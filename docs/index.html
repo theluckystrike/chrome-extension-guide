@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome Extension Guide — @theluckystrike/webext-* toolkit</title>
+  <meta name="description" content="Build type-safe Chrome extensions with the @theluckystrike/webext-* toolkit. Type-safe storage, messaging, and permissions for Chrome extensions.">
+  <meta property="og:title" content="Chrome Extension Guide — @theluckystrike/webext-* toolkit">
+  <meta property="og:description" content="Build type-safe Chrome extensions with the @theluckystrike/webext-* toolkit">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --accent: #4ade80;
+      --accent-dark: #22c55e;
+      --border: #30363d;
+      --code-bg: #1c2128;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero .subtitle code {
+      background: var(--bg-tertiary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      color: var(--accent);
+    }
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 50px 0;
+    }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .card-tagline {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    .card h4 {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 20px 0 8px;
+    }
+    .card ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .card li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 2px 0;
+    }
+    .card li::before {
+      content: "→ ";
+      color: var(--accent);
+    }
+    .card .exports {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+    /* Code Block */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .keyword { color: #ff7b72; }
+    .function { color: #d2a8ff; }
+    .string { color: #a5d6ff; }
+    .comment { color: #8b949e; font-style: italic; }
+    .type { color: #7ee787; }
+    .property { color: #79c0ff; }
+    /* Install Section */
+    .install {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .install h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .install code {
+      background: var(--bg);
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 0.95rem;
+      color: var(--accent);
+      word-break: break-all;
+    }
+    /* Tutorials */
+    .tutorials {
+      margin: 60px 0;
+    }
+    .tutorials h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .tutorial-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .tutorial-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .tutorial-item h3 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .tutorial-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 50px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--text);
+    }
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .subtitle { font-size: 1rem; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Chrome Extension Guide</h1>
+      <p class="subtitle">Build type-safe Chrome extensions with the <code>@theluckystrike/webext-*</code> toolkit</p>
+    </section>
+
+    <!-- Package Cards -->
+    <section class="cards">
+      <!-- Card 1: Storage -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">@theluckystrike/webext-storage</div>
+          <div class="card-tagline">Typed Chrome Storage</div>
+        </div>
+        <h4>Features</h4>
+        <ul>
+          <li>Schema-based storage</li>
+          <li>Auto defaults</li>
+          <li>Type validation</li>
+          <li>Reactive watchers</li>
+        </ul>
+        <h4>Exports</h4>
+        <p class="exports">defineSchema(), createStorage(), TypedStorage</p>
+        <pre><code><span class="keyword">const</span> <span class="property">storage</span> = <span class="function">createStorage</span>({ <span class="property">schema</span>, <span class="property">area</span>: <span class="string">"local"</span> });
+<span class="keyword">await</span> <span class="property">storage</span>.<span class="function">set</span>(<span class="string">"theme"</span>, <span class="string">"light"</span>);
+<span class="keyword">const</span> <span class="property">theme</span> = <span class="keyword">await</span> <span class="property">storage</span>.<span class="function">get</span>(<span class="string">"theme"</span>);</code></pre>
+        <a href="tutorials/storage-quickstart.md">→ Storage Quickstart</a>
+      </div>
+
+      <!-- Card 2: Messaging -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">@theluckystrike/webext-messaging</div>
+          <div class="card-tagline">Typed Message Passing</div>
+        </div>
+        <h4>Features</h4>
+        <ul>
+          <li>Promise-based API</li>
+          <li>Auto channel management</li>
+          <li>Async handlers</li>
+        </ul>
+        <h4>Exports</h4>
+        <p class="exports">createMessenger&lt;M&gt;(), sendMessage, onMessage</p>
+        <pre><code><span class="keyword">const</span> <span class="property">msg</span> = <span class="function">createMessenger</span>&lt;<span class="type">Messages</span>&gt;();
+<span class="keyword">const</span> <span class="property">user</span> = <span class="keyword">await</span> <span class="property">msg</span>.<span class="function">send</span>(<span class="string">"getUser"</span>, { <span class="property">id</span>: <span class="type">1</span> });</code></pre>
+        <a href="tutorials/messaging-quickstart.md">→ Messaging Quickstart</a>
+      </div>
+
+      <!-- Card 3: Permissions -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">@theluckystrike/webext-permissions</div>
+          <div class="card-tagline">Runtime Permission Helpers</div>
+        </div>
+        <h4>Features</h4>
+        <ul>
+          <li>Human-readable descriptions</li>
+          <li>Batch operations</li>
+          <li>50+ permissions</li>
+        </ul>
+        <h4>Exports</h4>
+        <p class="exports">checkPermission, requestPermission, PERMISSION_DESCRIPTIONS</p>
+        <pre><code><span class="keyword">const</span> <span class="property">result</span> = <span class="keyword">await</span> <span class="function">checkPermission</span>(<span class="string">"tabs"</span>);
+<span class="property">console</span>.<span class="function">log</span>(<span class="property">result</span>.<span class="property">description</span>);</code></pre>
+        <a href="tutorials/permissions-quickstart.md">→ Permissions Quickstart</a>
+      </div>
+    </section>
+
+    <!-- Install Section -->
+    <section class="install">
+      <h2>Install</h2>
+      <code>npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging @theluckystrike/webext-permissions</code>
+    </section>
+
+    <!-- Tutorials -->
+    <section class="tutorials">
+      <h2>Tutorials</h2>
+      <div class="tutorial-list">
+        <div class="tutorial-item">
+          <h3>Storage Quickstart</h3>
+          <p>Learn how to define schemas, create type-safe storage, and use reactive watchers.</p>
+        </div>
+        <div class="tutorial-item">
+          <h3>Messaging Quickstart</h3>
+          <p>Set up typed message passing between content scripts, background scripts, and popups.</p>
+        </div>
+        <div class="tutorial-item">
+          <h3>Permissions Quickstart</h3>
+          <p>Check, request, and manage Chrome permissions with human-readable descriptions.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Built by <a href="https://github.com/theluckystrike">theluckystrike</a></p>
+    <p><a href="https://github.com/theluckystrike/chrome-extension-guide">GitHub</a> · MIT License</p>
+  </footer>
+</body>
+</html>
