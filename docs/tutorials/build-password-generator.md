@@ -1,575 +1,652 @@
-# Build a Password Generator Extension
+# Build a Password Generator Extension — Full Tutorial
 
-Build a Chrome extension that generates cryptographically secure passwords with customizable options, a strength indicator, history tracking, and context menu integration. Uses **@theluckystrike/webext-storage** for persistent settings and history.
+## What We're Building
+- Popup with configurable password options (length, uppercase, lowercase, numbers, symbols)
+- Cryptographically secure generation using `crypto.getRandomValues`
+- Visual password strength indicator with color-coded bar
+- One-click copy to clipboard with `navigator.clipboard`
+- Password history stored with `@theluckystrike/webext-storage`
+- Content script to auto-fill password fields on web pages
+- Keyboard shortcut (`Alt+Shift+P`) to generate a password from anywhere
 
 ## Prerequisites
-
-- Chrome 116+ with Developer Mode enabled
-- Node.js 18+ and npm
-- Familiarity with HTML, CSS, JavaScript, and Chrome extension basics
+- Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
+- Node.js + npm installed
+- `npm install @theluckystrike/webext-storage`
 
 ---
 
-## Step 1: Manifest and Project Setup
+## Step 1: Project Setup and manifest.json
 
 ```bash
-mkdir password-generator-ext && cd password-generator-ext
+mkdir securepass-ext && cd securepass-ext
 npm init -y
 npm install @theluckystrike/webext-storage
+npm install -D typescript
 ```
-
-Create `manifest.json`:
 
 ```json
 {
   "manifest_version": 3,
-  "name": "Password Generator",
+  "name": "SecurePass Generator",
   "version": "1.0.0",
-  "description": "Generate strong, cryptographically secure passwords instantly.",
-  "permissions": ["storage", "contextMenus", "clipboardWrite", "activeTab"],
+  "description": "Generate cryptographically secure passwords with one click.",
+  "permissions": ["storage", "activeTab", "clipboardWrite"],
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
   },
-  "background": { "service_worker": "background.js" },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content.js"],
-    "css": ["content.css"],
-    "run_at": "document_idle"
-  }],
-  "options_ui": { "page": "options/options.html", "open_in_tab": false },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "commands": {
     "generate-password": {
       "suggested_key": { "default": "Alt+Shift+P", "mac": "Alt+Shift+P" },
-      "description": "Generate and copy a password"
+      "description": "Generate and fill a password"
     }
-  },
-  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  }
 }
 ```
 
-`contextMenus` adds a right-click generate option. `clipboardWrite` enables copying from the background context. `activeTab` grants temporary page access on user interaction. `commands` registers the keyboard shortcut.
+`clipboardWrite` lets us copy passwords programmatically. `activeTab` grants access to the current page when invoked via keyboard shortcut. The content script runs on all pages to detect and fill password fields. The `commands` entry registers `Alt+Shift+P` for quick generation.
 
 ---
 
-## Step 2: Popup UI
+## Step 2: Popup UI with Password Options
 
-Create `popup/popup.html`:
+Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="popup.css">
+  <style>
+    body { width: 320px; padding: 16px; font-family: system-ui, sans-serif; }
+    h2 { margin: 0 0 12px; font-size: 16px; }
+    .password-display { display: flex; gap: 8px; margin-bottom: 8px; }
+    .password-display input {
+      flex: 1; font-family: monospace; font-size: 14px;
+      padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    .password-display button {
+      padding: 8px 12px; border: none; border-radius: 4px;
+      background: #4285f4; color: white; cursor: pointer; font-weight: 600;
+    }
+    .strength-bar { height: 6px; border-radius: 3px; margin-bottom: 4px; background: #eee; overflow: hidden; }
+    .strength-bar .fill { height: 100%; transition: width 0.3s, background 0.3s; }
+    #strength-label { font-size: 11px; color: #888; margin-bottom: 12px; }
+    .option-row {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 8px; font-size: 13px;
+    }
+    .option-row input[type="range"] { width: 120px; }
+    #generate-btn {
+      width: 100%; padding: 10px; background: #34a853; color: white;
+      border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600;
+    }
+    #history { margin-top: 16px; border-top: 1px solid #eee; padding-top: 12px; }
+    #history h3 { font-size: 13px; margin: 0 0 8px; color: #666; }
+    .history-item {
+      font-family: monospace; font-size: 12px; padding: 4px 0;
+      color: #333; cursor: pointer; word-break: break-all;
+    }
+    .history-item:hover { color: #4285f4; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Password Generator</h1>
-    <div class="password-display">
-      <input type="text" id="password-output" readonly>
-      <button id="copy-btn" title="Copy to clipboard">Copy</button>
-    </div>
-    <div class="strength-bar"><div id="strength-fill"></div></div>
-    <p id="strength-label">Generate a password</p>
-    <div class="controls">
-      <label>Length: <span id="length-value">16</span>
-        <input type="range" id="length-slider" min="8" max="64" value="16">
-      </label>
-      <label><input type="checkbox" id="opt-uppercase" checked> Uppercase (A-Z)</label>
-      <label><input type="checkbox" id="opt-lowercase" checked> Lowercase (a-z)</label>
-      <label><input type="checkbox" id="opt-numbers" checked> Numbers (0-9)</label>
-      <label><input type="checkbox" id="opt-symbols" checked> Symbols (!@#$...)</label>
-    </div>
-    <button id="generate-btn">Generate Password</button>
-    <details class="history-section">
-      <summary>History (<span id="history-count">0</span>)</summary>
-      <ul id="history-list"></ul>
-    </details>
+  <h2>SecurePass Generator</h2>
+  <div class="password-display">
+    <input type="text" id="password" readonly />
+    <button id="copy-btn">Copy</button>
+  </div>
+  <div class="strength-bar"><div class="fill" id="strength-fill"></div></div>
+  <p id="strength-label"></p>
+  <div class="option-row">
+    <label>Length: <span id="length-val">16</span></label>
+    <input type="range" id="length-slider" min="8" max="64" value="16" />
+  </div>
+  <div class="option-row"><label>Uppercase (A-Z)</label><input type="checkbox" id="opt-uppercase" checked /></div>
+  <div class="option-row"><label>Lowercase (a-z)</label><input type="checkbox" id="opt-lowercase" checked /></div>
+  <div class="option-row"><label>Numbers (0-9)</label><input type="checkbox" id="opt-numbers" checked /></div>
+  <div class="option-row"><label>Symbols (!@#$...)</label><input type="checkbox" id="opt-symbols" checked /></div>
+  <button id="generate-btn">Generate Password</button>
+  <div id="history">
+    <h3>Recent Passwords</h3>
+    <div id="history-list"></div>
   </div>
   <script src="popup.js"></script>
 </body>
 </html>
 ```
 
-Create `popup/popup.css`:
-
-```css
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { width: 340px; font-family: system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 16px; }
-h1 { font-size: 16px; text-align: center; margin-bottom: 12px; color: #00d4ff; }
-.password-display { display: flex; gap: 8px; margin-bottom: 8px; }
-#password-output { flex: 1; padding: 8px; border: 1px solid #333; border-radius: 4px; background: #0f0f23; color: #00ff88; font-family: monospace; font-size: 13px; }
-#copy-btn { padding: 8px 14px; border: none; border-radius: 4px; background: #00d4ff; color: #1a1a2e; font-weight: 600; cursor: pointer; }
-#copy-btn.copied { background: #00ff88; }
-.strength-bar { height: 6px; background: #333; border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
-#strength-fill { height: 100%; width: 0; border-radius: 3px; transition: width 0.3s, background 0.3s; }
-#strength-label { font-size: 11px; color: #888; margin-bottom: 12px; }
-.controls { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.controls label { font-size: 13px; display: flex; align-items: center; gap: 6px; }
-#length-slider { width: 100%; margin-top: 4px; accent-color: #00d4ff; }
-#generate-btn { width: 100%; padding: 10px; border: none; border-radius: 4px; background: #00d4ff; color: #1a1a2e; font-size: 14px; font-weight: 600; cursor: pointer; }
-.history-section { margin-top: 12px; font-size: 12px; }
-.history-section summary { cursor: pointer; color: #888; }
-#history-list { list-style: none; max-height: 150px; overflow-y: auto; }
-#history-list li { padding: 4px 0; font-family: monospace; font-size: 11px; color: #aaa; border-bottom: 1px solid #222; cursor: pointer; }
-#history-list li:hover { color: #00ff88; }
-```
+The popup is 320px wide with a monospace password display, a color-coded strength bar, and checkboxes for each character set. The history section at the bottom shows clickable previous passwords.
 
 ---
 
-## Step 3: Cryptographically Secure Password Generation
+## Step 3: Crypto-Secure Password Generation
 
-Create `lib/generate.js`:
+`crypto.getRandomValues` provides a CSPRNG, unlike `Math.random` which is predictable. This module is shared between the popup and background script.
 
-```javascript
+```typescript
+// generator.ts
+
 const CHARSETS = {
   uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   lowercase: 'abcdefghijklmnopqrstuvwxyz',
   numbers: '0123456789',
   symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-};
+} as const;
 
-export function generatePassword(options) {
-  const { length = 16, uppercase = true, lowercase = true, numbers = true, symbols = true } = options;
-  let pool = '';
-  if (uppercase) pool += CHARSETS.uppercase;
-  if (lowercase) pool += CHARSETS.lowercase;
-  if (numbers) pool += CHARSETS.numbers;
-  if (symbols) pool += CHARSETS.symbols;
-  if (!pool.length) throw new Error('At least one character type must be selected');
-
-  const randomValues = new Uint32Array(length);
-  crypto.getRandomValues(randomValues);
-  const chars = Array.from(randomValues, v => pool[v % pool.length]);
-
-  // Guarantee at least one character from each selected set
-  const required = [];
-  if (uppercase) required.push(CHARSETS.uppercase);
-  if (lowercase) required.push(CHARSETS.lowercase);
-  if (numbers) required.push(CHARSETS.numbers);
-  if (symbols) required.push(CHARSETS.symbols);
-
-  for (const charset of required) {
-    if (!chars.some(c => charset.includes(c))) {
-      const pos = crypto.getRandomValues(new Uint32Array(1))[0] % length;
-      chars[pos] = charset[crypto.getRandomValues(new Uint32Array(1))[0] % charset.length];
-    }
-  }
-  return chars.join('');
+export interface PasswordOptions {
+  length: number;
+  uppercase: boolean;
+  lowercase: boolean;
+  numbers: boolean;
+  symbols: boolean;
 }
 
-export function calculateStrength(password) {
+export function generatePassword(options: PasswordOptions): string {
+  let charset = '';
+  if (options.uppercase) charset += CHARSETS.uppercase;
+  if (options.lowercase) charset += CHARSETS.lowercase;
+  if (options.numbers) charset += CHARSETS.numbers;
+  if (options.symbols) charset += CHARSETS.symbols;
+
+  if (charset.length === 0) {
+    throw new Error('At least one character set must be selected');
+  }
+
+  const array = new Uint32Array(options.length);
+  crypto.getRandomValues(array);
+
+  let password = '';
+  for (let i = 0; i < options.length; i++) {
+    password += charset[array[i] % charset.length];
+  }
+
+  // Guarantee at least one character from each selected set
+  const required: string[] = [];
+  if (options.uppercase) required.push(secureRandomChar(CHARSETS.uppercase));
+  if (options.lowercase) required.push(secureRandomChar(CHARSETS.lowercase));
+  if (options.numbers) required.push(secureRandomChar(CHARSETS.numbers));
+  if (options.symbols) required.push(secureRandomChar(CHARSETS.symbols));
+
+  const chars = password.split('');
+  for (let i = 0; i < required.length; i++) {
+    chars[i] = required[i];
+  }
+  return secureShuffle(chars).join('');
+}
+
+function secureRandomChar(charset: string): string {
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  return charset[array[0] % charset.length];
+}
+
+function secureShuffle(arr: string[]): string[] {
+  const shuffled = [...arr];
+  const randomValues = new Uint32Array(shuffled.length);
+  crypto.getRandomValues(randomValues);
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = randomValues[i] % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+```
+
+The guarantee loop replaces the first N characters with one from each required set, then the Fisher-Yates shuffle (using secure randomness) distributes them. For production, consider rejection sampling to eliminate modulo bias. See cross-ref: `docs/guides/security-best-practices.md`.
+
+---
+
+## Step 4: Password Strength Indicator
+
+The strength calculation uses entropy estimation: `bits = length * log2(poolSize)`. The pool size is detected from the actual password content, not the configured options.
+
+```typescript
+// strength.ts
+
+export interface StrengthResult {
+  score: number;   // 0-100
+  bits: number;    // entropy in bits
+  label: string;   // 'Weak' | 'Fair' | 'Good' | 'Strong' | 'Excellent'
+  color: string;   // CSS color for the bar
+}
+
+export function calculateStrength(password: string): StrengthResult {
   let poolSize = 0;
   if (/[a-z]/.test(password)) poolSize += 26;
   if (/[A-Z]/.test(password)) poolSize += 26;
   if (/[0-9]/.test(password)) poolSize += 10;
   if (/[^a-zA-Z0-9]/.test(password)) poolSize += 32;
 
-  const bits = password.length * Math.log2(poolSize || 1);
-  if (bits < 40) return { bits: Math.round(bits), label: 'Weak', percent: 20 };
-  if (bits < 60) return { bits: Math.round(bits), label: 'Fair', percent: 40 };
-  if (bits < 80) return { bits: Math.round(bits), label: 'Good', percent: 60 };
-  if (bits < 100) return { bits: Math.round(bits), label: 'Strong', percent: 80 };
-  return { bits: Math.round(bits), label: 'Very Strong', percent: 100 };
+  const bits = Math.round(password.length * Math.log2(poolSize || 1));
+
+  // Uniqueness bonus: penalize repeated characters
+  const uniqueRatio = new Set(password).size / password.length;
+  const adjustedBits = Math.round(bits * (0.7 + 0.3 * uniqueRatio));
+
+  let score: number, label: string, color: string;
+  if (adjustedBits < 40)  { score = 20;  label = 'Weak';      color = '#ea4335'; }
+  else if (adjustedBits < 60)  { score = 40;  label = 'Fair';      color = '#fbbc04'; }
+  else if (adjustedBits < 80)  { score = 60;  label = 'Good';      color = '#ffcc00'; }
+  else if (adjustedBits < 100) { score = 80;  label = 'Strong';    color = '#34a853'; }
+  else                         { score = 100; label = 'Excellent'; color = '#0d652d'; }
+
+  return { score, bits: adjustedBits, label, color };
 }
 ```
 
-`crypto.getRandomValues` uses a CSPRNG, unlike `Math.random` which is predictable. The guarantee loop ensures every selected character set appears at least once. Entropy is calculated as `length * log2(poolSize)` -- a 16-character all-types password yields ~105 bits.
+| Entropy (bits) | Rating | Color | Bar % |
+|----------------|--------|-------|-------|
+| < 40 | Weak | Red | 20% |
+| 40-59 | Fair | Yellow | 40% |
+| 60-79 | Good | Gold | 60% |
+| 80-99 | Strong | Green | 80% |
+| 100+ | Excellent | Dark green | 100% |
+
+A 16-character password with all types: `16 * log2(94) = 104.8 bits`.
 
 ---
 
-## Step 4: Copy to Clipboard with Visual Feedback
+## Step 5: Clipboard Copy with Visual Feedback
 
-Create `popup/popup.js`:
+Uses `navigator.clipboard.writeText` with a fallback to `document.execCommand('copy')` for older contexts. See cross-ref: `docs/patterns/clipboard-patterns.md`.
 
-```javascript
-import { generatePassword, calculateStrength } from '../lib/generate.js';
-import { createStorage } from '@theluckystrike/webext-storage';
+```typescript
+// clipboard.ts
 
-const storage = createStorage('password-generator', {
-  history: [],
-  defaults: { length: 16, uppercase: true, lowercase: true, numbers: true, symbols: true }
-});
-
-const $ = id => document.getElementById(id);
-const passwordOutput = $('password-output'), copyBtn = $('copy-btn');
-const strengthFill = $('strength-fill'), strengthLabel = $('strength-label');
-const lengthSlider = $('length-slider'), lengthValue = $('length-value');
-const generateBtn = $('generate-btn'), historyList = $('history-list'), historyCount = $('history-count');
-const cbs = { uppercase: $('opt-uppercase'), lowercase: $('opt-lowercase'), numbers: $('opt-numbers'), symbols: $('opt-symbols') };
-
-async function loadDefaults() {
-  const { defaults, history } = await storage.get();
-  lengthSlider.value = defaults.length;
-  lengthValue.textContent = defaults.length;
-  Object.entries(cbs).forEach(([k, el]) => el.checked = defaults[k]);
-  renderHistory(history);
-}
-
-function getOptions() {
-  return { length: +lengthSlider.value, ...Object.fromEntries(Object.entries(cbs).map(([k, el]) => [k, el.checked])) };
-}
-
-async function handleGenerate() {
+export async function copyToClipboard(
+  text: string,
+  button: HTMLButtonElement
+): Promise<void> {
   try {
-    const pw = generatePassword(getOptions());
-    passwordOutput.value = pw;
-    const { bits, label, percent } = calculateStrength(pw);
-    strengthFill.style.width = `${percent}%`;
-    strengthFill.style.background = { 20: '#ff4444', 40: '#ff8800', 60: '#ffcc00', 80: '#88cc00', 100: '#00ff88' }[percent];
-    strengthLabel.textContent = `${label} (${bits} bits of entropy)`;
-    await saveToHistory(pw);
-  } catch (e) { strengthLabel.textContent = e.message; }
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // Fallback: select from a temporary textarea
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+
+  // Visual feedback
+  const original = button.textContent;
+  const originalBg = button.style.background;
+  button.textContent = 'Copied!';
+  button.style.background = '#34a853';
+  setTimeout(() => {
+    button.textContent = original;
+    button.style.background = originalBg;
+  }, 1500);
+}
+```
+
+---
+
+## Step 6: Password History with @theluckystrike/webext-storage
+
+```typescript
+// popup.ts
+import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+import { generatePassword, PasswordOptions } from './generator';
+import { calculateStrength } from './strength';
+import { copyToClipboard } from './clipboard';
+
+const schema = defineSchema({
+  passwordLength: 'number',
+  useUppercase: 'boolean',
+  useLowercase: 'boolean',
+  useNumbers: 'boolean',
+  useSymbols: 'boolean',
+  passwordHistory: 'string' // JSON-encoded array of { password, timestamp }
+});
+const storage = createStorage(schema, 'local');
+
+const MAX_HISTORY = 20;
+
+// DOM references
+const passwordInput = document.getElementById('password') as HTMLInputElement;
+const copyBtn = document.getElementById('copy-btn') as HTMLButtonElement;
+const generateBtn = document.getElementById('generate-btn') as HTMLButtonElement;
+const strengthFill = document.getElementById('strength-fill') as HTMLDivElement;
+const strengthLabel = document.getElementById('strength-label') as HTMLParagraphElement;
+const lengthSlider = document.getElementById('length-slider') as HTMLInputElement;
+const lengthVal = document.getElementById('length-val') as HTMLSpanElement;
+const historyList = document.getElementById('history-list') as HTMLDivElement;
+
+const checkboxes = {
+  uppercase: document.getElementById('opt-uppercase') as HTMLInputElement,
+  lowercase: document.getElementById('opt-lowercase') as HTMLInputElement,
+  numbers: document.getElementById('opt-numbers') as HTMLInputElement,
+  symbols: document.getElementById('opt-symbols') as HTMLInputElement,
+};
+
+// --- Restore saved options ---
+async function restoreOptions(): Promise<void> {
+  const len = await storage.get('passwordLength');
+  if (len) { lengthSlider.value = String(len); lengthVal.textContent = String(len); }
+
+  const flags: Array<[string, keyof typeof checkboxes]> = [
+    ['useUppercase', 'uppercase'], ['useLowercase', 'lowercase'],
+    ['useNumbers', 'numbers'], ['useSymbols', 'symbols']
+  ];
+  for (const [key, cb] of flags) {
+    const val = await storage.get(key as any);
+    if (val !== null) checkboxes[cb].checked = val;
+  }
 }
 
-async function handleCopy() {
-  if (!passwordOutput.value) return;
-  await navigator.clipboard.writeText(passwordOutput.value);
-  copyBtn.textContent = 'Copied!';
-  copyBtn.classList.add('copied');
-  setTimeout(() => { copyBtn.textContent = 'Copy'; copyBtn.classList.remove('copied'); }, 1500);
+function getOptions(): PasswordOptions {
+  return {
+    length: parseInt(lengthSlider.value),
+    uppercase: checkboxes.uppercase.checked,
+    lowercase: checkboxes.lowercase.checked,
+    numbers: checkboxes.numbers.checked,
+    symbols: checkboxes.symbols.checked,
+  };
 }
 
-async function saveToHistory(password) {
-  const data = await storage.get();
-  const history = [{ password, timestamp: Date.now() }, ...data.history].slice(0, 20);
-  await storage.set({ history });
+async function saveOptions(): Promise<void> {
+  const opts = getOptions();
+  await storage.set('passwordLength', opts.length);
+  await storage.set('useUppercase', opts.uppercase);
+  await storage.set('useLowercase', opts.lowercase);
+  await storage.set('useNumbers', opts.numbers);
+  await storage.set('useSymbols', opts.symbols);
+}
+
+// --- Generate and display ---
+function generate(): string | null {
+  try {
+    const password = generatePassword(getOptions());
+    passwordInput.value = password;
+
+    const strength = calculateStrength(password);
+    strengthFill.style.width = `${strength.score}%`;
+    strengthFill.style.background = strength.color;
+    strengthLabel.textContent = `${strength.label} (${strength.bits} bits)`;
+    return password;
+  } catch (e: any) {
+    passwordInput.value = '';
+    strengthLabel.textContent = e.message;
+    return null;
+  }
+}
+
+// --- History management ---
+async function addToHistory(password: string): Promise<void> {
+  const raw = await storage.get('passwordHistory');
+  const history: Array<{ password: string; timestamp: number }> =
+    raw ? JSON.parse(raw) : [];
+
+  history.unshift({ password, timestamp: Date.now() });
+  if (history.length > MAX_HISTORY) history.pop();
+  await storage.set('passwordHistory', JSON.stringify(history));
   renderHistory(history);
 }
 
-function renderHistory(history) {
-  historyCount.textContent = history.length;
+async function loadHistory(): Promise<void> {
+  const raw = await storage.get('passwordHistory');
+  const history = raw ? JSON.parse(raw) : [];
+  renderHistory(history);
+}
+
+function renderHistory(
+  history: Array<{ password: string; timestamp: number }>
+): void {
   historyList.innerHTML = '';
   for (const entry of history) {
-    const li = document.createElement('li');
-    li.textContent = entry.password;
-    li.title = `Generated: ${new Date(entry.timestamp).toLocaleString()} -- Click to copy`;
-    li.addEventListener('click', async () => {
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.textContent = entry.password;
+    div.title = `${new Date(entry.timestamp).toLocaleString()} -- click to copy`;
+    div.addEventListener('click', async () => {
       await navigator.clipboard.writeText(entry.password);
-      li.style.color = '#00ff88';
-      setTimeout(() => li.style.color = '', 800);
+      div.style.color = '#34a853';
+      setTimeout(() => { div.style.color = ''; }, 800);
     });
-    historyList.appendChild(li);
+    historyList.appendChild(div);
   }
 }
 
-lengthSlider.addEventListener('input', () => lengthValue.textContent = lengthSlider.value);
-generateBtn.addEventListener('click', handleGenerate);
-copyBtn.addEventListener('click', handleCopy);
-Object.values(cbs).forEach(cb => cb.addEventListener('change', () => {
-  if (!Object.values(cbs).some(c => c.checked)) cb.checked = true;
-}));
-loadDefaults().then(handleGenerate);
+// --- Event listeners ---
+lengthSlider.addEventListener('input', () => {
+  lengthVal.textContent = lengthSlider.value;
+  generate();
+  saveOptions();
+});
+
+Object.values(checkboxes).forEach(cb => {
+  cb.addEventListener('change', () => {
+    // Prevent unchecking all boxes
+    if (!Object.values(checkboxes).some(c => c.checked)) {
+      cb.checked = true;
+      return;
+    }
+    generate();
+    saveOptions();
+  });
+});
+
+generateBtn.addEventListener('click', async () => {
+  const password = generate();
+  if (password) await addToHistory(password);
+});
+
+copyBtn.addEventListener('click', () => {
+  if (passwordInput.value) copyToClipboard(passwordInput.value, copyBtn);
+});
+
+// --- Initialize ---
+restoreOptions().then(() => {
+  generate();
+  loadHistory();
+});
 ```
 
-The copy button toggles text to "Copied!" and turns green for 1.5 seconds. The strength bar uses color-coded entropy ranges (red through green). History entries are clickable for quick re-copy.
+Options persist across popup opens. History stores up to 20 entries with timestamps. Each history item is clickable to re-copy.
 
 ---
 
-## Step 5: Password Strength Indicator
+## Step 7: Auto-Fill Password Fields (Content Script)
 
-The strength indicator (wired in Step 4) maps entropy to visual feedback:
+The content script detects password fields on web pages and injects a small "Gen" button inside each one. A `MutationObserver` handles dynamically-added fields in SPAs.
 
-| Entropy | Rating | Color | Bar |
-|---------|--------|-------|-----|
-| < 40 bits | Weak | Red | 20% |
-| 40-59 | Fair | Orange | 40% |
-| 60-79 | Good | Yellow | 60% |
-| 80-99 | Strong | Light green | 80% |
-| 100+ | Very Strong | Green | 100% |
+```typescript
+// content.ts
 
-The formula `E = L * log2(P)` uses the detected pool size (not configured) so the bar reflects actual password content. A 16-character all-types password: `16 * log2(94) = 104.8 bits`.
+import { generatePassword, PasswordOptions } from './generator';
 
----
+const DEFAULT_OPTIONS: PasswordOptions = {
+  length: 16,
+  uppercase: true,
+  lowercase: true,
+  numbers: true,
+  symbols: true,
+};
 
-## Step 6: Password History (Last 20)
-
-History is stored via `@theluckystrike/webext-storage` wrapping `chrome.storage.local`. Each entry is `{ password, timestamp }`. The `saveToHistory` function in Step 4 prepends new entries and truncates to 20 with `.slice(0, 20)`. The collapsible `<details>` element keeps the popup compact. History entries are clickable to copy.
-
----
-
-## Step 7: Context Menu Auto-Fill
-
-Create `background.js`:
-
-```javascript
-import { generatePassword } from './lib/generate.js';
-import { createStorage } from '@theluckystrike/webext-storage';
-
-const storage = createStorage('password-generator', {
-  history: [],
-  defaults: { length: 16, uppercase: true, lowercase: true, numbers: true, symbols: true }
-});
-
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: 'generate-password', title: 'Generate Password', contexts: ['editable'] });
-});
-
-async function generateAndSave() {
-  const data = await storage.get();
-  const password = generatePassword(data.defaults);
-  const history = [{ password, timestamp: Date.now() }, ...data.history].slice(0, 20);
-  await storage.set({ history });
-  return password;
+function findPasswordFields(): HTMLInputElement[] {
+  return Array.from(document.querySelectorAll<HTMLInputElement>(
+    'input[type="password"], input[autocomplete="new-password"]'
+  ));
 }
 
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId !== 'generate-password') return;
-  const password = await generateAndSave();
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: (pw) => {
-      const el = document.activeElement;
-      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
-        el.value = pw;
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-    },
-    args: [password]
-  });
-});
-
-chrome.commands.onCommand.addListener(async (command) => {
-  if (command !== 'generate-password') return;
-  const password = await generateAndSave();
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab) return;
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: (pw) => {
-      navigator.clipboard.writeText(pw).then(() => {
-        const toast = document.createElement('div');
-        toast.textContent = 'Password copied!';
-        Object.assign(toast.style, {
-          position: 'fixed', top: '20px', right: '20px', padding: '12px 20px',
-          background: '#00d4ff', color: '#1a1a2e', borderRadius: '6px',
-          fontFamily: 'sans-serif', fontWeight: '600', zIndex: '999999', transition: 'opacity 0.3s'
-        });
-        document.body.appendChild(toast);
-        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 1500);
-      });
-    },
-    args: [password]
-  });
-});
-
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'generate') {
-    generateAndSave().then(pw => sendResponse({ password: pw }));
-    return true;
-  }
-});
-```
-
-The context menu uses `contexts: ['editable']` so it only appears on input fields. The injected script dispatches `input` and `change` events so frameworks (React, Vue) detect the value change.
-
----
-
-## Step 8: Content Script for Password Fields
-
-Create `content.js`:
-
-```javascript
-const BUTTON_CLASS = 'pwgen-inject-btn';
-
-function createGenerateButton(input) {
-  if (input.dataset.pwgenInjected) return;
-  input.dataset.pwgenInjected = 'true';
+function injectFillButton(field: HTMLInputElement): void {
+  if (field.dataset.securepassInjected) return;
+  field.dataset.securepassInjected = 'true';
 
   const btn = document.createElement('button');
   btn.type = 'button';
-  btn.className = BUTTON_CLASS;
   btn.textContent = 'Gen';
-  btn.title = 'Generate a secure password';
+  btn.title = 'Generate secure password';
+  Object.assign(btn.style, {
+    position: 'absolute',
+    right: '4px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    fontSize: '11px',
+    padding: '3px 8px',
+    border: '1px solid #ccc',
+    borderRadius: '3px',
+    background: '#fff',
+    cursor: 'pointer',
+    zIndex: '10000',
+    fontWeight: '600',
+  });
 
   const wrapper = document.createElement('span');
-  wrapper.className = 'pwgen-wrapper';
-  input.parentNode.insertBefore(wrapper, input);
-  wrapper.appendChild(input);
+  Object.assign(wrapper.style, {
+    position: 'relative',
+    display: 'inline-flex',
+    alignItems: 'center',
+    width: field.offsetWidth + 'px',
+  });
+  field.parentNode?.insertBefore(wrapper, field);
+  wrapper.appendChild(field);
   wrapper.appendChild(btn);
 
   btn.addEventListener('click', async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const response = await chrome.runtime.sendMessage({ action: 'generate' });
-    if (response?.password) {
-      input.value = response.password;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-      btn.textContent = 'Done';
-      btn.style.background = '#00ff88';
-      setTimeout(() => { btn.textContent = 'Gen'; btn.style.background = ''; }, 1200);
+    const password = generatePassword(DEFAULT_OPTIONS);
+    field.value = password;
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+
+    // Visual feedback
+    btn.textContent = 'Done';
+    btn.style.background = '#34a853';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Gen';
+      btn.style.background = '#fff';
+      btn.style.color = '';
+    }, 1200);
+
+    try {
+      await navigator.clipboard.writeText(password);
+    } catch {
+      // Clipboard access may be blocked in content script context
     }
   });
 }
 
-function scan() {
-  document.querySelectorAll('input[type="password"]:not([data-pwgen-injected])').forEach(createGenerateButton);
-}
+// Initial scan
+findPasswordFields().forEach(injectFillButton);
 
-scan();
-new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+// Watch for dynamically added password fields
+const observer = new MutationObserver(() => {
+  findPasswordFields().forEach(injectFillButton);
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Listen for messages from background (keyboard shortcut trigger)
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message.action === 'fill-password') {
+    const fields = findPasswordFields();
+    if (fields.length > 0) {
+      const password = generatePassword(DEFAULT_OPTIONS);
+      fields.forEach(field => {
+        field.value = password;
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+        field.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      sendResponse({ filled: true, password });
+    } else {
+      sendResponse({ filled: false });
+    }
+  }
+  return true; // Keep message channel open for async response
+});
 ```
 
-Create `content.css`:
-
-```css
-.pwgen-wrapper { position: relative; display: inline-flex; align-items: center; }
-.pwgen-wrapper input { padding-right: 48px; }
-.pwgen-inject-btn {
-  position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
-  padding: 3px 8px; border: none; border-radius: 3px;
-  background: #0078d4; color: #fff; font-size: 11px; font-weight: 600;
-  cursor: pointer; z-index: 10000;
-}
-.pwgen-inject-btn:hover { background: #005ea2; }
-```
-
-The `MutationObserver` detects password fields added dynamically (SPAs, lazy-loaded forms). Each field gets a "Gen" button positioned inside.
+The `input` and `change` events are dispatched so frameworks like React and Vue detect the programmatic value change.
 
 ---
 
-## Step 9: Options Page
+## Step 8: Keyboard Shortcut (Background Service Worker)
 
-Create `options/options.html`:
+The background script handles the `Alt+Shift+P` shortcut registered in the manifest. It sends a message to the content script to fill any password fields, and copies the generated password to clipboard.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="options.css"></head>
-<body>
-  <div class="container">
-    <h1>Password Generator Settings</h1>
-    <section>
-      <h2>Default Options</h2>
-      <label>Default Length: <span id="length-value">16</span>
-        <input type="range" id="length-slider" min="8" max="64" value="16">
-      </label>
-      <label><input type="checkbox" id="opt-uppercase" checked> Uppercase (A-Z)</label>
-      <label><input type="checkbox" id="opt-lowercase" checked> Lowercase (a-z)</label>
-      <label><input type="checkbox" id="opt-numbers" checked> Numbers (0-9)</label>
-      <label><input type="checkbox" id="opt-symbols" checked> Symbols</label>
-    </section>
-    <section>
-      <h2>History</h2>
-      <p id="history-info">0 passwords saved.</p>
-      <button id="clear-history">Clear History</button>
-    </section>
-    <div id="status"></div>
-    <button id="save-btn">Save Settings</button>
-  </div>
-  <script src="options.js"></script>
-</body>
-</html>
+```typescript
+// background.ts
+
+chrome.commands.onCommand.addListener(async (command: string) => {
+  if (command !== 'generate-password') return;
+
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) return;
+
+  try {
+    const response = await chrome.tabs.sendMessage(tab.id, {
+      action: 'fill-password'
+    });
+
+    if (response?.filled && response?.password) {
+      // Show a brief toast via injected script
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id! },
+        func: (pw: string) => {
+          navigator.clipboard.writeText(pw);
+          const toast = document.createElement('div');
+          toast.textContent = 'Password generated and copied!';
+          Object.assign(toast.style, {
+            position: 'fixed', top: '20px', right: '20px', padding: '12px 20px',
+            background: '#34a853', color: '#fff', borderRadius: '6px',
+            fontFamily: 'system-ui, sans-serif', fontWeight: '600',
+            zIndex: '999999', transition: 'opacity 0.3s',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          });
+          document.body.appendChild(toast);
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+          }, 1500);
+        },
+        args: [response.password]
+      });
+    }
+  } catch {
+    // Content script not loaded on this page (chrome://, edge://, etc.)
+  }
+});
 ```
 
-Create `options/options.css`:
-
-```css
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: system-ui, sans-serif; background: #f5f5f5; color: #333; padding: 24px; max-width: 480px; }
-h1 { font-size: 20px; margin-bottom: 16px; }
-h2 { font-size: 15px; margin-bottom: 8px; color: #555; }
-section { background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-section p { font-size: 13px; color: #777; margin-bottom: 12px; }
-label { display: block; font-size: 14px; margin-bottom: 8px; }
-input[type="range"] { width: 100%; margin-top: 4px; }
-#save-btn { padding: 10px 24px; border: none; border-radius: 4px; background: #0078d4; color: #fff; font-weight: 600; cursor: pointer; }
-#clear-history { padding: 6px 16px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; }
-#status { font-size: 13px; color: #00aa44; margin-bottom: 8px; min-height: 20px; }
-```
-
-Create `options/options.js`:
-
-```javascript
-import { createStorage } from '@theluckystrike/webext-storage';
-
-const storage = createStorage('password-generator', {
-  history: [],
-  defaults: { length: 16, uppercase: true, lowercase: true, numbers: true, symbols: true }
-});
-
-const $ = id => document.getElementById(id);
-const slider = $('length-slider'), val = $('length-value');
-const cbs = { uppercase: $('opt-uppercase'), lowercase: $('opt-lowercase'), numbers: $('opt-numbers'), symbols: $('opt-symbols') };
-
-async function load() {
-  const { defaults, history } = await storage.get();
-  slider.value = defaults.length;
-  val.textContent = defaults.length;
-  Object.entries(cbs).forEach(([k, el]) => el.checked = defaults[k]);
-  $('history-info').textContent = `${history.length} passwords saved.`;
-}
-
-$('save-btn').addEventListener('click', async () => {
-  const defaults = { length: +slider.value, ...Object.fromEntries(Object.entries(cbs).map(([k, el]) => [k, el.checked])) };
-  if (!Object.values(cbs).some(c => c.checked)) { $('status').textContent = 'Select at least one type.'; return; }
-  await storage.set({ defaults });
-  $('status').textContent = 'Settings saved.';
-  setTimeout(() => $('status').textContent = '', 2000);
-});
-
-$('clear-history').addEventListener('click', async () => {
-  await storage.set({ history: [] });
-  $('history-info').textContent = '0 passwords saved.';
-});
-
-slider.addEventListener('input', () => val.textContent = slider.value);
-load();
-```
-
-The options page writes to the same storage namespace. Changes immediately affect generation from popup, context menu, and keyboard shortcut.
+Users can customize the shortcut at `chrome://extensions/shortcuts`.
 
 ---
 
-## Step 10: Keyboard Shortcut
+## Testing
 
-The shortcut (`Alt+Shift+P`) is registered in the manifest and handled in `background.js` (Step 7). The flow: read defaults from storage, generate a password, save to history, inject a script that copies to clipboard and shows a brief toast. Users can customize the binding at `chrome://extensions/shortcuts`.
+1. Load unpacked from `chrome://extensions` with Developer Mode on
+2. Click the extension icon -- verify popup shows with options
+3. Move the length slider, toggle checkboxes -- confirm password regenerates and strength bar updates
+4. Click "Copy" -- paste elsewhere to verify clipboard works
+5. Click "Generate Password" several times -- check history section fills
+6. Close and reopen the popup -- verify options and history persist
+7. Navigate to a login or signup page, confirm "Gen" button appears in password fields
+8. Click "Gen" in a password field -- verify value fills and button shows "Done" briefly
+9. Press `Alt+Shift+P` on a page with a password field -- verify it fills and shows a toast
 
----
-
-## Project Structure
-
-```
-password-generator-ext/
-  manifest.json
-  background.js
-  content.js
-  content.css
-  lib/generate.js
-  popup/   (popup.html, popup.css, popup.js)
-  options/ (options.html, options.css, options.js)
-  icons/   (icon16.png, icon48.png, icon128.png)
-```
-
-## Bundling
-
-ES module imports require a bundler. Use Rollup:
-
-```bash
-npm install -D rollup @rollup/plugin-node-resolve
-```
-
-```javascript
-// rollup.config.js
-import resolve from '@rollup/plugin-node-resolve';
-export default ['popup/popup.js', 'background.js', 'options/options.js'].map(input => ({
-  input,
-  output: { file: `dist/${input}`, format: 'iife' },
-  plugins: [resolve()]
-}));
-```
-
-Run `npx rollup -c`, copy static assets to `dist/`, and load `dist/` as your extension.
-
-## Key Takeaways
-
-- Use `crypto.getRandomValues` for security-sensitive generation -- `Math.random` is predictable.
-- Entropy (`L * log2(P)`) quantifies strength. 16 chars with all types yields ~105 bits, well above the 80-bit strong threshold.
-- `contextMenus` with `editable` context targets only input fields, avoiding menu clutter.
-- `MutationObserver` in content scripts handles dynamically added password fields in SPAs.
-- `@theluckystrike/webext-storage` wraps `chrome.storage.local` with a clean async API.
-- Register keyboard shortcuts in the manifest; handle them in the service worker via `chrome.commands.onCommand`.
+## What You Learned
+- Crypto-secure random generation with `crypto.getRandomValues` and Fisher-Yates shuffle
+- Entropy-based password strength estimation
+- Clipboard access with `navigator.clipboard` and fallback (cross-ref: `docs/patterns/clipboard-patterns.md`)
+- Persisting structured data with `@theluckystrike/webext-storage` and `defineSchema`
+- Content scripts that detect and modify page DOM with `MutationObserver`
+- Keyboard shortcuts via `chrome.commands` and background service worker
+- Security considerations for password handling (cross-ref: `docs/guides/security-best-practices.md`)
