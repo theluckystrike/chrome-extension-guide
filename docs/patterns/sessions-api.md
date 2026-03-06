@@ -1,52 +1,52 @@
-# Sessions API Patterns
+# Chrome Extension Sessions API Patterns
 
 ## Overview
 
-The Chrome Sessions API (`chrome.sessions`) provides powerful capabilities for tracking, retrieving, and restoring browser sessions. This guide covers eight production-ready patterns for building session management features in your extension.
+The Chrome Sessions API (`chrome.sessions`) enables tracking, retrieving, and restoring browser sessions. This guide covers eight production-ready patterns.
 
 ---
 
 ## Required Permissions
 
-```jsonc
-// manifest.json
-{
-  "permissions": ["sessions", "tabs"],
-  "permissions": ["sessions", "tabs", "storage"],
-  "permissions": ["sessions", "tabs", "tabGroups"]
-}
+```json
+{ "permissions": ["sessions", "tabs"], "optional_permissions": ["tabGroups", "storage"] }
 ```
 
 ---
 
 ## Pattern 1: Retrieving Recently Closed Tabs
 
-The `chrome.sessions.getRecentlyClosed()` method retrieves recently closed tabs and windows:
+Use `chrome.sessions.getRecentlyClosed()` to fetch recently closed tabs and windows:
 
-```ts
+```typescript
 // services/session-service.ts
-export async function getRecentlyClosed(
-  maxResults: number = 25
-): Promise<chrome.sessions.Session[]> {
+export interface SessionItem {
+  sessionId: string;
+  url?: string;
+  title?: string;
+  lastAccessTime?: number;
+  tab?: chrome.tabs.Tab;
+  window?: chrome.windows.Window;
+  tabs?: chrome.tabs.Tab[];
+}
+
+export async function getRecentlyClosed(maxResults = 25): Promise<SessionItem[]> {
   return new Promise((resolve, reject) => {
     chrome.sessions.getRecentlyClosed({ maxResults }, (sessions) => {
-      if (chrome.runtime.lastError) {
-        reject(new Error(chrome.runtime.lastError.message));
-      } else {
-        resolve(sessions);
-      }
+      if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
+      else resolve(sessions as SessionItem[]);
     });
   });
 }
 
-export async function getRecentlyClosedTabs(maxResults: number = 25) {
+export async function getRecentlyClosedTabs(maxResults = 25): Promise<SessionItem[]> {
   const sessions = await getRecentlyClosed(maxResults);
-  return sessions.filter((s): s is chrome.sessions.Session => "url" in s);
+  return sessions.filter((s) => s.url && !s.tabs);
 }
 
-export async function getRecentlyClosedWindows(maxResults: number = 25) {
+export async function getRecentlyClosedWindows(maxResults = 25): Promise<SessionItem[]> {
   const sessions = await getRecentlyClosed(maxResults);
-  return sessions.filter((s): s is chrome.sessions.SessionGroup => "tabs" in s);
+  return sessions.filter((s) => s.tabs && s.tabs.length > 0);
 }
 ```
 
@@ -54,18 +54,15 @@ export async function getRecentlyClosedWindows(maxResults: number = 25) {
 
 ## Pattern 2: Restoring Individual Tabs and Windows
 
-Use `chrome.sessions.restore()` to bring back sessions:
+Use `chrome.sessions.restore()` to bring back closed sessions:
 
-```ts
+```typescript
 // services/session-restore.ts
 export async function restoreTab(sessionId: string): Promise<chrome.tabs.Tab | null> {
   return new Promise((resolve, reject) => {
     chrome.sessions.restore(sessionId, (restored) => {
-      if (chrome.runtime.lastError) {
-        reject(new Error(chrome.runtime.lastError.message));
-      } else {
-        resolve(restored as unknown as chrome.tabs.Tab);
-      }
+      if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
+      else resolve(restored.tab || null);
     });
   });
 }
@@ -74,7 +71,7 @@ export async function restoreTabAndFocus(sessionId: string): Promise<chrome.tabs
   const tab = await restoreTab(sessionId);
   if (tab?.id) {
     await chrome.tabs.update(tab.id, { active: true });
-    await chrome.windows.update(tab.windowId!, { focused: true });
+    if (tab.windowId) await chrome.windows.update(tab.windowId, { focused: true });
   }
   return tab;
 }
@@ -82,13 +79,9 @@ export async function restoreTabAndFocus(sessionId: string): Promise<chrome.tabs
 export async function restoreWindow(sessionId: string): Promise<chrome.windows.Window> {
   return new Promise((resolve, reject) => {
     chrome.sessions.restore(sessionId, (restored) => {
-      if (chrome.runtime.lastError) {
-        reject(new Error(chrome.runtime.lastError.message));
-      } else if (restored.window) {
-        resolve(restored.window);
-      } else {
-        reject(new Error("No window in restored session"));
-      }
+      if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
+      else if (restored.window) resolve(restored.window);
+      else reject(new Error('No window in restored session'));
     });
   });
 }
@@ -98,36 +91,30 @@ export async function restoreWindow(sessionId: string): Promise<chrome.windows.W
 
 ## Pattern 3: Filtering Sessions by Time Range and Type
 
-```ts
+```typescript
 // services/session-filter.ts
-export interface TimeRange {
-  startTime: number;
-  endTime: number;
-}
-
-export async function filterSessions(
-  options: {
-    type?: "tab" | "window";
-    timeRange?: TimeRange;
-    maxResults?: number;
-  } = {}
-): Promise<chrome.sessions.Session[]> {
-  const sessions = await getRecentlyClosed(options.maxResults || 100);
-
-  return sessions.filter((session) => {
-    if (options.type === "tab" && !("url" in session)) return false;
-    if (options.type === "window" && !("tabs" in session)) return false;
-    if (options.timeRange) {
-      const time = session.lastAccessTime || 0;
-      return time >= options.timeRange.startTime && time <= options.timeRange.endTime;
-    }
-    return true;
-  });
-}
+export interface TimeRange { startTime: number; endTime: number; }
 
 export function createRecentTimeRange(minutes: number): TimeRange {
   const now = Date.now();
   return { startTime: now - minutes * 60 * 1000, endTime: now };
+}
+
+export async function filterSessions(options: {
+  type?: 'tab' | 'window';
+  timeRange?: TimeRange;
+  maxResults?: number;
+}): Promise<SessionItem[]> {
+  const { type, timeRange, maxResults = 100 } = options;
+  const sessions = await getRecentlyClosed(maxResults);
+  return sessions.filter((session) => {
+    if (type === 'tab' && !session.url) return false;
+    if (type === 'window' && !session.tabs) return false;
+    if (timeRange && session.lastAccessTime) {
+      return session.lastAccessTime >= timeRange.startTime && session.lastAccessTime <= timeRange.endTime;
+    }
+    return true;
+  });
 }
 ```
 
@@ -135,117 +122,83 @@ export function createRecentTimeRange(minutes: number): TimeRange {
 
 ## Pattern 4: Building a "Recently Closed" Popup UI
 
-Full popup implementation with one-click restore:
-
 ```html
 <!-- popup.html -->
 <div class="popup-container">
-  <header>
-    <h1>Recently Closed</h1>
-    <select id="filter-type">
-      <option value="all">All</option>
-      <option value="tab">Tabs</option>
-      <option value="window">Windows</option>
-    </select>
+  <header><h1>Recently Closed</h1>
+    <select id="filter-type"><option value="all">All</option><option value="tab">Tabs</option><option value="window">Windows</option></select>
   </header>
   <div id="sessions-list"></div>
   <template id="session-item-template">
     <div class="session-item" data-session-id="">
-      <img class="favicon" hidden>
-      <div class="session-info">
-        <div class="session-title"></div>
-        <div class="session-url"></div>
-      </div>
-      <button class="restore-btn">Restore</button>
+      <img class="favicon"><div class="session-info"><div class="session-title"></div><div class="session-url"></div></div>
+      <button class="restore-btn">↻</button>
     </div>
   </template>
 </div>
 ```
 
-```ts
+```typescript
 // popup.ts
-import { filterSessions, createRecentTimeRange } from "./services/session-filter";
-import { restoreTab } from "./services/session-restore";
+import { filterSessions, createRecentTimeRange, SessionItem } from './services/session-filter';
+import { restoreTabAndFocus } from './services/session-restore';
 
-const state = { sessions: [] as chrome.sessions.Session[] };
+const state = { sessions: [] as SessionItem[] };
 
 async function loadSessions() {
-  const typeFilter = (document.getElementById("filter-type") as HTMLSelectElement).value;
+  const typeFilter = (document.getElementById('filter-type') as HTMLSelectElement).value;
   state.sessions = await filterSessions({
-    type: typeFilter === "all" ? undefined : typeFilter as "tab" | "window",
-    timeRange: createRecentTimeRange(60),
-    maxResults: 25,
+    type: typeFilter === 'all' ? undefined : typeFilter as 'tab' | 'window',
+    timeRange: createRecentTimeRange(60), maxResults: 25,
   });
   renderSessions();
 }
 
 function renderSessions() {
-  const list = document.getElementById("sessions-list")!;
-  const template = document.getElementById("session-item-template") as HTMLTemplateElement;
-  list.innerHTML = "";
-
+  const list = document.getElementById('sessions-list')!;
+  const template = document.getElementById('session-item-template') as HTMLTemplateElement;
+  list.innerHTML = '';
   for (const session of state.sessions) {
     const clone = template.content.cloneNode(true) as HTMLElement;
-    const item = clone.querySelector(".session-item")!;
-    item.querySelector(".session-title")!.textContent = session.title || "Untitled";
-    item.querySelector(".session-url")!.textContent = session.url ? new URL(session.url).hostname : "";
-    item.querySelector(".restore-btn")!.onclick = async () => {
-      await restoreTab(session.sessionId);
-      item.remove();
-    };
+    const item = clone.querySelector('.session-item')!;
+    item.dataset.sessionId = session.sessionId;
+    item.querySelector('.session-title')!.textContent = session.title || 'Untitled';
+    item.querySelector('.session-url')!.textContent = session.url ? new URL(session.url).hostname : '';
+    const favicon = item.querySelector('.favicon') as HTMLImageElement;
+    if (session.tab?.favIconUrl) { favicon.src = session.tab.favIconUrl; favicon.hidden = false; }
+    else { favicon.hidden = true; }
+    item.querySelector('.restore-btn')!.onclick = async () => { await restoreTabAndFocus(session.sessionId); item.remove(); };
     list.appendChild(clone);
   }
 }
-
-document.addEventListener("DOMContentLoaded", loadSessions);
+document.addEventListener('DOMContentLoaded', loadSessions);
 ```
 
 ---
 
 ## Pattern 5: Session Search and Filtering
 
-```ts
+```typescript
 // services/session-search.ts
-export async function searchSessions(query: {
-  text?: string;
-  domain?: string;
-  urlPattern?: string;
-}): Promise<chrome.sessions.Session[]> {
-  const sessions = await getRecentlyClosed(100);
+export interface SearchOptions { text?: string; domain?: string; urlPattern?: string; }
 
+export async function searchSessions(options: SearchOptions, maxResults = 50): Promise<SessionItem[]> {
+  const sessions = await getRecentlyClosed(maxResults);
   return sessions.filter((session) => {
-    const url = session.url || "";
-    const title = session.title || "";
-
-    if (query.text) {
-      const q = query.text.toLowerCase();
-      if (!url.toLowerCase().includes(q) && !title.toLowerCase().includes(q)) {
-        return false;
-      }
+    const url = session.url || '';
+    const title = session.title || '';
+    if (options.text) {
+      const q = options.text.toLowerCase();
+      if (!url.toLowerCase().includes(q) && !title.toLowerCase().includes(q)) return false;
     }
-
-    if (query.domain) {
-      try {
-        if (!new URL(url).hostname.toLowerCase().includes(query.domain.toLowerCase())) {
-          return false;
-        }
-      } catch {
-        return false;
-      }
+    if (options.domain) {
+      try { if (!new URL(url).hostname.toLowerCase().includes(options.domain.toLowerCase())) return false; }
+      catch { return false; }
     }
-
-    if (query.urlPattern) {
-      try {
-        if (!new RegExp(query.urlPattern).test(url)) return false;
-      } catch {}
-    }
-
+    if (options.urlPattern) { try { if (!new RegExp(options.urlPattern).test(url)) return false; } catch {} }
     return true;
   });
 }
-
-// Usage
-const results = await searchSessions({ text: "github", domain: "github.com" });
 ```
 
 ---
@@ -254,47 +207,38 @@ const results = await searchSessions({ text: "github", domain: "github.com" });
 
 Restore all tabs from a closed window:
 
-```ts
+```typescript
 // services/batch-restore.ts
-export async function restoreWindowTabs(sessionId: string): Promise<number> {
-  await chrome.sessions.restore(sessionId);
-  return 1; // Window restored
-}
+import { getRecentlyClosed } from './session-service';
+import { restoreTab, restoreWindow } from './session-restore';
 
-export async function restoreMultipleSessions(
-  sessionIds: string[]
-): Promise<{ success: number; failed: number }> {
+export interface BatchRestoreResult { success: number; failed: number; }
+
+export async function restoreMultipleSessions(sessionIds: string[]): Promise<BatchRestoreResult> {
   let success = 0, failed = 0;
-
   for (const id of sessionIds) {
-    try {
-      await restoreWindowTabs(id);
-      success++;
-    } catch {
-      failed++;
-    }
+    try { await restoreTab(id); success++; } catch { failed++; }
   }
-
   return { success, failed };
 }
 
-// Custom batch: open tabs in current window
+export async function restoreWindowTabs(sessionId: string): Promise<number> {
+  const sessions = await getRecentlyClosed(100);
+  const windowSession = sessions.find((s) => s.sessionId === sessionId && s.tabs);
+  if (!windowSession?.tabs) throw new Error('Session not found');
+  await restoreWindow(sessionId);
+  return windowSession.tabs.length;
+}
+
 export async function restoreTabsToCurrentWindow(sessionId: string): Promise<number> {
   const sessions = await getRecentlyClosed(100);
-  const windowSession = sessions.find(
-    (s) => s.sessionId === sessionId && "tabs" in s
-  ) as chrome.sessions.SessionGroup | undefined;
-
-  if (!windowSession) throw new Error("Session not found");
-
+  const windowSession = sessions.find((s) => s.sessionId === sessionId && s.tabs);
+  if (!windowSession?.tabs) throw new Error('Session not found');
   const currentWindow = await chrome.windows.getCurrent();
   let count = 0;
-
   for (const tab of windowSession.tabs) {
-    await chrome.tabs.create({ url: tab.url, windowId: currentWindow.id });
-    count++;
+    if (tab.url && !tab.url.startsWith('chrome://')) { await chrome.tabs.create({ url: tab.url, windowId: currentWindow.id }); count++; }
   }
-
   return count;
 }
 ```
@@ -305,67 +249,45 @@ export async function restoreTabsToCurrentWindow(sessionId: string): Promise<num
 
 Using `@theluckystrike/webext-storage` for cross-restart recovery:
 
-```ts
+```typescript
 // storage/session-storage.ts
-import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
+import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+
+export interface TabSnapshot { url: string; title: string; faviconUrl?: string; }
+export interface SessionSnapshot { id: string; name: string; createdAt: number; tabs: TabSnapshot[]; }
 
 const sessionSchema = defineSchema({
-  snapshots: [] as Array<{
-    id: string;
-    name: string;
-    createdAt: number;
-    tabs: Array<{ url: string; title: string; faviconUrl?: string }>;
-  }>,
+  snapshots: [] as SessionSnapshot[],
   maxSnapshots: 10 as number,
 });
 
-const sessionStorage = createStorage({ schema: sessionSchema, area: "local" });
+const sessionStorage = createStorage({ schema: sessionSchema, area: 'local' });
 
-export async function saveSessionSnapshot(
-  name: string,
-  tabs?: chrome.tabs.Tab[]
-): Promise<string> {
-  if (!tabs) {
-    const win = await chrome.windows.getCurrent();
-    tabs = await chrome.tabs.query({ windowId: win.id });
-  }
-
-  const snapshot = {
-    id: crypto.randomUUID(),
-    name,
-    createdAt: Date.now(),
-    tabs: tabs
-      .filter((t) => t.url && !t.url.startsWith("chrome://"))
-      .map((t) => ({ url: t.url!, title: t.title || "", faviconUrl: t.favIconUrl })),
+export async function saveSessionSnapshot(name: string): Promise<string> {
+  const win = await chrome.windows.getCurrent();
+  const tabs = await chrome.tabs.query({ windowId: win.id });
+  const snapshot: SessionSnapshot = {
+    id: crypto.randomUUID(), name, createdAt: Date.now(),
+    tabs: tabs.filter((t) => t.url && !t.url.startsWith('chrome://')).map((t) => ({ url: t.url!, title: t.title || '', faviconUrl: t.favIconUrl })),
   };
-
-  const snapshots = await sessionStorage.get("snapshots");
-  const max = await sessionStorage.get("maxSnapshots");
-  await sessionStorage.set("snapshots", [snapshot, ...snapshots].slice(0, max));
-
+  const snapshots = await sessionStorage.get('snapshots');
+  const max = await sessionStorage.get('maxSnapshots');
+  await sessionStorage.set('snapshots', [snapshot, ...snapshots].slice(0, max));
   return snapshot.id;
 }
 
 export async function restoreSessionSnapshot(snapshotId: string): Promise<number> {
-  const snapshots = await sessionStorage.get("snapshots");
+  const snapshots = await sessionStorage.get('snapshots');
   const snapshot = snapshots.find((s) => s.id === snapshotId);
-
-  if (!snapshot) throw new Error("Snapshot not found");
-
-  for (const tab of snapshot.tabs) {
-    await chrome.tabs.create({ url: tab.url });
-  }
-
+  if (!snapshot) throw new Error('Snapshot not found');
+  for (const tab of snapshot.tabs) { await chrome.tabs.create({ url: tab.url }); }
   return snapshot.tabs.length;
 }
 
-export async function getSessionSnapshots() {
-  return sessionStorage.get("snapshots");
-}
-
-export async function deleteSessionSnapshot(id: string): Promise<void> {
-  const snapshots = await sessionStorage.get("snapshots");
-  await sessionStorage.set("snapshots", snapshots.filter((s) => s.id !== id));
+export async function getSnapshots(): Promise<SessionSnapshot[]> { return sessionStorage.get('snapshots'); }
+export async function deleteSnapshot(id: string): Promise<void> {
+  const snapshots = await sessionStorage.get('snapshots');
+  await sessionStorage.set('snapshots', snapshots.filter((s) => s.id !== id));
 }
 ```
 
@@ -375,105 +297,49 @@ export async function deleteSessionSnapshot(id: string): Promise<void> {
 
 Workspace restoration using tab groups (Chrome 120+):
 
-```ts
+```typescript
+// storage/workspace-storage.ts
+import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+
+export interface Workspace { id: string; name: string; createdAt: number; tabGroupId?: number; color?: string; tabUrls: string[]; }
+const workspaceSchema = defineSchema({ workspaces: [] as Workspace[] });
+const workspaceStorage = createStorage({ schema: workspaceSchema, area: 'local' });
+
 // services/workspace-restore.ts
-import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
-
-const workspaceSchema = defineSchema({
-  workspaces: [] as Array<{
-    id: string;
-    name: string;
-    createdAt: number;
-    groupId?: number;
-    tabIds: number[];
-    color?: string;
-  }>,
-});
-
-const workspaceStorage = createStorage({ schema: workspaceSchema, area: "local" });
-
-export async function createWorkspace(name: string, color?: string) {
+export async function createWorkspace(name: string): Promise<Workspace> {
   const win = await chrome.windows.getCurrent();
   const tabs = await chrome.tabs.query({ windowId: win.id });
-  const grouped = tabs.filter((t) => t.groupId >= 0);
-
-  const workspace = {
-    id: crypto.randomUUID(),
-    name,
-    createdAt: Date.now(),
-    groupId: grouped[0]?.groupId,
-    tabIds: tabs.map((t) => t.id!).filter((id) => id >= 0),
-    color,
+  const grouped = tabs.filter((t) => t.groupId && t.groupId >= 0);
+  let tabGroupId: number | undefined, color: string | undefined;
+  if (grouped.length > 0) {
+    tabGroupId = grouped[0].groupId;
+    try { const group = await chrome.tabGroups.get(tabGroupId); color = group.color; } catch {}
+  }
+  const workspace: Workspace = {
+    id: crypto.randomUUID(), name, createdAt: Date.now(), tabGroupId, color,
+    tabUrls: tabs.filter((t) => t.url && !t.url.startsWith('chrome://')).map((t) => t.url!),
   };
-
-  const workspaces = await workspaceStorage.get("workspaces");
-  await workspaceStorage.set("workspaces", [workspace, ...workspaces]);
+  const workspaces = await workspaceStorage.get('workspaces');
+  await workspaceStorage.set('workspaces', [workspace, ...workspaces]);
   return workspace;
 }
 
-export async function restoreWorkspace(
-  workspaceId: string,
-  options: { useGroups?: boolean } = {}
-): Promise<number> {
-  const workspaces = await workspaceStorage.get("workspaces");
+export async function restoreWorkspace(workspaceId: string, options: { useGroups?: boolean } = {}): Promise<number> {
+  const workspaces = await workspaceStorage.get('workspaces');
   const ws = workspaces.find((w) => w.id === workspaceId);
-
-  if (!ws) throw new Error("Workspace not found");
-
-  // Get URLs from storage (tab IDs aren't persistent)
-  const tabUrls = await getWorkspaceTabUrls(workspaceId);
+  if (!ws) throw new Error('Workspace not found');
   const tabIds: number[] = [];
-
-  for (const { url } of tabUrls) {
-    const tab = await chrome.tabs.create({ url });
-    tabIds.push(tab.id!);
+  for (const url of ws.tabUrls) { const tab = await chrome.tabs.create({ url }); if (tab.id) tabIds.push(tab.id); }
+  if (options.useGroups && tabIds.length > 0 && ws.color) {
+    try { const groupId = await chrome.tabs.group({ tabIds }); await chrome.tabGroups.update(groupId, { color: ws.color as chrome.tabGroups.ColorEnum }); } catch {}
   }
-
-  if (options.useGroups && tabIds.length > 0) {
-    try {
-      const groupId = await chrome.tabs.group({ tabIds });
-      if (ws.color) {
-        await chrome.tabGroups.update(groupId, { color: ws.color as chrome.tabGroups.ColorEnum });
-      }
-    } catch {}
-  }
-
   return tabIds.length;
 }
 
-// Store tab URLs separately (since tab IDs aren't persistent)
-const workspaceTabsStorage = createStorage({
-  schema: defineSchema({ tabs: {} as Record<string, Array<{ url: string; title: string }>> }),
-  area: "local",
-});
-
-export async function saveWorkspaceTabs(
-  workspaceId: string,
-  tabs: Array<{ url: string; title: string }>
-): Promise<void> {
-  const all = await workspaceTabsStorage.get("tabs");
-  all[workspaceId] = tabs;
-  await workspaceTabsStorage.set("tabs", all);
-}
-
-export async function getWorkspaceTabUrls(
-  workspaceId: string
-): Promise<Array<{ url: string; title: string }>> {
-  const all = await workspaceTabsStorage.get("tabs");
-  return all[workspaceId] || [];
-}
-
-export async function listWorkspaces() {
-  return workspaceStorage.get("workspaces");
-}
-
+export async function listWorkspaces(): Promise<Workspace[]> { return workspaceStorage.get('workspaces'); }
 export async function deleteWorkspace(workspaceId: string): Promise<void> {
-  const workspaces = await workspaceStorage.get("workspaces");
-  await workspaceStorage.set("workspaces", workspaces.filter((w) => w.id !== workspaceId));
-
-  const all = await workspaceTabsStorage.get("tabs");
-  delete all[workspaceId];
-  await workspaceTabsStorage.set("tabs", all);
+  const workspaces = await workspaceStorage.get('workspaces');
+  await workspaceStorage.set('workspaces', workspaces.filter((w) => w.id !== workspaceId));
 }
 ```
 
@@ -495,11 +361,7 @@ export async function deleteWorkspace(workspaceId: string): Promise<void> {
 ### Key Takeaways
 
 1. **Session IDs are temporary**: They expire after a short period. For permanent storage, save URLs to `chrome.storage` (Pattern 7).
-
 2. **Window vs Tab**: `getRecentlyClosed()` returns both. Windows have a `tabs` array; tabs have a direct `url` property.
-
 3. **Error handling**: Always wrap `chrome.sessions.restore()` in try/catch—sessions may expire or URLs may become invalid.
-
 4. **Storage integration**: Use `@theluckystrike/webext-storage` for type-safe session snapshots that survive browser restarts.
-
-5. **Message passing**: For complex UIs, use `@theluckystrike/webext-messaging` to communicate between popup, background, and content scripts.
+5. **Message passing**: For complex UIs, use `@theluckystrike/webext-messaging` to coordinate between popup, background, and content scripts.
