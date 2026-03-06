@@ -6,9 +6,9 @@ The Chrome Top Sites API (`chrome.topSites`) provides access to the user's most 
 
 ---
 
-## Pattern 1: Basic Top Sites Retrieval
+## Pattern 1: Fetching Top Sites with chrome.topSites.get
 
-The simplest pattern involves fetching and displaying the user's top sites:
+The fundamental pattern for retrieving top sites:
 
 ```ts
 // background.ts
@@ -67,9 +67,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-## Pattern 2: Speed Dial New Tab Page
+## Pattern 2: Building a Custom New Tab Speed Dial
 
-Build a custom new tab page with a speed dial grid:
+Create a personalized new tab page with a speed dial grid:
 
 ```ts
 // newtab.ts
@@ -77,10 +77,7 @@ import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 import { sendMessage } from "@theluckystrike/webext-messaging";
 
 const storage = createStorage(defineSchema({
-  gridLayout: { 
-    type: "object", 
-    default: { columns: 4, rows: 3 } 
-  },
+  gridLayout: { type: "object", default: { columns: 4, rows: 3 } },
   tileSize: { type: "number", default: 120 },
   showTitles: { type: "boolean", default: true },
 }));
@@ -89,7 +86,6 @@ interface SpeedDialSite {
   url: string;
   title: string;
   favicon: string;
-  faviconUrl?: string;
 }
 
 async function renderSpeedDial(): Promise<void> {
@@ -144,11 +140,7 @@ document.addEventListener("DOMContentLoaded", renderSpeedDial);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.dial-favicon {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-}
+.dial-favicon { width: 32px; height: 32px; border-radius: 4px; }
 
 .dial-title {
   margin-top: 8px;
@@ -185,61 +177,35 @@ function deduplicateByDomain(sites: chrome.topSites.TopSite[]): chrome.topSites.
       if (seen.has(domain)) return false;
       seen.add(domain);
       return true;
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   });
 }
 
-function filterTopSites(
-  sites: chrome.topSites.TopSite[],
-  options: FilterOptions
-): chrome.topSites.TopSite[] {
-  const {
-    excludeDomains = [],
-    excludePatterns = [],
-    deduplicateBy = "domain",
-    minDomainLength = 0,
-  } = options;
+function filterTopSites(sites: chrome.topSites.TopSite[], options: FilterOptions): chrome.topSites.TopSite[] {
+  const { excludeDomains = [], excludePatterns = [], deduplicateBy = "domain", minDomainLength = 0 } = options;
   
-  let filtered = sites;
+  let filtered = deduplicateBy === "domain" ? deduplicateByDomain(sites) : sites;
   
-  // Apply deduplication
-  if (deduplicateBy === "domain") {
-    filtered = deduplicateByDomain(filtered);
-  }
-  
-  // Exclude specific domains
   const excludeSet = new Set(excludeDomains.map(d => d.toLowerCase()));
   filtered = filtered.filter(site => {
     try {
       const domain = new URL(site.url).hostname.toLowerCase();
       return !excludeSet.has(domain);
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   });
   
-  // Apply regex patterns
-  filtered = filtered.filter(site => {
-    return !excludePatterns.some(pattern => pattern.test(site.url));
-  });
+  filtered = filtered.filter(site => !excludePatterns.some(p => p.test(site.url)));
   
-  // Filter by minimum domain length
   if (minDomainLength > 0) {
     filtered = filtered.filter(site => {
-      try {
-        return new URL(site.url).hostname.length >= minDomainLength;
-      } catch {
-        return false;
-      }
+      try { return new URL(site.url).hostname.length >= minDomainLength; }
+      catch { return false; }
     });
   }
   
   return filtered;
 }
 
-// Usage example
 async function getFilteredTopSites(): Promise<chrome.topSites.TopSite[]> {
   const sites = await chrome.topSites.get();
   return filterTopSites(sites, {
@@ -253,9 +219,9 @@ async function getFilteredTopSites(): Promise<chrome.topSites.TopSite[]> {
 
 ---
 
-## Pattern 4: Unified Launcher with Bookmarks
+## Pattern 4: Combining Top Sites with Bookmarks
 
-Combine top sites with custom bookmarks for a comprehensive launcher:
+Create a unified launcher that combines top sites with custom bookmarks:
 
 ```ts
 // background.ts
@@ -272,18 +238,15 @@ interface LauncherItem {
   url: string;
   title: string;
   favicon: string;
-  source?: string;
 }
 
 async function getUnifiedLauncherResults(query: string): Promise<LauncherItem[]> {
   const results: LauncherItem[] = [];
+  const pinned = await storage.get("pinnedSites") as Array<{ url: string; title: string }>;
+  const pinnedUrls = new Set(pinned.map(s => s.url));
   
-  // Get pinned sites first
-  const pinned = await storage.get("pinnedSites");
-  const pinnedUrls = new Set(pinned.map((s: { url: string }) => s.url));
-  
-  // Add pinned sites
-  for (const site of pinned as Array<{ url: string; title: string }>) {
+  // Add pinned sites first
+  for (const site of pinned) {
     if (!query || site.title.toLowerCase().includes(query.toLowerCase())) {
       results.push({
         id: `pinned-${site.url}`,
@@ -295,12 +258,11 @@ async function getUnifiedLauncherResults(query: string): Promise<LauncherItem[]>
     }
   }
   
-  // Get top sites
+  // Add top sites
   const topSites = await chrome.topSites.get();
   for (const site of topSites.slice(0, 15)) {
     if (pinnedUrls.has(site.url)) continue;
     if (query && !site.title.toLowerCase().includes(query.toLowerCase())) continue;
-    
     results.push({
       id: `topsite-${site.url}`,
       type: "topsite",
@@ -310,21 +272,19 @@ async function getUnifiedLauncherResults(query: string): Promise<LauncherItem[]>
     });
   }
   
-  // Get bookmarks
-  const folders = await storage.get("bookmarkFolders");
-  for (const folderId of folders as string[]) {
+  // Add bookmarks from configured folders
+  const folders = await storage.get("bookmarkFolders") as string[];
+  for (const folderId of folders) {
     const bookmarks = await chrome.bookmarks.getChildren(folderId);
     for (const bm of bookmarks) {
       if (!bm.url) continue;
       if (query && !bm.title.toLowerCase().includes(query.toLowerCase())) continue;
-      
       results.push({
         id: `bookmark-${bm.id}`,
         type: "bookmark",
         url: bm.url,
         title: bm.title,
         favicon: getFaviconUrl(bm.url),
-        source: folderId,
       });
     }
   }
@@ -334,17 +294,14 @@ async function getUnifiedLauncherResults(query: string): Promise<LauncherItem[]>
 
 function getFaviconUrl(url: string): string {
   try {
-    const domain = new URL(url).hostname;
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-  } catch {
-    return "";
-  }
+    return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`;
+  } catch { return ""; }
 }
 ```
 
 ---
 
-## Pattern 5: Caching Strategy with Storage
+## Pattern 5: Caching Top Sites Data
 
 Implement intelligent caching to reduce API calls:
 
@@ -354,20 +311,17 @@ import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
 const storage = createStorage(defineSchema({
   topSitesCache: { type: "array", default: [] },
-  cacheMeta: { 
-    type: "object", 
-    default: { timestamp: 0, etag: "", count: 0 } 
-  },
+  cacheMeta: { type: "object", default: { timestamp: 0, count: 0 } },
 }));
 
 interface CacheConfig {
-  maxAge: number;        // Cache lifetime in milliseconds
-  maxEntries: number;     // Maximum number of sites to cache
+  maxAge: number;
+  maxEntries: number;
   staleWhileRevalidate: boolean;
 }
 
 const defaultConfig: CacheConfig = {
-  maxAge: 5 * 60 * 1000, // 5 minutes
+  maxAge: 5 * 60 * 1000,
   maxEntries: 50,
   staleWhileRevalidate: true,
 };
@@ -382,47 +336,34 @@ class TopSitesCache {
 
   async get(forceRefresh = false): Promise<chrome.topSites.TopSite[]> {
     const cache = await storage.get("topSitesCache");
-    const meta = await storage.get("cacheMeta");
+    const meta = await storage.get("cacheMeta") as { timestamp: number; count: number };
     const now = Date.now();
 
-    // Return cache if valid and not forcing refresh
     if (!forceRefresh && cache.length > 0 && now - meta.timestamp < this.config.maxAge) {
       return cache;
     }
 
-    // If stale-while-revalidate is enabled and we have stale cache, return it
     if (this.config.staleWhileRevalidate && cache.length > 0) {
       this.refreshInBackground();
       return cache;
     }
 
-    // Otherwise, fetch fresh data
     return this.fetchAndCache();
   }
 
   private async fetchAndCache(): Promise<chrome.topSites.TopSite[]> {
-    // Prevent multiple simultaneous fetches
-    if (this.refreshPromise) {
-      return this.refreshPromise;
-    }
-
+    if (this.refreshPromise) return this.refreshPromise;
     this.refreshPromise = this.fetchSites();
     const sites = await this.refreshPromise;
     this.refreshPromise = null;
-
     return sites;
   }
 
   private async fetchSites(): Promise<chrome.topSites.TopSite[]> {
     const sites = await chrome.topSites.get();
     const trimmed = sites.slice(0, this.config.maxEntries);
-
     await storage.set("topSitesCache", trimmed);
-    await storage.set("cacheMeta", {
-      timestamp: Date.now(),
-      count: trimmed.length,
-    });
-
+    await storage.set("cacheMeta", { timestamp: Date.now(), count: trimmed.length });
     return trimmed;
   }
 
@@ -432,19 +373,16 @@ class TopSitesCache {
 
   async invalidate(): Promise<void> {
     await storage.set("topSitesCache", []);
-    await storage.set("cacheMeta", { timestamp: 0, etag: "", count: 0 });
+    await storage.set("cacheMeta", { timestamp: 0, count: 0 });
   }
 }
 
-const topSitesCache = new TopSitesCache({
-  maxAge: 10 * 60 * 1000,
-  maxEntries: 30,
-});
+const topSitesCache = new TopSitesCache({ maxAge: 10 * 60 * 1000, maxEntries: 30 });
 ```
 
 ---
 
-## Pattern 6: Visit Frequency and Recency Tracking
+## Pattern 6: Top Sites Widget with Favicons and Visit Frequency
 
 Track and display visit frequency alongside top sites:
 
@@ -453,81 +391,43 @@ Track and display visit frequency alongside top sites:
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
 const storage = createStorage(defineSchema({
-  visitHistory: { type: "object", default: {} },
   siteStats: { type: "object", default: {} },
 }));
 
-interface VisitEntry {
-  url: string;
-  timestamp: number;
-  transitionType?: string;
-}
-
 interface SiteStats {
-  url: string;
   visitCount: number;
   lastVisit: number;
   avgInterval: number;
-  visitTimestamps: number[];
 }
 
-async function trackVisit(url: string, transitionType?: string): Promise<void> {
-  const history = await storage.get("visitHistory") as Record<string, VisitEntry[]>;
+async function trackVisit(url: string): Promise<void> {
   const stats = await storage.get("siteStats") as Record<string, SiteStats>;
-  
   const domain = new URL(url).hostname;
   const timestamp = Date.now();
   
-  // Update visit history
-  if (!history[domain]) history[domain] = [];
-  history[domain].push({ url, timestamp, transitionType });
-  
-  // Keep only last 100 visits per domain
-  history[domain] = history[domain].slice(-100);
-  
-  // Update site stats
   if (!stats[domain]) {
-    stats[domain] = {
-      url: domain,
-      visitCount: 0,
-      lastVisit: timestamp,
-      avgInterval: 0,
-      visitTimestamps: [],
-    };
+    stats[domain] = { visitCount: 0, lastVisit: timestamp, avgInterval: 0 };
   }
   
   const siteStat = stats[domain];
+  const timeSinceLastVisit = timestamp - siteStat.lastVisit;
+  
   siteStat.visitCount++;
   siteStat.lastVisit = timestamp;
-  siteStat.visitTimestamps.push(timestamp);
+  siteStat.avgInterval = siteStat.avgInterval 
+    ? (siteStat.avgInterval * 0.7 + timeSinceLastVisit * 0.3)
+    : timeSinceLastVisit;
   
-  // Keep only last 50 timestamps for interval calculation
-  siteStat.visitTimestamps = siteStat.visitTimestamps.slice(-50);
-  
-  // Calculate average visit interval
-  if (siteStat.visitTimestamps.length > 1) {
-    const intervals: number[] = [];
-    for (let i = 1; i < siteStat.visitTimestamps.length; i++) {
-      intervals.push(siteStat.visitTimestamps[i] - siteStat.visitTimestamps[i - 1]);
-    }
-    siteStat.avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
-  }
-  
-  await storage.set("visitHistory", history);
   await storage.set("siteStats", stats);
 }
 
-// Listen for history updates
 chrome.history.onVisited.addListener((result) => {
-  if (result.url) {
-    trackVisit(result.url, result.transitionType);
-  }
+  if (result.url) trackVisit(result.url);
 });
 
 async function getEnhancedTopSites(): Promise<Array<chrome.topSites.TopSite & {
   visitCount: number;
   avgInterval: number;
-  lastVisit: number;
   recencyScore: number;
 }>> {
   const sites = await chrome.topSites.get();
@@ -536,17 +436,13 @@ async function getEnhancedTopSites(): Promise<Array<chrome.topSites.TopSite & {
   return sites.map(site => {
     const domain = new URL(site.url).hostname.replace(/^www\./, "");
     const siteStat = stats[domain] || { visitCount: 0, avgInterval: 0, lastVisit: 0 };
-    const now = Date.now();
-    
-    // Calculate recency score (0-100)
-    const hoursSinceLastVisit = (now - siteStat.lastVisit) / (1000 * 60 * 60);
+    const hoursSinceLastVisit = (Date.now() - siteStat.lastVisit) / (1000 * 60 * 60);
     const recencyScore = Math.max(0, 100 - hoursSinceLastVisit * 2);
     
     return {
       ...site,
       visitCount: siteStat.visitCount,
       avgInterval: siteStat.avgInterval,
-      lastVisit: siteStat.lastVisit,
       recencyScore,
     };
   });
@@ -555,7 +451,7 @@ async function getEnhancedTopSites(): Promise<Array<chrome.topSites.TopSite & {
 
 ---
 
-## Pattern 7: Customizable Speed Dial
+## Pattern 7: User-Customizable Speed Dial
 
 Allow users to pin, reorder, and customize their speed dial:
 
@@ -569,12 +465,7 @@ const storage = createStorage(defineSchema({
   customOrder: { type: "array", default: [] },
   displaySettings: { 
     type: "object", 
-    default: { 
-      showFavicon: true,
-      showTitle: true,
-      titleLength: 20,
-      tileSize: "medium",
-    } 
+    default: { showFavicon: true, showTitle: true, titleLength: 20, tileSize: "medium" }
   },
 }));
 
@@ -585,62 +476,29 @@ interface PinnedSite {
   addedAt: number;
 }
 
-interface DisplaySettings {
-  showFavicon: boolean;
-  showTitle: boolean;
-  titleLength: number;
-  tileSize: "small" | "medium" | "large";
-}
-
 async function getCustomizedSpeedDial(): Promise<{
   pinned: PinnedSite[];
-  autoPopulated: Array<chrome.topSites.TopSite & { isHidden: boolean }>;
+  autoPopulated: chrome.topSites.TopSite[];
 }> {
   const pinned = await storage.get("pinnedSites") as PinnedSite[];
   const hidden = await storage.get("hiddenSites") as string[];
-  const order = await storage.get("customOrder") as string[];
-  
   const hiddenSet = new Set(hidden);
   const topSites = await chrome.topSites.get();
-  
-  // Filter out hidden sites
-  const autoPopulated = topSites
-    .filter(site => !hiddenSet.has(site.url))
-    .map(site => ({ ...site, isHidden: false }));
-  
-  // Apply custom order if exists
-  if (order.length > 0) {
-    autoPopulated.sort((a, b) => {
-      const aIdx = order.indexOf(a.url);
-      const bIdx = order.indexOf(b.url);
-      if (aIdx === -1 && bIdx === -1) return 0;
-      if (aIdx === -1) return 1;
-      if (bIdx === -1) return -1;
-      return aIdx - bIdx;
-    });
-  }
+  const autoPopulated = topSites.filter(site => !hiddenSet.has(site.url));
   
   return { pinned, autoPopulated };
 }
 
 async function pinSite(url: string, title: string): Promise<void> {
   const pinned = await storage.get("pinnedSites") as PinnedSite[];
-  const exists = pinned.find(s => s.url === url);
-  
-  if (!exists) {
-    pinned.push({
-      url,
-      title,
-      position: pinned.length,
-      addedAt: Date.now(),
-    });
+  if (!pinned.find(s => s.url === url)) {
+    pinned.push({ url, title, position: pinned.length, addedAt: Date.now() });
     await storage.set("pinnedSites", pinned);
   }
 }
 
 async function unpinSite(url: string): Promise<void> {
-  let pinned = await storage.get("pinnedSites") as PinnedSite[];
-  pinned = pinned.filter(s => s.url !== url);
+  const pinned = (await storage.get("pinnedSites") as PinnedSite[]).filter(s => s.url !== url);
   await storage.set("pinnedSites", pinned);
 }
 
@@ -656,8 +514,6 @@ async function reorderPinned(fromIndex: number, toIndex: number): Promise<void> 
   let pinned = await storage.get("pinnedSites") as PinnedSite[];
   const [moved] = pinned.splice(fromIndex, 1);
   pinned.splice(toIndex, 0, moved);
-  
-  // Update positions
   pinned = pinned.map((site, idx) => ({ ...site, position: idx }));
   await storage.set("pinnedSites", pinned);
 }
@@ -665,9 +521,9 @@ async function reorderPinned(fromIndex: number, toIndex: number): Promise<void> 
 
 ---
 
-## Pattern 8: Privacy-Aware Display
+## Pattern 8: Privacy-Aware Top Sites Display
 
-Handle incognito mode and privacy settings:
+Handle incognito mode and privacy settings gracefully:
 
 ```ts
 // background.ts
@@ -695,24 +551,17 @@ interface PrivacySettings {
   requireHttps: boolean;
 }
 
-async function getPrivacyFilteredTopSites(
-  includeIncognito = false
-): Promise<chrome.topSites.TopSite[]> {
+async function getPrivacyFilteredTopSites(includeIncognito = false): Promise<chrome.topSites.TopSite[]> {
   const settings = await storage.get("privacySettings") as PrivacySettings;
   const whitelist = await storage.get("userWhitelist") as string[];
-  
   let sites = await chrome.topSites.get();
   
-  // Check incognito mode
+  // Check incognito access
   if (settings.excludeIncognito && !includeIncognito) {
-    // Check if we're in an incognito context
     const state = await chrome.extension.isAllowedIncognitoAccess();
-    if (!state) {
-      // Can't access topSites in incognito, but can still filter regular results
-    }
+    if (!state) console.log("Running in incognito - limited access");
   }
   
-  // Filter by privacy settings
   sites = sites.filter(site => {
     const url = site.url;
     
@@ -720,27 +569,16 @@ async function getPrivacyFilteredTopSites(
     if (whitelist.some(w => url.includes(w))) return true;
     
     // Exclude app launcher
-    if (settings.excludeAppLauncher && url.startsWith("chrome://apps/")) {
-      return false;
-    }
+    if (settings.excludeAppLauncher && url.startsWith("chrome://apps/")) return false;
     
-    // Exclude search results (detected by common search engine patterns)
+    // Exclude search results
     if (settings.excludeSearchResults) {
-      const searchPatterns = [
-        /[?&]q=/,           // Google, Bing, etc.
-        /[?&]search=/,     // Yahoo
-        /\/search\?/,      // DuckDuckGo
-        /\/search\?q=/,    // Additional patterns
-      ];
-      if (searchPatterns.some(p => p.test(url))) {
-        return false;
-      }
+      const searchPatterns = [/[?&]q=/, /[?&]search=/, /\/search\?/];
+      if (searchPatterns.some(p => p.test(url))) return false;
     }
     
     // Require HTTPS
-    if (settings.requireHttps && !url.startsWith("https://")) {
-      return false;
-    }
+    if (settings.requireHttps && !url.startsWith("https://")) return false;
     
     return true;
   });
@@ -748,23 +586,11 @@ async function getPrivacyFilteredTopSites(
   return sites;
 }
 
-// Privacy indicator for UI
 async function getPrivacyStatus(): Promise<{
   incognitoAllowed: boolean;
-  canAccessHistory: boolean;
   privacyLevel: "high" | "medium" | "low";
 }> {
   const incognitoAllowed = await chrome.extension.isAllowedIncognitoAccess();
-  
-  // Check if we can access topSites (requires normal permissions)
-  let canAccessHistory = true;
-  try {
-    await chrome.topSites.get();
-  } catch {
-    canAccessHistory = false;
-  }
-  
-  let privacyLevel: "high" | "medium" | "low" = "medium";
   const settings = await storage.get("privacySettings") as PrivacySettings;
   
   const score = [
@@ -773,10 +599,8 @@ async function getPrivacyStatus(): Promise<{
     settings.requireHttps ? 1 : 0,
   ].reduce((a, b) => a + b, 0);
   
-  if (score >= 2) privacyLevel = "high";
-  else if (score === 0) privacyLevel = "low";
-  
-  return { incognitoAllowed, canAccessHistory, privacyLevel };
+  const privacyLevel = score >= 2 ? "high" : score === 0 ? "low" : "medium";
+  return { incognitoAllowed, privacyLevel };
 }
 ```
 
@@ -786,25 +610,24 @@ async function getPrivacyStatus(): Promise<{
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
-| Basic Retrieval | Simple top sites list | chrome.topSites.get() | Basic |
-| Speed Dial | Custom new tab page | chrome.topSites.get() + UI | Basic |
-| Filtering | Remove unwanted sites | URL parsing, regex | Intermediate |
-| Unified Launcher | Combine with bookmarks | chrome.bookmarks + topSites | Intermediate |
-| Caching | Reduce API calls | chrome.storage | Intermediate |
-| Visit Tracking | Show visit frequency | chrome.history.onVisited | Advanced |
-| Customization | User pinning/reordering | chrome.storage + UI | Advanced |
-| Privacy | Incognito handling | chrome.extension.isAllowedIncognitoAccess | Advanced |
+| 1. Basic Retrieval | Simple top sites list | chrome.topSites.get() | Basic |
+| 2. Speed Dial | Custom new tab page | chrome.topSites.get() + UI | Basic |
+| 3. Filtering | Remove unwanted sites | URL parsing, regex | Intermediate |
+| 4. Unified Launcher | Combine with bookmarks | chrome.bookmarks + topSites | Intermediate |
+| 5. Caching | Reduce API calls | chrome.storage | Intermediate |
+| 6. Visit Tracking | Show visit frequency | chrome.history.onVisited | Advanced |
+| 7. Customization | User pinning/reordering | chrome.storage + UI | Advanced |
+| 8. Privacy | Incognito handling | chrome.extension.isAllowedIncognitoAccess | Advanced |
 
 ---
 
 ## Key Takeaways
 
-1. Always cache top sites data to avoid excessive API calls
-2. Use domain-level deduplication to avoid showing duplicate sites
-3. Combine with bookmarks for a more comprehensive launcher
-4. Implement privacy-aware filtering for sensitive browsing
-5. Track visit frequency to enhance the user experience
-6. Allow users to customize and pin their preferred sites
-7. Handle incognito mode gracefully - top sites may not be available
-8. Use Google Favicon service as a fallback for favicon display
-
+1. **Always cache top sites** - The API fetches fresh data each call; cache to reduce overhead
+2. **Use domain deduplication** - Avoid showing duplicate sites from the same domain
+3. **Combine with bookmarks** - Create a unified launcher for comprehensive search
+4. **Implement privacy filtering** - Handle incognito gracefully and exclude sensitive URLs
+5. **Track visit frequency** - Enhance UI with visit counts and recency scores
+6. **Allow user customization** - Enable pinning, hiding, and reordering
+7. **Handle favicons** - Use Google Favicon service as a reliable fallback
+8. **Check permissions** - The topSites permission is required; manifest configuration matters
