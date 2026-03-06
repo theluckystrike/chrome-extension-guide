@@ -11,7 +11,7 @@ Create `manifest.json` with the necessary permissions:
   "manifest_version": 3,
   "name": "Code Snippet Manager",
   "version": "1.0",
-  "permissions": ["contextMenus", "storage", "activeTab"],
+  "permissions": ["contextMenus", "storage", "activeTab", "downloads"],
   "action": { "default_popup": "popup.html" },
   "background": { "service_worker": "background.js" }
 }

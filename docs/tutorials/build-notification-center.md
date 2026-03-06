@@ -51,7 +51,7 @@ Configure your extension to use the side panel:
 
 ## Notification Types
 
-Chrome notifications support three main types:
+Chrome notifications support four types (`basic`, `image`, `list`, `progress`):
 
 ### Basic Notification
 

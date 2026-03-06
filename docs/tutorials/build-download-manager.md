@@ -45,7 +45,8 @@ Define required permissions and background worker:
   "permissions": [
     "downloads",
     "notifications",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -342,7 +343,7 @@ function showErrorNotification(download, error) {
           // Retry download
           chrome.downloads.download({ url: download.url });
         } else {
-          chrome.downloads.show();
+          chrome.downloads.showDefaultFolder();
         }
       }
     });

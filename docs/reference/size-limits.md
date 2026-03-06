@@ -42,6 +42,13 @@ This document provides a comprehensive reference for all size and quota limits i
 | Message size | ~64 MB | Practical JSON message size limit |
 | Response timeout | None | Messages wait indefinitely for response |
 
+### Native Messaging
+
+| Direction | Limit | Notes |
+|-----------|-------|-------|
+| From extension to native host | 64 MiB | Maximum message size sent by the extension |
+| From native host to extension | 1 MB | Maximum message size received from native host |
+
 ## Content Scripts
 
 | Property | Value | Notes |

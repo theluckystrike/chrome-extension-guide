@@ -111,10 +111,13 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((d) => {});
 Requires `webRequest` permission.
 
 ```javascript
-chrome.webRequest.onBeforeRequest.addListener((d) => ({ cancel: d.url.includes('ads') }), { urls: ['<all_urls>'] }, ['blocking']);
-chrome.webRequest.onBeforeSendHeaders.addListener((d) => ({ requestHeaders: d.requestHeaders }), { urls: ['<all_urls>'] }, ['blocking', 'requestHeaders']);
+// Note: In MV3, 'blocking' is NOT available (except for policy-installed extensions).
+// Use chrome.declarativeNetRequest for request blocking/modification instead.
+// The webRequest API in MV3 is observational only:
+chrome.webRequest.onBeforeRequest.addListener((d) => { console.log('Request:', d.url); }, { urls: ['<all_urls>'] });
+chrome.webRequest.onBeforeSendHeaders.addListener((d) => { /* observe headers */ }, { urls: ['<all_urls>'] }, ['requestHeaders']);
 chrome.webRequest.onSendHeaders.addListener((d) => {}, { urls: ['<all_urls>'] }, ['requestHeaders']);
-chrome.webRequest.onHeadersReceived.addListener((d) => ({ responseHeaders: d.responseHeaders }), { urls: ['<all_urls>'] }, ['blocking', 'responseHeaders']);
+chrome.webRequest.onHeadersReceived.addListener((d) => { /* observe headers */ }, { urls: ['<all_urls>'] }, ['responseHeaders']);
 chrome.webRequest.onResponseStarted.addListener((d) => {}, { urls: ['<all_urls>'] });
 chrome.webRequest.onCompleted.addListener((d) => {}, { urls: ['<all_urls>'] });
 chrome.webRequest.onErrorOccurred.addListener((d) => {}, { urls: ['<all_urls>'] });

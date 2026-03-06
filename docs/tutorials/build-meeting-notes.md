@@ -67,7 +67,17 @@ function detectMeeting(): MeetingInfo | null {
   return { url, title, startTime: Date.now() };
 }
 
-// Auto-open side panel when meeting detected
+// Send message to background to open side panel
+const meeting = detectMeeting();
+if (meeting) {
+  chrome.runtime.sendMessage({ type: 'MEETING_START', meeting });
+}
+```
+
+In `background.js`, handle the message and open the side panel:
+
+```typescript
+// background.js - chrome.sidePanel.open() can only be called from the background service worker
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'MEETING_START') {
     chrome.sidePanel.open({ tabId: sender.tab?.id });

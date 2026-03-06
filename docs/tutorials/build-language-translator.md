@@ -32,7 +32,7 @@ Create your `manifest.json` with the necessary permissions for context menus, ac
   },
   "commands": {
     "translate-selection": {
-      "suggested_key": "Ctrl+Shift+T",
+      "suggested_key": { "default": "Ctrl+Shift+T" },
       "description": "Translate selected text"
     }
   }
@@ -207,20 +207,20 @@ chrome.commands.onCommand.addListener(async (command) => {
   if (command === "translate-selection") {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     
-    chrome.tabs.executeScript(tab.id, {
-      code: `window.getSelection().toString()`
-    }, async ([selection]) => {
-      if (selection) {
-        const { targetLang } = await chrome.storage.sync.get(['targetLang']);
-        const translation = await translateText(selection, targetLang || 'en');
-        
-        // Show in tooltip or notification
-        chrome.tabs.sendMessage(tab.id, {
-          action: "showTranslation",
-          translation
-        });
-      }
+    const [{result: selection}] = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => window.getSelection().toString()
     });
+    if (selection) {
+      const { targetLang } = await chrome.storage.sync.get(['targetLang']);
+      const translation = await translateText(selection, targetLang || 'en');
+
+      // Show in tooltip or notification
+      chrome.tabs.sendMessage(tab.id, {
+        action: "showTranslation",
+        translation
+      });
+    }
   }
 });
 ```

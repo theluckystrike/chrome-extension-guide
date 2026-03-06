@@ -181,21 +181,22 @@ Understanding what your match patterns can and cannot match is critical for prop
 
 | Pattern | Matches |
 |---------|---------|
-| `*://*/*` | All HTTP, HTTPS, and FTP URLs |
+| `*://*/*` | All HTTP and HTTPS URLs (the `*` scheme matches http and https only) |
 | `https://*/*` | All HTTPS URLs |
 | `https://example.com/*` | All paths on example.com |
-| `<all_urls>` | HTTP, HTTPS, and FTP (not chrome://, about:, etc.) |
+| `<all_urls>` | HTTP, HTTPS, and file URLs (not chrome://, about:, data:, etc.) |
 
 ### What `<all_urls>` Does NOT Match
 
-The `<all_urls>` special value and the `*://*/*` pattern do **NOT** match:
+The `<all_urls>` special value does **NOT** match:
 
 - `chrome://*` URLs
 - `chrome-extension://` URLs
 - `about:` URLs
-- `file://` URLs
 - `data:` URLs
 - `blob:` URLs
+
+Note: `<all_urls>` **does** match `file://` URLs, but the user must enable "Allow access to file URLs" for the extension. The `*://*/*` pattern matches only `http` and `https` URLs (not `file://`).
 
 ### Recommended Patterns
 

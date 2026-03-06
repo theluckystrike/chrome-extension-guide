@@ -23,7 +23,7 @@ Create `manifest.json` with required permissions:
   "manifest_version": 3,
   "name": "Weather Widget",
   "version": "1.0",
-  "permissions": ["alarms", "storage", "geolocation"],
+  "permissions": ["alarms", "storage"],
   "host_permissions": ["https://api.openweathermap.org/*"],
   "action": { "default_popup": "popup.html" },
   "options_page": "options.html",
@@ -31,7 +31,7 @@ Create `manifest.json` with required permissions:
 }
 ```
 
-Required permissions: `alarms` for periodic updates, `storage` for caching, `geolocation` for auto-location.
+Required permissions: `alarms` for periodic updates, `storage` for caching. Geolocation is available to extension popups via the standard `navigator.geolocation` API without a special permission.
 
 ---
 

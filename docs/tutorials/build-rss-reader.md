@@ -17,7 +17,7 @@ Create `manifest.json` with required permissions for alarms, storage, and notifi
   "manifest_version": 3,
   "name": "RSS Reader",
   "version": "1.0",
-  "permissions": ["alarms", "storage", "notifications", "offscreen", "badge"],
+  "permissions": ["alarms", "storage", "notifications", "offscreen"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",

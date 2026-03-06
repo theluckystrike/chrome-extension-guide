@@ -79,7 +79,12 @@ Use the Alarms API for notifications:
 ```typescript
 chrome.alarms.create(task.id, { when: new Date(dueDate).getTime() });
 chrome.alarms.onAlarm.addListener((alarm) => {
-  chrome.notifications.create({ message: 'Task due!' });
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icon-128.png',
+    title: 'Task Reminder',
+    message: 'Task due!'
+  });
 });
 ```
 

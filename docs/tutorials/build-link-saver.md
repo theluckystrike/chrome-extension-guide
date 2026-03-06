@@ -19,11 +19,10 @@ First, configure the required permissions in your `manifest.json`:
   "permissions": [
     "storage",
     "activeTab",
+    "scripting",
     "contextMenus"
   ],
-  "action": {
-    "default_popup": "popup.html"
-  }
+  "action": {}
 }
 ```
 

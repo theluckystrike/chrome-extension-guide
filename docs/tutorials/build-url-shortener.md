@@ -12,7 +12,7 @@
   "manifest_version": 3,
   "name": "URL Shortener",
   "version": "1.0.0",
-  "permissions": ["activeTab", "storage", "clipboardWrite", "contextMenus"],
+  "permissions": ["activeTab", "storage", "clipboardWrite", "scripting", "contextMenus"],
   "action": { "default_popup": "popup.html" },
   "background": { "service_worker": "background.js" }
 }
@@ -35,12 +35,21 @@ async function shortenUrl(url: string, alias?: string): Promise<string> {
 ```
 
 ## Step 2: One-Click Shortening
+
+> **Note:** `chrome.action.onClicked` only fires when no `default_popup` is set in the manifest. To use this one-click mode, remove `"default_popup": "popup.html"` from the `action` field. If you prefer the popup UI (Step 3), skip this step.
+
 ```typescript
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab.url) return;
   try {
     const shortUrl = await shortenUrl(tab.url);
-    await navigator.clipboard.writeText(shortUrl);
+    // navigator.clipboard is not available in service workers;
+    // use chrome.scripting.executeScript or copy from the popup instead.
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: (text) => navigator.clipboard.writeText(text),
+      args: [shortUrl]
+    });
     chrome.action.setBadgeText({ text: '✓', tabId: tab.id });
     chrome.action.setBadgeBackgroundColor({ color: '#4CAF50', tabId: tab.id });
     setTimeout(() => chrome.action.setBadgeText({ text: '', tabId: tab.id }), 2000);

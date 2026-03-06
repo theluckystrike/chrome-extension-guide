@@ -16,7 +16,7 @@ Build a quick note-taking extension with page-linked notes, side panel editing, 
   "version": "1.0.0",
   "permissions": ["sidePanel", "storage", "activeTab", "contextMenus"],
   "side_panel": { "default_path": "sidepanel.html" },
-  "action": { "default_popup": "popup.html" },
+  "action": {},
   "background": { "service_worker": "background.js" },
   "commands": {
     "quick-note": {

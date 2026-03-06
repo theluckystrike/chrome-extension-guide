@@ -122,12 +122,7 @@ manifest.json:
 ```json
 {
   "commands": {
-    "toggle-reader": { "suggested_key": "Alt+Shift+R", "description": "Toggle speed reader" },
-    "pause-resume": { "suggested_key": "Space", "description": "Pause/Resume" },
-    "speed-up": { "suggested_key": "Up", "description": "Increase speed" },
-    "speed-down": { "suggested_key": "Down", "description": "Decrease speed" },
-    "skip-forward": { "suggested_key": "Right", "description": "Skip sentence" },
-    "skip-back": { "suggested_key": "Left", "description": "Go back" }
+    "toggle-reader": { "suggested_key": { "default": "Alt+Shift+R" }, "description": "Toggle speed reader" }
   }
 }
 ```

@@ -26,7 +26,7 @@ Create `manifest.json`:
   "name": "Email Productivity Tracker",
   "version": "1.0.0",
   "description": "Track time spent on Gmail, view statistics, and stay focused.",
-  "permissions": ["storage", "alarms", "notifications", "tabs", "idle"],
+  "permissions": ["storage", "alarms", "notifications", "tabs", "idle", "downloads"],
   "host_permissions": ["https://mail.google.com/*"],
   "action": {
     "default_popup": "popup/popup.html",

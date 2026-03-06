@@ -410,7 +410,7 @@ async function checkProductPrice(product) {
 
 // Create offscreen document for long-running tasks
 async function createOffscreenDocument() {
-  const existingContexts = await chrome.offscreen.getAllContexts();
+  const existingContexts = await chrome.runtime.getContexts({ contextTypes: ['OFFSCREEN_DOCUMENT'] });
   
   if (!existingContexts.some(ctx => ctx.documentUrl.includes('offscreen.html'))) {
     await chrome.offscreen.createDocument({

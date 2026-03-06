@@ -25,6 +25,7 @@ Create your `manifest.json` with the following permissions and configuration:
     "alarms",
     "tabs",
     "notifications",
+    "idle",
     "declarativeNetRequest"
   ],
   "host_permissions": [
