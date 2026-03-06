@@ -52,7 +52,7 @@ await chrome.offscreen.createDocument({
 ```typescript
 // MV2
 let count = 0;
-chrome.action.onClicked.addListener(() => count++);
+chrome.browserAction.onClicked.addListener(() => count++);
 
 // MV3 — use storage
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';

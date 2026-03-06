@@ -18,7 +18,7 @@ No special permission is required to use `chrome.windows` methods. However, the 
 | `height` | `number` | Height in pixels |
 | `tabs` | `Tab[]` | Array of tabs in the window (only if `populate: true`) |
 | `incognito` | `boolean` | Whether this is an incognito window |
-| `type` | `WindowType` | One of `"normal"`, `"popup"`, `"panel"`, `"app"`, `"devtools"` |
+| `type` | `WindowType` | One of `"normal"`, `"popup"`, `"panel"` (deprecated), `"app"`, `"devtools"` |
 | `state` | `WindowState` | One of `"normal"`, `"minimized"`, `"maximized"`, `"fullscreen"`, `"locked-fullscreen"` |
 | `alwaysOnTop` | `boolean` | Whether the window is always on top |
 | `sessionId` | `string \| undefined` | Session ID for restored windows |

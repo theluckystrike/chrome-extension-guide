@@ -34,7 +34,7 @@ async function getActiveTab() {
 |-----|-------|-------|
 | `tabs` | "No tab with id" | Tab already closed |
 | `tabs` | "Permission denied" | Missing host permission |
-| `storage` | "QUOTA_BYTES" | Data exceeds 5MB limit |
+| `storage` | "QUOTA_BYTES" | Data exceeds 10MB limit |
 | `storage` | "MAX_SCRIPT_WORKS" | Storage quota exceeded |
 | `messaging` | "Could not establish connection" | Receiver not found |
 | `messaging` | "Extension context invalidated" | Extension reloaded/unloaded |

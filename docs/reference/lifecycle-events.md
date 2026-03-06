@@ -5,7 +5,7 @@
 ### onInstalled
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
-  // details.reason: "install" | "update" | "chrome_update"
+  // details.reason: "install" | "update" | "chrome_update" | "shared_module_update"
   // details.previousVersion: string (only on "update")
 });
 ```

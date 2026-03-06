@@ -165,9 +165,9 @@ document.head.appendChild(style);
 
 ## Web APIs Available
 Content scripts have access to all standard Web APIs:
-- `fetch()` — makes requests from extension origin (bypasses CORS)
+- `fetch()` — subject to the same CORS rules as the host page (since Chrome 83); use the service worker for cross-origin requests
 - `XMLHttpRequest`
-- `localStorage` — extension's localStorage (not page's, in ISOLATED world)
+- `localStorage` — accesses the host page's localStorage (not the extension's); use `chrome.storage` instead
 - `navigator.*` — standard navigator APIs
 - `MutationObserver`
 - `IntersectionObserver`
@@ -178,8 +178,8 @@ Content scripts have access to all standard Web APIs:
 
 ## fetch() in Content Scripts
 ```typescript
-// fetch from content script uses extension's origin
-// This bypasses CORS restrictions (if host_permissions match)
+// fetch from content script uses the HOST PAGE's origin (not the extension's)
+// Subject to CORS since Chrome 83 — send cross-origin requests from the service worker instead
 const response = await fetch('https://api.example.com/data');
 const data = await response.json();
 ```
@@ -189,7 +189,7 @@ const data = await response.json();
 |---|---|
 | `document_start` | Before DOM is constructed |
 | `document_end` | After DOM is ready, before subresources |
-| `document_idle` | After `DOMContentLoaded` (default) |
+| `document_idle` | Between `document_end` and just after `window.onload` (default) |
 
 ## Shadow DOM for UI Isolation
 ```typescript

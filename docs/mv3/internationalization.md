@@ -52,8 +52,12 @@ Use `$NAME$` for named placeholders and `$1`, `$2` for positional arguments.
 const name = chrome.i18n.getMessage('greeting_message', ['World']);
 // Returns: "Hello, World!"
 
-const greeting = chrome.i18n.getMessage('greeting_message', { NAME: 'Alice' });
+// You can also pass a single string instead of an array:
+const greeting = chrome.i18n.getMessage('greeting_message', 'Alice');
+// Returns: "Hello, Alice!"
 ```
+
+> **Note:** The `substitutions` parameter accepts a string or an array of up to 9 strings. It does NOT accept an object. Named placeholders like `$NAME$` are defined in `messages.json` and map to positional substitutions (`$1`, `$2`, etc.).
 
 ### Detecting User Language
 
@@ -73,6 +77,8 @@ chrome.i18n.getAcceptLanguages((languages) => {
 | `@@ui_locale` | Current UI locale |
 | `@@bidi_dir` | "ltr" or "rtl" |
 | `@@bidi_reversed_dir` | Opposite of @@bidi_dir |
+| `@@bidi_start_edge` | "left" for ltr, "right" for rtl |
+| `@@bidi_end_edge` | "right" for ltr, "left" for rtl |
 
 ```javascript
 const extId = chrome.i18n.getMessage('@@extension_id');

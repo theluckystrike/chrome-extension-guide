@@ -24,11 +24,11 @@ This reference documents which Chrome Extension APIs are available in each execu
 | `chrome.runtime.getURL()` | ✅ | ✅ | ✅ | ✅ |
 | `chrome.runtime.id` | ✅ | ✅ | ✅ | ✅ |
 | `chrome.runtime.getManifest()` | ✅ | ✅ | ✅ | ✅ |
-| `chrome.runtime.getBackgroundPage()` | ✅ | ❌ | ❌ | ❌ |
+| `chrome.runtime.getBackgroundPage()` | ❌ (MV3) | ❌ | ❌ | ❌ |
 | **chrome.storage** | | | | |
 | `chrome.storage.local` | ✅ | ✅ | ✅ | ✅ |
 | `chrome.storage.sync` | ✅ | ✅ | ✅ | ✅ |
-| `chrome.storage.session` | ✅ | ✅ | ✅ | ✅ |
+| `chrome.storage.session` | ✅ | ⚠️** | ✅ | ✅ |
 | `chrome.storage.onChanged` | ✅ | ✅ | ✅ | ✅ |
 | **chrome.tabs** | | | | |
 | `chrome.tabs.*` | ✅ | ❌* | ✅ | ❌ |
@@ -58,6 +58,8 @@ This reference documents which Chrome Extension APIs are available in each execu
 | `chrome.webNavigation.*` | ✅ | ❌ | ✅ | ❌ |
 
 *Content scripts can access `chrome.tabs` via `sender.tab` in message listeners.
+
+**`chrome.storage.session` is NOT available to content scripts by default. You must call `chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_AND_UNTRUSTED_CONTEXTS' })` from the service worker to enable content script access.
 
 ## Web API Availability
 
@@ -100,7 +102,11 @@ Use offscreen documents when you need DOM access from the service worker:
 ```javascript
 // In service worker
 async function parseHTML(html) {
-  if (!await chrome.offscreen.hasDocument()) {
+  // Check if an offscreen document already exists (Chrome 116+ via runtime.getContexts)
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
+  if (contexts.length === 0) {
     await chrome.offscreen.createDocument({
       url: 'offscreen.html',
       reasons: ['DOM_PARSER'],
@@ -111,13 +117,22 @@ async function parseHTML(html) {
 }
 ```
 
-Available offscreen reasons:
-- `DOM_SCRAPING` — parse/manipulate DOM
-- `DOM_PARSER` — use DOMParser
-- `CLIPBOARD` — clipboard operations
-- `LOCAL_STORAGE` — localStorage access
+Available offscreen reasons (partial list):
+- `DOM_SCRAPING` — embed and scrape an iframe's DOM
+- `DOM_PARSER` — use DOMParser API
+- `CLIPBOARD` — interact with the Clipboard API
+- `LOCAL_STORAGE` — access localStorage
 - `AUDIO_PLAYBACK` — play audio
-- `IFRAME_SCRIPTING` — interact with iframes
+- `IFRAME_SCRIPTING` — embed and script an iframe
+- `BLOBS` — interact with Blob objects
+- `USER_MEDIA` — access getUserMedia streams
+- `DISPLAY_MEDIA` — capture display media
+- `WEB_RTC` — use WebRTC
+- `WORKERS` — spawn a web worker
+- `BATTERY_STATUS` — access Battery Status API
+- `MATCH_MEDIA` — use matchMedia
+- `GEOLOCATION` — use Geolocation API
+- `TESTING` — for testing purposes
 
 ## Quick Reference: What to Use Where
 

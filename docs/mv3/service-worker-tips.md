@@ -55,8 +55,16 @@ Service workers cannot access DOM. Use offscreen documents.
 
 ```javascript
 async function parseHTML(html) {
-  if (!await chrome.offscreen.hasDocument()) {
-    await chrome.offscreen.createDocument({ url: 'offscreen.html', reasons: ['DOM_PARSER'], justification: 'Parse HTML' });
+  // Check if an offscreen document already exists by querying contexts
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
+  if (contexts.length === 0) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: [chrome.offscreen.Reason.DOM_PARSER],
+      justification: 'Parse HTML'
+    });
   }
 }
 ```

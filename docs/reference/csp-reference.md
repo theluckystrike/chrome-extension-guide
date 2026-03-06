@@ -131,9 +131,9 @@ import { createMessenger } from '@theluckystrike/webext-messaging';
 ## MV2 vs MV3 CSP Differences
 | Feature | MV2 | MV3 |
 |---|---|---|
-| `unsafe-eval` | Allowed (opt-out) | Blocked |
-| `unsafe-inline` | Allowed (opt-out) | Blocked |
-| Remote scripts | Allowed | Blocked |
+| `unsafe-eval` | Allowed (opt-in via CSP relaxation) | Blocked |
+| `unsafe-inline` | Blocked by default | Blocked |
+| Remote scripts | Allowed (opt-in via CSP relaxation) | Blocked |
 | Sandbox pages | Available | Available |
 | `wasm-unsafe-eval` | N/A | Available |
 

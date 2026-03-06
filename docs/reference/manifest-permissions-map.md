@@ -11,7 +11,6 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 | `cookies` | `chrome.cookies` | Needs host_permissions too |
 | `declarativeContent` | `chrome.declarativeContent` | Show/hide action icon |
 | `dns` | `chrome.dns` | Resolve DNS |
-| `downloads` | `chrome.downloads` | Manage downloads |
 | `fontSettings` | `chrome.fontSettings` | Browser font config |
 | `gcm` | `chrome.gcm` | Push messaging |
 | `identity` | `chrome.identity` | OAuth flows |
@@ -26,11 +25,8 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 | `sidePanel` | `chrome.sidePanel` | Side panel UI |
 | `storage` | `chrome.storage` | Extension storage |
 | `tabGroups` | `chrome.tabGroups` | Tab group management |
-| `tabs` | `chrome.tabs` (URL access) | See all tab URLs |
-| `topSites` | `chrome.topSites` | Most visited sites |
 | `tts` | `chrome.tts` | Text-to-speech |
 | `unlimitedStorage` | No 10MB limit on local storage | Large data |
-| `webNavigation` | `chrome.webNavigation` | Navigation events |
 | `webRequest` | `chrome.webRequest` | Observe-only in MV3 |
 
 ## Permissions With Warnings
@@ -41,12 +37,16 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 | `clipboardWrite` | Clipboard copy | "Modify data you copy and paste" |
 | `contentSettings` | `chrome.contentSettings` | "Change settings that control websites' access..." |
 | `debugger` | `chrome.debugger` | "Access the page debugger backend" |
-| `declarativeNetRequest` | `chrome.declarativeNetRequest` | "Block page content" |
+| `declarativeNetRequest` | `chrome.declarativeNetRequest` | "Block content on any page" |
+| `downloads` | `chrome.downloads` | "Manage your downloads" |
 | `geolocation` | `navigator.geolocation` | "Detect your physical location" |
 | `history` | `chrome.history` | "Read and change your browsing history" |
 | `management` | `chrome.management` | "Manage your apps, extensions, and themes" |
 | `nativeMessaging` | Native app communication | "Communicate with cooperating native applications" |
 | `privacy` | `chrome.privacy` | "Change your privacy-related settings" |
+| `tabs` | `chrome.tabs` | "Read your browsing history" |
+| `topSites` | `chrome.topSites` | "Read a list of your most frequently visited websites" |
+| `webNavigation` | `chrome.webNavigation` | "Read your browsing history" |
 
 ## Host Permissions
 ```json

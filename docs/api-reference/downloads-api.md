@@ -10,11 +10,11 @@ The `chrome.downloads` API lets you initiate, monitor, search, pause, resume, ca
 }
 ```
 
-For controlling the download shelf (the bar at the bottom of Chrome) or overriding save-as locations, you also need:
+For opening downloaded files or controlling the download UI, you may also need:
 
 ```json
 {
-  "permissions": ["downloads", "downloads.shelf", "downloads.ui"]
+  "permissions": ["downloads", "downloads.open", "downloads.ui"]
 }
 ```
 

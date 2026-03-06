@@ -108,10 +108,14 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content_security_policy` | string | CSP string for extension pages |
+| `content_security_policy` | object | CSP object with `extension_pages` and `sandbox` keys |
+
+In MV3, `content_security_policy` is an **object**, not a string. The default enforced minimum is `script-src 'self' 'wasm-unsafe-eval'; object-src 'self'`.
 
 ```json
-"content_security_policy": "script-src 'self'; object-src 'self'"
+"content_security_policy": {
+  "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+}
 ```
 
 ## Other Extensions Features
@@ -193,7 +197,9 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
     "resources": ["images/*"],
     "matches": ["<all_urls>"]
   }],
-  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
   "commands": {
     "toggle-feature": {
       "suggested_key": "Ctrl+Shift+Y",

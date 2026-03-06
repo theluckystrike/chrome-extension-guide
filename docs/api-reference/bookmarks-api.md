@@ -26,7 +26,7 @@ Every bookmark or folder is represented as a `BookmarkTreeNode`:
 | `url` | `string \| undefined` | URL of the bookmark. Absent for folders |
 | `title` | `string` | Display title |
 | `dateAdded` | `number \| undefined` | Creation timestamp (ms since epoch) |
-| `dateLastUsed` | `number \| undefined` | Last time the bookmark was opened |
+| `dateLastUsed` | `number \| undefined` | Last time the bookmark was opened (not set for folders; Chrome 114+) |
 | `dateGroupModified` | `number \| undefined` | Last time folder contents changed (folders only) |
 | `children` | `BookmarkTreeNode[]` | Child nodes (present only when using `getTree()` or `getSubTree()`) |
 | `unmodifiable` | `"managed"` | Present if the bookmark is managed by policy |
