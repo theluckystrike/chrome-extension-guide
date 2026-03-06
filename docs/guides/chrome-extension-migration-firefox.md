@@ -50,6 +50,27 @@ Firefox supports both persistent and event-based backgrounds:
 }
 ```
 
+## Content Scripts
+
+Content scripts are mostly compatible between Chrome and Firefox. Both support:
+- Programmatic injection via `chrome.scripting.executeScript`
+- Declarative injection in manifest
+- Access to DOM and Chrome/Firefox extension APIs
+
+## Building for Both Browsers
+
+Use conditional code or build-time configuration:
+
+```javascript
+const isFirefox = typeof browser !== 'undefined' && !chrome.runtime?.id;
+
+if (isFirefox) {
+  // Firefox-specific code
+}
+```
+
+Or use build tools to swap polyfills based on target browser.
+
 ## Storage API
 
 The `browser.storage` API is fully compatible: `storage.local`, `storage.sync`, and `storage.managed`.
