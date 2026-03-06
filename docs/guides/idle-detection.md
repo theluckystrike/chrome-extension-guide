@@ -11,6 +11,8 @@ The Idle Detection API provides three key capabilities:
 
 This guide covers all aspects of working with the chrome.idle API in Manifest V3.
 
+> **Note**: This API is available in both Manifest V2 and Manifest V3 extensions. The examples in this guide use the Manifest V3 service worker syntax.
+
 ## Permissions
 
 ### manifest.json Configuration
