@@ -197,7 +197,7 @@ async function pinTabToGroup(groupName: string, tabId: number) {
 | **Duration** | Persistent (always granted) | Temporary (expires on navigation) |
 | **URL access** | All tabs | Only current active tab |
 | **User gesture required** | No | Yes |
-| **Store warning** | "Read and change all your data on all websites" | No warning |
+| **Store warning** | "Read your browsing history" | No warning |
 | **Chrome Web Store review** | More scrutiny | Faster approval |
 
 ## When to Use Which
@@ -218,7 +218,7 @@ async function pinTabToGroup(groupName: string, tabId: number) {
 
 1. **Undefined without permission**: Always check if `tab.url`, `tab.title`, `tab.favIconUrl` exist before using them. They will be `undefined` if `tabs` permission isn't granted.
 
-2. **"Browsing history" warning**: The `tabs` permission triggers the "Read and change all your data on all websites" warning in the Chrome Web Store. This can reduce conversion rates.
+2. **"Browsing history" warning**: The `tabs` permission triggers the "Read your browsing history" warning in the Chrome Web Store. This can reduce conversion rates.
 
 3. **sendMessage works without tabs**: You can use `chrome.tabs.sendMessage()` to communicate with content scripts without the `tabs` permission — as long as you have host permissions for the target URL.
 
