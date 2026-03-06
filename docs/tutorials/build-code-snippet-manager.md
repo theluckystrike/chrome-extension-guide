@@ -1,159 +1,151 @@
-# Build a Code Snippet Manager Extension
+# Build a Code Snippet Manager Chrome Extension
 
-## What You'll Build
-A code snippet manager that lets users save, organize, and retrieve code snippets from any webpage. Features syntax highlighting, tagging, search, and import/export functionality.
+In this tutorial, we'll build a Chrome extension that lets you save, organize, and retrieve code snippets from any web page.
 
-## Project Structure
-```
-code-snippet-manager/
-  manifest.json
-  background.js
-  content.js
-  popup/popup.html
-  popup/popup.css
-  popup/popup.js
-  options/options.html
-  options/options.css
-  options/options.js
-  offscreen.html
-  offscreen.js
-```
+## Step 1: Manifest Configuration
 
-## Step 1: Manifest
+Create `manifest.json` with the necessary permissions:
+
 ```json
 {
   "manifest_version": 3,
   "name": "Code Snippet Manager",
-  "version": "1.0.0",
-  "permissions": ["contextMenus", "storage", "activeTab", "offscreen"],
-  "action": { "default_popup": "popup/popup.html" },
-  "options_page": "options/options.html",
-  "background": { "service_worker": "background.js" },
-  "content_scripts": [{ "matches": ["<all_urls>"], "js": ["content.js"] }]
+  "version": "1.0",
+  "permissions": ["contextMenus", "storage", "activeTab"],
+  "action": { "default_popup": "popup.html" },
+  "background": { "service_worker": "background.js" }
 }
 ```
 
-## Step 2: Context Menu
+Key permissions:
+- **contextMenus**: Right-click to save selected code
+- **storage**: Persist snippets locally
+- **activeTab**: Access current tab's content
+
+## Step 2: Context Menu for Saving Code
+
+In `background.js`, create the context menu:
+
 ```javascript
-// background.js
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: 'saveSnippet',
-    title: 'Save as Snippet',
-    contexts: ['selection']
-  });
+chrome.contextMenus.create({
+  id: "saveSnippet",
+  title: "Save as Snippet",
+  contexts: ["selection"]
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === 'saveSnippet') {
-    chrome.tabs.sendMessage(tab.id, { 
-      type: 'SAVE_SELECTION', 
-      code: info.selectionText 
-    });
+  if (info.menuItemId === "saveSnippet") {
+    saveSnippet(info.selectionText, tab.url);
   }
 });
 ```
 
-## Step 3: Content Script Detection
-```javascript
-// content.js
-// Detect code blocks and add save buttons
-function injectSaveButtons() {
-  document.querySelectorAll('pre code, pre').forEach(block => {
-    if (block.dataset.snippetBtn) return;
-    block.dataset.snippetBtn = 'true';
-    
-    const btn = document.createElement('button');
-    btn.textContent = 'Save Snippet';
-    btn.className = 'snippet-save-btn';
-    btn.onclick = () => {
-      const code = block.querySelector('code')?.textContent || block.textContent;
-      chrome.runtime.sendMessage({ type: 'SAVE_CODE', code });
-    };
-    block.style.position = 'relative';
-    block.appendChild(btn);
-  });
-}
+## Step 3: Popup UI
 
-// Listen for messages from background
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === 'SAVE_SELECTION') {
-    chrome.runtime.sendMessage({ type: 'SAVE_CODE', code: msg.code });
-  }
-});
-```
+Create `popup.html` with search, filter, and snippet list:
 
-## Step 4: IndexedDB Storage (via Offscreen)
-```javascript
-// offscreen.js — handle IndexedDB for large snippet collections
-const DB_NAME = 'snippets-db';
-const STORE_NAME = 'snippets';
-
-async function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = e => {
-      const db = e.target.result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        const store = db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
-        store.createIndex('language', 'language', { unique: false });
-        store.createIndex('tags', 'tags', { unique: false, multiEntry: true });
-      }
-    };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === 'ADD_SNIPPET') { /* add to IDB */ }
-  if (msg.type === 'GET_SNIPPETS') { /* query IDB */ }
-  if (msg.type === 'DELETE_SNIPPET') { /* remove from IDB */ }
-  if (msg.type === 'EXPORT_SNIPPETS') { /* export all as JSON */ }
-  if (msg.type === 'IMPORT_SNIPPETS') { /* import from JSON */ }
-  return true;
-});
-```
-
-## Step 5: Popup UI with Search
 ```html
-<!-- popup/popup.html -->
-<div class="snippet-popup">
-  <input type="text" id="search" placeholder="Search snippets...">
-  <select id="languageFilter"><option>All Languages</option></select>
-  <div id="snippetList"></div>
-</div>
+<input type="text" id="search" placeholder="Search snippets...">
+<select id="languageFilter"><option value="">All Languages</option></select>
+<div id="snippetList"></div>
 ```
-```javascript
-// popup/popup.js
-async function loadSnippets() {
-  const { defaultLanguage } = await chrome.storage.local.get('defaultLanguage');
-  // Fetch from background, display with syntax highlighting
-}
 
-function renderSnippets(snippets) {
-  const list = document.getElementById('snippetList');
-  list.innerHTML = snippets.map(s => `
-    <div class="snippet-item" data-id="${s.id}">
-      <div class="snippet-header">
-        <span class="language">${s.language}</span>
-        <div class="tags">${s.tags?.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      </div>
-      <pre><code class="language-${s.language}">${escapeHtml(s.code)}</code></pre>
-      <button class="copy-btn">Copy</button>
-    </div>
-  `).join('');
-  // Apply highlighting with Prism.js or highlight.js
+Style with `popup.css` for a clean, searchable interface.
+
+## Step 4: IndexedDB Storage
+
+For large snippet collections, use IndexedDB via an offscreen document:
+
+```javascript
+// offscreen.js
+const dbRequest = indexedDB.open("SnippetsDB", 1);
+dbRequest.onupgradeneeded = (e) => {
+  const db = e.target.result;
+  db.createObjectStore("snippets", { keyPath: "id" });
+};
+```
+
+See [patterns/indexeddb-extensions.md](../../patterns/indexeddb-extensions.md).
+
+## Step 5: Syntax Highlighting
+
+Use a lightweight highlighter like Prism.js or Highlight.js:
+
+```javascript
+function highlightCode(code, language) {
+  return Prism.highlight(code, Prism.languages[language], language);
 }
 ```
 
 ## Step 6: Copy to Clipboard
+
+Add one-click copy functionality:
+
 ```javascript
-// In popup.js
 async function copyToClipboard(text) {
   await navigator.clipboard.writeText(text);
-  // Show toast notification
 }
+```
 
-// Options page for default language and cleanup
-// Cross-ref: patterns/clipboard-patterns.md, patterns/indexeddb-extensions.md, patterns/context-menu-patterns.md
+See [patterns/clipboard-patterns.md](../../patterns/clipboard-patterns.md).
+
+## Step 7: Tags and Categories
+
+Organize snippets with tags:
+
+```javascript
+const snippet = {
+  id: Date.now(),
+  code: "...",
+  language: "javascript",
+  tags: ["utility", "async"],
+  createdAt: new Date().toISOString()
+};
+```
+
+## Step 8: Import/Export
+
+Export snippets as JSON:
+
+```javascript
+function exportSnippets() {
+  const data = JSON.stringify(snippets, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  chrome.downloads.download({ url, filename: "snippets.json" });
+}
+```
+
+Import via file input and parse JSON.
+
+## Content Script: Detect Code Blocks
+
+Create `content.js` to detect code on pages:
+
+```javascript
+const codeBlocks = document.querySelectorAll("pre code");
+codeBlocks.forEach(block => {
+  const btn = document.createElement("button");
+  btn.textContent = "Save Snippet";
+  btn.onclick = () => saveSnippet(block.textContent);
+  block.appendChild(btn);
+});
+```
+
+## Options Page
+
+Create `options.html` for:
+- Default language preference
+- Storage cleanup/management
+- Theme settings
+
+## Summary
+
+This extension demonstrates:
+- Context menus for quick saving
+- IndexedDB for scalable storage
+- Syntax highlighting for readability
+- Import/export for portability
+- Content scripts for page integration
+
+For more patterns, see [patterns/context-menu-patterns.md](../../patterns/context-menu-patterns.md).
