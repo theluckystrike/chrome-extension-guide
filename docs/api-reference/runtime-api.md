@@ -1,512 +1,600 @@
-# Chrome Runtime API Reference
+# Chrome Runtime API Complete Reference
 
-The `chrome.runtime` API provides core extension lifecycle management, messaging, and utility functions. It's the backbone of every Chrome extension — no permission is required to use it.
+The `chrome.runtime` API is the backbone of every Chrome extension. It provides lifecycle management, messaging between contexts, resource URL resolution, and platform utilities. No permission is required -- it is available in every extension context (service worker, popup, options page, content script).
 
-## Permissions
-
-None required. `chrome.runtime` is available to all extension contexts by default.
+---
 
 ## Properties
 
 ### chrome.runtime.id
 
-The extension's unique ID.
-
-```ts
-console.log(chrome.runtime.id); // "abcdefghijklmnop..."
+```typescript
+const extensionId: string = chrome.runtime.id;
+// "abcdefghijklmnopqrstuvwxyz"
 ```
+
+The globally unique identifier for this extension. Stable across sessions; changes only if the extension is unpacked and reloaded from a different directory.
 
 ### chrome.runtime.lastError
 
-Set when an async Chrome API call fails. Check this in callbacks (less relevant with promise-based MV3 APIs — use try/catch instead).
+```typescript
+chrome.runtime.lastError: { message: string } | undefined;
+```
 
-```ts
-// Legacy callback pattern
-chrome.tabs.create({ url: "invalid" }, (tab) => {
+Set inside callbacks when the preceding async API call failed. In MV3 with promise-based APIs, prefer `try/catch` instead.
+
+```typescript
+// Callback style (MV2 / backward-compat)
+chrome.tabs.create({ url: "chrome://invalid" }, (tab) => {
   if (chrome.runtime.lastError) {
     console.error(chrome.runtime.lastError.message);
     return;
   }
-  // success
+  console.log("Tab created:", tab.id);
 });
 
-// Modern async pattern — use try/catch instead
+// Promise style (MV3) -- lastError not needed
 try {
-  await chrome.tabs.create({ url: "chrome://invalid" });
-} catch (e) {
-  console.error(e);
+  const tab = await chrome.tabs.create({ url: "https://example.com" });
+} catch (err) {
+  console.error((err as Error).message);
 }
-```
-
-## URL and Resource Methods
-
-### chrome.runtime.getURL(path)
-
-Convert a relative path to a fully qualified `chrome-extension://` URL.
-
-```ts
-const url = chrome.runtime.getURL("popup.html");
-// "chrome-extension://abcdefghijklmnop/popup.html"
-
-const iconUrl = chrome.runtime.getURL("images/icon.png");
-
-// Use in HTML
-const img = document.createElement("img");
-img.src = chrome.runtime.getURL("assets/logo.png");
 ```
 
 ### chrome.runtime.getManifest()
 
-Get the parsed `manifest.json` as an object.
-
-```ts
-const manifest = chrome.runtime.getManifest();
-console.log(manifest.version); // "1.2.3"
-console.log(manifest.name);    // "My Extension"
-console.log(manifest.permissions); // ["tabs", "storage"]
+```typescript
+function getManifest(): chrome.runtime.Manifest;
 ```
 
-## Lifecycle Events
+Returns the parsed `manifest.json` as an object. Useful for reading your own version, permissions, or custom keys at runtime.
+
+```typescript
+const manifest = chrome.runtime.getManifest();
+console.log(manifest.version);      // "1.2.3"
+console.log(manifest.name);         // "My Extension"
+console.log(manifest.permissions);   // ["storage", "alarms"]
+```
+
+### chrome.runtime.getURL(path)
+
+```typescript
+function getURL(path: string): string;
+```
+
+Converts a relative path within the extension bundle to a fully qualified `chrome-extension://` URL.
+
+```typescript
+const popupUrl = chrome.runtime.getURL("popup.html");
+// "chrome-extension://abcdef.../popup.html"
+
+// Use in content scripts to reference extension-bundled assets
+const img = document.createElement("img");
+img.src = chrome.runtime.getURL("icons/logo.png");
+document.body.appendChild(img);
+```
+
+---
+
+## Events
 
 ### chrome.runtime.onInstalled
 
-Fires when the extension is first installed, updated, or Chrome is updated. This is the most important lifecycle event.
+```typescript
+chrome.runtime.onInstalled.addListener(
+  callback: (details: {
+    reason: "install" | "update" | "chrome_update" | "shared_module_update";
+    previousVersion?: string;
+    id?: string;
+  }) => void
+): void;
+```
 
-```ts
+Fires when the extension is first installed, updated to a new version, or when Chrome itself updates. The standard place to run one-time setup.
+
+```typescript
 chrome.runtime.onInstalled.addListener((details) => {
-  switch (details.reason) {
-    case "install":
-      // First install — set defaults, show onboarding
-      console.log("Extension installed!");
-      chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
-      break;
-
-    case "update":
-      // Extension updated — migrate data if needed
-      console.log(`Updated from ${details.previousVersion}`);
-      break;
-
-    case "chrome_update":
-      // Browser itself was updated
-      console.log("Chrome updated");
-      break;
+  if (details.reason === "install") {
+    chrome.storage.local.set({ version: chrome.runtime.getManifest().version });
+    chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
   }
+  if (details.reason === "update") {
+    console.log(`Updated from ${details.previousVersion}`);
+    migrateStorageSchema(details.previousVersion!);
+  }
+  // Context menus must be recreated on every install/update
+  chrome.contextMenus.create({ id: "main-action", title: "Do the thing", contexts: ["selection"] });
 });
 ```
 
-**InstallDetails:**
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `reason` | `string` | `"install"`, `"update"`, `"chrome_update"`, `"shared_module_update"` |
-| `previousVersion` | `string \| undefined` | Previous version (only on `"update"`) |
-| `id` | `string \| undefined` | ID of the imported extension (shared module) |
-
 ### chrome.runtime.onStartup
 
-Fires when the browser starts up (profile loaded). Does NOT fire on install — use `onInstalled` for that.
+```typescript
+chrome.runtime.onStartup.addListener(callback: () => void): void;
+```
 
-```ts
+Fires when a Chrome profile that has this extension installed starts up. Does **not** fire on install -- only on subsequent browser launches.
+
+```typescript
 chrome.runtime.onStartup.addListener(() => {
-  console.log("Browser started — extension service worker waking up");
-  // Re-initialize state, re-register alarms, etc.
+  chrome.storage.session.set({ sessionStart: Date.now() });
 });
 ```
 
 ### chrome.runtime.onSuspend
 
-Fires just before the service worker is terminated. You have a very short time window (~5 seconds) to clean up.
+```typescript
+chrome.runtime.onSuspend.addListener(callback: () => void): void;
+```
 
-```ts
+Fires just before the service worker (MV3) or event page (MV2) is unloaded. You have roughly five seconds to run synchronous cleanup -- async operations are not guaranteed to complete.
+
+```typescript
 chrome.runtime.onSuspend.addListener(() => {
-  console.log("Service worker shutting down");
-  // Close connections, flush buffers
+  chrome.storage.session.set({ cachedData: inMemoryCache });
 });
-```
-
-### chrome.runtime.onUpdateAvailable
-
-Fires when a new version of the extension is available but hasn't been installed yet (because the extension is running).
-
-```ts
-chrome.runtime.onUpdateAvailable.addListener((details) => {
-  console.log(`Update available: ${details.version}`);
-  // Force update immediately (instead of waiting for browser restart)
-  chrome.runtime.reload();
-});
-```
-
-## Messaging
-
-### chrome.runtime.sendMessage(message, options?)
-
-Send a message from any context to the service worker (or between extension pages).
-
-```ts
-// From popup or content script
-const response = await chrome.runtime.sendMessage({
-  type: "getData",
-  key: "settings",
-});
-console.log(response);
 ```
 
 ### chrome.runtime.onMessage
 
-Listen for messages. Return `true` from the listener to indicate you'll send a response asynchronously.
+```typescript
+chrome.runtime.onMessage.addListener(
+  callback: (
+    message: any,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+  ) => boolean | undefined
+): void;
+```
 
-```ts
-// In service worker
+Fires when a message is sent via `chrome.runtime.sendMessage` or `chrome.tabs.sendMessage` from any context within the same extension. Return `true` to keep the channel open for async `sendResponse`.
+
+```typescript
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === "getData") {
-    // Async response pattern
-    fetchData(message.key).then((data) => {
-      sendResponse(data);
-    });
-    return true; // keep the message channel open
+  if (message.type === "GET_DATA") {
+    fetchData(message.key)
+      .then((data) => sendResponse({ success: true, data }))
+      .catch((err) => sendResponse({ success: false, error: err.message }));
+    return true; // async -- must return true
   }
-
-  if (message.type === "ping") {
-    sendResponse("pong");
-    // No return true needed — response is synchronous
+  if (message.type === "LOG") {
+    console.log(`[Tab ${sender.tab?.id}] ${message.text}`);
+    sendResponse({ ack: true }); // sync -- no return true needed
   }
 });
 ```
 
-**Sender object:**
+**MessageSender fields:**
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `tab` | `Tab \| undefined` | Tab that sent the message (if from content script) |
-| `frameId` | `number \| undefined` | Frame ID within the tab |
-| `id` | `string \| undefined` | Extension ID of the sender |
-| `url` | `string \| undefined` | URL of the sender page/script |
-| `origin` | `string \| undefined` | Origin of the sender |
-| `documentId` | `string \| undefined` | UUID of the document that sent the message |
-| `documentLifecycle` | `string \| undefined` | Lifecycle state of the sender document |
+| Field | Type | Description |
+|---|---|---|
+| `sender.tab` | `Tab \| undefined` | The tab that sent the message (undefined from popup/background) |
+| `sender.frameId` | `number` | Frame ID within the tab (0 = main frame) |
+| `sender.id` | `string` | Extension ID of the sender |
+| `sender.url` | `string` | URL of the sending context |
+| `sender.origin` | `string` | Origin of the sending context |
+| `sender.documentId` | `string` | UUID of the sender document |
+| `sender.documentLifecycle` | `string` | Lifecycle state of the sender document |
 
-### chrome.runtime.connect(extensionId?, connectInfo)
+### chrome.runtime.onMessageExternal
 
-Establish a long-lived connection (port) for ongoing communication.
+```typescript
+chrome.runtime.onMessageExternal.addListener(
+  callback: (
+    message: any,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+  ) => boolean | undefined
+): void;
+```
 
-```ts
-// From popup
-const port = chrome.runtime.connect({ name: "popup" });
+Fires when a message arrives from a **different extension** or from a web page (if `"externally_connectable"` is configured in the manifest). The `sender.id` identifies which extension sent the message.
 
-port.postMessage({ type: "subscribe", channel: "updates" });
+```typescript
+// manifest.json: "externally_connectable": { "ids": ["other-ext-id"] }
 
-port.onMessage.addListener((message) => {
-  console.log("Received:", message);
-});
-
-port.onDisconnect.addListener(() => {
-  console.log("Port disconnected");
+chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+  if (sender.id !== "expected-extension-id") {
+    sendResponse({ error: "unauthorized" });
+    return;
+  }
+  sendResponse({ data: "shared info" });
 });
 ```
 
 ### chrome.runtime.onConnect
 
-Listen for incoming port connections.
+```typescript
+chrome.runtime.onConnect.addListener(
+  callback: (port: chrome.runtime.Port) => void
+): void;
+```
 
-```ts
-// In service worker
+Fires when a long-lived connection is opened via `chrome.runtime.connect()`.
+
+```typescript
 chrome.runtime.onConnect.addListener((port) => {
-  console.log(`New connection: ${port.name}`);
-
-  port.onMessage.addListener((message) => {
-    if (message.type === "subscribe") {
-      // Send periodic updates
-      const interval = setInterval(() => {
-        try {
-          port.postMessage({ type: "update", data: getLatestData() });
-        } catch {
-          clearInterval(interval); // Port disconnected
-        }
-      }, 1000);
-
-      port.onDisconnect.addListener(() => {
-        clearInterval(interval);
-      });
-    }
+  port.onMessage.addListener((msg) => {
+    if (msg.type === "PING") port.postMessage({ type: "PONG", ts: Date.now() });
+  });
+  port.onDisconnect.addListener(() => {
+    if (chrome.runtime.lastError) console.warn("Port error:", chrome.runtime.lastError.message);
   });
 });
 ```
 
-### External messaging
+### chrome.runtime.onConnectExternal
 
-Communicate with other extensions or web pages.
+```typescript
+chrome.runtime.onConnectExternal.addListener(
+  callback: (port: chrome.runtime.Port) => void
+): void;
+```
 
-```ts
-// Send to another extension
-const response = await chrome.runtime.sendMessage(
-  "other-extension-id",
-  { type: "request", data: "hello" },
-);
+Like `onConnect`, but for connections originating from other extensions or web pages. Requires `"externally_connectable"` in the manifest.
 
-// Listen for messages from other extensions
-chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
-  console.log(`Message from extension ${sender.id}:`, message);
-  sendResponse({ received: true });
-});
-
-// Listen for connections from web pages
-// (requires "externally_connectable" in manifest)
+```typescript
 chrome.runtime.onConnectExternal.addListener((port) => {
-  console.log("External connection from:", port.sender?.url);
+  console.log(`External connection from: ${port.sender?.id}`);
+  port.onMessage.addListener((msg) => {
+    port.postMessage({ echo: msg });
+  });
 });
 ```
 
-**Manifest for external messaging:**
+**Manifest declaration for external messaging:**
 
-```json
+```jsonc
 {
   "externally_connectable": {
     "matches": ["https://example.com/*"],
-    "ids": ["other-extension-id"]
+    "ids": ["other-extension-id-here"]
   }
 }
 ```
 
-## Utility Methods
+### chrome.runtime.onUpdateAvailable
+
+```typescript
+chrome.runtime.onUpdateAvailable.addListener(
+  callback: (details: { version: string }) => void
+): void;
+```
+
+Fires when a Chrome Web Store update is available but not yet applied. Chrome delays updates while the extension is active. Call `chrome.runtime.reload()` to apply immediately, or let Chrome apply it on next restart.
+
+```typescript
+chrome.runtime.onUpdateAvailable.addListener((details) => {
+  console.log(`Update to v${details.version} available`);
+  // Apply immediately or defer -- see "Update flow" pattern below
+  chrome.runtime.reload();
+});
+```
+
+---
+
+## Methods
+
+### chrome.runtime.sendMessage()
+
+```typescript
+function sendMessage<R = any>(
+  message: any,
+  options?: { includeTlsChannelId?: boolean }
+): Promise<R>;
+
+function sendMessage<R = any>(
+  extensionId: string,
+  message: any,
+  options?: { includeTlsChannelId?: boolean }
+): Promise<R>;
+```
+
+Sends a one-shot message to the extension's service worker. When `extensionId` is provided, sends to that other extension.
+
+```typescript
+// To own background
+const response = await chrome.runtime.sendMessage({ type: "GET_COUNT" });
+
+// To another extension
+const extRes = await chrome.runtime.sendMessage("other-ext-id", { type: "SHARE" });
+
+// Error handling
+try {
+  await chrome.runtime.sendMessage({ type: "ACTION" });
+} catch (err) {
+  // "Could not establish connection. Receiving end does not exist."
+  console.error((err as Error).message);
+}
+```
+
+### chrome.runtime.connect()
+
+```typescript
+function connect(connectInfo?: { name?: string }): chrome.runtime.Port;
+function connect(
+  extensionId: string,
+  connectInfo?: { name?: string }
+): chrome.runtime.Port;
+```
+
+Opens a long-lived message channel returning a `Port` for bidirectional communication.
+
+```typescript
+const port = chrome.runtime.connect({ name: "data-stream" });
+port.postMessage({ subscribe: "updates" });
+port.onMessage.addListener((msg) => console.log("Received:", msg));
+port.onDisconnect.addListener(() => console.log("Closed"));
+port.disconnect(); // close when done
+```
+
+### chrome.runtime.getContexts() (MV3 only, Chrome 116+)
+
+```typescript
+function getContexts(filter: {
+  contextTypes?: ContextType[];
+  documentIds?: string[];
+  documentOrigins?: string[];
+  documentUrls?: string[];
+  frameIds?: number[];
+  incognito?: boolean;
+  tabIds?: number[];
+  windowIds?: number[];
+}): Promise<ExtensionContext[]>;
+
+type ContextType =
+  | "TAB" | "POPUP" | "BACKGROUND"
+  | "OFFSCREEN_DOCUMENT" | "SIDE_PANEL"
+  | "DEVELOPER_TOOLS";
+```
+
+Returns information about active extension contexts. The MV3 replacement for `getBackgroundPage()`.
+
+```typescript
+// Check if an offscreen document exists
+const offscreen = await chrome.runtime.getContexts({ contextTypes: ["OFFSCREEN_DOCUMENT"] });
+const hasOffscreen = offscreen.length > 0;
+
+// Check if popup is open
+const popup = await chrome.runtime.getContexts({ contextTypes: ["POPUP"] });
+const popupIsOpen = popup.length > 0;
+```
+
+### chrome.runtime.getBackgroundPage() (MV2 only)
+
+```typescript
+function getBackgroundPage(): Promise<Window>;
+```
+
+Returns the `Window` object of the background page. **Not available in MV3.** Replace with `sendMessage()` or shared modules.
+
+```typescript
+const bg = await chrome.runtime.getBackgroundPage(); // MV2 only
+bg.someGlobalFunction();
 
 ### chrome.runtime.reload()
 
-Restart the extension.
-
-```ts
-chrome.runtime.reload(); // Extension restarts immediately
+```typescript
+function reload(): void;
 ```
 
-### chrome.runtime.setUninstallURL(url)
+Reloads the extension immediately. Equivalent to clicking the reload button on `chrome://extensions`. Terminates the service worker, re-reads the manifest, and restarts.
 
-Set a URL to open when the user uninstalls the extension.
+```typescript
+// Apply a pending update
+chrome.runtime.onUpdateAvailable.addListener(() => {
+  chrome.runtime.reload();
+});
+```
 
-```ts
-chrome.runtime.setUninstallURL("https://example.com/uninstall-survey");
+### chrome.runtime.requestUpdateCheck()
+
+```typescript
+function requestUpdateCheck(): Promise<{
+  status: "throttled" | "no_update" | "update_available";
+  version?: string;
+}>;
+```
+
+Asks the Chrome Web Store whether an update is available for this extension. Throttled if called too frequently.
+
+```typescript
+const { status, version } = await chrome.runtime.requestUpdateCheck();
+if (status === "update_available") {
+  console.log(`Version ${version} is available`);
+}
+if (status === "throttled") {
+  console.log("Too many checks -- try again later");
+}
+```
+
+### chrome.runtime.setUninstallURL()
+
+```typescript
+function setUninstallURL(url: string): Promise<void>;
+```
+
+Sets a URL to open when the user uninstalls the extension. Must be `http:` or `https:`, max 1023 characters. Typically used for exit surveys.
+
+```typescript
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.setUninstallURL(
+    "https://example.com/uninstall-survey?ext=my-extension"
+  );
+});
 ```
 
 ### chrome.runtime.openOptionsPage()
 
-Open the extension's options page.
+```typescript
+function openOptionsPage(): Promise<void>;
+```
 
-```ts
+Opens the extension's options page as defined by `options_ui` in the manifest. If the page is already open in a tab, that tab is focused instead.
+
+```typescript
 await chrome.runtime.openOptionsPage();
 ```
 
 ### chrome.runtime.getPlatformInfo()
 
-Get info about the current platform.
-
-```ts
-const info = await chrome.runtime.getPlatformInfo();
-console.log(info.os);   // "mac", "win", "linux", "cros", "android", "openbsd"
-console.log(info.arch); // "arm", "arm64", "x86-32", "x86-64", "mips", "mips64", "riscv64"
+```typescript
+function getPlatformInfo(): Promise<{
+  os: "mac" | "win" | "android" | "cros" | "linux" | "openbsd" | "fuchsia";
+  arch: "arm" | "arm64" | "x86-32" | "x86-64" | "mips" | "mips64";
+  nacl_arch: "arm" | "x86-32" | "x86-64" | "mips" | "mips64";
+}>;
 ```
 
-### chrome.runtime.getContexts(filter)
+Returns the operating system and architecture the extension is running on.
 
-Get information about active extension contexts (MV3, Chrome 116+).
+```typescript
+const platform = await chrome.runtime.getPlatformInfo();
+if (platform.os === "mac") {
+  console.log("Use Cmd key shortcuts");
+} else {
+  console.log("Use Ctrl key shortcuts");
+}
+```
 
-```ts
-// Check if popup is open
-const contexts = await chrome.runtime.getContexts({
-  contextTypes: ["POPUP"],
-});
-const popupIsOpen = contexts.length > 0;
+### chrome.runtime.getPackageDirectoryEntry()
 
-// Get all active contexts
-const allContexts = await chrome.runtime.getContexts({});
-allContexts.forEach((ctx) => {
-  console.log(`${ctx.contextType}: ${ctx.documentUrl}`);
+```typescript
+function getPackageDirectoryEntry(): Promise<DirectoryEntry>;
+```
+
+Returns a `DirectoryEntry` (File System API) for the extension's install directory.
+
+```typescript
+const dir = await chrome.runtime.getPackageDirectoryEntry();
+dir.getFile("data/config.json", {}, (entry) => {
+  entry.file((file) => {
+    const reader = new FileReader();
+    reader.onload = () => console.log(reader.result);
+    reader.readAsText(file);
+  });
 });
 ```
 
-**ContextFilter:**
-
-| Property | Type |
-|----------|------|
-| `contextTypes` | `("TAB" \| "POPUP" \| "BACKGROUND" \| "OFFSCREEN_DOCUMENT" \| "SIDE_PANEL" \| "DEVELOPER_TOOLS")[]` |
-| `documentIds` | `string[]` |
-| `documentOrigins` | `string[]` |
-| `documentUrls` | `string[]` |
-| `frameIds` | `number[]` |
-| `incognito` | `boolean` |
-| `tabIds` | `number[]` |
-| `windowIds` | `number[]` |
-
-## Using with @theluckystrike/webext-messaging
-
-The `@theluckystrike/webext-messaging` package wraps `chrome.runtime.sendMessage` and `chrome.runtime.onMessage` with type safety:
-
-```ts
-import { createMessenger } from "@theluckystrike/webext-messaging";
-
-type Messages = {
-  getVersion: { request: void; response: string };
-  getPlatform: { request: void; response: { os: string; arch: string } };
-  checkUpdate: { request: void; response: { available: boolean; version?: string } };
-};
-
-const msg = createMessenger<Messages>();
-
-// Background — register handlers
-msg.onMessage({
-  getVersion: async () => {
-    return chrome.runtime.getManifest().version;
-  },
-  getPlatform: async () => {
-    const info = await chrome.runtime.getPlatformInfo();
-    return { os: info.os, arch: info.arch };
-  },
-  checkUpdate: async () => {
-    const result = await chrome.runtime.requestUpdateCheck();
-    return {
-      available: result.status === "update_available",
-      version: result.version,
-    };
-  },
-});
-
-// Popup — send typed messages
-const version = await msg.send("getVersion", undefined);
-const platform = await msg.send("getPlatform", undefined);
-```
-
-## Using with @theluckystrike/webext-storage
-
-Common pattern: initialize storage defaults on install and migrate on update.
-
-```ts
-import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
-
-const schema = defineSchema({
-  schemaVersion: 3,
-  theme: "system" as "dark" | "light" | "system",
-  fontSize: 14,
-  sidebarWidth: 300,
-  features: {
-    autoSave: true,
-    spellCheck: true,
-    darkMode: false,
-  },
-});
-
-const storage = createStorage({ schema, area: "local" });
-
-chrome.runtime.onInstalled.addListener(async (details) => {
-  if (details.reason === "install") {
-    // First install: all defaults are already set by the schema
-    // Optionally set any computed defaults
-    const platform = await chrome.runtime.getPlatformInfo();
-    if (platform.os === "mac") {
-      await storage.set("fontSize", 15); // slightly larger on Mac
-    }
-  }
-
-  if (details.reason === "update") {
-    const version = await storage.get("schemaVersion");
-
-    if (version < 2) {
-      // v2 added sidebarWidth
-      await storage.set("sidebarWidth", 300);
-    }
-    if (version < 3) {
-      // v3 changed theme to include "system"
-      await storage.set("theme", "system");
-    }
-
-    await storage.set("schemaVersion", 3);
-  }
-});
-```
+---
 
 ## Common Patterns
 
-### Keep the service worker alive (when needed)
+### Install handler with storage migration
 
-```ts
-// Use chrome.runtime.onConnect to maintain a keepalive port
-// Only do this when genuinely needed (e.g., long-running operations)
+```typescript
+chrome.runtime.onInstalled.addListener(async (details) => {
+  const currentVersion = chrome.runtime.getManifest().version;
 
-// From popup or offscreen document:
-const port = chrome.runtime.connect({ name: "keepalive" });
-const keepAlive = setInterval(() => port.postMessage("ping"), 25000);
-
-// Clean up when done
-clearInterval(keepAlive);
-port.disconnect();
-```
-
-### Feature detection
-
-```ts
-// Check if an API is available
-if (chrome.runtime.getContexts) {
-  // Chrome 116+ feature
-  const contexts = await chrome.runtime.getContexts({});
-}
-
-// Check extension context
-const isServiceWorker = typeof window === "undefined";
-const isPopup = location.href.includes("popup.html");
-```
-
-### Graceful error handling for messaging
-
-```ts
-async function safeSendMessage(message: unknown) {
-  try {
-    return await chrome.runtime.sendMessage(message);
-  } catch (e) {
-    const error = e as Error;
-    if (error.message.includes("Receiving end does not exist")) {
-      // Service worker is not running — expected in some cases
-      return null;
-    }
-    throw e;
+  if (details.reason === "install") {
+    await chrome.storage.local.set({ version: currentVersion, settings: { theme: "auto" } });
+    await chrome.runtime.setUninstallURL("https://example.com/feedback");
   }
-}
-```
 
-### Version comparison on update
-
-```ts
-chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason !== "update") return;
-
-  const prev = details.previousVersion!.split(".").map(Number);
-  const curr = chrome.runtime.getManifest().version.split(".").map(Number);
-
-  const isMajorUpdate = curr[0] > prev[0];
-  const isMinorUpdate = curr[0] === prev[0] && curr[1] > prev[1];
-
-  if (isMajorUpdate) {
-    chrome.tabs.create({ url: chrome.runtime.getURL("changelog.html") });
+  if (details.reason === "update") {
+    const { version: old } = await chrome.storage.local.get("version");
+    // Run migrations based on previous version
+    if (old === "1.0.0") {
+      const { config } = await chrome.storage.local.get("config");
+      await chrome.storage.local.set({ settings: config });
+      await chrome.storage.local.remove("config");
+    }
+    await chrome.storage.local.set({ version: currentVersion });
   }
 });
 ```
 
-## Gotchas
+### Message router
 
-1. **`onMessage` must return `true`** for async responses in the callback pattern. If you don't return `true`, the message channel closes before your async operation completes. With `@theluckystrike/webext-messaging`, this is handled automatically.
+```typescript
+type Handler = (payload: any, sender: chrome.runtime.MessageSender) => Promise<any>;
 
-2. **`sendMessage` throws** if no listener is registered. Always wrap in try/catch, especially from content scripts (the service worker may be inactive).
+const handlers: Record<string, Handler> = {
+  GET_DATA: async (p) => ({ data: await fetchFromApi(p.endpoint) }),
+  SAVE: async (p) => { await chrome.storage.sync.set({ [p.key]: p.value }); return { ok: true }; },
+  TAB_URL: async (_, s) => ({ url: s.tab?.url ?? null }),
+};
 
-3. **`onInstalled` fires once per reason.** After an update, it fires with `reason: "update"`. It does NOT fire again on the next browser startup — use `onStartup` for that.
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  const handler = handlers[msg.type];
+  if (!handler) return sendResponse({ error: `Unknown: ${msg.type}` });
+  handler(msg.payload, sender)
+    .then(sendResponse)
+    .catch((err) => sendResponse({ error: err.message }));
+  return true; // async
+});
+```
 
-4. **`onSuspend` has a very short time window** (~5 seconds). Do not start long async operations. Flush synchronously or accept data loss.
+### Port management with reconnection
 
-5. **`getContexts()` is Chrome 116+ only.** Check for its existence before using it.
+```typescript
+// content.ts -- auto-reconnecting port
+function createPort(): chrome.runtime.Port {
+  const port = chrome.runtime.connect({ name: "content-link" });
 
-6. **`connect()` ports disconnect** when the other end's context is destroyed (popup closed, tab navigated away). Always handle `onDisconnect`.
+  port.onMessage.addListener((msg) => handleBackgroundMessage(msg));
 
-7. **External messaging requires manifest declaration.** Without `"externally_connectable"`, web pages cannot send messages to your extension.
+  port.onDisconnect.addListener(() => {
+    // Service worker went idle -- reconnect after a delay
+    setTimeout(() => { activePort = createPort(); }, 1000);
+  });
 
-8. **`lastError` is only set in callbacks**, not in promise rejections. In MV3 with async/await, use try/catch instead of checking `lastError`.
+  return port;
+}
+
+let activePort = createPort();
+```
+
+### Deferred update flow
+
+```typescript
+let updatePending = false;
+
+chrome.runtime.onUpdateAvailable.addListener((details) => {
+  updatePending = true;
+  chrome.runtime.sendMessage({ type: "UPDATE_AVAILABLE", version: details.version }).catch(() => {});
+});
+
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === "idle" && updatePending) chrome.runtime.reload();
+});
+```
+
+---
+
+## Error Handling Reference
+
+| Method | Error Message | Cause |
+|---|---|---|
+| `sendMessage` | `Could not establish connection. Receiving end does not exist.` | No `onMessage` listener in the target context |
+| `sendMessage` | `The message port closed before a response was received.` | Listener did not return `true` for async response |
+| `connect` | `Could not establish connection.` | Target context does not exist or has no `onConnect` listener |
+| `sendMessage` (ext) | `Invalid extension id` | The target extension is not installed |
+| `setUninstallURL` | `Invalid URL` | URL exceeds 1023 chars or uses a non-http(s) scheme |
+| `openOptionsPage` | `No options page` | `options_ui` not declared in the manifest |
+| `getBackgroundPage` | `Access denied` | Called from a content script, or called in MV3 |
+
+---
+
+## MV2 vs MV3 Differences
+
+| Feature | MV2 | MV3 |
+|---|---|---|
+| Background context | Persistent background page | Ephemeral service worker |
+| `getBackgroundPage()` | Returns background `Window` | Not available -- use `getContexts()` |
+| `getContexts()` | Not available | Returns info on all active contexts |
+| API style | Callbacks + `chrome.runtime.lastError` | Promises + `try/catch` |
+| `onSuspend` timing | Fires when event page goes idle | Fires when service worker terminates (~30s idle) |
+| Port lifetime | Survives as long as background page lives | Disconnects when service worker goes idle |
+| `getPackageDirectoryEntry` | Full access (DOM available) | Available but limited (no DOM in service worker) |
+
+**Key migration note:** In MV3, service workers terminate after approximately 30 seconds of inactivity. Long-lived `Port` connections will disconnect when this happens. Content scripts must handle reconnection, and all persistent state must go into `chrome.storage` rather than global variables.
+
+---
 
 ## Related
 
-- [Alarms API](alarms-api.md) (for scheduled background work)
-- [Storage API Deep Dive](storage-api-deep-dive.md)
-- [Tabs API](tabs-api.md) (for `sendMessage` to content scripts)
-- [Chrome runtime API docs](https://developer.chrome.com/docs/extensions/reference/api/runtime)
+- [Alarms API](alarms-api.md) -- scheduled background work
+- [Storage API Deep Dive](storage-api-deep-dive.md) -- persistence patterns
+- [Tabs API](tabs-api.md) -- `sendMessage` to content scripts
+- [Chrome runtime API docs](https://developer.chrome.com/docs/extensions/reference/api/runtime) -- official reference
