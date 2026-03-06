@@ -64,7 +64,7 @@ Match patterns use a specialized syntax that allows precise specification of URL
 - `https://*.example.com/*` - Matches all HTTPS pages on example.com and subdomains
 - `https://example.com/*` - Matches only example.com (not subdomains)
 - `https://example.com/api/*` - Matches only API endpoints
-- `<all_urls>` - Legacy pattern matching all URLs (equivalent to `*://*/*`)
+- `<all_urls>` - Matches all URLs including `file://` and `ftp://` schemes (broader than `*://*/*` which only covers `http`/`https`)
 
 ```json
 {
@@ -177,11 +177,11 @@ Certain permissions trigger prominent warnings because they provide broad access
 
 | Permission | Warning Message |
 |------------|-----------------|
-| `history` | "Read and change your browsing activity on all websites" |
+| `history` | "Read and change your browsing history on all signed-in devices" |
 | `tabs` | "Read your browsing history" |
-| `webRequest` | "Intercept, modify, or block network traffic" |
 | `<all_urls>` | "Read and change all your data on all websites" |
-| `cookies` | "Read and change your cookies and site data" |
+
+Note: Some permissions like `cookies` and `webRequest` do not trigger their own install-time warnings. Warnings depend on the combination of permissions and host access requested.
 
 When multiple sensitive permissions are combined, the warning becomes more severe, which can significantly reduce installation rates.
 
@@ -210,10 +210,10 @@ The `activeTab` permission is a security-focused feature that grants an extensio
 
 When `activeTab` is declared, the extension does not have access to any tabs by default. Access is granted only in the following scenarios:
 
-1. The user clicks the extension icon
+1. The user clicks the extension's action button
 2. The user invokes a keyboard shortcut assigned to the extension
-3. The extension executes a context menu item
-4. The extension is triggered through some other user gesture
+3. The user selects a context menu item from the extension
+4. The user accepts an omnibox suggestion from the extension
 
 ```json
 {
@@ -323,9 +323,9 @@ class SecureDataHandler {
   async readSensitiveData(url: string): Promise<any> {
     // Verify we have the necessary host permission
     const hasPermission = await chrome.permissions.contains({
-      host_permissions: [url]
+      origins: [url]
     });
-    
+
     if (!hasPermission) {
       throw new Error(`No permission to access ${url}`);
     }
@@ -349,9 +349,9 @@ Inject content scripts only when needed rather than declaratively in the manifes
 async function injectContentScript(tabId: number, url: string): Promise<void> {
   // Verify we have permission for this specific URL
   const hasPermission = await chrome.permissions.contains({
-    host_permissions: [url]
+    origins: [url]
   });
-  
+
   if (!hasPermission) {
     console.error('No permission to inject script into this page');
     return;
@@ -452,7 +452,7 @@ async function secureFetch(url: string): Promise<string> {
   
   // Check if we have host permission for this specific URL
   const hasPermission = await chrome.permissions.contains({
-    host_permissions: [`${urlObj.protocol}//${urlObj.host}/*`]
+    origins: [`${urlObj.protocol}//${urlObj.host}/*`]
   });
   
   if (!hasPermission) {

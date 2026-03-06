@@ -164,7 +164,7 @@ async function syncData() {
 **Benefits of chrome.alarms:**
 - Survives service worker termination
 - Alarms persist across browser restarts
-- Precise timing even when extension isn't active
+- Minimum interval of 1 minute; timing is approximate, not precise
 
 ---
 

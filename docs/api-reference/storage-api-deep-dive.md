@@ -455,7 +455,7 @@ Need persistence across browser restarts?
 
 3. **`onChanged` fires for ALL changes**, including your own writes. Guard against infinite loops when a watcher triggers a write.
 
-4. **`local.clear()` removes EVERYTHING**, including keys from other extensions sharing the storage area. `TypedStorage.clear()` only removes schema keys.
+4. **`local.clear()` removes EVERYTHING** in your extension's storage area, including keys not managed by your schema. Each extension has its own isolated storage -- `clear()` does not affect other extensions. `TypedStorage.clear()` only removes schema keys.
 
 5. **`session` storage is not available in content scripts by default.** You must set `chrome.storage.session.setAccessLevel({ accessLevel: "TRUSTED_AND_UNTRUSTED_CONTEXTS" })` in your service worker to allow content script access.
 

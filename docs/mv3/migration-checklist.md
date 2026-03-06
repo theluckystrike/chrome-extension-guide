@@ -1,7 +1,7 @@
 # MV2 to MV3 Migration Checklist
 
 ## Overview
-- Chrome deprecated MV2 in June 2024
+- Chrome began disabling MV2 extensions on stable channel in October 2024 (warning banners appeared June 2024)
 - MV3 is required for new submissions and updates
 - This checklist covers every migration step
 
@@ -52,7 +52,7 @@
 
 ## 7. Promise-Based APIs
 - [ ] Replace callbacks with `async/await` where possible
-- [ ] All Chrome APIs return Promises in MV3
+- [ ] Most Chrome APIs return Promises in MV3 (some still require callbacks)
 - [ ] `chrome.runtime.onMessage` handlers returning `true` for async still required
 - Cross-ref: `docs/mv3/promise-based-apis.md`
 
@@ -78,7 +78,7 @@
 ## Common Migration Issues
 - `chrome.extension.getBackgroundPage()` removed — use messaging (`@theluckystrike/webext-messaging`)
 - `chrome.extension.getURL()` → `chrome.runtime.getURL()`
-- Synchronous `chrome.storage` in content scripts not available — use async
+- `chrome.storage` is always async -- ensure all usage uses callbacks or Promises
 - `webRequestBlocking` removed — must use `declarativeNetRequest`
 - Background page timers don't work — use `chrome.alarms`
 

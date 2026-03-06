@@ -4,7 +4,7 @@
 - **Permission string**: `"debugger"`
 - **What it grants**: Access to `chrome.debugger` API — attach to tabs and use Chrome DevTools Protocol (CDP)
 - **Risk level**: Very High — full CDP access can read/modify page content, intercept network, access cookies
-- **User prompt**: "Access the page debugger backend"
+- **User prompt**: "Access the page debugger backend" and "Read and change all your data on all websites"
 - `@theluckystrike/webext-permissions`: `describePermission('debugger')`
 
 ## manifest.json

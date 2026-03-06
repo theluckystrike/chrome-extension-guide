@@ -71,9 +71,13 @@ In MV3, these are merged into a single **`chrome.action`** API that works as eit
 | `chrome.action.setPopup(details)` | Set or remove the popup |
 | `chrome.action.enable([tabId])` | Enable the action |
 | `chrome.action.disable([tabId])` | Disable the action |
+| `chrome.action.setBadgeTextColor(details)` | Set the badge text color |
+| `chrome.action.getUserSettings()` | Get user-specified settings for the action |
+| `chrome.action.isEnabled([tabId])` | Check if the action is enabled |
+| `chrome.action.openPopup()` | Open the extension popup programmatically |
 | `chrome.action.onClicked` | Event fired when action is clicked (no popup) |
 
-All methods except `onClicked` accept an optional `tabId` parameter to target specific tabs.
+All setter/getter methods accept an optional `tabId` parameter to target specific tabs. Tab-specific settings take priority over global settings.
 
 ---
 
@@ -114,15 +118,13 @@ async function toggleFeature(enabled: boolean) {
   // Send message to service worker
   await messenger.send("toggle-feature", { enabled });
   
-  // Update badge directly
+  // Update badge globally (omit tabId for global)
   chrome.action.setBadgeText({
-    text: enabled ? "ON" : "",
-    tabId: chrome.tabs.TAB_ID_NONE
+    text: enabled ? "ON" : ""
   });
-  
+
   chrome.action.setBadgeBackgroundColor({
-    color: enabled ? "#4CAF50" : "#999999",
-    tabId: chrome.tabs.TAB_ID_NONE
+    color: enabled ? "#4CAF50" : "#999999"
   });
 }
 
@@ -213,12 +215,11 @@ chrome.action.setPopup({ popup: "popup.html" });
 ### Badge Counter
 
 ```ts
-function incrementBadge(tabId: number) {
-  chrome.action.getBadgeText({ tabId }, (result) => {
-    const current = parseInt(result.text || "0", 10);
-    const next = current + 1;
-    chrome.action.setBadgeText({ text: String(next), tabId });
-  });
+async function incrementBadge(tabId: number) {
+  const currentText = await chrome.action.getBadgeText({ tabId });
+  const current = parseInt(currentText || "0", 10);
+  const next = current + 1;
+  await chrome.action.setBadgeText({ text: String(next), tabId });
 }
 ```
 
@@ -293,10 +294,10 @@ chrome.action.setPopup({ popup: "" });
 
 ### Badge text limit
 
-Badge text is limited to **4 characters**. Longer text will be truncated:
+Badge text should use **4 or fewer characters** due to limited space. Longer text may be truncated depending on character width:
 
 ```ts
-chrome.action.setBadgeText({ text: "12345" }); // Shows "1234"
+chrome.action.setBadgeText({ text: "12345" }); // May be truncated visually
 ```
 
 ### Per-tab state lost on navigation
@@ -345,4 +346,4 @@ chrome.action.setBadgeText({ text: "5", tabId: tab.id });
 - Use `@theluckystrike/webext-messaging` for popup ↔ service worker communication
 - Use `@theluckystrike/webext-storage` to persist badge state across restarts
 - Remove popup to handle clicks via `onClicked`
-- Badge text limited to 4 characters
+- Badge text recommended to be 4 or fewer characters

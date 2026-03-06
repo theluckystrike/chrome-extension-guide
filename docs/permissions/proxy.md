@@ -4,6 +4,7 @@
 - **Permission string**: `"proxy"`
 - **What it grants**: Access to `chrome.proxy` API — configure Chrome's proxy settings
 - **Risk level**: High — routes ALL browser traffic through specified proxy
+- **User prompt**: "Read and change all your data on all websites"
 - `@theluckystrike/webext-permissions`: `describePermission('proxy')`
 
 ## manifest.json
@@ -240,7 +241,7 @@ chrome.proxy.onProxyError.addListener((details) => {
 - **`controlled_by_other_extensions` blocks your changes** — if another extension has set the proxy, your `set()` call silently fails. Always check `levelOfControl` from `get()` before setting.
 - **Proxy credentials cannot be set programmatically** — Chrome will prompt the user with its own auth dialog when the proxy requires authentication. You cannot bypass or pre-fill this.
 - **PAC script errors are silent** — if your `FindProxyForURL` function has a syntax error, Chrome falls back to direct connections without any visible error. Always test PAC scripts thoroughly.
-- **Incognito mode has separate proxy settings** — setting `scope: "regular"` does not affect incognito windows. Use `scope: "incognito_persistent"` to set proxy for incognito.
+- **Incognito mode inherits from regular by default** — incognito windows inherit proxy settings from regular windows. You can override with `scope: "incognito_persistent"` to set separate proxy for incognito.
 - **Proxy settings are global** — this permission affects ALL browser traffic, not just your extension. Be very transparent with users about what you are routing and where.
 
 ## Common Errors

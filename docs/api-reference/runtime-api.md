@@ -98,7 +98,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `reason` | `string` | `"install"`, `"update"`, `"chrome_update"` |
+| `reason` | `string` | `"install"`, `"update"`, `"chrome_update"`, `"shared_module_update"` |
 | `previousVersion` | `string \| undefined` | Previous version (only on `"update"`) |
 | `id` | `string \| undefined` | ID of the imported extension (shared module) |
 
@@ -178,10 +178,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 | Property | Type | Description |
 |----------|------|-------------|
 | `tab` | `Tab \| undefined` | Tab that sent the message (if from content script) |
-| `frameId` | `number` | Frame ID within the tab |
-| `id` | `string` | Extension ID of the sender |
-| `url` | `string` | URL of the sender page/script |
-| `origin` | `string` | Origin of the sender |
+| `frameId` | `number \| undefined` | Frame ID within the tab |
+| `id` | `string \| undefined` | Extension ID of the sender |
+| `url` | `string \| undefined` | URL of the sender page/script |
+| `origin` | `string \| undefined` | Origin of the sender |
+| `documentId` | `string \| undefined` | UUID of the document that sent the message |
+| `documentLifecycle` | `string \| undefined` | Lifecycle state of the sender document |
 
 ### chrome.runtime.connect(extensionId?, connectInfo)
 
@@ -297,8 +299,8 @@ Get info about the current platform.
 
 ```ts
 const info = await chrome.runtime.getPlatformInfo();
-console.log(info.os);   // "mac", "win", "linux", "cros", "android"
-console.log(info.arch); // "arm", "arm64", "x86-32", "x86-64"
+console.log(info.os);   // "mac", "win", "linux", "cros", "android", "openbsd"
+console.log(info.arch); // "arm", "arm64", "x86-32", "x86-64", "mips", "mips64", "riscv64"
 ```
 
 ### chrome.runtime.getContexts(filter)
@@ -323,7 +325,7 @@ allContexts.forEach((ctx) => {
 
 | Property | Type |
 |----------|------|
-| `contextTypes` | `("TAB" \| "POPUP" \| "BACKGROUND" \| "OFFSCREEN_DOCUMENT" \| "SIDE_PANEL")[]` |
+| `contextTypes` | `("TAB" \| "POPUP" \| "BACKGROUND" \| "OFFSCREEN_DOCUMENT" \| "SIDE_PANEL" \| "DEVELOPER_TOOLS")[]` |
 | `documentIds` | `string[]` |
 | `documentOrigins` | `string[]` |
 | `documentUrls` | `string[]` |
@@ -357,10 +359,10 @@ msg.onMessage({
     return { os: info.os, arch: info.arch };
   },
   checkUpdate: async () => {
-    const status = await chrome.runtime.requestUpdateCheck();
+    const result = await chrome.runtime.requestUpdateCheck();
     return {
-      available: status[0] === "update_available",
-      version: status[1]?.version,
+      available: result.status === "update_available",
+      version: result.version,
     };
   },
 });

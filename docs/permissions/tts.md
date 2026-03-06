@@ -23,7 +23,8 @@ chrome.tts.speak("Hello!", {
 });
 ```
 - Options: `lang`, `rate` (0.1-10), `pitch` (0-2), `volume` (0-1), `voiceName`, `enqueue`
-- Events: `start`, `word`, `sentence`, `end`, `error`, `interrupted`, `cancelled`
+- Max utterance length: 32,768 characters
+- Events: `start`, `end`, `word`, `sentence`, `marker`, `interrupted`, `cancelled`, `error`, `pause`, `resume`
 
 ### stop() / pause() / resume()
 ### isSpeaking(callback)
@@ -205,7 +206,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 - **No concurrent speech by default** — calling `speak()` while speech is active interrupts it unless you pass `enqueue: true`. If you want queued playback, always set `enqueue`.
 - **`getVoices()` may return empty on first call** — voices load asynchronously. If the list is empty, wait and retry, or listen for voice list changes with a short delay.
 - **`rate` range differs by platform** — the spec says 0.1-10, but most engines only support a narrower range (e.g., 0.5-2.0). Values outside the engine's range are clamped silently.
-- **No SSML support in Chrome TTS** — unlike the Web Speech API, `chrome.tts` does not support SSML markup. Pass plain text only.
+- **SSML is supported** — `chrome.tts.speak()` accepts SSML markup. The first argument should be a complete SSML document with an XML header and a top-level `<speak>` tag. Engines that don't support specific SSML tags will ignore them and still speak the underlying text.
 
 ## Common Errors
 - Voice not found — always check available voices first
