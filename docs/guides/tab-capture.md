@@ -726,13 +726,7 @@ checkStatus();
 // Optimize capture performance
 async function optimizedCapture(tabId) {
   const streamId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true,
-    // Request lower resolution for better performance
-    minWidth: 1280,
-    minHeight: 720,
-    maxFrameRate: 30
+    targetTabId: tabId
   });
 
   return await chrome.tabCapture.capture({
@@ -812,9 +806,7 @@ function secureCaptureHandler(tabId, requestedSources) {
   
   // Only capture with explicit user action
   return chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: requestedSources.includes('audio'),
-    video: requestedSources.includes('video')
+    targetTabId: tabId
   });
 }
 ```
