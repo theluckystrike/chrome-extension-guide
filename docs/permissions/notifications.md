@@ -170,3 +170,5 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 
 ## API Reference
 - [Notifications API Reference](../api-reference/notifications-api.md)
+- [Chrome notifications API docs](https://developer.chrome.com/docs/extensions/reference/api/notifications)
+- [Notifications API deep dive](../api-reference/notifications-api.md)

@@ -122,3 +122,7 @@ onBeforeRequest -> onBeforeSendHeaders -> onSendHeaders ->
 
 ## Related Permissions
 - [cookies](cookies.md), [tabs](tabs.md), [activeTab](activeTab.md)
+- [declarativeNetRequest](declarativeNetRequest.md) — MV3 replacement for request blocking/modification
+
+## API Reference
+- [Chrome webRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/webRequest)

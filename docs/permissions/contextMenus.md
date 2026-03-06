@@ -186,3 +186,5 @@ chrome.contextMenus.create({
 
 ## API Reference
 - [Context Menus API Reference](../api-reference/context-menus-api.md)
+- [Chrome contextMenus API docs](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
+- [Context Menus API deep dive](../api-reference/context-menus-api.md)

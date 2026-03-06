@@ -138,3 +138,6 @@ storage.watch("autoInjectEnabled", (enabled) => {
 ## Related Permissions
 - [activeTab](activeTab.md) — temporary host access, pairs perfectly with scripting
 - [tabs](tabs.md) — read tab URLs to decide what to inject
+
+## API Reference
+- [Chrome scripting API docs](https://developer.chrome.com/docs/extensions/reference/api/scripting)

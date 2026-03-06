@@ -87,8 +87,163 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 - Consider `optional_permissions` — request only when needed
 - Store debug preferences with `@theluckystrike/webext-storage`
 
+## Using with @theluckystrike/webext-permissions
+
+```ts
+import { checkPermission, requestPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
+
+const result = await checkPermission("debugger");
+console.log(result.description); // "Access the page debugger backend"
+console.log(result.granted);
+
+PERMISSION_DESCRIPTIONS.debugger; // "Access the page debugger backend"
+
+// This is a very high-risk permission — consider optional_permissions
+if (!result.granted) {
+  const req = await requestPermission("debugger");
+  if (!req.granted) return;
+}
+```
+
+## Using with @theluckystrike/webext-messaging
+
+Pattern: popup triggers debug actions, background manages CDP sessions:
+
+```ts
+type Messages = {
+  captureScreenshot: {
+    request: { tabId: number; format?: "png" | "jpeg" };
+    response: { dataUrl: string };
+  };
+  getPageMetrics: {
+    request: { tabId: number };
+    response: { domNodes: number; jsHeapSize: number; layoutCount: number };
+  };
+  detachDebugger: {
+    request: { tabId: number };
+    response: { detached: boolean };
+  };
+};
+
+// background.ts
+import { createMessenger } from "@theluckystrike/webext-messaging";
+const msg = createMessenger<Messages>();
+
+msg.onMessage({
+  captureScreenshot: async ({ tabId, format }) => {
+    await chrome.debugger.attach({ tabId }, "1.3");
+    try {
+      const result = await chrome.debugger.sendCommand(
+        { tabId },
+        "Page.captureScreenshot",
+        { format: format || "png" }
+      );
+      return { dataUrl: `data:image/${format || "png"};base64,${(result as any).data}` };
+    } finally {
+      await chrome.debugger.detach({ tabId });
+    }
+  },
+  getPageMetrics: async ({ tabId }) => {
+    await chrome.debugger.attach({ tabId }, "1.3");
+    try {
+      await chrome.debugger.sendCommand({ tabId }, "Performance.enable", {});
+      const metrics = await chrome.debugger.sendCommand({ tabId }, "Performance.getMetrics", {});
+      const m = (metrics as any).metrics;
+      return {
+        domNodes: m.find((x: any) => x.name === "Nodes")?.value || 0,
+        jsHeapSize: m.find((x: any) => x.name === "JSHeapUsedSize")?.value || 0,
+        layoutCount: m.find((x: any) => x.name === "LayoutCount")?.value || 0,
+      };
+    } finally {
+      await chrome.debugger.sendCommand({ tabId }, "Performance.disable", {});
+      await chrome.debugger.detach({ tabId });
+    }
+  },
+  detachDebugger: async ({ tabId }) => {
+    await chrome.debugger.detach({ tabId });
+    return { detached: true };
+  },
+});
+```
+
+## Using with @theluckystrike/webext-storage
+
+Store debug session preferences and captured data:
+
+```ts
+import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
+
+const schema = defineSchema({
+  screenshotFormat: "png" as "png" | "jpeg",
+  screenshotQuality: 80,
+  capturedScreenshots: [] as Array<{ url: string; dataUrl: string; timestamp: number }>,
+  networkLogEnabled: false,
+});
+const storage = createStorage({ schema });
+
+// Watch for network logging toggle
+storage.watch("networkLogEnabled", (enabled) => {
+  if (enabled) console.log("Network logging activated");
+  else console.log("Network logging deactivated");
+});
+```
+
+## Practical Example: Full-Page Screenshot
+
+```ts
+async function captureFullPage(tabId: number): Promise<string> {
+  await chrome.debugger.attach({ tabId }, "1.3");
+
+  try {
+    // Get full page dimensions
+    const layout = await chrome.debugger.sendCommand(
+      { tabId },
+      "Page.getLayoutMetrics",
+      {}
+    ) as any;
+
+    const { width, height } = layout.contentSize;
+
+    // Override viewport to full page size
+    await chrome.debugger.sendCommand({ tabId }, "Emulation.setDeviceMetricsOverride", {
+      width: Math.ceil(width),
+      height: Math.ceil(height),
+      deviceScaleFactor: 1,
+      mobile: false,
+    });
+
+    // Capture
+    const screenshot = await chrome.debugger.sendCommand(
+      { tabId },
+      "Page.captureScreenshot",
+      { format: "png", fromSurface: true }
+    ) as any;
+
+    // Reset viewport
+    await chrome.debugger.sendCommand({ tabId }, "Emulation.clearDeviceMetricsOverride", {});
+
+    return `data:image/png;base64,${screenshot.data}`;
+  } finally {
+    await chrome.debugger.detach({ tabId });
+  }
+}
+```
+
+## Gotchas
+- **Chrome shows a persistent "debugging" infobar** — users will see "Extension is debugging this browser" at the top of the tab. There is no way to suppress this. Attach and detach quickly to minimize user disruption.
+- **Only one debugger per tab** — if another extension (or DevTools) is already attached to a tab, `attach()` will fail. Always handle the `"Cannot attach to this target"` error gracefully.
+- **`onDetach` fires when the user dismisses the infobar** — the user can cancel debugging at any time by clicking the infobar's close button. Always listen for `onDetach` with reason `"canceled_by_user"` and clean up state accordingly.
+- **CDP commands are async but not always Promise-based** — in older Chrome versions, `sendCommand` uses callbacks. In MV3, most are Promise-based, but always check for errors.
+- **Chrome Web Store scrutiny is intense** — extensions using `debugger` get extra review. Document clearly why you need CDP access, and consider whether `scripting` or `activeTab` could achieve the same goal.
+
 ## Common Errors
 - `"Cannot attach to this target"` — already attached or target not debuggable
 - User dismissed infobar — `onDetach` fires with `"canceled_by_user"`
 - CDP version mismatch — use `"1.3"` for broadest compatibility
 - Multiple extensions can't debug same tab simultaneously
+
+## Related
+- [Chrome debugger API docs](https://developer.chrome.com/docs/extensions/reference/api/debugger)
+- [Chrome DevTools Protocol reference](https://chromedevtools.github.io/devtools-protocol/)
+- [scripting](scripting.md) — lighter-weight alternative for script injection
+- [activeTab](activeTab.md) — temporary tab access without full debugging
