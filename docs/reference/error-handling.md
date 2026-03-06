@@ -1,135 +1,177 @@
 # Error Handling Reference
 
-## chrome.runtime.lastError
-```typescript
-// Callback APIs set chrome.runtime.lastError
-chrome.tabs.create({ url: 'invalid://url' }, (tab) => {
+Quick reference for error handling in Chrome Extensions (Manifest V3).
+
+## 1. chrome.runtime.lastError (MV2 Callbacks)
+
+```js
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   if (chrome.runtime.lastError) {
     console.error(chrome.runtime.lastError.message);
     return;
   }
-  // success
+  // Use tabs[0]
 });
 ```
 
-## Promise Rejection (MV3)
-```typescript
-try {
-  const tab = await chrome.tabs.create({ url: 'invalid://url' });
-} catch (error) {
-  console.error(error.message);
-}
-```
+## 2. Promise Rejection with try/catch (MV3)
 
-## Common Error Messages
-
-### Tabs: "No tab with id: X", "Cannot access contents of url", "Tabs cannot be edited right now"
-### Storage: "QUOTA_BYTES quota exceeded", "MAX_ITEMS quota exceeded", "MAX_WRITE_OPERATIONS_PER_HOUR exceeded"
-### Messaging: "Could not establish connection. Receiving end does not exist.", "The message port closed before a response was received.", "Extension context invalidated."
-### Scripting: "Cannot access a chrome:// URL", "Missing host permission for the tab"
-### Alarms: "Alarm delay is less than minimum of 30 seconds"
-
-## @theluckystrike/webext-messaging Errors
-```typescript
-import { createMessenger, MessagingError } from '@theluckystrike/webext-messaging';
-type Msgs = { GET_DATA: { request: { id: string }; response: { data: string } } };
-const m = createMessenger<Msgs>();
-
-try {
-  const result = await m.sendMessage('GET_DATA', { id: '123' });
-} catch (error) {
-  if (error instanceof MessagingError) {
-    console.error(`Messaging failed: ${error.message}`);
+```js
+async function getActiveTab() {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    return tab;
+  } catch (err) {
+    console.error('Tab query failed:', err.message);
+    throw err;
   }
 }
 ```
 
-## @theluckystrike/webext-storage Errors
-```typescript
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
-const storage = createStorage(defineSchema({ count: 'number' }), 'local');
+## 3. Common Error Messages
+
+| API | Error | Cause |
+|-----|-------|-------|
+| `tabs` | "No tab with id" | Tab already closed |
+| `tabs` | "Permission denied" | Missing host permission |
+| `storage` | "QUOTA_BYTES" | Data exceeds 5MB limit |
+| `storage` | "MAX_SCRIPT_WORKS" | Storage quota exceeded |
+| `messaging` | "Could not establish connection" | Receiver not found |
+| `messaging` | "Extension context invalidated" | Extension reloaded/unloaded |
+| `scripting` | "Scripting disallowed" | Content script not injected |
+| `scripting` | "Cannot access frame" | Cross-origin restriction |
+
+## 4. @theluckystrike/webext-messaging MessagingError
+
+```js
+import { sendMessage, MessagingError } from '@theluckystrike/webext-messaging';
+
 try {
-  await storage.set('count', 42);
-} catch (error) {
-  console.error('Storage error:', error); // quota exceeded, etc.
+  const response = await sendMessage('my-extension', { type: 'PING' });
+} catch (err) {
+  if (err instanceof MessagingError) {
+    console.error(`Code: ${err.code}, Details: ${err.details}`);
+    // COMMON_CODES: CONNECTION_FAILED, TIMEOUT, NO_RECEIVER
+  }
 }
 ```
 
-## Async/Await Patterns
-```typescript
-// Safe get
-async function safeGetTab(tabId: number) {
-  try { return await chrome.tabs.get(tabId); }
-  catch { return null; }
+## 5. @theluckystrike/webext-storage Error Handling
+
+```js
+import { storage } from '@theluckystrike/webext-storage';
+
+try {
+  await storage.set('key', { data: 'value' });
+} catch (err) {
+  if (err.message.includes('QUOTA_BYTES')) {
+    // Handle quota exceeded - compress or clear old data
+  }
 }
 
-// Batch with allSettled
-const results = await Promise.allSettled(tabIds.map(id => chrome.tabs.get(id)));
-const tabs = results.filter((r): r is PromiseFulfilledResult<chrome.tabs.Tab> => r.status === 'fulfilled').map(r => r.value);
+// Batch operations
+const results = await storage.getMany(['key1', 'key2', 'key3']);
 ```
 
-## Listener Error Handling
-```typescript
-// Always catch in listeners — uncaught errors crash service worker
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+## 6. Listener Protection Pattern
+
+```js
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   try {
-    await processAlarm(alarm);
-  } catch (error) {
-    console.error(`Alarm ${alarm.name} failed:`, error);
+    handleMessage(message, sender);
+    sendResponse({ success: true });
+  } catch (err) {
+    sendResponse({ error: err.message });
+  }
+  return true; // Keep channel open for async response
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  try {
+    if (changeInfo.status === 'complete') {
+      // Process tab
+    }
+  } catch (err) {
+    console.error('Tab update handler error:', err);
   }
 });
+```
 
-// Message listener with error response
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  handleMessage(msg)
-    .then(result => sendResponse({ success: true, data: result }))
-    .catch(error => sendResponse({ success: false, error: error.message }));
-  return true;
+## 7. Extension Context Invalidated
+
+```js
+// In content script - detect orphaned context
+window.addEventListener('unload', () => {
+  // Extension context may be invalid after reload
+});
+
+chrome.runtime.onConnect.addListener((port) => {
+  port.onDisconnect.addListener(() => {
+    if (chrome.runtime.lastError?.message.includes('Extension context invalidated')) {
+      // Extension reloaded - content script orphaned
+    }
+  });
 });
 ```
 
-## Extension Context Invalidated
-```typescript
-function safeSendMessage(msg: any) {
-  try {
-    chrome.runtime.sendMessage(msg);
-  } catch (error) {
-    if ((error as Error).message.includes('Extension context invalidated')) {
-      cleanup(); // Extension updated — content script orphaned
+## 8. Retry with Exponential Backoff
+
+```js
+async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 500) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (attempt === maxRetries - 1) throw err;
+      const delay = baseDelay * Math.pow(2, attempt);
+      await new Promise(r => setTimeout(r, delay));
     }
   }
 }
+
+// Usage
+const tab = await retryWithBackoff(() => chrome.tabs.get(tabId));
 ```
 
-## Retry Pattern
-```typescript
-async function retry<T>(fn: () => Promise<T>, maxRetries = 3): Promise<T> {
-  for (let i = 0; i < maxRetries; i++) {
-    try { return await fn(); }
-    catch (error) {
-      if (i === maxRetries - 1) throw error;
-      await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
-    }
+## 9. Promise.allSettled for Batch Operations
+
+```js
+async function updateMultipleSettings(settings) {
+  const results = await Promise.allSettled(
+    Object.entries(settings).map(([key, value]) => 
+      chrome.storage.local.set({ [key]: value })
+    )
+  );
+
+  const failed = results
+    .map((r, i) => ({ key: Object.keys(settings)[i], ...r }))
+    .filter(r => r.status === 'rejected');
+
+  if (failed.length) {
+    console.error('Failed settings:', failed.map(f => f.key));
   }
-  throw new Error('Unreachable');
+  return results;
 }
 ```
 
-## Debugging
-- Service worker: `chrome://extensions` → "Inspect views: service worker"
-- Popup: Right-click popup → "Inspect"
-- Content script: Page DevTools → Sources → Content scripts
-- Errors button: `chrome://extensions` → extension card → "Errors"
+## 10. Common Pitfalls
 
-## Common Pitfalls
-1. Not checking `chrome.runtime.lastError` in callbacks
-2. Swallowing Promise rejections
-3. Throwing in event listeners (crashes SW)
-4. Assuming tabs/windows exist
-5. Not handling extension update orphaned content scripts
-6. Ignoring storage quota limits
+| Pitfall | Solution |
+|---------|----------|
+| Forgetting `return true` in async listeners | Always return true for async `sendResponse` |
+| Not checking `chrome.runtime.lastError` in callbacks | Always check in MV2 callback APIs |
+| Ignoring promise rejections | Use `.catch()` or `try/catch` |
+| Orphaned content scripts after reload | Check context validity before messaging |
+| Race conditions with tab IDs | Verify tab still exists before use |
+| Storage quota exceeded | Monitor usage with `chrome.storage.local.getBytesInUse()` |
+| Messaging timeout | Use `@theluckystrike/webext-messaging` with timeout option |
 
-## Cross-References
-- Guide: `docs/guides/debugging-extensions.md`
-- Guide: `docs/guides/advanced-debugging.md`
-- Reference: `docs/reference/message-passing-patterns.md`
+## Quick Checklist
+
+- [ ] Always wrap event listeners in try/catch
+- [ ] Check `chrome.runtime.lastError` in callbacks
+- [ ] Use try/catch with async/await
+- [ ] Handle storage quota errors
+- [ ] Implement retry logic for network-dependent ops
+- [ ] Use `Promise.allSettled` for batch operations
+- [ ] Handle extension context invalidation in content scripts
