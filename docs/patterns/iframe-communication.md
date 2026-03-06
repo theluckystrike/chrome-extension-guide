@@ -183,7 +183,7 @@ window.addEventListener("DOMContentLoaded", () => {
 **Gotchas:**
 - The iframe `src` must point to a file listed in `web_accessible_resources` in your manifest. Without this, the browser blocks the load.
 - Using `mode: "closed"` for the shadow root prevents page scripts from traversing into your DOM, but determined actors can still detect the host element.
-- The extension iframe runs in the extension origin, so it has access to `chrome.*` APIs. The content script does not have `chrome.runtime.getURL` available unless you declared it correctly in the manifest.
+- The extension iframe runs in the extension origin, so it has access to `chrome.*` APIs. Content scripts always have access to `chrome.runtime.getURL()` as part of the `chrome.runtime` API subset available to content scripts.
 
 ---
 

@@ -73,7 +73,7 @@ async function ensureOffscreen(): Promise<void> {
 
   await chrome.offscreen.createDocument({
     url: "offscreen.html",
-    reasons: [chrome.offscreen.Reason.WEB_RTC],
+    reasons: [chrome.offscreen.Reason.WORKERS],
     justification: "Maintain SSE connection for real-time data",
   });
 }
@@ -118,8 +118,10 @@ connectSSE("https://api.example.com/events");
 
 - Only one offscreen document can exist at a time. If you need SSE alongside other offscreen
   uses (audio, DOM parsing), multiplex inside a single document.
-- `chrome.offscreen.Reason` doesn't have an "SSE" value. `WEB_RTC` or `WORKERS` are
-  commonly used; pick whichever best matches your review narrative.
+- `chrome.offscreen.Reason` doesn't have an "SSE" value. Use `WORKERS` if the
+  offscreen document also spawns workers, or another applicable reason. Avoid using
+  `WEB_RTC` unless you actually use WebRTC -- pick the reason that most honestly
+  describes your use case for Chrome Web Store review.
 - The offscreen document is torn down if the service worker dies. Use `chrome.alarms` to
   periodically wake the worker and verify the document is alive.
 
@@ -514,8 +516,8 @@ class ResilientSSE {
 - `Last-Event-ID` only works if the server supports it. Verify with your SSE provider --
   many only support it for specific event types.
 - `setTimeout` in a service worker will fire only if the worker is still alive. For
-  reconnections spanning minutes, use `chrome.alarms.create` (minimum 1-minute granularity)
-  instead.
+  reconnections spanning minutes, use `chrome.alarms.create` (minimum 30-second granularity
+  since Chrome 120) instead.
 
 ---
 

@@ -81,7 +81,7 @@ function heavyComputation(data: number[]): number {
 }
 ```
 
-Declare the worker script in `web_accessible_resources` so the offscreen document can load it.
+Offscreen documents are extension pages, so the worker script does **not** need to be listed in `web_accessible_resources`. It can be loaded directly by path since the offscreen document runs in the extension origin.
 
 ---
 

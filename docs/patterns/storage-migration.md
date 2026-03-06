@@ -123,9 +123,10 @@ async function runPendingMigrations(): Promise<void> {
   not put migration logic in the top-level worker scope -- it will run on every restart.
 - Set the schema version *after each* successful migration, not after all of them. This way,
   if migration 4 of 5 fails, the user retries from 4, not from 1.
-- If your migration is slow (>30 s), the service worker may terminate mid-migration. Use
-  `chrome.runtime.onSuspend` to detect this, or break large migrations into chunks (see
-  Pattern 7).
+- If your migration is slow (>30 s), the service worker may terminate mid-migration.
+  MV3 service workers do not have a reliable pre-termination event (there is no
+  `chrome.runtime.onSuspend` in service workers). Break large migrations into chunks
+  and persist progress after each chunk (see Pattern 7).
 
 ---
 

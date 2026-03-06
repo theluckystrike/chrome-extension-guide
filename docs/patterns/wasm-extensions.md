@@ -53,7 +53,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 ```
 
 **Gotchas:**
-- The WASM file must be listed in `web_accessible_resources` or fetched via `chrome.runtime.getURL`.
+- The WASM file can be fetched from the service worker using `chrome.runtime.getURL` without listing it in `web_accessible_resources`. However, if content scripts need to fetch the file, it **must** be listed in `web_accessible_resources`.
 - Service workers terminate after ~30 seconds of inactivity. The WASM instance is lost on termination and must be re-instantiated. Cache the compiled module (see Pattern 3) to speed up restarts.
 - `instantiateStreaming` may fail in service worker contexts on some Chrome versions. Always fall back to `ArrayBuffer`-based instantiation.
 
@@ -623,17 +623,17 @@ async function runExtensionBenchmarks(
 
 ## Pattern 8: CSP Considerations for WASM in MV3
 
-Manifest V3 enforces a strict Content Security Policy. WASM compilation is allowed by default in MV3, but there are nuances to understand.
+Manifest V3 enforces a strict Content Security Policy. WASM compilation requires explicitly opting in via CSP configuration.
 
 ```typescript
-// MV3 default CSP (implicit, you do NOT set this yourself):
-// script-src 'self' 'wasm-unsafe-eval';
+// MV3 default CSP (implicit):
+// script-src 'self';
 // object-src 'self';
 
-// The 'wasm-unsafe-eval' directive is automatically included in MV3,
-// allowing WebAssembly.compile() and WebAssembly.instantiate().
+// IMPORTANT: 'wasm-unsafe-eval' is NOT included by default in MV3.
+// You must explicitly add it to your manifest to use WebAssembly:
 
-// manifest.json -- extending the CSP (if needed)
+// manifest.json -- required for WASM support
 // {
 //   "content_security_policy": {
 //     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
@@ -687,7 +687,7 @@ function detectContext(): WasmContext {
   ) {
     return "service-worker";
   }
-  if (chrome.extension?.getBackgroundPage) {
+  if (typeof window !== "undefined" && chrome.runtime?.id) {
     return "extension-page";
   }
   return "content-script";
@@ -754,13 +754,13 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
 | Directive | MV3 Default | Effect on WASM |
 |---|---|---|
-| `wasm-unsafe-eval` | Included | Allows `WebAssembly.compile()` and `instantiate()` |
+| `wasm-unsafe-eval` | **Not included by default** | Must be explicitly added to allow `WebAssembly.compile()` and `instantiate()` |
 | `script-src 'self'` | Included | WASM files must be bundled with the extension |
 | `script-src 'unsafe-eval'` | **Forbidden** in MV3 | Cannot use `eval()`, but WASM is unaffected |
-| No `wasm-unsafe-eval` | N/A (always present) | Would block all WASM compilation |
+| No `wasm-unsafe-eval` | Default state | Blocks all WASM compilation |
 
 **Gotchas:**
-- MV3 automatically includes `wasm-unsafe-eval` in the extension pages CSP. You do not need to add it manually. If you override `content_security_policy.extension_pages`, make sure you keep `wasm-unsafe-eval` in your custom policy or WASM will break.
+- MV3 does **not** automatically include `wasm-unsafe-eval` in the extension pages CSP. You **must** explicitly add `'wasm-unsafe-eval'` to `content_security_policy.extension_pages` in your manifest for WASM to work. Without it, `WebAssembly.compile()` and `WebAssembly.instantiate()` will be blocked by CSP.
 - Content scripts compile WASM under the extension's CSP, not the host page's CSP. This means WASM works in content scripts even on pages with restrictive CSPs.
 - Sandbox pages (`content_security_policy.sandbox`) can use `wasm-unsafe-eval` independently. This is useful for isolating WASM execution in an iframe.
 - Remote WASM files cannot be loaded in MV3. All WASM modules must be bundled in the extension package. Fetch from `chrome.runtime.getURL` only.

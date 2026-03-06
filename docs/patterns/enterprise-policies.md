@@ -59,7 +59,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 **Gotchas:**
 - `chrome.storage.managed.get()` throws an error (not an empty object) when no managed schema is defined or the extension is unmanaged. Always wrap in try/catch.
-- `chrome.management.getSelf()` requires the `management` permission in `manifest.json`.
+- `chrome.management.getSelf()` does **not** require the `management` permission. It is one of the few `chrome.management` methods (along with `getPermissionWarningsByManifest()` and `uninstallSelf()`) that works without declaring the permission.
 - An extension can be managed (has policies) without being force-installed, and vice versa. Check both signals.
 
 ---
@@ -399,7 +399,7 @@ export const featureFlags = new PolicyFeatureFlags();
 ```
 
 **Gotchas:**
-- Content scripts cannot directly access `chrome.storage.managed`. Cache the resolved flags in `chrome.storage.local` and read them from there in content scripts.
+- By default, content scripts **can** access `chrome.storage.managed` (as well as `local` and `sync`). However, this can be restricted by calling `chrome.storage.managed.setAccessLevel()`. If you need to ensure content scripts always have access regardless of access level settings, caching the resolved flags in `chrome.storage.local` is a safe fallback strategy.
 - Policy changes can arrive at any time (e.g., when the admin pushes a new configuration). Always listen for `onChanged` and react dynamically.
 - Validate enum-type flags against known values. If an admin sets an unexpected string, fall back to the default rather than crashing.
 
