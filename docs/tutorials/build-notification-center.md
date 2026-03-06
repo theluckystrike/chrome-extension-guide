@@ -1,175 +1,343 @@
-# Build a Notification Center Extension — Full Tutorial
+# Building a Notification Center with Chrome Extension
 
-## What We're Building
-- Notification center displaying all notifications in a side panel
-- Supports all 4 notification types: basic, image, list, progress
-- Stores history with read/unread states, badge showing unread count
-- Scheduled notifications via alarms
-- Cross-ref: [notifications permission](../permissions/notifications.md), [sidePanel permission](../permissions/sidePanel.md)
+This tutorial demonstrates how to build a comprehensive notification center for your Chrome extension using the side panel, notifications API, storage, and alarms.
 
 ## Prerequisites
-- Basic Chrome extension knowledge
-- `npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging`
 
-## Step 1: manifest.json
+- Chrome 114+ (for side panel support)
+- Basic knowledge of Manifest V3
+- Understanding of service workers
+
+## Required Permissions
+
+Add these permissions to your `manifest.json`:
+
 ```json
 {
-  "manifest_version": 3,
-  "name": "Notification Center",
-  "version": "1.0.0",
-  "permissions": ["notifications", "sidePanel", "storage", "alarms"],
-  "side_panel": { "default_path": "sidepanel.html" },
-  "action": { "default_icon": "icon.png" },
-  "background": { "service_worker": "background.js" }
+  "permissions": [
+    "notifications",
+    "sidePanel",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
 }
 ```
 
-## Step 2: Storage Schema
-```typescript
-// storage.ts
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+For detailed permission explanations, see:
+- [permissions/notifications.md](../permissions/notifications.md)
+- [permissions/sidePanel.md](../permissions/sidePanel.md)
 
-export interface NotificationEntry {
-  id: string; type: 'basic' | 'image' | 'list' | 'progress';
-  title: string; message: string; timestamp: number; read: boolean;
-  iconUrl?: string; imageUrl?: string; items?: Array<{ title: string; message: string }>; progress?: number;
-}
+## Manifest Configuration
 
-export const storage = createStorage(defineSchema({ notifications: 'object', unreadCount: 'number' }), 'local');
-export const DEFAULT_STATE = { notifications: [] as NotificationEntry[], unreadCount: 0 };
-```
+Configure your extension to use the side panel:
 
-## Step 3: Create All Notification Types
-```typescript
-// notifications.ts
-import { storage, DEFAULT_STATE } from './storage';
-import type { NotificationEntry } from './storage';
-
-async function addToHistory(entry: NotificationEntry) {
-  const state = await storage.get() || DEFAULT_STATE;
-  state.notifications.unshift(entry);
-  state.unreadCount++;
-  await storage.set(state);
-  return entry;
-}
-
-export async function createBasic(title: string, message: string) {
-  const id = await chrome.notifications.create({ type: 'basic', iconUrl: 'icons/n.png', title, message });
-  return addToHistory({ id, title, message, timestamp: Date.now(), read: false, type: 'basic' });
-}
-
-export async function createImage(title: string, message: string, imageUrl: string) {
-  const id = await chrome.notifications.create({ type: 'image', iconUrl: 'icons/n.png', title, message, imageUrl });
-  return addToHistory({ id, title, message, timestamp: Date.now(), read: false, type: 'image', imageUrl });
-}
-
-export async function createList(title: string, items: Array<{ title: string; message: string }>) {
-  const id = await chrome.notifications.create({ type: 'list', iconUrl: 'icons/n.png', title, message: `${items.length} items`, items });
-  return addToHistory({ id, title, message: `${items.length} items`, timestamp: Date.now(), read: false, type: 'list', items });
-}
-
-export async function createProgress(title: string, progress: number) {
-  const id = await chrome.notifications.create({ type: 'progress', iconUrl: 'icons/n.png', title, message: `${progress}%`, progress });
-  return addToHistory({ id, title, message: `${progress}%`, timestamp: Date.now(), read: false, type: 'progress', progress });
+```json
+{
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "icon.png",
+    "default_title": "Notification Center"
+  }
 }
 ```
 
-## Step 4: Background Service Worker
-```typescript
-// background.ts
-import { createMessenger } from '@theluckystrike/webext-messaging';
-import { storage, DEFAULT_STATE } from './storage';
-import { createBasic, createList, createProgress } from './notifications';
+## Notification Types
 
-type Messages = {
-  getNotifications: { request: void; response: any[] };
-  markRead: { request: { id: string }; response: void };
-  markAllRead: { request: void; response: void };
-  clearAll: { request: void; response: void };
-};
+Chrome notifications support three main types:
 
-const messenger = createMessenger<Messages>();
+### Basic Notification
 
-chrome.notifications.onClicked.addListener(async (id) => {
-  const state = await storage.get() || DEFAULT_STATE;
-  const n = state.notifications.find(x => x.id === id);
-  if (n && !n.read) { n.read = true; state.unreadCount = Math.max(0, state.unreadCount - 1); await storage.set(state); updateBadge(state.unreadCount); }
-  chrome.notifications.clear(id);
+```javascript
+chrome.notifications.create('notification-id', {
+  type: 'basic',
+  iconUrl: 'icon.png',
+  title: 'Hello!',
+  message: 'This is a basic notification',
+  priority: 1
 });
-
-function updateBadge(count: number) {
-  chrome.action.setBadgeText({ text: count > 0 ? String(count) : '' });
-  chrome.action.setBadgeBackgroundColor({ color: '#ff4444' });
-}
-
-messenger.onMessage('getNotifications', async () => (await storage.get() || DEFAULT_STATE).notifications);
-messenger.onMessage('markRead', async ({ id }) => {
-  const state = await storage.get() || DEFAULT_STATE;
-  const n = state.notifications.find(x => x.id === id);
-  if (n && !n.read) { n.read = true; state.unreadCount = Math.max(0, state.unreadCount - 1); await storage.set(state); updateBadge(state.unreadCount); }
-});
-messenger.onMessage('markAllRead', async () => { await storage.set({ ...DEFAULT_STATE, notifications: (await storage.get() || DEFAULT_STATE).notifications.map(n => ({ ...n, read: true })) }); updateBadge(0); });
-messenger.onMessage('clearAll', async () => { await storage.set(DEFAULT_STATE); updateBadge(0); });
-
-chrome.action.onClicked.addListener(async (tab) => await chrome.sidePanel.open({ tabId: tab.id }));
 ```
 
-## Step 5: Side Panel UI
+### List Notification
+
+```javascript
+chrome.notifications.create('list-notification', {
+  type: 'list',
+  iconUrl: 'icon.png',
+  title: 'Multiple Items',
+  message: 'First item',
+  items: [
+    { title: 'Item 1', message: 'Description 1' },
+    { title: 'Item 2', message: 'Description 2' }
+  ]
+});
+```
+
+### Progress Notification
+
+```javascript
+chrome.notifications.create('progress-notification', {
+  type: 'progress',
+  iconUrl: 'icon.png',
+  title: 'Downloading...',
+  message: 'Progress update',
+  progress: 50  // 0-100
+});
+```
+
+## Notification History Storage
+
+Store notification history using `@theluckystrike/webext-storage`:
+
+```javascript
+// background.js
+import { Storage } from '@theluckystrike/webext-storage';
+
+const storage = new Storage();
+
+const NOTIFICATION_HISTORY_KEY = 'notification_history';
+
+export async function saveNotification(notification) {
+  const history = await storage.get(NOTIFICATION_HISTORY_KEY) || [];
+  
+  const notificationRecord = {
+    id: notification.id,
+    title: notification.title,
+    message: notification.message,
+    timestamp: Date.now(),
+    read: false,
+    type: notification.type
+  };
+  
+  history.unshift(notificationRecord);
+  
+  // Keep only last 100 notifications
+  await storage.set(NOTIFICATION_HISTORY_KEY, history.slice(0, 100));
+  
+  return notificationRecord;
+}
+
+export async function getNotificationHistory() {
+  return await storage.get(NOTIFICATION_HISTORY_KEY) || [];
+}
+
+export async function markAsRead(notificationId) {
+  const history = await storage.get(NOTIFICATION_HISTORY_KEY) || [];
+  const updated = history.map(n => 
+    n.id === notificationId ? { ...n, read: true } : n
+  );
+  await storage.set(NOTIFICATION_HISTORY_KEY, updated);
+}
+
+export async function getUnreadCount() {
+  const history = await storage.get(NOTIFICATION_HISTORY_KEY) || [];
+  return history.filter(n => !n.read).length;
+}
+```
+
+## Side Panel Implementation
+
+Create `sidepanel.html`:
+
 ```html
-<!-- sidepanel.html -->
-<!DOCTYPE html><html><head><link rel="stylesheet" href="sidepanel.css"></head>
-<body><header><h1>Notifications</h1><div><button id="markAllRead">Mark All Read</button><button id="clearAll">Clear All</button></div></header>
-<div id="notificationList"></div><script src="sidepanel.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Notification Center</h1>
+    <span id="unread-badge" class="badge">0</span>
+  </div>
+  <div id="notification-list" class="notification-list"></div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>
 ```
 
-## Step 6: Side Panel Logic
-```typescript
-// sidepanel.ts
-import { createMessenger } from '@theluckystrike/webext-messaging';
-import type { NotificationEntry } from './storage';
+## Communication with Service Worker
 
-const messenger = createMessenger<any>();
+Use `@theluckystrike/webext-messaging` for communication:
 
-async function load() {
-  const notifications = await messenger.sendMessage('getNotifications', undefined);
-  document.getElementById('notificationList')!.innerHTML = notifications.map(n => 
-    `<div class="item ${n.read ? 'read' : 'unread'}" data-id="${n.id}"><div class="title">${n.title}</div><div class="msg">${n.message}</div><div class="time">${new Date(n.timestamp).toLocaleString()}</div></div>`
-  ).join('');
-}
+```javascript
+// sidepanel.js
+import { Messaging } from '@theluckystrike/webext-messaging';
 
-document.getElementById('markAllRead')!.onclick = async () => { await messenger.sendMessage('markAllRead', undefined); load(); };
-document.getElementById('clearAll')!.onclick = async () => { await messenger.sendMessage('clearAll', undefined); load(); };
-document.getElementById('notificationList')!.onclick = async (e: any) => { if (e.target.closest('.item')) { await messenger.sendMessage('markRead', { id: e.target.closest('.item').dataset.id }); load(); }};
-load();
-```
+const messaging = new Messaging();
 
-## Step 7: Side Panel CSS
-```css
-/* sidepanel.css */
-body { width: 320px; font-family: system-ui, sans-serif; margin: 0; }
-header { display: flex; justify-content: space-between; padding: 10px; background: #f5f5f5; border-bottom: 1px solid #ddd; }
-header h1 { margin: 0; font-size: 15px; }
-header button { font-size: 11px; margin-left: 6px; cursor: pointer; }
-.item { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; }
-.item.unread { background: #e8f0fe; }
-.item .title { font-weight: 600; font-size: 13px; }
-.item .msg { color: #666; font-size: 12px; margin: 3px 0; }
-.item .time { color: #999; font-size: 10px; }
-```
+// Request notification history on load
+const history = await messaging.sendToBackground('get-notification-history');
+renderNotifications(history);
 
-## Step 8: Scheduled Notifications via Alarms
-```typescript
-// scheduled.ts - add to background.ts
-export async function scheduleNotification(name: string, title: string, msg: string, delayMin: number = 1) {
-  chrome.alarms.create(name, { delayInMinutes: delayMin });
-}
-
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  const state = await storage.get() || DEFAULT_STATE;
-  const scheduled = state.notifications.find(n => n.id === alarm.name);
-  if (scheduled) await chrome.notifications.create({ type: 'basic', iconUrl: 'icons/n.png', title: scheduled.title, message: scheduled.message });
+// Listen for new notifications
+messaging.onMessage((message) => {
+  if (message.type === 'new-notification') {
+    prependNotification(message.notification);
+    updateBadge(message.unreadCount);
+  }
 });
 ```
 
-## Summary
-This notification center extension covers: all 4 notification types, @theluckystrike/webext-storage for persistence, side panel UI with history, @theluckystrike/webext-messaging, badge for unread count, scheduled notifications via chrome.alarms, mark read/clear all actions, and proper cross-references.
+```javascript
+// background.js
+import { Messaging } from '@theluckystrike/webext-messaging';
+
+const messaging = new Messaging();
+
+messaging.onMessage((message, sender) => {
+  switch (message.type) {
+    case 'get-notification-history':
+      return getNotificationHistory();
+    case 'mark-as-read':
+      return markAsRead(message.notificationId);
+    case 'clear-history':
+      return clearNotificationHistory();
+  }
+});
+```
+
+## Button Click Handlers
+
+Handle notification button clicks:
+
+```javascript
+// background.js
+chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
+  console.log(`Button ${buttonIndex} clicked for notification ${notificationId}`);
+  
+  if (buttonIndex === 0) {
+    // Primary action - mark as read and open related content
+    handlePrimaryAction(notificationId);
+  } else if (buttonIndex === 1) {
+    // Secondary action - dismiss
+    handleSecondaryAction(notificationId);
+  }
+});
+
+chrome.notifications.onClicked.addListener((notificationId) => {
+  // Handle notification click (not button)
+  openNotificationDetails(notificationId);
+});
+
+chrome.notifications.onClosed.addListener((notificationId, byUser) => {
+  if (byUser) {
+    // User closed the notification - mark as read
+    markAsRead(notificationId);
+    updateBadge();
+  }
+});
+```
+
+Create notifications with buttons:
+
+```javascript
+chrome.notifications.create('with-buttons', {
+  type: 'basic',
+  iconUrl: 'icon.png',
+  title: 'Action Required',
+  message: 'Please choose an action',
+  buttons: [
+    { title: 'View Details' },
+    { title: 'Dismiss' }
+  ]
+});
+```
+
+## Badge with Unread Count
+
+Update the extension badge to show unread count:
+
+```javascript
+export async function updateBadge() {
+  const unreadCount = await getUnreadCount();
+  
+  if (unreadCount > 0) {
+    chrome.action.setBadgeText({ text: unreadCount.toString() });
+    chrome.action.setBadgeBackgroundColor({ color: '#FF5722' });
+  } else {
+    chrome.action.setBadgeText({ text: '' });
+  }
+}
+
+// Call after creating or reading notifications
+await updateBadge();
+```
+
+## Scheduled Notifications with Alarms
+
+Schedule notifications using the alarms API:
+
+```javascript
+// background.js
+chrome.alarms.create('scheduled-notification', {
+  delayInMinutes: 5,
+  periodInMinutes: 60  // Repeat every hour
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'scheduled-notification') {
+    sendScheduledNotification();
+  }
+});
+
+async function sendScheduledNotification() {
+  // Check if we should send a notification
+  const settings = await storage.get('notification_settings');
+  
+  if (!settings.enabled) return;
+  
+  const notification = {
+    id: `scheduled-${Date.now()}`,
+    title: 'Scheduled Reminder',
+    message: 'Your scheduled notification is here!',
+    type: 'basic'
+  };
+  
+  await chrome.notifications.create(notification.id, {
+    type: 'basic',
+    iconUrl: 'icon.png',
+    title: notification.title,
+    message: notification.message
+  });
+  
+  await saveNotification(notification);
+  await updateBadge();
+}
+```
+
+## Complete Flow
+
+Here's the complete flow:
+
+1. **Service Worker** creates notification via `chrome.notifications.create()`
+2. User clicks button or notification
+3. **Service Worker** handles click via `onButtonClicked` or `onClicked`
+4. Notification is saved to storage with `saveNotification()`
+5. Badge updates with `updateBadge()`
+6. **Side Panel** receives updates via messaging
+7. User views history in side panel
+8. Notifications marked as read via `markAsRead()`
+
+## Best Practices
+
+- Always handle notification permissions gracefully
+- Limit stored history to prevent storage bloat
+- Use appropriate notification types for content
+- Clear badges when notifications are read
+- Test with Chrome's notification permissions
+
+## Related Resources
+
+- [Chrome Notifications API](https://developer.chrome.com/docs/extensions/reference/notifications/)
+- [Side Panel API](https://developer.chrome.com/docs/extensions/reference/sidePanel/)
+- [Alarms API](https://developer.chrome.com/docs/extensions/reference/alarms/)
+- [@theluckystrike/webext-storage](https://www.npmjs.com/package/@theluckystrike/webext-storage)
+- [@theluckystrike/webext-messaging](https://www.npmjs.com/package/@theluckystrike/webext-messaging)
