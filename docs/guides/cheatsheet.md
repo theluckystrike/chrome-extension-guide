@@ -1,459 +1,407 @@
 # Chrome Extension Development Cheatsheet
 
-Quick-reference for Manifest V3 Chrome extension development. Every snippet is copy-paste ready TypeScript.
+A quick-reference cheatsheet covering the most common patterns, APIs, and snippets for Chrome extension development with Manifest V3.
 
 ---
 
-## Manifest V3 Skeleton
+## Minimal Manifest V3 Template
 
-```jsonc
+```json
 {
   "manifest_version": 3,
   "name": "My Extension",
   "version": "1.0.0",
-  "description": "A brief description.",
-  "permissions": ["storage", "activeTab"],
-  "host_permissions": ["https://*.example.com/*"],
-  "background": { "service_worker": "src/background.ts", "type": "module" },
+  "description": "A brief description of your extension.",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.example.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+    "default_icon": "icon-48.png"
   },
-  "content_scripts": [{
-    "matches": ["https://*.example.com/*"],
-    "js": ["src/content.ts"],
-    "run_at": "document_idle"
-  }],
-  "options_ui": { "page": "options.html", "open_in_tab": false },
-  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
-  "web_accessible_resources": [{
-    "resources": ["images/*"],
-    "matches": ["https://*.example.com/*"]
-  }]
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  }
 }
 ```
 
 ---
 
-## Service Worker Event Registration
+## Service Worker Quick Patterns
 
-All listeners **must** be registered synchronously at the top level. The worker terminates when idle and restarts on events.
+### Lifecycle Events
 
 ```typescript
-// background.ts
+// Install: runs once when extension is first installed or updated
 chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === "install") chrome.storage.local.set({ installedAt: Date.now() });
-  if (details.reason === "update") console.log(`Updated from ${details.previousVersion}`);
+  if (details.reason === "install") {
+    chrome.storage.local.set({ firstRun: true });
+  }
+  if (details.reason === "update") {
+    console.log("Updated from", details.previousVersion);
+  }
 });
 
-chrome.runtime.onStartup.addListener(() => { /* browser cold start */ });
-
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  handleMessage(msg, sender, sendResponse);
-  return true; // keep channel open for async sendResponse
-});
-
-chrome.alarms.onAlarm.addListener((alarm) => handleAlarm(alarm));
-chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (info.status === "complete") handleTabReady(tabId, tab);
+// Startup: runs each time the browser launches
+chrome.runtime.onStartup.addListener(() => {
+  console.log("Browser started");
 });
 ```
 
----
+### Alarms (Persistent Scheduling)
 
-## Content Script Injection (3 Ways)
-
-**1. Manifest-declared (static)**
-```jsonc
-{ "content_scripts": [{
-    "matches": ["https://example.com/*"],
-    "js": ["src/content.ts"],
-    "run_at": "document_idle",  // "document_start" | "document_end" | "document_idle"
-    "all_frames": false
-}]}
-```
-
-**2. Programmatic file injection** (requires `"scripting"` permission)
 ```typescript
-chrome.scripting.executeScript({ target: { tabId }, files: ["src/content.ts"] });
-```
+// Create a repeating alarm
+chrome.alarms.create("sync-data", { periodInMinutes: 15 });
 
-**3. Programmatic inline function**
-```typescript
-chrome.scripting.executeScript({
-  target: { tabId },
-  func: (greeting: string) => { document.title = greeting; },
-  args: ["Hello from extension"],
+// Listen for alarm
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === "sync-data") {
+    syncData();
+  }
 });
+
+// One-shot alarm (delay only)
+chrome.alarms.create("reminder", { delayInMinutes: 5 });
 ```
 
----
+### Service Worker Keep-Alive Trick
 
-## Message Passing Templates
-
-**One-shot: content to background**
 ```typescript
-// content.ts
-const response = await chrome.runtime.sendMessage({ type: "FETCH_DATA", url: location.href });
-
-// background.ts
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === "FETCH_DATA") {
-    fetch(msg.url).then(r => r.json()).then(data => sendResponse({ data }));
-    return true; // async
+// Use a long-lived port to keep the SW alive (use sparingly)
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name === "keepalive") {
+    port.onDisconnect.addListener(() => {
+      // Reconnect logic in content script
+    });
   }
 });
 ```
 
-**One-shot: background to tab**
-```typescript
-const response = await chrome.tabs.sendMessage(tabId, { type: "HIGHLIGHT", selector: "#main" });
+---
+
+## Content Script Injection Patterns
+
+### Static (manifest.json)
+
+```json
+"content_scripts": [
+  {
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "css": ["content.css"],
+    "run_at": "document_idle",
+    "all_frames": false
+  }
+]
 ```
 
-**Long-lived port**
-```typescript
-// content.ts
-const port = chrome.runtime.connect({ name: "stream" });
-port.postMessage({ type: "SUBSCRIBE" });
-port.onMessage.addListener((msg) => console.log(msg));
+### Programmatic Injection
 
-// background.ts
-chrome.runtime.onConnect.addListener((port) => {
-  if (port.name !== "stream") return;
-  port.onMessage.addListener((msg) => {
-    const interval = setInterval(() => port.postMessage({ ts: Date.now() }), 1000);
-    port.onDisconnect.addListener(() => clearInterval(interval));
-  });
+```typescript
+// Inject into the active tab
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  files: ["injected.js"],
 });
-```
 
-**Popup to background**
-```typescript
-const { status } = await chrome.runtime.sendMessage({ type: "GET_STATUS" });
+// Inject a function directly
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  func: (greeting) => document.title = greeting,
+  args: ["Hello!"],
+});
+
+// Inject CSS
+chrome.scripting.insertCSS({
+  target: { tabId: tab.id },
+  css: "body { border: 2px solid red; }",
+});
 ```
 
 ---
 
-## Storage Snippets
+## Storage Quick Patterns
 
 ```typescript
-// ---- chrome.storage.local ----
-await chrome.storage.local.set({ settings: { theme: "dark" }, lastSync: Date.now() });
-const { settings } = await chrome.storage.local.get("settings");
-const { settings: s } = await chrome.storage.local.get({ settings: { theme: "light" } }); // defaults
-await chrome.storage.local.remove("lastSync");
+// Local storage (per-device, ~10 MB limit)
+await chrome.storage.local.set({ key: "value", count: 42 });
+const { key } = await chrome.storage.local.get("key");
+await chrome.storage.local.remove("key");
 await chrome.storage.local.clear();
 
-// ---- chrome.storage.sync (100KB total, 8KB per item) ----
-await chrome.storage.sync.set({ prefs: { lang: "en" } });
+// Sync storage (synced across devices, ~100 KB total)
+await chrome.storage.sync.set({ prefs: { theme: "dark" } });
 const { prefs } = await chrome.storage.sync.get("prefs");
 
-// ---- chrome.storage.session (cleared on browser close) ----
-await chrome.storage.session.set({ token: "abc" });
-await chrome.storage.session.setAccessLevel({
-  accessLevel: "TRUSTED_AND_UNTRUSTED_CONTEXTS", // allow content scripts
-});
+// Session storage (in-memory, cleared on restart, ~10 MB)
+await chrome.storage.session.set({ token: "abc123" });
+const { token } = await chrome.storage.session.get("token");
 
-// ---- Listen for changes ----
+// Watch for changes
 chrome.storage.onChanged.addListener((changes, area) => {
-  for (const [key, { oldValue, newValue }] of Object.entries(changes))
-    console.log(`[${area}] ${key}: ${oldValue} -> ${newValue}`);
+  if (area === "local" && changes.count) {
+    console.log("count:", changes.count.oldValue, "->", changes.count.newValue);
+  }
 });
 ```
 
 ---
 
-## chrome.action Badge/Icon/Title
+## Message Passing Patterns
+
+### One-Time Messages
 
 ```typescript
-await chrome.action.setBadgeText({ text: "5" });              // global
-await chrome.action.setBadgeText({ text: "5", tabId });        // per-tab
-await chrome.action.setBadgeBackgroundColor({ color: "#F00" });
-await chrome.action.setBadgeTextColor({ color: "#FFF" });      // Chrome 110+
-await chrome.action.setTitle({ title: "Click me" });
-await chrome.action.setIcon({ path: { 16: "icons/on-16.png", 32: "icons/on-32.png" } });
-await chrome.action.enable(tabId);
-await chrome.action.disable(tabId);
-await chrome.action.openPopup();  // Chrome 127+, needs user gesture
+// From content script to background
+const response = await chrome.runtime.sendMessage({ type: "FETCH_DATA", url });
 
-chrome.action.onClicked.addListener((tab) => { /* fires only if no popup */ });
+// From background to a specific tab
+const response = await chrome.tabs.sendMessage(tabId, { type: "HIGHLIGHT" });
+
+// Listener (background or content script)
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === "FETCH_DATA") {
+    fetch(message.url)
+      .then((r) => r.json())
+      .then(sendResponse);
+    return true; // Keep channel open for async sendResponse
+  }
+});
 ```
 
----
-
-## Context Menu Creation
+### Long-Lived Connections (Ports)
 
 ```typescript
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: "lookup", title: 'Look up "%s"', contexts: ["selection"] });
-  chrome.contextMenus.create({ id: "save-img", title: "Save image", contexts: ["image"] });
-  chrome.contextMenus.create({
-    id: "sidebar", title: "Open sidebar", contexts: ["page"],
-    documentUrlPatterns: ["https://*.example.com/*"],
-  });
-});
+// Content script: open a port
+const port = chrome.runtime.connect({ name: "stream" });
+port.postMessage({ subscribe: "updates" });
+port.onMessage.addListener((msg) => console.log(msg));
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "lookup") console.log("Selected:", info.selectionText);
-  if (info.menuItemId === "save-img") console.log("Image:", info.srcUrl);
+// Background: accept the port
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name === "stream") {
+    port.onMessage.addListener((msg) => {
+      port.postMessage({ data: "here you go" });
+    });
+  }
 });
 ```
 
 ---
 
-## chrome.alarms Setup
+## Permission Declaration Patterns
+
+```json
+// Required permissions (granted at install)
+"permissions": ["storage", "alarms", "tabs", "activeTab", "scripting"]
+
+// Optional permissions (requested at runtime)
+"optional_permissions": ["bookmarks", "history", "downloads"]
+
+// Host permissions (MV3 separates these)
+"host_permissions": ["https://*.example.com/*", "https://api.myservice.com/*"]
+
+// Optional host permissions
+"optional_host_permissions": ["https://*/*", "http://*/*"]
+```
+
+### Requesting Optional Permissions at Runtime
 
 ```typescript
-// Requires "alarms" permission
-chrome.alarms.create("one-shot", { delayInMinutes: 1 });
-chrome.alarms.create("periodic", { delayInMinutes: 1, periodInMinutes: 30 });
-chrome.alarms.create("scheduled", { when: Date.now() + 3600_000 });
-
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === "periodic") syncData();
+const granted = await chrome.permissions.request({
+  permissions: ["bookmarks"],
+  origins: ["https://extra-site.com/*"],
 });
-
-const all = await chrome.alarms.getAll();
-await chrome.alarms.clear("one-shot");
-await chrome.alarms.clearAll();
+if (granted) {
+  // Permission was granted
+}
 ```
 
 ---
 
-## chrome.tabs Common Operations
+## Common chrome.* API One-Liners
 
 ```typescript
-// Query
-const [active] = await chrome.tabs.query({ active: true, currentWindow: true });
-const matching = await chrome.tabs.query({ url: "https://example.com/*" });
+// Get the current active tab
+const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-// Create / Update / Remove
-const tab = await chrome.tabs.create({ url: "https://example.com", active: true });
-await chrome.tabs.update(tabId, { url: "https://new.com", pinned: true });
-await chrome.tabs.remove(tabId);
-await chrome.tabs.remove([tabId1, tabId2]);
+// Open a new tab
+await chrome.tabs.create({ url: "https://example.com" });
 
-// Move / Duplicate
-await chrome.tabs.move(tabId, { index: 0 });
-const dup = await chrome.tabs.duplicate(tabId);
+// Get extension URL for a bundled resource
+const url = chrome.runtime.getURL("assets/logo.png");
 
-// Group
-const groupId = await chrome.tabs.group({ tabIds: [tabId1, tabId2] });
-await chrome.tabGroups.update(groupId, { title: "Research", color: "blue" });
+// Set the badge
+await chrome.action.setBadgeText({ text: "5" });
+await chrome.action.setBadgeBackgroundColor({ color: "#FF0000" });
 
-// Message to content script
-const res = await chrome.tabs.sendMessage(tabId, { type: "PING" });
+// Copy to clipboard (content script)
+await navigator.clipboard.writeText("copied!");
 
-// Capture screenshot (requires "activeTab")
-const dataUrl = await chrome.tabs.captureVisibleTab(windowId, { format: "png" });
+// Create a context menu item
+chrome.contextMenus.create({
+  id: "lookup",
+  title: "Look up '%s'",
+  contexts: ["selection"],
+});
 
-// Reload
-await chrome.tabs.reload(tabId, { bypassCache: true });
+// Create a notification
+chrome.notifications.create("my-notif", {
+  type: "basic",
+  iconUrl: "icon-128.png",
+  title: "Heads up",
+  message: "Something happened.",
+});
+
+// Open the side panel (Chrome 114+)
+await chrome.sidePanel.open({ windowId: tab.windowId });
 ```
 
 ---
 
-## chrome.scripting.executeScript Templates
+## Debugging Quick Commands
 
-```typescript
-// Execute file
-await chrome.scripting.executeScript({ target: { tabId }, files: ["scripts/inject.js"] });
-
-// Inline function with args
-const [{ result }] = await chrome.scripting.executeScript({
-  target: { tabId },
-  func: (sel: string) => document.querySelector(sel)?.textContent ?? null,
-  args: ["h1"],
-});
-
-// All frames
-await chrome.scripting.executeScript({ target: { tabId, allFrames: true }, files: ["inject.js"] });
-
-// MAIN world (access page JS)
-await chrome.scripting.executeScript({
-  target: { tabId }, world: "MAIN",
-  func: () => (window as any).appConfig,
-});
-
-// Insert / remove CSS
-await chrome.scripting.insertCSS({ target: { tabId }, css: "body { border: 3px solid red; }" });
-await chrome.scripting.removeCSS({ target: { tabId }, css: "body { border: 3px solid red; }" });
-
-// Register dynamic content scripts
-await chrome.scripting.registerContentScripts([{
-  id: "dynamic", matches: ["https://example.com/*"],
-  js: ["scripts/dynamic.js"], runAt: "document_idle", persistAcrossSessions: true,
-}]);
-await chrome.scripting.unregisterContentScripts({ ids: ["dynamic"] });
-```
-
----
-
-## declarativeNetRequest Rule Templates
-
-**Block**
-```jsonc
-[{ "id": 1, "priority": 1,
-   "action": { "type": "block" },
-   "condition": { "urlFilter": "tracker.example.com", "resourceTypes": ["script", "image"] }
-}]
-```
-
-**Redirect**
-```jsonc
-[{ "id": 2, "priority": 1,
-   "action": { "type": "redirect", "redirect": { "url": "https://safe.example.com/" } },
-   "condition": { "urlFilter": "old.example.com", "resourceTypes": ["main_frame"] }
-}]
-```
-
-**Modify headers**
-```jsonc
-[{ "id": 3, "priority": 1,
-   "action": { "type": "modifyHeaders",
-     "requestHeaders": [{ "header": "Cookie", "operation": "remove" }],
-     "responseHeaders": [{ "header": "X-Frame-Options", "operation": "remove" }]
-   },
-   "condition": { "urlFilter": "api.example.com/*", "resourceTypes": ["xmlhttprequest"] }
-}]
-```
-
-**Dynamic rules at runtime**
-```typescript
-await chrome.declarativeNetRequest.updateDynamicRules({
-  addRules: [{ id: 100, priority: 1,
-    action: { type: "block" as const },
-    condition: { urlFilter: "ads.example.com", resourceTypes: ["script" as const] },
-  }],
-  removeRuleIds: [99],
-});
-```
-
----
-
-## Permission Quick Reference
-
-| Permission | Unlocks |
+| Action | URL / Method |
 |---|---|
-| `activeTab` | Temporary host access on user gesture |
-| `alarms` | `chrome.alarms` |
-| `bookmarks` | `chrome.bookmarks` |
-| `contextMenus` | `chrome.contextMenus` |
-| `cookies` | `chrome.cookies` (+ host_permissions) |
-| `declarativeNetRequest` | Network request rules |
-| `downloads` | `chrome.downloads` |
-| `history` | `chrome.history` |
-| `identity` | OAuth via `chrome.identity` |
-| `notifications` | `chrome.notifications` |
-| `offscreen` | Offscreen documents |
-| `scripting` | `chrome.scripting` |
-| `sidePanel` | `chrome.sidePanel` |
-| `storage` | `chrome.storage` |
-| `tabGroups` | `chrome.tabGroups` |
-| `tabs` | Access tab `url`, `title`, `favIconUrl` |
-| `webNavigation` | `chrome.webNavigation` |
+| Extensions dashboard | `chrome://extensions` |
+| Enable developer mode | Toggle in top-right of `chrome://extensions` |
+| Inspect service worker | Click "Inspect views: service worker" on extension card |
+| Inspect popup | Right-click extension icon > "Inspect Popup" |
+| Content script console | DevTools on the page > Console > select extension context |
+| Reload extension | Click the reload arrow on extension card, or `chrome.runtime.reload()` |
+| View storage | DevTools > Application > Extension Storage |
+| Network for background | Inspect service worker > Network tab |
+| Clear service worker | `chrome://serviceworker-internals` |
 
 ---
 
-## Common Errors and Fixes
+## TypeScript Type Snippets
 
-| Error | Fix |
-|---|---|
-| `Extension context invalidated` | Extension reloaded. Re-inject content script or reload tab. |
-| `Receiving end does not exist` | Target has no listener. Inject content script first. |
-| `Message port closed before response` | Return `true` from `onMessage` when using async `sendResponse`. |
-| `Cannot access chrome:// URL` | Extensions cannot inject into chrome:// pages. |
-| `Service worker registration failed` | Wrong file path or top-level `await` in service worker. |
-| `Fetch blocked by CORS` | Move fetch to service worker. Add host to `host_permissions`. |
-| `Exceeded storage quota` | `sync` is 100KB. Switch to `storage.local` (10MB). |
-| `No tab with id` | Tab closed before execution. Wrap in try/catch. |
-| `Alarm delay < 30 seconds` | Minimum alarm delay is 30s in production. |
-
----
-
-## Debug Commands
-
-```
-chrome://extensions          — manage extensions, click "Errors" for logs
-chrome://inspect/#extensions — inspect service workers
-chrome://flags               — experimental flags
-chrome://serviceworker-internals — SW lifecycle status
-```
-
-| Action | macOS | Windows/Linux |
-|---|---|---|
-| DevTools | Cmd+Opt+I | Ctrl+Shift+I |
-| Console | Cmd+Opt+J | Ctrl+Shift+J |
-| Search files | Cmd+P | Ctrl+P |
-| Search source | Cmd+Opt+F | Ctrl+Shift+F |
-| Pause debugger | F8 | F8 |
-
----
-
-## Build Configs
-
-**Vite**
 ```typescript
-import { defineConfig } from "vite";
-import { resolve } from "path";
+// Typed message handler
+interface MessageMap {
+  FETCH_DATA: { url: string };
+  SET_THEME: { theme: "light" | "dark" };
+}
 
-export default defineConfig({
-  build: {
-    outDir: "dist", emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        popup: resolve(__dirname, "popup.html"),
-        background: resolve(__dirname, "src/background.ts"),
-        content: resolve(__dirname, "src/content.ts"),
-      },
-      output: { entryFileNames: "[name].js" },
-    },
+type MessageType = keyof MessageMap;
+
+function sendTypedMessage<T extends MessageType>(
+  type: T,
+  payload: MessageMap[T]
+): Promise<unknown> {
+  return chrome.runtime.sendMessage({ type, ...payload });
+}
+
+// Typed storage helper
+interface StorageSchema {
+  count: number;
+  prefs: { theme: string; lang: string };
+  token: string;
+}
+
+async function getStorage<K extends keyof StorageSchema>(
+  key: K
+): Promise<StorageSchema[K] | undefined> {
+  const result = await chrome.storage.local.get(key);
+  return result[key];
+}
+```
+
+---
+
+## @theluckystrike/webext-storage Quick Examples
+
+```typescript
+import { createStorage } from "@anthropic/webext-storage";
+
+// Define a typed, reactive store
+const store = createStorage({
+  count: 0,
+  theme: "dark" as "light" | "dark",
+});
+
+// Get and set values with full type safety
+const count = await store.get("count"); // number
+await store.set("count", count + 1);
+
+// Watch for changes reactively
+store.watch("theme", (newVal, oldVal) => {
+  document.body.className = newVal;
+});
+```
+
+---
+
+## @theluckystrike/webext-messaging Quick Examples
+
+```typescript
+import { defineMessages, createHandler } from "@anthropic/webext-messaging";
+
+// Define your protocol once
+const protocol = defineMessages({
+  getUser: {
+    input: { id: string },
+    output: { name: string; email: string },
+  },
+  setTheme: {
+    input: { theme: "light" | "dark" },
+    output: { ok: boolean },
   },
 });
+
+// Background: register handlers
+createHandler(protocol, {
+  getUser: async ({ id }) => {
+    return { name: "Alice", email: "alice@example.com" };
+  },
+  setTheme: async ({ theme }) => {
+    await chrome.storage.local.set({ theme });
+    return { ok: true };
+  },
+});
+
+// Content script / popup: call with full type safety
+const user = await protocol.send("getUser", { id: "123" });
 ```
 
-**CRXJS (simplest)**
-```typescript
-import { defineConfig } from "vite";
-import crx from "@crxjs/vite-plugin";
-import manifest from "./manifest.json";
-export default defineConfig({ plugins: [crx({ manifest })] });
-```
+---
 
-**webpack**
-```typescript
-import path from "path";
-import CopyPlugin from "copy-webpack-plugin";
-export default {
-  mode: "production",
-  entry: { background: "./src/background.ts", content: "./src/content.ts", popup: "./src/popup.ts" },
-  output: { path: path.resolve(__dirname, "dist"), filename: "[name].js", clean: true },
-  module: { rules: [{ test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ }] },
-  resolve: { extensions: [".ts", ".tsx", ".js"] },
-  plugins: [new CopyPlugin({ patterns: [
-    { from: "manifest.json" }, { from: "popup.html" }, { from: "icons", to: "icons" },
-  ]})],
-};
-```
+## Most-Used APIs Summary Table
 
-**package.json scripts**
-```jsonc
-{ "scripts": {
-    "dev": "vite build --watch --mode development",
-    "build": "vite build",
-    "zip": "cd dist && zip -r ../extension.zip . -x '*.map'",
-    "typecheck": "tsc --noEmit"
-}}
-```
+| API | Permission | Use Case |
+|---|---|---|
+| `chrome.storage` | `storage` | Persist data locally, sync, or in-session |
+| `chrome.tabs` | `tabs` (or `activeTab`) | Query, create, update, remove tabs |
+| `chrome.scripting` | `scripting` | Programmatically inject JS/CSS |
+| `chrome.runtime` | _(none)_ | Messaging, lifecycle events, extension URLs |
+| `chrome.alarms` | `alarms` | Schedule recurring or delayed tasks |
+| `chrome.action` | _(none)_ | Badge, popup, icon for the toolbar button |
+| `chrome.contextMenus` | `contextMenus` | Right-click menu items |
+| `chrome.notifications` | `notifications` | System notifications |
+| `chrome.permissions` | _(none)_ | Request optional permissions at runtime |
+| `chrome.sidePanel` | `sidePanel` | Open/manage the side panel (Chrome 114+) |
+| `chrome.declarativeNetRequest` | `declarativeNetRequest` | Block/redirect network requests declaratively |
+| `chrome.identity` | `identity` | OAuth2 authentication flows |
 
-**tsconfig.json**
-```jsonc
-{ "compilerOptions": {
-    "target": "ES2022", "module": "ES2022", "moduleResolution": "bundler",
-    "strict": true, "outDir": "dist", "types": ["chrome"]
-}, "include": ["src/**/*.ts"] }
-```
+---
 
-```bash
-npm install -D @types/chrome
-```
+## See Also
+
+- [Manifest V3 Fields Reference](manifest-v3-fields.md)
+- [Service Worker Lifecycle](service-worker-lifecycle.md)
+- [Content Script Patterns](content-script-patterns.md)
+- [Debugging Extensions](debugging-extensions.md)
+- [MV2 to MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
