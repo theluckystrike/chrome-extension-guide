@@ -128,6 +128,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 - **English fallback** - Ensure default locale has all keys
 - **Consistent keys** - Use naming like `menu_open`, `notification_new`
 - **Use descriptions** - Help translators understand context
+- **Test RTL languages** - Use @@bidi_dir for proper RTL support
 
 ## Related Resources
 
