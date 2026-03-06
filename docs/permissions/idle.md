@@ -1,144 +1,124 @@
-# idle Permission
+# Idle Permission
 
-## What It Grants
-Access to the `chrome.idle` API for detecting when the user is idle, active, or has locked their screen.
+## Overview
 
-## Manifest
-```json
-{
-  "permissions": ["idle"]
-}
-```
+- **Permission string:** `"idle"`
+- **Grants access to:** `chrome.idle` API
+- **Purpose:** Detects when user is idle or screen is locked
 
-## User Warning
-None — this permission does not trigger a warning at install time.
+---
 
-## API Access
-When granted, you can use:
-- `chrome.idle.queryState(detectionIntervalInSeconds)` — returns `"active"`, `"idle"`, or `"locked"`
-- `chrome.idle.setDetectionInterval(intervalInSeconds)` — set the idle threshold (minimum 15 seconds)
-- `chrome.idle.onStateChanged` — event fired when idle state changes
+## API Methods
 
-## Idle States
-| State | Meaning |
-|---|---|
-| `"active"` | User is interacting with the system |
-| `"idle"` | No user input for >= detection interval |
-| `"locked"` | Screen is locked (OS-level) |
+### `chrome.idle.queryState(detectionIntervalInSeconds)`
 
-## Basic Usage
-```typescript
-// Query current state (idle after 60 seconds of no input)
-const state = await chrome.idle.queryState(60);
-console.log(`User is ${state}`);
+Returns Promise resolving to `"active"`, `"idle"`, or `"locked"`.
 
-// Set detection interval
-chrome.idle.setDetectionInterval(30); // 30 seconds
-
-// Listen for state changes
-chrome.idle.onStateChanged.addListener((newState) => {
-  console.log(`State changed to: ${newState}`);
+```javascript
+chrome.idle.queryState(30).then((state) => {
+  console.log(`Current state: ${state}`);
 });
 ```
 
-## Auto-Save Pattern
-```typescript
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+### `chrome.idle.setDetectionInterval(intervalInSeconds)`
 
-const schema = defineSchema({
-  draftContent: 'string',
-  lastSaved: 'number'
-});
-const storage = createStorage(schema, 'local');
+Sets threshold for idle detection (minimum 15 seconds).
 
-chrome.idle.setDetectionInterval(30);
-
-chrome.idle.onStateChanged.addListener(async (state) => {
-  if (state === 'idle') {
-    // User went idle — save their work
-    const draft = await storage.get('draftContent');
-    if (draft) {
-      await storage.set('lastSaved', Date.now());
-      console.log('Auto-saved draft on idle');
-    }
-  }
-});
-```
-
-## Presence Detection
-```typescript
-import { createMessenger } from '@theluckystrike/webext-messaging';
-
-type Messages = {
-  GET_PRESENCE: { request: {}; response: { state: string; since: number } };
-};
-
-const messenger = createMessenger<Messages>();
-let lastStateChange = Date.now();
-
+```javascript
 chrome.idle.setDetectionInterval(60);
+```
+
+### `chrome.idle.getAutoLockDelay()`
+
+Returns system auto-lock delay in seconds (0 if never).
+
+```javascript
+chrome.idle.getAutoLockDelay().then((delay) => console.log(delay));
+```
+
+---
+
+## Events
+
+### `chrome.idle.onStateChanged.addListener(callback)`
+
+Fires with new state: `"active"`, `"idle"`, or `"locked"`. Detection interval set by `setDetectionInterval` determines when "idle" fires.
+
+```javascript
 chrome.idle.onStateChanged.addListener((state) => {
-  lastStateChange = Date.now();
-});
-
-messenger.onMessage('GET_PRESENCE', async () => {
-  const state = await chrome.idle.queryState(60);
-  return { state, since: lastStateChange };
+  console.log(`State: ${state}`);
 });
 ```
 
-## Security Lockout
-```typescript
-chrome.idle.onStateChanged.addListener(async (state) => {
-  if (state === 'locked' || state === 'idle') {
-    // Clear sensitive data when user locks screen or goes idle
-    await chrome.storage.session.clear();
-    chrome.action.setBadgeText({ text: '🔒' });
+---
+
+## Manifest Declaration
+
+```json
+{ "permissions": ["idle"] }
+```
+
+---
+
+## Use Cases
+
+- **Auto-save drafts** when user goes idle
+- **Presence detection** for collaboration tools
+- **Security lockout**: lock extension UI when screen locks
+- **Pause background sync** when idle to save resources
+- **Activity tracking** and time management tools
+
+---
+
+## MV3 Considerations
+
+- `onStateChanged` wakes the service worker
+- Use with `chrome.alarms` for periodic idle checks
+- Store last-known state in `@theluckystrike/webext-storage`
+
+---
+
+## Code Examples
+
+### Basic Idle Detection
+
+```javascript
+chrome.idle.setDetectionInterval(30);
+chrome.idle.onStateChanged.addListener((state) => {
+  console.log(`User is: ${state}`);
+});
+```
+
+### Auto-Save Pattern
+
+```javascript
+let isDirty = false;
+
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === 'idle' && isDirty) {
+    saveToStorage('draft', getContent());
+    isDirty = false;
+  } else if (state === 'active') {
+    isDirty = true;
   }
 });
 ```
 
-## Productivity Tracking
-```typescript
-chrome.idle.setDetectionInterval(120); // 2 minutes
+### Security Pattern
 
-chrome.idle.onStateChanged.addListener(async (state) => {
-  const now = Date.now();
-  if (state === 'active') {
-    await storage.set('lastActive', now);
-  } else if (state === 'idle') {
-    const lastActive = await storage.get('lastActive');
-    const activeTime = now - (lastActive || now);
-    const total = (await storage.get('totalActiveTime')) || 0;
-    await storage.set('totalActiveTime', total + activeTime);
+```javascript
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === 'locked') {
+    localStorage.removeItem('authToken');
+    sessionStorage.clear();
   }
 });
 ```
 
-## Detection Interval
-- Minimum: 15 seconds
-- Default: 60 seconds
-- Applies to both `queryState()` and `onStateChanged`
-- Lower values = more responsive but more CPU usage
-
-## When to Use
-- Auto-save on idle
-- Presence/availability indicators
-- Security lockout (clear sensitive data)
-- Productivity/time tracking
-- Pause background operations when user is away
-- Auto-logout after inactivity
-
-## When NOT to Use
-- If you only need to know when tab is visible — use `document.visibilityState`
-- If you need precise mouse/keyboard tracking — use content script events
-
-## Permission Check
-```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('idle');
-```
+---
 
 ## Cross-References
-- Guide: `docs/guides/idle-detection.md`
-- Related: `docs/permissions/power.md`
+
+- `permissions/power.md`
+- `patterns/idle-detection.md`
+- `guides/idle-detection.md`
