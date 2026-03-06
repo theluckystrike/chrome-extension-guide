@@ -142,7 +142,7 @@ chrome.contextMenus.create({
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `id` | `string` | Unique identifier (required in MV3) |
+| `id` | `string` | Unique identifier (recommended; required for event pages) |
 | `title` | `string` | Display text (`%s` for selected text) |
 | `type` | `ItemType` | `"normal"` (default), `"checkbox"`, `"radio"`, `"separator"` |
 | `checked` | `boolean` | Initial state for checkbox/radio |
@@ -153,7 +153,7 @@ chrome.contextMenus.create({
 | `enabled` | `boolean` | Whether the item is enabled (default `true`) |
 | `visible` | `boolean` | Whether the item is visible (default `true`) |
 
-**ContextType values:** `"all"`, `"page"`, `"frame"`, `"selection"`, `"link"`, `"editable"`, `"image"`, `"video"`, `"audio"`, `"action"`, `"launcher"`.
+**ContextType values:** `"all"`, `"page"`, `"frame"`, `"selection"`, `"link"`, `"editable"`, `"image"`, `"video"`, `"audio"`, `"action"`, `"browser_action"`, `"page_action"`, `"launcher"`.
 
 ### chrome.contextMenus.update(id, updateProperties)
 

@@ -27,17 +27,21 @@ Every method that returns tab data provides a `chrome.tabs.Tab` object:
 | `pinned` | `boolean` | No |
 | `highlighted` | `boolean` | No |
 | `incognito` | `boolean` | No |
-| `status` | `"loading" \| "complete"` | No |
+| `status` | `TabStatus \| undefined` | No |
+| `discarded` | `boolean` | No |
+| `autoDiscardable` | `boolean` | No |
 | `groupId` | `number` | No |
 | `url` | `string \| undefined` | Yes |
 | `pendingUrl` | `string \| undefined` | Yes |
 | `title` | `string \| undefined` | Yes |
 | `favIconUrl` | `string \| undefined` | Yes |
 | `openerTabId` | `number \| undefined` | No |
-| `audible` | `boolean` | No |
-| `mutedInfo` | `MutedInfo` | No |
-| `width` | `number` | No |
-| `height` | `number` | No |
+| `audible` | `boolean \| undefined` | No |
+| `mutedInfo` | `MutedInfo \| undefined` | No |
+| `width` | `number \| undefined` | No |
+| `height` | `number \| undefined` | No |
+| `sessionId` | `string \| undefined` | No |
+| `lastAccessed` | `number` | No |
 
 ## Core Methods
 
@@ -161,7 +165,7 @@ await chrome.tabs.move([tabId1, tabId2], { index: 0 });
 
 ### chrome.tabs.group(options) / chrome.tabs.ungroup(tabIds)
 
-Manage tab groups (Chrome 89+).
+Manage tab groups (Chrome 88+).
 
 ```ts
 // Group tabs together
@@ -314,11 +318,11 @@ chrome.tabs.onMoved.addListener((tabId, moveInfo) => {
 
 // Tab moved to a different window
 chrome.tabs.onDetached.addListener((tabId, detachInfo) => {
-  console.log(`Tab ${tabId} detached from window ${detachInfo.oldWindowId}`);
+  console.log(`Tab ${tabId} detached from window ${detachInfo.oldWindowId} at position ${detachInfo.oldPosition}`);
 });
 
 chrome.tabs.onAttached.addListener((tabId, attachInfo) => {
-  console.log(`Tab ${tabId} attached to window ${attachInfo.newWindowId}`);
+  console.log(`Tab ${tabId} attached to window ${attachInfo.newWindowId} at position ${attachInfo.newPosition}`);
 });
 ```
 
@@ -467,7 +471,7 @@ function waitForTabLoad(tabId: number): Promise<chrome.tabs.Tab> {
 
 4. **`captureVisibleTab` captures what's visible**, not the full page. For full-page screenshots, you need a content script.
 
-5. **`tabs.sendMessage` fails silently** if no content script is listening in the target tab. Wrap in try/catch.
+5. **`tabs.sendMessage` throws an error** if no content script is listening in the target tab ("Could not establish connection. Receiving end does not exist."). Always wrap in try/catch.
 
 6. **Tab IDs are not stable across sessions.** Never persist tab IDs — they change on browser restart.
 

@@ -7,8 +7,8 @@
 
 ## Required Fields
 - `manifest_version`: Must be `3`
-- `name`: Extension display name (max 45 chars)
-- `version`: Semver string like `"1.0.0"`
+- `name`: Extension display name (max 75 chars)
+- `version`: One to four dot-separated integers (e.g., `"1.0.0"` or `"1.2.3.4"`), not semver — each integer 0–65535
 
 ## Recommended Fields
 - `description`: Short summary (max 132 chars) shown in Chrome Web Store

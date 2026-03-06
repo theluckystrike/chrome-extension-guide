@@ -36,9 +36,9 @@ Alarms are persisted by Chrome and will fire even if the service worker was term
 
 ## Core Methods
 
-### chrome.alarms.create(name, alarmInfo)
+### chrome.alarms.create(name?, alarmInfo)
 
-Create a named alarm.
+Create a named alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
 ```ts
 // Fire once, 5 minutes from now
@@ -82,9 +82,9 @@ await chrome.alarms.create("frequent", {
 
 You must specify either `when` or `delayInMinutes` (not both). `periodInMinutes` is optional and makes the alarm repeat.
 
-### chrome.alarms.get(name)
+### chrome.alarms.get(name?)
 
-Get a specific alarm.
+Get a specific alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
 ```ts
 const alarm = await chrome.alarms.get("sync");
@@ -107,9 +107,9 @@ alarms.forEach((alarm) => {
 });
 ```
 
-### chrome.alarms.clear(name)
+### chrome.alarms.clear(name?)
 
-Delete a specific alarm.
+Delete a specific alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
 ```ts
 const wasCleared = await chrome.alarms.clear("sync");

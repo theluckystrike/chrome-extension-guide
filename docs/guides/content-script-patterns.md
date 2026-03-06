@@ -20,7 +20,7 @@ Content scripts run in web pages and bridge the gap between the page and your ex
 | Value | When | Use Case |
 |-------|------|----------|
 | `document_start` | Before DOM is built | Inject early CSS, block elements |
-| `document_idle` | After DOM ready (default) | Most common — safe DOM access |
+| `document_idle` | Between `document_end` and just after `window.onload` (default) | Most common — safe DOM access |
 | `document_end` | After DOM parsed, before subresources | DOM manipulation before images load |
 
 ## Pattern 1: Send Page Data to Background
