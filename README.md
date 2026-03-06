@@ -98,6 +98,68 @@ if (!result.granted) {
 npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging @theluckystrike/webext-permissions
 ```
 
+## API Reference
+
+- [Tabs API](docs/api-reference/tabs-api.md)
+- [Windows API](docs/api-reference/windows-api.md)
+- [Bookmarks API](docs/api-reference/bookmarks-api.md)
+- [History API](docs/api-reference/history-api.md)
+- [Downloads API](docs/api-reference/downloads-api.md)
+- [Alarms API](docs/api-reference/alarms-api.md)
+- [Notifications API](docs/api-reference/notifications-api.md)
+- [Context Menus API](docs/api-reference/context-menus-api.md)
+- [Storage API Deep Dive](docs/api-reference/storage-api-deep-dive.md)
+- [Runtime API](docs/api-reference/runtime-api.md)
+
+## Guides
+
+- [Extension Architecture](docs/guides/extension-architecture.md)
+- [Service Worker Lifecycle](docs/guides/service-worker-lifecycle.md)
+- [Background Service Worker Patterns](docs/guides/background-patterns.md)
+- [Content Script Patterns](docs/guides/content-script-patterns.md)
+- [Content Script Isolation](docs/guides/content-script-isolation.md)
+- [Tab Management Patterns](docs/guides/tab-management.md)
+- [Window Management](docs/guides/window-management.md)
+- [Bookmark API Guide](docs/guides/bookmark-api.md)
+- [Context Menus](docs/guides/context-menus.md)
+- [Download Management](docs/guides/download-management.md)
+- [Background Scheduling with Alarms](docs/guides/alarms-scheduling.md)
+- [Rich Notifications](docs/guides/notifications-guide.md)
+- [Popup Patterns](docs/guides/popup-patterns.md)
+- [Building an Options Page](docs/guides/options-page.md)
+- [Building DevTools Extensions](docs/guides/devtools-extensions.md)
+- [manifest.json Reference](docs/guides/manifest-json-reference.md)
+- [Security Best Practices](docs/guides/security-best-practices.md)
+- [Performance Optimization](docs/guides/performance.md)
+- [Memory Management](docs/guides/memory-management.md)
+- [Debugging Extensions](docs/guides/debugging-extensions.md)
+- [Testing Extensions](docs/guides/testing-extensions.md)
+- [Accessibility](docs/guides/accessibility.md)
+- [Internationalization (i18n)](docs/guides/internationalization.md)
+- [Cross-Browser Development](docs/guides/cross-browser.md)
+- [Handling Extension Updates](docs/guides/extension-updates.md)
+- [Chrome Web Store Publish API](docs/guides/chrome-web-store-api.md)
+
+## Permissions
+
+- [activeTab](docs/permissions/activeTab.md)
+- [alarms](docs/permissions/alarms.md)
+- [bookmarks](docs/permissions/bookmarks.md)
+- [contextMenus](docs/permissions/contextMenus.md)
+- [cookies](docs/permissions/cookies.md)
+- [debugger](docs/permissions/debugger.md)
+- [declarativeNetRequest](docs/permissions/declarativeNetRequest.md)
+- [downloads](docs/permissions/downloads.md)
+- [history](docs/permissions/history.md)
+- [identity](docs/permissions/identity.md)
+- [notifications](docs/permissions/notifications.md)
+- [proxy](docs/permissions/proxy.md)
+- [scripting](docs/permissions/scripting.md)
+- [storage](docs/permissions/storage.md)
+- [tabs](docs/permissions/tabs.md)
+- [tts](docs/permissions/tts.md)
+- [webRequest](docs/permissions/webRequest.md)
+
 ## Tutorials
 
 - [Storage Quickstart](docs/tutorials/storage-quickstart.md)
