@@ -1,140 +1,181 @@
 # sessions Permission
 
-## What It Grants
-Access to the `chrome.sessions` API for querying and restoring recently closed tabs/windows and accessing tabs from other devices.
+## Overview
+- Permission string: `"sessions"`
+- Grants access to `chrome.sessions` API
+- Query and restore recently closed tabs/windows, access cross-device tabs
 
-## Manifest
+## API Methods
+
+### chrome.sessions.getRecentlyClosed(filter?)
+Gets a list of recently closed tabs/windows.
+
+```ts
+interface Filter {
+  maxResults?: number; // Default: 25, Maximum: 25
+}
+
+interface Session {
+  lastModified: number; // Timestamp in milliseconds
+  tab?: Tab;           // Present if closed item was a tab
+  window?: Window;     // Present if closed item was a window
+}
+
+// Returns array of Session objects
+const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 10 });
+```
+
+### chrome.sessions.restore(sessionId?)
+Restores a closed tab or window.
+
+```ts
+// Omit sessionId to restore most recently closed item
+const restored = await chrome.sessions.restore();
+
+// Restore a specific session
+const restored = await chrome.sessions.restore(sessionId);
+
+// Returns the restored Session object
+```
+
+### chrome.sessions.getDevices(filter?)
+Gets tabs from other signed-in devices.
+
+```ts
+interface Filter {
+  maxResults?: number;
+}
+
+interface Device {
+  deviceName: string;   // Name of the other device
+  sessions: Session[]; // Sessions from that device
+}
+
+// Returns array of Device objects
+const devices = await chrome.sessions.getDevices({ maxResults: 10 });
+```
+
+## Types
+
+### Session
+```ts
+{
+  lastModified: number;    // Unix timestamp
+  tab?: chrome.tabs.Tab;   // Tab object (either tab OR window, not both)
+  window?: chrome.windows.Window; // Window object
+}
+```
+
+### Device
+```ts
+{
+  deviceName: string;     // e.g., "Mike's MacBook Pro"
+  sessions: Session[];    // Array of sessions from this device
+}
+```
+
+## Constants
+- `chrome.sessions.MAX_SESSION_RESULTS` — Maximum number of sessions returned (25)
+
+## Events
+- `chrome.sessions.onChanged` — Fires when the recently closed list changes
+```ts
+chrome.sessions.onChanged.addListener(() => {
+  console.log("Recently closed sessions changed");
+});
+```
+
+## Manifest Declaration
+
 ```json
 {
   "permissions": ["sessions"]
 }
 ```
 
-## User Warning
-None — this permission does not trigger a warning at install time. (Note: accessing tabs from other devices also requires `tabs` permission.)
+Note: Also needs `"tabs"` permission to see tab URLs/titles.
 
-## API Access
-- `chrome.sessions.getRecentlyClosed(filter?)` — get recently closed tabs/windows
-- `chrome.sessions.restore(sessionId?)` — restore a closed tab or window
-- `chrome.sessions.getDevices(filter?)` — get tabs from other synced devices
-- `chrome.sessions.MAX_SESSION_RESULTS` — maximum number of results (25)
+## Use Cases
 
-### Events
-- `chrome.sessions.onChanged` — fired when recently closed list changes
+### Session Restore UI
+Build a "recently closed" dropdown showing tabs the user can reopen:
+```ts
+async function getRecentlyClosedTabs() {
+  const sessions = await chrome.sessions.getRecentlyClosed();
+  return sessions
+    .filter(s => s.tab)
+    .map(s => ({
+      title: s.tab?.title,
+      url: s.tab?.url,
+      lastModified: s.lastModified
+    }));
+}
+```
 
-## Get Recently Closed
-```typescript
-const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 10 });
-
-for (const session of sessions) {
-  if (session.tab) {
-    console.log(`Closed tab: ${session.tab.title} — ${session.tab.url}`);
-  } else if (session.window) {
-    console.log(`Closed window with ${session.window.tabs?.length} tabs`);
+### "Undo Close Tab" Feature
+Implement keyboard shortcut to restore the most recent tab:
+```ts
+// Restore most recently closed tab
+async function undoCloseTab() {
+  const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 1 });
+  if (sessions.length > 0) {
+    await chrome.sessions.restore(sessions[0].tab?.sessionId);
   }
 }
 ```
 
-## Restore a Session
-```typescript
-// Restore most recently closed
-const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 1 });
-if (sessions.length > 0) {
-  const session = sessions[0];
-  const sessionId = session.tab?.sessionId || session.window?.sessionId;
-  if (sessionId) {
-    await chrome.sessions.restore(sessionId);
-  }
-}
-
-// Restore without specifying ID restores the most recent
-await chrome.sessions.restore();
-```
-
-## Cross-Device Tabs
-```typescript
-// Requires both "sessions" and "tabs" permissions
-const devices = await chrome.sessions.getDevices({ maxResults: 5 });
-
-for (const device of devices) {
-  console.log(`Device: ${device.deviceName}`);
-  for (const session of device.sessions) {
-    if (session.window?.tabs) {
-      for (const tab of session.window.tabs) {
-        console.log(`  Tab: ${tab.title} — ${tab.url}`);
+### Cross-Device Tab Access
+Show tabs from other signed-in devices:
+```ts
+async function getCrossDeviceTabs() {
+  const devices = await chrome.sessions.getDevices();
+  const allTabs: Array<{ device: string; title: string; url: string }> = [];
+  
+  for (const device of devices) {
+    for (const session of device.sessions) {
+      if (session.tab) {
+        allTabs.push({
+          device: device.deviceName,
+          title: session.tab.title || "Untitled",
+          url: session.tab.url || ""
+        });
       }
     }
   }
+  return allTabs;
 }
 ```
 
-## Session Restore UI Pattern
-```typescript
-import { createMessenger } from '@theluckystrike/webext-messaging';
+### Store Session Snapshots with @theluckystrike/webext-storage
+```ts
+import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
-type Messages = {
-  GET_CLOSED_TABS: { request: { max: number }; response: { tabs: Array<{ title: string; url: string; sessionId: string }> } };
-  RESTORE_TAB: { request: { sessionId: string }; response: { ok: boolean } };
-};
-const m = createMessenger<Messages>();
-
-m.onMessage('GET_CLOSED_TABS', async ({ max }) => {
-  const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: max });
-  const tabs = sessions
-    .filter(s => s.tab)
-    .map(s => ({
-      title: s.tab!.title || '',
-      url: s.tab!.url || '',
-      sessionId: s.tab!.sessionId || ''
-    }));
-  return { tabs };
+const schema = defineSchema({
+  sessionSnapshots: [] as Array<{
+    id: string;
+    tabs: Array<{ title: string; url: string }>;
+    savedAt: number;
+  }>
 });
 
-m.onMessage('RESTORE_TAB', async ({ sessionId }) => {
-  await chrome.sessions.restore(sessionId);
-  return { ok: true };
-});
-```
+const storage = createStorage({ schema });
 
-## Monitor Changes
-```typescript
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
-
-const schema = defineSchema({ closedCount: 'number' });
-const storage = createStorage(schema, 'local');
-
-chrome.sessions.onChanged.addListener(async () => {
-  const sessions = await chrome.sessions.getRecentlyClosed();
-  await storage.set('closedCount', sessions.length);
-  chrome.action.setBadgeText({ text: String(sessions.length) });
-});
-```
-
-## Session Object Structure
-```typescript
-interface Session {
-  lastModified: number;  // timestamp
-  tab?: tabs.Tab;        // if a tab was closed
-  window?: windows.Window; // if a window was closed
+async function saveSessionSnapshot() {
+  const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 25 });
+  const snapshot = {
+    id: crypto.randomUUID(),
+    tabs: sessions
+      .filter(s => s.tab)
+      .map(s => ({ title: s.tab!.title || "", url: s.tab!.url || "" })),
+    savedAt: Date.now()
+  };
+  
+  const snapshots = await storage.get("sessionSnapshots");
+  await storage.set("sessionSnapshots", [snapshot, ...snapshots].slice(0, 10));
 }
 ```
 
-## When to use
-- "Recently closed tabs" UI
-- Session restore/undo close
-- Cross-device tab sync display
-- Tab history/analytics
-
-## When NOT to Use
-- If you need full browsing history — use `history` permission
-- If you only need current tabs — use `tabs` permission
-
-## Permission Check
-```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('sessions');
-```
-
-## Cross-References
-- Related: `docs/permissions/tabs.md`, `docs/permissions/history.md`
-- Patterns: `docs/patterns/sessions-api.md`
+## Cross-references
+- [tabs](tabs.md) — Required to access tab URLs/titles
+- [patterns/sessions-api](../patterns/sessions-api.md) — Session management patterns
+- [guides/tab-management](../guides/tab-management.md) — Tab management guide
