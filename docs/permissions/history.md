@@ -4,7 +4,7 @@
 - **Permission string**: `"history"`
 - **What it grants**: Access to `chrome.history` API — browse, search, and delete browsing history
 - **Risk level**: High — full access to user's browsing history
-- **User prompt**: "Read and change your browsing history"
+- **User prompt**: "Read and change your browsing history on all signed-in devices"
 - `@theluckystrike/webext-permissions` description: `describePermission('history')`
 
 ## manifest.json Setup
@@ -43,7 +43,7 @@ chrome.history.getVisits({ url: "https://github.com" }, (visits) => {
 });
 ```
 - Returns individual visit records for a specific URL
-- `transition`: How the user navigated — `"typed"`, `"link"`, `"auto_bookmark"`, `"auto_subframe"`, `"reload"`, etc.
+- `transition`: How the user navigated — `"link"`, `"typed"`, `"auto_bookmark"`, `"auto_subframe"`, `"manual_subframe"`, `"generated"`, `"auto_toplevel"`, `"form_submit"`, `"reload"`, `"keyword"`, `"keyword_generated"`
 
 ### chrome.history.addUrl(details)
 ```javascript

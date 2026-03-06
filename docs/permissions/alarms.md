@@ -4,7 +4,7 @@
 - Grants access to the `chrome.alarms` API
 - Schedule code to run at specific times or intervals
 - MV3 replacement for `setTimeout`/`setInterval` (which don't survive service worker termination)
-- Minimum interval: 30 seconds (in production; 1 second for development)
+- Minimum interval: 30 seconds (Chrome 120+; was 1 minute before). Unpacked extensions have no minimum during development.
 
 ## Why alarms Instead of setTimeout
 In MV3, the background is a service worker that can be terminated at any time. `setTimeout` and `setInterval` are unreliable. `chrome.alarms` persists across service worker restarts.
@@ -12,7 +12,7 @@ In MV3, the background is a service worker that can be terminated at any time. `
 | Feature | setTimeout/setInterval | chrome.alarms |
 |---------|----------------------|---------------|
 | Survives SW termination | No | Yes |
-| Minimum delay | 0ms | 30s (prod) / 1s (dev) |
+| Minimum delay | 0ms | 30s (Chrome 120+; no limit for unpacked) |
 | Persistent | No | Yes |
 | Use case | Short delays | Scheduled/periodic tasks |
 
@@ -136,11 +136,12 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 5. Badge update intervals
 
 ## Gotchas
-- Minimum interval is 30 seconds in production, 1 second in development
+- Minimum interval is 30 seconds in production (Chrome 120+; was 1 minute before). Unpacked extensions have no minimum limit during development.
 - Alarms are not precise — they may fire slightly late under system load
 - `alarms.create()` with same name replaces the existing alarm
 - Must register `onAlarm` listener at top level of service worker (not inside async)
-- Alarms persist across browser restarts but NOT across extension updates
+- Alarms persist across browser restarts but are NOT guaranteed to persist across extension updates
+- Maximum 500 concurrent alarms per extension (Chrome 117+); `create()` fails beyond this limit
 
 ## Related Permissions
 - [notifications](notifications.md) — often paired to show alerts when alarms fire

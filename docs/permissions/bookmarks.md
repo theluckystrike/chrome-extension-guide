@@ -88,6 +88,9 @@ chrome.bookmarks.move("123", { parentId: "2", index: 0 });
 #### chrome.bookmarks.onRemoved
 #### chrome.bookmarks.onChanged
 #### chrome.bookmarks.onMoved
+#### chrome.bookmarks.onChildrenReordered
+#### chrome.bookmarks.onImportBegan
+#### chrome.bookmarks.onImportEnded
 ```javascript
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
   console.log(`New bookmark: ${bookmark.title} at ${bookmark.url}`);
@@ -106,6 +109,8 @@ interface BookmarkTreeNode {
   title: string;
   dateAdded?: number;   // timestamp
   dateGroupModified?: number;
+  dateLastUsed?: number; // last opened timestamp (Chrome 114+)
+  unmodifiable?: "managed"; // set for admin-configured bookmarks
   children?: BookmarkTreeNode[];  // only for folders
 }
 ```

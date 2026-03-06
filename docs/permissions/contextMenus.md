@@ -18,6 +18,9 @@
 | `frame` | Right-click in a subframe |
 | `editable` | Right-click in an input/textarea |
 | `action` | Click on the extension's toolbar icon |
+| `browser_action` | Click on the extension's browser action (MV2) |
+| `page_action` | Click on the extension's page action (MV2) |
+| `launcher` | ChromeOS app launcher context menu |
 | `all` | All of the above |
 
 ## Menu Item Types
