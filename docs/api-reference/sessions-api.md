@@ -30,7 +30,7 @@ Represents a recently closed tab or window:
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `lastModified` | `number` | Unix timestamp (ms) when the session was closed |
+| `lastModified` | `number` | Unix timestamp (seconds since epoch) when the session was closed |
 | `tab` | `Tab \| undefined` | The closed tab (if it was a tab) |
 | `window` | `Window \| undefined` | The closed window (if it was a window) |
 
@@ -100,7 +100,7 @@ await chrome.sessions.restore("session-id-123");
 **Parameters:**
 - `sessionId?` — Optional string. If omitted, restores the most recently closed session.
 
-**Returns:** `Promise<Tab | Window>` — The restored tab or window.
+**Returns:** `Promise<Session>` — The restored session containing either a tab or window.
 
 ### chrome.sessions.getDevices(filter?)
 

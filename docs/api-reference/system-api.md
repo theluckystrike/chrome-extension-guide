@@ -44,11 +44,11 @@ chrome.system.cpu.getInfo(callback)
 #### ProcessorInfo
 
 Each processor object contains:
-- `usage` (object): CPU usage statistics
-  - `user` (number): Percentage of CPU time in user mode
-  - `kernel` (number): Percentage of CPU time in kernel mode
-  - `idle` (number): Percentage of CPU time in idle mode
-  - `total` (number): Total CPU usage percentage
+- `usage` (object): Cumulative CPU usage statistics
+  - `user` (number): Cumulative time in user mode (milliseconds)
+  - `kernel` (number): Cumulative time in kernel mode (milliseconds)
+  - `idle` (number): Cumulative time in idle mode (milliseconds)
+  - `total` (number): Total cumulative time (milliseconds)
 
 ### Use Cases
 
@@ -80,7 +80,6 @@ chrome.system.memory.getInfo(callback)
 **Returns:** A [MemoryInfo](#memoryinfo) object containing:
 - `capacity` (number): Total physical memory in bytes.
 - `availableCapacity` (number): Available memory in bytes.
-- `usagePercent` (number): Percentage of memory in use (if available).
 
 ### Use Cases
 
@@ -122,7 +121,7 @@ chrome.system.storage.ejectDevice(deviceId, callback)
 
 **Parameters:**
 - `deviceId` (string): The unique ID of the storage device to eject.
-- `callback` (function): Called with the result status ("success" or "in_use").
+- `callback` (function): Called with the result status ("success", "in_use", "no_such_device", or "failure").
 
 #### getAvailableCapacity(deviceId)
 
@@ -290,11 +289,11 @@ async function adaptToSystemCapabilities() {
 
 ```javascript
 // Listen for removable storage attachment
-chrome.storage.onAdded.addListener((device) => {
+chrome.system.storage.onAttached.addListener((device) => {
   console.log(`Storage attached: ${device.name} (${device.id})`);
 });
 
-chrome.storage.onDetached.addListener((deviceId) => {
+chrome.system.storage.onDetached.addListener((deviceId) => {
   console.log(`Storage detached: ${deviceId}`);
 });
 

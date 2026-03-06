@@ -139,7 +139,7 @@ chrome.commands.onCommand.addListener((command, tab) => {
 | `Alt` | Alternate key |
 | `Shift` | Shift key |
 | `Command` | Command key (Mac only) |
-| `MacCtrl` | Mac Ctrl key (maps to Command on Mac) |
+| `MacCtrl` | Mac Control key (use when you want the Control key on Mac, not Command) |
 
 ### Supported Keys
 

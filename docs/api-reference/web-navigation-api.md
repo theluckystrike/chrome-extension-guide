@@ -114,7 +114,7 @@ Fires when the fragment identifier (hash) of a URL changes.
 ```typescript
 chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
   console.log("Hash changed:", details.url);
-  console.log("Fragment:", details.fragment);
+  console.log("Transition type:", details.transitionType);
 });
 ```
 
@@ -183,9 +183,7 @@ chrome.webNavigation.onCompleted.addListener(
 ```
 
 Filter properties include:
-- `url`: Array of URL match patterns
-- `types`: Filter by frame type (main_frame, sub_frame)
-- `tabId`: Specific tab
+- `url`: Array of UrlFilter objects (supports hostSuffix, hostEquals, pathPrefix, schemes, etc.)
 
 ## Frame Details
 

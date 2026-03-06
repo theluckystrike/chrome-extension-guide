@@ -28,7 +28,7 @@ await chrome.action.setIcon({ path: { "16": "16.png", "32": "32.png" }, tabId: 1
 ```
 ### chrome.action.getIcon(details)
 ```typescript
-const { icon } = await chrome.action.getIcon({ tabId: 123 });
+const icon = await chrome.action.getIcon({ tabId: 123 });
 ```
 
 ## Title (Tooltip)
@@ -38,7 +38,7 @@ await chrome.action.setTitle({ title: "My Extension", tabId: 123 });
 ```
 ### chrome.action.getTitle(details)
 ```typescript
-const { title } = await chrome.action.getTitle({ tabId: 123 });
+const title = await chrome.action.getTitle({ tabId: 123 });
 ```
 
 ## Badge
@@ -49,7 +49,7 @@ await chrome.action.setBadgeText({ text: "" }); // Clear
 ```
 ### chrome.action.getBadgeText(details)
 ```typescript
-const { text } = await chrome.action.getBadgeText({ tabId: 123 });
+const text = await chrome.action.getBadgeText({ tabId: 123 });
 ```
 ### chrome.action.setBadgeBackgroundColor(details)
 ```typescript
@@ -58,7 +58,7 @@ await chrome.action.setBadgeBackgroundColor({ color: "#FF0000" });
 ```
 ### chrome.action.getBadgeBackgroundColor(details)
 ```typescript
-const { color } = await chrome.action.getBadgeBackgroundColor({ tabId: 123 });
+const color = await chrome.action.getBadgeBackgroundColor({ tabId: 123 });
 ```
 ### chrome.action.setBadgeTextColor(details) — **Chrome 110+**
 ```typescript
@@ -74,7 +74,7 @@ await chrome.action.setPopup({ popup: "" }); // Disable
 ```
 ### chrome.action.getPopup(details)
 ```typescript
-const { popup } = await chrome.action.getPopup({ tabId: 123 });
+const popup = await chrome.action.getPopup({ tabId: 123 });
 ```
 ### chrome.action.openPopup() — **Chrome 127+**, user gesture required
 ```typescript
@@ -92,7 +92,7 @@ await chrome.action.disable(123);
 ```
 ### chrome.action.isEnabled(tabId?)
 ```typescript
-const { isEnabled } = await chrome.action.isEnabled(123);
+const isEnabled = await chrome.action.isEnabled(123);
 ```
 
 ## Events

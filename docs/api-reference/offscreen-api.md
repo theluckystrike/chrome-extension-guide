@@ -42,10 +42,10 @@ await chrome.offscreen.closeDocument();
 
 ### hasDocument()
 
-Checks if an offscreen document exists (Chrome 116+). Returns boolean.
+Checks if an offscreen document exists (Chrome 116+). Returns `Promise<boolean>`.
 
 ```javascript
-if (!chrome.offscreen.hasDocument()) {
+if (!(await chrome.offscreen.hasDocument())) {
   await chrome.offscreen.createDocument({...});
 }
 ```
@@ -87,7 +87,7 @@ if (!chrome.offscreen.hasDocument()) {
 
 ```javascript
 // 1. Check hasDocument()
-if (!chrome.offscreen.hasDocument()) {
+if (!(await chrome.offscreen.hasDocument())) {
   // 2. Create if needed
   await chrome.offscreen.createDocument({
     url: 'offscreen.html',
@@ -144,7 +144,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ```javascript
 async function readClipboard() {
-  if (!chrome.offscreen.hasDocument()) {
+  if (!(await chrome.offscreen.hasDocument())) {
     await chrome.offscreen.createDocument({
       url: 'offscreen.html',
       reasons: [chrome.offscreen.Reason.CLIPBOARD],
