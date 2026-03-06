@@ -1,83 +1,213 @@
 # Extension Lifecycle Events
 
-## Overview
+This guide covers handling Chrome extension lifecycle events comprehensively: installation, updates, startup, and shutdown.
 
-Chrome extensions fire events at install, update, startup, and shutdown. This guide covers patterns for handling each lifecycle event.
+## Prerequisites
+
+```json
+{
+  "manifest_version": 3,
+  "permissions": ["storage", "contextMenus", "declarativeContent"]
+}
+```
+
+---
 
 ## chrome.runtime.onInstalled
 
-Fires on first install, update, or Chrome update:
+Fires once when the extension is installed or updated. Use for one-time initialization.
 
-```ts
+```typescript
+// background/service-worker.ts
+
 chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === "install") {
-    chrome.storage.local.set({ settings: { theme: "light" }, firstRun: Date.now() });
-    chrome.tabs.create({ url: "onboarding.html" });
+  if (details.reason === 'install') {
+    // First-time setup
+    handleFirstInstall();
+  } else if (details.reason === 'update') {
+    // Handle extension update
+    handleUpdate(details.previousVersion);
   }
-  if (details.reason === "update") migrateFrom(details.previousVersion);
 });
+
+async function handleFirstInstall(): Promise<void> {
+  // Set default settings (idempotent)
+  await initializeDefaultSettings();
+  
+  // Create context menus
+  await setupContextMenus();
+  
+  // Set up declarativeContent rules
+  await setupDeclarativeRules();
+  
+  // Open onboarding tab
+  chrome.tabs.create({ url: 'onboarding.html' });
+}
+
+async function handleUpdate(previousVersion: string): Promise<void> {
+  // Run migrations
+  await runMigrations(previousVersion);
+  
+  // Show "what's new" notification
+  await showWhatsNew(previousVersion);
+}
 ```
+
+---
+
+## Initialization Best Practices
+
+### Idempotent Storage Initialization
+
+Always check before setting defaults to support users who have customized settings:
+
+```typescript
+async function initializeDefaultSettings(): Promise<void> {
+  const defaults = {
+    theme: 'system',
+    notifications: true,
+    syncEnabled: false
+  };
+  
+  const stored = await chrome.storage.local.get(Object.keys(defaults));
+  
+  // Only set defaults for keys that don't exist
+  const toSet: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(defaults)) {
+    if (stored[key] === undefined) {
+      toSet[key] = value;
+    }
+  }
+  
+  if (Object.keys(toSet).length > 0) {
+    await chrome.storage.local.set(toSet);
+  }
+}
+```
+
+### Context Menu Recreation
+
+Always recreate context menus in onInstalled to handle extension updates:
+
+```typescript
+async function setupContextMenus(): Promise<void> {
+  // Clear existing to avoid duplicates
+  await chrome.contextMenus.removeAll();
+  
+  chrome.contextMenus.create({
+    id: 'analyze-page',
+    title: 'Analyze This Page',
+    contexts: ['page']
+  });
+  
+  chrome.contextMenus.create({
+    id: 'analyze-selection',
+    title: 'Analyze Selection',
+    contexts: ['selection']
+  });
+}
+```
+
+---
 
 ## chrome.runtime.onStartup
 
-Fires when Chrome starts or extension is enabled:
+Runs when Chrome starts (profile starts). Use for restoring state:
 
-```ts
+```typescript
 chrome.runtime.onStartup.addListener(() => {
-  chrome.storage.session.set({ sessionStart: Date.now() });
+  console.log('Chrome started, initializing extension...');
+  
+  // Restore any cached state
+  initializeFromStorage();
+  
+  // Re-register listeners that may have been cleared
+  setupEventListeners();
 });
 ```
 
-**Note**: On first install, `onInstalled` fires before `onStartup`.
+---
 
 ## chrome.runtime.onSuspend
 
-Fires before service worker terminates:
+Fires just before the service worker is terminated. Save critical state:
 
-```ts
+```typescript
 chrome.runtime.onSuspend.addListener(() => {
-  chrome.storage.local.set({ lastSuspend: Date.now() });
+  // Save current state before SW stops
+  saveCurrentState();
+  
+  // Persist any pending operations
+  flushPendingChanges();
 });
 ```
 
-## Idempotent Initialization
+---
 
-Ensure setup runs safely multiple times:
+## Listener Registration: Common Mistake
 
-```ts
-async function ensureInit() {
-  const { initialized } = await chrome.storage.local.get("initialized");
-  if (!initialized) { await doSetup(); await chrome.storage.local.set({ initialized: true }); }
-}
-chrome.runtime.onStartup.addListener(ensureInit);
-chrome.runtime.onInstalled.addListener(ensureInit);
-```
+**Always register listeners at top level**, not inside callbacks:
 
-## Storage Defaults
-
-Set defaults only if not already set:
-
-```ts
-const { prefs } = await chrome.storage.local.get("prefs");
-if (!prefs) await chrome.storage.local.set({ prefs: { theme: "system" } });
-```
-
-## Common Mistakes
-
-❌ **Wrong** - Listeners inside onInstalled don't persist:
-```ts
+```typescript
+// ❌ WRONG - listeners won't receive events
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.runtime.onMessage.addListener(handler);
+  chrome.runtime.onMessage.addListener(handleMessage);
 });
+
+// ✅ CORRECT - listeners registered at top level
+chrome.runtime.onInstalled.addListener(handleInstall);
+chrome.runtime.onMessage.addListener(handleMessage);
 ```
 
-✅ **Correct** - Register at top level:
-```ts
-chrome.runtime.onMessage.addListener(handler);
+---
+
+## Complete Lifecycle Handler
+
+```typescript
+// background/service-worker.ts
+
+// Top-level listener registration
+chrome.runtime.onInstalled.addListener(handleInstall);
+chrome.runtime.onStartup.addListener(handleStartup);
+chrome.runtime.onSuspend.addListener(handleSuspend);
+
+async function handleInstall(details: chrome.runtime.InstalledDetails): Promise<void> {
+  if (details.reason === 'install') {
+    await initializeDefaults();
+    await setupContextMenus();
+    await setupDeclarativeRules();
+  } else if (details.reason === 'update') {
+    await runMigrations(details.previousVersion);
+    await showUpdateNotification(details.previousVersion);
+  }
+}
+
+async function handleStartup(): Promise<void> {
+  // Always re-register listeners on startup
+  await restoreState();
+  registerContentScripts();
+}
+
+function handleSuspend(): void {
+  // Critical: save state synchronously if needed
+  persistState();
+}
 ```
+
+---
+
+## Event Ordering Guarantees
+
+On first install, Chrome guarantees:
+1. `chrome.runtime.onInstalled` fires **before** `chrome.runtime.onStartup`
+2. Listeners registered in `onInstalled` are active for the first session
+
+This ensures initialization completes before any runtime events.
+
+---
 
 ## Cross-References
 
-- [Runtime API Reference](../api-reference/runtime-api.md)
-- [Lifecycle Events Reference](../reference/lifecycle-events.md)
-- [Update Migration Patterns](./update-migration.md)
+- [Lifecycle Events Reference](/docs/reference/lifecycle-events.md)
+- [Runtime API Reference](/docs/api-reference/runtime-api.md)
+- [Update Migration Patterns](/docs/patterns/update-migration.md)
