@@ -308,4 +308,5 @@ await exportAsJson({ users: ["alice", "bob"] }, "export/users.json");
 - [tabs](tabs.md) — get URLs from tabs to feed into downloads
 
 ## API Reference
+- [Downloads API Reference](../api-reference/downloads-api.md)
 - [Chrome downloads API docs](https://developer.chrome.com/docs/extensions/reference/api/downloads)

@@ -167,3 +167,6 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 ## Related Permissions
 - [alarms](alarms.md) — trigger notifications on schedule
 - [storage](storage.md) — store notification preferences
+
+## API Reference
+- [Notifications API Reference](../api-reference/notifications-api.md)

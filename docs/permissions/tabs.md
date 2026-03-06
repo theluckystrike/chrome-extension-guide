@@ -234,5 +234,6 @@ async function pinTabToGroup(groupName: string, tabId: number) {
 - [storage](storage.md) — persist data
 
 ## API Reference
+- [Tabs API Reference](../api-reference/tabs-api.md)
 - [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/tabs)
 - [Manifest permissions](https://developer.chrome.com/docs/extensions/develop/concepts/permissions)

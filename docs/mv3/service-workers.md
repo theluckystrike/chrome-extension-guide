@@ -438,6 +438,6 @@ The `@theluckystrike/webext-storage` and `@theluckystrike/webext-messaging` libr
 
 ## Next Steps
 
-- Review the [Messaging Guide](./messaging.md) for cross-context communication
-- See [Storage Best Practices](./storage.md) for advanced storage patterns
-- Check [Extension Lifecycle Events](./events.md) for detailed event handling
+- Review the [Runtime API](../api-reference/runtime-api.md) for cross-context communication
+- See [Storage Changes in MV3](storage-changes.md) for advanced storage patterns
+- Check [Service Worker Lifecycle](../guides/service-worker-lifecycle.md) for detailed event handling

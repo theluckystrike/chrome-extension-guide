@@ -145,3 +145,6 @@ if (!result.granted) {
 - `"history" permission not declared` — must be in permissions or optional_permissions
 - `search()` returning no results — check startTime/endTime range
 - `getVisits()` requires exact URL match — use `search()` first to find URLs
+
+## API Reference
+- [History API Reference](../api-reference/history-api.md)
