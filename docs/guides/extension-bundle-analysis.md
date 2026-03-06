@@ -11,7 +11,7 @@ Extension bundle size directly impacts several critical factors:
 - **Storage Quota**: Users have limited disk space; smaller extensions are more appealing
 - **Update Bandwidth**: Smaller bundles mean faster updates for existing users
 
-The Chrome Web Store allows extensions up to **500MB**, but well-optimized extensions should aim for **under 5MB** for optimal performance.
+The Chrome Web Store allows extension packages up to **2GB**, but well-optimized extensions should aim for **under 5MB** for optimal performance.
 
 ## Bundle Analysis Tools
 

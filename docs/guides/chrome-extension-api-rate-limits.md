@@ -29,8 +29,8 @@ The per-item limit of 8 KB is a hard constraint—larger values will fail with a
 
 The `chrome.alarms` API schedules code execution at specific times.
 
-- **Minimum interval**: 1 minute in production
-- **Minimum interval in dev**: 30 seconds (Chrome DevTools)
+- **Minimum interval**: 30 seconds (since Chrome 120; was 1 minute prior)
+- **Minimum `periodInMinutes`**: 0.5 (30 seconds)
 - **Maximum alarms**: No explicit limit, but practical constraints apply
 
 Use the minimum interval wisely. Alarms firing too frequently impact performance and battery life. For sub-minute precision, consider using `requestAnimationFrame` or Web Workers instead.
@@ -51,9 +51,9 @@ The `declarativeNetRequest` API modifies network requests declaratively.
 
 | Rule Type | Limit |
 |-----------|-------|
-| Static rules | 5,000 |
+| Static rules (guaranteed minimum) | 30,000 |
 | Dynamic rules | 30,000 |
-| Regex rules | 5,000 |
+| Regex rules | 1,000 |
 
 Static rules are defined in `ruleset` JSON files. Dynamic rules can be added at runtime via `updateDynamicRules()`. Regex rules have higher overhead—use static rules when possible.
 

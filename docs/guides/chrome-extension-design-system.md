@@ -7,8 +7,8 @@ Building consistent, professional UI for Chrome extensions requires understandin
 Chrome imposes specific constraints on popup dimensions:
 - Maximum size: 800px width × 600px height
 - Minimum size: 25px width × 25px height
-- Default size: defined in manifest `default_width` / `default_height`
-- Resizable by user via Chrome settings
+- Default size: determined automatically by content dimensions
+- Content is automatically sized to fit within constraints
 
 ## Design Language
 Match Chrome's native appearance for a cohesive experience:

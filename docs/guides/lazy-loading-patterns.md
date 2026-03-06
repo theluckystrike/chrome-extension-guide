@@ -340,15 +340,14 @@ chrome.runtime.onInstalled.addListener(async () => {
   ]);
 });
 
-// Runtime caching for API calls
+// Runtime caching for API calls (observational only in MV3; use declarativeNetRequest for blocking/redirecting)
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
     if (details.url.includes('api.example.com')) {
-      return { redirectUrl: createCacheKey(details.url) };
+      console.log('API request detected:', details.url);
     }
   },
-  { urls: ['*://api.example.com/*'] },
-  ['blocking']
+  { urls: ['*://api.example.com/*'] }
 );
 ```
 

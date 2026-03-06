@@ -26,7 +26,7 @@ To use managed storage, declare the schema in your manifest:
   "name": "Enterprise Config Extension",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["storage", "storage.managed"],
+  "permissions": ["storage"],
   "storage": {
     "managed_schema": "managed_schema.json"
   }

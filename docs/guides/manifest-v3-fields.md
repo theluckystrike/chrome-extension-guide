@@ -443,7 +443,7 @@ Managed storage is read-only from the extension's perspective.
 }
 ```
 
-Max 50 static rulesets, 10 enabled simultaneously, 300,000 total static rules. Disabled rulesets toggled at runtime with `chrome.declarativeNetRequest.updateEnabledRulesets()`.
+Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneously (since Chrome 120; was 10 before), 300,000 total static rules shared across all extensions. Disabled rulesets toggled at runtime with `chrome.declarativeNetRequest.updateEnabledRulesets()`.
 
 ---
 

@@ -177,12 +177,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 ### Symptom: Storage quota exceeded errors
 
 **Likely Causes:**
-- Storage quota exceeded (typically 5MB for local, 100KB for sync)
+- Storage quota exceeded (typically 10MB for local, 100KB for sync)
 - Storing large objects or media files
 
 **How to Diagnose:**
 1. Check chrome.storage.local.getBytesInUse()
-2. Monitor storage quota via chrome.storage.quota
+2. Compare against quota constants like `chrome.storage.local.QUOTA_BYTES`
 
 **How to Fix:**
 - Implement storage cleanup and rotation policies

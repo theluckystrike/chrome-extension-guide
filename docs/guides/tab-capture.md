@@ -90,38 +90,29 @@ chrome.tabCapture.capture(captureOptions, (stream) => {
 Here's a complete example showing how to capture a tab when the user clicks the extension action:
 
 ```javascript
-// background.js
+// background.js (service worker)
+// Note: chrome.tabCapture.capture() cannot be called from a service worker in MV3.
+// Use getMediaStreamId() in the service worker, then pass the stream ID to an
+// offscreen document or extension page that calls navigator.mediaDevices.getUserMedia().
 chrome.action.onClicked.addListener(async (tab) => {
   try {
-    // First, get the stream ID for the tab
+    // Get the stream ID for the tab (available in service workers since Chrome 116)
     const streamId = await chrome.tabCapture.getMediaStreamId({
       targetTabId: tab.id
     });
 
-    // Capture the tab with the stream ID
-    const stream = await chrome.tabCapture.capture({
-      audioConstraints: {
-        mandatory: {
-          chromeMediaSource: 'tab',
-          chromeMediaSourceId: streamId
-        }
-      },
-      videoConstraints: {
-        mandatory: {
-          chromeMediaSource: 'tab',
-          chromeMediaSourceId: streamId,
-          maxWidth: 1920,
-          maxHeight: 1080,
-          maxFrameRate: 30
-        }
-      }
+    console.log('Stream ID obtained:', streamId);
+
+    // Create an offscreen document to consume the stream
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: ['USER_MEDIA'],
+      justification: 'Recording tab content'
     });
 
-    console.log('Capture started:', stream);
-    
-    // Send stream ID to content script or popup
-    chrome.tabs.sendMessage(tab.id, { streamId: streamId });
-    
+    // Send stream ID to offscreen document for capture
+    chrome.runtime.sendMessage({ type: 'START_CAPTURE', streamId });
+
   } catch (error) {
     console.error('Capture error:', error);
   }
@@ -313,7 +304,7 @@ async function getCapturedTabs() {
 // Example: Monitor capture state
 chrome.tabCapture.onStatusChanged.addListener((status) => {
   console.log(`Tab ${status.tabId} capture status: ${status.status}`);
-  // Status can be 'started' or 'stopped'
+  // Status can be 'pending', 'active', 'stopped', or 'error'
 });
 ```
 
@@ -406,13 +397,10 @@ async function startOffscreenCapture(tabId) {
     targetTabId: tabId
   });
 
-  // Message the offscreen document
-  const clients = await chrome.clients.matchAll({ type: 'window' });
-  clients.forEach(client => {
-    client.postMessage({ 
-      type: 'START_CAPTURE', 
-      streamId: streamId 
-    });
+  // Message the offscreen document via chrome.runtime messaging
+  chrome.runtime.sendMessage({
+    type: 'START_CAPTURE',
+    streamId: streamId
   });
 }
 

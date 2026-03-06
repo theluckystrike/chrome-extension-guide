@@ -54,7 +54,7 @@ A practical, step-by-step checklist for migrating Chrome extensions from Manifes
 - [ ] Remove all DOM references (`document`, `window`)
 - [ ] Replace `XMLHttpRequest` with `fetch()`
 - [ ] Replace `setTimeout`/`setInterval` with `chrome.alarms`
-- [ ] Set minimum alarm time to 1 minute (minimum allowed)
+- [ ] Set minimum alarm time to 30 seconds (minimum allowed since Chrome 120; was 1 minute before)
 - [ ] Move all state to `chrome.storage` (no in-memory globals)
 - [ ] Register event listeners at top-level (not inside async functions)
 - [ ] Add lifecycle handling for service worker termination
@@ -121,8 +121,8 @@ A practical, step-by-step checklist for migrating Chrome extensions from Manifes
 - **Fix**: Store all state in `chrome.storage`, never in global variables
 
 ### Alarm Minimum Interval
-- **Issue**: Alarms must be at least 1 minute
-- **Fix**: Use `chrome.alarms.create(name, { periodInMinutes: 1 })` — no sub-minute alarms
+- **Issue**: Alarms must be at least 30 seconds (since Chrome 120; was 1 minute before)
+- **Fix**: Use `chrome.alarms.create(name, { periodInMinutes: 0.5 })` — minimum is 30 seconds
 
 ### XMLHttpRequest Removed
 - **Issue**: `XMLHttpRequest` not available in service worker

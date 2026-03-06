@@ -81,11 +81,14 @@ The offscreen document API lets you create background pages for specific tasks. 
 ```js
 // In service worker - create offscreen document
 async function createWorkerDocument() {
-  const contexts = await chrome.contextMenus.getAll();
-  if (!contexts.find(c => c.contexts?.includes('offscreen'))) {
-    chrome.offscreen.createDocument({
+  // Check if an offscreen document already exists
+  const existingContexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
+  if (existingContexts.length === 0) {
+    await chrome.offscreen.createDocument({
       url: 'offscreen.html',
-      reasons: ['WORKERS' | 'CLIPBOARD' | 'MESSAGING'],
+      reasons: ['WORKERS'],
       justification: 'Process large data in background'
     });
   }
