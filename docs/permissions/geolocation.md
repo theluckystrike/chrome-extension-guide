@@ -1,23 +1,44 @@
 # geolocation Permission
 
-## What It Grants
-Allows the extension to use the Geolocation API (`navigator.geolocation`) without prompting the user each time.
+## Overview
 
-## Manifest
-```json
-{
-  "permissions": ["geolocation"]
-}
+- **Permission string**: `"geolocation"` (optional permission in MV3)
+- Enables `navigator.geolocation` in extension pages
+- MV3 challenge: service workers cannot use Geolocation API directly
+
+## Web API (not chrome.* API)
+
+```javascript
+navigator.geolocation.getCurrentPosition(success, error?, options?)
+navigator.geolocation.watchPosition(success, error?, options?)
+navigator.geolocation.clearWatch(watchId)
 ```
 
-## User Warning
-"Detect your physical location" — this permission triggers a warning.
+## Position Options
 
-## How It Works
-- In MV2: background page could use `navigator.geolocation` directly
-- In MV3: service workers do NOT have `navigator.geolocation` — must use offscreen document or content script
+| Option | Type | Description |
+|--------|------|-------------|
+| `enableHighAccuracy` | boolean | Use GPS if available (slower, more battery) |
+| `timeout` | number | Milliseconds to wait for position |
+| `maximumAge` | number | Accept cached position if younger than this (ms) |
 
-## MV3 Pattern (Offscreen Document)
+## Position Object
+
+- `coords.latitude`, `coords.longitude`, `coords.accuracy`
+- `coords.altitude`, `coords.altitudeAccuracy` (may be null)
+- `coords.heading`, `coords.speed` (may be null)
+- `timestamp`
+
+## MV3: Service Worker Workaround
+
+Service workers do not have access to `navigator.geolocation`. Use an offscreen document with `GEOLOCATION` reason:
+
+1. SW creates offscreen doc with reason `GEOLOCATION`
+2. Send message to offscreen doc requesting position
+3. Offscreen doc calls `navigator.geolocation`
+4. Offscreen doc sends result back to SW
+5. SW closes offscreen doc (optional)
+
 ```typescript
 // background.ts (service worker)
 async function getLocation(): Promise<GeolocationPosition> {
@@ -42,96 +63,89 @@ async function getLocation(): Promise<GeolocationPosition> {
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === 'GET_LOCATION') {
     navigator.geolocation.getCurrentPosition(
-      (pos) => sendResponse({
-        position: { lat: pos.coords.latitude, lng: pos.coords.longitude, accuracy: pos.coords.accuracy }
-      }),
+      (pos) => sendResponse({ position: pos }),
       (err) => sendResponse({ error: err.message }),
       { enableHighAccuracy: true, timeout: 10000 }
     );
-    return true; // async response
+    return true;
   }
 });
 ```
 
-## Content Script Pattern
-```typescript
-// Content scripts can use navigator.geolocation directly
-// (inherits the extension's geolocation permission)
-navigator.geolocation.getCurrentPosition(
-  (pos) => {
-    chrome.runtime.sendMessage({
-      type: 'LOCATION_UPDATE',
-      lat: pos.coords.latitude,
-      lng: pos.coords.longitude
-    });
-  },
-  (err) => console.error('Geolocation error:', err)
-);
+## Manifest Declaration
+
+```json
+{
+  "permissions": ["offscreen"],
+  "optional_permissions": ["geolocation"]
+}
 ```
 
-## Position Options
-```typescript
-const options: PositionOptions = {
-  enableHighAccuracy: true,  // GPS if available (slower, more battery)
-  timeout: 10000,            // Max wait time in ms
-  maximumAge: 300000         // Accept cached position up to 5 min old
-};
-```
+Or declare geolocation as required:
 
-## Watch Position
-```typescript
-// In popup or side panel (not service worker!)
-const watchId = navigator.geolocation.watchPosition(
-  (pos) => updateMap(pos.coords.latitude, pos.coords.longitude),
-  (err) => showError(err.message),
-  { enableHighAccuracy: true }
-);
-
-// Stop watching
-navigator.geolocation.clearWatch(watchId);
-```
-
-## Storage Integration
-```typescript
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
-
-const schema = defineSchema({
-  lastLat: 'number',
-  lastLng: 'number',
-  lastLocationTime: 'number'
-});
-const storage = createStorage(schema, 'local');
-
-async function saveLocation(lat: number, lng: number) {
-  await storage.set('lastLat', lat);
-  await storage.set('lastLng', lng);
-  await storage.set('lastLocationTime', Date.now());
+```json
+{
+  "permissions": ["geolocation", "offscreen"]
 }
 ```
 
 ## Use Cases
-- Weather extensions
-- Local business/restaurant finders
-- Location-based reminders
-- Travel/map extensions
-- Geo-tagging tools
 
-## When NOT to Use
-- If approximate location is fine — use IP-based geolocation (no permission needed)
-- If you only need it once — consider prompting via content script
-- High battery impact with `enableHighAccuracy` + `watchPosition`
+- Local weather widget
+- Nearby store/restaurant finder
+- Location-based notifications
+- Travel distance calculator
+- Geo-fencing alerts
 
-## Privacy Considerations
-- Location data is sensitive — store minimally, never transmit without consent
-- Provide clear UI showing when location is being accessed
-- Allow users to disable location features
+## Code Examples
 
-## Permission Check
+### Get position from popup (direct)
+
 ```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('geolocation');
+navigator.geolocation.getCurrentPosition(
+  (pos) => console.log(pos.coords.latitude, pos.coords.longitude),
+  (err) => console.error(err.message),
+  { enableHighAccuracy: true, timeout: 10000 }
+);
+```
+
+### Watch position with error handling
+
+```typescript
+const watchId = navigator.geolocation.watchPosition(
+  (pos) => console.log('Updated:', pos.coords.latitude, pos.coords.longitude),
+  (err) => {
+    if (err.code === err.PERMISSION_DENIED) console.error('Denied');
+    else if (err.code === err.POSITION_UNAVAILABLE) console.error('Unavailable');
+    else if (err.code === err.TIMEOUT) console.error('Timeout');
+  },
+  { enableHighAccuracy: true, maximumAge: 60000 }
+);
+navigator.geolocation.clearWatch(watchId);
+```
+
+### Get position from service worker via offscreen
+
+```typescript
+// background.ts
+async function getLocation() {
+  if (!(await chrome.offscreen.hasDocument())) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: [chrome.offscreen.Reason.GEOLOCATION],
+      justification: 'Geolocation needs document context'
+    });
+  }
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ type: 'GET_LOCATION' }, (resp) => {
+      resp.error ? reject(new Error(resp.error)) : resolve(resp.position);
+    });
+  });
+}
 ```
 
 ## Cross-References
-- Related: `docs/permissions/offscreen.md`
-- Guide: `docs/mv3/offscreen-documents.md`
+
+- [permissions/offscreen.md](./offscreen.md)
+- [mv3/offscreen-documents.md](../mv3/offscreen-documents.md)
+- [patterns/offscreen-documents.md](../patterns/offscreen-documents.md)
