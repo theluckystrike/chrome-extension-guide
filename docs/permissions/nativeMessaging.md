@@ -1,21 +1,36 @@
 # nativeMessaging Permission
 
-## What It Grants
-Access to `chrome.runtime.connectNative()` and `chrome.runtime.sendNativeMessage()` for communicating with native applications installed on the user's machine.
+## Overview
+- **Permission string:** `"nativeMessaging"`
+- Enables communication between extension and native applications
+- Two modes: **connection-based** (persistent) and **message-based** (one-shot)
 
-## Manifest
+## Manifest Declaration
 ```json
-{
-  "permissions": ["nativeMessaging"]
-}
+{ "permissions": ["nativeMessaging"] }
 ```
 
-## User Warning
-"Communicate with cooperating native applications"
+**User warning:** "Communicate with cooperating native applications"
 
-## API Access
+## API Methods
 
-### One-Time Messages
+### Persistent Connection
+`chrome.runtime.connectNative(hostName)` returns Port for persistent connection.
+
+**Port Methods:** `Port.postMessage(msg)`, `Port.onMessage`, `Port.onDisconnect`
+
+```typescript
+const port = chrome.runtime.connectNative('com.example.myhost');
+port.onMessage.addListener((msg) => console.log('From native:', msg));
+port.onDisconnect.addListener(() => {
+  if (chrome.runtime.lastError) console.error('Disconnect:', chrome.runtime.lastError.message);
+});
+port.postMessage({ action: 'startMonitoring' });
+```
+
+### One-Shot Messages
+`chrome.runtime.sendNativeMessage(hostName, message)` — single request/response.
+
 ```typescript
 const response = await chrome.runtime.sendNativeMessage('com.example.myhost', {
   action: 'getVersion'
@@ -23,49 +38,30 @@ const response = await chrome.runtime.sendNativeMessage('com.example.myhost', {
 console.log(response.version);
 ```
 
-### Long-Lived Connections
-```typescript
-const port = chrome.runtime.connectNative('com.example.myhost');
+## Native Messaging Host Setup
 
-port.onMessage.addListener((msg) => {
-  console.log('From native:', msg);
-});
-
-port.onDisconnect.addListener(() => {
-  if (chrome.runtime.lastError) {
-    console.error('Disconnect:', chrome.runtime.lastError.message);
-  }
-});
-
-port.postMessage({ action: 'startMonitoring' });
-```
-
-## Native Host Manifest
-The native app must register a JSON manifest:
+### Host Manifest (JSON)
 ```json
 {
   "name": "com.example.myhost",
-  "description": "My Native Host",
-  "path": "/usr/local/bin/my-native-host",
+  "description": "My native messaging host",
+  "path": "/path/to/native/app",
   "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://abcdefghijklmnopqrstuvwxyz123456/"
-  ]
+  "allowed_origins": ["chrome-extension://abcdef.../"]
 }
 ```
 
-### Host Manifest Location
+### Registration by OS
 | OS | Path |
 |---|---|
 | macOS | `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.example.myhost.json` |
 | Linux | `~/.config/google-chrome/NativeMessagingHosts/com.example.myhost.json` |
-| Windows | Registry: `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.example.myhost` → path to JSON |
+| Windows | Registry: `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.example.myhost` |
 
 ## Message Format
-- Messages serialized as JSON
-- 32-bit (4-byte) length prefix in native byte order
-- Max size: 1 MB (native → extension), 4 GB (extension → native)
-- Native host reads stdin, writes stdout
+- 32-bit message length prefix (native byte order) + UTF-8 JSON payload
+- Maximum: 1 MB incoming, 4 GB outgoing from host
+- Host reads from stdin, writes to stdout
 
 ## Native Host Example (Python)
 ```python
@@ -73,8 +69,7 @@ import struct, sys, json
 
 def read_message():
     raw_length = sys.stdin.buffer.read(4)
-    if not raw_length:
-        return None
+    if not raw_length: return None
     length = struct.unpack('=I', raw_length)[0]
     return json.loads(sys.stdin.buffer.read(length))
 
@@ -84,46 +79,76 @@ def send_message(msg):
     sys.stdout.buffer.write(encoded)
     sys.stdout.buffer.flush()
 
-while True:
-    msg = read_message()
-    if msg is None:
-        break
+while (msg := read_message()):
     if msg.get('action') == 'getVersion':
         send_message({'version': '1.0.0'})
 ```
 
 ## Use Cases
-- File system access (read/write local files)
-- Hardware integration (USB, serial, Bluetooth)
-- Password manager integration
-- Native app launcher
-- System-level operations
+- File system access beyond browser sandbox
+- Native app integration (password managers, VPNs)
+- Hardware access (USB, Bluetooth via native helper)
+- System services and legacy app bridges
 
-## Messaging Integration
+## Security Considerations
+- `allowed_origins` must list specific extension IDs only
+- Host app path must be absolute
+- Validate all messages in both directions
+- Host process runs with user privileges
+
+## Code Examples
+
+### One-Shot Message Pattern
 ```typescript
-import { createMessenger } from '@theluckystrike/webext-messaging';
+async function sendNativeMessage(hostName: string, message: object) {
+  try {
+    return await chrome.runtime.sendNativeMessage(hostName, message);
+  } catch (error) {
+    console.error('Native message failed:', error);
+    throw error;
+  }
+}
+const version = await sendNativeMessage('com.example.myhost', { action: 'getVersion' });
+```
 
-type Messages = {
-  NATIVE_CMD: { request: { command: string }; response: { result: string } };
-};
-const m = createMessenger<Messages>();
+### Persistent Connection with Reconnect
+```typescript
+class NativeHostConnection {
+  private port: chrome.runtime.Port | null = null;
+  private attempts = 0;
+  constructor(private hostName: string) {}
 
-m.onMessage('NATIVE_CMD', async ({ command }) => {
-  const res = await chrome.runtime.sendNativeMessage('com.example.myhost', { command });
-  return { result: res.output };
+  connect(): void {
+    this.port = chrome.runtime.connectNative(this.hostName);
+    this.port.onMessage.addListener((msg) => console.log('Received:', msg));
+    this.port.onDisconnect.addListener(() => {
+      this.port = null;
+      if (this.attempts++ < 3) setTimeout(() => this.connect(), 1000 * this.attempts);
+    });
+  }
+
+  send(message: object): void { this.port?.postMessage(message); }
+}
+```
+
+### Error Handling
+```typescript
+chrome.runtime.connectNative('com.example.myhost', (port) => {
+  if (chrome.runtime.lastError) {
+    const err = chrome.runtime.lastError.message;
+    if (err.includes('not found')) console.error('Host not installed');
+    else if (err.includes('exited')) console.error('Host crashed');
+    else if (err.includes('forbidden')) console.error('Check allowed_origins');
+    return;
+  }
+  port.onMessage.addListener(handleMessage);
 });
 ```
 
-## Permission Check
-```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('nativeMessaging');
-```
-
 ## Common Errors
-- "Native host has exited" — host crashed or path wrong
-- "Specified native messaging host not found" — manifest not in correct location
+- "Native host has exited" — host crashed or wrong path
+- "Specified native messaging host not found" — manifest location incorrect
 - "Access to the specified native messaging host is forbidden" — extension ID not in `allowed_origins`
 
 ## Cross-References
-- Related: `docs/guides/extension-architecture.md`
+- Related: `docs/reference/message-passing-patterns.md`
