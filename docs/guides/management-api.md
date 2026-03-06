@@ -108,9 +108,6 @@ The `ExtensionInfo` object returned by the API contains comprehensive informatio
   updateUrl: "https://example.com/update",  // Update URL
   offlineEnabled: false,                    // Works offline
   optionsUrl: "options.html",               // Options page URL
-  privacy: { public: true },                // Privacy settings
-  dependencies: [],                         // Extension dependencies
-  location: "unpacked"                      // "unpacked", "user", "policy", "third_party"
 }
 ```
 

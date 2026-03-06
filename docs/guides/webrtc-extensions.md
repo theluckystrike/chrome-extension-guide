@@ -32,13 +32,17 @@ async function captureTab(tabId: number): Promise<MediaStream | null> {
 ```
 
 ### chrome.desktopCapture
-Provides control with a native picker UI:
+Shows a native picker UI for the user to select a source:
 ```ts
-async function getSources() {
-  return chrome.desktopCapture.getSources({
-    types: ["window", "screen", "tab"],
-    thumbnailSize: { width: 320, height: 180 }
-  });
+function chooseSource(callback: (streamId: string) => void) {
+  // chooseDesktopMedia uses a callback, not a promise.
+  // It returns a request ID that can be passed to cancelChooseDesktopMedia.
+  chrome.desktopCapture.chooseDesktopMedia(
+    ["window", "screen", "tab"],
+    (streamId) => {
+      if (streamId) callback(streamId);
+    }
+  );
 }
 ```
 

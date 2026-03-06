@@ -27,7 +27,7 @@ Add the `"idle"` permission to your manifest:
 }
 ```
 
-The `"idle"` permission is a "grant on demand" permission in Manifest V3—users won't be prompted during installation.
+The `"idle"` permission must be declared in the manifest. It does not trigger a permission warning during installation.
 
 ## Idle States
 

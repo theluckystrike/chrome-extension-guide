@@ -113,9 +113,9 @@ function getImageData(size) {
 }
 ```
 
-### RequestContentScript (MV2 only)
+### RequestContentScript (Experimental -- not available on stable builds)
 ```javascript
-// Inject content script when conditions match (MV2 only)
+// Inject content script when conditions match (experimental, not on stable Chrome)
 new chrome.declarativeContent.RequestContentScript({
   js: ['inject.js'],
   css: ['styles.css']

@@ -26,7 +26,7 @@ Chrome supports three rule sources, each with different lifetimes and quota limi
 
 | Source | Defined In | Persists | Max Rules | Use Case |
 |--------|-----------|----------|-----------|----------|
-| **Static** | `rule_resources` in manifest | Always (bundled) | 330,000 total; 30,000 enabled | Stable block/allow lists |
+| **Static** | `rule_resources` in manifest | Always (bundled) | 30,000 guaranteed per extension (shared global pool) | Stable block/allow lists |
 | **Dynamic** | `updateDynamicRules()` | Across sessions | 30,000 | User-configurable rules |
 | **Session** | `updateSessionRules()` | Current session only | 5,000 | Temporary rules, debugging |
 

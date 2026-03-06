@@ -2,7 +2,7 @@
 
 ## Overview
 - `chrome.printing` API provides programmatic control over print jobs in Chrome extensions
-- Available in Chrome 101+ (Manifest V3)
+- Available in Chrome 81+ (ChromeOS only)
 - Requires enterprise policy or user gesture to function properly
 - Cross-ref: `docs/permissions/printing.md`
 

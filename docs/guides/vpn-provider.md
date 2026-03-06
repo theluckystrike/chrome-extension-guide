@@ -93,27 +93,28 @@ The VPN platform sends messages to your extension about connection events, confi
 ### Setting Up the Message Handler
 
 ```javascript
-chrome.vpnProvider.onPlatformMessage.addListener((message, sessionId) => {
-  console.log('Platform message received:', message.state);
-  
-  switch (message.state) {
+// onPlatformMessage callback receives: id (string), message (PlatformMessage enum), error (string)
+chrome.vpnProvider.onPlatformMessage.addListener((id, message, error) => {
+  console.log('Platform message for config:', id, 'message:', message);
+
+  switch (message) {
     case 'connected':
-      handleConnected(message, sessionId);
+      handleConnected(id);
       break;
     case 'disconnected':
-      handleDisconnected(message, sessionId);
+      handleDisconnected(id);
       break;
     case 'error':
-      handleError(message, sessionId);
+      handleError(id, error);
       break;
     case 'linkDown':
-      handleLinkDown(message, sessionId);
+      handleLinkDown(id);
       break;
     case 'linkUp':
-      handleLinkUp(message, sessionId);
+      handleLinkUp(id);
       break;
     default:
-      console.log('Unknown platform message state:', message.state);
+      console.log('Unknown platform message:', message);
   }
 });
 
