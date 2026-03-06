@@ -149,3 +149,4 @@ const granted = await checkPermission('ttsEngine');
 ## Cross-References
 - Related: `docs/permissions/tts.md`
 - Guide: `docs/guides/accessibility.md`
+
