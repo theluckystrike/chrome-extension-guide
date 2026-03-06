@@ -1,251 +1,245 @@
-# Platform Detection Patterns
+# Platform Detection
 
-Detecting the platform and system environment is essential for building extensions that adapt to different operating systems, browsers, and user preferences. This guide covers patterns for platform detection using Chrome APIs and web standards.
+## Overview
+
+Chrome extensions run across Windows, macOS, Linux, and ChromeOS — each with different keyboard shortcuts, file paths, and user expectations. Detecting the platform and system context lets you adapt behavior, UI, and shortcuts for each environment.
 
 ---
 
-## Detecting Operating System and Architecture
+## Platform Info via chrome.runtime.getPlatformInfo()
 
-### Using chrome.runtime.getPlatformInfo()
+The `chrome.runtime.getPlatformInfo()` API returns the OS, architecture, and platform type:
 
-The `chrome.runtime.getPlatformInfo()` API returns the OS, architecture, and other platform details:
-
-```javascript
-async function getPlatformInfo() {
-  const platformInfo = await chrome.runtime.getPlatformInfo();
-  return {
-    os: platformInfo.os,      // 'mac', 'win', 'linux', 'cros', 'android', 'ios'
-    arch: platformInfo.arch,  // 'arm', 'x86-32', 'x86-64'
-    nacl_arch: platformInfo.nacl_arch  // 'arm', 'x86-32', 'x86-64'
-  };
-}
-```
-
-This API is available in all extension contexts and returns immediately without Promises in older Chrome versions.
-
-### Platform Utility Example
-
-```javascript
+```ts
 // utils/platform.ts
-export const Platform = {
-  async getInfo() {
-    return await chrome.runtime.getPlatformInfo();
-  },
+export interface PlatformInfo {
+  os: "mac" | "win" | "android" | "cros" | "linux" | "openbsd";
+  arch: "arm" | "x86-32" | "x86-64" | "arm64";
+  nacl_arch: "arm" | "x86-32" | "x86-64";
+}
 
-  isMac() {
-    return chrome.runtime.getPlatformInfo().then(info => info.os === 'mac');
-  },
+export async function getPlatformInfo(): Promise<PlatformInfo> {
+  return chrome.runtime.getPlatformInfo();
+}
 
-  isWindows() {
-    return chrome.runtime.getPlatformInfo().then(info => info.os === 'win');
-  },
-
-  isLinux() {
-    return chrome.runtime.getPlatformInfo().then(info => info.os === 'linux');
-  },
-
-  isMobile() {
-    return chrome.runtime.getPlatformInfo().then(
-      info => info.os === 'android' || info.os === 'ios'
-    );
-  }
-};
+// Usage
+const platform = await getPlatformInfo();
+console.log(`Running on ${platform.os}/${platform.arch}`);
 ```
+
+This runs in any extension context — popup, background, options page.
 
 ---
 
 ## Chrome Version Detection
 
-### From Navigator User Agent
+Detect the Chrome version to gate features or warn users:
 
-```javascript
-function getChromeVersion() {
-  const match = navigator.userAgent.match(/Chrome\/(\d+)\.(\d+)\.(\d+)\.(\d+)/);
-  if (match) {
-    return {
-      major: parseInt(match[1], 10),
-      minor: parseInt(match[2], 10),
-      build: parseInt(match[3], 10),
-      patch: parseInt(match[4], 10)
-    };
-  }
-  return null;
+```ts
+// utils/chrome-version.ts
+export function getChromeVersion(): number {
+  const match = navigator.userAgent.match(/Chrome\/(\d+)/);
+  return match ? parseInt(match[1], 10) : 0;
 }
-```
 
-### From chrome.runtime.getManifest()
-
-```javascript
-function getExtensionVersion() {
-  const manifest = chrome.runtime.getManifest();
-  return manifest.version;
+export function isChromeVersionAtLeast(minVersion: number): boolean {
+  return getChromeVersion() >= minVersion;
 }
-```
 
-Version detection is useful for enabling features conditionally based on Chrome version support.
-
----
-
-## Development vs Production Detection
-
-```javascript
-const isDevelopment = () => {
-  return !chrome.runtime.id?.startsWith('abcdef'); // Typical pattern
-};
-
-// Or check for unpacked extension
-async function isUnpacked() {
-  const info = await chrome.management.getSelf();
-  return info.installType === 'development';
+// Usage: Gate MV3-only features
+if (isChromeVersionAtLeast(110)) {
+  // Use side panel API (MV3.9+)
 }
 ```
 
 ---
 
-## Display Information
+## Environment Detection: Dev vs Production
 
-### Using chrome.system.display
+Distinguish between development and production contexts:
 
-```javascript
-async function getDisplayInfo() {
+```ts
+// utils/environment.ts
+export function isDevelopment(): boolean {
+  return (
+    chrome.runtime.id?.includes("dev") ||
+    !chrome.runtime.id?.match(/^[a-hjkmnp-z]{32}$/) ||
+    location.hostname === "localhost"
+  );
+}
+
+export async function getExtensionId(): Promise<string> {
+  return chrome.runtime.id;
+}
+```
+
+Development extensions have temporary IDs; production extensions have 32-character IDs.
+
+---
+
+## Display and Window Info
+
+Get display dimensions for positioning popups or side panels:
+
+```ts
+// utils/display.ts
+export async function getPrimaryDisplay(): Promise<chrome.system.display.DisplayInfo> {
   const displays = await chrome.system.display.getInfo();
-  return displays.map(display => ({
-    id: display.id,
-    name: display.name,
-    bounds: display.bounds,
-    isPrimary: display.isPrimary,
-    workArea: display.workArea,
-    scaleFactor: display.scaleFactor,
-    rotation: display.rotation
-  }));
+  return displays.find((d) => d.isPrimary) ?? displays[0];
+}
+
+export async function getWorkArea(): Promise<{ width: number; height: number }> {
+  const display = await getPrimaryDisplay();
+  return {
+    width: display.workArea.width,
+    height: display.workArea.height,
+  };
 }
 ```
-
-Requires the `system.display` permission in manifest.
 
 ---
 
 ## Color Scheme and Reduced Motion
 
-### Detecting User Preferences
+Respect user accessibility preferences:
 
-```javascript
-// Listen for color scheme changes
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  const isDark = e.matches;
-  console.log('Color scheme changed to:', isDark ? 'dark' : 'light');
-});
+```ts
+// utils/preferences.ts
+export function getColorScheme(): "light" | "dark" {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return "dark";
+  }
+  return "light";
+}
 
-// Check reduced motion preference
-const prefersReducedMotion = () => {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
+export function getReducedMotion(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// Apply theme
+document.documentElement.setAttribute("data-theme", getColorScheme());
 ```
-
-These preferences enable your extension to respect system-level accessibility settings.
 
 ---
 
-## Language and Network Detection
+## Language and Locale
 
-### Navigator Language
+Detect user language for i18n:
 
-```javascript
-function getLanguageInfo() {
+```ts
+// utils/locale.ts
+export function getLanguage(): string {
+  return navigator.language || "en";
+}
+
+export function getLanguages(): string[] {
+  return navigator.languages || [navigator.language || "en"];
+}
+
+// Usage: Load the right locale file
+const lang = getLanguage().split("-")[0]; // "en-US" → "en"
+```
+
+---
+
+## Network Type Detection
+
+```ts
+// utils/network.ts
+export function getNetworkType(): "online" | "offline" | "slow-2g" | "2g" | "3g" | "4g" {
+  const connection = (navigator as any).connection;
+  if (!navigator.onLine) return "offline";
+  if (connection) {
+    return connection.effectiveType || "online";
+  }
+  return "online";
+}
+```
+
+---
+
+## Platform Utility: Unified Helper
+
+Combine all detection into one utility:
+
+```ts
+// utils/system.ts
+export interface SystemContext {
+  platform: PlatformInfo;
+  version: number;
+  isDev: boolean;
+  colorScheme: "light" | "dark";
+  reducedMotion: boolean;
+  language: string;
+  network: "online" | "offline";
+}
+
+export async function getSystemContext(): Promise<SystemContext> {
   return {
-    language: navigator.language,       // 'en-US'
-    languages: navigator.languages,       // ['en-US', 'en']
-    isRTL: navigator.language.startsWith('ar') ||
-           navigator.language.startsWith('he') ||
-           navigator.language.startsWith('fa')
+    platform: await getPlatformInfo(),
+    version: getChromeVersion(),
+    isDev: isDevelopment(),
+    colorScheme: getColorScheme(),
+    reducedMotion: getReducedMotion(),
+    language: getLanguage(),
+    network: getNetworkType(),
   };
 }
 ```
 
-### Network Information API
+---
 
-```javascript
-function getNetworkInfo() {
-  const connection = navigator.connection ||
-                     navigator.mozConnection ||
-                     navigator.webkitConnection;
-  
-  if (connection) {
-    return {
-      effectiveType: connection.effectiveType,  // '4g', '3g', '2g', 'slow-2g'
-      downlink: connection.downlink,
-      rtt: connection.rtt,
-      saveData: connection.saveData
-    };
-  }
-  return null;
+## Pattern: Adaptive Shortcuts
+
+Different platforms use different modifier keys:
+
+```ts
+// utils/shortcuts.ts
+export function getModifierKey(): string {
+  const platform = getPlatformInfo(); // sync in content scripts
+  return platform.os === "mac" ? "Command" : "Ctrl";
+}
+
+export function formatShortcut(key: string): string {
+  const mod = getModifierKey();
+  return `${mod}+${key.toUpperCase()}`;
 }
 ```
+
+In the extension popup, show "Press Ctrl+S on Windows, Command+S on macOS".
 
 ---
 
-## Platform-Specific Behavior
+## Pattern: Platform-Aware UI
 
-### Adaptive Shortcuts Based on Platform
+Adjust UI based on platform conventions:
 
-```javascript
-async function setPlatformShortcuts() {
-  const platform = await chrome.runtime.getPlatformInfo();
-  
-  if (platform.os === 'mac') {
-    // Mac users expect Cmd-based shortcuts
-    await chrome.commands.update({
-      name: 'open-panel',
-      shortcut: 'Command+Shift+P'
-    });
-  } else {
-    // Windows/Linux use Ctrl-based shortcuts
-    await chrome.commands.update({
-      name: 'open-panel',
-      shortcut: 'Ctrl+Shift+P'
-    });
-  }
-}
-```
+```ts
+// ui/platform-aware.ts
+export function applyPlatformStyles(): void {
+  const platformInfo = getPlatformInfo(); // Call from sync context
+  const isMac = platformInfo.os === "mac";
 
-### Platform-Aware UI
+  document.body.classList.toggle("is-mac", isMac);
+  document.body.classList.toggle("is-windows", !isMac);
 
-```javascript
-function getPlatformStylesheet() {
-  chrome.runtime.getPlatformInfo().then(platform => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    
-    if (platform.os === 'mac') {
-      link.href = 'styles/mac.css';
-    } else if (platform.os === 'win') {
-      link.href = 'styles/windows.css';
-    } else {
-      link.href = 'styles/default.css';
-    }
-    
-    document.head.appendChild(link);
+  // macOS uses Cmd instead of Ctrl in tooltips
+  const tooltips = document.querySelectorAll("[data-ctrl-label]");
+  tooltips.forEach((el) => {
+    const label = el.getAttribute("data-ctrl-label");
+    el.setAttribute("title", label?.replace("Ctrl", isMac ? "Cmd" : "Ctrl") || "");
   });
 }
 ```
 
 ---
 
-## Summary
-
-| Detection Target | API/Method | Permission Required |
-|-----------------|------------|---------------------|
-| OS & Architecture | `chrome.runtime.getPlatformInfo()` | None |
-| Chrome Version | `navigator.userAgent` | None |
-| Display Info | `chrome.system.display.getInfo()` | `system.display` |
-| Color Scheme | `matchMedia('(prefers-color-scheme: dark)')` | None |
-| Reduced Motion | `matchMedia('(prefers-reduced-motion: reduce)')` | None |
-| Network | `navigator.connection` | None |
-
----
-
 ## See Also
 
-- [chrome.system API Reference](../api-reference/system-api.md)
-- [Cross-Browser Compatibility](./cross-browser-compatibility.md)
-- [Accessibility in Chrome Extensions](./accessibility.md)
+- [System API Reference][api-reference_system-api] — Full chrome.system.* APIs
+- [Cross-Browser Compatibility][patterns_cross-browser] — Feature detection and polyfills
+- [Accessibility Guide][guides_accessibility] — Color scheme, reduced motion, keyboard nav
+
+[api_reference_system-api]: ../api-reference/system-api.md
+[patterns_cross-browser]: ./cross-browser-compatibility.md
+[guides_accessibility]: ../guides/accessibility.md
