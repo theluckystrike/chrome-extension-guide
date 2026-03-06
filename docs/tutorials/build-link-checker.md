@@ -47,13 +47,31 @@ const CONCURRENT_LIMIT = 5;
 
 async function checkLink(url) {
   if (cache.has(url)) return cache.get(url);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  
   try {
-    const response = await fetch(url, { method: 'HEAD' });
-    const result = { status: response.status, ok: response.ok };
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      signal: controller.signal,
+      redirect: 'follow'
+    });
+    clearTimeout(timeoutId);
+    const result = { 
+      status: response.status, 
+      ok: response.ok,
+      redirect: response.redirected
+    };
     cache.set(url, result);
     return result;
   } catch (error) {
-    cache.set(url, { status: 0, ok: false, error: error.message });
+    clearTimeout(timeoutId);
+    const isCors = error.message.includes('Failed to fetch');
+    cache.set(url, { 
+      status: 0, 
+      ok: false, 
+      error: error.name === 'AbortError' ? 'timeout' : (isCors ? 'cors-blocked' : error.message) 
+    });
     return cache.get(url);
   }
 }
@@ -97,8 +115,34 @@ document.getElementById('copyReport').addEventListener('click', () => {
   const broken = results.filter(r => !r.ok);
   navigator.clipboard.writeText(broken.map(l => `${l.status}: ${l.href}`).join('\n'));
 });
+
+// Badge showing broken link count
+chrome.runtime.sendMessage({
+  action: 'updateBadge',
+  count: results.filter(r => !r.ok).length
+});
+```
+
+## Step 5: Badge Action
+
+Display broken link count in extension badge:
+
+```javascript
+// background.js
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === 'updateBadge') {
+    chrome.action.setBadgeText({ text: message.count > 0 ? String(message.count) : '' });
+    chrome.action.setBadgeBackgroundColor({ color: message.count > 0 ? '#ef4444' : '#22c55e' });
+  }
+});
 ```
 
 ## Summary
 
 Extension demonstrates link extraction, HTTP checking with rate limiting, visual highlighting, and report generation.
+
+## See Also
+
+- [Content Script Patterns](../guides/content-script-patterns.md)
+- [Rate Limiting Pattern](../patterns/rate-limiting.md)
+- [Badge Action UI](../patterns/badge-action-ui.md)
