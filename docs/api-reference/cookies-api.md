@@ -1,0 +1,144 @@
+# chrome.cookies API Reference
+
+The `chrome.cookies` API provides full CRUD operations for querying and modifying browser cookies. Requires `"cookies"` permission plus host permissions.
+
+## Manifest Declaration
+
+```json
+{
+  "permissions": ["cookies"],
+  "host_permissions": ["https://*.example.com/*"]
+}
+```
+
+## API Methods
+
+### chrome.cookies.get
+
+Retrieves a single cookie by name and URL.
+
+```typescript
+chrome.cookies.get({ url: string, name: string, storeId?: string }, callback): void;
+```
+
+### chrome.cookies.getAll
+
+Retrieves all cookies matching filters.
+
+```typescript
+chrome.cookies.getAll({ url?: string, domain?: string, name?: string, path?: string, secure?: boolean, session?: boolean, storeId?: string }, callback): void;
+```
+
+```javascript
+chrome.cookies.getAll({ domain: ".example.com" }, (cookies) => {
+  cookies.forEach((c) => console.log(`${c.name} = ${c.value}`));
+});
+```
+
+### chrome.cookies.set
+
+Sets or updates a cookie. Parameters: url (required), name, value, domain, path, secure, httpOnly, sameSite ("no_restriction" | "lax" | "strict" | "unspecified"), expirationDate, storeId.
+
+```typescript
+chrome.cookies.set({ url: string, name?: string, value?: string, domain?: string, path?: string, secure?: boolean, httpOnly?: boolean, sameSite?: string, expirationDate?: number, storeId?: string }, callback): void;
+```
+
+```javascript
+chrome.cookies.set({
+  url: "https://example.com",
+  name: "user_token",
+  value: "abc123",
+  domain: ".example.com",
+  secure: true,
+  httpOnly: true,
+  sameSite: "lax"
+});
+```
+
+### chrome.cookies.remove
+
+Removes a cookie by name and URL.
+
+```typescript
+chrome.cookies.remove({ url: string, name: string, storeId?: string }, callback): void;
+```
+
+### chrome.cookies.getAllCookieStores
+
+Returns all available cookie stores. IDs: "0" (default), "1" (incognito).
+
+```typescript
+chrome.cookies.getAllCookieStores(callback): void;
+```
+
+## Cookie Object
+
+Properties: name, value, domain, hostOnly, path, secure, httpOnly, sameSite, session, expirationDate, storeId.
+
+## Events
+
+### chrome.cookies.onChanged
+
+Fires when a cookie is set or removed. Cause values: "evicted" | "expired" | "explicit" | "expired_overwrite" | "overwrite".
+
+```typescript
+chrome.cookies.onChanged.addListener((changeInfo: { removed: boolean; cookie: Cookie; cause: string }) => void): void;
+```
+
+```javascript
+chrome.cookies.onChanged.addListener((changeInfo) => {
+  console.log(`Cookie ${changeInfo.cookie.name} was ${changeInfo.removed ? "removed" : "set"}`);
+});
+```
+
+## Code Examples
+
+### Get All Cookies for a Domain
+
+```javascript
+chrome.cookies.getAll({ domain: "example.com" }, (cookies) => {
+  cookies.forEach((c) => console.log(c.name, c.value));
+});
+```
+
+### Set a Cookie
+
+```javascript
+const expiry = Math.floor(Date.now() / 1000) + (24 * 60 * 60);
+chrome.cookies.set({
+  url: "https://example.com",
+  name: "auth_token",
+  value: token,
+  domain: ".example.com",
+  secure: true,
+  httpOnly: true,
+  sameSite: "lax",
+  expirationDate: expiry
+});
+```
+
+### Delete All Cookies for a Site
+
+```javascript
+chrome.cookies.getAll({ domain: domain }, (cookies) => {
+  cookies.forEach((c) => {
+    chrome.cookies.remove({ url: `https://${c.domain}${c.path}`, name: c.name });
+  });
+});
+```
+
+### Monitor Cookie Changes
+
+```javascript
+chrome.cookies.onChanged.addListener((changeInfo) => {
+  if (changeInfo.cookie.name === "auth_token") {
+    console.log(changeInfo.removed ? "Logged out" : "Logged in");
+  }
+});
+```
+
+## Cross-references
+
+- [Cookie Permissions](../permissions/cookies.md)
+- [Cookies API Guide](../guides/cookies-api.md)
+- [Session Management Patterns](../patterns/cookies-sessions.md)
