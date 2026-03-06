@@ -14,7 +14,11 @@ Build a Pomodoro timer extension with configurable work/break intervals, site bl
   "background": { "service_worker": "background.js" },
   "declarative_net_request": {
     "rule_resources": [{ "id": "focus_rules", "enabled": false, "path": "rules.json" }]
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["blocked.html"],
+    "matches": ["<all_urls>"]
+  }]
 }
 ```
 

@@ -75,7 +75,7 @@ Add to `package.json` scripts: `"dev": "vite build --watch"` and `"build": "vite
   "name": "Dev Dashboard",
   "version": "1.0.0",
   "description": "Developer productivity dashboard for your new tab page",
-  "permissions": ["storage", "alarms"],
+  "permissions": ["storage", "alarms", "notifications"],
   "chrome_url_overrides": { "newtab": "newtab.html" },
   "background": { "service_worker": "background.js" },
   "icons": { "48": "icons/icon-48.png", "128": "icons/icon-128.png" }

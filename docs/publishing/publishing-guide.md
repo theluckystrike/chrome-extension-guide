@@ -74,7 +74,7 @@ Your `manifest.json` must include:
 ```jsonc
 {
   "manifest_version": 3,              // MV2 no longer accepted for new submissions
-  "name": "My Extension",             // 45 characters max
+  "name": "My Extension",             // 75 characters max
   "version": "1.0.0",                 // Semver recommended
   "description": "Brief description", // 132 characters max
   "icons": {
@@ -169,8 +169,8 @@ based on screenshots before reading the description.
 
 | Type | Size | Required? |
 |---|---|---|
-| Small promo tile | 440 x 280 px | Optional but recommended |
-| Marquee promo tile | 1400 x 560 px | Required for featuring |
+| Small promo tile | 440 x 280 px | Required |
+| Marquee promo tile | 1400 x 560 px | Optional (required for featuring) |
 
 The marquee tile is only used if Chrome editors choose to feature your
 extension. Include it anyway -- you never know when they might pick yours.
@@ -191,7 +191,7 @@ should be:
 
 The store listing is your sales page. Every field matters.
 
-### Name (Maximum 45 Characters)
+### Name (Maximum 75 Characters)
 
 - Be descriptive but concise
 - Include a primary keyword (e.g., "Tab Manager" not "Tabify")

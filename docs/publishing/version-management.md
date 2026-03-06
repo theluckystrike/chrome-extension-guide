@@ -54,8 +54,8 @@ git push origin v1.2.3
 - CWS review typically 1-3 days — no instant deploys
 
 ## Rollback Strategies
-- CWS does NOT support rollback to previous version
-- Must publish a NEW version with the fix
+- CWS now supports rollback to a previously published version via the Developer Dashboard
+- You can also publish a NEW version with the fix if preferred
 - Always keep previous release tag for reference
 - Fast-track: have a "known good" build ready to publish
 

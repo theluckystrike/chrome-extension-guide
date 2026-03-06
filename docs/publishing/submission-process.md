@@ -37,7 +37,7 @@ Key rules:
 - `name`: max 75 characters, no misleading terms
 - `description`: max 132 characters
 - `version`: semver format
-- Icons: 16x16, 48x48, 128x128 PNG (no alpha for 128)
+- Icons: 16x16, 48x48, 128x128 PNG (alpha transparency supported; 96x96 artwork with 16px transparent padding recommended for 128)
 - Only request permissions you actually use
 
 ## Step 3: Package Your Extension
@@ -52,12 +52,11 @@ Key rules:
 | Store icon | 128x128 PNG | Yes |
 | Screenshot 1 | 1280x800 or 640x400 | Yes |
 | Screenshots 2-5 | Same sizes | Recommended |
-| Promo tile (small) | 440x280 | Recommended |
-| Promo tile (large) | 920x680 | Optional |
+| Promo tile (small) | 440x280 | Required |
 | Marquee promo | 1400x560 | Optional |
 
 ## Step 5: Store Listing Details
-- Detailed description (up to 16,000 characters)
+- Detailed description (up to 16,384 characters)
 - Category selection
 - Language/region targeting
 - Website URL

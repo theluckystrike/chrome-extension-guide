@@ -9,7 +9,7 @@ Build a Chrome extension that saves credentials, auto-fills login forms, and gen
   "manifest_version": 3,
   "name": "SecureVault",
   "version": "1.0.0",
-  "permissions": ["storage", "activeTab", "contextMenus", "unlimitedStorage"],
+  "permissions": ["storage", "activeTab", "contextMenus", "unlimitedStorage", "idle"],
   "action": { "default_popup": "popup.html" },
   "content_scripts": [{
     "matches": ["<all_urls>"],

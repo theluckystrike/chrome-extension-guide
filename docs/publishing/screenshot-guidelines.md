@@ -8,8 +8,7 @@ Screenshots are the first thing users see. Good screenshots dramatically increas
 | Asset | Dimensions | Format | Required |
 |-------|-----------|--------|----------|
 | Screenshot | 1280x800 or 640x400 | PNG or JPEG | Min 1, max 5 |
-| Small promo tile | 440x280 | PNG | Recommended |
-| Large promo tile | 920x680 | PNG | Optional |
+| Small promo tile | 440x280 | PNG | Required |
 | Marquee promo | 1400x560 | PNG | Optional |
 
 ## Screenshot Best Practices
@@ -52,14 +51,16 @@ Screenshots are the first thing users see. Good screenshots dramatically increas
 Show a basic Puppeteer script to capture extension screenshots programmatically.
 
 ## Promotional Tile Design
-- Small tile (440x280): Used in store category pages
+- Small tile (440x280): Required for store listing
+- Marquee tile (1400x560): Optional, used if Chrome editors feature your extension
 - Include extension name, icon, and one-line tagline
 - High contrast, readable at small sizes
 - Dark backgrounds work well
 
 ## Store Icon Requirements
-- 128x128 PNG
-- No alpha transparency (solid background)
+- 128x128 PNG (actual artwork 96x96 with 16px transparent padding per side)
+- Alpha transparency is supported and recommended (icons without alpha get auto-framed with rounded corners)
+- Should work well on both light and dark backgrounds
 - Simple, recognizable design
 - Looks good at 16x16, 48x48, and 128x128
 
@@ -74,5 +75,5 @@ Show a basic Puppeteer script to capture extension screenshots programmatically.
 - [ ] No personal/sensitive data visible
 - [ ] Text is readable at display size
 - [ ] Consistent visual style across screenshots
-- [ ] Store icon is 128x128 PNG, no alpha
+- [ ] Store icon is 128x128 PNG (96x96 artwork with 16px transparent padding)
 - [ ] Small promo tile if you want category placement

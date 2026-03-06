@@ -16,7 +16,11 @@
   "background": { "service_worker": "background.js" },
   "declarative_net_request": {
     "rule_resources": [{ "id": "default_rules", "enabled": true, "path": "rules.json" }]
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["blocked.html"],
+    "matches": ["<all_urls>"]
+  }]
 }
 ```
 

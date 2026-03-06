@@ -58,7 +58,11 @@ site-blocker/
       "enabled": true,
       "path": "rules.json"
     }]
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["blocked.html"],
+    "matches": ["<all_urls>"]
+  }]
 }
 ```
 
@@ -186,7 +190,7 @@ async function updateBlockingRules() {
   const rules = blocklist.map((domain, index) => ({
     id: index + 1,
     priority: 1,
-    action: { type: 'redirect', redirect: { url: 'blocked.html' } },
+    action: { type: 'redirect', redirect: { extensionPath: '/blocked.html' } },
     condition: {
       urlFilter: `*://${domain}/*`,
       resourceTypes: ['main_frame']

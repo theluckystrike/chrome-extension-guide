@@ -15,7 +15,7 @@ Your store listing is your extension's landing page. Optimization affects both s
 - Include primary keyword naturally
 - Action-oriented: "Quickly switch between tabs with keyboard shortcuts"
 
-## Detailed Description (max 16,000 chars)
+## Detailed Description (max 16,384 chars)
 
 ### Structure:
 1. **Opening paragraph** — What it does and why it's useful (2-3 sentences)
