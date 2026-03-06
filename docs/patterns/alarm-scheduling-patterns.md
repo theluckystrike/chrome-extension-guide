@@ -1,0 +1,143 @@
+# Alarm Scheduling Patterns
+
+Advanced patterns for the `chrome.alarms` API in Chrome extensions.
+
+## Core API Methods
+
+```javascript
+// Create an alarm
+chrome.alarms.create('my-alarm', {
+  delayInMinutes: 5,           // One-shot: fires once after delay
+  periodInMinutes: 10          // Periodic: fires every 10 minutes
+});
+
+// Listen for alarms
+chrome.alarms.onAlarm.addListener((alarm) => {
+  console.log(alarm.name, alarm.scheduledTime);
+});
+
+// Query alarms
+const alarms = await chrome.alarms.getAll();
+
+// Clear specific alarm
+await chrome.alarms.clear('my-alarm');
+
+// Clear all alarms
+await chrome.alarms.clearAll();
+```
+
+## Minimum Intervals
+
+- **Production**: Minimum 1 minute (`periodInMinutes: 1`)
+- **Dev mode**: Minimum 30 seconds
+
+Shorter intervals may be throttled or ignored by Chrome.
+
+## Named Alarms as Routing Keys
+
+Use descriptive names to route to specific handlers:
+
+```javascript
+chrome.alarms.onAlarm.addListener((alarm) => {
+  const handlers = {
+    'data-sync': handleDataSync,
+    'notification-check': handleNotifications,
+    'cleanup-temp': handleCleanup
+  };
+  
+  if (handlers[alarm.name]) {
+    handlers[alarm.name]();
+  }
+});
+```
+
+## Scheduled Tasks
+
+Calculate `delayInMinutes` from a target time:
+
+```javascript
+function scheduleAt(targetDate) {
+  const now = Date.now();
+  const delayMs = targetDate.getTime() - now;
+  const delayInMinutes = Math.max(1, Math.floor(delayMs / 60000));
+  
+  chrome.alarms.create('scheduled-task', {
+    delayInMinutes,
+    periodInMinutes: 24 * 60 // Daily repeat
+  });
+}
+```
+
+## Time Zone Handling
+
+Always store UTC timestamps; convert for display:
+
+```javascript
+// Store UTC
+const scheduledUTC = alarm.scheduledTime;
+
+// Display in local time
+const localTime = new Date(scheduledUTC).toLocaleString();
+```
+
+## Alarm Persistence
+
+Alarms survive service worker restart. Chrome automatically restores them.
+
+## Alarm Recovery on Startup
+
+Recreate missing alarms after extension updates:
+
+```javascript
+chrome.runtime.onInstalled.addListener(async () => {
+  const alarms = await chrome.alarms.getAll();
+  const alarmNames = alarms.map(a => a.name);
+  
+  if (!alarmNames.includes('daily-sync')) {
+    chrome.alarms.create('daily-sync', {
+      delayInMinutes: 60,
+      periodInMinutes: 24 * 60
+    });
+  }
+});
+```
+
+## Alarm Cancellation
+
+Clear specific alarms when tasks are cancelled:
+
+```javascript
+async function cancelTask(taskId) {
+  await chrome.alarms.clear(`task-${taskId}`);
+}
+```
+
+## Alarm vs setTimeout
+
+| Feature | `chrome.alarms` | `setTimeout` |
+|---------|-----------------|--------------|
+| Survives SW sleep | ✓ | ✗ |
+| Persists restart | ✓ | ✗ |
+| Precise timing | Limited | ✓ |
+
+## Calendar-like Scheduling
+
+```javascript
+// Daily at midnight
+chrome.alarms.create('daily-midnight', {
+  delayInMinutes: minutesUntilMidnight(),
+  periodInMinutes: 24 * 60
+});
+
+// Weekly on Monday
+chrome.alarms.create('weekly-monday', {
+  delayInMinutes: minutesUntilMonday(),
+  periodInMinutes: 7 * 24 * 60
+});
+```
+
+## See Also
+
+- [API Reference: alarms API](../api_reference/alarms-api.md)
+- [Guides: Alarms Scheduling](../guides/alarms-scheduling.md)
+- [Patterns: Long-running Operations](../patterns/long-running-operations.md)
