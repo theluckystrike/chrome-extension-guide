@@ -1,0 +1,187 @@
+# Sandboxed Pages in Chrome Extensions
+
+Sandboxed pages are a powerful pattern in Chrome extensions that allow running code with relaxed Content Security Policy (CSP), enabling features that would otherwise be blocked. This pattern is essential for certain use cases but requires careful security considerations.
+
+## Manifest Configuration
+
+To use sandboxed pages, declare them in your `manifest.json`:
+
+```json
+{
+  "sandbox": {
+    "pages": [
+      "sandbox.html",
+      "templates/compiler.html"
+    ]
+  }
+}
+```
+
+Sandboxed pages run with relaxed CSP that allows `eval()`, `new Function()`, and inline scripts that would otherwise violate the extension's CSP.
+
+## Security Model
+
+Sandboxed pages operate under significant restrictions:
+
+- **No chrome.* APIs**: Cannot access any Chrome extension APIs directly
+- **No network requests**: Cannot make XMLHttpRequest or fetch calls
+- **No DOM access to parent**: Cannot access the parent page's DOM
+- **Isolated origin**: Runs in a unique origin separate from the extension
+
+This security model protects the extension from potentially malicious code running in the sandbox while allowing dangerous operations like `eval` within a controlled environment.
+
+## Communication: postMessage
+
+Since sandboxed pages cannot directly access extension APIs, communication happens via `postMessage`:
+
+```javascript
+// Main extension page (background.js or popup)
+const sandbox = document.createElement('iframe');
+sandbox.src = chrome.runtime.getURL('sandbox.html');
+document.body.appendChild(sandbox);
+
+sandbox.contentWindow.postMessage({ 
+  action: 'render', 
+  template: '{{greeting}}', 
+  data: { greeting: 'Hello!' } 
+}, '*');
+
+window.addEventListener('message', (event) => {
+  console.log('Result:', event.data.result);
+});
+```
+
+```javascript
+// sandbox.html
+window.addEventListener('message', (event) => {
+  const { action, template, data } = event.data;
+  
+  if (action === 'render') {
+    // Use Handlebars, EJS, or similar
+    const compiled = Handlebars.compile(template);
+    const result = compiled(data);
+    
+    event.source.postMessage({ result }, '*');
+  }
+});
+```
+
+## Use Cases
+
+### Template Engines
+
+Many template engines (Handlebars, EJS, Underscore.js) rely on `eval` for runtime compilation:
+
+```javascript
+// sandbox.html - Handlebars example
+const Handlebars = window.Handlebars;
+const template = Handlebars.compile('{{greeting}}, {{name}}!');
+const output = template({ greeting: 'Hello', name: 'World' });
+```
+
+### User-Provided Scripts
+
+Allow users to write custom scripts that get executed safely:
+
+```javascript
+// sandbox.html - Safe script execution
+const safeEval = (script, context) => {
+  with (context) {
+    return eval(script);
+  }
+};
+```
+
+### Rich Text Editors
+
+Some rich text editors use `eval` for dynamic style calculations or markdown parsing.
+
+## Multiple Sandboxed Pages
+
+For different libraries or security requirements, use multiple sandboxes:
+
+```json
+{
+  "sandbox": {
+    "pages": [
+      "sandbox/handlebars.html",
+      "sandbox/markdown.html",
+      "sandbox/user-scripts.html"
+    ]
+  }
+}
+```
+
+Each sandbox runs in its own isolated context with separate CSP relaxations.
+
+## Performance Considerations
+
+- **iframe overhead**: Each sandboxed page requires an iframe, adding DOM overhead
+- **Message serialization**: Complex data passed via postMessage incurs serialization costs
+- **Startup latency**: Loading sandbox pages takes time; consider preloading
+- **Memory usage**: Each iframe maintains its own JavaScript context
+
+## Alternatives
+
+Before using sandboxed pages, consider these alternatives:
+
+1. **Pre-compile templates at build time**: Use Handlebars precompilation to avoid runtime `eval`
+2. **Use eval-free libraries**: Libraries like Nunjucks support precompilation
+3. **Web Workers**: For heavy computation without DOM requirements
+4. **Native JS templating**: Use template literals which don't require `eval`
+
+## Testing Sandboxed Pages
+
+For debugging, navigate directly to the sandbox page URL:
+
+```
+chrome-extension://<extension-id>/sandbox.html
+```
+
+This allows direct inspection and debugging of the sandbox environment.
+
+## Example: Complete Template Engine Sandbox
+
+```javascript
+// popup.js
+function renderWithSandbox(template, data) {
+  return new Promise((resolve) => {
+    const iframe = document.createElement('iframe');
+    iframe.src = chrome.runtime.getURL('sandbox/compiler.html');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    
+    const handler = (event) => {
+      if (event.data.type === 'compiled') {
+        window.removeEventListener('message', handler);
+        iframe.remove();
+        resolve(event.data.html);
+      }
+    };
+    
+    window.addEventListener('message', handler);
+    iframe.onload = () => {
+      iframe.contentWindow.postMessage({ template, data }, '*');
+    };
+  });
+}
+```
+
+```html
+<!-- sandbox/compiler.html -->
+<script src="handlebars.min.js"></script>
+<script>
+  window.addEventListener('message', (event) => {
+    const { template, data } = event.data;
+    const compiled = Handlebars.compile(template);
+    const html = compiled(data);
+    event.source.postMessage({ type: 'compiled', html }, '*');
+  });
+</script>
+```
+
+## Cross-References
+
+- [CSP Reference](../reference/csp-reference.md)
+- [CSP Workarounds](./csp-workarounds.md)
+- [MV3 Content Security Policy](../mv3/content-security-policy.md)
