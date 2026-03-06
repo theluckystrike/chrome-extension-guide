@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check markdown files exist
+        run: |
+          echo "Checking documentation structure..."
+          test -d docs/api-reference || exit 1
+          test -d docs/guides || exit 1
+          test -d docs/permissions || exit 1
+
+      - name: Verify README exists
+        run: test -f README.md
