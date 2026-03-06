@@ -7,9 +7,9 @@
 
 ## 1. Excessive Permissions
 - **What triggers it**: Requesting permissions your extension doesn't actively use
-- **Examples**: Requesting `<all_urls>` when you only need specific domains, requesting `tabs` when you only need `activeTab`
+- **Examples**: Requesting `<all_urls>` when you only need specific domains, requesting `tabs` when you only need `activeTab`.
 - **Fix**: Audit manifest.json permissions, use `optional_permissions` for non-critical features, use `activeTab` instead of broad host permissions
-- Mention `@theluckystrike/webext-permissions` for runtime permission management — `requestPermission()` lets you request permissions on demand instead of upfront
+- Mention `@theluckystrike/webext-permissions` for runtime permission management ... `requestPermission()` lets you request permissions on demand instead of upfront
 
 ## 2. Missing or Inadequate Privacy Policy
 - **What triggers it**: Using permissions like `storage`, `cookies`, `identity`, or any host permissions without a privacy policy
@@ -23,7 +23,7 @@
 ## 4. Remote Code Execution
 - **What triggers it**: Using `eval()`, `new Function()`, loading remote scripts via `<script src="...">`, `chrome.scripting.executeScript` with arbitrary strings
 - **Fix**: Bundle all code locally, use `chrome.scripting.executeScript` with `files` parameter only, set strict CSP in manifest.json
-- MV3 note: MV3 blocks remote code by default — see `docs/mv3/content-security-policy.md`
+- MV3 note: MV3 blocks remote code by default ... see `docs/mv3/content-security-policy.md`
 
 ## 5. Obfuscated Code
 - **What triggers it**: Minified/obfuscated source code that reviewers can't read
@@ -63,3 +63,5 @@
 - Extension tested on Chrome stable
 - Screenshots are current and accurate
 - Single clear purpose
+
+**IMPORTANT**: Author all commits as `theluckystrike`. No Co-Authored-By lines. Make sure the file actually lands on the `main` branch before reporting done. If the file already exists on main (another agent may have created it), report "already exists" and skip.
