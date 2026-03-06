@@ -4,19 +4,18 @@ This pattern describes how Chrome extensions communicate with websites they are 
 
 ## Manifest Configuration: externally_connectable
 
-To enable communication from websites, declare the `externally_connectable` permission in your `manifest.json`:
+To enable communication from websites, declare the `externally_connectable` manifest key in your `manifest.json`:
 
 ```json
 {
   "manifest_version": 3,
-  "permissions": ["externally_connectable"],
   "externally_connectable": {
     "matches": ["https://example.com/*", "https://*.example.org/*"]
   }
 }
 ```
 
-The `matches` array defines which websites can send messages to your extension. Omitting `matches` allows all sites to connect.
+The `matches` array defines which websites can send messages to your extension. Omitting `matches` means no web pages can connect (only other extensions can). Note: `externally_connectable` is a manifest key, not a permission -- it does not go in the `permissions` array.
 
 ## Sending Messages from Website to Extension
 

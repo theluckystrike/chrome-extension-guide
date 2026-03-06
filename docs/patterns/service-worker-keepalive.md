@@ -4,7 +4,7 @@
 
 Chrome's Manifest V3 service workers have strict lifetime limits:
 - **30 seconds** idle timeout (auto-terminates after 30s of inactivity)
-- **5 minutes** hard limit (absolute maximum runtime)
+- **5 minutes** per-event limit (maximum time for a single event handler; the worker can run longer if new events arrive)
 
 This differs significantly from MV2 background pages which could run indefinitely.
 

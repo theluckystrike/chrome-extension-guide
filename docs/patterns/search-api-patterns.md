@@ -109,7 +109,7 @@ const searchEngines = {
 
 function searchWithEngine(query, engine = 'google', disposition = 'NEW_TAB') {
   const url = searchEngines[engine](query);
-  chrome.search.query({ url, disposition });
+  chrome.search.query({ text: query, disposition });
 }
 ```
 

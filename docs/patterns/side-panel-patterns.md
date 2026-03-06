@@ -32,10 +32,10 @@ chrome.sidePanel.setOptions({
 Chrome 116+ supports opening the side panel programmatically:
 
 ```javascript
-// Open side panel for current tab
-chrome.sidePanel.open(window.tabId);
+// Open side panel for the current window
+await chrome.sidePanel.open({ windowId: chrome.windows.WINDOW_ID_CURRENT });
 
-// With promise support
+// Open side panel for a specific tab
 await chrome.sidePanel.open({ tabId: currentTab.id });
 ```
 
@@ -83,8 +83,10 @@ Unlike popups, side panels persist across tab switches:
 let panelState = { scrollPosition: 0, userData: null };
 
 // Restore state when panel opens
-chrome.sidePanel.onShow.addListener(() => {
-  restoreState();
+// Side panel does not have an onShow event.
+// Use document lifecycle events instead:
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') restoreState();
 });
 ```
 

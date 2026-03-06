@@ -152,7 +152,7 @@ function stopBlinking() {
 For service worker extensions, use chrome.alarms instead of setInterval:
 
 ```js
-chrome.alarms.create('blink', { periodInMinutes: 0.016 }); // ~1 second
+chrome.alarms.create('blink', { periodInMinutes: 0.5 }); // 30 seconds (minimum allowed)
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'blink') {

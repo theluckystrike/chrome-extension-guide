@@ -196,13 +196,9 @@ function handleSuspend(): void {
 
 ---
 
-## Event Ordering Guarantees
+## Event Ordering
 
-On first install, Chrome guarantees:
-1. `chrome.runtime.onInstalled` fires **before** `chrome.runtime.onStartup`
-2. Listeners registered in `onInstalled` are active for the first session
-
-This ensures initialization completes before any runtime events.
+On first install, only `chrome.runtime.onInstalled` fires -- `chrome.runtime.onStartup` does **not** fire during the initial installation. `onStartup` fires on subsequent browser/profile starts after the extension is already installed. Both events are independent and serve different purposes.
 
 ---
 

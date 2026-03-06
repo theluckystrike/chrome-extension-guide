@@ -19,7 +19,7 @@ Understanding the three types of declarativeNetRequest rules is crucial for choo
 
 | Rule Type | Definition | Persistence | Limit |
 |-----------|------------|--------------|-------|
-| **Static** | Defined in `manifest.json` | Persist across extension updates | 300,000 rules |
+| **Static** | Defined in `manifest.json` | Persist across extension updates | 30,000 guaranteed per extension (plus shared global pool of 300,000) |
 | **Dynamic** | Added via API at runtime | Persist across browser sessions | 30,000 rules |
 | **Session** | Added via API at runtime | Cleared on browser restart | 5,000 rules |
 

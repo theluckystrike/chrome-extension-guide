@@ -7,7 +7,7 @@ The DeclarativeNetRequest API is Chrome's recommended way to block or modify net
 This guide covers advanced patterns for building sophisticated network request modification features, including dynamic rules, header manipulation, regex patterns, and production-ready implementations. All examples use TypeScript and assume Manifest V3.
 
 Key facts:
-- **Static Rules**: Defined in manifest.json, max 5,000 rules per extension
+- **Static Rules**: Defined in manifest.json, guaranteed 30,000 rules per extension (plus access to a shared global pool of 300,000)
 - **Dynamic Rules**: Added at runtime, persist across sessions, max 30,000
 - **Session Rules**: Temporary rules cleared on browser restart, max 5,000
 - **Regex Rules**: Limited to 5,000 regex patterns total

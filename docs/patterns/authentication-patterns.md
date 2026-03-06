@@ -90,16 +90,16 @@ For Google APIs, use the built-in token management:
 
 ```typescript
 async function getGoogleAuthToken(): Promise<string> {
-  const token = await chrome.identity.getAuthToken({
+  const result = await chrome.identity.getAuthToken({
     interactive: true,
     scopes: ['https://www.googleapis.com/auth/drive']
   });
-  return token;
+  return result.token; // MV3 returns { token: string, grantedScopes: string[] }
 }
 
 async function removeGoogleToken(): Promise<void> {
-  const token = await chrome.identity.getAuthToken({ interactive: false });
-  await chrome.identity.removeCachedAuthToken({ token });
+  const result = await chrome.identity.getAuthToken({ interactive: false });
+  await chrome.identity.removeCachedAuthToken({ token: result.token });
 }
 ```
 

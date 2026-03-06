@@ -7,9 +7,9 @@ This guide covers patterns for handling images in Chrome extensions, including c
 Use `chrome.tabs.captureVisibleTab()` to capture the visible portion of a tab. This API requires the `activeTab` permission.
 
 ```javascript
-// Capture screenshot of active tab
-async function captureTabScreenshot(tabId) {
-  const screenshot = await chrome.tabs.captureVisibleTab(tabId, {
+// Capture screenshot of the active tab in a given window
+async function captureTabScreenshot(windowId) {
+  const screenshot = await chrome.tabs.captureVisibleTab(windowId, {
     format: 'png',
     quality: 100
   });

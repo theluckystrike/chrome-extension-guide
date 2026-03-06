@@ -22,14 +22,19 @@ Get a stream ID for tab, screen, or window capture:
 
 ```typescript
 // utils/capture.ts
-async function getDesktopStreamId(): Promise<string> {
-  const sources = await chrome.desktopCapture.getDesktopSources({
-    types: ['screen', 'window', 'tab'],
-    thumbnailSize: { width: 320, height: 180 }
+// chrome.desktopCapture.chooseDesktopMedia() shows a picker and returns a stream ID.
+// It must be called from a user gesture context (e.g., action click).
+function chooseDesktopMedia(tabToShareWith: chrome.tabs.Tab): Promise<string> {
+  return new Promise((resolve, reject) => {
+    chrome.desktopCapture.chooseDesktopMedia(
+      ['screen', 'window', 'tab'],
+      tabToShareWith,
+      (streamId) => {
+        if (streamId) resolve(streamId);
+        else reject(new Error('User cancelled'));
+      }
+    );
   });
-  
-  const selectedSource = sources.find(s => s.id === 'user-selected-id');
-  return selectedSource?.id || sources[0]?.id;
 }
 
 // Use stream ID with navigator.mediaDevices.getUserMedia()
@@ -55,26 +60,29 @@ Capture a specific tab's audio and video:
 
 ```typescript
 // utils/tabCapture.ts
+// In MV3, use chrome.tabCapture.getMediaStreamId() to get a stream ID,
+// then use navigator.mediaDevices.getUserMedia() with the stream ID.
 async function captureTab(tabId: number): Promise<MediaStream> {
-  const stream = await chrome.tabCapture.capture({
-    tabId,
-    audio: true,
-    video: true,
-    videoConstraints: {
+  const streamId = await chrome.tabCapture.getMediaStreamId({ targetTabId: tabId });
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: {
       mandatory: {
+        chromeMediaSource: 'tab',
+        chromeMediaSourceId: streamId
+      }
+    } as any,
+    video: {
+      mandatory: {
+        chromeMediaSource: 'tab',
+        chromeMediaSourceId: streamId,
         minWidth: 1280,
         minHeight: 720,
         maxWidth: 1920,
         maxHeight: 1080
       }
-    }
+    } as any
   });
   return stream;
-}
-
-// List available capture targets
-async function getCaptureTargets(): Promise<chrome.tabCapture.CaptureTarget[]> {
-  return chrome.tabCapture.getCapturableTabs();
 }
 ```
 

@@ -88,8 +88,8 @@ Use the `chrome.management.onUninstalled` listener to detect when other extensio
 ```js
 // Requires "management" permission in manifest
 
-chrome.management.onUninstalled.addListener((extensionInfo) => {
-  if (extensionInfo.id === 'companion-extension-id') {
+chrome.management.onUninstalled.addListener((id) => {
+  if (id === 'companion-extension-id') {
     console.log('Companion extension was uninstalled');
     // Notify user or disable related features
   }
@@ -190,8 +190,8 @@ async function checkCompanionExtension() {
 }
 
 // Listen for companion uninstall
-chrome.management.onUninstalled.addListener((info) => {
-  if (info.id === 'companion-extension-id') {
+chrome.management.onUninstalled.addListener((id) => {
+  if (id === 'companion-extension-id') {
     showCompanionWarning();
   }
 });

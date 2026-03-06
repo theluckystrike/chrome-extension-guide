@@ -171,7 +171,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-Note: In MV3, blocking in webRequest requires the `declarativeNetRequest` permission.
+Note: In MV3, blocking via `webRequest` (`webRequestBlocking`) is no longer available for most extensions. Only policy-installed extensions retain access. Use `declarativeNetRequest` instead for request blocking and modification.
 
 ## Security Considerations
 

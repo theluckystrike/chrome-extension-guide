@@ -37,13 +37,12 @@ async function startBasicCapture(
   types: Array<"screen" | "window" | "tab"> = ["screen", "window", "tab"]
 ): Promise<{ streamId: string; stream: MediaStream } | null> {
   // Request capture via the desktop capture picker
-  const streamId = await chrome.desktopCapture.chooseDesktopMedia(
-    types,
-    // Optional: handle when user cancels or closes the picker
-    undefined
-  );
+  // Note: chooseDesktopMedia is callback-based, not promise-based
+  const streamId = await new Promise<string>((resolve) => {
+    chrome.desktopCapture.chooseDesktopMedia(types, (id) => resolve(id));
+  });
 
-  // User cancelled — streamId is null or empty
+  // User cancelled — streamId is empty
   if (!streamId) {
     console.log("User cancelled capture selection");
     return null;
@@ -487,7 +486,7 @@ document.getElementById("pick-screen-only")!.addEventListener("click", async () 
 });
 ```
 
-> **Note:** The `chooseDesktopMedia` API doesn't directly support filtering sources client-side. To implement custom filtering, you'd need to use the desktopCapture API's `getSources` method (deprecated but still available) or design your UI to only present specific capture options to users.
+> **Note:** The `chooseDesktopMedia` API doesn't directly support filtering sources client-side. To limit the capture options, pass a filtered array of `DesktopCaptureSourceType` values (e.g., `["screen"]` or `["window"]`). There is no `getSources` method on the `chrome.desktopCapture` API.
 
 ---
 
@@ -593,29 +592,15 @@ async function captureTabAudio(tabId: number): Promise<MediaStream> {
   });
 }
 
-// List available audio sources
-async function getAudioSources(): Promise<
-  Array<{ id: string; name: string; thumbnail: string }>
-> {
-  // Note: getDesktopSources is deprecated but still functional
-  // Prefer chooseDesktopMedia for new code
-  const sources = await new Promise<chrome.desktopCapture.DesktopCaptureSource[]>(
-    (resolve) => {
-      chrome.desktopCapture.getSources(
-        {
-          types: ["screen", "window", "tab"],
-          thumbnailSize: { width: 0, height: 0 },
-        },
-        (sources) => resolve(sources)
-      );
-    }
-  );
-
-  return sources.map((s) => ({
-    id: s.id,
-    name: s.name,
-    thumbnail: s.thumbnail.toDataURL(),
-  }));
+// Note: chrome.desktopCapture does not have a getSources method.
+// To capture audio, use chooseDesktopMedia with the desired source types
+// and request audio in the getUserMedia constraints.
+async function captureWithAudio(sourceTypes: chrome.desktopCapture.DesktopCaptureSourceType[]): Promise<string> {
+  return new Promise((resolve) => {
+    chrome.desktopCapture.chooseDesktopMedia(sourceTypes, (streamId) => {
+      resolve(streamId);
+    });
+  });
 }
 ```
 

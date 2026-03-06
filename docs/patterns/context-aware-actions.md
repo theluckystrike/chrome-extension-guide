@@ -139,13 +139,14 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ## Resetting to Defaults
 
-Pass `null` to reset to manifest-defined defaults:
+To clear tab-specific overrides and fall back to global/manifest defaults:
 
 ```ts
-chrome.action.setPopup({ tabId, popup: null });  // Uses manifest popup
-chrome.action.setIcon({ tabId, path: null });      // Uses manifest icon
-chrome.action.setTitle({ tabId, title: null });   // Uses manifest title
+chrome.action.setPopup({ tabId, popup: '' });    // Clears tab-specific popup (empty string = no popup)
+chrome.action.setTitle({ tabId, title: '' });     // Clears tab-specific title, falls back to manifest
 ```
+
+Note: Tab-specific overrides are automatically cleared when the tab is closed.
 
 ---
 

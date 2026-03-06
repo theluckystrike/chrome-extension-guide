@@ -84,7 +84,7 @@ async function submitPrintJob(pdfBase64: string, printerId: string): Promise<{ j
     content: pdfBase64,
   };
   return new Promise((resolve, reject) => {
-    chrome.printing.submitJob({ job: printJob, printerId }, (response) => {
+    chrome.printing.submitJob({ job: { ...printJob, printerId, title: 'Print Job', contentType: 'application/pdf', document: new Blob([Uint8Array.from(atob(pdfBase64), c => c.charCodeAt(0))], { type: 'application/pdf' }) } }, (response) => {
       if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
       else if (response?.jobId) resolve({ jobId: response.jobId });
       else reject(new Error("Print job submission failed"));

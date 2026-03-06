@@ -7,7 +7,7 @@ Favicons are small icons that represent websites in browser tabs, bookmarks, and
 Key facts:
 - **Favicon sizes**: Standard sizes are 16x16, 32x32, and 64x64 pixels
 - **Storage locations**: Favicons are cached in Chrome's internal database (`favicons` table in `Web Data`)
-- **API access**: Available through `chrome.tabs.Tab.favIconUrl` and `chrome.favicons` API (Manifest V3)
+- **API access**: Available through `chrome.tabs.Tab.favIconUrl` property and the `chrome://favicon/` URL scheme
 - **Fallback chain**: Tab favicon → Google S2 service → Default extension icon
 
 ---
@@ -1243,7 +1243,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 ### Related APIs
 
 - `chrome.tabs.Tab.favIconUrl` - Tab favicon property
-- `chrome.favicons` - (Limited availability in MV3)
+- `chrome://favicon/` URL scheme - for accessing cached favicons (requires `"favicon"` permission in MV3)
 - `chrome.notifications` - System notifications
 - `chrome.tabs.onUpdated` - Tab change events
 - IndexedDB - Favicon caching

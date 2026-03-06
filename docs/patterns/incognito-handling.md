@@ -94,11 +94,18 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 Incognito windows use separate cookie stores:
 
 ```javascript
-// Get cookies from incognito store (storeId "1")
-async function getIncognitoCookies(url) {
+// Discover cookie stores dynamically (storeId values are not guaranteed)
+async function getIncognitoCookieStore() {
+  const stores = await chrome.cookies.getAllCookieStores();
+  // Find the incognito store by checking which tabs are incognito
+  // Do NOT hardcode storeId values -- use getAllCookieStores() to discover them
+  return stores;
+}
+
+async function getIncognitoCookies(url, incognitoStoreId) {
   const cookies = await chrome.cookies.getAll({
     url: url,
-    storeId: '1' // Incognito cookie store
+    storeId: incognitoStoreId
   });
   return cookies;
 }
@@ -110,8 +117,6 @@ async function listCookieStores() {
     console.log(`Store ID: ${store.id}, Tab IDs: ${store.tabIds}`);
   });
 }
-
-// Regular storeId is "0", incognito is "1"
 ```
 
 ## Privacy-Aware Implementation

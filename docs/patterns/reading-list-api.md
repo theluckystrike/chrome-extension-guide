@@ -590,7 +590,8 @@ async function cleanup(): Promise<void> {
 }
 
 // Auto-cache when marking as read
-chrome.readingList.onTitleChanged.addListener(async (url) => {
+chrome.readingList.onEntryUpdated.addListener(async (entry) => {
+  const url = entry.url;
   const [tab] = await chrome.tabs.query({ url });
   if (tab?.id) {
     const result = await chrome.tabs.sendMessage(tab.id, { type: "extract-content" });

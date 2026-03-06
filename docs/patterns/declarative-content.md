@@ -8,7 +8,7 @@ This guide covers practical patterns for using DeclarativeContent in modern Chro
 
 Key facts:
 - **PageStateMatcher**: Defines conditions that trigger rule activation (URL patterns, CSS selectors, page schemes)
-- **ShowAction/HideAction**: Controls visibility of the extension action button
+- **ShowAction**: Shows the extension action button when conditions match (note: there is no HideAction; the action is hidden by default and shown only when rules match)
 - **Event**: `chrome.declarativeContent.onPageChanged` manages rule registration
 - **Persistence**: Rules survive browser restarts and extension updates
 - **Performance**: Browser evaluates rules natively — no background script wake-up for non-matching pages
@@ -441,16 +441,11 @@ const settingsStorage = createStorage(settingsSchema);
 async function buildRuleFromSettings(): Promise<chrome.declarativeContent.PageChangeRule> {
   const settings = await settingsStorage.getAll();
 
-  // If disabled, return a rule that hides action everywhere
+  // If disabled, remove all rules so the action stays hidden by default
+  // (there is no HideAction in the API; the action is hidden when no ShowAction rules match)
   if (!settings.enabled) {
-    return {
-      conditions: [
-        new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: { schemes: ["https", "http"] },
-        }),
-      ],
-      actions: [new chrome.declarativeContent.HideAction()],
-    };
+    await chrome.declarativeContent.onPageChanged.removeRules();
+    return null;
   }
 
   // Build URL conditions from user patterns
@@ -559,7 +554,7 @@ async function removeRuleById(ruleId: string): Promise<void> {
 
 ## Pattern 5: Action State with SetIcon and RequestContentScript
 
-While ShowAction/HideAction are the primary actions, DeclarativeContent can work alongside other extension APIs to create rich, stateful experiences. This pattern covers combining multiple actions and states.
+While ShowAction is the primary declarative action (there is no HideAction), DeclarativeContent can work alongside other extension APIs to create rich, stateful experiences. This pattern covers combining multiple actions and states.
 
 ### Dynamic Icon Based on Page State
 
@@ -978,7 +973,7 @@ async function debugListRules(): Promise<void> {
 
     console.log(`  Actions: ${rule.actions?.length || 0}`);
     for (const action of rule.actions || []) {
-      console.log(`    - ${action instanceof chrome.declarativeContent.ShowAction ? "ShowAction" : "HideAction"}`);
+      console.log(`    - ${action instanceof chrome.declarativeContent.ShowAction ? "ShowAction" : "Other action"}`);
     }
   }
 }
