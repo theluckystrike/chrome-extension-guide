@@ -1112,3 +1112,183 @@ Remember to test thoroughly across different scenarios including:
 - Offline message queuing
 - Subscription refresh/expiration
 - Rate limiting scenarios
+
+---
+
+## Testing Push Notifications
+
+### Local Testing Setup
+
+For testing push notifications during development, you can use various approaches:
+
+```javascript
+// Testing utilities for local development
+class PushNotificationTester {
+  constructor() {
+    this.testResults = [];
+  }
+
+  // Simulate incoming GCM message
+  async simulateGCMMessage(messageData) {
+    const message = {
+      senderId: 'TEST_SENDER_ID',
+      messageId: `test-${Date.now()}`,
+      data: messageData
+    };
+
+    // Trigger the onMessage listener manually
+    chrome.gcm.onMessage.emit(message);
+    
+    this.testResults.push({
+      type: 'gcm',
+      timestamp: Date.now(),
+      success: true
+    });
+  }
+
+  // Simulate Web Push event
+  async simulatePushEvent(payload) {
+    const event = new PushEvent('push', {
+      data: payload ? JSON.stringify(payload) : null
+    });
+    
+    // Dispatch to service worker
+    const registration = await navigator.serviceWorker.ready;
+    registration.active.postMessage({
+      type: 'PUSH_EVENT',
+      payload: payload
+    });
+  }
+
+  // Test notification display
+  async testNotificationDisplay(options) {
+    try {
+      const notificationId = `test-${Date.now()}`;
+      await chrome.notifications.create(notificationId, options);
+      return { success: true, notificationId };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
+  // Get test results
+  getResults() {
+    return this.testResults;
+  }
+
+  // Clear results
+  clearResults() {
+    this.testResults = [];
+  }
+}
+
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = PushNotificationTester;
+}
+```
+
+### Testing Checklist
+
+```markdown
+## Push Notification Testing Checklist
+
+### Permission Testing
+- [ ] Test permission granted on first request
+- [ ] Test permission denied flow
+- [ ] Test permission previously denied (blocked)
+- [ ] Test permission reset via browser settings
+
+### Message Delivery
+- [ ] Test message delivery when extension is running
+- [ ] Test message delivery when extension is backgrounded
+- [ ] Test message delivery after browser restart
+- [ ] Test message delivery with multiple instances
+
+### Notification Display
+- [ ] Test basic notification rendering
+- [ ] Test rich notification with image
+- [ ] Test notification with action buttons
+- [ ] Test notification click handling
+- [ ] Test notification dismissal
+
+### Error Handling
+- [ ] Test handling of invalid sender ID
+- [ ] Test handling of network failures
+- [ ] Test handling of expired subscription
+- [ ] Test retry logic for failed messages
+
+### Performance
+- [ ] Test with large payload (max size)
+- [ ] Test notification delivery latency
+- [ ] Test background message handling
+- [ ] Test with many concurrent notifications
+```
+
+### Debugging Tips
+
+```javascript
+// Debug utilities for push notifications
+const PushDebug = {
+  // Enable verbose logging
+  enableDebugMode() {
+    localStorage.setItem('push_debug', 'true');
+    console.log('Push notification debug mode enabled');
+  },
+
+  // Log all incoming messages
+  setupMessageLogging() {
+    // GCM messages
+    chrome.gcm.onMessage.addListener((message) => {
+      console.group('📨 GCM Message Received');
+      console.log('Sender:', message.senderId);
+      console.log('Message ID:', message.messageId);
+      console.log('Data:', message.data);
+      console.groupEnd();
+    });
+
+    // Web Push messages (in service worker)
+    self.addEventListener('push', (event) => {
+      console.group('📨 Web Push Event');
+      console.log('Data:', event.data?.text());
+      console.groupEnd();
+    });
+  },
+
+  // Monitor notification events
+  setupNotificationLogging() {
+    chrome.notifications.onClicked.addListener((id) => {
+      console.log('Notification clicked:', id);
+    });
+
+    chrome.notifications.onClosed.addListener((id, byUser) => {
+      console.log(`Notification ${id} closed by ${byUser ? 'user' : 'system'}`);
+    });
+
+    chrome.notifications.onButtonClicked.addListener((id, index) => {
+      console.log(`Button ${index} clicked on notification ${id}`);
+    });
+  },
+
+  // Check subscription status
+  async checkSubscriptionStatus() {
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription();
+    
+    console.log('Push subscription:', subscription ? 'active' : 'none');
+    if (subscription) {
+      console.log('Endpoint:', subscription.endpoint);
+      console.log('Expiration:', subscription.expirationTime);
+    }
+    
+    return subscription;
+  },
+
+  // Verify GCM registration
+  async checkGCMRegistration() {
+    // GCM registration status is not directly exposed
+    // Test by attempting to send a message
+    console.log('GCM status: Use send() to verify registration');
+  }
+};
+```
