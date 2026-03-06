@@ -145,3 +145,6 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 ## Related Permissions
 - [notifications](notifications.md) — often paired to show alerts when alarms fire
 - [storage](storage.md) — store alarm metadata and configuration
+
+## API Reference
+- [Alarms API Reference](../api-reference/alarms-api.md)

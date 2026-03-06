@@ -146,3 +146,6 @@ chrome.bookmarks.getTree(async (tree) => {
 - `"Can't modify the root bookmark folders"` — IDs "0", "1", "2" are system folders
 - `"Can't remove non-empty folder"` — use `removeTree` for folders with children
 - Bookmark ID not found — bookmarks may have been deleted by user
+
+## API Reference
+- [Bookmarks API Reference](../api-reference/bookmarks-api.md)

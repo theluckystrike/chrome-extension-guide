@@ -152,8 +152,8 @@ msg.onMessage({
 - `watch()` fires for changes from ANY context (popup, background, content script)
 
 ## Related Permissions
-- [unlimitedStorage](unlimitedStorage.md) — removes the 10MB local limit
 - [activeTab](activeTab.md) — often paired to extract + store page data
 
 ## API Reference
+- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Chrome storage API docs](https://developer.chrome.com/docs/extensions/reference/api/storage)

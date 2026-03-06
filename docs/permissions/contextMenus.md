@@ -183,3 +183,6 @@ chrome.contextMenus.create({
 - [activeTab](activeTab.md) — context menu click grants activeTab access
 - [scripting](scripting.md) — inject scripts after context menu action
 - [storage](storage.md) — store menu preferences and saved data
+
+## API Reference
+- [Context Menus API Reference](../api-reference/context-menus-api.md)
