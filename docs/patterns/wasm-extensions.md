@@ -1,215 +1,231 @@
 # WebAssembly in Chrome Extensions
 
-## Overview
+WebAssembly (WASM) enables near-native performance for compute-heavy tasks inside Chrome extensions. This guide covers eight practical patterns for integrating WASM modules with Manifest V3, including loading strategies, memory management, caching, and Content Security Policy configuration.
 
-WebAssembly brings near-native performance to Chrome extensions for CPU-intensive tasks like cryptography, text processing, and data parsing. MV3's execution contexts each impose different constraints on WASM loading. This guide covers eight production-ready patterns.
-
----
-
-## Quick Reference
-
-| Pattern | Context | CSP Needed | Streaming | Best For |
-|---|---|---|---|---|
-| 1. Service Worker Loading | Background | `wasm-unsafe-eval` | No | Lightweight modules |
-| 2. Content Script Loading | Content script | Host page CSP | No | Page-scoped compute |
-| 3. Offscreen Document | Offscreen | `wasm-unsafe-eval` | Yes | Full WASM support |
-| 4. Bundler Integration | Build time | Varies | Varies | Production builds |
-| 5. JS/WASM Data Passing | Any | Varies | N/A | Interop patterns |
-| 6. Text Processing | Any | Varies | N/A | Regex, parsing |
-| 7. Cryptography | Any | Varies | N/A | Hashing, encryption |
-| 8. CSP Configuration | manifest.json | N/A | N/A | Security policy |
+> **Cross-references:**
+> - [Content Security Policy in MV3](../mv3/content-security-policy.md)
+> - [Performance Profiling](performance-profiling.md)
 
 ---
 
-## Pattern 1: Loading WASM in Service Workers
+## Pattern 1: Loading WASM in a Service Worker
 
-Service workers cannot use `instantiateStreaming`. Fetch the binary as an `ArrayBuffer` and use `WebAssembly.instantiate` instead.
+Service workers in MV3 support `WebAssembly.instantiate` but do not support `WebAssembly.instantiateStreaming` in all contexts. The safest approach is to fetch the binary and instantiate from an `ArrayBuffer`.
 
-```ts
+```typescript
+// background.ts
 let wasmInstance: WebAssembly.Instance | null = null;
 
 async function loadWasm(): Promise<WebAssembly.Instance> {
   if (wasmInstance) return wasmInstance;
-  const url = chrome.runtime.getURL("wasm/processor.wasm");
-  const bytes = await (await fetch(url)).arrayBuffer();
-  const result = await WebAssembly.instantiate(bytes, {
-    env: { abort: () => { throw new Error("WASM abort"); } },
-  });
-  wasmInstance = result.instance;
-  return wasmInstance;
+
+  const wasmUrl = chrome.runtime.getURL("wasm/processor.wasm");
+  const response = await fetch(wasmUrl);
+  const bytes = await response.arrayBuffer();
+
+  const importObject: WebAssembly.Imports = {
+    env: {
+      log: (ptr: number, len: number) => {
+        const memory = wasmInstance!.exports.memory as WebAssembly.Memory;
+        const text = new TextDecoder().decode(
+          new Uint8Array(memory.buffer, ptr, len)
+        );
+        console.log("[WASM]", text);
+      },
+    },
+  };
+
+  const { instance } = await WebAssembly.instantiate(bytes, importObject);
+  wasmInstance = instance;
+  return instance;
 }
 
+// Use the WASM module in a message handler
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
-  if (msg.type === "WASM_COMPUTE") {
-    loadWasm().then((inst) => {
-      const fn = inst.exports.compute as (n: number) => number;
-      sendResponse({ result: fn(msg.payload) });
+  if (msg.type === "PROCESS") {
+    loadWasm().then((instance) => {
+      const process = instance.exports.process as (n: number) => number;
+      sendResponse({ result: process(msg.value) });
     });
-    return true;
+    return true; // async response
   }
 });
 ```
 
-Declare the file in `web_accessible_resources` so the service worker can fetch it:
-
-```jsonc
-// manifest.json
-{
-  "web_accessible_resources": [{
-    "resources": ["wasm/*.wasm"],
-    "matches": ["<all_urls>"]
-  }]
-}
-```
-
-Cache the instance in a module variable, but expect it to be lost on service worker restart. For faster reload, cache the compiled `WebAssembly.Module` in IndexedDB since it survives worker termination.
+**Gotchas:**
+- The WASM file must be listed in `web_accessible_resources` or fetched via `chrome.runtime.getURL`.
+- Service workers terminate after ~30 seconds of inactivity. The WASM instance is lost on termination and must be re-instantiated. Cache the compiled module (see Pattern 3) to speed up restarts.
+- `instantiateStreaming` may fail in service worker contexts on some Chrome versions. Always fall back to `ArrayBuffer`-based instantiation.
 
 ---
 
 ## Pattern 2: Loading WASM in Content Scripts
 
-Content scripts inherit the **host page's** CSP for WASM execution. If the page blocks `wasm-unsafe-eval`, loading fails. Probe first, then fall back to the background.
+Content scripts run in an isolated world but can load WASM modules. The module must be declared in `web_accessible_resources` so the content script can fetch it.
 
-```ts
-async function getWasmStrategy(): Promise<"local" | "remote"> {
-  try {
-    // Smallest valid WASM module: magic number + version
-    new WebAssembly.Module(
-      new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00])
-    );
-    return "local";
-  } catch {
-    return "remote";
-  }
-}
+```typescript
+// manifest.json (partial)
+// {
+//   "web_accessible_resources": [{
+//     "resources": ["wasm/analyzer.wasm"],
+//     "matches": ["https://*.example.com/*"]
+//   }]
+// }
 
-async function processData(data: Uint8Array): Promise<Uint8Array> {
-  if ((await getWasmStrategy()) === "local") {
-    const url = chrome.runtime.getURL("wasm/parser.wasm");
-    const bytes = await (await fetch(url)).arrayBuffer();
-    const { instance } = await WebAssembly.instantiate(bytes, {});
-    const fn = instance.exports.parse as (ptr: number, len: number) => number;
-    // ... use WASM directly
-    return data;
-  }
-  // Delegate to service worker when CSP blocks WASM
-  const resp = await chrome.runtime.sendMessage({
-    type: "WASM_PROCESS",
-    payload: Array.from(data),
-  });
-  return new Uint8Array(resp.result);
-}
-```
+// content.ts
+async function loadAnalyzer(): Promise<WebAssembly.Instance> {
+  const wasmUrl = chrome.runtime.getURL("wasm/analyzer.wasm");
+  const response = await fetch(wasmUrl);
+  const bytes = await response.arrayBuffer();
 
----
-
-## Pattern 3: Loading WASM in Offscreen Documents
-
-Offscreen documents have full WASM support including `instantiateStreaming`. This is the recommended context for heavy workloads.
-
-```ts
-// offscreen/wasm-runner.ts
-interface WasmExports {
-  memory: WebAssembly.Memory;
-  process_data: (ptr: number, len: number) => number;
-  alloc: (size: number) => number;
-  dealloc: (ptr: number, size: number) => void;
-}
-
-let exports: WasmExports | null = null;
-
-async function init(): Promise<WasmExports> {
-  if (exports) return exports;
-  const url = chrome.runtime.getURL("wasm/engine.wasm");
-  const { instance } = await WebAssembly.instantiateStreaming(fetch(url), {});
-  exports = instance.exports as unknown as WasmExports;
-  return exports;
-}
-
-chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
-  if (msg.type !== "OFFSCREEN_WASM") return;
-  init().then((wasm) => {
-    const input = new Uint8Array(msg.payload);
-    const ptr = wasm.alloc(input.length);
-    new Uint8Array(wasm.memory.buffer).set(input, ptr);
-    const outLen = wasm.process_data(ptr, input.length);
-    const result = new Uint8Array(wasm.memory.buffer).slice(ptr, ptr + outLen);
-    wasm.dealloc(ptr, input.length);
-    sendResponse(Array.from(result));
-  });
-  return true;
-});
-```
-
----
-
-## Pattern 4: Bundling WASM with Vite/webpack
-
-### Vite with vite-plugin-wasm
-
-```ts
-import { defineConfig } from "vite";
-import wasm from "vite-plugin-wasm";
-import topLevelAwait from "vite-plugin-top-level-await";
-
-export default defineConfig({
-  plugins: [wasm(), topLevelAwait()],
-  build: {
-    target: "esnext",
-    rollupOptions: {
-      output: { assetFileNames: "wasm/[name][extname]" },
+  const { instance } = await WebAssembly.instantiate(bytes, {
+    env: {
+      now: () => performance.now(),
     },
-  },
-});
-```
-
-### wasm-pack output integration
-
-```ts
-import init, { process_text } from "../wasm/pkg/my_crate";
-
-let ready = false;
-export async function ensureWasm(): Promise<void> {
-  if (ready) return;
-  await init(chrome.runtime.getURL("wasm/my_crate_bg.wasm"));
-  ready = true;
-}
-export { process_text };
-```
-
-### Emscripten loader
-
-```ts
-import createModule from "../wasm/pkg/module.js";
-
-export async function loadEmscriptenModule() {
-  return createModule({
-    locateFile: (path: string) => chrome.runtime.getURL(`wasm/${path}`),
   });
+
+  return instance;
+}
+
+// Example: analyze DOM text content with WASM
+async function analyzePageContent(): Promise<number> {
+  const instance = await loadAnalyzer();
+  const memory = instance.exports.memory as WebAssembly.Memory;
+  const alloc = instance.exports.alloc as (size: number) => number;
+  const analyze = instance.exports.analyze as (ptr: number, len: number) => number;
+
+  const text = document.body.innerText;
+  const encoded = new TextEncoder().encode(text);
+
+  // Allocate memory in WASM and copy data
+  const ptr = alloc(encoded.length);
+  new Uint8Array(memory.buffer, ptr, encoded.length).set(encoded);
+
+  return analyze(ptr, encoded.length);
 }
 ```
 
-Emscripten output may use `eval` internally. If so, load it in a sandboxed page (see Pattern 8).
+**Gotchas:**
+- Exposing WASM files via `web_accessible_resources` makes them accessible to the host page. Scope `matches` to only the domains that need access.
+- Content scripts share the page's CSP constraints for network requests, but WASM compilation uses the extension's own CSP.
+- Large WASM modules in content scripts increase memory usage per tab. Consider offloading to the service worker and communicating results via messaging.
 
 ---
 
-## Pattern 5: Passing Data Between JS and WASM
+## Pattern 3: WASM Module Caching with chrome.storage
 
-WASM linear memory is a flat `ArrayBuffer`. Data must be explicitly copied in and out. Refresh views after any allocation because `memory.buffer` can be detached when memory grows.
+Compiling WASM from bytes is expensive. Cache the compiled module bytes in `chrome.storage.local` to avoid re-fetching on every service worker restart.
 
-```ts
-class WasmBridge {
-  constructor(
-    private memory: WebAssembly.Memory,
-    private alloc: (size: number) => number,
-    private dealloc: (ptr: number, size: number) => void
-  ) {}
+```typescript
+// wasm-cache.ts
+const WASM_CACHE_KEY = "wasm_module_v1";
 
-  writeString(str: string): [number, number] {
+interface CachedModule {
+  bytes: number[];
+  version: string;
+  timestamp: number;
+}
+
+async function getCachedModule(
+  wasmPath: string,
+  version: string
+): Promise<WebAssembly.Module> {
+  // Try cache first
+  const { [WASM_CACHE_KEY]: cached } = await chrome.storage.local.get(
+    WASM_CACHE_KEY
+  );
+
+  if (cached && (cached as CachedModule).version === version) {
+    const bytes = new Uint8Array((cached as CachedModule).bytes);
+    return WebAssembly.compile(bytes);
+  }
+
+  // Fetch and cache
+  const url = chrome.runtime.getURL(wasmPath);
+  const response = await fetch(url);
+  const bytes = await response.arrayBuffer();
+  const byteArray = Array.from(new Uint8Array(bytes));
+
+  await chrome.storage.local.set({
+    [WASM_CACHE_KEY]: {
+      bytes: byteArray,
+      version,
+      timestamp: Date.now(),
+    } satisfies CachedModule,
+  });
+
+  return WebAssembly.compile(bytes);
+}
+
+async function instantiateCached(
+  wasmPath: string,
+  version: string,
+  imports: WebAssembly.Imports
+): Promise<WebAssembly.Instance> {
+  const module = await getCachedModule(wasmPath, version);
+  return WebAssembly.instantiate(module, imports);
+}
+
+// Usage
+const instance = await instantiateCached(
+  "wasm/processor.wasm",
+  "1.2.0",
+  { env: { /* ... */ } }
+);
+```
+
+**Gotchas:**
+- `chrome.storage.local` has a default quota of ~10 MB. Large WASM modules (several MB) can consume significant storage. Use `chrome.storage.local.getBytesInUse` to monitor.
+- Storing binary data as `number[]` increases size due to JSON serialization overhead. For modules over 1 MB, consider using IndexedDB instead (available in service workers since Chrome 108).
+- Always version your cache key so that extension updates load the new WASM binary.
+
+---
+
+## Pattern 4: Memory Management for WASM Modules
+
+WASM linear memory must be managed carefully, especially in long-running extension contexts where leaks accumulate.
+
+```typescript
+// memory-manager.ts
+class WasmMemoryManager {
+  private memory: WebAssembly.Memory;
+  private alloc: (size: number) => number;
+  private dealloc: (ptr: number, size: number) => void;
+  private allocations: Map<number, number> = new Map(); // ptr -> size
+
+  constructor(instance: WebAssembly.Instance) {
+    this.memory = instance.exports.memory as WebAssembly.Memory;
+    this.alloc = instance.exports.alloc as (size: number) => number;
+    this.dealloc = instance.exports.dealloc as (
+      ptr: number,
+      size: number
+    ) => void;
+  }
+
+  allocate(size: number): number {
+    const ptr = this.alloc(size);
+    if (ptr === 0) {
+      throw new Error(`WASM allocation failed for ${size} bytes`);
+    }
+    this.allocations.set(ptr, size);
+    return ptr;
+  }
+
+  free(ptr: number): void {
+    const size = this.allocations.get(ptr);
+    if (size === undefined) {
+      console.warn("Attempting to free unknown pointer:", ptr);
+      return;
+    }
+    this.dealloc(ptr, size);
+    this.allocations.delete(ptr);
+  }
+
+  writeString(str: string): { ptr: number; len: number } {
     const encoded = new TextEncoder().encode(str);
-    const ptr = this.alloc(encoded.length);
-    new Uint8Array(this.memory.buffer).set(encoded, ptr);
-    return [ptr, encoded.length];
+    const ptr = this.allocate(encoded.length);
+    new Uint8Array(this.memory.buffer, ptr, encoded.length).set(encoded);
+    return { ptr, len: encoded.length };
   }
 
   readString(ptr: number, len: number): string {
@@ -218,199 +234,550 @@ class WasmBridge {
     );
   }
 
-  writeBytes(data: Uint8Array): [number, number] {
-    const ptr = this.alloc(data.length);
-    new Uint8Array(this.memory.buffer).set(data, ptr);
-    return [ptr, data.length];
+  writeBytes(data: Uint8Array): number {
+    const ptr = this.allocate(data.length);
+    new Uint8Array(this.memory.buffer, ptr, data.length).set(data);
+    return ptr;
   }
 
   readBytes(ptr: number, len: number): Uint8Array {
-    return new Uint8Array(this.memory.buffer).slice(ptr, ptr + len);
+    return new Uint8Array(this.memory.buffer, ptr, len).slice();
   }
 
-  free(ptr: number, len: number): void {
-    this.dealloc(ptr, len);
-  }
-}
-```
-
-For zero-copy sharing, use `SharedArrayBuffer` with shared memory:
-
-```ts
-function createSharedWasmMemory(pages: number): WebAssembly.Memory {
-  return new WebAssembly.Memory({
-    initial: pages,
-    maximum: pages * 4,
-    shared: true, // Requires cross-origin isolation headers
-  });
-}
-```
-
-Shared memory is available in extension pages but not content scripts.
-
----
-
-## Pattern 6: High-Performance Text Processing
-
-WASM excels at regex matching and parsing on large inputs where JS overhead is noticeable.
-
-```ts
-class WasmTextProcessor {
-  private bridge: WasmBridge;
-  constructor(
-    private wasm: {
-      memory: WebAssembly.Memory;
-      alloc: (n: number) => number;
-      dealloc: (p: number, n: number) => void;
-      count_matches: (tp: number, tl: number, pp: number, pl: number) => number;
-      extract_emails: (tp: number, tl: number, op: number) => number;
+  freeAll(): void {
+    for (const [ptr, size] of this.allocations) {
+      this.dealloc(ptr, size);
     }
-  ) {
-    this.bridge = new WasmBridge(wasm.memory, wasm.alloc, wasm.dealloc);
+    this.allocations.clear();
   }
 
-  countMatches(text: string, pattern: string): number {
-    const [tp, tl] = this.bridge.writeString(text);
-    const [pp, pl] = this.bridge.writeString(pattern);
-    const count = this.wasm.count_matches(tp, tl, pp, pl);
-    this.bridge.free(tp, tl);
-    this.bridge.free(pp, pl);
-    return count;
-  }
-
-  extractEmails(text: string): string[] {
-    const [tp, tl] = this.bridge.writeString(text);
-    const outCap = 256_000;
-    const op = this.wasm.alloc(outCap);
-    const len = this.wasm.extract_emails(tp, tl, op);
-    const raw = this.bridge.readString(op, len);
-    this.bridge.free(tp, tl);
-    this.bridge.free(op, outCap);
-    return raw.split("\0").filter(Boolean);
+  get stats(): { allocations: number; totalBytes: number } {
+    let totalBytes = 0;
+    for (const size of this.allocations.values()) {
+      totalBytes += size;
+    }
+    return { allocations: this.allocations.size, totalBytes };
   }
 }
 ```
 
-WASM regex engines like `regex-automata` (Rust) outperform JS `RegExp` by 3-10x on large documents (100KB+). For simple patterns on small text, JS is faster due to copy overhead.
+**Gotchas:**
+- WASM memory can only grow, never shrink. If your module allocates heavily, memory usage increases monotonically until the context (service worker or tab) is destroyed.
+- When the service worker restarts, all WASM memory is reclaimed. This is actually beneficial -- treat SW termination as automatic garbage collection.
+- The `memory.buffer` reference becomes invalid after `memory.grow()`. Always re-read `memory.buffer` after any operation that might grow memory.
 
 ---
 
-## Pattern 7: Cryptography in Extensions
+## Pattern 5: Passing Data Between JS and WASM
 
-WASM enables battle-tested crypto libraries (RustCrypto, libsodium) for algorithms Web Crypto does not support.
+WASM only understands numeric types natively. Strings, objects, and arrays must be serialized into linear memory.
 
-```ts
-class WasmCrypto {
-  private bridge: WasmBridge;
-  constructor(private wasm: any) {
-    this.bridge = new WasmBridge(wasm.memory, wasm.alloc, wasm.dealloc);
+```typescript
+// data-bridge.ts
+
+interface WasmExports {
+  memory: WebAssembly.Memory;
+  alloc: (size: number) => number;
+  dealloc: (ptr: number, size: number) => void;
+  process_json: (ptr: number, len: number) => number;
+  get_result_ptr: () => number;
+  get_result_len: () => number;
+}
+
+class WasmDataBridge {
+  private exports: WasmExports;
+
+  constructor(instance: WebAssembly.Instance) {
+    this.exports = instance.exports as unknown as WasmExports;
   }
 
-  sha256(data: Uint8Array): Uint8Array {
-    const [dp, dl] = this.bridge.writeBytes(data);
-    const op = this.wasm.alloc(32);
-    this.wasm.sha256(dp, dl, op);
-    const hash = this.bridge.readBytes(op, 32);
-    this.bridge.free(dp, dl);
-    this.bridge.free(op, 32);
+  // Pass a JS object to WASM as JSON
+  callWithJson<TInput, TOutput>(
+    fn: (ptr: number, len: number) => number,
+    data: TInput
+  ): TOutput {
+    const json = JSON.stringify(data);
+    const encoded = new TextEncoder().encode(json);
+
+    const ptr = this.exports.alloc(encoded.length);
+    const view = new Uint8Array(this.exports.memory.buffer, ptr, encoded.length);
+    view.set(encoded);
+
+    const status = fn.call(null, ptr, encoded.length);
+    this.exports.dealloc(ptr, encoded.length);
+
+    if (status !== 0) {
+      throw new Error(`WASM function returned error code: ${status}`);
+    }
+
+    // Read result
+    const resultPtr = this.exports.get_result_ptr();
+    const resultLen = this.exports.get_result_len();
+    const resultBytes = new Uint8Array(
+      this.exports.memory.buffer,
+      resultPtr,
+      resultLen
+    );
+    const resultJson = new TextDecoder().decode(resultBytes);
+
+    return JSON.parse(resultJson) as TOutput;
+  }
+
+  // Pass typed arrays directly (zero-copy for numeric data)
+  passFloat64Array(data: Float64Array): number {
+    const byteLen = data.byteLength;
+    const ptr = this.exports.alloc(byteLen);
+    const view = new Float64Array(
+      this.exports.memory.buffer,
+      ptr,
+      data.length
+    );
+    view.set(data);
+    return ptr;
+  }
+
+  // Read a typed array result from WASM
+  readFloat64Array(ptr: number, length: number): Float64Array {
+    return new Float64Array(
+      this.exports.memory.buffer,
+      ptr,
+      length
+    ).slice(); // slice() to copy out of WASM memory
+  }
+}
+
+// Usage in extension
+const bridge = new WasmDataBridge(instance);
+
+interface AnalysisInput {
+  text: string;
+  options: { caseSensitive: boolean; maxResults: number };
+}
+
+interface AnalysisResult {
+  matches: number;
+  score: number;
+}
+
+const result = bridge.callWithJson<AnalysisInput, AnalysisResult>(
+  instance.exports.process_json as (ptr: number, len: number) => number,
+  { text: "hello world", options: { caseSensitive: false, maxResults: 10 } }
+);
+```
+
+**Gotchas:**
+- JSON serialization adds overhead. For hot paths with numeric data, pass typed arrays directly into WASM memory instead of serializing to JSON.
+- Always `.slice()` when reading typed arrays from WASM memory. Without slicing, the returned view shares the WASM buffer and becomes invalid if memory grows or the module is freed.
+- String encoding must match between JS and WASM. Use UTF-8 consistently. If your WASM module is compiled from Rust, its `String` type is already UTF-8.
+
+---
+
+## Pattern 6: WASM for Crypto Operations in Extensions
+
+WASM excels at cryptographic operations that would be slow in pure JavaScript. This is useful for extensions that handle encryption, hashing, or signature verification client-side.
+
+```typescript
+// crypto-wasm.ts
+
+interface CryptoWasmExports {
+  memory: WebAssembly.Memory;
+  alloc: (size: number) => number;
+  dealloc: (ptr: number, size: number) => void;
+  sha256: (inputPtr: number, inputLen: number, outputPtr: number) => void;
+  argon2_hash: (
+    passwordPtr: number,
+    passwordLen: number,
+    saltPtr: number,
+    saltLen: number,
+    outputPtr: number,
+    iterations: number,
+    memoryKb: number
+  ) => number;
+  aes_gcm_encrypt: (
+    keyPtr: number,
+    keyLen: number,
+    noncePtr: number,
+    dataPtr: number,
+    dataLen: number,
+    outputPtr: number
+  ) => number;
+}
+
+class ExtensionCrypto {
+  private exports: CryptoWasmExports;
+
+  constructor(instance: WebAssembly.Instance) {
+    this.exports = instance.exports as unknown as CryptoWasmExports;
+  }
+
+  async sha256(data: Uint8Array): Promise<Uint8Array> {
+    const inputPtr = this.exports.alloc(data.length);
+    const outputPtr = this.exports.alloc(32); // SHA-256 is always 32 bytes
+
+    new Uint8Array(this.exports.memory.buffer, inputPtr, data.length).set(data);
+    this.exports.sha256(inputPtr, data.length, outputPtr);
+
+    const hash = new Uint8Array(this.exports.memory.buffer, outputPtr, 32).slice();
+
+    this.exports.dealloc(inputPtr, data.length);
+    this.exports.dealloc(outputPtr, 32);
+
     return hash;
   }
 
-  encrypt(key: Uint8Array, data: Uint8Array): Uint8Array {
-    const nonce = crypto.getRandomValues(new Uint8Array(12));
-    const [kp, kl] = this.bridge.writeBytes(key);
-    const [np, nl] = this.bridge.writeBytes(nonce);
-    const [dp, dl] = this.bridge.writeBytes(data);
-    const outCap = data.length + 16; // ciphertext + auth tag
-    const op = this.wasm.alloc(outCap);
+  async hashPassword(
+    password: string,
+    salt: Uint8Array
+  ): Promise<Uint8Array> {
+    const passwordBytes = new TextEncoder().encode(password);
+    const passwordPtr = this.exports.alloc(passwordBytes.length);
+    const saltPtr = this.exports.alloc(salt.length);
+    const outputPtr = this.exports.alloc(32);
 
-    const len = this.wasm.aes_gcm_encrypt(kp, kl, np, nl, dp, dl, op);
-    const ct = this.bridge.readBytes(op, len);
-    this.bridge.free(kp, kl);
-    this.bridge.free(np, nl);
-    this.bridge.free(dp, dl);
-    this.bridge.free(op, outCap);
+    new Uint8Array(
+      this.exports.memory.buffer, passwordPtr, passwordBytes.length
+    ).set(passwordBytes);
+    new Uint8Array(
+      this.exports.memory.buffer, saltPtr, salt.length
+    ).set(salt);
 
-    // Prepend nonce to ciphertext
-    const result = new Uint8Array(12 + ct.length);
-    result.set(nonce, 0);
-    result.set(ct, 12);
-    return result;
+    const status = this.exports.argon2_hash(
+      passwordPtr, passwordBytes.length,
+      saltPtr, salt.length,
+      outputPtr,
+      3,    // iterations
+      65536 // 64 MB memory cost
+    );
+
+    if (status !== 0) {
+      throw new Error("Argon2 hashing failed");
+    }
+
+    const hash = new Uint8Array(this.exports.memory.buffer, outputPtr, 32).slice();
+
+    this.exports.dealloc(passwordPtr, passwordBytes.length);
+    this.exports.dealloc(saltPtr, salt.length);
+    this.exports.dealloc(outputPtr, 32);
+
+    return hash;
   }
 }
+
+// Usage in background service worker
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg.type === "HASH_PASSWORD") {
+    loadCryptoWasm().then(async (crypto) => {
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const hash = await crypto.hashPassword(msg.password, salt);
+      sendResponse({
+        hash: Array.from(hash),
+        salt: Array.from(salt),
+      });
+    });
+    return true;
+  }
+});
 ```
 
-**When to choose WASM vs Web Crypto:** Use Web Crypto for standard algorithms (AES-GCM, RSA, ECDSA) since it is hardware-accelerated. Use WASM for Argon2, ChaCha20-Poly1305, BLAKE3, or custom KDFs.
+**Gotchas:**
+- For simple hashing (SHA-256, SHA-512), the Web Crypto API (`crypto.subtle`) is already fast and available in service workers. Use WASM only for algorithms not in Web Crypto (Argon2, scrypt, custom ciphers).
+- Memory-hard algorithms like Argon2 require significant WASM memory. Ensure the initial memory allocation in the WASM module is large enough, or configure `WebAssembly.Memory` with adequate `initial` and `maximum` pages.
+- Sensitive data (passwords, keys) stored in WASM linear memory is not automatically zeroed. Overwrite buffers with zeros after use.
 
 ---
 
-## Pattern 8: CSP Considerations for WASM
+## Pattern 7: Performance Comparison -- JS vs WASM in Extensions
 
-WASM requires `wasm-unsafe-eval` in the extension CSP. This is distinct from `unsafe-eval`, which MV3 forbids.
+Not everything benefits from WASM. Here is a framework for benchmarking and deciding when WASM is worthwhile.
 
-```jsonc
-// manifest.json
-{
-  "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+```typescript
+// benchmark.ts
+
+interface BenchmarkResult {
+  name: string;
+  jsTimeMs: number;
+  wasmTimeMs: number;
+  speedup: string;
+  recommendation: string;
+}
+
+async function benchmark(
+  name: string,
+  jsFn: () => void,
+  wasmFn: () => void,
+  iterations: number = 1000
+): Promise<BenchmarkResult> {
+  // Warm up
+  for (let i = 0; i < 10; i++) {
+    jsFn();
+    wasmFn();
   }
+
+  // Benchmark JS
+  const jsStart = performance.now();
+  for (let i = 0; i < iterations; i++) {
+    jsFn();
+  }
+  const jsTime = performance.now() - jsStart;
+
+  // Benchmark WASM
+  const wasmStart = performance.now();
+  for (let i = 0; i < iterations; i++) {
+    wasmFn();
+  }
+  const wasmTime = performance.now() - wasmStart;
+
+  const speedup = jsTime / wasmTime;
+
+  return {
+    name,
+    jsTimeMs: Math.round(jsTime * 100) / 100,
+    wasmTimeMs: Math.round(wasmTime * 100) / 100,
+    speedup: `${speedup.toFixed(2)}x`,
+    recommendation:
+      speedup > 2
+        ? "Use WASM"
+        : speedup > 1.2
+          ? "WASM marginal, consider complexity trade-off"
+          : "Stick with JS",
+  };
+}
+
+// Example benchmarks for common extension tasks
+async function runExtensionBenchmarks(
+  wasmInstance: WebAssembly.Instance
+): Promise<void> {
+  const results: BenchmarkResult[] = [];
+  const exports = wasmInstance.exports as Record<string, Function>;
+
+  // 1. Image processing (pixel manipulation)
+  const imageData = new Uint8Array(1920 * 1080 * 4); // Full HD RGBA
+  crypto.getRandomValues(imageData);
+
+  results.push(
+    await benchmark(
+      "Image grayscale (1080p)",
+      () => {
+        for (let i = 0; i < imageData.length; i += 4) {
+          const avg = (imageData[i] + imageData[i + 1] + imageData[i + 2]) / 3;
+          imageData[i] = imageData[i + 1] = imageData[i + 2] = avg;
+        }
+      },
+      () => exports.grayscale(imageData.length),
+      10
+    )
+  );
+
+  // 2. String search (regex-like pattern matching)
+  const text = "a".repeat(10000);
+  results.push(
+    await benchmark(
+      "Pattern search (20KB text)",
+      () => text.indexOf("search_pattern"),
+      () => exports.find_pattern(text.length),
+      100
+    )
+  );
+
+  // 3. JSON parsing
+  const jsonStr = JSON.stringify({ data: Array(1000).fill({ x: 1, y: 2 }) });
+  results.push(
+    await benchmark(
+      "JSON parse (structured data)",
+      () => JSON.parse(jsonStr),
+      () => exports.parse_json(jsonStr.length),
+      100
+    )
+  );
+
+  console.table(results);
 }
 ```
 
-For Emscripten modules that need `eval`, use a sandboxed page:
+**When WASM wins in extensions:**
 
-```jsonc
-{
-  "content_security_policy": {
-    "sandbox": "sandbox allow-scripts; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'"
-  },
-  "sandbox": { "pages": ["sandbox.html"] }
-}
+| Task | Typical Speedup | Notes |
+|---|---|---|
+| Image/video processing | 3-10x | Pixel-level operations on large buffers |
+| Cryptographic hashing | 2-5x | Argon2, bcrypt, custom ciphers |
+| Data compression | 2-8x | zlib, brotli, custom codecs |
+| Complex parsing | 2-4x | Binary formats, protocol buffers |
+| Math-heavy computation | 3-15x | Signal processing, simulations |
+
+**When JS is sufficient:**
+
+| Task | Why JS Wins |
+|---|---|
+| DOM manipulation | WASM cannot access DOM directly |
+| Simple string operations | V8 is heavily optimized for strings |
+| Small data transforms | Marshaling overhead dominates |
+| Chrome API calls | All chrome.* APIs are JS-only |
+| JSON handling | V8's native JSON.parse is very fast |
+
+**Gotchas:**
+- The marshaling cost (copying data between JS and WASM memory) can negate WASM's raw speed advantage for small inputs. Benchmark with realistic data sizes.
+- V8 optimizes hot JS code aggressively (TurboFan). Simple loops in JS may approach WASM speed after JIT compilation.
+- In service workers, WASM instantiation cost is paid on every wake-up unless you cache the compiled module (Pattern 3).
+
+---
+
+## Pattern 8: CSP Considerations for WASM in MV3
+
+Manifest V3 enforces a strict Content Security Policy. WASM compilation is allowed by default in MV3, but there are nuances to understand.
+
+```typescript
+// MV3 default CSP (implicit, you do NOT set this yourself):
+// script-src 'self' 'wasm-unsafe-eval';
+// object-src 'self';
+
+// The 'wasm-unsafe-eval' directive is automatically included in MV3,
+// allowing WebAssembly.compile() and WebAssembly.instantiate().
+
+// manifest.json -- extending the CSP (if needed)
+// {
+//   "content_security_policy": {
+//     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+//   }
+// }
 ```
 
-Sandboxed pages have no `chrome.*` API access. Communicate via `window.postMessage`.
+### Verifying WASM Loads Under CSP
 
-Runtime detection for choosing the right execution context:
-
-```ts
-async function isWasmAllowed(): Promise<boolean> {
+```typescript
+// csp-check.ts
+async function verifyWasmSupport(): Promise<{
+  supported: boolean;
+  error?: string;
+}> {
   try {
-    await WebAssembly.compile(
-      new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00])
-    );
-    return true;
-  } catch {
-    return false;
+    // Minimal valid WASM module (8 bytes: magic number + version)
+    const minimalWasm = new Uint8Array([
+      0x00, 0x61, 0x73, 0x6d, // \0asm magic
+      0x01, 0x00, 0x00, 0x00, // version 1
+    ]);
+    await WebAssembly.compile(minimalWasm);
+    return { supported: true };
+  } catch (err) {
+    return {
+      supported: false,
+      error: `WASM blocked by CSP: ${(err as Error).message}`,
+    };
   }
 }
 
-async function chooseContext(): Promise<"local" | "offscreen" | "sandbox"> {
-  if (await isWasmAllowed()) return "local";
-  if (chrome.offscreen) return "offscreen";
-  return "sandbox";
-}
+// Run on extension startup
+chrome.runtime.onInstalled.addListener(async () => {
+  const { supported, error } = await verifyWasmSupport();
+  if (!supported) {
+    console.error("WASM not available:", error);
+  }
+});
 ```
+
+### Loading WASM Safely Across Contexts
+
+```typescript
+// wasm-loader.ts
+type WasmContext = "service-worker" | "extension-page" | "content-script";
+
+function detectContext(): WasmContext {
+  if (
+    typeof ServiceWorkerGlobalScope !== "undefined" &&
+    self instanceof ServiceWorkerGlobalScope
+  ) {
+    return "service-worker";
+  }
+  if (chrome.extension?.getBackgroundPage) {
+    return "extension-page";
+  }
+  return "content-script";
+}
+
+async function loadWasmModule(
+  path: string,
+  imports: WebAssembly.Imports = {}
+): Promise<WebAssembly.Instance> {
+  const context = detectContext();
+  const url = chrome.runtime.getURL(path);
+
+  switch (context) {
+    case "service-worker":
+    case "extension-page": {
+      // Extension CSP applies -- wasm-unsafe-eval is available
+      const response = await fetch(url);
+      const bytes = await response.arrayBuffer();
+      const { instance } = await WebAssembly.instantiate(bytes, imports);
+      return instance;
+    }
+
+    case "content-script": {
+      // Content scripts use the extension's CSP for WASM compilation,
+      // but the host page's CSP for network requests.
+      // Fetching from chrome.runtime.getURL bypasses the host page CSP.
+      try {
+        const response = await fetch(url);
+        const bytes = await response.arrayBuffer();
+        const { instance } = await WebAssembly.instantiate(bytes, imports);
+        return instance;
+      } catch (err) {
+        // Fallback: ask the service worker to compile and send the bytes
+        console.warn(
+          "Direct WASM load failed in content script, falling back to SW"
+        );
+        const bytes = await chrome.runtime.sendMessage({
+          type: "GET_WASM_BYTES",
+          path,
+        });
+        const { instance } = await WebAssembly.instantiate(
+          new Uint8Array(bytes),
+          imports
+        );
+        return instance;
+      }
+    }
+  }
+}
+
+// Service worker handler for the fallback path
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg.type === "GET_WASM_BYTES") {
+    const url = chrome.runtime.getURL(msg.path);
+    fetch(url)
+      .then((r) => r.arrayBuffer())
+      .then((buf) => sendResponse(Array.from(new Uint8Array(buf))));
+    return true;
+  }
+});
+```
+
+### CSP Quick Reference for WASM
+
+| Directive | MV3 Default | Effect on WASM |
+|---|---|---|
+| `wasm-unsafe-eval` | Included | Allows `WebAssembly.compile()` and `instantiate()` |
+| `script-src 'self'` | Included | WASM files must be bundled with the extension |
+| `script-src 'unsafe-eval'` | **Forbidden** in MV3 | Cannot use `eval()`, but WASM is unaffected |
+| No `wasm-unsafe-eval` | N/A (always present) | Would block all WASM compilation |
+
+**Gotchas:**
+- MV3 automatically includes `wasm-unsafe-eval` in the extension pages CSP. You do not need to add it manually. If you override `content_security_policy.extension_pages`, make sure you keep `wasm-unsafe-eval` in your custom policy or WASM will break.
+- Content scripts compile WASM under the extension's CSP, not the host page's CSP. This means WASM works in content scripts even on pages with restrictive CSPs.
+- Sandbox pages (`content_security_policy.sandbox`) can use `wasm-unsafe-eval` independently. This is useful for isolating WASM execution in an iframe.
+- Remote WASM files cannot be loaded in MV3. All WASM modules must be bundled in the extension package. Fetch from `chrome.runtime.getURL` only.
 
 ---
 
 ## Summary
 
-| # | Pattern | Key Takeaway |
+| Pattern | Best For | Key Consideration |
 |---|---|---|
-| 1 | Service Worker Loading | Use `instantiate` with `ArrayBuffer`; no streaming |
-| 2 | Content Script Loading | Subject to host page CSP; probe before loading |
-| 3 | Offscreen Documents | Full WASM support including `instantiateStreaming` |
-| 4 | Bundler Integration | Configure Vite/webpack to emit `.wasm` alongside JS |
-| 5 | JS/WASM Data Passing | Refresh views after allocations; memory can grow |
-| 6 | Text Processing | WASM regex outperforms JS on large inputs (100KB+) |
-| 7 | Cryptography | Use WASM for Argon2/BLAKE3; Web Crypto for standard algos |
-| 8 | CSP Configuration | Add `wasm-unsafe-eval` to `extension_pages` CSP |
+| SW loading | Background processing | Re-instantiation on wake-up |
+| Content script loading | Per-page analysis | Memory per tab, `web_accessible_resources` |
+| Module caching | Fast SW restarts | Storage quota, versioning |
+| Memory management | Long-running tasks | Linear memory only grows |
+| Data bridging | Complex inputs/outputs | Marshaling overhead |
+| Crypto operations | Argon2, custom ciphers | Check Web Crypto first |
+| Performance benchmarking | Build vs. buy decisions | Realistic data sizes |
+| CSP configuration | Deployment correctness | Keep `wasm-unsafe-eval` |
 
-**General guidance:**
-
-- Start with offscreen documents for serious WASM workloads.
-- Use the service worker only for lightweight, fast-loading modules.
-- Always add `wasm-unsafe-eval` to your extension CSP.
-- Test content script WASM on restrictive sites (banking, enterprise portals).
-- Prefer `wasm-pack` (Rust) for new projects; Emscripten for existing C/C++ code.
-- Profile before assuming WASM is faster -- for small data, JS avoids copy overhead.
+WASM is a powerful tool for Chrome extensions, but it adds complexity. Use it when profiling shows a clear bottleneck that JS cannot solve, and prefer the Web Platform APIs (Web Crypto, Compression Streams) when they cover your use case.
