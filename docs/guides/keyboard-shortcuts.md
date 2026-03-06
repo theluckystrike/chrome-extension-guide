@@ -1,59 +1,103 @@
-# Keyboard Shortcuts in Chrome Extensions
+# Chrome Extension Keyboard Shortcuts API Guide
 
-## Introduction
+This guide provides comprehensive coverage of the `chrome.commands` API for implementing keyboard shortcuts in Chrome Extensions. Keyboard shortcuts significantly enhance user productivity by enabling quick access to extension features without navigating through menus or clicking toolbar icons.
 
-Keyboard shortcuts enhance user productivity by allowing quick access to extension features. The `chrome.commands` API provides a robust system for defining, handling, and managing keyboard shortcuts.
+## Overview of the chrome.commands API
 
-## The chrome.commands API
+The `chrome.commands` API is a powerful system for defining, handling, and managing keyboard shortcuts in Chrome Extensions. It allows extension developers to register keyboard combinations that users can trigger to activate specific extension functionality.
 
-- **Manifest**: Define shortcuts in `manifest.json` using `commands`
-- **Listener**: Use `chrome.commands.onCommand` to respond
-- **Query**: Use `chrome.commands.getAll()` to retrieve bindings
-- **Customize**: Users modify via `chrome://extensions/shortcuts`
+### Core Components
 
-## Manifest Configuration
+The API consists of three main parts that work together to provide a complete keyboard shortcut system:
 
-### Basic Structure
+1. **Manifest Configuration**: Define shortcuts in `manifest.json` using the `commands` key
+2. **Event Listener**: Use `chrome.commands.onCommand` to respond when shortcuts are triggered
+3. **Query API**: Use `chrome.commands.getAll()` to retrieve current bindings
+
+### Basic API Methods
+
+```javascript
+// Retrieve all registered commands and their current shortcuts
+chrome.commands.getAll(callback);
+
+// Listen for command activation
+chrome.commands.onCommand.addListener((command, tab) => {
+  // Handle the command
+});
+```
+
+The `getAll()` method returns an array of command objects, each containing:
+- `name`: The command identifier
+- `description`: The description from the manifest
+- `shortcut`: The current keyboard shortcut (or empty if not set)
+- `global`: Whether it's a global shortcut
+
+## Manifest.json commands Entry
+
+The `commands` key in your manifest.json file is where you define all keyboard shortcuts for your extension. Each command requires specific properties to function correctly.
+
+### Required Properties
+
+Every command definition must include two required properties:
+
+1. **suggested_key**: The default keyboard combination
+2. **description**: A human-readable description shown in the shortcuts UI
+
+### Basic Manifest Structure
 
 ```json
 {
   "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0.0",
   "commands": {
-    "toggle-feature": {
+    "command-name": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
-      "description": "Toggle the main feature on/off"
+      "description": "Description shown in shortcuts UI"
     }
   }
 }
 ```
 
-### Properties
-
-- **suggested_key** (required): Default keyboard combination
-- **description** (required): Shown in shortcuts UI
-- **global** (optional): Works when Chrome isn't focused
+### Complete Example
 
 ```json
 {
+  "manifest_version": 3,
+  "name": "Productivity Booster",
+  "version": "1.0.0",
+  "permissions": ["storage", "sidePanel"],
   "commands": {
     "_execute_action": {
-      "suggested_key": {"default": "Ctrl+Shift+E", "mac": "Command+Shift+E"},
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
       "description": "Open extension popup"
     },
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T"
+      },
+      "description": "Toggle the main feature on/off"
+    },
     "open-sidebar": {
-      "suggested_key": {"default": "Ctrl+Shift+B", "mac": "Command+Shift+B"},
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      },
       "description": "Open the side panel"
     },
-    "quick-search": {
-      "suggested_key": {"default": "Alt+S", "mac": "Alt+S"},
-      "description": "Quick search on current page"
-    },
-    "export-data": {
-      "suggested_key": {"default": "Ctrl+Shift+X", "mac": "Command+Shift+X"},
-      "description": "Export extension data"
+    "quick-action": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "Execute quick action on current page"
     }
   }
 }
@@ -61,11 +105,18 @@ Keyboard shortcuts enhance user productivity by allowing quick access to extensi
 
 ## Defining Keyboard Shortcuts with suggested_key
 
-Platform identifiers:
-- **default**: Fallback for all platforms
-- **windows**: Windows and Linux
-- **mac**: macOS
-- **linux**: Linux only
+The `suggested_key` property defines the default keyboard combination(s) for your command. You can specify different keys for different platforms to ensure a consistent user experience across operating systems.
+
+### Platform Identifiers
+
+Chrome supports several platform identifiers for targeting specific operating systems:
+
+- **default**: Fallback key combination used when no platform-specific key is defined
+- **windows**: Windows operating system
+- **mac**: macOS (Apple computers)
+- **linux**: Linux distribution
+
+### Platform-Specific Configuration
 
 ```json
 {
@@ -73,8 +124,11 @@ Platform identifiers:
     "my-command": {
       "suggested_key": {
         "default": "Ctrl+Shift+M",
-        "mac": "Command+Shift+M"
-      }
+        "windows": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M",
+        "linux": "Ctrl+Shift+M"
+      },
+      "description": "Execute my command"
     }
   }
 }
@@ -82,29 +136,67 @@ Platform identifiers:
 
 ### Supported Keys
 
-- **Letters/Numbers**: `A`-`Z`, `0`-`9`
-- **Punctuation**: `Comma`, `Period`, `Slash`
-- **Special**: `Space`, `Tab`, `Enter`, `Delete`, `Home`, `End`
-- **Arrows**: `Up`, `Down`, `Left`, `Right`
-- **Function**: `F1`-`F12`
-- **Media**: `MediaNextTrack`, `MediaPlayPause`
-- **Modifiers**: `Ctrl`, `Alt`, `Shift`, `Command`
+The Chrome Commands API supports a wide range of keys:
+
+**Alphabetic Keys:**
+- Letters A through Z (case-insensitive)
+
+**Numeric Keys:**
+- Numbers 0 through 9
+
+**Punctuation and Symbols:**
+- Comma, Period, Slash, Backslash, Quote, Semicolon, Equals, Bracket keys
+
+**Special Keys:**
+- Space, Tab, Enter, Backspace, Delete, Insert
+- Home, End, PageUp, PageDown
+
+**Arrow Keys:**
+- Up, Down, Left, Right
+
+**Function Keys:**
+- F1 through F12
+
+**Media Keys:**
+- MediaNextTrack, MediaPrevTrack, MediaPlayPause, MediaStop
+
+**Modifier Keys (used in combinations):**
+- Ctrl, Alt, Shift, Command (Mac only)
 
 ### Modifier Requirements
 
-- **Windows/Linux**: Must include `Ctrl` or `Alt`
-- **macOS**: Must include `Command` (⌘) or `Alt` (⌥)
+Chrome enforces specific modifier requirements to prevent conflicts with system shortcuts:
 
-Valid: `Ctrl+Shift+A` ✅, `Command+Shift+P` ✅  
-Invalid: `Shift+A` ❌, `A` ❌
+**Windows and Linux:**
+- Must include at least one of: Ctrl, Alt
+- Shift is optional but commonly used
+
+**macOS:**
+- Must include at least one of: Command (⌘), Alt (⌥)
+- Command is the primary modifier for user shortcuts
+
+```json
+// Valid combinations
+"valid-1": { "suggested_key": { "default": "Ctrl+Shift+A" } }
+"valid-2": { "suggested_key": { "default": "Alt+T" } }
+"valid-3": { "suggested_key": { "mac": "Command+Shift+P" } }
+
+// Invalid combinations (will be ignored)
+"invalid-1": { "suggested_key": { "default": "Shift+A" } }
+"invalid-2": { "suggested_key": { "default": "A" } }
+```
 
 ## Handling Commands with chrome.commands.onCommand
 
-```javascript
-// background.js
-chrome.commands.onCommand.addListener((command, tab) => {
-  console.log(`Command: "${command}" on tab: ${tab?.id}`);
+The `chrome.commands.onCommand` event is the primary mechanism for responding to keyboard shortcut activations. This event fires whenever the user triggers a registered command.
 
+### Basic Event Listener
+
+```javascript
+// background.js (for Manifest V3)
+chrome.commands.onCommand.addListener((command, tab) => {
+  console.log(`Command "${command}" triggered on tab ${tab?.id}`);
+  
   switch (command) {
     case 'toggle-feature':
       handleToggleFeature(tab);
@@ -112,110 +204,302 @@ chrome.commands.onCommand.addListener((command, tab) => {
     case 'open-sidebar':
       handleOpenSidebar(tab);
       break;
-    case 'quick-search':
-      handleQuickSearch(tab);
-      break;
-    case 'export-data':
-      handleExportData();
+    case 'quick-action':
+      handleQuickAction(tab);
       break;
   }
 });
+```
 
-async function handleToggleFeature(tab) {
-  if (!tab) return;
-  const { featureEnabled } = await chrome.storage.local.get('featureEnabled');
-  const newState = !featureEnabled;
-  await chrome.storage.local.set({ featureEnabled: newState });
-  chrome.action.setBadgeText({ tabId: tab.id, text: newState ? 'ON' : '' });
-  chrome.tabs.sendMessage(tab.id, { type: 'FEATURE_TOGGLE', enabled: newState });
-}
+### Tab Parameter Handling
 
-async function handleOpenSidebar(tab) {
-  if (!tab) return;
-  await chrome.sidePanel.open({ tabId: tab.id });
-}
+The `tab` parameter provides information about the active tab when the command was triggered. Always verify the tab exists before performing tab-specific operations:
 
-async function handleQuickSearch(tab) {
-  if (!tab) return;
-  await chrome.sidePanel.open({ tabId: tab.id });
-  chrome.tabs.sendMessage(tab.id, { type: 'FOCUS_SEARCH' });
-}
+```javascript
+chrome.commands.onCommand.addListener((command, tab) => {
+  // Always check if tab exists
+  if (!tab || !tab.id) {
+    console.log('No active tab available');
+    return;
+  }
+  
+  // Safe to use tab.id now
+  handleCommand(command, tab.id);
+});
 
-async function handleExportData() {
-  const data = await chrome.storage.local.get(null);
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `export-${Date.now()}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
+async function handleCommand(command, tabId) {
+  switch (command) {
+    case 'capture-screenshot':
+      await captureTabScreenshot(tabId);
+      break;
+    case 'inject-script':
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        func: () => console.log('Script injected!')
+      });
+      break;
+  }
 }
 ```
 
 ### Communicating with Content Scripts
 
+One common pattern is to respond to keyboard commands by communicating with content scripts running in the active tab:
+
 ```javascript
-// Background
+// background.js
 chrome.commands.onCommand.addListener(async (command, tab) => {
   if (!tab?.id) return;
+  
   switch (command) {
-    case 'highlight-selection':
-      await chrome.tabs.sendMessage(tab.id, { action: 'highlight', color: '#ff0000' });
+    case 'highlight-elements':
+      // Send message to content script
+      await chrome.tabs.sendMessage(tab.id, {
+        action: 'highlight',
+        color: '#FFFF00'
+      });
       break;
+      
     case 'extract-data':
-      const data = await chrome.tabs.sendMessage(tab.id, { action: 'extract' });
-      if (data) await chrome.storage.local.set({ lastExtracted: data });
+      // Request data from content script
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        action: 'extract',
+        selector: '.important-data'
+      });
+      
+      if (response) {
+        await chrome.storage.local.set({ extractedData: response });
+      }
+      break;
+      
+    case 'toggle-state':
+      // Toggle extension state in the page
+      await chrome.tabs.sendMessage(tab.id, {
+        action: 'toggle-extension-state'
+      });
       break;
   }
 });
 
-// Content script
+// content.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'highlight') {
-    const selection = window.getSelection();
-    if (selection.rangeCount > 0) {
-      const span = document.createElement('span');
-      span.style.backgroundColor = message.color;
-      selection.getRangeAt(0).surroundContents(span);
-    }
+  switch (message.action) {
+    case 'highlight':
+      highlightPageElements(message.color);
+      break;
+    case 'extract':
+      const data = extractPageData(message.selector);
+      sendResponse(data);
+      break;
+    case 'toggle-extension-state':
+      toggleExtensionFeature();
+      break;
   }
-  if (message.action === 'extract') {
-    sendResponse({ title: document.title, url: location.href });
-  }
+  
+  // Required for async response
   return true;
 });
+
+function highlightPageElements(color) {
+  const elements = document.querySelectorAll('p, h1, h2, h3');
+  elements.forEach(el => {
+    el.style.backgroundColor = color;
+  });
+}
+
+function extractPageData(selector) {
+  const elements = document.querySelectorAll(selector);
+  return Array.from(elements).map(el => el.textContent.trim());
+}
+
+function toggleExtensionFeature() {
+  document.body.classList.toggle('extension-active');
+}
 ```
+
+### Using Async/Await with Commands
+
+Modern extensions should use async/await patterns for handling commands that require asynchronous operations:
+
+```javascript
+chrome.commands.onCommand.addListener(async (command, tab) => {
+  try {
+    if (!tab?.id) throw new Error('No active tab');
+    
+    switch (command) {
+      case 'save-page':
+        await savePageContent(tab.id);
+        break;
+      case 'open-settings':
+        await chrome.runtime.openOptionsPage();
+        break;
+      case 'sync-data':
+        await syncWithServer();
+        break;
+    }
+  } catch (error) {
+    console.error('Command failed:', error);
+    showErrorNotification(error.message);
+  }
+});
+
+async function savePageContent(tabId) {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const result = await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => document.body.innerHTML
+  });
+  
+  await chrome.storage.local.set({
+    savedPage: {
+      url: tab.url,
+      title: tab.title,
+      content: result[0].result,
+      timestamp: Date.now()
+    }
+  });
+}
+
+async function syncWithServer() {
+  const { data } = await chrome.storage.local.get('data');
+  if (!data) return;
+  
+  const response = await fetch('https://api.example.com/sync', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+  
+  if (!response.ok) {
+    throw new Error('Sync failed');
+  }
+}
+
+function showErrorNotification(message) {
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icon.png',
+    title: 'Command Error',
+    message: message
+  });
+}
+```
+
+## Platform-Specific Key Combinations (Ctrl vs Cmd)
+
+Understanding platform-specific key combinations is crucial for creating extensions that feel native on all operating systems. The difference between Windows/Linux and macOS is the most important consideration.
+
+### The Ctrl vs Command Distinction
+
+On Windows and Linux, the primary modifier key is Ctrl (Control). On macOS, the Command key (⌘) serves a similar purpose for user-accessible shortcuts. Using the wrong modifier key will result in the shortcut not working on macOS.
+
+```json
+{
+  "commands": {
+    "open-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Open side panel"
+    },
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Toggle feature"
+    }
+  }
+}
+```
+
+### Best Practices for Platform Keys
+
+Follow these guidelines when defining platform-specific shortcuts:
+
+1. **Always provide both default and mac keys**: The default key serves Windows/Linux, while the mac key is specifically for macOS
+
+2. **Use Command for macOS shortcuts**: This is the standard modifier for user shortcuts in macOS applications
+
+3. **Consider platform conventions**: Some shortcuts are universal (like Ctrl/Cmd+S for save), while others vary by platform
+
+4. **Test on all platforms**: Always test your shortcuts on both Windows and macOS to ensure they work correctly
+
+### Alternative Platform Keys
+
+Beyond default and mac, you can use more specific platform identifiers:
+
+```json
+{
+  "commands": {
+    "platform-test": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "windows": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T",
+        "linux": "Ctrl+Shift+T",
+        "chromeos": "Ctrl+Shift+T"
+      },
+      "description": "Test platform-specific keys"
+    }
+  }
+}
+```
+
+### macOS-Specific Considerations
+
+macOS has several important considerations:
+
+1. **Command key (⌘)**: The primary modifier for user shortcuts
+2. **Option key (⌥)**: Alternative to Command for some shortcuts
+3. **Reserved shortcuts**: Many shortcuts are reserved by macOS and the system
+
+Reserved macOS shortcuts to avoid:
+- Command+L: Focus address bar
+- Command+T: New tab
+- Command+W: Close tab
+- Command+N: New window
+- Command+Q: Quit application
+- Command+,: Open preferences
 
 ## Special Commands: _execute_action and _execute_browser_action
 
+Chrome provides several special command names that perform built-in actions without requiring an onCommand listener. These commands control core Chrome extension UI elements.
+
 ### _execute_action
 
-Opens the extension popup (equivalent to clicking toolbar icon):
+The `_execute_action` command opens your extension's action popup (the toolbar icon popup). This is equivalent to the user clicking your extension's icon in the toolbar:
 
 ```json
 {
   "commands": {
     "_execute_action": {
-      "suggested_key": {"default": "Ctrl+Shift+E", "mac": "Command+Shift+E"},
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
       "description": "Open extension popup"
     }
   }
 }
 ```
 
-No `onCommand` listener needed - automatic behavior.
+This command doesn't require an onCommand listener - the popup opens automatically when triggered. This is the Manifest V3 equivalent of what was `_execute_browser_action` in Manifest V2.
 
 ### _execute_browser_action
 
-In Manifest V2, use `_execute_browser_action`. In MV3, use `_execute_action`:
+In Manifest V2 extensions, `_execute_browser_action` performed the same function. In Manifest V3, this has been replaced with `_execute_action`. If you're maintaining a Manifest V2 extension:
 
 ```json
-// MV2
+// Manifest V2
 {
+  "manifest_version": 2,
   "commands": {
     "_execute_browser_action": {
-      "suggested_key": {"default": "Ctrl+Shift+E", "mac": "Command+Shift+E"}
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      }
     }
   }
 }
@@ -223,168 +507,402 @@ In Manifest V2, use `_execute_browser_action`. In MV3, use `_execute_action`:
 
 ### _execute_side_panel
 
-Opens the extension's side panel:
+The `_execute_side_panel` command opens your extension's side panel:
 
 ```json
 {
   "commands": {
     "_execute_side_panel": {
-      "suggested_key": {"default": "Ctrl+Shift+P", "mac": "Command+Shift+P"},
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
       "description": "Open side panel"
     }
   }
 }
 ```
 
-### Using Multiple Special Commands
+This requires the sidePanel permission and side_panel section in your manifest:
 
 ```json
 {
-  "commands": {
-    "_execute_action": {"suggested_key": {"default": "Ctrl+Shift+E"}, "description": "Open popup"},
-    "_execute_side_panel": {"suggested_key": {"default": "Ctrl+Shift+S"}, "description": "Open side panel"},
-    "quick-action": {"suggested_key": {"default": "Ctrl+Shift+Q"}, "description": "Quick action"}
+  "permissions": ["sidePanel"],
+  "side_panel": {
+    "default_path": "sidepanel.html"
   }
 }
 ```
 
-## User Customization via chrome://extensions/shortcuts
+### Combining Special Commands
 
-Users customize shortcuts:
-1. Open `chrome://extensions/shortcuts`
-2. Find your extension
-3. Click shortcut field
-4. Press desired key
-5. Saved automatically
+You can define multiple special commands alongside regular custom commands:
+
+```json
+{
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Open popup"
+    },
+    "_execute_side_panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Open side panel"
+    },
+    "custom-command-1": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Custom action 1"
+    },
+    "custom-command-2": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "Custom action 2"
+    }
+  }
+}
+```
+
+## Allowing Users to Customize Shortcuts
+
+One of the key features of the Chrome Commands API is that users can customize keyboard shortcuts through Chrome's built-in interface. This provides flexibility but requires understanding the limitations.
+
+### The chrome://extensions/shortcuts Page
+
+Users can access the shortcuts configuration page at:
+`chrome://extensions/shortcuts`
+
+On this page, users can:
+- View all registered commands
+- See the current shortcut (or lack thereof)
+- Add new shortcuts by clicking and pressing keys
+- Remove existing shortcuts
 
 ### Querying Current Shortcuts
 
+Your extension can query the current state of all shortcuts:
+
 ```javascript
+// Get all commands with their current shortcuts
 chrome.commands.getAll((commands) => {
   commands.forEach(cmd => {
-    console.log(`${cmd.name}: ${cmd.shortcut || '(not set)'}`);
+    console.log(`Command: ${cmd.name}`);
+    console.log(`Description: ${cmd.description}`);
+    console.log(`Current shortcut: ${cmd.shortcut || '(not set)'}`);
+    console.log(`Is global: ${cmd.global}`);
+    console.log('---');
   });
 });
+
+// Using promises (Manifest V3)
+async function getAllCommands() {
+  const commands = await chrome.commands.getAll();
+  return commands;
+}
+
+// Example output
+// Command: _execute_action
+// Description: Open extension popup
+// Current shortcut: Ctrl+Shift+E
+// Is global: false
+// ---
+// Command: toggle-feature
+// Description: Toggle feature
+// Current shortcut: (not set)
+// Is global: false
 ```
 
-### Limitations
+### What Users Can Do
 
-1. **Maximum 4 suggested shortcuts** in manifest
-2. Users can add more manually
-3. Some combinations reserved by Chrome/OS
-4. No programmatic modification allowed
-5. User overrides take precedence
+Users have the following customization options:
 
-### Global Shortcuts
+1. **Change existing shortcuts**: Users can modify any suggested shortcut
+2. **Add new shortcuts**: Users can add shortcuts for commands that don't have one
+3. **Remove shortcuts**: Users can clear any shortcut
+4. **Create new bindings**: Users can add shortcuts for commands not in the manifest
 
-Works when Chrome isn't focused:
+### What Extensions Cannot Do
+
+Important limitations to communicate to users:
+
+1. **No programmatic modification**: Extensions cannot change shortcuts
+2. **No shortcut removal**: Cannot programmatically remove user-set shortcuts
+3. **No强制 enforcement**: Cannot guarantee a specific shortcut will always work
+
+### Handling User-Set Shortcuts
+
+Since users can change or remove shortcuts, always handle cases where shortcuts might not be set:
+
+```javascript
+chrome.commands.onCommand.addListener((command, tab) => {
+  // The command event still fires even if the shortcut was changed by the user
+  // This is the expected behavior - the user's custom shortcut triggers the command
+  console.log(`Command "${command}" triggered`);
+  
+  handleCommand(command, tab);
+});
+
+async function checkShortcutStatus() {
+  const commands = await chrome.commands.getAll();
+  const command = commands.find(c => c.name === 'toggle-feature');
+  
+  if (!command?.shortcut) {
+    // Remind user to set a shortcut
+    showNotification('Please set a keyboard shortcut in chrome://extensions/shortcuts');
+  }
+}
+```
+
+### Limitations and Restrictions
+
+The Chrome Commands API has several important limitations:
+
+1. **Maximum 4 suggested shortcuts**: Only the first 4 commands with suggested_key entries will appear in the shortcuts UI
+
+2. **Reserved combinations**: Some key combinations are reserved by Chrome or the operating system and cannot be used
+
+3. **Global shortcut restrictions**: Global shortcuts (working outside Chrome) are limited to Ctrl+Shift+[0-9]
+
+4. **Platform-specific behavior**: Shortcuts behave differently on different platforms
+
+```json
+// Only 4 commands with suggested_key will be shown in UI
+{
+  "commands": {
+    "cmd-1": { "suggested_key": {...}, "description": "..." },  // Shown
+    "cmd-2": { "suggested_key": {...}, "description": "..." },  // Shown
+    "cmd-3": { "suggested_key": {...}, "description": "..." },  // Shown
+    "cmd-4": { "suggested_key": {...}, "description": "..." },  // Shown
+    "cmd-5": { "suggested_key": {...}, "description": "..." }   // NOT shown
+  }
+}
+```
+
+## Global Shortcuts
+
+Global shortcuts work even when Chrome is not the focused application. This is useful for extensions that need to respond to shortcuts regardless of what the user is doing.
+
+### Defining Global Shortcuts
+
+Add `"global": true` to your command definition:
 
 ```json
 {
   "commands": {
     "global-toggle": {
-      "suggested_key": {"default": "Ctrl+Shift+1"},
-      "description": "Toggle globally",
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Toggle extension globally",
       "global": true
     }
   }
 }
 ```
 
-Restrictions: Limited to `Ctrl+Shift+[0-9]`, must be enabled by user.
+### Global Shortcut Restrictions
 
-```javascript
-chrome.commands.onCommand.addListener((command) => {
-  if (command === 'global-toggle') handleGlobalToggle();
-});
-```
+Global shortcuts have stricter limitations:
 
-## Platform-Specific Considerations
+1. **Limited key combinations**: Only Ctrl+Shift+[0-9] combinations are allowed
+2. **User must enable**: Users must explicitly enable global shortcuts in the UI
+3. **OS conflicts**: May conflict with system-wide shortcuts
 
-### Ctrl vs Command on macOS
-
-- **Windows/Linux**: Use `Ctrl`
-- **macOS**: Use `Command` (⌘)
-
-### macOS Reserved Shortcuts
-
-- `Command+L` - Address bar
-- `Command+T` - New tab
-- `Command+W` - Close tab
-- `Command+N` - New window
-
-## Best Practices
-
-### Use Meaningful Shortcuts
-
-Easy to remember, consistent with other apps.
-
-### Provide Clear Descriptions
-
-```json
-"toggle-feature": {
-  "suggested_key": {"default": "Ctrl+Shift+T"},
-  "description": "Toggle feature on current page"
-}
-```
-
-### Handle Missing Tabs
+### Handling Global Shortcuts
 
 ```javascript
 chrome.commands.onCommand.addListener((command, tab) => {
-  if (!tab) return;
+  // For global shortcuts, tab might be undefined
+  console.log(`Global command "${command}" triggered`);
+  
+  if (command === 'global-toggle') {
+    handleGlobalToggle();
+  }
+});
+
+function handleGlobalToggle() {
+  // Global toggle implementation
+  // Since there's no tab, work with storage or system-level actions
+  chrome.storage.local.get(['enabled'], (result) => {
+    const newState = !result.enabled;
+    chrome.storage.local.set({ enabled: newState });
+    
+    // Show notification
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icon.png',
+      title: 'Extension Toggled',
+      message: `Extension ${newState ? 'enabled' : 'disabled'}`
+    });
+  });
+}
+```
+
+## Best Practices
+
+Follow these best practices for creating effective keyboard shortcuts in your extension:
+
+### 1. Choose Intuitive Shortcuts
+
+Select shortcuts that are:
+- Easy to remember (mnemonic)
+- Consistent with common application conventions
+- Unlikely to conflict with browser or OS shortcuts
+
+### 2. Provide Clear Descriptions
+
+Always include meaningful descriptions:
+
+```json
+// Good
+"toggle-bookmark": {
+  "suggested_key": { "default": "Ctrl+Shift+D" },
+  "description": "Add current page to bookmarks"
+}
+
+// Bad
+"bookmark": {
+  "suggested_key": { "default": "Ctrl+Shift+D" },
+  "description": "Do bookmark thing"
+}
+```
+
+### 3. Test Cross-Platform
+
+Always test your extension on:
+- Windows with keyboard
+- macOS with keyboard
+- Chrome OS
+
+### 4. Handle Edge Cases
+
+Always handle scenarios where tabs might not be available:
+
+```javascript
+chrome.commands.onCommand.addListener((command, tab) => {
+  // tab can be undefined in some cases
+  if (!tab) {
+    console.log('No active tab - handling globally');
+    handleGlobalCommand(command);
+    return;
+  }
+  
+  handleTabCommand(command, tab);
 });
 ```
 
-### Store User Preferences
+### 5. Document Shortcuts for Users
+
+Make sure users know about available shortcuts by:
+- Including shortcuts in your popup UI
+- Documenting in your options page
+- Adding to your Chrome Web Store listing
+
+```html
+<!-- In popup.html -->
+<div class="shortcuts-help">
+  <h3>Keyboard Shortcuts</h3>
+  <ul>
+    <li><kbd>Ctrl+Shift+E</kbd> - Open popup</li>
+    <li><kbd>Ctrl+Shift+B</kbd> - Open side panel</li>
+    <li><kbd>Ctrl+Shift+T</kbd> - Toggle feature</li>
+  </ul>
+  <p>Customize at: chrome://extensions/shortcuts</p>
+</div>
+```
+
+## Common Mistakes to Avoid
+
+Avoid these common pitfalls when implementing keyboard shortcuts:
+
+### 1. Missing Platform-Specific Keys
+
+```json
+// Wrong - won't work on Mac
+"command": {
+  "suggested_key": { "default": "Ctrl+Shift+E" },
+  "description": "..."
+}
+
+// Correct
+"command": {
+  "suggested_key": {
+    "default": "Ctrl+Shift+E",
+    "mac": "Command+Shift+E"
+  },
+  "description": "..."
+}
+```
+
+### 2. Missing Description
+
+The description is required and must be present:
+
+```json
+// Wrong - will fail validation
+"command": {
+  "suggested_key": { "default": "Ctrl+Shift+E" }
+}
+
+// Correct
+"command": {
+  "suggested_key": { "default": "Ctrl+Shift+E" },
+  "description": "Open extension"
+}
+```
+
+### 3. Not Accounting for User Changes
 
 ```javascript
-chrome.commands.onCommand.addListener(async (command) => {
-  const stats = (await chrome.storage.local.get('stats')).stats || {};
-  stats[command] = (stats[command] || 0) + 1;
-  await chrome.storage.local.set({ stats });
+// Don't assume the shortcut hasn't changed
+chrome.commands.getAll((commands) => {
+  const cmd = commands.find(c => c.name === 'my-command');
+  // cmd.shortcut might be different from what you set in manifest
 });
 ```
 
-### Inform Users About Shortcuts
+### 4. Too Many Suggested Shortcuts
 
-Document in popup, options page, and store listing.
-
-## Common Mistakes
-
-### Missing Platform-Specific Keys
+Only 4 commands with suggested_key will be shown:
 
 ```json
-// Bad: {"suggested_key": {"default": "Ctrl+Shift+E"}}
-// Good: {"suggested_key": {"default": "Ctrl+Shift+E", "mac": "Command+Shift+E"}}
+// Only the first 4 will appear in the shortcuts UI
 ```
 
-### Forgetting Description
+### 5. Ignoring Content Script Loading
 
-```json
-// Bad: {"suggested_key": {"default": "Ctrl+Shift+K"}}
-// Good: {"suggested_key": {"default": "Ctrl+Shift+K"}, "description": "Open search"}
-```
-
-### Not Handling Content Script Loading
+When sending messages to content scripts, handle the case where the script isn't loaded:
 
 ```javascript
-// Bad: chrome.tabs.sendMessage(tab.id, { action: 'x' });
-// Good: chrome.tabs.sendMessage(tab.id, { action: 'x' }, () => {
-//   if (chrome.runtime.lastError) console.log('Not ready');
-// });
+// Add error handling
+chrome.tabs.sendMessage(tab.id, { action: 'doSomething' }, (response) => {
+  if (chrome.runtime.lastError) {
+    console.log('Content script not loaded:', chrome.runtime.lastError.message);
+    // Handle gracefully
+  }
+});
 ```
-
-### Too Many Shortcuts
-
-Limit to 4 suggested shortcuts.
 
 ## Conclusion
 
-Keyboard shortcuts enhance extension usability:
+The `chrome.commands` API provides a robust system for adding keyboard shortcuts to your Chrome Extension. By following the guidelines in this guide, you can create intuitive, cross-platform keyboard shortcuts that significantly enhance user productivity.
+
+Key takeaways:
 - Define shortcuts in manifest.json with `suggested_key` and `description`
-- Include platform-specific keys (Ctrl for Windows/Linux, Command for macOS)
-- Use `chrome.commands.onCommand` to handle activation
-- Use special commands `_execute_action` and `_execute_side_panel`
-- Users customize via `chrome://extensions/shortcuts`
-- Follow best practices for cross-platform compatibility
+- Use platform-specific keys (Ctrl for Windows/Linux, Command for macOS)
+- Handle commands with `chrome.commands.onCommand`
+- Use special commands like `_execute_action` and `_execute_side_panel` for built-in behaviors
+- Understand that users can customize shortcuts via `chrome://extensions/shortcuts`
+- Follow best practices for cross-platform compatibility and user experience
+
+With proper implementation, keyboard shortcuts become a powerful way to make your extension more accessible and efficient for power users.
