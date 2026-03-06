@@ -6,7 +6,7 @@ A comprehensive guide to migrating from callback-based Chrome extension APIs to 
 
 In Manifest V3, most `chrome.*` APIs now return Promises when no callback is provided. This represents a significant shift from the callback-based pattern used in Manifest V2, bringing Chrome extension APIs in line with modern JavaScript async/await patterns.
 
-**Key change**: When you omit the callback parameter, Chrome APIs return a Promise instead of requiring you to pass a callback function.
+**Key change**: When you omit the callback parameter, Chrome APIs return a Promise instead of requiring you to pass a callback function. You cannot use both on the same function call -- if you pass a callback, the function will not return a promise.
 
 ```js
 // MV2 (callback-based)
@@ -106,8 +106,8 @@ The following Chrome APIs return Promises in MV3 when the callback is omitted:
 | **cookies** | `get()`, `getAll()`, `set()`, `remove()`, `getCookieStore()` | `Promise<Cookie>` / `Promise<Cookie[]>` |
 | **downloads** | `download()`, `search()`, `pause()`, `resume()`, `cancel()`, `erase()`, `open()`, `show()`, `showDefaultFolder()` | `Promise<number>` / `Promise<void>` |
 | **notifications** | `create()`, `update()`, `clear()` | `Promise<string>` / `Promise<boolean>` |
-| **contextMenus** | `create()`, `update()`, `remove()`, `removeAll()` | `Promise<void>` / `Promise<string>` |
-| **runtime** | `sendMessage()`, `sendNativeMessage()`, `getManifest()`, `getPackageDirectoryEntry()` | `Promise<any>` |
+| **contextMenus** | `update()`, `remove()`, `removeAll()` (Chrome 123+) | `Promise<void>` |
+| **runtime** | `sendMessage()`, `sendNativeMessage()` | `Promise<any>` |
 
 ## APIs Still Using Callbacks
 
@@ -266,7 +266,7 @@ async function getSettings() {
 
 ### Pattern 2: Error Handling (lastError to try/catch)
 
-MV3 eliminates `chrome.runtime.lastError`:
+When using promise-based calls, errors become rejected promises instead of requiring `chrome.runtime.lastError` checks (though `lastError` still exists for callback-based usage):
 
 ```js
 // ❌ MV2 style
@@ -333,7 +333,7 @@ const granted = await requestPermission("storage");
 
 ## chrome.runtime.lastError
 
-In MV2, `chrome.runtime.lastError` was checked after every async API call. In MV3, errors are thrown as rejected Promises.
+In MV2, `chrome.runtime.lastError` was checked after every async API call. In MV3, when using promise-based calls (omitting the callback), errors are thrown as rejected Promises. Note: `chrome.runtime.lastError` still works when callbacks are used, but `chrome.extension.lastError` is deprecated.
 
 ```js
 // ❌ MV2 - checking lastError
@@ -425,15 +425,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### 2. contextMenus.create Has Partial Promise Support
+### 2. contextMenus.create Does NOT Return a Promise
 
 ```js
-// ⚠️ Returns Promise<void> but callbacks still work differently
-await chrome.contextMenus.create({
+// ⚠️ create() returns number|string synchronously, NOT a promise
+const menuId = chrome.contextMenus.create({
   title: "My Menu",
   contexts: ["selection"]
 });
-// Note: Some edge cases may still require callbacks
+// Use the optional callback parameter for error handling
+// Note: update(), remove(), and removeAll() DO return promises (Chrome 123+)
 ```
 
 ### 3. Always Use try/catch

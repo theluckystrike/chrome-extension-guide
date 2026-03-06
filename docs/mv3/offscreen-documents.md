@@ -86,7 +86,7 @@ if (existingContexts.length === 0) {
 - Only ONE offscreen document can exist at a time
 - Must check before creating — `createDocument` throws if one already exists
 - Close when done: `await chrome.offscreen.closeDocument()`
-- Chrome may auto-close idle offscreen documents after ~30 seconds
+- Chrome auto-closes offscreen documents with `AUDIO_PLAYBACK` reason after 30 seconds without audio; all other reasons have no automatic lifetime limit
 
 ## Common Patterns
 
@@ -119,7 +119,7 @@ if (existingContexts.length === 0) {
 
 ## Common Mistakes
 - Creating without checking if one exists — throws error
-- Forgetting Chrome auto-closes idle offscreen docs — re-create as needed
+- For `AUDIO_PLAYBACK` reason, Chrome auto-closes after 30s without audio -- re-create as needed
 - Using offscreen for tasks that don't need DOM — unnecessary overhead
 - Only one offscreen document at a time — can't have multiple
 

@@ -16,10 +16,10 @@
 |------|-------|-------------|------|----------|
 | `local` | 10 MB | Device only | No | Large data, caches, sensitive data |
 | `sync` | 100 KB total, 8 KB/item | All devices | Yes | User preferences, settings |
-| `session` | 10 MB | Browser session | No | Temporary state (NEW in MV3) |
-| `managed` | Unlimited | Read-only | Enterprise | Admin-configured settings |
+| `session` | 10 MB | Browser session | No | Temporary state (Chrome 102+, MV3 only) |
+| `managed` | Policy-defined | Read-only | Enterprise | Admin-configured settings |
 
-## session Storage (New in MV3)
+## session Storage (Chrome 102+, MV3 only)
 ```javascript
 // Persists across SW terminations but NOT browser restarts
 await chrome.storage.session.set({ tempData: "value" });
@@ -27,7 +27,8 @@ const { tempData } = await chrome.storage.session.get("tempData");
 ```
 - Perfect for: authentication tokens, temporary caches, session state
 - Faster than `local` (in-memory backing)
-- Cleared on browser close
+- 10 MB limit (was 1 MB in Chrome 111 and earlier)
+- Cleared on browser close, extension reload, or extension update
 - Set access from content scripts: `chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_AND_UNTRUSTED_CONTEXTS' })`
 
 ## Promise-Based API (MV3)
@@ -71,9 +72,9 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 - Cross-ref: `docs/guides/performance.md`
 
 ## Storage Quotas
-- `local`: 10 MB (was 5 MB, increased)
-- `sync`: 100 KB total, 8 KB per item, 512 items max, 120 writes/min
-- `session`: 10 MB (same as local)
+- `local`: 10 MB (was 5 MB in Chrome 113 and earlier; can request `"unlimitedStorage"` permission)
+- `sync`: 100 KB total, 8 KB per item, 512 items max, 1800 writes/hour, 120 writes/min
+- `session`: 10 MB (was 1 MB in Chrome 111 and earlier)
 - Check usage: `chrome.storage.local.getBytesInUse(null, (bytes) => {})`
 
 ## Common MV3 Storage Patterns

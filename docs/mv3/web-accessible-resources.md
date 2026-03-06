@@ -63,7 +63,7 @@ const container = document.createElement("div");
 container.innerHTML = `<iframe src="${chrome.runtime.getURL('widget.html')}" style="..."></iframe>`;
 document.body.appendChild(container);
 ```
-- iframe has full extension context (can use Chrome APIs)
+- iframe with `chrome-extension://` URL has limited API access; use `chrome.runtime.sendMessage()` to communicate with the service worker for full API access
 - Communicate between iframe and content script via `window.postMessage` or `@theluckystrike/webext-messaging`
 
 ## Security Considerations

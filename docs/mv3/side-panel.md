@@ -2,7 +2,7 @@
 
 ## Introduction
 - Side Panel: persistent UI panel that opens alongside the page (right side of browser)
-- Available since Chrome 114
+- Available since Chrome 114 (Manifest V3 only)
 - Replaces the need for popups that close when clicked away
 - Requires `"sidePanel"` permission
 
@@ -89,10 +89,11 @@ const behavior = await chrome.sidePanel.getPanelBehavior();
 console.log(behavior.openPanelOnActionClick);
 ```
 
-### open(options)
+### open(options) *(Chrome 116+)*
 ```javascript
 await chrome.sidePanel.open({ windowId: windowId });
 ```
+- Must be called in response to a user gesture
 
 ## Side Panel vs Popup
 | Feature | Side Panel | Popup |
@@ -160,7 +161,7 @@ document.getElementById('input').addEventListener('input', async (e) => {
 - Consider both `openPanelOnActionClick` and popup — let user choose in options
 
 ## Common Mistakes
-- Calling `open()` without user gesture — fails silently
+- Calling `open()` without user gesture — throws an error
 - Not handling panel close/reopen — state is lost unless persisted
 - Making panel too wide — takes too much page space
 - Forgetting `"sidePanel"` permission — API calls fail

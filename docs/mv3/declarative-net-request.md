@@ -121,12 +121,13 @@ Rules are defined in JSON format with the following structure:
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `urlFilter` | string | Regex pattern to match URLs |
+| `urlFilter` | string | Filter pattern to match URLs (uses special syntax with `*`, `\|`, `\|\|`, `^` operators -- not regex) |
 | `regexFilter` | string | Alternative regex pattern |
-| `resourceTypes` | array | Types: `main_frame`, `sub_frame`, `stylesheet`, `script`, `image`, `font`, `object`, `xmlhttprequest`, `ping`, `csp_report`, `media`, `websocket`, `other` |
+| `resourceTypes` | array | Types: `main_frame`, `sub_frame`, `stylesheet`, `script`, `image`, `font`, `object`, `xmlhttprequest`, `ping`, `csp_report`, `media`, `websocket`, `webtransport`, `webbundle`, `other` |
 | `initiatorDomains` | array | Domains that initiated the request |
 | `requestDomains` | array | Domains being requested |
-| `excludedDomains` | array | Domains to exclude |
+| `excludedInitiatorDomains` | array | Initiator domains to exclude |
+| `excludedRequestDomains` | array | Request domains to exclude |
 | `tabIds` | array | Specific tab IDs to match |
 | `excludeTabIds` | array | Tab IDs to exclude |
 
@@ -142,7 +143,6 @@ The `action.type` property determines what happens when a rule matches:
 | `upgradeScheme` | Upgrade HTTP to HTTPS | ✅ |
 | `modifyHeaders` | Add, remove, or modify request/response headers | ✅ |
 | `allowAllRequests` | Allow all requests in a frame hierarchy | ✅ |
-| `headers` | Alias for `modifyHeaders` | ✅ |
 
 ### Example: Block Action
 
@@ -198,14 +198,14 @@ Create a rules file at `rules/block-trackers.json`:
     "action": { "type": "block" },
     "condition": {
       "urlFilter": "doubleclick\\.net",
-      "resourceTypes": ["script", "image", "iframe"]
+      "resourceTypes": ["script", "image", "sub_frame"]
     }
   },
   {
     "id": 3,
     "priority": 1,
-    "action": { "type": "redirect" },
     "action": {
+      "type": "redirect",
       "redirect": { "url": "https://example.com/blocked.png" }
     },
     "condition": {
@@ -474,7 +474,7 @@ Each extension has limits on the number of rules it can declare:
 
 | Rule Type | Limit | Description |
 |-----------|-------|-------------|
-| **Static Rules** | 300,000 | Defined in JSON files, bundled with extension |
+| **Static Rules** | 30,000 (guaranteed minimum) | Defined in JSON files, bundled with extension (up to 100 rulesets, 50 enabled at once) |
 | **Dynamic Rules** | 30,000 | Added/removed at runtime |
 | **Session Rules** | 5,000 | Temporary rules for current session |
 | **Regex Rules** | 1,000 | Rules using `regexFilter` |
@@ -483,11 +483,9 @@ Each extension has limits on the number of rules it can declare:
 
 ```typescript
 async function checkRuleLimits() {
-  const { ruleset } = await chrome.declarativeNetRequest.getAvailableStaticRuleCount(
-    "ruleset_1"
-  );
-  
-  console.log(`Available static rules: ${ruleset}`);
+  const count = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
+
+  console.log(`Available static rules: ${count}`);
 }
 
 // Get all rule counts
@@ -518,7 +516,7 @@ The `modifyHeaders` action type allows you to add, remove, or modify HTTP header
   },
   "condition": {
     "urlFilter": "api\\.example\\.com",
-    "resourceTypes": ["xmlhttprequest", "fetch"]
+    "resourceTypes": ["xmlhttprequest"]
   }
 }
 ```

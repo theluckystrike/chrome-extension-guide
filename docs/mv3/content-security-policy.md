@@ -9,7 +9,7 @@ Manifest V3 (MV3) enforces a **stricter Content Security Policy (CSP)** compared
 - **No `eval()`** — Dynamic code execution is no longer allowed
 - **No `new Function()`** — Function constructor is blocked
 - **No remote code** — All scripts must be bundled locally
-- **No unsafe-inline** — Inline scripts require a hash or nonce (extension pages only)
+- **No inline scripts** — Inline scripts are blocked; move all code to external .js files
 
 These changes improve security but require code refactoring for many extensions.
 
@@ -409,32 +409,32 @@ Content scripts have a unique relationship with the host page's CSP.
 | Context | CSP Applied |
 |---------|-------------|
 | Host page | Page's CSP (you can't control this) |
-| Content script | Extension's CSP (your `content_security_policy`) |
+| Content script | Not subject to the page's CSP; content scripts can use `chrome.runtime` APIs freely |
 | Extension pages | Extension's CSP (your `content_security_policy`) |
 
 ### Implications
 
-1. **Content scripts can access page content** but are subject to page's CSP
+1. **Content scripts** run in an isolated world and are not restricted by the host page's CSP
 2. **Messages to extension** use `chrome.runtime.sendMessage` (CSP-exempt)
 3. **Inline handlers in page** — You cannot use them, use `addEventListener`
 
 ### ❌ MV2 (Will Fail in MV3)
 
-```javascript
-// Content script
-document.querySelector('button').onclick = () => {
-  chrome.runtime.sendMessage({ action: 'doSomething' });
-};
+```html
+<!-- Inline event handler in HTML -- blocked by CSP -->
+<button onclick="chrome.runtime.sendMessage({ action: 'doSomething' })">Click</button>
 ```
 
 ### ✅ MV3 Compatible
 
 ```javascript
-// Content script - use addEventListener
+// Content script or extension page -- use addEventListener or .onclick property
 document.querySelector('button').addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'doSomething' });
 });
 ```
+
+> **Note:** JavaScript `.onclick` property assignment is NOT blocked by CSP. Only HTML `onclick="..."` attribute inline handlers are blocked.
 
 ---
 
