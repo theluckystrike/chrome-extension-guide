@@ -1,210 +1,150 @@
-# Runtime Error Patterns
+# Chrome Runtime Error Patterns
 
-## Introduction
+This guide covers systematic handling of `chrome.runtime` errors in Chrome extensions.
 
-Handling errors in Chrome extensions requires a systematic approach due to the asynchronous nature of the Chrome APIs and the complex communication channels between different extension contexts. This guide covers patterns for properly handling chrome.runtime errors, understanding common error types, and building robust error-handling infrastructure.
+## The Fundamental Rule: Check chrome.runtime.lastError
 
-## Understanding chrome.runtime.lastError
-
-The `chrome.runtime.lastError` property is a critical part of error handling in Chrome extension APIs. **You must check this value in every callback function** from Chrome APIs, or the error will go uncaught and may cause unexpected behavior.
+**Every callback from a Chrome API must check `chrome.runtime.lastError`.** If you don't check it, errors will be silently swallowed and may cause hard-to-debug issues.
 
 ```javascript
-// ❌ WRONG - ignoring lastError
-chrome.tabs.get(tabId, (tab) => {
-  console.log(tab.title); // May crash if tab doesn't exist
+// ❌ WRONG - errors are silently ignored
+chrome.tabs.query({ active: true }, (tabs) => {
+  console.log(tabs[0].id); // May be undefined if error occurred
 });
 
 // ✅ CORRECT - always check lastError
-chrome.tabs.get(tabId, (tab) => {
+chrome.tabs.query({ active: true }, (tabs) => {
   if (chrome.runtime.lastError) {
-    console.error('Failed to get tab:', chrome.runtime.lastError.message);
+    console.error('Tab query failed:', chrome.runtime.lastError.message);
     return;
   }
-  console.log(tab.title);
+  console.log(tabs[0].id);
 });
 ```
 
 ## Common Chrome Runtime Errors
 
-### "Could not establish connection"
+### "Could not establish connection. Receiving end does not exist"
 
-This error occurs when trying to communicate with a context that doesn't have a listener set up. Common causes:
-
-- Sending a message to a content script that hasn't been injected yet
-- Trying to connect to an extension page that hasn't loaded
-- The receiving end was closed before the message arrived
+**Cause:** No listener is registered for the message, or the content script wasn't injected.
 
 ```javascript
-// Solution: Check if the port is valid before sending
-const port = chrome.tabs.connect(tabId, { frameId: 0 });
-if (!port) {
-  throw new Error('Could not establish connection to tab');
-}
-port.postMessage({ action: 'ping' });
+// Sender side - handle the error
+chrome.tabs.sendMessage(tabId, { action: 'getData' }, (response) => {
+  if (chrome.runtime.lastError) {
+    // Content script not loaded or tab closed
+    console.log('Content script not available');
+  }
+});
 ```
+
+**Fix:** Ensure content script is registered in manifest and injected into the target tab.
 
 ### "Extension context invalidated"
 
-This happens when the extension context is no longer valid, typically after:
-
-- The extension was updated or reloaded
-- The user disabled and re-enabled the extension
-- The extension context was garbage collected
+**Cause:** Extension was updated or reloaded while an async operation was pending.
 
 ```javascript
-// Handle context invalidation in your message listener
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  try {
-    // Process message
-    sendResponse({ success: true });
-  } catch (error) {
-    // Check if it's a context invalidation error
-    if (error.message.includes('Extension context invalidated')) {
-      console.warn('Extension context invalidated, ask user to reload');
-      sendResponse({ error: 'Please reload the extension' });
-    }
+// After extension update, pending callbacks fail with this error
+chrome.storage.local.get('key', (result) => {
+  if (chrome.runtime.lastError?.message.includes('invalidated')) {
+    // Extension was updated - user must refresh the page
+    notifyUser('Please refresh the page to continue');
   }
-  return true; // Keep channel open for async response
 });
 ```
 
 ### "The message port closed before a response was received"
 
-This error occurs when:
-
-- The sendResponse callback is not called within the listener's scope
-- The content script page unloads before responding
-- Not returning `true` from the listener for async responses
+**Cause:** `sendResponse` was not called in time, or the context was destroyed.
 
 ```javascript
-// ✅ CORRECT - return true for async responses
+// In message listener - always respond or return true to keep channel open
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'asyncOperation') {
+  if (message.action === 'asyncOperation') {
     doAsyncWork().then(result => {
-      sendResponse({ result });
+      sendResponse({ success: true, data: result });
     });
-    return true; // Important: keeps message channel open
+    return true; // Keep message channel open for async response
   }
 });
 ```
 
-## Promise-Based APIs in Manifest V3
+## Promise-Based APIs (Manifest V3)
 
-In Manifest V3, many Chrome APIs return Promises instead of using callbacks. Error handling changes from checking `lastError` to using try/catch with rejected promises:
+In MV3, many Chrome APIs return Promises. Errors become Promise rejections:
 
 ```javascript
-// MV3 Promise-based API
-async function getStorageData(keys) {
-  try {
-    const data = await chrome.storage.local.get(keys);
-    return data;
-  } catch (error) {
-    // Handle the error appropriately
-    console.error('Storage get failed:', error.message);
-    throw error;
+// MV3 style - use try/catch
+try {
+  const [tab] = await chrome.tabs.query({ active: true });
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => console.log('Injected!')
+  });
+} catch (error) {
+  // Error may wrap chrome.runtime.lastError
+  if (error.message.includes('No tab with id')) {
+    // Tab was closed between query and script execution
   }
 }
 ```
 
-## Building a Safe Chrome API Wrapper
-
-Create a helper function that wraps Chrome APIs and handles errors consistently:
+## Safe Chrome API Wrapper
 
 ```javascript
-function safeChromeApi(apiCall) {
+/**
+ * Wraps Chrome API calls to handle lastError properly
+ * @param {Function} apiCall - Function that takes a callback
+ * @returns {Promise} Resolves with result or rejects with Error
+ */
+function wrapChromeAPI(apiCall) {
   return new Promise((resolve, reject) => {
-    try {
-      const result = apiCall();
-      // For callback-based APIs
+    apiCall((result) => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError.message));
-        return;
+      } else {
+        resolve(result);
       }
-      resolve(result);
-    } catch (error) {
-      reject(error);
-    }
+    });
   });
 }
 
 // Usage
-async function getTab(tabId) {
-  return safeChromeApi(() => {
-    chrome.tabs.get(tabId, (tab) => {
-      // lastError is handled by wrapper
-    });
-  });
+try {
+  const tabs = await wrapChromeAPI(cb => chrome.tabs.query({ active: true }, cb));
+} catch (error) {
+  console.error('Failed to query tabs:', error.message);
 }
 ```
 
 ## Error Categorization
 
-### Transient Errors (Retry-Able)
+### Transient Errors (Retry-OK)
 
-These errors may succeed if retried:
-
-- Network-related failures
-- Temporary resource unavailability
-- Rate limiting (back off and retry)
-
-```javascript
-const TRANSIENT_ERRORS = [
-  'Could not establish connection',
-  'No tab with id',
-];
-
-function isTransient(error) {
-  return TRANSIENT_ERRORS.some(e => error.message?.includes(e));
-}
-
-async function withRetry(fn, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (!isTransient(error) || i === maxRetries - 1) {
-        throw error;
-      }
-      await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)));
-    }
-  }
-}
-```
+- **Network timeout** - Retry with exponential backoff
+- **Tab closed during operation** - Re-query tabs before retry
+- **Storage temporarily unavailable** - Retry after delay
 
 ### Permanent Errors (Fix Required)
 
-These require code changes:
-
-- Missing permissions
-- Invalid parameters
-- Context invalidated
-
-## Logging with Context
-
-Always log errors with sufficient context for debugging:
+- **No permission** - Add required permission to manifest
+- **Extension context invalidated** - User action required
+- **Invalid parameters** - Fix the code logic
 
 ```javascript
-function logError(context, error) {
-  console.error(`[${context}] Error:`, {
-    message: error.message,
-    stack: error.stack,
-    timestamp: new Date().toISOString(),
-    extensionState: chrome.runtime.lastError,
-  });
+function isTransientError(error) {
+  const transientPatterns = [
+    'Could not establish connection',
+    'Tab closed',
+    'No tab with id'
+  ];
+  return transientPatterns.some(p => error.message?.includes(p));
 }
-
-// Usage
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  if (chrome.runtime.lastError) {
-    logError('tabs.query', chrome.runtime.lastError);
-    return;
-  }
-  // Process tabs
-});
 ```
 
-## Cross-Reference
+## Cross-References
 
-- [Error Handling Guide](../reference/error-handling.md)
-- [Extension Error Recovery Patterns](./extension-error-recovery.md)
-- [Background Script Best Practices](../guides/background-patterns.md)
+- [Reference: Error Handling](../reference/error-handling.md)
+- [Patterns: Error Handling](./error-handling.md)
+- [Patterns: Extension Error Recovery](./extension-error-recovery.md)
