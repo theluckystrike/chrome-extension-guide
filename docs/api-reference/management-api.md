@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `chrome.management` API provides functions and events to manage installed extensions and apps. It allows you to query information about extensions, enable or disable them, and uninstall them programmatically.
+The `chrome.management` API manages installed extensions and apps.
 
 - **Permission:** `"management"`
 - **Availability:** Chrome, Edge, Opera
@@ -11,281 +11,117 @@ The `chrome.management` API provides functions and events to manage installed ex
 
 ### Query Extensions
 
-#### `chrome.management.getAll(callback)`
-
-Retrieves a list of information about all installed extensions and apps.
+**`chrome.management.getAll(callback)`** - List all extensions/apps. Returns ExtensionInfo[].
 
 ```javascript
-chrome.management.getAll((extensions) => {
-  extensions.forEach(ext => {
-    console.log(`${ext.name}: ${ext.enabled}`);
-  });
-});
+chrome.management.getAll(e => e.forEach(x => console.log(x.name)));
 ```
 
-**Returns:** Array of [ExtensionInfo](#extensioninfo-type) objects
+**`chrome.management.get(id, callback)`** - Get specific extension info.
 
----
+**`chrome.management.getSelf(callback)`** - Get calling extension (no permission needed).
 
-#### `chrome.management.get(id, callback)`
+**`chrome.management.getPermissionWarningsById(id, callback)`** - Get permission warnings.
 
-Gets information about a specific extension or app by its ID.
-
-```javascript
-chrome.management.get(' extensão-id-here', (extensionInfo) => {
-  console.log(extensionInfo.name);
-});
-```
-
-**Parameters:**
-- `id` (string): The ID of the extension/app
-
-**Returns:** [ExtensionInfo](#extensioninfo-type) object
-
----
-
-#### `chrome.management.getSelf(callback)`
-
-Gets information about the calling extension. Does not require the management permission.
-
-```javascript
-chrome.management.getSelf((selfInfo) => {
-  console.log(`Running: ${selfInfo.name} v${selfInfo.version}`);
-});
-```
-
-**Returns:** [ExtensionInfo](#extensioninfo-type) object
-
----
-
-#### `chrome.management.getPermissionWarningsById(id, callback)`
-
-Gets the permission warnings for a specific extension by its ID.
-
-```javascript
-chrome.management.getPermissionWarningsById(' extension-id', (warnings) => {
-  warnings.forEach(warning => console.log(warning));
-});
-```
-
----
-
-#### `chrome.management.getPermissionWarningsByManifest(manifestStr, callback)`
-
-Gets permission warnings for a manifest string without installing the extension.
-
-```javascript
-const manifest = JSON.stringify({
-  "name": "Test",
-  "version": "1.0",
-  "permissions": ["tabs", "storage"]
-});
-chrome.management.getPermissionWarningsByManifest(manifest, (warnings) => {
-  console.log(warnings);
-});
-```
+**`chrome.management.getPermissionWarningsByManifest(manifestStr, callback)`** - Get warnings from manifest.
 
 ---
 
 ### Control Extensions
 
-#### `chrome.management.setEnabled(id, enabled, callback)`
-
-Enables or disables an extension or app.
+**`chrome.management.setEnabled(id, enabled, callback)`** - Enable/disable extension.
 
 ```javascript
-// Disable an extension
-chrome.management.setEnabled('extension-id', false, () => {
-  console.log('Extension disabled');
-});
-
-// Enable an extension
-chrome.management.setEnabled('extension-id', true, () => {
-  console.log('Extension enabled');
-});
+chrome.management.setEnabled('ext-id', false, () => {});
 ```
 
-**Parameters:**
-- `id` (string): The ID of the extension/app
-- `enabled` (boolean): True to enable, false to disable
-
----
-
-#### `chrome.management.uninstall(id, options, callback)`
-
-Uninstalls an extension or app.
+**`chrome.management.uninstall(id, options, callback)`** - Uninstall extension.
 
 ```javascript
-chrome.management.uninstall('extension-id', {
-  showConfirmDialog: true
-}, () => {
-  console.log('Uninstalled');
-});
+chrome.management.uninstall('ext-id', { showConfirmDialog: true }, () => {});
 ```
 
-**Parameters:**
-- `id` (string): The ID of the extension/app
-- `options` (object): Optional
-  - `showConfirmDialog` (boolean): Whether to show confirmation dialog
-
----
-
-#### `chrome.management.uninstallSelf(options, callback)`
-
-Uninstalls the calling extension.
-
-```javascript
-chrome.management.uninstallSelf({
-  showConfirmDialog: true
-}, () => {
-  console.log('Self-uninstalled');
-});
-```
+**`chrome.management.uninstallSelf(options, callback)`** - Uninstall calling extension.
 
 ---
 
 ## ExtensionInfo Type
-
-The `ExtensionInfo` object contains detailed information about an extension or app:
 
 | Property | Type | Description |
 |----------|------|-------------|
 | `id` | string | Unique identifier |
 | `name` | string | Display name |
 | `shortName` | string | Short name |
-| `description` | string | Extension description |
+| `description` | string | Description |
 | `version` | string | Version number |
-| `versionName` | string | Version name (if available) |
-| `type` | string | "extension", "hosted_app", "packaged_app", "legacy_packaged_app", or "theme" |
-| `enabled` | boolean | Whether currently enabled |
-| `disabledReason` | string | Reason if disabled: "unknown", "permissions_increase", "corporate_policy" |
+| `versionName` | string | Version name |
+| `type` | string | "extension", "hosted_app", "packaged_app", "theme" |
+| `enabled` | boolean | Currently enabled |
+| `disabledReason` | string | "unknown", "permissions_increase", "corporate_policy" |
 | `isApp` | boolean | Whether it's an app |
 | `homepageUrl` | string | Homepage URL |
 | `updateUrl` | string | Update URL |
-| `permissions` | array | Array of permission strings |
-| `hostPermissions` | array | Array of host permission strings |
-| `installType` | string | "admin", "development", "normal", "sideload", or "other" |
-| `icons` | array | Array of icon objects `{ size, url }` |
+| `permissions` | array | Permission strings |
+| `hostPermissions` | array | Host permission strings |
+| `installType` | string | "admin", "development", "normal", "sideload" |
+| `icons` | array | Array of { size, url } |
 
 ---
 
 ## Events
 
-### `chrome.management.onInstalled.addListener(callback)`
-
-Fired when an extension or app is installed.
+**`chrome.management.onInstalled`** - Extension installed.
 
 ```javascript
-chrome.management.onInstalled.addListener((extensionInfo) => {
-  console.log(`Installed: ${extensionInfo.name}`);
-});
+chrome.management.onInstalled.addListener(info => console.log(info.name));
 ```
 
----
-
-### `chrome.management.onUninstalled.addListener(callback)`
-
-Fired when an extension or app is uninstalled.
+**`chrome.management.onUninstalled`** - Extension uninstalled.
 
 ```javascript
-chrome.management.onUninstalled.addListener((id) => {
-  console.log(`Uninstalled: ${id}`);
-});
+chrome.management.onUninstalled.addListener(id => console.log(id));
 ```
 
----
+**`chrome.management.onEnabled`** - Extension enabled.
 
-### `chrome.management.onEnabled.addListener(callback)`
-
-Fired when an extension or app is enabled.
-
-```javascript
-chrome.management.onEnabled.addListener((extensionInfo) => {
-  console.log(`Enabled: ${extensionInfo.name}`);
-});
-```
-
----
-
-### `chrome.management.onDisabled.addListener(callback)`
-
-Fired when an extension or app is disabled.
-
-```javascript
-chrome.management.onDisabled.addListener((extensionInfo) => {
-  console.log(`Disabled: ${extensionInfo.name}`);
-});
-```
+**`chrome.management.onDisabled`** - Extension disabled.
 
 ---
 
 ## Code Examples
 
-### List All Installed Extensions
+### List Extensions
 
 ```javascript
-function listExtensions() {
-  chrome.management.getAll((extensions) => {
-    const exts = extensions.filter(e => e.type === 'extension');
-    exts.forEach(ext => {
-      console.log(`${ext.name} (${ext.id})`);
-      console.log(`  Enabled: ${ext.enabled}`);
-      console.log(`  Version: ${ext.version}`);
-    });
-  });
-}
+chrome.management.getAll(e => e.filter(x => x.type === 'extension')
+  .forEach(x => console.log(x.name, x.enabled)));
 ```
 
-### Disable Conflicting Extension
+### Disable Extension
 
 ```javascript
-function disableExtension(extensionId) {
-  chrome.management.setEnabled(extensionId, false, () => {
-    if (chrome.runtime.lastError) {
-      console.error('Error:', chrome.runtime.lastError);
-    } else {
-      console.log('Extension disabled successfully');
-    }
-  });
-}
+chrome.management.setEnabled('ext-id', false, () => 
+  console.log(chrome.runtime.lastError ? 'Error' : 'Disabled'));
 ```
 
-### Self-Uninstall with Confirmation
+### Self-Uninstall
 
 ```javascript
-function uninstallSelf() {
-  chrome.management.uninstallSelf({
-    showConfirmDialog: true
-  }, () => {
-    console.log('Uninstall initiated');
-  });
-}
+chrome.management.uninstallSelf({ showConfirmDialog: true }, () => {});
 ```
 
-### Monitor Extension Changes
+### Monitor Events
 
 ```javascript
-// Listen for all management events
-chrome.management.onInstalled.addListener(info => {
-  console.log(`Installed: ${info.name}`);
-});
-
-chrome.management.onUninstalled.addListener(id => {
-  console.log(`Uninstalled: ${id}`);
-});
-
-chrome.management.onEnabled.addListener(info => {
-  console.log(`Enabled: ${info.name}`);
-});
-
-chrome.management.onDisabled.addListener(info => {
-  console.log(`Disabled: ${info.name}`);
-});
+chrome.management.onInstalled.addListener(console.log);
+chrome.management.onUninstalled.addListener(console.log);
+chrome.management.onEnabled.addListener(console.log);
+chrome.management.onDisabled.addListener(console.log);
 ```
 
 ---
 
 ## Cross-references
 
-- [Management Permission](../permissions/management.md) - Permission requirements and manifest configuration
-- [Management API Guide](../guides/management-api.md) - Practical guide for building extension managers
+- [Management Permission](../permissions/management.md)
+- [Management API Guide](../guides/management-api.md)
