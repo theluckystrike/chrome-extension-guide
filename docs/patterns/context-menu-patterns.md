@@ -430,7 +430,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Note that `chrome.contextMenus.update` does not support changing `contexts` or `parentId` after creation. You can only update `title`, `checked`, `enabled`, and `visible`.
+Note that `chrome.contextMenus.update` accepts the same properties as `create`. You can update `title`, `checked`, `enabled`, `visible`, `contexts`, `parentId`, `documentUrlPatterns`, `targetUrlPatterns`, and more.
 
 ---
 

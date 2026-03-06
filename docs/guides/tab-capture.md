@@ -95,9 +95,7 @@ chrome.action.onClicked.addListener(async (tab) => {
   try {
     // First, get the stream ID for the tab
     const streamId = await chrome.tabCapture.getMediaStreamId({
-      tabId: tab.id,
-      audio: true,
-      video: true
+      targetTabId: tab.id
     });
 
     // Capture the tab with the stream ID
@@ -227,9 +225,7 @@ async function captureVideoOnly(tabId) {
 // Selective audio sources
 async function captureWithOptions(tabId, options) {
   const streamId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: options.captureAudio !== false,
-    video: options.captureVideo !== false
+    targetTabId: tabId
   });
 
   return await chrome.tabCapture.capture({
@@ -358,9 +354,7 @@ async function requestCaptureWithConsent(tabId) {
   
   // Proceed with capture
   return await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true
+    targetTabId: tabId
   });
 }
 
@@ -385,9 +379,7 @@ The `chrome.tabCapture.getMediaStreamId()` method generates a stream ID that can
 // Get stream ID for a specific tab
 async function getStreamId(tabId) {
   const streamId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true
+    targetTabId: tabId
   });
   
   console.log('Stream ID:', streamId);
@@ -411,9 +403,7 @@ async function startOffscreenCapture(tabId) {
 
   // Send stream ID to offscreen document
   const streamId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true
+    targetTabId: tabId
   });
 
   // Message the offscreen document
@@ -470,19 +460,12 @@ You can generate multiple stream IDs for different purposes:
 async function setupDualStream(tabId) {
   // ID for preview (lower quality)
   const previewId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true,
-    minWidth: 640,
-    minHeight: 360,
-    maxFrameRate: 15
+    targetTabId: tabId
   });
 
   // ID for recording (full quality)
   const recordId = await chrome.tabCapture.getMediaStreamId({
-    tabId: tabId,
-    audio: true,
-    video: true
+    targetTabId: tabId
   });
 
   return { previewId, recordId };
@@ -556,9 +539,7 @@ async function startRecording(tabId) {
   try {
     // Get stream ID for the tab
     currentStreamId = await chrome.tabCapture.getMediaStreamId({
-      tabId: tabId,
-      audio: true,
-      video: true
+      targetTabId: tabId
     });
 
     // Create capture stream
@@ -792,7 +773,7 @@ async function safeCapture(tabId) {
     }
 
     const streamId = await chrome.tabCapture.getMediaStreamId({
-      tabId: tabId
+      targetTabId: tabId
     });
 
     if (!streamId) {

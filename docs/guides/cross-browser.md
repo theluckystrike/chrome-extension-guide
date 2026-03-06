@@ -7,9 +7,9 @@ Building extensions that work across Chrome, Firefox, Edge, and Safari requires 
 | Feature | Chrome | Firefox | Edge | Safari |
 |---------|--------|---------|------|--------|
 | Manifest V3 | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| Service Workers | ✅ | ❌ (Event Pages) | ✅ | ❌ (Event Pages) |
+| Service Workers | ✅ | ✅ (background scripts) | ✅ | ✅ (since Safari 16.4) |
 | `chrome.*` namespace | ✅ Native | ✅ Via Polyfill | ✅ Native | ✅ Native |
-| `browser.*` namespace | ✅ Alias | ✅ Native | ✅ Alias | ✅ Alias |
+| `browser.*` namespace | ✅ Native (since Chrome 146) | ✅ Native | ✅ Alias | ✅ Alias |
 | Promise-based APIs | ✅ | ✅ | ✅ | ✅ Partial |
 | sidePanel API | ✅ | ❌ | ✅ | ❌ |
 | declarativeNetRequest | ✅ | ✅ | ✅ | ✅ |
@@ -19,7 +19,8 @@ Building extensions that work across Chrome, Firefox, Edge, and Safari requires 
 
 ### Namespace Differences
 
-- **Chrome/Edge**: Use `chrome.*` APIs natively with callbacks
+- **Chrome**: Supports both `chrome.*` and `browser.*` natively (native `browser.*` since Chrome 146)
+- **Edge**: Uses `chrome.*` APIs natively with callbacks
 - **Firefox**: Prefers `browser.*` namespace with Promises (WebExtension standard)
 - **Safari**: Supports both but with limited Promise support in some APIs
 
@@ -191,10 +192,11 @@ console.log(JSON.stringify(merged, null, 2));
 
 ## Key Differences
 
-### Service Worker vs Event Pages
+### Service Worker vs Background Scripts
 
 - **Chrome/Edge (MV3)**: Use service workers (no persistent background context)
-- **Firefox/Safari**: Still use persistent background pages (event pages in MV2 terminology)
+- **Firefox (MV3)**: Uses non-persistent background scripts (not event pages; service worker support is in progress)
+- **Safari (MV3)**: Supports service workers since Safari 16.4
 
 ```javascript
 // Detect current environment

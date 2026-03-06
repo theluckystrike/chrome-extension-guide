@@ -21,13 +21,9 @@ Use `chrome.sessions.getRecentlyClosed()` to fetch recently closed tabs and wind
 ```typescript
 // services/session-service.ts
 export interface SessionItem {
-  sessionId: string;
-  url?: string;
-  title?: string;
-  lastAccessTime?: number;
+  lastModified: number;
   tab?: chrome.tabs.Tab;
   window?: chrome.windows.Window;
-  tabs?: chrome.tabs.Tab[];
 }
 
 export async function getRecentlyClosed(maxResults = 25): Promise<SessionItem[]> {
@@ -41,12 +37,12 @@ export async function getRecentlyClosed(maxResults = 25): Promise<SessionItem[]>
 
 export async function getRecentlyClosedTabs(maxResults = 25): Promise<SessionItem[]> {
   const sessions = await getRecentlyClosed(maxResults);
-  return sessions.filter((s) => s.url && !s.tabs);
+  return sessions.filter((s) => s.tab !== undefined);
 }
 
 export async function getRecentlyClosedWindows(maxResults = 25): Promise<SessionItem[]> {
   const sessions = await getRecentlyClosed(maxResults);
-  return sessions.filter((s) => s.tabs && s.tabs.length > 0);
+  return sessions.filter((s) => s.window !== undefined);
 }
 ```
 
@@ -108,10 +104,11 @@ export async function filterSessions(options: {
   const { type, timeRange, maxResults = 100 } = options;
   const sessions = await getRecentlyClosed(maxResults);
   return sessions.filter((session) => {
-    if (type === 'tab' && !session.url) return false;
-    if (type === 'window' && !session.tabs) return false;
-    if (timeRange && session.lastAccessTime) {
-      return session.lastAccessTime >= timeRange.startTime && session.lastAccessTime <= timeRange.endTime;
+    if (type === 'tab' && !session.tab) return false;
+    if (type === 'window' && !session.window) return false;
+    if (timeRange && session.lastModified) {
+      const lastModifiedMs = session.lastModified * 1000; // API returns seconds since epoch
+      return lastModifiedMs >= timeRange.startTime && lastModifiedMs <= timeRange.endTime;
     }
     return true;
   });
@@ -161,13 +158,15 @@ function renderSessions() {
   for (const session of state.sessions) {
     const clone = template.content.cloneNode(true) as HTMLElement;
     const item = clone.querySelector('.session-item')!;
-    item.dataset.sessionId = session.sessionId;
-    item.querySelector('.session-title')!.textContent = session.title || 'Untitled';
-    item.querySelector('.session-url')!.textContent = session.url ? new URL(session.url).hostname : '';
+    const tab = session.tab;
+    const sessionId = tab?.sessionId || session.window?.sessionId || '';
+    item.dataset.sessionId = sessionId;
+    item.querySelector('.session-title')!.textContent = tab?.title || 'Window';
+    item.querySelector('.session-url')!.textContent = tab?.url ? new URL(tab.url).hostname : '';
     const favicon = item.querySelector('.favicon') as HTMLImageElement;
-    if (session.tab?.favIconUrl) { favicon.src = session.tab.favIconUrl; favicon.hidden = false; }
+    if (tab?.favIconUrl) { favicon.src = tab.favIconUrl; favicon.hidden = false; }
     else { favicon.hidden = true; }
-    item.querySelector('.restore-btn')!.onclick = async () => { await restoreTabAndFocus(session.sessionId); item.remove(); };
+    item.querySelector('.restore-btn')!.onclick = async () => { await restoreTabAndFocus(sessionId); item.remove(); };
     list.appendChild(clone);
   }
 }
@@ -185,8 +184,9 @@ export interface SearchOptions { text?: string; domain?: string; urlPattern?: st
 export async function searchSessions(options: SearchOptions, maxResults = 50): Promise<SessionItem[]> {
   const sessions = await getRecentlyClosed(maxResults);
   return sessions.filter((session) => {
-    const url = session.url || '';
-    const title = session.title || '';
+    const tab = session.tab;
+    const url = tab?.url || '';
+    const title = tab?.title || (session.window ? 'Window' : '');
     if (options.text) {
       const q = options.text.toLowerCase();
       if (!url.toLowerCase().includes(q) && !title.toLowerCase().includes(q)) return false;
@@ -224,19 +224,19 @@ export async function restoreMultipleSessions(sessionIds: string[]): Promise<Bat
 
 export async function restoreWindowTabs(sessionId: string): Promise<number> {
   const sessions = await getRecentlyClosed(100);
-  const windowSession = sessions.find((s) => s.sessionId === sessionId && s.tabs);
-  if (!windowSession?.tabs) throw new Error('Session not found');
+  const windowSession = sessions.find((s) => s.window?.sessionId === sessionId);
+  if (!windowSession?.window?.tabs) throw new Error('Session not found');
   await restoreWindow(sessionId);
-  return windowSession.tabs.length;
+  return windowSession.window.tabs.length;
 }
 
 export async function restoreTabsToCurrentWindow(sessionId: string): Promise<number> {
   const sessions = await getRecentlyClosed(100);
-  const windowSession = sessions.find((s) => s.sessionId === sessionId && s.tabs);
-  if (!windowSession?.tabs) throw new Error('Session not found');
+  const windowSession = sessions.find((s) => s.window?.sessionId === sessionId);
+  if (!windowSession?.window?.tabs) throw new Error('Session not found');
   const currentWindow = await chrome.windows.getCurrent();
   let count = 0;
-  for (const tab of windowSession.tabs) {
+  for (const tab of windowSession.window.tabs) {
     if (tab.url && !tab.url.startsWith('chrome://')) { await chrome.tabs.create({ url: tab.url, windowId: currentWindow.id }); count++; }
   }
   return count;
@@ -361,7 +361,7 @@ export async function deleteWorkspace(workspaceId: string): Promise<void> {
 ### Key Takeaways
 
 1. **Session IDs are temporary**: They expire after a short period. For permanent storage, save URLs to `chrome.storage` (Pattern 7).
-2. **Window vs Tab**: `getRecentlyClosed()` returns both. Windows have a `tabs` array; tabs have a direct `url` property.
+2. **Window vs Tab**: `getRecentlyClosed()` returns `Session` objects with either a `tab` or `window` property set. Access `session.tab.url` for tab sessions or `session.window.tabs` for window sessions.
 3. **Error handling**: Always wrap `chrome.sessions.restore()` in try/catch—sessions may expire or URLs may become invalid.
 4. **Storage integration**: Use `@theluckystrike/webext-storage` for type-safe session snapshots that survive browser restarts.
 5. **Message passing**: For complex UIs, use `@theluckystrike/webext-messaging` to coordinate between popup, background, and content scripts.

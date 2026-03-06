@@ -7,10 +7,10 @@ The Chrome Power API (`chrome.power`) enables extensions to prevent the system f
 The Power API provides three core methods: `requestKeepAwake()`, `releaseKeepAwake()`, and the ability to specify two levels of keep-awake: "display" (prevents only the display from sleeping) and "system" (prevents the entire system from sleeping).
 
 Key facts:
-- **Two keep-awake levels**: "display" prevents screen dimming/sleep, "system" prevents full sleep
-- **No permissions required**: The Power API works without special permissions in Manifest V3
+- **Two keep-awake levels**: "display" prevents the display from being turned off or dimmed, and prevents system sleep; "system" prevents system sleep but allows the screen to dim or turn off
+- **Permission required**: The Power API requires the `"power"` permission in Manifest V3
 - **Automatic release**: Power requests are automatically released when the extension is unloaded or the browser closes
-- **Stack behavior**: Multiple requests can be stacked; all must be released to fully release
+- **Replacement behavior**: A new `requestKeepAwake` call from the same extension replaces the previous request (it does not stack)
 
 ---
 
@@ -20,7 +20,7 @@ The most common use case is preventing the display from sleeping while the user 
 
 ### Required Permission
 
-Add `"power"` to your `manifest.json` permissions (optional but recommended for clarity):
+Add `"power"` to your `manifest.json` permissions:
 
 ```json
 {
@@ -40,7 +40,7 @@ export class PowerManager {
 
   /**
    * Request keep-awake at the display level
-   * Prevents screen from dimming or sleeping
+   * Prevents the display from being turned off or dimmed, and prevents system sleep
    */
   async requestDisplayKeepAwake(): Promise<void> {
     if (this.requestCount === 0 || this.currentLevel === "system") {
@@ -107,8 +107,8 @@ export class PowerManager {
 
   /**
    * Request system-level keep-awake
-   * Prevents both display AND system from sleeping
-   * Use for critical background operations
+   * Prevents the system from sleeping, but allows the screen to dim or turn off
+   * Use for critical background operations that don't need the screen
    */
   async requestSystemKeepAwake(): Promise<void> {
     // System-level overrides display-level
@@ -153,17 +153,17 @@ export class PowerManager {
 
 | Operation Type | Recommended Level | Rationale |
 |---------------|-------------------|-----------|
-| Video playback | Display | User is present, just not interacting |
-| Presentation | Display | Presenter needs screen, but system can sleep |
-| File download | System | Must complete even if user is away |
-| Background sync | System | May need to complete while user is away |
-| Long computation | System | User may not be present |
+| Video playback | Display | User is present, screen must stay on |
+| Presentation | Display | Presenter needs screen to stay on |
+| File download | System | Must complete even if screen turns off |
+| Background sync | System | May need to complete while screen is off |
+| Long computation | System | User may not be watching; screen can turn off |
 
 ---
 
 ## Pattern 3: Releasing Keep-Awake
 
-Properly releasing keep-awake requests is critical to avoid unnecessary power consumption. The Power API uses a stack-based approach where all requests must be released.
+Properly releasing keep-awake requests is critical to avoid unnecessary power consumption. The Power API uses a replacement model: a new `requestKeepAwake` call from the same extension replaces the previous request, and a single `releaseKeepAwake` call releases it.
 
 ### Release Implementation
 
@@ -1055,8 +1055,8 @@ chrome.runtime.onInstalled.addListener(initializeBadge);
 
 ### Common Considerations
 
-- **Permission requirements**: The Power API itself requires no special permissions, but patterns may need `downloads`, `tabs`, or storage permissions
-- **Stack behavior**: Multiple `requestKeepAwake()` calls require the same number of `releaseKeepAwake()` calls
+- **Permission requirements**: The Power API requires the `"power"` permission; patterns may also need `downloads`, `tabs`, or storage permissions
+- **Replacement behavior**: A new `requestKeepAwake()` call from the same extension replaces the previous request; a single `releaseKeepAwake()` call releases it
 - **Automatic cleanup**: Power requests are automatically released when the extension is unloaded or Chrome closes
 - **Battery impact**: System-level keep-awake has significantly higher battery impact than display-level; use sparingly
 - **User awareness**: Consider notifying users when keep-awake is active to avoid confusion about battery drain

@@ -138,7 +138,7 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
   context: async ({}, use) => {
     const extensionPath = path.resolve(__dirname, "../dist");
     const context = await chromium.launchPersistentContext("", {
-      headless: false, // Extensions require headed mode in Chromium
+      headless: false, // Use headed mode for reliability; new headless mode (Chrome 132+) also supports extensions
       args: [
         `--disable-extensions-except=${extensionPath}`,
         `--load-extension=${extensionPath}`,
@@ -187,7 +187,7 @@ test("popup page opens without errors", async ({ context, extensionId }) => {
 });
 ```
 
-Note: Playwright's Chromium requires `headless: false` for extension testing. Use `xvfb-run` on CI to run headed mode without a display.
+Note: Chrome's new headless mode (the default since Chrome 132) supports loading extensions. You can use `headless: true` with the `--headless=new` flag. For older Chrome versions, use `headless: false` and `xvfb-run` on CI to run headed mode without a display.
 
 ---
 

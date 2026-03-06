@@ -29,7 +29,7 @@ const storage = createStorage(defineSchema({ cachedSettings: { type: "object", d
 
 interface AllSettings {
   network: { webRTCIPHandlingPolicy: string; networkPredictionEnabled: boolean };
-  services: { safeBrowsingEnabled: boolean; spellingServiceEnabled: boolean };
+  services: { safeBrowsingEnabled: boolean; spellingServiceEnabled: boolean; };
   websites: { thirdPartyCookiesAllowed: boolean; referrersEnabled: boolean; doNotTrackEnabled: boolean };
 }
 
@@ -40,7 +40,7 @@ async function getAllPrivacySettings(): Promise<AllSettings> {
       chrome.privacy.network.networkPredictionEnabled.get({}),
     ]),
     Promise.all([
-      chrome.privacy.services.safeBrowsing.get({}),
+      chrome.privacy.services.safeBrowsingEnabled.get({}),
       chrome.privacy.services.spellingServiceEnabled.get({}),
     ]),
     Promise.all([
@@ -93,15 +93,13 @@ async function getCookieStatus(): Promise<boolean> {
   return result.value as boolean;
 }
 
-// Chrome 100+ support check
-async function getCookieCapabilities(): Promise<{ allowed: boolean; blockable?: boolean }> {
+// Check current third-party cookie status with details
+async function getCookieCapabilities(): Promise<{ allowed: boolean; levelOfControl: string }> {
   const result = await chrome.privacy.websites.thirdPartyCookiesAllowed.get({});
-  const response = { allowed: result.value as boolean };
-  try {
-    const block = await chrome.privacy.websites.blockThirdPartyCookies?.get({});
-    if (block) response.blockable = block.value as boolean;
-  } catch { /* Not supported */ }
-  return response;
+  return {
+    allowed: result.value as boolean,
+    levelOfControl: result.levelOfControl,
+  };
 }
 ```
 
@@ -110,8 +108,8 @@ async function getCookieCapabilities(): Promise<{ allowed: boolean; blockable?: 
 ## Pattern 4: Toggling Safe Browsing and Predictions
 
 ```ts
-async function setSafeBrowsing(enabled: boolean): Promise<void> {
-  await chrome.privacy.services.safeBrowsing.set({ value: enabled });
+async function setSafeBrowsingEnabled(enabled: boolean): Promise<void> {
+  await chrome.privacy.services.safeBrowsingEnabled.set({ value: enabled });
 }
 
 async function setPredictionServices(settings: { networkPrediction: boolean; spelling: boolean; translation: boolean }): Promise<void> {
@@ -231,7 +229,7 @@ const setters: Record<string, () => Promise<void>> = {
   cookies: () => chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value: arguments[1] }),
   dnt: () => chrome.privacy.websites.doNotTrackEnabled.set({ value: arguments[1] }),
   referrers: () => chrome.privacy.websites.referrersEnabled.set({ value: arguments[1] }),
-  safeBrowsing: () => chrome.privacy.services.safeBrowsing.set({ value: arguments[1] }),
+  safeBrowsing: () => chrome.privacy.services.safeBrowsingEnabled.set({ value: arguments[1] }),
   spelling: () => chrome.privacy.services.spellingServiceEnabled.set({ value: arguments[1] }),
 };
 
@@ -275,7 +273,7 @@ async function applyHardening(): Promise<{ applied: string[]; errors: string[] }
     referrersEnabled: chrome.privacy.websites.referrersEnabled,
     hyperlinkAuditingEnabled: chrome.privacy.websites.hyperlinkAuditingEnabled,
     doNotTrackEnabled: chrome.privacy.websites.doNotTrackEnabled,
-    safeBrowsingEnabled: chrome.privacy.services.safeBrowsing,
+    safeBrowsingEnabled: chrome.privacy.services.safeBrowsingEnabled,
     spellingServiceEnabled: chrome.privacy.services.spellingServiceEnabled,
     translationServiceEnabled: chrome.privacy.services.translationServiceEnabled,
   };
@@ -316,7 +314,7 @@ class PresetManager {
       referrersEnabled: chrome.privacy.websites.referrersEnabled,
       hyperlinkAuditingEnabled: chrome.privacy.websites.hyperlinkAuditingEnabled,
       doNotTrackEnabled: chrome.privacy.websites.doNotTrackEnabled,
-      safeBrowsingEnabled: chrome.privacy.services.safeBrowsing,
+      safeBrowsingEnabled: chrome.privacy.services.safeBrowsingEnabled,
     };
     await Promise.all(Object.entries(preset.settings).map(async ([k, v]) => {
       try { await map[k].set({ value: v }); result.applied.push(k); }
@@ -399,7 +397,7 @@ function isRisk(setting: string, value: any): boolean {
 | **1: Reading Settings** | Retrieve all privacy values | `chrome.privacy.*.get({})` |
 | **2: WebRTC Control** | Control IP handling | `webRTCIPHandlingPolicy` |
 | **3: Cookie Management** | Toggle third-party cookies | `thirdPartyCookiesAllowed` |
-| **4: Safe Browsing** | Toggle protection | `safeBrowsing` |
+| **4: Safe Browsing** | Toggle protection | `safeBrowsingEnabled` |
 | **5: Dashboard Popup** | Interactive UI | Message passing |
 | **6: Hardening** | One-click privacy lock | Batch `set()` |
 | **7: Presets** | Relaxed/Moderate/Strict | `PresetManager` |
@@ -416,5 +414,5 @@ npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 | Category | Settings |
 |----------|----------|
 | **network** | `webRTCIPHandlingPolicy`, `networkPredictionEnabled` |
-| **services** | `safeBrowsing`, `spellingServiceEnabled`, `translationServiceEnabled` |
+| **services** | `safeBrowsingEnabled`, `spellingServiceEnabled`, `translationServiceEnabled` |
 | **websites** | `thirdPartyCookiesAllowed`, `referrersEnabled`, `doNotTrackEnabled`, `hyperlinkAuditingEnabled` |

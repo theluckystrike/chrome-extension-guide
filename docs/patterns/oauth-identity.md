@@ -50,19 +50,11 @@ interface GoogleUserInfo {
 export async function getGoogleToken(
   interactive: boolean = true
 ): Promise<string> {
-  return new Promise((resolve, reject) => {
-    chrome.identity.getAuthToken({ interactive }, (token) => {
-      if (chrome.runtime.lastError) {
-        reject(new Error(chrome.runtime.lastError.message));
-        return;
-      }
-      if (!token) {
-        reject(new Error("No token returned"));
-        return;
-      }
-      resolve(token);
-    });
-  });
+  const result = await chrome.identity.getAuthToken({ interactive });
+  if (!result.token) {
+    throw new Error("No token returned");
+  }
+  return result.token;
 }
 
 export async function getGoogleUserInfo(): Promise<GoogleUserInfo> {
@@ -89,10 +81,8 @@ export async function getGoogleUserInfo(): Promise<GoogleUserInfo> {
   return response.json();
 }
 
-function removeCachedToken(token: string): Promise<void> {
-  return new Promise((resolve) => {
-    chrome.identity.removeCachedAuthToken({ token }, resolve);
-  });
+async function removeCachedToken(token: string): Promise<void> {
+  await chrome.identity.removeCachedAuthToken({ token });
 }
 ```
 
@@ -138,22 +128,14 @@ export async function launchOAuthFlow(
   authUrl.searchParams.set("state", state);
   authUrl.searchParams.set("response_type", "code");
 
-  const responseUrl = await new Promise<string>((resolve, reject) => {
-    chrome.identity.launchWebAuthFlow(
-      { url: authUrl.toString(), interactive: true },
-      (callbackUrl) => {
-        if (chrome.runtime.lastError) {
-          reject(new Error(chrome.runtime.lastError.message));
-          return;
-        }
-        if (!callbackUrl) {
-          reject(new Error("No callback URL returned"));
-          return;
-        }
-        resolve(callbackUrl);
-      }
-    );
+  const responseUrl = await chrome.identity.launchWebAuthFlow({
+    url: authUrl.toString(),
+    interactive: true,
   });
+
+  if (!responseUrl) {
+    throw new Error("No callback URL returned");
+  }
 
   const params = new URL(responseUrl).searchParams;
   if (params.get("state") !== state) {
@@ -582,13 +564,9 @@ export async function logout(
 
   // 2. Clear Chrome's cached Google token (if using getAuthToken)
   try {
-    const token = await new Promise<string | undefined>((resolve) => {
-      chrome.identity.getAuthToken({ interactive: false }, resolve);
-    });
-    if (token) {
-      await new Promise<void>((resolve) => {
-        chrome.identity.removeCachedAuthToken({ token }, resolve);
-      });
+    const result = await chrome.identity.getAuthToken({ interactive: false });
+    if (result.token) {
+      await chrome.identity.removeCachedAuthToken({ token: result.token });
     }
   } catch {
     // Not using Google auth — skip

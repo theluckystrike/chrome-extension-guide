@@ -272,37 +272,31 @@ export async function analyzeTransitionTypes(
 
 /**
  * Chrome history transition types:
- * - link: User clicked a link
- * - typed: User typed the URL directly
- * - bookmark: User navigated from a bookmark
- * - toolbar: User navigated from the toolbar
- * - address_bar: User typed in the address bar
- * - auto_bookmark: User clicked through auto-bookmark
- * - auto_subframe: User navigated through auto-generated subframe
- * - manual_subframe: User navigated through manually generated subframe
- * - generated: User generated the navigation (e.g., omnibox)
- * - start_page: User navigated from the start page
+ * - link: User clicked a link on another page
+ * - typed: User typed the URL in the address bar (also used for other explicit navigation)
+ * - auto_bookmark: User arrived via a suggestion in the UI (e.g., a menu item)
+ * - auto_subframe: Subframe navigation the user didn't request (e.g., an ad)
+ * - manual_subframe: User navigated within a subframe
+ * - generated: User typed in the address bar and selected a non-URL entry (e.g., a search suggestion)
+ * - auto_toplevel: Automatically generated top-level navigation
  * - form_submit: User submitted a form
  * - reload: User reloaded the page
- * - keyword: User used a keyword
- * - other: Other transition type
+ * - keyword: URL generated from a replaceable keyword (not default search provider)
+ * - keyword_generated: Visit generated for a keyword
  */
 
 export const TransitionType = {
   LINK: "link",
   TYPED: "typed",
-  BOOKMARK: "bookmark",
-  TOOLBAR: "toolbar",
-  ADDRESS_BAR: "address_bar",
   AUTO_BOOKMARK: "auto_bookmark",
   AUTO_SUBFRAME: "auto_subframe",
   MANUAL_SUBFRAME: "manual_subframe",
   GENERATED: "generated",
-  START_PAGE: "start_page",
+  AUTO_TOPLEVEL: "auto_toplevel",
   FORM_SUBMIT: "form_submit",
   RELOAD: "reload",
   KEYWORD: "keyword",
-  OTHER: "other",
+  KEYWORD_GENERATED: "keyword_generated",
 } as const;
 
 export function isValidTransition(type: string): boolean {

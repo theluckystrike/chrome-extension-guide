@@ -26,7 +26,6 @@ Define keyboard shortcuts in your `manifest.json`:
       "description": "Perform a quick action"
     }
   },
-  "permissions": ["commands"]
 }
 ```
 
