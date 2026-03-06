@@ -88,24 +88,17 @@ Several npm packages provide TypeScript definitions for the `chrome.*` namespace
 | Package | Source | Notes |
 |---------|--------|-------|
 | `chrome-types` | Auto-generated from Chromium source | Most accurate, updated frequently |
-| `@anthropic-ai/chrome-types` | Fork with MV3 improvements | Better service worker typing |
-| `@anthropic-ai/browser-types` | Cross-browser WebExtension types | Use for cross-browser extensions |
-| `@anthropic-ai/chrome-types` | Enhanced Chrome API types | Stricter generics, better docs |
-| `@anthropic-ai/browser-types` | Browser extension standard types | Maps to `browser.*` namespace |
-| `@anthropic-ai/chrome-types` | Chrome-specific MV3 types | Includes experimental APIs |
-| `@anthropic-ai/browser-types` | WebExtension polyfill compatible | Works with `webextension-polyfill` |
+| `@anthropic-ai/chrome-types` | Deprecated / unavailable | Do not use |
+| `@types/chrome` | DefinitelyTyped community | Widely used, may lag behind Chrome releases |
 
 ### Installation and Setup
 
 ```bash
-# Option 1: chrome-types (community standard)
+# Option 1: chrome-types (auto-generated from Chromium, most accurate)
 npm install -D chrome-types
 
-# Option 2: @anthropic-ai/chrome-types (enhanced, MV3-focused)
-npm install -D @anthropic-ai/chrome-types
-
-# Option 3: cross-browser support
-npm install -D @anthropic-ai/browser-types
+# Option 2: @types/chrome (DefinitelyTyped, widely used)
+npm install -D @types/chrome
 ```
 
 After installation, add the types to your `tsconfig.json`:
@@ -114,7 +107,7 @@ After installation, add the types to your `tsconfig.json`:
 {
   "compilerOptions": {
     "types": ["chrome-types"]
-    // or: "types": ["@anthropic-ai/chrome-types"]
+    // or for @types/chrome: "types": ["chrome"]
   }
 }
 ```
@@ -123,6 +116,8 @@ Alternatively, use a triple-slash directive at the top of files that use Chrome 
 
 ```typescript
 /// <reference types="chrome-types" />
+// or for @types/chrome:
+/// <reference types="chrome" />
 ```
 
 ### Verifying Types Work

@@ -16,13 +16,6 @@
       },
       "description": "Open extension popup"
     },
-    "_execute_side_panel": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+P",
-        "mac": "Command+Shift+P"
-      },
-      "description": "Open side panel"
-    },
     "toggle-feature": {
       "suggested_key": {
         "default": "Alt+T",
@@ -42,9 +35,10 @@
 ```
 
 ## Special Commands
-- `_execute_action` — opens the extension popup (equivalent to clicking toolbar icon)
-- `_execute_side_panel` — opens the extension's side panel
-- These are built-in and don't need `onCommand` listener
+- `_execute_action` (MV3) — opens the extension popup (equivalent to clicking toolbar icon)
+- `_execute_browser_action` (MV2) — opens the browser action popup
+- `_execute_page_action` (MV2) — opens the page action popup
+- These are built-in and don't dispatch `onCommand` events
 
 ## Listening for Commands
 ```javascript

@@ -162,19 +162,23 @@ The platform can send various message types that your extension should handle:
 The platform may also send server configuration details:
 
 ```javascript
-chrome.vpnProvider.onPlatformMessage.addListener((message, sessionId) => {
-  if (message.state === 'connected') {
-    // Extract server configuration
-    const serverConfig = {
-      serverAddress: message.serverAddress,
-      subnetMask: message.subnetMask,
-      dnsServers: message.dnsServers || [],
-      mtu: message.mtu || 1500,
-      routes: message.routes || []
-    };
-    
-    // Configure your VPN tunnel with these parameters
-    configureTunnel(serverConfig, sessionId);
+// onPlatformMessage receives: (id: string, message: PlatformMessage, error: string)
+// where PlatformMessage is one of: "connected", "disconnected", "error", "linkDown", "linkUp", "linkChanged", "suspend", "resume"
+chrome.vpnProvider.onPlatformMessage.addListener((id, message, error) => {
+  if (message === 'connected') {
+    // The user selected this VPN config from Chrome OS settings.
+    // Now configure the tunnel parameters:
+    chrome.vpnProvider.setParameters({
+      address: '10.0.0.1',
+      mtu: '1500',
+      exclusionList: [],
+      inclusionList: ['0.0.0.0/0'],
+      dnsServers: ['8.8.8.8']
+    }, () => {
+      if (!chrome.runtime.lastError) {
+        chrome.vpnProvider.notifyConnectionStateChanged('connected');
+      }
+    });
   }
 });
 ```
@@ -301,52 +305,42 @@ Managing the VPN connection lifecycle involves coordinating between user actions
 
 ### Initiating a Connection
 
+The VPN Provider API does not have `connect()` or `disconnect()` methods. Instead, the connection lifecycle is managed by the Chrome OS platform. When the user selects a VPN configuration from Chrome OS network settings, Chrome OS sends a `"connected"` platform message to the extension. The extension then calls `setParameters()` to configure the tunnel and `notifyConnectionStateChanged()` to report connection state.
+
 ```javascript
-function connectVpn(configId, credentials) {
-  // Validate configuration exists
-  chrome.vpnProvider.getConfigs((configs) => {
-    const config = configs.find(c => c.id === configId);
-    if (!config) {
-      throw new Error('Configuration not found');
+// When Chrome OS signals that the user wants to connect,
+// your extension receives an onPlatformMessage with "connected".
+// You then configure the tunnel parameters:
+function handleConnected(configId) {
+  // Set tunnel parameters for the VPN
+  chrome.vpnProvider.setParameters({
+    address: '10.0.0.1',
+    mtu: '1500',
+    exclusionList: [],
+    inclusionList: ['0.0.0.0/0'],
+    dnsServers: ['8.8.8.8', '8.8.4.4']
+  }, () => {
+    if (chrome.runtime.lastError) {
+      console.error('Failed to set parameters:', chrome.runtime.lastError);
+      chrome.vpnProvider.notifyConnectionStateChanged('failure');
+      return;
     }
-    
-    // Authenticate with VPN server
-    authenticateVpn(credentials, (authResult) => {
-      if (authResult.success) {
-        // Request platform to initiate connection
-        chrome.vpnProvider.connect(configId, (sessionId) => {
-          if (chrome.runtime.lastError) {
-            console.error('Connection failed:', chrome.runtime.lastError);
-            notifyPopup('error', { 
-              message: 'Failed to establish VPN connection' 
-            });
-            return;
-          }
-          
-          console.log('VPN connection initiated, session:', sessionId);
-          // Platform will send 'connected' message when ready
-        });
-      } else {
-        notifyPopup('error', { message: 'Authentication failed' });
-      }
-    });
+    // Notify Chrome OS that the connection is established
+    chrome.vpnProvider.notifyConnectionStateChanged('connected');
+    console.log('VPN tunnel configured and connected');
   });
 }
 ```
 
 ### Disconnecting
 
+When the user disconnects from Chrome OS network settings, the platform sends a `"disconnected"` platform message. Your extension should clean up resources:
+
 ```javascript
-function disconnectVpn(sessionId) {
-  chrome.vpnProvider.disconnect(sessionId, () => {
-    if (chrome.runtime.lastError) {
-      console.error('Disconnect failed:', chrome.runtime.lastError);
-      return;
-    }
-    
-    console.log('VPN disconnect requested');
-    // Platform will send 'disconnected' message when complete
-  });
+function handleDisconnected(configId) {
+  // Clean up tunnel resources
+  cleanupConnection(configId);
+  console.log('VPN disconnected, resources cleaned up');
 }
 ```
 
@@ -359,11 +353,11 @@ let reconnectAttempts = 0;
 const MAX_RECONNECT_ATTEMPTS = 5;
 let currentSessionId = null;
 
-chrome.vpnProvider.onPlatformMessage.addListener((message, sessionId) => {
-  if (message.state === 'disconnected' && message.unexpected) {
-    // Handle unexpected disconnection
-    console.log('Unexpected disconnection, attempting reconnect...');
-    attemptReconnect(sessionId);
+chrome.vpnProvider.onPlatformMessage.addListener((id, message, error) => {
+  if (message === 'disconnected') {
+    // Handle disconnection
+    console.log('Disconnection detected, cleaning up...');
+    cleanupConnection(id);
   }
 });
 
@@ -383,16 +377,10 @@ function attemptReconnect(sessionId) {
   setTimeout(() => {
     console.log(`Reconnection attempt ${reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS}`);
     
-    chrome.vpnProvider.getLastConnection((lastConfigId) => {
-      if (lastConfigId) {
-        chrome.vpnProvider.connect(lastConfigId, (newSessionId) => {
-          if (!chrome.runtime.lastError) {
-            currentSessionId = newSessionId;
-            console.log('Reconnection successful');
-          }
-        });
-      }
-    });
+    // Reconnection is initiated by the platform, not the extension.
+    // The extension can only respond to onPlatformMessage events.
+    // Signal readiness by notifying connection state:
+    chrome.vpnProvider.notifyConnectionStateChanged('connected');
   }, delay);
 }
 ```
@@ -540,52 +528,60 @@ class VpnExtension {
     );
   }
   
-  handlePlatformMessage(message, sessionId) {
-    console.log('Platform message:', message.state, message);
-    
-    switch (message.state) {
+  // onPlatformMessage receives: (id: string, message: PlatformMessage, error: string)
+  handlePlatformMessage(id, message, error) {
+    console.log('Platform message:', id, message, error);
+
+    switch (message) {
       case 'connected':
-        this.handleConnected(message, sessionId);
+        this.handleConnected(id);
         break;
       case 'disconnected':
-        this.handleDisconnected(message, sessionId);
+        this.handleDisconnected(id);
         break;
       case 'error':
-        this.handleError(message, sessionId);
+        this.handleError(id, error);
         break;
     }
   }
-  
-  handleConnected(message, sessionId) {
-    this.sessionId = sessionId;
+
+  handleConnected(configId) {
+    this.configId = configId;
     this.isConnected = true;
     this.reconnectAttempts = 0;
-    
-    // Notify popup
-    this.notifyPopup('connected', {
-      server: message.serverAddress,
-      session: sessionId
+
+    // Configure tunnel parameters
+    chrome.vpnProvider.setParameters({
+      address: '10.0.0.1',
+      mtu: '1500',
+      exclusionList: [],
+      inclusionList: ['0.0.0.0/0'],
+      dnsServers: ['8.8.8.8']
+    }, () => {
+      if (!chrome.runtime.lastError) {
+        chrome.vpnProvider.notifyConnectionStateChanged('connected');
+        this.notifyPopup('connected', { configId });
+      }
     });
-    
-    console.log('VPN connected:', message.serverAddress);
+
+    console.log('VPN connected for config:', configId);
   }
-  
-  handleDisconnected(message, sessionId) {
-    this.sessionId = null;
+
+  handleDisconnected(configId) {
     this.isConnected = false;
-    
+
     this.notifyPopup('disconnected', {
-      reason: message.message || 'User disconnected'
+      reason: 'User disconnected'
     });
-    
+
     console.log('VPN disconnected');
   }
-  
-  handleError(message, sessionId) {
-    console.error('VPN error:', message.error);
-    
+
+  handleError(configId, error) {
+    console.error('VPN error:', error);
+
     this.notifyPopup('error', {
-      error: message.error
+      error: error
     });
   }
   
@@ -626,59 +622,36 @@ class VpnExtension {
     }
   }
   
-  async connect() {
-    try {
-      // Get or create configuration
-      const configId = await this.getOrCreateConfig();
-      
-      // Connect to VPN
-      return new Promise((resolve, reject) => {
-        chrome.vpnProvider.connect(configId, (sessionId) => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-          } else {
-            resolve(sessionId);
-          }
-        });
-      });
-    } catch (error) {
-      console.error('Connection failed:', error);
-      this.notifyPopup('error', { error: error.message });
-    }
-  }
-  
-  async disconnect() {
-    if (this.sessionId) {
-      return new Promise((resolve) => {
-        chrome.vpnProvider.disconnect(this.sessionId, () => {
-          resolve();
-        });
-      });
-    }
-  }
-  
-  getOrCreateConfig() {
+  // Note: The VPN Provider API does not have connect() or disconnect() methods.
+  // Connections are initiated by the user via Chrome OS network settings.
+  // The extension can only create/destroy configs and respond to platform messages.
+
+  async createConfig() {
     return new Promise((resolve, reject) => {
-      chrome.vpnProvider.getConfigs((configs) => {
+      chrome.vpnProvider.createConfig('My VPN', (configId) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
-          return;
-        }
-        
-        const existing = configs.find(c => c.name === 'My VPN');
-        if (existing) {
-          resolve(existing.id);
         } else {
-          chrome.vpnProvider.createConfig('My VPN', (configId) => {
-            if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError);
-            } else {
-              resolve(configId);
-            }
-          });
+          this.configId = configId;
+          resolve(configId);
         }
       });
     });
+  }
+
+  async destroyConfig() {
+    if (this.configId) {
+      return new Promise((resolve, reject) => {
+        chrome.vpnProvider.destroyConfig(this.configId, () => {
+          if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
+          } else {
+            this.configId = null;
+            resolve();
+          }
+        });
+      });
+    }
   }
   
   notifyPopup(state, details) {

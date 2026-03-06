@@ -189,4 +189,4 @@ async function getValidToken() {
 - Not implementing token refresh — tokens expire
 - Missing PKCE for public clients (security vulnerability)
 - Forgetting `interactive: false` for silent auth checks
-- Not revoking tokens on uninstall (use `chrome.runtime.onInstalled` reason "uninstall" — note: limited)
+- Not revoking tokens on uninstall (use `chrome.runtime.setUninstallURL()` to redirect to a server-side revocation endpoint)

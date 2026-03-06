@@ -155,27 +155,24 @@ chrome.scripting.removeCSS(
 );
 ```
 
-Or remove all CSS injected by your extension:
+To remove previously injected CSS, call `removeCSS` with the same CSS string or file that was originally injected:
 
 ```javascript
-// You need to track injection IDs if you want to remove them later
-let lastInjectionId;
+const cssText = '.highlight { background: yellow; }';
 
-async function injectAndTrack() {
-  const results = await chrome.scripting.insertCSS({
-    target: { tabId: 12345 },
-    css: '.highlight { background: yellow; }'
+async function injectHighlight(tabId) {
+  await chrome.scripting.insertCSS({
+    target: { tabId },
+    css: cssText
   });
-  lastInjectionId = results[0].frameId;
+  // insertCSS returns Promise<void> — no injection results
 }
 
-async function removeLastInjection() {
-  if (lastInjectionId) {
-    await chrome.scripting.removeCSS({
-      target: { tabId: 12345, frameIds: [lastInjectionId] },
-      css: '.highlight { background: yellow; }'
-    });
-  }
+async function removeHighlight(tabId) {
+  await chrome.scripting.removeCSS({
+    target: { tabId },
+    css: cssText
+  });
 }
 ```
 
@@ -240,10 +237,10 @@ chrome.scripting.getRegisteredContentScripts((scripts) => {
   console.log('Registered scripts:', scripts);
 });
 
-// Unregister a specific script
-chrome.scripting.unregisterContentScripts(['my-script']);
+// Unregister a specific script by filter
+chrome.scripting.unregisterContentScripts({ ids: ['my-script'] });
 
-// Unregister all scripts
+// Unregister all scripts (no filter)
 chrome.scripting.unregisterContentScripts();
 ```
 
@@ -417,7 +414,7 @@ chrome.scripting.executeScript(
     },
     files: ['content-script.js'],
     world: 'ISOLATED',  // Default, equivalent to MV2 behavior
-    runAt: 'document_end'
+    injectImmediately: true  // If false/omitted, injects at document_idle
   },
   (results) => {
     if (chrome.runtime.lastError) {

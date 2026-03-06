@@ -87,7 +87,7 @@ During development, you may want to prevent the service worker from being termin
 ```javascript
 // Development only -- do not ship this
 if (process.env.NODE_ENV === 'development') {
-  chrome.alarms.create('keep-alive-debug', { periodInMinutes: 0.4 });
+  chrome.alarms.create('keep-alive-debug', { periodInMinutes: 0.5 });
   chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === 'keep-alive-debug') {
       console.log('[SW] Keep-alive ping at', new Date().toISOString());

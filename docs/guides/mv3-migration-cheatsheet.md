@@ -477,7 +477,7 @@ let cache = {};
 
 **MV3:**
 ```ts
-// chrome.storage.session — in-memory, cleared when SW terminates or browser restarts
+// chrome.storage.session — in-memory, persists across SW restarts but cleared on browser restart, extension reload/update/disable
 await chrome.storage.session.set({ token: "abc123" });
 const { token } = await chrome.storage.session.get("token");
 
@@ -527,7 +527,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-> Note: The minimum alarm period is 30 seconds (in development) or 1 minute (in production). For shorter intervals, you can use `setTimeout` inside an active event handler, but it will not survive SW termination.
+> Note: Since Chrome 120, the minimum alarm period is 30 seconds (`periodInMinutes: 0.5`). Setting values lower than 0.5 will not be honored and will cause a warning. For shorter intervals, you can use `setTimeout` inside an active event handler, but it will not survive SW termination.
 
 > Full API reference: [Alarms API](../api-reference/alarms-api.md)
 

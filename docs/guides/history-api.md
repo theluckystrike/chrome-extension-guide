@@ -48,7 +48,7 @@ chrome.history.getVisits({ url: 'https://developer.chrome.com/' }, (visits) => {
 - `"auto_subframe"` — iframe navigation
 - `"manual_subframe"` — user-initiated iframe nav
 - `"generated"` — from omnibox suggestion
-- `"auto_toplevel"` — auto navigation (redirect)
+- `"auto_toplevel"` — page specified in command line or start page
 - `"form_submit"` — form submission
 - `"reload"` — page reload
 - `"keyword"` — search keyword

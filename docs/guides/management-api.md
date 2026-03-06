@@ -102,7 +102,6 @@ The `ExtensionInfo` object returned by the API contains comprehensive informatio
   type: "extension",                        // "extension", "theme", "app"
   installType: "normal",                    // "normal", "development", "sideload"
   mayDisable: true,                         // Whether user can disable
-  mayEnable: true,                          // Whether user can enable
   appLaunchUrl: null,                       // For apps: launch URL
   homepageUrl: "https://example.com",       // Homepage if set
   updateUrl: "https://example.com/update",  // Update URL
@@ -195,7 +194,7 @@ async function canToggleExtension(extensionId) {
   const ext = await chrome.management.get(extensionId);
   
   return {
-    canEnable: ext.mayEnable && !ext.enabled,
+    canEnable: !ext.enabled,
     canDisable: ext.mayDisable && ext.enabled,
     reason: ext.disabledReason
   };
@@ -648,7 +647,7 @@ async function canManageExtension(extensionId) {
   
   return {
     canDisable: ext.mayDisable && ext.enabled,
-    canEnable: ext.mayEnable && !ext.enabled,
+    canEnable: !ext.enabled,
     canUninstall: ext.mayDisable, // Generally same requirement
     isSelf: ext.id === chrome.runtime.id,
     isPolicyInstalled: ext.installType === 'policy'

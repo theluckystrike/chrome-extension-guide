@@ -18,7 +18,7 @@ chrome.cookies.get({
     console.log('Expires:', cookie.expirationDate ? new Date(cookie.expirationDate * 1000) : 'Session');
     console.log('Secure:', cookie.secure);
     console.log('HttpOnly:', cookie.httpOnly);
-    console.log('SameSite:', cookie.sameSite); // "no_restriction", "lax", "strict"
+    console.log('SameSite:', cookie.sameSite); // "no_restriction", "lax", "strict", "unspecified"
   }
 });
 
@@ -52,7 +52,7 @@ chrome.cookies.set({
   path: '/',                   // Optional: defaults to '/'
   secure: true,                // Only sent over HTTPS
   httpOnly: false,             // Accessible to JavaScript
-  sameSite: 'lax',            // "no_restriction" | "lax" | "strict"
+  sameSite: 'lax',            // "no_restriction" | "lax" | "strict" | "unspecified"
   expirationDate: Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60) // 30 days
 }, (cookie) => {
   if (cookie) {

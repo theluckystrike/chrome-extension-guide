@@ -36,12 +36,12 @@ The `getAll()` method returns an array of command objects, each containing:
 
 The `commands` key in your manifest.json file is where you define all keyboard shortcuts for your extension. Each command requires specific properties to function correctly.
 
-### Required Properties
+### Properties
 
-Every command definition must include two required properties:
+Command definitions support the following properties:
 
-1. **suggested_key**: The default keyboard combination
-2. **description**: A human-readable description shown in the shortcuts UI
+1. **suggested_key** (optional): The default keyboard combination. An extension can have many commands but may specify at most four suggested keyboard shortcuts.
+2. **description** (required for standard commands, ignored for Action commands): A human-readable description shown in the shortcuts UI
 
 ### Basic Manifest Structure
 
@@ -148,8 +148,7 @@ The Chrome Commands API supports a wide range of keys:
 - Comma, Period, Slash, Backslash, Quote, Semicolon, Equals, Bracket keys
 
 **Special Keys:**
-- Space, Tab, Enter, Backspace, Delete, Insert
-- Home, End, PageUp, PageDown
+- Space, Insert, Home, End, PageUp, PageDown, Delete
 
 **Arrow Keys:**
 - Up, Down, Left, Right
@@ -161,19 +160,17 @@ The Chrome Commands API supports a wide range of keys:
 - MediaNextTrack, MediaPrevTrack, MediaPlayPause, MediaStop
 
 **Modifier Keys (used in combinations):**
-- Ctrl, Alt, Shift, Command (Mac only)
+- Ctrl, Alt, Shift, Command (Mac only), MacCtrl (Mac only), Search (ChromeOS only)
 
 ### Modifier Requirements
 
 Chrome enforces specific modifier requirements to prevent conflicts with system shortcuts:
 
-**Windows and Linux:**
-- Must include at least one of: Ctrl, Alt
+**All Platforms:**
+- Extension command shortcuts must include either Ctrl or Alt
 - Shift is optional but commonly used
-
-**macOS:**
-- Must include at least one of: Command (⌘), Alt (⌥)
-- Command is the primary modifier for user shortcuts
+- On macOS, `Ctrl` is automatically converted to `Command`; use `MacCtrl` to target the actual Control key
+- Media Keys can be used without modifiers, but modifiers cannot be combined with Media Keys
 
 ```json
 // Valid combinations
@@ -390,7 +387,7 @@ Understanding platform-specific key combinations is crucial for creating extensi
 
 ### The Ctrl vs Command Distinction
 
-On Windows and Linux, the primary modifier key is Ctrl (Control). On macOS, the Command key (⌘) serves a similar purpose for user-accessible shortcuts. Using the wrong modifier key will result in the shortcut not working on macOS.
+On Windows and Linux, the primary modifier key is Ctrl (Control). On macOS, the Command key (⌘) serves a similar purpose for user-accessible shortcuts. Note that `Ctrl` in the `default` key is automatically converted to `Command` on macOS, so a single `default` entry often suffices. Use the `mac` key when you want explicit control, or use `MacCtrl` to specifically target the Control key on macOS.
 
 ```json
 {
@@ -417,9 +414,9 @@ On Windows and Linux, the primary modifier key is Ctrl (Control). On macOS, the 
 
 Follow these guidelines when defining platform-specific shortcuts:
 
-1. **Always provide both default and mac keys**: The default key serves Windows/Linux, while the mac key is specifically for macOS
+1. **Provide a `default` key**: `Ctrl` in the `default` key is auto-converted to `Command` on macOS. Add a `mac` key only when you need explicit control or want to use `MacCtrl`.
 
-2. **Use Command for macOS shortcuts**: This is the standard modifier for user shortcuts in macOS applications
+2. **Use Command for explicit macOS shortcuts**: If providing a `mac` key, use `Command` as the primary modifier since it is the standard for macOS user shortcuts
 
 3. **Consider platform conventions**: Some shortcuts are universal (like Ctrl/Cmd+S for save), while others vary by platform
 
@@ -505,38 +502,9 @@ In Manifest V2 extensions, `_execute_browser_action` performed the same function
 }
 ```
 
-### _execute_side_panel
+### Combining Special and Custom Commands
 
-The `_execute_side_panel` command opens your extension's side panel:
-
-```json
-{
-  "commands": {
-    "_execute_side_panel": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+P",
-        "mac": "Command+Shift+P"
-      },
-      "description": "Open side panel"
-    }
-  }
-}
-```
-
-This requires the sidePanel permission and side_panel section in your manifest:
-
-```json
-{
-  "permissions": ["sidePanel"],
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  }
-}
-```
-
-### Combining Special Commands
-
-You can define multiple special commands alongside regular custom commands:
+You can define the special `_execute_action` command alongside regular custom commands:
 
 ```json
 {
@@ -547,13 +515,6 @@ You can define multiple special commands alongside regular custom commands:
         "mac": "Command+Shift+E"
       },
       "description": "Open popup"
-    },
-    "_execute_side_panel": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+S",
-        "mac": "Command+Shift+S"
-      },
-      "description": "Open side panel"
     },
     "custom-command-1": {
       "suggested_key": {
@@ -572,6 +533,8 @@ You can define multiple special commands alongside regular custom commands:
   }
 }
 ```
+
+> **Note:** To open a side panel via keyboard shortcut, use a custom command with a `chrome.commands.onCommand` listener that calls `chrome.sidePanel.open()`. There is no `_execute_side_panel` reserved command.
 
 ## Allowing Users to Customize Shortcuts
 
@@ -629,7 +592,7 @@ Users have the following customization options:
 1. **Change existing shortcuts**: Users can modify any suggested shortcut
 2. **Add new shortcuts**: Users can add shortcuts for commands that don't have one
 3. **Remove shortcuts**: Users can clear any shortcut
-4. **Create new bindings**: Users can add shortcuts for commands not in the manifest
+4. **Remap global commands**: Users can remap global commands to their preferred key combinations
 
 ### What Extensions Cannot Do
 
@@ -637,7 +600,7 @@ Important limitations to communicate to users:
 
 1. **No programmatic modification**: Extensions cannot change shortcuts
 2. **No shortcut removal**: Cannot programmatically remove user-set shortcuts
-3. **No强制 enforcement**: Cannot guarantee a specific shortcut will always work
+3. **No enforcement**: Cannot guarantee a specific shortcut will always work
 
 ### Handling User-Set Shortcuts
 
@@ -825,16 +788,18 @@ Make sure users know about available shortcuts by:
 
 Avoid these common pitfalls when implementing keyboard shortcuts:
 
-### 1. Missing Platform-Specific Keys
+### 1. Understanding Platform Key Mapping
+
+On macOS, `Ctrl` in the `default` key is automatically converted to `Command`. Specifying a separate `mac` key is therefore optional, but recommended for clarity:
 
 ```json
-// Wrong - won't work on Mac
+// Works on all platforms (Ctrl auto-maps to Command on Mac)
 "command": {
   "suggested_key": { "default": "Ctrl+Shift+E" },
   "description": "..."
 }
 
-// Correct
+// Explicit — clearer intent, and lets you use MacCtrl if you need the Control key on Mac
 "command": {
   "suggested_key": {
     "default": "Ctrl+Shift+E",
@@ -843,6 +808,8 @@ Avoid these common pitfalls when implementing keyboard shortcuts:
   "description": "..."
 }
 ```
+
+> **Tip:** Use `MacCtrl` in the `"mac"` key if you specifically need the Control key (not Command) on macOS.
 
 ### 2. Missing Description
 
@@ -901,7 +868,7 @@ Key takeaways:
 - Define shortcuts in manifest.json with `suggested_key` and `description`
 - Use platform-specific keys (Ctrl for Windows/Linux, Command for macOS)
 - Handle commands with `chrome.commands.onCommand`
-- Use special commands like `_execute_action` and `_execute_side_panel` for built-in behaviors
+- Use the special `_execute_action` command for built-in popup behavior
 - Understand that users can customize shortcuts via `chrome://extensions/shortcuts`
 - Follow best practices for cross-platform compatibility and user experience
 

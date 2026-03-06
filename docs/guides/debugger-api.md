@@ -56,9 +56,6 @@ To use the `chrome.debugger` API, you need to declare it in your manifest:
   "permissions": [
     "debugger"
   ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
   "background": {
     "service_worker": "background.js"
   }
@@ -68,8 +65,8 @@ To use the `chrome.debugger` API, you need to declare it in your manifest:
 ### Important Notes
 
 - **Manifest V3**: The debugger API is available but requires a service worker in MV3
-- **Host Permissions**: You need host permissions (`<all_urls>` or specific origins) to debug pages
-- **Extension ID**: Debugger connections persist across extension restarts
+- **Host Permissions**: Host permissions are NOT required for the debugger API; only the `"debugger"` permission is needed
+- **User Warning**: Chrome shows a warning bar when a debugger is attached to a tab
 
 ## 3. Attaching to Tabs
 
@@ -82,10 +79,9 @@ The first step in using CDP is attaching to a tab:
 const TAB_ID = chrome.runtime.id;
 
 function attachToTab(tabId) {
-  // Debuggee format: extensionId:tabId:sessionId
   const debuggee = { tabId: tabId };
-  
-  chrome.debugger.attach(debuggee, "1.0", (() => {
+
+  chrome.debugger.attach(debuggee, "1.3", (() => {
     if (chrome.runtime.lastError) {
       console.error('Attach failed:', chrome.runtime.lastError.message);
       return;
@@ -300,12 +296,11 @@ Handle disconnection events:
 chrome.debugger.onDetach.addListener((source, reason) => {
   console.log('Debugger detached from tab', source.tabId);
   console.log('Reason:', reason);
-  
-  // Possible reasons:
+
+  // Possible reasons (DetachReason enum):
   // - "target_closed": Target page was closed
-  // - "canceled": Detach was explicitly requested
-  // "severity_level": Error level (warning, error)
-  
+  // - "canceled_by_user": User canceled the debugging session
+
   if (reason === "target_closed") {
     // Optionally re-attach or clean up
     cleanupForTab(source.tabId);
@@ -510,7 +505,6 @@ Here's a complete extension that monitors console output:
   "name": "Console Monitor",
   "version": "1.0",
   "permissions": ["debugger", "storage"],
-  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
@@ -671,23 +665,11 @@ document.addEventListener('DOMContentLoaded', () => {
 The `chrome.debugger` API requires specific permissions:
 
 1. **"debugger" permission**: Required in manifest
-2. **Host permissions**: Needed for each origin you want to debug
-3. **User consent**: Chrome shows a banner when debugger attaches
+2. **User awareness**: Chrome shows a warning bar when debugger attaches to a tab
 
-### User Consent Banner
+### User Warning Banner
 
-When your extension first attaches to a tab, Chrome displays:
-
-```
-[Extension Name] is now attached to this tab. 
-It can access and modify all data on this page including passwords, 
-credit cards, and all data you enter or see while browsing.
-```
-
-Users can:
-- Click "Allow" to permit debugging
-- Click "Deny" to block
-- Check "Remember this decision" for future sessions
+When your extension attaches to a tab, Chrome displays a warning bar at the top of the page informing the user that an extension is debugging the tab. The user can cancel the debugging session, which will trigger the `onDetach` event with reason `"canceled_by_user"`.
 
 ### Best Practices for Security
 
@@ -695,8 +677,8 @@ Users can:
 // Always check for user consent
 chrome.debugger.attach(debuggee, "1.3", (() => {
   if (chrome.runtime.lastError) {
-    if (chrome.runtime.lastError.message.includes('User canceled')) {
-      console.log('User denied debugger access');
+    if (chrome.runtime.lastError.message.includes('canceled')) {
+      console.log('User canceled debugger access');
       return;
     }
     // Handle other errors

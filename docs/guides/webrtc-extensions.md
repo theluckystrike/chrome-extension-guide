@@ -165,8 +165,7 @@ Service workers in MV3 cannot persist WebRTC connections reliably. Offscreen doc
 ### Creating Offscreen Document
 ```ts
 async function createWebRTCOffscreen(): Promise<void> {
-  const existing = await chrome.contexts.offscreen.getContexts();
-  const hasOffscreen = existing.some(ctx => ctx.documentUrl?.includes("offscreen.html"));
+  const hasOffscreen = await chrome.offscreen.hasDocument();
   if (!hasOffscreen) {
     await chrome.offscreen.createDocument({
       url: "offscreen.html",
@@ -328,8 +327,8 @@ class TimedRecorder {
 ### Stream Unavailable After Service Worker Restart
 ```ts
 async function ensureOffscreen(): Promise<void> {
-  const contexts = await chrome.contexts.offscreen.getContexts();
-  if (contexts.length === 0) {
+  const hasDoc = await chrome.offscreen.hasDocument();
+  if (!hasDoc) {
     await chrome.offscreen.createDocument({
       url: "offscreen.html",
       reasons: ["WEB_RTC", "AUDIO_PLAYBACK" as chrome.offscreen.Reason],

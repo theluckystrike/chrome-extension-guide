@@ -4,7 +4,7 @@ The `chrome.power` API enables extensions to control system power management, pr
 
 ## chrome.power API Overview
 
-The Power API provides two core functions for managing power states:
+The Power API provides two core functions for managing power states, plus an additional Chrome OS-only method:
 
 ```javascript
 // Request keeping the system awake
@@ -12,6 +12,9 @@ chrome.power.requestKeepAwake(level);
 
 // Release the keep-awake request
 chrome.power.releaseKeepAwake();
+
+// Chrome OS only (Chrome 113+): Report user activity to reset idle timers
+chrome.power.reportActivity();
 ```
 
 ### Permission Requirements
@@ -34,13 +37,13 @@ The `requestKeepAwake()` method accepts a `level` parameter that determines what
 
 | Level | Behavior |
 |-------|----------|
-| `system` | Prevents the entire system from sleeping (most power-intensive) |
-| `display` | Prevents only the display from turning off (less aggressive) |
+| `system` | Prevents the system from sleeping in response to user inactivity |
+| `display` | Prevents the display from turning off or dimming, AND prevents the system from sleeping (higher precedence than `system`) |
 
 ### Display Level (Recommended)
 
 ```javascript
-// Keep display on, allow system to sleep
+// Keep display on and prevent system sleep
 chrome.power.requestKeepAwake('display');
 ```
 
@@ -65,7 +68,7 @@ Use `system` level for:
 
 ## Preventing Display Sleep
 
-The most common use case is keeping the display awake while allowing the system to enter idle power-saving states when possible.
+The most common use case is keeping the display awake during user-facing tasks like presentations or media playback. Note that the `display` level also prevents system sleep.
 
 ### Basic Implementation
 
@@ -229,7 +232,7 @@ class DownloadPowerManager {
   }
 
   setupListeners() {
-    chrome.downloads.onStarted.addListener((downloadItem) => {
+    chrome.downloads.onCreated.addListener((downloadItem) => {
       // For large downloads, use system level
       if (downloadItem.fileSize > 50 * 1024 * 1024) { // 50MB+
         this.enableSystemAwake(downloadItem.id);
@@ -238,12 +241,11 @@ class DownloadPowerManager {
       }
     });
 
-    chrome.downloads.onComplete.addListener((downloadItem) => {
-      this.disablePowerManagement(downloadItem.id);
-    });
-
-    chrome.downloads.onError.addListener((downloadItem) => {
-      this.disablePowerManagement(downloadItem.id);
+    // Track state changes via onChanged (no separate onComplete/onError events)
+    chrome.downloads.onChanged.addListener((delta) => {
+      if (delta.state && (delta.state.current === 'complete' || delta.state.current === 'interrupted')) {
+        this.disablePowerManagement(delta.id);
+      }
     });
   }
 
@@ -295,9 +297,9 @@ async function processLargeFile(file) {
 }
 ```
 
-### Use Display Level When Possible
+### Choose the Right Level
 
-Prefer `display` over `system` to allow energy savings:
+Use `system` when you only need to prevent system sleep (allows display to dim/off). Use `display` when the screen must stay on (also prevents system sleep):
 
 ```javascript
 // Prefer this (display level)

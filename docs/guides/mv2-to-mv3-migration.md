@@ -277,7 +277,7 @@ chrome.webRequest.onBeforeRequest.addListener(
   "id": 1, "priority": 1,
   "action": { "type": "block" },
   "condition": {
-    "urlFilter": "*://*.ads.example.com/*",
+    "urlFilter": "||ads.example.com",
     "resourceTypes": ["script","image","stylesheet","xmlhttprequest","sub_frame"]
   }
 }]
@@ -292,7 +292,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     "type": "modifyHeaders",
     "requestHeaders": [{ "header": "User-Agent", "operation": "set", "value": "Custom" }]
   },
-  "condition": { "urlFilter": "*", "resourceTypes": ["main_frame"] }
+  "condition": { "resourceTypes": ["main_frame"] }
 }]
 ```
 
@@ -302,7 +302,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 [{
   "id": 3, "priority": 1,
   "action": { "type": "redirect", "redirect": { "transform": { "scheme": "https" } } },
-  "condition": { "urlFilter": "http://*", "resourceTypes": ["main_frame"] }
+  "condition": { "urlFilter": "|http:", "resourceTypes": ["main_frame"] }
 }]
 ```
 
@@ -318,9 +318,11 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 
 ### Limits and Caveats
 
-- 300,000 static rules max, 30,000 dynamic+session rules
+- Each extension is guaranteed 30,000 static rules; a shared global pool provides up to 300,000 additional rules across all extensions
+- Up to 100 static rulesets, 50 enabled at a time
+- 30,000 dynamic rules max; 5,000 session rules max (these are separate limits, not combined)
 - Cannot inspect/modify request or response bodies
-- Regex rules limited to 1,000 and must be RE2-compatible
+- Regex rules limited to 1,000 per ruleset type and must be RE2-compatible
 - Observational `webRequest` (non-blocking) still works in MV3
 
 ---
@@ -524,7 +526,7 @@ Missing domain in `host_permissions`.
 Listeners registered inside async callbacks. Move all `.addListener` calls to the top level.
 
 ### Alarm delay less than minimum
-`chrome.alarms` minimum is 30 seconds. For shorter delays, use `setTimeout` (acceptable for one-shot tasks while the worker is active).
+`chrome.alarms` minimum interval is 30 seconds (`periodInMinutes: 0.5`). Values below 0.5 will trigger a warning and not be honored. For shorter delays, use `setTimeout` (acceptable for one-shot tasks while the worker is active).
 
 ### Maximum dynamic rules exceeded
 Use static rulesets for large rule lists. Consolidate with regex rules where possible.

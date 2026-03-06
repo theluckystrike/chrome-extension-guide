@@ -153,7 +153,7 @@ class PasskeyManager {
     this.storage = storage;
   }
 
-  async storePasskeycredentialId, userId, userName) {
+  async storePasskey(credentialId, userId, userName) {
     const passkeys = await this.storage.get('passkeys') || {};
     passkeys[credentialId] = {
       userId,
@@ -163,7 +163,7 @@ class PasskeyManager {
     await this.storage.set('passkeys', passkeys);
   }
 
-  async getPasskeysForRPRpId) {
+  async getPasskeysForRP(rpId) {
     const passkeys = await this.storage.get('passkeys') || {};
     // Filter and return credentials for this RP
     return Object.entries(passkeys)
@@ -242,9 +242,9 @@ Extensions can act as credential providers, managing WebAuthn credentials for mu
 ### Storing Credentials Securely
 
 ```javascript
-// Use chrome.storage.secure for sensitive credential data
-// Note: Extensions don't have encrypted storage by default,
-// consider using the Web Crypto API for encryption
+// Note: There is no chrome.storage.secure API. Extensions don't have
+// encrypted storage by default. Use the Web Crypto API to encrypt
+// sensitive data before storing it in chrome.storage.local.
 
 class CredentialStore {
   constructor() {
@@ -805,5 +805,5 @@ WebAuthn provides powerful passwordless authentication for Chrome Extensions. Ke
 
 For more information, see:
 - [WebAuthn W3C Specification](https://www.w3.org/TR/webauthn/)
-- [Chrome WebAuthn Documentation](https://developer.chrome.com/docs/extensions/mv3/intro/)
+- [Chrome Web Authentication API](https://developer.chrome.com/docs/web-platform/webauthn)
 - [FIDO Alliance Standards](https://fidoalliance.org/specifications/)

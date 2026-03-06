@@ -22,14 +22,13 @@ To use the pageCapture API, you need to declare the `"pageCapture"` permission i
   "name": "Page Capture Extension",
   "version": "1.0.0",
   "permissions": [
-    "pageCapture",
-    "tabs"
+    "pageCapture"
   ],
   "manifest_version": 3
 }
 ```
 
-The `"tabs"` permission is required to access tab information and determine which tab to capture.
+The `"pageCapture"` permission is required to use the API. The `"tabs"` permission is not needed for `saveAsMHTML()` itself, but you may need it if you want to access `tab.url` or `tab.title` properties for other purposes.
 
 ## Understanding MHTML Format
 
@@ -618,7 +617,7 @@ async function safeCapture(tabId) {
 For certain use cases, other APIs might be more appropriate:
 
 - **chrome.tabCapture**: For audio/video content
-- **chrome.printToPDF**: For PDF output
+- **chrome.debugger** with `Page.printToPDF`: For PDF output (via Chrome DevTools Protocol)
 - **chrome.devtools.inspectedWindow**: For developer-focused saving
 
 ## Conclusion

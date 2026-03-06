@@ -122,9 +122,8 @@ chrome.gcm.onMessage.addListener((message) => {
   
   // Message object structure:
   // {
-  //   senderId: string,
-  //   messageId: string,
-  //   data: { key: value } // Custom key-value pairs
+  //   data: { key: value }, // Custom key-value pairs
+  //   collapseKey: string   // Optional collapse key
   // }
   
   // Handle different message types
@@ -180,7 +179,7 @@ The GCM API also supports sending messages from your extension back to your serv
 // Send message to your server via GCM
 async function sendUpstreamMessage(messageData) {
   const message = {
-    destinationId: 'YOUR_SERVER_SENDER_ID', // Your server's sender ID
+    destinationId: 'YOUR_SENDER_ID@gcm.googleapis.com', // Sender ID with @gcm.googleapis.com suffix
     messageId: `msg-${Date.now()}`, // Unique message ID
     data: {
       ...messageData,
@@ -333,7 +332,8 @@ async function syncPendingMessages() {
 
 async function subscribeToPush() {
   // Check if Push Manager is supported
-  if (!('PushManager' in window)) {
+  // Note: In a MV3 service worker, use 'self' instead of 'window'
+  if (!('PushManager' in self)) {
     console.error('Push messaging not supported');
     return;
   }
@@ -371,7 +371,7 @@ function urlBase64ToUint8Array(base64String) {
     .replace(/-/g, '+')
     .replace(/_/g, '/');
   
-  const rawData = window.atob(base64);
+  const rawData = atob(base64); // atob is available globally in service workers (no 'window.' prefix)
   const outputArray = new Uint8Array(rawData.length);
   
   for (let i = 0; i < rawData.length; ++i) {
@@ -937,7 +937,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 async function initializePushNotifications() {
   // Prefer Web Push if service worker is ready
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  if ('serviceWorker' in navigator && 'PushManager' in self) {
     await initializeWebPush();
   } else if ('gcm' in chrome) {
     await initializeGCM();
@@ -1026,7 +1026,7 @@ function urlBase64ToUint8Array(base64String) {
   const base64 = (base64String + padding)
     .replace(/-/g, '+')
     .replace(/_/g, '/');
-  const rawData = window.atob(base64);
+  const rawData = atob(base64); // atob is available globally in service workers (no 'window.' prefix)
   const outputArray = new Uint8Array(rawData.length);
   for (let i = 0; i < rawData.length; ++i) {
     outputArray[i] = rawData.charCodeAt(i);
@@ -1136,8 +1136,10 @@ class PushNotificationTester {
       data: messageData
     };
 
-    // Trigger the onMessage listener manually
-    chrome.gcm.onMessage.emit(message);
+    // Note: Chrome event objects don't have an .emit() method.
+    // To test, call your message handler function directly instead.
+    // Example: handleGCMMessage(message);
+    handleGCMMessage(message);
     
     this.testResults.push({
       type: 'gcm',
@@ -1231,8 +1233,9 @@ if (typeof module !== 'undefined' && module.exports) {
 // Debug utilities for push notifications
 const PushDebug = {
   // Enable verbose logging
-  enableDebugMode() {
-    localStorage.setItem('push_debug', 'true');
+  async enableDebugMode() {
+    // Note: localStorage is NOT available in service workers; use chrome.storage instead
+    await chrome.storage.local.set({ push_debug: true });
     console.log('Push notification debug mode enabled');
   },
 
