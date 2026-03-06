@@ -1,76 +1,75 @@
 # browsingData Permission
 
-## What It Grants
-Access to the `chrome.browsingData` API for removing browsing data (cache, cookies, history, passwords, etc.) programmatically.
+## Overview
 
-## Manifest
+- **Permission string:** `"browsingData"`
+- **API exposed:** `chrome.browsingData`
+- **Purpose:** Remove browsing data (cache, cookies, history, downloads, passwords, localStorage, etc.) programmatically
+
+This permission allows extensions to clear user browsing data without requiring the user to manually navigate to Chrome's Clear Browsing Data dialog. It only provides removal capabilities — reading data requires separate permissions like `history`, `cookies`, or `downloads`.
+
+## Manifest Declaration
+
 ```json
 {
   "permissions": ["browsingData"]
 }
 ```
 
-## User Warning
-None — this permission does not trigger a warning at install time. (Note: the extension still needs separate permissions like `history` to read data, but `browsingData` only removes it.)
+**User Warning:** None — this permission does not trigger an install-time warning.
 
-## API Access
+## API Methods
 
-### Remove All Data Types
+### General Removal
+
 ```typescript
+chrome.browsingData.remove(
+  options: RemovalOptions,
+  dataToRemove: DataToRemove
+): Promise<void>
+```
+
+- `options.since` — Timestamp in ms since epoch. Only clears data created after this time.
+- `dataToRemove` — Object with boolean flags for each data type.
+
+```typescript
+// Clear all data from the last hour
 await chrome.browsingData.remove(
-  { since: Date.now() - 3600000 }, // last hour
-  {
-    cache: true,
-    cookies: true,
-    history: true,
-    localStorage: true,
-    formData: true
-  }
+  { since: Date.now() - 3600000 },
+  { cache: true, cookies: true, history: true }
 );
 ```
 
-### Convenience Methods
+### Specific Removal Methods
+
 ```typescript
-// Individual removal methods
-await chrome.browsingData.removeCache({});
-await chrome.browsingData.removeCookies({ since: Date.now() - 86400000 });
-await chrome.browsingData.removeDownloads({});
-await chrome.browsingData.removeFormData({});
-await chrome.browsingData.removeHistory({});
-await chrome.browsingData.removeLocalStorage({});
-await chrome.browsingData.removePasswords({});
-await chrome.browsingData.removePluginData({});
+chrome.browsingData.removeCache(options)
+chrome.browsingData.removeCookies(options)
+chrome.browsingData.removeDownloads(options)
+chrome.browsingData.removeFormData(options)
+chrome.browsingData.removeHistory(options)
+chrome.browsingData.removeLocalStorage(options)
+chrome.browsingData.removePasswords(options)
 ```
 
-### Query Current Settings
+### Settings
+
 ```typescript
-const settings = await chrome.browsingData.settings();
-console.log(settings.options);    // { since: timestamp }
-console.log(settings.dataToRemove); // which types are selected
-console.log(settings.dataRemovalPermitted); // which types the extension can remove
+chrome.browsingData.settings(): Promise<Settings>
 ```
 
-## Removal Options
-```typescript
-interface RemovalOptions {
-  since?: number;          // Only remove data created after this timestamp (ms since epoch)
-  originTypes?: {
-    unprotectedWeb?: boolean;  // Normal websites (default: true)
-    protectedWeb?: boolean;    // Apps/extensions with protectedWeb
-    extension?: boolean;       // Extension data
-  };
-}
-```
+Returns `{ options, dataToRemove, dataRemovalPermitted }` — the user's Clear Browsing Data preferences and what the extension is permitted to clear.
 
 ## Data Types
-| Type | What It Removes |
-|---|---|
+
+| Property | Description |
+|----------|-------------|
 | `appcache` | Application caches |
-| `cache` | Browser cache |
-| `cacheStorage` | Cache Storage (Service Worker caches) |
+| `cache` | HTTP cache |
+| `cacheStorage` | Service Worker caches |
 | `cookies` | Cookies |
-| `downloads` | Download history (not files) |
-| `fileSystems` | File system data |
+| `downloads` | Download history |
+| `fileSystems` | File system API data |
 | `formData` | Autofill form data |
 | `history` | Browsing history |
 | `indexedDB` | IndexedDB data |
@@ -79,63 +78,70 @@ interface RemovalOptions {
 | `serviceWorkers` | Service worker registrations |
 | `webSQL` | WebSQL data |
 
-## Privacy Tool Pattern
+## Options Object
+
 ```typescript
-import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
-import { createMessenger } from '@theluckystrike/webext-messaging';
-
-const schema = defineSchema({
-  cleanOnExit: 'boolean',
-  cleanTypes: 'string' // JSON array
-});
-const storage = createStorage(schema, 'sync');
-
-type Messages = {
-  CLEAN_NOW: { request: { types?: string[] }; response: { success: boolean } };
-};
-const m = createMessenger<Messages>();
-
-m.onMessage('CLEAN_NOW', async ({ types }) => {
-  const cleanTypes = types || JSON.parse(await storage.get('cleanTypes') || '["cache","cookies"]');
-  const dataToRemove: Record<string, boolean> = {};
-  cleanTypes.forEach((t: string) => dataToRemove[t] = true);
-
-  await chrome.browsingData.remove({ since: 0 }, dataToRemove);
-  return { success: true };
-});
+interface RemovalOptions {
+  since?: number;
+  originTypes?: {
+    unprotectedWeb?: boolean;  // default: true
+    protectedWeb?: boolean;
+    extension?: boolean;       // default: false
+  };
+}
 ```
 
-## Scheduled Cleanup
-```typescript
-chrome.alarms.create('cleanup', { periodInMinutes: 60 });
+## Use Cases
 
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'cleanup') {
-    const cleanOnExit = await storage.get('cleanOnExit');
-    if (cleanOnExit) {
-      await chrome.browsingData.removeCache({});
-      await chrome.browsingData.removeCookies({ since: Date.now() - 86400000 });
+- **Privacy/cleanup tools:** One-click "clear all" functionality
+- **Selective clearing:** Clear only cookies and cache for a specific time range
+- **Privacy mode toggle:** Automatically clear data when extension is disabled
+- **Development tools:** Clear site data during testing
+- **"Panic button" features:** Quickly erase browsing data with a shortcut
+
+## Code Examples
+
+### Clear All Data from Last Hour
+
+```typescript
+async function clearLastHour() {
+  await chrome.browsingData.remove(
+    { since: Date.now() - 3600000 },
+    {
+      cache: true, cookies: true, history: true,
+      localStorage: true, formData: true, downloads: true,
+      passwords: true, indexedDB: true, webSQL: true,
+      fileSystems: true, serviceWorkers: true,
+      cacheStorage: true, appcache: true
     }
-  }
-});
+  );
+}
 ```
 
-## When to Use
-- Privacy/cleanup extensions
-- Cache clearing tools
-- "Panic button" extensions
-- Parental control cleanup
-- Development/testing utilities
+### Clear Only Cookies and Cache
 
-## When NOT to Use
-- If you need to read data — use specific APIs (`history`, `cookies`, `downloads`)
-- Only removes, never reads
-
-## Permission Check
 ```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('browsingData');
+async function clearCookiesAndCache() {
+  await chrome.browsingData.remove(
+    { since: 0 },
+    { cookies: true, cache: true }
+  );
+}
+```
+
+### Check What User Permits to Clear
+
+```typescript
+async function checkPermissions() {
+  const settings = await chrome.browsingData.settings();
+  console.log('Allowed to remove:', settings.dataRemovalPermitted);
+  return settings.dataRemovalPermitted;
+}
 ```
 
 ## Cross-References
-- Related: `docs/permissions/cookies.md`, `docs/permissions/history.md`, `docs/permissions/downloads.md`
+
+- [cookies.md](./cookies.md) — Read/write cookies (browsingData only removes them)
+- [history.md](./history.md) — Read browsing history
+- [downloads.md](./downloads.md) — Manage download history
+- [patterns/privacy-api.md](../patterns/privacy-api.md) — Privacy-focused API patterns
