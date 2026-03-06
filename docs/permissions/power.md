@@ -1,7 +1,7 @@
 # power Permission
 
 ## What It Grants
-Access to the `chrome.power` API for preventing system/display sleep.
+Access to the `chrome.power` API for controlling system and display power management (preventing sleep/screen off).
 
 ## Manifest
 ```json
@@ -11,28 +11,32 @@ Access to the `chrome.power` API for preventing system/display sleep.
 ```
 
 ## User Warning
-None — no warning at install.
+None — this permission does not trigger a warning at install time.
 
 ## API Access
-- `chrome.power.requestKeepAwake(level)` — prevent sleep ("system" or "display")
+When granted, you can use:
+- `chrome.power.requestKeepAwake(level)` — prevent sleep
 - `chrome.power.releaseKeepAwake()` — allow sleep again
 
-### Levels
+### Keep-Awake Levels
 | Level | Effect |
 |---|---|
-| `"system"` | Prevents system sleep (display may turn off) |
-| `"display"` | Prevents system sleep AND keeps display on |
+| `"system"` | Prevents system from sleeping (display may turn off) |
+| `"display"` | Prevents both system sleep AND display from turning off |
 
 ## Basic Usage
 ```typescript
+// Prevent display from sleeping
 chrome.power.requestKeepAwake("display");
-// ... later
+
+// Later, release
 chrome.power.releaseKeepAwake();
 ```
 
 ## Toggle Pattern
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
+
 const schema = defineSchema({ keepAwake: 'boolean' });
 const storage = createStorage(schema, 'local');
 
@@ -50,10 +54,13 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-## MV3 Wake-Up Re-request
+## MV3 Service Worker Considerations
+- Service worker can terminate — keep-awake state persists in browser
+- On SW wake-up, re-read state and re-request if needed:
 ```typescript
 chrome.runtime.onStartup.addListener(async () => {
-  if (await storage.get('keepAwake')) {
+  const isAwake = await storage.get('keepAwake');
+  if (isAwake) {
     chrome.power.requestKeepAwake('display');
   }
 });
@@ -63,6 +70,7 @@ chrome.runtime.onStartup.addListener(async () => {
 ```typescript
 chrome.power.requestKeepAwake('display');
 chrome.alarms.create('release-power', { delayInMinutes: 30 });
+
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'release-power') {
     chrome.power.releaseKeepAwake();
@@ -72,16 +80,19 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 ```
 
 ## When to Use
-- Presentations / kiosk mode
-- Media playback
-- Long downloads
-- Video conferencing
-- Timer/pomodoro extensions
+- Presentation mode / kiosk mode
+- Media playback extensions
+- Long download/upload monitoring
+- Video conferencing extensions
+- Pomodoro/timer extensions
 
 ## When NOT to Use
-- Don't keep awake permanently — battery drain
-- Use `"system"` instead of `"display"` when screen isn't needed
-- Always provide auto-release
+- Don't keep awake permanently — wastes battery
+- Don't use `"display"` when `"system"` suffices
+- Release as soon as the reason ends
+
+## Battery Impact
+Keeping the display awake significantly increases power consumption. Always provide user controls and auto-release mechanisms.
 
 ## Permission Check
 ```typescript
@@ -92,4 +103,3 @@ const granted = await checkPermission('power');
 ## Cross-References
 - Guide: `docs/guides/power-management.md`
 - Patterns: `docs/patterns/power-api.md`
-- Related: `docs/permissions/idle.md`
