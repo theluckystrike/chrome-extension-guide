@@ -148,3 +148,5 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ## API Reference
 - [Alarms API Reference](../api-reference/alarms-api.md)
+- [Chrome alarms API docs](https://developer.chrome.com/docs/extensions/reference/api/alarms)
+- [Alarms API deep dive](../api-reference/alarms-api.md)

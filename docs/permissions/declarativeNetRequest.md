@@ -121,8 +121,20 @@ const result = await checkPermission('declarativeNetRequest');
 | Session | 5,000 |
 | Regex | 1,000 |
 
+## Gotchas
+- **Rule IDs must be globally unique** — if you use the same ID in both static and dynamic rules, behavior is undefined. Establish a clear ID range convention (e.g., 1-9999 for static, 10000+ for dynamic).
+- **Regex rules have a hard limit of 1,000** — prefer `urlFilter` patterns over `regexFilter` whenever possible. URL filter patterns cover most use cases and don't count against the regex quota.
+- **Static rules cannot be modified at runtime** — they are baked into the extension package. Use `updateEnabledRulesets()` to toggle entire rulesets on/off, or use dynamic rules for user-configurable blocking.
+
 ## Common Errors
 - Rule ID conflicts — each rule must have a unique ID
 - Invalid `urlFilter` pattern — test patterns carefully
 - Missing host permissions for redirects
 - Exceeding rule count limits
+
+## Related Permissions
+- [webRequest](webRequest.md) — read-only network observation (MV3)
+- [activeTab](activeTab.md) — temporary host access for per-tab rules
+
+## API Reference
+- [Chrome declarativeNetRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest)

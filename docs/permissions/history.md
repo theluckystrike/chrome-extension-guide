@@ -141,6 +141,11 @@ if (!result.granted) {
 - Show users what history data you're accessing and why
 - Provide a way to disable history features
 
+## Gotchas
+- **`search({ text: "" })` returns ALL history** — without a text filter, this can return thousands of results. Always set `maxResults` or a `startTime`/`endTime` range to avoid performance issues.
+- **`getVisits()` requires an exact URL** — you cannot use wildcards or partial matches. Use `search()` first to find matching URLs, then call `getVisits()` on each result.
+- **`deleteAll()` is irreversible** — there is no confirmation dialog and no undo. Guard this behind explicit user confirmation in your UI.
+
 ## Common Errors
 - `"history" permission not declared` — must be in permissions or optional_permissions
 - `search()` returning no results — check startTime/endTime range
@@ -148,3 +153,5 @@ if (!result.granted) {
 
 ## API Reference
 - [History API Reference](../api-reference/history-api.md)
+- [Chrome history API docs](https://developer.chrome.com/docs/extensions/reference/api/history)
+- [History API deep dive](../api-reference/history-api.md)
