@@ -1,4 +1,4 @@
-# system.* Permissions
+# System.* Permissions (Chrome Extension API)
 
 ## Overview
 The `system.*` permissions provide access to hardware and system information. Each is a separate permission.
