@@ -1,119 +1,286 @@
 # offscreen Permission
 
-## What It Grants
-Access to the `chrome.offscreen` API for creating offscreen documents — hidden HTML pages that provide DOM access without visible UI. MV3 only.
+The `offscreen` permission enables the Chrome `chrome.offscreen` API, which allows extensions to create offscreen documents for performing operations that require DOM access from the extension's service worker context. This is a Manifest V3-only feature that replaces the background page DOM access available in Manifest V2.
 
-## Manifest
+## Overview
+
+| Property | Value |
+|----------|-------|
+| Permission string | `"offscreen"` |
+| API | `chrome.offscreen` |
+| Minimum Chrome version | 94+ |
+| Manifest requirement | Must be declared in `permissions` array |
+
+The offscreen document is a hidden HTML document that runs in the context of your extension but has no visible UI. It provides a way to perform DOM-related operations from the service worker, which otherwise has no access to the DOM.
+
+## API Methods
+
+### createDocument
+
+Creates an offscreen document with the specified parameters:
+
+```javascript
+chrome.offscreen.createDocument({
+  url: 'offscreen.html',
+  reasons: [chrome.offscreen.Reason.DOM_SCRAPING],
+  justification: 'Need to parse HTML content for data extraction'
+});
+```
+
+**Parameters:**
+- `url` (string): Path to the HTML file relative to the extension root
+- `reasons` (array): Array of `chrome.offscreen.Reason` enum values
+- `justification` (string): Explanation of why the offscreen document is needed (required for Chrome Web Store review)
+
+### closeDocument
+
+Closes the currently open offscreen document:
+
+```javascript
+await chrome.offscreen.closeDocument();
+```
+
+### hasDocument
+
+Checks whether an offscreen document currently exists (Chrome 116+):
+
+```javascript
+const exists = await chrome.offscreen.hasDocument();
+```
+
+## Reason Enum Values
+
+The `chrome.offscreen.Reason` enum provides various reasons for creating an offscreen document. Chrome supports the following reasons:
+
+| Reason | Description |
+|--------|-------------|
+| `TESTING` | Used for automated testing scenarios |
+| `AUDIO_PLAYBACK` | Audio playback from background context |
+| `IFRAME_SCRIPTING` | Scripting iframes from background |
+| `DOM_SCRAPING` | Parsing and extracting data from HTML |
+| `BLOBS` | Working with Blob objects |
+| `DOM_PARSER` | HTML/XML parsing operations |
+| `USER_MEDIA` | Capturing user media (webcam/microphone) |
+| `DISPLAY_MEDIA` | Capturing display media |
+| `WEB_RTC` | WebRTC operations |
+| `CLIPBOARD` | Clipboard read/write operations |
+| `LOCAL_STORAGE` | Local storage operations |
+| `WORKERS` | Web Worker management |
+| `BATTERY_STATUS` | Battery API access |
+| `MATCH_MEDIA` | Media query matching |
+| `GEOLOCATION` | Geolocation API access |
+
+## Constraints
+
+### One Document Limit
+
+Only **one offscreen document** can exist at a time per extension. Attempting to create a new one while one already exists will result in an error. Always check with `hasDocument()` before creating:
+
+```javascript
+async function createOffscreenIfNeeded() {
+  if (await chrome.offscreen.hasDocument()) {
+    return;
+  }
+  
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: [chrome.offscreen.Reason.DOM_SCRAPING],
+    justification: 'Need to parse HTML for data extraction'
+  });
+}
+```
+
+### Reason Requirement
+
+At least **one reason** must be specified when creating the document. Providing an empty array will cause an error.
+
+### No UI Visibility
+
+The offscreen document has **no visible UI** to the user. It exists purely in memory and is not rendered in any window.
+
+### Communication via Messaging
+
+Since the offscreen document runs in isolation, communication with your service worker or content scripts must use `chrome.runtime` messaging:
+
+```javascript
+// In service worker
+chrome.runtime.sendMessage({ action: 'doWork', data: '...' });
+
+// In offscreen document
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Handle message and respond
+  sendResponse({ result: '...' });
+});
+```
+
+## Manifest Declaration
+
+To use the offscreen API, declare the permission in your `manifest.json`:
+
 ```json
 {
-  "permissions": ["offscreen"]
-}
-```
-
-## User Warning
-None — this permission does not trigger a warning at install time.
-
-## API Access
-- `chrome.offscreen.createDocument(params)` — create an offscreen document
-- `chrome.offscreen.closeDocument()` — close the offscreen document
-- `chrome.offscreen.hasDocument()` — check if one exists (Chrome 116+)
-
-## Creating an Offscreen Document
-```typescript
-await chrome.offscreen.createDocument({
-  url: chrome.runtime.getURL('offscreen.html'),
-  reasons: [chrome.offscreen.Reason.DOM_PARSER],
-  justification: 'Parse HTML content from fetched pages'
-});
-```
-
-## Reasons Enum
-You must specify why you need the document. Valid reasons:
-
-| Reason | Use Case |
-|---|---|
-| `TESTING` | Automated testing |
-| `AUDIO_PLAYBACK` | Play audio |
-| `IFRAME_SCRIPTING` | Interact with iframe content |
-| `DOM_SCRAPING` | Parse/scrape DOM |
-| `BLOBS` | Create/manage Blobs |
-| `DOM_PARSER` | Use DOMParser API |
-| `USER_MEDIA` | Access camera/microphone |
-| `DISPLAY_MEDIA` | Screen capture |
-| `WEB_RTC` | WebRTC connections |
-| `CLIPBOARD` | Clipboard read/write |
-| `LOCAL_STORAGE` | Access localStorage |
-| `WORKERS` | Run web workers |
-| `BATTERY_STATUS` | Battery API |
-| `MATCH_MEDIA` | Media queries |
-| `GEOLOCATION` | Geolocation API |
-
-## Key Constraints
-- **Only one offscreen document at a time** per extension
-- Document has no visible UI
-- Cannot use `chrome.tabs`, `chrome.windows`, or other UI-focused APIs
-- Can use `chrome.runtime.sendMessage` to communicate with service worker
-
-## Communication Pattern
-```typescript
-// In service worker:
-import { createMessenger } from '@theluckystrike/webext-messaging';
-
-type Messages = {
-  PARSE_HTML: { request: { html: string }; response: { text: string } };
-};
-const m = createMessenger<Messages>();
-
-// Ensure offscreen doc exists before sending
-async function ensureOffscreen() {
-  if (!(await chrome.offscreen.hasDocument())) {
-    await chrome.offscreen.createDocument({
-      url: chrome.runtime.getURL('offscreen.html'),
-      reasons: [chrome.offscreen.Reason.DOM_PARSER],
-      justification: 'Parse HTML'
-    });
+  "name": "My Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "offscreen"
+  ],
+  "background": {
+    "service_worker": "background.js"
   }
 }
-
-// In offscreen.html script:
-m.onMessage('PARSE_HTML', async ({ html }) => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return { text: doc.body.textContent || '' };
-});
 ```
 
-## Clipboard Access Pattern
-```typescript
-// Service worker
-await ensureOffscreen();
-const text = await m.sendMessage('READ_CLIPBOARD', {});
+Note: The `offscreen` permission is only available in Manifest V3. It is not available in Manifest V2.
 
-// offscreen.js
-m.onMessage('READ_CLIPBOARD', async () => {
-  const text = await navigator.clipboard.readText();
-  return { text };
-});
+## Use Cases
+
+### DOM Parsing
+
+Parse HTML content that cannot be handled directly in the service worker:
+
+```javascript
+// In service worker
+async function parseHTML(html) {
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: [chrome.offscreen.Reason.DOM_PARSER],
+    justification: 'Parsing HTML content for extraction'
+  });
+  
+  // Send HTML to offscreen document for parsing
+  chrome.runtime.sendMessage({
+    type: 'PARSE_HTML',
+    html: html
+  });
+  
+  // Wait for response (implementation details vary)
+  await chrome.offscreen.closeDocument();
+}
 ```
 
-## When to Use
-- DOM parsing (DOMParser, innerHTML) — not available in service workers
-- Clipboard operations (navigator.clipboard)
-- Audio/video playback
-- Canvas/image manipulation
-- Geolocation access
-- Web Workers that need DOM context
+### Audio Playback
 
-## When NOT to Use
-- If you can do it in the service worker directly (fetch, storage, alarms)
-- If a content script can handle it (DOM access on existing pages)
-- If you need visible UI — use popup, side panel, or options page
+Play audio from the background service worker context:
 
-## Permission Check
-```typescript
-import { checkPermission } from '@theluckystrike/webext-permissions';
-const granted = await checkPermission('offscreen');
+```javascript
+async function playAudio(audioUrl) {
+  await chrome.offscreen.createDocument({
+    url: 'audio-player.html',
+    reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+    justification: 'Playing audio notifications from background'
+  });
+  
+  chrome.runtime.sendMessage({
+    type: 'PLAY_AUDIO',
+    url: audioUrl
+  });
+}
 ```
 
-## Cross-References
-- Guide: `docs/mv3/offscreen-documents.md`
-- Related: `docs/tutorials/build-clipboard-manager.md`
+### Clipboard Operations
+
+Perform advanced clipboard operations:
+
+```javascript
+async function readClipboard() {
+  if (await chrome.offscreen.hasDocument()) {
+    await chrome.offscreen.closeDocument();
+  }
+  
+  await chrome.offscreen.createDocument({
+    url: 'clipboard.html',
+    reasons: [chrome.offscreen.Reason.CLIPBOARD],
+    justification: 'Reading clipboard content'
+  });
+  
+  return new Promise((resolve) => {
+    chrome.runtime.onMessage.addListener(function onMessage(message) {
+      if (message.type === 'CLIPBOARD_CONTENT') {
+        chrome.runtime.onMessage.removeListener(onMessage);
+        resolve(message.content);
+      }
+    });
+  });
+}
+```
+
+### Geolocation
+
+Access geolocation from the background context:
+
+```javascript
+async function getLocation() {
+  await chrome.offscreen.createDocument({
+    url: 'geolocation.html',
+    reasons: [chrome.offscreen.Reason.GEOLOCATION],
+    justification: 'Tracking user location for notifications'
+  });
+  
+  return new Promise((resolve) => {
+    chrome.runtime.onMessage.addListener(function onMessage(message) {
+      if (message.type === 'LOCATION') {
+        chrome.runtime.onMessage.removeListener(onMessage);
+        resolve(message.coords);
+      }
+    });
+  });
+}
+```
+
+## Code Examples
+
+### Guard Pattern
+
+Always check if an offscreen document exists before creating:
+
+```javascript
+async function ensureOffscreen(reason) {
+  if (await chrome.offscreen.hasDocument()) {
+    return;
+  }
+  
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: [reason],
+    justification: 'Required for extension functionality'
+  });
+}
+```
+
+### Complete Workflow
+
+A complete example of creating, communicating, and closing:
+
+```javascript
+async function scrapePageData(url) {
+  // Create offscreen document
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: [chrome.offscreen.Reason.DOM_SCRAPING],
+    justification: 'Scraping page content for data extraction'
+  });
+  
+  // Send message to offscreen document
+  const response = await chrome.runtime.sendMessage({
+    type: 'SCRAPE_URL',
+    url: url
+  });
+  
+  // Close the document when done
+  await chrome.offscreen.closeDocument();
+  
+  return response.data;
+}
+```
+
+## Cross-references
+
+- [MV3 Offscreen Documents](mv3/offscreen-documents.md) - Detailed guide on using offscreen documents
+- [Offscreen Document Patterns](patterns/offscreen-documents.md) - Common patterns and best practices
+- [Geolocation Permission](permissions/geolocation.md) - Related permission for location access
+
+## See Also
+
+- [Chrome Extensions Documentation: Offscreen Documents](https://developer.chrome.com/docs/extensions/mv3/offscreen/)
+- [chrome.offscreen API Reference](https://developer.chrome.com/docs/extensions/reference/offscreen/)
