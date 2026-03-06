@@ -1,0 +1,101 @@
+# Setting Up Storybook for Chrome Extension Development
+
+Storybook builds UI components in isolation—ideal for Chrome extensions where you can develop and test without loading the full extension.
+
+## Why Storybook?
+
+- **Isolated Development**: Build without extension reloads
+- **Visual Testing**: Catch UI regressions early
+- **Documentation**: Auto-generate component docs
+
+## Installation
+
+```bash
+npx storybook@latest init
+```
+
+Select your framework (React, Vue, Svelte).
+
+## Configuration
+
+Create `.storybook/main.ts`:
+
+```typescript
+import type { StorybookConfig } from '@storybook/react-vite';
+
+const config: StorybookConfig = {
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  framework: { name: '@storybook/react-vite', options: {} },
+};
+
+export default config;
+```
+
+## Mocking Chrome APIs
+
+Chrome APIs aren't available in Storybook. Create a decorator in `.storybook/preview.ts`:
+
+```typescript
+import type { Preview } from '@storybook/react';
+
+const preview: Preview = {
+  decorators: [
+    (Story) => {
+      chrome.storage = { local: { get: async () => ({}), set: async () => {} } } as any;
+      chrome.runtime = { id: 'mock-id', getURL: (path: string) => `mock/${path}` } as any;
+      return <Story />;
+    },
+  ],
+};
+
+export default preview;
+```
+
+## Extension Viewport Decorator
+
+Simulate popup dimensions (400x600):
+
+```typescript
+export const popupViewport: Decorator = (Story, context) => {
+  if (context.parameters.viewport === 'popup') {
+    return <div style={{ width: '400px', height: '600px', border: '1px solid #ccc' }}><Story /></div>;
+  }
+  return <Story />;
+};
+```
+
+## Popup Component Story
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/react';
+import { PopupHeader } from './PopupHeader';
+
+const meta: Meta<typeof PopupHeader> = { title: 'Popup/PopupHeader', component: PopupHeader };
+export default meta;
+
+export const Default: StoryObj<typeof PopupHeader> = {
+  args: { title: 'My Extension', onSettingsClick: () => {} },
+};
+
+export const DarkMode: StoryObj<typeof PopupHeader> = {
+  parameters: { backgrounds: { default: 'dark' } },
+  args: { title: 'My Extension', theme: 'dark' },
+};
+```
+
+## Recommended Addons
+
+- **@storybook/addon-a11y** - Accessibility testing
+- **@storybook/addon-viewport** - Device simulation
+- **@storybook/addon-themes** - Theme switching
+
+## Visual Regression Testing
+
+Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=YOUR_TOKEN`
+
+## Related Guides
+
+- [React Setup](./chrome-extension-react-setup.md)
+- [Design System](./chrome-extension-design-system.md)
+- [Testing Strategies](./chrome-extension-testing-strategies.md)
