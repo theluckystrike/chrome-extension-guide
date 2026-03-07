@@ -1,6 +1,6 @@
 # Page Analyzer
 
-Shows how `webext-messaging`, `webext-storage`, and a context menu work together to analyze web pages.
+Shows how `mv3-messaging`, `chrome-storage-typed`, and a context menu work together to analyze web pages.
 
 ## What it does
 
@@ -11,8 +11,8 @@ Shows how `webext-messaging`, `webext-storage`, and a context menu work together
 
 ## Packages used
 
-- `@theluckystrike/webext-storage` — persist analysis results
-- `@theluckystrike/webext-messaging` — background <-> content script communication
+- `@theluckystrike/chrome-storage-typed` — persist analysis results
+- `@theluckystrike/mv3-messaging` — background <-> content script communication
 
 ## Files
 

@@ -1,19 +1,20 @@
-import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
-import { onMessage, sendMessage } from "@theluckystrike/webext-messaging";
+/**
+ * Clipboard Manager - Background Service Worker
+ *
+ * Demonstrates: chrome-storage-typed + mv3-messaging + chrome.offscreen API
+ */
+
+import { get, set } from "@theluckystrike/chrome-storage-typed";
+import { onMessage, sendToBackground } from "@theluckystrike/mv3-messaging";
 
 interface ClipboardEntry {
   text: string;
   copiedAt: number;
 }
 
-const schema = defineSchema({
-  clipboardHistory: [] as ClipboardEntry[],
-  maxEntries: 25,
-});
+const MAX_ENTRIES = 25;
 
-const storage = createStorage({ schema, area: "local" });
-
-// Ensure offscreen document exists
+// Ensure offscreen document exists for clipboard access
 async function ensureOffscreen(): Promise<void> {
   const contexts = await chrome.runtime.getContexts({
     contextTypes: [chrome.runtime.ContextType.OFFSCREEN_DOCUMENT],
@@ -28,63 +29,37 @@ async function ensureOffscreen(): Promise<void> {
   });
 }
 
-// Messages from offscreen document
-type OffscreenMessages = {
-  writeClipboard: {
-    request: { text: string };
-    response: { success: boolean };
-  };
-  readClipboard: {
-    request: void;
-    response: { text: string };
-  };
-};
-
-// Messages from popup
-type PopupMessages = {
-  copyText: {
-    request: { text: string };
-    response: { success: boolean };
-  };
-  getHistory: {
-    request: void;
-    response: ClipboardEntry[];
-  };
-  clearHistory: {
-    request: void;
-    response: { success: boolean };
-  };
-};
-
-onMessage<PopupMessages>({
-  async copyText({ text }) {
+// Handle popup request to copy text
+onMessage<{ text: string }, { success: boolean }>(
+  "copyText",
+  async (payload) => {
     await ensureOffscreen();
 
     // Forward to offscreen document for actual clipboard access
-    const result = await sendMessage<OffscreenMessages, "writeClipboard">(
-      "writeClipboard",
-      { text }
-    );
+    const result = await sendToBackground<
+      { text: string },
+      { success: boolean }
+    >("writeClipboard", { text: payload.text });
 
     if (result.success) {
-      // Save to history
-      const history = await storage.get("clipboardHistory");
-      const maxEntries = await storage.get("maxEntries");
+      const history = (await get<ClipboardEntry[]>("clipboardHistory")) ?? [];
 
-      history.unshift({ text, copiedAt: Date.now() });
-      if (history.length > maxEntries) history.length = maxEntries;
-      await storage.set("clipboardHistory", history);
+      history.unshift({ text: payload.text, copiedAt: Date.now() });
+      if (history.length > MAX_ENTRIES) history.length = MAX_ENTRIES;
+      await set("clipboardHistory", history);
     }
 
     return result;
-  },
+  }
+);
 
-  async getHistory() {
-    return storage.get("clipboardHistory");
-  },
+// Handle popup request to get history
+onMessage<void, ClipboardEntry[]>("getHistory", async () => {
+  return (await get<ClipboardEntry[]>("clipboardHistory")) ?? [];
+});
 
-  async clearHistory() {
-    await storage.set("clipboardHistory", []);
-    return { success: true };
-  },
+// Handle popup request to clear history
+onMessage<void, { success: boolean }>("clearHistory", async () => {
+  await set<ClipboardEntry[]>("clipboardHistory", []);
+  return { success: true };
 });

@@ -10,8 +10,8 @@ Shows how offscreen documents, storage, and messaging work together for clipboar
 
 ## Packages used
 
-- `@theluckystrike/webext-storage` — persist clipboard history
-- `@theluckystrike/webext-messaging` — coordinate background, popup, and offscreen document
+- `@theluckystrike/chrome-storage-typed` — persist clipboard history
+- `@theluckystrike/mv3-messaging` — coordinate background, popup, and offscreen document
 
 ## Key pattern: Offscreen for DOM APIs
 

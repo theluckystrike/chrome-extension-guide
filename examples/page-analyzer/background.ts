@@ -1,5 +1,11 @@
-import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
-import { sendTabMessage, onMessage } from "@theluckystrike/webext-messaging";
+/**
+ * Page Analyzer - Background Service Worker
+ *
+ * Demonstrates: chrome-storage-typed + mv3-messaging + chrome.contextMenus
+ */
+
+import { get, set } from "@theluckystrike/chrome-storage-typed";
+import { sendToTab, onMessage } from "@theluckystrike/mv3-messaging";
 
 interface PageAnalysis {
   url: string;
@@ -10,32 +16,7 @@ interface PageAnalysis {
   analyzedAt: number;
 }
 
-// Messages: background -> content script
-type ContentMessages = {
-  analyzePage: {
-    request: void;
-    response: Omit<PageAnalysis, "analyzedAt">;
-  };
-};
-
-// Messages: popup -> background
-type BackgroundMessages = {
-  getHistory: {
-    request: void;
-    response: PageAnalysis[];
-  };
-  clearHistory: {
-    request: void;
-    response: { success: boolean };
-  };
-};
-
-const schema = defineSchema({
-  analysisHistory: [] as PageAnalysis[],
-  maxHistory: 50,
-});
-
-const storage = createStorage({ schema, area: "local" });
+const MAX_HISTORY = 50;
 
 // Context menu setup
 chrome.contextMenus.create({
@@ -48,29 +29,26 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId !== "analyze-page" || !tab?.id) return;
 
   // Send message to content script to extract page data
-  const analysis = await sendTabMessage<ContentMessages, "analyzePage">(
-    { tabId: tab.id },
-    "analyzePage",
-    undefined
-  );
+  const analysis = await sendToTab<
+    void,
+    Omit<PageAnalysis, "analyzedAt">
+  >(tab.id, "analyzePage", undefined as unknown as void);
 
   // Store result
-  const history = await storage.get("analysisHistory");
-  const maxHistory = await storage.get("maxHistory");
+  const history = (await get<PageAnalysis[]>("analysisHistory")) ?? [];
 
   history.unshift({ ...analysis, analyzedAt: Date.now() });
-  if (history.length > maxHistory) history.length = maxHistory;
+  if (history.length > MAX_HISTORY) history.length = MAX_HISTORY;
 
-  await storage.set("analysisHistory", history);
+  await set("analysisHistory", history);
 });
 
 // Handle popup messages
-onMessage<BackgroundMessages>({
-  async getHistory() {
-    return storage.get("analysisHistory");
-  },
-  async clearHistory() {
-    await storage.set("analysisHistory", []);
-    return { success: true };
-  },
+onMessage<void, PageAnalysis[]>("getHistory", async () => {
+  return (await get<PageAnalysis[]>("analysisHistory")) ?? [];
+});
+
+onMessage<void, { success: boolean }>("clearHistory", async () => {
+  await set<PageAnalysis[]>("analysisHistory", []);
+  return { success: true };
 });

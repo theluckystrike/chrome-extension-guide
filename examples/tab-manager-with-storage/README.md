@@ -1,6 +1,6 @@
 # Tab Manager with Persistent Settings
 
-Shows how `webext-storage`, `webext-messaging`, and `webext-permissions` work together in a tab management extension.
+Shows how `chrome-storage-typed`, `mv3-messaging`, `chrome-tabs-manager`, and `chrome-permissions-guard` work together in a tab management extension.
 
 ## What it does
 
@@ -10,9 +10,10 @@ Shows how `webext-storage`, `webext-messaging`, and `webext-permissions` work to
 
 ## Packages used
 
-- `@theluckystrike/webext-storage` — persist saved tab groups
-- `@theluckystrike/webext-messaging` — popup <-> background communication
-- `@theluckystrike/webext-permissions` — runtime `tabs` permission check
+- `@theluckystrike/chrome-storage-typed` — persist saved tab groups
+- `@theluckystrike/mv3-messaging` — popup <-> background communication
+- `@theluckystrike/chrome-tabs-manager` — query and create tabs
+- `@theluckystrike/chrome-permissions-guard` — runtime `tabs` permission check
 
 ## Files
 
