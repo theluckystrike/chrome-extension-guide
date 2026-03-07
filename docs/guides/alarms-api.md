@@ -1,364 +1,164 @@
-# Chrome Alarms API Guide
+# Chrome Alarms API
 
-## Overview
-The `chrome.alarms` API provides a way to schedule code to run periodically or at specified times. This is essential for background tasks in Chrome Extensions, especially in Manifest V3 where service workers replace background pages. The Alarms API solves the problem that `setInterval` and `setTimeout` cannot persist after service worker termination.
+The Chrome Alarms API provides robust background task scheduling in Manifest V3 extensions, replacing unreliable `setInterval`/`setTimeout` calls.
 
-**Official Reference:** [developer.chrome.com/docs/extensions/reference/api/alarms](https://developer.chrome.com/docs/extensions/reference/api/alarms)
+## Why Use chrome.alarms
 
-## Permission Requirements
-Add the `"alarms"` permission to your `manifest.json`:
+In Manifest V2, developers used `setInterval()` and `setTimeout()` in background pages, but these fail when service workers terminate. The `chrome.alarms` API persists alarms across service worker restarts, browser restarts, and wakes the worker when alarms fire.
+
+## Required Permission
+
 ```json
-{
-  "permissions": ["alarms"],
-  "background": {
-    "service_worker": "background.js"
-  }
-}
+{ "permissions": ["alarms"], "background": { "service_worker": "background.js" } }
 ```
 
-## chrome.alarms.create — Creating Alarms
+## AlarmInfo Properties
 
-### Basic Syntax
-```javascript
-chrome.alarms.create(string name, AlarmCreateInfo options, optional function callback)
-```
-
-### One-Time Alarm (Delay)
-```javascript
-// Fire once after specified delay (in minutes)
-chrome.alarms.create("oneTimeTask", {
-  delayInMinutes: 5
-});
-```
-
-### Repeating Alarm (Periodic)
-```javascript
-// Fire after initial delay, then repeat at specified interval
-chrome.alarms.create("periodicTask", {
-  delayInMinutes: 10,
-  periodInMinutes: 30
-});
-```
-
-### Alarm at Specific Time
-```javascript
-// Fire at exact timestamp (milliseconds since epoch)
-const targetTime = new Date("2024-12-25T09:00:00").getTime();
-chrome.alarms.create("dailyReminder", {
-  when: targetTime
-});
-```
-
-### AlarmCreateInfo Options
 | Property | Type | Description |
 |----------|------|-------------|
 | `delayInMinutes` | number | Minutes until alarm fires (one-time) |
 | `periodInMinutes` | number | Repeat interval in minutes |
-| `when` | number | Exact firing time (Unix timestamp in ms) |
+| `when` | number | Unix timestamp for exact firing time |
 
-**Note:** If both `delayInMinutes` and `when` are provided, `when` takes precedence. For repeating alarms, use `periodInMinutes`.
+**Minimum interval:** 1 minute in production; shorter in dev allowed.
 
-## chrome.alarms.get / getAll — Querying Alarms
+## chrome.alarms.create — Creating Alarms
 
-### Get Single Alarm
+### One-Time Alarm
 ```javascript
-// Get alarm by name
-chrome.alarms.get("myAlarm", (alarm) => {
+chrome.alarms.create("oneTimeTask", { delayInMinutes: 5 });
+```
+
+### Periodic Alarm
+```javascript
+chrome.alarms.create("syncTask", { delayInMinutes: 1, periodInMinutes: 30 });
+```
+
+### Alarm at Specific Time
+```javascript
+chrome.alarms.create("dailyTask", { when: new Date("2024-12-25T09:00:00").getTime() });
+```
+
+### Multiple Named Alarms
+```javascript
+chrome.alarms.create("pomodoroTimer", { delayInMinutes: 25 });
+chrome.alarms.create("breakTimer", { delayInMinutes: 5 });
+chrome.alarms.create("dataSync", { periodInMinutes: 15 });
+```
+
+## chrome.alarms.get — Getting a Specific Alarm
+
+```javascript
+chrome.alarms.get("pomodoroTimer", (alarm) => {
   if (alarm) {
     console.log(`Next fire: ${new Date(alarm.scheduledTime)}`);
-    console.log(`Period: ${alarm.periodInMinutes} minutes`);
-    console.log(`Scheduled time: ${alarm.scheduledTime}`);
-  } else {
-    console.log("Alarm not found");
-  }
+  } else { console.log("Alarm not found"); }
 });
-
-// Promise-based (using chrome.alarms.get returns void in callback, but we can wrap)
-const getAlarm = (name) => new Promise((resolve) => {
-  chrome.alarms.get(name, (alarm) => resolve(alarm));
-});
+// Promise-based: const alarm = await chrome.alarms.get("name");
 ```
 
-### Get All Alarms
-```javascript
-// List all active alarms
-chrome.alarms.getAll((alarms) => {
-  console.log(`Total alarms: ${alarms.length}`);
-  alarms.forEach((alarm) => {
-    console.log(`- ${alarm.name}: fires at ${new Date(alarm.scheduledTime)}`);
-  });
-});
+## chrome.alarms.getAll — Listing All Active Alarms
 
-// Promise-based
-const getAllAlarms = () => new Promise((resolve) => {
-  chrome.alarms.getAll((alarms) => resolve(alarms));
-});
+```javascript
+chrome.alarms.getAll((alarms) => alarms.forEach(a => console.log(a.name)));
+// Promise-based: const all = await chrome.alarms.getAll();
 ```
 
-## chrome.alarms.clear / clearAll — Removing Alarms
+## chrome.alarms.clear — Removing a Specific Alarm
 
-### Clear Single Alarm
 ```javascript
-// Remove specific alarm by name
-chrome.alarms.clear("oldAlarm", (wasCleared) => {
-  console.log(wasCleared ? "Alarm removed" : "Alarm not found");
-});
+chrome.alarms.clear("pomodoroTimer", (wasCleared) => console.log(wasCleared));
+// Promise-based: await chrome.alarms.clear("name");
 ```
 
-### Clear All Alarms
+## chrome.alarms.clearAll — Removing All Alarms
+
 ```javascript
-// Remove all alarms
-chrome.alarms.clearAll(() => {
-  console.log("All alarms cleared");
-});
+chrome.alarms.clearAll();
+// Promise-based: await chrome.alarms.clearAll();
 ```
 
 ## chrome.alarms.onAlarm — Event Listener
 
-### Basic Usage
+Register at the top level of your service worker:
+
 ```javascript
 chrome.alarms.onAlarm.addListener((alarm) => {
-  console.log(`Alarm fired: ${alarm.name}`);
-  console.log(`Scheduled time: ${new Date(alarm.scheduledTime)}`);
-  
-  if (alarm.name === "dataSync") {
-    performSync();
-  }
+  if (alarm.name === "pomodoroTimer") handlePomodoroComplete();
+  else if (alarm.name === "dataSync") syncData();
 });
 ```
 
-### Handling Different Alarm Types
+The service worker wakes when alarms fire. Listener must be at top-level.
+
+## Persistent Scheduling Across Restarts
+
 ```javascript
-chrome.alarms.onAlarm.addListener((alarm) => {
-  switch (alarm.name) {
-    case "morningNotification":
-      sendMorningAlert();
-      break;
-    case "dataBackup":
-      backupUserData();
-      break;
-    case "cleanupTask":
-      performCleanup();
-      break;
-  }
+chrome.alarms.get("dataSync", (alarm) => {
+  if (!alarm) chrome.alarms.create("dataSync", { periodInMinutes: 30 });
 });
 ```
 
-**Critical:** Register `onAlarm` at the top level of your service worker file, NOT inside async functions or event handlers. The listener must be registered when the service worker starts to receive events.
+## Building a Pomodoro Timer Extension
 
-## Replacing setInterval in Manifest V3
-
-### The Problem
-In MV2, developers used `setInterval` in background pages:
 ```javascript
-// MV2 - BROKEN IN MV3
-setInterval(() => {
-  checkForUpdates();
-}, 60000); // Every minute
-```
+// background.js - Pomodoro Timer
+const POMODORO = 25, BREAK = 5;
 
-This doesn't work in MV3 because service workers can be terminated after 30 seconds of inactivity.
+function startPomodoro() {
+  chrome.alarms.create("pomodoro", { delayInMinutes: POMODORO });
+  chrome.storage.local.set({ state: "working" });
+}
 
-### The Solution: chrome.alarms
-```javascript
-// MV3 - Using chrome.alarms
-chrome.alarms.create("periodicCheck", {
-  delayInMinutes: 1,
-  periodInMinutes: 60  // Repeat every hour after initial 1-minute delay
-});
+function startBreak() {
+  chrome.alarms.create("break", { delayInMinutes: BREAK });
+}
 
 chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === "periodicCheck") {
-    checkForUpdates();
+  if (alarm.name === "pomodoro") {
+    chrome.notifications.create({ title: "Pomodoro Complete!", message: "Time for a break." });
+    startBreak();
+  } else if (alarm.name === "break") {
+    chrome.notifications.create({ title: "Break Over!", message: "Ready for another?" });
   }
 });
-```
 
-### Sub-Minute Precision (Development Only)
-The minimum alarm period is 30 seconds in production. For more precise timing during development:
-```javascript
-chrome.alarms.create("preciseTask", {
-  delayInMinutes: 0.1,  // 6 seconds (works in unpacked extensions)
-  periodInMinutes: 0.1
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.action === "start") startPomodoro();
+  if (msg.action === "stop") { chrome.alarms.clear("pomodoro"); chrome.alarms.clear("break"); }
 });
 ```
 
-**Note:** Short periods (< 30 seconds) are silently clamped in production builds.
+## Building a Periodic Data Sync Extension
 
-## Persistent Scheduling
-
-### Creating Persistent Alarms
-Alarms persist even after browser restart. Create them in the install/update handler:
 ```javascript
+// background.js - Periodic Sync
+const SYNC_INTERVAL = 15;
+
+async function syncData() {
+  try {
+    const resp = await fetch("https://api.example.com/data");
+    await chrome.storage.local.set({ lastSync: Date.now(), data: await resp.json() });
+  } catch (e) { console.error("Sync failed:", e); }
+}
+
 chrome.runtime.onInstalled.addListener(() => {
-  // Create alarms that survive browser restarts
-  chrome.alarms.create("dailyCleanup", {
-    when: getNextMidnight(),
-    periodInMinutes: 24 * 60  // Daily
-  });
-  
-  chrome.alarms.create("hourlySync", {
-    delayInMinutes: 60,
-    periodInMinutes: 60
-  });
+  chrome.alarms.create("dataSync", { delayInMinutes: 1, periodInMinutes: SYNC_INTERVAL });
+  syncData();
 });
 
-function getNextMidnight() {
-  const now = new Date();
-  const midnight = new Date(now);
-  midnight.setHours(24, 0, 0, 0);
-  return midnight.getTime();
-}
-```
-
-### Restoring Alarms After Update
-```javascript
-chrome.runtime.onUpdateAvailable.addListener(() => {
-  // Refresh alarm schedules on extension update
-  chrome.alarms.clearAll(() => {
-    chrome.alarms.create("refreshedTask", { periodInMinutes: 30 });
-  });
-});
-```
-
-## Building a Reminder Extension
-
-### Complete Example
-```javascript
-// background.js - Reminder Extension
-
-// Store reminders in chrome.storage
-const ReminderStorage = {
-  async getReminders() {
-    return new Promise((resolve) => {
-      chrome.storage.local.get("reminders", (result) => {
-        resolve(result.reminders || []);
-      });
-    });
-  },
-  
-  async saveReminder(reminder) {
-    const reminders = await this.getReminders();
-    reminders.push(reminder);
-    await chrome.storage.local.set({ reminders });
-  },
-  
-  async removeReminder(id) {
-    const reminders = await this.getReminders();
-    const filtered = reminders.filter(r => r.id !== id);
-    await chrome.storage.local.set({ reminders: filtered });
-  }
-};
-
-// Create alarm for a reminder
-async function scheduleReminder(reminder) {
-  const delay = reminder.time - Date.now();
-  
-  if (delay <= 0) {
-    console.log("Reminder time has passed");
-    return;
-  }
-  
-  const delayInMinutes = delay / 60000;
-  
-  chrome.alarms.create(`reminder-${reminder.id}`, {
-    delayInMinutes: delayInMinutes
-  });
-}
-
-// Handle alarm events
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name.startsWith("reminder-")) {
-    const reminderId = alarm.name.replace("reminder-", "");
-    const reminders = await ReminderStorage.getReminders();
-    const reminder = reminders.find(r => r.id === reminderId);
-    
-    if (reminder) {
-      // Show notification
-      chrome.notifications.create({
-        type: "basic",
-        iconUrl: "icon.png",
-        title: "Reminder",
-        message: reminder.message
-      });
-      
-      // Remove completed reminder
-      await ReminderStorage.removeReminder(reminderId);
-    }
-  }
-});
-
-// API for popup to create reminders
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "createReminder") {
-    scheduleReminder(message.reminder);
-    sendResponse({ success: true });
-  }
-  return true;
-});
-```
-
-### Manifest Configuration
-```json
-{
-  "permissions": ["alarms", "storage", "notifications"],
-  "background": {
-    "service_worker": "background.js"
-  }
-}
+chrome.alarms.onAlarm.addListener((a) => { if (a.name === "dataSync") syncData(); });
 ```
 
 ## Best Practices
 
-### 1. Unique Alarm Names
-Use descriptive, unique names to avoid conflicts:
-```javascript
-chrome.alarms.create(`sync-${extensionVersion}`, { periodInMinutes: 60 });
-```
+- Use meaningful alarm names for debugging
+- Check for existing alarms before creating duplicates
+- Handle missing alarms gracefully with `chrome.alarms.get()`
+- Clean up on uninstall using `chrome.runtime.onUninstalled`
+- Combine with `chrome.notifications` for user alerts
 
-### 2. Check Before Creating
-Prevent duplicate alarms:
-```javascript
-async function createAlarmSafe(name, options) {
-  const existing = await new Promise(resolve => 
-    chrome.alarms.get(name, resolve)
-  );
-  
-  if (!existing) {
-    chrome.alarms.create(name, options);
-  }
-}
-```
+## Reference
 
-### 3. Graceful Offline Handling
-```javascript
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  try {
-    await doBackgroundTask();
-  } catch (error) {
-    console.error("Task failed:", error);
-    // Schedule retry
-    chrome.alarms.create("retryTask", { delayInMinutes: 5 });
-  }
-});
-```
-
-### 4. Debugging Alarms
-```javascript
-chrome.alarms.getAll((alarms) => {
-  alarms.forEach(a => {
-    console.log(`[${a.name}] Next: ${new Date(a.scheduledTime)}`);
-  });
-});
-```
-
-## Common Pitfalls
-
-1. **Registering listener inside async function** — Listener won't receive events
-2. **Using setInterval** — Doesn't work in MV3 service workers
-3. **Setting period < 30 seconds** — Silently clamped in production
-4. **Not handling extension updates** — Alarms persist but handlers may change
-5. **Creating duplicate alarms** — Same name overwrites previous (can be intentional)
-
-## Summary
-The Chrome Alarms API is essential for any extension requiring scheduled background tasks in Manifest V3. It provides reliable, persistent scheduling that survives service worker termination and browser restarts. Use it to replace `setInterval`, implement reminder systems, schedule periodic syncs, and more.
+- [Official Documentation](https://developer.chrome.com/docs/extensions/reference/api/alarms)
+- [Chrome Extensions Samples](https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/api/alarms)
