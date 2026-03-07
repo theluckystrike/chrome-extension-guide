@@ -1,438 +1,419 @@
-# Handling Extension Updates
+# Chrome Extension Update Strategies
 
-## chrome.runtime.onInstalled
+## Introduction
+- Chrome extensions require careful update management to ensure users receive new features, bug fixes, and security patches
+- Poor update strategies can lead to user data loss, broken functionality, and negative reviews
+- This guide covers auto-updates, versioning, migration, testing, and deployment strategies
 
-The `chrome.runtime.onInstalled` event fires when your extension is first installed, updated to a new version, or when Chrome itself is updated. This is the central hook for handling both initial setup and updates.
+## Auto-Update Mechanism
 
+### How Chrome Auto-Updates Work
+- Chrome checks for extension updates every few hours (typically 5-6 hours)
+- Update check is triggered by the `update_url` in manifest.json
+- For Web Store extensions: `https://clients2.google.com/service/update2/crx`
+- Chrome downloads the new CRX file, verifies the signature, and installs automatically
+- Users are notified via chrome://extensions "Update" button or automatic notification
+- Extensions loaded unpacked (`--load-extension`) do NOT auto-update
+
+### Update Check Frequency
 ```javascript
-chrome.runtime.onInstalled.addListener((details) => {
-  switch (details.reason) {
-    case "install":
-      onFirstInstall();
-      break;
-    case "update":
-      onUpdate(details.previousVersion);
-      break;
-    case "chrome_update":
-      onChromeUpdate();
-      break;
-  }
-});
+// Manifest V3 - automatic, no code needed
+// Chrome handles update checks internally based on:
+// - Extension ID
+// - Update URL in manifest
+// - Current version
 ```
 
-The `details` object contains:
-- `reason`: One of `"install"`, `"update"`, or `"chrome_update"`
-- `previousVersion`: The version the extension was before the update (only for `"update"`)
-- `id`: The extension ID (always available)
+## Version Numbering Best Practices
 
----
+### Semantic Versioning (SemVer) for Extensions
+- Format: `MAJOR.MINOR.PATCH` (e.g., 2.1.0)
+- MAJOR: Breaking changes, removed features, significant architecture changes
+- MINOR: New features, backward-compatible functionality
+- PATCH: Bug fixes, performance improvements, security patches
+- Pre-release versions: `1.0.0-beta.1`, `1.0.0-rc.2`
 
-## First Install — Set Defaults
-
-When your extension is installed for the first time, you need to initialize default settings, create alarms, and optionally show a welcome page.
-
-Using `@theluckystrike/webext-storage` for storage:
-
-```javascript
-import { Storage } from '@theluckystrike/webext-storage';
-
-const storage = new Storage({
-  defaults: {
-    schemaVersion: 1,
-    theme: 'light',
-    notifications: true,
-    lastSync: null,
-  }
-});
-
-async function onFirstInstall() {
-  // Initialize storage with defaults
-  await storage.init();
-  
-  // Create alarms for scheduled tasks
-  await chrome.alarms.create('dailySync', {
-    delayInMinutes: 5,
-    periodInMinutes: 1440 // 24 hours
-  });
-  
-  // Open welcome page
-  chrome.tabs.create({
-    url: 'welcome.html'
-  });
-  
-  console.log('Extension installed for the first time');
+### Version Rules in manifest.json
+```json
+{
+  "manifest_version": 3,
+  "version": "2.1.0",
+  "version_name": "2.1.0 Beta"
 }
 ```
+- `version` is required and must be valid (MAJOR.MINOR.PATCH)
+- `version_name` is optional for user-facing version display
 
----
+### Best Practices
+- Always increment version for each published update
+- Don't skip versions (1.0.0 → 1.0.2 is confusing)
+- Use `version_name` for beta/RC releases
+- Document version history in CHANGELOG.md
 
-## Update Handler — Run Migrations
+## Breaking Changes Handling
 
-When your extension is updated to a new version, you need to handle migrations, recreate alarms, and optionally show a "What's New" page.
+### Identifying Breaking Changes
+- Removed APIs or parameters
+- Changed data structures
+- Incompatible storage schemas
+- Modified permissions requirements
+- Different content script injection behavior
 
+### Strategies for Safe Breaking Changes
+- Deprecation warnings before removal
+- Feature flags for gradual rollout
+- Backward compatibility layers
+- Migration utilities for user data
+
+### Example: Feature Flag Migration
 ```javascript
-async function onUpdate(previousVersion) {
-  const currentVersion = chrome.runtime.getManifest().version;
-  
-  console.log(`Updating from ${previousVersion} to ${currentVersion}`);
-  
-  // Run version-based migrations
-  await runMigrations(previousVersion, currentVersion);
-  
-  // Recreate alarms (they may have been cleared)
-  await recreateAlarms();
-  
-  // Show "What's New" page for significant updates
-  if (isMajorUpdate(previousVersion, currentVersion)) {
-    chrome.tabs.create({
-      url: 'whats-new.html'
-    });
-  }
-}
-
-async function runMigrations(fromVersion, toVersion) {
-  const migrations = [
-    { from: '1.0.0', to: '1.1.0', fn: migrateV1toV11 },
-    { from: '1.1.0', to: '1.2.0', fn: migrateV11toV12 },
-    { from: '1.2.0', to: '2.0.0', fn: migrateV12toV20 },
-  ];
-  
-  for (const migration of migrations) {
-    if (needsMigration(fromVersion, toVersion, migration.from, migration.to)) {
-      await migration.fn();
+// background.js
+chrome.runtime.onInstalled.addListener(async (details) => {
+  if (details.reason === 'update') {
+    const previousVersion = details.previousVersion;
+    
+    // Migrate from old feature to new feature
+    if (semver.lt(previousVersion, '2.0.0')) {
+      await migrateToV2();
+    }
+    
+    // Handle specific version jumps
+    if (semver.lt(previousVersion, '2.1.0')) {
+      await migrateToV2_1();
     }
   }
+});
+
+async function migrateToV2() {
+  const oldData = await chrome.storage.local.get('oldSetting');
+  if (oldData.oldSetting) {
+    await chrome.storage.local.set({
+      newSetting: transformSetting(oldData.oldSetting)
+    });
+    await chrome.storage.local.remove('oldSetting');
+  }
 }
 ```
 
----
+## Data Migration Between Versions
 
-## Storage Migration Pattern
-
-When updating your extension, you may need to change your storage schema. Always use version-based migrations to safely transform user data.
-
-### Version-Based Migrations
-
+### Storage Migration Pattern
 ```javascript
-const STORAGE_KEYS = {
-  SCHEMA_VERSION: 'schemaVersion',
-  USER_SETTINGS: 'userSettings',
-  CACHE_DATA: 'cacheData'
+// migrations.js - Centralized migration manager
+const MIGRATIONS = {
+  '1.0.0': migrateFrom1_0_0,
+  '1.1.0': migrateFrom1_1_0,
+  '2.0.0': migrateFrom2_0_0
 };
 
-async function migrateV11toV12() {
-  // Read old data using raw chrome.storage
-  const oldData = await chrome.storage.local.get(['settings', 'cache']);
-  
-  // Transform and store using new structure with @theluckystrike/webext-storage
-  const storage = new Storage({
-    defaults: {
-      schemaVersion: 2,
-      userPreferences: oldData.settings || {},
-      cacheTimestamp: Date.now()
-    }
-  });
-  
-  await storage.init();
-  
-  // Clear old keys
-  await chrome.storage.local.remove(['settings', 'cache']);
-  
-  console.log('Migration from v1.1.0 to v1.2.0 complete');
-}
-```
-
-### Rename Keys Pattern
-
-```javascript
-async function migrateKeyNames() {
-  const oldKeys = await chrome.storage.local.get(['oldTheme', 'oldNotification']);
-  
-  const updates = {};
-  if (oldKeys.oldTheme !== undefined) {
-    updates.theme = oldKeys.oldTheme;
-  }
-  if (oldKeys.oldNotification !== undefined) {
-    updates.notifications = oldKeys.oldNotification;
-  }
-  
-  if (Object.keys(updates).length > 0) {
-    await chrome.storage.local.set(updates);
-    await chrome.storage.local.remove(['oldTheme', 'oldNotification']);
-  }
-}
-```
-
-### Add New Defaults
-
-```javascript
-async function addNewDefaults(currentVersion) {
-  const storage = new Storage({
-    defaults: {
-      schemaVersion: currentVersion,
-      // New settings that didn't exist before
-      newFeatureEnabled: false,
-      advancedMode: false,
-    }
-  });
-  
-  // This merges new defaults with existing data
-  await storage.init();
-}
-```
-
----
-
-## chrome.runtime.onStartup
-
-The `chrome.runtime.onStartup` event fires when the browser profile starts, but NOT when the extension is installed or updated. Use this for initializing features on browser launch.
-
-```javascript
-chrome.runtime.onStartup.addListener(async () => {
-  console.log('Browser started, initializing extension...');
-  
-  // Check if extension needs attention
-  const storage = new Storage({ defaults: { schemaVersion: 1 }});
-  await storage.init();
-  
-  // Restore alarm-based tasks
-  await ensureAlarmsExist();
-  
-  // Resume any paused operations
-  await resumeBackgroundTasks();
-});
-```
-
-**Important**: This does NOT run on first install or update. It's purely for browser launch events.
-
----
-
-## chrome.runtime.onUpdateAvailable
-
-When a new version of your extension is available (published to the Chrome Web Store), this event fires. By default, the update will be applied when the browser restarts, but you can force an immediate reload.
-
-```javascript
-chrome.runtime.onUpdateAvailable.addListener((details) => {
-  console.log(`New version available: ${details.version}`);
-  
-  // Optionally show a notification to the user
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icon.png',
-    title: 'Extension Updated',
-    message: `Version ${details.version} is ready. Refresh to update.`
-  });
-  
-  // Apply the update immediately (recommended for critical fixes)
-  chrome.runtime.reload();
-});
-```
-
-Without calling `chrome.runtime.reload()`, the update will be applied the next time the browser restarts.
-
----
-
-## Version Comparison Utility Function
-
-A reliable version comparison function is essential for determining when migrations are needed.
-
-```javascript
-/**
- * Compare two version strings
- * @returns -1 if v1 < v2, 0 if v1 === v2, 1 if v1 > v2
- */
-function compareVersions(v1, v2) {
-  const parts1 = v1.split('.').map(Number);
-  const parts2 = v2.split('.').map(Number);
-  
-  const maxLength = Math.max(parts1.length, parts2.length);
-  
-  for (let i = 0; i < maxLength; i++) {
-    const p1 = parts1[i] || 0;
-    const p2 = parts2[i] || 0;
+chrome.runtime.onInstalled.addListener(async (details) => {
+  if (details.reason === 'update') {
+    const previousVersion = details.previousVersion;
+    const currentVersion = chrome.runtime.getManifest().version;
     
-    if (p1 < p2) return -1;
-    if (p1 > p2) return 2;
+    for (const [version, migrateFn] of Object.entries(MIGRATIONS)) {
+      if (semver.lt(previousVersion, version)) {
+        console.log(`Running migration for version ${version}`);
+        await migrateFn();
+      }
+    }
   }
-  
-  return 0;
-}
+});
 
-/**
- * Check if version1 needs migration to version2
- */
-function needsMigration(currentVersion, targetVersion, fromVersion, toVersion) {
-  return compareVersions(currentVersion, fromVersion) >= 0 &&
-         compareVersions(currentVersion, toVersion) < 0;
-}
-
-/**
- * Check if update is a major version change
- */
-function isMajorUpdate(oldVersion, newVersion) {
-  const oldMajor = parseInt(oldVersion.split('.')[0], 10);
-  const newMajor = parseInt(newVersion.split('.')[0], 10);
-  return newMajor > oldMajor;
+async function migrateFrom1_1_0() {
+  // Example: rename storage keys
+  const data = await chrome.storage.local.get(['oldKey1', 'oldKey2']);
+  if (data.oldKey1) {
+    await chrome.storage.local.set({
+      newKey1: data.oldKey1,
+      newKey2: data.oldKey2 || 'default'
+    });
+    await chrome.storage.local.remove(['oldKey1', 'oldKey2']);
+  }
 }
 ```
 
----
+### Migration Checklist
+- [ ] Document all storage keys and their purposes
+- [ ] Create migration functions for each version
+- [ ] Test migration path from oldest supported version
+- [ ] Handle migration failures gracefully
+- [ ] Provide fallback for corrupted data
+- [ ] Log migration status for debugging
 
-## Best Practices
+## chrome.runtime.onInstalled for Update Detection
 
-### 1. Handle All onInstalled Reasons
-
-Always handle all three cases in your `onInstalled` listener:
-
+### Basic Usage
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
   switch (details.reason) {
     case 'install':
-      // Initialize defaults, create resources
+      console.log('Extension installed for the first time');
+      initializeDefaultSettings();
+      showWelcomePage();
       break;
+      
     case 'update':
-      // Run migrations, update resources
+      console.log(`Updated from ${details.previousVersion}`);
+      handleUpdate(details.previousVersion);
       break;
+      
     case 'chrome_update':
-      // Handle Chrome version changes that may affect extension
+      console.log('Chrome browser updated');
       break;
   }
 });
-```
 
-### 2. Store Schema Version
-
-Always store and increment a schema version in your storage:
-
-```javascript
-const CURRENT_SCHEMA_VERSION = 3;
-
-// On init
-await chrome.storage.local.set({ schemaVersion: CURRENT_SCHEMA_VERSION });
-
-// When checking for migrations
-const { schemaVersion = 0 } = await chrome.storage.local.get('schemaVersion');
-if (schemaVersion < CURRENT_SCHEMA_VERSION) {
-  await runMigrations(schemaVersion, CURRENT_SCHEMA_VERSION);
+async function handleUpdate(previousVersion) {
+  // Show changelog for significant updates
+  if (semver.major(previousVersion) !== semver.major(chrome.runtime.getManifest().version)) {
+    showMajorUpdateNotification();
+  }
 }
 ```
 
-### 3. Recreate Alarms
-
-Alarms are cleared when an extension is updated. Always recreate them:
-
+### Detecting Update Type
 ```javascript
-async function recreateAlarms() {
-  // Remove existing alarms first to avoid duplicates
-  const alarms = await chrome.alarms.getAll();
-  for (const alarm of alarms) {
-    await chrome.alarms.clear(alarm.name);
-  }
+function getUpdateType(previousVersion, currentVersion) {
+  const prev = semver.parse(previousVersion);
+  const curr = semver.parse(currentVersion);
   
-  // Recreate with same configuration
-  await chrome.alarms.create('dailySync', {
-    delayInMinutes: 5,
-    periodInMinutes: 1440
+  if (prev.major !== curr.major) return 'major';
+  if (prev.minor !== curr.minor) return 'minor';
+  return 'patch';
+}
+```
+
+## Update Notification Patterns
+
+### In-App Notifications
+```javascript
+// Show update notification in popup or options page
+async function showUpdateNotification(previousVersion) {
+  const changelog = await fetchChangelog(previousVersion);
+  
+  const notification = {
+    type: 'basic',
+    iconUrl: 'images/icon48.png',
+    title: 'Extension Updated!',
+    message: `Version ${chrome.runtime.getManifest().version} is now available.`,
+    priority: 1,
+    buttons: [
+      { title: 'View Changes' },
+      { title: 'Dismiss' }
+    ]
+  };
+  
+  chrome.notifications.create('update-notification', notification);
+}
+```
+
+### Changelog Display
+```javascript
+// Display changelog to user after update
+chrome.runtime.onInstalled.addListener(async (details) => {
+  if (details.reason === 'update') {
+    // Show changelog in a new tab
+    chrome.tabs.create({
+      url: 'changelog.html',
+      active: false
+    });
+  }
+});
+
+// changelog.html - fetch and display recent changes
+(async () => {
+  const response = await fetch('CHANGELOG.md');
+  const changelog = await response.text();
+  document.getElementById('changelog').textContent = changelog;
+})();
+```
+
+## Staged Rollouts in Chrome Web Store
+
+### Understanding Staged Rollouts
+- Chrome Web Store supports gradual rollout percentages
+- Start with 1-5% of users, then increase after monitoring
+- Allows catching critical bugs before full release
+- Available in developer dashboard under "Distribution"
+
+### Staged Rollout Strategy
+1. Upload new version as draft
+2. Test with trusted testers
+3. Publish to 1-5% rollout
+4. Monitor crash reports and reviews
+5. Increase rollout percentage incrementally
+6. Reach 100% after confidence is high
+
+### Monitoring During Rollout
+- Check Chrome Web Store developer dashboard
+- Monitor chrome://extensions errors
+- Review user feedback and ratings
+- Track storage error rates in telemetry
+
+## Rollback Strategies
+
+### Preventing Bad Updates
+- Always test locally before publishing
+- Use staged rollouts to catch issues early
+- Keep previous version CRX for emergency rollback
+- Maintain a "known good" version reference
+
+### Emergency Rollback Process
+1. Go to Chrome Web Store developer dashboard
+2. Select the extension
+3. Upload previous version CRX
+4. Set as active version
+5. Push to 100% rollout immediately
+6. Monitor for stabilization
+
+### Version Preservation
+```bash
+# Keep old CRX files for emergency rollback
+/extensions/
+  ├── myextension-1.0.0.crx
+  ├── myextension-1.0.1.crx
+  └── myextension-1.1.0.crx
+```
+
+## Forced Updates for Security Fixes
+
+### Implementing Forced Updates
+```javascript
+// Check minimum required version on startup
+const MINIMUM_VERSION = '2.1.0';
+
+async function checkForcedUpdate() {
+  const currentVersion = chrome.runtime.getManifest().version;
+  
+  if (semver.lt(currentVersion, MINIMUM_VERSION)) {
+    // Show urgent update notification
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'images/warning.png',
+      title: 'Security Update Required',
+      message: 'A critical security update is required. Please update now.',
+      priority: 2,
+      buttons: [{ title: 'Update Now' }]
+    });
+    
+    // Disable extension functionality until updated
+    await chrome.storage.local.set({ extensionEnabled: false });
+  }
+}
+```
+
+### Security Update Checklist
+- [ ] Communicate urgency clearly
+- [ ] Provide one-click update path
+- [ ] Consider auto-update delay (48-72 hours)
+- [ ] Have rollback plan ready
+- [ ] Document the security vulnerability
+
+## Self-Hosted Extension Updates
+
+### Update Manifest XML Format
+For self-hosted extensions, Chrome checks an XML manifest for updates:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0' server='prod'>
+  <app appid='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'>
+    <updatecheck 
+      codebase='https://example.com/extensions/myextension.crx'
+      version='2.1.0'
+      hash='sha256=abc123...'/>
+  </app>
+</gupdate>
+```
+
+### Hosting the Update Manifest
+```javascript
+// Example: Dynamic XML generation (server-side)
+app.get('/update.xml', (req, res) => {
+  const updateXml = `<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0' server='prod'>
+  <app appid='${EXTENSION_ID}'>
+    <updatecheck 
+      codebase='https://example.com/updates/extension-${latestVersion}.crx'
+      version='${latestVersion}'
+      hash='sha256=${fileHash}'/>
+  </app>
+</gupdate>`;
+  
+  res.type('application/xml').send(updateXml);
+});
+```
+
+### Manifest.json Update URL
+```json
+{
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "2.1.0",
+  "update_url": "https://example.com/update.xml"
+}
+```
+
+Reference: https://developer.chrome.com/docs/extensions/develop/distribute/host-on-linux
+
+## Testing Updates Locally
+
+### Local Testing Methods
+1. Load unpacked extension: `chrome://extensions` → "Load unpacked"
+2. Use "Update" button to reload after changes
+3. Test `chrome.runtime.onInstalled` by reinstalling
+4. Test data migration with development storage
+
+### Simulating Updates
+```javascript
+// Test migration logic without actual update
+async function testMigration() {
+  // Set up "old" storage state
+  await chrome.storage.local.set({
+    oldSetting: 'legacy-value',
+    oldData: { items: [1, 2, 3] }
   });
   
-  await chrome.alarms.create('hourlyCleanup', {
-    periodInMinutes: 60
-  });
+  // Simulate update event
+  const mockDetails = {
+    reason: 'update',
+    previousVersion: '1.0.0'
+  };
+  
+  // Run migration
+  await handleUpdate(mockDetails);
+  
+  // Verify migration results
+  const result = await chrome.storage.local.get(['newSetting', 'newData']);
+  console.log('Migration result:', result);
 }
 ```
 
-### 4. Test Update Flow
+### Testing Checklist
+- [ ] Test fresh install flow
+- [ ] Test update from oldest supported version
+- [ ] Test update from each major version
+- [ ] Test data migration with real data
+- [ ] Test forced update scenario
+- [ ] Test rollback behavior
 
-To test your update handlers:
+## Update Architecture Best Practices
 
-1. Load your extension in development mode
-2. Make code changes
-3. Click "Update" in `chrome://extensions` or use the Reload button
-4. Check console logs for migration output
-5. Verify storage contains correct schema version
+### Summary Checklist
+- [ ] Use semantic versioning consistently
+- [ ] Implement robust data migration system
+- [ ] Use chrome.runtime.onInstalled for update handling
+- [ ] Display changelog after major updates
+- [ ] Use staged rollouts in Chrome Web Store
+- [ ] Keep previous versions for emergency rollback
+- [ ] Implement forced updates for security-critical patches
+- [ ] Test all migration paths thoroughly
+- [ ] Monitor update success/failure rates
+- [ ] Communicate changes clearly to users
 
----
-
-## Common Mistakes
-
-### Not Handling onInstalled
-
-```javascript
-// ❌ WRONG: Only handling install
-chrome.runtime.onInstalled.addListener(() => {
-  initializeDefaults();
-});
-```
-
-```javascript
-// ✅ CORRECT: Handle all cases
-chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    initializeDefaults();
-  } else if (details.reason === 'update') {
-    runMigrations(details.previousVersion);
-  }
-});
-```
-
-### Confusing onInstalled with onStartup
-
-- **`onInstalled`**: Fires on first install, extension update, or Chrome update
-- **`onStartup`**: Fires only when the browser profile starts
-
-```javascript
-// ❌ WRONG: Using onStartup for setup
-chrome.runtime.onStartup.addListener(() => {
-  initializeDefaults(); // This runs every browser start!
-});
-
-// ✅ CORRECT: Use appropriate handlers
-chrome.runtime.onInstalled.addListener(() => {
-  initializeDefaults(); // Run once on install/update
-});
-
-chrome.runtime.onStartup.addListener(() => {
-  resumeTasks(); // Run on browser start
-});
-```
-
-### Breaking Storage Without Migration
-
-```javascript
-// ❌ WRONG: Changing storage keys without migration
-const storage = new Storage({
-  defaults: {
-    // Changed from 'enabled' to 'featureEnabled'
-    featureEnabled: false
-  }
-});
-// Users lose their 'enabled' setting!
-```
-
-```javascript
-// ✅ CORRECT: Migrate old keys
-async function migrateV1toV2() {
-  const oldData = await chrome.storage.local.get('enabled');
-  if (oldData.enabled !== undefined) {
-    await chrome.storage.local.set({ featureEnabled: oldData.enabled });
-    await chrome.storage.local.remove('enabled');
-  }
-}
-```
-
----
-
-## Summary
-
-| Event | When It Fires | Use For |
-|-------|--------------|---------|
-| `chrome.runtime.onInstalled` | Install, update, Chrome update | Setting defaults, migrations |
-| `chrome.runtime.onStartup` | Browser profile starts | Resuming tasks, initializing |
-| `chrome.runtime.onUpdateAvailable` | New version from Web Store | Notifying user, forcing reload |
-
-Always:
-- Store a schema version in storage
-- Implement version-based migrations
-- Handle all `onInstalled` reasons
-- Recreate alarms after updates
-- Test your update flow thoroughly
+### Recommended Tools
+- `semver` npm package for version comparison
+- Chrome Storage for migration state
+- Chrome Web Store publishing API for automation
+- CRX viewer for inspecting published extensions
