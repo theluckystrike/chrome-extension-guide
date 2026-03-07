@@ -1,21 +1,14 @@
 # Chrome Extension Tab Capture API
 
-## Introduction
+The Chrome Extension Tab Capture API is a powerful feature that allows extensions to capture the visual and audio content of browser tabs. This API opens up a wide range of possibilities, from building screen recording extensions to creating collaborative whiteboarding tools. In this comprehensive guide, we'll explore every aspect of the Tab Capture API, from basic usage to advanced implementation patterns.
 
-The Chrome Tab Capture API (`chrome.tabCapture`) is a powerful Chrome-specific API that enables extensions to capture the visual and audio content of a browser tab as a MediaStream. This API is essential for building screen recording extensions, tab mirroring solutions, and applications that need to capture tab content for processing or streaming.
+## Overview and Permissions
 
-Unlike the desktop capture API (`chrome.desktopCapture`), which captures the entire screen or specific windows, tab capture is specifically designed to capture tab content. This makes it ideal for:
-- Screen recording extensions
-- Tab streaming applications
-- Collaborative viewing tools
-- Content archiving solutions
-- Accessibility tools that capture page content
+The `chrome.tabCapture` API provides the ability to capture the content of a tab as a media stream. Before using this API, you need to declare the appropriate permissions in your extension's manifest file.
 
-## Manifest Configuration
+### Manifest Permissions
 
-To use the Tab Capture API, you need to declare the appropriate permissions in your manifest.json file.
-
-### Required Permissions
+To use the Tab Capture API, you must add the `"tabCapture"` permission to your manifest:
 
 ```json
 {
@@ -27,48 +20,74 @@ To use the Tab Capture API, you need to declare the appropriate permissions in y
   ],
   "host_permissions": [
     "<all_urls>"
-  ],
-  "action": {
-    "default_title": "Capture Tab"
-  }
+  ]
 }
 ```
 
-### Permission Details
+It's important to note that the `"tabCapture"` permission alone doesn't automatically grant access to all tabs. The user must initiate the capture through a user gesture, such as clicking a button in your extension's popup or background script.
 
-- **tabCapture**: Required permission to access the Tab Capture API. This is a Chrome-specific permission and is not available in other browsers.
-- **host_permissions**: Depending on your use case, you may need host permissions to access the captured content or to inject scripts that process the stream.
-- **activeTab**: Often used alongside tabCapture for extensions that respond to user clicks, providing a more secure permission model.
+### Understanding Capture Constraints
 
-## Capturing Tab Audio and Video
-
-### The capture() Method
-
-The primary method for capturing tab content is `chrome.tabCapture.capture()`. This method initiates tab capture and returns a MediaStream.
+The Tab Capture API works in conjunction with the Chrome desktopCapture API. When capturing a tab, you can specify various constraints to control what gets captured:
 
 ```javascript
-// Basic capture syntax
-chrome.tabCapture.capture(options, callback);
-```
-
-### Capture Options
-
-The options object allows you to configure what to capture:
-
-```javascript
-const captureOptions = {
-  audio: true,      // Capture tab audio (default: true)
-  video: true,      // Capture tab video (default: true)
-  audioConstraints: {
+const constraints = {
+  audio: true,
+  video: {
     mandatory: {
       chromeMediaSource: 'tab',
       chromeMediaSourceId: streamId
     }
-  },
-  videoConstraints: {
+  }
+};
+```
+
+## Capturing Tab Audio and Video
+
+The primary method for capturing a tab is `chrome.tabCapture.capture()`. This method initiates the capture and returns a MediaStream object that you can use in various ways.
+
+### Basic Capture Implementation
+
+Here's a fundamental example of how to capture a tab:
+
+```javascript
+async function captureTab(tabId) {
+  try {
+    const stream = await chrome.tabCapture.capture({
+      audio: true,
+      video: true
+    });
+    
+    console.log('Capture started successfully');
+    return stream;
+  } catch (error) {
+    console.error('Capture failed:', error);
+    throw error;
+  }
+}
+```
+
+### Capture Options
+
+The `capture()` method accepts an options object with the following properties:
+
+- **audio**: Boolean or AudioConstraints - Whether to capture audio from the tab
+- **video**: Boolean or VideoConstraints - Whether to capture video from the tab
+- **audioConstraints**: MediaStreamConstraints - Specific constraints for audio capture
+- **videoConstraints**: MediaStreamConstraints - Specific constraints for video capture
+
+```javascript
+const captureOptions = {
+  audio: {
     mandatory: {
       chromeMediaSource: 'tab',
-      chromeMediaSourceId: streamId,
+      echoCancellation: true,
+      noiseSuppression: true
+    }
+  },
+  video: {
+    mandatory: {
+      chromeMediaSource: 'tab',
       maxWidth: 1920,
       maxHeight: 1080,
       maxFrameRate: 30
@@ -76,298 +95,170 @@ const captureOptions = {
   }
 };
 
-chrome.tabCapture.capture(captureOptions, (stream) => {
-  if (chrome.runtime.lastError) {
-    console.error('Capture failed:', chrome.runtime.lastError.message);
-    return;
-  }
-  console.log('Stream captured successfully:', stream);
-});
-```
-
-### Complete Capture Example
-
-Here's a complete example showing how to capture a tab when the user clicks the extension action:
-
-```javascript
-// background.js (service worker)
-// Note: chrome.tabCapture.capture() cannot be called from a service worker in MV3.
-// Use getMediaStreamId() in the service worker, then pass the stream ID to an
-// offscreen document or extension page that calls navigator.mediaDevices.getUserMedia().
-chrome.action.onClicked.addListener(async (tab) => {
-  try {
-    // Get the stream ID for the tab (available in service workers since Chrome 116)
-    const streamId = await chrome.tabCapture.getMediaStreamId({
-      targetTabId: tab.id
-    });
-
-    console.log('Stream ID obtained:', streamId);
-
-    // Create an offscreen document to consume the stream
-    await chrome.offscreen.createDocument({
-      url: 'offscreen.html',
-      reasons: ['USER_MEDIA'],
-      justification: 'Recording tab content'
-    });
-
-    // Send stream ID to offscreen document for capture
-    chrome.runtime.sendMessage({ type: 'START_CAPTURE', streamId });
-
-  } catch (error) {
-    console.error('Capture error:', error);
-  }
-});
+const stream = await chrome.tabCapture.capture(captureOptions);
 ```
 
 ## MediaStream Handling and Processing
 
-### Working with the Captured Stream
+Once you have a MediaStream from tab capture, you can process it in various ways. The stream behaves like any standard MediaStream, allowing you to work with its tracks using the MediaStream API.
 
-Once you have a MediaStream from tab capture, you can process it in various ways:
+### Accessing Audio and Video Tracks
 
 ```javascript
-// Process captured stream in content script
-function processTabStream(stream) {
-  // Create video element to display or process the stream
-  const video = document.createElement('video');
-  video.srcObject = stream;
-  video.autoplay = true;
-  video.controls = true;
-  document.body.appendChild(video);
-
-  // Access individual tracks
+function processStream(stream) {
   const audioTracks = stream.getAudioTracks();
   const videoTracks = stream.getVideoTracks();
-
-  console.log('Audio tracks:', audioTracks.length);
-  console.log('Video tracks:', videoTracks.length);
-
-  // Configure video track settings
-  if (videoTracks.length > 0) {
-    const settings = videoTracks[0].getSettings();
-    console.log('Video dimensions:', settings.width, 'x', settings.height);
-    console.log('Frame rate:', settings.frameRate);
-  }
+  
+  audioTracks.forEach(track => {
+    console.log('Audio track:', track.label);
+    // Configure audio processing
+    track.enabled = true;
+  });
+  
+  videoTracks.forEach(track => {
+    console.log('Video track:', track.label);
+    // Configure video processing
+    track.enabled = true;
+  });
+  
+  return { audioTracks, videoTracks };
 }
 ```
 
-### Recording the Stream
+### Creating Processed Streams
 
-To record tab content, you can use the MediaRecorder API:
+You can use MediaStreamTrackProcessor and MediaStreamTrackGenerator (available in modern browsers) to process and transform captured media:
 
 ```javascript
-// Record captured stream
-function recordTabStream(stream, filename = 'recording.webm') {
-  const mediaRecorder = new MediaRecorder(stream, {
-    mimeType: 'video/webm;codecs=vp9'
-  });
-
-  const chunks = [];
-
-  mediaRecorder.ondataavailable = (event) => {
-    if (event.data.size > 0) {
-      chunks.push(event.data);
+async function createProcessedStream(sourceStream) {
+  const videoTrack = sourceStream.getVideoTracks()[0];
+  const audioTrack = sourceStream.getAudioTracks()[0];
+  
+  // Create a track processor for video
+  const videoProcessor = new MediaStreamTrackProcessor({ track: videoTrack });
+  const videoGenerator = new MediaStreamTrackGenerator({ kind: 'video' });
+  
+  // Transform the video (example: add a filter)
+  const transformer = new TransformStream({
+    transform(videoFrame, controller) {
+      // Apply processing to the frame
+      controller.enqueue(videoFrame);
     }
-  };
-
-  mediaRecorder.onstop = () => {
-    const blob = new Blob(chunks, { type: 'video/webm' });
-    const url = URL.createObjectURL(blob);
-    
-    // Download the recording
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    
-    URL.revokeObjectURL(url);
-  };
-
-  // Start recording (collect data every 1 second)
-  mediaRecorder.start(1000);
-
-  return mediaRecorder;
+  });
+  
+  videoProcessor.readable.pipeThrough(transformer).pipeTo(videoGenerator.writable);
+  
+  // Create new stream with processed tracks
+  return new MediaStream([videoGenerator, audioTrack]);
 }
 ```
 
-### Audio-Only and Video-Only Capture
+### Recording Captured Content
 
-You can capture only audio or only video depending on your needs:
-
-```javascript
-// Audio-only capture
-async function captureAudioOnly(tabId) {
-  const stream = await chrome.tabCapture.capture({
-    audio: true,
-    video: false
-  });
-  return stream;
-}
-
-// Video-only capture (no audio)
-async function captureVideoOnly(tabId) {
-  const stream = await chrome.tabCapture.capture({
-    audio: false,
-    video: true
-  });
-  return stream;
-}
-
-// Selective audio sources
-async function captureWithOptions(tabId, options) {
-  const streamId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
-  });
-
-  return await chrome.tabCapture.capture({
-    audioConstraints: options.captureAudio ? {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId,
-        // Prefer specific audio constraints
-        echoCancellation: true,
-        noiseSuppression: true
-      }
-    } : false,
-    videoConstraints: options.captureVideo ? {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId,
-        maxWidth: options.maxWidth || 1920,
-        maxHeight: options.maxHeight || 1080
-      }
-    } : false
-  });
-}
-```
-
-### Stream Processing with Web Audio API
-
-You can process the audio from a captured tab using the Web Audio API:
+One of the most common use cases for Tab Capture is recording the tab's content. Here's how to implement a basic recorder:
 
 ```javascript
-// Process tab audio with Web Audio API
-function processTabAudio(stream) {
-  const audioContext = new AudioContext();
-  const source = audioContext.createMediaStreamSource(stream);
-  
-  // Create audio processing nodes
-  const gainNode = audioContext.createGain();
-  const analyserNode = audioContext.createAnalyser();
-  
-  // Connect the audio graph
-  source.connect(gainNode);
-  gainNode.connect(analyserNode);
-  
-  // Adjust volume
-  gainNode.gain.value = 1.5; // Increase volume by 50%
-  
-  // Analyze audio data
-  analyserNode.fftSize = 256;
-  const bufferLength = analyserNode.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-  
-  function analyze() {
-    analyserNode.getByteFrequencyData(dataArray);
-    // Process frequency data here
-    requestAnimationFrame(analyze);
+class TabRecorder {
+  constructor(stream) {
+    this.stream = stream;
+    this.mediaRecorder = null;
+    this.chunks = [];
   }
   
-  analyze();
+  startRecording() {
+    this.chunks = [];
+    
+    this.mediaRecorder = new MediaRecorder(this.stream, {
+      mimeType: 'video/webm;codecs=vp9'
+    });
+    
+    this.mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        this.chunks.push(event.data);
+      }
+    };
+    
+    this.mediaRecorder.start(1000); // Collect data every second
+    console.log('Recording started');
+  }
   
-  return { audioContext, gainNode, analyserNode };
+  stopRecording() {
+    return new Promise((resolve) => {
+      this.mediaRecorder.onstop = () => {
+        const blob = new Blob(this.chunks, { type: 'video/webm' });
+        resolve(blob);
+      };
+      
+      this.mediaRecorder.stop();
+      console.log('Recording stopped');
+    });
+  }
+  
+  downloadRecording(filename = 'recording.webm') {
+    return this.stopRecording().then(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
 }
 ```
 
 ## Tab Capture Indicators and User Awareness
 
-### Understanding Chrome's Capture Indicator
+When a tab is being captured, Chrome displays a visual indicator to inform the user. This is an important UX consideration that you should be aware of when building capture extensions.
 
-When a tab is being captured, Chrome automatically displays a red circle indicator in the tab's favicon area. This is a built-in privacy feature that alerts users when their tab content is being captured.
+### Understanding the Recording Indicator
+
+Chrome automatically shows a red recording indicator in the browser's address bar when a tab is being captured. This indicator:
+- Appears as a small red circle or dot next to the favicon
+- Persists for the duration of the capture
+- Cannot be hidden or disabled by the extension
+
+This is a security feature to ensure transparency with users about when their tab content is being recorded.
 
 ### Detecting Capture State
 
-You can check if a tab is currently being captured:
+You can check if a tab is currently being captured using `chrome.tabCapture.getCapturedTabs()`:
 
 ```javascript
-// Check if tab is being captured
-async function isTabCaptured(tabId) {
-  const captureInfo = await chrome.tabCapture.getCapturedTabs();
-  return captureInfo.some(tab => tab.id === tabId);
-}
-
-// Get all captured tabs
-async function getCapturedTabs() {
-  return await chrome.tabCapture.getCapturedTabs();
-}
-
-// Example: Monitor capture state
-chrome.tabCapture.onStatusChanged.addListener((status) => {
-  console.log(`Tab ${status.tabId} capture status: ${status.status}`);
-  // Status can be 'pending', 'active', 'stopped', or 'error'
-});
-```
-
-### Building a Capture Status Indicator
-
-Create a visual indicator in your extension's popup or UI:
-
-```javascript
-// popup.js - Update UI based on capture status
-async function updateCaptureStatus(tabId) {
-  const capturedTabs = await chrome.tabCapture.getCapturedTabs();
-  const isCaptured = capturedTabs.some(t => t.id === tabId);
+async function getCapturedTabInfo() {
+  const tabs = await chrome.tabCapture.getCapturedTabs();
   
-  const statusElement = document.getElementById('status');
-  if (isCaptured) {
-    statusElement.textContent = '● Recording';
-    statusElement.classList.add('recording');
-  } else {
-    statusElement.textContent = '○ Not Recording';
-    statusElement.classList.remove('recording');
-  }
-}
-```
-
-### User Consent and Privacy
-
-When building tab capture extensions, you must consider user privacy:
-
-```javascript
-// Request user consent before capturing
-async function requestCaptureWithConsent(tabId) {
-  // Show a confirmation dialog first
-  const confirmed = confirm('Do you want to start recording this tab?');
-  
-  if (!confirmed) {
-    return null;
-  }
-  
-  // Proceed with capture
-  return await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
+  tabs.forEach(tab => {
+    console.log(`Tab ${tab.id}: ${tab.status}`);
   });
+  
+  return tabs;
 }
+```
 
-// Alternative: Use chrome.contentSettings to manage capture permissions
-function checkCapturePermission(url) {
-  chrome.contentSettings['mediaStreamCamera'].get(
-    { primaryUrl: url },
-    (details) => {
-      console.log('Capture setting:', details.setting);
-    }
-  );
-}
+The returned objects contain:
+- **tabId**: The ID of the tab
+- **status**: Either "connected" or "disconnected"
+- **fullscreen**: Whether the tab is in fullscreen mode
+
+### Handling Fullscreen Changes
+
+When a user enters fullscreen mode during capture, you need to handle it properly:
+
+```javascript
+stream.getVideoTracks()[0].onended = () => {
+  console.log('Capture ended - possibly due to fullscreen change');
+  // Handle the ended event appropriately
+};
 ```
 
 ## getMediaStreamId for Offscreen Document Capture
 
-### Introduction to getMediaStreamId
+In Manifest V3, service workers have limited lifetime, making continuous capture challenging. The `chrome.tabCapture.getMediaStreamId()` method provides a solution by generating a stream ID that can be used in various contexts, including offscreen documents.
 
-The `chrome.tabCapture.getMediaStreamId()` method generates a stream ID that can be used to capture tab content in contexts where direct stream access isn't possible, such as in offscreen documents or background scripts.
+### Generating a Stream ID
 
 ```javascript
-// Get stream ID for a specific tab
 async function getStreamId(tabId) {
   const streamId = await chrome.tabCapture.getMediaStreamId({
     targetTabId: tabId
@@ -378,436 +269,278 @@ async function getStreamId(tabId) {
 }
 ```
 
-### Offscreen Document Capture Pattern
+The `getMediaStreamId()` method accepts options:
+- **targetTabId**: The ID of the tab to capture (optional, defaults to active tab)
 
-In Manifest V3, service workers cannot maintain persistent MediaStream connections. The solution is to use offscreen documents for long-running capture operations:
+### Using Stream ID in Offscreen Documents
+
+Offscreen documents in Manifest V3 provide a way to handle long-running tasks that don't fit in the service worker lifecycle. Here's how to use Tab Capture with offscreen documents:
+
+First, create an offscreen document:
 
 ```javascript
-// background.js - Create offscreen document for capture
-async function startOffscreenCapture(tabId) {
-  // Create an offscreen document
-  await chrome.offscreen.createDocument({
-    url: 'offscreen.html',
-    reasons: ['USER_MEDIA'],
-    justification: 'Recording tab content in background'
+async function createOffscreenDocument() {
+  const existingContexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
   });
-
-  // Send stream ID to offscreen document
-  const streamId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
-  });
-
-  // Message the offscreen document via chrome.runtime messaging
-  chrome.runtime.sendMessage({
-    type: 'START_CAPTURE',
-    streamId: streamId
-  });
-}
-
-// offscreen.js - Handle capture in offscreen document
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'START_CAPTURE') {
-    startCapture(message.streamId);
-  }
-});
-
-async function startCapture(streamId) {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId
-      }
-    },
-    video: {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId
-      }
-    }
-  });
-
-  // Process stream in offscreen document
-  const recorder = new MediaRecorder(stream);
   
-  recorder.ondataavailable = (event) => {
-    // Handle recorded data
-    saveRecordingData(event.data);
-  };
-
-  recorder.start();
-}
-```
-
-### Multiple Stream IDs
-
-You can generate multiple stream IDs for different purposes:
-
-```javascript
-// Generate separate IDs for preview and recording
-async function setupDualStream(tabId) {
-  // ID for preview (lower quality)
-  const previewId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
-  });
-
-  // ID for recording (full quality)
-  const recordId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
-  });
-
-  return { previewId, recordId };
-}
-```
-
-## Building a Complete Tab Recording Extension
-
-### Project Structure
-
-```
-tab-recorder/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   └── popup.js
-├── content/
-│   └── content.js
-└── offscreen/
-    └── offscreen.html
-```
-
-### manifest.json
-
-```json
-{
-  "name": "Tab Recorder",
-  "version": "1.0",
-  "manifest_version": 3,
-  "permissions": [
-    "tabCapture",
-    "offscreen"
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
-  "background": {
-    "service_worker": "background.js"
-  }
-}
-```
-
-### background.js - Main Extension Logic
-
-```javascript
-// background.js
-let mediaRecorder = null;
-let recordedChunks = [];
-let currentStreamId = null;
-
-// Handle extension icon click
-chrome.action.onClicked.addListener(async (tab) => {
-  if (mediaRecorder && mediaRecorder.state === 'recording') {
-    stopRecording();
-  } else {
-    await startRecording(tab.id);
-  }
-});
-
-// Start tab recording
-async function startRecording(tabId) {
-  try {
-    // Get stream ID for the tab
-    currentStreamId = await chrome.tabCapture.getMediaStreamId({
-      targetTabId: tabId
+  if (existingContexts.length === 0) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: ['USER_INTERACTION'],
+      justification: 'Recording tab capture for later download'
     });
+  }
+}
+```
 
-    // Create capture stream
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        mandatory: {
-          chromeMediaSource: 'tab',
-          chromeMediaSourceId: currentStreamId
-        }
-      },
+Then use the stream ID in your offscreen document:
+
+```javascript
+// In offscreen.html/offscreen.js
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'startCapture') {
+    const streamId = message.streamId;
+    
+    navigator.mediaDevices.getUserMedia({
       video: {
-        mandatory: {
-          chromeMediaSource: 'tab',
-          chromeMediaSourceId: currentStreamId
-        }
-      }
-    });
-
-    // Create MediaRecorder
-    mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm;codecs=vp9'
-    });
-
-    recordedChunks = [];
-
-    mediaRecorder.ondataavailable = (event) => {
-      if (event.data.size > 0) {
-        recordedChunks.push(event.data);
-      }
-    };
-
-    mediaRecorder.onstop = () => {
-      // Create and download the recording
-      const blob = new Blob(recordedChunks, { type: 'video/webm' });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `recording-${Date.now()}.webm`;
-      a.click();
-      
-      URL.revokeObjectURL(url);
-      
-      // Stop all tracks
-      stream.getTracks().forEach(track => track.stop());
-    };
-
-    // Start recording
-    mediaRecorder.start(1000);
-    
-    // Update badge to show recording state
-    chrome.action.setBadgeText({ text: 'REC' });
-    chrome.action.setBadgeBackgroundColor({ color: '#ff0000' });
-    
-    // Notify content script
-    chrome.tabs.sendMessage(tabId, { recording: true });
-
-  } catch (error) {
-    console.error('Recording error:', error);
-  }
-}
-
-// Stop recording
-function stopRecording() {
-  if (mediaRecorder && mediaRecorder.state === 'recording') {
-    mediaRecorder.stop();
-    
-    chrome.action.setBadgeText({ text: '' });
-  }
-}
-
-// Handle messages from popup
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'getStatus') {
-    sendResponse({ 
-      recording: mediaRecorder && mediaRecorder.state === 'recording' 
-    });
-  }
-});
-```
-
-### popup/popup.html
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body {
-      width: 200px;
-      padding: 16px;
-      font-family: system-ui, sans-serif;
-    }
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #ccc;
-    }
-    .indicator.recording {
-      background: #ff0000;
-      animation: pulse 1s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    button {
-      width: 100%;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    button.start {
-      background: #4CAF50;
-      color: white;
-    }
-    button.stop {
-      background: #f44336;
-      color: white;
-    }
-  </style>
-</head>
-<body>
-  <div class="status">
-    <div class="indicator" id="indicator"></div>
-    <span id="statusText">Ready to record</span>
-  </div>
-  <button id="recordBtn" class="start">Start Recording</button>
-  <script src="popup.js"></script>
-</body>
-</html>
-```
-
-### popup/popup.js
-
-```javascript
-// popup/popup.js
-const indicator = document.getElementById('indicator');
-const statusText = document.getElementById('statusText');
-const recordBtn = document.getElementById('recordBtn');
-
-// Check current recording status
-async function checkStatus() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
-  chrome.runtime.sendMessage({ action: 'getStatus' }, (response) => {
-    if (response && response.recording) {
-      indicator.classList.add('recording');
-      statusText.textContent = 'Recording...';
-      recordBtn.textContent = 'Stop Recording';
-      recordBtn.classList.remove('start');
-      recordBtn.classList.add('stop');
-    }
-  });
-}
-
-// Toggle recording on button click
-recordBtn.addEventListener('click', async () => {
-  // The background script handles the actual recording
-  // This just triggers the action click
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.action.setPopup({ tabId: tab.id, popup: '' }); // Remove popup temporarily
-  chrome.action.performAction(tab.id, 'click'); // Trigger background handler
-  window.close();
-});
-
-checkStatus();
-```
-
-## Best Practices and Troubleshooting
-
-### Performance Optimization
-
-```javascript
-// Optimize capture performance
-async function optimizedCapture(tabId) {
-  const streamId = await chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
-  });
-
-  return await chrome.tabCapture.capture({
-    audioConstraints: {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId,
-        // Reduce audio quality for performance
-        sampleRate: 44100,
-        channels: 1
-      }
-    },
-    videoConstraints: {
-      mandatory: {
-        chromeMediaSource: 'tab',
-        chromeMediaSourceId: streamId,
-        maxWidth: 1280,
-        maxHeight: 720,
-        maxFrameRate: 30
-      }
-    }
-  });
-}
-```
-
-### Common Errors and Solutions
-
-```javascript
-// Error handling patterns
-async function safeCapture(tabId) {
-  try {
-    // Check if tab is capturable
-    const captureInfo = await chrome.tabCapture.getCapturedTabs();
-    const tabInfo = captureInfo.find(t => t.id === tabId);
-    
-    if (tabInfo && tabInfo.status === 'pending') {
-      throw new Error('Tab capture is pending. Please wait.');
-    }
-
-    const streamId = await chrome.tabCapture.getMediaStreamId({
-      targetTabId: tabId
-    });
-
-    if (!streamId) {
-      throw new Error('Failed to generate stream ID');
-    }
-
-    return await chrome.tabCapture.capture({
-      videoConstraints: {
         mandatory: {
           chromeMediaSource: 'tab',
           chromeMediaSourceId: streamId
         }
       }
+    }).then(stream => {
+      // Process the stream
+      sendResponse({ success: true });
     });
+    
+    return true; // Keep channel open for async response
+  }
+});
+```
 
-  } catch (error) {
-    if (error.message.includes('Permission denied')) {
-      console.error('User denied capture permission');
-    } else if (error.message.includes('Tab not found')) {
-      console.error('Tab no longer exists');
-    } else {
-      console.error('Capture error:', error);
+## Building a Tab Recording Extension
+
+Now let's put everything together to build a complete tab recording extension. This example demonstrates best practices and real-world implementation patterns.
+
+### Popup Implementation
+
+```javascript
+// popup.js
+document.addEventListener('DOMContentLoaded', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  
+  document.getElementById('startBtn').addEventListener('click', async () => {
+    // Request capture
+    const stream = await chrome.tabCapture.capture({
+      audio: true,
+      video: true
+    });
+    
+    if (stream) {
+      // Store stream reference for later use
+      chrome.storage.local.set({ 
+        captureStream: true,
+        tabId: tab.id 
+      });
+      
+      // Notify background script
+      chrome.runtime.sendMessage({
+        action: 'captureStarted',
+        tabId: tab.id
+      });
+      
+      updateUI('recording');
     }
+  });
+  
+  document.getElementById('stopBtn').addEventListener('click', () => {
+    chrome.runtime.sendMessage({ action: 'stopCapture' });
+    updateUI('stopped');
+  });
+});
+
+function updateUI(state) {
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  
+  if (state === 'recording') {
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+  } else {
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  }
+}
+```
+
+### Background Script Handler
+
+```javascript
+// background.js
+let currentRecorder = null;
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'captureStarted') {
+    handleCaptureStart(message.tabId);
+  } else if (message.action === 'stopCapture') {
+    handleCaptureStop();
+  }
+});
+
+async function handleCaptureStart(tabId) {
+  const stream = await chrome.tabCapture.capture({
+    audio: true,
+    video: true
+  });
+  
+  currentRecorder = new TabRecorder(stream);
+  currentRecorder.startRecording();
+  
+  // Store recorder reference
+  chrome.storage.local.set({ 
+    recorderActive: true 
+  });
+}
+
+async function handleCaptureStop() {
+  if (currentRecorder) {
+    await currentRecorder.downloadRecording(`tab-recording-${Date.now()}.webm`);
+    currentRecorder = null;
+    
+    chrome.storage.local.set({ 
+      recorderActive: false 
+    });
+  }
+}
+```
+
+## Advanced Patterns and Best Practices
+
+### Error Handling
+
+Always implement robust error handling for capture operations:
+
+```javascript
+async function safeCapture(tabId) {
+  try {
+    // Check if tab exists
+    const tab = await chrome.tabs.get(tabId);
+    if (!tab.id) {
+      throw new Error('Tab not found');
+    }
+    
+    // Attempt capture
+    const stream = await chrome.tabCapture.capture({
+      audio: true,
+      video: true
+    });
+    
+    if (!stream) {
+      throw new Error('Capture returned no stream');
+    }
+    
+    // Handle stream errors
+    stream.getTracks().forEach(track => {
+      track.onended = () => {
+        console.log('Track ended:', track.kind);
+        handleTrackEnd(track);
+      };
+      
+      track.onmute = () => {
+        console.log('Track muted:', track.kind);
+      };
+      
+      track.onunmute = () => {
+        console.log('Track unmuted:', track.kind);
+      };
+    });
+    
+    return stream;
+    
+  } catch (error) {
+    console.error('Capture error:', error);
     throw error;
   }
+}
+
+function handleTrackEnd(track) {
+  // Clean up resources
+  if (track.kind === 'video') {
+    // Handle video track end
+  } else if (track.kind === 'audio') {
+    // Handle audio track end
+  }
+}
+```
+
+### Performance Optimization
+
+For optimal performance when capturing tabs:
+
+```javascript
+function optimizeCaptureSettings() {
+  return {
+    video: {
+      mandatory: {
+        // Request only what's needed
+        minWidth: 1280,
+        minHeight: 720,
+        maxFrameRate: 30, // Reduce for better performance
+        // Use efficient codec
+        chromeMediaSource: 'tab'
+      }
+    },
+    audio: {
+      mandatory: {
+        chromeMediaSource: 'tab',
+        // Disable echo cancellation if not needed
+        echoCancellation: false,
+        // Disable noise suppression for better CPU usage
+        noiseSuppression: false
+      }
+    }
+  };
 }
 ```
 
 ### Security Considerations
 
+When implementing tab capture, keep these security best practices in mind:
+
+1. **Always require user gesture** - Never start capture without explicit user action
+2. **Validate tab ID** - Ensure the tab ID is valid before attempting capture
+3. **Clean up resources** - Always stop tracks and release resources when done
+4. **Handle permissions gracefully** - Check if the user has granted necessary permissions
+5. **Secure the stream** - Don't share stream IDs across untrusted contexts
+
 ```javascript
-// Secure capture implementation
-function secureCaptureHandler(tabId, requestedSources) {
-  // Validate tab exists
-  // Note: Additional validation logic here
+async function secureCapture(tabId) {
+  // Validate tab exists and is accessible
+  try {
+    await chrome.tabs.get(tabId);
+  } catch (error) {
+    throw new Error('Cannot capture this tab');
+  }
   
-  // Only capture with explicit user action
-  return chrome.tabCapture.getMediaStreamId({
-    targetTabId: tabId
+  // Request capture with user gesture context
+  return chrome.tabCapture.capture({
+    audio: true,
+    video: true
   });
 }
 ```
 
 ## Conclusion
 
-The Chrome Tab Capture API provides powerful capabilities for capturing tab content with both audio and video. Key takeaways:
+The Chrome Extension Tab Capture API is an incredibly powerful tool that enables a wide range of creative use cases. From building screen recording tools to creating collaborative applications, this API provides the foundation for rich media experiences within Chrome extensions.
 
-1. **Permissions**: Requires `tabCapture` permission in manifest.json
-2. **Capture Methods**: Use `capture()` for direct streaming or `getMediaStreamId()` for ID-based capture
-3. **Media Processing**: Work with standard MediaStream APIs for processing and recording
-4. **User Awareness**: Chrome automatically shows capture indicators; always inform users when recording
-5. **Offscreen Documents**: Use offscreen documents for persistent capture in Manifest V3
-6. **Best Practices**: Implement proper error handling, optimize for performance, and respect user privacy
+Key takeaways from this guide:
+- The API requires the `"tabCapture"` permission in your manifest
+- Always capture in response to user gestures for better UX
+- Use `getMediaStreamId()` for Manifest V3 compatibility with offscreen documents
+- Implement proper error handling and resource cleanup
+- Respect the recording indicator that Chrome displays to users
+- Follow security best practices when handling captured media
 
-For more information, refer to the official Chrome Extensions documentation and the chrome.tabCapture API reference.
+With these patterns and best practices, you're well-equipped to build robust tab capture extensions that provide excellent user experiences while respecting browser security and performance considerations.
