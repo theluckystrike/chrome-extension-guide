@@ -15,16 +15,18 @@ The `chrome.management` API provides powerful capabilities for managing installe
 ### Required Permissions {#required-permissions}
 
 To use the `chrome.management` API, you need to declare the `"management"` permission in your extension's `manifest.json`:
+# Chrome Management API
 
+## Overview
+The `chrome.management` API provides powerful capabilities for managing installed extensions and apps within Chrome. It enables querying extension information, controlling enabled/disabled state, uninstalling extensions, and listening for installation events. Essential for building extension managers, enterprise policy tools, and productivity applications.
+
+## Required Permission
 ```json
 {
-  "name": "My Extension Manager",
-  "version": "1.0",
-  "permissions": [
-    "management"
-  ]
+  "permissions": ["management"]
 }
 ```
+Note: The "management" permission is considered a "strong" permission requiring review during Chrome Web Store submission.
 
 ### Permission Scope {#permission-scope}
 
@@ -40,80 +42,47 @@ The `"management"` permission is considered a "strong" permission and requires r
 ### Listing All Installed Extensions {#listing-all-installed-extensions}
 
 The `chrome.management.getAll()` method returns an array of all installed extensions and apps:
+## Core Methods
 
+### chrome.management.getAll()
+Returns all installed extensions and apps:
 ```javascript
-// Get all installed extensions and apps
 async function getAllExtensions() {
   const extensions = await chrome.management.getAll();
-  
-  // Filter to show only extensions (not apps)
   const exts = extensions.filter(ext => ext.type === 'extension');
-  
-  // Filter to show only enabled extensions
   const enabled = extensions.filter(ext => ext.enabled);
-  
   return { all: extensions, extensionsOnly: exts, enabled };
 }
-
-// Log extension details
-getAllExtensions().then(({ all }) => {
-  all.forEach(ext => {
-    console.log(`${ext.name} (${ext.id})`);
-    console.log(`  Version: ${ext.version}`);
-    console.log(`  Enabled: ${ext.enabled}`);
-    console.log(`  Permissions: ${ext.permissions.join(', ')}`);
-  });
-});
 ```
 
 ### Getting a Specific Extension {#getting-a-specific-extension}
 
 Use `chrome.management.get()` with an extension ID to get details about a specific extension:
 
+### chrome.management.get(id)
+Get info about a specific extension:
 ```javascript
-// Get info for a specific extension by ID
 async function getExtensionInfo(extensionId) {
   try {
-    const ext = await chrome.management.get(extensionId);
-    return ext;
+    return await chrome.management.get(extensionId);
   } catch (error) {
     console.error('Extension not found:', error);
     return null;
   }
 }
-
-// Example: Get info about the current extension
-const myInfo = await chrome.management.get(chrome.runtime.id);
 ```
 
 ### Extension Info Object Structure {#extension-info-object-structure}
 
 The `ExtensionInfo` object returned by the API contains comprehensive information:
 
+### chrome.management.getSelf()
+Get info about your own extension:
 ```javascript
-{
-  id: "abcdefghijklmnopqrstuvwxyz123456",  // Unique identifier
-  name: "Extension Name",                   // Display name
-  version: "1.0.0",                         // Version string
-  description: "What this extension does", // Description
-  permissions: ["tabs", "storage"],         // Granted permissions
-  hostPermissions: ["https://*/*"],        // Host permissions
-  icons: [                                   // Available icons
-    { size: 16, url: "icon16.png" },
-    { size: 48, url: "icon48.png" },
-    { size: 128, url: "icon128.png" }
-  ],
-  enabled: true,                            // Current enabled state
-  disabledReason: null,                    // Reason if disabled (permissions, etc.)
-  type: "extension",                        // "extension", "theme", "app"
-  installType: "normal",                    // "normal", "development", "sideload"
-  mayDisable: true,                         // Whether user can disable
-  appLaunchUrl: null,                       // For apps: launch URL
-  homepageUrl: "https://example.com",       // Homepage if set
-  updateUrl: "https://example.com/update",  // Update URL
-  offlineEnabled: false,                    // Works offline
-  optionsUrl: "options.html",               // Options page URL
+async function getSelfInfo() {
+  return await chrome.management.getSelf();
 }
+// Returns: { id, version, name, enabled, mayDisable, installType, ... }
 ```
 
 ## Working with Extension Icons {#working-with-extension-icons}
@@ -185,11 +154,13 @@ async function disableExtension(extensionId) {
 }
 
 // Toggle extension state
+### chrome.management.setEnabled(id, enabled)
+Enable or disable an extension:
+```javascript
 async function toggleExtension(extensionId) {
   const ext = await chrome.management.get(extensionId);
   await chrome.management.setEnabled(extensionId, !ext.enabled);
 }
-```
 
 ### Checking Can Enable/Disable {#checking-can-enabledisable}
 
@@ -217,12 +188,16 @@ if (!canDisable) {
 
 Some extensions can be disabled programmatically with a reason:
 
-```javascript
-// Disable with a specific reason (Manifest V3)
-async function disableWithReason(extensionId, reason) {
-  await chrome.management.setEnabled(extensionId, false, { enabled: false, reason });
+async function disableExtension(extensionId) {
+  await chrome.management.setEnabled(extensionId, false);
 }
 ```
+
+### chrome.management.uninstall() and uninstallSelf()
+Uninstall extensions programmatically:
+```javascript
+// Uninstall another extension (shows confirmation dialog)
+await chrome.management.uninstall(extensionId, { showConfirmDialog: true });
 
 ## Uninstalling Extensions {#uninstalling-extensions}
 
@@ -272,20 +247,19 @@ async function silentUninstall(extensionId) {
 Extensions can uninstall themselves:
 
 ```javascript
-// Extension uninstalls itself
-function uninstallSelf() {
-  chrome.management.uninstallSelf((result) => {
-    if (chrome.runtime.lastError) {
-      console.error('Uninstall failed:', chrome.runtime.lastError);
-    } else {
-      console.log('Self-uninstall successful');
-    }
-  });
-}
+// Silent uninstall (enterprise scenarios)
+await chrome.management.uninstall(extensionId, { showConfirmDialog: false });
 
-// With confirmation dialog
-function uninstallSelfWithConfirm() {
-  chrome.management.uninstallSelf({ showConfirmDialog: true });
+// Extension uninstalls itself
+chrome.management.uninstallSelf({ showConfirmDialog: true });
+```
+
+### chrome.management.getPermissionWarningsById(id)
+Get permission warnings before installation:
+```javascript
+async function checkPermissionWarnings(extensionId) {
+  const warnings = await chrome.management.getPermissionWarningsById(extensionId);
+  console.log('Permission warnings:', warnings);
 }
 ```
 
@@ -294,17 +268,13 @@ function uninstallSelfWithConfirm() {
 The Management API provides several events for monitoring extension state changes:
 
 ### onInstalled Event {#oninstalled-event}
+## Events
 
+### onInstalled
 Listen for new extension installations:
-
 ```javascript
 chrome.management.onInstalled.addListener((extensionInfo) => {
-  console.log('Extension installed:', extensionInfo.name);
-  console.log('ID:', extensionInfo.id);
-  console.log('Version:', extensionInfo.version);
-  
-  // Send notification to user
-  showNotification(`New extension installed: ${extensionInfo.name}`);
+  console.log('Installed:', extensionInfo.name, extensionInfo.id);
 });
 ```
 
@@ -312,12 +282,11 @@ chrome.management.onInstalled.addListener((extensionInfo) => {
 
 Listen for extension uninstallations:
 
+### onUninstalled
+Listen for uninstallations:
 ```javascript
 chrome.management.onUninstalled.addListener((extensionId) => {
-  console.log('Extension uninstalled:', extensionId);
-  
-  // Clean up any stored data related to this extension
-  cleanupExtensionData(extensionId);
+  console.log('Uninstalled:', extensionId);
 });
 ```
 
@@ -325,14 +294,12 @@ chrome.management.onUninstalled.addListener((extensionId) => {
 
 Listen for extensions being enabled:
 
+### onEnabled / onDisabled
+Listen for state changes:
 ```javascript
 chrome.management.onEnabled.addListener((extensionInfo) => {
-  console.log('Extension enabled:', extensionInfo.name);
-  
-  // Update your extension's internal state
-  updateEnabledExtensionsList();
+  console.log('Enabled:', extensionInfo.name);
 });
-```
 
 ### onDisabled Event {#ondisabled-event}
 
@@ -340,20 +307,16 @@ Listen for extensions being disabled:
 
 ```javascript
 chrome.management.onDisabled.addListener((extensionInfo) => {
-  console.log('Extension disabled:', extensionInfo.name);
-  console.log('Reason:', extensionInfo.disabledReason);
-  
-  // Notify user if extension was disabled unexpectedly
-  if (extensionInfo.disabledReason === 'permissions_increase') {
-    showWarning('Extension disabled due to new permissions required');
-  }
+  console.log('Disabled:', extensionInfo.name, extensionInfo.disabledReason);
 });
 ```
 
 ### Complete Event Listener Setup {#complete-event-listener-setup}
 
 Here's a comprehensive example combining all events:
+## Use Cases
 
+### Extension Manager Dashboard
 ```javascript
 class ExtensionEventMonitor {
   constructor() {
@@ -418,153 +381,81 @@ Here's a full example of building an extension manager dashboard:
 ```javascript
 // Dashboard state management
 class ExtensionDashboard {
+class ExtensionManager {
   constructor() {
     this.extensions = [];
-    this.filter = 'all'; // all, enabled, disabled
-    this.sortBy = 'name';
+    this.load();
+    this.setupListeners();
   }
-  
-  async loadExtensions() {
+
+  async load() {
     this.extensions = await chrome.management.getAll();
     this.render();
   }
-  
-  filterExtensions() {
-    let filtered = [...this.extensions];
-    
-    // Apply filter
-    if (this.filter === 'enabled') {
-      filtered = filtered.filter(ext => ext.enabled);
-    } else if (this.filter === 'disabled') {
-      filtered = filtered.filter(ext => !ext.enabled);
-    }
-    
-    // Apply sort
-    filtered.sort((a, b) => {
-      if (this.sortBy === 'name') {
-        return a.name.localeCompare(b.name);
-      } else if (this.sortBy === 'version') {
-        return a.version.localeCompare(b.version);
-      }
-      return 0;
-    });
-    
-    return filtered;
+
+  setupListeners() {
+    chrome.management.onInstalled.addListener(() => this.load());
+    chrome.management.onUninstalled.addListener(() => this.load());
+    chrome.management.onEnabled.addListener(() => this.load());
+    chrome.management.onDisabled.addListener(() => this.load());
   }
-  
+
   render() {
-    const container = document.getElementById('extensions-list');
-    const filtered = this.filterExtensions();
-    
-    container.innerHTML = filtered.map(ext => this.renderExtensionCard(ext)).join('');
-  }
-  
-  renderExtensionCard(ext) {
-    const icon = ext.icons?.[0]?.url || '/default-icon.png';
-    const status = ext.enabled ? 'Enabled' : 'Disabled';
-    
-    return `
-      <div class="extension-card" data-id="${ext.id}">
-        <img src="${icon}" alt="${ext.name}" class="extension-icon">
-        <div class="extension-info">
-          <h3>${ext.name}</h3>
-          <p>${ext.description || 'No description'}</p>
-          <span class="version">v${ext.version}</span>
-        </div>
-        <div class="extension-actions">
-          <span class="status ${ext.enabled ? 'enabled' : 'disabled'}">${status}</span>
-          <button onclick="dashboard.toggleExtension('${ext.id}')">
-            ${ext.enabled ? 'Disable' : 'Enable'}
-          </button>
-          <button onclick="dashboard.uninstallExtension('${ext.id}')" class="danger">
-            Uninstall
-          </button>
-        </div>
-      </div>
-    `;
-  }
-  
-  async toggleExtension(extensionId) {
-    const ext = await chrome.management.get(extensionId);
-    await chrome.management.setEnabled(extensionId, !ext.enabled);
-    await this.loadExtensions();
-  }
-  
-  async uninstallExtension(extensionId) {
-    if (confirm('Are you sure you want to uninstall this extension?')) {
-      await chrome.management.uninstall(extensionId);
-      await this.loadExtensions();
-    }
-  }
-  
-  setFilter(filter) {
-    this.filter = filter;
-    this.render();
-  }
-  
-  setSort(sortBy) {
-    this.sortBy = sortBy;
-    this.render();
+    // Render extension list with enable/disable/uninstall controls
   }
 }
+```
 
-const dashboard = new ExtensionDashboard();
+### Conflict Detection
+Detect extensions with conflicting permissions:
+```javascript
+async function detectConflicts() {
+  const extensions = await chrome.management.getAll();
+  const conflicts = [];
+
+  for (const ext of extensions) {
+    const allPerms = [...ext.permissions, ...ext.hostPermissions];
+    if (allPerms.includes('webRequest') && allPerms.includes('declarativeNetRequest')) {
+      conflicts.push({ ext, issue: 'Multiple blocking APIs detected' });
+    }
+  }
+  return conflicts;
+}
 ```
 
 ### Advanced Dashboard Features {#advanced-dashboard-features}
 
 #### Search and Filter
 
+### Dependency Checking
+Check if required extensions are installed:
 ```javascript
-// Add search functionality
-function searchExtensions(query) {
-  const lowerQuery = query.toLowerCase();
-  
-  return this.extensions.filter(ext => {
-    return ext.name.toLowerCase().includes(lowerQuery) ||
-           ext.description?.toLowerCase().includes(lowerQuery) ||
-           ext.permissions.some(p => p.toLowerCase().includes(lowerQuery));
-  });
-}
+async function checkDependencies(requiredIds) {
+  const extensions = await chrome.management.getAll();
+  const installed = new Set(extensions.map(e => e.id));
 
-// Filter by permissions
-function filterByPermission(permission) {
-  return this.extensions.filter(ext => 
-    ext.permissions.includes(permission) ||
-    ext.hostPermissions.includes(permission)
-  );
-}
-
-// Filter by type
-function filterByType(type) {
-  return this.extensions.filter(ext => ext.type === type);
+  const missing = requiredIds.filter(id => !installed.has(id));
+  return { installed: requiredIds.filter(id => installed.has(id)), missing };
 }
 ```
 
-#### Permission Analysis
+## ExtensionInfo Properties
+Key properties returned by the API:
+- `id`: Unique extension identifier
+- `name`, `version`, `description`: Basic info
+- `enabled`: Current enabled state
+- `permissions`, `hostPermissions`: Granted permissions
+- `icons`: Array of available icon sizes
+- `type`: "extension", "theme", or "app"
+- `installType`: "normal", "development", or "policy"
+- `mayDisable`: Whether user can disable this extension
+- `disabledReason`: Reason if disabled (e.g., "permissions_increase")
 
-```javascript
-// Analyze extension permissions for security review
-async function analyzePermissions(extensionId) {
-  const ext = await chrome.management.get(extensionId);
-  
-  const allPermissions = [...ext.permissions, ...ext.hostPermissions];
-  
-  return {
-    name: ext.name,
-    totalPermissions: allPermissions.length,
-    dangerousPermissions: allPermissions.filter(p => 
-      ['tabs', 'history', 'cookies', 'webRequest', 'debugger', 'pageCapture', 
-       'proxy', 'clipboardRead', 'clipboardWrite', 'geolocation', 'desktopCapture']
-       .includes(p)
-    ),
-    hostAccess: allPermissions.filter(p => p.includes('://')).length,
-    canReadData: allPermissions.some(p => 
-      ['tabs', 'history', 'cookies', 'bookmarks'].includes(p)
-    )
-  };
-}
-```
+## Important Limitations
+1. Cannot manage extensions installed by enterprise policy in some cases
+2. Built-in Chrome extensions cannot be disabled
+3. Self-uninstall always requires user confirmation
+4. Management permission requires Chrome Web Store review
 
 #### Extension Usage Statistics
 
@@ -692,7 +583,8 @@ For more information, see the official [Chrome Management API documentation](htt
 
 - [Management API Reference](../api-reference/management-api.md)
 - [Extension Configuration](../patterns/extension-configuration.md)
--e 
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+## Reference
+Official documentation: https://developer.chrome.com/docs/extensions/reference/api/management
