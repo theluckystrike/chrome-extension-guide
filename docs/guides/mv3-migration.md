@@ -934,6 +934,57 @@ const { user } = await chrome.storage.local.get('user');
 console.log(user); // {...}
 ```
 
+## Using webextension-polyfill for Compatibility
+
+The [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) library provides Promise-based APIs that work across both MV2 and MV3, making it easier to maintain compatibility.
+
+### Installation
+
+```bash
+npm install webextension-polyfill
+```
+
+### Basic Usage
+
+```javascript
+// Import in your background script
+import browser from 'webextension-polyfill';
+
+// Promise-based API - works in both MV2 and MV3
+await browser.storage.local.set({ key: 'value' });
+const result = await browser.storage.local.get('key');
+
+// Query tabs
+const tabs = await browser.tabs.query({ active: true });
+
+// Send messages
+await browser.runtime.sendMessage({ message: 'hello' });
+```
+
+### With TypeScript
+
+```typescript
+import browser from 'webextension-polyfill';
+
+interface MyMessage {
+  type: 'GET_DATA';
+  payload?: unknown;
+}
+
+// Fully typed messaging
+browser.runtime.sendMessage({
+  type: 'GET_DATA',
+  payload: { id: 123 }
+} as MyMessage);
+```
+
+### Benefits
+
+1. **Cross-manifest compatibility**: Same code works in MV2 and MV3
+2. **Promise-based**: Clean async/await syntax
+3. **TypeScript support**: Full type definitions included
+4. **Familiar API**: Matches Firefox extension API
+
 ## Reference
 
 - Official Migration Guide: [developer.chrome.com/docs/extensions/develop/migrate](https://developer.chrome.com/docs/extensions/develop/migrate)
