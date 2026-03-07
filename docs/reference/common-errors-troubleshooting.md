@@ -6,13 +6,13 @@ A practical reference for Chrome extension developers encountering runtime error
 
 The `runtime.lastError` property appears when a Chrome API call fails but the callback does not explicitly handle the error. This is one of the most common warnings seen in the extension console.
 
-**Common causes**
+Common causes
 
 - Calling a Chrome API with an invalid argument, such as a malformed tab ID or an incorrect permission scope
 - Attempting to communicate with a content script that has already been unloaded
 - Using a callback-based API in an async function without proper error handling
 
-**Fixes**
+Fixes
 
 Always check `runtime.lastError` inside every callback from Chrome APIs:
 
@@ -48,13 +48,13 @@ Prefer the Promise-based versions of Chrome APIs when available in Manifest V3.
 
 This error occurs when the extension attempts to send a message but cannot reach the recipient. It typically manifests as "Could not establish connection. Receiving end does not exist."
 
-**Common causes**
+Common causes
 
 - The content script is not injected into the target page
 - The service worker has terminated and has not been woken yet
 - The background script is still loading when the message is sent
 
-**Troubleshooting steps**
+Troubleshooting steps
 
 1. Verify the content script is declared in `manifest.json` and matches the target URL patterns
 2. Check that the target tab is fully loaded before sending messages
@@ -80,11 +80,11 @@ For service workers, acknowledge that they may be dormant. Implement retry logic
 
 This error appears when trying to use a context that has been destroyed, typically after an extension update or when a page refresh invalidates the extension's view.
 
-**Detection**
+Detection
 
 The error message reads: "Extension context invalidated" and typically occurs in message handlers or when accessing extension APIs from a stale context.
 
-**Recovery strategies**
+Recovery strategies
 
 - Implement try/catch blocks around API calls that may access invalidated contexts
 - Use a health-check function before performing critical operations:
@@ -107,14 +107,14 @@ async function isContextValid() {
 
 Manifest V3 uses service workers instead of background pages, and registration can fail for several reasons.
 
-**Common causes**
+Common causes
 
 - The service worker file path is incorrect in `manifest.json`
 - Syntax errors in the service worker file prevent execution
 - The service worker exceeds the 128KB compressed limit for initial load (Chrome will still load it but may terminate it aggressively)
 - Memory pressure causes Chrome to terminate the worker
 
-**Resolutions**
+Resolutions
 
 - Double-check the `background.service_worker` path in the manifest matches the actual file location
 - Use the "Errors" and "Warnings" tabs in `chrome://extensions` to see specific failure reasons
@@ -135,7 +135,7 @@ self.addEventListener('activate', (event) => {
 
 This CSP violation occurs when the extension attempts to run inline JavaScript, which is prohibited by Chrome's content security policy for extensions.
 
-**Fixes**
+Fixes
 
 1. Move all inline scripts to separate files and load them via `<script src="...">`
 2. For content scripts, use programmatic injection with `chrome.scripting.executeScript` instead of declaring scripts in the manifest
@@ -157,7 +157,7 @@ chrome.scripting.executeScript({
 
 Extensions can make cross-origin requests that bypass CORS when using the appropriate permissions, but misconfiguration leads to blocks.
 
-**Solutions**
+Solutions
 
 - Add the target host to the `permissions` array in `manifest.json`:
 
@@ -185,7 +185,7 @@ chrome.runtime.sendMessage({ url: 'https://api.example.com/data' }, (response) =
 
 This error occurs when the sender closes the message channel before the receiver responds, or when the receiver's message port becomes invalid.
 
-**Async fixes**
+Async fixes
 
 - Use `chrome.runtime.sendNativeMessage` with proper Promise handling
 - Implement a timeout pattern to avoid waiting indefinitely:
@@ -216,7 +216,7 @@ function sendMessageWithTimeout(message, timeout = 5000) {
 
 When using `chrome.storage.local` or `chrome.storage.sync`, you are limited to approximately 5MB for sync and 10MB for local storage (exact limits vary).
 
-**Cleanup approaches**
+Cleanup approaches
 
 - Implement a periodic cleanup routine that removes old data:
 
@@ -242,14 +242,14 @@ async function cleanupOldData() {
 
 This warning appears when Chrome detects that an extension's files have been modified outside of the expected update mechanism.
 
-**Causes**
+Causes
 
 - Manual editing of extension files in the profile directory
 - Antivirus or disk utilities modifying extension files
 - Crashed update process leaving partial files
 - Loading an unpacked extension from a directory that was moved or edited
 
-**Resolution**
+Resolution
 
 - Uninstall and reinstall the extension from the Chrome Web Store
 - For development, use `chrome://extensions` in developer mode and click "Reload" rather than modifying files directly
@@ -259,7 +259,7 @@ This warning appears when Chrome detects that an extension's files have been mod
 
 Extensions can declare permissions that users must approve, but some permissions are not granted automatically and require explicit user action.
 
-**Handling patterns**
+Handling patterns
 
 - Use optional permissions for features that are not essential:
 
