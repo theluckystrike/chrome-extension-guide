@@ -350,3 +350,9 @@ The chrome.idle API provides essential functionality:
 4. **Three states** - active, idle, and locked
 
 Use these capabilities to implement auto-save, session timeouts, away status, and more.
+
+## See Also
+
+- [Idle Detection Patterns](../patterns/idle-detection.md) - Advanced patterns and production-ready implementations for idle detection
+- [Power Management Guide](./power-management.md) - Complementary guide for power-aware extension development
+- [Background Patterns](./background-patterns.md) - Best practices for background service workers
