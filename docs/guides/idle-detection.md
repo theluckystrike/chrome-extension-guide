@@ -363,7 +363,11 @@ Use these capabilities to implement auto-save, session timeouts, away status, an
 
 - [Idle API Reference](../api-reference/idle.md)
 - [Power Management](../guides/power-management.md)
--e 
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+## See Also
+
+- [Idle Detection Patterns](../patterns/idle-detection.md) - Advanced patterns and production-ready implementations for idle detection
+- [Power Management Guide](./power-management.md) - Complementary guide for power-aware extension development
+- [Background Patterns](./background-patterns.md) - Best practices for background service workers
