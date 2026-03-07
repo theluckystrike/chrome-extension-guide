@@ -92,6 +92,21 @@ if (!result.granted) {
 }
 ```
 
+## TEMPLATES
+
+Looking for a starting point? The [Chrome Extension Toolkit](https://github.com/theluckystrike/chrome-extension-toolkit) features 10 fully configured starter repositories:
+
+- [React Starter](https://github.com/theluckystrike/chrome-extension-react-starter)
+- [Svelte Starter](https://github.com/theluckystrike/chrome-extension-svelte-starter)
+- [Vue Starter](https://github.com/theluckystrike/chrome-extension-vue-starter)
+- [Vanilla TS Starter](https://github.com/theluckystrike/chrome-extension-vanilla-ts-starter)
+- [Content Script Starter](https://github.com/theluckystrike/chrome-extension-content-script-starter)
+- [Popup Starter](https://github.com/theluckystrike/chrome-extension-popup-starter)
+- [DevTools Starter](https://github.com/theluckystrike/chrome-extension-devtools-starter)
+- [Side Panel Starter](https://github.com/theluckystrike/chrome-extension-side-panel-starter)
+- [Full-Stack Starter](https://github.com/theluckystrike/chrome-extension-full-stack)
+- [Minimal MV3 Starter](https://github.com/theluckystrike/chrome-extension-mv3-minimal)
+
 ## INSTALLATION
 
 ```bash
