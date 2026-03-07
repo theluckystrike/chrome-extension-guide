@@ -92,6 +92,10 @@ if (!result.granted) {
 }
 ```
 
+## PACKAGE CATALOG
+
+Browse the complete **[Package Catalog](docs/package-catalog.md)** — every `@theluckystrike` package organized by category: Storage, Tabs & Windows, UI Components, Messaging, Security, Browser APIs, System APIs, and Utilities.
+
 ## INTEGRATION EXAMPLES
 
 See [examples/](examples/) for complete working examples using multiple packages together:
