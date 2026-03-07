@@ -1,634 +1,746 @@
-# Chrome Extension Page Capture API
+# Page Capture API Guide
 
-The Chrome Extension Page Capture API provides powerful capabilities for saving web pages locally in MHTML format. This guide explores how to use the chrome.pageCapture API to create extensions that can archive web pages for offline reading, implement bookmark-like functionality, or build content backup tools.
+## Overview
 
-## Overview of chrome.pageCapture
+The `chrome.pageCapture` API enables Chrome extensions to save web pages as MHTML (MIME HTML) format. MHTML is a web page archive format that packages all resources (images, CSS, JavaScript) into a single file, making it ideal for offline viewing and archiving purposes.
 
-The chrome.pageCapture API allows extensions to capture the contents of a tab and save them as a MHTML (MIME HTML) file. MHTML is a web page archive format that bundles all resources (images, CSS, JavaScript) into a single file, making it perfect for offline storage and sharing.
+- Requires `"pageCapture"` permission (cross-ref `docs/permissions/page-capture.md`)
+- Saves pages as MHTML - a self-contained format that works offline
+- Only works in extension context (background scripts, content scripts with proper messaging)
+- Cannot be used directly from web pages - requires extension mediation
 
-### Key Features
+## Permissions
 
-- **Single File Storage**: All page resources are embedded in one MHTML file
-- **Self-Contained**: No external dependencies when viewing offline
-- **Faithful Reproduction**: Preserves the visual appearance of the original page
-- **Simple Integration**: Works seamlessly with other Chrome APIs
-
-### Permissions Required
-
-To use the pageCapture API, you need to declare the `"pageCapture"` permission in your extension's manifest:
+### Manifest Configuration
 
 ```json
 {
   "name": "Page Capture Extension",
-  "version": "1.0.0",
+  "version": "1.0",
   "permissions": [
-    "pageCapture"
+    "pageCapture",
+    "downloads"
   ],
-  "manifest_version": 3
+  "host_permissions": [
+    "<all_urls>"
+  ]
 }
 ```
 
-The `"pageCapture"` permission is required to use the API. The `"tabs"` permission is not needed for `saveAsMHTML()` itself, but you may need it if you want to access `tab.url` or `tab.title` properties for other purposes.
+### Important Permission Notes
 
-## Understanding MHTML Format
+- The `pageCapture` permission is a "host permission" in Manifest V3 - it must be declared in `host_permissions` for full functionality
+- You need `"<all_urls>"` or specific host patterns to capture pages from any website
+- The `activeTab` permission can also be used for tab-specific capture without broad URL access
+- Unlike some APIs, pageCapture does NOT require user gesture (click) to function
 
-MHTML (MIME HTML) is specified in RFC 2557 and provides a way to combine multiple resources (HTML, images, CSS, JavaScript) into a single file. The format uses MIME multipart messages to embed resources.
+## Saving Pages as MHTML
 
-### MHTML Structure
-
-An MHTML file has the following structure:
-
-```
-MIME-Version: 1.0
-Content-Type: multipart/related; boundary=----boundary
-
-------boundary
-Content-Type: text/html
-Content-Location: https://example.com/page.html
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Example Page</title>
-</head>
-<body>
-  <p>Page content here</p>
-</body>
-</html>
-
-------boundary
-Content-Type: image/png
-Content-Location: https://example.com/image.png
-
-[Base64 encoded image data]
-------boundary--
-```
-
-### Advantages for Extension Development
-
-1. **Offline Access**: Users can view captured pages without internet
-2. **Portability**: Single file can be shared via email or cloud storage
-3. **Preservation**: Captures dynamic content at a point in time
-4. **Storage Efficiency**: Compression reduces overall file size
-
-## Capturing a Page
-
-The primary method in the pageCapture API is `saveAsMHTML()`, which captures a tab's content and saves it as an MHTML blob.
-
-### Basic Capture Implementation
+### The saveAsMHTML Method
 
 ```javascript
-// background.js (Service Worker)
-chrome.action.onClicked.addListener(async (tab) => {
-  try {
-    // Capture the page
-    const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({
-      tabId: tab.id
-    });
+// Basic usage - capture a specific tab
+function captureTab(tabId) {
+  chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (mhtmlBlob) => {
+    if (chrome.runtime.lastError) {
+      console.error('Capture failed:', chrome.runtime.lastError);
+      return;
+    }
+    
+    // mhtmlBlob is a Blob object containing the MHTML data
+    console.log('Captured MHTML, size:', mhtmlBlob.size);
+  });
+}
 
-    // Convert blob to ArrayBuffer for processing
-    const arrayBuffer = await mhtmlBlob.arrayBuffer();
-    const uint8Array = new Uint8Array(arrayBuffer);
-
-    // Generate filename from tab title and URL
-    const filename = generateFilename(tab.title);
-
-    // Use downloads API to save the file
-    await chrome.downloads.download({
-      url: blobToDataURL(mhtmlBlob, uint8Array),
-      filename: `captures/${filename}.mhtml`,
-      saveAs: true
-    });
-
-    console.log('Page captured successfully');
-  } catch (error) {
-    console.error('Failed to capture page:', error);
+// Capture the active tab
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  if (tabs[0]) {
+    captureTab(tabs[0].id);
   }
 });
+```
 
-// Helper function to convert blob to data URL
-function blobToDataURL(blob, uint8Array) {
-  let binary = '';
-  for (let i = 0; i < uint8Array.length; i++) {
-    binary += String.fromCharCode(uint8Array[i]);
-  }
-  return 'data:application/x-mimearchive;base64,' + btoa(binary);
-}
+### Method Signature
 
-// Generate safe filename from title
-function generateFilename(title) {
-  return title
-    .replace(/[^a-z0-9]/gi, '_')
-    .toLowerCase()
-    .substring(0, 50);
+```typescript
+chrome.pageCapture.saveAsMHTML(
+  options: {
+    tabId: number
+  },
+  callback: (blob: Blob) => void
+)
+```
+
+- `tabId`: The ID of the tab to capture
+- Returns: A Blob containing the MHTML content
+- The MHTML follows RFC 2557 standard for MIME HTML documents
+
+## Blob Handling and Download Creation
+
+### Converting Blob to Download
+
+```javascript
+// Complete example: capture and save
+async function captureAndSave(tabId, filename) {
+  return new Promise((resolve, reject) => {
+    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (mhtmlBlob) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+        return;
+      }
+      
+      // Convert Blob to ArrayBuffer for Downloads API
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const arrayBuffer = reader.result;
+        
+        // Use chrome.downloads to save the file
+        chrome.downloads.download({
+          url: URL.createObjectURL(mhtmlBlob),
+          filename: filename,
+          saveAs: true,
+          conflictAction: 'uniquify'
+        }, (downloadId) => {
+          if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
+          } else {
+            resolve(downloadId);
+          }
+        });
+      };
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(mhtmlBlob);
+    });
+  });
 }
+```
+
+### Alternative: Using createObjectURL
+
+```javascript
+// Simpler approach using URL.createObjectURL
+chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+  const url = URL.createObjectURL(blob);
+  
+  // Create a link and click it to download
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `page-${Date.now()}.mhtml`;
+  a.click();
+  
+  // Clean up
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 ```
 
 ### Handling Large Pages
 
-For pages with many resources, you may want to show progress or handle memory efficiently:
-
 ```javascript
-// background.js
-async function capturePageWithProgress(tabId) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // Get tab info for progress tracking
-      const tab = await chrome.tabs.get(tabId);
-
-      console.log(`Capturing: ${tab.title}`);
-
-      const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({
-        tabId: tabId
-      });
-
-      const size = mhtmlBlob.size;
-      console.log(`Captured ${size.toLocaleString()} bytes`);
-
-      if (size > 10 * 1024 * 1024) {
-        console.warn('Large page captured - may take time to save');
-      }
-
-      resolve({ blob: mhtmlBlob, tab: tab, size: size });
-    } catch (error) {
-      reject(error);
+// Handle large MHTML files with streaming approach
+function captureLargePage(tabId) {
+  chrome.pageCapture.saveAsMHTML({ tabId: tabId }, async (blob) => {
+    // Check blob size first
+    console.log('MHTML size:', blob.size, 'bytes');
+    
+    if (blob.size > 50 * 1024 * 1024) { // 50MB limit
+      console.warn('Large file - may take time to process');
     }
+    
+    // Process in chunks if needed
+    const stream = blob.stream();
+    const reader = stream.getReader();
+    const chunks = [];
+    
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+    }
+    
+    const totalSize = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+    console.log('Total processed:', totalSize, 'bytes');
   });
 }
 ```
 
-## Integration with Downloads API
+## Use Cases
 
-The pageCapture API returns a Blob, which you can save using the downloads API or convert to other formats.
-
-### Saving with Downloads API
+### Offline Reading
 
 ```javascript
-// background.js
-async function saveMHTML(blob, suggestedName) {
-  // Create a unique filename
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const filename = `captures/${suggestedName}_${timestamp}.mhtml`;
-
-  // Convert blob to data URL
-  const dataUrl = await blobToDataUrl(blob);
-
-  // Trigger download
-  const downloadId = await chrome.downloads.download({
-    url: dataUrl,
-    filename: filename,
-    saveAs: true,
-    conflictAction: 'uniquify'
-  });
-
-  return downloadId;
-}
-
-// Convert Blob to data URL
-function blobToDataUrl(blob) {
-  return new Promise((resolve, reject) => {
+// Save page for offline reading
+function saveForOffline(tabId) {
+  chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
+    reader.onload = () => {
+      // Store in extension storage or file system
+      chrome.storage.local.set({
+        [`offline_${tabId}`]: {
+          timestamp: Date.now(),
+          content: reader.result
+        }
+      }, () => {
+        console.log('Page saved for offline reading');
+      });
+    };
     reader.readAsDataURL(blob);
   });
 }
 ```
 
-### Listening for Download Events
+### Archiving
 
 ```javascript
-// background.js
-chrome.downloads.onChanged.addListener((downloadDelta) => {
-  if (downloadDelta.state) {
-    if (downloadDelta.state.current === 'complete') {
-      console.log(`Download completed: ${downloadDelta.id}`);
-    } else if (downloadDelta.state.current === 'interrupted') {
-      console.error(`Download interrupted: ${downloadDelta.id}`);
+// Automatic page archiver
+class PageArchiver {
+  constructor() {
+    this.archivedUrls = new Set();
+  }
+  
+  async archiveTab(tabId, url) {
+    // Check if already archived
+    if (this.archivedUrls.has(url)) {
+      console.log('Already archived:', url);
+      return;
+    }
+    
+    // Capture the page
+    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, async (blob) => {
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const filename = `archive/${this.sanitizeFilename(url)}-${timestamp}.mhtml`;
+      
+      try {
+        const downloadId = await chrome.downloads.download({
+          url: URL.createObjectURL(blob),
+          filename: filename,
+          saveAs: false
+        });
+        
+        this.archivedUrls.add(url);
+        console.log('Archived:', url, 'as', filename);
+      } catch (error) {
+        console.error('Archive failed:', error);
+      }
+    });
+  }
+  
+  sanitizeFilename(url) {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname + urlObj.pathname
+        .replace(/[^a-z0-9]/gi, '_')
+        .substring(0, 100);
+    } catch {
+      return 'unknown';
     }
   }
-});
-
-chrome.downloads.onErased.addListener((downloadId) => {
-  console.log(`Download erased: ${downloadId}`);
-});
-```
-
-## Building a Complete Page Capture Extension
-
-Here's a more complete implementation showing best practices:
-
-### Manifest (manifest.json)
-
-```json
-{
-  "name": "Page Saver",
-  "version": "1.0.0",
-  "description": "Capture and save web pages as MHTML for offline reading",
-  "permissions": [
-    "pageCapture",
-    "tabs",
-    "downloads",
-    "storage"
-  ],
-  "action": {
-    "default_title": "Save this page"
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "manifest_version": 3
 }
 ```
 
-### Background Script (background.js)
+### Evidence Collection
 
 ```javascript
-// Store captured pages metadata
-const STORAGE_KEY = 'captured_pages';
+// Evidence collection for compliance/legal purposes
+class EvidenceCollector {
+  constructor(caseId) {
+    this.caseId = caseId;
+    this.evidence = [];
+  }
+  
+  collectEvidence(tabId, url, notes = '') {
+    return new Promise((resolve) => {
+      chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+        const evidenceRecord = {
+          id: this.generateId(),
+          caseId: this.caseId,
+          url: url,
+          capturedAt: new Date().toISOString(),
+          notes: notes,
+          hash: null, // Would compute SHA-256 hash here
+          size: blob.size
+        };
+        
+        // Save with metadata
+        this.saveEvidence(evidenceRecord, blob).then(() => {
+          this.evidence.push(evidenceRecord);
+          resolve(evidenceRecord);
+        });
+      });
+    });
+  }
+  
+  async saveEvidence(metadata, blob) {
+    const filename = `evidence/${this.caseId}/${metadata.id}.mhtml`;
+    
+    await chrome.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: filename,
+      saveAs: false
+    });
+    
+    // Save metadata separately
+    await chrome.storage.local.set({
+      [`evidence_${metadata.id}`]: metadata
+    });
+  }
+  
+  generateId() {
+    return `EV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  }
+}
+```
+
+## Combining with chrome.downloads
+
+### Complete Workflow Example
+
+```javascript
+// Full-featured page saver with progress tracking
+class PageSaver {
+  constructor() {
+    this.downloads = new Map();
+    this.setupListeners();
+  }
+  
+  setupListeners() {
+    // Track download progress
+    chrome.downloads.onCreated.addListener((downloadItem) => {
+      console.log('Download started:', downloadItem.id);
+      this.downloads.set(downloadItem.id, downloadItem);
+    });
+    
+    chrome.downloads.onChanged.addListener((downloadDelta) => {
+      if (downloadDelta.state) {
+        console.log('Download state:', downloadDelta.state.current);
+        
+        if (downloadDelta.state.current === 'complete') {
+          this.onDownloadComplete(downloadDelta.id);
+        } else if (downloadDelta.state.current === 'interrupted') {
+          this.onDownloadError(downloadDelta.id, 'Download interrupted');
+        }
+      }
+    });
+    
+    chrome.downloads.onErased.addListener((downloadId) => {
+      this.downloads.delete(downloadId);
+    });
+  }
+  
+  async savePage(tabId, options = {}) {
+    const {
+      filename = 'captured-page.mhtml',
+      saveAs = true,
+      autoRename = true
+    } = options;
+    
+    // Step 1: Capture the page
+    const blob = await this.captureMHTML(tabId);
+    
+    // Step 2: Create download
+    const downloadId = await chrome.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: filename,
+      saveAs: saveAs,
+      conflictAction: autoRename ? 'uniquify' : 'overwrite'
+    });
+    
+    return downloadId;
+  }
+  
+  captureMHTML(tabId) {
+    return new Promise((resolve, reject) => {
+      chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve(blob);
+        }
+      });
+    });
+  }
+  
+  onDownloadComplete(downloadId) {
+    console.log('Download complete:', downloadId);
+    this.downloads.get(downloadId);
+  }
+  
+  onDownloadError(downloadId, error) {
+    console.error('Download error:', downloadId, error);
+  }
+}
+```
+
+### Batch Capture
+
+```javascript
+// Capture multiple tabs
+async function captureAllTabs() {
+  const tabs = await chrome.tabs.query({ currentWindow: true });
+  
+  const results = await Promise.allSettled(
+    tabs.map(async (tab, index) => {
+      const blob = await captureMHTML(tab.id);
+      
+      return chrome.downloads.download({
+        url: URL.createObjectURL(blob),
+        filename: `batch/${tab.title.substring(0, 50)}.mhtml`,
+        saveAs: false
+      });
+    })
+  );
+  
+  results.forEach((result, index) => {
+    if (result.status === 'fulfilled') {
+      console.log(`Captured tab ${index}: ${tabs[index].title}`);
+    } else {
+      console.error(`Failed to capture tab ${index}:`, result.reason);
+    }
+  });
+}
+```
+
+## Content Security and Cross-Origin Considerations
+
+### MHTML Security Model
+
+```javascript
+// Understanding MHTML limitations
+function captureConsiderations(tabId, url) {
+  // MHTML has same-origin restrictions
+  // Cross-origin resources may not be embedded properly
+  
+  chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+    // Some resources may be blocked due to CSP
+    // Images from other domains might not load
+    // Fonts and scripts may be restricted
+    
+    console.log('Captured blob size:', blob.size);
+    // Note: This is the raw MHTML, not a processed version
+  });
+}
+```
+
+### Working Around Restrictions
+
+```javascript
+// Use content script to capture with modifications
+// manifest.json
+{
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content-script.js"]
+  }]
+}
+
+// content-script.js - run at document_idle
+function getPageHTML() {
+  // Clone the document
+  const docClone = document.cloneNode(true);
+  
+  // Convert to string (includes all inline content)
+  const html = docClone.documentElement.outerHTML;
+  
+  // Note: This doesn't capture external resources
+  // For full capture, use pageCapture from background
+}
+
+// Better approach: Inject styles to handle cross-origin images
+function enhanceMHTMLCapture(tabId) {
+  // First, inject a content script to prepare the page
+  chrome.scripting.executeScript({
+    target: { tabId: tabId },
+    func: () => {
+      // Make images work with data URLs if possible
+      document.querySelectorAll('img').forEach(img => {
+        // Store original src for reference
+        img.dataset.originalSrc = img.src;
+      });
+    }
+  }, () => {
+    // Then capture
+    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+      // Process the blob
+    });
+  });
+}
+```
+
+### CSP Considerations
+
+```javascript
+// Handle Content Security Policy restrictions
+function captureWithCSPWorkaround(tabId) {
+  // pageCapture itself bypasses some CSP restrictions
+  // but the resulting MHTML might not render properly
+  
+  chrome.pageCapture.saveAsMHTML({ tabId: tabId }, async (blob) => {
+    // Read the MHTML content
+    const text = await blob.text();
+    
+    // Analyze embedded resources
+    const hasExternalResources = text.includes('src="http');
+    const hasInlineScripts = text.includes('<script');
+    
+    console.log({
+      hasExternalResources,
+      hasInlineScripts,
+      totalSize: text.length
+    });
+  });
+}
+```
+
+### Privacy and Data Handling
+
+```javascript
+// Secure handling of captured content
+class SecurePageCapture {
+  constructor() {
+    this.encryptionKey = null; // Would use proper key management
+  }
+  
+  async secureCapture(tabId, url) {
+    // Capture the page
+    const blob = await this.captureMHTML(tabId);
+    const arrayBuffer = await blob.arrayBuffer();
+    
+    // In production, encrypt before storage
+    // const encrypted = await this.encrypt(arrayBuffer);
+    
+    // Store securely
+    await chrome.storage.session.set({
+      [`capture_${Date.now()}`]: {
+        url: url,
+        timestamp: Date.now(),
+        // encrypted: encrypted, // Would store encrypted data
+        size: blob.size
+      }
+    });
+    
+    // Clear blob from memory when done
+    blob.close?.();
+  }
+  
+  // Clean up temporary data
+  cleanup() {
+    chrome.storage.local.get(null, (items) => {
+      const captures = Object.keys(items).filter(k => k.startsWith('capture_'));
+      captures.forEach(key => {
+        chrome.storage.local.remove(key);
+      });
+    });
+  }
+}
+```
+
+## Code Examples
+
+### Complete Extension Example
+
+```javascript
+// background.js - Main extension logic
 
 // Handle toolbar icon click
 chrome.action.onClicked.addListener(async (tab) => {
   try {
-    const result = await captureAndSavePage(tab);
-    await updateStorage(result);
-    showNotification('Page Saved', `Saved: ${tab.title}`);
+    const blob = await saveTabAsMHTML(tab.id);
+    await downloadBlob(blob, `${getFilename(tab.url)}.mhtml`);
+    showNotification('Page captured successfully!');
   } catch (error) {
-    console.error('Capture failed:', error);
-    showNotification('Capture Failed', error.message);
+    showNotification('Capture failed: ' + error.message, 'error');
   }
 });
 
-// Main capture function
-async function captureAndSavePage(tab) {
-  // Capture the page
-  const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({
-    tabId: tab.id
-  });
-
-  // Get page info
-  const tabInfo = await chrome.tabs.get(tab.id);
-
-  // Generate filename
-  const filename = generateSafeFilename(tabInfo.title);
-
-  // Save using downloads API
-  const downloadId = await saveToDownloads(mhtmlBlob, filename);
-
-  // Return metadata
-  return {
-    id: downloadId,
-    url: tabInfo.url,
-    title: tabInfo.title,
-    capturedAt: new Date().toISOString(),
-    filename: `${filename}.mhtml`,
-    size: mhtmlBlob.size
-  };
-}
-
-// Save blob to downloads
-async function saveToDownloads(blob, filename) {
-  const dataUrl = await blobToDataUrl(blob);
-
-  return await chrome.downloads.download({
-    url: dataUrl,
-    filename: `PageSaver/${filename}.mhtml`,
-    saveAs: true,
-    conflictAction: 'uniquify'
-  });
-}
-
-// Update storage with capture metadata
-async function updateStorage(result) {
-  const { captured_pages: existing = [] } = await chrome.storage.local.get(
-    STORAGE_KEY
-  );
-
-  const updated = [result, ...existing].slice(0, 100); // Keep last 100
-
-  await chrome.storage.local.set({
-    [STORAGE_KEY]: updated
-  });
-}
-
-// Generate safe filename
-function generateSafeFilename(title) {
-  return title
-    .replace(/[<>:"/\\|?*]/g, '')
-    .replace(/\s+/g, '_')
-    .substring(0, 60)
-    .toLowerCase();
-}
-
-// Convert blob to data URL
-function blobToDataUrl(blob) {
+// Capture tab as MHTML
+function saveTabAsMHTML(tabId) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
+    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+      } else {
+        resolve(blob);
+      }
+    });
   });
+}
+
+// Download the captured MHTML
+function downloadBlob(blob, filename) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(blob);
+    
+    chrome.downloads.download({
+      url: url,
+      filename: filename,
+      saveAs: true,
+      conflictAction: 'uniquify'
+    }, (downloadId) => {
+      URL.revokeObjectURL(url);
+      
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+      } else {
+        resolve(downloadId);
+      }
+    });
+  });
+}
+
+// Generate filename from URL
+function getFilename(url) {
+  try {
+    const urlObj = new URL(url);
+    const path = urlObj.pathname.split('/').filter(Boolean).join('-') || 'index';
+    const sanitized = path.replace(/[^a-zA-Z0-9-]/g, '_').substring(0, 100);
+    return `${urlObj.hostname}_${sanitized}`;
+  } catch {
+    return `page_${Date.now()}`;
+  }
 }
 
 // Show notification
-function showNotification(title, message) {
+function showNotification(message, type = 'success') {
   chrome.notifications.create({
     type: 'basic',
-    iconUrl: 'icons/icon128.png',
-    title: title,
+    iconUrl: 'icons/icon48.png',
+    title: type === 'success' ? 'Page Capture' : 'Error',
     message: message
   });
 }
 ```
 
-### Popup UI (popup.html)
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body {
-      width: 300px;
-      padding: 16px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    h2 { margin-top: 0; }
-    .recent-captures {
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    .capture-item {
-      padding: 8px;
-      border-bottom: 1px solid #eee;
-    }
-    .capture-item:last-child { border-bottom: none; }
-    .capture-title {
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .capture-meta {
-      font-size: 12px;
-      color: #666;
-    }
-  </style>
-</head>
-<body>
-  <h2>📄 Page Saver</h2>
-  <p>Click the toolbar icon to save any page as MHTML.</p>
-  <h3>Recent Captures</h3>
-  <div class="recent-captures" id="captures"></div>
-  <script src="popup.js"></script>
-</body>
-</html>
-```
-
-### Popup Script (popup.js)
+### Keyboard Shortcut Handler
 
 ```javascript
-document.addEventListener('DOMContentLoaded', async () => {
-  const { captured_pages: captures } = await chrome.storage.local.get(
-    'captured_pages'
-  );
-
-  const container = document.getElementById('captures');
-
-  if (!captures || captures.length === 0) {
-    container.innerHTML = '<p>No captures yet</p>';
-    return;
+// commands.json
+{
+  "commands": {
+    "capture-page": {
+      "suggested_key": "Ctrl+Shift+S",
+      "description": "Capture current page as MHTML"
+    }
   }
+}
 
-  container.innerHTML = captures.slice(0, 10).map(capture => `
-    <div class="capture-item">
-      <div class="capture-title">${escapeHtml(capture.title)}</div>
-      <div class="capture-meta">
-        ${new Date(capture.capturedAt).toLocaleDateString()} •
-        ${formatBytes(capture.size)}
-      </div>
-    </div>
-  `).join('');
+// background.js - Command listener
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'capture-page') {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab) {
+      // Execute capture
+      await handleCapture(tab);
+    }
+  }
+});
+```
+
+### Context Menu Integration
+
+```javascript
+// Create context menu for page capture
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: 'capture-page',
+    title: 'Save as MHTML',
+    contexts: ['page', 'link']
+  });
 });
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-}
-```
-
-## Use Cases and Applications
-
-### 1. Offline Reading Archive
-
-Build an extension that allows users to save articles for later offline reading:
-
-```javascript
-// Capture and organize by domain
-async function captureForOfflineReading(tabId) {
-  const tab = await chrome.tabs.get(tabId);
-  const domain = new URL(tab.url).hostname;
-
-  const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({
-    tabId: tabId
-  });
-
-  const dataUrl = await blobToDataUrl(mhtmlBlob);
-  const filename = `${domain}/${generateFilename(tab.title)}.mhtml`;
-
-  await chrome.downloads.download({
-    url: dataUrl,
-    filename: filename,
-    saveAs: false
-  });
-}
-```
-
-### 2. Bookmark Backup System
-
-Create automatic backups of bookmarked pages:
-
-```javascript
-// Backup all bookmarks
-async function backupBookmarks() {
-  const bookmarks = await chrome.bookmarks.getTree();
-
-  async function processNode(node) {
-    if (node.children) {
-      for (const child of node.children) {
-        await processNode(child);
-      }
-    } else if (node.url) {
-      // Find tab with this URL and capture
-      const tabs = await chrome.tabs.query({ url: node.url });
-      if (tabs[0]) {
-        await capturePage(tabs[0].id, node.title);
-      }
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  if (info.menuItemId === 'capture-page') {
+    const targetTabId = info.linkUrl 
+      ? await openLinkAsTab(info.linkUrl)
+      : tab.id;
+    
+    if (targetTabId) {
+      await captureAndDownload(targetTabId);
     }
   }
+});
 
-  await processNode(bookmarks[0]);
+async function openLinkAsTab(url) {
+  const [tab] = await chrome.tabs.create({ url, active: false });
+  // Wait for page to load
+  await new Promise(resolve => {
+    chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+      if (tabId === tab.id && changeInfo.status === 'complete') {
+        chrome.tabs.onUpdated.removeListener(listener);
+        resolve(tabId);
+      }
+    });
+  });
+  return tab.id;
 }
 ```
 
-### 3. Research Collection Tool
-
-For researchers collecting web sources:
+### Popup Interface
 
 ```javascript
-// Add metadata to captured pages
-async function captureWithMetadata(tabId, tags = []) {
-  const tab = await chrome.tabs.get(tabId);
-  const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({
-    tabId: tabId
+// popup.js - When user clicks extension icon
+document.addEventListener('DOMContentLoaded', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  
+  document.getElementById('url').textContent = tab.url;
+  document.getElementById('title').textContent = tab.title;
+  
+  document.getElementById('capture-btn').addEventListener('click', async () => {
+    const filename = document.getElementById('filename').value || 
+      `${tab.title}.mhtml`;
+    
+    try {
+      const blob = await captureMHTML(tab.id);
+      await downloadBlob(blob, filename);
+      window.close();
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
   });
+});
 
-  const metadata = {
-    url: tab.url,
-    title: tab.title,
-    capturedAt: new Date().toISOString(),
-    tags: tags,
-    notes: ''
-  };
+function captureMHTML(tabId) {
+  return new Promise((resolve, reject) => {
+    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+      } else {
+        resolve(blob);
+      }
+    });
+  });
+}
 
-  // Save both MHTML and metadata
-  await saveWithMetadata(mhtmlBlob, metadata);
+function downloadBlob(blob, filename) {
+  return new Promise((resolve, reject) => {
+    chrome.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: filename,
+      saveAs: true
+    }, (downloadId) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+      } else {
+        resolve(downloadId);
+      }
+    });
+  });
 }
 ```
 
 ## Best Practices
 
-### 1. Handle Large Pages Efficiently
+1. **Always handle errors** - Check `chrome.runtime.lastError` in callbacks
+2. **Use async/await** - Wrap callbacks in Promises for cleaner code
+3. **Clean up object URLs** - Call `URL.revokeObjectURL()` after downloads complete
+4. **Consider file sizes** - Large MHTML files can impact storage and performance
+5. **Test cross-origin scenarios** - Not all pages capture equally
+6. **Respect user privacy** - Only capture pages with appropriate permissions
+7. **Provide feedback** - Use notifications to inform users of capture status
 
-```javascript
-// Check page size before capture
-async function canCaptureTab(tabId) {
-  const tab = await chrome.tabs.get(tabId);
+## Related APIs
 
-  // Skip file:// URLs
-  if (tab.url.startsWith('file://')) {
-    throw new Error('Cannot capture file:// URLs');
-  }
-
-  // Skip chrome:// URLs
-  if (tab.url.startsWith('chrome://')) {
-    throw new Error('Cannot capture Chrome internal pages');
-  }
-
-  return true;
-}
-```
-
-### 2. User Experience Considerations
-
-```javascript
-// Show progress for large captures
-async function captureWithProgress(tabId) {
-  const tab = await chrome.tabs.get(tabId);
-
-  // Update badge to show activity
-  chrome.action.setBadgeText({ tabId: tabId, text: '...' });
-  chrome.action.setBadgeBackgroundColor({
-    tabId: tabId,
-    color: '#FFA500'
-  });
-
-  try {
-    const blob = await chrome.pageCapture.saveAsMHTML({ tabId });
-
-    chrome.action.setBadgeText({ tabId: tabId, text: '✓' });
-    chrome.action.setBadgeBackgroundColor({
-      tabId: tabId,
-      color: '#4CAF50'
-    });
-
-    return blob;
-  } catch (error) {
-    chrome.action.setBadgeText({ tabId: tabId, text: '!' });
-    chrome.action.setBadgeBackgroundColor({
-      tabId: tabId,
-      color: '#F44336'
-    });
-    throw error;
-  }
-}
-```
-
-### 3. Error Handling
-
-```javascript
-// Comprehensive error handling
-async function safeCapture(tabId) {
-  try {
-    // Validate tab exists
-    const tab = await chrome.tabs.get(tabId);
-
-    // Check URL scheme
-    if (!tab.url.startsWith('http://') &&
-        !tab.url.startsWith('https://')) {
-      throw new Error('Only http:// and https:// pages can be captured');
-    }
-
-    // Attempt capture
-    return await chrome.pageCapture.saveAsMHTML({ tabId });
-
-  } catch (error) {
-    if (error.message.includes('No tab with id')) {
-      throw new Error('Tab no longer exists');
-    }
-    if (error.message.includes('Extension has not been granted')) {
-      throw new Error('Permission denied');
-    }
-    throw error;
-  }
-}
-```
-
-## Limitations and Considerations
-
-### What Works Well
-
-- Static content preservation
-- Single-page applications (SPAs)
-- Pages with embedded images and CSS
-- Offline archiving for personal use
-- Research and documentation
-
-### Limitations
-
-- **Dynamic Content**: Content loaded via JavaScript after page load may not be captured
-- **Authentication**: Protected pages require login before capture
-- **Cross-Origin**: Some resources may be blocked due to CORS
-- **Large Files**: Very large pages can create unwieldy MHTML files
-- **Playback**: Dynamic media (video/audio) may not playback from MHTML
-
-### Alternatives to Consider
-
-For certain use cases, other APIs might be more appropriate:
-
-- **chrome.tabCapture**: For audio/video content
-- **chrome.debugger** with `Page.printToPDF`: For PDF output (via Chrome DevTools Protocol)
-- **chrome.devtools.inspectedWindow**: For developer-focused saving
-
-## Conclusion
-
-The chrome.pageCapture API provides a straightforward way to save web pages for offline use, archiving, and backup purposes. By combining it with other Chrome APIs like downloads and storage, you can build powerful extensions for capturing and organizing web content.
-
-Key takeaways:
-- Use `"pageCapture"` permission in manifest
-- The `saveAsMHTML()` method returns a Blob
-- Combine with downloads API for file saving
-- Handle errors gracefully for better UX
-- Consider the limitations for dynamic content
-
-With these patterns, you can create extensions that help users build personal archives, save research materials, or capture web content for offline reading.
+- `chrome.downloads` - For saving the captured MHTML files
+- `chrome.tabs` - For getting tab information and managing captures
+- `chrome.scripting` - For injecting scripts to modify page capture behavior
+- `chrome.notifications` - For user feedback during capture process
+- `chrome.contextMenus` - For adding capture options to right-click menu
+- `chrome.commands` - For keyboard shortcuts to trigger capture
