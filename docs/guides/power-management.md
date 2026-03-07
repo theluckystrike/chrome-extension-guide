@@ -1,5 +1,7 @@
 # Power Management in Chrome Extensions
 
+> **Guide Level:** Intermediate | **Last Updated:** 2025
+
 The `chrome.power` API enables extensions to control system power management, preventing devices from sleeping or the display from turning off during critical operations. This is essential for extensions that need to complete long-running tasks without interruption.
 
 ## chrome.power API Overview
