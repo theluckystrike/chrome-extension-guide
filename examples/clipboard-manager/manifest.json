@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Clipboard Manager",
+  "version": "1.0.0",
+  "description": "Clipboard history using offscreen documents",
+  "permissions": ["storage", "offscreen"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}

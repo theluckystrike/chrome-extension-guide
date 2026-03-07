@@ -92,6 +92,14 @@ if (!result.granted) {
 }
 ```
 
+## INTEGRATION EXAMPLES
+
+See [examples/](examples/) for complete working examples using multiple packages together:
+
+- [Tab Manager with Storage](examples/tab-manager-with-storage/) — webext-storage + webext-messaging + webext-permissions
+- [Page Analyzer](examples/page-analyzer/) — webext-storage + webext-messaging + context menus
+- [Clipboard Manager](examples/clipboard-manager/) — webext-storage + webext-messaging + offscreen API
+
 ## TEMPLATES
 
 Looking for a starting point? The [Chrome Extension Toolkit](https://github.com/theluckystrike/chrome-extension-toolkit) features 10 fully configured starter repositories:

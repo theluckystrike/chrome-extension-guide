@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Manager",
+  "version": "1.0.0",
+  "description": "Save and restore tab groups with type-safe storage",
+  "permissions": ["storage"],
+  "optional_permissions": ["tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
