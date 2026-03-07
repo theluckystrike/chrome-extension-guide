@@ -95,7 +95,7 @@ Delete individual history entries using `chrome.history.deleteUrl()`:
 
 ```javascript
 function deleteItem(url) {
-  chrome.history.deleteUrl(url, () => location.reload());
+  chrome.history.deleteUrl({ url }, () => location.reload());
 }
 ```
 

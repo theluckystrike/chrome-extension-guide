@@ -19,14 +19,15 @@ Chrome provides three APIs for media capture: `chrome.tabCapture` for tab audio/
 ## Using WebRTC APIs from Extension Contexts
 
 ### chrome.tabCapture
-Captures the visible area of a tab as a MediaStream:
+Captures the visible area of the currently active tab as a MediaStream. Note: `capture()` does not accept a `tabId` — it always captures the active tab. In MV3, consider using `chrome.tabCapture.getMediaStreamId()` instead.
 ```ts
-async function captureTab(tabId: number): Promise<MediaStream | null> {
-  return chrome.tabCapture.capture({
-    tabId,
-    audio: true,
-    video: true,
-    videoConstraints: { mandatory: { minWidth: 1280, maxWidth: 1920, frameRate: 30 } }
+async function captureTab(): Promise<MediaStream | null> {
+  return new Promise((resolve) => {
+    chrome.tabCapture.capture({
+      audio: true,
+      video: true,
+      videoConstraints: { mandatory: { minWidth: 1280, maxWidth: 1920, frameRate: 30 } }
+    }, (stream) => resolve(stream));
   });
 }
 ```
@@ -64,10 +65,12 @@ async function startScreenShare(): Promise<MediaStream | null> {
 
 ## Screen Capture with chrome.tabCapture and getDisplayMedia
 
-### Capturing Specific Tabs
+### Capturing the Active Tab
 ```ts
-async function captureSpecificTab(tabId: number): Promise<MediaStream> {
-  return chrome.tabCapture.capture({ tabId, audio: true, video: true });
+async function captureActiveTab(): Promise<MediaStream> {
+  return new Promise((resolve) => {
+    chrome.tabCapture.capture({ audio: true, video: true }, (stream) => resolve(stream!));
+  });
 }
 ```
 
@@ -95,21 +98,23 @@ function handleStream(stream: MediaStream): void {
 
 ### Capturing Tab Audio Only
 ```ts
-async function captureTabAudio(tabId: number): Promise<MediaStream | null> {
-  return chrome.tabCapture.capture({
-    tabId,
-    audio: true,
-    audioConstraints: { mandatory: { chromeMediaSource: "tab", echoCancellation: false } }
+async function captureTabAudio(): Promise<MediaStream | null> {
+  return new Promise((resolve) => {
+    chrome.tabCapture.capture({
+      audio: true,
+      audioConstraints: { mandatory: { chromeMediaSource: "tab", echoCancellation: false } }
+    }, (stream) => resolve(stream));
   });
 }
 ```
 
-### Using getUserMedia for Tab Capture
+### Using getMediaStreamId for Tab Capture (MV3)
 ```ts
-async function captureTabWithGetUserMedia(tabId: number): Promise<MediaStream> {
+async function captureTabWithStreamId(tabId: number): Promise<MediaStream> {
+  const streamId = await chrome.tabCapture.getMediaStreamId({ targetTabId: tabId });
   return navigator.mediaDevices.getUserMedia({
-    audio: { mandatory: { chromeMediaSource: "tab", chromeMediaSourceId: tabId } },
-    video: { mandatory: { chromeMediaSource: "tab", chromeMediaSourceId: tabId } }
+    audio: { mandatory: { chromeMediaSource: "tab", chromeMediaSourceId: streamId } },
+    video: { mandatory: { chromeMediaSource: "tab", chromeMediaSourceId: streamId } }
   });
 }
 ```
@@ -146,8 +151,10 @@ class TabRecorder {
 
 ### Recording with Progress
 ```ts
-async function recordWithProgress(tabId: number): Promise<Blob> {
-  const stream = await chrome.tabCapture.capture({ tabId, audio: true, video: true });
+async function recordWithProgress(): Promise<Blob> {
+  const stream = await new Promise<MediaStream>((resolve) => {
+    chrome.tabCapture.capture({ audio: true, video: true }, (s) => resolve(s!));
+  });
   const recorder = new MediaRecorder(stream!, { mimeType: "video/webm;codecs=vp9" });
   const chunks: Blob[] = [];
   recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
@@ -225,7 +232,7 @@ class ScreenRecorder {
   
   async startRecording(options: RecordingOptions): Promise<RecordingSession> {
     await createWebRTCOffscreen();
-    const stream = options.sourceType === "tab" ? await this.captureTab(options.tabId!) : await this.captureScreen();
+    const stream = options.sourceType === "tab" ? await this.captureTab() : await this.captureScreen();
     const sessionId = this.generateId();
     const port = await chrome.runtime.connect({ name: "recorder" });
     port.postMessage({ type: "START_RECORDING", sessionId, stream });
@@ -245,7 +252,7 @@ class ScreenRecorder {
     });
   }
   
-  private async captureTab(tabId: number): Promise<MediaStream> { return chrome.tabCapture.capture({ tabId, audio: true, video: true }); }
+  private async captureTab(): Promise<MediaStream> { return new Promise((resolve) => { chrome.tabCapture.capture({ audio: true, video: true }, (s) => resolve(s!)); }); }
   private async captureScreen(): Promise<MediaStream> { return navigator.mediaDevices.getDisplayMedia({ audio: true, video: true }); }
   private generateId(): string { return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`; }
 }
@@ -340,11 +347,15 @@ async function ensureOffscreen(): Promise<void> {
 
 ### Audio Not Being Captured
 ```ts
-async function captureWithFallback(tabId: number): Promise<MediaStream> {
-  let stream = await chrome.tabCapture.capture({ tabId, audio: true, video: true });
+async function captureWithFallback(): Promise<MediaStream> {
+  let stream = await new Promise<MediaStream>((resolve) => {
+    chrome.tabCapture.capture({ audio: true, video: true }, (s) => resolve(s!));
+  });
   if (stream.getAudioTracks().length === 0) {
     console.warn("Audio blocked - retrying without audio");
-    stream = await chrome.tabCapture.capture({ tabId, audio: false, video: true });
+    stream = await new Promise<MediaStream>((resolve) => {
+      chrome.tabCapture.capture({ audio: false, video: true }, (s) => resolve(s!));
+    });
   }
   return stream;
 }

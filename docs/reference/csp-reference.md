@@ -2,16 +2,16 @@
 
 ## Default MV3 CSP
 ```
-script-src 'self' 'wasm-unsafe-eval';
+script-src 'self';
 object-src 'self';
 ```
-MV3 does NOT allow `unsafe-inline`, `unsafe-eval`, or remote script sources.
+MV3 does NOT allow `unsafe-inline`, `unsafe-eval`, or remote script sources. Chrome no longer grants `wasm-unsafe-eval` by default — extensions that use WebAssembly must explicitly add `'wasm-unsafe-eval'` to their `extension_pages` CSP declaration.
 
 ## Customizing CSP in Manifest
 ```json
 {
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
+    "extension_pages": "script-src 'self'; object-src 'self'",
     "sandbox": "sandbox allow-scripts allow-forms allow-popups; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self'"
   }
 }

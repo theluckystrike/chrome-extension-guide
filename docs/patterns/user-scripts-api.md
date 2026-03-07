@@ -52,14 +52,6 @@ interface UserScript {
   world?: 'USER_SCRIPT' | 'MAIN';
 }
 
-interface UserScriptRegistrationResult {
-  ids: string[];
-  errors?: Array<{
-    details: string;
-    error: string;
-  }>;
-}
-
 // Background service worker
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Extension installed, ready to manage user scripts');
@@ -78,8 +70,8 @@ async function registerHelloWorldScript(): Promise<void> {
   ];
 
   try {
-    const result = await chrome.userScripts.register(scripts);
-    console.log('Registered scripts:', result.ids);
+    await chrome.userScripts.register(scripts);
+    console.log('Registered scripts successfully');
   } catch (error) {
     console.error('Failed to register scripts:', error);
   }
@@ -167,7 +159,7 @@ class UserScriptManager {
     this.storage = new Storage('user-scripts');
   }
 
-  async registerScript(config: ScriptConfig): Promise<string[]> {
+  async registerScript(config: ScriptConfig): Promise<void> {
     const script: RegisteredUserScript = {
       id: config.id,
       matches: config.matches,
@@ -176,15 +168,13 @@ class UserScriptManager {
       world: config.world
     };
 
-    const result = await chrome.userScripts.register([script]);
+    await chrome.userScripts.register([script]);
     this.registeredIds.add(config.id);
-    
-    return result.ids;
   }
 
   async registerMultipleScripts(
     configs: ScriptConfig[]
-  ): Promise<UserScriptRegistrationResult> {
+  ): Promise<void> {
     const scripts: RegisteredUserScript[] = configs
       .filter(c => c.enabled)
       .map(config => ({
@@ -195,13 +185,11 @@ class UserScriptManager {
         world: config.world
       }));
 
-    const result = await chrome.userScripts.register(scripts);
-    
+    await chrome.userScripts.register(scripts);
+
     configs
       .filter(c => c.enabled)
       .forEach(c => this.registeredIds.add(c.id));
-
-    return result;
   }
 }
 ```
