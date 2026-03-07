@@ -5,47 +5,40 @@ description: "Learn Chrome extension push notifications with this developer guid
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/gcm-push-notifications/"
 ---
 # GCM & Push Notifications in Chrome Extensions
+# GCM and Push Notifications in Chrome Extensions
 
 ## Introduction {#introduction}
 
-Push notifications enable Chrome extensions to receive messages from a server even when the extension isn't actively running. This is critical for real-time updates, messaging apps, collaborative tools, and any extension that needs to alert users about events happening on a backend.
+Chrome extensions can receive push notifications from a backend server using either the legacy GCM (Google Cloud Messaging) API or the modern Web Push API. This guide covers both approaches, with emphasis on the recommended Web Push migration path.
 
-There are two notification systems available:
-1. **GCM (Google Cloud Messaging)** - The legacy Chrome-specific API (`chrome.gcm`)
-2. **Web Push** - The modern standard using `PushManager` and service workers
+The `chrome.gcm` API has been the traditional way to handle cloud messaging in Chrome extensions. However, Google has been encouraging developers to migrate to the Web Push standard, which is more widely supported across browsers.
 
-This guide covers both approaches, with emphasis on the Web Push migration path since GCM is deprecated.
+This guide will walk you through setting up both approaches, handling message reception, and building a complete push notification system for your extension.
 
 ## Understanding the Architecture {#understanding-the-architecture}
+## Prerequisites
 
-The push notification flow involves several components:
+Before implementing push notifications, you need:
 
-```
-┌─────────────┐      ┌─────────────┐      ┌─────────────┐
-│   Server    │─────▶│  Chrome     │─────▶│   User's    │
-│  (Your API) │      │  Push       │      │   Device    │
-└─────────────┘      │  Service    │      └─────────────┘
-                     └─────────────┘
-```
+- A Chrome Extension with the `gcm` permission or pushManager support
+- A server-side component to send notifications
+- A Firebase project (for GCM) or a VAPID key pair (for Web Push)
+- HTTPS endpoint for your extension's background service worker
 
-1. Your server sends a push message to the push service (FCM/Chrome Push Service)
-2. The push service delivers it to Chrome on the user's device
-3. Chrome wakes up your extension's service worker
-4. Your extension processes the message and optionally shows a notification
+## manifest.json Configuration
 
 ## manifest.json Setup {#manifestjson-setup}
 
 Both GCM and Web Push require specific permissions and configuration:
+### For GCM (Legacy)
 
 ```json
 {
-  "name": "Push Notification Extension",
-  "version": "1.0.0",
-  "manifest_version": 3,
+  "name": "My Push Extension",
+  "version": "1.0",
   "permissions": [
     "gcm",
-    "notifications",
-    "pushMessaging"
+    "notifications"
   ],
   "background": {
     "service_worker": "background.js"
@@ -53,31 +46,31 @@ Both GCM and Web Push require specific permissions and configuration:
 }
 ```
 
-For Web Push (recommended), you'll also need:
+### For Web Push (Modern)
 
 ```json
 {
+  "name": "My Push Extension",
+  "version": "1.0",
   "permissions": [
-    "notifications"
-  ],
-  "user_permissions": [
-    "notifications"
+    "notifications",
+    "push"
   ],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  }
+    "service_worker": "background.js"
+  },
+  "manifest_version": 3
 }
 ```
 
 ## Using chrome.gcm (Legacy GCM API) {#using-chromegcm-legacy-gcm-api}
 
 ### Overview {#overview}
+Note that Web Push does not require the `gcm` permission in manifest.json. The push permission is requested at runtime.
 
-The `chrome.gcm` API was Chrome's original push messaging solution. While deprecated, it still works and many existing extensions use it. Key methods:
-- `chrome.gcm.register()` - Register to receive messages
-- `chrome.gcm.onMessage` - Listen for incoming messages
-- `chrome.gcm.send()` - Send messages upstream to your server
+## Setting Up GCM (Legacy Approach)
+
+### Creating a Firebase Project
 
 ### Getting a Sender ID {#getting-a-sender-id}
 
@@ -86,111 +79,155 @@ Before using GCM, you need a project in the Google Cloud Console:
 2. Create a new project
 3. Enable "Firebase Cloud Messaging" API
 4. Get your **Sender ID** (project number) and **Server API Key**
+1. Go to the Firebase Console (console.firebase.google.com)
+2. Create a new project or select an existing one
+3. Navigate to Project Settings
+4. Under "Your apps", click the Web icon (</>)
+5. Register your app and copy the `firebaseConfig` object
+6. Go to "Cloud Messaging" settings
+7. Enable "Cloud Messaging API (Legacy)" if not already enabled
+8. Copy your Server Key
 
 ### Registering with GCM {#registering-with-gcm}
 
 ```javascript
 // background.js
-const SENDER_ID = 'YOUR_SENDER_ID'; // Your Google Cloud project number
+const SENDER_ID = 'your-firebase-sender-id';
+const FIREBASE_CONFIG = {
+  apiKey: "your-api-key",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "your-sender-id",
+  appId: "your-app-id"
+};
 
-async function registerWithGCM() {
-  try {
-    const registrationId = await new Promise((resolve, reject) => {
-      chrome.gcm.register([SENDER_ID], (registrationId) => {
-        if (chrome.runtime.lastError) {
-          reject(chrome.runtime.lastError);
-        } else {
-          resolve(registrationId);
-        }
-      });
-    });
-    
-    console.log('Registered with GCM, ID:', registrationId);
-    
-    // Send registrationId to your server
-    await sendRegistrationIdToServer(registrationId);
-    
-    return registrationId;
-  } catch (error) {
-    console.error('GCM registration failed:', error);
+// Register with GCM to get a push token
+chrome.gcm.register([SENDER_ID], (registrationId) => {
+  if (chrome.runtime.lastError) {
+    console.error('Registration failed:', chrome.runtime.lastError);
+    return;
   }
+  
+  console.log('Registration ID:', registrationId);
+  
+  // Send this ID to your server
+  sendRegistrationIdToServer(registrationId);
+});
+
+function sendRegistrationIdToServer(id) {
+  fetch('https://your-server.com/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      registrationId: id,
+      extensionId: chrome.runtime.id
+    })
+  });
 }
-
-// Register on extension install
-chrome.runtime.onInstalled.addListener(() => {
-  registerWithGCM();
-});
-
-// Also register on startup (for service worker restarts)
-chrome.runtime.onStartup.addListener(() => {
-  registerWithGCM();
-});
 ```
 
 ### Receiving Messages {#receiving-messages}
+### Handling Incoming GCM Messages
 
 ```javascript
-// background.js
 chrome.gcm.onMessage.addListener((message) => {
-  console.log('Received GCM message:', message);
+  console.log('Received message:', message);
   
-  // Message object structure:
+  // Message format from server:
   // {
-  //   "collapseKey": "string",
-  //   "delayWhileIdle": boolean,
-  //   "destination": "string",
-  //   "from": "string",
-  //   "notification": { "body": "...", "icon": "...", "title": "..." },
-  //   "payload": { "key": "value" },
-  //   "rawData": "base64-encoded-string"
+  //   "data": {
+  //     "title": "New Notification",
+  //     "body": "You have a new message",
+  //     "icon": "/images/icon.png"
+  //   },
+  //   "collapseKey": "optional-collapse-key"
   // }
   
-  // Show notification if payload has data
   if (message.data) {
     showNotification(message.data);
   }
 });
 
 function showNotification(data) {
-  const options = {
+  chrome.notifications.create({
     type: 'basic',
-    iconUrl: 'icons/icon-128.png',
-    title: data.title || 'New Notification',
-    message: data.body || JSON.stringify(data),
-    priority: 1,
-    silent: false
-  };
-  
-  chrome.notifications.create('gcm-notification', options, (notificationId) => {
+    iconUrl: data.icon || '/images/icon.png',
+    title: data.title || 'Notification',
+    message: data.body || '',
+    priority: data.priority || 0
+  }, (notificationId) => {
     console.log('Notification created:', notificationId);
   });
 }
 ```
 
 ### Sending Upstream Messages {#sending-upstream-messages}
+### Unregistering from GCM
 
-You can send messages from the extension back to your server:
+```javascript
+chrome.gcm.unregister(() => {
+  if (chrome.runtime.lastError) {
+    console.error('Unregistration failed:', chrome.runtime.lastError);
+    return;
+  }
+  console.log('Unregistered from GCM');
+});
+```
+
+## Setting Up Web Push (Modern Approach)
+
+### Generating VAPID Keys
+
+VAPID (Voluntary Application Server Identification) keys are used to identify your application server. Generate a key pair using the web-push library:
+
+```bash
+# Install web-push globally
+npm install -g web-push
+
+# Generate VAPID keys
+web-push generate-vapid-keys
+```
+
+This will output:
+- Public Key (put this in your extension)
+- Private Key (keep secret on your server)
+
+### Requesting Push Permission
 
 ```javascript
 // background.js
-function sendUpstreamMessage(message) {
-  const upstreamMessage = {
-    destination: SENDER_ID,
-    messageId: Date.now().toString(),
-    payload: {
-      action: 'update',
-      data: message
-    },
-    timeToLive: 3600, // seconds
-    delayWhileIdle: false
-  };
+async function requestPushPermission() {
+  const permission = await Notification.permission;
   
-  chrome.gcm.send(upstreamMessage, (messageId) => {
-    if (chrome.runtime.lastError) {
-      console.error('Send failed:', chrome.runtime.lastError.message);
-    } else {
-      console.log('Message sent with ID:', messageId);
-    }
+  if (permission === 'granted') {
+    return true;
+  }
+  
+  if (permission === 'denied') {
+    console.error('Push notifications are blocked');
+    return false;
+  }
+  
+  // Request permission
+  const result = await chrome.permissions.request({
+    permissions: ['push']
+  });
+  
+  return result;
+}
+
+// Check current permission status
+function checkPushPermission() {
+  if (!('PushManager' in window)) {
+    console.error('Push not supported');
+    return;
+  }
+  
+  Notification.requestPermission().then(permission => {
+    console.log('Permission:', permission);
   });
 }
 ```
@@ -210,10 +247,11 @@ Key differences from GCM:
 ### Setting Up VAPID Keys {#setting-up-vapid-keys}
 
 Generate VAPID keys for authentication:
+### Subscribing to Push
 
 ```javascript
-// You can generate these once and reuse them
-const webpush = require('web-push');
+// Your VAPID public key (base64 encoded)
+const VAPID_PUBLIC_KEY = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U';
 
 // Generate keys (run this once in Node.js)
 const vapidKeys = webpush.generateVapidKeys();
@@ -266,44 +304,33 @@ const subscriptionOptions = {
 const VAPID_PUBLIC_KEY = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U';
 
 async function subscribeToPush() {
-  try {
-    const subscription = await self.registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: new Uint8Array([
-        // Convert base64 to Uint8Array - use a utility function
-        0x04, 0x9e, 0xad, 0x8a, ... // your key bytes
-      ])
-    });
-    
-    console.log('Push subscription:', subscription);
-    
-    // Send subscription to your server
-    await sendSubscriptionToServer(subscription);
-    
-    return subscription;
-  } catch (error) {
-    console.error('Push subscription failed:', error);
-  }
+  const registration = await navigator.serviceWorker.ready;
+  
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+  });
+  
+  console.log('Push subscription:', subscription);
+  
+  // Send subscription to your server
+  await fetch('https://your-server.com/push/subscribe', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(subscription)
+  });
+  
+  return subscription;
 }
-
-// Subscribe on install
-chrome.runtime.onInstalled.addListener(() => {
-  subscribeToPush();
-});
-
-// Check existing subscription on startup
-chrome.runtime.onStartup.addListener(async () => {
-  const subscription = await self.registration.pushManager.getSubscription();
-  if (!subscription) {
-    await subscribeToPush();
-  }
-});
 ```
 
 ### Handling Push Events {#handling-push-events}
+### Handling Push Events in Service Worker
 
 ```javascript
-// background.js
+// sw.js (service worker)
 self.addEventListener('push', (event) => {
   console.log('Push event received:', event);
   
@@ -317,43 +344,45 @@ self.addEventListener('push', (event) => {
     }
   }
   
-  // Show notification
+  const title = data.title || 'Notification';
   const options = {
-    body: data.body || 'New message received',
-    icon: data.icon || 'icons/icon-128.png',
-    badge: 'icons/badge-32.png',
-    tag: data.tag || 'default',
+    body: data.body || '',
+    icon: data.icon || '/images/icon.png',
+    badge: data.badge || '/images/badge.png',
+    tag: data.tag || '',
     data: data.data || {},
-    actions: data.actions || [
-      { action: 'open', title: 'Open' },
-      { action: 'dismiss', title: 'Dismiss' }
-    ],
-    vibrate: [100, 50, 100],
-    requireInteraction: data.requireInteraction || false
+    actions: data.actions || [],
+    vibrate: data.vibrate || [200, 100, 200]
   };
   
-  const promise = self.registration.showNotification(
-    data.title || 'Push Notification',
-    options
+  event.waitUntil(
+    self.registration.showNotification(title, options)
   );
-  
-  event.waitUntil(promise);
 });
 
-// Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
-  console.log('Notification clicked:', event.notification.tag);
+  console.log('Notification clicked:', event);
   
   event.notification.close();
   
-  if (event.action === 'open' || !event.action) {
-    // Open the extension or a specific page
-    event.waitUntil(
-      clients.openWindow('index.html')
-    );
-  } else if (event.action === 'dismiss') {
-    // Just close - do nothing
-  }
+  // Handle notification click
+  const urlToOpen = event.notification.data?.url || '/';
+  
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        // Focus existing window if open
+        for (const client of clientList) {
+          if (client.url === urlToOpen && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // Open new window if none exist
+        if (clients.openWindow) {
+          return clients.openWindow(urlToOpen);
+        }
+      })
+  );
 });
 ```
 
@@ -439,12 +468,17 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 
 ```javascript
 // server.js
+### Sending Push from Server
+
+Using the web-push library on your server:
+
+```javascript
 const webpush = require('web-push');
 
-// VAPID keys - keep private key secret!
+// Your VAPID keys
 const vapidKeys = {
   publicKey: 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U',
-  privateKey: 'UUxI4O8-FbRouAf7-7OT9xX7R4lNkI9W2p6h8jN3YcM'
+  privateKey: 'UUxI4O8-FbRouAf7-7OTt9GH4o-4VJ5a6Qw2NpQRsT0'
 };
 
 webpush.setVapidDetails(
@@ -453,56 +487,22 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-// Store subscriptions in database
-const subscriptions = new Map(); // In production, use a database
-
-// Endpoint to save subscription
-app.post('/subscribe', (req, res) => {
-  const subscription = req.body;
-  const endpoint = subscription.endpoint;
-  
-  subscriptions.set(endpoint, subscription);
-  
-  console.log('New subscription saved:', endpoint);
-  res.status(200).json({ success: true });
-});
-
-// Send push notification to all subscribers
-async function sendPushNotification(payload) {
-  const notifications = [];
-  
-  for (const [endpoint, subscription] of subscriptions) {
-    const promise = webpush.sendNotification(subscription, JSON.stringify(payload))
-      .catch((err) => {
-        if (err.statusCode === 410) {
-          // Subscription expired, remove it
-          subscriptions.delete(endpoint);
-          console.log('Subscription removed:', endpoint);
-        } else {
-          console.error('Push error:', err);
-        }
-      });
-    
-    notifications.push(promise);
-  }
-  
-  await Promise.all(notifications);
-}
-
-// Send to specific subscriber
-async function sendToSubscriber(subscription, payload) {
+async function sendPushNotification(subscription, payload) {
   try {
-    await webpush.sendNotification(subscription, JSON.stringify(payload));
-    return true;
+    await webpush.sendNotification(
+      subscription,
+      JSON.stringify(payload)
+    );
+    console.log('Push sent successfully');
   } catch (error) {
     if (error.statusCode === 410) {
-      // Subscription expired
-      return false;
+      // Subscription expired, remove from database
+      console.log('Subscription expired');
+    } else {
+      console.error('Push error:', error);
     }
-    throw error;
   }
 }
-```
 
 ### Payload Encryption {#payload-encryption}
 
@@ -511,9 +511,13 @@ Web Push requires payload encryption. The `web-push` library handles this automa
 ```javascript
 // server.js - Automatic encryption (recommended)
 const payload = {
+// Example payload
+const notificationPayload = {
   title: 'New Message',
   body: 'You have a new message from John',
-  icon: 'https://example.com/icon.png',
+  icon: '/images/icon.png',
+  badge: '/images/badge.png',
+  tag: 'message-123',
   data: {
     type: 'message',
     messageId: '12345',
@@ -648,8 +652,10 @@ self.addEventListener('push', (event) => {
       // Notify server to potentially resubscribe user
       notifyServerAboutExpiration(subscription);
     }
+    url: '/messages/123',
+    type: 'new_message'
   }
-});
+};
 ```
 
 ## Migration from GCM to Web Push {#migration-from-gcm-to-web-push}
@@ -694,31 +700,40 @@ chrome.gcm.onMessage.addListener((message) => { /* ... */ });
 // NEW (Web Push)
 self.addEventListener('push', (event) => { /* ... */ });
 ```
+## Comparing GCM and Web Push
+
+| Feature | GCM (Legacy) | Web Push (Modern) |
+|---------|--------------|-------------------|
+| Browser Support | Chrome only | All modern browsers |
+| Permission | gcm in manifest | Runtime permission |
+| Requires Firebase | Yes | No |
+| VAPID Keys | Not required | Required |
+| Message Size | Up to 4KB | Up to 4KB |
+| Reliability | High | High |
+| Future Support | Deprecated | Recommended |
 
 ## Best Practices {#best-practices}
 
-1. **Use Web Push for new projects** - GCM is deprecated
-2. **Request notification permission at the right time** - Don't ask immediately on install
-3. **Handle service worker lifecycle** - Don't assume the SW stays alive
-4. **Implement message queuing** - Handle offline scenarios
-5. **Monitor subscription expiration** - Renew before they expire
-6. **Use meaningful notification content** - Give users value
-7. **Respect user preferences** - Allow disabling notifications
-8. **Test on real devices** - Emulator testing is limited
-9. **Secure your VAPID keys** - Never expose private key in extension
-10. **Encrypt sensitive data** - Don't send PII in plain push payloads
+### Message Design
 
 ## Common Mistakes {#common-mistakes}
+Keep notifications concise and actionable:
 
-- Using GCM for new extensions (use Web Push instead)
-- Not handling notification permission denial
-- Sending too many notifications (spamming users)
-- Not handling service worker termination
-- Missing expiration time checks
-- Not implementing notification click handling
-- Storing private keys in extension code
-- Not testing offline scenarios
-- Not providing value in notifications
+```javascript
+const notification = {
+  title: 'Action Required',
+  body: 'Click to complete your profile',
+  icon: '/images/action-icon.png',
+  badge: '/images/badge.png',
+  tag: 'profile-action',
+  data: {
+    action: 'complete_profile',
+    url: '/options.html#profile'
+  },
+  requireInteraction: true,
+  vibrate: [200, 100, 200]
+};
+```
 
 ## Related Documentation {#related-documentation}
 
@@ -733,7 +748,152 @@ self.addEventListener('push', (event) => { /* ... */ });
 
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications Guide](../guides/notifications-guide.md)
--e 
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+### Rate Limiting
+
+Implement client-side rate limiting to avoid overwhelming users:
+
+```javascript
+// Track last notification time
+const RATE_LIMIT_MS = 60000; // 1 minute
+let lastNotificationTime = 0;
+
+function canShowNotification() {
+  const now = Date.now();
+  if (now - lastNotificationTime < RATE_LIMIT_MS) {
+    return false;
+  }
+  lastNotificationTime = now;
+  return true;
+}
+
+chrome.gcm.onMessage.addListener((message) => {
+  if (canShowNotification()) {
+    showNotification(message.data);
+  }
+});
+```
+
+### Managing Subscriptions
+
+Keep subscriptions fresh and handle expiration:
+
+```javascript
+async function refreshSubscription() {
+  const registration = await navigator.serviceWorker.ready;
+  const subscription = await registration.pushManager.getSubscription();
+  
+  if (subscription) {
+    // Check if subscription needs renewal
+    const expirationTime = subscription.expirationTime;
+    if (expirationTime) {
+      const expiresSoon = Date.now() > expirationTime - 7 * 24 * 60 * 60 * 1000;
+      if (expiresSoon) {
+        // Resubscribe
+        await subscription.unsubscribe();
+        return await subscribeToPush();
+      }
+    }
+  }
+  
+  return subscription;
+}
+```
+
+### Handling Multiple Notifications
+
+Use tags to manage notification stacking:
+
+```javascript
+// Different tags for different notification types
+const tags = {
+  MESSAGE: 'message-notification',
+  ALERT: 'alert-notification',
+  UPDATE: 'update-notification'
+};
+
+// Messages with same tag replace previous
+chrome.notifications.create('msg-123', {
+  type: 'basic',
+  iconUrl: '/images/message.png',
+  title: 'New Message',
+  message: 'You have a new message',
+  tag: tags.MESSAGE
+});
+```
+
+## Debugging Push Notifications
+
+### Common Issues and Solutions
+
+1. **Messages not received**
+   - Check service worker is activated
+   - Verify permission granted
+   - Check network connectivity
+
+2. **Permission denied**
+   - User has blocked notifications
+   - Guide user to enable in browser settings
+
+3. **GCM registration fails**
+   - Verify Sender ID is correct
+   - Check Firebase project configuration
+
+4. **Web Push subscription fails**
+   - Verify VAPID key format
+   - Check service worker is registered
+
+### Debugging Tips
+
+```javascript
+// Add logging to track message flow
+chrome.gcm.onMessage.addListener((message) => {
+  console.log('GCM Message received:', message);
+  console.log('Timestamp:', new Date().toISOString());
+});
+
+// Log subscription details
+registration.pushManager.getSubscription()
+  .then(sub => console.log('Current subscription:', sub));
+```
+
+## Security Considerations
+
+### Validate All Messages
+
+```javascript
+chrome.gcm.onMessage.addListener((message) => {
+  // Validate message structure
+  if (!message.data || !message.data.signature) {
+    console.warn('Invalid message format');
+    return;
+  }
+  
+  // Verify message signature (implement on server too)
+  const isValid = verifyMessageSignature(message.data);
+  if (!isValid) {
+    console.warn('Invalid message signature');
+    return;
+  }
+  
+  processMessage(message.data);
+});
+```
+
+### Use HTTPS
+
+Always use HTTPS for your push endpoint. Service workers only work on secure origins.
+
+## Conclusion
+
+Push notifications are a powerful way to re-engage users. While GCM is still functional, the Web Push API is the recommended approach for new extensions due to its cross-browser support and modern architecture.
+
+Key takeaways:
+
+- Use Web Push for new projects
+- Handle permission requests gracefully
+- Implement rate limiting to avoid user annoyance
+- Test thoroughly across different scenarios
+- Keep subscriptions fresh and handle expiration
