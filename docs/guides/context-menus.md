@@ -1,124 +1,192 @@
-# Context Menus in Chrome Extensions
+# Chrome Context Menus API
 
-## Introduction
-- Add custom items to Chrome's right-click menu
-- Requires `"contextMenus"` permission
-- Items created in background service worker, persist across restarts
+The Chrome Context Menus API adds items to Chrome's right-click menu, enabling contextual interactions with text selections, links, images, or entire pages.
 
-## manifest.json Setup
+## Required Permission
+
 ```json
 {
+  "name": "My Extension",
   "permissions": ["contextMenus"],
-  "background": { "service_worker": "background.js" }
+  "manifest_version": 3
 }
 ```
 
-## Creating Menu Items
+## Core Methods
 
 ### chrome.contextMenus.create()
+
+Creates a new context menu item:
+
 ```javascript
 chrome.contextMenus.create({
-  id: "lookupSelection",
-  title: "Look up '%s'",           // %s = selected text
-  contexts: ["selection"],          // Only show when text is selected
+  id: "search-selection",
+  title: "Search '%s'",
+  contexts: ["selection"]
+}, () => {
+  if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
 });
 ```
-- Must be called in service worker (typically in `chrome.runtime.onInstalled`)
-- `id`: Unique string identifier (required in MV3)
-- `title`: Display text, `%s` placeholder for selected text
-- `contexts`: Array of when to show — see Context Types below
 
-### Context Types
-- `"all"` — show everywhere
-- `"page"` — right-click on page background
-- `"selection"` — text is selected
-- `"link"` — right-click on a link
-- `"image"` — right-click on an image
-- `"video"`, `"audio"` — media elements
-- `"frame"` — right-click in an iframe
-- `"editable"` — input fields, textareas
-- `"action"` — extension's toolbar icon (replaces `"browser_action"`)
-- `"launcher"` — ChromeOS app launcher
+Key properties: `id`, `title`, `contexts`, `parentId`, `checked`, `visible`, `enabled`, `icons` (Chrome 128+).
 
-### Nested Menus (Submenus)
+### chrome.contextMenus.update()
+
+Modifies an existing item:
+
 ```javascript
-chrome.contextMenus.create({ id: "parent", title: "My Extension" });
-chrome.contextMenus.create({ id: "child1", parentId: "parent", title: "Option 1" });
-chrome.contextMenus.create({ id: "child2", parentId: "parent", title: "Option 2" });
+chrome.contextMenus.update("search-selection", { title: "Find '%s' in Google" });
 ```
 
-### Menu Item Types
-- `"normal"` — standard menu item (default)
-- `"checkbox"` — toggleable checkbox
-- `"radio"` — radio button (grouped by `parentId`)
-- `"separator"` — visual divider
+### chrome.contextMenus.remove()
+
+Removes a specific item:
+
+```javascript
+chrome.contextMenus.remove("search-selection", () => {});
+```
+
+### chrome.contextMenus.removeAll()
+
+Clears all context menus created by your extension:
+
+```javascript
+chrome.contextMenus.removeAll(() => {});
+```
+
+## Context Types
+
+| ContextType | Description |
+|-------------|-------------|
+| `page` | Right-click anywhere on the page |
+| `selection` | Text is selected |
+| `link` | Right-click on a hyperlink |
+| `image` | Right-click on an image |
+| `video` | Right-click on a video |
+| `audio` | Right-click on audio |
+| `frame` | Right-click on an iframe |
+| `editable` | Right-click in input/textarea |
+| `action` | Extension action icon click |
+
+## Item Types
+
+```javascript
+// Normal item
+chrome.contextMenus.create({ id: "normal", title: "Action", type: "normal" });
+
+// Checkbox (toggle)
+chrome.contextMenus.create({ id: "toggle", title: "Enable", type: "checkbox", checked: false });
+
+// Radio (exclusive)
+chrome.contextMenus.create({ id: "opt1", title: "Option 1", type: "radio", checked: true });
+
+// Separator
+chrome.contextMenus.create({ id: "sep1", type: "separator" });
+```
+
+## Parent-Child Hierarchies
+
+Create nested menus:
+
+```javascript
+chrome.contextMenus.create({ id: "search-tools", title: "Search Tools", contexts: ["selection"] });
+chrome.contextMenus.create({ id: "search-google", parentId: "search-tools", title: "Google", contexts: ["selection"] });
+chrome.contextMenus.create({ id: "search-wiki", parentId: "search-tools", title: "Wikipedia", contexts: ["selection"] });
+```
 
 ## Handling Clicks
 
-### chrome.contextMenus.onClicked
 ```javascript
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
-    case "lookupSelection":
-      console.log("Selected text:", info.selectionText);
-      console.log("Page URL:", info.pageUrl);
+    case "search-selection":
+      const query = encodeURIComponent(info.selectionText);
+      chrome.tabs.create({ url: `https://google.com/search?q=${query}` });
       break;
-    case "saveImage":
-      console.log("Image URL:", info.srcUrl);
+    case "copy-link":
+      navigator.clipboard.writeText(info.linkUrl);
       break;
   }
 });
 ```
 
-### OnClickData Properties
-- `menuItemId`: Which item was clicked
-- `selectionText`: Selected text (if context is "selection")
-- `pageUrl`: URL of the page
-- `srcUrl`: URL of image/video/audio element
-- `linkUrl`: URL of the link (if context is "link")
-- `frameUrl`: URL of the iframe
-- `editable`: Whether the element is editable
+`info` properties: `menuItemId`, `pageUrl`, `linkUrl`, `srcUrl`, `selectionText`, `editable`.
 
-## Updating and Removing
+## Dynamic Menus
 
-### chrome.contextMenus.update(id, changes)
+Update menus based on context:
+
 ```javascript
-chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
+chrome.contextMenus.onShown.addListener((info, tab) => {
+  chrome.contextMenus.update("dynamic-item", { visible: info.selectionText.length > 0 });
+});
+chrome.contextMenus.onHidden.addListener(() => {});
 ```
 
-### chrome.contextMenus.remove(id)
-### chrome.contextMenus.removeAll()
+## URL Filtering
 
-## Patterns
+```javascript
+chrome.contextMenus.create({
+  id: "admin",
+  title: "Admin Tools",
+  documentUrlPatterns: ["*://*.example.com/*"],
+  contexts: ["page"]
+});
 
-### Dynamic Menus Based on Page
-- Create menus in `onInstalled`, update based on active tab
-- Use `chrome.tabs.onActivated` to update menu visibility
+chrome.contextMenus.create({
+  id: "external-links",
+  title: "Open External",
+  targetUrlPatterns: ["http://*/*", "https://*/*"],
+  contexts: ["link"]
+});
+```
 
-### Send Selected Text to Background
-- Context menu with `"selection"` context
-- Use `@theluckystrike/webext-messaging` to process in background:
-  ```typescript
-  const messenger = createMessenger<Messages>();
-  chrome.contextMenus.onClicked.addListener(async (info) => {
-    if (info.menuItemId === "process" && info.selectionText) {
-      await messenger.sendTabMessage(tab.id, 'highlight', { text: info.selectionText });
-    }
-  });
-  ```
+## Icons (Chrome 128+)
 
-### Save User Preferences for Menu Items
-- Store checkbox/radio state with `@theluckystrike/webext-storage`
-- Restore state in `onInstalled` listener
+```javascript
+chrome.contextMenus.create({
+  id: "search-icon",
+  title: "Search",
+  contexts: ["selection"],
+  icons: { "16": "icons/search16.png", "32": "icons/search32.png" }
+});
+```
+
+## Complete Example: Productivity Menu
+
+```javascript
+// background.js
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({ id: "search", title: "🔍 Search '%s'", contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "translate", title: "🌐 Translate", contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "copy", title: "📋 Copy", contexts: ["selection", "link"] });
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  const text = info.selectionText || info.linkUrl;
+  switch (info.menuItemId) {
+    case "search":
+      chrome.tabs.create({ url: `https://google.com/search?q=${encodeURIComponent(info.selectionText)}` });
+      break;
+    case "translate":
+      chrome.tabs.create({ url: `https://translate.google.com/?text=${encodeURIComponent(info.selectionText)}` });
+      break;
+    case "copy":
+      navigator.clipboard.writeText(text);
+      break;
+  }
+});
+```
 
 ## Best Practices
-- Create all menus in `chrome.runtime.onInstalled` — they persist automatically
-- Use descriptive `id` strings — easier to debug than auto-generated IDs
-- Keep menu items minimal — too many clutters the context menu
-- Use `contexts` to show items only where relevant
-- `documentUrlPatterns` to limit to specific sites
 
-## Common Mistakes
-- Creating menus outside `onInstalled` — duplicates on every service worker restart
-- Forgetting `id` field — required in MV3 (was optional in MV2)
-- Not handling all `menuItemId` values in the click listener
+1. Use string IDs for easier debugging
+2. Check for `chrome.runtime.lastError`
+3. Clean up menus in `onUninstalled`
+4. Be specific with URL patterns
+5. Use icons for discoverability (Chrome 128+)
+
+## Reference
+
+- [Chrome Context Menus API](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
+- [Samples](https://developer.chrome.com/docs/extensions/mv3/samples#contextmenus)
