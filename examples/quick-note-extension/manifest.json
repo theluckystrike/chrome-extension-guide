@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Note",
+  "version": "1.0",
+  "description": "A fast and simple note taking extension for Chrome. Capture your ideas instantly without switching apps.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "open-popup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+N",
+        "mac": "Command+Shift+N"
+      },
+      "description": "Open Quick Note popup"
+    }
+  }
+}

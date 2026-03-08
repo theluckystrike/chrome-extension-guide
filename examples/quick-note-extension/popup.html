@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Note</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Quick Note</h1>
+      <button id="add-note-btn" class="add-btn">+ New Note</button>
+    </header>
+    
+    <div id="notes-list" class="notes-list">
+      <!-- Notes will be dynamically inserted here -->
+    </div>
+    
+    <div id="empty-state" class="empty-state">
+      <p>No notes yet. Click "+ New Note" to create your first note.</p>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
