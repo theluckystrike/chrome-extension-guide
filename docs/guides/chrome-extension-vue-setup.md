@@ -226,3 +226,8 @@ Configure in vite.config.ts for Chrome API helpers.
 - `docs/guides/vite-extension-setup.md` — general Vite configuration
 - `docs/patterns/building-with-vue.md` — Vue architecture patterns
 - `docs/patterns/content-script-vue.md` — content script patterns
+
+## Related Articles
+
+- [Content Script with Vue](../patterns/content-script-vue.md)
+- [React Setup](../guides/chrome-extension-react-setup.md)

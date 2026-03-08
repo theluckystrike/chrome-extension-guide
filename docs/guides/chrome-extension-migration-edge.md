@@ -106,3 +106,8 @@ Maintain a single codebase for both stores:
 - [Cross-Browser Extension Development](./cross-browser.md)
 - [Browser Compatibility Reference](../reference/browser-compatibility.md)
 - [Firefox Migration Guide](./chrome-extension-migration-firefox.md)
+
+## Related Articles
+
+- [Firefox Migration](../guides/chrome-extension-migration-firefox.md)
+- [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)

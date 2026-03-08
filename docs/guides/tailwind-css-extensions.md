@@ -144,3 +144,8 @@ module.exports = {
 Use these constraints in your popup layout for responsive designs within extension viewport limits.
 
 For more extension development patterns and tools, explore the resources at zovo.one.
+
+## Related Articles
+
+- [CSS Injection](../guides/chrome-extension-css-injection.md)
+- [Design System](../guides/chrome-extension-design-system.md)

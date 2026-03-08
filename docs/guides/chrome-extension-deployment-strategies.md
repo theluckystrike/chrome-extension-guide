@@ -162,3 +162,8 @@ Increase `minimum_chrome_version` in manifest to require users update:
 - [Publishing Guide](../publishing/publishing-guide.md)
 - [Version Management](../publishing/version-management.md)
 - [Automated Publishing](./chrome-extension-automated-publishing.md)
+
+## Related Articles
+
+- [Extension Packaging](../guides/extension-packaging.md)
+- [Extension Updates](../guides/extension-updates.md)

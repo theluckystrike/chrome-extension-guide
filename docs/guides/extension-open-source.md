@@ -136,3 +136,8 @@ Offer premium features, use extension as lead magnet, accept donations via GitHu
 - `docs/guides/ci-cd-pipeline.md`
 - `docs/publishing/publishing-guide.md`
 - `docs/guides/security-best-practices.md`
+
+## Related Articles
+
+- [Review Preparation](../guides/extension-review-preparation.md)
+- [Publishing Guide](../publishing/publishing-guide.md)

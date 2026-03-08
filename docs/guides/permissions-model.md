@@ -527,3 +527,8 @@ The Chrome extension permissions model provides a robust framework for building 
 6. **Explain permissions to users** with clear rationale for each request
 
 By following these patterns, you can build extensions that respect user privacy, maintain security, and provide excellent user experience while still delivering powerful functionality.
+
+## Related Articles
+
+- [Permission Gating](../patterns/permission-gating.md)
+- [Permissions Strategy](../guides/extension-permissions-strategy.md)

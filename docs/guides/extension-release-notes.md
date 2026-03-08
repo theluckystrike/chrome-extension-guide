@@ -125,3 +125,8 @@ Always include screenshots or GIFs when:
 - [Extension Updates](./extension-updates.md) - Managing the update lifecycle
 - [Version Management](../publishing/version-management.md) - Publishing and versioning strategies
 - [User Onboarding](./user-onboarding.md) - Guiding new users through your extension
+
+## Related Articles
+
+- [Extension Updates](../guides/extension-updates.md)
+- [Automated Publishing](../guides/chrome-extension-automated-publishing.md)

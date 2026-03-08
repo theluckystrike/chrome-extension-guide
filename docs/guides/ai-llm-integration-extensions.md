@@ -329,3 +329,8 @@ async function smartAIRequest(prompt) {
 Keep your AI extension performant and secure by following these principles. Make API calls from the background service worker only, never expose keys to content scripts, implement streaming for long responses to improve perceived latency, track token usage to control costs, and always provide fallback mechanisms for when AI services are unavailable.
 
 For more advanced patterns and real-world implementations, explore the extensions ecosystem on zovo.one where developers share production-ready solutions for Chrome extension development.
+
+## Related Articles
+
+- [Chrome Built-in AI APIs](../guides/chrome-built-in-ai-apis.md)
+- [OAuth Identity](../guides/identity-oauth.md)

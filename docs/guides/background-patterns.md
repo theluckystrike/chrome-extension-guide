@@ -238,3 +238,9 @@ ensureInitialized();
 - [Service Workers (MV3)](../mv3/service-workers.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)
+
+## Related Articles
+
+- [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
+- [Service Worker Debugging](../guides/service-worker-debugging.md)
+- [Event-Driven Messaging](../patterns/event-driven-messaging.md)

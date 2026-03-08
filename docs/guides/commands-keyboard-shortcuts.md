@@ -148,3 +148,8 @@ chrome.commands.onCommand.addListener(async (command) => {
 - Not providing `description` (required for shortcuts UI)
 - Relying on specific shortcuts being available (users can change them)
 - Not handling undefined `tab` in `onCommand` callback
+
+## Related Articles
+
+- [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
+- [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)

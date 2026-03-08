@@ -255,3 +255,8 @@ The small footprint also helps stay within Chrome's service worker memory limits
 
 - `docs/guides/vite-extension-setup.md` — general Vite configuration
 - `docs/guides/typescript-extensions.md` — TypeScript best practices
+
+## Related Articles
+
+- [Building with Svelte](../patterns/building-with-svelte.md)
+- [Vue Setup](../guides/chrome-extension-vue-setup.md)

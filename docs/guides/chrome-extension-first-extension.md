@@ -227,3 +227,8 @@ chrome.runtime.onInstalled.addListener(() => {
 - [Manifest JSON Reference](./manifest-json-reference.md)
 - [Debugging Extensions](./debugging-extensions.md)
 - [Extension Architecture](./extension-architecture.md)
+
+## Related Articles
+
+- [Project Structure](../guides/chrome-extension-project-structure.md)
+- [Manifest Reference](../guides/manifest-json-reference.md)

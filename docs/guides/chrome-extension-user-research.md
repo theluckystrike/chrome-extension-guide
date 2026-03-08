@@ -248,3 +248,8 @@ The exit survey page should ask:
 - [Publishing Analytics](../publishing/analytics.md)
 - [Beta Testing](../publishing/beta-testing.md)
 - [Extension Analytics](../guides/extension-analytics.md)
+
+## Related Articles
+
+- [User Onboarding](../guides/extension-onboarding.md)
+- [User Onboarding Guide](../guides/user-onboarding.md)

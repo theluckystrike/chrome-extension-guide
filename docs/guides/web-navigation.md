@@ -157,3 +157,8 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 - Ignoring `onErrorOccurred` — failed navigations still matter
 - Heavy processing in event handlers slowing navigation
 - Not using URL filters (processing every navigation is wasteful)
+
+## Related Articles
+
+- [Web Navigation API](../api-reference/web-navigation-api.md)
+- [URL Handling](../patterns/navigation-url-handling.md)

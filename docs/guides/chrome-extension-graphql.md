@@ -311,3 +311,8 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'; // heavier
 - [Cross-Origin Requests](../patterns/cross-origin-requests.md)
 - [WebSocket in Service Workers](../patterns/websocket-service-workers.md)
 - [Extension Error Reporting](../guides/extension-error-reporting.md)
+
+## Related Articles
+
+- [GraphQL Patterns](../patterns/graphql-extensions.md)
+- [REST API Patterns](../guides/rest-api-patterns.md)

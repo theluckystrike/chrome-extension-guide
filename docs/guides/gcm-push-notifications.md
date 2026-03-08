@@ -725,3 +725,8 @@ self.addEventListener('push', (event) => { /* ... */ });
 - [Web Push Protocol](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol)
 - [web-push Library](https://github.com/web-push-libs/web-push)
 - [FCM Documentation](https://firebase.google.com/docs/cloud-messaging)
+
+## Related Articles
+
+- [Notification Patterns](../patterns/notification-patterns.md)
+- [Notifications Guide](../guides/notifications-guide.md)

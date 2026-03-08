@@ -111,3 +111,8 @@ chrome.runtime.onStartup.addListener(() => console.log('[SW] onStartup'));
 - Using `setTimeout`/`setInterval` for scheduling — use `chrome.alarms`
 - Heavy initialization at top level — slows every wake-up
 - Not handling the case where SW was terminated mid-operation
+
+## Related Articles
+
+- [Service Worker Lifecycle Patterns](../patterns/service-worker-lifecycle.md)
+- [Event Handling](../patterns/service-worker-event-handling.md)

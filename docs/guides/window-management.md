@@ -98,3 +98,8 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 - Assuming window position is valid on multi-monitor — check `screen` dimensions
 - Creating too many popup windows — confuses users
 - Not requesting `"tabs"` permission when you need tab URLs in `populate: true` results
+
+## Related Articles
+
+- [Multi-Window Patterns](../patterns/multi-window.md)
+- [Windows API](../api-reference/windows-api.md)

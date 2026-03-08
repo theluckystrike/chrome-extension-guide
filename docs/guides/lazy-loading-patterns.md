@@ -512,3 +512,8 @@ reportPerformance({
 - [Background Service Worker Patterns](./background-patterns.md)
 - [Content Script Isolation](./content-script-isolation.md)
 - [Message Passing](./messaging.md)
+
+## Related Articles
+
+- [Lazy Loading Content Scripts](../patterns/lazy-loading-content-scripts.md)
+- [Caching Strategies](../guides/caching-strategies.md)

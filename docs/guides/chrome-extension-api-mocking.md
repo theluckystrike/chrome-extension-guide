@@ -304,3 +304,8 @@ it('should render popup with mock data', () => {
 - [Testing Extensions](./testing-extensions.md)
 - [Chrome Extension Unit Testing](./chrome-extension-unit-testing.md)
 - [Chrome Extension Testing Strategies](./chrome-extension-testing-strategies.md)
+
+## Related Articles
+
+- [API Rate Limits](../guides/chrome-extension-api-rate-limits.md)
+- [Testing Extensions](../guides/testing-extensions.md)

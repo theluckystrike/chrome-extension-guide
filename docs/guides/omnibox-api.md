@@ -159,3 +159,8 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 - Slow suggestion callbacks (keep under 200ms — use caching)
 - Not setting a default suggestion (confuses users)
 - Using a keyword that conflicts with common URLs or search terms
+
+## Related Articles
+
+- [Command Palette](../patterns/command-palette.md)
+- [Commands API](../api-reference/commands-api.md)

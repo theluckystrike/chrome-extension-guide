@@ -88,3 +88,8 @@ description: "A comprehensive developer guide for building Chrome extensions wit
 3. Add targeted `console.log` at messaging boundaries
 4. Use storage watch to track state changes
 5. Test permission grants with `getGrantedPermissions()`
+
+## Related Articles
+
+- [Debugging Checklist](../guides/extension-debugging-checklist.md)
+- [Debugging Tools](../guides/chrome-extension-debugging-tools.md)

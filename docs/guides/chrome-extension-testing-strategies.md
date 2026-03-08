@@ -500,3 +500,8 @@ jobs:
 - Guide: [CI/CD Pipeline](ci-cd-pipeline.md)
 - Patterns: [Testing Patterns](../patterns/testing-patterns.md)
 - MV3: [Testing MV3 Extensions](../mv3/testing-mv3-extensions.md)
+
+## Related Articles
+
+- [Playwright Testing](../guides/extension-testing-with-playwright.md)
+- [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)

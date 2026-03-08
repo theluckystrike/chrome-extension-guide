@@ -870,3 +870,9 @@ Debugging Chrome extensions requires a systematic approach because code runs acr
 - Build a debug mode toggle rather than scattering and removing console.log statements.
 
 Master these techniques and you will spend less time confused about what your extension is doing and more time building features.
+
+## Related Articles
+
+- [Debugging Checklist](../guides/extension-debugging-checklist.md)
+- [Debugging Extensions](../guides/debugging-extensions.md)
+- [Debugging Tools](../guides/chrome-extension-debugging-tools.md)

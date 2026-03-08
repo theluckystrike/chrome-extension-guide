@@ -227,3 +227,8 @@ class WorkerPool {
 - [Offscreen Permissions](../permissions/offscreen.md)
 - [Performance Optimization](../guides/performance.md)
 - [Background Service Worker Patterns](background-patterns.md)
+
+## Related Articles
+
+- [Worker Offloading](../patterns/webworker-offloading.md)
+- [WASM in Extensions](../guides/wasm-in-extensions.md)

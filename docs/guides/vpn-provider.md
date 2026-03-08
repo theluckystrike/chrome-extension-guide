@@ -711,3 +711,8 @@ Be aware of the following limitations when working with the VPN Provider API:
 - **Network Requirements**: A valid network connection is required to establish VPN tunnel
 
 Always implement feature detection and provide appropriate fallbacks for users on unsupported platforms.
+
+## Related Articles
+
+- [Proxy Settings Deep Dive](../patterns/proxy-settings-deep-dive.md)
+- [Proxy Permission](../permissions/proxy.md)

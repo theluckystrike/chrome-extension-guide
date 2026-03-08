@@ -250,3 +250,8 @@ if (await shouldActivate()) {
 - [Messaging Quickstart](../tutorials/messaging-quickstart.md)
 - [Storage Quickstart](../tutorials/storage-quickstart.md)
 - [Popup Patterns](popup-patterns.md)
+
+## Related Articles
+
+- [Content Script Injection](../patterns/content-script-injection.md)
+- [Communication Bridge](../patterns/content-script-communication-bridge.md)

@@ -195,3 +195,8 @@ async function getValidToken() {
 - Missing PKCE for public clients (security vulnerability)
 - Forgetting `interactive: false` for silent auth checks
 - Not revoking tokens on uninstall (use `chrome.runtime.setUninstallURL()` to redirect to a server-side revocation endpoint)
+
+## Related Articles
+
+- [OAuth Identity Patterns](../patterns/oauth-identity.md)
+- [Identity API Reference](../api-reference/identity-api.md)

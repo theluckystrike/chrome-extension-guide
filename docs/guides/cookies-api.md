@@ -182,3 +182,8 @@ chrome.cookies.onChanged.addListener(async (changeInfo) => {
 - Forgetting that `domain` starts with `.` for domain cookies
 - Assuming cookies persist in incognito (separate store, cleared on close)
 - Setting `httpOnly: true` then trying to read the cookie with `document.cookie` in content scripts
+
+## Related Articles
+
+- [Cookies API Reference](../api-reference/cookies-api.md)
+- [Cookies & Sessions](../patterns/cookies-sessions.md)

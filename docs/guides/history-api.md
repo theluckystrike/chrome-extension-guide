@@ -128,3 +128,8 @@ chrome.history.onVisited.addListener(async (result) => {
 - Deleting history without confirmation — it's irreversible
 - Not accounting for `maxResults` default (100) — always set explicitly
 - Calling `getVisits` in a loop — batch queries when possible
+
+## Related Articles
+
+- [History API Reference](../api-reference/history-api.md)
+- [Bookmark API](../guides/bookmark-api.md)

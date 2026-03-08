@@ -564,3 +564,8 @@ The Scripting API is essential for Manifest V3 extensions that need to:
 - Precisely target specific tabs, frames, or all frames
 
 Understanding the differences between ISOLATED and MAIN worlds, proper error handling, and the migration path from Manifest V2 will help you build robust and secure extensions.
+
+## Related Articles
+
+- [Scripting API Reference](../api-reference/scripting-api.md)
+- [Content Script Injection](../patterns/content-script-injection.md)

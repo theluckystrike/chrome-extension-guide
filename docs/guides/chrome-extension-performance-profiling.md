@@ -198,3 +198,8 @@ async function measureExtension() {
 - See [guides/performance.md](./performance.md) for optimization patterns
 - See [patterns/performance-profiling.md](../patterns/performance-profiling.md) for advanced techniques
 - See [guides/memory-management.md](./memory-management.md) for memory optimization
+
+## Related Articles
+
+- [Performance Guide](../guides/performance.md)
+- [Size Optimization](../guides/extension-size-optimization.md)

@@ -190,3 +190,8 @@ Provide a minimal but functional options.html with:
 - `storage.clear()` only removes YOUR schema keys, not all extension storage
 - Always `await` storage operations — they're async
 - `watch()` fires from ALL contexts — your options page changes trigger watches in popup/content too
+
+## Related Articles
+
+- [Options Page Patterns](../patterns/options-page-patterns.md)
+- [Accessibility](../guides/accessibility.md)

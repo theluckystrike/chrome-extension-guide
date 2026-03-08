@@ -162,3 +162,9 @@ async function updateSyncInterval(minutes) {
 - Setting period less than 30 seconds — silently clamped to minimum
 - Not handling extension update — alarms persist but handlers may change
 - Creating alarm with same name overwrites previous — can be feature or bug
+
+## Related Articles
+
+- [Alarm Scheduling Patterns](../patterns/alarm-scheduling-patterns.md)
+- [Background Patterns](../guides/background-patterns.md)
+- [Alarms Permission](../permissions/alarms.md)

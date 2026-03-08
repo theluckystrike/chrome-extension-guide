@@ -162,3 +162,8 @@ The production build process handles minification, tree-shaking unused code, and
 For continuous deployment, consider integrating the build command into your CI/CD pipeline. WXT's output structure makes it straightforward to automate submissions to extension stores using their respective APIs.
 
 This framework significantly reduces the boilerplate required for Chrome extension development. Teams building extensions at zovo.one have found that WXT's opinionated defaults accelerate development while maintaining the flexibility needed for complex extensions.
+
+## Related Articles
+
+- [Plasmo Framework](../guides/plasmo-framework-setup.md)
+- [Vite Setup](../guides/vite-extension-setup.md)

@@ -126,3 +126,8 @@ Or use offscreen documents for processing.
 - [Content Security Policy](./mv3/content-security-policy.md)
 - [CSP Reference](./reference/csp-reference.md)
 - [Performance Guide](./guides/performance.md)
+
+## Related Articles
+
+- [WASM Patterns](../patterns/wasm-extensions.md)
+- [Web Workers](../guides/web-workers-extensions.md)

@@ -284,3 +284,8 @@ jobs:
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)
 ```
+
+## Related Articles
+
+- [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
+- [E2E Testing Patterns](../patterns/e2e-testing-patterns.md)

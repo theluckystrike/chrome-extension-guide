@@ -43,3 +43,8 @@ description: "Learn Chrome extension memory management with this developer guide
 
 ## Common Mistakes
 - Large globals in content scripts, never disconnecting observers, ignoring SW termination, holding detached DOM refs
+
+## Related Articles
+
+- [Memory Management Patterns](../patterns/memory-management.md)
+- [Performance Guide](../guides/performance.md)

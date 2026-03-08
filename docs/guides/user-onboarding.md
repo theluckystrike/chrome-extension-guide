@@ -351,3 +351,8 @@ For more information on related topics, consult these additional guides:
 - **[Extension Updates](../guides/extension-updates.md)** - Best practices for managing update flows and maintaining backward compatibility
 - **[State Management Patterns](../patterns/state-management.md)** - Comprehensive guide to storing and retrieving extension state
 - **[Listing Optimization](../publishing/listing-optimization.md)** - Tips for optimizing your Chrome Web Store listing to improve conversion rates
+
+## Related Articles
+
+- [Onboarding Patterns](../patterns/extension-onboarding.md)
+- [User Research](../guides/chrome-extension-user-research.md)

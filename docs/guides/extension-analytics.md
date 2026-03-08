@@ -137,3 +137,8 @@ window.addEventListener('unhandledrejection', e =>
 
 - [CWS User Data Policy](https://developer.chrome.com/docs/webstore/user-data)
 - [GA4 Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/ga4)
+
+## Related Articles
+
+- [Analytics & Telemetry](../patterns/analytics-telemetry.md)
+- [Data Privacy](../guides/chrome-extension-data-privacy.md)

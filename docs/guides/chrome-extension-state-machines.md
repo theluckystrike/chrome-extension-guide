@@ -317,3 +317,8 @@ Use the [XState Visualizer](https://stately.ai/viz) during development to diagra
 - [State Management Patterns](../patterns/state-management.md)
 - [Extension Architecture Patterns](./architecture-patterns.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
+
+## Related Articles
+
+- [State Management](../patterns/state-management.md)
+- [Extension Architecture](../guides/extension-architecture.md)

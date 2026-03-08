@@ -108,3 +108,8 @@ Enable fast iteration during development:
 - [Debugging Extensions](./debugging-extensions.md) - In-depth debugging techniques.
 - [Vite Extension Setup](./vite-extension-setup.md) - Configure Vite for extensions.
 - [Linting & Code Quality](./linting-code-quality.md) - Set up ESLint and Prettier.
+
+## Related Articles
+
+- [TypeScript Setup](../guides/typescript-setup.md)
+- [Vite Setup](../guides/vite-extension-setup.md)

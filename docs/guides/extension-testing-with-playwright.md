@@ -173,3 +173,8 @@ jobs:
 - [Testing Extensions](testing-extensions.md)
 - [CI/CD Pipeline](ci-cd-pipeline.md)
 - [Chrome Extension Testing Strategies](chrome-extension-testing-strategies.md)
+
+## Related Articles
+
+- [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
+- [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)

@@ -105,3 +105,9 @@ document.addEventListener('keydown', (e) => {
 - Low contrast text — fails WCAG, hard to read in bright light
 - Trapping focus without Escape key exit
 - `aria-label` on elements that already have visible text (redundant)
+
+## Related Articles
+
+- [Accessibility Patterns](../patterns/accessibility.md)
+- [Keyboard Shortcuts Guide](../guides/keyboard-shortcuts.md)
+- [Accessibility Testing](../guides/extension-a11y-testing.md)

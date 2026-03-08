@@ -441,3 +441,8 @@ Always:
 - Handle all `onInstalled` reasons
 - Recreate alarms after updates
 - Test your update flow thoroughly
+
+## Related Articles
+
+- [Update Handling](../patterns/extension-update-handling.md)
+- [Extension Packaging](../guides/extension-packaging.md)

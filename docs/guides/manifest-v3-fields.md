@@ -541,3 +541,8 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 - [MV2 to MV3 Migration Guide](mv2-to-mv3-migration.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Service Worker Lifecycle](service-worker-lifecycle.md)
+
+## Related Articles
+
+- [Manifest Fields](../reference/manifest-fields.md)
+- [Manifest Reference](../guides/manifest-json-reference.md)

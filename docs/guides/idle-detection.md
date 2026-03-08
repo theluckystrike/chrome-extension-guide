@@ -355,3 +355,8 @@ The chrome.idle API provides essential functionality:
 4. **Three states** - active, idle, and locked
 
 Use these capabilities to implement auto-save, session timeouts, away status, and more.
+
+## Related Articles
+
+- [Idle API Reference](../api-reference/idle.md)
+- [Power Management](../guides/power-management.md)

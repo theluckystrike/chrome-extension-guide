@@ -756,3 +756,8 @@ await messenger.sendTab(tabId, "increment", { by: 1 });
 - [Declarative Net Request](../mv3/declarative-net-request.md) — network rules
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) — storage patterns
 - [Alarms API](../api-reference/alarms-api.md) — scheduling reference
+
+## Related Articles
+
+- [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
+- [MV3 Migration Guide](../mv3/manifest-v3-migration-guide.md)

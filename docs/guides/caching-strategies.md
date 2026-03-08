@@ -467,3 +467,8 @@ const { data, fromCache, stale } = await offlineCache.fetch(
 - [State Management](../patterns/state-management.md) - Managing application state across contexts
 - [Performance](../guides/performance.md) - General performance optimization techniques
 - [Memory Management](../guides/memory-management.md) - Managing memory in service workers
+
+## Related Articles
+
+- [Caching Patterns](../patterns/caching-strategies.md)
+- [Bundle Analysis](../guides/extension-bundle-analysis.md)

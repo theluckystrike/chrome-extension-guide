@@ -103,3 +103,8 @@ async function getConfig() {
 - [ ] No memory leaks in content scripts
 - [ ] API responses cached
 - [ ] No unnecessary message passing
+
+## Related Articles
+
+- [Performance Profiling](../patterns/performance-profiling.md)
+- [Performance Profiling](../guides/extension-performance-profiling.md)

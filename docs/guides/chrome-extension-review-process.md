@@ -86,3 +86,8 @@ Minimize permissions to only what is strictly necessary. Write clear, accurate d
 - [Submission Process](./publishing/submission-process.md)
 - [Common Rejections](./publishing/common-rejections.md)
 - [Privacy Policy Template](./publishing/privacy-policy-template.md)
+
+## Related Articles
+
+- [Review Preparation](../guides/extension-review-preparation.md)
+- [Code Review Checklist](../guides/chrome-extension-code-review-checklist.md)

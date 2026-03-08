@@ -684,3 +684,8 @@ When building extension managers, be mindful of:
 The `chrome.management` API is a powerful tool for building extension management solutions. From simple enable/disable toggles to comprehensive dashboards with security analysis, this API provides the foundation for managing Chrome's extension ecosystem. Remember to handle edge cases like policy-installed extensions and always provide good UX with proper error handling and user feedback.
 
 For more information, see the official [Chrome Management API documentation](https://developer.chrome.com/docs/extensions/reference/management/).
+
+## Related Articles
+
+- [Management API Reference](../api-reference/management-api.md)
+- [Extension Configuration](../patterns/extension-configuration.md)

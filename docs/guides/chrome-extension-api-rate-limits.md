@@ -164,3 +164,8 @@ Common error codes:
 - [Size Limits Reference](/reference/size-limits.md)
 - [Storage API Deep Dive](/api-reference/storage-api-deep-dive.md)
 - [Rate Limiting Patterns](/patterns/rate-limiting.md)
+
+## Related Articles
+
+- [Rate Limiting Patterns](../patterns/rate-limiting.md)
+- [API Mocking](../guides/chrome-extension-api-mocking.md)

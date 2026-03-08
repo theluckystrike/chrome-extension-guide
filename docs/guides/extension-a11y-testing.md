@@ -219,3 +219,8 @@ Never remove outline without replacement:
 ## Related Guides
 - [Accessibility](guides/accessibility.md) - General a11y principles
 - [Accessibility Patterns](patterns/accessibility.md) - Implementation patterns
+
+## Related Articles
+
+- [Accessibility](../guides/accessibility.md)
+- [Testing Extensions](../guides/testing-extensions.md)

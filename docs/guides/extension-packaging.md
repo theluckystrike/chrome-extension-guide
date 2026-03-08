@@ -200,3 +200,8 @@ Always verify your package before distribution:
 - [Publishing Guide](../publishing/publishing-guide.md) — Overview of distribution options
 - [Submission Process](../publishing/submission-process.md) — Step-by-step Store submission
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Automation best practices
+
+## Related Articles
+
+- [Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
+- [Extension Updates](../guides/extension-updates.md)

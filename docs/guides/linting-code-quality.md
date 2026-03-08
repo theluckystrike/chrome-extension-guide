@@ -993,3 +993,8 @@ A robust code quality pipeline for Chrome extensions includes:
 8. **Security auditing** via npm audit and Snyk, with lockfile validation.
 9. **GitHub Actions CI** that runs lint, type check, build, and security checks on every PR.
 10. **Pre-publish automation** that validates everything before uploading to the Chrome Web Store.
+
+## Related Articles
+
+- [Code Review Checklist](../guides/chrome-extension-code-review-checklist.md)
+- [Environment Variables](../guides/chrome-extension-env-variables.md)

@@ -129,3 +129,8 @@ async function trackDownload(item) {
 - Missing `downloads` permission in manifest
 - Using `downloads.open` without `downloads.ui` permission
 - Not cleaning up blob URLs after download (`URL.revokeObjectURL`)
+
+## Related Articles
+
+- [Downloads Management Patterns](../patterns/downloads-management.md)
+- [Downloads API](../api-reference/downloads-api.md)

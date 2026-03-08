@@ -751,3 +751,8 @@ The Chrome Extension Web Navigation API provides comprehensive tools for monitor
 - **Filtering**: Use URL filters and event filters to improve performance
 
 By mastering these advanced patterns, you can build powerful navigation analytics, deep linking systems, and content filtering extensions.
+
+## Related Articles
+
+- [Web Navigation Patterns](../patterns/webnavigation-patterns.md)
+- [Web Navigation](../guides/web-navigation.md)

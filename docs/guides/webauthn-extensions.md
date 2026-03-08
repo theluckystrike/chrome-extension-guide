@@ -812,3 +812,8 @@ For more information, see:
 - [WebAuthn W3C Specification](https://www.w3.org/TR/webauthn/)
 - [Chrome Web Authentication API](https://developer.chrome.com/docs/web-platform/webauthn)
 - [FIDO Alliance Standards](https://fidoalliance.org/specifications/)
+
+## Related Articles
+
+- [OAuth Identity](../patterns/oauth-identity.md)
+- [Security Audit](../guides/extension-security-audit.md)

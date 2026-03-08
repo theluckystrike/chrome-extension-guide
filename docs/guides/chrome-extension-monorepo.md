@@ -846,3 +846,8 @@ Create shared packages only when code genuinely serves multiple purposes. Premat
 - [CI/CD Pipeline](./ci-cd-pipeline.md) - GitHub Actions setup for extension builds
 - [TypeScript Extensions](./typescript-extensions.md) - TypeScript configuration for browser extensions
 - [Extension Testing with Playwright](./extension-testing-with-playwright.md) - E2E testing strategies
+
+## Related Articles
+
+- [Project Structure](../guides/chrome-extension-project-structure.md)
+- [Environment Variables](../guides/chrome-extension-env-variables.md)

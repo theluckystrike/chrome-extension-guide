@@ -309,3 +309,8 @@ For more information on related topics, see these guides:
 - [Vite Extension Setup](./vite-extension-setup.md) - Fast builds with Vite
 - [esbuild Extension Setup](./esbuild-extension-setup.md) - Ultra-fast builds with esbuild
 - [TypeScript Extensions](./typescript-extensions.md) - TypeScript configuration and type definitions for Chrome APIs
+
+## Related Articles
+
+- [Rollup Setup](../guides/rollup-extension-setup.md)
+- [Vite Setup](../guides/vite-extension-setup.md)

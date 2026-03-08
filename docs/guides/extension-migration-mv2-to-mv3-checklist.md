@@ -164,3 +164,8 @@ A practical, step-by-step checklist for migrating Chrome extensions from Manifes
 | Host permissions | In `permissions` | Separate `host_permissions` |
 
 Complete this checklist, test thoroughly, and your extension will be ready for Manifest V3 submission to the Chrome Web Store.
+
+## Related Articles
+
+- [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
+- [MV3 Migration Cheatsheet](../guides/mv3-migration-cheatsheet.md)

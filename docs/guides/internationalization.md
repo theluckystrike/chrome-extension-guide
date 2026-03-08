@@ -132,3 +132,8 @@ chrome.i18n.detectLanguage("Bonjour le monde", (result) => {
 - Typo in message key — `getMessage` returns empty string silently
 - Forgetting to add new strings to ALL locale files — causes fallback to default
 - Using string concatenation instead of placeholders — breaks word order in some languages
+
+## Related Articles
+
+- [i18n API Reference](../api-reference/i18n-api.md)
+- [Advanced i18n](../patterns/advanced-i18n.md)

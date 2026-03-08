@@ -379,3 +379,8 @@ function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
 - [Popup Patterns](popup-patterns.md)
 - [MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
 - [Permissions Best Practices](../permissions/best-practices.md)
+
+## Related Articles
+
+- [WebRTC Screen Sharing](../patterns/webrtc-screen-sharing.md)
+- [Desktop Capture](../guides/desktop-capture.md)

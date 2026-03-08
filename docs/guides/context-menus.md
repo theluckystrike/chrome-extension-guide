@@ -127,3 +127,8 @@ chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
 - Creating menus outside `onInstalled` — duplicates on every service worker restart
 - Forgetting `id` field — required in MV3 (was optional in MV2)
 - Not handling all `menuItemId` values in the click listener
+
+## Related Articles
+
+- [Context Menu Patterns](../patterns/context-menu-patterns.md)
+- [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

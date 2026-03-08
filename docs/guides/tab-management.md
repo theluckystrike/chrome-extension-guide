@@ -124,3 +124,8 @@ const storage = createStorage(defineSchema({
 - Not checking if content script is injected before `sendTabMessage`
 - Forgetting `activeTab` gives access to current tab without `"tabs"` permission
 - Tab IDs are not persistent across browser restarts
+
+## Related Articles
+
+- [Tab Management Patterns](../patterns/tab-management.md)
+- [Tab Group Patterns](../patterns/tab-group-patterns.md)

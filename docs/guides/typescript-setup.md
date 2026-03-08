@@ -1039,3 +1039,8 @@ A well-configured TypeScript setup for Chrome extensions involves:
 6. **Path aliases** synced between `tsconfig.json` and your bundler for clean imports across contexts.
 
 These patterns scale from small utility extensions to complex multi-context applications with dozens of message types and storage schemas.
+
+## Related Articles
+
+- [Dev Tools](../guides/chrome-extension-dev-tools.md)
+- [Webpack Setup](../guides/webpack-extension-setup.md)

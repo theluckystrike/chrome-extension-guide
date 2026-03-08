@@ -191,3 +191,8 @@ element.classList.add('ext-highlight');
 - [Content Script Patterns](./content-script-patterns.md)
 - [Theming: Dark Mode](../patterns/theming-dark-mode.md)
 - [Scripting API Reference](../api-reference/scripting-api.md)
+
+## Related Articles
+
+- [Content Script Injection](../patterns/content-script-injection.md)
+- [Content Script Patterns](../guides/content-script-patterns.md)

@@ -256,3 +256,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - [Debugging Extensions Guide](debugging-extensions.md) - General debugging fundamentals
 - [Advanced Debugging](advanced-debugging.md) - Deep-dive debugging techniques
 - [Service Worker Debugging](service-worker-debugging.md) - Detailed SW lifecycle debugging
+
+## Related Articles
+
+- [Debugging Extensions](../guides/debugging-extensions.md)
+- [Advanced Debugging](../guides/advanced-debugging.md)

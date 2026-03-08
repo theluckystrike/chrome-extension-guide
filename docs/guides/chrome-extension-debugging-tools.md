@@ -95,3 +95,8 @@ chrome.management.getSelf((info) => {
 - [Debugging Extensions](./debugging-extensions.md) - Basic debugging techniques
 - [Advanced Debugging](./advanced-debugging.md) - Complex debugging scenarios
 - [Service Worker Debugging](./service-worker-debugging.md) - Service worker specific tips
+
+## Related Articles
+
+- [Debugging Extensions](../guides/debugging-extensions.md)
+- [Advanced Debugging](../guides/advanced-debugging.md)

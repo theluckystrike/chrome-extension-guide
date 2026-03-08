@@ -243,3 +243,8 @@ Inject secrets from CI environment variables:
 - [Vite Extension Setup Guide](./vite-extension-setup.md)
 - [Webpack Extension Setup Guide](./webpack-extension-setup.md)
 - [CI/CD Pipeline Guide](./ci-cd-pipeline.md)
+
+## Related Articles
+
+- [Monorepo Setup](../guides/chrome-extension-monorepo.md)
+- [Linting & Code Quality](../guides/linting-code-quality.md)

@@ -178,3 +178,8 @@ For more detailed guidance on specific security topics, refer to:
 - [guides/security-best-practices.md](./security-best-practices.md) - Fundamental security principles
 - [guides/security-hardening.md](./security-hardening.md) - Advanced hardening techniques
 - [reference/csp-reference.md](../reference/csp-reference.md) - CSP configuration reference
+
+## Related Articles
+
+- [Security Hardening](../guides/security-hardening.md)
+- [Security Best Practices](../guides/security-best-practices.md)

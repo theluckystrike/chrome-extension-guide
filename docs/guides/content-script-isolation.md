@@ -116,3 +116,8 @@ Page JS <-- window.postMessage --> Content Script <-- chrome.runtime --> Backgro
 - Forgetting that injected `<script>` tags run in page context, not extension context
 - Not filtering `window.postMessage` events — any page script can send messages
 - Expecting content script to have access to `chrome.tabs` — it doesn't
+
+## Related Articles
+
+- [Content Script Isolation](../patterns/content-script-isolation.md)
+- [Content Script Patterns](../guides/content-script-patterns.md)

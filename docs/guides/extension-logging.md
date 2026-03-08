@@ -170,3 +170,8 @@ Or use a custom plugin to strip all logging calls in production builds.
 - [Debugging Extensions](./debugging-extensions.md) — General debugging techniques
 - [Service Worker Debugging](./service-worker-debugging.md) — Background worker specifics
 - [Extension Error Reporting](./extension-error-reporting.md) — Collecting and reporting errors
+
+## Related Articles
+
+- [Logging Patterns](../patterns/logging-patterns.md)
+- [Error Reporting](../guides/extension-error-reporting.md)

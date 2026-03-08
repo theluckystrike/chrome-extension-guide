@@ -163,3 +163,8 @@ const data = await msg.send("getPageData");
 - [Content Script Isolation](/docs/guides/content-script-isolation.md)
 - [Building with React](/docs/guides/building-with-react.md)
 - [Building with Svelte](/docs/guides/building-with-svelte.md)
+
+## Related Articles
+
+- [Content Script Patterns](../guides/content-script-patterns.md)
+- [Content Script Lifecycle](../patterns/content-script-lifecycle.md)

@@ -92,3 +92,8 @@ Use this checklist when reviewing pull requests for Chrome extension projects to
 - See [Security Best Practices](../guides/security-best-practices.md) for security guidelines
 - See [Chrome Extension Security Checklist](../guides/chrome-extension-security-checklist.md) for security verification
 - See [Linting & Code Quality](../guides/linting-code-quality.md) for code quality standards
+
+## Related Articles
+
+- [Review Preparation](../guides/extension-review-preparation.md)
+- [Linting & Code Quality](../guides/linting-code-quality.md)

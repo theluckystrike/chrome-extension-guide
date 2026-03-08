@@ -1166,3 +1166,8 @@ Cross-references:
 - `docs/guides/cross-browser.md` — browser compatibility considerations
 - `docs/guides/extension-updates.md` — update lifecycle and migration
 - `docs/guides/security-hardening.md` — security checks to add to your pipeline
+
+## Related Articles
+
+- [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
+- [Release Notes](../guides/extension-release-notes.md)

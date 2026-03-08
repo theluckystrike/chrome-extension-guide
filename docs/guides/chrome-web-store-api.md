@@ -88,3 +88,8 @@ curl -H "Authorization: Bearer ACCESS_TOKEN" \
 - Use CI/CD secrets or environment variables
 - Rotate refresh tokens periodically
 - Limit OAuth scope to `chromewebstore` only
+
+## Related Articles
+
+- [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
+- [Listing Optimization](../publishing/listing-optimization.md)

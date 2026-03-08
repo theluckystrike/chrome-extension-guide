@@ -146,3 +146,8 @@ Rollup offers the best balance of bundle optimization and configuration control,
 - [Vite Extension Setup](./vite-extension-setup.md) - Alternative modern bundler
 - [ESBuild Extension Setup](./esbuild-extension-setup.md) - Fastest bundler option
 - [TypeScript Extensions](./typescript-extensions.md) - Type-safe extension development
+
+## Related Articles
+
+- [Webpack Setup](../guides/webpack-extension-setup.md)
+- [Vite Setup](../guides/vite-extension-setup.md)

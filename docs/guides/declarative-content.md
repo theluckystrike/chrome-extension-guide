@@ -167,3 +167,8 @@ chrome.declarativeContent.onPageChanged.addRules([
 - Only setting rules in `onInstalled` — rules persist, but good practice to reset
 - Using `RequestContentScript` in MV3 (not supported — use `chrome.scripting` instead)
 - Missing `"declarativeContent"` in permissions array
+
+## Related Articles
+
+- [Declarative Content Patterns](../patterns/declarative-content-patterns.md)
+- [Declarative Content Permission](../permissions/declarativeContent.md)

@@ -549,3 +549,8 @@ Key takeaways from this guide:
 - Follow security best practices when handling captured media
 
 With these patterns and best practices, you're well-equipped to build robust tab capture extensions that provide excellent user experiences while respecting browser security and performance considerations.
+
+## Related Articles
+
+- [Desktop Capture Patterns](../patterns/desktop-capture.md)
+- [Desktop Capture](../guides/desktop-capture.md)

@@ -136,3 +136,8 @@ async function tagBookmark(id, tags) {
 - Confusing `remove` (single) with `removeTree` (recursive)
 - Not handling the asynchronous nature of all bookmark APIs
 - Forgetting that `search` matches both title AND URL substrings
+
+## Related Articles
+
+- [Bookmarks API Reference](../api-reference/bookmarks-api.md)
+- [History API](../guides/history-api.md)

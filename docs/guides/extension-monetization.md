@@ -244,3 +244,8 @@ const premiumAction = withLicenseCheck(async (data) => {
 - `docs/guides/security-best-practices.md` — Secure storage and authentication
 - `docs/patterns/state-management.md` — State management patterns
 - `docs/guides/identity-oauth.md` — Chrome Identity API for user authentication
+
+## Related Articles
+
+- [Listing Optimization](../publishing/listing-optimization.md)
+- [Release Notes](../guides/extension-release-notes.md)

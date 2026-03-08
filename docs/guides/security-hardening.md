@@ -896,3 +896,8 @@ Cross-references:
 - `docs/guides/permissions-model.md` — Chrome permissions system in depth
 - `docs/guides/content-script-isolation.md` — content script security boundaries
 - `docs/guides/web-request-patterns.md` — network request handling
+
+## Related Articles
+
+- [Security Best Practices](../guides/security-best-practices.md)
+- [Security Audit](../guides/extension-security-audit.md)

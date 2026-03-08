@@ -177,3 +177,8 @@ If your extension is rejected:
 - [Common Rejections](../publishing/common-rejections.md)
 - [Privacy Policy Template](../publishing/privacy-policy-template.md)
 - [Listing Optimization](../publishing/listing-optimization.md)
+
+## Related Articles
+
+- [Common Rejections](../publishing/common-rejections.md)
+- [Rejection Fixes](../publishing/chrome-web-store-rejection-fixes.md)

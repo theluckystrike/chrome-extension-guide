@@ -153,3 +153,8 @@ Setting up CI/CD for your extension takes some initial effort but pays dividends
 For extensions that need to reach users quickly and reliably, GitHub Actions provides the infrastructure you need without maintaining your own build servers. The combination of automated testing, artifact storage, and integrated publishing creates a smooth path from code to users.
 
 If you're looking to streamline your extension development workflow further, zovo.one offers additional tools and resources for modern extension development.
+
+## Related Articles
+
+- [CI/CD Pipeline](../guides/ci-cd-pipeline.md)
+- [Automated Publishing](../guides/chrome-extension-automated-publishing.md)

@@ -221,3 +221,8 @@ Configure to trigger CWS publish on release:
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Build automation
 - [Version Management](../publishing/version-management.md) — Version strategies
 - [Chrome Web Store API](../guides/chrome-web-store-api.md) — API reference
+
+## Related Articles
+
+- [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
+- [Chrome Web Store API](../guides/chrome-web-store-api.md)

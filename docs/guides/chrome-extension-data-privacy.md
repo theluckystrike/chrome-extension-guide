@@ -166,3 +166,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 - [GDPR Official Guidelines](https://gdpr.eu/)
 - [CCPA California Attorney General](https://oag.ca.gov/privacy/ccpa)
 - [COPPA Compliance](https://www.ftc.gov/tips-advice/business-center/guidance/complying-coppa-frequently-asked-questions)
+
+## Related Articles
+
+- [Analytics Privacy](../patterns/extension-analytics-privacy.md)
+- [Permissions Model](../guides/permissions-model.md)

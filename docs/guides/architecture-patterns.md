@@ -1060,3 +1060,9 @@ Regardless of scale, these principles apply:
 - **Split extensions only when the costs of coupling exceed the costs of coordination.** Cross-extension messaging is powerful but adds operational complexity.
 
 Start simple. Refactor toward complexity only when the code demands it.
+
+## Related Articles
+
+- [Extension Architecture](../guides/extension-architecture.md)
+- [Project Structure](../guides/chrome-extension-project-structure.md)
+- [State Persistence](../patterns/extension-state-persistence.md)

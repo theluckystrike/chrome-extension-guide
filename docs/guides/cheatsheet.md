@@ -410,3 +410,8 @@ const user = await protocol.send("getUser", { id: "123" });
 - [Content Script Patterns](content-script-patterns.md)
 - [Debugging Extensions](debugging-extensions.md)
 - [MV2 to MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
+
+## Related Articles
+
+- [Chrome API Index](../reference/chrome-api-index.md)
+- [Manifest Reference](../guides/manifest-json-reference.md)

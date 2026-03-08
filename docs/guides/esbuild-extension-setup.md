@@ -504,3 +504,8 @@ For more information on related topics, see these guides:
 - [TypeScript Extensions](./typescript-extensions.md) - TypeScript configuration and type definitions for Chrome APIs
 - [CI/CD Pipeline](./ci-cd-pipeline.md) - Automated testing and deployment workflows
 - [Vite Extension Setup](./vite-extension-setup.md) - Alternative build tool comparison
+
+## Related Articles
+
+- [Vite Setup](../guides/vite-extension-setup.md)
+- [Webpack Setup](../guides/webpack-extension-setup.md)

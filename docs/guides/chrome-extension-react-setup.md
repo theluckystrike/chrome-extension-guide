@@ -200,3 +200,8 @@ export function useMessage(callback: (message: any) => void) {
 - [Building with React](./patterns/building-with-react.md)
 - [Content Script React](./patterns/content-script-react.md)
 - [Vite Extension Setup](./guides/vite-extension-setup.md)
+
+## Related Articles
+
+- [Building with React](../patterns/building-with-react.md)
+- [Svelte Setup](../guides/chrome-extension-svelte-setup.md)

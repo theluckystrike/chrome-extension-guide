@@ -163,3 +163,8 @@ Follow WCAG 2.1 AA guidelines:
 - [Accessibility Guide](accessibility.md) — Full accessibility requirements
 - [Popup Patterns](popup-patterns.md) — Implementation patterns
 - [Options Page](options-page.md) — Settings page design
+
+## Related Articles
+
+- [CSS Injection](../guides/chrome-extension-css-injection.md)
+- [Dark Mode](../guides/theming-dark-mode.md)

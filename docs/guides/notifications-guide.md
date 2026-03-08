@@ -156,3 +156,8 @@ chrome.notifications.getAll((notifications) => {
 - Forgetting to handle `onClicked` — dead-end notifications frustrate users
 - Creating too many notifications — OS may throttle or user will disable
 - Not clearing notifications — stale notifications pile up
+
+## Related Articles
+
+- [Notification Patterns](../patterns/notification-patterns.md)
+- [Notifications API](../api-reference/notifications-api.md)

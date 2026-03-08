@@ -130,3 +130,8 @@ Be aware of these Safari-specific limitations:
 - [Browser Compatibility Reference](../reference/browser-compatibility.md)
 - [Edge Migration Guide](./chrome-extension-migration-edge.md)
 - [Firefox Migration Guide](./chrome-extension-migration-firefox.md)
+
+## Related Articles
+
+- [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
+- [Cross-Browser Guide](../guides/cross-browser.md)

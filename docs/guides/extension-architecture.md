@@ -60,3 +60,8 @@ description: "Learn Chrome extension extension architecture with this developer 
 - Web pages can't access extension APIs
 - Extension pages can't access other extensions
 - CSP restrictions in MV3 (cross-ref: `docs/mv3/content-security-policy.md`)
+
+## Related Articles
+
+- [Architecture Patterns](../guides/architecture-patterns.md)
+- [Project Structure](../guides/chrome-extension-project-structure.md)

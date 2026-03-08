@@ -586,3 +586,8 @@ chrome.commands.onCommand.addListener((command) => {
 - Patterns: `docs/patterns/keyboard-shortcuts-api.md`
 - Keyboard Navigation: `docs/guides/chrome-extension-keyboard-navigation.md`
 - Reference: [developer.chrome.com/docs/extensions/reference/api/commands](https://developer.chrome.com/docs/extensions/reference/api/commands)
+
+## Related Articles
+
+- [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
+- [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)

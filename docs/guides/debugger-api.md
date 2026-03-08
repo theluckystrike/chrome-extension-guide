@@ -867,3 +867,8 @@ Key takeaways:
 - Combine with other Extension APIs for powerful integrations
 
 For more information, refer to the official [Chrome Debugger API documentation](https://developer.chrome.com/docs/extensions/mv3/reference/debugger) and the [Chrome DevTools Protocol Viewer](https://chromedevtools.github.io/devtools-protocol/).
+
+## Related Articles
+
+- [Debugging Extensions](../guides/debugging-extensions.md)
+- [Advanced Debugging](../guides/advanced-debugging.md)

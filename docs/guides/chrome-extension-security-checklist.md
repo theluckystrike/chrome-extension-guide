@@ -93,3 +93,8 @@ Use this checklist when developing, auditing, or reviewing a Chrome extension.
 | Storage | Use `chrome.storage`, not `localStorage` |
 | Messaging | Validate sender and message schema |
 | Dependencies | Audit regularly, lock versions |
+
+## Related Articles
+
+- [Security Best Practices](../guides/security-best-practices.md)
+- [Security Hardening](../guides/security-hardening.md)

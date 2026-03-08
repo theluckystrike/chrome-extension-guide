@@ -352,3 +352,8 @@ For more information on related topics, see these guides:
 - [TypeScript Extensions](./typescript-extensions.md) - TypeScript configuration and type definitions for Chrome APIs
 - [CI/CD Pipeline](./ci-cd-pipeline.md) - Automated testing and deployment workflows
 - [Architecture Patterns](./architecture-patterns.md) - Design patterns for scalable extension architecture
+
+## Related Articles
+
+- [Esbuild Setup](../guides/esbuild-extension-setup.md)
+- [Rollup Setup](../guides/rollup-extension-setup.md)

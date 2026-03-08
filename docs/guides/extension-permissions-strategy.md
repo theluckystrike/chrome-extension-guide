@@ -165,3 +165,8 @@ Provide clear, honest descriptions in your store listing and extension settings.
 - [Permissions Model](./permissions-model.md) — Deep dive into Manifest V3 permissions
 - [Advanced Permissions](../tutorials/advanced-permissions.md) — Complex permission patterns
 - [Common Rejections](../publishing/common-rejections.md) — Avoiding review issues
+
+## Related Articles
+
+- [Permissions Model](../guides/permissions-model.md)
+- [Permission Gating](../patterns/permission-gating.md)

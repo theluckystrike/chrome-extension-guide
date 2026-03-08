@@ -315,3 +315,8 @@ Run: `npx size-limit`
 - [Extension Size Optimization](extension-size-optimization.md) - Deep dive into size reduction techniques
 - [Performance](performance.md) - Runtime performance best practices
 - [Lazy Loading Patterns](lazy-loading-patterns.md) - Code splitting and lazy loading strategies
+
+## Related Articles
+
+- [Bundle Optimization](../patterns/bundle-optimization.md)
+- [Size Optimization](../guides/extension-size-optimization.md)

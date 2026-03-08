@@ -749,3 +749,8 @@ function downloadBlob(blob, filename) {
 - `chrome.notifications` - For user feedback during capture process
 - `chrome.contextMenus` - For adding capture options to right-click menu
 - `chrome.commands` - For keyboard shortcuts to trigger capture
+
+## Related Articles
+
+- [Downloads Management](../patterns/downloads-management.md)
+- [Desktop Capture](../guides/desktop-capture.md)

@@ -217,3 +217,8 @@ async function autoBackupToSync(key: string, data: unknown): Promise<void> {
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Downloads API](../api-reference/downloads-api.md)
 - [Storage Migration Patterns](./storage-migration.md)
+
+## Related Articles
+
+- [State Persistence](../patterns/extension-state-persistence.md)
+- [Storage Migration](../guides/storage-migration.md)

@@ -310,3 +310,8 @@ This pattern ensures that changes to shared types trigger rebuilds of all depend
 Start simple and evolve as needed. A flat structure works for single-purpose extensions. Add `src/` and a build tool when TypeScript or multiple files become unwieldy. Move to monorepo when maintaining multiple extensions or a web companion app.
 
 Remember: the goal is maintainability. If you can't find files, or changing one thing breaks another, your structure needs adjustment.
+
+## Related Articles
+
+- [Architecture Patterns](../guides/architecture-patterns.md)
+- [Monorepo](../guides/chrome-extension-monorepo.md)

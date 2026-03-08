@@ -208,3 +208,8 @@ Provide a minimal but complete template:
 - `window.close()` closes the popup programmatically
 - Console logs appear in the popup's own DevTools (right-click popup > Inspect)
 - Popup HTML must be a local file (no remote URLs)
+
+## Related Articles
+
+- [Popup Communication](../patterns/popup-communication.md)
+- [Popup Data Loading](../patterns/popup-data-loading.md)

@@ -380,3 +380,8 @@ Run through this checklist before publishing:
 - [Performance Optimization](performance.md) — Comprehensive performance guide
 - [CI/CD Pipeline](ci-cd-pipeline.md) — Automate builds and publishing
 - [Size Limits Reference](../reference/size-limits.md) — Official size limits and quotas
+
+## Related Articles
+
+- [Bundle Optimization](../patterns/bundle-optimization.md)
+- [Bundle Analysis](../guides/extension-bundle-analysis.md)

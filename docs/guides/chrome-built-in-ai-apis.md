@@ -153,3 +153,8 @@ Extensions offer AI features while maintaining trust. No data sent to third part
 This privacy-first approach aligns with Chrome's direction and user expectations. Extensions using on-device AI can market themselves as privacy-respecting alternatives to cloud solutions.
 
 For more advanced AI integration patterns in Chrome extensions, check out the guides at zovo.one.
+
+## Related Articles
+
+- [AI Integration](../guides/ai-llm-integration-extensions.md)
+- [First Extension](../guides/chrome-extension-first-extension.md)

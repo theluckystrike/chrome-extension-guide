@@ -524,3 +524,8 @@ Linux has limited audio capture support. Test thoroughly on target distributions
 - `MediaRecorder` - Record MediaStream objects
 - `RTCPeerConnection` - Stream via WebRTC
 - `ImageCapture` - Capture still images from video tracks
+
+## Related Articles
+
+- [Desktop Capture Patterns](../patterns/desktop-capture.md)
+- [Tab Capture](../guides/tab-capture.md)

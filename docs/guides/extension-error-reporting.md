@@ -193,3 +193,8 @@ class ErrorReporter {
 - [Error Handling Reference](../reference/error-handling.md)
 - [Debugging Extensions](./debugging-extensions.md)
 - [Extension Analytics](./extension-analytics.md)
+
+## Related Articles
+
+- [Error Handling Patterns](../patterns/error-handling.md)
+- [Extension Logging](../guides/extension-logging.md)

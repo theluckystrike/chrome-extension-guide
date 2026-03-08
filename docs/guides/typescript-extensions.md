@@ -152,3 +152,8 @@ Cross-references:
 - `docs/guides/architecture-patterns.md` — structuring extensions
 - `docs/guides/ci-cd-pipeline.md` — automated builds
 - `docs/guides/debugging-extensions.md` — debugging typed code
+
+## Related Articles
+
+- [TypeScript Setup](../guides/typescript-setup.md)
+- [Linting & Code Quality](../guides/linting-code-quality.md)

@@ -725,3 +725,8 @@ Key considerations:
 - Print content must be from chrome-extension:// or chrome:// URLs
 - Always handle errors and provide feedback to users
 - Consider implementing job queuing for multiple print requests
+
+## Related Articles
+
+- [System API Reference](../api-reference/system-api.md)
+- [Desktop Capture](../guides/desktop-capture.md)

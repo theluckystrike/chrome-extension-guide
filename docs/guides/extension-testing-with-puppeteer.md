@@ -166,3 +166,8 @@ module.exports = {
 - [Testing Extensions Overview](./testing-extensions.md)
 - [Extension Testing with Playwright](./extension-testing-with-playwright.md)
 - [CI/CD Pipeline](./ci-cd-pipeline.md)
+
+## Related Articles
+
+- [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
+- [Playwright Testing](../guides/extension-testing-with-playwright.md)

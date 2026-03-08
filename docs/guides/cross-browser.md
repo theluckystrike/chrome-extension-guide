@@ -496,3 +496,8 @@ const settings = await storage.get('settings');
 ```
 
 Both packages handle the Promise/callback normalization and provide consistent APIs across Chrome, Firefox, Edge, and Safari.
+
+## Related Articles
+
+- [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
+- [Safari Porting](../guides/chrome-extension-safari-porting.md)

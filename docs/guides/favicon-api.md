@@ -286,3 +286,8 @@ The `favicon` permission only triggers a warning if `tabs` or host permissions h
 - For content scripts, also declare `"_favicon/*"` as a web accessible resource
 - Always implement fallbacks for sites without favicons
 - Lazy load and cache for better performance
+
+## Related Articles
+
+- [Favicon Patterns](../patterns/favicon-api.md)
+- [Web Navigation](../guides/web-navigation.md)

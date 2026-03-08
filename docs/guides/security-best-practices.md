@@ -80,3 +80,8 @@ description: "Secure your Chrome extension with this security guide covering bes
 - [ ] No `innerHTML` with dynamic content
 - [ ] HTTPS for all network requests
 - [ ] Dependencies audited
+
+## Related Articles
+
+- [Security Hardening](../guides/security-hardening.md)
+- [CORS Patterns](../patterns/cors-extension-patterns.md)

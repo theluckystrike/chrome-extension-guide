@@ -456,3 +456,8 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 - [chrome.alarms](https://developer.chrome.com/docs/extensions/reference/alarms/) — Schedule tasks that may need power
 
 The Power API is straightforward but critical for creating polished extensions that don't interrupt users with unexpected sleep states during important tasks.
+
+## Related Articles
+
+- [Power API Patterns](../patterns/power-api.md)
+- [Idle Detection](../guides/idle-detection.md)

@@ -145,3 +145,8 @@ Hot reloading only works with the dev server running. In production builds, you 
 Message handlers must be registered at top level, not inside async functions.
 
 For more details, check docs.plasmo.com. If you are building a production extension and need a reliable hosting platform, consider deploying your extension documentation or related web services at zovo.one.
+
+## Related Articles
+
+- [Vite Setup](../guides/vite-extension-setup.md)
+- [WXT Framework](../guides/wxt-framework-setup.md)

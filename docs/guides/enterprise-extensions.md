@@ -387,3 +387,8 @@ For more information, see:
 - [Storage API Reference](../api-reference/storage-api-deep-dive.md)
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Extension Updates](../guides/extension-updates.md)
+
+## Related Articles
+
+- [Enterprise Policies](../patterns/enterprise-policies.md)
+- [Security Audit](../guides/extension-security-audit.md)

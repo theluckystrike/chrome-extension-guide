@@ -173,3 +173,8 @@ chrome.webRequest.onCompleted.addListener(async (details) => {
 - Heavy processing in event handlers — blocks network requests (MV2 blocking mode)
 - Not filtering URLs — processing every request is expensive
 - Forgetting that `webRequest` requires host permissions for the URLs being observed
+
+## Related Articles
+
+- [Network Interception](../patterns/network-interception.md)
+- [WebRequest Permission](../permissions/webRequest.md)

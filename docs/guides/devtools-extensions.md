@@ -161,3 +161,8 @@ DevTools Page <-> Background Service Worker <-> Content Script <-> Inspected Pag
 - Panel pages don't have access to `chrome.devtools.*` — communicate via messaging to devtools.js
 - `inspectedWindow.eval()` runs in page context, not extension context — can't access Chrome APIs there
 - Forgetting that DevTools pages are destroyed when DevTools closes
+
+## Related Articles
+
+- [DevTools Patterns](../patterns/devtools-extension-patterns.md)
+- [Debugging Extensions](../guides/debugging-extensions.md)

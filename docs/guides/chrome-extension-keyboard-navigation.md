@@ -192,3 +192,8 @@ function announce(message) {
 - [accessibility.md](./accessibility.md) — Full accessibility guide
 - [keyboard-shortcuts.md](./keyboard-shortcuts.md) — Extension shortcut configuration
 - [commands-keyboard-shortcuts.md](./commands-keyboard-shortcuts.md) — Commands API deep dive
+
+## Related Articles
+
+- [Accessibility](../guides/accessibility.md)
+- [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

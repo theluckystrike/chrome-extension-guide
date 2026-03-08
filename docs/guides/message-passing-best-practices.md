@@ -255,3 +255,8 @@ const response = await withTimeout(
 - [Message Passing Patterns](/reference/message-passing-patterns.md)
 - [Advanced Messaging Tutorial](/tutorials/advanced-messaging.md)
 - [Messaging Quickstart](/tutorials/messaging-quickstart.md)
+
+## Related Articles
+
+- [Messaging Protocols](../patterns/extension-messaging-protocols.md)
+- [Message Passing Patterns](../reference/message-passing-patterns.md)

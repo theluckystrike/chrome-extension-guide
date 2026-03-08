@@ -113,3 +113,8 @@ description: "Learn Chrome extension manifest reference with this developer guid
 - Forgetting `host_permissions` (MV3 separates these)
 - Wrong icon sizes
 - JSON syntax errors (no trailing commas, no comments)
+
+## Related Articles
+
+- [Manifest Fields](../reference/manifest-fields.md)
+- [Cheatsheet](../guides/cheatsheet.md)
