@@ -3,8 +3,9 @@ title: Building a GitHub Notifications Extension
 description: Learn how to build a Chrome extension that polls the GitHub API for unread notifications.
 ---
 
-# Building a GitHub Notifications Extension
+# Chrome Extension Building a GitHub Notifications Extension — Complete Developer's Guide
 
+Create desktop notifications with the Chrome Notifications API. Learn how to build engaging notification experiences.
 This tutorial walks you through creating a Chrome extension that monitors GitHub notifications.
 
 ## Prerequisites
