@@ -171,3 +171,6 @@ Use the chrome.bookmarks API to create, read, update, and delete bookmarks. You 
 
 ### Can extensions read user's existing bookmarks?
 Yes, with the "bookmarks" permission, your extension can read and manipulate the user's existing bookmarks.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

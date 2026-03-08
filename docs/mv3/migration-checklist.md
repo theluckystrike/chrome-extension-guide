@@ -93,3 +93,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/migr
 - Chrome Extension Manifest V3 migration tool (Chrome team)
 - `web-ext lint` for Firefox compatibility
 - TypeScript for catching API changes at compile time
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

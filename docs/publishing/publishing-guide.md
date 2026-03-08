@@ -844,3 +844,7 @@ analytics, respond to user reviews, and choose a monetization model that
 matches your extension's value. Keep your listing accurate, your permissions
 minimal, and your users informed -- that is how you build a successful
 Chrome extension.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

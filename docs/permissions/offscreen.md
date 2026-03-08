@@ -301,3 +301,6 @@ Offscreen documents are hidden pages that extension can create to perform tasks 
 
 ### How do I create an offscreen document?
 Use chrome.offscreen.createDocument() with a specified reason and the HTML file to load. Only one offscreen document can exist per extension at a time.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

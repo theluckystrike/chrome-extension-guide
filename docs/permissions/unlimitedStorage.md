@@ -151,3 +151,6 @@ The unlimitedStorage permission removes the 10MB quota for chrome.storage.local,
 
 ### Is unlimitedStorage required for all storage?
 No, it's optional. Without it, local storage is limited to 10MB. Most extensions don't need unlimited storage.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

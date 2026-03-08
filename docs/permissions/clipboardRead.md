@@ -145,3 +145,6 @@ Add "clipboardRead" to your permissions in manifest.json, then use navigator.cli
 
 ### Why does clipboardRead require user gesture?
 Chrome requires a user gesture (click, keypress) before allowing clipboard access to prevent malicious extensions from reading sensitive data silently.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

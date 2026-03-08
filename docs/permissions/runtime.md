@@ -156,3 +156,6 @@ chrome.runtime provides messaging between parts of your extension, access to man
 
 ### How do I detect extension updates?
 Use chrome.runtime.onUpdateAvailable to detect when a new version is available, and chrome.runtime.reload() to update.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -135,3 +135,7 @@ async function processChunk() {
 - `setInterval` / `setTimeout` — use `chrome.alarms`
 - Assuming SW stays alive — design for termination
 - Not saving progress for long tasks
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

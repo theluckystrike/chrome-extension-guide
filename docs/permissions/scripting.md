@@ -158,3 +158,6 @@ Use chrome.scripting.executeScript() to inject JavaScript into web pages. You'll
 
 ### Can I inject CSS with the scripting API?
 Yes, use chrome.scripting.insertCSS() to inject CSS styles into pages.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

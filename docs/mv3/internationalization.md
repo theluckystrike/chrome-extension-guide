@@ -150,3 +150,7 @@ See [Internationalization Guide](../guides/internationalization.md).
 ## References {#references}
 
 - [Chrome i18n API](https://developer.chrome.com/docs/extensions/i18n)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

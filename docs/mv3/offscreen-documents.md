@@ -134,3 +134,7 @@ if (existingContexts.length === 0) {
 - MV2 background pages had DOM access by default
 - MV3: move DOM-dependent code to offscreen document
 - Add messaging layer between background SW and offscreen
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

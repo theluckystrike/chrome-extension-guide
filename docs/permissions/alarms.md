@@ -168,3 +168,6 @@ Use the chrome.alarms API to schedule code to run periodically or at a specific 
 
 ### Does chrome.alarms work in Manifest V3?
 Yes, chrome.alarms works in Manifest V3 but runs in the background service worker. Note that the service worker may be terminated between alarm fires.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

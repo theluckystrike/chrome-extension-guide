@@ -86,3 +86,7 @@ document.body.appendChild(container);
 - Using MV2 flat array format — must use MV3 object array format
 - Not using `chrome.runtime.getURL()` — hardcoded paths won't work
 - Exposing JavaScript files that contain sensitive logic
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

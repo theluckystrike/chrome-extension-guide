@@ -108,3 +108,7 @@ self.addEventListener('unhandledrejection', (event) => {
 - Beta testing on too few users — need enough for statistical significance
 - Not monitoring error rates — beta bugs can ship to stable
 - Skipping CWS review time — trusted tester builds still need review
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

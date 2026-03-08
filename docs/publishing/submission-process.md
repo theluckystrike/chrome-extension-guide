@@ -125,3 +125,7 @@ const desc = describePermission("tabs");
 
 ## Common Rejection Reasons {#common-rejection-reasons}
 - See [Common Rejections](common-rejections.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -327,3 +327,6 @@ Use chrome.downloads.download() to initiate downloads from your extension. You c
 
 ### Can extensions download files to a custom location?
 Yes, but users will be prompted to choose a location, or you can use the downloads API's "saveAs" option set to false with appropriate permissions.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

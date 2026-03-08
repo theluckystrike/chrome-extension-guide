@@ -172,3 +172,6 @@ Use chrome.history.search() to query the user's browsing history. You can search
 
 ### Can extensions delete history entries?
 Yes, with the history permission, you can use chrome.history.deleteUrl() to remove specific URLs from history.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

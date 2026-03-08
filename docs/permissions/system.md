@@ -140,3 +140,6 @@ Use chrome.system to access CPU, memory, display, and storage information. The s
 
 ### Can extensions control system settings?
 Some system APIs allow reading and monitoring, but controlling system settings is limited for security reasons.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

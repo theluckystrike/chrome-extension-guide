@@ -924,3 +924,6 @@ Optional permissions are declared in "optional_permissions" and requested at run
 
 ### How do I request permissions at runtime?
 Use chrome.permissions.request() with the permissions you need. The user will be prompted to grant access.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -164,3 +164,6 @@ The chrome.fontSettings API allows extensions to get and set the default font si
 
 ### Can extensions install custom fonts?
 No, the fontSettings API cannot install fonts. It can only manage existing system and Chrome font settings.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

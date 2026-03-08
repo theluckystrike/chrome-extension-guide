@@ -112,3 +112,6 @@ webRequestBlocking allows extensions to synchronously block or modify network re
 
 ### Should I use declarativeNetRequest instead?
 Yes, for most blocking scenarios in MV3, declarativeNetRequest is preferred as it's more performant and doesn't require the blocking permission.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

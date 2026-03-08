@@ -506,3 +506,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - [ ] Add global error handlers for unhandled rejections
 - [ ] Test service worker for crash-free operation
 - [ ] Verify all event listeners follow the `return true` pattern for async responses
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

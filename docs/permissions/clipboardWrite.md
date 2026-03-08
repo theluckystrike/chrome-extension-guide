@@ -152,3 +152,6 @@ Use navigator.clipboard.writeText('your text') in your content script or popup. 
 
 ### Can I copy images to clipboard?
 Yes, but it requires the clipboardWrite permission and using the Clipboard API with image data as a Blob.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

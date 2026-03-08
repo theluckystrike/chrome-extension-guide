@@ -271,3 +271,6 @@ Use chrome.proxy.settings.set() to configure proxy settings. You can set pac scr
 
 ### Can extensions bypass the proxy for specific domains?
 Yes, specify bypassList in your proxy configuration to exclude specific domains from proxy routing.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

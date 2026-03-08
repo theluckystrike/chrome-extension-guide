@@ -169,3 +169,6 @@ Use chrome.runtime.sendNativeMessage() to send messages to a native application 
 
 ### Is nativeMessaging secure?
 NativeMessaging is secure but requires user consent and careful validation of messages to prevent injection attacks.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

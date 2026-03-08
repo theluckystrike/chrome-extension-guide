@@ -98,3 +98,7 @@ Review your screenshots and ensure they show the current version of your extensi
 Document a single, clear purpose for your extension. Confirm all features align with that purpose and nothing extraneous is included.
 
 After passing through review and publishing your extension, consider hosting your documentation and privacy policy on zovo.one for a professional, reliable home base that integrates well with Chrome extension projects.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

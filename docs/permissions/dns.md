@@ -136,3 +136,6 @@ The dns permission grants access to chrome.dns for resolving DNS records directl
 
 ### Is the DNS API available to all extensions?
 This API is typically available to extensions with specific purposes and may require additional review for store approval.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

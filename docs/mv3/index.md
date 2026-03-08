@@ -26,3 +26,7 @@ This guide provides comprehensive coverage of all Manifest V3 changes, migration
 - [storage-changes](storage-changes.html)
 - [testing-mv3-extensions](testing-mv3-extensions.html)
 - [web-accessible-resources](web-accessible-resources.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

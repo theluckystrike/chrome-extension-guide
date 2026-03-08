@@ -132,3 +132,7 @@ channel.onMessage.addListener((msg) => console.log('Received:', msg));
 | ES modules | Add "type": "module" |
 | Debug | Use chrome://extensions |
 | Messaging | Use webext-messaging |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

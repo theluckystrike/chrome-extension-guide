@@ -96,3 +96,7 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 - Exceeding sync quotas — 8 KB per item limit is easy to hit with JSON
 - Forgetting `session` storage exists — perfect for temporary state
 - Not using batch operations — multiple individual calls are slow
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

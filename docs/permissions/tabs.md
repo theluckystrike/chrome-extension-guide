@@ -254,3 +254,6 @@ Use chrome.tabs.query({active: true, currentWindow: true}) to get the currently 
 
 ### Can I access tab URLs without host permissions?
 With the tabs permission, you can access limited tab metadata including URL, title, and favIconUrl.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

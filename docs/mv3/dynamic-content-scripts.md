@@ -120,3 +120,7 @@ await chrome.scripting.removeCSS({ target: { tabId }, files: ['styles.css'] });
 - Using MAIN world without understanding security implications
 - Invalid match patterns cause silent failure
 - Not verifying registration with `getRegisteredContentScripts`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

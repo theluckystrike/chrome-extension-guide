@@ -196,3 +196,6 @@ The chrome.readingList API allows extensions to add, remove, and query items in 
 
 ### Is readingList available in all Chrome versions?
 The readingList API was introduced recently and may not be available in older Chrome versions.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

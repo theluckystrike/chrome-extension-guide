@@ -141,3 +141,6 @@ Add "declarativeNetRequestFeedback" permission to receive onRuleMatchedDebug eve
 
 ### Can I see which ads are being blocked?
 Yes, with declarativeNetRequestFeedback, you can log or display statistics about matched rules and blocked requests.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

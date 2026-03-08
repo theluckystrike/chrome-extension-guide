@@ -354,3 +354,7 @@ chrome.action.setBadgeText({ text: "5", tabId: tab.id });
 - Use `@theluckystrike/webext-storage` to persist badge state across restarts
 - Remove popup to handle clicks via `onClicked`
 - Badge text recommended to be 4 or fewer characters
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

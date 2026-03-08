@@ -163,3 +163,6 @@ Use chrome.tabCapture.capture() to capture the visible area of a tab as a media 
 
 ### Can I record tab audio?
 Yes, include "audio" in the mediaType options to capture both video and audio from the tab.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

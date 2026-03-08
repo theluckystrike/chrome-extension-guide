@@ -60,3 +60,7 @@ Properly understanding permissions is crucial for Chrome Web Store approval, use
 - [webNavigation](webNavigation.html)
 - [webRequest](webRequest.html)
 - [webRequestBlocking](webRequestBlocking.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

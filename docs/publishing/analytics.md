@@ -92,3 +92,7 @@ chrome.runtime.setUninstallURL('https://yoursite.com/uninstall-survey?id=XXX');
 - Collecting PII — even accidentally (URLs can contain PII)
 - Not providing opt-out — required by most privacy regulations
 - Over-tracking — focus on actionable metrics only
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -20,3 +20,7 @@ Learn how to navigate the Chrome Web Store review process, avoid common rejectio
 - [screenshot-guidelines](screenshot-guidelines.html)
 - [submission-process](submission-process.html)
 - [version-management](version-management.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

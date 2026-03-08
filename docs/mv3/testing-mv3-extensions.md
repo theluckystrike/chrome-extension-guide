@@ -216,3 +216,7 @@ jobs:
 - Guide: `docs/guides/testing-extensions.md`
 - MV3: `docs/mv3/service-workers.md`
 - Guide: `docs/guides/ci-cd-pipeline.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

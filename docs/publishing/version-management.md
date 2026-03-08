@@ -90,3 +90,7 @@ document.getElementById('version').textContent = `v${manifest.version}`;
 - Using `version_name` where `version` is expected — they're different fields
 - Not tagging releases — loses ability to reference specific builds
 - Manual version bumps — error-prone, automate with CI
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

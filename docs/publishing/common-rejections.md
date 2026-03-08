@@ -72,3 +72,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishi
 - Single clear purpose
 
 **IMPORTANT**: Author all commits as `theluckystrike`. No Co-Authored-By lines. Make sure the file actually lands on the `main` branch before reporting done. If the file already exists on main (another agent may have created it), report "already exists" and skip.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

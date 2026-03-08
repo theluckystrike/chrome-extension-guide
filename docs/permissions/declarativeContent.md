@@ -207,3 +207,6 @@ DeclarativeContent allows your extension to take actions based on page content w
 
 ### Is declarativeContent still available in MV3?
 Yes, but with limitations. It works for page actions and can show the action based on page conditions, but cannot automatically inject content scripts.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

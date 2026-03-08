@@ -196,3 +196,6 @@ chrome.sessions allows your extension to query and restore recently closed tabs 
 
 ### Can I sync sessions across devices?
 Sessions API provides local session data only. For cross-device sync, you'd need to implement your own cloud storage.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

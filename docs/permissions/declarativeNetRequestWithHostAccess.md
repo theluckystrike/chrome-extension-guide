@@ -121,3 +121,6 @@ Host permissions are needed if you want to modify requests to specific websites 
 
 ### Can I block requests without host permissions?
 Yes, using static rulesets that don't require host access can block requests to any domain.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -264,3 +264,6 @@ The chrome.debugger API allows extensions to instrument network traffic, debug J
 
 ### Why does debugger require a permission warning?
 The debugger API provides powerful capabilities that can intercept and modify page content, which is why it triggers a permission warning.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -127,3 +127,6 @@ Use chrome.power.requestKeepAwake() to prevent the system from sleeping. Use chr
 
 ### Does power API work on all platforms?
 The power API works on ChromeOS, Windows, and Mac. Linux support is limited.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

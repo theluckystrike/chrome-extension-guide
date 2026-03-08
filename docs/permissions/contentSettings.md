@@ -151,3 +151,6 @@ The contentSettings API allows your extension to override settings for cookies, 
 
 ### Can extensions block JavaScript per-site?
 Yes, use chrome.contentSettings.javascript.set() to enable or disable JavaScript for specific patterns.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

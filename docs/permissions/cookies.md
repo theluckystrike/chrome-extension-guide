@@ -130,3 +130,6 @@ Use the chrome.cookies API with the "cookies" permission. Call chrome.cookies.ge
 
 ### Can extensions set HTTP-only cookies?
 No, extensions cannot set HttpOnly cookies through the cookies API. These cookies are only accessible to the server.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -166,3 +166,6 @@ Implement the chrome.ttsEngine API to create an engine that handles TTS requests
 
 ### Do I need to host my own TTS engine?
 Your extension can implement the TTS engine interface, but you'll need to connect it to a speech synthesis service.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

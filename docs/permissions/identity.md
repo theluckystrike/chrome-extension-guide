@@ -250,3 +250,6 @@ Use the chrome.identity API to launch OAuth flows. You'll need to configure redi
 
 ### Is chrome.identity free?
 Yes, the chrome.identity API is free to use, but you'll need to set up OAuth with your identity provider (Google, Auth0, etc.).
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

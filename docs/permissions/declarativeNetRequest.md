@@ -155,3 +155,6 @@ declarativeNetRequest allows extensions to block or modify network requests decl
 
 ### Is declarativeNetRequest free to use?
 Yes, the declarativeNetRequest API is free and doesn't require any special approval, though there are ruleset size limits.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

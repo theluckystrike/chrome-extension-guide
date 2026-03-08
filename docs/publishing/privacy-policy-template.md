@@ -501,3 +501,7 @@ Using libraries like `@theluckystrike/webext-permissions` and `@theluckystrike/w
 *Last updated: [Date]*
 
 *Disclaimer: This privacy policy template is provided for informational purposes only and does not constitute legal advice. Consult with a legal professional for advice specific to your extension and jurisdiction.*
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

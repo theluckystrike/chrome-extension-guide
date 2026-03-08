@@ -573,3 +573,7 @@ MV3's stricter CSP significantly improves extension security but requires migrat
 5. **Use @theluckystrike libraries** — They're designed for CSP compliance
 
 The `@theluckystrike/webext-messaging` and `@theluckystrike/webext-storage` libraries provide clean, CSP-safe APIs that work out of the box with Manifest V3.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

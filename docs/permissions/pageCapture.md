@@ -150,3 +150,6 @@ Use chrome.pageCapture.saveAsMHTML() to save the current page as MHTML format, w
 
 ### Can I capture specific elements only?
 No, pageCapture captures the entire page. For specific elements, consider using the scripting API to extract HTML.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

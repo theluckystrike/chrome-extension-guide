@@ -143,3 +143,6 @@ The webRequest API allows extensions to intercept, block, or modify network requ
 
 ### Is webRequest available in Manifest V3?
 In MV3, webRequest is available but blocking is limited. Use declarativeNetRequest for most blocking scenarios instead.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -235,3 +235,6 @@ Use chrome.tts.speak() to make Chrome read text aloud. You can choose voices, ra
 
 ### Can I use custom voices with the TTS API?
 Yes, you can use Chrome's built-in voices or install extension TTS engines for additional voice options.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

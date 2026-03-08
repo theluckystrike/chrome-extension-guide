@@ -114,3 +114,6 @@ Use the chrome.privacy API to read and modify Chrome's privacy settings like net
 
 ### Can extensions disable safe browsing?
 Extensions with the privacy permission can modify safe browsing settings, but this may trigger warnings to users.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

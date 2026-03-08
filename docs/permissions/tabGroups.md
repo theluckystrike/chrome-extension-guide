@@ -388,3 +388,6 @@ Use chrome.tabGroups API to create, update, and delete tab groups. Users can als
 
 ### Are tab groups available on all platforms?
 Tab groups are available on Chrome desktop (Windows, Mac, Linux) and ChromeOS.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

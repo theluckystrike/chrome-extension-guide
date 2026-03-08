@@ -173,3 +173,7 @@ document.getElementById('input').addEventListener('input', async (e) => {
 - Making panel too wide — takes too much page space
 - Forgetting `"sidePanel"` permission — API calls fail
 - Not testing per-tab panels — each tab can have different state
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

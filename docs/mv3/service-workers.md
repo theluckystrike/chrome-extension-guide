@@ -448,3 +448,7 @@ The `@theluckystrike/webext-storage` and `@theluckystrike/webext-messaging` libr
 - Review the [Runtime API](../api-reference/runtime-api.md) for cross-context communication
 - See [Storage Changes in MV3](storage-changes.md) for advanced storage patterns
 - Check [Service Worker Lifecycle](../guides/service-worker-lifecycle.md) for detailed event handling
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

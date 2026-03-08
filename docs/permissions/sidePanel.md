@@ -320,3 +320,6 @@ Declare "side_panel" in your manifest and use chrome.sidePanel.setOptions() to c
 
 ### Can side panels work on all pages?
 Yes, you can configure side panels to show on specific URL patterns or allow users to toggle it on any page.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

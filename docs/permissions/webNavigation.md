@@ -81,3 +81,6 @@ Use chrome.webNavigation API to receive events when frames navigate, complete lo
 
 ### Can I block navigations with webNavigation?
 No, webNavigation is for tracking only. To block or modify navigations, use declarativeNetRequest or webRequest.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

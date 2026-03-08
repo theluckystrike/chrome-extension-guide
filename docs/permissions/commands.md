@@ -142,3 +142,6 @@ Declare commands in your manifest.json with "commands" key, then handle them in 
 
 ### What keyboard shortcuts are reserved in Chrome?
 Ctrl+Shift+1 through Ctrl+Shift+9 are reserved by Chrome for switching to specific tabs. Your extension cannot override these.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -146,3 +146,6 @@ Yes, for most use cases. activeTab doesn't trigger the scary "Read and change al
 
 ### Can I use activeTab with chrome.tabs.query()?
 No. activeTab only grants access to the tab the user interacted with. For querying other tabs, you'll need host permissions or the tabs permission.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

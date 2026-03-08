@@ -746,3 +746,7 @@ Declarative Net Request replaces `webRequestBlocking` entirely in Manifest V3:
 - ✅ **Better privacy** — No raw request data exposure
 
 Use static rules for pre-defined blocking lists bundled with your extension, and dynamic rules for user-configurable features.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

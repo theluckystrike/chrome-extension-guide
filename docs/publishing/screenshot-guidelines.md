@@ -84,3 +84,7 @@ Show a basic Puppeteer script to capture extension screenshots programmatically.
 - [ ] Consistent visual style across screenshots
 - [ ] Store icon is 128x128 PNG (96x96 artwork with 16px transparent padding)
 - [ ] Small promo tile if you want category placement
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

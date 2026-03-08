@@ -166,3 +166,6 @@ Use the standard Geolocation API (navigator.geolocation) in your content script.
 
 ### Can extensions override geolocation for testing?
 Yes, Chrome DevTools allows you to override geolocation for testing purposes in your content scripts.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

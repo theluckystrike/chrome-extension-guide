@@ -149,3 +149,7 @@ async function trackFeatureUse(feature: string) {
 - [ ] Privacy policy linked
 - [ ] Support contact provided
 - [ ] Translations for key markets (optional but recommended)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -162,3 +162,6 @@ Use the chrome.browsingData API to clear various types of browsing data includin
 
 ### Can I selectively clear only cookies?
 Yes, specify the dataTypes parameter with { "cookies": true } to clear only cookies while preserving other data.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

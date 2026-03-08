@@ -144,3 +144,6 @@ The chrome.management API allows extensions to get info about other installed ex
 
 ### Can my extension uninstall itself?
 Yes, use chrome.management.uninstallSelf() to allow users to uninstall your extension from within the extension UI.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

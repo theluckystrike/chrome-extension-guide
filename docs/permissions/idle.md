@@ -211,3 +211,6 @@ Use chrome.idle.queryState() to check current idle state, or chrome.idle.onState
 
 ### Can I run code when user returns from idle?
 Yes, listen to onStateChanged and check for "active" state to trigger actions when the user returns.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

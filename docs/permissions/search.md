@@ -140,3 +140,6 @@ Use chrome.search to interact with Chrome's default search provider. Your extens
 
 ### Can I add custom search engines?
 The search API doesn't allow creating new search engines, but you can interact with existing ones.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

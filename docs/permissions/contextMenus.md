@@ -208,3 +208,6 @@ Use chrome.contextMenus.create() in your background script to add items to the r
 
 ### Can I add submenus to context menus?
 Yes, create a parent menu item first, then use the "parentId" property when creating child items.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

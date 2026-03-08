@@ -158,3 +158,7 @@ const m = createMessenger<Msgs>();
 - `docs/mv3/service-workers.md`
 - `docs/mv3/event-driven-architecture.md`
 - `docs/mv3/declarative-net-request.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -189,3 +189,6 @@ Use chrome.notifications.create() to display system notifications. You'll need t
 
 ### Can I customize notification appearance?
 Yes, you can set icons, titles, messages, buttons, and even use HTML in notification windows.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -169,3 +169,6 @@ Use chrome.topSites.get() to retrieve the user's most visited sites. This requir
 
 ### Are top sites customizable?
 Users can pin sites to appear in top sites. Extensions can only read the current list, not modify it.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -174,3 +174,6 @@ Yes, chrome.storage.sync is completely free to use. It has size limits (100KB to
 
 ### What's the difference between local and sync storage?
 local storage persists only on the current device, while sync storage syncs across all Chrome instances where the user is signed in.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
