@@ -10,3 +10,9 @@ kramdown:
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      reading_time: true
