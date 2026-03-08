@@ -775,3 +775,169 @@ Understanding the differences between ISOLATED and MAIN worlds, proper error han
 - [Chrome Scripting API](https://developer.chrome.com/docs/extensions/reference/api/scripting)
 - [Content Scripts Guide](https://developer.chrome.com/docs/extensions/mv3/content_scripts/)
 - [Manifest V3 Migration](https://developer.chrome.com/docs/extensions/mv3/intro/)
+title: "Chrome Extension Scripting API — Dynamic Script and CSS Injection in MV3"
+description: A comprehensive guide to dynamic script and CSS injection in Chrome Extensions using the Manifest V3 Scripting API
+author: theluckystrike
+date: 2024
+---
+
+# Chrome Extension Scripting API — Dynamic Script and CSS Injection in MV3
+
+The Chrome Extension Scripting API is one of the most powerful additions in Manifest V3, enabling developers to dynamically inject JavaScript and CSS into web pages at runtime. This capability opens up endless possibilities for building feature-rich extensions that can interact with any webpage, modify its appearance, or extract data on demand.
+
+## Understanding chrome.scripting.executeScript
+
+The `chrome.scripting.executeScript` method is the primary way to inject JavaScript code into web pages programmatically. Unlike the deprecated `chrome.tabs.executeScript` from Manifest V2, this new API provides more flexibility and better performance characteristics.
+
+### Basic Usage
+
+To execute a script, you need to specify the target tab and the script content:
+
+```javascript
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  files: ['content.js']
+});
+```
+
+The API supports two injection methods: file-based and function-based. File-based injection loads scripts from extension resources, while function-based injection executes a JavaScript function directly within the page context.
+
+### Function Injection
+
+Function injection is particularly useful when you need to pass dynamic data to your script:
+
+```javascript
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  func: (args) => {
+    console.log('Received data:', args);
+    document.body.style.backgroundColor = args.color;
+  },
+  args: [{ color: '#ff0000' }]
+});
+```
+
+This approach eliminates the need to create temporary script files and allows for seamless data passing between your extension background and the injected code.
+
+## Working with CSS: insertCSS and removeCSS
+
+The Scripting API provides similar functionality for CSS manipulation through `chrome.scripting.insertCSS` and `chrome.scripting.removeCSS`. These methods allow you to dynamically add or remove stylesheets without modifying the page's permanent CSS.
+
+### Inserting CSS
+
+```javascript
+chrome.scripting.insertCSS({
+  target: { tabId: tab.id },
+  css: 'body { background-color: lightblue !important; }'
+});
+```
+
+You can also inject CSS from files:
+
+```javascript
+chrome.scripting.insertCSS({
+  target: { tabId: tab.id },
+  files: ['styles/injected.css']
+});
+```
+
+### Removing CSS
+
+To remove previously injected CSS, use the `removeCSS` method:
+
+```javascript
+chrome.scripting.removeCSS({
+  target: { tabId: tab.id },
+  css: 'body { background-color: lightblue !important; }'
+});
+```
+
+This is particularly useful for toggle features where you want to apply and remove styles dynamically based on user interaction.
+
+## Registering Content Scripts with registerContentScripts
+
+The `chrome.scripting.registerContentScripts` method allows you to programmatically register content scripts that automatically inject when matching conditions are met. This is useful for extensions that need to run on specific websites or under certain conditions.
+
+```javascript
+chrome.scripting.registerContentScripts([{
+  id: 'my-script',
+  matches: ['https://*.example.com/*'],
+  js: ['content.js'],
+  css: ['styles.css'],
+  runAt: 'document_end'
+}]);
+```
+
+Unlike declarativeNetRequest rules, content scripts registered this way can manipulate the DOM directly and communicate with the extension background script.
+
+## The World Parameter: MAIN and ISOLATED
+
+One of the most significant additions to the Scripting API is the `world` parameter, which allows you to specify which execution context to use: `'MAIN'` or `'ISOLATED'`.
+
+### ISOLATED World (Default)
+
+By default, scripts run in the isolated world, which is separate from the page's JavaScript context. This provides security benefits but means your scripts cannot access page variables directly:
+
+```javascript
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  world: 'ISOLATED',
+  func: () => {
+    // This runs in isolated context
+    return document.title;
+  }
+});
+```
+
+### MAIN World
+
+The `'MAIN'` world allows your injected scripts to share the same JavaScript context as the webpage. This enables direct access to page variables and functions:
+
+```javascript
+chrome.scripting.executeScript({
+  target: { tabId: tab.id },
+  world: 'MAIN',
+  func: () => {
+    // Can access page variables here
+    window.myPageVariable;
+  }
+});
+```
+
+However, be cautious when using MAIN world as it exposes your extension code to the webpage and vice versa, potentially creating security vulnerabilities.
+
+## File vs Function Injection: When to Use Each
+
+Choosing between file and function injection depends on your use case:
+
+### File Injection
+
+Best for:
+- Large scripts that would be cumbersome to inline
+- Scripts that need to be cached for performance
+- Sharing code across multiple injection points
+- Complex logic with multiple dependencies
+
+### Function Injection
+
+Best for:
+- Small scripts with dynamic parameters
+- One-off injections
+- When you need to pass data from the extension context
+- Simple DOM manipulations that don't warrant a separate file
+
+## Best Practices and Performance Considerations
+
+When using the Scripting API, keep these performance tips in mind:
+
+1. **Minimize injection frequency**: Avoid injecting scripts repeatedly. Cache the results and reuse them when possible.
+
+2. **Use runAt strategically**: Set `runAt` to `document_idle` (default) for most cases, but use `document_start` when you need to inject CSS before the page renders to prevent flash of unstyled content.
+
+3. **Clean up after yourself**: Always remove injected CSS and scripts when they're no longer needed to prevent memory leaks and unintended side effects.
+
+4. **Handle errors gracefully**: The Scripting API returns promises, so always handle potential errors with proper try-catch blocks or `.catch()` handlers.
+
+## Conclusion
+
+The Chrome Extension Scripting API provides powerful tools for dynamic content injection in Manifest V3. By understanding `executeScript`, `insertCSS`, `removeCSS`, and `registerContentScripts`, along with the `world` parameter, you can build sophisticated extensions that can interact with any webpage dynamically and efficiently.
