@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Shadow Dom Advanced — Best Practices"
 description: "Advanced shadow DOM patterns for extension UI components."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/shadow-dom-advanced/"
 ---
 
 # Shadow DOM Advanced Patterns for Chrome Extensions

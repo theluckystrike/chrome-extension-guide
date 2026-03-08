@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Popup Data Loading — Best Practices"
 description: "Optimize data loading patterns for extension popups."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-data-loading/"
 ---
 
 # Popup Data Loading Patterns

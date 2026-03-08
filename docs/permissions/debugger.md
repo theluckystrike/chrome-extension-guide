@@ -4,6 +4,7 @@ description: "- **Permission string**: `"debugger"` - **What it grants**: Access
 permalink: /permissions/debugger/
 category: permissions
 order: 11
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/debugger/"
 ---
 
 # debugger Permission — Chrome Extension Reference

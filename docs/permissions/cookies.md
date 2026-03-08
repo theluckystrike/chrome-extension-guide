@@ -4,6 +4,7 @@ description: "- Grants access to `chrome.cookies` API - Read, write, delete cook
 permalink: /permissions/cookies/
 category: permissions
 order: 10
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/cookies/"
 ---
 
 # cookies Permission Reference

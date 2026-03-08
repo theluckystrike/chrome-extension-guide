@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Update Handling — Best Practices"
 description: "Handle extension updates and notify users."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-update-handling/"
 ---
 
 # Extension Update Handling

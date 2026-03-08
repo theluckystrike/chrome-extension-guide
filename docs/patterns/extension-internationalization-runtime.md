@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Internationalization Runtime — Best Practices"
 description: "Implement runtime internationalization for dynamic translations."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-internationalization-runtime/"
 ---
 
 # Runtime Internationalization Patterns

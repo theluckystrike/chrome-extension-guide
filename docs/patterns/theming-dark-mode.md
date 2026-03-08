@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Theming Dark Mode — Best Practices"
 description: "Implement dark mode and theme synchronization for extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/theming-dark-mode/"
 ---
 
 # Theming and Dark Mode Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Undo Redo Patterns — Best Practices"
 description: "Implement undo/redo functionality in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/undo-redo-patterns/"
 ---
 
 # Undo/Redo Patterns for Chrome Extensions

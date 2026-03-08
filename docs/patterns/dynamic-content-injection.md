@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Dynamic Content Injection — Best Practices"
 description: "Inject content scripts dynamically based on user actions and page state."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/dynamic-content-injection/"
 ---
 
 # Dynamic Content Injection

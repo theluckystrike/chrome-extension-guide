@@ -1,0 +1,9 @@
+# Redirects for renamed or moved articles
+# Format:
+# /old/path/: /new/path/
+#
+# Example:
+# /guides/old-name/: /guides/new-name/
+# /tutorials/old-tutorial/: /tutorials/new-tutorial/
+
+{}

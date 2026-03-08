@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Webrtc Screen Sharing — Best Practices"
 description: "Implement screen sharing with WebRTC in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/webrtc-screen-sharing/"
 ---
 
 # WebRTC Screen Sharing Patterns for Chrome Extensions

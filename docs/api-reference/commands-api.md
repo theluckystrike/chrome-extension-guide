@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Commands API Complete Reference"
 description: "The Chrome Commands API defines keyboard shortcuts that trigger extension actions, with support for both Chrome-context and global OS-wide shortcuts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/commands-api/"
 ---
 
 # Chrome Commands API Reference

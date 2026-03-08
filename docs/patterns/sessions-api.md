@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Sessions Api — Best Practices"
 description: "Use the Sessions API to track browser sessions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/sessions-api/"
 ---
 
 # Chrome Extension Sessions API Patterns

@@ -4,6 +4,7 @@ description: "The `system.*` permissions provide access to hardware and system i
 permalink: /permissions/system/
 category: permissions
 order: 40
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/system/"
 ---
 
 # System.* Permissions (Chrome Extension API)

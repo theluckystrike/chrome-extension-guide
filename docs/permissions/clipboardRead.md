@@ -4,6 +4,7 @@ description: "Allows reading clipboard content using `navigator.clipboard.readTe
 permalink: /permissions/clipboardRead/
 category: permissions
 order: 5
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/clipboardRead/"
 ---
 
 # clipboardRead Permission

@@ -4,6 +4,7 @@ description: "- **Permission string**: `"geolocation"` (optional permission in M
 permalink: /permissions/geolocation/
 category: permissions
 order: 20
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/geolocation/"
 ---
 
 # geolocation Permission

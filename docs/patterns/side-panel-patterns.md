@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Side Panel Patterns — Best Practices"
 description: "Advanced patterns for side panel development."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/side-panel-patterns/"
 ---
 
 # Advanced Side Panel Patterns

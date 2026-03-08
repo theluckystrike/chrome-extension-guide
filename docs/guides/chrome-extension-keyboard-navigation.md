@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Keyboard Navigation — Developer Guide"
 description: "Learn Chrome extension keyboard navigation with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-keyboard-navigation/"
 ---
 # Keyboard Navigation in Chrome Extensions
 

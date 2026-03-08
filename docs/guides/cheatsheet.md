@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Developer Cheatsheet — Developer Guide"
 description: "Learn Chrome extension developer cheatsheet with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/cheatsheet/"
 ---
 # Chrome Extension Development Cheatsheet
 

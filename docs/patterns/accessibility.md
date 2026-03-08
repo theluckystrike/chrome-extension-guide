@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Accessibility — Best Practices"
 description: "Build accessible Chrome extensions following WCAG guidelines."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/accessibility/"
 ---
 
 # Accessibility in Chrome Extensions

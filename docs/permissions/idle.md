@@ -1,6 +1,8 @@
 ---
 title: "Idle Permission"
-description: "- **Permission string:** `"idle"` - **Grants access to:** `chrome.idle` API - **Purpose:** Detects when user is idle or screen is locked --- Returns Promise resolving to `"active"`, `"idle"`, or `"..."
+description: "- **Permission string:** `"idle"` - **Grants access to:** `chrome.idle` API - **Purpose:** Detects when user is idle or screen is locked
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/idle/"
+--- Returns Promise resolving to `"active"`, `"idle"`, or `"..."
 permalink: /permissions/idle/
 category: permissions
 order: 23

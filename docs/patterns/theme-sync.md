@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Theme Sync — Best Practices"
 description: "Synchronize extension themes with browser themes."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/theme-sync/"
 ---
 
 # Theme Sync Pattern

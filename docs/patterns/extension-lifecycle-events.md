@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Lifecycle Events — Best Practices"
 description: "Handle extension lifecycle events."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-lifecycle-events/"
 ---
 
 # Extension Lifecycle Events

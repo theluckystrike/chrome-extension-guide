@@ -4,6 +4,7 @@ description: "- **Permission string:** `"browsingData"` - **API exposed:** `chro
 permalink: /permissions/browsingData/
 category: permissions
 order: 4
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/browsingData/"
 ---
 
 # browsingData Permission

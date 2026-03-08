@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Building With React — Best Practices"
 description: "Build Chrome extensions with React."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/building-with-react/"
 ---
 
 # Building Chrome Extensions with React

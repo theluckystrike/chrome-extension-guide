@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Action Api — Manifest V3 Guide"
 description: "Use the Action API for toolbar buttons in Manifest V3."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/action-api/"
 ---
 
 # MV3 Action API Guide

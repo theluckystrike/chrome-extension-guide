@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Wasm Extensions — Best Practices"
 description: "Integrate WebAssembly modules into Chrome extensions for performance."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/wasm-extensions/"
 ---
 
 # WebAssembly in Chrome Extensions

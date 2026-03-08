@@ -4,6 +4,7 @@ description: "- Grants access to `chrome.storage` API (local, sync, session, man
 permalink: /permissions/storage/
 category: permissions
 order: 39
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/storage/"
 ---
 
 # storage Permission Reference

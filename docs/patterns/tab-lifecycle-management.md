@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Tab Lifecycle Management — Best Practices"
 description: "Manage tab lifecycle events effectively."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/tab-lifecycle-management/"
 ---
 
 # Tab Lifecycle Management Patterns

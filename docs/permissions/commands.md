@@ -4,6 +4,7 @@ description: "`commands` is a manifest key (not a `permissions` entry) that defi
 permalink: /permissions/commands/
 category: permissions
 order: 7
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/commands/"
 ---
 
 # commands (Manifest Key)

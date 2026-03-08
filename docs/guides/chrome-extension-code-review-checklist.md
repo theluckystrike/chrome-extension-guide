@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Code Review Checklist — Developer Guide"
 description: "Learn Chrome extension code review checklist with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-code-review-checklist/"
 ---
 # Chrome Extension Code Review Checklist
 

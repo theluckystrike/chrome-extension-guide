@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Copy as Markdown — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-copy-as-markdown/"
 ---
 # Build a Copy-as-Markdown Chrome Extension
 

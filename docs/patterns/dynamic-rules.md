@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Dynamic Rules — Best Practices"
 description: "Implement dynamic declarative rules for network filtering."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/dynamic-rules/"
 ---
 
 # Dynamic Rules Pattern (declarativeNetRequest)

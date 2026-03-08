@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Multi Tab Coordination — Best Practices"
 description: "Coordinate actions across multiple tabs with patterns for tab groups, sessions, and shared state."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/multi-tab-coordination/"
 ---
 
 # Multi-Tab Coordination Patterns

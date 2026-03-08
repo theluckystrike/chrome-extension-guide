@@ -1,7 +1,10 @@
 ---
+
 title: Chrome Extension Getting Started — Your Complete Guide
 description: Learn how to build Chrome extensions from scratch. Step-by-step tutorials, starter templates, and the @theluckystrike/webext-* package ecosystem.
 layout: default
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/getting-started/"
+
 ---
 
 # Chrome Extension Getting Started

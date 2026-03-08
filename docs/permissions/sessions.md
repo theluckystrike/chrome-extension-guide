@@ -4,6 +4,7 @@ description: "- Permission string: `"sessions"` - Grants access to `chrome.sessi
 permalink: /permissions/sessions/
 category: permissions
 order: 37
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/sessions/"
 ---
 
 # sessions Permission

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Vue — Best Practices"
 description: "Integrate Vue.js with content scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-vue/"
 ---
 
 # Content Script Vue Pattern

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Storage Migration — Best Practices"
 description: "Migrate between storage APIs safely."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/storage-migration/"
 ---
 
 # Storage Area Migration Pattern

@@ -4,6 +4,7 @@ description: "The `declarativeNetRequestWithHostAccess` permission allows extens
 permalink: /permissions/declarativeNetRequestWithHostAccess/
 category: permissions
 order: 15
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequestWithHostAccess/"
 ---
 
 # declarativeNetRequestWithHostAccess

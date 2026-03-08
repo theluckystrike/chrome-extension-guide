@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Local File Access — Best Practices"
 description: "Access local files from Chrome extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/local-file-access/"
 ---
 
 # Local File Access Patterns in Chrome Extensions

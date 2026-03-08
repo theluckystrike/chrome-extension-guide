@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Cookies Sessions — Best Practices"
 description: "Manage cookies and sessions in Chrome extensions for authentication."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/cookies-sessions/"
 ---
 
 # Cookies and Sessions Patterns

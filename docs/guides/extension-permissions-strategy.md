@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Permissions Strategy — Developer Guide"
 description: "Manage Chrome extension permissions with this guide covering manifest declarations, optional permissions, and security best practices."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-permissions-strategy/"
 ---
 # Extension Permissions Strategy
 

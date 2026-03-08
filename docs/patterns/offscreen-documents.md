@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Offscreen Documents — Best Practices"
 description: "Use offscreen documents for DOM operations and long-running tasks in Manifest V3."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/offscreen-documents/"
 ---
 
 # Offscreen Document Patterns

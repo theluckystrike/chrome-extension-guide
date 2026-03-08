@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Cross Origin Requests — Best Practices"
 description: "Handle cross-origin requests in Chrome extensions with CORS workarounds and background fetch patterns."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/cross-origin-requests/"
 ---
 
 # Cross-Origin Request Patterns for Chrome Extensions

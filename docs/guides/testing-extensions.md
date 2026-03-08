@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Testing Extensions — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/testing-extensions/"
 ---
 # Testing Chrome Extensions
 

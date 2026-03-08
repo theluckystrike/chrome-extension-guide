@@ -4,6 +4,7 @@ description: "Allows your extension to register as a text-to-speech engine that 
 permalink: /permissions/ttsEngine/
 category: permissions
 order: 46
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/ttsEngine/"
 ---
 
 # ttsEngine Permission

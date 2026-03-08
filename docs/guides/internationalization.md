@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Internationalization — Developer Guide"
 description: "Learn Chrome extension internationalization with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/internationalization/"
 ---
 # Internationalization (i18n) for Chrome Extensions
 

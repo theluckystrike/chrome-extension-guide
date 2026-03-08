@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Dependency Injection — Best Practices"
 description: "Implement dependency injection for cleaner extension architecture."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-dependency-injection/"
 ---
 
 # Extension Dependency Injection Patterns

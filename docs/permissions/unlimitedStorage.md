@@ -4,6 +4,7 @@ description: "Removes the quota limits on `chrome.storage.local`, IndexedDB, Cac
 permalink: /permissions/unlimitedStorage/
 category: permissions
 order: 47
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/unlimitedStorage/"
 ---
 
 # unlimitedStorage Permission

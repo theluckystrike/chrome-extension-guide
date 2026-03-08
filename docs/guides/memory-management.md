@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Memory Management — Developer Guide"
 description: "Learn Chrome extension memory management with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/memory-management/"
 ---
 # Memory Management in Chrome Extensions
 

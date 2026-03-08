@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Tab Communication — Best Practices"
 description: "Communicate between extension components and tabs."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/tab-communication/"
 ---
 
 # Tab Communication Patterns

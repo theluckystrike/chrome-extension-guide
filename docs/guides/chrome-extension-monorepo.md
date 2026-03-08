@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Monorepo Setup — Developer Guide"
 description: "Learn Chrome extension monorepo setup with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-monorepo/"
 ---
 # Chrome Extension Monorepo
 

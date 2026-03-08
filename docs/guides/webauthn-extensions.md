@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension WebAuthn — Developer Guide"
 description: "Learn Chrome extension webauthn with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/webauthn-extensions/"
 ---
 # WebAuthn & FIDO2 in Chrome Extensions
 

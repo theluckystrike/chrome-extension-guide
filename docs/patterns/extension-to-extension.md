@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension To Extension — Best Practices"
 description: "Implement communication between different Chrome extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-to-extension/"
 ---
 
 # Extension-to-Extension Communication Patterns

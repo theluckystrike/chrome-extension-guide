@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Publishing Guide — Publishing Guide"
 description: "Complete guide to publishing your Chrome extension to the Chrome Web Store."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/publishing-guide/"
 ---
 
 # Chrome Web Store Publishing Guide

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Proxy Settings — Best Practices"
 description: "Configure proxy settings for extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/proxy-settings/"
 ---
 
 # Proxy Settings API Patterns

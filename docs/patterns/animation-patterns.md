@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Animation Patterns — Best Practices"
 description: "Create smooth animations in extension popups and content scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/animation-patterns/"
 ---
 
 # Animation and Transition Patterns for Chrome Extensions

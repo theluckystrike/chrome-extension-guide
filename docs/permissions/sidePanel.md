@@ -4,6 +4,7 @@ description: "- **Permission string:** `"sidePanel"` - **Grants access to:** `ch
 permalink: /permissions/sidePanel/
 category: permissions
 order: 38
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/sidePanel/"
 ---
 
 # sidePanel Permission

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Security Policy — Manifest V3 Guide"
 description: "Understand and work with Content Security Policy restrictions in Manifest V3."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/content-security-policy/"
 ---
 
 # MV3 Content Security Policy

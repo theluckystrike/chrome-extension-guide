@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Declarative Net Request — Manifest V3 Guide"
 description: "Use Declarative Net Request API for network request filtering in Manifest V3."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/declarative-net-request/"
 ---
 
 # Declarative Net Request (DNR)

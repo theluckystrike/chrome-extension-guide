@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Web Request Patterns — Developer Guide"
 description: "Learn Chrome extension web request patterns with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/web-request-patterns/"
 ---
 # WebRequest API Patterns
 

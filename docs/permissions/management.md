@@ -4,6 +4,7 @@ description: "Access to `chrome.management` API — manage other installed exten
 permalink: /permissions/management/
 category: permissions
 order: 24
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/management/"
 ---
 
 # management Permission

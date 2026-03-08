@@ -4,6 +4,7 @@ description: "- **Permission string**: `"identity"` - **What it grants**: Access
 permalink: /permissions/identity/
 category: permissions
 order: 22
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/identity/"
 ---
 
 # identity Permission — Chrome Extension Reference

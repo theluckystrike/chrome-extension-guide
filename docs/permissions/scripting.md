@@ -4,6 +4,7 @@ description: "- Grants access to the `chrome.scripting` API (MV3 replacement for
 permalink: /permissions/scripting/
 category: permissions
 order: 35
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/scripting/"
 ---
 
 # scripting Permission Reference

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Svelte Setup — Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-svelte-setup/"
 ---
 # Svelte Setup for Chrome Extensions
 

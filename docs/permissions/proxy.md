@@ -4,6 +4,7 @@ description: "- **Permission string**: `"proxy"` - **What it grants**: Access to
 permalink: /permissions/proxy/
 category: permissions
 order: 32
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/proxy/"
 ---
 
 # proxy Permission — Chrome Extension Reference

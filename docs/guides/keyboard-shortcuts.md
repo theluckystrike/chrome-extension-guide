@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Keyboard Shortcuts — Developer Guide"
 description: "Learn Chrome extension keyboard shortcuts with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/keyboard-shortcuts/"
 ---
 # Chrome Extension Keyboard Shortcuts
 

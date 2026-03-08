@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Manifest Content Scripts Config — Best Practices"
 description: "Configure content scripts in manifest.json."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/manifest-content-scripts-config/"
 ---
 
 # Content Script Manifest Configuration Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Web Workers Extensions — Best Practices"
 description: "Use Web Workers for background processing in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/web-workers-extensions/"
 ---
 
 # Web Workers in Chrome Extensions

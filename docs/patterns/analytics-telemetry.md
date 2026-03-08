@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Analytics Telemetry — Best Practices"
 description: "Implement analytics and telemetry in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/analytics-telemetry/"
 ---
 
 # Extension Analytics and Telemetry

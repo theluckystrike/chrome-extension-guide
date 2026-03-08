@@ -4,6 +4,7 @@ description: "- **Permission string**: `"declarativeNetRequest"` or `"declarativ
 permalink: /permissions/declarativeNetRequest/
 category: permissions
 order: 13
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequest/"
 ---
 
 # declarativeNetRequest Permission — Chrome Extension Reference

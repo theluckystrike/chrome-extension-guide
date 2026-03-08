@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Popup State Persistence — Best Practices"
 description: "Persist popup UI state across sessions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-state-persistence/"
 ---
 
 # Popup State Persistence

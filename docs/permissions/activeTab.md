@@ -4,6 +4,7 @@ description: "- Grants temporary access to the currently active tab when the use
 permalink: /permissions/activeTab/
 category: permissions
 order: 1
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/activeTab/"
 ---
 
 # activeTab Permission Reference

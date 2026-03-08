@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Management API — Developer Guide"
 description: "Learn how to use the Chrome Extension Management API with this developer guide covering methods, permissions, and implementation examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/management-api/"
 ---
 # Chrome Extension Management API
 

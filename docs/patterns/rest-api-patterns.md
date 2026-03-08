@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Rest Api Patterns — Best Practices"
 description: "Consume REST APIs securely in Chrome extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/rest-api-patterns/"
 ---
 
 # REST API Patterns in Chrome Extensions

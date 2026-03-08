@@ -4,6 +4,7 @@ description: "Access to the `chrome.search` API for triggering searches using th
 permalink: /permissions/search/
 category: permissions
 order: 36
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/search/"
 ---
 
 # search Permission

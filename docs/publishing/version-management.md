@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Version Management — Publishing Guide"
 description: "Manage extension versions effectively for smooth updates and rollbacks."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/version-management/"
 ---
 
 # Version Management Strategies

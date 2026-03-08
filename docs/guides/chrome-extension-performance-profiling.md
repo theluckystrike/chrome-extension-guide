@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Performance Profiling — Developer Guide"
 description: "Optimize your Chrome extension performance with this guide covering profiling, lazy loading, and memory management."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-performance-profiling/"
 ---
 # Performance Profiling for Chrome Extensions
 

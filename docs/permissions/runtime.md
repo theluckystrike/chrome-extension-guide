@@ -4,6 +4,7 @@ description: "The `chrome.runtime` API provides extension information and utilit
 permalink: /permissions/runtime/
 category: permissions
 order: 34
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/runtime/"
 ---
 
 # chrome.runtime API Reference

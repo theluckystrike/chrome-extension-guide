@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Push Notifications — Developer Guide"
 description: "Learn Chrome extension push notifications with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/gcm-push-notifications/"
 ---
 # GCM & Push Notifications in Chrome Extensions
 

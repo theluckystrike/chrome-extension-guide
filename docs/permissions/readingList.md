@@ -4,6 +4,7 @@ description: "- **Permission string**: `"readingList"` - **API**: `chrome.readin
 permalink: /permissions/readingList/
 category: permissions
 order: 33
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/readingList/"
 ---
 
 # readingList Permission

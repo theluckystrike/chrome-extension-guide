@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome TTS API Complete Reference"
 description: "The Chrome TTS API synthesizes speech using the operating system's text-to-speech engine, with fine-grained control over voice selection, rate, pitch, and event handling."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/tts-api/"
 ---
 
 # chrome.tts API Reference

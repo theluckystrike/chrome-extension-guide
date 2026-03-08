@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Web Workers — Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/web-workers-extensions/"
 ---
 # Web Workers in Chrome Extensions
 

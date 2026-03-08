@@ -4,6 +4,7 @@ description: "Access to the `chrome.pageCapture` API for saving complete web pag
 permalink: /permissions/pageCapture/
 category: permissions
 order: 28
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/pageCapture/"
 ---
 
 # pageCapture Permission

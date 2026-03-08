@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension API Mocking — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-api-mocking/"
 ---
 # Mocking Chrome Extension APIs
 

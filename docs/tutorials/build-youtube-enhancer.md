@@ -1,6 +1,7 @@
 ---
 title: Building a YouTube Enhancer Extension
 description: Learn how to build a Chrome extension that enhances YouTube with playback speed shortcuts, video stats overlay, and volume memory per channel.
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-youtube-enhancer/"
 ---
 
 # Chrome Extension Building a YouTube Enhancer Extension — Complete Developer's Guide

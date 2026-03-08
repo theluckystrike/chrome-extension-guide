@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Font Settings Api — Best Practices"
 description: "Access and modify user font settings with the Font Settings API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/font-settings-api/"
 ---
 
 # Font Settings API in Chrome Extensions

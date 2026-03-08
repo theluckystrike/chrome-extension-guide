@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome System API Complete Reference"
 description: "The Chrome System API provides access to system hardware and resource information including CPU, memory, storage devices, and display configurations."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/system-api/"
 ---
 
 # chrome.system API Reference

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Design System — Developer Guide"
 description: "Learn Chrome extension design system with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-design-system/"
 ---
 # Design System for Chrome Extensions
 

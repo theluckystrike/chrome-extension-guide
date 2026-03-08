@@ -4,6 +4,7 @@ description: "Enables blocking/modifying network requests in `chrome.webRequest`
 permalink: /permissions/webRequestBlocking/
 category: permissions
 order: 50
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/webRequestBlocking/"
 ---
 
 # webRequestBlocking Permission (MV2 Only)

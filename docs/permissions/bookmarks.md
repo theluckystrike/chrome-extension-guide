@@ -4,6 +4,7 @@ description: "- **Permission string**: `"bookmarks"` - **What it grants**: Full 
 permalink: /permissions/bookmarks/
 category: permissions
 order: 3
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/bookmarks/"
 ---
 
 # bookmarks Permission — Chrome Extension Reference

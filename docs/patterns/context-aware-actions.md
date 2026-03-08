@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Context Aware Actions — Best Practices"
 description: "Implement context-aware actions based on page and user state."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/context-aware-actions/"
 ---
 
 # Context-Aware Extension Actions

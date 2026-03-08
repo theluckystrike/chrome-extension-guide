@@ -4,6 +4,7 @@ description: "- Grants access to the `chrome.notifications` API - Show rich desk
 permalink: /permissions/notifications/
 category: permissions
 order: 26
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/notifications/"
 ---
 
 # notifications Permission Reference

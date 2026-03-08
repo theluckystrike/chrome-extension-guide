@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Communication Bridge — Best Practices"
 description: "Bridge communication between content scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-communication-bridge/"
 ---
 
 # Content Script Communication Bridge

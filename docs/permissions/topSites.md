@@ -4,6 +4,7 @@ description: "- Permission string: `"topSites"` - Grants access to `chrome.topSi
 permalink: /permissions/topSites/
 category: permissions
 order: 44
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/topSites/"
 ---
 
 # topSites Permission

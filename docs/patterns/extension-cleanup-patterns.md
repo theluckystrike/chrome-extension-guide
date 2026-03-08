@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Cleanup Patterns — Best Practices"
 description: "Clean up resources when extensions or tabs are closed."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-cleanup-patterns/"
 ---
 
 # Cleanup and Teardown Patterns for Chrome Extensions

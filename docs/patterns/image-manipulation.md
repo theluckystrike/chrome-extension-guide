@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Image Manipulation — Best Practices"
 description: "Process and manipulate images in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/image-manipulation/"
 ---
 
 # Image Manipulation Patterns in Chrome Extensions

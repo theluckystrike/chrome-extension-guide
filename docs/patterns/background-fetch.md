@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Background Fetch — Best Practices"
 description: "Use Background Fetch API for large file downloads in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/background-fetch/"
 ---
 
 # Background Fetch Patterns

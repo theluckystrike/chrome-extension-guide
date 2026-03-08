@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Multi Account Patterns — Best Practices"
 description: "Handle multiple user accounts in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/multi-account-patterns/"
 ---
 
 # Multi-Account and Profile Patterns

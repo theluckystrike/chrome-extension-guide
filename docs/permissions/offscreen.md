@@ -4,6 +4,7 @@ description: "The `offscreen` permission enables the Chrome `chrome.offscreen` A
 permalink: /permissions/offscreen/
 category: permissions
 order: 27
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/offscreen/"
 ---
 
 # offscreen Permission

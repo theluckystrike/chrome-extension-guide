@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Navigation Url Handling — Best Practices"
 description: "Handle navigation events and URL changes with the webNavigation API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/navigation-url-handling/"
 ---
 
 # Navigation and URL Handling Patterns

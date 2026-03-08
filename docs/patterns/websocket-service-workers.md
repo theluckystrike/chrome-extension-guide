@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Websocket Service Workers — Best Practices"
 description: "Use WebSockets in service workers."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/websocket-service-workers/"
 ---
 
 # WebSocket Connections from Service Workers

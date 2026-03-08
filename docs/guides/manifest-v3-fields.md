@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Manifest V3 Fields — Developer Guide"
 description: "Learn Chrome extension manifest v3 fields with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/manifest-v3-fields/"
 ---
 # Manifest.json Complete Field Reference (Manifest V3)
 

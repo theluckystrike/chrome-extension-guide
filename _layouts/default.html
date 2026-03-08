@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="canonical" href="{{ page.canonical_url }}">
   {% seo %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Window Management — Developer Guide"
 description: "Learn Chrome extension window management with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/window-management/"
 ---
 # Window Management in Chrome Extensions
 

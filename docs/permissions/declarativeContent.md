@@ -4,6 +4,7 @@ description: "Access to the `chrome.declarativeContent` API for showing/hiding y
 permalink: /permissions/declarativeContent/
 category: permissions
 order: 12
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeContent/"
 ---
 
 # declarativeContent Permission

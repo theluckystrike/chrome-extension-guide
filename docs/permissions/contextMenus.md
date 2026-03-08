@@ -4,6 +4,7 @@ description: "- Grants access to the `chrome.contextMenus` API - Add custom item
 permalink: /permissions/contextMenus/
 category: permissions
 order: 9
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/contextMenus/"
 ---
 
 # contextMenus Permission Reference

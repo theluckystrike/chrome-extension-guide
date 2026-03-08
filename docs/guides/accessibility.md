@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Accessibility Implementation — Developer Guide"
 description: "Learn Chrome extension accessibility implementation with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/accessibility/"
 ---
 # Accessibility in Chrome Extensions
 

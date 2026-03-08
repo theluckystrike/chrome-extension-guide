@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Context Detection — Best Practices"
 description: "Detect execution context in Chrome extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-context-detection/"
 ---
 
 # Extension Context Detection

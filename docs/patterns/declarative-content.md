@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Declarative Content — Best Practices"
 description: "Use declarative content for conditional script injection."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/declarative-content/"
 ---
 
 # DeclarativeContent API Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Typed Storage Wrapper — Best Practices"
 description: "Type-safe storage wrappers for extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/typed-storage-wrapper/"
 ---
 
 # Type-Safe Storage Wrapper Patterns

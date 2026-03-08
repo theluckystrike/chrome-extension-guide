@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Printing Api — Best Practices"
 description: "Handle printing from Chrome extensions with the Printing API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/printing-api/"
 ---
 
 # Printing API Patterns

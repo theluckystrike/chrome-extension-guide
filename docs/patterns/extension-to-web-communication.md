@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension To Web Communication — Best Practices"
 description: "Communicate from extensions to web pages."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-to-web-communication/"
 ---
 
 # Extension-to-Web Communication

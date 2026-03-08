@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Enterprise Policies — Best Practices"
 description: "Support enterprise deployment with Chrome policies."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/enterprise-policies/"
 ---
 
 # Enterprise Policy Patterns for Chrome Extensions

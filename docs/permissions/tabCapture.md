@@ -4,6 +4,7 @@ description: "Access to the `chrome.tabCapture` API for capturing the visible ar
 permalink: /permissions/tabCapture/
 category: permissions
 order: 41
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tabCapture/"
 ---
 
 # tabCapture Permission

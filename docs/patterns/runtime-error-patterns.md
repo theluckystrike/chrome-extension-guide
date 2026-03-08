@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Runtime Error Patterns — Best Practices"
 description: "Handle and recover from runtime errors gracefully."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/runtime-error-patterns/"
 ---
 
 # Chrome Runtime Error Patterns

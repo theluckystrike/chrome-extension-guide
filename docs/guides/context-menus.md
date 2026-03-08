@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Context Menus — Developer Guide"
 description: "Learn Chrome extension context menus with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/context-menus/"
 ---
 # Context Menus in Chrome Extensions
 

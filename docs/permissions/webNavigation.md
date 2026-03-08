@@ -4,6 +4,7 @@ description: "Access to the `chrome.webNavigation` API for monitoring page navig
 permalink: /permissions/webNavigation/
 category: permissions
 order: 48
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/webNavigation/"
 ---
 
 # webNavigation Permission

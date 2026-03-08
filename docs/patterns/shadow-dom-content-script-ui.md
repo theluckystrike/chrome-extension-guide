@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Shadow Dom Content Script Ui — Best Practices"
 description: "Create isolated UI components in shadow DOM from content scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/shadow-dom-content-script-ui/"
 ---
 
 Shadow DOM UI Patterns for Content Scripts

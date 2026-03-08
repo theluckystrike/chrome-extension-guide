@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Update Migration — Best Practices"
 description: "Handle extension updates and migrations smoothly."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/update-migration/"
 ---
 
 # Extension Update and Migration Strategies

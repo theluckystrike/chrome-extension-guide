@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Authentication Patterns — Best Practices"
 description: "Implement OAuth and authentication flows in Chrome extensions securely."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/authentication-patterns/"
 ---
 
 # Authentication Patterns for Chrome Extensions

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Keyboard Shortcuts Api — Best Practices"
 description: "Configure keyboard shortcuts with the Commands API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/keyboard-shortcuts-api/"
 ---
 
 # Keyboard Shortcuts API Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Proxy Settings Deep Dive — Best Practices"
 description: "Configure proxy settings programmatically in extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/proxy-settings-deep-dive/"
 ---
 
 # Proxy Settings Deep Dive

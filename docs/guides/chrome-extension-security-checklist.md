@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Security Checklist — Developer Guide"
 description: "Secure your Chrome extension with this security guide covering best practices, vulnerability prevention, and audit procedures."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-security-checklist/"
 ---
 # Chrome Extension Security Checklist
 

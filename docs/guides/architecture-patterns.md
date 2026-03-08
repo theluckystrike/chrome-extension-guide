@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Architecture Patterns — Developer Guide"
 description: "Learn Chrome extension architecture patterns with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/architecture-patterns/"
 ---
 # Extension Architecture Patterns
 

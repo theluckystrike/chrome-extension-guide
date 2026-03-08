@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Notification Patterns — Best Practices"
 description: "Create and manage notifications in Chrome extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/notification-patterns/"
 ---
 
 # Notification Patterns

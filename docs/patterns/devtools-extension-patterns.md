@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Devtools Extension Patterns — Best Practices"
 description: "Build custom DevTools panels and extensions for advanced debugging."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/devtools-extension-patterns/"
 ---
 
 # DevTools Extension Patterns

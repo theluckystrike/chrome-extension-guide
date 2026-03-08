@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Search Api Patterns — Best Practices"
 description: "Implement search functionality with the Search API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/search-api-patterns/"
 ---
 
 # Chrome Search API Patterns

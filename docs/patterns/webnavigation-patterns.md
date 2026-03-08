@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Webnavigation Patterns — Best Practices"
 description: "Use webNavigation API for advanced navigation tracking."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/webnavigation-patterns/"
 ---
 
 # Web Navigation API Patterns

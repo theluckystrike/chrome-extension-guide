@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Safari Porting — Developer Guide"
 description: "Learn Chrome extension safari porting with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-safari-porting/"
 ---
 # Porting Chrome Extensions to Safari Web Extensions
 

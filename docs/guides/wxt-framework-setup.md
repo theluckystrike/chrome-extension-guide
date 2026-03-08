@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension WXT Framework — Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/wxt-framework-setup/"
 ---
 # WXT Framework Setup
 

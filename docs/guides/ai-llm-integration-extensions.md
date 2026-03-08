@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension AI & LLM Integration — Developer Guide"
 description: "Learn Chrome extension ai & llm integration with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/ai-llm-integration-extensions/"
 ---
 # AI and LLM Integration in Chrome Extensions
 

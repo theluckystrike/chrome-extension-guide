@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension VPN Provider — Developer Guide"
 description: "Learn Chrome extension vpn provider with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/vpn-provider/"
 ---
 # VPN Provider API in Chrome Extensions
 

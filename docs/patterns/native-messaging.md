@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Native Messaging — Best Practices"
 description: "Communicate with native applications via native messaging."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/native-messaging/"
 ---
 
 # Native Messaging Patterns

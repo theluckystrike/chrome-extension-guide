@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Cross Context State — Best Practices"
 description: "Share state across extension contexts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/cross-context-state/"
 ---
 
 # Cross-Context State Management

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Inter Process — Best Practices"
 description: "Implement inter-process communication patterns between extension components like popups, background scripts, and content scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-inter-process/"
 ---
 
 # Extension Inter-Process Communication Patterns

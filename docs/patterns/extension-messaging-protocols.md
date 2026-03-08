@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Messaging Protocols — Best Practices"
 description: "Design message passing protocols between extension components."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-messaging-protocols/"
 ---
 
 # Extension Messaging Protocols

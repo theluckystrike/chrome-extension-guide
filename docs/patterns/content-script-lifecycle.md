@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Lifecycle — Best Practices"
 description: "Manage content script lifecycle effectively."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-lifecycle/"
 ---
 
 # Content Script Lifecycle Management

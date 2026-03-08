@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Webworker Offloading — Best Practices"
 description: "Offload heavy computation to Web Workers."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/webworker-offloading/"
 ---
 
 # Web Worker Offloading Patterns

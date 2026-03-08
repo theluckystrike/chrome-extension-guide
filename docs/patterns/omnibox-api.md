@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Omnibox Api — Best Practices"
 description: "Implement custom search suggestions in the Chrome omnibox (address bar)."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/omnibox-api/"
 ---
 
 # Chrome Extension Omnibox API Patterns

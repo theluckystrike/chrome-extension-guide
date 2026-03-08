@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Migration Wizard — Best Practices"
 description: "Create migration wizards for major version updates."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/migration-wizard/"
 ---
 
 # Migration Wizard Pattern

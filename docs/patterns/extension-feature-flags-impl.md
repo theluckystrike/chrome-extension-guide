@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Feature Flags Impl — Best Practices"
 description: "Implement feature flags with storage and remote configuration."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-feature-flags-impl/"
 ---
 
 # Extension Feature Flag Implementation

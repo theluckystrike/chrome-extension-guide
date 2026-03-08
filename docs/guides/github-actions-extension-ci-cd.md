@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension GitHub Actions CI/CD — Developer Guide"
 description: "Learn Chrome extension github actions ci/cd with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/github-actions-extension-ci-cd/"
 ---
 # GitHub Actions CI/CD for Chrome Extensions
 

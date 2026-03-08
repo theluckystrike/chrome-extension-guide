@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Manifest V3 Migration Guide — Manifest V3 Guide"
 description: "Complete guide to migrating your Chrome extension from Manifest V2 to Manifest V3."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/manifest-v3-migration-guide/"
 ---
 
 # Manifest V3 Migration Guide

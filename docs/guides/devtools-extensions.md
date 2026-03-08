@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension DevTools Extensions — Developer Guide"
 description: "Learn Chrome extension devtools extensions with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/devtools-extensions/"
 ---
 # Building DevTools Extensions
 

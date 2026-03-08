@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Configuration — Best Practices"
 description: "Implement flexible configuration patterns for Chrome extensions using chrome.storage, managed storage, and feature flags."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-configuration/"
 ---
 
 # Extension Configuration Patterns

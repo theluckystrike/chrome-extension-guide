@@ -4,6 +4,7 @@ description: "Access to the `chrome.fontSettings` API for reading and modifying 
 permalink: /permissions/fontSettings/
 category: permissions
 order: 18
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/fontSettings/"
 ---
 
 # fontSettings Permission

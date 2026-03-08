@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension JSON Formatter — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-json-formatter/"
 ---
 # Build a JSON Formatter Chrome Extension
 

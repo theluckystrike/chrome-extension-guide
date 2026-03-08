@@ -4,6 +4,7 @@ description: "- **Permission string**: `"declarativeNetRequestFeedback"` - **Wha
 permalink: /permissions/declarativeNetRequestFeedback/
 category: permissions
 order: 14
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequestFeedback/"
 ---
 
 # declarativeNetRequestFeedback Permission — Chrome Extension Reference

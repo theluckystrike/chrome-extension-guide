@@ -4,6 +4,7 @@ description: "- Grants access to `chrome.downloads` API - Start downloads progra
 permalink: /permissions/downloads/
 category: permissions
 order: 17
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/downloads/"
 ---
 
 # downloads Permission Reference

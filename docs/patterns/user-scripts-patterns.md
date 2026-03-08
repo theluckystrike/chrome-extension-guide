@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension User Scripts Patterns — Best Practices"
 description: "Manage and inject user scripts with the User Scripts API."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/user-scripts-patterns/"
 ---
 
 # UserScripts API Patterns (Chrome 120+)

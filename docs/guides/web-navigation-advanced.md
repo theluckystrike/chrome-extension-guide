@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Advanced Web Navigation — Developer Guide"
 description: "Learn Chrome extension advanced web navigation with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/web-navigation-advanced/"
 ---
 # Chrome Extension Web Navigation Advanced Patterns
 

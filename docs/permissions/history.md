@@ -4,6 +4,7 @@ description: "- **Permission string**: `"history"` - **What it grants**: Access 
 permalink: /permissions/history/
 category: permissions
 order: 21
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/history/"
 ---
 
 # history Permission — Chrome Extension Reference

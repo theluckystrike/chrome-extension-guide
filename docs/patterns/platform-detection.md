@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Platform Detection — Best Practices"
 description: "Detect platform and OS for cross-platform extensions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/platform-detection/"
 ---
 
 # Platform Detection

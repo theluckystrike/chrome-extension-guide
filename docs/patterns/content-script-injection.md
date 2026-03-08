@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Injection — Best Practices"
 description: "Advanced content script injection techniques and patterns."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-injection/"
 ---
 
 # Content Script Injection Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Isolation — Best Practices"
 description: "Maintain proper isolation between content scripts and page scripts."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-isolation/"
 ---
 
 # Content Script Isolation Patterns

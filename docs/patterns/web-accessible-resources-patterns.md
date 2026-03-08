@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Web Accessible Resources Patterns — Best Practices"
 description: "Advanced patterns for web accessible resources."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/web-accessible-resources-patterns/"
 ---
 
 # Web Accessible Resources Advanced Patterns (MV3)

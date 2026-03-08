@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Drag And Drop — Best Practices"
 description: "Implement drag and drop in extension UIs."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/drag-and-drop/"
 ---
 
 # Drag and Drop in Extensions

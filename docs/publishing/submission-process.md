@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Submission Process — Publishing Guide"
 description: "Complete step-by-step guide to submitting your Chrome extension to the Chrome Web Store for review and publication."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/submission-process/"
 ---
 
 # Chrome Web Store Submission Process

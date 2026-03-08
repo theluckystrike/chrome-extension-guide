@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Debugging Checklist — Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-debugging-checklist/"
 ---
 # Extension Debugging Checklist
 

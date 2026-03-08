@@ -4,6 +4,7 @@ description: "Access to the `chrome.contentSettings` API for controlling per-sit
 permalink: /permissions/contentSettings/
 category: permissions
 order: 8
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/contentSettings/"
 ---
 
 # contentSettings Permission

@@ -4,6 +4,7 @@ description: "- Permission string: `"dns"` - Grants access to `chrome.dns` API -
 permalink: /permissions/dns/
 category: permissions
 order: 16
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/dns/"
 ---
 
 # dns Permission

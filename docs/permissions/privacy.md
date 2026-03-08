@@ -4,6 +4,7 @@ description: "Access to `chrome.privacy` API for reading/controlling Chrome's pr
 permalink: /permissions/privacy/
 category: permissions
 order: 31
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/privacy/"
 ---
 
 # privacy Permission

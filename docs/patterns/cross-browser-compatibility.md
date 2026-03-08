@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Cross Browser Compatibility — Best Practices"
 description: "Build extensions that work across Chrome, Firefox, and Edge."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/cross-browser-compatibility/"
 ---
 
 # Cross-Browser Compatibility

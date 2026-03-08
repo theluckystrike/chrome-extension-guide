@@ -4,6 +4,7 @@ description: "- Grants access to `chrome.webRequest` API - Observe HTTP/HTTPS re
 permalink: /permissions/webRequest/
 category: permissions
 order: 49
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/webRequest/"
 ---
 
 # webRequest Permission Reference

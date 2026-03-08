@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Esbuild Setup — Developer Guide"
 description: "Learn how to build a Esextension Setup Chrome extension with this comprehensive tutorial covering architecture, implementation, and best practices."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/esbuild-extension-setup/"
 ---
 # esbuild Setup for Chrome Extensions
 

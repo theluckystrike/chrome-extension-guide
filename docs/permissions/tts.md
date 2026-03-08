@@ -4,6 +4,7 @@ description: "- **Permission string**: `"tts"` (consumer) or `"ttsEngine"` (prov
 permalink: /permissions/tts/
 category: permissions
 order: 45
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tts/"
 ---
 
 # tts Permission — Chrome Extension Reference

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Storage API Deep Dive"
 description: "An in-depth guide to the Chrome Storage API covering all four storage areas, quota management, change listeners, migration patterns, and advanced usage for extension data persistence."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/storage-api-deep-dive/"
 ---
 
 # Chrome Storage API Deep Dive

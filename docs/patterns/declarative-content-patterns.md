@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Declarative Content Patterns — Best Practices"
 description: "Use Declarative Content API to trigger actions based on page content without host permissions."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/declarative-content-patterns/"
 ---
 
 # Declarative Content Patterns

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Event Driven Messaging — Best Practices"
 description: "Design event-driven architectures for extension components."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/event-driven-messaging/"
 ---
 
 # Event-Driven Messaging Patterns

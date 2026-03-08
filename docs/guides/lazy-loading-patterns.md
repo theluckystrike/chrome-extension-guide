@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Lazy Loading Patterns — Developer Guide"
 description: "Learn Chrome extension lazy loading patterns with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/lazy-loading-patterns/"
 ---
 # Chrome Extension Lazy Loading Patterns
 

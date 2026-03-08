@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Updates — Developer Guide"
 description: "Learn Chrome extension extension updates with this developer guide covering implementation, best practices, and code examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-updates/"
 ---
 # Handling Extension Updates
 

@@ -4,6 +4,7 @@ description: "- **Permission string:** `"nativeMessaging"` - Enables communicati
 permalink: /permissions/nativeMessaging/
 category: permissions
 order: 25
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/nativeMessaging/"
 ---
 
 # nativeMessaging Permission
