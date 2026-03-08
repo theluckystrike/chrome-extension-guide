@@ -1,0 +1,30 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>{{ site.title | xml_escape }}</title>
+  <link href="{{ site.url }}{{ site.baseurl }}" rel="alternate"/>
+  <link href="{{ site.url }}{{ site.baseurl }}/feed.xml" rel="self"/>
+  <id>{{ site.url }}{{ site.baseurl }}/</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <subtitle>{{ site.description | xml_escape }}</subtitle>
+  <author>
+    <name>theluckystrike</name>
+    <uri>https://zovo.one</uri>
+  </author>
+  <rights>Copyright (c) theluckystrike</rights>
+  
+  {% assign docs_sorted = site.docs | sort: 'date' | reverse %}
+  {% for doc in docs_sorted limit: 50 %}
+  <entry>
+    <title>{{ doc.title | xml_escape }}</title>
+    <link href="{{ site.url }}{{ site.baseurl }}{{ doc.url }}" rel="alternate"/>
+    <id>{{ site.url }}{{ site.baseurl }}{{ doc.url }}</id>
+    <updated>{{ doc.date | date_to_xmlschema }}</updated>
+    <published>{{ doc.date | date_to_xmlschema }}</published>
+    <summary>{{ doc.description | xml_escape }}</summary>
+    <content type="html"><![CDATA[{{ doc.content }}]]></content>
+  </entry>
+  {% endfor %}
+</feed>

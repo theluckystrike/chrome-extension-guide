@@ -16,3 +16,13 @@ defaults:
       path: ""
     values:
       reading_time: true
+
+
+collections:
+  docs:
+    output: true
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
