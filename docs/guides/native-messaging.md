@@ -535,3 +535,151 @@ readFile('/home/user/documents/data.txt')
 ## Conclusion
 
 Native messaging bridges Chrome Extensions with native applications, enabling powerful system integration capabilities. By following the protocols and security best practices outlined in this guide, you can create robust extensions that leverage the full power of the underlying operating system while maintaining security and reliability.
+---
+layout: default
+title: "Chrome Extension Native Messaging — How to Communicate with Desktop Apps"
+description: "Learn how to build native messaging hosts to enable Chrome extensions to communicate with desktop applications using stdio."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/native-messaging/"
+---
+
+# Chrome Extension Native Messaging — How to Communicate with Desktop Apps
+
+## Overview {#overview}
+
+Native messaging enables Chrome extensions to exchange messages with native applications installed on a user's computer. This powerful feature bridges the gap between web extensions and desktop software, allowing your extension to leverage system resources, access platform-specific APIs, or communicate with existing desktop applications. Unlike standard extension messaging, native messaging uses standard input/output (stdio) streams to pass JSON-encoded messages between the extension and the host application.
+
+The architecture consists of two main components: the Chrome extension that sends and receives messages, and the native messaging host—a standalone executable that runs as a separate process. Chrome launches the native application on demand, establishes a communication channel through stdin and stdout, and manages the connection lifecycle.
+
+## Manifest Registration {#manifest-registration}
+
+Before your extension can communicate with a native application, you must configure both the extension manifest and the native host manifest. The extension's `manifest.json` declares the native messaging permission and specifies which native hosts it can connect to.
+
+```json
+{
+  "name": "My Native Messaging Extension",
+  "version": "1.0",
+  "permissions": ["nativeMessaging"],
+  "externally_connectable": {
+    "matches": ["*://*.example.com/*"]
+  }
+}
+```
+
+The native messaging host requires its own manifest file named according to your application (e.g., `myapp.json` on Windows or `myapp.json` on macOS/Linux). This manifest must be registered with Chrome and placed in a specific location depending on the operating system:
+
+- **Windows**: `HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.myapp` or the user's Application Data folder
+- **macOS**: `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/`
+- **Linux**: `~/.config/google-chrome/NativeMessagingHosts/`
+
+The native host manifest must include the name, description, path to the executable, and permitted origins:
+
+```json
+{
+  "name": "com.myapp",
+  "description": "My Application Native Messaging Host",
+  "path": "/path/to/native-host",
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://extension-id/"]
+}
+```
+
+## Message Protocol {#message-protocol}
+
+The native messaging protocol uses JSON messages sent through stdin and stdout. Chrome encodes each message with a 4-byte length prefix (in little-endian byte order) followed by the JSON content. Both the extension and the native host must follow this protocol exactly.
+
+When sending a message from your extension, use the `chrome.runtime.sendNativeMessage()` API:
+
+```javascript
+// In your extension's background script or content script
+async function sendToNativeApp(message) {
+  try {
+    const response = await chrome.runtime.sendNativeMessage(
+      "com.myapp",
+      message
+    );
+    console.log("Response from native app:", response);
+  } catch (error) {
+    console.error("Native messaging error:", error);
+  }
+}
+
+// Example usage
+sendToNativeApp({ action: "getSystemInfo" });
+```
+
+The native application receives messages from stdin, processes them, and writes responses to stdout. Here's a simple Node.js example:
+
+```javascript
+// native-host.js
+const readline = require("readline");
+
+function readMessage() {
+  const lengthBuffer = Buffer.alloc(4);
+  process.stdin.read(lengthBuffer, 0, 4);
+  
+  const length = lengthBuffer.readUInt32LE(0);
+  const messageBuffer = Buffer.alloc(length);
+  process.stdin.read(messageBuffer, 0, length);
+  
+  return JSON.parse(messageBuffer.toString());
+}
+
+function sendMessage(message) {
+  const json = JSON.stringify(message);
+  const lengthBuffer = Buffer.alloc(4);
+  lengthBuffer.writeUInt32LE(json.length, 0);
+  
+  process.stdout.write(Buffer.concat([lengthBuffer, Buffer.from(json)]));
+}
+
+// Main loop
+while (true) {
+  const message = readMessage();
+  const response = processMessage(message);
+  sendMessage(response);
+}
+
+function processMessage(message) {
+  // Handle different message types
+  switch (message.action) {
+    case "getSystemInfo":
+      return { platform: process.platform, arch: process.arch };
+    case "executeCommand":
+      return { result: executeShellCommand(message.command) };
+    default:
+      return { error: "Unknown action" };
+  }
+}
+```
+
+## Platform-Specific Setup {#platform-setup}
+
+Each operating system has specific requirements for setting up native messaging hosts.
+
+### Windows {#windows-setup}
+
+On Windows, you can register the native messaging host either through the Windows Registry or by placing the manifest in the user's Application Data folder. The registry approach uses the path `HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.myapp` with a default string value pointing to the manifest file. Ensure the native executable is signed or marked as trusted, as Chrome may warn users about unsigned executables.
+
+### macOS {#macos-setup}
+
+macOS requires the native messaging host manifest to be placed in `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/`. The operating system's Gatekeeper may block unsigned applications, so you may need to sign your native host or instruct users to allow the application manually. Create the directory structure if it doesn't exist:
+
+```bash
+mkdir -p ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/
+```
+
+### Linux {#linux-setup}
+
+Linux follows the XDG Base Directory specification. Place the manifest in `~/.config/google-chrome/NativeMessagingHosts/` or `/etc/chromium/native-messaging-hosts/` for system-wide installation. Ensure the native executable has execute permissions:
+
+```bash
+chmod +x /path/to/native-host
+```
+
+## Security Considerations {#security}
+
+Native messaging introduces significant security considerations. Never pass sensitive data without proper validation, and always verify the origin of incoming messages. The native host should validate that messages come from authorized extension IDs. Additionally, be aware that native messaging bypasses Chrome's sandbox, so ensure your native application follows security best practices and runs with minimal necessary privileges.
+
+## Conclusion {#conclusion}
+
+Native messaging transforms Chrome extensions into powerful tools capable of interacting with desktop applications. By understanding manifest registration, the JSON-over-stdio protocol, and platform-specific setup requirements, you can build extensions that leverage the full capabilities of the operating system while maintaining security and reliability.
