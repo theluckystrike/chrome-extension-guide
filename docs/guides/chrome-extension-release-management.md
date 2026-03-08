@@ -221,7 +221,7 @@ All notable changes to this extension will be documented in this file.
 
 ### Fixed
 - Fixed memory leak in background service worker
-- Resolved conflict with other extensions using storage API
+- Resolved conflict with other extensions using [[storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
 - Corrected text truncation in long feed items
 
 ### Security
@@ -251,7 +251,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     
     if (changelogEntries.length > 0) {
       // Store changelog for the popup to display
-      await chrome.storage.local.set({
+      await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
         pendingChangelog: {
           version: currentVersion,
           entries: changelogEntries,
@@ -260,7 +260,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       });
       
       // Optionally show a notification
-      chrome.notifications.create({
+      [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({
         type: 'basic',
         iconUrl: 'icons/icon-128.png',
         title: 'Extension Updated!',
@@ -268,8 +268,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       });
     }
   } else if (details.reason === 'install') {
-    // Show onboarding for new users
-    await chrome.storage.local.set({
+    // Show [[onboarding](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies)](https://theluckystrike.github.io/extension-monetization-playbook/growth/[onboarding](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies)-strategies) for new users
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
       showOnboarding: true
     });
   }
@@ -298,12 +298,12 @@ async function getChangelogSince(version: string): Promise<ChangelogEntry[]> {
 import type { ChangelogEntry } from '../types/changelog';
 
 export async function showChangelog(): Promise<void> {
-  const { pendingChangelog } = await chrome.storage.local.get('pendingChangelog');
+  const { pendingChangelog } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('pendingChangelog');
   
   if (!pendingChangelog?.showAtNextOpen) return;
   
   // Clear the flag so we don't show again
-  await chrome.storage.local.set({
+  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
     pendingChangelog: { ...pendingChangelog, showAtNextOpen: false }
   });
   
@@ -406,7 +406,7 @@ export class BetaFeatureFlags {
 
   private async loadFlags(): Promise<void> {
     // In production, fetch from remote config
-    const stored = await chrome.storage.local.get('featureFlags');
+    const stored = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('featureFlags');
     if (stored.featureFlags) {
       this.flags = new Map(Object.entries(stored.featureFlags));
     }
@@ -459,7 +459,7 @@ export class BetaFeatureFlags {
 
   async setFlag(flag: FeatureFlag): Promise<void> {
     this.flags.set(flag.key, flag);
-    await chrome.storage.local.set({
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
       featureFlags: Object.fromEntries(this.flags)
     });
   }
@@ -526,7 +526,7 @@ class MigrationManager {
   }
 
   async migrateIfNeeded(): Promise<void> {
-    const { schemaVersion, ...existingData } = await chrome.storage.local.get('schemaVersion');
+    const { schemaVersion, ...existingData } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('schemaVersion');
     const storedVersion = schemaVersion || '1.0.0';
     
     if (storedVersion === this.currentVersion) {
@@ -545,7 +545,7 @@ class MigrationManager {
     }
 
     // Save migrated data with new version
-    await chrome.storage.local.set({
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
       ...data,
       schemaVersion: this.currentVersion
     });
@@ -636,3 +636,8 @@ For information on CWS-specific considerations including developer account setup
 ---
 
 Built by [Zovo](https://zovo.one) - Open-source tools and guides for extension developers.
+
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.

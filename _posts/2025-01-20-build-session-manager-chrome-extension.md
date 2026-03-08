@@ -29,7 +29,7 @@ Finally, the Chrome Web Store has a consistent demand for tab management tools. 
 
 ## Project Overview and Features {#project-overview}
 
-Our session manager extension will include the following core features. First, we need the ability to save the current window session, capturing all open tabs including their URLs and titles. Second, we need a saved sessions list that displays all previously saved sessions with options to restore or delete them. Third, we need session restoration that opens all tabs from a saved session in the current window or a new window. Fourth, we need persistent storage using Chrome storage API to save sessions across browser restarts. Finally, we need a clean, intuitive popup interface that makes managing sessions easy.
+Our session manager extension will include the following core features. First, we need the ability to save the current window session, capturing all open tabs including their URLs and titles. Second, we need a saved sessions list that displays all previously saved sessions with options to restore or delete them. Third, we need session restoration that opens all tabs from a saved session in the current window or a new window. Fourth, we need persistent storage using Chrome [[storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) to save sessions across browser restarts. Finally, we need a clean, intuitive popup interface that makes managing sessions easy.
 
 Let us start building this extension step by step.
 
@@ -295,7 +295,7 @@ async function saveCurrentSession() {
     // Collect tabs from all windows
     for (const window of windows) {
       if (window.type === 'normal') {
-        const tabs = await chrome.tabs.query({ windowId: window.id });
+        const tabs = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ windowId: window.id });
         allTabs = allTabs.concat(tabs);
       }
     }
@@ -326,14 +326,14 @@ async function saveCurrentSession() {
     };
     
     // Get existing sessions from storage
-    const result = await chrome.storage.local.get(['sessions']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['sessions']);
     const sessions = result.sessions || [];
     
     // Add new session
     sessions.unshift(session);
     
     // Save back to storage
-    await chrome.storage.local.set({ sessions });
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions });
     
     console.log('Session saved successfully!');
   } catch (error) {
@@ -347,7 +347,7 @@ async function loadSavedSessions() {
   const sessionsList = document.getElementById('sessionsList');
   
   try {
-    const result = await chrome.storage.local.get(['sessions']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['sessions']);
     const sessions = result.sessions || [];
     
     if (sessions.length === 0) {
@@ -376,7 +376,7 @@ async function loadSavedSessions() {
 // Restore a saved session
 async function restoreSession(sessionId) {
   try {
-    const result = await chrome.storage.local.get(['sessions']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['sessions']);
     const sessions = result.sessions || [];
     const session = sessions.find(s => s.id === sessionId);
     
@@ -389,11 +389,11 @@ async function restoreSession(sessionId) {
     const tabUrls = session.tabs.map(tab => tab.url);
     
     // Open the first tab in the current window
-    await chrome.tabs.create({ url: tabUrls[0], active: true });
+    await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: tabUrls[0], active: true });
     
     // Open remaining tabs
     for (let i = 1; i < tabUrls.length; i++) {
-      await chrome.tabs.create({ url: tabUrls[i], active: false });
+      await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: tabUrls[i], active: false });
     }
     
     console.log('Session restored successfully!');
@@ -406,14 +406,14 @@ async function restoreSession(sessionId) {
 // Delete a saved session
 async function deleteSession(sessionId) {
   try {
-    const result = await chrome.storage.local.get(['sessions']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['sessions']);
     let sessions = result.sessions || [];
     
     // Filter out the session to delete
     sessions = sessions.filter(s => s.id !== sessionId);
     
     // Save back to storage
-    await chrome.storage.local.set({ sessions });
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions });
     
     // Reload the sessions list
     await loadSavedSessions();
@@ -453,9 +453,9 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Session Manager extension installed');
   
   // Initialize storage if needed
-  chrome.storage.local.get(['sessions'], (result) => {
+  [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['sessions'], (result) => {
     if (!result.sessions) {
-      chrome.storage.local.set({ sessions: [] });
+      [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions: [] });
     }
   });
 });
@@ -495,11 +495,11 @@ Try restoring a session to see all your tabs open in a new window. Try deleting 
 
 Throughout this tutorial, we used several important Chrome extension APIs. Understanding these APIs will help you build more advanced extensions in the future.
 
-The chrome.tabs API provides methods for creating, retrieving, updating, and deleting tabs. We used chrome.tabs.query to get all tabs in a window and chrome.tabs.create to open new tabs during session restoration.
+The [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) API provides methods for creating, retrieving, updating, and deleting tabs. We used [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query to get all tabs in a window and [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create to open new tabs during session restoration.
 
 The chrome.windows API allows you to work with browser windows. We used chrome.windows.getAll to retrieve all open windows so we could save tabs from all of them.
 
-The chrome.storage API provides persistent storage for extension data. We used chrome.storage.local to save and retrieve sessions, which persists the data even after Chrome closes and restarts.
+The [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) API provides persistent storage for extension data. We used [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local to save and retrieve sessions, which persists the data even after Chrome closes and restarts.
 
 The chrome.runtime API provides information about the extension and handles lifecycle events. We used it in our background script to handle installation and startup events.
 
@@ -507,13 +507,13 @@ The chrome.runtime API provides information about the extension and handles life
 
 ## Extending Your Session Manager {#future-enhancements}
 
-Now that you have a working session manager extension, here are some ideas for extending its functionality. You could add session naming to let users give custom names to their saved sessions instead of using timestamps. You could implement session exporting to allow users to export sessions as JSON files for backup or sharing. You could add tab previews to show a preview of each tab when hovering over a saved session. You could implement auto-save to automatically save sessions at regular intervals or when Chrome closes. Finally, you could add session syncing to sync sessions across devices using chrome.storage.sync.
+Now that you have a working session manager extension, here are some ideas for extending its functionality. You could add session naming to let users give custom names to their saved sessions instead of using timestamps. You could implement session exporting to allow users to export sessions as JSON files for backup or sharing. You could add tab previews to show a preview of each tab when hovering over a saved session. You could implement auto-save to automatically save sessions at regular intervals or when Chrome closes. Finally, you could add session syncing to sync sessions across devices using [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync.
 
 ---
 
 ## Conclusion {#conclusion}
 
-Congratulations! You have successfully built a complete session manager Chrome extension. This extension demonstrates fundamental Chrome extension development concepts including Manifest V3 configuration, popup interface design, Chrome storage API usage, and the tabs and windows APIs.
+Congratulations! You have successfully built a complete session manager Chrome extension. This extension demonstrates fundamental Chrome extension development concepts including Manifest V3 configuration, popup interface design, Chrome [[storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) usage, and the tabs and windows APIs.
 
 The extension you built can save tabs session data, restore tabs chrome functionality, and manage multiple saved sessions. It provides a solid foundation that you can continue to expand and improve based on your needs or user feedback.
 
@@ -528,3 +528,8 @@ Remember to test thoroughly before publishing to the Chrome Web Store, and consi
 To continue learning about Chrome extension development, explore the official Chrome Extension Documentation at Google's developer site. The Chrome Sessions API documentation provides detailed information about the APIs we used. The Chrome Web Store publishing guide explains how to distribute your extension to millions of users.
 
 Happy coding, and enjoy using your new session manager extension!
+
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.

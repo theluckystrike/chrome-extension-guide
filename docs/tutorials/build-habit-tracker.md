@@ -21,12 +21,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Background service worker for alarm handling
 - Badge text updates for completed/total count
 
-See: [Alarms API](../api-reference/alarms-api.md), [Notifications API](../api-reference/notifications-api.md), [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+See: [[Alarms API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](../api-reference/alarms-api.md), [Notifications API](../api-reference/notifications-api.md), [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) Deep Dive](../api-reference/storage-api-deep-dive.md)
 
 ## Step 2: Storage Schema {#step-2-storage-schema}
 - Habit object structure: `{ id, name, createdDate, completionLog: { "YYYY-MM-DD": boolean } }`
 - Settings object: `{ reminderTime: "HH:MM", enabled: boolean }`
-- Use `chrome.storage.local` for persistence across sessions
+- Use `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local` for persistence across sessions
 
 ## Step 3: Popup UI {#step-3-popup-ui}
 - Display today's date and habits as checkboxes
@@ -41,12 +41,12 @@ See: [Alarms API](../api-reference/alarms-api.md), [Notifications API](../api-re
 - Store calculated streaks for display
 
 ## Step 5: Daily Reset with Alarms {#step-5-daily-reset-with-alarms}
-- Create alarm using `chrome.alarms.create()` to fire at midnight
+- Create alarm using `[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create()` to fire at midnight
 - Use `when` parameter with calculated milliseconds until midnight
 - On alarm trigger: clear today's completion flags, recalculate streaks
 - Re-schedule alarm for next day after reset
 
-See: [Alarms API](../api-reference/alarms-api.md)
+See: [[Alarms API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](../api-reference/alarms-api.md)
 
 ## Step 6: Notification Reminders {#step-6-notification-reminders}
 - Use `chrome.notifications.create()` for reminder alerts
@@ -62,7 +62,7 @@ See: [Notifications API](../api-reference/notifications-api.md)
 - Add new habit input with name field
 - Reminder time picker (24-hour format)
 - Toggle for enabling/disabling reminders
-- Save settings to `chrome.storage.local`
+- Save settings to `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local`
 
 ## Step 8: Weekly Summary View {#step-8-weekly-summary-view}
 - Calculate completion rate for past 7 days
@@ -90,7 +90,7 @@ See: [Notifications API](../api-reference/notifications-api.md)
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

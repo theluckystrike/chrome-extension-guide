@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Price Tracker Extension
 
-Build a Chrome extension that detects product prices on e-commerce pages, tracks them over time, shows price history sparklines, sends notifications on price drops, and provides a side panel for managing all tracked products. Uses **@theluckystrike/webext-storage** for persistent product data and **chrome.alarms** for background price checking.
+Build a Chrome extension that detects product prices on e-commerce pages, tracks them over time, shows price history sparklines, sends notifications on price drops, and provides a side panel for managing all tracked products. Uses **@theluckystrike/webext-storage** for persistent product data and **[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)** for background price checking.
 
 ## Prerequisites {#prerequisites}
 
@@ -319,7 +319,7 @@ Each product stores its full price history (trimmed to 90 days), lowest/highest 
 
 ---
 
-## Step 4: Background Price Checking with chrome.alarms {#step-4-background-price-checking-with-chromealarms}
+## Step 4: Background Price Checking with [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) {#step-4-background-price-checking-with-chromealarms}
 
 Create `src/background.ts`:
 
@@ -335,8 +335,8 @@ const ALARM_NAME = "check-prices";
 
 async function scheduleAlarm(): Promise<void> {
   const settings = await settingsStorage.get();
-  await chrome.alarms.clear(ALARM_NAME);
-  chrome.alarms.create(ALARM_NAME, {
+  await [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).clear(ALARM_NAME);
+  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create(ALARM_NAME, {
     delayInMinutes: 1,
     periodInMinutes: settings.checkIntervalMinutes,
   });
@@ -366,7 +366,7 @@ async function fetchCurrentPrice(product: TrackedProduct): Promise<number | null
 
 function notifyPriceDrop(product: TrackedProduct, newPrice: number, dropPercent: number): void {
   const sym = product.currency === "USD" ? "$" : product.currency + " ";
-  chrome.notifications.create(`price-drop-${product.id}`, {
+  [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create(`price-drop-${product.id}`, {
     type: "basic",
     iconUrl: "../icons/icon128.png",
     title: `Price dropped ${dropPercent.toFixed(0)}%!`,
@@ -379,7 +379,7 @@ function notifyPriceDrop(product: TrackedProduct, newPrice: number, dropPercent:
 
 function notifyTargetReached(product: TrackedProduct, price: number): void {
   const sym = product.currency === "USD" ? "$" : product.currency + " ";
-  chrome.notifications.create(`target-${product.id}`, {
+  [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create(`target-${product.id}`, {
     type: "basic",
     iconUrl: "../icons/icon128.png",
     title: "Target price reached!",
@@ -440,18 +440,18 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 // Notification actions
-chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
+[chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onButtonClicked.addListener((id, buttonIndex) => {
   if (buttonIndex === 0) {
     const productId = id.replace(/^(price-drop-|target-)/, "");
     productsStorage.get().then((products) => {
       const p = products.find((x) => x.id === productId);
-      if (p) chrome.tabs.create({ url: p.url });
+      if (p) [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: p.url });
     });
   }
-  chrome.notifications.clear(id);
+  [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).clear(id);
 });
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) checkAllPrices();
 });
 
@@ -592,7 +592,7 @@ async function loadProducts(): Promise<void> {
   productList.innerHTML = sorted.map(renderProduct).join("");
 
   document.querySelectorAll("[data-action='open']").forEach((btn) =>
-    btn.addEventListener("click", () => chrome.tabs.create({ url: (btn as HTMLElement).dataset.url! })));
+    btn.addEventListener("click", () => [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: (btn as HTMLElement).dataset.url! })));
   document.querySelectorAll("[data-action='remove']").forEach((btn) =>
     btn.addEventListener("click", async () => {
       await removeProduct((btn as HTMLElement).dataset.pid!);
@@ -748,7 +748,7 @@ async function render(): Promise<void> {
   productsEl.innerHTML = products.map(renderCard).join("");
 
   document.querySelectorAll("[data-url]").forEach((b) =>
-    b.addEventListener("click", () => chrome.tabs.create({ url: (b as HTMLElement).dataset.url! })));
+    b.addEventListener("click", () => [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: (b as HTMLElement).dataset.url! })));
   document.querySelectorAll("[data-rid]").forEach((b) =>
     b.addEventListener("click", async () => { await removeProduct((b as HTMLElement).dataset.rid!); render(); }));
   document.querySelectorAll("[data-tid]").forEach((input) =>
@@ -804,7 +804,7 @@ price-tracker/
 ## Key Takeaways {#key-takeaways}
 
 - **Content scripts** with site-specific selectors reliably extract product data from major e-commerce sites
-- **chrome.alarms** is essential for periodic background work in MV3 -- `setInterval` does not survive service worker termination
+- **[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)** is essential for periodic background work in MV3 -- `setInterval` does not survive service worker termination
 - **SVG sparklines** provide lightweight price history visualization without external charting dependencies
 - **Side panels** offer more screen real estate than popups, ideal for data-heavy views
 - **@theluckystrike/webext-storage** simplifies typed storage with reactive `onChange` for cross-context sync
@@ -818,7 +818,7 @@ price-tracker/
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

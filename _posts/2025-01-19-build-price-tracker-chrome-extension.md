@@ -25,7 +25,7 @@ First, there is the financial benefit. Studies show that consumers can save anyw
 
 Second, there is the time savings. Manually visiting multiple websites to check prices is tedious and inefficient. An automated price tracking solution checks prices in the background and notifies users only when it matters.
 
-Third, from a development perspective, building a price tracker extension teaches you valuable skills that apply to many other types of extensions. You will work with content scripts to extract data from web pages, background scripts for scheduling and storage, the Chrome Notifications API for alerts, and the Chrome Storage API for persisting user preferences.
+Third, from a development perspective, building a price tracker extension teaches you valuable skills that apply to many other types of extensions. You will work with content scripts to extract data from web pages, background scripts for scheduling and storage, the Chrome [Notifications API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) for alerts, and the Chrome [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) for persisting user preferences.
 
 ---
 
@@ -375,7 +375,7 @@ chrome.runtime.onInstalled.addListener(() => {
 // Load data from Chrome storage
 async function loadFromStorage() {
   try {
-    const result = await chrome.storage.local.get(['trackedProducts', 'priceHistory']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['trackedProducts', 'priceHistory']);
     trackedProducts = result.trackedProducts || {};
     priceHistory = result.priceHistory || {};
   } catch (error) {
@@ -386,7 +386,7 @@ async function loadFromStorage() {
 // Save data to Chrome storage
 async function saveToStorage() {
   try {
-    await chrome.storage.local.set({
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
       trackedProducts: trackedProducts,
       priceHistory: priceHistory
     });
@@ -472,7 +472,7 @@ function handleTrackProduct(data) {
   saveToStorage();
   
   // Show confirmation
-  chrome.notifications.create({
+  [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({
     type: 'basic',
     iconUrl: 'icons/icon128.png',
     title: 'Price Watch',
@@ -498,7 +498,7 @@ function handleUpdateTargetPrice(data) {
 function sendPriceAlert(product, newPrice, percentage) {
   const message = `Price dropped by ${percentage}%!\nWas: $${product.originalPrice}\nNow: $${newPrice}`;
   
-  chrome.notifications.create({
+  [chrome.notifications](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({
     type: 'basic',
     iconUrl: 'icons/icon128.png',
     title: '💰 Price Drop Alert!',
@@ -519,11 +519,11 @@ function generateProductId(url) {
 }
 
 // Set up periodic price checking (every hour)
-chrome.alarms.create('priceCheck', {
+[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('priceCheck', {
   periodInMinutes: 60
 });
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener((alarm) => {
   if (alarm.name === 'priceCheck') {
     // Re-check all tracked products
     // This would require opening each URL, which has limitations in MV3
@@ -551,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadTrackedProducts() {
   try {
-    const result = await chrome.storage.local.get(['trackedProducts']);
+    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['trackedProducts']);
     const products = result.trackedProducts || {};
     
     const container = document.getElementById('tracked-products');
@@ -607,12 +607,12 @@ function setupEventListeners() {
     }
     
     // Get current tab info
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [tab] = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ active: true, currentWindow: true });
     
     // Send message to content script to get product info
-    chrome.tabs.sendMessage(tab.id, { action: 'getProductInfo' }, async (response) => {
+    [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sendMessage(tab.id, { action: 'getProductInfo' }, async (response) => {
       // Get product data from storage
-      const result = await chrome.storage.local.get(['trackedProducts']);
+      const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['trackedProducts']);
       const products = result.trackedProducts || {};
       
       // Find the most recently added product (from content script)
@@ -623,7 +623,7 @@ function setupEventListeners() {
         // Update target price
         lastProduct.targetPrice = targetPrice;
         
-        await chrome.storage.local.set({ trackedProducts: products });
+        await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ trackedProducts: products });
         
         // Reload display
         loadTrackedProducts();
@@ -673,6 +673,11 @@ Another valuable feature is price prediction using machine learning. By analyzin
 
 Building a price tracker Chrome extension is an excellent project that teaches you fundamental extension development concepts while creating a genuinely useful tool. In this guide, we covered Manifest V3 configuration, content scripts for data extraction, background service workers for storage and notifications, and the popup interface for user interaction.
 
-The e-commerce landscape continues to evolve, and consumers are increasingly savvy about finding the best deals. A well-built price tracker extension meets a real market need and can even be monetized through premium features or affiliate partnerships.
+The e-commerce landscape continues to evolve, and consumers are increasingly savvy about finding the best deals. A well-built price tracker extension meets a real market need and can even be monetized through [[premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/[freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)-model) features or affiliate partnerships.
 
 Start building your extension today, test it thoroughly, and prepare for your first Chrome Web Store launch. The skills you learn through this project will serve as a strong foundation for any future Chrome extension development endeavors.
+
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.

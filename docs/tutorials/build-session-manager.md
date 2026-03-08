@@ -10,8 +10,8 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 A browser session manager that saves/restores window tab states, names sessions, and auto-saves.
 
 ## Prerequisites {#prerequisites}
-- Tabs API (cross-ref `docs/api-reference/tabs-api.md`)
-- Storage API (cross-ref `docs/api-reference/storage-api-deep-dive.md`)
+- [Tabs API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) (cross-ref `docs/api-reference/tabs-api.md`)
+- [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) (cross-ref `docs/api-reference/storage-api-deep-dive.md`)
 
 ## Project Structure {#project-structure}
 ```
@@ -38,16 +38,16 @@ session-manager/
 ```javascript
 // background.js - capture all tabs in current window
 async function saveSession(name) {
-  const tabs = await chrome.tabs.query({ currentWindow: true });
+  const tabs = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ currentWindow: true });
   const session = {
     id: Date.now(),
     name,
     timestamp: Date.now(),
     tabs: tabs.map(t => ({ url: t.url, title: t.title, pinned: t.pinned }))
   };
-  const { sessions = [] } = await chrome.storage.local.get('sessions');
+  const { sessions = [] } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
   sessions.unshift(session);
-  await chrome.storage.local.set({ sessions });
+  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions });
 }
 ```
 
@@ -66,12 +66,12 @@ async function saveSession(name) {
 ## Step 5: Restore Session {#step-5-restore-session}
 ```javascript
 async function restoreSession(sessionId) {
-  const { sessions } = await chrome.storage.local.get('sessions');
+  const { sessions } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
   const session = sessions.find(s => s.id === sessionId);
   for (const tab of session.tabs) {
     // Skip restricted pages (chrome://, about:)
     if (!tab.url.startsWith('chrome://') && !tab.url.startsWith('about:')) {
-      await chrome.tabs.create({ url: tab.url, pinned: tab.pinned });
+      await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: tab.url, pinned: tab.pinned });
     }
   }
 }
@@ -80,27 +80,27 @@ async function restoreSession(sessionId) {
 ## Step 6: Session Naming & Editing {#step-6-session-naming-editing}
 ```javascript
 async function renameSession(id, newName) {
-  const { sessions } = await chrome.storage.local.get('sessions');
+  const { sessions } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
   const idx = sessions.findIndex(s => s.id === id);
-  if (idx !== -1) { sessions[idx].name = newName; await chrome.storage.local.set({ sessions }); }
+  if (idx !== -1) { sessions[idx].name = newName; await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions }); }
 }
 async function deleteSession(id) {
-  const { sessions } = await chrome.storage.local.get('sessions');
-  await chrome.storage.local.set({ sessions: sessions.filter(s => s.id !== id) });
+  const { sessions } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
+  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions: sessions.filter(s => s.id !== id) });
 }
 ```
 
 ## Step 7: Auto-Save {#step-7-auto-save}
 ```javascript
 // background.js
-chrome.alarms.create('autoSave', { periodInMinutes: 5 });
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('autoSave', { periodInMinutes: 5 });
+[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'autoSave') {
-    const tabs = await chrome.tabs.query({ currentWindow: true });
+    const tabs = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ currentWindow: true });
     const session = { id: Date.now(), name: `Auto ${new Date().toLocaleTimeString()}`, 
       timestamp: Date.now(), tabs: tabs.map(t => ({ url: t.url, title: t.title })) };
-    const { sessions = [] } = await chrome.storage.local.get('sessions');
-    await chrome.storage.local.set({ sessions: [session, ...sessions].slice(0, 50) });
+    const { sessions = [] } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
+    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ sessions: [session, ...sessions].slice(0, 50) });
   }
 });
 ```
@@ -109,9 +109,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 ```javascript
 // Merge: add to current window instead of replacing
 async function restoreMerge(sessionId) {
-  const { sessions } = await chrome.storage.local.get('sessions');
+  const { sessions } = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
   for (const tab of sessions.find(s => s.id === sessionId).tabs) {
-    if (!tab.url.startsWith('chrome://')) await chrome.tabs.create({ url: tab.url });
+    if (!tab.url.startsWith('chrome://')) await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: tab.url });
   }
 }
 // Export/Import
@@ -125,3 +125,8 @@ function exportSessions(sessions) {
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
