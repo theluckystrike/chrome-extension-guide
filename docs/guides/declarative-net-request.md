@@ -1,491 +1,208 @@
-# Chrome DeclarativeNetRequest API
+---
+layout: guide
+title: Chrome Extension Declarative Net Request — MV3 Network Request Rules
+description: Learn how to use Chrome's Declarative Net Request API to modify network requests, block ads, and redirect traffic in Manifest V3 extensions.
+---
 
-## Introduction
-- DeclarativeNetRequest (DNR) allows extensions to block or modify network requests declaratively
-- **Replaces webRequest blocking** - DNR rules are evaluated in the browser, not in extension JS
-- Much better performance than webRequest because rules run natively, not in service worker
-- Three rule types: Static (manifest.json), Dynamic (runtime), Session (temporary)
-- Requires `"declarativeNetRequest"` permission in manifest.json
-- Cross-ref: `docs/permissions/declarative-net-request.md`
+# Chrome Extension Declarative Net Request — MV3 Network Request Rules
 
-## manifest.json Configuration
+The Declarative Net Request API is one of the most powerful features introduced in Manifest V3, enabling Chrome extensions to modify, block, or redirect network requests without requiring broad host permissions. This API provides a privacy-preserving and performance-friendly way to handle network-level operations, making it ideal for ad blocking, content filtering, and request modification.
+
+## Understanding the Rule Structure
+
+Each Declarative Net Request rule follows a structured JSON format that defines the action to take and the conditions under which to apply it. The core components include an ID, priority, action type, and condition matching rules.
+
+A basic rule structure looks like this:
+
+```json
+{
+  "id": 1,
+  "priority": 1,
+  "action": { "type": "block" },
+  "condition": { "urlFilter": "example.com", "resourceTypes": ["main_frame"] }
+}
+```
+
+The `urlFilter` property uses regex-like patterns to match URLs, supporting wildcards and special characters. For instance, `||example.com^` matches all requests to example.com and its subdomains, while `.*\.ads\..*` targets any URL containing "ads" in the domain.
+
+## Static vs Dynamic Rules
+
+Chrome extensions distinguish between two categories of Declarative Net Request rules: static and dynamic. Understanding the difference is crucial for proper extension architecture.
+
+**Static rules** are defined in the extension's manifest file and bundled with the extension during installation. They are declared in the `declarative_net_request` permission with a `rule_resources` array pointing to JSON rule files. These rules are verified during the Chrome Web Store review process and cannot be modified after publication.
+
 ```json
 {
   "permissions": ["declarativeNetRequest"],
-  "host_permissions": ["<all_urls>"],
-  "background": { "service_worker": "background.js" }
-}
-```
-
-### Declaring Static Rulesets
-```json
-{
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "default_ruleset",
-        "enabled": true,
-        "path": "rules/default.json"
-      },
-      {
-        "id": "custom_rules",
-        "enabled": false,
-        "path": "rules/custom.json"
-      }
-    ]
-  }
-}
-```
-
-## Rule Structure
-
-### Basic Rule Format
-```json
-{
-  "id": 1,
-  "priority": 1,
-  "condition": { ... },
-  "action": { ... }
-}
-```
-- `id`: Unique integer within a ruleset (required, starts at 1)
-- `priority`: Higher = evaluated first (default: 1)
-- `condition`: Defines when rule applies
-- `action`: What to do when matched
-
-### Condition Object
-```json
-{
-  "urlFilter": "example\\.com",
-  "resourceTypes": ["main_frame", "sub_frame", "xmlhttprequest"],
-  "requestDomains": ["ads.example.com"],
-  "excludedRequestDomains": ["trusted.example.com"],
-  "requestMethods": ["get", "post"],
-  "excludedRequestMethods": ["connect"],
-  "tabIds": [1, 2],
-  "excludedTabIds": [3],
-  "domainType": "thirdParty"  // "firstParty" | "thirdParty"
-}
-```
-- `urlFilter`: Regex pattern (uses RE2 syntax)
-- `regexFilter`: Alternative to urlFilter for more complex patterns (slower)
-- `resourceTypes`: Array of resource types to match
-- `requestDomains`: Filter by domain (can use wildcard prefix `*.`)
-- `requestMethods`: HTTP methods to match
-
-### Action Types
-
-#### block
-```json
-{
-  "id": 1,
-  "priority": 1,
-  "condition": { "urlFilter": "ads\\." },
-  "action": { "type": "block" }
-}
-```
-
-#### allow
-```json
-{
-  "id": 2,
-  "priority": 2,
-  "condition": { "urlFilter": ".*" },
-  "action": { "type": "allow" }
-}
-```
-- Use higher priority to allow specific URLs that would otherwise be blocked
-
-#### allowAllRequests
-```json
-{
-  "id": 3,
-  "priority": 1,
-  "condition": { "urlFilter": ".*\\.png$", "resourceTypes": ["image"] },
-  "action": { "type": "allowAllRequests" }
-}
-```
-- Allows all requests for a document (main_frame, sub_frame)
-
-#### redirect
-```json
-{
-  "id": 4,
-  "priority": 1,
-  "condition": { "urlFilter": "ads\\.example\\.com" },
-  "action": {
-    "type": "redirect",
-    "redirect": {
-      "url": "https://example.com/placeholder.png"
-    }
-  }
-}
-```
-
-#### redirect with extensionPath
-```json
-{
-  "id": 5,
-  "priority": 1,
-  "condition": { "urlFilter": "blocked\\.example\\.com" },
-  "action": {
-    "type": "redirect",
-    "redirect": { "extensionPath": "/images/blocked.svg" }
-  }
-}
-```
-
-#### redirect with transform
-```json
-{
-  "id": 6,
-  "priority": 1,
-  "condition": { "urlFilter": "example\\.com/old" },
-  "action": {
-    "type": "redirect",
-    "redirect": {
-      "transform": {
-        "scheme": "https",
-        "host": "new.example.com",
-        "path": "/new-path",
-        "queryTransform": {
-          "addOrReplaceParams": [{ "key": "source", "value": "extension" }]
-        }
-      }
-    }
-  }
-}
-```
-
-#### modifyHeaders
-```json
-{
-  "id": 7,
-  "priority": 1,
-  "condition": { "urlFilter": "api\\." },
-  "action": {
-    "type": "modifyHeaders",
-    "requestHeaders": [
-      { "header": "X-Custom-Header", "operation": "set", "value": "value" },
-      { "header": "Authorization", "operation": "remove" }
-    ],
-    "responseHeaders": [
-      { "header": "X-Tracker", "operation": "remove" },
-      { "header": "Access-Control-Allow-Origin", "operation": "set", "value": "*" }
-    ]
-  }
-}
-```
-- Header operations: `append`, `set`, `remove`
-- `set`: Sets value (creates if doesn't exist)
-- `append`: Adds another value (for headers that allow multiple values)
-- `remove`: Removes header entirely
-
-## Dynamic Rules
-
-### Adding Dynamic Rules
-```javascript
-// background.js
-const rules = [{
-  id: 1001,
-  priority: 1,
-  condition: { urlFilter: "track\\." },
-  action: { type: "block" }
-}];
-
-chrome.declarativeNetRequest.updateDynamicRules({
-  addRules: rules,
-  removeRuleIds: []  // Optional: remove by ID
-});
-```
-
-### Updating Dynamic Rules
-```javascript
-// Replace existing rules
-chrome.declarativeNetRequest.updateDynamicRules({
-  addRules: [{ id: 1001, priority: 1, condition: { urlFilter: "new\\." }, action: { type: "block" } }],
-  removeRuleIds: [1001]
-});
-```
-
-### Getting Dynamic Rules
-```javascript
-chrome.declarativeNetRequest.getDynamicRules()
-  .then(rules => console.log(rules));
-```
-
-## Session Rules
-
-- Session rules are temporary and cleared when the browser session ends
-- Use `updateSessionRules` API
-- Perfect for feature-gated rules or user toggles
-```javascript
-chrome.declarativeNetRequest.updateSessionRules({
-  addRules: [{ id: 1, priority: 1, condition: { urlFilter: "test\\." }, action: { type: "block" } }],
-  removeRuleIds: []
-});
-```
-
-## Rule Priorities and Matching Order
-
-1. Rules evaluated by priority (highest first)
-2. Within same priority: static > dynamic > session
-3. First matching rule wins
-4. If no action: continue to next rule
-
-### Priority Declaration
-```json
-{
-  "id": 1,
-  "priority": 100,  // Higher = more important
-  "condition": { ... },
-  "action": { ... }
-}
-```
-
-## Debugging
-
-### getMatchedRules
-```javascript
-// Get all matched rules (requires declarativeNetRequestFeedback)
-chrome.declarativeNetRequest.getMatchedRules()
-  .then(result => {
-    result.rules.forEach(rule => {
-      console.log(rule.ruleId, rule.matchedOn);
-    });
-  });
-```
-
-### onRuleMatchedDebug
-```javascript
-// Real-time rule matching events (development only)
-chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
-  console.log('Rule matched:', info.rule, 'URL:', info.request.url);
-});
-```
-- Only works in unpacked extensions
-- Great for testing rule conditions
-
-## Limits and Quotas
-
-### Static Rules
-- Maximum: **300,000 rules** per ruleset
-- Maximum: **100 rulesets** per extension
-- Rules defined in manifest.json at install time
-
-### Dynamic Rules
-- Maximum: **30,000 rules** per extension
-- Persist across browser sessions
-
-### Session Rules
-- Maximum: **5,000 rules** per session
-- Cleared on browser restart
-
-### Header Modification
-- Maximum: **100 header modifications** per rule
-
-## Migrating from webRequest Blocking
-
-### Before (MV2 webRequest)
-```javascript
-chrome.webRequest.onBeforeRequest.addListener(
-  (details) => ({ cancel: true }),
-  { urls: ["*://ads.example.com/*"] },
-  ["blocking"]
-);
-```
-
-### After (MV3 DNR)
-```json
-[
-  {
-    "id": 1,
-    "priority": 1,
-    "condition": { "urlFilter": "ads\\.example\\.com" },
-    "action": { "type": "block" }
-  }
-]
-```
-
-### Key Differences
-| webRequest Blocking | DeclarativeNetRequest |
-|---------------------|----------------------|
-| JS in service worker | Native browser evaluation |
-| Dynamic updates | Static + dynamic rules |
-| Unlimited rules | Quota limits |
-| Full request access | Declarative actions only |
-
-## Building an Ad Blocker
-
-### manifest.json
-```json
-{
-  "name": "Ad Blocker",
-  "version": "1.0",
-  "permissions": ["declarativeNetRequest"],
-  "host_permissions": ["<all_urls>"],
   "declarative_net_request": {
     "rule_resources": [{
-      "id": "easylist",
+      "id": "ruleset_1",
       "enabled": true,
-      "path": "rules/easylist.json"
+      "path": "rules/block_ads.json"
     }]
   }
 }
 ```
 
-### rules/easylist.json
-```json
-[
-  {
-    "id": 1,
-    "priority": 1,
-    "condition": { "urlFilter": "\\.doubleclick\\.net" },
-    "action": { "type": "block" }
-  },
-  {
-    "id": 2,
-    "priority": 1,
-    "condition": { "urlFilter": "pagead2\\.googlesyndication\\.com" },
-    "action": { "type": "block" }
-  },
-  {
-    "id": 3,
-    "priority": 1,
-    "condition": { "urlFilter": ".*", "resourceTypes": ["image"], "requestDomains": ["ads."] },
-    "action": { "type": "block" }
-  }
-]
-```
+**Dynamic rules** are added and managed programmatically at runtime using the `chrome.declarativeNetRequest.updateDynamicRules()` method. These rules persist across browser sessions and can be modified by the extension after installation. Dynamic rules are commonly used for user preferences, temporary blocks, or features that require runtime configuration.
 
-### Dynamic User Rules
 ```javascript
-// Allow user to block custom domains
-function addUserBlockRule(domain) {
-  const rule = {
-    id: Date.now(),
-    priority: 1,
-    condition: { urlFilter: domain.replace(/\./g, '\\.') },
-    action: { type: "block" }
-  };
-  return chrome.declarativeNetRequest.updateDynamicRules({
-    addRules: [rule]
-  });
-}
-```
-
-## Building a Privacy Extension
-
-### Block Trackers
-```javascript
-const trackerRules = [
-  {
-    id: 1,
-    priority: 1,
-    condition: { urlFilter: "google-analytics\\.com" },
-    action: { type: "block" }
-  },
-  {
-    id: 2,
-    priority: 1,
-    condition: { urlFilter: "facebook\\.com/tr" },
-    action: { type: "block" }
-  }
-];
-
+// Add dynamic rules at runtime
 chrome.declarativeNetRequest.updateDynamicRules({
-  addRules: trackerRules
+  addRules: [{
+    id: 1001,
+    priority: 1,
+    action: { type: "block" },
+    condition: { urlFilter: "tracker.example.com", resourceTypes: ["script"] }
+  }],
+  removeRuleIds: []
 });
 ```
 
-### Strip Tracking Parameters
-```javascript
-const trackingParams = ['utm_source', 'utm_medium', 'utm_campaign', 'fbclid', 'gclid'];
+## Redirect Rules
 
-const stripParamsRule = {
-  id: 100,
-  priority: 1,
-  condition: { urlFilter: ".*" },
-  action: {
-    type: "redirect",
-    redirect: {
+Redirect actions allow extensions to intercept requests and forward them to alternative URLs. This is particularly useful for URL shortening, domain forwarding, or replacing blocked resources with placeholder content.
+
+The redirect action supports several modes:
+
+```json
+{
+  "id": 2,
+  "priority": 2,
+  "action": {
+    "type": "redirect",
+    "redirect": {
+      "url": "https://example.com/alternative-page"
+    }
+  },
+  "condition": {
+    "urlFilter": "https://old-domain.com/page",
+    "resourceTypes": ["main_frame"]
+  }
+}
+```
+
+For more sophisticated redirects, you can use transform rules that modify URL components:
+
+```json
+{
+  "action": {
+    "type": "redirect",
+    "redirect": {
+      "transform": {
+        "scheme": "https",
+        "host": "new-host.com",
+        "path": "/redirected"
+      }
+    }
+  }
+}
+```
+
+## Header Modification
+
+The Declarative Net Request API enables modification of request and response headers through `modifyHeaders` actions. This capability is essential for managing cookies, adding security headers, or stripping tracking parameters.
+
+Request header modification:
+
+```json
+{
+  "action": {
+    "type": "modifyHeaders",
+    "requestHeaders": [
+      { "header": "User-Agent", "operation": "set", "value": "Mozilla/5.0" },
+      { "header": "X-Custom-Header", "operation": "remove" }
+    ]
+  }
+}
+```
+
+Response header modification works similarly but targets headers in the server's response:
+
+```json
+{
+  "action": {
+    "type": "modifyHeaders",
+    "responseHeaders": [
+      { "header": "X-Frame-Options", "operation": "set", "value": "DENY" },
+      { "header": "Set-Cookie", "operation": "remove" }
+    ]
+  }
+}
+```
+
+## Ad Blocking Patterns
+
+Creating effective ad blocking rules requires understanding common advertising networks and tracking domains. The declarative format allows for both simple domain blocks and complex pattern matching.
+
+A comprehensive ad blocking rule might combine multiple conditions:
+
+```json
+{
+  "id": 3,
+  "priority": 3,
+  "action": { "type": "block" },
+  "condition": {
+    "urlFilter": ".*",
+    "resourceTypes": ["script", "image", "sub_frame"],
+    "ifDomain": ["*advertising.com", "*tracker.net", "*analytics.org"]
+  }
+}
+```
+
+For URL parameter-based tracking removal:
+
+```json
+{
+  "action": {
+    "type": "redirect",
+    "redirect": {
       "transform": {
         "queryTransform": {
-          "removeParams": trackingParams
+          "removeParams": ["utm_source", "utm_medium", "utm_campaign", "fbclid", "gclid"]
         }
       }
     }
   }
-};
-```
-
-### Add Security Headers
-```javascript
-const headerRules = [
-  {
-    id: 200,
-    priority: 1,
-    condition: { urlFilter: ".*" },
-    action: {
-      type: "modifyHeaders",
-      responseHeaders: [
-        { header: "X-Content-Type-Options", "operation": "set", value: "nosniff" },
-        { header: "X-Frame-Options", "operation": "set", value: "DENY" }
-      ]
-    }
-  }
-];
-```
-
-## Filter List Conversion
-
-### EasyList to DNR Rules
-AdBlock-style filters need conversion:
-```
-||example.com^ → { "urlFilter": "example\\.com", "condition": { "domainType": "thirdParty" } }
-|https://example.com → { "urlFilter": "https://example\\.com" }
-||ads.example.com/* → { "urlFilter": "ads\\.example\\.com/.*" }
-```
-
-### Conversion Example
-```javascript
-function convertFilterToRule(filter) {
-  let urlFilter = filter
-    .replace(/\^\$/g, '')  // End anchor
-    .replace(/^\|\|/g, '')  // Domain anchor
-    .replace(/^\|/g, '')    // Start anchor
-    .replace(/\./g, '\\.')
-    .replace(/\*/g, '.*')
-    .replace(/\^/g, '.*');  // Any character
-
-  return {
-    id: Date.now(),
-    priority: 1,
-    condition: { urlFilter },
-    action: { type: "block" }
-  };
 }
 ```
 
-## Best Practices
-- Use static rules for permanent rules (loaded from manifest)
-- Use dynamic rules for user-configurable blocks
-- Use session rules for temporary/toggled features
-- Set appropriate priorities - allow rules need higher priority than block
-- Test with `onRuleMatchedDebug` in development
-- Monitor `getMatchedRules` for rule usage analytics
-- Group similar rules to minimize rule count
-- Use regex sparingly - urlFilter is faster
+## Best Practices and Limitations
 
-## Common Mistakes
-- Forgetting host_permissions for URL matching
-- Using webRequest patterns instead of DNR urlFilter syntax
-- Not accounting for rule priority in complex scenarios
-- Exceeding quota limits without handling errors
-- Modifying headers that browsers protect (e.g., Content-Length)
-- Using session rules for persistent user preferences
+When implementing Declarative Net Request rules, be mindful of Chrome's quotas. Extensions can have up to 300,000 static rules across all rulesets and 30,000 dynamic rules. Rule evaluation is performant because Chrome compiles rules into an efficient format, but overly complex regex patterns can impact matching speed.
 
-## Reference
-- Official Docs: https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
-- Sample Extensions: https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/api/declarative-net-request
-- EasyList Format: https://help.adblockplus.org/hc/en-us/articles/360062833197
+Always test your rules thoroughly using `chrome.declarativeNetRequest.testMatchOutcome()` before deploying to production. This method simulates URL matching without actually modifying requests, helping identify rule conflicts or unexpected behavior.
+
+## Rule Priority and Matching Order
+
+Understanding rule priority is essential when multiple rules could match the same request. Chrome evaluates rules in priority order, with higher priority rules taking precedence. When rules have equal priority, the one with the lower ID wins.
+
+The priority is explicitly defined in each rule, but Chrome also derives implicit priority from the specificity of conditions. More specific conditions like `ifDomain` and `unlessDomain` take precedence over broader `urlFilter` patterns. This means you can create general blocking rules while allowing exceptions for specific domains.
+
+For example, to block all ads except on user-approved sites:
+
+```json
+// High priority exception rule
+{
+  "id": 1,
+  "priority": 10,
+  "action": { "type": "allow" },
+  "condition": { "urlFilter": ".*", "ifDomain": ["trusted-site.com"] }
+},
+// Lower priority blocking rule
+{
+  "id": 2,
+  "priority": 1,
+  "action": { "type": "block" },
+  "condition": { "urlFilter": ".*\\.ads\\..*", "resourceTypes": ["script"] }
+}
+```
+
+## Common Use Cases
+
+The Declarative Net Request API serves numerous practical applications beyond basic ad blocking. Privacy-focused extensions use it to block tracking pixels and analytics scripts, while developer tools leverage header modification to debug API calls. Content filtering extensions use redirect rules to replace blocked images with placeholders or remove unwanted content from web pages.
+
+Extensions that manage corporate networks often implement URL forwarding rules to redirect employees to internal resources. E-commerce tools might intercept and modify checkout requests to apply coupon codes automatically. The flexibility of the condition system, supporting domain matching, URL patterns, resource types, and tab attributes, makes nearly any network modification scenario possible.
+
+Security extensions utilize this API to block known malicious domains, phishing attempts, and malware distribution networks. By maintaining updated blocklists as dynamic rules, these extensions can respond to new threats without requiring users to reinstall or update the extension manually.
+
