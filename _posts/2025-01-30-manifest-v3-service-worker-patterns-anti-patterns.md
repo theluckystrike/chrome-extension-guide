@@ -477,7 +477,7 @@ Equally important is avoiding the anti-patterns that seem natural coming from Ma
 
 The migration from Manifest V2 to V3 is not merely a technical update — it's an opportunity to build more robust, efficient extensions that better serve your users. The initial investment in learning these patterns pays dividends in reliability, performance, and maintainability.
 
-For more guidance on Chrome extension development, explore our comprehensive [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) and learn about [memory optimization techniques](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/) for building efficient extensions.
+For more guidance on Chrome extension development, explore our comprehensive [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/), learn about [service worker lifecycle management](/chrome-extension-guide/2025/01/25/chrome-extension-service-worker-lifecycle-deep-dive/), and discover [memory management best practices](/chrome-extension-guide/2025/01/21/chrome-extension-memory-management-best-practices/) for building efficient extensions.
 
 ---
 
