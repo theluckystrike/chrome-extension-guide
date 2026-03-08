@@ -17,6 +17,43 @@
   </script>
   {% endif %}
   {% seo %}
+  {% if page.title %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ page.title | escape }}",
+    "description": "{{ page.description | default: site.description | escape }}",
+    "author": {
+      "@type": "Organization",
+      "name": "Zovo",
+      "url": "https://zovo.one"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Zovo",
+      "url": "https://zovo.one",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://zovo.one/logo.png"
+      }
+    },
+    "url": "{{ page.url | absolute_url }}",
+    "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
+    "dateModified": "{{ site.time | date_to_xmlschema }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "inLanguage": "en-US",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "{{ site.title | escape }}",
+      "url": "{{ site.url }}"
+    }
+  }
+  </script>
+  {% endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   {% if page.url != '/' and page.url != '/docs/' %}

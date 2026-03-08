@@ -7,6 +7,21 @@ description: "Comprehensive Chrome extension development guide with 500+ article
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title | escape }}",
+  "description": "{{ site.description | escape }}",
+  "url": "{{ site.url }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zovo",
+    "url": "https://zovo.one"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Chrome Extension Development Guide - 500+ Articles",
   "description": "Comprehensive Chrome extension development guide with 500+ articles covering APIs, permissions, patterns, tutorials, and publishing.",
