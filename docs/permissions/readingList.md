@@ -1,6 +1,6 @@
 ---
 title: "readingList Permission"
-description: "- **Permission string**: `"readingList"` - **API**: `chrome.readingList` — manage Chrome's built-in Reading List - **Chrome version**: Chrome 120+ Adds URL to reading list. Throws if URL already ex..."
+description: ": : — manage Chrome's built-in Reading List : Chrome 120+ Adds URL to reading list. Throws if URL already ex..."
 permalink: /permissions/readingList/
 category: permissions
 order: 33

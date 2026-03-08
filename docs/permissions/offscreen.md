@@ -1,6 +1,6 @@
 ---
 title: "offscreen Permission"
-description: "The `offscreen` permission enables the Chrome `chrome.offscreen` API, which allows extensions to create offscreen documents for performing operations that require DOM access from the extension's se..."
+description: "The permission enables the Chrome API, which allows extensions to create offscreen documents for performing operations that require DOM access from the exten..."
 permalink: /permissions/offscreen/
 category: permissions
 order: 27

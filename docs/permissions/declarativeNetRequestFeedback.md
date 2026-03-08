@@ -1,6 +1,6 @@
 ---
 title: "declarativeNetRequestFeedback Permission — Chrome Extension Reference"
-description: "- **Permission string**: `"declarativeNetRequestFeedback"` - **What it grants**: Access to `chrome.declarativeNetRequest.onRuleMatchedDebug` event for debugging rule matches"
+description: ": : Access to event for debugging rule matches"
 permalink: /permissions/declarativeNetRequestFeedback/
 category: permissions
 order: 14

@@ -1,6 +1,6 @@
 ---
 title: "downloads Permission Reference"
-description: "- Grants access to `chrome.downloads` API - Start downloads programmatically from any extension context - Monitor download progress, pause, resume, and cancel"
+description: "Grants access to API Start downloads programmatically from any extension context Monitor download progress, pause, resume, and cancel"
 permalink: /permissions/downloads/
 category: permissions
 order: 17

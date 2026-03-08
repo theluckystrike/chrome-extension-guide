@@ -1,6 +1,6 @@
 ---
 title: "clipboardWrite Permission"
-description: "Allows the extension to write content to the system clipboard using `navigator.clipboard.writeText()` or `document.execCommand('copy')`. { "permissions": ["clipboardWrite"]"
+description: "Allows the extension to write content to the system clipboard using or . { 'permissions': ['clipboardWrite']"
 permalink: /permissions/clipboardWrite/
 category: permissions
 order: 6

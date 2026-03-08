@@ -1,6 +1,6 @@
 ---
 title: "declarativeNetRequest Permission — Chrome Extension Reference"
-description: "- **Permission string**: `"declarativeNetRequest"` or `"declarativeNetRequestWithHostAccess"` - **What it grants**: Block, redirect, or modify network requests using declarative rules"
+description: ": or : Block, redirect, or modify network requests using declarative rules"
 permalink: /permissions/declarativeNetRequest/
 category: permissions
 order: 13

@@ -1,6 +1,6 @@
 ---
 title: "webRequestBlocking Permission (MV2 Only)"
-description: "Enables blocking/modifying network requests in `chrome.webRequest` listeners. **MV2 only — removed in MV3.** { "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"] }"
+description: "Enables blocking/modifying network requests in listeners."
 permalink: /permissions/webRequestBlocking/
 category: permissions
 order: 50

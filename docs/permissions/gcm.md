@@ -1,6 +1,6 @@
 ---
 title: "gcm Permission"
-description: "Access to `chrome.gcm` (Google Cloud Messaging) API for sending and receiving push messages via Firebase Cloud Messaging (FCM). { "permissions": ["gcm"]"
+description: "Access to (Google Cloud Messaging) API for sending and receiving push messages via Firebase Cloud Messaging (FCM). { 'permissions': ['gcm']"
 permalink: /permissions/gcm/
 category: permissions
 order: 19

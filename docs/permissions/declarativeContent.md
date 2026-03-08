@@ -1,6 +1,6 @@
 ---
 title: "declarativeContent Permission"
-description: "Access to the `chrome.declarativeContent` API for showing/hiding your extension's action icon based on page content — without needing to read page data."
+description: "Access to the API for showing/hiding your extension's action icon based on page content — without needing to read page data."
 permalink: /permissions/declarativeContent/
 category: permissions
 order: 12

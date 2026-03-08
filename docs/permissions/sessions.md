@@ -1,6 +1,6 @@
 ---
 title: "sessions Permission"
-description: "- Permission string: `"sessions"` - Grants access to `chrome.sessions` API - Query and restore recently closed tabs/windows, access cross-device tabs Gets a list of recently closed tabs/windows."
+description: "Permission string: Grants access to API Query and restore recently closed tabs/windows, access cross-device tabs Gets a list of recently closed tabs/windows."
 permalink: /permissions/sessions/
 category: permissions
 order: 37

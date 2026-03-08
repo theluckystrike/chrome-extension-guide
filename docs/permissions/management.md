@@ -1,6 +1,6 @@
 ---
 title: "management Permission"
-description: "Access to `chrome.management` API — manage other installed extensions, apps, and themes. { "permissions": ["management"] } "Manage your apps, extensions, and themes""
+description: "Access to API — manage other installed extensions, apps, and themes. 'Manage your apps, extensions, and themes'"
 permalink: /permissions/management/
 category: permissions
 order: 24

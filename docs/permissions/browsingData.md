@@ -1,6 +1,6 @@
 ---
 title: "browsingData Permission"
-description: "- **Permission string:** `"browsingData"` - **API exposed:** `chrome.browsingData` - **Purpose:** Remove browsing data (cache, cookies, history, downloads, passwords, localStorage, etc.) programmat..."
+description: "Remove browsing data (cache, cookies, history, downloads, passwords, localStorage, etc.) programmat..."
 permalink: /permissions/browsingData/
 category: permissions
 order: 4

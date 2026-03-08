@@ -1,6 +1,6 @@
 ---
 title: "contextMenus Permission Reference"
-description: "- Grants access to the `chrome.contextMenus` API - Add custom items to the browser's right-click context menu - Items can appear on pages, links, images, selections, and more"
+description: "Grants access to the API Add custom items to the browser's right-click context menu Items can appear on pages, links, images, selections, and more"
 permalink: /permissions/contextMenus/
 category: permissions
 order: 9

@@ -1,6 +1,6 @@
 ---
 title: "search Permission"
-description: "Access to the `chrome.search` API for triggering searches using the user's default search engine. { "permissions": ["search"] } None — this permission does not trigger a warning at install time."
+description: "Access to the API for triggering searches using the user's default search engine. None — this permission does not trigger a warning at install time."
 permalink: /permissions/search/
 category: permissions
 order: 36

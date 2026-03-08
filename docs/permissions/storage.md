@@ -1,6 +1,6 @@
 ---
 title: "storage Permission Reference"
-description: "- Grants access to `chrome.storage` API (local, sync, session, managed) - Allows persistent key-value storage that survives browser restarts - Enables cross-device sync via `chrome.storage.sync`"
+description: "Grants access to API (local, sync, session, managed) Allows persistent key-value storage that survives browser restarts Enables cross-device sync via"
 permalink: /permissions/storage/
 category: permissions
 order: 39

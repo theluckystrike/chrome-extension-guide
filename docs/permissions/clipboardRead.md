@@ -1,6 +1,6 @@
 ---
 title: "clipboardRead Permission"
-description: "Allows reading clipboard content using `navigator.clipboard.readText()` or `document.execCommand('paste')`. { "permissions": ["clipboardRead"] } "Read data you copy and paste""
+description: "Allows reading clipboard content using or . 'Read data you copy and paste'"
 permalink: /permissions/clipboardRead/
 category: permissions
 order: 5

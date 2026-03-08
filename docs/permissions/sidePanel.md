@@ -1,6 +1,6 @@
 ---
 title: "sidePanel Permission"
-description: "- **Permission string:** `"sidePanel"` - **Grants access to:** `chrome.sidePanel` API - **Minimum Chrome version:** 114+ - **User warning:** None — this permission does not trigger a warning at ins..."
+description: "API 114+ None — this permission does not trigger a warning at ins..."
 permalink: /permissions/sidePanel/
 category: permissions
 order: 38

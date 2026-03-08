@@ -1,6 +1,6 @@
 ---
 title: "nativeMessaging Permission"
-description: "- **Permission string:** `"nativeMessaging"` - Enables communication between extension and native applications - Two modes: **connection-based** (persistent) and **message-based** (one-shot)"
+description: "Enables communication between extension and native applications Two modes: (persistent) and (one-shot)"
 permalink: /permissions/nativeMessaging/
 category: permissions
 order: 25

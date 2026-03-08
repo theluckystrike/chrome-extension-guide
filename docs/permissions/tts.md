@@ -1,6 +1,6 @@
 ---
 title: "tts Permission — Chrome Extension Reference"
-description: "- **Permission string**: `"tts"` (consumer) or `"ttsEngine"` (provider) - **What it grants**: `tts` — use `chrome.tts` to speak text aloud; `ttsEngine` — register as speech engine"
+description: ": (consumer) or (provider) : — use to speak text aloud; — register as speech engine"
 permalink: /permissions/tts/
 category: permissions
 order: 45

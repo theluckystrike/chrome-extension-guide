@@ -1,6 +1,6 @@
 ---
 title: "commands (Manifest Key)"
-description: "`commands` is a manifest key (not a `permissions` entry) that defines keyboard shortcuts. Enables the `chrome.commands` API. { "commands": { "_execute_action": {"
+description: "is a manifest key (not a entry) that defines keyboard shortcuts. Enables the API. { 'commands': { '_execute_action': {"
 permalink: /permissions/commands/
 category: permissions
 order: 7

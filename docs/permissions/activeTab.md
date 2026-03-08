@@ -1,6 +1,6 @@
 ---
 title: "activeTab Permission Reference"
-description: "- Grants temporary access to the currently active tab when the user invokes the extension (click, keyboard shortcut, context menu) - Access is temporary — expires when the user navigates away or cl..."
+description: "Grants temporary access to the currently active tab when the user invokes the extension (click, keyboard shortcut, context menu) Access is temporary — expire..."
 permalink: /permissions/activeTab/
 category: permissions
 order: 1

@@ -1,6 +1,6 @@
 ---
 title: "geolocation Permission"
-description: "- **Permission string**: `"geolocation"` (optional permission in MV3) - Enables `navigator.geolocation` in extension pages - MV3 challenge: service workers cannot use Geolocation API directly"
+description: ": (optional permission in MV3) Enables in extension pages MV3 challenge: service workers cannot use Geolocation API directly"
 permalink: /permissions/geolocation/
 category: permissions
 order: 20

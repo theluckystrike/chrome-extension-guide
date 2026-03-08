@@ -1,6 +1,6 @@
 ---
 title: "privacy Permission"
-description: "Access to `chrome.privacy` API for reading/controlling Chrome's privacy settings. { "permissions": ["privacy"] } "Change your privacy-related settings""
+description: "Access to API for reading/controlling Chrome's privacy settings. 'Change your privacy-related settings'"
 permalink: /permissions/privacy/
 category: permissions
 order: 31

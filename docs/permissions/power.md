@@ -1,6 +1,6 @@
 ---
 title: "Power Permission"
-description: "- Permission string: `"power"` - Grants access to `chrome.power` API - Controls display and system sleep behavior - Does not trigger a warning at install time"
+description: "Permission string: Grants access to API Controls display and system sleep behavior Does not trigger a warning at install time"
 permalink: /permissions/power/
 category: permissions
 order: 30
