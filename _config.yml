@@ -3,6 +3,10 @@ description: "500+ articles on Chrome extension development"
 url: "https://theluckystrike.github.io"
 baseurl: "/chrome-extension-guide"
 theme: minima
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
