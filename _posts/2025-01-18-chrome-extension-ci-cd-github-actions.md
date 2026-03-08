@@ -186,7 +186,7 @@ Now create the deployment job:
           name: extension
       
       - name: Get access token
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/[auth](https://theluckystrike.github.io/extension-monetization-playbook/monetization/authentication)@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       
@@ -424,3 +424,8 @@ By investing time in setting up proper CI/CD infrastructure, you significantly r
 Start with the basic workflow configurations provided in this guide and gradually add complexity as your project evolves. The modular nature of GitHub Actions makes it easy to incrementally improve your pipeline without disrupting existing functionality. With proper CI/CD in place, you can confidently iterate on your Chrome extension, knowing that every change is validated and every release is consistent.
 
 Remember that CI/CD is an ongoing investment. Regularly review and optimize your workflows, incorporate new testing strategies, and adapt to changes in the Chrome extension ecosystem. Your future self—and your users—will thank you for the time saved and the improved reliability.
+
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
