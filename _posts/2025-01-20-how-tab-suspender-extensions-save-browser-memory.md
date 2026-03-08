@@ -220,7 +220,7 @@ The hybrid approach recommended by many power users combines tab groups for orga
 
 If you're building extensions that interact with tab suspension or manage browser resources, following best practices ensures optimal performance and user experience.
 
-Request only the permissions you need. Extensions requesting broad permissions like reading all website data face more scrutiny during review and may worry privacy-conscious users. For tab suspension, the "activeTab" permission provides access to the current tab when clicked, which is sufficient for many use cases. For more comprehensive tab management, the full "tabs" permission is necessary, but you should document why in your extension's description.
+Request only the permissions you need. Extensions requesting broad permissions like reading all website data face more scrutiny during review and may worry privacy-conscious users. For tab suspension, the "activeTab" permission provides access to the current tab when clicked, which is sufficient for many use cases. For more comprehensive tab management, the full "tabs" permission is necessary, but you should [document why in your extension's description](/chrome-extension-guide/chrome-extension-permissions-explained/).
 
 Use efficient polling strategies. Rather than checking tabs continuously, use the Chrome alarms API to check at regular intervals. This reduces CPU usage and battery consumption while still providing responsive suspension behavior. For Tab Suspender Pro, we found that checking every minute provides a good balance between responsiveness and efficiency.
 
@@ -237,3 +237,7 @@ Implement proper error handling. The `chrome.tabs.discard` API can fail for vari
 Tab suspender extensions represent one of the most effective tools available for managing browser memory. By understanding the technical mechanisms behind tab consumption and suspension, you can make informed decisions about which solution best fits your needs or build your own extensions that leverage Chrome's discard API effectively. Whether you choose to build your own implementation using the patterns in this guide or use a ready-made solution like Tab Suspender Pro, the memory savings can be substantial, transforming a sluggish browser into a responsive productivity tool.
 
 Ready to monetize your extension? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+---
+
+*Built by theluckystrike at zovo.one*
