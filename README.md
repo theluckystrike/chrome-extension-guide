@@ -167,6 +167,10 @@ npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging @the
 - [Handling Extension Updates](docs/guides/extension-updates.md)
 - [Chrome Web Store Publish API](docs/guides/chrome-web-store-api.md)
 
+## MONETIZATION
+
+- [Market Research](docs/monetization/market-research.md)
+
 ## PERMISSIONS
 
 - [activeTab](docs/permissions/activeTab.md)
