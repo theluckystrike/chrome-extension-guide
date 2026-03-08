@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Web Navigation API Complete Reference"
+description: "The Chrome Web Navigation API tracks navigation events in tabs with detailed lifecycle information, enabling extensions to monitor and respond to page loads and frame updates."
+---
+
 # chrome.webNavigation API Reference
 
 The `chrome.webNavigation` API provides methods to track navigation events in tabs. It offers detailed insight into the navigation lifecycle, enabling extensions to monitor and respond to page loads, frame updates, and navigation errors.

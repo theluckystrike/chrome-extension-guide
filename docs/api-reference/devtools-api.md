@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome DevTools API Complete Reference"
+description: "The Chrome DevTools API extends Chrome Developer Tools with custom panels, sidebars, network tools, and inspection capabilities for debugging extensions."
+---
+
 # chrome.devtools API Reference
 
 The `chrome.devtools` API extends Chrome DevTools with custom panels, sidebars, and network tools.

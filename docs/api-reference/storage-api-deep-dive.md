@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Storage API Deep Dive"
+description: "An in-depth guide to the Chrome Storage API covering all four storage areas, quota management, change listeners, migration patterns, and advanced usage for extension data persistence."
+---
+
 # Chrome Storage API Deep Dive
 
 This is an in-depth reference for `chrome.storage`, covering all four storage areas, quota management, change listeners, migration patterns, performance, and advanced usage with `@theluckystrike/webext-storage`.

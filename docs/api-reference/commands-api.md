@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Commands API Complete Reference"
+description: "The Chrome Commands API defines keyboard shortcuts that trigger extension actions, with support for both Chrome-context and global OS-wide shortcuts."
+---
+
 # Chrome Commands API Reference
 
 The `chrome.commands` API allows extensions to define keyboard shortcuts that trigger actions. These shortcuts can work within Chrome's context or globally across the entire operating system.

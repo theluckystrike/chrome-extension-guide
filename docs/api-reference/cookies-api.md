@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Cookies API Complete Reference"
+description: "The Chrome Cookies API provides complete CRUD operations for querying, setting, and modifying browser cookies with domain and path filtering."
+---
+
 # chrome.cookies API Reference
 
 The `chrome.cookies` API provides full CRUD operations for querying and modifying browser cookies. Requires `"cookies"` permission plus host permissions.

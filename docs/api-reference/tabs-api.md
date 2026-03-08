@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Tabs API Complete Reference"
+description: "The Chrome Tabs API creates, modifies, queries, and rearranges browser tabs, providing access to tab properties like URL, title, favicon, and loading status."
+---
+
 # Chrome Tabs API Reference
 
 The `chrome.tabs` API lets you create, modify, query, and rearrange tabs in the browser. It is one of the most heavily used Chrome extension APIs.

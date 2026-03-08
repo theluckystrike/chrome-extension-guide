@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Downloads API Complete Reference"
+description: "The Chrome Downloads API initiates, monitors, searches, pauses, resumes, cancels, and manages file downloads with full control over download locations and behavior."
+---
+
 # Chrome Downloads API Reference
 
 The `chrome.downloads` API lets you initiate, monitor, search, pause, resume, cancel, and manage file downloads. You can also control where files are saved and open downloaded files.

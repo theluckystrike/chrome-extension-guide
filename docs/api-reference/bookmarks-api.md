@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Bookmarks API Complete Reference"
+description: "The Chrome Bookmarks API enables creating, reading, updating, deleting, searching, and organizing bookmarks in a hierarchical tree structure with folders and nodes."
+---
+
 # Chrome Bookmarks API Reference
 
 The `chrome.bookmarks` API lets you create, read, update, delete, search, and organize bookmarks. Bookmarks are stored in a tree structure with folders and bookmark nodes.

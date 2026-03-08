@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Permissions API Complete Reference"
+description: "The Chrome Permissions API requests and manages optional permissions at runtime, enabling least-privilege extensions that request access only when needed by users."
+---
+
 # chrome.permissions API Reference
 
 ## Overview

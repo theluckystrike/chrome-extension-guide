@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome API Reference Overview"
+description: "A comprehensive reference for Chrome Extensions APIs in Manifest V3, covering permissions, methods, events, types, and practical code examples for all extension capabilities."
+---
+
 # Chrome API Reference
 
 A comprehensive reference for the Chrome Extensions APIs available in Manifest V3. Each article covers permissions, methods, events, types, and practical code examples.

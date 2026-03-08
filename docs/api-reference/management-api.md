@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Management API Complete Reference"
+description: "The Chrome Management API queries and controls installed extensions and apps, enabling features like extension enabling, disabling, and uninstallation management."
+---
+
 # chrome.management API Reference
 
 ## Overview

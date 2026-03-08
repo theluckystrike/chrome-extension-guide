@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Alarms API Complete Reference"
+description: "The Chrome Alarms API schedules code to run periodically or at a specified time, providing reliable background task execution that survives service worker termination in Manifest V3."
+---
+
 # Chrome Alarms API Reference
 
 The `chrome.alarms` API lets you schedule code to run periodically or at a specified time. In MV3, alarms are the primary way to perform background work since service workers can be terminated at any time — `setTimeout` and `setInterval` are unreliable.

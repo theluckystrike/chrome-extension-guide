@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Declarative Net Request API Complete Reference"
+description: "The Chrome Declarative Net Request API blocks, redirects, and modifies network requests using declarative rules, replacing webRequest blocking in Manifest V3 with privacy-preserving performance."
+---
+
 # Chrome Declarative Net Request API Reference
 
 The `chrome.declarativeNetRequest` API lets you block, redirect, and modify network requests using declarative rules. It is the MV3 replacement for the `chrome.webRequest` blocking API and is designed to be performant and privacy-preserving -- the browser evaluates rules without exposing request details to the extension.

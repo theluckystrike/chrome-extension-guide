@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Action API Complete Reference"
+description: "The Chrome Action API controls your extension's toolbar icon in Chrome, enabling popup triggers, badge updates, and dynamic icon changes in Manifest V3."
+---
+
 # Chrome Action API Reference
 
 The `chrome.action` API controls the extension's toolbar icon in Chrome. It replaces the deprecated `chrome.browserAction` API from Manifest V2.

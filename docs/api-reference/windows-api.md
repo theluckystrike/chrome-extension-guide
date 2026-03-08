@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Windows API Complete Reference"
+description: "The Chrome Windows API creates, modifies, queries, and monitors browser windows, working closely with the Tabs API to manage the window-tab hierarchy."
+---
+
 # Chrome Windows API Reference
 
 The `chrome.windows` API lets you create, modify, query, and monitor browser windows. It works closely with the [Tabs API](tabs-api.md) — every tab lives inside a window.

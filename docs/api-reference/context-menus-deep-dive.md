@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Context Menus Deep Dive"
+description: "Advanced Chrome Context Menus API patterns covering dynamic menus, event handling, nested submenus, and Manifest V3 best practices."
+---
+
 # chrome.contextMenus Deep Dive
 
 In-depth reference for `chrome.contextMenus` covering advanced patterns, events, dynamic menus, and MV3.

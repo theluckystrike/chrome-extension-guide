@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Scripting API Complete Reference"
+description: "The Chrome Scripting API injects JavaScript and CSS into web pages, replacing executeScript and insertCSS with a powerful, structured interface for content manipulation."
+---
+
 # Chrome Scripting API Reference
 
 The `chrome.scripting` API lets you inject JavaScript and CSS into web pages. It replaces the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` from Manifest V2 with a more powerful, structured interface.

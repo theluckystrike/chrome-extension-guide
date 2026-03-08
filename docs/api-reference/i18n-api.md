@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome i18n API Complete Reference"
+description: "The Chrome i18n API provides internationalization and localization support for Chrome extensions, enabling multilingual extensions without requiring any permissions."
+---
+
 # chrome.i18n API Reference
 
 The `chrome.i18n` API provides internationalization support for Chrome Extensions without requiring permissions.

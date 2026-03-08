@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Notifications API Complete Reference"
+description: "The Chrome Notifications API creates rich desktop notifications using templates, displaying system-level alerts outside the browser window with icons, titles, and messages."
+---
+
 # Chrome Notifications API Reference
 
 The `chrome.notifications` API lets you create rich desktop notifications using templates. These are system-level notifications that appear outside the browser window.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Runtime API Complete Reference"
+description: "The Chrome Runtime API provides core extension lifecycle management, messaging between contexts, resource URL resolution, and platform utilities available to every extension."
+---
+
 # Chrome Runtime API Complete Reference
 
 The `chrome.runtime` API is the backbone of every Chrome extension. It provides lifecycle management, messaging between contexts, resource URL resolution, and platform utilities. No permission is required -- it is available in every extension context (service worker, popup, options page, content script).

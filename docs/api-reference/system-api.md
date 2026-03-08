@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome System API Complete Reference"
+description: "The Chrome System API provides access to system hardware and resource information including CPU, memory, storage devices, and display configurations."
+---
+
 # chrome.system API Reference
 
 The `chrome.system` API provides extensions with access to system hardware and resource information. This API enables extensions to adapt their behavior based on the capabilities and state of the underlying hardware.

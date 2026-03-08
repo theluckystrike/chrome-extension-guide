@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome TTS API Complete Reference"
+description: "The Chrome TTS API synthesizes speech using the operating system's text-to-speech engine, with fine-grained control over voice selection, rate, pitch, and event handling."
+---
+
 # chrome.tts API Reference
 
 The `chrome.tts` API enables extensions to synthesize speech using the operating system's text-to-speech engine. This API is particularly useful for accessibility features, read-aloud functionality, language learning applications, and audio notifications.
