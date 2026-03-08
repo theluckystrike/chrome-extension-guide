@@ -22,7 +22,7 @@ description: "Comprehensive Chrome extension development guide with 500+ article
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
+  "@type": "Article",
   "headline": "Chrome Extension Development Guide - 500+ Articles",
   "description": "Comprehensive Chrome extension development guide with 500+ articles covering APIs, permissions, patterns, tutorials, and publishing.",
   "genre": "Technical Documentation",
@@ -32,13 +32,13 @@ description: "Comprehensive Chrome extension development guide with 500+ article
     "applicationCategory": "Developer Tools"
   },
   "author": {
-    "@type": "Person",
-    "name": "theluckystrike",
-    "url": "https://github.com/theluckystrike"
+    "@type": "Organization",
+    "name": "Zovo",
+    "url": "https://zovo.one"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "theluckystrike",
+    "name": "Zovo",
     "url": "https://zovo.one"
   },
   "datePublished": "2025-01-01",

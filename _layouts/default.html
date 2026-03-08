@@ -21,17 +21,17 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
+    "@type": "Article",
     "headline": "{{ page.title | escape }}",
     "description": "{{ page.description | default: site.description | escape }}",
     "author": {
-      "@type": "Person",
-      "name": "theluckystrike",
-      "url": "https://github.com/theluckystrike"
+      "@type": "Organization",
+      "name": "Zovo",
+      "url": "https://zovo.one"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "zovo.one",
+      "name": "Zovo",
       "url": "https://zovo.one",
       "logo": {
         "@type": "ImageObject",
@@ -46,8 +46,6 @@
       "@id": "{{ page.url | absolute_url }}"
     },
     "inLanguage": "en-US",
-    "proficiencyLevel": "{{ page.proficiency_level | default: 'Beginner' }}",
-    "dependencies": "Chrome Browser, Manifest V3",
     "isPartOf": {
       "@type": "WebSite",
       "name": "{{ site.title | escape }}",
