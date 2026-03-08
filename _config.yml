@@ -1,0 +1,8 @@
+title: "Chrome Extension Guide by theluckystrike"
+description: "500+ articles on Chrome extension development"
+url: "https://theluckystrike.github.io"
+baseurl: "/chrome-extension-guide"
+theme: minima
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
