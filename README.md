@@ -1,8 +1,8 @@
 # CHROME EXTENSION GUIDE
 
-[![webext-storage](https://img.shields.io/npm/v/@theluckystrike/webext-storage?label=webext-storage)](https://www.npmjs.com/package/@theluckystrike/webext-storage)
-[![webext-messaging](https://img.shields.io/npm/v/@theluckystrike/webext-messaging?label=webext-messaging)](https://www.npmjs.com/package/@theluckystrike/webext-messaging)
-[![webext-permissions](https://img.shields.io/npm/v/@theluckystrike/webext-permissions?label=webext-permissions)](https://www.npmjs.com/package/@theluckystrike/webext-permissions)
+[![webext-storage - npm version badge](https://img.shields.io/npm/v/@theluckystrike/webext-storage?label=webext-storage)](https://www.npmjs.com/package/@theluckystrike/webext-storage)
+[![webext-messaging - npm version badge](https://img.shields.io/npm/v/@theluckystrike/webext-messaging?label=webext-messaging)](https://www.npmjs.com/package/@theluckystrike/webext-messaging)
+[![webext-permissions - npm version badge](https://img.shields.io/npm/v/@theluckystrike/webext-permissions?label=webext-permissions)](https://www.npmjs.com/package/@theluckystrike/webext-permissions)
 
 > Build type-safe Chrome extensions with the @theluckystrike/webext-* toolkit.
 

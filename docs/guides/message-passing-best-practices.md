@@ -10,6 +10,68 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 
 Effective communication between extension components is critical for building robust Chrome extensions. This guide covers the recommended patterns for message passing, common pitfalls to avoid, and how to build type-safe, reliable messaging systems in your extension.
 
+## Chrome Extension Message Flow Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    CHROME EXTENSION MESSAGE PASSING FLOW                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    CONTENT SCRIPT                    BACKGROUND SERVICE WORKER                 POPUP / OPTIONS
+    (injected in page)                (central hub)                            (UI extension pages)
+    ─────────────────                 ───────────────────────                   ───────────────────
+
+         │                                    │                                      │
+         │   chrome.runtime.sendMessage()     │                                      │
+         ├───────────────────────────────────►│                                      │
+         │     { type: 'GET_DATA' }           │                                      │
+         │                                    │                                      │
+         │                                    │  ┌─────────────────────────────┐     │
+         │                                    │  │  Message Router/Handler    │     │
+         │                                    │  │  - Validates message       │     │
+         │                                    │  │  - Routes to appropriate   │     │
+         │                                    │  │    handler                 │     │
+         │                                    │  └─────────────────────────────┘     │
+         │                                    │                                      │
+         │   ◄────────────────────────────────┤                                      │
+         │     { data: {...} } response       │                                      │
+         │                                    │                                      │
+         │                                    │      chrome.runtime.sendMessage()    │
+         │                                    ├───────────────────────────────────►  │
+         │                                    │      { type: 'UPDATE_UI' }           │
+         │                                    │                                      │
+         │                                    │      ◄────────────────────────────────
+         │                                    │      { success: true }              
+         │                                                                              
+         │                                                                              
+    ──────────────                    ───────────────────────                   ───────────────────
+    Page Context                       Background Context                       Extension Context
+    (isolated world)                   (service worker)                          (privileged APIs)
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         CONNECTION PORTS (chrome.runtime.connect)            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    TAB 1 ─────────────┐
+    (content script)    │     chrome.tabs.connect(tabId, { name: 'stream' })
+                        ├─────────────────────────┐
+    TAB 2 ─────────────┤                         │
+    (content script)   │                         ▼
+                        │              ┌─────────────────────┐
+    POPUP ──────────────┼──────────────►│   BACKGROUND SW     │◄── Persistent
+                        │              │   Port Manager      │     Connection
+                        │              └─────────────────────┘     (auto-reconnect)
+                        │                         │
+    TAB 3 ─────────────┘                         │
+    (content script)                              ▼
+                                       ┌─────────────────────┐
+                                       │   Message Stream    │
+                                       │   Bi-directional    │
+                                       └─────────────────────┘
+
+![Chrome Extension message passing architecture diagram showing content scripts, background service worker, and popup communication flows](docs/images/message-passing-architecture.svg)
+
 ## Choose the Right Method
 
 Chrome provides several messaging APIs, each suited for different use cases:

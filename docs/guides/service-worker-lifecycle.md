@@ -11,6 +11,139 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 - Service workers are event-driven, short-lived, and stateless
 - Understanding the lifecycle is critical for reliable extensions
 
+## Chrome Extension Service Worker Lifecycle
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                     CHROME EXTENSION SERVICE WORKER LIFECYCLE                   │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+    ┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+    │   INSTALL   │────►│  ACTIVATED   │────►│    IDLE     │────►│TERMINATED   │
+    └─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+          │                   │                   │                   │
+          │                   │                   │                   │
+          ▼                   ▼                   ▼                   ▼
+    First time or      SW becomes         No events            ~30 seconds
+    after update       active, ready      pending -            of inactivity
+    chrome.runtime.    to handle events   SW enters            SW is killed
+    onInstalled       (ready state)       idle state           (memory freed)
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                            EVENT TYPES THAT WAKE SW                            │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+  │   ALARMS     │  │   MESSAGES   │  │   TABS       │  │   COMMANDS   │
+  │              │  │              │  │              │  │              │
+  │ chrome.alarms│  │ chrome.      │  │ chrome.tabs  │  │ chrome.      │
+  │ .onAlarm     │  │ runtime.    │  │ .onUpdated   │  │ commands.    │
+  │              │  │ onMessage   │  │ .onCreated   │  │ onCommand    │
+  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+
+  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+  │  WEB REQUEST │  │   STORAGE    │  │  IDLE STATE  │  │    NFC       │
+  │              │  │              │  │              │  │              │
+  │ chrome.      │  │ chrome.      │  │ chrome.idle  │  │ chrome.nfc   │
+  │ webRequest   │  │ storage.    │  │ .onState     │  │ .onNDEF      │
+  │ .onCompleted │  │ .onChanged  │  │ Changed      │  │ .read        │
+  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          COLD START BEHAVIOR                                    │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │                         SERVICE WORKER COLD START                           │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  Event arrives ──► Chrome wakes SW ──► Execute top-level ──► Run event handler
+  (alarm, message,     from scratch      code (all listeners                 
+   etc.)                                    must register here)
+                                                 │
+                                                 ▼
+                                    ┌────────────────────────┐
+                                    │  TOP-LEVEL REGISTRATION│
+                                    │  (synchronous only!)   │
+                                    │                        │
+                                    │  chrome.alarms.        │
+                                    │    onAlarm.addListener │
+                                    │                        │
+                                    │  chrome.runtime.       │
+                                    │    onMessage.          │
+                                    │    addListener         │
+                                    │                        │
+                                    │  chrome.action.        │
+                                    │    onClicked.          │
+                                    │    addListener         │
+                                    └────────────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                         STATE PERSISTENCE PATTERN                              │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │                    SERVICE WORKER STATE MANAGEMENT                           │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  Wake #1                         Wake #2                         Wake #3
+  ──────                         ──────                         ──────
+  ┌─────────────┐               ┌─────────────┐               ┌─────────────┐
+  │ counter = 0 │   ───────►     │ counter = 5 │   ───────►    │ counter = 7 │
+  │ (reset!)    │   storage      │ (restored)  │   storage     │ (restored)  │
+  └─────────────┘   read         └─────────────┘   read        └─────────────┘
+       │                   │                   │
+       │   ┌───────────────┘                   │
+       │   │                                   │
+       ▼   ▼                                   
+  ┌─────────────────────────────────────────────────────────────┐
+  │  chrome.storage.local                                        │
+  │  { counter: 5, lastActive: 1700000000000, ... }             │
+  └─────────────────────────────────────────────────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                         INSTALL vs STARTUP EVENTS                              │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+  chrome.runtime.onInstalled                    chrome.runtime.onStartup
+  ──────────────────────────                    ──────────────────────────
+  • First install                              • Every browser launch
+  • Extension update                           • NOT on install/update
+  • Chrome update                              
+                                               Use cases:
+  Use for:                                    Use for:
+  • Set default prefs                         • Session init
+  • Create alarms                             • Connectivity checks  
+  • Show welcome page                         • Resume pending tasks
+  • Initialize storage
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                         DEBUGGING SERVICE WORKER                               │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+  1. Open chrome://extensions
+  2. Find your extension
+  3. Click "Inspect views: service worker"
+  4. Use DevTools console
+
+  Lifecycle logging:
+  ┌─────────────────────────────────────────┐
+  │ console.log('[SW] Starting...');        │
+  │ chrome.runtime.onInstalled.addListener ││
+  │   (() => console.log('[SW] Installed'));│
+  │ chrome.runtime.onStartup.addListener   ││
+  │   (() => console.log('[SW] Started'));  │
+  └─────────────────────────────────────────┘
+
+  Low-level status: chrome://serviceworker-internals
+
+![Chrome Extension service worker lifecycle diagram showing install, activation, idle, and termination states with event types that wake the service worker](docs/images/sw-lifecycle-diagram.svg)
+
 ## Lifecycle Phases
 1. **Registration**: Chrome reads `manifest.json` `background.service_worker`
 2. **Installation**: First time or after update — `chrome.runtime.onInstalled` fires
