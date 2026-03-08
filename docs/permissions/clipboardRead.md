@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "clipboardRead Permission"
 description: "Allows reading clipboard content using or . 'Read data you copy and paste'"
 permalink: /permissions/clipboardRead/

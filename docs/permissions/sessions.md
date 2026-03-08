@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "sessions Permission"
 description: "Permission string: Grants access to API Query and restore recently closed tabs/windows, access cross-device tabs Gets a list of recently closed tabs/windows."
 permalink: /permissions/sessions/

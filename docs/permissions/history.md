@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "history Permission — Chrome Extension Reference"
 description: ": : Access to API — browse, search, and delete browsing history : High — full access to user's browsing history"
 permalink: /permissions/history/

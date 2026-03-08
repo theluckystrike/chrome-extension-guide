@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "cookies Permission Reference"
 description: "Grants access to API Read, write, delete cookies for sites matching your host permissions Listen for cookie changes via"
 permalink: /permissions/cookies/

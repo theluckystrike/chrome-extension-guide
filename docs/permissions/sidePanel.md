@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "sidePanel Permission"
 description: "API 114+ None — this permission does not trigger a warning at ins..."
 permalink: /permissions/sidePanel/

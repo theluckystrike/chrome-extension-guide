@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "dns Permission"
 description: "Permission string: Grants access to API Perform DNS lookups from the extension Note: Limited availability, check chrome.dns existence before use"
 permalink: /permissions/dns/

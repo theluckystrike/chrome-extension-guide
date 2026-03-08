@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "geolocation Permission"
 description: ": (optional permission in MV3) Enables in extension pages MV3 challenge: service workers cannot use Geolocation API directly"
 permalink: /permissions/geolocation/

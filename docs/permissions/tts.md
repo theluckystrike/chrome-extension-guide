@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "tts Permission — Chrome Extension Reference"
 description: ": (consumer) or (provider) : — use to speak text aloud; — register as speech engine"
 permalink: /permissions/tts/

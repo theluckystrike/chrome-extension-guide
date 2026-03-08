@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "commands (Manifest Key)"
 description: "is a manifest key (not a entry) that defines keyboard shortcuts. Enables the API. { 'commands': { '_execute_action': {"
 permalink: /permissions/commands/

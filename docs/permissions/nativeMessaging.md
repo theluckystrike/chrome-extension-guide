@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "nativeMessaging Permission"
 description: "Enables communication between extension and native applications Two modes: (persistent) and (one-shot)"
 permalink: /permissions/nativeMessaging/

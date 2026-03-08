@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "tabCapture Permission"
 description: "Access to the API for capturing the visible area of a tab as a media stream (audio and/or video)."
 permalink: /permissions/tabCapture/

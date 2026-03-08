@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "scripting Permission Reference"
 description: "Grants access to the API (MV3 replacement for ) Inject JavaScript and CSS into web pages programmatically"
 permalink: /permissions/scripting/

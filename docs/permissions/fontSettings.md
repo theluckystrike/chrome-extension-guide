@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "fontSettings Permission"
 description: "Access to the API for reading and modifying Chrome's font preferences (default fonts, sizes, per-script fonts). { 'permissions': ['fontSettings']"
 permalink: /permissions/fontSettings/

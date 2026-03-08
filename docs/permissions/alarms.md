@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "alarms Permission Reference"
 description: "Grants access to the API Schedule code to run at specific times or intervals MV3 replacement for / (which don't survive service worker termination)"
 permalink: /permissions/alarms/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "clipboardWrite Permission"
 description: "Allows the extension to write content to the system clipboard using or . { 'permissions': ['clipboardWrite']"
 permalink: /permissions/clipboardWrite/

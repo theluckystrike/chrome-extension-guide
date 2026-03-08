@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "readingList Permission"
 description: ": : — manage Chrome's built-in Reading List : Chrome 120+ Adds URL to reading list. Throws if URL already ex..."
 permalink: /permissions/readingList/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "topSites Permission"
 description: "Permission string: Grants access to API Returns the user's most visited sites returns Promise with array of MostVisitedURL"
 permalink: /permissions/topSites/

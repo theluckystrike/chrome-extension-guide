@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "storage Permission Reference"
 description: "Grants access to API (local, sync, session, managed) Allows persistent key-value storage that survives browser restarts Enables cross-device sync via"
 permalink: /permissions/storage/

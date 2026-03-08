@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "bookmarks Permission — Chrome Extension Reference"
 description: ": : Full access to API — read, create, update, delete, move, search bookmarks"
 permalink: /permissions/bookmarks/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "activeTab Permission Reference"
 description: "Grants temporary access to the currently active tab when the user invokes the extension (click, keyboard shortcut, context menu) Access is temporary — expire..."
 permalink: /permissions/activeTab/

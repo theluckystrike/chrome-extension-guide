@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "declarativeNetRequestWithHostAccess"
 description: "The permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permi..."
 permalink: /permissions/declarativeNetRequestWithHostAccess/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "downloads Permission Reference"
 description: "Grants access to API Start downloads programmatically from any extension context Monitor download progress, pause, resume, and cancel"
 permalink: /permissions/downloads/

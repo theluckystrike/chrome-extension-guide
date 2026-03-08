@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "webNavigation Permission"
 description: "Access to the API for monitoring page navigation lifecycle across all tabs and frames. None — this permission does not trigger a warning ..."
 permalink: /permissions/webNavigation/

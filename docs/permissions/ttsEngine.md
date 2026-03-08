@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "ttsEngine Permission"
 description: "Allows your extension to register as a text-to-speech engine that other extensions (and Chrome itself) can use via . { 'permissions': ['ttsEngine'],"
 permalink: /permissions/ttsEngine/

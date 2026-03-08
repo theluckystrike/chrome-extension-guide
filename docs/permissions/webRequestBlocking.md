@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "webRequestBlocking Permission (MV2 Only)"
 description: "Enables blocking/modifying network requests in listeners."
 permalink: /permissions/webRequestBlocking/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "debugger Permission — Chrome Extension Reference"
 description: ": : Access to API — attach to tabs and use Chrome DevTools Protocol (CDP) : Very High — full CDP access can..."
 permalink: /permissions/debugger/

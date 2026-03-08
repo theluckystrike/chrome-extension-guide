@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "privacy Permission"
 description: "Access to API for reading/controlling Chrome's privacy settings. 'Change your privacy-related settings'"
 permalink: /permissions/privacy/

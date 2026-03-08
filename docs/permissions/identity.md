@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "identity Permission — Chrome Extension Reference"
 description: ": : Access to API for OAuth2 authentication : Medium — authenticates as the user with third-party services"
 permalink: /permissions/identity/

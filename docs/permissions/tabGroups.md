@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "tabGroups Permission"
 description: "The permission grants extensions access to the API, which enables programmatic management of tab groups in Google Chrome. Tab groups allow users to organize ..."
 permalink: /permissions/tabGroups/

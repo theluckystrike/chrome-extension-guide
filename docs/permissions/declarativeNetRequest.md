@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "declarativeNetRequest Permission — Chrome Extension Reference"
 description: ": or : Block, redirect, or modify network requests using declarative rules"
 permalink: /permissions/declarativeNetRequest/

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "notifications Permission Reference"
 description: "Grants access to the API Show rich desktop notifications (basic, image, list, progress types) Handle notification clicks, button clicks, and close events"
 permalink: /permissions/notifications/

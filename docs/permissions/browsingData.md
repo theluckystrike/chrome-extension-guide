@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "browsingData Permission"
 description: "Remove browsing data (cache, cookies, history, downloads, passwords, localStorage, etc.) programmat..."
 permalink: /permissions/browsingData/

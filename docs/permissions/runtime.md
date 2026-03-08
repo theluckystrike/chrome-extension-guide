@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "chrome.runtime API Reference"
 description: "The API provides extension information and utilities for messaging, lifecycle management, and resource handling. — always available."
 permalink: /permissions/runtime/

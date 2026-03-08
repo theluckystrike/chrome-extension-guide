@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "System.* Permissions (Chrome Extension API)"
 description: "The permissions provide access to hardware and system information. Each is a separate permission. No user warning."
 permalink: /permissions/system/

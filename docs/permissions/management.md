@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "management Permission"
 description: "Access to API — manage other installed extensions, apps, and themes. 'Manage your apps, extensions, and themes'"
 permalink: /permissions/management/

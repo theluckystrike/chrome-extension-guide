@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Idle Permission"
 description: "API Detects when user is idle or screen is locked"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/idle/"

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "proxy Permission — Chrome Extension Reference"
 description: ": : Access to API — configure Chrome's proxy settings : High — routes ALL browser traffic through specified proxy"
 permalink: /permissions/proxy/

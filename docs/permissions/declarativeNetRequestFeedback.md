@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "declarativeNetRequestFeedback Permission — Chrome Extension Reference"
 description: ": : Access to event for debugging rule matches"
 permalink: /permissions/declarativeNetRequestFeedback/

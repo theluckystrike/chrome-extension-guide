@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "webRequest Permission Reference"
 description: "Grants access to API Observe HTTP/HTTPS requests at various lifecycle stages MV3: webRequest is READ-ONLY — use for blocking/modifying"
 permalink: /permissions/webRequest/

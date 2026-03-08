@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "gcm Permission"
 description: "Access to (Google Cloud Messaging) API for sending and receiving push messages via Firebase Cloud Messaging (FCM). { 'permissions': ['gcm']"
 permalink: /permissions/gcm/
