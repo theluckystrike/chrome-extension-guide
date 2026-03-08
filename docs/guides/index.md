@@ -118,6 +118,7 @@ Whether you're a beginner just starting with Chrome extensions or an experienced
 - [remote-config](remote-config.html)
 - [rollup-extension-setup](rollup-extension-setup.html)
 - [scripting-api](scripting-api.html)
+- [chrome-extension-side-panel-api-tutorial-2026](chrome-extension-side-panel-api-tutorial-2026.html)
 - [security-best-practices](security-best-practices.html)
 - [security-hardening](security-hardening.html)
 - [service-worker-debugging](service-worker-debugging.html)
