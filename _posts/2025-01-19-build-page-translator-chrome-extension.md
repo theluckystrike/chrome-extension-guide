@@ -6,6 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-page-translator-chrome-extension/"
 ---
 
 # Build a Page Translator Chrome Extension — Complete Tutorial

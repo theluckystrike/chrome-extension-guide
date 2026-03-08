@@ -6,6 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-seo-analyzer-chrome-extension/"
 ---
 
 # Build an SEO Analyzer Chrome Extension — Complete Tutorial

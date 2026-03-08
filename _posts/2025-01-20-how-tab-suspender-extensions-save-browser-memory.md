@@ -6,6 +6,7 @@ date: 2025-01-20
 categories: [guides, performance]
 tags: [tab-suspender, browser-memory, chrome-extensions, ram-optimization, tab-management]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/how-tab-suspender-extensions-save-browser-memory/"
 ---
 
 # How Tab Suspender Extensions Save Browser Memory — Complete Technical Guide

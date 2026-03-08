@@ -6,6 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "dom inspector extension, element picker chrome, html inspector extension"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-dom-inspector-chrome-extension/"
 ---
 
 # Build a DOM Inspector Chrome Extension: Complete Developer Guide

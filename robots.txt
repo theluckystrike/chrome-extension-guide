@@ -1,3 +1,16 @@
+# robots.txt for Chrome Extension Guide
+# https://theluckystrike.github.io/chrome-extension-guide/
+
 User-agent: *
 Allow: /
+
+# Block non-content paths
+Disallow: /assets/
+Disallow: /examples/
+Disallow: /icons/
+
+# Crawl-delay for polite bots
+Crawl-delay: 1
+
+# Sitemaps
 Sitemap: https://theluckystrike.github.io/chrome-extension-guide/sitemap.xml

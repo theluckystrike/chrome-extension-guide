@@ -6,6 +6,7 @@ date: 2025-01-30
 categories: [guides, manifest-v3]
 tags: [manifest-v3, service-worker-patterns, chrome-extensions, background-scripts, state-management]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/"
 ---
 
 # Manifest V3 Service Worker Patterns and Anti-Patterns: What Works and What Doesn't

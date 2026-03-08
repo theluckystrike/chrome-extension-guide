@@ -6,6 +6,7 @@ date: 2025-01-22
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "text highlighter extension, highlight text chrome, web annotation extension"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-text-highlighter-chrome-extension/"
 ---
 
 # Build a Text Highlighter Chrome Extension: Complete 2025 Tutorial

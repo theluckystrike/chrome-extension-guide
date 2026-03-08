@@ -6,6 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome extension pdf viewer, pdf viewer extension, custom pdf reader extension"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-pdf-viewer-chrome-extension/"
 ---
 
 # Building a PDF Viewer Chrome Extension: Complete Developer Guide

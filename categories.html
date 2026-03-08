@@ -1,0 +1,79 @@
+---
+layout: default
+title: "All Categories - Chrome Extension Guide"
+description: "Browse all article categories in the Chrome Extension Guide. Find tutorials, guides, API references, design patterns, and more for Chrome extension development."
+permalink: /categories/
+sitemap: true
+---
+
+<h1>All Categories</h1>
+
+<p>Browse <strong>{{ site.posts.size }} articles</strong> across all categories in the Chrome Extension Guide.</p>
+
+<div class="categories-overview">
+  {% assign sorted_categories = site.categories | sort %}
+  {% for category in sorted_categories %}
+    {% assign cat_name = category[0] %}
+    {% assign cat_posts = category[1] %}
+    <div class="category-card" id="{{ cat_name | slugify }}">
+      <h2>
+        <a href="#{{ cat_name | slugify }}">{{ cat_name }}</a>
+        <span class="article-count">({{ cat_posts.size }} article{% if cat_posts.size != 1 %}s{% endif %})</span>
+      </h2>
+      <ul>
+        {% for post in cat_posts limit: 10 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        </li>
+        {% endfor %}
+        {% if cat_posts.size > 10 %}
+        <li class="more-articles">...and {{ cat_posts.size | minus: 10 }} more articles</li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .categories-overview {
+    margin-top: 2rem;
+  }
+  .category-card {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .category-card h2 {
+    margin-bottom: 0.75rem;
+  }
+  .article-count {
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #6b7280;
+  }
+  .category-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .category-card li {
+    padding: 0.35rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .category-card li a {
+    flex: 1;
+  }
+  .post-date {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+  .more-articles {
+    color: #6b7280;
+    font-style: italic;
+  }
+</style>

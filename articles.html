@@ -1,0 +1,135 @@
+---
+layout: default
+title: "All Articles - Chrome Extension Development Guide"
+description: "Complete index of all Chrome extension development articles organized by category. Browse 500+ articles covering APIs, permissions, patterns, tutorials, publishing, and Manifest V3."
+permalink: /articles/
+sitemap: true
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "All Articles - Chrome Extension Development Guide",
+  "description": "Complete index of all Chrome extension development articles organized by category.",
+  "url": "{{ page.url | absolute_url }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ site.title | escape }}",
+    "url": "{{ site.url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zovo",
+    "url": "https://zovo.one"
+  }
+}
+</script>
+
+<h1>All Articles</h1>
+
+<p>A complete index of all <strong>{{ site.posts.size }} articles</strong> in the Chrome Extension Guide, organized by category. Each article provides in-depth coverage of Chrome extension development topics.</p>
+
+<nav class="category-nav">
+  <strong>Jump to:</strong>
+  {% assign sorted_categories = site.categories | sort %}
+  {% for category in sorted_categories %}
+    <a href="#{{ category[0] | slugify }}">{{ category[0] }}</a>{% unless forloop.last %} &middot; {% endunless %}
+  {% endfor %}
+</nav>
+
+<hr>
+
+{% assign sorted_categories = site.categories | sort %}
+{% for category in sorted_categories %}
+  {% assign cat_name = category[0] %}
+  {% assign cat_posts = category[1] | sort: 'date' | reverse %}
+  <section class="article-category" id="{{ cat_name | slugify }}">
+    <h2>{{ cat_name }} <span class="article-count">({{ cat_posts.size }} article{% if cat_posts.size != 1 %}s{% endif %})</span></h2>
+    <div class="article-list">
+      {% for post in cat_posts %}
+      <article class="article-item">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        {% if post.description %}
+        <p class="article-description">{{ post.description | truncate: 160 }}</p>
+        {% endif %}
+        <div class="article-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+          {% if post.tags.size > 0 %}
+          <span class="article-tags">
+            {% for tag in post.tags limit: 3 %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </span>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endfor %}
+
+<style>
+  .category-nav {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    line-height: 1.8;
+  }
+  .category-nav a {
+    white-space: nowrap;
+  }
+  .article-category {
+    margin-bottom: 3rem;
+  }
+  .article-count {
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #6b7280;
+  }
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .article-item {
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  .article-item:hover {
+    border-color: #667eea;
+  }
+  .article-item h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  .article-description {
+    margin: 0 0 0.5rem;
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+  }
+  .article-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    background: #f3f4f6;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+</style>

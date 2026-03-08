@@ -6,6 +6,7 @@ date: 2025-01-27
 categories: [guides, storage]
 tags: [chrome-storage, indexeddb, extension-storage, data-management, chrome-extensions]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-storage-patterns-large-scale-data/"
 ---
 
 # Chrome Extension Storage Patterns for Large-Scale Data

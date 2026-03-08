@@ -6,6 +6,7 @@ date: 2025-01-21
 categories: [guides, performance]
 tags: [memory-management, chrome-extensions, performance, ram-usage, memory-leaks]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-memory-management-best-practices/"
 ---
 
 # Chrome Extension Memory Management Best Practices — Reduce RAM Usage by 80%

@@ -1,0 +1,98 @@
+---
+layout: default
+title: "All Tags - Chrome Extension Guide"
+description: "Browse all article tags in the Chrome Extension Guide. Discover content by topic including Chrome APIs, Manifest V3, service workers, tutorials, and more."
+permalink: /tags/
+sitemap: true
+---
+
+<h1>All Tags</h1>
+
+<p>Find articles by topic. Tags are sorted by article count.</p>
+
+<div class="tag-cloud">
+  {% assign sorted_tags = site.tags | sort %}
+  {% for tag in sorted_tags %}
+    {% assign tag_name = tag[0] %}
+    {% assign tag_posts = tag[1] %}
+    <a href="#{{ tag_name | slugify }}" class="tag-pill">
+      {{ tag_name }} <span class="tag-count">({{ tag_posts.size }})</span>
+    </a>
+  {% endfor %}
+</div>
+
+<hr>
+
+{% assign sorted_tags = site.tags | sort %}
+{% for tag in sorted_tags %}
+  {% assign tag_name = tag[0] %}
+  {% assign tag_posts = tag[1] %}
+  <div class="tag-section" id="{{ tag_name | slugify }}">
+    <h2>{{ tag_name }} <span class="article-count">({{ tag_posts.size }} article{% if tag_posts.size != 1 %}s{% endif %})</span></h2>
+    <ul>
+      {% for post in tag_posts %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+
+<style>
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  .tag-pill {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .tag-pill:hover {
+    background: #e5e7eb;
+  }
+  .tag-count {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  .tag-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .article-count {
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #6b7280;
+  }
+  .tag-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .tag-section li {
+    padding: 0.35rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .tag-section li a {
+    flex: 1;
+  }
+  .post-date {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+</style>

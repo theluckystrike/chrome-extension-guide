@@ -6,6 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-tab-search-chrome-extension/"
 ---
 
 # Build a Tab Search Chrome Extension — Complete 2025 Tutorial
