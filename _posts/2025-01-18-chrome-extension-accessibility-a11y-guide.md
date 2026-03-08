@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension accessibility, a11y extension development, chrome extension a11y, wcag chrome extension, accessible chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-accessibility-a11y-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-accessibility-a11y-guide/"
 ---
 
 # Chrome Extension Accessibility (A11y) Guide: Building Inclusive Extensions

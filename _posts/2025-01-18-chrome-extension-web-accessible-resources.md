@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome web accessible resources, manifest v3 web resources, extension accessible files, web_accessible_resources manifest v3, chrome extension file access"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-web-accessible-resources/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-web-accessible-resources/"
 ---
 
 # Web Accessible Resources in Chrome Extensions MV3: Complete Guide
@@ -401,6 +401,6 @@ With this knowledge, you're now equipped to implement Web Accessible Resources e
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

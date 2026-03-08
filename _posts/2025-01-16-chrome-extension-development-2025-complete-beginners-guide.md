@@ -35,7 +35,7 @@ Chrome extensions solve real problems for real users. From [reducing Chrome memo
 
 ### Monetization Opportunities
 
-Extensions can be monetized through [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, one-time purchases, subscriptions, or even by building a user base that feeds into a larger product. The Chrome Web Store provides a built-in distribution channel with low friction for user acquisition.
+Extensions can be monetized through freemium models, one-time purchases, subscriptions, or even by building a user base that feeds into a larger product. The Chrome Web Store provides a built-in distribution channel with low friction for user acquisition.
 
 ---
 
@@ -95,7 +95,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     console.log('Extension installed for the first time!');
     // Set default settings
-    [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+    chrome.storage.local.set({
       theme: 'light',
       notificationsEnabled: true,
       autoSave: false
@@ -190,8 +190,8 @@ The popup is the small window that appears when a user clicks your extension's i
 ```javascript
 // popup.js
 document.getElementById('highlightBtn').addEventListener('click', async () => {
-  const [tab] = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ active: true, currentWindow: true });
-  [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sendMessage(tab.id, { action: 'highlight' });
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.tabs.sendMessage(tab.id, { action: 'highlight' });
 });
 ```
 
@@ -382,46 +382,46 @@ Load the extension in Chrome using the developer mode instructions above, then n
 
 Chrome provides a rich set of APIs for extension developers. Here are the ones you will use most frequently:
 
-### [Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
+### Storage API
 
-The [Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) lets you persist data across browser sessions. It offers two storage areas: `local` (per-device) and `sync` (synced across devices via the user's Google account).
+The Storage API lets you persist data across browser sessions. It offers two storage areas: `local` (per-device) and `sync` (synced across devices via the user's Google account).
 
 ```javascript
 // Save data
-await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+await chrome.storage.local.set({
   settings: { theme: 'dark', fontSize: 16 }
 });
 
 // Read data
-const result = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
+const result = await chrome.storage.local.get('settings');
 console.log(result.settings);
 
 // Listen for changes
-[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, area) => {
+chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && changes.settings) {
     console.log('Settings changed:', changes.settings.newValue);
   }
 });
 ```
 
-For advanced storage patterns, see our [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) tutorial](/chrome-extension-guide/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/).
+For advanced storage patterns, see our [Storage API tutorial](/chrome-extension-guide/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/).
 
-### [Tabs API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
+### Tabs API
 
-The [Tabs API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) provides methods for creating, modifying, and managing browser tabs. This is one of the most commonly used APIs, powering extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) that optimize tab performance and memory usage.
+The Tabs API provides methods for creating, modifying, and managing browser tabs. This is one of the most commonly used APIs, powering extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) that optimize tab performance and memory usage.
 
 ```javascript
 // Query tabs
-const tabs = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({ active: true, currentWindow: true });
+const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
 
 // Create a new tab
-const newTab = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create({ url: 'https://example.com' });
+const newTab = await chrome.tabs.create({ url: 'https://example.com' });
 
 // Update a tab
-await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).update(tabId, { url: 'https://new-url.com' });
+await chrome.tabs.update(tabId, { url: 'https://new-url.com' });
 
 // Listen for tab events
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete') {
     console.log('Tab finished loading:', tab.url);
   }
@@ -447,19 +447,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // Send a message to a content script
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sendMessage(tabId, { action: 'update' });
+chrome.tabs.sendMessage(tabId, { action: 'update' });
 ```
 
-### [Alarms API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
+### Alarms API
 
-The [Alarms API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) lets you schedule periodic tasks — essential for extensions that need to perform background operations at regular intervals.
+The Alarms API lets you schedule periodic tasks — essential for extensions that need to perform background operations at regular intervals.
 
 ```javascript
 // Create an alarm that fires every 30 minutes
-[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('checkForUpdates', { periodInMinutes: 30 });
+chrome.alarms.create('checkForUpdates', { periodInMinutes: 30 });
 
 // Listen for alarm events
-[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'checkForUpdates') {
     performUpdateCheck();
   }
@@ -480,9 +480,9 @@ The biggest change in MV3 is the move from persistent background pages to event-
 
 **Key implications:**
 
-- You cannot store data in global variables between service worker restarts — use `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)` instead
+- You cannot store data in global variables between service worker restarts — use `chrome.storage` instead
 - DOM APIs are not available in service workers
-- Timers (`setTimeout`, `setInterval`) are unreliable because the service worker can terminate at any time — use `[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)` instead
+- Timers (`setTimeout`, `setInterval`) are unreliable because the service worker can terminate at any time — use `chrome.alarms` instead
 
 ### Declarative Net Request Replaces webRequest Blocking
 
@@ -627,7 +627,7 @@ Content scripts run on every matching page, so they should be as lightweight as 
 ### Optimize Storage Usage
 
 - Batch storage operations instead of making many small reads and writes
-- Use `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local` for large data sets and `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync` only for small, user-facing settings (sync storage has a 100KB total limit)
+- Use `chrome.storage.local` for large data sets and `chrome.storage.sync` only for small, user-facing settings (sync storage has a 100KB total limit)
 - Cache frequently accessed data in memory within the service worker's current lifecycle
 
 ### Keep the Service Worker Lean
@@ -687,7 +687,7 @@ Congratulations! You now have a solid foundation in Chrome extension development
 
 1. **Build something**: The best way to learn is by doing. Pick a problem you face daily and build an extension to solve it.
 
-2. **Explore advanced topics**: Dive into our guides on [state management](/chrome-extension-guide/docs/guides/chrome-extension-state-management/), [OAuth2 [authentication](https://theluckystrike.github.io/extension-monetization-playbook/monetization/authentication)](/chrome-extension-guide/docs/guides/chrome-extension-oauth2-[authentication](https://theluckystrike.github.io/extension-monetization-playbook/monetization/authentication)/), and [advanced messaging patterns](/chrome-extension-guide/docs/guides/advanced-messaging-patterns/).
+2. **Explore advanced topics**: Dive into our guides on [state management](/chrome-extension-guide/docs/guides/chrome-extension-state-management/), [OAuth2 authentication](/chrome-extension-guide/docs/guides/chrome-extension-oauth2-authentication/), and [advanced messaging patterns](/chrome-extension-guide/docs/guides/advanced-messaging-patterns/).
 
 3. **Learn from real extensions**: Study how production extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) handle tab management, memory optimization, and user preferences. See our [deep dive into how it reduces memory usage by 80%](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/).
 
@@ -702,7 +702,7 @@ The Chrome extension ecosystem continues to evolve, and 2025 brings exciting opp
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*

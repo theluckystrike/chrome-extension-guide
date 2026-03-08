@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome Extensions]
 tags: [chrome-extension, development]
 keywords: "automated testing extension, test chrome extension ci, selenium extension test"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/automated-testing-chrome-extensions/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/automated-testing-chrome-extensions/"
 ---
 
 # Automated Testing for Chrome Extensions: A Comprehensive Guide

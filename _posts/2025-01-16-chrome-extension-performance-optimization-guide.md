@@ -33,7 +33,7 @@ Before optimizing, you need to know what to measure. Chrome provides several too
 
 **Content script injection time**: The delay between page load and your content script becoming active. Slow injection creates visible layout shifts or delayed functionality.
 
-**Storage operation latency**: The time required for `[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)` read and write operations. Frequent or large storage operations can become a bottleneck.
+**Storage operation latency**: The time required for `chrome.storage` read and write operations. Frequent or large storage operations can become a bottleneck.
 
 ### Profiling Tools
 
@@ -99,19 +99,19 @@ Register only the event listeners you actually need. Every listener adds overhea
 
 ```javascript
 // BAD: Registering listeners you might not need
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onCreated.addListener(handleTabCreated);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onRemoved.addListener(handleTabRemoved);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onUpdated.addListener(handleTabUpdated);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onActivated.addListener(handleTabActivated);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onMoved.addListener(handleTabMoved);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onDetached.addListener(handleTabDetached);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAttached.addListener(handleTabAttached);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onReplaced.addListener(handleTabReplaced);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onHighlighted.addListener(handleTabHighlighted);
+chrome.tabs.onCreated.addListener(handleTabCreated);
+chrome.tabs.onRemoved.addListener(handleTabRemoved);
+chrome.tabs.onUpdated.addListener(handleTabUpdated);
+chrome.tabs.onActivated.addListener(handleTabActivated);
+chrome.tabs.onMoved.addListener(handleTabMoved);
+chrome.tabs.onDetached.addListener(handleTabDetached);
+chrome.tabs.onAttached.addListener(handleTabAttached);
+chrome.tabs.onReplaced.addListener(handleTabReplaced);
+chrome.tabs.onHighlighted.addListener(handleTabHighlighted);
 
 // GOOD: Only register what you use
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onUpdated.addListener(handleTabUpdated);
-[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onRemoved.addListener(handleTabRemoved);
+chrome.tabs.onUpdated.addListener(handleTabUpdated);
+chrome.tabs.onRemoved.addListener(handleTabRemoved);
 ```
 
 ### Service Worker State Management
@@ -125,7 +125,7 @@ let cache = null;
 const getState = async () => {
   if (cache !== null) return cache;
 
-  const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('appState');
+  const result = await chrome.storage.local.get('appState');
   cache = result.appState || getDefaultState();
   return cache;
 };
@@ -135,7 +135,7 @@ const setState = async (newState) => {
   // Debounce storage writes to avoid excessive I/O
   clearTimeout(setState._timer);
   setState._timer = setTimeout(() => {
-    [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ appState: cache });
+    chrome.storage.local.set({ appState: cache });
   }, 500);
 };
 ```
@@ -148,16 +148,16 @@ Some developers try to keep the service worker alive using techniques like perio
 
 ```javascript
 // BAD: Keeping the service worker alive artificially
-[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('keepAlive', { periodInMinutes: 0.5 });
-[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener((alarm) => {
+chrome.alarms.create('keepAlive', { periodInMinutes: 0.5 });
+chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'keepAlive') {
     // Do nothing, just keep the SW alive
   }
 });
 
 // GOOD: Let the service worker sleep and persist state
-[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('periodicSync', { periodInMinutes: 30 });
-[[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener(async (alarm) => {
+chrome.alarms.create('periodicSync', { periodInMinutes: 30 });
+chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'periodicSync') {
     await performActualWork();
   }
@@ -312,7 +312,7 @@ For more content script optimization patterns, see our [content script injection
 
 ## Optimizing Storage Operations {#optimizing-storage}
 
-Chrome's [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) is the primary persistence mechanism for extensions, and its performance characteristics can significantly impact your extension's responsiveness.
+Chrome's Storage API is the primary persistence mechanism for extensions, and its performance characteristics can significantly impact your extension's responsiveness.
 
 ### Batch Storage Operations
 
@@ -320,13 +320,13 @@ Each storage operation involves IPC (inter-process communication) between your e
 
 ```javascript
 // BAD: Multiple individual operations
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ setting1: value1 });
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ setting2: value2 });
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ setting3: value3 });
+await chrome.storage.local.set({ setting1: value1 });
+await chrome.storage.local.set({ setting2: value2 });
+await chrome.storage.local.set({ setting3: value3 });
 // 3 separate IPC calls
 
 // GOOD: Single batched operation
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+await chrome.storage.local.set({
   setting1: value1,
   setting2: value2,
   setting3: value3
@@ -336,17 +336,17 @@ await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-
 
 ### Use Efficient Data Structures
 
-The [[Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) serializes and deserializes data as JSON. Large or deeply nested objects are more expensive to process.
+The Storage API serializes and deserializes data as JSON. Large or deeply nested objects are more expensive to process.
 
 ```javascript
 // BAD: Storing and retrieving a massive object for small updates
-const data = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('allData');
+const data = await chrome.storage.local.get('allData');
 data.allData.users[userId].lastSeen = Date.now();
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ allData: data.allData });
+await chrome.storage.local.set({ allData: data.allData });
 // Serializes and writes the ENTIRE object
 
 // GOOD: Use granular keys
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+await chrome.storage.local.set({
   [`user_${userId}_lastSeen`]: Date.now()
 });
 // Only serializes and writes the small update
@@ -364,14 +364,14 @@ class StorageCache {
   }
 
   async initialize(keys) {
-    const data = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(keys);
+    const data = await chrome.storage.local.get(keys);
     for (const [key, value] of Object.entries(data)) {
       this.cache.set(key, value);
     }
     this.initialized = true;
 
     // Keep cache in sync with storage changes
-    [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, area) => {
+    chrome.storage.onChanged.addListener((changes, area) => {
       if (area !== 'local') return;
       for (const [key, { newValue }] of Object.entries(changes)) {
         if (newValue === undefined) {
@@ -389,7 +389,7 @@ class StorageCache {
 
   async set(key, value) {
     this.cache.set(key, value);
-    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ [key]: value });
+    await chrome.storage.local.set({ [key]: value });
   }
 }
 
@@ -399,8 +399,8 @@ await storageCache.initialize(['settings', 'userData', 'tabState']);
 
 ### Respect Storage Limits
 
-- `[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync`: 100KB total, 8KB per item, 120 write operations per minute
-- `[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local`: 10MB total (can be increased with `unlimitedStorage` permission)
+- `chrome.storage.sync`: 100KB total, 8KB per item, 120 write operations per minute
+- `chrome.storage.local`: 10MB total (can be increased with `unlimitedStorage` permission)
 
 Exceeding these limits causes errors and data loss. Monitor your usage and implement cleanup routines for old data.
 
@@ -440,7 +440,7 @@ Show the UI structure immediately and fill in data asynchronously:
 document.getElementById('status').textContent = 'Loading...';
 
 // Fetch data asynchronously
-[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings', (result) => {
+chrome.storage.local.get('settings', (result) => {
   const settings = result.settings || {};
   document.getElementById('status').textContent = settings.enabled ? 'Active' : 'Inactive';
   document.getElementById('toggle').checked = settings.enabled;
@@ -477,7 +477,7 @@ Cache API responses to avoid redundant network requests:
 ```javascript
 const fetchWithCache = async (url, maxAge = 300000) => {
   const cacheKey = `cache_${url}`;
-  const cached = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(cacheKey);
+  const cached = await chrome.storage.local.get(cacheKey);
 
   if (cached[cacheKey]) {
     const { data, timestamp } = cached[cacheKey];
@@ -489,7 +489,7 @@ const fetchWithCache = async (url, maxAge = 300000) => {
   const response = await fetch(url);
   const data = await response.json();
 
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+  await chrome.storage.local.set({
     [cacheKey]: { data, timestamp: Date.now() }
   });
 
@@ -643,7 +643,7 @@ const measure = async (label, fn) => {
 
 // Usage
 await measure('Storage read', async () => {
-  return [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
+  return chrome.storage.local.get('settings');
 });
 
 await measure('DOM update', () => {
@@ -669,7 +669,7 @@ describe('Extension Performance', () => {
 
   it('should read settings from storage in under 20ms', async () => {
     const start = Date.now();
-    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
+    await chrome.storage.local.get('settings');
     const duration = Date.now() - start;
     expect(duration).to.be.below(20);
   });
@@ -705,7 +705,7 @@ All of this must happen with minimal CPU and memory overhead — otherwise the e
 
 4. **Lazy suspension**: Tabs are suspended by replacing their content with a lightweight placeholder page, which frees the tab's renderer process memory. The original URL is stored so the tab can be restored instantly when the user returns to it.
 
-5. **Minimal content script footprint**: The extension injects minimal or no content scripts into web pages, relying instead on the [Tabs API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) and service worker logic.
+5. **Minimal content script footprint**: The extension injects minimal or no content scripts into web pages, relying instead on the Tabs API and service worker logic.
 
 These techniques allow Tab Suspender Pro to [reduce Chrome memory usage by up to 80%](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/) while consuming negligible resources itself. For a deep dive into managing many tabs efficiently, see our [tab management for developers guide](/chrome-extension-guide/docs/chrome-tab-management-developers/).
 
@@ -777,4 +777,4 @@ Remember: the fastest code is the code that does not run. Every feature, every l
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

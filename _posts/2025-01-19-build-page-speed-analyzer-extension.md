@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "page speed extension, performance checker chrome, web vitals extension, chrome extension page speed analyzer, website performance tool chrome extension, web vitals checker chrome extension, page performance analyzer extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-page-speed-analyzer-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-page-speed-analyzer-extension/"
 ---
 
 # Build a Page Speed Analyzer Extension: Complete Chrome Extension Development Guide

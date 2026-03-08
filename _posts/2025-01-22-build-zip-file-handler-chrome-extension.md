@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "zip handler extension, unzip chrome extension, file compression extension, chrome extension zip, build zip extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-zip-file-handler-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-zip-file-handler-chrome-extension/"
 ---
 
 # Build a ZIP File Handler Chrome Extension: Complete Developer's Guide

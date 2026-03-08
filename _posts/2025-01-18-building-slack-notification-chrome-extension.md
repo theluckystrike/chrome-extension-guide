@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "slack chrome extension, notification extension, slack integration, chrome extension slack api, slack webhooks chrome, slack notification chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-slack-notification-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-slack-notification-chrome-extension/"
 ---
 
 # Building a Slack Notification Chrome Extension: Complete Developer's Guide

@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial, email-tracker]
 keywords: "email tracker extension, email open notification, gmail tracker chrome, email tracking pixel, email open tracker, chrome extension email analytics, gmail tracking extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-email-tracker-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-email-tracker-chrome-extension/"
 ---
 
 # Build an Email Open Tracker Chrome Extension: Complete Developer Guide

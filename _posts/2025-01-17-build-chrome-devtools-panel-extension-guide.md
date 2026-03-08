@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome devtools extension, devtools panel tutorial, chrome developer tools extension, custom devtools panel"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/build-chrome-devtools-panel-extension-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/build-chrome-devtools-panel-extension-guide/"
 ---
 
 # Build a Chrome DevTools Panel Extension

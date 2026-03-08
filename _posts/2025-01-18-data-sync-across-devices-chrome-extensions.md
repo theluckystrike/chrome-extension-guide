@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension sync storage, sync data across browsers, chrome storage sync, cross-device data synchronization, chrome extension data persistence"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/data-sync-across-devices-chrome-extensions/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/data-sync-across-devices-chrome-extensions/"
 ---
 
 # Data Sync Across Devices in Chrome Extensions: Complete 2025 Guide

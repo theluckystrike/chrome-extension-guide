@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome Extensions, API Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension drag drop, drag api chrome extension, chrome extension file drop, html5 drag and drop chrome extension, chrome extension drag and drop tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-drag-drop-tutorial/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-drag-drop-tutorial/"
 ---
 
 # Drag and Drop in Chrome Extensions: Complete Tutorial

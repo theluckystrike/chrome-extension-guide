@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension auto update, extension version management, chrome extension update mechanism, chrome.runtime.onUpdateAvailable, manifest version update"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-auto-update-mechanism-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-auto-update-mechanism-guide/"
 ---
 
 # Chrome Extension Auto Update Mechanism Guide: Complete Implementation Tutorial

@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [css viewer extension, chrome extension development, css tool extension, inspect css chrome, web development tools]
 keywords: "css viewer extension, inspect css chrome, css tool extension, chrome extension css, inspect element chrome, css properties viewer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-css-viewer-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-css-viewer-chrome-extension/"
 ---
 
 # Build a CSS Properties Viewer Chrome Extension

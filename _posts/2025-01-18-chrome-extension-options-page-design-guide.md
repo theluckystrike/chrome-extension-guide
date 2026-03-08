@@ -101,13 +101,13 @@ Use standard HTML form elements consistently throughout your options page. Each 
 
 ### Instant Feedback and Saving
 
-One of the most frustrating experiences for users is unclear save states. Implement visual feedback that immediately confirms when settings are saved. With Chrome's [storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization), you can use automatic saving with debounced updates:
+One of the most frustrating experiences for users is unclear save states. Implement visual feedback that immediately confirms when settings are saved. With Chrome's storage API, you can use automatic saving with debounced updates:
 
 ```javascript
 // Example: Auto-save with visual feedback
 function saveSettings(settings) {
   return new Promise((resolve) => {
-    [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set(settings, () => {
+    chrome.storage.local.set(settings, () => {
       showSaveIndicator();
       resolve();
     });
@@ -216,17 +216,17 @@ When your options page contains modal dialogs or dynamic content updates, manage
 
 Proper data management is the backbone of any functional options page. Understanding Chrome's storage APIs is essential for building responsive and reliable settings.
 
-### Choosing the Right [Storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
+### Choosing the Right Storage API
 
 Chrome provides several storage mechanisms, each suited for different use cases:
 
-- **[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local**: Stores data locally on the user's machine. Ideal for settings that should persist across sessions. Limited to approximately 5MB of data.
+- **chrome.storage.local**: Stores data locally on the user's machine. Ideal for settings that should persist across sessions. Limited to approximately 5MB of data.
 
-- **[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync**: Automatically syncs data across all devices where the user is signed in to Chrome. Best for user preferences that should follow the user across devices. Limited to approximately 100KB of data.
+- **chrome.storage.sync**: Automatically syncs data across all devices where the user is signed in to Chrome. Best for user preferences that should follow the user across devices. Limited to approximately 100KB of data.
 
-- **[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).session**: Stores data for the current browser session only. Useful for temporary state that should not persist after the browser closes.
+- **chrome.storage.session**: Stores data for the current browser session only. Useful for temporary state that should not persist after the browser closes.
 
-For most extension settings, `[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync` is the recommended choice, as it provides a seamless experience across devices.
+For most extension settings, `chrome.storage.sync` is the recommended choice, as it provides a seamless experience across devices.
 
 ### Handling Storage Quotas
 
@@ -255,7 +255,7 @@ As your extension evolves, your settings structure may change. Implement a versi
 const CURRENT_VERSION = 2;
 
 async function migrateSettings() {
-  const { settingsVersion = 0 } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settingsVersion');
+  const { settingsVersion = 0 } = await chrome.storage.local.get('settingsVersion');
   
   if (settingsVersion < 1) {
     // Migration from v0 to v1
@@ -267,7 +267,7 @@ async function migrateSettings() {
     await migrateToV2();
   }
   
-  await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ settingsVersion: CURRENT_VERSION });
+  await chrome.storage.local.set({ settingsVersion: CURRENT_VERSION });
 }
 ```
 
@@ -284,7 +284,7 @@ When users save settings in your options page, notify other extension components
 ```javascript
 // In options page
 async function saveAndBroadcast(settings) {
-  await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set(settings);
+  await chrome.storage.local.set(settings);
   
   // Notify all extension contexts
   chrome.runtime.sendMessage({
@@ -329,7 +329,7 @@ Before publishing, verify:
 
 Consider implementing automated tests for critical functionality:
 
-- Test setting persistence using Chrome's [storage API](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) mocks
+- Test setting persistence using Chrome's storage API mocks
 - Test form validation logic independently of the UI
 - Test migration functions with various version scenarios
 
@@ -385,4 +385,4 @@ By mastering options page development, you are building a foundation for creatin
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
