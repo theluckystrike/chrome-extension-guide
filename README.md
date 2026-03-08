@@ -278,6 +278,10 @@ npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging @the
 
 ## MONETIZATION
 
+> Ready to make money from your Chrome extension? Check out the
+> [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) —
+> covering freemium, subscriptions, Stripe integration, pricing strategies, and more.
+
 - [Market Research](docs/monetization/market-research.md)
 
 ## PERMISSIONS
