@@ -613,3 +613,10 @@ Our extension uses content scripts that run on web pages, which means it should 
 **How do I add more CSS properties to view?**
 
 The current implementation already captures all computed styles. To add more features, you can modify the content script to include specific property groups or add custom analysis features.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+**Built by [theluckystrike](https://zovo.one)**

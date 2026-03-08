@@ -186,3 +186,10 @@ class Batcher {
 - [Chrome Extensions Dev](https://developer.chrome.com/docs/extensions/develop)
 - [GA4 Documentation](https://developers.google.com/analytics/devguides/collection/ga4)
 - [Sentry Chrome SDK](https://docs.sentry.io/platforms/javascript/guides/chrome/)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

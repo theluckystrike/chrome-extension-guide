@@ -932,3 +932,10 @@ With these patterns, you can extend the foundation to include advanced features 
 - Version history for palettes
 
 The complete source code for this extension pattern is available in the examples directory.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

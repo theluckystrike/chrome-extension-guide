@@ -314,3 +314,10 @@ export const SocialToolsPopup: React.FC = () => {
 ## Conclusion
 
 Building social media tools extensions requires careful handling of dynamic content, rate limiting, and cross-platform compatibility. The patterns shown here provide a solid foundation for creating robust, user-friendly extensions that can collect, analyze, and interact with social media content while respecting platform constraints and user privacy.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

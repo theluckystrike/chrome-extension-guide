@@ -539,3 +539,10 @@ For complete API documentation, see: [developer.chrome.com/docs/extensions/refer
 - Bookmark API (`chrome.bookmarks`) - for bookmark management
 - Top Sites API (`chrome.topSites`) - for frequently visited sites
 - Management API (`chrome.management`) - for extension management
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -676,3 +676,10 @@ Building reliable Chrome extension storage requires following proven patterns. H
 **Test Under Constraints**: Verify your storage implementation works correctly when approaching quota limits. Test migration patterns with realistic data sizes.
 
 By following these patterns and strategies, you'll build Chrome extensions with storage systems that are reliable, performant, and provide excellent user experience across all scenarios.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
