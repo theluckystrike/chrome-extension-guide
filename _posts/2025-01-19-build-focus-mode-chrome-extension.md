@@ -6,6 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "focus mode extension, distraction blocker chrome, deep work extension"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-focus-mode-chrome-extension/"
 ---
 
 # Build a Focus Mode Chrome Extension: Complete Development Guide

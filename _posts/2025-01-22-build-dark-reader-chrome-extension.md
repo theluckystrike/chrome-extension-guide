@@ -6,6 +6,7 @@ date: 2025-01-22
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-dark-reader-chrome-extension/"
 ---
 
 # Build a Dark Reader Chrome Extension — Complete 2025 Tutorial

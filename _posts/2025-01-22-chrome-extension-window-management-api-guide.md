@@ -6,6 +6,7 @@ date: 2025-01-22
 categories: [Chrome Extensions]
 tags: [chrome-extension]
 keywords: "window management extension, window api chrome, multi window extension"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-window-management-api-guide/"
 ---
 
 # Chrome Extension Window Management API: Complete 2025 Developer Guide

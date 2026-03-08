@@ -6,6 +6,7 @@ date: 2025-01-31
 categories: [guides, publishing]
 tags: [chrome-web-store-seo, extension-marketing, cws-listing, extension-installs, app-store-optimization]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/"
 ---
 
 # Chrome Web Store SEO — Rank Higher and Get More Installs in 2025

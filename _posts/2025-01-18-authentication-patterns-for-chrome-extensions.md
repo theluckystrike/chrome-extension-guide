@@ -6,6 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension auth, extension login flow, oauth chrome extension patterns, chrome extension authentication, manifest v3 auth, chrome identity api"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/authentication-patterns-for-chrome-extensions/"
 ---
 
 # Authentication Patterns for Chrome Extensions: A Complete Guide

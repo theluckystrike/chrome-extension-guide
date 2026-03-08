@@ -6,6 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "how ad blockers work, chrome ad blocker extension, declarativeNetRequest ad blocking"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/how-ad-blocker-chrome-extensions-work-under-the-hood/"
 ---
 
 # How Ad Blocker Chrome Extensions Work Under the Hood

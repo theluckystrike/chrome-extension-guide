@@ -19,6 +19,28 @@ defaults:
       path: ""
     values:
       reading_time: true
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+      sitemap: true
+  - scope:
+      path: "docs"
+    values:
+      sitemap: true
+
+# Exclude non-content files from sitemap
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - CONTRIBUTING.md
+  - SEO-AUDIT.md
+  - merge-all.sh
+  - merge-all2.sh
+  - examples/
 
 collections:
   docs:

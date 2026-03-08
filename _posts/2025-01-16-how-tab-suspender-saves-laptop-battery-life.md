@@ -5,6 +5,7 @@ description: "Learn how tab suspender extensions reduce Chrome power usage and e
 date: 2025-01-16
 categories: [Chrome Extensions, Performance]
 tags: [tab-suspender, battery-life, chrome-performance, power-saving]
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/how-tab-suspender-saves-laptop-battery-life/"
 ---
 
 # How Tab Suspender Extensions Save Your Laptop Battery Life

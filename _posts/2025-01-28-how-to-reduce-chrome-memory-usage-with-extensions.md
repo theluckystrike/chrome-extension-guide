@@ -6,6 +6,7 @@ date: 2025-01-28
 categories: [guides, performance]
 tags: [chrome-memory, ram-usage, tab-suspender, memory-optimization, browser-performance]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/how-to-reduce-chrome-memory-usage-with-extensions/"
 ---
 
 # How to Reduce Chrome Memory Usage with Extensions — Save Up to 80% RAM

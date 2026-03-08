@@ -5,7 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
-  <link rel="canonical" href="{{ page.canonical_url }}">
+  {% assign canonical = page.canonical_url | default: page.url | absolute_url %}
+  <link rel="canonical" href="{{ canonical }}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:type" content="{% if page.layout == 'post' or page.date %}article{% else %}website{% endif %}">
+  <meta property="og:locale" content="en_US">
+  {% if page.date %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  {% endif %}
+  {% if page.last_modified_at %}
+  <meta property="article:modified_time" content="{{ page.last_modified_at | date_to_xmlschema }}">
+  {% endif %}
+  {% if page.categories %}
+  {% for category in page.categories %}
+  <meta property="article:tag" content="{{ category }}">
+  {% endfor %}
+  {% endif %}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description | escape }}">
+  <meta name="twitter:site" content="@theluckystrike">
+
   {% if jekyll.environment == "production" and site.google_analytics %}
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
@@ -40,12 +67,15 @@
     },
     "url": "{{ page.url | absolute_url }}",
     "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
-    "dateModified": "{{ page.last_modified_at | default: site.time | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | default: site.time | date_to_xmlschema }}",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}"
     },
     "inLanguage": "en-US",
+    {% if page.tags %}"keywords": "{{ page.tags | join: ', ' | escape }}",{% endif %}
+    {% if page.categories %}"articleSection": "{{ page.categories | first | escape }}",{% endif %}
+    "wordCount": {{ content | number_of_words }},
     "isPartOf": {
       "@type": "WebSite",
       "name": "{{ site.title | escape }}",
@@ -186,7 +216,10 @@
     <nav class="sidebar">
       <h2>Chrome Extension Guide</h2>
       <ul>
-        <li><a href="{{ '/search/' | relative_url }}">🔍 Search</a></li>
+        <li><a href="{{ '/search/' | relative_url }}">Search</a></li>
+        <li><a href="{{ '/articles/' | relative_url }}">All Articles</a></li>
+        <li><a href="{{ '/categories/' | relative_url }}">Categories</a></li>
+        <li><a href="{{ '/tags/' | relative_url }}">Tags</a></li>
         <li><a href="{{ '/docs/permissions/' | relative_url }}">Permissions</a></li>
         <li><a href="{{ '/docs/api-reference/' | relative_url }}">API Reference</a></li>
         <li><a href="{{ '/docs/guides/' | relative_url }}">Guides</a></li>

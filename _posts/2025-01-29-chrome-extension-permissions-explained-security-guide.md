@@ -6,6 +6,7 @@ date: 2025-01-29
 categories: [guides, security]
 tags: [chrome-permissions, extension-security, manifest-permissions, activeTab, host-permissions]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-permissions-explained-security-guide/"
 ---
 
 # Chrome Extension Permissions Explained — Complete Security Guide

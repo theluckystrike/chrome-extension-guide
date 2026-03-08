@@ -6,6 +6,7 @@ date: 2025-01-21
 categories: [guides, performance]
 tags: [chrome extension performance, profile extension, extension bottleneck, optimize extension speed]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-performance-profiling-guide/"
 ---
 
 # Chrome Extension Performance Profiling: Find and Fix Bottlenecks

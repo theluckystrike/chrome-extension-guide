@@ -6,6 +6,7 @@ date: 2025-01-24
 categories: [guides, performance]
 tags: [browser-ram, chrome-memory, tab-suspender, ram-reduction, browser-performance]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/why-browser-uses-so-much-ram-chrome-extensions-help/"
 ---
 
 # Why Your Browser Uses So Much RAM — And How Chrome Extensions Can Help
