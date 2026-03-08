@@ -7,9 +7,11 @@ markdown: kramdown
 highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
+
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-feed
 
 defaults:
   - scope:
@@ -17,12 +19,6 @@ defaults:
     values:
       reading_time: true
 
-
 collections:
   docs:
     output: true
-
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-feed
