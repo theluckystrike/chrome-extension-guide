@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome Extension Monetization Playbook</title>
+  <meta name="description" content="A comprehensive guide to monetizing your Chrome extension. Learn pricing strategies, market research, competitor analysis, and user interview techniques.">
+  <meta property="og:title" content="Chrome Extension Monetization Playbook">
+  <meta property="og:description" content="Master Chrome extension monetization with our comprehensive playbook">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --accent: #4ade80;
+      --accent-dark: #22c55e;
+      --border: #30363d;
+      --code-bg: #1c2128;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    /* Cards Grid */
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 50px 0;
+    }
+    .article-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .article-card h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .article-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .article-card .link {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .article-card .link:hover {
+      text-decoration: underline;
+    }
+    /* CTA Section */
+    .cta-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta-section h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .cta-button:hover {
+      background: var(--accent-dark);
+      text-decoration: none;
+    }
+    /* Features */
+    .features {
+      margin: 60px 0;
+    }
+    .features h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .feature-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .feature-item h3 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-item h3::before {
+      content: "✓";
+      color: var(--accent);
+    }
+    .feature-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 50px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--text);
+    }
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .subtitle { font-size: 1rem; }
+      .articles { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Chrome Extension Monetization Playbook</h1>
+      <p class="subtitle">A comprehensive guide to building a sustainable revenue stream from your Chrome extension</p>
+    </section>
+
+    <!-- Monetization Articles -->
+    <section class="articles">
+      <div class="article-card">
+        <h3>SaaS Pricing</h3>
+        <p>Learn how to structure your pricing tiers, set competitive rates, and implement subscription models that convert.</p>
+        <a href="saas-pricing.html" class="link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Market Research</h3>
+        <p>Discover your target audience, understand willingness to pay, and identify market gaps for your extension.</p>
+        <a href="market-research.html" class="link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Competitor Analysis</h3>
+        <p>Analyze competing extensions, understand their pricing strategies, and find your unique value proposition.</p>
+        <a href="competitor-analysis.html" class="link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <h3>User Interviews</h3>
+        <p>Master the art of interviewing users to validate pricing, discover pain points, and improve your product-market fit.</p>
+        <a href="user-interviews.html" class="link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Product Roadmap</h3>
+        <p>Plan your extension's evolution with feature prioritization frameworks that align with revenue goals.</p>
+        <a href="product-roadmap.html" class="link">Read Article →</a>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>Ready to Start Building?</h2>
+      <p>Explore our comprehensive Chrome extension development guides and start building your extension today.</p>
+      <a href="https://theluckystrike.github.io/chrome-extension-guide/" class="cta-button">View Full Guide</a>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2>What's Included in the Playbook</h2>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h3>Freemium Models</h3>
+          <p>Learn when and how to offer free tiers that convert to paid users.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Subscription Strategies</h3>
+          <p>Best practices for recurring revenue and trial periods.</p>
+        </div>
+        <div class="feature-item">
+          <h3>License Validation</h3>
+          <p>Secure patterns for validating purchases and preventing piracy.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Payment Processing</h3>
+          <p>Integrate Stripe, Paddle, and other payment providers.</p>
+        </div>
+        <div class="feature-item">
+          <h3>User Retention</h3>
+          <p>Keep users engaged and reduce churn with proven tactics.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Analytics & Metrics</h3>
+          <p>Track the metrics that matter for monetization success.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Built at <a href="https://zovo.one">zovo.one</a> by <a href="https://github.com/theluckystrike">theluckystrike</a></p>
+  </footer>
+</body>
+</html>
