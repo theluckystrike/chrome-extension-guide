@@ -75,7 +75,7 @@ Every article must include Jekyll front matter at the top of the file:
 
 ```yaml
 ---
-layout: default
+layout: guide
 title: "Your Title Here"
 description: "SEO-friendly description under 160 characters"
 permalink: /guides/your-article-slug/
@@ -102,7 +102,7 @@ Use this template as a starting point for new articles:
 
 ```markdown
 ---
-layout: default
+layout: guide
 title: ""
 description: ""
 permalink: /guides/chrome-extension-your-topic/
