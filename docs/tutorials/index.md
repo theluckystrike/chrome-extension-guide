@@ -24,6 +24,7 @@ Each tutorial covers the entire development process: planning, manifest configur
 - [build-color-palette-extractor](build-color-palette-extractor.html)
 - [build-color-picker](build-color-picker.html)
 - [build-content-blocker](build-content-blocker.html)
+- [declarative-net-request](declarative-net-request.html)
 - [build-cookie-manager](build-cookie-manager.html)
 - [build-copy-as-markdown](build-copy-as-markdown.html)
 - [build-css-inspector](build-css-inspector.html)
