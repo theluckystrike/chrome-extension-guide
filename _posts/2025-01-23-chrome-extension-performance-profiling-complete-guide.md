@@ -1,13 +1,11 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Performance Profiling — Find and Fix Bottlenecks"
 description: "Master Chrome DevTools for extension profiling. CPU profiling, memory snapshots, network waterfall, service worker lifecycle analysis, and content script performance."
 date: 2025-01-23
 categories: [guides, performance]
 tags: [performance-profiling, chrome-devtools, cpu-profiling, memory-profiling, extension-debugging]
 author: theluckystrike
-keywords: "chrome extension performance profiling, chrome devtools profiling, service worker profiling, memory heap snapshots, content script performance"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/chrome-extension-performance-profiling-complete-guide/"
 ---
 
 # Chrome Extension Performance Profiling — Find and Fix Bottlenecks
