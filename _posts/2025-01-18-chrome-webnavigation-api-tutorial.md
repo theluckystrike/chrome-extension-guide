@@ -599,3 +599,9 @@ Key takeaways from this guide:
 With these patterns and practices, you're well-equipped to build robust Chrome extensions that effectively leverage the WebNavigation API. The API's detailed event model provides the foundation for creating powerful page detection, analytics, and content manipulation extensions that enhance the browsing experience.
 
 Start experimenting with the code examples in this guide, and you'll quickly discover the vast potential of the Chrome WebNavigation API for your extension projects.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

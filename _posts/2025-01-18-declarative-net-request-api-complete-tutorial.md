@@ -457,3 +457,9 @@ Throughout this tutorial, you've learned the fundamental concepts of rules, rule
 As you continue developing your extension, remember to test thoroughly across different scenarios and browsers, stay updated with Chrome's API changes, and always prioritize user privacy and experience. The DeclarativeNetRequest API provides powerful capabilities—use them responsibly to create extensions that users trust and value.
 
 With this knowledge, you're now equipped to build sophisticated network filtering extensions that leverage the full power of Manifest V3. Start experimenting with your own rule sets, and don't hesitate to explore the additional possibilities that the DeclarativeNetRequest API offers.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

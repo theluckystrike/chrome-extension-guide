@@ -543,3 +543,9 @@ The **web vitals extension** you build following this guide provides immediate, 
 As web performance continues to play an increasingly important role in user experience and search rankings, tools like this become essential. Start building your extension today, and contribute to a faster, more stable web for everyone.
 
 Remember, the best **performance metrics extension** is one that not only measures accurately but also helps users understand and improve their web experiences. Keep iterating, gather feedback, and continue enhancing your extension to make Core Web Vitals accessible to everyone.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

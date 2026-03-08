@@ -416,4 +416,8 @@ Tab Suspender Pro's automatic suspension is based on per-tab inactivity timers, 
 
 ---
 
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
 Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike. Tab Suspender Pro available on the [Chrome Web Store](https://chromewebstore.google.com). Professional extension development at [zovo.one](https://zovo.one).

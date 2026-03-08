@@ -321,3 +321,10 @@ async function applyTheme() {
 - Ensure accessibility throughout
 - Test with keyboard-only navigation
 - Support dark mode via system preference + manual override
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

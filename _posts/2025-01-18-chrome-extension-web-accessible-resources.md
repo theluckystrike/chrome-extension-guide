@@ -398,3 +398,9 @@ Web Accessible Resources are an essential feature of Chrome extension developmen
 Remember the key principles: always use the most restrictive match patterns possible, use chrome.runtime.getURL() for dynamic URL generation, avoid exposing unnecessary resources, and regularly audit your configuration as your extension evolves.
 
 With this knowledge, you're now equipped to implement Web Accessible Resources effectively in your Chrome extensions, creating more robust and secure user experiences.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

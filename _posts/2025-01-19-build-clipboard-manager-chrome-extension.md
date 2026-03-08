@@ -745,3 +745,9 @@ Building a clipboard history chrome extension is an excellent portfolio project 
 Here is a summary of all the files we created in this tutorial. The manifest.json file configures the extension with proper permissions and background service worker. The background.js file handles clipboard monitoring and storage. The popup.html file defines the user interface. The popup.css file provides the styling. The popup.js file implements user interactions and history display.
 
 You now have a complete, working clipboard manager extension that solves real problems for users. Consider adding some final touches like improving the icons, adding a nice icon badge showing the number of items, and testing across different scenarios before using it daily or sharing it with others.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

@@ -830,3 +830,9 @@ Remember to prioritize user experience by including features like automatic syst
 With the foundation provided in this guide, you can extend and customize your dark mode implementation to create unique features that set your extension apart. Whether you're building a simple dark mode toggle or a comprehensive theme management system, the principles remain the same: respect user preferences, optimize for performance, and test extensively.
 
 Start building your dark mode extension today and join the thousands of developers who are making the web more comfortable for users around the world.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

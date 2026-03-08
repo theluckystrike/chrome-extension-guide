@@ -443,3 +443,9 @@ Building a PDF viewer Chrome extension is an excellent project that combines web
 The foundation you have built can be extended in numerous directions based on your specific needs and user feedback. Whether you want to add cloud storage integration, collaborative annotation features, or support for additional file formats, the architectural patterns established here will serve as a solid foundation for future development.
 
 Remember that successful extensions evolve based on user feedback and changing requirements. Monitor reviews, analyze usage patterns, and continue improving your extension to provide the best possible PDF viewing experience for your users.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

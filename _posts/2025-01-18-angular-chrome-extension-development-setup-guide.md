@@ -401,3 +401,9 @@ Finally, thoroughly test your extension across different Chrome versions and con
 Building Chrome extensions with Angular combines the best of modern web development with powerful browser integration capabilities. This guide covered the essential setup steps, from creating an Angular project and configuring it for extension development, through implementing popups, content scripts, and inter-component communication. The patterns and practices outlined here provide a solid foundation for building sophisticated, production-ready Chrome extensions using Angular's powerful feature set.
 
 The Angular Chrome extension development workflow offers significant advantages in terms of code organization, maintainability, and developer experience. As you continue developing extensions, explore additional Angular features like signals for reactive state management, server-side rendering for complex UIs, and the extensive ecosystem of Angular-compatible libraries that can accelerate your development.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

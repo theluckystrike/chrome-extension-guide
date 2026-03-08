@@ -431,3 +431,9 @@ The key principles to remember are transparency, proportionality, and respect. Y
 By following these principles, you create a tool that provides genuine value without causing harm. Users will appreciate the functionality, website owners won't have cause for complaint, and you'll build something you can be proud of—something that demonstrates technical skill while maintaining ethical standards.
 
 The lead generation tools market continues to grow, and there's room for well-designed, ethical alternatives to questionable scraping services. Your extension can be part of that solution.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

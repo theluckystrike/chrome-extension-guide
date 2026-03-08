@@ -525,3 +525,9 @@ Building a regex tester chrome extension is an excellent project that combines p
 The extension you have created provides real-time pattern matching, capture group display, match highlighting, and replacement functionality—all essential features for any developer working with regular expressions. This foundation can serve as the basis for additional features or as a template for other Chrome extension projects.
 
 Regular expression skills remain valuable in modern web development, and having a powerful regex debugger extension at your fingertips makes pattern development significantly more efficient. Your completed extension stands as a practical tool that you can use daily while also demonstrating your ability to build production-quality browser extensions.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*

@@ -565,3 +565,9 @@ With Manifest V2 extensions facing eventual removal, completing this migration p
 ---
 
 *Ready to begin your migration? Start with the pre-migration preparation section and work through each checklist item systematically for the best results.*
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+*Built by theluckystrike at zovo.one*
