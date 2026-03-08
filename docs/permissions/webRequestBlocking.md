@@ -61,6 +61,37 @@ chrome.webRequest.onBeforeRequest.addListener(
 | Modify headers | `{ "type": "modifyHeaders", "requestHeaders": [...] }` |
 | Custom logic | Static/dynamic rules |
 
+## Common Use Cases
+
+### Ad Blocking
+In MV2, developers could intercept all network requests and cancel those matching ad-related patterns. This was a popular use case for ad-blocking extensions. In MV3, this functionality is now handled by the Declarative Net Request API with static rulesets.
+
+### Request Modification
+Extensions could modify request headers before they were sent, adding authentication tokens, custom headers, or removing sensitive information. This was useful for adding API keys or modifying user-agent strings.
+
+### URL Redirection
+Redirect users away from malicious or unwanted URLs by intercepting navigation requests and providing an alternative destination. This was commonly used for phishing protection.
+
+### Content Filtering
+Filter specific content types or resources based on URL patterns, such as blocking large images or preventing the loading of specific file types.
+
+## Best Practices
+
+### Migrate to MV3 Declarative Net Request
+If you're maintaining an MV2 extension, prioritize migrating to MV3 using `declarativeNetRequest`. The new API is more performant and has been designed with security and privacy in mind.
+
+### Understand the Limitations
+The declarative approach means you can't have custom logic for every request. Rules must be defined statically or as dynamic rules, not computed per-request in real-time.
+
+### Use Static Rules for Common Blocking
+For well-known ad networks or tracking domains, use predefined static rules. This is more efficient than dynamic rules and can be updated through the extension's update mechanism.
+
+### Test Thoroughly in Both Versions
+If you must support MV2, test your extension's network interception thoroughly. The behavior can differ between versions, and blocking requests may have unexpected side effects on web pages.
+
+### Consider Privacy Implications
+Be transparent about what your extension blocks or modifies. The removal of `webRequestBlocking` in MV3 was partly driven by privacy concerns about extensions observing all network traffic.
+
 ## When to Use
 - Only in MV2 extensions (legacy)
 - Migrate to `declarativeNetRequest` for MV3

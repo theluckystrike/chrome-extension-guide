@@ -125,6 +125,77 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
+### Presence Detection for Collaboration
+
+```javascript
+function updatePresence(state) {
+  const status = state === 'active' ? 'available' : 'away';
+  // Send presence update to your server
+  fetch('/api/presence', {
+    method: 'POST',
+    body: JSON.stringify({ status, timestamp: Date.now() })
+  });
+}
+
+chrome.idle.onStateChanged.addListener(updatePresence);
+```
+
+### Resource Management
+
+```javascript
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === 'idle') {
+    // Pause resource-intensive operations
+    pauseSync();
+    pauseNotifications();
+  } else if (state === 'active') {
+    // Resume operations
+    resumeSync();
+    processQueuedNotifications();
+  }
+});
+```
+
+## Common Use Cases
+
+### Auto-Save and Draft Management
+The most common use case for the idle API is automatically saving user work when they step away. This protects against data loss if the user forgets to save or if the browser crashes.
+
+### Security and Privacy
+Lock sensitive data or session information when the user is away or when the screen is locked. This is particularly important for extensions handling authentication tokens or sensitive documents.
+
+### Presence Systems
+For collaboration tools, track whether users are at their computers. This helps team members know when colleagues are available for quick questions or meetings.
+
+### Battery and Resource Management
+Reduce background activity when the user is away to conserve system resources and battery life. This includes pausing sync operations, reducing network requests, and limiting background processing.
+
+### Time Tracking and Productivity
+Track how much time users spend active versus idle. This is useful for productivity extensions that help users understand their work patterns and identify time wastage.
+
+## Best Practices
+
+### Set Appropriate Detection Intervals
+The default detection interval may not suit all use cases. For auto-save, 30-60 seconds is typically good. For resource management, longer intervals (5-10 minutes) might be more appropriate.
+
+### Handle All Three States
+Your code should handle all three states: `active`, `idle`, and `locked`. Each represents a different level of user presence and may require different responses.
+
+### Store Last Known State
+In MV3, service workers can be terminated. Store the last known idle state so you can take appropriate action when the service worker wakes up.
+
+### Combine with Alarms for Periodic Checks
+For continuous monitoring, combine idle detection with `chrome.alarms` to periodically check state even after the service worker has been terminated.
+
+### Consider Battery Impact
+Frequent state checks and listeners can impact battery life, especially on laptops. Balance the need for real-time updates with power efficiency.
+
+### Test on Different Platforms
+Idle detection behavior can vary between platforms (Windows, macOS, Linux). Test your extension on all target platforms to ensure consistent behavior.
+
+### Provide User Control
+Allow users to configure idle detection settings. Some users may want immediate idle detection while others prefer longer intervals.
+
 ---
 
 ## Cross-References

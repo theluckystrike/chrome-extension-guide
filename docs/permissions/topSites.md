@@ -43,12 +43,8 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 - Quick-launch panel: easy access to frequent sites
 
 ## Code Examples
-- Fetch and display top sites
-- Custom new tab page with top sites grid
-- Cache top sites with @theluckystrike/webext-storage and refresh interval
-- Combine with favicon API for site icons
 
-## Fetch and Display Top Sites
+### Fetch and Display Top Sites
 ```typescript
 const topSites = await chrome.topSites.get();
 for (const site of topSites) {
@@ -56,7 +52,7 @@ for (const site of topSites) {
 }
 ```
 
-## Custom New Tab Page
+### Custom New Tab Page
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -77,6 +73,79 @@ async function getTopSitesGrid() {
 }
 ```
 
-## Cross-references
+### Speed Dial Implementation
+```typescript
+function createSpeedDialHTML(sites) {
+  return sites.slice(0, 12).map(site => `
+    <a href="${site.url}" class="speed-dial-item" title="${site.title}">
+      <div class="favicon">
+        <img src="https://www.google.com/s2/favicons?domain=${new URL(site.url).hostname}&sz=64" />
+      </div>
+      <span class="title">${site.title}</span>
+    </a>
+  `).join('');
+}
+```
+
+### Quick Access Popup
+```typescript
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.tabs.create({ url: 'quick-launch.html' });
+});
+
+async function renderQuickLaunch() {
+  const sites = await chrome.topSites.get();
+  const container = document.getElementById('sites');
+  
+  sites.forEach(site => {
+    const link = document.createElement('a');
+    link.href = site.url;
+    link.textContent = site.title;
+    container.appendChild(link);
+  });
+}
+```
+
+## Common Use Cases
+
+### Custom New Tab Pages
+The most popular use case for `topSites` is creating custom new tab pages that display a speed dial or grid of frequently visited sites. This provides quick access without requiring users to navigate to their bookmarks.
+
+### Productivity Dashboards
+Build dashboard extensions that show users their browsing patterns. This helps users understand their habits and provides quick access to frequently used tools and sites.
+
+### Quick Launch Panels
+Create popup panels or side panels that function as a quick launcher. Users can type to filter their top sites and press Enter to navigate to the selected site.
+
+### Browsing Analytics
+Display statistics about users' browsing habits. Show which sites they visit most, how many unique sites they visit, and trends over time.
+
+### Site Recommendation Engine
+Analyze top sites and provide recommendations based on browsing patterns. For example, suggest productivity tools to users who frequently visit work-related sites.
+
+## Best Practices
+
+### Respect User Privacy
+Top sites reveal sensitive information about user behavior. Never transmit this data to external servers without explicit consent. Store and process all data locally.
+
+### Implement Caching
+Since there are no events, implement caching to reduce API calls. Cache results for a reasonable period (5-15 minutes is typical) and only refresh when needed.
+
+### Handle Empty States
+Some users may have no browsing history or have cleared their history. Provide helpful empty states and alternative content in these cases.
+
+### Provide User Control
+Allow users to exclude sites from appearing in top sites. Some users may not want certain sites (like banking or email) appearing in quick access lists.
+
+### Consider Performance
+Rendering many favicons can be slow. Use lazy loading or a service like Google's favicon API with appropriate sizing to improve performance.
+
+### Be Transparent About the Permission
+The `topSites` permission requires a user warning and may undergo additional review in the Chrome Web Store. Be transparent about why you need this permission.
+
+### Test with New Users
+New Chrome profiles have minimal browsing history. Test your extension with fresh profiles to ensure the UI handles sparse data gracefully.
+
+## Cross-References
 - patterns/top-sites.md
 - tutorials/build-new-tab.md

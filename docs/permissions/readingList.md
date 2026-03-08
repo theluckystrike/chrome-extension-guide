@@ -73,12 +73,22 @@ Returns array of ReadingListEntry objects.
 { "permissions": ["readingList"] }
 ```
 
-## Use Cases
+## Common Use Cases
 
-- Read-later: save articles from context menu
-- Content curation: batch add URLs from feeds
-- Research tools: organize research reading
-- Reading tracker: mark as read/unread
+### Read-Later Functionality
+The primary use case for the Reading List API is enabling users to save articles for later reading. Extensions can add a context menu option or toolbar button that saves the current page to Chrome's built-in Reading List with a single click.
+
+### Content Curation
+Build tools that allow users or content curators to batch-add URLs from RSS feeds, newsletters, or other sources. This is useful for building curated reading lists from multiple sources.
+
+### Research Tools
+Academic researchers and professionals can use the API to organize research materials. They can add articles, papers, and resources to the reading list and track which items have been read.
+
+### Reading Progress Tracking
+Track reading progress by marking entries as read or unread. The `hasBeenRead` property can be updated automatically when users visit a URL or manually through extension controls.
+
+### Bookmark Migration
+Help users migrate from traditional bookmarks to the Reading List, or sync between different bookmarking services and Chrome's Reading List.
 
 ## Code Examples
 
@@ -114,6 +124,61 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 ```
+
+### Batch add from URLs
+
+```javascript
+async function addMultipleUrls(urls) {
+  for (const { url, title } of urls) {
+    try {
+      await chrome.readingList.addEntry({ url, title, hasBeenRead: false });
+    } catch (e) {
+      // Entry already exists, skip or update
+      console.log(`Skipping ${url}: ${e.message}`);
+    }
+  }
+}
+```
+
+### Search reading list
+
+```javascript
+// Find entries containing a specific term
+async function searchReadingList(query) {
+  const all = await chrome.readingList.query({});
+  return all.filter(entry => 
+    entry.title.toLowerCase().includes(query.toLowerCase()) ||
+    entry.url.toLowerCase().includes(query.toLowerCase())
+  );
+}
+```
+
+## Best Practices
+
+### Handle Duplicate Entries
+The `addEntry` method throws an error if the URL already exists in the Reading List. Always handle this gracefully by catching the error or checking if the entry exists first.
+
+### Sync Read Status Carefully
+Be mindful when automatically marking entries as read. Users may want to revisit articles without losing their place. Consider providing an option to disable automatic read status updates.
+
+### Respect User Privacy
+Reading List entries contain browsing history information. Never transmit this data to external servers without explicit user consent, and be transparent in your privacy policy.
+
+### Use Descriptive Titles
+When adding entries programmatically, use meaningful titles. The page title is usually the best choice, but you might want to allow users to edit titles before saving.
+
+### Consider Storage Quotas
+While Chrome's Reading List has generous storage, be mindful of the volume of entries. Consider implementing cleanup of old or read entries to keep the list manageable.
+
+### Handle Events for Real-Time Updates
+Use the Reading List events to keep your extension's UI in sync with changes made through Chrome's native UI or other extensions.
+
+## Use Cases
+
+- Read-later: save articles from context menu
+- Content curation: batch add URLs from feeds
+- Research tools: organize research reading
+- Reading tracker: mark as read/unread
 
 ## Cross-references
 

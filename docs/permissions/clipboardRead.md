@@ -79,6 +79,46 @@ m.onMessage('GET_CLIPBOARD', async () => {
 });
 ```
 
+## Common Use Cases
+
+### Clipboard Managers
+Build comprehensive clipboard history managers that track multiple clipboard entries, allow searching through history, and let users paste previous items.
+
+### Paste Transformers
+Process clipboard content before pasting. For example, automatically format text, convert between formats (Markdown to HTML), or apply text transformations.
+
+### Data Extraction
+Extract specific data from clipboard content. For instance, parse URLs from copied text, extract email addresses from selected content, or pull structured data from copied spreadsheet cells.
+
+### Quick Note Capture
+Allow users to quickly capture clipboard contents as notes. This is useful for research, where users want to save information they've copied from web pages.
+
+### Form Auto-Fill
+Automatically fill form fields with data from the clipboard. This could include pasting addresses, phone numbers, or other frequently used information.
+
+## Best Practices
+
+### Use Offscreen Documents for Service Workers
+In MV3, service workers cannot directly access the clipboard API. Always use an offscreen document for clipboard operations in the background script.
+
+### Handle Permission Gracefully
+The clipboardRead permission triggers a significant warning. Only request it when necessary and explain to users why you need access.
+
+### Respect User Privacy
+Clipboard content may contain sensitive information (passwords, personal data, credit card numbers). Never transmit clipboard data to external servers without explicit consent.
+
+### Implement Security Measures
+Consider adding options to exclude sensitive apps or to clear clipboard after reading. Some users may want to manually approve clipboard access.
+
+### Cache When Appropriate
+Clipboard access can be slow. If you need to access clipboard content multiple times, consider caching it temporarily rather than reading repeatedly.
+
+### Handle Empty or Unsupported Content
+The clipboard may be empty or contain unsupported formats. Always handle these cases gracefully in your code.
+
+### Provide Visual Feedback
+Let users know when clipboard content has been read and what will happen with it. This builds trust and helps users understand your extension's behavior.
+
 ## When to Use
 - Clipboard managers, paste transformers, data extraction from clipboard
 
