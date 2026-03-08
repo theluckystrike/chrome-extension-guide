@@ -322,4 +322,10 @@ MIT
 
 ---
 
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+
+---
+
 Built at [zovo.one](https://zovo.one) by [theluckystrike](https://github.com/theluckystrike)
