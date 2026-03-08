@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Chrome Extension Guide Website
+    url: https://theluckystrike.github.io/chrome-extension-guide/
+    about: Main documentation site for the Chrome Extension Guide
+  - name: Extension Monetization Playbook
+    url: https://theluckystrike.github.io/extension-monetization-playbook/
+    about: Resources for monetizing Chrome extensions
+  - name: Zovo
+    url: https://zovo.one
+    about: Zovo platform resources
