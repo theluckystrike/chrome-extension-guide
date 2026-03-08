@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome password manager extension, secure password extension, credential storage extension, build password manager chrome extension, chrome extension encryption"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-password-manager-chrome-extension-securely/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-password-manager-chrome-extension-securely/"
 ---
 
 # Building a Password Manager Chrome Extension Securely: Complete Developer Guide

@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions]
 tags: [chrome-extension, development]
 keywords: "declarativeNetRequest tutorial, chrome network rules, mv3 network blocking, chrome.declarativeNetRequest API, Manifest V3 network request modification"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/"
 ---
 
 # DeclarativeNetRequest API Complete Tutorial: Master Chrome Network Rules in Manifest V3
@@ -460,6 +460,6 @@ With this knowledge, you're now equipped to build sophisticated network filterin
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

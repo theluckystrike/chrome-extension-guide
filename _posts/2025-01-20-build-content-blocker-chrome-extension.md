@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome Extensions]
 tags: [chrome-extension, development]
 keywords: "content blocker extension, element hider chrome, page cleaner extension, chrome content blocker tutorial, build ad blocker chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-content-blocker-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-content-blocker-chrome-extension/"
 ---
 
 # Build a Content Blocker Chrome Extension: Complete Developer's Guide

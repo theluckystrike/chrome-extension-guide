@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome Extensions]
 tags: [chrome-extension, development]
 keywords: "grpc chrome extension, grpc web extension, protobuf extension, chrome extension grpc client, gRPC web chrome, protocol buffers extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-grpc-web-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-grpc-web-guide/"
 ---
 
 # gRPC-Web in Chrome Extensions: Complete Implementation Guide for 2025

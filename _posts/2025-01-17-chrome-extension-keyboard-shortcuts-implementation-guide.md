@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, keyboard-shortcuts, hotkeys, commands-api, development, guide]
 keywords: "chrome extension keyboard shortcuts, extension commands api, hotkeys chrome extension, chrome extension hotkeys implementation, manifest v3 keyboard shortcuts"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/"
 ---
 
 # Chrome Extension Keyboard Shortcuts Implementation Guide

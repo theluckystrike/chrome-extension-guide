@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome Extensions]
 tags: [chrome-extension]
 keywords: "encrypted storage extension, secure data chrome, encryption extension, chrome extension encrypted storage, secure local storage chrome extension, browser extension encryption"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-local-storage-encryption/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-local-storage-encryption/"
 ---
 
 # Encrypted Local Storage in Chrome Extensions: Complete Guide for Secure Data Chrome

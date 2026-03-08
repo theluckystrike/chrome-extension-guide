@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension error tracking, extension crash reporting, chrome extension monitoring, chrome extension debugging, manifest v3 error handling, extension reliability"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/error-tracking-monitoring-chrome-extensions/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/error-tracking-monitoring-chrome-extensions/"
 ---
 
 # Error Tracking and Monitoring for Chrome Extensions: The Complete Guide
@@ -280,6 +280,6 @@ By following the practices outlined in this guide, you will be well-equipped to 
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

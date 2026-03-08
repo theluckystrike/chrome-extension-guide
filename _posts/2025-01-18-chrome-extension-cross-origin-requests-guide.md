@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension cors, cross origin extension, fetch api chrome extension, chrome extension cross origin requests, manifest v3 host permissions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/"
 ---
 
 # Cross-Origin Requests in Chrome Extensions: Complete CORS & Fetch API Guide

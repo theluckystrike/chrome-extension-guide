@@ -149,6 +149,6 @@ The path to five-star success begins with understanding your users, listening to
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

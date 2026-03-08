@@ -186,7 +186,7 @@ Now create the deployment job:
           name: extension
       
       - name: Get access token
-        uses: google-github-actions/[auth](https://theluckystrike.github.io/extension-monetization-playbook/monetization/authentication)@v2
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       
@@ -428,4 +428,4 @@ Remember that CI/CD is an ongoing investment. Regularly review and optimize your
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

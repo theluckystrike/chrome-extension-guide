@@ -759,7 +759,7 @@ With these skills, you can build Chrome extensions that securely connect to Goog
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *This guide is part of the Chrome Extension Guide series. For more tutorials on Chrome extension development, explore our comprehensive guides on [Chrome extension development](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) and [publishing to the Chrome Web Store](/chrome-extension-guide/2025/01/17/publish-chrome-extension-web-store-2025-guide/).*

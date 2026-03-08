@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "screen recorder extension, record screen chrome, screen capture extension, chrome screen recording, chrome extension development, MediaRecorder API, Display Media API"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-screen-recorder-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-screen-recorder-chrome-extension/"
 ---
 
 # Build a Screen Recorder Chrome Extension

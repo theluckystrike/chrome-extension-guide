@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome notifications api tutorial, push notifications chrome extension, chrome extension notification guide, chrome.webNotifications API, Manifest V3 notifications"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/"
 ---
 
 # Chrome Extension Notifications API: Complete Guide for Developers

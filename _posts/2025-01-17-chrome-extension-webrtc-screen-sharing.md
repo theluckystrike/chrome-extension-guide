@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome Extensions, Development]
 tags: [chrome-extension, webrtc, screen-sharing, tutorial]
 keywords: "chrome extension screen sharing, webrtc chrome extension, screen capture api, chrome screen capture extension, getDisplayMedia, WebRTC screen share"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-webrtc-screen-sharing/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-webrtc-screen-sharing/"
 ---
 
 # Build Screen Sharing with Chrome Extensions and WebRTC
