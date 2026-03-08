@@ -317,3 +317,16 @@ Review crash reports weekly. Look for patterns: errors that spike after a new re
 ## Conclusion
 
 Implementing comprehensive crash reporting across your Chrome extension's various contexts gives you visibility into real-world issues affecting your users. Start with basic error handlers, integrate a service like Sentry for richer diagnostics, and establish regular review processes to turn crash data into actionable fixes. The investment pays dividends through improved user satisfaction, better reviews, and a more stable extension.
+<<<<<<< HEAD
+=======
+
+## Related Articles
+
+- [Feature Flags](../patterns/feature-flags.md) - Kill switches for emergency responses
+- [Extension Feature Flags Implementation](../patterns/extension-feature-flags-impl.md) - Disable problematic features
+- [Remote Config](./remote-config.md) - Update settings without republishing
+- [A/B Testing](../patterns/extension-ab-testing.md) - Monitor experiment errors
+- [Extension Onboarding](../patterns/extension-onboarding.md) - Track onboarding errors
+- [Extension Logging](../guides/extension-logging.md) - Structured logging patterns
+- [Storage API](../permissions/storage.md) - Error queuing and persistence
+>>>>>>> f7893b1 (Add cross-links between guides and related articles)

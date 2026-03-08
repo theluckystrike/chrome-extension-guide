@@ -260,3 +260,15 @@ Remote configuration is an essential pattern for production Chrome extensions. B
 Start with a simple JSON endpoint and basic caching, then evolve toward成熟的 solutions like Firebase Remote Config or dedicated feature flag platforms as your needs grow. Remember to always prioritize security through HTTPS and input validation, and design for failure with robust fallback defaults.
 
 With remote config in place, your extension becomes truly dynamic—adapting to user needs and business requirements long after the initial publish.
+<<<<<<< HEAD
+=======
+
+## Related Articles
+
+- [Feature Flags](../patterns/feature-flags.md) - Toggle features on/off
+- [Extension Feature Flags Implementation](../patterns/extension-feature-flags-impl.md) - Detailed flag patterns
+- [A/B Testing](../patterns/extension-ab-testing.md) - Experiment with variants
+- [Crash Reporting](./crash-reporting.md) - Monitor remote config errors
+- [Alarms Scheduling](../guides/alarms-scheduling.md) - Periodic config refresh
+- [Storage API](../permissions/storage.md) - Cache configuration locally
+>>>>>>> f7893b1 (Add cross-links between guides and related articles)

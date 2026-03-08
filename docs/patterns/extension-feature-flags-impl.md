@@ -316,3 +316,8 @@ function trackFeatureUsage(featureName, flags) {
 - [Feature Flags](./feature-flags.md)
 - [Extension Configuration](./extension-configuration.md)
 - [Chrome Extension Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
+- [Remote Config](../guides/remote-config.md) - Server-side configuration delivery
+- [A/B Testing](./extension-ab-testing.md) - Experiment with feature variants
+- [Crash Reporting](../guides/crash-reporting.md) - Monitor flag-related errors
+- [Storage Permission](../permissions/storage.md) - Persist flag state
+- [Alarms Permission](../permissions/alarms.md) - Periodic refresh scheduling

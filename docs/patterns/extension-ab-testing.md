@@ -11,7 +11,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 A/B testing (or experimentation) enables data-driven feature decisions by comparing user responses to different variants. Unlike feature flags that toggle on/off, experiments assign users to cohorts and measure outcomes. This pattern covers client-side experimentation with consistent bucketing, remote configuration, and analytics integration.
 
-See also: [Feature Flags](./feature-flags.md), [Feature Flags Implementation](./extension-feature-flags-impl.md), [Analytics and Telemetry](./analytics-telemetry.md)
+See also: [Feature Flags](./feature-flags.md), [Feature Flags Implementation](./extension-feature-flags-impl.md), [Analytics and Telemetry](./analytics-telemetry.md), [Remote Config](../guides/remote-config.md)
 
 ---
 
@@ -194,3 +194,6 @@ Archive concluded experiments and clear their assignments from storage to preven
 - [Feature Flags](./feature-flags.md) - Toggle features independently
 - [Extension Feature Flags Implementation](./extension-feature-flags-impl.md) - Detailed flag patterns
 - [Analytics and Telemetry](./analytics-telemetry.md) - Privacy-first analytics
+- [Remote Config](../guides/remote-config.md) - Server-side configuration delivery
+- [Crash Reporting](../guides/crash-reporting.md) - Monitor experiment errors
+- [Storage API](../permissions/storage.md) - Persist experiment assignments

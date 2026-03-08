@@ -233,3 +233,7 @@ function assignOnboardingVariant() {
 - [User Onboarding Guide](../guides/user-onboarding.md) - Detailed onboarding strategies
 - [Permission Gating](../patterns/permission-gating.md) - Best practices for requesting permissions
 - [Extension Updates](../guides/extension-updates.md) - Handling updates and migrations
+- [A/B Testing Patterns](./extension-ab-testing.md) - Testing different onboarding approaches
+- [Feature Flags](./feature-flags.md) - Toggle features during onboarding
+- [Remote Config](../guides/remote-config.md) - Dynamic configuration without updates
+- [Crash Reporting](../guides/crash-reporting.md) - Monitor onboarding errors

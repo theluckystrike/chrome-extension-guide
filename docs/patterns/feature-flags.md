@@ -11,6 +11,8 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Feature flags enable enabling or disabling functionality without deploying new versions. They support gradual rollouts, A/B testing, and kill switches for emergency response. Essential for extensions with large user bases where instant updates aren't feasible.
 
+For server-side configuration and remote flag management, see [Remote Config](../guides/remote-config.md).
+
 ---
 
 ## Local Feature Flags {#local-feature-flags}
@@ -216,6 +218,10 @@ Never ship with debug flags enabled in production. Use build environment checks.
 - [State Management](./state-management.md) - Persisting flag state
 - [Update Migration](./update-migration.md) - Handling flag schema changes
 - [Extension Updates](../guides/extension-updates.md) - Update patterns
+- [Remote Config](../guides/remote-config.md) - Server-side configuration
+- [A/B Testing](./extension-ab-testing.md) - Experiment with variants
+- [Crash Reporting](../guides/crash-reporting.md) - Monitor flag-related errors
+- [Alarms API](../permissions/alarms.md) - Periodic flag refresh
 
 ---
 
