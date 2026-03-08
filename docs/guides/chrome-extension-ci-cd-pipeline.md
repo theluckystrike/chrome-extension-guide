@@ -1,198 +1,163 @@
 ---
 layout: default
-title: "Chrome Extension CI/CD Pipeline: Automated Testing and Publishing"
+title: "Chrome Extension CI/CD Pipeline: Automated Testing & Publishing"
 description: "Build a complete CI/CD pipeline for Chrome extensions with GitHub Actions. Automate linting, testing, building, packaging, and publishing to Chrome Web Store."
 permalink: /guides/chrome-extension-ci-cd-pipeline/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-ci-cd-pipeline/"
+date: 2026-03-08
+last_modified_at: 2026-03-08
+category: guides
+tags: [ci-cd, github-actions, testing, publishing, chrome-web-store, automation]
 ---
 
-# Chrome Extension CI/CD Pipeline: Automated Testing and Publishing
+# Chrome Extension CI/CD Pipeline: Automated Testing & Publishing
 
-Building a robust CI/CD pipeline is essential for maintaining high-quality Chrome extensions. Manual build and deployment processes are error-prone, time-consuming, and don't scale well with team growth or project complexity. This guide walks you through building a complete automated pipeline that handles everything from code quality checks to production releases on the Chrome Web Store.
+Continuous Integration and Continuous Deployment (CI/CD) are essential practices for building production-ready Chrome extensions. While manual builds and testing might work for personal projects, they become unsustainable as your extension grows in complexity, user base, and feature set. A well-designed CI/CD pipeline automates the entire process from code commit to Chrome Web Store publication, ensuring consistent quality, faster iteration cycles, and reduced human error.
 
-## Introduction: Why CI/CD Matters for Extension Development
+This comprehensive guide walks you through building a complete CI/CD pipeline for Chrome extensions using GitHub Actions. You'll learn how to automate linting, testing, building, packaging, and publishing—transforming your development workflow from a series of manual steps into a streamlined, reliable machine.
 
-Chrome extensions present unique challenges that make automation critical. Unlike web applications, extensions must work across multiple Chrome versions, handle various permission scenarios, and integrate with browser-specific APIs. Manual testing across these combinations becomes impractical as your extension grows.
+## Introduction: Why CI/CD Matters for Chrome Extension Development
 
-A well-designed CI/CD pipeline provides multiple benefits that directly impact your extension's success and your team's productivity.
+Chrome extensions present unique challenges that make CI/CD pipelines particularly valuable. Unlike traditional web applications, extensions must work across multiple Chrome versions, handle browser-specific APIs, and pass Chrome Web Store's review process. The manifest.json file dictates extension behavior, permissions affect user trust, and any runtime error can result in a one-star review that tanks your reputation.
 
-**Consistency and Reliability**: Every code change goes through the same verification process, eliminating the "it works on my machine" problems. Automated builds ensure that your extension compiles identically across all environments, whether on a developer's laptop or in the production pipeline.
+Manual builds are error-prone for several reasons. Developers forget to increment version numbers, accidentally include debug code, or miss testing on different operating systems. When multiple contributors work on an extension, inconsistent local environments lead to "works on my machine" bugs that only surface after publication. The Chrome Web Store review process adds another layer of complexity—rejections due to unused permissions or deprecated APIs can delay releases by days.
 
-**Faster Iteration Cycles**: Automated pipelines reduce the time from code commit to published extension. What might take hours of manual work becomes a push-to-deploy workflow, enabling you to ship bug fixes and new features rapidly.
+A robust CI/CD pipeline addresses these challenges systematically. Every pull request triggers automated tests that catch bugs before they reach production. Consistent build environments eliminate environment-specific issues. Automated packaging ensures every release follows the same process. And when something does go wrong, the pipeline provides clear audit trails showing exactly what changed and when.
 
-**Quality Gates**: By enforcing linting, testing, and build checks before code merges, you catch issues early. This prevents broken builds from reaching users and reduces the manual review burden.
+The pipeline you'll build in this guide covers these stages:
 
-**Security and Compliance**: Automated pipelines can scan for security vulnerabilities, verify extension manifests, and ensure sensitive credentials never enter the codebase.
+1. **Trigger** – Push to main, pull request creation, or tag push
+2. **Lint** – ESLint and TypeScript type checking
+3. **Test** – Unit tests with Vitest or Jest
+4. **Build** – Production build with optimizations
+5. **Package** – Create .zip for Chrome Web Store upload
+6. **Publish** – Optional auto-publish to Chrome Web Store
 
 ## Pipeline Architecture
 
-The complete CI/CD pipeline for Chrome extensions consists of six distinct stages, each serving a specific purpose in the development lifecycle. Understanding these stages helps you design a pipeline that matches your team's workflow and quality requirements.
-
-### Pipeline Stages Overview
+Understanding the overall architecture helps you design a pipeline that's both robust and maintainable. Here's the complete pipeline flow:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        CHROME EXTENSION CI/CD PIPELINE                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐              │
-│  │ TRIGGER  │───▶│   LINT   │───▶│   TEST   │───▶│  BUILD   │              │
-│  └──────────┘    └──────────┘    └──────────┘    └──────────┘              │
-│       │                                                   │                  │
-│       │                    Pipeline Flow                 │                  │
-│       ▼                                                   ▼                  │
-│  ┌──────────┐                                       ┌──────────┐              │
-│  │  PUSH    │                                       │ PACKAGE  │              │
-│  └──────────┘                                       └──────────┘              │
-│                                                            │                  │
-│                                                            ▼                  │
-│                                                      ┌──────────┐              │
-│                                                      │ PUBLISH  │              │
-│                                                      └──────────┘              │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   TRIGGER   │────▶│    LINT     │────▶│    TEST     │────▶│    BUILD    │
+│             │     │             │     │             │     │             │
+│ - Push      │     │ - ESLint    │     │ - Vitest    │     │ - Vite      │
+│ - PR        │     │ - TypeScript│     │ - Jest      │     │ - esbuild   │
+│ - Tag       │     │             │     │             │     │             │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+                                                                   │
+                                                                   ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   MONITOR   │◀────│  PUBLISH    │◀────│  PACKAGE    │◀────│   ARTIFACT  │
+│             │     │             │     │             │     │             │
+│ - Dashboard │     │ - CWS API   │     │ - Zip file  │     │ - dist/     │
+│ - Rollback  │     │ - Staged    │     │ - Version   │     │ - .zip      │
+│ - Sentry    │     │ - Secrets   │     │             │     │             │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
 ```
 
-### Trigger Events
-
-The pipeline responds to three primary trigger events that correspond to different development workflows.
-
-**Push to Main Branch**: Every commit to the main branch triggers a full pipeline run. This ensures that the HEAD of your main branch is always in a deployable state. This is the primary event for continuous integration.
-
-**Pull Request Creation and Updates**: Opening or updating a pull request triggers a pipeline run that validates the proposed changes. This provides immediate feedback to developers before code review begins. PR-triggered runs typically skip the packaging and publishing stages since those are only needed for production builds.
-
-**Tag Push**: Creating a version tag (e.g., `v1.2.3`) triggers the full pipeline including packaging and publishing. This semantic versioning approach aligns with Chrome Web Store update requirements and provides a clear audit trail.
-
-### Stage Details
-
-**Lint Stage**: This stage catches code quality issues before they reach testing. ESLint analyzes your JavaScript and TypeScript code for syntax errors, style violations, and potential bugs. TypeScript's type checker verifies type correctness, catching impossible states and API misuse at compile time.
-
-**Test Stage**: Automated tests verify that your extension behaves correctly. Unit tests check individual functions and modules in isolation. Integration tests verify that different parts of your extension work together correctly. For Chrome extensions, you also need to mock browser API responses since the actual Chrome APIs aren't available in the CI environment.
-
-**Build Stage**: The build process compiles your source code into the final extension bundle. This includes transpilation, minification, tree-shaking to remove unused code, and asset optimization. The build output goes into a designated `dist` directory ready for packaging.
-
-**Package Stage**: This stage creates the distributable `.zip` file required for Chrome Web Store uploads. It excludes development-only files, source maps (unless needed for debugging), and any other files that shouldn't ship with the production extension.
-
-**Publish Stage**: The final stage uploads your packaged extension to the Chrome Web Store. This stage should have additional safety controls since it's the only stage that modifies your live extension listing.
+Each stage serves a specific purpose in the delivery pipeline. The trigger determines when the pipeline runs—typically on every push to main, every pull request, and when version tags are pushed. Linting catches code quality issues and type errors before they reach testing. Tests verify that your code works as expected. Building creates the production-ready artifacts. Packaging prepares the extension for upload. Publishing delivers it to users.
 
 ## GitHub Actions Setup
 
-GitHub Actions provides an excellent foundation for extension CI/CD due to its tight integration with GitHub repositories, generous free tier for open-source projects, and extensive marketplace of pre-built actions.
-
-### Complete Workflow YAML
-
-Create the file `.github/workflows/ci-cd.yml` in your extension repository:
+GitHub Actions provides an excellent foundation for extension CI/CD because it's tightly integrated with GitHub repositories and offers generous free tier for public repositories. Create a `.github/workflows` directory in your extension repository and add the following comprehensive workflow file:
 
 ```yaml
-{% raw %}
-name: CI/CD Pipeline
+# .github/workflows/ci.yml
+name: Chrome Extension CI/CD
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  push:
-    tags:
-      - 'v*'
-
-permissions:
-  contents: read
-  id-token: write  # Required for OIDC token generation
+  release:
+    types: [published]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: '20'
-  PNPM_VERSION: '9'
 
 jobs:
   lint:
-    name: Lint & Type Check
+    name: Lint and Type Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Run ESLint
-        run: pnpm lint
+        run: npm run lint
 
       - name: Run TypeScript type check
-        run: pnpm typecheck
+        run: npm run typecheck
 
   test:
-    name: Unit Tests
+    name: Test (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [18, 20, 22]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Run tests
-        run: pnpm test
+        run: npm test -- --coverage
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
-          files: ./coverage/coverage-final.json
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
           fail_ci_if_error: false
 
   build:
-    name: Production Build
+    name: Build Extension
     runs-on: ubuntu-latest
     needs: [lint, test]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Build extension
-        run: pnpm build
+        run: npm run build
+        env:
+          NODE_ENV: production
+          API_URL: ${{ secrets.API_URL }}
 
-      - name: Upload build artifacts
+      - name: Upload built extension
         uses: actions/upload-artifact@v4
         with:
-          name: extension-build
+          name: extension-dist
           path: dist/
           retention-days: 7
 
@@ -200,306 +165,297 @@ jobs:
     name: Package Extension
     runs-on: ubuntu-latest
     needs: [build]
-    if: startsWith(github.ref, 'refs/tags/v')
+    outputs:
+      version: ${{ steps.package.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Download build artifacts
+      - name: Download built extension
         uses: actions/download-artifact@v4
         with:
-          name: extension-build
+          name: extension-dist
           path: dist/
 
-      - name: Create package
+      - name: Read version from manifest
+        id: version
         run: |
-          cd dist
-          zip -r ../extension.zip .
+          VERSION=$(node -p "require('./dist/manifest.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extension version: $VERSION"
 
-      - name: Upload package
+      - name: Create ZIP package
+        id: package
+        run: |
+          VERSION=$(node -p "require('./dist/manifest.json').version")
+          zip -r "extension-v${VERSION}.zip" dist/
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
           name: extension-package
-          path: extension.zip
+          path: extension-*.zip
+          retention-days: 30
 
   publish:
     name: Publish to Chrome Web Store
     runs-on: ubuntu-latest
     needs: [package]
-    if: startsWith(github.ref, 'refs/tags/v')
-    environment:
-      name: production
-      url: https://chromewebstore.google.com/detail/${{ vars.EXTENSION_ID }}
+    if: github.event_name == 'release' && github.event.action == 'published'
     steps:
-      - name: Download package
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download package artifact
         uses: actions/download-artifact@v4
         with:
           name: extension-package
           path: .
 
-      - name: Get version from tag
-        id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
       - name: Publish to Chrome Web Store
-        uses: michelefavero65/chrome-webstore-upload-action@v1
+        uses: peaceiris/actions-gh-release@v1
         with:
-          file: extension.zip
-          extension-id: ${{ vars.EXTENSION_ID }}
-          client-id: ${{ secrets.CWS_CLIENT_ID }}
-          client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
-          publish-type: "default"
-{% endraw %}
+          files: extension-*.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to CWS
+        run: |
+          npx chrome-webstore-upload@latest upload \
+            --extension-id ${{ secrets.EXTENSION_ID }} \
+            --client-id ${{ secrets.CWS_CLIENT_ID }} \
+            --client-secret ${{ secrets.CWS_CLIENT_SECRET }} \
+            --refresh-token ${{ secrets.CWS_REFRESH_TOKEN }} \
+            --zip-path extension-*.zip
 ```
 
-This workflow implements several best practices worth highlighting. The `needs` declarations create proper dependencies between jobs, ensuring that builds only proceed when earlier stages pass. Matrix testing across multiple Node versions catches version-specific issues early. The conditional `if` statements ensure that packaging and publishing only occur for tagged releases, not for every push to main.
+This workflow demonstrates several best practices. It uses a matrix strategy to test on multiple Node.js versions, ensuring compatibility across environments. It separates concerns into distinct jobs that run sequentially, with later jobs depending on earlier ones. It uploads artifacts between jobs, preserving build outputs without rebuilding. And it includes conditional publishing that only triggers on release events.
 
-## Linting Configuration
+## Linting Configuration for Chrome Extensions
 
-Proper linting configuration is crucial for maintaining code quality in Chrome extension projects. Extensions have unique requirements that standard JavaScript linting rules don't address, including Chrome API types and extension-specific patterns.
-
-### ESLint Configuration for Chrome Extensions
-
-Install the required ESLint packages:
-
-```bash
-pnpm add -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-chrome
-```
-
-Create the ESLint configuration file:
+ESLint configuration for Chrome extensions requires special handling because extensions use browser-specific globals and APIs that aren't available in Node.js environments. Here's a complete ESLint configuration optimized for Manifest V3 extensions:
 
 ```javascript
 // .eslintrc.js
+const path = require('path');
+
 module.exports = {
   root: true,
   env: {
     browser: true,
     es2022: true,
     webextensions: true,
+    node: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:chrome/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  plugins: ['@typescript-eslint', 'chrome'],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'promise'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {
-    // TypeScript-specific rules
+    // TypeScript rules
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     
-    // Chrome extension specific rules
-    'chrome/no-naive-eslint': 'error',
-    'chrome/no-unused-resources': 'warn',
+    // React rules
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
     
-    // General code quality
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // Chrome extension specific
+    'no-restricted-globals': ['error', 'window', 'document', 'navigator'],
   },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       parserOptions: {
-        project: './tsconfig.json',
+        project: path.resolve(__dirname, 'tsconfig.json'),
       },
     },
     {
-      files: ['test/**/*.ts', 'test/**/*.tsx'],
+      files: ['src/background/**/*'],
       env: {
-        jest: true,
-        node: true,
+        serviceworker: true,
       },
     },
   ],
 };
 ```
 
-### Pre-commit Hooks with Husky
-
-Setting up Husky ensures that code quality checks run before every commit, preventing bad code from entering the repository.
-
-Install Husky and lint-staged:
+For TypeScript type checking, install the Chrome types package to get autocompletion and type safety for Chrome extension APIs:
 
 ```bash
-pnpm add -D husky lint-staged
+npm install -D @anthropic-ai/chrome-types
 ```
 
-Initialize Husky:
-
-```bash
-npx husky init
-```
-
-Configure lint-staged in `package.json`:
+Then add it to your `tsconfig.json`:
 
 ```json
 {
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "tsc --noEmit"
-    ],
-    "*.{json,md,yml,yaml}": [
-      "prettier --write"
-    ]
+  "compilerOptions": {
+    "types": ["chrome", "node"]
   }
 }
 ```
 
-Update the Husky pre-commit hook:
+Pre-commit hooks with Husky and lint-staged ensure code quality before it reaches your repository:
 
-```bash
-echo 'npx lint-staged' > .husky/pre-commit
+```json
+// package.json
+{
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": ["eslint --fix", "prettier --write"],
+    "*.{json,md,yml,yaml}": ["prettier --write"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run typecheck"
+    }
+  }
+}
 ```
 
-This setup ensures that every commit passes your linting and type checks, maintaining consistent code quality across all contributors.
+## Testing in CI: Running Extension Tests Headlessly
 
-## Testing in CI
-
-Testing Chrome extensions presents unique challenges because the Chrome APIs (chrome.storage, chrome.runtime, chrome.tabs, etc.) aren't available in the Node.js test environment. You need to mock these APIs to run meaningful tests.
-
-### Unit Testing Background Scripts with Vitest
-
-Create a test setup file that mocks Chrome APIs:
+Testing Chrome extensions requires mocking browser APIs since tests run in Node.js environments. Create a comprehensive mock setup for Chrome APIs:
 
 ```typescript
-// test/setup/chrome-mocks.ts
-import { vi } from 'vitest';
-
-// Mock chrome.storage
-const storageMock = {
-  local: {
-    get: vi.fn((keys, callback) => {
-      if (callback) callback({});
-      return Promise.resolve({});
+// tests/__mocks__/chrome.ts
+const createChromeMock = () => ({
+  runtime: {
+    id: 'test-extension-id',
+    getManifest: () => ({
+      manifest_version: 3,
+      name: 'Test Extension',
+      version: '1.0.0',
     }),
-    set: vi.fn((items, callback) => {
-      if (callback) callback();
-      return Promise.resolve();
-    }),
-    remove: vi.fn((keys, callback) => {
-      if (callback) callback();
-      return Promise.resolve();
-    }),
-    clear: vi.fn((callback) => {
-      if (callback) callback();
-      return Promise.resolve();
-    }),
+    getURL: (path: string) => `chrome-extension://test-extension-id/${path}`,
+    sendMessage: jest.fn(),
+    onMessage: {
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    },
+    lastError: null,
   },
-  sync: {
-    get: vi.fn((keys, callback) => {
-      if (callback) callback({});
-      return Promise.resolve({});
-    }),
-    set: vi.fn((items, callback) => {
-      if (callback) callback();
-      return Promise.resolve();
-    }),
+  storage: {
+    local: {
+      get: jest.fn(),
+      set: jest.fn(),
+      remove: jest.fn(),
+      clear: jest.fn(),
+    },
+    sync: {
+      get: jest.fn(),
+      set: jest.fn(),
+      remove: jest.fn(),
+      clear: jest.fn(),
+    },
   },
-};
-
-// Mock chrome.runtime
-const runtimeMock = {
-  id: 'test-extension-id',
-  getURL: vi.fn((path) => `chrome-extension://test-extension-id/${path}`),
-  getManifest: vi.fn(() => ({
-    manifest_version: 3,
-    name: 'Test Extension',
-    version: '1.0.0',
-  })),
-  sendMessage: vi.fn(() => Promise.resolve({})),
-  onMessage: {
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
+  tabs: {
+    query: jest.fn(),
+    get: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    remove: jest.fn(),
+    sendMessage: jest.fn(),
   },
-  onInstalled: {
-    addListener: vi.fn(),
+  action: {
+    setBadgeText: jest.fn(),
+    setBadgeBackgroundColor: jest.fn(),
+    setTitle: jest.fn(),
+    setIcon: jest.fn(),
   },
-};
-
-// Mock chrome.tabs
-const tabsMock = {
-  query: vi.fn(() => Promise.resolve([])),
-  get: vi.fn((tabId, callback) => {
-    if (callback) callback(null);
-    return Promise.resolve(null);
-  }),
-  create: vi.fn(() => Promise.resolve({ id: 1 })),
-  update: vi.fn(() => Promise.resolve({})),
-};
-
-// Apply mocks globally
-Object.defineProperty(global, 'chrome', {
-  value: {
-    storage: storageMock,
-    runtime: runtimeMock,
-    tabs: tabsMock,
+  alarms: {
+    create: jest.fn(),
+    get: jest.fn(),
+    clear: jest.fn(),
+    clearAll: jest.fn(),
+    getAll: jest.fn(),
   },
-  writable: true,
+  permissions: {
+    request: jest.fn(),
+    remove: jest.fn(),
+    contains: jest.fn(),
+  },
+  contextMenus: {
+    create: jest.fn(),
+    update: jest.fn(),
+    remove: jest.fn(),
+    removeAll: jest.fn(),
+  },
+  declarativeNetRequest: {
+    getDynamicRules: jest.fn(),
+    updateDynamicRules: jest.fn(),
+  },
 });
 
-export { storageMock, runtimeMock, tabsMock };
+global.chrome = createChromeMock();
+
+export {};
 ```
 
-Create a test file for your background script:
+Now you can write tests for your background scripts:
 
 ```typescript
-// test/background/storage-handler.test.ts
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { StorageHandler } from '../../src/background/storage-handler';
+// tests/background/storage.test.ts
+import { handleStorageSet } from '../../src/background/storage';
 
-describe('StorageHandler', () => {
-  let storageHandler: StorageHandler;
-
+describe('Background Storage Handler', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
-    storageHandler = new StorageHandler();
+    jest.clearAllMocks();
   });
 
-  it('should save user preferences', async () => {
-    const preferences = { theme: 'dark', notifications: true };
+  it('should save user preferences to storage', async () => {
+    const mockData = { theme: 'dark', notifications: true };
     
-    await storageHandler.savePreferences(preferences);
+    await handleStorageSet('preferences', mockData);
     
-    expect(chrome.storage.local.set).toHaveBeenCalledWith(
-      { preferences },
-      expect.any(Function)
-    );
-  });
-
-  it('should retrieve user preferences', async () => {
-    (chrome.storage.local.get as any).mockResolvedValueOnce({
-      preferences: { theme: 'light' }
+    expect(chrome.storage.local.set).toHaveBeenCalledWith({
+      preferences: mockData,
     });
-    
-    const result = await storageHandler.getPreferences();
-    
-    expect(result).toEqual({ theme: 'light' });
   });
 
   it('should handle storage errors gracefully', async () => {
-    (chrome.storage.local.get as any).mockRejectedValueOnce(
-      new Error('Storage quota exceeded')
+    (chrome.storage.local.set as jest.Mock).mockImplementation(
+      (_data, callback) => {
+        if (callback) callback();
+      }
     );
     
-    await expect(storageHandler.getPreferences()).rejects.toThrow(
-      'Storage quota exceeded'
-    );
+    await expect(
+      handleStorageSet('invalid-key', { value: 'test' })
+    ).rejects.toThrow('Invalid storage key');
+  });
+
+  it('should validate data before storing', async () => {
+    const invalidData = { unknownField: 'value' };
+    
+    await handleStorageSet('preferences', invalidData);
+    
+    expect(chrome.storage.local.set).not.toHaveBeenCalled();
   });
 });
 ```
 
-Configure Vitest in your project:
+Configure Vitest or Jest to work with your extension's module system:
 
 ```typescript
 // vitest.config.ts
@@ -508,15 +464,10 @@ import path from 'path';
 
 export default defineConfig({
   test: {
-    globals: true,
     environment: 'node',
-    setupFiles: ['./test/setup/chrome-mocks.ts'],
-    include: ['test/**/*.test.ts'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-      exclude: ['test/', 'node_modules/'],
-    },
+    globals: true,
+    setupFiles: ['./tests/setup.ts'],
+    include: ['tests/**/*.test.ts'],
   },
   resolve: {
     alias: {
@@ -526,36 +477,21 @@ export default defineConfig({
 });
 ```
 
-Add test scripts to `package.json`:
+## Building for Production: Optimized Extension Builds
 
-```json
-{
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
-  }
-}
-```
-
-## Building for Production
-
-The build stage transforms your source code into a production-ready extension. This involves several optimization steps that reduce bundle size and improve performance.
-
-### Build Configuration
-
-For a typical Chrome extension built with TypeScript and a bundler like Vite, your build configuration should include:
+Production builds must minimize bundle size while maintaining debuggability. Use a build tool like Vite or esbuild with proper configuration:
 
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
+  plugins: [react()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    sourcemap: process.env.NODE_ENV !== 'production',
     rollupOptions: {
       input: {
         background: resolve(__dirname, 'src/background/index.ts'),
@@ -569,472 +505,724 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
+    sourcemap: true,
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: process.env.NODE_ENV === 'production',
-        drop_debugger: process.env.NODE_ENV === 'production',
+        drop_console: true,
+        drop_debugger: true,
       },
     },
+  },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env.API_URL': JSON.stringify(process.env.API_URL),
   },
 });
 ```
 
-### Environment Variables
+Environment variables require special handling for extensions. Create separate `.env` files for different environments:
 
-Create environment-specific build configurations:
+```bash
+# .env.production
+API_URL=https://api.production.com
+DEBUG_MODE=false
+ANALYTICS_ID=UA-XXXXX-X
+
+# .env.development
+API_URL=http://localhost:3000
+DEBUG_MODE=true
+```
+
+## Packaging the Extension: Creating the Uploadable ZIP
+
+After building, you need to package the extension into a ZIP file suitable for Chrome Web Store upload. Create a packaging script:
 
 ```typescript
-// src/config/index.ts
-interface AppConfig {
-  apiUrl: string;
-  analyticsId: string;
-  features: {
-    beta: boolean;
-    debug: boolean;
-  };
+// scripts/package-extension.ts
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+
+const DIST_DIR = path.join(process.cwd(), 'dist');
+const OUTPUT_DIR = path.join(process.cwd(), 'release');
+
+function ensureDir(dir: string) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
 }
 
-const config: Record<string, AppConfig> = {
-  development: {
-    apiUrl: 'http://localhost:3000',
-    analyticsId: '',
-    features: {
-      beta: true,
-      debug: true,
-    },
-  },
-  production: {
-    apiUrl: 'https://api.your-extension.com',
-    analyticsId: 'UA-XXXXX-X',
-    features: {
-      beta: false,
-      debug: false,
-    },
-  },
-};
+function readManifest(): { version: string; name: string } {
+  const manifestPath = path.join(DIST_DIR, 'manifest.json');
+  return JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+}
 
-export const getConfig = (): AppConfig => {
-  const env = import.meta.env.MODE || 'development';
-  return config[env] || config.development;
-};
+function createPackage() {
+  ensureDir(OUTPUT_DIR);
+  
+  const manifest = readManifest();
+  const version = manifest.version;
+  const zipName = `extension-v${version}.zip`;
+  const zipPath = path.join(OUTPUT_DIR, zipName);
+  
+  // Remove existing zip
+  if (fs.existsSync(zipPath)) {
+    fs.unlinkSync(zipPath);
+  }
+  
+  // Files and directories to exclude
+  const excludePatterns = [
+    '.DS_Store',
+    'Thumbs.db',
+    '*.map',
+    '*.test.js',
+    '*.test.ts',
+    '__tests__',
+    'node_modules',
+    '.git',
+  ];
+  
+  // Create ZIP using native macOS/Linux zip command
+  const distFiles = fs.readdirSync(DIST_DIR).filter(file => 
+    !excludePatterns.some(pattern => {
+      if (pattern.includes('*')) {
+        const regex = new RegExp('^' + pattern.replace('*', '.*') + '$');
+        return regex.test(file);
+      }
+      return file === pattern;
+    })
+  );
+  
+  execSync(`cd ${DIST_DIR} && zip -r ${zipPath} .`, { stdio: 'inherit' });
+  
+  console.log(`✓ Created ${zipName} (${(fs.statSync(zipPath).size / 1024).toFixed(2)} KB)`);
+  console.log(`  Version: ${version}`);
+  console.log(`  Path: ${zipPath}`);
+  
+  return { zipPath, version };
+}
+
+createPackage();
 ```
 
-Build with specific environment:
+Add the package script to your `package.json`:
 
-```bash
-# Development build
-pnpm build
-
-# Production build
-NODE_ENV=production pnpm build
-```
-
-## Packaging the Extension
-
-Packaging creates the `.zip` file required for Chrome Web Store uploads. The package must exclude development files, source maps, and any other files that shouldn't ship with the production extension.
-
-### Package Script
-
-Create a packaging script that handles version information and file exclusion:
-
-```bash
-#!/bin/bash
-# scripts/package.sh
-
-set -e
-
-DIST_DIR="dist"
-PACKAGE_DIR="package"
-VERSION=${1:-$(node -p "require('./package.json').version")}
-
-echo "Packaging extension version: $VERSION"
-
-# Clean up any existing package
-rm -rf "$PACKAGE_DIR"
-mkdir -p "$PACKAGE_DIR"
-
-# Copy distribution files
-cp -r "$DIST_DIR"/* "$PACKAGE_DIR/"
-
-# Copy manifest
-cp manifest.json "$PACKAGE_DIR/"
-
-# Create the zip file
-cd "$PACKAGE_DIR"
-zip -r "../extension-v${VERSION}.zip" . -x "*.map"
-
-echo "Package created: extension-v${VERSION}.zip"
-ls -lh "../extension-v${VERSION}.zip"
-```
-
-### Exclude Patterns
-
-Configure your bundler or use a `.zipignore` file to exclude unnecessary files:
-
-```
-# .zipignore
-# Development files
-*.map
-*.ts
-*.tsx
-tsconfig.json
-vite.config.ts
-.eslintrc.js
-.prettierrc
-
-# Test files
-test/
-__tests__/
-*.test.ts
-*.spec.ts
-coverage/
-
-# Git
-.git/
-.gitignore
-.gitattributes
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Node
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Misc
-.DS_Store
-Thumbs.db
-*.bak
-*.tmp
+```json
+{
+  "scripts": {
+    "build": "tsc && vite build",
+    "package": "npm run build && tsx scripts/package-extension.ts",
+    "release": "npm run package"
+  }
+}
 ```
 
 ## Auto-Publishing to Chrome Web Store
 
-Automating the Chrome Web Store publish process saves significant time and ensures consistent releases. However, this requires careful security handling since publishing directly affects your users.
+The Chrome Web Store provides an API for programmatic uploads. First, set up your credentials through the Google Cloud Console and Chrome Web Store Developer Dashboard, then store them as GitHub Secrets:
 
-### Prerequisites
-
-Before setting up auto-publishing, you'll need to:
-
-1. Create a Google Cloud project with the Chrome Web Store API enabled
-2. Set up OAuth credentials for the Chrome Web Store API
-3. Obtain your extension's unique ID from the Chrome Web Store developer dashboard
-4. Configure GitHub Secrets for your credentials
-
-### GitHub Secrets Configuration
-
-Add the following secrets to your GitHub repository:
-
-- `CWS_CLIENT_ID`: Your Google OAuth client ID
-- `CWS_CLIENT_SECRET`: Your Google OAuth client secret
-- `CWS_REFRESH_TOKEN`: OAuth refresh token for API access
-- `EXTENSION_ID`: Your extension's unique identifier in the Chrome Web Store
-
-### Publish Script
+- `CWS_CLIENT_ID` – OAuth2 client ID
+- `CWS_CLIENT_SECRET` – OAuth2 client secret
+- `CWS_REFRESH_TOKEN` – OAuth2 refresh token
+- `EXTENSION_ID` – Your extension's unique ID
 
 Create a publish script that handles the upload:
 
-```javascript
-// scripts/publish.js
-const fs = require('fs');
-const path = require('path');
-const { ChromeWebStore } = require('chrome-webstore-upload');
+```typescript
+// scripts/publish-to-cws.ts
+import { chromeWebstoreUpload } from 'chrome-webstore-upload';
+import fs from 'fs';
+import path from 'path';
 
-const extensionId = process.env.EXTENSION_ID;
-const clientId = process.env.CWS_CLIENT_ID;
-const clientSecret = process.env.CWS_CLIENT_SECRET;
-const refreshToken = process.env.CWS_REFRESH_TOKEN;
+interface PublishOptions {
+  extensionId: string;
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+  zipPath: string;
+  publishTarget?: 'default' | 'trustedTesters';
+}
 
-async function publish() {
-  if (!extensionId || !clientId || !clientSecret || !refreshToken) {
-    console.error('Missing required environment variables');
-    process.exit(1);
-  }
-
-  const extensionZip = path.join(__dirname, '../extension.zip');
-  
-  if (!fs.existsSync(extensionZip)) {
-    console.error('Extension package not found:', extensionZip);
-    process.exit(1);
-  }
-
-  const chromeWebStore = ChromeWebStore({
+async function publishToCWS(options: PublishOptions) {
+  const {
     extensionId,
     clientId,
     clientSecret,
     refreshToken,
-  });
+    zipPath,
+    publishTarget = 'default',
+  } = options;
+
+  // Create the upload credentials
+  const credentials = {
+    extId: extensionId,
+    clientId,
+    clientSecret,
+    refreshToken,
+  };
+
+  // Create the store
+  const store = chromeWebstoreUpload(credentials);
+
+  // Read the ZIP file
+  const fileBuffer = fs.readFileSync(zipPath);
 
   try {
-    console.log('Uploading extension...');
-    const uploadResponse = await chromeWebStore.uploadExisting(extensionZip);
+    // Upload the new version
+    console.log('Uploading extension to Chrome Web Store...');
+    const uploadResponse = await store.uploadExisting(fileBuffer, {
+      extensionsId: extensionId,
+    });
+
     console.log('Upload response:', uploadResponse);
 
-    // Check upload status
-    if (uploadResponse.error) {
-      console.error('Upload failed:', uploadResponse.error);
-      process.exit(1);
+    if (uploadResponse.uploadState === 'SUCCESS') {
+      // Publish the extension
+      console.log('Publishing extension...');
+      const publishResponse = await store.publish({
+        extensionsId: extensionId,
+        publishTarget,
+      });
+
+      console.log('Publish response:', publishResponse);
+      
+      if (publishResponse.status.includes('OK')) {
+        console.log('✅ Successfully published to Chrome Web Store!');
+      } else {
+        console.log('⚠️ Upload successful, but publish may require manual approval');
+      }
     }
 
-    console.log('Publishing extension...');
-    const publishResponse = await chromeWebStore.publish('default');
-    console.log('Publish response:', publishResponse);
-
-    console.log('Extension published successfully!');
+    return uploadResponse;
   } catch (error) {
-    console.error('Publishing failed:', error.message);
-    process.exit(1);
+    console.error('Failed to publish to CWS:', error);
+    throw error;
   }
 }
 
-publish();
+// Run if called directly
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  
+  publishToCWS({
+    extensionId: process.env.EXTENSION_ID!,
+    clientId: process.env.CWS_CLIENT_ID!,
+    clientSecret: process.env.CWS_CLIENT_SECRET!,
+    refreshToken: process.env.CWS_REFRESH_TOKEN!,
+    zipPath: args[0] || './release/extension.zip',
+    publishTarget: (process.env.PUBLISH_TARGET as any) || 'default',
+  }).catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+export { publishToCWS };
 ```
 
-### Safety Controls
-
-Implement multiple safety controls for publishing:
-
-1. **Tag-based releases**: Only publish when a version tag is pushed, not for regular commits
-2. **Manual approval**: Use GitHub Environments with required reviewers for production deployments
-3. **Staged rollout**: Initially publish to a small percentage of users to catch issues
+For security, only publish on version tags. Configure your workflow to require manual approval for releases:
 
 ```yaml
-# Add to your workflow for manual approval
-publish:
-  name: Publish to Chrome Web Store
-  runs-on: ubuntu-latest
-  needs: [package]
-  if: startsWith(github.ref, 'refs/tags/v')
-  environment:
-    name: production
-    url: https://chromewebstore.google.com/detail/${{ vars.EXTENSION_ID }}
-    # Require manual approval before publishing
-    deployment_review_required: true
+# .github/workflows/release.yml
+name: Release to Chrome Web Store
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download built extension
+        uses: actions/download-artifact@v4
+        with:
+          name: extension-package
+
+      - name: Publish to CWS
+        run: npx tsx scripts/publish-to-cws.ts extension-*.zip
+        env:
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
 ```
 
-## Version Management
+## Version Management: Keeping Versions in Sync
 
-Proper version management ensures consistent releases and helps users understand what changed in each update.
+Chrome extensions require version synchronization between multiple files. Create a version bump script that updates all relevant files:
 
-### Version Bump Script
+```typescript
+// scripts/bump-version.ts
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
 
-Create a script to automate version bumps:
+type BumpType = 'major' | 'minor' | 'patch';
 
-```javascript
-// scripts/version-bump.js
-const fs = require('fs');
-const path = require('path');
-
-const packageJsonPath = path.join(__dirname, '../package.json');
-const manifestPath = path.join(__dirname, '../manifest.json');
-
-function readJson(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+function getCurrentVersion(): string {
+  const packageJson = JSON.parse(
+    fs.readFileSync('./package.json', 'utf-8')
+  );
+  return packageJson.version;
 }
 
-function writeJson(filePath, data) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n');
-}
-
-function bumpVersion(currentVersion, bumpType) {
-  const [major, minor, patch] = currentVersion.split('.').map(Number);
+function bumpVersion(version: string, type: BumpType): string {
+  const [major, minor, patch] = version.split('.').map(Number);
   
-  switch (bumpType) {
+  switch (type) {
     case 'major':
       return `${major + 1}.0.0`;
     case 'minor':
       return `${major}.${minor + 1}.0`;
     case 'patch':
       return `${major}.${minor}.${patch + 1}`;
-    default:
-      throw new Error(`Unknown bump type: ${bumpType}`);
   }
 }
 
-const bumpType = process.argv[2] || 'patch';
-const packageJson = readJson(packageJsonPath);
-const newVersion = bumpVersion(packageJson.version, bumpType);
+function updateManifestVersion(version: string) {
+  const manifestPath = './src/manifest.json';
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+  manifest.version = version;
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+}
 
-console.log(`Bumping version: ${packageJson.version} -> ${newVersion}`);
+function updatePackageVersion(version: string) {
+  execSync(`npm version ${version} --no-git-tag-version`, { stdio: 'inherit' });
+}
 
-// Update package.json
-packageJson.version = newVersion;
-writeJson(packageJsonPath, packageJson);
+function main() {
+  const type = (process.argv[2] as BumpType) || 'patch';
+  const currentVersion = getCurrentVersion();
+  const newVersion = bumpVersion(currentVersion, type);
+  
+  console.log(`Bumping version: ${currentVersion} → ${newVersion}`);
+  
+  updateManifestVersion(newVersion);
+  updatePackageVersion(newVersion);
+  
+  console.log(`✅ Version bumped to ${newVersion}`);
+  console.log('Remember to commit and tag: git add -A && git commit -m "Bump version" && git tag v' + newVersion);
+}
 
-// Update manifest.json
-const manifest = readJson(manifestPath);
-manifest.version = newVersion;
-writeJson(manifestPath, manifest);
-
-// Create git tag
-const { execSync } = require('child_process');
-execSync(`git add -A && git commit -m "Release v${newVersion}"`, { stdio: 'inherit' });
-execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
-
-console.log(`Version bumped to ${newVersion} and tag created.`);
+main();
 ```
 
-Add version scripts to `package.json`:
+## Branch Protection and Review: GitHub Settings
+
+Configure branch protection rules to ensure code quality before merging:
+
+1. Go to your repository's **Settings** → **Branches**
+2. Add a rule for `main` branch
+3. Enable these settings:
+   - **Require pull request reviews before merging** – Require at least 1 approval
+   - **Require status checks to pass before merging** – Require CI jobs to pass
+   - **Require conversation resolution before merging** – Ensure all comments are addressed
+   - **Include administrators** – Apply rules to everyone
+
+Required status checks should include:
+- `lint` – ESLint and TypeScript checks
+- `test` – Test suite passing on all Node.js versions
+- `build` – Successful production build
+
+## Staged Rollouts {#staged-rollouts}
+
+The Chrome Web Store supports staged rollouts, allowing you to deploy updates to a percentage of your user base before rolling out globally. This is essential for catching issues that only appear at scale -- memory leaks under sustained use, compatibility problems with specific Chrome versions, or regressions in edge-case workflows.
+
+### Configuring Staged Rollouts via the CWS API
+
+The Chrome Web Store Publish API accepts a `deployPercentage` parameter that controls rollout scope:
+
+```typescript
+// scripts/staged-publish.ts
+import { createReadStream } from 'fs';
+
+interface PublishOptions {
+  extensionId: string;
+  accessToken: string;
+  zipPath: string;
+  deployPercentage: number; // 1-100
+}
+
+async function stagedPublish(options: PublishOptions): Promise<void> {
+  const { extensionId, accessToken, zipPath, deployPercentage } = options;
+
+  // Step 1: Upload the new version
+  const uploadResponse = await fetch(
+    `https://www.googleapis.com/upload/chromewebstore/v1.1/items/${extensionId}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-goog-api-version': '2',
+      },
+      body: createReadStream(zipPath) as unknown as BodyInit,
+    }
+  );
+
+  if (!uploadResponse.ok) {
+    throw new Error(`Upload failed: ${await uploadResponse.text()}`);
+  }
+
+  // Step 2: Publish with deploy percentage
+  const publishResponse = await fetch(
+    `https://www.googleapis.com/chromewebstore/v1.1/items/${extensionId}/publish`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'x-goog-api-version': '2',
+      },
+      body: JSON.stringify({
+        deployPercentage,
+      }),
+    }
+  );
+
+  const result = await publishResponse.json();
+  console.log(
+    `Published to ${deployPercentage}% of users:`,
+    result.status
+  );
+}
+```
+
+### Staged Rollout GitHub Actions Workflow
+
+Automate a multi-stage rollout with approval gates between stages:
+
+```yaml
+# .github/workflows/staged-rollout.yml
+name: Staged Rollout
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to deploy (e.g., v1.5.0)'
+        required: true
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    environment: canary  # Requires manual approval in GitHub settings
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci && npm run build && npm run package
+
+      - name: Publish to 5% of users
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+        run: npx tsx scripts/staged-publish.ts --percentage 5
+
+  beta:
+    needs: canary
+    runs-on: ubuntu-latest
+    environment: beta  # 24-hour wait + approval
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci && npm run build && npm run package
+      - name: Publish to 25% of users
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+        run: npx tsx scripts/staged-publish.ts --percentage 25
+
+  full-rollout:
+    needs: beta
+    runs-on: ubuntu-latest
+    environment: production  # Final approval gate
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci && npm run build && npm run package
+      - name: Publish to 100% of users
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+        run: npx tsx scripts/staged-publish.ts --percentage 100
+```
+
+Configure each environment in GitHub repository settings with required reviewers and optional wait timers. This gives your team time to monitor error rates, review user feedback, and catch regressions before widening the rollout.
+
+## Automated Changelog Generation {#changelog}
+
+A well-maintained changelog builds user trust and helps your team track what shipped in each release. Automating changelog generation from conventional commits eliminates manual bookkeeping.
+
+### Conventional Commits Standard
+
+Adopt the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages:
+
+```
+feat: add keyboard shortcut customization panel
+fix: resolve memory leak in content script observer
+docs: update OAuth2 guide with PKCE examples
+chore: upgrade vite to 6.1.0
+perf: reduce popup render time by 40% with virtual list
+refactor: extract token manager into separate module
+```
+
+### Generating Changelogs with standard-version
+
+The `standard-version` package reads conventional commits and generates a `CHANGELOG.md` automatically:
+
+```bash
+npm install --save-dev standard-version
+```
+
+Add scripts to `package.json`:
 
 ```json
 {
   "scripts": {
-    "version:major": "node scripts/version-bump.js major",
-    "version:minor": "node scripts/version-bump.js minor",
-    "version:patch": "node scripts/version-bump.js patch"
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch"
   }
 }
 ```
 
-### Version Sync Workflow
+Configure the changelog format in `.versionrc.json`:
 
-The complete version sync workflow:
-
-1. Developer runs `npm run version:patch` (or major/minor)
-2. Script updates both `package.json` and `manifest.json`
-3. Script creates a git commit and tag
-4. Developer pushes: `git push && git push --tags`
-5. GitHub Actions detects the tag and runs the full pipeline
-6. Package is created and uploaded to Chrome Web Store
-7. Users receive the update based on your rollout settings
-
-## Branch Protection
-
-Branch protection rules ensure that code changes go through proper review and testing before merging to the main branch.
-
-### Required Status Checks
-
-Configure branch protection to require passing CI/CD checks:
-
-1. Go to your repository settings
-2. Navigate to "Branches" > "Branch protection rules"
-3. Add a rule for `main`
-4. Enable "Require status checks to pass before merging"
-5. Select the required checks: `lint`, `test`, and `build`
-
-### Required Reviews
-
-Require pull request reviews:
-
-1. Enable "Require pull request reviews before merging"
-2. Set "Required approving reviews" to 1 or 2 based on your team's needs
-3. Enable "Dismiss stale reviews" when new commits are pushed
-4. Enable "Require review from code owners" for critical changes
-
-### Protection Rules Summary
-
-```markdown
-## Branch Protection Rules for main
-
-- ✅ Require pull request reviews before merging (minimum 1)
-- ✅ Require status checks to pass:
-  - ✅ lint (ESLint and TypeScript)
-  - ✅ test (Unit tests with Vitest)
-  - ✅ build (Production build)
-- ✅ Require branches to be up to date before merging
-- ✅ Require conversation resolution before merging
-- ✅ Include administrators in requirements (optional)
-- ✅ Restrict who can push:
-  - ✅ Require signed commits (optional, for additional security)
-  - ✅ Block force pushes
-  - ✅ Prevent branch deletion
-```
-
-## Monitoring and Rollback
-
-Even with comprehensive testing, issues can make it to production. Having proper monitoring and rollback procedures ensures you can quickly respond to problems.
-
-### Chrome Web Store Dashboard Monitoring
-
-The Chrome Web Store developer dashboard provides several metrics:
-
-1. **User feedback**: Review user reviews and ratings
-2. **Statistics**: Track daily users, installation trends, and crash reports
-3. **Stack traces**: View JavaScript errors reported by users
-4. **Publishing status**: Monitor the review status of published updates
-
-### Staged Rollout
-
-When publishing updates, use staged rollout to gradually distribute the update:
-
-1. In the Chrome Web Store publishing flow, select "Percentage of users"
-2. Start with 5-10% of users
-3. Monitor crash reports and user feedback
-4. Gradually increase the percentage if no issues arise
-5. After confirming stability, expand to 100%
-
-### Rollback Procedure
-
-If critical issues are discovered:
-
-1. **Immediate action**: Navigate to the Chrome Web Store dashboard
-2. **Revert to previous version**: Use the "Package" section to upload a previous stable package
-3. **Alternative**: Push a new tag for the previous version (e.g., `v1.2.0` if you're at `v1.2.1`)
-4. **Documentation**: Document the issue and steps taken in your release notes
-
-### Error Monitoring with Sentry
-
-Integrate Sentry for real-time error monitoring:
-
-```typescript
-// src/background/index.ts
-import * as Sentry from '@sentry/browser';
-
-Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  environment: import.meta.env.MODE,
-  release: `extension@${chrome.runtime.getManifest().version}`,
-  integrations: [
-    Sentry.Integrations.GlobalHandlers,
+```json
+{
+  "types": [
+    { "type": "feat", "section": "New Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "perf", "section": "Performance" },
+    { "type": "refactor", "section": "Internal Changes", "hidden": false },
+    { "type": "docs", "section": "Documentation", "hidden": true },
+    { "type": "chore", "hidden": true }
   ],
-});
-
-// Capture errors from background scripts
-self.addEventListener('error', (event) => {
-  Sentry.captureException(event.error);
-});
-
-self.addEventListener('unhandledrejection', (event) => {
-  Sentry.captureException(event.reason);
-});
-```
-
-```typescript
-// src/popup/index.tsx
-import * as Sentry from '@sentry/react';
-
-Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  environment: import.meta.env.MODE,
-  release: `extension@${chrome.runtime.getManifest().version}`,
-});
-
-export default function Popup() {
-  // Your popup component
+  "scripts": {
+    "postbump": "node scripts/sync-manifest-version.js"
+  }
 }
 ```
 
-## Related Resources
+### Syncing Manifest Version with Package Version
 
-For more information on extending your CI/CD pipeline and Chrome extension development, explore these related guides:
+Chrome extensions need the version in `manifest.json` to match the release version. Automate the sync:
 
-- [Extension Monetization Playbook](/../extension-monetization-playbook/): Learn strategies for monetizing your Chrome extension, including one-time purchases, subscriptions, and affiliate models. This guide complements your CI/CD setup by helping you understand the revenue side of extension development.
-- [Release Management](/publishing/version-management/): Detailed guidance on managing extension versions, handling updates, and coordinating releases across different channels.
-- [GitHub Actions for Extensions](/guides/github-actions-extension-ci-cd/): Additional GitHub Actions patterns specific to Chrome extension development.
-- [Extension Security Checklist](/guides/chrome-extension-security-checklist/): Ensure your CI/CD pipeline includes security verification steps.
+```typescript
+// scripts/sync-manifest-version.ts
+import { readFileSync, writeFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
+const manifestPath = 'src/manifest.json';
+const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
+
+manifest.version = pkg.version;
+writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+console.log(`Synced manifest.json version to ${pkg.version}`);
+```
+
+### GitHub Actions Changelog Job
+
+Integrate changelog generation into your release workflow:
+
+```yaml
+  changelog:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for changelog generation
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Generate changelog
+        run: npx standard-version --skip.commit --skip.tag
+
+      - name: Create GitHub Release with notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          # Extract the latest version's notes from CHANGELOG.md
+          NOTES=$(awk '/^## \[/{if(found)exit; found=1; next} found{print}' CHANGELOG.md)
+          gh release create "$VERSION" \
+            --title "$VERSION" \
+            --notes "$NOTES" \
+            dist/*.zip
+```
+
+## Code Signing {#code-signing}
+
+Code signing verifies that extension builds are authentic and have not been tampered with. While Chrome handles signing for Web Store distributions (every CRX is signed with the extension's key), self-distributed extensions and internal enterprise deployments require you to manage signing yourself.
+
+### CRX3 Signing for Self-Distribution
+
+Chrome extensions distributed outside the Web Store must be packaged as signed CRX3 files. Use the `crx3` npm package to automate this:
+
+```bash
+npm install --save-dev crx3
+```
+
+```typescript
+// scripts/sign-extension.ts
+import { createWriteStream, readFileSync } from 'fs';
+import { resolve } from 'path';
+import crx3 from 'crx3';
+
+async function signExtension(): Promise<void> {
+  const keyPath = resolve('keys/extension.pem');
+  const distPath = resolve('dist');
+  const outputPath = resolve(`releases/extension-${getVersion()}.crx`);
+
+  // Read the private key (keep this secure -- never commit to git)
+  const privateKey = readFileSync(keyPath);
+
+  await crx3(
+    [distPath],
+    {
+      keyPath,
+      crxPath: outputPath,
+    }
+  );
+
+  console.log(`Signed CRX written to ${outputPath}`);
+}
+
+function getVersion(): string {
+  const manifest = JSON.parse(
+    readFileSync('dist/manifest.json', 'utf-8')
+  );
+  return manifest.version;
+}
+
+signExtension().catch(console.error);
+```
+
+### Key Management Best Practices
+
+Your extension's private key is the single most critical secret in your project:
+
+1. **Never commit the key to version control** -- Add `*.pem` and `keys/` to `.gitignore`
+2. **Store the key in GitHub Secrets** -- Base64-encode the PEM file and store it as a secret
+3. **Rotate keys if compromised** -- Note that rotating the key changes your extension ID, which breaks auto-updates for existing users
+4. **Use hardware security modules (HSM) for enterprise** -- AWS CloudHSM or Google Cloud KMS can store and use keys without ever exposing the raw material
+
+### Build Artifact Integrity with SHA-256 Checksums
+
+Generate checksums for every build artifact to verify integrity:
+
+```yaml
+  checksum:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: extension-zip
+
+      - name: Generate checksums
+        run: |
+          sha256sum *.zip > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: checksums
+          path: SHA256SUMS.txt
+```
+
+Include the `SHA256SUMS.txt` file in your GitHub Release so users distributing the extension internally can verify the download.
+
+## Monitoring and Rollback: Post-Deploy {#monitoring}
+
+After publishing, monitor your extension through the Chrome Web Store Developer Dashboard. Key metrics to track include:
+
+- **User reviews** -- Respond promptly to negative feedback
+- **Crash reports** -- Use Sentry or similar error tracking
+- **Active users** -- Monitor for sudden drops indicating issues
+- **Retention rates** -- Track user engagement over time
+
+### Rollback Procedure
+
+If monitoring reveals a critical issue, roll back by publishing a previous version:
+
+```bash
+# Rollback procedure
+git checkout <previous-tag>
+npm run build && npm run package
+npx tsx scripts/staged-publish.ts --percentage 100
+```
+
+### Error Tracking with Sentry
+
+Set up Sentry for extension error monitoring to catch issues during staged rollouts:
+
+```typescript
+// src/background/error-tracking.ts
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: 'YOUR_SENTRY_DSN',
+  environment: process.env.NODE_ENV,
+  release: `my-extension@${chrome.runtime.getManifest().version}`,
+
+  // Filter out expected Chrome errors
+  beforeSend(event) {
+    if (event.exception?.values?.some(e =>
+      e.value?.includes('Extension context invalidated')
+    )) {
+      return null;
+    }
+    return event;
+  },
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  Sentry.captureMessage('Extension installed');
+});
+```
 
 ## Conclusion
 
-Implementing a comprehensive CI/CD pipeline for your Chrome extension is one of the most impactful investments you can make in your project's infrastructure. The initial setup time pays dividends through consistent code quality, faster iteration cycles, and reliable releases.
+A robust CI/CD pipeline transforms Chrome extension development from a manual, error-prone process into a reliable, automated workflow. By implementing the pipeline described in this guide, you'll catch bugs earlier, release more confidently, and scale your development team effectively.
 
-Start with the basic workflow outlined in this guide and progressively add more sophisticated features as your project grows. The modular nature of GitHub Actions makes it easy to extend functionality without disrupting existing functionality.
+The key components include GitHub Actions for workflow automation, ESLint and TypeScript for code quality, Vitest or Jest for testing with Chrome API mocks, Vite for optimized builds, and the Chrome Web Store API for programmatic publishing.
 
-Remember that CI/CD is not a set-it-and-forget-it system. Regularly review your pipeline metrics, update your test coverage based on real-world issues, and refine your processes as your team and project evolve.
+For more details on Chrome Web Store publishing, see our [Publishing Guide](/chrome-extension-guide/docs/publishing/publishing-guide/). For information about release management strategies, check out our upcoming [Release Management](/chrome-extension-guide/docs/guides/release-management/) guide.
 
 ---
 
