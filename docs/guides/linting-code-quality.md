@@ -195,6 +195,7 @@ Write custom rules for patterns specific to extension development. Place these i
 Using `innerHTML` in content scripts is a security risk (XSS via page-controlled data) and violates Chrome Web Store policy.
 
 ```javascript
+{% raw %}
 // eslint-plugins/no-innerhtml-in-content.js
 export default {
   meta: {
@@ -236,6 +237,7 @@ export default {
     };
   },
 };
+{% endraw %}
 ```
 
 ### Require Error Handling on Chrome APIs {#require-error-handling-on-chrome-apis}

@@ -399,6 +399,7 @@ npm install -D size-limit @size-limit/file
 ### CI Integration {#ci-integration}
 
 ```yaml
+{% raw %}
 # .github/workflows/size.yml
 name: Bundle Size Check
 on: [pull_request]
@@ -416,6 +417,7 @@ jobs:
       - uses: andresz1/size-limit-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+{% endraw %}
 ```
 
 ### Budget Tracking Over Time {#budget-tracking-over-time}

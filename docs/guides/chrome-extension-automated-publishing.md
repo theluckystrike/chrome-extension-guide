@@ -59,6 +59,7 @@ npx chrome-webstore-upload-cli upload \
 Complete workflow that builds, packages, and publishes on tag push:
 
 ```yaml
+{% raw %}
 # .github/workflows/publish.yml
 name: Publish to Chrome Web Store
 
@@ -106,6 +107,7 @@ jobs:
           client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
           action: publish
+{% endraw %}
 ```
 
 ---

@@ -441,6 +441,7 @@ export function messageBridge<T extends Record<string, unknown>>(
 Svelte's built-in transitions create polished UIs with zero additional dependencies:
 
 ```svelte
+{% raw %}
 <!-- popup/NotificationList.svelte -->
 <script lang="ts">
   import { fly, fade } from "svelte/transition";
@@ -485,6 +486,7 @@ Svelte's built-in transitions create polished UIs with zero additional dependenc
   .item button { background: none; border: none; font-size: 18px; cursor: pointer; opacity: 0.6; }
   .item button:hover { opacity: 1; }
 </style>
+{% endraw %}
 ```
 
 For popup UIs with tight rendering budgets, prefer `fade` and `slide` over `fly` with large offsets. Avoid `elasticOut` easing on lists with many items.

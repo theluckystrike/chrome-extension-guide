@@ -291,6 +291,7 @@ Rank errors using this formula: `Priority = (Error Rate) × (User Impact) × (Se
 Configure your error tracking tool to group similar errors automatically. Sentry's fingerprinting helps:
 
 ```javascript
+{% raw %}
 Sentry.configureScope((scope) => {
   scope.setFingerprint([
     '{{ default }}',
@@ -298,6 +299,7 @@ Sentry.configureScope((scope) => {
     errorData.context
   ]);
 });
+{% endraw %}
 ```
 
 Review crash reports weekly. Look for patterns: errors that spike after a new release indicate regression bugs. Errors in specific browser versions may reveal compatibility issues.

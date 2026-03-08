@@ -232,6 +232,7 @@ The manifest references the built output:
 Extract reusable components into `src/shared/` so popup, options, and side panel stay consistent:
 
 ```tsx
+{% raw %}
 // src/shared/components/StatusBadge.tsx
 
 interface StatusBadgeProps {
@@ -273,6 +274,7 @@ export function StatusBadge({ status, label }: StatusBadgeProps) {
     </span>
   );
 }
+{% endraw %}
 ```
 
 ```tsx
@@ -348,6 +350,7 @@ export function SettingsForm() {
 Use the same component in multiple surfaces:
 
 ```tsx
+{% raw %}
 // src/popup/App.tsx
 import { SettingsForm } from "@shared/components/SettingsForm";
 import { StatusBadge } from "@shared/components/StatusBadge";
@@ -363,9 +366,11 @@ export function App() {
     </div>
   );
 }
+{% endraw %}
 ```
 
 ```tsx
+{% raw %}
 // src/options/App.tsx — same components, different layout
 import { SettingsForm } from "@shared/components/SettingsForm";
 
@@ -377,6 +382,7 @@ export function App() {
     </div>
   );
 }
+{% endraw %}
 ```
 
 ---
@@ -386,6 +392,7 @@ export function App() {
 Create a context provider that syncs React state with `chrome.storage` and listens for external changes (from other extension pages or the background):
 
 ```tsx
+{% raw %}
 // src/shared/context/StorageContext.tsx
 
 import {
@@ -494,6 +501,7 @@ export function useStorageContext(): StorageContextValue {
   }
   return ctx;
 }
+{% endraw %}
 ```
 
 ---
@@ -706,6 +714,7 @@ chrome.runtime.onMessage.addListener((message) => {
 ```
 
 ```tsx
+{% raw %}
 // src/content/Overlay.tsx
 
 import { useState, useEffect } from "react";
@@ -749,6 +758,7 @@ export function Overlay({ onClose }: OverlayProps) {
     </div>
   );
 }
+{% endraw %}
 ```
 
 ---

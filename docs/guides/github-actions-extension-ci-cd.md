@@ -97,6 +97,7 @@ Store the generated zip as a workflow artifact so you can download and test it m
 Manual uploads to the Chrome Web Store are time-consuming and error-prone. The chrome-webstore-upload-cli package automates this process, taking your credentials and zip file and handling the upload for you. You'll need to obtain your Chrome Web Store developer credentials and store them as secrets in your GitHub repository.
 
 ```yaml
+{% raw %}
 - name: Publish to Chrome Web Store
   if: startsWith(github.ref, 'refs/tags/v')
   run: |
@@ -107,6 +108,7 @@ Manual uploads to the Chrome Web Store are time-consuming and error-prone. The c
       --refresh-token ${{ secrets.REFRESH_TOKEN }} \
       --upload-zip-file dist/extension.zip \
       --publish-target 'default'
+{% endraw %}
 ```
 
 This workflow publishes only when you create a version tag, giving you control over when releases go live. The publish-target option lets you publish to the default track, test track, or internal testing depending on your needs.
@@ -116,6 +118,7 @@ This workflow publishes only when you create a version tag, giving you control o
 If your extension targets multiple browsers, run your CI pipeline across all of them. GitHub Actions matrix strategy lets you define multiple browser environments and run tests in each one. Firefox uses the same extension format as Chrome for Manifest V2, but Manifest V3 extensions may need adjustments.
 
 ```yaml
+{% raw %}
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -125,6 +128,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - run: npm test -- --browser ${{ matrix.browser }}
+{% endraw %}
 ```
 
 Testing across browsers catches API differences and ensures your extension works for all users regardless of their browser choice.

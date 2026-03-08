@@ -534,6 +534,7 @@ Show meaningful progress for streams that have a known total length or expected 
 For indeterminate streams, use a token counter and elapsed time.
 
 ```typescript
+{% raw %}
 // stream-progress.ts
 
 interface StreamProgress {
@@ -607,6 +608,7 @@ function StreamIndicator({ progress }: { progress: StreamProgress }) {
     </div>
   );
 }
+{% endraw %}
 ```
 
 **Gotchas:**
