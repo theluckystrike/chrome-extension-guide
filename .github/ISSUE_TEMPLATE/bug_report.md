@@ -1,40 +1,40 @@
 ---
 name: Bug Report
-about: Report an error in a guide, broken code example, or incorrect information
-title: "[BUG] "
+about: Report an error in a guide or broken code example
+title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
 ## Article/Guide Link
-<!-- Link to the article or guide where you found the issue (e.g., /docs/guides/manifest-v3.md) -->
+> Please provide the link to the article or guide where you found the issue.
 
 ## Section Name
-<!-- Name of the specific section where the issue is located -->
+> Specify the section or heading where the issue exists.
 
 ## Issue Description
-<!-- A clear and concise description of what the issue is -->
+> Describe the problem in detail.
 
 ## Expected Behavior
-<!-- What should happen? -->
+> What should happen?
 
 ## Actual Behavior
-<!-- What actually happens? -->
+> What actually happened?
 
-## Steps to Reproduce (for code issues)
-<!-- If this is a code issue, provide numbered steps to reproduce -->
-1. Copy the code from the guide
-2. Run/deploy the extension
-3. See the error
+## Steps to Reproduce
+1.
+2.
+3.
 
 ## Environment
-- Chrome version: 
-- Node.js version: 
-- OS: 
-- Manifest version (v2/v3): 
+- **Chrome version:** 
+- **Node version:** 
+- **Operating System:** 
+- **Manifest version:** 
 
 ## Suggested Fix
-<!-- If you have a suggestion for how to fix this issue, describe it here -->
+> If you have a suggestion for how to fix this, please describe it here.
 
 ## Screenshots
-<!-- If applicable, add screenshots to help explain the problem -->
+> If applicable, add screenshots to help explain the problem.
+

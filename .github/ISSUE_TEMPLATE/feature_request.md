@@ -1,49 +1,38 @@
 ---
 name: Feature Request / New Article
-about: Suggest a new guide, article topic, or improvement
-title: "[REQUEST] "
+about: Suggest a new guide or improvement
+title: '[REQUEST] '
 labels: enhancement
 assignees: ''
 ---
 
 ## Request Type
-<!-- Check the appropriate option -->
-- [ ] New article/guide
-- [ ] Expansion of existing article
-- [ ] New code example
-- [ ] New starter template
-- [ ] Other improvement
+- [ ] New Article
+- [ ] Expansion of Existing Article
+- [ ] Code Example
+- [ ] Starter Template
+- [ ] Other (please describe below)
 
 ## Description
-<!-- A clear and concise description of the feature or improvement -->
+> Provide a brief description of your feature request.
 
 ## Proposed Title
-<!-- If requesting a new article/guide, what should the title be? -->
+> What should the new article or section be titled?
 
 ## Target Audience
-<!-- Who is this content for? (e.g., beginners, advanced developers) -->
-
-## Estimated Length
-<!-- Approximate length of the new content (e.g., 500 words, 2000 words) -->
+> Who is this guide for? (e.g., beginners, advanced developers, etc.)
 
 ## Key Topics
-<!-- What topics should be covered in this content? -->
-
-## Existing Article (for improvements)
-<!-- If expanding/improving an existing article, provide the link -->
-- Article link: 
-
-## Improvement Details
-<!-- Describe what improvements you'd like to see for the existing article -->
+> What specific topics should be covered?
 
 ## Why It Matters
-<!-- Explain why this would be useful for Chrome extension developers -->
+> Explain why this would be valuable to the Chrome Extension Guide community.
 
 ## Willingness to Contribute
-<!-- Check all that apply -->
-- [ ] Yes, I would like to write this
-- [ ] No, but I want this to exist
-- [ ] I can help review
+- [ ] I would like to help write this content
+- [ ] I can provide code examples
+- [ ] I prefer to just suggest the idea
 
 ## Additional Context
-<!-- Add any other context or examples about the feature request here -->
+> Add any other context, screenshots, or links about the feature request here.
+
