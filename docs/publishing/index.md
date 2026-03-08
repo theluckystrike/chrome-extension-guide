@@ -10,6 +10,8 @@ Welcome to the Chrome Extension Publishing Guide — your comprehensive resource
 
 Learn how to navigate the Chrome Web Store review process, avoid common rejection reasons, implement beta testing programs, and maintain your published extension over time. Whether you're publishing your first extension or looking to improve your existing listings, these guides provide the insights and strategies you need for success.
 
+> 💰 **Monetize Your Extension** — Once published, learn how to turn your extension into a revenue stream. Check out the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) for freemium models, subscriptions, Stripe integration, and pricing strategies.
+
 - [analytics](analytics.html)
 - [beta-testing](beta-testing.html)
 - [chrome-web-store-rejection-fixes](chrome-web-store-rejection-fixes.html)
