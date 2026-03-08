@@ -340,6 +340,10 @@ This RSS reader extension demonstrates:
 
 The extension can be installed locally by loading the unpacked extension in Chrome's extension management page.
 -e 
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

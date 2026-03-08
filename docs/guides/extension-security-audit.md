@@ -187,6 +187,10 @@ For more detailed guidance on specific security topics, refer to:
 - [Security Hardening](../guides/security-hardening.md)
 - [Security Best Practices](../guides/security-best-practices.md)
 -e 
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

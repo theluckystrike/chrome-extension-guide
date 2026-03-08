@@ -615,3 +615,7 @@ chrome.notifications.onClicked.addListener((id) => {
 - Combine with `chrome.alarms` for scheduled/scheduled notifications
 - Always respect users — don't spam notifications
 - Check permission status before creating notifications
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
