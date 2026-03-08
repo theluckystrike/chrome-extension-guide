@@ -94,5 +94,16 @@
   <footer>
     <p>Built by <a href="https://zovo.one">theluckystrike</a> at <a href="https://zovo.one">zovo.one</a> | <a href="https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn">Tab Suspender Pro</a></p>
   </footer>
+  <script>
+    // Add loading="lazy" to all images in content
+    document.addEventListener('DOMContentLoaded', function() {
+      var contentImages = document.querySelectorAll('.content img');
+      contentImages.forEach(function(img) {
+        if (!img.hasAttribute('loading')) {
+          img.setAttribute('loading', 'lazy');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
