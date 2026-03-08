@@ -58,6 +58,69 @@
   {% endif %}
 
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
+
+  <style>
+    .prev-next-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+      gap: 1rem;
+    }
+    
+    .prev-next-nav a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .prev-next-nav a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .prev-next-nav .nav-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+      margin-bottom: 0.25rem;
+    }
+    
+    .prev-next-nav .nav-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    
+    .prev-next-nav .prev-link {
+      align-items: flex-start;
+    }
+    
+    .prev-next-nav .next-link {
+      align-items: flex-end;
+      text-align: right;
+    }
+    
+    .prev-next-nav .empty-nav {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: #f3f4f6;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -88,6 +151,59 @@
       </nav>
       {% endif %}
       {{ content }}
+      
+      {% comment %}Previous/Next Navigation{% endcomment %}
+      <div class="prev-next-nav">
+        {% comment %}Build flat list of all pages{% endcomment %}
+        {% assign all_pages = "" | split: "" %}
+        
+        {% for section in site.data.navigation.sections %}
+          {% for article in section.articles %}
+            {% assign page_info = article.title | append: "|" | append: article.slug %}
+            {% assign all_pages = all_pages | push: page_info %}
+          {% endfor %}
+        {% endfor %}
+        
+        {% comment %}Find current page index{% endcomment %}
+        {% assign current_idx = -1 %}
+        {% for p in all_pages %}
+          {% assign p_parts = p | split: "|" %}
+          {% assign p_slug = p_parts[1] %}
+          {% if page.url contains p_slug %}
+            {% assign current_idx = forloop.index0 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        
+        {% comment %}Find previous page{% endcomment %}
+        {% if current_idx > 0 %}
+          {% assign prev_idx = current_idx | minus: 1 %}
+          {% assign prev_parts = all_pages[prev_idx] | split: "|" %}
+          {% assign prev_title = prev_parts[0] %}
+          {% assign prev_slug = prev_parts[1] %}
+          <a href="{{ prev_slug }}" class="prev-link">
+            <span class="nav-label">← Previous</span>
+            <span class="nav-title">{{ prev_title }}</span>
+          </a>
+        {% else %}
+          <div class="empty-nav">No previous article</div>
+        {% endif %}
+        
+        {% comment %}Find next page{% endcomment %}
+        {% assign total_pages = all_pages.size %}
+        {% if current_idx >= 0 and current_idx < total_pages | minus: 1 %}
+          {% assign next_idx = current_idx | plus: 1 %}
+          {% assign next_parts = all_pages[next_idx] | split: "|" %}
+          {% assign next_title = next_parts[0] %}
+          {% assign next_slug = next_parts[1] %}
+          <a href="{{ next_slug }}" class="next-link">
+            <span class="nav-label">Next →</span>
+            <span class="nav-title">{{ next_title }}</span>
+          </a>
+        {% else %}
+          <div class="empty-nav">No next article</div>
+        {% endif %}
+      </div>
     </main>
   </div>
   
