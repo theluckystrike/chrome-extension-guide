@@ -1,427 +1,376 @@
 ---
 layout: default
-title: "Chrome Extension Memory Management — Developer Guide"
-description: "Learn Chrome extension memory management with this developer guide covering implementation, best practices, and code examples."
+title: "Chrome Extension Memory Management — Avoid Leaks and Crashes"
+description: "Learn effective memory management techniques for Chrome extensions to prevent memory leaks, reduce crashes, and ensure stable performance."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/memory-management/"
 ---
-# Memory Management in Chrome Extensions
+# Chrome Extension Memory Management — Avoid Leaks and Crashes
 
-Memory management is critical for Chrome extension performance and user experience. Extensions run in multiple contexts, each with different memory characteristics and lifecycle behaviors. Understanding these differences is essential for building efficient, stable extensions that don't consume excessive system resources or cause browser slowdowns.
+## Overview {#overview}
 
-## Memory by Context
+Memory leaks in Chrome extensions can cause browser crashes, slowdowns, and poor user experience. Since extensions run in multiple contexts—service workers, content scripts, popup pages, and options pages—managing memory across all these environments requires careful attention. This guide covers common memory leak sources and proven techniques to keep your extension memory-efficient.
 
-Different extension contexts have fundamentally different memory behaviors:
+Chrome's garbage collector helps, but it can't automatically fix all memory issues. Circular references, detached DOM nodes, event listener accumulation, and improper closure usage can all cause memory to grow unbounded. Understanding these patterns and applying defensive coding practices will prevent your extension from becoming a memory hog.
 
-### Service Worker
-The service worker is terminated after approximately 30 seconds of inactivity. This means ALL in-memory state is lost when the worker terminates. To persist data across terminations, use the `@theluckystrike/webext-storage` library which automatically syncs state to Chrome's storage APIs:
+## Common Memory Leak Sources {#common-memory-leak-sources}
+
+### Circular References {#circular-references}
+
+JavaScript's garbage collector handles circular references, but they can cause problems when combined with Chrome's extension APIs:
 
 ```javascript
-import { createStorage } from '@theluckystrike/webext-storage';
+// ❌ Bad: Circular reference with DOM
+function createLeakyWidget() {
+  const widget = document.getElementById('widget');
+  
+  widget.addEventListener('click', () => {
+    console.log('Clicked', widget.textContent);
+  });
+  
+  // This creates a reference cycle: widget -> event listener -> widget
+}
 
-const storage = createStorage();
-await storage.set('userPreferences', { theme: 'dark', language: 'en' });
-const prefs = await storage.get('userPreferences');
-// Data persists across service worker restarts
+// ✅ Good: Break the cycle with weak reference or clean up
+function createSafeWidget() {
+  const widget = document.getElementById('widget');
+  const textContent = widget.textContent; // Extract primitive
+  
+  widget.addEventListener('click', () => {
+    console.log('Clicked', textContent); // Use primitive, not element reference
+  });
+  
+  // Or clean up explicitly
+  return () => widget.removeEventListener('click', handler);
+}
 ```
 
-### Content Scripts
-Content scripts live with the page and can leak memory if not properly managed. They share the page's JavaScript heap but have their own DOM access. Always clean up listeners and observers:
+### Event Listener Accumulation {#event-listener-accumulation}
+
+Repeatedly adding event listeners without removal causes memory to grow:
 
 ```javascript
-// Content script cleanup pattern
-let observer = null;
-
-function init() {
-  observer = new MutationObserver(handleMutations);
-  observer.observe(document.body, { childList: true, subtree: true });
+// ❌ Bad: Add listeners repeatedly
+function onTabUpdate(tabId, changeInfo, tab) {
+  chrome.tabs.sendMessage(tabId, { data: 'update' });
 }
 
-function cleanup() {
-  if (observer) {
-    observer.disconnect();
-    observer = null;
+chrome.tabs.onUpdated.addListener(onTabUpdate);
+// If this runs multiple times, you have multiple listeners
+
+// ✅ Good: Check before adding or use a flag
+let isListenerRegistered = false;
+
+function registerListener() {
+  if (isListenerRegistered) return;
+  
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    chrome.tabs.sendMessage(tabId, { data: 'update' });
+  });
+  
+  isListenerRegistered = true;
+}
+```
+
+### Closures Holding References {#closures-holding-references}
+
+Closures capture variables from their scope—sometimes more than you expect:
+
+```javascript
+// ❌ Bad: Closure holds large object reference
+function createProcessor() {
+  const largeData = new Array(1000000).fill('data');
+  
+  return {
+    process: function(input) {
+      return input.map(x => x * 2);
+    },
+    // largeData is still accessible even though process doesn't use it
+  };
+}
+
+// ✅ Good: Extract only what you need
+function createProcessor() {
+  const multiplier = 2;
+  
+  return {
+    process: function(input) {
+      return input.map(x => x * multiplier);
+    },
+    // largeData can be garbage collected
+  };
+}
+```
+
+## Service Worker Memory Management {#service-worker-memory-management}
+
+Service workers can be terminated and restarted at any time. Your code must handle this gracefully while avoiding memory buildup.
+
+### Clean Up on Termination {#clean-up-on-termination}
+
+Use the termination phase to release resources:
+
+```javascript
+// Store references that need cleanup
+let cache = null;
+let dbConnection = null;
+
+self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Activate immediately
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(clients.claim());
+});
+
+// Cleanup when service worker is about to terminate
+self.addEventListener('message', (event) => {
+  if (event.data === 'cleanup') {
+    if (cache) cache.close();
+    if (dbConnection) dbConnection.close();
+    cache = null;
+    dbConnection = null;
   }
-}
-
-// Cleanup when navigating away
-chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.type === 'CLEANUP') cleanup();
 });
 ```
 
-### Popup/Options Pages
-These have fresh state on every open and are freed when closed. Don't rely on in-memory state persisting between opens:
+### Use chrome.idle to Detect Inactivity {#use-chromeidle-to-detect-inactivity}
+
+Scale back or release resources when the user is idle:
 
 ```javascript
-// BAD: Relying on global state
-let cachedData = null; // Lost on every popup close
+chrome.idle.setDetectionInterval(60); // Check every minute
 
-// GOOD: Load from storage on open
-async function init() {
-  const { data } = await chrome.storage.local.get('data');
-  render(data);
-}
-```
-
-### Side Panel
-The side panel is persistent while open but can leak like content scripts if not properly managed:
-
-```javascript
-// Side panel cleanup
-sidePanel.addEventListener('visibilitychange', () => {
-  if (!sidePanel.visible) {
-    cleanupResources();
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === 'idle') {
+    // User away: release heavy resources
+    clearCache();
+    closeDatabaseConnections();
+  } else if (state === 'active') {
+    // User back: reinitialize as needed
+    initializeResources();
   }
 });
 ```
 
-## Common Memory Leaks
+## Content Script Memory Management {#content-script-memory-management}
 
-Understanding and preventing memory leaks is essential for stable extensions:
+Content scripts run in the context of web pages and can easily leak memory if not careful.
 
-### Forgotten Event Listeners
-Use the `AbortController` signal pattern for automatic cleanup:
+### Avoid Storing DOM References {#avoid-storing-dom-references}
 
-```javascript
-const controller = new AbortController();
-
-// Set up listeners with signal
-element.addEventListener('click', handler, { signal: controller.signal });
-
-// Single call to remove ALL listeners
-controller.abort();
-```
-
-### Detached DOM Nodes
-Null references after removing elements can cause memory leaks:
+Don't store DOM element references in long-lived objects:
 
 ```javascript
-// BAD: Holding reference to removed element
-const element = document.getElementById('modal');
-element.remove();
-// element still references the removed DOM node
+// ❌ Bad: Store DOM reference
+const state = {
+  button: document.getElementById('submit'),
+  form: document.querySelector('form'),
+};
 
-// GOOD: Clear references
-const element = document.getElementById('modal');
-element.remove();
-element = null;
-```
+setTimeout(() => {
+  state.button.addEventListener('click', handleClick);
+}, 1000);
 
-### Closures Holding Large Data
-Closures can unintentionally hold references to large objects:
-
-```javascript
-// BAD: Closure captures large array
-const largeData = new Array(1000000).fill('data');
-function getValue() {
-  return largeData[0]; // Keeps largeData in memory
+// ✅ Good: Query when needed
+function getSubmitButton() {
+  return document.getElementById('submit');
 }
 
-// GOOD: Extract only needed values
-const largeData = new Array(1000000).fill('data');
-function getValue() {
-  const needed = largeData[0]; // Copy the value
-  largeData.length = 0; // Release the array
-  return needed;
-}
+setTimeout(() => {
+  getSubmitButton().addEventListener('click', handleClick);
+}, 1000);
 ```
 
-### MutationObserver Not Disconnected
+### Clean Up Mutation Observers {#clean-up-mutation-observers}
+
 Always disconnect observers when done:
 
 ```javascript
-const observer = new MutationObserver(callback);
-observer.observe(target, { attributes: true });
-
-// When done - ALWAYS disconnect
-observer.disconnect();
-```
-
-### setInterval Without clearInterval
-Content scripts with intervals continue running unless cleared:
-
-```javascript
-// BAD: Interval continues after navigation
-setInterval(() => checkStatus(), 5000);
-
-// GOOD: Store interval ID and clear on cleanup
-const intervalId = setInterval(() => checkStatus(), 5000);
-
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === 'CLEANUP') {
-    clearInterval(intervalId);
-  }
+// ❌ Bad: Observer never disconnected
+const observer = new MutationObserver((mutations) => {
+  // Handle mutations
 });
-```
+observer.observe(document.body, { childList: true });
 
-## Memory-Efficient Patterns
+// ✅ Good: Store reference and disconnect
+const observer = new MutationObserver((mutations) => {
+  // Handle mutations
+});
+observer.observe(document.body, { childList: true });
 
-### WeakMap/WeakRef for DOM-Associated Caches
-These allow garbage collection when the key element is removed:
-
-```javascript
-// Cache that auto-cleans when element is removed
-const elementCache = new WeakMap();
-
-function getCachedData(element) {
-  if (!elementCache.has(element)) {
-    elementCache.set(element, computeExpensiveData(element));
-  }
-  return elementCache.get(element);
+// Clean up when necessary
+function cleanup() {
+  observer.disconnect();
 }
+
+// Call cleanup when appropriate (page navigation, extension disable, etc.)
+window.addEventListener('unload', cleanup);
 ```
 
-### Streaming Large Data
-Use `ReadableStream` instead of loading everything into memory:
+### Handle Page Navigation {#handle-page-navigation}
+
+Single-page applications don't trigger full page loads, so content scripts need to handle navigation:
 
 ```javascript
-async function processLargeData(url) {
-  const response = await fetch(url);
-  const reader = response.body.getReader();
+let currentPath = location.pathname;
+
+function handleNavigation() {
+  if (location.pathname !== currentPath) {
+    // Page changed - clean up old state
+    cleanup();
+    
+    // Reinitialize for new page
+    currentPath = location.pathname;
+    initialize();
+  }
+}
+
+// Use popstate for SPA navigation
+window.addEventListener('popstate', handleNavigation);
+
+// Also check periodically (for SPAs that don't use history API)
+setInterval(handleNavigation, 1000);
+```
+
+## Storage Memory Management {#storage-memory-management}
+
+The chrome.storage API stores data persistently, but unlimited storage leads to memory issues.
+
+### Implement Storage Limits {#implement-storage-limit}
+
+Set maximum storage thresholds:
+
+```javascript
+const MAX_STORAGE_ITEMS = 1000;
+const MAX_STORAGE_SIZE_MB = 5;
+
+async function addToStorage(key, value) {
+  const { currentSize = 0, items = [] } = await chrome.storage.local.get(['currentSize', 'items']);
   
-  const stream = new ReadableStream({
-    async start(controller) {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        processChunk(value); // Process in chunks
-        controller.enqueue(value);
-      }
-      controller.close();
-    }
+  // Estimate size (rough approximation)
+  const itemSize = JSON.stringify(value).length;
+  const newSize = currentSize + itemSize;
+  
+  if (items.length >= MAX_STORAGE_ITEMS || newSize > MAX_STORAGE_SIZE_MB * 1024 * 1024) {
+    // Remove oldest items
+    const itemsToRemove = items.slice(0, Math.floor(MAX_STORAGE_ITEMS * 0.2));
+    const removeKeys = itemsToRemove.map(item => item.key);
+    
+    await chrome.storage.local.remove(removeKeys);
+    
+    // Update tracking
+    await chrome.storage.local.set({
+      items: items.slice(itemsToRemove.length),
+      currentSize: newSize - itemsToRemove.reduce((sum, i) => sum + i.size, 0)
+    });
+  }
+  
+  // Add new item
+  await chrome.storage.local.set({ [key]: value });
+  await chrome.storage.local.set({
+    items: [...items, { key, size: itemSize }],
+    currentSize: newSize
   });
+}
+```
+
+### Clear Unused Data Periodically {#clear-unused-data-periodically}
+
+Implement cleanup of stale data:
+
+```javascript
+const DATA_RETENTION_DAYS = 30;
+
+async function cleanupOldData() {
+  const { cachedData = {} } = await chrome.storage.local.get('cachedData');
   
-  return stream;
+  const now = Date.now();
+  const cutoff = now - (DATA_RETENTION_DAYS * 24 * 60 * 60 * 1000);
+  
+  const cleaned = {};
+  let removedCount = 0;
+  
+  for (const [key, value] of Object.entries(cachedData)) {
+    if (value.timestamp > cutoff) {
+      cleaned[key] = value;
+    } else {
+      removedCount++;
+    }
+  }
+  
+  await chrome.storage.local.set({ cachedData: cleaned });
+  console.log(`Cleaned up ${removedCount} stale entries`);
+}
+
+// Run cleanup periodically
+chrome.alarms.create('cleanupOldData', { periodInMinutes: 60 * 24 }); // Daily
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'cleanupOldData') {
+    cleanupOldData();
+  }
+});
+```
+
+## Memory Profiling and Debugging {#memory-profiling-and-debugging}
+
+### Use Chrome DevTools {#use-chrome-devtools}
+
+Find memory leaks using Chrome's built-in tools:
+
+1. Open Chrome DevTools (F12)
+2. Go to the Memory tab
+3. Take heap snapshots before and after operations
+4. Compare snapshots to find retained objects
+
+### Monitor Memory with performance.measureMemory {#monitor-memory-with-performancemeasurememory}
+
+Use the Memory Measurement API:
+
+```javascript
+if (performance.measureMemory) {
+  performance.measureMemory().then((result) => {
+    console.log('Memory usage:', {
+      bytes: result.bytes,
+      jsHeapSizeLimit: result.jsHeapSizeLimit,
+    });
+  });
 }
 ```
 
-### Lazy Initialization with Dynamic import()
-Load code only when needed:
+### Log Memory State in Extension {#log-memory-state-in-extension}
+
+Add debugging to track memory growth:
 
 ```javascript
-// Only load heavy library when user clicks button
-document.getElementById('analyze').addEventListener('click', async () => {
-  const { HeavyLibrary } = await import('./heavy-library.js');
-  const analyzer = new HeavyLibrary();
-  analyzer.run();
-});
-```
-
-### In-Memory Cache with Storage Sync
-Use `@theluckystrike/webext-storage` `watch()` method:
-
-```javascript
-import { createStorage } from '@theluckystrike/webext-storage';
-
-const storage = createStorage();
-const cache = new Map();
-
-// Watch for storage changes and update cache
-storage.watch('items', (newVal, oldVal, area) => {
-  cache.clear();
-  if (newVal) {
-    newVal.forEach(item => cache.set(item.id, item));
-  }
-});
-```
-
-## Monitoring Memory
-
-### Extension Memory Page
-`chrome://extensions` shows per-extension memory usage - useful for quick checks:
-
-### DevTools Memory Tab
-Use heap snapshots, allocation timeline, and comparison features:
-
-```javascript
-// Take heap snapshot programmatically
-chrome.debugger.sendCommand({ tabId: tabId }, 'HeapProfiler.takeHeapSnapshot', 
-  (params) => {
-    console.log('Snapshot taken');
-  }
-);
-```
-
-### Performance API
-Check memory usage in extension pages:
-
-```javascript
-function logMemory() {
+function logMemoryState(label) {
   if (performance.memory) {
-    console.log(`Heap used: ${performance.memory.usedJSHeapSize / 1024 / 1024} MB`);
-    console.log(`Heap total: ${performance.memory.totalJSHeapSize / 1024 / 1024} MB`);
-    console.log(`Heap limit: ${performance.memory.jsHeapSizeLimit / 1024 / 1024} MB`);
-  }
-}
-```
-
-## Storage vs Memory Trade-offs
-
-| Factor | In-Memory | Chrome Storage |
-|--------|-----------|----------------|
-| Speed | Instant | ~1-5ms async |
-| Persistence | Lost on SW terminate | Persists forever |
-| Sharing | Single context | All contexts |
-| Capacity | Unlimited* | Limited (~5MB) |
-| Type | Synchronous | Asynchronous |
-
-*Limited by available system memory
-
-## Best Practices
-
-1. **Persist Critical State**: Service workers will terminate - always persist important data:
-   ```javascript
-   // Always save state before termination
-   chrome.runtime.onSuspend.addListener(async () => {
-     await chrome.storage.local.set({ state: currentState });
-   });
-   ```
-
-2. **Remove Listeners with AbortController**: Use the signal pattern for easy cleanup:
-   ```javascript
-   const controller = new AbortController();
-   element.addEventListener('input', handler, { signal: controller.signal });
-   // Clean up with single call
-   controller.abort();
-   ```
-
-3. **Disconnect MutationObservers**: Always clean up observers:
-   ```javascript
-   observer.disconnect(); // Call when done
-   observer = null;
-   ```
-
-4. **Use WeakMap/WeakRef for Caches**: Let GC handle cleanup automatically
-
-5. **Profile with DevTools Memory Tab**: Regular profiling catches leaks early
-
-## Memory by Context {#memory-by-context}
-- **Service Worker**: terminated after ~30s idle, ALL in-memory state lost. Persist with `@theluckystrike/webext-storage`
-- **Content Scripts**: live with the page, can leak. Must clean up listeners/observers
-- **Popup/Options**: fresh state on every open, freed on close
-- **Side Panel**: persistent while open, can leak like content scripts
-
-## Common Memory Leaks {#common-memory-leaks}
-- Forgotten event listeners — use `AbortController` signal pattern for cleanup
-- Detached DOM nodes — null references after removing elements
-- Closures holding large data — extract needed values, release large arrays
-- MutationObserver not disconnected — always call `observer.disconnect()`
-- `setInterval` without `clearInterval` in content scripts
-
-## Memory-Efficient Patterns {#memory-efficient-patterns}
-- `WeakMap`/`WeakRef` for DOM-associated caches (auto-GC when element removed)
-- Streaming large data with `ReadableStream` instead of loading all into memory
-- Lazy initialization with dynamic `import()`
-- In-memory cache synced via `@theluckystrike/webext-storage` `watch()`
-
-## Monitoring Memory {#monitoring-memory}
-- `chrome://extensions` — per-extension memory usage
-- DevTools Memory tab — heap snapshots, allocation timeline, compare snapshots
-- `performance.memory.usedJSHeapSize` in extension pages
-
-## Storage vs Memory Trade-offs Table {#storage-vs-memory-trade-offs-table}
-- Speed: instant vs ~1-5ms async
-- Persistence: lost on SW terminate vs persists forever
-- Sharing: single context vs all contexts
-
-## Best Practices {#best-practices}
-- Persist critical state — SW will terminate
-- Remove listeners with AbortController
-- Disconnect MutationObservers
-- WeakMap/WeakRef for caches
-- Profile with DevTools Memory tab
-
-## Common Mistakes {#common-mistakes}
-- Large globals in content scripts, never disconnecting observers, ignoring SW termination, holding detached DOM refs
-
-## Related Articles {#related-articles}
-
-- [Memory Management Patterns](../patterns/memory-management.md)
-- [Performance Guide](../guides/performance.md)
-
-
-- **Large globals in content scripts**: Avoid global state in content scripts
-- **Never disconnecting observers**: Always clean up on page unload
-- **Ignoring SW termination**: Don't rely on in-memory state persisting
-- **Holding detached DOM refs**: Always null out references to removed elements
-
-## Practical Example: Complete Memory-Safe Content Script
-
-```javascript
-class MemorySafeContentScript {
-  constructor() {
-    this.controller = new AbortController();
-    this.observers = [];
-    this.cache = new WeakMap();
-  }
-
-  init() {
-    this.setupMutationObserver();
-    this.setupMessageListeners();
-    this.setupEventListeners();
-  }
-
-  setupMutationObserver() {
-    const observer = new MutationObserver(this.handleMutations.bind(this));
-    observer.observe(document.body, { 
-      childList: true, 
-      subtree: true,
-      attributes: true 
+    console.log(`[${label}] Memory:`, {
+      used: `${(performance.memory.usedJSHeapSize / 1048576).toFixed(2)} MB`,
+      total: `${(performance.memory.totalJSHeapSize / 1048576).toFixed(2)} MB`,
+      limit: `${(performance.memory.jsHeapSizeLimit / 1048576).toFixed(2)} MB`,
     });
-    this.observers.push(observer);
-  }
-
-  setupEventListeners() {
-    const element = document.getElementById('tracked');
-    element?.addEventListener('click', this.handleClick.bind(this), {
-      signal: this.controller.signal
-    });
-  }
-
-  setupMessageListeners() {
-    chrome.runtime.onMessage.addListener((msg, _, respond) => {
-      if (msg.type === 'CLEANUP') {
-        this.cleanup();
-        respond({ success: true });
-      }
-      return true;
-    });
-  }
-
-  cleanup() {
-    // Disconnect all observers
-    this.observers.forEach(obs => obs.disconnect());
-    this.observers = [];
-    
-    // Abort all event listeners
-    this.controller.abort();
-    
-    // Clear caches
-    this.cache = new WeakMap();
   }
 }
 
-// Initialize and clean up on navigation
-const script = new MemorySafeContentScript();
-script.init();
+// Log at key points
+chrome.runtime.onInstalled.addListener(() => {
+  logMemoryState('onInstalled');
+});
 
-let lastUrl = location.href;
-new MutationObserver(() => {
-  if (location.href !== lastUrl) {
-    lastUrl = location.href;
-    script.cleanup();
-    script.init();
-  }
-}).observe(document.body, { subtree: true, childList: true });
+chrome.runtime.onStartup.addListener(() => {
+  logMemoryState('onStartup');
+});
 ```
 
-This comprehensive approach ensures your extension manages memory efficiently across all contexts while maintaining reliable functionality for users.
+## Best Practices Summary {#best-practices-summary}
 
-## Related Articles
+Memory management in Chrome extensions requires vigilance across multiple contexts. Follow these core practices:
 
-- [Memory Management Patterns](../patterns/memory-management.md)
-- [Performance Guide](../guides/performance.md)
--e 
----
+- Avoid circular references and unnecessary closures
+- Clean up event listeners when no longer needed
+- Disconnect MutationObservers and other watchers
+- Implement storage limits and periodic cleanup
+- Use chrome.idle to release resources when inactive
+- Profile memory regularly to catch leaks early
 
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+By proactively managing memory throughout your extension's lifecycle, you'll prevent crashes, improve performance, and deliver a stable experience for your users. Memory issues often start small but grow over time—address them early and monitor continuously.
