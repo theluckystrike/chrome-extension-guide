@@ -1,204 +1,223 @@
 ---
 layout: default
-title: "Chrome Extension Options Page — Developer Guide"
-description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+title: "Chrome Extension Options Page — How to Build a Settings UI"
+description: "A comprehensive guide to building Chrome extension options pages, covering embedded vs full-page layouts, chrome.storage integration, form design patterns, save/load implementations, and dark mode support."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/options-page/"
 ---
-# Building an Options Page
 
-## Overview {#overview}
-Step-by-step guide to building a production-quality options page. Uses @theluckystrike/webext-storage for persisting settings and @theluckystrike/webext-permissions for managing optional permissions from the settings UI.
+# Chrome Extension Options Page — How to Build a Settings UI
 
-## Manifest Setup {#manifest-setup}
+The options page is one of the most critical components of any Chrome extension. It's where users configure their preferences, customize behavior, and control how your extension interacts with their browsing experience. A well-designed options page improves user satisfaction, reduces support requests, and makes your extension feel professional and polished. This guide covers everything you need to know to build a production-quality options page, from choosing the right layout to implementing robust storage patterns.
+
+## Embedded vs Full-Page Options {#embedded-vs-full-page}
+
+Chrome extensions support two distinct options page configurations, each with its own use cases and trade-offs. Understanding when to use each type will help you make the right decision for your extension.
+
+**Embedded options** render directly within the Chrome extensions management page. They load quickly and feel integrated with the browser's UI, but they're constrained to a smaller viewport and have limited styling options. Use embedded options when your settings are simple and few—think boolean toggles, dropdown selections, or single-input forms. The embedded approach works well for utility extensions that need quick configuration without distracting users from their workflow.
+
+**Full-page options** open in a new browser tab, giving you complete control over the layout, styling, and user experience. This approach is ideal for complex settings interfaces with multiple sections, custom theming, or advanced form controls. Full-page options can include scrolling, complex layouts, and rich interactive elements that would feel cramped in an embedded view.
+
+Configuring either type requires updates to your manifest.json. For embedded options, use the simple `options_page` property:
+
 ```json
 {
-  "options_page": "options.html",
+  "options_page": "options.html"
+}
+```
+
+For full-page options with modern Manifest V3, use the more flexible `options_ui` object:
+
+```json
+{
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
-  },
-  "permissions": ["storage"],
-  "optional_permissions": ["tabs", "bookmarks", "history"]
+  }
 }
 ```
 
-## Step 1: Define Your Settings Schema {#step-1-define-your-settings-schema}
+The `open_in_tab: true` setting gives users a dedicated tab, while removing it embeds the options within Chrome's extensions management page. Most developers prefer `open_in_tab: true` for complex settings, as it provides a better user experience and avoids the constrained iframe environment.
 
-```ts
-import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
+## Chrome Storage Integration {#chrome-storage-integration}
 
-const schema = defineSchema({
-  theme: "system" as "light" | "dark" | "system",
-  fontSize: 14,
-  notificationsEnabled: true,
-  autoSaveInterval: 5,
-  blockedDomains: [] as string[],
-  advancedMode: false,
-  lastSaved: 0,
-});
+The chrome.storage API is the backbone of any options page. Unlike localStorage in web pages, chrome.storage is specifically designed for extensions and offers several important advantages. It synchronizes across a user's devices when they're signed into Chrome (with the `sync` area), persists independently of the extension's lifecycle, and provides asynchronous operations that won't block the UI.
 
-export const storage = createStorage({ schema, area: "sync" });
-```
+There are two storage areas to choose from: `storage.sync` and `storage.local`. Use `storage.sync` for user preferences that should follow them across devices—theme choices, notification settings, and personalized configurations. This area has a quota of about 100KB total but ensures users have consistent settings wherever they use Chrome. Use `storage.local` for larger data that doesn't need to sync, such as cached content, large configuration objects, or data that changes frequently.
 
-Explain why `sync` is good for user preferences (follows user across devices).
+Here's a basic pattern for initializing your extension's storage:
 
-## Step 2: Load Settings on Page Open {#step-2-load-settings-on-page-open}
+```javascript
+// Default settings configuration
+const DEFAULT_SETTINGS = {
+  theme: 'system',
+  notifications: true,
+  autoSave: true,
+  maxResults: 50,
+  blockedDomains: []
+};
 
-```ts
+// Load settings with defaults fallback
 async function loadSettings() {
-  const settings = await storage.getAll();
+  const result = await chrome.storage.sync.get(DEFAULT_SETTINGS);
+  return { ...DEFAULT_SETTINGS, ...result };
+}
 
-  (document.getElementById("theme") as HTMLSelectElement).value = settings.theme;
-  (document.getElementById("fontSize") as HTMLInputElement).value = String(settings.fontSize);
-  (document.getElementById("notifications") as HTMLInputElement).checked = settings.notificationsEnabled;
-  (document.getElementById("autoSave") as HTMLInputElement).value = String(settings.autoSaveInterval);
-  (document.getElementById("advancedMode") as HTMLInputElement).checked = settings.advancedMode;
+// Save individual setting
+async function saveSetting(key, value) {
+  await chrome.storage.sync.set({ [key]: value });
+}
 
-  renderBlockedDomains(settings.blockedDomains);
+// Save multiple settings at once
+async function saveSettings(settings) {
+  await chrome.storage.sync.set(settings);
 }
 ```
 
-## Step 3: Save Settings on Change {#step-3-save-settings-on-change}
+For production extensions, consider using a library like `@theluckystrike/webext-storage` or `webext-storage` to handle schema validation, type safety, and default value management. These libraries simplify storage operations and catch configuration errors early.
 
-### Auto-save pattern (save on every change): {#auto-save-pattern-save-on-every-change}
-```ts
-document.getElementById("theme")?.addEventListener("change", async (e) => {
-  const value = (e.target as HTMLSelectElement).value as "light" | "dark" | "system";
-  await storage.set("theme", value);
+## Form Design Patterns {#form-design}
+
+Designing effective forms for extension options requires balancing functionality with simplicity. Users should be able to understand and modify settings quickly, without feeling overwhelmed by complexity.
+
+**Group related settings into sections** using fieldsets or visual dividers. Common sections include General, Appearance, Advanced, and About. Each section should have a clear heading and a coherent set of related options. This organization helps users find what they need without scanning through dozens of unrelated settings.
+
+**Provide immediate feedback** when users change settings. Show a subtle "Saved" indicator or visual confirmation when settings are persisted. This feedback assures users that their changes took effect and prevents confusion about whether settings were applied.
+
+**Use appropriate input types** for each setting. Toggle switches work well for boolean on/off settings. Select dropdowns are perfect for mutually exclusive choices like theme selection. Sliders suit numerical ranges like volume or size preferences. Text inputs work for custom values, URLs, or API keys. Checkboxes are ideal for multi-select options where users can choose multiple items from a list.
+
+Here's an example of a well-structured options form section:
+
+```html
+<section id="appearance-settings">
+  <h2>Appearance</h2>
+  
+  <label for="theme-select">
+    <span>Theme</span>
+    <select id="theme-select">
+      <option value="system">System Default</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+  
+  <label for="font-size">
+    <span>Font Size</span>
+    <input type="range" id="font-size" min="12" max="24" value="14">
+    <span id="font-size-value">14px</span>
+  </label>
+  
+  <label for="compact-mode">
+    <input type="checkbox" id="compact-mode">
+    <span>Enable compact mode</span>
+  </label>
+</section>
+```
+
+## Save and Load Patterns {#save-load-patterns}
+
+There are two primary approaches to saving settings: auto-save on every change, or manual save with a button. Each approach has merits depending on your use case.
+
+**Auto-save** provides the most seamless experience. Users change a setting and it's immediately persisted—no extra steps required. This pattern works well for simple preferences like theme selection or toggles. Implementing auto-save is straightforward with event listeners:
+
+```javascript
+document.getElementById('theme-select').addEventListener('change', async (e) => {
+  const theme = e.target.value;
+  await saveSetting('theme', theme);
   showSaveIndicator();
 });
-```
 
-### Save button pattern (batch save): {#save-button-pattern-batch-save}
-```ts
-document.getElementById("save")?.addEventListener("click", async () => {
-  await storage.setMany({
-    theme: getSelectValue("theme") as "light" | "dark" | "system",
-    fontSize: getNumberValue("fontSize"),
-    notificationsEnabled: getCheckboxValue("notifications"),
-    autoSaveInterval: getNumberValue("autoSave"),
-    advancedMode: getCheckboxValue("advancedMode"),
-  });
-  await storage.set("lastSaved", Date.now());
-  showSaveIndicator();
+document.getElementById('font-size').addEventListener('input', async (e) => {
+  const size = parseInt(e.target.value, 10);
+  document.getElementById('font-size-value').textContent = `${size}px`;
+  await saveSetting('fontSize', size);
+});
+
+document.getElementById('compact-mode').addEventListener('change', async (e) => {
+  await saveSetting('compactMode', e.target.checked);
 });
 ```
 
-## Step 4: Reset to Defaults {#step-4-reset-to-defaults}
+**Manual save with a button** gives users more control over when changes are applied. This pattern is better for complex forms where multiple settings might need to be changed together, or where validation should occur before saving. It also provides an opportunity for a "Reset to Defaults" button that reverts all changes:
 
-```ts
-document.getElementById("reset")?.addEventListener("click", async () => {
-  if (!confirm("Reset all settings to defaults?")) return;
-  await storage.clear(); // Removes all schema keys — defaults restored on next get
-  await loadSettings(); // Reload UI with defaults
+```javascript
+document.getElementById('save-button').addEventListener('click', async () => {
+  const settings = {
+    theme: document.getElementById('theme-select').value,
+    fontSize: parseInt(document.getElementById('font-size').value, 10),
+    compactMode: document.getElementById('compact-mode').checked
+  };
+  
+  await saveSettings(settings);
+  showSaveConfirmation();
+});
+
+document.getElementById('reset-button').addEventListener('click', async () => {
+  if (confirm('Reset all settings to defaults?')) {
+    await chrome.storage.sync.clear();
+    await loadSettingsIntoForm();
+    showResetConfirmation();
+  }
 });
 ```
 
-## Step 5: Manage Optional Permissions {#step-5-manage-optional-permissions}
+Most modern extensions use auto-save because it provides a better user experience. However, always provide a visual indicator (a checkmark, toast message, or button state change) so users know their changes were saved.
 
-```ts
-import { checkPermissions, requestPermission, removePermission, describePermission } from "@theluckystrike/webext-permissions";
+## Dark Mode Support {#dark-mode-support}
 
-const OPTIONAL_PERMS = ["tabs", "bookmarks", "history"];
+Supporting dark mode in your options page is essential for providing a polished user experience. Many users prefer dark interfaces, especially when working late or in low-light environments. Your options page should respect these preferences.
 
-async function renderPermissions() {
-  const results = await checkPermissions(OPTIONAL_PERMS);
-  const container = document.getElementById("permissions")!;
+The simplest approach is to use CSS custom properties (variables) for colors, then update them based on the user's theme preference:
 
-  container.innerHTML = results.map(r => `
-    <div class="permission-row">
-      <div>
-        <strong>${r.permission}</strong>
-        <p>${r.description}</p>
-      </div>
-      <button data-perm="${r.permission}" data-granted="${r.granted}">
-        ${r.granted ? "Revoke" : "Grant"}
-      </button>
-    </div>
-  `).join("");
+```css
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --input-bg: #f5f5f5;
 }
 
-container.addEventListener("click", async (e) => {
-  const btn = (e.target as HTMLElement).closest("button");
-  if (!btn) return;
-  const perm = btn.dataset.perm!;
-  const isGranted = btn.dataset.granted === "true";
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --border-color: #333333;
+  --input-bg: #2a2a2a;
+}
 
-  if (isGranted) await removePermission(perm);
-  else await requestPermission(perm);
-  await renderPermissions();
-});
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 ```
 
-## Step 6: Live Preview with watch() {#step-6-live-preview-with-watch}
+Then apply the theme based on user preference and system settings:
 
-```ts
-// In popup or content script — react to options changes in real-time
-storage.watch("theme", (newTheme) => {
-  document.documentElement.dataset.theme = newTheme;
-});
+```javascript
+async function applyTheme() {
+  const settings = await loadSettings();
+  let theme = settings.theme;
+  
+  // Resolve "system" preference
+  if (theme === 'system') {
+    theme = window.matchMedia('(prefers-color-scheme: dark)').matches 
+      ? 'dark' 
+      : 'light';
+  }
+  
+  document.documentElement.setAttribute('data-theme', theme);
+}
 
-storage.watch("fontSize", (newSize) => {
-  document.documentElement.style.fontSize = `${newSize}px`;
-});
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
 ```
 
-## Step 7: Import/Export Settings {#step-7-importexport-settings}
+For full dark mode support, audit all your CSS to ensure proper contrast ratios and avoid hardcoded colors. Pay special attention to form inputs, borders, and interactive element states. Test your options page in both light and dark modes to catch visibility issues.
 
-```ts
-document.getElementById("export")?.addEventListener("click", async () => {
-  const settings = await storage.getAll();
-  const blob = new Blob([JSON.stringify(settings, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "extension-settings.json";
-  a.click();
-  URL.revokeObjectURL(url);
-});
+## Best Practices Summary {#best-practices}
 
-document.getElementById("import")?.addEventListener("change", async (e) => {
-  const file = (e.target as HTMLInputElement).files?.[0];
-  if (!file) return;
-  const text = await file.text();
-  const settings = JSON.parse(text);
-  await storage.setMany(settings);
-  await loadSettings();
-});
-```
+Building a great options page requires attention to several key areas. First, always load settings when the page initializes and populate form fields accordingly. Users should see their current configuration immediately upon opening the options page. Second, validate all input before saving—check that URLs are valid, numbers are within expected ranges, and required fields are present. Third, provide clear labels and help text for complex settings so users understand what each option does. Fourth, consider adding import and export functionality so users can back up their configuration or transfer settings between devices. Finally, test your options page thoroughly across different Chrome versions, screen sizes, and accessibility settings.
 
-## Step 8: Complete HTML Template {#step-8-complete-html-template}
+A well-designed options page demonstrates attention to detail and respect for your users. Invest the time to get it right, and your extension will feel more professional and trustworthy.
 
-Provide a minimal but functional options.html with:
-- Theme selector (light/dark/system)
-- Font size slider
-- Toggle switches for boolean settings
-- Blocked domains list with add/remove
-- Permissions management section
-- Save/Reset/Export/Import buttons
-- CSS for dark/light theming
-
-## Common Patterns {#common-patterns}
-1. Auto-save vs save button (pros/cons of each)
-2. Section-based settings (general, appearance, permissions, advanced)
-3. Confirmation dialogs for destructive actions (reset, revoke)
-4. Settings validation before save
-5. Migration from old schema versions
-
-## Gotchas {#gotchas}
-- `sync` storage has 8KB per item limit — don't store large arrays
-- Permission requests MUST come from user gestures (click handlers)
-- `storage.clear()` only removes YOUR schema keys, not all extension storage
-- Always `await` storage operations — they're async
-- `watch()` fires from ALL contexts — your options page changes trigger watches in popup/content too
-
-## Related Articles {#related-articles}
-
-## Related Articles
-
-- [Options Page Patterns](../patterns/options-page-patterns.md)
-- [Accessibility](../guides/accessibility.md)
--e 
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
