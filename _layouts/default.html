@@ -8,6 +8,54 @@
   <link rel="canonical" href="{{ page.canonical_url }}">
   {% seo %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% if page.url != '/' and page.url != '/docs/' %}
+  {% assign url_parts = page.url | split: '/' | compact %}
+  {% assign category_slug = url_parts[1] %}
+  {% case category_slug %}
+    {% when 'permissions' %}
+      {% assign category_name = 'Permissions' %}
+    {% when 'api-reference' %}
+      {% assign category_name = 'API Reference' %}
+    {% when 'guides' %}
+      {% assign category_name = 'Guides' %}
+    {% when 'patterns' %}
+      {% assign category_name = 'Patterns' %}
+    {% when 'publishing' %}
+      {% assign category_name = 'Publishing' %}
+    {% when 'mv3' %}
+      {% assign category_name = 'MV3' %}
+    {% when 'tutorials' %}
+      {% assign category_name = 'Tutorials' %}
+    {% else %}
+      {% assign category_name = '' %}
+  {% endcase %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.url }}{{ site.baseurl }}/"
+      }{% if category_name != '' %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ category_name }}",
+        "item": "{{ site.url }}{{ site.baseurl }}/docs/{{ category_slug }}/"
+      }{% endif %}{% if page.title %},
+      {
+        "@type": "ListItem",
+        "position": {% if category_name != '' %}3{% else %}2{% endif %},
+        "name": "{{ page.title }}"
+      }
+      {% endif %}
+    ]
+  }
+  </script>
+  {% endif %}
 </head>
 <body>
   <div class="container">
@@ -24,6 +72,19 @@
     </nav>
     
     <main class="content">
+      {% if page.url != '/' and page.url != '/docs/' %}
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        {% if category_name != '' %}
+          <span class="breadcrumb-separator">&gt;</span>
+          <a href="{{ '/docs/' | relative_url }}{{ category_slug }}/">{{ category_name }}</a>
+        {% endif %}
+        {% if page.title %}
+          <span class="breadcrumb-separator">&gt;</span>
+          <span class="breadcrumb-current">{{ page.title }}</span>
+        {% endif %}
+      </nav>
+      {% endif %}
       {{ content }}
     </main>
   </div>

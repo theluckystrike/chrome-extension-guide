@@ -1,0 +1,31 @@
+/* Breadcrumb Navigation */
+.breadcrumb {
+  padding: 12px 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.breadcrumb-current {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Ensure main content has proper spacing */
+main.content {
+  padding: 20px;
+}
