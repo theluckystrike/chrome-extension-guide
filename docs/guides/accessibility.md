@@ -723,3 +723,7 @@ Before publishing your extension, verify:
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [axe-core GitHub](https://github.com/dequelabs/axe-core)
 - [ChromeVox Tutorial](https://support.google.com/chromebook/answer/7031755)
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
