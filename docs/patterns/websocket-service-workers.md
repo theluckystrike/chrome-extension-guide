@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # WebSocket Connections from Service Workers
 
-## Overview
+## Overview {#overview}
 
 WebSockets provide real-time, bidirectional communication — but MV3 service workers are a hostile environment for persistent connections. The service worker can terminate after 30 seconds of inactivity, destroying any open WebSocket. This guide covers eight patterns for maintaining reliable WebSocket connections in Chrome extensions, from offscreen document hosting to graceful fallback strategies.
 
 ---
 
-## Pattern 1: WebSocket Basics in MV3 Service Workers
+## Pattern 1: WebSocket Basics in MV3 Service Workers {#pattern-1-websocket-basics-in-mv3-service-workers}
 
 You _can_ open a WebSocket directly in a service worker, but the connection dies when Chrome terminates it:
 
@@ -45,7 +45,7 @@ The core problem: Chrome terminates idle service workers after ~30 seconds. Dire
 
 ---
 
-## Pattern 2: Offscreen Document as a Persistent WebSocket Host
+## Pattern 2: Offscreen Document as a Persistent WebSocket Host {#pattern-2-offscreen-document-as-a-persistent-websocket-host}
 
 Move the WebSocket into an offscreen document, which runs in a normal page context and is not subject to service worker lifecycle limits:
 
@@ -113,7 +113,7 @@ function connectSocket(url: string): void {
 
 ---
 
-## Pattern 3: Reconnection with Exponential Backoff
+## Pattern 3: Reconnection with Exponential Backoff {#pattern-3-reconnection-with-exponential-backoff}
 
 Network failures and server restarts are inevitable. Use exponential backoff with jitter:
 
@@ -178,7 +178,7 @@ class ReconnectingWebSocket {
 
 ---
 
-## Pattern 4: Message Queuing During Disconnections
+## Pattern 4: Message Queuing During Disconnections {#pattern-4-message-queuing-during-disconnections}
 
 Buffer outbound messages while the socket is down and flush them on reconnect:
 
@@ -235,7 +235,7 @@ const ws = new ReconnectingWebSocket(
 
 ---
 
-## Pattern 5: Heartbeat / Ping-Pong Keep-Alive
+## Pattern 5: Heartbeat / Ping-Pong Keep-Alive {#pattern-5-heartbeat-ping-pong-keep-alive}
 
 Detect dead connections before the TCP timeout by exchanging periodic heartbeats:
 
@@ -284,7 +284,7 @@ const heartbeat = new HeartbeatManager(25_000, 10_000,
 
 ---
 
-## Pattern 6: Typed WebSocket Message Protocol
+## Pattern 6: Typed WebSocket Message Protocol {#pattern-6-typed-websocket-message-protocol}
 
 Define a compile-time-safe protocol for all WebSocket messages:
 
@@ -346,7 +346,7 @@ send("chat:send", { text: "Hello!", replyTo: "msg-123" });
 
 ---
 
-## Pattern 7: Broadcasting WebSocket Events to Popup and Content Scripts
+## Pattern 7: Broadcasting WebSocket Events to Popup and Content Scripts {#pattern-7-broadcasting-websocket-events-to-popup-and-content-scripts}
 
 WebSocket data arrives in the offscreen document but must reach the popup, side panel, and content scripts:
 
@@ -391,7 +391,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Pattern 8: Fallback from WebSocket to Polling
+## Pattern 8: Fallback from WebSocket to Polling {#pattern-8-fallback-from-websocket-to-polling}
 
 When the offscreen document is unavailable (already in use, or older Chrome), fall back to HTTP polling from the service worker:
 
@@ -444,7 +444,7 @@ async function createTransport(onMessage: (data: unknown) => void) {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

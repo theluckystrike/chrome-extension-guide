@@ -6,13 +6,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/a
 ---
 # Background Scheduling with chrome.alarms
 
-## Introduction
+## Introduction {#introduction}
 - `chrome.alarms` is THE way to schedule background tasks in MV3
 - Replaces `setInterval`/`setTimeout` which don't survive service worker termination
 - Requires `"alarms"` permission
 - Cross-ref: `docs/permissions/alarms.md`
 
-## manifest.json
+## manifest.json {#manifestjson}
 ```json
 {
   "permissions": ["alarms"],
@@ -20,16 +20,16 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/a
 }
 ```
 
-## Creating Alarms
+## Creating Alarms {#creating-alarms}
 
-### One-Time Alarm
+### One-Time Alarm {#one-time-alarm}
 ```javascript
 chrome.alarms.create("checkUpdates", {
   delayInMinutes: 5  // Fire once, 5 minutes from now
 });
 ```
 
-### Repeating Alarm
+### Repeating Alarm {#repeating-alarm}
 ```javascript
 chrome.alarms.create("syncData", {
   delayInMinutes: 1,     // First fire after 1 minute
@@ -37,14 +37,14 @@ chrome.alarms.create("syncData", {
 });
 ```
 
-### Alarm at Specific Time
+### Alarm at Specific Time {#alarm-at-specific-time}
 ```javascript
 chrome.alarms.create("dailyReport", {
   when: new Date("2024-01-15T09:00:00").getTime()  // Unix timestamp
 });
 ```
 
-## Handling Alarms
+## Handling Alarms {#handling-alarms}
 ```javascript
 chrome.alarms.onAlarm.addListener((alarm) => {
   switch (alarm.name) {
@@ -63,9 +63,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 - Register listener at TOP LEVEL of service worker (not inside async functions)
 - Handler wakes up the service worker if it was terminated
 
-## Managing Alarms
+## Managing Alarms {#managing-alarms}
 
-### Get Alarm Info
+### Get Alarm Info {#get-alarm-info}
 ```javascript
 chrome.alarms.get("syncData", (alarm) => {
   if (alarm) {
@@ -75,27 +75,27 @@ chrome.alarms.get("syncData", (alarm) => {
 });
 ```
 
-### List All Alarms
+### List All Alarms {#list-all-alarms}
 ```javascript
 chrome.alarms.getAll((alarms) => {
   alarms.forEach(a => console.log(a.name, new Date(a.scheduledTime)));
 });
 ```
 
-### Cancel Alarms
+### Cancel Alarms {#cancel-alarms}
 ```javascript
 chrome.alarms.clear("syncData");    // Cancel specific alarm
 chrome.alarms.clearAll();            // Cancel all alarms
 ```
 
-## MV3 Minimum Interval
+## MV3 Minimum Interval {#mv3-minimum-interval}
 - **Minimum period: 30 seconds** in production (was 1 minute, reduced in Chrome 120+)
 - In development (unpacked): can be shorter
 - For sub-30-second tasks, use `chrome.alarms` as a wake-up and then use `setTimeout` within the handler
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Periodic Data Sync
+### Periodic Data Sync {#periodic-data-sync}
 ```javascript
 // Setup on install
 chrome.runtime.onInstalled.addListener(() => {
@@ -112,7 +112,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Badge Update (Unread Count)
+### Badge Update (Unread Count) {#badge-update-unread-count}
 ```javascript
 chrome.alarms.create("updateBadge", { periodInMinutes: 5 });
 chrome.alarms.onAlarm.addListener(async (alarm) => {
@@ -123,17 +123,17 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Reminder System
+### Reminder System {#reminder-system}
 - User sets reminders via popup
 - Store reminder times with `@theluckystrike/webext-storage`
 - Create alarm for each reminder
 - Show `chrome.notifications` when alarm fires
 
-### Session Cleanup
+### Session Cleanup {#session-cleanup}
 - Periodic cleanup of stale data in storage
 - `clearAll()` on extension update, recreate needed alarms
 
-## Alarms + Storage Integration
+## Alarms + Storage Integration {#alarms-storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const storage = createStorage(defineSchema({
@@ -149,7 +149,7 @@ async function updateSyncInterval(minutes) {
 }
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 - Create alarms in `chrome.runtime.onInstalled` — they persist across restarts
 - Use descriptive alarm names — easier to debug
 - Always register `onAlarm` at top level of service worker
@@ -157,14 +157,14 @@ async function updateSyncInterval(minutes) {
 - Handle the case where alarm fires while offline (for network tasks)
 - Log alarm activity for debugging
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Using `setTimeout`/`setInterval` — doesn't survive SW termination
 - Registering `onAlarm` inside an async function — listener won't catch events
 - Setting period less than 30 seconds — silently clamped to minimum
 - Not handling extension update — alarms persist but handlers may change
 - Creating alarm with same name overwrites previous — can be feature or bug
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Alarm Scheduling Patterns](../patterns/alarm-scheduling-patterns.md)
 - [Background Patterns](../guides/background-patterns.md)

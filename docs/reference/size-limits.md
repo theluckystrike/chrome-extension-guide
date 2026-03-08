@@ -2,23 +2,23 @@
 
 This document provides a comprehensive reference for all size and quota limits in Chrome Extensions (Manifest V3).
 
-## Extension Package
+## Extension Package {#extension-package}
 
 | Limit | Value | Notes |
 |-------|-------|-------|
 | CRX file size | 500 MB maximum | Maximum compressed extension package size |
 | Recommended | Under 50 MB | Chrome Web Store recommends keeping extensions under 50MB for faster downloads |
 
-## Storage Quotas
+## Storage Quotas {#storage-quotas}
 
-### chrome.storage.local
+### chrome.storage.local {#chromestoragelocal}
 
 | Property | Value | Notes |
 |----------|-------|-------|
 | Default quota | 10 MB | Default storage capacity for local data |
 | With unlimitedStorage | Unlimited | Requires `"permissions": ["unlimitedStorage"]` in manifest |
 
-### chrome.storage.sync
+### chrome.storage.sync {#chromestoragesync}
 
 | Property | Value | Notes |
 |----------|-------|-------|
@@ -26,7 +26,7 @@ This document provides a comprehensive reference for all size and quota limits i
 | Per-item quota | 8 KB | Maximum size for a single storage item |
 | Maximum items | 512 | Maximum number of distinct keys |
 
-### chrome.storage.session
+### chrome.storage.session {#chromestoragesession}
 
 | Property | Value | Notes |
 |----------|-------|-------|
@@ -35,35 +35,35 @@ This document provides a comprehensive reference for all size and quota limits i
 
 > **Note**: For applications requiring large storage, use `chrome.storage.local` with the `unlimitedStorage` permission.
 
-## Message Passing
+## Message Passing {#message-passing}
 
 | Property | Value | Notes |
 |----------|-------|-------|
 | Message size | ~64 MB | Practical JSON message size limit |
 | Response timeout | None | Messages wait indefinitely for response |
 
-### Native Messaging
+### Native Messaging {#native-messaging}
 
 | Direction | Limit | Notes |
 |-----------|-------|-------|
 | From extension to native host | 64 MiB | Maximum message size sent by the extension |
 | From native host to extension | 1 MB | Maximum message size received from native host |
 
-## Content Scripts
+## Content Scripts {#content-scripts}
 
 | Property | Value | Notes |
 |----------|-------|-------|
 | Size limit | No strict limit | No explicit size limit, but large scripts impact performance |
 | Best practice | Minimize script size | Keep content scripts lightweight for page load performance |
 
-## Web Store Assets
+## Web Store Assets {#web-store-assets}
 
 | Asset Type | Limit | Notes |
 |------------|-------|-------|
 | Screenshots | 20 maximum | Required for store listing |
 | Promo images | 5 maximum | Used for promotional features |
 
-## Alarm Limits
+## Alarm Limits {#alarm-limits}
 
 | Property | Value | Notes |
 |----------|-------|-------|
@@ -78,7 +78,7 @@ chrome.alarms.create('myAlarm', {
 });
 ```
 
-## declarativeNetRequest Limits
+## declarativeNetRequest Limits {#declarativenetrequest-limits}
 
 | Rule Type | Limit | Notes |
 |-----------|-------|-------|
@@ -86,13 +86,13 @@ chrome.alarms.create('myAlarm', {
 | Dynamic rules | 30,000 | Rules added at runtime via API |
 | Session rules | 5,000 | Rules scoped to browser session |
 
-## Context Menus
+## Context Menus {#context-menus}
 
 | Property | Value | Notes |
 |----------|-------|-------|
 | Maximum items | Varies | Hard limit per extension; depends on menu complexity |
 
-## Manifest Field Limits
+## Manifest Field Limits {#manifest-field-limits}
 
 | Field | Maximum Characters | Notes |
 |-------|---------------------|-------|
@@ -100,7 +100,7 @@ chrome.alarms.create('myAlarm', {
 | short_name | 12 | Short name for limited space UI |
 | description | 132 | Extension description character limit |
 
-## Cross-References
+## Cross-References {#cross-references}
 
 For more detailed information, see:
 

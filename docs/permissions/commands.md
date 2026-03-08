@@ -9,10 +9,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # commands (Manifest Key)
 
-## What It Is
+## What It Is {#what-it-is}
 `commands` is a manifest key (not a `permissions` entry) that defines keyboard shortcuts. Enables the `chrome.commands` API.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "commands": {
@@ -28,21 +28,21 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — keyboard shortcuts do not trigger a permission warning.
 
-## Special Commands
+## Special Commands {#special-commands}
 - `_execute_action` — triggers `chrome.action.onClicked` or opens the popup
 - `_execute_side_panel` — opens the extension's side panel
 
-## Key Format Rules
+## Key Format Rules {#key-format-rules}
 - Must include `Ctrl` or `Alt` (Mac: `Command` or `MacCtrl`)
 - `Shift` is optional modifier
 - Media keys: `MediaNextTrack`, `MediaPlayPause`, `MediaPrevTrack`, `MediaStop`
 - Maximum 4 suggested shortcuts per extension
 - Users override at `chrome://extensions/shortcuts`
 
-## API Access
+## API Access {#api-access}
 ```typescript
 chrome.commands.onCommand.addListener((command: string) => {
   if (command === 'toggle-feature') { /* handle */ }
@@ -52,7 +52,7 @@ const commands = await chrome.commands.getAll();
 commands.forEach(cmd => console.log(`${cmd.name}: ${cmd.shortcut || 'not set'}`));
 ```
 
-## Global Shortcuts
+## Global Shortcuts {#global-shortcuts}
 ```json
 {
   "commands": {
@@ -65,7 +65,7 @@ commands.forEach(cmd => console.log(`${cmd.name}: ${cmd.shortcut || 'not set'}`)
 }
 ```
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const schema = defineSchema({ shortcutAction: 'string' });
@@ -120,15 +120,17 @@ Command listeners should be resilient. If a command triggers an action that fail
 Test your shortcuts on both Windows and macOS. What works on one platform might not work as expected on another due to different keyboard layouts and modifier key behavior.
 
 ## When to Use
+
+## When to Use {#when-to-use}
 - Add keyboard shortcuts for common actions
 - Open popup/side panel via hotkey
 - Power-user features
 
-## Limitations
+## Limitations {#limitations}
 - Max 4 suggested key bindings
 - Some key combos reserved by OS/browser
 - `global: true` limited to Ctrl+Shift+[0-9]
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/commands-keyboard-shortcuts.md`
 - Related: `docs/permissions/activeTab.md`

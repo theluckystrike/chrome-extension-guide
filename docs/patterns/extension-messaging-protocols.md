@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Designing structured messaging protocols for Chrome extensions ensures type-safe, maintainable communication between content scripts, background scripts, and popup pages.
 
-## Typed Message Protocol with Discriminated Unions
+## Typed Message Protocol with Discriminated Unions {#typed-message-protocol-with-discriminated-unions}
 
 Use discriminated unions for type-safe message routing:
 
@@ -25,7 +25,7 @@ type Response<T extends MessageType> =
   | { success: false; error: ErrorCode };
 ```
 
-## Request-Response Pattern
+## Request-Response Pattern {#request-response-pattern}
 
 Standardize all responses with success/error shape:
 
@@ -42,7 +42,7 @@ interface Response<T> {
 }
 ```
 
-## Versioning for Forward Compatibility
+## Versioning for Forward Compatibility {#versioning-for-forward-compatibility}
 
 Include protocol version in every message:
 
@@ -55,7 +55,7 @@ interface ProtocolMessage<T> {
 }
 ```
 
-## Standardized Error Codes
+## Standardized Error Codes {#standardized-error-codes}
 
 Define a consistent error code enum:
 
@@ -69,7 +69,7 @@ enum ErrorCode {
 }
 ```
 
-## Message Router
+## Message Router {#message-router}
 
 Create a type-safe router for handling messages:
 
@@ -87,7 +87,7 @@ const router: Record<string, MessageHandler<any>> = {
 };
 ```
 
-## Timeout Handling with AbortController
+## Timeout Handling with AbortController {#timeout-handling-with-abortcontroller}
 
 Implement reliable request-response with timeouts:
 
@@ -107,7 +107,7 @@ async function sendWithTimeout<T>(
 }
 ```
 
-## Message Logging Interceptor
+## Message Logging Interceptor {#message-logging-interceptor}
 
 Add debugging and audit capabilities:
 
@@ -121,7 +121,7 @@ const loggingInterceptor = (handler: Function) => async (msg: Message) => {
 };
 ```
 
-## Cross-Reference
+## Cross-Reference {#cross-reference}
 
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
 - [Event-Driven Messaging](./event-driven-messaging.md)

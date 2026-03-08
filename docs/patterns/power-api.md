@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Chrome Extension Power API Patterns
 
-## Overview
+## Overview {#overview}
 
 The Chrome Power API (`chrome.power`) enables extensions to prevent the system from entering sleep mode, ensuring critical operations complete without interruption. This API is essential for extensions that handle long-running tasks, downloads, presentations, or any operation where system sleep would cause disruption.
 
@@ -21,11 +21,11 @@ Key facts:
 
 ---
 
-## Pattern 1: Preventing Display Sleep
+## Pattern 1: Preventing Display Sleep {#pattern-1-preventing-display-sleep}
 
 The most common use case is preventing the display from sleeping while the user is watching content, reading, or performing tasks that require the screen to stay on.
 
-### Required Permission
+### Required Permission {#required-permission}
 
 Add `"power"` to your `manifest.json` permissions:
 
@@ -35,7 +35,7 @@ Add `"power"` to your `manifest.json` permissions:
 }
 ```
 
-### Basic Display Keep-Awake
+### Basic Display Keep-Awake {#basic-display-keep-awake}
 
 ```ts
 // lib/power-service.ts
@@ -80,7 +80,7 @@ export class PowerManager {
 export const powerManager = new PowerManager();
 ```
 
-### Usage in Background Service Worker
+### Usage in Background Service Worker {#usage-in-background-service-worker}
 
 ```ts
 // background/service-worker.ts
@@ -100,11 +100,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Pattern 2: Preventing System Sleep
+## Pattern 2: Preventing System Sleep {#pattern-2-preventing-system-sleep}
 
 System-level keep-awake prevents the entire computer from sleeping, which is necessary for background operations that must complete even if the user isn't actively using the device.
 
-### System Keep-Awake Implementation
+### System Keep-Awake Implementation {#system-keep-awake-implementation}
 
 ```ts
 // lib/power-service.ts (continued)
@@ -156,7 +156,7 @@ export class PowerManager {
 }
 ```
 
-### When to Use System vs Display
+### When to Use System vs Display {#when-to-use-system-vs-display}
 
 | Operation Type | Recommended Level | Rationale |
 |---------------|-------------------|-----------|
@@ -168,11 +168,11 @@ export class PowerManager {
 
 ---
 
-## Pattern 3: Releasing Keep-Awake
+## Pattern 3: Releasing Keep-Awake {#pattern-3-releasing-keep-awake}
 
 Properly releasing keep-awake requests is critical to avoid unnecessary power consumption. The Power API uses a replacement model: a new `requestKeepAwake` call from the same extension replaces the previous request, and a single `releaseKeepAwake` call releases it.
 
-### Release Implementation
+### Release Implementation {#release-implementation}
 
 ```ts
 // lib/power-service.ts (continued)
@@ -222,7 +222,7 @@ export class PowerManager {
 }
 ```
 
-### Cleanup on Extension Unload
+### Cleanup on Extension Unload {#cleanup-on-extension-unload}
 
 ```ts
 // background/service-worker.ts
@@ -249,11 +249,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Pattern 4: Building a Caffeine Toggle Extension
+## Pattern 4: Building a Caffeine Toggle Extension {#pattern-4-building-a-caffeine-toggle-extension}
 
 A "Caffeine" toggle extension prevents sleep on demand with a simple click. This is one of the most popular extension types using the Power API.
 
-### Storage Schema Definition
+### Storage Schema Definition {#storage-schema-definition}
 
 ```ts
 // lib/storage.ts
@@ -277,7 +277,7 @@ export type PowerState = {
 };
 ```
 
-### Complete Caffeine Extension Background Script
+### Complete Caffeine Extension Background Script {#complete-caffeine-extension-background-script}
 
 ```ts
 // background/service-worker.ts
@@ -373,7 +373,7 @@ function updateBadge(isActive: boolean): void {
 }
 ```
 
-### Popup UI Implementation
+### Popup UI Implementation {#popup-ui-implementation}
 
 ```ts
 // popup/popup.ts
@@ -419,11 +419,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 ---
 
-## Pattern 5: Auto Keep-Awake During Downloads
+## Pattern 5: Auto Keep-Awake During Downloads {#pattern-5-auto-keep-awake-during-downloads}
 
 Automatically prevent sleep during active downloads or long operations, then release when complete.
 
-### Download Detection Service
+### Download Detection Service {#download-detection-service}
 
 ```ts
 // lib/download-power-manager.ts
@@ -533,7 +533,7 @@ export class DownloadPowerManager {
 export const downloadPowerManager = new DownloadPowerManager();
 ```
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -546,11 +546,11 @@ export const downloadPowerManager = new DownloadPowerManager();
 
 ---
 
-## Pattern 6: Timed Keep-Awake with Auto Release
+## Pattern 6: Timed Keep-Awake with Auto Release {#pattern-6-timed-keep-awake-with-auto-release}
 
 Implement automatic release after a specified duration - useful for presentations,限时 tasks, or preventing sleep during a specific time window.
 
-### Timed Power Manager
+### Timed Power Manager {#timed-power-manager}
 
 ```ts
 // lib/timed-power.ts
@@ -696,11 +696,11 @@ export const timedPowerManager = new TimedPowerManager();
 
 ---
 
-## Pattern 7: Context-Aware Power Management
+## Pattern 7: Context-Aware Power Management {#pattern-7-context-aware-power-management}
 
 Keep the system awake only on specific websites or when certain conditions are met - for example, during video calls, on specific domains, or when working in web apps.
 
-### Site-Specific Power Manager
+### Site-Specific Power Manager {#site-specific-power-manager}
 
 ```ts
 // lib/context-aware-power.ts
@@ -827,7 +827,7 @@ export class ContextAwarePowerManager {
 export const contextPowerManager = new ContextAwarePowerManager();
 ```
 
-### Content Script for Page-Level Control
+### Content Script for Page-Level Control {#content-script-for-page-level-control}
 
 ```ts
 // content-scripts/power-control.ts
@@ -887,11 +887,11 @@ setupCallDetection();
 
 ---
 
-## Pattern 8: Power State Indicator in Badge
+## Pattern 8: Power State Indicator in Badge {#pattern-8-power-state-indicator-in-badge}
 
 Show the current power state in the extension badge with user-friendly controls. This provides immediate visual feedback without requiring users to open the popup.
 
-### Badge Power Indicator
+### Badge Power Indicator {#badge-power-indicator}
 
 ```ts
 // lib/badge-power-indicator.ts
@@ -1000,7 +1000,7 @@ export class BadgePowerIndicator {
 export const badgeIndicator = new BadgePowerIndicator();
 ```
 
-### Integration with Power Manager
+### Integration with Power Manager {#integration-with-power-manager}
 
 ```ts
 // background/service-worker.ts (enhanced)
@@ -1047,7 +1047,7 @@ chrome.runtime.onInstalled.addListener(initializeBadge);
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key API Methods | Dependencies |
 |---------|----------|-----------------|---------------|
@@ -1060,7 +1060,7 @@ chrome.runtime.onInstalled.addListener(initializeBadge);
 | **7: Context-Aware** | Site-specific, video calls | Tab listeners + URL matching | `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging` |
 | **8: Badge Indicator** | Visual status feedback | `chrome.action.setBadgeText()` | None |
 
-### Common Considerations
+### Common Considerations {#common-considerations}
 
 - **Permission requirements**: The Power API requires the `"power"` permission; patterns may also need `downloads`, `tabs`, or storage permissions
 - **Replacement behavior**: A new `requestKeepAwake()` call from the same extension replaces the previous request; a single `releaseKeepAwake()` call releases it

@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # Handling Extension Updates
 
-## chrome.runtime.onInstalled
+## chrome.runtime.onInstalled {#chromeruntimeoninstalled}
 
 The `chrome.runtime.onInstalled` event fires when your extension is first installed, updated to a new version, or when Chrome itself is updated. This is the central hook for handling both initial setup and updates.
 
@@ -33,7 +33,7 @@ The `details` object contains:
 
 ---
 
-## First Install — Set Defaults
+## First Install — Set Defaults {#first-install-set-defaults}
 
 When your extension is installed for the first time, you need to initialize default settings, create alarms, and optionally show a welcome page.
 
@@ -72,7 +72,7 @@ async function onFirstInstall() {
 
 ---
 
-## Update Handler — Run Migrations
+## Update Handler — Run Migrations {#update-handler-run-migrations}
 
 When your extension is updated to a new version, you need to handle migrations, recreate alarms, and optionally show a "What's New" page.
 
@@ -113,11 +113,11 @@ async function runMigrations(fromVersion, toVersion) {
 
 ---
 
-## Storage Migration Pattern
+## Storage Migration Pattern {#storage-migration-pattern}
 
 When updating your extension, you may need to change your storage schema. Always use version-based migrations to safely transform user data.
 
-### Version-Based Migrations
+### Version-Based Migrations {#version-based-migrations}
 
 ```javascript
 const STORAGE_KEYS = {
@@ -148,7 +148,7 @@ async function migrateV11toV12() {
 }
 ```
 
-### Rename Keys Pattern
+### Rename Keys Pattern {#rename-keys-pattern}
 
 ```javascript
 async function migrateKeyNames() {
@@ -169,7 +169,7 @@ async function migrateKeyNames() {
 }
 ```
 
-### Add New Defaults
+### Add New Defaults {#add-new-defaults}
 
 ```javascript
 async function addNewDefaults(currentVersion) {
@@ -189,7 +189,7 @@ async function addNewDefaults(currentVersion) {
 
 ---
 
-## chrome.runtime.onStartup
+## chrome.runtime.onStartup {#chromeruntimeonstartup}
 
 The `chrome.runtime.onStartup` event fires when the browser profile starts, but NOT when the extension is installed or updated. Use this for initializing features on browser launch.
 
@@ -213,7 +213,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-## chrome.runtime.onUpdateAvailable
+## chrome.runtime.onUpdateAvailable {#chromeruntimeonupdateavailable}
 
 When a new version of your extension is available (published to the Chrome Web Store), this event fires. By default, the update will be applied when the browser restarts, but you can force an immediate reload.
 
@@ -238,7 +238,7 @@ Without calling `chrome.runtime.reload()`, the update will be applied the next t
 
 ---
 
-## Version Comparison Utility Function
+## Version Comparison Utility Function {#version-comparison-utility-function}
 
 A reliable version comparison function is essential for determining when migrations are needed.
 
@@ -284,9 +284,9 @@ function isMajorUpdate(oldVersion, newVersion) {
 
 ---
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### 1. Handle All onInstalled Reasons
+### 1. Handle All onInstalled Reasons {#1-handle-all-oninstalled-reasons}
 
 Always handle all three cases in your `onInstalled` listener:
 
@@ -306,7 +306,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-### 2. Store Schema Version
+### 2. Store Schema Version {#2-store-schema-version}
 
 Always store and increment a schema version in your storage:
 
@@ -323,7 +323,7 @@ if (schemaVersion < CURRENT_SCHEMA_VERSION) {
 }
 ```
 
-### 3. Recreate Alarms
+### 3. Recreate Alarms {#3-recreate-alarms}
 
 Alarms are cleared when an extension is updated. Always recreate them:
 
@@ -347,7 +347,7 @@ async function recreateAlarms() {
 }
 ```
 
-### 4. Test Update Flow
+### 4. Test Update Flow {#4-test-update-flow}
 
 To test your update handlers:
 
@@ -359,9 +359,9 @@ To test your update handlers:
 
 ---
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 
-### Not Handling onInstalled
+### Not Handling onInstalled {#not-handling-oninstalled}
 
 ```javascript
 // ❌ WRONG: Only handling install
@@ -381,7 +381,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-### Confusing onInstalled with onStartup
+### Confusing onInstalled with onStartup {#confusing-oninstalled-with-onstartup}
 
 - **`onInstalled`**: Fires on first install, extension update, or Chrome update
 - **`onStartup`**: Fires only when the browser profile starts
@@ -402,7 +402,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-### Breaking Storage Without Migration
+### Breaking Storage Without Migration {#breaking-storage-without-migration}
 
 ```javascript
 // ❌ WRONG: Changing storage keys without migration
@@ -428,7 +428,7 @@ async function migrateV1toV2() {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Event | When It Fires | Use For |
 |-------|--------------|---------|
@@ -443,7 +443,7 @@ Always:
 - Recreate alarms after updates
 - Test your update flow thoroughly
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Update Handling](../patterns/extension-update-handling.md)
 - [Extension Packaging](../guides/extension-packaging.md)

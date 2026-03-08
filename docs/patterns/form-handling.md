@@ -11,7 +11,7 @@ Practical patterns for building forms in Chrome extension popups, options pages,
 
 ---
 
-## Table of Contents
+## Table of Contents {#table-of-contents}
 
 1. [Options Page Form with Auto-Save](#pattern-1-options-page-form-with-auto-save)
 2. [Form Validation with ARIA Error States](#pattern-2-form-validation-with-aria-error-states)
@@ -25,11 +25,11 @@ Practical patterns for building forms in Chrome extension popups, options pages,
 
 ---
 
-## Pattern 1: Options Page Form with Auto-Save
+## Pattern 1: Options Page Form with Auto-Save {#pattern-1-options-page-form-with-auto-save}
 
 Auto-saving eliminates the need for a "Save" button and gives users immediate feedback. The key is debouncing writes and showing a save indicator.
 
-### HTML Structure
+### HTML Structure {#html-structure}
 
 ```html
 <!-- options.html -->
@@ -77,7 +77,7 @@ Auto-saving eliminates the need for a "Save" button and gives users immediate fe
 </html>
 ```
 
-### TypeScript Auto-Save Logic
+### TypeScript Auto-Save Logic {#typescript-auto-save-logic}
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-### CSS for Save Indicator
+### CSS for Save Indicator {#css-for-save-indicator}
 
 ```css
 .save-indicator {
@@ -188,11 +188,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Pattern 2: Form Validation with ARIA Error States
+## Pattern 2: Form Validation with ARIA Error States {#pattern-2-form-validation-with-aria-error-states}
 
 Accessible form validation requires proper ARIA attributes so screen readers announce errors. Never rely on color alone.
 
-### Validation Infrastructure
+### Validation Infrastructure {#validation-infrastructure}
 
 ```typescript
 interface ValidationRule {
@@ -277,7 +277,7 @@ class FormValidator {
 }
 ```
 
-### Usage Example
+### Usage Example {#usage-example}
 
 ```typescript
 const validator = new FormValidator();
@@ -311,7 +311,7 @@ validator.addField('maxResults', document.getElementById('max-results') as HTMLI
 ]);
 ```
 
-### Error Styling
+### Error Styling {#error-styling}
 
 ```css
 .input-error {
@@ -341,11 +341,11 @@ validator.addField('maxResults', document.getElementById('max-results') as HTMLI
 
 ---
 
-## Pattern 3: Multi-Step Wizard in Popup
+## Pattern 3: Multi-Step Wizard in Popup {#pattern-3-multi-step-wizard-in-popup}
 
 Chrome extension popups have limited space. A wizard breaks complex setup into manageable steps.
 
-### Wizard Controller
+### Wizard Controller {#wizard-controller}
 
 ```typescript
 interface WizardStep {
@@ -461,7 +461,7 @@ class PopupWizard {
 }
 ```
 
-### HTML Skeleton
+### HTML Skeleton {#html-skeleton}
 
 ```html
 <div class="wizard" role="group" aria-label="Setup wizard">
@@ -506,7 +506,7 @@ class PopupWizard {
 </div>
 ```
 
-### Initialization
+### Initialization {#initialization}
 
 ```typescript
 const wizard = new PopupWizard(document.querySelector('.wizard')!, [
@@ -542,11 +542,11 @@ document.querySelector('.wizard-back')!.addEventListener('click', () => wizard.b
 
 ---
 
-## Pattern 4: Dynamic Form Fields from Storage Schema
+## Pattern 4: Dynamic Form Fields from Storage Schema {#pattern-4-dynamic-form-fields-from-storage-schema}
 
 Generate forms automatically from a schema definition. Useful for extensions with many configurable options.
 
-### Schema-Driven Form Generator
+### Schema-Driven Form Generator {#schema-driven-form-generator}
 
 ```typescript
 interface FieldSchema {
@@ -701,7 +701,7 @@ function createFieldHTML(field: FieldSchema): string {
 }
 ```
 
-### Loading and Saving Dynamic Fields
+### Loading and Saving Dynamic Fields {#loading-and-saving-dynamic-fields}
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -757,11 +757,11 @@ function attachDynamicAutoSave(schema: FieldSchema[], form: HTMLFormElement): vo
 
 ---
 
-## Pattern 5: Import/Export Settings via File Input
+## Pattern 5: Import/Export Settings via File Input {#pattern-5-importexport-settings-via-file-input}
 
 Let users back up and restore their extension settings with JSON files.
 
-### Export Function
+### Export Function {#export-function}
 
 ```typescript
 async function exportSettings(): Promise<void> {
@@ -790,7 +790,7 @@ async function exportSettings(): Promise<void> {
 }
 ```
 
-### Import Function with Validation
+### Import Function with Validation {#import-function-with-validation}
 
 ```typescript
 interface SettingsExport {
@@ -853,7 +853,7 @@ async function importSettings(file: File): Promise<{ success: boolean; message: 
 }
 ```
 
-### File Input UI
+### File Input UI {#file-input-ui}
 
 ```html
 <div class="import-export">
@@ -897,11 +897,11 @@ document.getElementById('import-file')!.addEventListener('change', async (e) => 
 
 ---
 
-## Pattern 6: Form State Persistence Across Popup Reopens
+## Pattern 6: Form State Persistence Across Popup Reopens {#pattern-6-form-state-persistence-across-popup-reopens}
 
 When a popup closes, all DOM state is lost. Save in-progress form data so users can resume.
 
-### Auto-Persist Controller
+### Auto-Persist Controller {#auto-persist-controller}
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -1046,11 +1046,11 @@ form.addEventListener('submit', async (e) => {
 
 ---
 
-## Pattern 7: Synced Form Between Popup and Options Page
+## Pattern 7: Synced Form Between Popup and Options Page {#pattern-7-synced-form-between-popup-and-options-page}
 
 When both the popup and options page modify the same settings, they must stay synchronized in real time.
 
-### Shared Storage Layer
+### Shared Storage Layer {#shared-storage-layer}
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -1101,7 +1101,7 @@ function flashField(el: HTMLElement): void {
 }
 ```
 
-### Popup Controller
+### Popup Controller {#popup-controller}
 
 ```typescript
 // popup.ts
@@ -1132,7 +1132,7 @@ async function initPopupForm(): Promise<void> {
 initPopupForm();
 ```
 
-### Options Page Controller
+### Options Page Controller {#options-page-controller}
 
 ```typescript
 // options.ts - same pattern, expanded UI
@@ -1183,7 +1183,7 @@ async function saveAllFields(form: HTMLFormElement): Promise<void> {
 initOptionsForm();
 ```
 
-### Sync Animation CSS
+### Sync Animation CSS {#sync-animation-css}
 
 ```css
 .field-synced {
@@ -1201,11 +1201,11 @@ initOptionsForm();
 
 ---
 
-## Pattern 8: Password/API Key Input with Secure Storage
+## Pattern 8: Password/API Key Input with Secure Storage {#pattern-8-passwordapi-key-input-with-secure-storage}
 
 API keys and passwords need special handling -- mask display, use `chrome.storage.session` when available, and never log credentials.
 
-### Secure Input Component
+### Secure Input Component {#secure-input-component}
 
 ```typescript
 interface SecureFieldOptions {
@@ -1311,7 +1311,7 @@ class SecureInput {
 }
 ```
 
-### Background Script: Secure Key Retrieval
+### Background Script: Secure Key Retrieval {#background-script-secure-key-retrieval}
 
 ```typescript
 // background.ts - Retrieve API key for use in fetch calls
@@ -1355,7 +1355,7 @@ async function callExternalApi(endpoint: string): Promise<unknown> {
 }
 ```
 
-### HTML for Secure Input
+### HTML for Secure Input {#html-for-secure-input}
 
 ```html
 <div class="secure-field">
@@ -1402,7 +1402,7 @@ document.getElementById('clear-key')!.addEventListener('click', async () => {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Problem Solved | Key API / Technique | Complexity |
 |---|---|---|---|
@@ -1417,7 +1417,7 @@ document.getElementById('clear-key')!.addEventListener('click', async () => {
 
 ---
 
-## Further Reading
+## Further Reading {#further-reading}
 
 - [Chrome Storage API](https://developer.chrome.com/docs/extensions/reference/api/storage)
 - [WAI-ARIA Authoring Practices: Forms](https://www.w3.org/WAI/ARIA/apg/patterns/forms/)

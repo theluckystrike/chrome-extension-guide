@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Advanced patterns for the `chrome.alarms` API in Chrome extensions.
 
-## Core API Methods
+## Core API Methods {#core-api-methods}
 
 ```javascript
 // Create an alarm
@@ -33,14 +33,14 @@ await chrome.alarms.clear('my-alarm');
 await chrome.alarms.clearAll();
 ```
 
-## Minimum Intervals
+## Minimum Intervals {#minimum-intervals}
 
 - **Production**: Minimum 1 minute (`periodInMinutes: 1`)
 - **Dev mode**: Minimum 30 seconds
 
 Shorter intervals may be throttled or ignored by Chrome.
 
-## Named Alarms as Routing Keys
+## Named Alarms as Routing Keys {#named-alarms-as-routing-keys}
 
 Use descriptive names to route to specific handlers:
 
@@ -58,7 +58,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Scheduled Tasks
+## Scheduled Tasks {#scheduled-tasks}
 
 Calculate `delayInMinutes` from a target time:
 
@@ -75,7 +75,7 @@ function scheduleAt(targetDate) {
 }
 ```
 
-## Time Zone Handling
+## Time Zone Handling {#time-zone-handling}
 
 Always store UTC timestamps; convert for display:
 
@@ -87,11 +87,11 @@ const scheduledUTC = alarm.scheduledTime;
 const localTime = new Date(scheduledUTC).toLocaleString();
 ```
 
-## Alarm Persistence
+## Alarm Persistence {#alarm-persistence}
 
 Alarms survive service worker restart. Chrome automatically restores them.
 
-## Alarm Recovery on Startup
+## Alarm Recovery on Startup {#alarm-recovery-on-startup}
 
 Recreate missing alarms after extension updates:
 
@@ -109,7 +109,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-## Alarm Cancellation
+## Alarm Cancellation {#alarm-cancellation}
 
 Clear specific alarms when tasks are cancelled:
 
@@ -119,7 +119,7 @@ async function cancelTask(taskId) {
 }
 ```
 
-## Alarm vs setTimeout
+## Alarm vs setTimeout {#alarm-vs-settimeout}
 
 | Feature | `chrome.alarms` | `setTimeout` |
 |---------|-----------------|--------------|
@@ -127,7 +127,7 @@ async function cancelTask(taskId) {
 | Persists restart | ✓ | ✗ |
 | Precise timing | Limited | ✓ |
 
-## Calendar-like Scheduling
+## Calendar-like Scheduling {#calendar-like-scheduling}
 
 ```javascript
 // Daily at midnight
@@ -143,7 +143,7 @@ chrome.alarms.create('weekly-monday', {
 });
 ```
 
-## See Also
+## See Also {#see-also}
 
 - [API Reference: alarms API](../api_reference/alarms-api.md)
 - [Guides: Alarms Scheduling](../guides/alarms-scheduling.md)

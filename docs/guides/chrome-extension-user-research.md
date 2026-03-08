@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 Understanding your users is critical for building successful extensions. This guide covers comprehensive strategies for gathering feedback, conducting research, and analyzing user behavior while maintaining privacy compliance.
 
-## Overview
+## Overview {#overview}
 
 Effective user research combines multiple data sources:
 - Direct user feedback (in-extension, surveys, reviews)
@@ -16,9 +16,9 @@ Effective user research combines multiple data sources:
 - Community engagement (GitHub issues, forums)
 - Proactive research (beta programs, user interviews)
 
-## In-Extension Feedback
+## In-Extension Feedback {#in-extension-feedback}
 
-### Feedback Form in Options Page
+### Feedback Form in Options Page {#feedback-form-in-options-page}
 
 Include a dedicated feedback section in your options page for users to report issues or suggest features:
 
@@ -36,7 +36,7 @@ document.getElementById('submit-feedback').addEventListener('click', async () =>
 </script>
 ```
 
-### Rating Prompt After Usage Milestone
+### Rating Prompt After Usage Milestone {#rating-prompt-after-usage-milestone}
 
 Prompt users for a rating after positive engagement milestones:
 
@@ -52,9 +52,9 @@ async function checkRatingPrompt() {
 }
 ```
 
-## Chrome Web Store Reviews
+## Chrome Web Store Reviews {#chrome-web-store-reviews}
 
-### Monitoring Reviews
+### Monitoring Reviews {#monitoring-reviews}
 
 Regularly track and respond to reviews:
 
@@ -68,18 +68,18 @@ async function getReviews() {
 }
 ```
 
-### Responding to Reviews
+### Responding to Reviews {#responding-to-reviews}
 
 - Respond within 24-48 hours
 - Be professional and helpful
 - Direct users to support channels for complex issues
 - Thank users for positive reviews
 
-## Analytics Integration
+## Analytics Integration {#analytics-integration}
 
 See [Extension Analytics Guide](../guides/extension-analytics.md) for detailed implementation of privacy-respecting analytics.
 
-### Key Metrics to Track
+### Key Metrics to Track {#key-metrics-to-track}
 
 | Metric | Description |
 |--------|-------------|
@@ -89,9 +89,9 @@ See [Extension Analytics Guide](../guides/extension-analytics.md) for detailed i
 | Retention | User return rates |
 | Error rate | Failed operations |
 
-## Feature Request Tracking
+## Feature Request Tracking {#feature-request-tracking}
 
-### In-Extension Suggestion Box
+### In-Extension Suggestion Box {#in-extension-suggestion-box}
 
 ```javascript
 // suggestion-box.js
@@ -106,16 +106,16 @@ function showSuggestionBox() {
 }
 ```
 
-### GitHub Issues Integration
+### GitHub Issues Integration {#github-issues-integration}
 
 Link your extension to a public GitHub repository for issue tracking:
 - Use issue templates for bug reports and feature requests
 - Label issues for categorization
 - Engage with reporters publicly
 
-## A/B Testing in Extensions
+## A/B Testing in Extensions {#ab-testing-in-extensions}
 
-### Feature Flags with Random Assignment
+### Feature Flags with Random Assignment {#feature-flags-with-random-assignment}
 
 ```javascript
 async function getFeatureFlag(flagName) {
@@ -130,7 +130,7 @@ async function trackExperiment(experimentId, variant, event) {
 }
 ```
 
-### Measuring Engagement
+### Measuring Engagement {#measuring-engagement}
 
 Compare metrics between variants:
 - Conversion rates
@@ -138,9 +138,9 @@ Compare metrics between variants:
 - Session duration
 - Error rates
 
-## User Surveys
+## User Surveys {#user-surveys}
 
-### In-Extension Survey Popup
+### In-Extension Survey Popup {#in-extension-survey-popup}
 
 Make surveys non-intrusive and dismissable:
 
@@ -161,23 +161,23 @@ function showSurvey() {
 }
 ```
 
-## Beta Testing
+## Beta Testing {#beta-testing}
 
 See [Beta Testing Guide](../publishing/beta-testing.md) for detailed beta program setup.
 
-### Chrome Web Store Trusted Testers
+### Chrome Web Store Trusted Testers {#chrome-web-store-trusted-testers}
 
 - Use unlisted distribution for beta versions
 - Limit tester count for controlled feedback
 - Gradually roll out to larger groups
 
-### Unlisted Distribution
+### Unlisted Distribution {#unlisted-distribution}
 
 Publish as unlisted to share only with specific users via direct links.
 
-## Crash and Error Reporting
+## Crash and Error Reporting {#crash-and-error-reporting}
 
-### Automated Error Collection
+### Automated Error Collection {#automated-error-collection}
 
 ```javascript
 window.onerror = async (message, source, lineno, colno, error) => {
@@ -193,7 +193,7 @@ window.onerror = async (message, source, lineno, colno, error) => {
 };
 ```
 
-## NPS Surveys
+## NPS Surveys {#nps-surveys}
 
 Net Promoter Score measures user loyalty:
 
@@ -212,9 +212,9 @@ async function showNPS() {
 }
 ```
 
-## Uninstall Feedback
+## Uninstall Feedback {#uninstall-feedback}
 
-### Exit Survey with setUninstallURL
+### Exit Survey with setUninstallURL {#exit-survey-with-setuninstallurl}
 
 ```javascript
 // In your background script
@@ -228,29 +228,29 @@ The exit survey page should ask:
 - Suggestions for improvement
 - Whether user might return
 
-## Privacy Considerations
+## Privacy Considerations {#privacy-considerations}
 
-### Data Anonymization
+### Data Anonymization {#data-anonymization}
 
 - Never collect PII without explicit consent
 - Use anonymous installation IDs
 - Aggregate data before analysis
 - Implement data retention policies
 
-### Disclosure Requirements
+### Disclosure Requirements {#disclosure-requirements}
 
 - Clearly state data collection in privacy policy
 - Explain what is collected and why
 - Provide opt-out mechanisms
 - Follow [CWS policies](https://developer.chrome.com/docs/webstore/program-policies/privacy/)
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Publishing Analytics](../publishing/analytics.md)
 - [Beta Testing](../publishing/beta-testing.md)
 - [Extension Analytics](../guides/extension-analytics.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [User Onboarding](../guides/extension-onboarding.md)
 - [User Onboarding Guide](../guides/user-onboarding.md)

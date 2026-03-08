@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 The Chrome Omnibox API allows extensions to integrate deeply with the browser's address bar, providing custom suggestions and commands. This guide covers practical patterns for building powerful omnibox experiences.
 
-## Overview
+## Overview {#overview}
 
 The Omnibox API enables your extension to:
 - Provide keyword-triggered suggestions in the address bar
@@ -27,11 +27,11 @@ The Omnibox API enables your extension to:
 
 ---
 
-## Pattern 1: Basic Omnibox Setup
+## Pattern 1: Basic Omnibox Setup {#pattern-1-basic-omnibox-setup}
 
 The foundation of any omnibox implementation involves three core event handlers that manage the user interaction lifecycle.
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 Define the keyword that triggers your extension in the omnibox:
 
@@ -45,7 +45,7 @@ Define the keyword that triggers your extension in the omnibox:
 }
 ```
 
-### Event Handlers
+### Event Handlers {#event-handlers}
 
 The omnibox interaction follows a clear lifecycle: activation → typing → selection.
 
@@ -88,7 +88,7 @@ chrome.omnibox.onInputCancelled.addListener(() => {
 });
 ```
 
-### Service Implementation
+### Service Implementation {#service-implementation}
 
 ```typescript
 // src/services/OmniboxService.ts
@@ -145,11 +145,11 @@ export class OmniboxService {
 
 ---
 
-## Pattern 2: Typed Suggestion Provider
+## Pattern 2: Typed Suggestion Provider {#pattern-2-typed-suggestion-provider}
 
 Provide contextual suggestions as users type, with proper XML formatting for rich display.
 
-### SuggestResult Interface
+### SuggestResult Interface {#suggestresult-interface}
 
 ```typescript
 import { Suggestion } from '@theluckystrike/webext-omnibox';
@@ -166,7 +166,7 @@ interface SuggestResult {
 }
 ```
 
-### XML Formatting Tags
+### XML Formatting Tags {#xml-formatting-tags}
 
 The description supports several XML tags for styling:
 
@@ -247,7 +247,7 @@ export class SuggestionProvider {
 }
 ```
 
-### Usage Example
+### Usage Example {#usage-example}
 
 ```typescript
 // src/omnibox/search.ts
@@ -277,11 +277,11 @@ async function searchBookmarks(query: string): Promise<SearchResult[]> {
 
 ---
 
-## Pattern 3: Async Search with Debounce
+## Pattern 3: Async Search with Debounce {#pattern-3-async-search-with-debounce}
 
 Avoid excessive API calls by debouncing user input and showing loading states.
 
-### Debounce Implementation
+### Debounce Implementation {#debounce-implementation}
 
 ```typescript
 // src/utils/debounce.ts
@@ -304,7 +304,7 @@ export function debounce<T extends (...args: unknown[]) => void>(
 }
 ```
 
-### Async Search Service
+### Async Search Service {#async-search-service}
 
 ```typescript
 // src/services/AsyncSearchService.ts
@@ -409,11 +409,11 @@ export class AsyncSearchService {
 
 ---
 
-## Pattern 4: Command Router Pattern
+## Pattern 4: Command Router Pattern {#pattern-4-command-router-pattern}
 
 Implement subcommands for a more powerful CLI-like interface in the omnibox.
 
-### Command Router
+### Command Router {#command-router}
 
 ```typescript
 // src/services/CommandRouter.ts
@@ -510,7 +510,7 @@ export class CommandRouter {
 }
 ```
 
-### Complete Implementation
+### Complete Implementation {#complete-implementation}
 
 ```typescript
 // src/omnibox/commands.ts
@@ -592,11 +592,11 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 
 ---
 
-## Pattern 5: History and Recent Searches
+## Pattern 5: History and Recent Searches {#pattern-5-history-and-recent-searches}
 
 Store and display recent queries for better user experience.
 
-### History Service
+### History Service {#history-service}
 
 ```typescript
 // src/services/HistoryService.ts
@@ -673,7 +673,7 @@ export class HistoryService {
 }
 ```
 
-### Integration with Omnibox
+### Integration with Omnibox {#integration-with-omnibox}
 
 ```typescript
 // src/omnibox/withHistory.ts
@@ -727,11 +727,11 @@ function formatResults(results: unknown[]): Suggestion[] {
 
 ---
 
-## Pattern 6: Rich Result Formatting
+## Pattern 6: Rich Result Formatting {#pattern-6-rich-result-formatting}
 
 Create visually appealing suggestions with proper XML formatting and truncation.
 
-### Formatting Utilities
+### Formatting Utilities {#formatting-utilities}
 
 ```typescript
 // src/utils/formatting.ts
@@ -851,7 +851,7 @@ export function createSuggestion(
 }
 ```
 
-### Complete Example
+### Complete Example {#complete-example}
 
 ```typescript
 // src/services/RichSuggestionService.ts
@@ -923,11 +923,11 @@ export class RichSuggestionService {
 
 ---
 
-## Pattern 7: Default Suggestion Management
+## Pattern 7: Default Suggestion Management {#pattern-7-default-suggestion-management}
 
 The default suggestion appears in the address bar itself (not in the dropdown) and provides context-aware hints.
 
-### Default Suggestion Service
+### Default Suggestion Service {#default-suggestion-service}
 
 ```typescript
 // src/services/DefaultSuggestionService.ts
@@ -1008,7 +1008,7 @@ export class DefaultSuggestionService {
 }
 ```
 
-### Integration
+### Integration {#integration}
 
 ```typescript
 // src/omnibox/defaultSuggestion.ts
@@ -1033,7 +1033,7 @@ chrome.omnibox.onInputStarted.addListener(() => {
 });
 ```
 
-### Context-Aware Examples
+### Context-Aware Examples {#context-aware-examples}
 
 ```typescript
 // Context-specific default suggestions
@@ -1058,11 +1058,11 @@ function getDefaultForContext(input: string, hasResults: boolean): DefaultSugges
 
 ---
 
-## Pattern 8: Omnibox to Tab Navigation
+## Pattern 8: Omnibox to Tab Navigation {#pattern-8-omnibox-to-tab-navigation}
 
 Handle different ways to open results based on user preference and context.
 
-### Tab Navigation Service
+### Tab Navigation Service {#tab-navigation-service}
 
 ```typescript
 // src/services/TabNavigationService.ts
@@ -1162,7 +1162,7 @@ export class TabNavigationService {
 }
 ```
 
-### Complete Integration
+### Complete Integration {#complete-integration}
 
 ```typescript
 // src/omnibox/navigation.ts
@@ -1230,7 +1230,7 @@ function parseSelectedSuggestion(text: string): SearchResult | null {
 }
 ```
 
-### Deep Linking to Extension Pages
+### Deep Linking to Extension Pages {#deep-linking-to-extension-pages}
 
 ```typescript
 // Deep linking utilities
@@ -1271,7 +1271,7 @@ router.register({
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|
@@ -1284,7 +1284,7 @@ router.register({
 | **Default Suggestion** | Context-aware hints | `setDefaultSuggestion` |
 | **Tab Navigation** | Open results appropriately | `disposition`, tab creation |
 
-### Key Best Practices
+### Key Best Practices {#key-best-practices}
 
 1. **Always escape XML** in user-provided content to prevent rendering issues
 2. **Limit suggestions** to 5-6 results for optimal UX

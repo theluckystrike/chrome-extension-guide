@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Badge and Action UI Patterns
 
-## Overview
+## Overview {#overview}
 
 The `chrome.action` API controls the extension's toolbar button — its icon, badge text, popup, and click behavior. Combined with per-tab state management, these APIs let you build rich, context-aware UI indicators without opening a full page. This guide covers practical patterns for badges, icons, popups, and action button behavior.
 
 ---
 
-## The Action Button Anatomy
+## The Action Button Anatomy {#the-action-button-anatomy}
 
 ```
 ┌─────────────────────────────────────────┐
@@ -44,7 +44,7 @@ Key facts:
 
 ---
 
-## Pattern 1: Dynamic Badge Text and Color Based on State
+## Pattern 1: Dynamic Badge Text and Color Based on State {#pattern-1-dynamic-badge-text-and-color-based-on-state}
 
 Update the badge to reflect extension state — active/inactive, error conditions, or status indicators:
 
@@ -99,7 +99,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-## Pattern 2: Per-Tab Badge State Management
+## Pattern 2: Per-Tab Badge State Management {#pattern-2-per-tab-badge-state-management}
 
 Show different badge states on different tabs — for example, the number of blocked items on each page:
 
@@ -150,7 +150,7 @@ Note: When you pass `tabId` to `setBadgeText`, the badge only changes for that t
 
 ---
 
-## Pattern 3: Badge as a Counter (Unread Count, Active Items)
+## Pattern 3: Badge as a Counter (Unread Count, Active Items) {#pattern-3-badge-as-a-counter-unread-count-active-items}
 
 Use the badge as a live counter that updates from external data sources:
 
@@ -226,7 +226,7 @@ async function getToken(): Promise<string> {
 
 ---
 
-## Pattern 4: Action Icon Swapping (Enabled/Disabled States)
+## Pattern 4: Action Icon Swapping (Enabled/Disabled States) {#pattern-4-action-icon-swapping-enableddisabled-states}
 
 Swap the toolbar icon to visually indicate the extension's state. Provide both 16px and 32px versions for crisp rendering:
 
@@ -322,7 +322,7 @@ async function setGrayscaleIcon(tabId?: number): Promise<void> {
 
 ---
 
-## Pattern 5: Action Popup vs Programmatic Action Handling
+## Pattern 5: Action Popup vs Programmatic Action Handling {#pattern-5-action-popup-vs-programmatic-action-handling}
 
 You can either show a popup HTML page on click, or handle the click programmatically — but not both at the same time. Choose based on your UX needs:
 
@@ -392,7 +392,7 @@ async function deactivateOnTab(tabId: number): Promise<void> {
 
 ---
 
-## Pattern 6: Dynamic Popup Selection Based on Context
+## Pattern 6: Dynamic Popup Selection Based on Context {#pattern-6-dynamic-popup-selection-based-on-context}
 
 Show different popup pages depending on the current tab, authentication state, or extension configuration:
 
@@ -458,7 +458,7 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
 
 ---
 
-## Pattern 7: Animated Badge Updates
+## Pattern 7: Animated Badge Updates {#pattern-7-animated-badge-updates}
 
 Draw attention to badge changes with a brief animation effect — useful for notifications or state transitions:
 
@@ -537,7 +537,7 @@ async function notifyNewItems(count: number): Promise<void> {
 
 ---
 
-## Pattern 8: Action Title and Tooltip Management
+## Pattern 8: Action Title and Tooltip Management {#pattern-8-action-title-and-tooltip-management}
 
 Set dynamic tooltip text to provide context about what clicking the action button will do:
 
@@ -644,9 +644,9 @@ async function getTabStats(tabId: number): Promise<TabStats> {
 
 ---
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
-### 1. Badge Text Length
+### 1. Badge Text Length {#1-badge-text-length}
 
 ```ts
 // Badge text is limited to ~4 characters.
@@ -662,7 +662,7 @@ function formatBadgeNumber(n: number): string {
 }
 ```
 
-### 2. Popup and onClicked Are Mutually Exclusive
+### 2. Popup and onClicked Are Mutually Exclusive {#2-popup-and-onclicked-are-mutually-exclusive}
 
 ```ts
 // If you set a popup in manifest.json, chrome.action.onClicked NEVER fires.
@@ -672,7 +672,7 @@ function formatBadgeNumber(n: number): string {
 chrome.action.setPopup({ popup: "" }); // now onClicked will fire
 ```
 
-### 3. Per-Tab State Is Not Persisted
+### 3. Per-Tab State Is Not Persisted {#3-per-tab-state-is-not-persisted}
 
 ```ts
 // Per-tab badge/icon/title state is lost when:
@@ -688,7 +688,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | When to Use |
 |---------|------------|

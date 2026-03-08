@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Optimize Chrome extension startup and popup performance. Target **<100ms** popup open time for a snappy user experience.
 
-## Minimize Popup Bundle
+## Minimize Popup Bundle {#minimize-popup-bundle}
 
 Keep your popup JavaScript bundle small. Use code splitting to load only what's needed.
 
-## Skeleton UI
+## Skeleton UI {#skeleton-ui}
 
 Show layout immediately, then populate data:
 
@@ -27,7 +27,7 @@ document.getElementById('app').innerHTML = `
 fetchData().then(render);
 ```
 
-## Preload Data in Background
+## Preload Data in Background {#preload-data-in-background}
 
 Prefetch data in the service worker before popup opens:
 
@@ -42,7 +42,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
 });
 ```
 
-## Inline Critical CSS
+## Inline Critical CSS {#inline-critical-css}
 
 Put critical styles directly in HTML to avoid render-blocking:
 
@@ -53,7 +53,7 @@ Put critical styles directly in HTML to avoid render-blocking:
 </head>
 ```
 
-## Defer Non-Essential Listeners
+## Defer Non-Essential Listeners {#defer-non-essential-listeners}
 
 Register listeners lazily to speed up initial execution:
 
@@ -64,7 +64,7 @@ document.getElementById('btn-advanced').addEventListener('click', async () => {
 });
 ```
 
-## Service Worker Startup Optimization
+## Service Worker Startup Optimization {#service-worker-startup-optimization}
 
 Minimize cold start penalty with lazy imports:
 
@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
 });
 ```
 
-## Tree-Shaking & System Fonts
+## Tree-Shaking & System Fonts {#tree-shaking-system-fonts}
 
 Configure your bundler for tree-shaking and use system fonts:
 
@@ -92,7 +92,7 @@ build: { rollupOptions: { output: { manualChunks: { vendor: ['react'] } } } }
 body { font-family: system-ui, -apple-system, sans-serif; }
 ```
 
-## Image Optimization
+## Image Optimization {#image-optimization}
 
 Use WebP and lazy loading:
 
@@ -100,7 +100,7 @@ Use WebP and lazy loading:
 <picture><source srcset="icon.webp" type="image/webp"><img src="icon.png" loading="lazy"></picture>
 ```
 
-## Measuring Startup
+## Measuring Startup {#measuring-startup}
 
 Use performance.mark/measure to identify bottlenecks:
 
@@ -111,7 +111,7 @@ performance.mark('fetch:end');
 performance.measure('fetch', 'popup:start', 'fetch:end');
 ```
 
-## Lazy Module Loader
+## Lazy Module Loader {#lazy-module-loader}
 
 ```javascript
 const moduleCache = new Map();
@@ -123,7 +123,7 @@ export async function lazyLoad(path) {
 }
 ```
 
-## Quick Checklist
+## Quick Checklist {#quick-checklist}
 
 - [ ] Target <100ms popup open
 - [ ] Implement skeleton UI
@@ -136,7 +136,7 @@ export async function lazyLoad(path) {
 - [ ] Optimize images (WebP, lazy load)
 - [ ] Measure with performance.mark/measure
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Performance Guide](../guides/performance.md)
 - [Extension Size Optimization](../guides/extension-size-optimization.md)

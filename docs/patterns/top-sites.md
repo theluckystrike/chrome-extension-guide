@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Top Sites API Patterns
 
-## Overview
+## Overview {#overview}
 
 The Chrome Top Sites API (`chrome.topSites`) provides access to the user's most visited websites. This guide covers practical patterns for implementing top sites functionality in Chrome Extensions, from basic retrieval to advanced speed dial implementations.
 
 ---
 
-## Pattern 1: Fetching Top Sites with chrome.topSites.get
+## Pattern 1: Fetching Top Sites with chrome.topSites.get {#pattern-1-fetching-top-sites-with-chrometopsitesget}
 
 The fundamental pattern for retrieving top sites:
 
@@ -64,7 +64,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-## Pattern 2: Building a Custom New Tab Speed Dial
+## Pattern 2: Building a Custom New Tab Speed Dial {#pattern-2-building-a-custom-new-tab-speed-dial}
 
 Create a personalized new tab page with a speed dial grid:
 
@@ -119,7 +119,7 @@ async function renderSpeedDial(): Promise<void> {
 document.addEventListener("DOMContentLoaded", renderSpeedDial);
 ```
 
-### CSS Styles
+### CSS Styles {#css-styles}
 
 ```css
 #speed-dial {
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", renderSpeedDial);
 
 ---
 
-## Pattern 3: Filtering and Deduplicating Results
+## Pattern 3: Filtering and Deduplicating Results {#pattern-3-filtering-and-deduplicating-results}
 
 Filter out unwanted domains and deduplicate similar URLs:
 
@@ -226,7 +226,7 @@ async function getFilteredTopSites(): Promise<chrome.topSites.TopSite[]> {
 
 ---
 
-## Pattern 4: Combining Top Sites with Bookmarks
+## Pattern 4: Combining Top Sites with Bookmarks {#pattern-4-combining-top-sites-with-bookmarks}
 
 Create a unified launcher that combines top sites with custom bookmarks:
 
@@ -308,7 +308,7 @@ function getFaviconUrl(url: string): string {
 
 ---
 
-## Pattern 5: Caching Top Sites Data
+## Pattern 5: Caching Top Sites Data {#pattern-5-caching-top-sites-data}
 
 Implement intelligent caching to reduce API calls:
 
@@ -389,7 +389,7 @@ const topSitesCache = new TopSitesCache({ maxAge: 10 * 60 * 1000, maxEntries: 30
 
 ---
 
-## Pattern 6: Top Sites Widget with Favicons and Visit Frequency
+## Pattern 6: Top Sites Widget with Favicons and Visit Frequency {#pattern-6-top-sites-widget-with-favicons-and-visit-frequency}
 
 Track and display visit frequency alongside top sites:
 
@@ -458,7 +458,7 @@ async function getEnhancedTopSites(): Promise<Array<chrome.topSites.TopSite & {
 
 ---
 
-## Pattern 7: User-Customizable Speed Dial
+## Pattern 7: User-Customizable Speed Dial {#pattern-7-user-customizable-speed-dial}
 
 Allow users to pin, reorder, and customize their speed dial:
 
@@ -528,7 +528,7 @@ async function reorderPinned(fromIndex: number, toIndex: number): Promise<void> 
 
 ---
 
-## Pattern 8: Privacy-Aware Top Sites Display
+## Pattern 8: Privacy-Aware Top Sites Display {#pattern-8-privacy-aware-top-sites-display}
 
 Handle incognito mode and privacy settings gracefully:
 
@@ -613,7 +613,7 @@ async function getPrivacyStatus(): Promise<{
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
@@ -628,7 +628,7 @@ async function getPrivacyStatus(): Promise<{
 
 ---
 
-## Key Takeaways
+## Key Takeaways {#key-takeaways}
 
 1. **Always cache top sites** - The API fetches fresh data each call; cache to reduce overhead
 2. **Use domain deduplication** - Avoid showing duplicate sites from the same domain

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Chrome extension storage has strict quota limits that require careful management. This guide covers patterns for effectively managing storage quotas in your extension.
 
-## Quota Overview
+## Quota Overview {#quota-overview}
 
 | Storage Type | Quota Limit | Notes |
 |--------------|--------------|-------|
@@ -17,7 +17,7 @@ Chrome extension storage has strict quota limits that require careful management
 | `sync` | 100 KB total, 8 KB/item | Synced across user's devices |
 | `session` | 10 MB | Cleared on browser restart |
 
-## Monitoring Usage
+## Monitoring Usage {#monitoring-usage}
 
 ```javascript
 // Monitor storage usage
@@ -28,7 +28,7 @@ async function getStorageUsage() {
 }
 ```
 
-## Data Compression
+## Data Compression {#data-compression}
 
 Use LZ-string to compress JSON data before storing:
 
@@ -39,9 +39,9 @@ const compress = (data) => LZString.compressToUTF16(JSON.stringify(data));
 const decompress = (compressed) => JSON.parse(LZString.decompressFromUTF16(compressed));
 ```
 
-## Data Eviction Strategies
+## Data Eviction Strategies {#data-eviction-strategies}
 
-### LRU Cache Implementation
+### LRU Cache Implementation {#lru-cache-implementation}
 
 ```javascript
 class LRUStorage {
@@ -74,7 +74,7 @@ class LRUStorage {
 }
 ```
 
-### TTL-Based Expiry
+### TTL-Based Expiry {#ttl-based-expiry}
 
 ```javascript
 async function setWithTTL(key, value, ttlMs) {
@@ -84,7 +84,7 @@ async function setWithTTL(key, value, ttlMs) {
 }
 ```
 
-## Splitting Large Data
+## Splitting Large Data {#splitting-large-data}
 
 For data exceeding single-key limits, chunk across multiple keys:
 
@@ -104,7 +104,7 @@ async function storeLargeData(key, data) {
 }
 ```
 
-## IndexedDB as Overflow
+## IndexedDB as Overflow {#indexeddb-as-overflow}
 
 For data exceeding `local` storage, use IndexedDB:
 
@@ -124,7 +124,7 @@ async function initDB() {
 }
 ```
 
-## Permission Considerations
+## Permission Considerations {#permission-considerations}
 
 Request `unlimitedStorage` in manifest to bypass quotas:
 
@@ -136,7 +136,7 @@ Request `unlimitedStorage` in manifest to bypass quotas:
 
 Note: This still doesn't guarantee infinite storage; browsers may still enforce limits.
 
-## Sync Storage Optimization
+## Sync Storage Optimization {#sync-storage-optimization}
 
 Minimize sync storage usage:
 
@@ -148,7 +148,7 @@ async function syncSettings(settings) {
 }
 ```
 
-## Batch Operations
+## Batch Operations {#batch-operations}
 
 Group writes to avoid write limits:
 
@@ -160,7 +160,7 @@ async function batchSet(items) {
 }
 ```
 
-## Cleaning Orphaned Data
+## Cleaning Orphaned Data {#cleaning-orphaned-data}
 
 ```javascript
 async function cleanup() {
@@ -174,7 +174,7 @@ async function cleanup() {
 }
 ```
 
-## User-Facing Storage UI
+## User-Facing Storage UI {#user-facing-storage-ui}
 
 Display usage to users for transparency:
 
@@ -191,7 +191,7 @@ function renderStorageUI(container) {
 }
 ```
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [IndexedDB for Extensions](../patterns/indexeddb-extensions.md)

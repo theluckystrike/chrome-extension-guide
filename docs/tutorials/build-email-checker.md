@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 Build a Chrome extension that connects to Gmail via OAuth2, shows your unread email count on the badge, previews messages in a popup, and sends desktop notifications when new mail arrives. Uses **@theluckystrike/webext-storage** for configurable settings and the **Chrome Identity API** for secure authentication.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -17,7 +17,7 @@ Build a Chrome extension that connects to Gmail via OAuth2, shows your unread em
 
 ---
 
-## Step 1: Project Setup and Manifest
+## Step 1: Project Setup and Manifest {#step-1-project-setup-and-manifest}
 
 ```bash
 mkdir email-checker && cd email-checker
@@ -92,7 +92,7 @@ Create `tsconfig.json`:
 
 ---
 
-## Step 2: OAuth2 Login with the Chrome Identity API
+## Step 2: OAuth2 Login with the Chrome Identity API {#step-2-oauth2-login-with-the-chrome-identity-api}
 
 Create `src/auth.ts` to handle Google sign-in:
 
@@ -153,7 +153,7 @@ export async function authenticatedFetch(
 
 ---
 
-## Step 3: Gmail API Integration
+## Step 3: Gmail API Integration {#step-3-gmail-api-integration}
 
 Create `src/gmail.ts` to interact with the Gmail API:
 
@@ -255,7 +255,7 @@ We query the `INBOX` label for the unread count and fetch message metadata (From
 
 ---
 
-## Step 4: Badge Showing Unread Count
+## Step 4: Badge Showing Unread Count {#step-4-badge-showing-unread-count}
 
 Create `src/badge.ts` to update the extension icon badge:
 
@@ -287,7 +287,7 @@ The badge shows the unread count in red. When there are no unread messages, the 
 
 ---
 
-## Step 5: Popup with Email Preview List
+## Step 5: Popup with Email Preview List {#step-5-popup-with-email-preview-list}
 
 Create `popup/popup.html`:
 
@@ -482,7 +482,7 @@ Clicking an email opens it in Gmail. The "Mark as read" button removes the UNREA
 
 ---
 
-## Step 6: Desktop Notifications for New Emails
+## Step 6: Desktop Notifications for New Emails {#step-6-desktop-notifications-for-new-emails}
 
 Create `src/notifications.ts`:
 
@@ -557,7 +557,7 @@ Single new emails show a rich notification with the sender, subject, and snippet
 
 ---
 
-## Step 7: Mark as Read from Notification Action
+## Step 7: Mark as Read from Notification Action {#step-7-mark-as-read-from-notification-action}
 
 The notification handler in Step 6 already wires up the "Mark as read" button. The flow works like this:
 
@@ -585,7 +585,7 @@ if (buttonIndex === 0) {
 
 ---
 
-## Step 8: Configurable Check Interval with @theluckystrike/webext-storage
+## Step 8: Configurable Check Interval with @theluckystrike/webext-storage {#step-8-configurable-check-interval-with-theluckystrikewebext-storage}
 
 Create `src/settings.ts`:
 
@@ -718,7 +718,7 @@ The background worker creates an alarm based on the user's configured interval. 
 
 ---
 
-## Full Project Structure
+## Full Project Structure {#full-project-structure}
 
 ```
 email-checker/
@@ -741,7 +741,7 @@ email-checker/
     popup.html
 ```
 
-## Google Cloud Setup
+## Google Cloud Setup {#google-cloud-setup}
 
 Before loading the extension:
 
@@ -752,7 +752,7 @@ Before loading the extension:
 5. Enter your extension ID (visible at `chrome://extensions` after loading unpacked)
 6. Copy the client ID into `manifest.json` under `oauth2.client_id`
 
-## Key Takeaways
+## Key Takeaways {#key-takeaways}
 
 - **chrome.identity.getAuthToken** manages the entire OAuth2 lifecycle -- consent, token exchange, caching, and refresh
 - **Gmail API** `labels/INBOX` endpoint is the most efficient way to get unread counts without fetching full messages
@@ -760,7 +760,7 @@ Before loading the extension:
 - **Notification buttons** enable quick actions (mark as read, open) without switching context
 - **@theluckystrike/webext-storage** simplifies typed settings with reactive `onChange` listeners that trigger alarm rescheduling
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [patterns/oauth-identity.md](../patterns/oauth-identity.md) -- OAuth2 flows and token management
 - [patterns/notification-patterns.md](../patterns/notification-patterns.md) -- Desktop notification strategies and best practices

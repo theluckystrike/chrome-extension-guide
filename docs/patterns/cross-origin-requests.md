@@ -9,14 +9,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers making cross-origin HTTP requests from Chrome extensions, including permission configuration, content script limitations, and robust request handling patterns.
 
-## Extension Privileges vs Content Scripts
+## Extension Privileges vs Content Scripts {#extension-privileges-vs-content-scripts}
 
 Chrome extensions have different CORS capabilities depending on where the code runs:
 
 - **Background service worker, popup, and options pages**: Can use `fetch()` or `XMLHttpRequest` to request any URL that matches declared `host_permissions` in manifest.json—no CORS restrictions apply
 - **Content scripts**: Are subject to the parent page's CORS policy and cannot make direct cross-origin requests; must relay through the background service worker
 
-## Host Permissions Configuration
+## Host Permissions Configuration {#host-permissions-configuration}
 
 Declare required host permissions in your manifest:
 
@@ -37,7 +37,7 @@ Use `<all_urls>` sparingly—it grants access to all websites:
 "host_permissions": ["<all_urls>"]
 ```
 
-### Optional Host Permissions
+### Optional Host Permissions {#optional-host-permissions}
 
 Request permissions on-demand for extensions in the Chrome Web Store:
 
@@ -50,7 +50,7 @@ async function requestHostPermission(host) {
 }
 ```
 
-## Fetch from Service Worker
+## Fetch from Service Worker {#fetch-from-service-worker}
 
 The background service worker uses the standard Fetch API with no CORS restrictions when proper host permissions are declared:
 
@@ -69,7 +69,7 @@ async function fetchFromBackground(url, options = {}) {
 }
 ```
 
-## Cookie Handling
+## Cookie Handling {#cookie-handling}
 
 Access cookies in cross-origin requests using the `credentials` option:
 
@@ -95,7 +95,7 @@ async function setCookie(url, name, value) {
 }
 ```
 
-## Error Handling Patterns
+## Error Handling Patterns {#error-handling-patterns}
 
 Implement robust error handling for network failures, HTTP errors, and timeouts:
 
@@ -134,7 +134,7 @@ class HttpError extends Error {
 }
 ```
 
-## Caching Responses
+## Caching Responses {#caching-responses}
 
 Cache API responses using the Cache API or chrome.storage for offline support:
 
@@ -164,7 +164,7 @@ function isFresh(response) {
 }
 ```
 
-## Rate Limiting
+## Rate Limiting {#rate-limiting}
 
 Implement rate limiting to avoid API bans:
 
@@ -190,7 +190,7 @@ const rateLimiter = {
 };
 ```
 
-## Request Queuing
+## Request Queuing {#request-queuing}
 
 Queue sequential API calls to maintain order:
 
@@ -212,7 +212,7 @@ async function queuedFetch(url) {
 }
 ```
 
-## Authentication Headers
+## Authentication Headers {#authentication-headers}
 
 Add Bearer tokens or API keys to requests:
 
@@ -229,7 +229,7 @@ async function fetchWithAuth(url, token, options = {}) {
 }
 ```
 
-## Content Script Proxy Pattern
+## Content Script Proxy Pattern {#content-script-proxy-pattern}
 
 Content scripts must relay requests through the background:
 
@@ -255,7 +255,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## See Also
+## See Also {#see-also}
 
 - [Web Request Patterns](/guides/web-request-patterns.md)
 - [Network Interception](/patterns/network-interception.md)

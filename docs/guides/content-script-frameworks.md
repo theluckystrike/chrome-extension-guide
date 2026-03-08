@@ -6,18 +6,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Using Frameworks in Content Scripts
 
-## Overview
+## Overview {#overview}
 
 Content scripts can inject full UI frameworks like React, Vue, Svelte, or Preact into web pages. This enables building complex floating panels, overlays, toolbars, and interactive widgets.
 
-## Why Use a Framework
+## Why Use a Framework {#why-use-a-framework}
 
 - **Complex injected UIs**: Floating panels, sidebars, and modals benefit from component architecture
 - **Component reuse**: Share UI between popup, options page, and content script
 - **State management**: Frameworks handle predictable state for interactive widgets
 - **Developer experience**: Hot reloading, TypeScript, and familiar tooling
 
-## Shadow DOM Foundation
+## Shadow DOM Foundation {#shadow-dom-foundation}
 
 Shadow DOM provides essential isolation for injected UI:
 
@@ -31,7 +31,7 @@ const shadow = host.attachShadow({ mode: 'closed' });
 
 Key benefits: CSS isolation, correct event bubbling, and no style leakage.
 
-## React in Content Scripts
+## React in Content Scripts {#react-in-content-scripts}
 
 ```jsx
 import { createRoot } from 'react-dom/client';
@@ -59,7 +59,7 @@ import { useState } from 'preact/hooks';
 render(<App />, shadow);
 ```
 
-## Vue in Content Scripts
+## Vue in Content Scripts {#vue-in-content-scripts}
 
 ```js
 import { createApp } from 'vue';
@@ -79,7 +79,7 @@ createApp(App).mount(mountPoint);
 
 Vue's scoped styles work well with shadow DOM.
 
-## Svelte in Content Scripts
+## Svelte in Content Scripts {#svelte-in-content-scripts}
 
 Svelte offers the smallest bundle size:
 
@@ -96,7 +96,7 @@ new Component({ target: shadow, props: { message: 'Hello!' } });
 
 Svelte's compiled styles are scoped by default—ideal for isolation.
 
-## Build Configuration
+## Build Configuration {#build-configuration}
 
 ```js
 // esbuild.config.js
@@ -126,9 +126,9 @@ esbuild.build({
 }
 ```
 
-## CSS Strategies
+## CSS Strategies {#css-strategies}
 
-### CSS-in-JS for Dynamic Injection
+### CSS-in-JS for Dynamic Injection {#css-in-js-for-dynamic-injection}
 
 ```js
 const styles = `.panel { position: fixed; top: 20px; right: 20px; background: white; }`;
@@ -137,7 +137,7 @@ styleSheet.replaceSync(styles);
 shadow.adoptedStyleSheets = [styleSheet];
 ```
 
-### Inline Styles
+### Inline Styles {#inline-styles}
 
 ```js
 const style = document.createElement('style');
@@ -145,7 +145,7 @@ style.textContent = `...css content...`;
 shadow.appendChild(style);
 ```
 
-## Communication with Service Worker
+## Communication with Service Worker {#communication-with-service-worker}
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -158,14 +158,14 @@ const msg = createMessenger<Messages>();
 const data = await msg.send("getPageData");
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [Content Script Patterns](/docs/guides/content-script-patterns.md)
 - [Content Script Isolation](/docs/guides/content-script-isolation.md)
 - [Building with React](/docs/guides/building-with-react.md)
 - [Building with Svelte](/docs/guides/building-with-svelte.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script Lifecycle](../patterns/content-script-lifecycle.md)

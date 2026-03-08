@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Chrome's Tab Groups API allows organizing tabs into visual groups, creating a workspace-like experience within the browser.
 
-## Creating Groups
+## Creating Groups {#creating-groups}
 
 Use `chrome.tabs.group()` to create a group from tabs:
 
@@ -25,7 +25,7 @@ await chrome.tabGroups.update(groupId, {
 });
 ```
 
-## Group Properties
+## Group Properties {#group-properties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -33,7 +33,7 @@ await chrome.tabGroups.update(groupId, {
 | `color` | string | One of: grey, blue, red, yellow, green, pink, purple, cyan |
 | `collapsed` | boolean | Whether group is collapsed to save space |
 
-## Updating Groups
+## Updating Groups {#updating-groups}
 
 ```javascript
 // Change group title and color
@@ -43,7 +43,7 @@ chrome.tabGroups.update(groupId, { title: 'Research', color: 'purple' });
 chrome.tabGroups.update(groupId, { collapsed: true });
 ```
 
-## Moving Tabs Between Groups
+## Moving Tabs Between Groups {#moving-tabs-between-groups}
 
 ```javascript
 // Add tab to existing group
@@ -53,7 +53,7 @@ chrome.tabs.group({ groupId: targetGroupId, tabIds: [tabId] });
 chrome.tabs.ungroup([tabId]);
 ```
 
-## Querying Groups
+## Querying Groups {#querying-groups}
 
 ```javascript
 // Get all groups in current window
@@ -63,7 +63,7 @@ const groups = await chrome.tabGroups.query({ windowId: windowId });
 const matching = await chrome.tabGroups.query({ title: 'Project X' });
 ```
 
-## Events
+## Events {#events}
 
 ```javascript
 chrome.tabGroups.onCreated.addListener((group) => {
@@ -83,9 +83,9 @@ chrome.tabGroups.onMoved.addListener((group, moveInfo) => {
 });
 ```
 
-## Auto-Grouping Patterns
+## Auto-Grouping Patterns {#auto-grouping-patterns}
 
-### Group by Domain
+### Group by Domain {#group-by-domain}
 
 ```javascript
 async function groupByDomain(windowId) {
@@ -108,7 +108,7 @@ async function groupByDomain(windowId) {
 }
 ```
 
-### Save/Restore Workspace
+### Save/Restore Workspace {#saverestore-workspace}
 
 ```javascript
 async function saveWorkspace(windowId) {
@@ -142,7 +142,7 @@ async function restoreWorkspace(windowId, workspace) {
 }
 ```
 
-## Permissions
+## Permissions {#permissions}
 
 Add `"tabGroups"` to `manifest.json`:
 
@@ -152,13 +152,13 @@ Add `"tabGroups"` to `manifest.json`:
 }
 ```
 
-## Limitations
+## Limitations {#limitations}
 
 - Groups cannot span multiple windows
 - Group colors are limited to 8 preset options
 - Maximum number of groups varies by browser
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Tab Management Patterns](tab-management.md)

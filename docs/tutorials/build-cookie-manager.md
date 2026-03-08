@@ -8,13 +8,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 This tutorial walks you through building a fully-featured cookie manager extension that allows users to view, edit, delete, search, and export cookies.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Chrome browser or Chromium-based browser
 - Basic JavaScript and HTML knowledge
 - Chrome Extensions API familiarity
 
-## Step 1: Manifest Configuration
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create your `manifest.json` with the required permissions:
 
@@ -45,7 +45,7 @@ Key permissions:
 - **storage**: For saving user preferences and exported cookies
 - **tabs**: For tab information
 
-## Step 2: Display Cookies for Current Site
+## Step 2: Display Cookies for Current Site {#step-2-display-cookies-for-current-site}
 
 Create `popup.js` to fetch and display cookies for the current tab:
 
@@ -71,7 +71,7 @@ function displayCookies(cookies, domain) {
 }
 ```
 
-## Step 3: Cookie Details View
+## Step 3: Cookie Details View {#step-3-cookie-details-view}
 
 Create a detailed view showing all cookie properties:
 
@@ -94,7 +94,7 @@ function showCookieDetails(cookie) {
 }
 ```
 
-## Step 4: Edit Cookie Values Inline
+## Step 4: Edit Cookie Values Inline {#step-4-edit-cookie-values-inline}
 
 Implement inline editing with `chrome.cookies.set`:
 
@@ -120,7 +120,7 @@ async function updateCookie(name, newValue, domain) {
 
 **Note**: For HttpOnly cookies, you cannot read or modify the value from JavaScript - this requires a background script.
 
-## Step 5: Delete Individual Cookies
+## Step 5: Delete Individual Cookies {#step-5-delete-individual-cookies}
 
 Use `chrome.cookies.remove` to delete a specific cookie:
 
@@ -138,7 +138,7 @@ async function deleteCookie(name, domain) {
 }
 ```
 
-## Step 6: Bulk Operations
+## Step 6: Bulk Operations {#step-6-bulk-operations}
 
 Delete all cookies for a domain or clear expired ones:
 
@@ -171,7 +171,7 @@ async function clearExpired() {
 }
 ```
 
-## Step 7: Search Across All Cookies
+## Step 7: Search Across All Cookies {#step-7-search-across-all-cookies}
 
 Search functionality across all domains:
 
@@ -186,7 +186,7 @@ async function searchCookies(query) {
 }
 ```
 
-## Step 8: Export and Import Cookies
+## Step 8: Export and Import Cookies {#step-8-export-and-import-cookies}
 
 Export cookies as JSON and import them back:
 
@@ -223,9 +223,9 @@ async function importCookies(file) {
 }
 ```
 
-## Additional Features
+## Additional Features {#additional-features}
 
-### Cookie Change Monitoring
+### Cookie Change Monitoring {#cookie-change-monitoring}
 
 Listen for cookie changes using the `onChanged` event:
 
@@ -236,7 +236,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-### Incognito Cookie Stores
+### Incognito Cookie Stores {#incognito-cookie-stores}
 
 Access cookies from different stores, including incognito:
 
@@ -252,7 +252,7 @@ const cookies = await chrome.cookies.getAll({
 });
 ```
 
-### Cookie Count Badge
+### Cookie Count Badge {#cookie-count-badge}
 
 Display cookie count as a badge on the extension icon:
 
@@ -269,7 +269,7 @@ async function updateBadge(tabId) {
 }
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. Always handle Secure and HttpOnly cookies appropriately
 2. Use proper URL construction with protocol
@@ -277,7 +277,7 @@ async function updateBadge(tabId) {
 4. Validate cookie data before modification
 5. Provide user feedback for all operations
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [Cookies API Reference](../api-reference/cookies-api.md)
 - [Cookie Permissions](../permissions/cookies.md)

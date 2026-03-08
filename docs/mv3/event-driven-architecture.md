@@ -7,10 +7,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/even
 
 # Event-Driven Architecture in MV3
 
-## Why Event-Driven?
+## Why Event-Driven? {#why-event-driven}
 MV3 service workers terminate after ~30s idle. No persistent background. Extensions must design for termination.
 
-## Core Rule: Top-Level Listener Registration
+## Core Rule: Top-Level Listener Registration {#core-rule-top-level-listener-registration}
 ```javascript
 // CORRECT
 chrome.runtime.onInstalled.addListener(handleInstall);
@@ -32,10 +32,10 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-## Service Worker Lifecycle
+## Service Worker Lifecycle {#service-worker-lifecycle}
 Install -> Active -> Idle (30s) -> Terminated -> (event) -> Restart
 
-## No Global State
+## No Global State {#no-global-state}
 ```javascript
 // WRONG
 let counter = 0;
@@ -50,7 +50,7 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-## Alarms Replace setInterval
+## Alarms Replace setInterval {#alarms-replace-setinterval}
 ```javascript
 // WRONG: dies with SW
 setInterval(() => check(), 60000);
@@ -64,7 +64,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Message-Driven Workflows
+## Message-Driven Workflows {#message-driven-workflows}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 type Msgs = {
@@ -77,7 +77,7 @@ m.onMessage('GET_STATUS', async ({ id }) => {
 });
 ```
 
-## Wake-Up Event Sources
+## Wake-Up Event Sources {#wake-up-event-sources}
 - `chrome.alarms.onAlarm`
 - `chrome.runtime.onMessage` / `onConnect` / `onMessageExternal`
 - `chrome.runtime.onInstalled` / `onStartup`
@@ -86,7 +86,7 @@ m.onMessage('GET_STATUS', async ({ id }) => {
 - `chrome.webNavigation.*` / `chrome.webRequest.*`
 - `chrome.tabs.*` / `chrome.notifications.onClicked`
 
-## Initialization Pattern
+## Initialization Pattern {#initialization-pattern}
 ```javascript
 chrome.runtime.onInstalled.addListener(async ({ reason }) => {
   if (reason === 'install') {
@@ -101,9 +101,9 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Anti-Patterns
+## Anti-Patterns {#anti-patterns}
 
-### WebSocket (dies with SW)
+### WebSocket (dies with SW) {#websocket-dies-with-sw}
 ```javascript
 // Use alarms to poll instead
 chrome.alarms.create('poll', { periodInMinutes: 1 });
@@ -115,7 +115,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Long-Running Tasks
+### Long-Running Tasks {#long-running-tasks}
 ```javascript
 // Chunk work and save progress
 async function processChunk() {
@@ -129,7 +129,7 @@ async function processChunk() {
 }
 ```
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Listeners inside `onInstalled` — lost on wake-up
 - Global variables — reset on termination
 - `setInterval` / `setTimeout` — use `chrome.alarms`

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/inte
 
 Chrome's i18n system supports multiple languages in extensions.
 
-## Directory Structure
+## Directory Structure {#directory-structure}
 
 ```
 my-extension/
@@ -21,7 +21,7 @@ my-extension/
 └── ...
 ```
 
-## messages.json Format
+## messages.json Format {#messagesjson-format}
 
 ```json
 {
@@ -40,7 +40,7 @@ my-extension/
 
 Use `$NAME$` for named placeholders and `$1`, `$2` for positional arguments.
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -51,9 +51,9 @@ Use `$NAME$` for named placeholders and `$1`, `$2` for positional arguments.
 }
 ```
 
-## Using Messages in JavaScript
+## Using Messages in JavaScript {#using-messages-in-javascript}
 
-### chrome.i18n.getMessage()
+### chrome.i18n.getMessage() {#chromei18ngetmessage}
 
 ```javascript
 const name = chrome.i18n.getMessage('greeting_message', ['World']);
@@ -66,7 +66,7 @@ const greeting = chrome.i18n.getMessage('greeting_message', 'Alice');
 
 > **Note:** The `substitutions` parameter accepts a string or an array of up to 9 strings. It does NOT accept an object. Named placeholders like `$NAME$` are defined in `messages.json` and map to positional substitutions (`$1`, `$2`, etc.).
 
-### Detecting User Language
+### Detecting User Language {#detecting-user-language}
 
 ```javascript
 const uiLang = chrome.i18n.getUILanguage();
@@ -76,7 +76,7 @@ chrome.i18n.getAcceptLanguages((languages) => {
 });
 ```
 
-## Predefined Messages
+## Predefined Messages {#predefined-messages}
 
 | Key | Description |
 |-----|-------------|
@@ -92,7 +92,7 @@ const extId = chrome.i18n.getMessage('@@extension_id');
 const direction = chrome.i18n.getMessage('@@bidi_dir');
 ```
 
-## Using Messages in CSS
+## Using Messages in CSS {#using-messages-in-css}
 
 For RTL support:
 
@@ -102,7 +102,7 @@ body {
 }
 ```
 
-## Storing User Language Preference
+## Storing User Language Preference {#storing-user-language-preference}
 
 Use `@theluckystrike/webext-storage`:
 
@@ -121,7 +121,7 @@ async function getUserLanguage() {
 }
 ```
 
-## Dynamic Locale Switching
+## Dynamic Locale Switching {#dynamic-locale-switching}
 
 ```javascript
 // background.js
@@ -136,17 +136,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
 - **English fallback** - Ensure default locale has all keys
 - **Consistent keys** - Use naming like `menu_open`, `notification_new`
 - **Use descriptions** - Help translators understand context
 - **Test RTL languages** - Use @@bidi_dir for proper RTL support
 
-## Related Resources
+## Related Resources {#related-resources}
 
 See [Internationalization Guide](../guides/internationalization.md).
 
-## References
+## References {#references}
 
 - [Chrome i18n API](https://developer.chrome.com/docs/extensions/i18n)

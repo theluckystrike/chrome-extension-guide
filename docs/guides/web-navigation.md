@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/w
 ---
 # Web Navigation API Guide
 
-## Overview
+## Overview {#overview}
 - Requires `"webNavigation"` permission
 - Track page navigation lifecycle across all tabs and frames
 - Powerful URL filtering to listen only to specific sites
 
-## Navigation Events (in order)
+## Navigation Events (in order) {#navigation-events-in-order}
 ```javascript
 // 1. Before navigation starts
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
@@ -41,7 +41,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-## URL Filtering
+## URL Filtering {#url-filtering}
 ```javascript
 // Only listen to specific URLs (evaluated in browser — efficient)
 chrome.webNavigation.onCompleted.addListener(
@@ -60,7 +60,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-### Filter Properties
+### Filter Properties {#filter-properties}
 - `hostContains`, `hostEquals`, `hostPrefix`, `hostSuffix`
 - `pathContains`, `pathEquals`, `pathPrefix`, `pathSuffix`
 - `queryContains`, `queryEquals`, `queryPrefix`, `querySuffix`
@@ -68,7 +68,7 @@ chrome.webNavigation.onCompleted.addListener(
 - `schemes` (array of scheme strings)
 - `ports` (array of port numbers or ranges)
 
-## Frame Navigation
+## Frame Navigation {#frame-navigation}
 ```javascript
 // Track frame hierarchy
 chrome.webNavigation.onCommitted.addListener((details) => {
@@ -88,7 +88,7 @@ chrome.webNavigation.getAllFrames({ tabId: tabId }, (frames) => {
 });
 ```
 
-## Transition Types
+## Transition Types {#transition-types}
 - `"link"` — clicked a link
 - `"typed"` — typed in address bar
 - `"auto_bookmark"` — from bookmark
@@ -101,7 +101,7 @@ chrome.webNavigation.getAllFrames({ tabId: tabId }, (frames) => {
 - `"keyword"` — omnibox keyword
 - `"keyword_generated"` — search keyword result
 
-## SPA Navigation Detection
+## SPA Navigation Detection {#spa-navigation-detection}
 ```javascript
 // Detect History API navigation (pushState/replaceState)
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
@@ -125,7 +125,7 @@ chrome.webNavigation.onTabReplaced.addListener((details) => {
 });
 ```
 
-## Tracking Page Visits
+## Tracking Page Visits {#tracking-page-visits}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -142,7 +142,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 });
 ```
 
-## webNavigation vs tabs.onUpdated
+## webNavigation vs tabs.onUpdated {#webnavigation-vs-tabsonupdated}
 | Feature | webNavigation | tabs.onUpdated |
 |---------|--------------|----------------|
 | Frame info | Yes (frameId, parentFrameId) | No |
@@ -152,14 +152,14 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 | Permission | `webNavigation` | `tabs` |
 | Event granularity | 7+ events per navigation | 1-2 per navigation |
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Forgetting `frameId === 0` check — events fire for ALL frames
 - Not handling SPA navigations (onHistoryStateUpdated)
 - Ignoring `onErrorOccurred` — failed navigations still matter
 - Heavy processing in event handlers slowing navigation
 - Not using URL filters (processing every navigation is wasteful)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Web Navigation API](../api-reference/web-navigation-api.md)
 - [URL Handling](../patterns/navigation-url-handling.md)

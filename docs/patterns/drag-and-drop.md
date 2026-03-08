@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Drag and Drop in Extensions
 
-## Overview
+## Overview {#overview}
 
 Drag and drop brings natural, tactile interaction to extension UIs — sortable bookmark lists in popups, file uploads into side panels, and content script overlays that let users drag page elements into the extension. But extensions add complexity: popups live in isolated windows, content scripts share the DOM with host pages, and cross-context communication requires message passing. This guide covers practical drag-and-drop patterns for every extension surface, from basic sortable lists to accessible keyboard alternatives.
 
 ---
 
-## Extension Drag-and-Drop Architecture
+## Extension Drag-and-Drop Architecture {#extension-drag-and-drop-architecture}
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -47,7 +47,7 @@ Key constraints:
 
 ---
 
-## Pattern 1: Sortable Lists in Popup UI
+## Pattern 1: Sortable Lists in Popup UI {#pattern-1-sortable-lists-in-popup-ui}
 
 Build drag-and-drop reordering for lists in popup or side panel HTML. This pattern tracks the drag source and target using data attributes and swaps elements on drop:
 
@@ -159,7 +159,7 @@ Minimal CSS for drag feedback:
 
 ---
 
-## Pattern 2: File Drop Into Extension Popup
+## Pattern 2: File Drop Into Extension Popup {#pattern-2-file-drop-into-extension-popup}
 
 Accept file drops in the popup for processing — image conversion, text extraction, config imports:
 
@@ -248,7 +248,7 @@ initFileDrop(dropZone, {
 
 ---
 
-## Pattern 3: Content Script Drag-and-Drop Overlays
+## Pattern 3: Content Script Drag-and-Drop Overlays {#pattern-3-content-script-drag-and-drop-overlays}
 
 Inject a drop overlay onto web pages that captures dragged content. This pattern creates a floating overlay that appears when the user drags items, and relays the dropped data to the service worker:
 
@@ -375,7 +375,7 @@ initContentDragListener();
 
 ---
 
-## Pattern 4: Cross-Context Drag (Page to Side Panel)
+## Pattern 4: Cross-Context Drag (Page to Side Panel) {#pattern-4-cross-context-drag-page-to-side-panel}
 
 Native HTML drag events cannot cross extension context boundaries. This pattern bridges the gap by using `chrome.runtime` messaging to relay drag data from a content script to the side panel:
 
@@ -473,7 +473,7 @@ function addCollectedItem(
 
 ---
 
-## Pattern 5: Custom Drag Previews and Ghost Images
+## Pattern 5: Custom Drag Previews and Ghost Images {#pattern-5-custom-drag-previews-and-ghost-images}
 
 Replace the browser's default translucent clone with a custom drag image for better visual communication:
 
@@ -575,7 +575,7 @@ function setCanvasDragPreview(
 
 ---
 
-## Pattern 6: Drop Zone Visual Feedback and Validation
+## Pattern 6: Drop Zone Visual Feedback and Validation {#pattern-6-drop-zone-visual-feedback-and-validation}
 
 Provide clear visual indicators for valid, invalid, and active drop states. This pattern validates drag contents before the user drops, using the `dataTransfer.types` array:
 
@@ -695,7 +695,7 @@ CSS states driven by `data-drop-state`:
 
 ---
 
-## Pattern 7: Drag Data Types — Text, URLs, Files, and Custom MIME
+## Pattern 7: Drag Data Types — Text, URLs, Files, and Custom MIME {#pattern-7-drag-data-types-text-urls-files-and-custom-mime}
 
 The `DataTransfer` API supports multiple data formats simultaneously. Set multiple types on drag so different drop targets can consume the most appropriate format:
 
@@ -786,7 +786,7 @@ Data type cheat sheet:
 
 ---
 
-## Pattern 8: Accessible Drag-and-Drop With Keyboard Alternatives
+## Pattern 8: Accessible Drag-and-Drop With Keyboard Alternatives {#pattern-8-accessible-drag-and-drop-with-keyboard-alternatives}
 
 Drag-and-drop is inherently mouse-centric. Every drag interaction must have a keyboard-accessible alternative for users who rely on assistive technology:
 
@@ -940,7 +940,7 @@ function renderKeyboardHelp(container: HTMLElement): void {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Context | Key Technique |
 |---------|---------|---------------|
@@ -953,7 +953,7 @@ function renderKeyboardHelp(container: HTMLElement): void {
 | Multiple data types | Any UI | Set `text/plain`, `text/uri-list`, `text/html`, custom MIME |
 | Keyboard accessible | Popup / Side Panel | `aria-grabbed` + arrow key reorder + live region announcements |
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
 1. **Popup closes on external drag** — You cannot drag items out of a popup. If you need cross-boundary drag, use the side panel instead.
 2. **Missing `preventDefault()`** — Failing to prevent default on `dragover` means `drop` will never fire. Always call `e.preventDefault()` in your `dragover` handler.
@@ -961,7 +961,7 @@ function renderKeyboardHelp(container: HTMLElement): void {
 4. **Cannot read data during `dragover`** — `dataTransfer.getData()` returns empty strings in `dragover` for security. Only `dataTransfer.types` is available.
 5. **Firefox requires `setData()`** — Firefox will not start a drag unless you call `e.dataTransfer.setData()` with at least one value in the `dragstart` handler.
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [MDN Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 - [Chrome Side Panel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)

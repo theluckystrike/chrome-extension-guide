@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishi
 
 # Chrome Web Store Rejection Fixes
 
-## The Stricter Review Landscape
+## The Stricter Review Landscape {#the-stricter-review-landscape}
 
 The Chrome Web Store review process has grown significantly more rigorous over the past years. Reviewers now employ automated tools that scan for patterns associated with policy violations, and manual reviews dive deeper into functionality than ever before. Extensions that previously sailed through approval now face rejection for subtle policy misalignments. Understanding these rejection reasons and their fixes is essential for any extension developer.
 
 This guide covers the most common rejection scenarios and provides actionable solutions. Each section explains what triggers the rejection, why it matters, and how to address it before submitting your extension.
 
-## Excessive Permissions
+## Excessive Permissions {#excessive-permissions}
 
 The most frequent rejection stems from requesting more permissions than your extension actually uses. The review process flags any permission that appears unnecessary for the stated functionality.
 
@@ -21,7 +21,7 @@ The most frequent rejection stems from requesting more permissions than your ext
 
 **How to fix it**: Audit every permission in your manifest.json and confirm each one is actively used by your extension. Replace host permissions with specific domains where possible. Use the `activeTab` permission instead of broad URL access for features that only run when the user explicitly invokes them. For permissions needed only in specific scenarios, declare them as `optional_permissions` and request them at runtime using the Permissions API. The `@theluckystrike/webext-permissions` library simplifies this pattern by providing a clean interface for requesting permissions on demand rather than upfront.
 
-## Missing Privacy Policy
+## Missing Privacy Policy {#missing-privacy-policy}
 
 Extensions that collect any user data must include a comprehensive privacy policy. This requirement applies to any extension using `storage`, `cookies`, `identity`, `webRequest`, or any host permissions.
 
@@ -29,7 +29,7 @@ Extensions that collect any user data must include a comprehensive privacy polic
 
 **How to fix it**: Create a dedicated privacy policy page on your website and link it in the Developer Dashboard under the Privacy Practices section. Your policy must clearly state what data your extension collects (if any), how that data is used, whether it is stored locally or transmitted to external servers, and whether you share data with third parties. For extensions that do not collect any user data, state this explicitly. Reference the privacy policy template in this guide for a comprehensive starting point.
 
-## Remote Code Execution Detection
+## Remote Code Execution Detection {#remote-code-execution-detection}
 
 Chrome Web Store prohibits extensions that execute remote code. This policy exists to protect users from malicious modifications that could occur after the extension passes review.
 
@@ -37,7 +37,7 @@ Chrome Web Store prohibits extensions that execute remote code. This policy exis
 
 **How to fix it**: Bundle all JavaScript code locally within your extension package. Use `chrome.scripting.executeScript` with the `files` parameter only, never with code strings. Implement a strict Content Security Policy in your manifest.json that blocks `unsafe-eval` and restricts script sources to local files only. If you need to load configuration data, use JSON files bundled with your extension rather than fetching them at runtime.
 
-## Deceptive Functionality
+## Deceptive Functionality {#deceptive-functionality}
 
 Your store listing must accurately represent what your extension actually does. Any discrepancy between the listing description and the actual functionality raises red flags for reviewers.
 
@@ -45,7 +45,7 @@ Your store listing must accurately represent what your extension actually does. 
 
 **How to fix it**: Review your store listing description and ensure every feature mentioned is present and functional in the current version. Use screenshots that accurately depict the actual extension interface. Remove any references to features that were cut or never implemented. If your extension has limitations, disclose them honestly in the description.
 
-## Missing or Unclear Purpose
+## Missing or Unclear Purpose {#missing-or-unclear-purpose}
 
 Extensions must serve a clear, identifiable purpose. Reviewers reject extensions that appear to do too much or whose purpose remains ambiguous.
 
@@ -53,7 +53,7 @@ Extensions must serve a clear, identifiable purpose. Reviewers reject extensions
 
 **How to fix it**: Define a single, coherent purpose for your extension and ensure all features support that purpose. If you have multiple distinct features, consider splitting them into separate extensions, each with its own clear focus. Your store listing should open with a clear statement of what your extension does and why it is useful.
 
-## User Data Policy Violation
+## User Data Policy Violation {#user-data-policy-violation}
 
 Chrome Web Store has strict requirements around how extensions handle user data. Violations here can result in permanent suspension in severe cases.
 
@@ -61,7 +61,7 @@ Chrome Web Store has strict requirements around how extensions handle user data.
 
 **How to fix it**: Disclose all data collection in both your privacy policy and within your extension's UI. Prefer local storage via `chrome.storage` over external servers when possible. The `@theluckystrike/webext-storage` library provides a clean abstraction for local storage operations. If you must send data to external servers, implement secure transmission (HTTPS) and obtain clear user consent. Provide users with the ability to export and delete their data.
 
-## Notification Abuse
+## Notification Abuse {#notification-abuse}
 
 Extensions that abuse the notification system face swift rejection. This includes spam notifications, notifications that persist inappropriately, or notifications that redirect users to external sites without clear value.
 
@@ -69,7 +69,7 @@ Extensions that abuse the notification system face swift rejection. This include
 
 **How to fix it**: Limit notifications to essential updates that directly relate to your extension's core purpose. Never use notifications for promotional or marketing purposes. Provide clear notification settings within your extension that allow users to control frequency and content. Test your notification behavior to ensure it does not annoy users or trigger system spam filters.
 
-## The Appeal Process
+## The Appeal Process {#the-appeal-process}
 
 When your extension receives a rejection, you have the opportunity to appeal. A well-crafted appeal can reverse rejections based on misunderstandings or provide context that clarifies your implementation.
 
@@ -79,7 +79,7 @@ When your extension receives a rejection, you have the opportunity to appeal. A 
 
 **Best practices**: Respond promptly to rejection notices, as delaying your appeal extends your time to market. Be respectful but firm in your justification. If you made changes to address the rejection, clearly describe those changes. Expect review times of several days to over a week for appeals.
 
-## Pre-Submission Checklist
+## Pre-Submission Checklist {#pre-submission-checklist}
 
 Before submitting any extension to the Chrome Web Store, work through this checklist to minimize rejection risk.
 

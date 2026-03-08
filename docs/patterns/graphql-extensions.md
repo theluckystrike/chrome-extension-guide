@@ -13,7 +13,7 @@ GraphQL offers structured data fetching that pairs well with the constrained env
 
 ---
 
-## Table of Contents
+## Table of Contents {#table-of-contents}
 
 1. [GraphQL Client Setup in Service Worker](#1-graphql-client-setup-in-service-worker)
 2. [Query Caching with chrome.storage](#2-query-caching-with-chromestorage)
@@ -26,11 +26,11 @@ GraphQL offers structured data fetching that pairs well with the constrained env
 
 ---
 
-## 1. GraphQL Client Setup in Service Worker
+## 1. GraphQL Client Setup in Service Worker {#1-graphql-client-setup-in-service-worker}
 
 Service workers cannot use libraries that depend on DOM globals. Choose a lightweight, fetch-based client like `graphql-request` or configure `urql` with a minimal exchange pipeline.
 
-### Using graphql-request
+### Using graphql-request {#using-graphql-request}
 
 ```typescript
 // background/graphql-client.ts
@@ -50,7 +50,7 @@ export async function query<T>(
 }
 ```
 
-### Using urql with a Custom Fetch Exchange
+### Using urql with a Custom Fetch Exchange {#using-urql-with-a-custom-fetch-exchange}
 
 ```typescript
 // background/urql-client.ts
@@ -70,7 +70,7 @@ export { urqlClient };
 
 ---
 
-## 2. Query Caching with chrome.storage
+## 2. Query Caching with chrome.storage {#2-query-caching-with-chromestorage}
 
 In-memory caches are lost when the service worker goes idle. Persist query results to `chrome.storage.local` for durability across wake cycles.
 
@@ -132,7 +132,7 @@ async function hashQuery(
 
 ---
 
-## 3. Subscriptions via Offscreen Document WebSocket
+## 3. Subscriptions via Offscreen Document WebSocket {#3-subscriptions-via-offscreen-document-websocket}
 
 Manifest V3 service workers cannot hold persistent WebSocket connections. Use an offscreen document to maintain the connection and relay subscription data back to the service worker.
 
@@ -195,7 +195,7 @@ See [WebSocket in Service Workers](websocket-service-workers.md) for reconnectio
 
 ---
 
-## 4. Optimistic Updates in Extension UI
+## 4. Optimistic Updates in Extension UI {#4-optimistic-updates-in-extension-ui}
 
 Apply mutations immediately in the UI and reconcile when the server responds. This is critical for popup and side panel interfaces where perceived latency matters.
 
@@ -263,11 +263,11 @@ async function toggleTodo(todo: Todo) {
 
 ---
 
-## 5. Schema-First Typing with Codegen
+## 5. Schema-First Typing with Codegen {#5-schema-first-typing-with-codegen}
 
 Use `graphql-codegen` to generate TypeScript types from your schema. This catches query errors at build time rather than runtime.
 
-### Configuration
+### Configuration {#configuration}
 
 ```yaml
 # codegen.yml
@@ -284,7 +284,7 @@ generates:
       skipTypename: true
 ```
 
-### Typed Query Usage
+### Typed Query Usage {#typed-query-usage}
 
 ```typescript
 // src/queries/todos.graphql
@@ -324,7 +324,7 @@ Run codegen as a build step: `npx graphql-codegen --config codegen.yml`
 
 ---
 
-## 6. Batching Queries for Performance
+## 6. Batching Queries for Performance {#6-batching-queries-for-performance}
 
 Combine multiple queries into a single HTTP request to reduce overhead, especially important when the service worker wakes and needs to hydrate multiple UI components.
 
@@ -398,7 +398,7 @@ export const batchClient = new BatchingClient("https://api.example.com/graphql")
 
 ---
 
-## 7. Authentication Headers and Token Refresh
+## 7. Authentication Headers and Token Refresh {#7-authentication-headers-and-token-refresh}
 
 Extensions often use OAuth tokens that expire. Wrap the client to handle transparent token refresh without interrupting queries.
 
@@ -515,7 +515,7 @@ The deduplication of refresh calls (`this.refreshPromise`) is essential. Multipl
 
 ---
 
-## 8. Offline-First with Persisted Queries
+## 8. Offline-First with Persisted Queries {#8-offline-first-with-persisted-queries}
 
 Persisted queries let you execute operations by hash rather than sending the full query text. Combined with local storage, this enables offline-first behavior.
 
@@ -670,7 +670,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Key Benefit | Watch Out For |
 |---------|------------|---------------|

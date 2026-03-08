@@ -8,13 +8,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 This tutorial walks you through building a Chrome extension that translates selected text on any webpage. The extension will support context menu translation, popup translation, keyboard shortcuts, and translation history.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Basic knowledge of JavaScript and HTML
 - Chrome browser installed
 - A code editor (VS Code recommended)
 
-## Step 1: Set Up Manifest with Required Permissions
+## Step 1: Set Up Manifest with Required Permissions {#step-1-set-up-manifest-with-required-permissions}
 
 Create your `manifest.json` with the necessary permissions for context menus, active tab access, and storage:
 
@@ -45,7 +45,7 @@ Create your `manifest.json` with the necessary permissions for context menus, ac
 }
 ```
 
-## Step 2: Create Context Menu for Translation
+## Step 2: Create Context Menu for Translation {#step-2-create-context-menu-for-translation}
 
 In your background script (`background.js`), create the context menu item:
 
@@ -66,7 +66,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Step 3: Content Script for Tooltip Display
+## Step 3: Content Script for Tooltip Display {#step-3-content-script-for-tooltip-display}
 
 Create `content.js` to handle selected text and display translation in a tooltip:
 
@@ -108,7 +108,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Step 4: Integrate Translation API
+## Step 4: Integrate Translation API {#step-4-integrate-translation-api}
 
 Use a free translation API like MyMemory or LibreTranslate:
 
@@ -127,7 +127,7 @@ async function translateText(text, targetLang = 'en') {
 }
 ```
 
-## Step 5: Popup for Manual Translation
+## Step 5: Popup for Manual Translation {#step-5-popup-for-manual-translation}
 
 Create `popup.html` and `popup.js` for manual translation input:
 
@@ -163,7 +163,7 @@ document.getElementById('translateBtn').addEventListener('click', async () => {
 });
 ```
 
-## Step 6: Options Page for User Preferences
+## Step 6: Options Page for User Preferences {#step-6-options-page-for-user-preferences}
 
 Create `options.html` for configuring default target language and API settings:
 
@@ -183,7 +183,7 @@ async function loadOptions() {
 }
 ```
 
-## Step 7: Translation History
+## Step 7: Translation History {#step-7-translation-history}
 
 Store translation history in Chrome storage:
 
@@ -204,7 +204,7 @@ async function saveToHistory(original, translated, targetLang) {
 }
 ```
 
-## Step 8: Keyboard Shortcut Handler
+## Step 8: Keyboard Shortcut Handler {#step-8-keyboard-shortcut-handler}
 
 Register the keyboard command in your background script:
 
@@ -231,9 +231,9 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Handling Edge Cases
+## Handling Edge Cases {#handling-edge-cases}
 
-### RTL Languages Support
+### RTL Languages Support {#rtl-languages-support}
 
 ```javascript
 function isRTL(lang) {
@@ -247,7 +247,7 @@ function applyRTL(text, detectedLang) {
 }
 ```
 
-### Long Text Handling
+### Long Text Handling {#long-text-handling}
 
 ```javascript
 async function translateLongText(text, targetLang, maxLength = 500) {
@@ -259,7 +259,7 @@ async function translateLongText(text, targetLang, maxLength = 500) {
 }
 ```
 
-### Rate Limiting
+### Rate Limiting {#rate-limiting}
 
 ```javascript
 let lastRequestTime = 0;
@@ -278,7 +278,7 @@ async function rateLimitedTranslate(text, targetLang) {
 }
 ```
 
-### HTML Content Stripping
+### HTML Content Stripping {#html-content-stripping}
 
 ```javascript
 function stripHTML(html) {
@@ -293,13 +293,13 @@ function preserveFormatting(text, translation) {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Context Menus API](../api-reference/context-menus-api.md)
 - [Keyboard Shortcuts](../guides/keyboard-shortcuts.md)
 - [Context Menu Patterns](../patterns/context-menu-patterns.md)
 
-## Testing Your Extension
+## Testing Your Extension {#testing-your-extension}
 
 1. Load unpacked extension in Chrome (`chrome://extensions`)
 2. Enable Developer mode
@@ -307,7 +307,7 @@ function preserveFormatting(text, translation) {
 4. Select text on any webpage and right-click to see "Translate selection"
 5. Test the popup and keyboard shortcut
 
-## Conclusion
+## Conclusion {#conclusion}
 
 You now have a fully functional translation extension with context menu support, popup translation, keyboard shortcuts, and history. Expand on this foundation by adding features like:
 - Multiple translation API support

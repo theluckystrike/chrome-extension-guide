@@ -6,13 +6,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/h
 ---
 # History API Guide
 
-## Overview
+## Overview {#overview}
 - Requires `"history"` permission (cross-ref `docs/permissions/history.md`)
 - Access browser's visited URL history
 - Add, delete, and query history entries
 - Privacy-sensitive — users must trust extensions with this permission
 
-## Searching History
+## Searching History {#searching-history}
 ```javascript
 // Search by text query
 chrome.history.search({
@@ -32,7 +32,7 @@ chrome.history.search({ text: '', maxResults: 1000 }, (results) => {
 });
 ```
 
-## Visit Details
+## Visit Details {#visit-details}
 ```javascript
 // Get individual visits to a URL
 chrome.history.getVisits({ url: 'https://developer.chrome.com/' }, (visits) => {
@@ -47,7 +47,7 @@ chrome.history.getVisits({ url: 'https://developer.chrome.com/' }, (visits) => {
 });
 ```
 
-### Transition Types
+### Transition Types {#transition-types}
 - `"link"` — clicked a link
 - `"typed"` — typed in address bar
 - `"auto_bookmark"` — from bookmarks
@@ -60,7 +60,7 @@ chrome.history.getVisits({ url: 'https://developer.chrome.com/' }, (visits) => {
 - `"keyword"` — search keyword
 - `"keyword_generated"` — from search engine
 
-## Adding & Removing History
+## Adding & Removing History {#adding-removing-history}
 ```javascript
 // Add a URL to history (creates entry as if visited)
 chrome.history.addUrl({ url: 'https://example.com/' });
@@ -78,7 +78,7 @@ chrome.history.deleteRange({
 chrome.history.deleteAll();
 ```
 
-## History Events
+## History Events {#history-events}
 ```javascript
 chrome.history.onVisited.addListener((result) => {
   // Fires when a URL is visited
@@ -94,7 +94,7 @@ chrome.history.onVisitRemoved.addListener((removed) => {
 });
 ```
 
-## Tracking Browsing Patterns
+## Tracking Browsing Patterns {#tracking-browsing-patterns}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -116,21 +116,21 @@ chrome.history.onVisited.addListener(async (result) => {
 });
 ```
 
-## Practical Patterns
+## Practical Patterns {#practical-patterns}
 - **Browsing dashboard**: aggregate visit data by domain, time of day, transition type
 - **Productivity tracker**: monitor time on distracting vs productive sites
 - **History search extension**: better search UI with filters, date ranges, domain grouping
 - **Privacy cleaner**: scheduled deletion of history for specific domains
 - **URL recall**: "I visited a page last week about X" — fuzzy search helper
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Not handling the volume of data — `search` can return thousands of results
 - Forgetting `text: ''` is required even when filtering by time only
 - Deleting history without confirmation — it's irreversible
 - Not accounting for `maxResults` default (100) — always set explicitly
 - Calling `getVisits` in a loop — batch queries when possible
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [History API Reference](../api-reference/history-api.md)
 - [Bookmark API](../guides/bookmark-api.md)

@@ -8,22 +8,22 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 This guide covers deployment strategies for Chrome extensions, from Chrome Web Store publishing to enterprise deployment and advanced release patterns.
 
-## Chrome Web Store Publishing Options
+## Chrome Web Store Publishing Options {#chrome-web-store-publishing-options}
 
-### Public
+### Public {#public}
 The extension is visible to everyone and searchable in the Chrome Web Store. Users can discover and install it directly.
 
-### Unlisted
+### Unlisted {#unlisted}
 The extension is not searchable but can be accessed via direct link. Ideal for beta testers or controlled releases without public visibility.
 
-### Private (Domain)
+### Private (Domain) {#private-domain}
 Available only to users within a specific Google Workspace domain. Perfect for internal organization tools.
 
 ---
 
-## Enterprise Deployment
+## Enterprise Deployment {#enterprise-deployment}
 
-### Chrome Enterprise Policy
+### Chrome Enterprise Policy {#chrome-enterprise-policy}
 Deploy extensions organization-wide using Chrome Enterprise policies:
 
 ```json
@@ -37,12 +37,12 @@ Deploy extensions organization-wide using Chrome Enterprise policies:
 }
 ```
 
-### Force-Install Extensions
+### Force-Install Extensions {#force-install-extensions}
 Use the admin console to push extensions to all managed devices without user interaction.
 
 ---
 
-## Self-Hosting
+## Self-Hosting {#self-hosting}
 
 Host your own extension by specifying `update_url` in the manifest:
 
@@ -65,13 +65,13 @@ Create an update XML manifest:
 
 ---
 
-## Staged Rollout
+## Staged Rollout {#staged-rollout}
 
 Use Chrome Web Store's percentage rollout feature for cautious releases. Start with 1-5% and gradually increase based on error metrics and user feedback.
 
 ---
 
-## Canary/Beta Channels
+## Canary/Beta Channels {#canarybeta-channels}
 
 Maintain separate CWS listings for testing:
 - **Stable**: Production-ready releases
@@ -80,7 +80,7 @@ Maintain separate CWS listings for testing:
 
 ---
 
-## Feature Flags
+## Feature Flags {#feature-flags}
 
 Deploy code but control visibility remotely:
 
@@ -107,7 +107,7 @@ if (isFeatureEnabled('newDashboard')) {
 
 ---
 
-## Version Numbering Strategy
+## Version Numbering Strategy {#version-numbering-strategy}
 
 Use semantic versioning: `MAJOR.MINOR.PATCH`
 
@@ -117,7 +117,7 @@ Use semantic versioning: `MAJOR.MINOR.PATCH`
 
 ---
 
-## Update Frequency
+## Update Frequency {#update-frequency}
 
 Balance new features against Chrome Web Store review time (typically 24-72 hours). Consider:
 - Critical security patches: Immediate release
@@ -126,11 +126,11 @@ Balance new features against Chrome Web Store review time (typically 24-72 hours
 
 ---
 
-## Auto-Update Behavior
+## Auto-Update Behavior {#auto-update-behavior}
 
 Chrome checks for updates every few hours (varies by browser). Users can manually check via `chrome://extensions`.
 
-### Forcing Updates
+### Forcing Updates {#forcing-updates}
 
 Increase `minimum_chrome_version` in manifest to require users update:
 
@@ -142,7 +142,7 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 ---
 
-## Rollback Plan
+## Rollback Plan {#rollback-plan}
 
 1. Keep previous version's source available
 2. Monitor error rates post-release
@@ -150,7 +150,7 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 ---
 
-## Pre-Release Testing
+## Pre-Release Testing {#pre-release-testing}
 
 - Use **Trusted Testers** in CWS developer dashboard
 - Run automated tests before submission
@@ -158,13 +158,13 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 ---
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Publishing Guide](../publishing/publishing-guide.md)
 - [Version Management](../publishing/version-management.md)
 - [Automated Publishing](./chrome-extension-automated-publishing.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Extension Packaging](../guides/extension-packaging.md)
 - [Extension Updates](../guides/extension-updates.md)

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers authentication patterns for Chrome extensions connecting to external services, including OAuth 2.0, token management, and security best practices.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 Declare the required permissions in your manifest:
 
@@ -23,9 +23,9 @@ Declare the required permissions in your manifest:
 
 ---
 
-## OAuth 2.0 with chrome.identity.launchWebAuthFlow()
+## OAuth 2.0 with chrome.identity.launchWebAuthFlow() {#oauth-20-with-chromeidentitylaunchwebauthflow}
 
-### PKCE Flow Implementation
+### PKCE Flow Implementation {#pkce-flow-implementation}
 
 The PKCE (Proof Key for Code Exchange) flow is the recommended OAuth pattern for extensions:
 
@@ -59,7 +59,7 @@ function generateCodeVerifier(): string {
 }
 ```
 
-### Token Storage and Refresh
+### Token Storage and Refresh {#token-storage-and-refresh}
 
 Never store tokens in localStorage or plain chrome.storage.local. Use encrypted storage:
 
@@ -91,7 +91,7 @@ class TokenManager {
 
 ---
 
-## Google-Specific: chrome.identity.getAuthToken()
+## Google-Specific: chrome.identity.getAuthToken() {#google-specific-chromeidentitygetauthtoken}
 
 For Google APIs, use the built-in token management:
 
@@ -112,7 +112,7 @@ async function removeGoogleToken(): Promise<void> {
 
 ---
 
-## Login State UI
+## Login State UI {#login-state-ui}
 
 Dynamically show different popup content based on authentication state:
 
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Multi-Account Support
+## Multi-Account Support {#multi-account-support}
 
 Store multiple account tokens with account identifiers:
 
@@ -157,7 +157,7 @@ async function switchAccount(accountId: string): Promise<void> {
 
 ---
 
-## Security Best Practices
+## Security Best Practices {#security-best-practices}
 
 - **Never hardcode API keys** — Use chrome.storage.local or an options page
 - **Never store passwords** — Use token-based authentication only
@@ -167,7 +167,7 @@ async function switchAccount(accountId: string): Promise<void> {
 
 ---
 
-## CORS and Credentials
+## CORS and Credentials {#cors-and-credentials}
 
 When making authenticated API calls, configure credentials properly:
 
@@ -186,7 +186,7 @@ async function authenticatedFetch(url: string): Promise<Response> {
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [patterns/oauth-identity.md](../guides/identity-oauth.md)
 - [guides/identity-oauth.md](../guides/identity-oauth.md)

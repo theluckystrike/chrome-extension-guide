@@ -2,7 +2,7 @@
 
 Comprehensive reference for browser compatibility of Chrome Extension APIs across Chrome, Firefox, Edge, and Safari.
 
-## Extension API Compatibility Table
+## Extension API Compatibility Table {#extension-api-compatibility-table}
 
 | API | Chrome | Firefox | Edge | Safari |
 |-----|--------|---------|------|--------|
@@ -26,7 +26,7 @@ Comprehensive reference for browser compatibility of Chrome Extension APIs acros
 | `chrome.identity` | ✅ Full | ✅ Full | ✅ Full | ⚠️ Limited |
 | `chrome.offscreen` | ✅ Chrome only | ❌ No | ✅ Full | ❌ No |
 
-## Manifest Version Support
+## Manifest Version Support {#manifest-version-support}
 
 | Feature | MV2 | MV3 |
 |---------|-----|-----|
@@ -36,14 +36,14 @@ Comprehensive reference for browser compatibility of Chrome Extension APIs acros
 | Side Panel | ❌ No | ✅ Yes |
 | Offscreen Documents | ❌ No | ✅ Yes |
 
-### Browser Manifest Support
+### Browser Manifest Support {#browser-manifest-support}
 
 - **Chrome**: MV2 (deprecated), MV3 (current), MV4 (beta)
 - **Firefox**: MV2 (supported), MV3 (supported), MV4 (experimental)
 - **Edge**: MV2 (deprecated), MV3 (current)
 - **Safari**: MV2, MV3 (14+)
 
-## Namespace Differences
+## Namespace Differences {#namespace-differences}
 
 | Aspect | Chrome | Firefox | Recommended |
 |--------|--------|---------|-------------|
@@ -51,7 +51,7 @@ Comprehensive reference for browser compatibility of Chrome Extension APIs acros
 | Callback Style | ✅ Default | ⚠️ Promises | Use polyfill |
 | Promise Support | ✅ MV3 | ✅ Default | Use promises |
 
-## Promise Support
+## Promise Support {#promise-support}
 
 All browsers support Promises in Manifest V3. In Manifest V2:
 
@@ -60,7 +60,7 @@ All browsers support Promises in Manifest V3. In Manifest V2:
 - **Edge**: Callbacks only
 - **Safari**: Callbacks only
 
-## Using WebExtension Polyfill
+## Using WebExtension Polyfill {#using-webextension-polyfill}
 
 For maximum compatibility, use the [webextension-polyfill](https://github.com/mozilla/webextension-polyfill):
 
@@ -72,13 +72,13 @@ await browser.storage.local.set({ key: 'value' });
 const data = await browser.storage.local.get('key');
 ```
 
-## Safari Specific Considerations
+## Safari Specific Considerations {#safari-specific-considerations}
 
-### Web Extension Conversion Tool
+### Web Extension Conversion Tool {#web-extension-conversion-tool}
 
 Safari requires converting extensions using the [Web Extension Converter](https://developer.apple.com/documentation/safariservices/safari_web_extensions/converting_a_web_extension_for_safari).
 
-### Safari Limitations
+### Safari Limitations {#safari-limitations}
 
 - No `sidePanel` API support
 - No `declarativeNetRequest` API
@@ -86,7 +86,7 @@ Safari requires converting extensions using the [Web Extension Converter](https:
 - Limited `identity` API
 - `commands` keyboard shortcuts may differ
 
-### Safari-Specific Files
+### Safari-Specific Files {#safari-specific-files}
 
 ```
 _safari/
@@ -95,7 +95,7 @@ _safari/
   background.js
 ```
 
-## Edge Specific Notes
+## Edge Specific Notes {#edge-specific-notes}
 
 Edge is Chromium-based, offering near-full Chrome compatibility:
 
@@ -104,7 +104,7 @@ Edge is Chromium-based, offering near-full Chrome compatibility:
 - Side Panel supported
 - Offscreen documents supported
 
-## Cross-Reference
+## Cross-Reference {#cross-reference}
 
 - [Cross-Browser Development Guide](../guides/cross-browser.md)
 - [Cross-Browser Patterns](../patterns/cross-browser-compatibility.md)

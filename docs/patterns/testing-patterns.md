@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Testing Chrome Extensions
 
-## Overview
+## Overview {#overview}
 
 Testing Chrome extensions requires working around unique constraints: service workers have no DOM, content scripts run in isolated worlds, and many features depend on Chrome-specific APIs that do not exist in Node. This guide covers eight patterns that combine unit tests with mocked Chrome APIs, integration tests with Playwright loading real extensions, and end-to-end flows against fixture pages.
 
 ---
 
-## Recommended Stack
+## Recommended Stack {#recommended-stack}
 
 ```jsonc
 // package.json (relevant devDependencies)
@@ -31,7 +31,7 @@ All unit test examples use Vitest. Integration and E2E examples use Playwright.
 
 ---
 
-## Pattern 1: Unit Testing Chrome API Mocks
+## Pattern 1: Unit Testing Chrome API Mocks {#pattern-1-unit-testing-chrome-api-mocks}
 
 Mock `chrome.storage`, `chrome.tabs`, and other APIs so service worker logic can run in plain Node without a browser:
 
@@ -131,7 +131,7 @@ Keep mock implementations minimal. Only add behavior you actually assert against
 
 ---
 
-## Pattern 2: Integration Testing with Playwright (Load Real Extension)
+## Pattern 2: Integration Testing with Playwright (Load Real Extension) {#pattern-2-integration-testing-with-playwright-load-real-extension}
 
 Playwright can launch Chromium with a real unpacked extension. This gives access to the service worker, popup, and content scripts:
 
@@ -198,7 +198,7 @@ Note: Chrome's new headless mode (the default since Chrome 132) supports loading
 
 ---
 
-## Pattern 3: Testing Popup UI
+## Pattern 3: Testing Popup UI {#pattern-3-testing-popup-ui}
 
 Open the popup page directly by navigating to its `chrome-extension://` URL, then assert against DOM elements:
 
@@ -270,7 +270,7 @@ Seeding storage via `sw.evaluate` before opening the popup avoids flaky race con
 
 ---
 
-## Pattern 4: Testing Content Scripts
+## Pattern 4: Testing Content Scripts {#pattern-4-testing-content-scripts}
 
 Inject a content script into a test page and verify it modifies the DOM as expected:
 
@@ -324,7 +324,7 @@ For pages you control, serve a local fixture HTML file instead of hitting a remo
 
 ---
 
-## Pattern 5: Testing Service Worker Lifecycle
+## Pattern 5: Testing Service Worker Lifecycle {#pattern-5-testing-service-worker-lifecycle}
 
 Verify that the service worker handles install, wake-up, and alarm events correctly:
 
@@ -392,7 +392,7 @@ Testing true service worker termination is difficult in Playwright. For critical
 
 ---
 
-## Pattern 6: Testing Message Passing
+## Pattern 6: Testing Message Passing {#pattern-6-testing-message-passing}
 
 Unit-test message handlers by extracting them into pure functions, then integration-test the full roundtrip:
 
@@ -486,7 +486,7 @@ Extracting handlers into standalone functions that return promises (instead of r
 
 ---
 
-## Pattern 7: E2E Testing with Fixture Pages
+## Pattern 7: E2E Testing with Fixture Pages {#pattern-7-e2e-testing-with-fixture-pages}
 
 Serve local HTML fixture pages to give content scripts a predictable DOM to work against:
 
@@ -585,7 +585,7 @@ Fixture pages eliminate network flakiness and give you full control over the DOM
 
 ---
 
-## Pattern 8: Snapshot Testing for Extension UI
+## Pattern 8: Snapshot Testing for Extension UI {#pattern-8-snapshot-testing-for-extension-ui}
 
 Capture the popup or options page HTML and compare against a stored snapshot to catch unintended UI regressions:
 
@@ -652,7 +652,7 @@ Run `npx playwright test --update-snapshots` to regenerate baselines after inten
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Scope | Tools | Key Technique |
 |---|---|---|---|

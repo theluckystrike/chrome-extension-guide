@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Integrating React into Chrome Extension Content Scripts
 
-## The Challenge
+## The Challenge {#the-challenge}
 
 Content scripts run in the context of the web page, not the extension. The page already has its own DOM, and injecting React directly into the page DOM creates two problems: style leakage (your CSS affects the page, page CSS affects your UI) and potential conflicts if the page already uses React.
 
 ---
 
-## Shadow DOM Mounting
+## Shadow DOM Mounting {#shadow-dom-mounting}
 
 React needs a DOM root to render into. For content scripts, create a Shadow DOM host element:
 
@@ -43,7 +43,7 @@ The Shadow DOM provides style isolation — global page CSS won't affect your Re
 
 ---
 
-## CSS-in-JS with Shadow DOM
+## CSS-in-JS with Shadow DOM {#css-in-js-with-shadow-dom}
 
 Use Emotion or styled-components with the `container` option to inject styles into Shadow DOM:
 
@@ -68,7 +68,7 @@ const cache = createCache({ container: shadowRoot });
 
 ---
 
-## Bundling Configuration
+## Bundling Configuration {#bundling-configuration}
 
 Content scripts must be bundled as standalone IIFE (Immediately Invoked Function Expression) — they can't use ES modules. Configure your bundler:
 
@@ -103,7 +103,7 @@ In `manifest.json`, reference the bundled file:
 
 ---
 
-## State Management
+## State Management {#state-management}
 
 For content scripts, avoid Redux/Context — they add overhead. Use lightweight alternatives:
 
@@ -127,7 +127,7 @@ Jotai is another excellent choice for atomic state management.
 
 ---
 
-## Communicating with Background
+## Communicating with Background {#communicating-with-background}
 
 ```typescript
 // content/hooks/useBackgroundMessage.ts
@@ -153,19 +153,19 @@ export function useBackgroundMessage(channel: string) {
 
 ---
 
-## Hot Module Replacement
+## Hot Module Replacement {#hot-module-replacement}
 
 HMR doesn't work reliably in content scripts — the script executes in the page context, not the extension. Each reload requires re-injecting into the page. Use standard development patterns: build → reload extension → refresh page.
 
 ---
 
-## Avoiding React Conflicts
+## Avoiding React Conflicts {#avoiding-react-conflicts}
 
 If the page uses React, your content script's React instance could conflict. Shadow DOM isolation prevents this — each React instance is entirely separate. The page's React won't mount into your Shadow DOM, and your React won't be affected by the page's React.
 
 ---
 
-## Bundle Size
+## Bundle Size {#bundle-size}
 
 React adds ~40KB (minified) to your content script. Consider alternatives:
 
@@ -185,7 +185,7 @@ export default defineConfig({
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Building Chrome Extensions with React](/docs/patterns/building-with-react.md) — Full React extension architecture
 - [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced.md) — Deep dive on Shadow DOM patterns

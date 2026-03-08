@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # Extension Backup and Restore Patterns
 
-## Overview
+## Overview {#overview}
 Guide to implementing robust backup and restore functionality for Chrome extension user data. Covers export formats, import strategies, encryption, and migration patterns.
 
-## Export Formats
+## Export Formats {#export-formats}
 
-### JSON File Download
+### JSON File Download {#json-file-download}
 Use `chrome.downloads.download()` to save backup files to the user's filesystem:
 
 ```ts
@@ -35,7 +35,7 @@ async function exportToFile(data: ExtensionData): Promise<void> {
 }
 ```
 
-### Clipboard Copy
+### Clipboard Copy {#clipboard-copy}
 For quick backups, copy JSON directly to clipboard:
 
 ```ts
@@ -45,9 +45,9 @@ async function exportToClipboard(data: ExtensionData): Promise<void> {
 }
 ```
 
-## Import Methods
+## Import Methods {#import-methods}
 
-### File Upload via Input
+### File Upload via Input {#file-upload-via-input}
 Handle file input in popup or options page:
 
 ```ts
@@ -62,7 +62,7 @@ document.getElementById("importFile")?.addEventListener("change", async (e) => {
 });
 ```
 
-### Drag and Drop
+### Drag and Drop {#drag-and-drop}
 Support drag-and-drop for better UX:
 
 ```ts
@@ -77,9 +77,9 @@ dropZone?.addEventListener("drop", async (e) => {
 });
 ```
 
-## Data Validation
+## Data Validation {#data-validation}
 
-### Schema Checking
+### Schema Checking {#schema-checking}
 Validate backup structure before restore:
 
 ```ts
@@ -100,7 +100,7 @@ function validateBackup(backup: unknown): backup is BackupFormat {
 }
 ```
 
-### Version Compatibility
+### Version Compatibility {#version-compatibility}
 Handle migrations between versions:
 
 ```ts
@@ -119,7 +119,7 @@ async function migrateIfNeeded(backup: BackupFormat): Promise<BackupFormat> {
 }
 ```
 
-## Selective Backup
+## Selective Backup {#selective-backup}
 
 Allow users to choose which data to export:
 
@@ -148,7 +148,7 @@ async function createSelectiveBackup(options: BackupOptions): Promise<BackupForm
 }
 ```
 
-## Encryption for Sensitive Data
+## Encryption for Sensitive Data {#encryption-for-sensitive-data}
 
 Use Web Crypto API for encrypting sensitive exports:
 
@@ -178,9 +178,9 @@ async function encryptBackup(data: string, password: string): Promise<string> {
 }
 ```
 
-## Restore Strategies
+## Restore Strategies {#restore-strategies}
 
-### Merge vs Replace
+### Merge vs Replace {#merge-vs-replace}
 Choose between merging or replacing existing data:
 
 ```ts
@@ -196,7 +196,7 @@ async function restoreWithReplace(importedData: Record<string, unknown>): Promis
 }
 ```
 
-## Automatic Cloud Backup
+## Automatic Cloud Backup {#automatic-cloud-backup}
 
 Use `chrome.storage.sync` for automatic cloud backup. Note the limits:
 - 8KB per item
@@ -214,12 +214,12 @@ async function autoBackupToSync(key: string, data: unknown): Promise<void> {
 }
 ```
 
-## See Also
+## See Also {#see-also}
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Downloads API](../api-reference/downloads-api.md)
 - [Storage Migration Patterns](./storage-migration.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [State Persistence](../patterns/extension-state-persistence.md)
 - [Storage Migration](../guides/storage-migration.md)

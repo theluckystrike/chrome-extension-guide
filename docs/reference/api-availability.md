@@ -2,7 +2,7 @@
 
 This reference documents which Chrome Extension APIs are available in each execution context. Use this to understand where you can use specific APIs and plan your extension architecture accordingly.
 
-## Execution Contexts Overview
+## Execution Contexts Overview {#execution-contexts-overview}
 
 | Context | Description | DOM Access |
 |---|---|---|
@@ -12,7 +12,7 @@ This reference documents which Chrome Extension APIs are available in each execu
 | **Options Page** | Extension settings page | ✅ Yes |
 | **Offscreen Document** | Hidden page for DOM operations | ✅ Yes |
 
-## Chrome API Availability Matrix
+## Chrome API Availability Matrix {#chrome-api-availability-matrix}
 
 | API | Service Worker | Content Script | Popup/Options | Offscreen |
 |---|---|---|---|---|
@@ -61,7 +61,7 @@ This reference documents which Chrome Extension APIs are available in each execu
 
 **`chrome.storage.session` is NOT available to content scripts by default. You must call `chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_AND_UNTRUSTED_CONTEXTS' })` from the service worker to enable content script access.
 
-## Web API Availability
+## Web API Availability {#web-api-availability}
 
 | Web API | Service Worker | Content Script | Popup/Options | Offscreen |
 |---|---|---|---|---|
@@ -80,9 +80,9 @@ This reference documents which Chrome Extension APIs are available in each execu
 
 *In isolated world content scripts, `localStorage` is separate from the page's localStorage.
 
-## Key Limitations by Context
+## Key Limitations by Context {#key-limitations-by-context}
 
-### Service Worker Limitations
+### Service Worker Limitations {#service-worker-limitations}
 - No DOM access (`document`, `window` unavailable)
 - No `localStorage` or `sessionStorage`
 - No `XMLHttpRequest` (use `fetch`)
@@ -90,12 +90,12 @@ This reference documents which Chrome Extension APIs are available in each execu
 - No access to current tab's URL directly
 - Variables reset on service worker termination
 
-### Content Script Limitations
+### Content Script Limitations {#content-script-limitations}
 - Cannot use most `chrome.*` APIs directly
 - Must message service worker for: `tabs`, `bookmarks`, `history`, `downloads`, `scripting`, etc.
 - Runs in isolated world — shares DOM, not JS context with page
 
-### Workaround: Offscreen Documents
+### Workaround: Offscreen Documents {#workaround-offscreen-documents}
 
 Use offscreen documents when you need DOM access from the service worker:
 
@@ -134,7 +134,7 @@ Available offscreen reasons (partial list):
 - `GEOLOCATION` — use Geolocation API
 - `TESTING` — for testing purposes
 
-## Quick Reference: What to Use Where
+## Quick Reference: What to Use Where {#quick-reference-what-to-use-where}
 
 | Need | Use In | Not Available In |
 |---|---|---|
@@ -148,7 +148,7 @@ Available offscreen reasons (partial list):
 | i18n messages | Any context | — |
 | Show notifications | Service Worker, Popup | Content Script |
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - Content Script API: `docs/reference/content-script-api.md`
 - Service Worker Tips: `docs/mv3/service-worker-tips.md`

@@ -6,74 +6,74 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 ---
 # Service Worker Debugging Guide
 
-## Overview
+## Overview {#overview}
 - MV3 service workers are harder to debug than MV2 background pages
 - SW lifecycle (start/stop) introduces new debugging challenges
 - Key tools and techniques for effective debugging
 
-## Accessing SW DevTools
+## Accessing SW DevTools {#accessing-sw-devtools}
 - Go to chrome://extensions
 - Find your extension, click "Inspect views: service worker"
 - DevTools opens attached to the service worker
 - Console, Sources, Network all work
 
-## Common Issues
+## Common Issues {#common-issues}
 
-### SW Goes Inactive
+### SW Goes Inactive {#sw-goes-inactive}
 - Problem: service worker stops after ~30s of inactivity
 - Symptom: breakpoints not hit, listeners not firing
 - Debug: check chrome://serviceworker-internals for SW status
 - Fix: ensure events are registered at top level synchronously
 
-### Lost State
+### Lost State {#lost-state}
 - Problem: variables reset on SW restart
 - Symptom: data disappears between actions
 - Debug: log at SW startup to confirm restarts
 - Fix: use chrome.storage.session for temporary state
 
-### Event Listeners Not Firing
+### Event Listeners Not Firing {#event-listeners-not-firing}
 - Problem: listeners registered inside async code
 - Symptom: events missed after SW restart
 - Debug: add console.log at registration point
 - Fix: register all listeners synchronously at top level
 
-### Port Disconnected
+### Port Disconnected {#port-disconnected}
 - Problem: long-lived connections drop when SW idles
 - Symptom: runtime.Port.onDisconnect fires unexpectedly
 - Fix: reconnect pattern or use sendMessage instead
 
-## Debugging Tools
+## Debugging Tools {#debugging-tools}
 
-### chrome://serviceworker-internals
+### chrome://serviceworker-internals {#chromeserviceworker-internals}
 - Shows all registered service workers
 - Start/stop/inspect controls
 - View registration scope and status
 
-### console.log Strategies
+### console.log Strategies {#consolelog-strategies}
 - Log at SW startup to detect restarts
 - Log event registrations
 - Log alarm and message handlers
 - Use structured logging with timestamps
 
-### Breakpoints
+### Breakpoints {#breakpoints}
 - Set breakpoints in Sources panel
 - Conditional breakpoints for specific events
 - Event listener breakpoints in DevTools
 
-### Network Tab
+### Network Tab {#network-tab}
 - Monitor fetch requests from SW
 - Check for failed requests
 - Inspect headers and responses
 
-## Testing SW Lifecycle
+## Testing SW Lifecycle {#testing-sw-lifecycle}
 - Manually stop SW from chrome://serviceworker-internals
 - Trigger alarm to verify SW wakes up
 - Send message to verify listener registration
 - Test after Chrome restart
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Debug Logging Wrapper for SW
+### Debug Logging Wrapper for SW {#debug-logging-wrapper-for-sw}
 ```javascript
 const DEBUG = true;
 function debug(...args) {
@@ -92,7 +92,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### SW Restart Detection Pattern
+### SW Restart Detection Pattern {#sw-restart-detection-pattern}
 ```javascript
 let isFirstRun = true;
 
@@ -116,7 +116,7 @@ async function initializeState() {
 initializeState();
 ```
 
-### Connection Recovery Pattern
+### Connection Recovery Pattern {#connection-recovery-pattern}
 ```javascript
 // For long-lived connections that may drop when SW idles
 function createReconnectHandler(port) {
@@ -143,13 +143,13 @@ async function sendWithRetry(message, retries = 3) {
 }
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 - [mv3/service-workers.md](../mv3/service-workers.md)
 - [mv3/service-worker-tips.md](../mv3/service-worker-tips.md)
 - [guides/debugging-extensions.md](debugging-extensions.md)
 - [guides/advanced-debugging.md](advanced-debugging.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Advanced Debugging](../guides/advanced-debugging.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)

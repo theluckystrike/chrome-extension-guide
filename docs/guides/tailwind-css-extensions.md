@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/t
 
 Tailwind CSS brings utility-first styling to Chrome extension development, offering rapid UI with minimal CSS. This guide covers integrating Tailwind into extension contexts while handling unique browser extension constraints.
 
-## Setting Up Tailwind
+## Setting Up Tailwind {#setting-up-tailwind}
 
 Install and initialize:
 
@@ -31,7 +31,7 @@ module.exports = {
 }
 ```
 
-## Popup and Options Pages
+## Popup and Options Pages {#popup-and-options-pages}
 
 Popup and options pages run in privileged extension contexts, making Tailwind setup straightforward. These pages behave like standard web pages without page style interference.
 
@@ -42,7 +42,7 @@ Popup and options pages run in privileged extension contexts, making Tailwind se
 </div>
 ```
 
-## Content Scripts with Shadow DOM
+## Content Scripts with Shadow DOM {#content-scripts-with-shadow-dom}
 
 Content scripts face a challenge: injected styles leak into the host page. Shadow DOM with `adoptedStyleSheets` provides isolation.
 
@@ -67,7 +67,7 @@ shadow.innerHTML = `<div class="p-4 bg-white rounded">Action</div>`;
 
 This keeps your Tailwind styles isolated from page CSS.
 
-## Using shadcn/ui Components
+## Using shadcn/ui Components {#using-shadcnui-components}
 
 shadcn/ui provides accessible components built on Radix UI. Install dependencies:
 
@@ -101,7 +101,7 @@ export function ExtensionPopup() {
 }
 ```
 
-## Preventing Style Conflicts
+## Preventing Style Conflicts {#preventing-style-conflicts}
 
 Use a scoped prefix to avoid collisions:
 
@@ -111,7 +111,7 @@ module.exports = { prefix: 'ext-' }
 
 Apply prefixed classes: `<div class="ext-flex ext-items-center">`.
 
-## Build Size Optimization
+## Build Size Optimization {#build-size-optimization}
 
 Extensions demand aggressive optimization:
 
@@ -127,7 +127,7 @@ export default {
 
 This removes unused styles and keeps your extension package lean.
 
-## Extension-Specific Configuration
+## Extension-Specific Configuration {#extension-specific-configuration}
 
 Popups max out around 400x600 pixels. Configure Tailwind:
 
@@ -146,7 +146,7 @@ Use these constraints in your popup layout for responsive designs within extensi
 
 For more extension development patterns and tools, explore the resources at zovo.one.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Design System](../guides/chrome-extension-design-system.md)

@@ -9,13 +9,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # notifications Permission Reference
 
-## What It Does
+## What It Does {#what-it-does}
 - Grants access to the `chrome.notifications` API
 - Show rich desktop notifications (basic, image, list, progress types)
 - Handle notification clicks, button clicks, and close events
 - Notifications persist in the system notification center
 
-## Notification Types
+## Notification Types {#notification-types}
 | Type | Description | Fields |
 |------|-------------|--------|
 | `basic` | Simple text notification | title, message, iconUrl |
@@ -23,14 +23,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 | `list` | Multiple items in one notification | + items[] |
 | `progress` | Shows a progress bar | + progress (0-100) |
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 ```json
 { "permissions": ["notifications"] }
 ```
 
 Low-warning permission.
 
-## Using with @theluckystrike/webext-permissions
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -41,7 +41,7 @@ console.log(result.description); // "Show desktop notifications"
 PERMISSION_DESCRIPTIONS.notifications; // "Show desktop notifications"
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: content script triggers notification via background:
 
@@ -91,7 +91,7 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store notification preferences and history:
 
@@ -127,7 +127,7 @@ storage.watch("notificationsEnabled", (enabled) => {
 });
 ```
 
-## Key API Methods
+## Key API Methods {#key-api-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -139,7 +139,7 @@ storage.watch("notificationsEnabled", (enabled) => {
 | `notifications.onButtonClicked` | Event — user clicked a notification button |
 | `notifications.onClosed` | Event — notification was dismissed |
 
-## Notification with Buttons
+## Notification with Buttons {#notification-with-buttons}
 ```ts
 chrome.notifications.create({
   type: "basic",
@@ -158,14 +158,14 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 });
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 1. Alarm-triggered reminders (alarms + notifications)
 2. Download complete alerts
 3. New content alerts (periodic check + notify)
 4. Action notifications with buttons
 5. Progress notifications for long operations
 
-## Gotchas
+## Gotchas {#gotchas}
 - Notifications may be silenced by OS-level Do Not Disturb
 - `iconUrl` is required — must be a valid extension URL or data URL
 - Notification IDs are strings — auto-generated if not provided
@@ -173,11 +173,11 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 - Too many notifications can cause Chrome to throttle them
 - `notifications.create()` returns a Promise in MV3
 
-## Related Permissions
+## Related Permissions {#related-permissions}
 - [alarms](alarms.md) — trigger notifications on schedule
 - [storage](storage.md) — store notification preferences
 
-## API Reference
+## API Reference {#api-reference}
 - [Notifications API Reference](../api-reference/notifications-api.md)
 - [Chrome notifications API docs](https://developer.chrome.com/docs/extensions/reference/api/notifications)
 - [Notifications API deep dive](../api-reference/notifications-api.md)

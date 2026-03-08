@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Web Accessible Resources Patterns
 
-## Overview
+## Overview {#overview}
 
 The [web accessible resources reference](../mv3/web-accessible-resources.md) covers manifest configuration. This guide focuses on practical patterns: injecting UI into pages, secure resource loading, dynamic resource URLs, fingerprint protection, and communication between web pages and extension resources.
 
 ---
 
-## How Web Accessible Resources Work
+## How Web Accessible Resources Work {#how-web-accessible-resources-work}
 
 Web accessible resources are extension files that web pages can load. In MV3, you must declare which origins can access which resources:
 
@@ -32,7 +32,7 @@ Without this declaration, web pages cannot load `chrome-extension://<id>/widget.
 
 ---
 
-## Pattern 1: Injecting a Full UI Widget
+## Pattern 1: Injecting a Full UI Widget {#pattern-1-injecting-a-full-ui-widget}
 
 Use web accessible resources to inject complex UI into web pages via iframes:
 
@@ -84,7 +84,7 @@ function injectWidget() {
 </html>
 ```
 
-### Communication Between Iframe and Content Script
+### Communication Between Iframe and Content Script {#communication-between-iframe-and-content-script}
 
 ```ts
 // widget.js — Inside the extension iframe
@@ -122,7 +122,7 @@ function sendToWidget(data: unknown) {
 
 ---
 
-## Pattern 2: Injecting CSS from Extension
+## Pattern 2: Injecting CSS from Extension {#pattern-2-injecting-css-from-extension}
 
 Load extension-bundled stylesheets into web pages:
 
@@ -165,7 +165,7 @@ Declare in manifest:
 
 ---
 
-## Pattern 3: Extension Images in Web Pages
+## Pattern 3: Extension Images in Web Pages {#pattern-3-extension-images-in-web-pages}
 
 Display extension-bundled images in content scripts:
 
@@ -183,7 +183,7 @@ const logo = createExtensionImage("images/logo.png", "Extension logo");
 document.getElementById("my-ext-container")?.appendChild(logo);
 ```
 
-### SVG Icons
+### SVG Icons {#svg-icons}
 
 ```ts
 // Load SVG as inline content for CSS styling
@@ -200,7 +200,7 @@ async function inlineExtensionSVG(path: string): Promise<SVGElement> {
 
 ---
 
-## Pattern 4: Dynamic Resource URL Generation
+## Pattern 4: Dynamic Resource URL Generation {#pattern-4-dynamic-resource-url-generation}
 
 Generate URLs at runtime for resources that depend on state:
 
@@ -215,7 +215,7 @@ function getThemedResource(resource: string): string {
 // "resources": ["themes/light/*", "themes/dark/*"]
 ```
 
-### URL with Cache Busting
+### URL with Cache Busting {#url-with-cache-busting}
 
 ```ts
 // Force reload of cached resources after extension update
@@ -227,7 +227,7 @@ function getVersionedURL(path: string): string {
 
 ---
 
-## Pattern 5: Secure Resource Access
+## Pattern 5: Secure Resource Access {#pattern-5-secure-resource-access}
 
 Restrict which origins can access your resources to prevent fingerprinting and data exfiltration:
 
@@ -251,7 +251,7 @@ Restrict which origins can access your resources to prevent fingerprinting and d
 }
 ```
 
-### Dynamic URLs (Chrome 110+)
+### Dynamic URLs (Chrome 110+) {#dynamic-urls-chrome-110}
 
 Dynamic URLs change on every browser session, preventing fingerprinting:
 
@@ -267,7 +267,7 @@ const dynamicUrl = chrome.runtime.getURL("content-injected.css");
 
 ---
 
-## Pattern 6: Injecting Scripts into the Page World
+## Pattern 6: Injecting Scripts into the Page World {#pattern-6-injecting-scripts-into-the-page-world}
 
 Sometimes you need to run code in the page's JavaScript context (not the isolated content script world). Web accessible resources enable this:
 
@@ -317,7 +317,7 @@ window.addEventListener("message", (event) => {
 });
 ```
 
-### MV3 Alternative: chrome.scripting.executeScript with MAIN world
+### MV3 Alternative: chrome.scripting.executeScript with MAIN world {#mv3-alternative-chromescriptingexecutescript-with-main-world}
 
 ```ts
 // background.ts — Preferred MV3 approach (no web_accessible_resources needed)
@@ -333,7 +333,7 @@ chrome.scripting.executeScript({
 
 ---
 
-## Pattern 7: Font Loading
+## Pattern 7: Font Loading {#pattern-7-font-loading}
 
 Load custom fonts from your extension:
 
@@ -366,7 +366,7 @@ function loadExtensionFont() {
 
 ---
 
-## Pattern 8: Resource Preloading
+## Pattern 8: Resource Preloading {#pattern-8-resource-preloading}
 
 Preload web accessible resources for faster injection:
 
@@ -402,9 +402,9 @@ if (document.readyState === "loading") {
 
 ---
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 
-### Extension Fingerprinting
+### Extension Fingerprinting {#extension-fingerprinting}
 
 Any web page in your `matches` list can probe for your extension by trying to load its resources:
 
@@ -422,13 +422,13 @@ Mitigations:
 3. Minimize the number of web accessible resources
 4. Never make sensitive configuration files web accessible
 
-### Content Security Policy
+### Content Security Policy {#content-security-policy}
 
 Web accessible resources loaded in iframes respect the extension's CSP, not the page's. This provides isolation but means your widget code runs under extension CSP rules.
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

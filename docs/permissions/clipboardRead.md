@@ -9,25 +9,25 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # clipboardRead Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Allows reading clipboard content using `navigator.clipboard.readText()` or `document.execCommand('paste')`.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 { "permissions": ["clipboardRead"] }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 "Read data you copy and paste"
 
-## Reading Clipboard
+## Reading Clipboard {#reading-clipboard}
 
-### Popup/Options Page
+### Popup/Options Page {#popupoptions-page}
 ```typescript
 const text = await navigator.clipboard.readText();
 ```
 
-### Service Worker (MV3) — via Offscreen Document
+### Service Worker (MV3) — via Offscreen Document {#service-worker-mv3-via-offscreen-document}
 ```typescript
 // background.ts
 async function readClipboard(): Promise<string> {
@@ -54,7 +54,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
 });
 ```
 
-## Clipboard History Pattern
+## Clipboard History Pattern {#clipboard-history-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const schema = defineSchema({ clipHistory: 'string' });
@@ -68,7 +68,7 @@ async function saveToHistory(text: string) {
 }
 ```
 
-## Messaging Integration
+## Messaging Integration {#messaging-integration}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 type Msgs = { GET_CLIPBOARD: { request: {}; response: { text: string } } };
@@ -120,18 +120,20 @@ The clipboard may be empty or contain unsupported formats. Always handle these c
 Let users know when clipboard content has been read and what will happen with it. This builds trust and helps users understand your extension's behavior.
 
 ## When to Use
+
+## When to Use {#when-to-use}
 - Clipboard managers, paste transformers, data extraction from clipboard
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If only writing clipboard — use `clipboardWrite`
 - If user pastes into your UI — no permission needed
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('clipboardRead');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/permissions/clipboardWrite.md`, `docs/permissions/offscreen.md`
 - Tutorial: `docs/tutorials/build-clipboard-manager.md`

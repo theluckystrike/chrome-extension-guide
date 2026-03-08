@@ -10,7 +10,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/p
 
 The `chrome.power` API enables extensions to control system power management, preventing devices from sleeping or the display from turning off during critical operations. This is essential for extensions that need to complete long-running tasks without interruption.
 
-## chrome.power API Overview
+## chrome.power API Overview {#chromepower-api-overview}
 
 The Power API provides two core functions for managing power states, plus an additional Chrome OS-only method:
 
@@ -25,7 +25,7 @@ chrome.power.releaseKeepAwake();
 chrome.power.reportActivity();
 ```
 
-### Permission Requirements
+### Permission Requirements {#permission-requirements}
 
 Add the `power` permission to your `manifest.json`:
 
@@ -39,7 +39,7 @@ Add the `power` permission to your `manifest.json`:
 
 No additional host permissions are required—it's a universal permission available to all extensions.
 
-## Power Levels
+## Power Levels {#power-levels}
 
 The `requestKeepAwake()` method accepts a `level` parameter that determines what to keep awake:
 
@@ -48,7 +48,7 @@ The `requestKeepAwake()` method accepts a `level` parameter that determines what
 | `system` | Prevents the system from sleeping in response to user inactivity |
 | `display` | Prevents the display from turning off or dimming, AND prevents the system from sleeping (higher precedence than `system`) |
 
-### Display Level (Recommended)
+### Display Level (Recommended) {#display-level-recommended}
 
 ```javascript
 // Keep display on and prevent system sleep
@@ -61,7 +61,7 @@ Use `display` level for:
 - Reading documents
 - Any scenario where user interaction is expected
 
-### System Level (Aggressive)
+### System Level (Aggressive) {#system-level-aggressive}
 
 ```javascript
 // Keep entire system awake
@@ -74,11 +74,11 @@ Use `system` level for:
 - File conversions or processing
 - Any task where system sleep would interrupt progress
 
-## Preventing Display Sleep
+## Preventing Display Sleep {#preventing-display-sleep}
 
 The most common use case is keeping the display awake during user-facing tasks like presentations or media playback. Note that the `display` level also prevents system sleep.
 
-### Basic Implementation
+### Basic Implementation {#basic-implementation}
 
 ```javascript
 // In your background service worker or popup script
@@ -94,7 +94,7 @@ function disableKeepAwake() {
 }
 ```
 
-### With Automatic Release
+### With Automatic Release {#with-automatic-release}
 
 Always release when done to conserve battery:
 
@@ -144,9 +144,9 @@ class PowerManager {
 const powerManager = new PowerManager();
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
-### Presentations and Slideshows
+### Presentations and Slideshows {#presentations-and-slideshows}
 
 Extensions that control presentations need the display to stay awake:
 
@@ -183,7 +183,7 @@ class PresentationManager {
 }
 ```
 
-### Media Playback
+### Media Playback {#media-playback}
 
 Video and audio extensions should manage power states:
 
@@ -227,7 +227,7 @@ class MediaPowerManager {
 }
 ```
 
-### Long Downloads
+### Long Downloads {#long-downloads}
 
 Download managers need to prevent system sleep during large transfers:
 
@@ -281,9 +281,9 @@ class DownloadPowerManager {
 }
 ```
 
-## Battery-Conscious Design Patterns
+## Battery-Conscious Design Patterns {#battery-conscious-design-patterns}
 
-### Always Release When Done
+### Always Release When Done {#always-release-when-done}
 
 The most important pattern: always pair `requestKeepAwake` with `releaseKeepAwake`:
 
@@ -305,7 +305,7 @@ async function processLargeFile(file) {
 }
 ```
 
-### Choose the Right Level
+### Choose the Right Level {#choose-the-right-level}
 
 Use `system` when you only need to prevent system sleep (allows display to dim/off). Use `display` when the screen must stay on (also prevents system sleep):
 
@@ -317,7 +317,7 @@ chrome.power.requestKeepAwake('display');
 chrome.power.requestKeepAwake('system');
 ```
 
-### Track Request Count
+### Track Request Count {#track-request-count}
 
 Multiple components can request keep-awake; track them properly:
 
@@ -351,7 +351,7 @@ class PowerRequestTracker {
 }
 ```
 
-### Respect User Preference
+### Respect User Preference {#respect-user-preference}
 
 Consider checking if the user has battery saver enabled:
 
@@ -379,7 +379,7 @@ async function smartRequestKeepAwake(level) {
 }
 ```
 
-### Context-Aware Power Management
+### Context-Aware Power Management {#context-aware-power-management}
 
 Adjust power behavior based on extension context:
 
@@ -414,7 +414,7 @@ class ContextAwarePowerManager {
 }
 ```
 
-### Event-Based Cleanup
+### Event-Based Cleanup {#event-based-cleanup}
 
 Use event listeners to automatically manage power:
 
@@ -432,7 +432,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 ```
 
-## Best Practices Summary
+## Best Practices Summary {#best-practices-summary}
 
 1. **Always release when done** — Use try/finally or event-driven cleanup
 2. **Prefer display level** — Only use system level when necessary
@@ -442,7 +442,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 6. **Clean up on unload** — Handle extension suspension and tab closure
 7. **Log state changes** — Helps debug power-related issues
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 
 - Forgetting to call `releaseKeepAwake()` after task completion
 - Using system level when display would suffice
@@ -450,7 +450,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 - Ignoring battery state on portable devices
 - Not cleaning up on extension suspension
 
-## Related APIs
+## Related APIs {#related-apis}
 
 - [chrome.idle](https://developer.chrome.com/docs/extensions/reference/idle/) — Detect user idle state
 - [chrome.power](https://developer.chrome.com/docs/extensions/reference/power/) — Full API documentation
@@ -458,7 +458,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 The Power API is straightforward but critical for creating polished extensions that don't interrupt users with unexpected sleep states during important tasks.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Power API Patterns](../patterns/power-api.md)
 - [Idle Detection](../guides/idle-detection.md)

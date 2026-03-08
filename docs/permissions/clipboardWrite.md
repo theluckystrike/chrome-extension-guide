@@ -9,22 +9,22 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # clipboardWrite Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Allows the extension to write content to the system clipboard using `navigator.clipboard.writeText()` or `document.execCommand('copy')`.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["clipboardWrite"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 "Modify data you copy and paste" — triggers a warning.
 
-## How to Write Clipboard
+## How to Write Clipboard {#how-to-write-clipboard}
 
-### In Popup/Options Page
+### In Popup/Options Page {#in-popupoptions-page}
 ```typescript
 // Modern Clipboard API (preferred)
 await navigator.clipboard.writeText('Hello from extension!');
@@ -42,7 +42,7 @@ document.execCommand('copy');
 textarea.remove();
 ```
 
-### In Service Worker (MV3)
+### In Service Worker (MV3) {#in-service-worker-mv3}
 Service workers cannot write clipboard directly. Use offscreen document:
 ```typescript
 // background.ts
@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-## Context Menu Copy Pattern
+## Context Menu Copy Pattern {#context-menu-copy-pattern}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -86,7 +86,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-## Messaging Integration
+## Messaging Integration {#messaging-integration}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -109,7 +109,7 @@ m.onMessage('COPY_TAB_URL', async ({ format }) => {
 });
 ```
 
-## Storage for Clipboard History
+## Storage for Clipboard History {#storage-for-clipboard-history}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -124,23 +124,23 @@ async function trackCopy(text: string) {
 }
 ```
 
-## When to Use
+## When to Use {#when-to-use}
 - Copy-to-clipboard buttons in popup/sidebar
 - URL/text formatting and copying
 - Code snippet copying
 - Context menu copy actions
 - Clipboard transformation tools
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - In content scripts on the user's page without clear intent
 - Don't overwrite clipboard unexpectedly — always user-initiated
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('clipboardWrite');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/permissions/clipboardRead.md`, `docs/permissions/offscreen.md`
 - Tutorial: `docs/tutorials/build-clipboard-manager.md`

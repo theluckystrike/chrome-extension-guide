@@ -6,14 +6,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Session Manager Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 A browser session manager that saves/restores window tab states, names sessions, and auto-saves.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Tabs API (cross-ref `docs/api-reference/tabs-api.md`)
 - Storage API (cross-ref `docs/api-reference/storage-api-deep-dive.md`)
 
-## Project Structure
+## Project Structure {#project-structure}
 ```
 session-manager/
   manifest.json
@@ -22,7 +22,7 @@ session-manager/
   popup/popup.js
 ```
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -34,7 +34,7 @@ session-manager/
 }
 ```
 
-## Step 2: Save Session
+## Step 2: Save Session {#step-2-save-session}
 ```javascript
 // background.js - capture all tabs in current window
 async function saveSession(name) {
@@ -51,19 +51,19 @@ async function saveSession(name) {
 }
 ```
 
-## Step 3: Storage Schema
+## Step 3: Storage Schema {#step-3-storage-schema}
 ```javascript
 // { sessions: [{ id, name, timestamp, tabs: [{ url, title, pinned }] }] }
 ```
 
-## Step 4: Popup UI
+## Step 4: Popup UI {#step-4-popup-ui}
 ```html
 <input type="text" id="sessionName" placeholder="Session name">
 <button id="saveBtn">Save</button>
 <div id="sessionList"></div>
 ```
 
-## Step 5: Restore Session
+## Step 5: Restore Session {#step-5-restore-session}
 ```javascript
 async function restoreSession(sessionId) {
   const { sessions } = await chrome.storage.local.get('sessions');
@@ -77,7 +77,7 @@ async function restoreSession(sessionId) {
 }
 ```
 
-## Step 6: Session Naming & Editing
+## Step 6: Session Naming & Editing {#step-6-session-naming-editing}
 ```javascript
 async function renameSession(id, newName) {
   const { sessions } = await chrome.storage.local.get('sessions');
@@ -90,7 +90,7 @@ async function deleteSession(id) {
 }
 ```
 
-## Step 7: Auto-Save
+## Step 7: Auto-Save {#step-7-auto-save}
 ```javascript
 // background.js
 chrome.alarms.create('autoSave', { periodInMinutes: 5 });
@@ -105,7 +105,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 8: Merge & Export/Import
+## Step 8: Merge & Export/Import {#step-8-merge-exportimport}
 ```javascript
 // Merge: add to current window instead of replacing
 async function restoreMerge(sessionId) {

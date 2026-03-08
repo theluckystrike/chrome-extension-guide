@@ -15,7 +15,7 @@ Uses `@theluckystrike/webext-storage` for persistent data and
 
 ---
 
-## Step 1: Manifest Targeting GitHub
+## Step 1: Manifest Targeting GitHub {#step-1-manifest-targeting-github}
 
 ```json
 {
@@ -45,7 +45,7 @@ periodic PR notification sync.
 
 ---
 
-## Step 2: Detecting PR Pages
+## Step 2: Detecting PR Pages {#step-2-detecting-pr-pages}
 
 ```js
 // content.js
@@ -75,7 +75,7 @@ initializes only when the relevant page context is detected.
 
 ---
 
-## Step 3: Floating Toolbar
+## Step 3: Floating Toolbar {#step-3-floating-toolbar}
 
 A toolbar anchored at the bottom-right provides quick access to all panels:
 
@@ -112,7 +112,7 @@ the collapse button are hidden via CSS.
 
 ---
 
-## Step 4: File Tree Navigator
+## Step 4: File Tree Navigator {#step-4-file-tree-navigator}
 
 A collapsible sidebar listing all changed files, extracted from GitHub's diff headers:
 
@@ -170,7 +170,7 @@ in green (`#3fb950`), deletions in red (`#f85149`).
 
 ---
 
-## Step 5: Inline Comment Templates
+## Step 5: Inline Comment Templates {#step-5-inline-comment-templates}
 
 Pre-built templates insert text into GitHub's comment textarea:
 
@@ -216,7 +216,7 @@ Pre-built templates insert text into GitHub's comment textarea:
 
 ---
 
-## Step 6: PR Statistics Panel
+## Step 6: PR Statistics Panel {#step-6-pr-statistics-panel}
 
 Displays additions, deletions, files changed, file type breakdown, and estimated
 review time (heuristic: ~200 lines/hour for careful review):
@@ -266,7 +266,7 @@ stat values. Additions are green, deletions are red.
 
 ---
 
-## Step 7: Keyboard Shortcuts
+## Step 7: Keyboard Shortcuts {#step-7-keyboard-shortcuts}
 
 Navigate between files and toggle panels without the mouse:
 
@@ -315,7 +315,7 @@ Navigate between files and toggle panels without the mouse:
 
 ---
 
-## Step 8: Review Checklist
+## Step 8: Review Checklist {#step-8-review-checklist}
 
 A per-repo checklist persisted via `@theluckystrike/webext-storage`. Template items
 are shared across PRs; checked state is per-PR:
@@ -402,7 +402,7 @@ Close the content script IIFE:
 
 ---
 
-## Step 9: Background Sync for Notification Badges
+## Step 9: Background Sync for Notification Badges {#step-9-background-sync-for-notification-badges}
 
 The background worker polls GitHub for pending review requests and updates the
 extension badge:
@@ -454,7 +454,7 @@ DevTools console.
 
 ---
 
-## Testing
+## Testing {#testing}
 
 1. Load unpacked at `chrome://extensions/` with Developer mode on.
 2. Navigate to any GitHub PR (e.g., `github.com/facebook/react/pull/1`).
@@ -467,7 +467,7 @@ DevTools console.
 
 ---
 
-## Architecture
+## Architecture {#architecture}
 
 ```
   content.js                         background.js
@@ -491,7 +491,7 @@ DevTools console.
 
 ---
 
-## Extending the Extension
+## Extending the Extension {#extending-the-extension}
 
 Here are several directions you can take this further:
 

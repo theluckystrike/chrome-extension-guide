@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Side Panel Patterns
 
-## Overview
+## Overview {#overview}
 
 The [Side Panel API reference](../mv3/side-panel.md) covers the basics. This guide provides production patterns for building rich side panel experiences: tab-specific panels, navigation, real-time page interaction, persistent state, and responsive layouts.
 
 ---
 
-## Pattern 1: Tab-Specific Side Panels
+## Pattern 1: Tab-Specific Side Panels {#pattern-1-tab-specific-side-panels}
 
 Show different content based on which tab is active:
 
@@ -56,7 +56,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 ---
 
-## Pattern 2: Open Side Panel from Action Click
+## Pattern 2: Open Side Panel from Action Click {#pattern-2-open-side-panel-from-action-click}
 
 Replace the popup with a side panel toggle:
 
@@ -79,7 +79,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Pattern 3: Side Panel with In-Page Navigation
+## Pattern 3: Side Panel with In-Page Navigation {#pattern-3-side-panel-with-in-page-navigation}
 
 Build a SPA-like experience within the side panel:
 
@@ -165,7 +165,7 @@ const router = new SidePanelRouter("app");
 
 ---
 
-## Pattern 4: Real-Time Page Interaction
+## Pattern 4: Real-Time Page Interaction {#pattern-4-real-time-page-interaction}
 
 The side panel can communicate with the active tab's content script:
 
@@ -263,7 +263,7 @@ msg.onMessage("highlight-text", async ({ query, color }) => {
 
 ---
 
-## Pattern 5: Persistent Side Panel State
+## Pattern 5: Persistent Side Panel State {#pattern-5-persistent-side-panel-state}
 
 The side panel stays open across tab switches, but its JavaScript context reloads. Persist state:
 
@@ -324,7 +324,7 @@ document.addEventListener("scroll", () => {
 
 ---
 
-## Pattern 6: Responsive Side Panel Layout
+## Pattern 6: Responsive Side Panel Layout {#pattern-6-responsive-side-panel-layout}
 
 Side panels can be resized by the user. Handle varying widths:
 
@@ -408,7 +408,7 @@ body {
 
 ---
 
-## Pattern 7: Side Panel with Background Sync
+## Pattern 7: Side Panel with Background Sync {#pattern-7-side-panel-with-background-sync}
 
 Keep the side panel updated with live data from the service worker:
 
@@ -441,7 +441,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Pattern 8: Disabling Side Panel Per-Site
+## Pattern 8: Disabling Side Panel Per-Site {#pattern-8-disabling-side-panel-per-site}
 
 ```ts
 // background.ts — Disable side panel on specific sites
@@ -461,7 +461,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

@@ -8,11 +8,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/w
 
 WebAssembly (Wasm) enables near-native performance for CPU-intensive tasks in Chrome extensions.
 
-## Overview
+## Overview {#overview}
 
 Wasm excels at performance-critical operations: image processing, cryptography, data parsing, and porting existing C/C++/Rust code. MV3 CSP allows WebAssembly with proper configuration.
 
-## CSP Configuration
+## CSP Configuration {#csp-configuration}
 
 Add `wasm-unsafe-eval` to your extension's CSP in `manifest.json`:
 
@@ -27,7 +27,7 @@ Add `wasm-unsafe-eval` to your extension's CSP in `manifest.json`:
 
 Without `wasm-unsafe-eval`, `WebAssembly.instantiate()` fails with a CSP violation.
 
-## Loading Wasm in Extensions
+## Loading Wasm in Extensions {#loading-wasm-in-extensions}
 
 Bundle `.wasm` files with your extension and load at runtime:
 
@@ -44,7 +44,7 @@ const result = wasm.process_data(inputData);
 
 Works in popup, options page, offscreen documents, and service workers.
 
-## Service Worker Limitations
+## Service Worker Limitations {#service-worker-limitations}
 
 Service workers can terminate after inactivity, destroying Wasm instances:
 
@@ -66,14 +66,14 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
 - **Image Processing**: Resize, filters, format conversion
 - **Cryptography**: Hashing (SHA-256), encryption (AES)
 - **Text Parsing**: Markdown, CSV, custom formats
 - **Data Compression**: Gzip, Brotli
 
-## Rust to Wasm Workflow
+## Rust to Wasm Workflow {#rust-to-wasm-workflow}
 
 ```bash
 cargo install wasm-pack
@@ -91,7 +91,7 @@ pub fn process_data(data: &[u8]) -> Vec<u8> {
 
 Bundle both `*.wasm` and `*.js` files in your extension.
 
-## AssemblyScript Alternative
+## AssemblyScript Alternative {#assemblyscript-alternative}
 
 ```bash
 npm install --save-dev assemblyscript
@@ -105,7 +105,7 @@ export function fibonacci(n: i32): i32 {
 }
 ```
 
-## Content Scripts and Wasm
+## Content Scripts and Wasm {#content-scripts-and-wasm}
 
 Page CSP may block Wasm in content scripts. Use message passing:
 
@@ -122,13 +122,13 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
 
 Or use offscreen documents for processing.
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Content Security Policy](./mv3/content-security-policy.md)
 - [CSP Reference](./reference/csp-reference.md)
 - [Performance Guide](./guides/performance.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [WASM Patterns](../patterns/wasm-extensions.md)
 - [Web Workers](../guides/web-workers-extensions.md)

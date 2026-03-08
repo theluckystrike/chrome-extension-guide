@@ -6,11 +6,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Download Manager Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 
 A comprehensive download manager extension with enhanced features including automatic file organization by category, real-time download progress tracking, desktop notifications, and batch download capabilities.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Chrome Downloads API (cross-ref `docs/api-reference/downloads-api.md`)
 - Chrome Notifications API (cross-ref `docs/api-reference/notifications-api.md`)
@@ -24,7 +24,7 @@ For permission requirements, see:
 For download management patterns, see:
 - [guides/download-management.md](../guides/download-management.md)
 
-## Project Structure
+## Project Structure {#project-structure}
 
 ```
 download-manager/
@@ -39,7 +39,7 @@ download-manager/
     options.js
 ```
 
-## Step 1: Manifest Configuration
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Define required permissions and background worker:
 
@@ -68,7 +68,7 @@ Define required permissions and background worker:
 }
 ```
 
-## Step 2: Download Monitoring
+## Step 2: Download Monitoring {#step-2-download-monitoring}
 
 Set up listeners in the background service worker to track all downloads:
 
@@ -135,7 +135,7 @@ function broadcastDownloadUpdate(download) {
 }
 ```
 
-## Step 3: Auto-Organization
+## Step 3: Auto-Organization {#step-3-auto-organization}
 
 Implement automatic file organization using `chrome.downloads.onDeterminingFilename`:
 
@@ -185,7 +185,7 @@ chrome.storage.local.get(['customRules'], (result) => {
 });
 ```
 
-## Step 4: Progress UI in Popup
+## Step 4: Progress UI in Popup {#step-4-progress-ui-in-popup}
 
 Create an interactive popup showing download progress:
 
@@ -310,7 +310,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-## Step 5: Notifications
+## Step 5: Notifications {#step-5-notifications}
 
 Add desktop notifications for download events:
 
@@ -357,7 +357,7 @@ function showErrorNotification(download, error) {
 }
 ```
 
-## Step 6: Batch Downloads
+## Step 6: Batch Downloads {#step-6-batch-downloads}
 
 Add context menu for batch downloading links:
 
@@ -429,7 +429,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Step 7: Download History
+## Step 7: Download History {#step-7-download-history}
 
 Store and search download history using storage:
 
@@ -487,7 +487,7 @@ chrome.downloads.onChanged.addListener((downloadDelta) => {
 });
 ```
 
-## Summary
+## Summary {#summary}
 
 This download manager extension provides:
 

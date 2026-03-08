@@ -11,7 +11,7 @@ A practical guide with copy-paste privacy policy templates for Chrome extensions
 
 ---
 
-## Why You Need a Privacy Policy
+## Why You Need a Privacy Policy {#why-you-need-a-privacy-policy}
 
 A privacy policy is **required by the Chrome Web Store (CWS)** if your extension handles any user data. This includes:
 
@@ -24,7 +24,7 @@ Google reviews your privacy policy during the extension review process. A clear,
 
 ---
 
-## When Is a Privacy Policy Required?
+## When Is a Privacy Policy Required? {#when-is-a-privacy-policy-required}
 
 | Extension Type | Privacy Policy Required? |
 |----------------|-------------------------|
@@ -41,53 +41,53 @@ Google reviews your privacy policy during the extension review process. A clear,
 
 ---
 
-## Template: Minimal Extension (No Data Collection)
+## Template: Minimal Extension (No Data Collection) {#template-minimal-extension-no-data-collection}
 
 Use this template if your extension only uses local storage and doesn't collect or transmit any user data.
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 [Your Extension Name] is a Chrome extension that operates entirely locally on your device. This privacy policy explains how we handle your data.
 
-## Data Collection
+## Data Collection {#data-collection}
 We do not collect, store, or transmit any personal information or browsing data. All data processed by this extension remains on your local device.
 
-## Local Storage
+## Local Storage {#local-storage}
 This extension uses chrome.storage.local to save your preferences locally. This data is never transmitted to any external servers.
 
-## Permissions Used
+## Permissions Used {#permissions-used}
 This extension may request the following permissions:
 - **Storage**: To save your preferences locally
 - **[Other permissions]**: [Brief description of why needed]
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy, please contact us at [email address].
 
 ---
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-### Copy-Paste Version
+### Copy-Paste Version {#copy-paste-version}
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 My Extension is a Chrome extension that operates entirely locally on your device. This privacy policy explains how we handle your data.
 
-## Data Collection
+## Data Collection {#data-collection}
 We do not collect, store, or transmit any personal information or browsing data. All data processed by this extension remains on your local device.
 
-## Local Storage
+## Local Storage {#local-storage}
 This extension uses chrome.storage.local to save your preferences locally. This data is never transmitted to any external servers.
 
-## Permissions Used
+## Permissions Used {#permissions-used}
 This extension uses the following Chrome permissions:
 - **storage**: Saves your preferences locally on your device
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy, please contact us at your-email@example.com.
 
 ---
@@ -96,91 +96,91 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-## Template: Extension with Permissions
+## Template: Extension with Permissions {#template-extension-with-permissions}
 
 Use this template if your extension uses permissions like `tabs`, `activeTab`, `cookies`, or host permissions.
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 [Your Extension Name] is a Chrome extension designed to [brief description of what your extension does]. This privacy policy explains our data practices.
 
-## Data We Collect
+## Data We Collect {#data-we-collect}
 [Describe what data your extension accesses or processes]
 
-## How We Use Data
+## How We Use Data {#how-we-use-data}
 [Explain how the data is used - e.g., to provide features, improve the extension, etc.]
 
-## Data Storage
+## Data Storage {#data-storage}
 - **Local Storage**: [Describe what data is stored locally]
 - **No External Servers**: [Specify if data is NOT sent to any servers]
 
-## Permissions Explanation
+## Permissions Explanation {#permissions-explanation}
 
 This extension requires the following Chrome permissions:
 
-### 1. tabs
+### 1. tabs {#1-tabs}
 This permission allows the extension to access information about open tabs in your browser, including URLs and titles. Used for: [your use case].
 
-### 2. activeTab
+### 2. activeTab {#2-activetab}
 This permission grants temporary access to the current active tab when you click the extension icon. This is used to: [your use case].
 
-### 3. cookies
+### 3. cookies {#3-cookies}
 This permission allows the extension to read or modify cookies for specific domains. Used for: [your use case].
 
-### 4. Host Permissions ([*.]example.com)
+### 4. Host Permissions ([*.]example.com) {#4-host-permissions-examplecom}
 This permission allows the extension to access content on specific websites. Used for: [your use case].
 
-### 5. webRequest
+### 5. webRequest {#5-webrequest}
 This permission allows the extension to intercept or modify network requests. Used for: [your use case].
 
-## Third-Party Services
+## Third-Party Services {#third-party-services}
 [List any third-party services you use - analytics, APIs, etc.]
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy, please contact us at [email address].
 
 ---
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-### Copy-Paste Version (with activeTab and tabs)
+### Copy-Paste Version (with activeTab and tabs) {#copy-paste-version-with-activetab-and-tabs}
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 My Extension is a Chrome extension that helps you [describe your extension's purpose]. This privacy policy explains our data practices.
 
-## Data We Collect
+## Data We Collect {#data-we-collect}
 This extension accesses the following data to provide its features:
 - Current webpage URL and title (when you click the extension)
 - Information about open browser tabs
 
-## How We Use Data
+## How We Use Data {#how-we-use-data}
 The data accessed is used solely to provide the extension's functionality. We do not store, share, or transmit any data to external servers.
 
-## Data Storage
+## Data Storage {#data-storage}
 All user preferences are stored locally using chrome.storage.local. This data remains on your device and is never sent to any external servers.
 
-## Permissions Explanation
+## Permissions Explanation {#permissions-explanation}
 
 This extension requires the following Chrome permissions:
 
-### activeTab
+### activeTab {#activetab}
 This permission grants temporary access to the current active tab when you interact with the extension. This allows the extension to [your specific use case]. Access is only granted when you explicitly click the extension icon or use a keyboard shortcut.
 
-### tabs
+### tabs {#tabs}
 This permission allows the extension to access information about all open tabs, including URLs and titles. This is used for [your specific use case].
 
-### storage
+### storage {#storage}
 This permission allows the extension to save your preferences locally on your device.
 
-## Third-Party Services
+## Third-Party Services {#third-party-services}
 We do not use any third-party analytics or tracking services.
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy, please contact us at your-email@example.com.
 
 ---
@@ -189,17 +189,17 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-## Using @theluckystrike/webext-permissions for Transparency
+## Using @theluckystrike/webext-permissions for Transparency {#using-theluckystrikewebext-permissions-for-transparency}
 
 The `@theluckystrike/webext-permissions` library helps you programmatically check and display what permissions your extension has been granted. This is excellent for transparency in your privacy policy or a dedicated permissions page.
 
-### Installation
+### Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-permissions
 ```
 
-### Usage Example
+### Usage Example {#usage-example}
 
 ```ts
 import { getGrantedPermissions, describePermission } from "@theluckystrike/webext-permissions";
@@ -239,7 +239,7 @@ async function buildTransparencyPage(): Promise<string> {
 }
 ```
 
-### In Your Privacy Policy
+### In Your Privacy Policy {#in-your-privacy-policy}
 
 You can reference this library in your privacy policy:
 
@@ -247,17 +247,17 @@ You can reference this library in your privacy policy:
 
 ---
 
-## Using @theluckystrike/webext-storage for Local-Only Data
+## Using @theluckystrike/webext-storage for Local-Only Data {#using-theluckystrikewebext-storage-for-local-only-data}
 
 The `@theluckystrike/webext-storage` library provides type-safe local storage for Chrome extensions. All data is stored locally and never transmitted.
 
-### Installation
+### Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-storage
 ```
 
-### Usage Example
+### Usage Example {#usage-example}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -285,7 +285,7 @@ const prefs = await storage.userPreferences.get();
 console.log(prefs.theme); // 'dark'
 ```
 
-### In Your Privacy Policy
+### In Your Privacy Policy {#in-your-privacy-policy}
 
 Reference this library to document local-only storage:
 
@@ -293,124 +293,124 @@ Reference this library to document local-only storage:
 
 ---
 
-## Template: Extension with Analytics
+## Template: Extension with Analytics {#template-extension-with-analytics}
 
 Use this template if your extension uses analytics or collects any user data.
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 [Your Extension Name] is a Chrome extension that [description]. This privacy policy explains what data we collect and how we use it.
 
-## Data We Collect
+## Data We Collect {#data-we-collect}
 
-### Usage Data
+### Usage Data {#usage-data}
 We collect anonymized usage data to help improve our extension:
 - Feature usage statistics
 - Error reports
 - Performance metrics
 
-### Personal Information
+### Personal Information {#personal-information}
 We do not collect personally identifiable information unless you voluntarily provide it (e.g., when contacting us).
 
-## How We Use Data
+## How We Use Data {#how-we-use-data}
 The data we collect is used to:
 - Improve our extension's functionality
 - Fix bugs and issues
 - Understand how users interact with our extension
 
-## Data Storage
+## Data Storage {#data-storage}
 - **Local Storage**: User preferences are stored locally on your device
 - **Analytics Data**: Anonymized usage data is stored [describe where - your own servers, third-party analytics, etc.]
 
-## Analytics Implementation
+## Analytics Implementation {#analytics-implementation}
 
 This extension uses [analytics provider] to collect anonymized usage data. The collected data:
 - Is anonymized and cannot identify individual users
 - Does not include personally identifiable information
 - Is used solely for improving the extension
 
-### What We Track
+### What We Track {#what-we-track}
 - Which features are used most frequently
 - Error occurrences and crash reports
 - General usage patterns
 
-### What We Don't Track
+### What We Don't Track {#what-we-dont-track}
 - URLs you visit
 - Personal information
 - Form data or passwords
 - Browser history
 
-## Permissions Explanation
+## Permissions Explanation {#permissions-explanation}
 
-### [List your permissions as shown in previous template]
+### [List your permissions as shown in previous template] {#list-your-permissions-as-shown-in-previous-template}
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy or want to opt out of analytics, please contact us at [email address].
 
 ---
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-### Copy-Paste Version with Analytics
+### Copy-Paste Version with Analytics {#copy-paste-version-with-analytics}
 
 ```markdown
 # Privacy Policy
 
-## Overview
+## Overview {#overview}
 My Extension is a Chrome extension that helps you [describe your extension]. This privacy policy explains what data we collect and how we use it.
 
-## Data We Collect
+## Data We Collect {#data-we-collect}
 
-### Usage Data
+### Usage Data {#usage-data}
 We collect anonymized usage data to help improve our extension:
 - Feature usage statistics
 - Error reports and crash data
 - Performance metrics
 
-### Personal Information
+### Personal Information {#personal-information}
 We do not collect personally identifiable information unless you voluntarily provide it when contacting us.
 
-## How We Use Data
+## How We Use Data {#how-we-use-data}
 The data we collect is used solely to:
 - Improve our extension's functionality and user experience
 - Fix bugs and technical issues
 - Understand how users interact with our extension
 
-## Data Storage
+## Data Storage {#data-storage}
 
-### Local Storage
+### Local Storage {#local-storage}
 User preferences are stored locally on your device using chrome.storage.local. This data never leaves your device.
 
-### Analytics Data
+### Analytics Data {#analytics-data}
 Anonymized usage data is collected using [Google Analytics / Plausible / other]. This data:
 - Is anonymized before collection
 - Cannot identify individual users
 - Does not include URLs, passwords, or personal data
 
-## What We DON'T Collect
+## What We DON'T Collect {#what-we-dont-collect}
 - URLs of websites you visit
 - Personal information (name, email, etc.)
 - Form data or passwords
 - Your browsing history
 
-## Permissions Explanation
+## Permissions Explanation {#permissions-explanation}
 
-### activeTab
+### activeTab {#activetab}
 Grants temporary access to the current tab when you click the extension. Used to [your use case].
 
-### storage
+### storage {#storage}
 Saves your preferences locally on your device.
 
-### [Other permissions]
+### [Other permissions] {#other-permissions}
 [Description]
 
-## Third-Party Services
+## Third-Party Services {#third-party-services}
 - **Analytics**: [Provider name] for anonymized usage tracking
 - **No other third-party services** are used
 
-## Contact
+## Contact {#contact}
 If you have questions about this privacy policy, please contact us at your-email@example.com.
 
 ---
@@ -419,72 +419,72 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-## Where to Host Your Privacy Policy
+## Where to Host Your Privacy Policy {#where-to-host-your-privacy-policy}
 
 You have several options for hosting your privacy policy where it can be publicly accessed:
 
-### 1. GitHub Pages (Recommended)
+### 1. GitHub Pages (Recommended) {#1-github-pages-recommended}
 Host your privacy policy as a static page:
 - Create a `docs` folder in your repository
 - Add your privacy policy as `docs/privacy-policy.html` or `.md`
 - Enable GitHub Pages in repository settings
 - URL: `https://yourusername.github.io/your-repo/privacy-policy.html`
 
-### 2. GitHub Gist
+### 2. GitHub Gist {#2-github-gist}
 Create a secret or public Gist:
 - Create a new Gist with your privacy policy
 - Copy the raw URL
 - Use the Gist URL in your Chrome Web Store listing
 - Example: `https://gist.github.com/yourusername/gist-id`
 
-### 3. Your Own Website
+### 3. Your Own Website {#3-your-own-website}
 If you already have a website:
 - Add a dedicated `/privacy-policy` page
 - Link to it from your extension's Chrome Web Store listing
 
-### 4. Notion (Public Page)
+### 4. Notion (Public Page) {#4-notion-public-page}
 - Create a Notion page with your privacy policy
 - Publish it as a public page
 - Use the public URL
 
-### 5. Inline in Extension (Not Recommended for CWS)
+### 5. Inline in Extension (Not Recommended for CWS) {#5-inline-in-extension-not-recommended-for-cws}
 While you can include the policy in your extension, the Chrome Web Store requires a **publicly accessible URL** that reviewers can verify.
 
 ---
 
-## Privacy Policy Checklist
+## Privacy Policy Checklist {#privacy-policy-checklist}
 
 Use this checklist before submitting to the Chrome Web Store:
 
-### Required Elements
+### Required Elements {#required-elements}
 - [ ] Publicly accessible URL (not just in the extension)
 - [ ] Clear explanation of what data your extension accesses
 - [ ] Description of how data is used
 - [ ] Contact information for questions
 
-### Permissions Documentation
+### Permissions Documentation {#permissions-documentation}
 - [ ] List all permissions your extension uses
 - [ ] Explain why each permission is needed
 - [ ] Be specific about what data each permission accesses
 
-### Data Collection
+### Data Collection {#data-collection}
 - [ ] State whether you collect any user data
 - [ ] If analytics are used, explain what is collected and how
 - [ ] Mention if data is stored locally or transmitted
 
-### Transparency
+### Transparency {#transparency}
 - [ ] Include a clear statement about local-only storage if applicable
 - [ ] Reference libraries used (like `@theluckystrike/webext-storage`)
 - [ ] Provide a way for users to contact you
 
-### Legal
+### Legal {#legal}
 - [ ] Include a disclaimer (not legal advice)
 - [ ] Date the policy
 - [ ] Update the policy when your extension changes
 
 ---
 
-## Summary
+## Summary {#summary}
 
 A good privacy policy for your Chrome extension should:
 

@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 Build a vocabulary builder extension that saves words while browsing, provides definitions via dictionary API, and offers flashcard review with spaced repetition for effective learning.
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 
 - Save words while browsing with automatic definitions
 - Flashcard review with spaced repetition algorithm (SM-2)
@@ -16,13 +16,13 @@ Build a vocabulary builder extension that saves words while browsing, provides d
 - Context sentence preservation and source URL tracking
 - Progress statistics and export functionality
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Chrome browser or Chromium-based browser
 - Basic JavaScript, HTML, and CSS knowledge
 - Familiarity with Chrome Extensions API
 
-## Project Structure
+## Project Structure {#project-structure}
 
 ```
 vocab-builder/
@@ -43,7 +43,7 @@ vocab-builder/
     └── icon.png
 ```
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 Create your `manifest.json` with the required permissions:
 
@@ -70,9 +70,9 @@ Create your `manifest.json` with the required permissions:
 }
 ```
 
-## Step 1: Word Capture
+## Step 1: Word Capture {#step-1-word-capture}
 
-### Context Menu Integration
+### Context Menu Integration {#context-menu-integration}
 
 Add "Save to VocabBuilder" option when users select text on any page.
 
@@ -92,7 +92,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-### Double-Click Capture
+### Double-Click Capture {#double-click-capture}
 
 Listen for double-click events in content scripts to capture words.
 
@@ -112,9 +112,9 @@ document.addEventListener('dblclick', async (e) => {
 });
 ```
 
-## Step 2: Dictionary API Integration
+## Step 2: Dictionary API Integration {#step-2-dictionary-api-integration}
 
-### Fetch Definitions
+### Fetch Definitions {#fetch-definitions}
 
 Use dictionaryapi.dev to get word definitions without authentication.
 
@@ -155,9 +155,9 @@ function parseDictionaryResponse(data, word) {
 }
 ```
 
-## Step 3: Storage Schema
+## Step 3: Storage Schema {#step-3-storage-schema}
 
-### Word Data Structure
+### Word Data Structure {#word-data-structure}
 
 Store vocabulary with spaced repetition metadata.
 
@@ -195,9 +195,9 @@ async function getVocabulary() {
 }
 ```
 
-## Step 4: Popup Word List
+## Step 4: Popup Word List {#step-4-popup-word-list}
 
-### Display Saved Words
+### Display Saved Words {#display-saved-words}
 
 Show all saved words with search and filter capabilities.
 
@@ -238,9 +238,9 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 });
 ```
 
-## Step 5: Flashcard Review (SM-2 Algorithm)
+## Step 5: Flashcard Review (SM-2 Algorithm) {#step-5-flashcard-review-sm-2-algorithm}
 
-### Spaced Repetition Implementation
+### Spaced Repetition Implementation {#spaced-repetition-implementation}
 
 Implement the SM-2 algorithm for optimal review scheduling.
 
@@ -285,7 +285,7 @@ async function getDueCards() {
 }
 ```
 
-### Flashcard UI
+### Flashcard UI {#flashcard-ui}
 
 Display cards with rating buttons for review.
 
@@ -324,9 +324,9 @@ async function rateCard(wordId, quality) {
 }
 ```
 
-## Step 6: Progress and Export
+## Step 6: Progress and Export {#step-6-progress-and-export}
 
-### Statistics Dashboard
+### Statistics Dashboard {#statistics-dashboard}
 
 Show learning progress and upcoming reviews.
 
@@ -346,7 +346,7 @@ async function getStats() {
 }
 ```
 
-### Export Functionality
+### Export Functionality {#export-functionality}
 
 Export vocabulary as JSON or CSV.
 
@@ -378,7 +378,7 @@ function downloadFile(content, filename, type) {
 }
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [permissions/contextMenus.md](../permissions/contextmenus.md)
 - [permissions/sidePanel.md](../permissions/sidepanel.md)

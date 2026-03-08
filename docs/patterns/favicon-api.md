@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Favicon API and Patterns
 
-## Overview
+## Overview {#overview}
 
 Favicons are small icons that represent websites in browser tabs, bookmarks, and history. Chrome Extensions have rich APIs for accessing, manipulating, and displaying favicons in various contexts. This guide covers practical patterns for working with favicons in Chrome Extensions, from basic retrieval to advanced manipulation and extraction.
 
@@ -19,11 +19,11 @@ Key facts:
 
 ---
 
-## Pattern 1: Getting Favicons via Chrome API
+## Pattern 1: Getting Favicons via Chrome API {#pattern-1-getting-favicons-via-chrome-api}
 
 The most straightforward way to get a favicon is through the `chrome.tabs.Tab.favIconUrl` property. However, this property may be empty for certain page types or during page load. This pattern implements a robust fallback chain.
 
-### Basic Favicon Retrieval
+### Basic Favicon Retrieval {#basic-favicon-retrieval}
 
 ```ts
 // background.ts
@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Handling Missing or Broken Favicons
+### Handling Missing or Broken Favicons {#handling-missing-or-broken-favicons}
 
 ```ts
 // utils/favicon-utils.ts
@@ -145,11 +145,11 @@ function isValidDataUrl(dataUrl: string): boolean {
 
 ---
 
-## Pattern 2: Favicon Cache Manager
+## Pattern 2: Favicon Cache Manager {#pattern-2-favicon-cache-manager}
 
 Repeatedly fetching favicons from external services is slow and wastes bandwidth. This pattern implements an IndexedDB-based cache with LRU eviction to store favicons efficiently.
 
-### Cache Database Setup
+### Cache Database Setup {#cache-database-setup}
 
 ```ts
 // background/favicon-cache.ts
@@ -190,7 +190,7 @@ async function getDb(): Promise<IDBPDatabase<FaviconCacheDB>> {
 }
 ```
 
-### Cache Operations with LRU Eviction
+### Cache Operations with LRU Eviction {#cache-operations-with-lru-eviction}
 
 ```ts
 // background/favicon-cache.ts (continued)
@@ -326,11 +326,11 @@ export const faviconCache = new FaviconCache();
 
 ---
 
-## Pattern 3: Favicon in Extension UI
+## Pattern 3: Favicon in Extension UI {#pattern-3-favicon-in-extension-ui}
 
 Displaying favicons in popup lists (bookmarks, history, tabs) requires consistent sizing, fallback rendering, and proper high-DPI handling.
 
-### Favicon Display Component
+### Favicon Display Component {#favicon-display-component}
 
 ```ts
 // components/FaviconDisplay.tsx
@@ -409,7 +409,7 @@ function generateLetterFavicon(
 }
 ```
 
-### High-DPI Favicon Handling
+### High-DPI Favicon Handling {#high-dpi-favicon-handling}
 
 ```ts
 // utils/high-dpi-favicons.ts
@@ -465,11 +465,11 @@ async function preloadFavicons(hostnames: string[]): Promise<void> {
 
 ---
 
-## Pattern 4: Favicon Change Detection
+## Pattern 4: Favicon Change Detection {#pattern-4-favicon-change-detection}
 
 Monitoring favicon changes enables features like notification when a monitored site updates its branding, or tracking when pages update their icons.
 
-### Detecting Favicon Changes
+### Detecting Favicon Changes {#detecting-favicon-changes}
 
 ```ts
 // background/favicon-monitor.ts
@@ -588,11 +588,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-## Pattern 5: Custom Favicon Override
+## Pattern 5: Custom Favicon Override {#pattern-5-custom-favicon-override}
 
 Sometimes you need to replace a page's favicon with a custom one for visual differentiation, branding, or accessibility purposes.
 
-### Content Script Favicon Replacement
+### Content Script Favicon Replacement {#content-script-favicon-replacement}
 
 ```ts
 // content-scripts/favicon-override.ts
@@ -684,7 +684,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Background Script for Favicon Management
+### Background Script for Favicon Management {#background-script-for-favicon-management}
 
 ```ts
 // background/favicon-manager.ts
@@ -747,11 +747,11 @@ async function getFaviconRules(): Promise<FaviconRule[]> {
 
 ---
 
-## Pattern 6: Favicon Generation
+## Pattern 6: Favicon Generation {#pattern-6-favicon-generation}
 
 Generate dynamic favicons using Canvas API in an offscreen document, useful for badges, notifications, or creating favicons from user-generated content.
 
-### Canvas-Based Favicon Generation
+### Canvas-Based Favicon Generation {#canvas-based-favicon-generation}
 
 ```ts
 // offscreen/favicon-generator.ts
@@ -874,7 +874,7 @@ async function createBadgeFavicon(
 }
 ```
 
-### Generating Favicons from Domain First Letter
+### Generating Favicons from Domain First Letter {#generating-favicons-from-domain-first-letter}
 
 ```ts
 // utils/domain-favicon.ts
@@ -923,11 +923,11 @@ function getConsistentColors(hostname: string): { bg: string; fg: string } {
 
 ---
 
-## Pattern 7: Favicon in Notifications and Badges
+## Pattern 7: Favicon in Notifications and Badges {#pattern-7-favicon-in-notifications-and-badges}
 
 Use site favicons in system notifications and create visual badges that combine site identity with status information.
 
-### Favicon in Chrome Notifications
+### Favicon in Chrome Notifications {#favicon-in-chrome-notifications}
 
 ```ts
 // background/notification-favicons.ts
@@ -1035,11 +1035,11 @@ async function createStatusNotificationFavicon(
 
 ---
 
-## Pattern 8: Favicon Extraction from Pages
+## Pattern 8: Favicon Extraction from Pages {#pattern-8-favicon-extraction-from-pages}
 
 Content scripts can extract all icon references from a page, helping extensions find the best available icon for a site.
 
-### Extracting All Icon References
+### Extracting All Icon References {#extracting-all-icon-references}
 
 ```ts
 // content-scripts/icon-extractor.ts
@@ -1141,7 +1141,7 @@ function parseSizesAttribute(sizes: string | null): number | undefined {
 }
 ```
 
-### Selecting the Best Available Icon
+### Selecting the Best Available Icon {#selecting-the-best-available-icon}
 
 ```ts
 // utils/icon-selector.ts
@@ -1225,7 +1225,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
@@ -1238,7 +1238,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 | **7. Notifications** | Use favicons in system notifications | `chrome.notifications` | Low |
 | **8. Icon Extraction** | Find best icon from page markup | Content script DOM | Medium |
 
-### Key Takeaways
+### Key Takeaways {#key-takeaways}
 
 1. **Always use fallback chain**: Tab favicon → Google S2 → Default icon
 2. **Cache aggressively**: Favicons change rarely; cache for performance
@@ -1247,7 +1247,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 5. **Generate dynamically**: Canvas enables custom badges and overlays
 6. **Monitor changes**: Track favicon updates for monitoring features
 
-### Related APIs
+### Related APIs {#related-apis}
 
 - `chrome.tabs.Tab.favIconUrl` - Tab favicon property
 - `chrome://favicon/` URL scheme - for accessing cached favicons (requires `"favicon"` permission in MV3)

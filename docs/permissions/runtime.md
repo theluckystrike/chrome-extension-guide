@@ -11,19 +11,19 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 The `chrome.runtime` API provides extension information and utilities for messaging, lifecycle management, and resource handling. **No permissions required** — always available.
 
-## Availability
+## Availability {#availability}
 
 Available in Service Workers, Content Scripts, Popup, and Options pages without any manifest permissions.
 
-## Key Properties
+## Key Properties {#key-properties}
 
-### chrome.runtime.id
+### chrome.runtime.id {#chromeruntimeid}
 Unique extension ID.
 ```javascript
 console.log(chrome.runtime.id);
 ```
 
-### chrome.runtime.lastError
+### chrome.runtime.lastError {#chromeruntimelasterror}
 Check in callbacks for errors.
 ```javascript
 chrome.runtime.sendMessage({ msg: "hello" }, () => {
@@ -33,21 +33,21 @@ chrome.runtime.sendMessage({ msg: "hello" }, () => {
 });
 ```
 
-### chrome.runtime.getURL(path)
+### chrome.runtime.getURL(path) {#chromeruntimegeturlpath}
 Convert relative path to full URL.
 ```javascript
 const iconUrl = chrome.runtime.getURL("images/icon.png");
 ```
 
-### chrome.runtime.getManifest()
+### chrome.runtime.getManifest() {#chromeruntimegetmanifest}
 Returns parsed manifest.json.
 ```javascript
 const version = chrome.runtime.getManifest().version;
 ```
 
-## Messaging API
+## Messaging API {#messaging-api}
 
-### chrome.runtime.sendMessage
+### chrome.runtime.sendMessage {#chromeruntimesendmessage}
 Send messages between extension contexts.
 ```javascript
 chrome.runtime.sendMessage({ action: "fetchData" }, (response) => {
@@ -58,7 +58,7 @@ chrome.runtime.sendMessage({ action: "fetchData" }, (response) => {
 chrome.runtime.sendMessage(extensionId, { action: "ping" });
 ```
 
-### chrome.runtime.onMessage
+### chrome.runtime.onMessage {#chromeruntimeonmessage}
 Listen for messages.
 ```javascript
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -69,15 +69,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### runtime.sendMessage vs tabs.sendMessage
+### runtime.sendMessage vs tabs.sendMessage {#runtimesendmessage-vs-tabssendmessage}
 | API | Target | Permission |
 |-----|--------|------------|
 | runtime.sendMessage | Any context | None |
 | tabs.sendMessage | Specific tab | `"tabs"` |
 
-## Connection API
+## Connection API {#connection-api}
 
-### chrome.runtime.connect / onConnect
+### chrome.runtime.connect / onConnect {#chromeruntimeconnect-onconnect}
 Long-lived connection between contexts.
 ```javascript
 // Popup
@@ -90,9 +90,9 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## Extension Events
+## Extension Events {#extension-events}
 
-### chrome.runtime.onInstalled
+### chrome.runtime.onInstalled {#chromeruntimeoninstalled}
 First install or update.
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
@@ -101,25 +101,25 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-### chrome.runtime.onStartup
+### chrome.runtime.onStartup {#chromeruntimeonstartup}
 Profile with extension starts.
 ```javascript
 chrome.runtime.onStartup.addListener(() => console.log("Started"));
 ```
 
-### Other Events
+### Other Events {#other-events}
 - `onUpdateAvailable` — Update ready but not downloaded
 - `onSuspend` — Service worker suspending
 - `onMessageExternal` — Message from another extension
 - `onConnectExternal` — Connection from another extension
 
-## Extension Lifecycle
+## Extension Lifecycle {#extension-lifecycle}
 1. **Install**: `onInstalled` reason `"install"`
 2. **Update**: `onInstalled` reason `"update"`
 3. **Enable**: `onStartup` fires
 4. **Disable**: Use `chrome.management` API
 
-## Communication Between Extensions
+## Communication Between Extensions {#communication-between-extensions}
 ```javascript
 // Send to another extension
 chrome.runtime.sendMessage("target-id", { action: "ping" });
@@ -130,7 +130,7 @@ chrome.runtime.onMessageExternal.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## @theluckystrike/webext-messaging
+## @theluckystrike/webext-messaging {#theluckystrikewebext-messaging}
 Wrapper with type-safe schemas and promise API.
 ```javascript
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -138,13 +138,13 @@ const messenger = createMessenger({ context: "background" });
 const response = await messenger.send("fetchData");
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 1. Always check `chrome.runtime.lastError` in callbacks
 2. Use connection ports for long-lived communication
 3. Validate `sender.id` for external messages
 4. Use `getURL` instead of hardcoded URLs
 
-## Related
+## Related {#related}
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
 - [chrome.tabs API](./tabs.md)
 - [chrome.management API](./management.md)

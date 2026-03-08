@@ -7,11 +7,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Event-Driven Messaging Patterns
 
-## Overview
+## Overview {#overview}
 
 While Chrome extensions primarily use request-response messaging via `chrome.runtime.sendMessage`, many extension architectures benefit from event-driven patterns. These patterns decouple producers from consumers, enable one-to-many broadcasts, and support complex message flows. This guide covers pub/sub, event bus, and command patterns that scale beyond simple request-response.
 
-## Typed Message Bus with Discriminated Unions
+## Typed Message Bus with Discriminated Unions {#typed-message-bus-with-discriminated-unions}
 
 Define message types as discriminated unions for type-safe routing:
 
@@ -56,7 +56,7 @@ router.register('ERROR', async (msg) => {
 });
 ```
 
-## Pub/Sub Pattern for Broadcasts
+## Pub/Sub Pattern for Broadcasts {#pubsub-pattern-for-broadcasts}
 
 Publish-subscribe enables one event to reach multiple listeners across contexts:
 
@@ -99,7 +99,7 @@ async function broadcastConfigUpdate(config: Config) {
 }
 ```
 
-## Message Routing: Type-Based Dispatch
+## Message Routing: Type-Based Dispatch {#message-routing-type-based-dispatch}
 
 Replace verbose if/else chains with a routing registry:
 
@@ -162,7 +162,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Middleware Pattern for Cross-Cutting Concerns
+## Middleware Pattern for Cross-Cutting Concerns {#middleware-pattern-for-cross-cutting-concerns}
 
 Apply middleware for logging, auth, rate limiting:
 
@@ -233,7 +233,7 @@ async function processWithMiddleware(ctx: MessageContext) {
 }
 ```
 
-## Port-Based Streaming Channels
+## Port-Based Streaming Channels {#port-based-streaming-channels}
 
 For continuous data streams, use ports instead of one-time messages:
 
@@ -277,7 +277,7 @@ setInterval(() => {
 }, 1000);
 ```
 
-## Error Propagation Across Contexts
+## Error Propagation Across Contexts {#error-propagation-across-contexts}
 
 Ensure errors are properly propagated and handled:
 
@@ -315,7 +315,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-## Cross-Context State Synchronization
+## Cross-Context State Synchronization {#cross-context-state-synchronization}
 
 Maintain consistent state across all extension contexts:
 
@@ -350,7 +350,7 @@ class StateSync {
 }
 ```
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Message Passing Patterns Reference](../reference/message-passing-patterns.md)
 - [Advanced Messaging Tutorial](../tutorials/advanced-messaging.md)

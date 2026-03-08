@@ -6,18 +6,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a CSS Gradient Generator Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 - Visual gradient builder with live preview | Multiple color stops | Linear/radial/conic types
 - One-click CSS copy | Saved gradients library | Random generator | Export CSS/SVG/PNG
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {"manifest_version":3,"name":"CSS Gradient Generator","version":"1.0","permissions":["storage"],"action":{"default_popup":"popup.html"}}
 ```
 
 ---
 
-## Step 1: Popup UI
+## Step 1: Popup UI {#step-1-popup-ui}
 
 ```html
 <div id="gradient-preview"></div>
@@ -37,7 +37,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 ---
 
-## Step 2: Color Stop Inputs
+## Step 2: Color Stop Inputs {#step-2-color-stop-inputs}
 
 ```javascript
 function renderColorStops() {
@@ -53,7 +53,7 @@ function renderColorStops() {
 
 ---
 
-## Step 3: Gradient String Builder
+## Step 3: Gradient String Builder {#step-3-gradient-string-builder}
 
 ```javascript
 const gradientTypes = { linear: a => `linear-gradient(${a}deg, {s})`, radial: () => `radial-gradient(circle, {s})`, conic: a => `conic-gradient(from ${a}deg, {s})` };
@@ -65,7 +65,7 @@ function buildGradientString() {
 
 ---
 
-## Step 4: Live Preview
+## Step 4: Live Preview {#step-4-live-preview}
 
 ```javascript
 function updatePreview() {
@@ -77,7 +77,7 @@ function updatePreview() {
 
 ---
 
-## Step 5: Copy to Clipboard
+## Step 5: Copy to Clipboard {#step-5-copy-to-clipboard}
 
 ```javascript
 document.getElementById('copy-btn').addEventListener('click', async () => {
@@ -87,7 +87,7 @@ document.getElementById('copy-btn').addEventListener('click', async () => {
 
 ---
 
-## Step 6: Saved Gradients
+## Step 6: Saved Gradients {#step-6-saved-gradients}
 
 ```javascript
 async function saveGradient() {
@@ -99,7 +99,7 @@ async function saveGradient() {
 
 ---
 
-## Additional Features
+## Additional Features {#additional-features}
 
 **Random Gradient:** `const rc = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');`
 `state.colorStops = [{c:rc(),p:0},{c:rc(),p:50},{c:rc(),p:100}]; state.angle = Math.floor(Math.random()*360); updatePreview();`
@@ -108,7 +108,7 @@ async function saveGradient() {
 
 ---
 
-## Related
+## Related {#related}
 - [patterns/clipboard-patterns.md](../patterns/clipboard-patterns.md)
 - [guides/popup-patterns.md](../guides/popup-patterns.md)
 - [api-reference/storage-api-deep-dive.md](../api-reference/storage-api-deep-dive.md)

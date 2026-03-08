@@ -7,15 +7,15 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Advanced Badge Management Patterns
 
-## Overview
+## Overview {#overview}
 
 Building on the foundational badge patterns in [Badge Management](badge-management.md), this guide covers advanced techniques for complex badge scenarios: intelligent number formatting, persistent badge state, accessibility-aware designs, performance optimization, and sophisticated status indicators. These patterns are essential for production extensions requiring robust badge behavior.
 
 ---
 
-## Per-Tab Badge Management
+## Per-Tab Badge Management {#per-tab-badge-management}
 
-### Tab-Specific Badge Updates
+### Tab-Specific Badge Updates {#tab-specific-badge-updates}
 
 The `tabId` parameter enables granular badge control per tab, allowing different counts or states across tabs:
 
@@ -43,7 +43,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 ```
 
-### When to Use Per-Tab vs Global Badges
+### When to Use Per-Tab vs Global Badges {#when-to-use-per-tab-vs-global-badges}
 
 | Scenario | Badge Type | Rationale |
 |----------|------------|-----------|
@@ -54,9 +54,9 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-## Smart Badge Text Formatting
+## Smart Badge Text Formatting {#smart-badge-text-formatting}
 
-### Number Abbreviation
+### Number Abbreviation {#number-abbreviation}
 
 Handle large numbers elegantly with abbreviated formats:
 
@@ -70,7 +70,7 @@ function formatBadgeCount(count) {
 }
 ```
 
-### Truncation with Context
+### Truncation with Context {#truncation-with-context}
 
 Always respect the 4-character maximum:
 
@@ -95,9 +95,9 @@ function formatStatus(status) {
 
 ---
 
-## Contextual Badge Colors
+## Contextual Badge Colors {#contextual-badge-colors}
 
-### Color Semantics
+### Color Semantics {#color-semantics}
 
 Use consistent color coding for user recognition:
 
@@ -129,9 +129,9 @@ function setBadgeWithContext(tabId, count, state) {
 
 ---
 
-## Status Indicator Badges
+## Status Indicator Badges {#status-indicator-badges}
 
-### Single-Character Indicators
+### Single-Character Indicators {#single-character-indicators}
 
 Compact status without numbers:
 
@@ -169,9 +169,9 @@ function setStatusBadge(tabId, status) {
 
 ---
 
-## Badge Persistence
+## Badge Persistence {#badge-persistence}
 
-### Restoring State After Service Worker Restart
+### Restoring State After Service Worker Restart {#restoring-state-after-service-worker-restart}
 
 Service worker badges reset on restart—restore from storage:
 
@@ -226,9 +226,9 @@ badgeManager.init();
 
 ---
 
-## Combining Badge with Title
+## Combining Badge with Title {#combining-badge-with-title}
 
-### Dual Information Architecture
+### Dual Information Architecture {#dual-information-architecture}
 
 Use badge for quick visual summary, title for detailed information:
 
@@ -253,9 +253,9 @@ setBadgeWithFullInfo(tabId, 42, 'syncing', 'Last sync: 2 min ago');
 
 ---
 
-## Accessibility Considerations
+## Accessibility Considerations {#accessibility-considerations}
 
-### Ensuring Badge Visibility
+### Ensuring Badge Visibility {#ensuring-badge-visibility}
 
 ```js
 const ACCESSIBLE_COLORS = {
@@ -290,9 +290,9 @@ function setAccessibleBadge(tabId, status) {
 
 ---
 
-## Performance: Debouncing Badge Updates
+## Performance: Debouncing Badge Updates {#performance-debouncing-badge-updates}
 
-### Prevent Excessive API Calls
+### Prevent Excessive API Calls {#prevent-excessive-api-calls}
 
 ```js
 function debounce(func, wait) {
@@ -322,9 +322,9 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Animated Notification Badge
+## Animated Notification Badge {#animated-notification-badge}
 
-### Attention-Grabbing Patterns (Use Sparingly)
+### Attention-Grabbing Patterns (Use Sparingly) {#attention-grabbing-patterns-use-sparingly}
 
 ```js
 class AnimatedBadge {
@@ -376,7 +376,7 @@ chrome.tabs.onActivated.addListener(({ tabId }) => {
 
 ---
 
-## Complete Example: Status Badge Manager
+## Complete Example: Status Badge Manager {#complete-example-status-badge-manager}
 
 ```js
 class StatusBadgeManager {
@@ -439,7 +439,7 @@ const badgeManager = new StatusBadgeManager();
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Action API Reference](../api-reference/action-api.md) - Complete chrome.action API documentation
 - [Badge and Action UI Patterns](badge-action-ui.md) - Related UI patterns and icon management

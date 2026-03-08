@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Context-Aware Extension Actions
 
-## Overview
+## Overview {#overview}
 
 The `chrome.action` API provides powerful methods to make your extension's toolbar button respond to the current tab context. By passing the `tabId` parameter to action API calls, you can display different icons, badges, popups, and titles for each tab — enabling site-specific behavior and toggle states.
 
 ---
 
-## Dynamic Icon Based on State
+## Dynamic Icon Based on State {#dynamic-icon-based-on-state}
 
 Change the icon based on whether the extension is active for a specific tab:
 
@@ -39,7 +39,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Dynamic Badge Per Tab
+## Dynamic Badge Per Tab {#dynamic-badge-per-tab}
 
 Display different badge text and colors for each tab:
 
@@ -62,7 +62,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Dynamic Popup Per Context
+## Dynamic Popup Per Context {#dynamic-popup-per-context}
 
 Show different popup pages based on the current site:
 
@@ -83,7 +83,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Dynamic Title for Contextual Tooltip
+## Dynamic Title for Contextual Tooltip {#dynamic-title-for-contextual-tooltip}
 
 Provide contextual information via the hover tooltip:
 
@@ -96,7 +96,7 @@ chrome.action.setTitle({
 
 ---
 
-## Enabling/Disabling Per Tab
+## Enabling/Disabling Per Tab {#enablingdisabling-per-tab}
 
 Control whether the action button is clickable on a per-tab basis:
 
@@ -113,7 +113,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Declarative Approach with chrome.declarativeContent
+## Declarative Approach with chrome.declarativeContent {#declarative-approach-with-chromedeclarativecontent}
 
 Automatically show/hide the action based on page conditions without content scripts:
 
@@ -144,7 +144,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-## Resetting to Defaults
+## Resetting to Defaults {#resetting-to-defaults}
 
 To clear tab-specific overrides and fall back to global/manifest defaults:
 
@@ -157,7 +157,7 @@ Note: Tab-specific overrides are automatically cleared when the tab is closed.
 
 ---
 
-## Combining with activeTab Permission
+## Combining with activeTab Permission {#combining-with-activetab-permission}
 
 Use `activeTab` for on-demand permissions while maintaining context-aware UI:
 
@@ -188,7 +188,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Use Cases
+## Use Cases {#use-cases}
 
 - **Toggle states**: Show active/inactive icon based on page-specific mode
 - **Site-specific tools**: Different popup for YouTube, GitHub, etc.
@@ -197,7 +197,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Badge Action UI](./badge-action-ui.md) — Comprehensive badge and action button patterns
 - [Declarative Content](./declarative-content.md) — Automatic show/hide based on page conditions

@@ -18,7 +18,7 @@ streaming and SSE in Manifest V3 extensions.
 
 ---
 
-## Pattern 1: Fetch Streaming Responses in a Service Worker
+## Pattern 1: Fetch Streaming Responses in a Service Worker {#pattern-1-fetch-streaming-responses-in-a-service-worker}
 
 Service workers can use the Fetch API with `ReadableStream` to consume chunked responses.
 The key constraint is that service workers terminate after ~30 seconds of inactivity, so you
@@ -65,7 +65,7 @@ async function fetchStream(url: string, signal?: AbortSignal): Promise<void> {
 
 ---
 
-## Pattern 2: SSE Connections via Offscreen Document
+## Pattern 2: SSE Connections via Offscreen Document {#pattern-2-sse-connections-via-offscreen-document}
 
 `EventSource` is not available in service workers. To maintain a persistent SSE connection,
 use an offscreen document -- it runs in a full DOM context and survives as long as the
@@ -134,7 +134,7 @@ connectSSE("https://api.example.com/events");
 
 ---
 
-## Pattern 3: Streaming AI API Responses (Chunked Transfer)
+## Pattern 3: Streaming AI API Responses (Chunked Transfer) {#pattern-3-streaming-ai-api-responses-chunked-transfer}
 
 AI APIs (OpenAI, Anthropic, Google) return streaming completions as SSE over `fetch`. Each
 chunk is a JSON payload prefixed with `data: `. Parsing requires accumulating a line buffer.
@@ -221,7 +221,7 @@ async function handleAIRequest(prompt: string): Promise<void> {
 
 ---
 
-## Pattern 4: Forwarding Stream Chunks to Popup / Side Panel
+## Pattern 4: Forwarding Stream Chunks to Popup / Side Panel {#pattern-4-forwarding-stream-chunks-to-popup-side-panel}
 
 The popup and side panel have independent lifetimes. Use `chrome.runtime.Port` for
 long-lived connections so you can detect when the UI closes and stop streaming.
@@ -313,7 +313,7 @@ port.onMessage.addListener((msg) => {
 
 ---
 
-## Pattern 5: Stream Buffering and Backpressure Handling
+## Pattern 5: Stream Buffering and Backpressure Handling {#pattern-5-stream-buffering-and-backpressure-handling}
 
 When the producer (network) is faster than the consumer (UI rendering), chunks pile up in
 memory. Implement a simple ring buffer with flush intervals to smooth delivery.
@@ -388,7 +388,7 @@ function createBufferedForwarder(port: chrome.runtime.Port, requestId: string): 
 
 ---
 
-## Pattern 6: Reconnection Strategies for SSE
+## Pattern 6: Reconnection Strategies for SSE {#pattern-6-reconnection-strategies-for-sse}
 
 Built-in `EventSource` reconnection is unreliable in extension contexts. Implement your own
 with exponential backoff and `Last-Event-ID` tracking.
@@ -528,7 +528,7 @@ class ResilientSSE {
 
 ---
 
-## Pattern 7: Stream Progress Indicators in Extension UI
+## Pattern 7: Stream Progress Indicators in Extension UI {#pattern-7-stream-progress-indicators-in-extension-ui}
 
 Show meaningful progress for streams that have a known total length or expected token count.
 For indeterminate streams, use a token counter and elapsed time.
@@ -620,7 +620,7 @@ function StreamIndicator({ progress }: { progress: StreamProgress }) {
 
 ---
 
-## Pattern 8: ReadableStream Processing in Content Scripts
+## Pattern 8: ReadableStream Processing in Content Scripts {#pattern-8-readablestream-processing-in-content-scripts}
 
 Content scripts can create their own `ReadableStream` pipelines via `TransformStream`. This
 is useful for intercepting and transforming page-initiated streams (e.g., adding translation
@@ -758,7 +758,7 @@ async function consumeForAnalysis(
 
 ---
 
-## Quick Reference
+## Quick Reference {#quick-reference}
 
 | Pattern | Best Context | Key API |
 |---------|-------------|---------|

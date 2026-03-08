@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # DeclarativeContent API Patterns
 
-## Overview
+## Overview {#overview}
 
 The DeclarativeContent API is a powerful Chrome Extension API that allows you to show or hide your extension's action button based on conditions matching the current page — without requiring the background service worker to stay awake. This declarative approach replaces the traditional imperative pattern of listening to `chrome.tabs.onUpdated` and manually checking URLs, offering significant performance benefits and cleaner code.
 
@@ -22,11 +22,11 @@ Key facts:
 
 ---
 
-## Pattern 1: DeclarativeContent API Basics
+## Pattern 1: DeclarativeContent API Basics {#pattern-1-declarativecontent-api-basics}
 
 The DeclarativeContent API centers around three core concepts: rules, PageStateMatcher conditions, and actions that control the extension's presence. Understanding these building blocks is essential before implementing more complex patterns.
 
-### Understanding the Core Components
+### Understanding the Core Components {#understanding-the-core-components}
 
 A declarative content rule consists of a condition (PageStateMatcher) and one or more actions. When the condition is met, the actions execute automatically. The most common action is ShowAction, which makes your extension's toolbar icon visible.
 
@@ -79,7 +79,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-### Required Permission
+### Required Permission {#required-permission}
 
 Add `"declarativeContent"` to your `manifest.json` permissions:
 
@@ -100,7 +100,7 @@ Add `"declarativeContent"` to your `manifest.json` permissions:
 }
 ```
 
-### How Rules Persist
+### How Rules Persist {#how-rules-persist}
 
 DeclarativeContent rules have an important characteristic: they persist across browser sessions. This means:
 
@@ -126,11 +126,11 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 ---
 
-## Pattern 2: Show Action on Specific Pages
+## Pattern 2: Show Action on Specific Pages {#pattern-2-show-action-on-specific-pages}
 
 Rather than showing your action everywhere, you can target specific pages using URL-based PageStateMatcher conditions. This is ideal for extensions that only work on particular websites.
 
-### URL-Based Matching Options
+### URL-Based Matching Options {#url-based-matching-options}
 
 PageStateMatcher supports multiple URL matching strategies:
 
@@ -143,7 +143,7 @@ PageStateMatcher supports multiple URL matching strategies:
 - **urlEquals**: Exact URL match
 - **urlMatches**: Regex pattern matching
 
-### Targeting Specific Domains
+### Targeting Specific Domains {#targeting-specific-domains}
 
 ```ts
 // background.ts - Show action only on specific domains
@@ -207,7 +207,7 @@ async function registerSiteSpecificRules(): Promise<void> {
 }
 ```
 
-### User-Configurable URL Patterns
+### User-Configurable URL Patterns {#user-configurable-url-patterns}
 
 Combine DeclarativeContent with user storage to allow customizable URL matching:
 
@@ -273,11 +273,11 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
 
 ---
 
-## Pattern 3: CSS-Based Page Matching
+## Pattern 3: CSS-Based Page Matching {#pattern-3-css-based-page-matching}
 
 One of DeclarativeContent's most powerful features is CSS selector matching. The action shows only when a page contains elements matching your specified CSS selectors — perfect for extensions that enhance specific UI components.
 
-### Basic CSS Element Detection
+### Basic CSS Element Detection {#basic-css-element-detection}
 
 ```ts
 // background.ts - Show action when password fields exist
@@ -320,7 +320,7 @@ const videoPageRule: chrome.declarativeContent.PageChangeRule = {
 };
 ```
 
-### Combining URL and CSS Selectors
+### Combining URL and CSS Selectors {#combining-url-and-css-selectors}
 
 For more precise targeting, combine URL conditions with CSS selectors:
 
@@ -370,7 +370,7 @@ const tweetEmbedRule: chrome.declarativeContent.PageChangeRule = {
 };
 ```
 
-### Advanced CSS Matching with Multiple Selectors
+### Advanced CSS Matching with Multiple Selectors {#advanced-css-matching-with-multiple-selectors}
 
 ```ts
 // background.ts - Multiple CSS conditions (AND logic)
@@ -409,11 +409,11 @@ const profilePageRule: chrome.declarativeContent.PageChangeRule = {
 
 ---
 
-## Pattern 4: Dynamic Rule Management
+## Pattern 4: Dynamic Rule Management {#pattern-4-dynamic-rule-management}
 
 Real-world extensions often need to adjust their DeclarativeContent rules based on user preferences, feature flags, or runtime state. This pattern covers managing rules dynamically.
 
-### Updating Rules Based on User Preferences
+### Updating Rules Based on User Preferences {#updating-rules-based-on-user-preferences}
 
 ```ts
 // background.ts - Dynamic rule management with storage
@@ -522,7 +522,7 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
 });
 ```
 
-### Clearing Rules Completely
+### Clearing Rules Completely {#clearing-rules-completely}
 
 ```ts
 // background.ts - Complete rule management
@@ -559,11 +559,11 @@ async function removeRuleById(ruleId: string): Promise<void> {
 
 ---
 
-## Pattern 5: Action State with SetIcon and RequestContentScript
+## Pattern 5: Action State with SetIcon and RequestContentScript {#pattern-5-action-state-with-seticon-and-requestcontentscript}
 
 While ShowAction is the primary declarative action (there is no HideAction), DeclarativeContent can work alongside other extension APIs to create rich, stateful experiences. This pattern covers combining multiple actions and states.
 
-### Dynamic Icon Based on Page State
+### Dynamic Icon Based on Page State {#dynamic-icon-based-on-page-state}
 
 ```ts
 // background.ts - Icon state management
@@ -640,7 +640,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 ```
 
-### Using RequestContentScript (Advanced)
+### Using RequestContentScript (Advanced) {#using-requestcontentscript-advanced}
 
 Note: In Manifest V3, `RequestContentScript` has limitations. The recommended approach is to use message passing combined with DeclarativeContent:
 
@@ -686,11 +686,11 @@ const enhancablePageRule: chrome.declarativeContent.PageChangeRule = {
 
 ---
 
-## Pattern 6: Replacing tabs.onUpdated Patterns
+## Pattern 6: Replacing tabs.onUpdated Patterns {#pattern-6-replacing-tabsonupdated-patterns}
 
 The classic Chrome Extension pattern for action visibility was using `chrome.tabs.onUpdated` to check every page load. DeclarativeContent provides a modern, declarative alternative that is more efficient and easier to maintain.
 
-### The Old Imperative Approach
+### The Old Imperative Approach {#the-old-imperative-approach}
 
 ```ts
 // background.ts - OLD PATTERN (not recommended)
@@ -738,7 +738,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
  */
 ```
 
-### The New Declarative Approach
+### The New Declarative Approach {#the-new-declarative-approach}
 
 ```ts
 // background.ts - NEW PATTERN (recommended)
@@ -792,7 +792,7 @@ chrome.runtime.onStartup.addListener(initializeRules);
  */
 ```
 
-### Side-by-Side Comparison
+### Side-by-Side Comparison {#side-by-side-comparison}
 
 | Aspect | Imperative (onUpdated) | Declarative (DeclarativeContent) |
 |--------|------------------------|---------------------------------|
@@ -805,11 +805,11 @@ chrome.runtime.onStartup.addListener(initializeRules);
 
 ---
 
-## Pattern 7: Complex Matching Patterns
+## Pattern 7: Complex Matching Patterns {#pattern-7-complex-matching-patterns}
 
 For advanced use cases, you can combine multiple matchers and conditions to create sophisticated targeting logic.
 
-### Multiple Matchers with OR Logic
+### Multiple Matchers with OR Logic {#multiple-matchers-with-or-logic}
 
 ```ts
 // background.ts - Complex matching with multiple conditions
@@ -851,7 +851,7 @@ const anyInputRule: chrome.declarativeContent.PageChangeRule = {
 };
 ```
 
-### URL Regex Matching
+### URL Regex Matching {#url-regex-matching}
 
 ```ts
 // background.ts - Regex URL matching
@@ -902,7 +902,7 @@ const ghIssuesRule: chrome.declarativeContent.PageChangeRule = {
 };
 ```
 
-### Scheme-Specific Matching
+### Scheme-Specific Matching {#scheme-specific-matching}
 
 ```ts
 // background.ts - Match by URL scheme
@@ -950,11 +950,11 @@ const localServerRule: chrome.declarativeContent.PageChangeRule = {
 
 ---
 
-## Pattern 8: Testing and Debugging Rules
+## Pattern 8: Testing and Debugging Rules {#pattern-8-testing-and-debugging-rules}
 
 Debugging DeclarativeContent rules can be challenging since they run in the browser's native layer. This pattern covers techniques for testing and troubleshooting.
 
-### Listing Active Rules
+### Listing Active Rules {#listing-active-rules}
 
 ```ts
 // background.ts - Debug utilities
@@ -996,7 +996,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Common Pitfalls and Solutions
+### Common Pitfalls and Solutions {#common-pitfalls-and-solutions}
 
 ```ts
 // background.ts - Troubleshooting utilities
@@ -1058,7 +1058,7 @@ function checkManifestPermissions(): void {
 }
 ```
 
-### Reset Rules Utility
+### Reset Rules Utility {#reset-rules-utility}
 
 ```ts
 // background.ts - Reset utilities for testing
@@ -1098,7 +1098,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|
@@ -1111,7 +1111,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 | **Complex Matching** | OR logic, regex, schemes | Multiple matchers, urlMatches |
 | **Debugging** | Test and troubleshoot rules | getRules, removeRules |
 
-### Best Practices
+### Best Practices {#best-practices}
 
 1. **Always register rules on startup** — use both `onInstalled` and `onStartup`
 2. **Clear rules before adding** — call `removeRules()` first to avoid duplicates
@@ -1120,7 +1120,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 5. **Handle updates** — refresh rules on extension update
 6. **Test thoroughly** — use the debug utilities to verify rule registration
 
-### Further Reading
+### Further Reading {#further-reading}
 
 - [Chrome DeclarativeContent API Reference](https://developer.chrome.com/docs/extensions/reference/api/declarativeContent)
 - [Chrome Extension Best Practices](https://developer.chrome.com/docs/extensions/mv3/)

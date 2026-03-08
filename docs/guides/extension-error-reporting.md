@@ -6,19 +6,19 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # Error Reporting and Monitoring for Chrome Extensions
 
-## Introduction
+## Introduction {#introduction}
 - Chrome extensions run across multiple isolated contexts: background service worker, popup, options page, content scripts
 - Unlike web apps, there's no built-in server-side logging — errors in each context need explicit handling
 - This guide covers setting up comprehensive error reporting across all extension contexts
 
-## Challenges in Extension Error Monitoring
+## Challenges in Extension Error Monitoring {#challenges-in-extension-error-monitoring}
 - **Multiple contexts**: Each context (background, popup, content scripts) is isolated — errors don't automatically bubble up
 - **Service worker lifecycle**: Background workers terminate after inactivity — error handlers must be set up at top level
 - **No server access**: Extensions can't write to traditional server logs without explicit network calls
 
-## Global Error Handlers
+## Global Error Handlers {#global-error-handlers}
 
-### Window.onerror for Popup and Options Pages
+### Window.onerror for Popup and Options Pages {#windowonerror-for-popup-and-options-pages}
 ```javascript
 // popup.js or options.js
 window.onerror = (message, source, lineno, colno, error) => {
@@ -35,7 +35,7 @@ window.onerror = (message, source, lineno, colno, error) => {
 };
 ```
 
-### Service Worker Error Listeners
+### Service Worker Error Listeners {#service-worker-error-listeners}
 ```javascript
 // background.js (service worker)
 self.addEventListener('error', (event) => {
@@ -63,9 +63,9 @@ self.addEventListener('unhandledrejection', (event) => {
 });
 ```
 
-## Structured Error Logging
+## Structured Error Logging {#structured-error-logging}
 
-### Essential Error Data to Capture
+### Essential Error Data to Capture {#essential-error-data-to-capture}
 ```javascript
 function captureErrorContext(error, context) {
   return {
@@ -80,7 +80,7 @@ function captureErrorContext(error, context) {
 }
 ```
 
-## Chrome.runtime.lastError Pattern
+## Chrome.runtime.lastError Pattern {#chromeruntimelasterror-pattern}
 Always check for `chrome.runtime.lastError` in callbacks:
 ```javascript
 chrome.runtime.sendMessage({ action: 'fetchData' }, (response) => {
@@ -96,7 +96,7 @@ chrome.runtime.sendMessage({ action: 'fetchData' }, (response) => {
 });
 ```
 
-## Content Script Error Isolation
+## Content Script Error Isolation {#content-script-error-isolation}
 Content scripts share the page's window — errors must be carefully isolated:
 ```javascript
 // content-script.js
@@ -120,9 +120,9 @@ Content scripts share the page's window — errors must be carefully isolated:
 })();
 ```
 
-## External Error Services
+## External Error Services {#external-error-services}
 
-### Sentry Integration
+### Sentry Integration {#sentry-integration}
 ```javascript
 import * as Sentry from '@sentry/browser';
 
@@ -144,7 +144,7 @@ Sentry.setContext('extension', {
 });
 ```
 
-### Custom Error Endpoint
+### Custom Error Endpoint {#custom-error-endpoint}
 ```javascript
 class ErrorReporter {
   constructor(endpoint) {
@@ -174,28 +174,28 @@ class ErrorReporter {
 }
 ```
 
-## Privacy Considerations
+## Privacy Considerations {#privacy-considerations}
 - Never capture page content, user input, or sensitive data in error reports
 - Strip URLs that may contain user data (query params, paths)
 - Anonymize user identifiers before sending
 - Comply with GDPR — provide way for users to opt out
 
-## Source Maps for Minified Code
+## Source Maps for Minified Code {#source-maps-for-minified-code}
 1. Upload source maps to error service (Sentry, Bugsnag) during build
 2. Ensure `sourceMap: true` in your bundler config
 3. Reference maps in production: `//# sourceMappingURL=bundle.js.map`
 
-## Chrome Web Store Crash Reports
+## Chrome Web Store Crash Reports {#chrome-web-store-crash-reports}
 - Enable in Chrome Web Store dashboard under "Advanced"
 - Shows crash data aggregated in the developer dashboard
 - Limited detail — use for high-level monitoring, not debugging
 
-## Cross-References
+## Cross-References {#cross-references}
 - [Error Handling Reference](../reference/error-handling.md)
 - [Debugging Extensions](./debugging-extensions.md)
 - [Extension Analytics](./extension-analytics.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Error Handling Patterns](../patterns/error-handling.md)
 - [Extension Logging](../guides/extension-logging.md)

@@ -9,20 +9,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # gcm Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to `chrome.gcm` (Google Cloud Messaging) API for sending and receiving push messages via Firebase Cloud Messaging (FCM).
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["gcm"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## API Access
+## API Access {#api-access}
 - `chrome.gcm.register(senderIds)` — register for push messages
 - `chrome.gcm.unregister()` — unregister
 - `chrome.gcm.send(message)` — send upstream message
@@ -30,7 +30,7 @@ None — this permission does not trigger a warning at install time.
 - `chrome.gcm.onMessagesDeleted` — messages were deleted on server
 - `chrome.gcm.onSendError` — upstream send failed
 
-## Registration
+## Registration {#registration}
 ```typescript
 // Register with your FCM sender ID
 const registrationId = await chrome.gcm.register(['YOUR_SENDER_ID']);
@@ -38,7 +38,7 @@ console.log('Registration ID:', registrationId);
 // Send this ID to your server to target this client
 ```
 
-## Receiving Messages
+## Receiving Messages {#receiving-messages}
 ```typescript
 chrome.gcm.onMessage.addListener((message) => {
   console.log('Push message:', message.data);
@@ -58,7 +58,7 @@ chrome.gcm.onMessagesDeleted.addListener(() => {
 });
 ```
 
-## Sending Upstream Messages
+## Sending Upstream Messages {#sending-upstream-messages}
 ```typescript
 await chrome.gcm.send({
   destinationId: 'YOUR_SENDER_ID@gcm.googleapis.com',
@@ -74,7 +74,7 @@ chrome.gcm.onSendError.addListener((error) => {
 });
 ```
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -95,7 +95,7 @@ chrome.runtime.onInstalled.addListener(async ({ reason }) => {
 });
 ```
 
-## Messaging Integration
+## Messaging Integration {#messaging-integration}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -118,36 +118,36 @@ m.onMessage('TOGGLE_PUSH', async ({ enabled }) => {
 });
 ```
 
-## FCM Setup Requirements
+## FCM Setup Requirements {#fcm-setup-requirements}
 1. Create project in Firebase Console
 2. Get Sender ID from project settings
 3. Use Sender ID in `chrome.gcm.register()`
 4. Send registration ID to your server
 5. Server sends messages via FCM HTTP API
 
-## Key Characteristics
+## Key Characteristics {#key-characteristics}
 - Messages have max 4 KB payload
 - `data` field is `Record<string, string>` (string values only)
 - Registration ID may change — handle re-registration
 - Messages delivered even when extension not running (wakes service worker)
 
-## When to Use
+## When to Use {#when-to-use}
 - Real-time notifications from your server
 - Chat/messaging extensions
 - Live data updates (stock prices, scores)
 - Server-triggered actions
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - For polling — use `chrome.alarms` instead
 - For extension-to-extension messaging — use `chrome.runtime.sendMessage`
 - If no server component — GCM requires backend
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('gcm');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/gcm-push-notifications.md`
 - Related: `docs/permissions/notifications.md`

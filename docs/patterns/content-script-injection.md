@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Content scripts run in the context of web pages. Understanding the different injection methods is essential for building effective Chrome extensions.
 
-## Overview
+## Overview {#overview}
 
 There are three primary ways to inject content scripts:
 
@@ -17,7 +17,7 @@ There are three primary ways to inject content scripts:
 - **Programmatic Injection**: Injected on demand via the Scripting API
 - **Dynamic Registration**: Registered at runtime but runs automatically on matching pages
 
-## Static Injection (Manifest)
+## Static Injection (Manifest) {#static-injection-manifest}
 
 Declare content scripts in manifest.json:
 
@@ -34,7 +34,7 @@ Declare content scripts in manifest.json:
 
 Best for always-on functionality on specific sites—runs automatically without user interaction.
 
-## Programmatic Injection
+## Programmatic Injection {#programmatic-injection}
 
 Use the Scripting API for on-demand injection:
 
@@ -47,7 +47,7 @@ chrome.scripting.executeScript({
 
 Requires `"scripting"` permission plus host permission or `activeTab`. Best for user-triggered actions.
 
-## Dynamic Registration
+## Dynamic Registration {#dynamic-registration}
 
 Register scripts at runtime:
 
@@ -66,7 +66,7 @@ Ideal for user-configurable site matching. Unregister with:
 chrome.scripting.unregisterContentScripts(['my-script']);
 ```
 
-## run_at Timing
+## run_at Timing {#run-at-timing}
 
 | Value | Description |
 |-------|-------------|
@@ -74,7 +74,7 @@ chrome.scripting.unregisterContentScripts(['my-script']);
 | `"document_idle"` | After DOMContentLoaded (default, recommended) |
 | `"document_end"` | After DOM, before subresources |
 
-## World Isolation
+## World Isolation {#world-isolation}
 
 - **ISOLATED** (default): Separate JS context, shared DOM, cannot access page variables
 - **MAIN**: Page's JS context, can access page variables, security risk
@@ -89,7 +89,7 @@ chrome.scripting.unregisterContentScripts(['my-script']);
 }
 ```
 
-## CSS Injection
+## CSS Injection {#css-injection}
 
 Static: add `"css": ["styles.css"]` to content_scripts. Programmatic:
 
@@ -98,7 +98,7 @@ chrome.scripting.insertCSS({ target: { tabId: 123 }, css: 'body { }' });
 chrome.scripting.removeCSS({ target: { tabId: 123 }, css: 'body { }' });
 ```
 
-## Injection Guards
+## Injection Guards {#injection-guards}
 
 Prevent duplicate injections using DOM markers:
 
@@ -113,7 +113,7 @@ Or check registered scripts:
 chrome.scripting.getRegisteredContentScripts({ ids: ['my-script'] });
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. Use static injection for always-on features
 2. Use programmatic injection for user-triggered actions
@@ -121,7 +121,7 @@ chrome.scripting.getRegisteredContentScripts({ ids: ['my-script'] });
 4. Prefer ISOLATED world for security
 5. Implement injection guards to prevent duplicates
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Content Script Patterns Guide](../guides/content-script-patterns.md)
 - [Dynamic Content Scripts (MV3)](../mv3/dynamic-content-scripts.md)

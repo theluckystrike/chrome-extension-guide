@@ -6,17 +6,17 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Messaging Quickstart
 
-## Overview
+## Overview {#overview}
 
 `@theluckystrike/webext-messaging` provides fully-typed, promise-based message passing between extension contexts (background, content scripts, popups).
 
-## Install
+## Install {#install}
 
 ```bash
 npm install @theluckystrike/webext-messaging
 ```
 
-## Step 1: Define Your Message Map
+## Step 1: Define Your Message Map {#step-1-define-your-message-map}
 
 Create a `MessageMap` type mapping message names to `{ request, response }` shapes:
 
@@ -37,7 +37,7 @@ type Messages = {
 };
 ```
 
-## Step 2: Create a Messenger (Recommended)
+## Step 2: Create a Messenger (Recommended) {#step-2-create-a-messenger-recommended}
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -51,7 +51,7 @@ The `Messenger<M>` interface has three methods:
 - `sendTab<K>(options, type, payload)` — sends via `chrome.tabs.sendMessage`
 - `onMessage(handlers)` — registers typed handlers
 
-## Step 3: Handle Messages (Background)
+## Step 3: Handle Messages (Background) {#step-3-handle-messages-background}
 
 ```ts
 // background.ts
@@ -92,7 +92,7 @@ const unsubscribe = msg.onMessage({
 - Returns an unsubscribe function for cleanup
 - `sender` is typed as `chrome.runtime.MessageSender`
 
-## Step 4: Send Messages (Content Script / Popup)
+## Step 4: Send Messages (Content Script / Popup) {#step-4-send-messages-content-script-popup}
 
 ```ts
 // content.ts
@@ -118,7 +118,7 @@ const pong = await msg.send("ping", undefined);
 // pong typed as "pong"
 ```
 
-## Step 5: Send to Specific Tabs (Background -> Content Script)
+## Step 5: Send to Specific Tabs (Background -> Content Script) {#step-5-send-to-specific-tabs-background-content-script}
 
 ```ts
 const result = await msg.sendTab(
@@ -137,7 +137,7 @@ const result2 = await msg.sendTab(
 
 `TabMessageOptions`: `{ tabId: number; frameId?: number }`
 
-## Step 6: Error Handling with MessagingError
+## Step 6: Error Handling with MessagingError {#step-6-error-handling-with-messagingerror}
 
 ```ts
 import { createMessenger, MessagingError } from "@theluckystrike/webext-messaging";
@@ -163,7 +163,7 @@ try {
 
 `MessagingError` wraps `chrome.runtime.lastError`. Has `.originalError` for the underlying cause.
 
-## Step 7: Using Low-Level Functions
+## Step 7: Using Low-Level Functions {#step-7-using-low-level-functions}
 
 ```ts
 import { sendMessage, sendTabMessage, onMessage } from "@theluckystrike/webext-messaging";
@@ -195,11 +195,11 @@ const unsub = onMessage<Messages>({
 });
 ```
 
-## Step 8: Complete Example — Tab Manager Extension
+## Step 8: Complete Example — Tab Manager Extension {#step-8-complete-example-tab-manager-extension}
 
 This example demonstrates a complete extension with shared message types, a background script handler, and a popup sender.
 
-### Shared Types (`src/types.ts`)
+### Shared Types (`src/types.ts`) {#shared-types-srctypests}
 
 ```ts
 // Shared message types used by both background and popup
@@ -219,7 +219,7 @@ export type Messages = {
 };
 ```
 
-### Background Script (`src/background.ts`)
+### Background Script (`src/background.ts`) {#background-script-srcbackgroundts}
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -261,7 +261,7 @@ const unsubscribe = msg.onMessage({
 // unsubscribe();
 ```
 
-### Popup Script (`src/popup.ts`)
+### Popup Script (`src/popup.ts`) {#popup-script-srcpopupts}
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -293,11 +293,11 @@ async function init() {
 init();
 ```
 
-## Wire Format
+## Wire Format {#wire-format}
 
 Messages sent as `Envelope`: `{ type: string, payload: request }`. Automatic — never construct manually.
 
-## Next Steps
+## Next Steps {#next-steps}
 
 - [Storage Quickstart](storage-quickstart.md)
 - [Permissions Quickstart](permissions-quickstart.md)

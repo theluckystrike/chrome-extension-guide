@@ -13,7 +13,7 @@ Enterprise environments impose strict requirements on Chrome extensions: managed
 
 ---
 
-## 1. Detecting Managed/Enterprise Environment
+## 1. Detecting Managed/Enterprise Environment {#1-detecting-managedenterprise-environment}
 
 Determine at runtime whether your extension is running in a managed (enterprise) context so you can adjust behavior accordingly.
 
@@ -71,7 +71,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 ---
 
-## 2. Reading Enterprise Policies with chrome.storage.managed
+## 2. Reading Enterprise Policies with chrome.storage.managed {#2-reading-enterprise-policies-with-chromestoragemanaged}
 
 Read and react to administrator-configured policies stored in Chrome's managed storage area.
 
@@ -135,7 +135,7 @@ const allowedDomains = await getPolicy("allowedDomains");
 
 ---
 
-## 3. Schema for Managed Storage (managed_schema.json)
+## 3. Schema for Managed Storage (managed_schema.json) {#3-schema-for-managed-storage-managed-schemajson}
 
 Define the structure of your managed storage so Google Admin Console and Chrome know what policies your extension accepts.
 
@@ -234,7 +234,7 @@ function validatePolicies(
 
 ---
 
-## 4. Force-Installed Extension Behavior
+## 4. Force-Installed Extension Behavior {#4-force-installed-extension-behavior}
 
 Handle the unique constraints and capabilities of extensions that are force-installed by enterprise policy.
 
@@ -313,7 +313,7 @@ async function checkPolicyPermissions(): Promise<{
 
 ---
 
-## 5. Policy-Based Feature Flags
+## 5. Policy-Based Feature Flags {#5-policy-based-feature-flags}
 
 Use managed storage policies to enable or disable features, allowing IT administrators to customize extension behavior per organization.
 
@@ -412,7 +412,7 @@ export const featureFlags = new PolicyFeatureFlags();
 
 ---
 
-## 6. Enterprise Extension Deployment via Google Admin Console
+## 6. Enterprise Extension Deployment via Google Admin Console {#6-enterprise-extension-deployment-via-google-admin-console}
 
 Structure your extension for deployment through Google Workspace admin controls.
 
@@ -502,7 +502,7 @@ function verifyDeploymentIntegrity(): boolean {
 
 ---
 
-## 7. Reporting and Compliance Logging
+## 7. Reporting and Compliance Logging {#7-reporting-and-compliance-logging}
 
 Log extension activity for enterprise audit trails and compliance monitoring.
 
@@ -625,7 +625,7 @@ export const complianceLogger = new ComplianceLogger();
 
 ---
 
-## 8. Handling Policy Changes at Runtime
+## 8. Handling Policy Changes at Runtime {#8-handling-policy-changes-at-runtime}
 
 React to real-time policy updates pushed by administrators without requiring extension restart.
 

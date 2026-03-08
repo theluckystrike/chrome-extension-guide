@@ -10,7 +10,7 @@ A quick-reference cheatsheet covering the most common patterns, APIs, and snippe
 
 ---
 
-## Minimal Manifest V3 Template
+## Minimal Manifest V3 Template {#minimal-manifest-v3-template}
 
 ```json
 {
@@ -44,9 +44,9 @@ A quick-reference cheatsheet covering the most common patterns, APIs, and snippe
 
 ---
 
-## Service Worker Quick Patterns
+## Service Worker Quick Patterns {#service-worker-quick-patterns}
 
-### Lifecycle Events
+### Lifecycle Events {#lifecycle-events}
 
 ```typescript
 // Install: runs once when extension is first installed or updated
@@ -65,7 +65,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-### Alarms (Persistent Scheduling)
+### Alarms (Persistent Scheduling) {#alarms-persistent-scheduling}
 
 ```typescript
 // Create a repeating alarm
@@ -82,7 +82,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 chrome.alarms.create("reminder", { delayInMinutes: 5 });
 ```
 
-### Service Worker Keep-Alive Trick
+### Service Worker Keep-Alive Trick {#service-worker-keep-alive-trick}
 
 ```typescript
 // Use a long-lived port to keep the SW alive (use sparingly)
@@ -97,9 +97,9 @@ chrome.runtime.onConnect.addListener((port) => {
 
 ---
 
-## Content Script Injection Patterns
+## Content Script Injection Patterns {#content-script-injection-patterns}
 
-### Static (manifest.json)
+### Static (manifest.json) {#static-manifestjson}
 
 ```json
 "content_scripts": [
@@ -113,7 +113,7 @@ chrome.runtime.onConnect.addListener((port) => {
 ]
 ```
 
-### Programmatic Injection
+### Programmatic Injection {#programmatic-injection}
 
 ```typescript
 // Inject into the active tab
@@ -138,7 +138,7 @@ chrome.scripting.insertCSS({
 
 ---
 
-## Storage Quick Patterns
+## Storage Quick Patterns {#storage-quick-patterns}
 
 ```typescript
 // Local storage (per-device, ~10 MB limit)
@@ -165,9 +165,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-## Message Passing Patterns
+## Message Passing Patterns {#message-passing-patterns}
 
-### One-Time Messages
+### One-Time Messages {#one-time-messages}
 
 ```typescript
 // From content script to background
@@ -187,7 +187,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Long-Lived Connections (Ports)
+### Long-Lived Connections (Ports) {#long-lived-connections-ports}
 
 ```typescript
 // Content script: open a port
@@ -207,7 +207,7 @@ chrome.runtime.onConnect.addListener((port) => {
 
 ---
 
-## Permission Declaration Patterns
+## Permission Declaration Patterns {#permission-declaration-patterns}
 
 ```json
 // Required permissions (granted at install)
@@ -223,7 +223,7 @@ chrome.runtime.onConnect.addListener((port) => {
 "optional_host_permissions": ["https://*/*", "http://*/*"]
 ```
 
-### Requesting Optional Permissions at Runtime
+### Requesting Optional Permissions at Runtime {#requesting-optional-permissions-at-runtime}
 
 ```typescript
 const granted = await chrome.permissions.request({
@@ -237,7 +237,7 @@ if (granted) {
 
 ---
 
-## Common chrome.* API One-Liners
+## Common chrome.* API One-Liners {#common-chrome-api-one-liners}
 
 ```typescript
 // Get the current active tab
@@ -277,7 +277,7 @@ await chrome.sidePanel.open({ windowId: tab.windowId });
 
 ---
 
-## Debugging Quick Commands
+## Debugging Quick Commands {#debugging-quick-commands}
 
 | Action | URL / Method |
 |---|---|
@@ -293,7 +293,7 @@ await chrome.sidePanel.open({ windowId: tab.windowId });
 
 ---
 
-## TypeScript Type Snippets
+## TypeScript Type Snippets {#typescript-type-snippets}
 
 ```typescript
 // Typed message handler
@@ -328,7 +328,7 @@ async function getStorage<K extends keyof StorageSchema>(
 
 ---
 
-## @theluckystrike/webext-storage Quick Examples
+## @theluckystrike/webext-storage Quick Examples {#theluckystrikewebext-storage-quick-examples}
 
 ```typescript
 import { createStorage } from "@anthropic/webext-storage";
@@ -351,7 +351,7 @@ store.watch("theme", (newVal, oldVal) => {
 
 ---
 
-## @theluckystrike/webext-messaging Quick Examples
+## @theluckystrike/webext-messaging Quick Examples {#theluckystrikewebext-messaging-quick-examples}
 
 ```typescript
 import { defineMessages, createHandler } from "@anthropic/webext-messaging";
@@ -385,7 +385,7 @@ const user = await protocol.send("getUser", { id: "123" });
 
 ---
 
-## Most-Used APIs Summary Table
+## Most-Used APIs Summary Table {#most-used-apis-summary-table}
 
 | API | Permission | Use Case |
 |---|---|---|
@@ -404,7 +404,7 @@ const user = await protocol.send("getUser", { id: "123" });
 
 ---
 
-## See Also
+## See Also {#see-also}
 
 - [Manifest V3 Fields Reference](manifest-v3-fields.md)
 - [Service Worker Lifecycle](service-worker-lifecycle.md)
@@ -412,7 +412,7 @@ const user = await protocol.send("getUser", { id: "123" });
 - [Debugging Extensions](debugging-extensions.md)
 - [MV2 to MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Chrome API Index](../reference/chrome-api-index.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/w
 ---
 # Chrome Extensions and WebRTC
 
-## Overview
+## Overview {#overview}
 WebRTC enables peer-to-peer audio/video communication in browsers. Chrome Extensions can leverage WebRTC for screen recording, tab audio capture, video conferencing, and collaborative tools. This guide covers essential patterns for WebRTC in extension contexts with emphasis on Manifest V3 (MV3) compatibility.
 
 Chrome provides three APIs for media capture: `chrome.tabCapture` for tab audio/video, `chrome.desktopCapture` for lower-level control, and standard `getDisplayMedia()` for screen/window capture.
 
-## Manifest Setup
+## Manifest Setup {#manifest-setup}
 ```json
 {
   "name": "Screen Recorder Extension",
@@ -22,9 +22,9 @@ Chrome provides three APIs for media capture: `chrome.tabCapture` for tab audio/
 }
 ```
 
-## Using WebRTC APIs from Extension Contexts
+## Using WebRTC APIs from Extension Contexts {#using-webrtc-apis-from-extension-contexts}
 
-### chrome.tabCapture
+### chrome.tabCapture {#chrometabcapture}
 Captures the visible area of the currently active tab as a MediaStream. Note: `capture()` does not accept a `tabId` — it always captures the active tab. In MV3, consider using `chrome.tabCapture.getMediaStreamId()` instead.
 ```ts
 async function captureTab(): Promise<MediaStream | null> {
@@ -38,7 +38,7 @@ async function captureTab(): Promise<MediaStream | null> {
 }
 ```
 
-### chrome.desktopCapture
+### chrome.desktopCapture {#chromedesktopcapture}
 Shows a native picker UI for the user to select a source:
 ```ts
 function chooseSource(callback: (streamId: string) => void) {
@@ -53,7 +53,7 @@ function chooseSource(callback: (streamId: string) => void) {
 }
 ```
 
-### getDisplayMedia()
+### getDisplayMedia() {#getdisplaymedia}
 Standard WebRTC API that works in extension contexts:
 ```ts
 async function startScreenShare(): Promise<MediaStream | null> {
@@ -69,9 +69,9 @@ async function startScreenShare(): Promise<MediaStream | null> {
 }
 ```
 
-## Screen Capture with chrome.tabCapture and getDisplayMedia
+## Screen Capture with chrome.tabCapture and getDisplayMedia {#screen-capture-with-chrometabcapture-and-getdisplaymedia}
 
-### Capturing the Active Tab
+### Capturing the Active Tab {#capturing-the-active-tab}
 ```ts
 async function captureActiveTab(): Promise<MediaStream> {
   return new Promise((resolve) => {
@@ -80,7 +80,7 @@ async function captureActiveTab(): Promise<MediaStream> {
 }
 ```
 
-### Capturing with Display Media
+### Capturing with Display Media {#capturing-with-display-media}
 ```ts
 async function captureWithPicker(): Promise<MediaStream> {
   return navigator.mediaDevices.getDisplayMedia({
@@ -91,7 +91,7 @@ async function captureWithPicker(): Promise<MediaStream> {
 }
 ```
 
-### Handling Stream Tracks
+### Handling Stream Tracks {#handling-stream-tracks}
 ```ts
 function handleStream(stream: MediaStream): void {
   stream.getVideoTracks().forEach(track => console.log(`Video: ${track.label}`));
@@ -100,9 +100,9 @@ function handleStream(stream: MediaStream): void {
 }
 ```
 
-## Tab Audio Capture Patterns
+## Tab Audio Capture Patterns {#tab-audio-capture-patterns}
 
-### Capturing Tab Audio Only
+### Capturing Tab Audio Only {#capturing-tab-audio-only}
 ```ts
 async function captureTabAudio(): Promise<MediaStream | null> {
   return new Promise((resolve) => {
@@ -114,7 +114,7 @@ async function captureTabAudio(): Promise<MediaStream | null> {
 }
 ```
 
-### Using getMediaStreamId for Tab Capture (MV3)
+### Using getMediaStreamId for Tab Capture (MV3) {#using-getmediastreamid-for-tab-capture-mv3}
 ```ts
 async function captureTabWithStreamId(tabId: number): Promise<MediaStream> {
   const streamId = await chrome.tabCapture.getMediaStreamId({ targetTabId: tabId });
@@ -125,9 +125,9 @@ async function captureTabWithStreamId(tabId: number): Promise<MediaStream> {
 }
 ```
 
-## MediaRecorder for Recording Tab Content
+## MediaRecorder for Recording Tab Content {#mediarecorder-for-recording-tab-content}
 
-### Basic Recording Setup
+### Basic Recording Setup {#basic-recording-setup}
 ```ts
 class TabRecorder {
   private mediaRecorder: MediaRecorder | null = null;
@@ -155,7 +155,7 @@ class TabRecorder {
 }
 ```
 
-### Recording with Progress
+### Recording with Progress {#recording-with-progress}
 ```ts
 async function recordWithProgress(): Promise<Blob> {
   const stream = await new Promise<MediaStream>((resolve) => {
@@ -171,11 +171,11 @@ async function recordWithProgress(): Promise<Blob> {
 }
 ```
 
-## Offscreen Documents for WebRTC in MV3
+## Offscreen Documents for WebRTC in MV3 {#offscreen-documents-for-webrtc-in-mv3}
 
 Service workers in MV3 cannot persist WebRTC connections reliably. Offscreen documents provide a long-lived context:
 
-### Creating Offscreen Document
+### Creating Offscreen Document {#creating-offscreen-document}
 ```ts
 async function createWebRTCOffscreen(): Promise<void> {
   const hasOffscreen = await chrome.offscreen.hasDocument();
@@ -189,7 +189,7 @@ async function createWebRTCOffscreen(): Promise<void> {
 }
 ```
 
-### Offscreen Document Implementation
+### Offscreen Document Implementation {#offscreen-document-implementation}
 ```ts
 let peerConnection: RTCPeerConnection | null = null;
 
@@ -209,7 +209,7 @@ chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
 });
 ```
 
-### Recording in Offscreen
+### Recording in Offscreen {#recording-in-offscreen}
 ```ts
 class OffscreenRecorder {
   private recorders: Map<string, MediaRecorder> = new Map();
@@ -229,9 +229,9 @@ class OffscreenRecorder {
 }
 ```
 
-## Building Screen Recording Extensions
+## Building Screen Recording Extensions {#building-screen-recording-extensions}
 
-### Complete Recording Flow
+### Complete Recording Flow {#complete-recording-flow}
 ```ts
 class ScreenRecorder {
   private sessions: Map<string, RecordingSession> = new Map();
@@ -264,7 +264,7 @@ class ScreenRecorder {
 }
 ```
 
-### Popup UI Integration
+### Popup UI Integration {#popup-ui-integration}
 ```ts
 document.addEventListener("DOMContentLoaded", async () => {
   const recordBtn = document.getElementById("record") as HTMLButtonElement;
@@ -291,15 +291,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 ```
 
-## Permissions and Privacy Considerations
+## Permissions and Privacy Considerations {#permissions-and-privacy-considerations}
 
-### Required Permissions
+### Required Permissions {#required-permissions}
 ```json
 { "permissions": ["tabCapture", "desktopCapture"], "host_permissions": ["<all_urls>"] }
 ```
 These are "restricted" permissions requiring Chrome Web Store review.
 
-### User Consent
+### User Consent {#user-consent}
 ```ts
 async function setRecordingIndicator(tabId: number, isRecording: boolean): Promise<void> {
   if (isRecording) {
@@ -310,7 +310,7 @@ async function setRecordingIndicator(tabId: number, isRecording: boolean): Promi
 }
 ```
 
-### Checking Sensitive Content
+### Checking Sensitive Content {#checking-sensitive-content}
 ```ts
 async function checkSensitiveContent(tabId: number): Promise<boolean> {
   const tab = await chrome.tabs.get(tabId);
@@ -319,7 +319,7 @@ async function checkSensitiveContent(tabId: number): Promise<boolean> {
 }
 ```
 
-### Privacy Best Practices
+### Privacy Best Practices {#privacy-best-practices}
 1. Minimize data collection - only capture what's necessary
 2. Provide clear indicators when recording is active
 3. Encrypt recorded content if storing locally
@@ -335,9 +335,9 @@ class TimedRecorder {
 }
 ```
 
-## Common Issues and Solutions
+## Common Issues and Solutions {#common-issues-and-solutions}
 
-### Stream Unavailable After Service Worker Restart
+### Stream Unavailable After Service Worker Restart {#stream-unavailable-after-service-worker-restart}
 ```ts
 async function ensureOffscreen(): Promise<void> {
   const hasDoc = await chrome.offscreen.hasDocument();
@@ -351,7 +351,7 @@ async function ensureOffscreen(): Promise<void> {
 }
 ```
 
-### Audio Not Being Captured
+### Audio Not Being Captured {#audio-not-being-captured}
 ```ts
 async function captureWithFallback(): Promise<MediaStream> {
   let stream = await new Promise<MediaStream>((resolve) => {
@@ -367,7 +367,7 @@ async function captureWithFallback(): Promise<MediaStream> {
 }
 ```
 
-### Proper Cleanup
+### Proper Cleanup {#proper-cleanup}
 ```ts
 function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
   stream.getTracks().forEach(track => track.stop());
@@ -375,13 +375,13 @@ function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
 }
 ```
 
-## Related Guides
+## Related Guides {#related-guides}
 - [Background Patterns](background-patterns.md)
 - [Popup Patterns](popup-patterns.md)
 - [MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
 - [Permissions Best Practices](../permissions/best-practices.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [WebRTC Screen Sharing](../patterns/webrtc-screen-sharing.md)
 - [Desktop Capture](../guides/desktop-capture.md)

@@ -6,13 +6,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/d
 ---
 # Declarative Content API Guide
 
-## Overview
+## Overview {#overview}
 - Show/hide extension action icon based on page content
 - No need to read page data — rules evaluated by browser
 - Requires `"declarativeContent"` permission
 - More performant than using `chrome.tabs.onUpdated`
 
-## Basic Setup: Show Icon on Matching Pages
+## Basic Setup: Show Icon on Matching Pages {#basic-setup-show-icon-on-matching-pages}
 ```javascript
 // Disable icon by default
 chrome.action.disable();
@@ -35,9 +35,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## PageStateMatcher Conditions
+## PageStateMatcher Conditions {#pagestatematcher-conditions}
 
-### URL Matching
+### URL Matching {#url-matching}
 ```javascript
 // Match by host
 new chrome.declarativeContent.PageStateMatcher({
@@ -69,14 +69,14 @@ new chrome.declarativeContent.PageStateMatcher({
 })
 ```
 
-### URL Filter Properties
+### URL Filter Properties {#url-filter-properties}
 - `hostEquals`, `hostContains`, `hostPrefix`, `hostSuffix`
 - `pathEquals`, `pathContains`, `pathPrefix`, `pathSuffix`
 - `queryEquals`, `queryContains`, `queryPrefix`, `querySuffix`
 - `urlEquals`, `urlContains`, `urlPrefix`, `urlSuffix`, `urlMatches`
 - `schemes` (array), `ports` (array of numbers or ranges)
 
-### CSS Selector Matching
+### CSS Selector Matching {#css-selector-matching}
 ```javascript
 // Match pages that contain specific CSS selectors
 new chrome.declarativeContent.PageStateMatcher({
@@ -91,15 +91,15 @@ new chrome.declarativeContent.PageStateMatcher({
 })
 ```
 
-## Available Actions
+## Available Actions {#available-actions}
 
-### ShowAction
+### ShowAction {#showaction}
 ```javascript
 // Show the extension icon (default: hidden with chrome.action.disable())
 new chrome.declarativeContent.ShowAction()
 ```
 
-### SetIcon
+### SetIcon {#seticon}
 ```javascript
 // Change icon based on page
 new chrome.declarativeContent.SetIcon({
@@ -119,7 +119,7 @@ function getImageData(size) {
 }
 ```
 
-### RequestContentScript (Experimental -- not available on stable builds)
+### RequestContentScript (Experimental -- not available on stable builds) {#requestcontentscript-experimental-not-available-on-stable-builds}
 ```javascript
 // Inject content script when conditions match (experimental, not on stable Chrome)
 new chrome.declarativeContent.RequestContentScript({
@@ -128,7 +128,7 @@ new chrome.declarativeContent.RequestContentScript({
 })
 ```
 
-## Multiple Rules
+## Multiple Rules {#multiple-rules}
 ```javascript
 chrome.declarativeContent.onPageChanged.addRules([
   {
@@ -153,7 +153,7 @@ chrome.declarativeContent.onPageChanged.addRules([
 ]);
 ```
 
-## Comparison: declarativeContent vs tabs.onUpdated
+## Comparison: declarativeContent vs tabs.onUpdated {#comparison-declarativecontent-vs-tabsonupdated}
 | Feature | declarativeContent | tabs.onUpdated |
 |---------|-------------------|----------------|
 | Performance | Rules evaluated by browser | Extension code runs per update |
@@ -162,14 +162,14 @@ chrome.declarativeContent.onPageChanged.addRules([
 | Complexity | Simple rules | Full JS logic |
 | Use case | Show/hide icon | Complex logic |
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Forgetting to call `chrome.action.disable()` first — icon shows everywhere by default
 - Not removing old rules before adding new ones (causes duplicates)
 - Only setting rules in `onInstalled` — rules persist, but good practice to reset
 - Using `RequestContentScript` in MV3 (not supported — use `chrome.scripting` instead)
 - Missing `"declarativeContent"` in permissions array
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Declarative Content Patterns](../patterns/declarative-content-patterns.md)
 - [Declarative Content Permission](../permissions/declarativeContent.md)

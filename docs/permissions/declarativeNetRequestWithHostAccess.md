@@ -11,14 +11,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 The `declarativeNetRequestWithHostAccess` permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permissions.
 
-## What It Grants
+## What It Grants {#what-it-grants}
 
 This permission enables DNR rules that require access to specific hosts, including:
 - **Redirect rules** that point to URLs on specific domains
 - **Modify headers rules** that target requests to particular hosts
 - Rules that use URL patterns requiring host permission validation
 
-## Difference from declarativeNetRequest
+## Difference from declarativeNetRequest {#difference-from-declarativenetrequest}
 
 | Feature | declarativeNetRequest | declarativeNetRequestWithHostAccess |
 |---------|----------------------|--------------------------------------|
@@ -30,7 +30,7 @@ This permission enables DNR rules that require access to specific hosts, includi
 
 The standard `declarativeNetRequest` permission allows blocking requests and redirects to `extensionPath` URLs without host permissions. However, redirecting to specific URLs or modifying headers for particular hosts requires this permission.
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -45,7 +45,7 @@ The standard `declarativeNetRequest` permission allows blocking requests and red
 
 The host permissions must explicitly list the domains your rules will interact with.
 
-## User Warning
+## User Warning {#user-warning}
 
 When users install an extension with this permission, they will see a warning indicating that the extension can:
 - Read and change your data on specified websites
@@ -53,7 +53,7 @@ When users install an extension with this permission, they will see a warning in
 
 This is because the permission effectively grants host-level access combined with request modification capabilities.
 
-## When It's Needed
+## When It's Needed {#when-its-needed}
 
 Use `declarativeNetRequestWithHostAccess` when:
 1. Creating redirect rules that point to specific external URLs
@@ -61,7 +61,7 @@ Use `declarativeNetRequestWithHostAccess` when:
 3. Using `urlTransform` rules with custom URLs
 4. Applying rules to `*://*/*` patterns combined with host-specific conditions
 
-## When It's NOT Needed
+## When It's NOT Needed {#when-its-not-needed}
 
 You can use basic `declarativeNetRequest` without this permission for:
 - Blocking requests based on URL patterns
@@ -69,7 +69,7 @@ You can use basic `declarativeNetRequest` without this permission for:
 - Removing headers regardless of host
 - Basic URL pattern matching without host-specific redirects
 
-## @theluckystrike/webext-permissions
+## @theluckystrike/webext-permissions {#theluckystrikewebext-permissions}
 
 This permission can be validated using `@theluckystrike/webext-permissions`:
 
@@ -79,12 +79,12 @@ import { hasPermission } from '@theluckystrike/webext-permissions';
 const hasDnrWithHostAccess = await hasPermission('declarativeNetRequestWithHostAccess');
 ```
 
-## Related Permissions
+## Related Permissions {#related-permissions}
 
 - [declarativeNetRequest](./declarativeNetRequest.md) - Basic DNR without host access
 - [declarativeNetRequestFeedback](./declarativeNetRequestFeedback.md) - Feedback on DNR rule matches
 
-## Example Use Case
+## Example Use Case {#example-use-case}
 
 An extension that redirects all requests from `site-a.com` to `site-b.com` would require:
 

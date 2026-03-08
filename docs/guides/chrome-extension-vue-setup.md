@@ -8,14 +8,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 This guide covers building Chrome extensions with Vue 3, covering project initialization, architecture patterns, and best practices for modern extension development.
 
-## Recommended Stack
+## Recommended Stack {#recommended-stack}
 
 - **Vue 3** - Latest features including Composition API and reactivity
 - **TypeScript** - Type safety across your extension
 - **Vite** - Fast dev server and optimized builds
 - **vite-plugin-web-extension** or **CRXJS** - Hot reload for Chrome extensions
 
-## Project Initialization
+## Project Initialization {#project-initialization}
 
 Create a new Vue project using create-vue:
 
@@ -55,7 +55,7 @@ export default defineConfig({
 });
 ```
 
-## Multiple Vue Entry Points
+## Multiple Vue Entry Points {#multiple-vue-entry-points}
 
 Chrome extensions have multiple entry points (popup, options page, side panel). Each should be a separate Vue app:
 
@@ -74,7 +74,7 @@ src/
     └── content.ts
 ```
 
-## Composition API Composable Helpers
+## Composition API Composable Helpers {#composition-api-composable-helpers}
 
 Create reusable composables for Chrome API integration:
 
@@ -131,7 +131,7 @@ export function useAlarm(name: string) {
 }
 ```
 
-## Pinia State Management
+## Pinia State Management {#pinia-state-management}
 
 Use Pinia for state management across extension contexts:
 
@@ -153,7 +153,7 @@ export const useExtensionStore = defineStore('extension', {
 });
 ```
 
-## Content Scripts with Vue
+## Content Scripts with Vue {#content-scripts-with-vue}
 
 Mount Vue components in content scripts using shadow DOM for style isolation:
 
@@ -173,11 +173,11 @@ shadow.appendChild(mountPoint);
 createApp(ContentApp).mount(mountPoint);
 ```
 
-## Vue DevTools
+## Vue DevTools {#vue-devtools}
 
 Vue DevTools works in extension pages. Open DevTools on popup, options, or side panel pages to inspect Vue component trees and state.
 
-## Routing
+## Routing {#routing}
 
 Use hash routing for extension pages since they run from `chrome-extension://`:
 
@@ -194,19 +194,19 @@ const router = createRouter({
 });
 ```
 
-## Styling Options
+## Styling Options {#styling-options}
 
 - **Tailwind CSS** - Utility-first, configure content paths for extension
 - **UnoCSS** - On-demand atomic CSS engine
 - **Scoped Styles** - Vue's built-in scoped CSS
 
-## Testing
+## Testing {#testing}
 
 - **Vitest** - Fast unit testing with Vite
 - **Vue Test Utils** - Component testing
 - **jest-chrome** - Mock Chrome extension APIs
 
-## Auto-Imports
+## Auto-Imports {#auto-imports}
 
 Use unplugin-auto-import for automatic composable imports:
 
@@ -216,19 +216,19 @@ npm install -D unplugin-auto-import
 
 Configure in vite.config.ts for Chrome API helpers.
 
-## Performance Optimization
+## Performance Optimization {#performance-optimization}
 
 - **Lazy Loading** - Use defineAsyncComponent for route-based code splitting
 - **Async Components** - Load features on demand
 - **Keep Alive** - Cache component states in popup
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - `docs/guides/vite-extension-setup.md` — general Vite configuration
 - `docs/patterns/building-with-vue.md` — Vue architecture patterns
 - `docs/patterns/content-script-vue.md` — content script patterns
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Content Script with Vue](../patterns/content-script-vue.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)

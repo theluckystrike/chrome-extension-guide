@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Cross-Browser Compatibility
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions can run on multiple Chromium-based browsers (Edge, Brave, Opera, Vivaldi) and, with care, on Firefox. This guide covers practical patterns for writing extensions that work across browsers without maintaining separate codebases.
 
 ---
 
-## The Browser Extension Landscape
+## The Browser Extension Landscape {#the-browser-extension-landscape}
 
 | Browser | Engine | API Namespace | Manifest | Store |
 |---------|--------|--------------|----------|-------|
@@ -26,7 +26,7 @@ Chrome extensions can run on multiple Chromium-based browsers (Edge, Brave, Oper
 
 ---
 
-## Pattern 1: Unified API Namespace
+## Pattern 1: Unified API Namespace {#pattern-1-unified-api-namespace}
 
 Firefox uses `browser.*` with native Promises. Chrome uses `chrome.*` with callbacks (and increasingly Promises). Create a unified accessor:
 
@@ -48,7 +48,7 @@ const tabs = await api.tabs.query({ active: true, currentWindow: true });
 
 For projects using `@anthropic-ai/webext-*` packages, the libraries already abstract over `chrome.*` — but direct API calls still need this wrapper.
 
-### Type-Safe Approach with Declaration Merging
+### Type-Safe Approach with Declaration Merging {#type-safe-approach-with-declaration-merging}
 
 ```ts
 // types/browser.d.ts
@@ -60,7 +60,7 @@ export {};
 
 ---
 
-## Pattern 2: Feature Detection over User-Agent Sniffing
+## Pattern 2: Feature Detection over User-Agent Sniffing {#pattern-2-feature-detection-over-user-agent-sniffing}
 
 Never rely on `navigator.userAgent` to determine browser capabilities. Instead, detect features directly:
 
@@ -86,7 +86,7 @@ if (supports.sidePanel) {
 
 ---
 
-## Pattern 3: Manifest Differences
+## Pattern 3: Manifest Differences {#pattern-3-manifest-differences}
 
 Chrome and Firefox have small but critical manifest differences. Use a build script to generate per-browser manifests from a shared base:
 
@@ -135,7 +135,7 @@ function buildFirefoxManifest(base: ManifestBase) {
 }
 ```
 
-### Key Manifest Differences
+### Key Manifest Differences {#key-manifest-differences}
 
 | Feature | Chrome MV3 | Firefox MV3 |
 |---------|-----------|-------------|
@@ -147,7 +147,7 @@ function buildFirefoxManifest(base: ManifestBase) {
 
 ---
 
-## Pattern 4: Polyfilling Missing APIs
+## Pattern 4: Polyfilling Missing APIs {#pattern-4-polyfilling-missing-apis}
 
 Some APIs exist only in certain browsers. Create graceful fallbacks:
 
@@ -180,7 +180,7 @@ export async function executeScript(
 
 ---
 
-## Pattern 5: Storage API Compatibility
+## Pattern 5: Storage API Compatibility {#pattern-5-storage-api-compatibility}
 
 The storage API is mostly consistent, but session storage is Chrome-only:
 
@@ -215,7 +215,7 @@ export async function getSessionValue<T>(key: string, fallback: T): Promise<T> {
 
 ---
 
-## Pattern 6: Conditional Imports with Build Tools
+## Pattern 6: Conditional Imports with Build Tools {#pattern-6-conditional-imports-with-build-tools}
 
 Use your bundler to swap modules per target browser:
 
@@ -257,7 +257,7 @@ notify("Hello", "Cross-browser notification");
 
 ---
 
-## Pattern 7: Testing Across Browsers
+## Pattern 7: Testing Across Browsers {#pattern-7-testing-across-browsers}
 
 Use Playwright or Puppeteer to test your extension in multiple browsers:
 
@@ -293,9 +293,9 @@ test("extension loads in Chromium", async () => {
 
 ---
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
-### 1. Promise vs Callback Styles
+### 1. Promise vs Callback Styles {#1-promise-vs-callback-styles}
 Chrome historically used callbacks. Firefox always used Promises. Modern Chrome (MV3) supports Promises for most APIs, but some older APIs still need callbacks:
 
 ```ts
@@ -315,7 +315,7 @@ export function promisify<T>(
 }
 ```
 
-### 2. Extension URL Schemes
+### 2. Extension URL Schemes {#2-extension-url-schemes}
 ```ts
 // Chrome: chrome-extension://<id>/page.html
 // Firefox: moz-extension://<uuid>/page.html
@@ -324,7 +324,7 @@ export function promisify<T>(
 const url = chrome.runtime.getURL("options.html");
 ```
 
-### 3. Context Menu Differences
+### 3. Context Menu Differences {#3-context-menu-differences}
 ```ts
 // Chrome supports "action" context; Firefox does not
 const contexts: chrome.contextMenus.ContextType[] = ["page", "selection"];
@@ -342,7 +342,7 @@ chrome.contextMenus.create({
 
 ---
 
-## Build Script: Multi-Browser Package
+## Build Script: Multi-Browser Package {#build-script-multi-browser-package}
 
 ```json
 {
@@ -360,7 +360,7 @@ chrome.contextMenus.create({
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Strategy | When to Use |
 |----------|------------|

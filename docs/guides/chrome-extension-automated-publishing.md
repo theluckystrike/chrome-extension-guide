@@ -10,7 +10,7 @@ Automate your extension publishing workflow using CI/CD pipelines. This guide co
 
 ---
 
-## Chrome Web Store API Setup
+## Chrome Web Store API Setup {#chrome-web-store-api-setup}
 
 Before automating, set up API access in Google Cloud Console:
 
@@ -23,7 +23,7 @@ Before automating, set up API access in Google Cloud Console:
 
 ---
 
-## Authentication
+## Authentication {#authentication}
 
 Store your CWS credentials securely in GitHub Secrets:
 
@@ -38,7 +38,7 @@ Store your CWS credentials securely in GitHub Secrets:
 
 ---
 
-## CLI Tools
+## CLI Tools {#cli-tools}
 
 The `chrome-webstore-upload-cli` package provides easy CLI access:
 
@@ -54,7 +54,7 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-## GitHub Actions Workflow
+## GitHub Actions Workflow {#github-actions-workflow}
 
 Complete workflow that builds, packages, and publishes on tag push:
 
@@ -110,7 +110,7 @@ jobs:
 
 ---
 
-## Versioning Automation
+## Versioning Automation {#versioning-automation}
 
 Sync `manifest.json` version from `package.json` or git tags:
 
@@ -131,7 +131,7 @@ git push origin v1.2.3
 
 ---
 
-## Publishing Stages
+## Publishing Stages {#publishing-stages}
 
 Control when your extension goes live:
 
@@ -143,7 +143,7 @@ Control when your extension goes live:
 
 ---
 
-## Pre-Publish Checks
+## Pre-Publish Checks {#pre-publish-checks}
 
 Run these checks before uploading:
 
@@ -154,7 +154,7 @@ Run these checks before uploading:
 
 ---
 
-## Rollback
+## Rollback {#rollback}
 
 To rollback to a previous version:
 
@@ -172,7 +172,7 @@ git push origin v1.2.2
 
 ---
 
-## Multi-Browser Publishing
+## Multi-Browser Publishing {#multi-browser-publishing}
 
 Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
 
@@ -188,7 +188,7 @@ Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
 
 ---
 
-## Semantic Release Integration
+## Semantic Release Integration {#semantic-release-integration}
 
 Automate changelog and version bumping with semantic-release:
 
@@ -216,14 +216,14 @@ Configure to trigger CWS publish on release:
 
 ---
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Publishing Guide](../publishing/publishing-guide.md) — Manual publishing process
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Build automation
 - [Version Management](../publishing/version-management.md) — Version strategies
 - [Chrome Web Store API](../guides/chrome-web-store-api.md) — API reference
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Chrome Web Store API](../guides/chrome-web-store-api.md)

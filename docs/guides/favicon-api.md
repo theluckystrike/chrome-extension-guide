@@ -6,17 +6,17 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/f
 ---
 # Favicon Access in Chrome Extensions
 
-## Overview
+## Overview {#overview}
 
 Chrome Extensions can access website favicons using the `_favicon` URL mechanism. There is no `chrome.favicon` API namespace -- instead, extensions construct a special URL that Chrome resolves to the site's favicon image.
 
-### Key Points
+### Key Points {#key-points}
 - Requires `"favicon"` permission in manifest (MV3)
 - Access favicons via a constructed URL, not a JavaScript API call
 - The URL pattern is `chrome-extension://<extension-id>/_favicon/?pageUrl=<url>&size=<size>`
 - Works in popup, side panel, options pages, and content scripts (with web accessible resources)
 
-## Permission Setup
+## Permission Setup {#permission-setup}
 
 Add the `favicon` permission to your `manifest.json`:
 
@@ -44,7 +44,7 @@ If you need to use favicons in content scripts, also declare `_favicon` as a web
 }
 ```
 
-## Constructing Favicon URLs
+## Constructing Favicon URLs {#constructing-favicon-urls}
 
 Use `chrome.runtime.getURL()` to build the favicon URL:
 
@@ -61,7 +61,7 @@ const url = getFaviconUrl('https://example.com', 32);
 // Returns: chrome-extension://<your-extension-id>/_favicon/?pageUrl=https%3A%2F%2Fexample.com&size=32
 ```
 
-### Displaying in HTML
+### Displaying in HTML {#displaying-in-html}
 
 ```html
 <img id="site-icon" alt="Site Favicon">
@@ -78,15 +78,15 @@ document.getElementById('site-icon').src = getFaviconUrl('https://example.com');
 </script>
 ```
 
-### Available Sizes
+### Available Sizes {#available-sizes}
 
 Common favicon sizes: `16`, `32`, `64`. The `size` parameter specifies the desired pixel dimensions. Chrome will return the closest available size.
 
-## Fallback Patterns for Sites Without Favicons
+## Fallback Patterns for Sites Without Favicons {#fallback-patterns-for-sites-without-favicons}
 
 Many sites don't have favicons. Implement graceful fallbacks:
 
-### Default Icon Fallback
+### Default Icon Fallback {#default-icon-fallback}
 
 ```javascript
 const DEFAULT_FAVICON = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" fill="%23ddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10">?</text></svg>';
@@ -101,7 +101,7 @@ function createFaviconImg(pageUrl, size = 16) {
 }
 ```
 
-### Generate Favicon from Domain Initial
+### Generate Favicon from Domain Initial {#generate-favicon-from-domain-initial}
 
 ```javascript
 function generateInitialFavicon(domain) {
@@ -118,9 +118,9 @@ function generateInitialFavicon(domain) {
 }
 ```
 
-## Displaying Favicons in Extension Pages
+## Displaying Favicons in Extension Pages {#displaying-favicons-in-extension-pages}
 
-### Popup Example
+### Popup Example {#popup-example}
 
 ```html
 <!-- popup.html -->
@@ -183,7 +183,7 @@ function renderFaviconList() {
 document.addEventListener('DOMContentLoaded', renderFaviconList);
 ```
 
-### Content Script Usage
+### Content Script Usage {#content-script-usage}
 
 To use favicons in content scripts, ensure `_favicon/*` is declared as a web accessible resource in your manifest (see Permission Setup above).
 
@@ -201,7 +201,7 @@ img.src = getFaviconUrl('https://example.com', 16);
 document.body.appendChild(img);
 ```
 
-## Caching Favicons Locally
+## Caching Favicons Locally {#caching-favicons-locally}
 
 Chrome caches favicons internally, but you can also cache them in extension storage for offline access:
 
@@ -232,9 +232,9 @@ async function setCachedFavicon(url, dataUrl) {
 }
 ```
 
-## Performance Best Practices
+## Performance Best Practices {#performance-best-practices}
 
-### Use Appropriate Sizes
+### Use Appropriate Sizes {#use-appropriate-sizes}
 
 Request only the size you need to avoid unnecessary data:
 
@@ -244,7 +244,7 @@ const listFavicon = getFaviconUrl(url, 16);
 const cardFavicon = getFaviconUrl(url, 32);
 ```
 
-### Lazy Loading
+### Lazy Loading {#lazy-loading}
 
 Load favicons only when visible:
 
@@ -265,21 +265,21 @@ img.dataset.url = 'https://example.com';
 observer.observe(img);
 ```
 
-## Common Issues and Solutions
+## Common Issues and Solutions {#common-issues-and-solutions}
 
-### Issue: Favicon Returns Empty or Broken
+### Issue: Favicon Returns Empty or Broken {#issue-favicon-returns-empty-or-broken}
 
 Always provide a fallback using the `onerror` handler on `<img>` elements.
 
-### Issue: Favicon Not Showing in Content Scripts
+### Issue: Favicon Not Showing in Content Scripts {#issue-favicon-not-showing-in-content-scripts}
 
 Ensure `_favicon/*` is listed in `web_accessible_resources` in your manifest.
 
-### Issue: Permission Warnings
+### Issue: Permission Warnings {#issue-permission-warnings}
 
 The `favicon` permission only triggers a warning if `tabs` or host permissions have not already been requested.
 
-## Summary
+## Summary {#summary}
 
 - There is no `chrome.favicon` JavaScript API -- favicons are accessed via URL construction
 - Use `chrome.runtime.getURL('/_favicon/')` with `pageUrl` and `size` query parameters
@@ -288,7 +288,7 @@ The `favicon` permission only triggers a warning if `tabs` or host permissions h
 - Always implement fallbacks for sites without favicons
 - Lazy load and cache for better performance
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Favicon Patterns](../patterns/favicon-api.md)
 - [Web Navigation](../guides/web-navigation.md)

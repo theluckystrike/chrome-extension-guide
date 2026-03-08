@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/i
 ---
 # Idle Detection API
 
-## Introduction
+## Introduction {#introduction}
 
 The Chrome Idle Detection API (`chrome.idle`) enables extensions to detect when users become inactive, active, or when their screen is locked. This API is essential for building extensions that need to respond to user presence, such as auto-saving documents, implementing session timeouts, or displaying away status.
 
@@ -17,7 +17,7 @@ The Idle Detection API provides three core capabilities:
 
 > **Note**: This API is available in both Manifest V2 and Manifest V3. The examples use Manifest V3 service worker syntax.
 
-## Permissions
+## Permissions {#permissions}
 
 Add the `"idle"` permission to your manifest:
 
@@ -35,7 +35,7 @@ Add the `"idle"` permission to your manifest:
 
 The `"idle"` permission must be declared in the manifest. It does not trigger a permission warning during installation.
 
-## Idle States
+## Idle States {#idle-states}
 
 The chrome.idle API defines three states:
 
@@ -45,9 +45,9 @@ The chrome.idle API defines three states:
 
 State priority: locked > idle > active
 
-## Detecting Current Idle State
+## Detecting Current Idle State {#detecting-current-idle-state}
 
-### Using queryState()
+### Using queryState() {#using-querystate}
 
 ```javascript
 chrome.idle.queryState(detectionIntervalInSeconds, callback)
@@ -67,7 +67,7 @@ chrome.idle.queryState(60, (state) => {
 });
 ```
 
-### Auto-Save Example
+### Auto-Save Example {#auto-save-example}
 
 ```javascript
 function performAutoSave() {
@@ -81,9 +81,9 @@ function performAutoSave() {
 }
 ```
 
-## Setting Detection Intervals
+## Setting Detection Intervals {#setting-detection-intervals}
 
-### Using setDetectionInterval()
+### Using setDetectionInterval() {#using-setdetectioninterval}
 
 ```javascript
 chrome.idle.setDetectionInterval(intervalInSeconds)
@@ -98,7 +98,7 @@ chrome.idle.setDetectionInterval(60);
 chrome.idle.setDetectionInterval(300);
 ```
 
-### Dynamic Interval Adjustment
+### Dynamic Interval Adjustment {#dynamic-interval-adjustment}
 
 ```javascript
 function adjustDetectionInterval() {
@@ -107,9 +107,9 @@ function adjustDetectionInterval() {
 }
 ```
 
-## Listening for State Changes
+## Listening for State Changes {#listening-for-state-changes}
 
-### Using onStateChanged
+### Using onStateChanged {#using-onstatechanged}
 
 ```javascript
 chrome.idle.onStateChanged.addListener((newState) => {
@@ -127,7 +127,7 @@ function handleUserAway() { console.log("User is away"); }
 function handleScreenLock() { console.log("Screen locked"); }
 ```
 
-## Complete Implementation Example
+## Complete Implementation Example {#complete-implementation-example}
 
 ```javascript
 // background.js
@@ -194,9 +194,9 @@ function clearSensitiveData() { console.log("Clearing sensitive data..."); }
 initialize();
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
-### Auto-Save Functionality
+### Auto-Save Functionality {#auto-save-functionality}
 
 ```javascript
 class AutoSaveManager {
@@ -231,7 +231,7 @@ const autoSave = new AutoSaveManager({ interval: 60000 });
 autoSave.start();
 ```
 
-### Session Timeout
+### Session Timeout {#session-timeout}
 
 ```javascript
 class SessionTimeoutManager {
@@ -267,7 +267,7 @@ class SessionTimeoutManager {
 const sessionManager = new SessionTimeoutManager({ timeoutDuration: 900000 });
 ```
 
-### Away Status Integration
+### Away Status Integration {#away-status-integration}
 
 ```javascript
 class AwayStatusManager {
@@ -297,9 +297,9 @@ class AwayStatusManager {
 const awayStatus = new AwayStatusManager();
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### 1. Set Appropriate Detection Intervals
+### 1. Set Appropriate Detection Intervals {#1-set-appropriate-detection-intervals}
 
 ```javascript
 // DON'T: Set very short intervals (battery drain)
@@ -309,7 +309,7 @@ chrome.idle.setDetectionInterval(5);
 chrome.idle.setDetectionInterval(60);
 ```
 
-### 2. Always Handle All States
+### 2. Always Handle All States {#2-always-handle-all-states}
 
 ```javascript
 chrome.idle.onStateChanged.addListener((state) => {
@@ -323,7 +323,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-### 3. Use queryState for Critical Operations
+### 3. Use queryState for Critical Operations {#3-use-querystate-for-critical-operations}
 
 ```javascript
 chrome.idle.queryState(60, (state) => {
@@ -331,7 +331,7 @@ chrome.idle.queryState(60, (state) => {
 });
 ```
 
-### 4. Clean Up Resources on Lock
+### 4. Clean Up Resources on Lock {#4-clean-up-resources-on-lock}
 
 ```javascript
 chrome.idle.onStateChanged.addListener((state) => {
@@ -339,14 +339,14 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-## Platform Limitations
+## Platform Limitations {#platform-limitations}
 
 - **Chrome OS**: The "locked" state may not fire reliably
 - **Linux**: Screen lock detection depends on desktop session management
 - **Mac**: May not detect screen lock in all cases
 - **Mobile**: Not fully supported on Android Chrome
 
-## Summary
+## Summary {#summary}
 
 The chrome.idle API provides essential functionality:
 
@@ -357,7 +357,7 @@ The chrome.idle API provides essential functionality:
 
 Use these capabilities to implement auto-save, session timeouts, away status, and more.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Idle API Reference](../api-reference/idle.md)
 - [Power Management](../guides/power-management.md)

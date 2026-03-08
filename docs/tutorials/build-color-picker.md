@@ -6,21 +6,21 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Color Picker Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 - Pick any color from any web page
 - Copy in HEX, RGB, HSL formats
 - Save color palettes
 - View recently picked colors
 - Keyboard shortcut: Alt+Shift+C
 
-## Manifest
+## Manifest {#manifest}
 - permissions: activeTab, storage, clipboardWrite
 - commands with Alt+Shift+C shortcut
 - action with popup
 
 ---
 
-## Step 1: EyeDropper API (Modern Browsers)
+## Step 1: EyeDropper API (Modern Browsers) {#step-1-eyedropper-api-modern-browsers}
 
 Chrome 95+ supports the native EyeDropper API:
 
@@ -43,7 +43,7 @@ document.addEventListener('mousemove', (e) => {
 
 ---
 
-## Step 2: Magnifier Overlay
+## Step 2: Magnifier Overlay {#step-2-magnifier-overlay}
 
 Inject a picker with crosshair:
 
@@ -62,7 +62,7 @@ Style: 10x zoom canvas, crosshair at center, position fixed, z-index 999999.
 
 ---
 
-## Step 3: Color Conversion
+## Step 3: Color Conversion {#step-3-color-conversion}
 
 ```javascript
 export function hexToRgb(hex) {
@@ -93,7 +93,7 @@ export function rgbToHsl(r, g, b) {
 
 ---
 
-## Step 4: Popup UI
+## Step 4: Popup UI {#step-4-popup-ui}
 
 ```html
 <div class="picker-popup">
@@ -115,7 +115,7 @@ export function rgbToHsl(r, g, b) {
 
 ---
 
-## Step 5: Palette Storage
+## Step 5: Palette Storage {#step-5-palette-storage}
 
 Use `@theluckystrike/webext-storage`:
 
@@ -135,7 +135,7 @@ function exportAsCssVars(name, colors) {
 
 ---
 
-## Step 6: Keyboard Shortcut
+## Step 6: Keyboard Shortcut {#step-6-keyboard-shortcut}
 
 manifest.json:
 ```json
@@ -163,7 +163,7 @@ Works via activeTab, must be user-triggered. Set at chrome://extensions/shortcut
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [activeTab Permission](./permissions/activeTab.md) — Overview of activeTab
 - [clipboardWrite Permission](./permissions/clipboardWrite.md) — Copying colors to clipboard
@@ -171,6 +171,6 @@ Works via activeTab, must be user-triggered. Set at chrome://extensions/shortcut
 
 ---
 
-## Summary
+## Summary {#summary}
 
 You built a color picker extension with EyeDropper API + fallback content script, color conversion (HEX/RGB/HSL), popup UI with format switching, palette storage and export, and keyboard shortcut (Alt+Shift+C). Test at chrome://extensions/ with Developer mode enabled.

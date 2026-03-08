@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Graceful handling of extension updates is critical for maintaining user data integrity and a seamless experience. This pattern covers the complete update lifecycle.
 
-## The `onInstalled` Event
+## The `onInstalled` Event {#the-oninstalled-event}
 
 Chrome provides `chrome.runtime.onInstalled` to detect extension lifecycle events:
 
@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-## Detecting Version Changes
+## Detecting Version Changes {#detecting-version-changes}
 
 Compare the current manifest version with the stored previous version:
 
@@ -54,7 +54,7 @@ async function handleUpdate(previousVersion: string): Promise<void> {
 }
 ```
 
-## Sequential Version Migrations
+## Sequential Version Migrations {#sequential-version-migrations}
 
 Run migrations in order to handle incremental changes:
 
@@ -80,7 +80,7 @@ async function runMigrations(fromVersion: string, toVersion: string): Promise<vo
 }
 ```
 
-## Storage Schema Upgrades
+## Storage Schema Upgrades {#storage-schema-upgrades}
 
 Handle storage schema changes safely:
 
@@ -110,7 +110,7 @@ async function migrateV210(): Promise<void> {
 }
 ```
 
-## Content Script Reconnection
+## Content Script Reconnection {#content-script-reconnection}
 
 After updates, existing content scripts may fail with "Receiving end does not exist":
 
@@ -130,7 +130,7 @@ async function reconnectContentScripts(): Promise<void> {
 }
 ```
 
-## Preserving User State
+## Preserving User State {#preserving-user-state}
 
 Always backup user data before migrations:
 
@@ -162,7 +162,7 @@ async function withRollback(
 }
 ```
 
-## Testing Updates Locally
+## Testing Updates Locally {#testing-updates-locally}
 
 Use `chrome.management.setEnabled` or reload the extension in developer mode:
 
@@ -175,7 +175,7 @@ async function reloadExtension(): Promise<void> {
 }
 ```
 
-## Summary
+## Summary {#summary}
 
 - Use `chrome.runtime.onInstalled` to detect update reason
 - Compare manifest version with stored version
@@ -184,7 +184,7 @@ async function reloadExtension(): Promise<void> {
 - Re-inject content scripts after updates
 - Implement rollback strategies for critical migrations
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Update Migration](./update-migration.md) - Detailed migration patterns
 - [Storage Migration](./storage-migration.md) - Storage schema upgrades

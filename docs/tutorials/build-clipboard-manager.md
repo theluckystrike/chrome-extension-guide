@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Clipboard Manager Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 Popup clipboard history with search, pinned favorites, one-click paste. Uses offscreen document for clipboard access in MV3.
 
-## Project Structure
+## Project Structure {#project-structure}
 ```
 clipboard-manager/
   manifest.json
@@ -22,7 +22,7 @@ clipboard-manager/
   content.js
 ```
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -41,7 +41,7 @@ clipboard-manager/
 }
 ```
 
-## Step 2: Content Script
+## Step 2: Content Script {#step-2-content-script}
 ```javascript
 // Detect copy events on any page
 document.addEventListener('copy', () => {
@@ -49,7 +49,7 @@ document.addEventListener('copy', () => {
 });
 ```
 
-## Step 3: Offscreen Document
+## Step 3: Offscreen Document {#step-3-offscreen-document}
 ```html
 <!-- offscreen.html -->
 <!DOCTYPE html>
@@ -75,7 +75,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Step 4: Background Service Worker
+## Step 4: Background Service Worker {#step-4-background-service-worker}
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -151,7 +151,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Step 5: Popup
+## Step 5: Popup {#step-5-popup}
 ```html
 <!DOCTYPE html>
 <html>
@@ -207,7 +207,7 @@ body { width: 350px; max-height: 500px; margin: 0; font-family: system-ui; backg
 </html>
 ```
 
-## Next Steps
+## Next Steps {#next-steps}
 - Image clipboard support
 - Rich text preview
 - Sync pinned items across devices

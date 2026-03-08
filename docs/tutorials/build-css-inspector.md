@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a CSS Inspector Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 - Hover to inspect any element on a page
 - Display computed styles, box model, typography
 - Color picker using EyeDropper API
@@ -14,7 +14,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Generate CSS selector paths
 - Inspect Shadow DOM elements
 
-## Step 1: Manifest with activeTab Permission
+## Step 1: Manifest with activeTab Permission {#step-1-manifest-with-activetab-permission}
 ```json
 {
   "manifest_version": 3,
@@ -26,7 +26,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 }
 ```
 
-## Step 2: Toggle Inspect Mode
+## Step 2: Toggle Inspect Mode {#step-2-toggle-inspect-mode}
 ```javascript
 // background.js
 chrome.action.onClicked.addListener(async (tab) => {
@@ -34,7 +34,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Step 3: Hover Overlay
+## Step 3: Hover Overlay {#step-3-hover-overlay}
 ```css
 .ext-inspector-overlay {
   position: absolute; border: 2px solid #ff0000;
@@ -59,7 +59,7 @@ document.addEventListener('mouseover', (e) => {
 });
 ```
 
-## Step 4: Extract Computed Styles
+## Step 4: Extract Computed Styles {#step-4-extract-computed-styles}
 ```javascript
 function getElementStyles(element) {
   const computed = getComputedStyle(element);
@@ -75,7 +75,7 @@ function getElementStyles(element) {
 }
 ```
 
-## Step 5: Display Panel
+## Step 5: Display Panel {#step-5-display-panel}
 ```javascript
 function createInspectPanel() {
   const panel = document.createElement('div');
@@ -89,7 +89,7 @@ function createInspectPanel() {
 }
 ```
 
-## Step 6: Color Picker with EyeDropper API
+## Step 6: Color Picker with EyeDropper API {#step-6-color-picker-with-eyedropper-api}
 ```javascript
 async function pickColor() {
   if (!window.EyeDropper) return null;
@@ -99,7 +99,7 @@ async function pickColor() {
 }
 ```
 
-## Step 7: Copy CSS to Clipboard
+## Step 7: Copy CSS to Clipboard {#step-7-copy-css-to-clipboard}
 ```javascript
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => showNotification('Copied!'));
@@ -111,7 +111,7 @@ function generateCssRule(element) {
 }
 ```
 
-## Step 8: CSS Selector Path Generator
+## Step 8: CSS Selector Path Generator {#step-8-css-selector-path-generator}
 ```javascript
 function generateSelector(element) {
   if (element.id) return `#${element.id}`;
@@ -126,7 +126,7 @@ function generateSelector(element) {
 }
 ```
 
-## Shadow DOM Support
+## Shadow DOM Support {#shadow-dom-support}
 ```javascript
 function inspectShadowElement(element) {
   if (element.shadowRoot) {
@@ -141,7 +141,7 @@ function inspectShadowElement(element) {
 }
 ```
 
-## Performance: Throttle Mousemove
+## Performance: Throttle Mousemove {#performance-throttle-mousemove}
 ```javascript
 function throttle(func, limit) {
   let inThrottle;
@@ -152,7 +152,7 @@ function throttle(func, limit) {
 document.addEventListener('mousemove', throttle((e) => { /* handle */ }, 50));
 ```
 
-## Cleanup: Remove Overlays and Listeners
+## Cleanup: Remove Overlays and Listeners {#cleanup-remove-overlays-and-listeners}
 ```javascript
 function deactivateInspector() {
   isInspecting = false;
@@ -164,10 +164,10 @@ function deactivateInspector() {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') deactivateInspector(); });
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - [DOM Observer Patterns](./patterns/dom-observer-patterns.md) — Detect dynamic DOM changes
 - [Clipboard Patterns](./patterns/clipboard-patterns.md) — Best practices for copy/paste
 - [Content Script Patterns](./guides/content-script-patterns.md) — Content script injection strategies
 
-## Summary
+## Summary {#summary}
 You built a CSS inspector extension with hover highlighting, computed style extraction, box model/typography/colors display, EyeDropper color picker, CSS rule copying, selector path generation, Shadow DOM support, throttled mousemove for performance, and cleanup on deactivate.

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.cookies` API provides full CRUD operations for querying and modifying browser cookies. Requires `"cookies"` permission plus host permissions.
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -18,9 +18,9 @@ The `chrome.cookies` API provides full CRUD operations for querying and modifyin
 }
 ```
 
-## API Methods
+## API Methods {#api-methods}
 
-### chrome.cookies.get
+### chrome.cookies.get {#chromecookiesget}
 
 Retrieves a single cookie by name and URL.
 
@@ -28,7 +28,7 @@ Retrieves a single cookie by name and URL.
 chrome.cookies.get({ url: string, name: string, storeId?: string }, callback): void;
 ```
 
-### chrome.cookies.getAll
+### chrome.cookies.getAll {#chromecookiesgetall}
 
 Retrieves all cookies matching filters.
 
@@ -42,7 +42,7 @@ chrome.cookies.getAll({ domain: ".example.com" }, (cookies) => {
 });
 ```
 
-### chrome.cookies.set
+### chrome.cookies.set {#chromecookiesset}
 
 Sets or updates a cookie. Parameters: url (required), name, value, domain, path, secure, httpOnly, sameSite ("no_restriction" | "lax" | "strict" | "unspecified"), expirationDate, storeId.
 
@@ -62,7 +62,7 @@ chrome.cookies.set({
 });
 ```
 
-### chrome.cookies.remove
+### chrome.cookies.remove {#chromecookiesremove}
 
 Removes a cookie by name and URL.
 
@@ -70,7 +70,7 @@ Removes a cookie by name and URL.
 chrome.cookies.remove({ url: string, name: string, storeId?: string }, callback): void;
 ```
 
-### chrome.cookies.getAllCookieStores
+### chrome.cookies.getAllCookieStores {#chromecookiesgetallcookiestores}
 
 Returns all available cookie stores. IDs: "0" (default), "1" (incognito).
 
@@ -78,13 +78,13 @@ Returns all available cookie stores. IDs: "0" (default), "1" (incognito).
 chrome.cookies.getAllCookieStores(callback): void;
 ```
 
-## Cookie Object
+## Cookie Object {#cookie-object}
 
 Properties: name, value, domain, hostOnly, path, secure, httpOnly, sameSite, session, expirationDate, storeId.
 
-## Events
+## Events {#events}
 
-### chrome.cookies.onChanged
+### chrome.cookies.onChanged {#chromecookiesonchanged}
 
 Fires when a cookie is set or removed. Cause values: "evicted" | "expired" | "explicit" | "expired_overwrite" | "overwrite".
 
@@ -98,9 +98,9 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Get All Cookies for a Domain
+### Get All Cookies for a Domain {#get-all-cookies-for-a-domain}
 
 ```javascript
 chrome.cookies.getAll({ domain: "example.com" }, (cookies) => {
@@ -108,7 +108,7 @@ chrome.cookies.getAll({ domain: "example.com" }, (cookies) => {
 });
 ```
 
-### Set a Cookie
+### Set a Cookie {#set-a-cookie}
 
 ```javascript
 const expiry = Math.floor(Date.now() / 1000) + (24 * 60 * 60);
@@ -124,7 +124,7 @@ chrome.cookies.set({
 });
 ```
 
-### Delete All Cookies for a Site
+### Delete All Cookies for a Site {#delete-all-cookies-for-a-site}
 
 ```javascript
 chrome.cookies.getAll({ domain: domain }, (cookies) => {
@@ -134,7 +134,7 @@ chrome.cookies.getAll({ domain: domain }, (cookies) => {
 });
 ```
 
-### Monitor Cookie Changes
+### Monitor Cookie Changes {#monitor-cookie-changes}
 
 ```javascript
 chrome.cookies.onChanged.addListener((changeInfo) => {
@@ -144,7 +144,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookies API Guide](../guides/cookies-api.md)

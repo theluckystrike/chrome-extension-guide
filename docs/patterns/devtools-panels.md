@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # DevTools Panel Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions can extend the DevTools with custom panels, sidebar panes, and deep integration with the inspected page. This guide covers production patterns for building DevTools extensions: creating panels, communicating with the inspected page, watching network traffic, and persisting panel state.
 
@@ -15,7 +15,7 @@ Chrome extensions can extend the DevTools with custom panels, sidebar panes, and
 
 ---
 
-## Pattern 1: Creating a Custom DevTools Panel
+## Pattern 1: Creating a Custom DevTools Panel {#pattern-1-creating-a-custom-devtools-panel}
 
 Register a new top-level tab in DevTools:
 
@@ -67,7 +67,7 @@ async function refreshData() {
 
 ---
 
-## Pattern 2: DevTools Sidebar Pane for Elements Panel
+## Pattern 2: DevTools Sidebar Pane for Elements Panel {#pattern-2-devtools-sidebar-pane-for-elements-panel}
 
 Add a sidebar pane that updates when the user selects a DOM element:
 
@@ -129,7 +129,7 @@ function updateSidebarWithObject(
 
 ---
 
-## Pattern 3: Inspected Window Evaluation
+## Pattern 3: Inspected Window Evaluation {#pattern-3-inspected-window-evaluation}
 
 Execute code in the context of the inspected page. This is the primary way DevTools panels interact with page content:
 
@@ -207,7 +207,7 @@ async function evaluateInContentScript(expression: string) {
 
 ---
 
-## Pattern 4: DevTools to Background Communication
+## Pattern 4: DevTools to Background Communication {#pattern-4-devtools-to-background-communication}
 
 DevTools pages cannot use `chrome.runtime.onMessage` directly. Use a persistent connection:
 
@@ -305,7 +305,7 @@ window.addEventListener("message", (event) => {
 
 ---
 
-## Pattern 5: Network Request Inspection from DevTools
+## Pattern 5: Network Request Inspection from DevTools {#pattern-5-network-request-inspection-from-devtools}
 
 Capture and analyze HTTP traffic from the inspected tab:
 
@@ -396,7 +396,7 @@ function categorizeRequest(mimeType: string): string {
 
 ---
 
-## Pattern 6: Custom Panel with React/Framework Integration
+## Pattern 6: Custom Panel with React/Framework Integration {#pattern-6-custom-panel-with-reactframework-integration}
 
 Mount a React application inside a DevTools panel:
 
@@ -496,7 +496,7 @@ function MetricCard({ label, value }: { label: string; value: string | number })
 
 ---
 
-## Pattern 7: DevTools Panel State Persistence
+## Pattern 7: DevTools Panel State Persistence {#pattern-7-devtools-panel-state-persistence}
 
 Preserve panel state across DevTools close/reopen cycles using `chrome.storage.session`:
 
@@ -572,7 +572,7 @@ document.getElementById("tab-network")?.addEventListener("click", () => {
 
 ---
 
-## Pattern 8: Resource and Source Watching
+## Pattern 8: Resource and Source Watching {#pattern-8-resource-and-source-watching}
 
 Monitor resource changes and source file updates in the inspected page:
 
@@ -681,7 +681,7 @@ function formatTime(ts: number): string {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

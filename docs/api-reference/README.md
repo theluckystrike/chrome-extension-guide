@@ -19,6 +19,8 @@ Chrome Extension APIs are organized into several categories based on their funct
 
 ## Tab & Window Management
 
+## Tab & Window Management {#tab-window-management}
+
 - [Chrome Tabs API Reference](tabs-api.md) -- Create, modify, query, and rearrange browser tabs using the most heavily used Chrome extension API.
 - [Chrome Windows API Reference](windows-api.md) -- Create, modify, query, and monitor browser windows alongside the Tabs API.
 
@@ -39,6 +41,8 @@ Use the windows API when you need to:
 
 ## Data & Storage
 
+## Data & Storage {#data-storage}
+
 - [Chrome Bookmarks API Reference](bookmarks-api.md) -- Create, read, update, delete, search, and organize bookmarks in a tree structure.
 - [Chrome History API Reference](history-api.md) -- Search, read, add, and delete browser history entries and visit records.
 - [Chrome Downloads API Reference](downloads-api.md) -- Initiate, monitor, search, pause, resume, cancel, and manage file downloads.
@@ -56,6 +60,8 @@ Choose the appropriate storage type based on whether you need syncing, persisten
 
 ## Background & Scheduling
 
+## Background & Scheduling {#background-scheduling}
+
 - [Chrome Alarms API Reference](alarms-api.md) -- Schedule code to run periodically or at a specified time, the primary mechanism for reliable background work in MV3.
 - [Chrome Runtime API Reference](runtime-api.md) -- Core extension lifecycle management, messaging, and utility functions available to every extension.
 
@@ -64,6 +70,8 @@ Choose the appropriate storage type based on whether you need syncing, persisten
 In Manifest V3, background scripts are replaced by service workers. The alarms API becomes crucial for scheduling periodic tasks since service workers can be terminated by the browser when idle.
 
 ## User Interface
+
+## User Interface {#user-interface}
 
 - [Chrome Notifications API Reference](notifications-api.md) -- Create rich desktop notifications using templates that appear as system-level alerts outside the browser.
 - [Chrome Context Menus API Reference](context-menus-api.md) -- Add custom items to Chrome's right-click context menu for pages, links, images, and selections.
@@ -135,6 +143,8 @@ In MV3, use offscreen documents when you need to access clipboard APIs from serv
 APIs may behave differently across Chrome versions. Test your extension with stable, beta, and dev channels.
 
 ## See Also
+
+## See Also {#see-also}
 
 - [Permissions Reference](../permissions/) -- Detailed breakdown of each Chrome extension permission and its user-facing warnings.
 - [Guides](../guides/) -- Step-by-step tutorials for building Chrome extensions with MV3.

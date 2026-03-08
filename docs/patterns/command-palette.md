@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 The command palette pattern brings VS Code-style functionality to Chrome Extensions, combining keyboard shortcuts, fuzzy search, and quick actions into a unified interface that users love.
 
-## Overview
+## Overview {#overview}
 
 A command palette provides:
 - Quick access to all extension features via keyboard
@@ -19,7 +19,7 @@ A command palette provides:
 
 ---
 
-## Architecture
+## Architecture {#architecture}
 
 The command palette consists of three interconnected components:
 
@@ -44,7 +44,7 @@ The command palette consists of three interconnected components:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Component Responsibilities
+### Component Responsibilities {#component-responsibilities}
 
 | Component | Responsibility |
 |-----------|----------------|
@@ -54,7 +54,7 @@ The command palette consists of three interconnected components:
 
 ---
 
-## Pattern 1: Command Registry
+## Pattern 1: Command Registry {#pattern-1-command-registry}
 
 Define commands as objects with metadata for search and execution:
 
@@ -105,7 +105,7 @@ export function getCommands(): Command[] {
 
 ---
 
-## Pattern 2: Keyboard Trigger
+## Pattern 2: Keyboard Trigger {#pattern-2-keyboard-trigger}
 
 Use `chrome.commands` to define the palette shortcut in your manifest:
 
@@ -146,7 +146,7 @@ function showCommandPalette() {
 
 ---
 
-## Pattern 3: Palette UI with Shadow DOM
+## Pattern 3: Palette UI with Shadow DOM {#pattern-3-palette-ui-with-shadow-dom}
 
 Inject an isolated modal overlay using Shadow DOM for style encapsulation:
 
@@ -232,7 +232,7 @@ export function createPalette(commands: PaletteItem[]): HTMLElement {
 
 ---
 
-## Pattern 4: Fuzzy Search & Keyboard Navigation
+## Pattern 4: Fuzzy Search & Keyboard Navigation {#pattern-4-fuzzy-search-keyboard-navigation}
 
 Implement fuzzy filtering and keyboard-driven selection:
 
@@ -294,7 +294,7 @@ export function handleKeyboardNavigation(
 
 ---
 
-## Pattern 5: Action Execution
+## Pattern 5: Action Execution {#pattern-5-action-execution}
 
 Send selected command to service worker for execution:
 
@@ -328,7 +328,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Complete Integration
+## Complete Integration {#complete-integration}
 
 Putting it all together in your content script:
 
@@ -428,7 +428,7 @@ function closePalette() {
 
 ---
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. **Shadow DOM isolation** — Prevent page styles from affecting your palette
 2. **Fuzzy matching** — Use fuzzy search for forgiving input matching
@@ -440,7 +440,7 @@ function closePalette() {
 
 ---
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Keyboard Shortcuts API](/docs/patterns/keyboard-shortcuts-api) — Global shortcut configuration
 - [Commands Keyboard Shortcuts](/docs/guides/commands-keyboard-shortcuts.md) — Shortcut best practices

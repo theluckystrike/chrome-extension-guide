@@ -9,27 +9,27 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # contentSettings Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.contentSettings` API for controlling per-site content settings (cookies, JavaScript, images, popups, notifications, location, camera, microphone, etc.).
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["contentSettings"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## API Access
+## API Access {#api-access}
 Each content type is a `ContentSetting` object with methods:
 - `.get({ primaryUrl, secondaryUrl? })` — get current setting for a URL
 - `.set({ primaryPattern, secondaryPattern?, setting, scope? })` — set for a URL pattern
 - `.clear({})` — clear all custom settings (reset to defaults)
 - `.getResourceIdentifiers()` — (for plugins only) list resource identifiers
 
-## Content Types
+## Content Types {#content-types}
 | Property | Values | Description |
 |---|---|---|
 | `chrome.contentSettings.cookies` | allow, block, session_only | Cookie behavior |
@@ -44,7 +44,7 @@ Each content type is a `ContentSetting` object with methods:
 | `chrome.contentSettings.camera` | allow, block, ask | Camera access |
 | `chrome.contentSettings.automaticDownloads` | allow, block, ask | Multiple file downloads |
 
-## Basic Usage
+## Basic Usage {#basic-usage}
 ```typescript
 // Check JavaScript setting for a site
 const { setting } = await chrome.contentSettings.javascript.get({
@@ -71,7 +71,7 @@ await chrome.contentSettings.images.set({
 });
 ```
 
-## URL Pattern Format
+## URL Pattern Format {#url-pattern-format}
 ```
 scheme://host/path
 ```
@@ -80,7 +80,7 @@ scheme://host/path
 - `https://example.com/*` — specific origin
 - `<all_urls>` — all URLs
 
-## Privacy Control Pattern
+## Privacy Control Pattern {#privacy-control-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -104,7 +104,7 @@ m.onMessage('BLOCK_SITE', async ({ url, types }) => {
 });
 ```
 
-## Scope
+## Scope {#scope}
 ```typescript
 // Regular scope — applies to regular browsing
 await chrome.contentSettings.cookies.set({
@@ -121,23 +121,23 @@ await chrome.contentSettings.cookies.set({
 });
 ```
 
-## When to Use
+## When to Use {#when-to-use}
 - Privacy/security extensions (block trackers, control permissions)
 - Parental control extensions
 - Site-specific preference management
 - Cookie management tools
 - JavaScript blocker extensions
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If you need to block network requests — use `declarativeNetRequest`
 - If you need to modify page content — use content scripts
 - For temporary changes — these persist until cleared
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('contentSettings');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/permissions/cookies.md`, `docs/permissions/privacy.md`

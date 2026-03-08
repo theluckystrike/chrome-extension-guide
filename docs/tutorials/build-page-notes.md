@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Per-Page Notes Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 Chrome extension saving notes linked to pages with markdown support and full-text search. Notes associate with URLs, render markdown, search across all notes, and sync across devices.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -22,26 +22,26 @@ Chrome extension saving notes linked to pages with markdown support and full-tex
 }
 ```
 
-## Step 1: Side Panel UI
+## Step 1: Side Panel UI {#step-1-side-panel-ui}
 Open side panel on icon click.
 ```typescript
 chrome.sidePanel.setOptions({ path: 'sidepanel.html' });
 chrome.action.onClicked.addListener(async (tab) => await chrome.sidePanel.open({ tabId: tab.id }));
 ```
 
-## Step 2: Storage Schema
+## Step 2: Storage Schema {#step-2-storage-schema}
 Notes keyed by normalized URL with content, timestamp, and tags.
 ```typescript
 interface PageNote { url: string; content: string; tags: string[]; createdAt: number; updatedAt: number; }
 ```
 
-## Step 3: URL Normalization
+## Step 3: URL Normalization {#step-3-url-normalization}
 Strip query params and anchors for consistent keys.
 ```typescript
 function normalizeUrl(url: string): string { try { const u = new URL(url); return u.origin + u.pathname; } catch { return url; } }
 ```
 
-## Step 4: Auto-Save with Debounce
+## Step 4: Auto-Save with Debounce {#step-4-auto-save-with-debounce}
 ```typescript
 let saveTimeout: number;
 function debouncedSave(note: PageNote): void {
@@ -54,7 +54,7 @@ function debouncedSave(note: PageNote): void {
 }
 ```
 
-## Step 5: Markdown Preview Toggle
+## Step 5: Markdown Preview Toggle {#step-5-markdown-preview-toggle}
 Simple parser without eval.
 ```typescript
 function parseMarkdown(text: string): string {
@@ -64,13 +64,13 @@ function parseMarkdown(text: string): string {
 }
 ```
 
-## Step 6: Tags for Organization
+## Step 6: Tags for Organization {#step-6-tags-for-organization}
 ```typescript
 function addTag(note: PageNote, tag: string): PageNote { return note.tags.includes(tag) ? note : { ...note, tags: [...note.tags, tag] }; }
 function filterByTag(notes: PageNote[], tag: string): PageNote[] { return notes.filter(n => n.tags.includes(tag)); }
 ```
 
-## Step 7: Search Across All Notes
+## Step 7: Search Across All Notes {#step-7-search-across-all-notes}
 ```typescript
 async function searchNotes(query: string): Promise<PageNote[]> {
   const { pageNotes: notes = {} } = await chrome.storage.local.get('pageNotes');
@@ -79,7 +79,7 @@ async function searchNotes(query: string): Promise<PageNote[]> {
 }
 ```
 
-## Step 8: Note List View & Export
+## Step 8: Note List View & Export {#step-8-note-list-view-export}
 ```typescript
 async function getAllNotes(): Promise<PageNote[]> {
   const { pageNotes: notes = {} } = await chrome.storage.local.get('pageNotes');
@@ -96,10 +96,10 @@ function exportMarkdown(notes: PageNote[]): string { return notes.map(n => `# ${
 function exportJSON(notes: PageNote[]): string { return JSON.stringify(notes, null, 2); }
 ```
 
-## Sync Notes
+## Sync Notes {#sync-notes}
 Use `chrome.storage.sync` for cross-device sync (watch ~100KB quota): `await chrome.storage.sync.set({ pageNotes: notes });` or local for larger data.
 
-## Cross-references
+## Cross-references {#cross-references}
 - [api-reference/storage-api-deep-dive.md](../api-reference/storage-api-deep-dive.md)
 - [mv3/side-panel.md](../mv3/side-panel.md)
 - [patterns/throttle-debounce-extensions.md](../patterns/throttle-debounce-extensions.md)

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Chrome extension popups present a unique challenge: each time the user opens the popup, it starts fresh with no persistent DOM or JavaScript state from the previous session. This means every open requires loading data quickly to provide a smooth user experience.
 
-## The Core Challenge
+## The Core Challenge {#the-core-challenge}
 
 When a popup opens:
 - A new instance of the popup HTML/JS is created
@@ -17,7 +17,7 @@ When a popup opens:
 - Network requests add latency
 - Users expect near-instant rendering
 
-## Storage-First Pattern
+## Storage-First Pattern {#storage-first-pattern}
 
 Read from `chrome.storage.local` first, display immediately, then fetch fresh data in the background:
 
@@ -34,7 +34,7 @@ async function loadData() {
 }
 ```
 
-## Stale-While-Revalidate
+## Stale-While-Revalidate {#stale-while-revalidate}
 
 Show stale cached data while fetching fresh data in the background:
 
@@ -50,7 +50,7 @@ async function swrLoad(key, fetcher) {
 }
 ```
 
-## Skeleton Screens
+## Skeleton Screens {#skeleton-screens}
 
 Show a layout placeholder while loading to perceived performance:
 
@@ -66,7 +66,7 @@ function renderSkeleton() {
 }
 ```
 
-## Abort on Close
+## Abort on Close {#abort-on-close}
 
 Cancel pending requests when the popup closes using `AbortController`:
 
@@ -82,7 +82,7 @@ async function loadData() {
 }
 ```
 
-## Loading Priority
+## Loading Priority {#loading-priority}
 
 Load critical data first, defer secondary data:
 
@@ -99,7 +99,7 @@ async function loadAll() {
 }
 ```
 
-## Debounced Search
+## Debounced Search {#debounced-search}
 
 For search functionality, debounce requests:
 
@@ -111,7 +111,7 @@ searchInput.addEventListener('input', (e) => {
 });
 ```
 
-## Timeout Handling
+## Timeout Handling {#timeout-handling}
 
 Show an error if data doesn't load within a timeout:
 
@@ -129,7 +129,7 @@ async function loadWithTimeout(ms = 5000) {
 }
 ```
 
-## Empty States
+## Empty States {#empty-states}
 
 Provide friendly messages when no data is available:
 
@@ -144,7 +144,7 @@ function renderEmpty() {
 }
 ```
 
-## Error States
+## Error States {#error-states}
 
 Show meaningful errors when data unavailable:
 
@@ -159,7 +159,7 @@ function showError(message) {
 }
 ```
 
-## Pagination
+## Pagination {#pagination}
 
 Load data in pages for large lists:
 
@@ -175,7 +175,7 @@ async function loadPage(page = 1) {
 }
 ```
 
-## Background Prefetching
+## Background Prefetching {#background-prefetching}
 
 Use the service worker to prepare data before the popup opens:
 
@@ -193,7 +193,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## Best Practices Summary
+## Best Practices Summary {#best-practices-summary}
 
 1. **Always show cached data first** - Perceived performance matters
 2. **Background refresh** - Don't block UI on network requests
@@ -202,7 +202,7 @@ chrome.runtime.onConnect.addListener((port) => {
 5. **Abort stale requests** - Prevent memory leaks and wasted bandwidth
 6. **Debounce search** - Reduce unnecessary API calls
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Popup Communication Patterns](./popup-communication.md) - Message passing between popup and background
 - [Caching Strategies](./caching-strategies.md) - Advanced caching patterns

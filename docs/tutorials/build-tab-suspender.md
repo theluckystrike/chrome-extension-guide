@@ -6,18 +6,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Tab Suspender Extension — Full Tutorial
 
-## What We're Building
+## What We're Building {#what-were-building}
 - Automatically suspend inactive tabs to free memory
 - Uses `chrome.tabs.discard()`, `chrome.idle`, and `@theluckystrike/webext-storage`
 - Configurable whitelist and timeout settings
 - Badge showing suspended tab count
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
 - `npm install @theluckystrike/webext-storage`
 
-## Step 1: manifest.json
+## Step 1: manifest.json {#step-1-manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -30,7 +30,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 }
 ```
 
-## Step 2: Storage Schema
+## Step 2: Storage Schema {#step-2-storage-schema}
 Define the configuration schema for whitelist and timeout settings:
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -51,7 +51,7 @@ export const suspendedTabs = createStorage(defineSchema({
 }), 'local');
 ```
 
-## Step 3: Idle Detection
+## Step 3: Idle Detection {#step-3-idle-detection}
 Monitor user idle state and trigger tab suspension:
 ```typescript
 import { config, suspendedTabs } from './storage.js';
@@ -89,7 +89,7 @@ async function suspendInactiveTabs() {
 }
 ```
 
-## Step 4: Tab Count Threshold
+## Step 4: Tab Count Threshold {#step-4-tab-count-threshold}
 Auto-suspend when too many tabs are open:
 ```typescript
 chrome.tabs.onCreated.addListener(async () => {
@@ -102,7 +102,7 @@ chrome.tabs.onCreated.addListener(async () => {
 });
 ```
 
-## Step 5: Restore on Activation
+## Step 5: Restore on Activation {#step-5-restore-on-activation}
 Restore suspended tabs when users switch back:
 ```typescript
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
@@ -115,7 +115,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 });
 ```
 
-## Step 6: Badge Display
+## Step 6: Badge Display {#step-6-badge-display}
 Show suspended tab count in the extension badge:
 ```typescript
 async function updateBadge() {
@@ -127,7 +127,7 @@ async function updateBadge() {
 }
 ```
 
-## Step 7: Options Page
+## Step 7: Options Page {#step-7-options-page}
 Create `options.html` for user configuration:
 ```html
 <input type="number" id="timeout" min="5" max="60" value="5">
@@ -146,7 +146,7 @@ saveBtn.addEventListener('click', async () => {
 });
 ```
 
-## Step 8: Time-Based Suspension
+## Step 8: Time-Based Suspension {#step-8-time-based-suspension}
 Use alarms for periodic suspension checks:
 ```typescript
 chrome.alarms.create('checkIdle', { periodInMinutes: 1 });
@@ -161,21 +161,21 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Testing
+## Testing {#testing}
 - Load unpacked from `chrome://extensions`
 - Open 30+ tabs, wait for idle timeout
 - Verify badge shows suspended count
 - Click suspended tab to restore it
 - Test whitelist functionality
 
-## What You Learned
+## What You Learned {#what-you-learned}
 - `chrome.tabs.discard()` to unload tabs without closing
 - `chrome.idle` for inactivity detection
 - Persisting configuration with `@theluckystrike/webext-storage`
 - Badge updates for extension state
 - Tab restoration via `chrome.tabs.onActivated`
 
-## See Also
+## See Also {#see-also}
 - Cross-ref: `docs/permissions/tabs.md`
 - Cross-ref: `docs/patterns/tab-management.md`
 - Cross-ref: `docs/guides/memory-management.md`

@@ -7,29 +7,29 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishi
 
 # Chrome Extension Analytics
 
-## CWS Dashboard Metrics
+## CWS Dashboard Metrics {#cws-dashboard-metrics}
 - Daily/weekly installs and uninstalls
 - Active users (daily, weekly)
 - Ratings and reviews
 - Impressions (how many saw your listing)
 - Install conversion rate
 
-## Custom Analytics Options
+## Custom Analytics Options {#custom-analytics-options}
 - Google Analytics 4 (GA4) — most common, works in extension pages
 - Plausible Analytics — privacy-focused, no cookies
 - Custom backend — full control, POST events to your API
 - All require user consent (GDPR, CCPA)
 
-## Implementing Analytics
+## Implementing Analytics {#implementing-analytics}
 
-### In Popup/Options Pages
+### In Popup/Options Pages {#in-popupoptions-pages}
 ```html
 <!-- GA4 in popup.html -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
 ```
 - NOTE: MV3 CSP may block external scripts — use Measurement Protocol instead
 
-### Measurement Protocol (Server-Side)
+### Measurement Protocol (Server-Side) {#measurement-protocol-server-side}
 ```javascript
 // background.js — send events without external scripts
 async function trackEvent(name, params = {}) {
@@ -46,7 +46,7 @@ async function trackEvent(name, params = {}) {
 }
 ```
 
-### Consent Pattern
+### Consent Pattern {#consent-pattern}
 ```typescript
 const storage = createStorage(defineSchema({
   analyticsConsent: 'boolean',
@@ -61,14 +61,14 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-## What to Track
+## What to Track {#what-to-track}
 - Feature usage (which features are used most)
 - Errors and crashes (cross-ref: `docs/publishing/beta-testing.md`)
 - Extension lifecycle (install, update, uninstall)
 - User flow (onboarding completion rate)
 - Performance metrics (popup load time, message latency)
 
-## Privacy Best Practices
+## Privacy Best Practices {#privacy-best-practices}
 - Always get explicit consent before tracking
 - Store consent preference with `@theluckystrike/webext-storage`
 - No PII (email, IP, browsing history)
@@ -78,7 +78,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 - GDPR: consent must be opt-in, not opt-out
 - Include analytics disclosure in CWS privacy practices
 
-## Uninstall Tracking
+## Uninstall Tracking {#uninstall-tracking}
 ```javascript
 chrome.runtime.setUninstallURL('https://yoursite.com/uninstall-survey?id=XXX');
 ```
@@ -86,7 +86,7 @@ chrome.runtime.setUninstallURL('https://yoursite.com/uninstall-survey?id=XXX');
 - Keep survey short (1-2 questions)
 - Don't track without consent even here
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Loading external analytics scripts blocked by MV3 CSP — use Measurement Protocol
 - Tracking without consent — violates CWS policy and GDPR
 - Collecting PII — even accidentally (URLs can contain PII)

@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Cross-Context State Management
 
-## The Core Challenge
+## The Core Challenge {#the-core-challenge}
 
 Chrome extensions run multiple isolated JavaScript environments: background service workers, content scripts, popups, options pages, and side panels. Each context has its own memory space and lifecycle. A popup closing destroys its state. A service worker can terminate and restart at any time. Nothing is shared by default.
 
@@ -15,7 +15,7 @@ This guide covers patterns for managing state reliably across these boundaries.
 
 ---
 
-## Pattern 1: Storage as Single Source of Truth
+## Pattern 1: Storage as Single Source of Truth {#pattern-1-storage-as-single-source-of-truth}
 
 Use `chrome.storage.local` as the persistent backbone. Every context reads from and writes to storage, with `onChanged` listeners to react to updates:
 
@@ -65,7 +65,7 @@ export const store = new CrossContextStore();
 
 ---
 
-## Pattern 2: Ephemeral State with chrome.storage.session
+## Pattern 2: Ephemeral State with chrome.storage.session {#pattern-2-ephemeral-state-with-chromestoragesession}
 
 For data that should only live as long as the browser session (or until all extension contexts close), use `chrome.storage.session`:
 
@@ -82,7 +82,7 @@ chrome.storage.session.get('authToken', (result) => {
 
 ---
 
-## Pattern 3: Port-Based Live Connections
+## Pattern 3: Port-Based Live Connections {#pattern-3-port-based-live-connections}
 
 For real-time, low-latency communication between contexts, use `chrome.runtime.connect`:
 
@@ -109,7 +109,7 @@ export function notifyTabStateChange(tabId: number, state: SharedState) {
 
 ---
 
-## Pattern 4: Debounced Storage Writes
+## Pattern 4: Debounced Storage Writes {#pattern-4-debounced-storage-writes}
 
 Avoid hammering storage on every keystroke. Debounce writes:
 
@@ -135,7 +135,7 @@ document.getElementById('theme')?.addEventListener('input', (e) => {
 
 ---
 
-## Pattern 5: Conflict Resolution
+## Pattern 5: Conflict Resolution {#pattern-5-conflict-resolution}
 
 When multiple contexts write simultaneously, last-write-wins by default. For complex scenarios, implement version vectors or timestamps:
 
@@ -166,7 +166,7 @@ async function writeWithVersion<T>(key: string, data: T, source: string): Promis
 
 ---
 
-## Architecture: Centralized vs Distributed
+## Architecture: Centralized vs Distributed {#architecture-centralized-vs-distributed}
 
 | Approach | Pros | Cons |
 |----------|------|------|
@@ -177,7 +177,7 @@ The **storage-backed pub/sub** pattern (Pattern 1) provides a middle ground: sto
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [State Management Patterns](../patterns/state-management.md) — General state patterns
 - [Message Passing Patterns Reference](../reference/message-passing-patterns.md) — One-time and port-based messaging

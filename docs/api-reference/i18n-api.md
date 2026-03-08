@@ -9,13 +9,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.i18n` API provides internationalization support for Chrome Extensions without requiring permissions.
 
-## Overview
+## Overview {#overview}
 
 - **Permission**: None - always available in all extension contexts
 - **Manifest**: `default_locale` required in manifest.json
 - **Available In**: Service worker, content scripts, popup, options page
 
-## Message Files
+## Message Files {#message-files}
 
 Location: `_locales/{locale}/messages.json`
 
@@ -34,9 +34,9 @@ Location: `_locales/{locale}/messages.json`
 
 **Manifest:** `{ "default_locale": "en", "name": "__MSG_extensionName__" }`
 
-## API Methods
+## API Methods {#api-methods}
 
-### chrome.i18n.getMessage(messageName, substitutions?)
+### chrome.i18n.getMessage(messageName, substitutions?) {#chromei18ngetmessagemessagename-substitutions}
 
 Returns localized string from messages.json.
 
@@ -49,7 +49,7 @@ chrome.i18n.getMessage("greetingMessage", "John");   // "Hello, John!"
 - `substitutions`: Optional string/array for $1, $2... placeholders
 - Returns: Translated string or empty string if not found
 
-### chrome.i18n.getUILanguage()
+### chrome.i18n.getUILanguage() {#chromei18ngetuilanguage}
 
 Returns browser UI language (e.g., "en-US", "es").
 
@@ -57,7 +57,7 @@ Returns browser UI language (e.g., "en-US", "es").
 const uiLang = chrome.i18n.getUILanguage();
 ```
 
-### chrome.i18n.getAcceptLanguages(callback)
+### chrome.i18n.getAcceptLanguages(callback) {#chromei18ngetacceptlanguagescallback}
 
 Returns user's preferred languages array.
 
@@ -66,7 +66,7 @@ chrome.i18n.getAcceptLanguages((langs) => console.log(langs));
 // ["en-US", "es", "fr"]
 ```
 
-### chrome.i18n.detectLanguage(text, callback)
+### chrome.i18n.detectLanguage(text, callback) {#chromei18ndetectlanguagetext-callback}
 
 Detects language of text using CLD.
 
@@ -77,7 +77,7 @@ chrome.i18n.detectLanguage("Hello world", (result) => {
 });
 ```
 
-## Predefined Messages (@@)
+## Predefined Messages (@@) {#predefined-messages}
 
 Built-in messages (no definition needed):
 
@@ -94,7 +94,7 @@ Built-in messages (no definition needed):
 document.documentElement.dir = chrome.i18n.getMessage("@@bidi_dir");
 ```
 
-## Using in Manifest
+## Using in Manifest {#using-in-manifest}
 
 Use `__MSG_*__` syntax for name, description, action.default_title, etc.
 
@@ -105,13 +105,13 @@ Use `__MSG_*__` syntax for name, description, action.default_title, etc.
 }
 ```
 
-## Locale Fallback
+## Locale Fallback {#locale-fallback}
 
 Search order: exact locale → language only → default_locale
 
 Example: `pt_BR → pt → en → (fallback)` when default_locale is "en"
 
-## Code Examples
+## Code Examples {#code-examples}
 
 **Basic message:**
 ```javascript
@@ -129,12 +129,12 @@ chrome.i18n.detectLanguage(text, (r) => console.log(r.languages));
 document.documentElement.dir = chrome.i18n.getMessage("@@bidi_dir");
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [MV3 Internationalization](./mv3/internationalization.md)
 - [Internationalization Guide](../guides/internationalization.md)
 - [Advanced i18n Patterns](../patterns/advanced-i18n.md)
 
-## See Also
+## See Also {#see-also}
 
 - [Chrome i18n Docs](https://developer.chrome.com/docs/extensions/i18n)

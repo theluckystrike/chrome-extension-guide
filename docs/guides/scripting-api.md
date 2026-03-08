@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 ---
 # Scripting API Guide
 
-## Overview
+## Overview {#overview}
 
 The Chrome Extension Scripting API (`chrome.scripting`) is a powerful API introduced in Manifest V3 that provides fine-grained control over content script injection, CSS manipulation, and dynamic script registration. It replaces many of the capabilities that were previously handled by the Tabs API in Manifest V2.
 
@@ -16,7 +16,7 @@ The Scripting API is essential for extensions that need to:
 - Register content scripts at runtime based on conditions
 - Work with different execution worlds (MAIN vs ISOLATED)
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 To use the Scripting API, you must declare the `"scripting"` permission in your manifest.json:
 
@@ -37,11 +37,11 @@ To use the Scripting API, you must declare the `"scripting"` permission in your 
 
 The `"scripting"` permission is required for all Scripting API methods. Additionally, you'll often need either `"activeTab"` (for user-invoked actions) or host permissions (like `"<all_urls>"`) to target specific pages.
 
-## ExecuteScript Basics
+## ExecuteScript Basics {#executescript-basics}
 
 The `chrome.scripting.executeScript()` method injects JavaScript code into a page. This is the primary method for programmatically running content scripts.
 
-### Basic Syntax
+### Basic Syntax {#basic-syntax}
 
 ```javascript
 chrome.scripting.executeScript(
@@ -61,7 +61,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Injecting Files
+### Injecting Files {#injecting-files}
 
 You can inject an external JavaScript file instead of inline code:
 
@@ -77,7 +77,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Return Values
+### Return Values {#return-values}
 
 The executeScript method returns the results of the injected function for each frame:
 
@@ -103,11 +103,11 @@ chrome.scripting.executeScript(
 );
 ```
 
-## Injecting CSS
+## Injecting CSS {#injecting-css}
 
 The Scripting API provides methods for dynamically manipulating CSS in web pages.
 
-### insertCSS
+### insertCSS {#insertcss}
 
 Insert CSS into a page to style its content:
 
@@ -143,7 +143,7 @@ chrome.scripting.insertCSS(
 );
 ```
 
-### removeCSS
+### removeCSS {#removecss}
 
 Remove previously injected CSS:
 
@@ -182,11 +182,11 @@ async function removeHighlight(tabId) {
 }
 ```
 
-## Dynamic Content Script Registration
+## Dynamic Content Script Registration {#dynamic-content-script-registration}
 
 The `chrome.scripting.registerContentScripts()` method allows you to register content scripts programmatically at runtime, without requiring them to be declared in the manifest.
 
-### Registering Scripts
+### Registering Scripts {#registering-scripts}
 
 ```javascript
 chrome.scripting.registerContentScripts([
@@ -204,7 +204,7 @@ chrome.scripting.registerContentScripts([
 });
 ```
 
-### Script Registration Options
+### Script Registration Options {#script-registration-options}
 
 The registration object supports several options:
 
@@ -233,7 +233,7 @@ chrome.scripting.registerContentScripts([
 ]);
 ```
 
-### Managing Registered Scripts
+### Managing Registered Scripts {#managing-registered-scripts}
 
 You can get and unregister content scripts:
 
@@ -250,11 +250,11 @@ chrome.scripting.unregisterContentScripts({ ids: ['my-script'] });
 chrome.scripting.unregisterContentScripts();
 ```
 
-## World Isolation: MAIN vs ISOLATED
+## World Isolation: MAIN vs ISOLATED {#world-isolation-main-vs-isolated}
 
 Chrome extensions execute content scripts in one of two JavaScript worlds:
 
-### ISOLATED World (Default)
+### ISOLATED World (Default) {#isolated-world-default}
 
 Content scripts run in the Isolated World, separate from the page's JavaScript:
 
@@ -277,7 +277,7 @@ chrome.scripting.executeScript(
 // Page JavaScript cannot access myExtensionVar
 ```
 
-### MAIN World
+### MAIN World {#main-world}
 
 The MAIN world shares the page's JavaScript context:
 
@@ -300,7 +300,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### When to Use MAIN World
+### When to Use MAIN World {#when-to-use-main-world}
 
 Use the MAIN world when you need to:
 - Interact with page's JavaScript frameworks (React, Angular, Vue)
@@ -308,18 +308,18 @@ Use the MAIN world when you need to:
 - Call page-defined functions
 - Work with page's SPA router state
 
-### When to Use ISOLATED World
+### When to Use ISOLATED World {#when-to-use-isolated-world}
 
 Use the ISOLATED world (default) when:
 - Avoiding conflicts with page JavaScript
 - Security is a concern (isolation protects against page JS accessing extension code)
 - Working primarily with DOM manipulation
 
-## Targeting Specific Tabs and Frames
+## Targeting Specific Tabs and Frames {#targeting-specific-tabs-and-frames}
 
 The Scripting API allows precise targeting of where code should execute.
 
-### Targeting Specific Tabs
+### Targeting Specific Tabs {#targeting-specific-tabs}
 
 ```javascript
 // Get the active tab and inject
@@ -338,7 +338,7 @@ async function injectIntoActiveTab() {
 }
 ```
 
-### Targeting Specific Frames
+### Targeting Specific Frames {#targeting-specific-frames}
 
 ```javascript
 // Inject only into a specific frame by frameId
@@ -358,7 +358,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Finding Frame IDs
+### Finding Frame IDs {#finding-frame-ids}
 
 To find frame IDs, you can use the debugging API:
 
@@ -387,11 +387,11 @@ chrome.scripting.executeScript(
 );
 ```
 
-## MV3 Migration from chrome.tabs.executeScript
+## MV3 Migration from chrome.tabs.executeScript {#mv3-migration-from-chrometabsexecutescript}
 
 If you're migrating from Manifest V2, here's how to convert your code:
 
-### MV2 Code
+### MV2 Code {#mv2-code}
 
 ```javascript
 // Manifest V2 - chrome.tabs.executeScript
@@ -408,7 +408,7 @@ chrome.tabs.executeScript(
 );
 ```
 
-### MV3 Equivalent
+### MV3 Equivalent {#mv3-equivalent}
 
 ```javascript
 // Manifest V3 - chrome.scripting.executeScript
@@ -432,7 +432,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Permission Changes
+### Permission Changes {#permission-changes}
 
 | MV2 Permission | MV3 Permission |
 |---------------|----------------|
@@ -440,14 +440,14 @@ chrome.scripting.executeScript(
 | `"<all_urls>"` | `"host_permissions": ["<all_urls>"]` |
 | Automatic on page load | Must use `registerContentScripts` or inject on demand |
 
-### Key Differences
+### Key Differences {#key-differences}
 
 1. **Permissions**: MV3 requires explicit host permissions for each site
 2. **Promise-based**: MV3 supports promises (can use async/await)
 3. **World option**: MV3 adds the `world` option for MAIN/ISOLATED choice
 4. **No more automatic injection**: Use `registerContentScripts` for automatic loading
 
-### Full Migration Example
+### Full Migration Example {#full-migration-example}
 
 ```javascript
 // MV2 Background Script
@@ -480,7 +480,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 });
 ```
 
-## Error Handling
+## Error Handling {#error-handling}
 
 Proper error handling is crucial when working with the Scripting API:
 
@@ -527,7 +527,7 @@ Common errors include:
 - `"Permission denied"` - Host permission missing
 - `"Frame not found"` - Frame was destroyed before injection
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. **Use activeTab when possible**: This grants temporary access to the active tab without broad host permissions
 
@@ -556,7 +556,7 @@ Common errors include:
 
 7. **Use world appropriately**: Only use MAIN world when necessary, as it can expose extension code to page scripts
 
-## Summary
+## Summary {#summary}
 
 The Scripting API is essential for Manifest V3 extensions that need to:
 - Programmatically inject JavaScript or CSS into web pages
@@ -566,7 +566,7 @@ The Scripting API is essential for Manifest V3 extensions that need to:
 
 Understanding the differences between ISOLATED and MAIN worlds, proper error handling, and the migration path from Manifest V2 will help you build robust and secure extensions.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Scripting API Reference](../api-reference/scripting-api.md)
 - [Content Script Injection](../patterns/content-script-injection.md)

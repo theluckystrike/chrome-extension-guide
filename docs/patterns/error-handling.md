@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Error Handling Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions run code across multiple contexts — background service workers, content scripts, popup pages, and options pages. An unhandled error in one context can silently break functionality without any visible feedback. This guide covers practical patterns for catching, typing, isolating, retrying, and reporting errors across every extension context.
 
 ---
 
-## The Error Landscape
+## The Error Landscape {#the-error-landscape}
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -41,7 +41,7 @@ Each context has its own global scope, its own error events, and its own failure
 
 ---
 
-## Pattern 1: Centralized Error Handler
+## Pattern 1: Centralized Error Handler {#pattern-1-centralized-error-handler}
 
 Create a single error handler module that works in every context:
 
@@ -156,7 +156,7 @@ window.addEventListener("error", (event) => {
 
 ---
 
-## Pattern 2: Typed Error Classes
+## Pattern 2: Typed Error Classes {#pattern-2-typed-error-classes}
 
 Define extension-specific error types so catch blocks can make intelligent decisions:
 
@@ -275,7 +275,7 @@ async function fetchData(url: string): Promise<unknown> {
 
 ---
 
-## Pattern 3: Graceful Degradation for Missing Permissions
+## Pattern 3: Graceful Degradation for Missing Permissions {#pattern-3-graceful-degradation-for-missing-permissions}
 
 Optional permissions can be revoked at any time. Always check before using gated APIs:
 
@@ -360,7 +360,7 @@ chrome.permissions.onAdded.addListener((permissions) => {
 
 ---
 
-## Pattern 4: Retry with Exponential Backoff
+## Pattern 4: Retry with Exponential Backoff {#pattern-4-retry-with-exponential-backoff}
 
 Network calls from extensions fail often — the user might be offline, the API might be rate-limiting, or the service worker might wake mid-request:
 
@@ -456,7 +456,7 @@ async function callExternalApi(endpoint: string): Promise<unknown> {
 
 ---
 
-## Pattern 5: Error Boundaries for Extension UI
+## Pattern 5: Error Boundaries for Extension UI {#pattern-5-error-boundaries-for-extension-ui}
 
 Popup and options pages built with frameworks need error boundaries to avoid a blank white page:
 
@@ -571,7 +571,7 @@ export function App() {
 
 ---
 
-## Pattern 6: Content Script Error Isolation
+## Pattern 6: Content Script Error Isolation {#pattern-6-content-script-error-isolation}
 
 Content scripts share the page's DOM. An uncaught exception can break page functionality or leak extension internals. Wrap all content script entry points:
 
@@ -672,7 +672,7 @@ main();
 
 ---
 
-## Pattern 7: Logging and Error Reporting Pipeline
+## Pattern 7: Logging and Error Reporting Pipeline {#pattern-7-logging-and-error-reporting-pipeline}
 
 Build a pipeline that captures errors across all contexts and periodically ships them:
 
@@ -820,7 +820,7 @@ async function displayErrorLog(): Promise<void> {
 
 ---
 
-## Pattern 8: chrome.runtime.lastError Handling
+## Pattern 8: chrome.runtime.lastError Handling {#pattern-8-chromeruntimelasterror-handling}
 
 Many Chrome APIs use `chrome.runtime.lastError` instead of throwing. Failing to check it produces "Unchecked runtime.lastError" console warnings and silently swallows errors:
 
@@ -946,7 +946,7 @@ export async function broadcastMessage(message: unknown): Promise<void> {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

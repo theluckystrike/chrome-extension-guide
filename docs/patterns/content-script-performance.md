@@ -7,11 +7,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Content Script Performance Optimization
 
-## Overview
+## Overview {#overview}
 
 Content scripts directly impact page load performance and user experience. Optimizing their initialization and runtime behavior is critical for maintaining fast page loads and responsive extension functionality.
 
-## Minimizing Initial Load Impact
+## Minimizing Initial Load Impact {#minimizing-initial-load-impact}
 
 Content scripts block page rendering if loaded at `document_start`. Use `document_idle` for non-critical functionality:
 
@@ -27,7 +27,7 @@ Content scripts block page rendering if loaded at `document_start`. Use `documen
 
 For critical features needing early injection, defer non-essential initialization using `requestIdleCallback`.
 
-## Deferred Initialization Pattern
+## Deferred Initialization Pattern {#deferred-initialization-pattern}
 
 Defer expensive operations until the page has settled:
 
@@ -51,7 +51,7 @@ function initializeFeatures() {
 initContentScript();
 ```
 
-## Efficient DOM Querying
+## Efficient DOM Querying {#efficient-dom-querying}
 
 Cache DOM queries and avoid repeated searches:
 
@@ -71,7 +71,7 @@ const container = document.getElementById('extension-root');
 const button = container.querySelector('.action-btn');
 ```
 
-## Intersection Observer for Lazy DOM Operations
+## Intersection Observer for Lazy DOM Operations {#intersection-observer-for-lazy-dom-operations}
 
 Defer DOM manipulation until elements are visible:
 
@@ -88,7 +88,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.lazy-load').forEach(el => observer.observe(el));
 ```
 
-## MutationObserver Performance
+## MutationObserver Performance {#mutationobserver-performance}
 
 Use targeted observation instead of monitoring entire subtrees:
 
@@ -112,7 +112,7 @@ Disconnect observers when no longer needed to prevent memory leaks:
 observer.disconnect();
 ```
 
-## Avoiding Layout Thrashing
+## Avoiding Layout Thrashing {#avoiding-layout-thrashing}
 
 Read layout properties together, then write together:
 
@@ -128,7 +128,7 @@ const heights = elements.map(el => el.offsetHeight); // All READS
 elements.forEach((el, i) => el.style.height = heights[i] + 'px'); // All WRITES
 ```
 
-## CSS Containment for Injected UI
+## CSS Containment for Injected UI {#css-containment-for-injected-ui}
 
 Use CSS containment to isolate extension UI from page reflows:
 
@@ -139,7 +139,7 @@ Use CSS containment to isolate extension UI from page reflows:
 }
 ```
 
-## Message Batching
+## Message Batching {#message-batching}
 
 Reduce IPC overhead by batching messages:
 
@@ -168,7 +168,7 @@ function flushMessages() {
 }
 ```
 
-## Memory Leak Prevention
+## Memory Leak Prevention {#memory-leak-prevention}
 
 Always clean up observers, listeners, and timers:
 
@@ -204,7 +204,7 @@ class ContentFeature {
 }
 ```
 
-## Script Injection Timing Tradeoffs
+## Script Injection Timing Tradeoffs {#script-injection-timing-tradeoffs}
 
 | Timing | Use Case | Tradeoff |
 |--------|----------|----------|
@@ -212,7 +212,7 @@ class ContentFeature {
 | `document_end` | DOM ready, no layout yet | Fast but limited access |
 | `document_idle` | Most features | Best balance, but delayed |
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [DOM Observer Patterns](./dom-observer-patterns.md) - Advanced observer configurations
 - [Content Script Lifecycle](./content-script-lifecycle.md) - Initialization and cleanup

@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Service Worker Keep-Alive Patterns
 
-## Understanding MV3 Service Worker Lifecycle
+## Understanding MV3 Service Worker Lifecycle {#understanding-mv3-service-worker-lifecycle}
 
 Chrome's Manifest V3 service workers have strict lifetime limits:
 - **30 seconds** idle timeout (auto-terminates after 30s of inactivity)
@@ -15,9 +15,9 @@ Chrome's Manifest V3 service workers have strict lifetime limits:
 
 This differs significantly from MV2 background pages which could run indefinitely.
 
-## Legitimate Keep-Alive Patterns
+## Legitimate Keep-Alive Patterns {#legitimate-keep-alive-patterns}
 
-### 1. Active Port Connections
+### 1. Active Port Connections {#1-active-port-connections}
 
 The most reliable way to keep a service worker alive is through active port connections:
 
@@ -34,7 +34,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### 2. Alarm-Based Periodic Tasks
+### 2. Alarm-Based Periodic Tasks {#2-alarm-based-periodic-tasks}
 
 For scheduled background work, use chrome.alarms API:
 
@@ -52,7 +52,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### 3. Offscreen Documents
+### 3. Offscreen Documents {#3-offscreen-documents}
 
 For truly persistent work requiring long-running operations:
 
@@ -65,13 +65,13 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-## Anti-Patterns to Avoid
+## Anti-Patterns to Avoid {#anti-patterns-to-avoid}
 
 - **setInterval pings**: Unreliable and may be ignored by Chrome
 - **nativeMessaging keepalive**: Considered abusive usage
 - **Infinite promise chains**: Poor practice, harms ecosystem
 
-## When to Use Keep-Alive vs Event-Driven Design
+## When to Use Keep-Alive vs Event-Driven Design {#when-to-use-keep-alive-vs-event-driven-design}
 
 **Use keep-alive when:**
 - User has an open popup interacting with the extension
@@ -83,18 +83,18 @@ await chrome.offscreen.createDocument({
 - Data processing can be chunked into smaller tasks
 - Notifications or other push-based interactions suffice
 
-## Chrome's Reasoning
+## Chrome's Reasoning {#chromes-reasoning}
 
 These limits exist for good reasons:
 - Battery life preservation on mobile and laptop
 - Reduced memory usage across extensions
 - Ecosystem health and stability
 
-## Testing and Debugging
+## Testing and Debugging {#testing-and-debugging}
 
 Monitor service worker lifecycle at: `chrome://serviceworker-internals`
 
-## Graceful Shutdown Pattern
+## Graceful Shutdown Pattern {#graceful-shutdown-pattern}
 
 Always save state before termination:
 
@@ -107,7 +107,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)

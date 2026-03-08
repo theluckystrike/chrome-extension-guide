@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # End-to-End Testing Chrome Extensions with Playwright
 
-## Overview
+## Overview {#overview}
 Playwright provides powerful E2E testing capabilities for Chrome extensions. Unlike Puppeteer, Playwright offers better cross-browser support and improved API for handling extension contexts.
 
-## Setup: Launching Chromium with Extension
+## Setup: Launching Chromium with Extension {#setup-launching-chromium-with-extension}
 
 Playwright can launch Chromium with your extension loaded using browser context arguments:
 
@@ -28,7 +28,7 @@ async function launchWithExtension(extensionPath: string) {
 }
 ```
 
-## Getting Extension ID Programmatically
+## Getting Extension ID Programmatically {#getting-extension-id-programmatically}
 
 To access extension pages, you need the extension ID. Get it from the service worker URL:
 
@@ -42,7 +42,7 @@ async function getExtensionId(browser: Browser): Promise<string> {
 }
 ```
 
-## Testing Popup Pages
+## Testing Popup Pages {#testing-popup-pages}
 
 Open the popup directly using the extension URL format:
 
@@ -63,7 +63,7 @@ test("popup displays current state", async ({ browser }) => {
 });
 ```
 
-## Testing Content Scripts
+## Testing Content Scripts {#testing-content-scripts}
 
 Navigate to a target page and verify injected elements:
 
@@ -84,7 +84,7 @@ test("content script injects elements", async ({ page }) => {
 });
 ```
 
-## Testing Background/Service Worker
+## Testing Background/Service Worker {#testing-backgroundservice-worker}
 
 Evaluate code directly in the service worker context:
 
@@ -110,7 +110,7 @@ test("background script handles messages", async ({ browser }) => {
 });
 ```
 
-## Testing Options Page
+## Testing Options Page {#testing-options-page}
 
 Navigate to and interact with the options page:
 
@@ -130,7 +130,7 @@ test("options page saves settings", async ({ browser }) => {
 });
 ```
 
-## Extension Test Fixture
+## Extension Test Fixture {#extension-test-fixture}
 
 Create a reusable fixture for cleaner tests:
 
@@ -147,7 +147,7 @@ export const test = base.extend({
 });
 ```
 
-## CI Setup
+## CI Setup {#ci-setup}
 
 Extensions require headful mode. Use xvfb on Linux:
 
@@ -163,19 +163,19 @@ jobs:
           CI: "true"
 ```
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
 - **Extension not loaded**: Ensure `--disable-extensions-except` and `--load-extension` are both set
 - **Wrong extension ID**: ID changes between builds; always fetch dynamically
 - **Timing issues**: Wait for extension to initialize before testing
 - **Service worker termination**: Use `--disable-backgrounding-occluded-windows` to prevent sleep
 
-## Related Guides
+## Related Guides {#related-guides}
 - [Testing Extensions](testing-extensions.md)
 - [CI/CD Pipeline](ci-cd-pipeline.md)
 - [Chrome Extension Testing Strategies](chrome-extension-testing-strategies.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)

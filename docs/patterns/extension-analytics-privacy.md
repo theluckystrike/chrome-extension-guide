@@ -9,9 +9,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers how to implement analytics in Chrome extensions while respecting user privacy and complying with platform policies.
 
-## Core Principles
+## Core Principles {#core-principles}
 
-### Anonymized Usage Tracking
+### Anonymized Usage Tracking {#anonymized-usage-tracking}
 
 Never collect personally identifiable information (PII). Use hashed identifiers that cannot be reversed to trace back to specific users:
 
@@ -36,7 +36,7 @@ async function sha256(message) {
 }
 ```
 
-### Event-Based Analytics
+### Event-Based Analytics {#event-based-analytics}
 
 Track feature usage rather than user behavior. Focus on aggregate metrics:
 
@@ -60,7 +60,7 @@ function trackEvent(category, action, label = null) {
 }
 ```
 
-### Local-First Analytics
+### Local-First Analytics {#local-first-analytics}
 
 Aggregate data locally before sending to reduce privacy exposure:
 
@@ -98,9 +98,9 @@ class LocalAggregator {
 }
 ```
 
-## Consent Management
+## Consent Management {#consent-management}
 
-### Opt-In Consent
+### Opt-In Consent {#opt-in-consent}
 
 Always ask before collecting any data. Make opt-out easy:
 
@@ -132,7 +132,7 @@ class ConsentManager {
 }
 ```
 
-### Session Tracking Without Cookies
+### Session Tracking Without Cookies {#session-tracking-without-cookies}
 
 Use `chrome.storage.session` for ephemeral session tracking:
 
@@ -147,7 +147,7 @@ async function getSessionId() {
 }
 ```
 
-## Self-Hosted Analytics Alternatives
+## Self-Hosted Analytics Alternatives {#self-hosted-analytics-alternatives}
 
 Consider privacy-focused analytics platforms:
 
@@ -158,7 +158,7 @@ Consider privacy-focused analytics platforms:
 | Ackee | Yes | Node.js, GDPR ready | Limited |
 | Fathom | Yes | Cookie-free | Yes |
 
-### Using Measurement Protocol
+### Using Measurement Protocol {#using-measurement-protocol}
 
 Send events server-side without client-side scripts:
 
@@ -180,9 +180,9 @@ async function sendMeasurementProtocol events(events, clientId) {
 }
 ```
 
-## GDPR/CCPA Compliance
+## GDPR/CCPA Compliance {#gdprccpa-compliance}
 
-### Consent Banner
+### Consent Banner {#consent-banner}
 
 ```html
 <div id="privacy-consent" class="consent-banner">
@@ -193,7 +193,7 @@ async function sendMeasurementProtocol events(events, clientId) {
 </div>
 ```
 
-### Data Deletion Endpoint
+### Data Deletion Endpoint {#data-deletion-endpoint}
 
 Provide users ability to request data deletion:
 
@@ -208,9 +208,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Chrome Web Store Compliance
+## Chrome Web Store Compliance {#chrome-web-store-compliance}
 
-### Accurate Privacy Disclosure
+### Accurate Privacy Disclosure {#accurate-privacy-disclosure}
 
 In your CWS listing, accurately describe data collection:
 
@@ -218,7 +218,7 @@ In your CWS listing, accurately describe data collection:
 - **Encryption**: How data is protected in transit
 - **Third Parties**: Any analytics providers used
 
-### Avoiding Rejection
+### Avoiding Rejection {#avoiding-rejection}
 
 Common CWS review failures related to analytics:
 
@@ -227,7 +227,7 @@ Common CWS review failures related to analytics:
 3. **PII collection** - Never collect emails, names, or identifiable data
 4. **Overly broad permissions** - Don't use analytics as justification for excessive permissions
 
-## Extension-Specific Metrics
+## Extension-Specific Metrics {#extension-specific-metrics}
 
 Track metrics meaningful to extensions:
 
@@ -240,7 +240,7 @@ Track metrics meaningful to extensions:
 | Version adoption | How quickly users upgrade |
 | Installation source | How users found your extension |
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Publishing Guide](../publishing/analytics.md)
 - [Analytics & Telemetry Patterns](./analytics-telemetry.md)

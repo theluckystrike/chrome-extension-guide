@@ -9,14 +9,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # bookmarks Permission — Chrome Extension Reference
 
-## Overview
+## Overview {#overview}
 - **Permission string**: `"bookmarks"`
 - **What it grants**: Full access to `chrome.bookmarks` API — read, create, update, delete, move, search bookmarks
 - **Risk level**: Medium — full access to user's bookmark tree
 - **User prompt**: "Read and change your bookmarks"
 - `@theluckystrike/webext-permissions` description: `describePermission('bookmarks')`
 
-## manifest.json Setup
+## manifest.json Setup {#manifestjson-setup}
 ```json
 {
   "permissions": ["bookmarks"]
@@ -29,9 +29,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
   if (result.granted) { /* use chrome.bookmarks */ }
   ```
 
-## Key APIs
+## Key APIs {#key-apis}
 
-### Reading Bookmarks
+### Reading Bookmarks {#reading-bookmarks}
 
 #### chrome.bookmarks.getTree()
 ```javascript
@@ -62,7 +62,7 @@ chrome.bookmarks.search({ query: "github" }, (results) => {
 - Search by title, URL, or both
 - Also accepts string shorthand: `chrome.bookmarks.search("github", cb)`
 
-### Creating Bookmarks
+### Creating Bookmarks {#creating-bookmarks}
 
 #### chrome.bookmarks.create(bookmark)
 ```javascript
@@ -75,7 +75,7 @@ chrome.bookmarks.create({
 - Omit `url` to create a folder
 - `index` controls position within parent
 
-### Modifying Bookmarks
+### Modifying Bookmarks {#modifying-bookmarks}
 
 #### chrome.bookmarks.update(id, changes)
 ```javascript
@@ -91,7 +91,7 @@ chrome.bookmarks.move("123", { parentId: "2", index: 0 });
 - `remove` — delete a single bookmark
 - `removeTree` — delete a folder and all its contents
 
-### Events
+### Events {#events}
 
 #### chrome.bookmarks.onCreated
 #### chrome.bookmarks.onRemoved
@@ -108,7 +108,7 @@ chrome.bookmarks.onCreated.addListener((id, bookmark) => {
 - React to bookmark changes in real-time
 - Works in background service worker
 
-## BookmarkTreeNode Structure
+## BookmarkTreeNode Structure {#bookmarktreenode-structure}
 ```typescript
 interface BookmarkTreeNode {
   id: string;
@@ -124,24 +124,24 @@ interface BookmarkTreeNode {
 }
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Bookmark Manager
+### Bookmark Manager {#bookmark-manager}
 - Read tree, display in custom UI, allow CRUD operations
 - Persist user preferences with `@theluckystrike/webext-storage`
 
-### Bookmark Sync/Export
+### Bookmark Sync/Export {#bookmark-syncexport}
 - `getTree()` to read all, serialize to JSON/HTML
 - Import by iterating and calling `create()`
 
-### Duplicate Finder
+### Duplicate Finder {#duplicate-finder}
 - `getTree()`, flatten, group by URL, find duplicates
 
-### Bookmark Search from Popup
+### Bookmark Search from Popup {#bookmark-search-from-popup}
 - Quick search popup using `chrome.bookmarks.search()`
 - Show results in extension popup
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const storage = createStorage(defineSchema({
@@ -156,10 +156,10 @@ chrome.bookmarks.getTree(async (tree) => {
 });
 ```
 
-## Common Errors
+## Common Errors {#common-errors}
 - `"Can't modify the root bookmark folders"` — IDs "0", "1", "2" are system folders
 - `"Can't remove non-empty folder"` — use `removeTree` for folders with children
 - Bookmark ID not found — bookmarks may have been deleted by user
 
-## API Reference
+## API Reference {#api-reference}
 - [Bookmarks API Reference](../api-reference/bookmarks-api.md)

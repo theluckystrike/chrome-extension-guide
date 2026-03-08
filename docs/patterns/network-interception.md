@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Network Request Interception Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome's `declarativeNetRequest` (DNR) API replaced the blocking `webRequest` API in MV3. Instead of intercepting requests in JavaScript, you declare JSON rules that Chrome's network stack evaluates natively — delivering better performance and privacy. This guide covers practical patterns for building, managing, and debugging DNR rules.
 
 ---
 
-## How DNR Works
+## How DNR Works {#how-dnr-works}
 
 ```
 ┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
@@ -38,7 +38,7 @@ Key concepts:
 
 ---
 
-## Pattern 1: Rule Structure and Priorities
+## Pattern 1: Rule Structure and Priorities {#pattern-1-rule-structure-and-priorities}
 
 Every DNR rule has the same shape — an `id`, a `priority`, an `action`, and a `condition`. Understanding this structure is essential:
 
@@ -102,7 +102,7 @@ Static rules live in a JSON file referenced by `manifest.json`:
 
 ---
 
-## Pattern 2: Dynamic Rules — Add/Remove at Runtime
+## Pattern 2: Dynamic Rules — Add/Remove at Runtime {#pattern-2-dynamic-rules-addremove-at-runtime}
 
 Dynamic rules let users customize blocking behavior without shipping a new extension version:
 
@@ -183,7 +183,7 @@ async function replaceAllRules(
 
 ---
 
-## Pattern 3: Request Blocking by URL Pattern
+## Pattern 3: Request Blocking by URL Pattern {#pattern-3-request-blocking-by-url-pattern}
 
 DNR supports two URL matching syntaxes — `urlFilter` (lightweight pattern) and `regexFilter` (full regex). Prefer `urlFilter` when possible since it's faster:
 
@@ -257,7 +257,7 @@ const blockingRules: chrome.declarativeNetRequest.Rule[] = [
 
 ---
 
-## Pattern 4: Request Header Modification
+## Pattern 4: Request Header Modification {#pattern-4-request-header-modification}
 
 Add, remove, or overwrite request headers. Common uses include injecting auth tokens, stripping tracking headers, or setting custom headers:
 
@@ -344,7 +344,7 @@ Note: Use **session rules** for sensitive values like auth tokens — they are c
 
 ---
 
-## Pattern 5: Response Header Modification (CSP, CORS)
+## Pattern 5: Response Header Modification (CSP, CORS) {#pattern-5-response-header-modification-csp-cors}
 
 Modify response headers to relax Content Security Policy for your extension's content scripts or enable cross-origin requests:
 
@@ -431,7 +431,7 @@ const addSecurityHeaders: chrome.declarativeNetRequest.Rule = {
 
 ---
 
-## Pattern 6: Redirect Rules (URL Rewriting)
+## Pattern 6: Redirect Rules (URL Rewriting) {#pattern-6-redirect-rules-url-rewriting}
 
 Redirect requests to different URLs — useful for replacing CDN resources, routing through proxies, or migrating API endpoints:
 
@@ -531,7 +531,7 @@ When redirecting to an extension resource, make sure the file is listed in `web_
 
 ---
 
-## Pattern 7: Rule Conditions — Resource Types, Domains, Methods
+## Pattern 7: Rule Conditions — Resource Types, Domains, Methods {#pattern-7-rule-conditions-resource-types-domains-methods}
 
 Fine-grained conditions prevent rules from matching too broadly. This is critical for performance and to avoid breaking pages:
 
@@ -642,7 +642,7 @@ async function blockOnTab(tabId: number, domain: string): Promise<void> {
 }
 ```
 
-### Resource Type Reference
+### Resource Type Reference {#resource-type-reference}
 
 | Resource Type | Matches |
 |--------------|---------|
@@ -659,7 +659,7 @@ async function blockOnTab(tabId: number, domain: string): Promise<void> {
 
 ---
 
-## Pattern 8: Debugging Rules with getMatchedRules
+## Pattern 8: Debugging Rules with getMatchedRules {#pattern-8-debugging-rules-with-getmatchedrules}
 
 `getMatchedRules` shows which rules fired and on what requests. Essential for development and user-facing diagnostics:
 
@@ -779,9 +779,9 @@ Add the debug permission to your manifest for development:
 
 ---
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
-### 1. Forgetting resourceTypes
+### 1. Forgetting resourceTypes {#1-forgetting-resourcetypes}
 
 ```ts
 // WRONG: resourceTypes is required — omitting it means the rule matches nothing
@@ -807,7 +807,7 @@ Add the debug permission to your manifest for development:
 }
 ```
 
-### 2. Rule ID Collisions
+### 2. Rule ID Collisions {#2-rule-id-collisions}
 
 ```ts
 // Dynamic and session rules share the same ID namespace.
@@ -817,7 +817,7 @@ const DYNAMIC_ID_BASE = 10_000;
 const SESSION_ID_BASE = 50_000;
 ```
 
-### 3. Regex Rule Limits
+### 3. Regex Rule Limits {#3-regex-rule-limits}
 
 ```ts
 // Chrome limits regex rules to 1,000 across static + dynamic + session.
@@ -829,7 +829,7 @@ console.log(`Using ${regexCount} of 1,000 regex rule slots`);
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | When to Use |
 |---------|------------|

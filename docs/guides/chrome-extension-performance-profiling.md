@@ -6,26 +6,26 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Performance Profiling for Chrome Extensions
 
-## Overview
+## Overview {#overview}
 Performance profiling for extensions requires understanding Chrome's multi-process architecture. Each extension component (service worker, popup, content scripts, options page) runs in isolated contexts with unique profiling approaches.
 
-## DevTools Performance Tab
+## DevTools Performance Tab {#devtools-performance-tab}
 
-### Recording Performance
+### Recording Performance {#recording-performance}
 1. Open DevTools (F12) in your extension's context
 2. For **service worker**: Navigate to `chrome://extensions`, enable "Developer mode", find your extension, click "service worker" link
 3. For **popup/options**: Right-click popup → Inspect
 4. For **content scripts**: Inspect any page where your content script runs
 
-### Analyzing Flame Charts
+### Analyzing Flame Charts {#analyzing-flame-charts}
 - **Network section**: Shows IPC calls to Chrome APIs (storage, tabs, runtime)
 - **Scripting section**: Your extension's JavaScript execution
 - **Rendering section**: DOM manipulation in popup/options
 - Look for: long tasks (>50ms), blocking calls, excessive GC pauses
 
-## Memory Profiling
+## Memory Profiling {#memory-profiling}
 
-### Heap Snapshots
+### Heap Snapshots {#heap-snapshots}
 ```javascript
 // In DevTools Memory tab
 // 1. Take baseline snapshot
@@ -34,14 +34,14 @@ Performance profiling for extensions requires understanding Chrome's multi-proce
 // 4. Compare to find retained objects
 ```
 
-### Allocation Timeline
+### Allocation Timeline {#allocation-timeline}
 - Track memory allocation over time
 - Identify objects not being garbage collected
 - Useful for detecting memory leaks in long-running extensions
 
-## Service Worker Performance
+## Service Worker Performance {#service-worker-performance}
 
-### Startup Time Measurement
+### Startup Time Measurement {#startup-time-measurement}
 ```javascript
 // At top of service worker
 const startTime = performance.now();
@@ -53,14 +53,14 @@ chrome.runtime.onFetch.addListener((details) => {
 });
 ```
 
-### Event Handler Duration
+### Event Handler Duration {#event-handler-duration}
 - Use `performance.now()` around async handlers
 - Monitor with `chrome.devtools.performance` API
 - Target: handlers complete within 100ms to avoid timeout
 
-## Content Script Impact
+## Content Script Impact {#content-script-impact}
 
-### Measuring CPU/Memory Added to Page
+### Measuring CPU/Memory Added to Page {#measuring-cpumemory-added-to-page}
 1. Open Chrome Task Manager (Shift+Esc)
 2. Note baseline CPU/memory for tab
 3. Load page with your content script
@@ -73,9 +73,9 @@ performance.mark('content-script-end');
 performance.measure('content-script', 'content-script-start', 'content-script-end');
 ```
 
-## Popup Rendering Performance
+## Popup Rendering Performance {#popup-rendering-performance}
 
-### First Paint & Interaction Readiness
+### First Paint & Interaction Readiness {#first-paint-interaction-readiness}
 - Measure from popup open to interactive:
 ```javascript
 // In popup script
@@ -87,9 +87,9 @@ requestAnimationFrame(() => {
 ```
 - Target: < 200ms for perceived responsiveness
 
-## Storage Performance
+## Storage Performance {#storage-performance}
 
-### Benchmarking Read/Write
+### Benchmarking Read/Write {#benchmarking-readwrite}
 ```javascript
 // Benchmark storage operations
 async function benchmarkStorage() {
@@ -116,9 +116,9 @@ async function benchmarkStorage() {
 }
 ```
 
-## Message Passing Overhead
+## Message Passing Overhead {#message-passing-overhead}
 
-### Measuring Latency
+### Measuring Latency {#measuring-latency}
 ```javascript
 // In content script
 const start = performance.now();
@@ -130,20 +130,20 @@ chrome.runtime.sendMessage({ action: 'ping' }, () => {
 - Target: < 50ms for responsive UX
 - Profile: larger payloads = longer serialization time
 
-## Common Performance Bottlenecks
+## Common Performance Bottlenecks {#common-performance-bottlenecks}
 
 - **Synchronous storage**: `chrome.storage.local.get()` blocks — always await
 - **DOM-heavy content scripts**: Use `requestAnimationFrame` for batch updates
 - **Large data serialization**: Clone only what you need in message passing
 
-## Chrome Task Manager
+## Chrome Task Manager {#chrome-task-manager}
 
 1. Press Shift+Esc or Menu → More tools → Task Manager
 2. Find your extension by name
 3. Monitor: Memory, CPU, Network
 4. Look for: high memory growth, sustained CPU usage
 
-## Performance API for Extensions
+## Performance API for Extensions {#performance-api-for-extensions}
 
 ```javascript
 // Custom performance marks
@@ -157,7 +157,7 @@ const entries = performance.getEntriesByType('measure');
 entries.forEach(e => console.log(`${e.name}: ${e.duration}ms`));
 ```
 
-## Lighthouse for Extension Pages
+## Lighthouse for Extension Pages {#lighthouse-for-extension-pages}
 
 ```bash
 # Run Lighthouse on popup
@@ -169,7 +169,7 @@ lighthouse chrome-extension://EXTENSION_ID/options.html
 
 Focus audits on: First Contentful Paint, Largest Contentful Paint, Total Blocking Time.
 
-## Automated Performance Testing
+## Automated Performance Testing {#automated-performance-testing}
 
 ```javascript
 // benchmark.js - run with Puppeteer
@@ -188,19 +188,19 @@ async function measureExtension() {
 }
 ```
 
-## Bundle Size Impact
+## Bundle Size Impact {#bundle-size-impact}
 
 - Larger bundles = longer service worker startup
 - Target: background < 100KB, content scripts < 50KB (gzipped)
 - Use code splitting: lazy-load non-critical features
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - See [guides/performance.md](./performance.md) for optimization patterns
 - See [patterns/performance-profiling.md](../patterns/performance-profiling.md) for advanced techniques
 - See [guides/memory-management.md](./memory-management.md) for memory optimization
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Performance Guide](../guides/performance.md)
 - [Size Optimization](../guides/extension-size-optimization.md)

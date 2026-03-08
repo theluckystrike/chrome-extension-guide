@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers systematic handling of `chrome.runtime` errors in Chrome extensions.
 
-## The Fundamental Rule: Check chrome.runtime.lastError
+## The Fundamental Rule: Check chrome.runtime.lastError {#the-fundamental-rule-check-chromeruntimelasterror}
 
 **Every callback from a Chrome API must check `chrome.runtime.lastError`.** If you don't check it, errors will be silently swallowed and may cause hard-to-debug issues.
 
@@ -29,9 +29,9 @@ chrome.tabs.query({ active: true }, (tabs) => {
 });
 ```
 
-## Common Chrome Runtime Errors
+## Common Chrome Runtime Errors {#common-chrome-runtime-errors}
 
-### "Could not establish connection. Receiving end does not exist"
+### "Could not establish connection. Receiving end does not exist" {#could-not-establish-connection-receiving-end-does-not-exist}
 
 **Cause:** No listener is registered for the message, or the content script wasn't injected.
 
@@ -47,7 +47,7 @@ chrome.tabs.sendMessage(tabId, { action: 'getData' }, (response) => {
 
 **Fix:** Ensure content script is registered in manifest and injected into the target tab.
 
-### "Extension context invalidated"
+### "Extension context invalidated" {#extension-context-invalidated}
 
 **Cause:** Extension was updated or reloaded while an async operation was pending.
 
@@ -61,7 +61,7 @@ chrome.storage.local.get('key', (result) => {
 });
 ```
 
-### "The message port closed before a response was received"
+### "The message port closed before a response was received" {#the-message-port-closed-before-a-response-was-received}
 
 **Cause:** `sendResponse` was not called in time, or the context was destroyed.
 
@@ -77,7 +77,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Promise-Based APIs (Manifest V3)
+## Promise-Based APIs (Manifest V3) {#promise-based-apis-manifest-v3}
 
 In MV3, many Chrome APIs return Promises. Errors become Promise rejections:
 
@@ -97,7 +97,7 @@ try {
 }
 ```
 
-## Safe Chrome API Wrapper
+## Safe Chrome API Wrapper {#safe-chrome-api-wrapper}
 
 ```javascript
 /**
@@ -125,15 +125,15 @@ try {
 }
 ```
 
-## Error Categorization
+## Error Categorization {#error-categorization}
 
-### Transient Errors (Retry-OK)
+### Transient Errors (Retry-OK) {#transient-errors-retry-ok}
 
 - **Network timeout** - Retry with exponential backoff
 - **Tab closed during operation** - Re-query tabs before retry
 - **Storage temporarily unavailable** - Retry after delay
 
-### Permanent Errors (Fix Required)
+### Permanent Errors (Fix Required) {#permanent-errors-fix-required}
 
 - **No permission** - Add required permission to manifest
 - **Extension context invalidated** - User action required
@@ -150,7 +150,7 @@ function isTransientError(error) {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Reference: Error Handling](../reference/error-handling.md)
 - [Patterns: Error Handling](./error-handling.md)

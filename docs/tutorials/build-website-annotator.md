@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 This tutorial guides you through building a Chrome extension that allows users to add sticky notes to any position on a webpage, save annotations per URL, and manage their notes.
 
-## Project Overview
+## Project Overview {#project-overview}
 
 The Website Annotator extension enables users to:
 - Add sticky notes to any position on a webpage
@@ -17,7 +17,7 @@ The Website Annotator extension enables users to:
 - Color-code notes for organization
 - View all annotated pages in a popup
 
-## Step 1: Manifest Configuration
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create your `manifest.json` with the required permissions:
 
@@ -42,7 +42,7 @@ Create your `manifest.json` with the required permissions:
 
 We use `activeTab` permission for minimal access - the extension only works on pages the user explicitly activates.
 
-## Step 2: Content Script Setup
+## Step 2: Content Script Setup {#step-2-content-script-setup}
 
 Create `content.js` to handle note creation and positioning:
 
@@ -64,7 +64,7 @@ function handleClick(e) {
 }
 ```
 
-## Step 3: Click-to-Add Notes
+## Step 3: Click-to-Add Notes {#step-3-click-to-add-notes}
 
 When users click on a page, create a note at that position:
 
@@ -89,7 +89,7 @@ function createNote(x, y, url) {
 }
 ```
 
-## Step 4: Note UI Components
+## Step 4: Note UI Components {#step-4-note-ui-components}
 
 Style your notes with a floating card design:
 
@@ -115,7 +115,7 @@ Style your notes with a floating card design:
 }
 ```
 
-## Step 5: Draggable Notes
+## Step 5: Draggable Notes {#step-5-draggable-notes}
 
 Implement drag functionality using mouse events:
 
@@ -148,7 +148,7 @@ document.addEventListener('mouseup', () => {
 });
 ```
 
-## Step 6: Position Storage
+## Step 6: Position Storage {#step-6-position-storage}
 
 Save note positions relative to viewport for consistent placement:
 
@@ -175,7 +175,7 @@ function loadNotes(url) {
 }
 ```
 
-## Step 7: Persistence Across Page Visits
+## Step 7: Persistence Across Page Visits {#step-7-persistence-across-page-visits}
 
 Notes are automatically restored when revisiting a page:
 
@@ -198,7 +198,7 @@ function getColor(colorName) {
 }
 ```
 
-## Step 8: Note List in Popup
+## Step 8: Note List in Popup {#step-8-note-list-in-popup}
 
 Create `popup.html` to show all annotated pages:
 
@@ -229,7 +229,7 @@ chrome.storage.local.get(null, (items) => {
 });
 ```
 
-## Handling Page Layout Changes
+## Handling Page Layout Changes {#handling-page-layout-changes}
 
 When page layouts change, notes may appear misplaced. Anchor notes to DOM elements:
 
@@ -244,7 +244,7 @@ function anchorToElement(note, selector) {
 }
 ```
 
-## Export Notes as Markdown
+## Export Notes as Markdown {#export-notes-as-markdown}
 
 Allow users to export all notes:
 
@@ -266,7 +266,7 @@ function exportAsMarkdown() {
 }
 ```
 
-## Shadow DOM Isolation
+## Shadow DOM Isolation {#shadow-dom-isolation}
 
 Use Shadow DOM to prevent page styles from affecting notes:
 
@@ -285,7 +285,7 @@ function createNoteWithShadow() {
 }
 ```
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [DOM Observer Pattern](/docs/patterns/dom-observer-patterns.md) - For detecting page changes
 - [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md) - For advanced injection

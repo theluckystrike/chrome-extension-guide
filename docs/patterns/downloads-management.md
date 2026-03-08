@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers patterns for managing downloads in Chrome extensions using the Downloads API.
 
-## Starting Downloads
+## Starting Downloads {#starting-downloads}
 
 Use `chrome.downloads.download()` to initiate downloads:
 
@@ -31,7 +31,7 @@ async function startDownload(url, filename) {
 - `saveAs`: Show "Save As" dialog (`true`/`false`)
 - `method`: HTTP method (default: 'GET')
 
-## Monitoring Progress
+## Monitoring Progress {#monitoring-progress}
 
 Listen to `chrome.downloads.onChanged` to track download progress:
 
@@ -47,14 +47,14 @@ chrome.downloads.onChanged.addListener((downloadDelta) => {
 });
 ```
 
-## Download States
+## Download States {#download-states}
 
 Downloads transition through these states:
 - `in_progress`: Download is actively downloading
 - `interrupted`: Download was interrupted (check `error` for reason)
 - `complete`: Download finished successfully
 
-## Progress UI in Popup
+## Progress UI in Popup {#progress-ui-in-popup}
 
 Display download progress in your extension popup:
 
@@ -66,7 +66,7 @@ function updateProgressBar(downloadId, percent) {
 }
 ```
 
-## Filename Generation
+## Filename Generation {#filename-generation}
 
 Generate dynamic filenames with timestamps:
 
@@ -78,7 +78,7 @@ function generateFilename(baseName, extension) {
 }
 ```
 
-## File Type Handling
+## File Type Handling {#file-type-handling}
 
 Set appropriate MIME types and extensions:
 
@@ -90,7 +90,7 @@ const fileTypes = {
 };
 ```
 
-## Batch Downloads
+## Batch Downloads {#batch-downloads}
 
 Queue multiple downloads with concurrency control:
 
@@ -112,7 +112,7 @@ async function batchDownload(urls, concurrency = 3) {
 }
 ```
 
-## Download from Generated Data
+## Download from Generated Data {#download-from-generated-data}
 
 Create downloads from Blob URLs for generated content:
 
@@ -125,7 +125,7 @@ async function downloadDataAsFile(data, filename, mimeType) {
 }
 ```
 
-## Cancel, Pause, Resume
+## Cancel, Pause, Resume {#cancel-pause-resume}
 
 ```javascript
 chrome.downloads.cancel(downloadId);    // Cancel download
@@ -133,14 +133,14 @@ chrome.downloads.pause(downloadId);    // Pause download
 chrome.downloads.resume(downloadId);   // Resume paused download
 ```
 
-## Open and Show Files
+## Open and Show Files {#open-and-show-files}
 
 ```javascript
 chrome.downloads.open(downloadId);    // Open downloaded file
 chrome.downloads.show(downloadId);    // Show in file manager
 ```
 
-## Download History
+## Download History {#download-history}
 
 Query past downloads:
 
@@ -151,7 +151,7 @@ async function getDownloadHistory() {
 }
 ```
 
-## Shelf Control
+## Shelf Control {#shelf-control}
 
 Control the download shelf (bottom bar):
 
@@ -160,7 +160,7 @@ chrome.downloads.setShelfEnabled(false);  // Hide download shelf
 chrome.downloads.setShelfEnabled(true);   // Show download shelf
 ```
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Downloads Permissions](../permissions/downloads.md)

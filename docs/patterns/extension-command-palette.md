@@ -19,7 +19,7 @@ Command palettes have become a standard UI pattern in modern applications becaus
 - Create a consistent, predictable interface
 - Support keyboard-only workflows preferred by power users
 
-## Activation
+## Activation {#activation}
 
 The first step is registering a global keyboard shortcut in your manifest.json that triggers the command palette:
 
@@ -69,7 +69,7 @@ function createPalette() {
 }
 ```
 
-## UI Structure
+## UI Structure {#ui-structure}
 
 Design the command palette as a full-width overlay at the top of the page for maximum visibility:
 
@@ -147,6 +147,8 @@ Design the command palette as a full-width overlay at the top of the page for ma
 
 ## Fuzzy Search Algorithm
 
+## Fuzzy Search Algorithm {#fuzzy-search-algorithm}
+
 Implement fuzzy matching to help users find commands even with typos. Consecutive character matches should score higher:
 
 ```javascript
@@ -218,7 +220,7 @@ function rankCommands(query, commands) {
 }
 ```
 
-## Command Registry
+## Command Registry {#command-registry}
 
 Create a flexible command registry that supports dynamic registration and categorization:
 
@@ -327,7 +329,7 @@ commands.register({
 });
 ```
 
-## Dynamic Commands
+## Dynamic Commands {#dynamic-commands}
 
 Filter commands based on current context such as page URL or extension permissions:
 
@@ -369,7 +371,7 @@ function isValidUrl(url, pattern) {
 }
 ```
 
-## Keyboard Navigation
+## Keyboard Navigation {#keyboard-navigation}
 
 Implement comprehensive keyboard navigation for accessibility and efficiency:
 
@@ -379,6 +381,8 @@ class PaletteKeyboardNavigator {
     this.selectedIndex = 0;
     this.commands = [];
   }
+
+## Categories {#categories}
 
   init(commands) {
     this.commands = commands;
@@ -394,6 +398,8 @@ class PaletteKeyboardNavigator {
     this.render();
     this.scrollToSelected();
   }
+
+## Sub-commands {#sub-commands}
 
   selectFirst() {
     this.selectedIndex = 0;
@@ -511,7 +517,7 @@ commands.register({
 });
 ```
 
-## Result Preview
+## Result Preview {#result-preview}
 
 Show detailed information for the highlighted command:
 
@@ -596,7 +602,7 @@ commands.register({
 9. **Persist user preferences**: Remember the last selected command
 10. **Test thoroughly**: Ensure the palette works on various websites
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [Command Palette Overview](../patterns/command-palette.md)
 - [Keyboard Shortcuts Guide](../guides/keyboard-shortcuts.md)

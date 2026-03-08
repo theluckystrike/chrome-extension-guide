@@ -11,9 +11,9 @@ The `chrome.runtime` API is the backbone of every Chrome extension. It provides 
 
 ---
 
-## Properties
+## Properties {#properties}
 
-### chrome.runtime.id
+### chrome.runtime.id {#chromeruntimeid}
 
 ```typescript
 const extensionId: string = chrome.runtime.id;
@@ -22,7 +22,7 @@ const extensionId: string = chrome.runtime.id;
 
 The globally unique identifier for this extension. Stable across sessions; changes only if the extension is unpacked and reloaded from a different directory.
 
-### chrome.runtime.lastError
+### chrome.runtime.lastError {#chromeruntimelasterror}
 
 ```typescript
 chrome.runtime.lastError: { message: string } | undefined;
@@ -48,7 +48,7 @@ try {
 }
 ```
 
-### chrome.runtime.getManifest()
+### chrome.runtime.getManifest() {#chromeruntimegetmanifest}
 
 ```typescript
 function getManifest(): chrome.runtime.Manifest;
@@ -63,7 +63,7 @@ console.log(manifest.name);         // "My Extension"
 console.log(manifest.permissions);   // ["storage", "alarms"]
 ```
 
-### chrome.runtime.getURL(path)
+### chrome.runtime.getURL(path) {#chromeruntimegeturlpath}
 
 ```typescript
 function getURL(path: string): string;
@@ -83,9 +83,9 @@ document.body.appendChild(img);
 
 ---
 
-## Events
+## Events {#events}
 
-### chrome.runtime.onInstalled
+### chrome.runtime.onInstalled {#chromeruntimeoninstalled}
 
 ```typescript
 chrome.runtime.onInstalled.addListener(
@@ -114,7 +114,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-### chrome.runtime.onStartup
+### chrome.runtime.onStartup {#chromeruntimeonstartup}
 
 ```typescript
 chrome.runtime.onStartup.addListener(callback: () => void): void;
@@ -128,7 +128,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-### chrome.runtime.onSuspend
+### chrome.runtime.onSuspend {#chromeruntimeonsuspend}
 
 ```typescript
 chrome.runtime.onSuspend.addListener(callback: () => void): void;
@@ -142,7 +142,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-### chrome.runtime.onMessage
+### chrome.runtime.onMessage {#chromeruntimeonmessage}
 
 ```typescript
 chrome.runtime.onMessage.addListener(
@@ -183,7 +183,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 | `sender.documentId` | `string` | UUID of the sender document |
 | `sender.documentLifecycle` | `string` | Lifecycle state of the sender document |
 
-### chrome.runtime.onMessageExternal
+### chrome.runtime.onMessageExternal {#chromeruntimeonmessageexternal}
 
 ```typescript
 chrome.runtime.onMessageExternal.addListener(
@@ -209,7 +209,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 });
 ```
 
-### chrome.runtime.onConnect
+### chrome.runtime.onConnect {#chromeruntimeonconnect}
 
 ```typescript
 chrome.runtime.onConnect.addListener(
@@ -230,7 +230,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### chrome.runtime.onConnectExternal
+### chrome.runtime.onConnectExternal {#chromeruntimeonconnectexternal}
 
 ```typescript
 chrome.runtime.onConnectExternal.addListener(
@@ -260,7 +260,7 @@ chrome.runtime.onConnectExternal.addListener((port) => {
 }
 ```
 
-### chrome.runtime.onUpdateAvailable
+### chrome.runtime.onUpdateAvailable {#chromeruntimeonupdateavailable}
 
 ```typescript
 chrome.runtime.onUpdateAvailable.addListener(
@@ -280,9 +280,9 @@ chrome.runtime.onUpdateAvailable.addListener((details) => {
 
 ---
 
-## Methods
+## Methods {#methods}
 
-### chrome.runtime.sendMessage()
+### chrome.runtime.sendMessage() {#chromeruntimesendmessage}
 
 ```typescript
 function sendMessage<R = any>(
@@ -315,7 +315,7 @@ try {
 }
 ```
 
-### chrome.runtime.connect()
+### chrome.runtime.connect() {#chromeruntimeconnect}
 
 ```typescript
 function connect(connectInfo?: { name?: string }): chrome.runtime.Port;
@@ -335,7 +335,7 @@ port.onDisconnect.addListener(() => console.log("Closed"));
 port.disconnect(); // close when done
 ```
 
-### chrome.runtime.getContexts() (MV3 only, Chrome 116+)
+### chrome.runtime.getContexts() (MV3 only, Chrome 116+) {#chromeruntimegetcontexts-mv3-only-chrome-116}
 
 ```typescript
 function getContexts(filter: {
@@ -367,7 +367,7 @@ const popup = await chrome.runtime.getContexts({ contextTypes: ["POPUP"] });
 const popupIsOpen = popup.length > 0;
 ```
 
-### chrome.runtime.getBackgroundPage() (MV2 only)
+### chrome.runtime.getBackgroundPage() (MV2 only) {#chromeruntimegetbackgroundpage-mv2-only}
 
 ```typescript
 function getBackgroundPage(): Promise<Window>;
@@ -379,7 +379,7 @@ Returns the `Window` object of the background page. **Not available in MV3.** Re
 const bg = await chrome.runtime.getBackgroundPage(); // MV2 only
 bg.someGlobalFunction();
 
-### chrome.runtime.reload()
+### chrome.runtime.reload() {#chromeruntimereload}
 
 ```typescript
 function reload(): void;
@@ -394,7 +394,7 @@ chrome.runtime.onUpdateAvailable.addListener(() => {
 });
 ```
 
-### chrome.runtime.requestUpdateCheck()
+### chrome.runtime.requestUpdateCheck() {#chromeruntimerequestupdatecheck}
 
 ```typescript
 function requestUpdateCheck(): Promise<{
@@ -415,7 +415,7 @@ if (status === "throttled") {
 }
 ```
 
-### chrome.runtime.setUninstallURL()
+### chrome.runtime.setUninstallURL() {#chromeruntimesetuninstallurl}
 
 ```typescript
 function setUninstallURL(url: string): Promise<void>;
@@ -431,7 +431,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### chrome.runtime.openOptionsPage()
+### chrome.runtime.openOptionsPage() {#chromeruntimeopenoptionspage}
 
 ```typescript
 function openOptionsPage(): Promise<void>;
@@ -443,7 +443,7 @@ Opens the extension's options page as defined by `options_ui` in the manifest. I
 await chrome.runtime.openOptionsPage();
 ```
 
-### chrome.runtime.getPlatformInfo()
+### chrome.runtime.getPlatformInfo() {#chromeruntimegetplatforminfo}
 
 ```typescript
 function getPlatformInfo(): Promise<{
@@ -464,7 +464,7 @@ if (platform.os === "mac") {
 }
 ```
 
-### chrome.runtime.getPackageDirectoryEntry()
+### chrome.runtime.getPackageDirectoryEntry() {#chromeruntimegetpackagedirectoryentry}
 
 ```typescript
 function getPackageDirectoryEntry(): Promise<DirectoryEntry>;
@@ -485,9 +485,9 @@ dir.getFile("data/config.json", {}, (entry) => {
 
 ---
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Install handler with storage migration
+### Install handler with storage migration {#install-handler-with-storage-migration}
 
 ```typescript
 chrome.runtime.onInstalled.addListener(async (details) => {
@@ -511,7 +511,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-### Message router
+### Message router {#message-router}
 
 ```typescript
 type Handler = (payload: any, sender: chrome.runtime.MessageSender) => Promise<any>;
@@ -532,7 +532,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### Port management with reconnection
+### Port management with reconnection {#port-management-with-reconnection}
 
 ```typescript
 // content.ts -- auto-reconnecting port
@@ -552,7 +552,7 @@ function createPort(): chrome.runtime.Port {
 let activePort = createPort();
 ```
 
-### Deferred update flow
+### Deferred update flow {#deferred-update-flow}
 
 ```typescript
 let updatePending = false;
@@ -569,7 +569,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Error Handling Reference
+## Error Handling Reference {#error-handling-reference}
 
 | Method | Error Message | Cause |
 |---|---|---|
@@ -583,7 +583,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## MV2 vs MV3 Differences
+## MV2 vs MV3 Differences {#mv2-vs-mv3-differences}
 
 | Feature | MV2 | MV3 |
 |---|---|---|
@@ -599,7 +599,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Related
+## Related {#related}
 
 - [Alarms API](alarms-api.md) -- scheduled background work
 - [Storage API Deep Dive](storage-api-deep-dive.md) -- persistence patterns

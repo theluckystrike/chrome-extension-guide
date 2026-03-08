@@ -6,20 +6,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Form Filler Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 - Auto-fill forms with saved profiles
 - Detect form fields and match to profile data
 - Multiple profiles (personal, work, testing)
 - Context menu and keyboard shortcut triggers
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
 - `npm install @theluckystrike/webext-storage`
 
 ---
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 
 ```bash
 mkdir formfiller-ext && cd formfiller-ext
@@ -40,7 +40,7 @@ npm init -y && npm install @theluckystrike/webext-storage
 
 ---
 
-## Step 2: Profile Storage (`src/profiles.ts`)
+## Step 2: Profile Storage (`src/profiles.ts`) {#step-2-profile-storage-srcprofilests}
 
 ```typescript
 import { Storage } from '@theluckystrike/webext-storage';
@@ -62,7 +62,7 @@ export async function createProfile(name: string): Promise<Profile> {
 
 ---
 
-## Step 3: Form Detection (`src/content.ts`)
+## Step 3: Form Detection (`src/content.ts`) {#step-3-form-detection-srccontentts}
 
 ```typescript
 interface FieldMatch { element: Element; keys: string[]; }
@@ -79,7 +79,7 @@ export function detectFields(): FieldMatch[] {
 
 ---
 
-## Step 4: Form Filling (`src/content.ts`)
+## Step 4: Form Filling (`src/content.ts`) {#step-4-form-filling-srccontentts}
 
 ```typescript
 export function fillForm(values: Record<string, string>): number {
@@ -104,7 +104,7 @@ export function fillForm(values: Record<string, string>): number {
 
 ---
 
-## Step 5: Background Script (`src/background.ts`)
+## Step 5: Background Script (`src/background.ts`) {#step-5-background-script-srcbackgroundts}
 
 ```typescript
 import { getProfiles } from './profiles';
@@ -132,7 +132,7 @@ chrome.commands.onCommand.addListener(async (cmd, tab) => {
 
 ---
 
-## Step 6: Popup UI
+## Step 6: Popup UI {#step-6-popup-ui}
 
 `popup.html`:
 ```html
@@ -155,7 +155,7 @@ render();
 
 ---
 
-## Testing
+## Testing {#testing}
 1. Load unpacked in Chrome (`chrome://extensions`)
 2. Open DevTools on test form page
 3. Test context menu and `Alt+Shift+F` shortcut
@@ -164,7 +164,7 @@ See `docs/guides/content-script-patterns.md` and `docs/patterns/form-handling.md
 
 ---
 
-## Summary
+## Summary {#summary}
 - Profile storage with `@theluckystrike/webext-storage`
 - Smart field detection with fuzzy matching
 - Context menu and keyboard triggers

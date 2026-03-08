@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 ---
 # Service Worker Lifecycle Deep Dive
 
-## Introduction
+## Introduction {#introduction}
 - MV3 replaces persistent background pages with service workers
 - Service workers are event-driven, short-lived, and stateless
 - Understanding the lifecycle is critical for reliable extensions
@@ -145,6 +145,8 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 ![Chrome Extension service worker lifecycle diagram showing install, activation, idle, and termination states with event types that wake the service worker](docs/images/sw-lifecycle-diagram.svg)
 
 ## Lifecycle Phases
+
+## Lifecycle Phases {#lifecycle-phases}
 1. **Registration**: Chrome reads `manifest.json` `background.service_worker`
 2. **Installation**: First time or after update — `chrome.runtime.onInstalled` fires
 3. **Activation**: SW becomes active, ready to handle events
@@ -152,7 +154,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 5. **Termination**: ~30 seconds after last event — SW is killed
 6. **Wake-up**: New event arrives — SW restarts from scratch
 
-## Event-Driven Wake-up
+## Event-Driven Wake-up {#event-driven-wake-up}
 - SW wakes for: alarms, messages, web requests, commands, runtime events
 - Each wake-up = cold start — all top-level code re-executes
 - MUST register all event listeners at top level (synchronously):
@@ -169,14 +171,14 @@ async function init() {
 init();
 ```
 
-## chrome.runtime.onInstalled vs onStartup
+## chrome.runtime.onInstalled vs onStartup {#chromeruntimeoninstalled-vs-onstartup}
 - `onInstalled`: fires on first install, extension update, Chrome update
 - `onStartup`: fires on every browser launch (not on install/update)
 - Use `onInstalled` for: setting defaults, creating alarms, showing welcome page
 - Use `onStartup` for: session initialization, connectivity checks
 - Cross-ref: `docs/guides/extension-updates.md`
 
-## State Persistence
+## State Persistence {#state-persistence}
 - **Problem**: all variables reset to initial values on every wake-up
 - **Solution**: use `@theluckystrike/webext-storage` for persistent state
 ```typescript
@@ -194,13 +196,13 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Keeping SW Alive (and Why You Shouldn't)
+## Keeping SW Alive (and Why You Shouldn't) {#keeping-sw-alive-and-why-you-shouldnt}
 - Chrome terminates idle SW after ~30 seconds
 - Workarounds exist (periodic alarms, ports) but are anti-patterns
 - Design FOR termination, not against it
 - If you need long-running work: use offscreen documents (`docs/mv3/offscreen-documents.md`)
 
-## Async Initialization Patterns
+## Async Initialization Patterns {#async-initialization-patterns}
 ```javascript
 // Pattern: lazy-loaded config
 let config = null;
@@ -222,7 +224,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Debugging SW Lifecycle
+## Debugging SW Lifecycle {#debugging-sw-lifecycle}
 - `chrome://extensions` → "Inspect views: service worker"
 - Console persists across SW restarts (if DevTools stays open)
 - `chrome://serviceworker-internals` — low-level SW status
@@ -233,20 +235,20 @@ chrome.runtime.onInstalled.addListener(() => console.log('[SW] onInstalled'));
 chrome.runtime.onStartup.addListener(() => console.log('[SW] onStartup'));
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 - **Alarm-driven sync**: `chrome.alarms` wakes SW periodically
 - **Message-driven**: popup/content script sends message, SW wakes to respond
 - **Event-driven**: `chrome.webNavigation`, `chrome.tabs.onUpdated` wake SW
 - **Init on install**: `onInstalled` sets up alarms, defaults, context menus
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Expecting global variables to persist — they don't
 - Registering listeners inside `async` functions — misses events
 - Using `setTimeout`/`setInterval` for scheduling — use `chrome.alarms`
 - Heavy initialization at top level — slows every wake-up
 - Not handling the case where SW was terminated mid-operation
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Service Worker Lifecycle Patterns](../patterns/service-worker-lifecycle.md)
 - [Event Handling](../patterns/service-worker-event-handling.md)

@@ -9,20 +9,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # search Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.search` API for triggering searches using the user's default search engine.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["search"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## API Access
+## API Access {#api-access}
 Single method:
 ```typescript
 await chrome.search.query({
@@ -31,14 +31,14 @@ await chrome.search.query({
 });
 ```
 
-## Parameters
+## Parameters {#parameters}
 | Parameter | Type | Description |
 |---|---|---|
 | `text` | string | The search query (required) |
 | `disposition` | string | Where to show results: `CURRENT_TAB`, `NEW_TAB`, `NEW_WINDOW` |
 | `tabId` | number | Tab to show results in (only with `CURRENT_TAB`) |
 
-## Disposition Options
+## Disposition Options {#disposition-options}
 ```typescript
 // Search in current tab
 await chrome.search.query({ text: 'query', disposition: 'CURRENT_TAB' });
@@ -53,7 +53,7 @@ await chrome.search.query({ text: 'query', disposition: 'NEW_WINDOW' });
 await chrome.search.query({ text: 'query', disposition: 'CURRENT_TAB', tabId: 123 });
 ```
 
-## Search Launcher Pattern
+## Search Launcher Pattern {#search-launcher-pattern}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -71,7 +71,7 @@ m.onMessage('QUICK_SEARCH', async ({ query, where }) => {
 });
 ```
 
-## Keyboard Shortcut Search
+## Keyboard Shortcut Search {#keyboard-shortcut-search}
 ```typescript
 // manifest.json: "commands": { "quick-search": { "suggested_key": { "default": "Ctrl+Shift+S" } } }
 
@@ -90,7 +90,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Context Menu Search
+## Context Menu Search {#context-menu-search}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -107,26 +107,26 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Important Notes
+## Important Notes {#important-notes}
 - Uses the user's default search engine (you cannot choose which engine)
 - Does NOT return search results — only opens the search page
 - Simple API — just triggers browser search
 
-## When to use
+## When to use {#when-to-use}
 - Quick-search extensions
 - Context menu "search for this" features
 - Omnibox alternatives
 - Keyboard shortcut search triggers
 
-## When NOT to use
+## When NOT to use {#when-not-to-use}
 - If you need search results programmatically — use a search API directly (Google Custom Search, etc.)
 - If you want to control which search engine — not possible with this API
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('search');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/guides/omnibox-api.md`

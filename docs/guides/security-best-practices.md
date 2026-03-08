@@ -6,24 +6,24 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 ---
 # Security Best Practices for Chrome Extensions
 
-## Introduction
+## Introduction {#introduction}
 - Extensions have elevated privileges — security matters more than in regular web apps
 - Common attack vectors: XSS in extension pages, message spoofing, permission over-reach
 
-## 1. Principle of Least Privilege
+## 1. Principle of Least Privilege {#1-principle-of-least-privilege}
 - Only request permissions you actively use
 - Use `optional_permissions` for features users may not enable
 - Use `@theluckystrike/webext-permissions` `requestPermission()` to request at runtime instead of install time
 - Use `activeTab` instead of `<all_urls>` whenever possible
 - Example: `const result = await requestPermission('tabs'); if (result.granted) { /* proceed */ }`
 
-## 2. Content Security Policy (CSP)
+## 2. Content Security Policy (CSP) {#2-content-security-policy-csp}
 - MV3 default CSP: `script-src 'self'; object-src 'self'`
 - Never use `unsafe-eval` or `unsafe-inline`
 - No remote code loading — bundle everything locally
 - Cross-ref: `docs/mv3/content-security-policy.md`
 
-## 3. Secure Messaging
+## 3. Secure Messaging {#3-secure-messaging}
 - Validate message origins in `onMessage` handlers
 - Never trust data from content scripts blindly — web pages can manipulate the DOM
 - Use `@theluckystrike/webext-messaging` typed messages to enforce request/response contracts:
@@ -37,7 +37,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 - Handle `MessagingError` for failed communications
 - Never pass `eval()`-able strings through messages
 
-## 4. Storage Security
+## 4. Storage Security {#4-storage-security}
 - `chrome.storage.local` is only accessible to your extension — prefer it for sensitive data
 - `chrome.storage.sync` syncs across devices — don't store secrets there
 - Use `@theluckystrike/webext-storage` schema validation to prevent storing unexpected data types:
@@ -48,31 +48,31 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
   ```
 - Never store plaintext passwords or tokens — use `chrome.identity` for OAuth
 
-## 5. Content Script Safety
+## 5. Content Script Safety {#5-content-script-safety}
 - Sanitize all data from web pages before using it
 - Use `textContent` instead of `innerHTML` when reading page data
 - Never inject user-controlled strings with `innerHTML` or `document.write`
 - Use `DOMPurify` if you must insert HTML from untrusted sources
 
-## 6. XSS Prevention in Extension Pages
+## 6. XSS Prevention in Extension Pages {#6-xss-prevention-in-extension-pages}
 - Extension popups, options, and background pages are targets for XSS
 - Never use `innerHTML` with dynamic content — use DOM APIs or a framework
 - Don't use `eval()`, `new Function()`, `setTimeout(string)` — all blocked by MV3 CSP anyway
 - Sanitize any data displayed from `chrome.storage` or messages
 
-## 7. Network Request Security
+## 7. Network Request Security {#7-network-request-security}
 - Always use HTTPS for external requests
 - Validate and sanitize API responses before processing
 - Use `fetch()` with proper error handling
 - Set appropriate `Content-Type` headers
 
-## 8. Update and Supply Chain Security
+## 8. Update and Supply Chain Security {#8-update-and-supply-chain-security}
 - Pin dependency versions in package.json
 - Audit dependencies with `npm audit`
 - Use a bundler to avoid shipping `node_modules`
 - Chrome Web Store auto-updates — ensure every version is thoroughly tested
 
-## Security Checklist
+## Security Checklist {#security-checklist}
 - [ ] Only essential permissions requested
 - [ ] Optional permissions used where possible
 - [ ] No `eval()` or dynamic code execution
@@ -82,7 +82,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 - [ ] HTTPS for all network requests
 - [ ] Dependencies audited
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Security Hardening](../guides/security-hardening.md)
 - [CORS Patterns](../patterns/cors-extension-patterns.md)

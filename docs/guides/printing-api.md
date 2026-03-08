@@ -6,13 +6,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/p
 ---
 # Chrome Extension Printing API Guide
 
-## Overview
+## Overview {#overview}
 - `chrome.printing` API provides programmatic control over print jobs in Chrome extensions
 - Available in Chrome 81+ (ChromeOS only)
 - Requires enterprise policy or user gesture to function properly
 - Cross-ref: `docs/permissions/printing.md`
 
-## Permissions & Requirements
+## Permissions & Requirements {#permissions-requirements}
 ```json
 // manifest.json
 {
@@ -30,7 +30,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/p
 - `chrome.printing` requires the extension to be force-installed by enterprise policy OR the user must be interactively prompted
 - Print jobs are sent to printers registered with Chrome (cloud printers or local printers)
 
-## Listing Available Printers
+## Listing Available Printers {#listing-available-printers}
 ```javascript
 // Get all available printers
 chrome.printing.getPrinters((printers) => {
@@ -71,7 +71,7 @@ interface Printer {
 ]
 ```
 
-## Understanding Print Tickets
+## Understanding Print Tickets {#understanding-print-tickets}
 The print ticket defines all job settings. Key components:
 ```javascript
 const printTicket = {
@@ -106,9 +106,9 @@ const printTicket = {
 };
 ```
 
-## Common Print Ticket Configurations
+## Common Print Ticket Configurations {#common-print-ticket-configurations}
 
-### Basic Black & White Print
+### Basic Black & White Print {#basic-black-white-print}
 ```javascript
 function createBWPrintTicket(printerId) {
   return {
@@ -129,7 +129,7 @@ function createBWPrintTicket(printerId) {
 }
 ```
 
-### Double-Sided (Duplex) Print
+### Double-Sided (Duplex) Print {#double-sided-duplex-print}
 ```javascript
 function createDuplexPrintTicket(printerId, isLongEdge = true) {
   return {
@@ -152,7 +152,7 @@ function createDuplexPrintTicket(printerId, isLongEdge = true) {
 }
 ```
 
-### Multiple Copies with Collating
+### Multiple Copies with Collating {#multiple-copies-with-collating}
 ```javascript
 function createCollatedPrintTicket(printerId, copies = 1) {
   return {
@@ -173,7 +173,7 @@ function createCollatedPrintTicket(printerId, copies = 1) {
 }
 ```
 
-### Different Paper Sizes
+### Different Paper Sizes {#different-paper-sizes}
 ```javascript
 const PAPER_SIZES = {
   A4: { widthMicrons: 210000, heightMicrons: 297000 },
@@ -201,7 +201,7 @@ function createPrintTicketWithSize(printerId, paperSize) {
 }
 ```
 
-## Submitting Print Jobs
+## Submitting Print Jobs {#submitting-print-jobs}
 ```javascript
 function submitPrintJob(printTicket) {
   chrome.printing.submitJob(printTicket, (response) => {
@@ -232,7 +232,7 @@ interface SubmitJobResponse {
 }
 ```
 
-## Monitoring Job Status
+## Monitoring Job Status {#monitoring-job-status}
 ```javascript
 // Listen for job status changes
 chrome.printing.onJobStatusChanged.addListener((jobInfo) => {
@@ -263,7 +263,7 @@ Job Info Object:
 */
 ```
 
-### Complete Print with Status Monitoring
+### Complete Print with Status Monitoring {#complete-print-with-status-monitoring}
 ```javascript
 class PrintJobManager {
   constructor() {
@@ -337,7 +337,7 @@ printManager.submitPrintJob(ticket)
   .catch(err => console.error(err));
 ```
 
-## Chrome Printing Metrics API
+## Chrome Printing Metrics API {#chrome-printing-metrics-api}
 For enterprise environments, track printing usage:
 ```javascript
 // Get printing metrics
@@ -373,7 +373,7 @@ Print Job Metric Object:
 */
 ```
 
-### Enterprise Usage Tracking Example
+### Enterprise Usage Tracking Example {#enterprise-usage-tracking-example}
 ```javascript
 class PrintingAnalytics {
   constructor() {
@@ -442,9 +442,9 @@ const analytics = new PrintingAnalytics();
 analytics.loadMetrics().then(() => analytics.generateReport());
 ```
 
-## Building a Print Management Extension
+## Building a Print Management Extension {#building-a-print-management-extension}
 
-### Complete Extension Structure
+### Complete Extension Structure {#complete-extension-structure}
 ```javascript
 // background.js - Main service worker
 class PrintManager {
@@ -552,7 +552,7 @@ class PrintManager {
 const printManager = new PrintManager();
 ```
 
-### Popup UI Integration
+### Popup UI Integration {#popup-ui-integration}
 ```javascript
 // popup.js - Handle UI interactions
 document.addEventListener('DOMContentLoaded', async () => {
@@ -607,7 +607,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-### HTML for Print Content
+### HTML for Print Content {#html-for-print-content}
 ```html
 <!-- content/printable.html -->
 <!DOCTYPE html>
@@ -636,7 +636,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </html>
 ```
 
-## Best Practices & Error Handling
+## Best Practices & Error Handling {#best-practices-error-handling}
 ```javascript
 // Robust print job submission with retries
 async function submitWithRetry(printTicket, maxRetries = 3) {
@@ -713,7 +713,7 @@ async function printDocument(options) {
 }
 ```
 
-## Summary
+## Summary {#summary}
 The Chrome Printing API enables powerful print management capabilities:
 - **List printers** with `getPrinters()` for user selection
 - **Configure jobs** with flexible ticket options (copies, color, duplex, paper size)
@@ -727,7 +727,7 @@ Key considerations:
 - Always handle errors and provide feedback to users
 - Consider implementing job queuing for multiple print requests
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [System API Reference](../api-reference/system-api.md)
 - [Desktop Capture](../guides/desktop-capture.md)

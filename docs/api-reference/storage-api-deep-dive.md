@@ -11,7 +11,7 @@ This is an in-depth reference for `chrome.storage`, covering all four storage ar
 
 For the basic permission reference, see [storage permission](../permissions/storage.md).
 
-## Permissions
+## Permissions {#permissions}
 
 ```json
 {
@@ -21,9 +21,9 @@ For the basic permission reference, see [storage permission](../permissions/stor
 
 No user-facing warning. Add `"unlimitedStorage"` to remove the 10MB `local` limit.
 
-## The Four Storage Areas
+## The Four Storage Areas {#the-four-storage-areas}
 
-### chrome.storage.local
+### chrome.storage.local {#chromestoragelocal}
 
 General-purpose persistent storage. Data is stored on the local machine only.
 
@@ -57,7 +57,7 @@ console.log(`Using ${bytes} bytes of ${10 * 1024 * 1024}`);
 
 **Limits:** 10MB (or unlimited with `"unlimitedStorage"` permission).
 
-### chrome.storage.sync
+### chrome.storage.sync {#chromestoragesync}
 
 Synced across the user's Chrome instances via their Google account.
 
@@ -83,7 +83,7 @@ const perKey = await chrome.storage.sync.getBytesInUse("theme");
 console.log(`Total: ${bytesInUse}/102400, "theme": ${perKey}/8192`);
 ```
 
-### chrome.storage.session
+### chrome.storage.session {#chromestoragesession}
 
 Temporary storage that's cleared when the browser is closed. Available to all extension contexts (service worker, popup, content scripts) but not persisted.
 
@@ -103,7 +103,7 @@ const result = await chrome.storage.session.get("token");
 - Caching expensive computations for the current session
 - Cross-context state sharing (service worker <-> popup)
 
-### chrome.storage.managed
+### chrome.storage.managed {#chromestoragemanaged}
 
 Read-only storage populated by enterprise policy. Your extension declares a JSON schema, and IT admins set values via Chrome Enterprise policies.
 
@@ -123,9 +123,9 @@ Requires a `managed_schema` declaration in the manifest:
 }
 ```
 
-## Change Listeners
+## Change Listeners {#change-listeners}
 
-### chrome.storage.onChanged
+### chrome.storage.onChanged {#chromestorageonchanged}
 
 Global listener that fires for changes in any storage area.
 
@@ -138,7 +138,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-### Area-specific listeners
+### Area-specific listeners {#area-specific-listeners}
 
 ```ts
 // Only local changes
@@ -159,7 +159,7 @@ chrome.storage.session.onChanged.addListener((changes) => {
 });
 ```
 
-### Change object structure
+### Change object structure {#change-object-structure}
 
 Each changed key provides:
 
@@ -170,11 +170,11 @@ interface StorageChange {
 }
 ```
 
-## @theluckystrike/webext-storage Deep Dive
+## @theluckystrike/webext-storage Deep Dive {#theluckystrikewebext-storage-deep-dive}
 
 The `@theluckystrike/webext-storage` package wraps `chrome.storage` with type safety, schema validation, and a cleaner API.
 
-### Schema Definition
+### Schema Definition {#schema-definition}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -213,7 +213,7 @@ type Schema = typeof schema;
 // }
 ```
 
-### Creating Storage Instances
+### Creating Storage Instances {#creating-storage-instances}
 
 ```ts
 // Local storage (default)
@@ -237,7 +237,7 @@ const settings = createStorage({ schema: settingsSchema, area: "sync" });
 const data = createStorage({ schema: dataSchema, area: "local" });
 ```
 
-### TypedStorage Methods
+### TypedStorage Methods {#typedstorage-methods}
 
 ```ts
 const storage = createStorage({ schema, area: "local" });
@@ -273,7 +273,7 @@ await storage.removeMany(["theme", "fontSize"]);
 await storage.clear();
 ```
 
-### Reactive Watching
+### Reactive Watching {#reactive-watching}
 
 ```ts
 // Watch a single key
@@ -291,7 +291,7 @@ unwatch();
 // - Sync brings a change from another device -> local watcher fires
 ```
 
-### Advanced Patterns with webext-storage
+### Advanced Patterns with webext-storage {#advanced-patterns-with-webext-storage}
 
 #### Migrating schema versions
 
@@ -381,9 +381,9 @@ storage.watch("syncState", (state) => {
 });
 ```
 
-## Performance Considerations
+## Performance Considerations {#performance-considerations}
 
-### Batch operations
+### Batch operations {#batch-operations}
 
 ```ts
 // Bad: multiple round trips
@@ -395,7 +395,7 @@ await storage.set("c", 3);
 await storage.setMany({ a: 1, b: 2, c: 3 });
 ```
 
-### Avoid reading in hot paths
+### Avoid reading in hot paths {#avoid-reading-in-hot-paths}
 
 ```ts
 // Bad: reading on every event
@@ -418,7 +418,7 @@ chrome.tabs.onUpdated.addListener(() => {
 });
 ```
 
-### Monitor quota
+### Monitor quota {#monitor-quota}
 
 ```ts
 async function checkQuota(area: "local" | "sync") {
@@ -431,7 +431,7 @@ async function checkQuota(area: "local" | "sync") {
 }
 ```
 
-## Raw Chrome API vs webext-storage Comparison
+## Raw Chrome API vs webext-storage Comparison {#raw-chrome-api-vs-webext-storage-comparison}
 
 | Feature | `chrome.storage.*` | `@theluckystrike/webext-storage` |
 |---------|-------------------|----------------------------------|
@@ -442,7 +442,7 @@ async function checkQuota(area: "local" | "sync") {
 | Clear behavior | Removes ALL keys in the area | Only removes schema keys |
 | Multi-key get | Returns `Record<string, any>` | Returns typed partial object |
 
-## Storage Area Decision Guide
+## Storage Area Decision Guide {#storage-area-decision-guide}
 
 ```
 Need persistence across browser restarts?
@@ -454,7 +454,7 @@ Need persistence across browser restarts?
 └── No → session
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 1. **Values must be JSON-serializable.** No `Date`, `Map`, `Set`, `RegExp`, functions, or circular references. Convert to primitives first.
 
@@ -482,7 +482,7 @@ try {
 }
 ```
 
-## Related
+## Related {#related}
 
 - [storage permission](../permissions/storage.md)
 - [Runtime API](runtime-api.md) (for `onInstalled` migration patterns)

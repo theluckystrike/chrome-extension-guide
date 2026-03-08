@@ -8,11 +8,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/d
 
 The `chrome.desktopCapture` API enables Chrome Extensions to capture screen content, windows, browser tabs, and audio from the user's desktop. This guide covers building screenshot tools, screen recorders, and real-time streaming extensions.
 
-## API Overview
+## API Overview {#api-overview}
 
 The `chrome.desktopCapture` API provides methods to capture the user's screen or individual windows and convert them into MediaStream objects for processing, recording, or streaming.
 
-### Required Permissions
+### Required Permissions {#required-permissions}
 
 Add the `desktopCapture` permission to your `manifest.json`:
 
@@ -27,9 +27,9 @@ Add the `desktopCapture` permission to your `manifest.json`:
 
 The `host_permissions` is required when streaming to remote servers via WebRTC. For local processing only, you can omit it.
 
-## Core Methods
+## Core Methods {#core-methods}
 
-### chooseDesktopMedia()
+### chooseDesktopMedia() {#choosedesktopmedia}
 
 Displays the native Chrome source picker dialog for users to select a screen, window, or tab to share:
 
@@ -40,7 +40,7 @@ chrome.desktopCapture.chooseDesktopMedia(
 ): number;             // Returns request ID for cancellation
 ```
 
-### cancelChooseDesktopMedia()
+### cancelChooseDesktopMedia() {#cancelchoosedesktopmedia}
 
 Programmatically dismiss the source picker:
 
@@ -52,9 +52,9 @@ const requestId = chrome.desktopCapture.chooseDesktopMedia(
 chrome.desktopCapture.cancelChooseDesktopMedia(requestId);
 ```
 
-## Source Types
+## Source Types {#source-types}
 
-### screen - Full Screen Capture
+### screen - Full Screen Capture {#screen-full-screen-capture}
 
 Captures entire displays or specific monitors:
 
@@ -87,7 +87,7 @@ function captureFullScreen() {
 }
 ```
 
-### window - Application Window Capture
+### window - Application Window Capture {#window-application-window-capture}
 
 Restricts the picker to show only application windows:
 
@@ -113,7 +113,7 @@ function captureWindow() {
 }
 ```
 
-### tab - Browser Tab Capture
+### tab - Browser Tab Capture {#tab-browser-tab-capture}
 
 Captures browser tabs with optional tab audio:
 
@@ -139,7 +139,7 @@ function captureTab() {
 }
 ```
 
-### audio - System and Tab Audio
+### audio - System and Tab Audio {#audio-system-and-tab-audio}
 
 Capture system or tab audio (Chrome 74+):
 
@@ -171,11 +171,11 @@ function captureWithAudio() {
 }
 ```
 
-## Converting Stream ID to MediaStream
+## Converting Stream ID to MediaStream {#converting-stream-id-to-mediastream}
 
 The `chooseDesktopMedia()` returns a stream ID string that must be passed to `getUserMedia()`:
 
-### Basic Conversion
+### Basic Conversion {#basic-conversion}
 
 ```javascript
 async function getMediaStream(streamId) {
@@ -190,7 +190,7 @@ async function getMediaStream(streamId) {
 }
 ```
 
-### Working with Tracks
+### Working with Tracks {#working-with-tracks}
 
 ```javascript
 function handleStream(stream) {
@@ -208,9 +208,9 @@ function handleStream(stream) {
 }
 ```
 
-## Building a Screenshot Extension
+## Building a Screenshot Extension {#building-a-screenshot-extension}
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -227,7 +227,7 @@ function handleStream(stream) {
 }
 ```
 
-### Background Script (background.js)
+### Background Script (background.js) {#background-script-backgroundjs}
 
 ```javascript
 chrome.action.onClicked.addListener(async (tab) => {
@@ -253,7 +253,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Offscreen Document (offscreen.html)
+### Offscreen Document (offscreen.html) {#offscreen-document-offscreenhtml}
 
 ```html
 <!DOCTYPE html>
@@ -268,7 +268,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 </html>
 ```
 
-### Offscreen Script (offscreen.js)
+### Offscreen Script (offscreen.js) {#offscreen-script-offscreenjs}
 
 ```javascript
 chrome.runtime.onMessage.addListener((message) => {
@@ -316,9 +316,9 @@ async function captureScreenshot(streamId) {
 }
 ```
 
-## Building a Screen Recording Extension
+## Building a Screen Recording Extension {#building-a-screen-recording-extension}
 
-### Background Script
+### Background Script {#background-script}
 
 ```javascript
 chrome.action.onClicked.addListener(async (tab) => {
@@ -350,7 +350,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-### Recording Logic (recorder.html)
+### Recording Logic (recorder.html) {#recording-logic-recorderhtml}
 
 ```javascript
 let mediaRecorder;
@@ -417,9 +417,9 @@ async function saveRecording() {
 }
 ```
 
-## Error Handling and Best Practices
+## Error Handling and Best Practices {#error-handling-and-best-practices}
 
-### Proper Error Handling
+### Proper Error Handling {#proper-error-handling}
 
 ```javascript
 async function safeCapture(sourceTypes) {
@@ -455,7 +455,7 @@ async function safeCapture(sourceTypes) {
 }
 ```
 
-### Resource Cleanup
+### Resource Cleanup {#resource-cleanup}
 
 ```javascript
 function cleanupStream(stream) {
@@ -480,7 +480,7 @@ async function captureWithCleanup() {
 }
 ```
 
-### Handling User Cancellation
+### Handling User Cancellation {#handling-user-cancellation}
 
 ```javascript
 chrome.desktopCapture.chooseDesktopMedia(
@@ -496,21 +496,21 @@ chrome.desktopCapture.chooseDesktopMedia(
 );
 ```
 
-## Platform-Specific Considerations
+## Platform-Specific Considerations {#platform-specific-considerations}
 
-### macOS Requirements
+### macOS Requirements {#macos-requirements}
 
 Users must grant Screen Recording permission in System Preferences > Privacy & Security > Screen Recording. Without this permission, the picker shows no sources.
 
-### Multi-Monitor Support
+### Multi-Monitor Support {#multi-monitor-support}
 
 Chrome's picker automatically shows all available screens in multi-monitor setups. Users can select which monitor to capture.
 
-### Linux Considerations
+### Linux Considerations {#linux-considerations}
 
 Linux has limited audio capture support. Test thoroughly on target distributions.
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 
 1. Always require user interaction to start capture
 2. Minimize stream ID lifetime - process and release quickly
@@ -518,7 +518,7 @@ Linux has limited audio capture support. Test thoroughly on target distributions
 4. Always stop tracks when done
 5. Consider privacy implications
 
-## Related APIs
+## Related APIs {#related-apis}
 
 - `chrome.tabCapture` - Alternative API for tab-specific capture
 - `navigator.mediaDevices.getUserMedia` - Core Web API for media capture
@@ -526,7 +526,7 @@ Linux has limited audio capture support. Test thoroughly on target distributions
 - `RTCPeerConnection` - Stream via WebRTC
 - `ImageCapture` - Capture still images from video tracks
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Tab Capture](../guides/tab-capture.md)

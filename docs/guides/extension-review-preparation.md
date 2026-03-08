@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 This guide covers everything you need to prepare your Chrome extension for a successful Chrome Web Store (CWS) review. Following these guidelines will help avoid common rejection reasons and ensure a smooth submission process.
 
-## Pre-Submission Checklist
+## Pre-Submission Checklist {#pre-submission-checklist}
 
 Before submitting your extension, verify each of the following:
 
@@ -22,36 +22,36 @@ Before submitting your extension, verify each of the following:
 - [ ] **Content Security Policy** is properly defined
 - [ ] **Single purpose** is clearly stated in the description
 
-## Common Rejection Reasons and How to Avoid Them
+## Common Rejection Reasons and How to Avoid Them {#common-rejection-reasons-and-how-to-avoid-them}
 
 Understanding frequent rejection reasons helps you prevent them:
 
-### 1. Permission Overreach
+### 1. Permission Overreach {#1-permission-overreach}
 **Problem:** Requesting more permissions than necessary for your extension's functionality.
 
 **Solution:** Only request permissions your extension actually needs. Use optional permissions where possible and implement permission downgrades in Manifest V3.
 
-### 2. Single Purpose Violation
+### 2. Single Purpose Violation {#2-single-purpose-violation}
 **Problem:** Extension tries to do too many unrelated things.
 
 **Solution:** Ensure your extension has one clear purpose. If you need multiple features, consider creating separate extensions or clearly document how features relate to the core purpose.
 
-### 3. Obfuscated Code
+### 3. Obfuscated Code {#3-obfuscated-code}
 **Problem:** Using minified, obfuscated, or packed code that reviewers cannot inspect.
 
 **Solution:** Always submit source code that can be reviewed. If you must use build tools that minify code, ensure source maps are available or keep a non-minified version for submission.
 
-### 4. Misleading Descriptions
+### 4. Misleading Descriptions {#4-misleading-descriptions}
 **Problem:** Description doesn't match actual functionality.
 
 **Solution:** Your description must accurately reflect what the extension does. Update it if functionality changes.
 
-### 5. Privacy Policy Issues
+### 5. Privacy Policy Issues {#5-privacy-policy-issues}
 **Problem:** Missing, inadequate, or inaccessible privacy policy.
 
 **Solution:** Host a comprehensive privacy policy at a stable URL. See [Privacy Policy Template](../publishing/privacy-policy-template.md) for requirements.
 
-## Permission Justification
+## Permission Justification {#permission-justification}
 
 Every permission must be justified in the CWS developer dashboard. Document why each permission is needed:
 
@@ -67,7 +67,7 @@ Every permission must be justified in the CWS developer dashboard. Document why 
 
 Always prefer `activeTab` over `tabs` permission when possible—it only grants access when the user explicitly invokes your extension.
 
-## Privacy Policy Requirements
+## Privacy Policy Requirements {#privacy-policy-requirements}
 
 A compliant privacy policy must include:
 
@@ -79,7 +79,7 @@ A compliant privacy policy must include:
 
 See [Privacy Policy Template](../publishing/privacy-policy-template.md) for a complete template.
 
-## Single Purpose Policy Compliance
+## Single Purpose Policy Compliance {#single-purpose-policy-compliance}
 
 Chrome Web Store requires extensions to have a single, clearly defined purpose:
 
@@ -88,7 +88,7 @@ Chrome Web Store requires extensions to have a single, clearly defined purpose:
 - Avoid bundling unrelated functionality
 - If you need multiple distinct features, consider separate extensions
 
-## No Obfuscated Code Rule
+## No Obfuscated Code Rule {#no-obfuscated-code-rule}
 
 CWS reviewers must be able to inspect your code:
 
@@ -97,7 +97,7 @@ CWS reviewers must be able to inspect your code:
 - Avoid code packers, obfuscators, or encryptors
 - CSS and HTML should also be human-readable
 
-## Content Security Policy Requirements
+## Content Security Policy Requirements {#content-security-policy-requirements}
 
 Define a proper CSP in your `manifest.json`:
 
@@ -115,7 +115,7 @@ Guidelines:
 - If you need external scripts, whitelist specific domains
 - Manifest V3 has stricter CSP requirements than V2
 
-## Screenshots and Store Listing Requirements
+## Screenshots and Store Listing Requirements {#screenshots-and-store-listing-requirements}
 
 Your store listing must include:
 
@@ -128,7 +128,7 @@ Your store listing must include:
 
 See [Screenshot Guidelines](../publishing/screenshot-guidelines.md) and [Listing Optimization](../publishing/listing-optimization.md) for best practices.
 
-## Review Timeline Expectations
+## Review Timeline Expectations {#review-timeline-expectations}
 
 CWS review times vary:
 
@@ -142,26 +142,26 @@ Factors affecting timeline:
 - Previous review history
 - Holiday periods
 
-## Handling Rejections
+## Handling Rejections {#handling-rejections}
 
 If your extension is rejected:
 
-### Step 1: Understand the Reason
+### Step 1: Understand the Reason {#step-1-understand-the-reason}
 - Check the rejection email for specific issues
 - Review [Common Rejections](../publishing/common-rejections.md) guide
 - Access detailed feedback in CWS Developer Dashboard
 
-### Step 2: Fix the Issues
+### Step 2: Fix the Issues {#step-2-fix-the-issues}
 - Address each point mentioned in the rejection
 - Update code, permissions, or listing as needed
 - Document your changes for the resubmission
 
-### Step 3: Appeal or Resubmit
+### Step 3: Appeal or Resubmit {#step-3-appeal-or-resubmit}
 - If you believe rejection was incorrect, use the appeal process
 - Provide clear justification for why the extension complies
 - For fixes, resubmit with updated "Notes for Reviewer" explaining changes
 
-### Common Fixes for Rejections
+### Common Fixes for Rejections {#common-fixes-for-rejections}
 
 | Issue | Fix |
 |-------|-----|
@@ -171,7 +171,7 @@ If your extension is rejected:
 | Single purpose violation | Remove unrelated features or split extension |
 | Misleading description | Update description to match functionality |
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Submission Process](../publishing/submission-process.md)
 - [Publishing Guide](../publishing/publishing-guide.md)
@@ -179,7 +179,7 @@ If your extension is rejected:
 - [Privacy Policy Template](../publishing/privacy-policy-template.md)
 - [Listing Optimization](../publishing/listing-optimization.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Common Rejections](../publishing/common-rejections.md)
 - [Rejection Fixes](../publishing/chrome-web-store-rejection-fixes.md)

@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # State Management Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions scatter state across isolated contexts -- background service workers, content scripts, popups, options pages, and side panels. Each has its own memory space and lifecycle. A popup closing destroys its in-memory state. A service worker can terminate at any time. This guide covers eight patterns for managing state reliably using `chrome.storage`, message passing, and careful architectural choices.
 
 ---
 
-## Pattern 1: Centralized State Store Backed by chrome.storage
+## Pattern 1: Centralized State Store Backed by chrome.storage {#pattern-1-centralized-state-store-backed-by-chromestorage}
 
 Create a typed store backed by `chrome.storage.local` as the single source of truth:
 
@@ -67,7 +67,7 @@ chrome.storage.onChanged.addListener((changes) => {
 
 ---
 
-## Pattern 2: Pub/Sub Pattern Across Extension Contexts
+## Pattern 2: Pub/Sub Pattern Across Extension Contexts {#pattern-2-pubsub-pattern-across-extension-contexts}
 
 Build publish/subscribe on top of `chrome.runtime` messaging so contexts react to state changes without polling:
 
@@ -123,7 +123,7 @@ window.addEventListener("unload", unsub);
 
 ---
 
-## Pattern 3: Derived/Computed State from Storage Values
+## Pattern 3: Derived/Computed State from Storage Values {#pattern-3-derivedcomputed-state-from-storage-values}
 
 Compute values from raw state without storing redundant data:
 
@@ -185,7 +185,7 @@ export function derivedStorage<T>(
 
 ---
 
-## Pattern 4: Undo/Redo with State Snapshots
+## Pattern 4: Undo/Redo with State Snapshots {#pattern-4-undoredo-with-state-snapshots}
 
 Maintain a history stack for reversible user actions:
 
@@ -253,7 +253,7 @@ document.addEventListener("keydown", (e) => {
 
 ---
 
-## Pattern 5: Transactional State Updates (All-or-Nothing Writes)
+## Pattern 5: Transactional State Updates (All-or-Nothing Writes) {#pattern-5-transactional-state-updates-all-or-nothing-writes}
 
 When multiple storage keys must update atomically, roll back on failure:
 
@@ -301,7 +301,7 @@ export async function transactionalUpdate<T extends Record<string, unknown>>(
 
 ---
 
-## Pattern 6: State Selectors and Memoization
+## Pattern 6: State Selectors and Memoization {#pattern-6-state-selectors-and-memoization}
 
 Avoid recomputing expensive derived values when unrelated state changes:
 
@@ -354,7 +354,7 @@ const selectActiveRules = composeSelectors(
 
 ---
 
-## Pattern 7: Cross-Tab State Synchronization via storage.onChanged
+## Pattern 7: Cross-Tab State Synchronization via storage.onChanged {#pattern-7-cross-tab-state-synchronization-via-storageonchanged}
 
 Keep all open extension UIs in sync using `chrome.storage.onChanged`:
 
@@ -406,7 +406,7 @@ This is critical when options and popup are open simultaneously -- a change in o
 
 ---
 
-## Pattern 8: State Debugging and Time-Travel Inspection
+## Pattern 8: State Debugging and Time-Travel Inspection {#pattern-8-state-debugging-and-time-travel-inspection}
 
 Log every state mutation for development and troubleshooting:
 
@@ -472,7 +472,7 @@ store.update = async function(partial) {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | What It Solves |
 |---------|---------------|

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.system` API provides extensions with access to system hardware and resource information. This API enables extensions to adapt their behavior based on the capabilities and state of the underlying hardware.
 
-## Overview
+## Overview {#overview}
 
 The chrome.system API is organized into several sub-APIs, each providing access to different system resources:
 
@@ -20,15 +20,15 @@ The chrome.system API is organized into several sub-APIs, each providing access 
 
 Each sub-API requires its own permission in the extension manifest. Request only the permissions you need to minimize the permissions surface of your extension.
 
-## chrome.system.cpu
+## chrome.system.cpu {#chromesystemcpu}
 
-### Permission
+### Permission {#permission}
 
 ```json
 "permissions": ["system.cpu"]
 ```
 
-### Methods
+### Methods {#methods}
 
 #### getInfo()
 
@@ -57,21 +57,21 @@ Each processor object contains:
   - `idle` (number): Cumulative time in idle mode (milliseconds)
   - `total` (number): Total cumulative time (milliseconds)
 
-### Use Cases
+### Use Cases {#use-cases}
 
 - **Adaptive Performance**: Reduce computational work on systems with weaker CPUs
 - **Resource Monitoring**: Display CPU usage information in extension dashboards
 - **Performance Profiling**: Collect CPU statistics to optimize extension behavior
 
-## chrome.system.memory
+## chrome.system.memory {#chromesystemmemory}
 
-### Permission
+### Permission {#permission}
 
 ```json
 "permissions": ["system.memory"]
 ```
 
-### Methods
+### Methods {#methods}
 
 #### getInfo()
 
@@ -88,21 +88,21 @@ chrome.system.memory.getInfo(callback)
 - `capacity` (number): Total physical memory in bytes.
 - `availableCapacity` (number): Available memory in bytes.
 
-### Use Cases
+### Use Cases {#use-cases}
 
 - **Memory-Aware Caching**: Adjust cache sizes based on available memory
 - **Resource Management**: Warn users when memory is low
 - **Adaptive Behavior**: Reduce memory footprint on constrained devices
 
-## chrome.system.storage
+## chrome.system.storage {#chromesystemstorage}
 
-### Permission
+### Permission {#permission}
 
 ```json
 "permissions": ["system.storage"]
 ```
 
-### Methods
+### Methods {#methods}
 
 #### getInfo()
 
@@ -142,7 +142,7 @@ chrome.system.storage.getAvailableCapacity(deviceId, callback)
 - `deviceId` (string): The unique ID of the storage device.
 - `callback` (function): Called with the available capacity.
 
-### Events
+### Events {#events}
 
 #### onAttached
 
@@ -160,21 +160,21 @@ Fired when a removable storage device is detached.
 chrome.system.storage.onDetached.addListener(callback)
 ```
 
-### Use Cases
+### Use Cases {#use-cases}
 
 - **Removable Media Management**: Monitor USB drives and SD cards
 - **Storage Monitoring**: Display available space to users
 - **File Operations**: Direct file I/O to specific storage devices
 
-## chrome.system.display
+## chrome.system.display {#chromesystemdisplay}
 
-### Permission
+### Permission {#permission}
 
 ```json
 "permissions": ["system.display"]
 ```
 
-### Methods
+### Methods {#methods}
 
 #### getInfo(flags?)
 
@@ -217,7 +217,7 @@ chrome.system.display.setDisplayProperties(id, info, callback)
   - `rotation` (number): Screen rotation
   - `boundsOriginX`, `boundsOriginY` (number): Position for extended desktop
 
-### Events
+### Events {#events}
 
 #### onDisplayChanged
 
@@ -227,13 +227,13 @@ Fired when the display configuration changes.
 chrome.system.display.onDisplayChanged.addListener(callback)
 ```
 
-### Use Cases
+### Use Cases {#use-cases}
 
 - **Multi-Monitor Aware Extensions**: Position popups and windows appropriately
 - **Display Information**: Show users details about their monitor setup
 - **DPI-Aware Rendering**: Adjust UI scaling based on DPI
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 To use the chrome.system API, declare the required permissions in your manifest:
 
@@ -258,9 +258,9 @@ Request only the specific sub-permissions your extension needs. For example, if 
 }
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Display System Info Dashboard
+### Display System Info Dashboard {#display-system-info-dashboard}
 
 ```javascript
 async function showSystemInfo() {
@@ -274,7 +274,7 @@ async function showSystemInfo() {
 }
 ```
 
-### Adaptive Behavior Based on CPU/Memory
+### Adaptive Behavior Based on CPU/Memory {#adaptive-behavior-based-on-cpumemory}
 
 ```javascript
 async function adaptToSystemCapabilities() {
@@ -292,7 +292,7 @@ async function adaptToSystemCapabilities() {
 }
 ```
 
-### Monitor Removable Storage Devices
+### Monitor Removable Storage Devices {#monitor-removable-storage-devices}
 
 ```javascript
 // Listen for removable storage attachment
@@ -309,7 +309,7 @@ const devices = await chrome.system.storage.getInfo();
 const removable = devices.filter(d => d.type === 'removable');
 ```
 
-### Multi-Monitor Aware Extension
+### Multi-Monitor Aware Extension {#multi-monitor-aware-extension}
 
 ```javascript
 async function positionOnSecondMonitor() {
@@ -327,12 +327,12 @@ async function positionOnSecondMonitor() {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Permissions Overview](/docs/permissions/overview.md) - Understanding Chrome extension permissions
 - [System Permissions](/docs/permissions/system.md) - Detailed information on system-related permissions
 
-## Additional Resources
+## Additional Resources {#additional-resources}
 
 - [Chrome System API Official Documentation](https://developer.chrome.com/docs/extensions/system-api)
 - [Manifest Permissions Format](/docs/permissions/overview.md)

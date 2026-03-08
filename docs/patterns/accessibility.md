@@ -7,19 +7,19 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Accessibility in Chrome Extensions
 
-## Overview
+## Overview {#overview}
 
 Extension UIs — popups, options pages, side panels, and injected content — must be accessible to all users. This guide covers ARIA patterns, keyboard navigation, focus management, screen reader support, and high-contrast mode for Chrome extension interfaces.
 
 ---
 
-## Why Accessibility Matters for Extensions
+## Why Accessibility Matters for Extensions {#why-accessibility-matters-for-extensions}
 
 Extensions modify the browser experience. An inaccessible extension doesn't just fail one user — it can break the accessibility of every page it touches. Content scripts that inject UI elements can destroy the accessibility tree of the host page if done carelessly.
 
 ---
 
-## Pattern 1: Accessible Popup Structure
+## Pattern 1: Accessible Popup Structure {#pattern-1-accessible-popup-structure}
 
 Popups are small, focused UIs. Structure them with proper landmarks and headings:
 
@@ -95,7 +95,7 @@ Popups are small, focused UIs. Structure them with proper landmarks and headings
 
 ---
 
-## Pattern 2: Keyboard Navigation in Popups
+## Pattern 2: Keyboard Navigation in Popups {#pattern-2-keyboard-navigation-in-popups}
 
 Every interactive element must be reachable and operable via keyboard:
 
@@ -159,7 +159,7 @@ function announceStatus(message: string) {
 
 ---
 
-## Pattern 3: Accessible Content Script Injection
+## Pattern 3: Accessible Content Script Injection {#pattern-3-accessible-content-script-injection}
 
 When injecting UI into web pages, preserve the host page's accessibility:
 
@@ -241,7 +241,7 @@ function createAccessiblePanel(): HTMLElement {
 
 ---
 
-## Pattern 4: ARIA Live Regions for Dynamic Updates
+## Pattern 4: ARIA Live Regions for Dynamic Updates {#pattern-4-aria-live-regions-for-dynamic-updates}
 
 Extensions often update UI dynamically. Use live regions so screen readers announce changes:
 
@@ -282,7 +282,7 @@ announcer.announce("3 results found");
 
 ---
 
-## Pattern 5: High Contrast and Forced Colors
+## Pattern 5: High Contrast and Forced Colors {#pattern-5-high-contrast-and-forced-colors}
 
 Support Windows High Contrast Mode and `prefers-contrast`:
 
@@ -351,7 +351,7 @@ Support Windows High Contrast Mode and `prefers-contrast`:
 
 ---
 
-## Pattern 6: Accessible Options Page
+## Pattern 6: Accessible Options Page {#pattern-6-accessible-options-page}
 
 Options pages are full HTML pages with more complex forms:
 
@@ -425,7 +425,7 @@ function validateForm(form: HTMLFormElement): FieldError[] {
 
 ---
 
-## Pattern 7: Extension Keyboard Shortcuts
+## Pattern 7: Extension Keyboard Shortcuts {#pattern-7-extension-keyboard-shortcuts}
 
 Register accessible keyboard shortcuts via the manifest and commands API:
 
@@ -462,7 +462,7 @@ Users can customize these at `chrome://extensions/shortcuts` — always provide 
 
 ---
 
-## Pattern 8: Color and Contrast Requirements
+## Pattern 8: Color and Contrast Requirements {#pattern-8-color-and-contrast-requirements}
 
 Ensure sufficient contrast ratios (WCAG 2.1 AA):
 
@@ -490,9 +490,9 @@ function getContrastRatio(l1: number, l2: number): number {
 
 ---
 
-## Testing Accessibility
+## Testing Accessibility {#testing-accessibility}
 
-### Chrome DevTools Audit
+### Chrome DevTools Audit {#chrome-devtools-audit}
 
 ```ts
 // In the extension's popup or options page console:
@@ -501,7 +501,7 @@ function getContrastRatio(l1: number, l2: number): number {
 // 3. Elements > Accessibility pane for ARIA tree inspection
 ```
 
-### Automated Testing
+### Automated Testing {#automated-testing}
 
 ```ts
 // tests/a11y.test.ts
@@ -519,7 +519,7 @@ test("popup has no accessibility violations", async ({ page }) => {
 });
 ```
 
-### Manual Checklist
+### Manual Checklist {#manual-checklist}
 
 - [ ] All interactive elements reachable via Tab
 - [ ] All actions possible via keyboard alone
@@ -533,7 +533,7 @@ test("popup has no accessibility violations", async ({ page }) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Key Takeaway |
 |---------|-------------|

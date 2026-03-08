@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.sessions` API lets you query and restore recently closed tabs and windows, as well as access tabs from other devices signed into the same Chrome profile.
 
-## Permissions
+## Permissions {#permissions}
 
 ```json
 {
@@ -29,9 +29,9 @@ Without `tabs`, tab objects will have `undefined` values for `url` and `title`.
 
 See the [sessions permission reference](../permissions/sessions.md) for details.
 
-## Types
+## Types {#types}
 
-### Session
+### Session {#session}
 
 Represents a recently closed tab or window:
 
@@ -43,7 +43,7 @@ Represents a recently closed tab or window:
 
 A `Session` object contains either a `tab` or a `window`, but never both.
 
-### Device
+### Device {#device}
 
 Represents a remote device with sessions:
 
@@ -52,7 +52,7 @@ Represents a remote device with sessions:
 | `deviceName` | `string` | Name of the device (e.g., "Mike's MacBook Pro") |
 | `sessions` | `Session[]` | Array of recent sessions on this device |
 
-### Filter
+### Filter {#filter}
 
 Filter options for querying sessions:
 
@@ -60,7 +60,7 @@ Filter options for querying sessions:
 |----------|------|-------------|
 | `maxResults` | `number` | Maximum number of sessions to return (1-25) |
 
-### MAX_SESSION_RESULTS
+### MAX_SESSION_RESULTS {#max-session-results}
 
 ```ts
 const chrome.sessions.MAX_SESSION_RESULTS; // 25
@@ -68,9 +68,9 @@ const chrome.sessions.MAX_SESSION_RESULTS; // 25
 
 The maximum number of sessions that can be returned in a single query. This is a read-only constant.
 
-## Methods
+## Methods {#methods}
 
-### chrome.sessions.getRecentlyClosed(filter?)
+### chrome.sessions.getRecentlyClosed(filter?) {#chromesessionsgetrecentlyclosedfilter}
 
 Retrieves a list of recently closed tabs/windows.
 
@@ -92,7 +92,7 @@ for (const session of sessions) {
 
 **Returns:** `Promise<Session[]>`
 
-### chrome.sessions.restore(sessionId?)
+### chrome.sessions.restore(sessionId?) {#chromesessionsrestoresessionid}
 
 Restores a closed tab or window.
 
@@ -109,7 +109,7 @@ await chrome.sessions.restore("session-id-123");
 
 **Returns:** `Promise<Session>` — The restored session containing either a tab or window.
 
-### chrome.sessions.getDevices(filter?)
+### chrome.sessions.getDevices(filter?) {#chromesessionsgetdevicesfilter}
 
 Retrieves sessions from all devices signed into the same Chrome profile.
 
@@ -132,9 +132,9 @@ for (const device of devices) {
 
 **Returns:** `Promise<Device[]>`
 
-## Events
+## Events {#events}
 
-### chrome.sessions.onChanged
+### chrome.sessions.onChanged {#chromesessionsonchanged}
 
 Fires when the list of recently closed sessions changes (e.g., user closes a tab).
 
@@ -146,9 +146,9 @@ chrome.sessions.onChanged.addListener(() => {
 
 This event has no payload. Query `getRecentlyClosed()` to get the updated list.
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### List Recently Closed Tabs
+### List Recently Closed Tabs {#list-recently-closed-tabs}
 
 ```ts
 async function listRecentlyClosed() {
@@ -163,7 +163,7 @@ async function listRecentlyClosed() {
 }
 ```
 
-### Restore Most Recently Closed Tab
+### Restore Most Recently Closed Tab {#restore-most-recently-closed-tab}
 
 ```ts
 async function restoreLastTab() {
@@ -178,7 +178,7 @@ async function restoreLastTab() {
 }
 ```
 
-### Cross-Device Tab Viewer
+### Cross-Device Tab Viewer {#cross-device-tab-viewer}
 
 ```ts
 async function getAllDeviceTabs(): Promise<Map<string, string[]>> {
@@ -199,7 +199,7 @@ async function getAllDeviceTabs(): Promise<Map<string, string[]>> {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Sessions permission](../permissions/sessions.md)
 - [Sessions API patterns](../patterns/sessions-api.md)

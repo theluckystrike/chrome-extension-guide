@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Persisting state across MV3 service worker restarts is critical for building reliable Chrome extensions. Unlike the persistent background page in MV2, MV3 service workers are ephemeral and can be terminated after a period of inactivity, losing all in-memory state.
 
-## The Problem
+## The Problem {#the-problem}
 
 Service workers in MV3 have a lifecycle that includes activation, idle, and termination phases. When a service worker goes idle and later gets terminated, all global variables and in-memory data are lost. This affects:
 
@@ -18,9 +18,9 @@ Service workers in MV3 have a lifecycle that includes activation, idle, and term
 - Temporary computation results
 - Any state stored in global variables
 
-## Storage Options
+## Storage Options {#storage-options}
 
-### chrome.storage.session
+### chrome.storage.session {#chromestoragesession}
 
 Ephemeral storage that survives service worker restarts but NOT browser restart. Ideal for:
 
@@ -33,7 +33,7 @@ Ephemeral storage that survives service worker restarts but NOT browser restart.
 await chrome.storage.session.set({ lastFetch: Date.now() });
 ```
 
-### chrome.storage.local
+### chrome.storage.local {#chromestoragelocal}
 
 Persistent storage that survives browser restarts. Use for:
 
@@ -46,7 +46,7 @@ Persistent storage that survives browser restarts. Use for:
 await chrome.storage.local.set({ userSettings: settings });
 ```
 
-## Choosing the Right Storage Area
+## Choosing the Right Storage Area {#choosing-the-right-storage-area}
 
 | Use Case | Storage Area | Rationale |
 |----------|--------------|-----------|
@@ -56,7 +56,7 @@ await chrome.storage.local.set({ userSettings: settings });
 | Temporary computation | session | Rebuildable state |
 | Tab/window state | session | Survives SW restart, not browser crash |
 
-## State Hydration Pattern
+## State Hydration Pattern {#state-hydration-pattern}
 
 Load state from storage when the service worker wakes up, and flush to storage before going to sleep.
 
@@ -89,7 +89,7 @@ class StateManager {
 }
 ```
 
-## onSuspend Handler
+## onSuspend Handler {#onsuspend-handler}
 
 Save critical state before the service worker terminates:
 
@@ -103,7 +103,7 @@ chrome.runtime.onSuspend.addListener(async () => {
 });
 ```
 
-## Lazy Initialization
+## Lazy Initialization {#lazy-initialization}
 
 Reconstruct state from storage on first access rather than at startup:
 
@@ -119,7 +119,7 @@ async function getUsers() {
 }
 ```
 
-## Global Variables Anti-Pattern
+## Global Variables Anti-Pattern {#global-variables-anti-pattern}
 
 Never rely on global state in MV3 service workers:
 
@@ -139,7 +139,7 @@ async function handleMessage(msg) {
 }
 ```
 
-## Caching Strategy: Hot Data in Memory + Storage Backing
+## Caching Strategy: Hot Data in Memory + Storage Backing {#caching-strategy-hot-data-in-memory-storage-backing}
 
 Keep frequently accessed data in a global variable with storage as backup:
 
@@ -164,7 +164,7 @@ class HybridCache {
 }
 ```
 
-## Promise-Based Initialization
+## Promise-Based Initialization {#promise-based-initialization}
 
 Ensure state is loaded before processing messages:
 
@@ -186,7 +186,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Session Storage for Tabs/Window State
+## Session Storage for Tabs/Window State {#session-storage-for-tabswindow-state}
 
 Data stored in `chrome.storage.session` survives service worker restarts but not browser crash. This is useful for:
 
@@ -203,7 +203,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 });
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Service Worker Keep-Alive Patterns](./service-worker-keepalive.md)

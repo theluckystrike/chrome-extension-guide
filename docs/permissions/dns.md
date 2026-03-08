@@ -9,43 +9,43 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # dns Permission
 
-## Overview
+## Overview {#overview}
 - Permission string: `"dns"`
 - Grants access to `chrome.dns` API
 - Perform DNS lookups from the extension
 - Note: Limited availability, check chrome.dns existence before use
 
-## API Methods
+## API Methods {#api-methods}
 - `chrome.dns.resolve(hostname)` resolve a hostname to IP address
   - Returns Promise with `{ resultCode, address }`
   - resultCode: 0 for success, non-zero for error
   - address: resolved IP address string
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 ```json
 { "permissions": ["dns"] }
 ```
 
-## Availability
+## Availability {#availability}
 - Originally dev channel only
 - Check `typeof chrome.dns !== 'undefined'` before use
 - Not available in all Chrome builds
 - Consider fallback strategies
 
-## Use Cases
+## Use Cases {#use-cases}
 - Network diagnostics: check if hostname resolves
 - Hostname verification: verify domains before connecting
 - DNS-based ad/tracker filtering: check DNS blocklists
 - Security tools: detect DNS rebinding attempts
 - Developer tools: DNS lookup utility
 
-## Limitations
+## Limitations {#limitations}
 - Only A/AAAA record lookups (no MX, TXT, etc.)
 - No cache control
 - No TTL information returned
 - Single hostname per call (no batch)
 
-## Code Examples
+## Code Examples {#code-examples}
 ```typescript
 // Basic hostname resolution
 async function resolveHostname(hostname: string): Promise<string | null> {
@@ -124,5 +124,7 @@ DNS resolution can behave differently on various networks (home, corporate VPN, 
 The API only supports A (IPv4) and AAAA (IPv6) records. If you need to query other record types, you'll need to use an external DNS service as a fallback.
 
 ## Cross-References
+
+## Cross-References {#cross-references}
 - guides/security-best-practices.md
 - patterns/network-interception.md

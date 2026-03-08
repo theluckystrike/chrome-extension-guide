@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.scripting` API lets you inject JavaScript and CSS into web pages. It replaces the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` from Manifest V2 with a more powerful, structured interface.
 
-## Permissions
+## Permissions {#permissions}
 
 The `scripting` permission is required. You also need [host permissions](../permissions/host-permissions.md) for any pages you want to inject into.
 
@@ -22,9 +22,9 @@ The `scripting` permission is required. You also need [host permissions](../perm
 
 If you use `activeTab` instead of broad host permissions, injection is allowed only after the user triggers the extension (clicks the action button, uses a context menu, etc.).
 
-## Key Types
+## Key Types {#key-types}
 
-### InjectionTarget
+### InjectionTarget {#injectiontarget}
 
 Specifies which tab and frames to inject into.
 
@@ -42,7 +42,7 @@ Rules:
 - `frameIds`, `allFrames`, and `documentIds` are mutually exclusive.
 - If none of the optional fields are set, injection targets only the top-level frame.
 
-### ExecutionWorld
+### ExecutionWorld {#executionworld}
 
 Controls the JavaScript environment where code runs.
 
@@ -51,7 +51,7 @@ Controls the JavaScript environment where code runs.
 | `"ISOLATED"` | Default. Runs in the content script isolated world. Has DOM access but not the page's JS variables. |
 | `"MAIN"` | Runs in the page's own execution context. Can access page JS variables but loses extension API access. The page can observe your code. |
 
-### ScriptInjection
+### ScriptInjection {#scriptinjection}
 
 ```ts
 interface ScriptInjection {
@@ -66,7 +66,7 @@ interface ScriptInjection {
 
 Provide exactly one of `func` or `files`.
 
-### InjectionResult
+### InjectionResult {#injectionresult}
 
 ```ts
 interface InjectionResult {
@@ -76,9 +76,9 @@ interface InjectionResult {
 }
 ```
 
-## Methods
+## Methods {#methods}
 
-### chrome.scripting.executeScript(injection)
+### chrome.scripting.executeScript(injection) {#chromescriptingexecutescriptinjection}
 
 Injects JavaScript into a page. Returns a promise resolving to an array of `InjectionResult` objects, one per frame injected into.
 
@@ -174,7 +174,7 @@ try {
 
 ---
 
-### chrome.scripting.insertCSS(injection)
+### chrome.scripting.insertCSS(injection) {#chromescriptinginsertcssinjection}
 
 Injects CSS into a page.
 
@@ -223,7 +223,7 @@ await chrome.scripting.insertCSS({
 
 ---
 
-### chrome.scripting.removeCSS(injection)
+### chrome.scripting.removeCSS(injection) {#chromescriptingremovecssinjection}
 
 Removes CSS that was previously inserted with `insertCSS`. The parameters must exactly match a prior `insertCSS` call.
 
@@ -241,7 +241,7 @@ await chrome.scripting.removeCSS({ target: { tabId: tab.id }, css: darkCSS });
 
 ---
 
-### chrome.scripting.registerContentScripts(scripts)
+### chrome.scripting.registerContentScripts(scripts) {#chromescriptingregistercontentscriptsscripts}
 
 Registers content scripts dynamically at runtime. These persist across browser restarts by default and can be added, updated, or removed without reloading the extension.
 
@@ -327,7 +327,7 @@ try {
 
 ---
 
-### chrome.scripting.updateContentScripts(scripts)
+### chrome.scripting.updateContentScripts(scripts) {#chromescriptingupdatecontentscriptsscripts}
 
 Updates properties of previously registered content scripts. Only the properties you provide are changed; omitted properties keep their current values. The `id` field is required.
 
@@ -346,7 +346,7 @@ await chrome.scripting.updateContentScripts([
 
 ---
 
-### chrome.scripting.unregisterContentScripts(filter?)
+### chrome.scripting.unregisterContentScripts(filter?) {#chromescriptingunregistercontentscriptsfilter}
 
 Removes registered content scripts. With no arguments, removes all dynamically registered scripts.
 
@@ -364,7 +364,7 @@ await chrome.scripting.unregisterContentScripts();
 
 ---
 
-### chrome.scripting.getRegisteredContentScripts(filter?)
+### chrome.scripting.getRegisteredContentScripts(filter?) {#chromescriptinggetregisteredcontentscriptsfilter}
 
 Returns all dynamically registered content scripts, optionally filtered by ID.
 
@@ -385,9 +385,9 @@ const specific = await chrome.scripting.getRegisteredContentScripts({
 
 ---
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Toggle injection on/off
+### Toggle injection on/off {#toggle-injection-onoff}
 
 ```ts
 let isEnabled = false;
@@ -423,7 +423,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Inject with complex arguments and return values
+### Inject with complex arguments and return values {#inject-with-complex-arguments-and-return-values}
 
 ```ts
 interface SearchConfig {
@@ -453,7 +453,7 @@ const links = await extractFromPage(tab.id, {
 });
 ```
 
-### Bridge between MAIN and ISOLATED worlds
+### Bridge between MAIN and ISOLATED worlds {#bridge-between-main-and-isolated-worlds}
 
 ```ts
 // Step 1: Read page variables from the MAIN world
@@ -479,7 +479,7 @@ const results = await chrome.scripting.executeScript({
 
 ---
 
-## Migration from MV2
+## Migration from MV2 {#migration-from-mv2}
 
 | MV2 | MV3 |
 |-----|-----|
@@ -497,7 +497,7 @@ Key differences:
 
 ---
 
-## Gotchas and Limitations
+## Gotchas and Limitations {#gotchas-and-limitations}
 
 1. **Cannot inject into `chrome://` or `chrome-extension://` pages.** These are always off-limits.
 2. **Cannot inject into the Chrome Web Store** (`https://chromewebstore.google.com`).
@@ -509,7 +509,7 @@ Key differences:
 8. **Dynamic scripts with `persistAcrossSessions: true`** survive extension updates, browser restarts, and enable/disable cycles.
 9. **Injection into `about:blank` frames** requires `matchOriginAsFallback: true` on registered content scripts.
 
-## See Also
+## See Also {#see-also}
 
 - [Content Scripts Guide](../guides/content-scripts.md) -- patterns for building content scripts
 - [Tabs API Reference](tabs-api.md) -- querying and managing tabs

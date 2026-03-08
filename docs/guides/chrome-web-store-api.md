@@ -6,16 +6,16 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Chrome Web Store Publish API
 
-## Introduction
+## Introduction {#introduction}
 - Automate extension publishing with Chrome Web Store API
 - Use cases: CI/CD pipelines, automated releases, multi-extension management
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Chrome Web Store developer account ($5 one-time fee)
 - Google Cloud project with CWS API enabled
 - OAuth2 credentials (client ID + client secret)
 
-## Setting Up API Access
+## Setting Up API Access {#setting-up-api-access}
 1. Go to Google Cloud Console -> APIs & Services -> Enable "Chrome Web Store API"
 2. Create OAuth2 credentials (Desktop app type)
 3. Get refresh token using authorization flow:
@@ -25,9 +25,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
    ```
 4. Exchange code for refresh token
 
-## API Endpoints
+## API Endpoints {#api-endpoints}
 
-### Upload a New Version
+### Upload a New Version {#upload-a-new-version}
 ```bash
 curl -X PUT \
   -H "Authorization: Bearer ACCESS_TOKEN" \
@@ -36,7 +36,7 @@ curl -X PUT \
   "https://www.googleapis.com/upload/chromewebstore/v1.1/items/EXTENSION_ID"
 ```
 
-### Publish an Extension
+### Publish an Extension {#publish-an-extension}
 ```bash
 curl -X POST \
   -H "Authorization: Bearer ACCESS_TOKEN" \
@@ -45,52 +45,52 @@ curl -X POST \
   "https://www.googleapis.com/chromewebstore/v1.1/items/EXTENSION_ID/publish"
 ```
 
-### Get Extension Info
+### Get Extension Info {#get-extension-info}
 ```bash
 curl -H "Authorization: Bearer ACCESS_TOKEN" \
   -H "x-goog-api-version: 2" \
   "https://www.googleapis.com/chromewebstore/v1.1/items/EXTENSION_ID?projection=DRAFT"
 ```
 
-## CI/CD Integration
+## CI/CD Integration {#cicd-integration}
 
-### GitHub Actions Workflow
+### GitHub Actions Workflow {#github-actions-workflow}
 - Complete example workflow: build -> zip -> upload -> publish
 - Using secrets for credentials
 - Triggered on version tag push
 
-### npm Script Automation
+### npm Script Automation {#npm-script-automation}
 - `chrome-webstore-upload-cli` npm package
 - Configure with environment variables
 - Add to `package.json` scripts
 
-## Publishing to Specific Channels
+## Publishing to Specific Channels {#publishing-to-specific-channels}
 - `"publishTarget": "default"` — public
 - `"publishTarget": "trustedTesters"` — beta testers only
 - Useful for staged rollouts
 
-## Version Management with the API
+## Version Management with the API {#version-management-with-the-api}
 - Bump version in `manifest.json` before upload
 - API rejects uploads with same or lower version number
 - Cross-ref: `docs/publishing/version-management.md` (upcoming)
 
-## Error Handling
+## Error Handling {#error-handling}
 - 401: Token expired — refresh the access token
 - 403: API not enabled or wrong permissions
 - 409: Version conflict — bump the version number
 - Review status codes and what they mean
 
-## Rate Limits
+## Rate Limits {#rate-limits}
 - Upload: 20 per day per extension
 - Publish: limited (don't publish more than a few times per day)
 
-## Security Best Practices
+## Security Best Practices {#security-best-practices}
 - Never commit API credentials to source control
 - Use CI/CD secrets or environment variables
 - Rotate refresh tokens periodically
 - Limit OAuth scope to `chromewebstore` only
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
 - [Listing Optimization](../publishing/listing-optimization.md)

@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # Chrome Extension Architecture Deep Dive
 
-## The Extension Component Model
+## The Extension Component Model {#the-extension-component-model}
 - How Chrome loads and isolates extension components
 - Process model: each component runs in its own context
 - Diagram description: Background SW <-> Content Scripts <-> Popup/Options <-> DevTools
 
-## Background Service Worker
+## Background Service Worker {#background-service-worker}
 - Entry point defined in `manifest.json` `"background": { "service_worker": "background.js" }`
 - Lifecycle: install -> activate -> idle -> terminate -> wake
 - No DOM access, no `window` object
@@ -19,26 +19,26 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Persistence: use `chrome.storage` (via `@theluckystrike/webext-storage`) to persist state across restarts
 - Example: `const storage = createStorage(defineSchema({ lastRun: 'number' }), 'local')`
 
-## Content Scripts
+## Content Scripts {#content-scripts}
 - Injected into web pages via `manifest.json` `"content_scripts"` or `chrome.scripting.executeScript`
 - Isolated world: shares DOM but NOT JavaScript scope with the page
 - Can access limited Chrome APIs: `chrome.runtime`, `chrome.storage`
 - Communication with background: use `@theluckystrike/webext-messaging`
 - Example: `const messenger = createMessenger<MyMessages>(); messenger.sendMessage('getData', { key: 'value' })`
 
-## Popup and Options Pages
+## Popup and Options Pages {#popup-and-options-pages}
 - Popup: triggered by clicking extension icon, lives as long as popup is open
 - Options: full page for extension settings, opened via right-click -> Options
 - Both have full Chrome API access like background
 - State management: use `@theluckystrike/webext-storage` `watch()` for reactive updates
 - Example: `storage.watch('theme', (newVal, oldVal) => updateUI(newVal))`
 
-## DevTools Pages
+## DevTools Pages {#devtools-pages}
 - Custom panels in Chrome DevTools
 - Access to `chrome.devtools.*` APIs
 - Communication pattern: DevTools -> Background -> Content Script
 
-## Inter-Component Communication Patterns
+## Inter-Component Communication Patterns {#inter-component-communication-patterns}
 - Popup <-> Background: direct `chrome.runtime` messaging
 - Content <-> Background: `chrome.runtime.sendMessage` / `chrome.tabs.sendMessage`
 - Using `@theluckystrike/webext-messaging` for type-safe messaging across all components:
@@ -51,18 +51,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
   ```
 - Cross-component storage sync via `@theluckystrike/webext-storage` `watch()`
 
-## Manifest.json as the Blueprint
+## Manifest.json as the Blueprint {#manifestjson-as-the-blueprint}
 - Structure overview: manifest_version, name, version, permissions, background, content_scripts, action
 - How Chrome reads the manifest to wire up components
 - Common mistakes: missing permissions, wrong paths, invalid JSON
 
-## Security Boundaries
+## Security Boundaries {#security-boundaries}
 - Content scripts can't access extension pages directly
 - Web pages can't access extension APIs
 - Extension pages can't access other extensions
 - CSP restrictions in MV3 (cross-ref: `docs/mv3/content-security-policy.md`)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)

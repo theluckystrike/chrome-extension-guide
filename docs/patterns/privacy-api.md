@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Chrome Extension Privacy API Patterns
 
-## Overview
+## Overview {#overview}
 
 The Chrome Privacy API (`chrome.privacy`) enables extensions to read and modify browser privacy settings. This guide covers eight practical patterns from basic setting retrieval to building a privacy dashboard with presets and monitoring.
 
@@ -18,7 +18,7 @@ The API is organized into three categories:
 
 ---
 
-## Required Permission
+## Required Permission {#required-permission}
 
 ```json
 { "permissions": ["privacy"] }
@@ -26,7 +26,7 @@ The API is organized into three categories:
 
 ---
 
-## Pattern 1: Reading Privacy Settings
+## Pattern 1: Reading Privacy Settings {#pattern-1-reading-privacy-settings}
 
 ```ts
 // background.ts
@@ -67,7 +67,7 @@ async function getAllPrivacySettings(): Promise<AllSettings> {
 
 ---
 
-## Pattern 2: Controlling WebRTC IP Handling
+## Pattern 2: Controlling WebRTC IP Handling {#pattern-2-controlling-webrtc-ip-handling}
 
 WebRTC can leak your real IP address even with VPNs.
 
@@ -88,7 +88,7 @@ async function examples() {
 
 ---
 
-## Pattern 3: Managing Third-Party Cookies
+## Pattern 3: Managing Third-Party Cookies {#pattern-3-managing-third-party-cookies}
 
 ```ts
 async function setThirdPartyCookies(allowed: boolean): Promise<void> {
@@ -112,7 +112,7 @@ async function getCookieCapabilities(): Promise<{ allowed: boolean; levelOfContr
 
 ---
 
-## Pattern 4: Toggling Safe Browsing and Predictions
+## Pattern 4: Toggling Safe Browsing and Predictions {#pattern-4-toggling-safe-browsing-and-predictions}
 
 ```ts
 async function setSafeBrowsingEnabled(enabled: boolean): Promise<void> {
@@ -130,9 +130,9 @@ async function setPredictionServices(settings: { networkPrediction: boolean; spe
 
 ---
 
-## Pattern 5: Privacy Dashboard Popup
+## Pattern 5: Privacy Dashboard Popup {#pattern-5-privacy-dashboard-popup}
 
-### Popup HTML
+### Popup HTML {#popup-html}
 
 ```html
 <!-- popup.html -->
@@ -181,7 +181,7 @@ async function setPredictionServices(settings: { networkPrediction: boolean; spe
 </html>
 ```
 
-### Popup TypeScript
+### Popup TypeScript {#popup-typescript}
 
 ```ts
 // popup.ts
@@ -221,7 +221,7 @@ document.getElementById("refresh").addEventListener("click", loadSettings);
 loadSettings();
 ```
 
-### Background Handler
+### Background Handler {#background-handler}
 
 ```ts
 // background.ts
@@ -256,7 +256,7 @@ async function handleSet(key: string, value: any): Promise<void> {
 
 ---
 
-## Pattern 6: One-Click Privacy Hardening
+## Pattern 6: One-Click Privacy Hardening {#pattern-6-one-click-privacy-hardening}
 
 ```ts
 const HARDENING = {
@@ -296,7 +296,7 @@ async function applyHardening(): Promise<{ applied: string[]; errors: string[] }
 
 ---
 
-## Pattern 7: Per-Profile Privacy Presets
+## Pattern 7: Per-Profile Privacy Presets {#pattern-7-per-profile-privacy-presets}
 
 ```ts
 interface Preset { id: string; name: string; description: string; settings: Record<string, any>; }
@@ -339,7 +339,7 @@ export const presetManager = new PresetManager();
 
 ---
 
-## Pattern 8: Monitoring and Alerting
+## Pattern 8: Monitoring and Alerting {#pattern-8-monitoring-and-alerting}
 
 ```ts
 interface ChangeEvent { setting: string; oldValue: any; newValue: any; timestamp: number; }
@@ -397,7 +397,7 @@ function isRisk(setting: string, value: any): boolean {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Description | Key APIs |
 |---------|-------------|----------|
@@ -410,13 +410,13 @@ function isRisk(setting: string, value: any): boolean {
 | **7: Presets** | Relaxed/Moderate/Strict | `PresetManager` |
 | **8: Monitoring** | Track and alert | Polling + badges |
 
-### Dependencies
+### Dependencies {#dependencies}
 
 ```bash
 npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 ```
 
-### Settings Quick Reference
+### Settings Quick Reference {#settings-quick-reference}
 
 | Category | Settings |
 |----------|----------|

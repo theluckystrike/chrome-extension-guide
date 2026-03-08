@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 This tutorial walks through building a Chrome extension that lets users inspect DOM elements on any webpage—hover to highlight, view element details, and copy selectors.
 
-## Step 1: Manifest Configuration
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with the `activeTab` permission for minimal access:
 
@@ -27,7 +27,7 @@ Create `manifest.json` with the `activeTab` permission for minimal access:
 }
 ```
 
-## Step 2: Toggle Inspect Mode
+## Step 2: Toggle Inspect Mode {#step-2-toggle-inspect-mode}
 
 Handle the browser action click in `background.js` to inject the content script:
 
@@ -40,7 +40,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Step 3: Hover Overlay Highlighting
+## Step 3: Hover Overlay Highlighting {#step-3-hover-overlay-highlighting}
 
 In `content.js`, create an overlay that highlights elements on hover:
 
@@ -60,7 +60,7 @@ document.addEventListener('mouseover', (e) => {
 });
 ```
 
-## Step 4: Element Info Panel
+## Step 4: Element Info Panel {#step-4-element-info-panel}
 
 Show element details on click—tag name, classes, id, dimensions, computed styles:
 
@@ -86,7 +86,7 @@ function createInfoPanel(el) {
 }
 ```
 
-## Step 5: Generate CSS Selector
+## Step 5: Generate CSS Selector {#step-5-generate-css-selector}
 
 Build a unique CSS selector for any element:
 
@@ -111,7 +111,7 @@ function getCssSelector(el) {
 }
 ```
 
-## Step 6: Generate XPath
+## Step 6: Generate XPath {#step-6-generate-xpath}
 
 Create an XPath for element selection:
 
@@ -129,7 +129,7 @@ function getXPath(el) {
 }
 ```
 
-## Step 7: DOM Tree Hierarchy View
+## Step 7: DOM Tree Hierarchy View {#step-7-dom-tree-hierarchy-view}
 
 Display parent hierarchy up to body:
 
@@ -146,7 +146,7 @@ function getHierarchy(el) {
 }
 ```
 
-## Step 8: Clipboard Operations
+## Step 8: Clipboard Operations {#step-8-clipboard-operations}
 
 Copy selector, XPath, or HTML to clipboard:
 
@@ -166,14 +166,14 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-## Performance & UX Tips
+## Performance & UX Tips {#performance-ux-tips}
 
 - **Throttle mousemove**: Use `requestAnimationFrame` or lodash throttle to limit hover updates
 - **Exclude extension elements**: Use `e.target.closest('[data-dom-inspector]')` to skip overlay UI
 - **Keyboard navigation**: Arrow keys to move up/down the DOM tree
 - **Scroll offset**: Account for `window.scrollY` and `window.scrollX` in overlay positioning
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - See [DOM Observer Patterns](/patterns/dom-observer-patterns.md) for mutation tracking
 - See [Clipboard Patterns](/patterns/clipboard-patterns.md) for advanced copy operations

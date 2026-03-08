@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This pattern describes how Chrome extensions communicate with websites they are not injected into. Unlike content scripts which run in the context of web pages, extension-to-web communication allows external websites to interact with your extension's backend.
 
-## Manifest Configuration: externally_connectable
+## Manifest Configuration: externally_connectable {#manifest-configuration-externally-connectable}
 
 To enable communication from websites, declare the `externally_connectable` manifest key in your `manifest.json`:
 
@@ -24,7 +24,7 @@ To enable communication from websites, declare the `externally_connectable` mani
 
 The `matches` array defines which websites can send messages to your extension. Omitting `matches` means no web pages can connect (only other extensions can). Note: `externally_connectable` is a manifest key, not a permission -- it does not go in the `permissions` array.
 
-## Sending Messages from Website to Extension
+## Sending Messages from Website to Extension {#sending-messages-from-website-to-extension}
 
 Web pages use `chrome.runtime.sendMessage()` to communicate with the extension:
 
@@ -43,7 +43,7 @@ chrome.runtime.sendMessage(
 );
 ```
 
-## Receiving Messages in the Extension
+## Receiving Messages in the Extension {#receiving-messages-in-the-extension}
 
 The extension must set up a listener in its service worker or background script:
 
@@ -64,7 +64,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 });
 ```
 
-## Web-Accessible Resources
+## Web-Accessible Resources {#web-accessible-resources}
 
 Share static files with websites using `web_accessible_resources`:
 
@@ -81,7 +81,7 @@ Share static files with websites using `web_accessible_resources`:
 
 Websites can then load these resources directly via URL.
 
-## Content Script as Bridge
+## Content Script as Bridge {#content-script-as-bridge}
 
 For bidirectional communication, use a content script as intermediary:
 
@@ -97,7 +97,7 @@ window.addEventListener("message", (event) => {
 });
 ```
 
-## DOM-Based Communication
+## DOM-Based Communication {#dom-based-communication}
 
 For simple state sharing without message passing:
 
@@ -119,13 +119,13 @@ document.dispatchEvent(new CustomEvent("extensionReady", {
 }));
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
 - **Detect extension installation**: Website checks `chrome.runtime.sendMessage` callback
 - **Extension provides API**: Expose functionality like authentication, data processing
 - **Authentication bridge**: Share auth state between extension and website
 
-## Security Best Practices
+## Security Best Practices {#security-best-practices}
 
 Always validate the sender's origin:
 
@@ -141,7 +141,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 
 Limit `externally_connectable` to specific domains rather than using wildcards.
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Extension to Extension Communication](./extension-to-extension.md)
 - [Content Script Isolation Guide](../guides/content-script-isolation.md)

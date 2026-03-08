@@ -10,7 +10,7 @@ order: 23
 
 # Idle Permission
 
-## Overview
+## Overview {#overview}
 
 - **Permission string:** `"idle"`
 - **Grants access to:** `chrome.idle` API
@@ -18,9 +18,9 @@ order: 23
 
 ---
 
-## API Methods
+## API Methods {#api-methods}
 
-### `chrome.idle.queryState(detectionIntervalInSeconds)`
+### `chrome.idle.queryState(detectionIntervalInSeconds)` {#chromeidlequerystatedetectionintervalinseconds}
 
 Returns Promise resolving to `"active"`, `"idle"`, or `"locked"`.
 
@@ -30,7 +30,7 @@ chrome.idle.queryState(30).then((state) => {
 });
 ```
 
-### `chrome.idle.setDetectionInterval(intervalInSeconds)`
+### `chrome.idle.setDetectionInterval(intervalInSeconds)` {#chromeidlesetdetectionintervalintervalinseconds}
 
 Sets threshold for idle detection (minimum 15 seconds).
 
@@ -38,7 +38,7 @@ Sets threshold for idle detection (minimum 15 seconds).
 chrome.idle.setDetectionInterval(60);
 ```
 
-### `chrome.idle.getAutoLockDelay()`
+### `chrome.idle.getAutoLockDelay()` {#chromeidlegetautolockdelay}
 
 Returns system auto-lock delay in seconds (0 if never).
 
@@ -48,9 +48,9 @@ chrome.idle.getAutoLockDelay().then((delay) => console.log(delay));
 
 ---
 
-## Events
+## Events {#events}
 
-### `chrome.idle.onStateChanged.addListener(callback)`
+### `chrome.idle.onStateChanged.addListener(callback)` {#chromeidleonstatechangedaddlistenercallback}
 
 Fires with new state: `"active"`, `"idle"`, or `"locked"`. Detection interval set by `setDetectionInterval` determines when "idle" fires.
 
@@ -62,7 +62,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 { "permissions": ["idle"] }
@@ -70,7 +70,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Use Cases
+## Use Cases {#use-cases}
 
 - **Auto-save drafts** when user goes idle
 - **Presence detection** for collaboration tools
@@ -80,7 +80,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## MV3 Considerations
+## MV3 Considerations {#mv3-considerations}
 
 - `onStateChanged` wakes the service worker
 - Use with `chrome.alarms` for periodic idle checks
@@ -88,9 +88,9 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Basic Idle Detection
+### Basic Idle Detection {#basic-idle-detection}
 
 ```javascript
 chrome.idle.setDetectionInterval(30);
@@ -99,7 +99,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-### Auto-Save Pattern
+### Auto-Save Pattern {#auto-save-pattern}
 
 ```javascript
 let isDirty = false;
@@ -114,7 +114,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-### Security Pattern
+### Security Pattern {#security-pattern}
 
 ```javascript
 chrome.idle.onStateChanged.addListener((state) => {
@@ -198,7 +198,7 @@ Allow users to configure idle detection settings. Some users may want immediate 
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - `permissions/power.md`
 - `patterns/idle-detection.md`

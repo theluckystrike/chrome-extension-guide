@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # DevTools Extension Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome DevTools extensions extend Chrome's developer tools with custom panels, sidebar panes, and deep integration with the inspected page. DevTools pages run in a privileged context with access to the `chrome.devtools.*` APIs, enabling rich debugging and inspection tooling.
 
@@ -15,7 +15,7 @@ Chrome DevTools extensions extend Chrome's developer tools with custom panels, s
 
 ---
 
-## DevTools Page Lifecycle
+## DevTools Page Lifecycle {#devtools-page-lifecycle}
 
 The `devtools.html` page runs once per DevTools window opening. Use it to register panels and establish communication:
 
@@ -42,7 +42,7 @@ backgroundPort.postMessage({ type: "devtools-opened", tabId: chrome.devtools.ins
 
 ---
 
-## Creating Custom Panels
+## Creating Custom Panels {#creating-custom-panels}
 
 Panels appear as top-level tabs in DevTools. They contain full HTML pages with complete framework support:
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Sidebar Panes for Elements Panel
+## Sidebar Panes for Elements Panel {#sidebar-panes-for-elements-panel}
 
 Add contextual sidebars to the Elements panel that update when users select DOM elements:
 
@@ -97,7 +97,7 @@ chrome.devtools.panels.elements.createSidebarPane(
 
 ---
 
-## Accessing the Inspected Page
+## Accessing the Inspected Page {#accessing-the-inspected-page}
 
 Use `chrome.devtools.inspectedWindow.eval()` to execute code in the page context:
 
@@ -122,7 +122,7 @@ function highlightElement(selector: string) {
 
 ---
 
-## Network Monitoring
+## Network Monitoring {#network-monitoring}
 
 Capture and analyze HTTP traffic using the Network API:
 
@@ -145,7 +145,7 @@ chrome.devtools.network.getHAR((har) => {
 
 ---
 
-## Theme Detection
+## Theme Detection {#theme-detection}
 
 Detect whether DevTools is in light or dark mode:
 
@@ -159,7 +159,7 @@ document.documentElement.classList.toggle("dark-mode", themeName === "dark");
 
 ---
 
-## Resource Tracking
+## Resource Tracking {#resource-tracking}
 
 Monitor all resources loaded by the inspected page:
 
@@ -179,7 +179,7 @@ chrome.devtools.inspectedWindow.onResourceAdded.addListener((resource) => {
 
 ---
 
-## Communication Architecture
+## Communication Architecture {#communication-architecture}
 
 DevTools pages cannot directly access content scripts. Use message passing through the background service worker:
 
@@ -207,7 +207,7 @@ port.postMessage({ type: "page-state", data: {...} });
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | API | Purpose |
 |-----|---------|
@@ -220,7 +220,7 @@ port.postMessage({ type: "page-state", data: {...} });
 
 ---
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [DevTools API Reference](../api-reference/devtools-api.md)
 - [Building DevTools Extensions](../guides/devtools-extensions.md)

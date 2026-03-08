@@ -8,11 +8,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/t
 
 The Chrome Extension Tab Capture API is a powerful feature that allows extensions to capture the visual and audio content of browser tabs. This API opens up a wide range of possibilities, from building screen recording extensions to creating collaborative whiteboarding tools. In this comprehensive guide, we'll explore every aspect of the Tab Capture API, from basic usage to advanced implementation patterns.
 
-## Overview and Permissions
+## Overview and Permissions {#overview-and-permissions}
 
 The `chrome.tabCapture` API provides the ability to capture the content of a tab as a media stream. Before using this API, you need to declare the appropriate permissions in your extension's manifest file.
 
-### Manifest Permissions
+### Manifest Permissions {#manifest-permissions}
 
 To use the Tab Capture API, you must add the `"tabCapture"` permission to your manifest:
 
@@ -32,7 +32,7 @@ To use the Tab Capture API, you must add the `"tabCapture"` permission to your m
 
 It's important to note that the `"tabCapture"` permission alone doesn't automatically grant access to all tabs. The user must initiate the capture through a user gesture, such as clicking a button in your extension's popup or background script.
 
-### Understanding Capture Constraints
+### Understanding Capture Constraints {#understanding-capture-constraints}
 
 The Tab Capture API works in conjunction with the Chrome desktopCapture API. When capturing a tab, you can specify various constraints to control what gets captured:
 
@@ -48,11 +48,11 @@ const constraints = {
 };
 ```
 
-## Capturing Tab Audio and Video
+## Capturing Tab Audio and Video {#capturing-tab-audio-and-video}
 
 The primary method for capturing a tab is `chrome.tabCapture.capture()`. This method initiates the capture and returns a MediaStream object that you can use in various ways.
 
-### Basic Capture Implementation
+### Basic Capture Implementation {#basic-capture-implementation}
 
 Here's a fundamental example of how to capture a tab:
 
@@ -73,7 +73,7 @@ async function captureTab(tabId) {
 }
 ```
 
-### Capture Options
+### Capture Options {#capture-options}
 
 The `capture()` method accepts an options object with the following properties:
 
@@ -104,11 +104,11 @@ const captureOptions = {
 const stream = await chrome.tabCapture.capture(captureOptions);
 ```
 
-## MediaStream Handling and Processing
+## MediaStream Handling and Processing {#mediastream-handling-and-processing}
 
 Once you have a MediaStream from tab capture, you can process it in various ways. The stream behaves like any standard MediaStream, allowing you to work with its tracks using the MediaStream API.
 
-### Accessing Audio and Video Tracks
+### Accessing Audio and Video Tracks {#accessing-audio-and-video-tracks}
 
 ```javascript
 function processStream(stream) {
@@ -131,7 +131,7 @@ function processStream(stream) {
 }
 ```
 
-### Creating Processed Streams
+### Creating Processed Streams {#creating-processed-streams}
 
 You can use MediaStreamTrackProcessor and MediaStreamTrackGenerator (available in modern browsers) to process and transform captured media:
 
@@ -159,7 +159,7 @@ async function createProcessedStream(sourceStream) {
 }
 ```
 
-### Recording Captured Content
+### Recording Captured Content {#recording-captured-content}
 
 One of the most common use cases for Tab Capture is recording the tab's content. Here's how to implement a basic recorder:
 
@@ -213,11 +213,11 @@ class TabRecorder {
 }
 ```
 
-## Tab Capture Indicators and User Awareness
+## Tab Capture Indicators and User Awareness {#tab-capture-indicators-and-user-awareness}
 
 When a tab is being captured, Chrome displays a visual indicator to inform the user. This is an important UX consideration that you should be aware of when building capture extensions.
 
-### Understanding the Recording Indicator
+### Understanding the Recording Indicator {#understanding-the-recording-indicator}
 
 Chrome automatically shows a red recording indicator in the browser's address bar when a tab is being captured. This indicator:
 - Appears as a small red circle or dot next to the favicon
@@ -226,7 +226,7 @@ Chrome automatically shows a red recording indicator in the browser's address ba
 
 This is a security feature to ensure transparency with users about when their tab content is being recorded.
 
-### Detecting Capture State
+### Detecting Capture State {#detecting-capture-state}
 
 You can check if a tab is currently being captured using `chrome.tabCapture.getCapturedTabs()`:
 
@@ -247,7 +247,7 @@ The returned objects contain:
 - **status**: Either "connected" or "disconnected"
 - **fullscreen**: Whether the tab is in fullscreen mode
 
-### Handling Fullscreen Changes
+### Handling Fullscreen Changes {#handling-fullscreen-changes}
 
 When a user enters fullscreen mode during capture, you need to handle it properly:
 
@@ -258,11 +258,11 @@ stream.getVideoTracks()[0].onended = () => {
 };
 ```
 
-## getMediaStreamId for Offscreen Document Capture
+## getMediaStreamId for Offscreen Document Capture {#getmediastreamid-for-offscreen-document-capture}
 
 In Manifest V3, service workers have limited lifetime, making continuous capture challenging. The `chrome.tabCapture.getMediaStreamId()` method provides a solution by generating a stream ID that can be used in various contexts, including offscreen documents.
 
-### Generating a Stream ID
+### Generating a Stream ID {#generating-a-stream-id}
 
 ```javascript
 async function getStreamId(tabId) {
@@ -278,7 +278,7 @@ async function getStreamId(tabId) {
 The `getMediaStreamId()` method accepts options:
 - **targetTabId**: The ID of the tab to capture (optional, defaults to active tab)
 
-### Using Stream ID in Offscreen Documents
+### Using Stream ID in Offscreen Documents {#using-stream-id-in-offscreen-documents}
 
 Offscreen documents in Manifest V3 provide a way to handle long-running tasks that don't fit in the service worker lifecycle. Here's how to use Tab Capture with offscreen documents:
 
@@ -325,11 +325,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Building a Tab Recording Extension
+## Building a Tab Recording Extension {#building-a-tab-recording-extension}
 
 Now let's put everything together to build a complete tab recording extension. This example demonstrates best practices and real-world implementation patterns.
 
-### Popup Implementation
+### Popup Implementation {#popup-implementation}
 
 ```javascript
 // popup.js
@@ -380,7 +380,7 @@ function updateUI(state) {
 }
 ```
 
-### Background Script Handler
+### Background Script Handler {#background-script-handler}
 
 ```javascript
 // background.js
@@ -421,9 +421,9 @@ async function handleCaptureStop() {
 }
 ```
 
-## Advanced Patterns and Best Practices
+## Advanced Patterns and Best Practices {#advanced-patterns-and-best-practices}
 
-### Error Handling
+### Error Handling {#error-handling}
 
 Always implement robust error handling for capture operations:
 
@@ -480,7 +480,7 @@ function handleTrackEnd(track) {
 }
 ```
 
-### Performance Optimization
+### Performance Optimization {#performance-optimization}
 
 For optimal performance when capturing tabs:
 
@@ -510,7 +510,7 @@ function optimizeCaptureSettings() {
 }
 ```
 
-### Security Considerations
+### Security Considerations {#security-considerations}
 
 When implementing tab capture, keep these security best practices in mind:
 
@@ -537,7 +537,7 @@ async function secureCapture(tabId) {
 }
 ```
 
-## Conclusion
+## Conclusion {#conclusion}
 
 The Chrome Extension Tab Capture API is an incredibly powerful tool that enables a wide range of creative use cases. From building screen recording tools to creating collaborative applications, this API provides the foundation for rich media experiences within Chrome extensions.
 
@@ -551,7 +551,7 @@ Key takeaways from this guide:
 
 With these patterns and best practices, you're well-equipped to build robust tab capture extensions that provide excellent user experiences while respecting browser security and performance considerations.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Desktop Capture](../guides/desktop-capture.md)

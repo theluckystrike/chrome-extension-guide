@@ -9,10 +9,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # System.* Permissions (Chrome Extension API)
 
-## Overview
+## Overview {#overview}
 The `system.*` permissions provide access to hardware and system information. Each is a separate permission.
 
-## system.cpu
+## system.cpu {#systemcpu}
 ```json
 { "permissions": ["system.cpu"] }
 ```
@@ -31,7 +31,7 @@ cpuInfo.processors.forEach((p, i) => {
 });
 ```
 
-## system.memory
+## system.memory {#systemmemory}
 ```json
 { "permissions": ["system.memory"] }
 ```
@@ -42,7 +42,7 @@ console.log(`Total: ${(memInfo.capacity / 1024 / 1024 / 1024).toFixed(1)} GB`);
 console.log(`Available: ${(memInfo.availableCapacity / 1024 / 1024 / 1024).toFixed(1)} GB`);
 ```
 
-## system.storage
+## system.storage {#systemstorage}
 ```json
 { "permissions": ["system.storage"] }
 ```
@@ -66,7 +66,7 @@ chrome.system.storage.onDetached.addListener((id) => {
 });
 ```
 
-## system.display
+## system.display {#systemdisplay}
 ```json
 { "permissions": ["system.display"] }
 ```
@@ -88,7 +88,7 @@ chrome.system.display.onDisplayChanged.addListener(async () => {
 });
 ```
 
-## System Monitor Pattern
+## System Monitor Pattern {#system-monitor-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -115,20 +115,20 @@ m.onMessage('GET_SYSTEM_INFO', async () => {
 });
 ```
 
-## When to Use
+## When to Use {#when-to-use}
 - System monitoring/dashboard extensions
 - Hardware information display
 - Storage management tools
 - Multi-monitor aware extensions
 - Performance diagnostics
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const hasCpu = await checkPermission('system.cpu');
 const hasMem = await checkPermission('system.memory');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/memory-management.md`
 - Guide: `docs/guides/performance.md`

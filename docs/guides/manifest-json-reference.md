@@ -6,21 +6,21 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 ---
 # manifest.json Complete Reference
 
-## Introduction
+## Introduction {#introduction}
 - The manifest is the blueprint of every Chrome extension
 - MV3 required (`"manifest_version": 3`)
 - JSON format, no comments allowed
 
-## Required Fields
+## Required Fields {#required-fields}
 - `manifest_version`: Must be `3`
 - `name`: Extension display name (max 75 chars)
 - `version`: One to four dot-separated integers (e.g., `"1.0.0"` or `"1.2.3.4"`), not semver — each integer 0–65535
 
-## Recommended Fields
+## Recommended Fields {#recommended-fields}
 - `description`: Short summary (max 132 chars) shown in Chrome Web Store
 - `icons`: Object with `"16"`, `"32"`, `"48"`, `"128"` pixel PNG icons
 
-## Background Service Worker
+## Background Service Worker {#background-service-worker}
 ```json
 "background": {
   "service_worker": "background.js",
@@ -31,7 +31,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 - Only ONE service worker file (use bundler or imports)
 - Cross-ref: `docs/mv3/service-workers.md`
 
-## Content Scripts
+## Content Scripts {#content-scripts}
 ```json
 "content_scripts": [{
   "matches": ["https://*.example.com/*"],
@@ -45,7 +45,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 - `run_at`: `"document_start"` | `"document_idle"` | `"document_end"`
 - `all_frames`: boolean, inject into iframes too
 
-## Action (Toolbar Button)
+## Action (Toolbar Button) {#action-toolbar-button}
 ```json
 "action": {
   "default_popup": "popup.html",
@@ -56,7 +56,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 - Replaces MV2's `browser_action` and `page_action`
 - Cross-ref: `docs/mv3/action-api.md`
 
-## Permissions
+## Permissions {#permissions}
 ```json
 "permissions": ["storage", "activeTab", "alarms"],
 "optional_permissions": ["tabs", "bookmarks"],
@@ -67,7 +67,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 - `host_permissions`: Separate in MV3 (was in `permissions` in MV2)
 - Use `@theluckystrike/webext-permissions` for runtime management
 
-## Options Page
+## Options Page {#options-page}
 ```json
 "options_ui": {
   "page": "options.html",
@@ -75,7 +75,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 }
 ```
 
-## Web Accessible Resources
+## Web Accessible Resources {#web-accessible-resources}
 ```json
 "web_accessible_resources": [{
   "resources": ["images/*.png", "styles.css"],
@@ -84,7 +84,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 ```
 - MV3 requires specifying which origins can access resources
 
-## Commands (Keyboard Shortcuts)
+## Commands (Keyboard Shortcuts) {#commands-keyboard-shortcuts}
 ```json
 "commands": {
   "_execute_action": {
@@ -94,7 +94,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 }
 ```
 
-## Content Security Policy
+## Content Security Policy {#content-security-policy}
 ```json
 "content_security_policy": {
   "extension_pages": "script-src 'self'; object-src 'self'"
@@ -102,20 +102,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 ```
 - MV3 uses object format (not string like MV2)
 
-## Internationalization
+## Internationalization {#internationalization}
 - `"default_locale": "en"` — required if `_locales/` exists
 
-## Other Fields
+## Other Fields {#other-fields}
 - `devtools_page`, `side_panel`, `externally_connectable`, `minimum_chrome_version`, `incognito`, `storage`, `update_url`
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Missing `manifest_version: 3`
 - Using MV2 keys like `browser_action` instead of `action`
 - Forgetting `host_permissions` (MV3 separates these)
 - Wrong icon sizes
 - JSON syntax errors (no trailing commas, no comments)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Cheatsheet](../guides/cheatsheet.md)

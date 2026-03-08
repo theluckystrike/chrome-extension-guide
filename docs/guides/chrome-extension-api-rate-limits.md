@@ -8,9 +8,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 This guide documents the rate limits and quotas enforced by Chrome for extension APIs. Understanding these limits is essential for building reliable extensions that function correctly across all users.
 
-## Storage Quotas
+## Storage Quotas {#storage-quotas}
 
-### storage.local
+### storage.local {#storagelocal}
 
 The `storage.local` API provides persistent storage for extension data.
 
@@ -20,7 +20,7 @@ The `storage.local` API provides persistent storage for extension data.
 
 When approaching the 10 MB limit, users will receive a warning. The `unlimitedStorage` permission removes these restrictions entirely.
 
-### storage.sync
+### storage.sync {#storagesync}
 
 The `storage.sync` API synchronizes data across user's Chrome instances.
 
@@ -31,7 +31,7 @@ The `storage.sync` API synchronizes data across user's Chrome instances.
 
 The per-item limit of 8 KB is a hard constraint—larger values will fail with a `QUOTA_BYTES_PER_ITEM` error.
 
-## Alarm API Limits
+## Alarm API Limits {#alarm-api-limits}
 
 The `chrome.alarms` API schedules code execution at specific times.
 
@@ -41,7 +41,7 @@ The `chrome.alarms` API schedules code execution at specific times.
 
 Use the minimum interval wisely. Alarms firing too frequently impact performance and battery life. For sub-minute precision, consider using `requestAnimationFrame` or Web Workers instead.
 
-## Notification Rate Limiting
+## Notification Rate Limiting {#notification-rate-limiting}
 
 Platform-specific throttling applies to the Notifications API:
 
@@ -51,7 +51,7 @@ Platform-specific throttling applies to the Notifications API:
 
 Excessive notifications may be suppressed or queued. Batch related notifications to avoid hitting limits.
 
-## declarativeNetRequest Limits
+## declarativeNetRequest Limits {#declarativenetrequest-limits}
 
 The `declarativeNetRequest` API modifies network requests declaratively.
 
@@ -63,25 +63,25 @@ The `declarativeNetRequest` API modifies network requests declaratively.
 
 Static rules are defined in `ruleset` JSON files. Dynamic rules can be added at runtime via `updateDynamicRules()`. Regex rules have higher overhead—use static rules when possible.
 
-## Badge Text
+## Badge Text {#badge-text}
 
 No explicit rate limit exists for `chrome.action.setBadgeText()`, but rapid updates cause visual flicker. Badge updates are asynchronous and may not render between calls.
 
 **Best practice**: Debounce badge updates to once per second maximum.
 
-## chrome.tabs.query
+## chrome.tabs.query {#chrometabsquery}
 
 No hard limit exists, but `chrome.tabs.query()` becomes expensive with large tab sets (100+ tabs). The API scans all open tabs across all windows.
 
 **Optimization**: Use event listeners (`chrome.tabs.onUpdated`, `chrome.tabs.onCreated`) instead of polling with `query()`.
 
-## Message Passing
+## Message Passing {#message-passing}
 
 No explicit rate limit exists, but performance degrades with excessive message passing. Each message incurs serialization and context switching overhead.
 
 **Recommendation**: Batch related data and minimize message frequency. Use `chrome.storage` for inter-context communication when real-time delivery isn't required.
 
-## Downloads API
+## Downloads API {#downloads-api}
 
 The `chrome.downloads` API has concurrent download limits:
 
@@ -90,7 +90,7 @@ The `chrome.downloads` API has concurrent download limits:
 
 Exceeding concurrent limits queues downloads automatically.
 
-## Identity API
+## Identity API {#identity-api}
 
 The `chrome.identity` API has token refresh limits:
 
@@ -99,9 +99,9 @@ The `chrome.identity` API has token refresh limits:
 
 Token caching reduces API calls. Store tokens securely and refresh only when expired or invalid.
 
-## Strategies for Working Within Limits
+## Strategies for Working Within Limits {#strategies-for-working-within-limits}
 
-### Batching Writes
+### Batching Writes {#batching-writes}
 
 Aggregate data before writing to storage:
 
@@ -113,7 +113,7 @@ function queueWrite(key, value) {
 }
 ```
 
-### Debouncing Updates
+### Debouncing Updates {#debouncing-updates}
 
 Coalesce rapid updates into single operations:
 
@@ -127,7 +127,7 @@ function debouncedBadgeUpdate(count) {
 }
 ```
 
-### Caching API Results
+### Caching API Results {#caching-api-results}
 
 Cache frequently accessed data to reduce API calls:
 
@@ -141,7 +141,7 @@ async function getCachedTabs() {
 }
 ```
 
-## Detecting Quota Errors
+## Detecting Quota Errors {#detecting-quota-errors}
 
 Catch specific error types to handle quota violations gracefully:
 
@@ -160,13 +160,13 @@ Common error codes:
 - `MAX_WRITE_OPERATIONS_PER_MINUTE`: Too many writes
 - `QUOTA_BYTES_PER_ITEM`: Item too large for storage.sync
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Size Limits Reference](/reference/size-limits.md)
 - [Storage API Deep Dive](/api-reference/storage-api-deep-dive.md)
 - [Rate Limiting Patterns](/patterns/rate-limiting.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Rate Limiting Patterns](../patterns/rate-limiting.md)
 - [API Mocking](../guides/chrome-extension-api-mocking.md)

@@ -9,28 +9,28 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # tabCapture Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.tabCapture` API for capturing the visible area of a tab as a media stream (audio and/or video).
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["tabCapture"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 "Capture content of your screen" — this triggers a warning.
 
-## API Access
+## API Access {#api-access}
 - `chrome.tabCapture.capture(options)` — capture current tab as MediaStream
 - `chrome.tabCapture.getMediaStreamId(options)` — get stream ID for use with `getUserMedia`
 - `chrome.tabCapture.getCapturedTabs()` — list currently captured tabs
 
-### Events
+### Events {#events}
 - `chrome.tabCapture.onStatusChanged` — capture status changed
 
-## Capture Options
+## Capture Options {#capture-options}
 ```typescript
 interface CaptureOptions {
   audio: boolean;
@@ -40,7 +40,7 @@ interface CaptureOptions {
 }
 ```
 
-## Basic Tab Capture
+## Basic Tab Capture {#basic-tab-capture}
 ```typescript
 // Must be called from a user gesture (popup click, action click)
 chrome.tabCapture.capture(
@@ -58,7 +58,7 @@ chrome.tabCapture.capture(
 );
 ```
 
-## MV3 with getMediaStreamId
+## MV3 with getMediaStreamId {#mv3-with-getmediastreamid}
 ```typescript
 // In service worker — get stream ID
 chrome.action.onClicked.addListener(async (tab) => {
@@ -84,7 +84,7 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 });
 ```
 
-## Recording Pattern
+## Recording Pattern {#recording-pattern}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -100,7 +100,7 @@ m.onMessage('START_RECORDING', async ({ tabId }) => {
 });
 ```
 
-## Capture Status
+## Capture Status {#capture-status}
 ```typescript
 chrome.tabCapture.onStatusChanged.addListener((info) => {
   console.log(`Tab ${info.tabId}: ${info.status}`);
@@ -114,7 +114,7 @@ captured.forEach(info => {
 });
 ```
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -126,30 +126,30 @@ const schema = defineSchema({
 const storage = createStorage(schema, 'local');
 ```
 
-## Key Constraints
+## Key Constraints {#key-constraints}
 - Must be initiated from user gesture (popup click, action click, keyboard shortcut)
 - Only captures visible tab content
 - Cannot capture in incognito unless `incognito: "split"` in manifest
 - One capture per tab at a time
 
-## When to Use
+## When to Use {#when-to-use}
 - Screen/tab recording extensions
 - Live streaming tools
 - Audio capture for transcription
 - Tab mirroring/casting
 - Accessibility tools (screen reader enhancement)
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - For screenshots — use `chrome.tabs.captureVisibleTab()` (simpler, no permission needed beyond `activeTab`)
 - For desktop capture — use `desktopCapture` permission
 - For page content — use content scripts
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('tabCapture');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/tab-capture.md`
 - Related: `docs/permissions/offscreen.md`, `docs/guides/desktop-capture.md`

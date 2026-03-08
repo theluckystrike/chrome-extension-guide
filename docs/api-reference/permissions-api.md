@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 # chrome.permissions API Reference
 
-## Overview
+## Overview {#overview}
 
 The `chrome.permissions` API allows extensions to request and manage **optional permissions** at runtime, rather than declaring them all upfront in the manifest. This enables a principle of least privilege—your extension starts with minimal access and requests more only when the user needs specific features.
 
@@ -17,7 +17,7 @@ The `chrome.permissions` API allows extensions to request and manage **optional 
 - Requests must be triggered by a user gesture (e.g., button click)
 - Users can revoke permissions at any time via Chrome's extension settings
 
-## Manifest Setup
+## Manifest Setup {#manifest-setup}
 
 To use the Permissions API, declare your optional permissions in `manifest.json`:
 
@@ -45,9 +45,9 @@ To use the Permissions API, declare your optional permissions in `manifest.json`
 - **`optional_permissions`**: Permissions that can be requested at runtime
 - **`optional_host_permissions`**: Host permissions that can be requested at runtime
 
-## API Methods
+## API Methods {#api-methods}
 
-### contains(permissions, callback)
+### contains(permissions, callback) {#containspermissions-callback}
 
 Checks whether the extension has the specified permissions granted.
 
@@ -72,7 +72,7 @@ chrome.permissions.contains(
 
 ---
 
-### request(permissions, callback)
+### request(permissions, callback) {#requestpermissions-callback}
 
 Requests access to the specified optional permissions. Must be called from a user gesture handler (e.g., click event).
 
@@ -103,7 +103,7 @@ document.getElementById('requestBtn').addEventListener('click', () => {
 
 ---
 
-### remove(permissions, callback)
+### remove(permissions, callback) {#removepermissions-callback}
 
 Removes access to the specified permissions. Cannot remove required (non-optional) permissions.
 
@@ -128,7 +128,7 @@ chrome.permissions.remove(
 
 ---
 
-### getAll(callback)
+### getAll(callback) {#getallcallback}
 
 Retrieves all permissions granted to the extension.
 
@@ -144,9 +144,9 @@ chrome.permissions.getAll((permissions) => {
 
 **Returns:** `{ permissions: string[], origins: string[] }`
 
-## Events
+## Events {#events}
 
-### onAdded
+### onAdded {#onadded}
 
 Fired when permissions are added to the extension.
 
@@ -159,7 +159,7 @@ chrome.permissions.onAdded.addListener((permissions) => {
 
 ---
 
-### onRemoved
+### onRemoved {#onremoved}
 
 Fired when permissions are removed from the extension.
 
@@ -170,12 +170,12 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 });
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### 1. Start Minimal
+### 1. Start Minimal {#1-start-minimal}
 Declare only essential permissions in your manifest. Request additional permissions only when the user attempts to use a feature that requires them.
 
-### 2. Explain Before Requesting
+### 2. Explain Before Requesting {#2-explain-before-requesting}
 Always show a clear explanation of why you need the permission before calling `request()`. Use your extension's UI to inform users:
 
 ```javascript
@@ -189,7 +189,7 @@ document.getElementById('enableFeature').addEventListener('click', () => {
 });
 ```
 
-### 3. Handle Denial Gracefully
+### 3. Handle Denial Gracefully {#3-handle-denial-gracefully}
 Users may deny permission requests. Design your UI to provide alternative functionality or clear messaging when permissions are denied.
 
 ```javascript
@@ -203,7 +203,7 @@ chrome.permissions.request({ permissions: ['tabs'] }, granted => {
 });
 ```
 
-### 4. Remove Unused Permissions
+### 4. Remove Unused Permissions {#4-remove-unused-permissions}
 If a feature is disabled or no longer needed, consider removing the permission to reduce your extension's attack surface:
 
 ```javascript
@@ -212,9 +212,9 @@ function cleanupPermissions() {
 }
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Request Optional Permission on Button Click
+### Request Optional Permission on Button Click {#request-optional-permission-on-button-click}
 
 ```javascript
 document.getElementById('enableBookmarks').addEventListener('click', () => {
@@ -229,7 +229,7 @@ document.getElementById('enableBookmarks').addEventListener('click', () => {
 });
 ```
 
-### Progressive Host Permission Request
+### Progressive Host Permission Request {#progressive-host-permission-request}
 
 ```javascript
 document.getElementById('connectBtn').addEventListener('click', () => {
@@ -244,7 +244,7 @@ document.getElementById('connectBtn').addEventListener('click', () => {
 });
 ```
 
-### Permission-Gated UI
+### Permission-Gated UI {#permission-gated-ui}
 
 ```javascript
 function updateUI() {
@@ -259,7 +259,7 @@ chrome.permissions.onAdded.addListener(updateUI);
 chrome.permissions.onRemoved.addListener(updateUI);
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Permissions Model](../guides/permissions-model.md) - Understanding Chrome's permission system
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md) - Deep dive into permission strategies

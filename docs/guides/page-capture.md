@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/p
 ---
 # Page Capture API Guide
 
-## Overview
+## Overview {#overview}
 
 The `chrome.pageCapture` API enables Chrome extensions to save web pages as MHTML (MIME HTML) format. MHTML is a web page archive format that packages all resources (images, CSS, JavaScript) into a single file, making it ideal for offline viewing and archiving purposes.
 
@@ -15,9 +15,9 @@ The `chrome.pageCapture` API enables Chrome extensions to save web pages as MHTM
 - Only works in extension context (background scripts, content scripts with proper messaging)
 - Cannot be used directly from web pages - requires extension mediation
 
-## Permissions
+## Permissions {#permissions}
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -33,16 +33,16 @@ The `chrome.pageCapture` API enables Chrome extensions to save web pages as MHTM
 }
 ```
 
-### Important Permission Notes
+### Important Permission Notes {#important-permission-notes}
 
 - The `pageCapture` permission is a "host permission" in Manifest V3 - it must be declared in `host_permissions` for full functionality
 - You need `"<all_urls>"` or specific host patterns to capture pages from any website
 - The `activeTab` permission can also be used for tab-specific capture without broad URL access
 - Unlike some APIs, pageCapture does NOT require user gesture (click) to function
 
-## Saving Pages as MHTML
+## Saving Pages as MHTML {#saving-pages-as-mhtml}
 
-### The saveAsMHTML Method
+### The saveAsMHTML Method {#the-saveasmhtml-method}
 
 ```javascript
 // Basic usage - capture a specific tab
@@ -66,7 +66,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 ```
 
-### Method Signature
+### Method Signature {#method-signature}
 
 ```typescript
 chrome.pageCapture.saveAsMHTML(
@@ -81,9 +81,9 @@ chrome.pageCapture.saveAsMHTML(
 - Returns: A Blob containing the MHTML content
 - The MHTML follows RFC 2557 standard for MIME HTML documents
 
-## Blob Handling and Download Creation
+## Blob Handling and Download Creation {#blob-handling-and-download-creation}
 
-### Converting Blob to Download
+### Converting Blob to Download {#converting-blob-to-download}
 
 ```javascript
 // Complete example: capture and save
@@ -121,7 +121,7 @@ async function captureAndSave(tabId, filename) {
 }
 ```
 
-### Alternative: Using createObjectURL
+### Alternative: Using createObjectURL {#alternative-using-createobjecturl}
 
 ```javascript
 // Simpler approach using URL.createObjectURL
@@ -139,7 +139,7 @@ chrome.pageCapture.saveAsMHTML({ tabId: tabId }, (blob) => {
 });
 ```
 
-### Handling Large Pages
+### Handling Large Pages {#handling-large-pages}
 
 ```javascript
 // Handle large MHTML files with streaming approach
@@ -169,9 +169,9 @@ function captureLargePage(tabId) {
 }
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
-### Offline Reading
+### Offline Reading {#offline-reading}
 
 ```javascript
 // Save page for offline reading
@@ -194,7 +194,7 @@ function saveForOffline(tabId) {
 }
 ```
 
-### Archiving
+### Archiving {#archiving}
 
 ```javascript
 // Automatic page archiver
@@ -243,7 +243,7 @@ class PageArchiver {
 }
 ```
 
-### Evidence Collection
+### Evidence Collection {#evidence-collection}
 
 ```javascript
 // Evidence collection for compliance/legal purposes
@@ -296,9 +296,9 @@ class EvidenceCollector {
 }
 ```
 
-## Combining with chrome.downloads
+## Combining with chrome.downloads {#combining-with-chromedownloads}
 
-### Complete Workflow Example
+### Complete Workflow Example {#complete-workflow-example}
 
 ```javascript
 // Full-featured page saver with progress tracking
@@ -376,7 +376,7 @@ class PageSaver {
 }
 ```
 
-### Batch Capture
+### Batch Capture {#batch-capture}
 
 ```javascript
 // Capture multiple tabs
@@ -405,9 +405,9 @@ async function captureAllTabs() {
 }
 ```
 
-## Content Security and Cross-Origin Considerations
+## Content Security and Cross-Origin Considerations {#content-security-and-cross-origin-considerations}
 
-### MHTML Security Model
+### MHTML Security Model {#mhtml-security-model}
 
 ```javascript
 // Understanding MHTML limitations
@@ -426,7 +426,7 @@ function captureConsiderations(tabId, url) {
 }
 ```
 
-### Working Around Restrictions
+### Working Around Restrictions {#working-around-restrictions}
 
 ```javascript
 // Use content script to capture with modifications
@@ -471,7 +471,7 @@ function enhanceMHTMLCapture(tabId) {
 }
 ```
 
-### CSP Considerations
+### CSP Considerations {#csp-considerations}
 
 ```javascript
 // Handle Content Security Policy restrictions
@@ -496,7 +496,7 @@ function captureWithCSPWorkaround(tabId) {
 }
 ```
 
-### Privacy and Data Handling
+### Privacy and Data Handling {#privacy-and-data-handling}
 
 ```javascript
 // Secure handling of captured content
@@ -539,9 +539,9 @@ class SecurePageCapture {
 }
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Complete Extension Example
+### Complete Extension Example {#complete-extension-example}
 
 ```javascript
 // background.js - Main extension logic
@@ -615,7 +615,7 @@ function showNotification(message, type = 'success') {
 }
 ```
 
-### Keyboard Shortcut Handler
+### Keyboard Shortcut Handler {#keyboard-shortcut-handler}
 
 ```javascript
 // commands.json
@@ -640,7 +640,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-### Context Menu Integration
+### Context Menu Integration {#context-menu-integration}
 
 ```javascript
 // Create context menu for page capture
@@ -679,7 +679,7 @@ async function openLinkAsTab(url) {
 }
 ```
 
-### Popup Interface
+### Popup Interface {#popup-interface}
 
 ```javascript
 // popup.js - When user clicks extension icon
@@ -732,7 +732,7 @@ function downloadBlob(blob, filename) {
 }
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. **Always handle errors** - Check `chrome.runtime.lastError` in callbacks
 2. **Use async/await** - Wrap callbacks in Promises for cleaner code
@@ -742,7 +742,7 @@ function downloadBlob(blob, filename) {
 6. **Respect user privacy** - Only capture pages with appropriate permissions
 7. **Provide feedback** - Use notifications to inform users of capture status
 
-## Related APIs
+## Related APIs {#related-apis}
 
 - `chrome.downloads` - For saving the captured MHTML files
 - `chrome.tabs` - For getting tab information and managing captures
@@ -751,7 +751,7 @@ function downloadBlob(blob, filename) {
 - `chrome.contextMenus` - For adding capture options to right-click menu
 - `chrome.commands` - For keyboard shortcuts to trigger capture
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Downloads Management](../patterns/downloads-management.md)
 - [Desktop Capture](../guides/desktop-capture.md)

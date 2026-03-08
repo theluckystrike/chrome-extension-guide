@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/w
 ---
 # Web Workers in Chrome Extensions
 
-## Overview
+## Overview {#overview}
 Web Workers enable running JavaScript in background threads, keeping your extension's UI responsive by offloading CPU-intensive operations. They run in parallel to the main thread and communicate via message passing.
 
 In Chrome Extensions, Web Workers are available in extension pages (popup, options, tab pages) and offscreen documents, but NOT in the background service worker context. This distinction is important when architecting your extension.
 
-## Worker Types Available
+## Worker Types Available {#worker-types-available}
 
 - **Dedicated Workers**: Private to the creating page or script. Each popup or options page gets its own worker instance.
 - **Shared Workers**: Can be shared between multiple extension pages using the same origin. Less commonly used in extensions.
@@ -22,7 +22,7 @@ In Chrome Extensions, Web Workers are available in extension pages (popup, optio
 const worker = new Worker(chrome.runtime.getURL('worker.js'));
 ```
 
-## Creating Workers in Extensions
+## Creating Workers in Extensions {#creating-workers-in-extensions}
 
 Workers are created from extension pages using the standard Web Worker API:
 
@@ -46,7 +46,7 @@ worker.onerror = (error) => {
 
 The worker file must be listed in `web_accessible_resources` in manifest.json if accessed from content scripts, or available as a regular extension resource.
 
-## Chrome API Access in Workers
+## Chrome API Access in Workers {#chrome-api-access-in-workers}
 
 Web Workers do NOT have direct access to Chrome extension APIs. The worker cannot call `chrome.storage`, `chrome.tabs`, or any other chrome.* APIs directly.
 
@@ -73,7 +73,7 @@ worker.onmessage = async (event) => {
 };
 ```
 
-## Offscreen Document + Worker Pattern
+## Offscreen Document + Worker Pattern {#offscreen-document-worker-pattern}
 
 The offscreen document API lets you create background pages for specific tasks. Combined with Web Workers, this gives you powerful background processing:
 
@@ -114,7 +114,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
 Web Workers excel at CPU-intensive tasks that would otherwise freeze the UI:
 
@@ -124,7 +124,7 @@ Web Workers excel at CPU-intensive tasks that would otherwise freeze the UI:
 - **Text analysis**: Search indexing, diff algorithms, parsing
 - **Complex calculations**: Data aggregation, statistics computation
 
-## Module Workers
+## Module Workers {#module-workers}
 
 Use module workers to import other extension modules:
 
@@ -149,7 +149,7 @@ self.onmessage = (event) => {
 };
 ```
 
-## Performance Considerations
+## Performance Considerations {#performance-considerations}
 
 - **Structured clone**: postMessage uses structured clone algorithm (no functions, limited object types)
 - **Transferable objects**: For ArrayBuffers and typed arrays, use transferable objects to avoid copying:
@@ -164,9 +164,9 @@ worker.postMessage({ buffer }, [buffer]); // Second arg transfers ownership
 - **Reuse workers**: Create once, reuse for multiple tasks. Don't spawn per-task
 - **Terminate when done**: Call `worker.terminate()` when no longer needed to free memory
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Basic Worker for Data Processing
+### Basic Worker for Data Processing {#basic-worker-for-data-processing}
 
 ```js
 // data-worker.js
@@ -183,7 +183,7 @@ self.onmessage = (event) => {
 };
 ```
 
-### Worker Pool Pattern
+### Worker Pool Pattern {#worker-pool-pattern}
 
 ```js
 // worker-pool.ts
@@ -215,7 +215,7 @@ class WorkerPool {
 }
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 - Workers cannot access DOM or window objects
 - No direct chrome.* API access — use message passing bridge
@@ -223,13 +223,13 @@ class WorkerPool {
 - Module workers require { type: 'module' } option
 - Workers run in isolated origin — may need web_accessible_resources
 
-## Related Guides
+## Related Guides {#related-guides}
 - [Offscreen Documents](../mv3/offscreen-documents.md)
 - [Offscreen Permissions](../permissions/offscreen.md)
 - [Performance Optimization](../guides/performance.md)
 - [Background Service Worker Patterns](background-patterns.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Worker Offloading](../patterns/webworker-offloading.md)
 - [WASM in Extensions](../guides/wasm-in-extensions.md)

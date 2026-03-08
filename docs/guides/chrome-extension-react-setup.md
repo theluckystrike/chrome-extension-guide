@@ -8,14 +8,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 This guide covers building Chrome extensions with React, covering project initialization, architecture patterns, and best practices for modern extension development.
 
-## Recommended Stack
+## Recommended Stack {#recommended-stack}
 
 - **React 18** - Latest features including concurrent rendering
 - **TypeScript** - Type safety across your extension
 - **Vite** - Fast dev server and optimized builds
 - **CRXJS** - Vite plugin for Chrome extension hot reload
 
-## Project Initialization
+## Project Initialization {#project-initialization}
 
 Create a new Vite project and add the CRXJS plugin:
 
@@ -40,7 +40,7 @@ export default defineConfig({
 });
 ```
 
-## Multiple React Roots
+## Multiple React Roots {#multiple-react-roots}
 
 Chrome extensions have multiple entry points (popup, options page, side panel). Each should be a separate React app:
 
@@ -54,7 +54,7 @@ src/
 
 Configure multiple HTML entry points in Vite and register them in `manifest.json`.
 
-## Shared Components
+## Shared Components {#shared-components}
 
 Create a common UI library used across all extension contexts:
 
@@ -67,9 +67,9 @@ packages/ui/
 
 Publish as internal package or use workspace monorepo structure.
 
-## State Management
+## State Management {#state-management}
 
-### Zustand (Recommended)
+### Zustand (Recommended) {#zustand-recommended}
 
 Lightweight, no provider wrapper needed, works across extension contexts:
 
@@ -87,11 +87,11 @@ export const useStore = create<ExtensionStore>((set) => ({
 }));
 ```
 
-### Redux Toolkit
+### Redux Toolkit {#redux-toolkit}
 
 For complex state needs, Redux Toolkit provides standardized patterns.
 
-## Content Scripts with React
+## Content Scripts with React {#content-scripts-with-react}
 
 Content scripts run in page context. Use shadow DOM for style isolation:
 
@@ -111,7 +111,7 @@ shadow.appendChild(reactRoot);
 createRoot(reactRoot).render(<App />);
 ```
 
-## React DevTools
+## React DevTools {#react-devtools}
 
 React DevTools works in extension pages. Enable in `manifest.json`:
 
@@ -123,7 +123,7 @@ React DevTools works in extension pages. Enable in `manifest.json`:
 
 Open DevTools on popup, options, or side panel pages to inspect React component trees.
 
-## Routing
+## Routing {#routing}
 
 Use hash routing for extension pages since they run from `chrome-extension://`:
 
@@ -138,19 +138,19 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 </HashRouter>
 ```
 
-## Styling Options
+## Styling Options {#styling-options}
 
 - **Tailwind CSS** - Utility-first, configure with content paths for extension
 - **CSS Modules** - Scoped styles without runtime overhead
 - **styled-components** - Component-level styling with theming
 
-## Testing
+## Testing {#testing}
 
 - **Vitest** - Fast unit testing with Vite
 - **React Testing Library** - Component testing
 - **jest-chrome** - Mock Chrome extension APIs for tests
 
-## Custom Hooks for Extension APIs
+## Custom Hooks for Extension APIs {#custom-hooks-for-extension-apis}
 
 Create reusable hooks for common extension functionality:
 
@@ -189,20 +189,20 @@ export function useMessage(callback: (message: any) => void) {
 }
 ```
 
-## Performance Optimization
+## Performance Optimization {#performance-optimization}
 
 - **Code Splitting** - Lazy load extension pages
 - **Dynamic Imports** - Load features on demand
 - **Memoization** - Use React.memo and useMemo for expensive operations
 - **Background Scripts** - Offload heavy processing from UI
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Building with React](./patterns/building-with-react.md)
 - [Content Script React](./patterns/content-script-react.md)
 - [Vite Extension Setup](./guides/vite-extension-setup.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Building with React](../patterns/building-with-react.md)
 - [Svelte Setup](../guides/chrome-extension-svelte-setup.md)

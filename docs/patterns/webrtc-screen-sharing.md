@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers WebRTC-based screen and tab capture patterns for Chrome extensions, including desktop capture, tab capture, and streaming implementations.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 Declare the required permissions in your manifest:
 
@@ -23,7 +23,7 @@ Declare the required permissions in your manifest:
 
 ---
 
-## chrome.desktopCapture.getMediaStreamId()
+## chrome.desktopCapture.getMediaStreamId() {#chromedesktopcapturegetmediastreamid}
 
 Get a stream ID for tab, screen, or window capture:
 
@@ -61,7 +61,7 @@ async function startCapture(streamId: string): Promise<MediaStream> {
 
 ---
 
-## chrome.tabCapture.capture()
+## chrome.tabCapture.capture() {#chrometabcapturecapture}
 
 Capture a specific tab's audio and video:
 
@@ -95,7 +95,7 @@ async function captureTab(tabId: number): Promise<MediaStream> {
 
 ---
 
-## getDisplayMedia in Extension Pages
+## getDisplayMedia in Extension Pages {#getdisplaymedia-in-extension-pages}
 
 Use getDisplayMedia in extension contexts (popup, options, side panel):
 
@@ -127,7 +127,7 @@ async function startScreenShare(): Promise<MediaStream | null> {
 
 ---
 
-## MediaRecorder for Recording
+## MediaRecorder for Recording {#mediarecorder-for-recording}
 
 Record captured streams locally:
 
@@ -161,7 +161,7 @@ class StreamRecorder {
 
 ---
 
-## Streaming via WebRTC Peer Connections
+## Streaming via WebRTC Peer Connections {#streaming-via-webrtc-peer-connections}
 
 Stream captured content to a remote peer:
 
@@ -183,7 +183,7 @@ async function streamToPeer(
 
 ---
 
-## Canvas Frame Processing
+## Canvas Frame Processing {#canvas-frame-processing}
 
 Process video frames using canvas:
 
@@ -217,7 +217,7 @@ class FrameProcessor {
 
 ---
 
-## MV3 Considerations
+## MV3 Considerations {#mv3-considerations}
 
 Capture APIs require extension page context. Use offscreen documents for background capture:
 
@@ -240,7 +240,7 @@ async function createCaptureOffscreen(): Promise<void> {
 
 ---
 
-## Privacy Best Practices
+## Privacy Best Practices {#privacy-best-practices}
 
 - Always display a visual indicator when capture is active
 - Show the extension icon in the tab's favicon area during capture
@@ -249,7 +249,7 @@ async function createCaptureOffscreen(): Promise<void> {
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [guides/desktop-capture.md](../guides/desktop-capture.md)
 - [guides/tab-capture.md](../guides/tab-capture.md)

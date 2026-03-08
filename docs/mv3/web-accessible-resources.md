@@ -7,16 +7,16 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/web-
 
 # Web Accessible Resources in Manifest V3
 
-## Introduction
+## Introduction {#introduction}
 - Files in your extension that web pages and content scripts can access
 - MV3 changes: must explicitly declare which origins can access which resources
 - Security improvement over MV2's blanket `web_accessible_resources` array
 
-## MV2 vs MV3
+## MV2 vs MV3 {#mv2-vs-mv3}
 - MV2: `"web_accessible_resources": ["images/*.png", "styles.css"]` — any page could access
 - MV3: must specify `matches` (which origins) or `extension_ids` (which extensions)
 
-## manifest.json Setup
+## manifest.json Setup {#manifestjson-setup}
 ```json
 "web_accessible_resources": [{
   "resources": ["images/*.png", "inject.css", "widget.html"],
@@ -31,7 +31,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/web-
 }]
 ```
 
-## Accessing Resources
+## Accessing Resources {#accessing-resources}
 ```javascript
 // From content script or web page
 const url = chrome.runtime.getURL("images/icon.png");
@@ -44,26 +44,26 @@ link.href = chrome.runtime.getURL("inject.css");
 document.head.appendChild(link);
 ```
 
-## Fields
+## Fields {#fields}
 - `resources`: Array of file paths/globs to expose
 - `matches`: URL patterns for which web pages can access these resources
 - `extension_ids`: Other extensions that can access (for inter-extension communication)
 - `use_dynamic_url`: If true, resource URL changes per session (prevents fingerprinting)
 
-## use_dynamic_url
+## use_dynamic_url {#use-dynamic-url}
 - Default: false (static URL based on extension ID)
 - When true: URL includes session-specific token
 - Prevents websites from detecting extension by probing known URLs
 - Trade-off: URL changes on browser restart, can't be hardcoded
 
-## Common Use Cases
+## Common Use Cases {#common-use-cases}
 - **CSS injection**: Content script injects extension stylesheet into page
 - **Images/icons**: Display extension branding in injected UI
 - **HTML widgets**: Inject iframe with extension page into web page
 - **Fonts**: Custom fonts used by injected content
 - **Shared data**: JSON config files accessible to content scripts
 
-## Content Script + WAR Pattern
+## Content Script + WAR Pattern {#content-script-war-pattern}
 ```javascript
 // content.js — inject extension UI into page
 const container = document.createElement("div");
@@ -73,14 +73,14 @@ document.body.appendChild(container);
 - iframe with `chrome-extension://` URL has limited API access; use `chrome.runtime.sendMessage()` to communicate with the service worker for full API access
 - Communicate between iframe and content script via `window.postMessage` or `@theluckystrike/webext-messaging`
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 - Only expose files that MUST be accessible — minimize attack surface
 - Use `matches` to restrict to specific origins, not `<all_urls>`
 - Enable `use_dynamic_url` to prevent extension fingerprinting
 - Never expose sensitive files (config with API keys, internal scripts)
 - Web pages CAN read exposed file contents via fetch — don't expose secrets
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Exposing everything with `<all_urls>` — use specific origins
 - Forgetting to declare resources — content script can't load them
 - Using MV2 flat array format — must use MV3 object array format

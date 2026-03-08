@@ -10,11 +10,11 @@ The `chrome.vpnProvider` API enables Chrome extensions to act as VPN clients, al
 
 **Important Platform Note**: The VPN Provider API is exclusively available on Chrome OS. Extensions using this API will not function on Windows, macOS, Linux, or other platforms. Always implement proper feature detection before using this API.
 
-## chrome.vpnProvider API Overview
+## chrome.vpnProvider API Overview {#chromevpnprovider-api-overview}
 
 The VPN Provider API provides a complete framework for implementing VPN client functionality within a Chrome extension. It enables communication between your extension and Chrome OS's built-in VPN stack, allowing for packet transmission, connection management, and platform notifications.
 
-### Core Components
+### Core Components {#core-components}
 
 The API consists of several key components that work together to provide VPN functionality:
 
@@ -23,7 +23,7 @@ The API consists of several key components that work together to provide VPN fun
 - **Packet Interface**: Handles sending and receiving network packets
 - **Connection Events**: Notifies your extension about connection state changes
 
-### Permission Requirements
+### Permission Requirements {#permission-requirements}
 
 Add the `vpnProvider` permission to your `manifest.json`:
 
@@ -38,11 +38,11 @@ Add the `vpnProvider` permission to your `manifest.json`:
 
 The `platforms` key ensures your extension only targets Chrome OS, preventing installation on incompatible platforms.
 
-## Creating VPN Configurations
+## Creating VPN Configurations {#creating-vpn-configurations}
 
 VPN configurations represent connection profiles that users can select from the Chrome OS network settings. Each configuration contains connection parameters and display information.
 
-### Basic Configuration Creation
+### Basic Configuration Creation {#basic-configuration-creation}
 
 ```javascript
 // In your background service worker
@@ -57,7 +57,7 @@ chrome.vpnProvider.createConfig('My VPN', (configId) => {
 
 The `createConfig()` method takes a display name and returns a unique configuration ID. This ID is used for subsequent operations like connecting and disconnecting.
 
-### Configuration Parameters
+### Configuration Parameters {#configuration-parameters}
 
 When creating a VPN configuration, you can specify additional parameters:
 
@@ -78,7 +78,7 @@ chrome.vpnProvider.createConfig(vpnConfig.name, (configId) => {
 });
 ```
 
-### Removing Configurations
+### Removing Configurations {#removing-configurations}
 
 When your extension needs to clean up or remove a VPN configuration:
 
@@ -92,11 +92,11 @@ chrome.vpnProvider.destroyConfig(configId, () => {
 });
 ```
 
-## Handling Platform Messages
+## Handling Platform Messages {#handling-platform-messages}
 
 The VPN platform sends messages to your extension about connection events, configuration changes, and other platform-level operations. Your extension must handle these messages to manage the VPN lifecycle properly.
 
-### Setting Up the Message Handler
+### Setting Up the Message Handler {#setting-up-the-message-handler}
 
 ```javascript
 // onPlatformMessage callback receives: id (string), message (PlatformMessage enum), error (string)
@@ -151,7 +151,7 @@ function handleError(message, sessionId) {
 }
 ```
 
-### Message Types
+### Message Types {#message-types}
 
 The platform can send various message types that your extension should handle:
 
@@ -163,7 +163,7 @@ The platform can send various message types that your extension should handle:
 | `linkDown` | Physical network link down | Pause packet handling |
 | `linkUp` | Physical network link restored | Resume packet handling |
 
-### Server Configuration Messages
+### Server Configuration Messages {#server-configuration-messages}
 
 The platform may also send server configuration details:
 
@@ -189,11 +189,11 @@ chrome.vpnProvider.onPlatformMessage.addListener((id, message, error) => {
 });
 ```
 
-## Sending and Receiving Packets
+## Sending and Receiving Packets {#sending-and-receiving-packets}
 
 Once the VPN connection is established, your extension handles the actual network packet transmission. This is the core functionality that makes the VPN work.
 
-### Sending Packets
+### Sending Packets {#sending-packets}
 
 ```javascript
 // Packet queue for outgoing data
@@ -226,7 +226,7 @@ function tunnelOutgoingPacket(originalPacket) {
 }
 ```
 
-### Receiving Packets
+### Receiving Packets {#receiving-packets}
 
 ```javascript
 chrome.vpnProvider.onPacketReceived.addListener((sessionId, packet) => {
@@ -259,7 +259,7 @@ function processLocalPacket(packet) {
 }
 ```
 
-### Packet Processing Pipeline
+### Packet Processing Pipeline {#packet-processing-pipeline}
 
 A complete packet processing pipeline involves several stages:
 
@@ -305,11 +305,11 @@ class VpnPacketProcessor {
 }
 ```
 
-## VPN Connection Lifecycle Management
+## VPN Connection Lifecycle Management {#vpn-connection-lifecycle-management}
 
 Managing the VPN connection lifecycle involves coordinating between user actions, platform messages, and your extension's internal state.
 
-### Initiating a Connection
+### Initiating a Connection {#initiating-a-connection}
 
 The VPN Provider API does not have `connect()` or `disconnect()` methods. Instead, the connection lifecycle is managed by the Chrome OS platform. When the user selects a VPN configuration from Chrome OS network settings, Chrome OS sends a `"connected"` platform message to the extension. The extension then calls `setParameters()` to configure the tunnel and `notifyConnectionStateChanged()` to report connection state.
 
@@ -338,7 +338,7 @@ function handleConnected(configId) {
 }
 ```
 
-### Disconnecting
+### Disconnecting {#disconnecting}
 
 When the user disconnects from Chrome OS network settings, the platform sends a `"disconnected"` platform message. Your extension should clean up resources:
 
@@ -350,7 +350,7 @@ function handleDisconnected(configId) {
 }
 ```
 
-### Handling Reconnection
+### Handling Reconnection {#handling-reconnection}
 
 Network conditions may cause the VPN to disconnect unexpectedly. Implement reconnection logic:
 
@@ -391,11 +391,11 @@ function attemptReconnect(sessionId) {
 }
 ```
 
-## UI Notifications for Connection Status
+## UI Notifications for Connection Status {#ui-notifications-for-connection-status}
 
 Providing clear feedback to users about the VPN connection status is essential for a good user experience.
 
-### Popup Integration
+### Popup Integration {#popup-integration}
 
 ```javascript
 // popup.js - Update UI based on connection state
@@ -442,7 +442,7 @@ function updateStatusUI(status) {
 }
 ```
 
-### Chrome OS Network Notification
+### Chrome OS Network Notification {#chrome-os-network-notification}
 
 Chrome OS displays VPN connection status in the system network menu:
 
@@ -471,7 +471,7 @@ function notifyConnectionChange(state, details) {
 }
 ```
 
-### Status Icons
+### Status Icons {#status-icons}
 
 Provide clear visual indicators for different states:
 
@@ -500,7 +500,7 @@ function updateBadge(state) {
 }
 ```
 
-## Complete Implementation Example
+## Complete Implementation Example {#complete-implementation-example}
 
 Here's a comprehensive example combining all the concepts:
 
@@ -672,37 +672,37 @@ class VpnExtension {
 const vpn = new VpnExtension();
 ```
 
-## Best Practices and Security Considerations
+## Best Practices and Security Considerations {#best-practices-and-security-considerations}
 
 When implementing a VPN Provider extension, consider these important aspects:
 
-### Security
+### Security {#security}
 
 - Never store credentials in plain text; use Chrome's secure storage APIs
 - Implement proper certificate validation for VPN connections
 - Use strong encryption for all tunneled traffic
 - Validate all data received from the VPN platform
 
-### Performance
+### Performance {#performance}
 
 - Process packets asynchronously to avoid blocking the service worker
 - Implement proper queue management for packet transmission
 - Use efficient data structures for connection state management
 
-### User Experience
+### User Experience {#user-experience}
 
 - Provide clear connection status feedback
 - Implement reconnection logic for network interruptions
 - Allow users to configure automatic reconnection preferences
 - Handle platform limitations gracefully with informative messages
 
-### Testing
+### Testing {#testing}
 
 - Test on actual Chrome OS devices or the Chrome OS emulator
 - Simulate various network conditions (slow, unstable, disconnected)
 - Verify proper cleanup of resources on disconnection
 
-## Platform Limitations
+## Platform Limitations {#platform-limitations}
 
 Be aware of the following limitations when working with the VPN Provider API:
 
@@ -713,7 +713,7 @@ Be aware of the following limitations when working with the VPN Provider API:
 
 Always implement feature detection and provide appropriate fallbacks for users on unsupported platforms.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Proxy Settings Deep Dive](../patterns/proxy-settings-deep-dive.md)
 - [Proxy Permission](../permissions/proxy.md)

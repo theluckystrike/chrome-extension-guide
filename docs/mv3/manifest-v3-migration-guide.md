@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/mani
 
 # Manifest V3 Migration Guide
 
-## Quick Checklist
+## Quick Checklist {#quick-checklist}
 1. Change `"manifest_version": 2` → `3`
 2. Replace `"background": { "scripts": [...] }` → `"background": { "service_worker": "background.js" }`
 3. Replace `"browser_action"` / `"page_action"` → `"action"`
@@ -19,7 +19,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/mani
 9. Replace `chrome.tabs.insertCSS` → `chrome.scripting.insertCSS`
 10. Handle service worker lifecycle (no persistent state)
 
-## Manifest Changes
+## Manifest Changes {#manifest-changes}
 ```json
 // MV2
 {
@@ -39,9 +39,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/mani
 }
 ```
 
-## Background Script → Service Worker
+## Background Script → Service Worker {#background-script-service-worker}
 
-### No DOM Access
+### No DOM Access {#no-dom-access}
 ```typescript
 // MV2 (had DOM in background page)
 const parser = new DOMParser();
@@ -55,7 +55,7 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-### No Persistent State
+### No Persistent State {#no-persistent-state}
 ```typescript
 // MV2
 let count = 0;
@@ -70,7 +70,7 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### No setInterval/setTimeout (long-running)
+### No setInterval/setTimeout (long-running) {#no-setintervalsettimeout-long-running}
 ```typescript
 // MV2
 setInterval(() => poll(), 60000);
@@ -80,7 +80,7 @@ chrome.alarms.create('poll', { periodInMinutes: 1 });
 chrome.alarms.onAlarm.addListener(a => { if (a.name === 'poll') poll(); });
 ```
 
-## Web Request → Declarative Net Request
+## Web Request → Declarative Net Request {#web-request-declarative-net-request}
 ```typescript
 // MV2 (blocking webRequest)
 chrome.webRequest.onBeforeRequest.addListener(
@@ -99,7 +99,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }]
 ```
 
-## Scripting API Changes
+## Scripting API Changes {#scripting-api-changes}
 ```typescript
 // MV2
 chrome.tabs.executeScript(tabId, { code: 'alert("hi")' });
@@ -116,7 +116,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-## Action API
+## Action API {#action-api}
 ```typescript
 // MV2
 chrome.browserAction.setIcon({ path: 'icon.png' });
@@ -127,7 +127,7 @@ chrome.action.setIcon({ path: 'icon.png' });
 chrome.action.onClicked.addListener(handler);
 ```
 
-## Content Security Policy
+## Content Security Policy {#content-security-policy}
 ```json
 // MV2 — allowed remote scripts
 { "content_security_policy": "script-src 'self' https://cdn.example.com; object-src 'self'" }
@@ -136,7 +136,7 @@ chrome.action.onClicked.addListener(handler);
 { "content_security_policy": { "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'" } }
 ```
 
-## Messaging with @theluckystrike/webext-messaging
+## Messaging with @theluckystrike/webext-messaging {#messaging-with-theluckystrikewebext-messaging}
 ```typescript
 // Works the same in MV2 and MV3
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -145,7 +145,7 @@ const m = createMessenger<Msgs>();
 // Handles SW lifecycle automatically
 ```
 
-## Common Migration Pitfalls
+## Common Migration Pitfalls {#common-migration-pitfalls}
 - Listeners inside async functions — lost on SW restart
 - Global variables — reset on termination
 - DOM APIs in service worker — use offscreen document
@@ -153,7 +153,7 @@ const m = createMessenger<Msgs>();
 - `localStorage` — use `chrome.storage`
 - `window` object — not available in SW
 
-## Cross-References
+## Cross-References {#cross-references}
 - `docs/guides/mv2-to-mv3-migration.md`
 - `docs/mv3/service-workers.md`
 - `docs/mv3/event-driven-architecture.md`

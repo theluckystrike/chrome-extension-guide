@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 Caching is essential for building responsive Chrome extensions that work efficiently and gracefully handle offline scenarios. This guide covers caching strategies, storage options, and implementation patterns specific to extension development.
 
-## Overview
+## Overview {#overview}
 
 Caching in Chrome extensions serves several critical purposes:
 
@@ -19,11 +19,11 @@ Caching in Chrome extensions serves several critical purposes:
 
 Effective caching strategies balance data freshness with performance, choosing the right approach based on how often data changes and how critical it is to have the latest version.
 
-## Storage Options for Caching
+## Storage Options for Caching {#storage-options-for-caching}
 
 Chrome extensions provide multiple storage APIs, each with different characteristics suited for specific caching scenarios.
 
-### chrome.storage.local
+### chrome.storage.local {#chromestoragelocal}
 
 Persistent storage that survives browser restarts. Default quota is 10MB, but you can request unlimited storage with the `"unlimitedStorage"` permission in your manifest. Data is stored as JSON-serializable objects and accessed asynchronously.
 
@@ -39,7 +39,7 @@ const result = await chrome.storage.local.get('users');
 
 This storage is ideal for data that should persist across sessions, such as user preferences, cached API responses, and computed results that take significant time to generate.
 
-### chrome.storage.session
+### chrome.storage.session {#chromestoragesession}
 
 Fast, ephemeral storage cleared when the browser restarts. Provides 10MB quota and is ideal for data that doesn't need to persist across sessions. Access is also asynchronous.
 
@@ -52,7 +52,7 @@ await chrome.storage.session.set({
 
 Use this for temporary caching during a single browsing session, such as data that will be refreshed when the user next opens the browser.
 
-### In-Memory Caching
+### In-Memory Caching {#in-memory-caching}
 
 JavaScript variables within the service worker provide the fastest access but are lost when the service worker terminates or is updated. This happens more frequently than you might expect.
 
@@ -71,7 +71,7 @@ function setCached(key, value) {
 
 In-memory caching is best for data that can be easily re-fetched or recomputed, where the performance gain outweighs the risk of data loss.
 
-### Cache API
+### Cache API {#cache-api}
 
 The standard Cache API, typically associated with service workers, can also be used in extension context for HTTP response caching. This is useful when you need to cache network requests with full request/response pairs.
 
@@ -81,9 +81,9 @@ const cache = await caches.open(cacheName);
 await cache.put(request, response);
 ```
 
-## Cache Patterns
+## Cache Patterns {#cache-patterns}
 
-### Cache-First
+### Cache-First {#cache-first}
 
 The cache-first pattern checks storage before making network requests. If cached data exists and is fresh, return it immediately. Otherwise, fetch from the network, cache the result, and return it.
 
@@ -106,7 +106,7 @@ async function cacheFirst(key, fetchFn, ttl = 3600000) {
 
 This pattern works best for data that changes infrequently, such as configuration data, static lists, or user preferences. The TTL (time-to-live) parameter controls how long cached data is considered fresh.
 
-### Network-First
+### Network-First {#network-first}
 
 The network-first pattern attempts to fetch fresh data from the network first. If the request succeeds, cache the response. If it fails (offline or error), fall back to cached data.
 
@@ -130,7 +130,7 @@ async function networkFirst(key, fetchFn) {
 
 This approach ensures users get fresh data when online while maintaining functionality offline. Best for data that should be as current as possible, such as news feeds or notifications.
 
-### Stale-While-Revalidate
+### Stale-While-Revalidate {#stale-while-revalidate}
 
 This pattern returns cached data immediately for fast responses while simultaneously fetching fresh data in the background. The cached data is updated for subsequent requests.
 
@@ -163,11 +163,11 @@ async function staleWhileRevalidate(key, fetchFn, ttl = 3600000) {
 
 This pattern provides the best of both worlds: instant response times with cached data, plus eventual consistency with fresh data. Ideal for frequently accessed data where slight staleness is acceptable.
 
-## TTL (Time-To-Live) Implementation
+## TTL (Time-To-Live) Implementation {#ttl-time-to-live-implementation}
 
 Proper TTL implementation ensures cached data remains fresh while avoiding unnecessary network requests.
 
-### Basic TTL Wrapper
+### Basic TTL Wrapper {#basic-ttl-wrapper}
 
 ```javascript
 class TTLCache {
@@ -203,7 +203,7 @@ class TTLCache {
 const cache = new TTLCache(chrome.storage.local);
 ```
 
-### Periodic Cache Cleanup
+### Periodic Cache Cleanup {#periodic-cache-cleanup}
 
 Use chrome.alarms to periodically clean up expired cache entries:
 
@@ -223,11 +223,11 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Cache Invalidation
+## Cache Invalidation {#cache-invalidation}
 
 Invalidating cache entries at the right time ensures users see fresh data when needed.
 
-### Manual Invalidation
+### Manual Invalidation {#manual-invalidation}
 
 ```javascript
 async function invalidateCache(key) {
@@ -241,7 +241,7 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 });
 ```
 
-### Write-Through Invalidation
+### Write-Through Invalidation {#write-through-invalidation}
 
 Update or invalidate cache when data is mutated:
 
@@ -257,7 +257,7 @@ async function updateUser(userId, updates) {
 }
 ```
 
-### Event-Based Invalidation
+### Event-Based Invalidation {#event-based-invalidation}
 
 Listen for storage changes across extension contexts:
 
@@ -273,11 +273,11 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-## SW-Aware Caching
+## SW-Aware Caching {#sw-aware-caching}
 
 Service workers in extensions can be terminated and restarted frequently, causing in-memory caches to be lost.
 
-### Hydration Pattern
+### Hydration Pattern {#hydration-pattern}
 
 Reconstruct in-memory cache from persistent storage when the service worker starts:
 
@@ -299,7 +299,7 @@ function getFromCache(key) {
 }
 ```
 
-### Tiered Caching Strategy
+### Tiered Caching Strategy {#tiered-caching-strategy}
 
 Combine storage types for optimal performance:
 
@@ -331,11 +331,11 @@ async function getWithTieredCache(key) {
 }
 ```
 
-## Cache Size Management
+## Cache Size Management {#cache-size-management}
 
 Monitor and manage storage quota to prevent hitting limits.
 
-### Monitor Storage Usage
+### Monitor Storage Usage {#monitor-storage-usage}
 
 ```javascript
 async function checkStorageUsage() {
@@ -350,7 +350,7 @@ async function checkStorageUsage() {
 }
 ```
 
-### LRU Eviction
+### LRU Eviction {#lru-eviction}
 
 Implement least-recently-used eviction to manage cache size:
 
@@ -394,7 +394,7 @@ class LRUCache {
 }
 ```
 
-### Compression
+### Compression {#compression}
 
 For large cached values, consider compression:
 
@@ -417,9 +417,9 @@ async function getAndDecompress(key) {
 }
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Offline-First Data Access
+### Offline-First Data Access {#offline-first-data-access}
 
 Complete pattern for resilient data fetching:
 
@@ -463,13 +463,13 @@ const { data, fromCache, stale } = await offlineCache.fetch(
 );
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [State Management](../patterns/state-management.md) - Managing application state across contexts
 - [Performance](../guides/performance.md) - General performance optimization techniques
 - [Memory Management](../guides/memory-management.md) - Managing memory in service workers
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Caching Patterns](../patterns/caching-strategies.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)

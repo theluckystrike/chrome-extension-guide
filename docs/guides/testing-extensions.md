@@ -6,18 +6,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/t
 ---
 # Testing Chrome Extensions
 
-## Overview
+## Overview {#overview}
 Testing extensions is tricky because they run across multiple contexts (background, popup, content scripts) and depend on Chrome APIs. This guide covers strategies from unit tests to manual testing.
 
-## Testing Pyramid for Extensions
+## Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
 1. **Unit tests** — test pure logic, schema definitions, message types
 2. **Integration tests** — test with mocked Chrome APIs
 3. **E2E tests** — test the loaded extension in a real browser (Puppeteer/Playwright)
 4. **Manual testing** — load unpacked and verify
 
-## Unit Testing Setup
+## Unit Testing Setup {#unit-testing-setup}
 
-### Install dependencies
+### Install dependencies {#install-dependencies}
 ```bash
 npm install -D vitest @anthropic-ai/claude-code
 ```
@@ -27,7 +27,7 @@ Actually, for testing:
 npm install -D vitest
 ```
 
-### vitest.config.ts
+### vitest.config.ts {#vitestconfigts}
 ```ts
 import { defineConfig } from "vitest/config";
 
@@ -39,9 +39,9 @@ export default defineConfig({
 });
 ```
 
-## Testing @theluckystrike/webext-storage
+## Testing @theluckystrike/webext-storage {#testing-theluckystrikewebext-storage}
 
-### Test schema definitions
+### Test schema definitions {#test-schema-definitions}
 ```ts
 import { defineSchema } from "@theluckystrike/webext-storage";
 
@@ -60,7 +60,7 @@ describe("schema", () => {
 });
 ```
 
-### Mock chrome.storage for integration tests
+### Mock chrome.storage for integration tests {#mock-chromestorage-for-integration-tests}
 ```ts
 // __mocks__/chrome.ts
 const store: Record<string, unknown> = {};
@@ -93,7 +93,7 @@ const mockStorage = {
 (globalThis as any).chrome = { storage: mockStorage, runtime: { lastError: null } };
 ```
 
-### Test storage operations
+### Test storage operations {#test-storage-operations}
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
@@ -121,9 +121,9 @@ describe("TypedStorage", () => {
 });
 ```
 
-## Testing @theluckystrike/webext-messaging
+## Testing @theluckystrike/webext-messaging {#testing-theluckystrikewebext-messaging}
 
-### Test message type definitions
+### Test message type definitions {#test-message-type-definitions}
 ```ts
 // Compile-time type testing
 type Messages = {
@@ -137,7 +137,7 @@ import { createMessenger } from "@theluckystrike/webext-messaging";
 const msg = createMessenger<Messages>();
 ```
 
-### Mock chrome.runtime for messaging tests
+### Mock chrome.runtime for messaging tests {#mock-chromeruntime-for-messaging-tests}
 ```ts
 const listeners: Function[] = [];
 
@@ -164,9 +164,9 @@ const listeners: Function[] = [];
 };
 ```
 
-## Testing @theluckystrike/webext-permissions
+## Testing @theluckystrike/webext-permissions {#testing-theluckystrikewebext-permissions}
 
-### Mock chrome.permissions
+### Mock chrome.permissions {#mock-chromepermissions}
 ```ts
 const grantedPermissions = new Set(["storage"]);
 
@@ -192,7 +192,7 @@ const grantedPermissions = new Set(["storage"]);
 };
 ```
 
-### Test permission checks
+### Test permission checks {#test-permission-checks}
 ```ts
 import { checkPermission, describePermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
 
@@ -214,7 +214,7 @@ describe("permissions", () => {
 });
 ```
 
-## E2E Testing with Puppeteer
+## E2E Testing with Puppeteer {#e2e-testing-with-puppeteer}
 
 ```ts
 import puppeteer from "puppeteer";
@@ -243,7 +243,7 @@ const text = await popupPage.$eval("#status", el => el.textContent);
 expect(text).toBe("Enabled");
 ```
 
-## Manual Testing Checklist
+## Manual Testing Checklist {#manual-testing-checklist}
 - [ ] Load unpacked extension in chrome://extensions
 - [ ] Test popup opens and displays correctly
 - [ ] Test all popup actions
@@ -257,14 +257,14 @@ expect(text).toBe("Enabled");
 - [ ] Check DevTools console for errors in each context
 - [ ] Test on Chrome stable (not just dev)
 
-## Debugging Tips
+## Debugging Tips {#debugging-tips}
 - Background: `chrome://extensions` > service worker "Inspect"
 - Popup: right-click popup > "Inspect"
 - Content script: page DevTools > Console (select extension context in dropdown)
 - Storage: DevTools > Application > Extension Storage
 - Network: DevTools > Network tab (for fetch calls from background)
 
-## CI Setup (GitHub Actions)
+## CI Setup (GitHub Actions) {#ci-setup-github-actions}
 
 ```yaml
 name: Test
@@ -280,13 +280,13 @@ jobs:
       - run: npm test
 ```
 
-## Related Guides
+## Related Guides {#related-guides}
 - [Background Patterns](background-patterns.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)
 ```
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [E2E Testing Patterns](../patterns/e2e-testing-patterns.md)

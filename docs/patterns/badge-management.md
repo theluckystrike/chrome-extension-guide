@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Badge Management Patterns
 
-## Overview
+## Overview {#overview}
 
 The browser action badge is a powerful tool for communicating extension state directly in the toolbar. Effective badge management involves controlling badge text, colors, and icon states to provide meaningful feedback to users without requiring them to open the extension popup.
 
@@ -15,9 +15,9 @@ This guide covers practical patterns for badge text, colors, per-tab vs global b
 
 ---
 
-## Badge Text Patterns
+## Badge Text Patterns {#badge-text-patterns}
 
-### Unread Count Display
+### Unread Count Display {#unread-count-display}
 
 Show the number of unread items with overflow handling:
 
@@ -31,7 +31,7 @@ function updateUnreadBadge(count) {
 }
 ```
 
-### Status Indicators
+### Status Indicators {#status-indicators}
 
 Use short text for status:
 
@@ -44,7 +44,7 @@ const STATUS_TEXTS = {
 };
 ```
 
-### Error States
+### Error States {#error-states}
 
 Show error indicators prominently:
 
@@ -55,7 +55,7 @@ function showError(message) {
 }
 ```
 
-### Clearing the Badge
+### Clearing the Badge {#clearing-the-badge}
 
 An empty string removes the badge:
 
@@ -65,7 +65,7 @@ chrome.action.setBadgeText({ text: '' });
 
 ---
 
-## Badge Colors
+## Badge Colors {#badge-colors}
 
 Define color constants for consistent theming:
 
@@ -87,9 +87,9 @@ chrome.action.setBadgeBackgroundColor({ color: BADGE_COLORS.success });
 
 ---
 
-## Per-Tab Badge Management
+## Per-Tab Badge Management {#per-tab-badge-management}
 
-### Setting Per-Tab Badges
+### Setting Per-Tab Badges {#setting-per-tab-badges}
 
 Different tabs can display different badge states:
 
@@ -103,7 +103,7 @@ function updateTabBadge(tabId, count) {
 }
 ```
 
-### Per-Tab vs Global Behavior
+### Per-Tab vs Global Behavior {#per-tab-vs-global-behavior}
 
 - **Per-tab badge**: Overrides global badge for specific tabs only
 - **Per-tab resets**: Badge clears automatically when tab navigates away
@@ -122,9 +122,9 @@ chrome.action.setBadgeText({ text: '3' });
 
 ---
 
-## Animated Badge Patterns
+## Animated Badge Patterns {#animated-badge-patterns}
 
-### Basic Blinking Badge
+### Basic Blinking Badge {#basic-blinking-badge}
 
 Toggle between two states to attract attention:
 
@@ -154,7 +154,7 @@ function stopBlinking() {
 }
 ```
 
-### Using chrome.alarms (Service Worker Safe)
+### Using chrome.alarms (Service Worker Safe) {#using-chromealarms-service-worker-safe}
 
 For service worker extensions, use chrome.alarms instead of setInterval:
 
@@ -168,7 +168,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Auto-Stop on Interaction
+### Auto-Stop on Interaction {#auto-stop-on-interaction}
 
 Stop animation when user interacts:
 
@@ -187,7 +187,7 @@ chrome.tabs.onActivated.addListener(() => {
 
 ---
 
-## Badge with Icon State
+## Badge with Icon State {#badge-with-icon-state}
 
 Combine badge changes with icon updates for richer feedback:
 
@@ -211,7 +211,7 @@ function setExtensionState(state, tabId) {
 }
 ```
 
-### Canvas-Based Dynamic Icons
+### Canvas-Based Dynamic Icons {#canvas-based-dynamic-icons}
 
 Generate icons programmatically:
 
@@ -233,7 +233,7 @@ chrome.action.setIcon({ imageData: createColoredIcon('#4CAF50') });
 
 ---
 
-## State Machine Pattern
+## State Machine Pattern {#state-machine-pattern}
 
 Centralize badge and action state management:
 
@@ -281,7 +281,7 @@ setActionState('active', tabId);
 
 ---
 
-## Complete Example: Unread Counter with Auto-Clear
+## Complete Example: Unread Counter with Auto-Clear {#complete-example-unread-counter-with-auto-clear}
 
 ```js
 class BadgeManager {
@@ -321,7 +321,7 @@ const badgeManager = new BadgeManager();
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Action API Reference](../api-reference/action-api.md) - Full chrome.action API documentation
 - [Badge and Action UI Patterns](badge-action-ui.md) - Related UI patterns

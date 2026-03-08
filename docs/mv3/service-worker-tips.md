@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/serv
 
 Practical tips for building robust Chrome Extension service workers using Manifest V3.
 
-## 1. Register Listeners at Top Level (Mandatory)
+## 1. Register Listeners at Top Level (Mandatory) {#1-register-listeners-at-top-level-mandatory}
 
 Service workers terminate unexpectedly. All event listeners must be at the top level.
 
@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 async function init() { chrome.runtime.onInstalled.addListener(() => {}); }
 ```
 
-## 2. No Global State — Use @theluckystrike/webext-storage
+## 2. No Global State — Use @theluckystrike/webext-storage {#2-no-global-state-use-theluckystrikewebext-storage}
 
 Global variables are lost on restart. Use `chrome.storage` for persistence.
 
@@ -36,7 +36,7 @@ const { theme } = await storage.get('settings', { theme: 'light' });
 storage.onChanged.addListener((changes) => console.log('Changed:', changes));
 ```
 
-## 3. No setInterval — Use chrome.alarms
+## 3. No setInterval — Use chrome.alarms {#3-no-setinterval-use-chromealarms}
 
 `setInterval`/`setTimeout` don't work reliably. Use `chrome.alarms` instead.
 
@@ -45,7 +45,7 @@ chrome.alarms.create('sync', { periodInMinutes: 15 });
 chrome.alarms.onAlarm.addListener((alarm) => { if (alarm.name === 'sync') doSync(); });
 ```
 
-## 4. Handle Restart in onStartup
+## 4. Handle Restart in onStartup {#4-handle-restart-in-onstartup}
 
 Re-initialize state when the service worker starts.
 
@@ -56,7 +56,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## 5. Use Offscreen Docs for DOM APIs
+## 5. Use Offscreen Docs for DOM APIs {#5-use-offscreen-docs-for-dom-apis}
 
 Service workers cannot access DOM. Use offscreen documents.
 
@@ -76,7 +76,7 @@ async function parseHTML(html) {
 }
 ```
 
-## 6. No window/document/localStorage/XMLHttpRequest
+## 6. No window/document/localStorage/XMLHttpRequest {#6-no-windowdocumentlocalstoragexmlhttprequest}
 
 These APIs are unavailable in service workers.
 
@@ -87,7 +87,7 @@ These APIs are unavailable in service workers.
 // ✅ Use storage + fetch instead
 ```
 
-## 7. ES Modules: "type": "module" in manifest
+## 7. ES Modules: "type": "module" in manifest {#7-es-modules-type-module-in-manifest}
 
 Enable ES modules in manifest.json.
 
@@ -99,7 +99,7 @@ Enable ES modules in manifest.json.
 import { Storage } from './utils/storage.js';
 ```
 
-## 8. Debug at chrome://extensions
+## 8. Debug at chrome://extensions {#8-debug-at-chromeextensions}
 
 Open `chrome://extensions`, enable Developer mode, click your extension's "service worker" link.
 
@@ -108,7 +108,7 @@ const DEBUG = true;
 function log(...args) { if (DEBUG) console.log('[SW]', ...args); }
 ```
 
-## 9. @theluckystrike/webext-messaging for Typed Messages
+## 9. @theluckystrike/webext-messaging for Typed Messages {#9-theluckystrikewebext-messaging-for-typed-messages}
 
 Use `@theluckystrike/webext-messaging` for reliable message passing.
 
@@ -119,7 +119,7 @@ await channel.send('content-script', { type: 'UPDATE', data: {} });
 channel.onMessage.addListener((msg) => console.log('Received:', msg));
 ```
 
-## Summary
+## Summary {#summary}
 
 | Tip | Action |
 |-----|--------|

@@ -9,15 +9,15 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # readingList Permission
 
-## Overview
+## Overview {#overview}
 
 - **Permission string**: `"readingList"`
 - **API**: `chrome.readingList` — manage Chrome's built-in Reading List
 - **Chrome version**: Chrome 120+
 
-## API Methods
+## API Methods {#api-methods}
 
-### addEntry(entry)
+### addEntry(entry) {#addentryentry}
 
 Adds URL to reading list. Throws if URL already exists.
 
@@ -29,7 +29,7 @@ chrome.readingList.addEntry({ url, title, hasBeenRead })
 - `title`: string
 - `hasBeenRead`: boolean
 
-### removeEntry(info)
+### removeEntry(info) {#removeentryinfo}
 
 Removes entry by URL.
 
@@ -37,7 +37,7 @@ Removes entry by URL.
 chrome.readingList.removeEntry({ url })
 ```
 
-### updateEntry(info)
+### updateEntry(info) {#updateentryinfo}
 
 Updates an entry. URL is the identifier.
 
@@ -45,7 +45,7 @@ Updates an entry. URL is the identifier.
 chrome.readingList.updateEntry({ url, title?, hasBeenRead? })
 ```
 
-### query(info)
+### query(info) {#queryinfo}
 
 Search reading list with optional filters.
 
@@ -55,25 +55,27 @@ chrome.readingList.query({ url?, title?, hasBeenRead? })
 
 Returns array of ReadingListEntry objects.
 
-## Events
+## Events {#events}
 
 - `chrome.readingList.onEntryAdded` — fires when entry added
 - `chrome.readingList.onEntryRemoved` — fires when entry removed
 - `chrome.readingList.onEntryUpdated` — fires when entry updated
 
-## ReadingListEntry Type
+## ReadingListEntry Type {#readinglistentry-type}
 
 ```javascript
 { url, title, hasBeenRead, lastUpdateTime, creationTime }
 ```
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 { "permissions": ["readingList"] }
 ```
 
 ## Common Use Cases
+
+## Use Cases {#use-cases}
 
 ### Read-Later Functionality
 The primary use case for the Reading List API is enabling users to save articles for later reading. Extensions can add a context menu option or toolbar button that saves the current page to Chrome's built-in Reading List with a single click.
@@ -90,9 +92,9 @@ Track reading progress by marking entries as read or unread. The `hasBeenRead` p
 ### Bookmark Migration
 Help users migrate from traditional bookmarks to the Reading List, or sync between different bookmarking services and Chrome's Reading List.
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Add page via context menu
+### Add page via context menu {#add-page-via-context-menu}
 
 ```javascript
 // manifest: { "permissions": ["readingList", "contextMenus"] }
@@ -109,13 +111,13 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-### Query unread entries
+### Query unread entries {#query-unread-entries}
 
 ```javascript
 const unread = await chrome.readingList.query({ hasBeenRead: false });
 ```
 
-### Mark as read after visiting
+### Mark as read after visiting {#mark-as-read-after-visiting}
 
 ```javascript
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -181,6 +183,8 @@ Use the Reading List events to keep your extension's UI in sync with changes mad
 - Reading tracker: mark as read/unread
 
 ## Cross-references
+
+## Cross-references {#cross-references}
 
 - patterns/reading-list-api.md
 - tutorials/build-reading-list.md

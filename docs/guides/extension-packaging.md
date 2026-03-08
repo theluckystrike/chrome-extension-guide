@@ -10,7 +10,7 @@ This guide covers how to package your Chrome extension for distribution—either
 
 ---
 
-## Overview
+## Overview {#overview}
 
 Packaging your extension is the final step before distribution. The package format depends on your distribution method:
 
@@ -22,7 +22,7 @@ This guide covers all three approaches plus automation strategies.
 
 ---
 
-## Directory Structure for Packaging
+## Directory Structure for Packaging {#directory-structure-for-packaging}
 
 Your extension needs a clean, production-ready directory before packaging. A typical structure looks like:
 
@@ -45,7 +45,7 @@ This `dist` folder should contain only the files needed at runtime—no source f
 
 ---
 
-## What to Include
+## What to Include {#what-to-include}
 
 Every extension package must include:
 
@@ -60,7 +60,7 @@ Every extension package must include:
 
 ---
 
-## What to Exclude
+## What to Exclude {#what-to-exclude}
 
 Never include the following in your package:
 
@@ -75,7 +75,7 @@ Never include the following in your package:
 
 ---
 
-## ZIP for Chrome Web Store
+## ZIP for Chrome Web Store {#zip-for-chrome-web-store}
 
 The Chrome Web Store accepts extensions as ZIP files. Create your package with:
 
@@ -84,7 +84,7 @@ cd dist
 zip -r ../extension.zip . -x ".*" "*.map"
 ```
 
-### Important Notes
+### Important Notes {#important-notes}
 
 - **Maximum size**: 50MB (compressed), though smaller is better
 - **Faster review**: Smaller packages review faster
@@ -93,11 +93,11 @@ zip -r ../extension.zip . -x ".*" "*.map"
 
 ---
 
-## CRX for Self-Hosting
+## CRX for Self-Hosting {#crx-for-self-hosting}
 
 For self-hosted distribution (without the Store), create a CRX file:
 
-### Option 1: Using Chrome UI
+### Option 1: Using Chrome UI {#option-1-using-chrome-ui}
 
 1. Open `chrome://extensions`
 2. Enable **Developer mode**
@@ -105,13 +105,13 @@ For self-hosted distribution (without the Store), create a CRX file:
 4. Select your `dist` directory
 5. Chrome generates `dist.crx` and `dist.pem`
 
-### Option 2: Programmatic (crx3 package)
+### Option 2: Programmatic (crx3 package) {#option-2-programmatic-crx3-package}
 
 ```bash
 npx crx3 pack ./dist -o extension.crx -p private-key.pem
 ```
 
-### Important: Private Key
+### Important: Private Key {#important-private-key}
 
 - The `.pem` file is your private key—keep it secure
 - This key signs your CRX and identifies your extension
@@ -120,7 +120,7 @@ npx crx3 pack ./dist -o extension.crx -p private-key.pem
 
 ---
 
-## Build Script Example
+## Build Script Example {#build-script-example}
 
 A typical npm-based build and package workflow:
 
@@ -144,7 +144,7 @@ More advanced setups might use:
 
 ---
 
-## Automated Packaging in CI
+## Automated Packaging in CI {#automated-packaging-in-ci}
 
 Automate your packaging pipeline using GitHub Actions:
 
@@ -169,7 +169,7 @@ jobs:
           path: extension.zip
 ```
 
-### Publishing to Chrome Web Store
+### Publishing to Chrome Web Store {#publishing-to-chrome-web-store}
 
 For automated publishing, use the Chrome Web Store API with a service account:
 
@@ -184,7 +184,7 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-## Verification Before Packaging
+## Verification Before Packaging {#verification-before-packaging}
 
 Always verify your package before distribution:
 
@@ -196,13 +196,13 @@ Always verify your package before distribution:
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Publishing Guide](../publishing/publishing-guide.md) — Overview of distribution options
 - [Submission Process](../publishing/submission-process.md) — Step-by-step Store submission
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Automation best practices
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
 - [Extension Updates](../guides/extension-updates.md)

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.contextMenus` API lets you add items to Chrome's right-click context menu. Menu items can appear on pages, links, images, selections, and more.
 
-## Permissions
+## Permissions {#permissions}
 
 ```json
 {
@@ -21,9 +21,9 @@ No user-facing warning. This is a low-sensitivity permission.
 
 See the [contextMenus permission reference](../permissions/contextMenus.md) for details.
 
-## Core Methods
+## Core Methods {#core-methods}
 
-### chrome.contextMenus.create(createProperties, callback?)
+### chrome.contextMenus.create(createProperties, callback?) {#chromecontextmenuscreatecreateproperties-callback}
 
 Create a context menu item. This is a synchronous-style call (returns the menu item ID directly) but accepts an optional callback for error handling.
 
@@ -117,7 +117,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### Nested Menus (Submenus)
+### Nested Menus (Submenus) {#nested-menus-submenus}
 
 Create parent items and assign children via `parentId`:
 
@@ -145,7 +145,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### CreateProperties
+### CreateProperties {#createproperties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -162,7 +162,7 @@ chrome.contextMenus.create({
 
 **ContextType values:** `"all"`, `"page"`, `"frame"`, `"selection"`, `"link"`, `"editable"`, `"image"`, `"video"`, `"audio"`, `"action"`, `"browser_action"`, `"page_action"`, `"launcher"`.
 
-### chrome.contextMenus.update(id, updateProperties)
+### chrome.contextMenus.update(id, updateProperties) {#chromecontextmenusupdateid-updateproperties}
 
 Modify an existing menu item.
 
@@ -180,7 +180,7 @@ await chrome.contextMenus.update("dark-mode", { checked: true });
 await chrome.contextMenus.update("my-action", { visible: false });
 ```
 
-### chrome.contextMenus.remove(menuItemId)
+### chrome.contextMenus.remove(menuItemId) {#chromecontextmenusremovemenuitemid}
 
 Remove a specific menu item.
 
@@ -188,7 +188,7 @@ Remove a specific menu item.
 await chrome.contextMenus.remove("my-action");
 ```
 
-### chrome.contextMenus.removeAll()
+### chrome.contextMenus.removeAll() {#chromecontextmenusremoveall}
 
 Remove all menu items created by your extension.
 
@@ -196,9 +196,9 @@ Remove all menu items created by your extension.
 await chrome.contextMenus.removeAll();
 ```
 
-## Events
+## Events {#events}
 
-### chrome.contextMenus.onClicked
+### chrome.contextMenus.onClicked {#chromecontextmenusonclicked}
 
 Fires when a menu item is clicked.
 
@@ -235,7 +235,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-### OnClickData (the `info` parameter)
+### OnClickData (the `info` parameter) {#onclickdata-the-info-parameter}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -252,7 +252,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 | `wasChecked` | `boolean` | Previous state (checkbox/radio) |
 | `checked` | `boolean` | New state (checkbox/radio) |
 
-## Setting Up Context Menus
+## Setting Up Context Menus {#setting-up-context-menus}
 
 Context menus should be created in `chrome.runtime.onInstalled` so they persist and aren't duplicated:
 
@@ -279,7 +279,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Route context menu actions through the messaging layer:
 
@@ -340,7 +340,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Dynamic context menus based on stored preferences:
 
@@ -383,9 +383,9 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Context-aware menu items
+### Context-aware menu items {#context-aware-menu-items}
 
 ```ts
 // Show different menus based on the page
@@ -404,7 +404,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### Update menu title dynamically based on state
+### Update menu title dynamically based on state {#update-menu-title-dynamically-based-on-state}
 
 ```ts
 let isEnabled = false;
@@ -427,7 +427,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 1. **Create menus in `onInstalled`, not at top level.** Creating at the top level of the service worker will attempt to recreate them every time the worker starts, causing errors (duplicate IDs).
 
@@ -443,7 +443,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 
 7. **Menu items persist** across browser restarts. Use `removeAll()` in `onInstalled` to avoid stale items after updates.
 
-## Related
+## Related {#related}
 
 - [contextMenus permission](../permissions/contextMenus.md)
 - [Context Menus Guide](../guides/context-menus.md)

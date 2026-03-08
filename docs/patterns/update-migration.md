@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Extension Update and Migration Strategies
 
-## Overview
+## Overview {#overview}
 
 Chrome auto-updates extensions silently. When users receive a new version, your service worker restarts, storage schemas may be outdated, context menus disappear, and alarms are cleared. Without proper migration code, updates break features and lose user data. This guide covers practical patterns for handling installs, updates, schema migrations, permission changes, and rollback strategies.
 
 ---
 
-## The Update Lifecycle
+## The Update Lifecycle {#the-update-lifecycle}
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -39,7 +39,7 @@ Key facts:
 
 ---
 
-## Pattern 1: Handling onInstalled Events
+## Pattern 1: Handling onInstalled Events {#pattern-1-handling-oninstalled-events}
 
 The `chrome.runtime.onInstalled` event fires for three distinct reasons. Handle each one explicitly:
 
@@ -90,7 +90,7 @@ async function handleChromeUpdate(): Promise<void> {
 
 ---
 
-## Pattern 2: Storage Schema Versioning
+## Pattern 2: Storage Schema Versioning {#pattern-2-storage-schema-versioning}
 
 Always store a version number alongside your data. Define typed interfaces for each version:
 
@@ -170,7 +170,7 @@ export const migrations: Migration[] = [
 
 ---
 
-## Pattern 3: Incremental Migration Runner
+## Pattern 3: Incremental Migration Runner {#pattern-3-incremental-migration-runner}
 
 Always migrate through every intermediate version (v1 -> v2 -> v3), never skip steps. Each migration is small, testable, and reversible:
 
@@ -229,7 +229,7 @@ Incremental (GOOD):   v1 → v2 (rename field) → v3 (add object)
 
 ---
 
-## Pattern 4: Context Menu and Alarm Re-registration
+## Pattern 4: Context Menu and Alarm Re-registration {#pattern-4-context-menu-and-alarm-re-registration}
 
 Context menus, alarms, and declarativeNetRequest rules are **ephemeral** — Chrome clears them on update. Re-register on install, update, and every service worker startup:
 
@@ -325,7 +325,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-## Pattern 5: Handling Breaking Permission Changes
+## Pattern 5: Handling Breaking Permission Changes {#pattern-5-handling-breaking-permission-changes}
 
 When an update requires new permissions, Chrome won't grant them automatically. Use `optional_permissions` and request at runtime:
 
@@ -396,7 +396,7 @@ chrome.permissions.onRemoved.addListener(async (permissions) => {
 
 ---
 
-## Pattern 6: Post-Update Changelog Notification
+## Pattern 6: Post-Update Changelog Notification {#pattern-6-post-update-changelog-notification}
 
 Let users know what changed without being intrusive. Only open tabs for major updates:
 
@@ -464,7 +464,7 @@ function compareVersions(a: string, b: string): number {
 
 ---
 
-## Pattern 7: Rollback Strategies When Migrations Fail
+## Pattern 7: Rollback Strategies When Migrations Fail {#pattern-7-rollback-strategies-when-migrations-fail}
 
 A robust migration runner tracks state and can automatically roll back:
 
@@ -550,7 +550,7 @@ export async function rollbackToVersion(
 
 ---
 
-## Pattern 8: Testing Migrations with Mock Storage
+## Pattern 8: Testing Migrations with Mock Storage {#pattern-8-testing-migrations-with-mock-storage}
 
 Migrations are critical code paths. Test every version transition with fixture data:
 
@@ -658,7 +658,7 @@ export function createMockStorage(
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

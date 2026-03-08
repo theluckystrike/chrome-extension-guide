@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # RTL and Advanced Localization Patterns
 
-## Overview
+## Overview {#overview}
 
 Supporting right-to-left (RTL) languages like Arabic, Hebrew, and Persian in a Chrome extension goes far beyond translating strings. Layouts must mirror, text direction must adapt per-element, and formatting rules for dates, numbers, and plurals vary dramatically across locales. Chrome's `chrome.i18n` API handles basic message substitution, but advanced localization -- dynamic locale switching, ICU plural rules, bidirectional text in mixed content -- requires deliberate architecture. This guide covers eight patterns for building extensions that work correctly in every script direction and locale.
 
 ---
 
-## RTL Language Reference
+## RTL Language Reference {#rtl-language-reference}
 
 | Language | Code | Script Direction | Plural Categories | Calendar |
 |----------|------|-----------------|-------------------|----------|
@@ -26,7 +26,7 @@ Supporting right-to-left (RTL) languages like Arabic, Hebrew, and Persian in a C
 
 ---
 
-## Pattern 1: RTL Layout Detection and CSS Logical Properties
+## Pattern 1: RTL Layout Detection and CSS Logical Properties {#pattern-1-rtl-layout-detection-and-css-logical-properties}
 
 The foundation of RTL support is detecting the active direction and using CSS logical properties instead of physical ones. Logical properties automatically flip in RTL contexts:
 
@@ -103,7 +103,7 @@ The key rule: replace every `left`/`right` with `inline-start`/`inline-end`, and
 
 ---
 
-## Pattern 2: Bidirectional Text Handling in Extension UI
+## Pattern 2: Bidirectional Text Handling in Extension UI {#pattern-2-bidirectional-text-handling-in-extension-ui}
 
 Mixed-direction content -- such as an Arabic sentence containing an English brand name or a URL -- requires explicit Unicode bidirectional controls and the `dir="auto"` attribute:
 
@@ -168,7 +168,7 @@ Always mark URLs, file paths, code snippets, and numbers as `dir="ltr"` -- they 
 
 ---
 
-## Pattern 3: Dynamic Locale Switching Without Restart
+## Pattern 3: Dynamic Locale Switching Without Restart {#pattern-3-dynamic-locale-switching-without-restart}
 
 Chrome's `chrome.i18n.getMessage()` is bound to the browser's UI locale at startup. To let users switch languages within the extension without restarting, maintain your own message catalog:
 
@@ -286,7 +286,7 @@ This pattern lets users override the browser locale for just your extension. The
 
 ---
 
-## Pattern 4: Pluralization and ICU Message Format
+## Pattern 4: Pluralization and ICU Message Format {#pattern-4-pluralization-and-icu-message-format}
 
 Chrome's built-in `chrome.i18n` has no plural support. For correct pluralization, use the `Intl.PluralRules` API with ICU-style message patterns:
 
@@ -372,7 +372,7 @@ Arabic has six plural categories; English has two. Always define at least `one` 
 
 ---
 
-## Pattern 5: Date and Number Formatting Per Locale
+## Pattern 5: Date and Number Formatting Per Locale {#pattern-5-date-and-number-formatting-per-locale}
 
 Use the `Intl` APIs consistently for all formatted output. Avoid hardcoded format strings:
 
@@ -459,7 +459,7 @@ Never concatenate formatted numbers with hardcoded text -- different locales use
 
 ---
 
-## Pattern 6: RTL-Aware Icon and Image Mirroring
+## Pattern 6: RTL-Aware Icon and Image Mirroring {#pattern-6-rtl-aware-icon-and-image-mirroring}
 
 Some icons need to be mirrored in RTL layouts (arrows, progress indicators), while others must remain unchanged (play buttons, checkmarks, clocks). Define a mirroring policy:
 
@@ -515,7 +515,7 @@ For CSS-based mirroring, `transform: scaleX(-1)` is the simplest approach. For c
 
 ---
 
-## Pattern 7: Testing RTL Layouts in Extensions
+## Pattern 7: Testing RTL Layouts in Extensions {#pattern-7-testing-rtl-layouts-in-extensions}
 
 Automated testing for RTL requires checking both visual layout and text rendering. Set up a testing harness that toggles direction:
 
@@ -619,7 +619,7 @@ The visual toggle is invaluable during development -- inject it only in dev buil
 
 ---
 
-## Pattern 8: Locale-Specific Content Script Behavior
+## Pattern 8: Locale-Specific Content Script Behavior {#pattern-8-locale-specific-content-script-behavior}
 
 Content scripts that inject UI into web pages must respect both the page's locale and the extension's locale, which may differ:
 
@@ -719,7 +719,7 @@ The critical distinction: extension UI panels (floating toolbars, sidebars) shou
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Advanced i18n Patterns](advanced-i18n.md) -- Message catalogs, fallback chains, and locale negotiation
 - [Internationalization Guide](../guides/internationalization.md) -- Setting up `_locales` and `chrome.i18n` basics

@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 State machines provide a structured way to manage complex extension behavior, turning tangled conditional logic into clear, predictable flows. By defining explicit states and allowed transitions, you eliminate impossible states and make your extension's behavior understandable at a glance.
 
-## Why State Machines
+## Why State Machines {#why-state-machines}
 
 Traditional extension logic often relies on scattered boolean flags and nested conditionals:
 
@@ -26,7 +26,7 @@ State machines solve this by enforcing explicit transitions:
 - **Clear transitions**: Every state change has a documented trigger
 - **Easier debugging**: Current state and possible events are explicit
 
-## XState Integration
+## XState Integration {#xstate-integration}
 
 [XState](https://xstate.js.org/) is a lightweight state machine library ideal for extensions:
 
@@ -63,9 +63,9 @@ const authMachine = createMachine({
 });
 ```
 
-## Extension Use Cases
+## Extension Use Cases {#extension-use-cases}
 
-### Authentication Flow
+### Authentication Flow {#authentication-flow}
 
 Manage user authentication with clear states:
 
@@ -89,7 +89,7 @@ const authMachine = createMachine({
 });
 ```
 
-### Download Manager
+### Download Manager {#download-manager}
 
 Track download lifecycle:
 
@@ -110,7 +110,7 @@ const downloadMachine = createMachine({
 });
 ```
 
-### Onboarding Wizard
+### Onboarding Wizard {#onboarding-wizard}
 
 Multi-step wizard with validation:
 
@@ -127,7 +127,7 @@ const onboardingMachine = createMachine({
 });
 ```
 
-## State Persistence
+## State Persistence {#state-persistence}
 
 Serialize machine state to `chrome.storage` and restore on service worker wake:
 
@@ -160,7 +160,7 @@ authService.onTransition(state => {
 });
 ```
 
-## Transition Handlers
+## Transition Handlers {#transition-handlers}
 
 Trigger Chrome API calls on state transitions:
 
@@ -188,7 +188,7 @@ const machine = createMachine({
 });
 ```
 
-## Guards and Actions
+## Guards and Actions {#guards-and-actions}
 
 Use guards for conditional transitions:
 
@@ -214,9 +214,9 @@ const machine = createMachine({
 });
 ```
 
-## Parallel and Hierarchical States
+## Parallel and Hierarchical States {#parallel-and-hierarchical-states}
 
-### Parallel States
+### Parallel States {#parallel-states}
 
 Multiple independent state machines for different features:
 
@@ -248,7 +248,7 @@ const extensionMachine = createMachine({
 });
 ```
 
-### Hierarchical States
+### Hierarchical States {#hierarchical-states}
 
 Nested states for complex flows:
 
@@ -283,7 +283,7 @@ const checkoutMachine = createMachine({
 });
 ```
 
-## Testing State Machines
+## Testing State Machines {#testing-state-machines}
 
 State machines are pure and easily unit tested:
 
@@ -307,19 +307,19 @@ describe('Auth Machine', () => {
 });
 ```
 
-## Visualizing State
+## Visualizing State {#visualizing-state}
 
 Use the [XState Visualizer](https://stately.ai/viz) during development to diagram your state machines and visualize transitions. Export machine configurations to share with team members.
 
 ---
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [State Management Patterns](../patterns/state-management.md)
 - [Extension Architecture Patterns](./architecture-patterns.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [State Management](../patterns/state-management.md)
 - [Extension Architecture](../guides/extension-architecture.md)

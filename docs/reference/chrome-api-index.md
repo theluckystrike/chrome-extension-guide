@@ -1,10 +1,10 @@
 # Chrome Extension API Quick Reference
 
-## Introduction
+## Introduction {#introduction}
 - Alphabetical index of all major Chrome extension APIs
 - Each entry: API name, one-line description, required permission, link to guide (if available)
 
-## APIs A-Z
+## APIs A-Z {#apis-a-z}
 
 | API | Description | Permission | Guide |
 |-----|-------------|------------|-------|
@@ -50,14 +50,14 @@
 | `chrome.webRequest` | Observe/modify network requests | `webRequest` | `docs/permissions/webRequest.md` |
 | `chrome.windows` | Window management | None | `docs/guides/window-management.md` |
 
-## Package Helpers
+## Package Helpers {#package-helpers}
 | Package | What It Does |
 |---------|-------------|
 | `@theluckystrike/webext-storage` | Type-safe `chrome.storage` wrapper with schema validation, batch ops, watch |
 | `@theluckystrike/webext-messaging` | Type-safe messaging with `createMessenger<M>()`, error handling |
 | `@theluckystrike/webext-permissions` | Runtime permission check/request with 50+ human-readable descriptions |
 
-## Notes
+## Notes {#notes}
 - APIs marked "None" for permission are available to all extensions
 - Some APIs require manifest keys instead of permissions (e.g., `devtools_page`, `omnibox`)
 - MV3 removed: `chrome.webRequestBlocking` (use `declarativeNetRequest`), `chrome.extension.getBackgroundPage()` (use messaging)

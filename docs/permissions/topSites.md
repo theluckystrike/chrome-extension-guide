@@ -9,34 +9,34 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # topSites Permission
 
-## Overview
+## Overview {#overview}
 - Permission string: `"topSites"`
 - Grants access to `chrome.topSites` API
 - Returns the user's most visited sites
 
-## API Methods
+## API Methods {#api-methods}
 - `chrome.topSites.get()` returns Promise with array of MostVisitedURL
   - MostVisitedURL: `{ title, url }`
   - Returns approximately 15-20 most visited sites
   - Excludes incognito visits
   - Results are pre-sorted by visit frequency
 
-## No Events
+## No Events {#no-events}
 - No events available, poll on demand
 - Cache results and refresh periodically if needed
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 ```json
 { "permissions": ["topSites"] }
 ```
 
-## Privacy Considerations
+## Privacy Considerations {#privacy-considerations}
 - Exposes user's browsing habits to the extension
 - Be transparent in privacy policy about data usage
 - Never transmit this data to external servers without consent
 - Chrome Web Store review may scrutinize this permission
 
-## Use Cases
+## Use Cases {#use-cases}
 - Custom new tab page: show speed dial of top sites
 - Productivity dashboard: display most visited sites
 - Analytics: show user their browsing patterns
@@ -45,6 +45,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 ## Code Examples
 
 ### Fetch and Display Top Sites
+
+## Code Examples {#code-examples}
+- Fetch and display top sites
+- Custom new tab page with top sites grid
+- Cache top sites with @theluckystrike/webext-storage and refresh interval
+- Combine with favicon API for site icons
+
+## Fetch and Display Top Sites {#fetch-and-display-top-sites}
 ```typescript
 const topSites = await chrome.topSites.get();
 for (const site of topSites) {
@@ -53,6 +61,8 @@ for (const site of topSites) {
 ```
 
 ### Custom New Tab Page
+
+## Custom New Tab Page {#custom-new-tab-page}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -147,5 +157,7 @@ The `topSites` permission requires a user warning and may undergo additional rev
 New Chrome profiles have minimal browsing history. Test your extension with fresh profiles to ensure the UI handles sparse data gracefully.
 
 ## Cross-References
+
+## Cross-references {#cross-references}
 - patterns/top-sites.md
 - tutorials/build-new-tab.md

@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/t
 ---
 # Tab Management Patterns
 
-## Introduction
+## Introduction {#introduction}
 - `chrome.tabs` is one of the most-used Chrome APIs
 - Requires `"tabs"` permission for full URL/title access (cross-ref: `docs/permissions/tabs.md`)
 - `activeTab` permission is sufficient for many use cases
 
-## Querying Tabs
+## Querying Tabs {#querying-tabs}
 ```javascript
 // Active tab in current window
 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -29,7 +29,7 @@ const pinned = await chrome.tabs.query({ pinned: true });
 const audible = await chrome.tabs.query({ audible: true });
 ```
 
-## Creating/Updating/Removing Tabs
+## Creating/Updating/Removing Tabs {#creatingupdatingremoving-tabs}
 ```javascript
 // Create
 const newTab = await chrome.tabs.create({ url: "https://example.com", active: false });
@@ -42,7 +42,7 @@ await chrome.tabs.remove(tabId);
 await chrome.tabs.remove([tabId1, tabId2]); // Batch remove
 ```
 
-## Tab Events
+## Tab Events {#tab-events}
 ```javascript
 chrome.tabs.onCreated.addListener((tab) => { /* new tab */ });
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -53,7 +53,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => { /* tab closed */ });
 chrome.tabs.onActivated.addListener((activeInfo) => { /* tab switched */ });
 ```
 
-## Tab Groups (chrome.tabGroups)
+## Tab Groups (chrome.tabGroups) {#tab-groups-chrometabgroups}
 ```javascript
 // Group tabs
 const groupId = await chrome.tabs.group({ tabIds: [tab1.id, tab2.id] });
@@ -72,7 +72,7 @@ await chrome.tabs.group({ tabIds: [tab3.id], groupId: groupId });
 await chrome.tabs.ungroup([tab1.id]);
 ```
 
-## Moving Tabs
+## Moving Tabs {#moving-tabs}
 ```javascript
 // Move within window
 await chrome.tabs.move(tabId, { index: 0 }); // Move to first position
@@ -81,7 +81,7 @@ await chrome.tabs.move(tabId, { index: 0 }); // Move to first position
 await chrome.tabs.move(tabId, { windowId: otherWindowId, index: -1 });
 ```
 
-## Tab Communication
+## Tab Communication {#tab-communication}
 - Send message to specific tab's content script:
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -96,7 +96,7 @@ for (const tab of tabs) {
 }
 ```
 
-## Advanced Tab Operations
+## Advanced Tab Operations {#advanced-tab-operations}
 - `chrome.tabs.captureVisibleTab()` — screenshot the active tab
 - `chrome.tabs.discard(tabId)` — unload tab to save memory (tab stays in strip)
 - `chrome.tabs.duplicate(tabId)` — duplicate a tab
@@ -104,7 +104,7 @@ for (const tab of tabs) {
 - `chrome.tabs.detectLanguage(tabId)` — detect page language
 - `chrome.tabs.getZoom(tabId)` / `setZoom(tabId, factor)`
 
-## Storing Tab State
+## Storing Tab State {#storing-tab-state}
 ```typescript
 const storage = createStorage(defineSchema({
   pinnedTabs: 'string',    // JSON array of URLs
@@ -113,20 +113,20 @@ const storage = createStorage(defineSchema({
 }), 'local');
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 - **Tab manager**: list/search/close/group tabs from popup
 - **Tab saver**: save tab session, restore later
 - **Duplicate finder**: find tabs with same URL
 - **Auto-grouper**: group tabs by domain automatically
 - **Tab limiter**: warn or close when too many tabs open
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Using `chrome.tabs.query` without `"tabs"` permission — URL/title will be undefined
 - Not checking if content script is injected before `sendTabMessage`
 - Forgetting `activeTab` gives access to current tab without `"tabs"` permission
 - Tab IDs are not persistent across browser restarts
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Tab Management Patterns](../patterns/tab-management.md)
 - [Tab Group Patterns](../patterns/tab-group-patterns.md)

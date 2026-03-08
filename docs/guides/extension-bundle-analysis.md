@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 This guide covers analyzing and optimizing your Chrome extension's bundle size for better performance and user experience.
 
-## Why Bundle Size Matters
+## Why Bundle Size Matters {#why-bundle-size-matters}
 
 Extension bundle size directly impacts several critical factors:
 
@@ -19,9 +19,9 @@ Extension bundle size directly impacts several critical factors:
 
 The Chrome Web Store allows extension packages up to **2GB**, but well-optimized extensions should aim for **under 5MB** for optimal performance.
 
-## Bundle Analysis Tools
+## Bundle Analysis Tools {#bundle-analysis-tools}
 
-### Webpack Bundle Analyzer
+### Webpack Bundle Analyzer {#webpack-bundle-analyzer}
 
 Visualize your bundle contents as an interactive treemap:
 
@@ -42,7 +42,7 @@ module.exports = {
 
 Run with: `npx webpack --profile --json > stats.json && npx webpack-bundle-analyzer stats.json`
 
-### Rollup Plugin Visualizer
+### Rollup Plugin Visualizer {#rollup-plugin-visualizer}
 
 For Rollup-based builds:
 
@@ -61,7 +61,7 @@ export default {
 };
 ```
 
-### Source Map Explorer
+### Source Map Explorer {#source-map-explorer}
 
 Analyze source maps to understand original source contributions:
 
@@ -69,9 +69,9 @@ Analyze source maps to understand original source contributions:
 npx source-map-explorer dist/**/*.js
 ```
 
-## Measuring Bundle Size
+## Measuring Bundle Size {#measuring-bundle-size}
 
-### Total Extension Size
+### Total Extension Size {#total-extension-size}
 
 ```bash
 # Check unpacked size
@@ -81,7 +81,7 @@ du -sh dist/
 gzip -c dist/*.js | wc -c  # Compare to sum of file sizes
 ```
 
-### Per-File Breakdown
+### Per-File Breakdown {#per-file-breakdown}
 
 Generate a detailed size report:
 
@@ -117,7 +117,7 @@ function analyzeBundle(dir) {
 analyzeBundle('./dist');
 ```
 
-## Common Bloat Sources
+## Common Bloat Sources {#common-bloat-sources}
 
 1. **Unused Dependencies**: Importing entire libraries when only a function is needed
 2. **Large Libraries**: moment.js (~300KB), lodash full (~70KB), full React (~100KB)
@@ -125,9 +125,9 @@ analyzeBundle('./dist');
 4. **Source Maps in Production**: Never ship .map files to production
 5. **Duplicate Code**: Multiple versions of the same dependency
 
-## Optimization Strategies
+## Optimization Strategies {#optimization-strategies}
 
-### Tree Shaking
+### Tree Shaking {#tree-shaking}
 
 Ensure ES modules are used throughout your codebase:
 
@@ -152,7 +152,7 @@ import { isEmpty } from 'lodash';
 import { isEmpty, isEqual } from 'lodash';
 ```
 
-### Code Splitting by Context
+### Code Splitting by Context {#code-splitting-by-context}
 
 Separate bundles for different extension contexts:
 
@@ -183,7 +183,7 @@ module.exports = {
 };
 ```
 
-### Dynamic Imports
+### Dynamic Imports {#dynamic-imports}
 
 Lazy load features in extension pages:
 
@@ -195,7 +195,7 @@ document.getElementById('advanced-settings').addEventListener('click', async () 
 });
 ```
 
-## Replacing Heavy Libraries
+## Replacing Heavy Libraries {#replacing-heavy-libraries}
 
 | Library | Replacement | Savings |
 |---------|-------------|---------|
@@ -204,7 +204,7 @@ document.getElementById('advanced-settings').addEventListener('click', async () 
 | React (full) | Preact + preact/compat | ~100KB → ~4KB |
 | Axios | fetch + small wrapper | ~15KB → ~0KB |
 
-### Example: Date Library Migration
+### Example: Date Library Migration {#example-date-library-migration}
 
 ```javascript
 // Before (moment.js)
@@ -216,7 +216,7 @@ import { format } from 'date-fns';
 const formatted = format(new Date(date), 'yyyy-MM-dd');
 ```
 
-## Image Optimization
+## Image Optimization {#image-optimization}
 
 - **Icons**: Use SVG for all icons and UI elements
 - **Photos**: Convert to WebP for significant size reduction
@@ -246,7 +246,7 @@ module.exports = {
 };
 ```
 
-## Font Subsetting
+## Font Subsetting {#font-subsetting}
 
 For custom fonts, create subsets including only needed characters:
 
@@ -255,9 +255,9 @@ For custom fonts, create subsets including only needed characters:
 pyftsubset font.woff2 --unicodes=U+0-FF --layout-features=...
 ```
 
-## CI Size Monitoring
+## CI Size Monitoring {#ci-size-monitoring}
 
-### Using size-limit
+### Using size-limit {#using-size-limit}
 
 ```json
 // package.json
@@ -281,7 +281,7 @@ pyftsubset font.woff2 --unicodes=U+0-FF --layout-features=...
 
 Run: `npx size-limit`
 
-### Using bundlesize
+### Using bundlesize {#using-bundlesize}
 
 ```json
 // package.json
@@ -301,7 +301,7 @@ Run: `npx size-limit`
   run: npx bundlesize
 ```
 
-## Best Practices Summary
+## Best Practices Summary {#best-practices-summary}
 
 1. Analyze bundles regularly during development
 2. Set size budgets in CI to catch regressions
@@ -311,13 +311,13 @@ Run: `npx size-limit`
 6. Optimize all images and consider WebP/SVG
 7. Verify tree-shaking is working on each dependency
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Extension Size Optimization](extension-size-optimization.md) - Deep dive into size reduction techniques
 - [Performance](performance.md) - Runtime performance best practices
 - [Lazy Loading Patterns](lazy-loading-patterns.md) - Code splitting and lazy loading strategies
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Size Optimization](../guides/extension-size-optimization.md)

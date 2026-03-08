@@ -9,13 +9,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # identity Permission — Chrome Extension Reference
 
-## Overview
+## Overview {#overview}
 - **Permission string**: `"identity"`
 - **What it grants**: Access to `chrome.identity` API for OAuth2 authentication
 - **Risk level**: Medium — authenticates as the user with third-party services
 - `@theluckystrike/webext-permissions` description: `describePermission('identity')`
 
-## manifest.json Setup
+## manifest.json Setup {#manifestjson-setup}
 ```json
 {
   "permissions": ["identity"],
@@ -26,34 +26,34 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 }
 ```
 
-## Key APIs
+## Key APIs {#key-apis}
 
-### chrome.identity.getAuthToken()
+### chrome.identity.getAuthToken() {#chromeidentitygetauthtoken}
 - `interactive: true` shows sign-in popup
 - `interactive: false` fails silently if not signed in
 - Token is auto-managed by Chrome (caching, refresh)
 - Example with fetch to Google API
 
-### chrome.identity.launchWebAuthFlow()
+### chrome.identity.launchWebAuthFlow() {#chromeidentitylaunchwebauthflow}
 - For non-Google OAuth providers (GitHub, Twitter, Discord, etc.)
 - `getRedirectURL()` returns `https://<extension-id>.chromiumapp.org/`
 - Parse redirect URL for access token
 - Full example with provider URL construction
 
-### chrome.identity.removeCachedAuthToken()
+### chrome.identity.removeCachedAuthToken() {#chromeidentityremovecachedauthtoken}
 - Call when token is expired or revoked
 - Then call `getAuthToken()` again for fresh token
 
-### chrome.identity.getProfileUserInfo()
+### chrome.identity.getProfileUserInfo() {#chromeidentitygetprofileuserinfo}
 - Returns signed-in Chrome user's email and ID
 - Requires `identity.email` scope
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Google API Authentication
+### Google API Authentication {#google-api-authentication}
 - Use `getAuthToken()` — simplest path for Google APIs
 
-### Third-Party OAuth
+### Third-Party OAuth {#third-party-oauth}
 - Use `launchWebAuthFlow()` with provider's OAuth URL
 - Store tokens with `@theluckystrike/webext-storage`:
   ```typescript
@@ -61,10 +61,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
   await storage.set('oauthToken', token);
   ```
 
-### Token Refresh Pattern
+### Token Refresh Pattern {#token-refresh-pattern}
 - Check validity before API calls, if 401 → removeCachedAuthToken → getAuthToken
 
-## Runtime Permission Check
+## Runtime Permission Check {#runtime-permission-check}
 ```typescript
 import { checkPermission, requestPermission } from '@theluckystrike/webext-permissions';
 const result = await checkPermission('identity');
@@ -74,13 +74,13 @@ if (!result.granted) {
 }
 ```
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 - Store tokens in `chrome.storage.local` (not sync)
 - Never expose tokens in content scripts
 - Use minimal OAuth scopes
 - Implement token revocation
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: popup requests auth token from background, background manages token lifecycle:
 
@@ -130,7 +130,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store authentication state and user preferences:
 
@@ -163,7 +163,7 @@ storage.watch("isSignedIn", (signedIn) => {
 });
 ```
 
-## Practical Example: GitHub OAuth via launchWebAuthFlow
+## Practical Example: GitHub OAuth via launchWebAuthFlow {#practical-example-github-oauth-via-launchwebauthflow}
 
 ```ts
 const GITHUB_CLIENT_ID = "your_github_client_id";
@@ -200,7 +200,7 @@ async function signInWithGitHub(): Promise<string | null> {
 }
 ```
 
-## Practical Example: Token Refresh with Retry
+## Practical Example: Token Refresh with Retry {#practical-example-token-refresh-with-retry}
 
 ```ts
 async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Response> {
@@ -226,19 +226,19 @@ async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Re
 }
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 - **`getAuthToken` only works for Google accounts** — for any non-Google OAuth provider (GitHub, Discord, Twitter), you must use `launchWebAuthFlow()` instead.
 - **`interactive: true` requires a user gesture** — calling `getAuthToken({ interactive: true })` from a background script without a preceding user action (button click, context menu) will fail with `"Interactive signin request must be triggered by explicit user action"`.
 - **Token caching is automatic but opaque** — Chrome caches tokens internally. If a token is revoked server-side, Chrome still returns the cached (now invalid) token. Always call `removeCachedAuthToken()` before retrying.
 - **`getRedirectURL()` is extension-specific** — the redirect URL includes your extension ID, so it changes between development and production if your extension ID changes. Pin your extension ID in the manifest for consistency.
 - **OAuth2 scopes cannot be changed after install** — if you add new scopes to `manifest.json`, existing users must re-authorize. Plan your scopes carefully upfront.
 
-## Common Errors
+## Common Errors {#common-errors}
 - `"OAuth2 not granted or revoked"` — user denied or revoked
 - `"Interactive signin request must be triggered by explicit user action"`
 - `"Invalid client_id"` — check Google Cloud Console
 
-## Related
+## Related {#related}
 - [Chrome identity API docs](https://developer.chrome.com/docs/extensions/reference/api/identity)
 - [storage](storage.md) — persist auth state and tokens
 - [cookies](cookies.md) — alternative session management approach

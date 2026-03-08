@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Strategies for migrating extension storage data between versions.
 
-## Overview
+## Overview {#overview}
 
 When your extension evolves, the data schema stored in chrome.storage often needs to change. A robust migration system ensures user data is preserved and transformed correctly during updates.
 
-## Schema Versioning
+## Schema Versioning {#schema-versioning}
 
 Store a version number in storage and check it on startup:
 
@@ -29,7 +29,7 @@ async function initializeStorage() {
 }
 ```
 
-## Sequential Migrations
+## Sequential Migrations {#sequential-migrations}
 
 Run migration functions in order (v1→v2, v2→v3, etc.):
 
@@ -47,7 +47,7 @@ async function runMigrations(fromVersion, toVersion) {
 }
 ```
 
-## Idempotent Migrations
+## Idempotent Migrations {#idempotent-migrations}
 
 Design migrations to be safe if interrupted or re-run:
 
@@ -64,7 +64,7 @@ async function migrateV1toV2() {
 }
 ```
 
-## Backup Before Migration
+## Backup Before Migration {#backup-before-migration}
 
 Copy data to a backup key before transforming:
 
@@ -80,7 +80,7 @@ async function backupBeforeMigration() {
 }
 ```
 
-## Lazy Migration
+## Lazy Migration {#lazy-migration}
 
 Transform data on read rather than all at once:
 
@@ -95,9 +95,9 @@ async function getSettings() {
 }
 ```
 
-## Common Migration Patterns
+## Common Migration Patterns {#common-migration-patterns}
 
-### Field Additions
+### Field Additions {#field-additions}
 Merge new defaults with existing data:
 
 ```javascript
@@ -110,7 +110,7 @@ async function addField() {
 }
 ```
 
-### Field Renames
+### Field Renames {#field-renames}
 Copy old key to new key, delete old:
 
 ```javascript
@@ -123,7 +123,7 @@ async function renameField() {
 }
 ```
 
-### Type Changes
+### Type Changes {#type-changes}
 Transform stored values to new format:
 
 ```javascript
@@ -136,7 +136,7 @@ async function changeType() {
 }
 ```
 
-### Collection Restructuring
+### Collection Restructuring {#collection-restructuring}
 Array to map, nested to flat:
 
 ```javascript
@@ -150,7 +150,7 @@ async function restructureArray() {
 }
 ```
 
-## Handling Missing Data
+## Handling Missing Data {#handling-missing-data}
 
 Don't crash on unexpected schema:
 
@@ -164,7 +164,7 @@ function safeGet(data, path, defaultValue = null) {
 }
 ```
 
-## Migration Testing
+## Migration Testing {#migration-testing}
 
 Test with real user data samples:
 
@@ -181,7 +181,7 @@ testCases.forEach(({ input, expected }) => {
 });
 ```
 
-## Rollback Support
+## Rollback Support {#rollback-support}
 
 Store pre-migration backup for N versions:
 
@@ -198,7 +198,7 @@ async function createRollbackPoint() {
 }
 ```
 
-## Logging
+## Logging {#logging}
 
 Record migration steps for debugging:
 
@@ -211,7 +211,7 @@ async function logMigration(from, to, status) {
 }
 ```
 
-## Async Migrations
+## Async Migrations {#async-migrations}
 
 Handle large data sets without blocking:
 
@@ -228,7 +228,7 @@ async function migrateLargeDataset() {
 }
 ```
 
-## See Also
+## See Also {#see-also}
 
 - [Storage Migration](./storage-migration.md)
 - [Update Migration](./update-migration.md)

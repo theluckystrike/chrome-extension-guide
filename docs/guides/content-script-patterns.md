@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Content Script Patterns
 
-## Overview
+## Overview {#overview}
 Content scripts run in web pages and bridge the gap between the page and your extension. They can read/modify the DOM but need messaging to communicate with the background service worker.
 
-## Manifest Setup
+## Manifest Setup {#manifest-setup}
 ```json
 {
   "content_scripts": [{
@@ -22,14 +22,14 @@ Content scripts run in web pages and bridge the gap between the page and your ex
 }
 ```
 
-## run_at Options
+## run_at Options {#run-at-options}
 | Value | When | Use Case |
 |-------|------|----------|
 | `document_start` | Before DOM is built | Inject early CSS, block elements |
 | `document_idle` | Between `document_end` and just after `window.onload` (default) | Most common — safe DOM access |
 | `document_end` | After DOM parsed, before subresources | DOM manipulation before images load |
 
-## Pattern 1: Send Page Data to Background
+## Pattern 1: Send Page Data to Background {#pattern-1-send-page-data-to-background}
 
 ```ts
 // content.ts
@@ -55,7 +55,7 @@ async function reportPage() {
 reportPage();
 ```
 
-## Pattern 2: Receive Commands from Background/Popup
+## Pattern 2: Receive Commands from Background/Popup {#pattern-2-receive-commands-from-backgroundpopup}
 
 ```ts
 // content.ts
@@ -87,7 +87,7 @@ msg.onMessage({
 });
 ```
 
-## Pattern 3: Read Settings from Storage
+## Pattern 3: Read Settings from Storage {#pattern-3-read-settings-from-storage}
 
 Content scripts can access chrome.storage directly:
 
@@ -129,7 +129,7 @@ storage.watch("highlightColor", (color) => {
 applySettings();
 ```
 
-## Pattern 4: Overlay/Widget UI
+## Pattern 4: Overlay/Widget UI {#pattern-4-overlaywidget-ui}
 
 Inject a floating UI widget into the page:
 
@@ -160,7 +160,7 @@ function createWidget() {
 
 Explain: Shadow DOM isolates your styles from the page and vice versa.
 
-## Pattern 5: Mutation Observer (Dynamic Pages)
+## Pattern 5: Mutation Observer (Dynamic Pages) {#pattern-5-mutation-observer-dynamic-pages}
 
 Watch for DOM changes on SPAs:
 
@@ -178,7 +178,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-## Pattern 6: Bidirectional Communication
+## Pattern 6: Bidirectional Communication {#pattern-6-bidirectional-communication}
 
 Content script acts as a bridge between the page and background:
 
@@ -206,7 +206,7 @@ window.addEventListener("message", async (event) => {
 });
 ```
 
-## Pattern 7: Conditional Injection
+## Pattern 7: Conditional Injection {#pattern-7-conditional-injection}
 
 Only activate on certain pages:
 
@@ -233,13 +233,13 @@ if (await shouldActivate()) {
 }
 ```
 
-## Content Script Isolation
+## Content Script Isolation {#content-script-isolation}
 - Content scripts share the DOM but have a separate JavaScript environment
 - Cannot access page's JS variables (use `world: "MAIN"` in MV3 for that)
 - Page cannot access your content script's variables
 - Use Shadow DOM for UI to avoid CSS conflicts
 
-## Gotchas
+## Gotchas {#gotchas}
 - Content scripts can't use `chrome.tabs`, `chrome.action`, etc. — use messaging
 - `chrome.storage` IS available in content scripts
 - Don't pollute the global scope — wrap in IIFE or use modules
@@ -247,12 +247,12 @@ if (await shouldActivate()) {
 - Clean up on SPA navigation (remove observers, listeners)
 - Content script CSS can conflict with page CSS — use Shadow DOM or unique prefixes
 
-## Related Guides
+## Related Guides {#related-guides}
 - [Messaging Quickstart](../tutorials/messaging-quickstart.md)
 - [Storage Quickstart](../tutorials/storage-quickstart.md)
 - [Popup Patterns](popup-patterns.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Communication Bridge](../patterns/content-script-communication-bridge.md)

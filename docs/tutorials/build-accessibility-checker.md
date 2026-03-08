@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build an Accessibility Checker Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 - Scan any web page for common accessibility issues
 - Check alt text on images
 - Validate color contrast (WCAG AA/AAA)
@@ -18,7 +18,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Detect landmark regions
 - Generate accessibility reports with severity levels
 
-## Manifest
+## Manifest {#manifest}
 - permissions: activeTab, scripting, storage
 - host_permissions: <all_urls>
 - content scripts for page scanning
@@ -26,7 +26,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 ---
 
-## Step 1: DOM Scanner
+## Step 1: DOM Scanner {#step-1-dom-scanner}
 
 Scan the page for accessibility issues:
 
@@ -90,7 +90,7 @@ function getSelector(el) {
 
 ---
 
-## Step 2: Color Contrast Calculator
+## Step 2: Color Contrast Calculator {#step-2-color-contrast-calculator}
 
 Validate WCAG color contrast ratios:
 
@@ -144,7 +144,7 @@ document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li').forEach(el =
 
 ---
 
-## Step 3: Issue Highlighter Overlay
+## Step 3: Issue Highlighter Overlay {#step-3-issue-highlighter-overlay}
 
 Visual overlay to highlight issues on page:
 
@@ -188,7 +188,7 @@ function highlightIssues(issues) {
 
 ---
 
-## Step 4: Report Generator
+## Step 4: Report Generator {#step-4-report-generator}
 
 Create detailed accessibility report:
 
@@ -256,7 +256,7 @@ function displayReport(report) {
 
 ---
 
-## Testing
+## Testing {#testing}
 
 ```javascript
 // Run accessibility check
@@ -283,7 +283,7 @@ document.getElementById('run-scan').addEventListener('click', async () => {
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 - [guides/accessibility.md](../guides/accessibility.md)
 - [guides/extension-a11y-testing.md](../guides/extension-a11y-testing.md)
 - [patterns/dom-observer-patterns.md](../patterns/dom-observer-patterns.md)

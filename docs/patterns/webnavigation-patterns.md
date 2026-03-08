@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 The `chrome.webNavigation` API provides powerful capabilities for monitoring and analyzing navigation events in Chrome extensions. This document covers advanced patterns for working with this API effectively.
 
-## Event Sequence
+## Event Sequence {#event-sequence}
 
 Navigation events fire in a predictable sequence:
 
@@ -24,7 +24,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## Frame Tracking
+## Frame Tracking {#frame-tracking}
 
 - **`frameId: 0`** - Main/top-level frame
 - **`frameId > 0`** - Subframes (iframes, frames)
@@ -39,7 +39,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-## URL Filtering
+## URL Filtering {#url-filtering}
 
 Use the `filters` parameter to receive only events matching specific URLs:
 
@@ -52,7 +52,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-## SPA Detection
+## SPA Detection {#spa-detection}
 
 Single Page Applications (SPAs) don't trigger full page loads. Use these events:
 
@@ -70,7 +70,7 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
 });
 ```
 
-## Error Detection
+## Error Detection {#error-detection}
 
 Track failed navigations:
 
@@ -81,7 +81,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-## Tab Navigation Tracking
+## Tab Navigation Tracking {#tab-navigation-tracking}
 
 Combine with the `chrome.tabs` API for complete navigation tracking:
 
@@ -94,7 +94,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 });
 ```
 
-## Transition Types
+## Transition Types {#transition-types}
 
 The `transitionType` property indicates how navigation was initiated:
 
@@ -111,7 +111,7 @@ The `transitionType` property indicates how navigation was initiated:
 | `reload` | Page reload |
 | `keyword` | Keyword navigation |
 
-## Transition Qualifiers
+## Transition Qualifiers {#transition-qualifiers}
 
 Additional qualifiers modify the transition:
 
@@ -127,7 +127,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-## Frame Lifecycle
+## Frame Lifecycle {#frame-lifecycle}
 
 Detect when new tabs or windows are created via navigation:
 
@@ -138,7 +138,7 @@ chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
 });
 ```
 
-## Performance Monitoring
+## Performance Monitoring {#performance-monitoring}
 
 Measure time between navigation events:
 
@@ -160,7 +160,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## Conditional Content Script Injection
+## Conditional Content Script Injection {#conditional-content-script-injection}
 
 Inject content scripts based on navigation patterns:
 
@@ -175,9 +175,9 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### SPA Router Detector
+### SPA Router Detector {#spa-router-detector}
 
 ```javascript
 function detectSPANavigation() {
@@ -194,7 +194,7 @@ function detectSPANavigation() {
 }
 ```
 
-### Navigation Logger
+### Navigation Logger {#navigation-logger}
 
 ```javascript
 chrome.webNavigation.onBeforeNavigate.addListener(d => log('beforeNavigate', d));
@@ -207,7 +207,7 @@ function log(event, details) {
 }
 ```
 
-### Frame-Aware Content Injector
+### Frame-Aware Content Injector {#frame-aware-content-injector}
 
 ```javascript
 chrome.webNavigation.onCompleted.addListener((details) => {
@@ -230,7 +230,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## See Also
+## See Also {#see-also}
 
 - [Web Navigation API Reference](../api_reference/web-navigation-api.md)
 - [Web Navigation Guide](../guides/web-navigation.md)

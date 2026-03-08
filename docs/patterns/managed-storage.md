@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This document covers `chrome.storage.managed` for enterprise-managed extension settings in Chrome extensions.
 
-## Overview
+## Overview {#overview}
 
 Managed storage (`chrome.storage.managed`) provides a read-only storage area controlled by enterprise policies. IT administrators deploy settings organization-wide, and extensions receive pre-configured values they cannot modify.
 
-## Schema Definition
+## Schema Definition {#schema-definition}
 
 Define the managed storage schema in your extension's `manifest.json`:
 
@@ -51,7 +51,7 @@ The JSON schema file (`managed-schema.json`) defines acceptable values:
 }
 ```
 
-## Reading Managed Settings
+## Reading Managed Settings {#reading-managed-settings}
 
 Retrieve managed settings using `chrome.storage.managed.get()`:
 
@@ -66,7 +66,7 @@ const settings = await getManagedSettings();
 console.log(settings.apiEndpoint);
 ```
 
-## Detecting Managed vs Unmanaged Values
+## Detecting Managed vs Unmanaged Values {#detecting-managed-vs-unmanaged-values}
 
 Check whether specific values are managed by verifying they exist in managed storage:
 
@@ -77,7 +77,7 @@ async function isValueManaged(key) {
 }
 ```
 
-## Layered Configuration Pattern
+## Layered Configuration Pattern {#layered-configuration-pattern}
 
 Implement layered configuration with priority: managed > sync > local:
 
@@ -98,7 +98,7 @@ async function getConfig() {
 }
 ```
 
-## Enterprise Policy Deployment
+## Enterprise Policy Deployment {#enterprise-policy-deployment}
 
 Admins deploy policies through Chrome Enterprise policies:
 
@@ -116,7 +116,7 @@ Example policy JSON:
 }
 ```
 
-## Managed-Aware Options Page
+## Managed-Aware Options Page {#managed-aware-options-page}
 
 Display managed settings as locked/read-only:
 
@@ -133,7 +133,7 @@ async function renderOptionsPage() {
 }
 ```
 
-## Listening for Admin Updates
+## Listening for Admin Updates {#listening-for-admin-updates}
 
 Use `onChanged` to detect when administrators update policies:
 
@@ -146,7 +146,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-## Testing Managed Storage
+## Testing Managed Storage {#testing-managed-storage}
 
 Enable managed storage testing in Chrome:
 
@@ -154,11 +154,11 @@ Enable managed storage testing in Chrome:
 2. Enable the flag
 3. Use `--managed-storage-override-dir` flag to load test policies
 
-## Documentation for Admins
+## Documentation for Admins {#documentation-for-admins}
 
 Provide admins with a policy template explaining available settings, types, and descriptions.
 
-## See Also
+## See Also {#see-also}
 
 - [Enterprise Policies](./enterprise-policies.md)
 - [Enterprise Extensions Guide](../guides/enterprise-extensions.md)

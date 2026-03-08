@@ -7,11 +7,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Background Queue Processing Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions often have multiple contexts (popup, content scripts, options page) that submit work to the background service worker. Processing requests immediately can overwhelm the system, cause race conditions, or fail when the service worker is terminated. A queue-based architecture ensures work is processed sequentially, survives restarts, and handles failures gracefully.
 
-## Persistent Task Queue
+## Persistent Task Queue {#persistent-task-queue}
 
 Store queue in `chrome.storage.local` to survive service worker termination:
 
@@ -72,7 +72,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Priority Queue
+## Priority Queue {#priority-queue}
 
 Process urgent items first by sorting before processing:
 
@@ -94,7 +94,7 @@ async function processPriorityQueue() {
 }
 ```
 
-## Batch Processing with Alarms
+## Batch Processing with Alarms {#batch-processing-with-alarms}
 
 Process N items per wake cycle, schedule alarm for remainder:
 
@@ -121,7 +121,7 @@ async function processBatch() {
 }
 ```
 
-## Deduplication
+## Deduplication {#deduplication}
 
 Prevent duplicate entries based on task signature:
 
@@ -142,7 +142,7 @@ async function enqueueWithDedup(task) {
 }
 ```
 
-## Queue Monitoring in Popup
+## Queue Monitoring in Popup {#queue-monitoring-in-popup}
 
 Display queue depth and status to users:
 
@@ -163,7 +163,7 @@ async function updateQueueDisplay() {
 chrome.storage.onChanged.addListener(updateQueueDisplay);
 ```
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Long-Running Operations](./long-running-operations.md) — chunked processing patterns
 - [Retry Patterns](./retry-patterns.md) — failure handling strategies

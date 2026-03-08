@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Feature Flag Patterns
 
-## Overview
+## Overview {#overview}
 
 Feature flags enable enabling or disabling functionality without deploying new versions. They support gradual rollouts, A/B testing, and kill switches for emergency response. Essential for extensions with large user bases where instant updates aren't feasible.
 
 ---
 
-## Local Feature Flags
+## Local Feature Flags {#local-feature-flags}
 
 Store flags in `chrome.storage.local` or `chrome.storage.sync`. Define defaults in code, then override from storage if present.
 
@@ -53,7 +53,7 @@ Toggle via options page or developer console. Good for beta features and user pr
 
 ---
 
-## Remote Feature Flags
+## Remote Feature Flags {#remote-feature-flags}
 
 Fetch flag config from your server periodically. Cache with TTL in `chrome.storage.local`. Use `chrome.alarms` for periodic refresh.
 
@@ -104,7 +104,7 @@ Fallback to cached values when offline. Check on extension startup.
 
 ---
 
-## Flag Evaluation
+## Flag Evaluation {#flag-evaluation}
 
 Check flag before rendering feature UI. Gate API calls behind flags. Conditional content script injection based on flags.
 
@@ -131,7 +131,7 @@ Support user-level overrides by checking local storage first, then remote, then 
 
 ---
 
-## Gradual Rollout
+## Gradual Rollout {#gradual-rollout}
 
 Hash extension installation ID for consistent bucketing. Enable for X% of users. Increase percentage over time.
 
@@ -157,7 +157,7 @@ Monitor error rates per flag state to detect issues early.
 
 ---
 
-## Kill Switch Pattern
+## Kill Switch Pattern {#kill-switch-pattern}
 
 Remote flag that disables broken features immediately. Check on extension startup and periodically. Faster than Chrome Web Store update cycle.
 
@@ -191,7 +191,7 @@ Critical for production incident response. Always check on startup.
 
 ---
 
-## Developer/Debug Flags
+## Developer/Debug Flags {#developerdebug-flags}
 
 Special flags for development and testing. Enable verbose logging, mock data, debug UI.
 
@@ -211,7 +211,7 @@ Never ship with debug flags enabled in production. Use build environment checks.
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [State Management](./state-management.md) - Persisting flag state
 - [Update Migration](./update-migration.md) - Handling flag schema changes
@@ -219,7 +219,7 @@ Never ship with debug flags enabled in production. Use build environment checks.
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Flag Type | Storage | Use Case |
 |-----------|---------|----------|

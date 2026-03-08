@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers various methods for working with local files in Chrome extensions, from simple file input to advanced filesystem APIs.
 
-## File System Access API
+## File System Access API {#file-system-access-api}
 
 The File System Access API provides powerful file picker dialogs in extension pages (not content scripts).
 
@@ -28,7 +28,7 @@ async function openFile() {
 }
 ```
 
-## Traditional File Input
+## Traditional File Input {#traditional-file-input}
 
 Use `<input type="file">` in popup or options pages for simpler file selection:
 
@@ -43,7 +43,7 @@ document.getElementById('fileInput').addEventListener('change', async (e) => {
 </script>
 ```
 
-## Reading Files with FileReader API
+## Reading Files with FileReader API {#reading-files-with-filereader-api}
 
 ```javascript
 // Read as text
@@ -58,7 +58,7 @@ reader.readAsDataURL(file);
 reader.readAsArrayBuffer(file);
 ```
 
-## Drag and Drop
+## Drag and Drop {#drag-and-drop}
 
 Enable drag-and-drop file handling in extension pages:
 
@@ -72,9 +72,9 @@ dropZone.addEventListener('drop', async (e) => {
 });
 ```
 
-## Downloading/Saving Files
+## Downloading/Saving Files {#downloadingsaving-files}
 
-### Using chrome.downloads API (requires permissions)
+### Using chrome.downloads API (requires permissions) {#using-chromedownloads-api-requires-permissions}
 
 ```javascript
 chrome.downloads.download({
@@ -83,7 +83,7 @@ chrome.downloads.download({
 });
 ```
 
-### Using Blob URLs
+### Using Blob URLs {#using-blob-urls}
 
 ```javascript
 const blob = new Blob(['Hello World'], { type: 'text/plain' });
@@ -95,14 +95,14 @@ a.click();
 URL.revokeObjectURL(url);
 ```
 
-### Using Data URLs
+### Using Data URLs {#using-data-urls}
 
 ```javascript
 const dataUrl = 'data:text/plain;base64,SGVsbG8gV29ybGQ=';
 chrome.downloads.download({ url: dataUrl, filename: 'decoded.txt' });
 ```
 
-## File Type Validation
+## File Type Validation {#file-type-validation}
 
 Always validate file types for security:
 
@@ -116,7 +116,7 @@ function validateFile(file, allowedTypes) {
 }
 ```
 
-## Processing Large Files
+## Processing Large Files {#processing-large-files}
 
 Use streaming for files larger than available memory:
 
@@ -134,7 +134,7 @@ async function streamReadFile(file) {
 }
 ```
 
-## Origin Private File System (OPFS)
+## Origin Private File System (OPFS) {#origin-private-file-system-opfs}
 
 Store extension-local data using OPFS:
 
@@ -148,7 +148,7 @@ async function writeToOPFS(filename, content) {
 }
 ```
 
-## Temporary Files with createObjectURL
+## Temporary Files with createObjectURL {#temporary-files-with-createobjecturl}
 
 ```javascript
 // Create temporary URL for a Blob
@@ -158,13 +158,13 @@ const tempUrl = URL.createObjectURL(blob);
 URL.revokeObjectURL(tempUrl);
 ```
 
-## Limitations
+## Limitations {#limitations}
 
 - **Content scripts**: Cannot use File System Access API directly; must communicate with background script
 - **file:// URLs**: Require explicit user permission; not accessible by default
 - **Permissions**: `activeTab` or specific host permissions needed for some operations
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Native Messaging Patterns](./native-messaging.md)

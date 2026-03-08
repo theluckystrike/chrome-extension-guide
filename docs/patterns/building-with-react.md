@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Building Chrome Extensions with React
 
-## Overview
+## Overview {#overview}
 
 React is a natural fit for Chrome extension UIs — popups, options pages, side panels, and even content script overlays are all component trees that benefit from declarative rendering. But extension projects have unique build requirements: multiple HTML entry points, separate service worker bundles, Shadow DOM mounting, and Chrome API integration that doesn't fit standard React patterns. This guide covers practical patterns for structuring, building, and optimizing a React-based Chrome extension.
 
 ---
 
-## Extension + React Architecture
+## Extension + React Architecture {#extension-react-architecture}
 
 ```
 ┌───────────────────────────────────────────────────┐
@@ -41,7 +41,7 @@ Each UI surface is a separate React root with its own entry point. They share co
 
 ---
 
-## Pattern 1: Project Structure
+## Pattern 1: Project Structure {#pattern-1-project-structure}
 
 Organize code by entry point, with shared code extracted to a common directory:
 
@@ -125,7 +125,7 @@ root.render(
 
 ---
 
-## Pattern 2: Vite Configuration for Multiple Entry Points
+## Pattern 2: Vite Configuration for Multiple Entry Points {#pattern-2-vite-configuration-for-multiple-entry-points}
 
 Vite handles multiple entry points cleanly. Configure it to build each UI surface and the background worker as separate bundles:
 
@@ -227,7 +227,7 @@ The manifest references the built output:
 
 ---
 
-## Pattern 3: Shared Components Across Surfaces
+## Pattern 3: Shared Components Across Surfaces {#pattern-3-shared-components-across-surfaces}
 
 Extract reusable components into `src/shared/` so popup, options, and side panel stay consistent:
 
@@ -381,7 +381,7 @@ export function App() {
 
 ---
 
-## Pattern 4: React Context for chrome.storage Integration
+## Pattern 4: React Context for chrome.storage Integration {#pattern-4-react-context-for-chromestorage-integration}
 
 Create a context provider that syncs React state with `chrome.storage` and listens for external changes (from other extension pages or the background):
 
@@ -498,7 +498,7 @@ export function useStorageContext(): StorageContextValue {
 
 ---
 
-## Pattern 5: Custom Hooks for Chrome APIs
+## Pattern 5: Custom Hooks for Chrome APIs {#pattern-5-custom-hooks-for-chrome-apis}
 
 Wrap Chrome APIs in hooks that handle lifecycle, cleanup, and error states:
 
@@ -630,7 +630,7 @@ export function useSendMessage() {
 
 ---
 
-## Pattern 6: Content Script React Mounting with Shadow DOM
+## Pattern 6: Content Script React Mounting with Shadow DOM {#pattern-6-content-script-react-mounting-with-shadow-dom}
 
 Content scripts need isolation from the host page's styles. Mount React inside a Shadow DOM container:
 
@@ -753,7 +753,7 @@ export function Overlay({ onClose }: OverlayProps) {
 
 ---
 
-## Pattern 7: Hot Module Reload During Development
+## Pattern 7: Hot Module Reload During Development {#pattern-7-hot-module-reload-during-development}
 
 Vite's HMR works out of the box for popup and options pages when served via the dev server. Content scripts and service workers need extra handling:
 
@@ -850,7 +850,7 @@ if (import.meta.env.DEV) {
 
 ---
 
-## Pattern 8: Production Build Optimization
+## Pattern 8: Production Build Optimization {#pattern-8-production-build-optimization}
 
 Optimize the production bundle for Chrome Web Store distribution:
 
@@ -957,7 +957,7 @@ console.log("Build verification passed.");
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

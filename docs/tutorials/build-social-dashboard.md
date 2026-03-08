@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Social Media Dashboard Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 
 In this tutorial, you'll create a Chrome extension that helps users manage their social media consumption. The extension will track time spent on social media sites, block or limit access during focus hours, display usage statistics, and provide motivational content when sites are blocked.
 
@@ -17,7 +17,7 @@ In this tutorial, you'll create a Chrome extension that helps users manage their
 - Motivational alternatives when sites are blocked
 - Notifications at 80% limit and when blocked
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 Create your `manifest.json` with the following permissions and configuration:
 
@@ -69,7 +69,7 @@ Create your `manifest.json` with the following permissions and configuration:
 - `notifications` - Alert users at 80% limit and when blocked
 - `declarativeNetRequest` - Block network requests when limits reached
 
-## Step 1: Site Tracking
+## Step 1: Site Tracking {#step-1-site-tracking}
 
 The foundation of your extension is tracking which social media sites users visit and for how long. Use the Chrome tabs API to detect when users navigate to social media domains.
 
@@ -123,7 +123,7 @@ This implementation monitors tab activations and updates to detect when users na
 
 See [guides/content-script-patterns.md](../guides/content-script-patterns.md) for more on communicating between content scripts and the background service worker.
 
-## Step 2: Blocking Rules
+## Step 2: Blocking Rules {#step-2-blocking-rules}
 
 Implement daily limits per site using declarativeNetRequest. Users can set custom limits for each platform, and when reached, the extension blocks access.
 
@@ -160,7 +160,7 @@ The blocking system redirects users to a custom blocked page when they exceed th
 
 See [permissions/declarativeNetRequest.md](../permissions/declarativeNetRequest.md) and [patterns/dynamic-rules.md](../patterns/dynamic-rules.md) for detailed information on dynamic rules.
 
-## Step 3: Focus Mode
+## Step 3: Focus Mode {#step-3-focus-mode}
 
 Schedule focus hours during which all social media sites are blocked. Use chrome.alarms to activate and deactivate focus mode at scheduled times.
 
@@ -213,7 +213,7 @@ The focus mode system uses Chrome alarms to automatically enable and disable blo
 
 See [permissions/alarms.md](../permissions/alarms.md) for more information on scheduling with alarms.
 
-## Step 4: Usage Dashboard (Popup)
+## Step 4: Usage Dashboard (Popup) {#step-4-usage-dashboard-popup}
 
 Create a popup that displays today's usage per site with progress bars, weekly usage charts, and comparison with yesterday's usage.
 
@@ -274,7 +274,7 @@ async function loadDashboard() {
 loadDashboard();
 ```
 
-## Step 5: Notifications
+## Step 5: Notifications {#step-5-notifications}
 
 Implement notifications to keep users informed about their social media usage throughout the day.
 
@@ -316,7 +316,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Step 6: Motivational Blocking Page
+## Step 6: Motivational Blocking Page {#step-6-motivational-blocking-page}
 
 When a site is blocked, display a motivational page with productive alternatives and a countdown to when access resumes.
 
@@ -380,7 +380,7 @@ When a site is blocked, display a motivational page with productive alternatives
 </html>
 ```
 
-## Summary
+## Summary {#summary}
 
 You've built a comprehensive social media dashboard extension with the following capabilities:
 
@@ -393,7 +393,7 @@ You've built a comprehensive social media dashboard extension with the following
 
 This extension demonstrates the power of Chrome's extension APIs for building productivity tools. The combination of background workers, storage, and the declarativeNetRequest API enables sophisticated usage monitoring and control.
 
-## Next Steps
+## Next Steps {#next-steps}
 
 - Add local storage sync across devices using chrome.storage.sync
 - Implement machine learning to suggest personalized focus schedules

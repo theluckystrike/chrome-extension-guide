@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/g
 ---
 # GCM & Push Notifications in Chrome Extensions
 
-## Introduction
+## Introduction {#introduction}
 
 Push notifications enable Chrome extensions to receive messages from a server even when the extension isn't actively running. This is critical for real-time updates, messaging apps, collaborative tools, and any extension that needs to alert users about events happening on a backend.
 
@@ -16,7 +16,7 @@ There are two notification systems available:
 
 This guide covers both approaches, with emphasis on the Web Push migration path since GCM is deprecated.
 
-## Understanding the Architecture
+## Understanding the Architecture {#understanding-the-architecture}
 
 The push notification flow involves several components:
 
@@ -33,7 +33,7 @@ The push notification flow involves several components:
 3. Chrome wakes up your extension's service worker
 4. Your extension processes the message and optionally shows a notification
 
-## manifest.json Setup
+## manifest.json Setup {#manifestjson-setup}
 
 Both GCM and Web Push require specific permissions and configuration:
 
@@ -70,16 +70,16 @@ For Web Push (recommended), you'll also need:
 }
 ```
 
-## Using chrome.gcm (Legacy GCM API)
+## Using chrome.gcm (Legacy GCM API) {#using-chromegcm-legacy-gcm-api}
 
-### Overview
+### Overview {#overview}
 
 The `chrome.gcm` API was Chrome's original push messaging solution. While deprecated, it still works and many existing extensions use it. Key methods:
 - `chrome.gcm.register()` - Register to receive messages
 - `chrome.gcm.onMessage` - Listen for incoming messages
 - `chrome.gcm.send()` - Send messages upstream to your server
 
-### Getting a Sender ID
+### Getting a Sender ID {#getting-a-sender-id}
 
 Before using GCM, you need a project in the Google Cloud Console:
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
@@ -87,7 +87,7 @@ Before using GCM, you need a project in the Google Cloud Console:
 3. Enable "Firebase Cloud Messaging" API
 4. Get your **Sender ID** (project number) and **Server API Key**
 
-### Registering with GCM
+### Registering with GCM {#registering-with-gcm}
 
 ```javascript
 // background.js
@@ -127,7 +127,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-### Receiving Messages
+### Receiving Messages {#receiving-messages}
 
 ```javascript
 // background.js
@@ -167,7 +167,7 @@ function showNotification(data) {
 }
 ```
 
-### Sending Upstream Messages
+### Sending Upstream Messages {#sending-upstream-messages}
 
 You can send messages from the extension back to your server:
 
@@ -195,9 +195,9 @@ function sendUpstreamMessage(message) {
 }
 ```
 
-## Using Web Push (Recommended)
+## Using Web Push (Recommended) {#using-web-push-recommended}
 
-### Overview
+### Overview {#overview}
 
 Web Push is the modern standard for push notifications, using the same infrastructure that powers web notifications. It's more secure and is the recommended path for new extensions.
 
@@ -207,7 +207,7 @@ Key differences from GCM:
 - Works with any push service (not just Google's)
 - Better security with public/private key pairs
 
-### Setting Up VAPID Keys
+### Setting Up VAPID Keys {#setting-up-vapid-keys}
 
 Generate VAPID keys for authentication:
 
@@ -230,7 +230,7 @@ Store these keys:
 - **Public Key** - Embed in your extension
 - **Private Key** - Keep on your server
 
-### Converting VAPID Keys
+### Converting VAPID Keys {#converting-vapid-keys}
 
 VAPID keys are typically base64-encoded. For use in Chrome extensions, convert to Uint8Array:
 
@@ -259,7 +259,7 @@ const subscriptionOptions = {
 };
 ```
 
-### Subscribing to Push
+### Subscribing to Push {#subscribing-to-push}
 
 ```javascript
 // background.js
@@ -300,7 +300,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-### Handling Push Events
+### Handling Push Events {#handling-push-events}
 
 ```javascript
 // background.js
@@ -357,7 +357,7 @@ self.addEventListener('notificationclick', (event) => {
 });
 ```
 
-### Checking Subscription Status
+### Checking Subscription Status {#checking-subscription-status}
 
 ```javascript
 // background.js
@@ -384,7 +384,7 @@ async function checkPushSubscription() {
 }
 ```
 
-## Combining with chrome.notifications
+## Combining with chrome.notifications {#combining-with-chromenotifications}
 
 While Web Push can show notifications directly via the service worker, `chrome.notifications` offers more control:
 
@@ -433,9 +433,9 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 });
 ```
 
-## Server-Side Implementation
+## Server-Side Implementation {#server-side-implementation}
 
-### Node.js with web-push Library
+### Node.js with web-push Library {#nodejs-with-web-push-library}
 
 ```javascript
 // server.js
@@ -504,7 +504,7 @@ async function sendToSubscriber(subscription, payload) {
 }
 ```
 
-### Payload Encryption
+### Payload Encryption {#payload-encryption}
 
 Web Push requires payload encryption. The `web-push` library handles this automatically:
 
@@ -529,7 +529,7 @@ const payload = {
 await webpush.sendNotification(subscription, JSON.stringify(payload));
 ```
 
-### GCM Server Integration (Legacy)
+### GCM Server Integration (Legacy) {#gcm-server-integration-legacy}
 
 For the legacy GCM API, send messages via HTTP:
 
@@ -578,9 +578,9 @@ function sendGCMMessage(registrationIds, data) {
 }
 ```
 
-## Handling Edge Cases
+## Handling Edge Cases {#handling-edge-cases}
 
-### Service Worker Lifecycle
+### Service Worker Lifecycle {#service-worker-lifecycle}
 
 Push events wake up the service worker, but it may be terminated after handling:
 
@@ -607,7 +607,7 @@ self.addEventListener('activate', (event) => {
 });
 ```
 
-### Offline Handling
+### Offline Handling {#offline-handling}
 
 ```javascript
 // background.js
@@ -630,7 +630,7 @@ async function queueMessageForLater() {
 }
 ```
 
-### Renewal and Expiration
+### Renewal and Expiration {#renewal-and-expiration}
 
 Push subscriptions can expire. Handle this gracefully:
 
@@ -652,17 +652,17 @@ self.addEventListener('push', (event) => {
 });
 ```
 
-## Migration from GCM to Web Push
+## Migration from GCM to Web Push {#migration-from-gcm-to-web-push}
 
 If you're migrating from GCM to Web Push:
 
-### Step 1: Generate VAPID Keys
+### Step 1: Generate VAPID Keys {#step-1-generate-vapid-keys}
 
 ```bash
 npx web-push generate-vapid-keys
 ```
 
-### Step 2: Update manifest.json
+### Step 2: Update manifest.json {#step-2-update-manifestjson}
 
 ```json
 {
@@ -672,7 +672,7 @@ npx web-push generate-vapid-keys
 }
 ```
 
-### Step 3: Replace Registration Code
+### Step 3: Replace Registration Code {#step-3-replace-registration-code}
 
 ```javascript
 // OLD (GCM)
@@ -685,7 +685,7 @@ await self.registration.pushManager.subscribe({
 });
 ```
 
-### Step 4: Replace Message Handler
+### Step 4: Replace Message Handler {#step-4-replace-message-handler}
 
 ```javascript
 // OLD (GCM)
@@ -695,7 +695,7 @@ chrome.gcm.onMessage.addListener((message) => { /* ... */ });
 self.addEventListener('push', (event) => { /* ... */ });
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
 1. **Use Web Push for new projects** - GCM is deprecated
 2. **Request notification permission at the right time** - Don't ask immediately on install
@@ -708,7 +708,7 @@ self.addEventListener('push', (event) => { /* ... */ });
 9. **Secure your VAPID keys** - Never expose private key in extension
 10. **Encrypt sensitive data** - Don't send PII in plain push payloads
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 
 - Using GCM for new extensions (use Web Push instead)
 - Not handling notification permission denial
@@ -720,14 +720,14 @@ self.addEventListener('push', (event) => { /* ... */ });
 - Not testing offline scenarios
 - Not providing value in notifications
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [Chrome Push Messaging](https://developer.chrome.com/docs/extensions/develop/concepts/push-messaging)
 - [Web Push Protocol](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol)
 - [web-push Library](https://github.com/web-push-libs/web-push)
 - [FCM Documentation](https://firebase.google.com/docs/cloud-messaging)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications Guide](../guides/notifications-guide.md)

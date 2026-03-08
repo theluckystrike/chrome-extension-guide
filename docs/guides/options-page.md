@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/o
 ---
 # Building an Options Page
 
-## Overview
+## Overview {#overview}
 Step-by-step guide to building a production-quality options page. Uses @theluckystrike/webext-storage for persisting settings and @theluckystrike/webext-permissions for managing optional permissions from the settings UI.
 
-## Manifest Setup
+## Manifest Setup {#manifest-setup}
 ```json
 {
   "options_page": "options.html",
@@ -22,7 +22,7 @@ Step-by-step guide to building a production-quality options page. Uses @thelucky
 }
 ```
 
-## Step 1: Define Your Settings Schema
+## Step 1: Define Your Settings Schema {#step-1-define-your-settings-schema}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -42,7 +42,7 @@ export const storage = createStorage({ schema, area: "sync" });
 
 Explain why `sync` is good for user preferences (follows user across devices).
 
-## Step 2: Load Settings on Page Open
+## Step 2: Load Settings on Page Open {#step-2-load-settings-on-page-open}
 
 ```ts
 async function loadSettings() {
@@ -58,9 +58,9 @@ async function loadSettings() {
 }
 ```
 
-## Step 3: Save Settings on Change
+## Step 3: Save Settings on Change {#step-3-save-settings-on-change}
 
-### Auto-save pattern (save on every change):
+### Auto-save pattern (save on every change): {#auto-save-pattern-save-on-every-change}
 ```ts
 document.getElementById("theme")?.addEventListener("change", async (e) => {
   const value = (e.target as HTMLSelectElement).value as "light" | "dark" | "system";
@@ -69,7 +69,7 @@ document.getElementById("theme")?.addEventListener("change", async (e) => {
 });
 ```
 
-### Save button pattern (batch save):
+### Save button pattern (batch save): {#save-button-pattern-batch-save}
 ```ts
 document.getElementById("save")?.addEventListener("click", async () => {
   await storage.setMany({
@@ -84,7 +84,7 @@ document.getElementById("save")?.addEventListener("click", async () => {
 });
 ```
 
-## Step 4: Reset to Defaults
+## Step 4: Reset to Defaults {#step-4-reset-to-defaults}
 
 ```ts
 document.getElementById("reset")?.addEventListener("click", async () => {
@@ -94,7 +94,7 @@ document.getElementById("reset")?.addEventListener("click", async () => {
 });
 ```
 
-## Step 5: Manage Optional Permissions
+## Step 5: Manage Optional Permissions {#step-5-manage-optional-permissions}
 
 ```ts
 import { checkPermissions, requestPermission, removePermission, describePermission } from "@theluckystrike/webext-permissions";
@@ -130,7 +130,7 @@ container.addEventListener("click", async (e) => {
 });
 ```
 
-## Step 6: Live Preview with watch()
+## Step 6: Live Preview with watch() {#step-6-live-preview-with-watch}
 
 ```ts
 // In popup or content script — react to options changes in real-time
@@ -143,7 +143,7 @@ storage.watch("fontSize", (newSize) => {
 });
 ```
 
-## Step 7: Import/Export Settings
+## Step 7: Import/Export Settings {#step-7-importexport-settings}
 
 ```ts
 document.getElementById("export")?.addEventListener("click", async () => {
@@ -167,7 +167,7 @@ document.getElementById("import")?.addEventListener("change", async (e) => {
 });
 ```
 
-## Step 8: Complete HTML Template
+## Step 8: Complete HTML Template {#step-8-complete-html-template}
 
 Provide a minimal but functional options.html with:
 - Theme selector (light/dark/system)
@@ -178,21 +178,21 @@ Provide a minimal but functional options.html with:
 - Save/Reset/Export/Import buttons
 - CSS for dark/light theming
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 1. Auto-save vs save button (pros/cons of each)
 2. Section-based settings (general, appearance, permissions, advanced)
 3. Confirmation dialogs for destructive actions (reset, revoke)
 4. Settings validation before save
 5. Migration from old schema versions
 
-## Gotchas
+## Gotchas {#gotchas}
 - `sync` storage has 8KB per item limit — don't store large arrays
 - Permission requests MUST come from user gestures (click handlers)
 - `storage.clear()` only removes YOUR schema keys, not all extension storage
 - Always `await` storage operations — they're async
 - `watch()` fires from ALL contexts — your options page changes trigger watches in popup/content too
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Options Page Patterns](../patterns/options-page-patterns.md)
 - [Accessibility](../guides/accessibility.md)

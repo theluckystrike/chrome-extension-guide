@@ -7,15 +7,15 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Tab Lifecycle Management Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions frequently need to track browser tabs throughout their lifecycle—from creation to removal, activation, and navigation. The chrome.tabs API provides comprehensive event listeners for monitoring these state changes. This guide covers practical patterns for implementing robust tab lifecycle management in your extension.
 
 ---
 
-## Core Tab Lifecycle Events
+## Core Tab Lifecycle Events {#core-tab-lifecycle-events}
 
-### Event Overview
+### Event Overview {#event-overview}
 
 The Tabs API provides six primary lifecycle events:
 
@@ -30,9 +30,9 @@ The Tabs API provides six primary lifecycle events:
 
 ---
 
-## Basic Tab Tracker Implementation
+## Basic Tab Tracker Implementation {#basic-tab-tracker-implementation}
 
-### Tracking All Tabs
+### Tracking All Tabs {#tracking-all-tabs}
 
 Maintain a map of all open tabs:
 
@@ -76,9 +76,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Tab Activation Monitoring
+## Tab Activation Monitoring {#tab-activation-monitoring}
 
-### Tracking Active Tab Changes
+### Tracking Active Tab Changes {#tracking-active-tab-changes}
 
 Detect when users switch tabs:
 
@@ -98,7 +98,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 ```
 
-### Window Focus Tracking
+### Window Focus Tracking {#window-focus-tracking}
 
 Monitor when windows gain or lose focus:
 
@@ -119,9 +119,9 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 ---
 
-## URL Change Detection
+## URL Change Detection {#url-change-detection}
 
-### Detecting Navigation Events
+### Detecting Navigation Events {#detecting-navigation-events}
 
 Track URL changes with the updated event:
 
@@ -148,9 +148,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Filtered Listeners
+## Filtered Listeners {#filtered-listeners}
 
-### Optimizing Event Handling
+### Optimizing Event Handling {#optimizing-event-handling}
 
 Use filters to reduce unnecessary callbacks:
 
@@ -184,9 +184,9 @@ chrome.tabs.onUpdated.addListener(
 
 ---
 
-## Tab State Management
+## Tab State Management {#tab-state-management}
 
-### Handling Tab States
+### Handling Tab States {#handling-tab-states}
 
 Modern Chrome can discard tabs to save memory:
 
@@ -216,9 +216,9 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 
 ---
 
-## Handling Tab Replacement
+## Handling Tab Replacement {#handling-tab-replacement}
 
-### The onReplaced Event
+### The onReplaced Event {#the-onreplaced-event}
 
 Chrome sometimes replaces tabs (prerendering, instant pages):
 
@@ -240,7 +240,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Tab Management Patterns](./tab-management.md)

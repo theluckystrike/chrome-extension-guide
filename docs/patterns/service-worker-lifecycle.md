@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Service Worker Lifecycle Patterns
 
-## Overview
+## Overview {#overview}
 
 The [MV3 service workers guide](../mv3/service-workers.md) covers the basics of migrating from background pages. This article goes deeper into lifecycle events, keep-alive strategies, state persistence, error recovery, and advanced patterns for working with Chrome's ephemeral service worker model.
 
 ---
 
-## Lifecycle States
+## Lifecycle States {#lifecycle-states}
 
 ```
                     ┌──────────┐
@@ -41,7 +41,7 @@ Key facts:
 
 ---
 
-## Pattern 1: Synchronous Event Registration
+## Pattern 1: Synchronous Event Registration {#pattern-1-synchronous-event-registration}
 
 All `chrome.*` event listeners **must** be registered synchronously at the top level of your service worker. This is the most critical lifecycle requirement:
 
@@ -77,7 +77,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 ---
 
-## Pattern 2: State Persistence Across Restarts
+## Pattern 2: State Persistence Across Restarts {#pattern-2-state-persistence-across-restarts}
 
 Global variables are lost when the service worker terminates. Choose the right storage for each type of state:
 
@@ -117,7 +117,7 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### State Machine Pattern
+### State Machine Pattern {#state-machine-pattern}
 
 ```ts
 // background.ts — Persistent state machine
@@ -152,11 +152,11 @@ async function transition(from: ExtensionState, to: ExtensionState): Promise<boo
 
 ---
 
-## Pattern 3: Keep-Alive Strategies
+## Pattern 3: Keep-Alive Strategies {#pattern-3-keep-alive-strategies}
 
 Sometimes you need the service worker to stay active beyond 30 seconds:
 
-### Using chrome.alarms (Recommended)
+### Using chrome.alarms (Recommended) {#using-chromealarms-recommended}
 
 ```ts
 // background.ts
@@ -171,7 +171,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Using Long-Lived Connections
+### Using Long-Lived Connections {#using-long-lived-connections}
 
 ```ts
 // popup.ts or content.ts — keeps SW alive while connected
@@ -198,7 +198,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Using offscreen Documents (Chrome 109+)
+### Using offscreen Documents (Chrome 109+) {#using-offscreen-documents-chrome-109}
 
 ```ts
 // background.ts
@@ -219,7 +219,7 @@ async function createKeepAliveDocument() {
 
 ---
 
-## Pattern 4: Handling the Install/Update Lifecycle
+## Pattern 4: Handling the Install/Update Lifecycle {#pattern-4-handling-the-installupdate-lifecycle}
 
 ```ts
 // background.ts
@@ -286,7 +286,7 @@ async function reinitialize() {
 
 ---
 
-## Pattern 5: Error Recovery
+## Pattern 5: Error Recovery {#pattern-5-error-recovery}
 
 Service workers can crash. Handle unexpected termination gracefully:
 
@@ -348,7 +348,7 @@ resumeInterruptedOperations();
 
 ---
 
-## Pattern 6: Startup Time Optimization
+## Pattern 6: Startup Time Optimization {#pattern-6-startup-time-optimization}
 
 Fast startup means events are handled quickly:
 
@@ -382,7 +382,7 @@ async function onActionClicked(tab: chrome.tabs.Tab) {
 
 ---
 
-## Pattern 7: Monitoring SW Health
+## Pattern 7: Monitoring SW Health {#pattern-7-monitoring-sw-health}
 
 ```ts
 // background.ts
@@ -413,9 +413,9 @@ async function checkServiceWorkerHealth() {
 
 ---
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
-### 1. setTimeout/setInterval
+### 1. setTimeout/setInterval {#1-settimeoutsetinterval}
 
 ```ts
 // Bad: Timer is killed when SW terminates
@@ -428,7 +428,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### 2. Fetch with No Listener
+### 2. Fetch with No Listener {#2-fetch-with-no-listener}
 
 ```ts
 // Bad: SW terminates before fetch completes if no event keeps it alive
@@ -447,7 +447,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### 3. WebSocket Connections
+### 3. WebSocket Connections {#3-websocket-connections}
 
 ```ts
 // WebSockets close when SW terminates. Use chrome.alarms to poll instead,
@@ -456,7 +456,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | When to Use |
 |---------|------------|

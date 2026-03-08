@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Long-Running Operations Patterns
 
-## Overview
+## Overview {#overview}
 
 MV3 service workers have a strict 30-second idle timeout. Unlike MV2 background pages that could run indefinitely, your extension must plan for termination at any time. This guide covers patterns for handling tasks that exceed the service worker lifetime.
 
 ---
 
-## Challenge: Service Worker Termination
+## Challenge: Service Worker Termination {#challenge-service-worker-termination}
 
 ```
 Service Worker Lifecycle:
@@ -41,7 +41,7 @@ Long-running tasks face these challenges:
 
 ---
 
-## Pattern 1: Chunked Processing with Alarms
+## Pattern 1: Chunked Processing with Alarms {#pattern-1-chunked-processing-with-alarms}
 
 Break large tasks into small chunks and process one chunk per wake cycle:
 
@@ -96,7 +96,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-## Pattern 2: Offscreen Documents for Sustained Work
+## Pattern 2: Offscreen Documents for Sustained Work {#pattern-2-offscreen-documents-for-sustained-work}
 
 For tasks requiring longer execution, use an offscreen document:
 
@@ -131,7 +131,7 @@ self.onmessage = async (e) => {
 
 ---
 
-## Pattern 3: Keep-Alive Heartbeat
+## Pattern 3: Keep-Alive Heartbeat {#pattern-3-keep-alive-heartbeat}
 
 For critical background tasks, keep the service worker alive:
 
@@ -150,7 +150,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-## Pattern 4: Resumable State Management
+## Pattern 4: Resumable State Management {#pattern-4-resumable-state-management}
 
 Always save state to `chrome.storage` for resumability:
 
@@ -180,7 +180,7 @@ async function resumeTask(taskId: string): Promise<void> {
 
 ---
 
-## Progress Communication
+## Progress Communication {#progress-communication}
 
 Notify the UI via message passing:
 
@@ -205,7 +205,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Anti-Patterns to Avoid
+## Anti-Patterns to Avoid {#anti-patterns-to-avoid}
 
 | Anti-Pattern | Problem | Solution |
 |--------------|---------|----------|
@@ -216,7 +216,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Related Patterns
+## Related Patterns {#related-patterns}
 
 - [Service Worker Lifecycle](./service-worker-lifecycle.md) — lifecycle deep dive
 - [Offscreen Documents](./offscreen-documents.md) — sustained execution contexts
@@ -224,7 +224,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 1. **Never assume** the service worker stays alive — plan for termination
 2. **Use chrome.alarms** for periodic work (not `setInterval`)

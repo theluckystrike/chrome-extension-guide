@@ -6,15 +6,15 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Page Speed Analyzer Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 A Chrome extension that analyzes page performance using the Performance API, displays metrics (FCP, LCP, CLS, FID, TTFB), shows resource breakdown, calculates performance scores, tracks history, and provides recommendations.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Performance API (cross-ref `docs/guides/performance.md`)
 - Web Navigation API (cross-ref `docs/api-reference/web-navigation-api.md`)
 - Performance profiling patterns (cross-ref `docs/patterns/performance-profiling.md`)
 
-## Project Structure
+## Project Structure {#project-structure}
 ```
 page-speed-analyzer/
   manifest.json
@@ -25,7 +25,7 @@ page-speed-analyzer/
   background.js
 ```
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -39,7 +39,7 @@ page-speed-analyzer/
 }
 ```
 
-## Step 2: Content Script with Performance API
+## Step 2: Content Script with Performance API {#step-2-content-script-with-performance-api}
 ```javascript
 // content.js - Collect performance metrics using Performance API
 (function() {
@@ -67,7 +67,7 @@ page-speed-analyzer/
 })();
 ```
 
-## Step 3: Background Script with Badge Grades
+## Step 3: Background Script with Badge Grades {#step-3-background-script-with-badge-grades}
 ```javascript
 // background.js - Handle badge updates with grades A-F
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -81,7 +81,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-## Step 4: Popup HTML
+## Step 4: Popup HTML {#step-4-popup-html}
 ```html
 <!DOCTYPE html>
 <html>
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 </html>
 ```
 
-## Step 5: Popup JavaScript
+## Step 5: Popup JavaScript {#step-5-popup-javascript}
 ```javascript
 // popup.js - Display metrics, charts, score calculation, history, export
 import { Chart } from 'chart.js/auto';
@@ -170,7 +170,7 @@ document.getElementById('export').addEventListener('click', () => {
 });
 ```
 
-## Step 6: Popup CSS
+## Step 6: Popup CSS {#step-6-popup-css}
 ```css
 body{width:320px;font-family:system-ui;background:#1a1a2e;color:#e0e0e0;padding:12px}
 h1{font-size:14px;color:#00ff41;margin-bottom:8px}
@@ -187,5 +187,5 @@ h1{font-size:14px;color:#00ff41;margin-bottom:8px}
 button{flex:1;padding:8px;border:1px solid #00ff41;background:transparent;color:#00ff41;border-radius:4px;cursor:pointer}
 ```
 
-## Summary
+## Summary {#summary}
 This extension uses the Performance API and PerformanceObserver to capture real-time metrics. The popup calculates a weighted performance score and displays a grade (A-F) as a badge. Resource breakdown uses a pie chart, and recommendations identify optimization opportunities. History is stored per URL, and reports can be exported as JSON.

@@ -9,24 +9,24 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # Power Permission
 
-## Overview
+## Overview {#overview}
 - Permission string: `"power"`
 - Grants access to `chrome.power` API
 - Controls display and system sleep behavior
 - Does not trigger a warning at install time
 
-## API Methods
+## API Methods {#api-methods}
 - `chrome.power.requestKeepAwake(level)` where level is `"display"` or `"system"`
   - `"display"` keeps screen on and prevents system sleep
   - `"system"` prevents system sleep only, screen can dim
 - `chrome.power.releaseKeepAwake()` releases the keep-awake request
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 ```json
 { "permissions": ["power"] }
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 - Presentations and slideshows: keep screen on during presentation
 - Media playback: prevent sleep during video/audio
 - Long-running downloads: keep system awake until complete
@@ -34,14 +34,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 - Timer/stopwatch apps: keep display visible
 - Video conferencing extensions: maintain active session
 
-## MV3 Considerations
+## MV3 Considerations {#mv3-considerations}
 - Service worker can call requestKeepAwake but SW may go idle
 - Re-request after service worker wake-up using chrome.alarms
 - Pattern: alarm triggers, SW wakes, re-call requestKeepAwake
 - Keep-awake state persists in browser even after SW terminates
 - On SW wake-up, re-read state and re-request if needed
 
-## Battery Impact
+## Battery Impact {#battery-impact}
 - Display mode: significant battery drain
 - System mode: moderate drain
 - Always call releaseKeepAwake when no longer needed
@@ -49,8 +49,8 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 - Don't use "display" when "system" suffices
 - Always provide user controls and auto-release mechanisms
 
-## Code Examples
-### Basic Keep-Awake Toggle
+## Code Examples {#code-examples}
+### Basic Keep-Awake Toggle {#basic-keep-awake-toggle}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -71,7 +71,7 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### Alarm-Based Re-request Pattern for MV3
+### Alarm-Based Re-request Pattern for MV3 {#alarm-based-re-request-pattern-for-mv3}
 ```typescript
 chrome.runtime.onStartup.addListener(async () => {
   const isAwake = await storage.get('keepAwake');
@@ -92,7 +92,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Integration with @theluckystrike/webext-storage
+### Integration with @theluckystrike/webext-storage {#integration-with-theluckystrikewebext-storage}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -115,7 +115,7 @@ async function disableKeepAwake() {
 }
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 - permissions/idle.md
 - guides/power-management.md
 - patterns/power-api.md

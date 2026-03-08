@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Cookies API Guide
 
-## Overview
+## Overview {#overview}
 - `chrome.cookies` API for reading and modifying browser cookies
 - Requires `"cookies"` permission + host permissions for target domains
 - Cross-ref: `docs/permissions/cookies.md`
 
-## Reading Cookies
+## Reading Cookies {#reading-cookies}
 ```javascript
 // Get a specific cookie
 chrome.cookies.get({
@@ -47,7 +47,7 @@ chrome.cookies.getAll({
 });
 ```
 
-## Setting Cookies
+## Setting Cookies {#setting-cookies}
 ```javascript
 // Set/update a cookie
 chrome.cookies.set({
@@ -76,7 +76,7 @@ chrome.cookies.set({
 });
 ```
 
-## Removing Cookies
+## Removing Cookies {#removing-cookies}
 ```javascript
 // Remove a specific cookie
 chrome.cookies.remove({
@@ -98,7 +98,7 @@ chrome.cookies.getAll({ domain: '.example.com' }, (cookies) => {
 });
 ```
 
-## Cookie Events
+## Cookie Events {#cookie-events}
 ```javascript
 // Monitor cookie changes
 chrome.cookies.onChanged.addListener((changeInfo) => {
@@ -112,7 +112,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-## Cookie Stores (Incognito)
+## Cookie Stores (Incognito) {#cookie-stores-incognito}
 ```javascript
 // List all cookie stores (normal + incognito)
 chrome.cookies.getAllCookieStores((stores) => {
@@ -129,7 +129,7 @@ chrome.cookies.getAll({
 });
 ```
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 ```json
 {
   "permissions": ["cookies"],
@@ -143,7 +143,7 @@ chrome.cookies.getAll({
 - Must also have host permissions for the domains you want to access
 - `"<all_urls>"` grants access to all domains' cookies
 
-## Tracking Cookie Changes
+## Tracking Cookie Changes {#tracking-cookie-changes}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -171,20 +171,20 @@ chrome.cookies.onChanged.addListener(async (changeInfo) => {
 });
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 - **Session manager**: save/restore cookies for quick account switching
 - **Privacy tool**: auto-delete cookies for specific sites on tab close
 - **Auth detector**: check if user is logged into a site before showing UI
 - **Cookie editor**: DevTools panel for viewing/editing all cookies
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Missing host permissions — `cookies` permission alone won't work
 - Not URL-encoding cookie values with special characters
 - Forgetting that `domain` starts with `.` for domain cookies
 - Assuming cookies persist in incognito (separate store, cleared on close)
 - Setting `httpOnly: true` then trying to read the cookie with `document.cookie` in content scripts
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Cookies API Reference](../api-reference/cookies-api.md)
 - [Cookies & Sessions](../patterns/cookies-sessions.md)

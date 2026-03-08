@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Sandboxed pages are a powerful pattern in Chrome extensions that allow running code with relaxed Content Security Policy (CSP), enabling features that would otherwise be blocked. This pattern is essential for certain use cases but requires careful security considerations.
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 
 To use sandboxed pages, declare them in your `manifest.json`:
 
@@ -26,7 +26,7 @@ To use sandboxed pages, declare them in your `manifest.json`:
 
 Sandboxed pages run with relaxed CSP that allows `eval()`, `new Function()`, and inline scripts that would otherwise violate the extension's CSP.
 
-## Security Model
+## Security Model {#security-model}
 
 Sandboxed pages operate under significant restrictions:
 
@@ -37,7 +37,7 @@ Sandboxed pages operate under significant restrictions:
 
 This security model protects the extension from potentially malicious code running in the sandbox while allowing dangerous operations like `eval` within a controlled environment.
 
-## Communication: postMessage
+## Communication: postMessage {#communication-postmessage}
 
 Since sandboxed pages cannot directly access extension APIs, communication happens via `postMessage`:
 
@@ -73,9 +73,9 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
-### Template Engines
+### Template Engines {#template-engines}
 
 Many template engines (Handlebars, EJS, Underscore.js) rely on `eval` for runtime compilation:
 
@@ -86,7 +86,7 @@ const template = Handlebars.compile('{{greeting}}, {{name}}!');
 const output = template({ greeting: 'Hello', name: 'World' });
 ```
 
-### User-Provided Scripts
+### User-Provided Scripts {#user-provided-scripts}
 
 Allow users to write custom scripts that get executed safely:
 
@@ -99,11 +99,11 @@ const safeEval = (script, context) => {
 };
 ```
 
-### Rich Text Editors
+### Rich Text Editors {#rich-text-editors}
 
 Some rich text editors use `eval` for dynamic style calculations or markdown parsing.
 
-## Multiple Sandboxed Pages
+## Multiple Sandboxed Pages {#multiple-sandboxed-pages}
 
 For different libraries or security requirements, use multiple sandboxes:
 
@@ -121,14 +121,14 @@ For different libraries or security requirements, use multiple sandboxes:
 
 Each sandbox runs in its own isolated context with separate CSP relaxations.
 
-## Performance Considerations
+## Performance Considerations {#performance-considerations}
 
 - **iframe overhead**: Each sandboxed page requires an iframe, adding DOM overhead
 - **Message serialization**: Complex data passed via postMessage incurs serialization costs
 - **Startup latency**: Loading sandbox pages takes time; consider preloading
 - **Memory usage**: Each iframe maintains its own JavaScript context
 
-## Alternatives
+## Alternatives {#alternatives}
 
 Before using sandboxed pages, consider these alternatives:
 
@@ -137,7 +137,7 @@ Before using sandboxed pages, consider these alternatives:
 3. **Web Workers**: For heavy computation without DOM requirements
 4. **Native JS templating**: Use template literals which don't require `eval`
 
-## Testing Sandboxed Pages
+## Testing Sandboxed Pages {#testing-sandboxed-pages}
 
 For debugging, navigate directly to the sandbox page URL:
 
@@ -147,7 +147,7 @@ chrome-extension://<extension-id>/sandbox.html
 
 This allows direct inspection and debugging of the sandbox environment.
 
-## Example: Complete Template Engine Sandbox
+## Example: Complete Template Engine Sandbox {#example-complete-template-engine-sandbox}
 
 ```javascript
 // popup.js
@@ -187,7 +187,7 @@ function renderWithSandbox(template, data) {
 </script>
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [CSP Reference](../reference/csp-reference.md)
 - [CSP Workarounds](./csp-workarounds.md)

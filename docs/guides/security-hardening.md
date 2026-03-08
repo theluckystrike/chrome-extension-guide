@@ -8,11 +8,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 
 An advanced, actionable guide to hardening Chrome extensions against real-world attack vectors. This goes beyond the basics covered in `security-best-practices.md` with concrete implementations you can drop into your codebase.
 
-## Content Security Policy Configuration
+## Content Security Policy Configuration {#content-security-policy-configuration}
 
 MV3 provides a default CSP, but you should tighten it further for different extension contexts.
 
-### Extension Pages CSP
+### Extension Pages CSP {#extension-pages-csp}
 
 Lock down your popup, options page, and side panel:
 
@@ -30,7 +30,7 @@ Key directives:
 - `base-uri 'self'` — prevents `<base>` tag injection that redirects relative URLs
 - `connect-src` — whitelist only the exact API origins your extension contacts
 
-### Sandbox CSP
+### Sandbox CSP {#sandbox-csp}
 
 If you need to run untrusted HTML (e.g., rendering user-provided templates), use a sandboxed page:
 
@@ -68,11 +68,11 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-## Input Sanitization in Content Scripts
+## Input Sanitization in Content Scripts {#input-sanitization-in-content-scripts}
 
 Content scripts run in the context of web pages. Any data read from the DOM is attacker-controlled.
 
-### Never Use innerHTML with Page Data
+### Never Use innerHTML with Page Data {#never-use-innerhtml-with-page-data}
 
 ```typescript
 // DANGEROUS — XSS via DOM data
@@ -87,7 +87,7 @@ div.textContent = title;  // textContent auto-escapes
 container.appendChild(div);
 ```
 
-### Build a Sanitization Utility
+### Build a Sanitization Utility {#build-a-sanitization-utility}
 
 For cases where you must work with HTML, build a strict sanitizer:
 
@@ -150,7 +150,7 @@ function sanitizeHTML(dirty: string): string {
 }
 ```
 
-### Validate URLs Before Navigation
+### Validate URLs Before Navigation {#validate-urls-before-navigation}
 
 ```typescript
 function isSafeURL(url: string): boolean {
@@ -172,9 +172,9 @@ function safeNavigate(url: string): void {
 }
 ```
 
-## Secure Message Validation
+## Secure Message Validation {#secure-message-validation}
 
-### Verify Sender in onMessage
+### Verify Sender in onMessage {#verify-sender-in-onmessage}
 
 Every message handler must validate who sent the message:
 
@@ -222,7 +222,7 @@ function isValidMessage(msg: unknown): msg is ExtensionMessage {
 }
 ```
 
-### Secure External Messaging
+### Secure External Messaging {#secure-external-messaging}
 
 If your extension accepts messages from web pages via `externally_connectable`:
 
@@ -275,9 +275,9 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 });
 ```
 
-## Minimal Permissions with Optional Permissions
+## Minimal Permissions with Optional Permissions {#minimal-permissions-with-optional-permissions}
 
-### Audit Your Permissions
+### Audit Your Permissions {#audit-your-permissions}
 
 Map every permission to the feature that requires it:
 
@@ -297,7 +297,7 @@ export const PERMISSION_JUSTIFICATION = {
 } as const;
 ```
 
-### Request Permissions Just-In-Time
+### Request Permissions Just-In-Time {#request-permissions-just-in-time}
 
 ```typescript
 async function withPermission<T>(
@@ -340,7 +340,7 @@ async function exportBookmarks() {
 }
 ```
 
-### Release Permissions When No Longer Needed
+### Release Permissions When No Longer Needed {#release-permissions-when-no-longer-needed}
 
 ```typescript
 async function cleanupUnusedPermissions(): Promise<void> {
@@ -367,11 +367,11 @@ async function cleanupUnusedPermissions(): Promise<void> {
 chrome.runtime.onStartup.addListener(cleanupUnusedPermissions);
 ```
 
-## Storage Encryption for Sensitive Data
+## Storage Encryption for Sensitive Data {#storage-encryption-for-sensitive-data}
 
 Chrome extension storage is not encrypted at rest. Any extension with the `storage` permission can read its own storage, and local storage is accessible via the file system.
 
-### Encrypt Sensitive Values
+### Encrypt Sensitive Values {#encrypt-sensitive-values}
 
 ```typescript
 class SecureStorage {
@@ -462,9 +462,9 @@ await secureStorage.setSecure('apiToken', 'sk-live-abc123...');
 const token = await secureStorage.getSecure('apiToken');
 ```
 
-## XSS Prevention in Extension Pages
+## XSS Prevention in Extension Pages {#xss-prevention-in-extension-pages}
 
-### Use Trusted Types
+### Use Trusted Types {#use-trusted-types}
 
 Enable Trusted Types in your CSP to prevent DOM XSS at the browser level:
 
@@ -497,7 +497,7 @@ const policy = trustedTypes.createPolicy('extension-safe', {
 export { policy };
 ```
 
-### Template Rendering Without innerHTML
+### Template Rendering Without innerHTML {#template-rendering-without-innerhtml}
 
 Build your UI safely with a builder pattern:
 
@@ -540,11 +540,11 @@ function renderBookmarkList(bookmarks: { title: string; url: string }[]): HTMLEl
 }
 ```
 
-## Clickjacking Protection
+## Clickjacking Protection {#clickjacking-protection}
 
 Extension pages can be embedded in iframes on malicious sites if you are not careful.
 
-### Frame-Busting in Extension Pages
+### Frame-Busting in Extension Pages {#frame-busting-in-extension-pages}
 
 ```typescript
 // Run at the top of every extension page (popup, options, side panel)
@@ -567,7 +567,7 @@ function preventFraming(): void {
 preventFraming();
 ```
 
-### X-Frame-Options via Web Request Rules
+### X-Frame-Options via Web Request Rules {#x-frame-options-via-web-request-rules}
 
 Use Declarative Net Request to add headers to your extension page responses:
 
@@ -611,9 +611,9 @@ Use Declarative Net Request to add headers to your extension page responses:
 ]
 ```
 
-## Network Request Security
+## Network Request Security {#network-request-security}
 
-### HTTPS Enforcement
+### HTTPS Enforcement {#https-enforcement}
 
 Block all non-HTTPS requests from your extension:
 
@@ -642,7 +642,7 @@ globalThis.fetch = async function secureFetch(
 };
 ```
 
-### API Client with Security Defaults
+### API Client with Security Defaults {#api-client-with-security-defaults}
 
 ```typescript
 class SecureAPIClient {
@@ -697,9 +697,9 @@ const api = new SecureAPIClient('https://api.yourservice.com');
 const data = await api.request<{ items: string[] }>('/v1/items');
 ```
 
-## Third-Party Dependency Auditing
+## Third-Party Dependency Auditing {#third-party-dependency-auditing}
 
-### Lock and Audit Dependencies
+### Lock and Audit Dependencies {#lock-and-audit-dependencies}
 
 ```bash
 # Use a lockfile — always
@@ -715,7 +715,7 @@ npx depcheck
 npm outdated
 ```
 
-### Vendoring Critical Dependencies
+### Vendoring Critical Dependencies {#vendoring-critical-dependencies}
 
 For maximum security, vendor your critical dependencies so supply chain attacks cannot affect your published extension:
 
@@ -759,7 +759,7 @@ for (const { hash, file } of checksums) {
 console.log('All vendor integrity checks passed.');
 ```
 
-### Subresource Integrity for CDN Resources
+### Subresource Integrity for CDN Resources {#subresource-integrity-for-cdn-resources}
 
 If you must load resources from a CDN (e.g., in a sandboxed page):
 
@@ -771,11 +771,11 @@ If you must load resources from a CDN (e.g., in a sandboxed page):
 ></script>
 ```
 
-## Chrome Web Store Security Review Preparation
+## Chrome Web Store Security Review Preparation {#chrome-web-store-security-review-preparation}
 
 The Chrome Web Store reviews extensions for security issues. Prepare your submission to avoid rejections.
 
-### Pre-Submission Checklist
+### Pre-Submission Checklist {#pre-submission-checklist}
 
 ```typescript
 // scripts/security-audit.ts — run before every submission
@@ -838,7 +838,7 @@ if (failures.length > 0) {
 }
 ```
 
-### Justification Document
+### Justification Document {#justification-document}
 
 Create a `PERMISSIONS_JUSTIFICATION.md` that maps each permission to its user-facing feature. Chrome Web Store reviewers check this:
 
@@ -850,7 +850,7 @@ Create a `PERMISSIONS_JUSTIFICATION.md` that maps each permission to its user-fa
 | bookmarks | Import bookmarks | Settings > Import |
 ```
 
-### Code Minification Considerations
+### Code Minification Considerations {#code-minification-considerations}
 
 Chrome Web Store may reject heavily obfuscated code. Use minification but not obfuscation:
 
@@ -877,7 +877,7 @@ export default defineConfig({
 });
 ```
 
-## Summary
+## Summary {#summary}
 
 Security hardening is not optional for Chrome extensions. Extensions run with elevated privileges and access sensitive user data. Apply these measures as layers of defense:
 
@@ -898,7 +898,7 @@ Cross-references:
 - `docs/guides/content-script-isolation.md` — content script security boundaries
 - `docs/guides/web-request-patterns.md` — network request handling
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Security Audit](../guides/extension-security-audit.md)

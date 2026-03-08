@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # Extension Monetization Guide
 
-## Overview
+## Overview {#overview}
 - Strategies for generating revenue from Chrome extensions
 - Choose based on extension type, user base, and market
 - Most extensions require external payment processing since Chrome Web Store payments were deprecated in 2020
 
-## Freemium Model
+## Freemium Model {#freemium-model}
 - Free tier with core features, paid tier with premium features
 - Use `@theluckystrike/webext-storage` to store license state locally:
   ```typescript
@@ -29,7 +29,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Clear distinction between free and premium features in UI
 - Upsell prompts at strategic points (e.g., after successful free actions)
 
-## One-Time Purchase
+## One-Time Purchase {#one-time-purchase}
 - Chrome Web Store payments deprecated since 2020
 - External payment processors: Stripe, Paddle, Gumroad, LemonSqueezy
 - License key validation pattern:
@@ -51,7 +51,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Use `chrome.identity` for user verification when available
 - Store purchase confirmation locally after successful validation
 
-## Subscription Model
+## Subscription Model {#subscription-model}
 - Monthly/yearly recurring payments
 - External billing via Stripe Subscriptions, Paddle, or Recurly
 - Server-side license checks required:
@@ -91,7 +91,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
   ```
 - Send reminder emails before trial ends
 
-## Donation-Based
+## Donation-Based {#donation-based}
 - Platforms: Ko-fi, Buy Me a Coffee, GitHub Sponsors, Patreon
 - Add donate button in popup or options page:
   ```html
@@ -103,16 +103,16 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Show appreciation for donors with subtle badge or thank-you message
 - Don't gate core functionality behind donation requests
 
-## Sponsorship and Partnerships
+## Sponsorship and Partnerships {#sponsorship-and-partnerships}
 - Affiliate links in new tab pages or toolbar popups
 - Sponsored default settings (with clear disclosure)
 - Partnership with SaaS tools (offer as integration option)
 - Native integrations with products users already use
 - Ensure partnerships align with user trust and extension purpose
 
-## Implementation Patterns
+## Implementation Patterns {#implementation-patterns}
 
-### License Key Validation
+### License Key Validation {#license-key-validation}
 - User enters key in options page:
   ```typescript
   document.getElementById('activate-btn')?.addEventListener('click', async () => {
@@ -135,7 +135,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Re-validate periodically (e.g., daily or on extension startup)
 - Handle offline gracefully: use cached data, warn user
 
-### Feature Gating
+### Feature Gating {#feature-gating}
 - Check license state before premium features:
   ```typescript
   function canAccessPremium(): boolean {
@@ -168,7 +168,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
   });
   ```
 
-### User Identification
+### User Identification {#user-identification}
 - `chrome.identity.getProfileUserInfo` for Google account (requires OAuth):
   ```typescript
   chrome.identity.getProfileUserInfo((userInfo) => {
@@ -191,7 +191,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
   ```
 - Link purchases to identity for cross-device access
 
-## What NOT To Do
+## What NOT To Do {#what-not-to-do}
 - Never inject ads into web pages (CWS policy violation)
 - Never sell user data or browsing history
 - Never use crypto miners in extensions
@@ -200,9 +200,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 - Avoid aggressive upselling that disrupts user experience
 - Respect CWS developer program policies — violations result in removal
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Upgrade Prompt UI
+### Upgrade Prompt UI {#upgrade-prompt-ui}
 ```html
 <div id="upgrade-banner" class="hidden">
   <p>Upgrade to Premium for unlimited access</p>
@@ -223,7 +223,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 </style>
 ```
 
-### License Check Middleware
+### License Check Middleware {#license-check-middleware}
 ```typescript
 function withLicenseCheck(handler: Function) {
   return async (...args: any[]) => {
@@ -240,13 +240,13 @@ const premiumAction = withLicenseCheck(async (data) => {
 });
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 - `docs/publishing/publishing-guide.md` — Publishing to Chrome Web Store
 - `docs/guides/security-best-practices.md` — Secure storage and authentication
 - `docs/patterns/state-management.md` — State management patterns
 - `docs/guides/identity-oauth.md` — Chrome Identity API for user authentication
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Listing Optimization](../publishing/listing-optimization.md)
 - [Release Notes](../guides/extension-release-notes.md)

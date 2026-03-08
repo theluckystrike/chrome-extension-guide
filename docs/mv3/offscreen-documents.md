@@ -7,20 +7,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/offs
 
 # Offscreen Documents in Manifest V3
 
-## Introduction
+## Introduction {#introduction}
 - MV3 service workers have NO DOM access — no `document`, `window`, `canvas`, `audio`, etc.
 - Offscreen documents solve this: create a hidden HTML page for DOM-dependent tasks
 - Available since Chrome 109
 - Requires `"offscreen"` permission
 
-## manifest.json
+## manifest.json {#manifestjson}
 ```json
 {
   "permissions": ["offscreen"]
 }
 ```
 
-## Creating an Offscreen Document
+## Creating an Offscreen Document {#creating-an-offscreen-document}
 ```javascript
 await chrome.offscreen.createDocument({
   url: "offscreen.html",
@@ -29,7 +29,7 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-### Reasons (enum values)
+### Reasons (enum values) {#reasons-enum-values}
 - `"TESTING"` — for testing purposes
 - `"AUDIO_PLAYBACK"` — play audio
 - `"IFRAME_SCRIPTING"` — interact with iframe content
@@ -46,7 +46,7 @@ await chrome.offscreen.createDocument({
 - `"MATCH_MEDIA"` — CSS media queries
 - `"GEOLOCATION"` — Geolocation API
 
-## Offscreen HTML Page
+## Offscreen HTML Page {#offscreen-html-page}
 ```html
 <!-- offscreen.html -->
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Communication: Background <-> Offscreen
+## Communication: Background <-> Offscreen {#communication-background-offscreen}
 - Use standard `chrome.runtime.sendMessage` / `onMessage`
 - Or use `@theluckystrike/webext-messaging`:
   ```typescript
@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   });
   ```
 
-## Lifecycle Management
+## Lifecycle Management {#lifecycle-management}
 ```javascript
 // Check if offscreen document already exists
 const existingContexts = await chrome.runtime.getContexts({
@@ -95,42 +95,42 @@ if (existingContexts.length === 0) {
 - Close when done: `await chrome.offscreen.closeDocument()`
 - Chrome auto-closes offscreen documents with `AUDIO_PLAYBACK` reason after 30 seconds without audio; all other reasons have no automatic lifetime limit
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### HTML/DOM Parsing
+### HTML/DOM Parsing {#htmldom-parsing}
 - Fetch HTML in background, send to offscreen for DOMParser processing
 - Extract data, return structured result
 
-### Audio Playback
+### Audio Playback {#audio-playback}
 - Play notification sounds, alarms
 - Background SW can't use Audio API — offscreen can
 
-### Canvas/Image Processing
+### Canvas/Image Processing {#canvasimage-processing}
 - Create canvas, draw images, manipulate pixels
 - Return processed image as data URL or Blob
 
-### Clipboard Access
+### Clipboard Access {#clipboard-access}
 - Read/write clipboard in offscreen document
 - Send results back to background
 
-### Web Workers
+### Web Workers {#web-workers}
 - Offscreen can spawn Web Workers for heavy computation
 - Keeps background SW responsive
 
-## Best Practices
+## Best Practices {#best-practices}
 - Create offscreen document only when needed, close when done
 - Always check for existing document before creating
 - Use specific `reasons` — Chrome uses these for lifecycle management
 - Keep offscreen page minimal — it consumes memory
 - Store processing results with `@theluckystrike/webext-storage` if needed
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Creating without checking if one exists — throws error
 - For `AUDIO_PLAYBACK` reason, Chrome auto-closes after 30s without audio -- re-create as needed
 - Using offscreen for tasks that don't need DOM — unnecessary overhead
 - Only one offscreen document at a time — can't have multiple
 
-## Migration from MV2
+## Migration from MV2 {#migration-from-mv2}
 - MV2 background pages had DOM access by default
 - MV3: move DOM-dependent code to offscreen document
 - Add messaging layer between background SW and offscreen

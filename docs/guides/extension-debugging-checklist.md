@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 This checklist provides a systematic approach to diagnosing and fixing common Chrome extension issues. Each section covers a specific problem area with symptoms, likely causes, diagnostic steps, and fixes.
 
-## Table of Contents
+## Table of Contents {#table-of-contents}
 
 - [Manifest Issues](#manifest-issues)
 - [Service Worker Issues](#service-worker-issues)
@@ -19,9 +19,9 @@ This checklist provides a systematic approach to diagnosing and fixing common Ch
 
 ---
 
-## Manifest Issues
+## Manifest Issues {#manifest-issues}
 
-### Symptom: Extension fails to load or shows errors in chrome://extensions
+### Symptom: Extension fails to load or shows errors in chrome://extensions {#symptom-extension-fails-to-load-or-shows-errors-in-chromeextensions}
 
 **Likely Causes:**
 - Syntax errors in manifest.json
@@ -50,9 +50,9 @@ This checklist provides a systematic approach to diagnosing and fixing common Ch
 
 ---
 
-## Service Worker Issues
+## Service Worker Issues {#service-worker-issues}
 
-### Symptom: Service worker not registering or not responding to events
+### Symptom: Service worker not registering or not responding to events {#symptom-service-worker-not-registering-or-not-responding-to-events}
 
 **Likely Causes:**
 - Service worker file missing or path incorrect
@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.storage.local.set({ key: value });
 ```
 
-### Symptom: Lost state after service worker restarts
+### Symptom: Lost state after service worker restarts {#symptom-lost-state-after-service-worker-restarts}
 
 **Likely Causes:**
 - Storing state in global variables
@@ -93,9 +93,9 @@ chrome.storage.local.set({ key: value });
 
 ---
 
-## Content Script Issues
+## Content Script Issues {#content-script-issues}
 
-### Symptom: Content script not injecting or not running
+### Symptom: Content script not injecting or not running {#symptom-content-script-not-injecting-or-not-running}
 
 **Likely Causes:**
 - Incorrect match patterns in manifest
@@ -120,7 +120,7 @@ chrome.storage.local.set({ key: value });
 - Use `document_idle` instead of `document_end` for SPAs
 - Use `chrome.scripting.executeScript` for dynamic injection
 
-### Symptom: CSS conflicts with page styles
+### Symptom: CSS conflicts with page styles {#symptom-css-conflicts-with-page-styles}
 
 **Likely Causes:**
 - Global CSS selectors affecting page elements
@@ -137,9 +137,9 @@ chrome.storage.local.set({ key: value });
 
 ---
 
-## Messaging Issues
+## Messaging Issues {#messaging-issues}
 
-### Symptom: Messages not delivered or no response
+### Symptom: Messages not delivered or no response {#symptom-messages-not-delivered-or-no-response}
 
 **Likely Causes:**
 - No listener registered in destination context
@@ -165,7 +165,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Symptom: "The message port closed before a response was received"
+### Symptom: "The message port closed before a response was received" {#symptom-the-message-port-closed-before-a-response-was-received}
 
 **Likely Causes:**
 - Async handler didn't return `true` to keep channel open
@@ -178,9 +178,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Storage Issues
+## Storage Issues {#storage-issues}
 
-### Symptom: Storage quota exceeded errors
+### Symptom: Storage quota exceeded errors {#symptom-storage-quota-exceeded-errors}
 
 **Likely Causes:**
 - Storage quota exceeded (typically 10MB for local, 100KB for sync)
@@ -195,7 +195,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - Store only essential data; offload large data to IndexedDB
 - Use compression for stored strings
 
-### Symptom: sync vs local confusion
+### Symptom: sync vs local confusion {#symptom-sync-vs-local-confusion}
 
 **Likely Causes:**
 - Using chrome.storage.sync when data doesn't need to sync
@@ -212,9 +212,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## UI Issues
+## UI Issues {#ui-issues}
 
-### Symptom: Popup not showing or showing blank
+### Symptom: Popup not showing or showing blank {#symptom-popup-not-showing-or-showing-blank}
 
 **Likely Causes:**
 - Popup HTML missing or path incorrect
@@ -239,7 +239,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - Avoid inline scripts; use external JS files
 - Check CSP headers on chrome-extension:// URLs
 
-### Symptom: CSP blocking extension functionality
+### Symptom: CSP blocking extension functionality {#symptom-csp-blocking-extension-functionality}
 
 **Likely Causes:**
 - Inline scripts or styles blocked by CSP
@@ -252,13 +252,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [Debugging Extensions Guide](debugging-extensions.md) - General debugging fundamentals
 - [Advanced Debugging](advanced-debugging.md) - Deep-dive debugging techniques
 - [Service Worker Debugging](service-worker-debugging.md) - Detailed SW lifecycle debugging
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

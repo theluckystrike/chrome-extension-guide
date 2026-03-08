@@ -8,15 +8,15 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/t
 
 TypeScript brings type safety, autocompletion, and confident refactoring to Chrome extension development.
 
-## Overview
+## Overview {#overview}
 
-### Why TypeScript for Extensions
+### Why TypeScript for Extensions {#why-typescript-for-extensions}
 
 - **Type safety** — catch mismatched message shapes at compile time
 - **Autocompletion** — `chrome.tabs.query` returns fully typed `Tab[]` objects
 - **Confident refactoring** — rename fields, verify with `tsc`
 
-### Chrome API Types
+### Chrome API Types {#chrome-api-types}
 
 Install `@types/chrome` for all Chrome extension API types:
 
@@ -24,7 +24,7 @@ Install `@types/chrome` for all Chrome extension API types:
 npm install --save-dev @types/chrome
 ```
 
-## Project Setup
+## Project Setup {#project-setup}
 
 ```bash
 mkdir my-extension && cd my-extension
@@ -33,7 +33,7 @@ npm install --save-dev typescript @types/chrome esbuild
 mkdir src
 ```
 
-### tsconfig.json
+### tsconfig.json {#tsconfigjson}
 
 ```json
 {
@@ -50,9 +50,9 @@ mkdir src
 }
 ```
 
-## Build Pipeline
+## Build Pipeline {#build-pipeline}
 
-### esbuild (Recommended)
+### esbuild (Recommended) {#esbuild-recommended}
 
 ```typescript
 import * as esbuild from 'esbuild';
@@ -79,16 +79,16 @@ async function build() {
 build();
 ```
 
-## Typing Chrome APIs
+## Typing Chrome APIs {#typing-chrome-apis}
 
-### Automatic Types
+### Automatic Types {#automatic-types}
 
 ```typescript
 const tabs = await chrome.tabs.query({ active: true });
 // tabs is typed as chrome.tabs.Tab[]
 ```
 
-### Typed Message Passing
+### Typed Message Passing {#typed-message-passing}
 
 Define messages as discriminated unions:
 
@@ -109,7 +109,7 @@ chrome.runtime.onMessage.addListener((msg: AllMessages, s, reply) => {
 
 Use `@theluckystrike/webext-messaging` for simpler typed wrappers.
 
-## Typed Storage
+## Typed Storage {#typed-storage}
 
 ```typescript
 interface ExtensionSettings {
@@ -125,9 +125,9 @@ async function getSettings(): Promise<ExtensionSettings> {
 
 `@theluckystrike/webext-storage` provides typed get/set helpers.
 
-## Context-Specific Types
+## Context-Specific Types {#context-specific-types}
 
-### Content Scripts (DOM)
+### Content Scripts (DOM) {#content-scripts-dom}
 
 ```json
 { "compilerOptions": { "lib": ["ES2020", "DOM"] } }
@@ -135,13 +135,13 @@ async function getSettings(): Promise<ExtensionSettings> {
 
 Access `chrome.runtime`, `chrome.storage`—not `chrome.tabs`. Use messaging.
 
-### Service Workers (WebWorker)
+### Service Workers (WebWorker) {#service-workers-webworker}
 
 ```json
 { "compilerOptions": { "lib": ["ES2020", "WebWorker"] } }
 ```
 
-## Summary
+## Summary {#summary}
 
 1. Install `@types/chrome` for automatic Chrome API typing
 2. Use esbuild for fast builds; Vite for framework UIs
@@ -154,7 +154,7 @@ Cross-references:
 - `docs/guides/ci-cd-pipeline.md` — automated builds
 - `docs/guides/debugging-extensions.md` — debugging typed code
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

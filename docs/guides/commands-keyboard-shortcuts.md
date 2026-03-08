@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Keyboard Shortcuts & Commands Guide
 
-## Overview
+## Overview {#overview}
 - `chrome.commands` API for global and extension-scoped keyboard shortcuts
 - Define shortcuts in manifest.json `"commands"` key
 - Users can customize shortcuts at `chrome://extensions/shortcuts`
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 ```json
 {
   "commands": {
@@ -40,13 +40,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 }
 ```
 
-## Special Commands
+## Special Commands {#special-commands}
 - `_execute_action` (MV3) — opens the extension popup (equivalent to clicking toolbar icon)
 - `_execute_browser_action` (MV2) — opens the browser action popup
 - `_execute_page_action` (MV2) — opens the page action popup
 - These are built-in and don't dispatch `onCommand` events
 
-## Listening for Commands
+## Listening for Commands {#listening-for-commands}
 ```javascript
 chrome.commands.onCommand.addListener((command, tab) => {
   console.log(`Command: ${command} on tab: ${tab?.id}`);
@@ -68,7 +68,7 @@ async function toggleFeature(tab) {
 }
 ```
 
-## Querying Registered Commands
+## Querying Registered Commands {#querying-registered-commands}
 ```javascript
 chrome.commands.getAll((commands) => {
   commands.forEach(cmd => {
@@ -77,20 +77,20 @@ chrome.commands.getAll((commands) => {
 });
 ```
 
-## Key Combination Rules
-### Required modifiers
+## Key Combination Rules {#key-combination-rules}
+### Required modifiers {#required-modifiers}
 - Must include `Ctrl` or `Alt` (Windows/Linux)
 - Must include `Command` or `Alt` (Mac)
 - `Shift` is optional
 
-### Supported keys
+### Supported keys {#supported-keys}
 - `A-Z`, `0-9`
 - `Comma`, `Period`, `Home`, `End`, `PageUp`, `PageDown`
 - `Space`, `Insert`, `Delete`
 - Arrow keys: `Up`, `Down`, `Left`, `Right`
 - Media keys: `MediaNextTrack`, `MediaPlayPause`, `MediaPrevTrack`, `MediaStop`
 
-### Platform-specific keys
+### Platform-specific keys {#platform-specific-keys}
 ```json
 {
   "suggested_key": {
@@ -103,7 +103,7 @@ chrome.commands.getAll((commands) => {
 }
 ```
 
-## Global Shortcuts
+## Global Shortcuts {#global-shortcuts}
 ```json
 {
   "commands": {
@@ -119,7 +119,7 @@ chrome.commands.getAll((commands) => {
 - Limited to `Ctrl+Shift+[0-9]` combinations
 - User must explicitly enable at `chrome://extensions/shortcuts`
 
-## Storing Shortcut Preferences
+## Storing Shortcut Preferences {#storing-shortcut-preferences}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -136,21 +136,21 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Limitations
+## Limitations {#limitations}
 - Maximum 4 suggested keyboard shortcuts per extension
 - Users can add more manually at `chrome://extensions/shortcuts`
 - Some key combinations are reserved by Chrome or the OS
 - No way to programmatically change shortcuts
 - `getAll()` returns user's current bindings, not suggested defaults
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Using more than 4 `suggested_key` entries (only 4 allowed)
 - Forgetting platform-specific `mac` key (Command instead of Ctrl)
 - Not providing `description` (required for shortcuts UI)
 - Relying on specific shortcuts being available (users can change them)
 - Not handling undefined `tab` in `onCommand` callback
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
 - [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)

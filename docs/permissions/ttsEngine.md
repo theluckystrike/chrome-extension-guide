@@ -9,10 +9,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # ttsEngine Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Allows your extension to register as a text-to-speech engine that other extensions (and Chrome itself) can use via `chrome.tts.speak()`.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["ttsEngine"],
@@ -28,17 +28,17 @@ Allows your extension to register as a text-to-speech engine that other extensio
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning.
 
-## API Access (Provider Side)
+## API Access (Provider Side) {#api-access-provider-side}
 - `chrome.ttsEngine.onSpeak` — request to speak text
 - `chrome.ttsEngine.onStop` — request to stop speaking
 - `chrome.ttsEngine.onPause` — request to pause
 - `chrome.ttsEngine.onResume` — request to resume
 - `chrome.ttsEngine.onGetVoices` — request for available voices (Chrome 119+)
 
-## Implementing a TTS Engine
+## Implementing a TTS Engine {#implementing-a-tts-engine}
 ```typescript
 chrome.ttsEngine.onSpeak.addListener((utterance, options, sendTtsEvent) => {
   // utterance: string to speak
@@ -75,7 +75,7 @@ chrome.ttsEngine.onResume.addListener(() => {
 });
 ```
 
-## TTS Event Types
+## TTS Event Types {#tts-event-types}
 | Event | Description |
 |---|---|
 | `start` | Speech started |
@@ -87,7 +87,7 @@ chrome.ttsEngine.onResume.addListener(() => {
 | `cancelled` | Speech was cancelled |
 | `error` | An error occurred |
 
-## Voice Registration
+## Voice Registration {#voice-registration}
 ```json
 {
   "tts_engine": {
@@ -107,7 +107,7 @@ chrome.ttsEngine.onResume.addListener(() => {
 }
 ```
 
-## Consumer Side (Using tts permission)
+## Consumer Side (Using tts permission) {#consumer-side-using-tts-permission}
 ```typescript
 // Other extensions or your own code can use the voice
 chrome.tts.speak('Hello world', {
@@ -121,7 +121,7 @@ chrome.tts.speak('Hello world', {
 });
 ```
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const schema = defineSchema({
@@ -132,30 +132,30 @@ const schema = defineSchema({
 const storage = createStorage(schema, 'sync');
 ```
 
-## When to Use
+## When to Use {#when-to-use}
 - Custom TTS engine (AI voices, specialized pronunciation)
 - Language-specific speech synthesis
 - Accessibility tools with custom voices
 - Integration with external TTS services (ElevenLabs, Google Cloud TTS, etc.)
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If you just want to speak text — use `tts` permission with `chrome.tts.speak()`
 - If built-in voices suffice — no need for custom engine
 
-## Difference: tts vs ttsEngine
+## Difference: tts vs ttsEngine {#difference-tts-vs-ttsengine}
 | | `tts` | `ttsEngine` |
 |---|---|---|
 | Role | Consumer (speak text) | Provider (generate speech) |
 | API | `chrome.tts.speak()` | `chrome.ttsEngine.onSpeak` |
 | Use | Use existing voices | Create new voices |
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('ttsEngine');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/permissions/tts.md`
 - Guide: `docs/guides/accessibility.md`
 

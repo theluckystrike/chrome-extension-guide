@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Chrome extensions face unique performance challenges that require throttle and debounce patterns. Storage writes, API calls, DOM mutations, and message passing can overwhelm the extension if left uncontrolled. This guide covers implementations optimized for extension contexts, especially service workers.
 
-## Why Throttle and Debounce Matter in Extensions
+## Why Throttle and Debounce Matter in Extensions {#why-throttle-and-debounce-matter-in-extensions}
 
 Unlike regular web apps, extensions run in multiple contexts (popup, background, content scripts) with independent lifecycles. Uncontrolled operations can cause:
 - Excessive storage writes hitting quota limits
@@ -18,11 +18,11 @@ Unlike regular web apps, extensions run in multiple contexts (popup, background,
 - Service worker wake-ups draining battery
 - Message channel congestion between contexts
 
-## Debounce Patterns
+## Debounce Patterns {#debounce-patterns}
 
 Debounce delays execution until after a quiet period. Use when: user stops typing, series of rapid events should be batched.
 
-### Debounced Storage Writer
+### Debounced Storage Writer {#debounced-storage-writer}
 
 ```javascript
 // utils/debounce.js - Simple debounce implementation
@@ -47,7 +47,7 @@ document.querySelectorAll('input').forEach(input => {
 });
 ```
 
-### Search-as-You-Type in Popup
+### Search-as-You-Type in Popup {#search-as-you-type-in-popup}
 
 ```javascript
 // popup/search.js
@@ -61,11 +61,11 @@ document.getElementById('search').addEventListener('input', (e) => {
 });
 ```
 
-## Throttle Patterns
+## Throttle Patterns {#throttle-patterns}
 
 Throttle limits execution frequency. Use when: need regular updates but not on every event.
 
-### Throttled DOM Observations
+### Throttled DOM Observations {#throttled-dom-observations}
 
 ```javascript
 // content script - throttled DOM mutation observer
@@ -88,7 +88,7 @@ const observer = new MutationObserver(throttle((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-### Throttled Badge Updates
+### Throttled Badge Updates {#throttled-badge-updates}
 
 ```javascript
 // background script - rate-limited badge updates
@@ -104,7 +104,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-### Throttled API Polling
+### Throttled API Polling {#throttled-api-polling}
 
 ```javascript
 // background script - limited API check frequency
@@ -119,11 +119,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Service Worker Timer Considerations
+## Service Worker Timer Considerations {#service-worker-timer-considerations}
 
 Service workers have unique constraints - `setTimeout` may not fire if the worker is suspended.
 
-### Use Chrome Alarms for > 30 Second Delays
+### Use Chrome Alarms for > 30 Second Delays {#use-chrome-alarms-for-30-second-delays}
 
 ```javascript
 // ❌ setTimeout may not fire when service worker is idle
@@ -136,7 +136,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Debouncing chrome.storage.onChanged
+### Debouncing chrome.storage.onChanged {#debouncing-chromestorageonchanged}
 
 ```javascript
 // Batch rapid storage changes
@@ -152,7 +152,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-## Cross-Context Message Throttling
+## Cross-Context Message Throttling {#cross-context-message-throttling}
 
 Message passing between extension contexts needs throttling to prevent congestion.
 
@@ -185,7 +185,7 @@ class BatchedMessenger {
 }
 ```
 
-## RequestAnimationFrame for Visual Updates
+## RequestAnimationFrame for Visual Updates {#requestanimationframe-for-visual-updates}
 
 In content scripts, use `requestAnimationFrame` for smooth visual updates:
 
@@ -202,7 +202,7 @@ function scheduleUpdate(state) {
 }
 ```
 
-## Quick Reference
+## Quick Reference {#quick-reference}
 
 | Pattern | Use Case | Typical Delay |
 |---------|----------|---------------|
@@ -211,7 +211,7 @@ function scheduleUpdate(state) {
 | RAF | Visual updates | Per frame |
 | Alarms | Long delays in SW | > 30s |
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Performance Guide](../guides/performance.md)
 - [Rate Limiting Patterns](./rate-limiting.md)

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Dynamic content injection enables Chrome Extensions to inject floating widgets, toolbars, sidebars, and other UI elements directly into web pages from content scripts. This pattern is fundamental for creating rich, interactive extensions that integrate seamlessly with host pages.
 
-## Overview
+## Overview {#overview}
 
 Content scripts can inject UI elements into pages, but doing so safely requires careful consideration of:
 - Style isolation from page CSS
@@ -21,9 +21,9 @@ See also: [Content Script Isolation](./content-script-isolation.md), [Shadow DOM
 
 ---
 
-## Floating Widget Pattern
+## Floating Widget Pattern {#floating-widget-pattern}
 
-### Position Fixed Overlay
+### Position Fixed Overlay {#position-fixed-overlay}
 
 Floating widgets use `position: fixed` to remain relative to the viewport:
 
@@ -51,7 +51,7 @@ widget.textContent = '+';
 document.body.appendChild(widget);
 ```
 
-### Draggable Panel
+### Draggable Panel {#draggable-panel}
 
 ```typescript
 function makeDraggable(element: HTMLElement): void {
@@ -76,7 +76,7 @@ function makeDraggable(element: HTMLElement): void {
 
 ---
 
-## Shadow DOM for Style Isolation
+## Shadow DOM for Style Isolation {#shadow-dom-for-style-isolation}
 
 Shadow DOM prevents page CSS from affecting your injected UI:
 
@@ -121,9 +121,9 @@ function createIsolatedWidget(): HTMLElement {
 
 ---
 
-## CSS Injection Methods
+## CSS Injection Methods {#css-injection-methods}
 
-### chrome.scripting.insertCSS (Manifest V3)
+### chrome.scripting.insertCSS (Manifest V3) {#chromescriptinginsertcss-manifest-v3}
 
 ```typescript
 await chrome.scripting.insertCSS({
@@ -132,7 +132,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-### Style Element Creation
+### Style Element Creation {#style-element-creation}
 
 For dynamic styles with page-specific logic:
 
@@ -149,7 +149,7 @@ Use `chrome.scripting` for static CSS; use style elements for dynamic, runtime-g
 
 ---
 
-## Z-Index Management
+## Z-Index Management {#z-index-management}
 
 Chrome extensions should use z-index values in the safe range:
 
@@ -166,7 +166,7 @@ element.style.zIndex = String(Z_INDEX_SAFE);
 
 ---
 
-## Handling Page Navigation
+## Handling Page Navigation {#handling-page-navigation}
 
 Single-page applications (SPAs) don't trigger page loads. Use the `navigation` API or polling:
 
@@ -187,7 +187,7 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 ---
 
-## Clean Removal
+## Clean Removal {#clean-removal}
 
 Remove all injected content when the extension disables or the script unloads:
 
@@ -204,7 +204,7 @@ window.addEventListener('unload', cleanup);
 
 ---
 
-## When to Use iframe vs Direct DOM
+## When to Use iframe vs Direct DOM {#when-to-use-iframe-vs-direct-dom}
 
 | Approach | Use Case |
 |----------|----------|

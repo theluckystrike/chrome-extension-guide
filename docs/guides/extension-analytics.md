@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 Analytics helps you understand how users interact with your extension while maintaining privacy and CWS compliance.
 
-## Overview
+## Overview {#overview}
 
 Track usage patterns to improve your extension with a privacy-first approach:
 - Aggregate data only, never PII
@@ -16,7 +16,7 @@ Track usage patterns to improve your extension with a privacy-first approach:
 - Clear privacy policy disclosure
 - Opt-in consent required
 
-## What to Track
+## What to Track {#what-to-track}
 
 **Recommended:**
 - Feature usage counts (popular features)
@@ -27,9 +27,9 @@ Track usage patterns to improve your extension with a privacy-first approach:
 
 **Never track:** PII, browsing history, form inputs, email addresses, cross-site data.
 
-## Privacy-First Analytics
+## Privacy-First Analytics {#privacy-first-analytics}
 
-### Anonymous ID Generation
+### Anonymous ID Generation {#anonymous-id-generation}
 
 ```javascript
 function getAnonymousId() {
@@ -42,7 +42,7 @@ function getAnonymousId() {
 }
 ```
 
-### Opt-In Consent
+### Opt-In Consent {#opt-in-consent}
 
 ```javascript
 async function track(event, props = {}) {
@@ -61,22 +61,22 @@ async function track(event, props = {}) {
 }
 ```
 
-## Implementation Approaches
+## Implementation Approaches {#implementation-approaches}
 
-### Self-Hosted (Recommended)
+### Self-Hosted (Recommended) {#self-hosted-recommended}
 Simple fetch() to your endpoint. Full control, no third-party dependencies, CSP-compatible.
 
-### Google Analytics 4 (Measurement Protocol)
+### Google Analytics 4 (Measurement Protocol) {#google-analytics-4-measurement-protocol}
 Server-side GA4 without script injection. Send events via fetch():
 ```
 POST https://www.google-analytics.com/mp/collect?measurement_id=G-XXXXX&api_secret=SECRET
 ```
 
-### Privacy Alternatives
+### Privacy Alternatives {#privacy-alternatives}
 - Plausible, Umami, Simple Analytics - privacy-focused
 - PostHog - open-source, self-hosted
 
-## CWS Policy Compliance
+## CWS Policy Compliance {#cws-policy-compliance}
 
 **Required disclosures:** What data collected, how used, whether shared, user control, retention period.
 
@@ -92,9 +92,9 @@ POST https://www.google-analytics.com/mp/collect?measurement_id=G-XXXXX&api_secr
 - [ ] No PII collected
 - [ ] Consent obtained before tracking
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Analytics Class
+### Analytics Class {#analytics-class}
 
 ```javascript
 class Analytics {
@@ -118,7 +118,7 @@ class Analytics {
 export const analytics = new Analytics('https://api.example.com/track');
 ```
 
-### Error Reporting
+### Error Reporting {#error-reporting}
 
 ```javascript
 window.addEventListener('error', e => 
@@ -128,18 +128,18 @@ window.addEventListener('unhandledrejection', e =>
   analytics.track('error', { message: String(e.reason) }));
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Publishing Analytics](./publishing/analytics.md) - CWS insights
 - [Privacy Policy Template](./publishing/privacy-policy-template.md)
 - [Analytics Patterns](./patterns/analytics-telemetry.md)
 
-## Resources
+## Resources {#resources}
 
 - [CWS User Data Policy](https://developer.chrome.com/docs/webstore/user-data)
 - [GA4 Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/ga4)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Analytics & Telemetry](../patterns/analytics-telemetry.md)
 - [Data Privacy](../guides/chrome-extension-data-privacy.md)

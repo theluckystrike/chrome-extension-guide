@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/i
 ---
 # Identity & OAuth Guide
 
-## Overview
+## Overview {#overview}
 - `chrome.identity` API for authentication in extensions
 - Requires `"identity"` permission (cross-ref `docs/permissions/identity.md`)
 - Two main flows: Google OAuth (`getAuthToken`) and third-party OAuth (`launchWebAuthFlow`)
 
-## Google OAuth with getAuthToken
+## Google OAuth with getAuthToken {#google-oauth-with-getauthtoken}
 ```json
 // manifest.json
 {
@@ -49,7 +49,7 @@ chrome.identity.getAuthToken({ interactive: false }, (token) => {
 });
 ```
 
-## Token Management
+## Token Management {#token-management}
 ```javascript
 // Remove cached token (for logout or refresh)
 chrome.identity.removeCachedAuthToken({ token: currentToken }, () => {
@@ -70,7 +70,7 @@ chrome.identity.getProfileUserInfo({ accountStatus: 'ANY' }, (userInfo) => {
 });
 ```
 
-## Third-Party OAuth with launchWebAuthFlow
+## Third-Party OAuth with launchWebAuthFlow {#third-party-oauth-with-launchwebauthflow}
 ```javascript
 // For GitHub, Twitter, Facebook, custom OAuth providers
 function getGitHubToken() {
@@ -100,7 +100,7 @@ function getGitHubToken() {
 }
 ```
 
-## PKCE Flow (Recommended for Public Clients)
+## PKCE Flow (Recommended for Public Clients) {#pkce-flow-recommended-for-public-clients}
 ```javascript
 // Generate PKCE challenge
 async function generatePKCE() {
@@ -146,7 +146,7 @@ async function authWithPKCE() {
 }
 ```
 
-## Storing Auth State
+## Storing Auth State {#storing-auth-state}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -175,7 +175,7 @@ async function clearAuth() {
 }
 ```
 
-## Token Refresh Pattern
+## Token Refresh Pattern {#token-refresh-pattern}
 ```javascript
 async function getValidToken() {
   const { authToken, tokenExpiry, refreshToken } = await getAuth();
@@ -189,7 +189,7 @@ async function getValidToken() {
 }
 ```
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Not handling `chrome.runtime.lastError` in callbacks
 - Storing tokens in `chrome.storage.sync` (quota too small, security risk)
 - Not implementing token refresh — tokens expire
@@ -197,7 +197,7 @@ async function getValidToken() {
 - Forgetting `interactive: false` for silent auth checks
 - Not revoking tokens on uninstall (use `chrome.runtime.setUninstallURL()` to redirect to a server-side revocation endpoint)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [OAuth Identity Patterns](../patterns/oauth-identity.md)
 - [Identity API Reference](../api-reference/identity-api.md)

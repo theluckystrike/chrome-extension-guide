@@ -8,13 +8,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 Storybook builds UI components in isolation—ideal for Chrome extensions where you can develop and test without loading the full extension.
 
-## Why Storybook?
+## Why Storybook? {#why-storybook}
 
 - **Isolated Development**: Build without extension reloads
 - **Visual Testing**: Catch UI regressions early
 - **Documentation**: Auto-generate component docs
 
-## Installation
+## Installation {#installation}
 
 ```bash
 npx storybook@latest init
@@ -22,7 +22,7 @@ npx storybook@latest init
 
 Select your framework (React, Vue, Svelte).
 
-## Configuration
+## Configuration {#configuration}
 
 Create `.storybook/main.ts`:
 
@@ -38,7 +38,7 @@ const config: StorybookConfig = {
 export default config;
 ```
 
-## Mocking Chrome APIs
+## Mocking Chrome APIs {#mocking-chrome-apis}
 
 Chrome APIs aren't available in Storybook. Create a decorator in `.storybook/preview.ts`:
 
@@ -58,7 +58,7 @@ const preview: Preview = {
 export default preview;
 ```
 
-## Extension Viewport Decorator
+## Extension Viewport Decorator {#extension-viewport-decorator}
 
 Simulate popup dimensions (400x600):
 
@@ -71,7 +71,7 @@ export const popupViewport: Decorator = (Story, context) => {
 };
 ```
 
-## Popup Component Story
+## Popup Component Story {#popup-component-story}
 
 ```typescript
 import type { Meta, StoryObj } from '@storybook/react';
@@ -90,23 +90,23 @@ export const DarkMode: StoryObj<typeof PopupHeader> = {
 };
 ```
 
-## Recommended Addons
+## Recommended Addons {#recommended-addons}
 
 - **@storybook/addon-a11y** - Accessibility testing
 - **@storybook/addon-viewport** - Device simulation
 - **@storybook/addon-themes** - Theme switching
 
-## Visual Regression Testing
+## Visual Regression Testing {#visual-regression-testing}
 
 Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=YOUR_TOKEN`
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [React Setup](./chrome-extension-react-setup.md)
 - [Design System](./chrome-extension-design-system.md)
 - [Testing Strategies](./chrome-extension-testing-strategies.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Design System](../guides/chrome-extension-design-system.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)

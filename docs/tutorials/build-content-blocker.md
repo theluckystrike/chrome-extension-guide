@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Content Blocker Extension — Full Tutorial
 
-## What We're Building
+## What We're Building {#what-were-building}
 - Productivity-focused site blocker
 - Block distracting sites during work hours
 - Uses `declarativeNetRequest` for efficient blocking, `@theluckystrike/webext-storage` for block list, `chrome.alarms` for scheduling
 
-## manifest.json
+## manifest.json {#manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -30,12 +30,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 }
 ```
 
-## Step 1: Static Rules (rules.json)
+## Step 1: Static Rules (rules.json) {#step-1-static-rules-rulesjson}
 - Default blocked sites (social media, news, etc.)
 - Rule structure: id, priority, action (redirect to blocked page), condition (urlFilter)
 - Redirect to extension's `blocked.html` page
 
-## Step 2: Dynamic Rules for User-Added Sites
+## Step 2: Dynamic Rules for User-Added Sites {#step-2-dynamic-rules-for-user-added-sites}
 ```javascript
 async function addBlockedSite(domain) {
   const ruleId = await getNextRuleId();
@@ -55,19 +55,19 @@ async function addBlockedSite(domain) {
 }
 ```
 
-## Step 3: Blocked Page (blocked.html)
+## Step 3: Blocked Page (blocked.html) {#step-3-blocked-page-blockedhtml}
 - Friendly message: "This site is blocked during focus time"
 - Show which domain was blocked
 - "Take a break" timer option (5-minute bypass)
 - "Back to work" button
 
-## Step 4: Popup UI
+## Step 4: Popup UI {#step-4-popup-ui}
 - List of blocked sites with add/remove
 - Schedule: set work hours (e.g., 9 AM - 5 PM)
 - Quick toggle: enable/disable all blocking
 - Badge showing "ON"/"OFF" status
 
-## Step 5: Scheduling with chrome.alarms
+## Step 5: Scheduling with chrome.alarms {#step-5-scheduling-with-chromealarms}
 ```javascript
 // background.js
 chrome.alarms.create("startBlocking", { when: getNextWorkStart() });
@@ -79,7 +79,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 6: Enable/Disable Blocking
+## Step 6: Enable/Disable Blocking {#step-6-enabledisable-blocking}
 ```javascript
 async function enableBlocking() {
   await chrome.declarativeNetRequest.updateEnabledRulesets({
@@ -97,7 +97,7 @@ async function disableBlocking() {
 }
 ```
 
-## Step 7: Storage with @theluckystrike/webext-storage
+## Step 7: Storage with @theluckystrike/webext-storage {#step-7-storage-with-theluckystrikewebext-storage}
 ```typescript
 const storage = createStorage(defineSchema({
   blockedSites: 'string',   // JSON array
@@ -108,7 +108,7 @@ const storage = createStorage(defineSchema({
 }), 'sync');
 ```
 
-## Testing
+## Testing {#testing}
 - Add sites to block list, verify they redirect to blocked.html
 - Test scheduling — set short intervals for testing
 - Test toggle on/off

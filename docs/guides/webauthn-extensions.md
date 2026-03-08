@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/w
 ---
 # WebAuthn & FIDO2 in Chrome Extensions
 
-## Overview
+## Overview {#overview}
 
 WebAuthn (Web Authentication API) is a W3C standard that enables secure passwordless authentication using public-key cryptography. Chrome Extensions can leverage WebAuthn to implement password managers, passkey managers, and strong authentication flows. This guide covers integrating WebAuthn/FIDO2 in extension contexts.
 
@@ -16,7 +16,7 @@ Key concepts:
 - **Relying Party (RP)**: The web application that authenticates users via WebAuthn
 - **Passkeys**: WebAuthn credentials that can be synced across devices (Google, Apple, password managers)
 
-## WebAuthn in Extension Pages
+## WebAuthn in Extension Pages {#webauthn-in-extension-pages}
 
 Extensions can use the WebAuthn API directly in their HTML pages (popup, options page, tab). The API is available in extension contexts just like regular web pages.
 
@@ -31,7 +31,7 @@ if (PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable?.()) {
 }
 ```
 
-### Registering a Credential
+### Registering a Credential {#registering-a-credential}
 
 ```javascript
 async function registerCredential(userId, username) {
@@ -77,7 +77,7 @@ async function registerCredential(userId, username) {
 }
 ```
 
-### Authenticating with a Credential
+### Authenticating with a Credential {#authenticating-with-a-credential}
 
 ```javascript
 async function authenticateUser(accountId) {
@@ -106,11 +106,11 @@ async function authenticateUser(accountId) {
 }
 ```
 
-## Passkey Integration Patterns
+## Passkey Integration Patterns {#passkey-integration-patterns}
 
 Passkeys are WebAuthn credentials synced by the operating system or password manager. They enable passwordless authentication across devices.
 
-### Detecting Passkey Support
+### Detecting Passkey Support {#detecting-passkey-support}
 
 ```javascript
 async function checkPasskeySupport() {
@@ -126,7 +126,7 @@ async function checkPasskeySupport() {
 }
 ```
 
-### Conditional UI (Auto-fill)
+### Conditional UI (Auto-fill) {#conditional-ui-auto-fill}
 
 Extensions can use conditional mediation to show passkeys in autofill suggestions:
 
@@ -151,7 +151,7 @@ async function setupConditionalFill(userId) {
 }
 ```
 
-### Managing Passkeys
+### Managing Passkeys {#managing-passkeys}
 
 ```javascript
 class PasskeyManager {
@@ -188,11 +188,11 @@ class PasskeyManager {
 }
 ```
 
-## Platform vs Roaming Authenticators
+## Platform vs Roaming Authenticators {#platform-vs-roaming-authenticators}
 
 WebAuthn supports two types of authenticators:
 
-### Platform Authenticators
+### Platform Authenticators {#platform-authenticators}
 - Built into the device (Touch ID, Face ID, Windows Hello, Android fingerprint)
 - Cannot be moved between devices
 - Faster user experience (no additional hardware)
@@ -208,7 +208,7 @@ const platformOnlyOptions = {
 };
 ```
 
-### Roaming Authenticators
+### Roaming Authenticators {#roaming-authenticators}
 - External devices (YubiKey, Solo, Titan Security Key)
 - Work across multiple devices
 - Higher security (physical presence required)
@@ -224,7 +224,7 @@ const roamingOptions = {
 };
 ```
 
-### Detecting Available Authenticators
+### Detecting Available Authenticators {#detecting-available-authenticators}
 
 ```javascript
 async function detectAuthenticators() {
@@ -241,11 +241,11 @@ async function detectAuthenticators() {
 }
 ```
 
-## Extension-Based Credential Management
+## Extension-Based Credential Management {#extension-based-credential-management}
 
 Extensions can act as credential providers, managing WebAuthn credentials for multiple sites.
 
-### Storing Credentials Securely
+### Storing Credentials Securely {#storing-credentials-securely}
 
 ```javascript
 // Note: There is no chrome.storage.secure API. Extensions don't have
@@ -308,7 +308,7 @@ class CredentialStore {
 }
 ```
 
-### Credential Provider Interface
+### Credential Provider Interface {#credential-provider-interface}
 
 Extensions can provide credentials to websites using the WebAuthn credential management API:
 
@@ -332,9 +332,9 @@ async function provideCredential(rpId) {
 }
 ```
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 
-### Extension-Specific Security Concerns
+### Extension-Specific Security Concerns {#extension-specific-security-concerns}
 
 1. **Content Script Isolation**: WebAuthn calls must originate from extension pages, not content scripts
 2. **Context Verification**: Always verify the calling context
@@ -349,7 +349,7 @@ if (window.location.protocol === 'chrome-extension:') {
 }
 ```
 
-### Secure Credential Storage
+### Secure Credential Storage {#secure-credential-storage}
 
 ```javascript
 // Best practices for credential storage
@@ -399,7 +399,7 @@ class SecureCredentialManager {
 }
 ```
 
-### Input Validation and Sanitization
+### Input Validation and Sanitization {#input-validation-and-sanitization}
 
 ```javascript
 // Validate all WebAuthn inputs
@@ -428,7 +428,7 @@ function validateCredential(credential) {
 }
 ```
 
-### Transport Security
+### Transport Security {#transport-security}
 
 ```javascript
 // Enforce secure transport for credential operations
@@ -455,11 +455,11 @@ function isLocalhostSecure() {
 }
 ```
 
-## Building a Password Manager Extension with WebAuthn
+## Building a Password Manager Extension with WebAuthn {#building-a-password-manager-extension-with-webauthn}
 
 This section provides a complete example of a password manager extension using WebAuthn.
 
-### Extension Structure
+### Extension Structure {#extension-structure}
 
 ```
 password-manager/
@@ -475,7 +475,7 @@ password-manager/
     └── storage.js
 ```
 
-### Manifest Configuration
+### Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -494,7 +494,7 @@ password-manager/
 }
 ```
 
-### WebAuthn Manager Implementation
+### WebAuthn Manager Implementation {#webauthn-manager-implementation}
 
 ```javascript
 // lib/webauthn.js
@@ -573,7 +573,7 @@ export class WebAuthnManager {
 }
 ```
 
-### Storage Implementation
+### Storage Implementation {#storage-implementation}
 
 ```javascript
 // lib/storage.js
@@ -626,7 +626,7 @@ export class CredentialStorage {
 }
 ```
 
-### Popup Implementation
+### Popup Implementation {#popup-implementation}
 
 ```javascript
 // popup/popup.js
@@ -733,11 +733,11 @@ async function refreshCredentials(rpId) {
 }
 ```
 
-## Testing WebAuthn Extensions
+## Testing WebAuthn Extensions {#testing-webauthn-extensions}
 
 Testing WebAuthn in extensions requires special setup:
 
-### Using Virtual Authenticators
+### Using Virtual Authenticators {#using-virtual-authenticators}
 
 ```javascript
 // In tests, use Chrome DevTools Protocol to simulate authenticators
@@ -758,7 +758,7 @@ async function setupVirtualAuthenticator() {
 }
 ```
 
-### Mock WebAuthn for Unit Tests
+### Mock WebAuthn for Unit Tests {#mock-webauthn-for-unit-tests}
 
 ```javascript
 // Test utilities for mocking WebAuthn
@@ -788,7 +788,7 @@ export function mockWebAuthn() {
 }
 ```
 
-## Browser Compatibility
+## Browser Compatibility {#browser-compatibility}
 
 | Feature | Chrome | Firefox | Safari | Edge |
 |---------|--------|---------|--------|------|
@@ -798,7 +798,7 @@ export function mockWebAuthn() {
 | Conditional Mediation | 108+ | 122+ | 16+ | 108+ |
 | Platform Authenticator | 67+ | 60+ | 14+ | 18+ |
 
-## Conclusion
+## Conclusion {#conclusion}
 
 WebAuthn provides powerful passwordless authentication for Chrome Extensions. Key takeaways:
 
@@ -814,7 +814,7 @@ For more information, see:
 - [Chrome Web Authentication API](https://developer.chrome.com/docs/web-platform/webauthn)
 - [FIDO Alliance Standards](https://fidoalliance.org/specifications/)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [OAuth Identity](../patterns/oauth-identity.md)
 - [Security Audit](../guides/extension-security-audit.md)

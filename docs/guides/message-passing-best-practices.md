@@ -6,7 +6,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 ---
 # Message Passing Best Practices
 
-## Overview
+## Overview {#overview}
 
 Effective communication between extension components is critical for building robust Chrome extensions. This guide covers the recommended patterns for message passing, common pitfalls to avoid, and how to build type-safe, reliable messaging systems in your extension.
 
@@ -74,6 +74,8 @@ Effective communication between extension components is critical for building ro
 
 ## Choose the Right Method
 
+## Choose the Right Method {#choose-the-right-method}
+
 Chrome provides several messaging APIs, each suited for different use cases:
 
 - **One-time messages**: Use `chrome.runtime.sendMessage` for simple request-response patterns between the background service worker and content scripts or popup.
@@ -81,7 +83,7 @@ Chrome provides several messaging APIs, each suited for different use cases:
 - **Persistent connection**: Use `chrome.runtime.connect` when you need streaming or frequent messages between components. Ports maintain an open channel and handle reconnection automatically.
 - **Cross-extension**: Use `runtime.sendMessage` with the `extensionId` parameter to communicate with other extensions.
 
-## Message Structure
+## Message Structure {#message-structure}
 
 Always structure your messages consistently for maintainability and type safety:
 
@@ -105,9 +107,9 @@ export const MessageTypes = {
 
 For TypeScript projects, consider using `@theluckystrike/webext-messaging` which provides typed wrappers and reduces boilerplate.
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
-### Unchecked lastError
+### Unchecked lastError {#unchecked-lasterror}
 
 Always check `chrome.runtime.lastError` in callbacks. This is a common source of silent failures:
 
@@ -129,7 +131,7 @@ chrome.runtime.sendMessage({ type: 'PING' }, (response) => {
 
 For promise-based calls, catch rejected promises to handle errors properly. The common error "Could not establish connection. Receiving end does not exist." indicates the content script isn't loaded.
 
-### Missing return true
+### Missing return true {#missing-return-true}
 
 The `onMessage` listener MUST return `true` if you intend to send an asynchronous response:
 
@@ -157,7 +159,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 ```
 
-### Dead Listeners
+### Dead Listeners {#dead-listeners}
 
 Content script listeners die when the page navigates. This is especially problematic for SPAs:
 
@@ -165,7 +167,7 @@ Content script listeners die when the page navigates. This is especially problem
 - Check if a content script exists before sending messages using a ping-pong pattern
 - Use `chrome.runtime.onConnect` for automatic reconnection handling
 
-## Async Response Pattern
+## Async Response Pattern {#async-response-pattern}
 
 Here's a complete example of the recommended async response pattern:
 
@@ -192,7 +194,7 @@ async function getTabData(tabId) {
 }
 ```
 
-## Error Handling
+## Error Handling {#error-handling}
 
 Implement robust error handling in your messaging layer:
 
@@ -220,7 +222,7 @@ function sendMessageWithTimeout(message, timeout = 5000) {
 }
 ```
 
-## Performance
+## Performance {#performance}
 
 Keep your messaging performant:
 
@@ -229,9 +231,9 @@ Keep your messaging performant:
 - **Batch updates**: Instead of sending a message per item, collect changes and send bulk updates
 - **Consider structured clone**: Be aware of what can be passed through the messaging system
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Type-Safe Message Handler with Router
+### Type-Safe Message Handler with Router {#type-safe-message-handler-with-router}
 
 ```js
 // message-router.js
@@ -251,7 +253,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 ```
 
-### Error-Resilient SendMessage Wrapper
+### Error-Resilient SendMessage Wrapper {#error-resilient-sendmessage-wrapper}
 
 ```js
 // messaging-utils.js
@@ -273,7 +275,7 @@ export async function sendMessageSafe(message) {
 }
 ```
 
-### Port-Based Streaming Pattern
+### Port-Based Streaming Pattern {#port-based-streaming-pattern}
 
 ```js
 // background.js - Create port
@@ -293,7 +295,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Message Timeout Utility
+### Message Timeout Utility {#message-timeout-utility}
 
 ```js
 // with-timeout.js
@@ -313,13 +315,13 @@ const response = await withTimeout(
 );
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Message Passing Patterns](/reference/message-passing-patterns.md)
 - [Advanced Messaging Tutorial](/tutorials/advanced-messaging.md)
 - [Messaging Quickstart](/tutorials/messaging-quickstart.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Messaging Protocols](../patterns/extension-messaging-protocols.md)
 - [Message Passing Patterns](../reference/message-passing-patterns.md)

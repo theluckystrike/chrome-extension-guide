@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Website Statistics Extension
 
-## Overview
+## Overview {#overview}
 Build an extension that tracks time spent on websites, visit frequency, and generates daily/weekly reports with idle detection and data export.
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -22,7 +22,7 @@ Build an extension that tracks time spent on websites, visit frequency, and gene
 }
 ```
 
-## Step 2: Background Service Worker - Tab Tracking
+## Step 2: Background Service Worker - Tab Tracking {#step-2-background-service-worker-tab-tracking}
 ```javascript
 // background.js - Track active tab changes
 let currentTab = null;
@@ -55,7 +55,7 @@ async function saveTimeForCurrentTab() {
 }
 ```
 
-## Step 3: Time Tracking Logic
+## Step 3: Time Tracking Logic {#step-3-time-tracking-logic}
 ```javascript
 // Storage schema for per-domain time accumulation
 const STORAGE_KEYS = {
@@ -88,7 +88,7 @@ async function updateSiteStats(domain, duration) {
 }
 ```
 
-## Step 4: Popup - Today's Top Sites
+## Step 4: Popup - Today's Top Sites {#step-4-popup-todays-top-sites}
 ```html
 <!-- popup.html -->
 <style>
@@ -131,7 +131,7 @@ async function loadTodayStats() {
 loadTodayStats();
 ```
 
-## Step 5: Weekly Report with CSS Bar Chart
+## Step 5: Weekly Report with CSS Bar Chart {#step-5-weekly-report-with-css-bar-chart}
 ```javascript
 // Weekly report in popup or separate page
 async function getWeeklyReport() {
@@ -157,7 +157,7 @@ async function getWeeklyReport() {
 </style>
 ```
 
-## Step 6: Idle Detection
+## Step 6: Idle Detection {#step-6-idle-detection}
 ```javascript
 // Pause tracking when user is idle
 const IDLE_THRESHOLD = 60; // seconds
@@ -179,7 +179,7 @@ chrome.idle.onStateChanged.addListener(async (state) => {
 });
 ```
 
-## Step 7: Options Page - Blacklist
+## Step 7: Options Page - Blacklist {#step-7-options-page-blacklist}
 ```html
 <!-- options.html -->
 <input type="text" id="blacklist" placeholder="domain.com, example.org">
@@ -197,7 +197,7 @@ chrome.idle.onStateChanged.addListener(async (state) => {
 </script>
 ```
 
-## Step 8: Data Retention & Cleanup
+## Step 8: Data Retention & Cleanup {#step-8-data-retention-cleanup}
 ```javascript
 // Auto-cleanup old data (older than 30 days)
 chrome.alarms.create('cleanup', { periodInMinutes: 1440 }); // daily
@@ -219,7 +219,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 9: Export Data as CSV
+## Step 9: Export Data as CSV {#step-9-export-data-as-csv}
 ```javascript
 async function exportToCSV() {
   const data = await chrome.storage.local.get(['site_times', 'daily_stats']);
@@ -238,7 +238,7 @@ async function exportToCSV() {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - [Tabs API](../api-reference/tabs-api.md)
 - [Idle Detection Patterns](../patterns/idle-detection.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)

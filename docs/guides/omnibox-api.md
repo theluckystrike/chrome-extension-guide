@@ -6,13 +6,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/o
 ---
 # Omnibox API Guide
 
-## Overview
+## Overview {#overview}
 - The omnibox (address bar) can be used as a custom search/command interface
 - User types your keyword, then a space, then their query
 - Extension provides suggestions in real-time
 - Requires `"omnibox"` key in manifest.json (not a permission)
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 ```json
 {
   "omnibox": {
@@ -24,7 +24,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/o
 - Choose a short, memorable keyword
 - Only ONE keyword per extension
 
-## Handling Input
+## Handling Input {#handling-input}
 ```javascript
 // Fires as user types (after keyword + space)
 chrome.omnibox.onInputStarted.addListener(() => {
@@ -65,7 +65,7 @@ chrome.omnibox.onInputCancelled.addListener(() => {
 });
 ```
 
-## Rich Suggestions with XML Markup
+## Rich Suggestions with XML Markup {#rich-suggestions-with-xml-markup}
 ```javascript
 // Description supports limited XML for styling
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
@@ -87,7 +87,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 // <url>text</url>      — URL-styled text
 ```
 
-## Setting Default Suggestion
+## Setting Default Suggestion {#setting-default-suggestion}
 ```javascript
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
   // The default suggestion appears at the top
@@ -103,7 +103,7 @@ function escapeXml(str) {
 }
 ```
 
-## Practical Example: Command Palette
+## Practical Example: Command Palette {#practical-example-command-palette}
 ```javascript
 const COMMANDS = [
   { name: 'settings', url: chrome.runtime.getURL('options.html'), desc: 'Open settings' },
@@ -127,7 +127,7 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 });
 ```
 
-## Storing Search History
+## Storing Search History {#storing-search-history}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -154,14 +154,14 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 });
 ```
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Forgetting to escape XML in descriptions (causes rendering errors)
 - Not handling all three `disposition` values in `onInputEntered`
 - Slow suggestion callbacks (keep under 200ms — use caching)
 - Not setting a default suggestion (confuses users)
 - Using a keyword that conflicts with common URLs or search terms
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Command Palette](../patterns/command-palette.md)
 - [Commands API](../api-reference/commands-api.md)

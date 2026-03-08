@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This guide covers optimization patterns for the `content_scripts` field in `manifest.json`.
 
-## URL Targeting: matches and exclude_matches
+## URL Targeting: matches and exclude_matches {#url-targeting-matches-and-exclude-matches}
 
 The `matches` field uses [match patterns](https://developer.chrome.com/docs/extensions/mv3/match_patterns/) to define which pages load your content script.
 
@@ -26,7 +26,7 @@ The `matches` field uses [match patterns](https://developer.chrome.com/docs/exte
 - **`matches`**: Required array of URL patterns to include
 - **`exclude_matches`**: Optional array of URL patterns to exclude (takes precedence)
 
-## run_at Options
+## run_at Options {#run-at-options}
 
 Controls when the content script injects relative to page load:
 
@@ -46,7 +46,7 @@ Controls when the content script injects relative to page load:
 }
 ```
 
-## Multiple Content Script Entries
+## Multiple Content Script Entries {#multiple-content-script-entries}
 
 Define separate entries for different sites to keep scripts focused:
 
@@ -65,7 +65,7 @@ Define separate entries for different sites to keep scripts focused:
 }
 ```
 
-## CSS Injection
+## CSS Injection {#css-injection}
 
 Use the separate `css` array for stylesheet injection:
 
@@ -81,7 +81,7 @@ Use the separate `css` array for stylesheet injection:
 
 CSS loads before JS by default. Use `css` for page styling and `js` for interactivity.
 
-## all_frames Option
+## all_frames Option {#all-frames-option}
 
 - `false` (default): Inject only into top-level frame
 - `true`: Inject into all frames including iframes
@@ -96,7 +96,7 @@ CSS loads before JS by default. Use `css` for page styling and `js` for interact
 }
 ```
 
-## match_about_blank
+## match_about_blank {#match-about-blank}
 
 Injects into `about:blank` frames created by matched pages:
 
@@ -110,7 +110,7 @@ Injects into `about:blank` frames created by matched pages:
 }
 ```
 
-## world Property
+## world Property {#world-property}
 
 Controls the JavaScript execution context:
 
@@ -127,7 +127,7 @@ Controls the JavaScript execution context:
 }
 ```
 
-## Multiple JS Files
+## Multiple JS Files {#multiple-js-files}
 
 Multiple files in a single entry load in order and share the same scope:
 
@@ -140,7 +140,7 @@ Multiple files in a single entry load in order and share the same scope:
 }
 ```
 
-## Glob Patterns
+## Glob Patterns {#glob-patterns}
 
 Use `include_globs` and `exclude_globs` for finer URL control:
 
@@ -155,23 +155,23 @@ Use `include_globs` and `exclude_globs` for finer URL control:
 }
 ```
 
-## Performance Impact
+## Performance Impact {#performance-impact}
 
 Each content script entry adds overhead on matching pages:
 - Keep entries minimal and specific
 - Use precise `matches` patterns to avoid unnecessary injections
 - Consider the [scripting API](https://developer.chrome.com/docs/extensions/reference/scripting/) for optional features
 
-## Combining Static and Dynamic
+## Combining Static and Dynamic {#combining-static-and-dynamic}
 
 - **Manifest (static)**: Always-needed scripts that must be available immediately
 - **Scripting API (dynamic)**: Optional features loaded on-demand
 
 See [Dynamic Scripts](../guides/content-script-patterns.md) for implementation details.
 
-## Common Configurations
+## Common Configurations {#common-configurations}
 
-### Site-Specific
+### Site-Specific {#site-specific}
 ```json
 {
   "content_scripts": [{
@@ -181,7 +181,7 @@ See [Dynamic Scripts](../guides/content-script-patterns.md) for implementation d
 }
 ```
 
-### Broad Matching
+### Broad Matching {#broad-matching}
 ```json
 {
   "content_scripts": [{
@@ -191,7 +191,7 @@ See [Dynamic Scripts](../guides/content-script-patterns.md) for implementation d
 }
 ```
 
-### Selective Paths
+### Selective Paths {#selective-paths}
 ```json
 {
   "content_scripts": [{
@@ -202,7 +202,7 @@ See [Dynamic Scripts](../guides/content-script-patterns.md) for implementation d
 }
 ```
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Manifest Fields Reference](../reference/manifest-fields.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

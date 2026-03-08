@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # User Scripts API Patterns
 
-## Overview
+## Overview {#overview}
 
 The Chrome User Scripts API (`chrome.userScripts`) enables extensions to dynamically register and manage user-provided scripts at runtime. Unlike traditional `content_scripts` defined in the manifest, user scripts can be added, updated, and removed dynamically by users or the extension itself—similar to how Greasemonkey and Tampermonkey work.
 
@@ -15,9 +15,9 @@ This guide covers practical patterns for building user script management feature
 
 ---
 
-## Pattern 1: User Scripts API Basics
+## Pattern 1: User Scripts API Basics {#pattern-1-user-scripts-api-basics}
 
-### Understanding the User Scripts API
+### Understanding the User Scripts API {#understanding-the-user-scripts-api}
 
 The User Scripts API allows dynamic script injection with several key advantages over traditional content scripts:
 
@@ -26,7 +26,7 @@ The User Scripts API allows dynamic script injection with several key advantages
 - **MAIN world execution**: Scripts can access and be accessed by page JavaScript
 - **Isolated execution**: Scripts run in the `USER_SCRIPT` world by default, providing isolation
 
-### Required Manifest Configuration
+### Required Manifest Configuration {#required-manifest-configuration}
 
 ```json
 {
@@ -44,7 +44,7 @@ The User Scripts API allows dynamic script injection with several key advantages
 
 The `userScripts` permission is required in the `permissions` array. You'll also need appropriate `host_permissions` for the URLs where scripts should run.
 
-### Basic Registration Example
+### Basic Registration Example {#basic-registration-example}
 
 ```typescript
 // types/userScripts.ts
@@ -85,7 +85,7 @@ async function registerHelloWorldScript(): Promise<void> {
 }
 ```
 
-### Difference from Content Scripts
+### Difference from Content Scripts {#difference-from-content-scripts}
 
 | Feature | Content Scripts | User Scripts |
 |---------|-----------------|--------------|
@@ -97,9 +97,9 @@ async function registerHelloWorldScript(): Promise<void> {
 
 ---
 
-## Pattern 2: Registering User Scripts at Runtime
+## Pattern 2: Registering User Scripts at Runtime {#pattern-2-registering-user-scripts-at-runtime}
 
-### The RegisteredUserScript Interface
+### The RegisteredUserScript Interface {#the-registereduserscript-interface}
 
 ```typescript
 // types/userScriptTypes.ts
@@ -141,7 +141,7 @@ interface RegisteredUserScript {
 }
 ```
 
-### Registering Scripts with Code
+### Registering Scripts with Code {#registering-scripts-with-code}
 
 ```typescript
 // services/userScriptManager.ts
@@ -201,7 +201,7 @@ class UserScriptManager {
 }
 ```
 
-### Updating Scripts with `update()`
+### Updating Scripts with `update()` {#updating-scripts-with-update}
 
 ```typescript
 // services/userScriptUpdater.ts
@@ -280,7 +280,7 @@ class UserScriptUpdater {
 }
 ```
 
-### Unregistering Scripts
+### Unregistering Scripts {#unregistering-scripts}
 
 ```typescript
 // services/userScriptCleanup.ts
@@ -352,9 +352,9 @@ class UserScriptCleanup {
 
 ---
 
-## Pattern 3: User Script Editor UI
+## Pattern 3: User Script Editor UI {#pattern-3-user-script-editor-ui}
 
-### Options Page with Code Editor
+### Options Page with Code Editor {#options-page-with-code-editor}
 
 ```typescript
 // options/editor.ts
@@ -578,9 +578,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Pattern 4: Match Pattern Management
+## Pattern 4: Match Pattern Management {#pattern-4-match-pattern-management}
 
-### Match Pattern Validation
+### Match Pattern Validation {#match-pattern-validation}
 
 ```typescript
 // utils/matchPattern.ts
@@ -703,7 +703,7 @@ class MatchPatternValidator {
 export const matchPatternValidator = new MatchPatternValidator();
 ```
 
-### Match Pattern UI Helper
+### Match Pattern UI Helper {#match-pattern-ui-helper}
 
 ```typescript
 // components/matchPatternInput.ts
@@ -826,9 +826,9 @@ class MatchPatternInput {
 
 ---
 
-## Pattern 5: Script World Configuration
+## Pattern 5: Script World Configuration {#pattern-5-script-world-configuration}
 
-### Understanding Script Worlds
+### Understanding Script Worlds {#understanding-script-worlds}
 
 ```typescript
 // types/worldTypes.ts
@@ -873,7 +873,7 @@ async function getWorldConfiguration(): Promise<WorldConfiguration | null> {
 }
 ```
 
-### World Selection Strategy
+### World Selection Strategy {#world-selection-strategy}
 
 ```typescript
 // services/worldSelector.ts
@@ -978,7 +978,7 @@ class WorldSelector {
 export const worldSelector = new WorldSelector();
 ```
 
-### CSP Configuration
+### CSP Configuration {#csp-configuration}
 
 ```typescript
 // services/cspManager.ts
@@ -1031,9 +1031,9 @@ class CSPManager {
 
 ---
 
-## Pattern 6: User Script Libraries
+## Pattern 6: User Script Libraries {#pattern-6-user-script-libraries}
 
-### Library Injection System
+### Library Injection System {#library-injection-system}
 
 ```typescript
 // services/libraryManager.ts
@@ -1174,7 +1174,7 @@ class UserScriptLibraryManager {
 }
 ```
 
-### Shared Utility Pattern
+### Shared Utility Pattern {#shared-utility-pattern}
 
 ```typescript
 // services/sharedUtilities.ts
@@ -1295,9 +1295,9 @@ if (typeof window !== 'undefined') {
 
 ---
 
-## Pattern 7: Greasemonkey/Tampermonkey Compatibility
+## Pattern 7: Greasemonkey/Tampermonkey Compatibility {#pattern-7-greasemonkeytampermonkey-compatibility}
 
-### Userscript Metadata Block Parser
+### Userscript Metadata Block Parser {#userscript-metadata-block-parser}
 
 ```typescript
 // parsers/userscriptMetadata.ts
@@ -1470,7 +1470,7 @@ class UserscriptMetadataParser {
 export const metadataParser = new UserscriptMetadataParser();
 ```
 
-### GM_API Shim Implementation
+### GM_API Shim Implementation {#gm-api-shim-implementation}
 
 ```typescript
 // shims/gmApiShim.ts
@@ -1694,7 +1694,7 @@ function injectGMApiShim(): void {
 }
 ```
 
-### Importing .user.js Files
+### Importing .user.js Files {#importing-userjs-files}
 
 ```typescript
 // services/userscriptImporter.ts
@@ -1853,9 +1853,9 @@ class UserscriptImporter {
 
 ---
 
-## Pattern 8: User Script Lifecycle Management
+## Pattern 8: User Script Lifecycle Management {#pattern-8-user-script-lifecycle-management}
 
-### Enable/Disable Without Unregistering
+### Enable/Disable Without Unregistering {#enabledisable-without-unregistering}
 
 ```typescript
 // services/scriptLifecycle.ts
@@ -1981,7 +1981,7 @@ class UserScriptLifecycleManager {
 }
 ```
 
-### Execution Logging and Error Reporting
+### Execution Logging and Error Reporting {#execution-logging-and-error-reporting}
 
 ```typescript
 // services/executionLogger.ts
@@ -2122,7 +2122,7 @@ class UserScriptExecutionLogger {
 }
 ```
 
-### Auto-Update from Remote URLs
+### Auto-Update from Remote URLs {#auto-update-from-remote-urls}
 
 ```typescript
 // services/autoUpdater.ts
@@ -2275,7 +2275,7 @@ class UserScriptAutoUpdater {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
@@ -2288,7 +2288,7 @@ class UserScriptAutoUpdater {
 | **Pattern 7: GM Compatibility** | Userscript migration | Metadata parsing, GM_* shims | High |
 | **Pattern 8: Lifecycle** | Script state management | Enable/disable, logging, updates | High |
 
-### Key Takeaways
+### Key Takeaways {#key-takeaways}
 
 1. **Start with USER_SCRIPT world** for security; only use MAIN when page access is required
 2. **Always validate match patterns** before registration to prevent errors
@@ -2297,7 +2297,7 @@ class UserScriptAutoUpdater {
 5. **Track execution state** to provide users with enable/disable functionality
 6. **Consider CSP implications** when enabling inline scripts or external resources
 
-### Additional Resources
+### Additional Resources {#additional-resources}
 
 - [Chrome User Scripts API Reference](https://developer.chrome.com/docs/extensions/mv3/user_scripts/)
 - [Match Pattern Syntax](https://developer.chrome.com/docs/extensions/mv3/match_patterns/)

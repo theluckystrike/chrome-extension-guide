@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 A comprehensive guide to tools, utilities, and workflows that streamline Chrome extension development.
 
-## Browser Built-in Tools
+## Browser Built-in Tools {#browser-built-in-tools}
 
 Chrome provides powerful built-in tools for extension development:
 
@@ -18,7 +18,7 @@ Chrome provides powerful built-in tools for extension development:
 
 - **`chrome://serviceworker-internals`** - Advanced service worker debugging. Force updates, view push events, and troubleshoot service worker registration issues.
 
-## VS Code Extensions
+## VS Code Extensions {#vs-code-extensions}
 
 Enhance your development workflow with these VS Code extensions:
 
@@ -28,7 +28,7 @@ Enhance your development workflow with these VS Code extensions:
 
 - **Extension Test Runner** - Run extension tests directly from VS Code with integrated debugging.
 
-## CLI Tools
+## CLI Tools {#cli-tools}
 
 Command-line utilities for automation and packaging:
 
@@ -38,7 +38,7 @@ Command-line utilities for automation and packaging:
 | `crx` | Package extensions as CRX files | `npm install -g crx` |
 | `chrome-webstore-upload-cli` | Upload to Chrome Web Store | `npm install -g chrome-webstore-upload-cli` |
 
-## Build Tools Comparison
+## Build Tools Comparison {#build-tools-comparison}
 
 Choose the right build tool based on your needs:
 
@@ -51,7 +51,7 @@ Choose the right build tool based on your needs:
 
 > **Tip:** For Vite-based projects, see [Vite Extension Setup](./vite-extension-setup.md).
 
-## Boilerplate Generators
+## Boilerplate Generators {#boilerplate-generators}
 
 Jump-start your extension with these generators:
 
@@ -62,7 +62,7 @@ Jump-start your extension with these generators:
 npm create chrome-ext@latest my-extension
 ```
 
-## Type Definitions
+## Type Definitions {#type-definitions}
 
 Add type safety to your extension:
 
@@ -73,13 +73,13 @@ Add type safety to your extension:
 npm install -D @anthropic/chrome-types
 ```
 
-## Linting
+## Linting {#linting}
 
 Maintain code quality with extension-specific linting:
 
 - **`eslint-plugin-chrome-extension`** - Rules for common Chrome extension patterns and best practices.
 
-## Testing Tools
+## Testing Tools {#testing-tools}
 
 Test your extension thoroughly:
 
@@ -87,30 +87,30 @@ Test your extension thoroughly:
 - **Puppeteer** - Control Chrome programmatically for integration tests.
 - **jest-chrome`** - Mock Chrome APIs for unit testing background scripts.
 
-## Debugging Tools
+## Debugging Tools {#debugging-tools}
 
 - **Extension DevTools** - Panel in Chrome DevTools for inspecting extension state.
 - **React DevTools** / **Vue Devtools** - Works within extension popup and option pages.
 
-## Documentation Resources
+## Documentation Resources {#documentation-resources}
 
 - [Chrome Extensions API Reference](https://developer.chrome.com/docs/extensions/mv3/) - Official API docs.
 - [MDN WebExtensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions) - Cross-browser documentation.
 
-## Hot Reload Tools
+## Hot Reload Tools {#hot-reload-tools}
 
 Enable fast iteration during development:
 
 - **`crx-hotreload`** - Watch for file changes and reload extension automatically.
 - **`vite-plugin-web-extension`** - Built-in HMR for Vite-based extensions.
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Debugging Extensions](./debugging-extensions.md) - In-depth debugging techniques.
 - [Vite Extension Setup](./vite-extension-setup.md) - Configure Vite for extensions.
 - [Linting & Code Quality](./linting-code-quality.md) - Set up ESLint and Prettier.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Focus Timer (Pomodoro) Extension
 
-## Overview
+## Overview {#overview}
 Build a Pomodoro timer extension with configurable work/break intervals, site blocking during focus sessions, notifications, and session history.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -28,7 +28,7 @@ Build a Pomodoro timer extension with configurable work/break intervals, site bl
 }
 ```
 
-## Timer with chrome.alarms
+## Timer with chrome.alarms {#timer-with-chromealarms}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -55,7 +55,7 @@ async function startFocus() {
 }
 ```
 
-## Messaging
+## Messaging {#messaging}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -83,7 +83,7 @@ m.onMessage('GET_STATUS', async () => {
 });
 ```
 
-## Alarm Handlers
+## Alarm Handlers {#alarm-handlers}
 ```typescript
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'focus-end') {
@@ -116,7 +116,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Site Blocking During Focus
+## Site Blocking During Focus {#site-blocking-during-focus}
 ```typescript
 async function enableSiteBlocking() {
   const sites = JSON.parse(await storage.get('blockedSites') || '["twitter.com","reddit.com","youtube.com"]');
@@ -140,7 +140,7 @@ async function disableSiteBlocking() {
 }
 ```
 
-## Badge Countdown
+## Badge Countdown {#badge-countdown}
 ```typescript
 async function updateBadge(state: string, minutes?: number) {
   if (state === 'focus') {
@@ -157,7 +157,7 @@ async function updateBadge(state: string, minutes?: number) {
 }
 ```
 
-## Notification Actions
+## Notification Actions {#notification-actions}
 ```typescript
 chrome.notifications.onButtonClicked.addListener(async (notifId, buttonIndex) => {
   if (notifId === 'focus-done' && buttonIndex === 0) {
@@ -170,7 +170,7 @@ chrome.notifications.onButtonClicked.addListener(async (notifId, buttonIndex) =>
 });
 ```
 
-## Service Worker Restart Recovery
+## Service Worker Restart Recovery {#service-worker-restart-recovery}
 ```typescript
 chrome.runtime.onStartup.addListener(async () => {
   const state = await storage.get('timerState');
@@ -186,7 +186,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Permission: `docs/permissions/alarms.md`, `docs/permissions/declarativeNetRequest.md`
 - MV3: `docs/mv3/event-driven-architecture.md`
 - Guide: `docs/guides/notifications-guide.md`

@@ -6,11 +6,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 ---
 # End-to-End Testing Chrome Extensions with Puppeteer
 
-## Overview
+## Overview {#overview}
 
 Puppeteer provides direct control over Chromium, making it a solid choice for testing Chrome extensions. While Playwright offers better cross-browser support, Puppeteer's tight Chromium integration provides reliable extension testing capabilities.
 
-## Setup: Launching Chromium with Extension
+## Setup: Launching Chromium with Extension {#setup-launching-chromium-with-extension}
 
 Launch Chromium with your extension loaded using the `--disable-extensions-except` and `--load-extension` arguments:
 
@@ -29,7 +29,7 @@ async function launchWithExtension(extensionPath) {
 }
 ```
 
-## Getting Extension ID Programmatically
+## Getting Extension ID Programmatically {#getting-extension-id-programmatically}
 
 To access extension pages, you need the extension ID. Retrieve it from the background service worker target:
 
@@ -45,7 +45,7 @@ async function getExtensionId(browser) {
 }
 ```
 
-## Testing Popup Pages
+## Testing Popup Pages {#testing-popup-pages}
 
 Open the popup directly using the extension URL scheme:
 
@@ -66,7 +66,7 @@ test("popup displays current state", async () => {
 });
 ```
 
-## Testing Content Scripts
+## Testing Content Scripts {#testing-content-scripts}
 
 Navigate to a target page and verify injected elements:
 
@@ -86,7 +86,7 @@ test("content script injects elements", async () => {
 });
 ```
 
-## Testing Background Service Worker
+## Testing Background Service Worker {#testing-background-service-worker}
 
 Access the service worker target directly:
 
@@ -100,7 +100,7 @@ async function getBackgroundPage(browser) {
 }
 ```
 
-## Waiting Strategies
+## Waiting Strategies {#waiting-strategies}
 
 Use appropriate wait strategies for extension contexts:
 
@@ -115,7 +115,7 @@ await page.waitForFunction(() => window.extensionReady === true);
 await page.waitForNavigation({ waitUntil: "networkidle0" });
 ```
 
-## Mocking Chrome APIs
+## Mocking Chrome APIs {#mocking-chrome-apis}
 
 Mock Chrome APIs in your test environment:
 
@@ -128,7 +128,7 @@ await page.evaluateOnNewDocument(() => {
 });
 ```
 
-## CI Setup
+## CI Setup {#ci-setup}
 
 Extensions require headful mode. Configure CI accordingly:
 
@@ -140,7 +140,7 @@ xvfb-run npm test
 npm test
 ```
 
-## Puppeteer vs Playwright for Extensions
+## Puppeteer vs Playwright for Extensions {#puppeteer-vs-playwright-for-extensions}
 
 | Feature | Puppeteer | Playwright |
 |---------|-----------|------------|
@@ -149,7 +149,7 @@ npm test
 | Extension API | Direct target access | Browser context args |
 | Community support | Strong | Growing |
 
-## Test Helpers
+## Test Helpers {#test-helpers}
 
 Create reusable utilities for extension testing:
 
@@ -162,13 +162,13 @@ module.exports = {
 };
 ```
 
-## Cross-Reference
+## Cross-Reference {#cross-reference}
 
 - [Testing Extensions Overview](./testing-extensions.md)
 - [Extension Testing with Playwright](./extension-testing-with-playwright.md)
 - [CI/CD Pipeline](./ci-cd-pipeline.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Playwright Testing](../guides/extension-testing-with-playwright.md)

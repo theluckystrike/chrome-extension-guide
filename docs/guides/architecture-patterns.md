@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/a
 
 How you structure a Chrome extension determines how maintainable it will be six months from now. A simple tab-modifier can live in a single file. A full-featured productivity tool with a side panel, options page, multiple content scripts, and a service worker needs deliberate architectural decisions. This guide presents proven patterns for extensions at every scale, from single-purpose utilities to complex multi-context applications.
 
-## Table of Contents
+## Table of Contents {#table-of-contents}
 
 - [Single-Purpose Extension](#single-purpose-extension)
 - [Standard Extension](#standard-extension)
@@ -23,11 +23,11 @@ How you structure a Chrome extension determines how maintainable it will be six 
 
 ---
 
-## Single-Purpose Extension
+## Single-Purpose Extension {#single-purpose-extension}
 
 The simplest architecture: one content script, no background service worker, no popup. This pattern is appropriate for extensions that modify page appearance, inject small utilities, or read page data without needing persistent state.
 
-### Directory Structure
+### Directory Structure {#directory-structure}
 
 ```
 my-highlighter/
@@ -40,7 +40,7 @@ my-highlighter/
     icon-128.png
 ```
 
-### Manifest
+### Manifest {#manifest}
 
 ```json
 {
@@ -63,24 +63,24 @@ my-highlighter/
 }
 ```
 
-### When This Pattern Works
+### When This Pattern Works {#when-this-pattern-works}
 
 - The extension reacts only to page content (no cross-tab state).
 - No network requests to external APIs are needed.
 - No user-configurable settings beyond what CSS can handle.
 - No communication with other extension contexts is required.
 
-### Limitations
+### Limitations {#limitations}
 
 Without a service worker, you cannot use `chrome.storage`, `chrome.alarms`, declarativeNetRequest, or any API that requires a background context. If you need any of these, move to the standard pattern.
 
 ---
 
-## Standard Extension
+## Standard Extension {#standard-extension}
 
 The workhorse pattern: a popup for user interaction, a service worker for background logic, and one or more content scripts for page interaction. Most published extensions follow this structure.
 
-### Directory Structure
+### Directory Structure {#directory-structure}
 
 ```
 my-extension/
@@ -99,7 +99,7 @@ my-extension/
     icon-128.png
 ```
 
-### Communication Flow
+### Communication Flow {#communication-flow}
 
 ```
 ┌──────────┐     chrome.runtime     ┌─────────────┐
@@ -120,7 +120,7 @@ my-extension/
 
 The popup and content scripts communicate through the service worker. Direct popup-to-content-script messaging is possible via `chrome.tabs.sendMessage` from the popup, but routing through the service worker gives you a central point for logging, validation, and state management.
 
-### Manifest
+### Manifest {#manifest}
 
 ```json
 {
@@ -148,7 +148,7 @@ The popup and content scripts communicate through the service worker. Direct pop
 }
 ```
 
-### State Management
+### State Management {#state-management}
 
 In this pattern, the service worker owns the canonical state. The popup reads state on open and writes state through messages. Content scripts request state as needed:
 
@@ -178,11 +178,11 @@ chrome.storage.local.get('appState', (result) => {
 
 ---
 
-## Complex Extension
+## Complex Extension {#complex-extension}
 
 When your extension has a side panel, options page, multiple content scripts targeting different sites, and a service worker coordinating everything, the flat file structure breaks down. You need clear boundaries between features and contexts.
 
-### Directory Structure
+### Directory Structure {#directory-structure}
 
 ```
 my-complex-extension/
@@ -234,7 +234,7 @@ my-complex-extension/
   _locales/
 ```
 
-### Manifest
+### Manifest {#manifest}
 
 ```json
 {
@@ -268,7 +268,7 @@ my-complex-extension/
 }
 ```
 
-### Key Principles
+### Key Principles {#key-principles}
 
 1. **Group by context first, then by feature.** Each execution context (background, content, popup) has its own directory because they run in isolation and are bundled separately.
 
@@ -308,11 +308,11 @@ export function registerTabHandlers() {
 
 ---
 
-## Monorepo Structure
+## Monorepo Structure {#monorepo-structure}
 
 When your project includes not just the extension but also a companion website, a shared component library, or a backend API, a monorepo keeps everything in sync.
 
-### Directory Structure
+### Directory Structure {#directory-structure}
 
 ```
 project-root/
@@ -345,7 +345,7 @@ project-root/
       tsconfig.json
 ```
 
-### Workspace Configuration
+### Workspace Configuration {#workspace-configuration}
 
 ```yaml
 # pnpm-workspace.yaml
@@ -363,7 +363,7 @@ packages:
 }
 ```
 
-### Shared Code Between Extension and Web App
+### Shared Code Between Extension and Web App {#shared-code-between-extension-and-web-app}
 
 The `shared` package contains types and utilities used by both the extension and the web app. This ensures API types stay in sync:
 
@@ -400,7 +400,7 @@ async function fetchTasks(): Promise<Task[]> {
 }
 ```
 
-### Build Considerations
+### Build Considerations {#build-considerations}
 
 The extension package needs its own bundler configuration that produces files Chrome can load. The shared package should be built as a library (or used as TypeScript source via project references):
 
@@ -420,11 +420,11 @@ The extension package needs its own bundler configuration that produces files Ch
 
 ---
 
-## Feature-Based Directory Organization
+## Feature-Based Directory Organization {#feature-based-directory-organization}
 
 As extensions grow, organizing by feature rather than by file type prevents the "utils folder with 40 files" problem.
 
-### Comparison: Type-Based vs Feature-Based
+### Comparison: Type-Based vs Feature-Based {#comparison-type-based-vs-feature-based}
 
 **Type-based (avoid for large extensions):**
 ```
@@ -471,7 +471,7 @@ src/
       messaging.js
 ```
 
-### Benefits of Feature-Based Organization
+### Benefits of Feature-Based Organization {#benefits-of-feature-based-organization}
 
 - **Locality**: everything related to a feature is in one place. When you work on "tasks", you open one directory.
 - **Deletion**: removing a feature means deleting one directory, not hunting across five folders.
@@ -480,11 +480,11 @@ src/
 
 ---
 
-## Shared Types Across Contexts
+## Shared Types Across Contexts {#shared-types-across-contexts}
 
 TypeScript makes extension development dramatically safer by catching message type mismatches, storage key typos, and API contract violations at compile time.
 
-### Defining Message Types
+### Defining Message Types {#defining-message-types}
 
 ```typescript
 // src/shared/message-types.ts
@@ -519,7 +519,7 @@ export interface Settings {
 }
 ```
 
-### Type-Safe Message Sending
+### Type-Safe Message Sending {#type-safe-message-sending}
 
 ```typescript
 // src/shared/messaging.ts
@@ -542,7 +542,7 @@ const newTask = await sendMessage({
 // newTask is typed as Task
 ```
 
-### Type-Safe Storage
+### Type-Safe Storage {#type-safe-storage}
 
 ```typescript
 // src/shared/storage-types.ts
@@ -572,11 +572,11 @@ export async function setStorage<K extends keyof StorageSchema>(
 
 ---
 
-## Dependency Injection for Chrome API Mocking
+## Dependency Injection for Chrome API Mocking {#dependency-injection-for-chrome-api-mocking}
 
 Chrome APIs are only available in the extension runtime, making unit tests difficult. Dependency injection solves this by decoupling your logic from the Chrome API surface.
 
-### The Problem
+### The Problem {#the-problem}
 
 ```typescript
 // This function is untestable outside Chrome
@@ -589,7 +589,7 @@ async function saveBookmark(url: string, title: string) {
 }
 ```
 
-### The Solution: Inject the API
+### The Solution: Inject the API {#the-solution-inject-the-api}
 
 ```typescript
 // src/shared/chrome-api.ts
@@ -622,7 +622,7 @@ export const chromeApi: ChromeApi = {
 };
 ```
 
-### Using the Injected API
+### Using the Injected API {#using-the-injected-api}
 
 ```typescript
 // src/features/bookmarks/bookmarkService.ts
@@ -646,7 +646,7 @@ export function createBookmarkService(api: ChromeApi) {
 }
 ```
 
-### Testing with a Mock
+### Testing with a Mock {#testing-with-a-mock}
 
 ```typescript
 // tests/bookmarkService.test.ts
@@ -695,11 +695,11 @@ test('saveBookmark creates new bookmark when none exists', async () => {
 
 ---
 
-## Event Bus Pattern for Cross-Context Communication
+## Event Bus Pattern for Cross-Context Communication {#event-bus-pattern-for-cross-context-communication}
 
 As extensions grow, point-to-point messaging between contexts becomes tangled. An event bus provides a centralized, decoupled communication pattern.
 
-### The Event Bus
+### The Event Bus {#the-event-bus}
 
 ```typescript
 // src/shared/event-bus.ts
@@ -731,7 +731,7 @@ export class EventBus {
 }
 ```
 
-### Cross-Context Event Bus Using Chrome Messaging
+### Cross-Context Event Bus Using Chrome Messaging {#cross-context-event-bus-using-chrome-messaging}
 
 The basic event bus works within a single context. To make it work across contexts (background, popup, content script), bridge it with Chrome messaging:
 
@@ -792,7 +792,7 @@ bus.on('task:created', (task) => {
 bus.emit('task:created', { id: '1', title: 'New task' });
 ```
 
-### Broadcasting to Content Scripts
+### Broadcasting to Content Scripts {#broadcasting-to-content-scripts}
 
 Content scripts do not receive `chrome.runtime.sendMessage` broadcasts. The service worker must explicitly forward events to tabs:
 
@@ -825,11 +825,11 @@ export function setupBusBridge(bus: CrossContextBus) {
 
 ---
 
-## Plugin/Module System for Extensible Extensions
+## Plugin/Module System for Extensible Extensions {#pluginmodule-system-for-extensible-extensions}
 
 Some extensions benefit from an internal plugin architecture -- think of a content blocker with multiple filter modules, or a developer tool with pluggable panels. A module system lets you add features without modifying core code.
 
-### Defining a Plugin Interface
+### Defining a Plugin Interface {#defining-a-plugin-interface}
 
 ```typescript
 // src/shared/plugin-types.ts
@@ -863,7 +863,7 @@ export interface PluginContext {
 }
 ```
 
-### Plugin Manager
+### Plugin Manager {#plugin-manager}
 
 ```typescript
 // src/background/plugin-manager.ts
@@ -923,7 +923,7 @@ export class PluginManager {
 }
 ```
 
-### Example Plugin
+### Example Plugin {#example-plugin}
 
 ```typescript
 // src/plugins/word-counter.ts
@@ -951,7 +951,7 @@ export const wordCounterPlugin: ExtensionPlugin = {
 };
 ```
 
-### Loading Plugins
+### Loading Plugins {#loading-plugins}
 
 ```typescript
 // src/background/index.js
@@ -983,11 +983,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## When to Split Into Multiple Extensions
+## When to Split Into Multiple Extensions {#when-to-split-into-multiple-extensions}
 
 Sometimes one extension is not the right answer. Here are the signals that you should split your project into separate extensions.
 
-### Split When
+### Split When {#split-when}
 
 **Permissions diverge significantly.** If half your features need `<all_urls>` access and the other half only need `activeTab`, users who want the limited features are forced to grant broad permissions. Two extensions with different permission sets let users choose their comfort level.
 
@@ -999,7 +999,7 @@ Sometimes one extension is not the right answer. Here are the signals that you s
 
 **Update cadences differ.** If your content scripts are stable but your popup UI changes weekly, separate extensions prevent unnecessary content script re-injection on every update.
 
-### Keep Together When
+### Keep Together When {#keep-together-when}
 
 **Features share state.** If the side panel needs data from the content script and the popup controls both, splitting means you need `externally_connectable` and cross-extension messaging, which adds complexity.
 
@@ -1007,7 +1007,7 @@ Sometimes one extension is not the right answer. Here are the signals that you s
 
 **Permissions overlap heavily.** If both halves need the same permissions, splitting forces the user to grant the same permissions twice.
 
-### Cross-Extension Communication
+### Cross-Extension Communication {#cross-extension-communication}
 
 If you do split, extensions can communicate using `chrome.runtime.sendMessage` with an explicit extension ID:
 
@@ -1041,7 +1041,7 @@ chrome.runtime.onMessageExternal.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 The right architecture depends on your extension's scope:
 
@@ -1062,7 +1062,7 @@ Regardless of scale, these principles apply:
 
 Start simple. Refactor toward complexity only when the code demands it.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)

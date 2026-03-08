@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Migration Wizard Pattern
 
-## Overview
+## Overview {#overview}
 
 Migrate user data between extension versions when storage schema changes. Define ordered migrations that run sequentially from current version to latest.
 
@@ -15,7 +15,7 @@ Migrate user data between extension versions when storage schema changes. Define
 
 ---
 
-## When Needed
+## When Needed {#when-needed}
 
 - Renaming keys or restructuring storage
 - MV2 to MV3 upgrade
@@ -24,7 +24,7 @@ Migrate user data between extension versions when storage schema changes. Define
 
 ---
 
-## Migration Runner
+## Migration Runner {#migration-runner}
 
 ```typescript
 // lib/migration-runner.ts
@@ -70,7 +70,7 @@ export const runner = new Runner();
 
 ---
 
-## Defining Migrations
+## Defining Migrations {#defining-migrations}
 
 ```typescript
 // migrations.ts
@@ -93,7 +93,7 @@ runner.register({ version: 2, name: "restructure",
 
 ---
 
-## Running on Update
+## Running on Update {#running-on-update}
 
 ```typescript
 // background.ts
@@ -111,7 +111,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 ---
 
-## Error Handling
+## Error Handling {#error-handling}
 
 - **Backup** before each migration (in `__backup`)
 - **Rollback** on failure from backup

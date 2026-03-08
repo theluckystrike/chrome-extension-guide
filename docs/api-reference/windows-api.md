@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.windows` API lets you create, modify, query, and monitor browser windows. It works closely with the [Tabs API](tabs-api.md) — every tab lives inside a window.
 
-## Permissions
+## Permissions {#permissions}
 
 No special permission is required to use `chrome.windows` methods. However, the `tabs` permission is needed to access `url`, `title`, and `favIconUrl` on the `Tab` objects returned in `window.tabs`.
 
-## Window Object
+## Window Object {#window-object}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -30,9 +30,9 @@ No special permission is required to use `chrome.windows` methods. However, the 
 | `alwaysOnTop` | `boolean` | Whether the window is always on top |
 | `sessionId` | `string \| undefined` | Session ID for restored windows |
 
-## Core Methods
+## Core Methods {#core-methods}
 
-### chrome.windows.get(windowId, queryOptions?)
+### chrome.windows.get(windowId, queryOptions?) {#chromewindowsgetwindowid-queryoptions}
 
 Get a specific window by ID.
 
@@ -50,7 +50,7 @@ const win = await chrome.windows.get(windowId, {
 });
 ```
 
-### chrome.windows.getCurrent(queryOptions?)
+### chrome.windows.getCurrent(queryOptions?) {#chromewindowsgetcurrentqueryoptions}
 
 Get the window that contains the calling script (popup, options page, etc.).
 
@@ -60,7 +60,7 @@ const current = await chrome.windows.getCurrent({ populate: true });
 console.log(`Current window has ${current.tabs!.length} tabs`);
 ```
 
-### chrome.windows.getLastFocused(queryOptions?)
+### chrome.windows.getLastFocused(queryOptions?) {#chromewindowsgetlastfocusedqueryoptions}
 
 Get the most recently focused window.
 
@@ -69,7 +69,7 @@ const focused = await chrome.windows.getLastFocused();
 console.log("Last focused window:", focused.id);
 ```
 
-### chrome.windows.getAll(queryOptions?)
+### chrome.windows.getAll(queryOptions?) {#chromewindowsgetallqueryoptions}
 
 Get all open browser windows.
 
@@ -85,7 +85,7 @@ const normalWindows = await chrome.windows.getAll({
 });
 ```
 
-### chrome.windows.create(createData?)
+### chrome.windows.create(createData?) {#chromewindowscreatecreatedata}
 
 Open a new browser window.
 
@@ -132,7 +132,7 @@ const win = await chrome.windows.create({
 
 **CreateData properties:** `url` (string or string[]), `tabId`, `left`, `top`, `width`, `height`, `focused`, `incognito`, `type`, `state`, `setSelfAsOpener`.
 
-### chrome.windows.update(windowId, updateInfo)
+### chrome.windows.update(windowId, updateInfo) {#chromewindowsupdatewindowid-updateinfo}
 
 Modify an existing window.
 
@@ -160,7 +160,7 @@ await chrome.windows.update(windowId, { state: "fullscreen" });
 
 **UpdateInfo properties:** `left`, `top`, `width`, `height`, `focused`, `drawAttention`, `state`.
 
-### chrome.windows.remove(windowId)
+### chrome.windows.remove(windowId) {#chromewindowsremovewindowid}
 
 Close a window and all its tabs.
 
@@ -168,13 +168,13 @@ Close a window and all its tabs.
 await chrome.windows.remove(windowId);
 ```
 
-## Special Constants
+## Special Constants {#special-constants}
 
-### chrome.windows.WINDOW_ID_NONE
+### chrome.windows.WINDOW_ID_NONE {#chromewindowswindow-id-none}
 
 Value: `-1`. Indicates that no window is focused (e.g. all Chrome windows are minimized or another app is in focus).
 
-### chrome.windows.WINDOW_ID_CURRENT
+### chrome.windows.WINDOW_ID_CURRENT {#chromewindowswindow-id-current}
 
 Value: `-2`. Refers to the window executing the current code. Useful in `chrome.windows.get()`.
 
@@ -182,9 +182,9 @@ Value: `-2`. Refers to the window executing the current code. Useful in `chrome.
 const current = await chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT);
 ```
 
-## Events
+## Events {#events}
 
-### chrome.windows.onCreated
+### chrome.windows.onCreated {#chromewindowsoncreated}
 
 ```ts
 chrome.windows.onCreated.addListener((window) => {
@@ -198,7 +198,7 @@ chrome.windows.onCreated.addListener(
 );
 ```
 
-### chrome.windows.onRemoved
+### chrome.windows.onRemoved {#chromewindowsonremoved}
 
 ```ts
 chrome.windows.onRemoved.addListener((windowId) => {
@@ -206,7 +206,7 @@ chrome.windows.onRemoved.addListener((windowId) => {
 });
 ```
 
-### chrome.windows.onFocusChanged
+### chrome.windows.onFocusChanged {#chromewindowsonfocuschanged}
 
 Fires when the focused window changes. Fires frequently — use it carefully.
 
@@ -220,7 +220,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 });
 ```
 
-### chrome.windows.onBoundsChanged
+### chrome.windows.onBoundsChanged {#chromewindowsonboundschanged}
 
 Fires when a window is resized or moved.
 
@@ -230,7 +230,7 @@ chrome.windows.onBoundsChanged.addListener((window) => {
 });
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Multi-window management from a popup or dashboard:
 
@@ -277,7 +277,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Persist window layouts and restore them:
 
@@ -339,9 +339,9 @@ async function restoreLayout(name: string) {
 }
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Split screen — open two windows side by side
+### Split screen — open two windows side by side {#split-screen-open-two-windows-side-by-side}
 
 ```ts
 async function splitScreen(leftUrl: string, rightUrl: string) {
@@ -361,13 +361,13 @@ async function splitScreen(leftUrl: string, rightUrl: string) {
 }
 ```
 
-### Move a tab to a new window
+### Move a tab to a new window {#move-a-tab-to-a-new-window}
 
 ```ts
 const win = await chrome.windows.create({ tabId: existingTabId });
 ```
 
-### Check if any window is focused
+### Check if any window is focused {#check-if-any-window-is-focused}
 
 ```ts
 chrome.windows.onFocusChanged.addListener((windowId) => {
@@ -375,7 +375,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 });
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 1. **`window.tabs` is only populated** when you pass `{ populate: true }` in the query options. Otherwise `tabs` will be `undefined`.
 
@@ -389,7 +389,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 6. **Window IDs are not stable** across browser sessions. Do not persist them.
 
-## Related
+## Related {#related}
 
 - [Tabs API](tabs-api.md)
 - [tabs permission](../permissions/tabs.md)

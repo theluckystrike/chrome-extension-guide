@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Building Chrome Extensions with Svelte
 
-## Overview
+## Overview {#overview}
 
 Svelte compiles components into efficient imperative code with no virtual DOM overhead, making it ideal for Chrome extensions where bundle size and startup speed matter. Popup windows, side panels, and content script overlays all benefit from Svelte's small footprint. This guide covers eight practical patterns for building production extensions with Svelte 5 and Vite.
 
 ---
 
-## Pattern 1: Project Structure for Svelte 5 + Chrome Extension
+## Pattern 1: Project Structure for Svelte 5 + Chrome Extension {#pattern-1-project-structure-for-svelte-5-chrome-extension}
 
 Organize your project so each extension context has its own entry point while sharing components and utilities:
 
@@ -73,7 +73,7 @@ mount(App, { target: document.getElementById("app")! });
 
 ---
 
-## Pattern 2: Vite Configuration for Multiple Entry Points
+## Pattern 2: Vite Configuration for Multiple Entry Points {#pattern-2-vite-configuration-for-multiple-entry-points}
 
 Configure Vite to build popup, options, side panel, background, and content script in a single pass:
 
@@ -147,7 +147,7 @@ export default defineConfig({
 
 ---
 
-## Pattern 3: Svelte Stores Backed by chrome.storage
+## Pattern 3: Svelte Stores Backed by chrome.storage {#pattern-3-svelte-stores-backed-by-chromestorage}
 
 Create writable stores that automatically sync with `chrome.storage` so UI reacts to changes from any context:
 
@@ -228,7 +228,7 @@ The `skipNextSync` flag prevents a write loop: without it, a storage change woul
 
 ---
 
-## Pattern 4: Shared Components Across Popup, Options, and Side Panel
+## Pattern 4: Shared Components Across Popup, Options, and Side Panel {#pattern-4-shared-components-across-popup-options-and-side-panel}
 
 Build reusable components using Svelte 5's `$props()` and `$bindable()` runes:
 
@@ -296,7 +296,7 @@ Use the same component in every UI context:
 
 ---
 
-## Pattern 5: Content Script Svelte Mounting with Shadow DOM
+## Pattern 5: Content Script Svelte Mounting with Shadow DOM {#pattern-5-content-script-svelte-mounting-with-shadow-dom}
 
 Mount Svelte inside a Shadow DOM to isolate from host page styles:
 
@@ -369,7 +369,7 @@ Svelte's default `css: "injected"` mode appends styles to `document.head`, which
 
 ---
 
-## Pattern 6: Reactive Messaging with Svelte Stores + chrome.runtime.onMessage
+## Pattern 6: Reactive Messaging with Svelte Stores + chrome.runtime.onMessage {#pattern-6-reactive-messaging-with-svelte-stores-chromeruntimeonmessage}
 
 Bridge Chrome's message-passing API with Svelte's reactivity:
 
@@ -436,7 +436,7 @@ export function messageBridge<T extends Record<string, unknown>>(
 
 ---
 
-## Pattern 7: Svelte Transitions and Animations in Popup UI
+## Pattern 7: Svelte Transitions and Animations in Popup UI {#pattern-7-svelte-transitions-and-animations-in-popup-ui}
 
 Svelte's built-in transitions create polished UIs with zero additional dependencies:
 
@@ -491,7 +491,7 @@ For popup UIs with tight rendering budgets, prefer `fade` and `slide` over `fly`
 
 ---
 
-## Pattern 8: Production Build, Tree-Shaking, and Bundle Optimization
+## Pattern 8: Production Build, Tree-Shaking, and Bundle Optimization {#pattern-8-production-build-tree-shaking-and-bundle-optimization}
 
 Optimize your Svelte extension for the Chrome Web Store:
 
@@ -529,7 +529,7 @@ export default defineConfig(({ mode }) => ({
 }));
 ```
 
-### Typical Bundle Sizes
+### Typical Bundle Sizes {#typical-bundle-sizes}
 
 | Context | Unoptimized | Optimized |
 |---------|------------|-----------|
@@ -543,7 +543,7 @@ Key optimizations: target `chrome120` to skip legacy polyfills, strip source map
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | What It Solves |
 |---------|---------------|

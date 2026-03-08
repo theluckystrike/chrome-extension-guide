@@ -9,27 +9,27 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # declarativeContent Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.declarativeContent` API for showing/hiding your extension's action icon based on page content — without needing to read page data.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["declarativeContent"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning. This is a key advantage: it doesn't require host permissions.
 
-## API Access
+## API Access {#api-access}
 - `chrome.declarativeContent.onPageChanged` — rule-based event
 - Rules consist of **conditions** (`PageStateMatcher`) and **actions** (`ShowAction`, `SetIcon`, `RequestContentScript`)
 
-## Core Concept
+## Core Concept {#core-concept}
 Instead of reading every page and deciding whether to show your icon, you declare rules that Chrome evaluates internally — no extension wake-up needed.
 
-## Basic Usage: Show Action on Matching Pages
+## Basic Usage: Show Action on Matching Pages {#basic-usage-show-action-on-matching-pages}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   // First, disable the action by default
@@ -51,9 +51,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## PageStateMatcher Conditions
+## PageStateMatcher Conditions {#pagestatematcher-conditions}
 
-### URL Matching
+### URL Matching {#url-matching}
 ```typescript
 // Match by host
 new chrome.declarativeContent.PageStateMatcher({
@@ -81,7 +81,7 @@ new chrome.declarativeContent.PageStateMatcher({
 });
 ```
 
-### CSS Matching
+### CSS Matching {#css-matching}
 ```typescript
 // Show action only when page has a video element
 new chrome.declarativeContent.PageStateMatcher({
@@ -100,7 +100,7 @@ new chrome.declarativeContent.PageStateMatcher({
 });
 ```
 
-## Multiple Rules
+## Multiple Rules {#multiple-rules}
 ```typescript
 chrome.declarativeContent.onPageChanged.addRules([
   {
@@ -120,15 +120,15 @@ chrome.declarativeContent.onPageChanged.addRules([
 ]);
 ```
 
-## Actions Available
+## Actions Available {#actions-available}
 
-### ShowAction
+### ShowAction {#showaction}
 Shows the extension's action icon (enables it).
 ```typescript
 new chrome.declarativeContent.ShowAction()
 ```
 
-### SetIcon
+### SetIcon {#seticon}
 Changes the icon dynamically.
 ```typescript
 new chrome.declarativeContent.SetIcon({
@@ -136,7 +136,7 @@ new chrome.declarativeContent.SetIcon({
 })
 ```
 
-### RequestContentScript
+### RequestContentScript {#requestcontentscript}
 Injects a content script on matching pages.
 ```typescript
 new chrome.declarativeContent.RequestContentScript({
@@ -145,7 +145,7 @@ new chrome.declarativeContent.RequestContentScript({
 })
 ```
 
-## Storage Integration
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -169,7 +169,7 @@ async function updateRules() {
 }
 ```
 
-## Comparison with tabs.onUpdated
+## Comparison with tabs.onUpdated {#comparison-with-tabsonupdated}
 | Feature | declarativeContent | tabs.onUpdated |
 |---|---|---|
 | Permission warning | None | "Read your browsing history" (with tabs) |
@@ -177,23 +177,23 @@ async function updateRules() {
 | CPU usage | Minimal | Per-navigation |
 | Flexibility | URL/CSS patterns only | Full programmatic control |
 
-## When to Use
+## When to Use {#when-to-use}
 - Show/hide action icon based on current page
 - Enable extension only on specific sites
 - No-permission alternative to checking URLs via `tabs`
 - Performance-sensitive extensions
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If you need to read page content — use content scripts
 - If you need complex logic — use `tabs.onUpdated` with `activeTab`
 - For dynamic UI beyond show/hide — limited actions available
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('declarativeContent');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/declarative-content.md`
 - Related: `docs/permissions/activeTab.md`, `docs/permissions/tabs.md`

@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Desktop Capture API Patterns
 
-## Overview
+## Overview {#overview}
 
 Chrome's `chrome.desktopCapture` API enables extensions to capture screen content, windows, and tabs. This guide covers eight production-ready patterns for screen recording, screenshots, window picking, audio capture, live preview, WebRTC streaming, and privacy-safe implementation.
 
 ---
 
-## Required Permissions
+## Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -28,7 +28,7 @@ The `desktopCapture` permission is required in the manifest. Note that this perm
 
 ---
 
-## Pattern 1: DesktopCapture API Basics
+## Pattern 1: DesktopCapture API Basics {#pattern-1-desktopcapture-api-basics}
 
 The `chrome.desktopCapture.chooseDesktopMedia()` method displays a system picker UI where users select what to share:
 
@@ -96,7 +96,7 @@ Key points:
 
 ---
 
-## Pattern 2: Screen Recording Extension
+## Pattern 2: Screen Recording Extension {#pattern-2-screen-recording-extension}
 
 Recording screen capture to a file requires combining desktop capture with the MediaRecorder API in an offscreen document:
 
@@ -265,7 +265,7 @@ async function saveRecording(blob: Blob, filename: string): Promise<void> {
 
 ---
 
-## Pattern 3: Screenshot from Desktop Capture
+## Pattern 3: Screenshot from Desktop Capture {#pattern-3-screenshot-from-desktop-capture}
 
 Capture a single frame from a video stream:
 
@@ -405,7 +405,7 @@ async function captureWithOptions(options: ScreenshotOptions): Promise<Blob> {
 
 ---
 
-## Pattern 4: Window Picker UI
+## Pattern 4: Window Picker UI {#pattern-4-window-picker-ui}
 
 Configure the picker to filter to specific source types:
 
@@ -497,7 +497,7 @@ document.getElementById("pick-screen-only")!.addEventListener("click", async () 
 
 ---
 
-## Pattern 5: Audio Capture
+## Pattern 5: Audio Capture {#pattern-5-audio-capture}
 
 Capturing system audio or tab audio requires specific constraints:
 
@@ -615,7 +615,7 @@ async function captureWithAudio(sourceTypes: chrome.desktopCapture.DesktopCaptur
 
 ---
 
-## Pattern 6: Live Preview
+## Pattern 6: Live Preview {#pattern-6-live-preview}
 
 Display captured content in the extension popup or a floating PiP window:
 
@@ -776,7 +776,7 @@ async function setupSidePanelPreview(sidePanel: chrome.sidePanel) {
 
 ---
 
-## Pattern 7: Streaming to WebRTC
+## Pattern 7: Streaming to WebRTC {#pattern-7-streaming-to-webrtc}
 
 Broadcast captured content to remote peers using WebRTC:
 
@@ -961,7 +961,7 @@ document.getElementById("stop-stream")!.addEventListener("click", () => {
 
 ---
 
-## Pattern 8: Permission and Privacy Patterns
+## Pattern 8: Permission and Privacy Patterns {#pattern-8-permission-and-privacy-patterns}
 
 Privacy-safe implementation with consent indicators and auto-stop:
 
@@ -1137,7 +1137,7 @@ const activeStreams = new Map<number, MediaStream>();
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|

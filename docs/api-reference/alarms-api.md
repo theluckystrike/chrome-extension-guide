@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.alarms` API lets you schedule code to run periodically or at a specified time. In MV3, alarms are the primary way to perform background work since service workers can be terminated at any time — `setTimeout` and `setInterval` are unreliable.
 
-## Permissions
+## Permissions {#permissions}
 
 ```json
 {
@@ -21,7 +21,7 @@ No user-facing warning. This is a low-sensitivity permission.
 
 See the [alarms permission reference](../permissions/alarms.md) for details.
 
-## Why Use Alarms Instead of setTimeout/setInterval
+## Why Use Alarms Instead of setTimeout/setInterval {#why-use-alarms-instead-of-settimeoutsetinterval}
 
 In Manifest V3, the background service worker can be terminated after ~30 seconds of inactivity. This means:
 
@@ -33,7 +33,7 @@ In Manifest V3, the background service worker can be terminated after ~30 second
 
 Alarms are persisted by Chrome and will fire even if the service worker was terminated and restarted.
 
-## Alarm Object
+## Alarm Object {#alarm-object}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -41,9 +41,9 @@ Alarms are persisted by Chrome and will fire even if the service worker was term
 | `scheduledTime` | `number` | When the alarm will fire next (ms since epoch) |
 | `periodInMinutes` | `number \| undefined` | Repeat interval (absent for one-shot alarms) |
 
-## Core Methods
+## Core Methods {#core-methods}
 
-### chrome.alarms.create(name?, alarmInfo)
+### chrome.alarms.create(name?, alarmInfo) {#chromealarmscreatename-alarminfo}
 
 Create a named alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
@@ -89,7 +89,7 @@ await chrome.alarms.create("frequent", {
 
 You must specify either `when` or `delayInMinutes` (not both). `periodInMinutes` is optional and makes the alarm repeat.
 
-### chrome.alarms.get(name?)
+### chrome.alarms.get(name?) {#chromealarmsgetname}
 
 Get a specific alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
@@ -103,7 +103,7 @@ if (alarm) {
 }
 ```
 
-### chrome.alarms.getAll()
+### chrome.alarms.getAll() {#chromealarmsgetall}
 
 Get all active alarms.
 
@@ -114,7 +114,7 @@ alarms.forEach((alarm) => {
 });
 ```
 
-### chrome.alarms.clear(name?)
+### chrome.alarms.clear(name?) {#chromealarmsclearname}
 
 Delete a specific alarm. The `name` parameter is optional and defaults to the empty string `""`.
 
@@ -123,7 +123,7 @@ const wasCleared = await chrome.alarms.clear("sync");
 console.log(wasCleared ? "Alarm removed" : "Alarm not found");
 ```
 
-### chrome.alarms.clearAll()
+### chrome.alarms.clearAll() {#chromealarmsclearall}
 
 Delete all alarms.
 
@@ -131,9 +131,9 @@ Delete all alarms.
 const wasCleared = await chrome.alarms.clearAll();
 ```
 
-## Events
+## Events {#events}
 
-### chrome.alarms.onAlarm
+### chrome.alarms.onAlarm {#chromealarmsonalarm}
 
 The only event — fires when any alarm triggers.
 
@@ -155,7 +155,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Manage alarms from a popup or options page:
 
@@ -230,7 +230,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Periodic data sync pattern:
 
@@ -287,9 +287,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Initialize alarms on install and startup
+### Initialize alarms on install and startup {#initialize-alarms-on-install-and-startup}
 
 ```ts
 chrome.runtime.onInstalled.addListener(() => setupAlarms());
@@ -304,7 +304,7 @@ async function setupAlarms() {
 }
 ```
 
-### One-shot delayed task
+### One-shot delayed task {#one-shot-delayed-task}
 
 ```ts
 // Execute something once after a delay
@@ -320,7 +320,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Dynamic alarm names for per-item scheduling
+### Dynamic alarm names for per-item scheduling {#dynamic-alarm-names-for-per-item-scheduling}
 
 ```ts
 // Schedule expiration checks for individual items
@@ -338,7 +338,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 1. **Minimum interval is 30 seconds** in production (packed extensions). In development (unpacked), there is no minimum. Chrome will silently clamp values below the minimum.
 
@@ -354,7 +354,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 7. **Alarms persist across browser restarts** but not across extension updates or reinstalls.
 
-## Related
+## Related {#related}
 
 - [alarms permission](../permissions/alarms.md)
 - [Notifications API](notifications-api.md)

@@ -8,26 +8,26 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 A comprehensive deep dive into debugging tools and techniques for Chrome extension development.
 
-## Chrome Internal Pages
+## Chrome Internal Pages {#chrome-internal-pages}
 
-### chrome://extensions
+### chrome://extensions {#chromeextensions}
 The central hub for managing extensions. Enable "Developer mode" to access debugging features. View errors and warnings directly on this page - a red badge on your extension indicates runtime errors that need attention.
 
-### chrome://inspect/#service-workers
+### chrome://inspect/#service-workers {#chromeinspectservice-workers}
 Inspect active service workers for your extensions. View running workers, their lifecycle state, and click "inspect" to open a dedicated DevTools window for the service worker context.
 
-### chrome://serviceworker-internals
+### chrome://serviceworker-internals {#chromeserviceworker-internals}
 Provides detailed lifecycle information about service workers. Use this to debug worker registration issues, update cycles, and termination behavior.
 
-## Extension DevTools
+## Extension DevTools {#extension-devtools}
 
-### Sources Panel
+### Sources Panel {#sources-panel}
 The Sources panel shows your extension's files in the "Content scripts" folder for injected scripts. Add breakpoints by clicking line numbers - these persist across page reloads.
 
-### Application Panel
+### Application Panel {#application-panel}
 Access the Storage section to inspect chrome.storage.local, chrome.storage.sync, and chrome.storage.managed. View IndexedDB databases and Cache API data directly.
 
-## Console Tricks
+## Console Tricks {#console-tricks}
 
 ```javascript
 // Copy any value to clipboard
@@ -43,7 +43,7 @@ queryObjects(ConstructorName);
 monitor(functionName);
 ```
 
-## Breakpoint Types
+## Breakpoint Types {#breakpoint-types}
 
 - **Line breakpoints**: Pause execution at specific lines
 - **Conditional breakpoints**: Pause only when conditions are met
@@ -51,7 +51,7 @@ monitor(functionName);
 - **DOM breakpoints**: Pause on subtree modifications, attribute changes, or node removal
 - **Event listener breakpoints**: Break on specific event types
 
-## Source Maps
+## Source Maps {#source-maps}
 
 Enable source maps in your bundler configuration (Webpack, Rollup, Vite) to map minified code back to source files. This provides readable stack traces and allows debugging original source directly.
 
@@ -60,15 +60,15 @@ Enable source maps in your bundler configuration (Webpack, Rollup, Vite) to map 
 devtool: 'source-map',
 ```
 
-## Network Debugging
+## Network Debugging {#network-debugging}
 
 Extension network requests appear in the page DevTools Network tab. Filter by "Other" to isolate extension-originated requests. Note that requests from service workers show the extension ID as the initiator.
 
-## Performance Profiling
+## Performance Profiling {#performance-profiling}
 
 Record performance profiles to analyze extension popup rendering. Open the popup, start recording, interact with UI, then stop to identify bottlenecks in your rendering pipeline.
 
-## Memory Leak Detection
+## Memory Leak Detection {#memory-leak-detection}
 
 1. Take a heap snapshot before an operation
 2. Perform the operation
@@ -77,11 +77,11 @@ Record performance profiles to analyze extension popup rendering. Open the popup
 
 Look for detached DOM trees and growing object counts that don't release after garbage collection.
 
-## Remote Debugging
+## Remote Debugging {#remote-debugging}
 
 Use chrome://inspect to debug extensions on mobile devices or remote Chrome instances. Configure port forwarding for Android device testing.
 
-## Debug Logging
+## Debug Logging {#debug-logging}
 
 Include version information in logs using chrome.management.getSelf() to track which extension version generated specific log entries:
 
@@ -91,13 +91,13 @@ chrome.management.getSelf((info) => {
 });
 ```
 
-## Related Guides
+## Related Guides {#related-guides}
 
 - [Debugging Extensions](./debugging-extensions.md) - Basic debugging techniques
 - [Advanced Debugging](./advanced-debugging.md) - Complex debugging scenarios
 - [Service Worker Debugging](./service-worker-debugging.md) - Service worker specific tips
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

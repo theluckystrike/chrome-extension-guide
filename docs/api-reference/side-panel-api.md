@@ -9,14 +9,14 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.sidePanel` API provides a persistent side panel UI that displays alongside web content. Introduced in Chrome 114, it offers a more integrated experience than popups for extensions that need to display information while users browse.
 
-## Overview
+## Overview {#overview}
 
 - **Persistent side panel UI** alongside web content
 - **Permission required**: `"sidePanel"`
 - **Minimum Chrome version**: 114+
 - Full access to `chrome.*` APIs from within the panel
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -29,9 +29,9 @@ The `chrome.sidePanel` API provides a persistent side panel UI that displays alo
 
 The `side_panel` manifest key defines the default panel page. The permission grants access to the `chrome.sidePanel` API.
 
-## API Methods
+## API Methods {#api-methods}
 
-### chrome.sidePanel.setOptions(details)
+### chrome.sidePanel.setOptions(details) {#chromesidepanelsetoptionsdetails}
 
 Configures the side panel for a specific tab or globally.
 
@@ -56,7 +56,7 @@ await chrome.sidePanel.setOptions({ tabId: 123, enabled: false });
   - `enabled` (boolean): Whether the panel is enabled
   - `tabId` (integer, optional): Tab ID for per-tab configuration
 
-### chrome.sidePanel.getOptions(details)
+### chrome.sidePanel.getOptions(details) {#chromesidepanelgetoptionsdetails}
 
 Retrieves the current side panel configuration.
 
@@ -74,7 +74,7 @@ const tabOptions = await chrome.sidePanel.getOptions({ tabId: 123 });
 
 **Returns:** Promise resolving to an object with `path` and `enabled` properties.
 
-### chrome.sidePanel.open(details) — Chrome 116+
+### chrome.sidePanel.open(details) — Chrome 116+ {#chromesidepanelopendetails-chrome-116}
 
 Opens the side panel programmatically. Requires a user gesture.
 
@@ -96,7 +96,7 @@ await chrome.sidePanel.open({ windowId: 99 });
 
 **Note:** This method requires a user gesture (e.g., action click, keyboard shortcut).
 
-### chrome.sidePanel.setPanelBehavior(details)
+### chrome.sidePanel.setPanelBehavior(details) {#chromesidepanelsetpanelbehaviordetails}
 
 Configures behavior for opening the panel via toolbar icon clicks.
 
@@ -112,7 +112,7 @@ await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false });
 - `details` (object)
   - `openPanelOnActionClick` (boolean): Whether clicking the action icon opens the side panel
 
-### chrome.sidePanel.getPanelBehavior()
+### chrome.sidePanel.getPanelBehavior() {#chromesidepanelgetpanelbehavior}
 
 Retrieves the current panel behavior configuration.
 
@@ -123,9 +123,9 @@ console.log(behavior.openPanelOnActionClick);
 
 **Returns:** Promise resolving to an object with `openPanelOnActionClick` boolean.
 
-## Per-Tab vs Global Configuration
+## Per-Tab vs Global Configuration {#per-tab-vs-global-configuration}
 
-### Global Panel (Default)
+### Global Panel (Default) {#global-panel-default}
 
 Omit `tabId` to configure a global panel that appears the same for all tabs:
 
@@ -136,7 +136,7 @@ await chrome.sidePanel.setOptions({
 });
 ```
 
-### Per-Tab Panel
+### Per-Tab Panel {#per-tab-panel}
 
 Provide `tabId` to configure different panels for different tabs:
 
@@ -162,22 +162,22 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### Precedence
+### Precedence {#precedence}
 
 Per-tab configuration overrides global configuration for that specific tab.
 
-## Communication
+## Communication {#communication}
 
 The side panel does not have dedicated events. Use standard message passing:
 
-### From Panel to Service Worker
+### From Panel to Service Worker {#from-panel-to-service-worker}
 
 ```typescript
 // In side panel
 chrome.runtime.sendMessage({ type: "GET_DATA", payload: { tabId: 123 } });
 ```
 
-### From Service Worker to Panel
+### From Service Worker to Panel {#from-service-worker-to-panel}
 
 ```typescript
 // In service worker
@@ -189,7 +189,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Using @theluckystrike/webext-messaging
+### Using @theluckystrike/webext-messaging {#using-theluckystrikewebext-messaging}
 
 For type-safe messaging, use the `@theluckystrike/webext-messaging` package:
 
@@ -203,7 +203,7 @@ interface SidePanelMessages {
 
 The side panel has full `chrome.*` API access, similar to popup windows.
 
-## Differences from Popup
+## Differences from Popup {#differences-from-popup}
 
 | Feature | Side Panel | Popup |
 |---------|-----------|-------|
@@ -213,9 +213,9 @@ The side panel has full `chrome.*` API access, similar to popup windows.
 | Multiple instances | Single instance per window | One per action click |
 | Closing | Must close explicitly | Closes automatically |
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Basic Setup
+### Basic Setup {#basic-setup}
 
 **manifest.json:**
 ```json
@@ -246,7 +246,7 @@ The side panel has full `chrome.*` API access, similar to popup windows.
 </html>
 ```
 
-### Open Panel on Toolbar Icon Click
+### Open Panel on Toolbar Icon Click {#open-panel-on-toolbar-icon-click}
 
 ```typescript
 // background.js
@@ -255,7 +255,7 @@ chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
 This connects the side panel to the extension's toolbar icon.
 
-### Two-Way Messaging with Service Worker
+### Two-Way Messaging with Service Worker {#two-way-messaging-with-service-worker}
 
 **sidepanel.js:**
 ```typescript
@@ -285,7 +285,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Dynamic Content Based on Active Tab
+### Dynamic Content Based on Active Tab {#dynamic-content-based-on-active-tab}
 
 ```typescript
 // sidepanel.js - update content when tab changes
@@ -306,7 +306,7 @@ function updatePanelContent(url) {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [permissions/sidePanel.md](../permissions/sidePanel.md) — Permission details
 - [mv3/side-panel.md](../mv3/side-panel.md) — Manifest V3 side panel

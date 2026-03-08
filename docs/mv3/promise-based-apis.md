@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/prom
 
 A comprehensive guide to migrating from callback-based Chrome extension APIs to promise-based patterns in Manifest V3.
 
-## Overview
+## Overview {#overview}
 
 In Manifest V3, most `chrome.*` APIs now return Promises when no callback is provided. This represents a significant shift from the callback-based pattern used in Manifest V2, bringing Chrome extension APIs in line with modern JavaScript async/await patterns.
 
@@ -26,9 +26,9 @@ const result = await chrome.storage.local.get("count");
 console.log(result.count);
 ```
 
-## The Change: Before/After Code
+## The Change: Before/After Code {#the-change-beforeafter-code}
 
-### Storage API
+### Storage API {#storage-api}
 
 **Before (MV2 with callbacks):**
 ```js
@@ -51,7 +51,7 @@ try {
 }
 ```
 
-### Tabs API
+### Tabs API {#tabs-api}
 
 **Before (MV2 with callbacks):**
 ```js
@@ -73,7 +73,7 @@ const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 await chrome.tabs.update(tab.id, { url: "https://example.com" });
 ```
 
-### Downloads API
+### Downloads API {#downloads-api}
 
 **Before (MV2 with callbacks):**
 ```js
@@ -98,7 +98,7 @@ const downloadId = await chrome.downloads.download({
 console.log("Download started:", downloadId);
 ```
 
-## APIs That Return Promises
+## APIs That Return Promises {#apis-that-return-promises}
 
 The following Chrome APIs return Promises in MV3 when the callback is omitted:
 
@@ -116,7 +116,7 @@ The following Chrome APIs return Promises in MV3 when the callback is omitted:
 | **contextMenus** | `update()`, `remove()`, `removeAll()` (Chrome 123+) | `Promise<void>` |
 | **runtime** | `sendMessage()`, `sendNativeMessage()` | `Promise<any>` |
 
-## APIs Still Using Callbacks
+## APIs Still Using Callbacks {#apis-still-using-callbacks}
 
 Not all Chrome APIs have been converted to return Promises. These APIs still require callback patterns:
 
@@ -128,7 +128,7 @@ Not all Chrome APIs have been converted to return Promises. These APIs still req
 | **tabs.onUpdated** | Event listener for tab updates |
 | **windows.onFocusChanged** | Event listener for window focus changes |
 
-### Handling Event Listeners (Still Callback-Based)
+### Handling Event Listeners (Still Callback-Based) {#handling-event-listeners-still-callback-based}
 
 Event listeners continue to use callbacks because they respond to events asynchronously:
 
@@ -143,7 +143,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## How @theluckystrike/webext-storage Handles This
+## How @theluckystrike/webext-storage Handles This {#how-theluckystrikewebext-storage-handles-this}
 
 The `@theluckystrike/webext-storage` library provides a promise-based interface that works seamlessly with MV3:
 
@@ -183,7 +183,7 @@ await storage.remove("count");
 - Schema validation built-in
 - Works across all contexts (popup, background, content scripts)
 
-## How @theluckystrike/webext-messaging Handles This
+## How @theluckystrike/webext-messaging Handles This {#how-theluckystrikewebext-messaging-handles-this}
 
 The `@theluckystrike/webext-messaging` library wraps callback-based message passing into clean promises:
 
@@ -220,7 +220,7 @@ try {
 - Automatic error propagation
 - Cross-context communication made simple
 
-## How @theluckystrike/webext-permissions Handles This
+## How @theluckystrike/webext-permissions Handles This {#how-theluckystrikewebext-permissions-handles-this}
 
 The `@theluckystrike/webext-permissions` library wraps `chrome.permissions` callbacks into promises:
 
@@ -250,9 +250,9 @@ await removePermission("tabs");
 - Works with all permission types (host permissions, API permissions)
 - TypeScript support
 
-## Migration Patterns
+## Migration Patterns {#migration-patterns}
 
-### Pattern 1: Callback to Await
+### Pattern 1: Callback to Await {#pattern-1-callback-to-await}
 
 Transform callback-based code to async/await:
 
@@ -271,7 +271,7 @@ async function getSettings() {
 }
 ```
 
-### Pattern 2: Error Handling (lastError to try/catch)
+### Pattern 2: Error Handling (lastError to try/catch) {#pattern-2-error-handling-lasterror-to-trycatch}
 
 When using promise-based calls, errors become rejected promises instead of requiring `chrome.runtime.lastError` checks (though `lastError` still exists for callback-based usage):
 
@@ -294,7 +294,7 @@ try {
 }
 ```
 
-### Pattern 3: Parallel Requests with Promise.all
+### Pattern 3: Parallel Requests with Promise.all {#pattern-3-parallel-requests-with-promiseall}
 
 Execute multiple async operations in parallel:
 
@@ -316,7 +316,7 @@ const [result1, result2, result3] = await Promise.all([
 ]);
 ```
 
-### Pattern 4: Using @theluckystrike Packages
+### Pattern 4: Using @theluckystrike Packages {#pattern-4-using-theluckystrike-packages}
 
 Leverage the libraries for consistent promise-based APIs:
 
@@ -338,7 +338,7 @@ await messenger.send("updateUser", { name: "John" });
 const granted = await requestPermission("storage");
 ```
 
-## chrome.runtime.lastError
+## chrome.runtime.lastError {#chromeruntimelasterror}
 
 In MV2, `chrome.runtime.lastError` was checked after every async API call. In MV3, when using promise-based calls (omitting the callback), errors are thrown as rejected Promises. Note: `chrome.runtime.lastError` still works when callbacks are used, but `chrome.extension.lastError` is deprecated.
 
@@ -366,7 +366,7 @@ try {
 - `"No tab with id"`: Tab no longer exists
 - `"Extension context invalidated"`: Extension reloaded
 
-## TypeScript Setup
+## TypeScript Setup {#typescript-setup}
 
 For full TypeScript support with Chrome APIs, use the `chrome-types` package:
 
@@ -394,7 +394,7 @@ tab.url;      // string | undefined
 tab.title;    // string | undefined
 ```
 
-### TypeScript with @theluckystrike Packages
+### TypeScript with @theluckystrike Packages {#typescript-with-theluckystrike-packages}
 
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
@@ -420,9 +420,9 @@ const user = await storage.get("user");
 // user is typed as { id: number; name: string; email: string }
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
-### 1. Not All APIs Are Promisified
+### 1. Not All APIs Are Promisified {#1-not-all-apis-are-promisified}
 
 Some APIs still require callbacks:
 ```js
@@ -432,7 +432,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### 2. contextMenus.create Does NOT Return a Promise
+### 2. contextMenus.create Does NOT Return a Promise {#2-contextmenuscreate-does-not-return-a-promise}
 
 ```js
 // ⚠️ create() returns number|string synchronously, NOT a promise
@@ -444,7 +444,7 @@ const menuId = chrome.contextMenus.create({
 // Note: update(), remove(), and removeAll() DO return promises (Chrome 123+)
 ```
 
-### 3. Always Use try/catch
+### 3. Always Use try/catch {#3-always-use-trycatch}
 
 Unhandled promise rejections in service workers can crash your extension:
 
@@ -460,7 +460,7 @@ try {
 }
 ```
 
-### 4. Unhandled Rejections Crash Service Workers
+### 4. Unhandled Rejections Crash Service Workers {#4-unhandled-rejections-crash-service-workers}
 
 In MV3 background service workers, unhandled promise rejections terminate the worker:
 
@@ -478,7 +478,7 @@ async function safeGet(key) {
 }
 ```
 
-### 5. Event Listeners Cannot Be Async
+### 5. Event Listeners Cannot Be Async {#5-event-listeners-cannot-be-async}
 
 ```js
 // ❌ Invalid - event listeners can't return promises
@@ -494,7 +494,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Migration Checklist
+## Migration Checklist {#migration-checklist}
 
 - [ ] Replace callback-based storage calls with `await`/`async`
 - [ ] Replace `chrome.runtime.lastError` checks with `try`/`catch` blocks

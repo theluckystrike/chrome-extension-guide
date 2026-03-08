@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.identity` API provides OAuth2 and OpenID Connect authentication capabilities for Chrome extensions and apps. It enables extensions to access Google APIs and third-party services that support OAuth authentication.
 
-## Overview
+## Overview {#overview}
 
 The identity API simplifies OAuth2 implementation by handling token management, user consent flows, and token caching. It supports both Google OAuth (with built-in convenience methods) and generic OAuth via web authentication flows.
 
-### Permission Requirements
+### Permission Requirements {#permission-requirements}
 
 Add the `identity` permission to your `manifest.json`:
 
@@ -36,7 +36,7 @@ For OAuth2 functionality, you also need to declare OAuth2 client configuration:
 
 > **Note**: The OAuth2 configuration must match exactly what's registered in the Google Cloud Console or your identity provider's dashboard.
 
-## Manifest Declaration
+## Manifest Declaration {#manifest-declaration}
 
 For Google APIs, the manifest should include both permissions and OAuth2 configuration:
 
@@ -59,9 +59,9 @@ For Google APIs, the manifest should include both permissions and OAuth2 configu
 
 For non-Google OAuth providers, you still need the identity permission but OAuth2 configuration may vary.
 
-## API Methods
+## API Methods {#api-methods}
 
-### Google OAuth Methods
+### Google OAuth Methods {#google-oauth-methods}
 
 #### getAuthToken
 
@@ -147,7 +147,7 @@ function logout() {
 }
 ```
 
-### Non-Google OAuth (Generic)
+### Non-Google OAuth (Generic) {#non-google-oauth-generic}
 
 #### launchWebAuthFlow
 
@@ -210,7 +210,7 @@ const redirectUrl = chrome.identity.getRedirectURL('oauth2callback');
 // Returns: https://<extension-id>.chromiumapp.org/oauth2callback
 ```
 
-### Profile Information
+### Profile Information {#profile-information}
 
 #### getProfileUserInfo
 
@@ -234,9 +234,9 @@ chrome.identity.getProfileUserInfo((userInfo) => {
 });
 ```
 
-## Events
+## Events {#events}
 
-### onSignInChanged
+### onSignInChanged {#onsigninchanged}
 
 Fired when a user's sign-in status changes.
 
@@ -263,9 +263,9 @@ chrome.identity.onSignInChanged.addListener((account, signedIn) => {
 });
 ```
 
-## Common OAuth Providers Setup
+## Common OAuth Providers Setup {#common-oauth-providers-setup}
 
-### Google
+### Google {#google}
 
 Use `getAuthToken` for the easiest integration with Google APIs:
 
@@ -275,7 +275,7 @@ chrome.identity.getAuthToken({ interactive: true }, (token) => {
 });
 ```
 
-### GitHub
+### GitHub {#github}
 
 Use `launchWebAuthFlow` with GitHub's OAuth endpoints:
 
@@ -288,7 +288,7 @@ const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLI
 chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, handleResponse);
 ```
 
-### Microsoft Azure AD
+### Microsoft Azure AD {#microsoft-azure-ad}
 
 Use `launchWebAuthFlow` with Microsoft identity platform:
 
@@ -302,9 +302,9 @@ const authUrl = `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/auth
 chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, handleResponse);
 ```
 
-## Error Handling
+## Error Handling {#error-handling}
 
-### Common Errors
+### Common Errors {#common-errors}
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -313,7 +313,7 @@ chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, handleRes
 | `OAuth2 not configured` | Missing manifest OAuth2 config | Add oauth2 section to manifest |
 | Invalid client_id | Client ID mismatch | Verify client ID in manifest matches GCP console |
 
-### Token Refresh Pattern
+### Token Refresh Pattern {#token-refresh-pattern}
 
 ```javascript
 function makeAuthenticatedRequest(url, options = {}) {
@@ -344,9 +344,9 @@ function makeAuthenticatedRequest(url, options = {}) {
 }
 ```
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Get Google Auth Token and Call Google API
+### Get Google Auth Token and Call Google API {#get-google-auth-token-and-call-google-api}
 
 ```javascript
 async function getUserProfile() {
@@ -374,7 +374,7 @@ getUserProfile().then(user => {
 });
 ```
 
-### GitHub OAuth via launchWebAuthFlow
+### GitHub OAuth via launchWebAuthFlow {#github-oauth-via-launchwebauthflow}
 
 ```javascript
 function authenticateWithGitHub() {
@@ -401,7 +401,7 @@ function authenticateWithGitHub() {
 }
 ```
 
-## Cross-references
+## Cross-references {#cross-references}
 
 - [Identity Permissions](../permissions/identity.md) - Permission configuration details
 - [Identity OAuth Guide](../guides/identity-oauth.md) - Complete OAuth implementation walkthrough

@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Keyboard Shortcuts API Patterns
 
-## Overview
+## Overview {#overview}
 
 The Chrome Commands API (`chrome.commands`) allows extensions to define keyboard shortcuts. This guide covers practical patterns for implementing keyboard shortcuts in Chrome Extensions.
 
 ---
 
-## Pattern 1: Manifest Commands Declaration
+## Pattern 1: Manifest Commands Declaration {#pattern-1-manifest-commands-declaration}
 
 Define keyboard shortcuts in your `manifest.json`:
 
@@ -36,7 +36,7 @@ Define keyboard shortcuts in your `manifest.json`:
 }
 ```
 
-### Keyboard Shortcut String Format
+### Keyboard Shortcut String Format {#keyboard-shortcut-string-format}
 
 ```ts
 // Valid formats: Ctrl+Shift+K, Alt+T, CommandOrControl+Shift+E, F12
@@ -55,7 +55,7 @@ function isValidShortcut(shortcut: string): boolean {
 
 ---
 
-## Pattern 2: Command Event Handling
+## Pattern 2: Command Event Handling {#pattern-2-command-event-handling}
 
 Use a command map pattern for clean routing:
 
@@ -104,7 +104,7 @@ chrome.commands.onCommand.addListener(async (cmd, tab) => {
 
 ---
 
-## Pattern 3: Dynamic Shortcut Discovery
+## Pattern 3: Dynamic Shortcut Discovery {#pattern-3-dynamic-shortcut-discovery}
 
 Allow users to see and configure shortcuts:
 
@@ -138,7 +138,7 @@ async function detectConflicts(): Promise<string[]> {
 
 ---
 
-## Pattern 4: Per-Tab Command Behavior
+## Pattern 4: Per-Tab Command Behavior {#pattern-4-per-tab-command-behavior}
 
 Execute different actions based on the active tab:
 
@@ -182,7 +182,7 @@ chrome.commands.onCommand.addListener(async (cmd, tab) => {
 
 ---
 
-## Pattern 5: Command Throttling and Debouncing
+## Pattern 5: Command Throttling and Debouncing {#pattern-5-command-throttling-and-debouncing}
 
 Prevent rapid-fire command execution:
 
@@ -221,7 +221,7 @@ function createThrottledHandler(cmd: string, cooldown = 1000) {
 
 ---
 
-## Pattern 6: Multi-Key Sequences (Chord Emulation)
+## Pattern 6: Multi-Key Sequences (Chord Emulation) {#pattern-6-multi-key-sequences-chord-emulation}
 
 Implement two-step shortcuts:
 
@@ -259,7 +259,7 @@ chrome.commands.onCommand.addListener((cmd) => { if (cmd.startsWith("sequence-")
 
 ---
 
-## Pattern 7: Shortcut Conflict Detection
+## Pattern 7: Shortcut Conflict Detection {#pattern-7-shortcut-conflict-detection}
 
 Detect and warn about conflicts:
 
@@ -296,7 +296,7 @@ function suggestAlt(s: string): string[] {
 
 ---
 
-## Pattern 8: Keyboard Shortcut Onboarding
+## Pattern 8: Keyboard Shortcut Onboarding {#pattern-8-keyboard-shortcut-onboarding}
 
 Help users discover shortcuts:
 
@@ -350,7 +350,7 @@ function renderCheatSheet(cmds: chrome.commands.Command[]): string {
 
 ---
 
-## Summary Table
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
@@ -365,7 +365,7 @@ function renderCheatSheet(cmds: chrome.commands.Command[]): string {
 
 ---
 
-## Key Takeaways
+## Key Takeaways {#key-takeaways}
 
 1. Use `CommandOrControl` for cross-platform compatibility
 2. Route commands through a centralized map

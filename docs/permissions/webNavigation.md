@@ -9,20 +9,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # webNavigation Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.webNavigation` API for monitoring page navigation lifecycle across all tabs and frames.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["webNavigation"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## API Access
+## API Access {#api-access}
 When granted, you can use all `chrome.webNavigation` events:
 - `onBeforeNavigate` — before navigation starts
 - `onCommitted` — navigation committed (headers received)
@@ -36,7 +36,7 @@ When granted, you can use all `chrome.webNavigation` events:
 - `getAllFrames(tabId)` — list all frames in a tab
 - `getFrame(tabId, frameId)` — get specific frame info
 
-## URL Filtering
+## URL Filtering {#url-filtering}
 ```javascript
 chrome.webNavigation.onCompleted.addListener(
   (details) => { /* only matching URLs */ },
@@ -44,7 +44,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-## Key Properties
+## Key Properties {#key-properties}
 Each event provides:
 - `tabId` — which tab
 - `url` — navigation URL
@@ -53,23 +53,23 @@ Each event provides:
 - `timeStamp` — when event fired
 - `transitionType` — how navigation was triggered (link, typed, reload, etc.)
 
-## When to Use
+## When to Use {#when-to-use}
 - Track page loads for analytics or logging
 - Detect SPA navigations (`onHistoryStateUpdated`)
 - Frame-aware content script injection
 - Page load timing measurement
 - URL-filtered event processing (more efficient than `tabs.onUpdated`)
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If you only need to know when tabs change — use `chrome.tabs.onUpdated` with `tabs` permission
 - If you need to block/modify requests — use `declarativeNetRequest`
 
-## Runtime Check
+## Runtime Check {#runtime-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('webNavigation');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/web-navigation.md`
 - Related: `docs/permissions/tabs.md`, `docs/permissions/webRequest.md`

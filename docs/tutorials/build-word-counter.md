@@ -10,7 +10,7 @@ In this tutorial, we'll build a Chrome extension that counts words, characters, 
 
 **Prerequisites:** Basic JavaScript and HTML knowledge.
 
-## Step 1: Manifest with activeTab Permission
+## Step 1: Manifest with activeTab Permission {#step-1-manifest-with-activetab-permission}
 
 Create `manifest.json` with `activeTab` permission for secure page access:
 
@@ -29,7 +29,7 @@ Create `manifest.json` with `activeTab` permission for secure page access:
 
 The `activeTab` permission ensures we only access the page when the user explicitly invokes our extension.
 
-## Step 2: Popup Showing Page Statistics
+## Step 2: Popup Showing Page Statistics {#step-2-popup-showing-page-statistics}
 
 Create `popup.html` to display word count, character count, sentences, and paragraphs:
 
@@ -58,7 +58,7 @@ Create `popup.html` to display word count, character count, sentences, and parag
 </html>
 ```
 
-## Step 3: Content Script Extracting Page Text
+## Step 3: Content Script Extracting Page Text {#step-3-content-script-extracting-page-text}
 
 Create `content.js` to extract text from the page using `document.body.innerText`:
 
@@ -84,7 +84,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 **Edge Cases:** Handle frames by iterating through `document.frames`, skip empty elements, and trim whitespace.
 
-## Step 4: Text Analysis Functions
+## Step 4: Text Analysis Functions {#step-4-text-analysis-functions}
 
 Implement analysis functions in `popup.js`:
 
@@ -113,7 +113,7 @@ function averageWordLength(text) {
 }
 ```
 
-## Step 5: Selection Counting
+## Step 5: Selection Counting {#step-5-selection-counting}
 
 Detect selected text and show stats for the selection. Update `popup.js`:
 
@@ -129,7 +129,7 @@ document.getElementById('includeSelection').addEventListener('change', async (e)
 
 When text is selected, the popup updates to show stats for only that selection.
 
-## Step 6: Readability Metrics
+## Step 6: Readability Metrics {#step-6-readability-metrics}
 
 Add Flesch-Kincaid grade level and reading time estimates:
 
@@ -149,7 +149,7 @@ function readingTime(text) {
 }
 ```
 
-## Step 7: Badge Showing Word Count
+## Step 7: Badge Showing Word Count {#step-7-badge-showing-word-count}
 
 Update `manifest.json` to include background script, then in `popup.js`:
 
@@ -160,7 +160,7 @@ chrome.action.setBadgeBackgroundColor({ color: '#4CAF50' });
 
 The badge displays the word count directly on the extension icon.
 
-## Step 8: Copy Stats to Clipboard
+## Step 8: Copy Stats to Clipboard {#step-8-copy-stats-to-clipboard}
 
 Add clipboard functionality using `navigator.clipboard` (see `patterns/clipboard-patterns.md`):
 
@@ -171,14 +171,14 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
 });
 ```
 
-## Performance Considerations
+## Performance Considerations {#performance-considerations}
 
 - Run analysis on demand (not continuously)
 - Use `requestAnimationFrame` for UI updates
 - Debounce user input for selection counting
 - For large pages, use Web Workers to prevent UI blocking
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - Content script patterns: see `guides/content-script-patterns.md`
 - Clipboard API: see `patterns/clipboard-patterns.md`

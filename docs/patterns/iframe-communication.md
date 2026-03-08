@@ -13,7 +13,7 @@ iframes are ubiquitous on the web, and Chrome extensions frequently need to comm
 
 ---
 
-## Pattern 1: Content Script to Page iframe Communication
+## Pattern 1: Content Script to Page iframe Communication {#pattern-1-content-script-to-page-iframe-communication}
 
 Content scripts can access iframes on the host page, but cross-origin restrictions apply. For same-origin iframes, you can inject directly. For cross-origin iframes, use `window.postMessage`.
 
@@ -89,7 +89,7 @@ function broadcastToIframes(message: unknown): void {
 
 ---
 
-## Pattern 2: Extension iframe in Content Script (Shadow DOM)
+## Pattern 2: Extension iframe in Content Script (Shadow DOM) {#pattern-2-extension-iframe-in-content-script-shadow-dom}
 
 Inject an extension-hosted iframe into a page using Shadow DOM to isolate styles and prevent the host page from interfering with your UI.
 
@@ -194,7 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Pattern 3: Cross-Origin iframe Messaging with postMessage
+## Pattern 3: Cross-Origin iframe Messaging with postMessage {#pattern-3-cross-origin-iframe-messaging-with-postmessage}
 
 When communicating across origins, a structured protocol with handshake, validation, and typed messages prevents security issues and race conditions.
 
@@ -360,7 +360,7 @@ class IframeBridge {
 
 ---
 
-## Pattern 4: Sandboxed iframe for Untrusted Content
+## Pattern 4: Sandboxed iframe for Untrusted Content {#pattern-4-sandboxed-iframe-for-untrusted-content}
 
 Chrome extensions can use sandboxed pages to run untrusted code (such as user-provided templates or third-party scripts) without access to extension APIs.
 
@@ -466,7 +466,7 @@ const html = await renderTemplate(
 
 ---
 
-## Pattern 5: iframe Permission and CSP Considerations
+## Pattern 5: iframe Permission and CSP Considerations {#pattern-5-iframe-permission-and-csp-considerations}
 
 Chrome extensions enforce a Content Security Policy that affects which iframes can be embedded and what they can do. Understanding these constraints prevents silent failures.
 
@@ -568,7 +568,7 @@ document.addEventListener("securitypolicyviolation", (event) => {
 
 ---
 
-## Pattern 6: Detecting and Interacting with Page iframes
+## Pattern 6: Detecting and Interacting with Page iframes {#pattern-6-detecting-and-interacting-with-page-iframes}
 
 Content scripts may need to find, filter, and interact with iframes already present on the host page. This requires careful DOM traversal and timing.
 
@@ -698,7 +698,7 @@ function waitForIframeLoad(
 
 ---
 
-## Pattern 7: Extension Popup with Embedded iframes
+## Pattern 7: Extension Popup with Embedded iframes {#pattern-7-extension-popup-with-embedded-iframes}
 
 Extension popups can embed iframes to load external dashboards, previews, or dynamically generated content. This pattern requires careful CSP and sizing management.
 
@@ -801,7 +801,7 @@ new MutationObserver(reportHeight).observe(document.body, {
 
 ---
 
-## Pattern 8: iframe-Based UI Injection Patterns
+## Pattern 8: iframe-Based UI Injection Patterns {#pattern-8-iframe-based-ui-injection-patterns}
 
 Instead of directly manipulating the host page DOM, inject a full UI as an iframe. This provides complete style isolation and avoids conflicts with the page's CSS and JavaScript.
 
@@ -1032,7 +1032,7 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Best For | Key Constraint |
 |---------|----------|----------------|

@@ -11,7 +11,7 @@ The `chrome.offscreen` API enables extensions to create offscreen documents for 
 
 ---
 
-## Overview
+## Overview {#overview}
 
 - **Permission**: `"offscreen"` in manifest.json
 - **MV3 Only**: Not available in Manifest V2
@@ -21,9 +21,9 @@ The `chrome.offscreen` API enables extensions to create offscreen documents for 
 
 ---
 
-## API Methods
+## API Methods {#api-methods}
 
-### createDocument(params)
+### createDocument(params) {#createdocumentparams}
 
 Creates a new offscreen document.
 
@@ -39,7 +39,7 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-### closeDocument()
+### closeDocument() {#closedocument}
 
 Closes the current offscreen document. No parameters.
 
@@ -47,7 +47,7 @@ Closes the current offscreen document. No parameters.
 await chrome.offscreen.closeDocument();
 ```
 
-### hasDocument()
+### hasDocument() {#hasdocument}
 
 Checks if an offscreen document exists (Chrome 116+). Returns `Promise<boolean>`.
 
@@ -59,7 +59,7 @@ if (!(await chrome.offscreen.hasDocument())) {
 
 ---
 
-## Reason Enum
+## Reason Enum {#reason-enum}
 
 | Reason | Description |
 |--------|-------------|
@@ -81,7 +81,7 @@ if (!(await chrome.offscreen.hasDocument())) {
 
 ---
 
-## Constraints
+## Constraints {#constraints}
 
 - Only ONE offscreen document at a time per extension
 - Cannot have a visible UI
@@ -90,7 +90,7 @@ if (!(await chrome.offscreen.hasDocument())) {
 
 ---
 
-## Common Pattern
+## Common Pattern {#common-pattern}
 
 ```javascript
 // 1. Check hasDocument()
@@ -114,9 +114,9 @@ await chrome.offscreen.closeDocument();
 
 ---
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### DOM Scraping
+### DOM Scraping {#dom-scraping}
 
 ```javascript
 // Service worker
@@ -147,7 +147,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### Clipboard Access
+### Clipboard Access {#clipboard-access}
 
 ```javascript
 async function readClipboard() {
@@ -162,7 +162,7 @@ async function readClipboard() {
 }
 ```
 
-### Audio Playback
+### Audio Playback {#audio-playback}
 
 ```javascript
 async function playAudio(audioUrl) {
@@ -177,7 +177,7 @@ async function playAudio(audioUrl) {
 
 ---
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Offscreen Documents Guide](../guides/offscreen-documents.md)
 - [Offscreen Permissions](../permissions/offscreen.md)

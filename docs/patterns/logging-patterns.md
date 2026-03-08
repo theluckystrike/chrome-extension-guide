@@ -18,7 +18,7 @@ debuggable extensions.
 
 ---
 
-## 1. Structured Logging with Log Levels
+## 1. Structured Logging with Log Levels {#1-structured-logging-with-log-levels}
 
 A structured logger gives you consistent output and the ability to filter by severity.
 Define standard log levels and route them through a single interface.
@@ -89,7 +89,7 @@ gives you a single place to adjust formatting, filtering, and output destination
 
 ---
 
-## 2. Context-Aware Logging
+## 2. Context-Aware Logging {#2-context-aware-logging}
 
 Chrome extensions run in multiple execution contexts. Each context has its own
 console, making it hard to correlate logs. Tag every log entry with its source context
@@ -144,7 +144,7 @@ chrome.runtime.sendMessage({
 
 ---
 
-## 3. Persisting Logs to chrome.storage
+## 3. Persisting Logs to chrome.storage {#3-persisting-logs-to-chromestorage}
 
 Console logs vanish when a service worker goes idle or a popup closes. Persist
 important logs to `chrome.storage.local` so you can review them later.
@@ -191,7 +191,7 @@ development.
 
 ---
 
-## 4. Remote Error Reporting (Sentry Integration)
+## 4. Remote Error Reporting (Sentry Integration) {#4-remote-error-reporting-sentry-integration}
 
 For production extensions, ship errors to a remote reporting service so you can
 monitor real-world failures. Sentry works well with Chrome extensions.
@@ -246,7 +246,7 @@ Key considerations for remote reporting in extensions:
 
 ---
 
-## 5. Log Filtering and Search in DevTools Panel
+## 5. Log Filtering and Search in DevTools Panel {#5-log-filtering-and-search-in-devtools-panel}
 
 Build a custom DevTools panel that displays your persisted logs with filtering
 controls. This is far more usable than scanning multiple console windows.
@@ -308,7 +308,7 @@ chrome.devtools.panels.create('My Extension Logs', '', 'devtools-panel.html');
 
 ---
 
-## 6. Performance Timing Logs
+## 6. Performance Timing Logs {#6-performance-timing-logs}
 
 Track how long operations take. This is critical for identifying bottlenecks in
 content scripts that manipulate the DOM or service workers that process large datasets.
@@ -383,7 +383,7 @@ function logWithThreshold(entry, thresholdMs = 1000) {
 
 ---
 
-## 7. User Action Audit Trail
+## 7. User Action Audit Trail {#7-user-action-audit-trail}
 
 Record user interactions for debugging user-reported issues. An audit trail lets you
 reconstruct what the user did before a bug occurred.
@@ -456,7 +456,7 @@ automatically. This drastically reduces the back-and-forth needed to reproduce i
 
 ---
 
-## 8. Production vs Development Logging Configuration
+## 8. Production vs Development Logging Configuration {#8-production-vs-development-logging-configuration}
 
 Use different logging configurations for development and production builds. In
 development, log everything. In production, log only warnings and errors, and route
@@ -547,7 +547,7 @@ export default defineConfig({
 
 ---
 
-## Putting It All Together
+## Putting It All Together {#putting-it-all-together}
 
 Combine these patterns into a unified logging module for your extension:
 

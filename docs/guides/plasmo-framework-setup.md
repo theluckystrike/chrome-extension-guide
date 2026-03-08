@@ -6,17 +6,17 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/p
 ---
 # Plasmo Framework Setup Guide
 
-## What is Plasmo
+## What is Plasmo {#what-is-plasmo}
 Plasmo is a browser extension framework built on top of Vite that provides a batteries-included developer experience. It handles boilerplate, build tooling, and common extension patterns so you can focus on your extension logic.
 
 The framework supports React, Vue, Svelte, and vanilla TypeScript out of the box. It generates MV3 extensions with manifest v3 compliance and includes hot module replacement during development.
 
-## Why Choose Plasmo Over Manual Setup
+## Why Choose Plasmo Over Manual Setup {#why-choose-plasmo-over-manual-setup}
 Manual extension setup requires configuring webpack or Vite from scratch, managing manifest.json, setting up content script injection, configuring the background service worker, and handling build output. Plasmo eliminates this friction.
 
 The framework provides several key advantages. Developer experience improvements come from zero-config TypeScript support, automatic manifest generation, and built-in support for multiple frontend frameworks. Content script UI (CSUI) lets you render React, Vue, or Svelte components directly inside web pages without style conflicts using shadow DOM encapsulation. Built-in messaging via @plasmohq/messaging gives you type-safe communication between content scripts and the background worker. Auto-reloading works out of the box during development.
 
-## Getting Started
+## Getting Started {#getting-started}
 Initialize a new Plasmo project:
 
 ```bash
@@ -38,7 +38,7 @@ my-extension/
 
 Plasmo automatically generates manifest.json based on files in source. Background scripts go in background.ts, content scripts in content.ts, Content Script UI in content-ui, popup in popup.tsx, and options in options.tsx.
 
-## Content Script UI
+## Content Script UI {#content-script-ui}
 One of Plasmo's most powerful features is Content Script UI (CSUI). This lets you render UI components directly inside web pages while keeping them isolated using shadow DOM.
 
 ```tsx
@@ -72,7 +72,7 @@ chrome.runtime.onMessage.addListener((message) => {
 
 The component renders inside shadow DOM, so styles will not leak.
 
-## Background Service Worker
+## Background Service Worker {#background-service-worker}
 The background service worker works like a standard extension:
 
 ```ts
@@ -89,7 +89,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 Plasmo handles the service worker lifecycle automatically.
 
-## Messaging with @plasmohq/messaging
+## Messaging with @plasmohq/messaging {#messaging-with-plasmohqmessaging}
 Plasmo provides a type-safe messaging API:
 
 ```ts
@@ -112,7 +112,7 @@ const response = await sendMessage({
 });
 ```
 
-## Storage with @plasmohq/storage
+## Storage with @plasmohq/storage {#storage-with-plasmohqstorage}
 Managing extension storage is simplified:
 
 ```ts
@@ -127,7 +127,7 @@ storage.watch("settings.theme", (newValue) => {
 });
 ```
 
-## Building for Production
+## Building for Production {#building-for-production}
 Build for distribution:
 
 ```bash
@@ -136,7 +136,7 @@ pnpm build
 
 This generates a production-ready build in dist folder. Use pnpm package to create a zip for Chrome Web Store submission.
 
-## Common Gotchas
+## Common Gotchas {#common-gotchas}
 The service worker restarts frequently. Since MV3 service workers terminate after inactivity, always store state in chrome.storage rather than relying on in-memory variables.
 
 Content Script UI requires the scripting permission. If CSUI components are not rendering, check that you have the "scripting" permission.
@@ -147,7 +147,7 @@ Message handlers must be registered at top level, not inside async functions.
 
 For more details, check docs.plasmo.com. If you are building a production extension and need a reliable hosting platform, consider deploying your extension documentation or related web services at zovo.one.
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Vite Setup](../guides/vite-extension-setup.md)
 - [WXT Framework](../guides/wxt-framework-setup.md)

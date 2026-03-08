@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly statistics with charts, provides a focus mode with configurable time limits, and sends notifications when over time. Uses **@theluckystrike/webext-storage** for persistent data and **chrome.idle** for intelligent pause detection.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -16,7 +16,7 @@ Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly 
 
 ---
 
-## Step 1: Manifest and Project Setup
+## Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
 
 ```bash
 mkdir email-tracker && cd email-tracker
@@ -52,7 +52,7 @@ Create `manifest.json`:
 
 ---
 
-## Step 2: Gmail Detection via Content Script
+## Step 2: Gmail Detection via Content Script {#step-2-gmail-detection-via-content-script}
 
 Create `content/gmail-detector.js` to detect when user is actively reading or composing emails:
 
@@ -94,7 +94,7 @@ chrome.runtime.sendMessage({ type: 'GMAIL_ACTIVITY', isActive });
 
 ---
 
-## Step 3: Time Tracking with Tab and Window Events
+## Step 3: Time Tracking with Tab and Window Events {#step-3-time-tracking-with-tab-and-window-events}
 
 Create `background.js` to track time using `tabs.onActivated` and `windows.onFocusChanged`:
 
@@ -207,7 +207,7 @@ See [patterns/idle-detection.md](../patterns/idle-detection.md) for more idle de
 
 ---
 
-## Step 4: Statistics Popup with Daily Totals and Weekly Chart
+## Step 4: Statistics Popup with Daily Totals and Weekly Chart {#step-4-statistics-popup-with-daily-totals-and-weekly-chart}
 
 Create `popup/popup.html`:
 
@@ -312,7 +312,7 @@ loadStats();
 
 ---
 
-## Step 5: Focus Mode with Notifications and Daily Limit
+## Step 5: Focus Mode with Notifications and Daily Limit {#step-5-focus-mode-with-notifications-and-daily-limit}
 
 Extend `background.js` with focus mode logic:
 
@@ -358,7 +358,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 6: CSV Export and Data Persistence
+## Step 6: CSV Export and Data Persistence {#step-6-csv-export-and-data-persistence}
 
 The popup already includes CSV export. For additional data management:
 
@@ -403,7 +403,7 @@ async function cleanupOldData() {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 This extension tracks email time through:
 1. **Content script** detects Gmail activity via URL and DOM

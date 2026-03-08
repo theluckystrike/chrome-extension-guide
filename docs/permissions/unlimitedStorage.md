@@ -9,20 +9,20 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # unlimitedStorage Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Removes the quota limits on `chrome.storage.local`, IndexedDB, Cache API, and other client-side storage used by the extension. Without it, `chrome.storage.local` is limited to ~10 MB.
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["unlimitedStorage"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## What It Affects
+## What It Affects {#what-it-affects}
 | Storage Type | Without Permission | With Permission |
 |---|---|---|
 | `chrome.storage.local` | ~10 MB | Unlimited |
@@ -34,7 +34,7 @@ None — this permission does not trigger a warning at install time.
 
 **Note:** `chrome.storage.sync` is always limited to 100 KB total / 8 KB per item regardless of this permission.
 
-## When You Need It
+## When You Need It {#when-you-need-it}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -50,7 +50,7 @@ const storage = createStorage(schema, 'local');
 await storage.set('cachedArticles', largeJsonString);
 ```
 
-## Checking Storage Usage
+## Checking Storage Usage {#checking-storage-usage}
 ```typescript
 // Check how much storage is in use
 const bytesInUse = await chrome.storage.local.getBytesInUse(null);
@@ -61,7 +61,7 @@ const keyBytes = await chrome.storage.local.getBytesInUse(['cachedArticles']);
 console.log(`cachedArticles: ${(keyBytes / 1024).toFixed(0)} KB`);
 ```
 
-## Storage Management Pattern
+## Storage Management Pattern {#storage-management-pattern}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -94,7 +94,7 @@ m.onMessage('CLEANUP_STORAGE', async ({ maxMB }) => {
 });
 ```
 
-## IndexedDB with Unlimited Storage
+## IndexedDB with Unlimited Storage {#indexeddb-with-unlimited-storage}
 ```typescript
 // IndexedDB also benefits from unlimitedStorage
 const db = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -112,7 +112,7 @@ const tx = db.transaction('files', 'readwrite');
 tx.objectStore('files').put({ id: 'large-file', data: largeBlob });
 ```
 
-## Common Use Cases
+## Common Use Cases {#common-use-cases}
 - Offline-first extensions (cache large datasets)
 - Image/media storage extensions
 - Activity/history logging
@@ -120,24 +120,24 @@ tx.objectStore('files').put({ id: 'large-file', data: largeBlob });
 - Local database extensions
 - Cache-heavy extensions (web scrapers, archivers)
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If your data fits in 10 MB — don't request unnecessary permissions
 - For synced data — `chrome.storage.sync` is always 100 KB regardless
 - Consider cleanup strategies even with unlimited storage
 
-## Best Practices
+## Best Practices {#best-practices}
 - Implement storage cleanup/pruning routines
 - Show users how much storage is in use
 - Provide "clear data" option in settings
 - Don't store what can be re-fetched
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('unlimitedStorage');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Guide: `docs/guides/memory-management.md`
 - Reference: `docs/reference/storage-patterns.md`
 - Related: `docs/permissions/storage.md`

@@ -9,11 +9,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Feature detection is essential for Chrome extensions because APIs are continuously added in newer Chrome versions, and cross-browser compatibility requires handling missing APIs gracefully.
 
-## Checking API Existence
+## Checking API Existence {#checking-api-existence}
 
 There are two primary approaches for checking if an API exists:
 
-### Using Conditional Checks
+### Using Conditional Checks {#using-conditional-checks}
 
 The safest approach is using conditional checks before accessing APIs:
 
@@ -23,7 +23,7 @@ if (chrome.sidePanel) {
 }
 ```
 
-### Using try/catch
+### Using try/catch {#using-trycatch}
 
 For cases where the API might exist but throw errors when accessed:
 
@@ -37,7 +37,7 @@ try {
 }
 ```
 
-## Checking Method Existence
+## Checking Method Existence {#checking-method-existence}
 
 Use `typeof` to verify specific methods exist:
 
@@ -49,9 +49,9 @@ if (typeof chrome.action?.setBadgeTextColor === 'function') {
 
 The optional chaining (`?.`) prevents errors when the parent API doesn't exist.
 
-## Version Detection
+## Version Detection {#version-detection}
 
-### Chrome Version from User Agent
+### Chrome Version from User Agent {#chrome-version-from-user-agent}
 
 ```javascript
 function getChromeVersion() {
@@ -62,7 +62,7 @@ function getChromeVersion() {
 
 > **Warning**: User agent parsing is fragile and should be avoided when feature detection is possible.
 
-### When to Use Version Detection
+### When to Use Version Detection {#when-to-use-version-detection}
 
 Version detection is appropriate when:
 - No reliable feature detection is available
@@ -71,7 +71,7 @@ Version detection is appropriate when:
 
 Otherwise, prefer runtime feature detection.
 
-## Graceful Degradation
+## Graceful Degradation {#graceful-degradation}
 
 Provide fallback behavior when APIs are unavailable:
 
@@ -86,7 +86,7 @@ async function setBadgeColor(color) {
 }
 ```
 
-### Fallback UI Patterns
+### Fallback UI Patterns {#fallback-ui-patterns}
 
 ```javascript
 function renderUI() {
@@ -100,7 +100,7 @@ function renderUI() {
 }
 ```
 
-## Progressive Enhancement
+## Progressive Enhancement {#progressive-enhancement}
 
 Add features when APIs are detected:
 
@@ -128,7 +128,7 @@ class FeatureDetector {
 }
 ```
 
-## Common Feature Checks
+## Common Feature Checks {#common-feature-checks}
 
 | Feature | Chrome Version | Detection Method |
 |---------|----------------|------------------|
@@ -138,7 +138,7 @@ class FeatureDetector {
 | Session Storage | 102+ | `chrome.storage.session` |
 | Badge Text Color | 110+ | `chrome.action.setBadgeTextColor` |
 
-## Feature Detector Utility
+## Feature Detector Utility {#feature-detector-utility}
 
 ```javascript
 const FeatureDetector = {
@@ -162,7 +162,7 @@ if (FeatureDetector.detect('sidePanel')) {
 }
 ```
 
-## Polyfills for Missing APIs
+## Polyfills for Missing APIs {#polyfills-for-missing-apis}
 
 For cross-browser compatibility, use the WebExtension Polyfill:
 
@@ -177,7 +177,7 @@ browser.storage.local.get('key').then(result => {
 
 Install via: `npm install webextension-polyfill`
 
-## Feature Matrix
+## Feature Matrix {#feature-matrix}
 
 Track which features work in which browsers:
 
@@ -188,7 +188,7 @@ Track which features work in which browsers:
 | User Scripts | 120+ | 102+ | ❌ | 120+ |
 | Session Storage | 102+ | 101+ | 14+ | 102+ |
 
-## Testing Across Chrome Versions
+## Testing Across Chrome Versions {#testing-across-chrome-versions}
 
 - **Stable**: Current public release
 - **Beta**: Next release candidate
@@ -197,7 +197,7 @@ Track which features work in which browsers:
 
 Install multiple channels to test feature availability.
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [API Availability Reference](../reference/api-availability.md)
 - [Browser Compatibility](../reference/browser-compatibility.md)

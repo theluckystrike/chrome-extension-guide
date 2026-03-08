@@ -7,24 +7,24 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishi
 
 # Chrome Web Store Listing Optimization
 
-## Overview
+## Overview {#overview}
 Your store listing is your extension's landing page. Optimization affects both search ranking and install conversion rate.
 
-## Extension Name (max 75 chars)
+## Extension Name (max 75 chars) {#extension-name-max-75-chars}
 - Lead with the primary function: "Tab Manager — Quick Switch & Search"
 - Include one keyword naturally
 - Don't keyword stuff: BAD "Tab Manager Best Tab Organizer Free Tab Tool"
 - Keep it memorable and brandable
 
-## Short Description (max 132 chars)
+## Short Description (max 132 chars) {#short-description-max-132-chars}
 - Shown in search results and category pages
 - Must clearly state what the extension does
 - Include primary keyword naturally
 - Action-oriented: "Quickly switch between tabs with keyboard shortcuts"
 
-## Detailed Description (max 16,384 chars)
+## Detailed Description (max 16,384 chars) {#detailed-description-max-16384-chars}
 
-### Structure:
+### Structure: {#structure}
 1. **Opening paragraph** — What it does and why it's useful (2-3 sentences)
 2. **Key features** — Bulleted list of top 5-7 features
 3. **How it works** — Brief explanation
@@ -32,7 +32,7 @@ Your store listing is your extension's landing page. Optimization affects both s
 5. **Privacy statement** — Brief data handling summary
 6. **Support/contact** — How to get help
 
-### Permissions Explanation Section
+### Permissions Explanation Section {#permissions-explanation-section}
 Use @theluckystrike/webext-permissions descriptions for consistent language:
 
 ```ts
@@ -52,7 +52,7 @@ Permissions explained:
 - Tabs: Allows searching and switching between open tabs
 ```
 
-## Category Selection
+## Category Selection {#category-selection}
 Choose the most specific category:
 - Productivity
 - Developer Tools
@@ -65,7 +65,7 @@ Choose the most specific category:
 
 Pick ONE primary category. Wrong category = lower rankings.
 
-## Search Ranking Factors
+## Search Ranking Factors {#search-ranking-factors}
 1. **Keyword relevance** — name + description match search query
 2. **Install count** — more installs = higher ranking
 3. **Rating** — higher stars = higher ranking
@@ -73,19 +73,19 @@ Pick ONE primary category. Wrong category = lower rankings.
 5. **Engagement** — active users / total installs ratio
 6. **Update frequency** — regularly updated extensions rank better
 
-## Conversion Rate Optimization
+## Conversion Rate Optimization {#conversion-rate-optimization}
 - First screenshot is crucial — make it count
 - Clear, benefit-focused description (not feature-focused)
 - Show social proof if available (user count, ratings)
 - Respond to reviews (especially negative ones)
 - Keep extension size small (faster install)
 
-## Internationalization
+## Internationalization {#internationalization}
 - Provide translations for top markets: English, Spanish, Portuguese, French, German, Japanese
 - Use Chrome's `_locales` system
 - Translate store listing separately in Developer Dashboard
 
-## Reviews and Ratings
+## Reviews and Ratings {#reviews-and-ratings}
 - Prompt for reviews at the right time (after positive interaction, not on first use)
 - Use @theluckystrike/webext-storage to track when to show review prompt:
 
@@ -113,7 +113,7 @@ async function maybeShowReviewPrompt() {
 - Respond to all negative reviews with helpful solutions
 - Never incentivize reviews (against policy)
 
-## Analytics and Tracking
+## Analytics and Tracking {#analytics-and-tracking}
 - Use Developer Dashboard analytics (installs, uninstalls, demographics)
 - Track feature usage with @theluckystrike/webext-storage (local only, no PII)
 
@@ -132,13 +132,13 @@ async function trackFeatureUse(feature: string) {
 }
 ```
 
-## Update Strategy
+## Update Strategy {#update-strategy}
 - Regular updates signal active maintenance
 - Use semantic versioning: major.minor.patch
 - Include changelog in description or separate page
 - Communicate changes to users
 
-## Listing Optimization Checklist
+## Listing Optimization Checklist {#listing-optimization-checklist}
 - [ ] Name includes primary keyword (under 75 chars)
 - [ ] Short description is clear and action-oriented (under 132 chars)
 - [ ] Detailed description follows the recommended structure

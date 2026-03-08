@@ -9,22 +9,22 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # activeTab Permission Reference
 
-## What It Does
+## What It Does {#what-it-does}
 - Grants temporary access to the currently active tab when the user invokes the extension (click, keyboard shortcut, context menu)
 - Access is temporary — expires when the user navigates away or closes the tab
 - Grants: `chrome.scripting.executeScript()` on the active tab, access to the tab's URL/title/favIconUrl, host permission for the tab's origin
 
-## Why Use activeTab
+## Why Use activeTab {#why-use-activetab}
 - No scary "Read and change all your data on all websites" warning
 - Users trust it more — access only happens on explicit interaction
 - Chrome Web Store reviews are faster with narrow permissions
 
-## When activeTab Is NOT Enough
+## When activeTab Is NOT Enough {#when-activetab-is-not-enough}
 - You need access to tabs the user didn't click on
 - You need persistent background access to tab content
 - You need to inject scripts on page load (use `scripting` + host permissions instead)
 
-## Manifest Configuration
+## Manifest Configuration {#manifest-configuration}
 ```json
 {
   "permissions": ["activeTab"],
@@ -36,9 +36,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 No `optional_permissions` needed — `activeTab` is always a required permission.
 
-## Using with @theluckystrike/webext-permissions
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
-### Checking if granted
+### Checking if granted {#checking-if-granted}
 ```ts
 import { checkPermission } from "@theluckystrike/webext-permissions";
 
@@ -48,7 +48,7 @@ console.log(result.description);
 console.log(result.granted); // true if declared in manifest
 ```
 
-### Description from PERMISSION_DESCRIPTIONS
+### Description from PERMISSION_DESCRIPTIONS {#description-from-permission-descriptions}
 ```ts
 import { PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
 
@@ -56,7 +56,7 @@ PERMISSION_DESCRIPTIONS.activeTab;
 // "Access the currently active tab when you click the extension"
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Common pattern: popup sends message to background, background uses activeTab to execute script on current tab.
 
@@ -95,7 +95,7 @@ const data = await msg.send("extractPageData", undefined);
 console.log(data.title, data.url);
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store data extracted via activeTab:
 
@@ -118,20 +118,20 @@ await storage.setMany({
 await storage.set("extractCount", (await storage.get("extractCount")) + 1);
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 1. Click-to-extract (popup + activeTab + scripting)
 2. Context menu action (contextMenus + activeTab)
 3. Keyboard shortcut trigger (commands + activeTab)
 
-## Gotchas
+## Gotchas {#gotchas}
 - activeTab does NOT grant access in the background without user gesture
 - Does not work with `chrome.tabs.query()` for non-active tabs
 - The permission auto-revokes on navigation — you can't cache it
 
-## Related Permissions
+## Related Permissions {#related-permissions}
 - [tabs](tabs.md) — persistent tab metadata access
 - [scripting](scripting.md) — inject scripts (needs host permissions without activeTab)
 
-## API Reference
+## API Reference {#api-reference}
 - [Chrome activeTab docs](https://developer.chrome.com/docs/extensions/develop/concepts/activeTab)
 ```

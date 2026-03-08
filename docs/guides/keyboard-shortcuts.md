@@ -6,16 +6,16 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/k
 ---
 # Chrome Extension Keyboard Shortcuts
 
-## Introduction
+## Introduction {#introduction}
 - The `chrome.commands` API allows extensions to define keyboard shortcuts
 - Shortcuts can trigger actions even when the extension has no UI open
 - Users can customize shortcuts via `chrome://extensions/shortcuts`
 - Requires `"commands"` permission in manifest.json
 - Cross-ref: `docs/permissions/commands.md`
 
-## manifest.json Configuration
+## manifest.json Configuration {#manifestjson-configuration}
 
-### Basic Setup
+### Basic Setup {#basic-setup}
 ```json
 {
   "name": "My Extension",
@@ -31,7 +31,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/k
 }
 ```
 
-### Platform-Specific Keys
+### Platform-Specific Keys {#platform-specific-keys}
 ```json
 {
   "commands": {
@@ -48,9 +48,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/k
 }
 ```
 
-## Handling Commands
+## Handling Commands {#handling-commands}
 
-### Basic Command Listener
+### Basic Command Listener {#basic-command-listener}
 ```javascript
 chrome.commands.onCommand.addListener((command) => {
   switch (command) {
@@ -64,7 +64,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-### With Action Parameters
+### With Action Parameters {#with-action-parameters}
 ```javascript
 chrome.commands.onCommand.addListener(async (command) => {
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -80,9 +80,9 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Special Commands
+## Special Commands {#special-commands}
 
-### _execute_action (Action Button)
+### _execute_action (Action Button) {#execute-action-action-button}
 - Triggers the extension's action (toolbar icon) click
 - Works even if the extension has no popup
 ```json
@@ -104,7 +104,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-### _execute_browser_action (MV2)
+### _execute_browser_action (MV2) {#execute-browser-action-mv2}
 - Equivalent to `_execute_action` in MV3
 - Still works for backward compatibility
 ```json
@@ -120,7 +120,7 @@ chrome.action.onClicked.addListener((tab) => {
 }
 ```
 
-### _execute_side_panel (Side Panel API)
+### _execute_side_panel (Side Panel API) {#execute-side-panel-side-panel-api}
 - Opens the side panel programmatically
 ```json
 {
@@ -136,9 +136,9 @@ chrome.action.onClicked.addListener((tab) => {
 }
 ```
 
-## Platform-Specific Considerations
+## Platform-Specific Considerations {#platform-specific-considerations}
 
-### Mac Modifier Keys
+### Mac Modifier Keys {#mac-modifier-keys}
 - `Command` = Mac ⌘ key
 - `MacCtrl` = Control key on Mac (different from Ctrl)
 - `Ctrl` = Control key on Windows/Linux
@@ -155,7 +155,7 @@ chrome.action.onClicked.addListener((tab) => {
 }
 ```
 
-### Key Syntax
+### Key Syntax {#key-syntax}
 | Key | Description |
 |-----|-------------|
 | `Ctrl` | Control (Windows/Linux) |
@@ -168,13 +168,13 @@ chrome.action.onClicked.addListener((tab) => {
 | `0-9` | Number keys |
 | `A-Z` | Letter keys |
 
-### Modifier Order
+### Modifier Order {#modifier-order}
 - Always: `Ctrl`/`Command` + `Shift` + `Alt` + key
 - Example: `Ctrl+Shift+Alt+T`
 
-## User Customization
+## User Customization {#user-customization}
 
-### Accessing User-Defined Shortcuts
+### Accessing User-Defined Shortcuts {#accessing-user-defined-shortcuts}
 ```javascript
 chrome.commands.getAll((commands) => {
   commands.forEach(cmd => {
@@ -183,7 +183,7 @@ chrome.commands.getAll((commands) => {
 });
 ```
 
-### Detecting Shortcut Changes
+### Detecting Shortcut Changes {#detecting-shortcut-changes}
 ```javascript
 chrome.commands.onCommand.addListener((command) => {
   console.log(`User triggered: ${command}`);
@@ -193,27 +193,27 @@ chrome.commands.onCommand.addListener((command) => {
 // Users must press the shortcut to trigger your handler
 ```
 
-### Preserving User Settings
+### Preserving User Settings {#preserving-user-settings}
 - User shortcuts persist across extension updates
 - Don't hardcode shortcuts in your code
 - Always use `chrome.commands.onCommand` regardless of manifest settings
 
-## Security Restrictions
+## Security Restrictions {#security-restrictions}
 
-### Scope Limits
+### Scope Limits {#scope-limits}
 - Shortcuts must include at least one modifier (Ctrl, Alt, etc.)
 - Single keys without modifiers are blocked
 - Some system shortcuts cannot be overridden
 
-### Restricted Shortcuts
+### Restricted Shortcuts {#restricted-shortcuts}
 Cannot override:
 - `Ctrl+Alt+Del`
 - `F12` in some contexts
 - System browser shortcuts
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Toggle State
+### Toggle State {#toggle-state}
 ```javascript
 let isEnabled = false;
 
@@ -228,7 +228,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-### Multi-Feature Shortcuts
+### Multi-Feature Shortcuts {#multi-feature-shortcuts}
 ```json
 {
   "commands": {
@@ -245,7 +245,7 @@ chrome.commands.onCommand.addListener((command) => {
 }
 ```
 
-### Context Menu Integration
+### Context Menu Integration {#context-menu-integration}
 ```javascript
 chrome.commands.onCommand.addListener((command) => {
   if (command === 'quick-note') {
@@ -258,7 +258,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-### Content Script Communication
+### Content Script Communication {#content-script-communication}
 ```javascript
 // background.js
 chrome.commands.onCommand.addListener((command, tab) => {
@@ -273,21 +273,21 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### Design Guidelines
+### Design Guidelines {#design-guidelines}
 1. Always provide default shortcuts via `suggested_key`
 2. Use platform-specific keys for Mac compatibility
 3. Document recommended shortcuts in your extension's README
 4. Test on all platforms your extension supports
 
-### Implementation Guidelines
+### Implementation Guidelines {#implementation-guidelines}
 1. Register `onCommand` listener at top level of service worker
 2. Don't assume shortcuts are immutable—users can change them
 3. Handle the case where no shortcut is set
 4. Use descriptive command names (`toggle-dark-mode` not `cmd1`)
 
-### UI Feedback
+### UI Feedback {#ui-feedback}
 ```javascript
 chrome.commands.onCommand.addListener((command) => {
   // Show visual feedback
@@ -300,9 +300,9 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-## Manifest Reference
+## Manifest Reference {#manifest-reference}
 
-### Full Command Object
+### Full Command Object {#full-command-object}
 ```json
 {
   "commands": {
@@ -320,35 +320,35 @@ chrome.commands.onCommand.addListener((command) => {
 }
 ```
 
-### Global vs Page Shortcuts
+### Global vs Page Shortcuts {#global-vs-page-shortcuts}
 - `global: true` - works even when Chrome isn't focused (requires "commands.global" permission)
 - `global: false` (default) - only works when Chrome is the active window
 - Note: Global shortcuts require additional approval during Chrome Web Store review
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
-### Shortcut Not Working
+### Shortcut Not Working {#shortcut-not-working}
 1. Check `chrome://extensions/shortcuts` - is it set?
 2. Verify the command name matches exactly
 3. Ensure listener is registered at top level
 4. Check for conflicts with other extensions
 
-### Development Tips
+### Development Tips {#development-tips}
 1. Use `Ctrl+Shift+[0-9]` for personal dev shortcuts
 2. Log command names to debug
 3. Test on Mac with Command key
 4. Remember Chrome caches service workers
 
-### Common Errors
+### Common Errors {#common-errors}
 ```
 "Invalid key combination" - Missing modifier or invalid key
 "Shortcut unavailable" - Already taken by browser/extension
 "Permission denied" - Need "commands" permission
 ```
 
-## Advanced Patterns
+## Advanced Patterns {#advanced-patterns}
 
-### Command Throttling and Debouncing
+### Command Throttling and Debouncing {#command-throttling-and-debouncing}
 Prevent rapid-fire command execution with throttling:
 ```javascript
 // Throttle command execution
@@ -379,7 +379,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-### Multi-Key Sequences (Chord Shortcuts)
+### Multi-Key Sequences (Chord Shortcuts) {#multi-key-sequences-chord-shortcuts}
 Implement two-step shortcuts similar to Vim:
 ```javascript
 // background.js - Chord/sequence handler
@@ -420,7 +420,7 @@ function processChordKey(key) {
 }
 ```
 
-### Shortcut Conflict Detection
+### Shortcut Conflict Detection {#shortcut-conflict-detection}
 Detect and warn about conflicts with browser/OS shortcuts:
 ```javascript
 // Reserved Chrome shortcuts
@@ -468,7 +468,7 @@ detectConflicts().then(conflicts => {
 });
 ```
 
-### Keyboard Shortcut Onboarding
+### Keyboard Shortcut Onboarding {#keyboard-shortcut-onboarding}
 Help users discover shortcuts with an onboarding flow:
 ```javascript
 // components/ShortcutOnboarding.js
@@ -561,7 +561,7 @@ function renderCheatSheet(commands) {
 }
 ```
 
-### Visual Feedback on Command Execution
+### Visual Feedback on Command Execution {#visual-feedback-on-command-execution}
 Provide clear visual feedback when shortcuts are triggered:
 ```javascript
 chrome.commands.onCommand.addListener((command) => {
@@ -582,13 +582,13 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Permissions: `docs/permissions/commands.md`
 - Patterns: `docs/patterns/keyboard-shortcuts-api.md`
 - Keyboard Navigation: `docs/guides/chrome-extension-keyboard-navigation.md`
 - Reference: [developer.chrome.com/docs/extensions/reference/api/commands](https://developer.chrome.com/docs/extensions/reference/api/commands)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
 - [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)

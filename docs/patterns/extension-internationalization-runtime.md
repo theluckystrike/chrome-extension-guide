@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Beyond `chrome.i18n.getMessage`, Chrome extensions can leverage modern JavaScript APIs for runtime localization.
 
-## DOM Translation with Data Attributes
+## DOM Translation with Data Attributes {#dom-translation-with-data-attributes}
 
 ```javascript
 function translateDOM() {
@@ -26,7 +26,7 @@ function translateDOM() {
 <button data-i18n="submitButton"></button>
 ```
 
-## Dynamic Content Translation
+## Dynamic Content Translation {#dynamic-content-translation}
 
 For programmatically generated strings, use substitution arrays:
 
@@ -35,7 +35,7 @@ const msg = chrome.i18n.getMessage('itemCount', [5, 'items']);
 // "You have 5 items" (with __MSG_itemCount__ defined as "You have $1 $2")
 ```
 
-## Number Formatting
+## Number Formatting {#number-formatting}
 
 ```javascript
 function formatNumber(num, locale) {
@@ -44,7 +44,7 @@ function formatNumber(num, locale) {
 formatNumber(1234567.89, 'de-DE'); // "1.234.567,89"
 ```
 
-## Date Formatting
+## Date Formatting {#date-formatting}
 
 ```javascript
 function formatDate(date, locale) {
@@ -55,7 +55,7 @@ function formatDate(date, locale) {
 }
 ```
 
-## Relative Time
+## Relative Time {#relative-time}
 
 ```javascript
 function formatRelative(date, locale) {
@@ -67,7 +67,7 @@ function formatRelative(date, locale) {
 formatRelative(Date.now() + 300000, 'en'); // "in 5 minutes"
 ```
 
-## Plural Rules
+## Plural Rules {#plural-rules}
 
 ```javascript
 function getPluralForm(count, locale) {
@@ -76,7 +76,7 @@ function getPluralForm(count, locale) {
 }
 ```
 
-## List Formatting
+## List Formatting {#list-formatting}
 
 ```javascript
 function formatList(items, locale) {
@@ -85,7 +85,7 @@ function formatList(items, locale) {
 formatList(['A', 'B', 'C'], 'en'); // "A, B, and C"
 ```
 
-## RTL Layout Support
+## RTL Layout Support {#rtl-layout-support}
 
 ```html
 <div dir="auto">مرحبا</div>
@@ -100,7 +100,7 @@ formatList(['A', 'B', 'C'], 'en'); // "A, B, and C"
 }
 ```
 
-## Locale Detection
+## Locale Detection {#locale-detection}
 
 ```javascript
 const uiLang = chrome.i18n.getUILanguage(); // Extension UI language
@@ -110,7 +110,7 @@ const browserLang = navigator.language;     // Browser locale
 const locale = userPreference || uiLang || browserLang || 'en';
 ```
 
-## Cross References
+## Cross References {#cross-references}
 
 - [Internationalization Guide](../guides/internationalization.md)
 - [Advanced i18n Patterns](./extension-internationalization-advanced.md)

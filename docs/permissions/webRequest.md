@@ -9,12 +9,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # webRequest Permission Reference
 
-## What It Does
+## What It Does {#what-it-does}
 - Grants access to `chrome.webRequest` API
 - Observe HTTP/HTTPS requests at various lifecycle stages
 - MV3: webRequest is READ-ONLY — use `declarativeNetRequest` for blocking/modifying
 
-## MV3 Critical Change
+## MV3 Critical Change {#mv3-critical-change}
 | Capability | MV2 | MV3 |
 |-----------|-----|-----|
 | Observe | webRequest | webRequest |
@@ -22,12 +22,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 | Modify headers | webRequestBlocking | declarativeNetRequest |
 | Redirect | webRequestBlocking | declarativeNetRequest |
 
-## Required: Host Permissions
+## Required: Host Permissions {#required-host-permissions}
 ```json
 { "permissions": ["webRequest"], "host_permissions": ["<all_urls>"] }
 ```
 
-## Using with @theluckystrike/webext-permissions
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, requestPermission } from "@theluckystrike/webext-permissions";
@@ -43,7 +43,7 @@ PERMISSION_DESCRIPTIONS.declarativeNetRequest;         // "Block or modify netwo
 PERMISSION_DESCRIPTIONS.declarativeNetRequestFeedback; // "Get feedback on declarative net requests"
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Request logger: background monitors, popup displays:
 
@@ -72,7 +72,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -90,14 +90,14 @@ storage.watch("monitoringEnabled", (enabled) => {
 });
 ```
 
-## Event Lifecycle
+## Event Lifecycle {#event-lifecycle}
 ```
 onBeforeRequest -> onBeforeSendHeaders -> onSendHeaders ->
   onHeadersReceived -> onResponseStarted -> onCompleted
                                          -> onErrorOccurred
 ```
 
-## Key Events
+## Key Events {#key-events}
 | Event | When | Use Case |
 |-------|------|----------|
 | `onBeforeRequest` | Before request sent | Log URLs, observe bodies |
@@ -106,20 +106,20 @@ onBeforeRequest -> onBeforeSendHeaders -> onSendHeaders ->
 | `onCompleted` | Request finished | Log status, timing |
 | `onErrorOccurred` | Request failed | Track network errors |
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 1. Network request logger/debugger
 2. Privacy monitor (third-party tracker counting)
 3. Performance monitor (request timing)
 4. API traffic inspector
 
-## Gotchas
+## Gotchas {#gotchas}
 - MV3: READ-ONLY — cannot block, redirect, or modify
 - `host_permissions` required — no events without them
 - Service worker lifecycle: register listeners synchronously at top level
 - High-traffic sites = thousands of events — always filter with URL patterns
 - `requestBody` needs `"extraInfoSpec": ["requestBody"]`
 
-## declarativeNetRequest for Blocking (MV3)
+## declarativeNetRequest for Blocking (MV3) {#declarativenetrequest-for-blocking-mv3}
 ```json
 {
   "permissions": ["declarativeNetRequest"],
@@ -129,9 +129,9 @@ onBeforeRequest -> onBeforeSendHeaders -> onSendHeaders ->
 }
 ```
 
-## Related Permissions
+## Related Permissions {#related-permissions}
 - [cookies](cookies.md), [tabs](tabs.md), [activeTab](activeTab.md)
 - [declarativeNetRequest](declarativeNetRequest.md) — MV3 replacement for request blocking/modification
 
-## API Reference
+## API Reference {#api-reference}
 - [Chrome webRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/webRequest)

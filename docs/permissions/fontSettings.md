@@ -9,40 +9,40 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # fontSettings Permission
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Access to the `chrome.fontSettings` API for reading and modifying Chrome's font preferences (default fonts, sizes, per-script fonts).
 
-## Manifest
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["fontSettings"]
 }
 ```
 
-## User Warning
+## User Warning {#user-warning}
 None — this permission does not trigger a warning at install time.
 
-## API Access
+## API Access {#api-access}
 
-### Font Management
+### Font Management {#font-management}
 - `chrome.fontSettings.getFont({ genericFamily, script? })` — get font for a family/script
 - `chrome.fontSettings.setFont({ genericFamily, fontId, script? })` — set font for a family/script
 - `chrome.fontSettings.getFontList()` — list all available fonts on the system
 - `chrome.fontSettings.clearFont({ genericFamily, script? })` — reset to default
 
-### Font Size Management
+### Font Size Management {#font-size-management}
 - `chrome.fontSettings.getDefaultFontSize()` / `setDefaultFontSize({ pixelSize })`
 - `chrome.fontSettings.getDefaultFixedFontSize()` / `setDefaultFixedFontSize({ pixelSize })`
 - `chrome.fontSettings.getMinimumFontSize()` / `setMinimumFontSize({ pixelSize })`
 - `chrome.fontSettings.clearDefaultFontSize()` / `clearDefaultFixedFontSize()` / `clearMinimumFontSize()`
 
-### Events
+### Events {#events}
 - `chrome.fontSettings.onFontChanged`
 - `chrome.fontSettings.onDefaultFontSizeChanged`
 - `chrome.fontSettings.onDefaultFixedFontSizeChanged`
 - `chrome.fontSettings.onMinimumFontSizeChanged`
 
-## Generic Font Families
+## Generic Font Families {#generic-font-families}
 | Family | Description |
 |---|---|
 | `standard` | Default body text font |
@@ -53,7 +53,7 @@ None — this permission does not trigger a warning at install time.
 | `fantasy` | Decorative font |
 | `math` | Math font |
 
-## Basic Usage
+## Basic Usage {#basic-usage}
 ```typescript
 // Get current serif font
 const { fontId } = await chrome.fontSettings.getFont({ genericFamily: 'serif' });
@@ -73,7 +73,7 @@ await chrome.fontSettings.setDefaultFontSize({ pixelSize: 18 });
 await chrome.fontSettings.setMinimumFontSize({ pixelSize: 12 });
 ```
 
-## Script-Specific Fonts
+## Script-Specific Fonts {#script-specific-fonts}
 ```typescript
 // Set font for Japanese text
 await chrome.fontSettings.setFont({
@@ -90,7 +90,7 @@ await chrome.fontSettings.setFont({
 });
 ```
 
-## Accessibility Extension Pattern
+## Accessibility Extension Pattern {#accessibility-extension-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -125,7 +125,7 @@ m.onMessage('RESET_FONTS', async () => {
 });
 ```
 
-## Monitor Font Changes
+## Monitor Font Changes {#monitor-font-changes}
 ```typescript
 chrome.fontSettings.onFontChanged.addListener((details) => {
   console.log(`Font changed: ${details.genericFamily} → ${details.fontId} (script: ${details.script})`);
@@ -136,21 +136,21 @@ chrome.fontSettings.onDefaultFontSizeChanged.addListener((details) => {
 });
 ```
 
-## When to Use
+## When to Use {#when-to-use}
 - Accessibility extensions (dyslexia-friendly fonts, larger text)
 - Reading customization tools
 - Typography/font management extensions
 - Localization tools (script-specific fonts)
 
-## When NOT to Use
+## When NOT to Use {#when-not-to-use}
 - If you only need to style specific pages — use content scripts with CSS injection
 - For temporary font changes — use CSS, not this API (changes are persistent)
 
-## Permission Check
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('fontSettings');
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 - Related: `docs/guides/accessibility.md`

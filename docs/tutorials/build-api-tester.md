@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests and view formatted responses.
 
-## Manifest
+## Manifest {#manifest}
 
 ```json
 {
@@ -21,7 +21,7 @@ Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests a
 }
 ```
 
-## Sending Requests
+## Sending Requests {#sending-requests}
 
 ```typescript
 async function sendRequest(req: { url: string; method: string; headers: Record<string,string>; body?: string; }): Promise<{ status: number; statusText: string; body: string; timing: number; }> {
@@ -31,7 +31,7 @@ async function sendRequest(req: { url: string; method: string; headers: Record<s
 }
 ```
 
-## Display Response
+## Display Response {#display-response}
 
 ```typescript
 function displayResponse(res: { status: number; statusText: string; body: string; }): void {
@@ -42,7 +42,7 @@ function displayResponse(res: { status: number; statusText: string; body: string
 }
 ```
 
-## History Storage
+## History Storage {#history-storage}
 
 ```typescript
 async function saveHistory(req: any, res: any): Promise<void> {
@@ -52,7 +52,7 @@ async function saveHistory(req: any, res: any): Promise<void> {
 }
 ```
 
-## Environment Variables
+## Environment Variables {#environment-variables}
 
 ```typescript
 function substitute(text: string, vars: Record<string, string>): string {
@@ -60,7 +60,7 @@ function substitute(text: string, vars: Record<string, string>): string {
 }
 ```
 
-## Export/Import
+## Export/Import {#exportimport}
 
 ```typescript
 function exportCollection(name: string, requests: any[]): void {
@@ -70,7 +70,7 @@ function exportCollection(name: string, requests: any[]): void {
 }
 ```
 
-## Send Handler
+## Send Handler {#send-handler}
 
 ```typescript
 async function handleSend(): Promise<void> {
@@ -86,7 +86,7 @@ async function handleSend(): Promise<void> {
 }
 ```
 
-## UI Structure
+## UI Structure {#ui-structure}
 
 ```html
 <div class="url-bar">
@@ -99,14 +99,14 @@ async function handleSend(): Promise<void> {
 <div id="error"></div>
 ```
 
-## Next Steps
+## Next Steps {#next-steps}
 
 - Add Bearer token and Basic Auth helpers
 - Build history browser UI
 - Add response search/filter
 - Support WebSocket connections
 
-## See Also
+## See Also {#see-also}
 
 - [Cross-Origin Requests](/patterns/cross-origin-requests)
 - [Popup Patterns](/guides/popup-patterns)

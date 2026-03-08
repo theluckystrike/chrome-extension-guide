@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This document covers patterns for intercepting and modifying network requests in Chrome extensions using MV3.
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions can intercept, modify, block, or redirect network requests through several mechanisms:
 
@@ -17,11 +17,11 @@ Chrome extensions can intercept, modify, block, or redirect network requests thr
 - **chrome.webRequest**: Read-only observation (limited in MV3)
 - **Content script injection**: Programmatic interception via monkey-patching
 
-## declarativeNetRequest (MV3)
+## declarativeNetRequest (MV3) {#declarativenetrequest-mv3}
 
 The `declarativeNetRequest` API is the MV3 approach for modifying network requests without requiring host permissions.
 
-### Static Rules
+### Static Rules {#static-rules}
 
 Static rules are defined in the manifest and loaded at extension startup:
 
@@ -37,7 +37,7 @@ Static rules are defined in the manifest and loaded at extension startup:
 }
 ```
 
-### Dynamic Rules
+### Dynamic Rules {#dynamic-rules}
 
 Dynamic rules can be added at runtime:
 
@@ -52,7 +52,7 @@ chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-## Blocking Patterns
+## Blocking Patterns {#blocking-patterns}
 
 Block specific requests using URL filters:
 
@@ -68,7 +68,7 @@ Block specific requests using URL filters:
 }
 ```
 
-## Redirect Patterns
+## Redirect Patterns {#redirect-patterns}
 
 Redirect requests to alternative URLs:
 
@@ -87,7 +87,7 @@ Redirect requests to alternative URLs:
 }
 ```
 
-### CDN Switching
+### CDN Switching {#cdn-switching}
 
 Rewrite URLs to use different CDNs:
 
@@ -106,7 +106,7 @@ Rewrite URLs to use different CDNs:
 }
 ```
 
-## Modifying Headers
+## Modifying Headers {#modifying-headers}
 
 Use `modifyHeaders` to add, remove, or set request/response headers:
 
@@ -127,7 +127,7 @@ Use `modifyHeaders` to add, remove, or set request/response headers:
 }
 ```
 
-## Programmatic Interception (Content Scripts)
+## Programmatic Interception (Content Scripts) {#programmatic-interception-content-scripts}
 
 For intercepting requests within page context, monkey-patch `fetch` and `XMLHttpRequest`:
 
@@ -158,7 +158,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-## Observing Requests (webRequest)
+## Observing Requests (webRequest) {#observing-requests-webrequest}
 
 Use `chrome.webRequest` for read-only observation (non-blocking):
 
@@ -180,7 +180,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 Note: In MV3, blocking via `webRequest` (`webRequestBlocking`) is no longer available for most extensions. Only policy-installed extensions retain access. Use `declarativeNetRequest` instead for request blocking and modification.
 
-## Security Considerations
+## Security Considerations {#security-considerations}
 
 - **Don't intercept sensitive requests**: Avoid modifying requests to authentication endpoints or payment processors
 - **Handle credentials carefully**: Ensure user credentials aren't inadvertently exposed
@@ -188,7 +188,7 @@ Note: In MV3, blocking via `webRequest` (`webRequestBlocking`) is no longer avai
 - **Limit scope**: Only intercept requests necessary for your extension's functionality
 - **Use HTTPS**: When redirecting, prefer HTTPS URLs
 
-## Reading Response Data
+## Reading Response Data {#reading-response-data}
 
 The `declarativeNetRequest` API cannot read response bodies. For content inspection:
 
@@ -196,7 +196,7 @@ The `declarativeNetRequest` API cannot read response bodies. For content inspect
 2. Intercept `fetch` or `XMLHttpRequest` to access response data
 3. Consider using `chrome.debugger` for deeper inspection (requires user consent)
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [declarativeNetRequest API Reference](../api-reference/declarative-net-request-api.md)
 - [Network Interception Patterns](./network-interception.md)

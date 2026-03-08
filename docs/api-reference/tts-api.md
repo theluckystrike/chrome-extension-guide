@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.tts` API enables extensions to synthesize speech using the operating system's text-to-speech engine. This API is particularly useful for accessibility features, read-aloud functionality, language learning applications, and audio notifications.
 
-## Overview
+## Overview {#overview}
 
 The Text-to-Speech (TTS) API allows Chrome extensions to convert text into spoken words. The API provides fine-grained control over voice selection, speech rate, pitch, volume, and event handling for synchronized visual highlighting.
 
@@ -23,9 +23,9 @@ The Text-to-Speech (TTS) API allows Chrome extensions to convert text into spoke
 
 The API uses the system's available TTS voices, which vary by operating system and installed language packs.
 
-## API Methods
+## API Methods {#api-methods}
 
-### chrome.tts.speak()
+### chrome.tts.speak() {#chromettsspeak}
 
 Speaks text using the TTS engine.
 
@@ -59,7 +59,7 @@ chrome.tts.speak('Hello, world!', {
 });
 ```
 
-### chrome.tts.stop()
+### chrome.tts.stop() {#chromettsstop}
 
 Immediately stops any ongoing speech and clears the queue.
 
@@ -75,7 +75,7 @@ setTimeout(() => {
 }, 3000);
 ```
 
-### chrome.tts.pause()
+### chrome.tts.pause() {#chromettspause}
 
 Pauses speech synthesis. Note: Not all TTS engines support pausing.
 
@@ -83,7 +83,7 @@ Pauses speech synthesis. Note: Not all TTS engines support pausing.
 chrome.tts.pause()
 ```
 
-### chrome.tts.resume()
+### chrome.tts.resume() {#chromettsresume}
 
 Resumes paused speech.
 
@@ -91,7 +91,7 @@ Resumes paused speech.
 chrome.tts.resume()
 ```
 
-### chrome.tts.isSpeaking()
+### chrome.tts.isSpeaking() {#chromettsisspeaking}
 
 Checks whether the TTS engine is currently speaking.
 
@@ -109,7 +109,7 @@ chrome.tts.isSpeaking((speaking) => {
 });
 ```
 
-### chrome.tts.getVoices()
+### chrome.tts.getVoices() {#chromettsgetvoices}
 
 Retrieves the list of available TTS voices.
 
@@ -129,7 +129,7 @@ chrome.tts.getVoices((voices) => {
 });
 ```
 
-## TtsVoice Object
+## TtsVoice Object {#ttsvoice-object}
 
 Represents a single available voice for speech synthesis.
 
@@ -151,11 +151,11 @@ Represents a single available voice for speech synthesis.
 }
 ```
 
-## Speech Events
+## Speech Events {#speech-events}
 
 The TTS API dispatches events during speech synthesis. Use the `onEvent` callback in `chrome.tts.speak()` to handle these events.
 
-### Event Types
+### Event Types {#event-types}
 
 | Event | Description |
 |-------|-------------|
@@ -183,31 +183,31 @@ chrome.tts.speak('Hello world, this is a test.', {
 });
 ```
 
-## Use Cases
+## Use Cases {#use-cases}
 
-### Accessibility
+### Accessibility {#accessibility}
 - Screen reader support for visually impaired users
 - Audio feedback for keyboard navigation
 - Voice prompts for complex interfaces
 
-### Read-Aloud Features
+### Read-Aloud Features {#read-aloud-features}
 - Reading articles or documents aloud
 - Email and message readers
 - E-book narration
 
-### Language Learning
+### Language Learning {#language-learning}
 - Pronunciation practice
 - Listening comprehension exercises
 - Vocabulary audio playback
 
-### Audio Notifications
+### Audio Notifications {#audio-notifications}
 - Silent push notification alternatives
 - Background task completion alerts
 - Time-based announcements
 
-## Code Examples
+## Code Examples {#code-examples}
 
-### Basic TTS Usage
+### Basic TTS Usage {#basic-tts-usage}
 
 ```javascript
 function speakText(text) {
@@ -221,7 +221,7 @@ function speakText(text) {
 speakText('Welcome to our extension!');
 ```
 
-### Voice Selection
+### Voice Selection {#voice-selection}
 
 ```javascript
 function speakWithVoice(text, voiceName) {
@@ -239,7 +239,7 @@ function speakWithVoice(text, voiceName) {
 speakWithVoice('Hello!', 'Google UK English Male');
 ```
 
-### Queue Multiple Utterances
+### Queue Multiple Utterances {#queue-multiple-utterances}
 
 ```javascript
 function speakQueue(messages) {
@@ -258,7 +258,7 @@ function speakQueue(messages) {
 speakQueue(['First message', 'Second message', 'Third message']);
 ```
 
-### Word Highlighting with Events
+### Word Highlighting with Events {#word-highlighting-with-events}
 
 ```javascript
 function speakWithHighlighting(text) {
@@ -281,7 +281,7 @@ function highlightWord(word) {
 }
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [TTS Permission](../permissions/tts.md) - Configuration and permission details
 - [TTS Engine Permission](../permissions/ttsEngine.md) - Custom TTS engine development

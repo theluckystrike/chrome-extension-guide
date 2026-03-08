@@ -6,12 +6,12 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 ---
 # Context Menus in Chrome Extensions
 
-## Introduction
+## Introduction {#introduction}
 - Add custom items to Chrome's right-click menu
 - Requires `"contextMenus"` permission
 - Items created in background service worker, persist across restarts
 
-## manifest.json Setup
+## manifest.json Setup {#manifestjson-setup}
 ```json
 {
   "permissions": ["contextMenus"],
@@ -19,9 +19,9 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 }
 ```
 
-## Creating Menu Items
+## Creating Menu Items {#creating-menu-items}
 
-### chrome.contextMenus.create()
+### chrome.contextMenus.create() {#chromecontextmenuscreate}
 ```javascript
 chrome.contextMenus.create({
   id: "lookupSelection",
@@ -34,7 +34,7 @@ chrome.contextMenus.create({
 - `title`: Display text, `%s` placeholder for selected text
 - `contexts`: Array of when to show — see Context Types below
 
-### Context Types
+### Context Types {#context-types}
 - `"all"` — show everywhere
 - `"page"` — right-click on page background
 - `"selection"` — text is selected
@@ -46,22 +46,22 @@ chrome.contextMenus.create({
 - `"action"` — extension's toolbar icon (replaces `"browser_action"`)
 - `"launcher"` — ChromeOS app launcher
 
-### Nested Menus (Submenus)
+### Nested Menus (Submenus) {#nested-menus-submenus}
 ```javascript
 chrome.contextMenus.create({ id: "parent", title: "My Extension" });
 chrome.contextMenus.create({ id: "child1", parentId: "parent", title: "Option 1" });
 chrome.contextMenus.create({ id: "child2", parentId: "parent", title: "Option 2" });
 ```
 
-### Menu Item Types
+### Menu Item Types {#menu-item-types}
 - `"normal"` — standard menu item (default)
 - `"checkbox"` — toggleable checkbox
 - `"radio"` — radio button (grouped by `parentId`)
 - `"separator"` — visual divider
 
-## Handling Clicks
+## Handling Clicks {#handling-clicks}
 
-### chrome.contextMenus.onClicked
+### chrome.contextMenus.onClicked {#chromecontextmenusonclicked}
 ```javascript
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
@@ -76,7 +76,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-### OnClickData Properties
+### OnClickData Properties {#onclickdata-properties}
 - `menuItemId`: Which item was clicked
 - `selectionText`: Selected text (if context is "selection")
 - `pageUrl`: URL of the page
@@ -85,23 +85,23 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 - `frameUrl`: URL of the iframe
 - `editable`: Whether the element is editable
 
-## Updating and Removing
+## Updating and Removing {#updating-and-removing}
 
-### chrome.contextMenus.update(id, changes)
+### chrome.contextMenus.update(id, changes) {#chromecontextmenusupdateid-changes}
 ```javascript
 chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
 ```
 
-### chrome.contextMenus.remove(id)
-### chrome.contextMenus.removeAll()
+### chrome.contextMenus.remove(id) {#chromecontextmenusremoveid}
+### chrome.contextMenus.removeAll() {#chromecontextmenusremoveall}
 
-## Patterns
+## Patterns {#patterns}
 
-### Dynamic Menus Based on Page
+### Dynamic Menus Based on Page {#dynamic-menus-based-on-page}
 - Create menus in `onInstalled`, update based on active tab
 - Use `chrome.tabs.onActivated` to update menu visibility
 
-### Send Selected Text to Background
+### Send Selected Text to Background {#send-selected-text-to-background}
 - Context menu with `"selection"` context
 - Use `@theluckystrike/webext-messaging` to process in background:
   ```typescript
@@ -113,23 +113,23 @@ chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
   });
   ```
 
-### Save User Preferences for Menu Items
+### Save User Preferences for Menu Items {#save-user-preferences-for-menu-items}
 - Store checkbox/radio state with `@theluckystrike/webext-storage`
 - Restore state in `onInstalled` listener
 
-## Best Practices
+## Best Practices {#best-practices}
 - Create all menus in `chrome.runtime.onInstalled` — they persist automatically
 - Use descriptive `id` strings — easier to debug than auto-generated IDs
 - Keep menu items minimal — too many clutters the context menu
 - Use `contexts` to show items only where relevant
 - `documentUrlPatterns` to limit to specific sites
 
-## Common Mistakes
+## Common Mistakes {#common-mistakes}
 - Creating menus outside `onInstalled` — duplicates on every service worker restart
 - Forgetting `id` field — required in MV3 (was optional in MV2)
 - Not handling all `menuItemId` values in the click listener
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Context Menu Patterns](../patterns/context-menu-patterns.md)
 - [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

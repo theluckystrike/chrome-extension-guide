@@ -8,7 +8,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 
 This tutorial walks through building a Chrome extension for instant note-taking with auto-save, folders, and search functionality.
 
-## Step 1: Manifest with Storage Permission
+## Step 1: Manifest with Storage Permission {#step-1-manifest-with-storage-permission}
 
 Create `manifest.json` with the required permissions:
 
@@ -22,7 +22,7 @@ Create `manifest.json` with the required permissions:
 }
 ```
 
-## Step 2: Popup with Textarea for Quick Note Entry
+## Step 2: Popup with Textarea for Quick Note Entry {#step-2-popup-with-textarea-for-quick-note-entry}
 
 Create `popup.html` with a textarea and note list:
 
@@ -34,7 +34,7 @@ Create `popup.html` with a textarea and note list:
 
 See [guides/popup-patterns.md](../guides/popup-patterns.md) for popup best practices.
 
-## Step 3: Auto-Save on Every Keystroke (Debounced)
+## Step 3: Auto-Save on Every Keystroke (Debounced) {#step-3-auto-save-on-every-keystroke-debounced}
 
 Implement debounced auto-save using `chrome.storage.sync`:
 
@@ -50,7 +50,7 @@ editor.addEventListener('input', () => {
 
 For storage limits and deep dive, see [api-reference/storage-api-deep-dive.md](../api-reference/storage-api-deep-dive.md).
 
-## Step 4: Note List with Preview and Timestamp
+## Step 4: Note List with Preview and Timestamp {#step-4-note-list-with-preview-and-timestamp}
 
 Display notes with preview and timestamps:
 
@@ -65,7 +65,7 @@ function renderNotes(notes) {
 }
 ```
 
-## Step 5: Create/Delete/Edit Notes
+## Step 5: Create/Delete/Edit Notes {#step-5-createdeleteedit-notes}
 
 Add CRUD operations for notes:
 
@@ -80,7 +80,7 @@ function deleteNote(id) {
 }
 ```
 
-## Step 6: Folder/Category Organization
+## Step 6: Folder/Category Organization {#step-6-foldercategory-organization}
 
 Organize notes into folders:
 
@@ -90,7 +90,7 @@ Organize notes into folders:
 
 Filter notes by folder in the sidebar.
 
-## Step 7: Full-Text Search Across All Notes
+## Step 7: Full-Text Search Across All Notes {#step-7-full-text-search-across-all-notes}
 
 Implement search functionality:
 
@@ -104,7 +104,7 @@ function searchNotes(query) {
 }
 ```
 
-## Step 8: Keyboard Shortcut to Open Popup
+## Step 8: Keyboard Shortcut to Open Popup {#step-8-keyboard-shortcut-to-open-popup}
 
 Add a keyboard shortcut in `manifest.json`:
 
@@ -119,9 +119,9 @@ Add a keyboard shortcut in `manifest.json`:
 
 See [api-reference/commands-api.md](../api-reference/commands-api.md) for more.
 
-## Additional Features
+## Additional Features {#additional-features}
 
-### Rich Text Basics
+### Rich Text Basics {#rich-text-basics}
 Use `contentEditable` for bold, italic, and lists:
 
 ```javascript
@@ -130,10 +130,10 @@ document.execCommand('italic');
 document.execCommand('insertUnorderedList');
 ```
 
-### Sync Across Devices
+### Sync Across Devices {#sync-across-devices}
 `chrome.storage.sync` syncs automatically across devices (100KB limit).
 
-### Export Notes as Text/Markdown
+### Export Notes as Text/Markdown {#export-notes-as-textmarkdown}
 ```javascript
 function exportNotes() {
   const markdown = notes.map(n => `# ${n.title}\n\n${n.content}`).join('\n\n');
@@ -142,10 +142,10 @@ function exportNotes() {
 }
 ```
 
-### Pin Important Notes to Top
+### Pin Important Notes to Top {#pin-important-notes-to-top}
 Add a `pinned: true` property and sort notes accordingly.
 
-### Note Count in Badge
+### Note Count in Badge {#note-count-in-badge}
 Display note count in extension badge:
 
 ```javascript

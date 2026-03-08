@@ -7,7 +7,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Navigation and URL Handling Patterns
 
-## Overview
+## Overview {#overview}
 
 Extensions frequently need to observe, intercept, and manipulate navigation. Chrome provides `chrome.webNavigation`, `chrome.declarativeNetRequest`, and content-script-level techniques for this. This guide covers 8 production patterns: advanced URL matching, navigation events, SPA detection, URL canonicalization, deep linking, redirect handling, parameter manipulation, and history tracking.
 
@@ -15,7 +15,7 @@ Extensions frequently need to observe, intercept, and manipulate navigation. Chr
 
 ---
 
-## Pattern 1: URL Pattern Matching Beyond Manifest Matches
+## Pattern 1: URL Pattern Matching Beyond Manifest Matches {#pattern-1-url-pattern-matching-beyond-manifest-matches}
 
 Manifest `matches` patterns are limited to scheme/host/path globs. For finer control, use `URLPattern` or regex in your service worker:
 
@@ -85,7 +85,7 @@ if (params) {
 
 ---
 
-## Pattern 2: webNavigation Events
+## Pattern 2: webNavigation Events {#pattern-2-webnavigation-events}
 
 The `chrome.webNavigation` API provides granular navigation lifecycle events that `tabs.onUpdated` cannot:
 
@@ -182,7 +182,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((d) => recordNavEvent("hi
 
 ---
 
-## Pattern 3: SPA Navigation Detection in Content Scripts
+## Pattern 3: SPA Navigation Detection in Content Scripts {#pattern-3-spa-navigation-detection-in-content-scripts}
 
 SPAs change URLs without full page loads. Detect this reliably in content scripts:
 
@@ -262,7 +262,7 @@ spaNav.onChange((oldUrl, newUrl) => {
 
 ---
 
-## Pattern 4: URL Canonicalization and Comparison
+## Pattern 4: URL Canonicalization and Comparison {#pattern-4-url-canonicalization-and-comparison}
 
 Normalize URLs before comparing them to avoid false negatives:
 
@@ -348,7 +348,7 @@ function urlsEqual(a: string, b: string, options?: CanonicalizeOptions): boolean
 
 ---
 
-## Pattern 5: Deep Linking into Extension Pages
+## Pattern 5: Deep Linking into Extension Pages {#pattern-5-deep-linking-into-extension-pages}
 
 Create linkable routes within your extension's HTML pages:
 
@@ -419,7 +419,7 @@ openExtensionPage("/detail", { id: "abc123" });
 
 ---
 
-## Pattern 6: Redirect Handling with declarativeNetRequest
+## Pattern 6: Redirect Handling with declarativeNetRequest {#pattern-6-redirect-handling-with-declarativenetrequest}
 
 Use declarative rules for fast, efficient URL redirects without a blocking listener:
 
@@ -538,7 +538,7 @@ For static rules shipped with the extension, define them in a JSON file:
 
 ---
 
-## Pattern 7: URL Parameter Extraction and Manipulation
+## Pattern 7: URL Parameter Extraction and Manipulation {#pattern-7-url-parameter-extraction-and-manipulation}
 
 Build a utility layer for reading and rewriting URL parameters safely:
 
@@ -657,7 +657,7 @@ function parseGitHubPR(url: string): GitHubPRUrl | null {
 
 ---
 
-## Pattern 8: Back/Forward Navigation Tracking
+## Pattern 8: Back/Forward Navigation Tracking {#pattern-8-backforward-navigation-tracking}
 
 Track navigation history within a tab to understand user journeys:
 
@@ -759,7 +759,7 @@ function detectNavigationLoop(tabId: number, threshold = 3): boolean {
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This document outlines patterns for migrating Chrome extensions from Manifest V2 event pages to Manifest V3 service workers.
 
-## Key Differences Between MV2 Event Pages and MV3 Service Workers
+## Key Differences Between MV2 Event Pages and MV3 Service Workers {#key-differences-between-mv2-event-pages-and-mv3-service-workers}
 
 Manifest V3 service workers have significant differences from MV2 event pages:
 
@@ -19,11 +19,11 @@ Manifest V3 service workers have significant differences from MV2 event pages:
 - **No persistent state**: Variables are not preserved between invocations
 - **Ephemeral lifecycle**: Service workers terminate after idle and restart on events
 
-## Global State Migration
+## Global State Migration {#global-state-migration}
 
 MV2 event pages could store state in global variables. MV3 service workers lose all state when terminated.
 
-### Before (MV2 Event Page)
+### Before (MV2 Event Page) {#before-mv2-event-page}
 
 ```javascript
 // event-page.js - MV2
@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-### After (MV3 Service Worker)
+### After (MV3 Service Worker) {#after-mv3-service-worker}
 
 ```javascript
 // service-worker.js - MV3
@@ -68,11 +68,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 Use `chrome.storage.session` for ephemeral data or `chrome.storage.local` for persistent data.
 
-## DOM Operations: Offscreen Documents
+## DOM Operations: Offscreen Documents {#dom-operations-offscreen-documents}
 
 For operations requiring DOM access (audio, canvas, clipboard), use offscreen documents.
 
-### Audio Playback
+### Audio Playback {#audio-playback}
 
 ```javascript
 // service-worker.js
@@ -89,7 +89,7 @@ async function playAudio(audioUrl) {
 }
 ```
 
-### Canvas/Image Processing
+### Canvas/Image Processing {#canvasimage-processing}
 
 ```javascript
 // service-worker.js
@@ -105,11 +105,11 @@ async function processImage(imageData) {
 }
 ```
 
-## Replacing setTimeout/setInterval
+## Replacing setTimeout/setInterval {#replacing-settimeoutsetinterval}
 
 Service workers cannot rely on `setTimeout` for delays over 30 seconds. Use `chrome.alarms` instead.
 
-### Before (MV2)
+### Before (MV2) {#before-mv2}
 
 ```javascript
 // event-page.js
@@ -118,7 +118,7 @@ setTimeout(() => {
 }, 60 * 60 * 1000); // 1 hour
 ```
 
-### After (MV3)
+### After (MV3) {#after-mv3}
 
 ```javascript
 // service-worker.js
@@ -131,11 +131,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## XMLHttpRequest to Fetch Migration
+## XMLHttpRequest to Fetch Migration {#xmlhttprequest-to-fetch-migration}
 
 Replace deprecated `XMLHttpRequest` with the `fetch` API.
 
-### Before (MV2)
+### Before (MV2) {#before-mv2}
 
 ```javascript
 const xhr = new XMLHttpRequest();
@@ -144,7 +144,7 @@ xhr.onload = () => console.log(xhr.responseText);
 xhr.send();
 ```
 
-### After (MV3)
+### After (MV3) {#after-mv3}
 
 ```javascript
 fetch('https://api.example.com/data')
@@ -153,18 +153,18 @@ fetch('https://api.example.com/data')
   .catch(error => console.error(error));
 ```
 
-## localStorage to chrome.storage
+## localStorage to chrome.storage {#localstorage-to-chromestorage}
 
 Replace `localStorage` with `chrome.storage`.
 
-### Before (MV2)
+### Before (MV2) {#before-mv2}
 
 ```javascript
 localStorage.setItem('key', 'value');
 const value = localStorage.getItem('key');
 ```
 
-### After (MV3)
+### After (MV3) {#after-mv3}
 
 ```javascript
 chrome.storage.local.set({ key: 'value' });
@@ -173,7 +173,7 @@ chrome.storage.local.get(['key']).then(result => {
 });
 ```
 
-## WebSocket in Service Workers
+## WebSocket in Service Workers {#websocket-in-service-workers}
 
 WebSocket connections cannot persist in service workers. Use an offscreen document for persistent connections.
 
@@ -191,7 +191,7 @@ async function connectWebSocket(url) {
 }
 ```
 
-## Common Migration Mistakes
+## Common Migration Mistakes {#common-migration-mistakes}
 
 1. **Assuming persistent state**: Never store data in global variables
 2. **Using setTimeout for long delays**: Use chrome.alarms API
@@ -199,14 +199,14 @@ async function connectWebSocket(url) {
 4. **Using localStorage**: Always use chrome.storage APIs
 5. **Not handling service worker lifecycle**: Plan for termination and restart
 
-## Testing Migration
+## Testing Migration {#testing-migration}
 
 - Run both versions side-by-side to compare behavior
 - Test edge cases: idle timeout, memory limits, event ordering
 - Verify all chrome.storage operations work correctly
 - Test offscreen document lifecycle management
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
 - [Service Workers](mv3/service-workers.md)
 - [Manifest V3 Migration Guide](mv3/manifest-v3-migration-guide.md)

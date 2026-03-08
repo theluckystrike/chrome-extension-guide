@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 This document covers common debugging patterns for Chrome extension development across different contexts.
 
-## Service Worker Debugging
+## Service Worker Debugging {#service-worker-debugging}
 
 Service workers run in the background and require special debugging approaches:
 
@@ -17,7 +17,7 @@ Service workers run in the background and require special debugging approaches:
 - **Inspect**: Go to `chrome://extensions`, enable "Developer mode", and click "Inspect view" for your service worker
 - **Console**: Each service worker has a separate DevTools window - logs appear here, not in the page's console
 
-## Popup Debugging
+## Popup Debugging {#popup-debugging}
 
 The popup context is短暂 and closes on blur:
 
@@ -25,7 +25,7 @@ The popup context is短暂 and closes on blur:
 - **Alternative**: Use `chrome.action.openPopup()` from the background console to open the popup
 - **Workaround**: Pin the popup to the toolbar to prevent it from closing when clicking elsewhere
 
-## Content Script Debugging
+## Content Script Debugging {#content-script-debugging}
 
 Content scripts run in the context of web pages:
 
@@ -33,7 +33,7 @@ Content scripts run in the context of web pages:
 - **File Recognition**: Content scripts appear with a special icon or under the "Content scripts" folder
 - **Breakpoints**: Set breakpoints directly in the content script from this panel
 
-## Background Console (Service Worker)
+## Background Console (Service Worker) {#background-console-service-worker}
 
 The background/service worker console is separate from page consoles:
 
@@ -41,7 +41,7 @@ The background/service worker console is separate from page consoles:
 - All `console.log`, `console.error`, etc. from the service worker appear here
 - Note: The console clears on service worker restart - use persistent logging if needed
 
-## Message Passing Debugging
+## Message Passing Debugging {#message-passing-debugging}
 
 Debugging communication between extension contexts:
 
@@ -56,7 +56,7 @@ Debugging communication between extension contexts:
   ```
 - **Verify Context**: Ensure the receiving end exists before sending
 
-## Storage Debugging
+## Storage Debugging {#storage-debugging}
 
 Inspect extension storage:
 
@@ -64,7 +64,7 @@ Inspect extension storage:
 - **Sync Storage**: Use `chrome.storage.sync.get(null, console.log)` for sync storage
 - **Monitor Changes**: Use the `chrome.storage.onChanged` listener to track changes
 
-## Permission Debugging
+## Permission Debugging {#permission-debugging}
 
 Verify active permissions at runtime:
 
@@ -76,7 +76,7 @@ chrome.permissions.getAll((permissions) => {
 
 This helps diagnose permission-related issues, especially with optional permissions.
 
-## Network Debugging
+## Network Debugging {#network-debugging}
 
 Extension network requests appear in different places:
 
@@ -84,7 +84,7 @@ Extension network requests appear in different places:
 - **Service Worker**: Network requests made from the service worker appear in the service worker's DevTools
 - **Filter**: Use "XHR" or "Fetch" filters to find extension API calls
 
-## Breakpoints Across Contexts
+## Breakpoints Across Contexts {#breakpoints-across-contexts}
 
 Each extension context has its own DevTools:
 
@@ -93,16 +93,16 @@ Each extension context has its own DevTools:
 - Service worker breakpoints in service worker DevTools
 - Popup breakpoints in popup DevTools
 
-## Common Errors
+## Common Errors {#common-errors}
 
-### "Receiving end does not exist"
+### "Receiving end does not exist" {#receiving-end-does-not-exist}
 
 This typically means:
 - The content script is not injected into the current page
 - The target tab doesn't exist or has been closed
 - The receiving extension context has been invalidated
 
-### "Extension context invalidated"
+### "Extension context invalidated" {#extension-context-invalidated}
 
 This occurs after:
 - Extension update (service worker restarts)
@@ -110,19 +110,19 @@ This occurs after:
 
 Re-establish connections after these events.
 
-## Useful Console Methods
+## Useful Console Methods {#useful-console-methods}
 
 - `console.table()` - Display structured data in table format (great for arrays/objects)
 - `console.trace()` - Print stack traces for understanding call paths
 
-## Source Maps in Extensions
+## Source Maps in Extensions {#source-maps-in-extensions}
 
 For bundled extensions:
 - Ensure your build process generates source maps
 - Source maps allow you to debug original TypeScript/JavaScript files
 - Load unpacked extension for development to enable proper source map support
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - [Debugging Extensions Guide](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

@@ -7,22 +7,22 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishi
 
 # Chrome Web Store Submission Process
 
-## Overview
+## Overview {#overview}
 Step-by-step guide from code to published extension. Covers everything from creating a developer account to passing review.
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 - Google Developer account ($5 one-time fee)
 - Extension built and tested locally
 - All required assets (icons, screenshots, descriptions)
 - Privacy policy URL (required for most permissions)
 
-## Step 1: Create a Developer Account
+## Step 1: Create a Developer Account {#step-1-create-a-developer-account}
 - Go to Chrome Web Store Developer Dashboard
 - Pay $5 registration fee
 - Verify email and identity
 - Set up payment if planning to charge
 
-## Step 2: Prepare Your manifest.json
+## Step 2: Prepare Your manifest.json {#step-2-prepare-your-manifestjson}
 Ensure your manifest is production-ready:
 ```json
 {
@@ -47,13 +47,13 @@ Key rules:
 - Icons: 16x16, 48x48, 128x128 PNG (alpha transparency supported; 96x96 artwork with 16px transparent padding recommended for 128)
 - Only request permissions you actually use
 
-## Step 3: Package Your Extension
+## Step 3: Package Your Extension {#step-3-package-your-extension}
 - Build/bundle your extension
 - Create a ZIP of the extension directory (not the parent folder)
 - Ensure no unnecessary files (node_modules, .git, tests, source maps)
 - Keep ZIP under 50MB
 
-## Step 4: Required Store Assets
+## Step 4: Required Store Assets {#step-4-required-store-assets}
 | Asset | Size | Required |
 |-------|------|----------|
 | Store icon | 128x128 PNG | Yes |
@@ -62,32 +62,32 @@ Key rules:
 | Promo tile (small) | 440x280 | Required |
 | Marquee promo | 1400x560 | Optional |
 
-## Step 5: Store Listing Details
+## Step 5: Store Listing Details {#step-5-store-listing-details}
 - Detailed description (up to 16,384 characters)
 - Category selection
 - Language/region targeting
 - Website URL
 - Support URL or email
 
-## Step 6: Privacy Practices
+## Step 6: Privacy Practices {#step-6-privacy-practices}
 - Declare which user data you collect
 - Explain why each permission is needed (single-purpose description)
 - Link to privacy policy
 - Certify compliance with Chrome Web Store policies
 
-## Step 7: Submit for Review
+## Step 7: Submit for Review {#step-7-submit-for-review}
 - Upload ZIP
 - Fill all required fields
 - Click "Submit for Review"
 - Typical review time: 1-3 business days (can take longer)
 
-## Step 8: After Submission
+## Step 8: After Submission {#step-8-after-submission}
 - Monitor the Developer Dashboard for review status
 - Respond promptly to any reviewer questions
 - If rejected, fix issues and resubmit
 - Once approved, extension goes live immediately
 
-## Tips for Fast Approval
+## Tips for Fast Approval {#tips-for-fast-approval}
 1. Request minimal permissions
 2. Use @theluckystrike/webext-permissions for optional runtime permissions (reduces manifest footprint)
 3. Clear, honest description
@@ -95,9 +95,9 @@ Key rules:
 5. Include a privacy policy even if not strictly required
 6. Test on Chrome stable (not just Canary/Beta)
 
-## Using @theluckystrike/webext-* for Better Reviews
+## Using @theluckystrike/webext-* for Better Reviews {#using-theluckystrikewebext-for-better-reviews}
 
-### Minimal manifest permissions with runtime requests
+### Minimal manifest permissions with runtime requests {#minimal-manifest-permissions-with-runtime-requests}
 ```ts
 // Instead of requiring "tabs" in manifest, request at runtime:
 import { requestPermission } from "@theluckystrike/webext-permissions";
@@ -108,7 +108,7 @@ document.getElementById("enable-tabs")?.addEventListener("click", async () => {
 });
 ```
 
-### User-friendly permission descriptions
+### User-friendly permission descriptions {#user-friendly-permission-descriptions}
 ```ts
 import { describePermission } from "@theluckystrike/webext-permissions";
 
@@ -117,11 +117,11 @@ const desc = describePermission("tabs");
 // "Read information about open tabs"
 ```
 
-## Version Updates
+## Version Updates {#version-updates}
 - Increment version in manifest.json
 - Upload new ZIP
 - Changes reviewed again (usually faster)
 - Auto-update pushes to users within hours
 
-## Common Rejection Reasons
+## Common Rejection Reasons {#common-rejection-reasons}
 - See [Common Rejections](common-rejections.md)

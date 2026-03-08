@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 Content scripts in Chrome extensions have a distinct lifecycle that differs from regular web page scripts. Understanding this lifecycle is crucial for building robust, memory-efficient extensions.
 
-## Injection Timing
+## Injection Timing {#injection-timing}
 
 Content scripts can be injected at different points in the page loading process:
 
@@ -28,9 +28,9 @@ Content scripts can be injected at different points in the page loading process:
 }
 ```
 
-## Static vs Dynamic Injection
+## Static vs Dynamic Injection {#static-vs-dynamic-injection}
 
-### Static Injection (Manifest)
+### Static Injection (Manifest) {#static-injection-manifest}
 ```json
 {
   "content_scripts": [{
@@ -40,7 +40,7 @@ Content scripts can be injected at different points in the page loading process:
 }
 ```
 
-### Dynamic Injection (Scripting API)
+### Dynamic Injection (Scripting API) {#dynamic-injection-scripting-api}
 ```javascript
 chrome.scripting.executeScript({
   target: { tabId: tab.id },
@@ -48,7 +48,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-## Multiple Injections & Navigation
+## Multiple Injections & Navigation {#multiple-injections-navigation}
 
 Content scripts inject **once per page navigation**, not on hash changes. For SPAs, you need additional handling:
 
@@ -67,7 +67,7 @@ observer.observe(document.body, {
 });
 ```
 
-## Cleanup on Navigation
+## Cleanup on Navigation {#cleanup-on-navigation}
 
 Content script globals are garbage collected when the page unloads. Always clean up:
 
@@ -79,7 +79,7 @@ window.addEventListener('unload', () => {
 });
 ```
 
-## Extension Updates
+## Extension Updates {#extension-updates}
 
 When an extension updates, existing content scripts keep running but lose their connection to the background script:
 
@@ -98,7 +98,7 @@ async function reconnectContentScripts() {
 }
 ```
 
-## Cross-Frame Injection
+## Cross-Frame Injection {#cross-frame-injection}
 
 Use `all_frames` to inject into iframes:
 
@@ -112,7 +112,7 @@ Use `all_frames` to inject into iframes:
 }
 ```
 
-## Memory Leak Prevention
+## Memory Leak Prevention {#memory-leak-prevention}
 
 Always clean up to avoid memory leaks:
 
@@ -130,7 +130,7 @@ function cleanup() {
 window.addEventListener('unload', cleanup);
 ```
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script API Reference](../reference/content-script-api.md)

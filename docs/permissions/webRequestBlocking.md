@@ -9,18 +9,18 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # webRequestBlocking Permission (MV2 Only)
 
-## What It Grants
+## What It Grants {#what-it-grants}
 Enables blocking/modifying network requests in `chrome.webRequest` listeners. **MV2 only — removed in MV3.**
 
-## Manifest (MV2)
+## Manifest (MV2) {#manifest-mv2}
 ```json
 { "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"] }
 ```
 
-## MV3 Replacement
+## MV3 Replacement {#mv3-replacement}
 Use `chrome.declarativeNetRequest` instead. See `docs/permissions/declarativeNetRequest.md`.
 
-## MV2 Usage
+## MV2 Usage {#mv2-usage}
 ```typescript
 // Block requests (MV2 only)
 chrome.webRequest.onBeforeRequest.addListener(
@@ -47,13 +47,13 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-## Why Removed in MV3
+## Why Removed in MV3 {#why-removed-in-mv3}
 - Performance: blocking listeners run in extension process, slowing page loads
 - Privacy: extensions could observe all network traffic
 - Security: could modify requests in ways hard to audit
 - `declarativeNetRequest` evaluates rules in the browser — faster, safer
 
-## Migration Table
+## Migration Table {#migration-table}
 | MV2 webRequestBlocking | MV3 declarativeNetRequest |
 |---|---|
 | `cancel: true` | `{ "type": "block" }` |
@@ -93,10 +93,12 @@ If you must support MV2, test your extension's network interception thoroughly. 
 Be transparent about what your extension blocks or modifies. The removal of `webRequestBlocking` in MV3 was partly driven by privacy concerns about extensions observing all network traffic.
 
 ## When to Use
+
+## When to Use {#when-to-use}
 - Only in MV2 extensions (legacy)
 - Migrate to `declarativeNetRequest` for MV3
 
-## Cross-References
+## Cross-References {#cross-references}
 - `docs/permissions/webRequest.md`
 - `docs/permissions/declarativeNetRequest.md`
 - `docs/mv3/declarative-net-request.md`

@@ -9,21 +9,21 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissi
 
 # tts Permission — Chrome Extension Reference
 
-## Overview
+## Overview {#overview}
 - **Permission string**: `"tts"` (consumer) or `"ttsEngine"` (provider)
 - **What it grants**: `tts` — use `chrome.tts` to speak text aloud; `ttsEngine` — register as speech engine
 - **Risk level**: Low — audio output only, no user data access
 - `@theluckystrike/webext-permissions`: `describePermission('tts')`
 
-## manifest.json
+## manifest.json {#manifestjson}
 ```json
 { "permissions": ["tts"] }
 ```
 For engine providers: add `"ttsEngine"` permission + `"tts_engine"` manifest key with voice definitions.
 
-## Key APIs — chrome.tts
+## Key APIs — chrome.tts {#key-apis-chrometts}
 
-### speak(text, options?, callback?)
+### speak(text, options?, callback?) {#speaktext-options-callback}
 ```javascript
 chrome.tts.speak("Hello!", {
   lang: "en-US", rate: 1.0, pitch: 1.0, volume: 1.0,
@@ -35,43 +35,43 @@ chrome.tts.speak("Hello!", {
 - Max utterance length: 32,768 characters
 - Events: `start`, `end`, `word`, `sentence`, `marker`, `interrupted`, `cancelled`, `error`, `pause`, `resume`
 
-### stop() / pause() / resume()
-### isSpeaking(callback)
-### getVoices(callback)
+### stop() / pause() / resume() {#stop-pause-resume}
+### isSpeaking(callback) {#isspeakingcallback}
+### getVoices(callback) {#getvoicescallback}
 ```javascript
 chrome.tts.getVoices((voices) => {
   voices.forEach(v => console.log(v.voiceName, v.lang, v.remote));
 });
 ```
 
-## chrome.ttsEngine (Provider)
+## chrome.ttsEngine (Provider) {#chromettsengine-provider}
 - `onSpeak` listener: receive text, synthesize, send events back
 - `onStop` listener: stop current synthesis
 - Register voices in manifest `tts_engine.voices` array
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Screen Reader
+### Screen Reader {#screen-reader}
 - Read selected text via context menu
 - Highlight words as spoken using `word` events
 - Store voice preferences with `@theluckystrike/webext-storage`
 
-### Language Learning
+### Language Learning {#language-learning}
 - Speak foreign text with correct pronunciation
 - Use `getVoices()` to find target language voices
 - Adjustable speed with `rate`
 
-### Accessibility Helper
+### Accessibility Helper {#accessibility-helper}
 - Auto-read page content
 - Voice/rate/pitch preferences stored in sync storage
 
-## Voice Selection Best Practices
+## Voice Selection Best Practices {#voice-selection-best-practices}
 - Check `getVoices()` first — voice names are system-specific
 - Prefer local voices (`remote: false`) for speed
 - Let users choose, store preference
 - Fall back gracefully if voice unavailable
 
-## Using with @theluckystrike/webext-permissions
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, requestPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -89,7 +89,7 @@ if (!result.granted) {
 }
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: popup or content script requests speech from the background:
 
@@ -139,7 +139,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store voice preferences:
 
@@ -176,7 +176,7 @@ storage.watch("speechRate", (newRate) => {
 });
 ```
 
-## Practical Example: Read Selection Aloud
+## Practical Example: Read Selection Aloud {#practical-example-read-selection-aloud}
 
 ```ts
 // background.ts — context menu + TTS integration
@@ -210,19 +210,19 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 - **Voice names are system-specific** — never hardcode a voice name. Always check `getVoices()` first and fall back gracefully if the preferred voice is unavailable.
 - **No concurrent speech by default** — calling `speak()` while speech is active interrupts it unless you pass `enqueue: true`. If you want queued playback, always set `enqueue`.
 - **`getVoices()` may return empty on first call** — voices load asynchronously. If the list is empty, wait and retry, or listen for voice list changes with a short delay.
 - **`rate` range differs by platform** — the spec says 0.1-10, but most engines only support a narrower range (e.g., 0.5-2.0). Values outside the engine's range are clamped silently.
 - **SSML is supported** — `chrome.tts.speak()` accepts SSML markup. The first argument should be a complete SSML document with an XML header and a top-level `<speak>` tag. Engines that don't support specific SSML tags will ignore them and still speak the underlying text.
 
-## Common Errors
+## Common Errors {#common-errors}
 - Voice not found — always check available voices first
 - No concurrent speech — new `speak()` interrupts unless `enqueue: true`
 - Text length — very long texts may be split internally
 
-## Related
+## Related {#related}
 - [Chrome TTS API docs](https://developer.chrome.com/docs/extensions/reference/api/tts)
 - [Chrome TTS Engine API docs](https://developer.chrome.com/docs/extensions/reference/api/ttsEngine)
 - [contextMenus](contextMenus.md) — trigger TTS from right-click menu

@@ -7,13 +7,13 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns
 
 # Chrome Web Store Listing That Converts
 
-## Overview
+## Overview {#overview}
 
 You built a great extension. Now you need people to find it, understand it, and click "Add to Chrome." The Chrome Web Store listing is your storefront — the single page that determines whether months of development effort reach users or gather dust. This guide covers eight actionable patterns for optimizing every element of your listing, from the name and description to screenshots, reviews, and analytics.
 
 ---
 
-## The Conversion Funnel
+## The Conversion Funnel {#the-conversion-funnel}
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -45,7 +45,7 @@ Each step is a filter. A 50% improvement at any stage compounds across the entir
 
 ---
 
-## Pattern 1: Extension Name and Short Description SEO
+## Pattern 1: Extension Name and Short Description SEO {#pattern-1-extension-name-and-short-description-seo}
 
 The name and short description (132 characters max) are the only text visible in search results and category listings. They determine whether users click through to your detail page.
 
@@ -87,7 +87,7 @@ The name and short description (132 characters max) are the only text visible in
 
 ---
 
-## Pattern 2: Detailed Description Structure
+## Pattern 2: Detailed Description Structure {#pattern-2-detailed-description-structure}
 
 The detailed description (up to 16,000 characters) is your sales page. Most users skim, so structure matters more than word count. Follow this proven layout:
 
@@ -164,7 +164,7 @@ Changelog: https://example.com/tab-suspender/changelog
 
 ---
 
-## Pattern 3: Screenshot Strategy
+## Pattern 3: Screenshot Strategy {#pattern-3-screenshot-strategy}
 
 Screenshots are the highest-impact visual element. Most users decide to install or leave based on the screenshots alone — many never read the description. Chrome Web Store allows up to 5 screenshots at 1280x800 or 640x400 pixels.
 
@@ -247,7 +247,7 @@ async function annotateScreenshot(
 
 ---
 
-## Pattern 4: Promotional Tile and Marquee Image Design
+## Pattern 4: Promotional Tile and Marquee Image Design {#pattern-4-promotional-tile-and-marquee-image-design}
 
 Chrome Web Store supports three promotional image sizes. These are used when your extension is featured in collections, category pages, and the store homepage.
 
@@ -289,7 +289,7 @@ Chrome Web Store supports three promotional image sizes. These are used when you
 
 ---
 
-## Pattern 5: Category and Tag Selection for Discoverability
+## Pattern 5: Category and Tag Selection for Discoverability {#pattern-5-category-and-tag-selection-for-discoverability}
 
 Choosing the right category and tags determines where your extension appears when users browse (rather than search). You get one primary category and can add relevant tags.
 
@@ -343,7 +343,7 @@ async function auditCompetitors(keyword: string): Promise<void> {
 
 ---
 
-## Pattern 6: Handling User Reviews
+## Pattern 6: Handling User Reviews {#pattern-6-handling-user-reviews}
 
 Reviews drive both conversion (social proof) and ranking (the store algorithm factors in rating and review count). A 4.5-star extension with 200 reviews dramatically outperforms a 5-star extension with 3 reviews.
 
@@ -430,7 +430,7 @@ function showReviewPrompt(): void {
 
 ---
 
-## Pattern 7: Conversion Funnel — Impression to Active User
+## Pattern 7: Conversion Funnel — Impression to Active User {#pattern-7-conversion-funnel-impression-to-active-user}
 
 Each stage of the funnel has different levers. Track metrics at every stage and optimize the weakest link.
 
@@ -487,7 +487,7 @@ The onboarding page should:
 
 ---
 
-## Pattern 8: A/B Testing Store Listing Elements
+## Pattern 8: A/B Testing Store Listing Elements {#pattern-8-ab-testing-store-listing-elements}
 
 The Chrome Web Store Developer Dashboard provides basic analytics — impressions, detail page views, installs, and uninstalls — but no built-in A/B testing. You can still run experiments by changing listing elements over time and measuring the impact.
 
@@ -568,7 +568,7 @@ function compareperiods(
 
 ---
 
-## Summary
+## Summary {#summary}
 
 | Pattern | Key Element | Primary Impact |
 |---------|-------------|----------------|
@@ -581,7 +581,7 @@ function compareperiods(
 | Conversion funnel | Track each stage independently | Identify weakest link |
 | A/B testing | Change one element, measure 14-day windows | Continuous improvement |
 
-## Common Pitfalls
+## Common Pitfalls {#common-pitfalls}
 
 1. **Keyword stuffing the name** — Triggers spam detection. Keep it natural and under 45 characters.
 2. **Generic screenshots** — Screenshots showing empty states, settings pages, or "Lorem ipsum" data reduce install rates.
@@ -590,7 +590,7 @@ function compareperiods(
 5. **Changing too many elements at once** — When testing, change one thing at a time or you cannot attribute the result.
 6. **Publishing and forgetting** — The store listing is a living document. Update screenshots when the UI changes. Refresh the description quarterly.
 
-## Related Resources
+## Related Resources {#related-resources}
 
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 - [Chrome Web Store Program Policies](https://developer.chrome.com/docs/webstore/program-policies)

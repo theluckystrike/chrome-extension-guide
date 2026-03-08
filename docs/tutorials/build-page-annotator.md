@@ -6,10 +6,10 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 ---
 # Build a Page Annotator Extension
 
-## What You'll Build
+## What You'll Build {#what-youll-build}
 Highlight text on any page, add color-coded notes, persist across visits, sync across devices.
 
-## Project Structure
+## Project Structure {#project-structure}
 ```
 page-annotator/
   manifest.json
@@ -20,7 +20,7 @@ page-annotator/
   popup/popup.js
 ```
 
-## Step 1: Manifest
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -38,7 +38,7 @@ page-annotator/
 }
 ```
 
-## Step 2: Content Script CSS
+## Step 2: Content Script CSS {#step-2-content-script-css}
 ```css
 .ext-highlight { background: rgba(255,255,0,0.4); cursor: pointer; border-radius: 2px; }
 .ext-highlight.green { background: rgba(0,255,65,0.3); }
@@ -58,7 +58,7 @@ page-annotator/
 .ext-note-popup button.delete { border-color: #ff4444; color: #ff4444; }
 ```
 
-## Step 3: Content Script JavaScript
+## Step 3: Content Script JavaScript {#step-3-content-script-javascript}
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -197,7 +197,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 restoreAnnotations();
 ```
 
-## Step 4: Popup — Annotation List
+## Step 4: Popup — Annotation List {#step-4-popup-annotation-list}
 ```html
 <!DOCTYPE html>
 <html>
@@ -247,7 +247,7 @@ button { margin-top: 8px; padding: 6px; border: 1px solid #00ff41; background: t
 </html>
 ```
 
-## Next Steps
+## Next Steps {#next-steps}
 - Side panel for annotation overview across all pages
 - Markdown/HTML export
 - Keyboard shortcut to highlight selection

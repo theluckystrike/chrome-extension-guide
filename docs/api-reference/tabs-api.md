@@ -9,7 +9,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-refe
 
 The `chrome.tabs` API lets you create, modify, query, and rearrange tabs in the browser. It is one of the most heavily used Chrome extension APIs.
 
-## Permissions
+## Permissions {#permissions}
 
 Most `chrome.tabs` methods work **without** the `tabs` permission. The permission only controls access to sensitive properties (`url`, `title`, `favIconUrl`, `pendingUrl`) on `Tab` objects.
 
@@ -21,7 +21,7 @@ Most `chrome.tabs` methods work **without** the `tabs` permission. The permissio
 
 See the [tabs permission reference](../permissions/tabs.md) for a detailed breakdown of what requires permission and what does not.
 
-## Tab Object
+## Tab Object {#tab-object}
 
 Every method that returns tab data provides a `chrome.tabs.Tab` object:
 
@@ -50,9 +50,9 @@ Every method that returns tab data provides a `chrome.tabs.Tab` object:
 | `sessionId` | `string \| undefined` | No |
 | `lastAccessed` | `number` | No |
 
-## Core Methods
+## Core Methods {#core-methods}
 
-### chrome.tabs.query(queryInfo)
+### chrome.tabs.query(queryInfo) {#chrometabsqueryqueryinfo}
 
 Find tabs matching a filter. The most-used method in the API.
 
@@ -82,7 +82,7 @@ const tabs = await chrome.tabs.query({
 
 **QueryInfo properties:** `active`, `pinned`, `audible`, `muted`, `highlighted`, `discarded`, `autoDiscardable`, `currentWindow`, `lastFocusedWindow`, `status`, `title`, `url` (glob pattern), `windowId`, `windowType`, `groupId`, `index`.
 
-### chrome.tabs.create(createProperties)
+### chrome.tabs.create(createProperties) {#chrometabscreatecreateproperties}
 
 Open a new tab.
 
@@ -106,7 +106,7 @@ const tab = await chrome.tabs.create({
 
 **CreateProperties:** `url`, `windowId`, `index`, `active`, `pinned`, `openerTabId`.
 
-### chrome.tabs.update(tabId, updateProperties)
+### chrome.tabs.update(tabId, updateProperties) {#chrometabsupdatetabid-updateproperties}
 
 Modify an existing tab.
 
@@ -127,7 +127,7 @@ await chrome.tabs.update(tabId, { active: true });
 
 **UpdateProperties:** `url`, `active`, `highlighted`, `pinned`, `muted`, `openerTabId`, `autoDiscardable`.
 
-### chrome.tabs.remove(tabIds)
+### chrome.tabs.remove(tabIds) {#chrometabsremovetabids}
 
 Close one or more tabs.
 
@@ -143,7 +143,7 @@ const tabs = await chrome.tabs.query({ url: "https://example.com/*" });
 await chrome.tabs.remove(tabs.map((t) => t.id!));
 ```
 
-### chrome.tabs.reload(tabId, reloadProperties?)
+### chrome.tabs.reload(tabId, reloadProperties?) {#chrometabsreloadtabid-reloadproperties}
 
 Refresh a tab.
 
@@ -155,7 +155,7 @@ await chrome.tabs.reload(tabId);
 await chrome.tabs.reload(tabId, { bypassCache: true });
 ```
 
-### chrome.tabs.move(tabIds, moveProperties)
+### chrome.tabs.move(tabIds, moveProperties) {#chrometabsmovetabids-moveproperties}
 
 Reorder tabs within or across windows.
 
@@ -170,7 +170,7 @@ await chrome.tabs.move(tabId, { windowId: targetWindowId, index: -1 });
 await chrome.tabs.move([tabId1, tabId2], { index: 0 });
 ```
 
-### chrome.tabs.group(options) / chrome.tabs.ungroup(tabIds)
+### chrome.tabs.group(options) / chrome.tabs.ungroup(tabIds) {#chrometabsgroupoptions-chrometabsungrouptabids}
 
 Manage tab groups (Chrome 88+).
 
@@ -192,7 +192,7 @@ await chrome.tabs.group({ tabIds: tabId3, groupId });
 await chrome.tabs.ungroup([tabId1, tabId2]);
 ```
 
-### chrome.tabs.discard(tabId?)
+### chrome.tabs.discard(tabId?) {#chrometabsdiscardtabid}
 
 Free memory by discarding a tab. The tab remains visible in the tab strip but its content is unloaded.
 
@@ -201,7 +201,7 @@ await chrome.tabs.discard(tabId);
 // Tab will reload when the user clicks on it
 ```
 
-### chrome.tabs.captureVisibleTab(windowId?, options?)
+### chrome.tabs.captureVisibleTab(windowId?, options?) {#chrometabscapturevisibletabwindowid-options}
 
 Take a screenshot of the visible area of the active tab. Requires `<all_urls>` or `activeTab` permission.
 
@@ -213,7 +213,7 @@ const dataUrl = await chrome.tabs.captureVisibleTab(undefined, {
 // dataUrl is a base64-encoded image
 ```
 
-### chrome.tabs.sendMessage(tabId, message, options?)
+### chrome.tabs.sendMessage(tabId, message, options?) {#chrometabssendmessagetabid-message-options}
 
 Send a message to content scripts running in a specific tab.
 
@@ -232,7 +232,7 @@ const response = await chrome.tabs.sendMessage(
 );
 ```
 
-### chrome.tabs.goBack(tabId?) / chrome.tabs.goForward(tabId?)
+### chrome.tabs.goBack(tabId?) / chrome.tabs.goForward(tabId?) {#chrometabsgobacktabid-chrometabsgoforwardtabid}
 
 Navigate tab history.
 
@@ -241,7 +241,7 @@ await chrome.tabs.goBack(tabId);
 await chrome.tabs.goForward(tabId);
 ```
 
-### chrome.tabs.getZoom(tabId?) / chrome.tabs.setZoom(tabId?, zoomFactor)
+### chrome.tabs.getZoom(tabId?) / chrome.tabs.setZoom(tabId?, zoomFactor) {#chrometabsgetzoomtabid-chrometabssetzoomtabid-zoomfactor}
 
 ```ts
 const zoom = await chrome.tabs.getZoom(tabId); // e.g. 1.0
@@ -249,16 +249,16 @@ await chrome.tabs.setZoom(tabId, 1.5); // 150%
 await chrome.tabs.setZoom(tabId, 0); // reset to default
 ```
 
-### chrome.tabs.detectLanguage(tabId?)
+### chrome.tabs.detectLanguage(tabId?) {#chrometabsdetectlanguagetabid}
 
 ```ts
 const lang = await chrome.tabs.detectLanguage(tabId);
 console.log(lang); // "en", "fr", "ja", etc.
 ```
 
-## Events
+## Events {#events}
 
-### chrome.tabs.onCreated
+### chrome.tabs.onCreated {#chrometabsoncreated}
 
 Fires when a new tab is created.
 
@@ -268,7 +268,7 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 ```
 
-### chrome.tabs.onUpdated
+### chrome.tabs.onUpdated {#chrometabsonupdated}
 
 Fires when a tab's properties change (URL, title, loading status, etc.). This is the most frequently fired tab event.
 
@@ -296,7 +296,7 @@ chrome.tabs.onUpdated.addListener(
 );
 ```
 
-### chrome.tabs.onRemoved
+### chrome.tabs.onRemoved {#chrometabsonremoved}
 
 ```ts
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -305,7 +305,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 ```
 
-### chrome.tabs.onActivated
+### chrome.tabs.onActivated {#chrometabsonactivated}
 
 Fires when the active tab in a window changes.
 
@@ -315,7 +315,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 ```
 
-### chrome.tabs.onMoved / onAttached / onDetached
+### chrome.tabs.onMoved / onAttached / onDetached {#chrometabsonmoved-onattached-ondetached}
 
 ```ts
 // Tab moved within a window
@@ -333,7 +333,7 @@ chrome.tabs.onAttached.addListener((tabId, attachInfo) => {
 });
 ```
 
-### chrome.tabs.onReplaced
+### chrome.tabs.onReplaced {#chrometabsonreplaced}
 
 Fires when a tab is replaced by another (e.g. prerendering).
 
@@ -343,7 +343,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 });
 ```
 
-## Using with @theluckystrike/webext-messaging
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Build a typed tab manager with the background querying tabs and sending results to the popup:
 
@@ -394,7 +394,7 @@ const msg = createMessenger<Messages>();
 const tabs = await msg.send("queryTabs", { query: { currentWindow: true } });
 ```
 
-## Using with @theluckystrike/webext-storage
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Track tab activity and persist it:
 
@@ -427,16 +427,16 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 ```
 
-## Common Patterns
+## Common Patterns {#common-patterns}
 
-### Get the current tab from a popup or action click
+### Get the current tab from a popup or action click {#get-the-current-tab-from-a-popup-or-action-click}
 
 ```ts
 // From popup.ts or action click handler
 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 ```
 
-### Inject a content script into a specific tab
+### Inject a content script into a specific tab {#inject-a-content-script-into-a-specific-tab}
 
 ```ts
 // Requires "scripting" permission
@@ -446,13 +446,13 @@ await chrome.scripting.executeScript({
 });
 ```
 
-### Duplicate a tab
+### Duplicate a tab {#duplicate-a-tab}
 
 ```ts
 const newTab = await chrome.tabs.duplicate(tabId);
 ```
 
-### Wait for a tab to finish loading
+### Wait for a tab to finish loading {#wait-for-a-tab-to-finish-loading}
 
 ```ts
 function waitForTabLoad(tabId: number): Promise<chrome.tabs.Tab> {
@@ -468,7 +468,7 @@ function waitForTabLoad(tabId: number): Promise<chrome.tabs.Tab> {
 }
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
 1. **`tab.id` can be undefined** in rare cases (e.g. devtools tabs). Always use non-null assertion (`tab.id!`) only when you're certain the tab has an ID.
 
@@ -482,7 +482,7 @@ function waitForTabLoad(tabId: number): Promise<chrome.tabs.Tab> {
 
 6. **Tab IDs are not stable across sessions.** Never persist tab IDs — they change on browser restart.
 
-## Related
+## Related {#related}
 
 - [tabs permission](../permissions/tabs.md)
 - [activeTab permission](../permissions/activeTab.md)

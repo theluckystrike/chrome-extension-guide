@@ -8,11 +8,11 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/c
 
 A comprehensive guide to testing Chrome Extensions (MV3) across all layers: unit tests, integration tests, and end-to-end tests.
 
-## Overview
+## Overview {#overview}
 
 Chrome extensions operate across multiple execution contexts—service workers, content scripts, popup pages, and options pages—each with unique testing challenges. A robust testing strategy covers all these contexts while handling Chrome-specific APIs.
 
-### Testing Pyramid for Extensions
+### Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
 
 ```
         ┌─────────────┐
@@ -30,11 +30,11 @@ Chrome extensions operate across multiple execution contexts—service workers, 
      └──────────────────┘
 ```
 
-## Unit Testing
+## Unit Testing {#unit-testing}
 
 Unit tests verify pure business logic without Chrome API dependencies. Extract logic into separate modules that can be tested independently.
 
-### Test Framework Setup
+### Test Framework Setup {#test-framework-setup}
 
 ```typescript
 // vitest.config.ts
@@ -49,7 +49,7 @@ export default defineConfig({
 });
 ```
 
-### Testing Pure Functions
+### Testing Pure Functions {#testing-pure-functions}
 
 ```typescript
 // src/utils/url-parser.ts
@@ -87,11 +87,11 @@ describe('isValidExtensionId', () => {
 });
 ```
 
-## Integration Testing
+## Integration Testing {#integration-testing}
 
 Integration tests verify interactions between extension components with mocked Chrome APIs.
 
-### Mocking Chrome Storage
+### Mocking Chrome Storage {#mocking-chrome-storage}
 
 ```typescript
 // test/__mocks__/chrome-storage.ts
@@ -146,7 +146,7 @@ vi.stubGlobal('chrome', {
 });
 ```
 
-### Testing Message Passing
+### Testing Message Passing {#testing-message-passing}
 
 ```typescript
 // src/background/message-handler.ts
@@ -187,11 +187,11 @@ describe('handleMessage', () => {
 });
 ```
 
-## End-to-End Testing
+## End-to-End Testing {#end-to-end-testing}
 
 E2E tests run the extension in a real Chrome browser with Puppeteer or Playwright.
 
-### Puppeteer Setup
+### Puppeteer Setup {#puppeteer-setup}
 
 ```typescript
 // test/e2e/puppeteer-extension.ts
@@ -245,7 +245,7 @@ export async function runExtensionE2E() {
 }
 ```
 
-### Playwright Alternative
+### Playwright Alternative {#playwright-alternative}
 
 ```typescript
 // test/e2e/playwright-extension.ts
@@ -268,11 +268,11 @@ export async function createExtensionContext(
 }
 ```
 
-## Testing Service Workers
+## Testing Service Workers {#testing-service-workers}
 
 Service workers have unique lifecycle considerations—Chrome can terminate them after inactivity.
 
-### Testing Event Registration
+### Testing Event Registration {#testing-event-registration}
 
 ```typescript
 // src/background/service-worker.ts
@@ -318,7 +318,7 @@ describe('Service Worker', () => {
 });
 ```
 
-### Testing SW Persistence
+### Testing SW Persistence {#testing-sw-persistence}
 
 ```typescript
 // test/e2e/service-worker-lifecycle.test.ts
@@ -351,11 +351,11 @@ test('state persists after SW restart', async () => {
 });
 ```
 
-## Testing Content Scripts
+## Testing Content Scripts {#testing-content-scripts}
 
 Content scripts run in the context of web pages and interact with the DOM.
 
-### JSDOM for Unit Tests
+### JSDOM for Unit Tests {#jsdom-for-unit-tests}
 
 ```typescript
 // test/unit/content-script.test.ts
@@ -391,7 +391,7 @@ describe('Content Script UI', () => {
 });
 ```
 
-### Puppeteer for Browser Tests
+### Puppeteer for Browser Tests {#puppeteer-for-browser-tests}
 
 ```typescript
 // test/e2e/content-script.test.ts
@@ -417,7 +417,7 @@ test('content script modifies page', async () => {
 });
 ```
 
-## Testing Popup and Options UI
+## Testing Popup and Options UI {#testing-popup-and-options-ui}
 
 Test popup and options pages as regular web pages with DOM interaction.
 
@@ -448,7 +448,7 @@ test('popup interactions', async () => {
 });
 ```
 
-## CI/CD Integration
+## CI/CD Integration {#cicd-integration}
 
 Automate testing in GitHub Actions with Chrome installed.
 
@@ -495,14 +495,14 @@ jobs:
           CI: true
 ```
 
-## Cross-References
+## Cross-References {#cross-references}
 
 - Guide: [Testing Extensions](testing-extensions.md)
 - Guide: [CI/CD Pipeline](ci-cd-pipeline.md)
 - Patterns: [Testing Patterns](../patterns/testing-patterns.md)
 - MV3: [Testing MV3 Extensions](../mv3/testing-mv3-extensions.md)
 
-## Related Articles
+## Related Articles {#related-articles}
 
 - [Playwright Testing](../guides/extension-testing-with-playwright.md)
 - [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)
