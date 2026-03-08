@@ -71,18 +71,31 @@ All code examples in the Chrome Extension Guide must meet high standards:
 
 ### Jekyll Front Matter
 
-Every article must include Jekyll front matter at the top of the file:
+Every article must include Jekyll front matter at the top of the file. All fields shown below are **required** unless marked optional:
 
 ```yaml
 ---
-layout: guide
-title: "Your Title Here"
-description: "SEO-friendly description under 160 characters"
-permalink: /guides/your-article-slug/
+layout: default
+title: "Chrome Extension Topic Name: Descriptive Subtitle"
+description: "SEO-friendly description under 160 characters covering the article scope."
+permalink: /guides/chrome-extension-your-topic/
+date: 2026-03-08            # Publication date (YYYY-MM-DD)
+last_modified_at: 2026-03-08 # Last substantive edit
+category: guides
+tags: [relevant, topic, tags] # 3-7 lowercase tags
 ---
 ```
 
-The `title` field should be descriptive and include "Chrome Extension" when relevant. The `description` should be concise and optimized for search engines, staying under 160 characters. The `permalink` should follow the pattern `/guides/chrome-extension-your-topic/` for consistency.
+Field requirements:
+
+- **layout**: Always `default`.
+- **title**: Descriptive and include "Chrome Extension" when relevant. Keep under 70 characters for clean search results.
+- **description**: Concise and optimized for search engines, under 160 characters.
+- **permalink**: Follow the pattern `/guides/chrome-extension-your-topic/`.
+- **date**: The date the article is first published.
+- **last_modified_at**: Updated whenever the article receives a substantive edit (not typo fixes).
+- **category**: Use `guides` for how-to content, `reference` for API docs, `tutorials` for step-by-step projects.
+- **tags**: 3-7 lowercase, hyphenated tags describing the article's topics (e.g., `service-worker`, `oauth2`, `testing`).
 
 ### File Naming
 
@@ -98,44 +111,77 @@ Link to related articles within the guide using relative paths. This helps reade
 
 ## Article Template
 
-Use this template as a starting point for new articles:
+Use this template as a starting point for new articles. Every section listed below is **required** unless marked optional:
 
 ```markdown
 ---
-layout: guide
-title: ""
-description: ""
+layout: default
+title: "Chrome Extension [Topic]: [Subtitle]"
+description: "Under 160 characters describing what readers will learn."
 permalink: /guides/chrome-extension-your-topic/
+date: YYYY-MM-DD
+last_modified_at: YYYY-MM-DD
+category: guides
+tags: [tag1, tag2, tag3]
 ---
 
-# Your Title
+# Chrome Extension [Topic]: [Subtitle]
 
-## Introduction
-[2-3 paragraphs introducing the topic]
+[1-2 sentence summary of what this guide covers and why it matters.]
 
-## Section 1
-[Content with code examples]
+## Table of Contents
 
-## Section 2
-[Content with code examples]
+1. [Introduction](#introduction)
+2. [Section 1](#section-1)
+3. [Section 2](#section-2)
+4. [Best Practices](#best-practices)
+5. [Common Pitfalls](#common-pitfalls)
+6. [Conclusion](#conclusion)
 
-## Best Practices
-[Bulleted list]
+## Introduction {#introduction}
 
-## Common Mistakes
-[What to avoid]
+[2-3 paragraphs introducing the topic. Explain what problem this
+solves, who the target audience is, and what readers will be able to
+do after reading the guide.]
 
-## Conclusion
-[Summary and next steps]
+## Section 1 {#section-1}
 
-## Related Guides
-- [Link to related guide 1]
-- [Link to related guide 2]
+[Main content with TypeScript code examples. Each code block should
+be complete and runnable.]
+
+## Section 2 {#section-2}
+
+[Additional content. Use H3 headings for subsections.]
+
+## Best Practices {#best-practices}
+
+[Bulleted list of actionable recommendations.]
+
+## Common Pitfalls {#common-pitfalls}
+
+[Numbered list of mistakes and how to avoid them.]
+
+## Conclusion {#conclusion}
+
+[Summary of key takeaways and links to related guides.]
 
 ---
 
 Built by [Zovo](https://zovo.one) - Open-source tools and guides for extension developers.
 ```
+
+### Required Sections Checklist
+
+Before submitting a new article, verify it includes:
+
+- [ ] Front matter with all required fields
+- [ ] Table of contents with anchor links
+- [ ] Introduction explaining the "why" (2-3 paragraphs minimum)
+- [ ] At least 3 TypeScript code examples
+- [ ] Best practices section
+- [ ] Common pitfalls section
+- [ ] Conclusion with links to related guides
+- [ ] Zovo footer
 
 ## Code Style
 
@@ -157,6 +203,22 @@ To help us review and merge your contributions efficiently, please follow these 
 - **Detailed Description**: Explain what you changed, why you made those changes, and how readers will benefit. For new articles, include the word count to help editors plan content.
 - **Self-Review**: Before submitting, review your changes for clarity, accuracy, and adherence to our style guide. Check that all links work and code examples are correct.
 - **Respond to Feedback**: Reviewers may suggest changes or ask questions. Please respond to feedback within 48 hours to keep the review process moving forward.
+
+## Review Process
+
+Every pull request goes through a structured review to maintain quality across the guide:
+
+1. **Automated checks**: CI runs link validation, spell checking, and front matter validation. Fix any failures before requesting review.
+2. **Editorial review**: A maintainer reviews the content for accuracy, clarity, and adherence to the style guide. Expect 1-2 rounds of feedback.
+3. **Technical review**: For code-heavy articles, a reviewer tests code examples to verify they compile and run correctly.
+4. **Merge**: Once approved, a maintainer merges the PR and the article is published automatically via GitHub Pages.
+
+Review timelines:
+- **Typo fixes and small corrections**: Typically reviewed within 24 hours
+- **New articles**: Allow 3-5 business days for thorough review
+- **Major rewrites**: Allow 5-7 business days
+
+If your PR has been open for more than a week without feedback, leave a comment to bump it.
 
 ## Code of Conduct
 
