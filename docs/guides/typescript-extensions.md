@@ -160,3 +160,7 @@ Cross-references:
 
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

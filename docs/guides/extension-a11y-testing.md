@@ -227,3 +227,7 @@ Never remove outline without replacement:
 
 - [Accessibility](../guides/accessibility.md)
 - [Testing Extensions](../guides/testing-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

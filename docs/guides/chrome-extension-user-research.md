@@ -256,3 +256,7 @@ The exit survey page should ask:
 
 - [User Onboarding](../guides/extension-onboarding.md)
 - [User Onboarding Guide](../guides/user-onboarding.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

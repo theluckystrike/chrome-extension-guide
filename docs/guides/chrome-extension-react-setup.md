@@ -208,3 +208,7 @@ export function useMessage(callback: (message: any) => void) {
 
 - [Building with React](../patterns/building-with-react.md)
 - [Svelte Setup](../guides/chrome-extension-svelte-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

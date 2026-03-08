@@ -1047,3 +1047,7 @@ These patterns scale from small utility extensions to complex multi-context appl
 
 - [Dev Tools](../guides/chrome-extension-dev-tools.md)
 - [Webpack Setup](../guides/webpack-extension-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

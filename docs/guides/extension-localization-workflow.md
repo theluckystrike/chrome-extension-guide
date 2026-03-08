@@ -135,3 +135,7 @@ Set `default_locale` in manifest.json. When a translation is missing, Chrome fal
 
 - [Internationalization](../guides/internationalization.md)
 - [Advanced i18n](../patterns/advanced-i18n.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

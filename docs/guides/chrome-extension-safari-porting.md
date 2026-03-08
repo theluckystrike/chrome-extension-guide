@@ -138,3 +138,7 @@ Be aware of these Safari-specific limitations:
 
 - [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
 - [Cross-Browser Guide](../guides/cross-browser.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

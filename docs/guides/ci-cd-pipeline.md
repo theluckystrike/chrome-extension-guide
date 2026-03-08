@@ -1174,3 +1174,7 @@ Cross-references:
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Release Notes](../guides/extension-release-notes.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -171,3 +171,7 @@ async function updateSyncInterval(minutes) {
 - [Alarm Scheduling Patterns](../patterns/alarm-scheduling-patterns.md)
 - [Background Patterns](../guides/background-patterns.md)
 - [Alarms Permission](../permissions/alarms.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -171,3 +171,7 @@ Follow WCAG 2.1 AA guidelines:
 
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Dark Mode](../guides/theming-dark-mode.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

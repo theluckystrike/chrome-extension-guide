@@ -327,3 +327,7 @@ const response = await withTimeout(
 
 - [Messaging Protocols](../patterns/extension-messaging-protocols.md)
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

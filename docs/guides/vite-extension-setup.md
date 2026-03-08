@@ -360,3 +360,7 @@ For more information on related topics, see these guides:
 
 - [Esbuild Setup](../guides/esbuild-extension-setup.md)
 - [Rollup Setup](../guides/rollup-extension-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

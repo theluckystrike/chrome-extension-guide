@@ -145,3 +145,7 @@ window.addEventListener('unhandledrejection', e =>
 
 - [Analytics & Telemetry](../patterns/analytics-telemetry.md)
 - [Data Privacy](../guides/chrome-extension-data-privacy.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

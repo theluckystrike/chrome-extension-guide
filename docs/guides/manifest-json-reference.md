@@ -121,3 +121,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Cheatsheet](../guides/cheatsheet.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

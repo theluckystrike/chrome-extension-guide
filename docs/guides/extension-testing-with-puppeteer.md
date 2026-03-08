@@ -174,3 +174,7 @@ module.exports = {
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Playwright Testing](../guides/extension-testing-with-playwright.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

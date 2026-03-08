@@ -174,3 +174,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 - [Analytics Privacy](../patterns/extension-analytics-privacy.md)
 - [Permissions Model](../guides/permissions-model.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

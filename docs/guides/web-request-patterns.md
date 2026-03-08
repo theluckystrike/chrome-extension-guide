@@ -181,3 +181,7 @@ chrome.webRequest.onCompleted.addListener(async (details) => {
 
 - [Network Interception](../patterns/network-interception.md)
 - [WebRequest Permission](../permissions/webRequest.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

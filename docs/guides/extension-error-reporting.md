@@ -201,3 +201,7 @@ class ErrorReporter {
 
 - [Error Handling Patterns](../patterns/error-handling.md)
 - [Extension Logging](../guides/extension-logging.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

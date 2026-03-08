@@ -475,3 +475,7 @@ const { data, fromCache, stale } = await offlineCache.fetch(
 
 - [Caching Patterns](../patterns/caching-strategies.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

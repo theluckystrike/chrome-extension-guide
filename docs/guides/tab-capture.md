@@ -557,3 +557,7 @@ With these patterns and best practices, you're well-equipped to build robust tab
 
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Desktop Capture](../guides/desktop-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

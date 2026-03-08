@@ -549,3 +549,7 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -203,3 +203,7 @@ async function getValidToken() {
 
 - [OAuth Identity Patterns](../patterns/oauth-identity.md)
 - [Identity API Reference](../api-reference/identity-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -247,3 +247,7 @@ ensureInitialized();
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
 - [Service Worker Debugging](../guides/service-worker-debugging.md)
 - [Event-Driven Messaging](../patterns/event-driven-messaging.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

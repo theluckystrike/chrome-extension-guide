@@ -292,3 +292,7 @@ jobs:
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [E2E Testing Patterns](../patterns/e2e-testing-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

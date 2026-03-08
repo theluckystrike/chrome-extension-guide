@@ -169,3 +169,7 @@ DevTools Page <-> Background Service Worker <-> Content Script <-> Inspected Pag
 
 - [DevTools Patterns](../patterns/devtools-extension-patterns.md)
 - [Debugging Extensions](../guides/debugging-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

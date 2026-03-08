@@ -258,3 +258,7 @@ if (await shouldActivate()) {
 
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Communication Bridge](../patterns/content-script-communication-bridge.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

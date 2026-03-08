@@ -759,3 +759,7 @@ By mastering these advanced patterns, you can build powerful navigation analytic
 
 - [Web Navigation Patterns](../patterns/webnavigation-patterns.md)
 - [Web Navigation](../guides/web-navigation.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

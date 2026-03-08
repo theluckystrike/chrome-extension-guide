@@ -594,3 +594,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 - [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
 - [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

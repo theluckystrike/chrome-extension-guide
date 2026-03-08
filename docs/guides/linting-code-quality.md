@@ -1001,3 +1001,7 @@ A robust code quality pipeline for Chrome extensions includes:
 
 - [Code Review Checklist](../guides/chrome-extension-code-review-checklist.md)
 - [Environment Variables](../guides/chrome-extension-env-variables.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

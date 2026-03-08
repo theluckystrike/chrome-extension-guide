@@ -161,3 +161,7 @@ For more advanced AI integration patterns in Chrome extensions, check out the gu
 
 - [AI Integration](../guides/ai-llm-integration-extensions.md)
 - [First Extension](../guides/chrome-extension-first-extension.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

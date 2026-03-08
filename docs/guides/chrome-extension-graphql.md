@@ -319,3 +319,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'; // heavier
 
 - [GraphQL Patterns](../patterns/graphql-extensions.md)
 - [REST API Patterns](../guides/rest-api-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

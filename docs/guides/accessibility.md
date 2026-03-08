@@ -114,3 +114,7 @@ document.addEventListener('keydown', (e) => {
 - [Accessibility Patterns](../patterns/accessibility.md)
 - [Keyboard Shortcuts Guide](../guides/keyboard-shortcuts.md)
 - [Accessibility Testing](../guides/extension-a11y-testing.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

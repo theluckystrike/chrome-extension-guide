@@ -181,3 +181,7 @@ jobs:
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

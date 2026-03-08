@@ -206,3 +206,7 @@ async function measureExtension() {
 
 - [Performance Guide](../guides/performance.md)
 - [Size Optimization](../guides/extension-size-optimization.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

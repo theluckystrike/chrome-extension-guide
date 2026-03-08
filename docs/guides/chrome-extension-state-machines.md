@@ -325,3 +325,7 @@ Use the [XState Visualizer](https://stately.ai/viz) during development to diagra
 
 - [State Management](../patterns/state-management.md)
 - [Extension Architecture](../guides/extension-architecture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

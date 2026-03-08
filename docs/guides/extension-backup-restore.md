@@ -225,3 +225,7 @@ async function autoBackupToSync(key: string, data: unknown): Promise<void> {
 
 - [State Persistence](../patterns/extension-state-persistence.md)
 - [Storage Migration](../guides/storage-migration.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

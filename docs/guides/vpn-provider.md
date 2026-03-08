@@ -719,3 +719,7 @@ Always implement feature detection and provide appropriate fallbacks for users o
 
 - [Proxy Settings Deep Dive](../patterns/proxy-settings-deep-dive.md)
 - [Proxy Permission](../permissions/proxy.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

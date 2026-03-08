@@ -173,3 +173,7 @@ Provide clear, honest descriptions in your store listing and extension settings.
 
 - [Permissions Model](../guides/permissions-model.md)
 - [Permission Gating](../patterns/permission-gating.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

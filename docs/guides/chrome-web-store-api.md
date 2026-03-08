@@ -96,3 +96,7 @@ curl -H "Authorization: Bearer ACCESS_TOKEN" \
 
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
 - [Listing Optimization](../publishing/listing-optimization.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

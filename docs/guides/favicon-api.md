@@ -294,3 +294,7 @@ The `favicon` permission only triggers a warning if `tabs` or host permissions h
 
 - [Favicon Patterns](../patterns/favicon-api.md)
 - [Web Navigation](../guides/web-navigation.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

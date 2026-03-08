@@ -820,3 +820,7 @@ For more information, see:
 
 - [OAuth Identity](../patterns/oauth-identity.md)
 - [Security Audit](../guides/extension-security-audit.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

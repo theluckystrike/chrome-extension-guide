@@ -171,3 +171,7 @@ const data = await msg.send("getPageData");
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script Lifecycle](../patterns/content-script-lifecycle.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

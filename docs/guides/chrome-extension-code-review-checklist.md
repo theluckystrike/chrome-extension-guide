@@ -100,3 +100,7 @@ Use this checklist when reviewing pull requests for Chrome extension projects to
 
 - [Review Preparation](../guides/extension-review-preparation.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

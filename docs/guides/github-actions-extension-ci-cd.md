@@ -161,3 +161,7 @@ If you're looking to streamline your extension development workflow further, zov
 
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md)
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

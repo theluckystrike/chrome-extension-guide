@@ -155,3 +155,7 @@ async function sendWithRetry(message, retries = 3) {
 
 - [Advanced Debugging](../guides/advanced-debugging.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

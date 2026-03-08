@@ -692,3 +692,7 @@ For more information, see the official [Chrome Management API documentation](htt
 
 - [Management API Reference](../api-reference/management-api.md)
 - [Extension Configuration](../patterns/extension-configuration.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

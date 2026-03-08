@@ -387,3 +387,7 @@ function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
 
 - [WebRTC Screen Sharing](../patterns/webrtc-screen-sharing.md)
 - [Desktop Capture](../guides/desktop-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

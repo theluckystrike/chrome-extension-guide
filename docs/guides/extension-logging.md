@@ -178,3 +178,7 @@ Or use a custom plugin to strip all logging calls in production builds.
 
 - [Logging Patterns](../patterns/logging-patterns.md)
 - [Error Reporting](../guides/extension-error-reporting.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

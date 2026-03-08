@@ -152,3 +152,7 @@ For more extension development patterns and tools, explore the resources at zovo
 
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Design System](../guides/chrome-extension-design-system.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -572,3 +572,7 @@ Understanding the differences between ISOLATED and MAIN worlds, proper error han
 
 - [Scripting API Reference](../api-reference/scripting-api.md)
 - [Content Script Injection](../patterns/content-script-injection.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

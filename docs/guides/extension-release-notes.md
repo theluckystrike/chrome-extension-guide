@@ -133,3 +133,7 @@ Always include screenshots or GIFs when:
 
 - [Extension Updates](../guides/extension-updates.md)
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -96,3 +96,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/d
 
 - [Debugging Checklist](../guides/extension-debugging-checklist.md)
 - [Debugging Tools](../guides/chrome-extension-debugging-tools.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

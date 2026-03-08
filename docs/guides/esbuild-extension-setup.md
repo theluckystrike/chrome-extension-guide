@@ -512,3 +512,7 @@ For more information on related topics, see these guides:
 
 - [Vite Setup](../guides/vite-extension-setup.md)
 - [Webpack Setup](../guides/webpack-extension-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

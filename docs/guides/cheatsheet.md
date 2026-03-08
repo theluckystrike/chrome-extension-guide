@@ -418,3 +418,7 @@ const user = await protocol.send("getUser", { id: "123" });
 
 - [Chrome API Index](../reference/chrome-api-index.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

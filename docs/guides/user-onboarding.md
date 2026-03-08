@@ -359,3 +359,7 @@ For more information on related topics, consult these additional guides:
 
 - [Onboarding Patterns](../patterns/extension-onboarding.md)
 - [User Research](../guides/chrome-extension-user-research.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

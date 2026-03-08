@@ -757,3 +757,7 @@ function downloadBlob(blob, filename) {
 
 - [Downloads Management](../patterns/downloads-management.md)
 - [Desktop Capture](../guides/desktop-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

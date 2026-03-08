@@ -112,3 +112,7 @@ Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=
 
 - [Design System](../guides/chrome-extension-design-system.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

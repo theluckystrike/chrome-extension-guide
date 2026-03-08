@@ -111,3 +111,7 @@ async function getConfig() {
 
 - [Performance Profiling](../patterns/performance-profiling.md)
 - [Performance Profiling](../guides/extension-performance-profiling.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

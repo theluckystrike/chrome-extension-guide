@@ -137,3 +137,7 @@ async function trackDownload(item) {
 
 - [Downloads Management Patterns](../patterns/downloads-management.md)
 - [Downloads API](../api-reference/downloads-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

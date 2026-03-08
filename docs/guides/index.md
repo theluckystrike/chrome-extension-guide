@@ -141,3 +141,7 @@ Whether you're a beginner just starting with Chrome extensions or an experienced
 - [webrtc-extensions](webrtc-extensions.html)
 - [window-management](window-management.html)
 - [wxt-framework-setup](wxt-framework-setup.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

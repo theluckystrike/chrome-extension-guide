@@ -153,3 +153,7 @@ For more details, check docs.plasmo.com. If you are building a production extens
 
 - [Vite Setup](../guides/vite-extension-setup.md)
 - [WXT Framework](../guides/wxt-framework-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

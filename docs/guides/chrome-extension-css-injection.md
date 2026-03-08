@@ -199,3 +199,7 @@ element.classList.add('ext-highlight');
 
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

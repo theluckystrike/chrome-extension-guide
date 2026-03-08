@@ -216,3 +216,7 @@ Provide a minimal but complete template:
 
 - [Popup Communication](../patterns/popup-communication.md)
 - [Popup Data Loading](../patterns/popup-data-loading.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

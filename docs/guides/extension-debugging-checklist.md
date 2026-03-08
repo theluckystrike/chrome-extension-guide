@@ -264,3 +264,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

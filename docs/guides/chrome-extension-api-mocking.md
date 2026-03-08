@@ -312,3 +312,7 @@ it('should render popup with mock data', () => {
 
 - [API Rate Limits](../guides/chrome-extension-api-rate-limits.md)
 - [Testing Extensions](../guides/testing-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

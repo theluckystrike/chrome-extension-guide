@@ -172,3 +172,7 @@ Common error codes:
 
 - [Rate Limiting Patterns](../patterns/rate-limiting.md)
 - [API Mocking](../guides/chrome-extension-api-mocking.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

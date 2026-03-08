@@ -134,3 +134,7 @@ Or use offscreen documents for processing.
 
 - [WASM Patterns](../patterns/wasm-extensions.md)
 - [Web Workers](../guides/web-workers-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

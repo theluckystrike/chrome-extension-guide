@@ -363,3 +363,7 @@ Use these capabilities to implement auto-save, session timeouts, away status, an
 
 - [Idle API Reference](../api-reference/idle.md)
 - [Power Management](../guides/power-management.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

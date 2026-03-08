@@ -520,3 +520,7 @@ reportPerformance({
 
 - [Lazy Loading Content Scripts](../patterns/lazy-loading-content-scripts.md)
 - [Caching Strategies](../guides/caching-strategies.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

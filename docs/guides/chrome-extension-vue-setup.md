@@ -234,3 +234,7 @@ Configure in vite.config.ts for Chrome API helpers.
 
 - [Content Script with Vue](../patterns/content-script-vue.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

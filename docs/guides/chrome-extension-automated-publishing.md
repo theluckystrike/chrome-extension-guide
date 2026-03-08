@@ -229,3 +229,7 @@ Configure to trigger CWS publish on release:
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Chrome Web Store API](../guides/chrome-web-store-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

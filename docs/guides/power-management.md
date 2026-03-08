@@ -464,3 +464,7 @@ The Power API is straightforward but critical for creating polished extensions t
 
 - [Power API Patterns](../patterns/power-api.md)
 - [Idle Detection](../guides/idle-detection.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -144,3 +144,7 @@ async function tagBookmark(id, tags) {
 
 - [Bookmarks API Reference](../api-reference/bookmarks-api.md)
 - [History API](../guides/history-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

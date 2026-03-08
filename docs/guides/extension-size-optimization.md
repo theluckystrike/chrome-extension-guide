@@ -388,3 +388,7 @@ Run through this checklist before publishing:
 
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

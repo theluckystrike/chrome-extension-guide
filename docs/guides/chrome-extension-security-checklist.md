@@ -101,3 +101,7 @@ Use this checklist when developing, auditing, or reviewing a Chrome extension.
 
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Security Hardening](../guides/security-hardening.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

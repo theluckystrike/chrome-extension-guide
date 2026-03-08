@@ -167,3 +167,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 
 - [Command Palette](../patterns/command-palette.md)
 - [Commands API](../api-reference/commands-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -124,3 +124,7 @@ Page JS <-- window.postMessage --> Content Script <-- chrome.runtime --> Backgro
 
 - [Content Script Isolation](../patterns/content-script-isolation.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

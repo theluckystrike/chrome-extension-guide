@@ -337,3 +337,7 @@ For more advanced patterns and real-world implementations, explore the extension
 
 - [Chrome Built-in AI APIs](../guides/chrome-built-in-ai-apis.md)
 - [OAuth Identity](../guides/identity-oauth.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

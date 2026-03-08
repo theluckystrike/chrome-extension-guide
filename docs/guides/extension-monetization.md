@@ -252,3 +252,7 @@ const premiumAction = withLicenseCheck(async (data) => {
 
 - [Listing Optimization](../publishing/listing-optimization.md)
 - [Release Notes](../guides/extension-release-notes.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

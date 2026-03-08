@@ -165,3 +165,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 
 - [Web Navigation API](../api-reference/web-navigation-api.md)
 - [URL Handling](../patterns/navigation-url-handling.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

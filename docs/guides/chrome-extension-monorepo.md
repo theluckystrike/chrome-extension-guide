@@ -854,3 +854,7 @@ Create shared packages only when code genuinely serves multiple purposes. Premat
 
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 - [Environment Variables](../guides/chrome-extension-env-variables.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

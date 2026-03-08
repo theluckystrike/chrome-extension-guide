@@ -68,3 +68,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

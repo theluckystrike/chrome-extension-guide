@@ -532,3 +532,7 @@ Linux has limited audio capture support. Test thoroughly on target distributions
 
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Tab Capture](../guides/tab-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

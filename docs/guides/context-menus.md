@@ -135,3 +135,7 @@ chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
 
 - [Context Menu Patterns](../patterns/context-menu-patterns.md)
 - [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

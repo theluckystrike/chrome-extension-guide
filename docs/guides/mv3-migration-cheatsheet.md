@@ -764,3 +764,7 @@ await messenger.sendTab(tabId, "increment", { by: 1 });
 
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
 - [MV3 Migration Guide](../mv3/manifest-v3-migration-guide.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

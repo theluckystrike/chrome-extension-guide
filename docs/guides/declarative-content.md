@@ -175,3 +175,7 @@ chrome.declarativeContent.onPageChanged.addRules([
 
 - [Declarative Content Patterns](../patterns/declarative-content-patterns.md)
 - [Declarative Content Permission](../permissions/declarativeContent.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

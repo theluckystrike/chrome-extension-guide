@@ -94,3 +94,7 @@ Minimize permissions to only what is strictly necessary. Write clear, accurate d
 
 - [Review Preparation](../guides/extension-review-preparation.md)
 - [Code Review Checklist](../guides/chrome-extension-code-review-checklist.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

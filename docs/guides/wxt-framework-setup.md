@@ -170,3 +170,7 @@ This framework significantly reduces the boilerplate required for Chrome extensi
 
 - [Plasmo Framework](../guides/plasmo-framework-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

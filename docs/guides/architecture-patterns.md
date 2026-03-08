@@ -1069,3 +1069,7 @@ Start simple. Refactor toward complexity only when the code demands it.
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 - [State Persistence](../patterns/extension-state-persistence.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

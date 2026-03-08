@@ -136,3 +136,7 @@ chrome.history.onVisited.addListener(async (result) => {
 
 - [History API Reference](../api-reference/history-api.md)
 - [Bookmark API](../guides/bookmark-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

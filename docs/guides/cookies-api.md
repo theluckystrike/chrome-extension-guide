@@ -190,3 +190,7 @@ chrome.cookies.onChanged.addListener(async (changeInfo) => {
 
 - [Cookies API Reference](../api-reference/cookies-api.md)
 - [Cookies & Sessions](../patterns/cookies-sessions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

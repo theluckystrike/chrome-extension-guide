@@ -879,3 +879,7 @@ Master these techniques and you will spend less time confused about what your ex
 - [Debugging Checklist](../guides/extension-debugging-checklist.md)
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Debugging Tools](../guides/chrome-extension-debugging-tools.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

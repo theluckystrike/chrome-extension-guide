@@ -140,3 +140,7 @@ chrome.i18n.detectLanguage("Bonjour le monde", (result) => {
 
 - [i18n API Reference](../api-reference/i18n-api.md)
 - [Advanced i18n](../patterns/advanced-i18n.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

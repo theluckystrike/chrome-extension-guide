@@ -132,3 +132,7 @@ const storage = createStorage(defineSchema({
 
 - [Tab Management Patterns](../patterns/tab-management.md)
 - [Tab Group Patterns](../patterns/tab-group-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

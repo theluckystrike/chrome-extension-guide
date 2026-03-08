@@ -114,3 +114,7 @@ Maintain a single codebase for both stores:
 
 - [Firefox Migration](../guides/chrome-extension-migration-firefox.md)
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -733,3 +733,7 @@ self.addEventListener('push', (event) => { /* ... */ });
 
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications Guide](../guides/notifications-guide.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

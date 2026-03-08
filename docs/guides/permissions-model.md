@@ -535,3 +535,7 @@ By following these patterns, you can build extensions that respect user privacy,
 
 - [Permission Gating](../patterns/permission-gating.md)
 - [Permissions Strategy](../guides/extension-permissions-strategy.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

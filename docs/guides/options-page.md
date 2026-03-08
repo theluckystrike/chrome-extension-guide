@@ -198,3 +198,7 @@ Provide a minimal but functional options.html with:
 
 - [Options Page Patterns](../patterns/options-page-patterns.md)
 - [Accessibility](../guides/accessibility.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

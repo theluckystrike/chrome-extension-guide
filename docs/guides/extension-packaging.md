@@ -208,3 +208,7 @@ Always verify your package before distribution:
 
 - [Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
 - [Extension Updates](../guides/extension-updates.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

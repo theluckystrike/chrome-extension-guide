@@ -144,3 +144,7 @@ Offer premium features, use extension as lead magnet, accept donations via GitHu
 
 - [Review Preparation](../guides/extension-review-preparation.md)
 - [Publishing Guide](../publishing/publishing-guide.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

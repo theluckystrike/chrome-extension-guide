@@ -235,3 +235,7 @@ class WorkerPool {
 
 - [Worker Offloading](../patterns/webworker-offloading.md)
 - [WASM in Extensions](../guides/wasm-in-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

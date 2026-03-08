@@ -106,3 +106,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 - [Multi-Window Patterns](../patterns/multi-window.md)
 - [Windows API](../api-reference/windows-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

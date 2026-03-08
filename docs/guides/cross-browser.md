@@ -504,3 +504,7 @@ Both packages handle the Promise/callback normalization and provide consistent A
 
 - [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
 - [Safari Porting](../guides/chrome-extension-safari-porting.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

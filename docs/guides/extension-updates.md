@@ -449,3 +449,7 @@ Always:
 
 - [Update Handling](../patterns/extension-update-handling.md)
 - [Extension Packaging](../guides/extension-packaging.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

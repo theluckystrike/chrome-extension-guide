@@ -170,3 +170,7 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 - [Extension Packaging](../guides/extension-packaging.md)
 - [Extension Updates](../guides/extension-updates.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

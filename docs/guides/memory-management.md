@@ -421,3 +421,7 @@ This comprehensive approach ensures your extension manages memory efficiently ac
 
 - [Memory Management Patterns](../patterns/memory-management.md)
 - [Performance Guide](../guides/performance.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -263,3 +263,7 @@ The small footprint also helps stay within Chrome's service worker memory limits
 
 - [Building with Svelte](../patterns/building-with-svelte.md)
 - [Vue Setup](../guides/chrome-extension-vue-setup.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

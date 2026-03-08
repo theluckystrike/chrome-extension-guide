@@ -185,3 +185,7 @@ If your extension is rejected:
 
 - [Common Rejections](../publishing/common-rejections.md)
 - [Rejection Fixes](../publishing/chrome-web-store-rejection-fixes.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -733,3 +733,7 @@ Key considerations:
 
 - [System API Reference](../api-reference/system-api.md)
 - [Desktop Capture](../guides/desktop-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

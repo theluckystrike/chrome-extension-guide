@@ -164,3 +164,7 @@ chrome.notifications.getAll((notifications) => {
 
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications API](../api-reference/notifications-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
