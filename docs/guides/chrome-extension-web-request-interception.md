@@ -1,771 +1,740 @@
 ---
 layout: default
-title: Chrome Extension Web Request Interception — Mastering webRequest API for Network Control
-description: Master the Chrome webRequest API to intercept, modify, and block HTTP requests. Build ad blockers, privacy tools, and request modifiers with TypeScript.
+title: "Chrome Extension Web Request Interception — Complete Developer Guide"
+description: "Master webRequest API for Chrome extensions. Learn request modification, ad blocking patterns, and privacy tools with TypeScript examples."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-web-request-interception/"
 ---
 
-# Chrome Extension Web Request Interception — Mastering webRequest API for Network Control
+# Chrome Extension Web Request Interception — Complete Developer Guide
 
-The Chrome webRequest API stands as one of the most powerful interfaces for Chrome extension developers who need to intercept, analyze, modify, or block network requests. This API provides granular control over HTTP traffic flowing through the browser, enabling sophisticated extensions for ad blocking, content filtering, API debugging, and privacy protection. Understanding how to leverage this API effectively opens doors to building tools that can dramatically reshape how users interact with web content.
-
-In this comprehensive guide, we'll explore the webRequest API's architecture, examine practical TypeScript implementations for common use cases, discuss ad blocking patterns that work within Chrome's Manifest V3 restrictions, and cover best practices that ensure your extension passes Chrome Web Store review while providing robust functionality.
+The Chrome Extension webRequest interception API represents one of the most powerful capabilities available to extension developers. This comprehensive guide dives deep into the webRequest API, exploring advanced request modification techniques, building effective ad blocking systems, and creating privacy-focused tools that respect user security while delivering powerful functionality. Whether you're building a developer utility, a content filter, or a privacy extension, understanding request interception is fundamental to creating sophisticated Chrome extensions.
 
 ## Understanding the webRequest API Architecture
 
-The webRequest API operates as a middleware layer between web pages and network requests, allowing extensions to observe and manipulate HTTP traffic at various stages of the request lifecycle. Unlike the newer Declarative Net Request API introduced in Manifest V3, the traditional webRequest API offers more flexibility but with greater responsibility placed on extension developers.
+The chrome.webRequest API provides a comprehensive interface for observing and analyzing network traffic flowing through the Chrome browser. Unlike content scripts that operate within the context of web pages, the webRequest API operates at the network layer, giving extensions visibility into and control over HTTP and HTTPS requests before they reach their destination servers.
 
-### The Request Lifecycle Events
+The architecture centers around a powerful event-driven system where Chrome fires events at various stages of the request lifecycle. Extensions can register listeners for these events to analyze, modify, or block requests based on sophisticated criteria. This event-based model allows for clean separation of concerns and enables extensions to handle complex interception scenarios without cluttering their core logic.
 
-Network requests in Chrome follow a well-defined lifecycle, with the webRequest API providing hooks at each stage. Understanding these stages helps you choose the right interception point for your use case.
+Understanding the permission model is crucial before implementing any webRequest functionality. The basic `"webRequest"` permission grants observation capabilities—your extension can see requests happening without necessarily being able to modify them. For modification capabilities, additional permissions become necessary, and the requirements differ significantly between Manifest V2 and Manifest V3.
 
-The lifecycle progresses through these events in order: `onBeforeRequest` fires when a request is about to occur, making it ideal for canceling or redirecting requests. Next, `onBeforeSendHeaders` executes before request headers are sent, allowing you to add, modify, or remove headers. The `onSendHeaders` event fires after headers have been sent, useful for logging. When response headers arrive, `onHeadersReceived` triggers, enabling you to modify response headers or status codes. For authentication challenges, `onAuthRequired` intercepts the authentication flow. Finally, `onResponseStarted` fires when the first byte of the response arrives, and `onCompleted` or `onErrorOccurred` signals completion or failure.
+### Request Lifecycle Events in Detail
 
-### Manifest V3 Changes and Limitations
+The webRequest API fires events in a predictable sequence for each network request, giving developers multiple opportunities to intercept and manipulate traffic. The lifecycle begins with `onBeforeRequest`, which fires when a request is about to be initiated—this is the earliest intervention point where you can cancel requests entirely or redirect them to different URLs.
 
-Manifest V3 introduced significant changes to how the webRequest API operates. Most notably, blocking listeners—which previously allowed extensions to synchronously block or modify requests—now have restricted capabilities. The `blocking` option is deprecated for most use cases, though it remains available for certain scenarios with appropriate permissions.
+Following the initial request, `onBeforeSendHeaders` fires just before request headers are transmitted to the server. This event provides the critical ability to add, remove, or modify headers such as User-Agent, Accept-Language, Cookie values, or custom headers your application requires. The next event in the sequence, `onSendHeaders`, fires after headers have been sent, serving primarily for logging and monitoring purposes rather than modification.
 
-In Manifest V3, you should prefer the Declarative Net Request API for simple blocking and modification tasks, as it provides better privacy guarantees and doesn't require host permissions for the URLs being modified. However, the webRequest API remains essential for cases requiring dynamic analysis, complex header manipulation, or request body access.
+When the server responds, `onHeadersReceived` fires with the complete response headers, enabling you to read or modify headers like Content-Type, Cache-Control, Set-Cookie, or custom response headers. For requests requiring HTTP authentication, the `onAuthRequired` event provides an opportunity to programmatically supply credentials without user intervention. Finally, `onResponseStarted` indicates the first byte of the response body has arrived, while `onCompleted` signals successful completion, and `onErrorOccurred` handles any failures during the request lifecycle.
 
-## Setting Up Your Extension for webRequest
+## Setting Up Your Extension for Request Interception
 
-Proper manifest configuration determines what your extension can and cannot do with network requests. Let's examine the required permissions and configuration patterns.
-
-### Required Permissions
+Proper manifest configuration forms the foundation of any webRequest implementation. The permissions you declare determine what capabilities your extension will have, and understanding these requirements prevents common development frustrations.
 
 ```json
 {
   "manifest_version": 3,
+  "name": "Request Interception Demo",
+  "version": "1.0.0",
   "permissions": [
     "webRequest",
     "webRequestBlocking"
   ],
   "host_permissions": [
     "<all_urls>"
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
 ```
 
-The `webRequest` permission grants access to the API itself, while `webRequestBlocking` enables blocking capabilities—though as noted above, this has limitations in Manifest V3. Host permissions determine which URLs your extension can intercept; using `<all_urls>` provides complete coverage but triggers significant permission warnings during installation.
+The distinction between `"permissions"` and `"host_permissions"` is critical in Manifest V3. The `"webRequest"` permission goes in the permissions array, while the domains you want to intercept go in host_permissions. Using `"<all_urls>"` grants access to all websites but triggers additional scrutiny during Chrome Web Store review.
 
-For more targeted interception, specify particular host patterns:
-
-```json
-{
-  "host_permissions": [
-    "https://*.example.com/*",
-    "https://api.example.org/*"
-  ]
-}
-```
-
-This approach reduces permission scope and improves user trust, though it limits your extension's visibility to matching URLs.
+For Manifest V3, it's important to note that the `webRequestBlocking` permission has significant restrictions. While it still works in Manifest V2, public extensions in Manifest V3 cannot use blocking webRequest listeners for modification. Instead, Google recommends the `declarativeNetRequest` API for blocking and modification capabilities. However, for enterprise extensions or development builds, the blocking API remains available.
 
 ## TypeScript Implementation Patterns
 
-Let's explore practical implementations covering common use cases, all written in TypeScript for type safety and better developer experience.
+TypeScript adds significant value to webRequest implementations through type safety and IntelliSense support. Let's explore comprehensive TypeScript examples that demonstrate real-world patterns.
 
-### Blocking Requests with TypeScript
+### Basic Request Monitoring
+
+The simplest use case involves monitoring requests without modification. This pattern is essential for analytics extensions, developer tools, and debugging utilities.
 
 ```typescript
-// types/web-request-types.ts
+// types/webrequest.ts
 interface RequestDetails {
   url: string;
   method: string;
   tabId: number;
   frameId: number;
   parentFrameId: number;
-  requestId: string;
+  timestamp: number;
   type: chrome.webRequest.ResourceType;
-  timeStamp: number;
-  initiator?: string;
+  initiator: string | undefined;
+  requestId: string;
 }
 
+interface RequestFilter {
+  urls: string[];
+  types?: chrome.webRequest.ResourceType[];
+  tabId?: number;
+  windowId?: number;
+}
+
+// background/request-monitor.ts
+type RequestCallback = (details: RequestDetails) => void;
+
+class RequestMonitor {
+  private listeners: Map<string, RequestCallback[]> = new Map();
+
+  constructor() {
+    this.initializeListeners();
+  }
+
+  private initializeListeners(): void {
+    // Monitor request completion for all requests
+    chrome.webRequest.onCompleted.addListener(
+      (details) => this.handleRequestComplete(details),
+      { urls: ["<all_urls>"] },
+      ["responseHeaders"]
+    );
+
+    // Monitor failed requests
+    chrome.webRequest.onErrorOccurred.addListener(
+      (details) => this.handleError(details),
+      { urls: ["<all_urls>"] }
+    );
+
+    // Track request initiation
+    chrome.webRequest.onBeforeRequest.addListener(
+      (details) => this.handleBeforeRequest(details),
+      { urls: ["<all_urls>"] }
+    );
+  }
+
+  private handleRequestComplete(details: chrome.webRequest.OnCompletedDetails): void {
+    console.log(`Request completed: ${details.method} ${details.url}`);
+    console.log(`Status: ${details.statusCode}`);
+    console.log(`Type: ${details.type}`);
+    console.log(`Tab ID: ${details.tabId}`);
+    
+    // Analyze response headers
+    if (details.responseHeaders) {
+      const contentType = details.responseHeaders.find(
+        header => header.name.toLowerCase() === 'content-type'
+      );
+      const cacheControl = details.responseHeaders.find(
+        header => header.name.toLowerCase() === 'cache-control'
+      );
+      
+      console.log('Content-Type:', contentType?.value);
+      console.log('Cache-Control:', cacheControl?.value);
+    }
+  }
+
+  private handleError(details: chrome.webRequest.OnErrorOccurredDetails): void {
+    console.error(`Request failed: ${details.url}`);
+    console.error(`Error: ${details.error}`);
+    console.error(`Type: ${details.type}`);
+  }
+
+  private handleBeforeRequest(details: chrome.webRequest.OnBeforeRequestDetails): void {
+    console.log(`Request initiated: ${details.method} ${details.url}`);
+    
+    // Analyze POST data if present
+    if (details.requestBody) {
+      if (details.requestBody.formData) {
+        console.log('Form data:', details.requestBody.formData);
+      }
+      if (details.requestBody.raw) {
+        console.log('Raw body present, length:', details.requestBody.raw.length);
+      }
+    }
+  }
+
+  // Register custom listeners
+  public onRequestComplete(callback: RequestCallback): void {
+    const listeners = this.listeners.get('complete') || [];
+    listeners.push(callback);
+    this.listeners.set('complete', listeners);
+  }
+}
+
+export const requestMonitor = new RequestMonitor();
+```
+
+### Request Modification and Blocking
+
+Implementing request modification requires careful attention to the blocking API and proper return values. This pattern demonstrates how to modify headers and block specific requests.
+
+```typescript
+// types/request-modification.ts
 interface BlockingResponse {
   cancel?: boolean;
   redirectUrl?: string;
-}
-
-// Blocklist stored in extension storage
-interface BlocklistRule {
-  pattern: string;
-  regex?: boolean;
-  resourceTypes?: chrome.webRequest.ResourceType[];
-}
-
-class RequestBlocker {
-  private blocklist: BlocklistRule[] = [];
-
-  constructor() {
-    this.loadBlocklist();
-  }
-
-  private async loadBlocklist(): Promise<void> {
-    const result = await chrome.storage.local.get('blocklist');
-    this.blocklist = result.blocklist || [];
-  }
-
-  matchesBlocklist(url: string, type: chrome.webRequest.ResourceType): boolean {
-    return this.blocklist.some(rule => {
-      if (rule.resourceTypes && !rule.resourceTypes.includes(type)) {
-        return false;
-      }
-      
-      if (rule.regex) {
-        const regex = new RegExp(rule.pattern);
-        return regex.test(url);
-      }
-      
-      return url.includes(rule.pattern);
-    });
-  }
-
-  handleBeforeRequest = (
-    details: RequestDetails
-  ): BlockingResponse | void => {
-    if (this.matchesBlocklist(details.url, details.type)) {
-      console.log(`Blocking request to: ${details.url}`);
-      return { cancel: true };
-    }
-  };
-}
-
-// Initialize the blocker
-const blocker = new RequestBlocker();
-
-// Register the listener with proper typing
-chrome.webRequest.onBeforeRequest.addListener(
-  blocker.handleBeforeRequest,
-  {
-    urls: ['<all_urls>'],
-    types: ['main_frame', 'sub_frame', 'xmlhttprequest', 'script', 'image']
-  },
-  ['blocking']
-);
-```
-
-### Modifying Request Headers
-
-```typescript
-// services/header-modifier.ts
-interface RequestHeaders {
-  name: string;
-  value: string;
+  requestHeaders?: chrome.webRequest.HttpHeader[];
+  responseHeaders?: chrome.webRequest.HttpHeader[];
 }
 
 interface HeaderModificationRule {
-  headerName: string;
-  headerValue?: string;
-  action: 'add' | 'remove' | 'modify';
+  header: string;
+  operation: 'set' | 'remove' | 'append';
+  value?: string;
 }
 
-class HeaderModifier {
-  private modifications: Map<string, HeaderModificationRule[]> = new Map();
-
-  constructor() {
-    this.initializeModifications();
+class RequestModifier {
+  // Block requests to specific domains
+  public blockDomains(patterns: string[]): void {
+    chrome.webRequest.onBeforeRequest.addListener(
+      (details): BlockingResponse | undefined => {
+        const url = new URL(details.url);
+        const shouldBlock = patterns.some(pattern => 
+          url.hostname.includes(pattern)
+        );
+        
+        if (shouldBlock) {
+          console.log(`Blocking request to: ${details.url}`);
+          return { cancel: true };
+        }
+        
+        return undefined;
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking"]
+    );
   }
 
-  private async initializeModifications(): Promise<void> {
-    // Load rules from storage
-    const result = await chrome.storage.sync.get('headerRules');
-    const rules: Record<string, HeaderModificationRule[]> = result.headerRules || {};
-    
-    this.modifications = new Map(Object.entries(rules));
-  }
-
-  getModificationsForUrl(url: string): HeaderModificationRule[] {
-    for (const [pattern, rules] of this.modifications.entries()) {
-      if (url.match(new RegExp(pattern))) {
-        return rules;
-      }
-    }
-    return [];
-  }
-
-  applyModifications(
-    details: chrome.webRequest.OnBeforeSendHeadersDetails
-  ): chrome.webRequest.BlockingResponse | void {
-    const url = details.url;
-    const modifications = this.getModificationsForUrl(url);
-    
-    if (modifications.length === 0) return;
-
-    let headers: RequestHeaders[] = [...(details.requestHeaders || [])];
-
-    for (const mod of modifications) {
-      switch (mod.action) {
-        case 'add':
-          headers.push({ name: mod.headerName, value: mod.headerValue || '' });
-          break;
-          
-        case 'remove':
-          headers = headers.filter(h => 
-            h.name.toLowerCase() !== mod.headerName.toLowerCase()
-          );
-          break;
-          
-        case 'modify':
-          const index = headers.findIndex(h => 
-            h.name.toLowerCase() === mod.headerName.toLowerCase()
-          );
-          if (index >= 0) {
-            headers[index].value = mod.headerValue || '';
-          } else {
-            headers.push({ name: mod.headerName, value: mod.headerValue || '' });
+  // Redirect requests to different URLs
+  public setupRedirects(redirects: Map<string, string>): void {
+    chrome.webRequest.onBeforeRequest.addListener(
+      (details): BlockingResponse | undefined => {
+        for (const [pattern, redirectUrl] of redirects) {
+          if (details.url.includes(pattern)) {
+            console.log(`Redirecting ${details.url} to ${redirectUrl}`);
+            return { redirectUrl };
           }
-          break;
-      }
-    }
-
-    return { requestHeaders: headers };
-  }
-}
-
-const headerModifier = new HeaderModifier();
-
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  headerModifier.applyModifications.bind(headerModifier),
-  {
-    urls: ['<all_urls>']
-  },
-  ['blocking', 'requestHeaders']
-);
-```
-
-### Intercepting and Modifying Response Headers
-
-```typescript
-// services/response-interceptor.ts
-interface CORSRule {
-  allowedOrigins: string[];
-  allowedMethods?: string[];
-}
-
-class ResponseInterceptor {
-  private corsRules: CORSRule[] = [];
-
-  constructor() {
-    this.loadRules();
-  }
-
-  private async loadRules(): Promise<void> {
-    const result = await chrome.storage.local.get('corsRules');
-    this.corsRules = result.corsRules || [];
-  }
-
-  private findMatchingRule(origin: string): CORSRule | undefined {
-    return this.corsRules.find(rule => 
-      rule.allowedOrigins.includes(origin)
+        }
+        return undefined;
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking"]
     );
   }
 
-  handleHeadersReceived = (
-    details: chrome.webRequest.OnHeadersReceivedDetails
-  ): chrome.webRequest.BlockingResponse | void => {
-    const initiator = details.initiator;
-    if (!initiator) return;
-
-    const matchingRule = this.findMatchingRule(initiator);
-    if (!matchingRule) return;
-
-    const headers = details.responseHeaders || [];
-    
-    // Add CORS headers
-    const existingAccessControl = headers.find(h => 
-      h.name.toLowerCase() === 'access-control-allow-origin'
+  // Modify request headers
+  public modifyRequestHeaders(modifications: HeaderModificationRule[]): void {
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+      (details): BlockingResponse | undefined => {
+        const headers = details.requestHeaders || [];
+        
+        for (const mod of modifications) {
+          const existingIndex = headers.findIndex(
+            h => h.name.toLowerCase() === mod.header.toLowerCase()
+          );
+          
+          switch (mod.operation) {
+            case 'set':
+              if (existingIndex >= 0) {
+                headers[existingIndex].value = mod.value;
+              } else {
+                headers.push({ name: mod.header, value: mod.value });
+              }
+              break;
+            case 'remove':
+              if (existingIndex >= 0) {
+                headers.splice(existingIndex, 1);
+              }
+              break;
+            case 'append':
+              headers.push({ name: mod.header, value: mod.value });
+              break;
+          }
+        }
+        
+        return { requestHeaders: headers };
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking", "requestHeaders"]
     );
-    
-    if (existingAccessControl) {
-      existingAccessControl.value = initiator;
-    } else {
-      headers.push({
-        name: 'Access-Control-Allow-Origin',
-        value: initiator
-      });
-    }
+  }
 
-    if (matchingRule.allowedMethods) {
-      headers.push({
-        name: 'Access-Control-Allow-Methods',
-        value: matchingRule.allowedMethods.join(', ')
-      });
-    }
-
-    return { responseHeaders: headers };
-  };
+  // Modify response headers
+  public modifyResponseHeaders(modifications: HeaderModificationRule[]): void {
+    chrome.webRequest.onHeadersReceived.addListener(
+      (details): BlockingResponse | undefined => {
+        const headers = details.responseHeaders || [];
+        
+        for (const mod of modifications) {
+          const existingIndex = headers.findIndex(
+            h => h.name.toLowerCase() === mod.header.toLowerCase()
+          );
+          
+          switch (mod.operation) {
+            case 'set':
+              if (existingIndex >= 0) {
+                headers[existingIndex].value = mod.value;
+              } else {
+                headers.push({ name: mod.header, value: mod.value });
+              }
+              break;
+            case 'remove':
+              if (existingIndex >= 0) {
+                headers.splice(existingIndex, 1);
+              }
+              break;
+            case 'append':
+              headers.push({ name: mod.header, value: mod.value });
+              break;
+          }
+        }
+        
+        return { responseHeaders: headers };
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking", "responseHeaders"]
+    );
+  }
 }
 
-const interceptor = new ResponseInterceptor();
-
-chrome.webRequest.onHeadersReceived.addListener(
-  interceptor.handleHeadersReceived,
-  {
-    urls: ['<all_urls>'],
-    types: ['xmlhttprequest', 'fetch']
-  },
-  ['blocking', 'responseHeaders']
-);
+export const requestModifier = new RequestModifier();
 ```
 
-## Building an Ad Blocker with webRequest
+## Building an Ad Blocker with Practical Patterns
 
-Creating an effective ad blocker requires combining request interception with efficient filtering logic. While Manifest V3 encourages using the Declarative Net Request API for this purpose, the webRequest API still offers unique capabilities for dynamic filtering.
-
-### Filter Engine Implementation
+Ad blocking represents one of the most common use cases for webRequest interception. A well-designed ad blocker combines multiple filtering strategies while maintaining performance and respecting user privacy.
 
 ```typescript
-// services/ad-blocker.ts
-interface Filter {
+// types/ad-blocker.ts
+interface FilterRule {
+  id: number;
   pattern: string;
-  type: 'url' | 'domain' | 'regex';
+  type: 'domain' | 'regex' | 'url';
   action: 'block' | 'allow' | 'redirect';
   redirectUrl?: string;
 }
 
-interface FilterMatch {
-  filter: Filter;
-  matchType: 'exact' | 'wildcard' | 'pattern';
+interface AdBlockerConfig {
+  enabled: boolean;
+  blockedDomains: string[];
+  customFilters: FilterRule[];
+  statistics: {
+    blockedCount: number;
+    allowedCount: number;
+  };
 }
 
-class AdBlockerEngine {
-  private filters: Filter[] = [];
-  private whitelist: Set<string> = new Set();
+class AdBlocker {
+  private config: AdBlockerConfig = {
+    enabled: true,
+    blockedDomains: [
+      'doubleclick.net',
+      'googlesyndication.com',
+      'googleadservices.com',
+      'facebook.com/tr',
+      'analytics.google.com',
+      'googletagmanager.com',
+    ],
+    customFilters: [],
+    statistics: {
+      blockedCount: 0,
+      allowedCount: 0,
+    },
+  };
 
   constructor() {
-    this.initializeFilters();
+    this.initializeBlocking();
+    this.loadConfiguration();
   }
 
-  private async initializeFilters(): Promise<void> {
-    const result = await chrome.storage.local.get(['filters', 'whitelist']);
-    this.filters = result.filters || this.getDefaultFilters();
-    this.whitelist = new Set(result.whitelist || []);
-  }
-
-  private getDefaultFilters(): Filter[] {
-    return [
-      { pattern: '.*\\.doubleclick\\.net', type: 'domain', action: 'block' },
-      { pattern: '.*\\.googlesyndication\\.com', type: 'domain', action: 'block' },
-      { pattern: '.*\\.googleadservices\\.com', type: 'domain', action: 'block' },
-      { pattern: '.*\\.facebook\\.com/tr/', type: 'url', action: 'block' },
-      { pattern: '.*\\.amazon-adsystem\\.com', type: 'domain', action: 'block' },
-      { pattern: '.*\\.adnxs\\.com', type: 'domain', action: 'block' },
-      { pattern: '.*\\.criteo\\.com', type: 'domain', action: 'block' },
-      { type: 'regex', pattern: '.*\\/ads\\/.*', action: 'block' },
-      { type: 'regex', pattern: '.*\\/ad\\/.*', action: 'block' },
-    ];
-  }
-
-  isWhitelisted(url: string): boolean {
+  private async loadConfiguration(): Promise<void> {
     try {
-      const urlObj = new URL(url);
-      return this.whitelist.has(urlObj.hostname);
+      const stored = await chrome.storage.local.get(['adBlockerConfig']);
+      if (stored.adBlockerConfig) {
+        this.config = { ...this.config, ...stored.adBlockerConfig };
+      }
+    } catch (error) {
+      console.error('Failed to load configuration:', error);
+    }
+  }
+
+  private initializeBlocking(): void {
+    // Block requests before they're sent
+    chrome.webRequest.onBeforeRequest.addListener(
+      (details): BlockingResponse | undefined => {
+        if (!this.config.enabled) {
+          return undefined;
+        }
+
+        // Check against blocked domains
+        try {
+          const url = new URL(details.url);
+          
+          for (const domain of this.config.blockedDomains) {
+            if (url.hostname.includes(domain)) {
+              this.config.statistics.blockedCount++;
+              this.updateStatistics();
+              
+              console.log(`[AdBlocker] Blocked: ${details.url}`);
+              return { cancel: true };
+            }
+          }
+
+          // Check custom filters
+          for (const filter of this.config.customFilters) {
+            if (this.matchesFilter(details.url, filter)) {
+              if (filter.action === 'block') {
+                this.config.statistics.blockedCount++;
+                this.updateStatistics();
+                return { cancel: true };
+              } else if (filter.action === 'redirect' && filter.redirectUrl) {
+                return { redirectUrl: filter.redirectUrl };
+              }
+            }
+          }
+
+          this.config.statistics.allowedCount++;
+        } catch (error) {
+          console.error('Error parsing URL:', error);
+        }
+
+        return undefined;
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking"]
+    );
+
+    // Remove tracking parameters from URLs
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+      (details): BlockingResponse | undefined => {
+        if (!this.config.enabled) {
+          return undefined;
+        }
+
+        const url = new URL(details.url);
+        const trackingParams = ['utm_source', 'utm_medium', 'utm_campaign', 'fbclid', 'gclid'];
+        let modified = false;
+
+        trackingParams.forEach(param => {
+          if (url.searchParams.has(param)) {
+            url.searchParams.delete(param);
+            modified = true;
+          }
+        });
+
+        if (modified && details.requestHeaders) {
+          const newUrl = url.toString();
+          // Reconstruct the request URL would require redirect
+          // For header-only modifications, we could add a custom header
+          console.log(`[AdBlocker] Cleaned tracking params: ${details.url}`);
+        }
+
+        return undefined;
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking", "requestHeaders"]
+    );
+  }
+
+  private matchesFilter(url: string, filter: FilterRule): boolean {
+    try {
+      switch (filter.type) {
+        case 'domain':
+          const parsedUrl = new URL(url);
+          return parsedUrl.hostname.includes(filter.pattern);
+        case 'url':
+          return url.includes(filter.pattern);
+        case 'regex':
+          return new RegExp(filter.pattern).test(url);
+        default:
+          return false;
+      }
     } catch {
       return false;
     }
   }
 
-  matchFilter(url: string): FilterMatch | null {
-    for (const filter of this.filters) {
-      let matches = false;
-
-      switch (filter.type) {
-        case 'domain':
-          try {
-            const urlObj = new URL(url);
-            matches = urlObj.hostname.includes(filter.pattern.replace(/^\*\./, ''));
-          } catch {
-            continue;
-          }
-          break;
-          
-        case 'url':
-          matches = url.includes(filter.pattern);
-          break;
-          
-        case 'regex':
-          try {
-            const regex = new RegExp(filter.pattern, 'i');
-            matches = regex.test(url);
-          } catch {
-            continue;
-          }
-          break;
-      }
-
-      if (matches) {
-        return { filter, matchType: 'wildcard' };
-      }
-    }
-    return null;
-  }
-
-  processRequest(
-    details: chrome.webRequest.OnBeforeRequestDetails
-  ): chrome.webRequest.BlockingResponse | void {
-    // Skip whitelisted URLs
-    if (this.isWhitelisted(details.url)) {
-      return;
-    }
-
-    const match = this.matchFilter(details.url);
-    
-    if (!match) return;
-
-    switch (match.filter.action) {
-      case 'block':
-        this.incrementBlockedCount();
-        return { cancel: true };
-        
-      case 'redirect':
-        if (match.filter.redirectUrl) {
-          return { redirectUrl: match.filter.redirectUrl };
-        }
-        return { cancel: true };
-        
-      case 'allow':
-        // Explicit allow - do nothing
-        return;
+  private async updateStatistics(): Promise<void> {
+    try {
+      await chrome.storage.local.set({
+        adBlockerStats: this.config.statistics,
+      });
+    } catch (error) {
+      console.error('Failed to update statistics:', error);
     }
   }
 
-  private async incrementBlockedCount(): Promise<void> {
-    const result = await chrome.storage.local.get('blockedCount');
-    const count = (result.blockedCount || 0) + 1;
-    await chrome.storage.local.set({ blockedCount: count });
+  public toggle(enabled: boolean): void {
+    this.config.enabled = enabled;
+    this.saveConfiguration();
   }
 
-  // Update filters dynamically
-  async updateFilters(newFilters: Filter[]): Promise<void> {
-    this.filters = newFilters;
-    await chrome.storage.local.set({ filters: newFilters });
-  }
-
-  // Manage whitelist
-  async addToWhitelist(domain: string): Promise<void> {
-    this.whitelist.add(domain);
-    await chrome.storage.local.set({ 
-      whitelist: Array.from(this.whitelist) 
-    });
+  private async saveConfiguration(): Promise<void> {
+    try {
+      await chrome.storage.local.set({
+        adBlockerConfig: this.config,
+      });
+    } catch (error) {
+      console.error('Failed to save configuration:', error);
+    }
   }
 }
 
-const adBlocker = new AdBlockerEngine();
-
-chrome.webRequest.onBeforeRequest.addListener(
-  (details) => adBlocker.processRequest(details),
-  {
-    urls: ['<all_urls>'],
-    types: [
-      'main_frame', 'sub_frame', 'stylesheet', 
-      'script', 'image', 'font', 'object', 
-      'xmlhttprequest', 'ping', 'csp_report', 
-      'media', 'websocket', 'other'
-    ]
-  },
-  ['blocking']
-);
+export const adBlocker = new AdBlocker();
 ```
 
-## Privacy Tools Implementation
+## Creating Privacy Protection Tools
 
-Beyond ad blocking, the webRequest API enables powerful privacy-focused extensions that can block trackers, modify headers to enhance privacy, and provide users with visibility into how their data flows.
-
-### Tracker Blocking and Analytics Prevention
+Privacy extensions benefit greatly from webRequest interception capabilities. These tools can block tracking scripts, remove identifying headers, and provide users with control over their digital footprint.
 
 ```typescript
-// services/privacy-shield.ts
+// types/privacy-protector.ts
+interface PrivacySettings {
+  blockTrackers: boolean;
+  blockSocialWidgets: boolean;
+  removeFingerprinting: boolean;
+  blockThirdPartyCookies: boolean;
+  clearOnExit: boolean;
+}
+
 interface TrackerCategory {
   name: string;
   domains: string[];
-  enabled: boolean;
 }
 
-interface PrivacyStats {
-  trackersBlocked: number;
-  cookiesBlocked: number;
-  requestsModified: number;
-}
-
-class PrivacyShield {
-  private trackerCategories: TrackerCategory[] = [];
-  private stats: PrivacyStats = {
-    trackersBlocked: 0,
-    cookiesBlocked: 0,
-    requestsModified: 0
+class PrivacyProtector {
+  private settings: PrivacySettings = {
+    blockTrackers: true,
+    blockSocialWidgets: true,
+    removeFingerprinting: true,
+    blockThirdPartyCookies: true,
+    clearOnExit: false,
   };
+
+  private trackerCategories: TrackerCategory[] = [
+    {
+      name: 'Analytics',
+      domains: [
+        'google-analytics.com',
+        'analytics.google.com',
+        'hotjar.com',
+        'mixpanel.com',
+        'segment.io',
+        'amplitude.com',
+        'heap.io',
+      ],
+    },
+    {
+      name: 'Advertising',
+      domains: [
+        'doubleclick.net',
+        'googlesyndication.com',
+        'adnxs.com',
+        'criteo.com',
+        'taboola.com',
+        'outbrain.com',
+      ],
+    },
+    {
+      name: 'Social',
+      domains: [
+        'facebook.com/plugins',
+        'facebook.com/tr',
+        'platform.twitter.com',
+        'platform.linkedin.com',
+        'disqus.com',
+      ],
+    },
+  ];
 
   constructor() {
-    this.initializeTrackers();
-    this.loadStats();
+    this.initializeProtection();
+    this.loadSettings();
   }
 
-  private initializeTrackers(): void {
-    this.trackerCategories = [
-      {
-        name: 'Analytics',
-        enabled: true,
-        domains: [
-          'google-analytics.com',
-          'googletagmanager.com',
-          'segment.io',
-          'mixpanel.com',
-          'amplitude.com',
-          'hotjar.com',
-          'fullstory.com'
-        ]
-      },
-      {
-        name: 'Advertising',
-        enabled: true,
-        domains: [
-          'doubleclick.net',
-          'googlesyndication.com',
-          'facebook.net',
-          'criteo.com',
-          'taboola.com',
-          'outbrain.com'
-        ]
-      },
-      {
-        name: 'Social Tracking',
-        enabled: true,
-        domains: [
-          'connect.facebook.net',
-          'platform.twitter.com',
-          'linkedin.com/px',
-          'pinterest.com/js'
-        ]
-      },
-      {
-        name: 'Fingerprinting',
-        enabled: true,
-        domains: [
-          'fingerprintjs.com',
-          'iovation.com',
-          'threatmetrix.com'
-        ]
-      }
-    ];
-  }
-
-  private async loadStats(): Promise<void> {
-    const result = await chrome.storage.local.get('privacyStats');
-    if (result.privacyStats) {
-      this.stats = result.privacyStats;
-    }
-  }
-
-  private async saveStats(): Promise<void> {
-    await chrome.storage.local.set({ privacyStats: this.stats });
-  }
-
-  private isTracker(url: string, type: chrome.webRequest.ResourceType): boolean {
+  private async loadSettings(): Promise<void> {
     try {
-      const urlObj = new URL(url);
-      const hostname = urlObj.hostname;
-      
-      return this.trackerCategories
-        .filter(cat => cat.enabled)
-        .some(cat => 
-          cat.domains.some(domain => hostname.includes(domain))
-        );
-    } catch {
-      return false;
-    }
-  }
-
-  handleBeforeRequest = (
-    details: chrome.webRequest.OnBeforeRequestDetails
-  ): chrome.webRequest.BlockingResponse | void => {
-    if (this.isTracker(details.url, details.type)) {
-      this.stats.trackersBlocked++;
-      this.saveStats();
-      return { cancel: true };
-    }
-  };
-
-  handleBeforeSendHeaders = (
-    details: chrome.webRequest.OnBeforeSendHeadersDetails
-  ): chrome.webRequest.BlockingResponse | void => {
-    const headers = details.requestHeaders || [];
-    let modified = false;
-    
-    // Remove tracking headers
-    const headersToRemove = [
-      'Referer',
-      'Cookie',
-      'User-Agent'
-    ];
-
-    const filteredHeaders = headers.filter(header => {
-      if (headersToRemove.includes(header.name)) {
-        modified = true;
-        return false;
+      const stored = await chrome.storage.sync.get(['privacySettings']);
+      if (stored.privacySettings) {
+        this.settings = { ...this.settings, ...stored.privacySettings };
       }
-      return true;
-    });
-
-    if (modified) {
-      this.stats.cookiesBlocked++;
-      this.stats.requestsModified++;
-      this.saveStats();
-      
-      return {
-        requestHeaders: filteredHeaders
-      };
+    } catch (error) {
+      console.error('Failed to load privacy settings:', error);
     }
-  };
+  }
 
-  // Allow users to toggle categories
-  setCategoryEnabled(categoryName: string, enabled: boolean): void {
-    const category = this.trackerCategories.find(c => c.name === categoryName);
-    if (category) {
-      category.enabled = enabled;
-      chrome.storage.local.set({ 
-        trackerCategories: this.trackerCategories 
+  private initializeProtection(): void {
+    // Block tracker requests
+    if (this.settings.blockTrackers) {
+      this.setupTrackerBlocking();
+    }
+
+    // Remove fingerprinting headers
+    if (this.settings.removeFingerprinting) {
+      this.setupFingerprintingProtection();
+    }
+
+    // Handle third-party cookie blocking via headers
+    if (this.settings.blockThirdPartyCookies) {
+      this.setupCookieProtection();
+    }
+  }
+
+  private setupTrackerBlocking(): void {
+    chrome.webRequest.onBeforeRequest.addListener(
+      (details): BlockingResponse | undefined => {
+        const url = new URL(details.url);
+        
+        for (const category of this.trackerCategories) {
+          for (const domain of category.domains) {
+            if (url.hostname.includes(domain)) {
+              console.log(`[Privacy] Blocked ${category.name} tracker: ${details.url}`);
+              return { cancel: true };
+            }
+          }
+        }
+        
+        return undefined;
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking"]
+    );
+  }
+
+  private setupFingerprintingProtection(): void {
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+      (details): BlockingResponse | undefined => {
+        const headers = details.requestHeaders || [];
+        const modified: chrome.webRequest.HttpHeader[] = [];
+        
+        for (const header of headers) {
+          // Remove or anonymize fingerprinting vectors
+          const nameLower = header.name.toLowerCase();
+          
+          if (nameLower === 'user-agent') {
+            // Replace with generic user agent
+            modified.push({
+              name: 'User-Agent',
+              value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            });
+          } else if (nameLower === 'accept-language') {
+            // Limit language information
+            modified.push({
+              name: 'Accept-Language',
+              value: 'en-US,en;q=0.9',
+            });
+          } else if (nameLower === 'referer') {
+            // Limit referrer information for privacy
+            try {
+              const refererUrl = new URL(header.value || '');
+              const currentUrl = new URL(details.url);
+              
+              // Only send referrer to same-domain requests
+              if (refererUrl.hostname !== currentUrl.hostname) {
+                // Don't include referrer for cross-origin requests
+                continue;
+              }
+            } catch {
+              // Invalid referrer, skip it
+              continue;
+            }
+          } else {
+            modified.push(header);
+          }
+        }
+        
+        return { requestHeaders: modified };
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking", "requestHeaders"]
+    );
+  }
+
+  private setupCookieProtection(): void {
+    chrome.webRequest.onHeadersReceived.addListener(
+      (details): BlockingResponse | undefined => {
+        const headers = details.responseHeaders || [];
+        const modified: chrome.webRequest.HttpHeader[] = [];
+        
+        for (const header of headers) {
+          const nameLower = header.name.toLowerCase();
+          
+          // Remove or modify cookies for third-party requests
+          if (nameLower === 'set-cookie') {
+            const cookieValue = header.value || '';
+            
+            // Add SameSite=Strict for enhanced privacy
+            if (!cookieValue.includes('SameSite=')) {
+              const modifiedCookie = cookieValue + '; SameSite=Strict; Secure';
+              modified.push({
+                name: 'Set-Cookie',
+                value: modifiedCookie,
+              });
+            } else {
+              modified.push(header);
+            }
+          } else {
+            modified.push(header);
+          }
+        }
+        
+        return { responseHeaders: modified };
+      },
+      { urls: ["<all_urls>"] },
+      ["blocking", "responseHeaders"]
+    );
+  }
+
+  public updateSettings(newSettings: Partial<PrivacySettings>): void {
+    this.settings = { ...this.settings, ...newSettings };
+    this.initializeProtection(); // Re-initialize with new settings
+    this.saveSettings();
+  }
+
+  private async saveSettings(): Promise<void> {
+    try {
+      await chrome.storage.sync.set({
+        privacySettings: this.settings,
       });
+    } catch (error) {
+      console.error('Failed to save privacy settings:', error);
     }
   }
-
-  getStats(): PrivacyStats {
-    return { ...this.stats };
-  }
 }
 
-const privacyShield = new PrivacyShield();
-
-// Listen for all request types
-chrome.webRequest.onBeforeRequest.addListener(
-  privacyShield.handleBeforeRequest,
-  {
-    urls: ['<all_urls>'],
-    types: ['script', 'image', 'xhr', 'fetch']
-  },
-  ['blocking']
-);
-
-// Modify headers for all requests
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  privacyShield.handleBeforeSendHeaders,
-  {
-    urls: ['<all_urls>']
-  },
-  ['blocking', 'requestHeaders']
-);
+export const privacyProtector = new PrivacyProtector();
 ```
 
-## Best Practices
+## Best Practices for Production Extensions
 
-When implementing webRequest-based extensions, following best practices ensures your extension performs well, passes Chrome Web Store review, and provides a good user experience.
+When deploying webRequest-based extensions to production, several critical considerations ensure reliability, performance, and user trust. Following these best practices helps avoid common pitfalls and ensures your extension passes Chrome Web Store review.
 
-### Permission Minimization
+Performance optimization begins with minimizing the scope of your request interception. Rather than intercepting all URLs with `"<all_urls>"`, filter to specific domains or URL patterns that actually require processing. Each event listener that matches all URLs fires potentially thousands of times per minute during normal browsing, creating significant overhead. If your extension only needs to monitor requests to a specific API, restrict your filters accordingly.
 
-Always request the minimum host permissions necessary for your extension's functionality. Rather than using `<all_urls>`, specify the exact domains or URL patterns your extension needs to intercept. This reduces permission warnings during installation and improves user trust.
+Memory management requires attention in service worker-based extensions. The service worker can terminate when idle, so avoid relying on in-memory state for critical functionality. Persist configuration and state to chrome.storage, and design your extension to handle service worker restarts gracefully. When registering webRequest listeners in the background service worker, ensure they're properly registered each time the worker activates.
 
-```typescript
-// Instead of:
-{ "host_permissions": ["<all_urls>"] }
+Permission requests deserve careful consideration. Request only the minimum permissions necessary for your extension's functionality. If you only need to observe requests without modification, avoid requesting blocking permissions. For host permissions, be as specific as possible—rather than `"<all_urls>"`, use patterns like `"https://api.example.com/*"` where applicable. Overly broad permissions trigger additional review and may concern privacy-conscious users.
 
-// Use specific patterns:
-{ "host_permissions": ["https://*.example.com/*"] }
-```
+Error handling within webRequest listeners must be robust. Since these listeners run in the background service worker context, unhandled exceptions can crash your extension's ability to intercept requests. Always wrap listener logic in try-catch blocks and log errors appropriately. Consider implementing a circuit breaker pattern that temporarily disables listeners if errors become frequent.
 
-### Efficient Filtering
+Testing your extension thoroughly across different scenarios is essential. Test with various network conditions, including slow connections and offline states. Verify that your extension handles redirects, authentication requirements, and error responses correctly. Use Chrome's developer tools to inspect network traffic and ensure your interception is working as expected.
 
-Avoid processing every network request. Use the `types` option in your listener configuration to filter only relevant resource types:
+## Security Considerations
 
-```typescript
-chrome.webRequest.onBeforeRequest.addListener(
-  handler,
-  {
-    urls: ['<all_urls>'],
-    // Only intercept these types
-    types: ['script', 'image', 'xhr', 'sub_frame']
-  },
-  ['blocking']
-);
-```
+Security forms a critical foundation for any webRequest-based extension. The ability to intercept and modify network requests carries significant responsibility, and poor security practices can harm users or lead to your extension being removed from the Chrome Web Store.
 
-### Asynchronous Processing
+Never exfiltrate request data without explicit user consent and transparent disclosure. If your extension logs URLs or request content for analytics, inform users in your extension's description and privacy policy. Consider providing user-facing controls to disable logging or data collection.
 
-In Manifest V3, prefer asynchronous processing over blocking listeners when possible. Use the `async` callback pattern to prevent blocking the browser:
+When modifying headers, avoid removing security-critical headers such as Content-Security-Policy, X-Content-Type-Options, or Strict-Transport-Security. These headers protect users from various attacks, and removing them weakens browser security. Similarly, be cautious about modifying authentication headers—incorrect handling can expose credentials or break secure authentication flows.
 
-```typescript
-// Blocking pattern (limited in MV3)
-chrome.webRequest.onBeforeRequest.addListener(
-  (details) => {
-    // Synchronous processing
-    return { cancel: shouldCancel(details.url) };
-  },
-  { urls: ['<all_urls>'] },
-  ['blocking']
-);
-
-// Preferred async pattern for MV3
-chrome.webRequest.onBeforeRequest.addListener(
-  async (details) => {
-    const shouldCancel = await checkBlocklistAsync(details.url);
-    return shouldCancel ? { cancel: true } : undefined;
-  },
-  { urls: ['<all_urls>'] }
-);
-```
-
-### Error Handling and Resilience
-
-Network request handling must be resilient to errors. Always wrap your processing logic in try-catch blocks and provide graceful degradation:
-
-```typescript
-const safeHandler = (details: chrome.webRequest.OnBeforeRequestDetails) => {
-  try {
-    return processRequest(details);
-  } catch (error) {
-    console.error('Request processing error:', error);
-    // Allow request through on error - fail safely
-    return undefined;
-  }
-};
-```
-
-### Performance Considerations
-
-Request listeners run frequently, so performance is critical. Optimize your implementations by caching filter rules in memory, using efficient data structures like Sets for blocklists, and avoiding regex compilation in hot paths:
-
-```typescript
-class OptimizedBlocker {
-  private blocklist: Set<string> = new Set();
-  private compiledRegex: RegExp[] = [];
-
-  updateBlocklist(patterns: string[]): void {
-    // Rebuild efficient data structures
-    this.blocklist = new Set(patterns.filter(p => !p.includes('*')));
-    this.compiledRegex = patterns
-      .filter(p => p.includes('*'))
-      .map(p => new RegExp(p.replace(/\*/g, '.*')));
-  }
-
-  isBlocked(url: string): boolean {
-    // Fast path: exact match
-    if (this.blocklist.has(url)) return true;
-    
-    // Regex path: slower but handles wildcards
-    return this.compiledRegex.some(regex => regex.test(url));
-  }
-}
-```
-
-### User Privacy and Transparency
-
-Be transparent with users about what your extension does with their network data. Avoid sending intercepted request data to external servers unless explicitly necessary and disclosed. Store sensitive data locally when possible, and provide users with controls over what gets blocked or modified.
-
-### Testing and Debugging
-
-Use Chrome's extension debugging tools to verify your listeners are working correctly. The Network tab in DevTools shows which requests were blocked or modified by your extension. Add logging to track unusual patterns, but avoid logging full URLs in production to protect user privacy.
+Validate all URL patterns and redirect destinations to prevent open redirect vulnerabilities. Ensure that your extension cannot be tricked into redirecting users to malicious sites through crafted URLs. When implementing redirect functionality, validate that target URLs are properly formatted and belong to expected domains.
 
 ## Conclusion
 
-The webRequest API provides powerful capabilities for Chrome extension developers seeking to intercept, analyze, and modify network traffic. While Manifest V3 has shifted some use cases toward the Declarative Net Request API, webRequest remains essential for dynamic filtering, header modification, and complex privacy features.
+The webRequest API provides Chrome extension developers with powerful capabilities for observing and manipulating network traffic. From building sophisticated ad blockers to creating privacy protection tools, understanding these APIs enables you to create extensions that meaningfully impact user browsing experiences.
 
-By following the implementation patterns and best practices outlined in this guide, you can build robust extensions that enhance user privacy, block unwanted content, and provide valuable network-level functionality. Remember to always minimize permissions, handle errors gracefully, and maintain transparency with users about your extension's network behavior.
+Key takeaways from this guide include understanding the event lifecycle and appropriate interception points, implementing TypeScript patterns that provide type safety and maintainability, building practical ad blocking and privacy tools with real-world code examples, following best practices for performance, security, and user trust, and properly configuring manifest permissions to support your use case while minimizing scope.
 
-Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one
+As you build your extension, remember that with great power comes great responsibility. Use these capabilities to enhance user privacy and security, be transparent about your extension's behavior, and always prioritize user interests in your design decisions.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
