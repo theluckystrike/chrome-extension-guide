@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension TypeScript Setup — Developer Guide"
+title: "Chrome Extension TypeScript Setup — Type-Safe Extension Development"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/typescript-setup/"
 ---
