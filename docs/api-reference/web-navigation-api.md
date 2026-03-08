@@ -263,7 +263,6 @@ chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
 - [Web Navigation Guide](../guides/web-navigation.md)
 - [Web Navigation Advanced](../guides/web-navigation-advanced.md)
 - [Permissions: webNavigation](../permissions/webNavigation.md)
-
 ## Frequently Asked Questions
 
 ### How do I track page loads?
@@ -271,3 +270,7 @@ Use chrome.webNavigation.onCompleted.addListener to be notified when a page fini
 
 ### Can I get the transition type?
 Yes, the navigation event includes a transitionType property (like "link", "typed", "bookmark").
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

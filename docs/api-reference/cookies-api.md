@@ -149,7 +149,6 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookies API Guide](../guides/cookies-api.md)
 - [Session Management Patterns](../patterns/cookies-sessions.md)
-
 ## Frequently Asked Questions
 
 ### How do I read cookies for a specific domain?
@@ -157,3 +156,7 @@ Use chrome.cookies.getAll() with a "domain" parameter to filter cookies by domai
 
 ### Can I set cookies from my extension?
 Yes, use chrome.cookies.set() to create or update cookies. Note that HttpOnly cookies cannot be set.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

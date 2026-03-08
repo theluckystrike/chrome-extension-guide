@@ -461,7 +461,6 @@ async function batchDownload(urls: string[]) {
 - [downloads permission](../permissions/downloads.md)
 - [Storage API Deep Dive](storage-api-deep-dive.md)
 - [Chrome downloads API docs](https://developer.chrome.com/docs/extensions/reference/api/downloads)
-
 ## Frequently Asked Questions
 
 ### How do I trigger a download?
@@ -469,3 +468,7 @@ Use chrome.downloads.download() with a URL. The method returns a download ID you
 
 ### Can I save content generated in JavaScript?
 Yes, create a Blob in your extension and use a data: URL or Blob URL in the download method.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

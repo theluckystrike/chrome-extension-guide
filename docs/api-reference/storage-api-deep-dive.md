@@ -487,7 +487,6 @@ try {
 - [storage permission](../permissions/storage.md)
 - [Runtime API](runtime-api.md) (for `onInstalled` migration patterns)
 - [Chrome storage API docs](https://developer.chrome.com/docs/extensions/reference/api/storage)
-
 ## Frequently Asked Questions
 
 ### What is the storage API quota?
@@ -495,3 +494,7 @@ local: 10MB, sync: 100KB total/8KB per item. Use unlimitedStorage permission to 
 
 ### How do I sync across devices?
 Use chrome.storage.sync for automatic cross-device synchronization. Data encrypts during transit.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

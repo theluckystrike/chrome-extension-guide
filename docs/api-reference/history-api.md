@@ -358,7 +358,6 @@ async function topDomains(days: number, limit: number) {
 - [Bookmarks API](bookmarks-api.md)
 - [Tabs API](tabs-api.md)
 - [Chrome history API docs](https://developer.chrome.com/docs/extensions/reference/api/history)
-
 ## Frequently Asked Questions
 
 ### How do I search browsing history?
@@ -366,3 +365,7 @@ Use chrome.history.search() with a query and time range to find matching history
 
 ### Can I add entries to browser history?
 No, extensions cannot add entries to the user's browsing history for privacy reasons.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

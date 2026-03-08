@@ -311,7 +311,6 @@ function updatePanelContent(url) {
 - [permissions/sidePanel.md](../permissions/sidePanel.md) — Permission details
 - [mv3/side-panel.md](../mv3/side-panel.md) — Manifest V3 side panel
 - [patterns/side-panel.md](../patterns/side-panel.md) — Usage patterns
-
 ## Frequently Asked Questions
 
 ### How do I open the side panel?
@@ -319,3 +318,7 @@ Use chrome.sidePanel.setOptions() to configure behavior, and users can open it v
 
 ### Can the side panel open automatically?
 Yes, use the "side_panel" permission with "openPanelOnActionClick": true to open when users click your extension icon.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -360,7 +360,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 - [Notifications API](notifications-api.md)
 - [Runtime API](runtime-api.md)
 - [Chrome alarms API docs](https://developer.chrome.com/docs/extensions/reference/api/alarms)
-
 ## Frequently Asked Questions
 
 ### How do I schedule recurring tasks?
@@ -368,3 +367,7 @@ Use chrome.alarms.create() with a periodInMinutes or delayInMinutes to schedule 
 
 ### Do alarms persist when Chrome closes?
 Yes, alarms persist across browser restarts. They're one of the few reliable ways to schedule background tasks in MV3.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

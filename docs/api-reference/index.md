@@ -37,3 +37,7 @@ Each API page covers method signatures, event listeners, permissions required, a
 - [tts-api](tts-api.html)
 - [web-navigation-api](web-navigation-api.html)
 - [windows-api](windows-api.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

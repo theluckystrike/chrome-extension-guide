@@ -138,7 +138,6 @@ chrome.action.onClicked.addListener(async (tab) => {
 - [MV3 Action API](../mv3/action-api.md)
 - [Badge Action UI Pattern](../patterns/badge-action-ui.md)
 - [Popup Patterns](../guides/popup-patterns.md)
-
 ## Frequently Asked Questions
 
 ### What is the chrome.action API?
@@ -149,3 +148,7 @@ No, the action API doesn't require any permissions. You configure it through the
 
 ### Can I change the icon dynamically?
 Yes, use chrome.action.setIcon() to change icons programmatically based on extension state or tab context.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

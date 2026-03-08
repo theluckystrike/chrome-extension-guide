@@ -449,7 +449,6 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 - [Context Menus Guide](../guides/context-menus.md)
 - [Tabs API](tabs-api.md)
 - [Chrome contextMenus API docs](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
-
 ## Frequently Asked Questions
 
 ### How do I add items to the right-click menu?
@@ -457,3 +456,7 @@ Use chrome.contextMenus.create() to add items. You can specify which contexts (p
 
 ### Can I add icons to context menu items?
 Yes, provide an "icons" object with 16x16 and 32x32 icon paths when creating the menu item.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

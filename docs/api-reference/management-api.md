@@ -132,7 +132,6 @@ chrome.management.onDisabled.addListener(console.log);
 
 - [Management Permission](../permissions/management.md)
 - [Management API Guide](../guides/management-api.md)
-
 ## Frequently Asked Questions
 
 ### How do I get info about installed extensions?
@@ -140,3 +139,7 @@ Use chrome.management.getAll() to get information about all installed apps and e
 
 ### Can I disable other extensions programmatically?
 Yes, with sufficient permissions, you can use chrome.management.setEnabled() to enable or disable extensions.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

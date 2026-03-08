@@ -148,3 +148,7 @@ APIs may behave differently across Chrome versions. Test your extension with sta
 
 - [Permissions Reference](../permissions/) -- Detailed breakdown of each Chrome extension permission and its user-facing warnings.
 - [Guides](../guides/) -- Step-by-step tutorials for building Chrome extensions with MV3.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

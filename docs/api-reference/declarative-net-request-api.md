@@ -475,7 +475,6 @@ await chrome.declarativeNetRequest.updateSessionRules({
 - [Scripting API Reference](scripting-api.md) -- injecting scripts and CSS
 - [Tabs API Reference](tabs-api.md) -- querying tabs for rule targeting
 - [Permissions Reference](../permissions/host-permissions.md) -- host permission patterns
-
 ## Frequently Asked Questions
 
 ### What is declarativeNetRequest API?
@@ -483,3 +482,7 @@ This API allows extensions to block or modify network requests using declarative
 
 ### How many rules can I have?
 Static rulesets are limited to 30,000 rules. Dynamic rules have no limit but share the total quota.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

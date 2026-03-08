@@ -394,7 +394,6 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 - [Tabs API](tabs-api.md)
 - [tabs permission](../permissions/tabs.md)
 - [Chrome windows API docs](https://developer.chrome.com/docs/extensions/reference/api/windows)
-
 ## Frequently Asked Questions
 
 ### How do I create a new window?
@@ -402,3 +401,7 @@ Use chrome.windows.create() with options like URL, size, and focus state.
 
 ### Can I manage window state?
 Yes, use chrome.windows.update() to change size, position, and state (maximized, minimized, fullscreen).
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

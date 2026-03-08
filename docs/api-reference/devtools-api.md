@@ -126,7 +126,6 @@ chrome.devtools.network.onRequestFinished.addListener(r => console.log(r.request
 - [DevTools Extensions Guide](../guides/devtools-extensions.md)
 - [DevTools Panels Pattern](../patterns/devtools-panels.md)
 - [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/mv3/devtools/)
-
 ## Frequently Asked Questions
 
 ### How do I create a DevTools extension?
@@ -134,3 +133,7 @@ Add "devtools_page" in manifest.json and create an HTML page that loads your Jav
 
 ### What can I do with DevTools API?
 You can create custom panels, add sidebar panes, access network request data, and instrument page execution.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
