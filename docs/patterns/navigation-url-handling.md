@@ -773,3 +773,7 @@ function detectNavigationLoop(tabId: number, threshold = 3): boolean {
 | Back/forward tracking | Build navigation history and detect loops |
 
 Navigation handling pairs well with the [tab management patterns](tab-management.md) for a complete tab-aware extension. Use `@theluckystrike/webext-patterns` for production-ready URL utilities and navigation observers.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

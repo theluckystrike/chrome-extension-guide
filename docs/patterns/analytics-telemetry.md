@@ -849,3 +849,7 @@ document.getElementById("save-btn")?.addEventListener("click", async () => {
 | A/B testing | Sticky variant assignment with exposure and conversion tracking |
 
 Extension analytics must be built from scratch because third-party scripts (Google Analytics, Mixpanel, etc.) cannot run in service workers. The patterns above give you the same capabilities -- event tracking, error reporting, experimentation -- while keeping the user in full control of their data.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

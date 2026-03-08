@@ -245,3 +245,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Tab Management Patterns](./tab-management.md)
 - [Tab Management Guide](../guides/tab-management.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

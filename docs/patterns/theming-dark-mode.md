@@ -435,3 +435,7 @@ Combine with `prefers-contrast: more` for users who want higher contrast without
 | 6 | Per-site overrides | Domain-keyed storage map | Exclude or customize per site |
 | 7 | Dynamic icon switching | `chrome.action.setIcon` | Toolbar icon visibility |
 | 8 | High contrast support | `forced-colors` + system color keywords | Accessibility compliance |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

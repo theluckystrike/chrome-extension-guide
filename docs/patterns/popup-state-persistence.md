@@ -252,3 +252,7 @@ Tabs maintain scroll position, form state, and navigation automatically. See [Po
 ## Related Patterns {#related-patterns}
 
 This pattern works alongside several other extension development approaches. The [State Management](./state-management.md) pattern provides centralized state architecture for larger extensions. For truly persistent UI, the [Side Panel](./side-panel.md) or [Popup-to-Tab](./popup-to-tab.md) patterns offer alternative interaction models that eliminate the persistence problem entirely.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

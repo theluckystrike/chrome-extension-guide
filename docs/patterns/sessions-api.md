@@ -372,3 +372,7 @@ export async function deleteWorkspace(workspaceId: string): Promise<void> {
 3. **Error handling**: Always wrap `chrome.sessions.restore()` in try/catch—sessions may expire or URLs may become invalid.
 4. **Storage integration**: Use `@theluckystrike/webext-storage` for type-safe session snapshots that survive browser restarts.
 5. **Message passing**: For complex UIs, use `@theluckystrike/webext-messaging` to coordinate between popup, background, and content scripts.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -127,3 +127,7 @@ chrome.scripting.getRegisteredContentScripts({ ids: ['my-script'] });
 - [Dynamic Content Scripts (MV3)](../mv3/dynamic-content-scripts.md)
 - [Scripting API Reference](../api-reference/scripting.md)
 - [Content Script Isolation](../patterns/content-script-isolation.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

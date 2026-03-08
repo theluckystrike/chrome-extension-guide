@@ -126,3 +126,7 @@ const loggingInterceptor = (handler: Function) => async (msg: Message) => {
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
 - [Event-Driven Messaging](./event-driven-messaging.md)
 - [Message Passing Best Practices](../guides/message-passing-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

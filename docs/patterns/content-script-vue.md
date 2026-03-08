@@ -134,3 +134,7 @@ For simpler injections, consider [Petite Vue](https://github.com/vuejs/petite-vu
 - [Building with Svelte](./building-with-svelte.md)
 - [Content Script React](./content-script-react.md)
 - [Shadow DOM Advanced](./shadow-dom-advanced.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

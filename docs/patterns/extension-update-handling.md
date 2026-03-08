@@ -189,3 +189,7 @@ async function reloadExtension(): Promise<void> {
 - [Update Migration](./update-migration.md) - Detailed migration patterns
 - [Storage Migration](./storage-migration.md) - Storage schema upgrades
 - [Extension Updates Guide](../guides/extension-updates.md) - Complete update handling guide
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

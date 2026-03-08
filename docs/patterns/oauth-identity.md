@@ -726,3 +726,7 @@ The background script handles the `SIGN_IN` and `SIGN_OUT` messages and dispatch
 | Auth-gated UI | Popup renders login vs. dashboard based on state |
 
 Authentication in extensions is harder than in web apps because the runtime is split across contexts and the service worker is ephemeral. Model your auth flow as an explicit state machine, split token storage between session and local, and always revoke tokens on logout. The `chrome.identity` API handles the OAuth dance, but token lifecycle and state management are your responsibility.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

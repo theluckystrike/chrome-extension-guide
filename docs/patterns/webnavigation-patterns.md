@@ -235,3 +235,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 - [Web Navigation API Reference](../api_reference/web-navigation-api.md)
 - [Web Navigation Guide](../guides/web-navigation.md)
 - [Web Navigation Advanced](../guides/web-navigation-advanced.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

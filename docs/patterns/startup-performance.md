@@ -141,3 +141,7 @@ export async function lazyLoad(path) {
 - [Performance Guide](../guides/performance.md)
 - [Extension Size Optimization](../guides/extension-size-optimization.md)
 - [Lazy Loading Patterns](../guides/lazy-loading-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

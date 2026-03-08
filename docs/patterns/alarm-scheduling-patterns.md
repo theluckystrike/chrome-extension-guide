@@ -148,3 +148,7 @@ chrome.alarms.create('weekly-monday', {
 - [API Reference: alarms API](../api_reference/alarms-api.md)
 - [Guides: Alarms Scheduling](../guides/alarms-scheduling.md)
 - [Patterns: Long-running Operations](../patterns/long-running-operations.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

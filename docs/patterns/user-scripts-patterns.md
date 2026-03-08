@@ -153,3 +153,7 @@ To migrate from dynamic content scripts to userScripts:
 - [User Scripts API](./user-scripts-api.md) - Full API reference
 - [Scripting API](../api-reference/scripting-api.md) - Chrome's scripting API
 - [Dynamic Content Scripts](../mv3/dynamic-content-scripts.md) - MV3 dynamic scripts
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

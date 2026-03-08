@@ -486,3 +486,7 @@ store.update = async function(partial) {
 | State debugging | Time-travel inspection and mutation logging for development |
 
 State in a Chrome extension is inherently distributed. These patterns share a common principle: treat `chrome.storage` as the authoritative store, use `onChanged` as the synchronization primitive, and layer application logic on top. Keep state shapes flat and serializable -- everything that enters `chrome.storage` must survive JSON round-tripping.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -207,3 +207,7 @@ chrome.runtime.onConnect.addListener((port) => {
 - [Popup Communication Patterns](./popup-communication.md) - Message passing between popup and background
 - [Caching Strategies](./caching-strategies.md) - Advanced caching patterns
 - [Popup Patterns Guide](../guides/popup-patterns.md) - Comprehensive popup development guide
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

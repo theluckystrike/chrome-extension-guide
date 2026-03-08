@@ -215,3 +215,7 @@ async function searchAllEngines(query) {
 - [Permissions: search](../permissions/search.md)
 - [Omnibox API Patterns](omnibox-api.md)
 - [History API Reference](../api-reference/history-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

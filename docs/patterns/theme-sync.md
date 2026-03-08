@@ -201,3 +201,7 @@ Smooth theme transitions prevent jarring visual changes:
 - [Theming Dark Mode](./theming-dark-mode.md) - Extended dark mode patterns
 - [State Management](./state-management.md) - Centralized state patterns
 - [Accessibility](./accessibility.md) - Reduced motion and accessibility considerations
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -596,3 +596,7 @@ function compareperiods(
 - [Chrome Web Store Program Policies](https://developer.chrome.com/docs/webstore/program-policies)
 - [Chrome Web Store Publish API](https://developer.chrome.com/docs/webstore/api_index)
 - [Best Practices for Listing](https://developer.chrome.com/docs/webstore/best_listing)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -144,3 +144,7 @@ async function detectHost(appId) { try { const port = chrome.runtime.connectNati
 ## Cross-references {#cross-references}
 - [Native Messaging Permission](./permissions/native-messaging.md)
 - [Message Passing Patterns](./reference/message-passing-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

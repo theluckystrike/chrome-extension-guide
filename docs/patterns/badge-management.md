@@ -326,3 +326,7 @@ const badgeManager = new BadgeManager();
 - [Action API Reference](../api-reference/action-api.md) - Full chrome.action API documentation
 - [Badge and Action UI Patterns](badge-action-ui.md) - Related UI patterns
 - [State Management](state-management.md) - Managing extension state across components
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

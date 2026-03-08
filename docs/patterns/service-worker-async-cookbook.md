@@ -138,3 +138,7 @@ function debounceFetch(tabId) {
 For more complex debouncing across service worker restarts, store state in storage and check timestamps on wake-up.
 
 These patterns form the foundation of reliable async service worker code. Combine them as needed. For more extension development resources, check out zovo.one.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

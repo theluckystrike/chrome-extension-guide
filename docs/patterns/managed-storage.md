@@ -163,3 +163,7 @@ Provide admins with a policy template explaining available settings, types, and 
 - [Enterprise Policies](./enterprise-policies.md)
 - [Enterprise Extensions Guide](../guides/enterprise-extensions.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -990,3 +990,7 @@ async function shouldNotify(category: string): Promise<boolean> {
 | Platform-aware strategies | macOS ignores image/progress/list types; adapt gracefully |
 
 The best notification is the one the user actually wants to see. Default to fewer notifications, let users configure categories and quiet hours, and always provide a clear action on click. When in doubt, don't notify — surface the information in your popup or side panel instead.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

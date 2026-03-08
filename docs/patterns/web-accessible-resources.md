@@ -442,3 +442,7 @@ Web accessible resources loaded in iframes respect the extension's CSP, not the 
 | Secure access | Restrict to specific origins only |
 
 Web accessible resources are the bridge between your extension and the web page. Use them deliberately — expose only what's needed, restrict access to specific origins, and prefer `use_dynamic_url` to prevent fingerprinting.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

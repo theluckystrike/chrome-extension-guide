@@ -652,3 +652,7 @@ class OfflineManager {
 5. **Combine patterns**: Production extensions often mix multiple patterns.
 6. **Storage**: Use `@theluckystrike/webext-storage` for settings and progress.
 7. **Messaging**: Use `@theluckystrike/webext-messaging` for background-content communication.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -132,3 +132,7 @@ const FEATURES = {
 - [Options Page Guide](../guides/options-page.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Feature Flags Pattern](./feature-flags.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

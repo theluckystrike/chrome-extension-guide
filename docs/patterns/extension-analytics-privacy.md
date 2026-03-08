@@ -245,3 +245,7 @@ Track metrics meaningful to extensions:
 - [Publishing Guide](../publishing/analytics.md)
 - [Analytics & Telemetry Patterns](./analytics-telemetry.md)
 - [Chrome Extension Data Privacy Guide](../guides/chrome-extension-data-privacy.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -207,3 +207,7 @@ function debugLog(context, data) {
 - [Error Handling Reference](../reference/error-handling.md)
 - [Retry Patterns](./retry-patterns.md)
 - [Extension Error Reporting](../guides/extension-error-reporting.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

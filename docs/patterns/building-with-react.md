@@ -971,3 +971,7 @@ console.log("Build verification passed.");
 | Production optimization | Code splitting, vendor chunks, and build verification |
 
 React and Chrome extensions work well together once you set up the build pipeline correctly. The critical insight is that each UI surface is its own React application — they share code through imports, not through a single React tree. Keep your background service worker React-free, mount content script UIs in Shadow DOM, and let Vite handle the multi-entry bundling.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

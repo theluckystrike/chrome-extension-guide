@@ -226,3 +226,7 @@ manager.executeAll();
 - [Service Worker Lifecycle](../patterns/service-worker-lifecycle.md)
 - [Content Script Lifecycle](../patterns/content-script-lifecycle.md)
 - [Extension Uninstall](../patterns/extension-uninstall.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

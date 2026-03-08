@@ -232,3 +232,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 4. **Save state** to `chrome.storage` for resumability
 5. **Use offscreen documents** for CPU-intensive tasks
 6. **Communicate progress** back to UI via message passing
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

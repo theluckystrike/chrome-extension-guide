@@ -115,3 +115,7 @@ const locale = userPreference || uiLang || browserLang || 'en';
 - [Internationalization Guide](../guides/internationalization.md)
 - [Advanced i18n Patterns](./extension-internationalization-advanced.md)
 - [i18n API Reference](../api-reference/i18n-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

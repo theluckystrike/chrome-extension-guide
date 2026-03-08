@@ -191,3 +191,7 @@ Allows administrators to push policies via Chrome Enterprise policies.
 - [Manifest Fields Reference](../reference/manifest-fields.md)
 - [Manifest JSON Reference](../guides/manifest-json-reference.md)
 - [Manifest V3 Fields](../guides/manifest-v3-fields.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

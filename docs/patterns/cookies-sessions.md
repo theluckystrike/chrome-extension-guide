@@ -507,3 +507,7 @@ function severityOrder(s: "high" | "medium" | "low"): number {
 | 6 | Backup and restore | `getAll` + `set` + downloads API | Export/import cookie profiles |
 | 7 | Cookie store management | `getAllCookieStores` + `storeId` | Incognito vs normal handling |
 | 8 | Security audit | Property inspection loop | Flag insecure cookie configs |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

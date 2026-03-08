@@ -232,3 +232,7 @@ Never ship with debug flags enabled in production. Use build environment checks.
 | Local | `chrome.storage` | User preferences, beta features |
 | Remote | Server + cache | Rollouts, kill switches, A/B tests |
 | Debug | Code/environment | Development, testing |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

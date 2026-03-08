@@ -159,3 +159,7 @@ module.exports = {
 
 - [Offscreen Documents](./offscreen-documents.md)
 - [Performance Guide](../guides/performance.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

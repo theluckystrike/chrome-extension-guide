@@ -202,3 +202,7 @@ Install multiple channels to test feature availability.
 - [API Availability Reference](../reference/api-availability.md)
 - [Browser Compatibility](../reference/browser-compatibility.md)
 - [Cross-Browser Compatibility Patterns](./cross-browser-compatibility.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

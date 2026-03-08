@@ -202,3 +202,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 - [Badge Action UI](./badge-action-ui.md) — Comprehensive badge and action button patterns
 - [Declarative Content](./declarative-content.md) — Automatic show/hide based on page conditions
 - [Action API Reference](../../api-reference/action-api.md) — Full chrome.action API documentation
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

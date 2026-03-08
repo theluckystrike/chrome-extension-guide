@@ -547,3 +547,7 @@ test("popup has no accessibility violations", async ({ page }) => {
 | Color contrast | WCAG 2.1 AA minimums: 4.5:1 text, 3:1 UI |
 
 Accessibility is not an afterthought. Build it into your extension from the start, test with real assistive technology, and respect user preferences for contrast, motion, and color schemes.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

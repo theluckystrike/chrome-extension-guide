@@ -135,3 +135,7 @@ window.addEventListener('unload', cleanup);
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script API Reference](../reference/content-script-api.md)
 - [Content Script Isolation](./content-script-isolation.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

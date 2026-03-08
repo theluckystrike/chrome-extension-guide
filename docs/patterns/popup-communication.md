@@ -644,3 +644,6 @@ async function getActiveTabInfo(): Promise<chrome.tabs.Tab> {
 - [Popup-to-Tab](./popup-to-tab.md)
 - [Message Passing](../reference/message-passing-patterns.md)
 - [Service Worker Communication](./service-worker-lifecycle.md)
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

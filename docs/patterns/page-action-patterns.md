@@ -263,3 +263,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 - [Action API Reference](../../api-reference/action-api.md) — Full chrome.action API documentation
 - [Declarative Content](./declarative-content.md) — Automatic show/hide based on page conditions
 - [Context-Aware Actions](./context-aware-actions.md) — Dynamic icons, badges, and popups per tab
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

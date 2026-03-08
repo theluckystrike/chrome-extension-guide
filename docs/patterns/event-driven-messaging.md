@@ -357,3 +357,7 @@ class StateSync {
 - [Message Passing Best Practices](../guides/message-passing-best-practices.md)
 - [Cross-Context State](./cross-context-state.md)
 - [Tab Communication Patterns](./tab-communication.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -162,3 +162,7 @@ Use Chrome's extension debugger to identify specific violation sources.
 - [CSP Reference](../reference/csp-reference.md)
 - [MV3 Content Security Policy](../mv3/content-security-policy.md)
 - [Security Best Practices](../guides/security-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

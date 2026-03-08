@@ -684,3 +684,7 @@ chrome.runtime.onStartup.addListener(async () => {
 | Persisted queries | Offline support, smaller payloads | Need build step for hash manifest |
 
 Each pattern addresses a specific constraint of the Manifest V3 environment. Combine them based on your extension's requirements -- a data-heavy dashboard extension might use all eight, while a simple API integration may only need patterns 1, 2, and 7.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

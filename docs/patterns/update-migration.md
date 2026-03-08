@@ -672,3 +672,7 @@ export function createMockStorage(
 | Testing migrations | Catch migration bugs before they reach users |
 
 Extension updates are invisible to users — until something breaks. Always version your storage schema, migrate incrementally with backups, re-register ephemeral state on every startup, and test your migration chain from every historical schema version to the current one. The ten minutes you spend writing migration tests will save you from a one-star review that says "lost all my settings after update."
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

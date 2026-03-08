@@ -199,3 +199,7 @@ function showUndoToast(message: string, onUndo: () => void): void {
 - [State Management](./state-management.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Keyboard Shortcuts](../guides/keyboard-shortcuts.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

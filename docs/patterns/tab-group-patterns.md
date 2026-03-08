@@ -163,3 +163,7 @@ Add `"tabGroups"` to `manifest.json`:
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Tab Management Patterns](tab-management.md)
 - [TabGroups Permission](../permissions/tabGroups.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

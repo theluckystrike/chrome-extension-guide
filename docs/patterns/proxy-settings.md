@@ -1329,3 +1329,7 @@ const storage = createStorage(schema);
 3. **Auth handling**: Remember to use `"asyncBlocking"` for auth listeners
 4. **Bypass patterns**: Test thoroughly - `<local>` works differently than expected
 5. **Error handling**: Always provide fallback (direct connection) when proxy fails
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

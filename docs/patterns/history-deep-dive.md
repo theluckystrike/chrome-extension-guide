@@ -1419,3 +1419,7 @@ export async function bulkBookmark(
 ```
 
 > **Note**: The `"bookmarks"` permission is optional and only needed for Pattern 8. Always prefer optional permissions to reduce permission warnings.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

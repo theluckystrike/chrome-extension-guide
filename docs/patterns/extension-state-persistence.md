@@ -208,3 +208,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Service Worker Keep-Alive Patterns](./service-worker-keepalive.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

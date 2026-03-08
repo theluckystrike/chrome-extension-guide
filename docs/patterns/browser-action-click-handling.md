@@ -142,3 +142,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 - [Action API Reference](../api-reference/action-api.md)
 - [MV3 Action API](../mv3/action-api.md)
 - [Context-Aware Actions](./context-aware-actions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

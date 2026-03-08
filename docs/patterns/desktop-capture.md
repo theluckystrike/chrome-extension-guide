@@ -1151,3 +1151,7 @@ const activeStreams = new Map<number, MediaStream>();
 | Privacy Patterns | User consent, indicators, auto-stop | Badge API, notifications, event listeners |
 
 The Desktop Capture API requires the `desktopCapture` permission but does not require host permissions. The user must always explicitly select what to capture via the system picker — extensions cannot silently capture without user action. Always implement privacy-safe patterns: show clear indicators when capture is active, provide easy stop mechanisms, and log capture sessions for transparency.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

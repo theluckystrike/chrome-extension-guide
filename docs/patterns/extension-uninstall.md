@@ -209,3 +209,7 @@ chrome.management.onUninstalled.addListener((id) => {
 - [Lifecycle Events](../reference/lifecycle-events.md) - Understanding extension lifecycle
 - [Management Permission](../permissions/management.md) - Using management API
 - [Extension Updates](../guides/extension-updates.md) - Handling updates and migrations
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

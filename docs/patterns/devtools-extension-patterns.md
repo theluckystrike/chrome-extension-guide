@@ -225,3 +225,7 @@ port.postMessage({ type: "page-state", data: {...} });
 - [DevTools API Reference](../api-reference/devtools-api.md)
 - [Building DevTools Extensions](../guides/devtools-extensions.md)
 - [DevTools Panel Patterns](./devtools-panels.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

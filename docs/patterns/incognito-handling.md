@@ -215,3 +215,7 @@ chrome.runtime.onStartup.addListener(async () => {
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookie Sessions Pattern](./cookies-sessions.md)
 - [Security Best Practices](../guides/security-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

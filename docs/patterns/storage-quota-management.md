@@ -196,3 +196,7 @@ function renderStorageUI(container) {
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [IndexedDB for Extensions](../patterns/indexeddb-extensions.md)
 - [Size Limits Reference](../reference/size-limits.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

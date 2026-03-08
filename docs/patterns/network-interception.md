@@ -843,3 +843,7 @@ console.log(`Using ${regexCount} of 1,000 regex rule slots`);
 | getMatchedRules debugging | Development, diagnostics, rule verification |
 
 The `declarativeNetRequest` API trades flexibility for performance — you define what to match and Chrome handles the rest at the network layer. For most use cases this is a clear win: faster execution, lower memory usage, and no need to keep a service worker alive just to inspect traffic.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

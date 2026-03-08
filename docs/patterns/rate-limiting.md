@@ -126,3 +126,7 @@ Listen to `chrome.alarms.onAlarm` to flush.
 - [Error Handling](./error-handling.md)
 - [State Management](./state-management.md)
 - [Storage Patterns](../reference/storage-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -178,3 +178,7 @@ Whether you need to implement efficient message passing between content scripts 
 - [webrtc-screen-sharing](webrtc-screen-sharing.html)
 - [websocket-service-workers](websocket-service-workers.html)
 - [webworker-offloading](webworker-offloading.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

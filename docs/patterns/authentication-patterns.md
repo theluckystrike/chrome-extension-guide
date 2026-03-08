@@ -191,3 +191,7 @@ async function authenticatedFetch(url: string): Promise<Response> {
 - [patterns/oauth-identity.md](../guides/identity-oauth.md)
 - [guides/identity-oauth.md](../guides/identity-oauth.md)
 - [guides/security-best-practices.md](../guides/security-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

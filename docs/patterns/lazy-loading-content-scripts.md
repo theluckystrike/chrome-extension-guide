@@ -114,3 +114,7 @@ try {
 - [Lazy Loading Patterns Guide](../../guides/lazy-loading-patterns.md)
 - [Scripting API Reference](../../api-reference/scripting-api.md)
 - [Dynamic Content Scripts (MV3)](../../mv3/dynamic-content-scripts.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

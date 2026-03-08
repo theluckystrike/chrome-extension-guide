@@ -182,3 +182,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 - [Side Panel API Reference](../api-reference/side-panel-api.md)
 - [Side Panel Basics](../mv3/side-panel.md)
 - [Side Panel Pattern Guide](./side-panel.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -321,3 +321,6 @@ function trackFeatureUsage(featureName, flags) {
 - [Crash Reporting](../guides/crash-reporting.md) - Monitor flag-related errors
 - [Storage Permission](../permissions/storage.md) - Persist flag state
 - [Alarms Permission](../permissions/alarms.md) - Periodic refresh scheduling
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

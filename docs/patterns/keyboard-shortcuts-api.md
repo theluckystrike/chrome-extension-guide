@@ -374,3 +374,7 @@ function renderCheatSheet(cmds: chrome.commands.Command[]): string {
 5. Provide visual feedback and onboarding
 6. Test across Windows, macOS, and Linux
 7. Use `chrome.commands.getAll()` for dynamic UIs
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

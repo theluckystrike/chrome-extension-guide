@@ -1293,3 +1293,7 @@ router.register({
 5. **Handle all dispositions** properly (currentTab, newForegroundTab, newBackgroundTab)
 6. **Store recent searches** in session storage for privacy
 7. **Provide meaningful defaults** when no input is given
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

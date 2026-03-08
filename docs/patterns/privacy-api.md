@@ -423,3 +423,7 @@ npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 | **network** | `webRTCIPHandlingPolicy`, `networkPredictionEnabled` |
 | **services** | `safeBrowsingEnabled`, `spellingServiceEnabled`, `translationServiceEnabled` |
 | **websites** | `thirdPartyCookiesAllowed`, `referrersEnabled`, `doNotTrackEnabled`, `hyperlinkAuditingEnabled` |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

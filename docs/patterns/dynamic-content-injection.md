@@ -212,3 +212,7 @@ window.addEventListener('unload', cleanup);
 | iframe | Isolated third-party content, complex iframe-friendly libraries |
 
 For most extension UI, direct DOM with Shadow DOM provides the best balance of integration and isolation.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

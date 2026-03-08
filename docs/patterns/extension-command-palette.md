@@ -609,3 +609,6 @@ commands.register({
 - [Commands API Reference](../api-reference/commands-api.md)
 - [Popup Patterns](./popup-patterns.md)
 - [Message Passing](../reference/message-passing-patterns.md)
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -214,3 +214,7 @@ On first install, only `chrome.runtime.onInstalled` fires -- `chrome.runtime.onS
 - [Lifecycle Events Reference](/docs/reference/lifecycle-events.md)
 - [Runtime API Reference](/docs/api-reference/runtime-api.md)
 - [Update Migration Patterns](/docs/patterns/update-migration.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -192,3 +192,7 @@ function isStateUpdate(msg: ExtensionMessage): msg is StateUpdateMessage {
 
 - [Message Passing Patterns](/docs/reference/message-passing-patterns.md) - Core messaging concepts
 - [Content Script Patterns](/docs/guides/content-script-patterns.md) - Best practices for content script architecture
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

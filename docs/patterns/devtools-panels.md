@@ -695,3 +695,7 @@ function formatTime(ts: number): string {
 | Resource watching | Monitor source changes and lazy-loaded assets |
 
 DevTools extensions are uniquely powerful because they combine privileged page access with a persistent UI context. Use `chrome.devtools.inspectedWindow.eval` sparingly and prefer structured messaging via the background service worker for anything that touches extension state.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -176,3 +176,7 @@ See also:
 - [Rate Limiting](./rate-limiting.md) - Preventing throttling
 - [Error Handling](./error-handling.md) - Graceful failure UX
 - [Performance Guide](../guides/performance.md) - Optimizing network requests
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

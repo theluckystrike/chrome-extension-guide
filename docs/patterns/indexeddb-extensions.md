@@ -777,3 +777,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 | Migration from chrome.storage | Moving existing user data without loss or downtime |
 
 IndexedDB is the right tool when your extension manages structured data at scale. Wrap the raw API in typed helpers, manage your schema with versioned upgrades, and always account for the service worker lifecycle. The patterns above give you a production-ready foundation — start with the CRUD wrapper and add indexes and migrations as your data model grows.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

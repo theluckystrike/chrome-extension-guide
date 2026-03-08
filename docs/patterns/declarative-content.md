@@ -1125,3 +1125,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 - [Chrome DeclarativeContent API Reference](https://developer.chrome.com/docs/extensions/reference/api/declarativeContent)
 - [Chrome Extension Best Practices](https://developer.chrome.com/docs/extensions/mv3/)
 - [@theluckystrike/webext-storage Documentation](./webext-storage.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

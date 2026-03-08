@@ -107,3 +107,7 @@ Note: `chrome.permissions.request()` can only be called from a user gesture (cli
 - [Permissions Model](../guides/permissions-model.md)
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md)
 - [Permissions API Reference](../api-reference/permissions-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

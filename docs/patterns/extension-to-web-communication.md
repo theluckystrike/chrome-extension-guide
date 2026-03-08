@@ -146,3 +146,7 @@ Limit `externally_connectable` to specific domains rather than using wildcards.
 - [Extension to Extension Communication](./extension-to-extension.md)
 - [Content Script Isolation Guide](../guides/content-script-isolation.md)
 - [Web Accessible Resources](../mv3/web-accessible-resources.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -481,3 +481,7 @@ const imageResult = await chrome.runtime.sendMessage({
 | Multi-purpose document | Single document serving multiple APIs |
 
 Offscreen documents bridge the gap between service workers (no DOM) and the functionality your extension needs. Keep them lightweight, close them when idle, and always handle the case where Chrome has already closed them.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

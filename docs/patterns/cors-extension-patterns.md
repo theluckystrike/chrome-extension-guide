@@ -186,3 +186,7 @@ async function fetchWithCookies(url, cookieDomain) {
 - [Cross-Origin Requests](./cross-origin-requests.md)
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Network Interception](./network-interception.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

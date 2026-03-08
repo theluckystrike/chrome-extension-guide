@@ -127,3 +127,7 @@ For bundled extensions:
 - [Debugging Extensions Guide](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)
 - [Service Worker Debugging](../guides/service-worker-debugging.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -287,3 +287,7 @@ The `chrome.proxy.settings` API provides comprehensive control over Chrome's pro
 3. **Always implement error handling** with fallback to direct connection
 4. **Use bypass lists** to exclude local traffic from proxying
 5. **Handle authentication** via `chrome.webRequest.onAuthRequired`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

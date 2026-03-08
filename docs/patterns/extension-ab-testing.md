@@ -197,3 +197,6 @@ Archive concluded experiments and clear their assignments from storage to preven
 - [Remote Config](../guides/remote-config.md) - Server-side configuration delivery
 - [Crash Reporting](../guides/crash-reporting.md) - Monitor experiment errors
 - [Storage API](../permissions/storage.md) - Persist experiment assignments
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

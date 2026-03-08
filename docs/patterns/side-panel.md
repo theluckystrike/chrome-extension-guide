@@ -475,3 +475,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 | Per-site disable | Hide panel on incompatible pages |
 
 The Side Panel API is Chrome's answer to the ephemeral popup. Use it when your extension needs persistent, always-available UI that interacts deeply with page content.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

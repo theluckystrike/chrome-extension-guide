@@ -165,3 +165,7 @@ chrome.downloads.setShelfEnabled(true);   // Show download shelf
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Downloads Permissions](../permissions/downloads.md)
 - [Download Management Guide](../guides/download-management.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

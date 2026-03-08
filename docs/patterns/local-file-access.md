@@ -169,3 +169,7 @@ URL.revokeObjectURL(tempUrl);
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Native Messaging Patterns](./native-messaging.md)
 - [Extension Backup & Restore Guide](../guides/extension-backup-restore.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

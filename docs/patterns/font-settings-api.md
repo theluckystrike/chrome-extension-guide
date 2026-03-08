@@ -737,3 +737,7 @@ chrome.fontSettings.onMinimumFontSizeChanged.addListener(e => {});
 4. Respect user preferences — don't override without consent
 5. Test multilingual scripts thoroughly
 6. Provide accessibility options — dyslexia mode, high contrast
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

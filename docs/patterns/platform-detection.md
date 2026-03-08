@@ -250,3 +250,7 @@ export function applyPlatformStyles(): void {
 [api_reference_system-api]: ../api-reference/system-api.md
 [patterns_cross-browser]: ./cross-browser-compatibility.md
 [guides_accessibility]: ../guides/accessibility.md
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

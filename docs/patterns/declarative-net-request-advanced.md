@@ -952,3 +952,7 @@ function patternToRegex(pattern: string): string {
 - [Declarative Net Request API Reference](/api_reference/declarative-net-request-api.md)
 - [Declarative Net Request Overview](/mv3/declarative-net-request.md)
 - [Network Interception Patterns](/patterns/network-interception.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

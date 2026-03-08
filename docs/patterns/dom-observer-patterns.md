@@ -141,3 +141,7 @@ resizeObserver.observe(document.querySelector('#container'));
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script Isolation](../patterns/content-script-isolation.md)
 - [Performance Guide](../guides/performance.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

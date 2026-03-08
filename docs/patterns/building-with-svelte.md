@@ -557,3 +557,7 @@ Key optimizations: target `chrome120` to skip legacy polyfills, strip source map
 | Production optimization | Small bundles, fast loads, CWS-ready builds |
 
 Svelte's compile-time approach makes it uniquely suited for Chrome extensions. The framework overhead is measured in kilobytes, startup is near-instant even in popup windows, and the reactive model maps naturally to Chrome's storage and messaging APIs. Start with the project structure in Pattern 1, wire up storage-backed stores from Pattern 3, and iterate from there.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

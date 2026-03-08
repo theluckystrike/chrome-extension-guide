@@ -192,3 +192,7 @@ function renderWithSandbox(template, data) {
 - [CSP Reference](../reference/csp-reference.md)
 - [CSP Workarounds](./csp-workarounds.md)
 - [MV3 Content Security Policy](../mv3/content-security-policy.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

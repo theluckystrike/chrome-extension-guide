@@ -312,3 +312,7 @@ async function migrateWithRollback() {
 
 - [Chrome Storage API Documentation](https://developer.chrome.com/docs/extensions/storage)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

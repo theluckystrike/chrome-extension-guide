@@ -201,3 +201,7 @@ The `declarativeNetRequest` API cannot read response bodies. For content inspect
 - [declarativeNetRequest API Reference](../api-reference/declarative-net-request-api.md)
 - [Network Interception Patterns](./network-interception.md)
 - [Web Request Patterns Guide](../guides/web-request-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

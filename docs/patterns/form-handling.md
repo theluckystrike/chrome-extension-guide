@@ -1422,3 +1422,7 @@ document.getElementById('clear-key')!.addEventListener('click', async () => {
 - [Chrome Storage API](https://developer.chrome.com/docs/extensions/reference/api/storage)
 - [WAI-ARIA Authoring Practices: Forms](https://www.w3.org/WAI/ARIA/apg/patterns/forms/)
 - [Chrome Extension Options Pages](https://developer.chrome.com/docs/extensions/develop/ui/options-page)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

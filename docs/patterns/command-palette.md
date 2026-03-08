@@ -446,3 +446,7 @@ function closePalette() {
 - [Commands Keyboard Shortcuts](/docs/guides/commands-keyboard-shortcuts.md) — Shortcut best practices
 - [Content Script Patterns](/docs/guides/content-script-patterns.md) — Safe script injection
 - [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced) — Complex Shadow DOM patterns
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

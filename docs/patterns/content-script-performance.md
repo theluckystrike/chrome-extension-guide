@@ -217,3 +217,7 @@ class ContentFeature {
 - [DOM Observer Patterns](./dom-observer-patterns.md) - Advanced observer configurations
 - [Content Script Lifecycle](./content-script-lifecycle.md) - Initialization and cleanup
 - [Performance Profiling](./performance-profiling.md) - Measuring and debugging performance
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

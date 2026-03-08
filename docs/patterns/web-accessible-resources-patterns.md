@@ -131,3 +131,7 @@ Allow extension pages to be loaded in frames:
 - [MV3 Web Accessible Resources](../mv3/web-accessible-resources.md)
 - [Basic Web Accessible Resources](../patterns/web-accessible-resources.md)
 - [Security Best Practices](../guides/security-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

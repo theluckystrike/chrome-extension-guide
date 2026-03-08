@@ -224,3 +224,7 @@ const storageAreas = {
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) - Comprehensive guide to chrome.storage API
 - [Storage Patterns](../reference/storage-patterns.md) - Additional storage patterns and best practices
 - [State Management](./state-management.md) - Managing application state across components
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

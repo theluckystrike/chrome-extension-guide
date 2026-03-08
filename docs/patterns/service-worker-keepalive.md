@@ -112,3 +112,7 @@ chrome.runtime.onSuspend.addListener(() => {
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
 - [Long-Running Operations](./long-running-operations.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

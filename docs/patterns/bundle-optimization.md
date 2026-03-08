@@ -654,3 +654,7 @@ module.exports = {
 | Production config | Terser + hidden source maps | 30-60% minification |
 
 These patterns are most effective when applied together. Start with code splitting per context (Pattern 1) as the foundation, layer on tree shaking (Pattern 2) and shared chunks (Pattern 4), then add automated monitoring (Pattern 6) to prevent regressions. The production build configuration (Pattern 8) ties everything together into a release-ready pipeline.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

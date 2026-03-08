@@ -561,3 +561,7 @@ Combine these patterns into a unified logging module for your extension:
 Each pattern works independently, so adopt them incrementally. Start with structured
 logging and context tags, then layer on persistence and remote reporting as your
 extension matures.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

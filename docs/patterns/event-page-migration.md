@@ -211,3 +211,7 @@ async function connectWebSocket(url) {
 - [Service Workers](mv3/service-workers.md)
 - [Manifest V3 Migration Guide](mv3/manifest-v3-migration-guide.md)
 - [Offscreen Documents](mv3/offscreen-documents.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

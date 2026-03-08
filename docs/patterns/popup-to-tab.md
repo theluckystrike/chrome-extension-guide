@@ -365,3 +365,7 @@ chrome.storage.local.get(['preferredMode'], ({ preferredMode }) => {
 This pattern works well with several other extension development patterns. The options page pattern provides an alternative for settings-focused interfaces. The state management pattern ensures consistent data across all extension contexts. The messaging pattern enables communication between background scripts, popups, and tab views.
 
 For more information, see the guides on [Popup Patterns](../guides/popup-patterns.md), [Options Page](../guides/options-page.md), and [State Management](./state-management.md).
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

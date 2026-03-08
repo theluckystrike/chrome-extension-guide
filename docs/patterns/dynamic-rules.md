@@ -264,3 +264,7 @@ async function addHeaderModificationRule() {
 - [declarativeNetRequest Permissions](../permissions/declarativeNetRequest.md)
 - [MV3 Declarative Net Request](../mv3/declarative-net-request.md)
 - [Network Interception Pattern](./network-interception.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

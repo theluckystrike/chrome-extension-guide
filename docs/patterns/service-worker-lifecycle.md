@@ -470,3 +470,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 | Health monitoring | Debugging and user-facing status |
 
 The service worker lifecycle is not a limitation to fight — it's a design constraint to embrace. Build your extension as a series of small, fast event handlers that persist their state externally and resume gracefully.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

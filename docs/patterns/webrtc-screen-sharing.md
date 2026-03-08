@@ -254,3 +254,7 @@ async function createCaptureOffscreen(): Promise<void> {
 - [guides/desktop-capture.md](../guides/desktop-capture.md)
 - [guides/tab-capture.md](../guides/tab-capture.md)
 - [patterns/desktop-capture.md](./desktop-capture.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

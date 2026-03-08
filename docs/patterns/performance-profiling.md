@@ -460,3 +460,7 @@ test("content script does not create long tasks", async ({ page }) => {
 | Testing | Automate performance assertions in CI |
 
 Profile first, optimize second. Use `performance.now()`, DevTools Performance panel, and automated tests to find real bottlenecks before applying optimizations.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

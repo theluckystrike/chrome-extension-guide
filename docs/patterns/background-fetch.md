@@ -247,3 +247,7 @@ Separate alarms allow independent control of polling frequency. Critical data li
 - [Service Worker Lifecycle](/guides/service-worker-lifecycle.md)
 - [Rate Limiting](/patterns/rate-limiting.md)
 - [Retry Patterns](/patterns/retry-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -116,3 +116,7 @@ For network events, use declarative rules to batch and process events efficientl
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

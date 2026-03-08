@@ -187,3 +187,7 @@ const pageState = getPageVar<{ user: string }>('__pageState');
 | Script injection | Page ← Extension | Running code in page context |
 
 Choose based on direction and complexity needs.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -155,3 +155,7 @@ function isTransientError(error) {
 - [Reference: Error Handling](../reference/error-handling.md)
 - [Patterns: Error Handling](./error-handling.md)
 - [Patterns: Extension Error Recovery](./extension-error-recovery.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

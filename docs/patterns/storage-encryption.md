@@ -143,3 +143,7 @@ async function setupMasterPassword(password) {
 - [Security Hardening](../guides/security-hardening.md)
 - [Build a Password Manager Tutorial](../tutorials/build-password-manager.md)
 - [Storage Patterns Reference](../reference/storage-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

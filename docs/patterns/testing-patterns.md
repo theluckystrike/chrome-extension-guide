@@ -664,3 +664,7 @@ Run `npx playwright test --update-snapshots` to regenerate baselines after inten
 | 6. Message passing | Unit + Integration | Vitest, Playwright | Extract handlers to pure async functions |
 | 7. Fixture pages | E2E | Playwright, HTTP server | Serve local HTML for deterministic DOM |
 | 8. Snapshot testing | E2E | Playwright | `toMatchSnapshot` on sanitized innerHTML |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -165,3 +165,7 @@ function getPageTheme() {
 Pass the detected theme to your component via context or props, then apply appropriate CSS variables. Your constructable stylesheet can define both themes and switch via CSS custom properties.
 
 This pattern scales from simple floating buttons to complex single-page interfaces. When you need to ship UI that survives page redesigns and never bleeds styles, shadow DOM is the answer. The zovo.one team uses this approach across their extension projects for reliable, maintainable content script interfaces.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

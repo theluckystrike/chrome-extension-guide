@@ -168,3 +168,7 @@ chrome.storage.onChanged.addListener(updateQueueDisplay);
 - [Long-Running Operations](./long-running-operations.md) — chunked processing patterns
 - [Retry Patterns](./retry-patterns.md) — failure handling strategies
 - [Alarms API](../api-reference/alarms-api.md) — scheduled background processing
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -949,3 +949,7 @@ See [Error Handling](error-handling.md) for UI-level error display patterns and 
 | Error handling | All network code | Classify errors for appropriate recovery |
 
 These patterns compose well together. A typical extension combines the fetch wrapper (pattern 1) with auth management (pattern 5), error handling (pattern 8), and one or more caching strategies (pattern 3) to build a robust API layer.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

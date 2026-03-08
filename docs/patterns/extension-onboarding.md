@@ -237,3 +237,6 @@ function assignOnboardingVariant() {
 - [Feature Flags](./feature-flags.md) - Toggle features during onboarding
 - [Remote Config](../guides/remote-config.md) - Dynamic configuration without updates
 - [Crash Reporting](../guides/crash-reporting.md) - Monitor onboarding errors
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

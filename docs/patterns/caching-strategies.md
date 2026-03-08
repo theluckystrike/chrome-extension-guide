@@ -694,3 +694,7 @@ Layer these patterns for best results. A typical architecture uses an in-memory 
 as the hot layer, chrome.storage as the warm layer, and IndexedDB for cold storage of
 large objects. Always pair caching with explicit invalidation (Pattern 3) and size
 management (Pattern 8) to prevent stale data and quota exhaustion.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -466,3 +466,7 @@ In the heap snapshot, search for `Detached` in the filter. Detached DOM trees ar
 | Heap snapshots | Undetected leaks in production |
 
 Memory management in extensions is about discipline: **every allocation should have a corresponding deallocation**, and every observer should have a disconnect path. Profile regularly with DevTools heap snapshots to catch leaks before users do.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

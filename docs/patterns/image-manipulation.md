@@ -200,3 +200,7 @@ async function processInWorker(worker, imageBlob) {
 - [Tabs API Reference](../api_reference/tabs-api.md)
 - [Offscreen Documents Pattern](./offscreen-documents.md)
 - [Screenshot Tool Tutorial](../tutorials/build-screenshot-tool.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

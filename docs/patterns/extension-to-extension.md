@@ -830,3 +830,7 @@ export function getRateLimiter(extensionId: string): TokenBucketLimiter {
 | Sender identity validation | Preventing unauthorized access from unknown extensions |
 
 Inter-extension communication opens powerful integration possibilities, but it also opens an attack surface. Always validate `sender.id`, enforce per-extension permissions, rate-limit external callers, and negotiate protocol versions before exchanging data. The `externally_connectable` manifest key is your first line of defense — only list extension IDs you explicitly trust.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

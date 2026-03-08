@@ -166,3 +166,7 @@ testMatchPattern('https://api.example.com/users', 'https://*.example.com/*');
 - [Permissions Model](../guides/permissions-model.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Manifest Fields Reference](../reference/manifest-fields.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

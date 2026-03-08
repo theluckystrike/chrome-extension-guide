@@ -511,3 +511,7 @@ Comlink adds ~4KB gzipped and eliminates boilerplate for request IDs, message ro
 - Terminate idle workers to avoid memory leaks.
 - Consider Comlink when your worker has more than two or three message types.
 - Size worker pools to `navigator.hardwareConcurrency` for optimal parallelism.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -660,3 +660,7 @@ chrome.tabs.onAttached.addListener((tabId, attachInfo) => {
 | Window-tab relationships | Track cross-window tab movement and merging |
 
 Tab management is the foundation of power-user extensions. Combine these patterns with `@theluckystrike/webext-patterns` for reusable utilities, and always initialize your registries on service worker startup to survive restarts.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

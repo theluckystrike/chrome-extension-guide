@@ -172,3 +172,7 @@ export const platform = {
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Content Script API](../reference/content-script-api.md)
 - [Service Workers](../mv3/service-workers.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

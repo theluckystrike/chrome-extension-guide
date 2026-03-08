@@ -445,3 +445,7 @@ const badgeManager = new StatusBadgeManager();
 - [Badge and Action UI Patterns](badge-action-ui.md) - Related UI patterns and icon management
 - [Badge Management](badge-management.md) - Foundational badge patterns and state machines
 - [Throttle and Debounce Patterns](throttle-debounce-extensions.md) - Performance optimization techniques
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

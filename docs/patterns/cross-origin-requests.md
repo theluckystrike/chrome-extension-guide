@@ -260,3 +260,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - [Web Request Patterns](/guides/web-request-patterns.md)
 - [Network Interception](/patterns/network-interception.md)
 - [Security Best Practices](/guides/security-best-practices.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -572,3 +572,7 @@ function showBanner(message: string) {
 | Context invalidation | Graceful handling of extension updates |
 
 Content script isolation is Chrome's security boundary. Work with it: use the isolated world for extension logic, inject into the main world only when you need page variables, and encapsulate your UI with Shadow DOM. Never trust data from the page — validate everything that crosses the isolation boundary.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

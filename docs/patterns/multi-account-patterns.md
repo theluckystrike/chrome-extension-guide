@@ -742,3 +742,7 @@ The export format includes a version number so future releases can handle format
 
 - [OAuth and Identity Patterns](oauth-identity.md) -- Token acquisition and refresh flows
 - [State Management Patterns](state-management.md) -- Cross-context state synchronization strategies
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

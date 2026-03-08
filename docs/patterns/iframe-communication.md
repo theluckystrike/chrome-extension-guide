@@ -1046,3 +1046,7 @@ chrome.runtime.onMessage.addListener((message) => {
 | UI Injection | Full extension panels on pages | Shadow DOM for style isolation |
 
 > **See also:** [Content Script Isolation](content-script-isolation.md) for understanding the isolated world that content scripts run in. [Web Accessible Resources](../mv3/web-accessible-resources.md) for configuring which extension files can be loaded from web pages.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

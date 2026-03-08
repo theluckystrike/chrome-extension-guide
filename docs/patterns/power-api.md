@@ -1068,3 +1068,7 @@ chrome.runtime.onInstalled.addListener(initializeBadge);
 - **Battery impact**: System-level keep-awake has significantly higher battery impact than display-level; use sparingly
 - **User awareness**: Consider notifying users when keep-awake is active to avoid confusion about battery drain
 - **Service worker limitations**: In Manifest V3, the service worker may be terminated after inactivity; ensure state is persisted in storage for restoration
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -190,3 +190,7 @@ export default defineConfig({
 - [Building Chrome Extensions with React](/docs/patterns/building-with-react.md) — Full React extension architecture
 - [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced.md) — Deep dive on Shadow DOM patterns
 - [Content Script Isolation](/docs/patterns/content-script-isolation.md) — Complete isolation strategies
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

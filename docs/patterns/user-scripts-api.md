@@ -2303,3 +2303,7 @@ class UserScriptAutoUpdater {
 - [Match Pattern Syntax](https://developer.chrome.com/docs/extensions/mv3/match_patterns/)
 - [Greasemonkey Wiki](https://wiki.greasespot.net/)
 - [Tampermonkey Documentation](https://www.tampermonkey.net/documentation.php)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

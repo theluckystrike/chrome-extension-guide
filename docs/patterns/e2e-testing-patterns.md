@@ -606,3 +606,7 @@ for (const vp of viewports) {
 | Visual regression | `toHaveScreenshot` assertions | Catching unintended UI changes |
 
 These patterns compose naturally. A typical test suite combines popup interaction tests with storage verification and visual snapshots, all running through the same Playwright persistent context fixture. Start with the fixture setup in Pattern 1, verify loading in Pattern 2, then layer on the patterns that match your extension's architecture.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -750,3 +750,7 @@ The manifest must declare the commands for shortcuts to appear:
 | 6. Dynamic sub-items | Children from storage data | `storage.onChanged`, `removeAll` + rebuild |
 | 7. Content script coordination | DOM actions triggered from menu | `tabs.sendMessage`, `runtime.onMessage` |
 | 8. Keyboard shortcut hints | Show bindings in menu titles | `chrome.commands.getAll` |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

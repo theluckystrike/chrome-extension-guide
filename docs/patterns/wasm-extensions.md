@@ -788,3 +788,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 | CSP configuration | Deployment correctness | Keep `wasm-unsafe-eval` |
 
 WASM is a powerful tool for Chrome extensions, but it adds complexity. Use it when profiling shows a clear bottleneck that JS cannot solve, and prefer the Web Platform APIs (Web Crypto, Compression Streams) when they cover your use case.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

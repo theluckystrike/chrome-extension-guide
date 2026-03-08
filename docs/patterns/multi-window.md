@@ -282,3 +282,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 - [State Management Patterns](./state-management.md) - Persisting and sharing state
 - [Badge and Action UI](./badge-action-ui.md) - Per-window badge management
 - [Popup to Tab Pattern](./popup-to-tab.md) - Converting popups to full windows
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

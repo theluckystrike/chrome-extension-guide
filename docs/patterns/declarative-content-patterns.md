@@ -204,3 +204,7 @@ Add to `manifest.json`:
 - Cannot detect element state (e.g., visible, hidden, checked)
 - Cannot read element content or attributes
 - For complex detection, combine with content scripts triggered by the action click
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

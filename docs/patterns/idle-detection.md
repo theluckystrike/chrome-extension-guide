@@ -1388,3 +1388,7 @@ export class DeviceStatusPanel {
 - **Message passing**: Use `@theluckystrike/webext-messaging` to coordinate idle state across extension contexts
 
 These patterns provide a comprehensive toolkit for building responsive, power-efficient Chrome extensions that adapt to user behavior.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

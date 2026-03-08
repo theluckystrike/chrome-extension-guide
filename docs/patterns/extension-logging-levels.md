@@ -252,3 +252,7 @@ function captureError(error: Error, context: string): void {
 - [Extension Logging Guide](../../guides/extension-logging.md)
 - [Debugging Extensions](../../guides/debugging-extensions.md)
 - [Error Handling Pattern](./error-handling.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

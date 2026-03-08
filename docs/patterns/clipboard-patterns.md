@@ -552,3 +552,7 @@ document.getElementById("read-btn")!.addEventListener("click", async () => {
 | Permissions and consent | Defensive error handling and user-gesture gating |
 
 Clipboard access in extensions requires routing through the right context. Service workers cannot touch the clipboard directly — always delegate to an offscreen document or content script. Handle permission errors gracefully, gate operations behind user gestures, and give users control over monitoring and history retention.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

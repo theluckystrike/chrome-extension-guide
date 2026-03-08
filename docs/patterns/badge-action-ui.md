@@ -701,4 +701,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 | Animated badge updates | Drawing attention to changes, notification effects |
 | Title and tooltip management | Providing hover context, accessibility labels |
 
-The action button is your extension's front door. Keep badge text short, icon changes meaningful, and tooltip text descriptive. Use per-tab state to make every tab feel like the extension understands its context.
+The action button is your extension's front door. Keep badge text short, icon changes meaningful, and tooltip text descriptive. Use per-tab state to make every tab feel like the extension understands its context.-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

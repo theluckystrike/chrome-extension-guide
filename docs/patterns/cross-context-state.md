@@ -182,3 +182,7 @@ The **storage-backed pub/sub** pattern (Pattern 1) provides a middle ground: sto
 - [State Management Patterns](../patterns/state-management.md) — General state patterns
 - [Message Passing Patterns Reference](../reference/message-passing-patterns.md) — One-time and port-based messaging
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) — Full storage API reference
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

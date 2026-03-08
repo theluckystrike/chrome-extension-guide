@@ -966,3 +966,7 @@ function renderKeyboardHelp(container: HTMLElement): void {
 - [MDN Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 - [Chrome Side Panel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)
 - [WAI-ARIA Drag-and-Drop](https://www.w3.org/WAI/ARIA/apg/patterns/drag-and-drop/)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

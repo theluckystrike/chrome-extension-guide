@@ -1255,3 +1255,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - `chrome.tabs.onUpdated` - Tab change events
 - IndexedDB - Favicon caching
 - OffscreenCanvas - Dynamic favicon generation
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

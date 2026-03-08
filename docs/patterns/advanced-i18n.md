@@ -449,3 +449,7 @@ process.exit(hasErrors ? 1 : 0);
 | Validation script | Catch missing translations in CI |
 
 Combine these patterns with the [base i18n guide](../guides/internationalization.md) for complete internationalization coverage in your Chrome extension.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

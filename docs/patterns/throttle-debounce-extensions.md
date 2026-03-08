@@ -216,3 +216,7 @@ function scheduleUpdate(state) {
 - [Performance Guide](../guides/performance.md)
 - [Rate Limiting Patterns](./rate-limiting.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

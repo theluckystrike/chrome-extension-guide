@@ -117,3 +117,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 - **Rollback** on failure from backup
 - **Log** errors with name/version
 - **Alert** user on critical failures
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

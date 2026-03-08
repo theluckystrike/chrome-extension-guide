@@ -233,3 +233,7 @@ async function migrateLargeDataset() {
 - [Storage Migration](./storage-migration.md)
 - [Update Migration](./update-migration.md)
 - [Extension Update Handling](./extension-update-handling.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

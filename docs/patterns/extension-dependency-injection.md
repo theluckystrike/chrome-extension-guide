@@ -146,3 +146,7 @@ interface IMessageService {
 - [Unit Testing Guide](../guides/chrome-extension-unit-testing.md)
 - [API Mocking Guide](../guides/chrome-extension-api-mocking.md)
 - [Architecture Patterns](./architecture-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

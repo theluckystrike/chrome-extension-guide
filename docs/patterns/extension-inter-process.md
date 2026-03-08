@@ -185,3 +185,7 @@ echo '{"action": "test"}' | ./native_app
 
 - [Chrome Native Messaging Documentation](https://developer.chrome.com/docs/apps/nativeMessaging)
 - [externally_connectable](https://developer.chrome.com/docs/extensions/mv3/manifest/externally_connectable/)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

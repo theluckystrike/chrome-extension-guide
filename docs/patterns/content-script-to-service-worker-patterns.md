@@ -300,3 +300,7 @@ Batching reduces the number of service worker wake-ups significantly.
 These patterns form the backbone of content script to service worker communication. Choose the right pattern based on your use case. For simple requests, sendMessage works well. For ongoing communication, prefer connect with proper reconnection logic.
 
 For more extension development patterns and tutorials, visit zovo.one.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

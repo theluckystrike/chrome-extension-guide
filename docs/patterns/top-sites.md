@@ -638,3 +638,7 @@ async function getPrivacyStatus(): Promise<{
 6. **Allow user customization** - Enable pinning, hiding, and reordering
 7. **Handle favicons** - Use Google Favicon service as a reliable fallback
 8. **Check permissions** - The topSites permission is required; manifest configuration matters
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

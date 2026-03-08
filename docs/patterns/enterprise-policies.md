@@ -752,3 +752,7 @@ policyManager.onAny(async (key, oldValue, newValue) => {
 - Policy sync timing is controlled by Chrome and the enterprise admin console, not by your extension. Changes can take several minutes to propagate after an admin makes them.
 - Some policy changes (e.g., switching API endpoints or disabling major features) may require notifying the user. Use `chrome.notifications` to display a non-intrusive message rather than silently changing behavior.
 - If multiple policies change simultaneously (common when an admin updates a policy bundle), they arrive as a single `onChanged` event with multiple keys. Process all changes in the same batch to maintain consistency.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

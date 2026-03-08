@@ -107,3 +107,7 @@ Maintain a single codebase that adapts to context using responsive design and co
 ## Related Patterns {#related-patterns}
 
 See [popup-to-tab](./popup-to-tab.md) for the related pattern covering popup-to-tab expansion. The [side panel](../mv3/side-panel.md) documentation covers the middle ground approach. [Popup Patterns](../guides/popup-patterns.md) provides additional implementation guidance.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

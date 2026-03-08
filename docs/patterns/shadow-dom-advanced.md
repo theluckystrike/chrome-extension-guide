@@ -463,3 +463,7 @@ Accessibility checklist for shadow DOM components:
 - Dispatch custom events with `composed: true` and `bubbles: true` to cross shadow boundaries.
 - Use `ElementInternals` for form-associated custom elements that participate in native validation.
 - Set `delegatesFocus: true` and explicit ARIA attributes to maintain accessibility.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

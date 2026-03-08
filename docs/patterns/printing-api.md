@@ -626,3 +626,7 @@ export const printPreferences = new PrintPreferencesManager();
 | Print Preview and Customization | Side panel preview, user options, preference storage | Custom UI components, chrome.storage |
 
 Printing in Chrome extensions requires understanding the different contexts and their capabilities. Use `window.print()` for extension pages, route through content scripts for page injection, and leverage offscreen documents for complex PDF generation. Always handle permission requirements gracefully, provide print preview when possible, and save user preferences for a seamless printing experience.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

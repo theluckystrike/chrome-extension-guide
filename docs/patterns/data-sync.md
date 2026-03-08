@@ -814,3 +814,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 | Storage area migration | Upgrading schema or moving data between local and sync |
 
 Sync storage is convenient but constrained. Always validate against quota limits before writing, assume eventual consistency between devices, and give users an escape hatch with import/export. For anything beyond simple settings, consider `storage.local` as the primary store with selective sync of critical data via `storage.sync`.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

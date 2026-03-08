@@ -185,3 +185,7 @@ async function focusTabByUrl(pattern: string): Promise<void> {
 - [Tabs API](../api-reference/tabs-api.md) - Full tabs API reference
 - [Tab Management](./tab-management.md) - Basic tab operations
 - [Cross-Context State](./cross-context-state.md) - State sharing patterns
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

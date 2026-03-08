@@ -458,3 +458,7 @@ async function createTransport(onMessage: (data: unknown) => void) {
 | Polling fallback | HTTP long-poll when offscreen document is unavailable |
 
 WebSocket reliability in MV3 comes down to one rule: never trust the service worker to stay alive. Host the connection in an offscreen document, add reconnection and queuing, and always have a fallback plan.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

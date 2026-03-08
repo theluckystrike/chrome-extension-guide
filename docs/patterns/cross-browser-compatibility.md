@@ -372,3 +372,7 @@ chrome.contextMenus.create({
 | Automated cross-browser tests | CI/CD for multi-browser releases |
 
 Cross-browser compatibility is primarily about **detection over assumption** and **abstraction over duplication**. Start with Chrome, feature-detect gracefully, and use build tooling to handle the manifest and API differences that can't be abstracted away.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

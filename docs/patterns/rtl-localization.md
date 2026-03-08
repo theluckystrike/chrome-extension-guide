@@ -723,3 +723,7 @@ The critical distinction: extension UI panels (floating toolbars, sidebars) shou
 
 - [Advanced i18n Patterns](advanced-i18n.md) -- Message catalogs, fallback chains, and locale negotiation
 - [Internationalization Guide](../guides/internationalization.md) -- Setting up `_locales` and `chrome.i18n` basics
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

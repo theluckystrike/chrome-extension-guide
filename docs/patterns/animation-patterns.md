@@ -1320,3 +1320,7 @@ function simulateReducedMotion(reduced: boolean): void {
 - [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API)
 - [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

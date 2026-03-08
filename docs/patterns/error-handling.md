@@ -960,3 +960,7 @@ export async function broadcastMessage(message: unknown): Promise<void> {
 | lastError handling | Silent failures from callback-based Chrome APIs |
 
 Treat errors as first-class data in your extension. Type them, catch them at every boundary, degrade gracefully when you can, and ship them to a pipeline so you can debug what users actually hit. The worst extension bug is the one nobody sees — because the error was silently swallowed.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
