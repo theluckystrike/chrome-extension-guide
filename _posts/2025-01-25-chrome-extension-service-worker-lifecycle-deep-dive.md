@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Service Worker Lifecycle — Complete Deep Dive (Manifest V3)"
 description: "Master the Chrome extension service worker lifecycle. Install, activate, idle, terminate events. Persistent state patterns, alarm-based keepalive, and migration from background pages."
 date: 2025-01-25
