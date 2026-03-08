@@ -56,6 +56,17 @@
     ]
   }
   </script>
+  {% if page.url contains '/docs/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "programmingLanguage": "JavaScript",
+    "runtimePlatform": "Chrome Extension",
+    "author": "theluckystrike"
+  }
+  </script>
+  {% endif %}
   {% endif %}
 
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
