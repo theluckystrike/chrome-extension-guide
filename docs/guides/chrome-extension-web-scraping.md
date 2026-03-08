@@ -7,238 +7,213 @@ permalink: /guides/chrome-extension-web-scraping/
 
 # Chrome Extension Web Scraping: Data Extraction with Content Scripts
 
-Web scraping has evolved significantly with the rise of modern web applications. Traditional server-side scrapers often struggle with JavaScript-heavy Single Page Applications (SPAs), complex authentication flows, and dynamic content loading. Chrome extensions provide a powerful alternative that runs directly in the browser, giving you access to fully rendered pages, authenticated sessions, and the ability to interact with dynamic content just like a real user.
-
-This comprehensive guide covers building production-ready data extraction extensions using content scripts, handling dynamic content, managing data flow, and implementing ethical scraping practices.
+Web scraping has evolved significantly beyond simple HTTP requests and server-side parsers. Chrome extensions provide a uniquely powerful platform for data extraction, combining the ability to execute JavaScript, render dynamic content, and access authenticated sessions—all within a real browser environment. This comprehensive guide walks you through building robust web scraping extensions using content scripts, handling dynamic content, managing data flow, and following ethical scraping practices.
 
 ## Introduction: Chrome Extensions as a Scraping Platform
 
-Chrome extensions occupy a unique position in the web scraping ecosystem. Unlike traditional scrapers that run on servers and make HTTP requests, extension-based scrapers execute within the browser environment. This fundamental difference provides several compelling advantages:
+Traditional web scraping faces fundamental limitations when dealing with modern web applications. Server-side scrapers cannot execute JavaScript, making them useless for Single Page Applications (SPAs) that load content dynamically. They cannot maintain sessions, bypass CAPTCHAs, or interact with authentication flows. They struggle with anti-bot measures that analyze browser fingerprints or behavior patterns.
 
-**Browser Context and JavaScript Rendering**: Modern websites rely heavily on JavaScript to render content. Server-side scrapers would need to implement full browser engines (like Puppeteer or Selenium) to handle this, which is resource-intensive. Chrome extensions have direct access to the fully rendered DOM after all JavaScript has executed, making data extraction straightforward and reliable.
+Chrome extensions solve these problems by running directly in the user's browser. Content scripts inject into web pages with full access to the DOM, JavaScript execution context, and browser storage. This approach offers several compelling advantages over traditional scraping methods.
 
-**Authenticated Session Access**: Extensions inherit the user's authenticated state from the browser. This means you can scrape content behind login walls without needing to handle authentication tokens, cookies, or session management separately. This is particularly valuable for extracting data from personal accounts, private dashboards, or membership-only content.
+First, extensions run in a real browser with genuine browser fingerprints, making detection significantly harder than headless browsers or server-side scrapers. Second, they natively handle JavaScript-rendered content—no need for Selenium, Puppeteer, or complex rendering solutions. Third, they have access to authenticated sessions, cookies, and local storage, enabling extraction from authenticated pages without re-implementing login flows. Fourth, they can intercept network requests at the browser level, capturing API responses that might not be visible in the rendered DOM.
 
-**User Interaction Capabilities**: Extensions can simulate user interactions—clicking buttons, scrolling pages, filling forms, and navigating through multi-step processes. This enables scraping of content that loads only after specific user actions, such as infinite-scroll feeds or tab-based interfaces.
-
-**Reduced Detection Footprint**: Because extensions run in a real browser with genuine user behavior patterns, they are significantly harder for websites to detect compared to automated bot traffic. This makes extension-based scraping more reliable for sites implementing anti-bot measures.
-
-### Legal and Ethical Considerations
-
-Before building any scraping extension, it's essential to understand the legal landscape. Web scraping exists in a complex legal gray area that varies by jurisdiction and use case. The following principles should guide your approach:
-
-**Respect Terms of Service**: Most websites explicitly prohibit scraping in their Terms of Service. While the legal enforceability of ToS clauses varies, violating them can result in account termination, IP blocking, or legal action. Always review and consider a website's ToS before scraping.
-
-**Personal vs. Commercial Use**: Extracting data for personal, non-commercial purposes is generally viewed more favorably than commercial data harvesting. If you plan to use scraped data commercially, consult with a legal professional to understand your obligations.
-
-**Privacy and Data Protection**: Scraping personal identifiable information (PII) triggers additional legal requirements under regulations like GDPR (Europe) or CCPA (California). Be especially careful when extracting user-generated content, email addresses, or any data that could identify individuals.
-
-**Rate Limiting and Server Impact**: Even when scraping is technically allowed, overwhelming a server with requests is considered bad practice and can constitute a denial-of-service attack. Always implement appropriate rate limiting to minimize your impact on target servers.
-
-For more information on monetization strategies for scraping extensions, see our [Extension Monetization Guide](./extension-monetization.md).
+Before diving into implementation, it's essential to understand the legal and ethical landscape. Web scraping exists in a complex legal environment governed by computer fraud laws, terms of service agreements, and privacy regulations. The Computer Fraud and Abuse Act (CFAA) in the United States, GDPR in Europe, and similar regulations worldwide can impose liability for unauthorized access to computer systems. Always review a website's Terms of Service and robots.txt before scraping, and consult legal counsel for commercial projects. This guide covers technical implementation while emphasizing ethical practices that keep you in good standing with websites and regulators.
 
 ## Content Scripts for Data Extraction
 
-Content scripts are the foundation of extension-based web scraping. They run in the context of web pages and have direct access to the DOM, making them ideal for extracting data from visible page elements.
+Content scripts are the foundation of extension-based web scraping. They operate within the context of web pages, giving you direct access to the DOM and page JavaScript. Understanding how to properly configure and write content scripts is essential for building effective scraping extensions.
 
-### How Content Scripts Inject into Web Pages
+### Manifest Configuration
 
-Content scripts are declared in the manifest.json file and automatically injected into matching pages. The extension runtime handles injection, so you don't need to manually trigger script execution.
+Content scripts are declared in `manifest.json` with match patterns that determine which pages they inject into. Here's a comprehensive configuration example:
 
 ```json
 {
   "content_scripts": [
     {
-      "matches": ["https://example.com/*", "https://*.example.org/*"],
-      "js": ["content-script.js"],
-      "css": ["styles.css"],
-      "run_at": "document_idle"
+      "matches": ["https://*.example.com/*", "https://example.org/*"],
+      "js": ["dist/content-script.js"],
+      "css": ["styles/injected.css"],
+      "run_at": "document_idle",
+      "match_about_blank": false,
+      "include_globs": [],
+      "exclude_globs": []
     }
   ]
 }
 ```
 
-The `matches` field uses URL patterns to control which pages receive the content script. You can specify exact URLs, wildcards, or use `<all_urls>` for universal injection. The `run_at` property controls when the script executes: `document_start` runs before any content renders, `document_end` runs after the DOM is complete but before subresources load, and `document_idle` runs after the page fully loads (the most common choice for scraping).
+The `matches` field uses URL patterns similar to Chrome's match patterns. Use `*` wildcards for subdomains and paths. The `run_at` property controls when your script executes: `document_start` runs before any content renders, `document_end` runs after the DOM is complete but before subresources, and `document_idle` runs after the page fully loads. For scraping, `document_idle` is typically most appropriate, though you'll often need additional logic to wait for dynamic content.
 
-### DOM Traversal and Data Extraction
+### Data Extraction Base Class
 
-Once injected, content scripts have access to the full DOM through standard JavaScript APIs. The most common approach uses `document.querySelector` and `document.querySelectorAll` to locate elements and extract their content.
+A well-designed extraction system starts with a reusable base class that handles common DOM traversal and data extraction patterns:
 
 ```typescript
-// content-script.ts
+// src/content-script/extractors/DataExtractor.ts
 
-interface ExtractedData {
-  title: string;
-  price: string;
-  description: string;
-  imageUrl: string;
+export interface ExtractionOptions {
+  root?: Element | Document;
+  timeout?: number;
+  retryCount?: number;
+  retryDelay?: number;
 }
 
-class DataExtractor {
-  /**
-   * Extracts text content from an element using a CSS selector
-   */
-  static getText(selector: string, parent: Element | Document = document): string | null {
-    const element = parent.querySelector(selector);
-    return element?.textContent?.trim() ?? null;
+export abstract class DataExtractor<T> {
+  protected root: Element | Document;
+  protected options: Required<ExtractionOptions>;
+
+  constructor(options: ExtractionOptions = {}) {
+    this.root = options.root || document;
+    this.options = {
+      root: this.root,
+      timeout: options.timeout || 5000,
+      retryCount: options.retryCount || 3,
+      retryDelay: options.retryDelay || 1000,
+      ...options
+    };
   }
 
-  /**
-   * Extracts an attribute value from an element
-   */
-  static getAttribute(selector: string, attribute: string, parent: Element | Document = document): string | null {
-    const element = parent.querySelector(selector);
-    return element?.getAttribute(attribute) ?? null;
+  protected querySelector(selector: string): Element | null {
+    return this.root.querySelector(selector);
   }
 
-  /**
-   * Extracts all text content from elements matching a selector
-   */
-  static getAllText(selector: string, parent: Element | Document = document): string[] {
-    const elements = parent.querySelectorAll(selector);
-    return Array.from(elements).map(el => el.textContent?.trim() ?? '').filter(Boolean);
+  protected querySelectorAll(selector: string): Element[] {
+    return Array.from(this.root.querySelectorAll(selector));
   }
 
-  /**
-   * Extracts data from multiple elements into an array of objects
-   */
-  static extractMultiple<T>(selector: string, mapper: (element: Element) => T): T[] {
-    const elements = document.querySelectorAll(selector);
-    return Array.from(elements).map(mapper);
+  protected getText(selector: string, defaultValue: string = ''): string {
+    const element = this.querySelector(selector);
+    return element?.textContent?.trim() || defaultValue;
   }
-}
 
-// Example: Extracting product data from a page
-function extractProductData(): ExtractedData {
-  return {
-    title: DataExtractor.getText('.product-title') ?? 'Unknown Product',
-    price: DataExtractor.getText('.product-price') ?? '0.00',
-    description: DataExtractor.getText('.product-description') ?? '',
-    imageUrl: DataExtractor.getAttribute('.product-image', 'src') ?? ''
-  };
+  protected getAttribute(selector: string, attribute: string, defaultValue: string = ''): string {
+    const element = this.querySelector(selector);
+    return element?.getAttribute(attribute) || defaultValue;
+  }
+
+  protected getNumber(selector: string, defaultValue: number = 0): number {
+    const text = this.getText(selector);
+    const cleaned = text.replace(/[^0-9.-]/g, '');
+    const parsed = parseFloat(cleaned);
+    return isNaN(parsed) ? defaultValue : parsed;
+  }
+
+  protected getHref(selector: string): string {
+    return this.getAttribute(selector, 'href');
+  }
+
+  protected getSrc(selector: string): string {
+    return this.getAttribute(selector, 'src');
+  }
+
+  abstract extract(): T | Promise<T>;
 }
 ```
 
-### Handling Dynamic and SPA Content
+This base class provides utility methods for common extraction tasks while requiring subclasses to implement the specific `extract()` method. The `querySelector` and `querySelectorAll` methods leverage the DOM API for element selection, while helper methods like `getText`, `getNumber`, and `getAttribute` handle common data extraction patterns with sensible defaults.
 
-Many modern websites load content dynamically after the initial page load. Content scripts running at `document_idle` might execute before this dynamic content appears. The `MutationObserver` API provides a solution by watching for DOM changes.
+### Handling Dynamic Content with MutationObserver
+
+Modern SPAs load content dynamically, meaning the page DOM changes after initial load. Simply waiting for `document_idle` isn't sufficient. The `MutationObserver` API allows you to watch for DOM changes and trigger extraction when relevant content appears:
 
 ```typescript
-// dynamic-content-watcher.ts
+// src/content-script/utils/DOMWatcher.ts
 
-type MutationCallback = (mutations: MutationRecord[]) => void;
+export type MutationCallback = (mutations: MutationRecord[]) => void;
 
-class DynamicContentWatcher {
+export class DOMWatcher {
   private observer: MutationObserver | null = null;
-  private observedElements: Set<Element> = new Set();
+  private debounceTimer: number | null = null;
 
-  /**
-   * Starts observing the document for DOM changes
-   */
-  start(callback: MutationCallback): void {
-    if (this.observer) {
-      return; // Already observing
-    }
-
-    this.observer = new MutationObserver(callback);
-    
-    this.observer.observe(document.body, {
+  constructor(
+    private target: Node = document.body,
+    private callback: MutationCallback,
+    private options: MutationObserverInit = {
       childList: true,
       subtree: true,
-      attributes: true,
-      characterData: true
+      attributes: false
+    },
+    private debounceMs: number = 300
+  ) {}
+
+  start(): void {
+    if (this.observer) return;
+    
+    this.observer = new MutationObserver((mutations) => {
+      if (this.debounceMs > 0) {
+        if (this.debounceTimer) {
+          clearTimeout(this.debounceTimer);
+        }
+        this.debounceTimer = window.setTimeout(() => {
+          this.callback(mutations);
+        }, this.debounceMs);
+      } else {
+        this.callback(mutations);
+      }
     });
+
+    this.observer.observe(this.target, this.options);
   }
 
-  /**
-   * Stops observing DOM changes
-   */
   stop(): void {
     if (this.observer) {
       this.observer.disconnect();
       this.observer = null;
     }
-    this.observedElements.clear();
-  }
-
-  /**
-   * Watches for specific elements to appear in the DOM
-   */
-  async waitForElement(selector: string, timeout: number = 10000): Promise<Element | null> {
-    // Check if element already exists
-    const existing = document.querySelector(selector);
-    if (existing) {
-      return existing;
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = null;
     }
-
-    return new Promise((resolve) => {
-      const observer = new MutationObserver((mutations, obs) => {
-        const element = document.querySelector(selector);
-        if (element) {
-          obs.disconnect();
-          resolve(element);
-        }
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-
-      // Timeout after specified duration
-      setTimeout(() => {
-        observer.disconnect();
-        resolve(null);
-      }, timeout);
-    });
   }
-}
 
-// Usage example
-const watcher = new DynamicContentWatcher();
-
-// Wait for dynamic content to load, then extract
-async function scrapeDynamicPage(): Promise<void> {
-  const productList = await watcher.waitForElement('.product-list .product-item', 15000);
-  
-  if (productList) {
-    const products = DataExtractor.extractMultiple('.product-item', (el) => ({
-      name: DataExtractor.getText('.product-name', el),
-      price: DataExtractor.getText('.product-price', el),
-      url: DataExtractor.getAttribute('.product-link', 'href', el)
-    }));
-    
-    console.log('Extracted products:', products);
+  disconnect(): void {
+    this.stop();
   }
-  
-  watcher.stop();
 }
 ```
 
+This utility class wraps the MutationObserver API with convenient features like debouncing to prevent excessive callback invocations during rapid DOM changes.
+
 ## Extracting Structured Data
 
-Beyond simple text extraction, scraping often requires extracting structured data in consistent formats. This section covers common extraction patterns for tables, product listings, and articles.
+Different types of content require different extraction strategies. This section covers practical patterns for extracting tables, product listings, and article content—three common scraping use cases.
 
-### Extracting Tables into JSON
+### Table Extraction
 
-Table extraction is a common requirement, whether you're scraping data tables, comparison charts, or financial reports.
+Tables are one of the most structured data formats on the web. Converting HTML tables to JSON is straightforward with proper selectors:
 
 ```typescript
-// table-extractor.ts
+// src/content-script/extractors/TableExtractor.ts
 
-interface TableData {
+import { DataExtractor, ExtractionOptions } from './DataExtractor';
+
+export interface TableData {
   headers: string[];
   rows: string[][];
 }
 
-class TableExtractor {
-  /**
-   * Extracts data from an HTML table into a structured format
-   */
-  static extract(tableSelector: string): TableData | null {
-    const table = document.querySelector(tableSelector) as HTMLTableElement;
+export class TableExtractor extends DataExtractor<TableData> {
+  private tableSelector: string;
+  private headerSelector: string;
+  private rowSelector: string;
+  private cellSelector: string;
+
+  constructor(
+    tableSelector: string = 'table',
+    options: ExtractionOptions = {}
+  ) {
+    super(options);
+    this.tableSelector = tableSelector;
+    this.headerSelector = 'thead th, thead td';
+    this.rowSelector = 'tbody tr, tr';
+    this.cellSelector = 'td, th';
+  }
+
+  extract(): TableData {
+    const table = this.querySelector(this.tableSelector);
     if (!table) {
-      return null;
+      return { headers: [], rows: [] };
     }
 
     const headers = this.extractHeaders(table);
@@ -247,1359 +222,1047 @@ class TableExtractor {
     return { headers, rows };
   }
 
-  private static extractHeaders(table: HTMLTableElement): string[] {
-    const headerRow = table.querySelector('thead tr') || table.querySelector('tr');
-    if (!headerRow) {
-      return [];
-    }
-
-    return Array.from(headerRow.querySelectorAll('th, td')).map(
-      cell => cell.textContent?.trim() ?? ''
+  private extractHeaders(table: Element): string[] {
+    const headerElements = table.querySelectorAll(this.headerSelector);
+    return Array.from(headerElements).map(
+      th => th.textContent?.trim() || ''
     );
   }
 
-  private static extractRows(table: HTMLTableElement): string[][] {
-    const rows: string[][] = [];
-    const tbody = table.querySelector('tbody') || table;
-    const trElements = tbody.querySelectorAll('tr');
-
-    trElements.forEach(tr => {
-      const row = Array.from(tr.querySelectorAll('td')).map(
-        cell => cell.textContent?.trim() ?? ''
+  private extractRows(table: Element): string[][] {
+    const rowElements = table.querySelectorAll(this.rowSelector);
+    return Array.from(rowElements).map(row => {
+      const cells = row.querySelectorAll(this.cellSelector);
+      return Array.from(cells).map(
+        cell => cell.textContent?.trim() || ''
       );
-      if (row.length > 0) {
-        rows.push(row);
-      }
     });
-
-    return rows;
   }
 
-  /**
-   * Converts table data to JSON format
-   */
-  static toJson(tableData: TableData): string {
-    const { headers, rows } = tableData;
-    const data = rows.map(row => {
+  toJSON(): string {
+    const { headers, rows } = this.extract();
+    const objects = rows.map(row => {
       const obj: Record<string, string> = {};
       headers.forEach((header, index) => {
-        obj[header] = row[index] ?? '';
+        obj[header] = row[index] || '';
       });
       return obj;
     });
-    return JSON.stringify(data, null, 2);
+    return JSON.stringify(objects, null, 2);
   }
-}
-
-// Usage
-const tableData = TableExtractor.extract('#financial-data');
-if (tableData) {
-  const json = TableExtractor.toJson(tableData);
-  console.log(json);
 }
 ```
 
-### Parsing Product Listings
+### Product Listing Extraction
 
-E-commerce scraping requires extracting consistent data from product cards or listings across multiple pages.
+E-commerce product listings typically contain price, title, image, URL, and sometimes ratings or availability. Here's a robust extractor for product data:
 
 ```typescript
-// product-extractor.ts
+// src/content-script/extractors/ProductExtractor.ts
 
-interface Product {
-  id: string;
+import { DataExtractor, ExtractionOptions } from './DataExtractor';
+
+export interface Product {
   title: string;
   price: string;
   originalPrice?: string;
   currency: string;
   imageUrl: string;
   productUrl: string;
-  rating?: string;
+  rating?: number;
   reviewCount?: number;
-  availability: string;
+  inStock?: boolean;
   seller?: string;
 }
 
-class ProductExtractor {
-  /**
-   * Extracts product data from a single product element
-   */
-  static extractProduct(element: Element): Product {
-    const titleEl = element.querySelector('.product-title, .item-title, [data-testid="product-title"]');
-    const priceEl = element.querySelector('.price, .product-price, [data-testid="price"]');
-    const imageEl = element.querySelector('img.product-image, .product-img img, [data-testid="product-image"]');
-    const linkEl = element.querySelector('a.product-link, a.item-link, [data-testid="product-link"]');
-    
-    const title = titleEl?.textContent?.trim() ?? 'Unknown Product';
-    const priceText = priceEl?.textContent?.trim() ?? '0.00';
-    const { price, currency, originalPrice } = this.parsePrice(priceText);
-    
-    return {
-      id: this.generateProductId(title, linkEl?.getAttribute('href') ?? ''),
-      title,
-      price,
-      originalPrice,
-      currency,
-      imageUrl: imageEl?.getAttribute('src') ?? imageEl?.getAttribute('data-src') ?? '',
-      productUrl: linkEl?.getAttribute('href') ?? window.location.href,
-      rating: element.querySelector('.rating, .stars')?.textContent?.trim(),
-      reviewCount: this.parseReviewCount(
-        element.querySelector('.review-count, .reviews')?.textContent ?? ''
-      ),
-      availability: this.parseAvailability(element),
-      seller: element.querySelector('.seller, .vendor')?.textContent?.trim()
-    };
+export class ProductExtractor extends DataExtractor<Product[]> {
+  private containerSelector: string;
+  private productSelector: string;
+  
+  // Configurable selectors (customize per site)
+  private selectors = {
+    title: '[data-product-title], .product-title, h3 a, [itemprop="name"]',
+    price: '[data-product-price], .price, [itemprop="price"]',
+    originalPrice: '.original-price, .was-price',
+    image: '[data-product-image], .product-image img, [itemprop="image"]',
+    link: 'a[href]',
+    rating: '[itemprop="ratingValue"], .rating .value',
+    reviewCount: '[itemprop="reviewCount"], .rating count',
+    availability: '[itemprop="availability"], .stock, .availability',
+    seller: '[itemprop="seller"], .seller'
+  };
+
+  constructor(
+    containerSelector: string = '.product-list, .products',
+    productSelector: string = '.product, [data-product]',
+    options: ExtractionOptions = {}
+  ) {
+    super({ ...options, root: document.body });
+    this.containerSelector = containerSelector;
+    this.productSelector = productSelector;
   }
 
-  /**
-   * Extracts all products from a listing page
-   */
-  static extractAll(containerSelector: string): Product[] {
-    const container = document.querySelector(containerSelector);
+  extract(): Product[] {
+    const container = this.querySelector(this.containerSelector);
     if (!container) {
+      console.warn('Product container not found');
       return [];
     }
 
-    const productElements = container.querySelectorAll('.product-item, .item, [data-testid="product-card"]');
-    return Array.from(productElements).map(el => this.extractProduct(el));
+    const productElements = container.querySelectorAll(this.productSelector);
+    return Array.from(productElements).map(element => this.extractProduct(element));
   }
 
-  private static parsePrice(priceText: string): { price: string; currency: string; originalPrice?: string } {
-    // Handle various price formats: "$99.99", "€99,99", "$99.99 $129.99", etc.
-    const match = priceText.match(/[\$€£¥]?\s*(\d+[,.]?\d*)/);
-    const price = match ? match[1].replace(',', '.') : '0.00';
-    
-    let currency = '$';
-    if (priceText.includes('€')) currency = '€';
-    else if (priceText.includes('£')) currency = '£';
-    else if (priceText.includes('¥')) currency = '¥';
-    
-    // Check for original price (sale items often show both)
-    const originalMatch = priceText.match(/\d+[,.]?\d*\s*[\$€£¥].*?(\d+[,.]?\d*)\s*[\$€£¥]/);
-    const originalPrice = originalMatch ? originalMatch[1] : undefined;
-    
-    return { price, currency, originalPrice };
+  private extractProduct(element: Element): Product {
+    const title = this.getText(element, this.selectors.title);
+    const price = this.getText(element, this.selectors.price);
+    const currency = this.extractCurrency(price);
+    const imageUrl = this.getSrc(element, this.selectors.image);
+    const productUrl = this.getAttribute(element, this.selectors.link, 'href');
+    const rating = this.getRating(element);
+    const reviewCount = this.getReviewCount(element);
+    const inStock = this.getAvailability(element);
+    const originalPrice = this.getText(element, this.selectors.originalPrice);
+
+    return {
+      title,
+      price: this.normalizePrice(price),
+      currency,
+      originalPrice: originalPrice ? this.normalizePrice(originalPrice) : undefined,
+      imageUrl: this.resolveUrl(imageUrl),
+      productUrl: this.resolveUrl(productUrl),
+      rating,
+      reviewCount,
+      inStock,
+      seller: this.getText(element, this.selectors.seller)
+    };
   }
 
-  private static parseReviewCount(text: string): number {
-    const match = text.match(/(\d+)/);
-    return match ? parseInt(match[1], 10) : 0;
+  private extractCurrency(priceText: string): string {
+    const match = priceText.match(/[$£€¥₹]/);
+    return match ? match[0] : '$';
   }
 
-  private static parseAvailability(element: Element): string {
-    const availEl = element.querySelector('.availability, .stock, [data-testid="availability"]');
-    const text = availEl?.textContent?.trim()?.toLowerCase() ?? '';
-    
-    if (text.includes('out of stock') || text.includes('unavailable')) return 'out_of_stock';
-    if (text.includes('low stock')) return 'low_stock';
-    return 'in_stock';
+  private normalizePrice(priceText: string): string {
+    return priceText.replace(/[^0-9.,]/g, '').trim();
   }
 
-  private static generateProductId(title: string, url: string): string {
-    const base = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    const urlHash = url.split('/').pop()?.slice(0, 10) ?? '';
-    return `${base}-${urlHash}`.slice(0, 50);
+  private getRating(element: Element): number | undefined {
+    const ratingText = this.getText(element, this.selectors.rating);
+    const rating = parseFloat(ratingText);
+    return isNaN(rating) ? undefined : Math.min(5, Math.max(0, rating));
+  }
+
+  private getReviewCount(element: Element): number | undefined {
+    const countText = this.getText(element, this.selectors.reviewCount);
+    const match = countText.match(/(\d+)/);
+    return match ? parseInt(match[1], 10) : undefined;
+  }
+
+  private getAvailability(element: Element): boolean | undefined {
+    const availText = this.getText(element, this.selectors.availability).toLowerCase();
+    if (availText.includes('out of stock') || availText.includes('unavailable')) {
+      return false;
+    }
+    if (availText.includes('in stock') || availText.includes('available')) {
+      return true;
+    }
+    return undefined;
+  }
+
+  private resolveUrl(url: string): string {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('//')) return `https:${url}`;
+    return new URL(url, window.location.origin).href;
+  }
+
+  private getText(element: Element, selector: string): string {
+    const target = element.querySelector(selector);
+    return target?.textContent?.trim() || '';
+  }
+
+  private getSrc(element: Element, selector: string): string {
+    const target = element.querySelector(selector);
+    return target?.getAttribute('src') || target?.getAttribute('data-src') || '';
   }
 }
 ```
 
-### Extracting Article Content
+### Article Content Extraction
 
-News articles, blog posts, and other content-heavy pages require extracting structured data like title, author, date, and body content.
+Extracting article content requires identifying the main content area and extracting structured fields like title, author, date, and body:
 
 ```typescript
-// article-extractor.ts
+// src/content-script/extractors/ArticleExtractor.ts
 
-interface Article {
+import { DataExtractor, ExtractionOptions } from './DataExtractor';
+
+export interface Article {
   title: string;
   author?: string;
   publishedDate?: string;
   modifiedDate?: string;
-  description?: string;
-  body: string;
-  images: string[];
-  tags: string[];
-  wordCount: number;
-  readingTime: number;
+  content: string;
+  excerpt?: string;
+  featuredImage?: string;
+  tags?: string[];
+  wordCount?: number;
+  url: string;
 }
 
-class ArticleExtractor {
-  /**
-   * Extracts article content from news sites, blogs, etc.
-   */
-  static extract(): Article {
+export class ArticleExtractor extends DataExtractor<Article> {
+  private selectors = {
+    title: 'h1, [itemprop="headline"], .article-title, .post-title',
+    author: '[itemprop="author"], .author, .byline, [rel="author"]',
+    publishedDate: '[itemprop="datePublished"], time[datetime], .published, .post-date',
+    modifiedDate: '[itemprop="dateModified"], .modified, .updated',
+    content: '[itemprop="articleBody"], article, .article-content, .post-content, main',
+    excerpt: '[itemprop="description"], .excerpt, .summary, meta[name="description"]',
+    featuredImage: '[itemprop="image"], .featured-image img, .post-thumbnail img',
+    tags: '[itemprop="keywords"], .tags, .post-tags, [rel="tag"]'
+  };
+
+  constructor(options: ExtractionOptions = {}) {
+    super({ ...options, root: document.body });
+  }
+
+  extract(): Article {
     const title = this.extractTitle();
     const author = this.extractAuthor();
-    const publishedDate = this.extractDate('published');
-    const modifiedDate = this.extractDate('modified');
-    const description = this.extractDescription();
-    const body = this.extractBody();
-    const images = this.extractImages();
+    const publishedDate = this.extractDate(this.selectors.publishedDate);
+    const modifiedDate = this.extractDate(this.selectors.modifiedDate);
+    const content = this.extractContent();
+    const excerpt = this.extractExcerpt();
+    const featuredImage = this.extractFeaturedImage();
     const tags = this.extractTags();
-    
-    const wordCount = this.calculateWordCount(body);
-    const readingTime = Math.ceil(wordCount / 200); // Average reading speed
+    const wordCount = content ? content.split(/\s+/).length : undefined;
 
     return {
       title,
       author,
       publishedDate,
       modifiedDate,
-      description,
-      body,
-      images,
+      content,
+      excerpt,
+      featuredImage,
       tags,
       wordCount,
-      readingTime
+      url: window.location.href
     };
   }
 
-  private static extractTitle(): string {
-    // Try multiple common title selectors in order of specificity
-    const selectors = [
-      'article h1',
-      '.article-title',
-      '.post-title',
-      'h1.title',
-      '[itemprop="headline"]',
-      'h1'
-    ];
-    
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el?.textContent?.trim()) {
-        return el.textContent.trim();
+  private extractTitle(): string {
+    for (const selector of this.selectors.title.split(', ')) {
+      const element = this.querySelector(selector);
+      if (element?.textContent?.trim()) {
+        return element.textContent.trim();
       }
     }
-    
-    return document.title;
+    return document.title || '';
   }
 
-  private static extractAuthor(): string | undefined {
-    const selectors = [
-      '[rel="author"]',
-      '.author-name',
-      '.byline',
-      '[itemprop="author"]',
-      '.article-author',
-      'meta[name="author"]'
-    ];
-    
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) {
-        if (el.tagName === 'META') {
-          return el.getAttribute('content') ?? undefined;
-        }
-        const text = el.textContent?.trim();
-        if (text) {
-          // Clean up common prefixes
-          return text.replace(/^(by|written by|author:)\s*/i, '');
-        }
+  private extractAuthor(): string | undefined {
+    for (const selector of this.selectors.author.split(', ')) {
+      const element = this.querySelector(selector);
+      const author = element?.textContent?.trim();
+      if (author) {
+        return author.replace(/^by\s+/i, '');
       }
     }
-    
     return undefined;
   }
 
-  private static extractDate(type: 'published' | 'modified'): string | undefined {
-    const selectors = [
-      `[itemprop="${type}Date"]`,
-      `.article-date`,
-      `.post-date`,
-      `time[datetime]`,
-      `meta[property="article:${type}_time}"]`
-    ];
+  private extractDate(selector: string): string | undefined {
+    const element = this.querySelector(selector);
+    if (!element) return undefined;
     
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) {
-        if (el.tagName === 'META') {
-          return el.getAttribute('content') ?? undefined;
+    const datetime = element.getAttribute('datetime');
+    if (datetime) return datetime;
+    
+    const text = element.textContent?.trim();
+    if (text) {
+      try {
+        const parsed = new Date(text);
+        if (!isNaN(parsed.getTime())) {
+          return parsed.toISOString();
         }
-        if (el.hasAttribute('datetime')) {
-          return el.getAttribute('datetime') ?? undefined;
-        }
-        if (el.hasAttribute('content')) {
-          return el.getAttribute('content') ?? undefined;
-        }
-        return el.textContent?.trim();
-      }
+      } catch {}
     }
-    
-    return undefined;
+    return text;
   }
 
-  private static extractDescription(): string | undefined {
-    const selectors = [
-      'meta[name="description"]',
-      'meta[property="og:description"]',
-      '.article-description',
-      '.post-description',
-      '. excerpt'
-    ];
+  private extractContent(): string {
+    const contentElement = this.querySelector(this.selectors.content);
+    if (!contentElement) return '';
+
+    // Clone to avoid modifying the actual page
+    const clone = contentElement.cloneNode(true) as Element;
     
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) {
-        const content = el.getAttribute('content') ?? el.textContent?.trim();
-        if (content) return content;
-      }
-    }
-    
-    return undefined;
+    // Remove unwanted elements
+    const unwanted = clone.querySelectorAll('script, style, nav, footer, aside, .advertisement, .ad, .comments, .share, .social');
+    unwanted.forEach(el => el.remove());
+
+    // Get text content
+    return clone.textContent?.trim() || '';
   }
 
-  private static extractBody(): string {
-    const selectors = [
-      'article',
-      '.article-body',
-      '.post-content',
-      '.entry-content',
-      '[itemprop="articleBody"]',
-      '.content'
-    ];
+  private extractExcerpt(): string | undefined {
+    let excerpt = this.getText(this.selectors.excerpt);
+    if (excerpt) return excerpt;
     
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) {
-        // Clone and clean the element
-        const clone = el.cloneNode(true) as Element;
-        
-        // Remove unwanted elements
-        const unwanted = clone.querySelectorAll('script, style, nav, footer, aside, .ads, .comments, .share-buttons');
-        unwanted.forEach(el => el.remove());
-        
-        return clone.textContent?.trim() ?? '';
-      }
-    }
-    
-    // Fallback: get all paragraph text
-    const paragraphs = document.querySelectorAll('p');
-    return Array.from(paragraphs)
-      .map(p => p.textContent?.trim())
-      .filter(Boolean)
-      .join('\n\n');
+    const content = this.extractContent();
+    return content ? content.substring(0, 200).trim() + '...' : undefined;
   }
 
-  private static extractImages(): string[] {
-    const images: string[] = [];
-    const imgElements = document.querySelectorAll('article img, .content img, .post-content img');
+  private extractFeaturedImage(): string | undefined {
+    const element = this.querySelector(this.selectors.featuredImage);
+    if (!element) return undefined;
     
-    imgElements.forEach(img => {
-      const src = img.getAttribute('src') ?? img.getAttribute('data-src');
-      if (src && !src.includes('data:')) {
-        images.push(src);
+    return element.getAttribute('src') || 
+           element.getAttribute('data-src') || 
+           element.getAttribute('content');
+  }
+
+  private extractTags(): string[] | undefined {
+    const tagElements = this.root.querySelectorAll(this.selectors.tags);
+    if (tagElements.length === 0) return undefined;
+    
+    return Array.from(tagElements)
+      .map(el => el.textContent?.trim())
+      .filter(Boolean) as string[];
+  }
+}
+```
+
+## Handling Dynamic Content
+
+Modern web applications load content asynchronously, making traditional DOM-based extraction insufficient. This section covers three powerful techniques for handling dynamic content.
+
+### Waiting for Elements
+
+For pages that load content after initial render but don't use complex frameworks, a simple waiting utility often suffices:
+
+```typescript
+// src/content-script/utils/WaitUtils.ts
+
+export async function waitForElement(
+  selector: string,
+  options: {
+    root?: Element;
+    timeout?: number;
+    state?: 'attached' | 'visible';
+  } = {}
+): Promise<Element | null> {
+  const {
+    root = document,
+    timeout = 10000,
+    state = 'attached'
+  } = options;
+
+  // Check if element already exists
+  const existing = root.querySelector(selector);
+  if (existing) {
+    if (state === 'visible' && !isVisible(existing)) {
+      return waitForElement(selector, { ...options, root });
+    }
+    return existing;
+  }
+
+  return new Promise((resolve) => {
+    const observer = new MutationObserver((mutations, obs) => {
+      const element = root.querySelector(selector);
+      if (element) {
+        if (state === 'visible' && !isVisible(element)) {
+          // Element exists but not visible yet, keep waiting
+          return;
+        }
+        obs.disconnect();
+        resolve(element);
       }
     });
-    
-    return images;
+
+    observer.observe(root, {
+      childList: true,
+      subtree: true
+    });
+
+    setTimeout(() => {
+      observer.disconnect();
+      resolve(null);
+    }, timeout);
+  });
+}
+
+function isVisible(element: Element): boolean {
+  const style = window.getComputedStyle(element);
+  return style.display !== 'none' && 
+         style.visibility !== 'hidden' && 
+         style.opacity !== '0' &&
+         element.offsetParent !== null;
+}
+```
+
+### Intercepting Network Requests
+
+For SPAs that load data via APIs, intercepting network requests can be more reliable than DOM extraction:
+
+```typescript
+// src/content-script/utils/NetworkInterceptor.ts
+
+type RequestHandler = (data: unknown) => void;
+
+export class NetworkInterceptor {
+  private originalFetch: typeof fetch;
+  private originalXHR: typeof XMLHttpRequest;
+  private handlers: Map<string, RequestHandler[]> = new Map();
+
+  constructor() {
+    this.originalFetch = window.fetch;
+    this.originalXHR = window.XMLHttpRequest;
   }
 
-  private static extractTags(): string[] {
-    const selectors = [
-      '.tags',
-      '.article-tags',
-      '[rel="tag"]',
-      '.keywords'
-    ];
-    
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) {
-        const tags = el.querySelectorAll('a, span, meta[content]');
-        return Array.from(tags)
-          .map(tag => tag.textContent?.trim() ?? tag.getAttribute('content') ?? '')
-          .filter(Boolean);
+  intercept(): void {
+    // Intercept fetch
+    window.fetch = async (...args: Parameters<typeof fetch>) => {
+      const response = await this.originalFetch(...args);
+      this.processFetchResponse(args, response.clone());
+      return response;
+    };
+
+    // Intercept XHR
+    const self = this;
+    window.XMLHttpRequest = class extends this.originalXHR {
+      private url: string;
+      
+      open(method: string, url: string | URL, ...args: Parameters<XMLHttpRequest['open']>): void {
+        this.url = url.toString();
+        return super.open(method, url, ...args);
       }
-    }
-    
-    return [];
+
+      send(...args: Parameters<XMLHttpRequest['send']>): void {
+        const handlers = self.handlers.get(this.url);
+        
+        this.addEventListener('load', () => {
+          if (this.responseType === '' || this.responseType === 'text') {
+            try {
+              const data = JSON.parse(this.responseText);
+              handlers?.forEach(handler => handler(data));
+            } catch {}
+          } else if (this.responseType === 'json') {
+            try {
+              const data = this.response;
+              handlers?.forEach(handler => handler(data));
+            } catch {}
+          }
+        });
+
+        return super.send(...args);
+      }
+    };
   }
 
-  private static calculateWordCount(text: string): number {
-    return text.split(/\s+/).filter(word => word.length > 0).length;
+  private async processFetchResponse(args: Parameters<typeof fetch>, response: Response): Promise<void> {
+    const url = args[0]?.toString() || '';
+    const handlers = this.handlers.get(url);
+    
+    if (!handlers?.length) return;
+
+    try {
+      const contentType = response.headers.get('content-type');
+      if (contentType?.includes('application/json')) {
+        const data = await response.json();
+        handlers.forEach(handler => handler(data));
+      }
+    } catch {}
+  }
+
+  on(urlPattern: string, handler: RequestHandler): void {
+    const normalized = this.normalizePattern(urlPattern);
+    const existing = this.handlers.get(normalized) || [];
+    existing.push(handler);
+    this.handlers.set(normalized, existing);
+  }
+
+  private normalizePattern(pattern: string): string {
+    return pattern.replace(/\*/g, '.*');
+  }
+}
+```
+
+### Complete Dynamic Content Watcher
+
+Combining these techniques into a comprehensive solution:
+
+```typescript
+// src/content-script/DynamicContentWatcher.ts
+
+import { DOMWatcher } from './utils/DOMWatcher';
+import { waitForElement } from './utils/WaitUtils';
+import { NetworkInterceptor } from './utils/NetworkInterceptor';
+
+export interface WatcherConfig {
+  watchDOM?: boolean;
+  watchNetwork?: boolean;
+  debounceMs?: number;
+  timeout?: number;
+}
+
+export class DynamicContentWatcher {
+  private domWatcher: DOMWatcher | null = null;
+  private networkInterceptor: NetworkInterceptor;
+  private onContentReady: () => void;
+  private hasTriggered = false;
+
+  constructor(
+    private triggerSelector: string,
+    private config: WatcherConfig = {},
+    onContentReady: () => void
+  ) {
+    this.onContentReady = () => {
+      if (!this.hasTriggered) {
+        this.hasTriggered = true;
+        onContentReady();
+      }
+    };
+    this.networkInterceptor = new NetworkInterceptor();
+  }
+
+  async start(): Promise<void> {
+    // First, try waiting for the element directly
+    const element = await waitForElement(this.triggerSelector, {
+      timeout: this.config.timeout || 5000
+    });
+
+    if (element) {
+      this.onContentReady();
+      return;
+    }
+
+    // Set up DOM watcher if enabled
+    if (this.config.watchDOM !== false) {
+      this.domWatcher = new DOMWatcher(
+        document.body,
+        () => {
+          const el = document.querySelector(this.triggerSelector);
+          if (el) {
+            this.domWatcher?.stop();
+            this.onContentReady();
+          }
+        },
+        { childList: true, subtree: true },
+        this.config.debounceMs || 300
+      );
+      this.domWatcher.start();
+    }
+
+    // Set up network interception if enabled
+    if (this.config.watchNetwork !== false) {
+      this.networkInterceptor.intercept();
+    }
+  }
+
+  stop(): void {
+    this.domWatcher?.stop();
+  }
+
+  onApiResponse(urlPattern: string, handler: (data: unknown) => void): void {
+    this.networkInterceptor.on(urlPattern, handler);
   }
 }
 ```
 
 ## Message Passing for Data Flow
 
-Content scripts run in an isolated world and cannot directly communicate with background scripts or other extension components. Chrome provides message passing APIs to facilitate communication between these different contexts.
+Content scripts cannot directly access Chrome APIs like `chrome.storage` or communicate with other extension components. Message passing bridges this gap.
 
-### One-off Messages with sendMessage
+### One-Off Messages with sendMessage
 
-For simple, single-request data extraction, `chrome.runtime.sendMessage` provides a straightforward way to send data from content scripts to the background script.
-
-```typescript
-// content-script.ts - Sending extracted data
-
-// Extract data from the page
-const productData = ProductExtractor.extractAll('.product-list')[0];
-
-// Send to background script
-chrome.runtime.sendMessage({
-  type: 'PRODUCT_EXTRACTED',
-  payload: productData,
-  sourceUrl: window.location.href,
-  timestamp: Date.now()
-}).then(() => {
-  console.log('Data sent successfully');
-}).catch(error => {
-  console.error('Failed to send data:', error);
-});
-```
-
-### Long-lived Connections with connect
-
-For streaming data or maintaining persistent connections, `chrome.runtime.connect` provides a more efficient approach.
+For simple, single-shot data transfers:
 
 ```typescript
-// content-script.ts - Streaming data extraction
+// src/content-script/messaging/Sender.ts
 
-class ScraperClient {
-  private port: chrome.runtime.Port | null = null;
-  private reconnectAttempts = 0;
-  private maxReconnectAttempts = 3;
-
-  connect(): void {
-    this.port = chrome.runtime.connect({ name: 'scraper-stream' });
-    
-    this.port.onMessage.addListener((message) => {
-      this.handleMessage(message);
-    });
-    
-    this.port.onDisconnect.addListener(() => {
-      this.handleDisconnect();
-    });
-  }
-
-  sendData(data: unknown): void {
-    if (this.port) {
-      this.port.postMessage({
-        type: 'SCRAPED_DATA',
-        payload: data
-      });
-    }
-  }
-
-  private handleMessage(message: { type: string; payload?: unknown }): void {
-    switch (message.type) {
-      case 'START_SCRAPING':
-        this.startScraping();
-        break;
-      case 'STOP_SCRAPING':
-        this.stopScraping();
-        break;
-      case 'REQUEST_RETRY':
-        this.retryLastExtraction();
-        break;
-    }
-  }
-
-  private handleDisconnect(): void {
-    if (this.reconnectAttempts < this.maxReconnectAttempts) {
-      this.reconnectAttempts++;
-      setTimeout(() => this.connect(), 1000 * this.reconnectAttempts);
-    }
-  }
-
-  private startScraping(): void {
-    // Implement scraping logic
-    const data = ProductExtractor.extractAll('.products .product');
-    this.sendData(data);
-  }
-
-  private stopScraping(): void {
-    // Cleanup logic
-  }
-
-  private retryLastExtraction(): void {
-    // Retry logic
-  }
-
-  disconnect(): void {
-    this.port?.disconnect();
-    this.port = null;
-  }
-}
-```
-
-### Background Script as Data Hub
-
-The background script acts as a central hub for receiving, processing, and storing scraped data.
-
-```typescript
-// background-script.ts
-
-interface ScraperMessage {
-  type: string;
-  payload?: unknown;
-  sourceUrl?: string;
-  timestamp?: number;
+export interface ScrapedDataMessage {
+  type: 'SCRAPED_DATA';
+  payload: {
+    pageUrl: string;
+    timestamp: number;
+    data: unknown;
+  };
 }
 
-class DataAggregationHub {
-  private dataStore: Map<string, unknown[]> = new Map();
-  private connectedClients: Set<chrome.runtime.Port> = new Set();
+export class MessageSender {
+  private extensionId: string;
 
-  constructor() {
-    this.setupMessageListeners();
-    this.setupConnectionListeners();
+  constructor(extensionId?: string) {
+    this.extensionId = extensionId || chrome.runtime.id;
   }
 
-  private setupMessageListeners(): void {
-    chrome.runtime.onMessage.addListener((message: ScraperMessage, sender, sendResponse) => {
-      this.handleMessage(message, sender).then(sendResponse);
-      return true; // Keep message channel open for async response
-    });
-  }
-
-  private setupConnectionListeners(): void {
-    chrome.runtime.onConnect.addListener((port) => {
-      if (port.name === 'scraper-stream') {
-        this.connectedClients.add(port);
-        
-        port.onMessage.addListener((message: ScraperMessage) => {
-          this.handleMessage(message, { tab: { id: port.sender?.tab?.id } } as chrome.runtime.MessageSender);
-        });
-        
-        port.onDisconnect.addListener(() => {
-          this.connectedClients.delete(port);
-        });
+  async sendData(data: unknown, pageUrl: string = window.location.href): Promise<boolean> {
+    const message: ScrapedDataMessage = {
+      type: 'SCRAPED_DATA',
+      payload: {
+        pageUrl,
+        timestamp: Date.now(),
+        data
       }
+    };
+
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage(
+        this.extensionId,
+        message,
+        (response) => {
+          if (chrome.runtime.lastError) {
+            console.error('Message send failed:', chrome.runtime.lastError);
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        }
+      );
     });
   }
 
-  private async handleMessage(message: ScraperMessage, sender: chrome.runtime.MessageSender): Promise<{ success: boolean }> {
-    const { type, payload, sourceUrl, timestamp } = message;
-
-    switch (type) {
-      case 'PRODUCT_EXTRACTED':
-        return this.handleProductData(payload, sourceUrl, timestamp);
-      case 'ARTICLE_EXTRACTED':
-        return this.handleArticleData(payload, sourceUrl, timestamp);
-      case 'TABLE_EXTRACTED':
-        return this.handleTableData(payload, sourceUrl, timestamp);
-      case 'GET_STORED_DATA':
-        return { success: true, data: this.getStoredData(sourceUrl) };
-      case 'CLEAR_DATA':
-        return this.clearStoredData(sourceUrl);
-      default:
-        console.warn('Unknown message type:', type);
-        return { success: false, error: 'Unknown message type' };
-    }
-  }
-
-  private async handleProductData(payload: unknown, sourceUrl?: string, timestamp?: number): Promise<{ success: boolean }> {
-    const key = 'products';
-    const existing = this.dataStore.get(key) ?? [];
-    existing.push({ ...payload as object, sourceUrl, timestamp });
-    this.dataStore.set(key, existing);
-    
-    // Persist to storage
-    await chrome.storage.local.set({ [key]: existing });
-    
-    return { success: true };
-  }
-
-  private async handleArticleData(payload: unknown, sourceUrl?: string, timestamp?: number): Promise<{ success: boolean }> {
-    const key = 'articles';
-    const existing = this.dataStore.get(key) ?? [];
-    existing.push({ ...payload as object, sourceUrl, timestamp });
-    this.dataStore.set(key, existing);
-    
-    await chrome.storage.local.set({ [key]: existing });
-    
-    return { success: true };
-  }
-
-  private async handleTableData(payload: unknown, sourceUrl?: string, timestamp?: number): Promise<{ success: boolean }> {
-    const key = 'tables';
-    const existing = this.dataStore.get(key) ?? [];
-    existing.push({ ...payload as object, sourceUrl, timestamp });
-    this.dataStore.set(key, existing);
-    
-    await chrome.storage.local.set({ [key]: existing });
-    
-    return { success: true };
-  }
-
-  private getStoredData(key?: string): unknown[] {
-    if (key) {
-      return this.dataStore.get(key) ?? [];
-    }
-    return Object.fromEntries(this.dataStore);
-  }
-
-  private async clearStoredData(key?: string): Promise<{ success: boolean }> {
-    if (key) {
-      this.dataStore.delete(key);
-      await chrome.storage.local.remove(key);
-    } else {
-      this.dataStore.clear();
-      await chrome.storage.local.clear();
-    }
-    return { success: true };
-  }
-
-  broadcast(message: object): void {
-    this.connectedClients.forEach(port => {
-      port.postMessage(message);
+  async requestData<T>(request: { action: string; payload?: unknown }): Promise<T | null> {
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage(
+        this.extensionId,
+        request,
+        (response) => {
+          if (chrome.runtime.lastError) {
+            console.error('Message request failed:', chrome.runtime.lastError);
+            resolve(null);
+          } else {
+            resolve(response as T);
+          }
+        }
+      );
     });
   }
 }
+```
 
-// Initialize the hub
-const hub = new DataAggregationHub();
+### Background Script Message Handler
+
+The background script acts as a central hub for receiving, processing, and storing scraped data:
+
+```typescript
+// src/background/messages/DataHandler.ts
+
+import { ScrapedDataMessage } from '../content-script/messaging/Sender';
+import { DataStore } from '../storage/DataStore';
+
+export class BackgroundMessageHandler {
+  private dataStore: DataStore;
+
+  constructor(dataStore: DataStore) {
+    this.dataStore = dataStore;
+    this.registerListeners();
+  }
+
+  private registerListeners(): void {
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      this.handleMessage(message, sender)
+        .then(sendResponse)
+        .catch(error => {
+          console.error('Message handling error:', error);
+          sendResponse({ error: error.message });
+        });
+      
+      // Return true to indicate async response
+      return true;
+    });
+  }
+
+  private async handleMessage(
+    message: ScrapedDataMessage | { action: string; payload?: unknown },
+    sender: chrome.runtime.MessageSender
+  ): Promise<unknown> {
+    switch (message.type) {
+      case 'SCRAPED_DATA':
+        return this.handleScrapedData(message as ScrapedDataMessage);
+      
+      case 'GET_STORED_DATA':
+        return this.dataStore.getAll();
+      
+      case 'CLEAR_DATA':
+        return this.dataStore.clear();
+        
+      default:
+        if ('action' in message) {
+          return this.handleCustomAction(message.action, message.payload, sender);
+        }
+        throw new Error(`Unknown message type: ${message}`);
+    }
+  }
+
+  private async handleScrapedData(message: ScrapedDataMessage): Promise<{ success: boolean }> {
+    const { pageUrl, timestamp, data } = message.payload;
+    
+    // Store the scraped data
+    await this.dataStore.add({
+      id: `${pageUrl}-${timestamp}`,
+      pageUrl,
+      timestamp,
+      data,
+      source: 'content_script'
+    });
+
+    return { success: true };
+  }
+
+  private async handleCustomAction(
+    action: string,
+    payload: unknown,
+    sender: chrome.runtime.MessageSender
+  ): Promise<unknown> {
+    // Handle custom actions from content scripts or popup
+    console.log(`Custom action: ${action}`, payload);
+    return { handled: true };
+  }
+}
 ```
 
 ## Data Storage and Export
 
-Once you've extracted data, you need to store it effectively and provide export capabilities. Chrome extensions offer several storage options with different characteristics.
+Once data is scraped, you need somewhere to store it. Chrome extensions offer several storage options with different trade-offs.
 
-### Using chrome.storage.local
-
-For most scraping extensions, `chrome.storage.local` provides sufficient capacity with automatic persistence across sessions.
+### Data Storage Class
 
 ```typescript
-// data-store.ts
+// src/background/storage/DataStore.ts
 
-interface StoredItem {
+export interface StoredItem<T = unknown> {
   id: string;
-  data: unknown;
-  sourceUrl: string;
+  pageUrl: string;
   timestamp: number;
-  tags?: string[];
+  data: T;
+  source: string;
 }
 
-class DataStore {
+export interface StorageOptions {
+  maxItems?: number;
+  maxSizeBytes?: number;
+}
+
+export class DataStore {
+  private storageArea: chrome.storage.StorageArea;
   private readonly STORAGE_KEY = 'scraped_data';
   private readonly MAX_ITEMS = 1000;
+  private readonly MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
 
-  /**
-   * Stores scraped data with metadata
-   */
-  async save(item: Omit<StoredItem, 'id' | 'timestamp'>): Promise<string> {
-    const id = this.generateId();
-    const storedItem: StoredItem = {
-      ...item,
-      id,
-      timestamp: Date.now()
-    };
-
-    const items = await this.getAll();
-    items.push(storedItem);
-
-    // Implement FIFO if over limit
-    if (items.length > this.MAX_ITEMS) {
-      items.shift();
-    }
-
-    await chrome.storage.local.set({ [this.STORAGE_KEY]: items });
-    return id;
+  constructor(
+    private options: StorageOptions = {}
+  ) {
+    this.storageArea = chrome.storage.local;
   }
 
-  /**
-   * Retrieves all stored items
-   */
-  async getAll(): Promise<StoredItem[]> {
-    const result = await chrome.storage.local.get(this.STORAGE_KEY);
-    return result[this.STORAGE_KEY] ?? [];
-  }
-
-  /**
-   * Retrieves items by source URL
-   */
-  async getBySource(sourceUrl: string): Promise<StoredItem[]> {
-    const items = await this.getAll();
-    return items.filter(item => item.sourceUrl === sourceUrl);
-  }
-
-  /**
-   * Searches items by tags
-   */
-  async searchByTags(tags: string[]): Promise<StoredItem[]> {
-    const items = await this.getAll();
-    return items.filter(item => 
-      item.tags?.some(tag => tags.includes(tag))
-    );
-  }
-
-  /**
-   * Deletes a specific item by ID
-   */
-  async delete(id: string): Promise<void> {
-    const items = await this.getAll();
-    const filtered = items.filter(item => item.id !== id);
-    await chrome.storage.local.set({ [this.STORAGE_KEY]: filtered });
-  }
-
-  /**
-   * Clears all stored data
-   */
-  async clear(): Promise<void> {
-    await chrome.storage.local.remove(this.STORAGE_KEY);
-  }
-
-  /**
-   * Exports data in specified format
-   */
-  async export(format: 'json' | 'csv' = 'json'): Promise<string> {
+  async add<T>(item: StoredItem<T>): Promise<void> {
     const items = await this.getAll();
     
-    if (format === 'json') {
-      return JSON.stringify(items, null, 2);
+    // Add new item
+    items.push(item as StoredItem);
+    
+    // Trim if exceeds limits
+    while (items.length > (this.options.maxItems || this.MAX_ITEMS)) {
+      items.shift(); // Remove oldest
     }
+    
+    await this.storageArea.set({ [this.STORAGE_KEY]: items });
+  }
 
-    // CSV export
+  async getAll<T = unknown>(): Promise<StoredItem<T>[]> {
+    const result = await this.storageArea.get(this.STORAGE_KEY);
+    return (result[this.STORAGE_KEY] as StoredItem<T>[]) || [];
+  }
+
+  async getByUrl<T = unknown>(url: string): Promise<StoredItem<T>[]> {
+    const items = await this.getAll<T>();
+    return items.filter(item => item.pageUrl === url);
+  }
+
+  async clear(): Promise<void> {
+    await this.storageArea.remove(this.STORAGE_KEY);
+  }
+
+  async exportToJSON(): Promise<string> {
+    const items = await this.getAll();
+    return JSON.stringify(items, null, 2);
+  }
+
+  async exportToCSV(): Promise<string> {
+    const items = await this.getAll();
+    
     if (items.length === 0) return '';
     
-    const headers = Object.keys(items[0]);
-    const csvRows = [headers.join(',')];
+    // Flatten the data for CSV
+    const flattened = items.map(item => ({
+      id: item.id,
+      pageUrl: item.pageUrl,
+      timestamp: new Date(item.timestamp).toISOString(),
+      source: item.source,
+      ...(typeof item.data === 'object' ? item.data as Record<string, unknown> : { data: item.data })
+    }));
     
-    for (const item of items) {
-      const values = headers.map(header => {
-        const value = item[header as keyof StoredItem];
-        const stringValue = JSON.stringify(value);
+    const headers = Object.keys(flattened[0]);
+    const rows = flattened.map(row => 
+      headers.map(header => {
+        const value = row[header];
+        const stringValue = String(value ?? '');
         // Escape quotes and wrap in quotes if contains comma
         if (stringValue.includes(',') || stringValue.includes('"')) {
           return `"${stringValue.replace(/"/g, '""')}"`;
         }
         return stringValue;
-      });
-      csvRows.push(values.join(','));
-    }
+      }).join(',')
+    );
     
-    return csvRows.join('\n');
+    return [headers.join(','), ...rows].join('\n');
   }
 
-  /**
-   * Copies data to clipboard
-   */
-  async copyToClipboard(format: 'json' | 'csv' = 'json'): Promise<boolean> {
-    const data = await this.export(format);
-    
+  async copyToClipboard(text: string): Promise<boolean> {
     try {
-      await navigator.clipboard.writeText(data);
+      await navigator.clipboard.writeText(text);
       return true;
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
+      console.error('Clipboard copy failed:', error);
       return false;
     }
-  }
-
-  private generateId(): string {
-    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  }
-}
-```
-
-### IndexedDB for Large Datasets
-
-For extensions that need to store large amounts of scraped data, IndexedDB provides significantly more storage capacity than chrome.storage. In Manifest V3, you can use IndexedDB through an offscreen document.
-
-```typescript
-// indexeddb-store.ts
-
-class IndexedDBStore {
-  private dbName: string;
-  private storeName: string;
-  private db: IDBDatabase | null = null;
-
-  constructor(dbName: string = 'ScraperDB', storeName: string = 'scraped_data') {
-    this.dbName = dbName;
-    this.storeName = storeName;
-  }
-
-  async init(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, 1);
-
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-
-      request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
-        if (!db.objectStoreNames.contains(this.storeName)) {
-          const store = db.createObjectStore(this.storeName, { keyPath: 'id' });
-          store.createIndex('sourceUrl', 'sourceUrl', { unique: false });
-          store.createIndex('timestamp', 'timestamp', { unique: false });
-        }
-      };
-    });
-  }
-
-  async add(item: object): Promise<string> {
-    if (!this.db) await this.init();
-    
-    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const fullItem = { ...item, id, timestamp: Date.now() };
-
-    return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([this.storeName], 'readwrite');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.add(fullItem);
-
-      request.onsuccess = () => resolve(id);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async getAll(): Promise<object[]> {
-    if (!this.db) await this.init();
-
-    return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([this.storeName], 'readonly');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.getAll();
-
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async getBySource(sourceUrl: string): Promise<object[]> {
-    if (!this.db) await this.init();
-
-    return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([this.storeName], 'readonly');
-      const store = transaction.objectStore(this.storeName);
-      const index = store.index('sourceUrl');
-      const request = index.getAll(sourceUrl);
-
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async clear(): Promise<void> {
-    if (!this.db) await this.init();
-
-    return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([this.storeName], 'readwrite');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.clear();
-
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
   }
 }
 ```
 
 ## Pagination and Batch Scraping
 
-Extracting data from multiple pages requires handling pagination effectively. This involves detecting pagination controls, following links, implementing rate limiting, and tracking progress.
+Real-world scraping often involves multiple pages. A robust pagination handler manages this complexity:
 
 ```typescript
-// pagination-handler.ts
+// src/content-script/pagination/PaginationHandler.ts
 
-interface PaginationConfig {
-  delayMs: number;
-  maxRetries: number;
-  retryDelayMs: number;
-  maxPages: number;
+export interface PaginationConfig {
+  nextButtonSelector: string;
+  pageIndicatorSelector?: string;
+  delay?: number;
+  maxPages?: number;
+  retryCount?: number;
+  retryDelay?: number;
+  onPageChange?: (pageNumber: number) => void;
+  shouldStop?: (pageNumber: number, url: string) => boolean;
 }
 
-interface PaginationState {
-  currentPage: number;
-  totalPages: number;
-  scrapedUrls: Set<string>;
-  failedUrls: string[];
-  isComplete: boolean;
-}
+export class PaginationHandler {
+  private currentPage: number = 1;
+  private isProcessing: boolean = false;
+  private shouldStop: boolean = false;
 
-class PaginationHandler {
-  private config: PaginationConfig;
-  private state: PaginationState;
-  private onPageScraped: (url: string, data: unknown) => Promise<void>;
-  private shouldContinue: () => boolean;
-
-  constructor(
-    onPageScraped: (url: string, data: unknown) => Promise<void>,
-    shouldContinue: () => boolean,
-    config: Partial<PaginationConfig> = {}
-  ) {
+  constructor(private config: PaginationConfig) {
     this.config = {
-      delayMs: config.delayMs ?? 2000,
-      maxRetries: config.maxRetries ?? 3,
-      retryDelayMs: config.retryDelayMs ?? 5000,
-      maxPages: config.maxPages ?? 50
-    };
-
-    this.onPageScraped = onPageScraped;
-    this.shouldContinue = shouldContinue;
-    this.state = {
-      currentPage: 0,
-      totalPages: 0,
-      scrapedUrls: new Set(),
-      failedUrls: [],
-      isComplete: false
+      delay: 2000,
+      maxPages: Infinity,
+      retryCount: 3,
+      retryDelay: 1000,
+      nextButtonSelector: '[rel="next"], .next, .pagination-next a, a[href*="page"]',
+      ...config
     };
   }
 
-  /**
-   * Detects pagination controls on the page
-   */
-  detectPagination(): { nextButton: Element | null; pageNumbers: number[]; hasNext: boolean } {
-    // Try common pagination patterns
-    const nextButton = document.querySelector(
-      '.pagination .next, .pager .next, [rel="next"], a:contains("Next")'
-    );
+  async scrapeAllPages(
+    scrapeCallback: () => Promise<void>
+  ): Promise<{ pagesScraped: number; success: boolean }> {
+    this.shouldStop = false;
+    this.currentPage = 1;
 
-    // Extract page numbers from pagination UI
-    const pageLinks = document.querySelectorAll('.pagination a, .pager a, [data-page]');
-    const pageNumbers: number[] = [];
-    
-    pageLinks.forEach(link => {
-      const pageNum = parseInt(link.textContent?.trim() ?? '', 10);
-      if (!isNaN(pageNum)) {
-        pageNumbers.push(pageNum);
+    while (!this.shouldStop) {
+      if (this.currentPage > (this.config.maxPages || Infinity)) {
+        console.log('Reached max pages limit');
+        break;
       }
-    });
 
-    // Check for "Load More" button
-    const loadMoreBtn = document.querySelector(
-      'button:contains("Load More"), .load-more, [data-action="load-more"]'
-    );
-
-    const hasNext = !!(nextButton || loadMoreBtn);
-
-    return { nextButton: nextButton as Element, pageNumbers, hasNext };
-  }
-
-  /**
-   * Gets the next page URL
-   */
-  getNextPageUrl(): string | null {
-    const { nextButton } = this.detectPagination();
-    
-    if (nextButton) {
-      // Click-based pagination
-      return (nextButton as HTMLAnchorElement).href;
-    }
-
-    // Check URL-based pagination (page=1, page=2, etc.)
-    const url = new URL(window.location.href);
-    const currentPage = parseInt(url.searchParams.get('page') ?? '1', 10);
-    
-    if (currentPage < this.config.maxPages) {
-      url.searchParams.set('page', String(currentPage + 1));
-      return url.toString();
-    }
-
-    return null;
-  }
-
-  /**
-   * Scrapes current page and advances to next
-   */
-  async scrapeCurrentPage(extractFn: () => unknown): Promise<void> {
-    const url = window.location.href;
-    
-    if (this.state.scrapedUrls.has(url)) {
-      console.log('Page already scraped:', url);
-      return;
-    }
-
-    let retries = 0;
-    let lastError: Error | null = null;
-
-    while (retries < this.config.maxRetries) {
+      this.isProcessing = true;
+      
       try {
-        const data = extractFn();
+        await scrapeCallback();
+        this.config.onPageChange?.(this.currentPage);
         
-        if (data) {
-          await this.onPageScraped(url, data);
-          this.state.scrapedUrls.add(url);
-          this.state.currentPage++;
-          console.log(`Successfully scraped page ${this.state.currentPage}: ${url}`);
-          return;
+        // Try to go to next page
+        const hasNext = await this.goToNextPage();
+        
+        if (!hasNext) {
+          console.log('No more pages found');
+          break;
         }
         
-        lastError = new Error('No data extracted');
+        this.currentPage++;
+        
+        // Rate limiting
+        await this.delay(this.config.delay || 2000);
+        
       } catch (error) {
-        lastError = error as Error;
-        console.error(`Error scraping ${url} (attempt ${retries + 1}):`, error);
-      }
-
-      retries++;
-      
-      if (retries < this.config.maxRetries) {
-        await this.delay(this.config.retryDelayMs);
+        console.error(`Error on page ${this.currentPage}:`, error);
+        
+        const shouldRetry = await this.handleError(error);
+        if (!shouldRetry) {
+          break;
+        }
+      } finally {
+        this.isProcessing = false;
       }
     }
 
-    this.state.failedUrls.push(url);
-    console.error(`Failed to scrape after ${this.config.maxRetries} attempts:`, lastError);
+    return { pagesScraped: this.currentPage, success: !this.shouldStop };
   }
 
-  /**
-   * Navigates to next page using click
-   */
-  async clickNext(): Promise<boolean> {
-    const { nextButton } = this.detectPagination();
+  private async goToNextPage(): Promise<boolean> {
+    const nextButton = document.querySelector<HTMLAnchorElement>(this.config.nextButtonSelector);
     
     if (!nextButton) {
-      this.state.isComplete = true;
+      // Try to find pagination links by looking for active page + following link
+      const activePage = document.querySelector('.active, .current, [aria-current="page"]');
+      if (activePage) {
+        const nextLink = activePage.nextElementSibling?.querySelector('a');
+        if (nextLink && nextLink instanceof HTMLAnchorElement) {
+          nextLink.click();
+          await this.waitForPageLoad();
+          return true;
+        }
+      }
       return false;
     }
 
-    // Click the next button
-    (nextButton as HTMLElement).click();
-    
-    // Wait for page to load
-    await this.delay(this.config.delayMs);
+    // Check if button is disabled
+    if (nextButton.hasAttribute('disabled') || nextButton.classList.contains('disabled')) {
+      return false;
+    }
+
+    // Navigate to next page
+    nextButton.click();
+    await this.waitForPageLoad();
     
     return true;
   }
 
-  /**
-   * Main scraping loop
-   */
-  async start(extractFn: () => unknown): Promise<PaginationState> {
-    while (this.shouldContinue() && !this.state.isComplete) {
-      await this.scrapeCurrentPage(extractFn);
+  private async waitForPageLoad(): Promise<void> {
+    return new Promise((resolve) => {
+      // Wait for network to settle
+      const timeout = setTimeout(resolve, 3000);
       
-      // Check if we should continue
-      if (!this.shouldContinue() || this.state.currentPage >= this.config.maxPages) {
-        break;
-      }
-
-      // Navigate to next page
-      const hasNext = await this.clickNext();
+      const observer = new MutationObserver(() => {
+        clearTimeout(timeout);
+        observer.disconnect();
+        
+        // Give a bit more time for content to render
+        setTimeout(resolve, 1000);
+      });
       
-      if (!hasNext) {
-        break;
-      }
-
-      // Rate limiting delay between pages
-      await this.delay(this.config.delayMs);
-    }
-
-    return this.state;
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
   }
 
-  /**
-   * Gets current progress
-   */
-  getProgress(): { current: number; total: number; percentage: number } {
-    const percentage = this.state.totalPages > 0
-      ? Math.round((this.state.currentPage / this.state.totalPages) * 100)
-      : 0;
+  private async handleError(error: unknown): Promise<boolean> {
+    let retries = 0;
     
-    return {
-      current: this.state.currentPage,
-      total: this.state.totalPages,
-      percentage
-    };
+    while (retries < (this.config.retryCount || 3)) {
+      await this.delay(this.config.retryDelay || 1000);
+      
+      // Check if page is now accessible
+      if (document.readyState === 'complete') {
+        return true;
+      }
+      
+      retries++;
+    }
+    
+    return false;
+  }
+
+  stop(): void {
+    this.shouldStop = true;
   }
 
   private delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  getCurrentPage(): number {
+    return this.currentPage;
+  }
+
+  isRunning(): boolean {
+    return this.isProcessing;
+  }
 }
-
-// Usage
-const handler = new PaginationHandler(
-  async (url, data) => {
-    const store = new DataStore();
-    await store.save({ data, sourceUrl: url });
-  },
-  () => !isScrapingComplete // External flag
-);
-
-const paginationState = await handler.start(() => {
-  return ProductExtractor.extractAll('.product-grid .product');
-});
 ```
 
 ## Ethical Scraping Guidelines
 
-Building a responsible scraping extension requires understanding and implementing ethical practices. These guidelines help ensure your extension respects website owners, users, and legal requirements.
+Building a scraper is technically straightforward—making it ethical requires discipline. The following guidelines help ensure your scraping activities remain responsible and legal.
 
 ### Respect Robots.txt and Terms of Service
 
-Before scraping any website, check its robots.txt file to understand what the site owner has designated as allowed or disallowed. While robots.txt is not legally binding in all jurisdictions, it represents the site owner's explicit preferences.
+Always check a website's robots.txt file before scraping. This file indicates which paths the site owner intends for automated access. However, robots.txt is not legally binding—it's a courtesy signal. More importantly, review the website's Terms of Service. Many sites explicitly prohibit scraping, and violating these terms can create legal liability even if no technical barriers exist.
 
-```typescript
-// robots-check.ts
+### Implement Rate Limiting
 
-interface RobotsRule {
-  userAgent: string;
-  allow: string[];
-  disallow: string[];
-  crawlDelay?: number;
-}
+Never overwhelm a server with requests. Implement delays between requests (typically 2-10 seconds for aggressive scraping, more for respectful practices). Your extension runs in a user's browser, so you're naturally limited by human browsing speeds—but still add explicit delays. If you receive 429 (Too Many Requests) responses, back off significantly and consider implementing exponential backoff.
 
-class RobotsChecker {
-  private rules: Map<string, RobotsRule> = new Map();
-  private userAgent = 'MyExtensionBot/1.0';
+### Personal vs. Commercial Use
 
-  /**
-   * Fetches and parses robots.txt
-   */
-  async fetchRules(baseUrl: string): Promise<void> {
-    const url = new URL('/robots.txt', baseUrl);
-    
-    try {
-      const response = await fetch(url.toString());
-      const text = await response.text();
-      this.parseRobotsTxt(text);
-    } catch (error) {
-      console.warn('Could not fetch robots.txt:', error);
-      // Default to allowing all if robots.txt not available
-      this.rules.set('*', { userAgent: '*', allow: ['/'], disallow: [] });
-    }
-  }
+The legal landscape differs significantly between personal and commercial scraping. Personal, non-commercial data collection for research or personal organization generally faces lower legal risk. Commercial use—particularly at scale, for competing with the source business, or for resale—carries substantially higher liability. If you're building a commercial product, consult with an attorney familiar with CFAA, GDPR, and applicable local laws.
 
-  /**
-   * Checks if a URL is allowed for scraping
-   */
-  isAllowed(url: string): boolean {
-    const urlObj = new URL(url);
-    const path = urlObj.pathname + urlObj.search;
-    
-    // Check rules for our user agent first, then fall back to '*'
-    let rule = this.rules.get(this.userAgent) ?? this.rules.get('*');
-    
-    if (!rule) {
-      return true; // No rules = allowed
-    }
+### Handle Personal Data Responsibly
 
-    // Check disallow rules first
-    for (const disallow of rule.disallow) {
-      if (this.matchPath(path, disallow)) {
-        // Check if there's a corresponding allow rule
-        const isAllowed = rule.allow.some(allow => 
-          this.matchPath(path, allow) && allow.length > disallow.length
-        );
-        if (!isAllowed) {
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * Gets recommended crawl delay from robots.txt
-   */
-  getCrawlDelay(): number | null {
-    const rule = this.rules.get(this.userAgent) ?? this.rules.get('*');
-    return rule?.crawlDelay ?? null;
-  }
-
-  private parseRobotsTxt(text: string): void {
-    const lines = text.split('\n');
-    let currentUserAgent = '*';
-    
-    this.rules.set('*', { userAgent: '*', allow: [], disallow: [] });
-
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
-
-      const [directive, value] = trimmed.split(':').map(s => s.trim());
-      
-      if (directive.toLowerCase() === 'user-agent') {
-        currentUserAgent = value;
-        if (!this.rules.has(currentUserAgent)) {
-          this.rules.set(currentUserAgent, { 
-            userAgent: currentUserAgent, 
-            allow: [], 
-            disallow: [] 
-          });
-        }
-      } else if (directive.toLowerCase() === 'disallow') {
-        this.rules.get(currentUserAgent)?.disallow.push(value);
-      } else if (directive.toLowerCase() === 'allow') {
-        this.rules.get(currentUserAgent)?.allow.push(value);
-      } else if (directive.toLowerCase() === 'crawl-delay') {
-        const delay = parseFloat(value);
-        if (!isNaN(delay)) {
-          this.rules.get(currentUserAgent)!.crawlDelay = delay;
-        }
-      }
-    }
-  }
-
-  private matchPath(path: string, pattern: string): boolean {
-    // Simple pattern matching - supports * and $
-    if (pattern === '*') return true;
-    if (pattern === '/') return true;
-    
-    const regex = new RegExp(
-      '^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '\\?') + '$'
-    );
-    return regex.test(path);
-  }
-}
-```
-
-### Rate Limiting Best Practices
-
-Always implement rate limiting to avoid overwhelming target servers. A good rule of thumb is to delay at least 1-2 seconds between requests, and significantly more for smaller sites or APIs without rate limiting protections.
-
-### Personal vs. Commercial Use Considerations
-
-The legal distinction between personal and commercial scraping is significant. Personal, non-commercial data extraction for research, archiving, or private use generally carries lower legal risk. Commercial use, however, often requires explicit permission or licenses from data owners.
-
-### GDPR and Privacy Compliance
-
-When dealing with personal data, you must comply with data protection regulations:
-
-- **Data Minimization**: Only collect data you actually need
-- **Purpose Limitation**: Use data only for stated purposes
-- **Storage Limitation**: Don't retain data indefinitely
-- **Security**: Protect stored data with encryption
+If your scraper collects personal data, you may be subject to privacy regulations like GDPR (European users), CCPA (California users), or similar laws. Principles include: collect only necessary data, store it securely, allow users to access and delete their data, and don't retain data longer than needed. If your extension scrapes personal information from social media or other platforms, you bear responsibility for how that data is handled.
 
 ### When NOT to Scrap
 
-Avoid scraping in these situations:
-
-- Behind others' authentication walls without permission
-- Personal identifiable information (PII) without consent
-- Content explicitly protected by paywalls (unless you have legitimate access)
-- Medical or financial data requiring special protections
-- Any content where the website explicitly prohibits automated access
+Some situations should always be avoided: scraping behind authentication walls you don't own (violates access terms), collecting personally identifiable information without consent, attempting to bypass CAPTCHAs or other security measures, scraping at volumes that degrade service for other users, and scraping content clearly marked as copyrighted without permission.
 
 ## Anti-Detection Considerations
 
-While Chrome extensions are naturally harder to detect than server-side bots, certain patterns can still trigger anti-bot systems.
+Websites employ various techniques to detect and block scraping. Chrome extensions have natural advantages but still require careful implementation.
 
-### Natural Behavior Patterns
+### Why Extensions Are Harder to Detect
 
-Automated scrapers often exhibit mechanical behavior that distinguishes them from human users:
-
-- **Timing Patterns**: Human users have variable timing between actions; bots are too consistent
-- **Mouse Movement**: Humans don't move in straight lines; implement realistic mouse curves
-- **Scroll Behavior**: Humans scroll at varying speeds and stop to read content
-- **Click Patterns**: Humans occasionally misclick andCorrect their actions
-
-```typescript
-// human-behavior.ts
-
-class HumanBehaviorSimulator {
-  /**
-   * Adds random delay to simulate human thinking
-   */
-  static async randomDelay(minMs: number = 500, maxMs: number = 2000): Promise<void> {
-    const delay = Math.random() * (maxMs - minMs) + minMs;
-    return new Promise(resolve => setTimeout(resolve, delay));
-  }
-
-  /**
-   * Simulates human scroll behavior with pauses
-   */
-  static async humanScroll(scrollAmount: number = 300): Promise<void> {
-    const currentScroll = window.scrollY;
-    const targetScroll = currentScroll + scrollAmount;
-    
-    // Scroll in small increments with varying delays
-    const steps = Math.floor(scrollAmount / 50);
-    for (let i = 0; i < steps; i++) {
-      const stepSize = 50 + Math.random() * 30;
-      window.scrollBy(0, stepSize);
-      await this.randomDelay(100, 300);
-    }
-  }
-
-  /**
-   * Simulates human-like mouse movement (simplified)
-   */
-  static async simulateMouseMove(targetElement: Element): Promise<void> {
-    const rect = targetElement.getBoundingClientRect();
-    const targetX = rect.left + rect.width / 2;
-    const targetY = rect.top + rect.height / 2;
-    
-    // Generate path with some randomness
-    const points = this.generateCurvedPath(
-      window.innerWidth / 2,
-      window.innerHeight / 2,
-      targetX,
-      targetY
-    );
-    
-    // Move through points with variable timing
-    for (const point of points) {
-      // Use JavaScript to trigger mousemove (requires content script context)
-      const event = new MouseEvent('mousemove', {
-        clientX: point.x,
-        clientY: point.y,
-        bubbles: true
-      });
-      document.dispatchEvent(event);
-      await this.randomDelay(20, 50);
-    }
-  }
-
-  private static generateCurvedPath(
-    x1: number, y1: number, x2: number, y2: number, points: number = 10
-  ): { x: number; y: number }[] {
-    const path: { x: number; y: number }[] = [];
-    
-    for (let i = 0; i <= points; i++) {
-      const t = i / points;
-      const x = x1 + (x2 - x1) * t;
-      // Add some curve with sine wave
-      const curve = Math.sin(t * Math.PI) * 50 * (Math.random() > 0.5 ? 1 : -1);
-      const y = y1 + (y2 - y1) * t + curve;
-      
-      path.push({ x, y });
-    }
-    
-    return path;
-  }
-}
-```
+Extensions run in a real browser context with genuine browser fingerprints. They have access to real cookies and session storage. They render JavaScript naturally rather than emulating a browser. They can space out requests naturally over time. These factors make extension-based scraping significantly harder to detect than headless browsers or server-side scrapers.
 
 ### Avoiding Detection Patterns
 
-Certain technical patterns can trigger detection systems:
-
-- **Excessive DOM Queries**: Don't query the same element repeatedly; cache selections
-- **Unnatural Request Timing**: Always add random delays between actions
-- **Missing Referrer Headers**: When navigating, maintain realistic referrer chains
-- **Inconsistent User Agents**: Stick to consistent, realistic browser user agents
+Several practices reduce detection risk: avoid making requests at perfectly regular intervals (add random jitter to delays), don't query the DOM excessively rapidly, use natural user behavior patterns (scroll, pause, click), respect rate limits and back off gracefully, and avoid obvious patterns like scraping every link on a page in rapid succession.
 
 ### Handling CAPTCHAs Gracefully
 
-If you encounter CAPTCHAs, **never attempt to bypass them**. This is both unethical and often illegal. Instead:
-
-- Notify the user that a CAPTCHA was encountered
-- Offer to pause or stop the scraping operation
-- Suggest manual intervention if appropriate
-- Consider reducing request frequency to avoid triggering CAPTCHAs
+If you encounter a CAPTCHA, do not attempt to bypass it. This is both ethically wrong and often illegal. Instead, notify the user that manual intervention is required, consider reducing your request rate to avoid triggering CAPTCHAs, and accept that some sites cannot be scraped legitimately.
 
 ## Complete Example: Price Comparison Extension
 
-This complete example demonstrates a production-ready price comparison extension that scrapes product data from multiple e-commerce sites and provides price tracking through a popup interface.
+Putting together all the concepts, here's a complete price comparison extension structure:
 
-### Manifest Configuration
-
-```json
+```typescript
+// manifest.json (MV3)
 {
   "manifest_version": 3,
-  "name": "PriceSpy - Price Comparison Tool",
+  "name": "PriceSpy - Price Comparison",
   "version": "1.0.0",
-  "description": "Compare prices across Amazon, eBay, and other major retailers",
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting"
-  ],
+  "permissions": ["storage"],
   "host_permissions": [
     "https://www.amazon.com/*",
     "https://www.ebay.com/*",
     "https://*.amazon.com/*",
     "https://*.ebay.com/*"
   ],
+  "content_scripts": [{
+    "matches": [
+      "https://www.amazon.com/*",
+      "https://www.ebay.com/*"
+    ],
+    "js": ["dist/content-script.js"],
+    "run_at": "document_idle"
+  }],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -1607,363 +1270,133 @@ This complete example demonstrates a production-ready price comparison extension
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
-  },
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.amazon.com/*",
-        "https://www.ebay.com/*"
-      ],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ]
+  }
 }
 ```
 
-### Content Script (content.ts)
-
 ```typescript
-// content.ts - Extracts product info from e-commerce pages
+// src/content-script/PriceScraper.ts
 
-interface ProductData {
-  id: string;
-  title: string;
-  price: number;
-  currency: string;
-  originalPrice?: number;
-  imageUrl: string;
-  productUrl: string;
-  source: string;
-  timestamp: number;
-  inStock: boolean;
-}
+import { ProductExtractor, Product } from './extractors/ProductExtractor';
+import { MessageSender } from './messaging/Sender';
 
-class PriceScraperContent {
-  private source: string;
+class PriceScraper {
+  private extractor: ProductExtractor;
+  private sender: MessageSender;
 
   constructor() {
-    this.source = this.detectSource();
+    this.extractor = new ProductExtractor();
+    this.sender = new MessageSender();
   }
 
-  private detectSource(): string {
-    const hostname = window.location.hostname;
-    if (hostname.includes('amazon')) return 'amazon';
-    if (hostname.includes('ebay')) return 'ebay';
-    return 'unknown';
-  }
-
-  extract(): ProductData | null {
-    switch (this.source) {
-      case 'amazon':
-        return this.extractAmazon();
-      case 'ebay':
-        return this.extractEbay();
-      default:
-        return null;
-    }
-  }
-
-  private extractAmazon(): ProductData | null {
-    const titleEl = document.querySelector('#productTitle');
-    const priceEl = document.querySelector('.a-price .a-offscreen') || 
-                     document.querySelector('#priceblock_ourprice') ||
-                     document.querySelector('#priceblock_dealprice');
-    const imageEl = document.querySelector('#landingImage') || 
-                    document.querySelector('#imgBlkFront');
-    const originalPriceEl = document.querySelector('.a-text-price .a-offscreen');
-    const availabilityEl = document.querySelector('#availability');
-
-    if (!titleEl || !priceEl) {
-      return null;
-    }
-
-    const title = titleEl.textContent?.trim() ?? '';
-    const priceText = priceEl.textContent?.trim() ?? '$0';
-    const price = this.parsePrice(priceText);
-    const originalPrice = originalPriceEl ? this.parsePrice(originalPriceEl.textContent ?? '') : undefined;
-
-    return {
-      id: this.generateId('amazon', title),
-      title,
-      price,
-      currency: 'USD',
-      originalPrice,
-      imageUrl: (imageEl as HTMLImageElement)?.src ?? '',
-      productUrl: window.location.href,
-      source: 'amazon',
-      timestamp: Date.now(),
-      inStock: !availabilityEl?.textContent?.toLowerCase().includes('out of stock')
-    };
-  }
-
-  private extractEbay(): ProductData | null {
-    const titleEl = document.querySelector('.x-item-title__mainTitle') ||
-                    document.querySelector('h1.it-ttl');
-    const priceEl = document.querySelector('.x-price-primary span') ||
-                    document.querySelector('#prcIsum');
-    const imageEl = document.querySelector('.ux-image-carousel-item img') ||
-                    document.querySelector('#icImg');
-    const availabilityEl = document.querySelector('.x-quantity__availability');
-
-    if (!titleEl || !priceEl) {
-      return null;
-    }
-
-    const title = titleEl.textContent?.trim() ?? '';
-    const priceText = priceEl.textContent?.trim() ?? '$0';
-    const price = this.parsePrice(priceText);
-
-    return {
-      id: this.generateId('ebay', title),
-      title,
-      price,
-      currency: 'USD',
-      imageUrl: (imageEl as HTMLImageElement)?.src ?? '',
-      productUrl: window.location.href,
-      source: 'ebay',
-      timestamp: Date.now(),
-      inStock: !availabilityEl?.textContent?.toLowerCase().includes('out of stock')
-    };
-  }
-
-  private parsePrice(text: string): number {
-    const match = text.match(/[\d,]+\.?\d*/);
-    return match ? parseFloat(match[0].replace(',', '')) : 0;
-  }
-
-  private generateId(source: string, title: string): string {
-    const hash = title.toLowerCase().slice(0, 20).replace(/\s+/g, '-');
-    return `${source}-${hash}`;
-  }
-
-  async init(): Promise<void> {
-    // Wait for page to fully load
+  async run(): Promise<void> {
+    // Wait for products to load
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    const product = this.extract();
+    const products = this.extractor.extract();
     
-    if (product) {
-      chrome.runtime.sendMessage({
-        type: 'PRODUCT_FOUND',
-        payload: product
-      });
+    if (products.length > 0) {
+      await this.sender.sendData({
+        products,
+        page: window.location.hostname,
+        scrapedAt: new Date().toISOString()
+      }, window.location.href);
+      
+      console.log(`PriceScraper: Extracted ${products.length} products`);
     }
   }
 }
 
-// Initialize on page load
-const scraper = new PriceScraperContent();
-scraper.init();
+// Initialize
+const scraper = new PriceScraper();
+scraper.run();
 ```
 
-### Background Script (background.ts)
-
 ```typescript
-// background.ts - Handles data storage and price comparison logic
+// src/background/PriceTracker.ts
+
+import { DataStore, StoredItem } from '../storage/DataStore';
+import { BackgroundMessageHandler } from './messages/DataHandler';
 
 interface PriceHistory {
-  productId: string;
-  prices: Array<{ price: number; date: number; source: string }>;
-  lowestPrice: number;
-  highestPrice: number;
-  averagePrice: number;
+  [productUrl: string]: {
+    prices: Array<{ price: number; date: string; store: string }>;
+    currentLowest: number;
+    currentHighest: number;
+  };
 }
 
-class PriceComparisonBackend {
-  private readonly STORAGE_KEY = 'price_history';
-
-  async handleProductFound(product: ProductData): Promise<void> {
-    const history = await this.getPriceHistory(product.id);
-    
-    history.prices.push({
-      price: product.price,
-      date: product.timestamp,
-      source: product.source
-    });
-
-    // Calculate statistics
-    const prices = history.prices.map(p => p.price);
-    history.lowestPrice = Math.min(...prices);
-    history.highestPrice = Math.max(...prices);
-    history.averagePrice = prices.reduce((a, b) => a + b, 0) / prices.length;
-
-    await this.savePriceHistory(product.id, history);
-    
-    // Notify popup if open
-    this.notifyPopup(product.id);
-  }
-
-  async getPriceHistory(productId: string): Promise<PriceHistory> {
-    const result = await chrome.storage.local.get(this.STORAGE_KEY);
-    const allHistory = result[this.STORAGE_KEY] ?? {};
-    
-    return allHistory[productId] ?? {
-      productId,
-      prices: [],
-      lowestPrice: 0,
-      highestPrice: 0,
-      averagePrice: 0
-    };
-  }
-
-  async savePriceHistory(productId: string, history: PriceHistory): Promise<void> {
-    const result = await chrome.storage.local.get(this.STORAGE_KEY);
-    const allHistory = result[this.STORAGE_KEY] ?? {};
-    allHistory[productId] = history;
-    
-    await chrome.storage.local.set({ [this.STORAGE_KEY]: allHistory });
-  }
-
-  async getAllTrackedProducts(): Promise<PriceHistory[]> {
-    const result = await chrome.storage.local.get(this.STORAGE_KEY);
-    const allHistory = result[this.STORAGE_KEY] ?? {};
-    return Object.values(allHistory);
-  }
-
-  async comparePrice(productId: string, targetPrice: number): Promise<{
-    isLower: boolean;
-    savings: number;
-    percentageOff: number;
-  }> {
-    const history = await this.getPriceHistory(productId);
-    
-    if (history.prices.length === 0) {
-      return { isLower: false, savings: 0, percentageOff: 0 };
-    }
-
-    const isLower = targetPrice < history.averagePrice;
-    const savings = history.averagePrice - targetPrice;
-    const percentageOff = (savings / history.averagePrice) * 100;
-
-    return { isLower, savings, percentageOff };
-  }
-
-  private async notifyPopup(productId: string): Promise<void> {
-    // This would communicate with the popup if open
-  }
-}
-
-// Message handler setup
-const backend = new PriceComparisonBackend();
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  (async () => {
-    switch (message.type) {
-      case 'PRODUCT_FOUND':
-        await backend.handleProductFound(message.payload);
-        sendResponse({ success: true });
-        break;
-      case 'GET_PRICE_HISTORY':
-        const history = await backend.getPriceHistory(message.productId);
-        sendResponse(history);
-        break;
-      case 'GET_ALL_PRODUCTS':
-        const products = await backend.getAllTrackedProducts();
-        sendResponse(products);
-        break;
-      case 'COMPARE_PRICE':
-        const comparison = await backend.comparePrice(
-          message.productId,
-          message.targetPrice
-        );
-        sendResponse(comparison);
-        break;
-    }
-  })();
-  
-  return true; // Keep message channel open for async response
-});
-```
-
-### Popup Script (popup.ts)
-
-```typescript
-// popup.ts - User interface for viewing prices
-
-interface TrackedProduct {
-  productId: string;
-  title: string;
-  currentPrice: number;
-  lowestPrice: number;
-  averagePrice: number;
-  priceChange: number;
-}
-
-class PricePopup {
-  private container: HTMLElement;
+export class PriceTracker {
+  private dataStore: DataStore;
+  private messageHandler: BackgroundMessageHandler;
 
   constructor() {
-    this.container = document.getElementById('products-container')!;
-    this.init();
+    this.dataStore = new DataStore();
+    this.messageHandler = new BackgroundMessageHandler(this.dataStore);
   }
 
-  async init(): Promise<void> {
-    const products = await this.getTrackedProducts();
-    this.render(products);
-  }
+  async getPriceHistory(): Promise<PriceHistory> {
+    const items = await this.dataStore.getAll<{
+      products: Array<{
+        title: string;
+        price: string;
+        productUrl: string;
+      }>;
+      page: string;
+      scrapedAt: string;
+    }>();
 
-  private async getTrackedProducts(): Promise<TrackedProduct[]> {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage(
-        { type: 'GET_ALL_PRODUCTS' },
-        (histories: PriceHistory[]) => {
-          const products: TrackedProduct[] = histories.map(history => {
-            const latestPrice = history.prices[history.prices.length - 1];
-            const priceChange = latestPrice.price - history.lowestPrice;
-            
-            return {
-              productId: history.productId,
-              title: history.productId,
-              currentPrice: latestPrice.price,
-              lowestPrice: history.lowestPrice,
-              averagePrice: history.averagePrice,
-              priceChange
-            };
-          });
-          resolve(products);
+    const history: PriceHistory = {};
+
+    for (const item of items) {
+      const data = item.data as { products: Array<{
+        title: string;
+        price: string;
+        productUrl: string;
+      }>; page: string; scrapedAt: string };
+      
+      for (const product of data.products) {
+        const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ''));
+        
+        if (!history[product.title]) {
+          history[product.title] = {
+            prices: [],
+            currentLowest: priceNum,
+            currentHighest: priceNum
+          };
         }
-      );
-    });
-  }
 
-  private render(products: TrackedProduct[]): void {
-    if (products.length === 0) {
-      this.container.innerHTML = '<p class="empty">No products tracked yet. Visit Amazon or eBay to start tracking prices.</p>';
-      return;
+        history[product.title].prices.push({
+          price: priceNum,
+          date: data.scrapedAt,
+          store: data.page
+        });
+
+        history[product.title].currentLowest = Math.min(
+          history[product.title].currentLowest,
+          priceNum
+        );
+        history[product.title].currentHighest = Math.max(
+          history[product.title].currentHighest,
+          priceNum
+        );
+      }
     }
 
-    this.container.innerHTML = products.map(product => `
-      <div class="product-card">
-        <h3 class="product-title">${product.title}</h3>
-        <div class="price-info">
-          <p class="current-price">$${product.currentPrice.toFixed(2)}</p>
-          <p class="price-stats">
-            Low: $${product.lowestPrice.toFixed(2)} | 
-            Avg: $${product.averagePrice.toFixed(2)}
-          </p>
-          <p class="price-change ${product.priceChange < 0 ? 'positive' : 'negative'}">
-            ${product.priceChange < 0 ? '↓' : '↑'} 
-            $${Math.abs(product.priceChange).toFixed(2)}
-          </p>
-        </div>
-      </div>
-    `).join('');
+    return history;
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  new PricePopup();
-});
 ```
 
-This completes our comprehensive guide to building Chrome extension web scrapers. You've learned how to extract data using content scripts, handle dynamic content, manage data flow between components, store and export data, handle pagination ethically, and avoid detection. The price comparison example demonstrates how all these pieces work together in a real-world application.
+This extension architecture demonstrates how content scripts extract product data, background scripts aggregate and analyze prices, and the popup displays comparison results. The modular design allows easy extension to additional retailers or features.
 
-For information on monetizing your scraping extensions, see our [Extension Monetization Guide](./extension-monetization.md).
+## Conclusion
+
+Chrome extensions provide a uniquely powerful platform for web scraping, combining the ability to render JavaScript, maintain sessions, and run in a real browser context. This guide covered the essential techniques: configuring content scripts, extracting structured data from DOM, handling dynamic content with MutationObservers and network interception, managing data flow through message passing, implementing storage and export, and handling pagination responsibly.
+
+Remember that technical capability comes with ethical responsibility. Always respect website terms of service, implement rate limiting, handle personal data carefully, and never attempt to bypass security measures. When building scraping extensions for commercial purposes, consult legal counsel to ensure compliance with applicable laws.
+
+For monetization strategies for your scraping extension, see our [Extension Monetization Guide](/guides/extension-monetization/) which covers freemium models, subscription pricing, and API access tiers that can help sustain your development while respecting users.
 
 ---
 
