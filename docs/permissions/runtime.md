@@ -1,3 +1,11 @@
+---
+title: "chrome.runtime API Reference"
+description: "The `chrome.runtime` API provides extension information and utilities for messaging, lifecycle management, and resource handling. **No permissions required** — always available."
+permalink: /permissions/runtime/
+category: permissions
+order: 34
+---
+
 # chrome.runtime API Reference
 
 The `chrome.runtime` API provides extension information and utilities for messaging, lifecycle management, and resource handling. **No permissions required** — always available.

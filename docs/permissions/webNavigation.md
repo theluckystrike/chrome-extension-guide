@@ -1,3 +1,11 @@
+---
+title: "webNavigation Permission"
+description: "Access to the `chrome.webNavigation` API for monitoring page navigation lifecycle across all tabs and frames. { "permissions": ["webNavigation"] } None — this permission does not trigger a warning ..."
+permalink: /permissions/webNavigation/
+category: permissions
+order: 48
+---
+
 # webNavigation Permission
 
 ## What It Grants

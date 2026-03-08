@@ -1,3 +1,11 @@
+---
+title: "System.* Permissions (Chrome Extension API)"
+description: "The `system.*` permissions provide access to hardware and system information. Each is a separate permission. { "permissions": ["system.cpu"] } No user warning."
+permalink: /permissions/system/
+category: permissions
+order: 40
+---
+
 # System.* Permissions (Chrome Extension API)
 
 ## Overview

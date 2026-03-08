@@ -1,3 +1,11 @@
+---
+title: "identity Permission — Chrome Extension Reference"
+description: "- **Permission string**: `"identity"` - **What it grants**: Access to `chrome.identity` API for OAuth2 authentication - **Risk level**: Medium — authenticates as the user with third-party services"
+permalink: /permissions/identity/
+category: permissions
+order: 22
+---
+
 # identity Permission — Chrome Extension Reference
 
 ## Overview

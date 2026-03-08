@@ -1,3 +1,11 @@
+---
+title: "contentSettings Permission"
+description: "Access to the `chrome.contentSettings` API for controlling per-site content settings (cookies, JavaScript, images, popups, notifications, location, camera, microphone, etc.)."
+permalink: /permissions/contentSettings/
+category: permissions
+order: 8
+---
+
 # contentSettings Permission
 
 ## What It Grants

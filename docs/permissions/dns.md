@@ -1,3 +1,11 @@
+---
+title: "dns Permission"
+description: "- Permission string: `"dns"` - Grants access to `chrome.dns` API - Perform DNS lookups from the extension - Note: Limited availability, check chrome.dns existence before use"
+permalink: /permissions/dns/
+category: permissions
+order: 16
+---
+
 # dns Permission
 
 ## Overview

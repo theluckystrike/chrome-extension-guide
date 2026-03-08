@@ -1,3 +1,11 @@
+---
+title: "tabCapture Permission"
+description: "Access to the `chrome.tabCapture` API for capturing the visible area of a tab as a media stream (audio and/or video). { "permissions": ["tabCapture"] }"
+permalink: /permissions/tabCapture/
+category: permissions
+order: 41
+---
+
 # tabCapture Permission
 
 ## What It Grants

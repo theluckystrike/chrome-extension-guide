@@ -1,3 +1,11 @@
+---
+title: "topSites Permission"
+description: "- Permission string: `"topSites"` - Grants access to `chrome.topSites` API - Returns the user's most visited sites - `chrome.topSites.get()` returns Promise with array of MostVisitedURL"
+permalink: /permissions/topSites/
+category: permissions
+order: 44
+---
+
 # topSites Permission
 
 ## Overview

@@ -1,3 +1,11 @@
+---
+title: "declarativeNetRequestWithHostAccess"
+description: "The `declarativeNetRequestWithHostAccess` permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permiss..."
+permalink: /permissions/declarativeNetRequestWithHostAccess/
+category: permissions
+order: 15
+---
+
 # declarativeNetRequestWithHostAccess
 
 The `declarativeNetRequestWithHostAccess` permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permissions.

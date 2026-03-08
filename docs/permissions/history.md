@@ -1,3 +1,11 @@
+---
+title: "history Permission — Chrome Extension Reference"
+description: "- **Permission string**: `"history"` - **What it grants**: Access to `chrome.history` API — browse, search, and delete browsing history - **Risk level**: High — full access to user's browsing history"
+permalink: /permissions/history/
+category: permissions
+order: 21
+---
+
 # history Permission — Chrome Extension Reference
 
 ## Overview

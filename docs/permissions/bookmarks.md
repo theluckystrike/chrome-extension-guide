@@ -1,3 +1,11 @@
+---
+title: "bookmarks Permission — Chrome Extension Reference"
+description: "- **Permission string**: `"bookmarks"` - **What it grants**: Full access to `chrome.bookmarks` API — read, create, update, delete, move, search bookmarks"
+permalink: /permissions/bookmarks/
+category: permissions
+order: 3
+---
+
 # bookmarks Permission — Chrome Extension Reference
 
 ## Overview

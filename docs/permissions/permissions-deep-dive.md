@@ -1,3 +1,11 @@
+---
+title: "Chrome Extension Permissions Deep Dive"
+description: "The definitive reference for every Chrome extension permission: what each grants, what users see, and how to request only what you need. --- 1. [How Permissions Work](#how-permissions-work)"
+permalink: /permissions/permissions-deep-dive/
+category: permissions
+order: 29
+---
+
 # Chrome Extension Permissions Deep Dive
 
 The definitive reference for every Chrome extension permission: what each grants,

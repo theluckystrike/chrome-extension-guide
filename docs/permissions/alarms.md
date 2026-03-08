@@ -1,3 +1,11 @@
+---
+title: "alarms Permission Reference"
+description: "- Grants access to the `chrome.alarms` API - Schedule code to run at specific times or intervals - MV3 replacement for `setTimeout`/`setInterval` (which don't survive service worker termination)"
+permalink: /permissions/alarms/
+category: permissions
+order: 2
+---
+
 # alarms Permission Reference
 
 ## What It Does

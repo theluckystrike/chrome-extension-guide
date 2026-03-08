@@ -1,3 +1,11 @@
+---
+title: "tabGroups Permission"
+description: "The `tabGroups` permission grants extensions access to the `chrome.tabGroups` API, which enables programmatic management of tab groups in Google Chrome. Tab groups allow users to organize their tab..."
+permalink: /permissions/tabGroups/
+category: permissions
+order: 42
+---
+
 # tabGroups Permission
 
 ## Overview

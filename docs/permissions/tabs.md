@@ -1,3 +1,11 @@
+---
+title: "tabs Permission Reference"
+description: "- Grants persistent access to tab metadata on all tabs in the browser - Access to `url`, `pendingUrl`, `title`, `favIconUrl` on Tab objects - Allows querying and monitoring tabs across all windows"
+permalink: /permissions/tabs/
+category: permissions
+order: 43
+---
+
 # tabs Permission Reference
 
 ## What It Does

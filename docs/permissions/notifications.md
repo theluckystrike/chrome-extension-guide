@@ -1,3 +1,11 @@
+---
+title: "notifications Permission Reference"
+description: "- Grants access to the `chrome.notifications` API - Show rich desktop notifications (basic, image, list, progress types) - Handle notification clicks, button clicks, and close events"
+permalink: /permissions/notifications/
+category: permissions
+order: 26
+---
+
 # notifications Permission Reference
 
 ## What It Does

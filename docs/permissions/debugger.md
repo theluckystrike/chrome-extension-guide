@@ -1,3 +1,11 @@
+---
+title: "debugger Permission — Chrome Extension Reference"
+description: "- **Permission string**: `"debugger"` - **What it grants**: Access to `chrome.debugger` API — attach to tabs and use Chrome DevTools Protocol (CDP) - **Risk level**: Very High — full CDP access can..."
+permalink: /permissions/debugger/
+category: permissions
+order: 11
+---
+
 # debugger Permission — Chrome Extension Reference
 
 ## Overview

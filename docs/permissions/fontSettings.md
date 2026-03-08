@@ -1,3 +1,11 @@
+---
+title: "fontSettings Permission"
+description: "Access to the `chrome.fontSettings` API for reading and modifying Chrome's font preferences (default fonts, sizes, per-script fonts). { "permissions": ["fontSettings"]"
+permalink: /permissions/fontSettings/
+category: permissions
+order: 18
+---
+
 # fontSettings Permission
 
 ## What It Grants

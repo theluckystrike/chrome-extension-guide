@@ -1,3 +1,11 @@
+---
+title: "cookies Permission Reference"
+description: "- Grants access to `chrome.cookies` API - Read, write, delete cookies for sites matching your host permissions - Listen for cookie changes via `chrome.cookies.onChanged`"
+permalink: /permissions/cookies/
+category: permissions
+order: 10
+---
+
 # cookies Permission Reference
 
 ## What It Does

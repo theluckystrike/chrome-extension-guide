@@ -1,3 +1,11 @@
+---
+title: "unlimitedStorage Permission"
+description: "Removes the quota limits on `chrome.storage.local`, IndexedDB, Cache API, and other client-side storage used by the extension. Without it, `chrome.storage.local` is limited to ~10 MB."
+permalink: /permissions/unlimitedStorage/
+category: permissions
+order: 47
+---
+
 # unlimitedStorage Permission
 
 ## What It Grants

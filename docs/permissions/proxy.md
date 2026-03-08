@@ -1,3 +1,11 @@
+---
+title: "proxy Permission — Chrome Extension Reference"
+description: "- **Permission string**: `"proxy"` - **What it grants**: Access to `chrome.proxy` API — configure Chrome's proxy settings - **Risk level**: High — routes ALL browser traffic through specified proxy"
+permalink: /permissions/proxy/
+category: permissions
+order: 32
+---
+
 # proxy Permission — Chrome Extension Reference
 
 ## Overview

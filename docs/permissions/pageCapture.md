@@ -1,3 +1,11 @@
+---
+title: "pageCapture Permission"
+description: "Access to the `chrome.pageCapture` API for saving complete web pages as MHTML files. { "permissions": ["pageCapture"] } None — this permission does not trigger a warning at install time."
+permalink: /permissions/pageCapture/
+category: permissions
+order: 28
+---
+
 # pageCapture Permission
 
 ## What It Grants

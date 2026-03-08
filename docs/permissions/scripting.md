@@ -1,3 +1,11 @@
+---
+title: "scripting Permission Reference"
+description: "- Grants access to the `chrome.scripting` API (MV3 replacement for `chrome.tabs.executeScript`) - Inject JavaScript and CSS into web pages programmatically"
+permalink: /permissions/scripting/
+category: permissions
+order: 35
+---
+
 # scripting Permission Reference
 
 ## What It Does
