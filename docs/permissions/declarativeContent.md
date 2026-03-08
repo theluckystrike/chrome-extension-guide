@@ -30,6 +30,8 @@ None — this permission does not trigger a warning. This is a key advantage: it
 Instead of reading every page and deciding whether to show your icon, you declare rules that Chrome evaluates internally — no extension wake-up needed.
 
 ## Basic Usage: Show Action on Matching Pages {#basic-usage-show-action-on-matching-pages}
+
+## How to Use declarativeContent API: Show Action on Matching Pages
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   // First, disable the action by default

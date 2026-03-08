@@ -106,12 +106,16 @@ chrome.contextMenus.update("dynamic", { title: `Mode: ${mode}`, visible: show })
 
 ## MV3 Notes {#mv3-notes}
 
+## MV3 contextMenus API Important Notes
+
 1. String IDs required (MV2 allowed integers)
 2. Register `onClicked` at top level
 3. Use `"action"` instead of `"browser_action"`
 4. Create in `onInstalled`
 
 ## Examples {#examples}
+
+## contextMenus API Code Examples
 
 ### Selection Search {#selection-search}
 ```ts

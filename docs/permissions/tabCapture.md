@@ -41,6 +41,8 @@ interface CaptureOptions {
 ```
 
 ## Basic Tab Capture {#basic-tab-capture}
+
+## chrome.tabCapture Basic Usage
 ```typescript
 // Must be called from a user gesture (popup click, action click)
 chrome.tabCapture.capture(

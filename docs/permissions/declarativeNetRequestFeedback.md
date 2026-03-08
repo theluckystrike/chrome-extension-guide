@@ -42,6 +42,8 @@ The `declarativeNetRequestFeedback` permission is an **addon** to the base `decl
 The `onRuleMatchedDebug` event fires whenever a DNR rule matches a network request. This is useful for debugging and analytics.
 
 ### Basic Usage {#basic-usage}
+
+### onRuleMatchedDebug Basic Usage
 ```typescript
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
   console.log("Rule matched:", {

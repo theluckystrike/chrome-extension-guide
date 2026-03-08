@@ -54,6 +54,8 @@ None — this permission does not trigger a warning at install time.
 | `math` | Math font |
 
 ## Basic Usage {#basic-usage}
+
+## How to Use fontSettings API
 ```typescript
 // Get current serif font
 const { fontId } = await chrome.fontSettings.getFont({ genericFamily: 'serif' });

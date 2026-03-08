@@ -21,6 +21,8 @@ Enables blocking/modifying network requests in `chrome.webRequest` listeners. **
 Use `chrome.declarativeNetRequest` instead. See `docs/permissions/declarativeNetRequest.md`.
 
 ## MV2 Usage {#mv2-usage}
+
+## webRequestBlocking MV2 Usage Example
 ```typescript
 // Block requests (MV2 only)
 chrome.webRequest.onBeforeRequest.addListener(

@@ -45,6 +45,8 @@ Each content type is a `ContentSetting` object with methods:
 | `chrome.contentSettings.automaticDownloads` | allow, block, ask | Multiple file downloads |
 
 ## Basic Usage {#basic-usage}
+
+## How to Use contentSettings API
 ```typescript
 // Check JavaScript setting for a site
 const { setting } = await chrome.contentSettings.javascript.get({

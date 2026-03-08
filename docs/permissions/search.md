@@ -108,6 +108,8 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 ```
 
 ## Important Notes {#important-notes}
+
+## search API Important Notes and Limitations
 - Uses the user's default search engine (you cannot choose which engine)
 - Does NOT return search results — only opens the search page
 - Simple API — just triggers browser search

@@ -209,6 +209,8 @@ chrome.tts.speak('Hello world, this is a test.', {
 
 ### Basic TTS Usage {#basic-tts-usage}
 
+### Basic chrome.tts.speak Usage
+
 ```javascript
 function speakText(text) {
   chrome.tts.speak(text, () => {

@@ -36,6 +36,8 @@ const mhtmlBlob = await chrome.pageCapture.saveAsMHTML({ tabId: tab.id! });
 ```
 
 ## Basic Usage {#basic-usage}
+
+## How to Use pageCapture API
 ```typescript
 // Save current tab as MHTML
 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });

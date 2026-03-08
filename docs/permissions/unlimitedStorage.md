@@ -51,6 +51,8 @@ await storage.set('cachedArticles', largeJsonString);
 ```
 
 ## Checking Storage Usage {#checking-storage-usage}
+
+## How to Check unlimitedStorage Usage
 ```typescript
 // Check how much storage is in use
 const bytesInUse = await chrome.storage.local.getBytesInUse(null);
