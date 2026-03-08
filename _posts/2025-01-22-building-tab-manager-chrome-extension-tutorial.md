@@ -917,4 +917,4 @@ The complete code for this tutorial is available in our [examples repository](ht
 
 ---
 
-**Built by [theluckystrike](https://zovo.one)**
+**Built by theluckystrike at [zovo.one](https://zovo.one)**
