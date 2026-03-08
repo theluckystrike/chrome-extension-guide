@@ -3,6 +3,10 @@ layout: default
 title: "Chrome Extension OAuth2 Authentication: Complete Implementation Guide"
 description: "Implement OAuth2 authentication in Chrome extensions. Learn chrome.identity API, PKCE flow, token management, and secure authentication patterns with TypeScript."
 permalink: /guides/chrome-extension-oauth2-authentication/
+date: 2026-03-08
+last_modified_at: 2026-03-08
+category: guides
+tags: [oauth2, authentication, pkce, chrome-identity, typescript, security]
 ---
 
 # Chrome Extension OAuth2 Authentication: Complete Implementation Guide
@@ -1521,6 +1525,260 @@ async function listGists(token: string, page: number = 1): Promise<GitHubGist[]>
   );
 }
 ```
+
+## Generic OAuth2 Provider Factory {#generic-provider}
+
+When your extension needs to support multiple OAuth2 providers or allow users to connect arbitrary services, a provider factory pattern keeps the code maintainable. The following implementation provides a reusable foundation that works with any standards-compliant OAuth2 provider.
+
+### Provider Configuration Interface
+
+Define a uniform configuration shape that captures the differences between providers:
+
+```typescript
+// providers/OAuthProviderFactory.ts
+
+interface OAuthProviderConfig {
+  id: string;
+  name: string;
+  clientId: string;
+  authorizationEndpoint: string;
+  tokenEndpoint: string;
+  userInfoEndpoint?: string;
+  scopes: string[];
+  additionalParams?: Record<string, string>;
+  scopeDelimiter?: string;     // Some providers use '+' instead of ' '
+  usePKCE?: boolean;           // Default true
+  tokenInHeader?: boolean;     // Send token as Bearer header vs query param
+  revokeEndpoint?: string;     // For clean sign-out
+}
+
+const REDIRECT_BASE = `https://${chrome.runtime.id}.chromiumapp.org`;
+
+class OAuthProviderFactory {
+  private providers = new Map<string, OAuthProviderConfig>();
+  private tokenManager: TokenManager;
+  private pkceService: PKCEService;
+
+  constructor(tokenManager: TokenManager, pkceService: PKCEService) {
+    this.tokenManager = tokenManager;
+    this.pkceService = pkceService;
+  }
+
+  registerProvider(config: OAuthProviderConfig): void {
+    this.providers.set(config.id, {
+      usePKCE: true,
+      tokenInHeader: true,
+      scopeDelimiter: ' ',
+      ...config,
+    });
+  }
+
+  async authenticate(providerId: string): Promise<string> {
+    const provider = this.providers.get(providerId);
+    if (!provider) {
+      throw new Error(`Unknown provider: ${providerId}`);
+    }
+
+    const redirectUri = `${REDIRECT_BASE}/${provider.id}-callback`;
+    const state = crypto.randomUUID();
+
+    const params: Record<string, string> = {
+      client_id: provider.clientId,
+      redirect_uri: redirectUri,
+      response_type: 'code',
+      scope: provider.scopes.join(provider.scopeDelimiter ?? ' '),
+      state,
+      ...provider.additionalParams,
+    };
+
+    // Add PKCE challenge when enabled
+    let codeVerifier: string | undefined;
+    if (provider.usePKCE !== false) {
+      const pkce = await this.pkceService.generateChallenge();
+      codeVerifier = pkce.verifier;
+      params.code_challenge = pkce.challenge;
+      params.code_challenge_method = 'S256';
+    }
+
+    const authUrl =
+      `${provider.authorizationEndpoint}?` +
+      new URLSearchParams(params).toString();
+
+    // Launch the auth flow
+    const resultUrl = await new Promise<string>((resolve, reject) => {
+      chrome.identity.launchWebAuthFlow(
+        { url: authUrl, interactive: true },
+        (callbackUrl) => {
+          if (chrome.runtime.lastError || !callbackUrl) {
+            reject(new Error(
+              chrome.runtime.lastError?.message ?? 'Auth flow cancelled'
+            ));
+            return;
+          }
+          resolve(callbackUrl);
+        }
+      );
+    });
+
+    // Validate state parameter to prevent CSRF
+    const resultParams = new URL(resultUrl).searchParams;
+    if (resultParams.get('state') !== state) {
+      throw new Error('State mismatch - possible CSRF attack');
+    }
+
+    const code = resultParams.get('code');
+    if (!code) {
+      throw new Error(`No authorization code in callback: ${resultUrl}`);
+    }
+
+    // Exchange code for tokens
+    const tokenBody: Record<string, string> = {
+      grant_type: 'authorization_code',
+      client_id: provider.clientId,
+      redirect_uri: redirectUri,
+      code,
+    };
+
+    if (codeVerifier) {
+      tokenBody.code_verifier = codeVerifier;
+    }
+
+    const tokenResponse = await fetch(provider.tokenEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(tokenBody).toString(),
+    });
+
+    if (!tokenResponse.ok) {
+      const errorBody = await tokenResponse.text();
+      throw new Error(`Token exchange failed (${tokenResponse.status}): ${errorBody}`);
+    }
+
+    const tokens = await tokenResponse.json();
+
+    await this.tokenManager.storeTokens(providerId, {
+      accessToken: tokens.access_token,
+      refreshToken: tokens.refresh_token,
+      expiresAt: tokens.expires_in
+        ? Date.now() + tokens.expires_in * 1000
+        : undefined,
+    });
+
+    return tokens.access_token;
+  }
+
+  async revokeAccess(providerId: string): Promise<void> {
+    const provider = this.providers.get(providerId);
+    if (!provider?.revokeEndpoint) return;
+
+    const tokens = await this.tokenManager.getTokens(providerId);
+    if (!tokens) return;
+
+    await fetch(provider.revokeEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        token: tokens.accessToken,
+        client_id: provider.clientId,
+      }).toString(),
+    });
+
+    await this.tokenManager.clearTokens(providerId);
+  }
+}
+```
+
+### Registering Common Providers
+
+With the factory in place, adding new providers becomes a configuration task rather than a coding task:
+
+```typescript
+// providers/registry.ts
+
+function registerDefaultProviders(factory: OAuthProviderFactory): void {
+  // Google (when not using chrome.identity.getAuthToken)
+  factory.registerProvider({
+    id: 'google',
+    name: 'Google',
+    clientId: process.env.GOOGLE_CLIENT_ID!,
+    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    userInfoEndpoint: 'https://www.googleapis.com/oauth2/v3/userinfo',
+    revokeEndpoint: 'https://oauth2.googleapis.com/revoke',
+    scopes: ['openid', 'email', 'profile'],
+    additionalParams: { access_type: 'offline', prompt: 'consent' },
+  });
+
+  // GitHub
+  factory.registerProvider({
+    id: 'github',
+    name: 'GitHub',
+    clientId: process.env.GITHUB_CLIENT_ID!,
+    authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+    tokenEndpoint: 'https://github.com/login/oauth/access_token',
+    userInfoEndpoint: 'https://api.github.com/user',
+    scopes: ['repo', 'user:email'],
+    usePKCE: false,  // GitHub does not support PKCE as of 2026
+    additionalParams: { allow_signup: 'false' },
+  });
+
+  // Spotify (example of a provider with non-standard scope delimiter)
+  factory.registerProvider({
+    id: 'spotify',
+    name: 'Spotify',
+    clientId: process.env.SPOTIFY_CLIENT_ID!,
+    authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+    tokenEndpoint: 'https://accounts.spotify.com/api/token',
+    userInfoEndpoint: 'https://api.spotify.com/v1/me',
+    scopes: ['user-read-private', 'user-read-email', 'playlist-read-private'],
+  });
+
+  // Generic self-hosted OAuth2 server (e.g., Keycloak, Auth0)
+  factory.registerProvider({
+    id: 'custom',
+    name: 'My Custom Service',
+    clientId: process.env.CUSTOM_CLIENT_ID!,
+    authorizationEndpoint: 'https://auth.example.com/oauth2/authorize',
+    tokenEndpoint: 'https://auth.example.com/oauth2/token',
+    userInfoEndpoint: 'https://auth.example.com/oauth2/userinfo',
+    revokeEndpoint: 'https://auth.example.com/oauth2/revoke',
+    scopes: ['openid', 'profile', 'api:read', 'api:write'],
+    additionalParams: { audience: 'https://api.example.com' },
+  });
+}
+```
+
+### Using the Factory in a Service Worker
+
+```typescript
+// background.ts
+
+const tokenManager = new TokenManager();
+const pkceService = new PKCEService();
+const oauthFactory = new OAuthProviderFactory(tokenManager, pkceService);
+
+registerDefaultProviders(oauthFactory);
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message.type === 'OAUTH_LOGIN') {
+    oauthFactory
+      .authenticate(message.providerId)
+      .then((token) => sendResponse({ success: true, token }))
+      .catch((error) => sendResponse({ success: false, error: error.message }));
+    return true; // Keep channel open for async response
+  }
+
+  if (message.type === 'OAUTH_LOGOUT') {
+    oauthFactory
+      .revokeAccess(message.providerId)
+      .then(() => sendResponse({ success: true }))
+      .catch((error) => sendResponse({ success: false, error: error.message }));
+    return true;
+  }
+});
+```
+
+This factory pattern scales cleanly as you add providers. Each provider only needs a configuration object, while authentication logic, PKCE handling, token storage, and error handling remain centralized and consistent.
 
 ## Conclusion
 
