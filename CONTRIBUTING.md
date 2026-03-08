@@ -6,128 +6,131 @@ Thank you for your interest in contributing to the Chrome Extension Guide! This 
 
 ### Reporting Issues
 
-If you find a bug, typo, or have a suggestion:
+If you find a bug, typo, or have a suggestion for improvement:
 
 1. Check if there's already an existing issue
 2. If not, create a new issue using the appropriate template:
-   - [Bug Report](.github/ISSUE_TEMPLATE/bug_report.md) - For reporting errors or unexpected behavior
-   - [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md) - For suggesting new features or improvements
-   - [Documentation Request](.github/ISSUE_TEMPLATE/documentation.md) - For documentation improvements
+   - [Bug Report](.github/ISSUE_TEMPLATE/bug_report.md)
+   - [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md)
+   - [Documentation Request](.github/ISSUE_TEMPLATE/documentation.md)
+3. Provide as much detail as possible, including:
+   - Clear description of the issue
+   - Steps to reproduce (for bugs)
+   - Expected vs. actual behavior
+   - Relevant code snippets or links
 
 ### Pull Requests
 
-We welcome pull requests! Here's how to contribute:
+We welcome pull requests for:
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b docs/your-feature-name`
-3. **Make your changes** following our code style guidelines
-4. **Test your changes** thoroughly
-5. **Commit your changes**: `git commit -m 'Add some feature'`
-6. **Push to your fork**: `git push origin docs/your-feature-name`
-7. **Submit a Pull Request** to the `main` branch
+- Bug fixes
+- New documentation
+- Code improvements
+- New features
+- Translation updates
 
-### Quick Start for Documentation Contributions
+#### PR Process
+
+1. **Fork the repository** and create a feature branch from `main`
+2. **Make your changes** following the code style guidelines
+3. **Test your changes** to ensure they work correctly
+4. **Update documentation** if your changes affect the API or usage
+5. **Submit a pull request** to the `main` branch
+6. **Respond to review feedback** and make necessary changes
+
+When submitting a PR, please include:
+- A clear description of what the PR does
+- Links to any related issues
+- Screenshots for UI changes (if applicable)
+- Test results (if applicable)
+
+### Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/theluckystrike/chrome-extension-guide.git
-cd chrome-extension-guide
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/chrome-extension-guide.git
 
 # Create a new branch
-git checkout -b docs/your-docs-branch
+git checkout -b your-feature-branch
 
-# Make your documentation changes
-# Add your .md files to the appropriate docs/ folder
-
-# Commit and push
+# Make your changes and commit them
 git add .
-git commit -m 'Add documentation for XYZ'
-git push origin docs/your-docs-branch
+git commit -m "Description of your changes"
+
+# Push to your fork
+git push origin your-feature-branch
 ```
 
 ## Code Style
 
+### General Guidelines
+
+- Use **TypeScript** for all code contributions
+- Follow existing code conventions in the repository
+- Keep code clean and well-commented
+- Write meaningful commit messages
+
+### TypeScript Style
+
+- Use strict TypeScript with explicit types
+- Prefer interfaces over types for object shapes
+- Use meaningful variable and function names
+- Keep functions small and focused
+- Use async/await over raw promises
+
 ### Documentation Style
 
 - Use clear, concise language
-- Include code examples where applicable
+- Include code examples where helpful
 - Follow the existing documentation structure
-- Use proper Markdown formatting with headings, lists, and code blocks
+- Use Markdown formatting consistently
 
-### TypeScript/JavaScript Examples
+### Git Commit Messages
 
-When writing code examples:
+- Use imperative mood ("Add feature" not "Added feature")
+- Keep the first line under 72 characters
+- Reference issues and PRs when applicable
 
-```typescript
-// Use TypeScript for type safety
-import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
+Example:
+```
+Add TypeScript types for storage API
 
-// Define clear types
-interface UserSettings {
-  theme: "dark" | "light";
-  notifications: boolean;
-}
+- Added type definitions for StorageArea
+- Included schema validation types
+- Fixed type inference for get/set methods
 
-// Use meaningful variable names
-const userSettings: UserSettings = {
-  theme: "dark",
-  notifications: true,
-};
+Closes #123
 ```
 
-### General Guidelines
+## PR Requirements
 
-- Run `npm run lint` before committing (if available)
-- Keep lines under 100 characters when possible
-- Use meaningful commit messages
-- Comment complex logic
+Before submitting a pull request, ensure:
 
-## Pull Request Process
-
-### Before Submitting
-
-1. **Ensure your changes align with the project goals** - This is a Chrome extension development guide
-2. **Test your examples** - Code examples should work
-3. **Check for typos** - Use a spell checker
-4. **Review existing documentation** - Follow the established patterns
-
-### PR Requirements
-
-- **Title**: Clear and descriptive
-- **Description**: Explain what you changed and why
-- **Screenshots**: For UI changes, include before/after images
-- **Linked Issues**: Reference any related issues
-
-### Review Process
-
-1. Maintainers will review your PR
-2. You may receive feedback or change requests
-3. Once approved, your PR will be merged
-
-## Issue Templates
-
-We use GitHub issue templates to standardize contributions:
-
-- **Bug Report** - For errors and unexpected behavior
-- **Feature Request** - For new features and enhancements
-- **Documentation** - For documentation improvements
-
-Find these templates in [.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)
+- [ ] Your code follows the style guidelines
+- [ ] You have tested your changes locally
+- [ ] Documentation is updated (if applicable)
+- [ ] Your commits are atomic and well-organized
+- [ ] PR description clearly explains the changes
 
 ## Code of Conduct
 
-This project follows a Code of Conduct to ensure a welcoming environment for everyone.
+This project is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand the expectations for participation in our community.
-
-## Getting Help
-
-- **Discord**: Join our community for questions and discussions
-- **GitHub Discussions**: For general questions and ideas
-- **GitHub Issues**: For bug reports and feature requests
+Please read the full [Code of Conduct](CODE_OF_CONDUCT.md) to understand what behavior is and isn't acceptable.
 
 ## Recognition
 
-Contributors will be acknowledged in the README.md and on our contributors page.
+Contributors will be recognized in the following ways:
+- Listed in the README contributors section
+- Mentioned in release notes for significant contributions
 
-Thank you for contributing to the Chrome Extension Guide!
+## Questions?
+
+If you have questions about contributing:
+- Open an issue with the "question" label
+- Check existing issues and discussions
+- Review the documentation thoroughly
+
+---
+
+Thank you for contributing to make the Chrome Extension Guide better for everyone!
