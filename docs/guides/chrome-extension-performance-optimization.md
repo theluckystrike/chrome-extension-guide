@@ -546,5 +546,3 @@ const userData = await fetchWithCache(
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
--e 
-<!-- Performance guide added by a16 -->
