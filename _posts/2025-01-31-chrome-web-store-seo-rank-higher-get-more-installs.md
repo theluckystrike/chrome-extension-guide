@@ -192,7 +192,7 @@ Chrome Web Store SEO is not a one-time task but an ongoing strategy that compoun
 
 Start by auditing your current listing against the principles in this guide. Identify your primary keyword, ensure it appears prominently in your title and description, verify your screenshots communicate clear value, and develop a systematic approach to gathering reviews. Expand to additional languages as resources allow, and commit to regular monitoring and iteration.
 
-For more insights on growing your Chrome extension business, explore our comprehensive guides on [extension monetization strategies](/chrome-extension-guide/docs/monetization/) and [growth marketing techniques](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/). Building a successful extension requires both excellent development and strategic marketing—CWS SEO is the bridge that connects your technical achievement with the users who need it.
+For more insights on growing your Chrome extension business, explore our comprehensive guides on [extension monetization strategies](https://theluckystrike.github.io/extension-monetization-playbook/articles/monetization-strategies-overview.html) and [growth marketing techniques](https://theluckystrike.github.io/extension-monetization-playbook/articles/growth-playbook-overview.html). Building a successful extension requires both excellent development and strategic marketing—CWS SEO is the bridge that connects your technical achievement with the users who need it.
 
 ---
 
