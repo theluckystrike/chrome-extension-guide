@@ -314,5 +314,7 @@ Remember: the goal is maintainability. If you can't find files, or changing one 
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Monorepo](../guides/chrome-extension-monorepo.md)

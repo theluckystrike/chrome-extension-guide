@@ -167,5 +167,7 @@ Follow WCAG 2.1 AA guidelines:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Dark Mode](../guides/theming-dark-mode.md)

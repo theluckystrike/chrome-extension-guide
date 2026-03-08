@@ -133,5 +133,7 @@ async function trackDownload(item) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Downloads Management Patterns](../patterns/downloads-management.md)
 - [Downloads API](../api-reference/downloads-api.md)

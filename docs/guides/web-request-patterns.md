@@ -177,5 +177,7 @@ chrome.webRequest.onCompleted.addListener(async (details) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Network Interception](../patterns/network-interception.md)
 - [WebRequest Permission](../permissions/webRequest.md)

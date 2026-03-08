@@ -254,5 +254,7 @@ if (await shouldActivate()) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Communication Bridge](../patterns/content-script-communication-bridge.md)

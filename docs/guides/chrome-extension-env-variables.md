@@ -247,5 +247,7 @@ Inject secrets from CI environment variables:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Monorepo Setup](../guides/chrome-extension-monorepo.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

@@ -170,5 +170,7 @@ module.exports = {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Playwright Testing](../guides/extension-testing-with-playwright.md)

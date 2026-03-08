@@ -252,5 +252,7 @@ The exit survey page should ask:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [User Onboarding](../guides/extension-onboarding.md)
 - [User Onboarding Guide](../guides/user-onboarding.md)

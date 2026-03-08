@@ -195,5 +195,7 @@ element.classList.add('ext-highlight');
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

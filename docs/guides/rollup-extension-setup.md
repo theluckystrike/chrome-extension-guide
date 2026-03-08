@@ -150,5 +150,7 @@ Rollup offers the best balance of bundle optimization and configuration control,
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Webpack Setup](../guides/webpack-extension-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

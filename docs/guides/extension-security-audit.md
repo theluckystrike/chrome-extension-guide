@@ -182,5 +182,7 @@ For more detailed guidance on specific security topics, refer to:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Security Hardening](../guides/security-hardening.md)
 - [Security Best Practices](../guides/security-best-practices.md)

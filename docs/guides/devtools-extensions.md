@@ -165,5 +165,7 @@ DevTools Page <-> Background Service Worker <-> Content Script <-> Inspected Pag
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [DevTools Patterns](../patterns/devtools-extension-patterns.md)
 - [Debugging Extensions](../guides/debugging-extensions.md)

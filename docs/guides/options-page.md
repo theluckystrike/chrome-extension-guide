@@ -194,5 +194,7 @@ Provide a minimal but functional options.html with:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Options Page Patterns](../patterns/options-page-patterns.md)
 - [Accessibility](../guides/accessibility.md)

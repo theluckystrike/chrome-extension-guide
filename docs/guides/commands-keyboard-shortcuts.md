@@ -152,5 +152,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Keyboard Shortcuts API](../patterns/keyboard-shortcuts-api.md)
 - [Keyboard Navigation](../guides/chrome-extension-keyboard-navigation.md)

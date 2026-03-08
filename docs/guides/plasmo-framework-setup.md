@@ -149,5 +149,7 @@ For more details, check docs.plasmo.com. If you are building a production extens
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Vite Setup](../guides/vite-extension-setup.md)
 - [WXT Framework](../guides/wxt-framework-setup.md)

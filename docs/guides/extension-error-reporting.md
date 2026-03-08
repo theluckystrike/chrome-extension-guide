@@ -197,5 +197,7 @@ class ErrorReporter {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Error Handling Patterns](../patterns/error-handling.md)
 - [Extension Logging](../guides/extension-logging.md)

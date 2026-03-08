@@ -92,5 +92,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/d
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Debugging Checklist](../guides/extension-debugging-checklist.md)
 - [Debugging Tools](../guides/chrome-extension-debugging-tools.md)

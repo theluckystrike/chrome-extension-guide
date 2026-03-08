@@ -204,5 +204,7 @@ export function useMessage(callback: (message: any) => void) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Building with React](../patterns/building-with-react.md)
 - [Svelte Setup](../guides/chrome-extension-svelte-setup.md)

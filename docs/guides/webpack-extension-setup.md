@@ -313,5 +313,7 @@ For more information on related topics, see these guides:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Rollup Setup](../guides/rollup-extension-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

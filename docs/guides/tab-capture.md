@@ -553,5 +553,7 @@ With these patterns and best practices, you're well-equipped to build robust tab
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Desktop Capture](../guides/desktop-capture.md)

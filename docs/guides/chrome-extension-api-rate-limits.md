@@ -168,5 +168,7 @@ Common error codes:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Rate Limiting Patterns](../patterns/rate-limiting.md)
 - [API Mocking](../guides/chrome-extension-api-mocking.md)

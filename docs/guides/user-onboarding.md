@@ -355,5 +355,7 @@ For more information on related topics, consult these additional guides:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Onboarding Patterns](../patterns/extension-onboarding.md)
 - [User Research](../guides/chrome-extension-user-research.md)

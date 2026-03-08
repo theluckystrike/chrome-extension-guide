@@ -290,5 +290,7 @@ The `favicon` permission only triggers a warning if `tabs` or host permissions h
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Favicon Patterns](../patterns/favicon-api.md)
 - [Web Navigation](../guides/web-navigation.md)

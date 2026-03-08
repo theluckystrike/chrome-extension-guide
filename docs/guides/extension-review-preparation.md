@@ -181,5 +181,7 @@ If your extension is rejected:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Common Rejections](../publishing/common-rejections.md)
 - [Rejection Fixes](../publishing/chrome-web-store-rejection-fixes.md)

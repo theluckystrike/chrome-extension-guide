@@ -108,5 +108,7 @@ Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Design System](../guides/chrome-extension-design-system.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)

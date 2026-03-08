@@ -99,5 +99,7 @@ chrome.management.getSelf((info) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

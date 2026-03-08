@@ -545,5 +545,7 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

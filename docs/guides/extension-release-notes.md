@@ -129,5 +129,7 @@ Always include screenshots or GIFs when:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Extension Updates](../guides/extension-updates.md)
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)

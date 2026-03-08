@@ -199,5 +199,7 @@ async function getValidToken() {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [OAuth Identity Patterns](../patterns/oauth-identity.md)
 - [Identity API Reference](../api-reference/identity-api.md)

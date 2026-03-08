@@ -140,5 +140,7 @@ Offer premium features, use extension as lead magnet, accept donations via GitHu
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Review Preparation](../guides/extension-review-preparation.md)
 - [Publishing Guide](../publishing/publishing-guide.md)

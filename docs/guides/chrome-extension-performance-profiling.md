@@ -202,5 +202,7 @@ async function measureExtension() {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Performance Guide](../guides/performance.md)
 - [Size Optimization](../guides/extension-size-optimization.md)

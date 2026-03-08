@@ -134,5 +134,7 @@ Be aware of these Safari-specific limitations:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
 - [Cross-Browser Guide](../guides/cross-browser.md)

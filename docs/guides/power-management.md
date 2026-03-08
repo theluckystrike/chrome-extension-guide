@@ -460,5 +460,7 @@ The Power API is straightforward but critical for creating polished extensions t
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Power API Patterns](../patterns/power-api.md)
 - [Idle Detection](../guides/idle-detection.md)

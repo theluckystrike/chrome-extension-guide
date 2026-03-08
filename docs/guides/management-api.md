@@ -688,5 +688,7 @@ For more information, see the official [Chrome Management API documentation](htt
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Management API Reference](../api-reference/management-api.md)
 - [Extension Configuration](../patterns/extension-configuration.md)

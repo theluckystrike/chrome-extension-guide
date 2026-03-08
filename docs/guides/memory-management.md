@@ -416,3 +416,8 @@ new MutationObserver(() => {
 ```
 
 This comprehensive approach ensures your extension manages memory efficiently across all contexts while maintaining reliable functionality for users.
+
+## Related Articles
+
+- [Memory Management Patterns](../patterns/memory-management.md)
+- [Performance Guide](../guides/performance.md)

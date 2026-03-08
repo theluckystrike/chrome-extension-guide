@@ -131,5 +131,7 @@ Set `default_locale` in manifest.json. When a translation is missing, Chrome fal
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Internationalization](../guides/internationalization.md)
 - [Advanced i18n](../patterns/advanced-i18n.md)

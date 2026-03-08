@@ -109,6 +109,8 @@ document.addEventListener('keydown', (e) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Accessibility Patterns](../patterns/accessibility.md)
 - [Keyboard Shortcuts Guide](../guides/keyboard-shortcuts.md)
 - [Accessibility Testing](../guides/extension-a11y-testing.md)

@@ -112,5 +112,7 @@ Enable fast iteration during development:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

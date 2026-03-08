@@ -140,5 +140,7 @@ async function tagBookmark(id, tags) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Bookmarks API Reference](../api-reference/bookmarks-api.md)
 - [History API](../guides/history-api.md)

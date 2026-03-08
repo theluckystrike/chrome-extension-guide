@@ -242,6 +242,8 @@ ensureInitialized();
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
 - [Service Worker Debugging](../guides/service-worker-debugging.md)
 - [Event-Driven Messaging](../patterns/event-driven-messaging.md)

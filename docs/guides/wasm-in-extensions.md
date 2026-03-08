@@ -130,5 +130,7 @@ Or use offscreen documents for processing.
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [WASM Patterns](../patterns/wasm-extensions.md)
 - [Web Workers](../guides/web-workers-extensions.md)

@@ -186,5 +186,7 @@ chrome.cookies.onChanged.addListener(async (changeInfo) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Cookies API Reference](../api-reference/cookies-api.md)
 - [Cookies & Sessions](../patterns/cookies-sessions.md)

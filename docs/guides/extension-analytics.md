@@ -141,5 +141,7 @@ window.addEventListener('unhandledrejection', e =>
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Analytics & Telemetry](../patterns/analytics-telemetry.md)
 - [Data Privacy](../guides/chrome-extension-data-privacy.md)

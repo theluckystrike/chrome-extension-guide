@@ -528,5 +528,7 @@ Linux has limited audio capture support. Test thoroughly on target distributions
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Desktop Capture Patterns](../patterns/desktop-capture.md)
 - [Tab Capture](../guides/tab-capture.md)

@@ -531,5 +531,7 @@ By following these patterns, you can build extensions that respect user privacy,
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Permission Gating](../patterns/permission-gating.md)
 - [Permissions Strategy](../guides/extension-permissions-strategy.md)

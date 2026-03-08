@@ -359,5 +359,7 @@ Use these capabilities to implement auto-save, session timeouts, away status, an
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Idle API Reference](../api-reference/idle.md)
 - [Power Management](../guides/power-management.md)

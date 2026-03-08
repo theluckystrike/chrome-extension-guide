@@ -1043,5 +1043,7 @@ These patterns scale from small utility extensions to complex multi-context appl
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Dev Tools](../guides/chrome-extension-dev-tools.md)
 - [Webpack Setup](../guides/webpack-extension-setup.md)

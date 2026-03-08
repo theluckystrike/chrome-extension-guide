@@ -177,5 +177,7 @@ jobs:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)

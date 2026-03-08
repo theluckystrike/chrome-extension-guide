@@ -156,5 +156,7 @@ Cross-references:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

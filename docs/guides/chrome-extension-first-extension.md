@@ -231,5 +231,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

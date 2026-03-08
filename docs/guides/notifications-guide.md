@@ -160,5 +160,7 @@ chrome.notifications.getAll((notifications) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications API](../api-reference/notifications-api.md)

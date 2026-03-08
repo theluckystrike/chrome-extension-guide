@@ -471,5 +471,7 @@ const { data, fromCache, stale } = await offlineCache.fetch(
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Caching Patterns](../patterns/caching-strategies.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)

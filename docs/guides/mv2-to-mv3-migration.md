@@ -555,5 +555,7 @@ Handle `port.onDisconnect` and reconnect when using long-lived ports via `chrome
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [MV3 Migration Cheatsheet](../guides/mv3-migration-cheatsheet.md)
 - [Migration Checklist](../guides/extension-migration-mv2-to-mv3-checklist.md)

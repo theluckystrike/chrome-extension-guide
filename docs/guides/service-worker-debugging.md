@@ -151,5 +151,7 @@ async function sendWithRetry(message, retries = 3) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Advanced Debugging](../guides/advanced-debugging.md)
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)

@@ -816,5 +816,7 @@ For more information, see:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [OAuth Identity](../patterns/oauth-identity.md)
 - [Security Audit](../guides/extension-security-audit.md)

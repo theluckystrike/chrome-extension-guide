@@ -288,5 +288,7 @@ jobs:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [E2E Testing Patterns](../patterns/e2e-testing-patterns.md)

@@ -167,5 +167,7 @@ const data = await msg.send("getPageData");
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script Lifecycle](../patterns/content-script-lifecycle.md)

@@ -171,5 +171,7 @@ chrome.declarativeContent.onPageChanged.addRules([
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Declarative Content Patterns](../patterns/declarative-content-patterns.md)
 - [Declarative Content Permission](../permissions/declarativeContent.md)

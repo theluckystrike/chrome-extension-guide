@@ -500,5 +500,7 @@ Both packages handle the Promise/callback normalization and provide consistent A
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
 - [Safari Porting](../guides/chrome-extension-safari-porting.md)

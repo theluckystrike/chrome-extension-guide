@@ -729,5 +729,7 @@ Key considerations:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [System API Reference](../api-reference/system-api.md)
 - [Desktop Capture](../guides/desktop-capture.md)

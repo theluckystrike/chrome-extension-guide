@@ -168,5 +168,7 @@ Complete this checklist, test thoroughly, and your extension will be ready for M
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
 - [MV3 Migration Cheatsheet](../guides/mv3-migration-cheatsheet.md)

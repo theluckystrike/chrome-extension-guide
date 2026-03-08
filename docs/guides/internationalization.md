@@ -136,5 +136,7 @@ chrome.i18n.detectLanguage("Bonjour le monde", (result) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [i18n API Reference](../api-reference/i18n-api.md)
 - [Advanced i18n](../patterns/advanced-i18n.md)

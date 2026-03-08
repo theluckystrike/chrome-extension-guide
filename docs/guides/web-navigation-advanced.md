@@ -755,5 +755,7 @@ By mastering these advanced patterns, you can build powerful navigation analytic
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Web Navigation Patterns](../patterns/webnavigation-patterns.md)
 - [Web Navigation](../guides/web-navigation.md)

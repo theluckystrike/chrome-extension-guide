@@ -445,5 +445,7 @@ Always:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Update Handling](../patterns/extension-update-handling.md)
 - [Extension Packaging](../guides/extension-packaging.md)

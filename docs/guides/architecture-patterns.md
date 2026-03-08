@@ -1064,6 +1064,8 @@ Start simple. Refactor toward complexity only when the code demands it.
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 - [State Persistence](../patterns/extension-state-persistence.md)

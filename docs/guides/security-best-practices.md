@@ -84,5 +84,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/s
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Security Hardening](../guides/security-hardening.md)
 - [CORS Patterns](../patterns/cors-extension-patterns.md)

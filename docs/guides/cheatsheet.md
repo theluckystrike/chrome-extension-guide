@@ -414,5 +414,7 @@ const user = await protocol.send("getUser", { id: "123" });
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Chrome API Index](../reference/chrome-api-index.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

@@ -333,5 +333,7 @@ For more advanced patterns and real-world implementations, explore the extension
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Chrome Built-in AI APIs](../guides/chrome-built-in-ai-apis.md)
 - [OAuth Identity](../guides/identity-oauth.md)

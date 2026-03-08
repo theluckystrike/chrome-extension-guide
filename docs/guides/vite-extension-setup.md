@@ -356,5 +356,7 @@ For more information on related topics, see these guides:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Esbuild Setup](../guides/esbuild-extension-setup.md)
 - [Rollup Setup](../guides/rollup-extension-setup.md)

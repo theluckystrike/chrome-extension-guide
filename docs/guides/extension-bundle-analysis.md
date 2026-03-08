@@ -319,5 +319,7 @@ Run: `npx size-limit`
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Size Optimization](../guides/extension-size-optimization.md)

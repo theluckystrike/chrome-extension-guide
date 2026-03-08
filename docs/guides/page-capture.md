@@ -753,5 +753,7 @@ function downloadBlob(blob, filename) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Downloads Management](../patterns/downloads-management.md)
 - [Desktop Capture](../guides/desktop-capture.md)

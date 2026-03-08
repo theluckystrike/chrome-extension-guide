@@ -96,5 +96,7 @@ Use this checklist when reviewing pull requests for Chrome extension projects to
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Review Preparation](../guides/extension-review-preparation.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

@@ -107,5 +107,7 @@ async function getConfig() {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Performance Profiling](../patterns/performance-profiling.md)
 - [Performance Profiling](../guides/extension-performance-profiling.md)

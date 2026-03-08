@@ -157,5 +157,7 @@ If you're looking to streamline your extension development workflow further, zov
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md)
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)

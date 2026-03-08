@@ -384,5 +384,7 @@ Run through this checklist before publishing:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)

@@ -383,5 +383,7 @@ function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [WebRTC Screen Sharing](../patterns/webrtc-screen-sharing.md)
 - [Desktop Capture](../guides/desktop-capture.md)

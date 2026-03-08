@@ -102,5 +102,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Multi-Window Patterns](../patterns/multi-window.md)
 - [Windows API](../api-reference/windows-api.md)

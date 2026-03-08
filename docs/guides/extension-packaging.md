@@ -204,5 +204,7 @@ Always verify your package before distribution:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
 - [Extension Updates](../guides/extension-updates.md)

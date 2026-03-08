@@ -850,5 +850,7 @@ Create shared packages only when code genuinely serves multiple purposes. Premat
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 - [Environment Variables](../guides/chrome-extension-env-variables.md)

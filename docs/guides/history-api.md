@@ -132,5 +132,7 @@ chrome.history.onVisited.addListener(async (result) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [History API Reference](../api-reference/history-api.md)
 - [Bookmark API](../guides/bookmark-api.md)

@@ -128,5 +128,7 @@ const storage = createStorage(defineSchema({
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Tab Management Patterns](../patterns/tab-management.md)
 - [Tab Group Patterns](../patterns/tab-group-patterns.md)

@@ -504,5 +504,7 @@ jobs:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Playwright Testing](../guides/extension-testing-with-playwright.md)
 - [Puppeteer Testing](../guides/extension-testing-with-puppeteer.md)

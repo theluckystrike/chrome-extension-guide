@@ -225,5 +225,7 @@ Configure to trigger CWS publish on release:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Chrome Web Store API](../guides/chrome-web-store-api.md)

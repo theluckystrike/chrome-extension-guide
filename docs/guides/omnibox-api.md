@@ -163,5 +163,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Command Palette](../patterns/command-palette.md)
 - [Commands API](../api-reference/commands-api.md)

@@ -131,5 +131,7 @@ chrome.contextMenus.update("myItem", { title: "New Title", enabled: false });
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Context Menu Patterns](../patterns/context-menu-patterns.md)
 - [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

@@ -125,5 +125,7 @@ Firefox uses `.xpi` format: `web-ext build`
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Edge Migration](../guides/chrome-extension-migration-edge.md)
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)

@@ -715,5 +715,7 @@ Always implement feature detection and provide appropriate fallbacks for users o
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Proxy Settings Deep Dive](../patterns/proxy-settings-deep-dive.md)
 - [Proxy Permission](../permissions/proxy.md)

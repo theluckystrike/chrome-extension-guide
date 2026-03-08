@@ -516,5 +516,7 @@ reportPerformance({
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Lazy Loading Content Scripts](../patterns/lazy-loading-content-scripts.md)
 - [Caching Strategies](../guides/caching-strategies.md)

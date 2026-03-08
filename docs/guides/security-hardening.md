@@ -900,5 +900,7 @@ Cross-references:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Security Audit](../guides/extension-security-audit.md)

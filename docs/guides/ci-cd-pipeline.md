@@ -1170,5 +1170,7 @@ Cross-references:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Release Notes](../guides/extension-release-notes.md)

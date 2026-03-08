@@ -120,5 +120,7 @@ Page JS <-- window.postMessage --> Content Script <-- chrome.runtime --> Backgro
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Content Script Isolation](../patterns/content-script-isolation.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

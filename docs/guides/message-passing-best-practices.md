@@ -323,5 +323,7 @@ const response = await withTimeout(
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Messaging Protocols](../patterns/extension-messaging-protocols.md)
 - [Message Passing Patterns](../reference/message-passing-patterns.md)

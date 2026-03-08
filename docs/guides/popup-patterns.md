@@ -212,5 +212,7 @@ Provide a minimal but complete template:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Popup Communication](../patterns/popup-communication.md)
 - [Popup Data Loading](../patterns/popup-data-loading.md)

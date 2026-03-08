@@ -64,5 +64,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)

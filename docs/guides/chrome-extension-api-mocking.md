@@ -308,5 +308,7 @@ it('should render popup with mock data', () => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [API Rate Limits](../guides/chrome-extension-api-rate-limits.md)
 - [Testing Extensions](../guides/testing-extensions.md)

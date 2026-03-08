@@ -166,6 +166,8 @@ async function updateSyncInterval(minutes) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Alarm Scheduling Patterns](../patterns/alarm-scheduling-patterns.md)
 - [Background Patterns](../guides/background-patterns.md)
 - [Alarms Permission](../permissions/alarms.md)

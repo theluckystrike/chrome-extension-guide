@@ -174,5 +174,7 @@ Or use a custom plugin to strip all logging calls in production builds.
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Logging Patterns](../patterns/logging-patterns.md)
 - [Error Reporting](../guides/extension-error-reporting.md)

@@ -196,5 +196,7 @@ function announce(message) {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Accessibility](../guides/accessibility.md)
 - [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

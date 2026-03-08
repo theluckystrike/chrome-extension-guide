@@ -92,5 +92,7 @@ curl -H "Authorization: Bearer ACCESS_TOKEN" \
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)
 - [Listing Optimization](../publishing/listing-optimization.md)

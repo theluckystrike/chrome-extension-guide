@@ -161,5 +161,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Web Navigation API](../api-reference/web-navigation-api.md)
 - [URL Handling](../patterns/navigation-url-handling.md)

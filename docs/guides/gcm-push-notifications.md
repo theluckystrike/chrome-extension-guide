@@ -729,5 +729,7 @@ self.addEventListener('push', (event) => { /* ... */ });
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Notification Patterns](../patterns/notification-patterns.md)
 - [Notifications Guide](../guides/notifications-guide.md)

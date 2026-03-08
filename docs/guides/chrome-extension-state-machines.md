@@ -321,5 +321,7 @@ Use the [XState Visualizer](https://stately.ai/viz) during development to diagra
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [State Management](../patterns/state-management.md)
 - [Extension Architecture](../guides/extension-architecture.md)

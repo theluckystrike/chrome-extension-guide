@@ -169,5 +169,7 @@ Provide clear, honest descriptions in your store listing and extension settings.
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Permissions Model](../guides/permissions-model.md)
 - [Permission Gating](../patterns/permission-gating.md)

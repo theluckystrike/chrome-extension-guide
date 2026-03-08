@@ -315,5 +315,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'; // heavier
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [GraphQL Patterns](../patterns/graphql-extensions.md)
 - [REST API Patterns](../guides/rest-api-patterns.md)

@@ -259,5 +259,7 @@ The small footprint also helps stay within Chrome's service worker memory limits
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Building with Svelte](../patterns/building-with-svelte.md)
 - [Vue Setup](../guides/chrome-extension-vue-setup.md)

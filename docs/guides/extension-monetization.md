@@ -248,5 +248,7 @@ const premiumAction = withLicenseCheck(async (data) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Listing Optimization](../publishing/listing-optimization.md)
 - [Release Notes](../guides/extension-release-notes.md)

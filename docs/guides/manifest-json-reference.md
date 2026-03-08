@@ -117,5 +117,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/m
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Cheatsheet](../guides/cheatsheet.md)

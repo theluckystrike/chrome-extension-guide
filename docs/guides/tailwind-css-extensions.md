@@ -148,5 +148,7 @@ For more extension development patterns and tools, explore the resources at zovo
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Design System](../guides/chrome-extension-design-system.md)

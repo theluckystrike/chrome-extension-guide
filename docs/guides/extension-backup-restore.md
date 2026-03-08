@@ -221,5 +221,7 @@ async function autoBackupToSync(key: string, data: unknown): Promise<void> {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [State Persistence](../patterns/extension-state-persistence.md)
 - [Storage Migration](../guides/storage-migration.md)

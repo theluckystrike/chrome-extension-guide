@@ -250,5 +250,7 @@ chrome.runtime.onStartup.addListener(() => console.log('[SW] onStartup'));
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Service Worker Lifecycle Patterns](../patterns/service-worker-lifecycle.md)
 - [Event Handling](../patterns/service-worker-event-handling.md)

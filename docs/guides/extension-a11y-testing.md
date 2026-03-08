@@ -223,5 +223,7 @@ Never remove outline without replacement:
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Accessibility](../guides/accessibility.md)
 - [Testing Extensions](../guides/testing-extensions.md)

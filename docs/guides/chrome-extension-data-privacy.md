@@ -170,5 +170,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Analytics Privacy](../patterns/extension-analytics-privacy.md)
 - [Permissions Model](../guides/permissions-model.md)

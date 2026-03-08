@@ -231,5 +231,7 @@ class WorkerPool {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Worker Offloading](../patterns/webworker-offloading.md)
 - [WASM in Extensions](../guides/wasm-in-extensions.md)

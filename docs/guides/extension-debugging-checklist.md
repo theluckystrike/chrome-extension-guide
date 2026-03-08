@@ -260,5 +260,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

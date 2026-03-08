@@ -760,5 +760,7 @@ await messenger.sendTab(tabId, "increment", { by: 1 });
 
 ## Related Articles {#related-articles}
 
+## Related Articles
+
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
 - [MV3 Migration Guide](../mv3/manifest-v3-migration-guide.md)
