@@ -1,12 +1,17 @@
-# Chrome Tab Groups API Guide
+---
+layout: default
+title: "Chrome Extension Tab Groups API — How to Organize and Manage Tab Groups"
+description: "A comprehensive guide to using the Chrome Tab Groups API in extensions. Learn to create, organize, and manage tab groups with colors, titles, moving tabs between groups, and collapsing functionality."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-groups/"
+---
 
-## Introduction
+# Chrome Extension Tab Groups API — How to Organize and Manage Tab Groups
 
-The Chrome Tab Groups API (`chrome.tabGroups`) enables extension developers to organize, manage, and manipulate tab groups programmatically. Tab groups help users categorize and manage their browser workspace efficiently.
+The Chrome Tab Groups API (`chrome.tabGroups`) is a powerful extension API that enables Chrome extensions to programmatically organize, manage, and manipulate tab groups. Tab groups help users categorize and manage their browser workspace efficiently, making it easier to handle numerous open tabs. This guide covers everything you need to build robust tab group management features into your extension.
 
-## Required Permissions
+## Prerequisites and Permissions
 
-Add the `tabGroups` permission to your manifest:
+Before using the Tab Groups API, you need to declare the appropriate permissions in your `manifest.json`:
 
 ```json
 {
@@ -14,17 +19,60 @@ Add the `tabGroups` permission to your manifest:
 }
 ```
 
-The `tabs` permission is required for accessing tab URLs and titles, which are essential for domain-based grouping.
+The `tabGroups` permission is required for creating, reading, updating, and deleting tab groups. The `tabs` permission is necessary for accessing tab URLs and titles, which are essential when implementing domain-based or project-based grouping logic. Both permissions are available in Manifest V3 and later versions.
 
----
+The Tab Groups API is available in Chrome 88+ for basic methods, Chrome 89+ for events, and Chrome 114+ for the move functionality. Keep these version requirements in mind when building features that depend on specific API methods.
+
+## Understanding the TabGroup Object
+
+When working with the Tab Groups API, you'll encounter `TabGroup` objects that contain several key properties:
+
+- `id` (number): Unique group identifier assigned by Chrome
+- `title` (string): Display name of the group (up to 50 characters)
+- `color` (string): Group color from a predefined palette
+- `collapsed` (boolean): Whether the group is currently collapsed
+- `windowId` (number): ID of the parent window containing this group
+
+The available colors are: grey, blue, red, yellow, green, pink, purple, cyan, and orange. Each color can be used to visually categorize groups by type, priority, or any custom criteria that fits your extension's use case.
 
 ## Core API Methods
 
-### chrome.tabGroups.get — Getting a Group by ID
+### Creating Tab Groups
 
-Retrieve a single tab group by its ID:
+Tab groups are created implicitly when you add tabs to a group using the `chrome.tabs.group()` method. This is the primary way to create new groups:
 
 ```javascript
+// Group multiple tabs together into a new group
+const tabIds = [tab1.id, tab2.id, tab3.id];
+const groupId = await chrome.tabs.group({ tabIds });
+
+// Set group properties after creation
+await chrome.tabGroups.update(groupId, {
+  title: "Project Alpha",
+  color: "blue"
+});
+
+// Add a single tab to an existing group
+const newGroupId = await chrome.tabs.group({
+  groupId: existingGroupId,
+  tabIds: [newTab.id]
+});
+
+// Create a group from tabs matching a URL pattern
+const tabs = await chrome.tabs.query({ url: "https://github.com/*" });
+const githubGroupId = await chrome.tabs.group({
+  tabIds: tabs.map(t => t.id)
+});
+```
+
+The `chrome.tabs.group()` method returns the group ID, which you can then use with `chrome.tabGroups.update()` to set the title and color. This two-step process (create group, then customize) is the standard pattern for programmatic group creation.
+
+### Reading Tab Groups
+
+Retrieve group information using `chrome.tabGroups.get()` and `chrome.tabGroups.query()`:
+
+```javascript
+// Get a single group by ID
 async function getTabGroup(groupId) {
   try {
     const group = await chrome.tabGroups.get(groupId);
@@ -34,34 +82,19 @@ async function getTabGroup(groupId) {
     console.error("Group not found:", error);
   }
 }
-```
 
-Returns a `TabGroup` object containing:
-- `id`: Unique group identifier
-- `title`: Display name
-- `color`: Group color (grey, blue, red, yellow, green, pink, purple, cyan, orange)
-- `collapsed`: Whether the group is collapsed
-- `windowId`: Parent window ID
-
----
-
-### chrome.tabGroups.query — Finding Groups with Filters
-
-Query all groups in a window or across all windows:
-
-```javascript
-// All groups in current window
+// Query all groups in the current window
 const groupsInWindow = await chrome.tabGroups.query({
   windowId: chrome.windows.WINDOW_ID_CURRENT
 });
 
-// All groups across all windows
+// Query all groups across all windows
 const allGroups = await chrome.tabGroups.query({});
 
-// Filter by color
+// Filter groups by color
 const redGroups = await chrome.tabGroups.query({ color: "red" });
 
-// Filter by title pattern (using callback)
+// Filter groups by title pattern
 chrome.tabGroups.query({}, (groups) => {
   const projectGroups = groups.filter(g => 
     g.title?.toLowerCase().includes("project")
@@ -69,11 +102,11 @@ chrome.tabGroups.query({}, (groups) => {
 });
 ```
 
----
+The `query()` method is particularly useful for building extension UIs that display all groups or allow filtering by color or other properties.
 
-### chrome.tabGroups.update — Modifying Group Properties
+### Updating Tab Groups
 
-Update a group's title, color, and collapsed state:
+Modify group properties using `chrome.tabGroups.update()`:
 
 ```javascript
 async function updateGroup(groupId, updates) {
@@ -90,20 +123,21 @@ async function updateGroup(groupId, updates) {
   await chrome.tabGroups.update(groupId, {
     title: updates.title,        // New title (string)
     color: updates.color,        // Group color
-    collapsed: updates.collapsed // true/false
+    collapsed: updates.collapsed // true to collapse, false to expand
   });
 }
 
 // Usage examples
 await updateGroup(groupId, { title: "Project Alpha" });
 await updateGroup(groupId, { color: "blue", collapsed: true });
+await updateGroup(groupId, { title: "Urgent", color: "red", collapsed: false });
 ```
 
----
+The update method allows you to change the title, color, and collapsed state of any group. These changes are reflected immediately in the browser's tab strip.
 
-### chrome.tabGroups.move — Moving Groups Between Windows
+### Moving Tab Groups
 
-Move a group to a different window or reorder within the same window:
+The `chrome.tabGroups.move()` method allows you to reorganize groups by moving them between windows or reordering them within the same window:
 
 ```javascript
 // Move group to another window
@@ -114,7 +148,7 @@ async function moveGroupToWindow(groupId, targetWindowId) {
   });
 }
 
-// Reorder groups in same window
+// Reorder groups within the same window
 async function reorderGroups(groupIds) {
   for (let i = 0; i < groupIds.length; i++) {
     await chrome.tabGroups.move(groupIds[i], {
@@ -130,13 +164,52 @@ const targetWindow = windows.find(w => w.id !== currentWindowId);
 await chrome.tabGroups.move(groupId, { windowId: targetWindow.id, index: 0 });
 ```
 
----
+The move API was added in Chrome 114, so ensure your extension accounts for this when supporting older Chrome versions.
+
+### Collapsing and Expanding Groups
+
+Collapsing groups is a key feature for managing screen real estate:
+
+```javascript
+// Collapse a group
+await chrome.tabGroups.update(groupId, { collapsed: true });
+
+// Expand a group
+await chrome.tabGroups.update(groupId, { collapsed: false });
+
+// Toggle group collapse state
+async function toggleGroupCollapse(groupId) {
+  const group = await chrome.tabGroups.get(groupId);
+  await chrome.tabGroups.update(groupId, { collapsed: !group.collapsed });
+}
+```
+
+When a group is collapsed, only the group title bar remains visible, hiding all the tabs within it. This is particularly useful for users who want to focus on specific groups while keeping others accessible but out of the way.
+
+## Removing Tabs from Groups
+
+When you need to remove tabs from a group (but keep the tab open), use `chrome.tabs.ungroup()`:
+
+```javascript
+// Remove single tab from group (becomes ungrouped)
+await chrome.tabs.ungroup(tabId);
+
+// Remove multiple tabs from their groups
+await chrome.tabs.ungroup([tabId1, tabId2, tabId3]);
+
+// Ungroup all tabs in a group
+const tabs = await chrome.tabs.query({ groupId: groupId });
+await chrome.tabs.ungroup(tabs.map(t => t.id));
+```
+
+Note that calling `ungroup()` doesn't close the tabs—it simply removes them from the group, leaving them as individual ungrouped tabs.
 
 ## Event Listeners
 
-### chrome.tabGroups.onCreated — Group Creation Events
+The Tab Groups API provides events for monitoring group changes:
 
 ```javascript
+// Group creation events
 chrome.tabGroups.onCreated.addListener((group) => {
   console.log(`Group created: ${group.title} (${group.color})`);
   
@@ -146,13 +219,8 @@ chrome.tabGroups.onCreated.addListener((group) => {
     group: group
   });
 });
-```
 
----
-
-### chrome.tabGroups.onUpdated — Group Property Changes
-
-```javascript
+// Group property changes
 chrome.tabGroups.onUpdated.addListener((groupId, changeInfo, group) => {
   console.log(`Group ${groupId} updated:`, changeInfo);
   
@@ -167,27 +235,16 @@ chrome.tabGroups.onUpdated.addListener((groupId, changeInfo, group) => {
     console.log(`Collapsed: ${changeInfo.collapsed}`);
   }
 });
-```
 
----
-
-### chrome.tabGroups.onRemoved — Group Deletion Events
-
-```javascript
+// Group deletion events
 chrome.tabGroups.onRemoved.addListener((groupId, removeInfo) => {
   console.log(`Group ${groupId} removed`);
-  console.log("Remove info:", removeInfo);
   
   // removeInfo contains: { windowId, isUngrouping }
   // isUngrouping is true if tabs were manually ungrouped
 });
-```
 
----
-
-### chrome.tabGroups.onMoved — Group Reorder Events
-
-```javascript
+// Group reorder events
 chrome.tabGroups.onMoved.addListener((groupId, moveInfo) => {
   console.log(`Group ${groupId} moved:`, moveInfo);
   
@@ -196,67 +253,25 @@ chrome.tabGroups.onMoved.addListener((groupId, moveInfo) => {
 });
 ```
 
----
-
-## Tab-Group Association
-
-### chrome.tabs.group — Adding Tabs to Groups
-
-```javascript
-// Group multiple tabs together
-const tabIds = [tab1.id, tab2.id, tab3.id];
-const groupId = await chrome.tabs.group({ tabIds });
-
-// Add a single tab to an existing group
-const newGroupId = await chrome.tabs.group({
-  groupId: existingGroupId,
-  tabIds: [newTab.id]
-});
-
-// Add tabs matching a pattern
-const tabs = await chrome.tabs.query({ url: "https://github.com/*" });
-const githubGroupId = await chrome.tabs.group({
-  tabIds: tabs.map(t => t.id)
-});
-```
-
----
-
-### chrome.tabs.ungroup — Removing Tabs from Groups
-
-```javascript
-// Remove single tab from group (becomes ungrouped)
-await chrome.tabs.ungroup(tabId);
-
-// Remove multiple tabs from their groups
-await chrome.tabs.ungroup([tabId1, tabId2, tabId3]);
-
-// Ungroup all tabs in a group
-const tabs = await chrome.tabs.query({ groupId: groupId });
-await chrome.tabs.ungroup(tabs.map(t => t.id));
-```
-
----
+These events enable your extension to react to user actions in real-time, which is essential for maintaining synchronized state between your extension's UI and the browser's tab groups.
 
 ## Color Options Reference
 
-| Color    | Value      | Use Case                        |
-|----------|------------|----------------------------------|
-| grey     | "grey"     | General/uncategorized           |
-| blue     | "blue"     | Work/business                   |
-| red      | "red"      | Urgent/important                |
-| yellow   | "yellow"   | In-progress/review              |
-| green    | "green"    | Completed/done                  |
-| pink     | "pink"     | Personal                        |
-| purple   | "purple"   | Development/technical           |
-| cyan     | "cyan"     | Research/learning               |
-| orange   | "orange"   | Finance/shopping                |
+| Color  | Value    | Use Case                        |
+|--------|----------|----------------------------------|
+| grey   | "grey"   | General/uncategorized           |
+| blue   | "blue"   | Work/business                   |
+| red    | "red"    | Urgent/important                |
+| yellow | "yellow" | In-progress/review              |
+| green  | "green"  | Completed/done                  |
+| pink   | "pink"   | Personal                        |
+| purple | "purple" | Development/technical           |
+| cyan   | "cyan"   | Research/learning               |
+| orange | "orange" | Finance/shopping                |
 
----
+## Practical Example: Auto-Grouping by Domain
 
-## Practical Examples
-
-### Building a Tab Organizer with Auto-Grouping
+Here's a complete example of a tab organizer that automatically groups new tabs by domain:
 
 ```javascript
 class TabOrganizer {
@@ -317,62 +332,22 @@ class TabOrganizer {
     };
     return colorMap[domain] || "grey";
   }
+  
+  onGroupCreated(group) {
+    console.log(`Auto-created group: ${group.title}`);
+  }
+  
+  onGroupUpdated(id, info, group) {
+    console.log(`Group ${id} updated:`, info);
+  }
 }
 ```
 
----
+This implementation automatically organizes new tabs into groups based on their domain, making it easy for users to keep related sites together without manual intervention.
 
-### Grouping by Project
+## Session Persistence
 
-```javascript
-// Organize tabs by project name in the URL or title
-async function groupByProject() {
-  const tabs = await chrome.tabs.query({ currentWindow: true });
-  
-  const projectMap = new Map();
-  
-  for (const tab of tabs) {
-    // Extract project from URL or title
-    const project = extractProjectName(tab.url, tab.title);
-    if (!project) continue;
-    
-    if (!projectMap.has(project)) {
-      projectMap.set(project, []);
-    }
-    projectMap.get(project).push(tab.id);
-  }
-  
-  // Create groups
-  const colors = ["blue", "green", "purple", "orange", "cyan"];
-  let colorIndex = 0;
-  
-  for (const [project, tabIds] of projectMap) {
-    if (tabIds.length < 2) continue; // Skip single tabs
-    
-    const groupId = await chrome.tabs.group({ tabIds });
-    await chrome.tabGroups.update(groupId, {
-      title: project,
-      color: colors[colorIndex % colors.length]
-    });
-    colorIndex++;
-  }
-}
-
-function extractProjectName(url, title) {
-  // Custom logic: extract project from JIRA, GitHub, etc.
-  const jiraMatch = url.match(/jira\.com\/b\/([A-Z]+-\d+)/);
-  if (jiraMatch) return jiraMatch[1];
-  
-  const githubMatch = url.match(/github\.com\/[^/]+\/([^/]+)/);
-  if (githubMatch) return githubMatch[1];
-  
-  return null;
-}
-```
-
----
-
-### Saving and Restoring Tab Group Sessions
+Many extensions benefit from saving and restoring tab group sessions:
 
 ```javascript
 // Save current groups to storage
@@ -429,13 +404,20 @@ async function restoreSession() {
 setInterval(saveSession, 60000); // Every minute
 ```
 
----
+This pattern enables users to preserve their workspace across browser restarts or transfer their setup to another machine.
+
+## Browser Compatibility Notes
+
+The Tab Groups API has evolved over several Chrome releases:
+
+- **Chrome 88**: Basic API methods (get, query, update, create via tabs.group)
+- **Chrome 89**: Event listeners (onCreated, onUpdated, onRemoved, onMoved)
+- **Chrome 114**: Move API for relocating groups between windows
+
+For extensions targeting a broader audience, consider using feature detection or providing fallback functionality for older Chrome versions.
 
 ## Reference
 
-Official documentation: [developer.chrome.com/docs/extensions/reference/api/tabGroups](https://developer.chrome.com/docs/extensions/reference/api/tabGroups)
-
-Additional resources:
+- [Official Tab Groups API Documentation](https://developer.chrome.com/docs/extensions/reference/api/tabGroups)
 - [Tab Groups API Chrome Status](https://chromestatus.com/feature/5740067858804736)
 - Requires Manifest V3+
-- Available in Chrome 88+ (methods), Chrome 89+ (events), Chrome 114+ (move API)
