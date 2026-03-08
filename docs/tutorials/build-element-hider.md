@@ -131,3 +131,7 @@ observer.observe(document.body, { childList: true, subtree: true });
 - See [Content Script Patterns](../guides/content-script-patterns.md) for communication strategies
 - See [DOM Observer Patterns](../patterns/dom-observer-patterns.md) for dynamic content handling
 - See [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) for storage optimization
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

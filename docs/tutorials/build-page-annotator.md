@@ -252,3 +252,7 @@ button { margin-top: 8px; padding: 6px; border: 1px solid #00ff41; background: t
 - Markdown/HTML export
 - Keyboard shortcut to highlight selection
 - Improved selector fallbacks for dynamic pages
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

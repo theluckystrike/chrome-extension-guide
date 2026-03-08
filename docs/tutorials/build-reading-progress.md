@@ -282,3 +282,7 @@ function isArticlePage() {
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Throttle & Debounce Patterns](../patterns/throttle-debounce-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

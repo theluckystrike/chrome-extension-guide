@@ -185,3 +185,7 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
 - Badge UI: see `patterns/badge-action-ui.md`
 
 Your word counter extension is ready! Install it via `chrome://extensions` in developer mode.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

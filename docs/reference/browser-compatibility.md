@@ -108,3 +108,7 @@ Edge is Chromium-based, offering near-full Chrome compatibility:
 
 - [Cross-Browser Development Guide](../guides/cross-browser.md)
 - [Cross-Browser Patterns](../patterns/cross-browser-compatibility.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

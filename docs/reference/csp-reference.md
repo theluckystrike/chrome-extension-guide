@@ -140,3 +140,7 @@ import { createMessenger } from '@theluckystrike/webext-messaging';
 ## Cross-References {#cross-references}
 - MV3: `docs/mv3/content-security-policy.md`
 - Guide: `docs/guides/security-best-practices.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

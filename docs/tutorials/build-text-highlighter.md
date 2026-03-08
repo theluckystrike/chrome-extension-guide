@@ -285,3 +285,7 @@ Download as .md file or copy to clipboard.
 ## Summary {#summary}
 
 You built a persistent text highlighter with: Selection API for text capture, XPath serialization for range storage, multiple color options, sidebar UI, removal functionality, and markdown export. Test at chrome://extensions/ with Developer mode enabled. Use Alt+Shift+H shortcut for quick access.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -179,3 +179,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 - Cross-ref: `docs/permissions/tabs.md`
 - Cross-ref: `docs/patterns/tab-management.md`
 - Cross-ref: `docs/guides/memory-management.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

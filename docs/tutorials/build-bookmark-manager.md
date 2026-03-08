@@ -214,3 +214,7 @@ loadBookmarks();
 - Add broken link checker (fetch HEAD, check status)
 - Import from HTML bookmark file
 - Sync tags across devices with `storage.sync`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

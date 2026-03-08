@@ -134,3 +134,7 @@ Full example: render a list of optional permissions with Grant/Revoke buttons us
 ## Next Steps {#next-steps}
 - [Storage Quickstart](storage-quickstart.md)
 - [Messaging Quickstart](messaging-quickstart.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -234,3 +234,7 @@ You now have a complete Pomodoro timer extension with:
 - Auto-start options
 
 This extension demonstrates key Chrome extension patterns including service worker timing, cross-context communication, and persistent state management.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

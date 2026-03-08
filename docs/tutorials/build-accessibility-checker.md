@@ -287,3 +287,7 @@ document.getElementById('run-scan').addEventListener('click', async () => {
 - [guides/accessibility.md](../guides/accessibility.md)
 - [guides/extension-a11y-testing.md](../guides/extension-a11y-testing.md)
 - [patterns/dom-observer-patterns.md](../patterns/dom-observer-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

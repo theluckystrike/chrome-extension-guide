@@ -115,3 +115,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Options page for custom file uploads
 - Handling cursor states and interaction types
 - Performance optimization with CSS-only approach
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -239,3 +239,7 @@ This tutorial covered building a GitHub UI enhancer with:
 - Settings popup for feature toggles
 - SPA navigation handling with MutationObserver
 - API rate limit handling with caching
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

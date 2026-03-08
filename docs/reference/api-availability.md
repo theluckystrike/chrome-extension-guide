@@ -154,3 +154,7 @@ Available offscreen reasons (partial list):
 - Service Worker Tips: `docs/mv3/service-worker-tips.md`
 - Offscreen Documents: `docs/mv3/offscreen-documents.md`
 - Manifest Permissions: `docs/reference/manifest-permissions-map.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -171,3 +171,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') deactivate
 
 ## Summary {#summary}
 You built a CSS inspector extension with hover highlighting, computed style extraction, box model/typography/colors display, EyeDropper color picker, CSS rule copying, selector path generation, Shadow DOM support, throttled mousemove for performance, and cleanup on deactivate.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

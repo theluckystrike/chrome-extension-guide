@@ -179,3 +179,7 @@ Add to manifest's content_scripts.matches or use runtime.onInstalled:
 - Chrome storage API for preferences
 - Smooth scroll API
 - Per-site vs global settings
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

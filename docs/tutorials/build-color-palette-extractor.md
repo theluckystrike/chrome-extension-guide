@@ -283,3 +283,7 @@ function checkWcagContrast(fg, bg) {
 ## Summary {#summary}
 
 You built a color palette extractor with activeTab permissions, content script scanning (getComputedStyle), image pixel sampling via canvas, color grouping and sorting, popup UI with format toggle, clipboard operations, and export options (CSS/JSON/PNG). Includes color naming and WCAG contrast checking. Test at chrome://extensions/ with Developer mode enabled.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -113,3 +113,7 @@ const storage = createStorage(defineSchema({
 - Test scheduling — set short intervals for testing
 - Test toggle on/off
 - Cross-ref: `docs/permissions/declarativeNetRequest.md`, `docs/mv3/declarative-net-request.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

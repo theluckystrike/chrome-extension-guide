@@ -74,3 +74,7 @@ const storage = createStorage(defineSchema({
 - Weather widget
 - Bookmarks integration
 - Theme customization
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

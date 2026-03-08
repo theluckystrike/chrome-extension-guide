@@ -308,3 +308,7 @@ async function copyNoteToClipboard(note: Note): Promise<void> {
 - [patterns/side-panel.md](../patterns/side-panel.md)
 - [patterns/state-management.md](../patterns/state-management.md)
 - [guides/options-page.md](../guides/options-page.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

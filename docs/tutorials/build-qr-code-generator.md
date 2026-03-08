@@ -285,3 +285,7 @@ Cross-ref: For context menu patterns, see `docs/patterns/context-menu-patterns.m
 - History stored via chrome.storage
 
 This extension demonstrates core extension patterns: popup UI, background service worker, storage, and context menus.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

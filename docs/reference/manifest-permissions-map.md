@@ -77,3 +77,7 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 - Make high-warning permissions optional
 - Only request permissions when user needs the feature
 - Use `@theluckystrike/webext-permissions` `listPermissions()` to show users what's granted
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -256,3 +256,7 @@ Your countdown timer extension now includes:
 - Precise timing using storage timestamps
 
 This demonstrates chrome.alarms for background timing, chrome.storage for state persistence, and badge management for visual feedback.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

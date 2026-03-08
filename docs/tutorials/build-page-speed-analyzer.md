@@ -189,3 +189,7 @@ button{flex:1;padding:8px;border:1px solid #00ff41;background:transparent;color:
 
 ## Summary {#summary}
 This extension uses the Performance API and PerformanceObserver to capture real-time metrics. The popup calculates a weighted performance score and displays a grade (A-F) as a badge. Resource breakdown uses a pie chart, and recommendations identify optimization opportunities. History is stored per URL, and reports can be exported as JSON.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

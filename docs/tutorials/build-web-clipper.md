@@ -690,3 +690,7 @@ Load the extension:
 ## Summary {#summary}
 
 This tutorial built a complete web clipper extension with three capture modes (full page, selection, screenshot), a content script that extracts metadata and converts HTML to Markdown, a side panel for managing clips, and export functionality. The extension uses `@theluckystrike/webext-storage` for typed persistent storage and `@theluckystrike/webext-messaging` for type-safe communication between popup, background, and content scripts.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

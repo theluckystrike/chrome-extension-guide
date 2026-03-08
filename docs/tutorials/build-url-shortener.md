@@ -140,3 +140,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 
 ## Summary {#summary}
 Built: one-click shortening, custom aliases, clipboard feedback, QR codes, history, context menu.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

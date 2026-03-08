@@ -213,3 +213,7 @@ You've built a complete IP lookup extension with:
 - History tracking
 
 For more patterns, see [patterns/cross-origin-requests.md](../patterns/cross-origin-requests.md), [api-reference/alarms-api.md](../api-reference/alarms-api.md), and [patterns/clipboard-patterns.md](../patterns/clipboard-patterns.md).
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

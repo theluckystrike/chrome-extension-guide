@@ -149,3 +149,7 @@ chrome.commands.onCommand.addListener((command) => {
 - [Permissions: scripting](../permissions/scripting.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Side Panel Pattern](../patterns/side-panel.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

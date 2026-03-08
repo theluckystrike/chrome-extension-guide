@@ -75,3 +75,7 @@ PERMISSION_DESCRIPTIONS['storage']; // Direct map access
 - Not listing in `optional_permissions` — can't request undeclared permissions
 - `removePermission` actually revokes access — guard subsequent API calls
 - Over-checking: cache results, re-check periodically not on every call
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

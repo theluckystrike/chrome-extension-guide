@@ -128,3 +128,7 @@ The extension uses the `commands` API. Press `Ctrl+Shift+Space` to open the sear
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Sessions API Reference](../api-reference/sessions-api.md)
 - [Tab Management Patterns](../patterns/tab-management.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

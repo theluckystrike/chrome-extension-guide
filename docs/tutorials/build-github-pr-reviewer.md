@@ -514,3 +514,7 @@ devices with `chrome.storage.sync`.
 **PR comparison mode.** Let users compare the current PR against a previous version
 of the same PR by storing snapshots of file changes. This helps track how a PR has
 evolved through review cycles.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

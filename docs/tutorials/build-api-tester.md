@@ -111,3 +111,7 @@ async function handleSend(): Promise<void> {
 - [Cross-Origin Requests](/patterns/cross-origin-requests)
 - [Popup Patterns](/guides/popup-patterns)
 - [Side Panel](/mv3/side-panel)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

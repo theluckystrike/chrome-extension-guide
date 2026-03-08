@@ -103,3 +103,7 @@ Use `chrome.storage.sync` for cross-device sync (watch ~100KB quota): `await chr
 - [api-reference/storage-api-deep-dive.md](../api-reference/storage-api-deep-dive.md)
 - [mv3/side-panel.md](../mv3/side-panel.md)
 - [patterns/throttle-debounce-extensions.md](../patterns/throttle-debounce-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

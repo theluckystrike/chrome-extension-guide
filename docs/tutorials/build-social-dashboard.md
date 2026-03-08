@@ -405,3 +405,7 @@ For more details on specific APIs used in this tutorial, check out:
 - [patterns/dynamic-rules.md](../patterns/dynamic-rules.md)
 - [guides/content-script-patterns.md](../guides/content-script-patterns.md)
 - [permissions/alarms.md](../permissions/alarms.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

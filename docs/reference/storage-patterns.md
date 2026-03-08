@@ -296,3 +296,7 @@ chrome.storage.sync.getBytesInUse(null, (bytes) => {
 - Storing sensitive data (passwords, tokens) in sync storage — use local
 - Not debouncing frequent writes — hit rate limits on sync
 - Forgetting `chrome.storage.onChanged` fires across ALL contexts
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -153,3 +153,7 @@ chrome.action.setBadgeText({ text: String(notes.length) });
 ```
 
 Your Quick Notes extension is ready! This pattern scales well with additional features like tags, rich text formatting, and cloud backup.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

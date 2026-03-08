@@ -217,3 +217,7 @@ document.body.appendChild(host);
 - Guide: `docs/guides/content-script-isolation.md`
 - MV3: `docs/mv3/dynamic-content-scripts.md`
 - Permission: `docs/permissions/scripting.md`, `docs/permissions/activeTab.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

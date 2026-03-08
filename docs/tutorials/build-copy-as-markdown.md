@@ -195,3 +195,7 @@ Provide visual feedback when content is copied using the Chrome notifications AP
 ## Conclusion {#conclusion}
 
 This extension demonstrates core Chrome extension concepts: context menus, clipboard access, and content script injection. With these foundations, you can extend functionality to support more Markdown features or integrate with note-taking apps.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

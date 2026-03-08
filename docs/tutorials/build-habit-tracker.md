@@ -86,3 +86,7 @@ See: [Notifications API](../api-reference/notifications-api.md)
 - Alarm scheduling for daily tasks, notification API for reminders
 - Storage schema design for habit tracking, streak calculation algorithms
 - Options page implementation, badge updates, weekly analytics
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

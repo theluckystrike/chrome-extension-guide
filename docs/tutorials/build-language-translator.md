@@ -314,3 +314,7 @@ You now have a fully functional translation extension with context menu support,
 - Language detection improvement
 - Translation memory
 - Cloud sync for history
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

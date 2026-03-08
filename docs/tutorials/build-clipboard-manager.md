@@ -212,3 +212,7 @@ body { width: 350px; max-height: 500px; margin: 0; font-family: system-ui; backg
 - Rich text preview
 - Sync pinned items across devices
 - Keyboard navigation in popup
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -209,3 +209,7 @@ function initializeVideoFeatures(video) {
 This extension demonstrates key Chrome extension patterns for working with SPAs like YouTube. The DOM observer handles YouTube's dynamic content, keyboard shortcuts provide quick playback control, and storage persists user preferences per channel.
 
 Next steps: Add ad-skip detection, implement keyboard shortcut customization, or add video quality presets.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

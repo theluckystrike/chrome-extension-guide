@@ -107,3 +107,7 @@ storage.watch('articles', (newValue) => {
 - Sync storage for cross-device data
 - Alarms for scheduled notifications
 - Reactive UI with storage.watch()
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -764,3 +764,7 @@ Before loading the extension:
 
 - [patterns/oauth-identity.md](../patterns/oauth-identity.md) -- OAuth2 flows and token management
 - [patterns/notification-patterns.md](../patterns/notification-patterns.md) -- Desktop notification strategies and best practices
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

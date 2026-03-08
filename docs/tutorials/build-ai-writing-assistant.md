@@ -591,3 +591,7 @@ provides visual feedback: green (normal), orange (>80%), red (exceeded).
 All messaging follows `@theluckystrike/webext-messaging` conventions with typed
 message objects (`{ type, ...payload }`). All storage uses
 `@theluckystrike/webext-storage` patterns via `chrome.storage.local`.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

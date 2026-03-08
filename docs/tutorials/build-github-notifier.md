@@ -143,3 +143,7 @@ chrome.action.onClicked.addListener(async () => {
 ## Summary {#summary}
 
 You've built a GitHub notifications extension with alarm-based polling, badge updates, desktop notifications, and token configuration. For production, upgrade to OAuth as documented in [Identity and OAuth](/docs/guides/identity-oauth.md).
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

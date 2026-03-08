@@ -242,3 +242,7 @@ async function exportToCSV() {
 - [Tabs API](../api-reference/tabs-api.md)
 - [Idle Detection Patterns](../patterns/idle-detection.md)
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

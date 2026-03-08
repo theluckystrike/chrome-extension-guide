@@ -245,3 +245,7 @@ For more information, see:
 - [Manifest Fields Reference](manifest-fields.md) - Complete manifest.json documentation
 - [Permissions Model](guides/permissions-model.md) - Understanding extension permissions
 - [Web Accessible Resources](mv3/web-accessible-resources.md) - Configuring accessible resources
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -101,3 +101,7 @@ catch (e) { if (e instanceof MessagingError) console.error(e); }
 - Missing `externally_connectable`
 - Port disconnects on SW termination
 - Circular messages
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

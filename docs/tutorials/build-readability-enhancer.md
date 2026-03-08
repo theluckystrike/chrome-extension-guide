@@ -213,3 +213,7 @@ chrome.commands.onCommand.addListener((command) => {
 - Theme switching with CSS custom properties
 - Keyboard shortcuts in extensions
 - Storage API for preferences
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

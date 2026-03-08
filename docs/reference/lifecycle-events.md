@@ -160,3 +160,7 @@ async function getState() {
 - Not handling `onSuspend` — lose unsaved state
 - Expecting event order guarantees between different APIs — race conditions possible
 - Using `onMessage` without returning `true` for async responses
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

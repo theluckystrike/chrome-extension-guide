@@ -414,3 +414,7 @@ This extension tracks email time through:
 6. **CSV export** enables data analysis in spreadsheets
 
 For production, add error handling, sync data across devices with [patterns/data-sync.md](../patterns/data-sync.md), and implement proper TypeScript types.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

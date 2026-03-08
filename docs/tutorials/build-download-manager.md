@@ -503,3 +503,7 @@ You can extend this further by adding:
 - Queue management with priority
 - File integrity verification (checksums)
 - Cloud sync for download history
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -121,3 +121,7 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 - `chrome.downloads` API
 - Canvas API for image manipulation
 - Content script scrolling + messaging for full-page capture
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

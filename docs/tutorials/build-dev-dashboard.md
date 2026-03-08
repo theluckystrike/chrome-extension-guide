@@ -641,3 +641,7 @@ npm run build
 ## Summary {#summary}
 
 This tutorial built a complete new-tab override extension with four independent widgets, persistent state via `chrome.storage`, background alarms via `chrome.alarms`, and a dark theme using CSS custom properties. Each widget is a standalone module in `src/widgets/`, making it straightforward to add new widgets or swap out data sources.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

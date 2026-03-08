@@ -228,3 +228,7 @@ async function getCachedOrFetch(url) {
 - Support multiple locations
 - Add weather notifications
 - Implement severe weather alerts
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

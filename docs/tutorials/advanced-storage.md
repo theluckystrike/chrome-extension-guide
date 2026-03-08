@@ -100,3 +100,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Not handling `undefined` returns for keys that haven't been set yet
 - Creating multiple `TypedStorage` instances for the same area with overlapping keys
 - Using `clear()` when you meant `remove()` — `clear()` wipes everything in the schema
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

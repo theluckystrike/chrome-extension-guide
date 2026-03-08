@@ -124,3 +124,7 @@ function deleteItem(url) {
 - [History API Reference](../api_reference/history-api.md)
 - [History Permissions](../permissions/history.md)
 - [History Patterns Deep Dive](../patterns/history-deep-dive.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

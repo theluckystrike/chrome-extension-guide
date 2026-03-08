@@ -437,3 +437,7 @@ This foundation can be extended with advanced features like custom themes, sched
 ## Testing — various site types, image handling, per-site persistence, sync across devices {#testing-various-site-types-image-handling-per-site-persistence-sync-across-devices}
 
 ## What You Learned — scripting.executeScript, activeTab pattern, per-site preferences, CSS filters, storage.watch {#what-you-learned-scriptingexecutescript-activetab-pattern-per-site-preferences-css-filters-storagewatch}
+## What You Learned — scripting.executeScript, activeTab pattern, per-site preferences, CSS filters, storage.watch
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

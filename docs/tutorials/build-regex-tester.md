@@ -130,3 +130,7 @@ Text: `matches.map((m,i)=>\`Match \${i+1}: \${m[0]}\`).join('\n')`
 - [guides/popup-patterns.md](../../guides/popup-patterns.md)
 - [api-reference/storage-api-deep-dive.md](../../api-reference/storage-api-deep-dive.md)
 - [patterns/throttle-debounce-extensions.md](../../patterns/throttle-debounce-extensions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

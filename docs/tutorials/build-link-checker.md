@@ -152,3 +152,7 @@ Extension demonstrates link extraction, HTTP checking with rate limiting, visual
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Rate Limiting Pattern](../patterns/rate-limiting.md)
 - [Badge Action UI](../patterns/badge-action-ui.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

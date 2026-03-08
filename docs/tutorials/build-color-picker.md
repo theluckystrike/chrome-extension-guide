@@ -174,3 +174,7 @@ Works via activeTab, must be user-triggered. Set at chrome://extensions/shortcut
 ## Summary {#summary}
 
 You built a color picker extension with EyeDropper API + fallback content script, color conversion (HEX/RGB/HSL), popup UI with format switching, palette storage and export, and keyboard shortcut (Alt+Shift+C). Test at chrome://extensions/ with Developer mode enabled.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

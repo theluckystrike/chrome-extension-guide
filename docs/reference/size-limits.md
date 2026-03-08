@@ -106,3 +106,7 @@ For more detailed information, see:
 
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Storage Migration Patterns](../patterns/storage-migration.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

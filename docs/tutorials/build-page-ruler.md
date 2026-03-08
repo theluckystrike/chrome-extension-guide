@@ -375,3 +375,7 @@ chrome.commands.onCommand.addListener((command) => {
 - [Dynamic Content Injection](../patterns/dynamic-content-injection.md)
 - [DOM Observer Patterns](../patterns/dom-observer-patterns.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

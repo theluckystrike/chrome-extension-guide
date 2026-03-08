@@ -109,3 +109,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Not handling the case where a tab's content script hasn't loaded yet
 - Using `sendTabMessage` to a tab that doesn't have a content script — always catch `MessagingError`
 - Defining mismatched types between sender and handler (TypeScript catches this at compile time with MessageMap)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

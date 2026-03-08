@@ -593,3 +593,7 @@ async function translateWithRetry(text, sourceLang, targetLang, maxRetries = 3) 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Context Menus API](../permissions/contextMenus.md)
 - [i18n API Reference](../api-reference/i18n-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

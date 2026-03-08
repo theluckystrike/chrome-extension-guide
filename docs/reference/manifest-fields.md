@@ -220,3 +220,7 @@ In MV3, `content_security_policy` is an **object**, not a string. The default en
 
 - [Manifest V3 Documentation](https://developer.chrome.com/docs/extensions/mv3/intro/)
 - [Chrome Extensions GitHub Repository](https://github.com/GoogleChrome/chrome-extensions-samples)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -156,3 +156,7 @@ function exportTasks(format: 'json' | 'text') {
 - Add unit tests for CRUD operations
 
 Happy building! 🚀
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

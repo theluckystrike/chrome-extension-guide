@@ -340,3 +340,7 @@ load();
 - Support trigger folders/categories
 - Add usage statistics per snippet
 - Implement multi-cursor expansion for code snippets
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

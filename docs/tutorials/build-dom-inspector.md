@@ -178,3 +178,7 @@ document.addEventListener('keydown', (e) => {
 - See [DOM Observer Patterns](/patterns/dom-observer-patterns.md) for mutation tracking
 - See [Clipboard Patterns](/patterns/clipboard-patterns.md) for advanced copy operations
 - See [Dynamic Content Injection](/patterns/dynamic-content-injection.md) for script injection
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

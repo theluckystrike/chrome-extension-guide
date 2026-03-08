@@ -1323,3 +1323,7 @@ npm install @theluckystrike/webext-vpnProvider
 ---
 
 Built by [theluckystrike](https://github.com/theluckystrike) — [zovo.one](https://zovo.one)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

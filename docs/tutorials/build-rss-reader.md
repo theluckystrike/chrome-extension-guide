@@ -339,3 +339,7 @@ This RSS reader extension demonstrates:
 - **Offscreen Documents** for XML parsing in service worker context (see `patterns/offscreen-documents.md`)
 
 The extension can be installed locally by loading the unpacked extension in Chrome's extension management page.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

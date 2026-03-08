@@ -246,3 +246,7 @@ function updatePopup() {
 - Bookmark API: `docs/guides/bookmark-api.md`
 - Storage API: `docs/guides/storage-api.md`
 - Permissions: `docs/permissions/bookmarks.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

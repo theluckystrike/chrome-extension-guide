@@ -230,3 +230,7 @@ chrome.runtime.onInstalled.addListener(() => {
 - Guide: `docs/guides/security-best-practices.md`
 - Permission: `docs/permissions/storage.md`, `docs/permissions/unlimitedStorage.md`
 - MV3: `docs/mv3/service-workers.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

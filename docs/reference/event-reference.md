@@ -186,3 +186,7 @@ chrome.tabs.onUpdated.addListener((id, info, tab) => {}, { urls: ['*://youtube.c
 - [Lifecycle Events](./lifecycle-events.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
 - [Service Workers](../mv3/service-workers.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -112,3 +112,7 @@ async function saveGradient() {
 - [patterns/clipboard-patterns.md](../patterns/clipboard-patterns.md)
 - [guides/popup-patterns.md](../guides/popup-patterns.md)
 - [api-reference/storage-api-deep-dive.md](../api-reference/storage-api-deep-dive.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

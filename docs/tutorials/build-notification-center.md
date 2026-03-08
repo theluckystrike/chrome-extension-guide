@@ -347,3 +347,7 @@ Here's the complete flow:
 - [Alarms API](https://developer.chrome.com/docs/extensions/reference/alarms/)
 - [@theluckystrike/webext-storage](https://www.npmjs.com/package/@theluckystrike/webext-storage)
 - [@theluckystrike/webext-messaging](https://www.npmjs.com/package/@theluckystrike/webext-messaging)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

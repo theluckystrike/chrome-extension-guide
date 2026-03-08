@@ -155,3 +155,7 @@ This extension demonstrates:
 - Content scripts for page integration
 
 For more patterns, see [patterns/context-menu-patterns.md](../../patterns/context-menu-patterns.md).
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

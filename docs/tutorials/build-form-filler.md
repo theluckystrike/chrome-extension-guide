@@ -169,3 +169,7 @@ See `docs/guides/content-script-patterns.md` and `docs/patterns/form-handling.md
 - Smart field detection with fuzzy matching
 - Context menu and keyboard triggers
 - Import/export profiles as JSON
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

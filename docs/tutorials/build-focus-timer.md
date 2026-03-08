@@ -190,3 +190,7 @@ chrome.runtime.onStartup.addListener(async () => {
 - Permission: `docs/permissions/alarms.md`, `docs/permissions/declarativeNetRequest.md`
 - MV3: `docs/mv3/event-driven-architecture.md`
 - Guide: `docs/guides/notifications-guide.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

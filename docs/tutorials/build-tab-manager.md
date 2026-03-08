@@ -121,3 +121,7 @@ function findDuplicates(tabs) {
 - `chrome.tabGroups` for colored tab groups
 - Type-safe messaging between popup and background
 - Persisting UI state with storage
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

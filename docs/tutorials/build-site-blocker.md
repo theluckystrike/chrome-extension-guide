@@ -611,3 +611,7 @@ A simple SHA-256 hash comparison could be added for better security. The current
 - [declarativeNetRequest API](https://developer.chrome.com/docs/extensions/mv3/reference/declarativeNetRequest)
 - [@theluckystrike/webext-storage](https://github.com/theluckystrike/webext-storage)
 - [@theluckystrike/webext-messaging](https://github.com/theluckystrike/webext-messaging)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

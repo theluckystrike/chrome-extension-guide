@@ -306,3 +306,7 @@ async function exportAllMeetings() {
 - [Side Panel API](../permissions/sidePanel.md)
 - [Side Panel Patterns](../patterns/side-panel.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

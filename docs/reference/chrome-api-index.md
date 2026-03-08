@@ -61,3 +61,7 @@
 - APIs marked "None" for permission are available to all extensions
 - Some APIs require manifest keys instead of permissions (e.g., `devtools_page`, `omnibox`)
 - MV3 removed: `chrome.webRequestBlocking` (use `declarativeNetRequest`), `chrome.extension.getBackgroundPage()` (use messaging)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

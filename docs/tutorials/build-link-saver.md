@@ -273,3 +273,7 @@ You've built a complete link saver extension with:
 - Import/Export functionality
 
 For state management patterns, see [patterns/state-management.md](../patterns/state-management.md).
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

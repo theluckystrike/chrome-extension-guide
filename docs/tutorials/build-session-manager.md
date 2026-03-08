@@ -121,3 +121,7 @@ function exportSessions(sessions) {
   a.download = 'sessions.json'; a.click();
 }
 ```
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

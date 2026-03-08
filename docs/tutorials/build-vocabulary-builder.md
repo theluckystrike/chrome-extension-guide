@@ -384,3 +384,7 @@ function downloadFile(content, filename, type) {
 - [permissions/sidePanel.md](../permissions/sidepanel.md)
 - [patterns/side-panel.md](../patterns/side-panel.md)
 - [patterns/state-management.md](../patterns/state-management.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

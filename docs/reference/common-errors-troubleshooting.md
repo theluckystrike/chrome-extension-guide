@@ -295,3 +295,7 @@ chrome.permissions.contains({ permissions: ['bookmarks'] }, (result) => {
 ## Additional resources {#additional-resources}
 
 For persistent issues not covered here, consult the official Chrome Extensions documentation and the Chrome Extension bug tracker. The developer community at zovo.one frequently discusses troubleshooting patterns for Manifest V3 implementations and can provide context-specific guidance for complex error scenarios.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

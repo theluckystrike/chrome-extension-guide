@@ -95,3 +95,7 @@ Each tutorial covers the entire development process: planning, manifest configur
 - [messaging-quickstart](messaging-quickstart.html)
 - [permissions-quickstart](permissions-quickstart.html)
 - [storage-quickstart](storage-quickstart.html)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -103,3 +103,7 @@ Need a specific extension type? We have dedicated starters:
 ---
 
 **Built by [theluckystrike](https://github.com/theluckystrike) — Part of the [zovo.one](https://zovo.one) ecosystem**
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

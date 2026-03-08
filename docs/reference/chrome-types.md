@@ -202,3 +202,7 @@ const all: string[] = listPermissions();
 - Reference: `docs/reference/storage-patterns.md`
 - Reference: `docs/reference/message-passing-patterns.md`
 - Reference: `docs/reference/manifest-permissions-map.md`
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

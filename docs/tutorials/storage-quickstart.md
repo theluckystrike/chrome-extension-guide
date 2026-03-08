@@ -147,3 +147,7 @@ Full realistic example combining all methods in an options page scenario.
 
 - [Messaging Quickstart](messaging-quickstart.md)
 - [Permissions Quickstart](permissions-quickstart.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

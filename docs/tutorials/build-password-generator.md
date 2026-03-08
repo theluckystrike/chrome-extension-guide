@@ -656,3 +656,7 @@ Users can customize the shortcut at `chrome://extensions/shortcuts`.
 - Content scripts that detect and modify page DOM with `MutationObserver`
 - Keyboard shortcuts via `chrome.commands` and background service worker
 - Security considerations for password handling (cross-ref: `docs/guides/security-best-practices.md`)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

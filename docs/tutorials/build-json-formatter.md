@@ -242,3 +242,7 @@ function parseJSONL(text) {
 - See `patterns/clipboard-patterns.md` for clipboard best practices
 - See `guides/content-script-patterns.md` for content script architecture
 - See `patterns/theming-dark-mode.md` for theme implementation
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

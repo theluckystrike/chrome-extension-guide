@@ -213,3 +213,7 @@ If you are injecting content scripts, remember they are subject to the page's CS
 These are the common pitfalls that trip up extension developers moving to MV3. Understanding these behaviors before you hit them will save debugging time.
 
 For more patterns and guides, check out the chrome-extension-guide at zovo.one.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

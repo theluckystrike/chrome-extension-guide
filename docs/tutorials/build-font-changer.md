@@ -274,3 +274,7 @@ chrome.commands.onCommand.addListener((command) => {
 - [Theming & Dark Mode](../patterns/theming-dark-mode.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Font Settings API](../patterns/font-settings-api.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

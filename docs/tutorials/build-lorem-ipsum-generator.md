@@ -91,3 +91,7 @@ canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorial
 - Keyboard shortcuts in extensions
 - Multiple text generation algorithms
 - Format conversion between plain/HTML/markdown
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

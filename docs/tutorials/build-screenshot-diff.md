@@ -220,3 +220,7 @@ function exportDiff(diffCanvas) {
 | Diff | Canvas getImageData + pixel comparison |
 | Display | Overlay, side-by-side, slider |
 | Export | canvas.toDataURL() + download |
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

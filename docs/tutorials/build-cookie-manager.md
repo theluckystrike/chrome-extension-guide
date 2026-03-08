@@ -282,3 +282,7 @@ async function updateBadge(tabId) {
 - [Cookies API Reference](../api-reference/cookies-api.md)
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookie Sessions Pattern](../patterns/cookies-sessions.md)
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

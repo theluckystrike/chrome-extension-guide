@@ -290,3 +290,7 @@ function createNoteWithShadow() {
 - [DOM Observer Pattern](/docs/patterns/dom-observer-patterns.md) - For detecting page changes
 - [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md) - For advanced injection
 - [Storage API Deep Dive](/docs/api-reference/storage-api-deep-dive.md) - For complex storage needs
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

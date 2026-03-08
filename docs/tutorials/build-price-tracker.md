@@ -814,3 +814,7 @@ price-tracker/
 
 - [patterns/side-panel.md](../patterns/side-panel.md) -- Side panel API patterns and best practices
 - [patterns/data-sync.md](../patterns/data-sync.md) -- Data portability and sync strategies
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

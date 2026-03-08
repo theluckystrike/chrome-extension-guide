@@ -583,3 +583,7 @@ Run `npx rollup -c`, copy static assets to `dist/`, and load it.
 - **`@theluckystrike/webext-messaging`** replaces raw `chrome.runtime.sendMessage` with typed `sendMessage`/`onMessage` pairs.
 - **Badge text** gives at-a-glance timer status without opening the popup.
 - **Auto-scheduling** via a periodic alarm lets focus mode activate during configured work hours without user action.
+-e 
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
