@@ -539,3 +539,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 - **Manifest V3 Migration:** Tabs API is fully supported in MV3
 - **Permissions:** Use `"tabs"` for full access or granular host permissions for specific URLs
 - **Promises:** Most methods return Promises in MV3—prefer async/await over callbacks
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

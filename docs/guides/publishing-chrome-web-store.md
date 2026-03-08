@@ -537,3 +537,7 @@ Publishing to the Chrome Web Store requires attention to detail, from technical 
 Remember that publishing is just the beginning. Maintain your extension actively, respond to user feedback, update regularly, and continue optimizing your store listing. A well-maintained extension with a strong listing can serve users for years.
 
 Good luck with your Chrome extension publication!
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

@@ -815,6 +815,10 @@ price-tracker/
 - [patterns/side-panel.md](../patterns/side-panel.md) -- Side panel API patterns and best practices
 - [patterns/data-sync.md](../patterns/data-sync.md) -- Data portability and sync strategies
 -e 
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

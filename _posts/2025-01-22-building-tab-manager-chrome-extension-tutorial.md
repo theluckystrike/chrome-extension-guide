@@ -792,6 +792,10 @@ The complete source code for this tutorial provides a solid foundation. You can 
 
 Remember to test thoroughly, handle edge cases, and always prioritize user privacy. With over [permissions best practices](/docs/guides/permissions-best-practices/) in mind, you'll build extensions that users trust and love.
 
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 **Built by theluckystrike at [zovo.one](https://zovo.one)**

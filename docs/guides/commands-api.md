@@ -284,3 +284,7 @@ async function executeMainAction() {
 - [Commands API - Chrome Extensions](https://developer.chrome.com/docs/extensions/reference/api/commands)
 - [Manifest - Commands](https://developer.chrome.com/docs/extensions/mv3/manifest/commands)
 - [User-Defined Shortcuts](https://developer.chrome.com/docs/extensions/mv3/manifest/commands#user-defined)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

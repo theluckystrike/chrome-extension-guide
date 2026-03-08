@@ -767,6 +767,10 @@ Understanding the differences between ISOLATED and MAIN worlds, proper error han
 
 - [Scripting API Reference](../api-reference/scripting-api.md)
 - [Content Script Injection](../patterns/content-script-injection.md)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

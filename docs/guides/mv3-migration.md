@@ -992,3 +992,7 @@ browser.runtime.sendMessage({
 - Service Worker Best Practices: [developer.chrome.com/docs/extensions/mv3/service-workers](https://developer.chrome.com/docs/extensions/mv3/service-workers)
 - Declarative Net Request: [developer.chrome.com/docs/extensions/mv3/reference/declarativeNetRequest](https://developer.chrome.com/docs/extensions/mv3/reference/declarativeNetRequest)
 - Scripting API: [developer.chrome.com/docs/extensions/reference/scripting](https://developer.chrome.com/docs/extensions/reference/scripting)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
