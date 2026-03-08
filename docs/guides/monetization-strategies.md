@@ -723,6 +723,20 @@ document.addEventListener('DOMContentLoaded', () => {
 - [Gumroad Documentation](https://gumroad.com/overlay) - Simple payment overlays
 - [FTC Endorsement Guidelines](https://www.ftc.gov/endorsement) - Affiliate disclosure requirements
 
+## Related Articles
+
+- [How to Monetize Your Chrome Extension — Complete Guide](../guides/monetization-overview.md) — Comprehensive overview of every monetization model with case studies
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Pricing psychology, subscription tiers, and trial periods that convert
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competitor pricing and find differentiation opportunities
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate willingness to pay before setting your price
+- [User Interviews](../monetization/user-interviews.md) — Interview users to understand perceived value and price sensitivity
+- [Product Roadmap](../monetization/product-roadmap.md) — Plan feature releases that align with revenue goals
+- [A/B Testing](../guides/ab-testing.md) — Test monetization experiments with real conversion data
+- [Analytics and Telemetry](../guides/analytics-telemetry.md) — Track MRR, churn, and conversion metrics
+- [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md) — Optimize your listing to maximize install-to-trial conversions
+
+For end-to-end implementation guides on Stripe integration, license key systems, and paywall UI patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
+
 ## Conclusion
 - Choose a monetization model that matches your extension's value delivery
 - Always provide a free tier or trial to demonstrate value

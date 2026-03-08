@@ -266,6 +266,14 @@ Score 20+ indicates a strong opportunity.
 - [Extension Monetization Guide](../guides/extension-monetization.md) — Comprehensive strategies for generating revenue from your Chrome extension
 - [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md) — Optimize your extension listing for maximum visibility and conversions
 - [Publishing Guide](../publishing/publishing-guide.md) — Step-by-step guide to publishing your extension on the Chrome Web Store
+- [Competitor Analysis for Chrome Extensions](../monetization/competitor-analysis.md) — Frameworks for analyzing competing extensions and finding market gaps
+- [User Interviews for Chrome Extensions](../monetization/user-interviews.md) — Validate your research findings with direct user conversations
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Turn your market research into a pricing model that converts
+- [Product Roadmap for Chrome Extensions](../monetization/product-roadmap.md) — Prioritize features based on your market research findings
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Complete guide to choosing the right monetization model
+- [Analytics and Telemetry](../guides/analytics-telemetry.md) — Track user behavior to validate your market research assumptions
+
+For implementation playbooks, pricing calculators, and real-world case studies, explore the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

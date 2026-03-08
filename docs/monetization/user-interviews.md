@@ -426,9 +426,17 @@ Sprint 6:      Plan next iteration
 
 ## Related Articles
 
-- [Chrome Extension User Research](./../guides/chrome-extension-user-research.md) — Comprehensive strategies for gathering user feedback
-- [Extension Onboarding Patterns](./../patterns/extension-onboarding.md) — Designing user onboarding flows
-- [Extension Analytics](./../guides/extension-analytics.md) — Implementing analytics to understand user behavior
+- [Chrome Extension User Research](../guides/chrome-extension-user-research.md) — Comprehensive strategies for gathering user feedback
+- [Extension Onboarding Patterns](../patterns/extension-onboarding.md) — Designing user onboarding flows informed by interview insights
+- [Extension Analytics](../guides/extension-analytics.md) — Implementing analytics to understand user behavior
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Combine interview findings with quantitative market data
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Use interview insights to identify competitive differentiation
+- [Product Roadmap for Chrome Extensions](../monetization/product-roadmap.md) — Convert interview findings into prioritized feature plans
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Validate pricing models with user willingness-to-pay data from interviews
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Complete monetization guide covering every revenue model
+- [User Feedback Collection](../guides/user-feedback.md) — Scale feedback collection beyond interviews with in-extension forms
+
+For interview-driven monetization strategies and real-world case studies, explore the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

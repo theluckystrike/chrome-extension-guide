@@ -507,9 +507,18 @@ Last updated: [Date]
 
 ## Related Articles
 
-- [Extension Monetization Strategies](../guides/extension-monetization.md)
-- [Publishing to Chrome Web Store](../publishing/publishing-guide.md)
-- [User Feedback Collection](../guides/user-feedback.md)
+- [Extension Monetization Strategies](../guides/extension-monetization.md) — Revenue strategies that inform roadmap priorities
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Complete monetization guide with implementation patterns
+- [Publishing to Chrome Web Store](../publishing/publishing-guide.md) — Publishing workflows for your release cadence
+- [User Feedback Collection](../guides/user-feedback.md) — Feed user insights back into your roadmap decisions
+- [User Interviews for Chrome Extensions](../monetization/user-interviews.md) — Validate roadmap priorities with direct user conversations
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Understand market demand to guide feature prioritization
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Align your pricing tiers with your feature roadmap
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Monitor competitor updates to adjust your roadmap
+- [A/B Testing in Chrome Extensions](../guides/ab-testing.md) — Test new features with experiments before full rollout
+- [Analytics and Telemetry](../guides/analytics-telemetry.md) — Track feature adoption to validate roadmap decisions
+
+For frameworks on monetization-driven roadmap planning and real-world case studies, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

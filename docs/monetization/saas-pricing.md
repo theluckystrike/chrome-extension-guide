@@ -384,9 +384,17 @@ Frame pricing in terms of what users lose by not upgrading:
 
 ## Related Articles
 
-- [Extension Monetization Guide](docs/guides/extension-monetization.md) — Comprehensive overview of monetization strategies for Chrome extensions
-- [Publishing Guide](docs/publishing/publishing-guide.md) — How to publish your extension to the Chrome Web Store
-- [Security Best Practices](docs/guides/security-best-practices.md) — Secure license validation and payment handling
+- [Extension Monetization Guide](../guides/extension-monetization.md) — Comprehensive overview of monetization strategies for Chrome extensions
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Complete guide covering freemium, subscriptions, one-time purchases, and more
+- [Publishing Guide](../publishing/publishing-guide.md) — How to publish your extension to the Chrome Web Store
+- [Security Best Practices](../guides/security-best-practices.md) — Secure license validation and payment handling
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competing extensions' pricing to inform your strategy
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate demand and willingness to pay before setting prices
+- [User Interviews](../monetization/user-interviews.md) — Interview users to understand perceived value and price sensitivity
+- [A/B Testing in Chrome Extensions](../guides/ab-testing.md) — Test pricing tiers and upgrade prompts with real conversion data
+- [User Onboarding](../guides/extension-onboarding.md) — Design onboarding flows that lead users toward premium features
+
+For detailed implementation guides on payment processing, license key systems, and conversion optimization, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

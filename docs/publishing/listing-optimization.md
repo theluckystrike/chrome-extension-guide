@@ -149,7 +149,19 @@ async function trackFeatureUse(feature: string) {
 - [ ] Privacy policy linked
 - [ ] Support contact provided
 - [ ] Translations for key markets (optional but recommended)
--e 
+
+## Related Articles
+
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Research your target audience and keyword strategy before writing your listing
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Study competing listings to find positioning advantages
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Turn listing traffic into revenue with the right monetization model
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Price your premium tier to maximize conversion from your listing
+- [User Onboarding](../guides/extension-onboarding.md) — Convert listing visitors who install into active, engaged users
+- [Publishing Guide](../publishing/publishing-guide.md) — Complete guide to the Chrome Web Store submission process
+- [A/B Testing](../guides/ab-testing.md) — Test listing variations to optimize install conversion rates
+
+For strategies on converting installs into paying customers, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
+
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

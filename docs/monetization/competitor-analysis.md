@@ -497,9 +497,16 @@ async function notifyCompetitorUpdate(competitor: any, newData: any) {
 
 ## Related Articles
 
-- [Listing Optimization](../publishing/listing-optimization.md)
-- [Extension Monetization](../guides/extension-monetization.md)
-- [User Feedback Collection](../guides/user-feedback.md)
+- [Listing Optimization](../publishing/listing-optimization.md) — Optimize your Chrome Web Store listing for discoverability
+- [Extension Monetization](../guides/extension-monetization.md) — Strategies for generating revenue from your extension
+- [User Feedback Collection](../guides/user-feedback.md) — Collecting and analyzing user feedback at scale
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate demand and understand your target audience before building
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Set competitive pricing tiers informed by your competitor analysis
+- [User Interviews for Chrome Extensions](../monetization/user-interviews.md) — Deep qualitative insights from real users to complement competitive data
+- [How to Monetize Your Chrome Extension](../guides/monetization-overview.md) — Complete overview of every monetization model for Chrome extensions
+- [A/B Testing in Chrome Extensions](../guides/ab-testing.md) — Test pricing and feature variations with real users
+
+For a deeper dive into monetization implementation patterns, pricing psychology, and real-world case studies, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

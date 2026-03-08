@@ -248,11 +248,18 @@ const premiumAction = withLicenseCheck(async (data) => {
 
 ## Related Articles {#related-articles}
 
-## Related Articles
+- [How to Monetize Your Chrome Extension — Complete Guide](../guides/monetization-overview.md) — In-depth overview of every monetization model with code examples
+- [SaaS Pricing Strategies for Chrome Extensions](../monetization/saas-pricing.md) — Pricing tiers, subscription design, and pricing psychology
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competing extensions' pricing and positioning
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate demand before choosing a monetization model
+- [User Interviews](../monetization/user-interviews.md) — Understand willingness to pay through user conversations
+- [Product Roadmap](../monetization/product-roadmap.md) — Align your feature roadmap with revenue goals
+- [Listing Optimization](../publishing/listing-optimization.md) — Optimize your CWS listing for conversions
+- [A/B Testing](../guides/ab-testing.md) — Test pricing and upgrade prompts with real data
+- [User Onboarding](../guides/extension-onboarding.md) — Convert installs into engaged users ready to upgrade
 
-- [Listing Optimization](../publishing/listing-optimization.md)
-- [Release Notes](../guides/extension-release-notes.md)
--e 
+For implementation playbooks covering Stripe integration, license key systems, and paywall patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
+
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

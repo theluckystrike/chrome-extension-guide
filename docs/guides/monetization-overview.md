@@ -299,9 +299,22 @@ Implementing payments in Chrome extensions presents unique challenges due to Con
 - **[Server-Side Validation](https://theluckystrike.github.io/extension-monetization-playbook/articles/server-side-validation/)** — Prevent license circumvention with proper backend validation
 - **[Paywall Patterns](https://theluckystrike.github.io/extension-monetization-playbook/articles/paywall-patterns/)** — UI patterns for upgrade prompts that convert without annoying users
 
+## Related Articles
+
+- [Extension Monetization Guide](../guides/extension-monetization.md) — Quick-reference monetization patterns with code snippets
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Deep dive into pricing tiers, trial periods, and pricing psychology
+- [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competing extensions to inform your pricing and positioning
+- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate demand and identify market gaps before monetizing
+- [User Interviews](../monetization/user-interviews.md) — Conduct interviews to understand willingness to pay and user pain points
+- [Product Roadmap](../monetization/product-roadmap.md) — Build a roadmap that aligns feature development with revenue milestones
+- [A/B Testing in Chrome Extensions](../guides/ab-testing.md) — Test pricing pages and upgrade prompts to optimize conversions
+- [Analytics and Telemetry](../guides/analytics-telemetry.md) — Track monetization metrics and conversion funnels
+- [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md) — Optimize your listing to drive installs into your monetization funnel
+- [User Onboarding](../guides/extension-onboarding.md) — Design onboarding that leads users toward premium value
+
 ## Further Reading
 
-The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers every aspect of building a revenue-generating extension business, from choosing your first model to scaling as a solo developer. Start with the [Monetization Strategies Overview](https://theluckystrike.github.io/extension-monetization-playbook/articles/monetization-strategies-overview/) for the complete picture.
+The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers every aspect of building a revenue-generating extension business, from choosing your first model to scaling as a solo developer. Start with the [Monetization Strategies Overview](https://theluckystrike.github.io/extension-monetization-playbook/articles/monetization-strategies-overview/) for the complete picture. The source code is available on [GitHub](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 
