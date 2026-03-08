@@ -153,3 +153,6 @@ Combining chrome://memory-internals with Chrome Task Manager (Shift+Esc) gives y
 ---
 
 For more information on managing browser memory and optimizing Chrome performance, explore our [memory management guide](/docs/guides/memory-management/), learn about [extension monetization strategies](/docs/guides/extension-monetization/), or check out our detailed [Tab Suspender Pro memory guide](/docs/guides/tab-suspender-pro-reduce-memory/) to maximize your RAM savings.
+
+---
+*Built by theluckystrike at zovo.one*
