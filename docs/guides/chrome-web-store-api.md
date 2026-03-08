@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Chrome Web Store API — Developer Guide"
+description: "Learn how to use the Chrome Extension Chrome Web Store API with this developer guide covering methods, permissions, and implementation examples."
+---
 # Chrome Web Store Publish API
 
 ## Introduction

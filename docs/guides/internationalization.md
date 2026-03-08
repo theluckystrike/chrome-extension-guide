@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Internationalization — Developer Guide"
+description: "Learn Chrome extension internationalization with this developer guide covering implementation, best practices, and code examples."
+---
 # Internationalization (i18n) for Chrome Extensions
 
 ## Introduction

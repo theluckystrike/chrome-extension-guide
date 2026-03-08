@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension API Rate Limits — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Chrome API Rate Limits and Quotas
 
 This guide documents the rate limits and quotas enforced by Chrome for extension APIs. Understanding these limits is essential for building reliable extensions that function correctly across all users.

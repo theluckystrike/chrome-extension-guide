@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Code Snippet Manager — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Code Snippet Manager Chrome Extension
 
 In this tutorial, we'll build a Chrome extension that lets you save, organize, and retrieve code snippets from any web page.

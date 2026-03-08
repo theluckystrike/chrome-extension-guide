@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension WebAssembly — Developer Guide"
+description: "Learn Chrome extension webassembly with this developer guide covering implementation, best practices, and code examples."
+---
 # WebAssembly in Chrome Extensions
 
 WebAssembly (Wasm) enables near-native performance for CPU-intensive tasks in Chrome extensions.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension VPN Provider — Developer Guide"
+description: "Learn Chrome extension vpn provider with this developer guide covering implementation, best practices, and code examples."
+---
 # VPN Provider API in Chrome Extensions
 
 The `chrome.vpnProvider` API enables Chrome extensions to act as VPN clients, allowing you to create custom VPN solutions that integrate with Chrome OS's network infrastructure. This API is particularly powerful for enterprise environments, educational institutions, and privacy-focused applications that require secure network tunneling.

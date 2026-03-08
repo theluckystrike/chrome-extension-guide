@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension CI/CD Pipeline — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Chrome Extension CI/CD Pipeline
 
 A complete guide to automating Chrome extension builds, testing, and publishing using GitHub Actions, Playwright, and the Chrome Web Store API.

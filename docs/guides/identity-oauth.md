@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension OAuth & Identity — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Identity & OAuth Guide
 
 ## Overview

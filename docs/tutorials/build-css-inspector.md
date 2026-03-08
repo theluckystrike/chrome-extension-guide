@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension CSS Inspector — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a CSS Inspector Extension
 
 ## What You'll Build

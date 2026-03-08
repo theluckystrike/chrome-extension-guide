@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Push Notifications — Developer Guide"
+description: "Learn Chrome extension push notifications with this developer guide covering implementation, best practices, and code examples."
+---
 # GCM & Push Notifications in Chrome Extensions
 
 ## Introduction

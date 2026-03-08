@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Quick Notes — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Quick Notes Popup Extension
 
 This tutorial walks through building a Chrome extension for instant note-taking with auto-save, folders, and search functionality.

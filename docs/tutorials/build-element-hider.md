@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Element Hider — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build an Element Hider Extension
 
 In this tutorial, we'll build a Chrome extension that lets users click to hide any page element, with persistent storage per site.

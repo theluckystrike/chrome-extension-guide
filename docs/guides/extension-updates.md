@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Extension Updates — Developer Guide"
+description: "Learn Chrome extension extension updates with this developer guide covering implementation, best practices, and code examples."
+---
 # Handling Extension Updates
 
 ## chrome.runtime.onInstalled

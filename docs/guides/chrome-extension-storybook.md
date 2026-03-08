@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Storybook Integration — Developer Guide"
+description: "Learn Chrome extension storybook integration with this developer guide covering implementation, best practices, and code examples."
+---
 # Setting Up Storybook for Chrome Extension Development
 
 Storybook builds UI components in isolation—ideal for Chrome extensions where you can develop and test without loading the full extension.

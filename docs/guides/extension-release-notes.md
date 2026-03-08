@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Release Notes — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Writing Effective Release Notes for Chrome Extensions
 
 Release notes are critical for keeping users informed about what's new, improving user experience, and maintaining trust. This guide covers best practices for writing and managing release notes across different platforms.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Extension Architecture — Developer Guide"
+description: "Learn Chrome extension extension architecture with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Architecture Deep Dive
 
 ## The Extension Component Model

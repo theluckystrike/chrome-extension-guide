@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension History Search — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Browsing History Search Extension
 
 This tutorial guides you through building an enhanced Chrome extension for searching and analyzing your browsing history.

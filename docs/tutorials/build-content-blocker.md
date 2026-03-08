@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Content Blocker — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Content Blocker Extension — Full Tutorial
 
 ## What We're Building

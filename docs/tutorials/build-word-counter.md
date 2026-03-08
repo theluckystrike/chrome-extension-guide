@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Word Counter — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Word Counter Chrome Extension
 
 In this tutorial, we'll build a Chrome extension that counts words, characters, sentences, and more on any webpage. We'll implement selection counting, readability metrics, and a badge display.

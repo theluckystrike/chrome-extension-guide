@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension History API — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # History API Guide
 
 ## Overview

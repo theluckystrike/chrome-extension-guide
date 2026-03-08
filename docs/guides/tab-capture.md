@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Tab Capture — Developer Guide"
+description: "Learn Chrome extension tab capture with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Tab Capture API
 
 The Chrome Extension Tab Capture API is a powerful feature that allows extensions to capture the visual and audio content of browser tabs. This API opens up a wide range of possibilities, from building screen recording extensions to creating collaborative whiteboarding tools. In this comprehensive guide, we'll explore every aspect of the Tab Capture API, from basic usage to advanced implementation patterns.

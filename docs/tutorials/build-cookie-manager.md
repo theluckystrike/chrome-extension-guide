@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Cookie Manager — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Cookie Manager Chrome Extension
 
 This tutorial walks you through building a fully-featured cookie manager extension that allows users to view, edit, delete, search, and export cookies.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Reading Progress — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Reading Progress Tracker Extension
 
 This tutorial walks through building a Chrome extension that tracks reading progress, saves position, and displays reading statistics.

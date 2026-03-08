@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Automated Publishing — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Automating Chrome Web Store Publishing with CI/CD
 
 Automate your extension publishing workflow using CI/CD pipelines. This guide covers GitHub Actions, API setup, versioning, and best practices for production deployments.

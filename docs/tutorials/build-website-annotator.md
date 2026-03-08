@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Website Annotator — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Website Annotator Extension
 
 This tutorial guides you through building a Chrome extension that allows users to add sticky notes to any position on a webpage, save annotations per URL, and manage their notes.

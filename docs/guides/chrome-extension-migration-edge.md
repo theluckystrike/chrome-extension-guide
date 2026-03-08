@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Edge Migration — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Porting Chrome Extensions to Microsoft Edge
 
 Microsoft Edge is built on the Chromium engine, which means most Chrome extensions can be ported with minimal or no modifications. This guide covers the key considerations for publishing your extension on the Edge Add-ons store.

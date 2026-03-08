@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Background Service Workers — Developer Guide"
+description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
+---
 # Background Service Worker Patterns
 
 ## Overview

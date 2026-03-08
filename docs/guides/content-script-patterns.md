@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Content Script Patterns — Developer Guide"
+description: "Learn Chrome extension content script patterns with this developer guide covering implementation, best practices, and code examples."
+---
 # Content Script Patterns
 
 ## Overview

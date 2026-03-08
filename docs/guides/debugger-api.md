@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Debugger API — Developer Guide"
+description: "Learn how to use the Chrome Extension Debugger API with this developer guide covering methods, permissions, and implementation examples."
+---
 # Chrome Extension Debugger API
 
 ## Introduction

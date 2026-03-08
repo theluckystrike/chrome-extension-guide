@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension React Setup — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Setting Up React for Chrome Extension Development
 
 This guide covers building Chrome extensions with React, covering project initialization, architecture patterns, and best practices for modern extension development.

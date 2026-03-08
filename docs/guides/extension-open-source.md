@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Open Source — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Guide to Open-Sourcing Chrome Extensions
 
 This guide covers the process, benefits, and best practices for open-sourcing your Chrome extension.

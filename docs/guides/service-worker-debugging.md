@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Debugging — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Service Worker Debugging Guide
 
 ## Overview

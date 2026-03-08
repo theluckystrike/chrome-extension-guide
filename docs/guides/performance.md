@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Performance Optimization — Developer Guide"
+description: "Optimize your Chrome extension performance with this guide covering profiling, lazy loading, and memory management."
+---
 # Performance Optimization for Chrome Extensions
 
 ## Introduction

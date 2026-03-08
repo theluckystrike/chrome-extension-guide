@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Storage Quickstart — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Storage Quickstart
 
 ## Overview

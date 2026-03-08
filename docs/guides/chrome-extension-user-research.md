@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension User Research — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # User Research and Feedback for Chrome Extensions
 
 Understanding your users is critical for building successful extensions. This guide covers comprehensive strategies for gathering feedback, conducting research, and analyzing user behavior while maintaining privacy compliance.

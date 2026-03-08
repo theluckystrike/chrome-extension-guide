@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension New Tab — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Custom New Tab Page
 
 ## What You'll Build

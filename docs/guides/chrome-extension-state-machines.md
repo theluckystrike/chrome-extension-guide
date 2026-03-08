@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension State Machines — Developer Guide"
+description: "Learn Chrome extension state machines with this developer guide covering implementation, best practices, and code examples."
+---
 # State Machines for Chrome Extension Logic
 
 State machines provide a structured way to manage complex extension behavior, turning tangled conditional logic into clear, predictable flows. By defining explicit states and allowed transitions, you eliminate impossible states and make your extension's behavior understandable at a glance.

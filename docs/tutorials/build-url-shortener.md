@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension URL Shortener — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a URL Shortener Extension
 
 ## What You'll Build

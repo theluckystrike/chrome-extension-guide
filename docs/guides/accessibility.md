@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Accessibility Implementation — Developer Guide"
+description: "Learn Chrome extension accessibility implementation with this developer guide covering implementation, best practices, and code examples."
+---
 # Accessibility in Chrome Extensions
 
 ## Introduction

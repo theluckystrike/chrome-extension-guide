@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Download Management — Developer Guide"
+description: "Learn Chrome extension download management with this developer guide covering implementation, best practices, and code examples."
+---
 # Download Management in Chrome Extensions
 
 ## chrome.downloads API Overview

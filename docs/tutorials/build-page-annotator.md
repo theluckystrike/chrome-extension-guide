@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Page Annotator — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Page Annotator Extension
 
 ## What You'll Build

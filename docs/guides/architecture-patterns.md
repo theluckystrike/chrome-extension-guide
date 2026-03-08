@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Architecture Patterns — Developer Guide"
+description: "Learn Chrome extension architecture patterns with this developer guide covering implementation, best practices, and code examples."
+---
 # Extension Architecture Patterns
 
 How you structure a Chrome extension determines how maintainable it will be six months from now. A simple tab-modifier can live in a single file. A full-featured productivity tool with a side panel, options page, multiple content scripts, and a service worker needs deliberate architectural decisions. This guide presents proven patterns for extensions at every scale, from single-purpose utilities to complex multi-context applications.

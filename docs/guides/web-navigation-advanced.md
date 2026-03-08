@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Advanced Web Navigation — Developer Guide"
+description: "Learn Chrome extension advanced web navigation with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Web Navigation Advanced Patterns
 
 ## Introduction

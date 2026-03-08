@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Declarative Content — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Declarative Content API Guide
 
 ## Overview

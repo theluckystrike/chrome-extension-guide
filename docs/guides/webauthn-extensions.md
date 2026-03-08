@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension WebAuthn — Developer Guide"
+description: "Learn Chrome extension webauthn with this developer guide covering implementation, best practices, and code examples."
+---
 # WebAuthn & FIDO2 in Chrome Extensions
 
 ## Overview

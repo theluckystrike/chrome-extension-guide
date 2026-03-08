@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Enterprise Extensions — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Enterprise Extensions Guide
 
 This guide covers building, deploying, and managing Chrome extensions for enterprise environments. Enterprise extensions differ from consumer extensions in that they're centrally managed, often force-installed, and configured through IT policies rather than user preferences.

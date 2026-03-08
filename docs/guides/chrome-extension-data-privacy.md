@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Data Privacy — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Data Privacy Guide for Chrome Extensions
 
 ## Introduction

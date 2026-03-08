@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Caching Strategies — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Caching Strategies for Extensions
 
 Caching is essential for building responsive Chrome extensions that work efficiently and gracefully handle offline scenarios. This guide covers caching strategies, storage options, and implementation patterns specific to extension development.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Accessibility Testing — Developer Guide"
+description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
+---
 # Accessibility Testing for Chrome Extensions
 
 ## Overview

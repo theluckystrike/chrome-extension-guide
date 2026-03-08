@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Power Management — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Power Management in Chrome Extensions
 
 > **Guide Level:** Intermediate | **Last Updated:** 2025

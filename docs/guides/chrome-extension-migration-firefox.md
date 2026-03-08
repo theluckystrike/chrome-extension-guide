@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Firefox Migration — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Chrome Extension Migration to Firefox
 
 Guide for porting Chrome extensions to Firefox, covering API compatibility and best practices.

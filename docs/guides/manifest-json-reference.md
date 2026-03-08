@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Manifest Reference — Developer Guide"
+description: "Learn Chrome extension manifest reference with this developer guide covering implementation, best practices, and code examples."
+---
 # manifest.json Complete Reference
 
 ## Introduction

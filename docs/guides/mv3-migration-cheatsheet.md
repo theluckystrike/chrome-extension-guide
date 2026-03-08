@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension MV3 Migration Cheatsheet — Developer Guide"
+description: "Migrate your Chrome extension to Manifest V3 with this comprehensive guide covering API changes and required updates."
+---
 # MV2 to MV3 Migration Cheatsheet
 
 A practical, side-by-side reference for migrating Chrome extensions from Manifest V2 to Manifest V3. Each section shows the old MV2 pattern and its MV3 replacement with working code examples.

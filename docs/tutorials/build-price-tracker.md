@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Price Tracker — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Price Tracker Extension
 
 Build a Chrome extension that detects product prices on e-commerce pages, tracks them over time, shows price history sparklines, sends notifications on price drops, and provides a side panel for managing all tracked products. Uses **@theluckystrike/webext-storage** for persistent product data and **chrome.alarms** for background price checking.

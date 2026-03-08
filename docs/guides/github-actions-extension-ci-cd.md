@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension GitHub Actions CI/CD — Developer Guide"
+description: "Learn Chrome extension github actions ci/cd with this developer guide covering implementation, best practices, and code examples."
+---
 # GitHub Actions CI/CD for Chrome Extensions
 
 Automating your extension pipeline with GitHub Actions eliminates manual build steps, reduces human error, and gives you confidence that every change works before it reaches users. This guide walks through setting up continuous integration and deployment for a Chrome extension project.

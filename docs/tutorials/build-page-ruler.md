@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Page Ruler — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Page Ruler Extension
 
 ## What You'll Build

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Lazy Loading Patterns — Developer Guide"
+description: "Learn Chrome extension lazy loading patterns with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Lazy Loading Patterns
 
 ## Overview

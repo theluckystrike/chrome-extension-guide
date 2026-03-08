@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Options Page — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Building an Options Page
 
 ## Overview

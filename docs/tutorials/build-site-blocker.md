@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Site Blocker — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Site Blocker Chrome Extension
 
 This tutorial guides you through building a powerful site blocker extension using modern Chrome Extension APIs. We'll use **declarativeNetRequest** for efficient blocking, **@theluckystrike/webext-storage** for persistent blocklist storage, **@theluckystrike/webext-messaging** for popup communication, and implement schedule-based blocking with password-protected overrides.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Content Script Isolation — Developer Guide"
+description: "Learn Chrome extension content script isolation with this developer guide covering implementation, best practices, and code examples."
+---
 # Content Script Isolation Deep Dive
 
 ## Introduction

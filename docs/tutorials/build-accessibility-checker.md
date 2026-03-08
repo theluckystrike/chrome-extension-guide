@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Accessibility Checker — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build an Accessibility Checker Extension
 
 ## What You'll Build

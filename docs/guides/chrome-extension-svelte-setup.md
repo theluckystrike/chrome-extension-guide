@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Svelte Setup — Developer Guide"
+description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+---
 # Svelte Setup for Chrome Extensions
 
 Svelte provides an excellent developer experience for building Chrome extensions with minimal runtime overhead. Its compile-time approach produces tiny bundles—critical for fast popup loading.

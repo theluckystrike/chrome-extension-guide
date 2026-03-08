@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension CSS Injection — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # CSS Injection Techniques for Chrome Extensions
 
 This guide covers various CSS injection methods for Chrome extensions, from static manifest declarations to dynamic runtime injection.

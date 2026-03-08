@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension AI & LLM Integration — Developer Guide"
+description: "Learn Chrome extension ai & llm integration with this developer guide covering implementation, best practices, and code examples."
+---
 # AI and LLM Integration in Chrome Extensions
 
 ## Architecture Overview

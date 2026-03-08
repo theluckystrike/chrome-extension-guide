@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Security Checklist — Developer Guide"
+description: "Secure your Chrome extension with this security guide covering best practices, vulnerability prevention, and audit procedures."
+---
 # Chrome Extension Security Checklist
 
 Use this checklist when developing, auditing, or reviewing a Chrome extension.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension First Extension — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Building Your First Chrome Extension
 
 A complete beginner's guide to creating your first Chrome extension from scratch.

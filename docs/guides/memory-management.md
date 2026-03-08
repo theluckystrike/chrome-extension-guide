@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Memory Management — Developer Guide"
+description: "Learn Chrome extension memory management with this developer guide covering implementation, best practices, and code examples."
+---
 # Memory Management in Chrome Extensions
 
 ## Memory by Context

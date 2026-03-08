@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Security Best Practices — Developer Guide"
+description: "Secure your Chrome extension with this security guide covering best practices, vulnerability prevention, and audit procedures."
+---
 # Security Best Practices for Chrome Extensions
 
 ## Introduction

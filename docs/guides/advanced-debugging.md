@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Debugging Techniques — Developer Guide"
+description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
+---
 # Advanced Debugging Techniques for Chrome Extensions
 
 Debugging Chrome extensions is fundamentally different from debugging regular web applications. Your code runs across multiple isolated contexts -- service workers, content scripts, popups, options pages, and side panels -- each with its own DevTools instance and lifecycle. This guide goes beyond the basics to cover the techniques and tools that experienced extension developers rely on daily.

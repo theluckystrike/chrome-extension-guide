@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Language Translator — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Page Language Translator Extension
 
 This tutorial walks you through building a Chrome extension that translates selected text on any webpage. The extension will support context menu translation, popup translation, keyboard shortcuts, and translation history.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Keyboard Shortcuts — Developer Guide"
+description: "Learn Chrome extension keyboard shortcuts with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Keyboard Shortcuts
 
 ## Introduction

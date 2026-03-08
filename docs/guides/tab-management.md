@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Tab Management — Developer Guide"
+description: "Learn Chrome extension tab management with this developer guide covering implementation, best practices, and code examples."
+---
 # Tab Management Patterns
 
 ## Introduction

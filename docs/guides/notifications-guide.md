@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Notifications — Developer Guide"
+description: "Design Chrome extension UI with this guide covering popup, options page, and side panel development patterns."
+---
 # Rich Notifications in Chrome Extensions
 
 ## Introduction

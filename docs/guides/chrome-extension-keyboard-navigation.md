@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Keyboard Navigation — Developer Guide"
+description: "Learn Chrome extension keyboard navigation with this developer guide covering implementation, best practices, and code examples."
+---
 # Keyboard Navigation in Chrome Extensions
 
 ## Introduction

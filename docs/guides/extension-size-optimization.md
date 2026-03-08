@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Size Optimization — Developer Guide"
+description: "Learn Chrome extension size optimization with this developer guide covering implementation, best practices, and code examples."
+---
 # Extension Size Optimization
 
 Learn how to reduce your Chrome extension's bundle size for faster installs, better performance, and smoother Chrome Web Store reviews.

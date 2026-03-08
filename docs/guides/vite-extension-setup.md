@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Vite Setup — Developer Guide"
+description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+---
 # Vite Setup for Chrome Extensions
 
 ## Overview

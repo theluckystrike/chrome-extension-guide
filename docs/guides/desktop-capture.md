@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Desktop Capture — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Chrome Extension Desktop Capture API Guide
 
 The `chrome.desktopCapture` API enables Chrome Extensions to capture screen content, windows, browser tabs, and audio from the user's desktop. This guide covers building screenshot tools, screen recorders, and real-time streaming extensions.

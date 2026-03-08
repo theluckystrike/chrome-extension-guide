@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Copy as Markdown — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Copy-as-Markdown Chrome Extension
 
 This tutorial guides you through building a Chrome extension that converts web content to Markdown format. The extension will copy selected HTML, links, and page titles as clean Markdown.

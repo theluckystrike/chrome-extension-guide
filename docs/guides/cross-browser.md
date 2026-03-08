@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Cross-Browser Development — Developer Guide"
+description: "Learn Chrome extension cross-browser development with this developer guide covering implementation, best practices, and code examples."
+---
 # Cross-Browser Extension Development
 
 Building extensions that work across Chrome, Firefox, Edge, and Safari requires understanding each browser's WebExtension implementation, API availability, and submission requirements. This guide covers the essential patterns and techniques for achieving true cross-browser compatibility.

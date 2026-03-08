@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Context Menus — Developer Guide"
+description: "Learn Chrome extension context menus with this developer guide covering implementation, best practices, and code examples."
+---
 # Context Menus in Chrome Extensions
 
 ## Introduction

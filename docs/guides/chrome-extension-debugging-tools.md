@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Debugging Tools — Developer Guide"
+description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
+---
 # Chrome Extension Debugging Tools
 
 A comprehensive deep dive into debugging tools and techniques for Chrome extension development.

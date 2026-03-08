@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Advanced Messaging — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Advanced Messaging Patterns with @theluckystrike/webext-messaging
 
 ## Prerequisites

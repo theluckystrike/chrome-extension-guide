@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Review Process — Developer Guide"
+description: "Learn Chrome extension review process with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Web Store Review Process
 
 The Chrome Web Store (CWS) employs a multi-stage review process to ensure extensions meet quality, security, and policy standards. Understanding this process helps developers prepare submissions that pass review efficiently.

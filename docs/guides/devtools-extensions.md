@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension DevTools Extensions — Developer Guide"
+description: "Learn Chrome extension devtools extensions with this developer guide covering implementation, best practices, and code examples."
+---
 # Building DevTools Extensions
 
 ## Introduction

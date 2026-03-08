@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Notification Center — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Building a Notification Center with Chrome Extension
 
 This tutorial demonstrates how to build a comprehensive notification center for your Chrome extension using the side panel, notifications API, storage, and alarms.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Management API — Developer Guide"
+description: "Learn how to use the Chrome Extension Management API with this developer guide covering methods, permissions, and implementation examples."
+---
 # Chrome Extension Management API
 
 ## Introduction

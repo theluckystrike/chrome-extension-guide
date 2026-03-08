@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension GitHub PR Reviewer — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a GitHub PR Review Extension
 
 A Chrome extension that enhances GitHub pull request pages with a floating toolbar,

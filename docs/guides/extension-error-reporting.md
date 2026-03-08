@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Error Reporting — Developer Guide"
+description: "Learn Chrome extension error reporting with this developer guide covering implementation, best practices, and code examples."
+---
 # Error Reporting and Monitoring for Chrome Extensions
 
 ## Introduction

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Idle Detection — Developer Guide"
+description: "Learn Chrome extension idle detection with this developer guide covering implementation, best practices, and code examples."
+---
 # Idle Detection API
 
 ## Introduction

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Permissions Model — Developer Guide"
+description: "Manage Chrome extension permissions with this guide covering manifest declarations, optional permissions, and security best practices."
+---
 # Chrome Extension Permissions Model
 
 The permissions system is one of the most critical security mechanisms in Chrome extensions. Understanding how to properly request, manage, and respect permissions is essential for building trustworthy extensions that users feel confident installing. This guide covers the complete permissions model in Manifest V3, from basic concepts to advanced patterns for minimum-privilege design.

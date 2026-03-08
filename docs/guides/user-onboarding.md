@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension User Onboarding — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # User Onboarding Guide
 
 A comprehensive guide to designing effective onboarding experiences for Chrome extensions that drive user adoption and retention.

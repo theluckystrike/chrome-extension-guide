@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension TypeScript Extensions — Developer Guide"
+description: "Learn Chrome extension typescript extensions with this developer guide covering implementation, best practices, and code examples."
+---
 # TypeScript for Chrome Extensions
 
 TypeScript brings type safety, autocompletion, and confident refactoring to Chrome extension development.

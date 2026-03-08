@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Reading List — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Reading List Extension — Full Tutorial
 
 ## What We're Building

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension WXT Framework — Developer Guide"
+description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+---
 # WXT Framework Setup
 
 WXT is a Nuxt-inspired Chrome extension framework that handles the complexity of building, bundling, and packaging extensions. Built on top of Vite, WXT provides a first-class developer experience with zero-config defaults while remaining highly configurable for advanced use cases.

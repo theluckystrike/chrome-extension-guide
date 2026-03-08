@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Lifecycle — Developer Guide"
+description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
+---
 # Service Worker Lifecycle Deep Dive
 
 ## Introduction

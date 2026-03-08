@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension JSON Formatter — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a JSON Formatter Chrome Extension
 
 This tutorial walks through building a Chrome extension that detects, formats, and visualizes JSON in browser tabs.

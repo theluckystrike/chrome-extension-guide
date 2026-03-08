@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Todo Extension — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build a Todo List Chrome Extension
 
 A step-by-step guide to building a feature-rich todo list extension with categories, due dates, reminders, and cloud sync.

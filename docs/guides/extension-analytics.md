@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Analytics & Telemetry — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Extension Analytics Guide
 
 Analytics helps you understand how users interact with your extension while maintaining privacy and CWS compliance.

@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension DevTools Integration — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Essential Developer Tools for Chrome Extension Development
 
 A comprehensive guide to tools, utilities, and workflows that streamline Chrome extension development.

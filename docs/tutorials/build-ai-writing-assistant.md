@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension AI Writing Assistant — Developer Guide"
+description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
+---
 # Build an AI-Powered Writing Assistant Extension
 
 A practical Chrome extension that helps users write better on any web page. It detects

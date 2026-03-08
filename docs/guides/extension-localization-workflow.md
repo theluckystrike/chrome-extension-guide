@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Localization Workflow — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Extension Localization Workflow
 
 This guide covers the end-to-end localization workflow for Chrome extensions using Chrome's i18n system.

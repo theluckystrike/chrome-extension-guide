@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Rollup Setup — Developer Guide"
+description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
+---
 # Rollup Setup for Chrome Extensions
 
 Rollup is a powerful JavaScript bundler that excels at producing highly optimized, tree-shaken bundles. While originally designed for libraries, it has become an excellent choice for Chrome extension development due to its fine-grained control over output and minimal bundle sizes.

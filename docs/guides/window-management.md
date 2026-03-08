@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Window Management — Developer Guide"
+description: "Learn Chrome extension window management with this developer guide covering implementation, best practices, and code examples."
+---
 # Window Management in Chrome Extensions
 
 ## Introduction

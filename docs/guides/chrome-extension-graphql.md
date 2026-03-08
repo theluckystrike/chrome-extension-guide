@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension GraphQL Integration — Developer Guide"
+description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
+---
 # Integrating GraphQL APIs into Chrome Extensions
 
 This guide covers best practices for integrating GraphQL APIs into Chrome extensions, focusing on bundle size, caching, and extension-specific constraints.

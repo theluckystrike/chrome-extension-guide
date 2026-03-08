@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Content Script Frameworks — Developer Guide"
+description: "Learn Chrome extension content script frameworks with this developer guide covering implementation, best practices, and code examples."
+---
 # Using Frameworks in Content Scripts
 
 ## Overview

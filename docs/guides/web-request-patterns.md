@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Web Request Patterns — Developer Guide"
+description: "Learn Chrome extension web request patterns with this developer guide covering implementation, best practices, and code examples."
+---
 # WebRequest API Patterns
 
 ## Overview

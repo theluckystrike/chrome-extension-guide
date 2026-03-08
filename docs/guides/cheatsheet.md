@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Chrome Extension Developer Cheatsheet — Developer Guide"
+description: "Learn Chrome extension developer cheatsheet with this developer guide covering implementation, best practices, and code examples."
+---
 # Chrome Extension Development Cheatsheet
 
 A quick-reference cheatsheet covering the most common patterns, APIs, and snippets for Chrome extension development with Manifest V3.
