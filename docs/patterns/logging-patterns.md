@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Logging Patterns — Best Practices"
+description: "Master logging patterns for debugging Chrome extensions across service workers, content scripts, and popups with structured logging, persistence, and remote error reporting."
+---
+
 # Logging Patterns for Chrome Extensions
 
 Effective logging is essential for debugging Chrome extensions, where code runs across

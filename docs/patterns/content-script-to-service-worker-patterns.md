@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script To Service Worker Patterns — Best Practices"
+description: "Communicate from content scripts to service workers."
+---
+
 # Content Script to Service Worker Communication Patterns
 
 This guide covers the communication patterns between content scripts and service workers in Chrome extensions. This is the most fundamental and error-prone part of extension development.

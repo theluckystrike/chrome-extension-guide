@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Caching Strategies — Best Practices"
+description: "Implement effective caching strategies for Chrome extensions using storage and cache APIs."
+---
+
 # Caching Strategies for Chrome Extensions
 
 Chrome extensions operate under unique constraints: service workers can terminate at

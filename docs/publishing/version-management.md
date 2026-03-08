@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Version Management — Publishing Guide"
+description: "Manage extension versions effectively for smooth updates and rollbacks."
+---
+
 # Version Management Strategies
 
 ## manifest.json Version Fields

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Declarative Net Request — Manifest V3 Guide"
+description: "Use Declarative Net Request API for network request filtering in Manifest V3."
+---
+
 # Declarative Net Request (DNR)
 
 > The Declarative Net Request API is the MV3 replacement for the deprecated `webRequestBlocking` API.

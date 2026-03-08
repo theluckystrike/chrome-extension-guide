@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension User Scripts Patterns — Best Practices"
+description: "Manage and inject user scripts with the User Scripts API."
+---
+
 # UserScripts API Patterns (Chrome 120+)
 
 The `chrome.userScripts` API allows Chrome extensions to register and manage user-provided scripts, similar to how Tampermonkey and Greasemonkey work. This enables users to customize web page behavior with their own JavaScript.

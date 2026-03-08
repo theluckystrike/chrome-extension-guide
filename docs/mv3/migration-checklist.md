@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Migration Checklist — Manifest V3 Guide"
+description: "Checklist for migrating Chrome extensions from Manifest V2 to V3."
+---
+
 # MV2 to MV3 Migration Checklist
 
 ## Overview

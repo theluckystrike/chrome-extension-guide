@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Storage Migration Strategies — Best Practices"
+description: "Migrate data between storage APIs when updating extensions."
+---
+
 # Storage Migration Strategies
 
 Strategies for migrating extension storage data between versions.

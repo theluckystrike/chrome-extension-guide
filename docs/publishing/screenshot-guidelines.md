@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Screenshot Guidelines — Publishing Guide"
+description: "Create effective screenshots and promotional images for your Chrome Web Store listing that convert visitors to users."
+---
+
 # Chrome Web Store Screenshot Guidelines
 
 ## Overview

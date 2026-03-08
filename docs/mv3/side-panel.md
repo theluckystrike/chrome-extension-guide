@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Side Panel — Manifest V3 Guide"
+description: "Implement side panels in Manifest V3 with the chrome.sidePanel API."
+---
+
 # Side Panel API in Chrome Extensions
 
 ## Introduction

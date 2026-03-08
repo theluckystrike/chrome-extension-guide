@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Action Api — Manifest V3 Guide"
+description: "Use the Action API for toolbar buttons in Manifest V3."
+---
+
 # MV3 Action API Guide
 
 The Chrome Extension Manifest V3 (MV3) unified the `browserAction` and `pageAction` APIs into a single `chrome.action` API. This guide covers migration patterns, API usage, and common workflows.

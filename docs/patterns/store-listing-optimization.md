@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Store Listing Optimization — Best Practices"
+description: "Optimize your Chrome Web Store listing for better visibility."
+---
+
 # Chrome Web Store Listing That Converts
 
 ## Overview

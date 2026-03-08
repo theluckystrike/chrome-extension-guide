@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Communication Bridge — Best Practices"
+description: "Bridge communication between content scripts."
+---
+
 # Content Script Communication Bridge
 
 ## Overview

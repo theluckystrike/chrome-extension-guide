@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Publishing Guide — Publishing Guide"
+description: "Complete guide to publishing your Chrome extension to the Chrome Web Store."
+---
+
 # Chrome Web Store Publishing Guide
 
 Complete guide from zero to published extension. Covers developer registration,

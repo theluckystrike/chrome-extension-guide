@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Popup Communication — Best Practices"
+description: "Communicate between popups and background scripts."
+---
+
 # Popup Communication
 
 ## Overview

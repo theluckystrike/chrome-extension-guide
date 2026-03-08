@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Migration Wizard — Best Practices"
+description: "Create migration wizards for major version updates."
+---
+
 # Migration Wizard Pattern
 
 ## Overview

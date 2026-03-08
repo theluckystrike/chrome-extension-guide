@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Building With Svelte — Best Practices"
+description: "Build Chrome extensions with Svelte framework."
+---
+
 # Building Chrome Extensions with Svelte
 
 ## Overview

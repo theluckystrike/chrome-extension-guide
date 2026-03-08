@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Permission Gating — Best Practices"
+description: "Request permissions progressively with permission gating patterns."
+---
+
 # Permission Gating UI Patterns
 
 Guide for implementing UI patterns that gate features behind optional permissions in Chrome extensions.

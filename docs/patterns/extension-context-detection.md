@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Context Detection — Best Practices"
+description: "Detect execution context in Chrome extensions."
+---
+
 # Extension Context Detection
 
 Chrome extensions run code in multiple distinct contexts, each with different APIs and constraints. Detecting which context your code is executing in is essential for building robust, portable extensions.

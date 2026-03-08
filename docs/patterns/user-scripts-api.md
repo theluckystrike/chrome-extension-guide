@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension User Scripts Api — Best Practices"
+description: "Use the User Scripts API for user-defined scripts."
+---
+
 # User Scripts API Patterns
 
 ## Overview

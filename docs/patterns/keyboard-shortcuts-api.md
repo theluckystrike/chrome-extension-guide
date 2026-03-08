@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Keyboard Shortcuts Api — Best Practices"
+description: "Configure keyboard shortcuts with the Commands API."
+---
+
 # Keyboard Shortcuts API Patterns
 
 ## Overview

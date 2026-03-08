@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Navigation Url Handling — Best Practices"
+description: "Handle navigation events and URL changes with the webNavigation API."
+---
+
 # Navigation and URL Handling Patterns
 
 ## Overview

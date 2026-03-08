@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Desktop Capture — Best Practices"
+description: "Capture screen and audio with desktopCapture API."
+---
+
 # Desktop Capture API Patterns
 
 ## Overview

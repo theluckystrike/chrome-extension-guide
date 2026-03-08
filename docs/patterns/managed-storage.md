@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Managed Storage — Best Practices"
+description: "Use Chrome Managed Storage for enterprise-deployed extensions with admin-controlled settings."
+---
+
 # Managed Storage Patterns for Enterprise Extensions
 
 This document covers `chrome.storage.managed` for enterprise-managed extension settings in Chrome extensions.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Cleanup Patterns — Best Practices"
+description: "Clean up resources when extensions or tabs are closed."
+---
+
 # Cleanup and Teardown Patterns for Chrome Extensions
 
 Proper cleanup ensures extensions leave no trace when disabled, uninstalled, or updated. This document covers essential patterns for graceful shutdown.

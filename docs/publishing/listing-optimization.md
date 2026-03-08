@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Listing Optimization — Publishing Guide"
+description: "Optimize your Chrome Web Store listing for better visibility, clicks, and conversions."
+---
+
 # Chrome Web Store Listing Optimization
 
 ## Overview

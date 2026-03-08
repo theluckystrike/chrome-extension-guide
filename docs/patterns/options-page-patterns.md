@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Options Page Patterns — Best Practices"
+description: "Build effective options pages for extension settings."
+---
+
 # Options Page Design Patterns
 
 This document covers design and implementation patterns for Chrome extension options pages.

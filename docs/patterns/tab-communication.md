@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Tab Communication — Best Practices"
+description: "Communicate between extension components and tabs."
+---
+
 # Tab Communication Patterns
 
 ## Overview

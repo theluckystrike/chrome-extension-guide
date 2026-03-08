@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script React — Best Practices"
+description: "Integrate React with content scripts for dynamic DOM manipulation in web pages."
+---
+
 # Integrating React into Chrome Extension Content Scripts
 
 ## The Challenge

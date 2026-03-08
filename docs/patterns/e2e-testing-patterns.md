@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension E2e Testing Patterns — Best Practices"
+description: "End-to-end testing patterns for Chrome extensions."
+---
+
 # End-to-End Testing Patterns for Chrome Extensions
 
 End-to-end testing for Chrome extensions presents unique challenges compared to standard web application testing. Extensions operate across multiple contexts -- popups, content scripts, service workers, and options pages -- each requiring distinct testing strategies. This guide covers eight essential patterns for building a reliable E2E test suite using Playwright, the tool best suited for extension testing due to its first-class Chromium support.

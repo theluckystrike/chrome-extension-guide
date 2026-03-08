@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Context Menu Patterns — Best Practices"
+description: "Create dynamic and contextual right-click menus with the Chrome Context Menus API."
+---
+
 # Context Menu Patterns
 
 ## Overview

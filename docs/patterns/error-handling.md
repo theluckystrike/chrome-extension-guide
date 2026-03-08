@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Error Handling — Best Practices"
+description: "Comprehensive error handling in Chrome extensions."
+---
+
 # Error Handling Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Native Messaging — Best Practices"
+description: "Communicate with native applications via native messaging."
+---
+
 # Native Messaging Patterns
 
 ## Overview

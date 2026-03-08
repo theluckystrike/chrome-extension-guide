@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Typed Storage Wrapper — Best Practices"
+description: "Type-safe storage wrappers for extensions."
+---
+
 # Type-Safe Storage Wrapper Patterns
 
 ## Problem Statement

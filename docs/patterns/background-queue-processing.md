@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Background Queue Processing — Best Practices"
+description: "Process tasks in the background with queue-based patterns."
+---
+
 # Background Queue Processing Patterns
 
 ## Overview

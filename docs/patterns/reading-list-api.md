@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Reading List Api — Best Practices"
+description: "Access Chrome Reading List with the Reading List API."
+---
+
 # Reading List API Patterns
 
 ## Overview

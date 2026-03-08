@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Cookies Sessions — Best Practices"
+description: "Manage cookies and sessions in Chrome extensions for authentication."
+---
+
 # Cookies and Sessions Patterns
 
 Working with cookies in Chrome extensions gives you fine-grained control over authentication state, tracking analysis, and cookie hygiene. The `chrome.cookies` API surfaces every cookie the browser manages and lets you read, write, delete, and monitor changes in real time.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Badge Action Ui — Best Practices"
+description: "Update badge text and colors to indicate extension state to users."
+---
+
 # Badge and Action UI Patterns
 
 ## Overview

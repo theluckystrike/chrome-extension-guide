@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Feature Flags — Best Practices"
+description: "Implement feature flags for gradual rollout and testing."
+---
+
 # Feature Flag Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Web Accessible Resources Patterns — Best Practices"
+description: "Advanced patterns for web accessible resources."
+---
+
 # Web Accessible Resources Advanced Patterns (MV3)
 
 ## Overview

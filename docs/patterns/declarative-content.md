@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Declarative Content — Best Practices"
+description: "Use declarative content for conditional script injection."
+---
+
 # DeclarativeContent API Patterns
 
 ## Overview

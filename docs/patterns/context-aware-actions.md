@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Context Aware Actions — Best Practices"
+description: "Implement context-aware actions based on page and user state."
+---
+
 # Context-Aware Extension Actions
 
 ## Overview

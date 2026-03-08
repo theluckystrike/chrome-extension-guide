@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Popup To Fullpage — Best Practices"
+description: "Open popups as full pages for enhanced functionality."
+---
+
 # Popup-to-Fullpage Pattern
 
 ## Overview

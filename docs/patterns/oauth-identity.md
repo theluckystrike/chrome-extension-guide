@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Oauth Identity — Best Practices"
+description: "Implement OAuth 2.0 for user authentication."
+---
+
 # OAuth and Identity Patterns
 
 ## Overview

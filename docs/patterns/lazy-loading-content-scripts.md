@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Lazy Loading Content Scripts — Best Practices"
+description: "Optimize extension performance with lazy loading patterns for content scripts that only run when needed."
+---
+
 # Lazy Loading Content Scripts
 On-demand and conditional content script injection for Chrome Extensions (MV3).
 ## Static vs Dynamic

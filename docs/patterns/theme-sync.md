@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Theme Sync — Best Practices"
+description: "Synchronize extension themes with browser themes."
+---
+
 # Theme Sync Pattern
 
 ## Overview

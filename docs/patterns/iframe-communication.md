@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Iframe Communication — Best Practices"
+description: "Communicate with iframes in content scripts."
+---
+
 # iframe Communication Patterns in Chrome Extensions
 
 iframes are ubiquitous on the web, and Chrome extensions frequently need to communicate with them, embed them, or use them as sandboxed execution environments. This guide covers eight patterns for working with iframes in Manifest V3 extensions, from basic message passing to advanced UI injection techniques.

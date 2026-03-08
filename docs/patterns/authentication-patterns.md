@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Authentication Patterns — Best Practices"
+description: "Implement OAuth and authentication flows in Chrome extensions securely."
+---
+
 # Authentication Patterns for Chrome Extensions
 
 This guide covers authentication patterns for Chrome extensions connecting to external services, including OAuth 2.0, token management, and security best practices.

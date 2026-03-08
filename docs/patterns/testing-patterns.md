@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Testing Patterns — Best Practices"
+description: "Testing patterns for Chrome extension development."
+---
+
 # Testing Chrome Extensions
 
 ## Overview

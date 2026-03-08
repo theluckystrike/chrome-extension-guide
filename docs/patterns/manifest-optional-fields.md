@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Manifest Optional Fields — Best Practices"
+description: "Explore optional manifest.json fields for enhanced extension functionality."
+---
+
 # Optional Manifest.json Fields
 
 Chrome extension manifest.json includes many optional fields beyond the required ones. Understanding when to use these fields helps you build more powerful and professional extensions.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension To Web Communication — Best Practices"
+description: "Communicate from extensions to web pages."
+---
+
 # Extension-to-Web Communication
 
 This pattern describes how Chrome extensions communicate with websites they are not injected into. Unlike content scripts which run in the context of web pages, extension-to-web communication allows external websites to interact with your extension's backend.

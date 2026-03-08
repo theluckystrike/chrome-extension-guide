@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Analytics Telemetry — Best Practices"
+description: "Implement analytics and telemetry in extensions."
+---
+
 # Extension Analytics and Telemetry
 
 ## Overview

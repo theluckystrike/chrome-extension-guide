@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Cross Context State — Best Practices"
+description: "Share state across extension contexts."
+---
+
 # Cross-Context State Management
 
 ## The Core Challenge

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Uninstall — Best Practices"
+description: "Handle extension uninstallation and gather feedback."
+---
+
 # Extension Uninstall Patterns
 
 ## Overview

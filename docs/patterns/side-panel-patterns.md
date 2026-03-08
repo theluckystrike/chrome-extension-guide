@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Side Panel Patterns — Best Practices"
+description: "Advanced patterns for side panel development."
+---
+
 # Advanced Side Panel Patterns
 
 This guide covers advanced patterns for building Chrome Extension side panels using the Side Panel API (Manifest V3).

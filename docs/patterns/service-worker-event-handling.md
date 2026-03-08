@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Event Handling — Best Practices"
+description: "Handle service worker events properly."
+---
+
 # Service Worker Event Handling Best Practices
 
 This document outlines essential patterns for handling events in Chrome Extension Manifest V3 service workers.

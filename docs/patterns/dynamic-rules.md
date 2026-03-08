@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Dynamic Rules — Best Practices"
+description: "Implement dynamic declarative rules for network filtering."
+---
+
 # Dynamic Rules Pattern (declarativeNetRequest)
 
 The `declarativeNetRequest` API provides a powerful way to modify network requests without needing broad host permissions. Dynamic rules allow extensions to add, remove, or modify network rules at runtime, giving users control over blocking, redirecting, and header modifications.

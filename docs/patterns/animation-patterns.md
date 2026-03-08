@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Animation Patterns — Best Practices"
+description: "Create smooth animations in extension popups and content scripts."
+---
+
 # Animation and Transition Patterns for Chrome Extensions
 
 Practical patterns for adding motion to Chrome extension UIs -- popups, content script overlays, badge icons, loading states, toasts, drag interactions, theme transitions, and accessibility. All patterns respect user motion preferences.

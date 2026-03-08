@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension State Persistence — Best Practices"
+description: "Persist and sync extension state across sessions and devices."
+---
+
 # Extension State Persistence Patterns
 
 Persisting state across MV3 service worker restarts is critical for building reliable Chrome extensions. Unlike the persistent background page in MV2, MV3 service workers are ephemeral and can be terminated after a period of inactivity, losing all in-memory state.

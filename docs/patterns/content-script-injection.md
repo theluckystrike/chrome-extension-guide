@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Injection — Best Practices"
+description: "Advanced content script injection techniques and patterns."
+---
+
 # Content Script Injection Patterns
 
 Content scripts run in the context of web pages. Understanding the different injection methods is essential for building effective Chrome extensions.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Power Api — Best Practices"
+description: "Manage power settings to prevent battery drain from extensions."
+---
+
 # Chrome Extension Power API Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Websocket Service Workers — Best Practices"
+description: "Use WebSockets in service workers."
+---
+
 # WebSocket Connections from Service Workers
 
 ## Overview

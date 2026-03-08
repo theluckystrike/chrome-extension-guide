@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Popup State Persistence — Best Practices"
+description: "Persist popup UI state across sessions."
+---
+
 # Popup State Persistence
 
 ## Overview

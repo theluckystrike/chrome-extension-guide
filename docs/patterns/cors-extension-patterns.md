@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Cors Extension Patterns — Best Practices"
+description: "Handle CORS issues in Chrome extensions with background scripts and proxy patterns."
+---
+
 # CORS Handling Patterns in Chrome Extensions
 
 Understanding CORS (Cross-Origin Resource Sharing) in Chrome extensions requires recognizing that different extension contexts have different CORS behaviors.

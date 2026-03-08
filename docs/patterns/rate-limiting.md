@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Rate Limiting — Best Practices"
+description: "Implement rate limiting to prevent API abuse and throttling."
+---
+
 # Rate Limiting Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Update Handling — Best Practices"
+description: "Handle extension updates and notify users."
+---
+
 # Extension Update Handling
 
 Graceful handling of extension updates is critical for maintaining user data integrity and a seamless experience. This pattern covers the complete update lifecycle.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Local File Access — Best Practices"
+description: "Access local files from Chrome extensions."
+---
+
 # Local File Access Patterns in Chrome Extensions
 
 This guide covers various methods for working with local files in Chrome extensions, from simple file input to advanced filesystem APIs.

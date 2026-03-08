@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Vue — Best Practices"
+description: "Integrate Vue.js with content scripts."
+---
+
 # Content Script Vue Pattern
 
 Guide for integrating Vue.js into Chrome extension content scripts with proper isolation.

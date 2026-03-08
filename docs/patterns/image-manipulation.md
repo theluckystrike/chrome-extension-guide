@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Image Manipulation — Best Practices"
+description: "Process and manipulate images in extensions."
+---
+
 # Image Manipulation Patterns in Chrome Extensions
 
 This guide covers patterns for handling images in Chrome extensions, including capture, processing, and optimization.

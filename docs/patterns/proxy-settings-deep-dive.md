@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Proxy Settings Deep Dive — Best Practices"
+description: "Configure proxy settings programmatically in extensions."
+---
+
 # Proxy Settings Deep Dive
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Storage Encryption — Best Practices"
+description: "Encrypt data in extension storage for security."
+---
+
 # Storage Encryption Pattern
 
 ## Overview

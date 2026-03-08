@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension To Extension — Best Practices"
+description: "Implement communication between different Chrome extensions."
+---
+
 # Extension-to-Extension Communication Patterns
 
 ## Overview

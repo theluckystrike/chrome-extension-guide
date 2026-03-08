@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Network Interception — Best Practices"
+description: "Intercept and modify network requests with the Declarative Net Request API."
+---
+
 # Network Request Interception Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Storage Changes — Manifest V3 Guide"
+description: "Handle storage changes with the chrome.storage API in Manifest V3."
+---
+
 # Storage API Changes in Manifest V3
 
 ## Why Storage Matters More in MV3

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Fetch Interceptor — Best Practices"
+description: "Intercept and modify fetch requests in extensions."
+---
+
 # Fetch/XHR Interception Patterns
 
 This document covers patterns for intercepting and modifying network requests in Chrome extensions using MV3.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Sessions Api — Best Practices"
+description: "Use the Sessions API to track browser sessions."
+---
+
 # Chrome Extension Sessions API Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Tips — Manifest V3 Guide"
+description: "Best practices for Chrome extension service workers in Manifest V3 including lifecycle, debugging, and keep-alive."
+---
+
 # MV3 Service Worker Tips
 
 Practical tips for building robust Chrome Extension service workers using Manifest V3.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Lifecycle Events — Best Practices"
+description: "Handle extension lifecycle events."
+---
+
 # Extension Lifecycle Events
 
 This guide covers handling Chrome extension lifecycle events comprehensively: installation, updates, startup, and shutdown.

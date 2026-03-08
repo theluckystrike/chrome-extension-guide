@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Configuration — Best Practices"
+description: "Implement flexible configuration patterns for Chrome extensions using chrome.storage, managed storage, and feature flags."
+---
+
 # Extension Configuration Patterns
 
 Configuration management is critical for building flexible, user-customizable Chrome extensions. This guide covers patterns for implementing robust configuration systems.

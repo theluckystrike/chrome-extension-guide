@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Clipboard Patterns — Best Practices"
+description: "Read and write clipboard content in Chrome extensions."
+---
+
 # Clipboard API Patterns
 
 ## Overview

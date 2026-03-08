@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Cross Origin Requests — Best Practices"
+description: "Handle cross-origin requests in Chrome extensions with CORS workarounds and background fetch patterns."
+---
+
 # Cross-Origin Request Patterns for Chrome Extensions
 
 This guide covers making cross-origin HTTP requests from Chrome extensions, including permission configuration, content script limitations, and robust request handling patterns.

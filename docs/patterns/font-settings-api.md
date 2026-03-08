@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Font Settings Api — Best Practices"
+description: "Access and modify user font settings with the Font Settings API."
+---
+
 # Font Settings API in Chrome Extensions
 
 ## Overview

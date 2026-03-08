@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Chrome Web Store Rejection Fixes — Publishing Guide"
+description: "Fix common Chrome Web Store rejection issues and get your extension approved."
+---
+
 # Chrome Web Store Rejection Fixes
 
 ## The Stricter Review Landscape

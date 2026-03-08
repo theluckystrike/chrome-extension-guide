@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Cross Browser Compatibility — Best Practices"
+description: "Build extensions that work across Chrome, Firefox, and Edge."
+---
+
 # Cross-Browser Compatibility
 
 ## Overview

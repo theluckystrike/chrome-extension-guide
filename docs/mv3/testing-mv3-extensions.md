@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Testing Mv3 Extensions — Manifest V3 Guide"
+description: "Testing strategies for Manifest V3 Chrome extensions."
+---
+
 # Testing MV3 Extensions
 
 ## Unit Testing Service Workers

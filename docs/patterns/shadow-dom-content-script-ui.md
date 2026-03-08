@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Shadow Dom Content Script Ui — Best Practices"
+description: "Create isolated UI components in shadow DOM from content scripts."
+---
+
 Shadow DOM UI Patterns for Content Scripts
 
 When building Chrome extensions, injecting UI into existing web pages presents a fundamental challenge: page styles will inevitably leak into your extension UI, and your styles will leak out. Shadow DOM provides the cleanest solution by creating a DOM boundary that encapsulates styles completely.

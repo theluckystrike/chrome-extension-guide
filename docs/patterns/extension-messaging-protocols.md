@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Messaging Protocols — Best Practices"
+description: "Design message passing protocols between extension components."
+---
+
 # Extension Messaging Protocols
 
 Designing structured messaging protocols for Chrome extensions ensures type-safe, maintainable communication between content scripts, background scripts, and popup pages.

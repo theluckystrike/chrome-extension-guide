@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Theming Dark Mode — Best Practices"
+description: "Implement dark mode and theme synchronization for extensions."
+---
+
 # Theming and Dark Mode Patterns
 
 Chrome extensions live across multiple surfaces -- popup, options page, side panel, and content scripts injected into arbitrary sites. Keeping a consistent theme across all of them while respecting user preferences requires a deliberate architecture. These eight patterns build from simple system-theme detection to a full multi-surface theme engine.

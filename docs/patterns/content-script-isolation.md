@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Isolation — Best Practices"
+description: "Maintain proper isolation between content scripts and page scripts."
+---
+
 # Content Script Isolation Patterns
 
 ## Overview

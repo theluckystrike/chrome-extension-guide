@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Notification Patterns — Best Practices"
+description: "Create and manage notifications in Chrome extensions."
+---
+
 # Notification Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Update Migration — Best Practices"
+description: "Handle extension updates and migrations smoothly."
+---
+
 # Extension Update and Migration Strategies
 
 ## Overview

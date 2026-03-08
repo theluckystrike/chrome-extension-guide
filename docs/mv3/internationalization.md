@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Internationalization — Manifest V3 Guide"
+description: "Implement internationalization in Manifest V3 extensions."
+---
+
 # Internationalization in Chrome Extensions (MV3)
 
 Chrome's i18n system supports multiple languages in extensions.

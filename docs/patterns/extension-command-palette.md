@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Command Palette — Best Practices"
+description: "Implement a command palette for quick extension actions and navigation."
+---
+
 # Command Palette Pattern for Chrome Extensions
 
 A command palette provides a keyboard-driven interface for accessing extension functionality, similar to VS Code's Ctrl+Shift+P launcher.

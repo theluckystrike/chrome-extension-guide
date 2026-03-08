@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Proxy Settings — Best Practices"
+description: "Configure proxy settings for extensions."
+---
+
 # Proxy Settings API Patterns
 
 ## Overview

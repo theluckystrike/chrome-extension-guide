@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Web Accessible Resources — Best Practices"
+description: "Configure web accessible resources in Manifest V3 for content script and page access."
+---
+
 # Web Accessible Resources Patterns
 
 ## Overview

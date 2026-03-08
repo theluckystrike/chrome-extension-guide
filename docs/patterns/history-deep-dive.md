@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension History Deep Dive — Best Practices"
+description: "Deep dive into the History API for browsing data access."
+---
+
 # Chrome Extension History Deep Dive
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Lifecycle — Best Practices"
+description: "Manage content script lifecycle effectively."
+---
+
 # Content Script Lifecycle Management
 
 Content scripts in Chrome extensions have a distinct lifecycle that differs from regular web page scripts. Understanding this lifecycle is crucial for building robust, memory-efficient extensions.

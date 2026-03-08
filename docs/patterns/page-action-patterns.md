@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Page Action Patterns — Best Practices"
+description: "Use page actions for tab-specific extension functionality."
+---
+
 # Page Action Patterns in MV3
 
 ## Overview

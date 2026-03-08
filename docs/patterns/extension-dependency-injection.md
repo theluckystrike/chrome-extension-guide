@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Dependency Injection — Best Practices"
+description: "Implement dependency injection for cleaner extension architecture."
+---
+
 # Extension Dependency Injection Patterns
 
 Patterns for writing testable Chrome extensions using dependency injection to decouple from global chrome.* APIs.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Workers — Manifest V3 Guide"
+description: "Understand service workers in Manifest V3 for background processing."
+---
+
 # MV3 Service Workers: A Complete Migration Guide
 
 In Manifest V3, the persistent background page from Manifest V2 is replaced by **ephemeral service workers**. This fundamental architectural change impacts how you manage state, handle events, and structure your extension's background logic. This guide covers everything you need to know to migrate successfully.

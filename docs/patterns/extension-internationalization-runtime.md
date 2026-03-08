@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Internationalization Runtime — Best Practices"
+description: "Implement runtime internationalization for dynamic translations."
+---
+
 # Runtime Internationalization Patterns
 
 Beyond `chrome.i18n.getMessage`, Chrome extensions can leverage modern JavaScript APIs for runtime localization.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Lifecycle — Best Practices"
+description: "Understand the service worker lifecycle in Manifest V3."
+---
+
 # Service Worker Lifecycle Patterns
 
 ## Overview

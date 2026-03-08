@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Multi Tab Coordination — Best Practices"
+description: "Coordinate actions across multiple tabs with patterns for tab groups, sessions, and shared state."
+---
+
 # Multi-Tab Coordination Patterns
 
 ## Overview

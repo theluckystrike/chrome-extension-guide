@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Async Cookbook — Best Practices"
+description: "Async patterns cookbook for service workers."
+---
+
 Service Worker Async Patterns Cookbook
 
 This guide covers practical async patterns for Chrome extension service workers. These patterns help you write reliable, performant code that handles Chrome's unique execution environment.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Script Performance — Best Practices"
+description: "Optimize content script performance."
+---
+
 # Content Script Performance Optimization
 
 ## Overview

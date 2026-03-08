@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Performance Profiling — Best Practices"
+description: "Profile and optimize extension performance."
+---
+
 # Performance Profiling for Chrome Extensions
 
 ## Overview

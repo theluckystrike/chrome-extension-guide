@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Multi Window — Best Practices"
+description: "Manage multiple windows and coordinate between them."
+---
+
 # Multi-Window Management Pattern
 
 ## Overview

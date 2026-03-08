@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Top Sites — Best Practices"
+description: "Access and display top sites from Chrome history using the Top Sites API for quick access features."
+---
+
 # Top Sites API Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Runtime Error Patterns — Best Practices"
+description: "Handle and recover from runtime errors gracefully."
+---
+
 # Chrome Runtime Error Patterns
 
 This guide covers systematic handling of `chrome.runtime` errors in Chrome extensions.

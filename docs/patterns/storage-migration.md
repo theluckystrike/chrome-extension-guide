@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Storage Migration — Best Practices"
+description: "Migrate between storage APIs safely."
+---
+
 # Storage Area Migration Pattern
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Analytics Privacy — Best Practices"
+description: "Track extension analytics while maintaining user privacy with privacy-conscious telemetry patterns."
+---
+
 # Privacy-First Analytics Patterns for Chrome Extensions
 
 This guide covers how to implement analytics in Chrome extensions while respecting user privacy and complying with platform policies.

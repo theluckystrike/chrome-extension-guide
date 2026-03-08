@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Event Page Migration — Best Practices"
+description: "Migrate from persistent background pages to event pages (service workers) with this comprehensive guide."
+---
+
 # Event Page to Service Worker Migration Patterns
 
 This document outlines patterns for migrating Chrome extensions from Manifest V2 event pages to Manifest V3 service workers.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Startup Performance — Best Practices"
+description: "Optimize extension startup performance."
+---
+
 # Startup Performance Patterns
 
 Optimize Chrome extension startup and popup performance. Target **<100ms** popup open time for a snappy user experience.

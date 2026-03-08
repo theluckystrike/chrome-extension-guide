@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Analytics — Publishing Guide"
+description: "Set up analytics for your Chrome extension to track users, engagement, and performance metrics."
+---
+
 # Chrome Extension Analytics
 
 ## CWS Dashboard Metrics

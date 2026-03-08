@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Memory Management — Best Practices"
+description: "Implement memory management to prevent memory leaks."
+---
+
 # Memory Management in Chrome Extensions
 
 ## Overview

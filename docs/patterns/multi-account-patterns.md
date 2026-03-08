@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Multi Account Patterns — Best Practices"
+description: "Handle multiple user accounts in extensions."
+---
+
 # Multi-Account and Profile Patterns
 
 ## Overview

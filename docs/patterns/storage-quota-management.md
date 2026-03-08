@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Storage Quota Management — Best Practices"
+description: "Manage storage quotas effectively."
+---
+
 # Storage Quota Management
 
 Chrome extension storage has strict quota limits that require careful management. This guide covers patterns for effectively managing storage quotas in your extension.

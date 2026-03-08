@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Tab Group Patterns — Best Practices"
+description: "Organize tabs with the Tab Groups API."
+---
+
 # Tab Group Patterns
 
 Chrome's Tab Groups API allows organizing tabs into visual groups, creating a workspace-like experience within the browser.

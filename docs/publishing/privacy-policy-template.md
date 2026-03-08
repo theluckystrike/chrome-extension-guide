@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Privacy Policy Template — Publishing Guide"
+description: "Privacy policy template and guidelines for Chrome Web Store compliance."
+---
+
 # Privacy Policy Template for Chrome Extensions
 
 A practical guide with copy-paste privacy policy templates for Chrome extensions. This guide helps you create a compliant privacy policy for the Chrome Web Store.

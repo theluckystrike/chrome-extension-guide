@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Event Driven Messaging — Best Practices"
+description: "Design event-driven architectures for extension components."
+---
+
 # Event-Driven Messaging Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Feature Detection — Best Practices"
+description: "Detect browser and API capabilities at runtime with feature detection patterns for cross-browser extensions."
+---
+
 # Extension Feature Detection Patterns
 
 Feature detection is essential for Chrome extensions because APIs are continuously added in newer Chrome versions, and cross-browser compatibility requires handling missing APIs gracefully.

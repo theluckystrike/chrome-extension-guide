@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Promise Based Apis — Manifest V3 Guide"
+description: "Master promise-based APIs in Manifest V3 for asynchronous operations."
+---
+
 # Promise-Based APIs in MV3
 
 A comprehensive guide to migrating from callback-based Chrome extension APIs to promise-based patterns in Manifest V3.

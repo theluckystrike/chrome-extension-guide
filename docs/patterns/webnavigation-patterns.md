@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Webnavigation Patterns — Best Practices"
+description: "Use webNavigation API for advanced navigation tracking."
+---
+
 # Web Navigation API Patterns
 
 The `chrome.webNavigation` API provides powerful capabilities for monitoring and analyzing navigation events in Chrome extensions. This document covers advanced patterns for working with this API effectively.

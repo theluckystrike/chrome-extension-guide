@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Building With React — Best Practices"
+description: "Build Chrome extensions with React."
+---
+
 # Building Chrome Extensions with React
 
 ## Overview

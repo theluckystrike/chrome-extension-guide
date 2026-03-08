@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Badges Advanced — Best Practices"
+description: "Advanced badge management and visualization."
+---
+
 # Advanced Badge Management Patterns
 
 ## Overview

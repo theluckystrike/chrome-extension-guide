@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Privacy Api — Best Practices"
+description: "Use the Privacy API to respect user privacy settings."
+---
+
 # Chrome Extension Privacy API Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Tab Management — Best Practices"
+description: "Implement advanced tab management features."
+---
+
 # Tab Management Patterns
 
 ## Overview

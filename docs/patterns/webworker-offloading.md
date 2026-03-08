@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Webworker Offloading — Best Practices"
+description: "Offload heavy computation to Web Workers."
+---
+
 # Web Worker Offloading Patterns
 
 Web Workers enable running computationally intensive tasks off the main thread, keeping extension UIs responsive.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Shadow Dom Advanced — Best Practices"
+description: "Advanced shadow DOM patterns for extension UI components."
+---
+
 # Shadow DOM Advanced Patterns for Chrome Extensions
 
 Shadow DOM gives content scripts a private DOM subtree that host page styles cannot penetrate. This guide covers eight advanced patterns for building robust, accessible extension UI with Shadow DOM in Manifest V3.

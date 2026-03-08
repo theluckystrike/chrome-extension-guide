@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Logging Levels — Best Practices"
+description: "Implement structured logging with different levels for development and production."
+---
+
 # Extension Logging Levels
 
 A comprehensive pattern for implementing structured, context-aware logging in Chrome extensions with runtime-controllable log levels.

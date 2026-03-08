@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Manifest Content Scripts Config — Best Practices"
+description: "Configure content scripts in manifest.json."
+---
+
 # Content Script Manifest Configuration Patterns
 
 This guide covers optimization patterns for the `content_scripts` field in `manifest.json`.

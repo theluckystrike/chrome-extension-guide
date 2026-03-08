@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Omnibox Api — Best Practices"
+description: "Implement custom search suggestions in the Chrome omnibox (address bar)."
+---
+
 # Chrome Extension Omnibox API Patterns
 
 The Chrome Omnibox API allows extensions to integrate deeply with the browser's address bar, providing custom suggestions and commands. This guide covers practical patterns for building powerful omnibox experiences.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Drag And Drop — Best Practices"
+description: "Implement drag and drop in extension UIs."
+---
+
 # Drag and Drop in Extensions
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Declarative Content Patterns — Best Practices"
+description: "Use Declarative Content API to trigger actions based on page content without host permissions."
+---
+
 # Declarative Content Patterns
 
 This document covers advanced patterns for using `chrome.declarativeContent` to show the extension action icon only on pages that match specific conditions—without requiring content scripts to run.

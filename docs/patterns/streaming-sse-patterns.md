@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Streaming Sse Patterns — Best Practices"
+description: "Implement Server-Sent Events for real-time streaming in extensions."
+---
+
 # Streaming and Server-Sent Events in Chrome Extensions
 
 Modern Chrome extensions increasingly need to handle streaming data -- from AI API responses

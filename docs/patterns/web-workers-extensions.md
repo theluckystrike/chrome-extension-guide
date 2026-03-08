@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Web Workers Extensions — Best Practices"
+description: "Use Web Workers for background processing in extensions."
+---
+
 # Web Workers in Chrome Extensions
 
 ## Overview

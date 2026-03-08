@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Undo Redo Patterns — Best Practices"
+description: "Implement undo/redo functionality in extensions."
+---
+
 # Undo/Redo Patterns for Chrome Extensions
 
 This guide covers implementing undo/redo functionality in Chrome extensions using proven patterns.

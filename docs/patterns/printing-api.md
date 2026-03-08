@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Printing Api — Best Practices"
+description: "Handle printing from Chrome extensions with the Printing API."
+---
+
 # Printing API Patterns
 
 ## Overview

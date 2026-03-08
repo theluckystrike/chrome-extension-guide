@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Service Worker Keepalive — Best Practices"
+description: "Keep service workers alive for long-running operations."
+---
+
 # Service Worker Keep-Alive Patterns
 
 ## Understanding MV3 Service Worker Lifecycle

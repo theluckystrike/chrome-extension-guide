@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension State Management — Best Practices"
+description: "Centralized state management patterns for extensions."
+---
+
 # State Management Patterns
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Inter Process — Best Practices"
+description: "Implement inter-process communication patterns between extension components like popups, background scripts, and content scripts."
+---
+
 # Extension Inter-Process Communication Patterns
 
 This document covers communication between Chrome Extensions and external applications, including native messaging and cross-extension communication.

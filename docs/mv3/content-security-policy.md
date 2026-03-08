@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Content Security Policy — Manifest V3 Guide"
+description: "Understand and work with Content Security Policy restrictions in Manifest V3."
+---
+
 # MV3 Content Security Policy
 
 A comprehensive guide to Content Security Policy changes in Manifest V3 and how to migrate your extension.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Alarm Scheduling Patterns — Best Practices"
+description: "Schedule tasks with the Alarms API."
+---
+
 # Alarm Scheduling Patterns
 
 Advanced patterns for the `chrome.alarms` API in Chrome extensions.

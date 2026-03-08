@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Data Sync — Best Practices"
+description: "Sync extension data across devices with sync storage."
+---
+
 # Data Synchronization Patterns
 
 ## Overview

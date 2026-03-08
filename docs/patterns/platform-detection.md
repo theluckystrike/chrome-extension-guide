@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Platform Detection — Best Practices"
+description: "Detect platform and OS for cross-platform extensions."
+---
+
 # Platform Detection
 
 ## Overview

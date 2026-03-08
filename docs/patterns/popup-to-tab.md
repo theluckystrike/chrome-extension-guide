@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Popup To Tab — Best Practices"
+description: "Learn patterns for opening extension popups as full tabs for enhanced user experience and larger interfaces."
+---
+
 # Popup-to-Tab Pattern
 
 ## Overview

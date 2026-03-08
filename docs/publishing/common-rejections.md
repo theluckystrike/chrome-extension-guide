@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Common Rejections — Publishing Guide"
+description: "Understand and avoid the most common Chrome Web Store rejection reasons."
+---
+
 # Common Chrome Web Store Rejections (and How to Fix Them)
 
 ## Introduction

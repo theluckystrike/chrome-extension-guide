@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Error Recovery — Best Practices"
+description: "Recover gracefully from errors in extensions."
+---
+
 # Error Recovery Patterns
 
 Resilience patterns for building self-healing Chrome extensions.

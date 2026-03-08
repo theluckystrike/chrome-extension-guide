@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Csp Workarounds — Best Practices"
+description: "Navigate Content Security Policy restrictions in Chrome extensions."
+---
+
 # CSP Workarounds in Chrome Extensions (MV3)
 
 Chrome Extensions in Manifest V3 operate under strict Content Security Policy (CSP) constraints that differ significantly from web pages. Understanding these constraints and their workarounds is essential for building secure, functional extensions.

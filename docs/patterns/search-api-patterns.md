@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Search Api Patterns — Best Practices"
+description: "Implement search functionality with the Search API."
+---
+
 # Chrome Search API Patterns
 
 The `chrome.search` API enables programmatic web searches from your Chrome extension. This document covers patterns for implementing search functionality in extensions.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Downloads Management — Best Practices"
+description: "Manage file downloads from extensions."
+---
+
 # Downloads Management Patterns
 
 This guide covers patterns for managing downloads in Chrome extensions using the Downloads API.

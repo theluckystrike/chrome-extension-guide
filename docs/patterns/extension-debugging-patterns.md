@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Extension Debugging Patterns — Best Practices"
+description: "Master debugging techniques for Chrome extensions across all execution contexts."
+---
+
 # Extension Debugging Patterns
 
 This document covers common debugging patterns for Chrome extension development across different contexts.

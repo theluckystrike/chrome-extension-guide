@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Accessibility — Best Practices"
+description: "Build accessible Chrome extensions following WCAG guidelines."
+---
+
 # Accessibility in Chrome Extensions
 
 ## Overview

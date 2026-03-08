@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Chrome Extension Beta Testing — Publishing Guide"
+description: "Learn how to beta test Chrome extensions using trusted testers, unlisted releases, and feature flags before full public launch."
+---
+
 # Beta Testing Chrome Extensions
 
 ## Introduction
