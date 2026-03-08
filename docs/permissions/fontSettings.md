@@ -154,3 +154,11 @@ const granted = await checkPermission('fontSettings');
 
 ## Cross-References {#cross-references}
 - Related: `docs/guides/accessibility.md`
+
+## Frequently Asked Questions
+
+### How do I access font settings in Chrome?
+The chrome.fontSettings API allows extensions to get and set the default font size, serif font, and other font-related preferences.
+
+### Can extensions install custom fonts?
+No, the fontSettings API cannot install fonts. It can only manage existing system and Chrome font settings.

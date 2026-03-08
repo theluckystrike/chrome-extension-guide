@@ -113,3 +113,11 @@ With a rule like:
   }
 }
 ```
+
+## Frequently Asked Questions
+
+### When do I need host permissions with declarativeNetRequest?
+Host permissions are needed if you want to modify requests to specific websites or need access to request headers for the rules.
+
+### Can I block requests without host permissions?
+Yes, using static rulesets that don't require host access can block requests to any domain.

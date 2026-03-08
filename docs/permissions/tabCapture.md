@@ -153,3 +153,11 @@ const granted = await checkPermission('tabCapture');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/tab-capture.md`
 - Related: `docs/permissions/offscreen.md`, `docs/guides/desktop-capture.md`
+
+## Frequently Asked Questions
+
+### How do I capture tab content?
+Use chrome.tabCapture.capture() to capture the visible area of a tab as a media stream. You'll need the tabCapture permission.
+
+### Can I record tab audio?
+Yes, include "audio" in the mediaType options to capture both video and audio from the tab.

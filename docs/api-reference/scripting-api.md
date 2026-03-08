@@ -514,3 +514,11 @@ Key differences:
 - [Content Scripts Guide](../guides/content-scripts.md) -- patterns for building content scripts
 - [Tabs API Reference](tabs-api.md) -- querying and managing tabs
 - [Permissions Reference](../permissions/host-permissions.md) -- host permission patterns
+
+## Frequently Asked Questions
+
+### How do I inject JavaScript into pages?
+Use chrome.scripting.executeScript() with a function or file. This requires the "scripting" permission.
+
+### Can I inject into all frames?
+Yes, set "allFrames": true in your executeScript options to inject into all frames of a tab.

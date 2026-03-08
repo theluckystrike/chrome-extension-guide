@@ -134,3 +134,11 @@ Test your shortcuts on both Windows and macOS. What works on one platform might 
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/commands-keyboard-shortcuts.md`
 - Related: `docs/permissions/activeTab.md`
+
+## Frequently Asked Questions
+
+### How do I add keyboard shortcuts to my Chrome extension?
+Declare commands in your manifest.json with "commands" key, then handle them in your background script with chrome.commands.onCommand.addListener.
+
+### What keyboard shortcuts are reserved in Chrome?
+Ctrl+Shift+1 through Ctrl+Shift+9 are reserved by Chrome for switching to specific tabs. Your extension cannot override these.

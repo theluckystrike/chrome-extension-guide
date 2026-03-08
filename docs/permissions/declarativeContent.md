@@ -197,3 +197,11 @@ const granted = await checkPermission('declarativeContent');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/declarative-content.md`
 - Related: `docs/permissions/activeTab.md`, `docs/permissions/tabs.md`
+
+## Frequently Asked Questions
+
+### How does declarativeContent work in Manifest V3?
+DeclarativeContent allows your extension to take actions based on page content without needing to run content scripts constantly. Use chrome.declarativeContent.onPageChanged to define rules.
+
+### Is declarativeContent still available in MV3?
+Yes, but with limitations. It works for page actions and can show the action based on page conditions, but cannot automatically inject content scripts.

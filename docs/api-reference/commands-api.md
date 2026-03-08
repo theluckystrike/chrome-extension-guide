@@ -245,3 +245,11 @@ chrome.commands.onCommand.addListener((command, tab) => {
 - [Commands Permission](../permissions/commands.md) — Detailed permission reference
 - [Keyboard Shortcuts Guide](../guides/commands-keyboard-shortcuts.md) — Step-by-step implementation guide
 - [Keyboard Shortcuts Pattern](../patterns/keyboard-shortcuts-api.md) — Recommended patterns and best practices
+
+## Frequently Asked Questions
+
+### How do I add keyboard shortcuts to my extension?
+Declare commands in manifest.json's "commands" section, then handle them with chrome.commands.onCommand.addListener.
+
+### What shortcuts can't I use?
+Ctrl+Shift+1-9 are reserved. Your shortcuts must include Ctrl or Alt and not conflict with browser shortcuts.

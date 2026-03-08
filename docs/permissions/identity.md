@@ -242,3 +242,11 @@ async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Re
 - [Chrome identity API docs](https://developer.chrome.com/docs/extensions/reference/api/identity)
 - [storage](storage.md) — persist auth state and tokens
 - [cookies](cookies.md) — alternative session management approach
+
+## Frequently Asked Questions
+
+### How do I implement OAuth in Chrome extensions?
+Use the chrome.identity API to launch OAuth flows. You'll need to configure redirect URIs and handle the token exchange.
+
+### Is chrome.identity free?
+Yes, the chrome.identity API is free to use, but you'll need to set up OAuth with your identity provider (Google, Auth0, etc.).

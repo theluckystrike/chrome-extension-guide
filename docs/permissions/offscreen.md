@@ -293,3 +293,11 @@ async function scrapePageData(url) {
 
 - [Chrome Extensions Documentation: Offscreen Documents](https://developer.chrome.com/docs/extensions/mv3/offscreen/)
 - [chrome.offscreen API Reference](https://developer.chrome.com/docs/extensions/reference/offscreen/)
+
+## Frequently Asked Questions
+
+### What are offscreen documents in Manifest V3?
+Offscreen documents are hidden pages that extension can create to perform tasks that require a DOM, like playing audio or using certain APIs.
+
+### How do I create an offscreen document?
+Use chrome.offscreen.createDocument() with a specified reason and the HTML file to load. Only one offscreen document can exist per extension at a time.

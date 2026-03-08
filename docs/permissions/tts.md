@@ -227,3 +227,11 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 - [Chrome TTS Engine API docs](https://developer.chrome.com/docs/extensions/reference/api/ttsEngine)
 - [contextMenus](contextMenus.md) — trigger TTS from right-click menu
 - [storage](storage.md) — persist voice preferences
+
+## Frequently Asked Questions
+
+### How do I add text-to-speech to Chrome extension?
+Use chrome.tts.speak() to make Chrome read text aloud. You can choose voices, rate, pitch, and listen for events.
+
+### Can I use custom voices with the TTS API?
+Yes, you can use Chrome's built-in voices or install extension TTS engines for additional voice options.

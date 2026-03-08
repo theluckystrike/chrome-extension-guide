@@ -144,3 +144,11 @@ const granted = await checkPermission('clipboardWrite');
 ## Cross-References {#cross-references}
 - Related: `docs/permissions/clipboardRead.md`, `docs/permissions/offscreen.md`
 - Tutorial: `docs/tutorials/build-clipboard-manager.md`
+
+## Frequently Asked Questions
+
+### How do I copy text to clipboard in a Chrome extension?
+Use navigator.clipboard.writeText('your text') in your content script or popup. No special permission is required for writing to clipboard in most contexts.
+
+### Can I copy images to clipboard?
+Yes, but it requires the clipboardWrite permission and using the Clipboard API with image data as a Blob.

@@ -119,3 +119,11 @@ async function disableKeepAwake() {
 - permissions/idle.md
 - guides/power-management.md
 - patterns/power-api.md
+
+## Frequently Asked Questions
+
+### How do I prevent screen sleep in Chrome extension?
+Use chrome.power.requestKeepAwake() to prevent the system from sleeping. Use chrome.power.releaseKeepAwake() when done.
+
+### Does power API work on all platforms?
+The power API works on ChromeOS, Windows, and Mac. Linux support is limited.

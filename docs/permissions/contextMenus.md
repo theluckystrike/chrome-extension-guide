@@ -200,3 +200,11 @@ chrome.contextMenus.create({
 - [Context Menus API Reference](../api-reference/context-menus-api.md)
 - [Chrome contextMenus API docs](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
 - [Context Menus API deep dive](../api-reference/context-menus-api.md)
+
+## Frequently Asked Questions
+
+### How do I add a context menu item in Chrome extension?
+Use chrome.contextMenus.create() in your background script to add items to the right-click context menu. You can specify contexts like "page", "selection", or "link".
+
+### Can I add submenus to context menus?
+Yes, create a parent menu item first, then use the "parentId" property when creating child items.

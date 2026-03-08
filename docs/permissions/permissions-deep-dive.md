@@ -916,3 +916,11 @@ optional permissions to defer warnings until users understand the value.
 The extensions with the highest install rates are the ones that request the
 least. Build trust by asking for less, and earn more access through runtime
 prompts that users understand and accept.
+
+## Frequently Asked Questions
+
+### What are optional permissions in Chrome extensions?
+Optional permissions are declared in "optional_permissions" and requested at runtime when needed, giving users more control over what your extension can access.
+
+### How do I request permissions at runtime?
+Use chrome.permissions.request() with the permissions you need. The user will be prompted to grant access.

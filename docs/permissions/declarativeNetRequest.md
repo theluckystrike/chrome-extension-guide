@@ -147,3 +147,11 @@ const result = await checkPermission('declarativeNetRequest');
 
 ## API Reference {#api-reference}
 - [Chrome declarativeNetRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest)
+
+## Frequently Asked Questions
+
+### What is declarativeNetRequest used for?
+declarativeNetRequest allows extensions to block or modify network requests declaratively (without seeing the request content), which is required in Manifest V3.
+
+### Is declarativeNetRequest free to use?
+Yes, the declarativeNetRequest API is free and doesn't require any special approval, though there are ruleset size limits.

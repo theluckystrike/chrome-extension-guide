@@ -141,3 +141,11 @@ const granted = await checkPermission('unlimitedStorage');
 - Guide: `docs/guides/memory-management.md`
 - Reference: `docs/reference/storage-patterns.md`
 - Related: `docs/permissions/storage.md`
+
+## Frequently Asked Questions
+
+### What does unlimitedStorage permission do?
+The unlimitedStorage permission removes the 10MB quota for chrome.storage.local, allowing extensions to store more data.
+
+### Is unlimitedStorage required for all storage?
+No, it's optional. Without it, local storage is limited to 10MB. Most extensions don't need unlimited storage.

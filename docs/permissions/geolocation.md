@@ -158,3 +158,11 @@ async function getLocation() {
 - [permissions/offscreen.md](./offscreen.md)
 - [mv3/offscreen-documents.md](../mv3/offscreen-documents.md)
 - [patterns/offscreen-documents.md](../patterns/offscreen-documents.md)
+
+## Frequently Asked Questions
+
+### How do I get user's location in a Chrome extension?
+Use the standard Geolocation API (navigator.geolocation) in your content script. The "geolocation" permission is only needed for the background script.
+
+### Can extensions override geolocation for testing?
+Yes, Chrome DevTools allows you to override geolocation for testing purposes in your content scripts.

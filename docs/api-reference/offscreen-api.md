@@ -182,3 +182,11 @@ async function playAudio(audioUrl) {
 - [Offscreen Documents Guide](../guides/offscreen-documents.md)
 - [Offscreen Permissions](../permissions/offscreen.md)
 - [Offscreen Documents Pattern](../patterns/offscreen-documents.md)
+
+## Frequently Asked Questions
+
+### What is the offscreen API for?
+Offscreen documents provide a hidden page with full DOM access for tasks that require a document, like audio processing.
+
+### When should I use offscreen documents?
+Use them for tasks that need DOM APIs unavailable in service workers, such as Web Audio, Canvas, or video processing.

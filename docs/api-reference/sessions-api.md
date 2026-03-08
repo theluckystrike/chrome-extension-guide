@@ -203,3 +203,11 @@ async function getAllDeviceTabs(): Promise<Map<string, string[]>> {
 
 - [Sessions permission](../permissions/sessions.md)
 - [Sessions API patterns](../patterns/sessions-api.md)
+
+## Frequently Asked Questions
+
+### How do I restore a closed tab?
+Use chrome.sessions.getRecentlyClosed() to find closed tabs and chrome.sessions.restore() to reopen them.
+
+### Can I sync sessions across devices?
+The sessions API only provides local data. For cross-device sync, you'd need to implement custom cloud storage.

@@ -161,3 +161,11 @@ chrome.runtime.connectNative('com.example.myhost', (port) => {
 
 ## Cross-References {#cross-references}
 - Related: `docs/reference/message-passing-patterns.md`
+
+## Frequently Asked Questions
+
+### How do I communicate with a native app?
+Use chrome.runtime.sendNativeMessage() to send messages to a native application configured in your manifest. The app must register a messaging host.
+
+### Is nativeMessaging secure?
+NativeMessaging is secure but requires user consent and careful validation of messages to prevent injection attacks.

@@ -488,3 +488,11 @@ function waitForTabLoad(tabId: number): Promise<chrome.tabs.Tab> {
 - [activeTab permission](../permissions/activeTab.md)
 - [Windows API](windows-api.md)
 - [Chrome tabs API docs](https://developer.chrome.com/docs/extensions/reference/api/tabs)
+
+## Frequently Asked Questions
+
+### How do I get the current tab?
+Use chrome.tabs.query() with {active: true, currentWindow: true} to get the active tab in the current window.
+
+### Can I create new tabs programmatically?
+Yes, use chrome.tabs.create() with a URL parameter to open new tabs.

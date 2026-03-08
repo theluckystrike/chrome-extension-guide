@@ -469,3 +469,11 @@ async function findDuplicates() {
 - [History API](history-api.md)
 - [Storage API Deep Dive](storage-api-deep-dive.md)
 - [Chrome bookmarks API docs](https://developer.chrome.com/docs/extensions/reference/api/bookmarks)
+
+## Frequently Asked Questions
+
+### How do I create bookmarks programmatically?
+Use chrome.bookmarks.create() with a title and URL. You can also create folders and organize bookmarks in a tree structure.
+
+### Can I search bookmarks from my extension?
+Yes, chrome.bookmarks.search() lets you find bookmarks by text, URL, or other criteria.

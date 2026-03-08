@@ -160,3 +160,11 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 - [Alarms API Reference](../api-reference/alarms-api.md)
 - [Chrome alarms API docs](https://developer.chrome.com/docs/extensions/reference/api/alarms)
 - [Alarms API deep dive](../api-reference/alarms-api.md)
+
+## Frequently Asked Questions
+
+### How do I schedule tasks in a Chrome extension?
+Use the chrome.alarms API to schedule code to run periodically or at a specific time. Unlike setTimeout, alarms persist across extension restarts and service worker wakes.
+
+### Does chrome.alarms work in Manifest V3?
+Yes, chrome.alarms works in Manifest V3 but runs in the background service worker. Note that the service worker may be terminated between alarm fires.

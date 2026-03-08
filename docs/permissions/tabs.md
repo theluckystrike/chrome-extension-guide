@@ -246,3 +246,11 @@ async function pinTabToGroup(groupName: string, tabId: number) {
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/tabs)
 - [Manifest permissions](https://developer.chrome.com/docs/extensions/develop/concepts/permissions)
+
+## Frequently Asked Questions
+
+### How do I get the current tab in Chrome extension?
+Use chrome.tabs.query({active: true, currentWindow: true}) to get the currently active tab, or use the tab parameter in event listeners.
+
+### Can I access tab URLs without host permissions?
+With the tabs permission, you can access limited tab metadata including URL, title, and favIconUrl.

@@ -138,3 +138,11 @@ document.documentElement.dir = chrome.i18n.getMessage("@@bidi_dir");
 ## See Also {#see-also}
 
 - [Chrome i18n Docs](https://developer.chrome.com/docs/extensions/i18n)
+
+## Frequently Asked Questions
+
+### How do I internationalize my extension?
+Use messages.json files in the _locales directory and reference them with __MSG_messagename__ in your code.
+
+### How do I get user's locale in code?
+Use chrome.i18n.getMessage() to retrieve translated strings, and chrome.i18n.getAcceptLanguages() for user's languages.

@@ -336,3 +336,11 @@ async function positionOnSecondMonitor() {
 
 - [Chrome System API Official Documentation](https://developer.chrome.com/docs/extensions/system-api)
 - [Manifest Permissions Format](/docs/permissions/overview.md)
+
+## Frequently Asked Questions
+
+### What system information can I access?
+chrome.system provides CPU, memory, display, and storage information. Specific capabilities vary by platform.
+
+### Is system API available in Chrome Apps?
+The system API is available in extensions but some features may differ from deprecated Chrome Apps.

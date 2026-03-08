@@ -122,3 +122,11 @@ chrome.cookies.onChanged.addListener(async (changeInfo) => {
 
 ## API Reference {#api-reference}
 - [Chrome cookies API docs](https://developer.chrome.com/docs/extensions/reference/api/cookies)
+
+## Frequently Asked Questions
+
+### How do I read cookies from a Chrome extension?
+Use the chrome.cookies API with the "cookies" permission. Call chrome.cookies.get() or chrome.cookies.getAll() to retrieve cookies for specific domains.
+
+### Can extensions set HTTP-only cookies?
+No, extensions cannot set HttpOnly cookies through the cookies API. These cookies are only accessible to the server.

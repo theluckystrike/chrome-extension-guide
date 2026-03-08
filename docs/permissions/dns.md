@@ -128,3 +128,11 @@ The API only supports A (IPv4) and AAAA (IPv6) records. If you need to query oth
 ## Cross-References {#cross-references}
 - guides/security-best-practices.md
 - patterns/network-interception.md
+
+## Frequently Asked Questions
+
+### What does the dns permission do?
+The dns permission grants access to chrome.dns for resolving DNS records directly from your extension, useful for network diagnostic tools.
+
+### Is the DNS API available to all extensions?
+This API is typically available to extensions with specific purposes and may require additional review for store approval.

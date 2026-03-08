@@ -130,3 +130,11 @@ const granted = await checkPermission('search');
 
 ## Cross-References {#cross-references}
 - Related: `docs/guides/omnibox-api.md`
+
+## Frequently Asked Questions
+
+### How do I create a search provider in Chrome?
+Use chrome.search to interact with Chrome's default search provider. Your extension can perform searches and get information about the current search provider.
+
+### Can I add custom search engines?
+The search API doesn't allow creating new search engines, but you can interact with existing ones.

@@ -135,3 +135,11 @@ onBeforeRequest -> onBeforeSendHeaders -> onSendHeaders ->
 
 ## API Reference {#api-reference}
 - [Chrome webRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/webRequest)
+
+## Frequently Asked Questions
+
+### What is webRequest API used for?
+The webRequest API allows extensions to intercept, block, or modify network requests before they're sent.
+
+### Is webRequest available in Manifest V3?
+In MV3, webRequest is available but blocking is limited. Use declarativeNetRequest for most blocking scenarios instead.

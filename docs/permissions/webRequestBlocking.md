@@ -102,3 +102,11 @@ Be transparent about what your extension blocks or modifies. The removal of `web
 - `docs/permissions/webRequest.md`
 - `docs/permissions/declarativeNetRequest.md`
 - `docs/mv3/declarative-net-request.md`
+
+## Frequently Asked Questions
+
+### What does webRequestBlocking do?
+webRequestBlocking allows extensions to synchronously block or modify network requests. In MV3, this is restricted to certain use cases.
+
+### Should I use declarativeNetRequest instead?
+Yes, for most blocking scenarios in MV3, declarativeNetRequest is preferred as it's more performant and doesn't require the blocking permission.

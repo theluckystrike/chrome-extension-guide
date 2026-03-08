@@ -166,3 +166,11 @@ msg.onMessage({
 ## API Reference {#api-reference}
 - [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
 - [Chrome storage API docs](https://developer.chrome.com/docs/extensions/reference/api/storage)
+
+## Frequently Asked Questions
+
+### Is chrome.storage.sync free?
+Yes, chrome.storage.sync is completely free to use. It has size limits (100KB total, 8KB per item) but no API costs.
+
+### What's the difference between local and sync storage?
+local storage persists only on the current device, while sync storage syncs across all Chrome instances where the user is signed in.

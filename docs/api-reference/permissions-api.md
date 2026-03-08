@@ -264,3 +264,11 @@ chrome.permissions.onRemoved.addListener(updateUI);
 - [Permissions Model](../guides/permissions-model.md) - Understanding Chrome's permission system
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md) - Deep dive into permission strategies
 - [Permissions Deep Dive](../permissions/permissions-deep-dive.md) - Comprehensive permission guide
+
+## Frequently Asked Questions
+
+### How do I check if I have a permission?
+Use chrome.permissions.contains() to check if your extension has a specific permission granted.
+
+### Can I request permissions after installation?
+Yes, use chrome.permissions.request() to request optional permissions at runtime after installation.

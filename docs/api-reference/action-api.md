@@ -138,3 +138,14 @@ chrome.action.onClicked.addListener(async (tab) => {
 - [MV3 Action API](../mv3/action-api.md)
 - [Badge Action UI Pattern](../patterns/badge-action-ui.md)
 - [Popup Patterns](../guides/popup-patterns.md)
+
+## Frequently Asked Questions
+
+### What is the chrome.action API?
+chrome.action controls the extension's toolbar icon in Chrome, replacing the deprecated browserAction API. It manages icons, badges, popups, and click handling.
+
+### Do I need a permission for chrome.action?
+No, the action API doesn't require any permissions. You configure it through the "action" key in manifest.json.
+
+### Can I change the icon dynamically?
+Yes, use chrome.action.setIcon() to change icons programmatically based on extension state or tab context.

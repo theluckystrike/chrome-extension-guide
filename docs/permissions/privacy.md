@@ -106,3 +106,11 @@ const granted = await checkPermission('privacy');
 
 ## Cross-References {#cross-references}
 - Related: `docs/permissions/contentSettings.md`, `docs/permissions/proxy.md`
+
+## Frequently Asked Questions
+
+### How do I access privacy settings?
+Use the chrome.privacy API to read and modify Chrome's privacy settings like network prediction, safe browsing, and tracking protection.
+
+### Can extensions disable safe browsing?
+Extensions with the privacy permission can modify safe browsing settings, but this may trigger warnings to users.

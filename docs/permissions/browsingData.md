@@ -154,3 +154,11 @@ async function checkPermissions() {
 - [history.md](./history.md) — Read browsing history
 - [downloads.md](./downloads.md) — Manage download history
 - [patterns/privacy-api.md](../patterns/privacy-api.md) — Privacy-focused API patterns
+
+## Frequently Asked Questions
+
+### How do I clear browsing data from a Chrome extension?
+Use the chrome.browsingData API to clear various types of browsing data including cookies, cache, history, downloads, and local storage. Users must grant permission via the browsingData settings.
+
+### Can I selectively clear only cookies?
+Yes, specify the dataTypes parameter with { "cookies": true } to clear only cookies while preserving other data.

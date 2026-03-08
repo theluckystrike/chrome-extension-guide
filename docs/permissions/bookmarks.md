@@ -163,3 +163,11 @@ chrome.bookmarks.getTree(async (tree) => {
 
 ## API Reference {#api-reference}
 - [Bookmarks API Reference](../api-reference/bookmarks-api.md)
+
+## Frequently Asked Questions
+
+### How do I bookmark pages in a Chrome extension?
+Use the chrome.bookmarks API to create, read, update, and delete bookmarks. You can create folders, organize bookmarks, and listen for changes via chrome.bookmarks.onCreated and other events.
+
+### Can extensions read user's existing bookmarks?
+Yes, with the "bookmarks" permission, your extension can read and manipulate the user's existing bookmarks.

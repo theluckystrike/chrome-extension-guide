@@ -141,3 +141,11 @@ const granted = await checkPermission('contentSettings');
 
 ## Cross-References {#cross-references}
 - Related: `docs/permissions/cookies.md`, `docs/permissions/privacy.md`
+
+## Frequently Asked Questions
+
+### What is contentSettings API used for?
+The contentSettings API allows your extension to override settings for cookies, JavaScript, plugins, and other content behaviors on a per-site or global basis.
+
+### Can extensions block JavaScript per-site?
+Yes, use chrome.contentSettings.javascript.set() to enable or disable JavaScript for specific patterns.

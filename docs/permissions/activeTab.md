@@ -135,3 +135,14 @@ await storage.set("extractCount", (await storage.get("extractCount")) + 1);
 ## API Reference {#api-reference}
 - [Chrome activeTab docs](https://developer.chrome.com/docs/extensions/develop/concepts/activeTab)
 ```
+
+## Frequently Asked Questions
+
+### What does the activeTab permission do?
+The activeTab permission grants temporary access to the currently active tab only when the user explicitly invokes your extension (by clicking, using a keyboard shortcut, or context menu). Access is automatically revoked when the user navigates away or closes the tab.
+
+### Is activeTab better than host permissions?
+Yes, for most use cases. activeTab doesn't trigger the scary "Read and change all your data on all websites" warning in the Chrome Web Store, leading to higher conversion rates and faster review times.
+
+### Can I use activeTab with chrome.tabs.query()?
+No. activeTab only grants access to the tab the user interacted with. For querying other tabs, you'll need host permissions or the tabs permission.

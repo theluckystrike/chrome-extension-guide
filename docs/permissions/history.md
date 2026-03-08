@@ -164,3 +164,11 @@ if (!result.granted) {
 - [History API Reference](../api-reference/history-api.md)
 - [Chrome history API docs](https://developer.chrome.com/docs/extensions/reference/api/history)
 - [History API deep dive](../api-reference/history-api.md)
+
+## Frequently Asked Questions
+
+### How do I search browser history in an extension?
+Use chrome.history.search() to query the user's browsing history. You can search by text, URL, and time range.
+
+### Can extensions delete history entries?
+Yes, with the history permission, you can use chrome.history.deleteUrl() to remove specific URLs from history.

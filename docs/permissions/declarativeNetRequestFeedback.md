@@ -131,3 +131,11 @@ const result = await checkPermission('declarativeNetRequestFeedback');
 ## API Reference {#api-reference}
 - [Chrome declarativeNetRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest)
 - [Chrome onRuleMatchedDebug documentation](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest#event-onRuleMatchedDebug)
+
+## Frequently Asked Questions
+
+### How do I get feedback on blocked requests?
+Add "declarativeNetRequestFeedback" permission to receive onRuleMatchedDebug events showing which rules matched for each request.
+
+### Can I see which ads are being blocked?
+Yes, with declarativeNetRequestFeedback, you can log or display statistics about matched rules and blocked requests.

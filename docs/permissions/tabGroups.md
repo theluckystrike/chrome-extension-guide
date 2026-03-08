@@ -380,3 +380,11 @@ For Manifest V2 extensions:
 
 For persistent storage of tab group configurations, consider using:
 - **@theluckystrike/webext-storage**: Save and restore tab group states across sessions
+
+## Frequently Asked Questions
+
+### How do I organize tabs into groups?
+Use chrome.tabGroups API to create, update, and delete tab groups. Users can also manually organize tabs into color-coded groups.
+
+### Are tab groups available on all platforms?
+Tab groups are available on Chrome desktop (Windows, Mac, Linux) and ChromeOS.

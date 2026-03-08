@@ -319,3 +319,11 @@ await exportAsJson({ users: ["alice", "bob"] }, "export/users.json");
 ## API Reference {#api-reference}
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Chrome downloads API docs](https://developer.chrome.com/docs/extensions/reference/api/downloads)
+
+## Frequently Asked Questions
+
+### How do I download a file in Chrome extension?
+Use chrome.downloads.download() to initiate downloads from your extension. You can specify the URL, filename, and other options.
+
+### Can extensions download files to a custom location?
+Yes, but users will be prompted to choose a location, or you can use the downloads API's "saveAs" option set to false with appropriate permissions.

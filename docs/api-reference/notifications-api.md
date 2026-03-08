@@ -466,3 +466,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 - [Alarms API](alarms-api.md)
 - [Runtime API](runtime-api.md)
 - [Chrome notifications API docs](https://developer.chrome.com/docs/extensions/reference/api/notifications)
+
+## Frequently Asked Questions
+
+### How do I show a notification?
+Use chrome.notifications.create() with an ID, notification options, and optional callback.
+
+### Can I add action buttons to notifications?
+Yes, include an array of "buttons" in your notification options to add clickable action buttons.

@@ -256,3 +256,11 @@ async function captureFullPage(tabId: number): Promise<string> {
 - [Chrome DevTools Protocol reference](https://chromedevtools.github.io/devtools-protocol/)
 - [scripting](scripting.md) — lighter-weight alternative for script injection
 - [activeTab](activeTab.md) — temporary tab access without full debugging
+
+## Frequently Asked Questions
+
+### What is the chrome.debugger API used for?
+The chrome.debugger API allows extensions to instrument network traffic, debug JavaScript, and interact with pages using the Chrome DevTools Protocol.
+
+### Why does debugger require a permission warning?
+The debugger API provides powerful capabilities that can intercept and modify page content, which is why it triggers a permission warning.

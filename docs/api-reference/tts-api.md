@@ -287,3 +287,11 @@ function highlightWord(word) {
 - [TTS Engine Permission](../permissions/ttsEngine.md) - Custom TTS engine development
 - [Accessibility Guide](../guides/accessibility.md) - Building accessible extensions
 - [chrome.ttsEngine API](https://developer.chrome.com/docs/extensions/reference/ttsEngine) - Custom TTS engine implementation
+
+## Frequently Asked Questions
+
+### How do I make Chrome speak text?
+Use chrome.tts.speak() with the text to speak. You can customize rate, pitch, and voice selection.
+
+### Can I pause and resume speech?
+Yes, use chrome.tts.pause() and chrome.tts.resume() to control ongoing speech.

@@ -152,3 +152,11 @@ chrome.contextMenus.create({ id: "set-sounds", title: "Sounds", type: "checkbox"
 - [context-menus-api.md](./context-menus-api.md) - Basic API
 - [contextMenus permission](../permissions/contextMenus.md) - Permission details
 - [context-menu-patterns.md](../patterns/context-menu-patterns.md) - Common patterns
+
+## Frequently Asked Questions
+
+### What's the difference between contextMenus and contextMenus API?
+They're the same API - "contextMenus" is the permission name while "context-menus" is typically the filename convention.
+
+### Can I create dynamic context menus?
+Yes, use chrome.contextMenus.create() in your background script, even dynamically based on page content or user actions.

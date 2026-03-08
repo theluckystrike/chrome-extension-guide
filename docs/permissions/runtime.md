@@ -148,3 +148,11 @@ const response = await messenger.send("fetchData");
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
 - [chrome.tabs API](./tabs.md)
 - [chrome.management API](./management.md)
+
+## Frequently Asked Questions
+
+### What is the runtime API used for?
+chrome.runtime provides messaging between parts of your extension, access to manifest info, and lifecycle events.
+
+### How do I detect extension updates?
+Use chrome.runtime.onUpdateAvailable to detect when a new version is available, and chrome.runtime.reload() to update.

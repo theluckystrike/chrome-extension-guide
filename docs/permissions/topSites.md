@@ -161,3 +161,11 @@ New Chrome profiles have minimal browsing history. Test your extension with fres
 ## Cross-references {#cross-references}
 - patterns/top-sites.md
 - tutorials/build-new-tab.md
+
+## Frequently Asked Questions
+
+### How do I get top sites in Chrome extension?
+Use chrome.topSites.get() to retrieve the user's most visited sites. This requires the topSites permission.
+
+### Are top sites customizable?
+Users can pin sites to appear in top sites. Extensions can only read the current list, not modify it.

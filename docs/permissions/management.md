@@ -136,3 +136,11 @@ const desc = describePermission('management');
 
 ## Cross-References {#cross-references}
 - Related: `docs/reference/lifecycle-events.md` (management events)
+
+## Frequently Asked Questions
+
+### What can I do with the management API?
+The chrome.management API allows extensions to get info about other installed extensions, enable/disable them, and manage apps.
+
+### Can my extension uninstall itself?
+Yes, use chrome.management.uninstallSelf() to allow users to uninstall your extension from within the extension UI.

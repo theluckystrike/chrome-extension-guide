@@ -140,3 +140,11 @@ const granted = await checkPermission('pageCapture');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/page-capture.md`
 - Related: `docs/permissions/downloads.md`, `docs/tutorials/build-web-clipper.md`
+
+## Frequently Asked Questions
+
+### How do I save a page as MHTML?
+Use chrome.pageCapture.saveAsMHTML() to save the current page as MHTML format, which preserves the complete page content.
+
+### Can I capture specific elements only?
+No, pageCapture captures the entire page. For specific elements, consider using the scripting API to extract HTML.

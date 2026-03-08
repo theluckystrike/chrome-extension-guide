@@ -188,3 +188,11 @@ async function saveSessionSnapshot() {
 - [tabs](tabs.md) — Required to access tab URLs/titles
 - [patterns/sessions-api](../patterns/sessions-api.md) — Session management patterns
 - [guides/tab-management](../guides/tab-management.md) — Tab management guide
+
+## Frequently Asked Questions
+
+### What can I do with the sessions API?
+chrome.sessions allows your extension to query and restore recently closed tabs and windows, useful for session management extensions.
+
+### Can I sync sessions across devices?
+Sessions API provides local session data only. For cross-device sync, you'd need to implement your own cloud storage.

@@ -181,3 +181,11 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 - [Notifications API Reference](../api-reference/notifications-api.md)
 - [Chrome notifications API docs](https://developer.chrome.com/docs/extensions/reference/api/notifications)
 - [Notifications API deep dive](../api-reference/notifications-api.md)
+
+## Frequently Asked Questions
+
+### How do I show notifications in Chrome extensions?
+Use chrome.notifications.create() to display system notifications. You'll need the "notifications" permission in your manifest.
+
+### Can I customize notification appearance?
+Yes, you can set icons, titles, messages, buttons, and even use HTML in notification windows.

@@ -151,3 +151,11 @@ const granted = await checkPermission('gcm');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/gcm-push-notifications.md`
 - Related: `docs/permissions/notifications.md`
+
+## Frequently Asked Questions
+
+### How do I use push notifications in Chrome extensions?
+Use Google Cloud Messaging (GCM) with chrome.gcm to send push notifications from your server to users. You'll need to set up a GCM project and handle incoming messages.
+
+### Is GCM still supported in Chrome extensions?
+Yes, GCM is supported, but note that it's being deprecated in favor of Web Push. Consider using Web Push for new projects.

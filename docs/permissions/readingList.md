@@ -188,3 +188,11 @@ Use the Reading List events to keep your extension's UI in sync with changes mad
 
 - patterns/reading-list-api.md
 - tutorials/build-reading-list.md
+
+## Frequently Asked Questions
+
+### What is the readingList API?
+The chrome.readingList API allows extensions to add, remove, and query items in Chrome's reading list feature.
+
+### Is readingList available in all Chrome versions?
+The readingList API was introduced recently and may not be available in older Chrome versions.

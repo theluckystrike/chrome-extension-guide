@@ -132,3 +132,11 @@ const hasMem = await checkPermission('system.memory');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/memory-management.md`
 - Guide: `docs/guides/performance.md`
+
+## Frequently Asked Questions
+
+### What system information can extensions access?
+Use chrome.system to access CPU, memory, display, and storage information. The specific APIs vary by capability.
+
+### Can extensions control system settings?
+Some system APIs allow reading and monitoring, but controlling system settings is limited for security reasons.

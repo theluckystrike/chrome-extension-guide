@@ -263,3 +263,11 @@ chrome.proxy.onProxyError.addListener((details) => {
 - [webRequest](webRequest.md) — observe requests going through the proxy
 - [storage](storage.md) — persist proxy profiles and preferences
 - [notifications](notifications.md) — alert users to proxy errors
+
+## Frequently Asked Questions
+
+### How do I configure proxy in Chrome extension?
+Use chrome.proxy.settings.set() to configure proxy settings. You can set pac scripts, fixed servers, or use system settings.
+
+### Can extensions bypass the proxy for specific domains?
+Yes, specify bypassList in your proxy configuration to exclude specific domains from proxy routing.

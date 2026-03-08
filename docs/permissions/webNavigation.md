@@ -73,3 +73,11 @@ const granted = await checkPermission('webNavigation');
 ## Cross-References {#cross-references}
 - Guide: `docs/guides/web-navigation.md`
 - Related: `docs/permissions/tabs.md`, `docs/permissions/webRequest.md`
+
+## Frequently Asked Questions
+
+### How do I track page navigations?
+Use chrome.webNavigation API to receive events when frames navigate, complete loading, or encounter errors.
+
+### Can I block navigations with webNavigation?
+No, webNavigation is for tracking only. To block or modify navigations, use declarativeNetRequest or webRequest.

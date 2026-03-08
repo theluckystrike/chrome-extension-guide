@@ -406,3 +406,11 @@ function authenticateWithGitHub() {
 - [Identity Permissions](../permissions/identity.md) - Permission configuration details
 - [Identity OAuth Guide](../guides/identity-oauth.md) - Complete OAuth implementation walkthrough
 - [OAuth Identity Patterns](../patterns/oauth-identity.md) - Reusable code patterns and best practices
+
+## Frequently Asked Questions
+
+### How do I authenticate users with OAuth?
+Use chrome.identity.launchWebAuthFlow() to initiate an OAuth flow. Configure redirect URIs in your manifest.
+
+### Can I get user's email address?
+Yes, after authentication, you can use chrome.identity.getProfileUserInfo() to get basic profile information.

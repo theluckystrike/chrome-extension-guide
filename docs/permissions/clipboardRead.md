@@ -137,3 +137,11 @@ const granted = await checkPermission('clipboardRead');
 ## Cross-References {#cross-references}
 - Related: `docs/permissions/clipboardWrite.md`, `docs/permissions/offscreen.md`
 - Tutorial: `docs/tutorials/build-clipboard-manager.md`
+
+## Frequently Asked Questions
+
+### How do I read the clipboard in a Chrome extension?
+Add "clipboardRead" to your permissions in manifest.json, then use navigator.clipboard.readText() in your content script or background script to read clipboard contents.
+
+### Why does clipboardRead require user gesture?
+Chrome requires a user gesture (click, keypress) before allowing clipboard access to prevent malicious extensions from reading sensitive data silently.

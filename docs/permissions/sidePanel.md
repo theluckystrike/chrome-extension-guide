@@ -312,3 +312,11 @@ document.getElementById('refresh').addEventListener('click', getPageInfo);
 - **Patterns:** `docs/patterns/side-panel.md`
 - **Related Permission:** `docs/permissions/tabs.md`
 - **Related Permission:** `docs/permissions/scripting.md`
+
+## Frequently Asked Questions
+
+### How do I add a side panel to Chrome?
+Declare "side_panel" in your manifest and use chrome.sidePanel.setOptions() to configure its behavior. Users access it via the toolbar icon.
+
+### Can side panels work on all pages?
+Yes, you can configure side panels to show on specific URL patterns or allow users to toggle it on any page.

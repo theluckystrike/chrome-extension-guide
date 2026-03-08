@@ -159,3 +159,10 @@ const granted = await checkPermission('ttsEngine');
 - Related: `docs/permissions/tts.md`
 - Guide: `docs/guides/accessibility.md`
 
+## Frequently Asked Questions
+
+### How do I create a custom TTS engine?
+Implement the chrome.ttsEngine API to create an engine that handles TTS requests. Your extension becomes a voice option in Chrome.
+
+### Do I need to host my own TTS engine?
+Your extension can implement the TTS engine interface, but you'll need to connect it to a speech synthesis service.

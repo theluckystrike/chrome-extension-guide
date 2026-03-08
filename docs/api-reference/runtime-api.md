@@ -605,3 +605,11 @@ chrome.idle.onStateChanged.addListener((state) => {
 - [Storage API Deep Dive](storage-api-deep-dive.md) -- persistence patterns
 - [Tabs API](tabs-api.md) -- `sendMessage` to content scripts
 - [Chrome runtime API docs](https://developer.chrome.com/docs/extensions/reference/api/runtime) -- official reference
+
+## Frequently Asked Questions
+
+### How do I communicate between background and content scripts?
+Use chrome.runtime.sendMessage() from content scripts and chrome.runtime.onMessage.addListener() in the background.
+
+### How do I get the extension ID?
+Use chrome.runtime.id to get your extension's unique ID at runtime.

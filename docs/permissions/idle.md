@@ -203,3 +203,11 @@ Allow users to configure idle detection settings. Some users may want immediate 
 - `permissions/power.md`
 - `patterns/idle-detection.md`
 - `guides/idle-detection.md`
+
+## Frequently Asked Questions
+
+### How do I detect when user is idle?
+Use chrome.idle.queryState() to check current idle state, or chrome.idle.onStateChanged.addListener to be notified when idle state changes.
+
+### Can I run code when user returns from idle?
+Yes, listen to onStateChanged and check for "active" state to trigger actions when the user returns.

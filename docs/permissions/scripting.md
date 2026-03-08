@@ -150,3 +150,11 @@ storage.watch("autoInjectEnabled", (enabled) => {
 
 ## API Reference {#api-reference}
 - [Chrome scripting API docs](https://developer.chrome.com/docs/extensions/reference/api/scripting)
+
+## Frequently Asked Questions
+
+### How do I inject scripts in Chrome extension?
+Use chrome.scripting.executeScript() to inject JavaScript into web pages. You'll need the "scripting" permission and appropriate host permissions.
+
+### Can I inject CSS with the scripting API?
+Yes, use chrome.scripting.insertCSS() to inject CSS styles into pages.
