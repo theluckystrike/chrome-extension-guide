@@ -567,3 +567,10 @@ Effective onboarding balances several competing priorities: demonstrating value 
 5. **Test and iterate**: A/B test onboarding flows to optimize conversion
 
 With these patterns, you can create onboarding experiences that users appreciate rather than tolerate - turning the initial setup into the beginning of a lasting relationship.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

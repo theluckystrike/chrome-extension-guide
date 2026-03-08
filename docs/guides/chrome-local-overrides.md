@@ -269,3 +269,10 @@ Official documentation: [developer.chrome.com/docs/extensions/develop/ui/overrid
 - Cannot override the Settings page
 - New tab override requires user gesture for some features
 - Some Chrome APIs may have limited functionality in overridden pages
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

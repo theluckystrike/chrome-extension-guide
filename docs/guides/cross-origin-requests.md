@@ -118,3 +118,10 @@ If your extension needs to make requests to many different domains dynamically, 
 ## Summary {#summary}
 
 Cross-origin requests in Chrome extensions require careful consideration of the permission model and context from which requests are made. Host permissions in the manifest control which domains your extension can access. The background service worker serves as the recommended location for cross-origin network requests, as it bypasses CORS restrictions that apply to content scripts. Content scripts are limited to the page's origin for network requests and must use message passing to communicate with the service worker for external API calls. Finally, Content Security Policy headers provide an additional layer of control over what network requests are allowed. By understanding these concepts, you can build extensions that securely and reliably interact with external services.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

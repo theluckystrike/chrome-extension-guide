@@ -83,3 +83,10 @@ Learning from successful extensions provides concrete inspiration for your own o
 ## Conclusion
 
 Effective Chrome extension onboarding balances education with action, giving users immediate value while helping them discover full capabilities. Focus on contextual permission requests, progressive feature introduction, and clear calls to action. Measure your funnel, iterate based on data, and always prioritize the user's time and attention. With a thoughtful onboarding flow, you transform one-time installers into lasting, engaged users.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -196,3 +196,10 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 - [Permission Strategy](/guides/extension-permissions-strategy/) — Best practices for permission requests
 - [Manifest V3 Migration](/guides/mv2-to-mv3-migration/) — Migrating from MV2 to MV3
 - [Security Best Practices](/guides/security-best-practices/) — Extension security guidelines
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

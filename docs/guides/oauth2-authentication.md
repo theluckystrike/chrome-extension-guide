@@ -582,3 +582,10 @@ Key takeaways:
 - Build a unified auth system if supporting multiple providers
 
 With these patterns, you can implement robust authentication that provides secure, seamless sign-in for your Chrome extension users across any OAuth2-enabled service.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

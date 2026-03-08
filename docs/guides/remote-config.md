@@ -272,3 +272,10 @@ With remote config in place, your extension becomes truly dynamic—adapting to 
 - [Alarms Scheduling](../guides/alarms-scheduling.md) - Periodic config refresh
 - [Storage API](../permissions/storage.md) - Cache configuration locally
 >>>>>>> f7893b1 (Add cross-links between guides and related articles)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

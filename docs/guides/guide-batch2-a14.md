@@ -744,3 +744,10 @@ Building a grammar checker extension requires careful consideration of multiple 
 5. **Performance**: Offload heavy processing to Web Workers, use debouncing/throttling
 
 These patterns scale well and provide a solid foundation for a professional-grade grammar checking extension. Remember to handle edge cases like contenteditable elements, text areas, and different document structures for maximum compatibility.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
