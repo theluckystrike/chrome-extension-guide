@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <h2>Chrome Extension Guide</h2>
+      <ul>
+        <li><a href="{{ '/docs/permissions/' | relative_url }}">Permissions</a></li>
+        <li><a href="{{ '/docs/api-reference/' | relative_url }}">API Reference</a></li>
+        <li><a href="{{ '/docs/guides/' | relative_url }}">Guides</a></li>
+        <li><a href="{{ '/docs/patterns/' | relative_url }}">Patterns</a></li>
+        <li><a href="{{ '/docs/publishing/' | relative_url }}">Publishing</a></li>
+        <li><a href="{{ '/docs/mv3/' | relative_url }}">MV3</a></li>
+      </ul>
+    </nav>
+    
+    <main class="content">
+      {{ content }}
+    </main>
+  </div>
+  
+  <footer>
+    <p>Built by <a href="https://zovo.one">theluckystrike</a> at <a href="https://zovo.one">zovo.one</a> | <a href="https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn">Tab Suspender Pro</a></p>
+  </footer>
+</body>
+</html>
