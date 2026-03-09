@@ -169,6 +169,7 @@ export function useUpdateSettings() {
 
 Share state across components:
 
+{% raw %}
 ```typescript
 // context/ExtensionContext.tsx
 import { createContext, useContext, ReactNode } from 'react';
@@ -220,6 +221,7 @@ export function useExtension() {
   return context;
 }
 ```
+{% endraw %}
 
 ### Managing Content Script Communication
 
@@ -270,6 +272,7 @@ export function useContentScript(tabId: number | undefined) {
 
 ### Unit Testing with Jest
 
+{% raw %}
 ```typescript
 // components/SettingsPanel.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -311,6 +314,7 @@ describe('SettingsPanel', () => {
   });
 });
 ```
+{% endraw %}
 
 ### Integration Testing with Playwright
 
