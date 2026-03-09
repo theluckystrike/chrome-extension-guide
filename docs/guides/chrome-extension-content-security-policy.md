@@ -171,4 +171,4 @@ Deepen your understanding of extension security through these related resources:
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
