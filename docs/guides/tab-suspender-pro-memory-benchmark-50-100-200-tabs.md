@@ -143,10 +143,10 @@ The benchmark demonstrates that dedicated tab suspension extensions significantl
 
 **Related Guides:**
 
-- [Chrome Extension Memory Management](/chrome-extension-guide/guides/memory-management/) — Comprehensive techniques for preventing memory leaks
-- [Tab Suspender Pro Battery Savings for Laptops](/chrome-extension-guide/guides/tab-suspender-pro-battery-savings-laptop/) — Optimize battery usage with tab suspension
-- [Tab Suspender Pro Memory Reduction Guide](/chrome-extension-guide/guides/tab-suspender-pro-reduce-memory/) — Advanced memory optimization techniques
-- [Chrome Tab Freezing to Save Battery](/chrome-extension-guide/guides/chrome-tab-freezing-save-battery-laptop/) — Built-in Chrome battery saving features
+- [Chrome Extension Memory Management](/guides/memory-management/) — Comprehensive techniques for preventing memory leaks
+- [Tab Suspender Pro Battery Savings for Laptops](/guides/tab-suspender-pro-battery-savings-laptop/) — Optimize battery usage with tab suspension
+- [Tab Suspender Pro Memory Reduction Guide](/guides/tab-suspender-pro-reduce-memory/) — Advanced memory optimization techniques
+- [Chrome Tab Freezing to Save Battery](/guides/chrome-tab-freezing-save-battery-laptop/) — Built-in Chrome battery saving features
 
 ---
 
