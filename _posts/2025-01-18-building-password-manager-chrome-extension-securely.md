@@ -534,3 +534,5 @@ The complete source code for this secure password manager extension provides a s
 - [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guidelines for extensions
 - [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implement robust CSP policies
 - [Chrome Extension Local Storage Encryption](/chrome-extension-guide/2025/01/22/chrome-extension-local-storage-encryption/) - Secure your local storage with encryption
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

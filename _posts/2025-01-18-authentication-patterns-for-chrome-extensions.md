@@ -138,3 +138,5 @@ As the Chrome extension platform continues to evolve, staying current with authe
 - [Chrome Extension OAuth2 Authentication Guide](/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
 - [Chrome Identity API OAuth Guide](/2025/01/24/chrome-identity-api-oauth/) - Learn how to use the Chrome Identity API for authentication
 - [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Security best practices for Chrome extensions
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

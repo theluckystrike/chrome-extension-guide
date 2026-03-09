@@ -469,3 +469,5 @@ As you continue to develop your custom devtools panels, remember to explore the 
 - [Build Chrome DevTools Panel Extension Guide](/2025/01/17/build-chrome-devtools-panel-extension-guide/) - Complete guide to building Chrome DevTools panel extensions
 - [Advanced Chrome Extension Debugging Techniques](/2025/01/17/advanced-chrome-extension-debugging-techniques/) - Advanced debugging techniques for Chrome extensions
 - [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Security best practices for Chrome extensions
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

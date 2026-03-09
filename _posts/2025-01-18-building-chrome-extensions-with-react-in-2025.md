@@ -376,3 +376,5 @@ Start your react chrome extension project today, and join the thousands of devel
 - [Building Chrome Extensions with Vue Complete Guide]({% post_url 2025-02-02-building-chrome-extensions-with-vue-complete-guide %})
 - [Building Chrome Extensions with Svelte Complete Guide]({% post_url 2025-02-03-building-chrome-extensions-with-svelte-complete-guide %})
 - [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %})
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

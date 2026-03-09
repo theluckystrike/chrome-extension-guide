@@ -606,3 +606,5 @@ With the knowledge gained from this tutorial, you're well-equipped to create a s
 - [Chrome Extension OAuth2 Authentication Guide]({% post_url 2025-01-17-chrome-extension-oauth2-authentication-guide %}) - Learn how to implement secure OAuth authentication in your Chrome extensions.
 - [Chrome Extension Notifications API Guide]({% post_url 2025-01-17-chrome-extension-notifications-api-guide %}) - Master the Chrome notifications system for displaying alerts and updates.
 - [Chrome Identity API and OAuth Guide]({% post_url 2025-01-24-chrome-identity-api-oauth %}) - Explore Google's identity services for user authentication.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
