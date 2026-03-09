@@ -476,4 +476,4 @@ The Chrome extension market rewards developers who combine great products with s
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built by theluckystrike at [zovo.one](https://zovo.one).*
+Built by theluckystrike at zovo.one
