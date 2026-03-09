@@ -41,6 +41,7 @@ exclude:
   - merge-all.sh
   - merge-all2.sh
   - examples/
+  - vendor/
 
 collections:
   docs:
