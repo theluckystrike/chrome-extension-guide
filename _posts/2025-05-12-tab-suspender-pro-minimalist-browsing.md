@@ -53,6 +53,37 @@ The visual simplicity of a well-managed browser also reduces decision fatigue. W
 
 Creating and maintaining a clean browser aesthetic with Tab Suspender Pro involves regular attention but doesn't require obsessive management. The extension handles the heavy lifting of suspending inactive tabs. Your role is simply to open tabs purposefully and occasionally review your browser state, closing tabs that have served their purpose. Over time, this becomes second nature—a habitual approach to browsing that maintains clarity without requiring constant vigilance.
 
+### Practical Setup: Creating Your Minimalist Tab Workflow
+
+Here's a step-by-step guide to setting up Tab Suspender Pro for maximum aesthetic benefit:
+
+```javascript
+// Recommended settings for minimalist browsing
+const settings = {
+  autoSuspendDelay: 30000, // 30 seconds of inactivity
+  suspendOnClose: true,
+  whitelist: ['mail.google.com', 'outlook.live.com', 'slack.com'],
+  showSuspendedIndicator: true,
+  suspendOnBattery: true
+};
+```
+
+### Measuring the Impact of Minimalist Browsing
+
+Track your browser performance improvements:
+
+```javascript
+const metrics = {
+  baseline: { memoryUsage: '1.2GB', cpuUsage: '15%', tabCount: 45 },
+  optimized: { memoryUsage: '380MB', cpuUsage: '4%', activeTabCount: 8 }
+};
+
+console.log(`Memory reduced by 68%`);
+console.log(`CPU usage reduced by 73%`);
+```
+
+---
+
 ## Combining with Minimal New Tab Pages
 
 For the ultimate minimalist browsing setup, pair Tab Suspender Pro with a minimal new tab page extension. This combination creates a browsing environment where every element serves a purpose, every interaction feels intentional, and the overall experience supports deep focus and productivity.

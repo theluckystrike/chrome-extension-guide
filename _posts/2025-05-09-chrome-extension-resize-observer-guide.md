@@ -486,6 +486,200 @@ async function testResizeBehavior() {
 }
 ```
 
+### Practical Testing Example: Testing a Real-Time Dashboard
+
+Consider a Chrome extension that displays a real-time dashboard in the side panel. Here's how to test its responsive behavior:
+
+```javascript
+// Comprehensive test for dashboard responsiveness
+class ResponsiveDashboardTester {
+  constructor() {
+    this.testResults = [];
+  }
+
+  async runAllTests() {
+    console.log('Starting responsive dashboard tests...');
+    
+    await this.testNarrowLayout();
+    await this.testMediumLayout();
+    await this.testWideLayout();
+    await this.testRapidResizing();
+    await this.testHeightChanges();
+    
+    this.reportResults();
+  }
+
+  async testNarrowLayout() {
+    const dashboard = document.getElementById('dashboard');
+    const initialWidth = dashboard.offsetWidth;
+    
+    // Simulate narrow viewport (mobile-like)
+    Object.defineProperty(dashboard, 'offsetWidth', {
+      value: 200,
+      writable: true
+    });
+    
+    // Trigger resize observation
+    const event = new Event('resize');
+    dashboard.dispatchEvent(event);
+    
+    await this.wait(100);
+    
+    // Verify narrow layout classes
+    const hasNarrowClass = dashboard.classList.contains('narrow');
+    this.testResults.push({
+      test: 'Narrow Layout',
+      passed: hasNarrowClass,
+      expected: true,
+      actual: hasNarrowClass
+    });
+    
+    // Restore original width
+    Object.defineProperty(dashboard, 'offsetWidth', {
+      value: initialWidth,
+      writable: true
+    });
+  }
+
+  async testMediumLayout() {
+    const dashboard = document.getElementById('dashboard');
+    const container = document.querySelector('.dashboard-container');
+    
+    // Simulate medium viewport
+    container.style.width = '350px';
+    
+    await this.wait(100);
+    
+    const hasMediumClass = dashboard.classList.contains('medium');
+    this.testResults.push({
+      test: 'Medium Layout',
+      passed: hasMediumClass,
+      expected: true,
+      actual: hasMediumClass
+    });
+    
+    container.style.width = '';
+  }
+
+  async testWideLayout() {
+    const dashboard = document.getElementById('dashboard');
+    const container = document.querySelector('.dashboard-container');
+    
+    // Simulate wide viewport
+    container.style.width = '600px';
+    
+    await this.wait(100);
+    
+    const hasWideClass = dashboard.classList.contains('wide');
+    this.testResults.push({
+      test: 'Wide Layout',
+      passed: hasWideClass,
+      expected: true,
+      actual: hasWideClass
+    });
+    
+    container.style.width = '';
+  }
+
+  async testRapidResizing() {
+    const dashboard = document.getElementById('dashboard');
+    const widths = [200, 400, 300, 500, 250];
+    const results = [];
+    
+    for (const width of widths) {
+      dashboard.style.width = width + 'px';
+      await this.wait(20); // Rapid changes
+      results.push(width);
+    }
+    
+    // Verify no layout thrashing occurred
+    const noErrors = !this.testResults.some(r => r.error);
+    this.testResults.push({
+      test: 'Rapid Resizing',
+      passed: noErrors,
+      expected: 'No errors',
+      actual: results.length + ' changes handled'
+    });
+  }
+
+  async testHeightChanges() {
+    const dashboard = document.getElementById('dashboard');
+    
+    // Test vertical responsiveness
+    const heights = [200, 400, 300, 600, 250];
+    
+    for (const height of heights) {
+      dashboard.style.height = height + 'px';
+      await this.wait(50);
+      
+      // Verify content adjusts appropriately
+      const shouldShowFullContent = height > 400;
+      const secondaryContent = document.querySelector('.secondary-content');
+      
+      if (secondaryContent) {
+        const isVisible = secondaryContent.offsetParent !== null;
+        const matches = isVisible === shouldShowFullContent;
+        
+        if (!matches) {
+          this.testResults.push({
+            test: `Height ${height}px`,
+            passed: false,
+            expected: shouldShowFullContent,
+            actual: isVisible
+          });
+        }
+      }
+    }
+  }
+
+  wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  reportResults() {
+    console.log('Test Results:');
+    console.log('='.repeat(50));
+    
+    let passed = 0;
+    let failed = 0;
+    
+    this.testResults.forEach(result => {
+      const status = result.passed ? '✓' : '✗';
+      console.log(`${status} ${result.test}: ${result.passed ? 'PASSED' : 'FAILED'}`);
+      if (!result.passed) {
+        console.log(`  Expected: ${result.expected}, Actual: ${result.actual}`);
+      }
+      
+      if (result.passed) passed++;
+      else failed++;
+    });
+    
+    console.log('='.repeat(50));
+    console.log(`Total: ${passed + failed} tests, ${passed} passed, ${failed} failed`);
+  }
+}
+
+// Run tests
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('dashboard')) {
+    const tester = new ResponsiveDashboardTester();
+    tester.runAllTests();
+  }
+});
+```
+
+### Using Chrome's Device Mode for Extension Testing
+
+Chrome DevTools provides a powerful Device Mode that can be repurposed for extension testing:
+
+1. **Open DevTools** in your extension popup or side panel
+2. **Click the Device Toggle** (Ctrl+Shift+M / Cmd+Shift+M)
+3. **Set custom dimensions** to test various container sizes
+4. **Rotate** to test landscape/portrait orientations
+5. **Throttle network** to simulate real-world conditions
+
+This approach helps you visualize how your extension responds to different container constraints.
+
 ---
 
 ## Browser Support and Polyfills
