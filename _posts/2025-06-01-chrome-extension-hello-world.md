@@ -7,24 +7,6 @@ categories: [tutorial]
 tags: [beginner, hello-world, manifest-v3, getting-started, first-extension]
 ---
 
-<<<<<<< HEAD
-Building your first Chrome extension is easier than you think. In this comprehensive guide, we'll walk through creating a basic extension from scratch, understanding each component, and getting it running in your browser. By the end of this tutorial, you'll have a fully functional Chrome extension that you can customize and expand.
-
-## Prerequisites
-
-Before we begin, make sure you have Google Chrome installed and a basic text editor like VS Code. No prior extension development experience is required - this guide is designed for complete beginners. We'll start from absolute zero and build up your understanding of how Chrome extensions work.
-
-### What You'll Need
-
-- Google Chrome browser (any recent version)
-- A code editor (VS Code is recommended, but Notepad will work in a pinch)
-- Basic familiarity with HTML, CSS, and JavaScript
-- About 15-20 minutes of your time
-
-## Creating Your Project Structure
-
-Every Chrome extension needs a specific file structure. Create a new folder on your computer - let's call it "my-first-extension" - and add the following files:
-=======
 Building your first Chrome extension is easier than you think. In this comprehensive guide, we'll walk through creating a basic extension from scratch, understanding each component, and getting it running in your browser. This tutorial is designed for complete beginners with no prior extension development experience.
 
 ## Prerequisites
@@ -52,7 +34,6 @@ Extensions can:
 ## Creating Your Project Structure
 
 Every Chrome extension needs a specific file structure. Create a new folder on your computer (let's call it "my-first-extension") and add the following files:
->>>>>>> quality/expand-thin-a5-r4
 
 1. **manifest.json** - The configuration file that tells Chrome about your extension
 2. **popup.html** - The interface users see when clicking your extension icon
@@ -76,11 +57,7 @@ Create a dedicated folder for your extension projects. Within that folder, creat
 
 ## Understanding the Manifest File
 
-<<<<<<< HEAD
-The manifest.json is the heart of your extension. It tells Chrome everything it needs to know about your extension, including its name, version, permissions, and what files to load. Here's the minimum required structure:
-=======
 The manifest.json is the heart of your extension. It's the only required file and tells Chrome everything it needs to know about your extension. Here's the minimum required structure:
->>>>>>> quality/expand-thin-a5-r4
 
 ```json
 {
@@ -95,23 +72,6 @@ The manifest.json is the heart of your extension. It's the only required file an
 }
 ```
 
-<<<<<<< HEAD
-The manifest_version: 3 refers to Manifest V3, the latest version of Chrome's extension platform. This version includes improved security features and more efficient background processing. All new extensions should use Manifest V3.
-
-### Understanding Manifest Fields
-
-Let's break down each field in the manifest:
-
-- **manifest_version**: Must be 3 for new extensions (Manifest V3)
-- **name**: Display name shown in Chrome (max 45 characters)
-- **version**: Your extension version (follows semver: major.minor.patch)
-- **description**: Brief description (max 132 characters)
-- **action**: Defines the popup that appears when users click your icon
-
-## Creating Your First Popup
-
-Let's create a simple popup that displays a greeting. This is the interface users will see when they click your extension icon in the toolbar:
-=======
 Let's break down each field:
 
 - **manifest_version**: 3 is the latest version of Chrome's extension platform. Always use version 3 for new extensions.
@@ -127,7 +87,6 @@ The manifest_version: 3 refers to Manifest V3, the latest version of Chrome's ex
 Let's create a simple popup that displays a greeting and responds to user interaction:
 
 ### popup.html
->>>>>>> quality/expand-thin-a5-r4
 
 ```html
 <!DOCTYPE html>
@@ -151,42 +110,6 @@ Let's create a simple popup that displays a greeting and responds to user intera
 </html>
 ```
 
-<<<<<<< HEAD
-### Adding Basic Styling
-
-Create a popup.css file to make your extension look professional:
-
-```css
-body {
-  width: 300px;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-h1 {
-  color: #4285f4;
-  font-size: 24px;
-}
-
-button {
-  background-color: #4285f4;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: #3367d6;
-}
-```
-
-## Adding Interactivity
-
-Create a popup.js file to handle button clicks and add dynamic behavior:
-=======
 ### popup.css
 
 ```css
@@ -250,7 +173,6 @@ p {
 ```
 
 ### popup.js
->>>>>>> quality/expand-thin-a5-r4
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -275,20 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-<<<<<<< HEAD
-### Expanding Functionality
-
-Let's make our extension more useful by adding tab information:
-
-```javascript
-document.getElementById('clickMe').addEventListener('click', async () => {
-  // Get the current active tab
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
-  // Display information about the current page
-  alert(`You're on: ${tab.title}\nURL: ${tab.url}`);
-});
-=======
 ## Adding Basic Interactivity
 
 Create a content script to demonstrate communication between your popup and web pages:
@@ -335,7 +243,6 @@ function getRandomColor() {
   ],
   "permissions": ["activeTab"]
 }
->>>>>>> quality/expand-thin-a5-r4
 ```
 
 ## Loading Your Extension
@@ -395,24 +302,6 @@ Content scripts let you automatically modify web pages. You can:
 - Add new features to existing websites
 - Extract data from pages
 
-<<<<<<< HEAD
-### Your Second Extension
-
-Try modifying your extension to:
-1. Change the button to save the current page URL
-2. Display a list of saved URLs
-3. Add a button to clear all saved URLs
-
-This exercise introduces you to the Chrome Storage API and data persistence.
-
-### Learning Resources
-
-To continue your extension development journey:
-- Read the official Chrome Extension documentation
-- Explore the Chrome Extension samples on GitHub
-- Join extension developer communities
-- Experiment with different Chrome APIs
-=======
 ### Background Scripts (Service Workers)
 Background scripts run independently of any web page:
 - Handle events when no popup is open
@@ -442,7 +331,6 @@ chrome.storage.sync.get(['theme'], (result) => {
 ```
 
 ### Publishing to the Chrome Web Store
->>>>>>> quality/expand-thin-a5-r4
 
 Ready to share your extension with the world?
 
@@ -452,50 +340,6 @@ Ready to share your extension with the world?
 4. Submit for review (usually takes 1-3 days)
 5. Publish once approved!
 
-<<<<<<< HEAD
-Publishing steps include:
-1. Create a developer account ($5 one-time fee)
-2. Prepare screenshots and a store listing
-3. Upload your extension package
-4. Submit for review (typically 1-3 days)
-5. Publish once approved
-
-### Debugging Your Extension
-
-Debugging Chrome extensions requires a different approach than regular web development. The popup has its own DevTools, content scripts run in the page context, and background scripts have yet another debugging environment. Understanding these distinctions is crucial for effective troubleshooting.
-
-To debug your popup, right-click anywhere in the popup and select "Inspect" from the context menu. This opens the popup-specific DevTools where you can set breakpoints, inspect DOM elements, and monitor console output. Remember that the popup closes when you click outside of it, so place your breakpoints carefully.
-
-For content script debugging, open DevTools on any page where your content script runs. Your content script variables and functions will be available in the console, though they exist in the isolated world context. This separation means you cannot directly access page variables from the console, but you can interact with the DOM freely.
-
-Background script debugging requires navigating to chrome://extensions and clicking the "Service Worker" link under your extension. This opens DevTools for the service worker context where you can monitor events, inspect storage, and debug asynchronous operations.
-
-### Extension Development Best Practices
-
-Following best practices from the start ensures your extension remains maintainable and performs well. Consider organizing your code into logical modules, even in small extensions. This makes it easier to add features later and helps other developers understand your code.
-
-Use modern JavaScript features like async/await for asynchronous operations. Chrome supports ES6+ features, so take advantage of arrow functions, destructuring, and template literals. Keep your popup lightweight by avoiding heavy frameworks unless absolutely necessary.
-
-Implement proper error handling throughout your extension. Try-catch blocks should wrap API calls and DOM manipulations. Display user-friendly error messages rather than raw exceptions. This professionalism builds user trust and makes debugging easier.
-
-### Understanding Chrome's Security Model
-
-Chrome extensions operate within a powerful but restricted security model. Understanding this model helps you build secure extensions and avoid common pitfalls. The principle of least privilege should guide your permission requests - only ask for what your extension genuinely needs.
-
-Content Security Policy (CSP) in extensions is stricter than regular web pages. Inline scripts require explicit allowance in your manifest, and eval() has limited functionality. These restrictions protect users from malicious extensions but require developers to adapt their coding patterns.
-
-Your extension's files are served from a unique origin that differs from web pages. This separation provides security benefits but means you cannot access page variables directly. Use message passing to communicate between your extension's different contexts.
-
-### Performance Optimization Tips
-
-Even simple extensions can become sluggish if not optimized properly. Start by measuring - use the Performance tab in DevTools to identify bottlenecks. Common issues include excessive API calls, large DOM manipulations, and memory leaks from event listeners.
-
-Lazy load functionality that users don't immediately need. If your extension has multiple features, consider loading only the code for the feature being used. This reduces memory footprint and speeds up initial load times.
-
-Clean up event listeners when they're no longer needed. Content scripts that persist across page navigations can accumulate listeners over time. Regularly audit your code for orphaned listeners and remove them appropriately.
-
-This simple foundation opens the door to powerful browser customization. The Chrome extension ecosystem offers endless possibilities for enhancing productivity, automating tasks, and creating unique browsing experiences.
-=======
 ## Common Issues and Solutions
 
 Here's a quick reference for common problems:
@@ -536,4 +380,3 @@ You've taken your first step into the world of Chrome extensions! This simple fo
 - Building businesses around useful tools
 
 Keep experimenting, and don't be afraid to look at how other extensions work. The best way to learn is by doing—and now you have the foundation to start building!
->>>>>>> quality/expand-thin-a5-r4

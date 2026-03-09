@@ -7,26 +7,12 @@ categories: [tutorial]
 tags: [permissions, security, manifest, privacy, chrome-api, best-practices]
 ---
 
-<<<<<<< HEAD
-Chrome extension permissions control what APIs and features your extension can access. Understanding permissions is crucial for building secure, trustworthy extensions that users will actually install. In this comprehensive guide, we'll explore the different types of permissions, best practices for requesting them, and how they impact user trust and installation rates.
-=======
 Chrome extension permissions control what APIs and features your extension can access. Understanding permissions is crucial for building secure, trustworthy extensions that users will actually install. In this comprehensive guide, we'll explore the intricacies of Chrome extension permissions, security best practices, and strategies for building user trust.
->>>>>>> quality/expand-thin-a5-r4
 
 ## Why Permissions Matter
 
 When you request permissions, users see a warning before installing your extension. Too many permissions or sensitive ones can dramatically reduce installation rates and erode user trust. Users are becoming increasingly privacy-conscious, and transparency about what your extension does with their data is essential.
 
-<<<<<<< HEAD
-### The User Trust Equation
-
-Every permission you request sends a message to users about what your extension can do. A simple note-taking app that requests access to all websites will raise red flags. However, the same permission in a bookmark-syncing extension makes perfect sense.
-
-Consider these statistics:
-- Extensions with fewer permissions see 30-50% higher installation rates
-- Users are 3x more likely to install extensions that clearly explain their permissions
-- High-risk permissions can trigger additional review processes in the Chrome Web Store
-=======
 The permission system exists to protect users. It ensures that extensions can't access sensitive data or functionality without explicit user consent. As a developer, respecting this system isn't just about following rules—it's about building sustainable, trusted software.
 
 ### The Installation Warning Impact
@@ -42,7 +28,6 @@ Building trust starts with transparency. Users appreciate knowing exactly what y
 - Explain permissions in your Chrome Web Store description
 - Provide a privacy policy that clearly states data usage
 - Consider adding an onboarding flow that explains why you need each permission
->>>>>>> quality/expand-thin-a5-r4
 
 ## Types of Permissions
 
@@ -56,28 +41,18 @@ Host permissions allow your extension to access specific websites or all website
 {
   "host_permissions": [
     "https://*.google.com/*",
-<<<<<<< HEAD
-    "https://example.com/*",
-=======
     "https://*.github.com/*",
->>>>>>> quality/expand-thin-a5-r4
     "<all_urls>"
   ]
 }
 ```
 
-<<<<<<< HEAD
-Host permissions are powerful and should be used carefully:
-- **Specific domains** (https://*.google.com/*) - Lower risk, targets specific sites
-- **All URLs** (<all_urls>) - Highest risk, requires strong justification
-=======
 **Important**: Host permissions trigger the most concerning permission warnings. Use `<all_urls>` only as a last resort.
 
 Types of host permission patterns:
 - **Specific domains**: `"https://example.com/*"` - Only runs on example.com
 - **Subdomains**: `"https://*.google.com/*"` - Runs on all Google subdomains
 - **All URLs**: `"<all_urls>"` - Runs everywhere (use sparingly!)
->>>>>>> quality/expand-thin-a5-r4
 
 ### API Permissions
 
@@ -97,14 +72,6 @@ API permissions grant access to specific Chrome APIs:
 }
 ```
 
-<<<<<<< HEAD
-Each API permission enables specific functionality:
-- **storage** - Save and retrieve data
-- **tabs** - Access tab information
-- **activeTab** - Access current tab when invoked
-- **bookmarks** - Read/modify bookmarks
-- **history** - Access browsing history
-=======
 Common API permissions and their purposes:
 
 | Permission | Use Case | Risk Level |
@@ -116,7 +83,6 @@ Common API permissions and their purposes:
 | history | Access browsing history | High |
 | webRequest | Monitor network requests | High |
 | proxy | Control proxy settings | High |
->>>>>>> quality/expand-thin-a5-r4
 
 ### Optional Permissions
 
@@ -127,25 +93,12 @@ You can declare some permissions as optional, requesting them only when needed:
   "optional_permissions": [
     "geolocation",
     "notifications",
-<<<<<<< HEAD
-    "bookmarks"
-=======
     "bookmarks",
     "history"
->>>>>>> quality/expand-thin-a5-r4
   ]
 }
 ```
 
-<<<<<<< HEAD
-This approach lets your extension work with basic functionality while enabling advanced features conditionally.
-
-### Requesting Optional Permissions at Runtime
-
-```javascript
-// Check if permission is granted
-chrome.permissions.contains({ permissions: ['geolocation'] }, (result) => {
-=======
 Requesting optional permissions:
 
 ```javascript
@@ -153,20 +106,14 @@ Requesting optional permissions:
 chrome.permissions.contains({ 
   permissions: ['geolocation'] 
 }, (result) => {
->>>>>>> quality/expand-thin-a5-r4
   if (result) {
     // Permission already granted
     useGeolocation();
   } else {
-<<<<<<< HEAD
-    // Request the permission
-    chrome.permissions.request({ permissions: ['geolocation'] }, (granted) => {
-=======
     // Request permission
     chrome.permissions.request({
       permissions: ['geolocation']
     }, (granted) => {
->>>>>>> quality/expand-thin-a5-r4
       if (granted) {
         useGeolocation();
       } else {
@@ -182,47 +129,6 @@ chrome.permissions.contains({
 Let's look at the most frequently used permissions:
 
 ### storage
-<<<<<<< HEAD
-
-Essential for saving user preferences and data. This permission is lightweight and rarely raises concerns.
-
-```javascript
-// Saving user preferences
-chrome.storage.sync.set({ theme: 'dark', language: 'en' });
-
-// Retrieving preferences
-chrome.storage.sync.get(['theme', 'language'], (result) => {
-  console.log(result.theme, result.language);
-});
-```
-
-Use cases: User settings, cached data, extension state
-
-### tabs
-
-Access to browser tab information. Required for extensions that manage or analyze tabs.
-
-```javascript
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  const currentTab = tabs[0];
-  console.log(currentTab.url, currentTab.title);
-});
-```
-
-Use cases: Tab managers, productivity tools, URL analyzers
-
-### activeTab
-
-Access to the current tab when the user invokes your extension. This is a privacy-friendly alternative to "<all_urls>" host permission.
-
-```javascript
-// This only works when user clicks your extension
-chrome.action.onClicked.addListener(async (tab) => {
-  // Can now access the active tab
-  await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: () => document.body.style.backgroundColor = 'red'
-=======
 Essential for saving user preferences and data. This permission is lightweight and rarely raises concerns. The storage API is asynchronous and provides better performance than localStorage.
 
 ```javascript
@@ -267,36 +173,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     function: () => document.title
   }, (results) => {
     console.log('Page title:', results[0].result);
->>>>>>> quality/expand-thin-a5-r4
   });
 });
 ```
 
-<<<<<<< HEAD
-Use cases: Page analyzers, content highlighters, page modifiers
-
-### bookmarks
-
-Read and modify browser bookmarks.
-
-```javascript
-// Create a bookmark
-chrome.bookmarks.create({
-  title: 'My Extension',
-  url: 'https://example.com'
-});
-
-// Get all bookmarks
-chrome.bookmarks.getTree((bookmarkTree) => {
-  console.log(bookmarkTree);
-});
-```
-
-Use cases: Bookmark managers, bookmark sync tools
-
-### history
-
-=======
 ### bookmarks
 Read and modify browser bookmarks.
 
@@ -315,16 +195,10 @@ chrome.bookmarks.create({
 ```
 
 ### history
->>>>>>> quality/expand-thin-a5-r4
 Access browsing history for analytics or cleanup features.
 
 ```javascript
 // Search history
-<<<<<<< HEAD
-chrome.history.search({ text: 'example', maxResults: 10 }, (results) => {
-  results.forEach((item) => {
-    console.log(item.url, item.title);
-=======
 chrome.history.search({
   text: 'example',
   startTime: 0,
@@ -332,14 +206,10 @@ chrome.history.search({
 }, (results) => {
   results.forEach((page) => {
     console.log('Visited:', page.url, 'at', page.lastVisitTime);
->>>>>>> quality/expand-thin-a5-r4
   });
 });
 ```
 
-<<<<<<< HEAD
-Use cases: History cleaners, reading time trackers
-=======
 ### webNavigation
 Monitor navigation events across tabs.
 
@@ -350,7 +220,6 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   url: [{ schemes: ['https'] }]
 });
 ```
->>>>>>> quality/expand-thin-a5-r4
 
 ## Security Best Practices
 
@@ -359,15 +228,6 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 Only ask for permissions your extension genuinely needs. If you can accomplish something with optional permissions or the activeTab API, prefer those approaches.
 
 Ask yourself:
-<<<<<<< HEAD
-- Does this feature absolutely require this permission?
-- Can I achieve the same result with a less invasive permission?
-- Is this permission needed immediately, or can it be optional?
-
-### Use ActiveTab When Possible
-
-The activeTab permission is much less invasive than host permissions. Your extension only accesses the current page when the user explicitly invokes it.
-=======
 - Can I achieve this with activeTab instead of host permissions?
 - Is this permission needed immediately, or only in certain scenarios?
 - Can I make this an optional permission?
@@ -382,7 +242,6 @@ The activeTab permission is much less invasive than host permissions. Your exten
   "host_permissions": []
 }
 ```
->>>>>>> quality/expand-thin-a5-r4
 
 ```json
 {
@@ -401,49 +260,15 @@ This provides:
 Users appreciate transparency. In your Chrome Web Store description, explain why each permission is necessary:
 
 ```
-<<<<<<< HEAD
-PERMISSIONS EXPLAINED:
-- storage: Saves your preferences across sessions
-- activeTab: Only accesses the current page when you click the extension
-- bookmarks: Required for bookmark backup feature
-=======
 Permissions used:
 - storage: Saves your preferences locally
 - activeTab: Allows the extension to work on the current page when clicked
 - bookmarks: Enables bookmark management features
->>>>>>> quality/expand-thin-a5-r4
 ```
 
 ### Test Permission Warnings
 
-<<<<<<< HEAD
-Before publishing, install your extension in development mode to see exactly what warning users will see:
-
-1. Navigate to chrome://extensions/
-2. Enable Developer mode
-3. Click "Pack extension" and select your folder
-4. Note the generated warnings
-
-### Implement Principle of Least Privilege
-
-Design your extension to work with the minimum permissions necessary:
-
-```javascript
-// Instead of requesting all URLs:
-// "host_permissions": ["<all_urls>"]
-
-// Use activeTab and request access only when needed
-chrome.action.onClicked.addListener(async (tab) => {
-  // Only accesses current tab when user clicks
-  await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ['content.js']
-  });
-});
-```
-=======
 Before publishing, install your extension in development mode to see exactly what warning users will see.
->>>>>>> quality/expand-thin-a5-r4
 
 ```bash
 # Test by packing the extension
@@ -462,28 +287,6 @@ If you're updating an older extension to Manifest V3, pay attention to permissio
 - Some permissions now require host permissions
 - The "background" key now uses "service_workers" instead of "scripts"
 - Certain powerful APIs have additional restrictions
-<<<<<<< HEAD
-- webRequest is replaced by declarativeNetRequest for blocking
-
-### Common Migration Issues
-
-1. **Background scripts become service workers**
-   ```json
-   // Manifest V2
-   "background": { "scripts": ["background.js"] }
-   
-   // Manifest V3
-   "background": { "service_worker": "background.js" }
-   ```
-
-2. **Host permissions separate from API permissions**
-   ```json
-   {
-     "permissions": ["storage", "tabs"],
-     "host_permissions": ["https://*.example.com/*"]
-   }
-   ```
-=======
 - webRequest is now declarativeNetRequest for network filtering
 
 ### Key Changes
@@ -494,7 +297,6 @@ If you're updating an older extension to Manifest V3, pay attention to permissio
 | webRequest | declarativeNetRequest |
 | browser_action | action |
 | persistent background page | non-persistent service worker |
->>>>>>> quality/expand-thin-a5-r4
 
 ## Testing Your Permission Warnings
 
@@ -527,21 +329,6 @@ Sometimes you can achieve your goals without sensitive permissions:
 - Implement **user-initiated actions** that grant temporary access
 - Consider **declarativeNetRequest** for network filtering instead of webRequest
 
-<<<<<<< HEAD
-### Example: Building Without Host Permissions
-
-```javascript
-// Using activeTab to avoid host permissions
-chrome.action.onClicked.addListener(async (tab) => {
-  // Script only runs when user clicks - no broad permissions needed
-  await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: () => {
-      // Your code here - can access the page
-      const title = document.title;
-      console.log('Page title:', title);
-    }
-=======
 ### Example: Alternative to Host Permissions
 
 Instead of:
@@ -565,38 +352,10 @@ chrome.action.onClicked.addListener((tab) => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: myContentFunction
->>>>>>> quality/expand-thin-a5-r4
   });
 });
 ```
 
-<<<<<<< HEAD
-=======
-## Permission Auditing
-
-Regularly audit your extension's permissions:
-
-1. Review which permissions you're actually using
-2. Remove any unused permissions
-3. Consider moving required-but-rare features to optional permissions
-4. Test the warning message with each change
-
-### Tools for Auditing
-
-Use Chrome's extension auditing features:
-- Extension Health Report in Chrome Web Store Developer Dashboard
-- chrome://extensions/ "Errors" and "Warnings" sections
-- Lighthouse Chrome extension for performance and security
-
->>>>>>> quality/expand-thin-a5-r4
-## Conclusion
-
-Thoughtful permission management leads to better user trust and higher installation rates. Always audit your permissions during development and remove any that aren't strictly necessary. Your users will thank you, and your extension will be more likely to succeed in the Chrome Web Store.
-
-<<<<<<< HEAD
-Remember: Every permission you request should have a clear, justifiable purpose. When in doubt, start with fewer permissions and add them as needed. Your users - and your installation rates - will benefit from this approach.
-<<<<<<< HEAD
-=======
 Remember:
 - Request only what you need
 - Prefer activeTab over host permissions
@@ -605,7 +364,6 @@ Remember:
 - Test the warnings before publishing
 
 Following these practices will help you build extensions that users trust and are happy to install.
->>>>>>> quality/expand-thin-a5-r4
 =======
 
 ### Handling Permission Errors

@@ -321,18 +321,8 @@ Remember to choose the appropriate API for your manifest version, keep badge tex
 
 For more information on Chrome extension development, explore our other guides on topics like notifications, storage APIs, and message passing between extension components.
 
-<<<<<<< HEAD
----
-
-## Related Articles
-
-- [Chrome Extension Notifications API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Implement rich notifications in your extensions
-- [Chrome Extension Popup Design Best Practices](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design user-friendly popup interfaces
-- [Chrome Action API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-action-api-guide/) - Master the Chrome Action API for toolbar interactions
-=======
 ## Related Articles
 
 - [Chrome Extension Notifications API Guide]({% post_url 2025-01-17-chrome-extension-notifications-api-guide %}) - Learn how to implement rich notifications to alert users about important events.
 - [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %}) - Design intuitive and effective popup interfaces for your extensions.
 - [Chrome Action API Guide]({% post_url 2025-01-24-chrome-action-api-guide %}) - Master the Chrome Action API for toolbar buttons and extension controls.
->>>>>>> quality/add-links-a15-r3

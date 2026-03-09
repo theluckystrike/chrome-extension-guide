@@ -627,16 +627,8 @@ Start implementing these testing practices today, and you will see the differenc
 
 ## Related Articles
 
-<<<<<<< HEAD
-- [Chrome Extension Testing — Unit, Integration, and E2E Testing Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/02/05/chrome-extension-testing-unit-integration-e2e-guide/)
-- [CI/CD for Chrome Extensions with GitHub Actions: Complete 2025 Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-ci-cd-github-actions/)
-- [Unit Testing Chrome Extensions with Jest: Complete Testing Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/03/14/chrome-extension-unit-testing-jest-guide/)
-
----
-=======
 - [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions from scratch.
 - [Chrome Extension Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for better performance and user experience.
 - [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Secure your extension against common vulnerabilities.
->>>>>>> quality/add-footer-a17-r2
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
