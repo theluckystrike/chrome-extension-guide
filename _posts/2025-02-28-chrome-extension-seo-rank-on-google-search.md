@@ -263,9 +263,10 @@ Remember: your extension's success depends on users finding it. Google Search is
 
 **Related Guides:**
 
-- [Chrome Web Store Listing Optimization](/chrome-extension-guide/publishing/cws-listing-optimization/) — Optimize your CWS presence for maximum visibility within the store
-- [Chrome Extension Monetization Strategies](/extension-monetization-playbook/articles/chrome-web-store-seo/) — Comprehensive SEO strategies from the extension monetization playbook
+- [Chrome Web Store Listing Optimization](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Optimize your CWS presence for maximum visibility within the store
+- [Chrome Extension Landing Page Guide](/chrome-extension-guide/2025/02/23/chrome-extension-landing-page-convert-visitors-to-installs/) — Create high-converting landing pages for your extensions
+- [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Comprehensive monetization strategies including SEO best practices
 
 ---
 
-*Built by theluckystrike at [zovo.one](https://zovo.one)*
+*Built by theluckystrike at zovo.one*
