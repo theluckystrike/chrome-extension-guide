@@ -159,11 +159,9 @@ Start your submission today, and join thousands of developers who have brought t
 
 ## Related Articles
 
-<<<<<<< HEAD
 - [Manifest V3 Migration Complete Guide 2025](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) - Learn everything about migrating from Manifest V2 to V3
 - [Chrome Extension Monetization Strategies That Work 2025](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) - Discover proven monetization strategies for your extension
 - [Chrome Extension CI/CD with GitHub Actions](/chrome-extension-guide/2025/01/18/chrome-extension-ci-cd-github-actions/) - Set up automated testing and deployment pipelines
-=======
 - [Chrome Extension Manifest V3 Migration Complete Guide]({% post_url 2025-01-16-manifest-v3-migration-complete-guide-2025 %})
 - [Chrome Extension Security Best Practices 2025]({% post_url 2025-01-16-chrome-extension-security-best-practices-2025 %})
 - [Chrome Extension Ad Monetization Ethical Guide]({% post_url 2025-01-17-chrome-extension-ad-monetization-ethical-guide %})
@@ -171,4 +169,5 @@ Start your submission today, and join thousands of developers who have brought t
 ---
 
 *For more guides on Chrome extension development and optimization, explore our comprehensive documentation and tutorials.*
->>>>>>> quality/add-links-a15-r2
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
