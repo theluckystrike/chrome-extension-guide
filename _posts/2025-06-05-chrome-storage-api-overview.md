@@ -4,6 +4,7 @@ title: "Chrome Storage API Overview"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 description: "Store data persistently in your extension using Chrome Storage API - a comprehensive guide with practical examples"
 =======
 description: "Discover Chrome Storage API for persistent extension data. Explore sync, local, and managed storage types, quotas, async operations, and change listeners."
@@ -14,6 +15,9 @@ description: "Store data persistently in your extension using Chrome Storage API
 =======
 description: "Master Chrome Storage API for persistent extension data. Learn sync and local storage, handling large datasets, quota management, and best practices."
 >>>>>>> quality/fix-frontmatter-a8-r5
+=======
+description: "Discover Chrome Storage API for persistent extension data. Explore sync, local, and managed storage types, quotas, async operations, and change listeners."
+>>>>>>> quality/expand-thin-a1-r5
 date: 2025-06-05
 categories: [tutorial]
 tags: [storage, data, persistence, chrome-api, sync, local, best-practices]
@@ -764,6 +768,7 @@ Remember these key best practices:
 - Use organized key naming conventions
 - Clean up old data regularly
 - Use promises for cleaner async code
+<<<<<<< HEAD
 =======
 - Handle errors gracefully with fallbacks
 - Consider encryption for sensitive data
@@ -773,3 +778,29 @@ Remember these key best practices:
 
 With these techniques, you can build robust, reliable data storage into your Chrome extensions!
 >>>>>>> quality/expand-thin-a5-r4
+=======
+
+### Storage Migration Strategies
+
+When moving from localStorage or other storage solutions to chrome.storage, plan your migration carefully to preserve user data.
+
+Create a migration function that runs on extension startup. Check for old data in localStorage and transfer it to chrome.storage. After successful migration, clear the old localStorage to prevent duplicate processing.
+
+Version your storage schema to handle future migrations. Store a version number with your data, allowing you to upgrade schemas when your extension evolves. This approach prevents compatibility issues as your extension grows.
+
+### Debugging Storage Issues
+
+Storage-related bugs can be challenging to diagnose. Chrome provides built-in tools for inspecting stored data.
+
+Navigate to chrome://extensions and click the "Service Worker" link for your extension. In the Console, type chrome.storage to access the Storage Area panel. This shows all stored keys and values.
+
+Use the Application tab in DevTools to inspect localStorage and sessionStorage if you're still using them. Check for size limits being exceeded, which can cause writes to fail silently.
+
+### Encryption Considerations
+
+While chrome.storage provides some protection, sensitive data may require additional encryption. Chrome provides the identity API for securing user credentials.
+
+For highly sensitive data, consider using the Web Crypto API to encrypt data before storing. This provides defense in depth, protecting data even if the device is compromised.
+
+Be cautious about storing tokens or credentials. Consider using the chrome.identity API for OAuth flows rather than storing tokens directly. This provides secure token management without manual encryption implementation.
+>>>>>>> quality/expand-thin-a1-r5

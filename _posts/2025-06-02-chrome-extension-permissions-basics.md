@@ -4,6 +4,7 @@ title: "Understanding Chrome Extension Permissions"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 description: "Learn about Chrome extension permissions, security best practices, and how to implement them properly in your extension"
 =======
 description: "Master Chrome extension permissions with this guide. Learn host, API, and optional permissions, security best practices, and minimize requests for better user trust."
@@ -14,6 +15,9 @@ description: "Learn about Chrome extension permissions and security best practic
 =======
 description: "Master Chrome extension permissions with this guide. Learn security best practices, proper implementation, host permissions, and how to minimize requests to build user trust."
 >>>>>>> quality/fix-frontmatter-a8-r5
+=======
+description: "Master Chrome extension permissions with this guide. Learn host, API, and optional permissions, security best practices, and minimize requests for better user trust."
+>>>>>>> quality/expand-thin-a1-r5
 date: 2025-06-02
 categories: [tutorial]
 tags: [permissions, security, manifest, privacy, chrome-api, best-practices]
@@ -607,6 +611,7 @@ Thoughtful permission management leads to better user trust and higher installat
 
 <<<<<<< HEAD
 Remember: Every permission you request should have a clear, justifiable purpose. When in doubt, start with fewer permissions and add them as needed. Your users - and your installation rates - will benefit from this approach.
+<<<<<<< HEAD
 =======
 Remember:
 - Request only what you need
@@ -617,3 +622,29 @@ Remember:
 
 Following these practices will help you build extensions that users trust and are happy to install.
 >>>>>>> quality/expand-thin-a5-r4
+=======
+
+### Handling Permission Errors
+
+Even with careful planning, your extension may encounter permission-related errors at runtime. Handle these gracefully to maintain a positive user experience.
+
+When API calls fail due to missing permissions, provide clear guidance to users. Explain what permission is needed and why. If possible, link directly to the extension settings where users can grant access.
+
+Use try-catch blocks around API calls that require permissions. This prevents unexpected crashes and allows you to provide meaningful error messages. Log errors appropriately for debugging while keeping user-facing messages simple and helpful.
+
+### Permissions and Manifest V3
+
+Manifest V3 introduced significant changes to how permissions work in Chrome extensions. Understanding these changes helps you build compliant extensions.
+
+The most notable change involves blocking synchronous XMLHttpRequest in extensions. Use fetch instead, which requires the appropriate host permissions. Additionally, the webRequest API is now declarative only for blocking, requiring declarativeNetRequest for content blocking.
+
+Background scripts became service workers in Manifest V3, bringing asynchronous patterns to the background context. This affects how you manage state and handle events. Plan accordingly when migrating or building new extensions.
+
+### Privacy-First Permission Design
+
+Design your extension with privacy as a core principle. Collect only the minimum data necessary, and be transparent about what you collect.
+
+Consider implementing on-device processing where possible. Rather than sending page content to external servers for analysis, process it locally within the extension. This reduces privacy concerns and can improve performance.
+
+Provide users with controls over data collection. Let them choose what data is stored and synced. Make it easy to export or delete their data. These features build trust and may be required in certain jurisdictions.
+>>>>>>> quality/expand-thin-a1-r5
