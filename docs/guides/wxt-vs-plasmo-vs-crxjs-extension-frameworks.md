@@ -146,7 +146,7 @@ const [settings, setSettings] = useStorage<ExtensionSettings>("settings")
 
 CRXJS provides TypeScript support through standard Vite configuration. You'll need to install `@types/chrome` separately, and manifest types require additional setup. The experience is good but less integrated than the other frameworks.
 
-For a comprehensive TypeScript setup guide, see our [Building Chrome Extensions with TypeScript tutorial](docs/tutorials/building-with-typescript.md) and the [Chrome Extension Development TypeScript Guide](docs/guides/chrome-extension-development-typescript-2026.md).
+For a comprehensive TypeScript setup guide, see our [Building Chrome Extensions with TypeScript tutorial]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-tutorial.md %}) and the [Chrome Extension Development TypeScript Guide]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-2026.md %}).
 
 ---
 
@@ -319,16 +319,16 @@ However, if your project requires the sophisticated storage and messaging abstra
 
 **CRXJS** is best suited for experienced developers who need maximum control over their build process and prefer to implement their own patterns rather than adopt framework conventions.
 
-Whatever framework you choose, ensure your team is comfortable with the TypeScript setup. Proper typing significantly reduces runtime errors and makes maintenance easier long-term. See our [TypeScript tutorial](docs/tutorials/building-with-typescript.md) and [development guides](docs/guides/chrome-extension-development-typescript-2026.md) for in-depth help getting started.
+Whatever framework you choose, ensure your team is comfortable with the TypeScript setup. Proper typing significantly reduces runtime errors and makes maintenance easier long-term. See our [TypeScript tutorial]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-tutorial.md %}) and [development guides]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-2026.md %}) for in-depth help getting started.
 
 ---
 
 ## Related Articles
 
-- [Building Chrome Extensions with TypeScript](docs/tutorials/building-with-typescript.md)
-- [Chrome Extension Development Tutorial](docs/guides/chrome-extension-development-typescript-2026.md)
-- [Chrome Extension Architecture Patterns](docs/guides/architecture-patterns.md)
-- [Cross-Browser Extension Development](docs/guides/cross-browser-extension-development.md)
+- [Building Chrome Extensions with TypeScript]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-tutorial.md %})
+- [Chrome Extension Development Tutorial]({{ site.baseurl }}{% link docs/guides/chrome-extension-development-typescript-2026.md %})
+- [Chrome Extension Architecture Patterns]({{ site.baseurl }}{% link docs/guides/architecture-patterns.md %})
+- [Cross-Browser Extension Development]({{ site.baseurl }}{% link docs/guides/cross-browser-extension-development.md %})
 
 ---
 
