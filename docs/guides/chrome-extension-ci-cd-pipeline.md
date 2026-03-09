@@ -82,8 +82,8 @@ GitHub Actions provides an excellent foundation for extension CI/CD due to its t
 
 Create the file `.github/workflows/ci-cd.yml` in your extension repository:
 
-{% raw %}
 ```yaml
+{% raw %}
 name: CI/CD Pipeline
 
 on:
@@ -252,8 +252,8 @@ jobs:
           client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
           publish-type: "default"
-```
 {% endraw %}
+```
 
 This workflow implements several best practices worth highlighting. The `needs` declarations create proper dependencies between jobs, ensuring that builds only proceed when earlier stages pass. Matrix testing across multiple Node versions catches version-specific issues early. The conditional `if` statements ensure that packaging and publishing only occur for tagged releases, not for every push to main.
 
@@ -803,7 +803,6 @@ Implement multiple safety controls for publishing:
 2. **Manual approval**: Use GitHub Environments with required reviewers for production deployments
 3. **Staged rollout**: Initially publish to a small percentage of users to catch issues
 
-{% raw %}
 ```yaml
 # Add to your workflow for manual approval
 publish:
@@ -817,7 +816,6 @@ publish:
     # Require manual approval before publishing
     deployment_review_required: true
 ```
-{% endraw %}
 
 ## Version Management
 

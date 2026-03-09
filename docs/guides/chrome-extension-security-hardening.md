@@ -245,7 +245,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
   const WINDOW_MS = 60_000;
   const MAX_REQUESTS = 30;
   
-  [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).session.get(rateLimitKey, (data) => {
+  chrome.storage.session.get(rateLimitKey, (data) => {
     const timestamps: number[] = (data[rateLimitKey] ?? [])
       .filter((t: number) => now - t < WINDOW_MS);
     
@@ -255,7 +255,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
     }
     
     timestamps.push(now);
-    [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).session.set({ [rateLimitKey]: timestamps });
+    chrome.storage.session.set({ [rateLimitKey]: timestamps });
     
     handleExternalMessage(message, sender, sendResponse);
   });
@@ -503,8 +503,3 @@ Security is layered—each measure reinforces the others. Refer to these related
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-
----
-
-## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
