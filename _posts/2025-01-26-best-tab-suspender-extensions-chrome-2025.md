@@ -103,7 +103,7 @@ Auto Tab Discard takes a different approach to tab management, using Chrome's bu
 
 ### Key Features
 
-Auto Tab Discard automatically discards tabs after a configurable period of inactivity, using Chrome's native tab discarding mechanism. This means tabs are unloaded from memory but can be quickly reloaded when needed. The extension provides more granular control than Chrome's built-in discarding, allowing you to set specific discard delays and exclude certain sites.
+Auto Tab Discard automatically discards tabs after a configurable period of inactivity, using Chrome's native tab discarding mechanism. This means tabs are unloaded from memory but can be quickly reloaded when needed. The extension provides more granular control than Chrome's native discarding, allowing you to set specific discard delays and exclude certain sites.
 
 The extension includes a discard queue feature that lets you manually queue tabs for discarding in a specific order. This is useful when you need to free memory quickly and want to choose which tabs are sacrificed first.
 
