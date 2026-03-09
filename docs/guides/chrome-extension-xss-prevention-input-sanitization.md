@@ -434,6 +434,7 @@ While there's no specific "OWASP for Chrome Extensions," the principles from [OW
 
 Implement automated checks in your CI/CD pipeline:
 
+{% raw %}
 ```yaml
 # Example GitHub Actions security workflow
 name: Security Audit
@@ -455,6 +456,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 ```
+{% endraw %}
 
 ## Common Attack Patterns to Defend Against
 

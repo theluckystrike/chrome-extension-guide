@@ -492,7 +492,7 @@ While our API tester is functional, there are many ways you could enhance it. He
 
 **Request History**: Store previous requests in local storage so users can quickly revisit them. This is invaluable when debugging APIs.
 
-**Environment Variables**: Allow users to define variables like `{{base_url}}` that get replaced before sending requests. This makes it easy to switch between development and production environments.
+**Environment Variables**: Allow users to define variables like `{% raw %}{{base_url}}{% endraw %}` that get replaced before sending requests. This makes it easy to switch between development and production environments.
 
 **Response Collections**: Save successful responses for comparison or documentation purposes.
 
