@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Chrome Extension Storage Patterns for Large-Scale Data"
+seo_title: "Chrome Extension Storage Patterns | Large Scale Data Guide"
 description: "Handle large datasets in Chrome extensions. Compare chrome.storage, IndexedDB, Cache API, and OPFS. Patterns for sync, migration, quota management, and performance."
 date: 2025-01-27
 categories: [guides, storage]

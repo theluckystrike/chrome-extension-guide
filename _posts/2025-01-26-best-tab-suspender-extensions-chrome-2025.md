@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Best Tab Suspender Extensions for Chrome in 2025 — Complete Comparison"
+seo_title: "Best Tab Suspender Extensions Chrome 2025 | Complete Comparison"
 description: "Compare the best tab suspender extensions for Chrome in 2025. Tab Suspender Pro, The Great Suspender alternatives, Auto Tab Discard, and more. Features, performance, and privacy compared."
 date: 2025-01-26
 categories: [reviews, tools]

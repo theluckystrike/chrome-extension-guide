@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Why Your Browser Uses So Much RAM — And How Chrome Extensions Can Help"
+seo_title: "Why Browser Uses So Much RAM | Chrome Extensions Guide 2025"
 description: "Understand why Chrome uses so much memory. Learn how tab suspender extensions, memory managers, and smart tab tools can reduce browser RAM usage by up to 80%."
 date: 2025-01-24
 categories: [guides, performance]
