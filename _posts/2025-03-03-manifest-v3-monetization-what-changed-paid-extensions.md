@@ -422,7 +422,7 @@ The key principles are:
 
 The developers who succeed in MV3 monetization are those who treat their extension as a client to a robust backend rather than trying to maintain all state in the browser. Build your monetization architecture with this principle in mind, and you'll create a system that's more reliable, more scalable, and better positioned for the future.
 
-For more on migrating to Manifest V3, see our [Manifest V3 Migration Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/). For detailed Stripe integration, check out our [Stripe Subscription Tutorial](/2025/02/20/chrome-extension-subscription-model-stripe-integration/).
+For more on migrating to Manifest V3, see our [Manifest V3 Migration Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/). For service worker architecture, check out our [Service Worker Patterns Guide](/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/). For detailed Stripe integration, check out our [Stripe Subscription Tutorial](/2025/02/20/chrome-extension-subscription-model-stripe-integration/). For comprehensive monetization strategies, see our [Extension Monetization Playbook](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/).
 
 ---
 
