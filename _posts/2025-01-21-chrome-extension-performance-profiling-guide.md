@@ -1,12 +1,11 @@
 ---
-layout: default
+layout: post
 title: "Chrome Extension Performance Profiling: Find and Fix Bottlenecks"
-description: "Master Chrome extension performance profiling with this comprehensive guide. Learn to identify and fix bottlenecks in service workers, content scripts, and popup pages using Chrome DevTools."
+description: "Master Chrome extension performance profiling with this guide. Learn to identify and fix bottlenecks in service workers, content scripts, and popup pages."
 date: 2025-01-21
 categories: [guides, performance]
-tags: [chrome extension performance, profile extension, extension bottleneck, optimize extension speed]
-author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-performance-profiling-guide/"
+tags: [chrome-extension-performance, profile-extension, extension-bottleneck, optimize-speed]
+seo_title: "Chrome Extension Performance Profiling Guide | 2025"
 ---
 
 # Chrome Extension Performance Profiling: Find and Fix Bottlenecks

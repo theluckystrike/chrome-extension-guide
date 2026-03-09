@@ -1,11 +1,11 @@
 ---
-layout: default
+layout: post
 title: "How Tab Suspender Extensions Save Browser Memory — Complete Technical Guide"
-description: "Deep dive into how tab suspender Chrome extensions reduce RAM usage. Learn the technical mechanisms behind tab suspension, memory reclamation, and browser performance optimization."
+description: "Deep dive into how tab suspender Chrome extensions reduce RAM usage. Learn technical mechanisms behind tab suspension, memory reclamation, and browser optimization."
 date: 2025-01-20
 categories: [guides, performance]
 tags: [tab-suspender, browser-memory, chrome-extensions, ram-optimization, tab-management]
-author: theluckystrike
+seo_title: "How Tab Suspender Extensions Save Browser Memory | 2025 Guide"
 ---
 
 # How Tab Suspender Extensions Save Browser Memory — Complete Technical Guide
