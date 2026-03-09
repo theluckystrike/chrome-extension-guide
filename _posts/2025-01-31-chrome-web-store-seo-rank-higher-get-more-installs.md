@@ -1,13 +1,11 @@
 ---
-layout: post
+layout: default
 title: "Chrome Web Store SEO — Rank Higher and Get More Installs in 2025"
 description: "Complete Chrome Web Store SEO guide. Optimize your listing title, description, screenshots, and reviews to rank higher and increase extension installs."
 date: 2025-01-31
 categories: [guides, publishing]
 tags: [chrome-web-store-seo, extension-marketing, cws-listing, extension-installs, app-store-optimization]
 author: theluckystrike
-keywords: "Chrome Web Store SEO, Chrome extension SEO, CWS optimization, extension listing optimization, Chrome Web Store ranking, get more extension installs"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/"
 ---
 
 # Chrome Web Store SEO — Rank Higher and Get More Installs in 2025
@@ -374,11 +372,11 @@ Remember: CWS SEO is not a one-time task. Continuously monitor your metrics, tes
 
 Looking to expand your extension's success? Explore these related guides:
 
-- [Chrome Extension Monetization Playbook](/chrome-extension-guide/2025/01/17/chrome-extension-ad-monetization-ethical-guide/) — Learn proven strategies to monetize your Chrome extension while maintaining user trust
-- [Chrome Extension Growth Strategies](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) — Comprehensive guide to growing your extension user base
-- [Chrome Web Store Publishing Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) — Step-by-step instructions for publishing to the Chrome Web Store
-- [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) — Ensure your extension meets current CWS requirements
+- [Chrome Extension Monetization Playbook](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-ad-monetization-ethical-guide/) — Learn proven strategies to monetize your Chrome extension while maintaining user trust
+- [Chrome Extension Growth Strategies](https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) — Comprehensive guide to growing your extension user base
+- [Chrome Web Store Publishing Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/publish-chrome-extension-web-store-2025-guide/) — Step-by-step instructions for publishing to the Chrome Web Store
+- [Manifest V3 Migration Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) — Ensure your extension meets current CWS requirements
 
 ---
 
-*Built by theluckystrike at [zovo.one](https://zovo.one)*
+*Built by theluckystrike at zovo.one*
