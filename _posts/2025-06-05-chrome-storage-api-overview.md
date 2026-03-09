@@ -1,23 +1,13 @@
 ---
 layout: post
 title: "Chrome Storage API Overview"
-<<<<<<< HEAD
-<<<<<<< HEAD
-description: "Store data persistently with Chrome Storage API. Learn sync, local, and managed storage types, quota limits, and best practices for extension data storage."
-=======
-description: "Discover Chrome Storage API for persistent extension data. Explore sync, local, and managed storage types, quotas, async operations, and change listeners."
->>>>>>> quality/fix-frontmatter-a7-r4
-=======
-description: "Discover the Chrome Storage API for persistent data storage in extensions. Learn about sync, local, and managed storage types, quotas, best practices, and how to handle asynchronous operations efficiently."
->>>>>>> quality/fix-frontmatter-a10-r3
+description: "Store data persistently in your extension using Chrome Storage API - a comprehensive guide with practical examples"
 date: 2025-06-05
 categories: [tutorial]
 tags: [storage, data, persistence, chrome-api, sync]
-keywords: "chrome storage API, chrome extension storage, sync storage chrome, local storage extension, chrome.storage tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/"
 ---
 
-The Chrome Storage API provides reliable data persistence for Chrome extensions. Unlike localStorage, it offers better performance, works across browser sessions, and can sync data across devices when users are signed in to Chrome.
+The Chrome Storage API provides reliable data persistence for Chrome extensions. Unlike localStorage, it offers better performance, works across browser sessions, and can sync data across devices when users are signed in to Chrome. This guide covers everything from basic usage to advanced patterns.
 
 ## Why Not localStorage?
 
@@ -27,13 +17,29 @@ While localStorage works in extensions, the Chrome Storage API is specifically d
 - **Sync support** - Automatically syncs data across devices when users sign in
 - **Larger storage quota** - More space than localStorage's typically 5MB limit
 - **Asynchronous API** - Doesn't block the UI thread like localStorage can
+- **Encryption support** - Built-in support for encrypted storage in certain scenarios
+
+### Performance Comparison
+
+```javascript
+// localStorage (synchronous, blocks UI)
+localStorage.setItem('key', 'value');  // Blocks thread
+const value = localStorage.getItem('key');  // Blocks thread
+
+// Chrome Storage API (asynchronous, non-blocking)
+chrome.storage.sync.set({key: 'value'});  // Non-blocking
+chrome.storage.sync.get(['key'], (result) => {  // Callback when ready
+  console.log(result.key);
+});
+```
 
 ## Storage Types
 
-Chrome provides three storage areas:
+Chrome provides three storage areas, each with different use cases:
 
 ### sync Storage
-Data syncs across all devices where the user is signed in:
+
+Data syncs across all devices where the user is signed in. Ideal for user preferences and settings that should follow the user across devices.
 
 ```javascript
 chrome.storage.sync.set({key: 'value'}, () => {
@@ -43,12 +49,22 @@ chrome.storage.sync.set({key: 'value'}, () => {
 chrome.storage.sync.get(['key'], (result) => {
   console.log('Retrieved:', result.key);
 });
+
+// Setting multiple values
+chrome.storage.sync.set({
+  theme: 'dark',
+  language: 'en',
+  notifications: true
+}, () => {
+  console.log('Multiple values saved');
+});
 ```
 
-**Quota**: Approximately 100KB per item, 8KB per item recommended for sync.
+**Quota**: Approximately 100KB total, 8KB per item recommended for optimal sync performance.
 
 ### local Storage
-Data stays on the current device only:
+
+Data stays on the current device only. Use for large data that doesn't need to sync, or for data that should remain device-specific.
 
 ```javascript
 chrome.storage.local.set({key: 'value'}, () => {
@@ -58,16 +74,29 @@ chrome.storage.local.set({key: 'value'}, () => {
 chrome.storage.local.get(['key'], (result) => {
   console.log('Retrieved:', result.key);
 });
+
+// Get all stored data
+chrome.storage.local.get(null, (result) => {
+  console.log('All data:', result);
+});
 ```
 
 **Quota**: Typically around 5MB total.
 
 ### managed Storage
-Storage controlled by enterprise policies (read-only for extensions):
+
+Storage controlled by enterprise policies (read-only for extensions). Used in organizational settings where administrators configure extension behavior.
 
 ```javascript
 chrome.storage.managed.get(['policyKey'], (result) => {
   console.log('Policy value:', result.policyKey);
+});
+
+// Common managed policies
+chrome.storage.managed.get(['allowedDomains', 'maxStorage'], (result) => {
+  if (result.allowedDomains) {
+    console.log('Allowed domains:', result.allowedDomains);
+  }
 });
 ```
 
@@ -85,17 +114,28 @@ const userSettings = {
   recentFiles: [
     { name: 'document.pdf', accessed: Date.now() },
     { name: 'notes.txt', accessed: Date.now() }
-  ]
+  ],
+  preferences: {
+    fontSize: 14,
+    lineHeight: 1.5,
+    autoSave: true
+  }
 };
 
 chrome.storage.sync.set({ settings: userSettings }, () => {
   console.log('Complex data saved');
 });
+
+// Retrieving nested data
+chrome.storage.sync.get(['settings'], (result) => {
+  const settings = result.settings;
+  console.log(settings.preferences.fontSize);
+});
 ```
 
 ### Handling Async Operations Properly
 
-The storage API uses callbacks, but you can wrap it in promises:
+The storage API uses callbacks, but you can wrap it in promises for cleaner async/await syntax:
 
 ```javascript
 const storage = {
@@ -112,9 +152,34 @@ const storage = {
 
 // Usage with async/await
 async function handleData() {
-  const result = await storage.get('settings');
-  await storage.set({ settings: { ...result.settings, theme: 'light' } });
-  await storage.remove('oldKey');
+  try {
+    const result = await storage.get('settings');
+    await storage.set({ 
+      settings: { 
+        ...result.settings, 
+        theme: 'light' 
+      } 
+    });
+    await storage.remove('oldKey');
+    console.log('Operations complete');
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+```
+
+### Modern Promise-Based API
+
+Chrome now supports promises natively:
+
+```javascript
+// Chrome 120+ with promise support
+try {
+  await chrome.storage.sync.set({ key: 'value' });
+  const result = await chrome.storage.sync.get(['key']);
+  console.log(result.key);
+} catch (error) {
+  console.error('Storage error:', error);
 }
 ```
 
@@ -124,6 +189,8 @@ You can monitor storage changes across all contexts:
 
 ```javascript
 chrome.storage.onChanged.addListener((changes, area) => {
+  console.log('Storage changed in:', area);
+  
   if (area === 'sync' && changes.settings) {
     const oldValue = changes.settings.oldValue;
     const newValue = changes.settings.newValue;
@@ -132,15 +199,20 @@ chrome.storage.onChanged.addListener((changes, area) => {
     // Update UI accordingly
     applyTheme(newValue.theme);
   }
+  
+  // Handle specific keys
+  if (changes.lastUpdated) {
+    console.log('Last updated:', changes.lastUpdated.newValue);
+  }
 });
 ```
 
 ## Storage Quotas and Limits
 
-Be mindful of storage limits:
+Be mindful of storage limits to prevent errors:
 
 | Storage Type | Limit |
-|-------------|-------|
+|--------------|-------|
 | sync | 100KB total, 512 bytes minimum per key |
 | local | ~5MB total |
 | managed | No explicit limit (set by admin) |
@@ -152,6 +224,29 @@ function estimateStorageUsage() {
   chrome.storage.sync.getBytesInUse(null, (bytes) => {
     console.log(`Using ${bytes} bytes of sync storage`);
   });
+  
+  // Check specific keys
+  chrome.storage.sync.getBytesInUse(['settings', 'cache'], (bytes) => {
+    console.log(`Settings and cache: ${bytes} bytes`);
+  });
+}
+```
+
+### Handling Quota Errors
+
+```javascript
+async function saveLargeData(data) {
+  try {
+    await chrome.storage.sync.set({ largeData: data });
+  } catch (error) {
+    if (error.message.includes('QUOTA_BYTES')) {
+      // Fallback to local storage
+      await chrome.storage.local.set({ largeData: data });
+      console.log('Saved to local storage instead');
+    } else {
+      throw error;
+    }
+  }
 }
 ```
 
@@ -160,28 +255,34 @@ function estimateStorageUsage() {
 ### Handle Errors Gracefully
 
 ```javascript
-chrome.storage.sync.set({ key: value }).then(() => {
-  console.log('Saved successfully');
-}).catch((error) => {
-  console.error('Storage error:', error);
-  // Fallback to local storage
-  chrome.storage.local.set({ key: value });
-});
+chrome.storage.sync.set({ key: value })
+  .then(() => {
+    console.log('Saved successfully');
+  })
+  .catch((error) => {
+    console.error('Storage error:', error);
+    // Fallback to local storage
+    chrome.storage.local.set({ key: value });
+  });
 ```
 
 ### Don't Store Sensitive Data Unencrypted
 
-The storage API doesn't encrypt by default. For sensitive data:
+The storage API doesn't encrypt by default. For sensitive data like API keys or personal information, use encryption:
 
 ```javascript
-// Use the Web Crypto API for encryption
+// Using the Web Crypto API for encryption
 async function encryptAndStore(data) {
   const encoded = new TextEncoder().encode(JSON.stringify(data));
+  
+  // Generate a key
   const key = await crypto.subtle.generateKey(
     { name: 'AES-GCM' },
     true,
     ['encrypt', 'decrypt']
   );
+  
+  // Encrypt the data
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const encrypted = await crypto.subtle.encrypt(
     { name: 'AES-GCM', iv },
@@ -189,10 +290,30 @@ async function encryptAndStore(data) {
     encoded
   );
   
+  // Store encrypted data
   await chrome.storage.sync.set({
     secureData: Array.from(new Uint8Array(encrypted)),
     iv: Array.from(iv)
   });
+}
+
+// Decrypting data
+async function decryptData(encryptedData, iv) {
+  const key = await crypto.subtle.importKey(
+    'raw',
+    await getKeyMaterial(),
+    { name: 'PBKDF2' },
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: new Uint8Array(iv) },
+    key,
+    new Uint8Array(encryptedData)
+  );
+  
+  return JSON.parse(new TextDecoder().decode(decrypted));
 }
 ```
 
@@ -203,6 +324,37 @@ Keep sync storage efficient:
 - Store only user preferences, not cached data
 - Use meaningful prefixes for organized keys
 - Remove unused data promptly
+- Keep individual items under 8KB
+
+```javascript
+// Organized key naming
+const KEYS = {
+  THEME: 'preferences.theme',
+  LANGUAGE: 'preferences.language',
+  CACHE_PREFIX: 'cache.',
+  TEMP_PREFIX: 'temp.'
+};
+
+chrome.storage.sync.set({
+  [KEYS.THEME]: 'dark',
+  [KEYS.LANGUAGE]: 'en'
+});
+```
+
+### Clear Old Data
+
+```javascript
+async function clearOldCache() {
+  const result = await chrome.storage.sync.get(null);
+  const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+  
+  for (const [key, value] of Object.entries(result)) {
+    if (key.startsWith('cache.') && value.timestamp < oneWeekAgo) {
+      await chrome.storage.sync.remove(key);
+    }
+  }
+}
+```
 
 ## Comparing Storage Options
 
@@ -212,7 +364,91 @@ Keep sync storage efficient:
 | Syncs across devices | Yes | No | No |
 | Storage quota | ~100KB | ~5MB | ~5MB |
 | Async | Yes | Yes | No |
+| Access from content scripts | Limited | Yes | Yes |
+| Encryption | Via API | Via API | Manual |
+
+## Practical Examples
+
+### User Preferences Manager
+
+```javascript
+class PreferencesManager {
+  constructor() {
+    this.defaults = {
+      theme: 'light',
+      fontSize: 14,
+      notifications: true
+    };
+  }
+  
+  async get(key) {
+    const result = await chrome.storage.sync.get(key);
+    return result[key] ?? this.defaults[key];
+  }
+  
+  async set(key, value) {
+    await chrome.storage.sync.set({ [key]: value });
+  }
+  
+  async getAll() {
+    const result = await chrome.storage.sync.get(null);
+    return { ...this.defaults, ...result };
+  }
+  
+  async reset() {
+    await chrome.storage.sync.clear();
+  }
+}
+```
+
+### Cache Manager
+
+```javascript
+class CacheManager {
+  constructor(prefix = 'cache') {
+    this.prefix = prefix;
+  }
+  
+  async set(key, value, ttl = 3600000) {
+    const cacheEntry = {
+      data: value,
+      timestamp: Date.now(),
+      ttl: ttl
+    };
+    await chrome.storage.local.set({
+      [`${this.prefix}.${key}`]: cacheEntry
+    });
+  }
+  
+  async get(key) {
+    const result = await chrome.storage.local.get(`${this.prefix}.${key}`);
+    const entry = result[`${this.prefix}.${key}`];
+    
+    if (!entry) return null;
+    
+    // Check if expired
+    if (Date.now() - entry.timestamp > entry.ttl) {
+      await this.remove(key);
+      return null;
+    }
+    
+    return entry.data;
+  }
+  
+  async remove(key) {
+    await chrome.storage.local.remove(`${this.prefix}.${key}`);
+  }
+}
+```
 
 ## Conclusion
 
-The Chrome Storage API is the recommended way to store user preferences and data in your extension. Its sync capabilities, larger quotas, and asynchronous design make it superior to localStorage for most extension use cases. Remember to handle errors, respect quotas, and consider encryption for sensitive data.
+The Chrome Storage API is the recommended way to store user preferences and data in your extension. Its sync capabilities, larger quotas, and asynchronous design make it superior to localStorage for most extension use cases.
+
+Remember these key best practices:
+- Always handle errors and provide fallbacks
+- Respect storage quotas
+- Consider encryption for sensitive data
+- Use organized key naming conventions
+- Clean up old data regularly
+- Use promises for cleaner async code
