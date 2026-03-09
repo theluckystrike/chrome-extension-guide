@@ -550,3 +550,11 @@ Key takeaways from this guide:
 By applying these patterns, you can build Chrome extensions that are reliable, performant, and maintainable — regardless of how complex your extension becomes.
 
 For more tutorials on Chrome extension development, explore our guides on [performance optimization](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) and [Manifest V3 best practices](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/).
+
+---
+
+## Related Articles
+
+- [Chrome Storage API Patterns]({% post_url 2025-01-24-chrome-storage-api-patterns %})
+- [Chrome Extension Local Storage vs Chrome Storage API]({% post_url 2025-01-18-chrome-extension-local-storage-vs-chrome-storage-api %})
+- [IndexedDB for Chrome Extension Data Storage]({% post_url 2025-01-21-indexeddb-chrome-extension-data-storage %})

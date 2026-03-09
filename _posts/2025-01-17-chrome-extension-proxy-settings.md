@@ -685,3 +685,11 @@ The Chrome Proxy Settings API provides powerful capabilities for building sophis
 Remember that successful proxy extensions require careful attention to user experience, robust error handling, and ongoing maintenance as network conditions and Chrome's APIs evolve. Start with basic functionality, test thoroughly, and progressively add advanced features as you validate your core implementation.
 
 The key to success lies in balancing functionality with simplicity. Users appreciate extensions that work reliably without requiring constant attention. By following the patterns and best practices outlined in this guide, you're well-equipped to build professional-quality proxy extensions that serve your users effectively.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Proxy Settings API]({% post_url 2025-03-07-chrome-extension-proxy-settings-api %})
+- [Chrome Extension Proxy API Guide]({% post_url 2025-01-22-chrome-extension-proxy-api-guide %})
+- [Chrome Extension Network Debugging Guide]({% post_url 2025-03-23-chrome-extension-network-debugging-guide %})

@@ -756,8 +756,16 @@ Always use the Chrome Identity API for OAuth flows rather than implementing cust
 
 With these skills, you can build Chrome extensions that securely connect to Google Drive, GitHub, and any other OAuth-enabled service, unlocking endless possibilities for your extension's functionality.
 
+---
+
+## Related Articles
+
+- [Chrome Extension OAuth2 Authentication Guide]({% post_url 2025-02-20-chrome-extension-oauth2-authentication-guide %})
+- [Chrome Identity API OAuth Guide]({% post_url 2025-01-24-chrome-identity-api-oauth %})
+- [Chrome Extension Authentication Patterns]({% post_url 2025-01-18-authentication-patterns-for-chrome-extensions %})
 
 ---
+
 ## Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
