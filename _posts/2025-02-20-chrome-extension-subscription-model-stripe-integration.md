@@ -1,7 +1,11 @@
 ---
 layout: post
 title: "Chrome Extension Subscription Model — Complete Stripe Integration Tutorial"
+<<<<<<< HEAD
 description: "Build a subscription Chrome extension with Stripe. Learn payment links, customer portal setup, webhook handling, license validation, and feature gating."
+=======
+description: "Build a subscription-based Chrome extension with Stripe. Master payment links, customer portal, webhooks, license validation, and feature gating for 2025."
+>>>>>>> quality/fix-frontmatter-a6-r5
 date: 2025-02-20
 categories: [tutorials, monetization]
 tags: [stripe, subscription-model, extension-payments, license-validation, chrome-extension-monetization]

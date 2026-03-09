@@ -1,7 +1,11 @@
 ---
 layout: post
 title: "Chrome Extension Analytics — Track Usage Without Invading Privacy"
+<<<<<<< HEAD
 description: "Add privacy-respecting analytics to Chrome extensions. Track events, analyze feature usage, measure funnels, and report crashes while respecting user privacy."
+=======
+description: "Privacy-respecting analytics for Chrome extensions. Learn event tracking, feature usage, funnel analysis, and crash reporting without collecting user data."
+>>>>>>> quality/fix-frontmatter-a6-r5
 date: 2025-02-24
 categories: [guides, analytics]
 tags: [extension-analytics, privacy-first-analytics, usage-tracking, chrome-extension-telemetry, gdpr-compliant]
