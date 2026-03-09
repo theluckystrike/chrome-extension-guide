@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "window resizer extension, resize browser chrome, responsive design extension, chrome window management, browser resize tool"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-window-resizer-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-window-resizer-chrome-extension/"
 ---
 
 # Build a Window Resizer Chrome Extension: Complete Developer's Guide
