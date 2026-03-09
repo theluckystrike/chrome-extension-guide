@@ -634,3 +634,7 @@ History data is sensitive and should be handled securely. Avoid logging URLs to 
 ---
 
 *Part of the [Chrome Extension Guide](https://github.com/theluckystrike/chrome-extension-guide) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

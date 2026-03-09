@@ -148,3 +148,11 @@ Start implementing React Query in your Chrome extensions today, and experience t
 ---
 
 *This comprehensive guide covers the essential aspects of using React Query in Chrome extensions. For more information and advanced techniques, refer to the official TanStack Query documentation and the Chrome Extension development guides.*
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

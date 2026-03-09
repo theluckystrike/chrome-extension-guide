@@ -921,3 +921,11 @@ This extension solves a real problem for designers and developers while providin
 Remember to test thoroughly before publishing and to respond promptly to user feedback once your extension is live in the Chrome Web Store. With dedication and iteration, your font pairing extension could become an essential tool for thousands of designers worldwide.
 
 Start building today and transform how people think about typography!
+---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
