@@ -404,6 +404,132 @@ Now that you have a working crypto ticker, consider adding these enhancements to
 
 ---
 
+## Advanced: Implementing Price Alerts
+
+Here's how to implement price alerts in your crypto ticker:
+
+```javascript
+// popup.js - Add price alert functionality
+class PriceAlertManager {
+  constructor() {
+    this.alerts = [];
+    this.loadAlerts();
+  }
+
+  async loadAlerts() {
+    const result = await chrome.storage.local.get('priceAlerts');
+    this.alerts = result.priceAlerts || [];
+  }
+
+  async addAlert(coinId, targetPrice, direction) {
+    const alert = {
+      id: Date.now(),
+      coinId,
+      targetPrice,
+      direction, // 'above' or 'below'
+      createdAt: new Date().toISOString()
+    };
+    
+    this.alerts.push(alert);
+    await chrome.storage.local.set({ priceAlerts: this.alerts });
+    this.checkAlerts();
+  }
+
+  async checkAlerts() {
+    const prices = await this.fetchPrices();
+    
+    for (const alert of this.alerts) {
+      const coin = prices.find(p => p.id === alert.coinId);
+      if (!coin) continue;
+
+      const shouldTrigger = 
+        (alert.direction === 'above' && coin.current_price >= alert.targetPrice) ||
+        (alert.direction === 'below' && coin.current_price <= alert.targetPrice);
+
+      if (shouldTrigger) {
+        this.triggerAlert(alert, coin);
+      }
+    }
+  }
+
+  triggerAlert(alert, coin) {
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icons/icon48.png',
+      title: 'Price Alert!',
+      message: `${coin.name} is now $${coin.current_price.toLocaleString()}`
+    });
+    
+    // Remove triggered alert
+    this.alerts = this.alerts.filter(a => a.id !== alert.id);
+    chrome.storage.local.set({ priceAlerts: this.alerts });
+  }
+}
+```
+
+---
+
+## Advanced: Adding Charts and Historical Data
+
+Displaying historical price data makes your extension more useful:
+
+```javascript
+// Fetch historical data and render simple chart
+async function fetchHistoricalData(coinId, days = 7) {
+  const response = await fetch(
+    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`
+  );
+  const data = await response.json();
+  return data.prices; // Array of [timestamp, price]
+}
+
+// Simple ASCII-style chart in popup
+function renderPriceChart(prices) {
+  const min = Math.min(...prices.map(p => p[1]));
+  const max = Math.max(...prices.map(p => p[1]));
+  const range = max - min;
+  
+  const chart = prices.map(([timestamp, price]) => {
+    const percent = (price - min) / range;
+    const chars = ' ▁▂▃▅▆▇█';
+    const charIndex = Math.floor(percent * (chars.length - 1));
+    return chars[charIndex];
+  }).join('');
+  
+  return chart;
+}
+```
+
+---
+
+## Security Best Practices
+
+When building financial extensions, security is paramount:
+
+1. **Use HTTPS for all API calls** - Never send data over insecure connections
+2. **Validate all data** - Sanitize API responses before displaying
+3. **Store sensitive data securely** - Use chrome.storage.encrypt if available
+4. **Minimize permissions** - Only request necessary permissions in manifest
+5. **Handle errors gracefully** - Don't expose internal errors to users
+
+```javascript
+// Validate price data
+function validatePriceData(data) {
+  if (!Array.isArray(data)) return false;
+  
+  return data.every(coin => {
+    return (
+      typeof coin.current_price === 'number' &&
+      coin.current_price > 0 &&
+      typeof coin.id === 'string' &&
+      typeof coin.name === 'string'
+    );
+  });
+}
+```
+
+---
+
 ## Publishing Your Extension {#publishing}
 
 Once you're satisfied with your extension, you can publish it to the Chrome Web Store for others to discover and install. Here's how:

@@ -337,6 +337,108 @@ When things go wrong, debugging service workers can be challenging. Here are tec
    });
    ```
 
+## Advanced Pattern: Service Worker Keep-Alive
+
+For extensions that need to maintain state or connections, implementing a keep-alive mechanism can help:
+
+```javascript
+// Keep-alive using periodic alarms
+chrome.alarms.create('keepAlive', { periodInMinutes: 0.8 });
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'keepAlive') {
+    // Perform minimal operation to keep worker alive
+    chrome.storage.local.get(null).catch(() => {});
+  }
+});
+```
+
+However, use this sparingly. Chrome may still terminate workers under memory pressure, and excessive keep-alive defeats the purpose of the service worker architecture.
+
+## Common Pitfalls and How to Avoid Them
+
+### Pitfall 1: Not Handling Async Operations Properly
+
+```javascript
+// PROBLEM: Not returning true for async operations
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => sendResponse(data));
+  // Missing return true!
+});
+```
+
+```javascript
+// SOLUTION: Always return true for async responses
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => sendResponse(data));
+  return true; // Keeps the message channel open
+});
+```
+
+### Pitfall 2: Memory Leaks from Event Listeners
+
+```javascript
+// PROBLEM: Adding listeners without cleanup
+function init() {
+  chrome.storage.onChanged.addListener(handleStorageChange);
+  chrome.alarms.onAlarm.addListener(handleAlarm);
+  // These persist across worker restarts but can accumulate
+}
+
+// SOLUTION: Use persistent listener management
+const LISTENERS = new Map();
+
+function addListener(name, type, handler) {
+  if (!LISTENERS.has(name)) {
+    if (type === 'storage') {
+      chrome.storage.onChanged.addListener(handler);
+    } else if (type === 'alarm') {
+      chrome.alarms.onAlarm.addListener(handler);
+    }
+    LISTENERS.set(name, { type, handler });
+  }
+}
+```
+
+### Pitfall 3: Race Conditions in Storage Operations
+
+```javascript
+// PROBLEM: Multiple async operations without coordination
+async function updateUser(user) {
+  const current = await chrome.storage.local.get('user');
+  const updated = { ...current.user, ...user };
+  await chrome.storage.local.set({ user: updated });
+}
+
+// Multiple calls can cause race conditions
+updateUser({ name: 'Alice' });
+updateUser({ age: 30 }); // May overwrite name!
+
+// SOLUTION: Use a queue or storage transactions
+class StorageQueue {
+  constructor() {
+    this.queue = Promise.resolve();
+  }
+  
+  async updateUser(updates) {
+    return new Promise((resolve) => {
+      this.queue = this.queue.then(async () => {
+        const current = await chrome.storage.local.get('user');
+        const updated = { ...current.user, ...updates };
+        await chrome.storage.local.set({ user: updated });
+        resolve(updated);
+      });
+    });
+  }
+}
+
+const storage = new StorageQueue();
+```
+
 ## Conclusion
 
 Manifest V3 service workers require a different mental model than Manifest V2 background pages. The key insight is that **your service worker will terminate**. By designing for this reality—using storage for state, alarms for scheduling, and message passing for communication—you can build robust extensions that work reliably.

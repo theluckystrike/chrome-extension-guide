@@ -640,4 +640,167 @@ Now that you have the foundation, explore these resources to deepen your knowled
 
 ---
 
+## Advanced: React Patterns for Complex Extensions
+
+### Handling Service Worker Restarts
+
+In Manifest V3, service workers can terminate after periods of inactivity. Your React popup must handle this gracefully:
+
+```tsx
+// hooks/useServiceWorker.ts
+import { useEffect, useState, useCallback } from 'react';
+
+export function useServiceWorker() {
+  const [isReady, setIsReady] = useState(false);
+  const [lastError, setLastError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    // Check if we can communicate with the service worker
+    const checkConnection = async () => {
+      try {
+        const response = await chrome.runtime.sendMessage({ 
+          type: 'PING' 
+        });
+        setIsReady(true);
+      } catch (error) {
+        setLastError(error as Error);
+        setIsReady(false);
+      }
+    };
+
+    checkConnection();
+
+    // Listen for service worker changes
+    const handleSWChange = () => {
+      checkConnection();
+    };
+
+    chrome.runtime.onStartup.addListener(handleSWChange);
+    chrome.runtime.onInstalled.addListener(handleSWChange);
+
+    return () => {
+      chrome.runtime.onStartup.removeListener(handleSWChange);
+      chrome.runtime.onInstalled.removeListener(handleSWChange);
+    };
+  }, []);
+
+  return { isReady, lastError };
+}
+```
+
+### Optimizing Popup Performance
+
+Popup performance is critical for user experience. Here's how to optimize:
+
+```tsx
+// Lazy load heavy components
+const HeavyChart = React.lazy(() => import('./components/HeavyChart'));
+
+function Popup() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <HeavyChart />
+    </Suspense>
+  );
+}
+
+// Use React.memo for static content
+const StaticHeader = React.memo(function StaticHeader() {
+  return <header>My Extension</header>;
+});
+```
+
+### Error Boundaries for Robust Extensions
+
+```tsx
+// components/ErrorBoundary.tsx
+import { Component, ReactNode } from 'react';
+
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+  error?: Error;
+}
+
+export class ErrorBoundary extends Component<Props, State> {
+  state: State = { hasError: false };
+
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Extension Error:', error, errorInfo);
+    // Report to error tracking service
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="error-screen">
+          <h2>Something went wrong</h2>
+          <button onClick={() => this.setState({ hasError: false })}>
+            Try Again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+### Testing React Extensions
+
+```tsx
+// tests/popup.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Popup } from '../Popup';
+import { chrome } from '__mocks__/chrome';
+
+// Mock Chrome APIs
+beforeEach(() => {
+  chrome.storage.local.get.mockResolvedValue({});
+  chrome.storage.local.set.mockResolvedValue(undefined);
+});
+
+test('renders settings panel', () => {
+  render(<Popup />);
+  expect(screen.getByText('Extension Settings')).toBeInTheDocument();
+});
+
+test('toggles notification setting', async () => {
+  render(<Popup />);
+  
+  const toggle = screen.getByRole('checkbox');
+  fireEvent.click(toggle);
+  
+  expect(chrome.storage.local.set).toHaveBeenCalledWith({
+    settings: expect.objectContaining({ notifications: true })
+  });
+});
+```
+
+---
+
+## Conclusion
+
+Building Chrome extensions with React in 2025 offers a powerful combination of modern development practices and browser integration. The key to success lies in understanding the unique constraints of extension architecture—service worker lifecycles, context isolation, and Chrome API interactions—while leveraging React's strengths in component-based architecture and state management.
+
+Remember these core principles:
+- Use Vite or Parcel for fast development builds
+- Implement proper state management with persistence
+- Handle service worker lifecycle gracefully
+- Test thoroughly across different scenarios
+- Follow Chrome Web Store policies for successful publication
+
+With these patterns and practices, you're well-equipped to build professional, production-ready Chrome extensions with React.
+
+---
+
 *Built by theluckystrike at [zovo.one](https://zovo.one)*

@@ -408,6 +408,192 @@ function handleStreamingAlert(data) {
 
 Implementing streaming API responses in Chrome extensions opens up possibilities for creating dynamic, real-time experiences that keep users engaged and informed. Whether you choose Server-Sent Events for simple unidirectional updates, WebSockets for bidirectional communication, or streaming fetch for large data processing, the key to success lies in understanding the unique constraints of the Chrome extension environment.
 
+---
+
+## Real-World Use Cases
+
+Here are practical examples of streaming implementations in production extensions:
+
+### 1. Live Notification Feed
+
+```javascript
+// Real-time notification stream
+class NotificationStream {
+  constructor() {
+    this.eventSource = null;
+    this.notifications = [];
+  }
+
+  connect() {
+    this.eventSource = new EventSource('https://api.example.com/notifications/stream');
+    
+    this.eventSource.onmessage = (event) => {
+      const notification = JSON.parse(event.data);
+      this.notifications.unshift(notification);
+      this.notifyListeners(notification);
+      this.updateBadge(this.notifications.length);
+    };
+
+    this.eventSource.onerror = () => {
+      this.reconnect();
+    };
+  }
+
+  updateBadge(count) {
+    chrome.action.setBadgeText({ 
+      text: count > 0 ? String(count) : '' 
+    });
+  }
+
+  reconnect() {
+    setTimeout(() => this.connect(), 5000);
+  }
+}
+```
+
+### 2. Collaborative Editing
+
+```javascript
+// WebSocket-based collaborative editing
+class CollaborativeEditor {
+  constructor(documentId) {
+    this.documentId = documentId;
+    this.websocket = null;
+    this.pendingChanges = [];
+  }
+
+  connect() {
+    this.websocket = new WebSocket(
+      `wss://api.example.com/documents/${this.documentId}`
+    );
+
+    this.websocket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      this.handleMessage(message);
+    };
+  }
+
+  sendChange(operation) {
+    if (this.websocket.readyState === WebSocket.OPEN) {
+      this.websocket.send(JSON.stringify({
+        type: 'operation',
+        operation
+      }));
+    } else {
+      this.pendingChanges.push(operation);
+    }
+  }
+}
+```
+
+### 3. Stock/CRYPTO Portfolio Tracker
+
+```javascript
+// Real-time portfolio updates
+class PortfolioTracker {
+  constructor() {
+    this.prices = {};
+    this.connectWebSocket();
+  }
+
+  connectWebSocket() {
+    this.ws = new WebSocket('wss://stream.example.com/portfolio');
+
+    this.ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      
+      if (data.type === 'price_update') {
+        this.prices[data.symbol] = data.price;
+        this.updatePortfolioValue();
+      }
+    };
+  }
+
+  updatePortfolioValue() {
+    // Calculate total portfolio value
+    // Update extension badge or popup
+  }
+}
+```
+
+---
+
+## Testing Streaming Implementations
+
+Testing streaming functionality requires special considerations:
+
+```javascript
+// Test SSE reconnection
+async function testSSE() {
+  const manager = new SSEManager();
+  
+  // Simulate connection
+  manager.connect();
+  
+  // Wait for initial data
+  await delay(1000);
+  expect(manager.lastData).toBeDefined();
+  
+  // Simulate disconnection
+  manager.eventSource.close();
+  
+  // Verify reconnection attempts
+  await delay(5000);
+  expect(manager.reconnectAttempts).toBeGreaterThan(0);
+}
+
+// Test WebSocket message handling
+async function testWebSocket() {
+  const ws = new WebSocket('wss://echo.websocket.org');
+  
+  const response = await new Promise((resolve) => {
+    ws.onmessage = (event) => resolve(JSON.parse(event.data));
+    ws.send(JSON.stringify({ test: 'message' }));
+  });
+  
+  expect(response.test).toBe('message');
+}
+```
+
+---
+
+## Performance Monitoring
+
+Track your streaming implementation's performance:
+
+```javascript
+class StreamMetrics {
+  constructor() {
+    this.metrics = {
+      messagesReceived: 0,
+      bytesReceived: 0,
+      errors: 0,
+      reconnectCount: 0,
+      latencySum: 0,
+      latencyCount: 0
+    };
+  }
+
+  recordMessage(size) {
+    this.metrics.messagesReceived++;
+    this.metrics.bytesReceived += size;
+  }
+
+  recordLatency(latency) {
+    this.metrics.latencySum += latency;
+    this.metrics.latencyCount++;
+  }
+
+  getAverageLatency() {
+    return this.metrics.latencySum / this.metrics.latencyCount;
+  }
+
+  report() {
+    console.table(this.metrics);
+  }
+}
+```
+
 Remember to design for failure, optimize for the service worker lifecycle, prioritize security, and thoroughly test your implementation across all extension contexts. With these best practices in mind, you're well-equipped to build robust, production-ready extensions that handle real-time data feeds effectively.
 
 The streaming capabilities you've learned in this guide form the foundation for building sophisticated Chrome extensions—everything from live collaboration tools to real-time monitoring dashboards becomes achievable when you master these techniques. Start implementing streaming in your extensions today, and unlock the full potential of real-time web functionality within the Chrome ecosystem.
