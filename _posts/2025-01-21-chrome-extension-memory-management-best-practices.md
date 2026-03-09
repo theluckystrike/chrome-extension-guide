@@ -353,4 +353,6 @@ Remember: every megabyte your extension doesn't consume is a megabyte available 
 
 ---
 
+*Last updated: January 2025*
+
 *Built by theluckystrike at [zovo.one](https://zovo.one)*
