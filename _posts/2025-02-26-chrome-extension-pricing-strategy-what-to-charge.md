@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Pricing Strategy — What to Charge and Why"
 description: "Data-driven pricing guide for Chrome extensions. Competitive analysis, willingness-to-pay research, pricing tiers, annual vs monthly, and price anchoring tactics."
 date: 2025-02-26
