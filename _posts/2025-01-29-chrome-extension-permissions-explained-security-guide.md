@@ -1,11 +1,10 @@
 ---
-layout: default
+layout: post
 title: "Chrome Extension Permissions Explained — Complete Security Guide for Users and Developers"
-description: "Understand every Chrome extension permission. What they mean, why extensions request them, and how to evaluate extension safety. Developer guide to minimal permissions."
+description: "Understand every Chrome extension permission: what they mean, why extensions request them, and how to evaluate extension safety. A developer guide to minimal permissions."
 date: 2025-01-29
 categories: [guides, security]
 tags: [chrome-permissions, extension-security, manifest-permissions, activeTab, host-permissions]
-author: theluckystrike
 ---
 
 # Chrome Extension Permissions Explained — Complete Security Guide for Users and Developers
