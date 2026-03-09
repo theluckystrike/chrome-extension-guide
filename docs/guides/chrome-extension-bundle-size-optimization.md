@@ -26,7 +26,7 @@ User perception matters significantly in extension marketplaces. Extensions disp
 
 ## Build Tool Configuration for Extensions
 
-Modern bundlers including Webpack, Vite, and Rollup provide sophisticated optimization capabilities specifically relevant to Chrome extension development. Understanding how to configure these tools for extension contexts ensures optimal output without manual post-processing.
+Modern bundlers including Webpack, Vite, and Rollup provide sophisticated optimization capabilities specifically relevant to Chrome extension development. Understanding how to configure these tools for extension contexts ensures optimal output without manual post-processing. For detailed setup guides, see our [Vite extension setup guide](/guides/vite-extension-setup/), [Webpack extension setup guide](/guides/webpack-extension-setup/), and [Rollup extension setup guide](/guides/rollup-extension-setup/).
 
 ### Vite Configuration for Extensions
 
@@ -509,7 +509,7 @@ build().then(() => {
 });
 ```
 
-Create custom analysis scripts that identify the largest dependencies and track changes over time. This data guides decisions about replacing heavy dependencies with lighter alternatives.
+Create custom analysis scripts that identify the largest dependencies and track changes over time. This data guides decisions about replacing heavy dependencies with lighter alternatives. For more on extension performance, see our [performance optimization guide](/guides/performance-optimization/) and [Chrome extension performance best practices](/guides/chrome-extension-performance-best-practices/).
 
 ---
 
@@ -585,7 +585,7 @@ Chrome extension bundle size optimization requires systematic attention througho
 
 Remember that optimization is iterative. Set measurable goals, track progress regularly, and continuously evaluate whether new dependencies justify their bundle cost. Your users will appreciate the fast, lightweight extension experience, and you'll benefit from better reviews and higher retention rates.
 
-Start by auditing your current bundle size, then implement the strategies most relevant to your extension's architecture. The techniques in this guide apply universally, but prioritize changes that address your specific bottlenecks first.
+Start by auditing your current bundle size, then implement the strategies most relevant to your extension's architecture. The techniques in this guide apply universally, but prioritize changes that address your specific bottlenecks first. For choosing the right framework for your extension, see our [WXT vs Plasmo vs CRXJS framework comparison](/guides/wxt-vs-plasmo-vs-crxjs-extension-frameworks/).
 
 ---
 
