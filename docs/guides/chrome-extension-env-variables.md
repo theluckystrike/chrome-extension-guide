@@ -222,6 +222,7 @@ const redirectUri = isDev
 
 Inject secrets from CI environment variables:
 
+{% raw %}
 ```yaml
 {% raw %}
 # GitHub Actions example
@@ -232,6 +233,7 @@ Inject secrets from CI environment variables:
   run: npm run build
 {% endraw %}
 ```
+{% endraw %}
 
 ```yaml
 # Netlify example

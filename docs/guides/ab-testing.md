@@ -959,6 +959,7 @@ function useExperiment(experimentId) {
 
 ### React Component Example
 
+{% raw %}
 ```javascript
 // components/ExperimentWrapper.jsx
 function ExperimentWrapper({ experimentId, children, variants }) {
@@ -982,6 +983,7 @@ function ExperimentWrapper({ experimentId, children, variants }) {
   }}
 />
 ```
+{% endraw %}
 
 ## Testing Experiments
 

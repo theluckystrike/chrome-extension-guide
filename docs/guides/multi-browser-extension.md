@@ -201,6 +201,7 @@ test('extension popup loads', async ({ page, context }) => {
 
 Set up continuous integration to test across multiple browsers:
 
+{% raw %}
 ```yaml
 # .github/workflows/test.yml
 jobs:
@@ -213,6 +214,7 @@ jobs:
       - name: Run tests on ${{ matrix.browser }}
         run: npm test -- --browser=${{ matrix.browser }}
 ```
+{% endraw %}
 
 ## Publishing to Multiple Stores
 

@@ -675,6 +675,7 @@ jobs:
 
 ### Testing Across Chrome Versions {#chrome-versions}
 
+{% raw %}
 ```yaml
 # .github/workflows/multi-browser.yml
 jobs:
@@ -703,6 +704,7 @@ jobs:
             --browser=chromium \
             --browser-channel=${{ matrix.channel }}
 ```
+{% endraw %}
 
 ## Manual Testing Checklist {#manual-testing-checklist}
 

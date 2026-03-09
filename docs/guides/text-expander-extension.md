@@ -338,6 +338,7 @@ export const snippetRepository = new SnippetRepository();
 
 ### Expansion Engine (services/expansion-engine.ts)
 
+{% raw %}
 ```typescript
 import { Snippet, ExpansionContext, ExpansionResult, ExpansionOptions } from '../shared/types';
 import { snippetRepository } from './snippet-repository';
@@ -439,6 +440,7 @@ export class ExpansionEngine {
   }
 }
 ```
+{% endraw %}
 
 ---
 

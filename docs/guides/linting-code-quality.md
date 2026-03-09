@@ -194,6 +194,7 @@ Write custom rules for patterns specific to extension development. Place these i
 
 Using `innerHTML` in content scripts is a security risk (XSS via page-controlled data) and violates Chrome Web Store policy.
 
+{% raw %}
 ```javascript
 {% raw %}
 // eslint-plugins/no-innerhtml-in-content.js
@@ -239,6 +240,7 @@ export default {
 };
 {% endraw %}
 ```
+{% endraw %}
 
 ### Require Error Handling on Chrome APIs {#require-error-handling-on-chrome-apis}
 

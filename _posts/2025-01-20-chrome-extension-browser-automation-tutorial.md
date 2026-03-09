@@ -725,6 +725,7 @@ async function waitForNetworkIdle(tabId, timeout = 3000) {
 
 For more complex automation, you need loops and conditionals:
 
+{% raw %}
 ```javascript
 // Example: Loop through a list of items
 const loopExample = {
@@ -752,6 +753,7 @@ const conditionalExample = {
   ]
 };
 ```
+{% endraw %}
 
 ---
 

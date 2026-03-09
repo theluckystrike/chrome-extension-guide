@@ -530,6 +530,7 @@ Continuous integration in monorepos requires determining which packages changed 
 
 Turborepo's affected detection identifies packages changed since a base commit:
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/ci.yml
@@ -564,6 +565,7 @@ jobs:
       - run: pnpm turbo run build --filter=...[${{ steps.affected.outputs.affected }}]
 {% endraw %}
 ```
+{% endraw %}
 
 The `--dry-run=json` flag outputs a JSON report of which packages would be built without actually building them. This drives conditional execution of test and build jobs.
 
@@ -596,6 +598,7 @@ The extension tests depend on shared and UI tests completing, but the shared and
 
 CI caching dramatically speeds up monorepo builds by reusing outputs from previous runs:
 
+{% raw %}
 ```yaml
 {% raw %}
 - uses: actions/cache@v4
@@ -608,6 +611,7 @@ CI caching dramatically speeds up monorepo builds by reusing outputs from previo
       ${{ runner.os }}-turbo-
 {% endraw %}
 ```
+{% endraw %}
 
 Turborepo also supports remote caching through Vercel or self-hosted servers, enabling cache sharing across CI runners.
 
@@ -777,6 +781,7 @@ zip -r extension.zip *
 
 GitHub Actions can automate publishing on tag creation:
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/publish.yml
@@ -798,6 +803,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 {% endraw %}
 ```
+{% endraw %}
 
 ---
 

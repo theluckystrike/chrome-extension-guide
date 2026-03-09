@@ -161,6 +161,7 @@ The refresh token is particularly important because it allows the pipeline to ob
 
 Here's a job that uploads and publishes your extension:
 
+{% raw %}
 ```yaml
 publish:
   runs-on: ubuntu-latest
@@ -183,6 +184,7 @@ publish:
         zip-file: extension.zip
         publish: true
 ```
+{% endraw %}
 
 This job only runs when a release is published, giving you control over when changes go live. Setting `publish: true` automatically publishes the extension after review (if auto-publishing is enabled in your dashboard) or submits it for review.
 
@@ -192,6 +194,7 @@ Semantic versioning brings predictability to your release process by enforcing a
 
 To implement semantic release, add the semantic-release package and configure your commit message format. Use the conventional commits specification, where commits are prefixed with `feat:`, `fix:`, `docs:`, `refactor:`, and so on. The semantic release tool analyzes these messages to determine whether to bump major, minor, or patch versions.
 
+{% raw %}
 ```yaml
 - name: Release
   if: github.ref == 'refs/heads/main'
@@ -200,6 +203,7 @@ To implement semantic release, add the semantic-release package and configure yo
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
+{% endraw %}
 
 Configure semantic-release to publish to both npm (if you have a package) and create GitHub releases. When you merge a pull request with a `feat:` commit, the version bumps from 1.0.0 to 1.1.0. A `fix:` commit would bump from 1.0.0 to 1.0.1. Breaking changes in commit messages trigger major version bumps.
 
@@ -211,6 +215,7 @@ Secret management is critical for security because your pipeline needs access to
 
 GitHub's secret storage encrypts values at rest and only decrypts them during workflow runs. Never print secrets to logs—even in error messages. Use the `no_log` option in conditional steps when necessary:
 
+{% raw %}
 ```yaml
 - name: Authenticate with Google
   run: |
@@ -219,6 +224,7 @@ GitHub's secret storage encrypts values at rest and only decrypts them during wo
   env:
     CWS_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
 ```
+{% endraw %}
 
 Consider using different secrets for different environments. For example, you might have a test extension ID and credentials for staging and a production extension ID for live publishing. This prevents accidental publishing to production and allows you to test your pipeline safely.
 

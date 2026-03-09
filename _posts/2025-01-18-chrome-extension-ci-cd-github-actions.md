@@ -59,6 +59,7 @@ This configuration triggers the workflow on every push and pull request to the m
 
 The testing phase is critical for maintaining extension quality. Your workflow should run comprehensive tests across multiple environments to catch compatibility issues early. Here is a complete test job configuration:
 
+{% raw %}
 ```yaml
 jobs:
   test:
@@ -90,6 +91,7 @@ jobs:
         with:
           files: ./coverage/lcov.info
 ```
+{% endraw %}
 
 This configuration uses a matrix strategy to run tests across three Node.js versions, ensuring your extension remains compatible with current and LTS Node releases. The workflow includes linting, testing, and coverage reporting, providing comprehensive validation of your code quality.
 
@@ -171,6 +173,7 @@ Add the following secrets to your repository:
 
 Now create the deployment job:
 
+{% raw %}
 ```yaml
   deploy:
     needs: build
@@ -199,6 +202,7 @@ Now create the deployment job:
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
 ```
+{% endraw %}
 
 This deployment job only runs on the main branch after a successful build, preventing accidental deployments from feature branches. The workflow uses a dedicated action for Web Store publishing, simplifying the API interactions.
 
@@ -243,6 +247,7 @@ Configure standard-version in a separate configuration file or add to package.js
 
 Then update your workflow to include version bumping:
 
+{% raw %}
 ```yaml
   release:
     needs: build
@@ -269,6 +274,7 @@ Then update your workflow to include version bumping:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
+{% endraw %}
 
 This configuration automatically bumps the version based on git tags, generates a changelog, and creates the appropriate GitHub release.
 
@@ -291,6 +297,7 @@ required_status checks:
 
 Third, use caching effectively to speed up workflows. Node.js projects benefit significantly from caching npm dependencies:
 
+{% raw %}
 ```yaml
 - name: Cache npm dependencies
   uses: actions/cache@v4
@@ -300,6 +307,7 @@ Third, use caching effectively to speed up workflows. Node.js projects benefit s
     restore-keys: |
       ${{ runner.os }}-npm-
 ```
+{% endraw %}
 
 Fourth, implement proper secret management. Never hardcode credentials in your workflow files. Use GitHub Secrets for all sensitive information, including API keys, tokens, and certificates. Review access permissions regularly and rotate credentials periodically.
 
@@ -407,11 +415,13 @@ If builds fail due to dependency issues, ensure your lock files are committed an
 
 For Web Store submission failures, verify your credentials are current and your extension meets all policy requirements. The Chrome Web Store API provides detailed error messages—log them for debugging:
 
+{% raw %}
 ```yaml
       - name: Debug Web Store response
         if: failure()
         run: echo "${{ steps.publish.outputs }}"
 ```
+{% endraw %}
 
 ---
 

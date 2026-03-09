@@ -172,6 +172,7 @@ fs.writeFileSync('dist/manifest.json', JSON.stringify({ ...base, ...browser }, n
 
 ## CI Testing
 
+{% raw %}
 ```yaml
 jobs:
   test:
@@ -181,6 +182,7 @@ jobs:
     steps:
       - run: npm test -- --browser=${{ matrix.browser }}
 ```
+{% endraw %}
 
 ---
 

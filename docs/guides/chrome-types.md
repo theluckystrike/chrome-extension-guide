@@ -201,6 +201,7 @@ interface StorageData { settings: Record<string, unknown>; }
 
 ## JSDoc for JavaScript
 
+{% raw %}
 ```javascript
 /** @typedef {{ theme: string }} Config */
 /** @param {Config} config */
@@ -210,6 +211,7 @@ async function initContentScript(config) {
   console.log(tab.title);
 }
 ```
+{% endraw %}
 
 ## Reference
 

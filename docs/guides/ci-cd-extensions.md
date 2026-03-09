@@ -303,6 +303,7 @@ npx chrome-webstore-upload-cli upload \
 
 ### GitHub Action for CWS Upload
 
+{% raw %}
 ```yaml
 - name: Upload to Chrome Web Store
   uses: asaskevich/chrome-webstore-upload-action@v1
@@ -313,6 +314,7 @@ npx chrome-webstore-upload-cli upload \
     refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
     upload-source: extension.zip
 ```
+{% endraw %}
 
 ---
 
@@ -390,6 +392,7 @@ web-ext sign \
 
 Run builds for multiple browsers simultaneously:
 
+{% raw %}
 ```yaml
 # .github/workflows/multi-browser.yml
 name: Multi-Browser CI
@@ -417,6 +420,7 @@ jobs:
           name: extension-${{ matrix.browser }}
           path: dist-${{ matrix.browser }}/
 ```
+{% endraw %}
 
 ---
 
@@ -438,6 +442,7 @@ main (production)
 
 ### Release Branch Workflow
 
+{% raw %}
 ```yaml
 # Create release branch
 - name: Create release branch
@@ -446,6 +451,7 @@ main (production)
     # Make version changes
     git push origin release/v${{ github.event.inputs.version }}
 ```
+{% endraw %}
 
 ---
 
@@ -576,6 +582,7 @@ Store credentials securely in GitHub Secrets:
 
 ## Complete CI/CD Pipeline Example
 
+{% raw %}
 ```yaml
 # .github/workflows/release.yml
 name: Release Pipeline
@@ -643,6 +650,7 @@ jobs:
           upload-source: extension.zip
           action: publish
 ```
+{% endraw %}
 
 ---
 
