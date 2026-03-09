@@ -487,7 +487,9 @@ Remember that your landing page is a living asset. Update it with new features, 
 Continue learning about Chrome extension growth with these comprehensive guides:
 
 - [How to Market Your Chrome Extension — From 0 to 10,000 Users](/2025/02/18/how-to-market-chrome-extension-0-to-10000-users/) — Complete marketing playbook covering content marketing, Product Hunt, Reddit strategy, and paid acquisition
+- [Extension Marketing Playbook](https://theluckystrike.github.io/extension-marketing-playbook/) — Comprehensive strategies for growing your Chrome extension audience
 - [Chrome Extension Monetization Strategies That Work in 2025](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Proven strategies for turning your extension into a revenue stream
+- [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) — Detailed guides on freemium models, Stripe integration, and subscription architecture
 - [Chrome Web Store Listing Optimization](/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your CWS conversion rate with proven listing improvements
 - [Chrome Web Store SEO Guide](/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/) — Rank higher in Chrome Web Store search results
 
