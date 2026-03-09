@@ -227,6 +227,7 @@ export default {
 
 Now let us create the user interface for the popup. We will use React for a modern, interactive experience. Update `src/popup.tsx`:
 
+{% raw %}
 ```tsx
 import { useState, useEffect } from "react"
 import { sendMessage } from "@plasmohq/messaging"
@@ -419,6 +420,7 @@ function Popup() {
 
 export default Popup
 ```
+{% endraw %}
 
 ### Step 4: Adding Storage Persistence
 
@@ -440,6 +442,7 @@ function Popup() {
 
 For more complex settings, create an options page at `src/options.tsx`:
 
+{% raw %}
 ```tsx
 import { useStorage } from "@plasmohq/storage"
 
@@ -492,6 +495,7 @@ function Options() {
 
 export default Options
 ```
+{% endraw %}
 
 ---
 

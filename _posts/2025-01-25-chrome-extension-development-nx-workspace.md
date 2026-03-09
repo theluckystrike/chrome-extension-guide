@@ -488,6 +488,7 @@ This workflow runs linting and tests for all projects, then builds only the affe
 
 You can extend the CI pipeline to automatically publish extensions when changes are merged:
 
+{% raw %}
 ```yaml
 - name: Build and Package
   run: |
@@ -504,6 +505,7 @@ You can extend the CI pipeline to automatically publish extensions when changes 
       --refresh-token ${{ secrets.REFRESH_TOKEN }} \
       --zip-path my-extension.zip
 ```
+{% endraw %}
 
 This automation ensures your extensions are always built consistently and deployed without manual intervention.
 
