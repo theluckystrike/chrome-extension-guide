@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Building Chrome Extensions with React — Complete Developer Guide (2025)"
-description: "Step-by-step guide to building Chrome extensions with React in 2025. Learn project setup, popup UI creation, content scripts with React, state management, hot reload configuration, and production build optimization."
+description: "Step-by-step guide to building Chrome extensions with React. Covers project setup, popup UI, content scripts, state management, hot reload, and production."
 date: 2025-02-01
-categories: [Chrome Extensions, Tutorials]
+categories: [tutorials, frameworks]
 tags: [react, chrome-extension, react-chrome-extension, popup-ui, content-scripts]
-keywords: "chrome extension react, build react chrome extension, react chrome extension tutorial, react extension popup, chrome extension with react, manifest v3 react"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/01/building-chrome-extensions-with-react-complete-guide/"
+author: theluckystrike
 ---
 
 # Building Chrome Extensions with React — Complete Developer Guide (2025)

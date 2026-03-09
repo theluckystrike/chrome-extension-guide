@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Building Chrome Extensions with Vue.js — Complete Developer Guide (2025)"
-description: "Build Chrome extensions with Vue 3 and the Composition API. Complete 2025 guide covers popup UI creation, content scripts integration, Pinia state management, and production builds for the Chrome Web Store."
+description: "Build Chrome extensions with Vue 3 and the Composition API. Covers popup UI, content scripts, Pinia state management, production builds, and deployment."
 date: 2025-02-02
-categories: [Chrome Extensions, Tutorials]
+categories: [tutorials, frameworks]
 tags: [vue, vue3, chrome-extension, vue-chrome-extension, composition-api]
-keywords: "chrome extension vue, build vue chrome extension, vue 3 chrome extension, vue chrome extension tutorial, vue extension popup, manifest v3 vue"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/02/building-chrome-extensions-with-vue-complete-guide/"
+author: theluckystrike
 ---
 
 # Building Chrome Extensions with Vue.js — Complete Developer Guide (2025)

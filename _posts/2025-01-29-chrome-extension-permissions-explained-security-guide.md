@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Chrome Extension Permissions Explained — Complete Security Guide for Users and Developers"
-description: "Understand every Chrome extension permission. Learn what they mean, why extensions request them, and how to evaluate extension safety. Complete developer guide to minimal permissions and security best practices."
+description: "Understand every Chrome extension permission. Learn what they mean, why extensions request them, and how to evaluate extension safety with this developer guide."
 date: 2025-01-29
-categories: [Chrome Extensions, Security]
+categories: [guides, security]
 tags: [chrome-permissions, extension-security, manifest-permissions, activeTab, host-permissions]
-keywords: "chrome extension permissions, extension security guide, manifest permissions, activeTab permission, host permissions, chrome extension safety, minimal permissions guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-permissions-explained-security-guide/"
+author: theluckystrike
 ---
 
 # Chrome Extension Permissions Explained — Complete Security Guide for Users and Developers
