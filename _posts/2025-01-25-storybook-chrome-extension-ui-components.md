@@ -124,6 +124,7 @@ This organization makes it intuitive for developers to locate relevant stories b
 
 When writing component stories, leverage Storybook's Args syntax to create multiple variations from a single definition. This approach allows you to demonstrate how components appear in different states—disabled, loading, error states, or with different content—without duplicating story definitions:
 
+{% raw %}
 ```javascript
 // Button.stories.js
 export default {
@@ -169,6 +170,7 @@ export const AllVariants = {
   )
 };
 ```
+{% endraw %}
 
 ---
 
