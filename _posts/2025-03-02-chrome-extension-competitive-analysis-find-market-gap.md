@@ -40,6 +40,8 @@ Leverage the store's filtering options to sort by rating, number of reviews, and
 
 Document every extension you find, even indirectly related ones. The competitive landscape is broader than you think. A PDF annotation tool might compete indirectly with a note-taking extension for the same users' workflow attention.
 
+For tips on optimizing your own Chrome Web Store listing once you've identified your competitive position, see our [Chrome Web Store Listing Optimization Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate).
+
 ---
 
 ## Feature Matrix Construction
@@ -124,7 +126,7 @@ Trial periods: How long can users test premium features before paying? Free tier
 
 Upgrade paths: How does the free-to-paid conversion work? What features are locked, and do those locks feel reasonable or manipulative?
 
-The pricing guide at [Chrome Extension Pricing Strategy](2025-02-26-chrome-extension-pricing-strategy-what-to-charge.md) provides deeper analysis on selecting the right model for your extension.
+The pricing guide at [Chrome Extension Pricing Strategy](https://theluckystrike.github.io/chrome-extension-guide/2025/02/26/chrome-extension-pricing-strategy-what-to-charge) provides deeper analysis on selecting the right model for your extension. For comprehensive monetization strategies including freemium, subscriptions, and payment integration, see the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/).
 
 ---
 
@@ -194,7 +196,7 @@ Analysis reveals that The Great Suspender's abandonment created massive opportun
 
 The gap analysis shows opportunities in: modern UI/UX, advanced rule systems, cross-device sync, AI-powered tab organization, and deep Chrome API integration. Each gap represents a potential winning position for a new entrant.
 
-Our comprehensive [Tab Suspender Pro alternatives comparison](2025-02-25-great-suspender-alternative-best-tab-suspenders-after-malware.md) demonstrates how competitive analysis translates into product strategy.
+Our comprehensive [Tab Suspender Pro alternatives comparison](https://theluckystrike.github.io/chrome-extension-guide/2025/02/25/great-suspender-alternative-best-tab-suspenders-after-malware) demonstrates how competitive analysis translates into product strategy.
 
 ---
 
@@ -212,7 +214,7 @@ Target overlooked user segments. Enterprise users, developers, educators, and sp
 
 Leverage emerging trends. New technologies, platforms, and workflows create new problem spaces. AI integration, remote work tools, and privacy-focused browsing represent emerging areas where competitive positions are still forming.
 
-The monetization guide at [Chrome Extension Monetization Strategies](2025-02-16-chrome-extension-monetization-strategies-that-work-2025.md) explores how blue ocean positioning affects revenue potential.
+The monetization guide at [Chrome Extension Monetization Strategies](https://theluckystrike.github.io/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025) explores how blue ocean positioning affects revenue potential.
 
 ---
 
