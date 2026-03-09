@@ -206,7 +206,7 @@ You cannot improve what you do not measure. Setting up comprehensive analytics h
 
 **Install tracking.** Track not just page visits but actual installations. You can set up goal completions in GA4 that fire when users complete the installation flow. This gives you a true conversion rate rather than just a click-through rate.
 
-**UTM parameters.** Use UTM parameters in your marketing links to track which channels drive the most valuable traffic.区分来自不同来源的流量，例如社交媒体、邮件通讯或付费广告，以便优化您的营销支出。
+**UTM parameters.** Use UTM parameters in your marketing links to track which channels drive the most valuable traffic. Distinguish traffic from different sources, such as social media, email newsletters, or paid advertising, to optimize your marketing spend.
 
 **Behavior flow.** Analyze behavior flow reports to see where users drop off, which pages keep them engaged, and which paths lead to conversion. This insight reveals opportunities to improve your page flow.
 
@@ -234,11 +234,11 @@ A significant portion of your traffic will come from mobile devices. Your landin
 
 Now that you have a high-converting landing page, continue building your growth strategy with these related guides.
 
-- **[Chrome Web Store Optimization Guide](/chrome-extension-guide/docs/cws-optimization/)** — Learn how to optimize your CWS listing to complement your landing page and capture store traffic.
+- **[Chrome Web Store Optimization Guide](/chrome-extension-guide/docs/publishing/cws-listing-optimization/)** — Learn how to optimize your CWS listing to complement your landing page and capture store traffic.
 
-- **[Extension Marketing Playbook](/chrome-extension-guide/docs/marketing-playbook/)** — A comprehensive guide to promoting your extension across multiple channels, from content marketing to paid advertising.
+- **[Extension Marketing Playbook](/chrome-extension-guide/docs/monetization/market-research/)** — A comprehensive guide to promoting your extension across multiple channels, from content marketing to paid advertising.
 
-- **[Extension Monetization Playbook](/chrome-extension-guide/docs/extension-monetization-playbook/)** — Turn your growing user base into revenue with proven monetization strategies.
+- **[Extension Monetization Playbook](/chrome-extension-guide/docs/guides/extension-monetization/)** — Turn your growing user base into revenue with proven monetization strategies.
 
 Building a landing page is not a one-time task. Continuously test, measure, and iterate to improve your conversion rates over time. With a well-optimized landing page working alongside your Chrome Web Store presence, you are equipped to turn every visitor into a loyal user.
 
