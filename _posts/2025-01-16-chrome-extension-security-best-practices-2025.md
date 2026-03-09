@@ -320,6 +320,6 @@ Stay vigilant, keep your dependencies updated, and make security reviews a regul
 
 ## Related Articles
 
-- [Chrome Extension Permissions Explained: A Complete Security Guide](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand how to properly request and manage permissions to minimize security risks.
-- [Privacy-First Chrome Extension Development Guide](/chrome-extension-guide/2025/01/17/privacy-first-chrome-extension-development-guide/) - Build extensions that respect user privacy and data protection.
-- [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implement robust CSP headers to protect against XSS and injection attacks.
+- [Manifest V3 Migration Complete Guide]({% post_url 2025-01-16-manifest-v3-migration-complete-guide-2025 %})
+- [Chrome Extension Development 2025 Complete Beginners Guide]({% post_url 2025-01-16-chrome-extension-development-2025-complete-beginners-guide %})
+- [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
