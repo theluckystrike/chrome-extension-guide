@@ -282,4 +282,8 @@ The extension developers who succeed in 2025 and beyond will be those who treat 
 
 ---
 
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+---
+
 *Built by theluckystrike at [zovo.one](https://zovo.one)*
