@@ -440,7 +440,7 @@ Building a high-converting landing page for your Chrome extension isn't optional
 
 Start by implementing the core elements outlined in this guide: a compelling hero section with inline installation, clear feature presentation, strategic social proof, and proper SEO foundations. Once your page is live, implement analytics tracking and begin testing variations to continuously improve conversion rates.
 
-For additional guidance on maximizing your extension's visibility, explore our [Chrome Web Store SEO guide](/_posts/2025-01-31-chrome-web-store-seo-rank-higher-get-more-installs.md) to optimize your store listing alongside your landing page. To understand comprehensive growth strategies, review our [extension monetization strategies](/_posts/2025-02-16-chrome-extension-monetization-strategies-that-work-2025.md) guide.
+For additional guidance on maximizing your extension's visibility, explore our [Chrome Web Store SEO guide](/_posts/2025-01-31-chrome-web-store-seo-rank-higher-get-more-installs.md) to optimize your store listing alongside your landing page. To understand comprehensive growth strategies, review our [extension monetization strategies](/_posts/2025-02-16-chrome-extension-monetization-strategies-that-work-2025.md) guide. For a complete marketing playbook covering organic and paid acquisition channels, see our [Chrome Extension Marketing Guide](/_posts/2025-02-18-how-to-market-chrome-extension-0-to-10000-users.md).
 
 Your landing page is a living asset—invest in its ongoing optimization and it will compound in value over time, driving installations and building your extension's brand for years to come.
 
