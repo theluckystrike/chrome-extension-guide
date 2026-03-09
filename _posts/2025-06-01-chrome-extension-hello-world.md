@@ -1,10 +1,12 @@
 ---
 layout: post
 title: "Chrome Extension Hello World"
-description: "A simple first extension tutorial - build your very own Chrome extension from scratch"
+description: "Build your first Chrome extension from scratch with this beginner-friendly tutorial. Learn manifest.json structure, create popups, add interactivity, and load your extension in Chrome."
 date: 2025-06-01
 categories: [tutorial]
 tags: [beginner, hello-world, manifest-v3]
+keywords: "chrome extension hello world, first chrome extension tutorial, build chrome extension, manifest v3 tutorial, chrome extension basics"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/01/chrome-extension-hello-world/"
 ---
 
 Building your first Chrome extension is easier than you think. In this comprehensive guide, we'll walk through creating a basic extension from scratch, understanding each component, and getting it running in your browser.

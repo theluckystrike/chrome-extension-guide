@@ -1,10 +1,12 @@
 ---
 layout: post
 title: "Understanding Chrome Extension Permissions"
-description: "Learn about Chrome extension permissions and security best practices"
+description: "Master Chrome extension permissions with this comprehensive guide. Learn about host permissions, API permissions, optional permissions, security best practices, and how to minimize permission requests for better user trust."
 date: 2025-06-02
 categories: [tutorial]
 tags: [permissions, security, manifest, privacy]
+keywords: "chrome extension permissions, manifest v3 permissions, chrome api permissions, extension security best practices, host permissions chrome"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/02/chrome-extension-permissions-basics/"
 ---
 
 Chrome extension permissions control what APIs and features your extension can access. Understanding permissions is crucial for building secure, trustworthy extensions that users will actually install.
