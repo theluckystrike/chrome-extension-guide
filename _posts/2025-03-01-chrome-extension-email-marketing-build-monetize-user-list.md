@@ -287,7 +287,7 @@ The welcome email sequence sets the tone for your entire email relationship. A w
 <!-- welcome-email-1.html -->
 Subject: Welcome to Tab Suspender Pro! Here's your quick-start guide
 
-Hi {{first_name}},
+Hi {% raw %}{{first_name}}{% endraw %},
 
 Thanks for subscribing! You're now part of 12,000+ users who are saving memory and extending battery life.
 
@@ -338,7 +338,7 @@ Avoid over-communicating minor updates. Reserve feature emails for genuinely not
 ```html
 Subject: New in Tab Suspender Pro: Dark Mode is Here
 
-Hi {{first_name}},
+Hi {% raw %}{{first_name}}{% endraw %},
 
 Big update! Tab Suspender Pro now supports dark mode—and it looks amazing.
 
@@ -379,7 +379,7 @@ Avoid aggressive sales language. Frame premium upgrades as solutions to problems
 ```html
 Subject: You've used Tab Suspender Pro for 30 days—here's what you might be missing
 
-Hi {{first_name}},
+Hi {% raw %}{{first_name}}{% endraw %},
 
 You've been using Tab Suspender Pro for a month, and we hope it's been helpful! Users like you have saved over 10 million tabs from memory waste.
 
@@ -419,7 +419,7 @@ Track uninstalls through Chrome Web Store metrics and user feedback. Create a se
 ```html
 Subject: We noticed you haven't used Tab Suspender Pro recently
 
-Hi {{first_name}},
+Hi {% raw %}{{first_name}}{% endraw %},
 
 It's been a little while since you used Tab Suspender Pro. We wanted to check in and see how we can help.
 
