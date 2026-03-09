@@ -1,7 +1,11 @@
 ---
 layout: post
 title: "Content Scripts in Chrome Extensions"
+<<<<<<< HEAD
 description: "Master content scripts to interact with web pages. Learn DOM manipulation, Manifest V3 configuration, injection patterns, and background worker communication."
+=======
+description: "Master content script injection in Chrome extensions. Learn declarative and programmatic injection, DOM manipulation, isolated worlds, and message passing."
+>>>>>>> quality/fix-frontmatter-a7-r4
 date: 2025-06-04
 categories: [tutorial]
 tags: [content-scripts, injection, dom, manifest, javascript]
