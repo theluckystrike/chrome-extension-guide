@@ -299,7 +299,7 @@ Chrome provides multiple storage APIs with different characteristics. chrome.sto
 
 Extensions requesting broad permissions face scrutiny from users and Chrome's review process. Request only the permissions necessary for core functionality, and use optional permissions for advanced features. This approach improves security, builds user trust, and aligns with Chrome's best practices.
 
-For detailed guidance on extension permissions and security best practices, see our [Chrome Extension Permissions Documentation]({{ site.baseurl }}/docs/development/permissions).
+For detailed guidance on extension permissions and security best practices, see our [Chrome Extension Permissions Documentation]({{ site.baseurl }}/docs/permissions/).
 
 ---
 
@@ -316,7 +316,7 @@ Whether you choose Chrome's built-in Memory Saver, a third-party extension like 
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook]({{ site.baseurl }}/docs/monetization/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 
