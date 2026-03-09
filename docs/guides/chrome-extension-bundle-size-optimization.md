@@ -599,4 +599,4 @@ For more on extension performance, explore these related guides:
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
