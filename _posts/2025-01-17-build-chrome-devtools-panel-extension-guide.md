@@ -452,3 +452,11 @@ In this guide, you learned how to set up a Manifest V3 extension with devtools_p
 The techniques covered here form the basis for building professional-grade DevTools extensions. As you continue developing, explore the full Chrome DevTools APIs, experiment with different panel layouts, and consider how your extension can integrate seamlessly with the existing DevTools workflow.
 
 Start building your custom DevTools panel today and transform how you debug and analyze web applications!
+
+---
+
+## Related Articles
+
+- [Build Chrome DevTools Panel Extension (2025 Update)](/chrome-extension-guide/2025/02/20/build-chrome-devtools-panel-extension/) - Updated guide for building DevTools panels in 2025.
+- [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions.
+- [Advanced Chrome Extension Debugging Techniques](/chrome-extension-guide/2025/01/17/advanced-chrome-extension-debugging-techniques/) - Master debugging for Chrome extensions.
