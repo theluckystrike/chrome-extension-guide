@@ -368,20 +368,19 @@ Optimizing your Chrome Web Store listing is not a one-time task—it is an ongoi
 
 Remember that your listing exists to serve users who are looking for a solution to a problem. Every optimization decision should ultimately aim to help those users find and understand how your extension solves their problem.
 
-For more on maximizing your extension's potential, explore our [Chrome Web Store Listing Optimization Guide](/chrome-extension-guide/publishing/cws-listing-optimization/) and learn about [Extension Monetization Strategies](/chrome-extension-guide/docs/guides/monetization-strategies/) to turn those installs into revenue.
+For more on maximizing your extension's potential, explore our [Chrome Web Store SEO Guide](/chrome-extension-guide/chrome-web-store-seo-rank-higher-get-more-installs/) and learn about [Extension Monetization Strategies](/chrome-extension-guide/chrome-extension-monetization-strategies-that-work-2025/) to turn those installs into revenue.
 
 ---
 
 ## Related Articles
 
-- [Chrome Web Store Listing Optimization — How to Rank Higher and Get More Installs](/chrome-extension-guide/publishing/cws-listing-optimization/)
-- [Extension Monetization Strategies: From Free to Paid](/chrome-extension-guide/docs/guides/monetization-strategies/)
-- [Publishing Your Chrome Extension: A Complete Guide](/chrome-extension-guide/docs/publishing/publishing-guide/)
+- [Chrome Web Store SEO: Rank Higher and Get More Installs](/chrome-extension-guide/chrome-web-store-seo-rank-higher-get-more-installs/)
+- [Extension Monetization Strategies That Work in 2025](/chrome-extension-guide/chrome-extension-monetization-strategies-that-work-2025/)
+- [How to Market Your Chrome Extension: 0 to 10,000 Users](/chrome-extension-guide/how-to-market-chrome-extension-0-to-10000-users/)
+- [Manifest V3 Monetization: What Changed for Paid Extensions](/chrome-extension-guide/manifest-v3-monetization-what-changed-paid-extensions/)
+- [Publishing Your Chrome Extension: A Complete Guide](/chrome-extension-guide/docs/guides/publishing-guide/)
 - [Understanding CWS Analytics and User Metrics](/chrome-extension-guide/docs/publishing/analytics/)
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
-
----
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Built by theluckystrike at zovo.one*
