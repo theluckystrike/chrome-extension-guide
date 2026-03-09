@@ -223,6 +223,342 @@ async function getData() {
 
 For more information on storage options, see the [chrome.storage](https://developer.chrome.com/docs/extensions/reference/api/storage) documentation.
 
+## Advanced Pattern: Service Worker Lifecycle Management
+
+Understanding and managing the service worker lifecycle is crucial for building robust extensions. Here are advanced patterns:
+
+### Keeping the Service Worker Alive
+
+For operations that take longer than the typical 30-second timeout, you can keep the worker active:
+
+```javascript
+// Use chrome.runtime.onKeepAlive to extend worker lifetime
+chrome.runtime.onKeepAlive.addListener((details) => {
+  if (details.reason === 'pending_connection') {
+    console.log('Keeping service worker alive for pending connection');
+    // Return true to keep the worker alive
+    return true;
+  }
+});
+```
+
+### Monitoring Service Worker State
+
+Track when your service worker starts and stops:
+
+```javascript
+chrome.runtime.onStartup.addListener(() => {
+  console.log('Service worker starting - initialize state here');
+  initializeExtension();
+});
+
+chrome.runtime.onSuspend.addListener(() => {
+  console.log('Service worker is being suspended - save state');
+  // Quick cleanup before termination
+  saveStateToStorage();
+});
+
+// Note: onSuspend is not always reliable, don't rely on it for critical operations
+```
+
+### Heartbeat Pattern for Long-Running Tasks
+
+For operations that need to complete even if they take time:
+
+```javascript
+class HeartbeatManager {
+  private intervalId: number | null = null;
+  private readonly HEARTBEAT_INTERVAL = 25000; // Send heartbeat every 25 seconds
+
+  startHeartbeat(operationId: string) {
+    this.intervalId = setInterval(() => {
+      // Update operation status in storage
+      chrome.storage.local.set({
+        [`operation_${operationId}`]: {
+          lastHeartbeat: Date.now(),
+          status: 'in_progress'
+        }
+      });
+    }, this.HEARTBEAT_INTERVAL);
+  }
+
+  stopHeartbeat() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+}
+```
+
+## Error Handling Best Practices
+
+Service workers need robust error handling since they can terminate unexpectedly:
+
+```javascript
+// Global error handler
+self.onerror = (event) => {
+  console.error('Service worker error:', event.error);
+  
+  // Log to error tracking service
+  logErrorToService({
+    message: event.message,
+    filename: event.filename,
+    lineno: event.lineno,
+    stack: event.error?.stack,
+    timestamp: Date.now()
+  });
+  
+  return false; // Don't prevent default error handling
+};
+
+// Handle unhandled promise rejections
+self.onunhandledrejection = (event) => {
+  console.error('Unhandled promise rejection:', event.reason);
+  
+  // Store for later analysis
+  chrome.storage.local.set({
+    pendingErrors: event.reason
+  }).catch(() => {
+    // Storage might be unavailable
+    console.error('Failed to store error:', event.reason);
+  });
+};
+```
+
+### Retry Pattern for Network Requests
+
+Implement exponential backoff for failed requests:
+
+```javascript
+async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3): Promise<Response> {
+  let lastError: Error;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      
+      if (!response.ok && attempt < maxRetries - 1) {
+        // Exponential backoff: 1s, 2s, 4s
+        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+        continue;
+      }
+      
+      return response;
+    } catch (error) {
+      lastError = error as Error;
+      const delay = Math.pow(2, attempt) * 1000;
+      console.log(`Retry ${attempt + 1}/${maxRetries} after ${delay}ms`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError!;
+}
+```
+
+## Testing Service Worker Patterns
+
+Testing service workers requires special consideration:
+
+```javascript
+// Jest test example for service worker handlers
+describe('Service Worker Alarm Handler', () => {
+  beforeEach(() => {
+    // Mock chrome APIs
+    global.chrome = {
+      alarms: {
+        create: jest.fn(),
+        onAlarm: {
+          addListener: jest.fn()
+        }
+      },
+      storage: {
+        local: {
+          get: jest.fn().mockResolvedValue({}),
+          set: jest.fn().mockResolvedValue(undefined)
+        }
+      }
+    };
+  });
+
+  test('should create alarm on install', () => {
+    // Simulate install event
+    const createFn = chrome.alarms.create;
+    expect(createFn).toHaveBeenCalledWith('syncData', {
+      periodInMinutes: 15
+    });
+  });
+
+  test('should handle alarm and sync data', async () => {
+    const alarmHandler = chrome.alarms.onAlarm.addListener.mock.calls[0][0];
+    
+    // Trigger the alarm
+    await alarmHandler({ name: 'syncData' });
+    
+    // Verify storage was called
+    expect(chrome.storage.local.get).toHaveBeenCalled();
+  });
+});
+```
+
+### Integration Testing with Puppeteer
+
+Test the full extension lifecycle:
+
+```javascript
+// puppeteer.test.ts
+import { test, expect } from '@playwright/test';
+
+test('service worker handles alarm correctly', async ({ extension }) => {
+  // Load the extension
+  const backgroundPage = await extension.background();
+  
+  // Wait for service worker to initialize
+  await backgroundPage.waitForFunction(() => {
+    return window.serviceWorkerReady === true;
+  });
+  
+  // Trigger an alarm
+  await backgroundPage.evaluate(() => {
+    chrome.alarms.create('testAlarm', { delayInMinutes: 0.01 });
+  });
+  
+  // Wait for alarm to fire
+  await backgroundPage.waitForEvent('console-message', 
+    msg => msg.text() === 'Alarm fired: testAlarm'
+  );
+});
+```
+
+## Security Considerations
+
+### Content Security Policy in MV3
+
+Service workers have strict CSP requirements:
+
+```javascript
+// In manifest.json
+{
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
+```
+
+### Avoid eval and inline scripts
+
+```javascript
+// BAD: Using eval
+const data = eval(userInput); // Never do this
+
+// GOOD: Use JSON.parse with try-catch
+let data;
+try {
+  data = JSON.parse(userInput);
+} catch (e) {
+  console.error('Invalid JSON:', e);
+  data = null;
+}
+```
+
+### Sanitize Data from Content Scripts
+
+Always validate and sanitize data received from content scripts:
+
+```javascript
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Validate sender
+  if (!sender.tab) {
+    sendResponse({ error: 'Invalid sender' });
+    return false;
+  }
+  
+  // Validate message structure
+  if (typeof message.data !== 'object' || !message.data.id) {
+    sendResponse({ error: 'Invalid message format' });
+    return false;
+  }
+  
+  // Sanitize data
+  const sanitized = {
+    id: Number(message.data.id),
+    name: String(message.data.name).slice(0, 100), // Limit length
+    // ... validate and sanitize all fields
+  };
+  
+  // Process sanitized data
+  processData(sanitized);
+  sendResponse({ success: true });
+  
+  return true;
+});
+```
+
+## Performance Optimization
+
+### Lazy Loading of Expensive Modules
+
+Load heavy modules only when needed:
+
+```javascript
+// Service worker entry point
+import { initializeCore } from './core';
+
+// Don't load heavy modules at startup
+let expensiveModule = null;
+
+async function getExpensiveModule() {
+  if (!expensiveModule) {
+    // Dynamic import - only loads when first needed
+    const module = await import('./expensive-module.js');
+    expensiveModule = module;
+  }
+  return expensiveModule;
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'heavyOperation') {
+    getExpensiveModule().then(module => {
+      module.process(message.data).then(sendResponse);
+    });
+    return true;
+  }
+});
+```
+
+### Use IndexedDB for Large Data
+
+For large datasets, use IndexedDB instead of chrome.storage:
+
+```javascript
+import { openDB } from 'idb';
+
+const DB_NAME = 'ExtensionDB';
+const STORE_NAME = 'cachedData';
+
+async function initDB() {
+  return openDB(DB_NAME, 1, {
+    upgrade(db) {
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+      }
+    }
+  });
+}
+
+async function cacheData(key: string, data: any) {
+  const db = await initDB();
+  await db.put(STORE_NAME, { id: key, data, timestamp: Date.now() });
+}
+
+async function getCachedData(key: string) {
+  const db = await initDB();
+  const result = await db.get(STORE_NAME, key);
+  return result?.data;
+}
+```
+
 ## Case Study: Tab Suspender Pro Migration
 
 Let's look at a real-world migration scenario. [Tab Suspender Pro](https://chrome.google.com/webstore/detail/tab-suspender-pro/) is an extension that automatically suspends inactive tabs to save memory. The migration from V2 to V3 required significant architectural changes.

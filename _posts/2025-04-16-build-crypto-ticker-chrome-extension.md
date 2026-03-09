@@ -24,6 +24,144 @@ First, create a new folder for your project called `crypto-ticker-extension`. In
 
 Chrome extensions are essentially web applications that run within the Chrome browser. They can interact with web pages, access browser APIs, and provide additional functionality to users. Our crypto ticker will use the Chrome extension popup system—a small window that appears when users click the extension icon in the toolbar.
 
+### Choosing a Cryptocurrency API
+
+Selecting the right API is crucial for reliability and rate limits:
+
+```javascript
+// API options comparison
+const API_OPTIONS = {
+  // CoinGecko - Free tier available, no API key required
+  coingecko: {
+    baseUrl: 'https://api.coingecko.com/api/v3',
+    endpoints: {
+      simplePrice: '/simple/price',
+      coinsList: '/coins/list'
+    },
+    rateLimit: '10-30 calls/minute (free tier)',
+    requiresAuth: false
+  },
+  // CoinCap - Free, no auth required
+  coincap: {
+    baseUrl: 'https://api.coincap.io/v2',
+    endpoints: {
+      assets: '/assets',
+      singleAsset: '/assets/{id}'
+    },
+    rateLimit: '333 requests/hour',
+    requiresAuth: false
+  },
+  // CryptoCompare - Freemium
+  cryptocompare: {
+    baseUrl: 'https://min-api.cryptocompare.com',
+    endpoints: {
+      price: '/data/price',
+      multi: '/data/pricemulti'
+    },
+    rateLimit: '10,000-50,000 calls/month',
+    requiresAuth: true
+  }
+};
+```
+
+### Best Practices for API Integration
+
+Handle rate limiting and errors gracefully:
+
+```javascript
+// api-service.js
+class CryptoAPIService {
+  constructor() {
+    this.cache = new Map();
+    this.cacheExpiry = 60000; // 1 minute cache
+    this.retryCount = 3;
+    this.retryDelay = 1000;
+  }
+
+  async fetchWithRetry(url, options = {}) {
+    for (let attempt = 0; attempt < this.retryCount; attempt++) {
+      try {
+        const response = await fetch(url, options);
+        
+        if (response.status === 429) {
+          // Rate limited - wait and retry
+          const waitTime = Math.pow(2, attempt) * this.retryDelay;
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          continue;
+        }
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+        
+        return await response.json();
+      } catch (error) {
+        if (attempt === this.retryCount - 1) throw error;
+        await new Promise(resolve => setTimeout(resolve, this.retryDelay));
+      }
+    }
+  }
+
+  async getPrices(coins = ['bitcoin', 'ethereum', 'solana']) {
+    // Check cache first
+    const cacheKey = coins.sort().join(',');
+    const cached = this.cache.get(cacheKey);
+    
+    if (cached && Date.now() - cached.timestamp < this.cacheExpiry) {
+      return cached.data;
+    }
+    
+    // Fetch fresh data
+    const ids = coins.join(',');
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
+    
+    const data = await this.fetchWithRetry(url);
+    
+    // Update cache
+    this.cache.set(cacheKey, { data, timestamp: Date.now() });
+    
+    return data;
+  }
+}
+```
+
+### Setting Up Automatic Refresh
+
+Implement automatic price updates using the Alarms API:
+
+```javascript
+// background.js - Service Worker for Manifest V3
+chrome.alarms.create('priceRefresh', {
+  periodInMinutes: 1  // Refresh every minute
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'priceRefresh') {
+    refreshPrices();
+  }
+});
+
+async function refreshPrices() {
+  try {
+    const prices = await getCryptoPrices();
+    
+    // Store latest prices
+    await chrome.storage.local.set({
+      latestPrices: prices,
+      lastUpdate: Date.now()
+    });
+    
+    // Notify all open popup windows
+    chrome.runtime.sendMessage({
+      type: 'PRICES_UPDATED',
+      prices: prices
+    });
+  } catch (error) {
+    console.error('Failed to refresh prices:', error);
+  }
+}
+```
+
 ---
 
 ## Creating the Manifest File {#manifest-file}

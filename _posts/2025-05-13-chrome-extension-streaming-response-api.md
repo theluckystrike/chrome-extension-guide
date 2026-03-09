@@ -29,6 +29,105 @@ If you're migrating from Manifest V2 to Manifest V3, you'll notice significant c
 
 This architectural change necessitates a different approach to streaming implementation. You can no longer rely on long-lived background pages to maintain persistent connections. Instead, you must implement proper connection management, implement heartbeats to keep service workers alive, and design your extension to handle the asynchronous nature of service worker lifecycle events.
 
+### Service Worker Streaming Architecture
+
+Here's a robust architecture for handling streaming in MV3:
+
+```javascript
+// background/streaming-orchestrator.js
+class StreamingOrchestrator {
+  constructor() {
+    this.connections = new Map();
+    this.serviceWorker = null;
+    this.heartbeatInterval = null;
+  }
+
+  async initialize() {
+    // Set up heartbeat to prevent service worker termination
+    this.heartbeatInterval = setInterval(() => {
+      this.sendHeartbeat();
+    }, 25000); // Every 25 seconds
+    
+    // Listen for service worker lifecycle events
+    chrome.runtime.onStartup.addListener(() => this.handleStartup());
+    chrome.runtime.onSuspend.addListener(() => this.handleSuspend());
+  }
+
+  async handleStartup() {
+    // Restore connections after service worker restart
+    for (const [id, connection] of this.connections) {
+      if (connection.shouldReconnect) {
+        await this.reconnect(id);
+      }
+    }
+  }
+
+  handleSuspend() {
+    // Save connection states before suspension
+    const states = {};
+    for (const [id, connection] of this.connections) {
+      states[id] = {
+        lastEventId: connection.lastEventId,
+        shouldReconnect: true
+      };
+    }
+    chrome.storage.local.set({ streamingStates: states });
+  }
+
+  sendHeartbeat() {
+    // Update storage to indicate worker is active
+    chrome.storage.local.set({ 
+      lastHeartbeat: Date.now(),
+      activeConnections: this.connections.size 
+    });
+  }
+}
+```
+
+### Connection State Management
+
+Manage connection state across service worker restarts:
+
+```javascript
+// background/connection-state.js
+class ConnectionStateManager {
+  static STORAGE_KEY = 'streaming_connection_state';
+
+  async saveState(connectionId, state) {
+    const allStates = await this.getAllStates();
+    allStates[connectionId] = {
+      ...state,
+      savedAt: Date.now()
+    };
+    await chrome.storage.local.set({
+      [ConnectionStateManager.STORAGE_KEY]: allStates
+    });
+  }
+
+  async getState(connectionId) {
+    const allStates = await this.getAllStates();
+    return allStates[connectionId] || null;
+  }
+
+  async getAllStates() {
+    const result = await chrome.storage.local.get(ConnectionStateManager.STORAGE_KEY);
+    return result[ConnectionStateManager.STORAGE_KEY] || {};
+  }
+
+  async clearState(connectionId) {
+    const allStates = await this.getAllStates();
+    delete allStates[connectionId];
+    await chrome.storage.local.set({
+      [ConnectionStateManager.STORAGE_KEY]: allStates
+    });
+  }
+
+  isStateStale(state, maxAge = 300000) { // 5 minutes
+    return Date.now() - state.savedAt > maxAge;
+  }
+}
+```
+
 ---
 
 ## Server-Sent Events (SSE) in Chrome Extensions

@@ -58,6 +58,375 @@ Hot module replacement, TypeScript support, and modern tooling make development 
 
 ---
 
+## Advanced React Patterns for Extensions
+
+### Custom Hooks for Chrome APIs
+
+Create reusable hooks for Chrome extension APIs:
+
+```typescript
+// hooks/useChromeStorage.ts
+import { useState, useEffect, useCallback } from 'react';
+
+export function useChromeStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Load initial value from storage
+    chrome.storage.local.get(key).then((result) => {
+      if (result[key] !== undefined) {
+        setStoredValue(result[key]);
+      }
+      setIsLoading(false);
+    });
+  }, [key]);
+
+  const setValue = useCallback(async (value: T | ((val: T) => T)) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      await chrome.storage.local.set({ [key]: valueToStore });
+    } catch (error) {
+      console.error('Error saving to storage:', error);
+    }
+  }, [key, storedValue]);
+
+  return [storedValue, setValue, isLoading] as const;
+}
+
+// Usage in component
+function SettingsPanel() {
+  const [theme, setTheme, isLoading] = useChromeStorage('theme', 'light');
+  const [notifications, setNotifications] = useChromeStorage('notifications', true);
+
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <label>
+        <input 
+          type="checkbox" 
+          checked={notifications}
+          onChange={(e) => setNotifications(e.target.checked)}
+        />
+        Enable notifications
+      </label>
+    </div>
+  );
+}
+```
+
+### Message Passing with React Query
+
+Combine React Query with Chrome messaging for efficient data fetching:
+
+```typescript
+// hooks/useExtensionData.ts
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+async function fetchFromServiceWorker<T>(action: string, payload?: any): Promise<T> {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action, payload }, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+      } else if (response?.error) {
+        reject(new Error(response.error));
+      } else {
+        resolve(response.data);
+      }
+    });
+  });
+}
+
+export function useUserData() {
+  return useQuery({
+    queryKey: ['userData'],
+    queryFn: () => fetchFromServiceWorker('getUserData'),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+export function useUpdateSettings() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (settings: Settings) => 
+      fetchFromServiceWorker('updateSettings', settings),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ['userData'] });
+    },
+  });
+}
+```
+
+### Context for Extension-Wide State
+
+Share state across components:
+
+```typescript
+// context/ExtensionContext.tsx
+import { createContext, useContext, ReactNode } from 'react';
+
+interface ExtensionState {
+  isEnabled: boolean;
+  currentTab: chrome.tabs.Tab | null;
+  user: User | null;
+}
+
+interface ExtensionContextValue extends ExtensionState {
+  toggleExtension: () => void;
+  setCurrentTab: (tab: chrome.tabs.Tab) => void;
+}
+
+const ExtensionContext = createContext<ExtensionContextValue | null>(null);
+
+export function ExtensionProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<ExtensionState>({
+    isEnabled: true,
+    currentTab: null,
+    user: null,
+  });
+
+  useEffect(() => {
+    // Listen for messages from service worker
+    const listener = (message: Message) => {
+      if (message.type === 'TAB_UPDATED') {
+        setState(s => ({ ...s, currentTab: message.tab }));
+      }
+    };
+    chrome.runtime.onMessage.addListener(listener);
+    return () => chrome.runtime.onMessage.removeListener(listener);
+  }, []);
+
+  const toggleExtension = () => setState(s => ({ ...s, isEnabled: !s.isEnabled }));
+  const setCurrentTab = (tab: chrome.tabs.Tab) => setState(s => ({ ...s, currentTab: tab }));
+
+  return (
+    <ExtensionContext.Provider value={{ ...state, toggleExtension, setCurrentTab }}>
+      {children}
+    </ExtensionContext.Provider>
+  );
+}
+
+export function useExtension() {
+  const context = useContext(ExtensionContext);
+  if (!context) throw new Error('useExtension must be used within ExtensionProvider');
+  return context;
+}
+```
+
+### Managing Content Script Communication
+
+Handle communication with content scripts:
+
+```typescript
+// hooks/useContentScript.ts
+import { useEffect, useState, useCallback } from 'react';
+
+export function useContentScript(tabId: number | undefined) {
+  const [isReady, setIsReady] = useState(false);
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    if (!tabId) return;
+
+    // Check if content script is loaded
+    chrome.tabs.sendMessage(tabId, { type: 'PING' }, (response) => {
+      if (response?.status === 'ready') {
+        setIsReady(true);
+      }
+    });
+
+    // Listen for messages from content script
+    const listener = (message: any, sender: chrome.runtime.MessageSender) => {
+      if (sender.tab?.id === tabId) {
+        setData(message);
+      }
+    };
+    chrome.runtime.onMessage.addListener(listener);
+    return () => chrome.runtime.onMessage.removeListener(listener);
+  }, [tabId]);
+
+  const sendToContentScript = useCallback(async (action: string, payload?: any) => {
+    if (!tabId || !isReady) {
+      throw new Error('Content script not ready');
+    }
+    return chrome.tabs.sendMessage(tabId, { action, payload });
+  }, [tabId, isReady]);
+
+  return { isReady, data, sendToContentScript };
+}
+```
+
+---
+
+## Testing React Extensions
+
+### Unit Testing with Jest
+
+```typescript
+// components/SettingsPanel.test.tsx
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { SettingsPanel } from './SettingsPanel';
+
+// Mock chrome API
+jest.mock('chrome', () => ({
+  storage: {
+    local: {
+      get: jest.fn().mockResolvedValue({ theme: 'light' }),
+      set: jest.fn().mockResolvedValue(undefined),
+    },
+  },
+}));
+
+describe('SettingsPanel', () => {
+  it('renders settings correctly', () => {
+    render(<SettingsPanel 
+      settings={{ theme: 'dark', notifications: true }}
+      onUpdate={jest.fn()}
+    />);
+    
+    expect(screen.getByDisplayValue('dark')).toBeInTheDocument();
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+
+  it('calls onUpdate when settings change', async () => {
+    const onUpdate = jest.fn();
+    render(<SettingsPanel 
+      settings={{ theme: 'light', notifications: false }}
+      onUpdate={onUpdate}
+    />);
+    
+    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'dark' } });
+    
+    await waitFor(() => {
+      expect(onUpdate).toHaveBeenCalledWith({ theme: 'dark', notifications: false });
+    });
+  });
+});
+```
+
+### Integration Testing with Playwright
+
+```typescript
+// tests/extension.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('popup interacts with service worker', async ({ page, extension }) => {
+  // Load the extension popup
+  const popup = await extension.popup();
+  
+  // Wait for React to render
+  await popup.waitForSelector('[data-testid="settings-panel"]');
+  
+  // Interact with UI
+  await popup.click('[data-testid="toggle-theme"]');
+  
+  // Verify state changed
+  await expect(popup.locator('.theme-dark')).toBeVisible();
+  
+  // Close popup and check background state
+  await popup.close();
+  
+  const background = await extension.background();
+  await background.waitForFunction(() => {
+    return window.getTheme() === 'dark';
+  });
+});
+```
+
+---
+
+## Performance Optimization
+
+### Code Splitting for Extension Pages
+
+Split your bundle for faster popup loading:
+
+```typescript
+// Lazy load heavy components
+const SettingsPanel = lazy(() => import('./components/SettingsPanel'));
+const AnalyticsDashboard = lazy(() => import('./components/AnalyticsDashboard'));
+
+function PopupApp() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      {currentPage === 'settings' && <SettingsPanel />}
+      {currentPage === 'analytics' && <AnalyticsDashboard />}
+      {currentPage === 'home' && <HomePage />}
+    </Suspense>
+  );
+}
+```
+
+### Memoization Strategies
+
+Prevent unnecessary re-renders:
+
+```typescript
+import { memo, useCallback, useMemo } from 'react';
+
+// Memoize expensive computations
+const processedData = useMemo(() => {
+  return expensiveOperation(rawData);
+}, [rawData]);
+
+// Memoize callback functions
+const handleItemClick = useCallback((id: string) => {
+  setSelectedItems(prev => 
+    prev.includes(id) 
+      ? prev.filter(i => i !== id)
+      : [...prev, id]
+  );
+}, []);
+
+// Memoize entire components
+const SettingsSection = memo(function SettingsSection({ 
+  title, 
+  children 
+}: SettingsSectionProps) {
+  return (
+    <section>
+      <h3>{title}</h3>
+      {children}
+    </section>
+  );
+});
+```
+
+### Optimizing Bundle Size
+
+Configure Vite to remove development code from production:
+
+```typescript
+// vite.config.ts
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@chakra-ui/react', 'framer-motion'],
+        },
+      },
+    },
+  },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  },
+});
+```
+
+---
+
 ## Project Scaffolding: Vite + React + CRXJS {#project-scaffolding}
 
 The fastest way to start is with a modern build toolchain. We'll use Vite for development, React for UI, and CRXJS for Chrome-specific builds.

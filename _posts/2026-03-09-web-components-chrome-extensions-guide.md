@@ -207,6 +207,163 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
+### Using Web Components with React in Popup
+
+If your extension uses React alongside Web Components, you'll need to configure React to treat custom elements as custom elements rather than components:
+
+```tsx
+// popup.tsx
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+// Tell React not to treat custom elements as React components
+const customElements = ['ext-popup-button', 'ext-card', 'ext-input'];
+
+const originalCreateElement = React.createElement;
+
+React.createElement = function(type: any, props: any, ...children: any[]) {
+  if (typeof type === 'string' && customElements.includes(type)) {
+    // Pass all props as attributes
+    return originalCreateElement(type, { ...props, }, ...children);
+  }
+  return originalCreateElement(type, props, ...children);
+};
+
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}
+```
+
+### Complete Popup Implementation Example
+
+Here's a more complete example showing how to build a settings popup using Web Components:
+
+```typescript
+// components/settings-form.ts
+import { PopupButton } from './popup-button';
+
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+    :host {
+      display: block;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+  </style>
+  <form id="settings-form">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" />
+    </div>
+    <div class="form-group">
+      <label for="theme">Theme</label>
+      <select id="theme" name="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="auto">Auto</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="notifications">Enable Notifications</label>
+      <input type="checkbox" id="notifications" name="notifications" />
+    </div>
+    <div class="actions">
+      <ext-popup-button variant="primary" label="Save Settings" id="save-btn"></ext-popup-button>
+      <ext-popup-button variant="secondary" label="Reset" id="reset-btn"></ext-popup-button>
+    </div>
+  </form>
+`;
+
+@customElement('ext-settings-form')
+export class SettingsForm extends HTMLElement {
+  private shadow: ShadowRoot;
+  private form: HTMLFormElement;
+
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.appendChild(template.content.cloneNode(true));
+    this.form = this.shadow.getElementById('settings-form') as HTMLFormElement;
+  }
+
+  connectedCallback() {
+    this.loadSettings();
+    this.setupEventListeners();
+  }
+
+  private async loadSettings() {
+    const result = await chrome.storage.local.get(['username', 'theme', 'notifications']);
+    (this.shadow.getElementById('username') as HTMLInputElement).value = result.username || '';
+    (this.shadow.getElementById('theme') as HTMLSelectElement).value = result.theme || 'light';
+    (this.shadow.getElementById('notifications') as HTMLInputElement).checked = result.notifications ?? true;
+  }
+
+  private setupEventListeners() {
+    const saveBtn = this.shadow.getElementById('save-btn');
+    const resetBtn = this.shadow.getElementById('reset-btn');
+
+    saveBtn?.addEventListener('ext-click', async () => {
+      const formData = new FormData(this.form);
+      await chrome.storage.local.set({
+        username: formData.get('username'),
+        theme: formData.get('theme'),
+        notifications: formData.get('notifications') === 'on'
+      });
+      this.dispatchEvent(new CustomEvent('settings-saved', { bubbles: true, composed: true }));
+    });
+
+    resetBtn?.addEventListener('ext-click', () => {
+      this.form.reset();
+    });
+  }
+}
+```
+
+### Handling Form Validation
+
+Add robust form validation to your Web Components:
+
+```typescript
+// Adding validation to components
+private validateForm(): boolean {
+  const username = this.shadow.getElementById('username') as HTMLInputElement;
+  const errorElement = this.shadow.getElementById('username-error');
+  
+  if (username.value.length < 3) {
+    username.setCustomValidity('Username must be at least 3 characters');
+    username.reportValidity();
+    return false;
+  }
+  
+  username.setCustomValidity('');
+  return true;
+}
+```
+
 ---
 
 ## Web Components in Content Scripts {#content-scripts}
@@ -264,6 +421,363 @@ For content scripts that run in webpage context, Web Components must be defined 
   // Inject the custom element
   document.body.appendChild(document.createElement('ext-page-overlay'));
 })();
+```
+
+---
+
+## Shadow DOM Deep Dive {#shadow-dom-deep-dive}
+
+Understanding Shadow DOM is crucial for building robust Web Components. Let's explore advanced patterns:
+
+### Event Handling with Shadow DOM
+
+Events dispatched from within Shadow DOM don't leak outside by default, but you can control this behavior:
+
+```typescript
+@customElement('ext-action-button')
+export class ActionButton extends HTMLElement {
+  private shadow: ShadowRoot;
+
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.render();
+    this.shadow.querySelector('button')?.addEventListener('click', () => {
+      // This event bubbles up through the shadow boundary
+      this.dispatchEvent(new CustomEvent('action-triggered', {
+        bubbles: true,
+        composed: true, // Allows event to cross shadow DOM boundary
+        detail: { timestamp: Date.now() }
+      }));
+    });
+  }
+
+  private render() {
+    this.shadow.innerHTML = `
+      <button>Execute Action</button>
+      <style>
+        button {
+          padding: 10px 20px;
+          background: #4285f4;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button:hover {
+          background: #3367d6;
+        }
+      </style>
+    `;
+  }
+}
+
+// Usage in regular DOM
+document.querySelector('ext-action-button')?.addEventListener('action-triggered', (e) => {
+  console.log('Action triggered at:', e.detail.timestamp);
+});
+```
+
+### Styling from Outside with CSS Custom Properties
+
+Expose styling hooks using CSS custom properties (CSS variables):
+
+```typescript
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+    :host {
+      --button-bg: #4285f4;
+      --button-color: white;
+      --button-padding: 8px 16px;
+      --button-radius: 4px;
+      
+      display: inline-block;
+    }
+    button {
+      background: var(--button-bg);
+      color: var(--button-color);
+      padding: var(--button-padding);
+      border: none;
+      border-radius: var(--button-radius);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+  <button><slot></slot></button>
+`;
+
+@customElement('ext-styled-button')
+export class StyledButton extends HTMLElement {
+  private shadow: ShadowRoot = this.attachShadow({ mode: 'open' });
+  
+  constructor() {
+    super();
+    this.shadow.appendChild(template.content.cloneNode(true));
+  }
+}
+
+// Usage with custom styling
+// <ext-styled-button style="--button-bg: #34a853; --button-radius: 8px;">
+//   Custom Styled Button
+// </ext-styled-button>
+```
+
+### Constructable Stylesheets
+
+For better performance with multiple components, use constructable stylesheets:
+
+```typescript
+// shared-styles.ts
+const sharedStyles = new CSSStyleSheet();
+sharedStyles.replace(`
+  .container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-sizing: border-box;
+  }
+  .container * {
+    box-sizing: border-box;
+  }
+  .hidden {
+    display: none !important;
+  }
+`);
+
+// Use in component
+@customElement('ext-container')
+export class ExtContainer extends HTMLElement {
+  private shadow: ShadowRoot = this.attachShadow({ mode: 'open' });
+
+  constructor() {
+    super();
+    this.shadow.adoptedStyleSheets = [sharedStyles];
+  }
+
+  connectedCallback() {
+    this.shadow.innerHTML = `<div class="container"><slot></slot></div>`;
+  }
+}
+```
+
+---
+
+## Communication Patterns Between Components {#communication-patterns}
+
+### Using Broadcast Channel API
+
+For communication between components in different contexts:
+
+```typescript
+// Create a channel for extension-wide messaging
+const extensionChannel = new BroadcastChannel('extension_events');
+
+@customElement('ext-data-provider')
+export class DataProvider extends HTMLElement {
+  private channel = extensionChannel;
+
+  constructor() {
+    super();
+    this.channel.postMessage({ type: 'provider-ready', source: 'data-provider' });
+  }
+
+  publishData(data: any) {
+    this.channel.postMessage({ type: 'data-update', payload: data });
+  }
+}
+
+@customElement('ext-data-display')
+export class DataDisplay extends HTMLElement {
+  private channel = extensionChannel;
+
+  constructor() {
+    super();
+    this.channel.onmessage = (event) => {
+      if (event.data.type === 'data-update') {
+        this.updateDisplay(event.data.payload);
+      }
+    };
+  }
+
+  private updateDisplay(data: any) {
+    // Update UI with new data
+  }
+}
+```
+
+### Property Change Observation
+
+Monitor property changes and react accordingly:
+
+```typescript
+@customElement('ext-smart-input')
+export class SmartInput extends HTMLElement {
+  private shadow: ShadowRoot = this.attachShadow({ mode: 'open' });
+  
+  // Observe attribute changes
+  static get observedAttributes() {
+    return ['value', 'disabled', 'placeholder'];
+  }
+
+  constructor() {
+    super();
+    this.shadow.innerHTML = `
+      <input type="text" />
+      <style>
+        input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+        }
+        input:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      </style>
+    `;
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    const input = this.shadow.querySelector('input');
+    if (!input) return;
+
+    switch (name) {
+      case 'value':
+        if (input.value !== newValue) {
+          input.value = newValue || '';
+        }
+        break;
+      case 'disabled':
+        input.disabled = this.hasAttribute('disabled');
+        break;
+      case 'placeholder':
+        input.placeholder = newValue || '';
+        break;
+    }
+  }
+
+  // Also react to property changes
+  set value(val: string) {
+    this.setAttribute('value', val);
+  }
+
+  get value(): string {
+    return this.getAttribute('value') || '';
+  }
+}
+```
+
+---
+
+## Performance Optimization {#performance-optimization}
+
+### Lazy Loading Components
+
+Load components only when needed:
+
+```typescript
+// lazy-component-loader.ts
+const loadedComponents = new Set<string>();
+
+export async function loadComponentWhenNeeded(tagName: string): Promise<void> {
+  if (loadedComponents.has(tagName)) return;
+  
+  // Dynamic import based on component name
+  const componentMap: Record<string, () => Promise<any>> = {
+    'ext-popup-button': () => import('./components/popup-button'),
+    'ext-card': () => import('./components/ext-card'),
+    'ext-data-table': () => import('./components/data-table'),
+    'ext-chart': () => import('./components/chart'),
+  };
+
+  const loadComponent = componentMap[tagName];
+  if (loadComponent) {
+    await loadComponent();
+    loadedComponents.add(tagName);
+  }
+}
+
+// Usage in popup
+async function initPopup() {
+  // Only load components when they're about to be used
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(async (entry) => {
+      if (entry.isIntersecting) {
+        const tagName = entry.target.tagName.toLowerCase();
+        await loadComponentWhenNeeded(tagName);
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  
+  document.querySelectorAll('ext-popup-button, ext-card, ext-data-table').forEach(
+    el => observer.observe(el)
+  );
+}
+```
+
+### Memory Management
+
+Properly clean up components to prevent memory leaks:
+
+```typescript
+@customElement('ext-cleanup-example')
+export class CleanupExample extends HTMLElement {
+  private shadow: ShadowRoot;
+  private eventListeners: Map<EventTarget, Map<string, EventListener>> = new Map();
+
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.render();
+    this.setupEventListeners();
+  }
+
+  disconnectedCallback() {
+    // CRITICAL: Clean up all event listeners
+    this.cleanupEventListeners();
+  }
+
+  private setupEventListeners() {
+    const button = this.shadow.querySelector('button');
+    if (button) {
+      const listener = () => this.handleClick();
+      button.addEventListener('click', listener);
+      
+      // Track for cleanup
+      if (!this.eventListeners.has(button)) {
+        this.eventListeners.set(button, new Map());
+      }
+      this.eventListeners.get(button)!.set('click', listener);
+    }
+  }
+
+  private cleanupEventListeners() {
+    this.eventListeners.forEach((listeners, target) => {
+      listeners.forEach((listener, type) => {
+        target.removeEventListener(type, listener);
+      });
+    });
+    this.eventListeners.clear();
+  }
+
+  private handleClick() {
+    console.log('Button clicked');
+  }
+
+  private render() {
+    this.shadow.innerHTML = `<button>Click Me</button>`;
+  }
+}
 ```
 
 ---
