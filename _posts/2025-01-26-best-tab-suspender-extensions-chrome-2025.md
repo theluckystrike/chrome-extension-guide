@@ -156,3 +156,4 @@ For a deeper dive into browser memory management strategies, explore our [Chrome
 ---
 
 *Built by theluckystrike at [zovo.one](https://zovo.one)*
+
