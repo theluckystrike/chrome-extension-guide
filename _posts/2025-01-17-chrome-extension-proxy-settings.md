@@ -693,3 +693,5 @@ The key to success lies in balancing functionality with simplicity. Users apprec
 - [Chrome Extension Proxy Settings API]({% post_url 2025-03-07-chrome-extension-proxy-settings-api %})
 - [Chrome Extension Proxy API Guide]({% post_url 2025-01-22-chrome-extension-proxy-api-guide %})
 - [Chrome Extension Network Debugging Guide]({% post_url 2025-03-23-chrome-extension-network-debugging-guide %})
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
