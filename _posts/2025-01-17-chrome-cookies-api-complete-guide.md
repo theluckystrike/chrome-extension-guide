@@ -681,3 +681,8 @@ For more information about Chrome extension development, explore our other guide
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 
 *This guide is part of our comprehensive Chrome Extension Development series. For more tutorials and resources, visit our Chrome Extension Guide.*
+---
+
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

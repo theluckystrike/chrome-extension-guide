@@ -490,3 +490,8 @@ Start building your bookmark manager extension today, and take advantage of the 
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 - [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)
+---
+
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

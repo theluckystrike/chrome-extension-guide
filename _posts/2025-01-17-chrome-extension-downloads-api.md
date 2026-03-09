@@ -387,3 +387,8 @@ The key to building successful download extensions lies in proper error handling
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 
 As you continue to develop your extension, remember to test thoroughly across different network conditions and file types, and always consider the security implications of your download functionality. With the Chrome Downloads API, you have all the tools you need to create professional-grade download features that your users will appreciate.
+---
+
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

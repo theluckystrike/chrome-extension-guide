@@ -600,3 +600,8 @@ Start implementing offline support in your extensions today, and provide your us
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 - [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/25/chrome-extension-service-worker-lifecycle-deep-dive/) - Understand service worker lifecycle for reliable background processing.
+---
+
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
