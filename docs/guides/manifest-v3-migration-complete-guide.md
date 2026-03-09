@@ -1,7 +1,7 @@
 ---
 layout: guide
-title: Manifest V3 Migration Guide — Convert Your Chrome Extension from MV2 to MV3
-description: A comprehensive guide to migrating your Chrome extension from Manifest V2 to Manifest V3. Learn about background service workers, declarativeNetRequest, permission changes, and more.
+title: "Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3"
+description: "A comprehensive step-by-step guide to migrating Chrome extensions from Manifest V2 to V3. Covers background service workers, declarativeNetRequest, permission changes, action API, storage patterns, and testing strategies."
 ---
 
 # Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
