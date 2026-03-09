@@ -1,7 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Chrome Extension Analytics — Track Usage Without Invading Privacy"
-description: "Privacy-respecting analytics for Chrome extensions. Event tracking, feature usage, funnel analysis, and crash reporting without collecting personal data."
+description: "Privacy-respecting analytics for Chrome extensions. Learn event tracking, feature usage, funnel analysis, and crash reporting without collecting user data."
 date: 2025-02-24
 categories: [guides, analytics]
 tags: [extension-analytics, privacy-first-analytics, usage-tracking, chrome-extension-telemetry, gdpr-compliant]
