@@ -1,470 +1,624 @@
----
-layout: default
-title: "Chrome Extension Power Management — Developer Guide"
-description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/power-management/"
----
-# Power Management in Chrome Extensions
+# Chrome Extension Power Management
 
-> **Guide Level:** Intermediate | **Last Updated:** 2025
+The Chrome Power API (`chrome.power`) enables extensions to manage system power states, preventing the system or display from sleeping during critical operations. This is essential for extensions that need to maintain active sessions without user interaction.
 
-The `chrome.power` API enables extensions to control system power management, preventing devices from sleeping or the display from turning off during critical operations. This is essential for extensions that need to complete long-running tasks without interruption.
+## Overview
 
-## chrome.power API Overview {#chromepower-api-overview}
+The Power API is part of the Chrome Extension APIs designed to control power management features. It allows extensions to request keep-awake behavior at different levels, ensuring that important tasks complete without interruption from system power-saving features.
 
-The Power API provides two core functions for managing power states, plus an additional Chrome OS-only method:
+## Required Permission
 
-```javascript
-// Request keeping the system awake
-chrome.power.requestKeepAwake(level);
-
-// Release the keep-awake request
-chrome.power.releaseKeepAwake();
-
-// Chrome OS only (Chrome 113+): Report user activity to reset idle timers
-chrome.power.reportActivity();
-```
-
-### Permission Requirements {#permission-requirements}
-
-Add the `power` permission to your `manifest.json`:
+To use the Power API, add the `power` permission to your extension's manifest:
 
 ```json
 {
-  "permissions": [
-    "power"
-  ]
+  "name": "My Power Management Extension",
+  "version": "1.0",
+  "permissions": ["power"],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
 ```
 
-No additional host permissions are required—it's a universal permission available to all extensions.
+No additional permissions are required for basic power management functionality.
 
-## Power Levels {#power-levels}
+## Power Levels
 
-The `requestKeepAwake()` method accepts a `level` parameter that determines what to keep awake:
+The Power API supports two distinct power levels that control different aspects of system behavior:
 
-| Level | Behavior |
-|-------|----------|
-| `system` | Prevents the system from sleeping in response to user inactivity |
-| `display` | Prevents the display from turning off or dimming, AND prevents the system from sleeping (higher precedence than `system`) |
+### chrome.power.Level.SYSTEM
 
-### Display Level (Recommended) {#display-level-recommended}
+The system level prevents the entire system from entering sleep mode. This is appropriate for operations that require the full system to remain active, such as file downloads, system-wide synchronization, or background processing that cannot be interrupted.
 
 ```javascript
-// Keep display on and prevent system sleep
-chrome.power.requestKeepAwake('display');
-```
-
-Use `display` level for:
-- Presentations and slideshows
-- Media playback
-- Reading documents
-- Any scenario where user interaction is expected
-
-### System Level (Aggressive) {#system-level-aggressive}
-
-```javascript
-// Keep entire system awake
+// Request system-level keep-awake
 chrome.power.requestKeepAwake('system');
 ```
 
-Use `system` level for:
-- Large file downloads
-- Background data synchronization
-- File conversions or processing
-- Any task where system sleep would interrupt progress
+When using system level, the computer will remain fully awake and consuming power. Use this sparingly and only when necessary, as it significantly impacts battery life on portable devices.
 
-## Preventing Display Sleep {#preventing-display-sleep}
+### chrome.power.Level.DISPLAY
 
-The most common use case is keeping the display awake during user-facing tasks like presentations or media playback. Note that the `display` level also prevents system sleep.
-
-### Basic Implementation {#basic-implementation}
+The display level prevents only the display (monitor/screen) from turning off or dimming, while allowing the system to enter sleep mode when idle. This is ideal for scenarios where you need visual feedback but don't require full system processing.
 
 ```javascript
-// In your background service worker or popup script
+// Request display-level keep-awake
+chrome.power.requestKeepAwake('display');
+```
 
-function enableKeepAwake() {
+Display-level keep-awake is more battery-efficient than system-level, making it the preferred choice for most use cases involving user-visible content.
+
+## Preventing Display Sleep with requestKeepAwake
+
+The `requestKeepAwake` method requests that power management be suppressed. The extension must call this method before performing any operation that should not be interrupted.
+
+### Basic Syntax
+
+```javascript
+chrome.power.requestKeepAwake(level);
+```
+
+- `level`: A string specifying either `'system'` or `'display'`
+
+### Example: Preventing Display Sleep During Task
+
+```javascript
+// In your background script or content script
+function startPresentation() {
+  // Prevent display from sleeping during presentation
   chrome.power.requestKeepAwake('display');
-  console.log('Display will stay awake');
+  console.log('Display keep-awake enabled');
 }
 
-function disableKeepAwake() {
+function stopPresentation() {
+  // Release when done
   chrome.power.releaseKeepAwake();
-  console.log('Power management released');
+  console.log('Display keep-awake released');
 }
 ```
 
-### With Automatic Release {#with-automatic-release}
+### Multiple Request Handling
 
-Always release when done to conserve battery:
+Chrome handles multiple keep-awake requests internally using a reference count. The power will remain suppressed as long as at least one request is active.
+
+```javascript
+// First request
+chrome.power.requestKeepAwake('display');
+
+// Later, another part of your extension also needs keep-awake
+chrome.power.requestKeepAwake('display');
+
+// When done, each request must be released
+chrome.power.releaseKeepAwake();
+chrome.power.releaseKeepAwake();
+// Now power management resumes
+```
+
+## Releasing with releaseKeepAwake
+
+The `releaseKeepAwake` method releases a previously requested keep-awake. It's crucial to pair every `requestKeepAwake` with a corresponding `releaseKeepAwake` to avoid unnecessarily draining battery.
+
+### Basic Syntax
+
+```javascript
+chrome.power.releaseKeepAwake();
+```
+
+### Release Patterns
+
+Always ensure proper release in error scenarios and when tasks complete:
+
+```javascript
+async function performLongDownload(downloadId) {
+  // Request power before starting
+  chrome.power.requestKeepAwake('system');
+  
+  try {
+    const result = await downloadFile(downloadId);
+    console.log('Download complete');
+    return result;
+  } catch (error) {
+    console.error('Download failed:', error);
+    throw error;
+  } finally {
+    // Always release, whether success or failure
+    chrome.power.releaseKeepAwake();
+  }
+}
+```
+
+### Using try-finally for Guaranteed Release
+
+```javascript
+function processLargeFile(fileData) {
+  chrome.power.requestKeepAwake('system');
+  
+  try {
+    // Process the file
+    return processInChunks(fileData);
+  } finally {
+    // Guaranteed to execute
+    chrome.power.releaseKeepAwake();
+  }
+}
+```
+
+## Power State Management Patterns
+
+Effective power management requires thoughtful implementation patterns that balance functionality with battery conservation.
+
+### Level Change Handling
+
+While the Power API doesn't directly provide power state change events, you can integrate with other APIs:
+
+```javascript
+// Monitor for lid close or power events via runtime events
+chrome.runtime.onSuspend.addListener(() => {
+  // Save state before potential suspension
+  chrome.power.releaseKeepAwake();
+  saveApplicationState();
+});
+```
+
+### Context-Aware Power Management
+
+Adapt power management based on the current use case:
 
 ```javascript
 class PowerManager {
   constructor() {
-    this.isActive = false;
-    this.releaseTimer = null;
+    this.keepAwakeCount = 0;
+    this.currentLevel = 'display';
   }
-
-  request(durationMinutes = 30) {
-    // Clear any existing timer
-    this.cancel();
-    
-    chrome.power.requestKeepAwake('display');
-    this.isActive = true;
-    
-    // Auto-release after duration (optional safety)
-    this.releaseTimer = setTimeout(() => {
-      this.release();
-    }, durationMinutes * 60 * 1000);
-    
-    console.log(`Keep-awake active for ${durationMinutes} minutes`);
-  }
-
-  release() {
-    if (this.releaseTimer) {
-      clearTimeout(this.releaseTimer);
-      this.releaseTimer = null;
-    }
-    
-    if (this.isActive) {
+  
+  request(level = 'display') {
+    if (this.keepAwakeCount === 0) {
+      this.currentLevel = level;
+      chrome.power.requestKeepAwake(level);
+    } else if (level === 'system' && this.currentLevel === 'display') {
+      // Upgrade to system level if needed
       chrome.power.releaseKeepAwake();
-      this.isActive = false;
-      console.log('Power management released');
+      chrome.power.requestKeepAwake('system');
+      this.currentLevel = 'system';
+    }
+    this.keepAwakeCount++;
+  }
+  
+  release() {
+    if (this.keepAwakeCount > 0) {
+      this.keepAwakeCount--;
+      if (this.keepAwakeCount === 0) {
+        chrome.power.releaseKeepAwake();
+        this.currentLevel = 'display';
+      }
     }
   }
-
-  cancel() {
-    if (this.releaseTimer) {
-      clearTimeout(this.releaseTimer);
-      this.releaseTimer = null;
-    }
+  
+  get isActive() {
+    return this.keepAwakeCount > 0;
   }
 }
 
+// Usage
 const powerManager = new PowerManager();
 ```
 
-## Use Cases {#use-cases}
+## Use Cases
 
-### Presentations and Slideshows {#presentations-and-slideshows}
+### Presentations and Slide Shows
 
-Extensions that control presentations need the display to stay awake:
+Extensions that control presentations should manage display power to prevent the screen from turning off during important moments:
 
 ```javascript
 // presentation-controller.js
-class PresentationManager {
+class PresentationController {
   constructor() {
-    this.activePresentation = null;
-    this.listeners = new Map();
+    this.isPresenting = false;
+    this.slideChangeListener = null;
   }
-
-  startPresentation(slideCount) {
-    // Keep display awake during presentation
+  
+  startPresentation() {
+    if (this.isPresenting) return;
+    
+    this.isPresenting = true;
     chrome.power.requestKeepAwake('display');
-    this.activePresentation = {
-      startTime: Date.now(),
-      slideCount,
-      currentSlide: 0
-    };
-    console.log('Presentation mode: display kept awake');
+    
+    // Listen for presentation events
+    this.slideChangeListener = (event) => this.handleSlideChange(event);
+    document.addEventListener('slidechange', this.slideChangeListener);
+    
+    console.log('Presentation mode: display will stay on');
   }
-
-  nextSlide() {
-    if (this.activePresentation) {
-      this.activePresentation.currentSlide++;
-    }
-  }
-
-  endPresentation() {
+  
+  stopPresentation() {
+    if (!this.isPresenting) return;
+    
+    this.isPresenting = false;
     chrome.power.releaseKeepAwake();
-    this.activePresentation = null;
-    console.log('Presentation ended: power released');
+    
+    if (this.slideChangeListener) {
+      document.removeEventListener('slidechange', this.slideChangeListener);
+    }
+    
+    console.log('Presentation mode ended');
+  }
+  
+  handleSlideChange(event) {
+    // Reset any idle timers if your extension has them
+    this.resetIdleDetection();
   }
 }
 ```
 
-### Media Playback {#media-playback}
+### Media Playback
 
-Video and audio extensions should manage power states:
+Video and audio extensions should maintain display power during playback:
 
 ```javascript
 // media-playback.js
 class MediaPowerManager {
   constructor() {
-    this.isPlaying = false;
-    this.setupListeners();
+    this.mediaElement = null;
+    this.keepAwakeLevel = 'display';
   }
-
-  setupListeners() {
-    // Listen for tab audio playing
-    chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-      if (changeInfo.audible === true) {
-        this.onMediaStart();
-      } else if (changeInfo.audible === false) {
-        this.onMediaStop();
-      }
-    });
+  
+  initialize(mediaSelector) {
+    this.mediaElement = document.querySelector(mediaSelector);
+    
+    this.mediaElement.addEventListener('play', () => this.onPlay());
+    this.mediaElement.addEventListener('pause', () => this.onPause());
+    this.mediaElement.addEventListener('ended', () => this.onPause());
   }
-
-  onMediaStart() {
-    // Only prevent display sleep, not system
-    chrome.power.requestKeepAwake('display');
-    this.isPlaying = true;
+  
+  onPlay() {
+    // Use display level for video playback
+    chrome.power.requestKeepAwake(this.keepAwakeLevel);
+    console.log('Media playing: display keep-awake active');
   }
-
-  onMediaStop() {
+  
+  onPause() {
     chrome.power.releaseKeepAwake();
-    this.isPlaying = false;
+    console.log('Media paused: released');
   }
-
-  togglePlayback() {
-    if (this.isPlaying) {
-      this.onMediaStop();
-    } else {
-      this.onMediaStart();
+  
+  setLevel(level) {
+    if (chrome.runtime.lastError) {
+      console.error('Power API error:', chrome.runtime.lastError);
+      return;
     }
+    this.keepAwakeLevel = level;
   }
 }
+
+// Initialize
+const mediaManager = new MediaPowerManager();
+mediaManager.initialize('video');
 ```
 
-### Long Downloads {#long-downloads}
+### Long Downloads and File Transfers
 
-Download managers need to prevent system sleep during large transfers:
+Background downloads need system-level keep-awake to ensure completion:
 
 ```javascript
 // download-manager.js
 class DownloadPowerManager {
   constructor() {
     this.activeDownloads = new Map();
-    this.setupListeners();
   }
-
-  setupListeners() {
-    chrome.downloads.onCreated.addListener((downloadItem) => {
-      // For large downloads, use system level
-      if (downloadItem.fileSize > 50 * 1024 * 1024) { // 50MB+
-        this.enableSystemAwake(downloadItem.id);
-      } else {
-        this.enableDisplayAwake(downloadItem.id);
-      }
-    });
-
-    // Track state changes via onChanged (no separate onComplete/onError events)
-    chrome.downloads.onChanged.addListener((delta) => {
-      if (delta.state && (delta.state.current === 'complete' || delta.state.current === 'interrupted')) {
-        this.disablePowerManagement(delta.id);
-      }
-    });
-  }
-
-  enableSystemAwake(downloadId) {
-    chrome.power.requestKeepAwake('system');
-    this.activeDownloads.set(downloadId, 'system');
-    console.log(`Download ${downloadId}: system kept awake`);
-  }
-
-  enableDisplayAwake(downloadId) {
-    chrome.power.requestKeepAwake('display');
-    this.activeDownloads.set(downloadId, 'display');
-    console.log(`Download ${downloadId}: display kept awake`);
-  }
-
-  disablePowerManagement(downloadId) {
-    this.activeDownloads.delete(downloadId);
+  
+  startDownload(downloadId, fileSize) {
+    // Use system level for large downloads
+    const level = fileSize > 100 * 1024 * 1024 ? 'system' : 'display';
     
-    // Only release if no more active downloads
-    if (this.activeDownloads.size === 0) {
-      chrome.power.releaseKeepAwake();
-      console.log('All downloads complete: power released');
-    }
-  }
-}
-```
-
-## Battery-Conscious Design Patterns {#battery-conscious-design-patterns}
-
-### Always Release When Done {#always-release-when-done}
-
-The most important pattern: always pair `requestKeepAwake` with `releaseKeepAwake`:
-
-```javascript
-// BAD: Never releases
-function startTask() {
-  chrome.power.requestKeepAwake('system');
-  // Task completes but power stays on!
-}
-
-// GOOD: Always releases
-async function processLargeFile(file) {
-  chrome.power.requestKeepAwake('system');
-  try {
-    await processFile(file);
-  } finally {
-    chrome.power.releaseKeepAwake(); // Always runs
-  }
-}
-```
-
-### Choose the Right Level {#choose-the-right-level}
-
-Use `system` when you only need to prevent system sleep (allows display to dim/off). Use `display` when the screen must stay on (also prevents system sleep):
-
-```javascript
-// Prefer this (display level)
-chrome.power.requestKeepAwake('display');
-
-// Over this (system level), unless necessary
-chrome.power.requestKeepAwake('system');
-```
-
-### Track Request Count {#track-request-count}
-
-Multiple components can request keep-awake; track them properly:
-
-```javascript
-class PowerRequestTracker {
-  constructor() {
-    this.requests = new Set();
-  }
-
-  request(level = 'display') {
-    this.requests.add(level);
-    if (this.requests.size === 1) {
-      chrome.power.requestKeepAwake(level);
-    }
-  }
-
-  release() {
-    if (this.requests.size > 0) {
-      const levels = Array.from(this.requests);
-      this.requests.clear();
-      chrome.power.releaseKeepAwake();
-      
-      // Re-request for remaining if needed
-      levels.slice(1).forEach(level => this.request(level));
-    }
-  }
-
-  get active() {
-    return this.requests.size > 0;
-  }
-}
-```
-
-### Respect User Preference {#respect-user-preference}
-
-Consider checking if the user has battery saver enabled:
-
-```javascript
-async function shouldRequestPower() {
-  // Check if on battery power
-  if (navigator.getBattery) {
-    try {
-      const battery = await navigator.getBattery();
-      if (battery.level < 0.2 && !battery.charging) {
-        console.warn('Low battery: avoiding power request');
-        return false;
-      }
-    } catch (e) {
-      // Battery API not supported, proceed normally
-    }
-  }
-  return true;
-}
-
-async function smartRequestKeepAwake(level) {
-  if (await shouldRequestPower()) {
     chrome.power.requestKeepAwake(level);
+    this.activeDownloads.set(downloadId, level);
+    
+    console.log(`Download ${downloadId} started with ${level} level`);
+  }
+  
+  onDownloadComplete(downloadId) {
+    const level = this.activeDownloads.get(downloadId);
+    if (level) {
+      chrome.power.releaseKeepAwake();
+      this.activeDownloads.delete(downloadId);
+      console.log(`Download ${downloadId} complete, power released`);
+    }
+  }
+  
+  onDownloadError(downloadId, error) {
+    // Release on error too
+    this.onDownloadComplete(downloadId);
+    console.error(`Download ${downloadId} error:`, error);
   }
 }
 ```
 
-### Context-Aware Power Management {#context-aware-power-management}
+### Real-Time Communication
 
-Adjust power behavior based on extension context:
+Video calls and live dashboards require sustained display power:
 
 ```javascript
-class ContextAwarePowerManager {
+// video-call-handler.js
+class VideoCallManager {
   constructor() {
-    this.popupOpen = false;
-    this.setupContextListeners();
+    this.callState = 'idle';
   }
-
-  setupContextListeners() {
-    // Detect when popup is open
-    chrome.runtime.onConnect.addListener((port) => {
-      if (port.name === 'popup') {
-        this.popupOpen = true;
-        port.onDisconnect.addListener(() => {
-          this.popupOpen = false;
-          this.evaluatePowerState();
-        });
-      }
-    });
+  
+  async startCall(roomId) {
+    this.callState = 'connecting';
+    
+    try {
+      await this.initializeConnection(roomId);
+      this.callState = 'connected';
+      
+      // System level for video calls
+      chrome.power.requestKeepAwake('system');
+      console.log('Video call active: system power maintained');
+      
+    } catch (error) {
+      this.callState = 'failed';
+      throw error;
+    }
   }
+  
+  endCall() {
+    this.callState = 'idle';
+    chrome.power.releaseKeepAwake();
+    console.log('Video call ended: power released');
+  }
+  
+  onConnectionLost() {
+    // Keep power while reconnecting
+    console.log('Connection lost, attempting reconnect...');
+  }
+}
+```
 
-  evaluatePowerState() {
-    // Only request power if popup is actively open
-    if (this.popupOpen) {
+## Battery-Conscious Extension Design
+
+Responsible extension development means minimizing power impact when full functionality isn't required.
+
+### Auto-Release Strategies
+
+Implement automatic release after timeouts:
+
+```javascript
+class AutoReleasePowerManager {
+  constructor(options = {}) {
+    this.timeout = options.timeout || 5 * 60 * 1000; // 5 minutes default
+    this.timer = null;
+    this.level = options.level || 'display';
+  }
+  
+  request() {
+    // Clear existing timer
+    this.clearTimer();
+    
+    // Request power
+    chrome.power.requestKeepAwake(this.level);
+    
+    // Set auto-release timer
+    this.timer = setTimeout(() => {
+      console.log('Auto-release: timeout reached');
+      this.release();
+    }, this.timeout);
+  }
+  
+  release() {
+    this.clearTimer();
+    chrome.power.releaseKeepAwake();
+  }
+  
+  clearTimer() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+  }
+}
+```
+
+### User Preference Integration
+
+Allow users to control power behavior:
+
+```javascript
+// options.js
+class UserPreferencePowerManager {
+  constructor() {
+    this.loadPreferences();
+  }
+  
+  async loadPreferences() {
+    const prefs = await chrome.storage.sync.get([
+      'preventSleep',
+      'sleepPreventionLevel',
+      'autoReleaseMinutes'
+    ]);
+    
+    this.enabled = prefs.preventSleep || false;
+    this.level = prefs.sleepPreventionLevel || 'display';
+    this.autoReleaseTime = (prefs.autoReleaseMinutes || 10) * 60 * 1000;
+  }
+  
+  async requestIfEnabled(taskDescription) {
+    await this.loadPreferences();
+    
+    if (!this.enabled) return false;
+    
+    chrome.power.requestKeepAwake(this.level);
+    
+    if (this.autoReleaseTime) {
+      setTimeout(() => {
+        chrome.power.releaseKeepAwake();
+        console.log(`Auto-released after ${this.autoReleaseTime}ms for: ${taskDescription}`);
+      }, this.autoReleaseTime);
+    }
+    
+    return true;
+  }
+}
+```
+
+### Battery Status Integration (Experimental)
+
+When available, use battery information to make intelligent decisions:
+
+```javascript
+// experimental: may require additional permissions
+async function requestPowerBasedOnBattery() {
+  if (!navigator.getBattery) {
+    // Fallback: request anyway
+    chrome.power.requestKeepAwake('display');
+    return;
+  }
+  
+  try {
+    const battery = await navigator.getBattery();
+    
+    if (!battery.charging && battery.level < 0.2) {
+      // Low battery: be conservative
+      console.log('Low battery: using conservative power mode');
       chrome.power.requestKeepAwake('display');
     } else {
-      chrome.power.releaseKeepAwake();
+      // Normal operation
+      chrome.power.requestKeepAwake('display');
     }
+    
+    // Listen for battery changes
+    battery.addEventListener('levelchange', () => handleBatteryChange(battery));
+    battery.addEventListener('chargingchange', () => handleBatteryChange(battery));
+    
+  } catch (error) {
+    console.error('Battery API error:', error);
+    chrome.power.requestKeepAwake('display');
+  }
+}
+
+function handleBatteryChange(battery) {
+  if (!battery.charging && battery.level < 0.1) {
+    // Critical: suggest stopping
+    notifyUser('Critical battery level. Consider pausing power-intensive tasks.');
   }
 }
 ```
 
-### Event-Based Cleanup {#event-based-cleanup}
+### Progressive Enhancement Pattern
 
-Use event listeners to automatically manage power:
+Start with minimal power requirements and escalate only when necessary:
 
 ```javascript
-// Auto-cleanup on extension unload
+class ProgressivePowerManager {
+  constructor() {
+    this.currentLevel = null;
+  }
+  
+  async requestForTask(taskType, priority = 'normal') {
+    // Start with display level
+    let requestedLevel = 'display';
+    
+    // Escalate based on task requirements
+    switch (taskType) {
+      case 'video-capture':
+      case 'large-download':
+        requestedLevel = priority === 'high' ? 'system' : 'display';
+        break;
+      case 'presentation':
+      case 'media-playback':
+        requestedLevel = 'display';
+        break;
+      case 'background-sync':
+        requestedLevel = 'display';
+        break;
+      default:
+        requestedLevel = 'display';
+    }
+    
+    // Only upgrade, never downgrade while active
+    if (this.currentLevel === 'system') {
+      return; // Already at highest level
+    }
+    
+    if (this.currentLevel === 'display' && requestedLevel === 'system') {
+      chrome.power.releaseKeepAwake();
+      chrome.power.requestKeepAwake('system');
+      this.currentLevel = 'system';
+    } else if (!this.currentLevel) {
+      chrome.power.requestKeepAwake(requestedLevel);
+      this.currentLevel = requestedLevel;
+    }
+  }
+  
+  release() {
+    chrome.power.releaseKeepAwake();
+    this.currentLevel = null;
+  }
+}
+```
+
+## Best Practices
+
+### Always Pair Request with Release
+
+Every `requestKeepAwake` should have a corresponding `releaseKeepAwake`. Use try-finally blocks to ensure release happens even when errors occur.
+
+### Prefer Display Over System Level
+
+Use display level whenever possible. System level significantly impacts battery life and should be reserved for operations that truly require it.
+
+### Set Appropriate Timeouts
+
+Implement auto-release timeouts to prevent unintended power consumption:
+
+```javascript
+function withTimeout(requestFn, timeoutMs = 300000) {
+  requestFn();
+  
+  setTimeout(() => {
+    chrome.power.releaseKeepAwake();
+    console.log('Power released due to timeout');
+  }, timeoutMs);
+}
+```
+
+### Listen for Extension Lifecycle Events
+
+Clean up power requests when the extension is suspended or unloaded:
+
+```javascript
 chrome.runtime.onSuspend.addListener(() => {
   chrome.power.releaseKeepAwake();
   console.log('Extension suspended: power released');
 });
+```
 
-// Clean up on tab close
-chrome.tabs.onRemoved.addListener((tabId) => {
-  // Check if this was the only active tab needing power
-  chrome.power.releaseKeepAwake();
+### Provide User Control
+
+Include options for users to configure power behavior:
+
+```json
+{
+  "permissions": ["storage"],
+  "options_page": "options.html"
+}
+```
+
+```javascript
+// options.html handler
+document.getElementById('preventSleep').addEventListener('change', (e) => {
+  chrome.storage.sync.set({ preventSleep: e.target.checked });
 });
 ```
 
-## Best Practices Summary {#best-practices-summary}
+## Summary
 
-1. **Always release when done** — Use try/finally or event-driven cleanup
-2. **Prefer display level** — Only use system level when necessary
-3. **Track multiple requests** — Don't let one component override another
-4. **Consider battery state** — Respect low-power conditions
-5. **Auto-timeout as safety** — Set maximum durations for power requests
-6. **Clean up on unload** — Handle extension suspension and tab closure
-7. **Log state changes** — Helps debug power-related issues
+The Chrome Power API is essential for building extensions that need to maintain active sessions without user interaction. Key takeaways:
 
-## Common Mistakes {#common-mistakes}
+1. Use `chrome.power.requestKeepAwake(level)` to prevent sleep, with `'display'` being the battery-friendly default
+2. Always pair requests with `chrome.power.releaseKeepAwake()` to avoid battery drain
+3. Implement timeouts and user preferences for responsible power management
+4. Choose the appropriate level based on your use case—display for visual content, system for background processing
+5. Follow battery-conscious design patterns to create extensions that respect user resources
 
-- Forgetting to call `releaseKeepAwake()` after task completion
-- Using system level when display would suffice
-- Not handling multiple concurrent power requests
-- Ignoring battery state on portable devices
-- Not cleaning up on extension suspension
-
-## Related APIs {#related-apis}
-
-- [chrome.idle](https://developer.chrome.com/docs/extensions/reference/idle/) — Detect user idle state
-- [chrome.power](https://developer.chrome.com/docs/extensions/reference/power/) — Full API documentation
-- [chrome.alarms](https://developer.chrome.com/docs/extensions/reference/alarms/) — Schedule tasks that may need power
-
-The Power API is straightforward but critical for creating polished extensions that don't interrupt users with unexpected sleep states during important tasks.
-
-## Related Articles {#related-articles}
-
-## Related Articles
-
-- [Power API Patterns](../patterns/power-api.md)
-- [Idle Detection](../guides/idle-detection.md)
--e 
----
-
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+By implementing these patterns, your extensions will provide reliable functionality while maintaining responsible power consumption.
