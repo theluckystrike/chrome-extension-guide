@@ -304,7 +304,7 @@ Tab Suspender Pro is an essential tool for anyone looking to optimize their Chro
 
 Start with the default settings and gradually customize the extension to match your workflow. The whitelist feature is particularly important—take time to configure it properly for the sites you use most. With a well-configured whitelist, you can enjoy significant memory savings without interrupting your productivity.
 
-For more tips on optimizing your browser's performance, explore our [Chrome memory management guide](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/) and learn about [reducing browser RAM usage](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/).
+For more tips on optimizing your browser's performance, explore our [Chrome memory management guide](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/) and learn about [reducing browser RAM usage](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/). For more Chrome extension guides and tutorials, visit our [Chrome Extension Guide](/chrome-extension-guide/).
 
 ---
 
