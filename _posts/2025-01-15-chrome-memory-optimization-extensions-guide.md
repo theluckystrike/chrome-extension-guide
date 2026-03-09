@@ -163,6 +163,14 @@ Remember that every system is different, and the optimal configuration depends o
 
 ---
 
+## Related Articles
+
+- [Fix Slow Browser - Too Many Tabs]({% post_url 2025-01-15-fix-slow-browser-too-many-tabs-chrome-extension %})
+- [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
+- [How Tab Suspender Saves Laptop Battery Life]({% post_url 2025-01-16-how-tab-suspender-saves-laptop-battery-life %})
+
+---
+
 *For more guides on Chrome extension development and optimization, explore our comprehensive documentation and tutorials.*
 ---
 
