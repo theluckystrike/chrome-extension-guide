@@ -12,7 +12,7 @@ author: theluckystrike
 
 The transition from Manifest V2 to Manifest V3 fundamentally changed how Chrome extensions operate, but the impact on monetization goes far beyond simple API updates. For developers who have built successful paid extensions, understanding these changes is critical for maintaining revenue streams and providing a seamless purchase experience to users. This guide breaks down every significant change affecting extension monetization and provides practical patterns for adapting your payment infrastructure to the Manifest V3 world.
 
-This article assumes you have a working Chrome extension and are familiar with basic monetization concepts. For a broader overview of extension monetization strategies, check out our [Extension Monetization Playbook](/chrome-extension-guide/docs/guides/monetization-strategies/). For Stripe integration details, see our [Stripe Payment Integration Tutorial](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/).
+This article assumes you have a working Chrome extension and are familiar with basic monetization concepts. For a broader overview of extension monetization strategies, check out our [Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). For Stripe integration details, see our [Stripe Payment Integration Tutorial](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/).
 
 ---
 
