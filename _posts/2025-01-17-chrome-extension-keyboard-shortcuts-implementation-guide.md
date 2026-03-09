@@ -324,3 +324,11 @@ Implementing keyboard shortcuts through the Chrome Extension Commands API is a p
 Remember to focus on user experience by providing clear shortcut documentation, choosing intuitive key combinations, and handling conflicts gracefully. With proper implementation, your extension's keyboard shortcuts will become an integral part of users' workflows, making your extension an indispensable tool in their browser.
 
 The Commands API continues to evolve with Chrome's development, so stay current with the latest documentation and consider exploring new features as they become available. Happy coding!
+
+---
+
+## Related Articles
+
+- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Create intuitive and efficient popup interfaces for your extensions.
+- [Chrome Extension Options Page Design Guide](/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/) - Build user-friendly settings pages for configuration.
+- [Chrome Extension Keyboard Navigation Implementation](/chrome-extension-guide/2025/01/29/chrome-extension-keyboard-navigation/) - Ensure your extension is fully accessible via keyboard.

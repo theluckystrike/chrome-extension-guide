@@ -458,6 +458,14 @@ The Chrome extension ecosystem continues to evolve, and Manifest V3 represents a
 
 ---
 
+## Related Articles
+
+- [Manifest V3 Service Worker Patterns: Anti-Patterns to Avoid](/chrome-extension-guide/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/) - Learn common pitfalls and best practices for MV3 service workers.
+- [Declarative Net Request API Complete Tutorial](/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/) - Master the declarativeNetRequest API for network request modification.
+- [Chrome Extension Web Store Publishing Checklist 2025](/chrome-extension-guide/2025/02/28/chrome-web-store-publishing-checklist-2025/) - Ensure your extension meets all publishing requirements.
+
+---
+
 *Ready to publish your migrated extension? Check out our comprehensive guide to [publishing Chrome extensions to the Web Store](/chrome-extension-guide/2025/01/17/publish-chrome-extension-web-store-2025-guide/) for step-by-step instructions.*
 
 ---

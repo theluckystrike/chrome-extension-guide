@@ -524,6 +524,15 @@ Start with simple local notifications to validate your use case, then expand to 
 Continue exploring other Chrome Extension APIs to build even more powerful extensions that leverage the full potential of the Chrome extension platform.
 
 ---
+
+## Related Articles
+
+- [Chrome Extension Badge Text and Icon Guide](/chrome-extension-guide/2025/01/18/chrome-extension-badge-text-and-icon-guide/) - Use badges to show notification counts and status.
+- [Chrome Extension Push Notifications: Web Push Integration](/chrome-extension-guide/2025/01/25/web-push-notifications-chrome-extension/) - Implement real-time push notifications for user engagement.
+- [Chrome Extension Notifications API Complete Guide](/chrome-extension-guide/2025/02/23/chrome-extension-notifications-api-complete-guide/) - Deep dive into advanced notification patterns and features.
+
+---
+
 ## Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

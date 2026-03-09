@@ -590,3 +590,11 @@ The key to success lies in understanding the tradeoffs between different storage
 As Chrome extensions continue to evolve, offline capability will become increasingly expected by users. By implementing the techniques covered in this guide, you'll be well-equipped to build reliable, performant extensions that work seamlessly in any connectivity scenario.
 
 Start implementing offline support in your extensions today, and provide your users with the seamless experience they deserve—because a great extension should work whenever and wherever it's needed.
+
+---
+
+## Related Articles
+
+- [Chrome Storage API Patterns: Best Practices](/chrome-extension-guide/2025/01/24/chrome-storage-api-patterns/) - Master chrome.storage for efficient settings and data management.
+- [IndexedDB Chrome Extension Data Storage Guide](/chrome-extension-guide/2025/01/21/indexeddb-chrome-extension-data-storage/) - Learn how to use IndexedDB for large-scale structured data.
+- [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/25/chrome-extension-service-worker-lifecycle-deep-dive/) - Understand service worker lifecycle for reliable background processing.
