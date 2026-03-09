@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Chrome Memory Optimization: Complete Guide to Managing Browser RAM in 2025"
+seo_title: "Chrome Memory Optimization Guide 2025 | Reduce RAM Usage"
 description: "Master chrome memory optimization with our comprehensive 2025 guide. Learn proven techniques to reduce chrome RAM usage, understand browser memory management, and fix chrome using too much memory with practical solutions."
 date: 2025-01-15
 categories: [guides, chrome-extensions, productivity]

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Chrome Extension Development in 2025: Complete Beginner's Guide"
+seo_title: "Chrome Extension Development Tutorial 2025 | Beginner's Guide"
 description: "Learn how to build Chrome extensions from scratch in 2025. This complete beginner's guide covers Manifest V3, service workers, content scripts, and everything you need to publish your first extension."
 date: 2025-01-16
 categories: [tutorials, chrome-extensions]

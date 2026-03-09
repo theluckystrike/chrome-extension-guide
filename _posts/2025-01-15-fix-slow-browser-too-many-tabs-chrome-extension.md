@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Fix Slow Browser From Too Many Tabs: Best Chrome Extensions for 2025"
+seo_title: "Fix Slow Browser | Best Chrome Extensions for Too Many Tabs 2025"
 description: "Is your Chrome browser running slow due to too many tabs? Learn how to fix slow browser issues, reduce Chrome memory usage, and improve performance with the best tab management extensions in 2025."
 date: 2025-01-15
 categories: [productivity, chrome-extensions, browser-performance]
