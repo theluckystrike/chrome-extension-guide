@@ -122,6 +122,265 @@ async function generateKeyPair() {
     ['encrypt', 'decrypt']
   );
   
+  // Export keys for storage
+  const publicKey = await window.crypto.subtle.exportKey('spki', keyPair.publicKey);
+  const privateKey = await window.crypto.subtle.exportKey('pkcs8', keyPair.privateKey);
+  
+  return {
+    publicKey: arrayBufferToBase64(publicKey),
+    privateKey: arrayBufferToBase64(privateKey),
+    keyPair
+  };
+}
+
+// Helper: Convert ArrayBuffer to Base64
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+```
+
+### Practical Example: Complete Key Management System
+
+Here's a complete implementation for managing encryption keys in your extension:
+
+```javascript
+// lib/key-manager.js
+
+class KeyManager {
+  constructor() {
+    this.storageKey = 'secure_chat_keys';
+    this.currentKeyPair = null;
+  }
+
+  async initialize() {
+    // Try to load existing keys from storage
+    const stored = await this.loadKeys();
+    
+    if (stored) {
+      this.currentKeyPair = await this.importKeys(stored.publicKey, stored.privateKey);
+      console.log('Loaded existing key pair');
+    } else {
+      // Generate new keys for new users
+      this.currentKeyPair = await this.generateNewKeyPair();
+      await this.saveKeys();
+      console.log('Generated new key pair');
+    }
+    
+    return this.getPublicKey();
+  }
+
+  async generateNewKeyPair() {
+    return window.crypto.subtle.generateKey(
+      {
+        name: 'RSA-OAEP',
+        modulusLength: 2048,
+        publicExponent: new Uint8Array([1, 0, 1]),
+        hash: 'SHA-256'
+      },
+      true,
+      ['encrypt', 'decrypt']
+    );
+  }
+
+  async importKeys(publicKeyBase64, privateKeyBase64) {
+    const publicKeyBuffer = base64ToArrayBuffer(publicKeyBase64);
+    const privateKeyBuffer = base64ToArrayBuffer(privateKeyBase64);
+
+    const publicKey = await window.crypto.subtle.importKey(
+      'spki',
+      publicKeyBuffer,
+      { name: 'RSA-OAEP', hash: 'SHA-256' },
+      true,
+      ['encrypt']
+    );
+
+    const privateKey = await window.crypto.subtle.importKey(
+      'pkcs8',
+      privateKeyBuffer,
+      { name: 'RSA-OAEP', hash: 'SHA-256' },
+      true,
+      ['decrypt']
+    );
+
+    return { publicKey, privateKey };
+  }
+
+  async encryptMessage(message, recipientPublicKey) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    
+    // Generate a random IV for each message
+    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+    
+    // For longer messages, use hybrid encryption (RSA + AES)
+    const aesKey = await window.crypto.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 },
+      true,
+      ['encrypt', 'decrypt']
+    );
+    
+    const encryptedData = await window.crypto.subtle.encrypt(
+      { name: 'AES-GCM', iv },
+      aesKey,
+      data
+    );
+    
+    // Encrypt AES key with RSA public key
+    const rawAesKey = await window.crypto.subtle.exportKey('raw', aesKey);
+    const encryptedAesKey = await window.crypto.subtle.encrypt(
+      { name: 'RSA-OAEP' },
+      recipientPublicKey,
+      rawAesKey
+    );
+    
+    return {
+      iv: arrayBufferToBase64(iv),
+      encryptedData: arrayBufferToBase64(encryptedData),
+      encryptedAesKey: arrayBufferToBase64(encryptedAesKey)
+    };
+  }
+
+  async decryptMessage(encryptedPayload, senderPublicKey) {
+    const iv = base64ToArrayBuffer(encryptedPayload.iv);
+    const encryptedData = base64ToArrayBuffer(encryptedPayload.encryptedData);
+    const encryptedAesKey = base64ToArrayBuffer(encryptedPayload.encryptedAesKey);
+    
+    // Decrypt AES key with RSA private key
+    const rawAesKey = await window.crypto.subtle.decrypt(
+      { name: 'RSA-OAEP' },
+      this.currentKeyPair.privateKey,
+      encryptedAesKey
+    );
+    
+    const aesKey = await window.crypto.subtle.importKey(
+      'raw',
+      rawAesKey,
+      { name: 'AES-GCM' },
+      false,
+      ['decrypt']
+    );
+    
+    // Decrypt data with AES key
+    const decryptedData = await window.crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv },
+      aesKey,
+      encryptedData
+    );
+    
+    const decoder = new TextDecoder();
+    return decoder.decode(decryptedData);
+  }
+
+  async saveKeys() {
+    const publicKey = await window.crypto.subtle.exportKey('spki', this.currentKeyPair.publicKey);
+    const privateKey = await window.crypto.subtle.exportKey('pkcs8', this.currentKeyPair.privateKey);
+    
+    await chrome.storage.local.set({
+      [this.storageKey]: {
+        publicKey: arrayBufferToBase64(publicKey),
+        privateKey: arrayBufferToBase64(privateKey)
+      }
+    });
+  }
+
+  async loadKeys() {
+    const result = await chrome.storage.local.get(this.storageKey);
+    return result[this.storageKey];
+  }
+
+  getPublicKey() {
+    return this.currentKeyPair?.publicKey;
+  }
+}
+
+// Helper functions
+function base64ToArrayBuffer(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+// Export for use in other files
+export default KeyManager;
+```
+
+### Using the Key Manager in Your Extension
+
+Here's how to integrate the KeyManager into your extension's background script:
+
+```javascript
+// background/service-worker.js
+import KeyManager from '../lib/key-manager.js';
+
+let keyManager;
+
+chrome.runtime.onInstalled.addListener(async () => {
+  keyManager = new KeyManager();
+  const publicKey = await keyManager.initialize();
+  
+  console.log('Secure Chat initialized');
+  console.log('Your public key:', publicKey);
+  
+  // Store public key for sharing with contacts
+  await chrome.storage.sync.set({ myPublicKey: publicKey });
+});
+
+// Handle incoming messages
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'ENCRYPT_MESSAGE') {
+    handleEncryption(message, sendResponse);
+    return true; // Keep channel open for async response
+  }
+  
+  if (message.type === 'DECRYPT_MESSAGE') {
+    handleDecryption(message, sendResponse);
+    return true;
+  }
+});
+
+async function handleEncryption(message, sendResponse) {
+  try {
+    // Import recipient's public key
+    const recipientKey = await importPublicKey(message.recipientPublicKey);
+    
+    // Encrypt the message
+    const encrypted = await keyManager.encryptMessage(message.content, recipientKey);
+    
+    sendResponse({ success: true, encrypted });
+  } catch (error) {
+    sendResponse({ success: false, error: error.message });
+  }
+}
+
+async function importPublicKey(base64Key) {
+  const keyBuffer = base64ToArrayBuffer(base64Key);
+  return window.crypto.subtle.importKey(
+    'spki',
+    keyBuffer,
+    { name: 'RSA-OAEP', hash: 'SHA-256' },
+    true,
+    ['encrypt']
+  );
+}
+```
+  
   return {
     publicKey: await exportKey(keyPair.publicKey),
     privateKey: await exportKey(keyPair.privateKey)

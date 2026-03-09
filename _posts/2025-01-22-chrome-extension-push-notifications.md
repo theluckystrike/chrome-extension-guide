@@ -120,6 +120,236 @@ function showNotification(title, message, iconUrl) {
 showNotification('New Update Available', 'Check out the latest features!', 'icons/notification-icon.png');
 ```
 
+### Advanced Notification System with Templates
+
+Create a comprehensive notification system for your extension:
+
+```javascript
+// lib/notification-manager.js
+
+class NotificationManager {
+  constructor() {
+    this.notificationQueue = [];
+    this.isProcessing = false;
+    this.maxConcurrent = 3;
+  }
+
+  // Show a rich notification with custom layout
+  async showRichNotification(options) {
+    const {
+      title,
+      message,
+      iconUrl,
+      imageUrl,
+      buttons = [],
+      contextMessage,
+      eventTime,
+      requiresInteraction = false
+    } = options;
+
+    return new Promise((resolve, reject) => {
+      chrome.notifications.create({
+        type: imageUrl ? 'image' : 'basic',
+        iconUrl: iconUrl || 'icons/icon-128.png',
+        imageUrl: imageUrl || undefined,
+        title: title,
+        message: message,
+        contextMessage: contextMessage,
+        eventTime: eventTime || Date.now(),
+        priority: requiresInteraction ? 2 : 1,
+        buttons: buttons,
+        requireInteraction: requiresInteraction
+      }, (notificationId) => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve(notificationId);
+        }
+      });
+    });
+  }
+
+  // Queue notifications to avoid overwhelming the user
+  async queueNotification(options) {
+    this.notificationQueue.push(options);
+    if (!this.isProcessing) {
+      this.processQueue();
+    }
+  }
+
+  async processQueue() {
+    if (this.notificationQueue.length === 0) {
+      this.isProcessing = false;
+      return;
+    }
+
+    this.isProcessing = true;
+    const notification = this.notificationQueue.shift();
+
+    try {
+      await this.showRichNotification(notification);
+      // Wait between notifications to avoid spam
+      await this.delay(2000);
+    } catch (error) {
+      console.error('Failed to show notification:', error);
+    }
+
+    this.processQueue();
+  }
+
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Clear all notifications
+  async clearAll() {
+    return new Promise((resolve) => {
+      chrome.notifications.getAll((notifications) => {
+        Object.keys(notifications).forEach(id => {
+          chrome.notifications.clear(id);
+        });
+        resolve();
+      });
+    });
+  }
+}
+
+// Export for use in background script
+export default NotificationManager;
+```
+
+### Practical Example: Real-Time Alert System
+
+Here's a complete example of implementing real-time alerts:
+
+```javascript
+// background/alerts.js
+import NotificationManager from '../lib/notification-manager.js';
+
+class AlertSystem {
+  constructor() {
+    this.notificationManager = new NotificationManager();
+    this.alertRules = [];
+    this.initializeListeners();
+  }
+
+  initializeListeners() {
+    // Listen for messages from content scripts or popup
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (message.type === 'TRIGGER_ALERT') {
+        this.handleAlert(message.payload);
+      }
+      if (message.type === 'UPDATE_RULES') {
+        this.alertRules = message.rules;
+      }
+    });
+
+    // Handle notification button clicks
+    chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
+      this.handleButtonClick(notificationId, buttonIndex);
+    });
+
+    // Handle notification clicks
+    chrome.notifications.onClicked.addListener((notificationId) => {
+      this.handleNotificationClick(notificationId);
+    });
+  }
+
+  async handleAlert(payload) {
+    const { title, message, priority, category, actions } = payload;
+
+    const buttons = actions?.map(action => ({ title: action })) || [];
+
+    await this.notificationManager.showRichNotification({
+      title: title,
+      message: message,
+      iconUrl: this.getIconForCategory(category),
+      contextMessage: category,
+      priority: priority || 1,
+      buttons: buttons,
+      requiresInteraction: priority >= 2
+    });
+  }
+
+  getIconForCategory(category) {
+    const icons = {
+      'info': 'icons/info.png',
+      'warning': 'icons/warning.png',
+      'error': 'icons/error.png',
+      'success': 'icons/success.png',
+      'default': 'icons/icon-128.png'
+    };
+    return icons[category] || icons.default;
+  }
+
+  handleButtonClick(notificationId, buttonIndex) {
+    console.log(`Button ${buttonIndex} clicked on notification ${notificationId}`);
+    
+    // Handle different button actions
+    switch (buttonIndex) {
+      case 0: // View Details
+        chrome.tabs.create({ url: 'options.html' });
+        break;
+      case 1: // Dismiss
+        chrome.notifications.clear(notificationId);
+        break;
+    }
+  }
+
+  handleNotificationClick(notificationId) {
+    // Focus the extension's popup or open options page
+    chrome.runtime.sendNativeMessage('application.id', {
+      action: 'notification_clicked',
+      notificationId
+    });
+  }
+}
+
+// Initialize the alert system
+const alertSystem = new AlertSystem();
+```
+
+### Notification Best Practices
+
+Follow these guidelines for effective notifications:
+
+```javascript
+const notificationBestPractices = {
+  // 1. Respect user attention - don't over-notify
+  shouldNotify: function(userActivity, lastNotificationTime) {
+    const cooldown = 60000; // 1 minute minimum between notifications
+    return (Date.now() - lastNotificationTime) > cooldown;
+  },
+
+  // 2. Provide clear, actionable notifications
+  createActionableNotification: function(data) {
+    return {
+      title: data.title, // Keep under 50 characters
+      message: data.message, // Keep under 200 characters
+      buttons: [
+        { title: 'Take Action' },
+        { title: 'Dismiss' }
+      ],
+      requireInteraction: data.urgent || false
+    };
+  },
+
+  // 3. Test across different scenarios
+  testNotifications: async function() {
+    const testCases = [
+      { title: 'Test Info', message: 'Info notification', priority: 0 },
+      { title: 'Test Warning', message: 'Warning notification', priority: 1 },
+      { title: 'Test Urgent', message: 'Urgent notification', priority: 2 }
+    ];
+
+    for (const testCase of testCases) {
+      await chrome.notifications.create(testCase);
+      await new Promise(r => setTimeout(r, 1000));
+    }
+  }
+};
+```
+
 ### Handling Notification Clicks
 
 To make your notifications interactive, you need to add a click handler:

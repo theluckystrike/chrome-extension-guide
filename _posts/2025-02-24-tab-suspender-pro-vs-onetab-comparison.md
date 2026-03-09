@@ -100,6 +100,87 @@ The ability to create named groups is a significant advantage for organized user
 
 However, OneTab requires more active management. You must remember to click the OneTab icon to save tabs, and you must actively restore tabs when you need them. For users who prefer passive management, this additional step may feel cumbersome.
 
+### Practical Decision Matrix
+
+Use this decision matrix to choose between the two extensions:
+
+```javascript
+const decisionMatrix = {
+  evaluate: function(userProfile) {
+    const { 
+      prefersAutomation = false,
+      tabCount = 20,
+      usesTabGroups = false,
+      needsPersistentTabs = true,
+      memoryConstrained = false 
+    } = userProfile;
+
+    let tabSuspenderScore = 0;
+    let oneTabScore = 0;
+
+    // Automation preference
+    if (prefersAutomation) tabSuspenderScore += 3;
+    else oneTabScore += 2;
+
+    // High tab count benefits from automation
+    if (tabCount > 30) tabSuspenderScore += 2;
+    
+    // Tab groups are OneTab's strength
+    if (usesTabGroups) oneTabScore += 3;
+
+    // Persistent tabs needed
+    if (needsPersistentTabs) tabSuspenderScore += 2;
+
+    // Memory constraints
+    if (memoryConstrained) {
+      tabSuspenderScore += 1;
+      oneTabScore += 1;
+    }
+
+    return {
+      winner: tabSuspenderScore > oneTabScore ? 'Tab Suspender Pro' : 'OneTab',
+      scores: { tabSuspenderPro: tabSuspenderScore, onetab: oneTabScore }
+    };
+  }
+};
+
+// Example usage
+const myProfile = {
+  prefersAutomation: true,
+  tabCount: 45,
+  usesTabGroups: false,
+  needsPersistentTabs: true,
+  memoryConstrained: true
+};
+
+console.log(decisionMatrix.evaluate(myProfile));
+// Output: { winner: 'Tab Suspender Pro', scores: { tabSuspenderPro: 8, onetab: 3 } }
+```
+
+### Quick Setup Comparison
+
+**Tab Suspender Pro Setup:**
+```javascript
+// Recommended initial configuration
+{
+  autoSuspendDelay: 300000, // 5 minutes
+  whitelist: ['gmail.com', 'slack.com', 'github.com'],
+  showSuspendedIndicator: true,
+  keyboardShortcut: 'Ctrl+Shift+S'
+}
+```
+
+**OneTab Setup:**
+```javascript
+// Best practices for OneTab users
+{
+  createGroupsByDomain: true,
+  restoreAllOnStartup: false,
+  showTabCountBadge: true,
+  excludeFromHistory: false
+}
+```
+
 ---
 
 ## Use Case Recommendations
