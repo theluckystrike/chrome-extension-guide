@@ -832,6 +832,15 @@ With the foundation provided in this guide, you can extend and customize your da
 Start building your dark mode extension today and join the thousands of developers who are making the web more comfortable for users around the world.
 
 ---
+
+## Related Articles
+
+- [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %})
+- [Chrome Extension Web Accessibility A11y Guide]({% post_url 2025-01-18-chrome-extension-accessibility-a11y-guide %})
+- [Chrome Extension Custom Fonts Loading]({% post_url 2025-03-22-chrome-extension-custom-fonts-loading %})
+
+---
+
 ## Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

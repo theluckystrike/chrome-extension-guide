@@ -437,5 +437,13 @@ Remember that CI/CD is an ongoing investment. Regularly review and optimize your
 
 ---
 
+## Related Articles
+
+- [Chrome Extension Testing Automation Guide]({% post_url 2025-01-16-chrome-extension-testing-automation-guide %})
+- [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
+- [Chrome Extension Webpack Bundling Guide]({% post_url 2025-02-27-chrome-extension-webpack-bundling-guide %})
+
+---
+
 ## Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

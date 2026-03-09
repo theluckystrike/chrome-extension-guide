@@ -368,3 +368,11 @@ Throughout this react chrome extension tutorial, we have covered the essential t
 As you continue developing, explore advanced topics like declarative Net Requests for network filtering, Side Panel API for persistent UIs, and the various Chrome AI APIs that are becoming available. The Chrome extension ecosystem continues to evolve, and React developers are well-positioned to build the next generation of browser tools.
 
 Start your react chrome extension project today, and join the thousands of developers creating extensions that millions of users rely on every day.
+
+---
+
+## Related Articles
+
+- [Building Chrome Extensions with Vue Complete Guide]({% post_url 2025-02-02-building-chrome-extensions-with-vue-complete-guide %})
+- [Building Chrome Extensions with Svelte Complete Guide]({% post_url 2025-02-03-building-chrome-extensions-with-svelte-complete-guide %})
+- [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %})
