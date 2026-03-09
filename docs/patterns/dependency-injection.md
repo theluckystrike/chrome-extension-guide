@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Dependency Injection — Testable and Modular Extension Code"
 description: "Learn how to apply dependency injection patterns in Chrome extensions for testable, maintainable, and modular code."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/dependency-injection/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/dependency-injection/"
 ---
 
 # Chrome Extension Dependency Injection
