@@ -540,6 +540,7 @@ For more sophisticated size tracking, consider these approaches:
 
 **Size Comparison Comments**: Use GitHub Actions to comment on pull requests with bundle size changes:
 
+{% raw %}
 ```yaml
 - name: Compare bundle sizes
   uses: ./.github/actions/compare-sizes
@@ -547,6 +548,7 @@ For more sophisticated size tracking, consider these approaches:
     base-branch: main
     head-branch: ${{ github.head_ref }}
 ```
+{% endraw %}
 
 **Budget Alerts**: Set up alerts that notify when approaching limits:
 
