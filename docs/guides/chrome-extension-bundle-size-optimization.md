@@ -637,4 +637,8 @@ Start with the configuration changes that have the biggest impact—production b
 
 ---
 
+<<<<<<< HEAD
 *Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one).*
+=======
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
+>>>>>>> content/bundle-size-optimization
