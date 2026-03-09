@@ -122,3 +122,11 @@ The extension login flow forms the foundation of user authentication experience,
 OAuth chrome extension patterns provide the most flexible approach for third-party integrations, and mastering these patterns opens up vast possibilities for extension functionality. Combined with Manifest V3 authentication best practices and careful token management, these patterns enable you to build extensions that securely access user data while providing seamless experiences.
 
 As the Chrome extension platform continues to evolve, staying current with authentication best practices remains crucial. The patterns and strategies outlined in this guide provide a solid foundation for implementing authentication in modern Chrome extensions, ensuring your extensions are secure, user-friendly, and ready for production deployment.
+
+---
+
+## Related Articles
+
+- [Chrome Extension OAuth2 Authentication Guide](/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
+- [Chrome Identity API OAuth Guide](/2025/01/24/chrome-identity-api-oauth/) - Learn how to use the Chrome Identity API for authentication
+- [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Security best practices for Chrome extensions
