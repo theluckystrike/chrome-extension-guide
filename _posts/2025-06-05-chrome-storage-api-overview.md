@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Chrome Storage API Overview"
-description: "Store data persistently in your extension using Chrome Storage API"
+description: "Store data persistently with Chrome Storage API. Learn sync, local, and managed storage types, quota limits, and best practices for extension data storage."
 date: 2025-06-05
 categories: [tutorial]
 tags: [storage, data, persistence, chrome-api, sync]
