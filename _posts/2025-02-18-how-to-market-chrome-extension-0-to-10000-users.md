@@ -1,11 +1,7 @@
 ---
 layout: post
 title: "How to Market Your Chrome Extension — From 0 to 10,000 Users"
-<<<<<<< HEAD
-description: "Complete marketing playbook for Chrome extensions. Master content marketing, Product Hunt launch, Reddit strategy, SEO, cross-promotion, and paid acquisition."
-=======
-description: "Complete marketing playbook for Chrome extensions. Master content marketing, Product Hunt launch, Reddit strategy, SEO, and paid acquisition channels."
->>>>>>> quality/fix-frontmatter-a6-r5
+description: "Complete marketing playbook for Chrome extensions. Content marketing, Product Hunt launch, Reddit strategy, SEO, cross-promotion, and paid acquisition channels."
 date: 2025-02-18
 categories: [guides, marketing]
 tags: [extension-marketing, chrome-extension-growth, product-hunt, user-acquisition, extension-promotion]
