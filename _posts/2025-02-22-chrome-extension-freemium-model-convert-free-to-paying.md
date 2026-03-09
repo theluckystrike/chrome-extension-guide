@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Freemium Model — Convert Free Users to Paying Customers"
 description: "Design a freemium Chrome extension that converts. Feature gating strategies, upgrade prompts, pricing tiers, conversion funnels, and real-world freemium benchmarks."
 date: 2025-02-22
@@ -511,4 +511,4 @@ By applying the strategies in this guide, you can build a freemium model that co
 ## Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](/docs/guides/monetization-overview/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+Built by theluckystrike at zovo.one
