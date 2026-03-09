@@ -36,7 +36,7 @@ Before diving into implementation patterns, understanding the threat landscape i
 
 **Replay Attacks**: Valid messages captured and resent by attackers can trigger duplicate actions, potentially causing unintended state changes or resource exhaustion.
 
-**Cross-Site Scripting (XSS) via Messaging**: If message data is directly inserted into DOM without sanitization, attackers can inject malicious scripts that execute in extension contexts.
+**Cross-Site Scripting (XSS) via Messaging**: If message data is directly inserted into DOM without sanitization, attackers can inject malicious scripts that execute in extension contexts. See our [XSS Prevention and Input Sanitization](/guides/chrome-extension-xss-prevention-input-sanitization/) guide for detailed mitigation strategies.
 
 **Native Messaging Exploits**: Communication with native applications through the Native Messaging API can expose system-level vulnerabilities if messages aren't properly validated before passing to external programs.
 
