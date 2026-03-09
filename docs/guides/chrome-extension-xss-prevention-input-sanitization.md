@@ -1,173 +1,125 @@
 ---
 layout: default
 title: "Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation"
-description: "Comprehensive guide to preventing cross-site scripting (XSS) vulnerabilities in Chrome extensions. Learn about extension-specific attack vectors, DOMPurify integration, Trusted Types API, message passing security, and defense-in-depth strategies."
+description: "Comprehensive guide to XSS prevention in Chrome extensions covering DOMPurify integration, Trusted Types API, message passing sanitization, content script injection risks, and modern defense strategies."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-xss-prevention-input-sanitization/"
 ---
 
 # Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation
 
-Cross-site scripting (XSS) vulnerabilities represent one of the most critical security risks facing Chrome extension developers. Unlike traditional web applications, extensions operate with elevated privileges, granting them access to sensitive browser APIs, user credentials, browsing history, and the ability to modify web page content. A successful XSS attack against an extension can compromise not just a single website but the entire browser experience for affected users. This comprehensive guide covers the extension-specific attack vectors that make XSS particularly dangerous in the Chrome extension ecosystem, along with practical implementation strategies for building secure, resilient extensions.
+Cross-site scripting (XSS) remains one of the most dangerous and prevalent security vulnerabilities in Chrome extensions. Unlike web applications, extensions operate with elevated privileges, access to sensitive browser APIs, and often handle confidential user data. A single XSS vulnerability in an extension can compromise not only the extension itself but also the pages users visit, making these vulnerabilities particularly severe. This guide provides comprehensive coverage of XSS prevention techniques specific to Chrome extensions, from understanding extension-specific attack vectors to implementing defense-in-depth strategies using modern APIs and best practices.
 
-Understanding XSS in the extension context requires recognizing that your extension sits at the intersection of multiple trust boundaries. Your content scripts interact with potentially malicious web pages, your popup and options pages display user-controlled data, and your background service worker handles messages from both your own UI and potentially compromised web pages. Each of these interaction points presents unique XSS risks that demand specialized defensive measures beyond what traditional web application security provides.
+Chrome extensions face unique XSS challenges that differ significantly from traditional web applications. Understanding these distinctions is essential for building secure extensions that protect users from malicious actors.
 
 ## Extension-Specific XSS Vectors
 
-Chrome extensions face XSS vulnerabilities that differ significantly from standard web applications. The extension's privileged position within the browser creates attack surfaces that attackers actively exploit. Understanding these vectors is the first step toward building secure extensions.
+Chrome extensions introduce several unique attack vectors that developers must understand to build secure applications. Unlike standard web pages, extensions have access to powerful APIs, can execute code in multiple contexts, and often communicate between components using message passing systems.
 
-### Content Script Injection Risks
+### The Content Script Dilemma
 
-Content scripts execute in the context of web pages, making them vulnerable to DOM-based XSS when interacting with page content. Even though content scripts run in an isolated JavaScript world, they still manipulate the shared DOM, and vulnerabilities in how they handle page content can lead to script execution in the extension's context. When your content script reads data from the page and renders it in the extension's UI or sends it to the background script, malicious pages can exploit this data flow to inject code into your extension.
+Content scripts represent the most significant XSS attack surface in Chrome extensions. These scripts run in the context of web pages, meaning they inherit all the vulnerabilities of those pages while also introducing new ones. When your content script interacts with the page's DOM, any user-controlled data that flows into that DOM becomes a potential XSS vector. This is particularly dangerous because content scripts have access to the `chrome.*` APIs, which often include sensitive permissions like cookies, tabs, and storage.
 
-The danger intensifies because content scripts share the DOM with page scripts, and sophisticated attackers can use various techniques to inject malicious data into locations your content script will read. Page authors can place specially crafted content in hidden elements, use mutation XSS techniques that exploit browser parsing differences, or leverage CSS injection to exfiltrate data. Your content script must treat all page data as potentially malicious, implementing sanitization before any use.
+The fundamental problem stems from the dual nature of content scripts—they must work with untrusted web page content while also protecting the extension's privileged capabilities. Attackers can exploit this by crafting malicious web pages that trick content scripts into executing harmful code or exfiltrating sensitive data through the extension's message passing system.
 
-Consider a content script that extracts page titles or meta descriptions to display in the extension's popup:
+### Message Passing Vulnerabilities
 
-```javascript
-// VULNERABLE: Directly using page content without sanitization
-document.getElementById('pageTitle').textContent = document.title;
+Extensions typically use message passing to communicate between content scripts, background service workers, popups, and options pages. If these messages aren't properly validated and sanitized, attackers can inject malicious payloads that propagate through the extension's internal communication channels. This is especially dangerous when background scripts blindly trust messages from content scripts, as any compromised content script can send crafted messages that trigger harmful actions.
 
-// VULNERABLE: Even textContent can be dangerous in certain contexts
-// when data flows to privileged contexts
-```
+The message passing system in Chrome extensions is designed for flexibility rather than security, making it the developer's responsibility to implement proper validation at every endpoint. Never assume that messages from content scripts are trustworthy simply because they originate within your extension—the underlying page may have been compromised.
 
-While `textContent` is generally safer than `innerHTML`, data can still flow through channels that execute code, making sanitization essential regardless of which DOM property you use.
+### DOM Injection Through Extension APIs
 
-### Popup and Options Page Vulnerabilities
-
-Extension popups and options pages face XSS risks from multiple sources. User-generated content, data from external APIs, messages from content scripts, and URL parameters can all introduce malicious input. The consequences are severe because these pages run with full extension privileges, including access to the chrome.storage API, cookies, and the ability to make network requests on behalf of the user.
-
-Dynamic HTML construction in popup pages presents particular danger. Patterns like building HTML strings from user data and inserting them via innerHTML create direct paths for script execution. Even seemingly safe operations like displaying bookmarks, history entries, or downloaded content can become attack vectors if the source data contains malicious payloads.
-
-Extension developers must also consider that popups have a limited lifespan—they close when users click outside or press Escape. This encourages lazy coding where developers might use innerHTML for quick rendering without considering the security implications. This pattern must be avoided entirely in extension development.
-
-### Message Passing and Communication XSS
-
-The Chrome extension message passing system, while essential for inter-component communication, introduces significant XSS risks if not handled carefully. Messages from content scripts to background pages, from popups to content scripts, and between any extension components can contain malicious payloads disguised as legitimate data.
-
-When your background script receives messages from content scripts, you cannot trust that the sending page is legitimate. Malicious pages can use various techniques to send messages to your extension's message listeners, potentially exploiting vulnerabilities in how your extension processes these messages. Every piece of data received through message passing must be treated as untrusted and sanitized before use.
+Many extensions use APIs like `chrome.scripting.executeScript` or `chrome.domains` to inject content into web pages. These operations become dangerous when the injected content includes any user-controlled data without proper sanitization. Even seemingly harmless operations like dynamically generating HTML for display can become XSS vectors if the data isn't sanitized before injection.
 
 ## The Dangers of innerHTML
 
-The innerHTML property represents perhaps the most significant XSS vulnerability in extension development. Its pervasive use in web development leads many extension developers to continue the dangerous pattern without realizing the elevated risks in the extension context. Understanding why innerHTML is so dangerous—and learning secure alternatives—is fundamental to building safe extensions.
+The `innerHTML` property is one of the most common sources of XSS vulnerabilities in extension development. While convenient for quickly rendering HTML content, it executes any embedded scripts and parses HTML in a way that can easily introduce vulnerabilities.
 
-### Why innerHTML Executes Scripts
+### Why innerHTML Is Particularly Dangerous in Extensions
 
-When you set innerHTML, the browser parses the HTML string and constructs DOM nodes, including executing any embedded JavaScript. This happens because the browser's HTML parser treats script elements as instructions to execute, creating a direct code execution path from any user-controllable string to JavaScript execution. Unlike textContent, which treats all input as literal text, innerHTML interprets markup, making it fundamentally unsafe for any user-controllable data.
+In the context of Chrome extensions, `innerHTML` becomes even more dangerous than in regular web applications. Content scripts using `innerHTML` to render data from web pages can inadvertently execute malicious scripts embedded by attackers. Similarly, popups and options pages that use `innerHTML` to display user data or extension settings can be compromised if any of that data originates from untrusted sources.
 
-In the extension context, the consequences extend beyond the immediate page. Because extension popup pages, options pages, and background service workers run with elevated privileges, an XSS vulnerability in these contexts gives attackers access to:
+The core problem with `innerHTML` is that it completely bypasses the browser's normal HTML parsing rules by inserting raw HTML into the document. Any `<script>` tags within the inserted content will be executed, event handlers in attributes like `onload` or `onerror` will fire, and SVG elements with embedded scripts will execute—all without any user interaction.
 
-- All chrome.storage data including sensitive user information
-- OAuth tokens and authentication credentials stored by the extension
-- The ability to make arbitrary network requests
-- Access to browsing history and potentially cookies
-- The ability to modify or steal data from any website the user visits
+### Safe Alternatives to innerHTML
 
-This privilege escalation makes innerHTML vulnerabilities in extensions far more dangerous than equivalent issues in regular web applications.
+Instead of using `innerHTML`, prefer text insertion methods that automatically escape potentially dangerous characters. The `textContent` property is the safest choice for displaying plain text, as it treats all characters as literal text rather than HTML. For complex DOM structures, use `document.createElement` and `document.createTextNode` to build elements programmatically, or use template literals with dedicated templating libraries that automatically escape values.
 
-### Secure Alternatives to innerHTML
-
-Modern browsers provide multiple secure methods for DOM manipulation that avoid the dangers of innerHTML. The safest approach is using textContent or innerText for text content, which automatically escapes any HTML and treats input as literal text:
-
-```javascript
-// SAFE: Using textContent for text data
-const titleElement = document.createElement('h1');
-titleElement.textContent = pageData.title; // Safely escaped
-
-// SAFE: Building DOM structures programmatically
-const container = document.createElement('div');
-const heading = document.createElement('h2');
-heading.textContent = data.heading;
-container.appendChild(heading);
-```
-
-For structured content that requires HTML elements, use document.createElement chains to build DOM structures programmatically. While more verbose than innerHTML, this approach guarantees that all content is treated as text rather than interpreted as HTML:
-
-```javascript
-// SAFE: Programmatic DOM construction
-function createSafeCard(data) {
-  const card = document.createElement('div');
-  card.className = 'card';
-  
-  const title = document.createElement('h3');
-  title.textContent = data.title || 'Untitled';
-  
-  const description = document.createElement('p');
-  description.textContent = data.description || '';
-  
-  const link = document.createElement('a');
-  link.href = data.url || '#';
-  link.textContent = 'Learn more';
-  
-  card.appendChild(title);
-  card.appendChild(description);
-  card.appendChild(link);
-  
-  return card;
-}
-```
-
-For complex HTML content that must be rendered, you need HTML sanitization—never trust raw HTML from untrusted sources.
+When you must render HTML content from potentially untrusted sources, always sanitize the content before insertion using a dedicated HTML sanitization library. DOMPurify, maintained by the OWASP community, is the gold standard for this purpose and should be your first choice for any HTML sanitization needs.
 
 ## DOMPurify Integration
 
-When your extension must render HTML content from untrusted sources, a proper HTML sanitization library becomes essential. DOMPurify is the industry-standard solution, having been battle-tested across millions of projects and maintained by a dedicated security-focused team. It parses HTML, strips dangerous elements and attributes, and returns safe HTML that can be inserted into the DOM.
+DOMPurify is a widely-used, battle-tested HTML sanitizer that removes all malicious code from HTML while preserving safe formatting elements. Integrating DOMPurify into your Chrome extension provides robust protection against XSS attacks when you need to render HTML content.
 
 ### Installing and Configuring DOMPurify
 
-DOMPurify can be installed via npm or included directly in your extension. For extensions, the npm approach provides better maintainability:
+DOMPurify can be included in your extension by downloading the minified version from the official repository or installing it via npm. For Manifest V3 extensions, include the DOMPurify library in your extension bundle:
 
-```bash
-npm install dompurify
-```
-
-After installation, you can import and configure DOMPurify for your extension's needs:
-
-```javascript
-import DOMPurify from 'dompurify';
-
-// Configure with extension-appropriate settings
-const clean = DOMPurify.sanitize(dirty, {
-  ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p', 'ul', 'ol', 'li', 'br'],
-  ALLOWED_ATTR: ['class', 'href', 'target'],
-  ALLOW_DATA_ATTR: false,
-  FORBID_TAGS: ['style', 'script', 'iframe', 'object', 'embed'],
-  FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover'],
-});
-```
-
-The key to effective DOMPurify configuration is the principle of least privilege—allow only the minimum set of tags and attributes your extension actually needs. Most extensions should start with a very restrictive configuration and add permitted elements only as required.
-
-### Using DOMPurify in Extension Contexts
-
-DOMPurify needs to run in an environment with a DOM available. In content scripts and popup pages, this works naturally. For background scripts that lack a DOM, you can use jsdom alongside DOMPurify:
-
-```javascript
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
-
-// Create DOM environment for background script
-const window = new JSDOM('').window;
-const purify = DOMPurify(window);
-
-// Now you can sanitize in background scripts
-function sanitizeHtmlForStorage(htmlContent) {
-  return purify.sanitize(htmlContent, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
-    ALLOWED_ATTR: ['href']
-  });
+```json
+{
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/dompurify/purify.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
 ```
 
-When displaying sanitized content, remember that even sanitized HTML should be inserted using safer methods when possible. Using outerHTML or replacing innerHTML is safer than the original unsanitized content, but consider whether you can use DOM construction methods instead.
+After adding the library to your extension, you can use it in any JavaScript file:
 
-## The Trusted Types API
+```javascript
+// In your popup, background, or content script
+import DOMPurify from 'dompurify';
 
-Trusted Types represent the modern approach to preventing DOM XSS by enabling policy-based security for DOM manipulation APIs. Rather than sanitizing strings before insertion, Trusted Types let you define policies that create type-safe objects that the browser guarantees are safe to insert. This shifts security from runtime sanitization to compile-time and runtime enforcement.
+// Sanitize user-controlled HTML before rendering
+const userContent = '<p>Hello, <img src=x onerror=alert(1)> world!</p>';
+const cleanContent = DOMPurify.sanitize(userContent);
+document.getElementById('container').innerHTML = cleanContent;
+```
 
-### Enabling Trusted Types in Extensions
+### Configuring DOMPurify for Extension Contexts
 
-Trusted Types can be enabled via Content Security Policy in your manifest.json:
+DOMPurify offers extensive configuration options that allow you to tailor its behavior to your specific needs. For Chrome extensions, certain configurations are particularly important. The `RETURN_TRUSTED_TYPE` option works alongside the Trusted Types API, while custom element and attribute allowlists let you control exactly what HTML features remain enabled.
+
+For content scripts that must interact with complex web page content, consider using DOMPurify in a configuration that removes all scripts but preserves formatting:
+
+```javascript
+const cleanHTML = DOMpurify.sanitize(dirtyHTML, {
+  ALLOWED_TAGS: ['p', 'br', 'b', 'i', 'em', 'strong', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  ALLOWED_ATTR: ['href', 'class', 'id', 'style'],
+  FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'form', 'input'],
+  FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover']
+});
+```
+
+## Trusted Types API
+
+The Trusted Types API provides a powerful mechanism for preventing DOM XSS attacks by allowing developers to create policies that restrict how DOM manipulation can occur. When enabled, the browser blocks dangerous DOM sinks like `innerHTML` unless they receive data from a trusted type.
+
+### Implementing Trusted Types in Extensions
+
+To enable Trusted Types in your extension, add the appropriate CSP directive and create policies in your JavaScript code:
+
+```javascript
+// Create a Trusted Types policy
+const policy = trustedTypes.createPolicy('extensionPolicy', {
+  createHTML: (input) => DOMPurify.sanitize(input, { RETURN_TRUSTED_TYPE: true }),
+  createScript: (input) => {
+    // Only allow pre-approved scripts
+    if (!isApprovedScript(input)) {
+      throw new Error('Script not approved');
+    }
+    return input;
+  }
+});
+
+// Use the policy
+const trusted = policy.createHTML('<p>Safe content</p>');
+element.innerHTML = trusted; // This works with Trusted Types enabled
+```
+
+For Trusted Types to be effective, you must enable them in your extension's CSP by adding the `require-trusted-types-for` directive:
 
 ```json
 {
@@ -177,224 +129,191 @@ Trusted Types can be enabled via Content Security Policy in your manifest.json:
 }
 ```
 
-The `require-trusted-types-for 'script'` directive tells the browser to block any DOM XSS sink that doesn't use Trusted Types, enforcing policy-based security at the browser level.
+This configuration tells the browser to block any use of dangerous DOM sinks that don't use Trusted Types, effectively eliminating an entire category of XSS vulnerabilities at the browser level.
 
-### Creating Trusted Type Policies
+## Message Passing Sanitization
 
-With Trusted Types enabled, you define policies that produce trusted values for specific operations:
+Proper message sanitization is critical for extension security because messages can travel between contexts with different privilege levels. Content scripts running in untrusted page contexts can send messages to background scripts with elevated permissions, making it essential to treat all incoming messages as potentially malicious.
 
-```javascript
-// Define a policy for URL handling
-const urlPolicy = trustedTypes.createPolicy('url-policy', {
-  createHTML: (input) => {
-    // Validate and sanitize URLs
-    const url = new URL(input);
-    if (!['https:', 'mailto:'].includes(url.protocol)) {
-      throw new Error('Only https and mailto protocols allowed');
-    }
-    return url.toString();
-  },
-  createScript: (input) => {
-    // For script-src, return empty string to block inline scripts
-    return '';
-  }
-});
+### Validating and Sanitizing Messages
 
-// Using the policy - returns a TrustedHTML object
-const safeHtml = htmlPolicy.createHTML(userContent);
-element.innerHTML = safeHtml; // Only works because policy created safe value
-```
-
-Trusted Types work alongside DOMPurify—your sanitization function becomes a policy that returns TrustedHTML, combining sanitization with the enforcement guarantees that Trusted Types provide.
-
-## The Sanitizer API
-
-The Sanitizer API is a browser-native solution for HTML sanitization that integrates directly into the platform. Unlike DOMPurify, which requires a library, the Sanitizer API is built into modern browsers, reducing bundle size and ensuring native performance optimizations.
-
-### Using the Native Sanitizer
-
-The Sanitizer API provides a simple interface for cleaning HTML:
-
-```javascript
-// Create sanitizer with custom configuration
-const sanitizer = new Sanitizer({
-  allowElements: ['b', 'i', 'em', 'strong', 'p', 'a'],
-  allowAttributes: { 'href': ['a'] },
-  dropElements: ['script', 'iframe', 'style']
-});
-
-// Sanitize HTML string
-const clean = sanitizer.sanitizeFor('div', dirtyHtmlString);
-
-// Insert the sanitized content
-document.getElementById('container').replaceChildren(clean);
-```
-
-The Sanitizer API supports various configuration options for controlling what elements and attributes are permitted. It handles the parsing and sanitization in a single step, returning a DOM node ready for insertion.
-
-### Browser Support and Polyfills
-
-As of 2024, the Sanitizer API has good support in Chrome, Edge, and Firefox, with Safari adding support in recent versions. For maximum compatibility, you can use the sanitizer-api npm package which provides a consistent interface with automatic polyfill loading for unsupported browsers:
-
-```javascript
-import { Sanitizer } from 'sanitizer-api';
-
-const sanitizer = new Sanitizer({
-  allowedTags: ['b', 'i', 'em', 'strong', 'p', 'a'],
-  allowedAttributes: { 'a': ['href'] }
-});
-
-const result = sanitizer.sanitize('<script>alert(1)</script><b>Safe</b>');
-// Result: <b>Safe</b>
-```
-
-## CSP as a Defense Layer
-
-Content Security Policy serves as your primary defense-in-depth measure against XSS attacks. While sanitization handles dangerous content that reaches your application, CSP prevents many attack attempts from ever executing. A properly configured CSP significantly reduces the attack surface available to XSS vulnerabilities.
-
-### Essential CSP Directives for Extensions
-
-Your extension's manifest.json should include comprehensive CSP configuration:
-
-```json
-{
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.yourservice.com; frame-ancestors 'none'; base-uri 'self'"
-  }
-}
-```
-
-Key directives include `script-src 'self'` to block external scripts, `object-src 'none'` to prevent plugin-based attacks, and `frame-ancestors 'none'` to protect against clickjacking. The `base-uri 'self'` directive prevents attackers from overriding base URLs to redirect relative links.
-
-For more detailed CSP configuration guidance, see our [Chrome Extension Content Security Policy](/guides/chrome-extension-content-security-policy.md) guide and the [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening.md) guide for advanced techniques.
-
-### CSP Violation Monitoring
-
-Monitoring CSP violations helps identify potential attack attempts and misconfigurations:
+Every message handler in your extension should implement input validation and sanitization:
 
 ```javascript
 // In your background script
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === 'csp-violation') {
-    console.error('CSP Violation:', message.details);
-    // Send to your analytics or security monitoring
-  }
-});
-
-// In content scripts or extension pages
-document.addEventListener('securitypolicyviolation', (e) => {
-  chrome.runtime.sendMessage({
-    type: 'csp-violation',
-    details: {
-      blockedURI: e.blockedURI,
-      violatedDirective: e.violatedDirective,
-      effectiveDirective: e.effectiveDirective
-    }
-  });
-});
-```
-
-## Message Passing Security
-
-Every message received from content scripts must be treated as potentially malicious. Implement strict validation for all message passing channels:
-
-```javascript
-// Background script message handler
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Validate sender - only accept from your extension's contexts
-  if (sender.id !== chrome.runtime.id) {
-    console.warn('Message from unknown extension:', sender.id);
-    return false;
-  }
-  
   // Validate message structure
   if (!message || typeof message !== 'object') {
     return false;
   }
-  
-  // Whitelist expected message types
-  const allowedTypes = ['get-status', 'update-badge', 'fetch-data'];
-  if (!message.type || !allowedTypes.includes(message.type)) {
+
+  // Validate expected fields
+  if (!message.type || typeof message.type !== 'string') {
+    console.error('Invalid message: missing type');
     return false;
   }
-  
-  // Sanitize any data from messages before use
-  const sanitizedData = message.data ? sanitizeInput(message.data) : null;
-  
-  // Process the validated message
-  handleMessage(message.type, sanitizedData);
-  
-  return true;
+
+  // Sanitize data payloads
+  const sanitizedData = message.data ? sanitizeMessageData(message.data) : {};
+
+  // Process validated message
+  handleMessage(message.type, sanitizedData, sender);
 });
+
+function sanitizeMessageData(data) {
+  if (typeof data === 'string') {
+    // Escape HTML entities to prevent XSS in rendered output
+    return data.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&#039;');
+  }
+
+  if (Array.isArray(data)) {
+    return data.map(sanitizeMessageData);
+  }
+
+  if (typeof data === 'object' && data !== null) {
+    const sanitized = {};
+    for (const key of Object.keys(data)) {
+      sanitized[key] = sanitizeMessageData(data[key]);
+    }
+    return sanitized;
+  }
+
+  return data;
+}
 ```
 
-For advanced message passing patterns and security considerations, see our [Advanced Messaging Patterns](/guides/advanced-messaging-patterns.md) guide.
+This approach ensures that any data passed through the message system is sanitized before use, preventing malicious payloads from triggering XSS vulnerabilities in other extension contexts.
+
+## Content Script Injection Risks
+
+Content scripts face unique risks because they operate in the context of untrusted web pages. Understanding these risks and implementing appropriate safeguards is essential for maintaining extension security.
+
+### Isolating Content Script Execution
+
+One of the most effective strategies for protecting content scripts is to minimize their interaction with page content. Use the `world` option in Manifest V3 to run your content scripts in an isolated world where they share the DOM with page scripts but maintain separate JavaScript contexts:
+
+```json
+{
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "world": "ISOLATED"
+    }
+  ]
+}
+```
+
+This isolation prevents page scripts from directly accessing your content script's variables and functions, reducing the risk of data exfiltration through prototype manipulation or other JavaScript-based attacks.
+
+### Avoiding eval and Similar Constructs
+
+Content scripts should never use `eval()`, `new Function()`, or similar constructs that execute strings as code. These are particularly dangerous in the content script context because any string execution could potentially be influenced by malicious page scripts. Instead, use direct function calls and JSON.parse() for data parsing.
+
+## Popup and Options Page Security
+
+Popup and options pages are extension pages that users interact with directly, making their security critical. These pages often display user data, settings, and information from external sources, all of which must be properly sanitized before rendering.
+
+### Best Practices for Extension UI Pages
+
+Always treat any data displayed in popups and options pages as potentially malicious, even if it originates from your extension's storage. User data, cached web content, and API responses should all be sanitized before insertion into the DOM. Use `textContent` whenever possible, and implement CSP with strict script-src directives to provide defense in depth.
+
+Implement proper input validation in options pages to ensure users can't inject malicious code through extension settings. Any configuration value that gets rendered or used in DOM operations should be sanitized first.
+
+## CSP as a Defense Layer
+
+Content Security Policy serves as your primary defense against XSS attacks by controlling what resources the browser is allowed to load and execute. A properly configured CSP can prevent XSS attacks from succeeding even if your code contains vulnerabilities.
+
+For a comprehensive guide to CSP configuration in Chrome extensions, see our [Chrome Extension Content Security Policy](/chrome-extension-guide/guides/chrome-extension-content-security-policy/) guide. For security hardening best practices, see [Chrome Extension Security Hardening](/chrome-extension-guide/guides/chrome-extension-security-hardening/).
+
+### Essential CSP Directives for XSS Prevention
+
+At minimum, your extension should implement these CSP directives:
+
+```json
+{
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';"
+  }
+}
+```
+
+The `script-src 'self'` directive ensures only your extension's own scripts can execute, while `object-src 'none'` prevents loading of potentially dangerous plugin content. These restrictions significantly reduce the attack surface available to XSS exploits.
+
+## Sanitizer API
+
+The HTML Sanitizer API is a newer browser standard that provides built-in HTML sanitization capabilities. Unlike DOMPurify, which is a JavaScript library you must include in your bundle, the Sanitizer API is implemented natively by the browser, offering better performance and requiring no external dependencies.
+
+### Using the Sanitizer API
+
+```javascript
+const sanitizer = new Sanitizer();
+const element = document.getElementById('target');
+element.setHTML('<p>Hello <img src=x> world</p>', { sanitizer });
+```
+
+The Sanitizer API automatically removes dangerous elements and attributes while preserving safe formatting. However, browser support varies, so you may need to use DOMPurify as a fallback for older browsers.
 
 ## Automated Security Scanning
 
-Integrating automated security scanning into your development workflow catches XSS vulnerabilities before they reach production. Several tools specifically target extension security.
+Regular security scanning helps identify XSS vulnerabilities before they reach production. Several tools can automate this process for Chrome extensions.
 
-### npm Audit and Dependency Scanning
+### Static Analysis Tools
 
-Regular dependency auditing catches vulnerable libraries that might introduce XSS risks:
+ESLint with security plugins can detect many common XSS patterns in your code:
 
 ```bash
-# Run npm audit regularly
-npm audit
-
-# Install and run snyk for comprehensive vulnerability scanning
-npm install -g snyk
-snyk test
+npm install --save-dev eslint eslint-plugin-security
 ```
 
-### Extension-Specific Security Tools
+Configure ESLint to flag dangerous patterns like unescaped variables in innerHTML:
 
-The Chrome Web Store now requires vulnerability-free extensions, making early detection essential:
-
-- **npm audit**: Checks for known vulnerabilities in dependencies
-- **Snyk**: Provides comprehensive dependency and code scanning
-- **ESLint with security plugins**: Catches dangerous patterns in your code
-
-```javascript
-// ESLint configuration for XSS prevention
+```json
 {
   "plugins": ["security"],
   "rules": {
     "security/detect-unsafe-regex": "error",
     "security/detect-non-literal-fs-filename": "error",
     "security/detect-non-literal-regexp": "error",
-    "security/detect-non-literal-constructor": "error",
-    "security/detect-eval-with-expression": "error",
-    "security/detect-possible-timing-attacks": "error",
-    "security/detect-pseudoRandomBytes": "error",
-    "security/detect-remove-node-timeline": "error"
+    "security/detect-non-literal-string": "error"
   }
+}
+```
+
+### Dynamic Testing with Puppeteer
+
+Automated browser testing can identify runtime XSS vulnerabilities:
+
+```javascript
+const puppeteer = require('puppeteer');
+
+async function testXSS(extensionPath) {
+  const browser = await puppeteer.launch({
+    args: [
+      `--extension-path=${extensionPath}`,
+      '--disable-extensions-except=' + extensionPath
+    ]
+  });
+
+  // Test your extension's pages with XSS payloads
+  // Verify payloads are properly sanitized
 }
 ```
 
 ## OWASP for Extensions
 
-The OWASP Foundation provides specific guidance for browser extension security. Their [Browser Extension Security](https://owasp.org/www-project-browser-extension-security/) project catalogs the unique threats extensions face and provides testing methodologies.
+The OWASP Foundation provides resources specifically relevant to Chrome extension security. The [OWASP Cheat Sheet series](https://cheatsheetseries.owasp.org/) includes valuable guidance on XSS prevention that applies to extension development.
 
-### Key OWASP Recommendations
+Key OWASP recommendations for extensions include implementing defense in depth through multiple security layers, validating all input regardless of source, escaping all output when displaying data in HTML contexts, using security libraries like DOMPurify instead of writing custom sanitization, and regularly auditing code for security vulnerabilities.
 
-- **Least Privilege**: Request only permissions your extension absolutely needs
-- **Input Validation**: Validate and sanitize all data from untrusted sources
-- **Output Encoding**: Use appropriate encoding for each output context
-- **Secure Defaults**: Default to secure configurations, require explicit opt-in for riskier features
-- **Defense in Depth**: Layer multiple security controls so that failure of one doesn't compromise security
+## Conclusion
 
-For comprehensive security guidance, also see our [Security Best Practices](/guides/security-best-practices.md) guide.
-
-## Related Guides
-
-Building secure extensions requires a layered approach—XSS prevention works alongside other security measures. Explore these related guides for complete security coverage:
-
-- [Chrome Extension Content Security Policy](/guides/chrome-extension-content-security-policy.md) — Complete CSP configuration for MV3 extensions
-- [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening.md) — Advanced protection techniques
-- [Security Best Practices](/guides/security-best-practices.md) — Foundational security concepts
-- [Extension Security Audit](/guides/extension-security-audit.md) — Comprehensive security testing methodology
+XSS prevention in Chrome extensions requires a comprehensive approach that addresses the unique challenges of extension development. By understanding extension-specific attack vectors, using safe DOM manipulation practices, integrating DOMPurify or the Sanitizer API, implementing Trusted Types, securing message passing channels, and maintaining defense in depth through CSP and regular security auditing, you can build extensions that protect users from XSS attacks. Security must be considered at every stage of development, from initial architecture to ongoing maintenance, ensuring that extensions remain secure as they evolve.
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
