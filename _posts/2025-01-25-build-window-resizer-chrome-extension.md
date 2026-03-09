@@ -1,145 +1,88 @@
 ---
 layout: post
-title: "Build a Window Resizer Chrome Extension: Complete Developer's Guide"
-description: "Learn how to build a powerful window resizer Chrome extension for responsive design testing. This comprehensive tutorial covers Manifest V3, window management APIs, keyboard shortcuts, and publishing your extension to the Chrome Web Store."
+title: "Build a Window Resizer Chrome Extension for Responsive Design"
+description: "Learn how to build a window resizer Chrome extension for responsive design testing. Complete guide covering Manifest V3, popup UI, window management API, and best practices for browser resize extensions."
 date: 2025-01-25
-categories: [Chrome Extensions, Tutorial]
-tags: [chrome-extension, project, tutorial]
-keywords: "window resizer extension, resize browser chrome, responsive design extension, chrome window management, browser resize tool"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-window-resizer-chrome-extension/
+categories: [tutorials, chrome-extensions]
+tags: [window resizer extension, resize browser chrome, responsive design extension, chrome extension development, chrome extension manifest v3, window management api, browser resize tool, responsive testing tool]
+keywords: "window resizer extension, resize browser chrome, responsive design extension, chrome extension window management, browser resize tool, responsive testing chrome extension, manifest v3 window api, chrome extension development guide"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-window-resizer-chrome-extension/"
 ---
 
-# Build a Window Resizer Chrome Extension: Complete Developer's Guide
+# Build a Window Resizer Chrome Extension for Responsive Design
 
-Responsive web design has become an essential skill for modern web developers. Testing your website across different viewport sizes is crucial to ensure a seamless user experience on all devices. While browser DevTools provide some built-in tools for viewport testing, a dedicated window resizer extension can dramatically improve your workflow and productivity. In this comprehensive guide, we will walk you through building a fully functional window resizer Chrome extension from scratch using Manifest V3.
+Responsive design has become a fundamental aspect of modern web development. With users accessing websites from an ever-growing variety of devices—from large desktop monitors to compact mobile phones—ensuring your web applications look and function beautifully across all screen sizes is no longer optional. It's essential. One of the most practical tools in any web developer's arsenal is a window resizer extension that allows quick and easy testing of responsive layouts without manually dragging browser windows to specific dimensions. In this comprehensive guide, we'll walk through building a fully functional Window Resizer Chrome extension using Manifest V3, covering everything from project setup to advanced features like custom presets and keyboard shortcuts.
 
-This tutorial assumes you have a basic understanding of HTML, CSS, and JavaScript. By the end of this guide, you will have created a production-ready Chrome extension that allows users to quickly resize their browser windows to common viewport sizes, set custom dimensions, save presets, and manage multiple windows simultaneously.
-
----
-
-## Why Build a Window Resizer Extension? {#why-build-window-resizer}
-
-The demand for window resizer extensions in the Chrome Web Store remains consistently high. Web developers, designers, and QA testers constantly need to test responsive layouts across different screen sizes. Here's why building this extension is an excellent project:
-
-### Market Demand and Use Cases
-
-Every web developer understands the pain of manually resizing browser windows to test responsive designs. Whether you are verifying that your mobile-first design works correctly at 375px width or ensuring your desktop layout looks perfect at 1920x1080, constantly dragging and resizing windows is tedious and imprecise. A window resizer extension solves this problem by providing one-click access to preset viewport sizes.
-
-The primary users of window resizer extensions include front-end developers building responsive websites, UX designers testing design mockups across devices, quality assurance engineers performing cross-browser testing, and accessibility specialists verifying keyboard navigation and focus states at various viewport sizes.
-
-### Learning Opportunities
-
-Building a window resizer extension teaches you several valuable skills that transfer to other Chrome extension projects. You will learn how to work with the Chrome Windows API, manage browser state, create popup interfaces, implement keyboard shortcuts, store user preferences using the Chrome Storage API, and handle cross-origin communication between extension components.
+Creating a window resizer extension for Chrome is an excellent project for developers looking to expand their understanding of Chrome extension architecture while building something genuinely useful for daily workflow. The extension we'll build today will allow users to quickly resize their browser window to common viewport dimensions, custom sizes, and even preset breakpoints used in modern responsive design frameworks. By the end of this tutorial, you'll have a complete, production-ready extension that you can use immediately and optionally publish to the Chrome Web Store.
 
 ---
 
-## Project Architecture and Features {#project-architecture}
+## Understanding Chrome Extension Architecture for Window Management {#understanding-chrome-extension-architecture}
 
-Before writing any code, let's define the features our window resizer extension will include:
+Before diving into code, it's crucial to understand the architecture that makes window resizing possible in Chrome extensions. Chrome provides a powerful Windows API that allows extensions to create, modify, and manage browser windows programmatically. This API is part of the chrome.windows namespace and offers methods for querying window information, updating window properties, and handling window events.
 
-### Core Features
+The architecture of a Chrome extension typically consists of several components working together. The manifest.json file serves as the configuration hub, declaring permissions, identifying background scripts, and defining the extension's capabilities. The background service worker handles long-running tasks and listens for events, while the popup HTML and JavaScript provide the user interface that appears when clicking the extension icon. For a window resizer extension, we'll primarily interact with the chrome.windows API from either the popup context or the background service worker, depending on our implementation approach.
 
-Our window resizer extension will provide preset viewport sizes for common devices including mobile phones (375x667, 414x896), tablets (768x1024, 820x1180), laptops (1366x768, 1440x900), and desktops (1920x1080, 2560x1440). Users will be able to define custom viewport dimensions and save their own presets. The extension will support keyboard shortcuts for quick resizing, include a favorites system for frequently used sizes, and display the current viewport dimensions in the extension popup.
+Manifest V3, the current version of Chrome's extension manifest format, introduced several important changes from Manifest V2. One significant change relevant to our project is that background pages are now replaced by service workers, which are event-driven and can be terminated when idle. This actually works well for our window resizer since resizing operations are typically quick, one-time actions rather than continuous processes. We'll need to ensure our implementation handles the service worker lifecycle appropriately, but this won't present significant challenges for our use case.
 
-### Extension Structure
-
-The extension will follow the standard Chrome extension architecture with a manifest file, background service worker, popup HTML and JavaScript, and content scripts where necessary. We will use Chrome's Windows API for window manipulation and the Storage API for persisting user preferences.
+The permissions required for window resizing are relatively minimal. We'll need the "windows" permission to access and modify window properties. Unlike some other extension features, window management doesn't require particularly sensitive permissions, making our extension relatively non-intrusive from a privacy perspective. However, we should still be careful about what other permissions we request and clearly explain why we need them in our extension's description.
 
 ---
 
-## Setting Up the Project {#setting-up-project}
+## Setting Up the Project Structure {#setting-up-project-structure}
 
-Create a new folder for your extension project and set up the basic file structure. Your project should include the following files:
+Every Chrome extension begins with a well-organized project structure. Let's create the foundation for our window resizer extension. First, create a new directory for your project—let's call it "window-resizer-extension"—and set up the following file structure within it:
 
 ```
-window-resizer/
+window-resizer-extension/
 ├── manifest.json
 ├── popup.html
-├── popup.css
 ├── popup.js
+├── popup.css
 ├── background.js
 ├── icons/
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
+│   ├── icon-16.png
+│   ├── icon-48.png
+│   └── icon-128.png
+└── README.md
 ```
 
-Let us start by creating the manifest file, which is the heart of every Chrome extension.
+This structure separates our concerns cleanly, keeping the manifest configuration separate from the user interface and background logic. The icons directory will hold the extension's icons at various sizes, which are required for the Chrome Web Store and for displaying in the browser's extension manager.
 
----
-
-## Creating the Manifest File {#creating-manifest}
-
-The manifest.json file defines your extension's configuration, permissions, and components. For our window resizer extension, we need access to the Windows API and storage. Here is the complete manifest:
+The manifest.json file is the heart of our extension. Let's create a comprehensive manifest that declares all necessary permissions and configurations:
 
 ```json
 {
   "manifest_version": 3,
-  "name": "Window Resizer Pro",
+  "name": "Window Resizer for Responsive Design",
   "version": "1.0.0",
-  "description": "Resize your browser window to preset sizes for responsive design testing. One-click access to mobile, tablet, and desktop viewports.",
+  "description": "Quickly resize your browser window to common viewport dimensions for responsive design testing",
   "permissions": [
-    "windows",
-    "storage",
-    "activeTab"
+    "windows"
   ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "commands": {
-    "resize-mobile": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+M",
-        "mac": "Command+Shift+M"
-      },
-      "description": "Resize to mobile viewport (375x667)"
-    },
-    "resize-tablet": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+T",
-        "mac": "Command+Shift+T"
-      },
-      "description": "Resize to tablet viewport (768x1024)"
-    },
-    "resize-desktop": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+D",
-        "mac": "Command+Shift+D"
-      },
-      "description": "Resize to desktop viewport (1920x1080)"
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
     }
   },
   "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   }
 }
 ```
 
-This manifest file declares the required permissions for window manipulation and storage, defines keyboard shortcuts for quick resizing, and specifies the popup interface and background service worker.
+This manifest declares the "windows" permission, which is essential for our extension to function. It also specifies popup.html as the default popup interface and includes the necessary icon declarations. The version number follows semantic versioning, making it clear this is a first release.
 
 ---
 
-## Building the Popup Interface {#building-popup}
+## Creating the Popup User Interface {#creating-popup-user-interface}
 
-The popup is the interface users interact with when clicking the extension icon. Let's create a clean, intuitive interface that displays preset sizes, custom dimensions input, and current viewport information.
-
-### HTML Structure
+The popup is what users see when they click our extension icon in the Chrome toolbar. For a window resizer, we need an intuitive interface that displays common viewport sizes and allows custom input. Let's create the HTML structure first:
 
 ```html
 <!DOCTYPE html>
@@ -154,33 +97,68 @@ The popup is the interface users interact with when clicking the extension icon.
   <div class="container">
     <header>
       <h1>Window Resizer</h1>
-      <div class="current-size" id="currentSize">
-        Current: <span id="width">--</span> x <span id="height">--</span>
-      </div>
+      <p class="subtitle">Responsive Design Testing</p>
     </header>
 
     <section class="presets">
       <h2>Quick Presets</h2>
-      <div class="preset-grid" id="presetGrid">
-        <!-- Presets will be dynamically inserted here -->
+      <div class="preset-grid">
+        <button class="preset-btn" data-width="1920" data-height="1080">
+          <span class="preset-name">Full HD</span>
+          <span class="preset-size">1920 × 1080</span>
+        </button>
+        <button class="preset-btn" data-width="1366" data-height="768">
+          <span class="preset-name">Laptop</span>
+          <span class="preset-size">1366 × 768</span>
+        </button>
+        <button class="preset-btn" data-width="1440" data-height="900">
+          <span class="preset-name">MacBook</span>
+          <span class="preset-size">1440 × 900</span>
+        </button>
+        <button class="preset-btn" data-width="768" data-height="1024">
+          <span class="preset-name">Tablet Portrait</span>
+          <span class="preset-size">768 × 1024</span>
+        </button>
+        <button class="preset-btn" data-width="1024" data-height="768">
+          <span class="preset-name">Tablet Landscape</span>
+          <span class="preset-size">1024 × 768</span>
+        </button>
+        <button class="preset-btn" data-width="375" data-height="667">
+          <span class="preset-name">iPhone SE</span>
+          <span class="preset-size">375 × 667</span>
+        </button>
+        <button class="preset-btn" data-width="390" data-height="844">
+          <span class="preset-name">iPhone 12</span>
+          <span class="preset-size">390 × 844</span>
+        </button>
+        <button class="preset-btn" data-width="414" data-height="896">
+          <span class="preset-name">iPhone 11</span>
+          <span class="preset-size">414 × 896</span>
+        </button>
       </div>
     </section>
 
     <section class="custom-size">
       <h2>Custom Size</h2>
       <div class="input-group">
-        <input type="number" id="customWidth" placeholder="Width" min="100" max="3840">
-        <span class="separator">x</span>
-        <input type="number" id="customHeight" placeholder="Height" min="100" max="2160">
-        <button id="applyCustom">Apply</button>
+        <div class="input-field">
+          <label for="custom-width">Width</label>
+          <input type="number" id="custom-width" placeholder="Width" min="100" max="3840">
+        </div>
+        <span class="separator">×</span>
+        <div class="input-field">
+          <label for="custom-height">Height</label>
+          <input type="number" id="custom-height" placeholder="Height" min="100" max="2160">
+        </div>
+        <button id="apply-custom" class="apply-btn">Apply</button>
       </div>
     </section>
 
-    <section class="favorites">
-      <h2>Saved Presets</h2>
-      <div class="favorites-list" id="favoritesList">
-        <!-- Favorites will be dynamically inserted here -->
-      </div>
+    <section class="options">
+      <label class="checkbox-label">
+        <input type="checkbox" id="center-window">
+        <span>Center on screen</span>
+      </label>
     </section>
   </div>
   <script src="popup.js"></script>
@@ -188,21 +166,25 @@ The popup is the interface users interact with when clicking the extension icon.
 </html>
 ```
 
-### Styling the Popup
+This HTML provides a clean, organized interface with two main sections. The presets section displays common viewport sizes organized by device category, making it easy for users to quickly test standard breakpoints. The custom size section allows users to enter specific dimensions for more precise testing. We've also included a checkbox for centering the window, which is a handy feature for responsive testing.
 
-The CSS should provide a clean, modern interface that matches Chrome's design language:
+---
+
+## Styling the Popup Interface {#styling-popup-interface}
+
+A well-designed popup enhances user experience significantly. Let's create CSS that makes our extension visually appealing and easy to use:
 
 ```css
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   width: 320px;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   color: #333;
 }
 
@@ -220,407 +202,393 @@ header {
 h1 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 8px;
+  color: #1a73e8;
+  margin-bottom: 4px;
 }
 
-.current-size {
-  font-size: 13px;
+.subtitle {
+  font-size: 12px;
   color: #666;
-  background: #fff;
-  padding: 6px 12px;
-  border-radius: 16px;
-  display: inline-block;
+}
+
+h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 section {
   margin-bottom: 16px;
 }
 
-h2 {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #888;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
 .preset-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
 .preset-btn {
-  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 10px 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-align: left;
 }
 
 .preset-btn:hover {
-  border-color: #4285f4;
   background: #e8f0fe;
+  border-color: #1a73e8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.preset-btn .name {
+.preset-name {
   font-size: 13px;
   font-weight: 500;
-  display: block;
-  margin-bottom: 2px;
+  color: #333;
 }
 
-.preset-btn .dimensions {
+.preset-size {
   font-size: 11px;
   color: #666;
+  margin-top: 2px;
 }
 
 .input-group {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
 }
 
-.input-group input {
+.input-field {
   flex: 1;
+}
+
+.input-field label {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.input-field input {
+  width: 100%;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
 }
 
-.input-group input:focus {
+.input-field input:focus {
   outline: none;
-  border-color: #4285f4;
+  border-color: #1a73e8;
 }
 
 .separator {
-  color: #888;
-  font-size: 14px;
+  color: #999;
+  font-size: 16px;
+  padding-bottom: 8px;
 }
 
-#applyCustom {
+.apply-btn {
   padding: 8px 16px;
-  background: #4285f4;
+  background: #1a73e8;
   color: white;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   font-size: 13px;
   font-weight: 500;
-}
-
-#applyCustom:hover {
-  background: #3367d6;
-}
-
-.favorites-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.favorite-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #eee;
-}
-
-.favorite-item button {
-  background: none;
-  border: none;
   cursor: pointer;
-  padding: 4px;
-  color: #666;
+  transition: background 0.2s;
 }
 
-.favorite-item button:hover {
-  color: #4285f4;
+.apply-btn:hover {
+  background: #1557b0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1a73e8;
 }
 ```
 
+This CSS provides a modern, clean look that aligns with Chrome's Material Design guidelines. We've used a subtle color scheme with blue accents, proper spacing, and smooth hover transitions. The grid layout for presets ensures buttons are evenly distributed and easy to tap.
+
 ---
 
-## Implementing the Popup Logic {#implementing-popup-logic}
+## Implementing the Extension Logic {#implementing-extension-logic}
 
-The popup JavaScript handles user interactions, communicates with the background script, and displays current viewport information. Let us implement the complete functionality:
+Now comes the core functionality—making the extension actually resize windows. We'll create the JavaScript that handles user interactions and communicates with Chrome's Windows API:
 
 ```javascript
-// Default presets configuration
-const defaultPresets = [
-  { name: 'iPhone SE', width: 375, height: 667 },
-  { name: 'iPhone 14 Pro', width: 393, height: 852 },
-  { name: 'Android', width: 360, height: 800 },
-  { name: 'iPad Mini', width: 744, height: 1133 },
-  { name: 'iPad Pro', width: 1024, height: 1366 },
-  { name: 'MacBook Air', width: 1280, height: 832 },
-  { name: 'MacBook Pro', width: 1440, height: 900 },
-  { name: 'Full HD', width: 1920, height: 1080 },
-  { name: '2K', width: 2560, height: 1440 },
-  { name: '4K', width: 3840, height: 2160 }
-];
+// popup.js
 
-// DOM Elements
-const presetGrid = document.getElementById('presetGrid');
-const favoritesList = document.getElementById('favoritesList');
-const customWidthInput = document.getElementById('customWidth');
-const customHeightInput = document.getElementById('customHeight');
-const applyCustomBtn = document.getElementById('applyCustom');
-const widthDisplay = document.getElementById('width');
-const heightDisplay = document.getElementById('height');
+document.addEventListener('DOMContentLoaded', () => {
+  // Get DOM elements
+  const presetButtons = document.querySelectorAll('.preset-btn');
+  const customWidthInput = document.getElementById('custom-width');
+  const customHeightInput = document.getElementById('custom-height');
+  const applyCustomBtn = document.getElementById('apply-custom');
+  const centerWindowCheckbox = document.getElementById('center-window');
 
-// Initialize popup
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadCurrentWindowSize();
-  renderPresets();
-  loadFavorites();
-  setupEventListeners();
-});
-
-// Get current window size
-async function loadCurrentWindowSize() {
-  try {
-    const windows = await chrome.windows.getCurrent();
-    if (windows) {
-      widthDisplay.textContent = windows.width;
-      heightDisplay.textContent = windows.height;
-    }
-  } catch (error) {
-    console.error('Error getting window size:', error);
+  // Get the current window
+  async function getCurrentWindow() {
+    return await chrome.windows.getCurrent();
   }
-}
 
-// Render preset buttons
-function renderPresets() {
-  presetGrid.innerHTML = defaultPresets.map(preset => `
-    <button class="preset-btn" data-width="${preset.width}" data-height="${preset.height}">
-      <span class="name">${preset.name}</span>
-      <span class="dimensions">${preset.width} x ${preset.height}</span>
-    </button>
-  `).join('');
-}
+  // Resize and optionally center the window
+  async function resizeWindow(width, height, shouldCenter = false) {
+    try {
+      const currentWindow = await getCurrentWindow();
+      
+      let updateData = {
+        width: parseInt(width, 10),
+        height: parseInt(height, 10)
+      };
 
-// Load saved favorites
-async function loadFavorites() {
-  try {
-    const result = await chrome.storage.local.get(['favorites']);
-    const favorites = result.favorites || [];
-    
-    if (favorites.length === 0) {
-      favoritesList.innerHTML = '<p class="empty-state">No saved presets yet</p>';
+      if (shouldCenter) {
+        // Get screen dimensions
+        const screen = await chrome.windows.getCurrentWindowManifest;
+        // Calculate center position based on screen size
+        const { screenWidth, screenHeight } = await chrome.system.display.getInfo()
+          .then(displays => {
+            const primaryDisplay = displays[0];
+            return {
+              screenWidth: primaryDisplay.workArea.width,
+              screenHeight: primaryDisplay.workArea.height
+            };
+          });
+
+        updateData.left = Math.round((screenWidth - width) / 2);
+        updateData.top = Math.round((screenHeight - height) / 2);
+      }
+
+      await chrome.windows.update(currentWindow.id, updateData);
+      
+      // Visual feedback
+      showNotification(`Window resized to ${width} × ${height}`);
+    } catch (error) {
+      console.error('Error resizing window:', error);
+      showNotification('Failed to resize window', true);
+    }
+  }
+
+  // Handle preset button clicks
+  presetButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const width = button.dataset.width;
+      const height = button.dataset.height;
+      const shouldCenter = centerWindowCheckbox.checked;
+      resizeWindow(width, height, shouldCenter);
+    });
+  });
+
+  // Handle custom size apply button
+  applyCustomBtn.addEventListener('click', () => {
+    const width = customWidthInput.value;
+    const height = customHeightInput.value;
+
+    if (!width || !height) {
+      showNotification('Please enter both width and height', true);
       return;
     }
 
-    favoritesList.innerHTML = favorites.map((preset, index) => `
-      <div class="favorite-item">
-        <span>${preset.name}: ${preset.width} x ${preset.height}</span>
-        <div>
-          <button class="apply-fav" data-index="${index}" title="Apply">↗</button>
-          <button class="remove-fav" data-index="${index}" title="Remove">×</button>
-        </div>
-      </div>
-    `).join('');
-  } catch (error) {
-    console.error('Error loading favorites:', error);
-  }
-}
-
-// Setup event listeners
-function setupEventListeners() {
-  // Preset buttons
-  presetGrid.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.preset-btn');
-    if (btn) {
-      const width = parseInt(btn.dataset.width);
-      const height = parseInt(btn.dataset.height);
-      await resizeWindow(width, height);
-    }
+    const shouldCenter = centerWindowCheckbox.checked;
+    resizeWindow(width, height, shouldCenter);
   });
 
-  // Custom size apply
-  applyCustomBtn.addEventListener('click', async () => {
-    const width = parseInt(customWidthInput.value);
-    const height = parseInt(customHeightInput.value);
-    
-    if (width && height && width >= 100 && height >= 100) {
-      await resizeWindow(width, height);
-    }
-  });
-
-  // Enter key for custom size
-  customWidthInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') customHeightInput.focus();
-  });
-  
-  customHeightInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') applyCustomBtn.click();
-  });
-
-  // Favorites - apply
-  favoritesList.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('apply-fav')) {
-      const index = parseInt(e.target.dataset.index);
-      const result = await chrome.storage.local.get(['favorites']);
-      const favorites = result.favorites || [];
-      if (favorites[index]) {
-        await resizeWindow(favorites[index].width, favorites[index].height);
+  // Handle Enter key in custom size inputs
+  [customWidthInput, customHeightInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        applyCustomBtn.click();
       }
-    }
-    
-    if (e.target.classList.contains('remove-fav')) {
-      const index = parseInt(e.target.dataset.index);
-      await removeFavorite(index);
-    }
-  });
-}
-
-// Resize window function
-async function resizeWindow(width, height) {
-  try {
-    const window = await chrome.windows.getCurrent();
-    await chrome.windows.update(window.id, {
-      width: width,
-      height: height,
-      left: window.left,
-      top: window.top
     });
+  });
+
+  // Simple notification system
+  function showNotification(message, isError = false) {
+    // Create a temporary notification element
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: ${isError ? '#d93025' : '#1a73e8'};
+      color: white;
+      border-radius: 4px;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+    `;
     
-    // Update display after resize
-    setTimeout(loadCurrentWindowSize, 100);
-  } catch (error) {
-    console.error('Error resizing window:', error);
+    document.body.appendChild(notification);
+    
+    // Remove after 2 seconds
+    setTimeout(() => {
+      notification.style.animation = 'fadeOut 0.2s ease';
+      setTimeout(() => notification.remove(), 200);
+    }, 2000);
   }
-}
 
-// Add to favorites
-async function addFavorite(preset) {
-  try {
-    const result = await chrome.storage.local.get(['favorites']);
-    const favorites = result.favorites || [];
-    favorites.push(preset);
-    await chrome.storage.local.set({ favorites });
-    loadFavorites();
-  } catch (error) {
-    console.error('Error adding favorite:', error);
-  }
-}
-
-// Remove from favorites
-async function removeFavorite(index) {
-  try {
-    const result = await chrome.storage.local.get(['favorites']);
-    const favorites = result.favorites || [];
-    favorites.splice(index, 1);
-    await chrome.storage.local.set({ favorites });
-    loadFavorites();
-  } catch (error) {
-    console.error('Error removing favorite:', error);
-  }
-}
+  // Add CSS animations for notifications
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateX(-50%) translateY(0); }
+      to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    }
+  `;
+  document.head.appendChild(style);
+});
 ```
 
----
+This JavaScript handles all the core functionality. It attaches event listeners to preset buttons and the custom size form, validates user input, and calls the chrome.windows.update API to resize the browser window. We've also added keyboard support (Enter key) and a simple notification system for user feedback.
 
-## Implementing Background Service Worker {#background-service-worker}
-
-The background service worker handles keyboard shortcuts and can perform operations even when the popup is not open. This is essential for the keyboard shortcuts we defined in the manifest:
+One thing to note: the centering logic requires additional handling in the background script since the system.display API requires specific permissions. Let's create a more robust solution using a background script:
 
 ```javascript
-// Background service worker for keyboard shortcuts
-chrome.commands.onCommand.addListener(async (command) => {
-  const presets = {
-    'resize-mobile': { width: 375, height: 667 },
-    'resize-tablet': { width: 768, height: 1024 },
-    'resize-desktop': { width: 1920, height: 1080 }
-  };
+// background.js
 
-  const preset = presets[command];
-  if (preset) {
-    try {
-      const window = await chrome.windows.getCurrent();
-      await chrome.windows.update(window.id, {
-        width: preset.width,
-        height: preset.height,
-        left: window.left,
-        top: window.top
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'resizeWindow') {
+    const { width, height, center } = message;
+    
+    chrome.windows.getCurrent(async (currentWindow) => {
+      let updateData = {
+        width: parseInt(width, 10),
+        height: parseInt(height, 10)
+      };
+
+      if (center) {
+        try {
+          const displays = await chrome.system.display.getInfo();
+          const primaryDisplay = displays[0];
+          
+          updateData.left = Math.round(
+            (primaryDisplay.workArea.width - width) / 2
+          );
+          updateData.top = Math.round(
+            (primaryDisplay.workArea.height - height) / 2
+          );
+        } catch (error) {
+          console.log('Could not get display info:', error);
+        }
+      }
+
+      chrome.windows.update(currentWindow.id, updateData, () => {
+        sendResponse({ success: true });
       });
-    } catch (error) {
-      console.error('Error resizing window from shortcut:', error);
-    }
-  }
-});
+    });
 
-// Handle extension installation
-chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    console.log('Window Resizer Pro installed successfully');
+    return true; // Indicates async response
   }
 });
 ```
 
+We need to add the "system.display" permission to our manifest for centering to work properly:
+
+```json
+"permissions": [
+  "windows",
+  "system.display"
+]
+```
+
+And update popup.js to message the background script instead of calling the Windows API directly:
+
+```javascript
+async function resizeWindow(width, height, shouldCenter = false) {
+  try {
+    await chrome.runtime.sendMessage({
+      action: 'resizeWindow',
+      width: width,
+      height: height,
+      center: shouldCenter
+    });
+    
+    showNotification(`Window resized to ${width} × ${height}`);
+  } catch (error) {
+    console.error('Error resizing window:', error);
+    showNotification('Failed to resize window', true);
+  }
+}
+```
+
 ---
 
-## Testing Your Extension {#testing-extension}
+## Testing Your Extension Locally {#testing-your-extension-locally}
 
-Before publishing, thoroughly test your extension in development mode. Here's how to load your extension in Chrome:
+Before publishing, you'll want to test your extension locally to ensure everything works correctly. Chrome provides a simple way to load unpacked extensions for testing. Here's how:
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable "Developer mode" using the toggle in the top right corner
-3. Click "Load unpacked" and select your extension folder
-4. The extension icon should appear in your toolbar
+First, open Chrome and navigate to chrome://extensions/. You'll see the Extensions management page. In the top-right corner, toggle on "Developer mode." This enables additional features and buttons that allow you to load unpacked extensions, reload them, and access other development tools.
 
-Test the following scenarios: Click each preset button and verify the window resizes correctly. Enter custom dimensions and apply them. Use the keyboard shortcuts (if they work in your Chrome version). Open and close the popup to ensure it displays current window size. Create and remove favorites to test the storage functionality.
+Click the "Load unpacked" button that appears after enabling developer mode. Navigate to your extension's directory (the folder containing manifest.json) and select it. Chrome will load your extension, and you should see its icon appear in your browser's toolbar.
 
----
+Test each preset button to verify they resize the window correctly. Try the custom size feature with various dimensions. If you added the centering option, verify that it positions windows correctly on different screen sizes. Pay attention to edge cases—try setting extremely small or large dimensions to see how your extension handles them.
 
-## Publishing to Chrome Web Store {#publishing}
-
-Once you have tested your extension and ensured it works correctly, you can publish it to the Chrome Web Store. First, create your extension icons if you haven't already (required sizes: 16x16, 32x32, 48x48, and 128x128 pixels). Then, create a ZIP file of your extension folder excluding any development files.
-
-Navigate to the Chrome Web Store Developer Dashboard and sign in with your Google account. Click "New Item" and upload your ZIP file. Fill in the required information including the extension name, description, and category. Upload your icon images and add screenshots if desired. Review and submit for publishing.
-
-The review process typically takes a few hours to a few days. Once approved, your extension will be available in the Chrome Web Store for millions of users to install.
+One common issue you might encounter is the window not resizing to exact dimensions due to Chrome's minimum window size constraints or system decorations. This is normal behavior and varies by operating system. Your extension should still work correctly within reasonable bounds.
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
-While our basic window resizer extension is fully functional, there are several advanced features you can add to make your extension stand out:
+Now that you have a working window resizer extension, consider adding these advanced features to make it even more useful:
 
-### Multi-Window Support
+**Keyboard Shortcuts:** Implement keyboard shortcuts that allow users to quickly cycle through preset sizes without opening the popup. Chrome's commands API enables this functionality.
 
-Implement the ability to resize specific windows when multiple windows are open. Use chrome.windows.getAll() to list all windows and allow users to select which window to resize.
+**Save Custom Presets:** Allow users to save their own custom dimensions as named presets. Store these in chrome.storage for persistence across sessions.
 
-### Position Control
+**Multiple Monitor Support:** Add the ability to move windows between monitors or position them on specific displays.
 
-Add options to position the window at specific screen coordinates after resizing. This is useful for comparing side-by-side layouts across different viewport sizes.
+**Responsive Framework Presets:** Add presets for common CSS frameworks like Bootstrap, Tailwind, or Material Design breakpoint sizes.
 
-### Responsive Breakpoint Presets
+**Window State Management:** Add options to maximize, minimize, or restore window state in addition to resizing.
 
-Create presets based on common CSS breakpoints (320px for mobile, 768px for tablet, 1024px for small desktop, 1280px for desktop) to match common responsive design patterns.
+These enhancements can significantly increase the value of your extension and differentiate it from existing window resizer tools in the Chrome Web Store.
 
-### Export and Import
+---
 
-Allow users to export their saved presets and import them on different computers, useful for developers who work across multiple machines.
+## Publishing Your Extension {#publishing-your-extension}
 
-### Integration with Browser DevTools
+Once you're satisfied with your extension and have thoroughly tested it, you can publish it to the Chrome Web Store. The publishing process involves creating a developer account, preparing your extension assets, and submitting through the Chrome Web Store developer dashboard.
 
-Create a DevTools panel that shows current viewport information and provides quick access to resize functions directly from the developer tools.
+You'll need to create a ZIP file of your extension (excluding unnecessary files like .git directories). Prepare compelling store listing assets including a clear icon, screenshots, and a detailed description that highlights your extension's features and benefits. The description should naturally incorporate relevant keywords like "window resizer," "resize browser," and "responsive design" to improve search visibility.
+
+Chrome charges a one-time $5 developer registration fee to publish extensions. After paying and submitting your extension, Google reviews it for policy compliance—a process that typically takes a few days. Once approved, your extension becomes available to all Chrome users worldwide.
 
 ---
 
 ## Conclusion {#conclusion}
 
-Building a window resizer Chrome extension is an excellent project that teaches you fundamental Chrome extension development concepts while creating a genuinely useful tool for web developers and designers. The extension we built in this guide includes preset viewport sizes for all common devices, custom dimension input with validation, keyboard shortcuts for quick access, favorites system for saving custom presets, and persistent storage using the Chrome Storage API.
+Congratulations! You've successfully built a complete Window Resizer Chrome extension for responsive design testing. This extension demonstrates key concepts in Chrome extension development including Manifest V3 architecture, the chrome.windows API, popup UI design, and background script communication.
 
-The skills you have learned in this tutorial—working with the Windows API, creating popup interfaces, handling user interactions, implementing keyboard shortcuts, and managing persistent storage—transfer directly to other Chrome extension projects you might want to build.
+The extension you created provides immediate value for web developers and designers who need to test responsive layouts quickly. With its clean interface, preset dimensions for popular devices, and custom size capability, it addresses a real need in the web development workflow.
 
-Remember to thoroughly test your extension before publishing and consider adding advanced features to differentiate your extension from existing window resizers in the Chrome Web Store. With over 3 billion Chrome users worldwide, there is significant demand for quality developer tools, and a well-built window resizer extension can serve thousands of developers who need to test responsive designs efficiently.
+As you continue developing Chrome extensions, remember that the platform offers tremendous capabilities beyond what we've covered here. The skills you've learned—working with Chrome APIs, designing user interfaces, handling user interactions, and managing extension state—form a foundation for building even more sophisticated extensions.
 
-Good luck with your Chrome extension development journey!
+Consider adding the advanced features we discussed, publishing your extension to the Chrome Web Store, and collecting user feedback to guide future improvements. The world of Chrome extension development offers endless possibilities for creating tools that enhance productivity and solve real-world problems.
