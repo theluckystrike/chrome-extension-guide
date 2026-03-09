@@ -2,7 +2,7 @@
 layout: post
 title: "Chrome Extension Performance Optimization: Speed Up Your Extension"
 seo_title: "Chrome Extension Performance Optimization Guide | Speed Up Extension"
-description: "Master Chrome extension performance optimization with this comprehensive guide. Learn how to reduce memory usage, minimize CPU overhead, optimize service workers, and deliver a fast user experience."
+description: "Master Chrome extension performance with proven techniques. Reduce memory usage, minimize CPU overhead, optimize service workers, and deliver a fast user experience."
 date: 2025-01-16
 categories: [guides, chrome-extensions]
 tags: [performance optimization, chrome extension, speed, memory usage, service workers, content scripts, manifest v3]
