@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: default
 title: "Chrome Web Store Listing Optimization — Double Your Install Rate"
-description: "Optimize your Chrome Web Store listing to double your install rate with proven title formulas, screenshot strategies, and A/B testing techniques that work."
+description: "Optimize your Chrome Web Store listing for maximum installs. Title formulas, description templates, screenshot strategies, and A/B testing techniques that work."
 date: 2025-02-17
 categories: [guides, publishing]
 tags: [chrome-web-store, cws-optimization, extension-listing, install-rate, app-store-optimization]
@@ -384,11 +384,19 @@ The developers who dominate the Chrome Web Store aren't necessarily the best eng
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
 - [Manifest V3 Migration Complete Guide]({% post_url 2025-01-16-manifest-v3-migration-complete-guide-2025 %})
 - [Chrome Tab Groups vs Tab Suspender: Which Is Better?]({% post_url 2025-01-16-chrome-tab-groups-vs-tab-suspender-which-is-better %})
+- [Chrome Web Store SEO: Rank Higher & Get More Installs]({% post_url 2025-01-31-chrome-web-store-seo-rank-higher-get-more-installs %})
+- [How to Market Your Chrome Extension: 0 to 10,000 Users]({% post_url 2025-02-18-how-to-market-chrome-extension-0-to-10000-users %})
+- [Chrome Extension Landing Page: Convert Visitors to Installs]({% post_url 2025-02-23-chrome-extension-landing-page-convert-visitors-to-installs %})
 
 ---
 
-## Turn Your Extension Into a Business
-Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+## Grow Your Extension Business
+
+Ready to take your Chrome extension to the next level? These guides will help you scale:
+
+- The [Extension Monetization Playbook](https://zovo.one/extension-monetization-playbook) covers freemium models, Stripe integration, subscription architecture, and proven growth strategies for Chrome extension developers.
+- Learn how to [build an audience and monetize your user base]({% post_url 2025-03-01-chrome-extension-email-marketing-build-monetize-user-list %}) with email marketing strategies that convert.
 
 ---
+
 *Built by theluckystrike at zovo.one*
