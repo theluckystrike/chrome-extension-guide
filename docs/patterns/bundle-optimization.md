@@ -398,6 +398,7 @@ npm install -D size-limit @size-limit/file
 
 ### CI Integration {#ci-integration}
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/size.yml
@@ -419,6 +420,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 {% endraw %}
 ```
+{% endraw %}
 
 ### Budget Tracking Over Time {#budget-tracking-over-time}
 

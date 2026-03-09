@@ -54,6 +54,7 @@ async function saveHistory(req: any, res: any): Promise<void> {
 
 ## Environment Variables {#environment-variables}
 
+{% raw %}
 ```typescript
 {% raw %}
 function substitute(text: string, vars: Record<string, string>): string {
@@ -61,6 +62,7 @@ function substitute(text: string, vars: Record<string, string>): string {
 }
 {% endraw %}
 ```
+{% endraw %}
 
 ## Export/Import {#exportimport}
 

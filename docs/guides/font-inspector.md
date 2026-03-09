@@ -404,6 +404,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 The popup provides quick access to font inspection tools:
 
+{% raw %}
 ```tsx
 // src/popup/App.tsx
 
@@ -529,6 +530,7 @@ function FontCard({ font }: { font: FontInfo }) {
   );
 }
 ```
+{% endraw %}
 
 ### Content Script Overlay
 

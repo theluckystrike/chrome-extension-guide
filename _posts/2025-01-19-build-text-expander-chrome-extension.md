@@ -677,7 +677,9 @@ While our basic text expander extension is fully functional, there are several e
 
 ### Dynamic Placeholders
 
+{% raw %}
 Add support for placeholder tokens that prompt for user input during expansion. For example, `;date` could expand to the current date, or `{{name}}` could prompt you to enter a name each time.
+{% endraw %}
 
 ### Clipboard History
 

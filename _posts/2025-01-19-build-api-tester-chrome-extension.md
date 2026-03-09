@@ -728,7 +728,9 @@ function substituteVariables(text, variables) {
 }
 ```
 
+{% raw %}
 This function finds patterns like `{{variableName}}` and replaces them with values from the variables object.
+{% endraw %}
 
 ### Environment Management UI
 

@@ -129,6 +129,7 @@ function ShadowDOMRenderer({ children }) {
 
 Vue's web components integration works naturally with Shadow DOM:
 
+{% raw %}
 ```javascript
 import { defineCustomElement } from 'vue';
 
@@ -145,6 +146,7 @@ const host = document.createElement('div');
 host.attachShadow({ mode: 'open' });
 host.shadowRoot.appendChild(new MyComponent({ title: 'Hello' }));
 ```
+{% endraw %}
 
 For Svelte, use the custom elements compilation mode to generate web components that work in Shadow DOM:
 

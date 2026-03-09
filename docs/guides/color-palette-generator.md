@@ -455,6 +455,7 @@ interface ExtractionOptions {
 
 The popup provides the primary user interface for color manipulation:
 
+{% raw %}
 ```tsx
 // src/popup/index.tsx
 
@@ -579,6 +580,7 @@ const Popup: React.FC = () => {
 
 export default Popup;
 ```
+{% endraw %}
 
 ### Sidebar Overlay Option
 

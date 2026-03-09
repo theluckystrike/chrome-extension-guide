@@ -506,6 +506,7 @@ export function renderErrorFallback(
 }
 ```
 
+{% raw %}
 ```tsx
 {% raw %}
 // ui/ErrorBoundary.tsx — React error boundary for popup/options
@@ -556,6 +557,7 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 {% endraw %}
 ```
+{% endraw %}
 
 ```tsx
 // popup/App.tsx

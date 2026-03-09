@@ -12,6 +12,7 @@ A complete guide to automating Chrome extension builds, testing, and publishing 
 
 ### Basic Build Workflow {#basic-build-workflow}
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/build.yml
@@ -72,11 +73,13 @@ jobs:
           retention-days: 7
 {% endraw %}
 ```
+{% endraw %}
 
 ### Multi-Browser Build Matrix {#multi-browser-build-matrix}
 
 Build for Chrome, Firefox, and Edge in parallel:
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/multi-browser.yml
@@ -123,6 +126,7 @@ jobs:
           path: dist/${{ matrix.browser }}/
 {% endraw %}
 ```
+{% endraw %}
 
 The build script uses the `TARGET_BROWSER` env to adjust the manifest and polyfills:
 
@@ -432,6 +436,7 @@ Add to your CI workflow:
 
 For PR comments showing size changes, use the size-limit GitHub Action:
 
+{% raw %}
 ```yaml
 {% raw %}
   size:
@@ -455,6 +460,7 @@ For PR comments showing size changes, use the size-limit GitHub Action:
           build_script: build
 {% endraw %}
 ```
+{% endraw %}
 
 ## Manifest Validation in CI {#manifest-validation-in-ci}
 
@@ -577,6 +583,7 @@ Store these as GitHub repository secrets:
 
 ### Publish Workflow {#publish-workflow}
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/publish.yml
@@ -624,6 +631,7 @@ jobs:
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
 {% endraw %}
 ```
+{% endraw %}
 
 ### Publishing Script {#publishing-script}
 
@@ -782,6 +790,7 @@ injectKey();
 
 Store the private key (`.pem` file) as an encrypted GitHub secret and never commit it:
 
+{% raw %}
 ```yaml
 {% raw %}
       - name: Inject extension key
@@ -790,6 +799,7 @@ Store the private key (`.pem` file) as an encrypted GitHub secret and never comm
           EXTENSION_PUBLIC_KEY: ${{ secrets.EXTENSION_PUBLIC_KEY }}
 {% endraw %}
 ```
+{% endraw %}
 
 ### .gitignore for Key Files {#gitignore-for-key-files}
 
@@ -865,6 +875,7 @@ console.log(generateReleaseNotes(fromTag));
 
 ### Automated GitHub Release with Notes {#automated-github-release-with-notes}
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/release.yml
@@ -925,6 +936,7 @@ jobs:
             extension-firefox.zip
 {% endraw %}
 ```
+{% endraw %}
 
 ## Canary and Beta Channel Deployment {#canary-and-beta-channel-deployment}
 
@@ -974,6 +986,7 @@ publishToChannel(channel);
 
 ### Staged Rollout Workflow {#staged-rollout-workflow}
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/staged-rollout.yml
@@ -1021,6 +1034,7 @@ jobs:
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
 {% endraw %}
 ```
+{% endraw %}
 
 ### Beta Version Numbering {#beta-version-numbering}
 
@@ -1054,6 +1068,7 @@ setBetaVersion();
 
 Here is a full workflow that ties everything together:
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/pipeline.yml
@@ -1162,6 +1177,7 @@ jobs:
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
 {% endraw %}
 ```
+{% endraw %}
 
 ## Summary {#summary}
 

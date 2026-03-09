@@ -280,6 +280,7 @@ const app = createApp(App);
 app.mount('#app');
 ```
 
+{% raw %}
 ```vue
 <!-- App.vue -->
 <template>
@@ -335,6 +336,7 @@ function retry() {
 }
 </script>
 ```
+{% endraw %}
 
 ### Svelte Popup Setup
 

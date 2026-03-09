@@ -456,7 +456,9 @@ jobs:
       matrix:
         chrome: [stable, beta, dev]
     steps:
+{% raw %}
       - run: npx playwright test --browser-channel=${{ matrix.chrome }}
+{% endraw %}
 ```
 
 ## 17. Testing Across Chrome Versions

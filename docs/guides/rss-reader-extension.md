@@ -574,6 +574,7 @@ function ArticleItem({ article }: { article: Article }) {
 ```
 
 ### Side Panel Reader (sidebar/reader.tsx)
+{% raw %}
 ```typescript
 export function SidePanelReader() {
   const [article, setArticle] = useState<Article | null>(null);
@@ -605,6 +606,7 @@ export function SidePanelReader() {
   );
 }
 ```
+{% endraw %}
 
 ## Testing Approach
 

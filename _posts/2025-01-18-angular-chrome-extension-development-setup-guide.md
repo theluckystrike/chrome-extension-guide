@@ -175,6 +175,7 @@ The popup is the user-facing part of your Chrome extension—the interface users
 
 First, create the main app component in `src/app/app.component.ts`:
 
+{% raw %}
 ```typescript
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -236,6 +237,7 @@ export class AppComponent {
   }
 }
 ```
+{% endraw %}
 
 This component demonstrates several key Angular concepts within the extension context. The use of standalone components keeps the bundle size minimal. The inline template and styles show how Angular can be used concisely. The component also interacts with Chrome's storage API to persist data across popup sessions.
 

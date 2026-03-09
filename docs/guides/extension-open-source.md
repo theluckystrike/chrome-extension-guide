@@ -100,6 +100,7 @@ Track forks for attribution. GPL projects: forks must also be open source. Cross
 
 ## GitHub Actions for CWS Publishing {#github-actions-for-cws-publishing}
 
+{% raw %}
 ```yaml
 {% raw %}
 name: Publish to CWS
@@ -117,6 +118,7 @@ jobs:
           refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
 {% endraw %}
 ```
+{% endraw %}
 
 Cross-ref: `docs/publishing/publishing-guide.md`
 

@@ -41,6 +41,7 @@ This security model protects the extension from potentially malicious code runni
 
 Since sandboxed pages cannot directly access extension APIs, communication happens via `postMessage`:
 
+{% raw %}
 ```javascript
 {% raw %}
 // Main extension page (background.js or popup)
@@ -59,6 +60,7 @@ window.addEventListener('message', (event) => {
 });
 {% endraw %}
 ```
+{% endraw %}
 
 ```javascript
 // sandbox.html
@@ -81,6 +83,7 @@ window.addEventListener('message', (event) => {
 
 Many template engines (Handlebars, EJS, Underscore.js) rely on `eval` for runtime compilation:
 
+{% raw %}
 ```javascript
 {% raw %}
 // sandbox.html - Handlebars example
@@ -89,6 +92,7 @@ const template = Handlebars.compile('{{greeting}}, {{name}}!');
 const output = template({ greeting: 'Hello', name: 'World' });
 {% endraw %}
 ```
+{% endraw %}
 
 ### User-Provided Scripts {#user-provided-scripts}
 

@@ -58,6 +58,7 @@ npx chrome-webstore-upload-cli upload \
 
 Complete workflow that builds, packages, and publishes on tag push:
 
+{% raw %}
 ```yaml
 {% raw %}
 # .github/workflows/publish.yml
@@ -109,6 +110,7 @@ jobs:
           action: publish
 {% endraw %}
 ```
+{% endraw %}
 
 ---
 

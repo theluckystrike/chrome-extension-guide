@@ -533,6 +533,7 @@ class ResilientSSE {
 Show meaningful progress for streams that have a known total length or expected token count.
 For indeterminate streams, use a token counter and elapsed time.
 
+{% raw %}
 ```typescript
 {% raw %}
 // stream-progress.ts
@@ -610,6 +611,7 @@ function StreamIndicator({ progress }: { progress: StreamProgress }) {
 }
 {% endraw %}
 ```
+{% endraw %}
 
 **Gotchas:**
 

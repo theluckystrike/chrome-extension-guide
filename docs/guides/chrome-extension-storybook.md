@@ -62,6 +62,7 @@ export default preview;
 
 Simulate popup dimensions (400x600):
 
+{% raw %}
 ```typescript
 {% raw %}
 export const popupViewport: Decorator = (Story, context) => {
@@ -72,6 +73,7 @@ export const popupViewport: Decorator = (Story, context) => {
 };
 {% endraw %}
 ```
+{% endraw %}
 
 ## Popup Component Story {#popup-component-story}
 

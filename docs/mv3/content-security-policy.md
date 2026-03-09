@@ -503,6 +503,7 @@ Some popular libraries have features that violate MV3's CSP. Here's how to handl
 
 ### Handlebars Migration Example {#handlebars-migration-example}
 
+{% raw %}
 ```javascript
 {% raw %}
 // ❌ MV2 - Runtime compilation (uses eval)
@@ -514,6 +515,7 @@ import template from './templates/hello.js';
 const html = template({ name: 'World' });
 {% endraw %}
 ```
+{% endraw %}
 
 ```bash
 # Precompile Handlebars

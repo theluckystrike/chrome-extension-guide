@@ -241,6 +241,7 @@ main();
 
 ### Rust Implementation
 
+{% raw %}
 ```rust
 use std::io::{self, Read, Write};
 use std::process::{Command, Stdio};
@@ -281,6 +282,7 @@ fn main() {
     }
 }
 ```
+{% endraw %}
 
 ### C++ Implementation
 

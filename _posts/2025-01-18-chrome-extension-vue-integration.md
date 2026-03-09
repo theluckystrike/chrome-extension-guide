@@ -130,6 +130,7 @@ The popup is the most common interface for Chrome extensions, and building it wi
 
 Your popup component will be the main interface users interact with when they click your extension's icon. Create a new component in `src/components/Popup.vue` with the following structure:
 
+{% raw %}
 ```vue
 <template>
   <div class="popup-container">
@@ -226,6 +227,7 @@ onMounted(async () => {
 }
 </style>
 ```
+{% endraw %}
 
 This component demonstrates several key patterns for Vue.js extension development. The script setup syntax provides a clean way to write component logic, while the reactive `ref` function creates responsive data that automatically updates the DOM when changed.
 
