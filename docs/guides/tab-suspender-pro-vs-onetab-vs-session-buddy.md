@@ -312,7 +312,7 @@ All three extensions can be combined with other productivity tools:
 - **OneTab** integrates with [Chrome Storage API](../guides/storage-api.md) for custom extensions
 - **Session Buddy** exports sessions as JSON, making it compatible with backup and automation workflows
 
-For extension developers, understanding how these tools interact with the [tabs API](../guides/tabs-api.md) and [memory management](../guides/memory-management.md) patterns can inform your own tab-related extension development.
+For extension developers, understanding how these tools interact with the [tabs API](../guides/tabs-api.md), [memory management](../guides/memory-management.md), and [tab management](../guides/tab-management.md) patterns can inform your own tab-related extension development.
 
 ---
 
