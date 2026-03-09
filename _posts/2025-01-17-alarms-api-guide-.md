@@ -440,3 +440,11 @@ Key takeaways from this guide include understanding that Chrome Alarms provide r
 By following the patterns and best practices outlined in this guide, you can implement robust scheduling in your extensions that provides value to users without compromising performance. Whether you're building a simple reminder app or a complex data synchronization system, the Chrome Alarms API provides the foundation you need for reliable time-based functionality in your Chrome extensions.
 
 Remember to test your alarm implementations thoroughly, especially across browser restarts and extension updates, to ensure your scheduled tasks work reliably in all scenarios.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Notifications API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
+- [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.
+- [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Implement file download functionality in your extension.
