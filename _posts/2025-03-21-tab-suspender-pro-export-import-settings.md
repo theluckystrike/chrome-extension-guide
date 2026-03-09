@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tab Suspender Pro: Export, Import, and Backup Your Settings"
-description: "Complete guide to exporting, importing, and backing up your Tab Suspender Pro settings across devices, profiles, and team members."
+description: "Complete guide to exporting, importing, and backing up your Tab Suspender Pro settings across devices, Chrome profiles, and team members for seamless setup."
 date: 2025-03-21
 categories: [Chrome Extensions, Guides]
 tags: [tab-suspender-pro, settings, backup]
