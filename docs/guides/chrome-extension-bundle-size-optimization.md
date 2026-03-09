@@ -950,6 +950,7 @@ Different contexts have different budgets. Enforce them individually:
 
 GitHub provides a bundle-size action for tracking changes over time:
 
+{% raw %}
 ```yaml
 # .github/workflows/bundle-size.yml
 - name: Measure bundle size
@@ -958,11 +959,13 @@ GitHub provides a bundle-size action for tracking changes over time:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
     build-script: 'npm run build'
 ```
+{% endraw %}
 
 ### Slack Notifications for Size Warnings
 
 Alert your team when bundles approach limits:
 
+{% raw %}
 ```yaml
 # .github/workflows/size-alert.yml
 - name: Check size and notify
@@ -976,6 +979,7 @@ Alert your team when bundles approach limits:
         -d "{\"text\": \"⚠️ Extension bundle size warning: ${SIZE}KB (limit: ${HARD_LIMIT}KB)\"}"
     fi
 ```
+{% endraw %}
 
 ### Setting Size Budgets in Build Tools
 
@@ -1024,6 +1028,7 @@ module.exports = {
 
 Maintain a historical record of bundle sizes to identify trends:
 
+{% raw %}
 ```yaml
 # .github/workflows/size-trend.yml
 - name: Record bundle size
@@ -1044,6 +1049,7 @@ Maintain a historical record of bundle sizes to identify trends:
         print(f"::warning::Bundle size increased by {increase*100:.1f}%")
     EOF
 ```
+{% endraw %}
 
 ## Best Practices Checklist
 
