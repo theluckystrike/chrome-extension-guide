@@ -617,6 +617,16 @@ Common issues and solutions:
 - **Extension not appearing**: Make sure manifest.json has no syntax errors
 - **Ads still showing**: Some ads may be loaded dynamically by JavaScript
 - **Popup not working**: Check that all files are in the correct locations
+- **Rules not applying**: Ensure the background script is properly loading the rules
+- **Performance issues**: Too many rules can slow down browser startup; consider using a smaller ruleset
+
+### Debugging Tips
+
+When developing your ad blocker, use Chrome's developer tools to troubleshoot issues effectively. The Extensions Management page (`chrome://extensions/) provides access to the service worker console, where you can view logs from your background script. Additionally, the Network tab in Chrome DevTools allows you to inspect network requests and verify which ones are being blocked by your extension. Understanding how to read these logs will significantly speed up your development process and help you identify issues with rule matching or extension initialization.
+
+### Understanding Rule Priorities
+
+The priority field in your rules is crucial for proper ad blocking behavior. When multiple rules could potentially match the same request, Chrome evaluates them based on priority values, with higher numbers indicating greater importance. In our simple ad blocker, all rules have the same priority (1), which works fine for basic use cases. However, when building more sophisticated blockers with both block and allow rules, understanding priority becomes essential. Allow rules should typically have higher priority than block rules when you want to whitelist specific domains while blocking everything else.
 
 ---
 
