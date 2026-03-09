@@ -725,7 +725,7 @@ Key takeaways:
 - **Measure impact**: Use Chrome's built-in metrics and custom performance markers
 - **Consider your framework**: Choose based on performance requirements and team expertise
 
-For continued learning, explore our related guides on [extension performance optimization](/chrome-extension-guide/docs/guides/performance-optimization/) and [bundle size optimization](/chrome-extension-guide/docs/guides/extension-size-optimization/).
+For continued learning, explore our related guides on [extension performance optimization](/guides/performance-optimization/) and [bundle size optimization](/guides/extension-size-optimization/).
 
 ---
 
