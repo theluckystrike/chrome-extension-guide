@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Chrome Extension Popup Basics"
-description: "Create your first extension popup - a complete guide to building user interfaces"
+description: "Learn to create Chrome extension popup interfaces with HTML, CSS, and JavaScript. Master Manifest V3 action config, styling best practices, and constraints."
 date: 2025-06-03
 categories: [tutorial]
 tags: [popup, ui, basics, manifest-v3, html]

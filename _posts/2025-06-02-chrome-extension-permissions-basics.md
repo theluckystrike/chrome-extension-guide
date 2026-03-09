@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Understanding Chrome Extension Permissions"
-description: "Learn about Chrome extension permissions and security best practices"
+description: "Master Chrome extension permissions for secure app development. Understand host, API, optional permissions, and security best practices in Manifest V3."
 date: 2025-06-02
 categories: [tutorial]
 tags: [permissions, security, manifest, privacy]
