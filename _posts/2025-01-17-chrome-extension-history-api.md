@@ -679,3 +679,11 @@ The History API provides a solid foundation for creating sophisticated history m
 Remember to thoroughly test your extension before publishing it to the Chrome Web Store, and always consider privacy implications when working with sensitive browsing data. With careful implementation and attention to user experience, your history search extension can become an invaluable tool for Chrome users who want better control over their browsing information.
 
 Start building your extension today, and explore the full potential of the Chrome History API in your projects.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Bookmarks API Guide](/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/) - Learn to work with browser bookmarks
+- [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/03/08/chrome-extension-downloads-api-guide/) - Manage downloads from your extension
+- [Chrome Extension Browsing Data API](/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/) - Clear and manage browsing data

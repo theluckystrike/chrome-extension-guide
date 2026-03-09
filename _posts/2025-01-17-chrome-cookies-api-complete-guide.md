@@ -678,7 +678,17 @@ For more information about Chrome extension development, explore our other guide
 
 ---
 
+<<<<<<< HEAD
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+=======
+## Related Articles
+
+- [Chrome Extension Local Storage vs Chrome Storage API](/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/) - Compare different storage options for Chrome extensions
+- [Chrome Extension Storage Patterns for Large Scale Data](/chrome-extension-guide/2025/01/27/chrome-extension-storage-patterns-large-scale-data/) - Learn advanced storage patterns for data-intensive extensions
+- [Chrome Extension State Management Patterns](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Master state management in your extensions
+
+---
+>>>>>>> quality/add-links-a14-r2
 
 *This guide is part of our comprehensive Chrome Extension Development series. For more tutorials and resources, visit our Chrome Extension Guide.*
 ---

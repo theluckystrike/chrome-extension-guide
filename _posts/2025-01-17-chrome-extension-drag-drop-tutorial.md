@@ -418,3 +418,11 @@ Drag and drop functionality is an essential feature for many Chrome extensions, 
 Remember to consider the different contexts where drag and drop might be implemented—popup pages, options pages, and content scripts—each with their own considerations. For file drops, the File API provides the tools you need to handle files dragged from the desktop. For cross-context operations, Chrome's message passing API enables coordination between different parts of your extension.
 
 With the techniques and examples in this guide, you have everything you need to implement professional drag and drop functionality in your Chrome extensions. Start with simple implementations, test thoroughly, and gradually add more sophisticated features as you become comfortable with the API.
+
+---
+
+## Related Articles
+
+- [Chrome Extension DOM Manipulation Guide](/chrome-extension-guide/2025/01/20/chrome-extension-dom-manipulation-guide/) - Learn advanced DOM manipulation techniques for extensions
+- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design intuitive popup interfaces for your extensions
+- [Chrome Extension Content Script Guide](/chrome-extension-guide/2025/03/16/chrome-extension-content-security-policy-csp/) - Master content scripts in your extensions
