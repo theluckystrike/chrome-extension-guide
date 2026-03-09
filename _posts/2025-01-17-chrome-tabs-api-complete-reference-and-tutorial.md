@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Chrome Tabs API Complete Reference and Tutorial"
-description: "Master the Chrome Tabs API with this comprehensive tutorial. Learn how to manage tabs, manipulate tab groups, capture pages, and build powerful tab management extensions."
+description: "Master the Chrome Tabs API with this comprehensive tutorial. Learn to manage tabs, manipulate tab groups, capture pages, and build tab management extensions."
 date: 2025-01-17
 categories: [tutorials, chrome-extensions, api-reference]
 tags: [chrome tabs api, manage tabs chrome extension, tab manipulation api, chrome extension api, tabs api tutorial]

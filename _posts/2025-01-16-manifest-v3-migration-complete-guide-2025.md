@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Manifest V3 Migration Guide: Update Your Chrome Extension in 2025"
-description: "Complete guide to migrating your Chrome extension from Manifest V2 to V3. Learn about service workers, declarativeNetRequest, storage changes, and common migration pitfalls."
+description: "Guide to migrating Chrome extension from Manifest V2 to V3. Learn service workers, declarativeNetRequest, storage changes, and common migration pitfalls."
 date: 2025-01-16
 categories: [Chrome Extensions, Development]
 tags: [manifest-v3, migration, chrome-extension-development, manifest v3 migration guide, mv2 to mv3 migration, manifest v3 service worker]
