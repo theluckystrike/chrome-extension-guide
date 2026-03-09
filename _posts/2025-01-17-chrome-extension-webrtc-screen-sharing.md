@@ -446,3 +446,6 @@ Start building your screen sharing extension today, and explore the countless po
 - [WebRTC Video Communication in Chrome Extensions](/chrome-extension-guide/2025/01/21/chrome-extension-webrtc-video/) - Learn how to implement WebRTC video calling features in your extensions
 - [Chrome Extension Screen Capture API](/chrome-extension-guide/2025/03/11/chrome-extension-screen-capture-api/) - Comprehensive guide to capturing screenshots and screen content
 - [WebRTC Data Channel for Chrome Extensions](/chrome-extension-guide/2025/01/22/chrome-extension-webrtc-data-channel/) - Build peer-to-peer data transfer functionality
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

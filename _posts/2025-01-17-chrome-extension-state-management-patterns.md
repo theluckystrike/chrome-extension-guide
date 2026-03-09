@@ -558,3 +558,6 @@ For more tutorials on Chrome extension development, explore our guides on [perfo
 - [Chrome Storage API Patterns]({% post_url 2025-01-24-chrome-storage-api-patterns %})
 - [Chrome Extension Local Storage vs Chrome Storage API]({% post_url 2025-01-18-chrome-extension-local-storage-vs-chrome-storage-api %})
 - [IndexedDB for Chrome Extension Data Storage]({% post_url 2025-01-21-indexeddb-chrome-extension-data-storage %})
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
