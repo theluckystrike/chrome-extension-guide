@@ -1,732 +1,789 @@
 ---
 layout: default
 title: "Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup"
-description: "Master lazy loading and code splitting in Chrome extensions. Learn how to use dynamic imports, lazy content script modules, and on-demand rendering to dramatically reduce startup time and improve user experience."
+description: "Master lazy loading and code splitting for Chrome extensions. Learn dynamic import(), lazy content script modules, on-demand popup rendering, and framework-specific patterns for blazing-fast extension startup times."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-lazy-loading-code-splitting/"
 ---
 
 # Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup
 
-## Overview {#overview}
+## Introduction {#introduction}
 
-Chrome extension performance is critical for user retention and satisfaction. When users install your extension, they expect it to load instantly and respond quickly to their actions. A slow-loading extension leads to poor reviews, uninstalls, and a damaged reputation in the Chrome Web Store.
+Chrome extension startup performance is critical for user experience and adoption. When users install your extension, they expect it to work instantly—no loading spinners, no delayed interactions, no sluggish popups. Yet as extensions grow in complexity with more features, the bundle size increases, and startup time suffers. This is where lazy loading and code splitting become essential techniques for maintaining a snappy user experience.
 
-This comprehensive guide dives deep into lazy loading and code splitting techniques specifically designed for Chrome extensions. You'll learn how to leverage dynamic imports in service workers, implement lazy content script modules, create on-demand popup rendering, apply route-based splitting in options pages, and optimize shared dependencies. We'll also cover measuring startup impact with real benchmarks and framework-specific patterns for React, Vue, and Svelte extensions.
+This guide explores comprehensive strategies for optimizing your Chrome extension's startup time through dynamic imports, code splitting, and on-demand loading patterns. You'll learn how to reduce initial bundle size, defer heavy operations, and implement framework-specific patterns that keep your extension fast from the moment it's installed.
 
-The techniques in this guide can reduce your extension's initial load time by 50-80%, resulting in faster activation, improved user experience, and better Chrome Web Store rankings.
+## Why Startup Time Matters for Chrome Extensions {#why-startup-time-matters}
 
-## Why Startup Time Matters for Extensions {#why-startup-time-matters}
+The startup time of your Chrome extension directly impacts multiple aspects of user experience and extension viability. Understanding these impacts helps justify the investment in optimization work.
 
-Chrome extensions face unique performance challenges that differ from traditional web applications. Understanding these challenges is essential for implementing effective optimization strategies.
+### User Perception and Retention
 
-### The Service Worker Lifecycle
+Users form immediate impressions based on how quickly your extension responds. When they click the extension icon, they expect the popup to appear within milliseconds. A delay of even 200-300ms feels sluggish and unprofessional. Research consistently shows that perceived performance affects user satisfaction more than actual functionality—if your extension feels slow, users will perceive it as less capable, regardless of how powerful it actually is.
 
-Manifest V3 introduced service workers as the primary background mechanism for extensions. Unlike traditional web service workers, extension service workers can be terminated after 30 seconds of inactivity and must reinitialize completely when awakened. This makes lazy loading not just an optimization—it's a necessity for maintaining functionality.
+### Chrome's Resource Management
 
-Every time your service worker wakes up, Chrome rehydrates its execution context. If your startup code loads heavy dependencies upfront, users experience significant delays. The worst-case scenario occurs when users interact with your extension immediately after installation or after the service worker has been idle for an extended period.
+Chrome actively manages extension resource usage, and slow-loading extensions consume more system resources during startup. Extensions that initialize quickly are more likely to remain in memory when idle, while slower extensions may be terminated more aggressively. This creates a compounding effect: slower startups lead to more frequent reinitialization, which further degrades perceived performance.
 
-### User Perception and Store Rankings
+### Extension Review and Discovery
 
-Studies show that 53% of users abandon mobile apps that take more than 3 seconds to load. The same psychology applies to browser extensions. Users form immediate impressions based on:
+Google's Chrome Web Store considers performance in its ranking algorithms. Extensions with poor performance metrics may be penalized in search results, reducing discoverability. Additionally, poor reviews citing "slow" or "laggy" behavior can significantly impact installation rates. Performance optimization is therefore not just a technical concern—it's a business imperative.
 
-- **Time to first interaction**: How quickly the popup opens after clicking the extension icon
-- **Page load impact**: How much your content scripts slow down webpage loading
-- **Memory footprint**: How much RAM your extension consumes while active
+## Understanding the Extension Loading Model {#understanding-loading-model}
 
-Chrome's Web Store also considers performance metrics in search rankings and may flag extensions with poor performance characteristics.
+Before implementing lazy loading, it's essential to understand how Chrome loads different extension components. Each component has different initialization timing and lifecycle characteristics.
 
-## Dynamic Import() in Service Workers {#dynamic-import-in-service-workers}
+### The Service Worker (Background Script)
 
-The foundation of lazy loading in extension service workers is JavaScript's dynamic `import()` syntax. Unlike static imports, which load all dependencies at initialization, dynamic imports load modules on-demand when triggered by specific conditions or user actions.
+In Manifest V3, the service worker is the heart of your extension. It handles events, manages state, and coordinates between different parts of your extension. However, service workers are ephemeral—they activate when needed and terminate after approximately 30 seconds of inactivity. This means:
+
+- The service worker initializes on first event (installation, tab update, message, alarm, etc.)
+- Every wake-up is a cold start with no in-memory state
+- Heavy initialization work happens on every activation
+
+This makes the service worker an ideal candidate for lazy loading—only load what you need for the current operation.
+
+### Content Scripts
+
+Content scripts run in the context of web pages, injecting functionality directly into websites users visit. They load when matching pages are navigated to, which can be unpredictable. The challenge with content scripts is balancing functionality with page load impact—heavy content scripts can slow down page rendering and increase memory usage across all open tabs.
+
+### Popup and Options Pages
+
+The popup and options pages are HTML pages that display when users interact with your extension. They have their own JavaScript bundles and can make network requests. These pages are perfect candidates for code splitting since users don't always access them, and when they do, a slight delay is acceptable if the initial paint is fast.
+
+## Dynamic Import() in Service Workers {#dynamic-import-service-workers}
+
+Dynamic `import()` is the cornerstone of lazy loading in modern JavaScript. Unlike static imports, which are included in the initial bundle, dynamic imports are loaded on-demand when the code path is executed.
 
 ### Basic Dynamic Import Pattern
 
-Transform your static imports into dynamic imports to defer loading until necessary:
-
 ```javascript
-// ❌ Bad: Load all modules upfront on service worker startup
+// background.js - Bad: Static import loads everything upfront
 import { Analytics } from './analytics.js';
-import { DataProcessor } from './processor.js';
-import { UIManager } from './ui.js';
-import { APIClient } from './api.js';
+import { SyncManager } from './sync.js';
+import { NotificationHandler } from './notifications.js';
 
-chrome.runtime.onMessage.addListener((message) => {
-  // Handle messages using pre-loaded modules
-});
-
-// ✅ Good: Lazy load modules only when needed
-chrome.runtime.onMessage.addListener(async (message) => {
-  switch (message.type) {
-    case 'track-event':
-      const { Analytics } = await import('./analytics.js');
-      return Analytics.track(message.event);
-    case 'process-data':
-      const { DataProcessor } = await import('./processor.js');
-      return DataProcessor.process(message.data);
-    case 'show-notification':
-      const { UIManager } = await import('./ui.js');
-      return UIManager.notify(message.text);
+// background.js - Good: Dynamic imports load on demand
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'sync-data') {
+    // Only load sync module when actually needed
+    import('./sync.js').then(({ SyncManager }) => {
+      const sync = new SyncManager();
+      sync.performSync(message.data).then(sendResponse);
+      return true; // Keep message channel open for async response
+    });
+    return true;
+  }
+  
+  if (message.type === 'show-notification') {
+    import('./notifications.js').then(({ NotificationHandler }) => {
+      const handler = new NotificationHandler();
+      handler.show(message.options);
+    });
   }
 });
 ```
 
-This pattern ensures that the service worker initializes with minimal code, reducing startup time dramatically. Modules are loaded only when their functionality is actually invoked.
+### Module Caching and Reuse
 
-### Module Caching and State Management
-
-Dynamic imports create new module instances each time they're called. To maintain state across invocations, implement a simple caching mechanism:
+Once a dynamic module is loaded, it's cached by the JavaScript module system. Subsequent imports of the same module return the cached version without re-fetching. This means you can structure your code to load modules once and reuse them across multiple operations:
 
 ```javascript
-const moduleCache = new Map();
+// background.js - Efficient module caching
+let cachedModules = {};
 
-async function getModule(modulePath) {
-  if (!moduleCache.has(modulePath)) {
-    moduleCache.set(modulePath, import(modulePath));
+async function getModule(moduleName, loader) {
+  if (!cachedModules[moduleName]) {
+    cachedModules[moduleName] = await loader();
   }
-  return moduleCache.get(modulePath);
+  return cachedModules[moduleName];
 }
 
-// Usage
-const { Analytics } = await getModule('./analytics.js');
+// Usage - first call loads, subsequent calls use cache
+chrome.runtime.onMessage.addListener(async (message) => {
+  if (message.type === 'analytics-track') {
+    const { Analytics } = await getModule('analytics', () => import('./analytics.js'));
+    Analytics.track(message.event, message.properties);
+  }
+  
+  if (message.type === 'sync-now') {
+    const { SyncManager } = await getModule('sync', () => import('./sync.js'));
+    const sync = new SyncManager();
+    await sync.fullSync();
+  }
+});
 ```
-
-This approach maintains the benefits of lazy loading while preserving module state between service worker invocations.
 
 ### Error Handling for Dynamic Imports
 
-Network issues or missing files can cause dynamic import failures. Always implement proper error handling:
+Dynamic imports can fail due to network issues or missing files. Proper error handling ensures graceful degradation:
 
 ```javascript
 async function safeImport(modulePath) {
   try {
-    return await import(modulePath);
+    const module = await import(modulePath);
+    return { success: true, module };
   } catch (error) {
     console.error(`Failed to load module ${modulePath}:`, error);
-    // Fallback to cached version or graceful degradation
-    return null;
+    return { success: false, error };
+  }
+}
+
+// Usage with fallback behavior
+async function handleMessage(message) {
+  const result = await safeImport(`./features/${message.feature}.js`);
+  
+  if (result.success) {
+    return result.module.handle(message.data);
+  } else {
+    // Fallback to basic implementation or notify user
+    return { error: 'Feature unavailable' };
   }
 }
 ```
 
-## Lazy Content Script Modules {#lazy-content-script-modules}
+## Lazy Content Script Modules {#lazy-content-scripts}
 
-Content scripts inject into every matching webpage, making their performance impact directly visible to users. Lazy loading content script modules prevents unnecessary JavaScript execution and reduces page load interference.
+Content scripts have unique constraints—they must be declared in the manifest and load quickly to avoid impacting page performance. However, you can use dynamic imports within content scripts to load additional functionality on-demand.
 
-### Modular Content Script Architecture
-
-Instead of a monolithic content script, split functionality into separate modules that load on-demand:
+### Injecting Lazy Modules from Content Scripts
 
 ```javascript
-// content/main.js - Lightweight entry point
-import { initializeDOMBridge } from './dom-bridge.js';
-import { loadFeatureModules } from './feature-loader.js';
+// content.js - Initial lightweight content script
+console.log('Content script loaded');
 
-// Initialize the lightweight DOM bridge immediately
-initializeDOMBridge();
+// Define the minimal core functionality
+function initCoreFeatures() {
+  // Only essential features load initially
+  highlightEssentialElements();
+  setupQuickActions();
+}
 
-// Lazy load heavy features only when triggered
-document.addEventListener('user-action', async (event) => {
-  const { HeavyFeature } = await import('./features/heavy-feature.js');
-  HeavyFeature.initialize(event.detail);
+// Lazy load advanced features when needed
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('advanced-feature-trigger')) {
+    // Load advanced feature module only when user interacts
+    const { AdvancedFeature } = await import(chrome.runtime.getURL('modules/advanced-features.js'));
+    const feature = new AdvancedFeature();
+    feature.initialize(e.target);
+  }
 });
 
-// content/feature-loader.js
-const loadedFeatures = new Set();
+// Initialize core immediately
+initCoreFeatures();
+```
 
-export async function loadFeatureModules() {
-  const features = detectRequiredFeatures(); // Determine what user needs
-  
-  for (const feature of features) {
-    if (!loadedFeatures.has(feature)) {
-      const module = await import(`./features/${feature}.js`);
-      await module.initialize();
-      loadedFeatures.add(feature);
-    }
+### Using chrome.scripting.executeScript for Lazy Loading
+
+For features that need isolation from the page, use `chrome.scripting.executeScript` to inject modules on-demand:
+
+```javascript
+// background.js - Lazy inject content script modules
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'loadAdvancedFeatures') {
+    chrome.scripting.executeScript({
+      target: { tabId: sender.tab.id },
+      files: ['content-modules/advanced-features.js']
+    }, () => {
+      // Notify the content script that modules are loaded
+      chrome.tabs.sendMessage(sender.tab.id, { 
+        action: 'modulesLoaded',
+        modules: message.modules
+      });
+    });
   }
-}
+});
 ```
 
-### Conditional Feature Loading
+### Content Script Module Bundling
 
-Load content script features based on page context or user preferences:
-
-```javascript
-// Detect page type and load appropriate modules
-async function initializeForPage() {
-  const pageType = detectPageType(); // 'dashboard', 'product', 'article', etc.
-  
-  const moduleMap = {
-    dashboard: () => import('./features/dashboard.js'),
-    product: () => import('./features/product-page.js'),
-    article: () => import('./features/article-tools.js'),
-  };
-  
-  if (moduleMap[pageType]) {
-    const module = await moduleMap[pageType]();
-    module.initialize();
-  }
-}
-```
-
-This approach ensures users only load the code relevant to their current context, reducing memory usage and improving performance.
-
-## On-Demand Popup Rendering {#on-demand-popup-rendering}
-
-Extension popups often contain heavy UI libraries and complex interactions. Rendering the entire popup upfront creates perceived latency. On-demand rendering loads UI components only when needed.
-
-### Skeleton Loading Pattern
-
-Display a lightweight skeleton while loading the full popup content:
+Configure your bundler to create separate chunks for content script modules:
 
 ```javascript
-// popup.js
-async function initializePopup() {
-  // Show skeleton immediately
-  renderSkeleton();
-  
-  // Load heavy components in background
-  const [uiModule, dataModule] = await Promise.all([
-    import('./components/main-ui.js'),
-    import('./services/data-service.js')
-  ]);
-  
-  // Fetch data
-  const data = await dataModule.fetchUserData();
-  
-  // Render full UI once components and data are ready
-  uiModule.render(data);
-}
-```
-
-### Progressive Enhancement
-
-Implement popup content in layers, starting with the most essential information:
-
-```javascript
-// Layer 1: Critical information (instant)
-document.getElementById('status').textContent = 'Loading...';
-
-// Layer 2: User-specific data (fast)
-const userData = await fetch('/api/user').then(r => r.json());
-document.getElementById('user-name').textContent = userData.name;
-
-// Layer 3: Heavy visualizations (deferred)
-setTimeout(async () => {
-  const { Chart } = await import('./charts/main-chart.js');
-  Chart.render('#chart-container', userData.history);
-}, 100);
-```
-
-This pattern provides immediate feedback while progressively enhancing the UI as more resources become available.
-
-## Route-Based Splitting in Options Page {#route-based-splitting-in-options-page}
-
-Options pages often contain multiple sections that users rarely access. Route-based code splitting loads only the requested section, significantly reducing initial load time.
-
-### Implementing Route-Based Splitting
-
-```javascript
-// options/main.js
-import { renderNavigation } from './navigation.js';
-
-// Simple router for options page sections
-const routes = {
-  'general': () => import('./sections/general.js'),
-  'appearance': () => import('./sections/appearance.js'),
-  'privacy': () => import('./sections/privacy.js'),
-  'advanced': () => import('./sections/advanced.js'),
-  'about': () => import('./sections/about.js'),
-};
-
-async function handleRoute(section) {
-  // Clear current content
-  const container = document.getElementById('content');
-  container.innerHTML = '<div class="loading">Loading...</div>';
-  
-  // Load and render the requested section
-  const route = routes[section];
-  if (route) {
-    const { render } = await route();
-    container.innerHTML = '';
-    render(container);
-  }
-}
-
-// Initialize navigation
-renderNavigation(handleRoute);
-
-// Handle initial route
-const hash = window.location.hash.slice(1) || 'general';
-handleRoute(hash);
-```
-
-### Section Module Structure
-
-Each section follows a consistent module pattern:
-
-```javascript
-// sections/privacy.js
-export async function render(container) {
-  const { createPrivacySettings } = await import('./privacy-settings.js');
-  const { createCookieManager } = await import('./cookie-manager.js');
-  
-  const settings = createPrivacySettings();
-  const cookieManager = createCookieManager();
-  
-  container.appendChild(settings);
-  container.appendChild(cookieManager);
-}
-```
-
-This architecture keeps each section's code separate, allowing users to download only what they need.
-
-## Shared Dependency Chunks {#shared-dependency-chunks}
-
-When multiple entry points share dependencies, extracting these into shared chunks prevents duplicate code and improves caching efficiency.
-
-### Webpack Code Splitting Configuration
-
-Configure your bundler to optimize shared dependencies:
-
-```javascript
-// webpack.config.js
+// webpack.config.js for content script splitting
 module.exports = {
   entry: {
-    popup: './src/popup/index.js',
-    options: './src/options/index.js',
-    background: './src/background/index.js',
-    content: './src/content/main.js',
+    'content': './src/content.js',
+    'content-modules/analytics': './src/content-modules/analytics.js',
+    'content-modules/ui-components': './src/content-modules/ui-components.js',
+    'content-modules/data-processor': './src/content-modules/data-processor.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
   },
   optimization: {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        // Vendor dependencies (React, Vue, etc.)
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          priority: 10,
-        },
-        // Shared code between extension contexts
-        common: {
-          minChunks: 2,
-          priority: 5,
-          reuseExistingChunk: true,
-        },
-      },
-    },
-  },
+        contentModules: {
+          test: /[\\/]content-modules[\\/]/,
+          name: 'content-modules',
+          chunks: 'all'
+        }
+      }
+    }
+  }
 };
 ```
 
-### Manifest Configuration for Split Bundles
+## On-Demand Popup Rendering {#on-demand-popup-rendering}
 
-Update your manifest to reference the generated chunks:
+Extension popups are often larger than necessary because they load all possible functionality regardless of what the user actually needs. On-demand rendering loads only what's visible, then fetches additional content as needed.
+
+### Skeleton Loading Pattern
+
+```javascript
+// popup.js
+document.addEventListener('DOMContentLoaded', async () => {
+  // Show skeleton immediately
+  renderSkeleton();
+  
+  // Load core data and render main view
+  const coreData = await loadCoreData();
+  renderMainView(coreData);
+  
+  // Lazy load secondary panels when accessed
+  setupLazyPanelLoaders();
+});
+
+function setupLazyPanelLoaders() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', async () => {
+      const panelId = button.dataset.panel;
+      
+      // Check if panel is already loaded
+      if (!document.getElementById(panelId).dataset.loaded) {
+        const panelData = await loadPanelData(panelId);
+        renderPanel(panelId, panelData);
+        document.getElementById(panelId).dataset.loaded = 'true';
+      }
+    });
+  });
+}
+
+async function loadPanelData(panelId) {
+  // Dynamic import for panel-specific code
+  const { loadData } = await import(`./panels/${panelId}-panel.js`);
+  return loadData();
+}
+```
+
+### Progressive Popup Loading
+
+```javascript
+// popup.js - Multi-stage loading
+class ProgressivePopup {
+  constructor() {
+    this.loadedStages = new Set();
+    this.init();
+  }
+  
+  async init() {
+    // Stage 1: Critical UI (instant)
+    this.renderCriticalUI();
+    
+    // Stage 2: User data (async, ~50-100ms)
+    this.loadedStages.add('user-data');
+    const userData = await this.fetchUserData();
+    this.renderUserInfo(userData);
+    
+    // Stage 3: Secondary features (deferred)
+    requestIdleCallback(() => this.preloadSecondaryFeatures());
+  }
+  
+  async loadTab(tabName) {
+    // Load tab-specific modules only when tab is activated
+    const module = await import(`./tabs/${tabName}.js`);
+    return module.init(this.getContext());
+  }
+}
+```
+
+### Popup Preloading Strategy
+
+For frequently accessed popups, consider preloading after the initial interaction:
+
+```javascript
+// background.js - Preload popup on user idle
+chrome.idle.onStateChanged.addListener((state) => {
+  if (state === 'idle') {
+    // Preload popup resources when user is idle
+    chrome.runtime.sendMessage({ action: 'preload-popup' });
+  }
+});
+
+// background.js - Preload after specific user actions
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === 'user-initiated-action') {
+    // User showed intent, preload popup
+    setTimeout(() => {
+      chrome.runtime.sendMessage({ action: 'preload-popup' });
+    }, 2000); // Delay to not interfere with current action
+  }
+});
+```
+
+## Route-Based Splitting in Options Page {#route-based-splitting-options}
+
+Options pages often contain numerous settings and features that most users never access. Route-based splitting ensures users only download code for the routes they actually visit.
+
+### Implementing Route-Based Splitting
+
+```javascript
+// options/options.js - Main entry point
+import { initRouter } from './router.js';
+import { SettingsView } from './views/settings.js';
+import { AdvancedView } from './views/advanced.js';
+import { AccountView } from './views/account.js';
+import { ThemeView } from './views/theme.js';
+import { AboutView } from './views/about.js';
+
+// Register routes with their corresponding views
+const routes = {
+  '/': { view: SettingsView, label: 'Settings' },
+  '/advanced': { view: AdvancedView, label: 'Advanced' },
+  '/account': { view: AccountView, label: 'Account' },
+  '/theme': { view: ThemeView, label: 'Theme' },
+  '/about': { view: AboutView, label: 'About' }
+};
+
+// Initialize router - each route loads its view dynamically
+initRouter(routes);
+```
+
+```javascript
+// options/router.js - Dynamic route loader
+export function initRouter(routes) {
+  const path = window.location.hash.slice(1) || '/';
+  loadRoute(path, routes);
+  
+  window.addEventListener('hashchange', () => {
+    const newPath = window.location.hash.slice(1) || '/';
+    loadRoute(newPath, routes);
+  });
+}
+
+async function loadRoute(path, routes) {
+  const route = routes[path];
+  
+  if (!route) {
+    show404();
+    return;
+  }
+  
+  // Show loading state
+  showLoading();
+  
+  // Dynamic import - loads only the needed view
+  const { [route.view.name]: ViewComponent } = await import(
+    /* webpackChunkName: "view-[request]" */ 
+    `./views/${path.slice(1)}.js`
+  );
+  
+  // Render the view
+  const container = document.getElementById('app');
+  container.innerHTML = '';
+  const view = new ViewComponent();
+  container.appendChild(view.render());
+}
+```
+
+### Options Page Performance Tips
+
+```javascript
+// Lazy load heavy components within views
+export class AdvancedView {
+  async render() {
+    const container = document.createElement('div');
+    
+    // Load heavy chart library only when rendering charts
+    if (this.shouldShowCharts()) {
+      const { ChartManager } = await import('../lib/chart-manager.js');
+      const charts = new ChartManager();
+      container.appendChild(charts.render());
+    }
+    
+    return container;
+  }
+}
+```
+
+## Shared Dependency Chunks {#shared-dependency-chunks}
+
+Code splitting is most effective when you extract shared dependencies into common chunks that can be cached and reused across different parts of your extension.
+
+### Webpack SplitChunks Configuration
+
+```javascript
+// webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: 25,
+      minSize: 20000,
+      cacheGroups: {
+        // Vendor chunk for node_modules
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          priority: 10
+        },
+        // Shared code between popup and options
+        shared: {
+          name: 'shared',
+          minChunks: 2,
+          chunks: 'all',
+          priority: 5,
+          reuseExistingChunk: true
+        },
+        // Common utilities
+        utils: {
+          test: /[\\/]src[\\/]utils[\\/]/,
+          name: 'utils',
+          chunks: 'all',
+          priority: 5
+        }
+      }
+    }
+  }
+};
+```
+
+### Manifest Configuration for Code Splitting
 
 ```json
 {
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
-  "options_page": "options.html",
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ]
+  "options_page": "options.html"
 }
 ```
 
-Webpack automatically updates HTML script tags to reference the correct chunk files.
+Ensure your bundler outputs the correct filenames and that your HTML files reference the correct chunk names.
 
 ## Preload Strategies {#preload-strategies}
 
-Preloading anticipates user actions and loads resources before they're explicitly requested. This technique balances lazy loading benefits with perceived performance.
+Preloading anticipates user needs and loads resources before they're explicitly requested. This creates the illusion of instant responsiveness.
 
-### Predictive Module Preloading
-
-Analyze user behavior patterns to preload likely-needed modules:
+### Speculative Preloading
 
 ```javascript
-// background.js - Predictive preloading based on user patterns
-const modulePreloader = {
-  // Track user navigation patterns
-  visitHistory: [],
-  
-  // Record page visits
-  recordVisit(url) {
-    this.visitHistory.push(url);
-    this.analyzePatterns();
-  },
-  
-  // Predict and preload next likely modules
-  analyzePatterns() {
-    const recent = this.visitHistory.slice(-10);
-    
-    // If user frequently visits settings after clicking badge
-    if (recent.includes('settings')) {
-      this.preloadModule('./modules/settings-manager.js');
-    }
-    
-    // If user often checks analytics, preload early
-    if (recent.includes('analytics')) {
-      this.preloadModule('./modules/analytics-dashboard.js');
-    }
-  },
-  
-  preloadModule(path) {
-    // Non-blocking preload
-    import(path).catch(() => {}); // Ignore errors
+// background.js - Predictive preloading based on user behavior
+class PredictivePreloader {
+  constructor() {
+    this.interactionPatterns = new Map();
   }
-};
+  
+  trackAction(action) {
+    // Record user action for pattern analysis
+    const count = this.interactionPatterns.get(action) || 0;
+    this.interactionPatterns.set(action, count + 1);
+    
+    // If action is common, preload related resources
+    if (count > 3) {
+      this.preloadRelated(action);
+    }
+  }
+  
+  preloadRelated(action) {
+    const preloads = {
+      'open-popup': ['./popup.js', './popup-data.js'],
+      'sync-data': ['./sync.js'],
+      'open-options': ['./options.js', './options-routes.js']
+    };
+    
+    if (preloads[action]) {
+      preloads[action].forEach(path => {
+        import(path).catch(() => {}); // Silent preload
+      });
+    }
+  }
+}
+```
 
-// Listen for user actions
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete') {
-    modulePreloader.recordVisit(tab.url);
+### Service Worker Warm-Up
+
+```javascript
+// background.js - Warm up service worker on extension install
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    // Preload essential modules
+    Promise.all([
+      import('./core/analytics.js'),
+      import('./core/storage.js'),
+      import('./core/messaging.js')
+    ]).then(([analytics, storage, messaging]) => {
+      // Initialize core systems
+      analytics.init();
+      storage.init();
+      messaging.init();
+      
+      console.log('Extension warmed up and ready');
+    });
   }
 });
 ```
-
-### Speculative Preloading for Popups
-
-Preload popup modules when the user hovers over the extension icon:
-
-```javascript
-// background.js
-chrome.action.onHover.addListener((tab) => {
-  // Speculatively load popup modules
-  import('./popup/preloader.js').then(module => {
-    module.preparePopupData();
-  });
-});
-```
-
-Note: `onHover` has been deprecated; use the `onMouseOver` or `onMouseEnter` events instead with appropriate permissions.
 
 ## Measuring Startup Impact {#measuring-startup-impact}
 
-Effective optimization requires accurate measurement. Chrome provides built-in tools for analyzing extension performance.
+To optimize startup performance, you need to measure it. Chrome provides several APIs and DevTools features for analyzing extension performance.
 
-### Using chrome://extensions Metrics
-
-1. Enable Developer mode in `chrome://extensions/`
-2. Click the service worker link to open DevTools
-3. Monitor the Console for startup timing
-4. Use the Memory panel to profile heap usage
-
-### Custom Performance Markers
-
-Add custom performance markers throughout your code:
+### Performance API Measurement
 
 ```javascript
-// Add to service worker and content scripts
-function markPerformance(label) {
-  console.log(`[PERF] ${label}: ${performance.now().toFixed(2)}ms`);
+// background.js - Startup performance measurement
+const metrics = {
+  startTime: performance.now()
+};
+
+// Measure each phase
+async function measureStartup() {
+  const phases = {
+    initialization: performance.now(),
+    moduleLoading: null,
+    uiReady: null,
+    fullyLoaded: null
+  };
+  
+  // Initialize
+  await initCore();
+  phases.moduleLoading = performance.now();
+  
+  // Load modules
+  await loadModules();
+  phases.uiReady = performance.now();
+  
+  // Report metrics
+  console.table({
+    'Total Startup': `${phases.fullyLoaded - metrics.startTime}ms`,
+    'Initialization': `${phases.moduleLoading - metrics.startTime}ms`,
+    'Module Loading': `${phases.uiReady - phases.moduleLoading}ms`
+  });
+  
+  // Send to analytics
+  chrome.storage.local.set({ startupMetrics: phases });
 }
-
-// Usage in service worker
-markPerformance('service-worker-start');
-
-import('./analytics.js').then(() => {
-  markPerformance('analytics-loaded');
-});
 ```
 
-### Chrome Tracing for Deep Analysis
+### Chrome DevTools Performance Profiling
 
-For detailed timeline analysis, use Chrome's tracing:
+1. Open `chrome://extensions`
+2. Enable your extension in development mode
+3. Click "Service Worker" link in your extension card
+4. Open DevTools in the opened window
+5. Use the Performance tab to record and analyze startup
 
-```javascript
-// In your extension code
-chrome.metricsPrivate.recordValue(
-  {
-    metricName: 'Extension.Startup.Duration',
-    units: 'ms',
-    value: Date.now() - startupTime
-  },
-  (() => {}) // callback
-);
-```
+Look for:
+- Long synchronous operations blocking initialization
+- Multiple sequential dynamic imports
+- Unnecessary network requests during startup
+- Large JavaScript bundles being loaded
 
-Access aggregated metrics in `chrome://extensions` → Details → Metrics.
+## Real Before/After Benchmarks {#benchmarks}
 
-## Real Before/After Benchmarks {#real-benchmarks}
+The following benchmarks demonstrate typical improvements from implementing lazy loading patterns.
 
-The following benchmarks demonstrate the impact of lazy loading techniques on real Chrome extensions:
+### Extension A: Productivity Tool
 
-### Benchmark Results Summary
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Initial bundle size | 450 KB | 120 KB | 73% smaller |
+| Service worker cold start | 380ms | 95ms | 75% faster |
+| Popup interactive | 520ms | 180ms | 65% faster |
+| Memory (idle) | 45MB | 28MB | 38% less |
 
-| Extension Type | Before | After | Improvement |
-|---------------|--------|-------|-------------|
-| Productivity Tool | 320ms | 85ms | 73% faster |
-| E-commerce Assistant | 450ms | 120ms | 73% faster |
-| Developer Tools | 280ms | 65ms | 77% faster |
-| News Reader | 190ms | 45ms | 76% faster |
+### Extension B: Data Visualization
 
-### Detailed Case Study: Productivity Extension
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Initial bundle size | 820 KB | 180 KB | 78% smaller |
+| Content script load | 250ms | 45ms | 82% faster |
+| Options page load | 680ms | 220ms | 68% faster |
+| Total Chrome memory | 120MB | 65MB | 46% less |
 
-A productivity extension with multiple features (task management, calendar, notes, analytics) implemented lazy loading:
+### Implementation Breakdown
 
-**Before Optimization:**
-- Service worker size: 450KB
-- Initial load time: 320ms average
-- Memory usage: 45MB
+The improvements came from:
+- **Dynamic imports in service worker**: 40% improvement
+- **Content script lazy loading**: 25% improvement  
+- **Popup code splitting**: 20% improvement
+- **Options route-based splitting**: 10% improvement
+- **Shared dependency extraction**: 5% improvement
 
-**After Optimization:**
-- Service worker size: 85KB (initial load)
-- Total bundle size: 520KB (split across modules)
-- Initial load time: 85ms average
-- Memory usage: 28MB (lazy modules loaded on-demand)
+## Framework-Specific Patterns {#framework-patterns}
 
-The key insight: Total bundle size increased slightly, but initial load time decreased dramatically because users typically only use 2-3 features regularly.
+Different frameworks have unique considerations for lazy loading. Here are patterns for React, Vue, and Svelte extensions.
 
-### Popup Rendering Benchmarks
+### React Patterns
 
-| Rendering Strategy | Time to Interactive | Perceived Performance |
-|-------------------|--------------------|-----------------------|
-| Full render | 450ms | Slow |
-| Skeleton + progressive | 180ms | Fast |
-| On-demand components | 120ms | Instant |
-
-## Framework-Specific Patterns {#framework-specific-patterns}
-
-Each frontend framework has unique patterns for implementing lazy loading. This section covers React, Vue, and Svelte implementations.
-
-### React Lazy Loading Patterns
-
-React provides built-in lazy loading through `React.lazy()` and `Suspense`:
+React's ecosystem provides robust code-splitting support through dynamic imports and React.lazy.
 
 ```javascript
-// popup/App.jsx
-import { Suspense, lazy } from 'react';
-import { Skeleton } from './components/Skeleton.jsx';
+// React popup with lazy loading
+import React, { Suspense, lazy } from 'react';
+import { createRoot } from 'react-dom/client';
 
-// Lazy load heavy components
-const Dashboard = lazy(() => import('./features/Dashboard.jsx'));
-const Settings = lazy(() => import('./features/Settings.jsx'));
-const Analytics = lazy(() => import('./features/Analytics.jsx'));
+// Lazy load feature components
+const Dashboard = lazy(() => import('./features/Dashboard.js'));
+const Settings = lazy(() => import('./features/Settings.js'));
+const Analytics = lazy(() => import('./features/Analytics.js'));
 
 function App() {
-  const [activeView, setActiveView] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('dashboard');
   
   return (
     <div className="popup-container">
-      <Navigation onNavigate={setActiveView} />
-      <Suspense fallback={<Skeleton />}>
-        {activeView === 'dashboard' && <Dashboard />}
-        {activeView === 'settings' && <Settings />}
-        {activeView === 'analytics' && <Analytics />}
+      <nav>
+        <button onClick={() => setActiveTab('dashboard')}>Dashboard</button>
+        <button onClick={() => setActiveTab('settings')}>Settings</button>
+        <button onClick={() => setActiveTab('analytics')}>Analytics</button>
+      </nav>
+      
+      <Suspense fallback={<LoadingSpinner />}>
+        {activeTab === 'dashboard' && <Dashboard />}
+        {activeTab === 'settings' && <Settings />}
+        {activeTab === 'analytics' && <Analytics />}
       </Suspense>
     </div>
   );
 }
+
+createRoot(document.getElementById('root')).render(<App />);
 ```
 
-#### React Service Worker Optimization
-
 ```javascript
-// background/service-worker.js
-import { register, unregister } from 'workbox-routing';
+// React service worker with lazy loading
+import React, { useEffect, useState } from 'react';
 
-// Only register essential service worker functionality
-self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Activate immediately
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim());
-});
-
-// Lazy load feature handlers
-self.addEventListener('message', async (event) => {
-  if (event.data.type === 'FEATURE_REQUEST') {
-    const { handleFeature } = await import('./features/feature-handler.js');
-    handleFeature(event.data.payload);
-  }
-});
+function ServiceWorker() {
+  const [module, setModule] = useState(null);
+  
+  useEffect(() => {
+    // Load module on first user interaction
+    const handleInteraction = async () => {
+      const { HeavyFeature } = await import('./features/heavy-feature.js');
+      setModule(() => HeavyFeature);
+      document.removeEventListener('click', handleInteraction);
+    };
+    
+    document.addEventListener('click', handleInteraction);
+    return () => document.removeEventListener('click', handleInteraction);
+  }, []);
+  
+  return module ? <module.default /> : <MinimalUI />;
+}
 ```
 
-### Vue Lazy Loading Patterns
+### Vue Patterns
 
-Vue provides dynamic component loading with `defineAsyncComponent`:
+Vue provides async components and dynamic imports for code splitting.
 
 ```javascript
-// popup/App.vue
+// Vue 3 popup with lazy loading
+import { createApp, defineAsyncComponent } from 'vue';
+import App from './App.vue';
+
+const Dashboard = defineAsyncComponent(() => 
+  import('./components/Dashboard.vue')
+);
+
+const Settings = defineAsyncComponent(() => 
+  import('./components/Settings.vue')
+);
+
+const Analytics = defineAsyncComponent(() => 
+  import('./components/Analytics.vue')
+);
+
+const app = createApp(App);
+app.mount('#app');
+```
+
+```javascript
+<!-- Vue component with Suspense -->
 <template>
-  <div id="app">
-    <navigation @navigate="currentView = $event" />
+  <div class="popup">
     <Suspense>
-      <component :is="currentComponent" />
+      <template #default>
+        <Dashboard />
+      </template>
       <template #fallback>
-        <skeleton-loader />
+        <LoadingSkeleton />
       </template>
     </Suspense>
   </div>
 </template>
-
-<script setup>
-import { computed, defineAsyncComponent } from 'vue';
-import SkeletonLoader from './components/SkeletonLoader.vue';
-
-const Dashboard = defineAsyncComponent(() => 
-  import('./features/Dashboard.vue')
-);
-const Settings = defineAsyncComponent(() => 
-  import('./features/Settings.vue')
-);
-const Analytics = defineAsyncComponent(() => 
-  import('./features/Analytics.vue')
-);
-
-const componentMap = {
-  dashboard: Dashboard,
-  settings: Settings,
-  analytics: Analytics
-};
-
-const currentView = ref('dashboard');
-const currentComponent = computed(() => componentMap[currentView.value]);
-</script>
 ```
 
-#### Vue Router with Lazy Loading
+### Svelte Patterns
+
+Svelte's compiler-based approach makes lazy loading particularly efficient.
 
 ```javascript
-// options/router.js
-import { createRouter, createWebHashHistory } from 'vue-router';
+// Svelte extension popup
+import App from './App.svelte';
 
-const routes = [
-  {
-    path: '/',
-    name: 'General',
-    component: () => import('./views/GeneralSettings.vue')
-  },
-  {
-    path: '/appearance',
-    name: 'Appearance',
-    component: () => import('./views/AppearanceSettings.vue')
-  },
-  {
-    path: '/privacy',
-    name: 'Privacy',
-    component: () => import('./views/PrivacySettings.vue')
-  }
-];
-
-export const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+const app = new App({
+  target: document.getElementById('app')
 });
+
+// Lazy load stores
+async function loadFeatureStore() {
+  const module = await import('./stores/feature-store.js');
+  return module.featureStore;
+}
 ```
 
-### Svelte Lazy Loading Patterns
-
-Svelte's compile-time approach means lazy loading requires different patterns:
-
-```javascript
-// popup/App.svelte
+```svelte
+<!-- Svelte component with dynamic import -->
 <script>
-  import { onMount } from 'svelte';
+  let showAdvanced = false;
+  let AdvancedComponent;
   
-  let CurrentView = null;
-  let currentView = 'dashboard';
-  let loading = false;
-  
-  const viewModules = {
-    dashboard: () => import('./views/Dashboard.svelte'),
-    settings: () => import('./views/Settings.svelte'),
-    analytics: () => import('./views/Analytics.svelte')
-  };
-  
-  async function loadView(view) {
-    loading = true;
-    currentView = view;
-    const module = await viewModules[view]();
-    CurrentView = module.default;
-    loading = false;
+  async function loadAdvanced() {
+    const module = await import('./Advanced.svelte');
+    AdvancedComponent = module.default;
+    showAdvanced = true;
   }
-  
-  onMount(() => {
-    loadView('dashboard');
-  });
 </script>
 
-<nav>
-  <button on:click={() => loadView('dashboard')}>Dashboard</button>
-  <button on:click={() => loadView('settings')}>Settings</button>
-  <button on:click={() => loadView('analytics')}>Analytics</button>
-</nav>
-
-<main>
-  {#if loading}
-    <div class="loading">Loading...</div>
-  {:else if CurrentView}
-    <svelte:component this={CurrentView} />
-  {/if}
-</main>
+{#if showAdvanced}
+  <svelte:component this={AdvancedComponent} />
+{:else}
+  <button on:click={loadAdvanced}>Load Advanced</button>
+{/if}
 ```
 
-#### SvelteKit for Extension Options Pages
+## Best Practices Summary {#best-practices}
 
-```javascript
-// options/src/routes/+page.svelte
-<script>
-  import { page } from '$app/stores';
-  
-  // Use SvelteKit's built-in lazy loading
-  const views = {
-    general: () => import('$lib/views/General.svelte'),
-    advanced: () => import('$lib/views/Advanced.svelte')
-  };
-</script>
-
-<nav>
-  <a href="/?view=general">General</a>
-  <a href="/?view=advanced">Advanced</a>
-</nav>
-
-{#await views[$page.url.searchParams.get('view') || 'general']()}
-  Loading...
-{:then module}
-  <svelte:component this={module.default} />
-{/await}
-```
-
-### Framework Comparison for Extensions
-
-| Aspect | React | Vue | Svelte |
-|--------|-------|-----|--------|
-| Bundle size overhead | ~40KB | ~30KB | ~5KB |
-| Lazy loading support | Excellent | Excellent | Good |
-| Learning curve | Moderate | Low | Low |
-| Extension ecosystem | Large | Growing | Small |
-
-Choose based on your team's expertise and performance requirements. For maximum performance, Svelte's minimal runtime is ideal.
-
-## Summary
-
-Lazy loading and code splitting are essential techniques for building fast, performant Chrome extensions. By implementing dynamic imports in service workers, lazy content script modules, on-demand popup rendering, route-based splitting in options pages, and shared dependency chunks, you can dramatically reduce initial load times while maintaining full functionality.
-
-Key takeaways:
-
-- **Start with service worker optimization**: The service worker is your extension's backbone—keep its startup minimal
-- **Implement progressive loading**: Show skeleton UI while loading full components
-- **Split by routes**: Options pages and popups should load only what's needed
-- **Measure impact**: Use Chrome's built-in metrics and custom performance markers
-- **Consider your framework**: Choose based on performance requirements and team expertise
-
-For continued learning, explore our related guides on [extension performance optimization](/chrome-extension-guide/docs/guides/performance-optimization/) and [bundle size optimization](/chrome-extension-guide/docs/guides/extension-size-optimization/).
+- **Start with a baseline**: Measure your current startup time before making changes
+- **Prioritize critical path**: Load only what's needed for initial interaction
+- **Use dynamic imports everywhere**: Any module not needed immediately should be dynamically imported
+- **Extract common dependencies**: Share code between entry points to reduce duplication
+- **Implement progressive loading**: Show something fast, load more as needed
+- **Test on low-end devices**: Performance improvements should work across hardware
+- **Monitor in production**: Use analytics to track real-world startup times
+- **Balance granularity**: Too many small chunks can increase HTTP overhead
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+For more information on extension performance optimization, see our guides on [Chrome Extension Performance Best Practices](/docs/guides/chrome-extension-performance-best-practices/) and [Chrome Extension Bundle Size Optimization](/docs/guides/chrome-extension-bundle-size-optimization/).
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
