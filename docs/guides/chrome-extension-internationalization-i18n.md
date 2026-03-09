@@ -511,6 +511,7 @@ files:
 
 For automated translation updates, set up a GitHub Actions workflow that syncs with Crowdin on each push to your translation source files:
 
+{% raw %}
 ```yaml
 # .github/workflows/crowdin.yml
 name: Sync translations with Crowdin
@@ -536,6 +537,7 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
 ```
+{% endraw %}
 
 ## Best Practices Summary
 
