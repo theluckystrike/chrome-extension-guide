@@ -252,6 +252,6 @@ Start collecting emails from your users today. Every user who installs your exte
 
 ---
 
-For more guidance on growing your Chrome extension, explore our [onboarding guide](/chrome-extension-guide/docs/guides/extension-onboarding/) for strategies that turn new installs into engaged users, and review our [monetization strategies](/chrome-extension-guide/docs/guides/extension-monetization/) for comprehensive approaches to building a sustainable extension business.
+For more guidance on growing your Chrome extension, explore our [onboarding guide](/chrome-extension-guide/docs/guides/extension-onboarding/) for strategies that turn new installs into engaged users, review our [monetization strategies](/chrome-extension-guide/docs/guides/extension-monetization/) for comprehensive approaches to building a sustainable extension business, and check out the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) for proven revenue models.
 
-Built by theluckystrike at [zovo.one](https://zovo.one)
+*Built by theluckystrike at zovo.one*
