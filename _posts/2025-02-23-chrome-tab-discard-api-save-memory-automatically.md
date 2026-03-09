@@ -6,7 +6,7 @@ date: 2025-02-23
 categories: [Chrome Extensions, Performance]
 tags: [chrome-tabs-api, tab-discard, memory-optimization, chrome-extension]
 keywords: "chrome tab discard api, chrome.tabs.discard, auto suspend chrome tabs, chrome extension save memory, tab suspension chrome api, reduce chrome memory usage extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/23/chrome-tab-discard-api-save-memory-automatically/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/23/chrome-tab-discard-api-save-memory-automatically/"
 ---
 
 # Chrome Tab Discard API: How Extensions Save Memory by Suspending Tabs

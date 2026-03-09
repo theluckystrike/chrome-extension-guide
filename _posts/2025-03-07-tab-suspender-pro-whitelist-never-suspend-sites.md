@@ -6,7 +6,7 @@ date: 2025-03-07
 categories: [Chrome Extensions, Guides]
 tags: [tab-suspender-pro, whitelist, configuration]
 keywords: "tab suspender pro whitelist, never suspend tabs, tab suspender whitelist, exclude sites tab suspender, tab suspender pro exceptions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/07/tab-suspender-pro-whitelist-never-suspend-sites/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/07/tab-suspender-pro-whitelist-never-suspend-sites/"
 ---
 
 # Tab Suspender Pro Whitelist Guide: Never Suspend Your Important Sites

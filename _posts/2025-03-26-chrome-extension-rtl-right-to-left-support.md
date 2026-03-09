@@ -6,7 +6,7 @@ date: 2025-03-26
 categories: [Chrome Extensions, Localization]
 tags: [rtl, localization, chrome-extension]
 keywords: "chrome extension rtl, right to left chrome extension, arabic chrome extension, hebrew extension support, rtl layout chrome popup"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/26/chrome-extension-rtl-right-to-left-support/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/26/chrome-extension-rtl-right-to-left-support/"
 ---
 
 # Chrome Extension RTL Support: Build Extensions for Arabic and Hebrew Users

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome Extensions]
 tags: [chrome-extension, utility]
 keywords: "whiteboard extension, drawing board chrome, collaborative whiteboard, chrome extension drawing canvas, build whiteboard chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-a-whiteboard-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-a-whiteboard-chrome-extension/"
 ---
 
 # Build a Whiteboard Chrome Extension: Complete Developer's Guide

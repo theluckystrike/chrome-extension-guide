@@ -6,7 +6,7 @@ date: 2025-04-29
 categories: [Chrome Extensions, Developer Tools]
 tags: [responsive, design, chrome-extension]
 keywords: "chrome extension responsive design, responsive tester chrome, screen size preview extension, build responsive extension, mobile preview chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/29/build-responsive-design-tester-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/29/build-responsive-design-tester-chrome-extension/"
 ---
 
 # Build a Responsive Design Tester Chrome Extension: Preview All Screen Sizes

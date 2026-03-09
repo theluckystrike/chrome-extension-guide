@@ -6,7 +6,7 @@ date: 2025-04-07
 categories: [Chrome Extensions, Comparisons]
 tags: [tab-suspender-pro, tiny-suspender, comparison]
 keywords: "tab suspender pro vs tiny suspender, tiny suspender alternative, minimalist tab suspender, tab suspender comparison lightweight, best simple tab suspender"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/07/tab-suspender-pro-vs-tiny-suspender/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/07/tab-suspender-pro-vs-tiny-suspender/"
 ---
 
 # Tab Suspender Pro vs Tiny Suspender: Full-Featured vs Minimalist Approach

@@ -6,7 +6,7 @@ date: 2025-03-20
 categories: [Chrome Extensions, Guides]
 tags: [tab-suspender-pro, auto-suspend, rules]
 keywords: "tab suspender pro auto suspend, automatic tab suspension rules, smart tab suspender, tab suspender pro rules, chrome automatic tab management"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/20/tab-suspender-pro-auto-suspend-rules-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/20/tab-suspender-pro-auto-suspend-rules-guide/"
 ---
 
 # Tab Suspender Pro Auto-Suspend Rules: Smart Tab Management on Autopilot

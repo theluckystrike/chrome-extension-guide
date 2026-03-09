@@ -6,7 +6,7 @@ date: 2025-03-02
 categories: [Chrome Extensions, Styling]
 tags: [tailwind-css, styling, chrome-extension]
 keywords: "chrome extension tailwind css, tailwind chrome extension, style chrome extension tailwind, tailwind popup chrome, chrome extension css framework"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/02/chrome-extension-tailwind-css-styling/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/02/chrome-extension-tailwind-css-styling/"
 ---
 
 # Using Tailwind CSS in Chrome Extensions: Complete Styling Guide

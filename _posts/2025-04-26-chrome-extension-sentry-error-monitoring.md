@@ -439,6 +439,7 @@ Sentry.init({
 
 Deployments are typically tracked in your CI/CD pipeline. For GitHub Actions:
 
+{% raw %}
 ```yaml
 # .github/workflows/deploy.yml
 - name: Create Sentry Release
@@ -451,6 +452,7 @@ Deployments are typically tracked in your CI/CD pipeline. For GitHub Actions:
     environment: production
     version: ${{ github.event.inputs.version }}
 ```
+{% endraw %}
 
 ---
 

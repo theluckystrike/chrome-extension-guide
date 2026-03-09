@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "linear chrome extension, issue tracker extension, linear api chrome, linear integration, linear issue tracker, chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-linear-integration-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-linear-integration-chrome-extension/"
 ---
 
 # Build a Linear Integration Chrome Extension: Complete Developer Guide

@@ -6,7 +6,7 @@ date: 2025-05-11
 categories: [Chrome Extensions, Cross-Platform]
 tags: [tab-suspender-pro, mac, windows]
 keywords: "tab suspender pro mac, tab suspender windows, chrome memory mac vs windows, tab suspender platform differences, chrome performance mac windows"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/11/tab-suspender-pro-mac-vs-windows-performance/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/11/tab-suspender-pro-mac-vs-windows-performance/"
 ---
 
 # Tab Suspender Pro on Mac vs Windows: Platform-Specific Performance Tips

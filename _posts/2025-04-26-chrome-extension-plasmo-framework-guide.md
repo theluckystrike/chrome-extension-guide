@@ -114,6 +114,7 @@ For our text highlighter, we might want to listen for text selection events and 
 
 The popup is your extension's most visible component. In Plasmo with React, you build it just like any other React component. Edit `src/popup.tsx`:
 
+{% raw %}
 ```tsx
 import { useState, useEffect } from "react"
 
@@ -168,6 +169,7 @@ function Popup() {
 
 export default Popup
 ```
+{% endraw %}
 
 This popup component uses Chrome's storage API to persist data. Notice how similar this is to building a regular React application — you have state management, effects, event handlers, and JSX rendering.
 

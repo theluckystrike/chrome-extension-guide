@@ -146,6 +146,7 @@ Start by modifying the app component that Angular created by default. This compo
 
 Here is a simple popup component implementation that demonstrates basic Chrome API interaction:
 
+{% raw %}
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -209,6 +210,7 @@ export class PopupComponent implements OnInit {
   }
 }
 ```
+{% endraw %}
 
 This component demonstrates several important patterns for Angular Chrome extensions. It uses standalone component syntax, imports necessary Angular modules, and interacts with the Chrome tabs API to get information about the current tab. The template uses Angular's built-in directives like *ngIf for conditional rendering.
 

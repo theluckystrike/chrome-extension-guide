@@ -172,6 +172,7 @@ We will build a simple todo extension popup to demonstrate Vue 3's capabilities 
 
 Create a new component at `src/components/TodoList.vue`:
 
+{% raw %}
 ```vue
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
@@ -398,6 +399,7 @@ h1 {
 }
 </style>
 ```
+{% endraw %}
 
 ### Updating the Main App Component
 
@@ -484,6 +486,7 @@ export const useExtensionStore = defineStore('extension', () => {
 
 ### Using the Store in Components
 
+{% raw %}
 ```vue
 <script setup lang="ts">
 import { onMounted } from 'vue'
@@ -510,6 +513,7 @@ const toggleTheme = () => {
   </div>
 </template>
 ```
+{% endraw %}
 
 ---
 

@@ -6,7 +6,7 @@ date: 2025-04-20
 categories: [Chrome Extensions, Tutorials]
 tags: [tab-counter, productivity, chrome-extension]
 keywords: "chrome extension tab counter, count open tabs chrome, tab counter badge chrome, how many tabs chrome, tab count extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/20/build-tab-counter-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/20/build-tab-counter-chrome-extension/"
 ---
 
 # Build a Tab Counter Chrome Extension: Track Your Open Tab Count

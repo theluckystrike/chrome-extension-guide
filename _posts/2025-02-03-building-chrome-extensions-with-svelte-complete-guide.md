@@ -366,6 +366,7 @@ Svelte's built-in transition engine makes adding polish to your popup effortless
 
 ### Basic Transitions
 
+{% raw %}
 ```svelte
 <script>
   import { fade, slide, fly } from 'svelte/transition';
@@ -395,11 +396,13 @@ Svelte's built-in transition engine makes adding polish to your popup effortless
   }
 </style>
 ```
+{% endraw %}
 
 ### Crossfade for List Items
 
 When reordering or removing items, Svelte's crossfade provides magical animations:
 
+{% raw %}
 ```svelte
 <script>
   import { crossfade } from 'svelte/transition';
@@ -431,6 +434,7 @@ When reordering or removing items, Svelte's crossfade provides magical animation
   {/each}
 </ul>
 ```
+{% endraw %}
 
 These animations work in popup contexts just as they do in web applications, giving your extension a polished, professional feel.
 

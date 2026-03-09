@@ -6,7 +6,7 @@ date: 2025-04-09
 categories: [Chrome Extensions, Tutorials]
 tags: [email, gmail, chrome-extension]
 keywords: "chrome extension email, gmail chrome extension build, email productivity extension, chrome extension gmail tools, email tracker chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/09/build-email-productivity-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/09/build-email-productivity-chrome-extension/"
 ---
 
 # Build an Email Productivity Chrome Extension: Enhance Gmail and Outlook

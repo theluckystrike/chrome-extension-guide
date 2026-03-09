@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "twitter tools extension, x enhancement chrome, social media tool, twitter chrome extension, x.com tools, build twitter extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-twitter-x-enhancement-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-twitter-x-enhancement-chrome-extension/"
 ---
 
 # Build a Twitter/X Enhancement Chrome Extension: Complete Developer Guide

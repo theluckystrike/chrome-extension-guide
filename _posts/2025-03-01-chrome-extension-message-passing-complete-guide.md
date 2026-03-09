@@ -6,7 +6,7 @@ date: 2025-03-01
 categories: [Chrome Extensions, Development]
 tags: [message-passing, chrome-extension, tutorial]
 keywords: "chrome extension message passing, chrome.runtime.sendMessage, chrome extension communication, message passing content script background, chrome extension ports"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/01/chrome-extension-message-passing-complete-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/01/chrome-extension-message-passing-complete-guide/"
 ---
 
 # Chrome Extension Message Passing: Communication Between Components Guide

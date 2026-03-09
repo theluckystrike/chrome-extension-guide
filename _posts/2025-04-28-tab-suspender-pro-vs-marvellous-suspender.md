@@ -6,7 +6,7 @@ date: 2025-04-28
 categories: [Chrome Extensions, Comparisons]
 tags: [tab-suspender-pro, marvellous-suspender, comparison]
 keywords: "tab suspender pro vs marvellous suspender, marvellous suspender alternative, best tab suspender replacement, tab suspender comparison 2025"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/tab-suspender-pro-vs-marvellous-suspender/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/tab-suspender-pro-vs-marvellous-suspender/"
 ---
 
 # Tab Suspender Pro vs The Marvellous Suspender: Detailed Comparison 2025

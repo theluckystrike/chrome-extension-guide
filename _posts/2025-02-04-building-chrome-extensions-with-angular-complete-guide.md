@@ -342,6 +342,7 @@ ng add @angular/material
 
 ### Using Material Components
 
+{% raw %}
 ```typescript
 // popup.component.html
 <mat-card class="extension-popup">
@@ -371,6 +372,7 @@ ng add @angular/material
   </mat-card-actions>
 </mat-card>
 ```
+{% endraw %}
 
 ### Customizing Material Styles for Popup Size
 

@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome Extensions]
 tags: [chrome-extension, utility]
 keywords: "cache viewer extension, browser cache chrome, cached content extension, chrome cache inspector"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-cache-viewer-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-cache-viewer-chrome-extension/"
 ---
 
 # Build a Cache Viewer Chrome Extension

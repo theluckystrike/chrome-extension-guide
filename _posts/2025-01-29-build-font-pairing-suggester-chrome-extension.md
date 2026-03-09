@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome Extensions]
 tags: [chrome-extension, utility]
 keywords: "font pairing extension, typography helper chrome, google fonts extension, font combination tool, chrome extension typography"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-font-pairing-suggester-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-font-pairing-suggester-chrome-extension/"
 ---
 
 # Build a Font Pairing Suggester Chrome Extension

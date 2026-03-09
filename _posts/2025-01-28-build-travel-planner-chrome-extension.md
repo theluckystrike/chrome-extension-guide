@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "travel planner extension, trip planning chrome, flight search extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-travel-planner-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-travel-planner-chrome-extension/"
 ---
 
 # Build a Travel Planner Chrome Extension: Complete Developer Guide

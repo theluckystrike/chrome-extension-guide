@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "kanban board extension, task board chrome, project manager extension, chrome kanban board, build chrome extension, productivity extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-kanban-board-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-kanban-board-chrome-extension/"
 ---
 
 # Build a Kanban Board Chrome Extension: Complete 2025 Developer's Guide

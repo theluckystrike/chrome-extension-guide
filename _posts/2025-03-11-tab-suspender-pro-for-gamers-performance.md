@@ -6,7 +6,7 @@ date: 2025-03-11
 categories: [Chrome Extensions, Gaming]
 tags: [tab-suspender-pro, gaming, performance]
 keywords: "tab suspender pro gaming, free ram for gaming chrome, chrome tabs slow gaming, tab suspender boost fps, reduce chrome memory gaming"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/11/tab-suspender-pro-for-gamers-performance/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/11/tab-suspender-pro-for-gamers-performance/"
 ---
 
 # Tab Suspender Pro for Gamers: Free Up RAM and Boost FPS While Browsing

@@ -6,7 +6,7 @@ date: 2025-05-03
 categories: [Chrome Extensions, Security]
 tags: [password-generator, security, chrome-extension]
 keywords: "chrome extension password generator, generate password chrome, build password extension, random password chrome, secure password extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/03/build-password-generator-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/03/build-password-generator-chrome-extension/"
 ---
 
 # Build a Password Generator Chrome Extension: Secure Passwords in One Click

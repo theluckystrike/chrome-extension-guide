@@ -590,7 +590,7 @@ This basic implementation provides a solid foundation, but there are many featur
 
 Adding export and import functionality would let you backup your snippets or share them with team members. You could implement cloud sync using Chrome storage sync API to access your snippets across multiple devices. A tagging system with tag management would improve organization for users with large snippet collections.
 
-Another powerful feature would be template variables that allow snippets to include placeholders like {{date}} or {{username}} that get replaced when copying. This is particularly useful for code that needs slight modifications each time.
+{% raw %}Another powerful feature would be template variables that allow snippets to include placeholders like {{date}} or {{username}} that get replaced when copying. This is particularly useful for code that needs slight modifications each time.{% endraw %}
 
 ---
 

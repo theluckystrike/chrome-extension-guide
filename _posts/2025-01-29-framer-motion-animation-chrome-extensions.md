@@ -55,6 +55,7 @@ Understanding Framer Motion's core concepts prepares you for building sophistica
 
 Every standard HTML element has a corresponding motion component that accepts animation props. For example, you would use `motion.div` instead of a regular `div` when you want to animate it. This wrapper component accepts properties like `initial`, `animate`, `transition`, and `exit` that define how the element should behave.
 
+{% raw %}
 ```jsx
 import { motion } from 'framer-motion';
 
@@ -72,6 +73,7 @@ function AnimatedButton() {
   );
 }
 ```
+{% endraw %}
 
 This example demonstrates several key concepts. The `initial` prop defines the starting state, `animate` specifies the target state, and `transition` controls how the animation progresses. The `whileHover` and `whileTap` props create interactive animations that respond to user input, perfect for buttons and interactive elements in your extension popup.
 
@@ -122,6 +124,7 @@ Chrome extensions typically feature several common interface patterns that benef
 
 The extension popup is often the first thing users interact with, making its animation particularly important. A well-designed popup animation provides visual feedback that helps users understand the extension's presence and responsiveness.
 
+{% raw %}
 ```jsx
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -143,6 +146,7 @@ function ExtensionPopup({ isOpen }) {
   );
 }
 ```
+{% endraw %}
 
 The `AnimatePresence` component enables exit animations, allowing elements to animate out before being removed from the DOM. This creates smooth transitions when closing the popup or navigating between views.
 
@@ -150,6 +154,7 @@ The `AnimatePresence` component enables exit animations, allowing elements to an
 
 Many extensions feature multiple views or tabs within their popup. Smooth transitions between these views improve the user experience by providing clear visual feedback about navigation.
 
+{% raw %}
 ```jsx
 function TabContainer() {
   const [activeTab, setActiveTab] = useState('settings');
@@ -173,6 +178,7 @@ function TabContainer() {
   );
 }
 ```
+{% endraw %}
 
 Using `mode="wait"` ensures the exiting view completes its animation before the new view begins animating in, preventing visual clutter and creating a clean transition.
 
@@ -180,6 +186,7 @@ Using `mode="wait"` ensures the exiting view completes its animation before the 
 
 Extension popups often display lists of items, whether bookmarks, tabs, or search results. Animating these lists makes the interface feel more alive and provides feedback when items are added, removed, or reordered.
 
+{% raw %}
 ```jsx
 function BookmarkList({ bookmarks }) {
   return (
@@ -211,6 +218,7 @@ function BookmarkList({ bookmarks }) {
   );
 }
 ```
+{% endraw %}
 
 The `layout` prop automatically animates position changes when items are reordered, making this pattern ideal for sortable lists or dynamic content that changes based on user interaction.
 
@@ -224,6 +232,7 @@ Once you have mastered the basics, several advanced techniques can further enhan
 
 Framer Motion's gesture system supports drag, pan, hover, and tap interactions. These gestures are particularly valuable in extension contexts where screen space is limited and direct manipulation feels natural.
 
+{% raw %}
 ```jsx
 function DraggableCard() {
   return (
@@ -237,6 +246,7 @@ function DraggableCard() {
   );
 }
 ```
+{% endraw %}
 
 This pattern could power features like draggable widgets, swipable cards, or interactive elements in your extension's interface.
 
@@ -244,6 +254,7 @@ This pattern could power features like draggable widgets, swipable cards, or int
 
 If your extension includes a longer popup or a dedicated options page, scroll-triggered animations can add visual interest as users navigate content.
 
+{% raw %}
 ```jsx
 function ScrollRevealSection() {
   return (
@@ -258,8 +269,9 @@ function ScrollRevealSection() {
   );
 }
 ```
+{% endraw %}
 
-The `whileInView` prop triggers animations when elements enter the viewport, and `viewport={{ once: true }}` ensures the animation only plays the first time, preventing distraction during repeated visits.
+{% raw %}The `whileInView` prop triggers animations when elements enter the viewport, and `viewport={{ once: true }}` ensures the animation only plays the first time, preventing distraction during repeated visits.{% endraw %}
 
 ### Orchestrating Complex Animation Sequences
 
@@ -298,6 +310,7 @@ While Framer Motion handles most performance considerations automatically, follo
 
 Always animate transform properties (translate, scale, rotate) rather than layout properties like width, height, or margin. Transforms are hardware-accelerated and do not trigger browser reflows, resulting in smoother animations.
 
+{% raw %}
 ```jsx
 // Good - animates transform
 <motion.div animate={{ scale: 1.1 }} />
@@ -305,6 +318,7 @@ Always animate transform properties (translate, scale, rotate) rather than layou
 // Avoid unless necessary - triggers reflow
 <motion.div animate={{ width: 200 }} />
 ```
+{% endraw %}
 
 When you must animate size changes, use the layout animations feature which automatically calculates transforms for smoother performance.
 
@@ -312,6 +326,7 @@ When you must animate size changes, use the layout animations feature which auto
 
 Each property you animate requires the browser to calculate and apply values. Keeping the number of animated properties minimal improves performance.
 
+{% raw %}
 ```jsx
 // Efficient - animates only necessary properties
 <motion.div
@@ -321,6 +336,7 @@ Each property you animate requires the browser to calculate and apply values. Ke
   }}
 />
 ```
+{% endraw %}
 
 ### Lazy Loading for Complex Animations
 
@@ -352,6 +368,7 @@ Every animation should serve a purpose, whether guiding user attention, providin
 
 Some users prefer reduced motion for accessibility reasons. Framer Motion supports detecting and respecting these preferences.
 
+{% raw %}
 ```jsx
 import { useReducedMotion } from 'framer-motion';
 
@@ -369,6 +386,7 @@ function AccessibleComponent() {
   );
 }
 ```
+{% endraw %}
 
 ### Consistent Timing
 

@@ -6,7 +6,7 @@ date: 2025-04-01
 categories: [Chrome Extensions, Education]
 tags: [tab-suspender-pro, education, teachers]
 keywords: "tab suspender pro teachers, chrome tabs for teachers, teacher browser management, tab suspender education, educator chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/01/tab-suspender-pro-for-teachers-educators/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/01/tab-suspender-pro-for-teachers-educators/"
 ---
 
 # Tab Suspender Pro for Teachers: Manage Research Tabs During Lesson Planning

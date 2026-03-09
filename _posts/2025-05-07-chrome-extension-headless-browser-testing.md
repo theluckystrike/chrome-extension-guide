@@ -6,7 +6,7 @@ date: 2025-05-07
 categories: [Chrome Extensions, Testing]
 tags: [headless, testing, chrome-extension]
 keywords: "chrome extension headless testing, headless chrome extension test, automated extension testing CI, chrome extension test pipeline, headless browser extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/07/chrome-extension-headless-browser-testing/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/07/chrome-extension-headless-browser-testing/"
 ---
 
 # Headless Testing Chrome Extensions: Automated CI/CD Quality Assurance

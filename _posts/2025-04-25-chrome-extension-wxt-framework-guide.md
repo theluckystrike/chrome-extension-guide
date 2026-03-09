@@ -6,7 +6,7 @@ date: 2025-04-25
 categories: [Chrome Extensions, Frameworks]
 tags: [wxt, framework, chrome-extension]
 keywords: "wxt chrome extension, wxt framework, chrome extension framework wxt, wxt extension development, modern chrome extension framework"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/25/chrome-extension-wxt-framework-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/25/chrome-extension-wxt-framework-guide/"
 ---
 
 # WXT Framework for Chrome Extensions: Next-Gen Development Experience

@@ -6,7 +6,7 @@ date: 2025-04-17
 categories: [Chrome Extensions, Features]
 tags: [tab-suspender-pro, video, streaming]
 keywords: "tab suspender pro video, youtube tab suspend, netflix chrome tab, video streaming tab suspender, chrome suspend video tabs"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/17/tab-suspender-pro-video-streaming-protection/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/17/tab-suspender-pro-video-streaming-protection/"
 ---
 
 # Tab Suspender Pro and Video Streaming: Never Interrupt Your Movies

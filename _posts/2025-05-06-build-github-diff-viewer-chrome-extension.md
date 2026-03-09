@@ -6,7 +6,7 @@ date: 2025-05-06
 categories: [Chrome Extensions, Developer Tools]
 tags: [github, diff-viewer, chrome-extension]
 keywords: "chrome extension github diff, github diff viewer chrome, enhanced code review extension, github pr chrome extension, better github diff"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/06/build-github-diff-viewer-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/06/build-github-diff-viewer-chrome-extension/"
 ---
 
 # Build a GitHub Diff Viewer Chrome Extension: Enhanced Code Review Experience

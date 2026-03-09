@@ -106,6 +106,7 @@ The popup is the most visible part of your extension, and Vue 3's Composition AP
 
 Your main `App.vue` for the popup might look like this:
 
+{% raw %}
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -149,6 +150,7 @@ const handleSave = async () => {
 }
 </style>
 ```
+{% endraw %}
 
 ### Leveraging Composables for Reusable Logic
 
@@ -216,6 +218,7 @@ app.mount(container)
 
 Your Vue component then operates within that isolated container:
 
+{% raw %}
 ```vue
 <!-- ContentWidget.vue -->
 <script setup>
@@ -257,6 +260,7 @@ const extractPageData = () => {
 }
 </style>
 ```
+{% endraw %}
 
 ### Shadow DOM for Style Isolation
 
@@ -408,6 +412,7 @@ export const useExtensionStore = defineStore('extension', () => {
 
 In your popup or options page:
 
+{% raw %}
 ```vue
 <script setup>
 import { onMounted } from 'vue'
@@ -433,6 +438,7 @@ const toggleTheme = () => {
   </div>
 </template>
 ```
+{% endraw %}
 
 ---
 
