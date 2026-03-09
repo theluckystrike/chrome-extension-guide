@@ -412,6 +412,137 @@ Web Components provide a robust foundation for building Chrome extensions that a
 
 The patterns demonstrated in this guide—from basic custom elements to content script integration—will help you build professional-grade Chrome extensions that scale well and avoid common pitfalls like style conflicts and memory leaks.
 
+<<<<<<< HEAD
 Start incorporating Web Components into your extension workflow today, and enjoy the benefits of truly reusable, encapsulated UI components. Remember to consider performance implications, use TypeScript for type safety, and follow security best practices when handling sensitive data.
 
 For more advanced topics, explore CSS-in-JS solutions like Lit, Stencil, or Glue, which provide additional features like scoped styles, reactive properties, and efficient rendering. These tools can further accelerate your extension development while maintaining the benefits of native Web Components.
+=======
+Start incorporating Web Components into your extension workflow today, and enjoy the benefits of truly reusable, encapsulated UI components.
+
+---
+
+## Debugging Web Components in Chrome DevTools {#debugging}
+
+Debugging Web Components requires understanding how Chrome DevTools presents Shadow DOM content. Here's how to effectively debug your components.
+
+### Viewing Shadow DOM
+
+Chrome DevTools automatically显示 Shadow DOM content. To inspect Shadow DOM:
+
+1. Open DevTools (F12 or Cmd+Option+I)
+2. Navigate to the Elements panel
+3. Expand elements with `#shadow-root` nodes
+4. Inspect styles and DOM structure within the shadow tree
+
+### Using the Breakpoint Feature
+
+Set DOM modification breakpoints to catch changes:
+
+```typescript
+// In your component, add debug logging
+connectedCallback() {
+  console.log('[Debug] Component connected:', this.tagName);
+  this.render();
+}
+
+attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  console.log(`[Debug] ${this.tagName} attribute changed:`, name, oldValue, '→', newValue);
+  this.render();
+}
+```
+
+### Common Debugging Scenarios
+
+**Issue: Styles not applying**
+- Check if Shadow DOM is properly attached
+- Verify CSS selectors are within the shadow tree
+- Use `this.shadowRoot.querySelector()` instead of `document.querySelector()`
+
+**Issue: Events not firing**
+- Ensure event listeners are set up in `connectedCallback()`
+- Check if event bubbles through Shadow DOM with `bubbles: true` and `composed: true`
+
+---
+
+## Performance Optimization for Web Components {#performance}
+
+Building performant Web Components requires attention to memory management and rendering efficiency.
+
+### Lazy Registration
+
+Register components only when needed to reduce initial load time:
+
+```typescript
+// Instead of importing all components upfront
+// popup.ts
+async function loadComponents() {
+  const { PopupButton } = await import('./components/popup-button');
+  const { ExtensionCard } = await import('./components/ext-card');
+  // Components auto-register via @customElement decorator
+}
+
+document.addEventListener('DOMContentLoaded', loadComponents);
+```
+
+### Template Cloning Optimization
+
+Use templates efficiently to avoid repeated DOM operations:
+
+```typescript
+// Create template once, clone multiple times
+const cardTemplate = document.createElement('template');
+cardTemplate.innerHTML = `<div class="card"><slot></slot></div>`;
+
+class EfficientCard extends HTMLElement {
+  private shadow = this.attachShadow({ mode: 'open' });
+  
+  constructor() {
+    super();
+    // Clone template content (not the template itself)
+    this.shadow.appendChild(cardTemplate.content.cloneNode(true));
+  }
+}
+```
+
+### Memory Management
+
+Prevent memory leaks by cleaning up event listeners:
+
+```typescript
+class CleanComponent extends HTMLElement {
+  private abortController = new AbortController();
+  
+  connectedCallback() {
+    window.addEventListener('resize', this.handleResize, {
+      signal: this.abortController.signal
+    });
+  }
+  
+  disconnectedCallback() {
+    // Clean up all listeners at once
+    this.abortController.abort();
+    console.log('Component cleaned up');
+  }
+}
+```
+
+### Rendering Optimization
+
+Use `requestAnimationFrame` for smooth updates:
+
+```typescript
+private pendingUpdate = false;
+  
+protected update() {
+  if (this.pendingUpdate) return;
+  
+  this.pendingUpdate = true;
+  requestAnimationFrame(() => {
+    this.render();
+    this.pendingUpdate = false;
+  });
+}
+```
+
+By implementing these debugging and optimization techniques, you'll create Web Components that are both powerful and production-ready.
+>>>>>>> quality/expand-thin-a5-r2

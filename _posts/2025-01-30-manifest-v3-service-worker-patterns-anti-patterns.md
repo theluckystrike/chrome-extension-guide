@@ -454,4 +454,160 @@ For more information on extending your knowledge, explore our [service worker li
 
 ---
 
+## Error Handling and Resilience Patterns {#error-handling}
+
+Building robust extensions requires comprehensive error handling at every layer.
+
+### Global Error Listeners
+
+Set up error handling in your service worker to catch unhandled exceptions:
+
+```javascript
+// Service worker error handling
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('[SW] Unhandled promise rejection:', event.reason);
+  
+  // Log to error tracking service
+  logErrorToService({
+    type: 'unhandled_rejection',
+    reason: event.reason,
+    timestamp: Date.now()
+  });
+});
+
+self.addEventListener('error', (event) => {
+  console.error('[SW] Uncaught error:', event.error);
+  
+  logErrorToService({
+    type: 'uncaught_error',
+    message: event.message,
+    stack: event.error?.stack,
+    timestamp: Date.now()
+  });
+});
+```
+
+### Retry Logic with Exponential Backoff
+
+Implement resilient network requests that handle transient failures:
+
+```javascript
+async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+  let lastError;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+      console.warn(`Fetch attempt ${attempt + 1} failed:`, error.message);
+      
+      // Exponential backoff: wait 1s, 2s, 4s...
+      if (attempt < maxRetries - 1) {
+        await new Promise(resolve => 
+          setTimeout(resolve, Math.pow(2, attempt) * 1000)
+        );
+      }
+    }
+  }
+  
+  throw new Error(`Failed after ${maxRetries} attempts: ${lastError.message}`);
+}
+```
+
+### Circuit Breaker Pattern
+
+Prevent cascading failures by implementing a circuit breaker:
+
+```javascript
+class CircuitBreaker {
+  constructor(threshold = 5, timeout = 60000) {
+    this.failures = 0;
+    this.threshold = threshold;
+    this.timeout = timeout;
+    this.lastFailureTime = null;
+    this.state = 'CLOSED'; // CLOSED, OPEN, HALF_OPEN
+  }
+  
+  async execute(fn) {
+    if (this.state === 'OPEN') {
+      if (Date.now() - this.lastFailureTime > this.timeout) {
+        this.state = 'HALF_OPEN';
+      } else {
+        throw new Error('Circuit breaker is OPEN');
+      }
+    }
+    
+    try {
+      const result = await fn();
+      this.onSuccess();
+      return result;
+    } catch (error) {
+      this.onFailure();
+      throw error;
+    }
+  }
+  
+  onSuccess() {
+    this.failures = 0;
+    this.state = 'CLOSED';
+  }
+  
+  onFailure() {
+    this.failures++;
+    this.lastFailureTime = Date.now();
+    
+    if (this.failures >= this.threshold) {
+      this.state = 'OPEN';
+      console.warn('Circuit breaker opened due to failures');
+    }
+  }
+}
+```
+
+---
+
+## Debugging Service Worker Issues {#debugging}
+
+Effective debugging requires understanding the service worker lifecycle and Chrome's DevTools.
+
+### Viewing Service Worker Logs
+
+1. Open Chrome DevTools (F12)
+2. Navigate to the **Service Worker** panel in Application tab
+3. Check the **Console** for service worker logs
+4. Use the **Update** and **Push** buttons to trigger service worker events
+
+### Force Service Worker Termination
+
+Test how your extension handles service worker restarts:
+
+1. Go to `chrome://extensions`
+2. Enable **Developer mode**
+3. Find your extension
+4. Click the **service worker** link
+5. Click **stop** in DevTools
+
+This lets you verify that:
+- State is properly persisted to storage
+- Alarms are correctly scheduled
+- Message listeners are re-registered on wake
+
+### Inspecting Storage
+
+Use Chrome DevTools to inspect extension storage:
+
+1. Open DevTools on any page
+2. Go to **Application** → **Storage** → **Extension Storage**
+3. View `chrome.storage.local` and `chrome.storage.sync`
+4. Edit values directly for testing
+
+---
+
 *Built by theluckystrike at [zovo.one](https://zovo.one)*

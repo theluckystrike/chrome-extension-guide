@@ -640,6 +640,7 @@ Now that you have the foundation, explore these resources to deepen your knowled
 
 ---
 
+<<<<<<< HEAD
 ## Advanced: React Patterns for Complex Extensions
 
 ### Handling Service Worker Restarts
@@ -782,10 +783,50 @@ test('toggles notification setting', async () => {
   
   expect(chrome.storage.local.set).toHaveBeenCalledWith({
     settings: expect.objectContaining({ notifications: true })
+=======
+## Testing React Components in Extensions {#testing}
+
+Testing React components in the extension environment requires special considerations.
+
+### Unit Testing with Vitest
+
+Set up Vitest for fast, modern testing:
+
+```bash
+npm install -D vitest @testing-library/react @testing-library/jest-dom
+```
+
+```typescript
+// setupTests.ts
+import '@testing-library/jest-dom';
+
+// Component test
+import { render, screen, fireEvent } from '@testing-library/react';
+import { SettingsPanel } from './SettingsPanel';
+
+describe('SettingsPanel', () => {
+  const defaultProps = {
+    settings: { notifications: true, theme: 'light' },
+    onUpdate: jest.fn()
+  };
+
+  it('renders settings correctly', () => {
+    render(<SettingsPanel {...defaultProps} />);
+    expect(screen.getByText('Extension Settings')).toBeInTheDocument();
+  });
+
+  it('calls onUpdate when toggle changes', () => {
+    render(<SettingsPanel {...defaultProps} />);
+    fireEvent.click(screen.getByRole('checkbox'));
+    expect(defaultProps.onUpdate).toHaveBeenCalledWith({
+      notifications: false
+    });
+>>>>>>> quality/expand-thin-a5-r2
   });
 });
 ```
 
+<<<<<<< HEAD
 ---
 
 ## Conclusion
@@ -800,6 +841,123 @@ Remember these core principles:
 - Follow Chrome Web Store policies for successful publication
 
 With these patterns and practices, you're well-equipped to build professional, production-ready Chrome extensions with React.
+=======
+### Integration Testing with Playwright
+
+Test the full extension in a real Chrome environment:
+
+```typescript
+// tests/extension.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('popup opens and displays settings', async ({ extension }) => {
+  const popup = await extension.newPopup();
+  
+  await popup.goto('popup.html');
+  await expect(popup.locator('text=Extension Settings')).toBeVisible();
+  
+  // Interact with React component
+  await popup.click('[data-testid="toggle-notifications"]');
+  
+  // Verify storage was updated
+  const storage = await extension.getStorage();
+  expect(storage.settings.notifications).toBe(false);
+});
+```
+
+### Mocking Chrome APIs
+
+Use Chrome's stubbed APIs for consistent testing:
+
+```typescript
+// __mocks__/chrome.ts
+export const chrome = {
+  storage: {
+    local: {
+      get: jest.fn().mockResolvedValue({ settings: {} }),
+      set: jest.fn().mockResolvedValue(undefined)
+    }
+  },
+  runtime: {
+    sendMessage: jest.fn(),
+    onMessage: {
+      addListener: jest.fn()
+    }
+  }
+};
+```
+
+---
+
+## Performance Optimization for React Extensions {#performance}
+
+Optimize your React extension for fast load times and smooth interactions.
+
+### Code Splitting
+
+Split your bundle to load only what's needed:
+
+```typescript
+// Lazy load heavy components
+const HeavyDashboard = React.lazy(() => import('./Dashboard'));
+
+function App() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <HeavyDashboard />
+    </Suspense>
+  );
+}
+```
+
+### Memoization Strategies
+
+Prevent unnecessary re-renders:
+
+```typescript
+import { useMemo, useCallback, memo } from 'react';
+
+// Memoize expensive computations
+const processedData = useMemo(() => {
+  return largeDataset.filter(item => item.active)
+    .map(item => transformItem(item));
+}, [largeDataset]);
+
+// Memoize callback functions
+const handleUpdate = useCallback((id: string, value: string) => {
+  setData(prev => ({ ...prev, [id]: value }));
+}, []);
+
+// Memoize entire components
+const SettingsItem = memo(({ label, value, onChange }) => (
+  <div className="settings-item">
+    <label>{label}</label>
+    <input value={value} onChange={e => onChange(e.target.value)} />
+  </div>
+));
+```
+
+### Extension-Specific Optimizations
+
+```typescript
+// Minimize popup render on open
+function usePopupState() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
+
+    chrome.action.onClicked.addListener(handleOpen);
+    return () => {
+      chrome.action.onClicked.removeListener(handleOpen);
+    };
+  }, []);
+
+  return isOpen;
+}
+```
+>>>>>>> quality/expand-thin-a5-r2
 
 ---
 
