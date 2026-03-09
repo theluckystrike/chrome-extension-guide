@@ -1,0 +1,55 @@
+/* Accessibility overlay indicator styles */
+#a11y-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999999;
+}
+
+#a11y-issue-marker {
+  position: absolute;
+  border: 2px solid #E53E3E;
+  background-color: rgba(229, 62, 62, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#a11y-issue-marker:hover {
+  background-color: rgba(229, 62, 62, 0.3);
+}
+
+#a11y-issue-marker::after {
+  content: attr(data-issue);
+  position: absolute;
+  top: -24px;
+  left: 0;
+  background: #E53E3E;
+  color: white;
+  padding: 2px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-family: sans-serif;
+}
+
+/* High contrast mode styles */
+.high-contrast-mode {
+  filter: contrast(150%) !important;
+}
+
+.high-contrast-mode img {
+  filter: contrast(200%) !important;
+}
+
+/* Focus indicator styles */
+.enhanced-focus *:focus {
+  outline: 3px solid #0066CC !important;
+  outline-offset: 2px !important;
+}
+
+.enhanced-focus *:focus:not(:focus-visible) {
+  outline: none !important;
+}
