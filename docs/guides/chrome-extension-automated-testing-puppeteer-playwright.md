@@ -447,6 +447,7 @@ Mocking is essential for testing error handling paths and for making tests run f
 
 Automating extension tests in CI requires configuring GitHub Actions to launch browsers with extension support.
 
+{% raw %}
 ```yaml
 # .github/workflows/test.yml
 name: Extension E2E Tests
@@ -463,33 +464,33 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-    
+
     runs-on: ${{ matrix.os }}
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: pnpm/action-setup@v4
         with:
           version: 9
-      
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-      
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Build extension
         run: pnpm build
-      
+
       - name: Install Playwright browsers
         run: pnpm playwright install chromium
-      
+
       - name: Run E2E tests
         run: pnpm playwright test
-        
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -498,6 +499,7 @@ jobs:
           path: playwright-report/
           retention-days: 7
 ```
+{% endraw %}
 
 For CI environments, you'll need to configure Playwright to run in headed mode or use xvfb to provide a virtual display, as Chrome needs a display to run extensions properly.
 
