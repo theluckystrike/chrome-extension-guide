@@ -562,3 +562,11 @@ The Chrome Text-to-Speech API is a powerful tool that enables developers to crea
 Remember to test thoroughly across platforms, handle errors gracefully, and always prioritize user experience. With the techniques and best practices covered in this guide, you're well-equipped to implement professional-grade text-to-speech functionality in your Chrome extensions.
 
 Start experimenting with the Chrome TTS API today, and discover how voice synthesis can enhance your extension's accessibility and user experience. The possibilities are virtually endless, from language learning tools to accessibility aids to innovative productivity applications.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Accessibility (A11y) Guide](/chrome-extension-guide/2025/01/18/chrome-extension-accessibility-a11y-guide/) - Build accessible extensions following best practices
+- [Speech Recognition and Voice Commands](/chrome-extension-guide/2025/01/21/chrome-extension-speech-recognition-voice-commands/) - Implement voice input in your extensions
+- [WebRTC Screen Sharing in Chrome Extensions](/chrome-extension-guide/2025/01/17/chrome-extension-webrtc-screen-sharing/) - Combine with WebRTC for video communication

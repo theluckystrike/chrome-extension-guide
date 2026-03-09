@@ -616,6 +616,14 @@ Remember to test your extension under various network conditions, handle edge ca
 
 ---
 
+## Related Articles
+
+- [WebSocket Client for Chrome Extensions](/chrome-extension-guide/2025/01/26/websocket-client-chrome-extension/) - Build a dedicated WebSocket client extension
+- [Socket.IO for Real-Time Chrome Extensions](/chrome-extension-guide/2025/01/29/socket-io-real-time-chrome-extensions/) - Implement Socket.IO for event-based communication
+- [Chrome Extension WebSocket and Real-Time Guide](/chrome-extension-guide/2025/04/01/chrome-extension-websocket-real-time-guide/) - Comprehensive real-time communication patterns
+
+---
+
 *For more guides on Chrome extension development and advanced APIs, explore our comprehensive documentation and tutorials.*
 
 ---

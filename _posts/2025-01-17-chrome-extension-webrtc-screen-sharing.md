@@ -438,3 +438,11 @@ The combination of Chrome extensions and WebRTC provides a powerful platform for
 Remember to thoroughly test your extension across different scenarios and Chrome versions, and always prioritize user privacy and security in your implementation. The screen sharing capabilities in Chrome extensions continue to evolve, so stay updated with the latest Chrome documentation for new features and API changes.
 
 Start building your screen sharing extension today, and explore the countless possibilities for enhancing remote collaboration and communication through the power of Chrome extensions and WebRTC technology.
+
+---
+
+## Related Articles
+
+- [WebRTC Video Communication in Chrome Extensions](/chrome-extension-guide/2025/01/21/chrome-extension-webrtc-video/) - Learn how to implement WebRTC video calling features in your extensions
+- [Chrome Extension Screen Capture API](/chrome-extension-guide/2025/03/11/chrome-extension-screen-capture-api/) - Comprehensive guide to capturing screenshots and screen content
+- [WebRTC Data Channel for Chrome Extensions](/chrome-extension-guide/2025/01/22/chrome-extension-webrtc-data-channel/) - Build peer-to-peer data transfer functionality
