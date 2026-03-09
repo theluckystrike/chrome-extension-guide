@@ -594,6 +594,8 @@ The overall "activated" rate (completed first suspend within 7 days) is approxim
 
 Freemium extensions face the toughest onboarding challenge: you need to demonstrate enough value that users upgrade, but you can't give everything away for free. The onboarding flow must strategically showcase premium features without alienating free users.
 
+For a comprehensive guide to freemium architecture, see our [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model).
+
 ### The Freemium Onboarding Philosophy
 
 Your onboarding should follow this sequence:
@@ -864,7 +866,7 @@ async function showWelcomePage() {
 
 ## Measuring Onboarding Completion Rate
 
-Understanding your onboarding funnel is essential for optimization. You need to measure where users drop off and why.
+Understanding your onboarding funnel is essential for optimization. You need to measure where users drop off and why. For detailed analytics implementation, see our [Chrome Extension Analytics Integration](/chrome-extension-guide/2025/01/18/analytics-integration-for-chrome-extensions/) guide.
 
 ### Key Onboarding Metrics
 
@@ -1179,6 +1181,7 @@ The first five minutes matter because they set the trajectory for the entire use
 ## Related Guides
 
 - [Chrome Extension Monetization Strategies That Work](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to convert free users to paid subscribers
+- [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) — Comprehensive guide to freemium models, pricing, and Stripe integration
 - [Chrome Extension Analytics Integration](/chrome-extension-guide/2025/01/18/analytics-integration-for-chrome-extensions/) — Track onboarding events and user behavior
 - [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/03/19/chrome-extension-popup-design-best-practices/) — Build onboarding UIs that convert
 - [Chrome Extension Options Page Design](/chrome-extension-guide/2025/03/24/chrome-extension-options-page-design/) — Create configuration flows users will actually complete
