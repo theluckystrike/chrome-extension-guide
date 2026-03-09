@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tab Suspender Pro: How to Reduce Chrome CPU Usage by 50% or More"
-description: "Discover how Tab Suspender Pro eliminates Chrome CPU waste from idle tabs. Learn to measure, configure, and achieve 50%+ CPU savings with practical tips."
+description: "Discover how Tab Suspender Pro eliminates Chrome CPU waste from idle tabs. Learn to measure, configure settings, and achieve 50%+ CPU savings in minutes."
 date: 2025-03-29
 categories: [Chrome Extensions, Performance]
 tags: [tab-suspender-pro, cpu-usage, chrome-performance]

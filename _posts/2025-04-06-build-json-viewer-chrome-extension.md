@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Build a JSON Viewer Chrome Extension: Pretty Print API Responses"
-description: "Learn how to build a JSON viewer Chrome extension that formats and pretty prints API responses. Step-by-step tutorial for developers with code examples."
+description: "Learn how to build a JSON viewer Chrome extension that formats and pretty prints API responses. Complete step-by-step tutorial for developers in 2025."
 date: 2025-04-06
 categories: [Chrome Extensions, Tutorials]
 tags: [json, viewer, chrome-extension]
