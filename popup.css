@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 800px;
+  height: 500px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: calc(100% - 40px);
+}
+
+.pane {
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+}
+
+.input-pane {
+  border-right: 1px solid #e1e4e8;
+}
+
+#markdown-input {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  border: none;
+  resize: none;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #f6f8fa;
+}
+
+#markdown-input:focus {
+  outline: none;
+}
+
+.preview-pane {
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.markdown-body {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.toolbar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 12px;
+  background-color: #f6f8fa;
+  border-top: 1px solid #e1e4e8;
+}
+
+.toolbar button {
+  padding: 6px 12px;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toolbar button:hover {
+  background-color: #f3f4f6;
+}

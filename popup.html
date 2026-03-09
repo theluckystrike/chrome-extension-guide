@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown Preview</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="pane input-pane">
+      <textarea id="markdown-input" placeholder="Enter your markdown here..."></textarea>
+    </div>
+    <div class="pane preview-pane">
+      <div id="markdown-preview" class="markdown-body"></div>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button id="copy-html">Copy HTML</button>
+    <button id="insert-page">Preview Selection</button>
+  </div>
+  <script src="marked.min.js"></script>
+  <script src="highlight.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
