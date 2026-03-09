@@ -446,6 +446,14 @@ The foundation you have built can be extended in numerous directions based on yo
 Remember that successful extensions evolve based on user feedback and changing requirements. Monitor reviews, analyze usage patterns, and continue improving your extension to provide the best possible PDF viewing experience for your users.
 
 ---
+
+## Related Articles
+
+- [CSS Injection with Chrome Extension Content Scripts](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject content scripts for web page manipulation
+- [Chrome Downloads API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Handle file downloads in your extensions
+- [Manifest V3 Migration Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) - Migrate your extension from Manifest V2 to V3
+
+---
 ## Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

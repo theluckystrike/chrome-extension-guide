@@ -113,6 +113,14 @@ Common authentication issues in Chrome extensions include token expiration not b
 
 ---
 
+## Related Articles
+
+- [Chrome Extension OAuth2 Authentication Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
+- [Chrome Identity API and OAuth](https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-identity-api-oauth/) - Learn how to use Chrome Identity API for authentication
+- [Chrome Storage API Overview](https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/) - Securely store tokens and authentication state
+
+---
+
 ## Conclusion: Building Robust Authentication for Chrome Extensions {#conclusion}
 
 Authentication patterns for Chrome extensions have evolved significantly with the introduction of Manifest V3, requiring developers to adapt their approaches while maintaining the security and usability that users expect. The chrome extension auth landscape offers multiple strategies—from simple token storage to sophisticated OAuth implementations—each suited to different use cases and security requirements.

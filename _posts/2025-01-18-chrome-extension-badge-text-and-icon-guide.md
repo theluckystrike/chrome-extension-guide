@@ -320,3 +320,11 @@ Chrome extension badges are a powerful tool for communicating with users in a no
 Remember to choose the appropriate API for your manifest version, keep badge text concise and meaningful, and always provide alternative notification methods for accessibility. With these techniques, you'll be well-equipped to implement badge functionality that users find valuable.
 
 For more information on Chrome extension development, explore our other guides on topics like notifications, storage APIs, and message passing between extension components.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Notifications API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Implement rich notifications in your extensions
+- [Chrome Extension Popup Design Best Practices](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design user-friendly popup interfaces
+- [Chrome Action API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-action-api-guide/) - Master the Chrome Action API for toolbar interactions

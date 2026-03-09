@@ -376,3 +376,11 @@ Cross-origin requests in Chrome extensions require a different approach than reg
 By following these patterns, you can build extensions that reliably interact with external APIs while maintaining security and passing Chrome Web Store review. The initial setup takes a bit more effort than simple fetch calls, but the result is a more robust and trustworthy extension.
 
 Remember that Chrome's extension platform continues to evolve. Stay current with the latest Manifest V3 documentation and best practices to ensure your extensions continue to work as browser security models evolve.
+
+---
+
+## Related Articles
+
+- [Chrome Web Request API Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-web-request-api-complete-guide/) - Intercept and modify network requests
+- [Chrome Extension Permissions Explained](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand extension permissions and security
+- [Chrome Storage API Overview](https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/) - Store data securely in your extensions
