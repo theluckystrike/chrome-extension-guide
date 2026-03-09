@@ -1,11 +1,7 @@
 ---
 layout: post
 title: "Content Scripts in Chrome Extensions"
-<<<<<<< HEAD
-description: "Learn how content scripts interact with web pages, modify DOM, and enhance browser functionality"
-=======
 description: "Master content script injection in Chrome extensions. Learn declarative and programmatic injection, DOM manipulation, isolated worlds, and message passing."
->>>>>>> quality/fix-frontmatter-a9-r2
 date: 2025-06-04
 categories: [tutorial]
 tags: [content-scripts, injection, dom, manifest, javascript]
@@ -383,3 +379,27 @@ Remember these key points:
 - Handle dynamic content properly
 - Communicate effectively with other extension parts
 - Test across multiple websites
+
+### Handling Page Frameworks
+
+Modern web applications often use frameworks like React, Vue, or Angular that dynamically manipulate the DOM. Content scripts must account for this dynamic behavior to function correctly.
+
+When working with framework-based pages, observe the DOM after framework initialization completes. Use MutationObserver to detect changes to specific elements you're targeting. This ensures your script runs even when content loads asynchronously.
+
+Avoid directly modifying framework-managed elements when possible. Instead, add your own elements alongside framework content. This prevents conflicts with framework reconciliation algorithms and reduces the risk of your changes being overwritten.
+
+### Security Considerations
+
+Content scripts have significant power over page content, making security a paramount concern. Never trust data from the page itself - always validate and sanitize before using or displaying information.
+
+When extracting sensitive information from pages, be mindful of what you're collecting. Avoid capturing passwords, credit card numbers, or other private data unless absolutely necessary for your extension's functionality. Such data handling may trigger additional review requirements.
+
+Use content Security Policy compliant code in your content scripts. Avoid eval() and similar functions that could introduce vulnerabilities. Chrome may block or restrict certain patterns in future versions.
+
+### Performance Optimization
+
+Content scripts impact page performance directly. Large, complex scripts can slow page load times and consume memory. Optimize by only running code when necessary and cleaning up resources.
+
+Use requestIdleCallback or setTimeout to defer non-critical operations. This allows the page to become interactive faster while your extension enhancements load in the background.
+
+Monitor memory usage in your content script. Event listeners attached to the document or window can accumulate over time, especially on single-page applications that navigate without full page reloads. Remove listeners when they're no longer needed.

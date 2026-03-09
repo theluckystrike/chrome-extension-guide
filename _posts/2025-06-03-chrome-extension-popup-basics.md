@@ -1,11 +1,7 @@
 ---
 layout: post
 title: "Chrome Extension Popup Basics"
-<<<<<<< HEAD
-description: "Create your first extension popup - a complete guide to building user interfaces for Chrome extensions"
-=======
 description: "Create Chrome extension popup interfaces with HTML, CSS, and JavaScript. Learn Manifest V3 action config, styling best practices, and size constraints."
->>>>>>> quality/fix-frontmatter-a9-r2
 date: 2025-06-03
 categories: [tutorial]
 tags: [popup, ui, basics, manifest-v3, html]
@@ -383,3 +379,35 @@ Additional tips for success:
 - Gather user feedback about the interface
 - Iterate on the design based on usage patterns
 - Consider adding keyboard shortcuts for power users
+
+### Popup Lifecycle Events
+
+Understanding the popup lifecycle helps you manage resources effectively. The popup fires standard DOM events like DOMContentLoaded and load, but also has Chrome-specific events worth knowing about.
+
+When the popup opens, Chrome creates a new instance of your popup HTML. This means every open is a fresh start - previous state isn't preserved unless you explicitly store it. Use chrome.storage to persist state between popup opens.
+
+The popup lifecycle follows this sequence: Chrome renders the popup → DOMContentLoaded fires → scripts execute → load event fires → popup is visible → user closes popup → JavaScript execution stops. This quick cycle means avoid heavy initialization that delays visibility.
+
+### State Management Patterns
+
+Managing state effectively in popups requires different patterns than regular web apps. Since popups can close at any time, always persist important state immediately rather than waiting for explicit save actions.
+
+The chrome.storage API provides the recommended storage solution. It offers synchronous-like API with asynchronous implementation, supports automatic syncing across devices, and provides more storage capacity than localStorage.
+
+For complex state, consider using a state machine pattern. Define clear states (loading, ready, error), transitions between states, and handle each state appropriately in your UI. This makes your popup predictable and easier to debug.
+
+### Building Forms in Popups
+
+Forms in popups require special consideration due to the limited space and potential for quick closure. Keep forms simple and focused on a single task. If you need complex forms, consider opening a full page instead.
+
+Implement autocomplete where appropriate - users appreciate not retyping information. Use proper label elements for accessibility, and ensure keyboard navigation works correctly through all form fields.
+
+Validate input both client-side and server-side when applicable. Show validation errors inline rather than in alert boxes. Consider using the constraint validation API for built-in browser validation support.
+
+### Performance Monitoring
+
+Monitor your popup's performance to ensure it remains responsive. Chrome provides the ability to track various metrics through the chrome.metricsPrivate API if you need detailed performance data.
+
+Track popup open time as a key metric. Users notice delays in popup appearance. Aim for sub-100ms open times by minimizing JavaScript execution during initialization.
+
+Memory management matters even in short-lived popups. Avoid creating closures that retain references to DOM elements. Use WeakMap and WeakSet where appropriate to allow garbage collection.

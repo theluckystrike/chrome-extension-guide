@@ -1,11 +1,7 @@
 ---
 layout: post
 title: "Chrome Extension Hello World"
-<<<<<<< HEAD
-description: "A simple first extension tutorial - build your very own Chrome extension from scratch with step-by-step instructions"
-=======
 description: "Build your first Chrome extension from scratch. Learn manifest.json, create popups, add interactivity, and load it in Chrome for testing."
->>>>>>> quality/fix-frontmatter-a9-r2
 date: 2025-06-01
 categories: [tutorial]
 tags: [beginner, hello-world, manifest-v3]
@@ -205,5 +201,39 @@ Publishing steps include:
 3. Upload your extension package
 4. Submit for review (typically 1-3 days)
 5. Publish once approved
+
+### Debugging Your Extension
+
+Debugging Chrome extensions requires a different approach than regular web development. The popup has its own DevTools, content scripts run in the page context, and background scripts have yet another debugging environment. Understanding these distinctions is crucial for effective troubleshooting.
+
+To debug your popup, right-click anywhere in the popup and select "Inspect" from the context menu. This opens the popup-specific DevTools where you can set breakpoints, inspect DOM elements, and monitor console output. Remember that the popup closes when you click outside of it, so place your breakpoints carefully.
+
+For content script debugging, open DevTools on any page where your content script runs. Your content script variables and functions will be available in the console, though they exist in the isolated world context. This separation means you cannot directly access page variables from the console, but you can interact with the DOM freely.
+
+Background script debugging requires navigating to chrome://extensions and clicking the "Service Worker" link under your extension. This opens DevTools for the service worker context where you can monitor events, inspect storage, and debug asynchronous operations.
+
+### Extension Development Best Practices
+
+Following best practices from the start ensures your extension remains maintainable and performs well. Consider organizing your code into logical modules, even in small extensions. This makes it easier to add features later and helps other developers understand your code.
+
+Use modern JavaScript features like async/await for asynchronous operations. Chrome supports ES6+ features, so take advantage of arrow functions, destructuring, and template literals. Keep your popup lightweight by avoiding heavy frameworks unless absolutely necessary.
+
+Implement proper error handling throughout your extension. Try-catch blocks should wrap API calls and DOM manipulations. Display user-friendly error messages rather than raw exceptions. This professionalism builds user trust and makes debugging easier.
+
+### Understanding Chrome's Security Model
+
+Chrome extensions operate within a powerful but restricted security model. Understanding this model helps you build secure extensions and avoid common pitfalls. The principle of least privilege should guide your permission requests - only ask for what your extension genuinely needs.
+
+Content Security Policy (CSP) in extensions is stricter than regular web pages. Inline scripts require explicit allowance in your manifest, and eval() has limited functionality. These restrictions protect users from malicious extensions but require developers to adapt their coding patterns.
+
+Your extension's files are served from a unique origin that differs from web pages. This separation provides security benefits but means you cannot access page variables directly. Use message passing to communicate between your extension's different contexts.
+
+### Performance Optimization Tips
+
+Even simple extensions can become sluggish if not optimized properly. Start by measuring - use the Performance tab in DevTools to identify bottlenecks. Common issues include excessive API calls, large DOM manipulations, and memory leaks from event listeners.
+
+Lazy load functionality that users don't immediately need. If your extension has multiple features, consider loading only the code for the feature being used. This reduces memory footprint and speeds up initial load times.
+
+Clean up event listeners when they're no longer needed. Content scripts that persist across page navigations can accumulate listeners over time. Regularly audit your code for orphaned listeners and remove them appropriately.
 
 This simple foundation opens the door to powerful browser customization. The Chrome extension ecosystem offers endless possibilities for enhancing productivity, automating tasks, and creating unique browsing experiences.
