@@ -10,167 +10,164 @@ author: theluckystrike
 
 # Chrome Extension Competitive Analysis — Find Your Market Gap
 
-Building a successful Chrome extension requires more than just solid coding skills. Understanding your competitive landscape is crucial for finding a sustainable market position. Whether you are launching your first extension or looking to expand an existing product line, competitive analysis helps you identify gaps, validate assumptions, and build differentiation that resonates with users.
-
-This guide walks you through a systematic approach to analyzing the Chrome extension marketplace, extracting actionable insights from competitor weaknesses, and positioning your extension for success.
+Building a successful Chrome extension requires more than just solid coding skills—it demands a deep understanding of the competitive landscape. Before investing months of development time, you need to identify market gaps, understand what competitors do well (and poorly), and position your extension for sustainable growth. This guide provides a systematic approach to competitive analysis specifically tailored for Chrome extensions, covering everything from Chrome Web Store research to advanced differentiation strategies.
 
 ---
 
 ## Why Competitive Analysis for Extensions Matters {#why-competitive-analysis}
 
-The Chrome Web Store hosts over 200,000 extensions competing for user attention. With such saturation, simply building a quality product is not enough. You need to understand what already exists, identify where competitors fall short, and find the specific angles that can make your extension stand out.
+The Chrome Web Store hosts over 100,000 extensions, with new submissions daily. Without competitive analysis, you risk entering oversaturated markets, building features that already exist, or missing obvious opportunities for differentiation. More importantly, understanding your competitors helps you make informed decisions about positioning, pricing, and feature prioritization.
 
-Competitive analysis serves multiple strategic purposes. First, it validates market demand. When you find competitors with significant user bases, you confirm that people are actively seeking solutions in that space. Second, it reveals unmet needs. By studying what users complain about in competitor reviews, you discover feature gaps that you can address. Third, it informs positioning. Understanding how competitors price, market, and present their extensions helps you craft a compelling unique value proposition.
+Competititve analysis serves multiple strategic purposes. First, it validates market demand—you can confirm that users actually want the functionality you're planning to build by examining existing solutions and their user bases. Second, it reveals gaps in the market where users' needs go unfulfilled. Third, it provides pricing benchmarks to ensure your monetization strategy aligns with market expectations. Finally, it helps you anticipate competitive responses and plan accordingly.
 
-Many extension developers skip this step and build products in isolation, only to discover after launch that the market is either oversaturated or that users want something fundamentally different from what they built. Competitive analysis prevents costly mistakes by grounding your product decisions in real market evidence.
-
----
-
-## Chrome Web Store Category Browsing Strategy {#cws-category-strategy}
-
-The Chrome Web Store organizes extensions into categories that serve as your primary research landscape. Effective category browsing requires a systematic approach rather than casual exploration.
-
-Start by identifying categories relevant to your idea. Common categories include Productivity, Accessibility, Blogging, Communication, Developer Tools, Entertainment, News & Weather, Photos, Shopping, Social & Communication, Sports, and Utilities. Each category has different competitive intensity and user expectations.
-
-When browsing a category, record the top 20 extensions by popularity. Note their names, brief descriptions, and user ratings. Pay attention to the "Featured" and "Trending" sections, as these highlight what Google considers high-quality extensions. Also check the "New" tab within each category to identify emerging competitors.
-
-Create a spreadsheet to track each competitor with columns for name, rating, number of reviews, pricing model, key features, and any notable weaknesses you observe. This structured approach transforms casual browsing into actionable market intelligence.
+Many extension developers skip this crucial step, building in isolation only to discover upon launch that competitors offer similar solutions with established user bases and better execution. By investing time in competitive analysis upfront, you can avoid costly mistakes and identify your unique value proposition with confidence.
 
 ---
 
-## Feature Matrix Construction {#feature-matrix}
+## Chrome Web Store Category Browsing Strategy {#cws-category-browsing}
 
-Once you have identified your primary competitors, the next step is building a feature matrix that maps every significant feature across all competitors. This matrix reveals the feature landscape and highlights opportunities for differentiation.
+The Chrome Web Store itself is your first and most valuable research tool. Rather than searching broadly, navigate directly to relevant category pages to discover competing extensions in your target space. Each category page displays extensions sorted by popularity, showing you which solutions have already captured user attention.
 
-Create a comprehensive list of features by reviewing each competitor's description, browsing their settings menus if available, and reading user reviews that mention specific capabilities. Common feature categories include core functionality, customization options, data export capabilities, integration with other tools, user interface elements, and support options.
+Effective CWS browsing requires a systematic approach. Start by identifying the most relevant categories for your extension idea—productivity, accessibility, shopping, social media, developer tools, and news all represent distinct ecosystems with different user expectations. Within each category, examine the top 20 extensions by user rating and install count. Don't ignore extensions with lower ratings; these represent opportunities where users feel underserved.
 
-For each feature, mark whether competitors offer it, partially offer it, or do not offer it. Use a simple scoring system such as full support (2 points), partial support (1 point), and no support (0 points). Total the scores to identify which competitors offer the most comprehensive feature sets.
+Pay attention to the "Recently added" and "Rising stars" sections on category pages. These highlight newer extensions gaining traction, showing you emerging competition and current market trends. The CWS also displays trending charts that reveal which types of extensions are gaining popularity in real-time.
 
-The feature matrix reveals several strategic insights. Features that most competitors offer are table stakes — you must include them to be competitive. Features that few or no competitors offer represent potential differentiation opportunities. Pay particular attention to features that users request frequently but no one provides — these are your highest-value targets.
-
----
-
-## Review Mining: Competitor 1-Star Reviews as Feature Ideas {#review-mining}
-
-Your competitors' negative reviews are a goldmine of product ideas. Users who leave 1-star reviews are vocal about their frustrations, and these frustrations directly indicate what the market wants but is not getting.
-
-Systematically collect 1-star and 2-star reviews for your top five competitors. Look for recurring complaints that appear across multiple reviews. Common patterns include missing features that users expected, poor performance or crashes, confusing user interfaces, privacy concerns, lack of customer support, and broken functionality after updates.
-
-Categorize these complaints into potential feature requests. For each complaint, consider whether you could solve the underlying problem better than the competitor. Some complaints are subjective preferences that are hard to address, while others represent genuine product gaps that you can fill.
-
-Pay special attention to reviews that mention specific use cases you had not considered. Users often reveal unexpected ways they try to use extensions, and these insights can inspire features that serve niche audiences well.
+Document every competing extension you discover, noting its name, install count, rating, pricing model, key features, and last update date. This becomes your competitive inventory—a foundation for deeper analysis. Tools like the Chrome Web Store Sorter browser extension can help you export this data for easier analysis.
 
 ---
 
-## Permission Analysis: Less Permissions Equals Trust {#permission-analysis}
+## Building a Feature Matrix {#feature-matrix-construction}
 
-Chrome extension permissions significantly impact user trust and installation rates. Users are increasingly sophisticated about privacy and wary of extensions that request broad permissions. Analyzing competitor permission requests reveals both potential vulnerabilities and competitive advantages.
+Once you've identified your main competitors, the next step is constructing a feature matrix—a comprehensive comparison table that maps each competitor's functionality against your planned features. This visual representation reveals patterns in the market and highlights differentiation opportunities.
 
-Review each competitor's manifest.json to see what permissions they request. The Chrome Web Store displays permission warnings that can deter users. Extensions requesting access to all data on all websites face significant friction compared to those with limited scope.
+Create a spreadsheet with competitors as columns and features as rows. For each competitor, research and document whether they offer specific capabilities. Common feature categories include core functionality (what the extension primarily does), user interface elements (popup, options page, full page), platform integrations (sync across devices, native app companion), automation capabilities, customization options, and data export features.
 
-Identify competitors who achieve similar functionality with fewer permissions. These extensions have a trust advantage that you can potentially replicate. Consider whether you can design your extension to minimize permissions without sacrificing core functionality.
+The feature matrix immediately reveals several strategic insights. Features present across all competitors represent table stakes—minimum requirements users expect. Features offered by only one or two competitors represent potential differentiators, though they may also indicate feature bloat that users don't actually want. The most valuable insights come from features nobody offers—these represent potential blue ocean opportunities where you could be the first mover.
 
-If your extension requires broad permissions, document why you need each one and communicate this transparently in your description. Users appreciate honesty and are more willing to grant permissions when they understand the rationale.
-
----
-
-## Pricing Comparison {#pricing-comparison}
-
-Understanding how competitors price their extensions informs your monetization strategy and helps you find viable positioning. The Chrome extension market supports various pricing models including free with ads, freemium, one-time purchases, and subscriptions.
-
-Research each competitor's pricing model and specific pricing tiers. Note whether they offer free trials, what features the free version includes, and how they structure paid tiers. Pay attention to whether competitors bundle features or sell them individually.
-
-Look for pricing gaps in the market. If most competitors charge premium prices, a well-executed free or low-cost alternative can capture price-sensitive users. Conversely, if the market is flooded with free extensions, a premium offering with superior quality and support can differentiate through value rather than price.
-
-Remember that pricing is not just about revenue — it is also a positioning signal. Free extensions often struggle with perceived quality, while paid extensions must deliver clear value to justify the cost.
+Be thorough in your feature analysis. Visit each competitor's Chrome Web Store listing, read their documentation, and if possible, install and test their extensions personally. Pay special attention to features mentioned prominently in their marketing versus features buried in settings. The prominence given to features often indicates their perceived value to users.
 
 ---
 
-## Update Frequency as Quality Signal {#update-frequency}
+## Review Mining: Competitor 1-Star Reviews as Feature Roadmap {#review-mining}
 
-Regular updates signal active development and commitment to users. Extensions that have not been updated in months or years appear abandoned, even if they still function. Analyzing competitor update histories reveals how active the market is and sets expectations for your own release cadence.
+Your competitors' negative reviews are a goldmine of product insights. Users who take the time to write 1-star reviews are explicitly telling you what they want but aren't getting. This feedback directly informs your feature roadmap and helps you avoid repeating others' mistakes.
 
-Check the "Last updated" date on competitor Chrome Web Store listings. Look for patterns in update frequency — some competitors release minor updates weekly, while others push major releases quarterly. Also note whether updates correspond to Chrome browser updates, which indicates the developer is maintaining compatibility.
+Systematically collect and analyze 1-star and 2-star reviews for each major competitor. Look for recurring complaints—themes that appear across multiple reviews indicate widespread pain points. Common categories include missing features users expected, performance issues and bugs, poor user interface design, privacy concerns, subscription or pricing problems, and lack of customer support.
 
-Extensions with consistent update histories demonstrate active maintenance, which influences user confidence. If your competitors update frequently, you will need to match that pace to appear competitive. If few competitors update regularly, maintaining a consistent release schedule can differentiate you as a reliable choice.
+Create a categorized list of complaints, grouping similar issues together. This becomes your "avoid list"—features or design choices to steer clear of. More importantly, look for requests for features or improvements that no competitor currently provides. These unmet needs represent your potential differentiation opportunities.
+
+For example, if multiple competitors receive complaints about poor offline support, and no extension offers robust offline functionality, you have a clear opportunity to differentiate. If users consistently request better customization options but all competitors offer limited configurability, that's another gap to exploit.
+
+Don't ignore positive reviews either. 5-star reviews reveal what competitors do well and what users value most. However, negative reviews are more actionable for finding market gaps, as they represent users who were willing to abandon a product rather than settle for less than ideal.
+
+---
+
+## Permission Analysis: The Trust Advantage {#permission-analysis}
+
+Chrome extension permissions significantly impact user trust and installation rates. Extensions requesting fewer, more targeted permissions often outperform those asking for broad access. Analyzing competitor permission requirements reveals opportunities to build trust through minimalism.
+
+Review each competitor's manifest.json file to see exactly what permissions they request. The Chrome Web Store listing also displays permission warnings that users see before installation. Pay attention to particularly sensitive permissions like access to all data on all websites, cookies, browsing history, andtabs API.
+
+The ideal competitive positioning often involves requesting the minimum permissions necessary to deliver your core value. If competitors in your space request broad permissions, a leaner permission profile becomes a significant marketing advantage. Users increasingly prioritize privacy, and extensions that demonstrate restraint in data access earn higher trust.
+
+Document the permissions each competitor requests and map them against their functionality. Look for overreach—extensions that request permissions seemingly unrelated to their core purpose. This creates an opportunity for you to explain, in your marketing, exactly why you need each permission you request.
+
+Consider also examining whether competitors use Manifest V3 properly, avoiding powerful but potentially abusive APIs. Extensions that demonstrate modern, privacy-conscious development practices earn credibility with increasingly sophisticated users.
+
+---
+
+## Pricing Comparison and Market Positioning {#pricing-comparison}
+
+Understanding how competitors monetize their extensions informs your own pricing strategy. Analyze whether competitors offer free versions, freemium models, premium subscriptions, one-time purchases, or ads. Note pricing tiers and what features each tier includes.
+
+Pricing analysis reveals market expectations and willingness to pay. If competitors successfully charge $5 per month for similar functionality, you have a benchmark for your own pricing. If no competitors charge for premium features, entering as a paid extension requires more education but may signal higher quality.
+
+Look for pricing gaps in the market. Some niches accept premium pricing readily; others are intensely price-sensitive. Your competitive analysis should identify which category your target market falls into. You can find more detailed guidance on pricing strategies in our [Chrome Extension Pricing Strategy guide](/chrome-extension-guide/2025/02/26/chrome-extension-pricing-strategy-what-to-charge/).
+
+Also examine competitors' monetization transitions—have any moved from free to freemium, or changed their pricing? User reactions to these changes provide valuable insights into price sensitivity and feature expectations.
+
+---
+
+## Update Frequency as a Quality Signal {#update-frequency}
+
+An extension's update history reveals developer commitment and product quality. Extensions that receive regular updates signal active maintenance, bug fixes, and ongoing improvement. Infrequent updates may indicate abandoned products or developers who prioritize other work.
+
+Check each competitor's Chrome Web Store listing for version history and update frequency. Extensions updated within the past week demonstrate active development. Those with last updates months or years ago may be abandoned—opportunities for you to capture displaced users.
+
+Beyond frequency, examine the nature of updates. Major version changes suggest significant feature development. Small incremental updates indicate ongoing maintenance. Look for patterns in changelogs to understand what competitors prioritize and how they respond to user feedback.
+
+This analysis informs your development roadmap too. You can commit to an update cadence that demonstrates comparable or superior commitment. In your marketing, emphasizing recent updates and active development differentiates you from stale competitors.
 
 ---
 
 ## User Count and Growth Estimation {#user-count-estimation}
 
-While the Chrome Web Store does not display exact user counts, you can estimate relative popularity through review counts and ratings. This estimation helps you understand market size and establish baseline expectations for your own growth.
+While exact user counts aren't publicly available beyond what's displayed on CWS listings, you can estimate competitor market share and growth trajectories. The install count displayed on each listing, combined with rating counts, provides reasonable benchmarks for market sizing.
 
-Review count correlates with user base size, though the relationship is not perfectly linear. Extensions with hundreds of thousands of reviews have millions of users, while those with hundreds of reviews may have only thousands. Use these proxies to estimate the total addressable market for your category.
+Install counts in the millions indicate mature, established products with significant brand recognition. Install counts in the tens of thousands suggest mid-market opportunities. Install counts in the thousands or lower may indicate either new entries or failed products—distinguish between them by checking update dates.
 
-Look for growth trends by checking whether top competitors have added reviews recently. An extension gaining new reviews quickly indicates a growing market. Stagnant review counts suggest a mature or declining market.
+Look at the relationship between install count and rating count. Extensions with millions of installs but relatively few ratings may have inflated numbers from bundling or promos. More importantly, the ratio of ratings to installs indicates user engagement—extensions where 5-10% of users leave reviews have highly engaged user bases.
 
-Estimate your potential market share by considering how you will compete against established players. In competitive categories, capturing even 1% of the market requires significant differentiation or resources. In less competitive spaces, you may capture meaningful share more easily.
-
----
-
-## Chrome Extension CRX Source Analysis {#crx-analysis}
-
-Advanced competitive analysis involves examining the actual extension files of competitors. Chrome extensions are distributed as CRX files, which you can download and inspect to understand implementation details, hidden features, and technical approaches.
-
-Use CRX extraction tools to download competitor extensions. Analyze their source code to understand how they implement core features. Look for techniques you can learn from, unused code that suggests planned features, and technical debt that might indicate maintenance challenges.
-
-This analysis requires technical skill but provides unique insights that you cannot get from external observation alone. You might discover that competitors are using outdated APIs, have significant performance issues in their code, or are secretly planning features based on commented-out code.
+Estimating growth requires examining install count trends over time. While CWS doesn't provide historical data directly, web archives and third-party tools can reveal historical install counts, showing you which competitors are growing, stable, or declining.
 
 ---
 
-## Tab Suspender Pro Competitive Landscape Analysis {#tab-suspender-pro-analysis}
+## Chrome Extension CRX Source Analysis {#crx-source-analysis}
 
-To illustrate competitive analysis in practice, consider the tab management category where [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) operates. This category includes numerous extensions that suspend inactive tabs to save memory and improve browser performance.
+Advanced competitive analysis involves examining the actual source code of competitor extensions. Chrome extensions are distributed as CRX files, which are essentially ZIP archives that can be downloaded and extracted for inspection.
 
-Analyzing Tab Suspender Pro's competitive landscape reveals several patterns. Many competitors offer basic tab suspension but lack advanced features like customizable suspension rules, whitelist management, or keyboard shortcuts. Some competitors request broad permissions that raise privacy concerns. Pricing varies from completely free with ads to premium subscriptions.
+You can obtain CRX files from the Chrome Web Store using various tools or browser extensions designed for this purpose. Once extracted, examine the manifest.json to understand the extension's architecture, permissions, and declared capabilities. Look at the background scripts to understand data handling and event-driven architecture.
 
-By studying this landscape, Tab Suspender Pro identified opportunities to differentiate through granular control options, minimal permissions, and a clean user interface. The extension positions itself as the privacy-conscious, user-friendly alternative to more complex competitors.
+Source analysis reveals technical implementation details that aren't visible in the UI. How do competitors handle storage—localStorage, chrome.storage, or external databases? Do they use content scripts efficiently? Are there obvious performance optimization opportunities they missed?
 
-This example demonstrates how competitive analysis directly informs product strategy and positioning decisions.
+This level of analysis requires technical expertise but provides significant competitive advantages. You can identify technical weaknesses to exploit, learn from superior implementations, and ensure your own architecture avoids known anti-patterns.
 
 ---
 
-## Finding Blue Ocean Niches {#blue-ocean-niches}
+## Tab Suspender Pro: A Competitive Landscape Case Study {#tab-suspender-pro-case-study}
 
-Blue ocean strategy involves finding market spaces with little competition rather than competing crowded red oceans. For Chrome extensions, this means identifying underserved user needs or creating new categories entirely.
+Let's apply these principles to a real-world example. Tab suspenders—extensions that reduce memory usage by suspending inactive tabs—represent a competitive niche with multiple players. Examining this landscape demonstrates competitive analysis in action.
 
-Look for signals of underserved needs in competitor reviews and forums. Users frequently request features that no one provides. They express frustrations with existing solutions that no one has solved well. They mention use cases that current extensions do not address.
+The Tab Suspender Pro extension has carved out a position by focusing specifically on memory optimization and battery savings. Competing products like The Great Suspender, Tab Wrangler, and LazyTab offer similar core functionality but with different emphasis. Some prioritize simplicity; others offer advanced automation rules.
 
-Consider emerging trends that create new opportunities. Changes in Chrome's APIs, new web standards, or shifts in how people work can all create demand for new types of extensions. Being early to emerging trends positions you as the established player as the market grows.
+Analyzing this competitive landscape reveals differentiation opportunities. Tab Suspender Pro differentiates through its focus on battery optimization specifically for laptop users—a more specific target market than generic tab management. Competitors that offer broader functionality may have spread themselves thin, creating an opportunity for deeper specialization.
 
-Blue ocean niches often require user education since no existing solutions have defined the category. This is more challenging but can create strong brand loyalty if you execute well.
+Review mining in this category reveals common complaints: some competitors drain battery themselves, others suspend tabs too aggressively, and many lack fine-grained control over suspension behavior. These pain points inform Tab Suspender Pro's feature development, ensuring it addresses genuine user needs rather than assumed ones.
+
+---
+
+## Finding Blue Ocean Niches {#finding-blue-ocean-niches}
+
+The ultimate goal of competitive analysis is identifying uncontested market space—blue ocean niches where demand exists but competition is limited. These opportunities offer higher margins, easier user acquisition, and sustainable competitive advantages.
+
+Blue ocean niches often emerge at the intersection of existing categories. Look for underserved user segments within larger markets. Consider geographic or demographic niches that international competitors ignore. Identify emerging use cases that established players are too slow to address.
+
+Technical changes create blue ocean opportunities. When Chrome announces Manifest V3 changes, many developers scramble to maintain compatibility while others see opportunity—extensions that embrace new APIs and modern architectures can capture users frustrated with legacy solutions.
+
+The most valuable blue oceans often involve combining features from different categories in novel ways. A tab manager combined with note-taking, a productivity tool integrated with specific third-party services, or an accessibility feature enhanced for a particular use case can create defensible differentiation.
 
 ---
 
 ## Building Your Differentiation Strategy {#differentiation-strategy}
 
-With competitive intelligence in hand, you can now build a differentiation strategy that positions your extension for success. Differentiation should be meaningful to users, defensible against competitors, and sustainable over time.
+With competitive analysis complete, you can articulate a clear differentiation strategy. This isn't just about being different—it's about being different in ways that matter to users and are difficult for competitors to replicate.
 
-Start by identifying your unique value proposition — the specific benefit you offer that competitors do not. This could be a unique feature, superior performance, better usability, stronger privacy, or a combination of factors. Your value proposition should resonate with your target users and address their most pressing needs.
+Your differentiation should address specific gaps identified in your analysis. If review mining revealed that users want feature X that nobody offers, your positioning centers on delivering feature X excellently. If permission analysis showed that all competitors request excessive permissions, your trust-focused positioning becomes a competitive advantage.
 
-Map your differentiation across all aspects of your extension. Your description should clearly communicate your unique value. Your feature set should deliver on your promise. Your pricing should reflect your positioning. Your updates should reinforce your commitment to users.
+Document your unique value proposition in a single, clear sentence. This becomes the foundation for all marketing, from your Chrome Web Store listing to your website and user communications. Every feature you build, every piece of content you create, should reinforce this differentiation.
 
-Document your differentiation strategy and use it to guide all product decisions. When evaluating features, ask whether they reinforce or dilute your positioning. When writing marketing copy, ensure consistency with your core message.
+Remember that differentiation must be sustainable. Features can be copied; brand positioning takes longer to build but becomes more defensible over time. Focus on building genuine value that serves your users better than alternatives.
 
 ---
 
 ## Conclusion
 
-Competitive analysis is not a one-time exercise but an ongoing discipline. The Chrome extension market evolves constantly, with new competitors, shifting user expectations, and technological changes. Regularly revisit your competitive analysis to identify emerging threats and opportunities.
+Competitive analysis transforms extension development from guesswork into strategic planning. By systematically examining the Chrome Web Store, analyzing competitor features and reviews, understanding permission implications, and estimating market dynamics, you position yourself for sustainable success.
 
-By systematically studying competitors, mining user feedback, and understanding market dynamics, you position your extension for sustainable success. The insights gained from competitive analysis inform every aspect of your product strategy, from feature prioritization to pricing to marketing.
+The techniques in this guide apply whether you're validating a new extension idea, repositioning an existing product, or seeking growth opportunities. Start with broad market scanning, drill into specific competitors, and synthesize your findings into actionable strategy.
 
-Remember that your goal is not to copy competitors but to understand them well enough to serve users better in ways they cannot or do not. Differentiation built on genuine user value is the foundation of lasting competitive advantage.
-
----
-
-## Related Resources
-
-- [Chrome Extension Monetization Strategies](/chrome-extension-guide/docs/monetization/)
-- [Extension Pricing Guide](/chrome-extension-guide/docs/pricing-guide/)
-- [CWS Store Listing Optimization](/chrome-extension-guide/docs/cws-optimization/)
-- [Extension Monetization Playbook](/chrome-extension-guide/docs/extension-monetization-playbook/)
+For more on monetizing your differentiated extension, explore our [Chrome Extension Monetization Strategies guide](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). To optimize your Chrome Web Store listing once you're ready to launch, check our [CWS Listing Optimization guide](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/). For deeper insights into building a sustainable business model, see our [extension monetization playbook](/chrome-extension-guide/docs/guides/extension-monetization/).
 
 ---
 
-*Built by theluckystrike at zovo.one*
+*Built by theluckystrike at [zovo.one](https://zovo.one)*
