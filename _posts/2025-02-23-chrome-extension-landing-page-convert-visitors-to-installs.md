@@ -6,6 +6,7 @@ date: 2025-02-23
 categories: [guides, marketing]
 tags: [landing-page, extension-marketing, conversion-optimization, extension-website, chrome-extension-promotion]
 author: theluckystrike
+published: true
 ---
 
 # Chrome Extension Landing Page — Convert Visitors to Installs
