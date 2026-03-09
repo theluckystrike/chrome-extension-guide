@@ -342,3 +342,6 @@ For more Chrome extension resources, explore the full [Chrome Extension Guide](h
 ---
 
 *This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

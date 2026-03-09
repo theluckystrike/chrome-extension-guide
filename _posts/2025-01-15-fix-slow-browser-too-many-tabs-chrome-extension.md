@@ -251,3 +251,6 @@ Take control of your browser performance today. Install Tab Suspender Pro, follo
 ---
 
 *For more tips on browser optimization and Chrome extension recommendations, explore our other guides on the Chrome Extension Guide website.*
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
