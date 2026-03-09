@@ -654,4 +654,4 @@ For more information on setting up your development environment and CI pipelines
 
 ---
 
-*This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and patterns, visit [zovo.one](https://zovo.one).*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
