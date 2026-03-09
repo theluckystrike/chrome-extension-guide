@@ -1,538 +1,394 @@
----
-layout: default
-title: "Chrome Extension Desktop Capture — Developer Guide"
-description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/desktop-capture/"
----
 # Chrome Extension Desktop Capture API Guide
 
-The `chrome.desktopCapture` API enables Chrome Extensions to capture screen content, windows, browser tabs, and audio from the user's desktop. This guide covers building screenshot tools, screen recorders, and real-time streaming extensions.
+## Overview
 
-## API Overview {#api-overview}
+The Chrome Desktop Capture API (`chrome.desktopCapture`) enables extensions to capture screen contents, windows, browser tabs, or audio streams. This API is essential for building screenshots, screen recordings, and collaborative sharing features.
 
-The `chrome.desktopCapture` API provides methods to capture the user's screen or individual windows and convert them into MediaStream objects for processing, recording, or streaming.
-
-### Required Permissions {#required-permissions}
-
-Add the `desktopCapture` permission to your `manifest.json`:
+## Required Permissions
 
 ```json
 {
-  "name": "My Capture Extension",
-  "version": "1.0",
-  "permissions": ["desktopCapture"],
-  "host_permissions": ["<all_urls>"]
+  "manifest_version": 3,
+  "name": "Screen Capture Extension",
+  "permissions": ["desktopCapture"]
 }
 ```
 
-The `host_permissions` is required when streaming to remote servers via WebRTC. For local processing only, you can omit it.
+## Source Types
 
-## Core Methods {#core-methods}
+### Screen (`desktopCaptureSourceType.SCREEN`)
 
-### chooseDesktopMedia() {#choosedesktopmedia}
-
-Displays the native Chrome source picker dialog for users to select a screen, window, or tab to share:
+Captures the entire display.
 
 ```javascript
-chrome.desktopCapture.chooseDesktopMedia(
-  sources: string[],    // Source types to display
-  callback: function    // Receives streamId or null
-): number;             // Returns request ID for cancellation
+async function captureScreen() {
+  const sources = await chrome.desktopCapture.getDesktopSources({
+    types: ['screen'],
+    thumbnailSize: { width: 320, height: 180 }
+  });
+  return sources[0]?.id;
+}
 ```
 
-### cancelChooseDesktopMedia() {#cancelchoosedesktopmedia}
+### Window (`desktopCaptureSourceType.WINDOW`)
 
-Programmatically dismiss the source picker:
+Captures a single application window.
 
 ```javascript
-const requestId = chrome.desktopCapture.chooseDesktopMedia(
-  ['screen', 'window'],
-  (streamId) => { /* handle result */ }
-);
-chrome.desktopCapture.cancelChooseDesktopMedia(requestId);
+async function captureWindow() {
+  const sources = await chrome.desktopCapture.getDesktopSources({
+    types: ['window'],
+    thumbnailSize: { width: 320, height: 180 }
+  });
+  return sources.map(s => ({ id: s.id, name: s.name }));
+}
 ```
 
-## Source Types {#source-types}
+### Tab (`desktopCaptureSourceType.TAB`)
 
-### screen - Full Screen Capture {#screen-full-screen-capture}
-
-Captures entire displays or specific monitors:
+Captures a browser tab.
 
 ```javascript
-function captureFullScreen() {
-  chrome.desktopCapture.chooseDesktopMedia(
-    ['screen'],
-    async (streamId) => {
-      if (!streamId) {
-        console.log('User cancelled');
-        return;
-      }
+async function captureTab(tabId) {
+  return navigator.mediaDevices.getUserMedia({
+    video: { mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: tabId } }
+  });
+}
+```
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: streamId,
-            minWidth: 1280,
-            maxWidth: 1920,
-            minHeight: 720,
-            maxHeight: 1080
-          }
-        }
-      });
+### Audio (`desktopCaptureSourceType.AUDIO`)
 
-      console.log('Screen capture started:', stream);
-    }
+Captures system or tab audio.
+
+```javascript
+async function captureWithAudio(tabId) {
+  return navigator.mediaDevices.getUserMedia({
+    audio: { mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: tabId } },
+    video: { mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: tabId } }
+  });
+}
+```
+
+## Choosing Capture Sources
+
+### chooseDesktopMedia
+
+```javascript
+async function startCapture() {
+  const streamId = await chrome.desktopCapture.chooseDesktopMedia(
+    ['screen', 'window', 'tab']
   );
+  return streamId || null;
 }
 ```
 
-### window - Application Window Capture {#window-application-window-capture}
-
-Restricts the picker to show only application windows:
+### Custom Thumbnail Size
 
 ```javascript
-function captureWindow() {
-  chrome.desktopCapture.chooseDesktopMedia(
-    ['window'],
-    async (streamId) => {
-      if (!streamId) return;
-
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: streamId
-          }
-        }
-      });
-
-      console.log('Window capture started:', stream);
-    }
-  );
+async function getSources() {
+  return chrome.desktopCapture.getDesktopSources({
+    types: ['screen', 'window', 'tab'],
+    thumbnailSize: { width: 640, height: 360 }
+  });
 }
 ```
 
-### tab - Browser Tab Capture {#tab-browser-tab-capture}
+## Canceling Capture
 
-Captures browser tabs with optional tab audio:
+### cancelChooseDesktopMedia
 
 ```javascript
-function captureTab() {
-  chrome.desktopCapture.chooseDesktopMedia(
-    ['tab'],
-    async (streamId) => {
-      if (!streamId) return;
+let currentId = null;
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          mandatory: {
-            chromeMediaSource: 'tab',
-            chromeMediaSourceId: streamId
-          }
-        }
-      });
+async function requestCapture() {
+  currentId = await chrome.desktopCapture.chooseDesktopMedia(['screen', 'window']);
+  return currentId;
+}
 
-      console.log('Tab capture started');
-    }
-  );
+function cancelCapture() {
+  if (currentId) {
+    chrome.desktopCapture.cancelChooseDesktopMedia(currentId);
+    currentId = null;
+  }
+}
+
+// Auto-cancel with timeout
+function captureWithTimeout(ms = 30000) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('Timeout')), ms);
+    chrome.desktopCapture.chooseDesktopMedia(['screen'])
+      .then(id => { clearTimeout(timer); resolve(id); })
+      .catch(e => { clearTimeout(timer); reject(e); });
+  });
 }
 ```
 
-### audio - System and Tab Audio {#audio-system-and-tab-audio}
+## Converting to MediaStream
 
-Capture system or tab audio (Chrome 74+):
-
-```javascript
-function captureWithAudio() {
-  chrome.desktopCapture.chooseDesktopMedia(
-    ['screen', 'window', 'tab', 'audio'],
-    async (streamId) => {
-      if (!streamId) return;
-
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: streamId
-          }
-        },
-        video: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: streamId
-          }
-        }
-      });
-
-      console.log('Audio captured:', stream.getAudioTracks()[0].label);
-    }
-  );
-}
-```
-
-## Converting Stream ID to MediaStream {#converting-stream-id-to-mediastream}
-
-The `chooseDesktopMedia()` returns a stream ID string that must be passed to `getUserMedia()`:
-
-### Basic Conversion {#basic-conversion}
+### Basic getUserMedia
 
 ```javascript
-async function getMediaStream(streamId) {
-  return await navigator.mediaDevices.getUserMedia({
+async function getDisplayStream(streamId) {
+  return navigator.mediaDevices.getUserMedia({
+    audio: false,
     video: {
       mandatory: {
         chromeMediaSource: 'desktop',
-        chromeMediaSourceId: streamId
+        chromeMediaSourceId: streamId,
+        minWidth: 1280, maxWidth: 1920,
+        minHeight: 720, maxHeight: 1080
       }
     }
   });
 }
 ```
 
-### Working with Tracks {#working-with-tracks}
+### With Audio
 
 ```javascript
-function handleStream(stream) {
-  const videoTrack = stream.getVideoTracks()[0];
-  const audioTrack = stream.getAudioTracks()[0];
-
-  console.log('Video settings:', videoTrack.getSettings());
-
-  videoTrack.onended = () => {
-    console.log('Capture ended');
-    cleanup(stream);
-  };
-
-  return { videoTrack, audioTrack };
-}
-```
-
-## Building a Screenshot Extension {#building-a-screenshot-extension}
-
-### Manifest Configuration {#manifest-configuration}
-
-```json
-{
-  "name": "Screenshot Pro",
-  "version": "1.0",
-  "permissions": ["desktopCapture", "offscreen", "downloads"],
-  "action": {
-    "default_icon": "icon.png",
-    "default_title": "Take Screenshot"
-  },
-  "background": {
-    "service_worker": "background.js"
-  }
-}
-```
-
-### Background Script (background.js) {#background-script-backgroundjs}
-
-```javascript
-chrome.action.onClicked.addListener(async (tab) => {
-  const streamId = await new Promise((resolve) => {
-    chrome.desktopCapture.chooseDesktopMedia(
-      ['screen', 'window', 'tab'],
-      (id) => resolve(id)
-    );
-  });
-
-  if (!streamId) return;
-
-  await chrome.offscreen.createDocument({
-    url: 'offscreen.html',
-    reasons: ['USER_MEDIA'],
-    justification: 'Capture and save screenshot'
-  });
-
-  chrome.runtime.sendMessage({
-    type: 'CAPTURE_SCREENSHOT',
-    streamId: streamId
-  });
-});
-```
-
-### Offscreen Document (offscreen.html) {#offscreen-document-offscreenhtml}
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="offscreen.js"></script>
-</head>
-<body>
-  <video id="video" autoplay></video>
-  <canvas id="canvas"></canvas>
-</body>
-</html>
-```
-
-### Offscreen Script (offscreen.js) {#offscreen-script-offscreenjs}
-
-```javascript
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === 'CAPTURE_SCREENSHOT') {
-    captureScreenshot(message.streamId);
-  }
-});
-
-async function captureScreenshot(streamId) {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    video: {
-      mandatory: {
-        chromeMediaSource: 'desktop',
-        chromeMediaSourceId: streamId
-      }
-    }
-  });
-
-  const video = document.getElementById('video');
-  const canvas = document.getElementById('canvas');
-
-  video.srcObject = stream;
-
-  video.onloadedmetadata = () => {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
-
-    canvas.toBlob(async (blob) => {
-      const url = URL.createObjectURL(blob);
-
-      await chrome.downloads.download({
-        url: url,
-        filename: `screenshot-${Date.now()}.png`,
-        saveAs: true
-      });
-
-      stream.getTracks().forEach(track => track.stop());
-      URL.revokeObjectURL(url);
-      window.close();
-    }, 'image/png');
-  };
-}
-```
-
-## Building a Screen Recording Extension {#building-a-screen-recording-extension}
-
-### Background Script {#background-script}
-
-```javascript
-chrome.action.onClicked.addListener(async (tab) => {
-  const streamId = await new Promise((resolve) => {
-    chrome.desktopCapture.chooseDesktopMedia(
-      ['screen', 'window', 'tab', 'audio'],
-      (id) => resolve(id)
-    );
-  });
-
-  if (!streamId) return;
-
-  await chrome.offscreen.createDocument({
-    url: 'recorder.html',
-    reasons: ['USER_MEDIA'],
-    justification: 'Record screen capture'
-  });
-
-  chrome.runtime.sendMessage({
-    type: 'START_RECORDING',
-    streamId: streamId
-  });
-});
-
-chrome.commands.onCommand.addListener((command) => {
-  if (command === 'stop-recording') {
-    chrome.runtime.sendMessage({ type: 'STOP_RECORDING' });
-  }
-});
-```
-
-### Recording Logic (recorder.html) {#recording-logic-recorderhtml}
-
-```javascript
-let mediaRecorder;
-let recordedChunks = [];
-
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === 'START_RECORDING') {
-    startRecording(message.streamId);
-  } else if (message.type === 'STOP_RECORDING') {
-    mediaRecorder?.stop();
-  }
-});
-
-async function startRecording(streamId) {
-  const stream = await navigator.mediaDevices.getUserMedia({
+async function getStreamWithAudio(streamId) {
+  return navigator.mediaDevices.getUserMedia({
     audio: {
       mandatory: {
         chromeMediaSource: 'desktop',
-        chromeMediaSourceId: streamId
+        chromeMediaSourceId: streamId,
+        echoCancellation: true
       }
-    }
-  });
-
-  const displayStream = await navigator.mediaDevices.getUserMedia({
+    },
     video: {
       mandatory: {
         chromeMediaSource: 'desktop',
-        chromeMediaSourceId: streamId
+        chromeMediaSourceId: streamId,
+        maxWidth: 1920, maxHeight: 1080
       }
     }
   });
+}
+```
 
-  const combinedStream = new MediaStream([
-    ...displayStream.getVideoTracks(),
-    ...stream.getAudioTracks()
-  ]);
+### Capture Manager Class
 
-  mediaRecorder = new MediaRecorder(combinedStream, {
-    mimeType: 'video/webm;codecs=vp9'
-  });
-
-  mediaRecorder.ondataavailable = (event) => {
-    if (event.data.size > 0) {
-      recordedChunks.push(event.data);
+```javascript
+class CaptureManager {
+  constructor() { this.stream = null; }
+  
+  async start(sources = ['screen', 'window', 'tab']) {
+    const id = await chrome.desktopCapture.chooseDesktopMedia(sources);
+    if (!id) return null;
+    
+    this.stream = await navigator.mediaDevices.getUserMedia({
+      audio: { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id } },
+      video: { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id, maxFrameRate: 30 } }
+    });
+    
+    this.stream.getVideoTracks()[0].onended = () => { this.stream = null; };
+    return this.stream;
+  }
+  
+  stop() {
+    if (this.stream) {
+      this.stream.getTracks().forEach(t => t.stop());
+      this.stream = null;
     }
-  };
-
-  mediaRecorder.onstop = saveRecording;
-  mediaRecorder.start(1000);
-}
-
-async function saveRecording() {
-  const blob = new Blob(recordedChunks, { type: 'video/webm' });
-  const url = URL.createObjectURL(blob);
-
-  await chrome.downloads.download({
-    url: url,
-    filename: `recording-${Date.now()}.webm`,
-    saveAs: true
-  });
-
-  URL.revokeObjectURL(url);
-  window.close();
-}
-```
-
-## Error Handling and Best Practices {#error-handling-and-best-practices}
-
-### Proper Error Handling {#proper-error-handling}
-
-```javascript
-async function safeCapture(sourceTypes) {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    throw new Error('Media capture not supported');
-  }
-
-  return new Promise((resolve, reject) => {
-    chrome.desktopCapture.chooseDesktopMedia(
-      sourceTypes,
-      async (streamId) => {
-        if (!streamId) {
-          reject(new Error('User cancelled'));
-          return;
-        }
-
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-              mandatory: {
-                chromeMediaSource: 'desktop',
-                chromeMediaSourceId: streamId
-              }
-            }
-          });
-          resolve(stream);
-        } catch (error) {
-          reject(error);
-        }
-      }
-    );
-  });
-}
-```
-
-### Resource Cleanup {#resource-cleanup}
-
-```javascript
-function cleanupStream(stream) {
-  if (!stream) return;
-
-  stream.getTracks().forEach(track => {
-    track.stop();
-    console.log(`Stopped ${track.kind} track`);
-  });
-}
-
-async function captureWithCleanup() {
-  let stream = null;
-
-  try {
-    const streamId = await getStreamId();
-    stream = await getMediaStream(streamId);
-    // Process stream...
-  } finally {
-    cleanupStream(stream);
   }
 }
 ```
 
-### Handling User Cancellation {#handling-user-cancellation}
+## Screenshot Extension
+
+### Manifest
+
+```json
+{
+  "manifest_version": 3,
+  "name": "Quick Screenshot",
+  "permissions": ["desktopCapture", "downloads"],
+  "action": { "default_title": "Take Screenshot" },
+  "background": { "service_worker": "background.js" }
+}
+```
+
+### Background Script
 
 ```javascript
-chrome.desktopCapture.chooseDesktopMedia(
-  ['screen', 'window'],
-  (streamId) => {
-    if (!streamId) {
-      console.log('User cancelled - no action needed');
-      return;
+chrome.action.onClicked.addListener(async () => {
+  const id = await chrome.desktopCapture.chooseDesktopMedia(['screen', 'window', 'tab']);
+  if (!id) return;
+  
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id } }
+  });
+  
+  const video = document.createElement('video');
+  video.srcObject = stream;
+  await video.play();
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  
+  stream.getTracks().forEach(t => t.stop());
+  
+  canvas.toBlob(async blob => {
+    const ts = new Date().toISOString().replace(/[:.]/g, '-');
+    await chrome.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: `screenshot-${ts}.png`,
+      saveAs: true
+    });
+  }, 'image/png');
+});
+```
+
+### Reusable Class
+
+```javascript
+class ScreenshotCapture {
+  async capture(type = 'all') {
+    const types = { screen: ['screen'], window: ['window'], tab: ['tab'], all: ['screen', 'window', 'tab'] }[type];
+    const id = await chrome.desktopCapture.chooseDesktopMedia(types);
+    if (!id) return null;
+    
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id } }
+    });
+    
+    const v = document.createElement('video');
+    v.srcObject = stream;
+    await new Promise(r => { v.onloadedmetadata = r; v.play(); });
+    
+    const c = document.createElement('canvas');
+    c.width = v.videoWidth; c.height = v.videoHeight;
+    c.getContext('2d').drawImage(v, 0, 0);
+    stream.getTracks().forEach(t => t.stop());
+    return c;
+  }
+  
+  async save(canvas, name) {
+    return new Promise(r => {
+      canvas.toBlob(async b => {
+        await chrome.downloads.download({
+          url: URL.createObjectURL(b),
+          filename: name || `screenshot-${Date.now()}.png`,
+          saveAs: true
+        });
+        r();
+      }, 'image/png');
+    });
+  }
+}
+```
+
+## Screen Recording Extension
+
+### Recorder Class
+
+```javascript
+class ScreenRecorder {
+  constructor() { this.chunks = []; this.recorder = null; this.stream = null; }
+  
+  async start(audio = true) {
+    const types = audio ? ['screen', 'window', 'tab', 'audio'] : ['screen', 'window', 'tab'];
+    const id = await chrome.desktopCapture.chooseDesktopMedia(types);
+    if (!id) return;
+    
+    this.stream = await navigator.mediaDevices.getUserMedia({
+      audio: audio ? { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id } } : false,
+      video: { mandatory: { chromeMediaSource: 'desktop', chromeMediaSourceId: id, maxWidth: 1920, maxFrameRate: 30 } }
+    });
+    
+    const mime = ['video/webm;codecs=vp9', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m)) || {};
+    this.recorder = new MediaRecorder(this.stream, mime);
+    this.chunks = [];
+    this.recorder.ondataavailable = e => { if (e.data.size) this.chunks.push(e.data); };
+    this.recorder.start(1000);
+  }
+  
+  async stop() {
+    if (!this.recorder || this.recorder.state === 'inactive') return;
+    this.recorder.stop();
+    this.stream.getTracks().forEach(t => t.stop());
+    
+    const blob = new Blob(this.chunks, { type: 'video/webm' });
+    await chrome.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: `recording-${Date.now()}.webm`,
+      saveAs: true
+    });
+    this.chunks = [];
+  }
+}
+```
+
+### Toggle Button
+
+```javascript
+let recorder = null;
+chrome.action.onClicked.addListener(async () => {
+  if (recorder?.recorder?.state === 'recording') {
+    await recorder.stop();
+    recorder = null;
+  } else {
+    recorder = new ScreenRecorder();
+    await recorder.start(true);
+  }
+});
+```
+
+## Best Practices
+
+### Request Minimum Required Sources
+
+```javascript
+// Good
+await chrome.desktopCapture.chooseDesktopMedia(['screen']);
+// Avoid
+await chrome.desktopCapture.chooseDesktopMedia(['screen', 'window', 'tab', 'audio']);
+```
+
+### Handle Errors Gracefully
+
+```javascript
+try {
+  const stream = await getDisplayStream(id);
+  stream.getVideoTracks()[0].onended = cleanup;
+  return stream;
+} catch (e) {
+  if (e.name === 'NotAllowedError') console.log('Denied');
+  else if (e.name === 'NotFoundError') console.log('No sources');
+  throw e;
+}
+```
+
+### Optimize Performance
+
+```javascript
+// Limit resolution and frame rate
+const constraints = {
+  video: {
+    mandatory: {
+      chromeMediaSource: 'desktop',
+      chromeMediaSourceId: id,
+      maxWidth: 1920, maxHeight: 1080, maxFrameRate: 30
     }
-
-    processStream(streamId);
   }
-);
+};
 ```
 
-## Platform-Specific Considerations {#platform-specific-considerations}
+## Platform Limitations
 
-### macOS Requirements {#macos-requirements}
+- **System audio**: Windows and macOS only
+- **Tab audio**: All platforms (tab must be audible)
+- Enterprise environments may block capture
 
-Users must grant Screen Recording permission in System Preferences > Privacy & Security > Screen Recording. Without this permission, the picker shows no sources.
+## Conclusion
 
-### Multi-Monitor Support {#multi-monitor-support}
+The Chrome Desktop Capture API enables powerful screen capture extensions. Key points:
 
-Chrome's picker automatically shows all available screens in multi-monitor setups. Users can select which monitor to capture.
+- Use `chooseDesktopMedia()` for user source selection
+- Convert stream IDs to MediaStream via `getUserMedia()`
+- Handle stream lifecycle and errors properly
+- Request only necessary permissions
 
-### Linux Considerations {#linux-considerations}
-
-Linux has limited audio capture support. Test thoroughly on target distributions.
-
-## Security Considerations {#security-considerations}
-
-1. Always require user interaction to start capture
-2. Minimize stream ID lifetime - process and release quickly
-3. Validate stream sources before processing
-4. Always stop tracks when done
-5. Consider privacy implications
-
-## Related APIs {#related-apis}
-
-- `chrome.tabCapture` - Alternative API for tab-specific capture
-- `navigator.mediaDevices.getUserMedia` - Core Web API for media capture
-- `MediaRecorder` - Record MediaStream objects
-- `RTCPeerConnection` - Stream via WebRTC
-- `ImageCapture` - Capture still images from video tracks
-
-## Related Articles {#related-articles}
-
-## Related Articles
-
-- [Desktop Capture Patterns](../patterns/desktop-capture.md)
-- [Tab Capture](../guides/tab-capture.md)
--e 
----
-
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+Build robust screenshot and recording extensions with these foundations.
