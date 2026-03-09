@@ -534,6 +534,7 @@ Automate your tests on every push and pull request with GitHub Actions.
 
 ### Basic CI Workflow
 
+{% raw %}
 ```yaml
 # .github/workflows/test.yml
 name: Test Suite
@@ -578,9 +579,11 @@ jobs:
           name: test-results
           path: test-results/
 ```
+{% endraw %}
 
 ### Matrix Testing with Multiple Browser Versions
 
+{% raw %}
 ```yaml
 # .github/workflows/multi-browser-test.yml
 name: Multi-Browser Tests
@@ -609,6 +612,7 @@ jobs:
       - name: Run tests on ${{ matrix.browser }}
         run: npm run test:${{ matrix.browser }}
 ```
+{% endraw %}
 
 ---
 
