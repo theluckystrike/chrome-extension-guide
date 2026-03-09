@@ -6,6 +6,7 @@ date: 2025-02-21
 categories: [guides, growth]
 tags: [extension-reviews, chrome-web-store-reviews, user-feedback, rating-optimization, social-proof]
 author: theluckystrike
+review_date: 2025-02-21
 ---
 
 # Chrome Extension Review Acquisition — How to Get 5-Star Ratings
