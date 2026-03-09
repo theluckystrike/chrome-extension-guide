@@ -6,11 +6,8 @@ date: 2025-02-21
 categories: [guides, growth]
 tags: [extension-reviews, chrome-web-store-reviews, user-feedback, rating-optimization, social-proof]
 author: theluckystrike
-<<<<<<< HEAD
 keywords: "chrome extension reviews, chrome web store reviews, get more reviews chrome extension, 5 star ratings extension, review acquisition strategy"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/21/chrome-extension-review-acquisition-5-star-ratings/"
-=======
->>>>>>> content/review-acquisition-guide
 ---
 
 # Chrome Extension Review Acquisition — How to Get 5-Star Ratings
