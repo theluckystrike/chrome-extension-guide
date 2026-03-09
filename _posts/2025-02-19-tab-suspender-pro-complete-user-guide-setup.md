@@ -1,7 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Tab Suspender Pro — Complete User Guide, Setup, and Tips"
-description: "Everything you need to know about Tab Suspender Pro. Installation, configuration, whitelist management, keyboard shortcuts, and advanced memory-saving tips."
+description: "Complete guide to Tab Suspender Pro extension. Learn installation, configuration, whitelist management, keyboard shortcuts, and advanced memory-saving tips."
 date: 2025-02-19
 categories: [guides, tools]
 tags: [tab-suspender-pro, chrome-extension, browser-memory, tab-management, productivity]
