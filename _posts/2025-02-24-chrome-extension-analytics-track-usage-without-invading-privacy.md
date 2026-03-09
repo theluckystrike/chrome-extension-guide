@@ -1,11 +1,7 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Analytics — Track Usage Without Invading Privacy"
-<<<<<<< HEAD
-description: "Add privacy-respecting analytics to Chrome extensions. Track events, analyze feature usage, measure funnels, and report crashes while respecting user privacy."
-=======
-description: "Privacy-respecting analytics for Chrome extensions. Learn event tracking, feature usage, funnel analysis, and crash reporting without collecting user data."
->>>>>>> quality/fix-frontmatter-a6-r5
+description: "Privacy-respecting analytics for Chrome extensions. Event tracking, feature usage, funnel analysis, and crash reporting without collecting personal data."
 date: 2025-02-24
 categories: [guides, analytics]
 tags: [extension-analytics, privacy-first-analytics, usage-tracking, chrome-extension-telemetry, gdpr-compliant]
@@ -553,3 +549,7 @@ Start simple, iterate based on what you learn, and always prioritize your users'
 - [Chrome Extension Monetization Strategies That Work](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to monetize your extension ethically
 - [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) — Understand how permissions work in Manifest V3
 - [Chrome Web Store Listing Optimization](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Optimize your store listing for more installs
+
+---
+
+*Built by theluckystrike at zovo.one*
