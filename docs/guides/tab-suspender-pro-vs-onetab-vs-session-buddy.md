@@ -2,7 +2,7 @@
 layout: default
 title: "Tab Suspender Pro vs OneTab vs Session Buddy: Which Tab Manager Is Best in 2026?"
 description: "Compare Tab Suspender Pro, OneTab, and Session Buddy in 2026. Feature matrix, memory savings, workflow differences, pricing, and use case recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-suspender-pro-vs-onetab-vs-session-buddy/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-suspender-pro-vs-onetab-vs-session-buddy/"
 ---
 
 # Tab Suspender Pro vs OneTab vs Session Buddy: Which Tab Manager Is Best in 2026?

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension OAuth2 Authentication: Complete Identity API Guide"
 description: "Master OAuth2 authentication in Chrome extensions with our comprehensive guide covering chrome.identity API, launchWebAuthFlow, getAuthToken, token management, PKCE flow, and multi-provider authentication with Google, GitHub, and Twitter."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-oauth2-authentication/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-oauth2-authentication/"
 date: 2026-03-09
 last_modified_at: 2026-03-09
 category: guides
