@@ -1,7 +1,11 @@
 ---
 layout: post
 title: "Chrome Extension Hello World"
+<<<<<<< HEAD
 description: "A simple first extension tutorial - build your very own Chrome extension from scratch with step-by-step instructions"
+=======
+description: "Build your first Chrome extension from scratch. Learn manifest.json, create popups, add interactivity, and load it in Chrome for testing."
+>>>>>>> quality/fix-frontmatter-a9-r2
 date: 2025-06-01
 categories: [tutorial]
 tags: [beginner, hello-world, manifest-v3]
