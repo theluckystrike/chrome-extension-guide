@@ -1,241 +1,239 @@
 ---
 layout: default
 title: "Secure Message Passing in Chrome Extensions: Validate, Sanitize, and Authenticate"
-description: "Master secure message passing patterns for Chrome extensions. Learn to validate senders, sanitize messages, prevent replay attacks, and implement type-safe communication using TypeScript, Zod, and Joi."
+description: "Master secure message passing in Chrome extensions with comprehensive coverage of sender validation, schema validation, replay prevention, and type-safe patterns for production extensions."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-secure-message-passing/"
 ---
 
 # Secure Message Passing in Chrome Extensions: Validate, Sanitize, and Authenticate
 
-Message passing is the backbone of Chrome extension architecture, enabling communication between content scripts, background service workers, popups, side panels, and native applications. However, with great communication comes great security responsibility. Without proper validation and authentication, extensions become vulnerable to cross-site scripting attacks, message spoofing, replay attacks, and unauthorized external access. This comprehensive guide covers essential security patterns that every Chrome extension developer must implement to protect their users and their extension from malicious actors.
+Message passing is the lifeblood of Chrome extensions. Every interaction between your extension's background service worker, content scripts, popups, side panels, and external applications flows through Chrome's messaging system. While this architecture enables powerful functionality, it also presents significant security risks. Without proper validation and authentication, your extension becomes vulnerable to message spoofing, injection attacks, cross-site scripting, and data exfiltration. This comprehensive guide covers the security principles and practical implementations you need to build defensible message passing systems.
 
 ## Table of Contents
 
-- [Understanding the Security Landscape](#understanding-the-security-landscape)
+- [Understanding the Threat Landscape](#understanding-the-threat-landscape)
 - [chrome.runtime.sendMessage Security](#chromeruntimesendmessage-security)
-- [External Messaging Risks and防护](#external-messaging-risks-and防护)
-- [Sender Validation Techniques](#sender-validation-techniques)
+- [External Messaging Risks](#external-messaging-risks)
+- [Sender Validation](#sender-validation)
 - [Message Schema Validation with Zod and Joi](#message-schema-validation-with-zod-and-joi)
 - [Port-Based Long-Lived Connections Security](#port-based-long-lived-connections-security)
 - [Native Messaging Security](#native-messaging-security)
 - [Cross-Origin Messaging and externally_connectable](#cross-origin-messaging-and-externally_connectable)
 - [Message Replay Prevention](#message-replay-prevention)
 - [Type-Safe Messaging with TypeScript](#type-safe-messaging-with-typescript)
-- [Related Security Guides](#related-security-guides)
+- [Security Checklist](#security-checklist)
 
 ---
 
-## Understanding the Security Landscape
+## Understanding the Threat Landscape
 
-Chrome extensions operate in a unique security environment. They have privileged access to browser APIs, can read and modify web page content, and often handle sensitive user data. The message passing system, while powerful, creates potential attack vectors that malicious websites or compromised extensions can exploit.
+Before implementing security measures, you must understand what you're protecting against. Chrome extension messaging operates across multiple trust boundaries, each presenting unique attack vectors.
 
-The fundamental principle underlying all secure message passing is simple: **never trust any message until you have verified its source, validated its content, and ensured it cannot be replayed or manipulated**. This three-pillar approach—authentication, validation, and replay prevention—forms the foundation of every pattern discussed in this guide.
+**Content Script Trust Issues**: Content scripts run in the context of web pages, meaning they share the DOM with potentially malicious page scripts. While content scripts have some isolation, web pages can manipulate the DOM in ways that influence what your content script sends to the background.
 
-When designing your extension's messaging system, consider the threat model. Your extension may face attacks from compromised content scripts running on malicious websites, from other extensions attempting to send spurious messages, from web pages attempting to inject messages through the external messaging API, or from man-in-the-middle scenarios where messages are intercepted and modified in transit.
+**External Application Attacks**: If your extension uses `externally_connectable` to communicate with websites or native messaging to communicate with applications, any compromised website or application can send messages to your extension.
+
+**Cross-Extension Attacks**: Without proper validation, another extension can send messages to your extension's runtime if you expose listeners.
+
+**Message Interception**: While Chrome's message passing is internal, the data flowing through messages originates from various sources that may be compromised.
+
+The core security principle is simple: **never trust any message without validation**. Every message is potentially malicious until proven otherwise.
 
 ---
 
 ## chrome.runtime.sendMessage Security
 
-The `chrome.runtime.sendMessage` API is the most common method for one-time message passing in Chrome extensions. While convenient, it requires careful security considerations to prevent unauthorized access and message injection.
+The `chrome.runtime.sendMessage` API is the most common message passing mechanism. While convenient, it introduces several security considerations that developers must address.
 
-### The Sender Verification Imperative
+### The Fundamental Problem
 
-Every message handler must verify the identity of the sender before processing. The `message` object received in your listener includes a `sender` property that provides critical information about the message origin. However, this information can be spoofed if you don't validate it properly.
+When you add a listener for `chrome.runtime.onMessage`, by default it accepts messages from any context that can send to your extension—content scripts, other extensions, and potentially external websites depending on your configuration. This is a significant attack surface.
 
-The `sender` object contains properties like `id` (the extension ID), `url` (the page URL for content scripts), `tab` (the tab object), and `frameId`. For messages from content scripts, always verify that the `sender.id` matches your extension's ID. For messages from other extension contexts, check both the extension ID and the specific context type.
+### Implementing Secure Handlers
+
+Always validate the sender before processing any message:
 
 ```typescript
-// Secure message handler in background service worker
+// Secure message handler template
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // First, verify the sender is from our extension
-  if (sender.id !== chrome.runtime.id) {
-    console.error('Message from unknown extension:', sender.id);
+  // First: Validate sender
+  if (!isValidSender(sender)) {
+    console.warn('Rejected message from invalid sender:', sender.origin);
     return false;
   }
 
-  // For content scripts, also verify the tab and URL
-  if (sender.url && !sender.url.startsWith('https://')) {
-    console.warn('Message from non-HTTPS origin:', sender.url);
-    // Decide whether to allow or reject based on your security policy
+  // Second: Validate message structure
+  if (!isValidMessage(message)) {
+    console.warn('Rejected malformed message:', message);
+    return false;
   }
 
-  // Now process the message
-  handleMessage(message);
-  return true;
+  // Third: Process with error handling
+  try {
+    handleMessage(message).then(sendResponse);
+  } catch (error) {
+    sendResponse({ error: error.message });
+  }
+
+  return true; // Keep message channel open for async response
 });
-```
 
-### Avoiding the ALL_URL Permission Trap
+function isValidSender(sender: chrome.runtime.MessageSender): boolean {
+  // Always verify the extension ID
+  if (sender.id !== chrome.runtime.id) {
+    return false;
+  }
 
-Extensions with the `<all_urls>` or `host_permissions: ["<all_urls>"]` permission face increased risk because content scripts can run on any website. If your extension uses this broad permission, implement additional validation layers. Consider restricting content script injection to specific domains where it's truly needed, and validate the `sender.url` against an allowlist before processing sensitive operations.
+  // For content scripts, verify the tab is legitimate
+  if (sender.tab?.id) {
+    // Additional tab URL validation if needed
+    const url = new URL(sender.tab.url);
+    // Implement your domain allowlist logic here
+  }
 
-### Message Expiration and Timestamps
+  return true;
+}
 
-Implement message expiration to prevent delayed attacks where captured messages are replayed later. Include a timestamp in your message protocol and reject messages that are too old:
-
-```typescript
-const MAX_MESSAGE_AGE_MS = 5000; // 5 seconds
-
-function validateMessageTimestamp(message: { timestamp?: number }): boolean {
-  if (!message.timestamp) return false;
-  const age = Date.now() - message.timestamp;
-  return age < MAX_MESSAGE_AGE_MS;
+function isValidMessage(message: unknown): message is ExtensionMessage {
+  return (
+    typeof message === 'object' &&
+    message !== null &&
+    'type' in message &&
+    'payload' in message
+  );
 }
 ```
 
----
+### Limiting Message Sources
 
-## External Messaging Risks and防护
-
-External messaging allows communication between your extension and external websites or applications. While useful for integration scenarios, this feature introduces significant security risks if not properly restricted.
-
-### The externally_connectable Manifest Key
-
-The `externally_connectable` key in your manifest controls which external origins can communicate with your extension. This is your first line of defense against unauthorized external messaging.
+Configure your `manifest.json` to restrict who can send messages:
 
 ```json
 {
-  "manifest_version": 3,
-  "name": "Secure Extension",
-  "version": "1.0",
   "externally_connectable": {
-    "matches": ["https://trusted-domain.com/*", "https://app.example.com/*"]
+    "matches": ["https://trusted-site.com/*"],
+    "accepts_tls_channel_id": false
   }
 }
 ```
 
-**Never use `["*"]` or `["<all_urls>"]` in externally_connectable unless absolutely necessary.** Each additional allowed origin expands your attack surface. Carefully audit every domain you add and regularly review whether each origin still needs access.
-
-### Web Page to Extension Messaging
-
-When a web page sends messages to your extension using `chrome.runtime.sendMessage`, the message handler receives a `sender` object with `url` set to the page's origin. Validate this origin rigorously:
-
-```typescript
-const ALLOWED_ORIGINS = new Set([
-  'https://trusted-domain.com',
-  'https://app.example.com'
-]);
-
-chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
-  const origin = new URL(sender.url).origin;
-
-  if (!ALLOWED_ORIGINS.has(origin)) {
-    console.error(`Rejected message from unauthorized origin: ${origin}`);
-    sendResponse({ error: 'Unauthorized origin' });
-    return false;
-  }
-
-  // Process validated message
-  processExternalMessage(message);
-  return true;
-});
-```
+This ensures only explicitly allowed domains can initiate external communications.
 
 ---
 
-## Sender Validation Techniques
+## External Messaging Risks
 
-Beyond basic extension ID checking, comprehensive sender validation requires understanding the message's complete context. Different sender types require different validation strategies.
+External messaging—communication between your extension and websites or native applications—requires heightened security measures. Unlike internal extension messaging, external messages originate from contexts you don't control.
 
-### Content Script Sender Validation
+### Website-to-Extension Messaging
 
-Content scripts run in the context of web pages, making them susceptible to page-level attacks. Always verify both the extension ID and the page origin:
+When using `externally_connectable`, any matching page can send messages to your extension:
 
 ```typescript
-interface SecureSender {
-  id: string;
-  url: string;
-  tab?: chrome.tabs.Tab;
-  frameId?: number;
-}
-
-const TRUSTED_DOMAINS = ['https://yourapp.com', 'https://dashboard.example.com'];
-
-function validateContentScriptSender(sender: SecureSender): boolean {
-  // Verify sender is our extension
-  if (sender.id !== chrome.runtime.id) return false;
-
-  // Verify the page origin is trusted
-  if (!sender.url) return false;
-
-  try {
-    const url = new URL(sender.url);
-    return TRUSTED_DOMAINS.some(domain => url.origin === domain || url.href.startsWith(domain));
-  } catch {
+// In your background script
+chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+  // External messages require extra scrutiny
+  if (!validateExternalSender(sender)) {
     return false;
   }
+
+  // Never trust external payloads—sanitize everything
+  const sanitized = sanitizeExternalPayload(message);
+  processExternalMessage(sanitized).then(sendResponse);
+  return true;
+});
+
+function validateExternalSender(sender: chrome.runtime.MessageSender): boolean {
+  // Verify the sender URL matches your allowlist
+  if (!sender.url) return false;
+  const url = new URL(sender.url);
+  const allowedDomains = ['trusted-site.com', 'app.trusted-site.com'];
+  return allowedDomains.some(domain => url.hostname.endsWith(domain));
+}
+
+function sanitizeExternalPayload(payload: unknown): SanitizedPayload {
+  // Treat all external data as potentially malicious
+  // Implement strict sanitization
+  if (typeof payload !== 'object' || payload === null) {
+    throw new Error('Invalid payload type');
+  }
+  // ... implement sanitization logic
 }
 ```
 
-### Service Worker and Extension Context Validation
+### Risks of Insufficient Validation
 
-Messages from other extension contexts (other extensions or your own extension's different contexts) should verify the extension ID and potentially the context type:
+Without proper validation, attackers can exploit external messaging to:
+
+- Inject malicious data into your extension's storage
+- Trigger privileged Chrome API calls
+- Execute cross-site scripting through content script injection
+- Exfiltrate sensitive extension data
+
+---
+
+## Sender Validation
+
+Sender validation is your first line of defense. Every message handler must verify the sender's identity before processing.
+
+### Verifying Extension Identity
+
+Always verify that messages originate from your extension:
 
 ```typescript
-interface ExtensionMessage {
-  type: string;
-  payload: unknown;
-  timestamp: number;
-}
-
 function validateExtensionSender(sender: chrome.runtime.MessageSender): boolean {
-  // Only accept messages from our extension
-  if (sender.id !== chrome.runtime.id) return false;
-
-  // Verify it's from a known context
-  const validContexts = ['background', 'content_script', 'popup', 'side_panel', 'offscreen'];
-  // Context type isn't directly available in sender, so we rely on ID + URL patterns
+  // Critical: Verify the extension ID matches
+  if (sender.id !== chrome.runtime.id) {
+    return false;
+  }
   return true;
 }
 ```
 
-### Implementing a Sender Validation Middleware
+### Context-Aware Validation
 
-Create a reusable validation function that wraps your message handlers:
+Different contexts warrant different trust levels:
 
 ```typescript
-function createSecureHandler<T>(
-  handler: (message: T, sender: chrome.runtime.MessageSender) => unknown,
-  options: {
-    requireExtensionId?: boolean;
-    allowedOrigins?: string[];
-    maxMessageAge?: number;
-  } = {}
-) {
-  return (message: T & { timestamp?: number }, sender: chrome.runtime.MessageSender, sendResponse: (response?: unknown) => void) => {
-    // Validate extension ID if required
-    if (options.requireExtensionId !== false && sender.id !== chrome.runtime.id) {
-      sendResponse({ error: 'Unauthorized sender' });
-      return false;
-    }
+enum TrustLevel {
+  HIGH,      // Background service worker
+  MEDIUM,    // Popup, options page, side panel
+  LOW,       // Content script (runs in untrusted web page)
+}
 
-    // Validate origin if allowlist provided
-    if (options.allowedOrigins?.length && sender.url) {
-      const origin = new URL(sender.url).origin;
-      if (!options.allowedOrigins.includes(origin)) {
-        sendResponse({ error: 'Origin not allowed' });
-        return false;
-      }
-    }
+function getTrustLevel(sender: chrome.runtime.MessageSender): TrustLevel {
+  if (!sender.id) return TrustLevel.LOW;
 
-    // Validate timestamp for replay protection
-    if (options.maxMessageAge && message.timestamp) {
-      if (Date.now() - message.timestamp > options.maxMessageAge) {
-        sendResponse({ error: 'Message expired' });
-        return false;
-      }
+  // Messages from our extension
+  if (sender.id === chrome.runtime.id) {
+    // Differentiate by context
+    if (sender.url?.startsWith('chrome-extension://')) {
+      return TrustLevel.HIGH;
     }
+    return TrustLevel.MEDIUM;
+  }
 
-    // Execute the handler
-    const result = handler(message, sender);
-    if (result instanceof Promise) {
-      result.then(sendResponse);
-      return true; // Indicates async response
-    }
-    sendResponse(result);
-    return false;
-  };
+  // Messages from other extensions
+  return TrustLevel.LOW;
+}
+
+function processBasedOnTrust(message: ExtensionMessage, sender: chrome.runtime.MessageSender): void {
+  const trustLevel = getTrustLevel(sender);
+
+  switch (trustLevel) {
+    case TrustLevel.HIGH:
+      // Full trust - execute with all privileges
+      executePrivilegedOperation(message);
+      break;
+    case TrustLevel.MEDIUM:
+      // Moderate trust - validate but allow most operations
+      executeStandardOperation(message);
+      break;
+    case TrustLevel.LOW:
+      // Low trust - maximum validation, restricted operations
+      executeRestrictedOperation(message);
+      break;
+  }
 }
 ```
 
@@ -243,217 +241,160 @@ function createSecureHandler<T>(
 
 ## Message Schema Validation with Zod and Joi
 
-Input validation is your second line of defense after sender validation. Even messages from trusted senders may contain malformed, malicious, or unexpected data. Schema validation ensures messages conform to expected structures before processing.
+Schema validation ensures messages conform to expected structures before processing. This prevents type confusion attacks and ensures your code handles only valid data.
 
 ### Using Zod for Type-Safe Validation
 
-Zod provides excellent TypeScript integration and compile-time type inference:
+Zod provides excellent TypeScript integration:
 
 ```typescript
 import { z } from 'zod';
 
 // Define message schemas
-const GetUserDataRequest = z.object({
-  type: z.literal('GET_USER_DATA'),
-  userId: z.string().uuid(),
-  timestamp: z.number().int().positive(),
+const BookmarkPayloadSchema = z.object({
+  url: z.string().url(),
+  title: z.string().min(1).max(500),
+  tags: z.array(z.string()).optional(),
 });
 
-const UserDataResponse = z.object({
-  type: z.literal('USER_DATA'),
-  userId: z.string().uuid(),
-  name: z.string().min(1).max(100),
-  email: z.string().email(),
-  preferences: z.object({
-    theme: z.enum(['light', 'dark', 'auto']),
-    notifications: z.boolean(),
-  }),
+const MessageSchema = z.object({
+  type: z.enum(['saveBookmark', 'deleteBookmark', 'getBookmarks']),
+  payload: z.union([
+    BookmarkPayloadSchema,
+    z.object({ id: z.string().uuid() }),
+    z.object({}),
+  ]),
+  timestamp: z.number().int().positive(),
+  nonce: z.string().uuid().optional(),
 });
 
 // Type inference
-type GetUserDataRequestType = z.infer<typeof GetUserDataRequest>;
-type UserDataResponseType = z.infer<typeof UserDataResponse>;
+type ValidatedMessage = z.infer<typeof MessageSchema>;
 
 // Validation wrapper
-function validateMessage<T>(schema: z.ZodSchema<T>, message: unknown): T {
-  try {
-    return schema.parse(message);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new Error(`Invalid message: ${error.errors.map(e => e.message).join(', ')}`);
-    }
-    throw error;
-  }
+function validateMessage(message: unknown): ValidatedMessage {
+  return MessageSchema.parse(message);
 }
 
-// Secure message handler
+// Safe message handler
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  try {
-    const validated = validateMessage(GetUserDataRequest, message);
-    // Process validated message
-    const response = fetchUserData(validated.userId);
-    sendResponse({ type: 'USER_DATA', ...response });
-  } catch (error) {
-    sendResponse({ error: error.message });
+  if (!isValidSender(sender)) {
+    sendResponse({ error: 'Invalid sender' });
+    return false;
   }
+
+  try {
+    const validated = validateMessage(message);
+    processValidatedMessage(validated);
+    sendResponse({ success: true });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      sendResponse({ error: 'Validation failed', details: error.errors });
+    } else {
+      sendResponse({ error: 'Processing error' });
+    }
+  }
+
   return true;
 });
 ```
 
 ### Using Joi for Complex Validation
 
-Joi offers a fluent API that's great for complex validation scenarios:
+Joi offers powerful validation with excellent error messages:
 
 ```typescript
 import Joi from 'joi';
 
-const messageSchema = Joi.object({
-  type: Joi.string()
-    .valid('GET_DATA', 'SET_DATA', 'DELETE_DATA', 'SUBSCRIBE', 'UNSUBSCRIBE')
-    .required(),
-
-  payload: Joi.object({
-    id: Joi.string().uuid().required(),
-    data: Joi.object().unknown(true), // Flexible data object
-    options: Joi.object({
-      timeout: Joi.number().integer().min(0).max(30000).default(5000),
-      retry: Joi.boolean().default(false),
-    }).default(),
-  }).when('type', {
-    switch: [
-      { is: 'GET_DATA', then: Joi.required() },
-      { is: 'SET_DATA', then: Joi.required() },
-      { is: 'DELETE_DATA', then: Joi.required() },
-    ],
+const DataExportSchema = Joi.object({
+  format: Joi.string().valid('json', 'csv', 'xml').required(),
+  data: Joi.object().required(),
+  options: Joi.object({
+    compression: Joi.boolean().default(false),
+    encryption: Joi.boolean().default(false),
   }),
+});
 
-  timestamp: Joi.number()
-    .integer()
-    .positive()
-    .max(Joi.ref('$now')) // Validate against context
-    .required(),
-
-  nonce: Joi.string()
-    .alphanum()
-    .length(32)
-    .required(), // For replay prevention
-}).with('type', 'payload');
-
-// Validation function
-function validateIncomingMessage(message: unknown, now: number): Joi.ValidationResult {
-  return messageSchema.validate(message, { context: { now } });
-}
-```
-
-### Sanitizing Message Data
-
-Beyond structural validation, sanitize data to prevent injection attacks:
-
-```typescript
-import DOMPurify from 'dompurify';
-
-function sanitizeUserInput(input: unknown): string {
-  if (typeof input !== 'string') return '';
-  // Remove potential XSS vectors
-  return DOMPurify.sanitize(input, { ALLOWED_TAGS: [] });
-}
-
-function sanitizeMessageData<T extends Record<string, unknown>>(data: T): T {
-  const sanitized: Record<string, unknown> = {};
-
-  for (const [key, value] of Object.entries(data)) {
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeUserInput(value);
-    } else if (typeof value === 'object' && value !== null) {
-      sanitized[key] = sanitizeMessageData(value as Record<string, unknown>);
-    } else {
-      sanitized[key] = value;
-    }
+function validateWithJoi(data: unknown) {
+  const { error, value } = DataExportSchema.validate(data);
+  if (error) {
+    throw new Error(`Validation error: ${error.details[0].message}`);
   }
-
-  return sanitized as T;
+  return value;
 }
 ```
+
+Schema validation should be applied at every message entry point, creating a defensive barrier against malformed or malicious data.
 
 ---
 
 ## Port-Based Long-Lived Connections Security
 
-While `chrome.runtime.sendMessage` handles one-time requests, `chrome.runtime.connect` creates persistent connections suitable for streaming data. These connections require their own security considerations.
+Port-based connections using `chrome.runtime.connect` are powerful for persistent communication but require additional security considerations.
 
-### Secure Port Initialization
-
-Always validate the connection at establishment time:
+### Secure Port Connection Handlers
 
 ```typescript
-// In background service worker
+// In background script
 chrome.runtime.onConnect.addListener((port) => {
-  if (port.name !== 'secure-channel') {
-    port.disconnect();
-    return;
-  }
-
-  // Validate sender
-  if (!port.sender || port.sender.id !== chrome.runtime.id) {
-    port.disconnect();
-    return;
-  }
-
-  // For content script connections, validate the origin
-  if (port.sender.url) {
-    const origin = new URL(port.sender.url).origin;
-    if (!TRUSTED_ORIGINS.has(origin)) {
+  if (port.name === 'content-script') {
+    // Validate sender before accepting connection
+    if (!isValidPortSender(port.sender)) {
       port.disconnect();
       return;
     }
+
+    port.onMessage.addListener((message) => {
+      // Validate each message on the connection
+      const validated = validatePortMessage(message);
+      handlePortMessage(validated, port);
+    });
+
+    port.onDisconnect.addListener(() => {
+      cleanupPortConnection(port);
+    });
   }
-
-  // Set up secure message handler
-  port.onMessage.addListener((message) => {
-    // Validate message before processing
-    handlePortMessage(port, message);
-  });
-
-  port.onDisconnect.addListener(() => {
-    cleanupConnection(port);
-  });
 });
+
+function isValidPortSender(sender: chrome.runtime.MessageSender): boolean {
+  // Same validation as one-time messages
+  return sender.id === chrome.runtime.id && !!sender.tab;
+}
 ```
 
-### Port Message Validation
+### Connection Lifecycle Security
 
-Apply the same validation rigor to port messages as to one-time messages:
+Implement connection health monitoring:
 
 ```typescript
-const PORT_MESSAGE_SCHEMA = z.object({
-  action: z.enum(['fetch', 'update', 'subscribe', 'unsubscribe']),
-  data: z.record(z.unknown()),
-  requestId: z.string().uuid(),
-  timestamp: z.number().int().positive(),
-});
+interface PortConnection {
+  port: chrome.runtime.Port;
+  lastMessage: number;
+  messageCount: number;
+  validated: boolean;
+}
 
-function handlePortMessage(port: chrome.runtime.Port, message: unknown) {
-  // Validate structure
-  const parsed = PORT_MESSAGE_SCHEMA.safeParse(message);
-  if (!parsed.success) {
-    port.postMessage({
-      error: 'Invalid message format',
-      requestId: message?.requestId,
-    });
-    return;
-  }
+const activeConnections = new Map<number, PortConnection>();
 
-  // Validate timestamp for replay protection
-  if (Date.now() - parsed.data.timestamp > 5000) {
-    port.postMessage({
-      error: 'Message expired',
-      requestId: parsed.data.requestId,
-    });
-    return;
-  }
+function monitorConnection(port: chrome.runtime.Port): void {
+  const tabId = port.sender?.tab?.id;
+  if (!tabId) return;
 
-  // Process validated message
-  processPortAction(port, parsed.data);
+  activeConnections.set(tabId, {
+    port,
+    lastMessage: Date.now(),
+    messageCount: 0,
+    validated: false,
+  });
+
+  // Cleanup stale connections
+  setInterval(() => {
+    const conn = activeConnections.get(tabId);
+    if (conn && Date.now() - conn.lastMessage > 300000) { // 5 minutes
+      port.disconnect();
+      activeConnections.delete(tabId);
+    }
+  }, 60000);
 }
 ```
 
@@ -461,192 +402,151 @@ function handlePortMessage(port: chrome.runtime.Port, message: unknown) {
 
 ## Native Messaging Security
 
-Native messaging allows extensions to communicate with native applications installed on the user's system. This powerful capability requires stringent security measures since it extends beyond the browser's sandbox.
+Native messaging allows your extension to communicate with applications outside the browser. This powerful capability requires strict security controls.
 
-### Restricting Native Messaging Connections
+### Securing Native Port Communication
 
-Configure `nativeMessaging` permission and restrict which applications can communicate with your extension:
+```typescript
+// Validate native messaging permissions
+const ALLOWED_NATIVE_APPS = ['com.example.extension-helper', 'com.example.backup-service'];
 
-```json
-{
-  "name": "Secure Native Extension",
-  "nativeMessaging": true,
-  "allowed_origins": [
-    "chrome-extension://[YOUR_EXTENSION_ID]"
-  ]
+chrome.runtime.onConnectExternal.addListener((port) => {
+  const nativeApp = port.sender?.nativeApplication;
+  if (!nativeApp || !ALLOWED_NATIVE_APPS.includes(nativeApp)) {
+    port.disconnect();
+    return;
+  }
+
+  // Validate all messages from native app
+  port.onMessage.addListener((message) => {
+    const validated = validateNativeMessage(message);
+    processNativeMessage(validated);
+  });
+});
+
+function validateNativeMessage(message: unknown): ValidatedNativeMessage {
+  // Native messages need even stricter validation
+  // as they may come from compromised local applications
+  const schema = z.object({
+    command: z.enum(['backup', 'restore', 'status']),
+    parameters: z.record(z.unknown()),
+  });
+  return schema.parse(message);
 }
 ```
 
-### Validating Native Messages
+### Native Message Sanitization
 
-Native applications can send messages to your extension. Treat these as potentially untrusted:
+Never execute native commands based on unvalidated input:
 
 ```typescript
-chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
-  // Native messages have no sender.url
-  if (!sender.id) {
-    sendResponse({ error: 'Native messaging from unknown source' });
-    return false;
+// UNSAFE - DON'T DO THIS
+function unsafeNativeHandler(message: { command: string }) {
+  exec(message.command); // Command injection vulnerability!
+}
+
+// SAFE - Use allowlist
+const ALLOWED_COMMANDS = {
+  backup: (params: BackupParams) => runBackup(params),
+  restore: (params: RestoreParams) => runRestore(params),
+  status: () => getStatus(),
+};
+
+function safeNativeHandler(message: { command: string; params?: unknown }) {
+  const handler = ALLOWED_COMMANDS[message.command];
+  if (!handler) {
+    throw new Error('Invalid command');
   }
-
-  // Validate message structure
-  const schema = z.object({
-    command: z.string(),
-    parameters: z.record(z.unknown()),
-  });
-
-  const result = schema.safeParse(message);
-  if (!result.success) {
-    sendResponse({ error: 'Invalid message schema' });
-    return false;
-  }
-
-  // Process with caution
-  handleNativeMessage(result.data);
-  return true;
-});
+  return handler(message.params);
+}
 ```
-
-**Security Note**: Native messaging bypasses many browser security controls. Only enable it when absolutely necessary, validate all data rigorously, and implement strong authentication between your extension and native application.
 
 ---
 
 ## Cross-Origin Messaging and externally_connectable
 
-Understanding cross-origin messaging is crucial for extensions that interact with multiple web applications.
+The `externally_connectable` manifest field controls which external pages can communicate with your extension.
 
-### The externally_connectable Security Model
-
-When `externally_connectable` is configured, only specified origins can send messages to your extension. This is a whitelist approach that significantly reduces attack surface:
+### Proper Configuration
 
 ```json
 {
   "externally_connectable": {
     "matches": [
       "https://*.trusted-domain.com/*",
-      "https://app.example.com/*"
+      "https://trusted-domain.com/*"
     ],
-    "accepts_bookmark_apps": false
+    "accepts_tls_channel_id": false
   }
 }
 ```
 
-The `accepts_bookmark_apps` option controls whether bookmark apps can connect. Set to `false` unless you specifically need this functionality.
+### Security Implications
 
-### Content Script to Web Page Communication
-
-Content scripts can communicate with page scripts using `window.postMessage`. This direction also requires validation:
-
-```typescript
-// In content script
-window.addEventListener('message', (event) => {
-  // Validate origin
-  if (!TRUSTED_ORIGINS.has(event.origin)) {
-    return; // Ignore messages from untrusted origins
-  }
-
-  // Validate message structure
-  const schema = z.object({
-    type: z.literal('FROM_EXTENSION'),
-    payload: z.unknown(),
-  });
-
-  const result = schema.safeParse(event.data);
-  if (!result.success) return;
-
-  // Process validated message
-  handlePageMessage(result.data.payload);
-});
-
-// Sending to page
-window.postMessage({
-  type: 'FROM_EXTENSION',
-  payload: { action: 'update', data: someData },
-}, TRUSTED_ORIGIN);
-```
+When `accepts_tls_channel_id` is enabled, you can verify the TLS connection identity. However, this should only be used when necessary as it increases the attack surface.
 
 ---
 
 ## Message Replay Prevention
 
-Message replay attacks occur when an attacker captures valid messages and resends them to perform unauthorized actions. Preventing replay attacks requires unique identifiers and timestamp validation.
+Message replay attacks involve capturing and retransmitting valid messages. Protect against this with timestamp validation and nonces.
 
-### Implementing Nonce-Based Replay Protection
-
-Generate unique nonces for each message and maintain a replay cache:
+### Implementing Replay Protection
 
 ```typescript
-import { createHash } from 'crypto';
-
-const replayCache = new Map<string, number>();
-const CACHE_TTL_MS = 60000; // 1 minute cache
-const MAX_CACHE_SIZE = 10000;
-
-// Cleanup old entries periodically
-setInterval(() => {
-  const now = Date.now();
-  for (const [nonce, timestamp] of replayCache.entries()) {
-    if (now - timestamp > CACHE_TTL_MS) {
-      replayCache.delete(nonce);
-    }
-  }
-}, 30000);
-
-function generateNonce(): string {
-  return createHash('sha256')
-    .update(`${Date.now()}-${Math.random()}`)
-    .digest('hex')
-    .substring(0, 32);
+interface MessageWithProtection {
+  payload: unknown;
+  timestamp: number;
+  nonce: string;
 }
 
-function checkReplay(nonce: string): boolean {
-  if (replayCache.has(nonce)) {
-    return false; // Replay detected
+const seenNonces = new Set<string>();
+const MESSAGE_MAX_AGE = 60000; // 1 minute
+
+function validateReplayProtection(message: MessageWithProtection): boolean {
+  const { timestamp, nonce } = message;
+
+  // Check timestamp freshness
+  const age = Date.now() - timestamp;
+  if (age > MESSAGE_MAX_AGE || age < -60000) {
+    console.warn('Message timestamp out of range');
+    return false;
   }
 
-  if (replayCache.size >= MAX_CACHE_SIZE) {
-    // Clear oldest entries
-    const oldestKey = replayCache.keys().next().value;
-    replayCache.delete(oldestKey);
+  // Check nonce (prevent exact replay)
+  if (seenNonces.has(nonce)) {
+    console.warn('Message replay detected');
+    return false;
   }
 
-  replayCache.set(nonce, Date.now());
+  // Add nonce to seen set (with cleanup for memory management)
+  seenNonces.add(nonce);
+  setTimeout(() => seenNonces.delete(nonce), MESSAGE_MAX_AGE * 2);
+
   return true;
-}
-
-// Usage in message handler
-function validateReplayProtection(message: { nonce?: string; timestamp?: number }): boolean {
-  if (!message.nonce || !message.timestamp) return false;
-  if (Date.now() - message.timestamp > 5000) return false; // Too old
-  return checkReplay(message.nonce);
 }
 ```
 
-### Signed Messages for Enhanced Security
+### Token-Based State Validation
 
-For high-security scenarios, sign messages to ensure integrity:
+For critical operations, implement stateful token validation:
 
 ```typescript
-import { createHmac } from 'crypto';
+const validTokens = new Map<string, number>();
 
-const SECRET_KEY = process.env.MESSAGE_SECRET;
-
-function signMessage<T extends object>(message: T): T & { signature: string } {
-  const payload = JSON.stringify(message);
-  const signature = createHmac('sha256', SECRET_KEY)
-    .update(payload)
-    .digest('hex');
-
-  return { ...message, signature };
+function generateActionToken(action: string): string {
+  const token = crypto.randomUUID();
+  validTokens.set(token, Date.now() + 300000); // 5 minute expiry
+  return token;
 }
 
-function verifySignature<T extends { signature: string }>(message: T): boolean {
-  const { signature, ...payload } = message;
-  const expectedSignature = createHmac('sha256', SECRET_KEY)
-    .update(JSON.stringify(payload))
-    .digest('hex');
-
-  return signature === expectedSignature;
+function validateActionToken(token: string): boolean {
+  const expiry = validTokens.get(token);
+  if (!expiry || Date.now() > expiry) {
+    return false;
+  }
+  validTokens.delete(token); // Single-use token
+  return true;
 }
 ```
 
@@ -654,126 +554,122 @@ function verifySignature<T extends { signature: string }>(message: T): boolean {
 
 ## Type-Safe Messaging with TypeScript
 
-TypeScript provides compile-time type safety that catches many security issues before runtime. Implementing type-safe messaging patterns reduces the chance of processing malformed data.
+TypeScript provides compile-time type safety that catches many security issues before runtime. Combined with runtime validation, you create defense in depth.
 
-### Defining Message Type Contracts
-
-Create a comprehensive type system for all messages:
+### Defining Type-Safe Message Protocols
 
 ```typescript
-// Message type definitions
-type MessageType =
-  | { type: 'GET_DATA'; payload: GetDataPayload }
-  | { type: 'SET_DATA'; payload: SetDataPayload }
-  | { type: 'SUBSCRIBE'; payload: SubscribePayload }
-  | { type: 'UNSUBSCRIBE'; payload: UnsubscribePayload };
-
-interface GetDataPayload {
-  resourceId: string;
-  options?: QueryOptions;
-}
-
-interface SetDataPayload {
-  resourceId: string;
-  data: Record<string, unknown>;
-  merge?: boolean;
-}
-
-interface SubscribePayload {
-  channel: string;
-  filter?: Record<string, unknown>;
-}
-
-interface UnsubscribePayload {
-  channel: string;
-}
-
-interface QueryOptions {
-  limit?: number;
-  offset?: number;
-  sort?: 'asc' | 'desc';
-}
-
-// Type-safe handler
-type MessageHandler<T extends MessageType> = (
-  payload: T['payload'],
-  sender: chrome.runtime.MessageSender
-) => Promise<unknown> | unknown;
-
-const handlers: { [K in MessageType['type']]: MessageHandler<any> } = {
-  GET_DATA: handleGetData,
-  SET_DATA: handleSetData,
-  SUBSCRIBE: handleSubscribe,
-  UNSUBSCRIBE: handleUnsubscribe,
+// Define your complete message protocol
+type MessageProtocol = {
+  // Bookmark operations
+  'bookmark:save': {
+    request: { url: string; title: string; tags?: string[] };
+    response: { id: string; success: boolean };
+  };
+  'bookmark:delete': {
+    request: { id: string };
+    response: { success: boolean };
+  };
+  'bookmark:list': {
+    request: { limit?: number };
+    response: { bookmarks: Bookmark[] };
+  };
+  // Settings operations
+  'settings:get': {
+    request: { key: string };
+    response: { value: unknown };
+  };
+  'settings:set': {
+    request: { key: string; value: unknown };
+    response: { success: boolean };
+  };
 };
 
-// Type-safe message router
-function routeMessage(message: MessageType, sender: chrome.runtime.MessageSender) {
-  const handler = handlers[message.type];
-  if (!handler) {
-    throw new Error(`No handler for message type: ${message.type}`);
-  }
-  return handler(message.payload, sender);
+// Type-safe message handler
+type MessageType = keyof MessageProtocol;
+type MessagePayload<T extends MessageType> = MessageProtocol[T]['request'];
+type MessageResponse<T extends MessageType> = MessageProtocol[T]['response'];
+
+function createTypedHandler<T extends MessageType>(
+  type: T,
+  handler: (payload: MessagePayload<T>) => Promise<MessageResponse<T>>
+) {
+  return async (message: { type: T; payload: unknown }, sender: chrome.runtime.MessageSender) => {
+    if (!isValidSender(sender)) {
+      throw new Error('Invalid sender');
+    }
+
+    const payload = message.payload as MessagePayload<T>;
+    return handler(payload);
+  };
 }
+
+// Usage
+chrome.runtime.onMessage.addListener(
+  createTypedHandler('bookmark:save', async (payload) => {
+    const id = await saveBookmark(payload);
+    return { id, success: true };
+  })
+);
 ```
 
-### Type-Safe Port Communication
+### Runtime Type Guards
 
-Extend the type safety to port-based connections:
+Even with TypeScript, runtime validation is essential:
 
 ```typescript
-type PortMessage =
-  | { direction: 'request'; requestId: string; body: MessageType }
-  | { direction: 'response'; requestId: string; body: ResponseType }
-  | { direction: 'error'; requestId: string; error: string };
+// Runtime type guards
+function isMessageType(type: string): type is MessageType {
+  return type in MessageProtocol;
+}
 
-class SecurePort {
-  constructor(private port: chrome.runtime.Port) {}
+function isMessageWithPayload(message: unknown): message is { type: string; payload: unknown } {
+  return typeof message === 'object' && message !== null &&
+    'type' in message && 'payload' in message;
+}
 
-  send<T extends MessageType>(message: T): Promise<ResponseType> {
-    return new Promise((resolve, reject) => {
-      const requestId = generateNonce();
-
-      const responseHandler = (response: PortMessage) => {
-        if (response.direction === 'error') {
-          reject(new Error(response.error));
-          this.port.onMessage.removeListener(responseHandler);
-        } else if (response.requestId === requestId && response.direction === 'response') {
-          resolve(response.body);
-          this.port.onMessage.removeListener(responseHandler);
-        }
-      };
-
-      this.port.onMessage.addListener(responseHandler);
-      this.port.postMessage({
-        direction: 'request',
-        requestId,
-        body: message,
-      });
-    });
-  }
+function validateOutgoingMessage<T extends MessageType>(
+  type: T,
+  payload: MessagePayload<T>
+): MessagePayload<T> {
+  const schema = getSchemaForType(type);
+  return schema.parse(payload);
 }
 ```
 
 ---
 
-## Related Security Guides
+## Security Checklist
 
-This guide is part of the Chrome Extension Guide's security series. For comprehensive security implementation, also review:
+Review this checklist before deploying your extension:
 
-- [Chrome Extension Security Checklist](/docs/chrome-extension-security-checklist/) - Comprehensive security audit checklist
-- [Chrome Extension XSS Prevention and Input Sanitization](/docs/chrome-extension-xss-prevention-input-sanitization/) - Preventing cross-site scripting attacks
-- [Security Best Practices](/docs/security-best-practices/) - General security guidelines for extensions
-- [Extension Security Hardening](/docs/extension-security-hardening/) - Advanced hardening techniques
-
----
-
-## Conclusion
-
-Secure message passing in Chrome extensions requires a defense-in-depth approach combining sender validation, message schema validation, replay prevention, and type-safe communication patterns. By implementing the techniques outlined in this guide—verifying sender identities, validating message structures with Zod or Joi, implementing nonce-based replay protection, and using TypeScript's type system—you significantly reduce your extension's attack surface and protect your users from malicious actors.
-
-Remember that security is not a one-time implementation but an ongoing process. Regularly audit your message handlers, update your validation schemas as your extension evolves, and stay informed about new attack vectors in the Chrome extension ecosystem.
+- [ ] All message handlers validate sender identity
+- [ ] Schema validation applied to all incoming messages
+- [ ] External messaging restricted via `externally_connectable`
+- [ ] Native messaging uses command allowlists
+- [ ] Replay protection implemented for sensitive operations
+- [ ] Type-safe message protocols defined with TypeScript
+- [ ] Runtime validation complements compile-time types
+- [ ] Content Security Policy restricts script execution
+- [ ] Logging and monitoring for suspicious message patterns
+- [ ] Regular security audits of message handlers
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
+## Cross-References
+
+- [Security Best Practices](/guides/security-best-practices.md)
+- [Chrome Extension XSS Prevention and Input Sanitization](/guides/chrome-extension-xss-prevention-input-sanitization.md)
+- [Advanced Messaging Patterns](/guides/advanced-messaging-patterns.md)
+- [Message Passing Fundamentals](/guides/message-passing.md)
+
+## Related Articles
+
+- [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening.md)
+- [Content Security Policy](/docs/mv3/content-security-policy.md)
+- [Background Service Worker Patterns](/guides/background-patterns.md)
+- [TypeScript Setup for Extensions](/guides/typescript-setup.md)
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
