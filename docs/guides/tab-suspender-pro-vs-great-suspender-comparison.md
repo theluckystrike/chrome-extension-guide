@@ -191,10 +191,10 @@ The security landscape for browser extensions will only continue to evolve. New 
 
 ## Related Guides
 
-- [Complete Guide to Tab Suspension Extensions](/docs/guides/tab-suspender-complete-guide)
-- [Chrome Memory Optimization Tips](/docs/guides/chrome-memory-optimization)
-- [Browser Extension Security Best Practices](/docs/guides/extension-security-guide)
-- [Managing 100+ Tabs Efficiently](/docs/guides/manage-many-tabs)
+- [Automatic Tab Suspension Guide](/docs/guides/automatic-tab-suspension-guide)
+- [Chrome Memory Optimization Developer Guide](/docs/guides/chrome-memory-optimization-developer-guide)
+- [Chrome Extension Security Hardening](/docs/guides/chrome-extension-security-hardening)
+- [Managing 100+ Chrome Tabs](/docs/guides/manage-100-plus-chrome-tabs)
 
 ---
 
