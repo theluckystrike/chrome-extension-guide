@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Content Scripts in Chrome Extensions"
-description: "Learn how content scripts interact with web pages, modify DOM, and enhance browser functionality"
+description: "Master Chrome extension content scripts. Learn to inject JavaScript into web pages, manipulate the DOM, communicate with background scripts, and build page modification features."
 date: 2025-06-04
 categories: [tutorial]
 tags: [content-scripts, injection, dom, manifest, javascript]
