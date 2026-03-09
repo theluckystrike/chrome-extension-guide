@@ -235,4 +235,4 @@ Experiment with all three—they're all free, and many users find they complemen
 
 For more information on managing Chrome tabs effectively, explore our [tab management guides](/guides/tab-management/) and learn about [memory optimization techniques](/guides/memory-management/) for Chrome extensions.
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
+Part of the Chrome Extension Guide by theluckystrike. More at zovo.one
