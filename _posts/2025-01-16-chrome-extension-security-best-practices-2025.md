@@ -323,3 +323,6 @@ Stay vigilant, keep your dependencies updated, and make security reviews a regul
 - [Manifest V3 Migration Complete Guide]({% post_url 2025-01-16-manifest-v3-migration-complete-guide-2025 %})
 - [Chrome Extension Development 2025 Complete Beginners Guide]({% post_url 2025-01-16-chrome-extension-development-2025-complete-beginners-guide %})
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -479,3 +479,6 @@ Ready to monetize? The Extension Monetization Playbook covers freemium models, S
 - [Chrome Extension Development 2025 Complete Beginners Guide]({% post_url 2025-01-16-chrome-extension-development-2025-complete-beginners-guide %})
 - [Chrome Extension Security Best Practices]({% post_url 2025-01-16-chrome-extension-security-best-practices-2025 %})
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

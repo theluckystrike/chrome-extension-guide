@@ -201,3 +201,6 @@ The savings are real and measurable. Light users can expect 15 to 30 extra minut
 - [Fix Slow Browser - Too Many Tabs]({% post_url 2025-01-15-fix-slow-browser-too-many-tabs-chrome-extension %})
 
 If you are ready to start saving battery life, try [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/fiabciakcmgepblmdkmemdbbkilneeeh) and configure automatic suspension with a 2 to 5 minute timer. The difference will be noticeable from your very first browsing session on battery power.
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

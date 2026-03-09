@@ -141,3 +141,6 @@ Whatever approach you choose, the important takeaway is that you do not have to 
 - [Fix Slow Browser - Too Many Tabs]({% post_url 2025-01-15-fix-slow-browser-too-many-tabs-chrome-extension %})
 
 If you are ready to experience the benefits of tab suspension firsthand, try [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/fiabciakcmgepblmdkmemdbbkilneeeh) and configure it to automatically suspend tabs after a short period of inactivity. Combined with Chrome tab groups for organization, you will have a powerful tab management system that keeps your browser fast, responsive, and organized.
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
