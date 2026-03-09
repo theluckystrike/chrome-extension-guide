@@ -333,6 +333,7 @@ Chrome extensions can now run on Chromebooks and in some mobile contexts. Track 
 
 Analytics integration is not optional for serious Chrome extension development. Understanding how users interact with your extension provides the insights needed to build a product that solves real problems and delivers genuine value. With the foundation laid out in this guide, you have everything you need to implement a robust analytics system that respects user privacy while providing actionable data.
 
+<<<<<<< HEAD
 ---
 
 ## Related Articles
@@ -340,6 +341,13 @@ Analytics integration is not optional for serious Chrome extension development. 
 - [Error Tracking and Monitoring for Chrome Extensions](/2025/01/18/error-tracking-monitoring-chrome-extensions/) - Learn how to implement error tracking and monitoring in your Chrome extension
 - [Chrome Extension Notifications API Guide](/2025/01/17/chrome-extension-notifications-api-guide/) - Complete guide to implementing notifications in Chrome extensions
 - [Chrome Extension User Onboarding Best Practices](/2025/01/18/chrome-extension-user-onboarding-best-practices/) - Best practices for onboarding new users to your extension
+=======
+## Related Articles
+
+- [Error Tracking and Monitoring for Chrome Extensions]({% post_url 2025-01-18-error-tracking-monitoring-chrome-extensions %}) - Learn how to implement comprehensive error tracking to identify and fix issues in your extension.
+- [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %}) - Optimize your extension's performance to reduce memory usage and improve user experience.
+- [Chrome Extension Testing Automation Guide]({% post_url 2025-01-16-chrome-extension-testing-automation-guide %}) - Automate testing to ensure your extension works reliably across different scenarios.
+>>>>>>> quality/add-links-a15-r3
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
 

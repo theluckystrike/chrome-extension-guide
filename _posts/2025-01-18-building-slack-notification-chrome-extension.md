@@ -600,3 +600,9 @@ Building a Slack notification Chrome extension combines the power of Chrome's ex
 The architecture we've implemented provides a solid foundation that you can extend with additional features such as multiple Slack workspace support, advanced message formatting with interactive components, or integration with other APIs. Remember to prioritize security, performance, and user experience as you continue developing your extension.
 
 With the knowledge gained from this tutorial, you're well-equipped to create a slack chrome extension that streamlines team communication and keeps everyone informed about important events. Start building today and discover how much more productive your workflow can become with seamless Slack integration directly in your browser.
+
+## Related Articles
+
+- [Chrome Extension OAuth2 Authentication Guide]({% post_url 2025-01-17-chrome-extension-oauth2-authentication-guide %}) - Learn how to implement secure OAuth authentication in your Chrome extensions.
+- [Chrome Extension Notifications API Guide]({% post_url 2025-01-17-chrome-extension-notifications-api-guide %}) - Master the Chrome notifications system for displaying alerts and updates.
+- [Chrome Identity API and OAuth Guide]({% post_url 2025-01-24-chrome-identity-api-oauth %}) - Explore Google's identity services for user authentication.
