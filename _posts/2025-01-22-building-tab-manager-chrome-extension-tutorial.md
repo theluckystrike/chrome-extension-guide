@@ -6,27 +6,28 @@ date: 2025-01-22
 categories: [tutorials]
 tags: [tab-manager, chrome-extension-tutorial, tab-groups, chrome-tabs-api, browser-extension]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/building-tab-manager-chrome-extension-tutorial/"
 ---
 
 # Building a Tab Manager Chrome Extension — Step-by-Step Tutorial (2025)
 
-Browser tab management remains one of the most pressing challenges for modern web users. Whether you are a researcher juggling dozens of reference articles, a developer working across multiple projects, or simply someone who forgets to close tabs after finishing a task, a custom tab manager extension can transform your browsing experience. In this comprehensive tutorial, we will walk through building a complete, production-ready tab manager extension using Chrome's modern APIs and Manifest V3.
+Tab overload is one of the most common productivity killers in modern web browsing. With the average power user juggling dozens of open tabs, having a well-designed tab manager can make the difference between chaotic multitasking and organized workflow efficiency. In this comprehensive tutorial, we'll walk through building a complete tab manager Chrome extension from scratch using Manifest V3.
 
-This tutorial assumes you have basic familiarity with JavaScript and HTML. By the end, you will have a fully functional extension with tab grouping, search functionality, suspend/restore capabilities, keyboard shortcuts, and the knowledge needed to publish it to the Chrome Web Store.
+By the end of this guide, you'll have a fully functional extension that allows users to organize tabs into groups, search through open tabs, suspend inactive tabs to save memory, and restore them instantly. We'll cover everything from project setup to publishing on the Chrome Web Store.
 
 ---
 
 ## Project Setup with Manifest V3 {#manifest-v3-setup}
 
-Every Chrome extension begins with the manifest file. This JSON configuration tells Chrome about your extension's permissions, entry points, and capabilities. Create a new directory for your project and add the following `manifest.json`:
+Every Chrome extension begins with the manifest file, which declares the extension's permissions, capabilities, and entry points. For a tab manager in 2025, we'll use Manifest V3, which offers improved security and performance over its predecessor.
+
+Create a new directory for your extension and add the following `manifest.json`:
 
 ```json
 {
   "manifest_version": 3,
-  "name": "TabMaster - Tab Manager",
+  "name": "Tab Master Pro",
   "version": "1.0.0",
-  "description": "A powerful tab manager with grouping, search, and suspend features",
+  "description": "Organize, search, and suspend your tabs with ease",
   "permissions": [
     "tabs",
     "tabGroups",
@@ -43,339 +44,226 @@ Every Chrome extension begins with the manifest file. This JSON configuration te
   },
   "commands": {
     "toggle-sidebar": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+T",
-        "mac": "Command+Shift+T"
-      },
+      "suggested_key": "Ctrl+Shift+T",
       "description": "Toggle tab manager sidebar"
     }
   },
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+  "background": {
+    "service_worker": "background.js"
   }
 }
 ```
 
-This manifest declares the core permissions we need: `tabs` for accessing tab information, `tabGroups` for creating and managing tab groups, `storage` for saving sessions, and `commands` for keyboard shortcuts. For a comprehensive guide to extension permissions and best practices, see our [Permissions Guide](/docs/permissions/). The `action` key defines the popup that appears when users click your extension icon.
+This manifest declares the core permissions we'll need: `tabs` for tab operations, `tabGroups` for organizing tabs into groups, `storage` for saving sessions, and `commands` for keyboard shortcuts. The `action` key defines our popup interface, while `background` registers the service worker that handles background logic.
 
-Create a basic folder structure:
-
-```
-tabmaster/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
-```
-
-For the icons, you can use any simple placeholder images or generate them using online tools. The important thing is that they exist for Chrome to accept your extension.
+For a detailed breakdown of all available permissions, check out our [Chrome Extension Permissions Guide](/chrome-extension-guide/docs/permissions/).
 
 ---
 
-## Chrome.tabs API Deep Dive {#chrome-tabs-api}
+## Chrome Tabs API Deep Dive {#chrome-tabs-api}
 
-The `chrome.tabs` API is the foundation of any tab manager extension. This powerful API provides methods for creating, querying, updating, and manipulating browser tabs. Understanding its capabilities is essential for building effective tab management features.
+The `chrome.tabs` API is the foundation of any tab management extension. This powerful API provides methods for creating, querying, updating, and manipulating browser tabs.
 
-### Querying Tabs
+### Understanding Tab Objects
 
-The most frequently used method is `chrome.tabs.query()`, which retrieves tabs based on specified criteria. This method accepts a query object and returns a promise resolving to an array of tab objects:
+Each tab in Chrome is represented by a `Tab` object containing numerous properties. The most important ones for our extension include:
 
-```javascript
-// Get all tabs in the current window
-const tabs = await chrome.tabs.query({ currentWindow: true });
+- **id**: Unique identifier for the tab
+- **title**: The page title
+- **url**: The current URL
+- **favIconUrl**: The favicon URL
+- **windowId**: The window containing the tab
+- **active**: Whether the tab is active in its window
+- **pinned**: Whether the tab is pinned
+- **groupId**: The ID of the tab's group (if any)
 
-// Get all tabs matching a specific URL pattern
-const githubTabs = await chrome.tabs.query({ 
-  url: '*://github.com/*' 
-});
+### Core Tab Operations
 
-// Get only pinned tabs
-const pinnedTabs = await chrome.tabs.query({ 
-  pinned: true 
-});
-
-// Get tabs from all windows
-const allTabs = await chrome.tabs.query({});
-```
-
-Each tab object contains extensive information including the URL, title, favicon, active state, window ID, and more. This data forms the basis for building your tab list interface.
-
-### Creating and Updating Tabs
-
-Beyond querying, the tabs API allows creating new tabs and updating existing ones:
+Here's how to perform essential tab operations:
 
 ```javascript
+// Get the current active tab
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  const activeTab = tabs[0];
+  console.log(`Active tab: ${activeTab.title}`);
+});
+
 // Create a new tab
-const newTab = await chrome.tabs.create({ 
-  url: 'https://example.com',
-  active: true,
-  pinned: false
-});
+chrome.tabs.create({ url: 'https://example.com' });
 
-// Update a tab's properties
-await chrome.tabs.update(tabId, { 
-  pinned: true,
-  muted: true
-});
+// Update a tab (e.g., pin it)
+chrome.tabs.update(tabId, { pinned: true });
 
-// Reload a tab
-await chrome.tabs.reload(tabId);
-
-// Move a tab to a different window
-await chrome.tabs.move(tabId, { windowId: otherWindowId, index: -1 });
+// Close a tab
+chrome.tabs.remove(tabId);
 ```
 
-### Listening for Tab Changes
-
-Your extension needs to react to user actions in real-time. The tabs API provides event listeners for this purpose:
-
-```javascript
-// When a tab is created
-chrome.tabs.onCreated.addListener((tab) => {
-  console.log('New tab created:', tab.title);
-});
-
-// When a tab is updated (navigation, title change, etc.)
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete') {
-    console.log('Tab finished loading:', tab.url);
-  }
-});
-
-// When a tab is closed
-chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
-  console.log('Tab closed, window closing:', removeInfo.isWindowClosing);
-});
-
-// When tab selection changes
-chrome.tabs.onActivated.addListener((activeInfo) => {
-  console.log('Switched to tab:', activeInfo.tabId);
-});
-```
-
-These events keep your extension synchronized with the browser state, enabling real-time updates to your UI. For a complete reference of all available tab properties and methods, see our [Tabs API Reference](/docs/api-reference/tabs-api.md).
+The `chrome.tabs.query()` method is particularly powerful as it allows filtering tabs based on multiple criteria. For a complete reference of all available methods and properties, see our [Chrome Tabs API Reference](/chrome-extension-guide/docs/api-reference/).
 
 ---
 
-## Tab Querying and Filtering {#tab-querying-filtering}
+## Tab Querying and Filtering {#tab-querying}
 
-Beyond basic querying, implementing robust search and filtering makes your tab manager truly useful. Users should be able to quickly find tabs by title, URL, or content.
+Building an effective tab manager requires sophisticated querying capabilities. Users need to find tabs quickly across potentially hundreds of open pages.
 
-### Implementing Search Functionality
+### Advanced Query Patterns
 
-Create a search feature that filters tabs in real-time:
+Chrome's tab query system supports numerous filtering options:
 
 ```javascript
-function filterTabs(tabs, searchQuery) {
-  const query = searchQuery.toLowerCase();
-  
-  return tabs.filter(tab => {
-    const titleMatch = tab.title?.toLowerCase().includes(query);
-    const urlMatch = tab.url?.toLowerCase().includes(query);
-    return titleMatch || urlMatch;
-  });
-}
+// Find all tabs from a specific domain
+chrome.tabs.query({ url: '*://*.github.com/*' }, (tabs) => {
+  tabs.forEach(tab => console.log(tab.title));
+});
 
-function renderTabList(tabs, container, filter = '') {
-  container.innerHTML = '';
-  
-  const filteredTabs = filter 
-    ? filterTabs(tabs, filter)
-    : tabs;
-  
-  filteredTabs.forEach(tab => {
-    const tabElement = document.createElement('div');
-    tabElement.className = 'tab-item';
-    tabElement.innerHTML = `
-      <img src="${tab.favIconUrl || ''}" class="favicon" />
-      <span class="tab-title">${tab.title}</span>
-      <span class="tab-url">${new URL(tab.url).hostname}</span>
-    `;
-    tabElement.addEventListener('click', () => {
-      chrome.tabs.update(tab.id, { active: true });
-    });
-    container.appendChild(tabElement);
+// Get all pinned tabs
+chrome.tabs.query({ pinned: true }, (tabs) => {
+  // Handle pinned tabs
+});
+
+// Find recently active tabs
+chrome.tabs.query({ lastAccessedWindowId: currentWindowId }, (tabs) => {
+  // Sort by lastAccessed desc
+  tabs.sort((a, b) => b.lastAccessed - a.lastAccessed);
+});
+
+// Search by title or URL
+function searchTabs(query) {
+  const lowerQuery = query.toLowerCase();
+  chrome.tabs.query({}, (tabs) => {
+    return tabs.filter(tab => 
+      tab.title.toLowerCase().includes(lowerQuery) ||
+      tab.url.toLowerCase().includes(lowerQuery)
+    );
   });
 }
 ```
 
-### Advanced Filtering Options
+### Building a Search Feature
 
-Add filters for common use cases:
+For your popup UI, implement a real-time search that filters tabs as the user types:
 
 ```javascript
-const filters = {
-  audio: { audible: true },
-  pinned: { pinned: true },
-  grouped: { windowId: null }, // Not in a group (though this needs tabGroups API)
-  inactive: { active: false },
-  loading: { status: 'loading' }
-};
-
-async function applyFilter(filterName) {
-  const filter = filters[filterName];
-  if (!filter) return await chrome.tabs.query({ currentWindow: true });
-  return await chrome.tabs.query(filter);
-}
+document.getElementById('search-input').addEventListener('input', async (e) => {
+  const query = e.target.value.toLowerCase();
+  const tabs = await chrome.tabs.query({});
+  
+  const filteredTabs = tabs.filter(tab => 
+    tab.title.toLowerCase().includes(query) ||
+    (tab.url && tab.url.toLowerCase().includes(query))
+  );
+  
+  renderTabList(filteredTabs);
+});
 ```
 
-The filtering system can be expanded to include date-based filters, domain grouping, and custom tags.
+This approach ensures users can quickly locate any tab regardless of how many windows they have open.
 
 ---
 
 ## Tab Groups API {#tab-groups-api}
 
-Chrome's Tab Groups API (introduced in Chrome 88 and expanded in subsequent versions) allows organizing tabs into color-coded groups. This feature is invaluable for project-based workflows.
+Chrome's Tab Groups API (introduced in Chrome 87) allows users to visually organize tabs with color-coded groups. This feature is essential for any modern tab manager.
 
-### Creating Tab Groups
-
-```javascript
-async function createTabGroup(tabIds, title, color = 'grey') {
-  // First, group the tabs
-  const groupId = await chrome.tabs.group({ tabIds });
-  
-  // Then, set the group properties
-  await chrome.tabGroups.update(groupId, {
-    title: title,
-    color: color
-  });
-  
-  return groupId;
-}
-
-// Usage
-const tabs = await chrome.tabs.query({ currentWindow: true });
-const projectTabs = tabs.filter(t => t.url.includes('github.com'));
-await createTabGroup(projectTabs.map(t => t.id), 'GitHub Projects', 'blue');
-```
-
-### Managing Existing Groups
+### Creating and Managing Groups
 
 ```javascript
-// Get all tab groups in the current window
-async function getTabGroups() {
-  const tabs = await chrome.tabs.query({ currentWindow: true });
-  const groups = await chrome.tabGroups.query({});
-  return groups;
-}
+// Create a new tab group
+chrome.tabs.group({ tabIds: [tabId1, tabId2] }, (groupId) => {
+  chrome.tabGroups.update(groupId, { title: 'Work', color: 'blue' });
+});
 
 // Add tabs to an existing group
-async function addToGroup(tabIds, groupId) {
-  await chrome.tabs.group({ tabIds, groupId });
-}
+chrome.tabs.group({ groupId: existingGroupId, tabIds: [newTabId] });
 
-// Ungroup tabs (remove from group but keep open)
-async function ungroupTabs(tabIds) {
-  await chrome.tabs.ungroup(tabIds);
-}
+// Remove a tab from its group (ungroup)
+chrome.tabs.ungroup([tabId]);
 
-// Delete a group and optionally close its tabs
-async function deleteTabGroup(groupId, closeTabs = false) {
-  if (closeTabs) {
-    const tabs = await chrome.tabs.query({ groupId });
-    await chrome.tabs.remove(tabs.map(t => t.id));
-  }
-  await chrome.tabGroups.remove(groupId);
-}
+// Update group properties
+chrome.tabGroups.update(groupId, { 
+  title: 'Project Alpha',
+  color: 'red',
+  collapsed: false
+});
+
+// Get all tab groups in a window
+chrome.tabGroups.query({ windowId: currentWindowId }, (groups) => {
+  groups.forEach(group => console.log(group.title, group.color));
+});
 ```
 
-### Available Group Colors
-
-Chrome provides a set of predefined colors for tab groups: grey, blue, red, yellow, green, pink, purple, cyan, and orange. Each color has semantic meaning you can communicate to users or use for automatic categorization.
+The Tab Groups API provides a visual organization system that users love. By assigning colors (gray, blue, red, yellow, green, pink, purple, cyan, orange) and titles, users can quickly identify groups at a glance.
 
 ---
 
 ## Suspend and Restore with chrome.tabs.discard {#suspend-restore}
 
-Tab suspension is crucial for users with many open tabs. Chrome provides the `chrome.tabs.discard` API to unload tab content from memory while keeping the tab accessible.
+Memory management is crucial for power users with many tabs. Chrome provides the `chrome.tabs.discard` API to suspend tabs without closing them, releasing their memory while preserving their state.
 
-### Understanding Tab Discarding
-
-When a tab is discarded, Chrome removes its content from memory but keeps the tab entry in the tab strip. The tab appears grayed out, and when clicked, Chrome reloads its content:
+### How Tab Discarding Works
 
 ```javascript
-// Discard a specific tab
-async function discardTab(tabId) {
-  try {
-    const discardedTab = await chrome.tabs.discard(tabId);
-    console.log('Tab discarded successfully');
-    return discardedTab;
-  } catch (error) {
-    console.error('Failed to discard tab:', error);
-  }
-}
+// Discard a specific tab (suspend it)
+chrome.tabs.discard(tabId, (discardedTab) => {
+  console.log(`Tab ${tabId} has been discarded`);
+  // The discardedTab object now represents the suspended tab
+});
 
-// Auto-discard inactive tabs
-async function autoDiscardInactive() {
-  const tabs = await chrome.tabs.query({ 
-    currentWindow: true,
-    active: false,
-    status: 'complete'
-  });
+// Automatically discard inactive tabs
+async function discardInactiveTabs(inactiveThreshold = 30 * 60 * 1000) {
+  const tabs = await chrome.tabs.query({});
+  const now = Date.now();
   
-  // Discard all but the 5 most recently used tabs
-  const tabsToDiscard = tabs.slice(5);
-  for (const tab of tabsToDiscard) {
-    await discardTab(tab.id);
+  for (const tab of tabs) {
+    // Skip active tab, pinned tabs, and tabs already discarded
+    if (!tab.active && !tab.pinned && tab.discarded) {
+      if (now - tab.lastAccessed > inactiveThreshold) {
+        chrome.tabs.discard(tab.id);
+      }
+    }
   }
 }
 
-// Restore a discarded tab (by clicking it or updating it)
-async function restoreTab(tabId) {
-  // Navigating to the same URL restores the content
-  const tab = await chrome.tabs.get(tabId);
-  await chrome.tabs.update(tabId, { url: tab.url });
+// Restore a discarded tab (user clicks on it)
+chrome.tabs.update(tabId, { active: true });
+```
+
+When a tab is discarded, Chrome releases the memory used by its content while keeping the tab in the tab strip. The tab appears grayed out, and clicking it automatically reloads the page. This provides significant memory savings—each discarded tab can free up 50MB to 500MB depending on the page content.
+
+### Intelligent Suspension Logic
+
+For a production-ready tab manager, implement smart suspension rules:
+
+```javascript
+function shouldSuspendTab(tab) {
+  // Never suspend pinned tabs
+  if (tab.pinned) return false;
+  
+  // Never suspend active tab
+  if (tab.active) return false;
+  
+  // Check against whitelist
+  const whitelistedDomains = ['gmail.com', 'slack.com', 'notion.so'];
+  if (whitelistedDomains.some(domain => tab.url.includes(domain))) {
+    return false;
+  }
+  
+  return true;
 }
 ```
 
-### Smart Discard Rules
-
-Implement intelligent automatic suspension:
-
-```javascript
-async function smartDiscard() {
-  const tabs = await chrome.tabs.query({ 
-    currentWindow: true,
-    pinned: false 
-  });
-  
-  // Don't discard pinned tabs or the active tab
-  const discardableTabs = tabs.filter(t => !t.pinned && t.id !== tabs[0]?.id);
-  
-  for (const tab of discardableTabs) {
-    // Check if tab is already discarded
-    if (tab.discarded) continue;
-    
-    // Optionally check idle time using chrome.idle API
-    // Skip tabs playing audio
-    if (tab.audible || tab.mutedInfo?.muted) continue;
-    
-    await discardTab(tab.id);
-  }
-}
-```
-
-For a more complete suspension solution, check out [Tab Suspender Pro](https://zovo.one), which provides advanced idle detection and custom suspension rules.
+This ensures critical applications remain active while non-essential tabs get suspended automatically.
 
 ---
 
 ## Popup UI with Tab List {#popup-ui}
 
-The popup is your extension's primary interface. It should provide quick access to core functionality while remaining lightweight and responsive.
+The popup interface is the primary interaction point for most users. Let's build a clean, functional tab list UI.
 
 ### HTML Structure
 
 ```html
+<!-- popup.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -383,17 +271,17 @@ The popup is your extension's primary interface. It should provide quick access 
 </head>
 <body>
   <div class="header">
-    <input type="text" id="search" placeholder="Search tabs...">
-    <button id="new-group">+ Group</button>
+    <input type="text" id="search-input" placeholder="Search tabs...">
+    <button id="suspend-all-btn">Suspend All</button>
   </div>
   
-  <div class="tabs-container" id="tabs-container">
-    <!-- Tabs will be rendered here -->
+  <div class="tabs-container" id="tabs-list">
+    <!-- Tab items will be rendered here -->
   </div>
   
   <div class="footer">
-    <button id="suspend-all">Suspend All</button>
-    <button id="settings">⚙</button>
+    <span id="tab-count">0 tabs</span>
+    <span id="memory-saved">0 MB saved</span>
   </div>
   
   <script src="popup.js"></script>
@@ -401,418 +289,271 @@ The popup is your extension's primary interface. It should provide quick access 
 </html>
 ```
 
-### JavaScript Implementation
+### JavaScript Logic
 
 ```javascript
+// popup.js
 document.addEventListener('DOMContentLoaded', async () => {
-  const tabsContainer = document.getElementById('tabs-container');
-  const searchInput = document.getElementById('search');
+  const tabs = await chrome.tabs.query({});
+  renderTabs(tabs);
+  updateStats();
+});
+
+function renderTabs(tabs) {
+  const container = document.getElementById('tabs-list');
+  container.innerHTML = '';
   
-  // Load and render tabs
-  async function loadTabs() {
-    const tabs = await chrome.tabs.query({ currentWindow: true });
-    renderTabs(tabs);
-  }
-  
-  function renderTabs(tabs) {
-    tabsContainer.innerHTML = '';
-    
-    tabs.forEach(tab => {
-      const tabEl = createTabElement(tab);
-      tabsContainer.appendChild(tabEl);
-    });
-  }
-  
-  function createTabElement(tab) {
-    const el = document.createElement('div');
-    el.className = `tab-item ${tab.active ? 'active' : ''} ${tab.discarded ? 'discarded' : ''}`;
-    el.innerHTML = `
-      <img src="${tab.favIconUrl || 'default-favicon.png'}" class="favicon">
-      <div class="tab-info">
-        <div class="tab-title">${tab.title}</div>
-        <div class="tab-host">${new URL(tab.url).hostname}</div>
-      </div>
-      <div class="tab-actions">
-        <button class="close-btn" data-id="${tab.id}">×</button>
-      </div>
-    `;
-    
-    // Click to activate
-    el.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('close-btn')) {
-        chrome.tabs.update(tab.id, { active: true });
-        window.close();
-      }
-    });
-    
-    // Close button
-    el.querySelector('.close-btn').addEventListener('click', async (e) => {
-      e.stopPropagation();
-      await chrome.tabs.remove(tab.id);
-      loadTabs();
-    });
-    
-    return el;
-  }
-  
-  // Search functionality
-  searchInput.addEventListener('input', async (e) => {
-    const query = e.target.value.toLowerCase();
-    const allTabs = await chrome.tabs.query({ currentWindow: true });
-    
-    const filtered = allTabs.filter(tab => 
-      tab.title.toLowerCase().includes(query) || 
-      tab.url.toLowerCase().includes(query)
-    );
-    
-    renderTabs(filtered);
+  tabs.forEach(tab => {
+    const tabElement = createTabElement(tab);
+    container.appendChild(tabElement);
   });
   
-  // Initialize
-  loadTabs();
-});
-```
-
-### CSS Styling
-
-```css
-body {
-  width: 400px;
-  min-height: 500px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  margin: 0;
-  background: #fff;
+  document.getElementById('tab-count').textContent = `${tabs.length} tabs`;
 }
 
-.header {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.header input {
-  flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.tabs-container {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.tab-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid #f0f0f0;
-  transition: background 0.15s;
-}
-
-.tab-item:hover {
-  background: #f5f5f5;
-}
-
-.tab-item.active {
-  background: #e8f0fe;
-}
-
-.tab-item.discarded {
-  opacity: 0.6;
-}
-
-.favicon {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-}
-
-.tab-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.tab-title {
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tab-host {
-  font-size: 11px;
-  color: #666;
-}
-
-.tab-actions {
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-
-.tab-item:hover .tab-actions {
-  opacity: 1;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #666;
-  padding: 4px 8px;
-}
-
-.close-btn:hover {
-  color: #d00;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-  border-top: 1px solid #e0e0e0;
-}
-
-.footer button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-#suspend-all {
-  background: #f0f0f0;
-}
-
-#suspend-all:hover {
-  background: #e0e0e0;
+function createTabElement(tab) {
+  const div = document.createElement('div');
+  div.className = `tab-item ${tab.discarded ? 'discarded' : ''}`;
+  div.innerHTML = `
+    <img src="${tab.favIconUrl || 'icons/default.png'}" class="favicon">
+    <div class="tab-info">
+      <div class="tab-title">${tab.title}</div>
+      <div class="tab-url">${new URL(tab.url).hostname}</div>
+    </div>
+    <div class="tab-actions">
+      <button class="pin-btn" data-id="${tab.id}">${tab.pinned ? '📌' : '📍'}</button>
+      <button class="close-btn" data-id="${tab.id}">✕</button>
+    </div>
+  `;
+  
+  // Add click handlers
+  div.querySelector('.close-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    chrome.tabs.remove(tab.id);
+  });
+  
+  div.addEventListener('click', () => {
+    chrome.tabs.update(tab.id, { active: true });
+  });
+  
+  return div;
 }
 ```
+
+For styling guidance, check out our [Chrome Extension UI Patterns](/chrome-extension-guide/docs/patterns/) documentation.
 
 ---
 
 ## Keyboard Shortcuts {#keyboard-shortcuts}
 
-Keyboard shortcuts make power users significantly more productive. Chrome's `commands` API allows you to define global and extension-specific shortcuts.
+Keyboard shortcuts dramatically improve productivity for power users. Manifest V3 provides a built-in commands API for this purpose.
 
 ### Defining Shortcuts in Manifest
-
-Add the `commands` permission and define shortcuts:
 
 ```json
 {
   "commands": {
     "toggle-sidebar": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+T",
-        "mac": "Command+Shift+T"
-      },
+      "suggested_key": "Ctrl+Shift+T",
       "description": "Toggle tab manager sidebar"
     },
-    "quick-search": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "Command+Shift+F"
-      },
-      "description": "Open quick tab search"
+    "suspend-active": {
+      "suggested_key": "Ctrl+Shift+D",
+      "description": "Suspend active tab"
     },
-    "discard-inactive": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+D",
-        "mac": "Command+Shift+D"
-      },
-      "description": "Discard all inactive tabs"
+    "search-tabs": {
+      "suggested_key": "Ctrl+Shift+F",
+      "description": "Focus tab search"
     }
   }
 }
 ```
 
-### Handling Commands in Background Script
+### Handling Commands in Background
 
 ```javascript
-chrome.commands.onCommand.addListener(async (command) => {
+// background.js
+chrome.commands.onCommand.addListener((command) => {
   switch (command) {
     case 'toggle-sidebar':
-      // Toggle a sidebar or open popup
-      chrome.action.openPopup();
+      toggleSidebar();
       break;
-      
-    case 'quick-search':
-      // Open a dedicated search view
-      const tabs = await chrome.tabs.query({ currentWindow: true });
-      // Show search UI or create search tab
+    case 'suspend-active':
+      suspendActiveTab();
       break;
-      
-    case 'discard-inactive':
-      // Discard all inactive tabs
-      const allTabs = await chrome.tabs.query({ currentWindow: true });
-      const activeTab = allTabs.find(t => t.active);
-      
-      for (const tab of allTabs) {
-        if (!tab.active && !tab.pinned && !tab.discarded) {
-          await chrome.tabs.discard(tab.id);
-        }
-      }
+    case 'search-tabs':
+      openSearch();
       break;
   }
 });
+
+async function suspendActiveTab() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (tab && !tab.discarded && !tab.pinned) {
+    chrome.tabs.discard(tab.id);
+  }
+}
 ```
 
-Users can also customize shortcuts via `chrome://extensions/shortcuts`.
+Users can also customize these shortcuts via `chrome://extensions/shortcuts`.
 
 ---
 
-## Storage for Saved Sessions {#storage-sessions}
+## Storage for Saved Sessions {#storage}
 
-Persistent storage allows users to save and restore tab sessions—a critical feature for anyone who closes their browser regularly.
+Persisting user sessions and preferences requires Chrome's storage API. This allows users to save and restore tab configurations across browser restarts.
 
 ### Saving Sessions
 
 ```javascript
-async function saveCurrentSession(name) {
+// storage.js
+const STORAGE_KEY = 'tab-manager-sessions';
+
+async function saveSession(name) {
   const tabs = await chrome.tabs.query({ currentWindow: true });
   
   const session = {
-    name: name,
+    name,
     timestamp: Date.now(),
     tabs: tabs.map(tab => ({
       url: tab.url,
       title: tab.title,
-      pinned: tab.pinned
+      pinned: tab.pinned,
+      groupId: tab.groupId
     }))
   };
   
-  // Get existing sessions
-  const { sessions = [] } = await chrome.storage.local.get('sessions');
+  const { [STORAGE_KEY]: sessions = [] } = await chrome.storage.local.get(STORAGE_KEY);
   sessions.push(session);
-  
-  // Save back
-  await chrome.storage.local.set({ sessions });
+  await chrome.storage.local.set({ [STORAGE_KEY]: sessions });
   
   return session;
 }
-```
 
-### Restoring Sessions
-
-```javascript
-async function restoreSession(session) {
-  // Close current tabs (optional)
+async function loadSession(sessionIndex) {
+  const { [STORAGE_KEY]: sessions = [] } = await chrome.storage.local.get(STORAGE_KEY);
+  const session = sessions[sessionIndex];
+  
+  if (!session) return;
+  
+  // Clear current tabs
   const currentTabs = await chrome.tabs.query({ currentWindow: true });
   await chrome.tabs.remove(currentTabs.map(t => t.id));
   
-  // Open saved tabs
+  // Restore session tabs
   for (const tab of session.tabs) {
-    await chrome.tabs.create({
-      url: tab.url,
-      pinned: tab.pinned,
-      active: false
+    const newTab = await chrome.tabs.create({ 
+      url: tab.url, 
+      pinned: tab.pinned 
     });
+    
+    // Restore group if applicable
+    if (tab.groupId && tab.groupId !== -1) {
+      // Note: Group restoration requires additional logic
+    }
   }
 }
 ```
 
-### Managing Sessions UI
-
-```javascript
-// List saved sessions
-async function listSessions() {
-  const { sessions = [] } = await chrome.storage.local.get('sessions');
-  return sessions.sort((a, b) => b.timestamp - a.timestamp);
-}
-
-// Delete a session
-async function deleteSession(index) {
-  const { sessions = [] } = await chrome.storage.local.get('sessions');
-  sessions.splice(index, 1);
-  await chrome.storage.local.set({ sessions });
-}
-```
+The storage API provides both `local` (persistent, unlimited) and `sync` (synced across devices, limited to 100KB) storage options. Use `local` for large session data and `sync` for user preferences.
 
 ---
 
-## Publishing to Chrome Web Store {#publishing-chrome-web-store}
+## Publishing to Chrome Web Store {#publishing}
 
-Once your extension is complete, publishing it makes it available to millions of Chrome users. The process involves preparing your extension, creating developer account assets, and uploading through the Chrome Web Store Developer Dashboard.
+Once your extension is complete, it's time to publish it. The Chrome Web Store provides access to millions of potential users.
 
-### Pre-Publication Checklist
+### Preparing for Publication
 
-Before submitting, ensure your extension meets all Chrome Web Store policies:
+1. **Create store listing assets**:
+   - Screenshots (1280x800 or 640x400)
+   - Promotional tile (440x280)
+   - Small tile (92x64)
+   - Icon (128x128)
 
-- Complete all required fields in your manifest
-- Provide clear, accurate screenshots and descriptions
-- Ensure your extension does not violate privacy policies
-- Test thoroughly across different Chrome versions
-- Remove any debugging code or console logs from production
+2. **Verify your manifest**:
+   ```json
+   {
+     "manifest_version": 3,
+     "name": "Your Extension Name",
+     "version": "1.0.0",
+     "description": "Clear, concise description",
+     "icons": {
+       "128": "icons/icon128.png"
+     }
+   }
+   ```
 
-### Creating Store Listings
+3. **Zip your extension** (exclude development files):
+   ```
+   zip -r extension.zip manifest.json popup.html popup.css popup.js background.js icons/ storage.js
+   ```
 
-Navigate to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) and create a new listing. You will need:
+### Publishing Process
 
-1. **Store listing details**: A compelling title (under 45 characters), detailed description, and category selection
-2. **Screenshots**: At least one 1280x800 or 640x400 screenshot showing your extension in action
-3. **Small tile icon**: A 128x128 promotional icon
-4. **Privacy policy**: Required if your extension accesses personal data
+1. Navigate to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
+2. Click "New Item" and upload your ZIP file
+3. Fill in store listing details:
+   - Title (max 45 characters)
+   - Short description (max 132 characters)
+   - Detailed description
+   - Category
+   - Language
+4. Set pricing and distribution (Free or Paid)
+5. Submit for review
 
-### Uploading Your Extension
-
-```bash
-# Package your extension using Chrome or zip the contents
-cd tabmaster
-zip -r tabmaster.zip *
-```
-
-Upload this ZIP file through the Developer Dashboard. After review (typically 24-72 hours), your extension will be live.
-
-For detailed publishing guidance, see our [Publishing Guide](/docs/publishing/) in the extension documentation.
+For a comprehensive guide to the publishing process, see our [Chrome Extension Publishing Guide](/chrome-extension-guide/docs/publishing/).
 
 ---
 
 ## Monetization Options {#monetization}
 
-Building a successful extension can also be a viable business. There are several monetization strategies available for tab manager extensions:
+Building a successful extension isn't just about coding—it's also about creating a sustainable business. There are several proven monetization strategies for tab managers.
 
-### Freemium Model
+### Monetization Strategies
 
-Offer basic features for free while reserving advanced functionality for paying users. Common premium features include:
+1. **Freemium Model**: Offer basic features for free with premium upgrades
+2. **One-time Purchase**: Full features with single payment
+3. **Subscription**: Monthly/yearly access to premium features
+4. **Affiliate Integration**: Earn commissions from recommended products
 
-- Unlimited session storage
-- Cloud sync across devices
-- Advanced automation rules
-- Custom themes and branding
-- Priority support
+### Premium Feature Ideas
 
-### Paid Features
+Consider these premium features for your tab manager:
 
-Consider which features to gate:
+- **Advanced Search**: Full-text search across all tab content
+- **Cloud Sync**: Sync sessions across devices
+- **Analytics**: Detailed browsing habit insights
+- **Custom Themes**: Branded color schemes
+- **Team Features**: Shared workspaces for collaboration
 
-- Advanced tab grouping algorithms
-- Enhanced suspend rules with idle detection
-- Export/import functionality
-- Team collaboration features
-- Analytics dashboard
+For detailed monetization strategies, see our [Extension Monetization Playbook](/chrome-extension-guide/docs/guides/extension-monetization.md).
 
-### Related Resources
+### Tab Suspender Pro: A Successful Example
 
-For comprehensive guidance on monetizing Chrome extensions, including ethical advertising practices and pricing strategies, refer to our [Extension Monetization Guide](/docs/guides/extension-monetization.md).
+[Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) demonstrates effective monetization of tab management features. The extension offers automatic tab suspension as a free core feature while monetizing advanced capabilities like custom suspension rules, detailed analytics, and priority support.
 
-For an example of a successful tab management product, check out [Tab Suspender Pro](https://zovo.one) which demonstrates professional implementation of tab suspension with a sustainable monetization model.
+This approach—free basic functionality with premium upgrades—has proven highly successful in the Chrome Web Store, generating consistent revenue while maintaining a large user base.
 
 ---
 
 ## Conclusion {#conclusion}
 
-Building a tab manager Chrome extension is an excellent project that teaches you the core concepts of extension development while creating a genuinely useful tool. You have learned how to work with the Chrome Tabs API, implement tab grouping, create suspend/restore functionality, design responsive popup interfaces, add keyboard shortcuts, and persist data with Chrome Storage.
+Building a tab manager Chrome extension is an excellent project that combines practical utility with valuable development skills. You've learned how to:
 
-The foundation you have built here can be extended in many directions: cloud sync, tab history analysis, AI-powered organization, team collaboration, and more. The Chrome extension ecosystem continues to evolve, and there is always demand for better tab management solutions.
+- Set up a Manifest V3 extension project
+- Leverage the chrome.tabs API for comprehensive tab control
+- Implement tab grouping for visual organization
+- Add suspend/restore functionality for memory management
+- Create an intuitive popup interface
+- Implement keyboard shortcuts for power users
+- Save and restore sessions with Chrome's storage API
+- Publish your extension to the Chrome Web Store
+- Monetize your work effectively
 
-Start with the basics outlined in this tutorial, gather user feedback, and iterate on your features. With persistence and attention to user needs, you can build an extension that thousands of users rely on daily.
+The tab management niche remains highly competitive but also lucrative. Users genuinely need help organizing their digital workspace, and a well-built extension can significantly improve their productivity.
+
+Remember to iterate based on user feedback, keep your extension lightweight and fast, and continuously add features that solve real problems. With dedication and good execution, your tab manager could become the next must-have extension for Chrome users worldwide.
 
 ---
 
