@@ -244,4 +244,4 @@ Building a landing page is not a one-time task. Continuously test, measure, and 
 
 ---
 
-*Built by [theluckystrike](https://zovo.one) at [zovo.one](https://zovo.one)*
+*Built by theluckystrike at zovo.one
