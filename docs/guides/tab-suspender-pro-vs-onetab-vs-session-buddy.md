@@ -29,7 +29,7 @@ This guide provides a comprehensive comparison of three popular tab management e
 
 ## Understanding the Core Approaches: Suspend vs. Close vs. Save
 
-Before diving into feature comparisons, it is essential to understand the three fundamental philosophies these extensions embody.
+Before diving into feature comparisons, it is essential to understand the three fundamental philosophies these extensions embody. For more details on tab management strategies, see our [Tab Management Guide](../tab-management/).
 
 **Tab Suspender Pro** uses a **suspend** approach. When a tab has been inactive for a configurable period, the extension "suspends" it, essentially freezing the page in its current state and releasing the memory it consumed. The tab remains visible in your tab bar but displays a placeholder. When you click it, the page instantly reloads from memory, restoring your place. This approach gives you the best of both worlds: dramatically reduced memory usage while maintaining instant access to your tabs.
 
@@ -60,7 +60,7 @@ Before diving into feature comparisons, it is essential to understand the three 
 
 ## Memory Savings Comparison
 
-Memory savings is where the rubber meets the road for most users. Here is how each extension performs in controlled testing with 30 tabs open.
+Memory savings is where the rubber meets the road for most users. Here is how each extension performs in controlled testing with 30 tabs open. For a deeper dive into Chrome memory optimization, check our [Memory Management Guide](../memory-management/).
 
 **Tab Suspender Pro** achieves approximately **79% memory reduction** in typical usage scenarios. With 30 tabs open (a mix of documentation, email, social media, and news sites), Chrome's memory consumption drops from approximately 3,500 MB to around 720 MB. The extension itself uses approximately 12 MB, resulting in total memory usage of roughly 732 MB. This represents a massive improvement in system responsiveness, especially for users with 8-16 GB of RAM.
 
@@ -170,7 +170,7 @@ Extensions can work together or conflict with each other.
 
 ## Making Your Decision
 
-Choose your tab manager based on your primary pain point:
+Choose your tab manager based on your primary pain point. For a broader comparison of tab management options, see our [Best Tab Manager Extensions Guide](../best-tab-manager-extensions-2026/) and [Automatic Tab Suspension Guide](../automatic-tab-suspension-guide/).
 
 - **If memory is your problem: Choose Tab Suspender Pro.** It provides automatic, continuous memory optimization with minimal user friction.
 - **If workflow disruption is acceptable and you prefer manual control: Choose OneTab.** It is simple and effective for users who do not mind the collapse/restore workflow.
