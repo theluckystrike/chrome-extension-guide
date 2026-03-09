@@ -9,6 +9,9 @@ highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
 
+include:
+  - google1a218412aeef37cf.html
+
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
