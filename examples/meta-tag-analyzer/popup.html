@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Tag Analyzer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Meta Tag Analyzer</h1>
+      <p class="subtitle">SEO & Open Graph Checker</p>
+    </header>
+
+    <div id="results">
+      <!-- Page Info -->
+      <section class="section">
+        <h2>Page Information</h2>
+        <div class="field">
+          <label>Page URL:</label>
+          <p class="url-display" id="pageUrl">Loading...</p>
+        </div>
+      </section>
+
+      <!-- Title Tag -->
+      <section class="section">
+        <h2>Title Tag</h2>
+        <div class="field">
+          <label>Title:</label>
+          <textarea id="titleTag" rows="2" readonly></textarea>
+          <div class="char-count">
+            <span id="titleCount">0</span> / 60 characters (recommended)
+          </div>
+          <div class="status" id="titleStatus"></div>
+        </div>
+      </section>
+
+      <!-- Meta Description -->
+      <section class="section">
+        <h2>Meta Description</h2>
+        <div class="field">
+          <label>Description:</label>
+          <textarea id="metaDescription" rows="3" readonly></textarea>
+          <div class="char-count">
+            <span id="descCount">0</span> / 160 characters (recommended)
+          </div>
+          <div class="status" id="descStatus"></div>
+        </div>
+      </section>
+
+      <!-- Open Graph Tags -->
+      <section class="section">
+        <h2>Open Graph Tags</h2>
+        <div class="field">
+          <label>OG Title:</label>
+          <input type="text" id="ogTitle" readonly>
+        </div>
+        <div class="field">
+          <label>OG Description:</label>
+          <textarea id="ogDescription" rows="2" readonly></textarea>
+        </div>
+        <div class="field">
+          <label>OG Image:</label>
+          <input type="text" id="ogImage" readonly>
+        </div>
+        <div class="field">
+          <label>OG URL:</label>
+          <input type="text" id="ogUrl" readonly>
+        </div>
+        <div class="field">
+          <label>OG Type:</label>
+          <input type="text" id="ogType" readonly>
+        </div>
+        <div class="field">
+          <label>OG Site Name:</label>
+          <input type="text" id="ogSiteName" readonly>
+        </div>
+        <div class="status" id="ogStatus"></div>
+      </section>
+
+      <!-- Twitter Cards -->
+      <section class="section">
+        <h2>Twitter Cards</h2>
+        <div class="field">
+          <label>Card Type:</label>
+          <input type="text" id="twitterCard" readonly>
+        </div>
+        <div class="field">
+          <label>Twitter Title:</label>
+          <input type="text" id="twitterTitle" readonly>
+        </div>
+        <div class="field">
+          <label>Twitter Description:</label>
+          <textarea id="twitterDescription" rows="2" readonly></textarea>
+        </div>
+        <div class="field">
+          <label>Twitter Image:</label>
+          <input type="text" id="twitterImage" readonly>
+        </div>
+        <div class="field">
+          <label>Twitter Site:</label>
+          <input type="text" id="twitterSite" readonly>
+        </div>
+        <div class="status" id="twitterStatus"></div>
+      </section>
+
+      <!-- Technical Tags -->
+      <section class="section">
+        <h2>Technical Meta Tags</h2>
+        <div class="field">
+          <label>Canonical URL:</label>
+          <input type="text" id="canonicalUrl" readonly>
+        </div>
+        <div class="field">
+          <label>Viewport:</label>
+          <input type="text" id="viewport" readonly>
+        </div>
+        <div class="field">
+          <label>Robots:</label>
+          <input type="text" id="robots" readonly>
+        </div>
+        <div class="field">
+          <label>Keywords:</label>
+          <input type="text" id="keywords" readonly>
+        </div>
+      </section>
+    </div>
+
+    <div id="error" class="error hidden">
+      <p>Unable to analyze this page. Please try a different URL.</p>
+    </div>
+
+    <footer>
+      <button id="refreshBtn">Refresh Analysis</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
