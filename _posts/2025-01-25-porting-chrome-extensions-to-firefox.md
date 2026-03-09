@@ -391,6 +391,7 @@ module.exports = environment => browserSpecific[environment];
 
 Set up CI/CD pipelines that test your extension in both Chrome and Firefox:
 
+{% raw %}
 ```yaml
 # Example: GitHub Actions workflow
 - name: Test in Firefox
@@ -399,6 +400,7 @@ Set up CI/CD pipelines that test your extension in both Chrome and Firefox:
 - name: Test in Chrome
   run: npx playwright test --browser chromium
 ```
+{% endraw %}
 
 ---
 
