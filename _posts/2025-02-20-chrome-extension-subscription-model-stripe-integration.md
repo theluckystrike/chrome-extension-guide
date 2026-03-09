@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Subscription Model — Complete Stripe Integration Tutorial"
-description: "Build a subscription-based Chrome extension with Stripe. Payment links, customer portal, webhook handling, license validation, and feature gating explained."
+description: "Build a subscription-based Chrome extension with Stripe. Payment links, customer portal, webhook handling, license validation, and feature gating implementation."
 date: 2025-02-20
 categories: [tutorials, monetization]
 tags: [stripe, subscription-model, extension-payments, license-validation, chrome-extension-monetization]
@@ -908,5 +908,3 @@ Remember that your extension's long-term success depends on delivering ongoing v
 For more monetization strategies, see our [Extension Monetization Guide](/chrome-extension-guide/docs/guides/monetization-overview/) and [Freemium Model Best Practices](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
 
 ---
-
-*Built by theluckystrike at [zovo.one](https://zovo.one)*
