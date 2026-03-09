@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "clean architecture extension, hexagonal architecture chrome, extension architecture patterns"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/clean-architecture-chrome-extensions-guide/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/clean-architecture-chrome-extensions-guide/"
 ---
 
 # Clean Architecture for Chrome Extensions: A Maintainable Design Guide

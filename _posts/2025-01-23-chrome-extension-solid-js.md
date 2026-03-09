@@ -123,6 +123,7 @@ Now let's create the actual extension interface. We'll build a reading list mana
 
 Modify `src/App.tsx` to create the popup interface:
 
+{% raw %}
 ```tsx
 import { createSignal, createEffect, For, Show } from 'solid-js';
 
@@ -236,6 +237,7 @@ function App() {
 
 export default App;
 ```
+{% endraw %}
 
 This example showcases several SolidJS patterns that make development pleasant and efficient. The `createSignal` hook creates reactive state, `createEffect` handles side effects like loading and saving data, and `For` and `Show` are control flow components that update efficiently.
 
@@ -243,6 +245,7 @@ This example showcases several SolidJS patterns that make development pleasant a
 
 Create an options page for additional settings in `src/Options.tsx`:
 
+{% raw %}
 ```tsx
 import { createSignal } from 'solid-js';
 
@@ -289,6 +292,7 @@ function Options() {
 
 export default Options;
 ```
+{% endraw %}
 
 ---
 
