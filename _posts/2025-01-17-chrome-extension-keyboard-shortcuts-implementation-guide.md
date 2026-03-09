@@ -332,3 +332,7 @@ The Commands API continues to evolve with Chrome's development, so stay current 
 - [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Create intuitive and efficient popup interfaces for your extensions.
 - [Chrome Extension Options Page Design Guide](/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/) - Build user-friendly settings pages for configuration.
 - [Chrome Extension Keyboard Navigation Implementation](/chrome-extension-guide/2025/01/29/chrome-extension-keyboard-navigation/) - Ensure your extension is fully accessible via keyboard.
+-e 
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -687,3 +687,7 @@ Start building your extension today, and explore the full potential of the Chrom
 - [Chrome Extension Bookmarks API Guide](/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/) - Learn to work with browser bookmarks
 - [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/03/08/chrome-extension-downloads-api-guide/) - Manage downloads from your extension
 - [Chrome Extension Browsing Data API](/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/) - Clear and manage browsing data
+-e 
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

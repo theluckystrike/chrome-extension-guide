@@ -426,3 +426,7 @@ With the techniques and examples in this guide, you have everything you need to 
 - [Chrome Extension DOM Manipulation Guide](/chrome-extension-guide/2025/01/20/chrome-extension-dom-manipulation-guide/) - Learn advanced DOM manipulation techniques for extensions
 - [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design intuitive popup interfaces for your extensions
 - [Chrome Extension Content Script Guide](/chrome-extension-guide/2025/03/16/chrome-extension-content-security-policy-csp/) - Master content scripts in your extensions
+-e 
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

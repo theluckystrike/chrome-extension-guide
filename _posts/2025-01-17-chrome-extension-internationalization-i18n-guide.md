@@ -249,3 +249,7 @@ The effort you invest in internationalization today will pay dividends in user s
 - [Chrome Extension Localization Workflow Guide]({% post_url 2025-01-18-chrome-extension-localization-workflow-guide %})
 - [Advanced i18n Workflow for Chrome Extensions]({% post_url 2025-01-29-advanced-i18n-workflow-for-chrome-extensions %})
 - [Chrome Extension Internationalization i18n Guide]({% post_url 2025-02-22-chrome-extension-internationalization-i18n-guide %})
+-e 
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

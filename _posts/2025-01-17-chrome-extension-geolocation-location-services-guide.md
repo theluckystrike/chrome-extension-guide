@@ -373,3 +373,7 @@ Remember to always request only the location permissions you need, handle errors
 - [Chrome Extension Permissions Explained: A Complete Guide](/chrome-extension-guide/2025/03/01/chrome-extension-permissions-explained/) - Understand extension permissions and security
 - [Chrome Extension Geolocation API Guide](/chrome-extension-guide/2025/04/01/chrome-extension-geolocation-api-guide/) - Deep dive into geolocation implementation
 - [Chrome Extension Web Bluetooth Guide](/chrome-extension-guide/2025/01/21/web-bluetooth-chrome-extension/) - Explore other powerful extension APIs
+-e 
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
