@@ -712,3 +712,11 @@ The Chrome Web Request API and declarativeNetRequest provide powerful capabiliti
 For most modern extension projects, declarativeNetRequest should be your primary tool. Its privacy-preserving design, performance advantages, and simpler review process make it the clear choice for ad blocking, content filtering, and general network request manipulation. Reserve Web Request for scenarios that genuinely require dynamic request analysis that cannot be expressed through declarative rules.
 
 With the techniques and examples in this guide, you have everything needed to start building powerful network control extensions that leverage the full potential of Chrome's extension platform.
+
+---
+
+## Related Articles
+
+- [Declarative Net Request API Complete Tutorial](/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/) - Learn more about the declarativeNetRequest API with hands-on examples
+- [Chrome Extension Cross-Origin Requests Guide](/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/) - Understanding CORS and cross-origin communication in extensions
+- [Build Network Monitor Chrome Extension](/chrome-extension-guide/2025/01/20/build-network-monitor-chrome-extension/) - Build a practical extension for monitoring network requests

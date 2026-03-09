@@ -415,3 +415,11 @@ Remember the key distinctions: use chrome.runtime.sendMessage for quick one-off 
 Implement proper error handling, validate all messages for security, clean up connections when they're no longer needed, and establish consistent message formats across your extension. Following these practices will help you build reliable, maintainable extensions that provide excellent user experiences.
 
 As you build more complex extensions, you'll find these message passing patterns appearing again and again. Master them now, and you'll be well-equipped to tackle any extension development challenge that comes your way.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Service Worker Complete Guide](/chrome-extension-guide/2025/02/17/chrome-extension-service-worker-complete-guide/) - Deep dive into service workers and their lifecycle in Chrome extensions
+- [CSS Injection Chrome Extension Content Script Guide](/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject and manage CSS in web pages from extensions
+- [Chrome Extension Event Pages vs Service Workers](/chrome-extension-guide/2025/01/18/chrome-extension-event-pages-vs-service-workers/) - Understand the differences between event pages and service workers

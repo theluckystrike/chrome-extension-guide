@@ -659,3 +659,11 @@ The Chrome Context Menus API provides a powerful foundation for building intuiti
 By following the examples and patterns presented in this guide, you now have the knowledge needed to create context menu extensions that are well-organized, performant, and user-friendly. The key to success is understanding your users' needs and providing targeted functionality that appears in the right context at the right time.
 
 As you continue developing extensions, remember to test thoroughly across different scenarios, handle errors gracefully, and consider performance implications when designing your menu structures. With these skills and best practices in mind, you are well-equipped to build powerful context menu extensions that provide genuine value to Chrome users.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand which permissions your extension needs and how to request them properly
+- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Learn how to design effective popup interfaces for your extensions
+- [Chrome Extension OAuth2 Authentication Guide](/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Implement secure authentication in your Chrome extensions
