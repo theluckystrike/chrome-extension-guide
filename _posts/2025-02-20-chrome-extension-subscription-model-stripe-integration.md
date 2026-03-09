@@ -518,4 +518,4 @@ For next steps, explore our detailed guides on [Freemium Model Implementation](/
 
 ---
 
-*Built by [theluckystrike](https://zovo.one) at [zovo.one](https://zovo.one)*
+*Built by theluckystrike at zovo.one*
