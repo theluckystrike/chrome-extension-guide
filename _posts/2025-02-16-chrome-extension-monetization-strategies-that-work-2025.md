@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Chrome Extension Monetization Strategies That Actually Work in 2025"
 description: "Proven monetization strategies for Chrome extensions. Freemium, subscriptions, one-time purchases, sponsorships, and affiliate models with real revenue numbers."
 date: 2025-02-16

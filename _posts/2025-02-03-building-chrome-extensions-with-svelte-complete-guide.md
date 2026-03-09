@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Building Chrome Extensions with Svelte — Complete Developer Guide (2025)"
 description: "Build lightweight Chrome extensions with Svelte. Zero runtime overhead, reactive stores for chrome.storage, content script injection, and blazing-fast popup UIs."
 date: 2025-02-03
