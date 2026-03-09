@@ -598,3 +598,5 @@ As you continue developing your extension, remember to stay current with Chrome'
 - [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design engaging and efficient popup interfaces
 - [Side Panel API Tutorial](/chrome-extension-guide/2025/02/23/chrome-extension-side-panel-api-tutorial/) - Advanced side panel implementation techniques
 - [Chrome Extension Options Page Design](/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/) - Build effective options and settings pages
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

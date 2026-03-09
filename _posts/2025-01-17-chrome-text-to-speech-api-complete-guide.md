@@ -570,3 +570,5 @@ Start experimenting with the Chrome TTS API today, and discover how voice synthe
 - [Chrome Extension Accessibility (A11y) Guide](/chrome-extension-guide/2025/01/18/chrome-extension-accessibility-a11y-guide/) - Build accessible extensions following best practices
 - [Speech Recognition and Voice Commands](/chrome-extension-guide/2025/01/21/chrome-extension-speech-recognition-voice-commands/) - Implement voice input in your extensions
 - [WebRTC Screen Sharing in Chrome Extensions](/chrome-extension-guide/2025/01/17/chrome-extension-webrtc-screen-sharing/) - Combine with WebRTC for video communication
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

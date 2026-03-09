@@ -720,3 +720,5 @@ With the techniques and examples in this guide, you have everything needed to st
 - [Declarative Net Request API Complete Tutorial](/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/) - Learn more about the declarativeNetRequest API with hands-on examples
 - [Chrome Extension Cross-Origin Requests Guide](/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/) - Understanding CORS and cross-origin communication in extensions
 - [Build Network Monitor Chrome Extension](/chrome-extension-guide/2025/01/20/build-network-monitor-chrome-extension/) - Build a practical extension for monitoring network requests
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -667,3 +667,5 @@ As you continue developing extensions, remember to test thoroughly across differ
 - [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand which permissions your extension needs and how to request them properly
 - [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Learn how to design effective popup interfaces for your extensions
 - [Chrome Extension OAuth2 Authentication Guide](/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Implement secure authentication in your Chrome extensions
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

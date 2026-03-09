@@ -624,3 +624,5 @@ Start building your tab management extension today, and explore the full potenti
 - [How to Manage 100+ Tabs Without Crashing](/chrome-extension-guide/2025/01/17/how-to-manage-100-tabs-chrome-without-crashing/) - Strategies for handling large numbers of tabs
 - [Tab Management Productivity Ultimate Guide](/chrome-extension-guide/2025/01/18/tab-management-productivity-ultimate-guide-2025/) - Complete guide to tab productivity
 - [Building a Tab Manager Chrome Extension](/chrome-extension-guide/2025/01/22/building-tab-manager-chrome-extension-tutorial/) - Step-by-step tab manager tutorial
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
