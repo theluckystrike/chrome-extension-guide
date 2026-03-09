@@ -1,159 +1,331 @@
 ---
 layout: default
 title: "Tab Suspender Pro vs OneTab vs Session Buddy: Which Tab Manager Is Best in 2026?"
-description: "Compare Tab Suspender Pro, OneTab, and Session Buddy across features, memory savings, workflow, pricing, and more. Find the best tab manager for your needs."
-permalink: /guides/tab-suspender-pro-vs-onetab-vs-session-buddy/
+description: "Compare Tab Suspender Pro, OneTab, and Session Buddy across features, memory savings, workflows, and pricing to find the best tab manager for your needs."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-suspender-pro-vs-onetab-vs-session-buddy/"
 ---
 
 # Tab Suspender Pro vs OneTab vs Session Buddy: Which Tab Manager Is Best in 2026?
 
-Chrome tab overload is a universal problem. Whether you're a researcher juggling dozens of article tabs, a developer with multiple documentation pages open, or a power user who leaves tabs open "for later," managing browser tabs has become essential for maintaining productivity and system performance. This comprehensive guide compares three of the most popular tab management extensions—Tab Suspender Pro, OneTab, and Session Buddy—to help you choose the right solution for your workflow in 2026.
+Tab overload is one of the most common productivity killers in modern web browsing. With the average knowledge worker keeping 50+ tabs open at any given time, browser memory consumption can bring even powerful machines to a crawl. Tab management extensions have evolved significantly to address this problem, offering different approaches ranging from aggressive tab suspension to comprehensive session management.
+
+In this comprehensive comparison, we'll examine three popular tab management solutions: Tab Suspender Pro, OneTab, and Session Buddy. Each takes a distinct approach to solving tab overload, and understanding their differences will help you choose the right tool for your workflow.
+
+## Understanding Tab Management Approaches
+
+Before diving into the specific tools, it's essential to understand the three primary strategies for managing tab resources:
+
+- **Tab Suspension**: Unloads tab content from memory while keeping the tab visible in the tab strip. When you click the tab, it reloads on demand.
+- **Tab Closing with Recovery**: Closes tabs but saves their URLs and optionally content, allowing you to restore sessions later.
+- **Session Management**: Captures complete browsing state including tabs, windows, history, and often additional metadata for comprehensive restoration.
+
+Each approach has trade-offs between memory savings, data preservation, and workflow integration. Let's see how our three contenders approach these strategies.
+
+---
 
 ## Feature Matrix: Suspend vs Close vs Save
 
-Understanding the fundamental approach each tool takes to tab management is the first step in making an informed decision.
-
 ### Tab Suspender Pro
 
-Tab Suspender Pro takes an automated approach to tab management by automatically suspending inactive tabs to free up memory while preserving their state. When you revisit a suspended tab, it reloads automatically—giving you the illusion that the tab was always there, just sleeping. The extension offers granular controls allowing you to whitelist sites that should never suspend, set custom suspension timers, and choose between discarding tabs completely or keeping them in a lightweight suspended state. For implementation details on tab suspension, see our [Tab Management Patterns](/docs/guides/tab-management.md) guide.
+Tab Suspender Pro takes the suspension-first approach to its logical conclusion. It automatically suspends tabs after a configurable period of inactivity, dramatically reducing memory usage while keeping all tabs accessible in the tab strip.
 
-The core philosophy behind Tab Suspender Pro is **passive automation**. It works in the background without requiring you to manually trigger tab consolidation. You install it, configure your preferences, and it handles the rest. This makes it particularly attractive for users who want a "set it and forget it" solution.
+**Core Features:**
+- Automatic tab suspension after customizable inactivity timer (1 minute to 24 hours)
+- Whitelist/blacklist for sites that should never or always be suspended
+- Manual suspend controls via toolbar popup
+- Tab grouping integration with Chrome's native tab groups
+- Keyboard shortcuts for quick suspend/resume
+- Visual indicators showing suspended vs. active tabs
+- Memory usage display in popup
+- Export/import suspension settings
+
+**Storage Approach**: Tab Suspender Pro focuses on suspension rather than saving. It doesn't store tab content for offline access but keeps the tab structure intact.
 
 ### OneTab
 
-OneTab takes a fundamentally different approach by converting your tabs into a list rather than keeping them loaded in the browser. When you click the OneTab icon, all your open tabs are converted into a list, and the tabs themselves are closed to free up memory. When you need to restore tabs, you can click individually or restore all at once.
+OneTab pioneered the "convert tabs to list" approach, which falls between suspension and closing. When activated, OneTab converts all your tabs into a list, closing them to free memory while preserving URLs for one-click restoration.
 
-This "convert to list" model means OneTab doesn't suspend tabs—it closes them entirely and stores their URLs in a lightweight list. This approach provides maximum memory savings since the tabs are genuinely closed, not just suspended. However, it also means you lose any unsaved form data or scroll position when tabs are converted to the list.
+**Core Features:**
+- One-click conversion of all tabs to a list
+- Individual or group tab restoration
+- Tab history with timestamps
+- Share tabs as a URL list (for sending to others)
+- Create multiple lists for organization
+- Search within saved tab lists
+- QR code generation for mobile access
+- Import/export functionality
+
+**Storage Approach**: OneTab saves URLs in its internal storage rather than keeping tabs open. This provides significant memory savings but requires explicit restoration to return to active tabs.
 
 ### Session Buddy
 
-Session Buddy occupies a middle ground between the automated approach of Tab Suspender Pro and the manual list approach of OneTab. It's primarily a session management tool that lets you save, restore, and organize browser sessions. While it doesn't automatically suspend tabs, it excels at capturing and preserving entire browser states.
+Session Buddy takes the most comprehensive approach, treating tab management as a full-fledged session management system. It's designed for users who need to manage complex browsing contexts across multiple projects or workflows.
 
-With Session Buddy, you can manually save your current window as a named session, restore previously saved sessions, and even recover tabs from crashed or closed windows. It's more of a "session insurance policy" than an active tab manager, giving you peace of mind that your browsing state won't be lost.
+**Core Features:**
+- Automatic session saving on browser close
+- Manual session capture and naming
+- Tab grouping within sessions
+- Session history with search
+- Duplicate tab detection and removal
+- Window organization tools
+- Import/export sessions (JSON format)
+- Cross-device sync via Chrome account
+- Session sharing via export
+
+**Storage Approach**: Session Buddy saves complete session data including URLs, titles, window arrangements, and timestamps. It prioritizes data preservation over aggressive memory management.
+
+---
 
 ## Memory Savings Comparison
 
-Memory efficiency is often the primary motivation for installing tab management extensions, so let's examine how each tool performs. For more details on how Chrome handles memory management for tabs, see our [Memory Management in Chrome Extensions](/docs/guides/memory-management.md) guide.
+Memory efficiency is often the primary reason users install tab management extensions. Here's how each tool performs:
 
-### Tab Suspender Pro Memory Savings
+### Memory Reduction Strategy
 
-Tab Suspender Pro uses Chrome's built-in tab discarding API to suspend tabs, which means the tab's content is unloaded from memory while preserving the tab in your tab bar (albeit with a visual indicator that it's suspended). In practice, users report saving between 60-90% of memory per suspended tab depending on the site's complexity.
+| Feature | Tab Suspender Pro | OneTab | Session Buddy |
+|---------|------------------|--------|---------------|
+| Method | In-memory suspension | URL storage only | Full session capture |
+| Memory Reduction | 85-95% per suspended tab | 95-99% per closed tab | Varies by session size |
+| Reactivation Speed | Instant (reloads in place) | Fast (new tab from URL) | Moderate (restores full state) |
+| Offline Access | No | No | Limited (session data only) |
 
-The memory savings with Tab Suspender Pro are impressive because suspended tabs consume virtually no memory—Chrome completely unloads them. However, there's a trade-off: when you click on a suspended tab, it must reload, which takes time and potentially uses data. For users with limited RAM but reliable internet, this is an excellent trade-off.
+### Real-World Impact
 
-### OneTab Memory Savings
+For a typical user with 50 tabs averaging 100MB each in memory:
 
-OneTab provides the most dramatic memory savings because it closes tabs entirely rather than just suspending them. When you convert 50 tabs to OneTab's list, you could potentially free 90% or more of the memory those tabs were consuming. The OneTab list itself uses minimal memory—essentially just the URLs and titles.
+- **Tab Suspender Pro** (auto-suspend after 5 minutes): Would reduce memory from 5GB to roughly 500MB-1GB depending on which tabs remain active. The browser continues running smoothly with minimal configuration.
 
-The trade-off is that OneTab requires more manual intervention. You need to remember to click the OneTab icon to consolidate tabs, and when you restore them, you're essentially opening fresh copies. Any dynamic content that was loading or any scroll position you had is lost.
+- **OneTab**: Would immediately free 4.9GB+ by closing all tabs, storing only the 50 URLs (a few kilobytes). Memory returns to near-baseline instantly. The trade-off is that each tab requires a click to restore.
 
-### Session Buddy Memory Savings
+- **Session Buddy**: Memory savings depend on whether auto-save is enabled. With aggressive session saving enabled, it can close tabs after capturing their state, achieving similar memory reduction to OneTab but with more sophisticated restoration options.
 
-Session Buddy doesn't provide automatic memory savings because it doesn't suspend or close tabs. Instead, it helps you manage sessions, which can lead to memory savings indirectly—by encouraging you to close windows you no longer need after saving their session.
+### Resource Consumption
 
-If you actively use Session Buddy to save and close sessions, you can achieve memory savings similar to OneTab. However, this requires more intentional behavior. Session Buddy's strength is in preserving state for later, not in automatically reducing memory usage.
+Each extension also consumes browser resources:
+
+- **Tab Suspender Pro**: Lightweight background process, minimal CPU when monitoring tab activity. Memory overhead of approximately 10-20MB for the extension itself.
+
+- **OneTab**: Very low resource usage. Stores URL lists efficiently (approximately 50 bytes per URL). No background monitoring required unless auto-convert is enabled.
+
+- **Session Buddy**: Higher resource usage due to continuous session monitoring. Stores more metadata per tab (URL, title, timestamp, window position), approximately 200-500 bytes per tab. Background sync can consume additional CPU.
+
+---
 
 ## Workflow Differences
 
-Each extension fits different workflow patterns:
+The way each extension integrates into your daily workflow varies significantly:
 
-**Tab Suspender Pro** works best for users who keep many tabs open continuously and want them all to be memory-efficient without manual action. If you typically have 20-50 tabs open at any time and want them all to be lightweight, Tab Suspender Pro's automation is valuable.
+### Tab Suspender Pro Workflow
 
-**OneTab** works best for users who do "burst" browsing—opening many tabs while researching, then wanting to consolidate them all at once to focus on the results. The conversion-to-list model encourages a workflow of "open many, consolidate, work through list."
+Tab Suspender Pro works best for users who want their tab ecosystem to largely manage itself. The automatic suspension means you can open tabs freely without worrying about memory:
 
-**Session Buddy** works best for users who work in distinct sessions—different projects or research topics that don't need to be open simultaneously. It excels at preserving complex tab arrangements for later use rather than optimizing the current browsing state.
+1. Browse normally, opening tabs as needed
+2. After inactivity period, tabs automatically suspend
+3. Suspended tabs show a visual indicator (grayed out or custom)
+4. Click any tab to instantly reload it
+5. Use keyboard shortcuts for bulk operations
+
+**Ideal For**: Power users who keep many reference tabs open for long periods and want transparent memory management without changing their browsing habits.
+
+### OneTab Workflow
+
+OneTab requires more deliberate action but offers better control:
+
+1. Accumulate tabs throughout your browsing session
+2. Click the OneTab icon when ready to reclaim memory
+3. All tabs convert to a clean list view
+4. Restore individual tabs or the entire list as needed
+5. Create named lists for different projects
+
+**Ideal For**: Users who work in focused bursts and want clear separation between different browsing contexts. The list view also serves as a useful visual organization tool.
+
+### Session Buddy Workflow
+
+Session Buddy is the most comprehensive but requires the most setup:
+
+1. Sessions auto-save (configurable) or you create named sessions
+2. Organize tabs into sessions manually or automatically
+3. When switching projects, load the relevant session
+4. Previous session remains saved for later
+5. Use search to find specific tabs across sessions
+
+**Ideal For**: Users managing multiple distinct projects or workflows who need to switch between different tab configurations frequently.
+
+---
 
 ## Tab Group Support
 
-Chrome's native tab groups feature has become increasingly important for tab organization, and each extension handles this differently.
+Chrome's native tab groups have become essential for organization. Here's how each extension handles them:
 
-**Tab Suspender Pro** respects Chrome's tab groups and will suspend tabs within groups while maintaining the group structure. When you restore a suspended tab, it returns to its original position within the group. This makes it compatible with users who rely heavily on tab groups for organization.
+### Tab Suspender Pro
 
-**OneTab** doesn't directly integrate with Chrome's tab groups. When you convert tabs to the OneTab list, the group structure is lost. The OneTab list itself offers its own grouping feature, but it's separate from Chrome's native tab groups. This could be a limitation for users who depend on visual tab group organization.
+Tab Suspender Pro maintains tab group associations when suspending. Groups remain intact, and you can see which tabs in a group are suspended vs. active. The extension respects Chrome's native tab group colors and labels. You can also configure group-specific suspension rules.
 
-**Session Buddy** captures tab groups when saving sessions, preserving the group structure within the saved session. When you restore a session, Session Buddy recreates the tab groups as they were. This makes it the strongest option for users who heavily rely on Chrome's native tab groups.
+### OneTab
 
-## Cloud Sync
+OneTab doesn't directly integrate with Chrome tab groups. When you convert tabs to the OneTab list, the group structure is lost. However, you can create multiple OneTab lists and use them as a replacement for tab groups. This approach works but requires a mental model shift from native groups.
 
-Cross-device synchronization has become essential for many users, particularly those who work across multiple computers.
+### Session Buddy
 
-**Tab Suspender Pro** stores its settings and suspension state locally by default. It offers limited sync capabilities through Chrome's storage sync API, but the focus is on local automation rather than cloud synchronization of tab lists.
+Session Buddy captures window and tab arrangement, which can include tab groups. When restoring a session, it attempts to recreate the original window structure. However, tab group colors and names aren't perfectly preserved in all restoration scenarios. For best results, organize within sessions rather than relying on native groups.
 
-**OneTab** offers cloud sync functionality through its premium version. You can sync your OneTab lists across devices, allowing you to start research on your work computer and continue on your home computer. This is particularly valuable for users who work across multiple machines.
+---
 
-**Session Buddy** provides robust cloud sync capabilities, allowing you to access your saved sessions across all your devices signed into the same Chrome account. Session data, including tab URLs and window arrangements, syncs automatically.
+## Cloud Sync Capabilities
+
+Sync capabilities matter for users working across multiple devices:
+
+### Tab Suspender Pro
+
+Basic sync support through Chrome's built-in extension sync (settings only). Tab suspensions aren't synced across devices—each browser instance manages its own tabs independently. This is typically acceptable since memory management is device-specific.
+
+### OneTab
+
+No built-in cloud sync. Tab lists are stored locally in each browser instance. However, you can manually export/import tab lists as JSON files or share via URL lists. This limits cross-device workflows but keeps data under user control.
+
+### Session Buddy
+
+The most robust sync capabilities among the three. Session Buddy integrates with Chrome's sync API to automatically sync sessions across devices where you're signed into the same Chrome account. This makes it the clear winner for multi-device workflows. Note that some sync limitations exist with very large sessions.
+
+---
 
 ## Keyboard Shortcuts
 
-Power users often rely on keyboard shortcuts for efficiency:
+Productivity-focused users rely heavily on keyboard shortcuts:
 
-**Tab Suspender Pro** offers customizable keyboard shortcuts for common actions like suspending the active tab, suspending all tabs in the current window, and restoring suspended tabs. The shortcuts are configurable in Chrome's keyboard shortcut settings.
+### Tab Suspender Pro
 
-**OneTab** provides keyboard shortcuts for converting all tabs to the list and restoring tabs. However, customization options are more limited compared to Tab Suspender Pro.
+- **Ctrl+Shift+S**: Suspend current tab
+- **Ctrl+Shift+U**: Unsuspend (reactivate) current tab
+- **Ctrl+Shift+A**: Suspend all tabs in current window
+- **Ctrl+Shift+D**: Disable auto-suspend temporarily
 
-**Session Buddy** includes keyboard shortcuts for saving sessions, restoring recent sessions, and accessing Session Buddy's interface. The shortcuts cover the most common session management tasks.
+### OneTab
+
+- **Ctrl+Shift+T**: Convert all tabs to OneTab list
+- **Ctrl+Shift+Y**: Restore last closed OneTab list
+- Right-click menu options for quick actions
+
+### Session Buddy
+
+- **Ctrl+Shift+H**: Open Session Buddy
+- **Ctrl+Shift+S**: Save current session
+- **Ctrl+Shift+Delete**: Discard current session
+- Extensive popup keyboard navigation
+
+---
 
 ## Performance Impact
 
-The performance characteristics of each extension differ significantly:
+Beyond memory savings, each extension affects overall browser performance:
 
-**Tab Suspender Pro** has minimal performance overhead since it uses Chrome's native tab discarding API. The extension primarily monitors tab activity and triggers suspension when appropriate. The visual indicator of suspended tabs requires minimal rendering resources.
+### Startup Behavior
 
-**OneTab** has essentially no performance impact on an active browsing session because tabs are either fully open or fully closed—there's no intermediate state. The OneTab list interface is lightweight and loads quickly.
+- **Tab Suspender Pro**: Minimal impact. Service worker runs in background but uses negligible resources until tab activity is detected.
+- **OneTab**: Near-zero impact. Only activates when clicked or via keyboard shortcut.
+- **Session Buddy**: Moderate impact. Continuous monitoring adds some CPU overhead, especially when syncing sessions.
 
-**Session Buddy** is lightweight when idle but does some processing when saving or restoring sessions. For normal browsing without session operations, its performance impact is negligible.
+### Reactivation Latency
+
+When returning to suspended or closed tabs:
+
+- **Tab Suspender Pro**: Nearly instant. The tab exists and simply reloads its content.
+- **OneTab**: Fast. Opens a new tab from the stored URL. Slightly slower than suspended tabs due to new tab creation.
+- **Session Buddy**: Moderate. Restores the complete tab state including scroll position and form data, which takes slightly longer but provides better continuity.
+
+---
 
 ## Privacy Comparison
 
-Privacy considerations are increasingly important for browser extensions that handle your browsing data.
+Privacy considerations vary based on where your tab data is stored:
 
-**Tab Suspender Pro** primarily interacts with Chrome's tab API and doesn't store significant amounts of user data externally. Suspension state is stored locally. However, users should review the extension's privacy policy to understand any data collection practices.
+### Tab Suspender Pro
 
-**OneTab** stores your tab URLs in its list, which could be considered sensitive information. The premium version's cloud sync means this data is transmitted to OneTab's servers. Users with strict privacy requirements should consider this.
+- All data remains local
+- No cloud connectivity for tab data
+- Minimal permissions required
+- Best privacy option
 
-**Session Buddy** stores session data locally and optionally syncs to the cloud. Since sessions can contain URLs of potentially sensitive browsing, users should evaluate whether cloud sync aligns with their privacy requirements.
+### OneTab
+
+- All data stored locally
+- Optional sharing features send URLs to OneTab's servers (to generate shareable links)
+- No account required
+- Good privacy with awareness of sharing limitations
+
+### Session Buddy
+
+- Optional Chrome sync stores sessions in Google's cloud
+- Sync data is encrypted in transit but accessible to Google
+- More permissions required due to comprehensive tab access
+- Good privacy unless sync is enabled
+
+---
 
 ## Use Case Recommendations
 
 ### For Power Users
 
-Power users who typically have dozens of tabs open will benefit most from **Tab Suspender Pro**. Its automated suspension means you can keep your "open tabs" workflow without memory consequences. The granular controls allow power users to customize behavior to match their exact needs.
+**Recommendation: Tab Suspender Pro**
+
+If you frequently keep dozens of reference tabs open and want transparent memory management without changing your behavior, Tab Suspender Pro is ideal. Its automatic suspension handles everything in the background, and the whitelist/blacklist system ensures critical tabs stay active.
 
 ### For Researchers
 
-Researchers who open many reference articles and need to return to them later should consider **OneTab**. The list-based workflow is ideal for research because you can quickly consolidate dozens of sources, work through them systematically, and always know how many tabs remain. The ability to group tabs within OneTab helps organize different research threads.
+**Recommendation: OneTab**
+
+Researchers often accumulate tabs while investigating topics and then need to systematically work through them. OneTab's list view provides a clean interface for reviewing and restoring tabs in order. The ability to create multiple named lists maps well to research projects.
 
 ### For Developers
 
-Developers who need to preserve complex arrangements of documentation, debugging tools, and code references will find **Session Buddy** most valuable. The ability to save named sessions for different projects means you can instantly switch between "API documentation mode" and "debugging mode" without losing your place. The session recovery feature is invaluable when Chrome crashes during development.
+**Recommendation: Session Buddy**
 
-## Pricing Comparison
+Developers typically work across multiple projects with different browser contexts. Session Buddy's comprehensive session management allows you to maintain separate sessions for different projects, easily switch between them, and preserve important browsing states like open documentation or debugging sessions.
 
-**Tab Suspender Pro** is primarily a free extension with optional premium features. The core suspension functionality is available at no cost, with premium options for advanced features.
+### For Multi-Device Users
 
-**OneTab** offers a freemium model. The basic conversion-to-list functionality is free, while cloud sync and additional features require a premium subscription.
+**Recommendation: Session Buddy**
 
-**Session Buddy** is free with optional premium features for enhanced sync and additional capabilities.
-
-## Integration Capabilities
-
-**Tab Suspender Pro** integrates with Chrome's native features and respects site preferences. It works well alongside other extensions and doesn't interfere with most web applications.
-
-**OneTab** can integrate with some productivity tools through its list sharing features. The list export functionality allows you to share tab lists with colleagues or import them into other applications.
-
-**Session Buddy** offers the most extensive integration capabilities, including the ability to export sessions in various formats and import sessions from other sources. This makes it valuable for teams that need to share browsing contexts.
-
-## Conclusion
-
-Choosing between Tab Suspender Pro, OneTab, and Session Buddy depends on your specific workflow and priorities:
-
-- Choose **Tab Suspender Pro** if you want transparent, automated tab memory management and prefer to keep tabs visible in your tab bar.
-- Choose **OneTab** if you prefer a manual list-based workflow and want maximum memory savings with a simple interface.
-- Choose **Session Buddy** if session management and cross-device sync are your primary concerns and you work in distinct, switchable contexts.
-
-For most users in 2026, the ideal solution might actually be a combination—using Tab Suspender Pro for ongoing tab efficiency while leveraging Session Buddy for session backup and OneTab for research consolidation.
+If you work across multiple computers and need your tab configurations available everywhere, Session Buddy's Chrome sync integration is the only option among these three that provides seamless multi-device support.
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
+## Pricing Comparison
 
+| Feature | Tab Suspender Pro | OneTab | Session Buddy |
+|---------|------------------|--------|---------------|
+| Free Version | Yes (limited) | Yes (full features) | Yes (full features) |
+| Premium Version | $4.99/year | $0 (donations) | $0 (donations) |
+| Premium Features | Advanced rules, cloud sync, priority support | N/A | N/A |
+
+Tab Suspender Pro is the only one with a freemium model. The free version covers basic automatic suspension, while premium adds advanced rules, cloud backup, and priority support. OneTab and Session Buddy operate on donation models with all features available for free.
+
+---
+
+## Integration Capabilities
+
+### Developer Extensions Ecosystem
+
+All three extensions can be combined with other productivity tools:
+
+- **Tab Suspender Pro** works well with [Tab Groups](../guides/tab-groups.md) for organization
+- **OneTab** integrates with [Chrome Storage API](../guides/storage-api.md) for custom extensions
+- **Session Buddy** exports sessions as JSON, making it compatible with backup and automation workflows
+
+For extension developers, understanding how these tools interact with the [tabs API](../guides/tabs-api.md), [memory management](../guides/memory-management.md), and [tab management](../guides/tab-management.md) patterns can inform your own tab-related extension development.
+
+---
+
+## Conclusion
+
+Choosing the right tab manager depends on your specific workflow:
+
+- **Choose Tab Suspender Pro** if you want automatic, transparent memory management with minimal intervention and good customization options.
+- **Choose OneTab** if you prefer explicit control over when tabs are managed and appreciate the list-based organization.
+- **Choose Session Buddy** if you need comprehensive session management with cross-device sync and complex tab configurations.
+
+All three tools effectively solve the core problem of tab overload, but their different philosophies make them suitable for different users and use cases. Try each one for a week in your actual workflow before committing—the right tab manager should feel invisible until you need it.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
