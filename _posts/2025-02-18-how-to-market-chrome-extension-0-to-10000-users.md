@@ -140,7 +140,7 @@ Prepare a thorough Hacker News comment explaining your product's technical imple
 
 ## Content Marketing Flywheel
 
-Content marketing creates sustainable, compounding growth that outperforms paid acquisition over time. Every piece of content you create continues generating traffic indefinitely, and quality content earns organic links that improve your entire marketing ecosystem.
+Content marketing creates sustainable, compounding growth that outperforms paid acquisition over time. Every piece of content you create continues generating traffic indefinitely, and quality content earns organic links that improve your entire marketing ecosystem. For a comprehensive guide to building and monetizing your email list through content marketing, see our [Chrome Extension Email Marketing](https://theluckystrike.github.io/chrome-extension-guide/2025/03/01/chrome-extension-email-marketing-build-monetize-user-list.html) guide.
 
 ### Blog Content Strategy
 
@@ -238,7 +238,7 @@ Positive reviews become marketing assets. Request permission to feature user tes
 
 ## Paid Acquisition Channels
 
-Once you understand your conversion funnel, paid channels can accelerate growth profitably. Start with small budgets to validate economics before scaling.
+Once you understand your conversion funnel, paid channels can accelerate growth profitably. Start with small budgets to validate economics before scaling. For detailed monetization strategies that work for Chrome extensions, check out our [Chrome Extension Monetization Strategies](https://theluckystrike.github.io/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025.html) guide.
 
 ### Google Ads for Extensions
 
