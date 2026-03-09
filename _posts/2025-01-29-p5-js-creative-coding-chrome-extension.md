@@ -349,4 +349,11 @@ To continue your journey with p5.js and Chrome extensions, explore these valuabl
 - [p5.js Instance Mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode) - Learn about creating isolated p5.js sketches
 - [Chrome Web Store Publishing Guide](https://developer.chrome.com/docs/webstore/publish) - How to publish your extension
 
-Happy creative coding!
+Happy creative coding!---
+
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
