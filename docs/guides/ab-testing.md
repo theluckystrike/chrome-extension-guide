@@ -1031,3 +1031,8 @@ For more information on Chrome extension development and best practices:
 5. **Document learnings** - Store experiment results for future reference
 6. **Monitor continuously** - Watch for issues and have kill switches ready
 7. **Iterate** - Use learnings to design better experiments
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+

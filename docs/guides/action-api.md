@@ -154,3 +154,8 @@ function initTracker() { /* tracking logic */ }
 ## Reference
 - https://developer.chrome.com/docs/extensions/reference/api/action
 - https://developer.chrome.com/docs/extensions/mv3/intro
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+

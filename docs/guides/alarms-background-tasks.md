@@ -146,3 +146,8 @@ chrome.alarms.get("myAlarm", (alarm) => {
 The chrome.alarms API is an essential tool for any Chrome extension developer working with Manifest V3. It provides a reliable mechanism for scheduling background tasks that survives service worker termination and handles the natural lifecycle of browser extensions.
 
 For simpler scheduled tasks, alarms alone are sufficient. But when you need full browser context for DOM operations or complex network requests, combine alarms with offscreen documents to create robust, long-running background processes that keep your extension working seamlessly for users.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+

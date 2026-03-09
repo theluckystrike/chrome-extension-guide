@@ -441,3 +441,8 @@ This foundation can be extended with advanced features like custom themes, sched
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+

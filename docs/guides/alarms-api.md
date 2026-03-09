@@ -162,3 +162,8 @@ chrome.alarms.onAlarm.addListener((a) => { if (a.name === "dataSync") syncData()
 
 - [Official Documentation](https://developer.chrome.com/docs/extensions/reference/api/alarms)
 - [Chrome Extensions Samples](https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/api/alarms)
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+

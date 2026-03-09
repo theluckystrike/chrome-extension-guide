@@ -396,3 +396,8 @@ The Canvas API opens tremendous possibilities for creating powerful drawing and 
 Remember to start with proper canvas setup, master the core drawing operations, implement intuitive drawing tools, optimize for performance, and follow best practices throughout development. With these skills, you can create Chrome extensions that deliver exceptional visual experiences to millions of users.
 
 As you continue developing canvas-based extensions, explore the additional possibilities offered by advanced features like WebGL for 3D graphics, the ImageBitmap API for efficient image processing, and the increasingly powerful capabilities of modern Chrome extensions. The canvas ecosystem continues to evolve, offering exciting opportunities for innovative extension developers.
+
+---
+## Turn Your Extension Into a Business
+Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+
