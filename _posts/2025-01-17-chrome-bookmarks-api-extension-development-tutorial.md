@@ -488,3 +488,8 @@ Start building your bookmark manager extension today, and take advantage of the 
 - [Chrome Extension Bookmarks API: Build a Custom Bookmark Manager](https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/)
 - [Chrome Extension History API: Access and Manage Browsing History](https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/)
 - [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)
+---
+
+---
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
