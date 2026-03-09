@@ -6,7 +6,7 @@ date: 2025-05-13
 categories: [Chrome Extensions, Security]
 tags: [web-crypto, encryption, chrome-extension]
 keywords: "chrome extension web crypto, encryption chrome extension, web crypto API extension, client side encryption chrome, chrome extension cryptography"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/13/chrome-extension-web-crypto-api-encryption/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/13/chrome-extension-web-crypto-api-encryption/"
 ---
 
 # Web Crypto API in Chrome Extensions: Client-Side Encryption Guide
