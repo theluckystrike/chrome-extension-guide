@@ -470,7 +470,7 @@ Key principles to remember:
 - **Measure and iterate**: Track what works and double down on successful channels
 - **Think long-term**: Sustainable growth comes from building genuine user relationships
 
-For more on monetizing your growing user base, explore our [Chrome Extension Monetization Strategies Guide]({% post_url 2025-02-16-chrome-extension-monetization-strategies-that-work-2025 %}). And for specific tactics on acquiring reviews that convert visitors to users, see our [Chrome Extension Review Acquisition Guide]({% post_url 2025-02-21-chrome-extension-review-acquisition-5-star-ratings %}).
+For more on getting your first 1,000 users, check out the [Zero to 1000 Users Guide](https://theluckystrike.github.io/extension-monetization-playbook/growth/zero-to-1000-users/) from our Extension Monetization Playbook. For content marketing strategies that drive organic traffic, see our [Chrome Extension SEO Guide]({% post_url 2025-02-28-chrome-extension-seo-rank-on-google-search %}). For more on monetizing your growing user base, explore our [Chrome Extension Monetization Strategies Guide]({% post_url 2025-02-16-chrome-extension-monetization-strategies-that-work-2025 %}). And for specific tactics on acquiring reviews that convert visitors to users, see our [Chrome Extension Review Acquisition Guide]({% post_url 2025-02-21-chrome-extension-review-acquisition-5-star-ratings %}).
 
 The Chrome extension market rewards developers who combine great products with strategic marketing. Execute these tactics consistently, and you'll build the foundation for sustainable growth from 10,000 users to 100,000 and beyond.
 
