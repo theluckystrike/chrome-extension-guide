@@ -2,13 +2,19 @@
 layout: post
 title: "Chrome Storage API Overview"
 <<<<<<< HEAD
+<<<<<<< HEAD
 description: "Store data persistently with Chrome Storage API. Learn sync, local, and managed storage types, quota limits, and best practices for extension data storage."
 =======
 description: "Discover Chrome Storage API for persistent extension data. Explore sync, local, and managed storage types, quotas, async operations, and change listeners."
 >>>>>>> quality/fix-frontmatter-a7-r4
+=======
+description: "Discover the Chrome Storage API for persistent data storage in extensions. Learn about sync, local, and managed storage types, quotas, best practices, and how to handle asynchronous operations efficiently."
+>>>>>>> quality/fix-frontmatter-a10-r3
 date: 2025-06-05
 categories: [tutorial]
 tags: [storage, data, persistence, chrome-api, sync]
+keywords: "chrome storage API, chrome extension storage, sync storage chrome, local storage extension, chrome.storage tutorial"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/"
 ---
 
 The Chrome Storage API provides reliable data persistence for Chrome extensions. Unlike localStorage, it offers better performance, works across browser sessions, and can sync data across devices when users are signed in to Chrome.

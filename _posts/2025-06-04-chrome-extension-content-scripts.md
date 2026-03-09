@@ -2,13 +2,19 @@
 layout: post
 title: "Content Scripts in Chrome Extensions"
 <<<<<<< HEAD
+<<<<<<< HEAD
 description: "Master content scripts to interact with web pages. Learn DOM manipulation, Manifest V3 configuration, injection patterns, and background worker communication."
 =======
 description: "Master content script injection in Chrome extensions. Learn declarative and programmatic injection, DOM manipulation, isolated worlds, and message passing."
 >>>>>>> quality/fix-frontmatter-a7-r4
+=======
+description: "Master content scripts in Chrome extensions with this complete guide. Learn how to inject JavaScript into web pages, manipulate DOM, communicate with background scripts, and understand isolated worlds for secure page modification."
+>>>>>>> quality/fix-frontmatter-a10-r3
 date: 2025-06-04
 categories: [tutorial]
 tags: [content-scripts, injection, dom, manifest, javascript]
+keywords: "chrome content scripts, content script injection, chrome extension DOM manipulation, manifest v3 content scripts, programmatic content script injection"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/04/chrome-extension-content-scripts/"
 ---
 
 Content scripts are a powerful feature of Chrome extensions that run in the context of web pages. They allow your extension to read and modify page content, enabling a wide range of functionality from ad blocking to page enhancement.

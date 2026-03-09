@@ -2,13 +2,19 @@
 layout: post
 title: "Chrome Extension Popup Basics"
 <<<<<<< HEAD
+<<<<<<< HEAD
 description: "Create Chrome extension popups from scratch. Learn HTML popup files, Manifest V3 configuration, CSS styling, and JavaScript for user interfaces in this guide."
 =======
 description: "Learn to create Chrome extension popup interfaces with HTML, CSS, and JavaScript. Master Manifest V3 action config, styling best practices, and constraints."
 >>>>>>> quality/fix-frontmatter-a7-r4
+=======
+description: "Learn how to create Chrome extension popups from scratch. This guide covers HTML structure, CSS styling, JavaScript interactivity, popup size constraints, and best practices for building user-friendly extension interfaces."
+>>>>>>> quality/fix-frontmatter-a10-r3
 date: 2025-06-03
 categories: [tutorial]
 tags: [popup, ui, basics, manifest-v3, html]
+keywords: "chrome extension popup, extension popup tutorial, chrome popup html css, extension ui design, manifest v3 action popup"
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/06/03/chrome-extension-popup-basics/"
 ---
 
 The popup is the small window that appears when users click your extension icon in the Chrome toolbar. It's often the primary way users interact with your extension, making good popup design essential for user experience.
