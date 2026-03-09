@@ -739,7 +739,7 @@ As you continue developing your email template extension, consider adding these 
 
 ### Dynamic Placeholders
 
-Allow users to include placeholders like `{{name}}`, `{{date}}`, or `{{company}}` that get automatically replaced when inserting the template. This is particularly useful for personalized email campaigns.
+{% raw %}Allow users to include placeholders like `{{name}}`, `{{date}}`, or `{{company}}` that get automatically replaced when inserting the template. This is particularly useful for personalized email campaigns.{% endraw %}
 
 ### Team Collaboration
 
