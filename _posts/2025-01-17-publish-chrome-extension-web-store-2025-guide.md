@@ -170,4 +170,9 @@ Start your submission today, and join thousands of developers who have brought t
 
 *For more guides on Chrome extension development and optimization, explore our comprehensive documentation and tutorials.*
 
+<<<<<<< HEAD
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+=======
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
+>>>>>>> quality/add-links-a15-r2
+>>>>>>> quality/add-footer-a20-r4

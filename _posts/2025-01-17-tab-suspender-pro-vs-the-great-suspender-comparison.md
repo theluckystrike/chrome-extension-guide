@@ -105,6 +105,8 @@ The Great Suspender provides straightforward, reliable tab suspension with a pro
 
 Tab Suspender Pro represents the modern standard for tab suspension extensions. Its advanced features, better state preservation, privacy-conscious design, and active development make it the clear winner for users who want the best possible tab management experience. The optional premium features provide additional value for power users who need maximum control.
 
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
+
 For most users in 2025, Tab Suspender Pro is the recommended choice. It delivers a superior experience while respecting user privacy and providing the features that power users need to effectively manage their browser tabs. Whether you are a casual user with a handful of tabs or a power user with hundreds of tabs across multiple projects, Tab Suspender Pro has the capabilities to meet your needs.
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

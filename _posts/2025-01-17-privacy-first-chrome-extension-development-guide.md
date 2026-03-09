@@ -145,6 +145,8 @@ Start implementing these privacy principles in your next extension project or au
 
 - [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guide for building secure Chrome extensions
 - [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understanding and properly implementing extension permissions
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
 - [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implementing CSP to protect your extensions and users
 
 *Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
