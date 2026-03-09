@@ -57,7 +57,7 @@ Every Chrome extension begins with the manifest file. This JSON configuration te
 }
 ```
 
-This manifest declares the core permissions we need: `tabs` for accessing tab information, `tabGroups` for creating and managing tab groups, `storage` for saving sessions, and `commands` for keyboard shortcuts. The `action` key defines the popup that appears when users click your extension icon.
+This manifest declares the core permissions we need: `tabs` for accessing tab information, `tabGroups` for creating and managing tab groups, `storage` for saving sessions, and `commands` for keyboard shortcuts. For a comprehensive guide to extension permissions and best practices, see our [Permissions Guide](/docs/permissions/). The `action` key defines the popup that appears when users click your extension icon.
 
 Create a basic folder structure:
 
@@ -162,7 +162,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 ```
 
-These events keep your extension synchronized with the browser state, enabling real-time updates to your UI.
+These events keep your extension synchronized with the browser state, enabling real-time updates to your UI. For a complete reference of all available tab properties and methods, see our [Tabs API Reference](/docs/api-reference/tabs-api.md).
 
 ---
 
@@ -799,7 +799,7 @@ Consider which features to gate:
 
 ### Related Resources
 
-For comprehensive guidance on monetizing Chrome extensions, including ethical advertising practices and pricing strategies, refer to our [Extension Monetization Guide](/docs/monetization/).
+For comprehensive guidance on monetizing Chrome extensions, including ethical advertising practices and pricing strategies, refer to our [Extension Monetization Guide](/docs/guides/extension-monetization.md).
 
 For an example of a successful tab management product, check out [Tab Suspender Pro](https://zovo.one) which demonstrates professional implementation of tab suspension with a sustainable monetization model.
 
