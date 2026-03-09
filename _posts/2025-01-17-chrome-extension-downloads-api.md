@@ -384,4 +384,6 @@ The Chrome Downloads API is a powerful tool that enables extension developers to
 
 The key to building successful download extensions lies in proper error handling, attention to user experience, and following security best practices. By implementing the patterns and techniques covered in this guide, you'll be well-equipped to create download features that are reliable, user-friendly, and secure.
 
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+
 As you continue to develop your extension, remember to test thoroughly across different network conditions and file types, and always consider the security implications of your download functionality. With the Chrome Downloads API, you have all the tools you need to create professional-grade download features that your users will appreciate.
