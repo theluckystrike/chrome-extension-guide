@@ -630,3 +630,5 @@ Start implementing these testing practices today, and you will see the differenc
 - [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions from scratch.
 - [Chrome Extension Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for better performance and user experience.
 - [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Secure your extension against common vulnerabilities.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -460,3 +460,5 @@ Start building your custom DevTools panel today and transform how you debug and 
 - [Build Chrome DevTools Panel Extension (2025 Update)](/chrome-extension-guide/2025/02/20/build-chrome-devtools-panel-extension/) - Updated guide for building DevTools panels in 2025.
 - [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions.
 - [Advanced Chrome Extension Debugging Techniques](/chrome-extension-guide/2025/01/17/advanced-chrome-extension-debugging-techniques/) - Master debugging for Chrome extensions.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

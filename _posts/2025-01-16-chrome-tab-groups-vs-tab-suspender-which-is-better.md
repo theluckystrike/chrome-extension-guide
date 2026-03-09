@@ -141,3 +141,5 @@ If you are ready to experience the benefits of tab suspension firsthand, try [Ta
 - [How Tab Suspender Saves Laptop Battery Life](/chrome-extension-guide/2025/01/16/how-tab-suspender-saves-laptop-battery-life/) - Discover how tab suspension technology extends your laptop's battery life.
 - [Chrome Memory Optimization with Extensions Guide](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/) - Learn how to reduce Chrome's memory footprint using extensions.
 - [Fix Slow Browser: Too Many Tabs Chrome Extension](/chrome-extension-guide/2025/01/15/fix-slow-browser-too-many-tabs-chrome-extension/) - Solutions for browser slowdown caused by too many open tabs.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

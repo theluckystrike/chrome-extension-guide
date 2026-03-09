@@ -448,3 +448,5 @@ Remember to test your alarm implementations thoroughly, especially across browse
 - [Chrome Extension Notifications API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
 - [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.
 - [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Implement file download functionality in your extension.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
