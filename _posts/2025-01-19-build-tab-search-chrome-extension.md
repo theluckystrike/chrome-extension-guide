@@ -563,3 +563,37 @@ The complete source code for this tutorial is available in our examples director
 ---
 
 *This tutorial is part of our comprehensive Chrome Extension Development Guide. For more tutorials, check out our other posts on building browser extensions.*
+
+---
+
+## Advanced Search Features and Keyboard Optimization {#advanced-search}
+
+Taking your tab search extension to the next level requires implementing advanced search capabilities and comprehensive keyboard navigation. This section explores techniques that will make your extension significantly more powerful for power users.
+
+### Fuzzy Search Implementation
+
+Exact matching is useful, but users often remember tab titles imperfectly. Implementing fuzzy search allows your extension to find relevant results even with typos or partial matches. The Fuse.js library provides excellent fuzzy search capabilities that you can integrate into your extension.
+
+Fuzzy matching works by calculating similarity scores between the search query and potential matches. Configure the threshold to balance between too many irrelevant results and missing valid matches. A threshold of 0.3 to 0.5 typically provides good results for most use cases.
+
+Consider implementing multiple fuzzy matching strategies: character-based matching for typos, token-based matching for multi-word searches, and weighting to prioritize matches in certain fields (like matching in the title being more important than matching in the URL).
+
+### Advanced Keyboard Shortcuts
+
+Power users prefer keyboard-driven interfaces. Beyond basic arrow key navigation, implement these advanced keyboard shortcuts to dramatically improve usability:
+
+The number keys 1-9 should instantly select and open the first nine results, allowing users to open tabs without leaving the keyboard. Implement Ctrl plus number to pin a tab to a specific position for even faster access to frequently visited sites.
+
+Add keyboard modifiers for different open actions: Enter opens the selected tab in the current window, Shift+Enter opens it in a new window, and Ctrl+Enter opens it in a new background tab. These conventions align with browser standards and will feel intuitive to experienced users.
+
+### Search History and Smart Ranking
+
+Analyze search patterns to improve result ranking over time. Store successful searches and their outcomes, then use this data to boost results that the user has historically selected for similar queries.
+
+Implement recency weighting that considers when tabs were last accessed, not just when they were opened. A tab that the user visited five minutes ago is likely more relevant than one visited yesterday, even if both match the search query equally well.
+
+### Multi-Window and Profile Support
+
+For users with multiple browser windows or profiles, add functionality to search across all windows and optionally filter by window or profile. Display window names or profile avatars in search results to help users identify which window contains the desired tab.
+
+The chrome.windows API provides information about open windows, and chrome.sessions can enumerate tabs across all windows. Combine these with your search functionality to create a truly comprehensive tab search experience.

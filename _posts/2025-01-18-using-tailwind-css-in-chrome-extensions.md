@@ -256,6 +256,7 @@ Tailwind-generated CSS is standard CSS and will work in any browser. However, en
 
 ---
 
+<<<<<<< HEAD
 ## Advanced Tailwind Patterns for Enterprise Extensions {#advanced-patterns}
 
 As your Chrome extension grows in complexity, you will encounter scenarios that require more sophisticated styling approaches. This section explores advanced Tailwind patterns that scale well for enterprise-level extensions with multiple developers and complex UI requirements.
@@ -346,3 +347,34 @@ Consider implementing keyboard shortcuts for power users. Document these shortcu
 Combine Tailwind's visual styling with proper ARIA attributes. Screen readers cannot see your carefully styled elements, so you must provide semantic meaning through ARIA labels, roles, and states. Use the aria-* prefixes in your HTML to communicate dynamic states like expanded sections or loading indicators.
 
 Test your extension with screen readers regularly. Chrome's built-in screen reader (ChromeVox) provides a quick way to check basic functionality, but testing with NVDA, JAWS, or VoiceOver reveals additional issues that might affect your user base.
+=======
+## Advanced Theming: Dark Mode and Dynamic Styles {#advanced-theming}
+
+Creating a polished extension requires attention to visual consistency and user preferences. This section covers advanced theming techniques that will make your extension feel native to Chrome while respecting user system preferences.
+
+### Implementing Dark Mode Support
+
+Modern users expect applications to support dark mode, and Chrome extensions should be no exception. Tailwind's dark mode variant makes implementing this feature straightforward, but the implementation requires careful planning to work correctly in all extension contexts.
+
+Start by configuring Tailwind to use the class-based dark mode strategy rather than the media query strategy. This gives you explicit control over when dark mode is active, which is essential for extensions that need to sync their theme with Chrome's current theme.
+
+In your extension's JavaScript, listen for theme changes using the chrome.theme API. When Chrome's theme updates, add or remove a dark class from your extension's root element. Your Tailwind styles will automatically respond to this class change, updating colors throughout your extension.
+
+For content scripts that inject into web pages, you may need to communicate with the extension's background script to determine the current theme, then apply appropriate styles to match the user's preference.
+
+### Creating Custom Color Schemes
+
+Beyond simple light and dark modes, consider implementing custom color schemes that allow users to personalize their extension experience. Tailwind's configuration system supports defining custom color palettes that can be easily referenced throughout your extension.
+
+Create a color configuration that defines semantic colors for your extension's UI: primary actions, secondary elements, success states, error states, and background variations. Using semantic names rather than direct color values makes it easy to adjust your entire color scheme by changing values in one place.
+
+Consider adding a color picker in your extension's options page, allowing users to customize specific colors while maintaining adequate contrast ratios. Store user preferences in chrome.storage and apply them dynamically when your extension loads.
+
+### Responsive Extension Design
+
+Chrome extensions can display in various contexts with different available space. Popup windows have limited width, while options pages and side panels offer more room. Tailwind's responsive prefixes enable creating layouts that adapt gracefully to these different contexts.
+
+Use sm: and md: prefixes to adjust spacing, font sizes, and layout structures based on available space. Test your extension in all possible display contexts to ensure usability is maintained regardless of the viewport size.
+
+For popup windows, consider implementing a scrolling interface for longer content rather than expanding the popup beyond a reasonable size. Users typically expect popups to be quick-access interfaces, not full-page applications.
+>>>>>>> quality/expand-thin-a1-r6
