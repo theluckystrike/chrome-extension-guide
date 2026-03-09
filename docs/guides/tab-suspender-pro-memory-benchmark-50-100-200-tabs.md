@@ -184,7 +184,7 @@ We measured CPU usage during a 60-second idle period where no user interaction o
 
 The CPU reduction scales even more dramatically than memory reduction. At 200 tabs, the baseline CPU usage of 52.3% represents more than half of a CPU core being consumed by background tab activity—activity the user isn't actively benefiting from. After suspension, this drops to just 4.8%, representing the minimal overhead of the suspension placeholders and Tab Suspender Pro's background monitoring service.
 
-For laptop users, this CPU reduction translates directly to battery life improvements. In our follow-up study on Tab Suspender Pro's battery life impact, we found that users gained an additional 2.5-3.5 hours of runtime on a single charge with typical usage patterns.
+For laptop users, this CPU reduction translates directly to battery life improvements. In our follow-up study on [Tab Suspender Pro's battery life impact](/docs/guides/tab-suspender-pro-battery-life-impact/), we found that users gained an additional 2.5-3.5 hours of runtime on a single charge with typical usage patterns. We also have a comprehensive guide on [Chrome tab freezing to save battery](/docs/guides/chrome-tab-freezing-save-battery-laptop/) for additional battery optimization strategies.
 
 ## System Responsiveness Scores
 
@@ -234,7 +234,7 @@ The timing of when tabs get suspended significantly impacts both user experience
 
 We recommend **30 seconds** as the default idle duration for most users. This provides enough buffer to handle typical tab-switching behavior while still capturing significant memory savings. Power users who keep many tabs active simultaneously may prefer 60 seconds, while users with extremely limited RAM may benefit from the more aggressive 15-second setting.
 
-For machines with 8GB of RAM or less, we recommend combining aggressive idle timers with a whitelist for your most frequently accessed sites. See our Chrome memory optimization developer guide for more configuration recommendations.
+For machines with 8GB of RAM or less, we recommend combining aggressive idle timers with a whitelist for your most frequently accessed sites. See our [Chrome memory optimization developer guide](/docs/guides/chrome-memory-optimization-developer-guide/) for more configuration recommendations, and check out our [memory management guide](/docs/guides/memory-management/) for additional techniques.
 
 ## Recommendations by Machine Specifications
 
@@ -269,7 +269,7 @@ High-memory systems may find tab suspension less critical but still beneficial f
 
 Tab Suspender Pro delivers consistent, substantial memory savings across all tab counts and site types tested. Whether you're managing 50 tabs or 200, you can expect 83-89% memory reduction and 85-91% CPU reduction after suspension activates. The impact on system responsiveness is transformative—at high tab counts, suspended Chrome uses fewer system resources than an idle desktop application.
 
-For users seeking to maximize their browser efficiency, combining Tab Suspender Pro with the techniques outlined in our Chrome tab freezing guide will deliver the best results. The extension's configurable nature allows you to balance memory savings against convenience, finding the optimal settings for your specific workflow and machine capabilities.
+For users seeking to maximize their browser efficiency, combining Tab Suspender Pro with the techniques outlined in our [Chrome tab freezing guide](/docs/guides/chrome-tab-freezing-save-battery-laptop/) will deliver the best results. The extension's configurable nature allows you to balance memory savings against convenience, finding the optimal settings for your specific workflow and machine capabilities.
 
 ---
 
