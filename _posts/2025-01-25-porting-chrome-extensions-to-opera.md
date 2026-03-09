@@ -187,3 +187,33 @@ To continue your learning journey in opera addon development and cross-browser e
 - Mozilla Developer Network: Cross-browser extension development best practices
 
 By leveraging these resources and applying the knowledge from this guide, you will be well-equipped to create successful cross-browser extensions that serve users across multiple platforms.
+
+---
+
+## Advanced Testing Strategies for Cross-Browser Extensions {#advanced-testing}
+
+Comprehensive testing is crucial for ensuring your extension works flawlessly across different versions of Opera and Chrome. This section covers advanced testing methodologies that will help you identify and resolve compatibility issues before they impact your users.
+
+### Automated Testing Frameworks
+
+Implementing automated tests significantly reduces the manual effort required for regression testing. Consider using Puppeteer or Playwright to create end-to-end tests that simulate user interactions across different browser contexts. These tools allow you to programmatically launch Opera or Chrome, interact with your extension's UI, and verify expected behaviors without manual intervention.
+
+For unit testing your extension's core logic, Jest combined with a Chrome API mocking library provides an excellent foundation. Mock the chrome global object to test background scripts and content script logic in isolation, ensuring your business logic works correctly regardless of the browser environment.
+
+### Browser Version Matrix Testing
+
+Opera and Chrome release updates frequently, and subtle differences between versions can cause unexpected behavior. Create a testing matrix that covers the minimum and maximum supported browser versions, as well as several versions in between. Prioritize testing on versions that your user analytics indicate are most popular among your user base.
+
+Virtual machines or containerized environments like Docker can help you maintain consistent testing environments across different browser versions. This approach ensures that your tests produce reliable results regardless of the host system's browser installations.
+
+### Performance Profiling Across Browsers
+
+Performance characteristics can vary between Opera and Chrome, especially for extensions that perform intensive computations or manipulate the DOM extensively. Use the browser's built-in developer tools to profile your extension's performance, paying particular attention to memory usage, CPU consumption, and startup time.
+
+The Performance API provides detailed timing information that you can capture and analyze automatically. Track metrics like time to first paint, time to interactive, and memory footprint across different browser versions to identify performance regressions early in your development cycle.
+
+### User Agent Detection and Feature Adaptation
+
+Implement robust user agent detection to customize your extension's behavior for different browsers and versions. While feature detection is preferable to user agent sniffing, some browser-specific optimizations may require knowing the exact browser version.
+
+Create configuration objects that define browser-specific behaviors, allowing you to easily adjust your extension's functionality based on the detected browser. This approach maintains clean code while supporting the nuanced differences between Opera and Chrome.
