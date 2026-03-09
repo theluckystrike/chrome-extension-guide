@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome Extensions, Developer Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "dom diff extension, html compare chrome, page change tracker"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-dom-diff-viewer-chrome-extension/
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-dom-diff-viewer-chrome-extension/"
 ---
 
 # Build a DOM Diff Viewer Chrome Extension: Complete Developer's Guide
