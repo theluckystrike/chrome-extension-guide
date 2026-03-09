@@ -357,12 +357,12 @@ For users who value their browser security, their personal data, and their devic
 
 Explore more tab management and Chrome optimization resources:
 
-- [Automatic Tab Suspension Setup Guide](/chrome-extension-guide/docs/guides/automatic-tab-suspension-guide/)
-- [Tab Suspender Pro: Memory Reduction Guide](/chrome-extension-guide/docs/guides/tab-suspender-pro-reduce-memory/)
-- [Tab Suspender Pro: Battery Life Impact](/chrome-extension-guide/docs/guides/tab-suspender-pro-battery-life-impact/)
-- [Fix Slow Chrome: Complete Guide](/chrome-extension-guide/docs/guides/fix-slow-chrome-too-many-tabs/)
-- [Chrome Memory Optimization Developer Guide](/chrome-extension-guide/docs/guides/chrome-memory-optimization-developer-guide/)
-- [Manage 100+ Chrome Tabs Effectively](/chrome-extension-guide/docs/guides/manage-100-plus-chrome-tabs/)
+- [Automatic Tab Suspension Setup Guide](/guides/automatic-tab-suspension-guide/)
+- [Tab Suspender Pro: Memory Reduction Guide](/guides/tab-suspender-pro-reduce-memory/)
+- [Tab Suspender Pro: Battery Life Impact](/guides/tab-suspender-pro-battery-life-impact/)
+- [Fix Slow Chrome: Complete Guide](/guides/fix-slow-chrome-too-many-tabs/)
+- [Chrome Memory Optimization Developer Guide](/guides/chrome-memory-optimization-developer-guide/)
+- [Manage 100+ Chrome Tabs Effectively](/guides/manage-100-plus-chrome-tabs/)
 
 ---
 
