@@ -187,3 +187,82 @@ To continue your learning journey in opera addon development and cross-browser e
 - Mozilla Developer Network: Cross-browser extension development best practices
 
 By leveraging these resources and applying the knowledge from this guide, you will be well-equipped to create successful cross-browser extensions that serve users across multiple platforms.
+
+---
+
+## Advanced Opera Extension Features {#advanced-features}
+
+Once you have successfully ported your basic extension to Opera, consider leveraging Opera-specific features to create a more polished experience for Opera users. These advanced capabilities can differentiate your extension and provide functionality unavailable in Chrome.
+
+### Opera Sidebar API Implementation
+
+One of Opera's most distinctive features is the sidebar, a persistent panel that remains visible alongside web pages. Extensions can integrate with this sidebar to provide always-accessible functionality without interrupting the user's browsing flow. The sidebar API allows your extension to create panels that users can toggle from the sidebar menu.
+
+Implementing sidebar support requires defining the sidebar_action in your manifest and creating an HTML panel that loads when users enable your extension. This panel can display information, provide controls, or serve as a mini-application alongside the main browser content.
+
+```json
+{
+  "sidebar_action": {
+    "default_panel": "sidebar.html",
+    "default_icon": {
+      "16": "icons/sidebar-16.png",
+      "32": "icons/sidebar-32.png"
+    },
+    "default_title": "My Extension"
+  }
+}
+```
+
+The sidebar HTML receives messages from your background script and can communicate with content scripts on the active tab. This enables powerful integrations where users can interact with the current page through the sidebar without navigating away from their content.
+
+### Integration with Opera's Built-in Features
+
+Opera includes several built-in features that users love, and your extension can interact with these to create seamless experiences. The built-in ad blocker, VPN client, and battery saver can all be referenced or integrated with through appropriate APIs and user preferences.
+
+Consider how your extension might complement these features. A password manager extension, for example, could integrate with Opera's synchronization system to provide a more cohesive experience. A VPN extension might work alongside Opera's built-in VPN to provide additional functionality.
+
+### Performance Optimization for Opera
+
+Opera users often value performance highly, given the browser's positioning around speed. Optimize your extension to minimize resource consumption and avoid impacting browser performance. Use the Chrome DevTools Protocol to profile your extension's memory and CPU usage.
+
+Implement lazy loading for extension features that are not immediately necessary. If your extension includes multiple modules, load them only when users access related functionality. This approach keeps the initial extension footprint small and responsive.
+
+---
+
+## Troubleshooting Common Porting Issues {#troubleshooting-issues}
+
+Despite Opera's close relationship with Chromium, porting issues can still arise. Understanding common problems and their solutions helps you resolve issues quickly and maintain a quality extension experience.
+
+### API Compatibility Problems
+
+Some Chrome APIs behave differently in Opera or may not be fully implemented. When encountering API issues, first check the Opera extension documentation for any limitations or alternative approaches. You may need to implement feature detection or provide graceful degradation for unsupported features.
+
+Common problem areas include advanced chrome.storage features, newer declarative APIs, and experimental features that Chrome has not yet stabilized. Test thoroughly across different Opera versions to ensure broad compatibility.
+
+### Manifest Version Conflicts
+
+While Opera supports Manifest V3, some older V2-specific patterns may not work correctly. Ensure your extension follows current best practices and does not rely on deprecated APIs. Review Chrome's migration guides for V3 to identify any problematic patterns in your code.
+
+### Visual Rendering Differences
+
+Minor rendering differences can occur between Chrome and Opera, particularly around form elements and scroll behavior. Test your extension's UI extensively in Opera, paying special attention to popup dimensions, scrollable regions, and input field styling. Use responsive Tailwind classes to accommodate different sizing.
+
+---
+
+## Testing Strategies for Cross-Browser Extensions {#testing-strategies}
+
+Comprehensive testing ensures your extension works correctly for all users, regardless of which browser they prefer. Develop testing strategies that cover both Chrome and Opera environments.
+
+### Automated Testing Approaches
+
+Implement automated tests that run in both Chrome and Opera environments. Use browser automation tools like Puppeteer or Playwright to create end-to-end tests that verify core functionality across browsers. These tests can catch regressions before they reach users.
+
+Unit tests should mock browser APIs to test logic independently of specific browser implementations. This approach reduces the number of browser-specific tests needed while ensuring business logic remains correct.
+
+### Manual Testing Checklists
+
+Create detailed manual testing checklists that cover essential user flows. Include tasks for both Chrome and Opera, with specific validation steps for each browser. Document any browser-specific behaviors that testers should verify.
+
+### User Feedback Integration
+
+Build mechanisms for collecting user feedback about browser-specific issues. In-extension feedback forms or review prompts can help identify problems that your testing missed. Monitor both Chrome Web Store and Opera Addons reviews for issue reports.
