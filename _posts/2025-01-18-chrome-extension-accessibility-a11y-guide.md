@@ -178,3 +178,11 @@ Chrome extension accessibility is both a technical discipline and a design philo
 The effort you invest in accessibility benefits not only users with disabilities but all users. Clear navigation, consistent interaction patterns, and good visual design improve the experience for everyone. By making accessibility a core part of your development process, you create better extensions that reach a wider audience and demonstrate your commitment to inclusive design.
 
 As Chrome extension development continues to evolve, accessibility standards and assistive technologies will continue to advance. Stay informed about developments in accessibility, update your extensions as new best practices emerge, and always prioritize the needs of all your users. Building accessible extensions is not just about compliance—it is about creating software that truly serves everyone.
+
+---
+
+## Related Articles
+
+- [Chrome Extension Keyboard Shortcuts Implementation Guide](/chrome-extension-guide/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/) - Implement keyboard navigation in your extensions
+- [Chrome Extension Internationalization (i18n) Guide](/chrome-extension-guide/2025/01/17/chrome-extension-internationalization-i18n-guide/) - Learn how to make your extension accessible globally
+- [Chrome Extension Dark Mode Implementation Guide](/chrome-extension-guide/2025/01/18/chrome-extension-dark-mode-implementation-guide/) - Implement accessible dark mode themes
