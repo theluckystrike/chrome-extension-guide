@@ -808,4 +808,4 @@ const port = connectWithRetry();
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+*This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and patterns, visit [zovo.one](https://zovo.one).*
