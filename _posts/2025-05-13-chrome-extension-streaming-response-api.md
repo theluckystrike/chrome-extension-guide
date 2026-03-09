@@ -411,3 +411,290 @@ Implementing streaming API responses in Chrome extensions opens up possibilities
 Remember to design for failure, optimize for the service worker lifecycle, prioritize security, and thoroughly test your implementation across all extension contexts. With these best practices in mind, you're well-equipped to build robust, production-ready extensions that handle real-time data feeds effectively.
 
 The streaming capabilities you've learned in this guide form the foundation for building sophisticated Chrome extensions—everything from live collaboration tools to real-time monitoring dashboards becomes achievable when you master these techniques. Start implementing streaming in your extensions today, and unlock the full potential of real-time web functionality within the Chrome ecosystem.
+
+---
+
+## Real-World Use Cases for Streaming {#use-cases}
+
+Streaming APIs enable various practical extension applications.
+
+### Live Collaborative Editing
+
+Build real-time document collaboration tools:
+
+```javascript
+// Real-time document sync
+class CollaborativeEditor {
+  constructor(documentId) {
+    this.documentId = documentId;
+    this.operations = [];
+    this.setupWebSocket();
+  }
+
+  setupWebSocket() {
+    this.ws = new WebSocket(`wss://api.example.com/docs/${this.documentId}`);
+    
+    this.ws.onmessage = (event) => {
+      const operation = JSON.parse(event.data);
+      this.applyOperation(operation);
+    };
+  }
+
+  applyOperation(operation) {
+    // Apply remote operation to local document
+    switch (operation.type) {
+      case 'insert':
+        this.insertText(operation.position, operation.text);
+        break;
+      case 'delete':
+        this.deleteText(operation.position, operation.length);
+        break;
+    }
+    this.operations.push(operation);
+  }
+}
+```
+
+### Stock Market Dashboard
+
+Create real-time stock tracking extensions:
+
+```javascript
+// Stock price streaming
+class StockStream {
+  constructor(symbols) {
+    this.symbols = symbols;
+    this.prices = new Map();
+    this.alerts = new Map();
+    this.connect();
+  }
+
+  connect() {
+    const url = `wss://stream.example.com/stocks?symbols=${this.symbols.join(',')}`;
+    this.ws = new WebSocket(url);
+    
+    this.ws.onmessage = (event) => {
+      const update = JSON.parse(event.data);
+      this.prices.set(update.symbol, update.price);
+      this.checkAlerts(update);
+      this.notifyListeners(update);
+    };
+  }
+
+  checkAlerts(update) {
+    const alert = this.alerts.get(update.symbol);
+    if (!alert) return;
+    
+    if (update.price >= alert.targetPrice && alert.direction === 'above') {
+      this.triggerAlert(update.symbol, update.price, 'above');
+    } else if (update.price <= alert.targetPrice && alert.direction === 'below') {
+      this.triggerAlert(update.symbol, update.price, 'below');
+    }
+  }
+}
+```
+
+### Live Sports Scores
+
+Track sports events in real-time:
+
+```javascript
+// Sports score streaming
+class SportsTracker {
+  constructor(sports) {
+    this.sports = sports;
+    this.sse = null;
+    this.subscribers = new Set();
+    this.connect();
+  }
+
+  connect() {
+    this.sse = new EventSource(`https://api.example.com/scores?sports=${this.sports}`);
+    
+    this.sse.onmessage = (event) => {
+      const update = JSON.parse(event.data);
+      this.notifySubscribers(update);
+      
+      if (update.importance === 'high') {
+        this.showNotification(update);
+      }
+    };
+
+    this.sse.onerror = () => {
+      console.error('SSE connection lost, reconnecting...');
+      setTimeout(() => this.connect(), 5000);
+    };
+  }
+
+  subscribe(callback) {
+    this.subscribers.add(callback);
+    return () => this.subscribers.delete(callback);
+  }
+
+  notifySubscribers(update) {
+    this.subscribers.forEach(callback => callback(update));
+  }
+}
+```
+
+---
+
+## Security Best Practices {#security}
+
+Secure your streaming implementations against common vulnerabilities.
+
+### Validate All Incoming Data
+
+```javascript
+// Input validation for streaming data
+function validateStockUpdate(data) {
+  const schema = {
+    symbol: { type: 'string', pattern: /^[A-Z]{1,5}$/ },
+    price: { type: 'number', min: 0, max: 1000000 },
+    timestamp: { type: 'number' }
+  };
+
+  for (const [field, rules] of Object.entries(schema)) {
+    const value = data[field];
+    
+    if (rules.type === 'string' && typeof value !== 'string') {
+      throw new Error(`Invalid ${field}: expected string`);
+    }
+    if (rules.type === 'number' && typeof value !== 'number') {
+      throw new Error(`Invalid ${field}: expected number`);
+    }
+    if (rules.min !== undefined && value < rules.min) {
+      throw new Error(`Invalid ${field}: below minimum ${rules.min}`);
+    }
+    if (rules.max !== undefined && value > rules.max) {
+      throw new Error(`Invalid ${field}: above maximum ${rules.max}`);
+    }
+  }
+
+  return true;
+}
+```
+
+### Secure WebSocket Connections
+
+```javascript
+// Use secure WebSocket connections
+function createSecureWebSocket(url) {
+  // Ensure wss:// (WebSocket Secure) protocol
+  if (!url.startsWith('wss://')) {
+    throw new Error('Only secure WebSocket connections allowed');
+  }
+
+  // Validate hostname
+  const hostname = new URL(url).hostname;
+  const allowedDomains = ['api.example.com', 'stream.example.com'];
+  
+  if (!allowedDomains.includes(hostname)) {
+    throw new Error('Connection to unauthorized domain blocked');
+  }
+
+  return new WebSocket(url);
+}
+```
+
+### Rate Limiting Implementation
+
+```javascript
+// Rate limiting for outgoing requests
+class RateLimiter {
+  constructor(maxRequests, timeWindow) {
+    this.maxRequests = maxRequests;
+    this.timeWindow = timeWindow;
+    this.requests = [];
+  }
+
+  async acquire() {
+    const now = Date.now();
+    this.requests = this.requests.filter(t => now - t < this.timeWindow);
+
+    if (this.requests.length >= this.maxRequests) {
+      const oldestRequest = this.requests[0];
+      const waitTime = this.timeWindow - (now - oldestRequest);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+      return this.acquire();
+    }
+
+    this.requests.push(now);
+    return true;
+  }
+}
+```
+
+---
+
+## Performance Monitoring {#monitoring}
+
+Track and optimize your streaming implementation's performance.
+
+### Connection Health Metrics
+
+```javascript
+class StreamMetrics {
+  constructor() {
+    this.metrics = {
+      messagesReceived: 0,
+      messagesFailed: 0,
+      reconnectionCount: 0,
+      averageLatency: 0,
+      lastMessageTime: null
+    };
+    this.latencies = [];
+  }
+
+  recordMessage(data, receiveTime) {
+    this.metrics.messagesReceived++;
+    this.metrics.lastMessageTime = receiveTime;
+
+    if (data.timestamp) {
+      const latency = receiveTime - data.timestamp;
+      this.latencies.push(latency);
+      
+      // Keep only last 100 measurements
+      if (this.latencies.length > 100) {
+        this.latencies.shift();
+      }
+      
+      this.metrics.averageLatency = 
+        this.latencies.reduce((a, b) => a + b, 0) / this.latencies.length;
+    }
+  }
+
+  recordFailure() {
+    this.metrics.messagesFailed++;
+  }
+
+  recordReconnection() {
+    this.metrics.reconnectionCount++;
+  }
+
+  getHealthStatus() {
+    const errorRate = this.metrics.messagesFailed / 
+      (this.metrics.messagesReceived + this.metrics.messagesFailed);
+    
+    return {
+      healthy: errorRate < 0.05 && this.metrics.averageLatency < 5000,
+      errorRate: (errorRate * 100).toFixed(2) + '%',
+      averageLatency: this.metrics.averageLatency.toFixed(0) + 'ms',
+      reconnectionCount: this.metrics.reconnectionCount
+    };
+  }
+}
+```
+
+---
+
+## Conclusion
+
+Mastering streaming APIs in Chrome extensions enables you to build sophisticated real-time applications. Key takeaways:
+
+1. **Choose the right protocol**: SSE for simple server-to-client, WebSockets for bidirectional, fetch streams for large data
+2. **Design for the service worker lifecycle**: Implement reconnection logic and state persistence
+3. **Prioritize security**: Validate all data, use secure connections, implement rate limiting
+4. **Monitor performance**: Track metrics to identify issues before users notice
+
+With these skills, you can create extensions that provide real-time experiences indistinguishable from native applications.
