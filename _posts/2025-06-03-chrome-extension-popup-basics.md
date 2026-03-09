@@ -1,15 +1,7 @@
 ---
 layout: post
 title: "Chrome Extension Popup Basics"
-<<<<<<< HEAD
-<<<<<<< HEAD
-description: "Create Chrome extension popups from scratch. Learn HTML popup files, Manifest V3 configuration, CSS styling, and JavaScript for user interfaces in this guide."
-=======
-description: "Learn to create Chrome extension popup interfaces with HTML, CSS, and JavaScript. Master Manifest V3 action config, styling best practices, and constraints."
->>>>>>> quality/fix-frontmatter-a7-r4
-=======
-description: "Learn how to create Chrome extension popups from scratch. This guide covers HTML structure, CSS styling, JavaScript interactivity, popup size constraints, and best practices for building user-friendly extension interfaces."
->>>>>>> quality/fix-frontmatter-a10-r3
+description: "Create Chrome extension popup interfaces with HTML, CSS, and JavaScript. Learn Manifest V3 action config, styling best practices, and size constraints."
 date: 2025-06-03
 categories: [tutorial]
 tags: [popup, ui, basics, manifest-v3, html]
