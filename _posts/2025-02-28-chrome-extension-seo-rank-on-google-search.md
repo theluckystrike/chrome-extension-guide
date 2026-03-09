@@ -6,6 +6,7 @@ date: 2025-02-28
 categories: [guides, seo]
 tags: [extension-seo, google-ranking, chrome-extension-marketing, search-optimization, backlinks]
 author: theluckystrike
+youtubeId: null
 ---
 
 # Chrome Extension SEO — Rank Your Extension on Google Search
