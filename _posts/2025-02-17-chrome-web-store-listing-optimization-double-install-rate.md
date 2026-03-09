@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Web Store Listing Optimization — Double Your Install Rate"
 description: "Optimize your Chrome Web Store listing for maximum installs. Title formulas, description templates, screenshot strategies, and A/B testing techniques that work."
 date: 2025-02-17
