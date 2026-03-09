@@ -535,7 +535,6 @@ For indeterminate streams, use a token counter and elapsed time.
 
 {% raw %}
 ```typescript
-{% raw %}
 // stream-progress.ts
 
 interface StreamProgress {
@@ -609,7 +608,6 @@ function StreamIndicator({ progress }: { progress: StreamProgress }) {
     </div>
   );
 }
-{% endraw %}
 ```
 {% endraw %}
 

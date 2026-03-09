@@ -292,7 +292,6 @@ Configure your error tracking tool to group similar errors automatically. Sentry
 
 {% raw %}
 ```javascript
-{% raw %}
 Sentry.configureScope((scope) => {
   scope.setFingerprint([
     '{{ default }}',
@@ -300,7 +299,6 @@ Sentry.configureScope((scope) => {
     errorData.context
   ]);
 });
-{% endraw %}
 ```
 {% endraw %}
 

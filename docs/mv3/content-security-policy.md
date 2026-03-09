@@ -505,7 +505,6 @@ Some popular libraries have features that violate MV3's CSP. Here's how to handl
 
 {% raw %}
 ```javascript
-{% raw %}
 // ❌ MV2 - Runtime compilation (uses eval)
 const template = Handlebars.compile('<div>{{name}}</div>');
 const html = template({ name: 'World' });
@@ -513,7 +512,6 @@ const html = template({ name: 'World' });
 // ✅ MV3 - Precompiled templates
 import template from './templates/hello.js';
 const html = template({ name: 'World' });
-{% endraw %}
 ```
 {% endraw %}
 

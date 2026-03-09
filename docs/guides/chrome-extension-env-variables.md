@@ -224,14 +224,12 @@ Inject secrets from CI environment variables:
 
 {% raw %}
 ```yaml
-{% raw %}
 # GitHub Actions example
 - name: Build Extension
   env:
     VITE_API_KEY: ${{ secrets.API_KEY }}
     VITE_API_URL: ${{ secrets.API_URL }}
   run: npm run build
-{% endraw %}
 ```
 {% endraw %}
 

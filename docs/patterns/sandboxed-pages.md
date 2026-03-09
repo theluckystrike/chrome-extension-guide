@@ -43,7 +43,6 @@ Since sandboxed pages cannot directly access extension APIs, communication happe
 
 {% raw %}
 ```javascript
-{% raw %}
 // Main extension page (background.js or popup)
 const sandbox = document.createElement('iframe');
 sandbox.src = chrome.runtime.getURL('sandbox.html');
@@ -58,7 +57,6 @@ sandbox.contentWindow.postMessage({
 window.addEventListener('message', (event) => {
   console.log('Result:', event.data.result);
 });
-{% endraw %}
 ```
 {% endraw %}
 
@@ -85,12 +83,10 @@ Many template engines (Handlebars, EJS, Underscore.js) rely on `eval` for runtim
 
 {% raw %}
 ```javascript
-{% raw %}
 // sandbox.html - Handlebars example
 const Handlebars = window.Handlebars;
 const template = Handlebars.compile('{{greeting}}, {{name}}!');
 const output = template({ greeting: 'Hello', name: 'World' });
-{% endraw %}
 ```
 {% endraw %}
 

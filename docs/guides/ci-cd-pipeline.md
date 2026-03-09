@@ -14,7 +14,6 @@ A complete guide to automating Chrome extension builds, testing, and publishing 
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/build.yml
 name: Build & Test
 
@@ -71,7 +70,6 @@ jobs:
           name: extension-build
           path: dist/
           retention-days: 7
-{% endraw %}
 ```
 {% endraw %}
 
@@ -81,7 +79,6 @@ Build for Chrome, Firefox, and Edge in parallel:
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/multi-browser.yml
 name: Multi-Browser Build
 
@@ -124,7 +121,6 @@ jobs:
         with:
           name: extension-${{ matrix.browser }}
           path: dist/${{ matrix.browser }}/
-{% endraw %}
 ```
 {% endraw %}
 
@@ -438,7 +434,6 @@ For PR comments showing size changes, use the size-limit GitHub Action:
 
 {% raw %}
 ```yaml
-{% raw %}
   size:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
@@ -458,7 +453,6 @@ For PR comments showing size changes, use the size-limit GitHub Action:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           build_script: build
-{% endraw %}
 ```
 {% endraw %}
 
@@ -585,7 +579,6 @@ Store these as GitHub repository secrets:
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/publish.yml
 name: Publish to Chrome Web Store
 
@@ -629,7 +622,6 @@ jobs:
           CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
           CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
-{% endraw %}
 ```
 {% endraw %}
 
@@ -792,12 +784,10 @@ Store the private key (`.pem` file) as an encrypted GitHub secret and never comm
 
 {% raw %}
 ```yaml
-{% raw %}
       - name: Inject extension key
         run: node scripts/inject-key.js
         env:
           EXTENSION_PUBLIC_KEY: ${{ secrets.EXTENSION_PUBLIC_KEY }}
-{% endraw %}
 ```
 {% endraw %}
 
@@ -877,7 +867,6 @@ console.log(generateReleaseNotes(fromTag));
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/release.yml
 name: Create Release
 
@@ -934,7 +923,6 @@ jobs:
           files: |
             extension.zip
             extension-firefox.zip
-{% endraw %}
 ```
 {% endraw %}
 
@@ -988,7 +976,6 @@ publishToChannel(channel);
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/staged-rollout.yml
 name: Staged Rollout
 
@@ -1032,7 +1019,6 @@ jobs:
           CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
           CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
-{% endraw %}
 ```
 {% endraw %}
 
@@ -1070,7 +1056,6 @@ Here is a full workflow that ties everything together:
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/pipeline.yml
 name: Extension Pipeline
 
@@ -1175,7 +1160,6 @@ jobs:
           CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
           CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
           CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
-{% endraw %}
 ```
 {% endraw %}
 

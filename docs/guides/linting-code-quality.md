@@ -196,7 +196,6 @@ Using `innerHTML` in content scripts is a security risk (XSS via page-controlled
 
 {% raw %}
 ```javascript
-{% raw %}
 // eslint-plugins/no-innerhtml-in-content.js
 export default {
   meta: {
@@ -238,7 +237,6 @@ export default {
     };
   },
 };
-{% endraw %}
 ```
 {% endraw %}
 

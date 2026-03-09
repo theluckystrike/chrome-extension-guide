@@ -98,7 +98,6 @@ Manual uploads to the Chrome Web Store are time-consuming and error-prone. The c
 
 {% raw %}
 ```yaml
-{% raw %}
 - name: Publish to Chrome Web Store
   if: startsWith(github.ref, 'refs/tags/v')
   run: |
@@ -109,7 +108,6 @@ Manual uploads to the Chrome Web Store are time-consuming and error-prone. The c
       --refresh-token ${{ secrets.REFRESH_TOKEN }} \
       --upload-zip-file dist/extension.zip \
       --publish-target 'default'
-{% endraw %}
 ```
 {% endraw %}
 
@@ -121,7 +119,6 @@ If your extension targets multiple browsers, run your CI pipeline across all of 
 
 {% raw %}
 ```yaml
-{% raw %}
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -131,7 +128,6 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - run: npm test -- --browser ${{ matrix.browser }}
-{% endraw %}
 ```
 {% endraw %}
 

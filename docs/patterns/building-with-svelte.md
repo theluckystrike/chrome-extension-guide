@@ -442,7 +442,6 @@ Svelte's built-in transitions create polished UIs with zero additional dependenc
 
 {% raw %}
 ```svelte
-{% raw %}
 <!-- popup/NotificationList.svelte -->
 <script lang="ts">
   import { fly, fade } from "svelte/transition";
@@ -487,7 +486,6 @@ Svelte's built-in transitions create polished UIs with zero additional dependenc
   .item button { background: none; border: none; font-size: 18px; cursor: pointer; opacity: 0.6; }
   .item button:hover { opacity: 1; }
 </style>
-{% endraw %}
 ```
 {% endraw %}
 
