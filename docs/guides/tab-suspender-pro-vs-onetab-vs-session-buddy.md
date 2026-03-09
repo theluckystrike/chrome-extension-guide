@@ -56,7 +56,7 @@ Memory optimization is the primary reason most users install a tab manager, maki
 
 **Session Buddy** consumes the least amount of memory for its core functionality since saved sessions are stored as data rather than active tabs. However, it doesn't provide automatic memory management for active browsing sessions. Users must manually save and close tabs to realize memory benefits, making Session Buddy more of a manual tool than an automated solution.
 
-For users focused primarily on memory optimization, Tab Suspender Pro provides the best balance between automatic management and state preservation. Check our [comprehensive guide to Chrome memory optimization](/docs/guides/chrome-memory-optimization-developer-guide/) for detailed benchmarks and configuration tips.
+For users focused primarily on memory optimization, Tab Suspender Pro provides the best balance between automatic management and state preservation. Check our [comprehensive guide to Chrome memory optimization](/guides/memory-management/) for detailed benchmarks and configuration tips.
 
 ## Workflow Differences
 
@@ -168,7 +168,7 @@ For most users in 2026, **Tab Suspender Pro** emerges as the best overall choice
 
 However, the right choice depends on your specific workflow. Choose **OneTab** if you want a completely free solution and don't mind manually managing your tab lists. Choose **Session Buddy** if complex session management and cross-device synchronization are priorities. Many power users benefit from combining these tools—using Tab Suspender Pro for ongoing tab optimization while leveraging Session Buddy for project-based organization.
 
-For more guidance on optimizing your Chrome experience, explore our [tab management guides](/docs/guides/automatic-tab-suspension-guide/) and learn about [Chrome memory optimization techniques](/docs/guides/chrome-memory-optimization-developer-guide/).
+For more guidance on optimizing your Chrome experience, explore our [tab management guides](/guides/tab-management/) and learn about [Chrome memory optimization techniques](/guides/memory-management/).
 
 ---
 
