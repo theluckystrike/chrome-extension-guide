@@ -626,6 +626,7 @@ Automate your tests on every push using GitHub Actions. For extension testing, y
 
 Create the CI workflow:
 
+{% raw %}
 ```yaml
 # .github/workflows/test-extension.yml
 name: Extension Tests
@@ -639,25 +640,25 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build extension
         run: npm run build
-      
+
       - name: Run unit tests
         run: npm test --if-present
-      
+
       - name: Run E2E tests with Playwright
         uses: nick-fields/retry@v3
         with:
@@ -666,14 +667,14 @@ jobs:
           command: npx playwright test --reporter=list
         env:
           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
-      
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
-      
+
       - name: Upload screenshots
         if: failure()
         uses: actions/upload-artifact@v4
@@ -691,6 +692,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
 ```
+{% endraw %}
 
 For Puppeteer tests in CI, add a headless-specific configuration:
 
