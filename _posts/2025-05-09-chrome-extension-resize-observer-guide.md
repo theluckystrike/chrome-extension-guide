@@ -486,6 +486,287 @@ async function testResizeBehavior() {
 }
 ```
 
+### Automated Testing with Puppeteer
+
+For comprehensive testing across different sizes, use Puppeteer:
+
+```javascript
+const puppeteer = require('puppeteer');
+
+async function testResponsivePopup() {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  
+  // Load extension
+  const extensionPath = '/path/to/extension';
+  await page.goto(`chrome-extension://${extensionPath}/popup.html`);
+  
+  // Test different sizes
+  const sizes = [
+    { width: 280, height: 400 },
+    { width: 320, height: 500 },
+    { width: 400, height: 600 },
+    { width: 500, height: 700 }
+  ];
+  
+  for (const size of sizes) {
+    await page.setViewport(size);
+    await page.reload();
+    
+    // Check layout classes
+    const layoutClass = await page.$eval('#popup-content', 
+      el => el.className);
+    console.log(`Size ${size.width}x${size.height}: ${layoutClass}`);
+  }
+  
+  await browser.close();
+}
+```
+
+---
+
+## Real-World Use Cases: Extension Examples
+
+### Use Case 1: Tab Manager Extension
+
+Tab managers benefit significantly from ResizeObserver:
+
+```javascript
+class TabManagerUI {
+  constructor() {
+    this.container = document.getElementById('tab-list');
+    this.setupResizeObserver();
+  }
+
+  setupResizeObserver() {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentBoxSize[0]?.inlineSize;
+        this.adjustTabDisplay(width);
+      }
+    });
+    
+    observer.observe(this.container);
+  }
+
+  adjustTabDisplay(width) {
+    // Narrow view: show favicon only
+    if (width < 200) {
+      this.container.classList.add('compact');
+      document.querySelectorAll('.tab-title').forEach(el => {
+        el.style.display = 'none';
+      });
+    } 
+    // Medium view: favicon + title
+    else if (width < 350) {
+      this.container.classList.remove('compact', 'expanded');
+      document.querySelectorAll('.tab-title').forEach(el => {
+        el.style.display = 'block';
+        el.style.whiteSpace = 'nowrap';
+        el.style.overflow = 'hidden';
+        el.style.textOverflow = 'ellipsis';
+      });
+    }
+    // Wide view: full information
+    else {
+      this.container.classList.add('expanded');
+    }
+  }
+}
+```
+
+### Use Case 2: Note-Taking Extension
+
+Notes apps can adapt their editor based on available space:
+
+```javascript
+class NoteEditorResponsive {
+  constructor(editorElement) {
+    this.editor = editorElement;
+    this.observer = new ResizeObserver(
+      this.handleResize.bind(this)
+    );
+    this.observer.observe(this.editor);
+  }
+
+  handleResize(entries) {
+    const { width } = entries[0].contentBoxSize[0];
+    
+    // Adjust toolbar layout
+    const toolbar = this.editor.querySelector('.toolbar');
+    if (width < 300) {
+      toolbar.classList.add('stacked');
+      toolbar.classList.remove('horizontal');
+    } else {
+      toolbar.classList.remove('stacked');
+      toolbar.classList.add('horizontal');
+    }
+    
+    // Adjust font size for readability
+    const baseFont = width < 280 ? 14 : width < 400 ? 16 : 18;
+    this.editor.style.fontSize = `${baseFont}px`;
+    
+    // Adjust line height
+    this.editor.style.lineHeight = width < 320 ? '1.4' : '1.6';
+  }
+}
+```
+
+### Use Case 3: Weather Widget Extension
+
+Weather extensions can show different detail levels:
+
+```javascript
+class WeatherWidgetResponsive {
+  constructor() {
+    this.container = document.getElementById('weather-widget');
+    this.setupObserver();
+  }
+
+  setupObserver() {
+    const observer = new ResizeObserver((entries) => {
+      const { width, height } = entries[0].contentBoxSize[0];
+      this.updateDisplay(width, height);
+    });
+    
+    observer.observe(this.container);
+  }
+
+  updateDisplay(width, height) {
+    // Tiny: temperature only
+    if (width < 150 || height < 100) {
+      this.showMinimal();
+    }
+    // Small: basic info
+    else if (width < 250 || height < 180) {
+      this.showBasic();
+    }
+    // Medium: standard display
+    else if (width < 400 || height < 300) {
+      this.showStandard();
+    }
+    // Large: full details
+    else {
+      this.showFull();
+    }
+  }
+
+  showMinimal() {
+    this.setDisplay(['temperature']);
+  }
+
+  showBasic() {
+    this.setDisplay(['temperature', 'condition']);
+  }
+
+  showStandard() {
+    this.setDisplay(['temperature', 'condition', 'humidity', 'wind']);
+  }
+
+  showFull() {
+    this.setDisplay(['temperature', 'condition', 'humidity', 'wind', 
+      'forecast', 'sunrise', 'sunset']);
+  }
+
+  setDisplay(elements) {
+    // Implementation to show/hide elements
+  }
+}
+```
+
+---
+
+## Integration with Chrome Side Panel API
+
+Chrome's Side Panel API works seamlessly with ResizeObserver:
+
+```javascript
+// side-panel.js - Complete integration
+class SidePanelManager {
+  constructor() {
+    this.panel = document.getElementById('side-panel-content');
+    this.initialize();
+  }
+
+  initialize() {
+    this.setupResizeObserver();
+    this.loadInitialState();
+  }
+
+  setupResizeObserver() {
+    const observer = new ResizeObserver(this.debounce((entries) => {
+      const entry = entries[0];
+      const width = entry.contentBoxSize[0]?.inlineSize || 0;
+      const height = entry.contentBoxSize[0]?.blockSize || 0;
+      
+      this.handleResize(width, height);
+    }, 100));
+    
+    observer.observe(this.panel);
+  }
+
+  handleResize(width, height) {
+    // Update panel layout based on dimensions
+    this.updateLayoutClasses(width);
+    this.updateComponentVisibility(width, height);
+    this.persistSizePreferences(width, height);
+  }
+
+  updateLayoutClasses(width) {
+    this.panel.classList.remove('narrow', 'medium', 'wide', 'ultra-wide');
+    
+    if (width < 200) this.panel.classList.add('narrow');
+    else if (width < 320) this.panel.classList.add('medium');
+    else if (width < 480) this.panel.classList.add('wide');
+    else this.panel.classList.add('ultra-wide');
+  }
+
+  updateComponentVisibility(width, height) {
+    // Dynamically show/hide components based on space
+    const components = {
+      'search-bar': width > 180,
+      'filter-panel': width > 280,
+      'preview-pane': width > 400,
+      'action-buttons': height > 60
+    };
+    
+    Object.entries(components).forEach(([id, visible]) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = visible ? 'flex' : 'none';
+    });
+  }
+
+  debounce(func, wait) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  async persistSizePreferences(width, height) {
+    await chrome.storage.local.set({
+      sidePanelSize: { width, height }
+    });
+  }
+
+  async loadInitialState() {
+    const result = await chrome.storage.local.get('sidePanelSize');
+    if (result.sidePanelSize) {
+      this.handleResize(
+        result.sidePanelSize.width, 
+        result.sidePanelSize.height
+      );
+    }
+  }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  new SidePanelManager();
+});
+```
+
 ---
 
 ## Browser Support and Polyfills

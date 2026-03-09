@@ -368,6 +368,348 @@ item.addEventListener('keydown', (e) => {
 });
 ```
 
+### Implementing Keyboard Reordering
+
+A complete keyboard-based reordering system:
+
+```javascript
+class KeyboardReorderManager {
+  constructor(listElement) {
+    this.list = listElement;
+    this.items = [...listElement.querySelectorAll('.sortable-item')];
+    this.setupKeyboardListeners();
+  }
+
+  setupKeyboardListeners() {
+    this.items.forEach(item => {
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('role', 'listitem');
+      item.setAttribute('aria-roledescription', 'draggable item');
+      
+      item.addEventListener('keydown', (e) => this.handleKeydown(e, item));
+    });
+  }
+
+  handleKeydown(e, item) {
+    switch(e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        this.moveItem(item, 'up');
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        this.moveItem(item, 'down');
+        break;
+      case 'Home':
+        e.preventDefault();
+        this.moveToFirst(item);
+        break;
+      case 'End':
+        e.preventDefault();
+        this.moveToLast(item);
+        break;
+    }
+  }
+
+  moveItem(item, direction) {
+    const items = [...this.list.querySelectorAll('.sortable-item')];
+    const currentIndex = items.indexOf(item);
+    const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+    
+    if (newIndex >= 0 && newIndex < items.length) {
+      const targetItem = items[newIndex];
+      if (direction === 'up') {
+        this.list.insertBefore(item, targetItem);
+      } else {
+        this.list.insertBefore(targetItem, item);
+      }
+      this.updateAriaLabels();
+      this.persistOrder();
+    }
+  }
+
+  moveToFirst(item) {
+    const firstItem = this.list.querySelector('.sortable-item');
+    if (firstItem && firstItem !== item) {
+      this.list.insertBefore(item, firstItem);
+      this.updateAriaLabels();
+      this.persistOrder();
+    }
+  }
+
+  moveToLast(item) {
+    const lastItem = [...this.list.querySelectorAll('.sortable-item')].pop();
+    if (lastItem && lastItem !== item) {
+      this.list.insertBefore(item, null);  // Append at end
+      this.updateAriaLabels();
+      this.persistOrder();
+    }
+  }
+
+  updateAriaLabels() {
+    const items = [...this.list.querySelectorAll('.sortable-item')];
+    items.forEach((item, index) => {
+      item.setAttribute('aria-label', `Item ${index + 1} of ${items.length}`);
+    });
+  }
+
+  persistOrder() {
+    const order = [...this.list.querySelectorAll('.sortable-item')]
+      .map(item => item.dataset.id);
+    chrome.storage.local.set({ itemOrder: order });
+  }
+}
+```
+
+### Touch Implementation with Touch Events
+
+For broader device support, implement touch-based drag and drop:
+
+```javascript
+class TouchDraggable {
+  constructor(element) {
+    this.element = element;
+    this.touchStartX = 0;
+    this.touchStartY = 0;
+    this.initialPosition = { x: 0, y: 0 };
+    
+    this.init();
+  }
+
+  init() {
+    this.element.addEventListener('touchstart', 
+      this.handleTouchStart.bind(this), 
+      { passive: false }
+    );
+    this.element.addEventListener('touchmove', 
+      this.handleTouchMove.bind(this), 
+      { passive: false }
+    );
+    this.element.addEventListener('touchend', 
+      this.handleTouchEnd.bind(this)
+    );
+  }
+
+  handleTouchStart(e) {
+    const touch = e.touches[0];
+    this.touchStartX = touch.clientX;
+    this.touchStartY = touch.clientY;
+    this.initialPosition = { 
+      x: this.element.offsetLeft, 
+      y: this.element.offsetTop 
+    };
+    
+    this.element.classList.add('touch-dragging');
+  }
+
+  handleTouchMove(e) {
+    e.preventDefault();  // Prevent scroll during drag
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - this.touchStartX;
+    const deltaY = touch.clientY - this.touchStartY;
+    
+    this.element.style.position = 'absolute';
+    this.element.style.left = `${this.initialPosition.x + deltaX}px`;
+    this.element.style.top = `${this.initialPosition.y + deltaY}px`;
+  }
+
+  handleTouchEnd(e) {
+    this.element.classList.remove('touch-dragging');
+    
+    // Calculate final position and reorder
+    const dropTarget = document.elementFromPoint(
+      e.changedTouches[0].clientX,
+      e.changedTouches[0].clientY
+    );
+    
+    if (dropTarget && dropTarget.closest('.drop-zone')) {
+      // Handle drop logic
+      this.handleDrop(dropTarget);
+    }
+    
+    // Reset position
+    this.element.style.position = '';
+    this.element.style.left = '';
+    this.element.style.top = '';
+  }
+
+  handleDrop(target) {
+    // Implementation for drop handling
+  }
+}
+```
+
+---
+
+## Real-World Extension Examples
+
+### Example 1: Bookmark Manager Extension
+
+A complete bookmark manager with drag and drop organization:
+
+```javascript
+class BookmarkManager {
+  constructor() {
+    this.folders = new Map();
+    this.dragData = null;
+    this.init();
+  }
+
+  init() {
+    this.loadBookmarks();
+    this.setupDragAndDrop();
+  }
+
+  async loadBookmarks() {
+    const result = await chrome.storage.local.get('bookmarks');
+    this.bookmarks = result.bookmarks || [];
+    this.render();
+  }
+
+  setupDragAndDrop() {
+    // Folder drag handlers
+    document.querySelectorAll('.folder').forEach(folder => {
+      folder.addEventListener('dragover', (e) => this.handleFolderDragOver(e));
+      folder.addEventListener('drop', (e) => this.handleFolderDrop(e));
+    });
+
+    // Bookmark drag handlers
+    document.querySelectorAll('.bookmark').forEach(bookmark => {
+      bookmark.addEventListener('dragstart', (e) => this.handleBookmarkDragStart(e));
+      bookmark.addEventListener('dragend', (e) => this.handleBookmarkDragEnd(e));
+    });
+  }
+
+  handleBookmarkDragStart(e) {
+    this.dragData = {
+      type: 'bookmark',
+      id: e.target.dataset.id,
+      sourceFolder: e.target.dataset.folderId
+    };
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  handleFolderDragOver(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('drag-over');
+  }
+
+  handleFolderDrop(e) {
+    e.preventDefault();
+    const folder = e.currentTarget;
+    folder.classList.remove('drag-over');
+    
+    if (this.dragData && this.dragData.type === 'bookmark') {
+      const targetFolderId = folder.dataset.folderId;
+      this.moveBookmark(this.dragData.id, targetFolderId);
+    }
+  }
+
+  async moveBookmark(bookmarkId, newFolderId) {
+    const bookmark = this.bookmarks.find(b => b.id === bookmarkId);
+    if (bookmark) {
+      bookmark.folderId = newFolderId;
+      await this.saveBookmarks();
+      this.render();
+    }
+  }
+}
+```
+
+### Example 2: Task Board with Multiple Lists
+
+Kanban-style task management across multiple columns:
+
+```javascript
+class TaskBoard {
+  constructor() {
+    this.lists = [];
+    this.draggedTask = null;
+    this.sourceList = null;
+    
+    this.init();
+  }
+
+  init() {
+    this.setupListDragDrop();
+    this.setupTaskDragDrop();
+  }
+
+  setupListDragDrop() {
+    const listsContainer = document.getElementById('task-lists');
+    
+    listsContainer.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const afterElement = this.getDragAfterElement(
+        listsContainer, 
+        e.clientX
+      );
+      const draggable = document.querySelector('.list-dragging');
+      
+      if (afterElement == null) {
+        listsContainer.appendChild(draggable);
+      } else {
+        listsContainer.insertBefore(draggable, afterElement);
+      }
+    });
+  }
+
+  setupTaskDragDrop() {
+    document.querySelectorAll('.task-list').forEach(list => {
+      list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const afterElement = this.getDragAfterElement(
+          list, 
+          e.clientY
+        );
+        const draggable = document.querySelector('.task-dragging');
+        
+        if (afterElement == null) {
+          list.appendChild(draggable);
+        } else {
+          list.insertBefore(draggable, afterElement);
+        }
+      });
+
+      list.addEventListener('drop', (e) => {
+        e.preventDefault();
+        this.handleTaskDrop(list);
+      });
+    });
+  }
+
+  getDragAfterElement(container, coordinate) {
+    const draggableElements = [
+      ...container.querySelectorAll('.draggable:not(.dragging)')
+    ];
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = container === child.parentNode
+        ? coordinate - box.top - box.height / 2
+        : coordinate - box.left - box.width / 2;
+
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  handleTaskDrop(targetList) {
+    const task = document.querySelector('.task-dragging');
+    if (task && targetList) {
+      const taskId = task.dataset.taskId;
+      const newStatus = targetList.dataset.status;
+      
+      this.updateTaskStatus(taskId, newStatus);
+    }
+  }
+}
+```
+
 ---
 
 ## Conclusion {#conclusion}

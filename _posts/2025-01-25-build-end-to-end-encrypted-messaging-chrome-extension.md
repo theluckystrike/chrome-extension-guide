@@ -554,6 +554,248 @@ Security-critical code requires rigorous testing:
 
 Use Chrome's built-in developer tools to debug your extension. The Console and Network tabs are invaluable for troubleshooting message handling.
 
+### Unit Testing Cryptographic Functions
+
+```javascript
+// tests/crypto.test.js
+
+describe('Cryptographic Functions', () => {
+  describe('generateKeyPair', () => {
+    it('should generate valid RSA key pair', async () => {
+      const keyPair = await generateKeyPair();
+      
+      expect(keyPair).toHaveProperty('publicKey');
+      expect(keyPair).toHaveProperty('privateKey');
+      expect(typeof keyPair.publicKey).toBe('string');
+      expect(typeof keyPair.privateKey).toBe('string');
+    });
+
+    it('should generate base64 encoded keys', async () => {
+      const { publicKey } = await generateKeyPair();
+      const base64Regex = /^[A-Za-z0-9+/]+=*$/;
+      expect(base64Regex.test(publicKey)).toBe(true);
+    });
+  });
+
+  describe('encryptMessage', () => {
+    it('should encrypt message successfully', async () => {
+      const { publicKey } = await generateKeyPair();
+      const message = 'Hello, secure world!';
+      
+      const encrypted = await encryptMessage(message, publicKey);
+      
+      expect(encrypted).toHaveProperty('encryptedContent');
+      expect(encrypted).toHaveProperty('encryptedSymmetricKey');
+      expect(encrypted).toHaveProperty('iv');
+    });
+
+    it('should produce different ciphertext for same message', async () => {
+      const { publicKey } = await generateKeyPair();
+      const message = 'Test message';
+      
+      const encrypted1 = await encryptMessage(message, publicKey);
+      const encrypted2 = await encryptMessage(message, publicKey);
+      
+      expect(encrypted1.encryptedContent).not.toBe(encrypted2.encryptedContent);
+    });
+  });
+
+  describe('encrypt/decrypt roundtrip', () => {
+    it('should correctly encrypt and decrypt message', async () => {
+      const { publicKey, privateKey } = await generateKeyPair();
+      const originalMessage = 'Secret message for testing';
+      
+      const encrypted = await encryptMessage(originalMessage, publicKey);
+      const decrypted = await decryptMessage(encrypted, privateKey);
+      
+      expect(decrypted).toBe(originalMessage);
+    });
+  });
+});
+```
+
+### Integration Testing with Chrome Extension Tests
+
+```javascript
+// tests/integration.test.js
+
+describe('Encrypted Messaging Integration', () => {
+  let extensionId;
+
+  beforeAll(async () => {
+    // Load extension for testing
+    extensionId = await loadExtension();
+  });
+
+  it('should send and receive encrypted messages', async () => {
+    // Generate key pair for sender
+    const senderKeys = await generateKeyPair();
+    
+    // Generate key pair for recipient
+    const recipientKeys = await generateKeyPair();
+    
+    // Sender encrypts message for recipient
+    const message = 'Integration test message';
+    const encrypted = await encryptMessage(message, recipientKeys.publicKey);
+    
+    // Verify encrypted package structure
+    expect(validateEncryptedPackage(encrypted)).toBe(true);
+    
+    // Recipient decrypts message
+    const decrypted = await decryptMessage(encrypted, recipientKeys.privateKey);
+    expect(decrypted).toBe(message);
+  });
+
+  it('should persist keys securely', async () => {
+    const { publicKey, privateKey } = await generateKeyPair();
+    
+    // Store keys
+    await storeKeys('test-user', publicKey, privateKey);
+    
+    // Retrieve keys
+    const retrieved = await retrieveKeys('test-user');
+    
+    expect(retrieved.publicKey).toBe(publicKey);
+    expect(retrieved.privateKey).toBe(privateKey);
+  });
+});
+```
+
+---
+
+## Advanced Security Patterns
+
+### Forward Secrecy Implementation
+
+Forward secrecy ensures that compromising one session key doesn't expose past messages:
+
+```javascript
+// lib/forward-secrecy.js
+
+class ForwardSecrecyManager {
+  constructor() {
+    this.sessionKeys = new Map();
+    this.expiredKeys = [];
+  }
+
+  generateSessionKey() {
+    return window.crypto.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 },
+      true,
+      ['encrypt', 'decrypt']
+    );
+  }
+
+  async encryptWithSessionKey(message, sessionKey) {
+    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+    const encoder = new TextEncoder();
+    const encodedMessage = encoder.encode(message);
+
+    const encrypted = await window.crypto.subtle.encrypt(
+      { name: 'AES-GCM', iv },
+      sessionKey,
+      encodedMessage
+    );
+
+    // Export session key for recipient
+    const exportedKey = await window.crypto.subtle.exportKey('raw', sessionKey);
+
+    return {
+      ciphertext: arrayBufferToBase64(encrypted),
+      iv: arrayBufferToBase64(iv),
+      sessionKey: arrayBufferToBase64(exportedKey),
+      timestamp: Date.now()
+    };
+  }
+
+  async decryptWithSessionKey(encryptedPackage, sessionKey) {
+    const ciphertext = base64ToArrayBuffer(encryptedPackage.ciphertext);
+    const iv = base64ToArrayBuffer(encryptedPackage.iv);
+
+    const decrypted = await window.crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv },
+      sessionKey,
+      ciphertext
+    );
+
+    const decoder = new TextDecoder();
+    return decoder.decode(decrypted);
+  }
+
+  rotateSessionKey() {
+    // Store current key in expired keys (for future forward secrecy)
+    // Generate new session key
+    return this.generateSessionKey();
+  }
+}
+```
+
+### Memory Protection Techniques
+
+Protect sensitive data in memory:
+
+```javascript
+// lib/memory-protection.js
+
+class SecureMemoryManager {
+  constructor() {
+    this.secureData = new WeakMap();
+  }
+
+  async storeSecureData(data) {
+    // Generate a secure random key for this data
+    const key = await window.crypto.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 },
+      true,
+      ['encrypt', 'decrypt']
+    );
+
+    // Encrypt the data before storing
+    const encoder = new TextEncoder();
+    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+    
+    const encrypted = await window.crypto.subtle.encrypt(
+      { name: 'AES-GCM', iv },
+      key,
+      encoder.encode(JSON.stringify(data))
+    );
+
+    const reference = {
+      encrypted: new Uint8Array(encrypted),
+      iv: iv,
+      key: key
+    };
+
+    this.secureData.set(reference, data);
+    return reference;
+  }
+
+  // Clear sensitive data from memory
+  clearSecureData(reference) {
+    if (this.secureData.has(reference)) {
+      const data = this.secureData.get(reference);
+      // Overwrite data in memory
+      for (let i = 0; i < data.length; i++) {
+        data[i] = 0;
+      }
+      this.secureData.delete(reference);
+    }
+  }
+}
+
+// Usage pattern for sensitive operations
+async function withSecureData(data, operation) {
+  const manager = new SecureMemoryManager();
+  const reference = await manager.storeSecureData(data);
+  
+  try {
+    return await operation(reference);
+  } finally {
+    manager.clearSecureData(reference);
+  }
+}
+```
+
 ---
 
 ## Deployment and Distribution {#deployment}

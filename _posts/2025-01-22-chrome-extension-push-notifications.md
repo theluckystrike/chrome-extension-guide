@@ -426,6 +426,180 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
+### Comprehensive Analytics Implementation
+
+```javascript
+// Advanced notification analytics
+class NotificationAnalytics {
+  constructor() {
+    this.metrics = {
+      shown: new Map(),
+      clicked: new Map(),
+      dismissed: new Map()
+    };
+  }
+
+  trackShown(notificationId, metadata = {}) {
+    const record = {
+      id: notificationId,
+      timestamp: Date.now(),
+      type: metadata.type || 'default',
+      ...metadata
+    };
+    
+    this.metrics.shown.set(notificationId, record);
+    this.sendToAnalytics('notification_shown', record);
+  }
+
+  trackClicked(notificationId) {
+    const record = this.metrics.shown.get(notificationId);
+    if (record) {
+      record.clickedAt = Date.now();
+      record.timeToClick = record.clickedAt - record.timestamp;
+      this.sendToAnalytics('notification_clicked', record);
+    }
+  }
+
+  trackDismissed(notificationId) {
+    const record = this.metrics.shown.get(notificationId);
+    if (record) {
+      record.dismissedAt = Date.now();
+      record.timeToDismiss = record.dismissedAt - record.timestamp;
+      this.sendToAnalytics('notification_dismissed', record);
+    }
+  }
+
+  sendToAnalytics(event, data) {
+    // Send to your analytics service
+    fetch('/api/analytics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event, data })
+    });
+  }
+
+  getMetricsSummary() {
+    const shown = this.metrics.shown.size;
+    const clicked = this.metrics.clicked.size;
+    const dismissed = this.metrics.dismissed.size;
+    
+    return {
+      totalShown: shown,
+      totalClicked: clicked,
+      totalDismissed: dismissed,
+      ctr: shown > 0 ? (clicked / shown * 100).toFixed(2) : 0,
+      dismissRate: shown > 0 ? (dismissed / shown * 100).toFixed(2) : 0
+    };
+  }
+}
+
+const analytics = new NotificationAnalytics();
+
+// Track all notification events
+chrome.notifications.onShown.addListener((notificationId) => {
+  analytics.trackShown(notificationId);
+});
+
+chrome.notifications.onClicked.addListener((notificationId) => {
+  analytics.trackClicked(notificationId);
+});
+
+chrome.notifications.onClosed.addListener((notificationId, byUser) => {
+  if (byUser) {
+    analytics.trackDismissed(notificationId);
+  }
+});
+```
+
+### Optimizing Based on Analytics
+
+```javascript
+// Notification optimization based on user engagement
+class NotificationOptimizer {
+  constructor() {
+    this.userEngagementScores = new Map();
+    this.notificationTypes = ['reminder', 'alert', 'update', 'promotion'];
+  }
+
+  calculateEngagementScore(userId, notificationType) {
+    // Get historical data for this user and notification type
+    const history = this.getUserHistory(userId, notificationType);
+    
+    if (history.length === 0) {
+      return 0.5; // Default medium score for new users
+    }
+    
+    const clickRate = history.filter(h => h.clicked).length / history.length;
+    const dismissRate = history.filter(h => h.dismissed).length / history.length;
+    
+    // Score: higher if clicked, lower if dismissed
+    return Math.max(0, Math.min(1, clickRate - dismissRate * 0.5));
+  }
+
+  shouldSendNotification(userId, notificationType, baseScore = 0.5) {
+    const userScore = this.calculateEngagementScore(userId, notificationType);
+    const combinedScore = (baseScore + userScore) / 2;
+    
+    // Only send if score exceeds threshold
+    return combinedScore > 0.3;
+  }
+
+  getOptimalSendTime(userId) {
+    // Analyze when user is most active
+    const activeHours = this.getUserActiveHours(userId);
+    return activeHours.length > 0 ? activeHours[0] : 9; // Default to 9 AM
+  }
+
+  getUserHistory(userId, notificationType) {
+    // Retrieve from storage
+    return [];
+  }
+
+  getUserActiveHours(userId) {
+    // Analyze user activity patterns
+    return [];
+  }
+}
+```
+
+---
+
+## Push Notification Best Practices Checklist
+
+Use this checklist to ensure your notification implementation follows best practices:
+
+### Permission Request Best Practices
+
+- [ ] Request permission at the right time (after user has engaged with your extension)
+- [ ] Explain what notifications they'll receive before requesting permission
+- [ ] Use the optional_permissions approach for better user experience
+- [ ] Handle permission denial gracefully
+- [ ] Provide an easy way to manage notification preferences
+
+### Notification Content Best Practices
+
+- [ ] Use clear, concise titles (under 50 characters)
+- [ ] Write compelling messages that provide value
+- [ ] Include relevant images when possible
+- [ ] Add action buttons for common user responses
+- [ ] Deep link to the most relevant content
+
+### Timing Best Practices
+
+- [ ] Respect user time zones
+- [ ] Don't send too many notifications (rate limiting)
+- [ ] Batch notifications when possible
+- [ ] Allow users to set quiet hours
+- [ ] Consider user engagement patterns
+
+### Technical Best Practices
+
+- [ ] Handle notification clicks appropriately
+- [ ] Clean up old notifications
+- [ ] Test across different Chrome versions
+- [ ] Implement proper error handling
+- [ ] Track metrics and iterate
+
 ---
 
 ## Conclusion
