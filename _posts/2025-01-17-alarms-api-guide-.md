@@ -445,6 +445,14 @@ Remember to test your alarm implementations thoroughly, especially across browse
 
 ## Related Articles
 
+<<<<<<< HEAD
 - [Chrome Extension Alarms API: Schedule Tasks and Periodic Events](https://theluckystrike.github.io/chrome-extension-guide/2025/02/24/chrome-extension-alarms-api-scheduling-tasks/)
 - [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)
 - [Chrome Extension Event Pages vs Service Workers: Complete MV3 Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-event-pages-vs-service-workers/)
+=======
+- [Chrome Extension Notifications API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
+- [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.
+- [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Implement file download functionality in your extension.
+
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+>>>>>>> quality/add-footer-a17-r2
