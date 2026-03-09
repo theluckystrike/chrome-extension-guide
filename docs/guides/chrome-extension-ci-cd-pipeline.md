@@ -84,7 +84,6 @@ Create the file `.github/workflows/ci-cd.yml` in your extension repository:
 
 {% raw %}
 ```yaml
-{% raw %}
 name: CI/CD Pipeline
 
 on:
@@ -253,7 +252,6 @@ jobs:
           client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
           publish-type: "default"
-{% endraw %}
 ```
 {% endraw %}
 

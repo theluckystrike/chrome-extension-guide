@@ -532,7 +532,6 @@ Turborepo's affected detection identifies packages changed since a base commit:
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/ci.yml
 name: CI
 
@@ -563,7 +562,6 @@ jobs:
           echo "affected=$AFFECTED" >> $GITHUB_OUTPUT
 
       - run: pnpm turbo run build --filter=...[${{ steps.affected.outputs.affected }}]
-{% endraw %}
 ```
 {% endraw %}
 
@@ -600,7 +598,6 @@ CI caching dramatically speeds up monorepo builds by reusing outputs from previo
 
 {% raw %}
 ```yaml
-{% raw %}
 - uses: actions/cache@v4
   with:
     path: |
@@ -609,7 +606,6 @@ CI caching dramatically speeds up monorepo builds by reusing outputs from previo
     key: ${{ runner.os }}-turbo-${{ github.sha }}
     restore-keys: |
       ${{ runner.os }}-turbo-
-{% endraw %}
 ```
 {% endraw %}
 
@@ -783,7 +779,6 @@ GitHub Actions can automate publishing on tag creation:
 
 {% raw %}
 ```yaml
-{% raw %}
 # .github/workflows/publish.yml
 name: Publish
 
@@ -801,7 +796,6 @@ jobs:
       - run: pnpm publish -r --filter @myorg/shared
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-{% endraw %}
 ```
 {% endraw %}
 

@@ -102,7 +102,6 @@ Track forks for attribution. GPL projects: forks must also be open source. Cross
 
 {% raw %}
 ```yaml
-{% raw %}
 name: Publish to CWS
 on: release
 jobs:
@@ -116,7 +115,6 @@ jobs:
           file-path: dist/extension.zip
           client-id: ${{ secrets.CWS_CLIENT_ID }}
           refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
-{% endraw %}
 ```
 {% endraw %}
 

@@ -56,11 +56,9 @@ async function saveHistory(req: any, res: any): Promise<void> {
 
 {% raw %}
 ```typescript
-{% raw %}
 function substitute(text: string, vars: Record<string, string>): string {
   return text.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] || `{{${k}}}`);
 }
-{% endraw %}
 ```
 {% endraw %}
 
