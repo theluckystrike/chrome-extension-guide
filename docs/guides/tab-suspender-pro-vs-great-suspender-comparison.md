@@ -192,6 +192,9 @@ The security landscape for browser extensions will only continue to evolve. New 
 ## Related Guides
 
 - [Automatic Tab Suspension Guide](/docs/guides/automatic-tab-suspension-guide)
+- [Tab Suspender Pro Memory Benchmarks: 50, 100, and 200 Tabs](/docs/guides/tab-suspender-pro-memory-benchmark-50-100-200-tabs)
+- [Tab Suspender Pro: Reduce Memory Usage](/docs/guides/tab-suspender-pro-reduce-memory)
+- [Tab Suspender Pro Battery Life Impact](/docs/guides/tab-suspender-pro-battery-life-impact)
 - [Chrome Memory Optimization Developer Guide](/docs/guides/chrome-memory-optimization-developer-guide)
 - [Chrome Extension Security Hardening](/docs/guides/chrome-extension-security-hardening)
 - [Managing 100+ Chrome Tabs](/docs/guides/manage-100-plus-chrome-tabs)
