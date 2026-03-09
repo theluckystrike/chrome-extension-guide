@@ -193,3 +193,6 @@ Tab suspender extensions address this problem directly by eliminating the resour
 The savings are real and measurable. Light users can expect 15 to 30 extra minutes of battery life, moderate users can gain 30 to 60 minutes, and heavy tab users can see improvements of one to three hours. Combined with Chrome's built-in Energy Saver mode, regular extension audits, and mindful tab management, a tab suspender extension is the most impactful single change you can make to extend your laptop's battery life while using Chrome.
 
 If you are ready to start saving battery life, try [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/fiabciakcmgepblmdkmemdbbkilneeeh) and configure automatic suspension with a 2 to 5 minute timer. The difference will be noticeable from your very first browsing session on battery power.
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

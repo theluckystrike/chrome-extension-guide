@@ -323,3 +323,6 @@ Stay vigilant, keep your dependencies updated, and make security reviews a regul
 - [Chrome Extension Permissions Explained: A Complete Security Guide](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand how to properly request and manage permissions to minimize security risks.
 - [Privacy-First Chrome Extension Development Guide](/chrome-extension-guide/2025/01/17/privacy-first-chrome-extension-development-guide/) - Build extensions that respect user privacy and data protection.
 - [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implement robust CSP headers to protect against XSS and injection attacks.
+
+---
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
