@@ -646,8 +646,8 @@ Optimizing Chrome extension bundle size requires a multi-faceted approach combin
 
 Start by analyzing your current bundle composition to identify the largest opportunities for improvement. Often, replacing a single large dependency or enabling dynamic imports for heavy features provides the most significant size reduction. Remember that bundle size optimization is an ongoing process—set up CI checks to catch regressions early and regularly review your bundle as your extension evolves.
 
-For more guidance on extension performance, explore our [performance optimization guides](../guides/chrome-extension-performance-optimization.md) and [framework setup documentation](../guides/wxt-framework-setup.md). Implementing these bundle size optimization techniques will help you create extensions that load quickly, perform well, and stay within Chrome Web Store size limits.
+For more guidance on extension performance, explore our [performance optimization guides](../guides/chrome-extension-performance-optimization.md) and [framework setup documentation](../guides/wxt-framework-setup.md). Implementing these bundle size optimization techniques will help you create extensions that load quickly, perform well, and stay within Chrome Web Store limits.
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one).*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
