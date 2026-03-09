@@ -6,6 +6,7 @@ date: 2025-01-22
 categories: [tutorials]
 tags: [tab-manager, chrome-extension-tutorial, tab-groups, chrome-tabs-api, browser-extension]
 author: theluckystrike
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/building-tab-manager-chrome-extension-tutorial/"
 ---
 
 # Building a Tab Manager Chrome Extension — Step-by-Step Tutorial (2025)
