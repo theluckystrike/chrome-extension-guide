@@ -659,6 +659,8 @@ async function loadCriticalData() {
 
 For more patterns on cross-context communication, see our [Advanced Messaging Patterns](/chrome-extension-guide/guides/advanced-messaging-patterns/) guide.
 
+For type-safe storage wrappers and structured data handling, check out our [Typed Storage Wrapper](/chrome-extension-guide/patterns/typed-storage-wrapper/) pattern and learn about [Chrome Storage Sync Strategies](/chrome-extension-guide/guides/chrome-storage-sync-strategies/) for implementing robust data synchronization.
+
 ## Performance Benchmarks {#performance}
 
 Understanding storage performance helps you design efficient extensions.
@@ -736,3 +738,13 @@ Effective storage management is crucial for building reliable Chrome extensions.
 6. **Optimize performance**: Cache frequently accessed data, batch operations, and choose appropriate storage types based on access patterns.
 
 For more advanced storage patterns and strategies, see our [Advanced Storage Patterns](/chrome-extension-guide/guides/advanced-storage-patterns/) and [Chrome Storage Sync Strategies](/chrome-extension-guide/guides/chrome-storage-sync-strategies/) guides.
+
+---
+
+For more insights into building production-ready Chrome extensions, explore the [Chrome Extension Guide](/chrome-extension-guide/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
+
+Visit [zovo.one](https://zovo.one) for more browser optimization tools, extensions, and productivity resources.
+
+---
+
+*This guide was last updated in 2026. Chrome Storage API features and limits may vary based on your Chrome version and extension manifest version.*
