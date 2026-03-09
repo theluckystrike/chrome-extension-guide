@@ -12,7 +12,7 @@ Startup performance is the cornerstone of a successful Chrome extension. When us
 
 Lazy loading and code splitting transform your extension from a heavyweight bundle into a lean, responsive tool that loads only what's needed, when it's needed. These techniques are essential for any serious Chrome extension developer who wants to deliver a premium user experience. This guide covers everything from dynamic imports in service workers to framework-specific patterns for React, Vue, and Svelte extensions.
 
-For a broader understanding of extension performance, see our [Chrome Extension Performance Best Practices](/chrome-extension-guide/guides/chrome-extension-performance-best-practices/) guide. For bundle size optimization techniques, check out [Chrome Extension Bundle Size Optimization](/chrome-extension-guide/guides/chrome-extension-bundle-size-optimization/).
+For a broader understanding of extension performance, see our [Chrome Extension Performance Best Practices](../guides/chrome-extension-performance-best-practices/) guide. For bundle size optimization techniques, check out [Chrome Extension Bundle Size Optimization](../guides/chrome-extension-bundle-size-optimization/).
 
 ---
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-For detailed performance profiling, see our guide on [Chrome Extension Performance Profiling with DevTools](/chrome-extension-guide/guides/chrome-extension-performance-profiling-devtools/).
+For detailed performance profiling, see our guide on [Chrome Extension Performance Profiling with DevTools](../guides/chrome-extension-performance-profiling-devtools/).
 
 ---
 
@@ -530,8 +530,8 @@ The patterns in this guide—from dynamic imports in service workers to route-ba
 
 Remember to measure your improvements with the tools and techniques outlined here. What gets measured gets optimized, and the results will show in user satisfaction and reviews.
 
-For more optimization strategies, explore our [Extension Bundle Analysis](/chrome-extension-guide/guides/extension-bundle-analysis/) guide and learn about [Performance Optimization](/chrome-extension-guide/guides/performance-optimization/) patterns specific to extensions.
+For more optimization strategies, explore our [Extension Bundle Analysis](../guides/extension-bundle-analysis/) guide and learn about [Performance Optimization](../guides/performance-optimization/) patterns specific to extensions.
 
 ---
 
-*This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and resources, visit [zovo.one](https://zovo.one).*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
