@@ -298,6 +298,6 @@ The Chrome extension ecosystem continues to evolve, and debugging tools evolve w
 
 ## Related Articles
 
-- [Chrome Extension Testing & Automation: Complete Guide](/chrome-extension-guide/2025/01/16/chrome-extension-testing-automation-guide/) - Learn how to test Chrome extensions with comprehensive testing strategies.
-- [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Get started with Chrome extension development from scratch.
-- [Chrome Extension Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for peak performance.
+- [Debugging Chrome Extensions: The Complete Developer Guide for 2025](https://theluckystrike.github.io/chrome-extension-guide/2025/02/25/chrome-extension-debugging-complete-guide/)
+- [Build a Chrome DevTools Panel Extension](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/build-chrome-devtools-panel-extension-guide/)
+- [Testing Chrome Extensions with Jest and Puppeteer: A Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/)
