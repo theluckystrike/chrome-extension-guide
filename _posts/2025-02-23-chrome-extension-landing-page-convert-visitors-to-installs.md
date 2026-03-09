@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Landing Page — Convert Visitors to Installs"
 description: "Build a high-converting landing page for Chrome extensions. Master hero sections, social proof, feature showcases, SEO, and CTA optimization for maximum installs."
 date: 2025-02-23
@@ -191,11 +191,11 @@ Form fields and input mechanisms must work smoothly on touch screens. If your la
 
 Your landing page shouldn't exist in isolation. Connect it to the broader ecosystem of content around your extension to improve SEO, provide additional value to visitors, and create multiple pathways to installation.
 
-If you haven't optimized your Chrome Web Store listing yet, review our guide on [Chrome Web Store Listing Optimization](/2025-02-17-chrome-web-store-listing-optimization-double-install-rate.md) to maximize your store conversion rate alongside your landing page efforts.
+If you haven't optimized your Chrome Web Store listing yet, review our guide on [Chrome Web Store Listing Optimization](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) to maximize your store conversion rate alongside your landing page efforts.
 
-For a comprehensive marketing strategy that extends beyond the landing page, explore our [Chrome Extension Marketing Playbook](/2025-02-18-how-to-market-chrome-extension-0-to-10000-users.md) covering Product Hunt launches, Reddit strategy, content marketing, and paid acquisition channels.
+For a comprehensive marketing strategy that extends beyond the landing page, explore our [Chrome Extension Marketing Playbook](/chrome-extension-guide/2025/02/18/how-to-market-chrome-extension-0-to-10000-users/) covering Product Hunt launches, Reddit strategy, content marketing, and paid acquisition channels.
 
-If you're thinking about monetization, our [Extension Monetization Strategies](/2025-02-16-chrome-extension-monetization-strategies-that-work-2025.md) guide covers freemium models, subscription billing, and building sustainable revenue alongside your install growth.
+If you're thinking about monetization, our [Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) guide covers freemium models, subscription billing, and building sustainable revenue alongside your install growth.
 
 ---
 
