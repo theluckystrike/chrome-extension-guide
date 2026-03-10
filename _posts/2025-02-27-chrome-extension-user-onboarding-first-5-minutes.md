@@ -371,4 +371,4 @@ By investing in thoughtful onboarding design, you transform one-time installers 
 
 ---
 
-*Built by theluckystrike at [zovo.one](https://zovo.one)*
+*Built by theluckystrike at zovo.one*
