@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Manifest V3 Monetization — What Changed for Paid Chrome Extensions"
-description: "How Manifest V3 affects extension monetization. Service worker limitations, new payment patterns, license validation changes, and updated monetization architectures."
+description: "How Manifest V3 affects extension monetization. Service worker limitations, new payment patterns, license validation changes, and updated monetization architectures for paid Chrome extensions."
 date: 2025-03-03
 categories: [guides, monetization]
 tags: [manifest-v3, extension-monetization, mv3-migration, service-worker-payments, chrome-extension-business]
