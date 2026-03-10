@@ -182,8 +182,8 @@ Content Security Policy forms the cornerstone of Chrome extension security in th
 
 The investment in robust CSP configuration pays dividends beyond security. Well-designed CSP policies clarify your extension's actual requirements, simplify security audits, and provide documentation of intended functionality. Treat CSP not as a compliance checkbox but as an integral part of your extension's security architecture.
 
-For additional security guidance, explore our [Chrome Extension Security Hardening](/chrome-extension-guide/guides/chrome-extension-security-hardening/) guide covering XSS prevention, secure messaging, and permission minimization. The [Web Request Interception](/chrome-extension-guide/guides/chrome-extension-web-request-interception/) guide provides detailed coverage of network request handling with proper security considerations.
+For additional security guidance, explore our [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening/) guide covering XSS prevention, secure messaging, and permission minimization. The [Web Request Interception](/guides/chrome-extension-web-request-interception/) guide provides detailed coverage of network request handling with proper security considerations.
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
