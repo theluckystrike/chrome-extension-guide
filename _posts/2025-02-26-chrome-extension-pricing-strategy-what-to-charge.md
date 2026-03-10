@@ -14,6 +14,8 @@ Pricing a Chrome extension is one of the most consequential decisions you'll mak
 
 This guide provides a comprehensive framework for pricing your extension based on market data, psychological research, and real-world case studies. We'll cover competitive analysis, willingness-to-pay research, pricing tier architecture, and advanced tactics like price anchoring and geographic pricing. By the end, you'll have a clear methodology for setting prices that maximize revenue while maintaining healthy conversion rates.
 
+This guide is part of our comprehensive [extension-monetization-playbook](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/), a collection of guides covering all aspects of monetizing Chrome extensions.
+
 This guide builds on our [monetization strategies overview](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) and [freemium model deep dive](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/). For technical implementation of payments, check out our [Stripe integration guide](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/).
 
 ---
