@@ -1,36 +1,54 @@
 ---
 layout: default
 title: "Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3"
-description: "Master CSP in Chrome extensions MV3. Covers defaults, sandbox pages, eval alternatives, trusted types, nonce scripts, remote code restrictions, and debugging."
+description: "Master Chrome extension CSP in MV3. Learn sandbox pages, eval alternatives, trusted types, nonce scripts, remote code restrictions, and debugging."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-content-security-policy/"
 ---
 
 # Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3
 
-Content Security Policy represents one of the most critical security mechanisms available to Chrome extension developers. With the transition from Manifest V2 to Manifest V3, Google significantly strengthened CSP requirements, eliminating many previously allowed patterns that posed security risks. This comprehensive guide explores every aspect of CSP configuration for modern Chrome extensions, from understanding default behaviors to implementing advanced security patterns that protect your users from common attack vectors.
+Content Security Policy represents one of the most critical security mechanisms available to Chrome extension developers. Unlike web applications where CSP is optional and often relaxed for compatibility, extensions operate with elevated privileges that make CSP configuration not just recommended but essential for protecting millions of users. This comprehensive guide dives deep into CSP implementation for Manifest V3 extensions, covering everything from default behaviors to advanced techniques like sandbox isolation, trusted types, and violation monitoring.
 
-Understanding CSP is no longer optional for extension developers—the Chrome Web Store review process actively examines CSP configurations, and extensions with inadequate policies face rejection or removal. Beyond compliance, robust CSP implementation protects your users from cross-site scripting attacks, data exfiltration, and malicious code injection that could compromise their browsing experience and sensitive information.
+Understanding CSP in the context of Chrome extensions requires recognizing a fundamental difference from traditional web development. Your extension runs with access to powerful APIs—cookies, tabs, webRequest, history, and more—that web pages simply cannot touch. A vulnerability in your extension therefore has far greater consequences than a vulnerability on a typical website. CSP serves as your primary defense against code injection attacks that could exploit these privileged APIs.
 
-## Understanding Manifest V3 CSP Defaults
+## Understanding MV3 CSP Defaults
 
-Chrome extensions built on Manifest V3 operate with a default Content Security Policy that provides baseline protection while allowing common development patterns. The default policy for extension pages is `script-src 'self' https://ajax.googleapis.com; object-src 'self';` — this configuration permits scripts from the extension's own origin and Google's AJAX CDN while allowing object elements from the extension origin.
+Chrome extensions built on Manifest V3 ship with a default Content Security Policy that provides baseline protection while remaining flexible enough for common development scenarios. The default policy permits scripts from the extension's own origin (`'self'`) and allows loading resources from `https://ajax.googleapis.com`, a remnant of the era when Google's CDN was the standard way to include popular libraries like jQuery.
 
-The default CSP exists primarily for backward compatibility and developer convenience during initial extension setup. Relying on these defaults without understanding their implications creates security vulnerabilities that sophisticated attackers can exploit. The allowance of `https://ajax.googleapis.com` is particularly concerning — if an attacker manages to compromise Google's CDN or inject malicious code into a commonly-used library, your extension could execute arbitrary JavaScript in your users' browsers.
+```json
+{
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0"
+}
+```
 
-Modern extension development requires explicit CSP configuration that aligns with your actual requirements. The default policy serves as a starting point, but production extensions should define comprehensive policies that restrict permissions to the minimum necessary for functionality. This approach follows the principle of least privilege — every capability your extension doesn't need should be explicitly denied.
+With this minimal manifest, your extension operates under the following implicit CSP: `script-src 'self' https://ajax.googleapis.com; object-src 'self'; child-src 'self'`. While this baseline protects against some attack vectors, it leaves significant gaps that malicious actors can exploit. The允许从Google CDN加载脚本的规定尤其令人担忧——如果攻击者能够渗透该CDN或通过中间人攻击替换资源，他们就可以在数百万个安装的扩展中执行任意代码。
 
-When you specify a custom CSP in your manifest.json, it completely replaces the default policy rather than augmenting it. This behavior surprises many developers who expect custom rules to add to existing restrictions. You must explicitly include all directives your extension requires, or those capabilities will be unavailable. For most extensions, this means crafting a policy that covers script sources, style sources, connect destinations, image sources, font sources, and object sources according to your specific use cases.
+The implicit policy also permits `object-src 'self'`, allowing your extension to load plugins and embedded content from its own origin. This capability, while sometimes necessary for specific use cases like PDF viewing, represents a potential attack surface that should be eliminated unless explicitly required.
+
+### Tightening Default Policies for Production
+
+Production extensions should always declare explicit CSP rules that eliminate unnecessary permissions. The following configuration represents a solid baseline for most extension types:
+
+```json
+{
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.example.com; frame-ancestors 'none'; base-uri 'self'"
+  }
+}
+```
+
+This configuration enforces strict boundaries: only scripts originating from your extension can execute, no plugins or external objects load, inline styles remain permitted for UI convenience, images can load from any HTTPS source, and your extension cannot be embedded in malicious iframes. The `connect-src` directive limits where your extension can make network requests, preventing data exfiltration even if an attacker injects code into your extension.
 
 ## Sandbox Pages for Untrusted Content
 
-Chrome's sandbox pages provide essential isolation for rendering content that cannot be fully trusted. When your extension needs to display user-generated HTML, process Markdown, render templates with user input, or handle content from external sources, doing so in your main extension context exposes all extension APIs and user data to potential compromise. Sandboxed pages run in an isolated environment with no access to extension APIs, creating a protective barrier between untrusted content and sensitive functionality.
-
-Configuring sandbox pages requires explicit declaration in your manifest and separate CSP for sandboxed content:
+One of the most powerful CSP features for extension developers is the ability to run pages in a sandboxed environment. Sandboxed pages operate in complete isolation from your extension's JavaScript context and cannot access any Chrome extension APIs. This isolation makes sandbox pages ideal for rendering untrusted content such as user-generated HTML, third-party widgets, or content fetched from external sources.
 
 ```json
 {
   "sandbox": {
-    "pages": ["sandbox.html", "renderer.html", "markdown-viewer.html"]
+    "pages": ["sandbox/renderer.html", "sandbox/markdown-viewer.html"]
   },
   "content_security_policy": {
     "sandbox": "sandbox allow-scripts; script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'"
@@ -38,27 +56,50 @@ Configuring sandbox pages requires explicit declaration in your manifest and sep
 }
 ```
 
-The sandbox CSP uses the `sandbox` directive to control what capabilities the isolated page receives. The `allow-scripts` keyword is essential — without it, the sandboxed page cannot execute any JavaScript at all, rendering it useless for dynamic content. However, notice the absence of extension API access in this policy — sandboxed pages cannot call chrome.runtime, chrome.storage, or any other extension APIs directly.
+Communication between your main extension context and sandbox pages occurs through message passing. Your main extension sends data to the sandbox, the sandbox processes it without access to sensitive APIs, and returns results back through the messaging system. This architecture ensures that even if malicious content escapes containment, it cannot access user data, intercept cookies, or manipulate browser tabs.
 
-Communication between sandboxed pages and your main extension requires the messaging API. The sandboxed page sends messages to your background script or popup, which then performs privileged operations on its behalf. This architecture ensures that even if malicious content compromises the sandbox, it cannot directly access extension APIs or user data without passing through your controlled message handlers.
+Consider a practical scenario where your extension renders Markdown content from user notes. Parsing untrusted Markdown requires executing complex transformations that might include embedded HTML. By running your Markdown renderer in a sandbox page, you isolate this risky operation from your extension's privileged context. The sandbox cannot access the `chrome.cookies` API, cannot read `chrome.storage`, and cannot make privileged extension calls—limiting the blast radius of any potential compromise.
 
-Popular extensions use sandboxing extensively for features like password manager autofill (rendering untrusted webpage content), email clients (displaying HTML emails), and note-taking extensions (rendering user-created Markdown). The additional development complexity is justified by the significant security improvement — a compromise in rendered content cannot directly access extension storage, credentials, or browser manipulation capabilities.
+## Alternatives to eval() and Function() Constructors
 
-## Alternatives to eval() and Function() in MV3
+Manifest V3 significantly restricts dynamic code execution capabilities that were common in Manifest V2. The `eval()` function, `new Function()` constructor, and similar mechanisms that compile and execute strings as JavaScript code are now blocked by default CSP. This restriction prevents a entire class of code injection attacks but requires developers to refactor code that previously relied on dynamic execution.
 
-Manifest V3 explicitly prohibits `eval()` and related functions like `new Function()` in extension pages by default. This restriction eliminates a common attack vector where attacker-controlled data could be interpreted as executable JavaScript. While this change broke many existing extensions that relied on dynamic code execution, the security improvement is substantial — the vast majority of `eval()` usages represent potential security vulnerabilities rather than necessary functionality.
+The most common use case for `eval()` involved loading scripts from strings—perhaps fetched from a server or constructed based on runtime conditions. Modern extensions should instead fetch complete script files and load them through standard script tags or dynamic import mechanisms.
 
-Modern JavaScript provides numerous alternatives that eliminate the need for dynamic code execution. Template literals, JSON parsing with `JSON.parse()`, and function composition patterns replace most common `eval()` use cases. For extensions that previously used `eval()` to execute user scripts or dynamic plugins, Chrome provides the User Scripts API (available in Manifest V3) that safely executes user-provided code in isolated worlds without access to extension APIs.
+```javascript
+// Instead of eval() for loading remote scripts
+// Old approach (broken in MV3):
+eval('console.log("loaded")');
 
-When you genuinely need dynamic code execution for legitimate extension functionality, the sandboxed page approach provides a secure alternative. Generate your dynamic code within a sandboxed page where script execution is allowed, then communicate results back to your main extension through message passing. This approach maintains security boundaries while enabling dynamic functionality.
+// Modern approach: Dynamic import
+async function loadModule(modulePath) {
+  const module = await import(modulePath);
+  return module;
+}
 
-For extensions requiring sophisticated scripting capabilities, consider implementing a domain-specific language or configuration system that interprets structured data rather than executable code. This approach provides flexibility without the risks associated with `eval()`. Many successful extensions have migrated from dynamic execution to structured configuration with improved security postures and no loss of functionality.
+// Loading from bundled scripts
+import { utilityFunction } from './utils/utility.js';
+```
+
+For cases where you genuinely need runtime code generation—such as creating functions from user-defined rules—consider alternatives like the `Function` constructor with careful input validation, or better yet, interpret user input as data rather than code. A rule engine that evaluates conditions against data can often be implemented using a safe expression parser rather than executable code strings.
+
+```javascript
+// Safe alternative: Data-driven function generation
+function createSafeEvaluator(rules) {
+  // Use a sandboxed iframe or create a function with limited scope
+  const allowedGlobals = { console, Math, Date, JSON, Array, Object };
+  
+  return new Function(...Object.keys(allowedGlobals), 'data', `
+    with (this) {
+      ${rules}
+    }
+  `).bind(allowedGlobals);
+}
+```
 
 ## Trusted Types for DOM XSS Prevention
 
-Trusted Types represent an advanced browser security feature that helps prevent DOM-based cross-site scripting attacks by controlling how browser APIs handle potentially dangerous data. When enabled, Trusted Types require that certain sink APIs receive specifically marked "trusted" objects rather than raw strings, preventing attacker-controlled data from being interpreted as executable code.
-
-Implementing Trusted Types in your extension requires adding the appropriate CSP directive and modifying your JavaScript to create trusted objects:
+Trusted Types represent an advanced browser security feature that helps prevent DOM-based cross-site scripting attacks. When enabled, Trusted Types require that potentially dangerous DOM operations use type-safe objects rather than raw strings. This approach shifts the security model from detecting attacks at runtime to preventing dangerous code patterns from being written in the first place.
 
 ```json
 {
@@ -68,122 +109,156 @@ Implementing Trusted Types in your extension requires adding the appropriate CSP
 }
 ```
 
-With Trusted Types enabled, attempts to assign HTML to innerHTML, document.write(), or other dangerous sinks using raw strings will fail. Instead, you must use the Trusted Types API to create specifically marked objects:
+With Trusted Types enabled, the following code will fail:
 
 ```javascript
-// Instead of: element.innerHTML = userInput;
-// Use:
-const policy = trustedTypes.createPolicy('myPolicy', {
-  createHTML: (input) => sanitizeHTML(input)
-});
-element.innerHTML = policy.createHTML(userInput);
+// This will throw a TypeError
+document.getElementById('output').innerHTML = userInput;
+
+// This works with Trusted Types
+const trustedHtml = trustedTypes.createHTML(userInput);
+document.getElementById('output').innerHTML = trustedHtml;
 ```
 
-The policy function receives raw input and returns sanitized output that the browser treats as trusted. This architecture ensures that even if malicious input passes through your sanitization logic, the browser will not execute it as JavaScript. Many modern frameworks including Angular, React (with appropriate configuration), and Lit automatically generate Trusted Types-compliant code when properly configured.
+Implementing Trusted Types requires updating all code that manipulates the DOM to use the Trusted Types API. For extensions with significant UI complexity, this migration can be substantial but provides substantial security benefits. The browser enforces type safety at runtime, eliminating entire categories of XSS vulnerabilities that CSP alone cannot prevent.
 
-Adopting Trusted Types requires careful consideration of all DOM manipulation in your extension. Legacy code using innerHTML with user data must be identified and refactored. The investment pays dividends in security — DOM XSS vulnerabilities represent one of the most common and severe extension vulnerabilities, and Trusted Types provide strong protection against entire categories of these attacks.
+```javascript
+// Define a Trusted Types policy for your extension
+const policy = trustedTypes.createPolicy('extension-policy', {
+  createHTML: (input) => {
+    // Sanitize input according to your requirements
+    return DOMPurify.sanitize(input, { RETURN_TRUSTED_TYPE: true });
+  },
+  createScript: (input) => {
+    // Validate and sanitize script content
+    if (/^[a-zA-Z0-9_-]+$/.test(input)) {
+      return input;
+    }
+    throw new Error('Invalid script identifier');
+  }
+});
+```
 
 ## Nonce-Based Script Execution
 
-For scenarios requiring dynamic script execution with controlled permissions, the nonce-based approach provides a secure alternative to unsafe-inline scripts. With nonce-based CSP, you include a cryptographically random nonce value in both your CSP header and inline script tags; the browser only executes scripts whose nonce matches the current request, preventing attackers from injecting their own scripts even if they can control page content.
-
-Implementing nonce-based scripts requires server-side generation of unique nonces for each page load:
+For scenarios requiring inline scripts—such as embedding third-party widgets or rendering content from external systems that generate HTML with embedded JavaScript—nonce-based script execution provides a secure alternative to unsafe-inline. Rather than allowing all inline scripts (which would defeat CSP's security purpose), you can whitelist specific scripts using cryptographic nonces.
 
 ```json
 {
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'nonce-{NONCE}'; object-src 'none';"
+    "extension_pages": "script-src 'self' 'nonce-{RANDOM}'; object-src 'none';"
   }
 }
 ```
 
+In your HTML, include the nonce attribute on scripts that must execute:
+
 ```html
-<script nonce="{NONCE}">
+<script nonce="<%= nonce %>">
   // This script will execute because its nonce matches the CSP
-  console.log('Authorized script execution');
+  console.log('Trusted inline script');
 </script>
 ```
 
-The nonce must be generated server-side (or in your extension's server-rendered content) and must be cryptographically random to prevent prediction attacks. Each page load should produce a new nonce value, ensuring that captured nonces cannot be reused in subsequent attacks.
+The nonce must be generated server-side (or in your extension's build process) and must be unique for each page load. This uniqueness prevents attackers from guessing or reusing nonces, as each page load generates a fresh value that cannot be predicted in advance.
 
-Chrome extensions rarely need nonce-based scripts since they can control their entire page content. However, this technique becomes valuable when integrating third-party widgets, ads, or embedded content that requires script execution. By providing nonce values to trusted third-party scripts while blocking untrusted ones, you maintain security while enabling necessary functionality.
+For extensions using a build system, integrating nonce generation is straightforward. Generate a random value during page rendering, inject it into your CSP header, and include it in any inline script tags. Content Security Policy will then permit only those specific scripts to execute while blocking all other inline scripts.
 
-## Remote Code Restrictions in MV3
+## Remote Code Restrictions and Subresource Integrity
 
-Manifest V3 dramatically restricted the ability to load and execute remote code, representing one of the most significant security improvements in the new manifest version. Extensions can no longer load arbitrary JavaScript from external URLs and execute it within the extension context. All executable code must be bundled within the extension package itself, eliminating the ability to modify extension behavior after publication.
+Manifest V3 enforces strict limitations on loading and executing remote code. Extensions cannot load scripts from remote servers at runtime—the code must be bundled with the extension package. This restriction dramatically reduces the attack surface by ensuring that all executable code undergoes Chrome Web Store review and cannot be modified after publication.
 
-This restriction prevents several attack scenarios that plagued Manifest V2 extensions. Attackers who compromised extension update servers or CDN infrastructure could inject malicious code into millions of extensions. Similarly, developers who maintained "hooks" for loading remote code (sometimes marketed as "dynamic features" or "cloud configuration") created vulnerabilities that attackers exploited. With MV3's remote code restrictions, even complete compromise of external infrastructure cannot inject executable code into properly configured extensions.
+For extensions that previously loaded scripts from external servers, this change requires architectural adjustments. Instead of fetching script updates from your server, bundle the scripts with your extension and push updates through the Web Store review process. While this adds friction to your release pipeline, it provides substantial security benefits for users.
 
-The primary implication is that all JavaScript, CSS, and HTML that your extension uses must be included in the package submitted to the Chrome Web Store. This requirement encourages better bundling practices and eliminates "live reload" development patterns that loaded code from external servers. During development, you can use extension reload mechanisms like Chrome's built-in reload feature or development frameworks that support hot module replacement, but production builds must be entirely self-contained.
+When you must load external resources—stylesheets, images, API data—use Subresource Integrity (SRI) to verify that retrieved content hasn't been tampered with:
 
-Extensions requiring dynamic behavior based on external configuration should fetch data (JSON, configuration objects, rulesets) rather than code. The fetched data can then be processed by bundled JavaScript, providing flexibility without compromising security. This pattern supports features like ad blocking rules, content filters, and feature flags while maintaining the security benefits of bundled code.
+```html
+<link rel="stylesheet" href="https://example.com/styles.css"
+      integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GqQ8K/uxy9rx7HNQlGYl1kPzQho1wx4JwY8wC"
+      crossorigin="anonymous">
+```
+
+The integrity hash ensures that even if an attacker intercepts the request and modifies the response, the browser will refuse to load the tampered resource. Combine SRI with strict CSP `connect-src` and `script-src` directives to create defense in depth.
 
 ## CSP Violation Reporting
 
-Effective CSP implementation requires monitoring for violations that indicate attempted attacks or misconfigurations. Chrome provides the `report-uri` directive (and the newer `report-to` directive) to send violation reports to specified endpoints, enabling security teams to detect and respond to attack attempts in real time.
-
-Configuring violation reporting in your extension:
+Monitoring CSP violations helps identify potential attack attempts and configuration errors before they cause problems. CSP provides a `report-uri` directive that instructs the browser to send JSON reports when policy violations occur:
 
 ```json
 {
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'none'; report-uri https://your-reporting-endpoint.com/csp-reports;"
+    "extension_pages": "script-src 'self'; object-src 'none'; report-uri https://your-server.com/csp-reports;"
   }
 }
 ```
 
-When CSP violations occur, Chrome sends JSON reports to your specified endpoint containing details about the violation including the blocked resource, the directive that was triggered, and the page that originated the request. These reports are invaluable for security monitoring, identifying misconfigurations during development, and detecting potential attack attempts against your users.
+Each violation report contains detailed information about what was blocked, where it originated, and which directive was violated:
 
-For production extensions, consider implementing a reporting endpoint that aggregates and analyzes CSP violations. Patterns of violations may indicate attempted cross-site scripting attacks, misconfigured CSP that breaks functionality, or legitimate feature requests that require policy updates. The reporting infrastructure also enables compliance documentation and security audits.
+```json
+{
+  "csp-report": {
+    "blocked-uri": "self",
+    "violated-directive": "script-src 'self'",
+    "original-policy": "script-src 'self'; object-src 'none'",
+    "document-uri": "chrome-extension://extension-id/popup.html",
+    "line-number": 42
+  }
+}
+```
+
+Implementing a violation reporting endpoint requires server-side infrastructure to receive and process the reports. For smaller extensions, consider aggregating reports and reviewing them periodically rather than implementing real-time alerting. Look for patterns that might indicate attacks—for instance, repeated violations from the same extension page attempting to load external scripts could signal an injection vulnerability.
 
 ## Debugging CSP Errors
 
-CSP errors manifest in various ways depending on the nature of the violation and the browser's configuration. Understanding how to identify and resolve these errors is essential for maintaining both security and functionality.
+When CSP blocks resources, Chrome provides clear error messages in the console and developer tools. Understanding how to interpret these messages accelerates troubleshooting significantly. The console displays violations with a clear explanation of which directive was violated and what resource was blocked.
 
-The Chrome DevTools Console displays CSP violation messages with clear indicators of what was blocked and which directive caused the blocking. Common error patterns include:
+The Extensions Management page (`chrome://extensions`) provides a "Errors" tab that shows CSP violations in context. This view is particularly useful because it shows errors across all your extension pages in one place, making it easier to identify systemic issues.
 
-**Script blocked by script-src**: This typically occurs when attempting to load external JavaScript libraries from CDNs, loading user scripts, or using dynamic code execution. Resolve by either bundling the required code within the extension or whitelisting specific trusted sources in your CSP.
+Common CSP errors and their solutions include:
 
-**Inline script blocked**: Manifest V3 blocks inline scripts by default unless you use nonce-based or hash-based allowances. Move functionality to external script files or implement the appropriate inline execution policy.
+**"Refused to load the script because it violates the following Content Security Policy directive"** — The script source is not allowed. Add the domain to your `script-src` directive or bundle the script with your extension.
 
-**Connection blocked by connect-src**: Extensions attempting to make network requests to unauthorized origins trigger this error. Verify that all API endpoints are explicitly listed in your connect-src directive.
+**"Refused to evaluate a string as because 'unsafe-eval' is not an allowed directive"** — Your code uses `eval()`, `Function()`, or similar dynamic code execution. Refactor to avoid these patterns.
 
-**Object blocked by object-src**: The `object-src 'none'` policy prevents plugin content from loading. If your extension genuinely needs object elements (rare in modern web development), specify appropriate sources, but prefer alternative approaches when possible.
+**"Refused to load the stylesheet because it violates the following Content Security Policy directive"** — Add `'unsafe-inline'` to your `style-src` directive or move styles to external stylesheets.
 
-Use the Security panel in Chrome DevTools to inspect the current page's CSP policy and identify any violations that have occurred. The Network panel also indicates blocked requests with a red status and CSP error message in the response details.
+**"Cannot load a script with URL starting with 'chrome-extension://'"** — This typically occurs when using `script.src` with an extension URL. Use `chrome.runtime.getURL()` to generate proper extension URLs.
 
-## Migration Strategies from MV2 Relaxed CSP
+## Migration from MV2 Relaxed CSP
 
-Extensions migrating from Manifest V2 often relied on policies that are no longer permitted in MV3. Common migration challenges include removing `eval()` usage, eliminating remote code loading, and restricting inline script execution. A systematic approach ensures secure migration without breaking functionality.
+Extensions migrating from Manifest V2 to Manifest V3 often face CSP-related breaking changes. MV2 permitted many practices that MV3 restricts or prohibits outright. The migration process requires systematically addressing each area where your extension's behavior conflicts with MV3's stricter security model.
 
-Begin by auditing your MV2 extension's CSP dependencies. Identify all external script sources, inline script blocks, dynamic code execution patterns, and object/embed elements. For each dependency, determine whether it represents legitimate functionality that requires reimplementation or can be eliminated entirely.
+Start by auditing your existing code for dynamic code execution patterns. Search for `eval(`, `new Function(`, `setTimeout(` with string arguments, and similar constructs. Each occurrence needs refactoring to use static code patterns. This audit often reveals opportunities to simplify code architecture while improving security.
 
-Replace external script dependencies with bundled libraries. Most JavaScript libraries can be downloaded and included directly in your extension package. Tools like webpack, Rollup, or esbuild simplify this process by automatically bundling dependencies. For React, Vue, Angular, and other popular frameworks, official documentation provides guidance for bundling within extension packages.
+Next, review any remote script loading. If your extension fetches scripts from external servers, you must either bundle them with your extension or implement a server-side architecture that serves only data (not executable code) to your extension. The extension then processes this data using bundled code.
 
-Address dynamic code execution by refactoring to use safer alternatives. Template systems should process data rather than code. User scripting requirements should use the official User Scripts API. Configuration-driven behavior should interpret structured data through bundled logic rather than executing strings as code.
+Finally, test extensively with strict CSP. Temporarily enable the strictest possible CSP during development to identify issues early:
 
-Test extensively after implementing CSP changes. Violation reports and console errors reveal remaining issues. Consider implementing feature flags that allow temporary CSP relaxation for testing new features, then tightening restrictions before production release.
+```json
+{
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self';"
+  }
+}
+```
+
+Gradually relax directives only as needed for legitimate functionality, documenting each exception.
 
 ## Real-World Secure Extension Examples
 
-Examining how successful extensions implement CSP provides practical guidance for your own projects. These patterns represent consensus best practices from extensions that have passed Chrome Web Store review and serve millions of users.
+Studying well-implemented extensions provides valuable patterns for your own projects. Password manager extensions demonstrate excellent CSP practices—they isolate password handling in sandboxed contexts, use Trusted Types for DOM manipulation, and restrict API access through carefully designed messaging patterns.
 
-Password managers like Bitwarden and 1Password implement strict CSP that permits only bundled scripts while using sandboxed pages for autofill functionality. Their architectures demonstrate effective use of sandbox isolation for handling untrusted page content while maintaining strong security in their main extension context.
+Consider a password manager's architecture: the main extension context handles encryption and storage through the chrome.storage API, but all UI rendering occurs in sandboxed pages. User-generated content (password entries, notes) is never rendered directly in the extension context—instead, it's passed to sandbox pages that use Trusted Types and strict CSP to safely display data. This architecture means that even if an XSS vulnerability exists in how the extension renders password entries, the attack cannot access the underlying storage APIs.
 
-Ad blockers implement CSP that allows their rule-loading mechanisms while blocking script execution from blocked sources. These extensions fetch rule updates (data, not code) and process them through bundled JavaScript, exemplifying the data-versus-code pattern that MV3 enforces.
+Another example: extensions that display third-party web content in frames should use the `sandbox` attribute on iframes and configure CSP to block script execution within the frame. This prevents malicious pages loaded in the iframe from escaping their boundaries to attack the extension.
 
-Productivity extensions that integrate with third-party services implement CSP allowing specific API endpoints while blocking other network requests. This approach enables legitimate functionality while preventing data exfiltration through unauthorized connections.
+## Related Guides
 
-Implementing these patterns in your extension requires honest assessment of your actual requirements. Many extensions can function with extremely restrictive CSP — `script-src 'self'; object-src 'none';` represents a reasonable starting point for extensions without external dependencies. Only add allowed sources that correspond to genuine functionality, and regularly audit your CSP as your extension evolves.
+Content Security Policy works alongside other security measures to create defense in depth. Explore these related guides to build comprehensive security into your extension:
 
-## Conclusion
-
-Content Security Policy forms the cornerstone of Chrome extension security in the Manifest V3 era. The restrictions that once seemed burdensome — elimination of remote code, restrictions on eval(), blocking of inline scripts — collectively create a much more secure extension ecosystem. By understanding and properly implementing CSP, you protect millions of users from sophisticated attacks while passing Chrome Web Store review requirements.
-
-The investment in robust CSP configuration pays dividends beyond security. Well-designed CSP policies clarify your extension's actual requirements, simplify security audits, and provide documentation of intended functionality. Treat CSP not as a compliance checkbox but as an integral part of your extension's security architecture.
-
-For additional security guidance, explore our [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening/) guide covering XSS prevention, secure messaging, and permission minimization. The [Web Request Interception](/guides/chrome-extension-web-request-interception/) guide provides detailed coverage of network request handling with proper security considerations.
+- [Security Hardening](/guides/chrome-extension-security-hardening.md) — Advanced techniques for protecting your extension against modern attack vectors
+- [Web Request Interception](/guides/chrome-extension-web-request-interception.md) — Secure patterns for observing and modifying network requests while maintaining CSP compliance
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
