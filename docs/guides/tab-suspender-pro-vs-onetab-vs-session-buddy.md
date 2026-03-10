@@ -70,7 +70,7 @@ Memory efficiency is often the primary reason users install tab management exten
 
 Tab Suspender Pro achieves approximately 80-90% memory reduction per suspended tab. When a tab is suspended, Chrome releases most of the JavaScript heap and rendering memory while keeping the minimal data needed to reconstruct the page. In our testing with 50 tabs of mixed content (social media, news, productivity tools), Tab Suspender Pro reduced total Chrome memory from 4.2GB to approximately 650MB.
 
-The extension uses Chrome's built-in tab discarding API combined with custom optimizations to achieve this. For an in-depth look at how Tab Suspender Pro achieves these savings, see our [Tab Suspender Pro Memory Guide](/tab-suspender-pro-memory-guide/).
+The extension uses Chrome's built-in tab discarding API combined with custom optimizations to achieve this. For an in-depth look at how Tab Suspender Pro achieves these savings, see our [Tab Suspender Pro Memory Guide](/docs/tab-suspender-pro-memory-guide/).
 
 ### OneTab: ~95%+ Memory Reduction
 
@@ -178,7 +178,7 @@ Researchers often open dozens of articles and reference materials. Tab Suspender
 
 Developers frequently have multiple documentation tabs, IDE alternatives, and API references open. Tab Suspender Pro's whitelist feature allows you to exclude development environments from suspension while managing other tabs. The instant restoration means documentation is always available without reload times.
 
-For developers specifically, see our [Chrome Tab Management for Developers](/docs/chrome-tab-management-developers/) guide for additional strategies.
+For developers specifically, see our [Chrome Tab Management for Developers](/chrome-tab-management-developers/) guide for additional strategies.
 
 ## Pricing Comparison
 
