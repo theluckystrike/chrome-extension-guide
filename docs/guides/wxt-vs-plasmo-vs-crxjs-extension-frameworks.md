@@ -330,4 +330,4 @@ All three frameworks are production-ready and actively maintained. Your choice s
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
