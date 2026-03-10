@@ -189,7 +189,7 @@ Not all users are ready for the same offer. Segment your list by:
 - Feature usage (power users vs. casual users)
 - Account age (new users need education; old users need re-engagement)
 
-Each segment receives different messaging and offers. For more on monetization strategies, see our [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) guide.
+Each segment receives different messaging and offers. For more on monetization strategies, see our [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) guide. For a comprehensive monetization playbook, visit our [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/).
 
 ---
 
