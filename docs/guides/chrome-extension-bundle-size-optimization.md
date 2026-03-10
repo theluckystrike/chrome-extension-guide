@@ -641,4 +641,4 @@ Start by analyzing your current bundle composition, then apply these techniques 
 
 ---
 
-*This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and resources, visit [zovo.one](https://zovo.one).*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
