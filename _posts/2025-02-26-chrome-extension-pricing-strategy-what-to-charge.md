@@ -16,6 +16,8 @@ This guide provides a comprehensive framework for pricing your extension based o
 
 This guide builds on our [monetization strategies overview](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) and [freemium model deep dive](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/). For technical implementation of payments, check out our [Stripe integration guide](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/).
 
+This guide is part of our extension-monetization-playbook series, covering pricing strategies that maximize revenue while maintaining healthy conversion rates.
+
 ---
 
 ## The Extension Pricing Landscape: What Competitors Charge
