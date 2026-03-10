@@ -14,6 +14,8 @@ Building a sustainable Chrome extension business requires more than just a great
 
 This tutorial builds on our [Stripe integration foundation](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/) and [monetization strategies overview](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). For context on freemium conversion tactics, see our [freemium model guide](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
 
+This guide provides practical implementation details for developers building subscription-based Chrome extensions in 2025.
+
 ---
 
 ## Why Subscriptions Work for Chrome Extensions
