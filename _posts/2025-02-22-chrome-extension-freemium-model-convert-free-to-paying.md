@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Freemium Model — Convert Free Users to Paying Customers"
 description: "Design a freemium Chrome extension that converts. Feature gating strategies, upgrade prompts, pricing tiers, conversion funnels, and real-world freemium benchmarks."
 date: 2025-02-22
