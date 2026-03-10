@@ -6,6 +6,7 @@ date: 2025-02-16
 categories: [guides, monetization]
 tags: [extension-monetization, chrome-extension-revenue, freemium-model, subscription-extensions, extension-business]
 author: theluckystrike
+# Last updated: 2025-02-16
 ---
 
 # Chrome Extension Monetization Strategies That Actually Work in 2025
