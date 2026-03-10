@@ -6,7 +6,7 @@ date: 2025-02-17
 categories: [guides, publishing]
 tags: [chrome-web-store, cws-optimization, extension-listing, install-rate, app-store-optimization]
 author: theluckystrike
-keywords: "chrome web store optimization, CWS listing, extension install rate, store listing optimization, chrome extension marketing
+keywords: "chrome web store optimization, CWS listing, extension install rate, store listing optimization, chrome extension marketing"
 ---
 
 # Chrome Web Store Listing Optimization — Double Your Install Rate
