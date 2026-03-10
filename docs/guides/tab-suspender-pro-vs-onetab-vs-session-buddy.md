@@ -194,9 +194,6 @@ For developers specifically, see our [Chrome Tab Management for Developers](/doc
 - **OneTab**: Limited integration. Works as a standalone system without extension conflicts.
 - **Session Buddy**: Offers some integration with browser sync but limited API access.
 
-<<<<<<< HEAD
-**Winner**: Tab Suspender Pro for developer integration capabilities.
-=======
 All three extensions can be combined with other productivity tools:
 
 - **Tab Suspender Pro** works well with [Tab Groups](../guides/tab-groups.md) for organization
@@ -206,7 +203,7 @@ All three extensions can be combined with other productivity tools:
 For extension developers, understanding how these tools interact with the [tabs API](../guides/tabs-api.md), [memory management](../guides/memory-management.md), and [tab management](../guides/tab-management.md) patterns can inform your own tab-related extension development.
 
 ---
->>>>>>> content/tab-suspender-vs-onetab-session-buddy
+
 
 ## Conclusion
 
