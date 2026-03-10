@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Manifest V3 Monetization — What Changed for Paid Chrome Extensions"
-description: "How Manifest V3 affects extension monetization. Service worker limitations, new payment patterns, license validation changes, and updated monetization architectures for paid Chrome extensions."
+description: "How Manifest V3 affects extension monetization. Service worker limitations, new payment patterns, license validation changes, and updated monetization architectures."
 date: 2025-03-03
 categories: [guides, monetization]
 tags: [manifest-v3, extension-monetization, mv3-migration, service-worker-payments, chrome-extension-business]
@@ -10,779 +10,1071 @@ author: theluckystrike
 
 # Manifest V3 Monetization — What Changed for Paid Chrome Extensions
 
-The transition from Manifest V2 to Manifest V3 fundamentally changed how Chrome extensions handle monetization. What was once a straightforward process of integrating Chrome Web Store payments or running background pages for license validation now requires a completely different architectural approach. Service workers replacing background pages, the deprecation of inline payments, new restrictions on network requests, and the introduction of offscreen documents all combine to create a monetization landscape that demands careful planning and implementation.
+The transition from Manifest V2 to Manifest V3 wasn't just a technical migration—it fundamentally changed how Chrome extension developers can monetize their products. If you're building a paid extension in 2025, understanding these changes isn't optional; it's essential for building a sustainable business.
 
-If you are building a paid Chrome extension in 2025, understanding these changes is not optional — it is essential for creating a sustainable business model that works within Chrome's security and performance constraints. This guide walks through every significant change, explains the new patterns that have emerged, and provides actionable code examples for implementing robust monetization in the Manifest V3 world.
+This guide covers everything that changed for paid extensions in MV3, from the deprecation of Chrome Web Store payments to new patterns for handling license validation, payment flows, and service worker termination scenarios.
 
 ---
 
-## MV3 Changes Impacting Monetization
+## MV3 Changes That Impact Monetization {#mv3-changes-impacting-monetization}
 
-Manifest V3 introduced several architectural changes that directly impact how you can monetize extensions. The most significant changes involve the replacement of persistent background pages with ephemeral service workers, restrictions on remote code execution, and modifications to how extensions can communicate with external servers.
+Several architectural changes in Manifest V3 directly affect how you can monetize your extension. Understanding these changes is the first step to building a robust monetization system.
 
 ### Service Workers Replace Background Pages
 
-The most fundamental change in Manifest V3 is the replacement of persistent background pages with service workers. In Manifest V2, your background page ran continuously in the background, maintaining state and always being available to handle events. This made it straightforward to validate licenses, process payments, and maintain user sessions. The background page was essentially a always-on server within the extension.
+The most significant change is the replacement of persistent background pages with ephemeral service workers. In Manifest V2, your background script ran continuously, maintaining state in global variables and keeping connections open. In Manifest V3, service workers activate only when needed and terminate after a period of inactivity—typically around 30 seconds.
 
-Service workers in Manifest V3 work fundamentally differently. They are event-driven, can be terminated by Chrome at any time when idle, and must reinitialize every time they are woken up. This creates significant challenges for monetization because you can no longer rely on a continuously running process to manage subscriptions, track usage, or maintain payment state.
+This change impacts monetization in several ways:
 
-This change means that any monetization logic that assumed a persistent background context must be rewritten. License validation can no longer happen in a continuously running background loop. Payment processing that relied on maintaining open connections or storing sensitive state in memory must be redesigned to work with ephemeral service workers.
+- **License state cannot be stored in memory**: Any licensing information must be persisted to `chrome.storage` because your service worker will be terminated between user interactions.
+- **No persistent connections**: WebSocket connections for real-time license verification will be closed when the service worker terminates.
+- **Timer limitations**: While `chrome.alarms` works reliably, `setTimeout` and `setInterval` don't persist across service worker restarts.
 
-### Removal of Inline Payments
+### Remote Code Execution Banned
 
-Chrome Web Store inline payments were a convenient way to handle purchases directly within the extension's UI without redirecting users to an external page. This feature has been deprecated in Manifest V3. Users must now be redirected to the Chrome Web Store to complete purchases, which introduces friction in the conversion funnel and makes the payment flow less seamless.
+Manifest V3 prohibits loading and executing remote code. This means all your extension's JavaScript must be bundled within the extension package. For monetization, this affects:
 
-This change has significant implications for your monetization architecture. You can no longer create a completely self-contained payment experience within your extension. Instead, you must design flows that redirect users to the Chrome Web Store and then handle the post-purchase state within your extension's service worker or offscreen documents.
+- **License validation servers**: You cannot dynamically load license validation logic from external servers. All validation code must be bundled.
+- **Payment provider SDKs**: If a payment provider requires loading external scripts, you need to find alternatives or use their server-side APIs.
+- **A/B testing and feature flags**: Remote configuration is still possible via API calls, but the logic handling those configurations must be bundled.
 
-### Restrictions on Remote Code
+### Host Permissions Become Runtime
 
-Manifest V3 prohibits loading and executing remote code in extensions. All JavaScript and CSS must be bundled with the extension package. While this is primarily a security measure, it affects monetization in subtle ways. You can no longer dynamically load payment processing libraries or remote configuration that might have included pricing changes or feature toggles.
+In Manifest V2, host permissions were granted at installation. In Manifest V3, many host permissions are requested at runtime using the `permissions` API. For paid extensions, this means:
 
-This restriction means your monetization logic must be entirely self-contained within your extension bundle. Any dynamic pricing, feature gating, or payment provider integration must be handled through APIs that your extension calls, rather than through dynamically loaded scripts.
+- **Feature gating is more complex**: You may need to request additional permissions after purchase to enable premium features.
+- **User trust is paramount**: Users can revoke permissions at any time, so your extension must handle permission loss gracefully.
 
-### Changes to Web Requests and Network Access
+### Storage API Changes
 
-The `webRequest` API has been replaced by `declarativeNetRequest` for network interception, which changes how you might have implemented affiliate tracking, ad revenue optimization, or usage-based billing. These new APIs are more restrictive and require declarative rules rather than programmatic interception.
+The storage API has new capabilities in MV3:
 
-For monetization specifically, if your business model relied on intercepting network requests to track usage, implement affiliate linking, or modify advertising delivery, you will need to redesign these aspects to work within the new constraints.
-
----
-
-## CWS Payments Deprecation — What Replaces It
-
-The Chrome Web Store's built-in payment system has undergone significant changes. Understanding what's available and what alternatives exist is crucial for planning your monetization strategy.
-
-### Current Chrome Web Store Payment Options
-
-As of 2025, the Chrome Web Store still supports paid extensions, but the integration model has changed significantly. The inline payment API that allowed seamless in-extension purchases has been deprecated. Here is what remains:
-
-**Chrome Web Store Licensing API**: This remains the primary way to verify that a user has paid for your extension. When a user purchases your extension from the Chrome Web Store, their license is associated with their Google account. Your extension can query this license to determine whether the user has a valid purchase.
-
-**One-time purchases**: Supported but with the requirement that users complete purchases through the Chrome Web Store interface rather than inline.
-
-**Subscriptions**: Available through the Chrome Web Store, though the integration requires specific API calls and handling of subscription lifecycle events.
-
-### Alternative Payment Models
-
-Given the limitations of Chrome Web Store payments, many extension developers have moved to alternative payment models:
-
-**External payment processing**: Most successful paid extensions now use external payment processors like Stripe, Paddle, or Gumroad. These services handle the payment flow, and your extension validates the purchase through your own backend API. This gives you complete control over the payment experience and enables various pricing models including subscriptions, one-time purchases, and usage-based billing.
-
-**Freemium with feature gating**: Many extensions offer a free tier with limited functionality, using Chrome Web Store licensing or their own backend to manage access to premium features. This model works well within Manifest V3 constraints.
-
-**Sponsorware and donations**: Some extensions have moved to a donation-based or sponsorware model, using platforms like GitHub Sponsors or Ko-fi to receive support from users.
-
-For detailed guidance on implementing external payment processing, see our [Stripe integration tutorial](/chrome-extension-guide/docs/guides/stripe-integration/) and our comprehensive [extension monetization playbook](/chrome-extension-guide/docs/guides/extension-monetization/).
+- **`chrome.storage.session`**: Session-scoped storage that doesn't persist across browser restarts. Useful for temporary authentication tokens.
+- **`chrome.storage.managed`**: Enterprise policy-controlled storage for license enforcement in organizational settings.
 
 ---
 
-## Service Worker and License Validation Timing
+## Chrome Web Store Payments Deprecation {#cws-payments-deprecation}
 
-License validation in Manifest V3 requires a fundamentally different approach than in Manifest V2. The ephemeral nature of service workers means you must design your validation logic to handle interruptions, terminations, and reinitialization.
+One of the most significant changes for paid extension developers is the deprecation of Chrome Web Store (CWS) payments. Google has been phasing out the built-in payment system, and developers must now implement their own payment processing.
 
-### When to Validate Licenses
+### What Replaces CWS Payments
 
-Because service workers can be terminated at any time, you cannot rely on continuous background validation. Instead, implement validation at strategic points:
+Developers now have several alternatives for accepting payments:
 
-**On service worker startup**: Validate the license when your service worker initializes. This happens on extension startup, when the service worker wakes up to handle an event, or after Chrome terminates and restarts the service worker.
+1. **Stripe**: The most popular choice for extension developers. Stripe offers robust APIs, subscription management, and excellent developer tooling.
+2. **Paddle**: Often used for software products with global tax compliance handling.
+3. **LemonSqueezy**: A merchant of record that handles taxes and VAT automatically.
+4. **Direct payments through your website**: Redirecting users to your website for payment processing.
 
-**On significant user actions**: Before allowing access to premium features, validate that the license is still valid. This creates a more secure model where premium features are only accessible when validation succeeds.
+### Setting Up External Payment Flow
 
-**Periodically using alarms**: Use the `chrome.alarms` API to schedule periodic validation checks. This allows you to revalidate licenses at regular intervals without requiring constant background processing.
+The recommended approach for MV3 extensions is to use an external payment flow:
 
-### Handling Validation Results
+1. **User clicks "Upgrade" in your extension**
+2. **Extension opens your payment page** (using `chrome.tabs.create` or `chrome.action.openPopup` followed by redirect)
+3. **User completes payment on your website**
+4. **Your server sends a license key or activates the license** via:
+   - Email with license key
+   - Direct API activation (extension calls your server with payment proof)
+   - Webhook that updates your license database
 
-Your validation logic must handle several scenarios:
+### License Key vs. API-Based Activation
+
+For MV3, API-based activation is generally superior to license keys:
+
+- **License keys**: User manually enters a key. Simple to implement but poor user experience.
+- **API activation**: Extension automatically verifies purchase via your server. Better UX and enables subscription management.
+
+---
+
+## Service Worker and License Validation Timing {#service-worker-license-validation}
+
+One of the biggest challenges in MV3 monetization is handling license validation with ephemeral service workers. Here's how to approach it.
+
+### When to Validate License
+
+License validation should happen at these key points:
+
+1. **On extension startup**: When the service worker first loads (in response to a user action or alarm)
+2. **On significant events**: When the user attempts to use premium features
+3. **Periodically**: Using `chrome.alarms` for subscription expiration checks
+4. **On payment completion**: When returning from a payment flow
+
+### Handling Service Worker Termination During Validation
+
+The worst-case scenario: a user is mid-purchase when Chrome terminates your service worker. Here's how to handle it:
 
 ```javascript
-// Service worker startup - validate license
-chrome.runtime.onInstalled.addListener(async (details) => {
-  if (details.reason === 'install' || details.reason === 'update') {
-    await validateLicense();
+// In your service worker
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'VERIFY_LICENSE') {
+    // Return a promise to indicate async response
+    verifyLicense(message.licenseKey).then(result => {
+      sendResponse({ valid: result.valid, expiresAt: result.expiresAt });
+    });
+    return true; // Keep message channel open for async response
   }
 });
 
-// Validate on service worker startup
-chrome.runtime.onStartup.addListener(async () => {
-  await validateLicense();
+// Use chrome.alarms to schedule periodic validation
+chrome.alarms.create('license-check', { periodInMinutes: 60 });
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'license-check') {
+    checkLicenseOnServer();
+  }
 });
 
-async function validateLicense() {
+// Store validation state in chrome.storage
+async function checkLicenseOnServer() {
+  const { licenseKey } = await chrome.storage.local.get('licenseKey');
+  if (!licenseKey) return;
+  
   try {
-    // Check Chrome Web Store license
-    const licenseStatus = await chrome.runtime.requestPackageVersion();
+    const response = await fetch('https://your-api.com/verify-license', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ licenseKey })
+    });
+    const result = await response.json();
     
-    // Or validate with your own backend
-    const storedToken = await chrome.storage.local.get('authToken');
-    if (storedToken.authToken) {
-      const response = await fetch('https://your-api.com/validate', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${storedToken.authToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          extensionId: chrome.runtime.id,
-          version: chrome.runtime.getManifest().version
-        })
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        await chrome.storage.local.set({ 
-          licenseValid: data.valid,
-          licenseExpiry: data.expiry,
-          premiumFeatures: data.features
-        });
-      }
-    }
+    await chrome.storage.local.set({
+      licenseStatus: result.valid ? 'active' : 'expired',
+      licenseExpiresAt: result.expiresAt
+    });
   } catch (error) {
-    console.error('License validation failed:', error);
-    await chrome.storage.local.set({ licenseValid: false });
+    console.error('License check failed:', error);
   }
 }
 ```
 
-The key principle is to store validation state in `chrome.storage` so that it persists across service worker terminations. When your service worker wakes up, it can check this stored state immediately while performing fresh validation in the background.
+### Service Worker Keep-Alive Patterns
+
+For payment flows where you need to maintain state, consider these patterns:
+
+- **Use offscreen documents** for longer-running operations
+- **Pass state through the payment callback URL** (your payment provider redirects back with state encoded in the URL)
+- **Use chrome.storage** to track payment in progress and verify on service worker wake-up
 
 ---
 
-## Offscreen Documents for Payment Flows
+## Offscreen Documents for Payment Flows {#offscreen-documents}
 
-Offscreen documents are one of the most important additions in Manifest V3 for handling monetization flows. They provide a way to run code in a persistent context that can handle long-running operations like OAuth flows, payment processing, and complex authentication sequences.
+Offscreen documents are a crucial tool for MV3 monetization. They allow you to run JavaScript in a background context that can persist longer than a service worker.
 
-### Why Offscreen Documents Matter for Payments
+### When to Use Offscreen Documents
 
-When you redirect users to an external payment provider or need to complete an OAuth authentication, you cannot do this within a service worker. Service workers do not have access to the DOM and cannot open windows or handle redirects in the same way background pages could. Offscreen documents solve this problem by providing a hidden page that runs in a tab-like context but is not visible to the user.
+Offscreen documents are ideal for:
 
-For payment flows, an offscreen document can:
+- **OAuth flows**: Completing authentication with external providers
+- **Payment processing**: Running payment SDK code
+- **Long computations**: License key generation or validation
+- **WebSocket connections**: Maintaining real-time communication
 
-- Open payment provider pages in a popup or iframe
-- Handle OAuth callbacks from payment providers
-- Process complex JavaScript that requires DOM access
-- Maintain a longer-running context for multi-step payment flows
-
-### Creating and Using Offscreen Documents
-
-Here is how to implement an offscreen document for payment processing:
+### Creating an Offscreen Document
 
 ```javascript
-// In your service worker - create offscreen for payment flow
-async function openPaymentFlow() {
-  // Check if offscreen document already exists
-  const existingContexts = await chrome.offscreen.hasDocument();
+// Create offscreen document for payment flow
+async function createPaymentOffscreen() {
+  // Check if offscreen already exists
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
   
-  if (!existingContexts) {
-    // Create new offscreen document
-    await chrome.offscreen.createDocument({
-      url: 'offscreen/payment.html',
-      reasons: ['DOM_SCRAPING', 'BLOBS'],
-      justification: 'Processing payment through external provider'
-    });
+  if (contexts.length > 0) {
+    return contexts[0];
   }
   
-  // Send message to offscreen document to start payment
-  chrome.runtime.sendMessage({
-    target: 'offscreen',
-    action: 'start-payment',
-    plan: 'premium-annual'
+  // Create new offscreen document
+  await chrome.offscreen.createDocument({
+    url: 'offscreen-payment.html',
+    reasons: ['PAYMENT_REQUESTS', 'CLIPBOARD'],
+    justification: 'Processing payment through Stripe SDK'
   });
 }
+
+// Close when done
+async function closePaymentOffscreen() {
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT'],
+    documentUrls: [chrome.runtime.getURL('offscreen-payment.html')]
+  });
+  
+  for (const context of contexts) {
+    await chrome.runtime.closeContext(context.contextId);
+  }
+}
 ```
 
+### Communication Between Service Worker and Offscreen
+
 ```javascript
-// offscreen/payment.html - handle payment flow
+// Service worker sends message to offscreen
+async function sendToOffscreen(message) {
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
+  
+  if (contexts.length > 0) {
+    await chrome.runtime.sendMessage(contexts[0].contextId, message);
+  }
+}
+
+// Offscreen document handles message
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'start-payment') {
-    // Redirect to payment provider or open payment window
-    const paymentWindow = window.open(
-      `https://your-payment-provider.com/checkout?plan=${message.plan}`,
-      'payment',
-      'width=600,height=700'
-    );
-    
-    // Listen for payment completion
-    paymentWindow.onload = () => {
-      // Set up message listener for postMessage from payment page
-    };
+  if (message.type === 'PROCESS_PAYMENT') {
+    // Initialize Stripe or other payment SDK
+    processPayment(message.amount).then(result => {
+      sendResponse({ success: true, transactionId: result.id });
+    });
+    return true; // Async response
   }
 });
 ```
 
-For more details on offscreen document implementation, see our [offscreen documents guide](/chrome-extension-guide/docs/guides/offscreen-documents/).
-
 ---
 
-## declarativeNetRequest and Ad-Blocker Monetization
+## declarativeNetRequest and Ad-Blocker Monetization {#declarativeNetRequest-ad-blocker-monetization}
 
-If your extension monetizes through advertising or uses network request modification, the changes to the `declarativeNetRequest` API require careful attention.
+For ad-blocker extensions, MV3 introduced significant changes to how network requests can be modified.
 
-### How DeclarativeNetRequest Works
+### The declarativeNetRequest API
 
-In Manifest V3, you cannot intercept and modify network requests in the same way as Manifest V2's `webRequest` API. Instead, you must use `declarativeNetRequest` to define rules that Chrome applies to network requests. This is a declarative system where you specify rules in your extension's manifest or in dynamic rule sets.
+In Manifest V3, `declarativeNetRequest` replaces the blocking `webRequest` API:
 
-For ad-blocker extensions or those that monetize through advertising, this creates both challenges and opportunities:
+- **Declarative rules**: You define rules in JSON, Chrome enforces them
+- **No reading of request content**: Privacy improvement but limits some use cases
+- **Static and dynamic rules**: Combined limit of 450,000 rules
 
-**Limitations**: You can no longer dynamically modify requests based on real-time analysis. Rules must be predefined or loaded as rule sets.
+### Monetizing Ad Blockers Under MV3
 
-**Benefits**: The declarative approach is more performant and Chrome provides guarantees about how rules are applied.
+Monetizing ad blockers in MV3 requires different approaches:
 
-### Monetization Through Declarative Rules
+1. **Freemium model**: Free version with limited blocking, premium with full features
+2. **Acceptable Ads program**: Participate to earn revenue from non-intrusive ads (note: must meet Google's requirements)
+3. **Affiliate partnerships**: Recommend privacy products through your extension
+4. **Donations**: Offer a way for users to support development
 
-If your extension monetizes through affiliate links or sponsored content that you inject based on network rules, you need to adapt to this model:
+### Implementing Premium Features with declarativeNetRequest
 
-```javascript
-// manifest.json - declare declarativeNetRequest rules
+```json
 {
-  "name": "Monetized Content Blocker",
-  "version": "1.0",
-  "manifest_version": 3,
   "permissions": ["declarativeNetRequest"],
   "host_permissions": ["<all_urls>"],
   "declarative_net_request": {
     "rule_resources": [{
-      "id": "monetization_rules",
+      "id": "default_ruleset",
       "enabled": true,
-      "path": "rules/monetization.json"
+      "path": "rules/default.json"
     }]
   }
 }
 ```
 
-```json
-// rules/monetization.json
-[
-  {
-    "id": 1,
-    "priority": 1,
-    "action": {
-      "type": "redirect",
-      "redirect": {
-        "transform": {
-          "queryTransform": {
-            "addOrReplaceParams": [
-              { "key": "ref", "value": "your-affiliate-id" }
-            ]
-          }
-        }
-      }
-    },
-    "condition": {
-      "urlFilter": "https://example.com/product/",
-      "resourceTypes": ["main_frame"]
+```javascript
+// Dynamic rule management for premium users
+async function enablePremiumBlocking() {
+  const rules = [
+    {
+      id: 1,
+      priority: 1,
+      action: { type: 'block' },
+      condition: { urlFilter: '.*ads\\..*', resourceTypes: ['script', 'image'] }
     }
-  }
-]
-```
+  ];
+  
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    addRules: rules,
+    removeRuleIds: [1]
+  });
+}
 
-For comprehensive guidance on declarativeNetRequest, see our [declarative net request guide](/chrome-extension-guide/docs/guides/declarative-net-request/).
+// Check premium status before enabling
+async function handlePremiumFeature(feature) {
+  const { licenseStatus } = await chrome.storage.local.get('licenseStatus');
+  
+  if (licenseStatus === 'active' || feature === 'basic') {
+    return true;
+  }
+  
+  // Prompt upgrade
+  showUpgradePrompt();
+  return false;
+}
+```
 
 ---
 
-## storage.session for Auth Tokens
+## storage.session for Auth Tokens {#storage-session-auth-tokens}
 
-Managing authentication tokens in Manifest V3 requires understanding the different storage options and their security implications.
+The `chrome.storage.session` API provides session-scoped storage that doesn't persist across browser restarts. This is ideal for sensitive temporary data like authentication tokens.
 
-### Session Storage in Extensions
-
-`chrome.storage.session` provides ephemeral storage that persists only for the browser session. This is useful for storing sensitive data that should not persist across browser restarts, such as temporary authentication tokens or payment session identifiers.
+### Using session Storage for Authentication
 
 ```javascript
-// Store auth token in session storage
+// Store auth token in session storage (not persisted)
 async function storeAuthToken(token) {
   await chrome.storage.session.set({ authToken: token });
 }
 
 // Retrieve auth token
 async function getAuthToken() {
-  const result = await chrome.storage.session.get('authToken');
-  return result.authToken;
+  const { authToken } = await chrome.storage.session.get('authToken');
+  return authToken;
 }
 
-// Use token in API calls
-async function callPremiumAPI() {
-  const token = await getAuthToken();
-  if (!token) {
-    // Redirect to login or show upgrade prompt
-    return;
-  }
-  
-  const response = await fetch('https://api.your-extension.com/premium', {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
-  
-  return response.json();
+// Clear on logout
+async function clearAuthSession() {
+  await chrome.storage.session.clear();
 }
 ```
 
-### Combining Storage Types for License Data
+### Combining session and local Storage
 
-For robust license management, combine different storage types:
+For robust auth in MV3, use both storage types:
 
 ```javascript
-async function manageLicenseData(licenseInfo) {
-  // Store sensitive token in session storage (ephemeral)
-  if (licenseInfo.token) {
-    await chrome.storage.session.set({ licenseToken: licenseInfo.token });
+class AuthManager {
+  async login(email, password) {
+    const response = await fetch('https://your-api.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    
+    const { token, refreshToken, expiresIn } = await response.json();
+    
+    // Store refresh token in persistent storage
+    await chrome.storage.local.set({ 
+      refreshToken, 
+      tokenExpiresAt: Date.now() + expiresIn * 1000 
+    });
+    
+    // Store access token in session storage
+    await chrome.storage.session.set({ authToken: token });
+    
+    return true;
   }
   
-  // Store license status in local storage (persistent)
-  await chrome.storage.local.set({
-    licenseType: licenseInfo.type,
-    licenseExpiry: licenseInfo.expiry,
-    licenseFeatures: licenseInfo.features,
-    lastValidation: Date.now()
-  });
+  async getValidToken() {
+    const { authToken, tokenExpiresAt } = await chrome.storage.session.get(['authToken', 'tokenExpiresAt']);
+    
+    // Check if token is still valid
+    if (authToken && tokenExpiresAt && Date.now() < tokenExpiresAt) {
+      return authToken;
+    }
+    
+    // Token expired, try refresh
+    return this.refreshToken();
+  }
   
-  // Store non-sensitive preferences in sync storage
-  await chrome.storage.sync.set({
-    autoRenew: licenseInfo.autoRenew,
-    notificationPreferences: licenseInfo.notifications
-  });
+  async refreshToken() {
+    const { refreshToken } = await chrome.storage.local.get('refreshToken');
+    
+    if (!refreshToken) {
+      throw new Error('No refresh token available');
+    }
+    
+    const response = await fetch('https://your-api.com/auth/refresh', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken })
+    });
+    
+    const { token, refreshToken: newRefreshToken, expiresIn } = await response.json();
+    
+    await chrome.storage.local.set({ 
+      refreshToken: newRefreshToken,
+      tokenExpiresAt: Date.now() + expiresIn * 1000 
+    });
+    
+    await chrome.storage.session.set({ authToken: token });
+    
+    return token;
+  }
 }
 ```
 
 ---
 
-## Alarm-Based License Re-Validation
+## Alarm-Based License Re-Validation {#alarm-based-license-re-validation}
 
-Because service workers can be terminated at any time, implementing periodic license re-validation requires using the alarms API to schedule background checks.
+For subscription-based extensions, you need to periodically check license status to ensure users haven't cancelled or had their subscription revoked.
 
 ### Setting Up License Re-Validation Alarms
 
 ```javascript
-// Set up periodic license check - run on extension install
-chrome.runtime.onInstalled.addListener(async () => {
-  // Clear any existing alarm
-  chrome.alarms.clear('license-check');
-  
-  // Create new periodic alarm - check every 6 hours
-  chrome.alarms.create('license-check', {
-    periodInMinutes: 6 * 60  // 6 hours
+// Schedule periodic license check
+function scheduleLicenseValidation() {
+  // Check every hour
+  chrome.alarms.create('license-validation', {
+    periodInMinutes: 60
   });
-});
+  
+  // Also check at a specific time daily (e.g., midnight)
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setHours(24, 0, 0, 0);
+  
+  chrome.alarms.create('daily-license-check', {
+    when: midnight.getTime(),
+    periodInMinutes: 1440 // 24 hours
+  });
+}
 
-// Handle the alarm
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'license-check') {
+  if (alarm.name === 'license-validation' || alarm.name === 'daily-license-check') {
     await validateLicense();
-    await checkSubscriptionStatus();
   }
 });
 
-async function checkSubscriptionStatus() {
+async function validateLicense() {
+  const { licenseKey, lastValidation } = await chrome.storage.local.get(['licenseKey', 'lastValidation']);
+  
+  if (!licenseKey) {
+    return;
+  }
+  
+  // Rate limit validation (don't hit API too often)
+  const now = Date.now();
+  if (lastValidation && now - lastValidation < 3600000) { // 1 hour
+    return;
+  }
+  
   try {
-    // Get stored token
-    const { licenseToken } = await chrome.storage.session.get('licenseToken');
+    const response = await fetch('https://your-api.com/license/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ licenseKey })
+    });
     
-    if (!licenseToken) {
-      await chrome.storage.local.set({ subscriptionActive: false });
+    const result = await response.json();
+    
+    await chrome.storage.local.set({
+      licenseStatus: result.valid ? 'active' : 'expired',
+      licenseExpiresAt: result.expiresAt,
+      lastValidation: now
+    });
+    
+    // Notify user if license expired
+    if (result.valid === false) {
+      notifyLicenseExpired();
+    }
+  } catch (error) {
+    console.error('License validation failed:', error);
+    // Don't immediately revoke on network failure
+  }
+}
+```
+
+### Smart Validation Scheduling
+
+For better user experience, combine multiple validation strategies:
+
+```javascript
+async function smartValidate() {
+  // 1. Quick local check first
+  const { licenseStatus, licenseExpiresAt } = await chrome.storage.local.get(['licenseStatus', 'licenseExpiresAt']);
+  
+  // 2. If local says expired, trust it (don't block user further)
+  if (licenseStatus === 'expired') {
+    return false;
+  }
+  
+  // 3. If license expires within 7 days, validate now
+  if (licenseExpiresAt && (licenseExpiresAt - Date.now()) < 7 * 24 * 60 * 60 * 1000) {
+    return validateLicense();
+  }
+  
+  // 4. Otherwise, trust local validation if recent
+  const { lastValidation } = await chrome.storage.local.get('lastValidation');
+  if (lastValidation && (Date.now() - lastValidation) < 24 * 60 * 60 * 1000) {
+    return licenseStatus === 'active';
+  }
+  
+  // 5. Must validate
+  return validateLicense();
+}
+```
+
+---
+
+## Tab Suspender Pro MV3 Monetization Migration {#tab-suspender-pro-mv3-monetization}
+
+To illustrate real-world MV3 monetization, let's examine how Tab Suspender Pro migrated its payment system.
+
+### MV2 Architecture (Legacy)
+
+In Manifest V2, Tab Suspender Pro used:
+
+- Chrome Web Store payments (built-in)
+- Background page with persistent state
+- Global variables for license status
+
+### MV3 Migration Challenges
+
+The migration required solving several challenges:
+
+1. **No more CWS payments**: Had to implement external payment flow
+2. **Service worker termination**: License state must persist
+3. **Payment completion handling**: Need to handle users closing browser mid-purchase
+
+### MV3 Solution Implemented
+
+```javascript
+// Tab Suspender Pro MV3 License Manager
+class LicenseManager {
+  constructor() {
+    this.initialize();
+  }
+  
+  async initialize() {
+    // Schedule validation on startup
+    this.scheduleValidation();
+    
+    // Check license status
+    await this.checkLicense();
+  }
+  
+  async checkLicense() {
+    const { licenseKey } = await chrome.storage.local.get('licenseKey');
+    
+    if (!licenseKey) {
+      this.setFreeTier();
       return;
     }
     
-    // Check with your backend
-    const response = await fetch('https://api.your-extension.com/subscription/status', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${licenseToken}`
-      }
+    // Validate with server
+    const isValid = await this.validateWithServer(licenseKey);
+    
+    if (isValid) {
+      this.setPremiumTier();
+    } else {
+      this.setFreeTier();
+    }
+  }
+  
+  async purchase() {
+    // Create checkout session
+    const response = await fetch('https://api.tabsuspenderpro.com/create-checkout', {
+      method: 'POST'
+    });
+    const { url, sessionId } = await response.json();
+    
+    // Store pending payment
+    await chrome.storage.local.set({ 
+      pendingPayment: sessionId,
+      paymentStarted: Date.now()
     });
     
-    if (response.ok) {
-      const status = await response.json();
-      await chrome.storage.local.set({
-        subscriptionActive: status.active,
-        subscriptionTier: status.tier,
-        nextBillingDate: status.nextBillingDate
-      });
-      
-      // Notify user if subscription is about to expire
-      if (status.expiringSoon) {
-        await showExpirationWarning();
-      }
-    } else {
-      await chrome.storage.local.set({ subscriptionActive: false });
-    }
-  } catch (error) {
-    console.error('Subscription check failed:', error);
+    // Open checkout in new tab
+    await chrome.tabs.create({ url });
+    
+    // Set up alarm to check payment status
+    chrome.alarms.create('payment-check', { delayInMinutes: 1 });
+  }
+  
+  async handlePaymentComplete(sessionId) {
+    // Verify payment with server
+    const response = await fetch('https://api.tabsuspenderpro.com/verify-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId })
+    });
+    
+    const { licenseKey, subscription } = await response.json();
+    
+    // Store license
+    await chrome.storage.local.set({
+      licenseKey,
+      licenseStatus: 'active',
+      subscription,
+      pendingPayment: null
+    });
+    
+    // Enable premium features
+    this.setPremiumTier();
+  }
+  
+  scheduleValidation() {
+    chrome.alarms.create('license-validate', { periodInMinutes: 30 });
   }
 }
 
-async function showExpirationWarning() {
-  // Use notifications to warn user
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icons/icon-128.png',
-    title: 'Subscription Expiring Soon',
-    message: 'Your subscription will expire in 7 days. Renew now to keep your premium features.',
-    priority: 1
-  });
-}
+chrome.alarms.onAlarm.addListener(async (alarm) => {
+  if (alarm.name === 'payment-check') {
+    const { pendingPayment } = await chrome.storage.local.get('pendingPayment');
+    if (pendingPayment) {
+      // Check with server if payment completed
+      const response = await fetch(`https://api.tabsuspenderpro.com/check-payment/${pendingPayment}`);
+      if (response.ok) {
+        licenseManager.handlePaymentComplete(pendingPayment);
+      }
+    }
+  }
+  
+  if (alarm.name === 'license-validate') {
+    await licenseManager.checkLicense();
+  }
+});
 ```
 
-This approach ensures that licenses are regularly validated without requiring a continuously running service worker. The alarm will wake up your service worker at the specified interval, perform validation, and then the service worker can terminate again.
-
-For more background task patterns, see our [alarms API guide](/chrome-extension-guide/docs/guides/alarms-api/) and [background service worker patterns](/chrome-extension-guide/docs/guides/background-service-worker-patterns/).
-
 ---
 
-## Tab Suspender Pro MV3 Monetization Migration
+## Stripe Checkout in MV3 World {#stripe-checkout-mv3}
 
-A real-world example helps illustrate these concepts. Tab Suspender Pro, a popular tab management extension, underwent a complete monetization migration from Manifest V2 to Manifest V3. Understanding their approach provides valuable insights for your own migration.
+Stripe is the most popular payment processor for Chrome extensions. Here's how to integrate Stripe Checkout in the MV3 world.
 
-### Their MV2 Monetization Architecture
-
-In Manifest V2, Tab Suspender Pro used a persistent background page that maintained a continuous connection to their licensing server. The background page would:
-
-- Validate licenses on startup and every few hours
-- Store license data in localStorage
-- Handle popup interactions directly through the background page
-- Use inline Chrome Web Store payments for purchases
-
-### Their MV3 Monetization Architecture
-
-The migration required a complete redesign:
-
-**License validation moved to service worker**: Instead of continuous validation, the service worker validates on startup, on significant events, and through scheduled alarms. Validation results are stored in `chrome.storage.local` for persistence across service worker terminations.
-
-**Payment flow through offscreen documents**: The payment flow now uses an offscreen document to handle the redirect to their payment provider (they migrated to Stripe), process the callback, and update local storage with the new license information.
-
-**Premium feature gating**: Features are now gated through a check that validates the stored license status before allowing access. This check happens at the point of feature use rather than continuously.
-
-**Subscription management through their own API**: They built a lightweight backend that handles subscription state, communicates with Stripe for payments, and provides a validation endpoint that their extension calls.
-
-This architecture is more complex than the MV2 version but provides better security, works within Manifest V3 constraints, and gives them more control over their monetization.
-
----
-
-## Stripe Checkout in MV3 World
-
-Integrating Stripe Checkout with a Manifest V3 extension requires handling the payment flow outside the extension and then validating the purchase through your backend.
-
-### The Flow
-
-1. User clicks "Upgrade" in your extension
-2. Extension opens an offscreen document or popup with your Stripe Checkout URL
-3. User completes payment on Stripe's hosted page
-4. Stripe redirects back to a page your extension controls (via a web-accessible resource or external website)
-5. Your backend receives the payment webhook and updates the user's license
-6. The extension validates the updated license through your API
-
-### Implementation
+### Creating a Stripe Checkout Flow
 
 ```javascript
-// Service worker - initiate payment
-async function initiateStripeCheckout(priceId) {
-  // Get or create a customer identifier
-  let { customerId } = await chrome.storage.local.get('customerId');
-  
-  if (!customerId) {
-    customerId = crypto.randomUUID();
-    await chrome.storage.local.set({ customerId });
-  }
-  
-  // Call your backend to create a checkout session
-  const response = await fetch('https://api.your-extension.com/create-checkout-session', {
+// popup.js or service worker
+async function initiatePurchase() {
+  // 1. Create Stripe Checkout Session on your server
+  const response = await fetch('https://your-api.com/create-checkout-session', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      priceId,
-      customerId,
-      extensionId: chrome.runtime.id
+      priceId: 'price_premium_monthly',
+      successUrl: chrome.runtime.getURL('payment-success.html'),
+      cancelUrl: chrome.runtime.getURL('payment-canceled.html'),
+      clientReferenceId: await getUserId()
     })
   });
   
-  const { url } = await response.json();
+  const { url, sessionId } = await response.json();
   
-  // Open checkout in a new window
-  chrome.windows.create({
-    url: url,
-    type: 'popup',
-    width: 600,
-    height: 700
+  // 2. Store session ID for verification
+  await chrome.storage.local.set({
+    pendingStripeSession: sessionId,
+    paymentInitiated: Date.now()
   });
+  
+  // 3. Open Stripe Checkout in a new tab
+  await chrome.tabs.create({ url });
+}
+
+// payment-success.html (loaded after payment)
+async function handlePaymentSuccess() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get('session_id');
+  
+  if (!sessionId) {
+    showError('No session ID found');
+    return;
+  }
+  
+  // Verify the payment with your server
+  const response = await fetch('https://your-api.com/verify-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId })
+  });
+  
+  if (!response.ok) {
+    showError('Payment verification failed');
+    return;
+  }
+  
+  const { licenseKey, subscription } = await response.json();
+  
+  // Store license in extension
+  await chrome.storage.local.set({
+    licenseKey,
+    licenseStatus: 'active',
+    subscription,
+    stripeCustomerId: (await response.json()).customerId
+  });
+  
+  // Notify service worker
+  chrome.runtime.sendMessage({ type: 'LICENSE_ACTIVATED' });
+  
+  // Close tab after short delay
+  setTimeout(() => window.close(), 2000);
 }
 ```
 
+### Server-Side Stripe Implementation
+
 ```javascript
-// Your backend endpoint (Node.js example)
+// server.js (Node.js/Express)
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 app.post('/create-checkout-session', async (req, res) => {
-  const { priceId, customerId, extensionId } = req.body;
+  const { priceId, successUrl, cancelUrl, clientReferenceId } = req.body;
   
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
     payment_method_types: ['card'],
-    line_items: [{
-      price: priceId,
-      quantity: 1
-    }],
-    client_reference_id: customerId,
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: successUrl + '?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: cancelUrl,
+    client_reference_id: clientReferenceId,
     metadata: {
-      extension_id: extensionId
-    },
-    success_url: 'https://your-extension.com/payment-success?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'https://your-extension.com/payment-cancelled'
+      extensionId: 'tab-suspender-pro'
+    }
   });
   
-  res.json({ url: session.url });
+  res.json({ url: session.url, sessionId: session.id });
+});
+
+app.post('/verify-session', async (req, res) => {
+  const { sessionId } = req.body;
+  
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  
+  if (session.payment_status !== 'paid') {
+    return res.status(400).json({ error: 'Payment not completed' });
+  }
+  
+  // Generate license key
+  const licenseKey = generateLicenseKey();
+  
+  // Store license in database
+  await saveLicense({
+    key: licenseKey,
+    customerId: session.customer,
+    subscriptionId: session.subscription,
+    status: 'active'
+  });
+  
+  res.json({ 
+    licenseKey,
+    subscription: {
+      id: session.subscription,
+      status: 'active',
+      currentPeriodEnd: session.expires_at
+    }
+  });
+});
+
+// Webhook to handle subscription changes
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+  
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  
+  if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object;
+    await deactivateLicense(subscription.customer);
+  }
+  
+  res.json({ received: true });
 });
 ```
 
-```javascript
-// Handle post-payment validation
-async function handlePaymentSuccess(sessionId) {
-  // Call your backend to verify the payment
-  const response = await fetch('https://api.your-extension-guide.com/verify-payment', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ sessionId })
-  });
-  
-  if (response.ok) {
-    const { subscription, token } = await response.json();
-    
-    // Store license information
-    await chrome.storage.local.set({
-      subscriptionActive: true,
-      subscriptionTier: subscription.tier,
-      licenseExpiry: subscription.currentPeriodEnd
-    });
-    
-    // Store auth token for API calls
-    await chrome.storage.session.set({ licenseToken: token });
-    
-    // Notify user of success
-    chrome.notifications.create({
-      type: 'basic',
-      iconUrl: 'icons/icon-128.png',
-      title: 'Upgrade Complete!',
-      message: 'Thank you for subscribing. Premium features are now unlocked.'
-    });
-  }
-}
-```
-
-For a complete Stripe integration guide, see our detailed [Stripe integration tutorial](/chrome-extension-guide/docs/guides/stripe-integration/).
-
 ---
 
-## External Website Payment Flow
+## External Website Payment Flow {#external-website-payment-flow}
 
-Beyond Stripe, many extensions use external websites for their payment and licensing. This pattern is common for extensions that offer more complex pricing tiers, usage-based billing, or integration with existing SaaS products.
+The external website payment flow is the recommended pattern for MV3 extensions. Here's a comprehensive implementation.
 
 ### Architecture Overview
 
-When using an external website for payments, your extension acts as a client to your own backend API, which handles all payment processing and license management. This gives you complete flexibility in your pricing model and payment experience.
-
-The key components are:
-
-**Your backend API**: Handles all license validation, subscription management, and payment processing. This is the source of truth for license status.
-
-**Your payment website**: A web interface where users can manage their subscription, view invoices, and complete payments.
-
-**Your extension**: Validates licenses through your API, grants access to premium features based on license status, and communicates with your backend.
-
-### Implementation Pattern
-
-```javascript
-// Extension service worker - check license status
-async function checkLicense() {
-  const { licenseToken } = await chrome.storage.session.get('licenseToken');
-  
-  if (!licenseToken) {
-    return { valid: false, reason: 'no_token' };
-  }
-  
-  try {
-    const response = await fetch('https://api.your-extension.com/license/validate', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${licenseToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        extensionId: chrome.runtime.id,
-        version: chrome.runtime.getManifest().version
-      })
-    });
-    
-    if (!response.ok) {
-      return { valid: false, reason: 'invalid_license' };
-    }
-    
-    const data = await response.json();
-    
-    // Cache the validation result
-    await chrome.storage.local.set({
-      licenseValid: data.valid,
-      licenseFeatures: data.features,
-      licenseExpiry: data.expiry,
-      lastValidation: Date.now()
-    });
-    
-    return data;
-  } catch (error) {
-    console.error('License check failed:', error);
-    // Return cached status if validation fails
-    const cached = await chrome.storage.local.get(['licenseValid', 'lastValidation']);
-    if (cached.licenseValid && cached.lastValidation) {
-      const sixHoursAgo = Date.now() - (6 * 60 * 60 * 1000);
-      if (cached.lastValidation > sixHoursAgo) {
-        return { valid: true, cached: true };
-      }
-    }
-    return { valid: false, reason: 'network_error' };
-  }
-}
-
-// Premium feature wrapper
-async function withPremiumFeature(featureCallback) {
-  const license = await checkLicense();
-  
-  if (!license.valid) {
-    // Show upgrade prompt
-    showUpgradePrompt();
-    return;
-  }
-  
-  if (!license.features.includes('advanced_features')) {
-    // Show feature not included message
-    showFeatureNotIncluded();
-    return;
-  }
-  
-  return featureCallback(license);
-}
-
-function showUpgradePrompt() {
-  chrome.action.setPopup({ popup: 'popup/upgrade.html' });
-  // Or open a payment page
-  chrome.tabs.create({ url: 'https://your-extension.com/upgrade' });
-}
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Chrome         │     │  Your           │     │  Payment        │
+│  Extension      │────▶│  Website        │────▶│  Provider       │
+│                 │     │  (checkout)     │     │  (Stripe)       │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+        │                       ▼                       │
+        │               ┌─────────────────┐              │
+        │               │  API Server     │              │
+        │               │  (license       │              │
+        └──────────────▶│  validation)    │              │
+                        └─────────────────┘
 ```
 
-This architecture is flexible and can accommodate any payment model, from simple one-time purchases to complex usage-based billing. The key is maintaining a clear separation between your extension's client-side logic and your backend's license management.
-
----
-
-## Handling Service Worker Termination During Purchase
-
-One of the most challenging aspects of monetization in Manifest V3 is handling the scenario where a service worker terminates during an active purchase or payment flow.
-
-### The Problem
-
-Users may have slow connections, close browser windows, or Chrome may terminate your service worker at any time. If a purchase flow is in progress when this happens, you need to ensure the purchase is not lost and the user experience remains consistent.
-
-### Solutions
-
-**State persistence**: Always persist the state of any in-progress transaction to `chrome.storage` before initiating any external request. This ensures that if the service worker terminates, the state can be recovered when it restarts.
+### Complete Implementation
 
 ```javascript
-async function startPurchaseFlow(plan) {
-  // Persist state before any async operation
-  await chrome.storage.local.set({
-    purchaseInProgress: true,
-    purchasePlan: plan,
-    purchaseStartTime: Date.now()
-  });
-  
-  try {
-    // Initiate payment...
-    await initiatePayment(plan);
-  } catch (error) {
-    // Handle error, but state is already persisted
-    console.error('Purchase failed:', error);
-  }
-}
-```
+// service-worker.js
 
-**Resume on startup**: When your service worker starts, check for any in-progress purchases and handle them appropriately.
-
-```javascript
-chrome.runtime.onStartup.addListener(async () => {
-  const { purchaseInProgress, purchaseStartTime } = await chrome.storage.local.get(['purchaseInProgress', 'purchaseStartTime']);
-  
-  if (purchaseInProgress) {
-    // Check if purchase was completed while we were terminated
-    await checkPurchaseStatus();
+// 1. User initiates purchase
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'INITIATE_PURCHASE') {
+    handlePurchase(message.plan);
+    return true;
   }
 });
 
-async function checkPurchaseStatus() {
-  const { licenseToken } = await chrome.storage.session.get('licenseToken');
+async function handlePurchase(plan) {
+  // Create payment session on your server
+  const response = await fetch('https://your-api.com/payments/initiate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+      plan,
+      extensionId: 'my-extension',
+      returnUrl: chrome.runtime.getURL('payment-callback.html')
+    })
+  });
   
-  if (licenseToken) {
-    // Payment likely completed - validate and clear purchase state
-    await validateLicense();
-    await chrome.storage.local.set({ purchaseInProgress: false });
-  } else {
-    // Payment may have failed or user abandoned - check with backend
-    const response = await fetch('https://api.your-extension.com/check-pending-purchase', {
-      method: 'GET'
-    });
-    
+  const { sessionId, paymentUrl } = await response.json();
+  
+  // Store payment context
+  await chrome.storage.local.set({
+    paymentSession: sessionId,
+    paymentPlan: plan,
+    paymentStarted: Date.now()
+  });
+  
+  // Open payment page
+  await chrome.tabs.create({ url: paymentUrl });
+}
+
+// 2. Handle return from payment
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'PAYMENT_COMPLETE') {
+    handlePaymentComplete(message.sessionId);
+    return true;
+  }
+});
+
+async function handlePaymentComplete(sessionId) {
+  // Verify payment with server
+  const response = await fetch('https://your-api.com/payments/verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId })
+  });
+  
+  if (!response.ok) {
+    throw new Error('Payment verification failed');
+  }
+  
+  const { licenseKey, subscription, features } = await response.json();
+  
+  // Store license
+  await chrome.storage.local.set({
+    licenseKey,
+    licenseStatus: 'active',
+    subscription,
+    premiumFeatures: features,
+    paymentSession: null // Clear pending payment
+  });
+  
+  // Update UI
+  notifyUser('Premium activated!');
+}
+
+// 3. Handle service worker termination during payment
+chrome.runtime.onStartup.addListener(async () => {
+  const { paymentSession, paymentStarted } = await chrome.storage.local.get(['paymentSession', 'paymentStarted']);
+  
+  if (paymentSession) {
+    // Check if payment was completed while we were terminated
+    const response = await fetch(`https://your-api.com/payments/status/${paymentSession}`);
     if (response.ok) {
-      const data = await response.json();
-      if (data.completed) {
-        await processCompletedPurchase(data);
+      const result = await response.json();
+      if (result.status === 'completed') {
+        await handlePaymentComplete(paymentSession);
+      } else if (result.status === 'failed' || result.status === 'canceled') {
+        await chrome.storage.local.set({ paymentSession: null });
+      }
+      // Still pending - user may be in checkout
+    }
+  }
+});
+
+// 4. Periodic check for abandoned payments
+chrome.alarms.create('check-abandoned-payments', { periodInMinutes: 5 });
+
+chrome.alarms.onAlarm.addListener(async (alarm) => {
+  if (alarm.name === 'check-abandoned-payments') {
+    const { paymentSession, paymentStarted } = await chrome.storage.local.get(['paymentSession', 'paymentStarted']);
+    
+    if (paymentSession && paymentStarted) {
+      // Check if payment has been pending too long (30 minutes)
+      if (Date.now() - paymentStarted > 30 * 60 * 1000) {
+        // May have been abandoned - try to verify
+        const response = await fetch(`https://your-api.com/payments/status/${paymentSession}`);
+        if (response.ok) {
+          const result = await response.json();
+          if (result.status === 'completed') {
+            await handlePaymentComplete(paymentSession);
+          } else {
+            // Clear stuck payment
+            await chrome.storage.local.set({ paymentSession: null });
+          }
+        }
+      }
+    }
+  }
+});
+```
+
+---
+
+## Handling Service Worker Termination During Purchase {#handling-sw-termination}
+
+The most challenging aspect of MV3 monetization is handling the case where the service worker terminates mid-purchase. Here's how to build a robust system.
+
+### The Problem
+
+User flow:
+1. User clicks "Buy Now" in extension popup
+2. Service worker creates payment session
+3. Payment tab opens
+4. User completes payment
+5. User switches back to Chrome
+6. Service worker has been terminated!
+
+### Solution: Resume Payment Flow on Wake-Up
+
+```javascript
+// service-worker.js - handles service worker startup
+chrome.runtime.onStartup.addListener(async () => {
+  await restorePaymentState();
+});
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await restorePaymentState();
+});
+
+async function restorePaymentState() {
+  const { paymentSession, paymentStarted, licenseStatus } = await chrome.storage.local.get([
+    'paymentSession',
+    'paymentStarted',
+    'licenseStatus'
+  ]);
+  
+  if (paymentSession && licenseStatus !== 'active') {
+    // There's a pending payment - check its status
+    try {
+      const response = await fetch(`https://your-api.com/payments/status/${paymentSession}`);
+      
+      if (response.ok) {
+        const result = await response.json();
+        
+        if (result.status === 'completed') {
+          // Payment completed while we were asleep!
+          await activateLicense(result.licenseKey, result.subscription);
+        } else if (result.status === 'failed' || result.status === 'canceled') {
+          // Payment didn't complete
+          await chrome.storage.local.set({ paymentSession: null });
+        }
+        // Still pending - user is probably in checkout
+      }
+    } catch (error) {
+      console.error('Failed to restore payment state:', error);
+    }
+  }
+  
+  // Also check if license needs validation after browser restart
+  if (licenseStatus === 'active') {
+    await validateLicense();
+  }
+}
+
+async function activateLicense(licenseKey, subscription) {
+  await chrome.storage.local.set({
+    licenseKey,
+    licenseStatus: 'active',
+    subscription,
+    paymentSession: null,
+    paymentStarted: null
+  });
+  
+  // Notify any open popup
+  chrome.runtime.sendMessage({ 
+    type: 'LICENSE_ACTIVATED',
+    subscription
+  }).catch(() => {
+    // Popup might not be open - that's fine
+  });
+}
+```
+
+### Handling Payment Callback URLs
+
+Your payment page should also handle returning users:
+
+```html
+<!-- payment-success.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Processing...</title>
+  <script>
+    async function processReturn() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+      const status = urlParams.get('status');
+      
+      if (status === 'success' && sessionId) {
+        // Verify with server
+        const response = await fetch('https://your-api.com/payments/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId })
+        });
+        
+        if (response.ok) {
+          const { licenseKey, subscription } = await response.json();
+          
+          // Try to notify extension
+          try {
+            await chrome.runtime.sendMessage({
+              type: 'PAYMENT_COMPLETE',
+              sessionId,
+              licenseKey,
+              subscription
+            });
+          } catch (e) {
+            // Extension may be closed - store for next startup
+            await chrome.storage.local.set({
+              paymentSession: null,
+              licenseKey,
+              licenseStatus: 'active',
+              subscription
+            });
+          }
+          
+          document.body.innerHTML = '<h1>Payment Successful!</h1><p>Your extension is now premium.</p>';
+          setTimeout(() => window.close(), 3000);
+        }
+      } else {
+        document.body.innerHTML = '<h1>Payment Failed</h1><p>Please try again.</p>';
       }
     }
     
-    // Clear pending state after timeout
-    await chrome.storage.local.set({ purchaseInProgress: false });
-  }
-}
+    processReturn();
+  </script>
+</head>
+<body>
+  <p>Processing your payment...</p>
+</body>
+</html>
 ```
-
-**Use offscreen documents for critical flows**: For the actual payment processing, use an offscreen document rather than the service worker. Offscreen documents are less likely to be terminated during active operations.
-
-```javascript
-// Use offscreen document for the critical payment window
-async function openPaymentWindow(plan) {
-  // Ensure offscreen document is created for payment handling
-  await chrome.offscreen.createDocument({
-    url: 'offscreen/payment-handler.html',
-    reasons: ['BLOBS', 'DOM_SCRAPING'],
-    justification: 'Handling payment process'
-  });
-  
-  // Send payment details to offscreen document
-  chrome.runtime.sendMessage({
-    target: 'offscreen',
-    action: 'process-payment',
-    plan: plan
-  });
-}
-```
-
-**Implement idempotency**: Design your backend to handle duplicate requests gracefully. If the extension retries a payment request after a service worker restart, the backend should recognize this and return the correct status rather than creating duplicate charges.
 
 ---
 
-## Summary
+## Conclusion {#conclusion}
 
-Manifest V3 fundamentally changed Chrome extension monetization, requiring developers to rethink their architecture from the ground up. The shift from persistent background pages to ephemeral service workers, the deprecation of inline payments, and new restrictions on network access all demand new patterns and approaches.
+Manifest V3 fundamentally changed Chrome extension monetization, but these changes aren't insurmountable. The key lessons are:
 
-The key takeaways for building a successful monetization strategy in Manifest V3 are:
+1. **Move away from CWS payments**: Implement external payment processing through Stripe or similar providers.
 
-**Embrace external payment processing**: With inline payments deprecated, most successful extensions now use external payment providers like Stripe. This gives you more control and enables flexible pricing models.
+2. **Design for service worker termination**: Your extension must handle the service worker being killed at any time. Use `chrome.storage` for all persistent state.
 
-**Design for service worker termination**: Never assume your service worker will remain running. Persist all state to storage, implement proper resume logic, and use offscreen documents for critical payment flows.
+3. **Use alarms for periodic validation**: Schedule license checks using `chrome.alarms` rather than relying on persistent background pages.
 
-**Implement robust license validation**: Use a combination of startup validation, alarm-based periodic checks, and feature-gated validation to ensure your premium features remain protected.
+4. **Leverage offscreen documents**: For longer-running operations like payment processing, offscreen documents provide the persistence you need.
 
-**Use offscreen documents strategically**: They provide the persistent context needed for complex payment flows and OAuth sequences that cannot work within a service worker.
+5. **Handle the edge cases**: Users will close their browser mid-purchase. Design your system to resume gracefully when the browser restarts.
 
-**Plan for the future**: The extension monetization landscape continues to evolve. Build flexible architectures that can adapt to new payment providers, pricing models, and Chrome API changes.
-
-For more guidance on migrating your extension to Manifest V3, see our comprehensive [MV3 migration guide](/chrome-extension-guide/docs/guides/mv3-migration/). For deeper dives into specific patterns, explore our [service worker patterns](/chrome-extension-guide/docs/guides/background-service-worker-patterns/) and [extension monetization](/chrome-extension-guide/docs/guides/extension-monetization/) documentation.
+For more details on implementing these patterns, see our guides on [MV3 migration](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/), [service worker patterns](/chrome-extension-guide/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/), [Stripe integration](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/), and [monetization strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/).
 
 ---
 
-Built by [theluckystrike](https://zovo.one) at [zovo.one](https://zovo.one)
+Built by theluckystrike at [zovo.one](https://zovo.one)
