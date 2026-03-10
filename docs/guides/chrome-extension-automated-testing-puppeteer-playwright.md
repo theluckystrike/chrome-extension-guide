@@ -1,70 +1,27 @@
 ---
 layout: default
 title: "Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration"
-description: "Learn how to automate testing for Chrome extensions using Puppeteer and Playwright. Covers loading unpacked extensions, popup testing, content script verification, service worker testing, CI/CD integration, and test coverage reporting."
+description: "Learn how to automate testing for Chrome extensions using Puppeteer and Playwright. Cover E2E testing, extension fixtures, popup testing, content script verification, service worker testing, CI/CD integration with GitHub Actions, and test coverage reporting."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-automated-testing-puppeteer-playwright/"
 ---
 
 # Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration
 
-Automated testing for Chrome extensions presents unique challenges that differ significantly from testing traditional web applications. Your extension code runs across multiple isolated contexts — service workers, content scripts, popup pages, options pages, and side panels — each with its own execution environment and lifecycle. This comprehensive guide covers the strategies, tools, and best practices for building a robust automated testing infrastructure for Chrome extensions using Puppeteer and Playwright.
+Automated testing is essential for maintaining reliable Chrome extensions. Unlike traditional web applications, extensions introduce unique challenges: multiple execution contexts (popup, background, content scripts), Chrome-specific APIs, and event-driven architectures. This guide covers comprehensive testing strategies using Puppeteer and Playwright, with practical patterns for CI integration.
 
-Whether you're building a simple productivity tool or a complex enterprise extension, implementing automated tests will catch regressions early, improve code quality, and enable confident continuous deployment. We'll cover everything from loading unpacked extensions in test environments to setting up GitHub Actions workflows with comprehensive test coverage reporting.
+## Loading Unpacked Extensions in Puppeteer
 
-## Table of Contents
-
-- [Understanding Chrome Extension Testing Contexts](#understanding-chrome-extension-testing-contexts)
-- [Setting Up Puppeteer for Extension Testing](#setting-up-puppeteer-for-extension-testing)
-- [Playwright Extension Fixtures and Configuration](#playwright-extension-fixtures-and-configuration)
-- [Testing Popup Interactions](#testing-popup-interactions)
-- [Content Script Verification](#content-script-verification)
-- [Service Worker Event Testing](#service-worker-event-testing)
-- [Screenshot Comparison for Visual Regression](#screenshot-comparison-for-visual-regression)
-- [End-to-End Test Patterns](#end-to-end-test-patterns)
-- [Mocking Chrome APIs](#mocking-chrome-apis)
-- [GitHub Actions CI Setup](#github-actions-ci-setup)
-- [Test Coverage Reporting](#test-coverage-reporting)
-- [Fixture Management and Best Practices](#fixture-management-and-best-practices)
-- [Related Articles](#related-articles)
-
----
-
-## Understanding Chrome Extension Testing Contexts
-
-Before diving into implementation, it's essential to understand the different contexts where your extension code runs. Each context requires a different testing approach:
-
-- **Service Worker (Background Script)**: Runs in an isolated environment, handles events, manages state, and coordinates other extension components. Testing requires special handling due to its lifecycle nature.
-
-- **Content Scripts**: Injected into web pages, can access and manipulate DOM, but run in a restricted environment separate from the page's JavaScript.
-
-- **Popup Pages**: HTML/CSS/JS that runs when the user clicks the extension icon. Has access to Chrome APIs but is terminated when closed.
-
-- **Options Pages**: Configuration UI that users access from `chrome://extensions`. Similar to popup but persistent.
-
-- **Side Panels**: New in Manifest V3, these provide a persistent sidebar experience.
-
-Testing each context requires different strategies. Puppeteer excels at direct browser control, while Playwright provides higher-level abstractions and better TypeScript support. Both can load unpacked extensions for testing.
-
----
-
-## Setting Up Puppeteer for Extension Testing
-
-Puppeteer provides direct control over Chrome/Chromium, making it ideal for extension testing. The key is using the `--disable-extensions-except` and `--load-extension` flags to launch Chrome with your extension loaded.
-
-### Basic Puppeteer Setup
+Puppeteer provides native support for loading Chrome extensions through the `--disable-extensions` flag reversal and `chrome.launch()` with the `args` option. The key is specifying the path to your unpacked extension directory.
 
 ```javascript
 const puppeteer = require('puppeteer');
-const path = require('path');
 
-async function createExtensionBrowser() {
-  const EXTENSION_PATH = path.resolve(__dirname, '../dist');
-  
+async function launchExtension(extensionPath) {
   const browser = await puppeteer.launch({
     headless: false,
     args: [
-      `--disable-extensions-except=${EXTENSION_PATH}`,
-      `--load-extension=${EXTENSION_PATH}`,
+      `--disable-extensions-except=${extensionPath}`,
+      `--load-extension=${extensionPath}`,
       '--no-sandbox',
       '--disable-setuid-sandbox'
     ]
@@ -74,470 +31,546 @@ async function createExtensionBrowser() {
 }
 ```
 
-### Loading Unpacked Extensions
-
-When testing extensions, you need to launch Chrome with your unpacked extension loaded. Puppeteer's `--load-extension` flag accepts a comma-separated list of extension paths:
+When loading extensions in Puppeteer, the background service worker (or background page in Manifest V2) starts automatically. You can access it through `backgroundPageTarget()`:
 
 ```javascript
-async function launchWithExtension(extensionPath) {
-  const browser = await puppeteer.launch({
-    headless: 'new', // Use new headless mode
-    args: [
-      `--disable-extensions-except=${extensionPath}`,
-      `--load-extension=${extensionPath}`,
-    ]
-  });
-  
-  // Get all targets and find extension background page
+async function getServiceWorkerContext(browser) {
   const targets = await browser.targets();
   const backgroundTarget = targets.find(
-    target => target.type() === 'service_worker' && 
-    target.url().includes('background.js')
+    target => target.type() === 'service_worker' || 
+              target.type() === 'background_page'
   );
   
   const backgroundPage = await backgroundTarget.page();
-  
-  return { browser, backgroundPage };
+  return backgroundPage;
 }
 ```
 
-### Accessing Extension Contexts
-
-Once your extension is loaded, you can access different contexts:
+For more reliable extension detection, use the extension URL pattern:
 
 ```javascript
-async function testExtensionPopup() {
-  const browser = await launchWithExtension(EXTENSION_PATH);
-  
-  // Open a test page first
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  
-  // Click extension icon to open popup
-  await page.click('#Extensions-button-selector');
-  
-  // Wait for popup to be available
-  const popup = await waitForExtensionPopup(browser);
-  
-  // Test popup content
-  const popupContent = await popup.evaluate(() => document.body.textContent);
-  console.log('Popup content:', popupContent);
-  
-  await browser.close();
-}
-
-async function waitForExtensionPopup(browser) {
+async function findExtensionBackgroundPage(browser, extensionId) {
   const target = await browser.waitForTarget(
-    target => target.type() === 'page' && 
-    target.url().includes('popup.html')
+    target => target.url().includes(`chrome-extension://${extensionId}`) &&
+              (target.type() === 'service_worker' || target.type() === 'background_page')
   );
   return target.page();
 }
 ```
 
----
+## Playwright Extension Fixtures
 
-## Playwright Extension Fixtures and Configuration
+Playwright offers a more modern approach to extension testing through its experimental extension support. The `chromium.launchPersistentContext()` method enables loading extensions in a persistent browser context:
 
-Playwright offers a more modern approach with built-in support for extension testing through its experimental `chromium.launchPersistentContext` API. This provides a persistent browser context with your extension pre-loaded.
+```javascript
+const { test, expect } = require('@playwright/test');
 
-### Playwright Extension Setup
+test.use({
+  launchOptions: {
+    args: [
+      '--disable-extensions-except=/path/to/extension',
+      '--load-extension=/path/to/extension'
+    ]
+  }
+});
 
-```typescript
-import { test, expect, chromium, BrowserContext } from '@playwright/test';
-import path from 'path';
-
-const EXTENSION_PATH = path.resolve(__dirname, '../dist');
-
-test.describe('Chrome Extension E2E Tests', () => {
-  let context: BrowserContext;
+test('extension popup loads correctly', async ({ page }) => {
+  // Access extension popup through its URL
+  const popupUrl = 'chrome-extension://<extension-id>/popup.html';
+  await page.goto(popupUrl);
   
-  test.beforeEach(async () => {
-    context = await chromium.launchPersistentContext('', {
-      headless: false,
+  await expect(page.locator('#my-button')).toBeVisible();
+});
+```
+
+For reusable test fixtures, create a custom Playwright configuration:
+
+```javascript
+// fixtures/extension.js
+const { test as base } = require('@playwright/test');
+
+const extensionTest = base.extend({
+  extensionBrowser: async ({ launchOptions }, use) => {
+    const browser = await chromium.launchPersistentContext('', {
+      ...launchOptions,
       args: [
-        `--disable-extensions-except=${EXTENSION_PATH}`,
-        `--load-extension=${EXTENSION_PATH}`,
-      ],
-      viewport: { width: 1280, height: 720 }
+        ...(launchOptions.args || []),
+        `--disable-extensions-except=${process.env.EXTENSION_PATH}`,
+        `--load-extension=${process.env.EXTENSION_PATH}`
+      ]
     });
+    await use(browser);
+    await browser.close();
+  },
+  
+  extensionId: async ({ extensionBrowser }, use) => {
+    const context = extensionBrowser.contexts()[0];
+    // Extract extension ID from background service worker
+    const background = await context.waitForEvent('weberror', 
+      error => error.url().includes('background.html') || 
+               error.url().includes('service_worker')
+    ).catch(() => null);
+    
+    await use(process.env.EXTENSION_ID || 'mock-extension-id');
+  }
+});
+
+module.exports = { extensionTest };
+```
+
+## Testing Popup Interactions
+
+The extension popup is a critical user interface component that requires thorough testing. Popups have a short lifecycle—they close when users click outside or press Escape. Here's how to handle this:
+
+```javascript
+test.describe('Extension Popup', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to popup URL
+    await page.goto('chrome-extension://abcdef123/popup.html');
+  });
+  
+  test('displays user information after authentication', async ({ page }) => {
+    // Set up mock storage before loading popup
+    await page.evaluate(() => {
+      chrome.storage.local.set({
+        user: { name: 'Test User', email: 'test@example.com' }
+      });
+    });
+    
+    // Reload to trigger storage read
+    await page.reload();
+    
+    await expect(page.locator('.user-name')).toHaveText('Test User');
+    await expect(page.locator('.user-email')).toHaveText('test@example.com');
+  });
+  
+  test('button click triggers background script message', async ({ page }) => {
+    const messagePromise = page.waitForEvent('console');
+    
+    await page.click('#action-button');
+    
+    const message = await messagePromise;
+    expect(message.text()).toContain('action triggered');
+  });
+  
+  test('form submission saves data correctly', async ({ page }) => {
+    await page.fill('#username', 'newusername');
+    await page.click('#save-button');
+    
+    // Verify storage was updated
+    const stored = await page.evaluate(() => {
+      return chrome.storage.local.get('username');
+    });
+    
+    expect(stored.username).toBe('newusername');
+  });
+});
+```
+
+## Content Script Verification
+
+Content scripts run in the context of web pages and require special testing approaches. You need to test both the injection mechanism and the script's behavior on target pages:
+
+```javascript
+test.describe('Content Script Injection', () => {
+  test('injects on matching URL patterns', async ({ page }) => {
+    await page.goto('https://example.com');
+    
+    // Wait for content script to inject
+    await page.waitForFunction(() => {
+      return window.__EXTENSION_INJECTED === true;
+    });
+    
+    // Verify content script modified the page
+    await expect(page.locator('.extension-highlight')).toBeVisible();
+  });
+  
+  test('communicates with background script via messaging', async ({ page }) => {
+    // Set up listener in content script context
+    await page.exposeFunction('sendToBackground', (data) => {
+      chrome.runtime.sendMessage(data);
+    });
+    
+    // Trigger content script action
+    await page.click('.extension-button');
+    
+    // Wait for response
+    const response = await page.evaluate(() => {
+      return new Promise((resolve) => {
+        chrome.runtime.onMessage.addListener((message) => {
+          resolve(message);
+        });
+      });
+    });
+    
+    expect(response.type).toBe('RESPONSE');
+  });
+  
+  test('respects page context isolation', async ({ page }) => {
+    // Content scripts should have access to DOM but not page's JavaScript
+    await page.goto('https://example.com');
+    
+    const canAccessWindow = await page.evaluate(() => {
+      try {
+        // Page's original window properties should be accessible
+        return typeof window.location.href === 'string';
+      } catch (e) {
+        return false;
+      }
+    });
+    
+    expect(canAccessWindow).toBe(true);
+  });
+});
+```
+
+## Service Worker Event Testing
+
+Service workers (background scripts in Manifest V3) handle events asynchronously, making testing more complex. You need to trigger events and verify state changes:
+
+```javascript
+test.describe('Service Worker Event Handling', () => {
+  let browser, context;
+  
+  test.beforeEach(async ({ browser: pb }) => {
+    browser = pb;
+    context = await browser.newContext();
   });
   
   test.afterEach(async () => {
     await context.close();
   });
   
-  test('loads extension successfully', async () => {
-    const background = context.serviceWorkers()[0];
-    expect(background).toBeDefined();
-  });
-});
-```
-
-### Extension Fixtures Pattern
-
-Create reusable fixtures for your extension tests:
-
-```typescript
-// fixtures/extension.ts
-import { test as base, BrowserContext, chromium } from '@playwright/test';
-import path from 'path';
-
-const EXTENSION_PATH = process.env.EXTENSION_PATH || 
-  path.resolve(__dirname, '../../dist');
-
-export const test = base.extend<{ extensionContext: BrowserContext }>({
-  extensionContext: async ({}, use) => {
-    const context = await chromium.launchPersistentContext('', {
-      headless: false,
-      args: [
-        `--disable-extensions-except=${EXTENSION_PATH}`,
-        `--load-extension=${EXTENSION_PATH}`,
-      ],
-      viewport: { width: 1280, height: 720 }
-    });
+  test('handles chrome.alarms events', async ({ page }) => {
+    // Navigate to trigger service worker activation
+    await context.newPage();
     
-    await use(context);
+    // Get background service worker
+    const bg = await context.waitForEvent('weberror', 
+      e => e.url().includes('service_worker')
+    ).catch(() => null);
     
-    await context.close();
-  }
-});
-
-export { expect } from '@playwright/test';
-```
-
-Now you can use the fixture in your tests:
-
-```typescript
-import { test, expect } from './fixtures/extension';
-
-test('popup displays correct data', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
-  await page.goto('https://example.com');
-  
-  // Your test logic here
-});
-```
-
----
-
-## Testing Popup Interactions
-
-The popup is often the primary user interface for your extension. Testing it requires understanding its lifecycle — it opens, executes, and closes rapidly.
-
-### Popup Test Strategy
-
-```typescript
-test('popup shows user preferences', async ({ extensionContext }) => {
-  // First, set up some test data via background script
-  const background = extensionContext.serviceWorkers()[0];
-  await background.evaluate(() => {
-    chrome.storage.local.set({ 
-      userPreference: { theme: 'dark', notifications: true } 
-    });
-  });
-  
-  // Open popup by simulating extension icon click
-  const page = await extensionContext.newPage();
-  
-  // Navigate to popup directly (simulates opening)
-  await page.goto(`chrome-extension://${EXTENSION_ID}/popup.html`);
-  
-  // Wait for content to load
-  await page.waitForSelector('.preference-theme');
-  
-  // Verify content
-  const themeText = await page.textContent('.preference-theme');
-  expect(themeText).toContain('dark');
-});
-```
-
-### Interacting with Popup Elements
-
-```typescript
-test('popup form submission works', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
-  await page.goto(`chrome-extension://${EXTENSION_ID}/popup.html`);
-  
-  // Fill form
-  await page.fill('#search-input', 'test query');
-  await page.click('#search-button');
-  
-  // Wait for results
-  await page.waitForSelector('.search-results');
-  
-  // Verify results
-  const results = await page.$$('.search-result-item');
-  expect(results.length).toBeGreaterThan(0);
-});
-```
-
----
-
-## Content Script Verification
-
-Content scripts run in the context of web pages, making their testing more complex. You need to ensure they load correctly, interact with the page, and communicate properly with other extension parts.
-
-### Testing Content Script Injection
-
-```typescript
-test('content script injects correctly', async ({ extensionContext }) => {
-  // Create a test page
-  const page = await extensionContext.newPage();
-  await page.goto('https://example.com');
-  
-  // Wait for content script to inject
-  await page.waitForFunction(() => {
-    return window.hasOwnProperty('__EXTENSION_INJECTED__');
-  });
-  
-  // Verify content script functionality
-  const injectedData = await page.evaluate(() => {
-    return window.__EXTENSION_DATA__;
-  });
-  
-  expect(injectedData).toBeDefined();
-});
-```
-
-### DOM Manipulation Verification
-
-```typescript
-test('content script modifies DOM', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
-  await page.goto('https://example.com');
-  
-  // Wait for extension UI elements
-  await page.waitForSelector('.extension-toolbar');
-  
-  // Verify DOM changes
-  const toolbarExists = await page.isVisible('.extension-toolbar');
-  expect(toolbarExists).toBe(true);
-  
-  // Test interaction
-  await page.click('.extension-button');
-  await page.waitForSelector('.extension-dropdown.open');
-});
-```
-
----
-
-## Service Worker Event Testing
-
-Service workers are event-driven and can be terminated at any time. Testing them requires understanding their lifecycle and simulating events.
-
-### Testing Service Worker Events
-
-```typescript
-test('service worker handles chrome.runtime.onMessage', async ({ extensionContext }) => {
-  const background = extensionContext.serviceWorkers()[0];
-  expect(background).toBeDefined();
-  
-  // Send a message to the service worker
-  const response = await background.evaluate(async () => {
-    return new Promise((resolve) => {
-      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        resolve({ message, sender: sender.id });
+    // Create an alarm programmatically
+    const backgroundPage = context.pages().find(p => 
+      p.url().includes('chrome-extension://')
+    );
+    
+    if (backgroundPage) {
+      await backgroundPage.evaluate(() => {
+        chrome.alarms.create('test-alarm', { delayInMinutes: 0.01 });
       });
       
-      // Simulate message from content script
+      // Wait for alarm to trigger
+      await backgroundPage.waitForTimeout(1000);
+      
+      // Verify alarm was handled
+      const alarmHandled = await backgroundPage.evaluate(() => {
+        return window.__ALARM_HANDLED === true;
+      });
+      
+      expect(alarmHandled).toBe(true);
+    }
+  });
+  
+  test('handles chrome.runtime.onMessage events', async ({ page }) => {
+    // Send message to background
+    await page.evaluate(() => {
       chrome.runtime.sendMessage({ type: 'TEST_MESSAGE', data: 'hello' });
     });
+    
+    // Verify message was processed
+    await page.waitForFunction(() => window.__MESSAGE_PROCESSED === true);
   });
-  
-  expect(response.message.type).toBe('TEST_MESSAGE');
 });
 ```
-
-### Testing Alarm Events
-
-```typescript
-test('service worker alarm triggers correctly', async ({ extensionContext }) => {
-  const background = extensionContext.serviceWorkers()[0];
-  
-  // Create an alarm
-  await background.evaluate(() => {
-    chrome.alarms.create('test-alarm', { delayInMinutes: 0.1 });
-  });
-  
-  // Wait for alarm to fire (in real tests, use longer delays)
-  await background.waitForEvent('alarm', { timeout: 10000 });
-  
-  // Verify alarm was handled
-  const alarmHandled = await background.evaluate(() => {
-    return window.__ALARM_HANDLED__ === true;
-  });
-  
-  expect(alarmHandled).toBe(true);
-});
-```
-
----
 
 ## Screenshot Comparison for Visual Regression
 
-Visual regression testing helps catch unintended UI changes. Playwright's screenshot capabilities make this straightforward.
+Visual regression testing helps catch unintended UI changes. Use Playwright's screenshot capabilities with pixel comparison:
 
-### Basic Screenshot Testing
+```javascript
+const { test, expect } = require('@playwright/test');
+const pixelmatch = require('pixelmatch');
+const { PNG } = require('pngjs');
 
-```typescript
-test('popup UI matches expected screenshot', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
-  await page.goto(`chrome-extension://${EXTENSION_ID}/popup.html`);
+test('popup visual regression', async ({ page }) => {
+  await page.goto('chrome-extension://abcdef123/popup.html');
   
-  // Take screenshot
-  await page.waitForSelector('.popup-content');
-  const screenshot = await page.screenshot();
+  // Wait for any animations to complete
+  await page.waitForTimeout(500);
   
-  // Compare with baseline (use pixelmatch or Playwright's expect)
-  expect(screenshot).toMatchSnapshot('popup-default.png');
+  const screenshot = await page.screenshot({ fullPage: false });
+  
+  // Load baseline screenshot
+  const baseline = fs.readFileSync('./tests/baselines/popup-default.png');
+  
+  // Compare screenshots
+  const diff = pixelmatch(
+    PNG.sync.read(baseline).data,
+    PNG.sync.read(screenshot).data,
+    null,
+    { threshold: 0.1 }
+  );
+  
+  expect(diff).toBe(0);
+});
+
+test('content script overlay on various pages', async ({ page }) => {
+  const testPages = [
+    'https://example.com',
+    'https://example.org',
+    'https://example.net'
+  ];
+  
+  for (const url of testPages) {
+    await page.goto(url);
+    await page.waitForSelector('.extension-overlay');
+    
+    const screenshot = await page.screenshot();
+    const baselinePath = `./tests/baselines/overlay-${new URL(url).hostname}.png`;
+    
+    // Generate baseline if it doesn't exist
+    if (!fs.existsSync(baselinePath)) {
+      fs.writeFileSync(baselinePath, screenshot);
+      continue;
+    }
+    
+    const baseline = fs.readFileSync(baselinePath);
+    const diff = pixelmatch(
+      PNG.sync.read(baseline).data,
+      PNG.sync.read(screenshot).data,
+      null,
+      { threshold: 0.1 }
+    );
+    
+    expect(diff).toBe(0);
+  }
 });
 ```
-
-### Full Page Visual Testing
-
-```typescript
-test('options page renders correctly', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
-  
-  // Navigate to options page
-  await page.goto(`chrome-extension://${EXTENSION_ID}/options.html`);
-  
-  // Wait for full render
-  await page.waitForLoadState('networkidle');
-  
-  // Take full page screenshot
-  const screenshot = await page.screenshot({ 
-    fullPage: true,
-    animations: 'disabled'
-  });
-  
-  expect(screenshot).toMatchSnapshot('options-page.png');
-});
-```
-
----
 
 ## End-to-End Test Patterns
 
-E2E tests verify your extension works as a user would interact with it, across multiple contexts and flows.
+Effective E2E testing requires proper setup, teardown, and isolation between tests:
 
-### Complete User Flow Test
+```javascript
+// tests/e2e/setup.js
+const path = require('path');
 
-```typescript
-test('complete user workflow', async ({ extensionContext }) => {
-  // Step 1: User visits a webpage
-  const page = await extensionContext.newPage();
-  await page.goto('https://news-site.com');
-  
-  // Step 2: Content script highlights specific elements
-  await page.waitForSelector('.extension-highlight');
-  const highlightCount = await page.$$eval(
-    '.extension-highlight', 
-    els => els.length
-  );
-  expect(highlightCount).toBeGreaterThan(0);
-  
-  // Step 3: User clicks highlight to open popup
-  await page.click('.extension-highlight:first-child');
-  
-  // Step 4: Popup opens with details
-  const popup = await extensionContext.waitForEvent('page');
-  await popup.waitForSelector('.highlight-details');
-  
-  // Step 5: User saves to collection via popup
-  await popup.click('.save-button');
-  
-  // Step 6: Verify saved in storage
-  const background = extensionContext.serviceWorkers()[0];
-  const savedItems = await background.evaluate(() => {
-    return chrome.storage.local.get('savedItems');
+async function createExtensionContext(browser, extensionPath) {
+  const context = await browser.newContext({
+    args: [
+      `--disable-extensions-except=${extensionPath}`,
+      `--load-extension=${extensionPath}`
+    ]
   });
   
-  expect(savedItems.savedItems.length).toBeGreaterThan(0);
+  return context;
+}
+
+async function clearExtensionStorage(context) {
+  const pages = context.pages();
+  const extensionPage = pages.find(p => 
+    p.url().includes('chrome-extension://')
+  );
+  
+  if (extensionPage) {
+    await extensionPage.evaluate(() => {
+      chrome.storage.local.clear();
+      chrome.storage.session.clear();
+    });
+  }
+}
+
+// tests/e2e/example.spec.js
+const { test, expect } = require('@playwright/test');
+const { createExtensionContext, clearExtensionStorage } = require('./setup');
+
+test.describe('Complete User Flow', () => {
+  let browser, context;
+  
+  test.beforeEach(async ({ browser: pb }) => {
+    browser = pb;
+    context = await createExtensionContext(browser, process.env.EXTENSION_PATH);
+    await clearExtensionStorage(context);
+  });
+  
+  test.afterEach(async () => {
+    await context.close();
+  });
+  
+  test('complete authentication and data sync flow', async () => {
+    // Step 1: User opens popup and clicks login
+    const popupPage = await context.newPage();
+    await popupPage.goto('chrome-extension://abcdef123/popup.html');
+    await popupPage.click('#login-button');
+    
+    // Step 2: Handle OAuth redirect (mock)
+    const newPagePromise = context.waitForEvent('page');
+    // ... OAuth handling
+    
+    // Step 3: Verify user is authenticated in popup
+    await popupPage.reload();
+    await expect(popupPage.locator('.user-profile')).toBeVisible();
+    
+    // Step 4: Navigate to external site and verify content script
+    const webPage = await context.newPage();
+    await webPage.goto('https://target-site.com');
+    
+    await expect(webPage.locator('.extension-toolbar')).toBeVisible();
+    
+    // Step 5: Trigger action that syncs data
+    await webPage.click('.sync-button');
+    
+    // Step 6: Verify sync in storage
+    const syncStatus = await popupPage.evaluate(() => {
+      return chrome.storage.local.get('syncStatus');
+    });
+    
+    expect(syncStatus.syncStatus.lastSynced).toBeDefined();
+  });
 });
 ```
-
----
 
 ## Mocking Chrome APIs
 
-For unit testing and isolated context testing, you often need to mock Chrome APIs.
-
-### Mocking with Jest/Puppeteer
+When testing extension logic in isolation or in Node.js environments, you need to mock Chrome APIs:
 
 ```javascript
-// mocks/chrome-api.js
-global.chrome = {
-  runtime: {
-    id: 'test-extension-id',
-    sendMessage: jest.fn(),
-    onMessage: {
-      addListener: jest.fn(),
-      removeListener: jest.fn()
-    },
-    getURL: jest.fn(path => `chrome-extension://test-id/${path}`)
-  },
-  storage: {
-    local: {
-      get: jest.fn(),
-      set: jest.fn(),
-      remove: jest.fn()
-    },
-    sync: {
-      get: jest.fn(),
-      set: jest.fn()
-    }
-  },
-  tabs: {
-    query: jest.fn(),
-    create: jest.fn(),
-    sendMessage: jest.fn()
-  },
-  alarms: {
-    create: jest.fn(),
-    clear: jest.fn(),
-    get: jest.fn()
+// tests/__mocks__/chrome.js
+const EventEmitter = require('events');
+
+class MockChrome extends EventEmitter {
+  constructor() {
+    super();
+    this.runtime = new MockRuntime();
+    this.storage = new MockStorage();
+    this.alarms = new MockAlarms();
+    this.tabs = new MockTabs();
   }
-};
+}
+
+class MockRuntime {
+  constructor() {
+    this.lastError = null;
+    this.id = 'mock-extension-id';
+  }
+  
+  sendMessage(message) {
+    return Promise.resolve({ success: true });
+  }
+  
+  onMessage = {
+    addListener: jest.fn(),
+    removeListener: jest.fn()
+  };
+  
+  getURL(path) {
+    return `chrome-extension://${this.id}/${path}`;
+  }
+}
+
+class MockStorage {
+  constructor() {
+    this.local = new MockStorageArea();
+    this.session = new MockStorageArea();
+  }
+}
+
+class MockStorageArea {
+  constructor() {
+    this.data = {};
+  }
+  
+  get(keys) {
+    return Promise.resolve(this.data);
+  }
+  
+  set(items) {
+    Object.assign(this.data, items);
+    return Promise.resolve();
+  }
+  
+  clear() {
+    this.data = {};
+    return Promise.resolve();
+  }
+}
+
+class MockAlarms {
+  create(name, options) {
+    return Promise.resolve();
+  }
+  
+  get(name) {
+    return Promise.resolve(null);
+  }
+  
+  onAlarm = {
+    addListener: jest.fn()
+  };
+}
+
+class MockTabs {
+  create(properties) {
+    return Promise.resolve({ id: 1, ...properties });
+  }
+  
+  query(queryInfo) {
+    return Promise.resolve([{ id: 1, url: 'https://example.com' }]);
+  }
+}
+
+global.chrome = new MockChrome();
 ```
 
-### Using Playwright's Route to Mock Network Requests
+For more complex scenarios, use libraries like `chrome-mock` or create custom mocks with Jest:
 
-```typescript
-test('extension handles API responses', async ({ extensionContext }) => {
-  const page = await extensionContext.newPage();
+```javascript
+// tests/e2e/chrome-api-mock.spec.js
+test('background script handles storage events', async () => {
+  // Override specific Chrome API methods for testing
+  await page.evaluate(() => {
+    let messageHandler;
+    
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      messageHandler(message, sender, sendResponse);
+    });
+    
+    window.__setMessageHandler = (handler) => {
+      messageHandler = handler;
+    };
+  });
   
-  // Mock external API
-  await page.route('**/api/data', route => {
-    route.fulfill({
-      status: 200,
-      body: JSON.stringify({ mock: 'data', timestamp: Date.now() })
+  // Simulate message from content script
+  await page.evaluate(() => {
+    window.__setMessageHandler((message, sender, sendResponse) => {
+      if (message.type === 'FETCH_DATA') {
+        sendResponse({ data: 'mocked data' });
+      }
     });
   });
   
-  await page.goto('https://example.com');
-  
-  // Extension fetches from mocked API
-  await page.waitForFunction(() => {
-    const el = document.querySelector('.data-display');
-    return el && el.textContent.includes('mock');
+  // Trigger message from console
+  const response = await page.evaluate(() => {
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage(
+        { type: 'FETCH_DATA' },
+        resolve
+      );
+    });
   });
+  
+  expect(response.data).toBe('mocked data');
 });
 ```
 
----
-
 ## GitHub Actions CI Setup
 
-Automate your tests on every push and pull request with GitHub Actions.
+Automate your extension testing with GitHub Actions to ensure every change is validated:
 
-### Basic CI Workflow
-
-{% raw %}
 ```yaml
 # .github/workflows/test.yml
-name: Test Suite
+name: Test
 
 on:
   push:
@@ -547,15 +580,20 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18.x, 20.x]
+    
+    runs-on: ${{ matrix.os }}
     
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
       
       - name: Install dependencies
@@ -567,107 +605,36 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
       
+      - name: Run integration tests with Puppeteer
+        run: npm run test:integration -- --browser=chromium
+        env:
+          EXTENSION_PATH: ${{ github.workspace }}/dist
+      
       - name: Run E2E tests with Playwright
         run: npm run test:e2e
         env:
           EXTENSION_PATH: ${{ github.workspace }}/dist
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
       
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: test-results/
-```
-{% endraw %}
-
-### Matrix Testing with Multiple Browser Versions
-
-{% raw %}
-```yaml
-# .github/workflows/multi-browser-test.yml
-name: Multi-Browser Tests
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: ['chromium', 'firefox', 'webkit']
-    
-    steps:
-      - uses: actions/checkout@v4
+          name: test-results-${{ matrix.os }}-node${{ matrix.node-version }}
+          path: |
+            test-results/
+            coverage/
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          node-version: '20'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build extension
-        run: npm run build
-      
-      - name: Run tests on ${{ matrix.browser }}
-        run: npm run test:${{ matrix.browser }}
-```
-{% endraw %}
+          name: failure-screenshots
+          path: tests/screenshots/
 
----
-
-## Test Coverage Reporting
-
-Measuring test coverage helps identify untested code paths.
-
-### Setting Up Coverage with Playwright
-
-```typescript
-// playwright.config.ts
-import { defineConfig, devices } from '@playwright/test';
-
-export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
-    ['json', { outputFile: 'test-results.json' }]
-  ],
-  use: {
-    trace: 'on-first-retry',
-    coverage: true
-  },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
-    }
-  ]
-});
-```
-
-### Generating Coverage Reports
-
-```bash
-# Install coverage tooling
-npm install -D @playwright/test coverage Istanbul
-
-# Run tests with coverage
-npx playwright test --coverage
-
-# Generate HTML report
-npx nyc report --reporter=html
-```
-
-### Coverage Workflow for Extensions
-
-```yaml
-# .github/workflows/coverage.yml
-name: Coverage Report
-
-jobs:
   coverage:
     runs-on: ubuntu-latest
+    needs: test
     
     steps:
       - uses: actions/checkout@v4
@@ -675,15 +642,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
       
-      - name: Build with coverage
-        run: npm run build:coverage
-      
-      - name: Run tests with coverage
+      - name: Build and test with coverage
         run: npm run test:coverage
       
       - name: Upload coverage to Codecov
@@ -693,76 +658,155 @@ jobs:
           flags: unittests
 ```
 
----
+## Test Coverage Reporting
 
-## Fixture Management and Best Practices
+Track test coverage to identify untested code paths:
 
-Organizing your test fixtures and following best practices ensures maintainable tests.
-
-### Shared Fixtures Pattern
-
-```typescript
-// fixtures/index.ts
-export { test as extensionTest, expect } from './extension';
-export { createMockStorage } from './storage';
-export { mockChromeAPI } from './chrome-mock';
+```javascript
+// jest.config.js with coverage
+module.exports = {
+  testEnvironment: 'jsdom',
+  collectCoverageFrom: [
+    'src/**/*.js',
+    '!src/**/*.test.js',
+    '!src/**/*.spec.js'
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70
+    },
+    './src/popup/': {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  },
+  coverageReporters: ['text', 'lcov', 'html'],
+  coverageDirectory: 'coverage'
+};
 ```
 
-### Page Object Pattern for Extensions
+Generate combined coverage reports for extension and tests:
 
-```typescript
-// pages/PopupPage.ts
-import { Page, Locator } from '@playwright/test';
+```bash
+# Generate coverage report
+npm run test:coverage
 
-export class PopupPage {
-  readonly searchInput: Locator;
-  readonly searchButton: Locator;
-  readonly resultsContainer: Locator;
+# View HTML report
+open coverage/lcov-report/index.html
+```
+
+For comprehensive coverage analysis including browser-based tests, use Playwright's coverage capabilities:
+
+```javascript
+// tests/coverage.spec.js
+test('collects coverage from extension', async ({ page }) => {
+  await page.coverage.startJSCoverage();
   
-  constructor(private page: Page) {
-    this.searchInput = page.locator('#search-input');
-    this.searchButton = page.locator('#search-button');
-    this.resultsContainer = page.locator('.search-results');
+  await page.goto('chrome-extension://abcdef123/popup.html');
+  await page.click('#some-button');
+  
+  const coverage = await page.coverage.stopJSCoverage();
+  
+  // Process coverage data
+  const coveredFiles = coverage.filter(entry => entry.url.includes('popup.js'));
+  
+  console.log(`Covered ${coveredFiles.length} files`);
+  console.log('Statement coverage:', calculateCoverage(coverage));
+});
+```
+
+## Fixture Management
+
+Organize test fixtures for maintainability and reusability:
+
+```javascript
+// tests/fixtures/index.js
+const fs = require('fs');
+const path = require('path');
+
+class ExtensionFixtures {
+  constructor(extensionPath) {
+    this.extensionPath = extensionPath;
+    this.extensionId = this.extractExtensionId();
   }
   
-  async open() {
-    await this.page.goto(`chrome-extension://${process.env.EXTENSION_ID}/popup.html`);
-    await this.page.waitForLoadState('domcontentloaded');
+  extractExtensionId() {
+    // Read manifest to get version or generate mock ID
+    const manifest = JSON.parse(
+      fs.readFileSync(path.join(this.extensionPath, 'manifest.json'))
+    );
+    return manifest.version === '0.0.0' ? 'test-extension-id' : null;
   }
   
-  async search(query: string) {
-    await this.searchInput.fill(query);
-    await this.searchButton.click();
-    await this.resultsContainer.waitFor();
+  getPopupUrl() {
+    return `chrome-extension://${this.extensionId}/popup.html`;
+  }
+  
+  getBackgroundUrl() {
+    return `chrome-extension://${this.extensionId}/background.html`;
+  }
+  
+  loadTestData(name) {
+    return JSON.parse(
+      fs.readFileSync(path.join(__dirname, 'data', `${name}.json`))
+    );
+  }
+  
+  async mockStorage(browser) {
+    const context = browser.defaultBrowserContext();
+    const pages = context.pages();
+    const extPage = pages.find(p => p.url().includes('chrome-extension://'));
+    
+    if (extPage) {
+      await extPage.evaluate((data) => {
+        chrome.storage.local.set(data);
+      }, this.loadTestData('initial-state'));
+    }
   }
 }
+
+module.exports = { ExtensionFixtures };
 ```
 
-### Best Practices Summary
+Use fixtures consistently across your test suite:
 
-1. **Use persistent contexts**: Extensions maintain state across pages; persistent contexts mirror this behavior.
+```javascript
+// tests/e2e/user-flow.spec.js
+const { test, expect } = require('@playwright/test');
+const { ExtensionFixtures } = require('../fixtures');
 
-2. **Wait for extension lifecycle**: Service workers may take time to initialize; use proper waiting strategies.
+const fixtures = new ExtensionFixtures(process.env.EXTENSION_PATH);
 
-3. **Test across contexts**: Ensure your tests verify communication between background, popup, content scripts, and pages.
+test.describe('User Settings', () => {
+  test.beforeEach(async ({ browser }) => {
+    await fixtures.mockStorage(browser);
+  });
+  
+  test('loads user preferences from storage', async ({ page }) => {
+    await page.goto(fixtures.getPopupUrl());
+    
+    const preferences = await page.evaluate(() => {
+      return chrome.storage.local.get('preferences');
+    });
+    
+    expect(preferences.preferences.theme).toBe('dark');
+  });
+});
+```
 
-4. **Mock external dependencies**: Network requests to external APIs should be mocked for reliable CI runs.
+## Related Guides
 
-5. **Capture traces on failure**: Use Playwright's trace viewer to debug failing tests.
+For more information on setting up CI/CD pipelines and development workflows, see these related guides:
 
-6. **Separate unit and E2E**: Fast unit tests for logic, slower E2E tests for integration.
-
-7. **Use environment variables**: Store extension paths and IDs in environment variables for flexibility.
+- [CI/CD Pipeline Guide](/guides/ci-cd-pipeline/) — Complete guide to automating extension builds and publishing
+- [Chrome Extension CI/CD Pipeline](/guides/chrome-extension-ci-cd-pipeline/) — GitHub Actions workflows for extension development
+- [Chrome Extension Development Tutorial](/guides/chrome-extension-development-typescript-2026/) — Step-by-step development guide
 
 ---
 
-## Related Articles
-
-- [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Automate your extension builds and releases
-- [Chrome Extension Development Tutorial](../guides/chrome-extension-development-typescript-2026.md) — Get started with extension development
-- [GitHub Actions for Extensions](../guides/github-actions-extension-ci-cd.md) — Deep dive into CI/CD workflows
-- [Advanced Debugging Techniques](../guides/advanced-debugging.md) — Debug service workers, popups, and content scripts
-
----
-
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one)*
