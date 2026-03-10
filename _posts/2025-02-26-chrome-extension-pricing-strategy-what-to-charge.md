@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension Pricing Strategy — What to Charge and Why"
 description: "Data-driven pricing guide for Chrome extensions. Competitive analysis, willingness-to-pay research, pricing tiers, annual vs monthly, and price anchoring tactics."
 date: 2025-02-26
@@ -400,8 +400,8 @@ Remember that pricing isn't static. As your extension evolves, your pricing shou
 
 Start with reasonable assumptions based on competitive research, launch with a clear pricing structure, and adjust based on real conversion data. Your optimal price will reveal itself through market feedback.
 
-Ready to implement your pricing strategy? The [Extension Monetization Playbook](/chrome-extension-guide/docs/extension-monetization-playbook/) covers freemium models, Stripe integration, and advanced monetization strategies for Chrome extension developers.
+Ready to implement your pricing strategy? The [Extension Monetization Playbook](/docs/monetization/saas-pricing/) covers [freemium models](/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/), [Stripe integration](/2025/02/20/chrome-extension-subscription-model-stripe-integration/), and advanced monetization strategies for Chrome extension developers.
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built by theluckystrike at [zovo.one](https://zovo.one).*
