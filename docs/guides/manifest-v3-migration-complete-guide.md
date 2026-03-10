@@ -1,6 +1,6 @@
 ---
 
-title: Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
+title: "Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3"
 description: Complete guide to migrating Chrome extensions from Manifest V2 to Manifest V3. Covers service workers, declarativeNetRequest, permission changes, and testing strategies for a successful migration.
 layout: default
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/manifest-v3-migration-complete-guide/"
