@@ -1,3 +1,9 @@
+---
+layout: guide
+title: Chrome Serial API Guide
+description: Learn how to use the Chrome Serial API to communicate with serial devices from Chrome extensions.
+---
+
 # Chrome Serial API Guide
 
 ## Overview

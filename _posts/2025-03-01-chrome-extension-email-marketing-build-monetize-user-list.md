@@ -297,7 +297,7 @@ The best email strategy fails if your messages don't reach the inbox. Avoiding s
 
 - **Avoid spam trigger words:** "Free," "guaranteed," "no risk," "act now"—use sparingly and only when genuine
 - **Balance text and images:** Image-only emails trigger spam filters; include meaningful text content
-- **Personalize thoughtfully:** "Hi {{first_name}}" feels personal; "Hi [USER]" feels spammy
+- **Personalize thoughtfully:** "Hi {% raw %}{{first_name}}{% endraw %}" feels personal; "Hi [USER]" feels spammy
 - **Send from recognizable addresses:** noreply@yourdomain.com is fine; use a name in the display
 
 ### List Hygiene

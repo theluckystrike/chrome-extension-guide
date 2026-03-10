@@ -1,6 +1,6 @@
 ---
 
-title: Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration
+title: "Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration"
 description: Learn how to automate testing for Chrome extensions using Puppeteer and Playwright. Cover popup testing, content script verification, service worker event testing, mocking Chrome APIs, and GitHub Actions CI setup.
 layout: default
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/chrome-extension-automated-testing-puppeteer-playwright/"
@@ -505,6 +505,7 @@ Running extension tests in CI requires special configuration to handle Chrome/Ch
 
 ### 9.1 GitHub Actions Workflow
 
+{% raw %}
 ```yaml
 # .github/workflows/test-extension.yml
 name: Extension Tests
@@ -518,34 +519,34 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build extension
         run: npm run build
-      
+
       - name: Install Playwright browsers
         run: npx playwright install chromium
-      
+
       - name: Run tests
         run: npx playwright test --reporter=html
-        
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
-      
+
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v4
@@ -556,31 +557,32 @@ jobs:
   test-multi-browser:
     runs-on: ubuntu-latest
     needs: test
-    
+
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build extension
         run: npm run build
-      
+
       - name: Install Playwright browsers
         run: npx playwright install ${{ matrix.browser }}
-      
+
       - name: Run browser tests
         run: npx playwright test --browser=${{ matrix.browser }}
 ```
+{% endraw %}
 
 ### 9.2 Containerized Testing with Chrome
 
