@@ -298,9 +298,9 @@ Start with the fundamentals: a compelling hero, clear value proposition, social 
 
 ## Related Guides
 
-- [Chrome Web Store Optimization Guide](/2025/01/15/chrome-web-store-optimization-ultimate-guide/) — Maximize your CWS listing visibility and conversion rates
-- [Extension Marketing Playbook](/2025/02/01-chrome-extension-marketing-playbook/) — Comprehensive strategies for promoting your extension
-- [Extension Monetization Growth Guide](/2025/02/10-extension-monetization-playbook/) — Scale your extension revenue with proven growth tactics
+- [Chrome Web Store Listing Optimization](/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your CWS listing visibility and conversion rates
+- [How to Market Your Chrome Extension](/2025/02/18/how-to-market-chrome-extension-0-to-10000-users/) — Comprehensive strategies for promoting your extension
+- [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Scale your extension revenue with proven growth tactics
 
 ---
 
