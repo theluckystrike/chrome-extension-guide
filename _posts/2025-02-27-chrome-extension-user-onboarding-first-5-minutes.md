@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Chrome Extension User Onboarding — The First 5 Minutes That Matter Most"
 description: "Design an onboarding flow that retains users. Welcome pages, permission requests, feature tours, and activation metrics for Chrome extension success."
 date: 2025-02-27
@@ -282,4 +282,4 @@ Don't forget regional permission considerations. Enterprise environments often h
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built by theluckystrike at [zovo.one](https://zovo.one).*
