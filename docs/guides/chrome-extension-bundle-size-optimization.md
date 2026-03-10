@@ -1,105 +1,116 @@
 ---
 layout: default
 title: "Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression"
-description: "Master Chrome extension bundle size optimization with tree-shaking, code splitting, and compression techniques. Learn webpack/vite/rollup configs, WASM tradeoffs, and CI size budgets for Manifest V3."
+description: "Learn how to reduce your Chrome extension bundle size with tree-shaking, code splitting, compression, and build optimization techniques. Comprehensive guide for extension developers."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-bundle-size-optimization/"
-proficiency_level: "Intermediate"
 ---
 
 # Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression
 
-Chrome Web Store imposes strict size limits on extensions, making bundle optimization critical for successful publication and positive user experience. Extensions that exceed these limits face rejection, while bloated bundles slow down installation times and consume unnecessary user bandwidth. This comprehensive guide covers advanced techniques for minimizing your extension's footprint without sacrificing functionality.
+Chrome extensions face unique bundle size challenges that web applications don't encounter. Your extension must load quickly across all extension contexts—popup, background service worker, content scripts, and options page—while staying within Chrome Web Store (CWS) limits. This comprehensive guide covers every technique you need to build lean, fast-loading extensions that pass review and delight users.
 
-Understanding and implementing these optimization strategies ensures your extension passes Chrome Web Store review while delivering a fast, responsive experience to millions of users. Whether you're building a lightweight utility or a feature-rich productivity tool, these techniques apply to projects of any scale.
+## Table of Contents {#table-of-contents}
 
----
-
-## Understanding Chrome Web Store Size Limits
-
-The Chrome Web Store enforces a **5MB limit** for uploaded extension packages, with an additional **125MB limit** for hosted resources when using extension hosting. This 5MB constraint is remarkably tight when bundling modern JavaScript frameworks, assets, and multiple localization files.
-
-For most extensions, staying under 2MB provides an optimal balance between functionality and performance. Users appreciate faster download and installation times, and smaller bundles contribute to better performance metrics in the Chrome Web Store listing.
-
-### Calculating Your Target Size
-
-Consider these guidelines when planning your bundle size budget:
-
-| Extension Type | Target Size | Feasibility |
-|----------------|-------------|-------------|
-| Simple utility | < 500KB | Easily achievable |
-| Medium feature set | 500KB - 1MB | Requires careful optimization |
-| Framework-heavy UI | 1MB - 2MB | Needs advanced techniques |
-| Complex application | 2MB - 5MB | Requires careful planning |
-
-Exceeding 5MB means your extension cannot be published without significant architectural changes. Always target 20-30% below the limit to accommodate future updates.
+- [Understanding Chrome Web Store Size Limits](#understanding-chrome-web-store-size-limits)
+- [Build Tool Configuration for Extensions](#build-tool-configuration-for-extensions)
+- [Tree-Shaking Unused APIs and Dependencies](#tree-shaking-unused-apis-and-dependencies)
+- [Dynamic Imports in Content Scripts](#dynamic-imports-in-content-scripts)
+- [Shared Chunks Between Popup and Background](#shared-chunks-between-popup-and-background)
+- [Image and Asset Optimization](#image-and-asset-optimization)
+- [Font Subsetting Strategies](#font-subsetting-strategies)
+- [WASM vs JavaScript Performance Tradeoffs](#wasm-vs-javascript-performance-tradeoffs)
+- [Analyzing Bundle Composition](#analyzing-bundle-composition)
+- [CI Size Budgets and Enforcement](#ci-size-budgets-and-enforcement)
 
 ---
 
-## Configuring Build Tools for Extension Optimization
+## Understanding Chrome Web Store Size Limits {#understanding-chrome-web-store-size-limits}
 
-Modern bundlers provide powerful optimization features that, when properly configured, dramatically reduce extension bundle sizes. Each bundler offers different strengths for extension development.
+The Chrome Web Store imposes strict size limits that directly impact your development decisions. As of 2024, the limits are:
+
+- **Initial download**: 256 KB (compressed CRX)
+- **Installed size**: 2 GB maximum
+- **Update package**: Must stay within reasonable bounds for user bandwidth
+
+The 256 KB initial download limit is the most critical constraint. This is what users experience when installing your extension for the first time. Users with slower connections or limited data plans will abandon extensions that take too long to download. Additionally, a smaller bundle means faster installation and less disk space usage on user machines.
+
+Extensions that exceed the initial download limit face rejection during the review process. Google designed this limit to ensure quality extensions and protect users from bloated software. However, you can leverage off-store resources and lazy loading strategies to deliver rich functionality beyond this limit.
+
+Understanding these limits shapes every optimization decision. A 50 KB bundle gives you far more flexibility than a 200 KB bundle. Plan your architecture with these constraints in mind from day one.
+
+---
+
+## Build Tool Configuration for Extensions {#build-tool-configuration-for-extensions}
+
+Modern build tools—Webpack, Vite, and Rollup—offer powerful optimization features, but extensions require specific configuration to work correctly with Chrome's extension contexts.
 
 ### Webpack Configuration
 
-Webpack remains the most configurable option for extension bundling. The following configuration demonstrates essential optimizations:
+Webpack remains the most configurable option for extension bundling. The key is properly defining entry points for each extension context:
 
 ```javascript
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
   mode: 'production',
+  entry: {
+    'popup': './src/popup/index.tsx',
+    'background': './src/background/index.ts',
+    'content-main': './src/content/main.ts',
+    'options': './src/options/index.tsx',
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    clean: true,
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   optimization: {
-    usedExports: true,
-    sideEffects: true,
-    minimize: true,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          name: 'vendor',
           chunks: 'all',
-        },
-        shared: {
-          name: 'shared',
-          minChunks: 2,
-          chunks: 'all',
-          priority: -10,
         },
       },
-    },
-  },
-  resolve: {
-    extensions: ['.js', '.ts'],
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
     },
   },
 };
 ```
 
-Key optimizations include enabling `usedExports` for tree-shaking, configuring `splitChunks` to extract vendor code and identify shared modules, and using `sideEffects` to eliminate unused code.
+The critical optimization settings include `splitChunks` for code splitting, `treeShaking` (enabled by default in production mode), and proper module resolution to avoid bundling unused files.
 
 ### Vite Configuration
 
-Vite offers excellent defaults with minimal configuration. Here's an optimized setup:
+Vite offers faster build times with its Rollup-based build system. Extension configuration requires the proper directory structure:
 
-```javascript
+```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
+  plugins: [react()],
   build: {
-    target: 'esnext',
-    minify: 'terser',
     rollupOptions: {
+      input: {
+        popup: resolve(__dirname, 'popup.html'),
+        background: resolve(__dirname, 'background.html'),
+        options: resolve(__dirname, 'options.html'),
+      },
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          chrome: ['webextension-polyfill'],
-        },
+        entryFileNames: '[name]/[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
+    minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
@@ -107,378 +118,438 @@ export default defineConfig({
       },
     },
   },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
-  },
 });
 ```
 
-Vite's esbuild-based minification is significantly faster than traditional Terser, and the `target: 'esnext'` option enables modern syntax that browsers support natively.
+Vite's native code splitting handles much of this automatically, but the configuration ensures proper file organization for Chrome's manifest requirements.
 
 ### Rollup Configuration
 
-Rollup provides excellent tree-shaking capabilities ideal for extension development:
+For maximum control, Rollup provides granular control over bundling:
 
 ```javascript
 // rollup.config.js
+import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
+
 export default {
-  input: 'src/index.js',
+  input: {
+    popup: 'src/popup/main.ts',
+    background: 'src/background/main.ts',
+    content: 'src/content/main.ts',
+  },
   output: {
     dir: 'dist',
     format: 'es',
-    sourcemap: false,
-    manualChunks: (id) => {
-      if (id.includes('node_modules')) {
-        return 'vendor';
-      }
-    },
+    entryFileNames: '[name]/[name].js',
+    chunkFileNames: 'chunks/[name]-[hash].js',
   },
-  treeshake: {
-    moduleSideEffects: false,
-    propertyReadSideEffects: false,
-  },
-};
-```
-
----
-
-## Tree-Shaking Unused Chrome APIs
-
-Chrome extensions often import the entire `chrome` API namespace, pulling in hundreds of unnecessary functions. Tree-shaking removes these unused references, significantly reducing bundle size.
-
-### Selective API Imports
-
-Instead of importing the entire Chrome API, import only what you need:
-
-```javascript
-// Bad: Imports entire chrome namespace
-import chrome from 'webextension-polyfill';
-
-// Good: Import specific functions
-import { tabs, runtime, storage } from 'webextension-polyfill';
-
-// Even better: Direct Chrome API usage in MV3
-const { sendMessage } = chrome.runtime;
-```
-
-### Configuring Tree-Shaking for Chrome APIs
-
-Webpack's `usedExports` works with the Chrome API, but you must ensure your bundler recognizes side-effect-free API calls:
-
-```javascript
-// webpack.config.js
-module.exports = {
-  optimization: {
-    usedExports: true,
-    sideEffects: [
-      '*.css',
-      '*.json',
-    ],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [
-              // Transform Chrome API to pure functions
-              'transform-remove-chrome-api',
-            ],
-          },
-        },
+  plugins: [
+    resolve(),
+    typescript({ tsconfig: './tsconfig.json' }),
+    terser({
+      compress: {
+        drop_console: true,
       },
-    ],
-  },
+    }),
+  ],
 };
 ```
 
-This approach ensures that unused API methods like `chrome.debugger`, `chrome.proxy`, or `chrome.tts` are removed from your production bundle.
-
-For more details on optimizing Chrome extension performance, see our guide on [Chrome Extension Performance Best Practices](/guides/chrome-extension-performance-best-practices/).
+Each build tool has strengths. Webpack offers the most ecosystem compatibility. Vite provides the fastest development experience. Rollup delivers the smallest production bundles with careful configuration.
 
 ---
 
-## Dynamic Imports in Content Scripts
+## Tree-Shaking Unused APIs and Dependencies {#tree-shaking-unused-apis-and-dependencies}
 
-Content scripts run in every page your extension injects into, making their initial load time critical. Dynamic imports allow you to load functionality only when needed, dramatically improving page injection performance.
+Tree-shaking eliminates dead code—functions, variables, and imports that never execute. Modern bundlers perform tree-shaking based on ES module static analysis, making your code structure critical.
 
-### Implementing Lazy Loading
+### Optimizing Import Statements
 
-```javascript
-// content-script.js
-// Load heavy UI framework only when user interacts
-let uiFramework = null;
+The way you import dependencies determines tree-shaking effectiveness:
 
-async function loadFramework() {
-  if (uiFramework) return uiFramework;
-  
-  const [{ createUI }, { framework }] = await Promise.all([
-    import('./ui/createUI.js'),
-    import('./framework/index.js'),
-  ]);
-  
-  uiFramework = { createUI, framework };
-  return uiFramework;
+```typescript
+// Bad: Imports entire library
+import _ from 'lodash';
+const sorted = _.sortBy(items, 'name');
+
+// Good: Imports only what you need
+import sortBy from 'lodash/sortBy';
+const sorted = sortBy(items, 'name');
+
+// Best: Imports specific function directly
+import sortBy from 'lodash.sortby';
+const sorted = sortBy(items, 'name');
+```
+
+Lodash demonstrates this clearly. The default import pulls in the entire library—hundreds of kilobytes. Named imports from specific modules reduce this to the actual functions used.
+
+### Side Effects and Tree-Shaking
+
+Tree-shaking only works when bundlers can prove code has no side effects. Mark pure functions explicitly:
+
+```typescript
+// Mark function as pure for better tree-shaking
+/* @__PURE__ */ function processData(data) {
+  return data.map(item => item.value);
 }
 
-// Initialize on first user interaction
-document.addEventListener('click', async (e) => {
-  if (e.target.closest('.my-extension-button')) {
-    const { createUI, framework } = await loadFramework();
-    createUI(framework);
-  }
-}, { once: true });
+// Or use JSDoc
+/** @__PURE__ */
+function transformValue(input) {
+  return input * 2;
+}
 ```
 
-For more details on using frameworks in content scripts, see our guide on [Chrome Extension Content Script Frameworks](/guides/content-script-frameworks/).
+The `/* @__PURE__ */` annotation tells Webpack and other bundlers that this function can be safely removed if unused. This is especially valuable for utility functions in shared code.
 
-### Conditional Feature Loading
+### Chrome API Tree-Shaking
 
-Load additional features based on page context:
+Chrome's extension APIs are large. Never import the entire `chrome` namespace:
 
-```javascript
-// content-script.js
-(async () => {
-  // Always load core functionality
-  await import('./core/content-core.js');
-  
-  // Conditional loading for specific page types
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
-  if (tab.url.includes('github.com')) {
-    await import('./features/github-integration.js');
-  }
-  
-  if (tab.url.includes('youtube.com')) {
-    await import('./features/youtube-integration.js');
-  }
-})();
+```typescript
+// Avoid: Imports massive chrome namespace
+import * as chrome from 'chrome';
+
+// Better: Import specific APIs
+import { tabs, runtime, storage } from 'chrome';
+
+// Best: Lazy-import when needed
+async function getCurrentTab() {
+  const { tabs } = await import('chrome');
+  const [tab] = await tabs.query({ active: true, currentWindow: true });
+  return tab;
+}
 ```
 
-This pattern ensures users only download code relevant to the current page, reducing bandwidth consumption and improving perceived performance.
+For TypeScript, use the `@types/chrome` package and import only the namespaces you need. This can reduce TypeScript compilation overhead significantly.
 
 ---
 
-## Shared Chunks Between Popup and Background
+## Dynamic Imports in Content Scripts {#dynamic-imports-in-content-scripts}
 
-Modern extensions consist of multiple entry points—popup, background service worker, options page, and content scripts. Extracting shared code into common chunks eliminates duplication and reduces total bundle size.
+Content scripts load in every page your extension matches, making initial bundle size critical. Dynamic imports defer loading until needed, keeping the initial payload small.
+
+### Lazy Loading Features
+
+Load features on-demand rather than at startup:
+
+```typescript
+// content/main.ts - Initial lightweight entry
+import { initializeUI } from './ui-core';
+import { setupEventListeners } from './events';
+
+// Initialize lightweight core immediately
+initializeUI();
+setupEventListeners();
+
+// Load heavy features only when triggered
+document.addEventListener('click', async (event) => {
+  if (event.target.matches('[data-feature="advanced"]')) {
+    const { initAdvancedFeature } = await import('./features/advanced');
+    initAdvancedFeature();
+  }
+});
+```
+
+This pattern keeps your content script under the initial size limit while providing full functionality when users need it.
+
+### Dynamic Import with User Interaction
+
+Content scripts often need heavy libraries for specific features. Load them only when users trigger those features:
+
+```typescript
+// Load charting library only when user opens the dashboard
+async function showDashboard() {
+  const { renderChart } = await import('./charting-lib');
+  const data = await fetchAnalytics();
+  renderChart(data);
+}
+```
+
+The tradeoff is slight latency when users first access those features. Balance this against initial load time—users tolerate brief delays for rare actions but abandon extensions that feel slow on every interaction.
+
+### Communication After Dynamic Import
+
+When using dynamic imports in content scripts, ensure proper message passing:
+
+```typescript
+// content/main.ts
+import { setupMessageHandler } from './messaging';
+
+document.addEventListener('contextmenu', async (e) => {
+  const { showContextMenu } = await import('./context-menu');
+  showContextMenu(e);
+  
+  // Re-establish messaging for dynamically loaded code
+  setupMessageHandler();
+});
+```
+
+Remember that dynamically imported code runs in the same content script context, so it shares the same message channel with your background script.
+
+---
+
+## Shared Chunks Between Popup and Background {#shared-chunks-between-popup-and-background}
+
+Extensions typically have multiple entry points—popup, background service worker, content scripts, options page. Shared code between these contexts should be extracted into common chunks to avoid duplication.
 
 ### Configuring Shared Chunks
 
+Webpack's `splitChunks` configuration handles this automatically:
+
 ```javascript
 // webpack.config.js
-module.exports = {
-  entry: {
-    popup: './src/popup/index.js',
-    background: './src/background/index.js',
-    options: './src/options/index.js',
-    'content-main': './src/content/main.js',
-    'content-injected': './src/content/injected.js',
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      maxInitialRequests: 25,
-      minSize: 20000,
-      cacheGroups: {
-        // Shared code across all entry points
-        common: {
-          minChunks: 2,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        // Chrome API wrapper used everywhere
-        chromeApi: {
-          test: /[\\/]node_modules[\\/]webextension-polyfill[\\/]/,
-          name: 'chrome-api',
-          chunks: 'all',
-          priority: 10,
-        },
-        // Vendor libraries
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-          priority: 5,
-        },
+optimization: {
+  splitChunks: {
+    chunks: 'all',
+    cacheGroups: {
+      // Extract common code used across contexts
+      common: {
+        name: 'common',
+        minChunks: 2,
+        priority: -10,
+        reuseExistingChunk: true,
+      },
+      // Vendor code (node_modules) shared across contexts
+      vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendor',
+        chunks: 'all',
+        priority: 10,
       },
     },
   },
-};
-```
-
-### Manifest Configuration for Shared Chunks
-
-Ensure your manifest.json properly references shared chunks:
-
-```json
-{
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content-main.js", "content-injected.js"]
-    }
-  ]
 }
 ```
 
-With proper chunking, webpack generates files like `vendors.js`, `chrome-api.js`, and `popup.js`, allowing browsers to cache shared code separately.
+This configuration creates a separate `common.js` chunk containing code shared between at least two entry points. The `vendor` chunk holds dependencies that don't change often, allowing long-term browser caching.
+
+### Manual Chunking for Extension APIs
+
+Sometimes automatic splitting doesn't capture your architecture. Manually chunk shared utilities:
+
+```javascript
+// webpack.config.js - Manual chunking
+optimization: {
+  splitChunks: {
+    cacheGroups: {
+      // Shared utilities used everywhere
+      utils: {
+        test: /[\\/]src[\\/]utils[\\/]/,
+        name: 'utils',
+        chunks: 'all',
+        priority: 20,
+      },
+      // Chrome API wrappers
+      chromeApi: {
+        test: /[\\/]src[\\/]chrome[\\/]/,
+        name: 'chrome-api',
+        chunks: 'all',
+        priority: 15,
+      },
+    },
+  },
+}
+```
+
+This approach ensures consistent chunking regardless of entry point changes.
+
+### Loading Shared Chunks
+
+Ensure your HTML files load shared chunks before entry points:
+
+```html
+<!-- popup.html -->
+<script src="vendor.js"></script>
+<script src="common.js"></script>
+<script src="popup.js"></script>
+```
+
+If using a bundler that inlines scripts, verify the output HTML maintains this order or use dynamic imports within your JavaScript.
 
 ---
 
-## Image and Asset Optimization
+## Image and Asset Optimization {#image-and-asset-optimization}
 
-Images often constitute the largest portion of extension bundle size. Implementing proper optimization strategies is essential for staying within limits.
+Images often constitute the largest portion of extension size. Strategic optimization dramatically reduces your bundle.
 
-### Using WebP and AVIF
+### Image Formats and Compression
 
-Modern image formats provide superior compression:
+Choose the right format for each image type:
 
-```javascript
-// Convert PNG/JPG to WebP during build
-// webpack.config.js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+- **Icons**: Use SVG when possible, then PNG at multiple sizes (16, 32, 48, 128)
+- **Screenshots**: JPEG at 80% quality, max 1280x800 pixels
+- **Promotional images**: WebP with JPEG fallback
+- **Inline images**: Data URIs for small images, external URLs for larger ones
 
-module.exports = {
-  optimization: {
-    minimizer: [
-      '...',
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [
-              ['mozjpeg', { quality: 80 }],
-              ['optipng', { optimizationLevel: 5 }],
-              ['webp', { quality: 80 }],
-            ],
-          },
-        },
-      }),
-    ],
-  },
-};
+For icons, generate multiple sizes and let Chrome select the appropriate one:
+
+```json
+{
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
 ```
 
 ### SVG Optimization
 
-SVGs should be optimized before inclusion:
+SVGs can be heavily optimized. Remove metadata and simplify paths:
 
 ```bash
-# Install svgo
-npm install -D svgo
-
-# Optimize all SVG files
-npx svgo -f ./src/icons --config .svgo.yml
+# Using svgo
+npx svgo --multipass --folder ./src/icons
 ```
 
-Create an `.svgo.yml` configuration:
+Remove unnecessary attributes, collapse groups, and round decimal precision. A well-optimized SVG icon can be under 500 bytes.
 
-```yaml
-plugins:
-  - name: preset-default
-    params:
-      overrides:
-        removeViewBox: false
-        cleanupIds: false
-  - removeDimensions: true
-  - removeAttrs:
-      attrs: ['data-*']
+### Lazy Loading Images
+
+For images within your extension UI, use lazy loading:
+
+```typescript
+// Lazy load images in popup
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target as HTMLImageElement;
+      img.src = img.dataset.src;
+      imageObserver.unobserve(img);
+    }
+  });
+});
+
+document.querySelectorAll('img[data-src]').forEach(img => {
+  imageObserver.observe(img);
+});
 ```
+
+This keeps initial payload small while still delivering rich imagery when needed.
 
 ---
 
-## Font Subsetting
+## Font Subsetting Strategies {#font-subsetting-strategies}
 
-Embedding entire font files significantly increases bundle size. Subsetting extracts only the characters your extension actually uses.
+Web fonts can add hundreds of kilobytes to your bundle. Subsetting includes only the characters your extension actually uses.
 
-### Using Fontsource or Subsetting
+### Creating Font Subsets
 
-For icon fonts, consider using individual SVG icons instead. For text rendering, use font subsetting:
+Generate subset fonts for optimal size:
 
 ```bash
-# Install fonttools
-pip install fonttools brotli
-
-# Subset a font to common characters
-pyftsubset SourceSansPro-Regular.ttf \
-  --unicodes=U+0020-007F,U+00A0-00FF,U+0100-017F \
-  --format=woff2 \
-  --output-file=SourceSansPro-subset.woff2
+# Using fonttools
+pyftsubset NotoSans-Regular.ttf \
+  --text="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" \
+  --layout-features-=calt,liga,locl \
+  --output-file=NotoSans-Subset.woff2
 ```
 
-Alternatively, use the Google Fonts API for web-delivered fonts, avoiding bundle bloat:
+For extensions, subset to ASCII characters plus any specific glyphs you need. This typically reduces font size by 70-90%.
 
-```html
-<!-- In your extension's HTML -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+### Using System Fonts
+
+The simplest solution: use system fonts that require no download:
+
+```css
+/* popup.css */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+}
 ```
+
+System fonts render instantly and require zero bundle size. The tradeoff is less visual consistency across platforms.
+
+### Font Display Swap
+
+When you must use custom fonts, prevent FOIT (Flash of Invisible Text):
+
+```css
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/custom.woff2') format('woff2');
+  font-display: swap;
+}
+```
+
+The `font-display: swap` strategy shows fallback fonts until your custom font loads, improving perceived performance.
 
 ---
 
-## WASM vs JavaScript Performance Tradeoffs
+## WASM vs JavaScript Performance Tradeoffs {#wasm-vs-javascript-performance-tradeoffs}
 
-WebAssembly offers performance benefits for computation-heavy operations but introduces additional overhead. Understanding when to use WASM versus optimized JavaScript is crucial.
+WebAssembly offers performance benefits in specific scenarios, but often adds overhead for extension use cases.
 
-### When to Use WebAssembly
+### When WASM Makes Sense
 
-WASM excels at:
+WASM excels at compute-heavy operations:
 
-- Complex mathematical computations (encryption, compression)
-- Image and video processing
-- Game engines and physics simulations
-- Porting existing C/C++ libraries
+- Image/video processing (resizing, filtering, encoding)
+- Cryptographic operations (hashing, encryption)
+- Data parsing (JSON, XML, binary formats)
+- Mathematical computations (statistics, charting)
+
+```typescript
+// Using a WASM module for image processing
+import init, { resizeImage } from './image-processor/pkg';
+
+await init();
+const resized = resizeImage(imageData, 100, 100);
+```
+
+The initial WASM module adds startup overhead, but processing is significantly faster for large operations.
 
 ### When to Stick with JavaScript
 
-JavaScript remains superior for:
+For most extension features, JavaScript is the better choice:
 
-- DOM manipulation
-- Most extension API interactions
-- String processing and parsing
-- Network requests and data transformation
+- **UI interactions**: DOM manipulation, event handling
+- **Network requests**: Fetch API, WebSocket connections
+- **Chrome API calls**: Direct chrome.* namespace usage
+- **Data transformation**: JSON parsing, array operations
 
-### Bundle Size Comparison
+JavaScript loads faster (no WASM runtime initialization) and integrates more easily with browser APIs. Modern JS engines are remarkably optimized for most use cases.
 
-Consider the size impact:
+### Hybrid Approaches
 
-| Operation | JavaScript | WebAssembly |
-|-----------|------------|--------------|
-| gzip compression | Good | Excellent |
-| Initial parse time | Faster | Slower |
-| Execution speed | Good (JIT) | Faster (precompiled) |
-| Bundle overhead | None | ~40KB baseline |
+Combine both for optimal results:
 
-For most extensions, pure JavaScript with proper optimization provides better performance-to-size ratios than WebAssembly.
+```typescript
+// Use JS for UI, WASM for heavy computation
+import { parseAndTransform } from './transform-wasm';
+
+function handleUserInput(input) {
+  // Immediate UI feedback
+  showLoadingSpinner();
+  
+  // Defer heavy processing to WASM
+  Promise.resolve().then(() => {
+    const result = parseAndTransform(input);
+    updateUI(result);
+  });
+}
+```
+
+This pattern provides responsive UI while leveraging WASM for performance-critical operations.
 
 ---
 
-## Analyzing Bundle Composition
+## Analyzing Bundle Composition {#analyzing-bundle-composition}
 
-Understanding what's in your bundle is the first step toward optimization. Use bundle analysis tools to identify optimization opportunities.
+Before optimizing, understand what comprises your bundle. Multiple tools provide detailed analysis.
 
 ### Webpack Bundle Analyzer
 
-```bash
-npm install --save-dev webpack-bundle-analyzer
-```
+Visualize your bundle contents:
 
 ```javascript
 // webpack.config.js
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   plugins: [
@@ -490,52 +561,78 @@ module.exports = {
 };
 ```
 
-Generate a report by running your production build, then examine the HTML output to identify large dependencies and duplication.
+Run `npm run build` and open the generated HTML report. You'll see exactly which dependencies contribute most to size.
 
 ### Source Map Explorer
 
+Analyze source maps to trace back to original source files:
+
 ```bash
-npm install --save-dev source-map-explorer
 npx source-map-explorer dist/*.js
 ```
 
-This tool maps compiled code back to source files, helping you identify which dependencies contribute most to bundle size.
+This shows which of your source files contribute most to the final bundle, helping prioritize optimization efforts.
 
-### rollup-plugin-visualizer
+### Chrome Extension Size Analysis
 
-For Rollup users:
+For extension-specific insights, use the CRX Size Analyzer:
 
-```javascript
-// rollup.config.js
-import visualizer from 'rollup-plugin-visualizer';
-
-export default {
-  plugins: [
-    visualizer({
-      filename: 'stats.html',
-      open: true,
-    }),
-  ],
-};
+```bash
+npx crx-size-analyzer /path/to/extension
 ```
+
+This tool breaks down your extension by file type, entry point, and manifest sections, showing exactly where space is used.
+
+### Regular Monitoring
+
+Track bundle size over time:
+
+```json
+// package.json
+{
+  "scripts": {
+    "analyze": "webpack-bundle-analyzer dist/stats.json",
+    "size": "echo 'Bundle size:' && du -sh dist/"
+  }
+}
+```
+
+Set up automated analysis in CI to catch size regressions before they reach production.
 
 ---
 
-## CI Size Budgets
+## CI Size Budgets and Enforcement {#ci-size-budgets-and-enforcement}
 
-Automated size checks prevent bundle bloat from sneaking into production. Implement size budgets in your CI pipeline to fail builds that exceed thresholds.
+Automated size enforcement prevents bundle bloat from creeping into your extension over time.
+
+### Webpack Size Limits
+
+Configure size warnings and failures:
+
+```javascript
+// webpack.config.js
+const { BundleSizePlugin } = require('webpack-bundle-size-analyzer');
+
+module.exports = {
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 250000,
+    maxAssetSize: 250000,
+  },
+};
+```
+
+This triggers warnings when bundles approach the Chrome Web Store limit. Set strict limits appropriate for your extension.
 
 ### GitHub Actions Size Check
+
+Enforce size limits in CI:
 
 ```yaml
 # .github/workflows/size-check.yml
 name: Bundle Size Check
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
   size-check:
@@ -543,101 +640,90 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          
       - name: Install dependencies
         run: npm ci
-        
-      - name: Build extension
+      
+      - name: Build
         run: npm run build
-        
-      - name: Check bundle size
+      
+      - name: Check CRX size
         run: |
-          SIZE=$(du -sh dist | cut -f1)
-          echo "Bundle size: $SIZE"
-          
-          # Fail if over 2MB
-          if [ $(echo "$SIZE" | sed 's/[^0-9]//g') -gt 2048 ]; then
-            echo "Error: Bundle exceeds 2MB limit"
+          EXTENSION_SIZE=$(npx crx-size-analyzer dist/ | grep "Total size" | awk '{print $3}')
+          echo "Extension size: $EXTENSION_SIZE KB"
+          if [ "$EXTENSION_SIZE" -gt 256 ]; then
+            echo "Error: Extension exceeds 256KB limit"
             exit 1
           fi
 ```
 
-### Using size-limit Package
+This workflow fails builds that exceed size limits, ensuring no oversized extensions reach the Chrome Web Store.
 
-```bash
-npm install --save-dev @size-limit/preset-webpack
-```
+### Size Budget in package.json
 
-```json
-// size-limit.json
-[
-  {
-    "path": "dist/**/*.js",
-    "limit": "2 MB",
-    "webpack": true
-  }
-]
-```
-
-Add to your package.json scripts:
+Modern build tools support size budgets:
 
 ```json
 {
-  "scripts": {
-    "size": "size-limit"
-  }
+  "budgets": [
+    {
+      "type": "initial",
+      "maximumWarning": "150KB",
+      "maximumError": "250KB"
+    },
+    {
+      "type": "anyComponent",
+      "maximumWarning": "50KB",
+      "maximumError": "100KB"
+    }
+  ]
 }
 ```
 
-Run `npm run size` in CI to automatically enforce bundle size limits.
+Angular and other frameworks respect these budgets during builds, providing another enforcement layer.
 
-### Setting Up Size Alerts
+### Pre-publish Verification
 
-Beyond failing builds, consider setting up alerts for gradual size increases:
+Always verify before publishing:
 
-{% raw %}
-```yaml
-- name: Report bundle size
-  run: |
-    SIZE=$(du -sh dist | cut -f1)
-    echo "::set-output name=size::$SIZE"
+```bash
+# Script to check everything before publish
+#!/bin/bash
+set -e
 
-    # Compare with previous build
-    if [ -f .bundle-size ]; then
-      PREVIOUS=$(cat .bundle-size)
-      echo "Previous: $PREVIOUS, Current: $SIZE"
-    fi
-    echo $SIZE > .bundle-size
+echo "Building extension..."
+npm run build
 
-- name: Comment on PR
-  uses: actions/github-script@v7
-  with:
-    script: |
-      const size = '${{ steps.build.outputs.size }}';
-      github.rest.issues.createComment({
-        issue_number: context.issue.number,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        body: `📦 Bundle size: **${size}**\n\nKeep it under 2MB for optimal performance!`
-      })
+echo "Checking CRX size..."
+npx crx-size-analyzer dist/
+
+echo "Verifying manifest..."
+node scripts/verify-manifest.js
+
+echo "All checks passed!"
 ```
-{% endraw %}
 
-This approach provides visibility into bundle size trends, helping teams catch gradual bloat before it becomes problematic.
+Run this before every publish to catch issues early.
 
 ---
 
 ## Conclusion
 
-Optimizing Chrome extension bundle size requires a multi-layered approach combining build tool configuration, code splitting strategies, and asset optimization. By implementing tree-shaking for unused Chrome APIs, dynamic imports for content scripts, shared chunks for common code, and proper asset compression, you can significantly reduce your extension's footprint.
+Chrome extension bundle optimization requires attention to multiple concerns: understanding CWS limits, configuring build tools properly, leveraging tree-shaking and code splitting, optimizing assets, and enforcing size budgets in CI. Each technique contributes to a lean extension that loads quickly and passes review.
 
-Remember these key principles: import only what you need, load code when necessary, share common modules across entry points, and monitor bundle size continuously in your CI pipeline. Extensions that respect users' bandwidth and device resources earn better reviews and higher adoption rates.
+Start with the basics—proper import statements and build configuration—then layer on advanced techniques like dynamic imports and WASM where they provide real value. Monitor bundle size continuously to catch regressions before they become problems.
 
-Start by analyzing your current bundle composition, then apply these techniques incrementally. The Chrome Web Store's 5MB limit becomes much more manageable with proper optimization, leaving room for future feature development without compromising performance.
+The techniques in this guide work together synergistically. A well-configured build pipeline with proper chunking, tree-shaking enabled, and CI enforcement creates an optimization system that maintains small bundle sizes automatically as your extension evolves.
+
+---
+
+## Related Articles
+
+- [Extension Performance Optimization](../guides/extension-performance-optimization.md)
+- [Performance Profiling Guide](../guides/chrome-extension-performance-profiling.md)
+- [Content Script Frameworks](../guides/content-script-frameworks.md)
+- [WXT Framework Setup](../guides/wxt-framework-setup.md)
+- [Plamo Framework Setup](../guides/plamo-framework-setup.md)
+- [Extension Bundle Analysis](../guides/extension-bundle-analysis.md)
 
 ---
 
