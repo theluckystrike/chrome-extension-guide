@@ -659,7 +659,7 @@ async function loadCriticalData() {
 
 For more patterns on cross-context communication, see our [Advanced Messaging Patterns](/chrome-extension-guide/guides/advanced-messaging-patterns/) guide.
 
-For type-safe storage wrappers and structured data handling, check out our [Typed Storage Wrapper](/chrome-extension-guide/patterns/typed-storage-wrapper/) pattern and learn about [Chrome Storage Sync Strategies](/chrome-extension-guide/guides/chrome-storage-sync-strategies/) for implementing robust data synchronization.
+For type-safe storage wrappers and structured data handling, check out our [Chrome Storage Typed](/chrome-extension-guide/patterns/typed-storage-wrapper/) guide and learn about [Data Sync Strategies](/chrome-extension-guide/guides/chrome-storage-sync-strategies/) for implementing robust data synchronization.
 
 ## Performance Benchmarks {#performance}
 
