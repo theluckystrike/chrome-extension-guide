@@ -569,9 +569,9 @@ chrome.runtime.onStartup.addListener(async () => {
 Now that you understand the changes, here's how to put this knowledge into practice:
 
 - **[Manifest V3 Migration Complete Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/)** — Step-by-step migration process and common pitfalls
-- **Service Worker Patterns** — Advanced patterns for working with ephemeral service workers
-- **Stripe Integration Tutorial** — Full implementation guide for Stripe in Chrome extensions
-- **Extension Monetization Playbook** — Comprehensive guide to building sustainable extension businesses
+- **[Manifest V3 Service Worker Patterns](/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/)** — Advanced patterns for working with ephemeral service workers
+- **[Stripe Integration Tutorial](/2025/03/26/chrome-extension-stripe-payment-integration/)** — Full implementation guide for Stripe in Chrome extensions
+- **[Extension Monetization Playbook](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)** — Comprehensive guide to building sustainable extension businesses
 
 ### Quick Checklist for MV3 Monetization
 
