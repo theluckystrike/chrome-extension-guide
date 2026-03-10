@@ -1,280 +1,494 @@
 ---
 layout: default
-title: "Chrome Extension Debugging Techniques — Complete Developer Guide"
-description: "Master Chrome extension debugging with comprehensive techniques for service workers, content scripts, popups, and remote Android debugging. Fix common errors fast."
+title: "Chrome Extension Debugging Techniques — Complete Guide"
+description: "Master Chrome extension debugging with our comprehensive guide covering service workers, content scripts, popups, and common error fixes."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-debugging-techniques/"
 ---
-
 # Chrome Extension Debugging Techniques
 
-## Introduction {#introduction}
+Debugging Chrome extensions requires understanding the unique architecture of browser extensions. Unlike standard web applications, Chrome extensions run code across multiple isolated contexts: service workers, content scripts, popups, options pages, and side panels. Each context has its own DevTools instance, lifecycle, and debugging workflow. This guide covers the essential techniques every extension developer needs to diagnose and fix issues effectively.
 
-Debugging Chrome extensions presents unique challenges compared to traditional web development. Unlike standard web applications, extensions consist of multiple isolated contexts that communicate through message passing, each with its own execution environment and lifecycle. Understanding how to effectively debug each component—service workers, content scripts, popups, and options pages—is essential for building reliable extensions.
+## Table of Contents
 
-This comprehensive guide covers proven debugging techniques for every extension component, from accessing service worker internals to remote debugging on Android devices. Whether you're troubleshooting message passing failures, investigating storage issues, or tracking down elusive runtime errors, these techniques will help you identify and resolve problems efficiently.
+- [Service Worker Debugging in chrome://serviceworker-internals](#service-worker-debugging-in-chromeserviceworker-internals)
+- [Content Script Debugging with Sources Panel](#content-script-debugging-with-sources-panel)
+- [Popup Debugging (Right-Click → Inspect)](#popup-debugging-right-click--inspect)
+- [Background Page Console Logs](#background-page-console-logs)
+- [chrome://extensions Error View](#chromeextensions-error-view)
+- [Network Request Inspection](#network-request-inspection)
+- [Storage Debugging with DevTools](#storage-debugging-with-devtools)
+- [Breakpoints in Injected Scripts](#breakpoints-in-injected-scripts)
+- [Remote Debugging on Android](#remote-debugging-on-android)
+- [Common Error Patterns and Fixes](#common-error-patterns-and-fixes)
 
-## 1. Service Worker Debugging in chrome://serviceworker-internals {#1-service-worker-debugging-in-chrome-serviceworker-internals}
+---
 
-The service worker serves as the backbone of modern Chrome extensions, handling background tasks, event listeners, and inter-component communication. Debugging the service worker requires understanding both the standard DevTools interface and the specialized `chrome://serviceworker-internals` page.
+## Service Worker Debugging in chrome://serviceworker-internals
 
-### Accessing Service Worker DevTools
+Service workers are the backbone of Manifest V3 extensions, handling background tasks, event listening, and coordination between extension components. Debugging them requires a different approach than regular JavaScript.
 
-The primary method for debugging service workers involves navigating to `chrome://extensions`, enabling Developer mode if not already active, and clicking the "Inspect views" link next to your extension's service worker entry. This opens a dedicated DevTools window connected to the service worker's execution context. From this window, you can access the Console for logging and error output, the Sources panel for breakpoint debugging, the Network tab for monitoring outgoing requests, and the Application tab for inspecting storage and caches.
+### Accessing Service Worker Internals
 
-The `chrome://serviceworker-internals` page provides additional diagnostic information that complements standard DevTools. Here you can view detailed status information about all registered service workers, including their current state (activating, activated, redundant), the source URL, the navigation IDs associated with each client, and the timestamp of the last update. This page proves particularly valuable when troubleshooting service worker registration issues or investigating unexpected termination behavior.
+Navigate to `chrome://serviceworker-internals` in your Chrome browser. This page displays every registered service worker in the browser, including your extension's. Unlike `chrome://extensions`, this page provides granular details about the service worker lifecycle:
 
-### Understanding Service Worker Lifecycle Issues
+- **Registration Status**: Shows whether the service worker is installed, activated, or in a redundant state
+- **Running Status**: Indicates if the worker is currently running or has been terminated
+- **Received Events**: A chronological log of events dispatched to the worker
+- **Start/Stop Controls**: Manual controls to start or stop the worker for testing
 
-Service workers in Chrome extensions follow a strict lifecycle that can cause unexpected behavior if not properly understood. The service worker may be terminated after 30 seconds of inactivity to conserve resources, which means your event listeners must be registered at the top level of your service worker file, not inside asynchronous functions. When the service worker wakes up to handle an event, it starts fresh with no in-memory state from previous executions.
+The ability to manually stop the service worker is particularly valuable. Click "Stop" to simulate the browser terminating your worker due to inactivity, then trigger an event (such as clicking your extension icon) to verify it restarts cleanly.
 
-To debug lifecycle-related issues, add console logs at the top level of your service worker to confirm it loads correctly:
+### Service Worker Lifecycle Logging
+
+Add logging to each lifecycle event to understand exactly when your code executes:
 
 ```javascript
-// background.js - Service worker entry point
-console.log('Service worker starting at', new Date().toISOString());
+// background.js (service worker)
 
-// Register all listeners at top level
-chrome.runtime.onInstalled.addListener((details) => {
-  console.log('Extension installed or updated:', details.reason);
-  // Initialize state from storage here
-  initializeExtension();
+self.addEventListener('install', (event) => {
+  console.log('[SW] Install event fired', {
+    timestamp: new Date().toISOString(),
+    state: self.registration?.active?.state
+  });
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('Message received:', message);
-  handleMessage(message, sender).then(sendResponse);
-  return true; // Keep message channel open for async response
+self.addEventListener('activate', (event) => {
+  console.log('[SW] Activate event fired', {
+    timestamp: new Date().toISOString()
+  });
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  console.log('[SW] onStartup fired — browser just launched');
+});
+
+chrome.runtime.onInstalled.addListener((details) => {
+  console.log('[SW] onInstalled fired', {
+    reason: details.reason,
+    previousVersion: details.previousVersion
+  });
 });
 ```
 
-When debugging service worker issues, also monitor the console for warnings about event listeners that fail to respond. If a listener doesn't return `true` for asynchronous message handling, Chrome may terminate the service worker before your async operation completes.
+### Catching Unhandled Errors
 
-## 2. Content Script Debugging with Sources Panel {#2-content-script-debugging-with-sources-panel}
+Service worker errors can silently terminate the worker without warning. Implement global error handlers at the top of your service worker script:
 
-Content scripts execute in the context of web pages, which creates a unique debugging environment separate from both the page's JavaScript and the extension's background contexts. The Chrome DevTools Sources panel provides access to content script debugging, though the interface requires some navigation to locate your scripts.
+```javascript
+self.addEventListener('error', (event) => {
+  console.error('[SW] Uncaught error:', event.message, event.filename, event.lineno);
+});
 
-### Locating Content Scripts in DevTools
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('[SW] Unhandled promise rejection:', event.reason);
+});
+```
 
-Open DevTools on any page where your content script should be active. In the Sources panel, expand the "Content scripts" folder in the left sidebar—your extension's content scripts appear here with their original filenames. If you're using a bundler like webpack or Rollup, you may see the bundled filename rather than your source files, depending on your source map configuration.
+### Keeping Service Worker Alive During Development
 
-The console context dropdown in DevTools (typically showing "top" or the page URL) allows you to switch between different execution contexts. Select your extension's context to see logs specifically from your content script, filtering out noise from the host page's own JavaScript.
+Service workers terminate after approximately 30 seconds of inactivity. During debugging sessions, you may want to prevent this:
+
+```javascript
+// Development only
+if (process.env.NODE_ENV === 'development') {
+  chrome.alarms.create('keep-alive-debug', { periodInMinutes: 0.5 });
+  chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name === 'keep-alive-debug') {
+      console.log('[SW] Keep-alive ping at', new Date().toISOString());
+    }
+  });
+}
+```
+
+---
+
+## Content Script Debugging with Sources Panel
+
+Content scripts run in an isolated world within web pages, sharing the DOM but having a separate JavaScript execution context. This creates unique debugging challenges.
+
+### Finding Content Scripts in DevTools
+
+Open DevTools on a page where your content script is active. In the **Sources** panel, locate the **Content scripts** tab in the left sidebar. Your extension's scripts appear grouped by extension ID. Ensure you have the page's DevTools open, not the extension's DevTools.
+
+### Working with Source Maps
+
+If you use a bundler like webpack, Vite, or Rollup, generate source maps for better debugging:
+
+```javascript
+// webpack.config.js
+module.exports = {
+  devtool: 'cheap-module-source-map',
+};
+```
+
+Include the source map reference in your bundled content script. Chrome DevTools automatically detects inline source maps or those referenced via `//# sourceMappingURL=`. This enables setting breakpoints in your original TypeScript or ES6 source code.
 
 ### Setting Breakpoints in Content Scripts
 
-Breakpoints work in content scripts just as they do in regular JavaScript debugging. Navigate to your content script in the Sources panel, click the line number where you want execution to pause, and the debugger will activate when that line executes. Conditional breakpoints—right-click a line number and select "Edit breakpoint"—let you specify conditions that must be true for the breakpoint to trigger, invaluable for debugging issues that occur only under specific circumstances.
+Several methods exist for debugging content scripts:
 
-For content scripts that run on many pages, consider adding `debugger` statements conditionally:
+1. **Line breakpoints**: Navigate to your content script in Sources and click the line number gutter
+2. **Conditional breakpoints**: Right-click the gutter to add conditions for specific scenarios
+3. **`debugger` statement**: Add `debugger;` directly in your source for reliable pauses
+4. **DOM breakpoints**: Right-click elements in the DOM tree and select "Break on..." to pause on modifications
+
+### Debugging Across the Isolated World Boundary
+
+Content scripts cannot access page JavaScript variables directly. Use the **context selector** dropdown at the Console panel's top to switch between your extension's isolated world and the page's main world.
+
+To pass data across the boundary for debugging:
 
 ```javascript
-// Only trigger debugger when specific condition is met
-if (window.location.href.includes('debug=true')) {
-  debugger; // Execution pauses here in DevTools
-}
+// content-script.js — post to page context
+window.postMessage({
+  source: 'my-extension-debug',
+  data: { someState: myVariable }
+}, '*');
 ```
 
-## 3. Popup Debugging (Right-Click → Inspect) {#3-popup-debugging-right-click-inspect}
+---
 
-Popup debugging presents a particular challenge because popups automatically close when they lose focus, making it difficult to maintain the debugging session. Chrome provides a convenient solution: right-click the extension icon in the toolbar and select "Inspect popup" from the context menu.
+## Popup Debugging (Right-Click → Inspect)
 
-This opens DevTools for the popup while keeping it visible, allowing you to interact with the extension interface while debugging. The DevTools window remains open even after the popup closes due to user interaction, preserving console output and allowing you to inspect the DOM state at the time of closure. This feature is essential for debugging popup initialization issues, form submission handling, and UI state management.
+Popups and side panels present a debugging challenge because they close when they lose focus, which also closes their DevTools connection.
 
-For debugging popups programmatically, you can also access the popup's code directly by navigating to `chrome-extension://YOUR_EXTENSION_ID/popup.html` in a new tab, though this approach may not perfectly replicate the popup's runtime environment.
+### Inspecting Popups
 
-### Debugging Options Pages
+Right-click your extension icon in the toolbar and select **"Inspect popup"**. This opens a dedicated DevTools window. The popup remains open as long as DevTools stays open, even if it loses focus.
 
-Options pages follow a similar debugging pattern. Navigate to `chrome://extensions`, find your extension, and click the "Options" link. This opens the options page in a full tab where you can use standard DevTools debugging. Alternatively, right-click your extension icon and select "Options" to open the page in the same manner as the popup.
+Alternatively, navigate to `chrome://extensions`, enable Developer mode, and click the "Inspect views" link next to your extension.
 
-## 4. Background Page Console Logs {#4-background-page-console-logs}
+### Side Panel Debugging
 
-For extensions using the deprecated background page architecture (Manifest V2), console logging works similarly to standard web page debugging. Navigate to `chrome://extensions`, find your extension, and click the "Inspect views: background page" link. This opens a DevTools window dedicated to the background page's console and debugging tools.
+Side panels persist during navigation, making them easier to debug than popups. Open DevTools the same way—through the "Inspect views" link or by right-clicking inside the panel and selecting "Inspect".
 
-The background page DevTools provides complete access to the console, network monitoring, and source-level debugging. However, remember that background pages in Manifest V2 remain active continuously, which can mask lifecycle issues that manifest in service worker-based extensions.
+### Persistent DevTools for Extension Pages
 
-For logging from background scripts, use standard console methods, but consider adding context to your logs to distinguish between different components:
+Full-tab extension pages (`chrome-extension://YOUR_ID/options.html`) work like regular web pages. Open DevTools with F12 or Cmd+Option+I. These pages persist until closed, making debugging straightforward.
+
+---
+
+## Background Page Console Logs
+
+In Manifest V2, background pages were persistent pages where console.log statements remained visible. In Manifest V3, service workers replace background pages and may terminate at any time.
+
+### Viewing Service Worker Logs
+
+Open the service worker DevTools from `chrome://extensions` by clicking the "service worker" link. Console logs appear here, but remember that logs disappear when the service worker terminates.
+
+### Implementing Persistent Logging
+
+For important events, log to storage instead of console:
 
 ```javascript
-// In background.js
-const TAG = '[BackgroundService]';
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log(`${TAG} Received message:`, message, 'from:', sender.tab?.id);
-  // Process message and respond
+// Log important events to storage for later inspection
+chrome.storage.local.set({
+  _debugLogs: [...(await chrome.storage.local.get('_debugLogs'))._debugLogs || [], 
+    { time: Date.now(), message: 'Service worker started' }
+  ].slice(-100) // Keep last 100 entries
 });
 ```
 
-## 5. chrome://extensions Error View {#5-chrome-extensions-error-view}
+### Using chrome.runtime.lastError
 
-Chrome provides a centralized error dashboard for extensions at `chrome://extensions`. With Developer mode enabled, each extension displays an "Errors" link that reveals any uncaught exceptions, manifest validation errors, or runtime failures. This view should be your first stop when investigating any extension malfunction.
-
-The error view displays errors in real-time, updating as new issues occur. Common errors shown here include manifest permission problems, CSP (Content Security Policy) violations, missing files referenced in the manifest, and uncaught JavaScript exceptions from any extension context. Clicking an error typically navigates to the relevant source location in DevTools.
-
-For persistent errors that don't clear after fixing the underlying issue, click the "Clear all" button to start fresh. Some errors may persist in the display even after the underlying problem is resolved until you explicitly clear them or reload the extension.
-
-## 6. Network Request Inspection {#6-network-request-inspection}
-
-Network request debugging in extensions requires understanding how different components make requests. Service workers and background scripts can make requests directly using the `fetch` API or `XMLHttpRequest`, while content scripts are subject to the page's CSP and should communicate with the background service worker for cross-origin requests.
-
-### Monitoring Service Worker Network Activity
-
-In the service worker DevTools, the Network tab displays all outgoing requests initiated by your background script. This includes API calls, resource fetches, and any network requests made through `chrome.runtime.sendNativeMessage` or similar APIs. Filter the network log by typing your API domain or endpoint to focus on relevant traffic.
-
-For extensions using the declarativeNetRequest API to modify network requests, the Network tab won't show interception behavior—instead, test your declarative rules by observing their effects on actual page loads.
-
-### Inspecting Cross-Origin Requests
-
-Content scripts face restrictions on cross-origin requests due to the same-origin policy. When debugging network issues in content scripts, you'll often see CORS errors in the console. The solution typically involves routing the request through the background service worker, which doesn't have the same restrictions:
+Always check `chrome.runtime.lastError` in callback-based APIs:
 
 ```javascript
-// content-script.js
-// Don't make cross-origin requests directly
-// Instead, send message to background service worker
-
-chrome.runtime.sendMessage({
-  type: 'FETCH_DATA',
-  payload: { url: 'https://api.example.com/data' }
-}, (response) => {
+chrome.runtime.sendMessage({ action: 'ping' }, (response) => {
   if (chrome.runtime.lastError) {
-    console.error('Message failed:', chrome.runtime.lastError);
+    console.error('Message failed:', chrome.runtime.lastError.message);
     return;
   }
-  console.log('Data received:', response.data);
+  console.log('Response:', response);
 });
 ```
 
-## 7. Storage Debugging with DevTools {#7-storage-debugging-with-devtools}
+---
 
-Chrome provides built-in storage inspection in DevTools for all extension contexts. Open DevTools for any extension component (service worker, popup, content script, or options page), navigate to the Application tab, and expand the "Storage" section in the left sidebar. Click "Extension Storage" to view all storage areas available to your extension: local, sync, managed, and session.
+## chrome://extensions Error View
 
-The storage viewer shows key-value pairs in a table format, making it easy to inspect current state. Right-click any value to edit it directly—useful for testing how your extension handles different storage states without manually triggering the code that creates them.
+The `chrome://extensions` page provides essential debugging information that may not appear elsewhere.
 
-### Console-Based Storage Inspection
+### The Errors Panel
 
-For programmatic storage inspection, use the console to query storage directly:
+When your extension throws an error, a red "Errors" button appears on your extension's card. Click it to view:
+
+- Error messages with stack traces
+- Context where errors occurred (service worker, content script, popup)
+- Timestamps for each error
+- Clear all button to reset
+
+Check this panel regularly. Some errors—particularly manifest parsing errors and permission denials—only appear here.
+
+### The Update Button
+
+Click "Update" to force-reload your unpacked extension. This triggers `onInstalled` with `reason: 'update'` and is essential for testing manifest changes, service worker updates, and declarative rules.
+
+### Service Worker Status Indicator
+
+The extension card shows whether your service worker is active, inactive, or has an error. Clicking the service worker link opens DevTools directly.
+
+---
+
+## Network Request Inspection
+
+Extensions interact with networks uniquely, intercepting requests and modifying headers from privileged contexts.
+
+### Monitoring Requests by Context
+
+Requests appear in different DevTools instances based on their origin:
+
+- Service worker requests: Service worker DevTools Network panel
+- Content script requests: Page's DevTools Network panel
+- Popup requests: Popup's DevTools
+
+### Logging Extension Network Activity
+
+Use `chrome.webRequest` for centralized logging:
 
 ```javascript
-// Get all local storage
+chrome.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    if (details.initiator?.startsWith('chrome-extension://')) {
+      console.log('[Network]', details.method, details.url, {
+        type: details.type,
+        tabId: details.tabId,
+        initiator: details.initiator
+      });
+    }
+  },
+  { urls: ['<all_urls>'] }
+);
+```
+
+### Debugging CORS Issues
+
+Service workers with proper `host_permissions` bypass CORS, but content scripts remain subject to cross-origin restrictions. Move problematic requests to the service worker:
+
+```javascript
+// From content script, send to service worker instead
+chrome.runtime.sendMessage({ 
+  action: 'fetch', 
+  url: 'https://api.example.com/data' 
+}, (response) => {
+  console.log('Data from background:', response);
+});
+```
+
+### Debugging Declarative Net Request Rules
+
+Use `chrome.declarativeNetRequest.getMatchedRules()` to verify rule matching:
+
+```javascript
+chrome.declarativeNetRequest.getMatchedRules({ tabId: tabId }, (result) => {
+  console.log('Matched rules:', result.rulesMatchedInfo);
+});
+```
+
+Enable the "Matched Rules" tab in DevTools to see which rules affected each request.
+
+---
+
+## Storage Debugging with DevTools
+
+Chrome extensions use `chrome.storage` instead of `localStorage`. Debugging requires different approaches.
+
+### Viewing Storage in DevTools
+
+In any extension context's DevTools, open the **Application** panel. Under **Storage**, find **Extension Storage** to view `chrome.storage.local` and `chrome.storage.sync`.
+
+### Querying Storage from Console
+
+Access storage directly from the console:
+
+```javascript
 chrome.storage.local.get(null, (items) => {
-  console.log('All local storage:', items);
+  console.log('All local storage:', JSON.stringify(items, null, 2));
 });
 
-// Get specific keys
-chrome.storage.sync.get(['userPreferences', 'cache'], (items) => {
-  console.log('Preferences:', items.userPreferences);
-  console.log('Cache:', items.cache);
-});
-
-// Monitor storage changes in real-time
-chrome.storage.onChanged.addListener((changes, areaName) => {
-  console.log(`Storage changed in ${areaName}:`, changes);
+chrome.storage.sync.get(null, (items) => {
+  console.log('All sync storage:', JSON.stringify(items, null, 2));
 });
 ```
 
-### Debugging Storage Quota Issues
+### Storage Types Reference
 
-Extensions have storage quotas that vary by storage type: local storage typically allows up to 5MB, while sync storage allows about 100KB. When approaching these limits, `chrome.storage.local.getBytesInUse()` and `chrome.storage.sync.getBytesInUse()` return the current usage, helping you identify when cleanup is necessary.
+| Storage Area | Persistence | Shared Across Devices | Quota |
+|--------------|-------------|----------------------|-------|
+| `local` | Permanent | No | 10 MB |
+| `sync` | Permanent | Yes | 100 KB |
+| `session` | Until browser closes | No | 10 MB |
 
-## 8. Breakpoints in Injected Scripts {#8-breakpoints-in-injected-scripts}
+### Monitoring Storage Changes
 
-Injected scripts—scripts added dynamically to pages using `chrome.scripting.executeScript`—appear in DevTools under the "Content scripts" section just like statically declared content scripts. Setting breakpoints works identically once you locate the script.
-
-For scripts injected at specific moments (on user action, after page load, conditionally), consider adding explicit debugger statements that activate only when needed:
+Track all modifications with the change listener:
 
 ```javascript
-// Inject this script when needed
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
+    console.log(`[Storage] ${areaName}.${key} changed:`, 
+      '\n  Old:', JSON.stringify(oldValue),
+      '\n  New:', JSON.stringify(newValue)
+    );
+  }
+});
+```
+
+### Checking Storage Quota
+
+Monitor usage to prevent quota exceeded errors:
+
+```javascript
+chrome.storage.local.getBytesInUse(null, (bytesInUse) => {
+  const quota = 10485760; // 10 MB
+  console.log(`Using ${bytesInUse} of ${quota} bytes (${(bytesInUse / quota * 100).toFixed(1)}%)`);
+});
+```
+
+---
+
+## Breakpoints in Injected Scripts
+
+Setting breakpoints in dynamically injected scripts requires specific techniques.
+
+### Using the debugger Statement
+
+The `debugger;` statement works reliably in injected scripts:
+
+```javascript
 chrome.scripting.executeScript({
   target: { tabId: tabId },
   func: () => {
-    // This runs in the page context
-    window.addEventListener('myCustomEvent', () => {
-      debugger; // Pauses in DevTools when event fires
-      console.log('Custom event received!');
-    });
+    debugger; // Pauses execution when DevTools is open
+    console.log('Script running');
   }
 });
 ```
 
-When debugging injected scripts, ensure the DevTools window remains open—breakpoints won't activate if DevTools is closed, and console logs may be lost.
+### Finding Injected Scripts in Sources
 
-## 9. Remote Debugging on Android {#9-remote-debugging-on-android}
+Injected scripts appear in the Sources panel under "Content scripts" or "Snippets" depending on injection method. Look for the script filename or the injection context.
 
-Debugging Chrome extensions on Android requires the Chrome DevTools Protocol and remote debugging capabilities. This workflow enables you to debug your extension while it runs in the Chrome browser on an Android device or emulator.
+### Conditional Breakpoints
 
-### Setting Up Remote Debugging
-
-First, enable USB debugging on your Android device: navigate to Settings > Developer Options > USB Debugging and enable the option. On desktop Chrome, open `chrome://inspect` and ensure your device appears under the "Devices" section. If prompted on your Android device, authorize the computer for USB debugging.
-
-With the connection established, you can inspect any tab on the Android device from desktop DevTools. Navigate to the page where your extension's content script is active, then use desktop DevTools to debug as you would locally—the Sources panel shows content scripts, breakpoints work, and the console displays output from the Android browser.
-
-### Debugging Service Workers on Android
-
-Service workers on Android Chrome can be inspected through the `chrome://inspect` page as well. Look for your extension's service worker listed under the service workers section, and click the "inspect" link to open a DevTools session connected to the Android service worker.
-
-Note that Android debugging may introduce latency and limitations compared to desktop development. Network throttling, CPU throttling, and other mobile emulation features can be combined with remote debugging to test realistic conditions.
-
-## 10. Common Error Patterns and Fixes {#10-common-error-patterns-and-fixes}
-
-### "Could not establish connection. Receiving end does not exist"
-
-This error occurs when attempting to send a message between extension components where the receiving end isn't available. Common causes include the content script not being injected into the current page, the service worker being terminated, or the popup being closed before the message completes. Ensure your content script is properly registered in the manifest and matches the target pages using URL patterns.
-
-### "The message port closed before a response was received"
-
-This typically indicates an async message handler that didn't return `true` to keep the message channel open. When sending messages that require async responses, the receiver must return `true` from the message listener to indicate it will respond asynchronously:
+Right-click a line number in Sources, select "Add conditional breakpoint", and enter a JavaScript expression. The breakpoint only triggers when the condition evaluates to true:
 
 ```javascript
-// Correct pattern for async message handling
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'asyncRequest') {
-    // Must return true to keep channel open
-    handleAsyncOperation(message.data).then(sendResponse);
-    return true;
-  }
-});
+// Example: window.location.hostname === 'example.com'
 ```
+
+---
+
+## Remote Debugging on Android
+
+Debug extensions on mobile devices using Chrome's remote debugging capabilities.
+
+### Setup Requirements
+
+1. Enable **Developer options** and **USB debugging** on your Android device
+2. Connect the device to your computer via USB
+3. Open `chrome://inspect` on desktop Chrome
+4. Your Android device appears under "Remote Target"
+
+### Installing Extensions on Android
+
+Chrome for Android doesn't support local extension loading natively. Two options exist:
+
+1. **Kiwi Browser**: A Chromium-based Android browser that supports unpacked extensions. Install your extension as on desktop, then debug using `chrome://inspect`.
+2. **Chrome Dev/Canary**: Some Android builds support extension sideloading via command-line flags.
+
+### Debugging on Mobile
+
+Use `chrome://inspect` to access DevTools for any extension context on the connected device. Test thoroughly—mobile content scripts may behave differently due to viewport differences and touch events.
+
+---
+
+## Common Error Patterns and Fixes
+
+Understanding common error messages helps diagnose issues quickly.
 
 ### "Extension context invalidated"
 
-This error appears when the extension context (typically a service worker or background page) is terminated while an async operation is in progress. The extension context may be invalidated due to service worker termination, extension update, or browser restart. Implement retry logic or persistence strategies to handle this gracefully:
+**Cause**: Content script called a Chrome API after extension reload. The old script runs on the page but loses its extension connection.
+
+**Fix**: Wrap Chrome API calls in try-catch:
 
 ```javascript
-async function sendMessageWithRetry(message, retries = 3) {
-  for (let attempt = 0; attempt < retries; attempt++) {
-    try {
-      return await chrome.runtime.sendMessage(message);
-    } catch (error) {
-      if (error.message.includes('context invalidated') && attempt < retries - 1) {
-        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
-        continue;
-      }
-      throw error;
+function safeSendMessage(message) {
+  try {
+    return chrome.runtime.sendMessage(message);
+  } catch (error) {
+    if (error.message.includes('Extension context invalidated')) {
+      console.warn('Extension reloaded. Refresh the page.');
+      return null;
     }
+    throw error;
   }
 }
 ```
 
-### CSP Violation Errors
+### "Could not establish connection. Receiving end does not exist"
 
-Content Security Policy violations appear in the console with messages like "Refused to execute inline script" or "Refused to load script from 'self'". These occur when your extension's code attempts to use patterns disallowed by the CSP. Inline scripts must be moved to external files, and all external resources must be explicitly declared in the manifest's `web_accessible_resources` or loaded from allowed origins.
+**Cause**: `sendMessage` called but no listener exists in the target context. Common when the service worker is terminated or content script hasn't injected.
 
-### Service Worker Not Starting
+**Fix**: Ensure the target context exists before sending:
 
-If your service worker fails to start, check the console in `chrome://serviceworker-internals` for error messages. Common causes include syntax errors in the service worker file, missing dependencies, or incorrect file paths in the manifest. The "Status" column in `chrome://serviceworker-internals` shows whether your service worker is running, stopped, or encountered an error.
+```javascript
+try {
+  const response = await chrome.tabs.sendMessage(tabId, { action: 'ping' });
+} catch (error) {
+  // Inject content script first, then retry
+  await chrome.scripting.executeScript({
+    target: { tabId },
+    files: ['content-script.js']
+  });
+  const response = await chrome.tabs.sendMessage(tabId, { action: 'ping' });
+}
+```
 
-## Conclusion {#conclusion}
+### "Service worker registration failed"
 
-Effective debugging of Chrome extensions requires familiarity with the unique architecture of extension components and their interactions. By mastering the techniques in this guide—service worker debugging, content script inspection, popup debugging, storage inspection, and remote Android debugging—you'll be equipped to handle even the most challenging extension issues.
+**Cause**: Syntax errors, wrong file paths, or missing module type declaration.
 
-Remember to start with the error view at `chrome://extensions` when encountering problems, use console logging strategically to trace execution flow, and leverage breakpoints for complex debugging scenarios. With practice, these debugging techniques will become second nature, enabling you to build more reliable Chrome extensions.
+**Fix**: Check the Errors panel on `chrome://extensions`. If using ES modules:
 
-## Related Articles {#related-articles}
+```json
+{
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
+```
 
-- [Chrome Extension Dev Tools](../guides/chrome-extension-dev-tools.md) — Overview of development tools for extensions
-- [Debugging Extensions](../guides/debugging-extensions.md) — General debugging fundamentals
-- [Advanced Debugging Techniques](../guides/chrome-extension-advanced-debugging-techniques.md) — Deep dive into advanced debugging scenarios
-- [Service Worker Debugging](../guides/service-worker-debugging.md) — Specific guidance for service worker issues
-- [Chrome Extension Testing Strategies](../guides/chrome-extension-testing-strategies.md) — Testing methodologies for extensions
-- [Extension Debugging Checklist](../guides/extension-debugging-checklist.md) — Step-by-step debugging workflow
-- [Comprehensive Extension Testing](../guides/comprehensive-extension-testing.md) — Complete testing guide
+### "Manifest file is missing or unreadable"
+
+**Cause**: Chrome cannot parse manifest.json—trailing commas, missing fields, or BOM characters.
+
+**Fix**: Validate with JSON.parse() or a linter. Ensure required fields exist: `manifest_version`, `name`, `version`.
+
+### "The message port closed before a response was received"
+
+**Cause**: `sendMessage` expected a response, but the listener didn't call `sendResponse` or return `true`.
+
+**Fix**: Return `true` for async handlers:
+
+```javascript
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  handleMessageAsync(message).then(sendResponse);
+  return true; // Keep message channel open
+});
+```
+
+---
+
+## Related Articles
+
+- [Chrome Extension Performance Profiling with DevTools](../guides/chrome-extension-performance-profiling-devtools.md)
+- [Extension Testing Strategies](../guides/extension-testing-strategies.md)
+- [Comprehensive Extension Testing](../guides/comprehensive-extension-testing.md)
+- [Extension Debugging Checklist](../guides/extension-debugging-checklist.md)
+- [Unit Testing for Extensions](../guides/unit-testing.md)
 
 ---
 
