@@ -30,7 +30,7 @@ Choosing the right framework for building Chrome extensions has become significa
 
 ### WXT Architecture
 
-WXT represents a modern approach to extension development, built on top of Vite and designed specifically for the unique requirements of browser extensions. The architecture emphasizes a "frontend-first" philosophy, allowing developers to leverage their existing React, Vue, Svelte, or vanilla JavaScript skills without learning extension-specific APIs.
+WXT represents a modern approach to extension development, built on top of Vite and designed specifically for the unique requirements of browser extensions. The architecture emphasizes a "frontend-first" philosophy, allowing developers to leverage their existing React, Vue, Svelte, or vanilla JavaScript skills without learning extension-specific APIs. For a detailed setup guide, see our [WXT Framework Setup](/guides/wxt-framework-setup/) documentation.
 
 The core architecture revolves around a unified entry point system where WXT automatically generates the appropriate manifest.json based on file conventions. Content scripts, background workers, popup pages, and options pages are all treated as individual "pages" that can import shared modules. This approach eliminates the traditional separation anxiety between different extension contexts.
 
@@ -38,7 +38,7 @@ WXT's plugin system deserves special mention. The framework provides first-class
 
 ### Plasmo Architecture
 
-Plasmo takes a different approach, positioning itself as a "framework for extensions" rather than a build tool with extension support. The architecture is built around the concept of "pages" and "panels," with strong opinions about how extension code should be organized.
+Plasmo takes a different approach, positioning itself as a "framework for extensions" rather than a build tool with extension support. The architecture is built around the concept of "pages" and "panels," with strong opinions about how extension code should be organized. For detailed setup instructions, check out our [Plasmo Framework Setup](/guides/plasmo-framework-setup/) guide.
 
 One of Plasmo's distinguishing architectural decisions is its embrace of the "content script as a component" paradigm. Instead of treating content scripts as isolated JavaScript files, Plasmo allows you to write content scripts as React components that can leverage the full React ecosystem. This dramatically simplifies complex content script logic and enables proper state management within injected scripts.
 
@@ -46,7 +46,7 @@ The framework also introduces the concept of "flux" for messaging between differ
 
 ### CRXJS Architecture
 
-CRXJS takes a minimalist approach, focusing primarily on the build process rather than providing a comprehensive framework. Built on top of Vite, CRXJS is essentially a Vite plugin that handles the complexities of extension bundling while leaving architectural decisions to the developer.
+CRXJS takes a minimalist approach, focusing primarily on the build process rather than providing a comprehensive framework. Built on top of Vite, CRXJS is essentially a Vite plugin that handles the complexities of extension bundling while leaving architectural decisions to the developer. For those new to Vite-based extension development, our [Vite Extension Setup](/guides/vite-extension-setup/) guide provides a helpful introduction.
 
 This lightweight approach means CRXJS doesn't impose any specific directory structure or coding patterns. You can use it with React, Vue, vanilla JavaScript, or any combination. The plugin handles manifest generation, code bundling, and extension packaging, but everything else is up to you.
 
@@ -82,7 +82,7 @@ The good news is that CRXJS provides sensible defaults and examples for common s
 
 ## TypeScript Integration
 
-All three frameworks provide first-class TypeScript support, but with different levels of out-of-the-box experience. For a comprehensive guide to setting up TypeScript in your extension project, see our [Building Chrome Extensions with TypeScript](https://theluckystrike.github.io/chrome-extension-guide/tutorials/building-with-typescript/) tutorial.
+All three frameworks provide first-class TypeScript support, but with different levels of out-of-the-box experience. For a comprehensive guide to setting up TypeScript in your extension project, see our [Building Chrome Extensions with TypeScript](/guides/typescript-setup/) tutorial.
 
 ### WXT TypeScript
 
@@ -267,7 +267,7 @@ For typical extensions, these differences are insignificant compared to your app
 
 For most new extension projects in 2026, WXT emerges as the strongest recommendation. Its excellent developer experience, comprehensive TypeScript support, and first-class multi-browser targeting make it the most well-rounded choice. The framework balances power with simplicity, allowing you to focus on building your extension rather than configuring build tools.
 
-For more detailed development guides, check out our [Chrome Extension Development Tutorial](https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-development-tutorial-typescript-2026/) to get started with extension development.
+For more detailed development guides, check out our [Chrome Extension Development Tutorial](/guides/chrome-extension-development-typescript-tutorial-2026/) to get started with extension development.
 
 However, the best framework ultimately depends on your specific requirements. If you're building a React-heavy extension and value the ecosystem, Plasmo remains an excellent choice. If you need maximum flexibility and already understand Vite, CRXJS provides the control you need.
 
