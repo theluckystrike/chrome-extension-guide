@@ -1,13 +1,12 @@
 ---
 layout: default
 title: "Chrome Extension OAuth2 Authentication: Complete Identity API Guide"
-description: "Master OAuth2 authentication in Chrome extensions with chrome.identity API, token management, PKCE flow, multi-provider auth, and production-ready implementation patterns."
+description: "Master OAuth2 authentication in Chrome extensions with our comprehensive guide covering chrome.identity API, token management, and secure implementation patterns."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-oauth2-authentication/"
 ---
-
 # Chrome Extension OAuth2 Authentication: Complete Identity API Guide
 
-Authentication is one of the most critical yet challenging aspects of building production Chrome extensions. Whether you're integrating with Google APIs, connecting to third-party services like GitHub or Twitter, or building your own user accounts, understanding the chrome.identity API and OAuth2 flows is essential for creating secure, user-friendly extensions. This comprehensive guide covers everything from API fundamentals to advanced token management patterns used by extensions serving millions of users.
+Authentication is one of the most critical yet complex aspects of building Chrome extensions. Whether you're integrating with Google APIs, connecting to third-party services like GitHub or Twitter, or building your own OAuth2 provider, understanding the chrome.identity API and proper token management is essential for building secure and user-friendly extensions. This guide provides a comprehensive walkthrough of OAuth2 authentication flow in Chrome extensions, from basic concepts to advanced token rotation strategies.
 
 ## Table of Contents
 
@@ -16,7 +15,7 @@ Authentication is one of the most critical yet challenging aspects of building p
 - [Google OAuth2 Setup for Extensions](#google-oauth2-setup-for-extensions)
 - [Token Storage Best Practices](#token-storage-best-practices)
 - [Refresh Token Rotation](#refresh-token-rotation)
-- [Multi-Provider Authentication](#multi-provider-authentication)
+- [Multi-Provider Auth (GitHub, Twitter)](#multi-provider-auth-github-twitter)
 - [PKCE Flow for Extensions](#pkce-flow-for-extensions)
 - [Error Handling and Token Revocation](#error-handling-and-token-revocation)
 - [Real-World Implementation Example](#real-world-implementation-example)
@@ -25,685 +24,904 @@ Authentication is one of the most critical yet challenging aspects of building p
 
 ## Chrome Identity API Overview
 
-The `chrome.identity` API provides the foundation for OAuth2 authentication in Chrome extensions. Introduced to standardize how extensions handle user authentication, this API abstracts away the complexity of managing browser-based OAuth flows while providing secure token storage mechanisms.
+The chrome.identity API provides the foundation for OAuth2 authentication in Chrome extensions. It offers two primary methods for obtaining authentication tokens: `getAuthToken` and `launchWebAuthFlow`. Before using either method, you must configure your extension's manifest with appropriate permissions and declare your OAuth2 client information.
 
-### Core Capabilities
+### Manifest Configuration
 
-The chrome.identity API offers three primary functions that serve different authentication scenarios:
-
-**`chrome.identity.getAuthToken`** retrieves OAuth2 tokens directly from the token issuer without requiring a visible web auth flow. This method works exclusively with OAuth2 clients registered in the Google Cloud Console and is ideal for extensions that primarily interact with Google APIs.
-
-**`chrome.identity.launchWebAuthFlow`** initiates a full OAuth2 or OpenID Connect authentication flow in a browser popup. This method supports any OAuth2-compatible identity provider, making it the universal choice for non-Google authentication.
-
-**`chrome.identity.removeCachedAuthToken`** invalidates cached tokens, enabling proper logout functionality and token refresh scenarios.
-
-Before using the identity API, your extension must declare the `"identity"` permission in manifest.json:
+First, add the identity permission to your manifest.json:
 
 ```json
 {
-  "permissions": [
-    "identity"
-  ],
+  "manifest_version": 3,
+  "permissions": ["identity"],
   "oauth2": {
-    "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
-    "scopes": ["https://www.googleapis.com/auth/drive"]
+    "client_id": "your-client-id.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/drive.file"]
   }
 }
 ```
 
-The OAuth2 configuration in manifest.json enables automatic token caching and simplifies the getAuthToken flow. However, this configuration is only available for Google OAuth2 and doesn't apply to launchWebAuthFlow.
+The chrome.identity API simplifies what would otherwise be a complex manual OAuth2 implementation. It handles the browser-based authentication flow, token caching, and interactive prompts automatically. Understanding when to use each method is crucial for building a robust authentication system.
 
 ---
 
 ## launchWebAuthFlow vs getAuthToken
 
-Understanding when to use each authentication method is crucial for building robust extensions. Both methods have distinct use cases, advantages, and limitations.
+Choosing between `launchWebAuthFlow` and `getAuthToken` depends on your authentication requirements. Each method has distinct characteristics that make it suitable for different scenarios.
 
-### When to Use getAuthToken
+### getAuthToken - Simplified Google OAuth
 
-The `getAuthToken` method is the simplest approach for Google API integration. It automatically handles token storage, caching, and refresh without requiring additional code:
+The `getAuthToken` method is specifically designed for Google OAuth2 and provides the simplest integration path. It automatically handles token caching, meaning subsequent calls return cached tokens without triggering new authentication flows:
 
-```javascript
-chrome.identity.getAuthToken({ interactive: true }, (token) => {
-  if (chrome.runtime.lastError) {
-    console.error(chrome.runtime.lastError.message);
-    return;
+```typescript
+// background.ts
+async function getGoogleAccessToken(): Promise<string | null> {
+  try {
+    const token = await chrome.identity.getAuthToken({
+      interactive: true,
+      scopes: ['https://www.googleapis.com/auth/drive.file']
+    });
+    return token;
+  } catch (error) {
+    console.error('Failed to get token:', error);
+    return null;
   }
-  // Use token for API calls
-  fetch('https://www.googleapis.com/drive/v3/files', {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-});
+}
 ```
 
-**Advantages of getAuthToken:**
-- Automatic token caching across browser sessions
-- Built-in token refresh when tokens expire
-- No need to handle OAuth callback URLs
-- Simpler implementation for Google APIs
+The `interactive` parameter controls whether the user sees an authentication prompt. Set it to `false` for background token refresh and `true` when the user explicitly initiates an action requiring authentication. The API automatically caches tokens, so calling `getAuthToken` multiple times doesn't prompt the user each time.
 
-**Limitations:**
-- Only works with Google OAuth2 clients
-- Requires OAuth2 configuration in manifest.json
-- Limited customization of the auth UI
+However, `getAuthToken` has limitations: it only works with Google APIs, doesn't support refresh token rotation, and provides no control over the OAuth2 flow parameters.
 
-### When to Use launchWebAuthFlow
+### launchWebAuthFlow - Full OAuth2 Control
 
-The `launchWebAuthFlow` method provides full control over the authentication process and supports any OAuth2-compatible provider:
+For non-Google OAuth2 providers or when you need full control over the authentication flow, `launchWebAuthFlow` opens a browser popup where the OAuth2 provider handles the entire authentication process:
 
-```javascript
-const authUrl = 'https://oauth-provider.com/authorize?' +
-  new URLSearchParams({
-    client_id: 'your-client-id',
-    redirect_uri: chrome.identity.getRedirectURL(),
-    response_type: 'code',
-    scope: 'read:user write:repo',
-    state: generateStateParam()
-  });
-
-chrome.identity.launchWebAuthFlow({
-  url: authUrl,
-  interactive: true
-}, (redirectUrl) => {
-  if (chrome.runtime.lastError || !redirectUrl) {
-    console.error('Auth failed:', chrome.runtime.lastError);
-    return;
+```typescript
+// background.ts
+async function authenticateWithProvider(
+  authUrl: string,
+  redirectUri: string
+): Promise<string | null> {
+  try {
+    const responseUrl = await chrome.identity.launchWebAuthFlow({
+      url: authUrl,
+      interactive: true
+    });
+    
+    // Extract token from redirect URL
+    const url = new URL(responseUrl);
+    const accessToken = url.searchParams.get('access_token');
+    return accessToken;
+  } catch (error) {
+    console.error('Auth flow failed:', error);
+    return null;
   }
-  // Parse authorization code from redirect URL
-  const code = new URL(redirectUrl).searchParams.get('code');
-  // Exchange code for tokens via your backend
-});
+}
 ```
 
-**Advantages of launchWebAuthFlow:**
-- Works with any OAuth2 provider (GitHub, Twitter, Slack, etc.)
-- Full control over authentication UI and flow
-- Supports PKCE for enhanced security
-- Enables custom OAuth2 configurations
+The `launchWebAuthFlow` method returns when the OAuth2 provider redirects back to your specified redirect URI. You must parse the response URL to extract tokens or authorization codes. This method supports any OAuth2-compliant provider, including GitHub, Twitter, Slack, and custom authorization servers.
 
-**Limitations:**
-- Manual token storage and refresh management
-- Requires backend for token exchange (for confidential clients)
-- More complex implementation
+Key differences summary:
 
-### Decision Matrix
-
-| Factor | getAuthToken | launchWebAuthFlow |
-|--------|--------------|-------------------|
-| Provider support | Google only | Any OAuth2 provider |
-| Token management | Automatic | Manual |
-| Complexity | Low | Medium-High |
-| Custom UI | Limited | Full control |
-| PKCE support | No | Yes |
-| Refresh tokens | Automatic | Manual implementation |
-
-For Google API integration, start with `getAuthToken`. For third-party providers or custom authentication flows, use `launchWebAuthFlow`.
+| Feature | getAuthToken | launchWebAuthFlow |
+|---------|-------------|-------------------|
+| Provider Support | Google only | Any OAuth2 provider |
+| Token Caching | Automatic | Manual implementation |
+| Refresh Tokens | Not supported | Full control |
+| Flow Customization | Limited | Complete control |
+| Use Case | Google APIs | Third-party services |
 
 ---
 
 ## Google OAuth2 Setup for Extensions
 
-Setting up Google OAuth2 for your extension requires configuration in both the Google Cloud Console and your extension's manifest. This section walks through the complete setup process.
+Setting up Google OAuth2 for your Chrome extension requires configuration in both the Google Cloud Console and your extension's manifest. This section walks through the complete setup process.
 
-### Step 1: Create a Google Cloud Project
+### Google Cloud Console Configuration
 
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select an existing one
-3. Enable the APIs your extension needs (e.g., Google Drive API, Gmail API)
+3. Go to "APIs & Services" > "OAuth consent screen"
+4. Configure the consent screen:
+   - User Type: External
+   - App name and email address
+   - Add your extension's permissions scope
+5. Go to "Credentials" > "Create Credentials" > "OAuth client ID"
+6. Select "Chrome App" as the application type
+7. Enter your extension ID (found at chrome://extensions)
+8. Save your client ID and client secret
 
-### Step 2: Configure OAuth Consent Screen
-
-1. Go to **APIs & Services > OAuth consent screen**
-2. Select **External** user type (internal is for organization-only apps)
-3. Fill in required fields:
-   - App name
-   - User support email
-   - Developer contact email
-4. Add authorized domains if needed
-5. Configure scopes for requested permissions
-
-### Step 3: Create OAuth Client ID
-
-1. Go to **APIs & Services > Credentials**
-2. Click **Create Credentials > OAuth client ID**
-3. Select **Chrome App** as the application type
-4. Enter your extension details:
-   - Name: Your extension name
-   - Application ID: Your Chrome Web Store item ID (required for published extensions)
-   - For development: Use any placeholder ID
-
-### Step 4: Configure Extension Manifest
-
-Add the OAuth2 configuration to your manifest.json:
+### Extension Manifest Configuration
 
 ```json
 {
+  "manifest_version": 3,
+  "name": "My Extension",
   "oauth2": {
-    "client_id": "123456789-abcdefghijklmnop.apps.googleusercontent.com",
+    "client_id": "your-client-id.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/drive.file",
       "https://www.googleapis.com/auth/gmail.readonly"
     ]
   }
 }
 ```
 
-**Important:** For production extensions, the client ID must match the Chrome Web Store listing. During development, you can use a placeholder, but you'll need to update before publication.
+### Complete Google Authentication Example
+
+```typescript
+// auth/google-auth.ts
+interface GoogleAuthConfig {
+  clientId: string;
+  scopes: string[];
+}
+
+export class GoogleAuth {
+  private config: GoogleAuthConfig;
+  private tokenCache: Map<string, { token: string; expiry: number }>;
+
+  constructor(config: GoogleAuthConfig) {
+    this.config = config;
+    this.tokenCache = new Map();
+  }
+
+  async getToken(interactive = false): Promise<string | null> {
+    const cacheKey = this.config.scopes.join(',');
+    const cached = this.tokenCache.get(cacheKey);
+    
+    // Return cached token if still valid
+    if (cached && cached.expiry > Date.now()) {
+      return cached.token;
+    }
+
+    try {
+      const token = await chrome.identity.getAuthToken({
+        interactive,
+        scopes: this.config.scopes
+      });
+
+      // Cache the token (expires in ~1 hour)
+      this.tokenCache.set(cacheKey, {
+        token,
+        expiry: Date.now() + 3500 * 1000
+      });
+
+      return token;
+    } catch (error) {
+      console.error('Google auth failed:', error);
+      return null;
+    }
+  }
+
+  async makeApiRequest(
+    endpoint: string,
+    options: RequestInit = {}
+  ): Promise<Response> {
+    const token = await this.getToken();
+    if (!token) throw new Error('Authentication required');
+
+    return fetch(`https://www.googleapis.com${endpoint}`, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  async revokeToken(): Promise<void> {
+    const token = await this.getToken(false);
+    if (token) {
+      await chrome.identity.removeCachedAuthToken({ token });
+      this.tokenCache.clear();
+    }
+  }
+}
+```
 
 ---
 
 ## Token Storage Best Practices
 
-Proper token storage is critical for extension security. Tokens must be protected from unauthorized access while remaining accessible for legitimate API calls.
+Proper token storage is critical for security. Chrome provides several storage mechanisms, each with different security characteristics. Understanding these options helps you make informed decisions about where and how to store authentication credentials.
 
 ### Storage Options Comparison
 
-Chrome extensions have several token storage options, each with different security characteristics:
+Chrome offers multiple storage APIs with varying security properties:
 
-**chrome.storage.local**: Stores data locally on the user's device. Not encrypted by default, but accessible only to your extension.
+| Storage Type | Encryption | Scope | Capacity |
+|-------------|------------|-------|----------|
+| chrome.storage.local | Not encrypted | Extension only | 5MB |
+| chrome.storage.session | Not encrypted, cleared on restart | Extension only | 1MB |
+| chrome.storage.sync | Not encrypted, synced across devices | Extension only | 100KB |
+| chrome.storage.managed | Encrypted | Managed by IT | 1MB |
 
-**chrome.storage.session**: Stores data only for the current browser session. Data is cleared when the browser closes. More secure for sensitive temporary data.
+For authentication tokens, the best practice is to use `chrome.storage.session` for access tokens (which are short-lived) and avoid storing refresh tokens in browser storage entirely when possible.
 
-**chrome.storage.sync**: Syncs data across the user's Chrome instances when signed in to the same account. Useful for user preferences, but avoid storing sensitive tokens here.
+### Secure Token Storage Implementation
 
-**IndexedDB**: Provides more storage capacity and complex querying capabilities. Suitable for applications with large token volumes.
+```typescript
+// auth/token-storage.ts
+interface TokenData {
+  accessToken: string;
+  refreshToken?: string;
+  expiresAt: number;
+  tokenType: string;
+  scope: string;
+}
 
-### Recommended Storage Strategy
+class SecureTokenStorage {
+  private readonly STORAGE_KEY = 'auth_tokens';
 
-For most extensions, a layered approach provides the best balance of security and usability:
-
-```javascript
-class TokenManager {
-  constructor() {
-    this.storageKey = 'auth_tokens';
-  }
-
-  async storeTokens(tokens) {
-    // Store access token in session storage (cleared on browser close)
+  async storeTokens(provider: string, tokens: TokenData): Promise<void> {
+    // Store access token in session storage (cleared on browser restart)
     await chrome.storage.session.set({
-      access_token: tokens.access_token,
-      expires_at: tokens.expires_at
+      [`${this.STORAGE_KEY}_${provider}`]: {
+        accessToken: tokens.accessToken,
+        expiresAt: tokens.expiresAt,
+        tokenType: tokens.tokenType,
+        scope: tokens.scope
+      }
     });
 
-    // Store refresh token in local storage (persists across sessions)
-    if (tokens.refresh_token) {
-      await chrome.storage.local.set({
-        refresh_token: tokens.refresh_token
-      });
+    // For refresh tokens, use native messaging to store in secure backend
+    // Never store refresh tokens in chrome.storage directly
+    if (tokens.refreshToken) {
+      await this.storeRefreshTokenSecurely(provider, tokens.refreshToken);
     }
   }
 
-  async getAccessToken() {
-    const { access_token, expires_at } = await chrome.storage.session.get(
-      ['access_token', 'expires_at']
+  async getTokens(provider: string): Promise<TokenData | null> {
+    const stored = await chrome.storage.session.get(
+      `${this.STORAGE_KEY}_${provider}`
     );
-
+    const tokens = stored[`${this.STORAGE_KEY}_${provider}`];
+    
+    if (!tokens) return null;
+    
     // Check if token is expired
-    if (expires_at && Date.now() >= expires_at) {
-      return null; // Token expired, needs refresh
+    if (tokens.expiresAt && tokens.expiresAt < Date.now()) {
+      return null;
     }
-
-    return access_token;
+    
+    return tokens;
   }
 
-  async getRefreshToken() {
-    const { refresh_token } = await chrome.storage.local.get('refresh_token');
-    return refresh_token;
+  async clearTokens(provider: string): Promise<void> {
+    await chrome.storage.session.remove(`${this.STORAGE_KEY}_${provider}`);
+    await this.clearRefreshToken(provider);
   }
 
-  async clearTokens() {
-    await chrome.storage.session.remove(['access_token', 'expires_at']);
-    await chrome.storage.local.remove('refresh_token']);
+  private async storeRefreshTokenSecurely(
+    _provider: string,
+    _refreshToken: string
+  ): Promise<void> {
+    // In production, send to your secure backend
+    // or use chrome.storage.managed for enterprise scenarios
+    console.warn('Refresh token storage requires backend integration');
+  }
+
+  private async clearRefreshToken(_provider: string): Promise<void> {
+    // Clear from backend as well
   }
 }
 ```
 
-### Security Considerations
-
-**Never store tokens in chrome.storage.sync** - synced data may be accessible across devices or through Google Takeout.
-
-**Encrypt sensitive tokens** using the Web Crypto API for additional protection:
-
-```javascript
-async function encryptToken(token, key) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(token);
-  const encrypted = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv: crypto.getRandomValues(new Uint8Array(12)) },
-    key,
-    data
-  );
-  return encrypted;
-}
-```
-
-**Implement token scope minimization** - request only the minimum scopes necessary for your extension's functionality.
+The critical principle is to minimize token exposure. Access tokens are short-lived and can be revoked without major security impact. Refresh tokens, however, grant prolonged access and should be treated with higher security. For production extensions, consider storing refresh tokens server-side or using the Identity API's built-in token management.
 
 ---
 
 ## Refresh Token Rotation
 
-Refresh tokens enable long-lived authentication without requiring users to re-authorize your extension. However, proper rotation and security practices are essential to prevent token theft and unauthorized access.
+Refresh token rotation is essential for maintaining secure, long-lived authentication sessions. When access tokens expire (typically after one hour), your extension needs a way to obtain new access tokens without requiring the user to re-authenticate.
 
-### Understanding Refresh Token Rotation
+### Understanding Refresh Token Flow
 
-Refresh token rotation involves issuing a new refresh token with each token refresh while invalidating the old one. This practice limits the window of opportunity for token theft and provides better security guarantees.
+The standard OAuth2 token refresh flow works as follows:
 
-### Implementation Pattern
+1. Your extension obtains both an access token and a refresh token during initial authentication
+2. When the access token expires, use the refresh token to request new tokens
+3. The authorization server returns a new access token (and potentially a new refresh token)
+4. Store and use the new tokens for subsequent requests
 
-```javascript
-class RefreshTokenHandler {
-  constructor(tokenManager) {
-    this.tokenManager = tokenManager;
+### Implementing Token Rotation with launchWebAuthFlow
+
+Since `getAuthToken` doesn't support refresh token rotation, you must implement it manually using `launchWebAuthFlow`:
+
+```typescript
+// auth/token-refresh.ts
+interface TokenResponse {
+  access_token: string;
+  refresh_token?: string;
+  expires_in: number;
+  token_type: string;
+  scope: string;
+}
+
+export class TokenManager {
+  private readonly TOKEN_ENDPOINT = 'https://oauth2.googleapis.com/token';
+  private readonly CLIENT_ID: string;
+  private readonly CLIENT_SECRET: string;
+
+  constructor(clientId: string, clientSecret: string) {
+    this.CLIENT_ID = clientId;
+    this.CLIENT_SECRET = clientSecret;
   }
 
-  async refreshAccessToken() {
-    const refreshToken = await this.tokenManager.getRefreshToken();
-    if (!refreshToken) {
-      throw new Error('No refresh token available');
-    }
-
+  async refreshAccessToken(refreshToken: string): Promise<TokenResponse | null> {
     try {
-      const response = await fetch('https://oauth2.googleapis.com/token', {
+      const response = await fetch(this.TOKEN_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         body: new URLSearchParams({
-          client_id: CONFIG.client_id,
+          client_id: this.CLIENT_ID,
+          client_secret: this.CLIENT_SECRET,
           refresh_token: refreshToken,
           grant_type: 'refresh_token'
         })
       });
 
       if (!response.ok) {
-        // Refresh token may be revoked
-        await this.tokenManager.clearTokens();
-        throw new Error('Token refresh failed');
+        console.error('Token refresh failed:', await response.text());
+        return null;
       }
 
-      const tokens = await response.json();
-
-      // Store new tokens with rotation
-      await this.tokenManager.storeTokens({
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token || refreshToken, // Use new if provided
-        expires_at: Date.now() + (tokens.expires_in * 1000)
-      });
-
-      return tokens.access_token;
+      const tokens: TokenResponse = await response.json();
+      
+      // Some providers rotate refresh tokens on each refresh
+      // Store the new refresh token if provided
+      return tokens;
     } catch (error) {
-      console.error('Refresh token error:', error);
-      throw error;
+      console.error('Token refresh error:', error);
+      return null;
     }
   }
 
-  async getValidToken() {
-    const accessToken = await this.tokenManager.getAccessToken();
-
-    if (accessToken) {
-      return accessToken;
+  async handleExpiredToken(
+    refreshToken: string,
+    onTokenRefreshed: (tokens: TokenResponse) => void
+  ): Promise<boolean> {
+    const newTokens = await this.refreshAccessToken(refreshToken);
+    
+    if (newTokens) {
+      onTokenRefreshed(newTokens);
+      return true;
     }
-
-    // Token expired or missing - refresh
-    return this.refreshAccessToken();
+    
+    return false;
   }
 }
 ```
 
-### Best Practices for Refresh Tokens
+### Automatic Token Refresh Interceptor
 
-**Always handle refresh token revocation** - OAuth providers may revoke refresh tokens due to security events, user action, or password changes. Your code must handle these scenarios gracefully.
+Implement an automatic token refresh mechanism that intercepts failed API requests and retries them after refreshing:
 
-**Implement token refresh proactively** - Don't wait for API calls to fail before refreshing. Implement a refresh buffer:
+```typescript
+// auth/api-client.ts
+export class AuthenticatedApiClient {
+  private tokenManager: TokenManager;
+  private tokenStorage: SecureTokenStorage;
+  private refreshToken: string | null = null;
 
-```javascript
-async function getTokenWithBuffer() {
-  const { expires_at } = await chrome.storage.session.get('expires_at');
-  const bufferTime = 5 * 60 * 1000; // 5 minutes
-
-  if (expires_at && Date.now() >= (expires_at - bufferTime)) {
-    await refreshTokenHandler.refreshAccessToken();
+  constructor(tokenManager: TokenManager, tokenStorage: SecureTokenStorage) {
+    this.tokenManager = tokenManager;
+    this.tokenStorage = tokenStorage;
   }
 
-  return tokenManager.getAccessToken();
+  async request(
+    url: string,
+    options: RequestInit = {}
+  ): Promise<Response> {
+    const tokens = await this.tokenStorage.getTokens('google');
+    
+    if (!tokens) {
+      throw new Error('Not authenticated');
+    }
+
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${tokens.accessToken}`
+      }
+    });
+
+    // If unauthorized, try refreshing the token
+    if (response.status === 401 && this.refreshToken) {
+      const refreshed = await this.tokenManager.refreshAccessToken(
+        this.refreshToken
+      );
+      
+      if (refreshed) {
+        // Retry the original request with new token
+        return this.request(url, options);
+      }
+    }
+
+    return response;
+  }
 }
 ```
-
-**Limit refresh token scope** - Request offline access only when necessary, and use the minimum required scopes.
 
 ---
 
-## Multi-Provider Authentication
+## Multi-Provider Auth (GitHub, Twitter)
 
-Modern extensions often need to authenticate with multiple OAuth providers. Whether you're integrating GitHub for repository access, Twitter for social features, or Slack for team communication, implementing a flexible multi-provider architecture is essential.
+Modern extensions often need to authenticate with multiple OAuth2 providers. This section covers implementing authentication for GitHub and Twitter, demonstrating the flexibility of `launchWebAuthFlow`.
 
-### Provider Abstraction Pattern
+### GitHub OAuth2 Setup
 
-Create a unified authentication interface that handles different providers consistently:
+1. Go to GitHub Settings > Developer settings > OAuth Apps
+2. Create a new OAuth App with:
+   - Homepage URL: Your extension or website URL
+   - Authorization callback URL: `https://<extension-id>.chromiumapp.org/github`
+3. Note your Client ID and Client Secret
 
-```javascript
-class AuthProvider {
-  constructor(config) {
-    this.provider = config.provider;
-    this.clientId = config.clientId;
-    this.scopes = config.scopes;
-    this.authEndpoint = config.authEndpoint;
-    this.tokenEndpoint = config.tokenEndpoint;
-  }
+### GitHub Authentication Implementation
 
-  getAuthUrl() {
-    const params = new URLSearchParams({
-      client_id: this.clientId,
-      redirect_uri: chrome.identity.getRedirectURL(),
-      response_type: 'code',
-      scope: this.scopes.join(' '),
-      state: this.generateState()
-    });
-
-    return `${this.authEndpoint}?${params}`;
-  }
-
-  generateState() {
-    const state = crypto.getRandomValues(new Uint8Array(16));
-    return btoa(String.fromCharCode(...state));
-  }
-
-  async exchangeCodeForTokens(code) {
-    const response = await fetch(this.tokenEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: this.clientId,
-        code,
-        grant_type: 'authorization_code',
-        redirect_uri: chrome.identity.getRedirectURL()
-      })
-    });
-
-    return response.json();
-  }
+```typescript
+// auth/github-auth.ts
+interface GitHubAuthConfig {
+  clientId: string;
+  clientSecret: string;
+  redirectUri: string;
+  scopes: string[];
 }
 
-// Provider configurations
-const providers = {
-  github: new AuthProvider({
-    provider: 'github',
-    clientId: 'YOUR_GITHUB_CLIENT_ID',
-    scopes: ['repo', 'user'],
-    authEndpoint: 'https://github.com/login/oauth/authorize',
-    tokenEndpoint: 'https://github.com/login/oauth/access_token'
-  }),
+export class GitHubAuth {
+  private readonly AUTHORIZATION_ENDPOINT = 'https://github.com/login/oauth/authorize';
+  private readonly TOKEN_ENDPOINT = 'https://github.com/login/oauth/access_token';
+  private config: GitHubAuthConfig;
 
-  twitter: new AuthProvider({
-    provider: 'twitter',
-    clientId: 'YOUR_TWITTER_CLIENT_ID',
-    scopes: ['tweet.read', 'users.read'],
-    authEndpoint: 'https://twitter.com/i/oauth2/authorize',
-    tokenEndpoint: 'https://api.twitter.com/2/oauth2/token'
-  })
-};
-```
+  constructor(config: GitHubAuthConfig) {
+    this.config = config;
+  }
 
-### GitHub OAuth2 Configuration
-
-GitHub OAuth requires additional configuration for extensions:
-
-1. Create a new OAuth App in GitHub Developer Settings
-2. Set callback URL to `https://<extension-id>.chromiumapp.org/*`
-3. Implement PKCE for enhanced security (see next section)
-
-### Twitter OAuth2 Configuration
-
-Twitter uses OAuth 2.0 with PKCE support:
-
-```javascript
-const twitterProvider = {
-  provider: 'twitter',
-  clientId: 'YOUR_TWITTER_CLIENT_ID',
-  scopes: ['tweet.read', 'users.read', 'offline.access'],
-  authEndpoint: 'https://twitter.com/i/oauth2/authorize',
-  tokenEndpoint: 'https://api.twitter.com/2/oauth2/token',
-
-  getAuthUrl() {
-    // Twitter requires PKCE
-    const codeVerifier = generateCodeVerifier();
-    const codeChallenge = await generateCodeChallenge(codeVerifier);
-
-    // Store code verifier for token exchange
-    await chrome.storage.session.set({ codeVerifier });
-
+  getAuthorizationUrl(): string {
     const params = new URLSearchParams({
-      client_id: this.clientId,
-      redirect_uri: chrome.identity.getRedirectURL(),
-      response_type: 'code',
-      scope: this.scopes.join(' '),
-      code_challenge: codeChallenge,
-      code_challenge_method: 'S256',
-      state: generateState()
+      client_id: this.config.clientId,
+      redirect_uri: this.config.redirectUri,
+      scope: this.config.scopes.join(' '),
+      // Generate and store PKCE code verifier
+      code_challenge: 'challenge',
+      code_challenge_method: 'S256'
     });
 
-    return `${this.authEndpoint}?${params}`;
+    return `${this.AUTHORIZATION_ENDPOINT}?${params.toString()}`;
   }
-};
+
+  async exchangeCodeForTokens(code: string, codeVerifier: string): Promise<{
+    accessToken: string;
+    refreshToken?: string;
+  } | null> {
+    try {
+      const response = await fetch(this.TOKEN_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          client_id: this.config.clientId,
+          client_secret: this.config.clientSecret,
+          code,
+          redirect_uri: this.config.redirectUri,
+          code_verifier: codeVerifier
+        })
+      });
+
+      if (!response.ok) {
+        console.error('Token exchange failed');
+        return null;
+      }
+
+      const data = await response.json();
+      return {
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token
+      };
+    } catch (error) {
+      console.error('GitHub auth error:', error);
+      return null;
+    }
+  }
+
+  async authenticate(): Promise<string | null> {
+    const authUrl = this.getAuthorizationUrl();
+    
+    try {
+      const responseUrl = await chrome.identity.launchWebAuthFlow({
+        url: authUrl,
+        interactive: true
+      });
+
+      const url = new URL(responseUrl);
+      const code = url.searchParams.get('code');
+      
+      if (!code) {
+        console.error('No authorization code received');
+        return null;
+      }
+
+      const tokens = await this.exchangeCodeForTokens(code, 'code-verifier');
+      return tokens?.accessToken ?? null;
+    } catch (error) {
+      console.error('GitHub authentication failed:', error);
+      return null;
+    }
+  }
+}
+```
+
+### Twitter/X OAuth2 Setup
+
+Twitter uses OAuth 2.0 with PKCE. The setup process is similar to GitHub but requires additional configuration in the Twitter Developer Portal:
+
+1. Create a project and app in the Twitter Developer Portal
+2. Enable OAuth 2.0
+3. Set the callback URL to `https://<extension-id>.chromiumapp.org/twitter`
+4. Request appropriate scopes (tweet.read, users.read, etc.)
+
+```typescript
+// auth/twitter-auth.ts
+export class TwitterAuth {
+  private readonly AUTHORIZATION_ENDPOINT = 'https://twitter.com/i/oauth2/authorize';
+  private readonly TOKEN_ENDPOINT = 'https://api.twitter.com/2/oauth2/token';
+  
+  // Generate random string for PKCE
+  private generateCodeVerifier(): string {
+    const array = new Uint8Array(32);
+    crypto.getRandomValues(array);
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  // SHA256 hash for code challenge
+  private async generateCodeChallenge(verifier: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(verifier);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return btoa(String.fromCharCode(...new Uint8Array(hash)))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=/g, '');
+  }
+
+  async authenticate(
+    clientId: string,
+    redirectUri: string,
+    scopes: string[]
+  ): Promise<string | null> {
+    const codeVerifier = this.generateCodeVerifier();
+    const codeChallenge = await this.generateCodeChallenge(codeVerifier);
+
+    const params = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      scope: scopes.join(' '),
+      response_type: 'code',
+      code_challenge: codeChallenge,
+      code_challenge_method: 'S256',
+      state: crypto.randomUUID()
+    });
+
+    const authUrl = `${this.AUTHORIZATION_ENDPOINT}?${params.toString()}`;
+
+    try {
+      const responseUrl = await chrome.identity.launchWebAuthFlow({
+        url: authUrl,
+        interactive: true
+      });
+
+      const url = new URL(responseUrl);
+      const code = url.searchParams.get('code');
+      
+      if (!code) return null;
+
+      // Exchange code for token (implement token exchange similar to GitHub)
+      return await this.exchangeCodeForToken(code, codeVerifier, clientId, redirectUri);
+    } catch (error) {
+      console.error('Twitter auth failed:', error);
+      return null;
+    }
+  }
+
+  private async exchangeCodeForToken(
+    code: string,
+    codeVerifier: string,
+    clientId: string,
+    redirectUri: string
+  ): Promise<string | null> {
+    // Implement token exchange with PKCE support
+    // Similar to GitHub implementation
+    return null;
+  }
+}
 ```
 
 ---
 
 ## PKCE Flow for Extensions
 
-Proof Key for Code Exchange (PKCE) adds an additional security layer to the OAuth2 authorization code flow, protecting against authorization code interception attacks. While originally designed for mobile apps, PKCE is increasingly required by OAuth providers and recommended for all public clients, including browser extensions.
+Proof Key for Code Exchange (PKCE) is a security extension to OAuth2 that prevents authorization code interception attacks. While PKCE is mandatory for public clients (including extensions), understanding its implementation ensures your authentication is secure.
 
-### How PKCE Works
+### Understanding PKCE
 
-PKCE adds three parameters to the OAuth flow:
+PKCE adds three parameters to the OAuth2 flow:
 
-1. **code_verifier** - A random string generated on the client
-2. **code_challenge** - A hash of the code verifier (S256 method recommended)
-3. **code_challenge_method** - Either "plain" or "S256"
+1. **code_verifier**: A cryptographically random string (43-128 characters)
+2. **code_challenge**: A hashed version of the code_verifier
+3. **code_challenge_method**: The hashing method (typically S256)
 
-The authorization server stores the code challenge. When exchanging the authorization code for tokens, the client must prove it possesses the original code verifier.
+### Implementing PKCE in Extensions
 
-### Implementation for Extensions
+```typescript
+// auth/pkce.ts
+export class PKCE {
+  private codeVerifier: string | null = null;
 
-```javascript
-class PKCEAuthFlow {
-  constructor() {
-    this.codeVerifier = null;
-  }
-
-  async generateCodeVerifier() {
+  // Generate a secure code verifier
+  generateCodeVerifier(): string {
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
-    this.codeVerifier = this.base64UrlEncode(array);
-    return this.codeVerifier;
+    
+    // Base64url encode
+    const base64 = btoa(String.fromCharCode(...array))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=/g, '');
+    
+    this.codeVerifier = base64;
+    return base64;
   }
 
-  async generateCodeChallenge(verifier) {
+  // Generate code challenge from verifier using S256
+  async generateCodeChallenge(verifier: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(verifier);
     const hash = await crypto.subtle.digest('SHA-256', data);
-    return this.base64UrlEncode(new Uint8Array(hash));
-  }
-
-  base64UrlEncode(array) {
-    return btoa(String.fromCharCode(...array))
+    
+    // Base64url encode the hash
+    return btoa(String.fromCharCode(...new Uint8Array(hash)))
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
-      .replace(/=+$/, '');
+      .replace(/=/g, '');
   }
 
-  async getAuthUrl(provider) {
-    const verifier = await this.generateCodeVerifier();
-    const challenge = await this.generateCodeChallenge(verifier);
-
-    // Store verifier for token exchange
-    await chrome.storage.session.set({ pkce_verifier: verifier });
-
-    const params = new URLSearchParams({
-      client_id: provider.clientId,
-      redirect_uri: chrome.identity.getRedirectURL(),
-      response_type: 'code',
-      scope: provider.scopes.join(' '),
-      code_challenge: challenge,
-      code_challenge_method: 'S256',
-      state: generateState()
-    });
-
-    return `${provider.authEndpoint}?${params}`;
+  getCodeVerifier(): string | null {
+    return this.codeVerifier;
   }
 
-  async exchangeCode(code) {
-    const { pkce_verifier } = await chrome.storage.session.get('pkce_verifier');
-
-    const response = await fetch(provider.tokenEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: provider.clientId,
-        code,
-        grant_type: 'authorization_code',
-        redirect_uri: chrome.identity.getRedirectURL(),
-        code_verifier: pkce_verifier
-      })
-    });
-
-    // Clear verifier after use
-    await chrome.storage.session.remove('pkce_verifier');
-
-    return response.json();
+  // Use with authorization URL
+  async createAuthorizationParams(): Promise<{
+    codeVerifier: string;
+    codeChallenge: string;
+    codeChallengeMethod: string;
+  }> {
+    const codeVerifier = this.generateCodeVerifier();
+    const codeChallenge = await this.generateCodeChallenge(codeVerifier);
+    
+    return {
+      codeVerifier,
+      codeChallenge,
+      codeChallengeMethod: 'S256'
+    };
   }
 }
 ```
 
-### When to Use PKCE
+### Using PKCE with OAuth2 Flow
 
-PKCE is recommended or required in these scenarios:
+```typescript
+// auth/oauth2-with-pkce.ts
+export class OAuth2WithPKCE {
+  private pkce = new PKCE();
+  private codeVerifier: string | null = null;
 
-- **Twitter** - Requires PKCE for OAuth 2.0
-- **Google** - Supports and recommends PKCE
-- **Any public client** - Protects against code interception
-- **Extensions with sensitive permissions** - Adds defense in depth
+  async initiateAuth(
+    authorizationEndpoint: string,
+    clientId: string,
+    redirectUri: string,
+    scopes: string[]
+  ): Promise<string> {
+    const { codeChallenge, codeChallengeMethod } = 
+      await this.pkce.createAuthorizationParams();
+    
+    this.codeVerifier = this.pkce.getCodeVerifier()!;
+
+    const params = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      response_type: 'code',
+      scope: scopes.join(' '),
+      code_challenge: codeChallenge,
+      code_challenge_method: codeChallengeMethod,
+      state: crypto.randomUUID()
+    });
+
+    return `${authorizationEndpoint}?${params.toString()}`;
+  }
+
+  async exchangeCode(
+    tokenEndpoint: string,
+    code: string,
+    clientId: string,
+    redirectUri: string
+  ): Promise<Record<string, unknown> | null> {
+    if (!this.codeVerifier) {
+      throw new Error('Code verifier not found. Initiate auth first.');
+    }
+
+    try {
+      const response = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          client_id: clientId,
+          code,
+          code_verifier: this.codeVerifier,
+          grant_type: 'authorization_code',
+          redirect_uri: redirectUri
+        })
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      // Clear the code verifier after successful exchange
+      this.codeVerifier = null;
+      return await response.json();
+    } catch (error) {
+      console.error('Token exchange failed:', error);
+      return null;
+    }
+  }
+}
+```
 
 ---
 
 ## Error Handling and Token Revocation
 
-Robust error handling is essential for production extensions. Users will encounter authentication errors due to network issues, expired tokens, revoked permissions, and provider-side problems. Your extension must handle these gracefully.
+Robust error handling is essential for a reliable authentication system. Users encounter various authentication errors, from network issues to revoked permissions. Your extension must handle these gracefully.
 
-### Common Error Types
+### Common Error Types and Handling
 
-**Network Errors**: Connectivity issues during authentication or token refresh.
+```typescript
+// auth/errors.ts
+export class AuthError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string,
+    public readonly recoverable: boolean = true
+  ) {
+    super(message);
+    this.name = 'AuthError';
+  }
+}
 
-**Token Expiration**: Access tokens typically expire within 1 hour. Your code must detect expiration and refresh proactively.
+export const AuthErrorCodes = {
+  TOKEN_EXPIRED: 'token_expired',
+  TOKEN_REVOKED: 'token_revoked',
+  USER_REVOKED: 'user_revoked',
+  NETWORK_ERROR: 'network_error',
+  INVALID_GRANT: 'invalid_grant',
+  INVALID_CLIENT: 'invalid_client',
+  UNKNOWN: 'unknown'
+} as const;
 
-**Permission Revoked**: Users can revoke extension permissions through their Google/Provider account settings.
-
-**Provider Errors**: OAuth provider-side issues, rate limiting, or service outages.
-
-**Invalid Grants**: Refresh token may be invalid due to revocation or expiration.
-
-### Comprehensive Error Handling
-
-```javascript
-class AuthErrorHandler {
-  static ERROR_TYPES = {
-    NETWORK: 'network_error',
-    EXPIRED_TOKEN: 'token_expired',
-    REVOKED: 'permission_revoked',
-    INVALID_GRANT: 'invalid_grant',
-    PROVIDER: 'provider_error',
-    UNKNOWN: 'unknown_error'
-  };
-
-  static parseError(error, provider = 'google') {
-    if (!navigator.onLine) {
-      return { type: this.ERROR_TYPES.NETWORK, message: 'No internet connection' };
+export function handleAuthError(error: unknown): AuthError {
+  if (error instanceof chrome.runtime.LastError) {
+    const message = error.message || 'Unknown Chrome identity error';
+    
+    if (message.includes('OAuth2')) {
+      return new AuthError(
+        message,
+        AuthErrorCodes.INVALID_GRANT,
+        true
+      );
     }
-
-    if (error.message?.includes('invalid_grant')) {
-      return { type: this.ERROR_TYPES.INVALID_GRANT, message: 'Session expired, please re-authenticate' };
+    
+    if (message.includes('network') || message.includes('connection')) {
+      return new AuthError(
+        message,
+        AuthErrorCodes.NETWORK_ERROR,
+        true
+      );
     }
-
-    if (error.status === 401 || error.message?.includes('token')) {
-      return { type: this.ERROR_TYPES.EXPIRED_TOKEN, message: 'Authentication required' };
-    }
-
-    if (error.status === 403) {
-      return { type: this.ERROR_TYPES.REVOKED, message: 'Permission denied by user' };
-    }
-
-    return { type: this.ERROR_TYPES.UNKNOWN, message: error.message || 'Authentication failed' };
   }
 
-  static async handleAuthError(error, retryCount = 0) {
-    const { type, message } = this.parseError(error);
-
-    switch (type) {
-      case this.ERROR_TYPES.EXPIRED_TOKEN:
-        // Try to refresh the token
-        if (retryCount < 1) {
-          const newToken = await refreshTokenHandler.refreshAccessToken();
-          return newToken;
-        }
-        // Fall through to prompt re-authentication
-
-      case this.ERROR_TYPES.INVALID_GRANT:
-      case this.ERROR_TYPES.REVOKED:
-        // Clear tokens and prompt user to re-authenticate
-        await tokenManager.clearTokens();
-        await this.promptReAuthentication();
-        break;
-
-      case this.ERROR_TYPES.NETWORK:
-        // Implement retry with exponential backoff
-        if (retryCount < 3) {
-          await this.delay(Math.pow(2, retryCount) * 1000);
-          return this.handleAuthError(error, retryCount + 1);
-        }
-        break;
-
-      default:
-        console.error('Unhandled auth error:', error);
-    }
-
-    throw new Error(message);
-  }
-
-  static delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  static async promptReAuthentication() {
-    // Notify user and trigger auth flow
-    chrome.runtime.sendMessage({
-      type: 'AUTH_REQUIRED',
-      message: 'Please re-authenticate to continue'
-    });
-  }
+  return new AuthError(
+    'An unexpected error occurred',
+    AuthErrorCodes.UNKNOWN,
+    true
+  );
 }
 ```
 
 ### Token Revocation
 
-Always implement proper token revocation on logout:
+Proper token revocation is critical when users log out or when security concerns arise:
 
-```javascript
-async function logout() {
-  const { access_token } = await chrome.storage.session.get('access_token');
+```typescript
+// auth/revocation.ts
+export class TokenRevocation {
+  private readonly GOOGLE_REVOKE_ENDPOINT = 
+    'https://oauth2.googleapis.com/revoke';
 
-  if (access_token) {
-    // Revoke with Google
+  async revokeGoogleToken(accessToken: string): Promise<boolean> {
     try {
-      await fetch(`https://oauth2.googleapis.com/revoke?token=${access_token}`);
-    } catch (e) {
-      console.warn('Token revocation failed:', e);
+      const response = await fetch(
+        `${this.GOOGLE_REVOKE_ENDPOINT}?token=${encodeURIComponent(accessToken)}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      );
+
+      return response.ok;
+    } catch (error) {
+      console.error('Token revocation failed:', error);
+      return false;
     }
   }
 
-  // Clear all stored tokens
-  await tokenManager.clearTokens();
+  async revokeAllTokens(
+    provider: string,
+    tokenStorage: SecureTokenStorage
+  ): Promise<void> {
+    const tokens = await tokenStorage.getTokens(provider);
+    
+    if (tokens?.accessToken) {
+      // Attempt to revoke with provider (best effort)
+      if (provider === 'google') {
+        await this.revokeGoogleToken(tokens.accessToken);
+      }
+    }
 
-  // Update UI to reflect logged-out state
-  chrome.runtime.sendMessage({ type: 'LOGOUT_COMPLETE' });
+    // Clear local tokens
+    await tokenStorage.clearTokens(provider);
+  }
+}
+```
+
+### Implementing Retry Logic with Exponential Backoff
+
+```typescript
+// auth/retry.ts
+export async function withRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries = 3,
+  baseDelay = 1000
+): Promise<T> {
+  let lastError: Error | null = null;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error as Error;
+      
+      // Don't retry on non-retryable errors
+      if (error instanceof AuthError && !error.recoverable) {
+        throw error;
+      }
+
+      // Exponential backoff
+      const delay = baseDelay * Math.pow(2, attempt);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError;
 }
 ```
 
@@ -711,207 +929,210 @@ async function logout() {
 
 ## Real-World Implementation Example
 
-This section provides a complete, production-ready authentication module that combines all the concepts covered in this guide.
+This section provides a complete, production-ready authentication system that combines all the concepts covered in this guide.
 
 ### Complete Auth Module
 
-```javascript
-// auth/AuthManager.js
+```typescript
+// auth/index.ts
+import { GoogleAuth } from './google-auth';
+import { GitHubAuth } from './github-auth';
+import { SecureTokenStorage } from './token-storage';
+import { TokenManager } from './token-refresh';
+import { withRetry } from './retry';
+import { TokenRevocation } from './revocation';
+
+export interface AuthProvider {
+  name: string;
+  authenticate(): Promise<string | null>;
+  getUserInfo(accessToken: string): Promise<Record<string, unknown> | null>;
+}
+
+export interface AuthConfig {
+  google?: {
+    clientId: string;
+    scopes: string[];
+  };
+  github?: {
+    clientId: string;
+    clientSecret: string;
+    scopes: string[];
+  };
+}
 
 export class AuthManager {
-  constructor(config) {
-    this.config = config;
-    this.tokenManager = new TokenManager();
-    this.refreshHandler = new RefreshTokenHandler(this.tokenManager);
-    this.pkceFlow = new PKCEAuthFlow();
-  }
+  private providers: Map<string, AuthProvider>;
+  private tokenStorage: SecureTokenStorage;
+  private tokenRevocation: TokenRevocation;
 
-  // Main entry point for authentication
-  async authenticate(provider = 'google') {
-    try {
-      if (provider === 'google') {
-        return await this.authenticateGoogle();
-      } else {
-        return await this.authenticateWithProvider(provider);
-      }
-    } catch (error) {
-      throw AuthErrorHandler.handleAuthError(error);
+  constructor(config: AuthConfig) {
+    this.providers = new Map();
+    this.tokenStorage = new SecureTokenStorage();
+    this.tokenRevocation = new TokenRevocation();
+
+    // Initialize providers based on config
+    if (config.google) {
+      const googleAuth = new GoogleAuth(config.google);
+      this.providers.set('google', {
+        name: 'Google',
+        authenticate: () => googleAuth.getToken(true),
+        getUserInfo: async (token) => {
+          const response = await fetch(
+            'https://www.googleapis.com/oauth2/v2/userinfo',
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          return response.ok ? response.json() : null;
+        }
+      });
     }
-  }
 
-  // Google OAuth using getAuthToken
-  async authenticateGoogle() {
-    return new Promise((resolve, reject) => {
-      chrome.identity.getAuthToken(
-        { interactive: true },
-        async (token) => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-            return;
-          }
-
-          await this.tokenManager.storeTokens({
-            access_token: token,
-            expires_at: Date.now() + 3600000 // 1 hour
+    if (config.github) {
+      const githubAuth = new GitHubAuth({
+        ...config.github,
+        redirectUri: `https://${chrome.runtime.id}.chromiumapp.org/github`
+      });
+      this.providers.set('github', {
+        name: 'GitHub',
+        authenticate: () => githubAuth.authenticate(),
+        getUserInfo: async (token) => {
+          const response = await fetch('https://api.github.com/user', {
+            headers: { Authorization: `Bearer ${token}` }
           });
-
-          resolve({ access_token: token });
+          return response.ok ? response.json() : null;
         }
-      );
-    });
+      });
+    }
   }
 
-  // Third-party OAuth using launchWebAuthFlow with PKCE
-  async authenticateWithProvider(providerConfig) {
-    const authUrl = await this.pkceFlow.getAuthUrl(providerConfig);
-
-    return new Promise((resolve, reject) => {
-      chrome.identity.launchWebAuthFlow(
-        { url: authUrl, interactive: true },
-        async (redirectUrl) => {
-          if (chrome.runtime.lastError || !redirectUrl) {
-            reject(chrome.runtime.lastError || new Error('Auth flow cancelled'));
-            return;
-          }
-
-          try {
-            const url = new URL(redirectUrl);
-            const code = url.searchParams.get('code');
-            const error = url.searchParams.get('error');
-
-            if (error) {
-              throw new Error(`OAuth error: ${error}`);
-            }
-
-            const tokens = await this.pkceFlow.exchangeCode(code);
-            await this.tokenManager.storeTokens(tokens);
-
-            resolve(tokens);
-          } catch (err) {
-            reject(err);
-          }
-        }
-      );
-    });
-  }
-
-  // Get a valid token, refreshing if necessary
-  async getValidToken() {
-    const token = await this.tokenManager.getAccessToken();
-    if (token) {
-      return token;
+  async login(providerName: string): Promise<boolean> {
+    const provider = this.providers.get(providerName);
+    if (!provider) {
+      console.error(`Provider ${providerName} not configured`);
+      return false;
     }
 
-    return this.refreshHandler.refreshAccessToken();
-  }
-
-  // Logout and revoke tokens
-  async logout() {
-    await this.logout();
-  }
-}
-
-// Usage example
-const authManager = new AuthManager({
-  providers: {
-    google: { clientId: 'GOOGLE_CLIENT_ID' },
-    github: { clientId: 'GITHUB_CLIENT_ID' }
-  }
-});
-
-// In your extension code
-async function makeAuthenticatedRequest(url, options = {}) {
-  const token = await authManager.getValidToken();
-
-  return fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      Authorization: `Bearer ${token}`
-    }
-  });
-}
-```
-
-### Integration with Background Service Worker
-
-```javascript
-// background.js
-import { AuthManager } from './auth/AuthManager.js';
-
-const authManager = new AuthManager(CONFIG);
-
-// Handle messages from popup, content scripts, etc.
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  switch (message.type) {
-    case 'GET_AUTH_STATUS':
-      authManager.getValidToken()
-        .then(token => sendResponse({ authenticated: !!token }))
-        .catch(() => sendResponse({ authenticated: false }));
-      return true; // Async response
-
-    case 'AUTHENTICATE':
-      authManager.authenticate(message.provider)
-        .then(tokens => sendResponse({ success: true, tokens }))
-        .catch(error => sendResponse({ success: false, error: error.message }));
-      return true;
-
-    case 'LOGOUT':
-      authManager.logout()
-        .then(() => sendResponse({ success: true }))
-        .catch(error => sendResponse({ success: false, error: error.message }));
-      return true;
-  }
-});
-
-// Periodic token refresh check
-chrome.alarms.create('tokenRefresh', { periodInMinutes: 30 });
-
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'tokenRefresh') {
     try {
-      await authManager.getValidToken();
+      const token = await withRetry(() => provider.authenticate());
+      if (!token) return false;
+
+      // Store tokens securely
+      await this.tokenStorage.storeTokens(providerName, {
+        accessToken: token,
+        expiresAt: Date.now() + 3600 * 1000, // 1 hour
+        tokenType: 'Bearer',
+        scope: ''
+      });
+
+      return true;
     } catch (error) {
-      console.warn('Token refresh failed:', error);
+      console.error('Login failed:', error);
+      return false;
     }
   }
+
+  async logout(providerName: string): Promise<void> {
+    await this.tokenRevocation.revokeAllTokens(providerName, this.tokenStorage);
+  }
+
+  async getAuthenticatedUser(
+    providerName: string
+  ): Promise<Record<string, unknown> | null> {
+    const provider = this.providers.get(providerName);
+    if (!provider) return null;
+
+    const tokens = await this.tokenStorage.getTokens(providerName);
+    if (!tokens) return null;
+
+    return provider.getUserInfo(tokens.accessToken);
+  }
+
+  isAuthenticated(providerName: string): Promise<boolean> {
+    return this.tokenStorage.getTokens(providerName).then(
+      tokens => tokens !== null
+    );
+  }
+}
+```
+
+### Usage in Background Script
+
+```typescript
+// background.ts
+import { AuthManager, AuthConfig } from './auth';
+
+const authConfig: AuthConfig = {
+  google: {
+    clientId: 'your-google-client-id.apps.googleusercontent.com',
+    scopes: [
+      'https://www.googleapis.com/auth/drive.file',
+      'https://www.googleapis.com/auth/gmail.readonly'
+    ]
+  },
+  github: {
+    clientId: 'your-github-client-id',
+    clientSecret: 'your-github-client-secret',
+    scopes: ['user:email', 'repo']
+  }
+};
+
+const authManager = new AuthManager(authConfig);
+
+// Handle messages from popup or content scripts
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  (async () => {
+    switch (message.action) {
+      case 'login':
+        const success = await authManager.login(message.provider);
+        sendResponse({ success });
+        break;
+        
+      case 'logout':
+        await authManager.logout(message.provider);
+        sendResponse({ success: true });
+        break;
+        
+      case 'getUser':
+        const user = await authManager.getAuthenticatedUser(message.provider);
+        sendResponse({ user });
+        break;
+        
+      case 'isAuthenticated':
+        const authenticated = await authManager.isAuthenticated(message.provider);
+        sendResponse({ authenticated });
+        break;
+    }
+  })();
+  
+  return true; // Keep message channel open for async response
 });
 ```
+
+---
+
+## Security Considerations
+
+When implementing OAuth2 in Chrome extensions, security should be your top priority. Review our comprehensive security guides to ensure your implementation follows best practices:
+
+- [Security Best Practices](../guides/security-best-practices.md) — Foundational security principles for extensions
+- [Secure Message Passing](../guides/chrome-extension-secure-message-passing.md) — Safely transmit authentication data between extension contexts
+
+### Key Security Takeaways
+
+1. **Never store refresh tokens in chrome.storage** — Use secure backend storage or managed storage
+2. **Always use PKCE** — It prevents authorization code interception attacks
+3. **Implement token expiration handling** — Check token expiry before making API calls
+4. **Validate all messages** — Authenticate and validate messages between extension contexts
+5. **Use HTTPS exclusively** — Never transmit tokens over unencrypted connections
+6. **Implement proper error handling** — Handle authentication failures gracefully without exposing sensitive information
 
 ---
 
 ## Conclusion
 
-Authentication in Chrome extensions requires careful consideration of security, user experience, and provider compatibility. The chrome.identity API provides robust primitives for OAuth2 authentication, but understanding when to use `getAuthToken` versus `launchWebAuthFlow` is crucial for building reliable extensions.
+OAuth2 authentication in Chrome extensions requires careful implementation to balance user experience with security. The chrome.identity API provides robust mechanisms through `getAuthToken` for Google services and `launchWebAuthFlow` for third-party providers. By following the patterns and best practices outlined in this guide, you can build secure, reliable authentication systems that protect user credentials while providing seamless integration with popular OAuth2 providers.
 
-Key takeaways from this guide:
-
-- Use **getAuthToken** for simple Google API integration with automatic token management
-- Use **launchWebAuthFlow** for third-party providers and custom OAuth flows
-- Implement **PKCE** for enhanced security, especially with sensitive permissions
-- Design **robust token storage** using session and local storage appropriately
-- Handle **refresh token rotation** proactively to maintain long-lived sessions
-- Build **comprehensive error handling** to gracefully manage auth failures
-- Create **provider-agnostic abstractions** for multi-provider support
-
-For additional security considerations and messaging patterns, refer to our [Security Best Practices](/guides/security-best-practices.md) and [Secure Message Passing](/guides/chrome-extension-secure-message-passing.md) guides.
+Remember to always implement proper token storage, refresh token rotation, and comprehensive error handling. As authentication standards evolve, keep your implementation updated to address new security requirements and best practices.
 
 ---
 
-## Related Guides
-
-- [Security Best Practices](/guides/security-best-practices.md)
-- [Chrome Extension Secure Message Passing](/guides/chrome-extension-secure-message-passing.md)
-- [Background Service Worker Patterns](/guides/background-patterns.md)
-- [Advanced Messaging Patterns](/guides/advanced-messaging-patterns.md)
-
-## Related Articles
-
-- [Chrome Extension Architecture Patterns](/guides/architecture-patterns.md)
-- [Service Worker Lifecycle](/guides/service-worker-lifecycle.md)
-- [Extension Performance Optimization](/guides/performance-optimization.md)
-- [Security Hardening Guide](/guides/security-hardening.md)
-
----
-
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at [zovo.one](https://zovo.one).*
