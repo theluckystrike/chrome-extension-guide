@@ -260,4 +260,4 @@ Start with the default settings, explore the configuration options to match your
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Built by theluckystrike at zovo.one*
