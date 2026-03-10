@@ -430,7 +430,7 @@ Remember that security is not a single feature but an ongoing commitment. Regula
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
 
 ---
 ## Turn Your Extension Into a Business
