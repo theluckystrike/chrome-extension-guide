@@ -317,11 +317,13 @@ Start by auditing your current web presence. Do you have a dedicated landing pag
 
 Building your extension's Google Search presence is an ongoing effort. To continue learning and improving your SEO strategy, explore these related guides:
 
-For optimizing your Chrome Web Store listing alongside your Google SEO efforts, read our [Chrome Web Store Listing Optimization Guide](/chrome-extension-guide/guides/chrome-web-store-listing-optimization-double-install-rate/) to maximize conversions from both channels.
+For understanding how CWS search works and optimizing your store listing, read our [Chrome Web Store SEO Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/) to master both Google Search and CWS visibility.
 
-If you are looking to create a high-converting landing page that ranks well in Google, check out our comprehensive [Extension Landing Page Guide](/chrome-extension-guide/guides/extension-landing-page-convert-visitors-to-installs/) for detailed implementation strategies.
+For optimizing your Chrome Web Store listing alongside your Google SEO efforts, read our [Chrome Web Store Listing Optimization Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) to maximize conversions from both channels.
 
-For monetization strategies that work synergistically with your SEO traffic, explore our [Extension Monetization Playbook](/chrome-extension-guide/guides/extension-monetization-strategies-that-work-2025/) to learn how to convert organic visitors into revenue.
+If you are looking to create a high-converting landing page that ranks well in Google, check out our comprehensive [Extension Landing Page Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/02/23/chrome-extension-landing-page-convert-visitors-to-installs/) for detailed implementation strategies.
+
+For monetization strategies that work synergistically with your SEO traffic, explore our [Extension Monetization Playbook](https://theluckystrike.github.io/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) to learn how to convert organic visitors into revenue.
 
 ---
 
