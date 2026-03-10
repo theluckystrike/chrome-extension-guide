@@ -1,47 +1,233 @@
 ---
 layout: default
 title: "Chrome Extension i18n: Complete Internationalization Guide"
-description: "Master Chrome extension internationalization with this comprehensive guide covering chrome.i18n API, locales, messages.json, RTL support, pluralization, and translation workflow."
+description: "Learn how to internationalize your Chrome extension with this comprehensive guide covering chrome.i18n API, locales, RTL support, pluralization, and localization tools."
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-internationalization-i18n/"
 ---
 
 # Chrome Extension i18n: Complete Internationalization Guide
 
-Internationalization (i18n) is essential for reaching a global audience with your Chrome extension. This guide covers everything you need to build multilingual extensions using Chrome's built-in i18n infrastructure, from basic setup to advanced patterns like RTL support and pluralization.
+Internationalization (i18n) transforms your Chrome extension from a single-language product into a global tool that serves users worldwide. When you invest in proper internationalization, you unlock access to billions of potential users who prefer interacting with applications in their native language. This guide covers everything you need to build, test, and maintain multilingual Chrome extensions using the chrome.i18n API and related tools.
 
----
+## Understanding Chrome Extension Internationalization
 
-## chrome.i18n API Basics {#chrome-i18n-api-basics}
+Chrome extensions support internationalization through a built-in system that separates translatable content from your code. This approach allows you to add new languages without modifying your JavaScript, HTML, or CSS files. The system uses message files stored in a `_locales` directory, with each language having its own subdirectory containing a `messages.json` file.
 
-Chrome provides a powerful `chrome.i18n` API specifically designed for extension internationalization. This API enables you to retrieve translated strings, detect user languages, and handle complex localization scenarios without external dependencies.
+The internationalization system works across all extension components, including the popup, options page, background service worker, content scripts, and even the Chrome Web Store listing. By implementing i18n correctly, you ensure consistency in your user's experience regardless of their language preference.
 
-### Core API Methods
+## The _locales Directory Structure
 
-The `chrome.i18n` API provides several key methods for working with translations:
+The `_locales` directory sits at the root of your extension folder and contains language-specific subdirectories. Each subdirectory uses a two-letter language code following the ISO 639-1 standard, with optional region codes for regional variants. For example, `en` for English, `es` for Spanish, `pt_BR` for Brazilian Portuguese, and `zh_CN` for Simplified Chinese.
 
-```javascript
-// Get a translated message by its key
-const greeting = chrome.i18n.getMessage("greeting", "User");
+Your extension directory structure should look like this:
 
-// Get the language code for the extension's current locale
-const currentLocale = chrome.i18n.getUILanguage();
-
-// Get all supported language codes
-chrome.i18n.getAcceptLanguages((languages) => {
-  console.log("Supported languages:", languages);
-});
-
-// Detect the language of a specific string
-chrome.i18n.detectLanguage("Hello World", (result) => {
-  console.log("Detected:", result.languages);
-});
+```
+my-extension/
+├── _locales/
+│   ├── en/messages.json
+│   ├── es/messages.json
+│   ├── fr/messages.json
+│   ├── de/messages.json
+│   ├── ja/messages.json
+│   └── zh_CN/messages.json
+├── manifest.json
+├── popup.html
+├── popup.js
+├── background.js
+├── styles.css
+└── icons/
+    ├── icon16.png
+    ├── icon48.png
+    └── icon128.png
 ```
 
-The `getMessage()` method is the primary way to retrieve translations. It accepts the message key as the first argument and optional substitution values as the second argument. When the message isn't found, Chrome returns an empty string or the message key itself (depending on your manifest configuration).
+The `default_locale` field in your manifest.json specifies the fallback language when a translation is missing. Always use a complete translation file for your default locale, as it serves as the source of truth for your messages.
+
+## messages.json Format and Placeholders
+
+The messages.json file contains key-value pairs where each key identifies a translatable string. Each message object includes the `message` field containing the actual translated text, and optionally a `description` field that helps translators understand the context.
+
+```json
+{
+  "extension_name": {
+    "message": "My Productivity Extension",
+    "description": "The name of the extension shown in the Chrome Web Store"
+  },
+  "extension_description": {
+    "message": "Boost your productivity with smart task management",
+    "description": "Short description of what the extension does"
+  },
+  "welcome_message": {
+    "message": "Welcome, $USER_NAME$!",
+    "description": "Greeting message when user opens the extension"
+  },
+  "task_count": {
+    "message": "You have $COUNT$ tasks remaining",
+    "description": "Message showing number of pending tasks"
+  },
+  "item_price": {
+    "message": "Price: $PRICE$",
+    "description": "Label for displaying item price",
+    "placeholders": {
+      "PRICE": {
+        "content": "$1",
+        "example": "$9.99"
+      }
+    }
+  }
+}
+```
+
+### Placeholder Types
+
+Chrome's i18n system supports both named and positional placeholders. Named placeholders use the `$NAME$` syntax and are defined in the `placeholders` object. Positional placeholders use `$1`, `$2`, and so on, representing the first, second, and additional arguments passed to the getMessage function.
+
+Named placeholders improve code readability and make translations more maintainable. Positional placeholders are simpler but can become confusing with multiple parameters. For complex messages with many variables, prefer named placeholders.
+
+## chrome.i18n API Basics
+
+The chrome.i18n API provides all the functionality you need to retrieve translations and detect user language preferences. This API is available in both background scripts and content scripts without requiring any special permissions.
+
+### getMessage()
+
+The primary function you'll use is `chrome.i18n.getMessage(messageName, substitutions)`. This retrieves the translated string for the specified message name, optionally substituting placeholder values.
+
+```javascript
+// Basic message retrieval
+const greeting = chrome.i18n.getMessage("welcome_message");
+console.log(greeting); // Output: "Welcome, $USER_NAME$!" (or translated version)
+
+// With substitutions
+const userName = "John";
+const personalizedGreeting = chrome.i18n.getMessage("welcome_message", userName);
+console.log(personalizedGreeting); // Output: "Welcome, John!"
+
+// Multiple placeholders
+const taskCount = 5;
+const taskMessage = chrome.i18n.getMessage("task_count", taskCount);
+console.log(taskMessage); // Output: "You have 5 tasks remaining"
+```
+
+### Detecting User Language
+
+You can determine the user's preferred language using `chrome.i18n.getAcceptLanguages()` and `chrome.i18n.getUILanguage()`. The former returns an array of language codes sorted by user preference, while the latter returns the Chrome UI language.
+
+```javascript
+// Get all accepted languages
+chrome.i18n.getAcceptLanguages((languages) => {
+  console.log("User's preferred languages:", languages);
+  // Example: ["en-US", "en", "es", "fr"]
+});
+
+// Get the UI language
+const uiLanguage = chrome.i18n.getUILanguage();
+console.log("Chrome UI language:", uiLanguage); // Example: "en-US"
+```
+
+### Error Handling
+
+When a message is not found, getMessage returns an empty string by default. You can change this behavior by providing a fallback message as the third parameter:
+
+```javascript
+const message = chrome.i18n.getMessage("nonexistent_key", null, "Default text");
+// Returns "Default text" if the key doesn't exist
+```
+
+## Using getMessage() in JavaScript, HTML, CSS, and Manifest
+
+### JavaScript Integration
+
+In JavaScript files, you can call chrome.i18n.getMessage directly. For extension popups and options pages, you often want to translate content when the page loads:
+
+```javascript
+// popup.js or options.js
+document.addEventListener("DOMContentLoaded", () => {
+  // Set document direction for RTL languages
+  document.documentElement.dir = chrome.i18n.getMessage("@@bidi_dir") || "ltr";
+  document.documentElement.lang = chrome.i18n.getMessage("@@ui_language");
+
+  // Translate static elements
+  document.getElementById("title").textContent = chrome.i18n.getMessage("extension_name");
+  document.getElementById("description").textContent = chrome.i18n.getMessage("extension_description");
+
+  // Update dynamic content
+  updateTaskList();
+});
+
+function updateTaskList() {
+  const tasks = getTasks();
+  const message = chrome.i18n.getMessage("task_count", tasks.length);
+  document.getElementById("task-count").textContent = message;
+}
+```
+
+### HTML Integration
+
+For HTML files, you can use the `__MSG_message_name__` syntax to embed translations directly in your markup. This approach works before any JavaScript runs:
+
+```html
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1 id="title">__MSG_extension_name__</h1>
+  <p id="description">__MSG_extension_description__</p>
+  <button id="action-btn">__MSG_action_button__</button>
+  <span id="status">__MSG_status_idle__</span>
+</body>
+</html>
+```
+
+This syntax works in any HTML attribute as well, making it easy to translate placeholders, titles, and alt text:
+
+```html
+<input type="text" placeholder="__MSG_search_placeholder__" title="__MSG_search_title__">
+<img src="icon.png" alt="__MSG_icon_description__">
+```
+
+### CSS Integration
+
+CSS files don't support direct message substitution, but you can use JavaScript to apply language-specific styles. For RTL languages, Chrome automatically applies the correct text direction, but you may need additional styling:
+
+```javascript
+// Apply RTL styles
+function applyRTLStyles() {
+  const isRTL = chrome.i18n.getMessage("@@bidi_dir") === "rtl";
+  
+  if (isRTL) {
+    document.body.classList.add("rtl");
+    document.body.style.direction = "rtl";
+    document.body.style.textAlign = "right";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", applyRTLStyles);
+```
+
+```css
+/* styles.css */
+.rtl .sidebar {
+  left: auto;
+  right: 0;
+}
+
+.rtl .icon-with-text {
+  flex-direction: row-reverse;
+}
+
+.rtl .menu {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 16px;
+}
+```
 
 ### Manifest Configuration
 
-To enable internationalization, you must specify default_locale in your manifest.json:
+In manifest.json, use the `__MSG_message_name__` syntax for translatable fields:
 
 ```json
 {
@@ -53,744 +239,332 @@ To enable internationalization, you must specify default_locale in your manifest
 }
 ```
 
-The `__MSG_*__` syntax tells Chrome to replace these placeholders with translations from your messages.json file. This applies to the name, description, and several other manifest fields.
+Chrome also provides special system messages prefixed with `@@`:
 
----
+- `@@extension_id`: The unique ID of your extension
+- `@@ui_language`: The current UI language code
+- `@@bidi_dir`: Either "rtl" or "ltr" based on the language direction
 
-## _locales Directory Structure {#locales-directory-structure}
+## RTL Language Support
 
-The `_locales` directory contains all your translation files. Each supported language has its own subdirectory named with the language code (ISO 639-1 format).
+Right-to-left (RTL) languages include Arabic, Hebrew, Persian, Urdu, and others. Proper RTL support requires more than just translating text—it involves mirroring the entire user interface to feel natural for RTL users.
 
-### Directory Layout
+Chrome's i18n system handles direction automatically when you use the `@@bidi_dir` message. The system detects whether the current language is RTL and sets the direction accordingly. However, you need to design your UI to work in both directions.
 
-```
-_extension/
-├── _locales/
-│   ├── en/
-│   │   └── messages.json
-│   ├── es/
-│   │   └── messages.json
-│   ├── fr/
-│   │   └── messages.json
-│   ├── de/
-│   │   └── messages.json
-│   ├── ja/
-│   │   └── messages.json
-│   ├── ar/
-│   │   └── messages.json
-│   └── zh_CN/
-│       └── messages.json
-├── manifest.json
-├── background.js
-└── ...
-```
+### Design Principles for RTL
 
-Each locale directory contains a `messages.json` file with translations for that language. Chrome loads translations from the directory matching the user's Chrome UI language, falling back to the default_locale if needed.
-
-### Language Code Conventions
-
-Use standard BCP 47 language tags for locale directories:
-
-| Language | Directory | Notes |
-|----------|-----------|-------|
-| English | `en` | Default (required) |
-| Spanish | `es` | |
-| French | `fr` | |
-| German | `de` | |
-| Japanese | `ja` | |
-| Chinese (Simplified) | `zh_CN` | |
-| Arabic | `ar` | RTL language |
-| Hebrew | `he` | RTL language |
-| Portuguese (Brazil) | `pt_BR` | |
-
----
-
-## messages.json Format and Placeholders {#messages-json-format}
-
-The messages.json file contains all translation strings for a locale. Each message has a unique key and supports various features including placeholders, pluralization, and gender-specific forms.
-
-### Basic Structure
-
-```json
-{
-  "extension_name": {
-    "message": "My Extension",
-    "description": "The name of the extension shown in the Chrome Web Store"
-  },
-  "greeting": {
-    "message": "Hello, $USER$!",
-    "description": "Greeting message for the user"
-  },
-  "items_count": {
-    "message": "You have $COUNT$ item(s)",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "5"
-      }
-    }
-  }
-}
-```
-
-### Placeholder Types
-
-Chrome i18n supports several placeholder types:
-
-**Direct Substitution** — Use `$1`, `$2`, etc. for positional arguments:
-
-```json
-{
-  "welcome_message": {
-    "message": "Welcome, $1! You have $2 notifications.",
-    "description": "Welcome message with user name and notification count"
-  }
-}
-```
-
-Usage: `chrome.i18n.getMessage("welcome_message", ["John", 3])`
-
-**Named Placeholders** — More readable and maintainable:
-
-```json
-{
-  "bookmarks_saved": {
-    "message": "$NUM_BOOKMARKS$ bookmarks saved",
-    "placeholders": {
-      "num_bookmarks": {
-        "content": "$1",
-        "example": "42"
-      }
-    }
-  }
-}
-```
-
-Usage: `chrome.i18n.getMessage("bookmarks_saved", [bookmarkCount])`
-
----
-
-## getMessage() Usage in JavaScript, HTML, and CSS {#getmessage-usage}
-
-### JavaScript Usage
-
-In JavaScript files, use `chrome.i18n.getMessage()` directly:
-
-```javascript
-// Simple message
-document.getElementById("title").textContent = chrome.i18n.getMessage("extension_title");
-
-// With substitution
-const message = chrome.i18n.getMessage("item_count", [itemCount]);
-document.getElementById("status").textContent = message;
-
-// Setting badge text
-chrome.action.setBadgeText({ text: chrome.i18n.getMessage("badge_new") });
-```
-
-### HTML Usage
-
-In HTML files, you can use the `__MSG_*__` syntax directly:
-
-```html
-<!-- In popup.html or options.html -->
-<h1 __MSG_extension_title__></h1>
-<button __MSG_save_button__></button>
-
-<!-- For dynamic content, use JavaScript -->
-<script>
-  document.querySelector(".error").textContent = chrome.i18n.getMessage("error_generic");
-</script>
-```
-
-### CSS Usage
-
-CSS files don't support the `__MSG_*__` syntax directly. Instead, use JavaScript to apply translated content:
+Always use CSS logical properties instead of physical ones. Logical properties like `margin-inline-start` and `padding-inline-end` automatically adapt to the text direction, while physical properties like `margin-left` always refer to the left side regardless of direction.
 
 ```css
-/* styles.css */
-[data-i18n="title"]::before {
-  content: attr(data-i18n-text);
-}
-```
-
-```javascript
-// Apply translations to elements with data-i18n attribute
-function applyTranslations() {
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.getAttribute("data-i18n");
-    element.setAttribute("data-i18n-text", chrome.i18n.getMessage(key));
-  });
-}
-```
-
-### Manifest Usage
-
-The manifest.json supports `__MSG_*__` syntax for specific fields:
-
-```json
-{
-  "name": "__MSG_extension_name__",
-  "description": "__MSG_extension_description__",
-  "default_title": "__MSG_default_toolbar_title__"
-}
-```
-
----
-
-## RTL Language Support {#rtl-language-support}
-
-Right-to-left (RTL) languages like Arabic, Hebrew, and Persian require special handling. Chrome extensions can detect RTL languages and automatically adjust layouts.
-
-### Detecting RTL Languages
-
-```javascript
-function isRTL() {
-  const language = chrome.i18n.getUILanguage();
-  const rtlLanguages = ["ar", "he", "fa", "ur"];
-  
-  // Check if the language code starts with an RTL language
-  return rtlLanguages.some((rtl) => language.startsWith(rtl));
-}
-
-// Apply RTL styles dynamically
-if (isRTL()) {
-  document.body.classList.add("rtl");
-}
-```
-
-### CSS RTL Patterns
-
-```css
-/* Default (LTR) styles */
-.container {
-  direction: ltr;
-  text-align: left;
-}
-
-/* RTL overrides */
-.rtl .container {
-  direction: rtl;
-  text-align: right;
-}
-
-.rtl .icon-arrow {
-  transform: scaleX(-1);
-}
-
-.rtl .margin-start {
-  margin-left: 0;
-  margin-right: 16px;
-}
-
-.rtl .margin-end {
-  margin-right: 0;
-  margin-left: 16px;
-}
-```
-
-Use logical properties (inline-start, inline-end, margin-block-start) instead of directional properties for better RTL support:
-
-```css
-/* Modern approach using logical properties */
+/* Good: Logical properties */
 .container {
   margin-inline-start: 16px;
   padding-inline-end: 24px;
-  border-inline-width: 1px;
+  border-inline-start: 1px solid #ccc;
+}
+
+/* Avoid: Physical properties */
+.container {
+  margin-left: 16px;
+  padding-right: 24px;
+  border-left: 1px solid #ccc;
 }
 ```
 
----
+For flexbox and grid layouts, use `start` and `end` values instead of `left` and `right`:
 
-## Pluralization Patterns {#pluralization-patterns}
+```css
+.flex-container {
+  justify-content: flex-start;  /* Starts at the logical beginning */
+  align-items: flex-end;         /* Aligns to the logical end */
+}
+```
 
-Different languages have different pluralization rules. Chrome i18n supports pluralization through special message formats.
+### Testing RTL Support
 
-### Basic Pluralization
+Test your extension with Arabic or Hebrew to ensure all UI elements render correctly. Pay special attention to:
+
+- Icons that convey direction (arrows, back/forward buttons)
+- Form inputs and their labels
+- Tables and data grids
+- Navigation menus
+- Dialogs and popups
+
+## Pluralization Patterns
+
+Different languages handle plurals differently. English has two forms (one and other), while Slavic languages like Russian have three forms, and Arabic has six. Chrome's i18n system handles this complexity through the `PluralMessage` syntax.
+
+### Defining Plural Messages
+
+In your messages.json, use the `pluralMessage` field to define plural-aware translations:
 
 ```json
 {
-  "items_selected": {
-    "message": "You selected $COUNT$ item",
+  "item_count": {
+    "message": "You have $COUNT$ items",
     "placeholders": {
-      "count": {
+      "COUNT": {
         "content": "$1",
         "example": "5"
       }
     }
   },
-  "items_selected_plural": {
-    "message": "You selected $COUNT$ items"
+  "item_count_plural": {
+    "pluralMessage": "You have $COUNT$ items",
+    "placeholders": {
+      "COUNT": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
   }
 }
 ```
 
-Wait for the proper pluralization API — Chrome i18n uses CLDR plural categories. For extensions, implement custom plural logic:
+### Using Plural Messages
+
+The getMessage function automatically selects the correct plural form based on the count value:
 
 ```javascript
-function getPluralMessage(key, count, translations) {
-  const lang = chrome.i18n.getUILanguage();
-  const pluralForm = getPluralForm(lang, count);
-  return translations[`${key}_${pluralForm}`] || translations[key];
-}
+// English: 1 = "item", anything else = "items"
+const message1 = chrome.i18n.getMessage("item_count_plural", 1);
+// Output: "You have 1 item"
 
-function getPluralForm(lang, count) {
-  // English: one, other
-  if (lang.startsWith("en")) {
-    return count === 1 ? "one" : "other";
+const message5 = chrome.i18n.getMessage("item_count_plural", 5);
+// Output: "You have 5 items"
+```
+
+For languages with complex plural rules like Russian, Chrome automatically applies the correct form:
+
+```json
+{
+  "unread_messages": {
+    "message": "You have $COUNT$ unread message",
+    "other": "You have $COUNT$ unread messages"
   }
-  // Russian: one, few, many, other
-  if (lang.startsWith("ru")) {
-    const mod10 = count % 10;
-    const mod100 = count % 100;
-    if (mod10 === 1 && mod100 !== 11) return "one";
-    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "few";
-    if (mod10 === 0 || mod10 >= 5 || mod10 >= 11 && mod100 >= 15) return "many";
-    return "other";
-  }
-  // Default fallback
-  return count === 1 ? "one" : "other";
 }
 ```
 
----
+## Dynamic Locale Switching
 
-## Dynamic Locale Switching {#dynamic-locale-switching}
+While Chrome extensions typically use the browser's language setting, you may want to allow users to manually select their preferred language. This is common in extensions that offer in-app language switching.
 
-By default, Chrome extensions use the user's Chrome UI language. However, you can implement custom locale switching for extensions that need to support language selection.
+### Storing User Preference
 
-### Getting User Language Preference
-
-```javascript
-// Check current locale
-const currentLocale = chrome.i18n.getUILanguage();
-
-// Get accept languages
-chrome.i18n.getAcceptLanguages((languages) => {
-  console.log("User's preferred languages:", languages);
-});
-```
-
-### Implementing Language Switching
+Store the user's language choice in the extension storage:
 
 ```javascript
-// Store user's language preference
-async function setExtensionLocale(locale) {
-  await chrome.storage.local.set({ extensionLocale: locale });
-  applyLocale(locale);
+// settings.js
+async function setLanguage(langCode) {
+  await chrome.storage.local.set({ preferredLanguage: langCode });
+  applyLanguage(langCode);
 }
 
-function applyLocale(locale) {
-  // Update document direction for RTL languages
-  const rtlLocales = ["ar", "he", "fa", "ur"];
-  document.dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
+function applyLanguage(langCode) {
+  // Update document attributes
+  document.documentElement.lang = langCode;
   
-  // Reload content with new locale
-  refreshContent();
-}
-
-// Load messages for a specific locale
-function loadLocaleMessages(locale) {
-  return fetch(`_locales/${locale}/messages.json`)
-    .then((response) => response.json())
-    .catch(() => fetch("_locales/en/messages.json"));
+  // Determine RTL
+  const rtlLanguages = ["ar", "he", "fa", "ur", "ps", "yi"];
+  document.documentElement.dir = rtlLanguages.includes(langCode) ? "rtl" : "ltr";
+  
+  // Update all translatable elements
+  translatePage();
 }
 ```
 
----
+### Message Lookup with Custom Locale
 
-## Testing Translations {#testing-translations}
+To retrieve messages for a specific locale (different from the user's Chrome language), use the fourth parameter of getMessage:
 
-Testing i18n requires checking all supported languages and verifying that translations display correctly.
+```javascript
+// Get Spanish translation regardless of user language
+const spanishHello = chrome.i18n.getMessage("hello", null, "Default", "es");
+// This requires the Spanish locale to be available
+```
+
+## Testing Translations
+
+Thorough testing ensures your internationalized extension works correctly across all supported languages.
 
 ### Manual Testing
 
-1. **Change Chrome language** — Go to Chrome Settings > Languages and add/test different languages
-2. **Load unpacked extension** — Chrome loads translations from the matching locale directory
-3. **Test all UI elements** — Verify buttons, labels, messages, and tooltips
+Test each language by changing Chrome's language settings:
+
+1. Open Chrome and navigate to Settings > Languages
+2. Add the target language and move it to the top of the list
+3. Restart Chrome
+4. Test your extension in the new language
 
 ### Automated Testing
 
+Create unit tests that verify message files are valid JSON and contain all required keys:
+
 ```javascript
-// Test that all message keys are defined
-async function validateMessages() {
-  const locales = ["en", "es", "fr", "de", "ja", "ar"];
-  const missingKeys = {};
-  
-  for (const locale of locales) {
-    const messages = await loadLocaleMessages(locale);
-    const keys = Object.keys(messages);
-    
-    // Check for missing keys compared to English
-    if (locale !== "en") {
-      const enKeys = Object.keys(await loadLocaleMessages("en"));
-      missingKeys[locale] = enKeys.filter((k) => !keys.includes(k));
-    }
-  }
-  
-  console.log("Missing translations:", missingKeys);
-}
+// tests/i18n.test.js
+const fs = require("fs");
+const path = require("path");
+
+describe("Internationalization", () => {
+  const localesDir = path.join(__dirname, "../_locales");
+  const locales = fs.readdirSync(localesDir);
+
+  const requiredKeys = [
+    "extension_name",
+    "extension_description",
+    "action_button",
+    "settings_title"
+  ];
+
+  locales.forEach((locale) => {
+    const messagesPath = path.join(localesDir, locale, "messages.json");
+    const messages = JSON.parse(fs.readFileSync(messagesPath, "utf8"));
+
+    requiredKeys.forEach((key) => {
+      it(`${locale} should have "${key}" translation`, () => {
+        expect(messages[key]).toBeDefined();
+        expect(messages[key].message).toBeTruthy();
+      });
+    });
+  });
+});
 ```
 
-### Testing RTL Layout
+### Testing for Placeholder Replacements
+
+Verify that all placeholder substitutions work correctly:
 
 ```javascript
-function testRTL() {
-  const testLocales = ["ar", "he", "fa"];
-  const originalLocale = chrome.i18n.getUILanguage();
-  
-  testLocales.forEach((locale) => {
-    // Simulate RTL locale
-    const isRTL = testLocales.includes(locale);
-    console.log(`Locale ${locale} is RTL:`, isRTL);
-    
-    // Verify CSS classes are applied
-    const hasRTLClass = document.body.classList.contains("rtl");
-    console.log(`RTL class applied:`, hasRTLClass);
+// tests/placeholders.test.js
+function testPlaceholderReplacements() {
+  const testCases = [
+    { key: "welcome_message", args: "John", expected: "Welcome, John!" },
+    { key: "task_count", args: 0, expected: "You have 0 tasks" },
+    { key: "task_count", args: 1, expected: "You have 1 task" },
+    { key: "task_count", args: 5, expected: "You have 5 tasks" }
+  ];
+
+  testCases.forEach(({ key, args, expected }) => {
+    const result = chrome.i18n.getMessage(key, args);
+    expect(result).toBe(expected);
   });
 }
 ```
 
----
+## Chrome Web Store Listing Localization
 
-## Chrome Web Store Listing Localization {#cws-listing-localization}
+Your extension's Chrome Web Store listing can be localized to appear differently in each region's store. This goes beyond the in-extension translations and affects how your extension appears in search results and on its store listing page.
 
-The Chrome Web Store (CWS) supports localized listings to reach users in their native language. Each locale can have its own title, description, and promotional material.
+### Localized Store Assets
 
-### Localized Store Listings
+In the Chrome Web Store Developer Dashboard, you can provide localized screenshots, videos, and promotional images. Create region-specific assets that show your extension's UI in that language.
 
-In the Chrome Web Store Developer Dashboard, you can add translations for:
+### Multi-Language Store Descriptions
 
-- **Title** — Up to 75 characters
-- **Description** — Up to 4,000 characters (with formatting)
-- **Promotional tagline** — Short description for store search results
+The developer dashboard allows you to add separate descriptions for each language. Provide thorough, well-written descriptions for each supported language—machine-translated descriptions often appear unprofessional and can hurt conversion rates.
 
-### Store Listing Best Practices
+### Keyword Localization
 
-1. **Prioritize key markets** — Start with English (en), then add languages based on your target audience
-2. **Don't machine translate** — Human translation ensures quality and cultural appropriateness
-3. **Include keywords** — Different languages may use different search terms
-4. **Update consistently** — Keep translations in sync with extension updates
+Research and include popular search terms in each language's store listing. Keywords that work in English may not translate directly, so use tools like the Chrome Web Store's search suggestions to find appropriate terms for each language.
 
-For detailed publishing guidance, see the [Publishing Guide](../publishing/publishing-guide.md) and [Chrome Web Store API](../guides/chrome-web-store-api.md).
+For more detailed guidance on optimizing your store listing, see our [Chrome Web Store Listing Optimization](../publishing/cws-listing-optimization.md) guide.
 
----
+## Localization Tools and Workflows
 
-## Tools: i18n-ally and Crowdin Integration {#tools}
+### VS Code i18n-ally Extension
 
-### VS Code i18n-ally
-
-The i18n-ally extension provides excellent i18n support directly in VS Code:
+The i18n-ally extension provides excellent support for Chrome extension i18n within VS Code. Configure it to recognize your `_locales` directory structure:
 
 ```json
 // .vscode/settings.json
 {
-  "i18n-ally.localesPaths": ["_locales"],
-  "i18n-ouldriven": false,
-  "i18n-ally.sourceLanguage": "en",
-  "i18n-ally.displayLanguage": "en",
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.locales": ["en", "es", "fr", "de", "ja", "zh_CN"],
+  "i18n-ally.sourceLocale": "en",
+  "i18n-ally.paths": {
+    "_locales/{locale}/messages.json": "{locale}"
+  },
+  "i18n-ally.enabledFrameworks": ["chrome-ext"]
 }
 ```
 
-Features include inline translation preview, missing key detection, and quick navigation between translations.
+This extension provides:
+
+- Inline translation preview
+- Key extraction from code
+- Translation status indicators
+- Quick navigation between translation files
 
 ### Crowdin Integration
 
-Crowdin provides professional translation management with:
+For larger projects with multiple languages, consider using Crowdin, a professional translation management platform. Crowdin integrates with GitHub and can automatically sync translation files.
 
-- **Translation memory** — Reuse previous translations
-- **In-context translation** — Translate directly in your extension UI
-- **Glossary management** — Maintain consistent terminology
-- **Team collaboration** — Work with professional translators
+To set up Crowdin with your Chrome extension:
+
+1. Create a Crowdin project and connect it to your GitHub repository
+2. Configure the file pattern to match your `_locales` structure
+3. Crowdin will automatically create translation requests for new or modified strings
+4. Professional translators or community members can provide translations
+5. Approved translations sync back to your repository automatically
 
 ```yaml
-# crowdin.yml configuration
+# crowdin.yml
 files:
   - source: /_locales/en/messages.json
-    translation: /_locales/%locale_with_underscore%/messages.json
+    translation: /_locales/%locale%/messages.json
 ```
 
-### Alternative Tools
+Crowdin supports:
 
-| Tool | Best For | Pricing |
-|------|----------|---------|
-| Crowdin | Large projects, team translation | Free tier available |
-| Weblate | Open source projects | Free (self-hosted) |
-| Lokalise | Professional translation services | Paid |
-| POEditor | Simple translation management | Free tier available |
+- Machine translation suggestions
+- Translation memory
+- Glossary management
+- QA checks for common translation errors
+- Integration with translation agencies
 
----
+### Translation Memory and Reuse
 
-## Internationalization Best Practices {#i18n-best-practices}
-
-Following best practices ensures maintainable translations and a consistent user experience across languages.
-
-### Message Key Naming Conventions
-
-Use descriptive, hierarchical key names that make translation management easier:
+As your extension grows, you'll accumulate common phrases across different parts of your extension. Create a glossary of standard translations for frequently used terms to ensure consistency:
 
 ```json
 {
-  "extension": {
-    "name": "My Extension",
-    "description": "A productivity tool"
+  "settings": {
+    "message": "Settings",
+    "description": "Navigation item for accessing settings"
   },
-  "button": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "confirm": "Confirm"
+  "save": {
+    "message": "Save",
+    "description": "Button to save changes"
   },
-  "message": {
-    "error": {
-      "generic": "An error occurred",
-      "network": "Network error. Please check your connection.",
-      "auth": "Authentication failed"
-    },
-    "success": {
-      "saved": "Changes saved successfully",
-      "deleted": "Item deleted"
-    }
+  "cancel": {
+    "message": "Cancel",
+    "description": "Button to cancel an action"
   }
 }
 ```
 
-### Translation Strategy
+## Best Practices Summary
 
-Develop a clear strategy for managing translations across your extension:
+Follow these guidelines for successful internationalization:
 
-**Start with English as source** — Use English (en) as your primary source language and translate from it. This ensures consistency and simplifies maintenance.
+Always externalize strings from your code from the beginning of your project. Adding i18n later requires updating every file that contains user-facing text, making it a tedious refactoring task.
 
-**Plan for text expansion** — Some languages expand significantly when translated. German can be 30% longer than English. Design your UI with flexibility:
+Use descriptive message keys that indicate the context, such as `popup_settings_title` rather than `title4`. This helps translators understand where each message appears.
 
-```css
-/* Allow room for text expansion */
-.button {
-  min-width: 80px;
-  padding: 8px 16px;
-  white-space: nowrap;
-}
+Provide clear descriptions for all messages, especially those with placeholders. Include example values to show translators how the placeholder will be filled.
 
-/* For longer languages, use flexible layouts */
-.extension-container {
-  width: min-content;
-  max-width: 400px;
-}
-```
+Test with real translations, not just simulated text. Languages have different lengths, and a string that fits nicely in English may overflow in German or require more space in French.
 
-**Separate content from code** — Keep all user-facing text in messages.json files. Never hardcode strings in JavaScript, HTML, or CSS:
+Support both LTR and RTL languages from the start. Using CSS logical properties makes this much easier.
 
-```javascript
-// Bad
-document.getElementById("title").textContent = "Settings";
-
-// Good
-document.getElementById("title").textContent = chrome.i18n.getMessage("settings_title");
-```
-
-### Handling Date and Time
-
-Dates and times require locale-aware formatting. Use the Intl API:
-
-```javascript
-function formatDate(date, locale) {
-  return new Intl.DateTimeFormat(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  }).format(date);
-}
-
-function formatTime(time, locale) {
-  return new Intl.DateTimeFormat(locale, {
-    hour: "2-digit",
-    minute: "2-digit"
-  }).format(time);
-}
-
-// Usage
-const locale = chrome.i18n.getUILanguage();
-const formattedDate = formatDate(new Date(), locale);
-const formattedTime = formatDate(new Date(), locale);
-```
-
-### Handling Numbers
-
-Numbers also require locale-specific formatting:
-
-```javascript
-function formatNumber(number, locale) {
-  return new Intl.NumberFormat(locale).format(number);
-}
-
-function formatCurrency(amount, currency, locale) {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: currency
-  }).format(amount);
-}
-
-// Usage
-const locale = chrome.i18n.getUILanguage();
-const count = formatNumber(1234.56, locale); // "1,234.56" in en-US
-const price = formatCurrency(99.99, "USD", locale); // "$99.99" in en-US
-```
-
-### Error Handling
-
-Implement robust error handling for missing translations:
-
-```javascript
-function safeGetMessage(key, substitutions) {
-  try {
-    const message = chrome.i18n.getMessage(key, substitutions);
-    if (!message) {
-      console.warn(`Missing translation for key: ${key}`);
-      return key; // Fallback to key itself
-    }
-    return message;
-  } catch (error) {
-    console.error(`Error getting translation for ${key}:`, error);
-    return key;
-  }
-}
-
-// Usage
-const errorMsg = safeGetMessage("error_network");
-const itemMsg = safeGetMessage("item_count", [itemCount]);
-```
-
----
-
-## Performance Considerations {#performance-considerations}
-
-Internationalization impacts extension performance. Consider these optimizations:
-
-### Lazy Loading Translations
-
-For extensions with many translations, load messages on demand:
-
-```javascript
-const messageCache = new Map();
-
-async function getMessage(key, substitutions) {
-  // Check cache first
-  if (messageCache.has(key)) {
-    return interpolate(messageCache.get(key), substitutions);
-  }
-  
-  // Load messages file if needed
-  const locale = chrome.i18n.getUILanguage();
-  const messages = await loadMessages(locale);
-  
-  messageCache.set(key, messages[key]?.message || key);
-  return interpolate(messageCache.get(key), substitutions);
-}
-```
-
-### Avoiding Runtime JSON Parsing
-
-Prefer compile-time extraction for performance-critical paths:
-
-```javascript
-// Build-time: Extract messages to a JS file
-// messages.js
-export const messages = {
-  extension_name: "My Extension",
-  button_save: "Save",
-  // ...
-};
-
-// Runtime: Direct property access
-const title = messages.extension_name;
-```
-
----
-
-## Common Pitfalls {#common-pitfalls}
-
-Avoid these common i18n mistakes:
-
-### Pitfall 1: Hardcoded Strings
-
-Never hardcode user-facing text:
-
-```javascript
-// Bad
-document.body.innerHTML = "<h1>Settings</h1>";
-
-// Good
-document.body.innerHTML = `<h1>${chrome.i18n.getMessage("settings_title")}</h1>`;
-```
-
-### Pitfall 2: Ignoring Text Direction
-
-Always account for RTL languages:
-
-```javascript
-// Bad
-element.style.marginLeft = "10px";
-
-// Good
-element.style.marginInlineStart = "10px";
-```
-
-### Pitfall 3: Missing Fallback Languages
-
-Always define fallback behavior:
-
-```javascript
-// Bad - Will show empty string if key missing
-const title = chrome.i18n.getMessage("missing_key");
-
-// Good - Has fallback
-const title = chrome.i18n.getMessage("missing_key") || "Default Title";
-```
-
-### Pitfall 4: Improper Placeholder Syntax
-
-Use correct placeholder formatting:
-
-```json
-// Bad - Missing placeholder definition
-{
-  "greeting": {
-    "message": "Hello, $USER$!"
-  }
-}
-
-// Good - Proper placeholder definition
-{
-  "greeting": {
-    "message": "Hello, $USER$!",
-    "placeholders": {
-      "user": {
-        "content": "$1",
-        "example": "John"
-      }
-    }
-  }
-}
-```
-
----
-
-## Related Guides {#related-guides}
-
-- [Publishing Guide](../publishing/publishing-guide.md) — Manual publishing process and CWS setup
-- [Manifest Reference](../guides/manifest-json-reference.md) — Complete manifest.json reference
-- [Internationalization API](../guides/i18n-api.md) — Detailed chrome.i18n API reference
-- [Accessibility Guide](../guides/accessibility.md) — Making extensions accessible to all users
-
----
-
-## Related Articles {#related-articles}
-
-- [Chrome Web Store Listing Optimization](../guides/chrome-web-store-listing-optimization.md)
-- [Extension Localization Workflow](../guides/extension-localization-workflow.md)
-- [Manifest V3 Fields](../guides/manifest-v3-fields.md)
+Keep messages concise. Screen space is limited in extension popups, and long translations can break layouts.
 
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
+
+---
+## Related Guides
+
+- [Chrome Extension Manifest V3](../mv3/index.md) — Complete reference for MV3 features and configuration
+- [Publishing Your Extension](../publishing/publishing-guide.md) — Learn how to publish and distribute your internationalized extension
+- [Chrome Web Store Listing Optimization](../publishing/cws-listing-optimization.md) — Optimize your store presence for global audiences
