@@ -599,19 +599,20 @@ Run `npm run size` in CI to automatically enforce bundle size limits.
 
 Beyond failing builds, consider setting up alerts for gradual size increases:
 
+{% raw %}
 ```yaml
 - name: Report bundle size
   run: |
     SIZE=$(du -sh dist | cut -f1)
     echo "::set-output name=size::$SIZE"
-    
+
     # Compare with previous build
     if [ -f .bundle-size ]; then
       PREVIOUS=$(cat .bundle-size)
       echo "Previous: $PREVIOUS, Current: $SIZE"
     fi
     echo $SIZE > .bundle-size
-    
+
 - name: Comment on PR
   uses: actions/github-script@v7
   with:
@@ -624,6 +625,7 @@ Beyond failing builds, consider setting up alerts for gradual size increases:
         body: `📦 Bundle size: **${size}**\n\nKeep it under 2MB for optimal performance!`
       })
 ```
+{% endraw %}
 
 This approach provides visibility into bundle size trends, helping teams catch gradual bloat before it becomes problematic.
 
