@@ -1,212 +1,163 @@
 ---
-
-layout: guide
-title: Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
-description: A comprehensive guide to migrating your Chrome extension from Manifest V2 to Manifest V3. Learn about background service workers, declarativeNetRequest, permission changes, and the complete migration checklist.
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/manifest-v3-migration-complete-guide/"
-
+layout: default
+title: "Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3"
+description: "A comprehensive guide to migrating Chrome extensions from Manifest V2 to V3. Covering service workers, declarativeNetRequest, permission changes, and complete migration checklist."
+canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/manifest-v3-migration-complete-guide/"
 ---
 
 # Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
 
-Chrome's transition from Manifest V2 to Manifest V3 represents the most significant architectural change in Chrome extension development history. With Google phasing out MV2 support and requiring all new extensions to use MV3, understanding this migration is essential for every extension developer. This comprehensive guide walks you through every aspect of moving your extension from MV2 to MV3, covering architecture changes, API replacements, permission updates, and testing strategies.
+Migrating your Chrome extension from Manifest V2 to Manifest V3 is one of the most important updates you'll make as an extension developer. Google introduced Manifest V3 to enhance security, improve performance, and protect user privacy. However, these improvements come with significant architectural changes that require careful planning and implementation. This comprehensive guide walks you through every aspect of the migration process, from understanding the fundamental differences between MV2 and MV3 to testing your migrated extension thoroughly before publishing.
+
+The transition represents the most substantial change to Chrome extension development since the platform launched. Extensions that once worked perfectly in MV2 may break completely or lose functionality if migrated improperly. Understanding these changes before you begin ensures a smooth transition and helps you avoid common pitfalls that trip up many developers. Whether you're maintaining a simple utility extension or a complex enterprise tool, this guide provides the knowledge you need to migrate successfully.
 
 ## Understanding MV2 vs MV3 Architecture Differences
 
-The fundamental difference between Manifest V2 and Manifest V3 lies in how each version handles background execution. In MV2, your extension ran a persistent background page that stayed alive as long as the browser was open. This background page could execute code continuously, maintain open connections, and run timers without concern for lifecycle management. MV3 replaces this model with ephemeral service workers that Chrome activates when needed and terminates after periods of inactivity.
+The fundamental difference between Manifest V2 and Manifest V3 lies in how the extension runtime operates and what capabilities developers can use. These architectural changes affect nearly every aspect of extension development, from how background code executes to how network requests are intercepted. Understanding these differences helps you plan your migration strategy effectively and anticipate challenges before they become problems.
 
-This architectural shift delivers substantial benefits for end users. Extensions consume zero memory when idle, the attack surface is dramatically reduced due to shorter execution windows, and the browser allocates system resources more efficiently. However, these benefits require developers to fundamentally rethink how they handle state, manage timers, and structure their extensions. The service worker model demands that you register all event listeners at the top level of your script, use chrome.storage for persistence instead of in-memory variables, and replace setTimeout/setInterval with the chrome.alarms API.
+### Background Page to Service Worker Migration
 
-Beyond the background execution model, MV3 introduces several other architectural changes. Remote code execution is no longer permitted, meaning all your extension's code must be bundled within the package. The webRequest API is now read-only, requiring migration to declarativeNetRequest for network modification capabilities. The action API consolidates browser action and page action into a single interface. These changes collectively improve security, privacy, and performance but require careful planning to implement correctly.
+One of the most significant changes in Manifest V3 is the replacement of persistent background pages with ephemeral service workers. In MV2, your background script runs in a persistent page that stays loaded as long as Chrome is open, maintaining state in global variables and having constant access to the DOM. This model is straightforward but consumes system resources continuously, even when the extension isn't actively doing anything.
 
-## Migrating from Background Pages to Service Workers
+MV3 introduces service workers that spin up when needed and terminate when idle. This ephemeral lifecycle dramatically reduces memory usage but requires you to rethink how you manage state and handle events. Your extension can no longer rely on global variables persisting between events, and you must use chrome.storage APIs to maintain any state that needs to survive between service worker invocations. Timer functions like setInterval and setTimeout don't work reliably in service workers because the worker may terminate before they fire, so you need to migrate to the chrome.alarms API for scheduled tasks.
 
-The transition from persistent background pages to service workers represents the most challenging aspect of MV3 migration. Your extension's background script must be completely restructured to work within the service worker lifecycle. The fundamental principle is that your service worker should initialize quickly, register all necessary event listeners, and then wait for Chrome to dispatch events. Any state your extension needs to persist must be stored in chrome.storage, as in-memory variables will be lost when Chrome terminates the service worker.
+The service worker model also affects how your extension handles long-running operations. Operations that previously ran continuously in the background now need to complete within the brief window before the service worker terminates. For operations that genuinely require persistent execution, such as maintaining WebSocket connections or processing large datasets, you'll need to implement patterns using the offscreen documents API or redesign your architecture to use short-lived operations triggered by events.
 
-Begin by updating your manifest.json to declare a service worker instead of a background page:
+### Network Request Blocking: webRequest to declarativeNetRequest
 
-```json
-{
-  "manifest_version": 3,
-  "name": "My Extension",
-  "version": "1.0.0",
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  }
-}
-```
+Extensions that block or modify network requests face perhaps the most complex migration challenge. MV2 allowed you to use the webRequest API with blocking listeners, giving you the power to intercept, modify, or cancel any network request in real-time. This capability was incredibly powerful but also potentially abusive, as it gave extensions broad access to all user network traffic.
 
-The "type": "module" setting enables ES modules, which is highly recommended for organizing code in modern extensions. Next, restructure your background.js to register all event listeners at the top level. Unlike MV2 where you might have conditionally registered listeners, MV3 requires all listeners to be registered immediately when the service worker executes:
+Manifest V3 replaces this with the declarativeNetRequest API, which works fundamentally differently. Instead of actively intercepting and modifying requests as they happen, you now define rules declaratively in your extension's manifest. Chrome evaluates these rules internally and applies them to network requests without your extension code running during each request. This approach is more secure because your extension never sees the actual network traffic, but it requires upfront planning to define all the rules your extension needs.
 
-```javascript
-// MV3 Service Worker Pattern
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.set({ initialized: true });
-});
+The migration involves translating your existing webRequest blocking logic into declarative rules stored in JSON rule files. These rules can block requests, redirect them to other URLs, modify headers, or upgrade HTTP requests to HTTPS. The declarative approach is less flexible than the old blocking webRequest—you can't make dynamic decisions based on request content in real-time—but it provides a clearer security model and better performance for users.
 
-chrome.alarms.create('periodicCleanup', { periodInMinutes: 15 });
+### Remote Code Elimination
 
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === 'periodicCleanup') {
-    // Handle cleanup task
-  }
-});
+Manifest V3 eliminates the ability to load and execute remote code, a change with major implications for how you structure your extension. MV2 allowed you to load scripts from external URLs at runtime, enabling dynamic updates without publishing new versions to the Chrome Web Store. This capability was convenient but created significant security risks, as extensions could potentially be modified maliciously after installation to behave differently than what users originally consented to.
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Handle messages from content scripts or popup
-});
-```
+In MV3, all your extension's code must be bundled within the extension package itself. Any JavaScript, Wasm, or other executable code must be included in the extension files you publish. This requirement means you can no longer load external scripts from your servers or CDNs. If your extension previously loaded analytics scripts, A/B testing frameworks, or other third-party libraries from external URLs, you must download and include them in your extension package.
 
-For detailed implementation patterns, refer to our [Chrome Extension Background Service Worker Guide](/chrome-extension-guide/docs/guides/background-service-worker/) which covers TypeScript patterns, messaging, alarms, and production-ready architectures.
+This change also affects how you handle dynamic configuration. Where you might have previously fetched configuration JSON from your server to control extension behavior, you now need to either bundle configuration in the extension or implement update mechanisms through the Chrome Web Store. For many extensions, this restriction means rethinking your architecture to ship all logic within the package while using chrome.storage or the storage API to store user-specific settings.
 
-## Moving from webRequest to declarativeNetRequest
+## Content Script Changes and Updates
 
-If your MV2 extension uses the webRequest API to block, modify, or redirect network requests, you must migrate to the declarativeNetRequest API in MV3. This change significantly impacts how your extension handles network requests, as declarativeNetRequest operates on a set of declarative rules that Chrome evaluates internally, rather than intercepting each request programmatically.
+Content scripts in MV3 work similarly to MV2 in many ways, but there are important differences worth understanding. Content scripts still run in the context of web pages, isolated from the page's JavaScript, but the mechanisms for injecting them and communicating with the background service worker have evolved. These changes affect how you structure your content scripts and how they interact with the rest of your extension.
 
-The declarativeNetRequest API offers several advantages. It doesn't require host permissions to modify requests, operates more efficiently since Chrome evaluates rules internally, and provides better privacy for users since extension code doesn't see request contents. However, the trade-off is reduced flexibility—you must define your rules statically or dynamically, and you cannot inspect or modify request bodies.
+The most significant change involves message passing between content scripts and your background service worker. Because the service worker isn't persistently running, you need to be more careful about connection management. Long-lived message channels can help maintain communication paths, but you should design your extension to handle the case where the service worker isn't currently running when a content script tries to communicate.
 
-To migrate, first remove the webRequest permission and add the declarativeNetRequest permission to your manifest:
+Content script injection also requires updates to your manifest. The old approach of specifying scripts directly in the manifest under the content_scripts key still works, but you might need to add matches and excludeMatches carefully to ensure your scripts run only where needed. For dynamic injection based on user actions or page state, the scripting API provides more flexibility in MV3, allowing you to inject scripts programmatically from your service worker or popup.
 
-```json
-{
-  "permissions": [
-    "declarativeNetRequest"
-  ],
-  "host_permissions": [
-    "*://*.example.com/*"
-  ]
-}
-```
+## Permission Model Updates
 
-Create a rules JSON file that defines your request modification rules:
+Manifest V3 introduces a revamped permissions model that gives users more control and requires developers to think more carefully about what access their extensions actually need. The changes affect both host permissions and API permissions, with implications for how you request access and how users perceive your extension's trustworthiness.
 
-```json
-[
-  {
-    "id": 1,
-    "priority": 1,
-    "action": { "type": "block" },
-    "condition": { "urlFilter": "*.ads.example.com", "resourceTypes": ["main_frame", "sub_frame"] }
-  },
-  {
-    "id": 2,
-    "priority": 1,
-    "action": { "type": "redirect", "redirect": { "url": "https://example.com/placeholder.png" } },
-    "condition": { "urlFilter": ".*\\.jpg$", "resourceTypes": ["image"] }
-  }
-]
-```
+Host permissions work differently in MV3 compared to MV2. In MV2, you could request broad host permissions at installation time, giving your extension access to all data on all websites. MV3 introduces a more granular model where host permissions can be requested at runtime rather than installation, and users can grant or revoke them later. Extensions should request only the specific hosts they need and consider using optional host permissions for features that aren't core to the extension's functionality.
 
-Load these rules in your service worker using chrome.declarativeNetRequest.updateDynamicRules. For comprehensive coverage of this API including dynamic rules, rule priorities, and advanced filtering, see our [Chrome Extension Declarative Net Request Guide](/chrome-extension-guide/docs/guides/declarative-net-request/).
-
-## Eliminating Remote Code
-
-One of the most significant security improvements in MV3 is the elimination of remote code execution. Your extension cannot load, evaluate, or execute code from external sources—everything must be bundled within the extension package. This change protects users from malicious extensions that might have injected code from remote servers.
-
-If your MV2 extension loads external scripts or evaluates dynamic code, you must restructure your approach. Any functionality that previously came from external sources must now be bundled directly in your extension. For configurations that previously came from servers, consider using chrome.storage to store rule sets that your extension applies locally. If your extension requires user-customizable rules, provide a user interface for them to define rules that your extension processes using declarativeNetRequest.
-
-This change also affects how you handle updates. Previously, you might have pushed code changes through your server; now, you must publish updates through the Chrome Web Store. Plan your release process accordingly, as review times vary.
-
-## Content Script Changes in MV3
-
-Content scripts undergo several important changes in MV3. They continue to run in the context of web pages, but the mechanisms for injection and communication have evolved. You can still inject content scripts through the manifest or programmatically, but programmatic injection offers more control over when and how scripts load.
-
-The key difference is in how content scripts communicate with your background service worker. Since the service worker can terminate at any time, you should structure messaging to be resilient to disconnections. Consider using message queues in your content script that can retry failed sends, and design your service worker to handle messages gracefully regardless of when it wakes up.
-
-Content scripts can still access most extension APIs directly, but some changes apply. The chrome.runtime.getManifest() method works the same way, and you can still use chrome.storage.sync or chrome.storage.local. However, be aware that chrome.runtime.lastError may behave differently in certain contexts—always check for its presence in your callbacks.
-
-## Updated Permission Model
-
-MV3 introduces a refined permission model that balances functionality with user privacy and security. Some permissions that were previously default or automatic now require explicit user consent at runtime. Understanding these changes is crucial for maintaining functionality while providing transparency to users.
-
-The most significant change involves host permissions. In MV2, requesting access to all URLs (<all_urls>) was common. In MV3, you should request only the hosts your extension actually needs. Chrome now displays permissions more prominently in the extension's store listing, and users must grant host permissions explicitly during installation or first use.
-
-Certain permissions now trigger additional warnings or restrictions. The "scripting" permission requires explicit declaration. The "activeTab" permission provides a more privacy-friendly alternative to host permissions when you only need to access the current tab. Use "activeTab" whenever possible, as it only grants access when the user explicitly invokes your extension.
+API permissions follow a similar principle. Some powerful APIs that were previously available by default now require explicit permission declarations in your manifest. Review your extension's use of APIs and ensure you're requesting only what you need. Removing unnecessary permissions improves user trust and can speed up the review process if your extension goes through Chrome Web Store review.
 
 ## Action API Migration
 
-MV3 consolidates the browser action and page action APIs into a single "action" API. If your MV2 extension uses either browserAction or pageAction, you must update your code to use chrome.action instead. This consolidation simplifies extension development while maintaining the same functionality.
+The Action API represents another consolidation in MV3 that simplifies extension development. MV2 had separate browserAction and pageAction APIs for toolbar icons, creating confusion about when to use each. MV3 unifies these into a single action API that works consistently for all extension icons, regardless of where they appear or when they're active.
 
-Update your manifest to use the action key:
+Migrating involves updating your manifest to use the action key instead of browserAction or pageAction, and updating any code that calls these APIs. The new action API provides equivalent functionality through slightly different method names. Methods like chrome.browserAction.setBadgeText become chrome.action.setBadgeText, and the patterns for showing, hiding, and enabling your extension's icon align across all use cases.
 
-```json
-{
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
-    }
-  }
-}
-```
+This consolidation also affects how you handle default states and icons. The structure for defining default icons, titles, and popups in the manifest is similar but uses the action key instead. If your extension used pageAction specifically for address bar integration, you'll find the behavior is now more flexible with the unified API, allowing you to show or hide the icon dynamically based on context.
 
-In your JavaScript, replace chrome.browserAction and chrome.pageAction calls with chrome.action. The API surface is nearly identical, so most changes involve simply renaming the namespace. Badge operations, which were split between browserAction.setBadgeText and pageAction.setBadgeText in MV2, now use chrome.action.setBadgeText exclusively.
+## Storage Patterns for MV3
 
-## Storage Pattern Updates
+Storage patterns require significant updates when migrating to MV3, particularly because of the service worker lifecycle. The chrome.storage API remains available and is actually the recommended way to maintain state in MV3, but how you use it needs to change. Global variables that worked in persistent background pages won't persist across service worker invocations, so you must read from storage when your service worker starts and write to storage whenever state changes.
 
-Storage patterns in MV3 require adjustment due to the service worker lifecycle. Never assume your service worker will remain running—any state must persist to chrome.storage immediately and be read from storage when the service worker wakes. This applies to configuration, cached data, and any extension state that needs to persist across service worker restarts.
+The storage API provides both local and sync storage options. Local storage is suitable for data that doesn't need to synchronize across devices, while sync storage automatically syncs across all Chrome instances where the user is signed in. Choose the appropriate storage type based on your extension's needs, and understand that storage operations are asynchronous, requiring you to use promises or callbacks to handle results.
 
-For optimal performance, use chrome.storage.session for data that doesn't need to persist across browser restarts but should survive service worker terminations. Use chrome.storage.sync when data needs to synchronize across a user's devices. Use chrome.storage.local for large amounts of data that don't need syncing.
-
-Implement a pattern where your service worker loads necessary state in the startup event:
-
-```javascript
-chrome.runtime.onInstalled.addListener((details) => {
-  // Initialize storage with defaults if needed
-});
-
-chrome.runtime.onStartup.addListener(async () => {
-  // Load state from storage when service worker starts
-  const state = await chrome.storage.local.get(['cachedData', 'config']);
-  // Initialize your extension with loaded state
-});
-```
+For complex data structures, consider using IndexedDB through a wrapper library or the raw API. While chrome.storage is convenient for simple key-value data, IndexedDB handles larger datasets and more complex queries better. If your extension manages significant amounts of data, the migration to MV3 is a good time to evaluate whether your storage approach still makes sense.
 
 ## Step-by-Step Migration Checklist
 
-Use this checklist to systematically migrate your extension from MV2 to MV3. Each step builds on the previous, ensuring you don't miss critical changes.
+Following a systematic migration process helps ensure you don't miss critical steps. Before beginning, audit your current extension thoroughly to understand every API and pattern you use. Create a detailed inventory of all MV2-specific code, including background scripts, content scripts, popup pages, and any external dependencies.
 
-1. Review your current manifest.json and note all APIs and permissions in use
-2. Update manifest_version to 3 and restructure the background section for service workers
-3. Convert all background page code to service worker patterns with top-level event listeners
-4. Replace chrome.alarms with setTimeout/setInterval for any timer functionality
-5. Migrate webRequest usage to declarativeNetRequest
-6. Consolidate browserAction and pageAction to chrome.action
-7. Review and minimize host permissions, switching to activeTab where appropriate
-8. Remove any remote code loading and bundle all functionality locally
-9. Update content script injection and messaging patterns for service worker lifecycle
-10. Implement chrome.storage for all persistent state
-11. Test all functionality in a development extension
-12. Run chrome.management extension audit and address warnings
-13. Publish to the Chrome Web Store for testing
+**Phase 1: Preparation and Audit**
 
-## Common Pitfalls to Avoid
+- Document all manifest.json settings and permissions currently in use
+- List every API call your extension makes to Chrome APIs
+- Identify all external dependencies and CDN resources
+- Catalog any use of webRequest blocking, XMLHttpRequest, or WebSockets
+- Map all state stored in global variables versus storage APIs
+- Review all content script injection patterns
 
-Several mistakes frequently occur during MV3 migration. Being aware of these helps you avoid wasted time and frustration. First, don't assume your service worker stays running—every piece of state must be in chrome.storage, and all listeners must register at the top level. Second, don't forget to declare "type": "module" in your background configuration if you're using ES modules.
+**Phase 2: Manifest Updates**
 
-Another common pithew is neglecting the chrome.alarms API. The service worker won't fire setTimeout callbacks after termination, so any recurring tasks must use chrome.alarms. Also, ensure you handle the case where your content script loads before your service worker is ready—implement proper message queuing and response handling.
+- Update manifest_version to 3
+- Restructure background to use service_worker instead of scripts
+- Replace browserAction and pageAction with action
+- Audit and minimize permissions, moving to optional where possible
+- Update host permissions to be specific rather than broad
 
-Finally, don't skip testing with multiple tabs and browser restarts. The service worker lifecycle behaves differently under various conditions, and issues often appear only in specific scenarios.
+**Phase 3: Background Script Migration**
+
+- Convert global variables to chrome.storage
+- Replace setInterval and setTimeout with chrome.alarms
+- Migrate XMLHttpRequest to fetch API
+- Implement state restoration handlers for service worker startup
+- Add offscreen document handling for DOM-dependent operations
+- Update message passing to handle service worker lifecycle
+
+**Phase 4: Network Request Handling**
+
+- Convert webRequest blocking listeners to declarativeNetRequest rules
+- Define rule sets in JSON files with appropriate conditions and actions
+- Test rule matching thoroughly with various URL patterns
+- Consider dynamic rules for user-configurable blocking
+
+**Phase 5: Content Script Updates**
+
+- Review and optimize content_scripts manifest entries
+- Update message passing to handle service worker unavailability
+- Test injection across various page types and SPAs
+
+**Phase 6: Testing and Deployment**
+
+- Test extensively in development mode
+- Verify storage persistence across service worker restarts
+- Test with various user permission configurations
+- Use Chrome flags to test MV2 and MV3 side-by-side
+- Prepare release notes highlighting MV3 compatibility
+
+## Common Migration Pitfalls
+
+Several issues frequently trip up developers during MV3 migration. Being aware of these pitfalls helps you avoid them or resolve them quickly when they occur. The most common problems relate to the fundamental architectural changes, particularly around service worker lifecycle and network request handling.
+
+**State Loss Issues**: Many extensions assume state persists in global variables, which fails completely in MV3's service worker model. Every piece of state your extension needs must be read from storage when the service worker starts. Failing to implement proper state restoration causes intermittent bugs that are hard to diagnose because they only appear after the service worker terminates and restarts.
+
+**Timer Problems**: Using setInterval or setTimeout directly in service workers doesn't work reliably because the service worker may terminate before the timer fires. Always use chrome.alarms API for scheduled tasks, which persists across service worker invocations and triggers reliably when the alarm fires.
+
+**Incomplete webRequest Migration**: The declarativeNetRequest API doesn't support all the capabilities of webRequest blocking. Some extensions try to maintain old behavior by keeping webRequest with blocking, which works temporarily but will fail when Chrome fully removes blocking support. Plan your migration to use only declarativeNetRequest capabilities.
+
+**Permission Oversights**: Requesting too many permissions harms user trust and may cause review delays. Conversely, failing to request necessary permissions causes runtime errors. Carefully audit what your migrated extension actually needs.
 
 ## Testing Strategy
 
-Comprehensive testing is essential for a successful MV3 migration. Start by testing basic functionality, then progressively test edge cases and lifecycle scenarios. Create test cases for service worker termination and restart, verify that all state persists correctly across browser restarts, and test with multiple extension invocations in quick succession.
+Testing MV3 migrations requires a comprehensive approach that verifies both functionality and performance. Start by testing basic functionality in development mode, but also simulate the service worker lifecycle to catch state management issues. The Chrome extension debugging tools include specific features for service worker inspection that help you understand what's happening during execution.
 
-Use Chrome's built-in developer tools to debug your service worker. Access the service worker context through the chrome://extensions page, using the "service worker" link to open DevTools in the service worker context. Monitor console output and use logging to track execution flow.
+Create test cases that explicitly trigger service worker termination and restart. This can happen through idle timeout or manually through the extensions management page. Verify that your extension behaves correctly after restart, with all necessary state restored from storage. Test edge cases like rapid popup opening and closing, multiple tab interactions, and network request handling under various conditions.
 
-Test your extension with varying numbers of open tabs, with the browser in different states, and simulate the service worker being terminated. Pay particular attention to any asynchronous operations that might not complete before the service worker terminates.
+Performance testing becomes more important in MV3 because of the service worker model. Measure how quickly your service worker starts and responds to events. Look for opportunities to reduce startup time by minimizing the work done during service worker initialization. The chrome.action API and other MV3-specific features may offer performance benefits over their MV2 equivalents.
 
 ## Chrome Timeline for MV2 Deprecation
 
-Google has established a clear timeline for MV2 deprecation. As of January 2023, new extensions cannot use Manifest V2, and all existing MV2 extensions will stop working once the transition completes. The exact timeline has shifted due to the complexity of the ecosystem, but the direction is clear—all extensions must migrate to MV3.
+Google has established a clear timeline for MV2 deprecation that affects all extension developers. New extensions submitted to the Chrome Web Store must use Manifest V3 as of early 2022. Existing MV2 extensions can continue working for now, but will eventually stop functioning as Chrome removes support. The exact timeline has shifted several times, so check the official Chrome extension development documentation for the current state.
 
-The Chrome Web Store no longer accepts new MV2 extensions, and existing MV2 extensions receive warnings about upcoming removal. For enterprise administrators, Chrome provides Enterprise Policies that can temporarily extend MV2 support, but this is a temporary measure and should not replace migration efforts.
+The deprecation happens in phases, with certain MV2 features being disabled before others. Some features may work with warnings before they stop working entirely. Monitor your extension's behavior in newer Chrome versions and plan to migrate before your users encounter problems. The Chrome team has stated that Enterprise administrators can temporarily extend MV2 support for managed devices, but this won't last indefinitely.
 
-Plan your migration now rather than waiting for deadlines. The longer you wait, the more rushed your migration becomes, and the greater risk of issues with your live extension. Start your migration using this guide, test thoroughly, and publish early to give yourself time to address any issues that arise.
+For extensions distributed outside the Chrome Web Store, such as through enterprise deployment or manual loading, the timeline matters less but eventual migration is still necessary. Chrome's direction is clear: all extensions must eventually move to Manifest V3. Starting your migration now ensures you're prepared when MV2 support ends.
 
 ---
 
-*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
+## Related Guides
+
+- [Background Service Worker Patterns](/chrome-extension-guide/guides/background-service-worker-patterns/) - Deep dive into service worker implementation
+- [Declarative Net Request Guide](/chrome-extension-guide/guides/declarative-net-request/) - Complete guide to network request rules
+- [MV2 to MV3 Migration Checklist](/chrome-extension-guide/guides/mv2-to-mv3-migration/) - Quick reference migration checklist
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
