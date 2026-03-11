@@ -577,4 +577,4 @@ Start implementing these optimizations today, and your users will experience fas
 
 ---
 
-*This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and resources, visit [zovo.one](https://zovo.one).*
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
