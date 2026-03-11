@@ -1,12 +1,11 @@
 ---
-layout: post
+layout: default
 title: "Chrome Web Store Listing Optimization — Double Your Install Rate"
 description: "Optimize your Chrome Web Store listing for maximum installs. Title formulas, description templates, screenshot strategies, and A/B testing techniques that work."
 date: 2025-02-17
 categories: [guides, publishing]
 tags: [chrome-web-store, cws-optimization, extension-listing, install-rate, app-store-optimization]
 author: theluckystrike
-keywords: "chrome web store optimization, CWS listing, extension install rate, app store optimization, chrome extension marketing"
 ---
 
 # Chrome Web Store Listing Optimization — Double Your Install Rate
@@ -268,4 +267,4 @@ The techniques in this guide have been proven across thousands of successful Chr
 
 ---
 
-*Built by [theluckystrike](https://zovo.one) at zovo.one*
+Built by theluckystrike at zovo.one
