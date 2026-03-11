@@ -328,11 +328,11 @@ If you use tab groups, configure different suspension rules per group:
 
 For laptop users concerned about battery life, combine Tab Suspender Pro with Chrome's built-in battery saver mode. The two features complement each other—battery saver throttles Chrome's foreground performance while Tab Suspender Pro eliminates background waste.
 
-For more detailed power management strategies, see our [Power Management for Chrome Extensions](/chrome-extension-guide/guides/power-management/) guide.
+For more detailed power management strategies, see our [Power Management for Chrome Extensions](/guides/power-management/) guide.
 
 ## Memory Optimization Integration
 
-Tab Suspender Pro works best as part of a comprehensive memory management strategy. For developers building extensions or users optimizing their browser setup, understanding Chrome's memory model is essential. Our [Memory Management](/chrome-extension-guide/guides/memory-management/) guide covers:
+Tab Suspender Pro works best as part of a comprehensive memory management strategy. For developers building extensions or users optimizing their browser setup, understanding Chrome's memory model is essential. Our [Memory Management](/guides/memory-management/) guide covers:
 
 - Service worker memory management
 - Content script cleanup patterns
