@@ -3,7 +3,7 @@ layout: post
 title: "Migrating Chrome Extension from Manifest V2 to V3 Checklist"
 description: "Complete migration checklist for moving your Chrome extension from Manifest V2 to V3. Covers all critical steps including manifest updates, API replacements, service worker migration, and testing procedures."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "mv2 to mv3 checklist, manifest v2 deprecation, chrome extension migration steps"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/migrating-chrome-extension-manifest-v2-v3-checklist/"

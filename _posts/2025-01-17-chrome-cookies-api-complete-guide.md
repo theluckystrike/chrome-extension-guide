@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Cookies API Complete Guide for Extensions"
 description: "Master the Chrome Cookies API with this comprehensive guide. Learn how to manage cookies in Chrome extensions, implement cookie manipulation, and build powerful cookie management features."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome cookies api, manage cookies chrome extension, cookie extension tutorial, chrome.cookies api, cookie manipulation extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-cookies-api-complete-guide/"

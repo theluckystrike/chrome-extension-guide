@@ -3,7 +3,7 @@ layout: post
 title: "Build an Image Gallery Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful image gallery extension for Chrome. This comprehensive tutorial covers everything from setting up your development environment to deploying a fully functional photo viewer chrome extension with advanced features."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "image gallery extension, photo viewer chrome, image collection extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-image-gallery-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Web Worker Thread Pool in Chrome Extensions: Complete Guide to Parallel Processing"
 description: "Master web worker pool implementation in Chrome extensions. Learn how to create efficient worker thread pools, handle parallel processing, and overcome multithreading limitations in Manifest V3 for high-performance extensions."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "web worker pool extension, parallel processing chrome, multithreading extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-web-worker-pool/"

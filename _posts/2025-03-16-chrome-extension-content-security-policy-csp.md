@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Content Security Policy (CSP): What You Need to Know"
 description: "Master Chrome Extension Content Security Policy (CSP) in Manifest V3. Learn how to handle inline script restrictions, configure security headers, and prevent common vulnerabilities in your extensions."
 date: 2025-03-16
-categories: [Chrome Extensions, Security]
+categories: [Chrome-Extensions, Security]
 tags: [csp, security, chrome-extension]
 keywords: "chrome extension CSP, content security policy chrome extension, chrome extension inline script blocked, CSP manifest v3, chrome extension security headers"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/16/chrome-extension-content-security-policy-csp/"

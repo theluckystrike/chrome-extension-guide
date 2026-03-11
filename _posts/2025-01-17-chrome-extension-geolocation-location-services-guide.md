@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Geolocation and Location Services Guide"
 description: "Master Chrome extension geolocation with this comprehensive guide. Learn how to use the Geolocation API, build location-based extensions, handle permissions, and implement best practices for Manifest V3."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension geolocation, location based chrome extension, geolocation api extension, chrome geolocation api, extension location services"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-geolocation-location-services-guide/"

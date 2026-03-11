@@ -3,7 +3,7 @@ layout: post
 title: "Debugging Chrome Extensions: The Complete Developer Guide for 2025"
 description: "Master chrome extension debugging with our comprehensive 2025 guide. Learn to use DevTools, inspect service workers, fix console errors, and troubleshoot common extension issues effectively."
 date: 2025-02-25
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [debugging, devtools, chrome-extension, debug chrome extension, chrome extension debugging, chrome extension devtools debug, inspect chrome extension, chrome extension console errors]
 keywords: "debug chrome extension, chrome extension debugging, chrome extension devtools debug, inspect chrome extension, chrome extension console errors"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/25/chrome-extension-debugging-complete-guide/"

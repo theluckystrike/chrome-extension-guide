@@ -3,7 +3,7 @@ layout: post
 title: "Build a Cross-Browser Bookmark Sync Extension: Complete Guide for Chrome and Firefox"
 description: "Learn how to build a powerful cross-browser bookmark sync extension that works seamlessly across Chrome and Firefox. This comprehensive tutorial covers Manifest V3, WebExtension APIs, storage synchronization, conflict resolution, and best practices for creating a production-ready bookmark sync extension."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "bookmark sync extension, sync bookmarks chrome firefox, cross browser bookmarks, chrome extension bookmark sync, firefox webextension bookmarks, browser bookmark synchronization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-cross-browser-bookmark-sync-extension/"

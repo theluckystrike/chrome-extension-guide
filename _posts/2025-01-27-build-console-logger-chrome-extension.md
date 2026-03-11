@@ -3,7 +3,7 @@ layout: post
 title: "Build a Console Logger Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful console logger Chrome extension from scratch. This comprehensive guide covers intercepting console methods, creating a visual log viewer, persistent storage, and advanced debugging features for Chrome extensions."
 date: 2025-01-27
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "console logger extension, debug log chrome, javascript logger, chrome extension console log, console interceptor chrome extension, debugging chrome extension, log viewer extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-console-logger-chrome-extension/"

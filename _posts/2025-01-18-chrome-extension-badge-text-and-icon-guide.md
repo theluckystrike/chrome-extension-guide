@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Badge Text and Icon Guide: Complete API Tutorial"
 description: "Master Chrome extension badge text and icons with this comprehensive guide. Learn how to use browserAction badge, set badge text, change extension icon dynamically, and implement visual notifications that improve user engagement in Manifest V3."
 date: 2025-01-18
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension badge, browserAction badge text, extension icon badge, chrome badge API, manifest v3 badge, chrome extension icon change, chrome.notifications badge"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-badge-text-and-icon-guide/"

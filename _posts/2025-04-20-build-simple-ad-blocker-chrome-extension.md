@@ -3,7 +3,7 @@ layout: post
 title: "Build a Simple Ad Blocker Chrome Extension with declarativeNetRequest"
 description: "Learn how to create a simple ad blocker Chrome extension from scratch using declarativeNetRequest API. This step-by-step tutorial covers Manifest V3 setup, blocking rules, and publishing your ad blocker to the Chrome Web Store."
 date: 2025-04-20
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [ad-blocker, declarativeNetRequest, chrome-extension]
 keywords: "chrome extension ad blocker, build ad blocker chrome, declarativeNetRequest ad block, simple ad blocker extension, chrome extension block ads mv3"
 author: theluckystrike

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Calculator Chrome Extension: Scientific Calculator in Your Browser"
 description: "Build a powerful scientific calculator Chrome extension with this step-by-step tutorial. Learn Manifest V3, popup design, JavaScript math, and deployment."
 date: 2025-04-16
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [calculator, math, chrome-extension]
 keywords: "chrome extension calculator, build calculator extension, scientific calculator chrome, chrome extension math, calculator popup chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/16/build-calculator-chrome-extension/"

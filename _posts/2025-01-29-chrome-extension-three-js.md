@@ -3,7 +3,7 @@ layout: post
 title: "Three.js 3D in Chrome Extensions: Complete Guide to WebGL Three Extension Development"
 description: "Learn how to create stunning 3D chrome popup experiences using Three.js. This comprehensive guide covers webgl three extension development, best practices, and real-world examples for modern Chrome extensions."
 date: 2025-01-29
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "three js extension, 3d chrome popup, webgl three extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-three-js/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Proxy Settings API Guide: Build VPN and Proxy Extensions"
 description: "Master the Chrome Proxy Settings API to build powerful browser extensions. Complete guide covering chrome.proxy API, PAC scripts, proxy configuration, and building VPN-like extensions for Manifest V3."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome proxy extension, proxy settings api, vpn chrome extension, chrome.proxy api, proxy auto-config, manifest v3 proxy"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-proxy-settings/"

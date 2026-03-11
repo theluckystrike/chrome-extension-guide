@@ -3,7 +3,7 @@ layout: post
 title: "Build a Gesture Drawing Chrome Extension: Complete Guide"
 description: "Learn how to create a gesture drawing Chrome extension that enables sketch overlay on any webpage. This comprehensive guide covers HTML5 Canvas, touch and mouse events, and publishing to the Chrome Web Store."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "gesture drawing extension, sketch overlay chrome, web drawing tool, chrome extension drawing, drawing overlay extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-gesture-drawing-chrome-extension/"

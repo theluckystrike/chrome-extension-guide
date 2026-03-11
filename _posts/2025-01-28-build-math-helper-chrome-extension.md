@@ -3,7 +3,7 @@ layout: post
 title: "Build a Math Helper Chrome Extension: Complete Guide 2025"
 description: "Learn how to build a powerful math helper extension for Chrome. This comprehensive guide covers calculator functionality, equation solving, and mathematical expression parsing for your Chrome extension."
 date: 2025-01-28
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "math helper extension, calculator chrome, equation solver extension, chrome math extension, mathematical chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-math-helper-chrome-extension/"

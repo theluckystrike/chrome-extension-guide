@@ -3,7 +3,7 @@ layout: post
 title: "Build a Canvas Screenshot Chrome Extension: Complete Guide"
 description: "Learn how to build a canvas screenshot extension that captures HTML elements using html2canvas. This step-by-step tutorial covers capture element chrome functionality, perfect for developers creating screenshot tools."
 date: 2025-01-24
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "canvas screenshot extension, capture element chrome, html2canvas extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-extension-canvas-screenshot/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Permissions Explained: What Users Need to Know"
 description: "Learn everything about chrome extension permissions, what they mean, and how to ensure extension permission safety. Our comprehensive guide helps users understand and manage Chrome extension permissions effectively."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension permissions, what permissions mean, extension permission safety"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/"

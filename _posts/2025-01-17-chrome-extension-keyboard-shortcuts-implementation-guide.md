@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Keyboard Shortcuts Implementation Guide"
 description: "Master keyboard shortcuts in Chrome extensions with our comprehensive guide. Learn how to use the Extension Commands API, implement hotkeys, and create intuitive user experiences for your Chrome extension."
 date: 2025-01-17
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, keyboard-shortcuts, hotkeys, commands-api, development, guide]
 keywords: "chrome extension keyboard shortcuts, extension commands api, hotkeys chrome extension, chrome extension hotkeys implementation, manifest v3 keyboard shortcuts"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Page Zoom Chrome Extension: Custom Zoom Levels Per Website"
 description: "Learn how to build a Chrome extension that allows custom zoom levels per website. This comprehensive guide covers Manifest V3, storage APIs, content scripts, and best practices for creating a page zoom extension."
 date: 2025-04-19
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [zoom, accessibility, chrome-extension]
 keywords: "chrome extension zoom, page zoom chrome extension, custom zoom level chrome, zoom per website chrome, build zoom extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-page-zoom-chrome-extension/"

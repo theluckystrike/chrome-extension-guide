@@ -3,7 +3,7 @@ layout: post
 title: "Build a Cache Viewer Chrome Extension"
 description: "Learn how to build a powerful Cache Viewer Chrome Extension from scratch. This comprehensive guide covers browser cache mechanics, extension architecture, and how to create a tool for inspecting and managing cached content in Chrome."
 date: 2025-01-29
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "cache viewer extension, browser cache chrome, cached content extension, chrome cache inspector"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-cache-viewer-chrome-extension/"

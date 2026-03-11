@@ -3,7 +3,7 @@ layout: post
 title: "Build a Webpage Archiver Chrome Extension: Complete 2025 Tutorial"
 description: "Learn how to build a webpage archiver extension that saves pages offline. This comprehensive tutorial covers Manifest V3, the chrome.pageCapture API, storage solutions, and how to create a production-ready web archive chrome extension."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "webpage archiver extension, save page offline, web archive chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-webpage-archiver-chrome-extension/"

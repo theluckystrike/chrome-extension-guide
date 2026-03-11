@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Low-RAM Computers: Making Chrome Usable on 2-4GB RAM"
 description: "Transform your low-RAM computer with Tab Suspender Pro. Learn how to make Chrome usable on 2-4GB RAM systems with aggressive tab suspension, optimized settings, and Chrome flags for maximum memory savings."
 date: 2025-04-23
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, low-ram, performance]
 keywords: "tab suspender pro low ram, chrome 2gb ram, chrome extension low memory, tab suspender old computer, make chrome faster low ram"
 ---

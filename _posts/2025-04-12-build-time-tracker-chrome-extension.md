@@ -3,7 +3,7 @@ layout: post
 title: "Build a Time Tracker Chrome Extension: Monitor Your Browsing Habits"
 description: "Learn to build a powerful time tracking Chrome extension that monitors website usage, tracks browsing habits, and boosts productivity in 2025."
 date: 2025-04-12
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [time-tracker, productivity, chrome-extension]
 keywords: "chrome extension time tracker, time tracking chrome extension, build time tracker extension, website time monitor chrome, browsing time chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/12/build-time-tracker-chrome-extension/"

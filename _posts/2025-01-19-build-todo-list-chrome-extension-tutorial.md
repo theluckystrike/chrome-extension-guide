@@ -3,7 +3,7 @@ layout: post
 title: "Build a Todo List Chrome Extension Tutorial — Complete 2025 Guide"
 description: "Learn how to build a powerful todo chrome extension with our comprehensive task manager extension tutorial. Covers Manifest V3, storage, notifications, and publishing."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-todo-list-chrome-extension-tutorial/"

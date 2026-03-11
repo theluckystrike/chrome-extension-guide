@@ -3,7 +3,7 @@ layout: post
 title: "Build a Chrome Extension with Angular: Complete Framework Guide 2025"
 description: "Learn to build Chrome extensions with Angular in 2025. This guide covers Angular CLI setup, Manifest V3, popup development, content scripts, and deployment."
 date: 2025-03-09
-categories: [Chrome Extensions, Frameworks]
+categories: [Chrome-Extensions, Frameworks]
 tags: [angular, chrome-extension, tutorial]
 keywords: "chrome extension angular, angular chrome extension, build extension angular, angular popup chrome, angular chrome extension tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/09/build-chrome-extension-with-angular/"

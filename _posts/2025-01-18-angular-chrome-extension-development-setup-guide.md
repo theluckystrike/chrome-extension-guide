@@ -3,7 +3,7 @@ layout: post
 title: "Angular Chrome Extension Development Setup Guide"
 description: "Learn how to set up Angular Chrome extension development from scratch. This comprehensive guide covers project structure, Manifest V3 configuration, popup development, and best practices for building production-ready extensions with Angular."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "angular chrome extension, chrome extension angular, angular popup extension, angular chrome extension setup, chrome extension with angular"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/angular-chrome-extension-development-setup-guide/"

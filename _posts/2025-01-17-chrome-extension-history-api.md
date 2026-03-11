@@ -3,7 +3,7 @@ layout: post
 title: "Chrome History API Extension Tutorial: Build a Browser History Search Extension"
 description: "Learn how to build a powerful browser history extension using the Chrome History API. This comprehensive tutorial covers everything from manifest configuration to advanced search functionality in Manifest V3."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome history api, browser history extension, history search chrome extension, chrome extension history api tutorial, chrome.history api, browser history search extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-history-api/"

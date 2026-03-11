@@ -3,7 +3,7 @@ layout: post
 title: "Build a Notification Center Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a notification center Chrome extension that aggregates notifications from multiple sources. This comprehensive guide covers unified notifications chrome, alert manager extension development, and best practices for creating a powerful notification hub."
 date: 2025-01-21
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "notification center extension, unified notifications chrome, alert manager extension, chrome notification hub, build notification extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-notification-center/"

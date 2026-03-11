@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Bookmarks API Extension Development Tutorial: Build a Bookmark Manager Extension"
 description: "Learn how to use the Chrome Bookmarks API to build powerful bookmark manager extensions. Complete guide covering chrome.bookmarks API methods, Manifest V3 permissions, tree traversal, CRUD operations, and best practices for Chrome extension development."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome bookmarks api, bookmark manager extension, chrome bookmark extension, chrome.bookmarks API, manifest v3 bookmarks, chrome extension bookmarks tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-bookmarks-api-extension-development-tutorial/"

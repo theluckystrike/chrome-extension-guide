@@ -3,7 +3,7 @@ layout: post
 title: "Build a Request Blocker Chrome Extension: Complete Developer Guide 2025"
 description: "Learn how to build a powerful request blocker Chrome extension from scratch. Master the Declarative Net Request API, implement URL blocking, create network filters, and publish your extension to the Chrome Web Store."
 date: 2025-01-27
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "request blocker extension, block url chrome, network filter extension, chrome extension blocking, declarative net request"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-request-blocker-chrome-extension/"

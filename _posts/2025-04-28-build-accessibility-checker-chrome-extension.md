@@ -3,7 +3,7 @@ layout: post
 title: "Build an Accessibility Checker Chrome Extension: WCAG Compliance Scanner"
 description: "Learn to build a WCAG-compliant accessibility checker Chrome extension. This comprehensive guide covers a11y scanning, ARIA validation, and automated accessibility auditing in Chrome."
 date: 2025-04-28
-categories: [Chrome Extensions, Accessibility]
+categories: [Chrome-Extensions, Accessibility]
 tags: [accessibility, wcag, chrome-extension]
 keywords: "chrome extension accessibility checker, wcag checker chrome, a11y scanner extension, build accessibility extension, accessibility audit chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/build-accessibility-checker-chrome-extension/"

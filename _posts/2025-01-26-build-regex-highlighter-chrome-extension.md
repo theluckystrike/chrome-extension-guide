@@ -3,7 +3,7 @@ layout: post
 title: "Build a Regex Highlighter Chrome Extension"
 description: "Learn how to create a powerful regex highlighter extension for Chrome. This comprehensive developer guide covers pattern matching, text highlighting, regex helper tools, and building production-ready Chrome extensions with Manifest V3."
 date: 2025-01-26
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "regex highlighter extension, pattern matcher chrome, regex helper, chrome regex tool, regex pattern matcher, text highlighter chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-regex-highlighter-chrome-extension/"

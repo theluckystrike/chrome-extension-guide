@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro with Multiple Chrome Windows: Per-Window Management"
 description: "Learn how Tab Suspender Pro handles multiple Chrome windows with per-window suspension rules, window-aware tab counting, and workspace management for power users."
 date: 2025-03-30
-categories: [Chrome Extensions, Guides]
+categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, windows, multi-window]
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "A/B Testing Chrome Extension Features: Run Experiments on Your Users"
 description: "Learn how to implement A/B testing in Chrome extensions. Master feature flags, run experiments, and safely rollout new features to your users with proven strategies."
 date: 2025-05-09
-categories: [Chrome Extensions, Growth]
+categories: [Chrome-Extensions, Growth]
 tags: [ab-testing, experiments, chrome-extension]
 keywords: "chrome extension ab testing, extension experiments, feature flags chrome extension, chrome extension rollout, a/b test extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/09/chrome-extension-ab-testing-experiments/"

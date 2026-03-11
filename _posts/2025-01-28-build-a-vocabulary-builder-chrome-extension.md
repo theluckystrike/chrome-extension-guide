@@ -3,7 +3,7 @@ layout: post
 title: "Build a Vocabulary Builder Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a vocabulary builder Chrome extension from scratch. This comprehensive guide covers word capture, spaced repetition, flashcard systems, and how to publish your language learning extension."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "vocabulary extension, word learner chrome, language learning extension, build chrome extension, vocabulary builder chrome extension"
 ---

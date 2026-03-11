@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Analytics: Track Usage Without Compromising Privacy"
 description: "Learn how to implement privacy-friendly analytics in your Chrome extension. Discover methods to track extension usage, understand user behavior, and gather meaningful metrics while respecting user privacy and complying with regulations."
 date: 2025-04-05
-categories: [Chrome Extensions, Analytics]
+categories: [Chrome-Extensions, Analytics]
 tags: [analytics, tracking, chrome-extension]
 keywords: "chrome extension analytics, track chrome extension usage, extension usage metrics, chrome extension telemetry, privacy-friendly analytics extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/05/chrome-extension-analytics-tracking-guide/"

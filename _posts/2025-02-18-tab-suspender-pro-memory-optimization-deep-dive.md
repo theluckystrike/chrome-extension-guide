@@ -3,7 +3,7 @@ layout: post
 title: "How Tab Suspender Pro Reduces Chrome Memory Usage: A Technical Deep Dive"
 description: "Discover how Tab Suspender Pro's intelligent tab suspension technology reduces Chrome memory usage by up to 80%. Learn the technical mechanisms behind memory reclamation and how to configure it for maximum performance gains."
 date: 2025-02-18
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, memory-optimization, chrome-performance]
 keywords: "tab suspender pro memory, chrome memory usage tabs, reduce chrome ram usage, tab suspender memory optimization, chrome using too much memory fix"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/18/tab-suspender-pro-memory-optimization-deep-dive/"

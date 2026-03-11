@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Web Request API: Complete Guide to Network Interception in Extensions"
 description: "Master the Chrome Web Request API and declarativeNetRequest for intercepting, blocking, and modifying network requests in your Chrome extensions. This comprehensive guide covers Manifest V3 compliance, rule-based filtering, and practical implementation examples for building powerful network control extensions."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [web-request, network, declarativeNetRequest, manifest-v3]
 keywords: "chrome web request api, declarativeNetRequest guide, chrome extension network requests, block requests chrome extension, manifest v3 network interception"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-web-request-api-complete-guide/"

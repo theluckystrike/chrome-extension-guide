@@ -3,7 +3,7 @@ layout: post
 title: "Build an Emoji Picker Chrome Extension: Insert Emojis Anywhere on the Web"
 description: "Learn how to build a chrome extension emoji picker that lets users insert emojis anywhere. Complete guide covering Manifest V3, content scripts, popup UI, and emoji search functionality."
 date: 2025-05-07
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [emoji, picker, chrome-extension]
 keywords: "chrome extension emoji picker, emoji keyboard chrome, build emoji extension, insert emoji chrome, chrome extension emoji search"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/07/build-emoji-picker-chrome-extension/"

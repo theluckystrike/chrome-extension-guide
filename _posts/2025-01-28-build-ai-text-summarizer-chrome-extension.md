@@ -3,7 +3,7 @@ layout: post
 title: "Build an AI Text Summarizer Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful AI text summarizer Chrome extension from scratch. This comprehensive guide covers NLP integration, API setup, content script injection, and deployment to the Chrome Web Store."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "ai summarizer extension, text summary chrome, article summarizer"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-ai-text-summarizer-chrome-extension/"

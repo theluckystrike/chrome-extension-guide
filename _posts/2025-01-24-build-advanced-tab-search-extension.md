@@ -3,7 +3,7 @@ layout: post
 title: "Build an Advanced Tab Search Extension with Fuzzy Matching"
 description: "Learn how to build an advanced tab search extension for Chrome with fuzzy search, intelligent ranking, keyboard shortcuts, and powerful filtering capabilities. A comprehensive 2025 tutorial."
 date: 2025-01-24
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-advanced-tab-search-extension/"

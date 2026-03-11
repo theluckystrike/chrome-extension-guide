@@ -3,7 +3,7 @@ layout: post
 title: "Build an Email Finder Chrome Extension Ethically: Complete Developer Guide"
 description: "Learn how to build an email extractor extension for Chrome that generates leads ethically. This comprehensive guide covers Chrome extension development, ethical scraping practices, and compliance with web scraping regulations."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "email extractor extension, lead generation chrome extension, ethical scraping extension, chrome extension email finder, build email scraper extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-email-finder-chrome-extension-ethically/"

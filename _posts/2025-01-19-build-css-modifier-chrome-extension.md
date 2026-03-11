@@ -3,7 +3,7 @@ layout: post
 title: "Build a CSS Modifier Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a CSS modifier Chrome extension that lets users edit and customize website styles in real-time. This comprehensive guide covers Manifest V3, content scripts, and best practices for style editor extensions."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "css editor extension, modify website css chrome, style editor extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-css-modifier-chrome-extension/"

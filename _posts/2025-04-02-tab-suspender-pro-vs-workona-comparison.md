@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro vs Workona: Tab Suspension vs Workspace Management"
 description: "Compare Tab Suspender Pro vs Workona for Chrome tab management. Which extension saves more memory and boosts productivity? Read our expert comparison."
 date: 2025-04-02
-categories: [Chrome Extensions, Comparisons]
+categories: [Chrome-Extensions, Comparisons]
 tags: [tab-suspender-pro, workona, comparison]
 keywords: "tab suspender pro vs workona, workona alternative, chrome workspace manager, tab suspender vs workspace, best tab organization chrome"
 ---

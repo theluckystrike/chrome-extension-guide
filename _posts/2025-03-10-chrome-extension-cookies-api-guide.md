@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Cookies API: Read, Write, and Manage Browser Cookies"
 description: "Master the Chrome Extension Cookies API with this comprehensive guide. Learn to read, write, and manage browser cookies programmatically. Perfect for developers building cookie manager extensions."
 date: 2025-03-10
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [cookies, chrome-extension, tutorial]
 keywords: "chrome extension cookies API, chrome.cookies, manage cookies chrome extension, read cookies chrome extension, cookie manager extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/10/chrome-extension-cookies-api-guide/"

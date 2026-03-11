@@ -3,7 +3,7 @@ layout: post
 title: "Build a Custom Search Engine Chrome Extension: Search Multiple Sites at Once"
 description: "Learn to build a custom search engine Chrome extension that searches multiple sites simultaneously. Complete guide with code examples using Manifest V3."
 date: 2025-05-12
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [search, multi-search, chrome-extension]
 keywords: "chrome extension search engine, custom search chrome, multi search chrome extension, search aggregator extension, build search extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/12/build-custom-search-engine-chrome-extension/"

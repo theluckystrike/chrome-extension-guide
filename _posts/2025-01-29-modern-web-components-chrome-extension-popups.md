@@ -3,7 +3,7 @@ layout: post
 title: "Modern Web Components in Chrome Extension Popups: A Complete Developer's Guide"
 description: "Master web components in Chrome extension popups with Shadow DOM encapsulation, custom elements, and modern UI patterns. Build robust, isolated popup interfaces that work seamlessly across any website."
 date: 2025-01-29
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "web components popup, shadow dom popup extension, custom elements chrome, chrome extension popup web components, shadow dom chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/modern-web-components-chrome-extension-popups/"

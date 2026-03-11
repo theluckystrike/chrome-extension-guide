@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Development with Nx Workspace: Enterprise-Grade Monorepo Architecture"
 description: "Learn how to build scalable Chrome extensions using Nx workspace. Discover enterprise extension monorepo patterns, shared libraries, and advanced tooling for managing multiple extensions efficiently."
 date: 2025-01-25
-categories: [Chrome Extensions, Framework]
+categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework, tooling]
 keywords: "nx chrome extension, nx workspace extension, enterprise extension monorepo, chrome extension monorepo, nx workspace chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-development-nx-workspace/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a CSS Unused Rules Finder Extension: Complete Developer Guide"
 description: "Learn how to build a powerful CSS unused rules finder extension that detects dead CSS, identifies unused styles, and helps optimize your websites. Perfect for developers looking to reduce page weight and improve performance."
 date: 2025-01-27
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "unused css extension, dead css finder chrome, css coverage extension, find unused css, css unused rules finder"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-css-unused-finder-extension/"

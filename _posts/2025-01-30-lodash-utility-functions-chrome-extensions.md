@@ -3,7 +3,7 @@ layout: post
 title: "Lodash Utility Functions in Chrome Extensions: A Complete Guide"
 description: "Discover how to leverage Lodash utility functions in Chrome extensions to write cleaner, more efficient code. Learn about lodash debounce, throttle, and other essential utilities for extension development."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "lodash chrome extension, utility functions extension, lodash debounce extension, chrome extension npm packages, lodash in manifest v3"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/lodash-utility-functions-chrome-extensions/"

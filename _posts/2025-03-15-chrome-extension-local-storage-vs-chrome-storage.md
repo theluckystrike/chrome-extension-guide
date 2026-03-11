@@ -3,7 +3,7 @@ layout: post
 title: "localStorage vs chrome.storage: Which Should Your Extension Use?"
 description: "Compare localStorage vs chrome.storage for Chrome extensions. Learn which storage method best suits your extension's needs for performance, sync, and capacity."
 date: 2025-03-15
-categories: [Chrome Extensions, Storage]
+categories: [Chrome-Extensions, Storage]
 tags: [storage, localStorage, chrome-extension]
 keywords: "chrome extension localStorage, chrome.storage vs localStorage, extension data storage, chrome extension save data, best storage chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/15/chrome-extension-local-storage-vs-chrome-storage/"

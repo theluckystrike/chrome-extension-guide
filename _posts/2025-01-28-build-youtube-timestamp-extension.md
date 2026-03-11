@@ -3,7 +3,7 @@ layout: post
 title: "Build a YouTube Timestamp Extension: Complete Guide to Video Bookmarking"
 description: "Learn how to build a YouTube timestamp extension from scratch. This comprehensive guide covers video bookmark chrome functionality, YouTube notes integration, and how to create a powerful video timestamp manager using Chrome extension APIs."
 date: 2025-01-28
-categories: [Chrome Extensions, Integration]
+categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "youtube timestamp extension, video bookmark chrome, youtube notes, build youtube extension, chrome extension video, timestamp bookmark extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-youtube-timestamp-extension/"

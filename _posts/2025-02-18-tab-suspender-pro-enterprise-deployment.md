@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Enterprise: Managing Chrome Tabs Across Your Organization"
 description: "Deploy Tab Suspender Pro across your enterprise with Google Workspace admin. Learn group policy configuration, memory monitoring, and calculate IT ROI."
 date: 2025-02-18
-categories: [Chrome Extensions, Enterprise]
+categories: [Chrome-Extensions, Enterprise]
 tags: [tab-suspender-pro, enterprise, chrome-management]
 keywords: "tab suspender enterprise, chrome tab management enterprise, deploy chrome extension organization, tab suspender pro business, corporate chrome extension management"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/18/tab-suspender-pro-enterprise-deployment/"

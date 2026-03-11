@@ -3,7 +3,7 @@ layout: post
 title: "Build a User Agent Switcher Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a user agent switcher extension for Chrome. This comprehensive guide covers device emulation, user agent strings, Manifest V3 implementation, and best practices for creating a powerful developer tool."
 date: 2025-01-27
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "user agent switcher extension, change user agent chrome, device emulator"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-user-agent-switcher-chrome-extension/"

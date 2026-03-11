@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Identity API: OAuth2 and Token Management for Extensions"
 description: "Complete guide to the Chrome Identity API for implementing OAuth2 authentication in extensions. Covers getAuthToken, launchWebAuthFlow, token management, and integration with Google and third-party providers."
 date: 2025-01-24
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3, authentication]
 keywords: "chrome.identity api, getAuthToken, launchWebAuthFlow, extension oauth, chrome extension authentication, token management"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-identity-api-oauth/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Linear Integration Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful linear chrome extension that integrates with Linear's issue tracker API. This comprehensive guide covers authentication, API integration, issue tracking, and best practices for creating productivity-enhancing browser extensions."
 date: 2025-01-28
-categories: [Chrome Extensions, Integration]
+categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "linear chrome extension, issue tracker extension, linear api chrome, linear integration, linear issue tracker, chrome extension development"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-linear-integration-chrome-extension/"

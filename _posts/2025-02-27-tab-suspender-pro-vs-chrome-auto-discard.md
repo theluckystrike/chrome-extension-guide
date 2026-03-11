@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro vs Chrome's Built-In Tab Discarding: What's the Difference?"
 description: "Compare Tab Suspender Pro vs Chrome's built-in tab discarding. Learn why power users prefer Tab Suspender Pro for granular control, custom whitelists, and superior memory management."
 date: 2025-02-27
-categories: [Chrome Extensions, Comparisons]
+categories: [Chrome-Extensions, Comparisons]
 tags: [tab-suspender-pro, chrome-discard, comparison]
 keywords: "tab suspender pro vs chrome discard, chrome auto tab discard, chrome built in tab management, tab discarding vs tab suspending, chrome memory saver vs tab suspender"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/27/tab-suspender-pro-vs-chrome-auto-discard/"

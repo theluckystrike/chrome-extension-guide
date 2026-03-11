@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Hot Reload During Development: The Complete Guide"
 description: "Master chrome extension hot reload and live reload extension development workflows. Learn to configure automatic reloading, optimize your development environment, and save hours of manual testing time."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension hot reload, live reload extension development, chrome extension auto reload, manifest v3 hot reload, chrome extension development workflow"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-hot-reload-during-development/"

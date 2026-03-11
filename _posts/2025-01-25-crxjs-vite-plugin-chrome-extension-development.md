@@ -3,7 +3,7 @@ layout: post
 title: "CRXJS Vite Plugin for Chrome Extension Development: The Complete Guide"
 description: "Master CRXJS Vite Plugin for seamless Chrome extension development. Learn how to build, package, and publish Chrome extensions with Vite-powered tooling. Complete guide covering setup, configuration, and best practices for modern extension development in 2025."
 date: 2025-01-25
-categories: [Chrome Extensions, Framework]
+categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework, tooling]
 keywords: "crxjs vite plugin, crxjs chrome extension, vite extension development, chrome extension build tools, vite chrome extension, crxjs vs web-ext"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/crxjs-vite-plugin-chrome-extension-development/"

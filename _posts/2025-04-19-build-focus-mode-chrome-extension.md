@@ -3,7 +3,7 @@ layout: post
 title: "Build a Focus Mode Chrome Extension: Distraction-Free Reading Experience"
 description: "Learn how to build a Focus Mode Chrome extension for distraction-free reading. This comprehensive guide covers Manifest V3, content scripts, and creating a clean reading experience in Chrome."
 date: 2025-04-19
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [focus-mode, reading, chrome-extension]
 keywords: "chrome extension focus mode, distraction free chrome, reading mode chrome extension, build focus extension, clean reading chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-focus-mode-chrome-extension/"

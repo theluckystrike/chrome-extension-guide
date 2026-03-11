@@ -3,7 +3,7 @@ layout: post
 title: "File Handling API in Chrome Extensions: Complete Guide 2025"
 description: "Master the File Handling API in Chrome extensions with our comprehensive guide. Learn file handling extension development, file association Chrome integration, and how to enable open with extension functionality for powerful file management."
 date: 2025-01-27
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "file handling extension, file association chrome, open with extension, chrome file handling API, file handling chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/file-handling-api-chrome-extensions/"

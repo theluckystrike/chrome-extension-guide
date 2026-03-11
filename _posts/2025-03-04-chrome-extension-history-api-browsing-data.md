@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension History API: Access and Manage Browsing History"
 description: "Learn how to use the Chrome Extension History API to access, search, and manage browsing history programmatically. Build powerful history manager extensions with chrome.history."
 date: 2025-03-04
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [history, chrome-extension, tutorial]
 keywords: "chrome extension history API, chrome.history, browsing history extension, chrome extension access history, history manager chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/"

@@ -3,7 +3,7 @@ layout: post
 title: "Web Speech API in Chrome Extensions: Voice Commands and Dictation"
 description: "Master the Web Speech API for Chrome extensions. Learn to implement voice commands, speech recognition, and dictation features in your Chrome extension with practical examples and best practices."
 date: 2025-01-21
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, voice-commands]
 keywords: "web speech api extension, voice commands chrome, speech recognition extension, dictation extension, chrome speech to text, voice input chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/web-speech-api-chrome-extension/"

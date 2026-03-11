@@ -3,7 +3,7 @@ layout: post
 title: "Day.js Date Handling in Chrome Extensions: Complete 2025 Guide"
 description: "Master dayjs extension date handling in Chrome extensions. Learn date manipulation chrome techniques, time formatting extension best practices, and how to implement Day.js for robust timestamp handling across your extension's content scripts, background workers, and popup pages."
 date: 2025-01-29
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "dayjs extension, date manipulation chrome, time formatting extension, Day.js chrome extension, date handling chrome extension, javascript date library"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-dayjs-dates/"

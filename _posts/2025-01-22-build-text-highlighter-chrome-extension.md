@@ -3,7 +3,7 @@ layout: post
 title: "Build a Text Highlighter Chrome Extension: Complete 2025 Tutorial"
 description: "Learn how to build a text highlighter Chrome extension from scratch. This comprehensive tutorial covers web annotation extension development, highlighting text in Chrome, and how to create your own text highlighter extension using modern JavaScript."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "text highlighter extension, highlight text chrome, web annotation extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-text-highlighter-chrome-extension/"

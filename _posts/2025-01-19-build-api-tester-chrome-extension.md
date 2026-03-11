@@ -3,7 +3,7 @@ layout: post
 title: "Build an API Tester Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful REST API tester Chrome extension from scratch. This comprehensive guide covers Manifest V3 setup, HTTP request handling, response formatting, history storage, and advanced features like environment variables and collections."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "api tester extension, rest client chrome extension, http client extension, chrome extension development, build api tester, postman alternative chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-api-tester-chrome-extension/"

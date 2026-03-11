@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Testing & Automation: Complete Guide for 2025"
 description: "Master chrome extension testing with this comprehensive guide. Learn unit testing, integration testing with Puppeteer, E2E testing, mocking Chrome APIs, CI/CD pipelines, and debugging tips for robust extensions."
 date: 2025-01-16
-categories: [Chrome Extensions, Testing]
+categories: [Chrome-Extensions, Testing]
 tags: [testing, automation, puppeteer, chrome-extension]
 keywords: "chrome extension testing, test chrome extension, extension automation testing, puppeteer chrome extension test, chrome extension unit testing, chrome extension integration testing"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-testing-automation-guide/"

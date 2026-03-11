@@ -3,7 +3,7 @@ layout: post
 title: "Build an Auto-Pagination Chrome Extension: Infinite Scrolling on Any Site"
 description: "Learn how to build a Chrome extension that automatically loads the next page when you reach the bottom of any website. Complete guide with code examples for auto next page functionality."
 date: 2025-04-27
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [pagination, scroll, chrome-extension]
 keywords: "chrome extension auto pagination, infinite scroll extension, auto next page chrome, chrome extension auto scroll, pagination extension chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/27/build-auto-pagination-chrome-extension/"

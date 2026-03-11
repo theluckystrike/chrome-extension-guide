@@ -3,7 +3,7 @@ layout: post
 title: "Dependency Injection in Chrome Extensions: A Complete Guide"
 description: "Master dependency injection in Chrome extensions with this comprehensive guide. Learn how to implement DI patterns using Inversify, improve code modularity, and build maintainable extension architecture."
 date: 2025-01-25
-categories: [Chrome Extensions, Architecture]
+categories: [Chrome-Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "dependency injection extension, di pattern chrome, inversify extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-dependency-injection/"

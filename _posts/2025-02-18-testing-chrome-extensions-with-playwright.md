@@ -3,7 +3,7 @@ layout: post
 title: "Testing Chrome Extensions with Playwright: Complete Automation Guide 2025"
 description: "Learn how to test chrome extensions with Playwright automation. This guide covers e2e testing, automated extension testing workflows, best practices for playwright extension testing, and CI/CD integration for robust chrome extension quality assurance."
 date: 2025-02-18
-categories: [Chrome Extensions, Testing]
+categories: [Chrome-Extensions, Testing]
 tags: [playwright, testing, automation, chrome-extension]
 keywords: "test chrome extension playwright, chrome extension e2e testing, playwright extension testing, automated chrome extension testing"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/18/testing-chrome-extensions-with-playwright/"

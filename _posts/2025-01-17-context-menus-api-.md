@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Context Menus API Tutorial"
 description: "Master the Chrome Context Menus API with this comprehensive tutorial. Learn how to create custom right-click menus for Chrome extensions using Manifest V3, with practical examples and best practices for building powerful context menu extensions."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, guide]
 keywords: "chrome context menu extension, right click menu chrome extension, chrome extension context menus api, manifest v3 context menu, chrome contextmenu api tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/context-menus-api-tutorial/"

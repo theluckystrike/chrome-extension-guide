@@ -3,7 +3,7 @@ layout: post
 title: "Caching Strategies for Chrome Extensions: A Complete Guide"
 description: "Master chrome extension caching with the Cache API, chrome.storage, and offline-first patterns. Learn implementation strategies for better performance and offline support."
 date: 2025-01-23
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 ---
 

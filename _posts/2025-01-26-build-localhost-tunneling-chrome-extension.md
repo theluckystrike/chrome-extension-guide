@@ -3,7 +3,7 @@ layout: post
 title: "Build a Localhost Tunneling Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a localhost tunnel extension for Chrome. This comprehensive guide covers ngrok integration, local dev access extension setup, and tunnel management for seamless browser-based development workflows."
 date: 2025-01-26
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "localhost tunnel extension, ngrok chrome, local dev access extension, chrome extension localhost tunnel, develop localhost extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-localhost-tunneling-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Web Font Checker Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a webfont checker extension that analyzes font loading performance, detects typography issues, and helps optimize web typography. Perfect for developers and designers who want to ensure consistent typography across websites."
 date: 2025-01-27
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "webfont checker extension, font loading chrome, typography extension, chrome extension font checker, web font analyzer extension, detect web fonts chrome extension, font loading performance extension, typography inspector chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-web-font-checker-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Media Session API for Extensions: Complete Implementation Guide"
 description: "Learn how to implement the Chrome Media Session API in your extensions to provide rich media controls, lock screen controls, and system-level audio integration. Complete guide with code examples and best practices."
 date: 2025-01-27
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "media session extension, media controls chrome, audio player extension, chrome media session api, media session chrome extension implementation"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-media-session-api-extensions/"

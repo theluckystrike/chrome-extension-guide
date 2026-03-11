@@ -3,7 +3,7 @@ layout: post
 title: "WebUSB API in Chrome Extensions: Hardware Integration Guide"
 description: "Learn how to integrate USB devices with Chrome extensions using the WebUSB API. This comprehensive guide covers device discovery, communication protocols, security considerations, and practical implementation patterns for building hardware-integrated extensions."
 date: 2025-01-21
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, webusb, usb-device, hardware, tutorial]
 keywords: "webusb chrome extension, usb device extension, hardware chrome extension, webusb api, chrome extension usb, chrome webusb, usb communication chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/webusb-chrome-extension/"

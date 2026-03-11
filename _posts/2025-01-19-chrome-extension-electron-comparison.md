@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension vs Electron App: When to Choose Which Technology"
 description: "Deciding between a Chrome extension and an Electron app? This comprehensive guide covers use cases, performance, distribution, and development factors to help you choose the right technology for your project."
 date: 2025-01-19
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension vs electron, extension or desktop app, browser extension alternatives, chrome extension vs desktop application"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-electron-comparison/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Options Page Design Guide: Best Practices for 2025"
 description: "Learn how to design and build Chrome extension options pages that users love. This comprehensive guide covers options_page vs options_ui, extension settings UI patterns, and modern design best practices for Manifest V3."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension options page, extension settings ui, options_page vs options_ui, chrome extension settings page design, manifest v3 options page"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/"

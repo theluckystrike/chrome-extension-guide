@@ -3,7 +3,7 @@ layout: post
 title: "Build a Performance Monitor Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a performance monitor extension with fps counter chrome, memory monitor extension features, and real-time metrics. This comprehensive tutorial covers Chrome extension development with Manifest V3 for creating powerful performance monitoring tools."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "performance monitor extension, fps counter chrome, memory monitor extension, chrome extension performance, build chrome extension tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-performance-monitor-chrome-extension/"

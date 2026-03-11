@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro and Pinned Tabs: How to Handle Your Always-On Tabs"
 description: "Learn how Tab Suspender Pro handles pinned tabs, configure exclusions for never-suspend pinned tabs, and optimize chrome pinned tabs memory usage effectively."
 date: 2025-03-13
-categories: [Chrome Extensions, Guides]
+categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, pinned-tabs, configuration]
 keywords: "tab suspender pro pinned tabs, never suspend pinned tabs, chrome pinned tabs memory, tab suspender exclude pinned, pinned tab management chrome"
 ---

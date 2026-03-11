@@ -3,7 +3,7 @@ layout: post
 title: "Build a Website Blocker Chrome Extension: Focus Mode for Productivity"
 description: "Learn how to build a powerful website blocker Chrome extension with focus mode, custom blocklists, and productivity timers. Boost your productivity by blocking distracting websites in Chrome today."
 date: 2025-04-10
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [website-blocker, focus, chrome-extension]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/10/build-website-blocker-chrome-extension/"

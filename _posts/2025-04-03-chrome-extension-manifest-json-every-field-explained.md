@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension manifest.json: Every Field Explained with Examples"
 description: "Complete guide to Chrome Extension manifest.json v3. Learn every field, from manifest_version to permissions, with practical code examples for building powerful extensions."
 date: 2025-04-03
-categories: [Chrome Extensions, Reference]
+categories: [Chrome-Extensions, Reference]
 tags: [manifest, configuration, chrome-extension]
 keywords: "chrome extension manifest.json, manifest json fields, chrome extension manifest guide, manifest v3 all fields, chrome extension configuration file"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/03/chrome-extension-manifest-json-every-field-explained/"

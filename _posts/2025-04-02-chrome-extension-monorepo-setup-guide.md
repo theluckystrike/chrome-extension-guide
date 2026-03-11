@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Monorepo Setup: Manage Multiple Extensions in One Repo"
 description: "Learn how to set up a chrome extension monorepo using Turborepo. Manage multiple Chrome extensions in one repository with shared code, efficient builds, and streamlined maintenance."
 date: 2025-04-02
-categories: [Chrome Extensions, Architecture]
+categories: [Chrome-Extensions, Architecture]
 tags: [monorepo, architecture, chrome-extension]
 keywords: "chrome extension monorepo, monorepo chrome extension, turborepo chrome extension, chrome extension workspace, manage multiple extensions"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/02/chrome-extension-monorepo-setup-guide/"

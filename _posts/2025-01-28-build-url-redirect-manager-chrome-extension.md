@@ -3,7 +3,7 @@ layout: post
 title: "Build a URL Redirect Manager Chrome Extension — Complete 2025 Guide"
 description: "Learn how to build a URL redirect manager Chrome extension from scratch. This comprehensive guide covers manifest V3, webNavigation API, redirect rules, and practical implementation with code examples."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-url-redirect-manager-chrome-extension/"

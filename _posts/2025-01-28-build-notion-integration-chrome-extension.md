@@ -3,7 +3,7 @@ layout: post
 title: "Build a Notion Integration Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a Notion chrome extension from scratch. This comprehensive guide covers the Notion API, content scripts, authentication flow, and how to create a powerful save to notion extension that clips web content directly to your Notion workspace."
 date: 2025-01-28
-categories: [Chrome Extensions, Integration]
+categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "notion chrome extension, notion clipper, save to notion extension, notoin integration chrome, chrome extension notion api, build notion extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-notion-integration-chrome-extension/"

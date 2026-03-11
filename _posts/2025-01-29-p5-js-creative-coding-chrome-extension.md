@@ -3,7 +3,7 @@ layout: post
 title: "p5.js Creative Coding in Chrome Extensions: Complete Guide"
 description: "Learn how to integrate p5.js creative coding into Chrome extensions. This comprehensive guide covers generative art extensions, canvas manipulation, and building interactive creative tools using p5.js in your Chrome extensions."
 date: 2025-01-29
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "p5 js extension, creative coding chrome, generative art extension, p5.js chrome extension tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/p5-js-creative-coding-chrome-extension/"

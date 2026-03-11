@@ -3,7 +3,7 @@ layout: post
 title: "Shape Detection API in Chrome Extensions: Complete Guide 2025"
 description: "Master the Shape Detection API for Chrome extensions. Learn how to implement face detection chrome, barcode scanning, and text detection api in your extensions with practical examples and best practices."
 date: 2025-01-27
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "shape detection extension, face detection chrome, text detection api, chrome shape detection, barcode detection extension, chrome extension face detection"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-shape-detection/"

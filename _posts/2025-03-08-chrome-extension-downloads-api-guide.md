@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Downloads API: Build a Download Manager Extension"
 description: "Master the Chrome downloads API to build a powerful download manager extension. Learn chrome.downloads methods, event handling, file management, and advanced features for creating professional download managers."
 date: 2025-03-08
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [downloads, chrome-extension, tutorial]
 keywords: "chrome extension downloads API, chrome.downloads, download manager chrome extension, chrome extension file download, manage downloads chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/08/chrome-extension-downloads-api-guide/"

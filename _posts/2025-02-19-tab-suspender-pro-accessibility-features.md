@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Accessibility Features: Managing Tabs for All Users"
 description: "Discover how Tab Suspender Pro prioritizes accessibility. Learn about keyboard shortcuts, screen reader support, high contrast mode, and cognitive load reduction for disabled users."
 date: 2025-02-19
-categories: [Chrome Extensions, Accessibility]
+categories: [Chrome-Extensions, Accessibility]
 tags: [tab-suspender-pro, accessibility, chrome-extension]
 author: theluckystrike
 ---

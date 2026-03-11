@@ -3,7 +3,7 @@ layout: post
 title: "Howler.js Audio in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to integrate Howler.js audio library in Chrome extensions. This comprehensive guide covers sound playback, spatial audio, sprite management, and best practices for building audio-enabled extensions."
 date: 2025-01-29
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "howler js extension, audio library chrome, sound player extension, howler.js chrome extension audio"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/howler-js-audio-chrome-extensions/"

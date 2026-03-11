@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Storage API Advanced Patterns: sync, local, session and managed"
 description: "Deep dive into the Chrome Storage API covering sync, local, session, and managed storage areas. Learn advanced patterns for data persistence, migrations, quota management, and real-time synchronization."
 date: 2025-01-24
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.storage api, storage sync vs local, extension data persistence, chrome.storage.session, managed storage, onChanged event"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-storage-api-patterns/"

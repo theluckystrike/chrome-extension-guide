@@ -3,7 +3,7 @@ layout: post
 title: "Testing Chrome Extensions with Puppeteer: Automated Browser Testing Guide"
 description: "Learn how to test Chrome extensions with Puppeteer automation. This comprehensive guide covers automated browser testing, extension testing best practices, and puppeteer extension testing techniques for 2025."
 date: 2025-03-06
-categories: [Chrome Extensions, Testing]
+categories: [Chrome-Extensions, Testing]
 tags: [puppeteer, testing, automation]
 keywords: "chrome extension puppeteer, test chrome extension puppeteer, puppeteer extension testing, automate chrome extension test, chrome extension automation"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/06/chrome-extension-testing-puppeteer/"

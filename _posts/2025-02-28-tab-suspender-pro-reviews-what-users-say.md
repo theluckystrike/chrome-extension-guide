@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Reviews: What Real Users Say About This Chrome Extension"
 description: "Discover what real users say in their Tab Suspender Pro reviews. Comprehensive analysis of ratings, pros, cons, and how it compares to alternatives for Chrome tab management."
 date: 2025-02-28
-categories: [Chrome Extensions, Reviews]
+categories: [Chrome-Extensions, Reviews]
 tags: [tab-suspender-pro, reviews, chrome-extension]
 keywords: "tab suspender pro review, tab suspender pro rating, is tab suspender pro good, tab suspender chrome review, best tab suspender extension review"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/28/tab-suspender-pro-reviews-what-users-say/"

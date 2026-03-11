@@ -3,7 +3,7 @@ layout: post
 title: "Building Custom Chrome DevTools Panels: A Complete Developer Guide"
 description: "Master the art of building custom Chrome DevTools panels with this comprehensive tutorial. Learn how to create inspector extensions, integrate debugging tools, and extend Chrome's developer console with your own custom panels."
 date: 2025-01-18
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "custom devtools panel, chrome extension devtools, inspector extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-custom-chrome-devtools-panels/"

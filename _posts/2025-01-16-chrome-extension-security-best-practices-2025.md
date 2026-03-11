@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Security Best Practices: Protect Your Users in 2025"
 description: "Learn essential Chrome extension security best practices for 2025. Discover how to protect your users from vulnerabilities, implement proper CSP configuration, minimize permissions, and conduct thorough security audits."
 date: 2025-01-16
-categories: [Chrome Extensions, Security]
+categories: [Chrome-Extensions, Security]
 tags: [security, permissions, chrome-extension, best-practices]
 keywords: "chrome extension security, extension permissions best practices, secure chrome extension development, browser extension security audit, chrome extension vulnerabilities, CSP chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/"

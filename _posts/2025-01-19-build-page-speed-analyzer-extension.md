@@ -3,7 +3,7 @@ layout: post
 title: "Build a Page Speed Analyzer Extension: Complete Chrome Extension Development Guide"
 description: "Learn how to build a powerful page speed analyzer extension for Chrome. This comprehensive tutorial covers Web Vitals, performance metrics, Lighthouse integration, and Manifest V3 development patterns."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "page speed extension, performance checker chrome, web vitals extension, chrome extension page speed analyzer, website performance tool chrome extension, web vitals checker chrome extension, page performance analyzer extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-page-speed-analyzer-extension/"

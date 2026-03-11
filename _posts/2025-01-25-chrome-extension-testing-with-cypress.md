@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Testing with Cypress: Complete E2E Testing Guide"
 description: "Master Cypress testing for Chrome extensions with our comprehensive guide covering setup, configuration, popup testing, content script validation, and CI/CD integration for robust extension quality assurance."
 date: 2025-01-25
-categories: [Chrome Extensions, Testing]
+categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "cypress chrome extension, cypress extension test, cypress e2e extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-testing-with-cypress/"

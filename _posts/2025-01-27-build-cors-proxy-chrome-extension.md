@@ -3,7 +3,7 @@ layout: post
 title: "Build a CORS Proxy Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a CORS proxy Chrome extension to bypass cross-origin restrictions. This comprehensive guide covers manifest configuration, background workers, content scripts, and deployment."
 date: 2025-01-27
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "cors proxy extension, cors bypass chrome, cross origin extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-cors-proxy-chrome-extension/"

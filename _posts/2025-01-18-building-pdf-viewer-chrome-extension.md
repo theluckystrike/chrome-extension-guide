@@ -3,7 +3,7 @@ layout: post
 title: "Building a PDF Viewer Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful PDF viewer Chrome extension from scratch. This comprehensive guide covers Manifest V3, PDF.js integration, custom rendering, and publishing to the Chrome Web Store."
 date: 2025-01-18
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome extension pdf viewer, pdf viewer extension, custom pdf reader extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-pdf-viewer-chrome-extension/"

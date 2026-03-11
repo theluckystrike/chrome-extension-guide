@@ -3,7 +3,7 @@ layout: post
 title: "Turndown HTML to Markdown in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to implement Turndown in your Chrome extension to convert HTML to Markdown. Complete guide covering setup, configuration, customization, and best practices for building a content converter extension."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "turndown extension, html markdown chrome, content converter extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-turndown/"

@@ -3,7 +3,7 @@ layout: post
 title: "Fix Chrome Memory Leaks with Tab Suspender Pro: Stop RAM Bloat"
 description: "Learn how Tab Suspender Pro fixes chrome memory leaks and prevents RAM bloat. Proven chrome RAM bloat fix strategies to stop chrome leaking memory tabs."
 date: 2025-03-23
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, memory-leak, chrome-performance]
 keywords: "chrome memory leak fix, tab suspender memory leak, chrome RAM bloat fix, chrome leaking memory tabs, tab suspender pro memory leak solution"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/23/tab-suspender-pro-chrome-memory-leak-fix/"

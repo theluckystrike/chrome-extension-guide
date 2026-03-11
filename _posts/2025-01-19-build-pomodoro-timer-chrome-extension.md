@@ -3,7 +3,7 @@ layout: post
 title: "Build a Pomodoro Timer Chrome Extension: Complete Development Guide"
 description: "Learn how to build a Pomodoro Timer Chrome Extension from scratch. This comprehensive tutorial covers Manifest V3, timer functionality, notifications, and productivity features for your own timer extension."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "pomodoro chrome extension, timer extension, productivity timer extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-pomodoro-timer-chrome-extension/"

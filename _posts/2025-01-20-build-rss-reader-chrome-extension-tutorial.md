@@ -3,7 +3,7 @@ layout: post
 title: "Build an RSS Reader Chrome Extension: Complete Tutorial for 2025"
 description: "Learn how to build a powerful RSS reader Chrome extension from scratch. This comprehensive rss extension tutorial covers Manifest V3, feed parsing, real-time updates, and deployment. Perfect for developers looking to create a feed reader chrome extension."
 date: 2025-01-20
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "rss reader extension, feed reader chrome, rss extension tutorial, build chrome extension rss, chrome rss feed reader"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-rss-reader-chrome-extension-tutorial/"

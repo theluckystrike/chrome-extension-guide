@@ -3,7 +3,7 @@ layout: post
 title: "Custom New Tab Page Chrome Extension Tutorial — Complete Guide (2025)"
 description: "Learn how to build a custom new tab page Chrome extension with this comprehensive tutorial. Covers Manifest V3, chrome://newtab override, themes, widgets, and publishing to the Chrome Web Store."
 date: 2025-01-18
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/custom-new-tab-page-chrome-extension-tutorial/"

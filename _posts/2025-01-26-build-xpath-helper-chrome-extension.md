@@ -3,7 +3,7 @@ layout: post
 title: "Build an XPath Helper Chrome Extension - Complete Developer's Guide"
 description: "Learn how to build a powerful XPath Helper Chrome Extension from scratch. This comprehensive tutorial covers XPath selectors, DOM traversal, and creating developer tools for efficient element targeting in Chrome."
 date: 2025-01-26
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "xpath helper extension, xpath selector chrome, xml query extension, chrome xpath tool, xpath finder chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-xpath-helper-chrome-extension/"

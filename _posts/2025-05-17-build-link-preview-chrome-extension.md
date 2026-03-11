@@ -3,7 +3,7 @@ layout: post
 title: "Build a Link Preview Chrome Extension: Hover to See Page Previews"
 description: "Learn to build a link preview Chrome extension that shows page previews on hover. Complete guide with code examples for Manifest V3."
 date: 2025-05-17
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [link-preview, hover, chrome-extension]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/17/build-link-preview-chrome-extension/"

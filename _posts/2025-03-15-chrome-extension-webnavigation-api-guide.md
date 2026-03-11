@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension WebNavigation API: Track Page Loads and Redirects"
 description: "Master the chrome.webNavigation API to track page loads, detect redirects, and monitor navigation events in Chrome extensions. Complete 2025 developer guide."
 date: 2025-03-15
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [webnavigation, chrome-extension, tutorial]
 keywords: "chrome extension webNavigation, track page loads chrome extension, chrome.webNavigation API, page redirect detection extension, navigation events chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/15/chrome-extension-webnavigation-api-guide/"

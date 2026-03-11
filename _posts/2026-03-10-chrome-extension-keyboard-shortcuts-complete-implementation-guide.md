@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Keyboard Shortcuts: Complete Implementation Guide"
 description: "Learn how to implement keyboard shortcuts in Chrome extensions with this comprehensive guide. Covers suggested_key configuration, onCommand listeners, platform-specific combinations, and user customization options."
 date: 2026-03-10
-categories: [Chrome Extensions, APIs, User Experience]
+categories: [Chrome-Extensions, APIs, User-Experience]
 tags: [keyboard-shortcuts, chrome-commands, extension-development, user-experience]
 keywords: "chrome extension keyboard shortcuts, chrome.commands API, suggested_key, onCommand listener, keyboard shortcuts chrome extension, global hotkeys extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2026/03/10/chrome-extension-keyboard-shortcuts-complete-implementation-guide/"

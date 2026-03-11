@@ -3,7 +3,7 @@ layout: post
 title: "Toast Notification System in Chrome Extensions: Complete Guide"
 description: "Learn how to implement toast notification systems in Chrome extensions. This comprehensive guide covers snackbar chrome extension patterns, notification UI best practices, and modern implementation techniques for Manifest V3."
 date: 2025-01-29
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "toast notification extension, snackbar chrome extension, notification ui"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/toast-notification-system-chrome-extensions/"

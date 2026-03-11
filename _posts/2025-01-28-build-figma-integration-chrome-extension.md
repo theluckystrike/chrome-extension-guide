@@ -3,7 +3,7 @@ layout: post
 title: "Build a Figma Integration Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful Figma integration Chrome extension from scratch. This comprehensive guide covers the Figma API, design-to-code workflows, and how to create a figma chrome extension that transforms your design workflow."
 date: 2025-01-28
-categories: [Chrome Extensions, Integration]
+categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "figma chrome extension, design to code extension, figma tool, figma integration chrome extension, build figma extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-figma-integration-chrome-extension/"

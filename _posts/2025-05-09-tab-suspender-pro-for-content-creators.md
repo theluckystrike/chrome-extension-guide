@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Content Creators: Manage YouTube, Canva, and Editor Tabs"
 description: "Discover how Tab Suspender Pro helps content creators manage YouTube, Canva, and editor tabs. Free RAM, boost productivity, and optimize your browser for seamless video editing and content creation workflow."
 date: 2025-05-09
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, content-creators, workflow]
 keywords: "tab suspender pro content creators, youtube tabs chrome memory, canva chrome performance, content creator browser management, video editing chrome tabs"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/09/tab-suspender-pro-for-content-creators/"

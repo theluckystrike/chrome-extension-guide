@@ -3,7 +3,7 @@ layout: post
 title: "Build a DOM Inspector Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a DOM Inspector Chrome extension with element picker functionality. This comprehensive guide covers Manifest V3, content scripts, DOM traversal, HTML inspection, and best practices for creating powerful developer tools."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "dom inspector extension, element picker chrome, html inspector extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-dom-inspector-chrome-extension/"

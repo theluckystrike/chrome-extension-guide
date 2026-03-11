@@ -3,7 +3,7 @@ layout: post
 title: "Using Web Workers in Chrome Extensions: Complete Guide to Background Processing"
 description: "Master chrome extension web workers for efficient background processing. Learn how to implement Web Workers in Manifest V3, offload heavy tasks, and improve extension performance."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension web workers, background processing extension, chrome extension background tasks, manifest v3 web workers, extension performance optimization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-web-workers-guide/"

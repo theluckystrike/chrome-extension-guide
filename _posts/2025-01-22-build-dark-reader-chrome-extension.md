@@ -3,7 +3,7 @@ layout: post
 title: "Build a Dark Reader Chrome Extension — Complete 2025 Tutorial"
 description: "Learn how to build a dark reader Chrome extension with dark mode injection. This comprehensive tutorial covers content scripts, CSS inversion, shadow DOM, and how to implement dark theme for all sites."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 author: theluckystrike
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-dark-reader-chrome-extension/"

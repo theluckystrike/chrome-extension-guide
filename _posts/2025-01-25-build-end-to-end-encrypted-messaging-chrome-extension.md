@@ -3,7 +3,7 @@ layout: post
 title: "Build End-to-End Encrypted Messaging Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a secure encrypted messaging extension for Chrome with end-to-end encryption. This comprehensive guide covers cryptographic implementations, message handling, and privacy-first architecture for Chrome extensions."
 date: 2025-01-25
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "encrypted messaging extension, e2e encryption chrome, secure chat extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-end-to-end-encrypted-messaging-chrome-extension/"

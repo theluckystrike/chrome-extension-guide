@@ -3,7 +3,7 @@ layout: post
 title: "WXT Framework for Chrome Extension Development: The Complete Guide"
 description: "Discover WXT, the modern framework for building Chrome extensions. Learn how WXT simplifies extension development with Vite-powered tooling, auto-reload, and seamless testing. Complete guide for developers in 2025."
 date: 2025-01-25
-categories: [Chrome Extensions, Framework]
+categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework, tooling]
 keywords: "wxt chrome extension, wxt framework, modern extension tooling, chrome extension development framework, wxt vs other frameworks"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/wxt-framework-chrome-extension-development/"

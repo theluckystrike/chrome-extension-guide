@@ -3,7 +3,7 @@ layout: post
 title: "Build a CSS Grid Inspector Chrome Extension: Visualize Grid Layouts"
 description: "Learn how to build a CSS Grid Inspector Chrome extension to visualize and debug CSS Grid layouts. Complete guide with code examples for overlay visualization."
 date: 2025-05-04
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [css-grid, inspector, chrome-extension]
 keywords: "chrome extension css grid, grid inspector chrome, css grid overlay extension, visualize css grid chrome, grid debugging extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/04/build-css-grid-inspector-chrome-extension/"

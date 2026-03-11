@@ -3,7 +3,7 @@ layout: post
 title: "Compute Pressure API in Chrome Extensions: Complete Guide 2025"
 description: "Master the Compute Pressure API for Chrome extensions. Learn how to monitor CPU load, create adaptive extensions that respond to system resources, and build intelligent CPU monitoring features using the Compute Pressure API."
 date: 2025-01-27
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "compute pressure extension, cpu monitor chrome, system load extension, compute pressure api chrome, chrome extension cpu monitoring, system resource api chrome, chrome extension performance, compute pressure javascript api, chrome cpu usage extension, chrome system monitoring"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/compute-pressure-api-guide/"

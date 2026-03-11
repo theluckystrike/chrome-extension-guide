@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro: The Productivity Tool Every Power User Needs in 2025"
 description: "Discover how Tab Suspender Pro transforms browser productivity by automatically managing tabs, boosting focus, and streamlining workflow for power users."
 date: 2025-02-16
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, productivity, workflow]
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/16/tab-suspender-pro-productivity-workflow/"
 ---

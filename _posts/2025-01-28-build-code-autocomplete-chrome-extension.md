@@ -3,7 +3,7 @@ layout: post
 title: "Build a Code Autocomplete Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a code autocomplete extension like GitHub Copilot for Chrome. This comprehensive guide covers AI-powered code suggestions, Chrome extension APIs, and implementation patterns for creating your own code helper."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "code autocomplete extension, ai code helper chrome, code suggestion"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-code-autocomplete-chrome-extension/"

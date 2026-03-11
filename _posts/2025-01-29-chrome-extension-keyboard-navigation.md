@@ -3,7 +3,7 @@ layout: post
 title: "Mastering Keyboard Navigation in Chrome Extensions: A Complete Guide"
 description: "Learn how to implement effective keyboard navigation in Chrome extensions. Discover keyboard shortcuts UI patterns, accessible navigation techniques, and best practices for creating keyboard-friendly extensions."
 date: 2025-01-29
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "keyboard navigation extension, keyboard shortcuts ui, accessible navigation"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-keyboard-navigation/"

@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Timer Settings: Find the Perfect Suspension Delay"
 description: "Master tab suspender pro timer settings with our complete guide. Learn optimal suspension delays for different workflows, customize timeout settings, and maximize browser performance."
 date: 2025-03-14
-categories: [Chrome Extensions, Guides]
+categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, timer, settings]
 keywords: "tab suspender pro timer, tab suspension delay, how long before tab suspends, tab suspender timeout settings, chrome tab idle time"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/14/tab-suspender-pro-timer-delay-settings/"

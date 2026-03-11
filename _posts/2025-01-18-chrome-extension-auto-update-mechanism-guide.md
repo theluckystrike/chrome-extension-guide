@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Auto Update Mechanism Guide: Complete Implementation Tutorial"
 description: "Master chrome extension auto update mechanism for seamless version management. Learn how Chrome updates extensions automatically, implement custom update checks, and handle version conflicts effectively."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension auto update, extension version management, chrome extension update mechanism, chrome.runtime.onUpdateAvailable, manifest version update"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-auto-update-mechanism-guide/"

@@ -3,7 +3,7 @@ layout: post
 title: "File System Access API in Chrome Extensions: Complete Guide"
 description: "Learn how to use the File System Access API in Chrome extensions to read and write local files. This comprehensive guide covers permissions, security best practices, and real-world implementation examples."
 date: 2025-01-22
-categories: [Chrome Extensions, API]
+categories: [Chrome-Extensions, API]
 tags: [chrome-extension, api]
 keywords: "file system api extension, read write files chrome, local file access extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/file-system-access-api-chrome-extensions/"

@@ -3,7 +3,7 @@ layout: post
 title: "Debugging Network Requests in Chrome Extensions: DevTools Deep Dive"
 description: "Learn to debug network requests in Chrome extensions with DevTools. Monitor extension API calls, trace fetch/XHR requests, and troubleshoot network issues."
 date: 2025-03-23
-categories: [Chrome Extensions, Debugging]
+categories: [Chrome-Extensions, Debugging]
 tags: [debugging, network, chrome-extension]
 keywords: "debug network chrome extension, chrome extension network tab, extension API requests debug, chrome extension fetch debug, network devtools extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/23/chrome-extension-network-debugging-guide/"

@@ -3,7 +3,7 @@ layout: post
 title: "RxJS Reactive Programming in Chrome Extensions: Complete Guide"
 description: "Master RxJS reactive programming in Chrome extensions with observable patterns, stream management, and real-world examples for building responsive extension experiences."
 date: 2025-01-25
-categories: [Chrome Extensions, State Management]
+categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "rxjs chrome extension, reactive extension, observable chrome extension, rxjs chrome, reactive programming chrome, rxjs extension patterns"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/rxjs-reactive-programming-chrome-extensions/"

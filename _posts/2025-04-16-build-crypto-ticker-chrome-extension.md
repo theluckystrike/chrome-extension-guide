@@ -3,7 +3,7 @@ layout: post
 title: "Build a Crypto Price Ticker Chrome Extension: Live Bitcoin and Ethereum Prices"
 description: "Learn how to build a crypto price ticker Chrome extension with live Bitcoin and Ethereum prices. Complete step-by-step guide for developers."
 date: 2025-04-16
-categories: [Chrome Extensions, Finance]
+categories: [Chrome-Extensions, Finance]
 tags: [crypto, ticker, chrome-extension]
 keywords: "chrome extension crypto, bitcoin price chrome extension, crypto ticker extension, cryptocurrency chrome extension, build crypto tracker"
 ---

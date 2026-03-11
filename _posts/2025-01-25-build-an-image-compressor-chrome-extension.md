@@ -3,7 +3,7 @@ layout: post
 title: "Build an Image Compressor Chrome Extension"
 description: "Learn how to build a powerful image compressor Chrome extension that reduces image file sizes without losing quality. This comprehensive guide covers compression algorithms, WebP conversion, batch processing, and Manifest V3 implementation for creating a production-ready image compressor extension."
 date: 2025-01-25
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "image compressor extension, compress images chrome, webp converter extension, chrome extension image optimization, batch image compression tool"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-an-image-compressor-chrome-extension/"

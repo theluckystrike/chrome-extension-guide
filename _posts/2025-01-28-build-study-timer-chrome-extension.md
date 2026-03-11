@@ -3,7 +3,7 @@ layout: post
 title: "Build a Study Timer Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a powerful study timer Chrome extension with Pomodoro technique, focus tracking, and productivity features. Step-by-step tutorial for beginners and advanced developers."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "study timer extension, pomodoro study chrome, focus study extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-study-timer-chrome-extension/"

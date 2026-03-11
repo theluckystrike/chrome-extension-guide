@@ -3,7 +3,7 @@ layout: post
 title: "Build an Advanced Tab Statistics Dashboard Extension: Complete 2025 Guide"
 description: "Learn how to build a powerful tab statistics extension for Chrome. This comprehensive guide covers browser analytics, tab usage tracking, and creating an interactive dashboard to monitor your browsing habits and boost productivity."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "tab statistics extension, browser analytics chrome, tab usage dashboard, chrome extension development, tab tracking, browser statistics"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-advanced-tab-statistics-dashboard-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Event Pages vs Service Workers: Complete MV3 Guide"
 description: "Learn key differences between Chrome extension event pages and service workers in Manifest V3. Master MV3 background scripts for optimal extension performance."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome event pages, background page vs service worker, mv3 background script, chrome extension event pages, manifest v3 service worker, chrome extension background script"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-event-pages-vs-service-workers/"

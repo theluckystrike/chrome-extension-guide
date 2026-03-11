@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Hot Reload: Auto-Refresh During Development"
 description: "Master chrome extension hot reload with our comprehensive 2025 guide. Learn auto reload chrome extension techniques, implement live reload for faster development, and streamline your extension development workflow with watch mode."
 date: 2025-03-16
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [hot-reload, development, chrome-extension]
 keywords: "chrome extension hot reload, auto reload chrome extension, chrome extension live reload, extension development refresh, watch mode chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/16/chrome-extension-hot-reload-development/"

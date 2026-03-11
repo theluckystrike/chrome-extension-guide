@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Text-to-Speech API Complete Guide for Extension Developers"
 description: "Master the Chrome TTS API for extensions. Learn how to implement text-to-speech, control voice parameters, handle events, and build accessible voice-enabled extensions."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome tts api, text to speech extension, speech synthesis chrome extension, chrome.tts api, text to speech chrome extension tutorial, chrome speech synthesis"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-text-to-speech-api-complete-guide/"

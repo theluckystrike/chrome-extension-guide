@@ -3,7 +3,7 @@ layout: post
 title: "Build a Viewport Size Checker Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a viewport checker extension that displays real-time viewport dimensions and device info. Perfect for responsive design testing and debugging web projects."
 date: 2025-01-27
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "viewport checker extension, screen size chrome, responsive viewport"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-viewport-size-checker-chrome-extension/"

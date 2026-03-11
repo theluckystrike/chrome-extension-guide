@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Bundling with esbuild: Ultra-Fast Build Setup"
 description: "Learn how to use esbuild for lightning-fast Chrome extension bundling. This comprehensive guide covers manifest v3 setup, build optimization, and production deployment for Chrome extensions using esbuild."
 date: 2025-03-10
-categories: [Chrome Extensions, Build Tools]
+categories: [Chrome-Extensions, Build-Tools]
 tags: [esbuild, bundling, chrome-extension, chrome extension esbuild, fast build chrome extension, esbuild manifest v3, chrome extension bundler]
 keywords: "chrome extension esbuild, esbuild chrome extension, fast build chrome extension, esbuild manifest v3, chrome extension bundler"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/10/chrome-extension-esbuild-fast-bundling/"

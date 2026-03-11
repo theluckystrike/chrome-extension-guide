@@ -3,7 +3,7 @@ layout: post
 title: "Build a Custom CSS Injector Chrome Extension: Restyle Any Website"
 description: "Learn how to build a custom CSS injector Chrome extension from scratch. This comprehensive guide covers content scripts, manifest configuration, user interface design, and advanced CSS injection techniques for 2025."
 date: 2025-04-19
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [css, styling, chrome-extension]
 keywords: "chrome extension custom css, inject css chrome extension, stylish chrome extension build, custom stylesheet chrome, override css chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-custom-css-injector-chrome-extension/"

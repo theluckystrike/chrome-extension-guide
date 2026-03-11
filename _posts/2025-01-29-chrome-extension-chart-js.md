@@ -3,7 +3,7 @@ layout: post
 title: "Chart.js in Chrome Extension Popups: Complete Implementation Guide"
 description: "Learn how to integrate Chart.js into Chrome extension popups for dynamic data visualization. This comprehensive guide covers setup, configuration, best practices, and real-world examples for building chart js extension functionality."
 date: 2025-01-29
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "chart js extension, charting chrome popup, graph extension, chartjs chrome extension, data visualization chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-chart-js/"

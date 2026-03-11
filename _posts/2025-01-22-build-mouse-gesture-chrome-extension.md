@@ -3,7 +3,7 @@ layout: post
 title: "Build a Mouse Gesture Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a mouse gesture extension for Chrome from scratch. This comprehensive tutorial covers gesture recognition, visual feedback, keyboard shortcuts, and advanced implementation patterns for a powerful gesture control chrome experience."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "mouse gesture extension, gesture control chrome, gesture shortcuts extension, build chrome extension gesture, chrome gesture recognition"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-mouse-gesture-chrome-extension/"

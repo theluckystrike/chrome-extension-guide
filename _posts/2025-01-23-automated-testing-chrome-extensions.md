@@ -3,7 +3,7 @@ layout: post
 title: "Automated Testing for Chrome Extensions: A Comprehensive Guide"
 description: "Learn how to implement automated testing for Chrome extensions with our complete guide covering Selenium, CI/CD integration, and best practices for robust extension quality assurance."
 date: 2025-01-23
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "automated testing extension, test chrome extension ci, selenium extension test"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/automated-testing-chrome-extensions/"

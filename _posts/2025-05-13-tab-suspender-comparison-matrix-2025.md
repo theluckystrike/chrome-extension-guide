@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Tab Suspender Comparison Matrix 2025: Every Extension Ranked"
 description: "Comprehensive 2025 comparison of Chrome tab suspender extensions. Compare 15+ extensions with feature matrices, performance benchmarks, privacy analysis, and expert rankings to find the best tab management solution."
 date: 2025-05-13
-categories: [Chrome Extensions, Comparisons]
+categories: [Chrome-Extensions, Comparisons]
 tags: [tab-suspender-pro, comparison-matrix, rankings]
 keywords: "tab suspender comparison 2025, best tab suspender ranked, chrome tab manager ranking, tab suspender extension matrix, compare all tab suspenders"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/13/tab-suspender-comparison-matrix-2025/"

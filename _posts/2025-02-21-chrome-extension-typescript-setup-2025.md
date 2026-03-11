@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Development with TypeScript in 2025: Complete Setup Guide"
 description: "Master TypeScript for Chrome extensions in 2025 with this complete setup guide. Learn Manifest V3 patterns, type-safe development, and build production-ready extensions with confidence."
 date: 2025-02-21
-categories: [Chrome Extensions, TypeScript]
+categories: [Chrome-Extensions, TypeScript]
 tags: [typescript, chrome-extension, setup]
 keywords: "chrome extension typescript, typescript chrome extension, chrome extension ts setup, manifest v3 typescript, type safe chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/21/chrome-extension-typescript-setup-2025/"

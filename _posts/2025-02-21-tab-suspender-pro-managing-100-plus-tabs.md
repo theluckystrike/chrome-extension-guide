@@ -3,7 +3,7 @@ layout: post
 title: "How to Manage 100+ Chrome Tabs Without Crashing: Tab Suspender Pro Guide"
 description: "Learn how to manage 100+ tabs in Chrome without crashes. Tab Suspender Pro prevents browser slowdown with smart auto-suspension and tab grouping features."
 date: 2025-02-21
-categories: [Chrome Extensions, Guides]
+categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, tab-management, chrome-performance]
 keywords: "manage 100 tabs chrome, too many chrome tabs, chrome tabs crashing, tab suspender pro 100 tabs, chrome tab limit"
 ---

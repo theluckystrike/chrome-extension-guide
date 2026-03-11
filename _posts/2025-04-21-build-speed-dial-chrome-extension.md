@@ -3,7 +3,7 @@ layout: post
 title: "Build a Speed Dial Chrome Extension: Quick Access to Your Favorite Sites"
 description: "Learn how to build a speed dial Chrome extension for quick access to favorite sites. Complete guide covering Manifest V3, new tab override, local storage, and publishing."
 date: 2025-04-21
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [speed-dial, new-tab, chrome-extension]
 keywords: "chrome extension speed dial, speed dial new tab chrome, build speed dial extension, quick access chrome extension, favorite sites new tab"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/21/build-speed-dial-chrome-extension/"

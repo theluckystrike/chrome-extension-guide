@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Native Messaging: Communicate with Desktop Applications"
 description: "Learn to implement chrome extension native messaging for desktop app communication. Complete guide with code examples, security best practices, and troubleshooting."
 date: 2025-03-05
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [native-messaging, chrome-extension, desktop-integration]
 keywords: "chrome extension native messaging, native messaging host, chrome extension desktop app, chrome extension native app communication, native messaging API chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/05/chrome-extension-native-messaging-host/"

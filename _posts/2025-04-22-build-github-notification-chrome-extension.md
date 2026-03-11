@@ -3,7 +3,7 @@ layout: post
 title: "Build a GitHub Notification Chrome Extension: Never Miss a PR or Issue"
 description: "Learn to build a GitHub notification Chrome extension that monitors PRs, issues, and reviews. Complete guide with Manifest V3, GitHub API integration, and real-time alerts."
 date: 2025-04-22
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [github, notifications, chrome-extension]
 keywords: "chrome extension github notifications, github notification extension, build github chrome extension, github alert chrome, pr notification extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/22/build-github-notification-chrome-extension/"

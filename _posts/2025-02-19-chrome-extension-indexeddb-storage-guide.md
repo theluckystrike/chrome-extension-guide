@@ -3,7 +3,7 @@ layout: post
 title: "Using IndexedDB in Chrome Extensions: Complete Storage Guide for Large Data"
 description: "Master IndexedDB storage in Chrome Extensions with this comprehensive 2025 guide. Learn advanced patterns for handling large datasets, performance optimization, and building robust offline-capable extensions with client-side database storage."
 date: 2025-02-19
-categories: [Chrome Extensions, Storage]
+categories: [Chrome-Extensions, Storage]
 tags: [indexeddb, storage, chrome-extension]
 keywords: "chrome extension indexeddb, indexeddb chrome extension, large data storage chrome extension, chrome extension database"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/19/chrome-extension-indexeddb-storage-guide/"

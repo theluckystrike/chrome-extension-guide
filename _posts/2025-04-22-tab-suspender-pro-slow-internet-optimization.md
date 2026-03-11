@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro on Slow Internet: Optimize Chrome for Low Bandwidth"
 description: "Discover how Tab Suspender Pro optimizes Chrome for slow internet connections. Reduce bandwidth usage and improve browsing on low-speed networks."
 date: 2025-04-22
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, bandwidth, slow-internet]
 keywords: "tab suspender pro slow internet, chrome slow internet tabs, reduce bandwidth chrome tabs, tab suspender low bandwidth, chrome optimization slow connection"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/22/tab-suspender-pro-slow-internet-optimization/"

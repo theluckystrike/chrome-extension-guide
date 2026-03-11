@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Cross-Origin Requests: CORS and Permissions Guide"
 description: "Master Chrome extension cross-origin requests with our comprehensive guide. Learn about CORS, host permissions, and how to fetch external APIs in Manifest V3."
 date: 2025-03-12
-categories: [Chrome Extensions, Networking]
+categories: [Chrome-Extensions, Networking]
 tags: [cors, cross-origin, chrome-extension]
 keywords: "chrome extension CORS, cross origin chrome extension, chrome extension fetch external API, chrome extension host permissions, bypass CORS chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/12/chrome-extension-cross-origin-requests-cors/"

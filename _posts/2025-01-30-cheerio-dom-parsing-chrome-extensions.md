@@ -3,7 +3,7 @@ layout: post
 title: "Cheerio DOM Parsing in Chrome Extensions: Complete 2025 Guide"
 description: "Master cheerio extension development for Chrome extensions. Learn how to use cheerio as a powerful html parser in chrome, implement dom parsing in extension, and build robust web scraping tools with this comprehensive guide."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "cheerio extension, html parser chrome, dom parsing extension, cheerio chrome extension, web scraping chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/cheerio-dom-parsing-chrome-extensions/"

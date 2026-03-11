@@ -3,7 +3,7 @@ layout: post
 title: "Build a Reading List Chrome Extension: Complete Step-by-Step Guide"
 description: "Learn how to build a reading list Chrome extension from scratch. This comprehensive tutorial covers Manifest V3, local storage, content scripts, and more. Create your own save for later extension today."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "reading list extension, save for later extension, bookmark reader"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-reading-list-chrome-extension/"

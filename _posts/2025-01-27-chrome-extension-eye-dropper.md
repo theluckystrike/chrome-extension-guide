@@ -3,7 +3,7 @@ layout: post
 title: "Eye Dropper API in Chrome Extensions: Complete Guide to Building a Color Picker Extension"
 description: "Learn how to build a powerful eye dropper extension using the Eye Dropper API in Chrome. This comprehensive guide covers the chrome.colorPicker API, Manifest V3 permissions, color extraction techniques, and best practices for creating professional color picker extensions."
 date: 2025-01-27
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "eye dropper extension, color picker api chrome, pick color extension, chrome.colorPicker API, eye dropper api chrome, color picker chrome extension, color extraction extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-eye-dropper/"

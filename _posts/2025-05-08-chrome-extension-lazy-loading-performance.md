@@ -3,7 +3,7 @@ layout: post
 title: "Lazy Loading in Chrome Extensions: Optimize Startup Performance"
 description: "Master lazy loading techniques for Chrome extensions to dramatically reduce startup time, improve performance, and create a faster user experience."
 date: 2025-05-08
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [lazy-loading, performance, chrome-extension]
 keywords: "chrome extension lazy loading, extension startup performance, chrome extension fast load, optimize extension load time, chrome extension code splitting"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/08/chrome-extension-lazy-loading-performance/"

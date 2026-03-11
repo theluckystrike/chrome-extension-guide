@@ -3,7 +3,7 @@ layout: post
 title: "How to Integrate Monaco Editor in Chrome Extensions: Complete Guide"
 description: "Learn how to integrate Monaco Editor, the powerful code editor behind VS Code, into your Chrome extensions. This comprehensive guide covers setup, configuration, customization, and best practices for building code editor extensions."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "monaco editor extension, vs code editor chrome, code editor extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/how-to-integrate-monaco-editor-in-chrome-extensions/"

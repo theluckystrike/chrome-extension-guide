@@ -3,7 +3,7 @@ layout: post
 title: "CryptoJS Encryption in Chrome Extensions: Complete 2025 Implementation Guide"
 description: "Master CryptoJS encryption in Chrome extensions with our comprehensive 2025 guide. Learn how to implement AES encryption, secure data storage, and protect sensitive information in your Chrome extensions using CryptoJS library."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "crypto js extension, aes encryption chrome, secure data extension, CryptoJS Chrome extension, encryption library chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/crypto-js-encryption-chrome-extensions-guide/"

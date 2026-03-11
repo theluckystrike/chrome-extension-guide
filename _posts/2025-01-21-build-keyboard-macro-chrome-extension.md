@@ -3,7 +3,7 @@ layout: post
 title: "Build a Keyboard Macro Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a powerful keyboard macro extension for Chrome. This comprehensive guide covers macro recording, playback, automation shortcuts, and advanced features using Manifest V3."
 date: 2025-01-21
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "keyboard macro extension, macro recorder chrome, automation shortcuts extension, chrome macro automation, chrome extension automation"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/build-keyboard-macro-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Internationalization (i18n): Support Multiple Languages"
 description: "Master Chrome extension i18n with our comprehensive guide. Learn to implement _locales, translation files, and support multiple languages seamlessly."
 date: 2025-02-22
-categories: [Chrome Extensions, Localization]
+categories: [Chrome-Extensions, Localization]
 tags: [i18n, localization, chrome-extension]
 keywords: "chrome extension i18n, chrome extension translation, internationalize chrome extension, chrome extension multiple languages, _locales chrome extension"
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "Esbuild for Chrome Extensions: Ultra Fast Builds That Will Transform Your Development Workflow"
 description: "Discover how esbuild can slash your Chrome extension build times from minutes to milliseconds. This comprehensive guide covers setting up esbuild for Chrome extensions, configuration best practices, and advanced optimization techniques for lightning-fast development cycles."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "esbuild chrome extension, fast build chrome extension, esbuild chrome extension setup, chrome extension build optimization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/esbuild-chrome-extension-ultra-fast-builds/"

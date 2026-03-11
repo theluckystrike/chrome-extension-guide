@@ -3,7 +3,7 @@ layout: post
 title: "Bundling Chrome Extensions with Webpack: Complete Build Setup Guide"
 description: "Learn how to set up Webpack for Chrome extensions with Manifest V3. This guide covers configuration, bundling strategies, code splitting, and production optimization."
 date: 2025-02-27
-categories: [Chrome Extensions, Build Tools]
+categories: [Chrome-Extensions, Build-Tools]
 tags: [webpack, bundling, chrome-extension]
 keywords: "chrome extension webpack, bundle chrome extension, webpack chrome extension, chrome extension build system, webpack manifest v3"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/27/chrome-extension-webpack-bundling-guide/"

@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Power Saving Mode: Maximum Battery Life Configuration"
 description: "Learn how to configure Tab Suspender Pro for maximum battery savings. Discover aggressive suspension settings, Chrome power consumption breakdown, and combine with OS power modes for extended laptop battery life."
 date: 2025-05-15
-categories: [Chrome Extensions, Battery]
+categories: [Chrome-Extensions, Battery]
 tags: [tab-suspender-pro, power-saving, battery]
 keywords: "tab suspender pro power saving, chrome power save extension, maximum battery chrome, tab suspender battery optimization, power efficient chrome browsing"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/15/tab-suspender-pro-power-saving-mode/"

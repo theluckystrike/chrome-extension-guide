@@ -3,7 +3,7 @@ layout: post
 title: "Vite Setup for Chrome Extension Development: Complete Guide"
 description: "Learn how to set up Vite for Chrome extension development with Manifest V3. This comprehensive guide covers vite chrome extension templates, fast extension dev workflows, and production-ready MV3 setups."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "vite chrome extension, fast extension dev, vite mv3 template, chrome extension vite setup, vite chrome extension manifest v3"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/vite-setup-chrome-extension-development/"

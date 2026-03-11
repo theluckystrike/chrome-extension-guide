@@ -3,7 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Svelte: Complete Developer Guide"
 description: "Learn how to build powerful Chrome extensions using Svelte. This comprehensive guide covers svelte chrome extension setup, svelte popup development, content script integration, and best practices for modern extension architecture."
 date: 2025-01-23
-categories: [Chrome Extensions, Framework]
+categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework]
 keywords: "svelte chrome extension, svelte popup, svelte content script extension, build chrome extension with svelte, svelte chrome extension tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/building-chrome-extensions-with-svelte/"

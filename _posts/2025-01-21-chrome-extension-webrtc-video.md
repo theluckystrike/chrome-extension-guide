@@ -3,7 +3,7 @@ layout: post
 title: "WebRTC Video Chat Chrome Extension Tutorial: Build Real-Time Communication"
 description: "Learn how to build a WebRTC video chat Chrome extension from scratch. This comprehensive tutorial covers peer connections, media streams, signaling servers, and real-time communication implementation."
 date: 2025-01-21
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "webrtc video extension, video chat chrome extension, peer connection extension, chrome extension webrtc tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-webrtc-video/"

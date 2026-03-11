@@ -3,7 +3,7 @@ layout: post
 title: "Build a Video Downloader Chrome Extension: Detect and Save Web Videos"
 description: "Learn to build a chrome extension video downloader that detects and saves web videos. Complete tutorial covering video detection, extraction, and saving functionality."
 date: 2025-04-24
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [video-downloader, media, chrome-extension]
 keywords: "chrome extension video downloader, download video chrome extension, build video saver extension, chrome extension detect video, web video downloader extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/24/build-video-downloader-chrome-extension/"

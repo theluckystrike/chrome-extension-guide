@@ -3,7 +3,7 @@ layout: post
 title: "Build a Regex Tester Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful regex tester chrome extension from scratch. This comprehensive guide covers regex debugger extension development, pattern matching tools, and regular expression testing with practical code examples."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "regex tester chrome extension, regex debugger extension, regular expression tool, regex pattern matching, chrome extension development"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-regex-tester-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Code Formatter Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a code formatter Chrome extension from scratch. This comprehensive guide covers Prettier integration, code beautification, and publishing your extension to the Chrome Web Store."
 date: 2025-01-26
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "code formatter extension, prettier chrome extension, code beautifier, chrome extension code formatter, format code in browser"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-code-formatter-chrome-extension/"

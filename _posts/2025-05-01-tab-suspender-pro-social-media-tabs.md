@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Social Media Addicts: Suspend Twitter, Facebook & Reddit"
 description: "Learn how Tab Suspender Pro helps social media addicts manage Twitter, Facebook & Reddit tabs. Save Chrome memory, reduce distractions and reclaim your productivity with smart tab suspension."
 date: 2025-05-01
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, social-media, digital-wellbeing]
 keywords: "tab suspender pro social media, suspend twitter tab, facebook tab chrome memory, reddit chrome tab, social media tab management"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/01/tab-suspender-pro-social-media-tabs/"

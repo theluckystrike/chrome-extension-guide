@@ -3,7 +3,7 @@ layout: post
 title: "Build an Advanced Reading List Chrome Extension: The Complete 2025 Guide"
 description: "Master building an advanced reading list Chrome extension with cloud sync, offline support, AI summarization, and cross-device synchronization. This comprehensive tutorial covers Manifest V3, IndexedDB storage, background sync, and advanced features for creating a production-ready save articles extension."
 date: 2025-01-25
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "reading list extension, read later chrome, save articles extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-advanced-reading-list-chrome-extension/"

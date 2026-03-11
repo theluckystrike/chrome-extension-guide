@@ -3,7 +3,7 @@ layout: post
 title: "Build a Password Generator Chrome Extension: Complete Tutorial"
 description: "Learn how to build a password generator Chrome extension from scratch. This comprehensive tutorial covers Manifest V3, secure random password generation, copy-to-clipboard functionality, and how to publish your security tool extension."
 date: 2025-01-20
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "password generator extension, random password chrome, security tool extension, build chrome extension, chrome extension password generator"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-password-generator-chrome-extension/"

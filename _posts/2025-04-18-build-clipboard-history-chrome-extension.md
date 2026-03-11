@@ -3,7 +3,7 @@ layout: post
 title: "Build a Clipboard History Chrome Extension: Never Lose Copied Text"
 description: "Learn to build a clipboard history Chrome extension from scratch. This comprehensive guide covers clipboard API, storage, UI design, and deployment for a powerful copy history chrome extension."
 date: 2025-04-18
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [clipboard, history, chrome-extension]
 keywords: "chrome extension clipboard history, clipboard manager chrome, copy history chrome extension, clipboard log extension, paste history chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/18/build-clipboard-history-chrome-extension/"

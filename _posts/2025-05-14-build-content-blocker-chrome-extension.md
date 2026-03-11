@@ -3,7 +3,7 @@ layout: post
 title: "Build a Content Blocker Chrome Extension: Hide Distracting Page Elements"
 description: "Learn how to build a content blocker Chrome extension to hide distracting page elements. Complete guide covering Manifest V3, content scripts, element selection, and publishing."
 date: 2025-05-14
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [content-blocker, element-hider, chrome-extension]
 keywords: "chrome extension content blocker, hide elements chrome, block content chrome extension, element hider extension, chrome extension remove elements"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/14/build-content-blocker-chrome-extension/"

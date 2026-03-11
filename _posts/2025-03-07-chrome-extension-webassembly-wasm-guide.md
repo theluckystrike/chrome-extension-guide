@@ -3,7 +3,7 @@ layout: post
 title: "Using WebAssembly (WASM) in Chrome Extensions: Performance Guide"
 description: "Learn how to integrate WebAssembly (WASM) in Chrome extensions for blazing fast performance. This guide covers Rust WASM setup, practical examples, and optimization tips."
 date: 2025-03-07
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [webassembly, wasm, chrome-extension]
 keywords: "chrome extension webassembly, wasm chrome extension, webassembly in extension, chrome extension wasm performance, rust wasm chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/07/chrome-extension-webassembly-wasm-guide/"

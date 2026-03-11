@@ -3,7 +3,7 @@ layout: post
 title: "Build a Code Playground Chrome Extension"
 description: "Learn how to create a powerful code playground Chrome extension with live code editing, real-time preview, and sandbox execution. This comprehensive tutorial covers building a fully functional code playground extension from scratch using modern web technologies and Chrome extension APIs."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "code playground extension, live code editor chrome, sandbox extension, chrome code editor extension, browser-based code playground, interactive coding extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-code-playground-chrome-extension/"

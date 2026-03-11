@@ -3,7 +3,7 @@ layout: post
 title: "Build a Note-Taking Chrome Extension: Capture Ideas While Browsing"
 description: "Learn how to build a powerful note-taking chrome extension from scratch. This comprehensive guide covers Chrome extension development, popup UIs, local storage, and best practices for creating a quick notes chrome extension that captures ideas instantly while browsing."
 date: 2025-04-15
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [notes, productivity, chrome-extension]
 keywords: "chrome extension note taking, notes chrome extension, build note extension, quick notes chrome, chrome extension notepad"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/15/build-note-taking-chrome-extension/"

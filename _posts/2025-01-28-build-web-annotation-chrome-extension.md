@@ -3,7 +3,7 @@ layout: post
 title: "Build a Web Annotation Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a web annotation Chrome extension that allows users to highlight text, annotate web pages, and save annotations. This comprehensive guide covers Manifest V3, content scripts, storage APIs, and best practices."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "web annotation extension, highlight text chrome, annotate web pages, chrome extension development tutorial"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-web-annotation-chrome-extension/"

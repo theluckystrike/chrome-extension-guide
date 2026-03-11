@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Size Optimization: Complete Guide to Reduce Extension Size"
 description: "Learn proven techniques to reduce extension size, optimize chrome extension bundle, and create small CRX files. This comprehensive guide covers code splitting, asset optimization, and best practices for minimal extension footprint."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "reduce extension size, optimize chrome extension bundle, small crx file, chrome extension optimization, extension size reduction"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-size-optimization/"

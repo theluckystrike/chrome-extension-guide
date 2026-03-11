@@ -3,7 +3,7 @@ layout: post
 title: "Performance Profiling Chrome Extensions: Find and Fix Memory Leaks"
 description: "Master chrome extension performance profiling with our comprehensive guide. Learn to identify extension memory leaks, use Chrome DevTools for profiling, and optimize your extension's performance in 2025."
 date: 2025-05-11
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [profiling, performance, chrome-extension]
 keywords: "chrome extension performance profiling, extension memory leak, profile chrome extension, chrome extension slow, debug extension performance"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/11/chrome-extension-performance-profiling-guide/"

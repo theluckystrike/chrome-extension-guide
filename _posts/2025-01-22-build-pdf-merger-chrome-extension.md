@@ -3,7 +3,7 @@ layout: post
 title: "Build a PDF Merger Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful PDF merger Chrome extension from scratch. This comprehensive guide covers Manifest V3, PDF manipulation libraries, file handling, drag-and-drop functionality, and publishing to the Chrome Web Store."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "pdf merger extension, combine pdf chrome, pdf tools extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-pdf-merger-chrome-extension/"

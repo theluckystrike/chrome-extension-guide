@@ -3,7 +3,7 @@ layout: post
 title: "Build a Base64 Encoder Decoder Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a Base64 encoder decoder Chrome extension from scratch. This comprehensive guide covers manifest configuration, popup UI, encoding/decoding logic, keyboard shortcuts, and publishing to the Chrome Web Store."
 date: 2025-01-27
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 author: theluckystrike
 ---

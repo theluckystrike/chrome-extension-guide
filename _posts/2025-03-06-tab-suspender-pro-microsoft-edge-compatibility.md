@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro on Microsoft Edge: Full Compatibility Guide"
 description: "Learn how Tab Suspender Pro works on Microsoft Edge. Complete guide to installing Chrome extensions on Edge, features, performance, and settings."
 date: 2025-03-06
-categories: [Chrome Extensions, Cross-Browser]
+categories: [Chrome-Extensions, Cross-Browser]
 tags: [tab-suspender-pro, microsoft-edge, cross-browser]
 keywords: "tab suspender pro edge, tab suspender microsoft edge, chrome extension on edge, tab suspender edge browser, edge tab management extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/06/tab-suspender-pro-microsoft-edge-compatibility/"

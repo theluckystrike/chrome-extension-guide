@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Streaming API Responses: Handle Real-Time Data Feeds"
 description: "Master streaming API in Chrome extensions. Learn to implement Server-Sent Events, handle real-time data feeds, manage WebSocket connections, and optimize streaming responses for seamless user experiences."
 date: 2025-05-13
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [streaming, real-time, chrome-extension]
 keywords: "chrome extension streaming, streaming api chrome extension, server sent events extension, chrome extension real time data, stream response chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/13/chrome-extension-streaming-response-api/"

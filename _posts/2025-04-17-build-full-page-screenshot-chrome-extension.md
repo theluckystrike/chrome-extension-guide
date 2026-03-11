@@ -3,7 +3,7 @@ layout: post
 title: "Build a Full Page Screenshot Chrome Extension: Capture Entire Webpages"
 description: "Build a full page screenshot Chrome extension with our comprehensive guide. Covers chrome.desktopCapture API, canvas rendering, and publishing."
 date: 2025-04-17
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [screenshot, capture, chrome-extension]
 keywords: "chrome extension full page screenshot, capture entire page chrome, screenshot chrome extension build, full page capture extension, chrome extension screen capture"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/17/build-full-page-screenshot-chrome-extension/"

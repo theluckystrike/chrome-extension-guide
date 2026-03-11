@@ -3,7 +3,7 @@ layout: post
 title: "Infinite Scroll in Chrome Extension UI: Complete Implementation Guide"
 description: "Master infinite scroll in Chrome extension development. Learn how to implement lazy load list chrome patterns, build efficient paginated UI extensions, and optimize performance for large datasets in Chrome extensions."
 date: 2025-01-29
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "infinite scroll extension, lazy load list chrome, paginated ui extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-infinite-scroll/"

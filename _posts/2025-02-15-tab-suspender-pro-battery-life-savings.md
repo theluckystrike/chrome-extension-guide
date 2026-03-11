@@ -3,7 +3,7 @@ layout: post
 title: "How Tab Suspender Pro Extends Your Laptop Battery Life by Hours"
 description: "Discover how Tab Suspender Pro battery optimization can extend your laptop battery life by hours with real benchmarks, practical tips, and configuration guide."
 date: 2025-02-15
-categories: [Chrome Extensions, Performance]
+categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, battery-life, chrome-performance]
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/15/tab-suspender-pro-battery-life-savings/"
 ---

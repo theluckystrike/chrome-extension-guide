@@ -3,7 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Lit Web Components"
 description: "Discover how to build lightweight, performant Chrome extensions using Lit web components. Learn about lit chrome extension development, web components extension patterns, lit element popup creation, and lightweight UI extension architecture."
 date: 2025-01-23
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "lit chrome extension, web components extension, lit element popup, lightweight ui extension, lit web components chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/lit-web-components-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build a Broken Link Checker Extension: Complete Chrome Extension Development Guide"
 description: "Learn how to build a broken link checker extension for Chrome. This comprehensive tutorial covers link validation, HTTP request handling, and creating a production-ready link validator chrome extension from scratch."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "broken link checker extension, link validator chrome, dead link finder"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-broken-link-checker-extension/"

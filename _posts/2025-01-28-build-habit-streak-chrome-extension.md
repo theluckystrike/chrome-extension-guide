@@ -3,7 +3,7 @@ layout: post
 title: "Build a Habit Streak Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a habit streaks extension for Chrome with our comprehensive tutorial. Master daily streak chrome tracking, create a consistency tracker, and develop powerful productivity tools using modern Chrome extension development techniques."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "habit streaks extension, daily streak chrome, consistency tracker, chrome extension habit tracker, streak counter extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-habit-streak-chrome-extension/"

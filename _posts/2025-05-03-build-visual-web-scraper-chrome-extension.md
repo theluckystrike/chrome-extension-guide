@@ -3,7 +3,7 @@ layout: post
 title: "Build a Visual Web Scraper Chrome Extension: Point-and-Click Data Extraction"
 description: "Learn how to build a visual web scraper Chrome extension with point-and-click functionality. No coding skills required - create your own easy web scraper extension for effortless data extraction."
 date: 2025-05-03
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [web-scraper, visual, chrome-extension]
 keywords: "visual web scraper chrome, point click scraper extension, no code web scraper chrome, chrome extension visual scraping, easy web scraper extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/03/build-visual-web-scraper-chrome-extension/"

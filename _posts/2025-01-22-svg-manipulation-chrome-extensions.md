@@ -3,7 +3,7 @@ layout: post
 title: "SVG Manipulation in Chrome Extensions: Complete Developer Guide"
 description: "Learn how to master SVG manipulation in Chrome extensions with this comprehensive developer guide. Discover techniques for building powerful svg chrome extension, svg editor extension, and vector graphics extension for modern web development."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "svg chrome extension, svg editor extension, vector graphics extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/svg-manipulation-chrome-extensions/"

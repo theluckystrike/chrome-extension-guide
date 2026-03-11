@@ -3,7 +3,7 @@ layout: post
 title: "Build a Time Tracker Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a time tracker Chrome extension from scratch. This comprehensive guide covers manifest V3, timer functionality, data storage, and productivity optimization for creating powerful time tracking extensions."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "time tracker extension, time tracking chrome, productivity timer, chrome extension time tracker, build chrome extension, manifest v3"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-time-tracker-chrome-extension/"

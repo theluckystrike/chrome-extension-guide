@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Badge Text and Icon: Dynamic Status Indicators"
 description: "Learn how to implement dynamic badge text and icons in Chrome extensions using chrome.action.setBadgeText. Complete guide with code examples for extension icon badges and status indicators."
 date: 2025-03-23
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [badge, icon, chrome-extension]
 keywords: "chrome extension badge text, chrome.action.setBadgeText, extension icon badge, dynamic badge chrome extension, chrome extension status icon"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/23/chrome-extension-badge-text-icon-guide/"

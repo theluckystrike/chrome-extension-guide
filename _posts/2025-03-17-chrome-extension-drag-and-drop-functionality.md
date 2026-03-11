@@ -3,7 +3,7 @@ layout: post
 title: "Adding Drag and Drop to Chrome Extensions: Interactive UI Guide"
 description: "Learn how to implement drag and drop functionality in Chrome extensions. Complete guide covering HTML5 DnD API, sortable lists, popup UI patterns, and best practices for interactive extension interfaces."
 date: 2025-03-17
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [drag-drop, ui-design, chrome-extension]
 keywords: "chrome extension drag drop, drag and drop chrome extension, interactive chrome extension UI, chrome extension sortable list, draggable popup chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/17/chrome-extension-drag-and-drop-functionality/"

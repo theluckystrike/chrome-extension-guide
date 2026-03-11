@@ -3,7 +3,7 @@ layout: post
 title: "CSS Injection in Chrome Extension Content Scripts: Complete Guide"
 description: "Learn how to inject CSS into web pages using Chrome extension content scripts. Master the techniques for chrome extension inject CSS, content script css injection, and style page chrome extension with this comprehensive developer guide."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension inject css, content script css injection, style page chrome extension, chrome extension content script CSS, inject styles chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/"

@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Students and Researchers: The Ultimate Guide to Academic Browser Management"
 description: "Discover how Tab Suspender Pro helps students and researchers manage dozens of research tabs, improve productivity, and reduce browser memory usage by up to 80%."
 date: 2025-01-30
-categories: [Chrome Extensions, Tab Suspender Pro]
+categories: [Chrome-Extensions, Tab-Suspender-Pro]
 tags: [tab-suspender-pro, performance, productivity, tab-suspender-students, research-tabs-chrome, academic-browser-management]
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/tab-suspender-pro-students-researchers/"
 ---

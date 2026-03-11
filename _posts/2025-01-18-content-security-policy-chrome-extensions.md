@@ -3,7 +3,7 @@ layout: post
 title: "Content Security Policy for Chrome Extensions: Complete Guide"
 description: "Learn how to properly implement Content Security Policy (CSP) for Chrome extensions in Manifest V3. Master chrome extension CSP rules, headers, and security best practices."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension csp, content security policy manifest v3, chrome extension content security policy, manifest v3 csp, csp chrome extension best practices"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/"

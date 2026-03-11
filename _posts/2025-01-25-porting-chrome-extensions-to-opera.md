@@ -3,7 +3,7 @@ layout: post
 title: "Porting Chrome Extensions to Opera: Complete 2025 Guide"
 description: "Learn how to port Chrome extensions to Opera with our comprehensive 2025 guide. Master opera extension development, understand opera addon compatibility, and leverage chromium opera extension APIs for successful cross-browser deployment."
 date: 2025-01-25
-categories: [Chrome Extensions, Cross-Browser]
+categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "opera extension development, opera addon, chromium opera extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/porting-chrome-extensions-to-opera/"

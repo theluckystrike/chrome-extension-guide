@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Developers: Optimize Your Browser for Coding"
 description: "Discover how Tab Suspender Pro helps developers manage 50+ browser tabs, optimize memory for coding, and streamline developer workflows with intelligent tab suspension."
 date: 2025-04-03
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [tab-suspender-pro, developer-workflow, productivity]
 keywords: "tab suspender pro developer, developer browser tabs, chrome tabs for developers, tab management developer workflow, coding browser optimization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/03/tab-suspender-pro-for-developers-workflow/"

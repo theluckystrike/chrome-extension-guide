@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Custom Protocol Handlers: Register Your Own URL Scheme"
 description: "Learn to register custom URL schemes in Chrome extensions using the protocol handler API. Build deep links and create powerful workflow integrations."
 date: 2025-05-19
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [protocol-handler, url-scheme, chrome-extension]
 keywords: "chrome extension protocol handler, custom url scheme chrome, register protocol chrome extension, chrome extension custom scheme, url handler extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/19/chrome-extension-custom-protocol-handler/"

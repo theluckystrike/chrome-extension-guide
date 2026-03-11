@@ -3,7 +3,7 @@ layout: post
 title: "Local-First Chrome Extension Architecture: Building Offline-Capable Extensions"
 description: "Master local-first chrome extension development with CRDTs, offline storage patterns, and sync strategies. Build extensions that work seamlessly without internet connectivity using IndexedDB, chrome.storage, and conflict resolution."
 date: 2025-01-19
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "local first chrome extension, offline capable extension, crdt extension, chrome extension offline storage, manifest v3 offline"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/local-first-chrome-extension-architecture/"

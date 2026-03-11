@@ -3,7 +3,7 @@ layout: post
 title: "Build a Grammar Checker Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a grammar checker Chrome extension from scratch. This comprehensive tutorial covers writing assistant extension development, spell check extension features, and Manifest V3 implementation for 2025."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "grammar checker extension, writing assistant extension, spell check extension, chrome extension development"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-grammar-checker-chrome-extension/"

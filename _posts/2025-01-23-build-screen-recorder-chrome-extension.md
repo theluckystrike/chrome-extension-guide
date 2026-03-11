@@ -3,7 +3,7 @@ layout: post
 title: "Build a Screen Recorder Chrome Extension"
 description: "Learn how to build a powerful screen recorder Chrome extension using the Display Media API and MediaRecorder. This comprehensive guide covers Manifest V3, screen capture permissions, recording customization, and publishing to the Chrome Web Store."
 date: 2025-01-23
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "screen recorder extension, record screen chrome, screen capture extension, chrome screen recording, chrome extension development, MediaRecorder API, Display Media API"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-screen-recorder-chrome-extension/"

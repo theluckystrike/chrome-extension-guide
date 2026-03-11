@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Crash Recovery: Never Lose Your Tabs Again"
 description: "Learn how Tab Suspender Pro's crash recovery feature protects your tabs from Chrome crashes. Automatic backup, easy restore, and peace of mind for power users."
 date: 2025-03-26
-categories: [Chrome Extensions, Features]
+categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, crash-recovery, data-protection]
 keywords: "tab suspender pro crash recovery, chrome crash restore tabs, tab suspender backup tabs, chrome tab recovery extension, prevent tab loss chrome"
 ---

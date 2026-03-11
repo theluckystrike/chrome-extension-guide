@@ -3,7 +3,7 @@ layout: post
 title: "Chrome declarativeNetRequest API: Modern Content Blocking in MV3"
 description: "Master the Chrome declarativeNetRequest API for content blocking in Manifest V3. Learn how to block network requests, create rules, and build powerful ad blockers with modern chrome extension development techniques."
 date: 2025-03-25
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [declarativeNetRequest, manifest-v3, chrome-extension]
 keywords: "declarativeNetRequest chrome, chrome extension content blocker, ad blocker manifest v3, chrome extension block requests mv3, declarativeNetRequest rules"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/25/chrome-extension-declarative-net-request-guide/"

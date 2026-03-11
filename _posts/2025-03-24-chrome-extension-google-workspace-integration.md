@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Google Workspace Integration: Gmail, Drive, and Docs"
 description: "Learn how to build Chrome extensions that integrate with Google Workspace APIs for Gmail, Drive, and Docs. A comprehensive developer guide with code examples and best practices."
 date: 2025-03-24
-categories: [Chrome Extensions, Integrations]
+categories: [Chrome-Extensions, Integrations]
 tags: [google-workspace, gmail, chrome-extension]
 keywords: "chrome extension google workspace, gmail chrome extension, google drive extension, chrome extension google docs, google api chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/24/chrome-extension-google-workspace-integration/"

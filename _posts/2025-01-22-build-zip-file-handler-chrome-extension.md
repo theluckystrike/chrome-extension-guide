@@ -3,7 +3,7 @@ layout: post
 title: "Build a ZIP File Handler Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a ZIP file handler Chrome extension from scratch. This comprehensive tutorial covers file compression, extraction, and handling ZIP files directly in your browser using modern JavaScript techniques."
 date: 2025-01-22
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "zip handler extension, unzip chrome extension, file compression extension, chrome extension zip, build zip extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-zip-file-handler-chrome-extension/"

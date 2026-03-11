@@ -3,7 +3,7 @@ layout: post
 title: "Build a Site-Specific Search Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a site-specific search Chrome extension that allows users to search within any website. This comprehensive guide covers Manifest V3, content scripts, messaging APIs, and deployment to the Chrome Web Store."
 date: 2025-01-28
-categories: [Chrome Extensions, Productivity]
+categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "site search extension, custom search chrome, search within site, chrome extension development, site-specific search"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-site-specific-search-chrome-extension/"

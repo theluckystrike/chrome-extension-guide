@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Bookmarks API: Build a Custom Bookmark Manager"
 description: "Master the Chrome Bookmarks API (chrome.bookmarks) to build a custom bookmark manager extension. Learn create, read, update, delete operations and create the ultimate bookmark organizer."
 date: 2025-03-04
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [bookmarks, chrome-extension, tutorial, chrome.bookmarks, bookmark manager]
 keywords: "chrome extension bookmarks API, chrome.bookmarks, build bookmark manager extension, chrome extension manage bookmarks, bookmark organizer chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/"

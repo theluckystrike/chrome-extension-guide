@@ -3,7 +3,7 @@ layout: post
 title: "Porting Chrome Extensions to Firefox: Complete Cross-Browser Guide"
 description: "Learn how to port Chrome extensions to Firefox with this comprehensive guide. Covering WebExtensions API, manifest differences, testing, and publishing to AMO."
 date: 2025-01-25
-categories: [Chrome Extensions, Cross-Browser]
+categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "port chrome extension firefox, firefox webextension, cross-browser extension, chrome to firefox extension migration, mozilla amO"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/port-chrome-extensions-to-firefox/"

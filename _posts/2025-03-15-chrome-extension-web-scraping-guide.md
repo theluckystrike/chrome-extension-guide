@@ -3,7 +3,7 @@ layout: post
 title: "Build a Web Scraping Chrome Extension: Extract Data from Any Website"
 description: "Build a powerful web scraping Chrome extension from scratch. Extract data from any website using DOM parsing, content scripts, and storage APIs."
 date: 2025-03-15
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [web-scraping, data-extraction, chrome-extension]
 keywords: "chrome extension web scraping, scrape website chrome extension, data extraction chrome extension, web scraper extension build, chrome extension dom parsing"
 ---

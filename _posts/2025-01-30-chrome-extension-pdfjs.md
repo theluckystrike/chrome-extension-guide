@@ -3,7 +3,7 @@ layout: post
 title: "PDF.js Document Viewer in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to integrate Mozilla's PDF.js into your Chrome extension for powerful PDF viewing capabilities. This comprehensive guide covers embedding PDF viewers, rendering PDF documents, and building a document reader extension from scratch."
 date: 2025-01-30
-categories: [Chrome Extensions, Libraries]
+categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "pdf js extension, pdf viewer chrome, document reader extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-pdfjs/"

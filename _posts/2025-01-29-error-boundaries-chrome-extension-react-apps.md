@@ -3,7 +3,7 @@ layout: post
 title: "Error Boundaries in Chrome Extension React Apps: Complete Guide"
 description: "Master error boundaries in Chrome extension React apps. Learn implementation patterns, crash recovery strategies, and best practices for building resilient extensions that handle errors gracefully."
 date: 2025-01-29
-categories: [Chrome Extensions, UI]
+categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "error boundary extension, react error handling chrome, crash recovery extension, error boundary react chrome extension, chrome extension error handling best practices"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/error-boundaries-chrome-extension-react-apps/"

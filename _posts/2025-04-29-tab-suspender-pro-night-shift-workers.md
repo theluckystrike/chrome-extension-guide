@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Night Shift Workers: Optimal Settings for Late-Night Browsing"
 description: "Optimize Tab Suspender Pro for night shift work. Learn scheduling rules, battery-saving settings, and auto-suspend configurations for overnight browsing."
 date: 2025-04-29
-categories: [Chrome Extensions, Guides]
+categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, night-shift, optimization]
 keywords: "tab suspender pro night shift, late night chrome settings, tab suspender nighttime, chrome overnight tab management, night browsing chrome optimization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/29/tab-suspender-pro-night-shift-workers/"

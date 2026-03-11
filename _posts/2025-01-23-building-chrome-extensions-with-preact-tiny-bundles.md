@@ -3,7 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Preact for Tiny Bundles: Complete Guide"
 description: "Learn how to build lightweight Chrome extensions using Preact for incredibly small bundle sizes. Master preact chrome extension development, preact popup creation, and lightweight extension UI optimization techniques."
 date: 2025-01-23
-categories: [Chrome Extensions, Framework]
+categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework]
 keywords: "preact chrome extension, lightweight extension ui, preact popup, chrome extension preact, preact chrome extension tutorial, build chrome extension with preact"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/building-chrome-extensions-with-preact-tiny-bundles/"

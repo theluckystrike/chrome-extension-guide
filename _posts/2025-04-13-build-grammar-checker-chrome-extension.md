@@ -3,7 +3,7 @@ layout: post
 title: "Build a Grammar Checker Chrome Extension: AI-Powered Writing Assistant"
 description: "Learn to build an AI-powered grammar checker Chrome extension with spell check, style improvements, and writing suggestions. Complete Manifest V3 tutorial."
 date: 2025-04-13
-categories: [Chrome Extensions, AI]
+categories: [Chrome-Extensions, AI]
 tags: [grammar, writing, chrome-extension]
 keywords: "chrome extension grammar checker, build grammar extension, writing assistant chrome, spell check chrome extension, chrome extension grammarly clone"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/13/build-grammar-checker-chrome-extension/"

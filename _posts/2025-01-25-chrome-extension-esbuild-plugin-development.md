@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension esbuild Plugin Development: Custom Build Tools for Modern Extensions"
 description: "Master esbuild plugin development for Chrome Extensions. Learn how to create custom build extensions, optimize your workflow, and leverage esbuild chrome tooling for lightning-fast builds."
 date: 2025-01-25
-categories: [Chrome Extensions, Testing]
+categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing, tooling]
 keywords: "esbuild plugin extension, custom build extension, esbuild chrome, chrome extension build tools, esbuild plugin development"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-esbuild-plugin-development/"

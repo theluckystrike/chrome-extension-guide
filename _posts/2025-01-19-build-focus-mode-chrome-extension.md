@@ -3,7 +3,7 @@ layout: post
 title: "Build a Focus Mode Chrome Extension: Complete Development Guide"
 description: "Learn how to build a Focus Mode Chrome Extension from scratch. This comprehensive tutorial covers creating a distraction blocker chrome extension with deep work features, Manifest V3 implementation, content blocking, and productivity optimization."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "focus mode extension, distraction blocker chrome, deep work extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-focus-mode-chrome-extension/"

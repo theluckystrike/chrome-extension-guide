@@ -3,7 +3,7 @@ layout: post
 title: "Build a Daily Inspiration Chrome Extension: Motivational Quotes on New Tab"
 description: "Learn how to build a daily inspiration Chrome extension that displays motivational quotes on every new tab. Complete tutorial with code examples."
 date: 2025-04-27
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [inspiration, quotes, chrome-extension]
 keywords: "chrome extension daily quotes, inspiration new tab chrome, motivational chrome extension, build quote extension, chrome extension daily motivation"
 ---

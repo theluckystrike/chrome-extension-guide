@@ -3,7 +3,7 @@ layout: post
 title: "Build a Writing Assistant Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a writing assistant Chrome extension with grammar checking, style suggestions, and productivity features. This comprehensive tutorial covers Manifest V3, content scripts, and real-world implementation."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "writing assistant extension, grammar help chrome, writing tool"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/chrome-extension-writing-assistant/"

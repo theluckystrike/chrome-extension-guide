@@ -3,7 +3,7 @@ layout: post
 title: "Build a Form Auto-Filler Chrome Extension: Save Time on Repetitive Forms"
 description: "Learn to build a chrome extension form filler from scratch. This step-by-step guide teaches auto fill forms chrome, form automation, and extension development."
 date: 2025-04-24
-categories: [Chrome Extensions, Tutorials]
+categories: [Chrome-Extensions, Tutorials]
 tags: [form-filler, automation, chrome-extension]
 keywords: "chrome extension form filler, auto fill forms chrome, build autofill extension, form automation chrome, chrome extension fill forms"
 ---

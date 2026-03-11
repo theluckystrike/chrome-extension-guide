@@ -3,7 +3,7 @@ layout: post
 title: "Web Accessible Resources in Chrome Extensions MV3: Complete Guide"
 description: "Master Web Accessible Resources in Chrome Extensions Manifest V3. Learn how to properly configure web_accessible_resources, expose extension files to web pages, and avoid common pitfalls in MV3 implementation."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome web accessible resources, manifest v3 web resources, extension accessible files, web_accessible_resources manifest v3, chrome extension file access"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-web-accessible-resources/"

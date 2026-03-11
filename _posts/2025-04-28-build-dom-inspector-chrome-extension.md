@@ -3,7 +3,7 @@ layout: post
 title: "Build a DOM Inspector Chrome Extension: Explore Page Structure in Real Time"
 description: "Learn how to build a DOM Inspector Chrome extension that lets you explore page structure in real time. This comprehensive guide covers DOM tree visualization, element inspection, and creating powerful developer tools."
 date: 2025-04-28
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [dom, inspector, chrome-extension]
 keywords: "chrome extension dom inspector, dom tree chrome extension, html inspector extension, build element inspector chrome, page structure chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/build-dom-inspector-chrome-extension/"

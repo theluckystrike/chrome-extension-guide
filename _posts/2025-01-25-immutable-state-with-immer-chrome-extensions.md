@@ -3,7 +3,7 @@ layout: post
 title: "Immutable State with Immer in Chrome Extensions: A Complete Guide"
 description: "Master immutable state management in Chrome extensions using Immer. Learn how produce state chrome patterns simplify state updates, prevent mutation bugs, and build more maintainable extension architectures."
 date: 2025-01-25
-categories: [Chrome Extensions, Architecture]
+categories: [Chrome-Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "immer chrome extension, immutable state extension, produce state chrome, chrome extension state management, immer for chrome extensions, immutable state patterns"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/immutable-state-with-immer-chrome-extensions/"

@@ -3,7 +3,7 @@ layout: post
 title: "Build an SEO Analysis Chrome Extension: Audit Any Webpage Instantly"
 description: "Learn how to build a powerful SEO analysis chrome extension from scratch. This comprehensive guide covers everything from manifest setup to implementing website audit features that analyze meta tags, headings, links, and more."
 date: 2025-04-06
-categories: [Chrome Extensions, SEO]
+categories: [Chrome-Extensions, SEO]
 tags: [seo, analysis, chrome-extension]
 keywords: "chrome extension SEO tool, build SEO extension, seo analysis chrome extension, website audit chrome extension, chrome seo checker"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/06/chrome-extension-seo-tools-build-guide/"

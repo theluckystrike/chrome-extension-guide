@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension eval() Alternatives for Manifest V3: Complete Guide"
 description: "Discover the best chrome extension eval alternative for Manifest V3. Learn about mv3 code execution methods, dynamic code chrome extension techniques, and secure alternatives to eval() that work with Google's latest extension platform requirements."
 date: 2025-01-18
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension eval alternative, mv3 code execution, dynamic code chrome extension, manifest v3 eval, chrome extension execute script alternatives"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-eval-alternatives/"

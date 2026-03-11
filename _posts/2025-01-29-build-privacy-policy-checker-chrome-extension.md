@@ -3,7 +3,7 @@ layout: post
 title: "Build a Privacy Policy Checker Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a privacy policy checker Chrome extension with cookie consent detection and GDPR compliance checking. Step-by-step tutorial for developers."
 date: 2025-01-29
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "privacy checker extension, cookie consent chrome, gdpr checker, chrome extension privacy, privacy policy analyzer, cookie compliance checker"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-privacy-policy-checker-chrome-extension/"

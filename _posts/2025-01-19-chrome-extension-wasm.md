@@ -3,7 +3,7 @@ layout: post
 title: "WebAssembly in Chrome Extensions: Complete Performance Guide"
 description: "Master WebAssembly in Chrome extensions with this comprehensive performance guide. Learn how wasm boosts extension performance, practical implementation patterns, and optimization strategies for chrome extension wasm projects."
 date: 2025-01-19
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension wasm, webassembly extension, wasm performance"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-wasm/"

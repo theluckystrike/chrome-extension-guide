@@ -3,7 +3,7 @@ layout: post
 title: "Build a Readability Chrome Extension: Complete 2025 Developer Guide"
 description: "Learn how to build a readability Chrome extension from scratch. This comprehensive tutorial covers reader mode extension development, clean article view implementation, and best practices for creating user-friendly readability extensions using modern web technologies."
 date: 2025-01-19
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "readability extension, reader mode extension, clean article view, chrome extension development, reader mode chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-readability-chrome-extension/"

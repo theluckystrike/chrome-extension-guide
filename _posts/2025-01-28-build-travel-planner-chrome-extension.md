@@ -3,7 +3,7 @@ layout: post
 title: "Build a Travel Planner Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a travel planner Chrome extension from scratch. This comprehensive guide covers Manifest V3, flight search integration, trip management features, and how to publish your extension to the Chrome Web Store."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "travel planner extension, trip planning chrome, flight search extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-travel-planner-chrome-extension/"

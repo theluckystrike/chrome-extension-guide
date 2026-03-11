@@ -3,7 +3,7 @@ layout: post
 title: "Build a Citation Manager Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful citation manager Chrome extension that automates bibliography creation. Step-by-step tutorial covering Manifest V3, content scripts, storage APIs, and publishing."
 date: 2025-01-28
-categories: [Chrome Extensions, Tutorial]
+categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "citation manager extension, reference tool chrome, bibliography extension, chrome extension citation manager, build citation tool chrome"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-citation-manager-chrome-extension/"

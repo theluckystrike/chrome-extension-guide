@@ -3,7 +3,7 @@ layout: post
 title: "IntersectionObserver in Chrome Extensions: Detect Visible Elements"
 description: "Learn how to use IntersectionObserver API in Chrome extensions to detect visible elements, implement lazy loading, and track viewport visibility for improved performance and user experience."
 date: 2025-05-07
-categories: [Chrome Extensions, APIs]
+categories: [Chrome-Extensions, APIs]
 tags: [intersection-observer, viewport, chrome-extension]
 keywords: "chrome extension intersection observer, detect visible elements extension, lazy load chrome extension, chrome extension viewport detection, scroll detection extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/07/chrome-extension-intersection-observer-guide/"

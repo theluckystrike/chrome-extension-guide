@@ -3,7 +3,7 @@ layout: post
 title: "Sideloading Chrome Extensions: Developer Mode Installation Guide"
 description: "Learn how to sideload Chrome extensions using Developer Mode. Step-by-step guide to install unpacked extensions, load local Chrome extensions, and test extensions in developer mode safely."
 date: 2025-05-02
-categories: [Chrome Extensions, Development]
+categories: [Chrome-Extensions, Development]
 tags: [sideloading, developer-mode, chrome-extension]
 keywords: "sideload chrome extension, chrome extension developer mode, install unpacked extension, load extension chrome, chrome extension local install"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/02/chrome-extension-sideloading-developer-mode/"

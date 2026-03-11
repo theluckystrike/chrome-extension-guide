@@ -3,7 +3,7 @@ layout: post
 title: "Build a Trello Integration Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful Trello Integration Chrome Extension from scratch. This comprehensive guide covers Trello API authentication, card creation, board management, and task management extension development using Manifest V3."
 date: 2025-01-28
-categories: [Chrome Extensions, Integration]
+categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "trello chrome extension, trello card creator, task management extension, build trello extension, chrome extension trello integration"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-trello-integration-chrome-extension/"

@@ -3,7 +3,7 @@ layout: post
 title: "Tab Suspender Pro Dark Mode: Customize Your Extension Theme"
 description: "Learn how to enable and customize dark mode in Tab Suspender Pro. Complete guide to chrome extension dark themes, system preference matching, and advanced CSS customization."
 date: 2025-03-06
-categories: [Chrome Extensions, Customization]
+categories: [Chrome-Extensions, Customization]
 tags: [tab-suspender-pro, dark-mode, themes]
 keywords: "tab suspender pro dark mode, chrome extension dark theme, tab suspender dark theme, dark mode chrome extension, tab suspender pro customization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/06/tab-suspender-pro-dark-mode-theme/"

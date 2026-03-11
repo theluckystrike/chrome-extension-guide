@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Extension Message Passing Complete Guide"
 description: "Master chrome extension message passing with this complete guide. Learn sendMessage, runtime.sendMessage, and port.connect API for seamless communication between extension components."
 date: 2025-01-17
-categories: [Chrome Extensions, API Guide]
+categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, guide]
 keywords: "chrome extension message passing, sendMessage chrome extension, port connect extension, runtime.sendMessage, chrome.runtime.onMessage, extension message API"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/message-passing-guide/"

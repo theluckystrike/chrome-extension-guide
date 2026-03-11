@@ -3,7 +3,7 @@ layout: post
 title: "Chrome Web Store Review Optimization Guide: Boost Your Extension's Success"
 description: "Master Chrome Web Store reviews and ratings with our comprehensive optimization guide. Learn proven strategies to improve your extension rating, handle feedback professionally, and maximize visibility in the Chrome Web Store."
 date: 2025-01-18
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome web store reviews, extension rating optimization, chrome extension rating, improve extension reviews, chrome web store optimization"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-review-optimization/"

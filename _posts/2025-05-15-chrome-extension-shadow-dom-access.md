@@ -3,7 +3,7 @@ layout: post
 title: "Accessing Shadow DOM from Chrome Extensions: Content Script Techniques"
 description: "Learn how to access shadow DOM from chrome extensions with content scripts. Master piercing shadow roots, handling closed shadow DOM, and building extensions that interact with shadow DOM elements."
 date: 2025-05-15
-categories: [Chrome Extensions, Advanced]
+categories: [Chrome-Extensions, Advanced]
 tags: [shadow-dom, content-scripts, chrome-extension]
 keywords: "chrome extension shadow dom, access shadow dom extension, pierce shadow dom chrome, shadow root chrome extension, chrome extension closed shadow dom"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/15/chrome-extension-shadow-dom-access/"

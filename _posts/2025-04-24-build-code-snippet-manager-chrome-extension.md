@@ -3,7 +3,7 @@ layout: post
 title: "Build a Code Snippet Manager Chrome Extension: Save and Reuse Code Blocks"
 description: "Learn how to build a code snippet manager Chrome extension from scratch. Save, organize, and reuse code blocks with this complete developer guide."
 date: 2025-04-24
-categories: [Chrome Extensions, Developer Tools]
+categories: [Chrome-Extensions, Developer-Tools]
 tags: [snippets, code-manager, chrome-extension]
 keywords: "chrome extension code snippets, snippet manager chrome, build snippet extension, code saver chrome extension, chrome extension code library"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/24/build-code-snippet-manager-chrome-extension/"

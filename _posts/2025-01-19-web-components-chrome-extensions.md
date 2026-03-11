@@ -3,7 +3,7 @@ layout: post
 title: "Web Components in Chrome Extensions: Complete Guide for Developers"
 description: "Learn how to leverage Web Components in Chrome Extensions for modern, framework-agnostic UI development. Master Shadow DOM, Custom Elements, and HTML Templates for building powerful extensions."
 date: 2025-01-19
-categories: [Chrome Extensions]
+categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "web components chrome extension, shadow dom extension, custom elements extension, chrome extension web components tutorial, shadow dom chrome extension"
 canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/web-components-chrome-extensions/"
