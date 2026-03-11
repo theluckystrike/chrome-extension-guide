@@ -577,4 +577,19 @@ Start implementing these optimizations today, and your users will experience fas
 
 ---
 
+<<<<<<< HEAD
 *Part of the Chrome Extension Guide by theluckystrike. More at zovo.one.*
+=======
+## Related Articles
+
+- [Extension Performance Optimization](../guides/extension-performance-optimization.md)
+- [Performance Profiling Guide](../guides/chrome-extension-performance-profiling.md)
+- [Content Script Frameworks](../guides/content-script-frameworks.md)
+- [WXT Framework Setup](../guides/wxt-framework-setup.md)
+- [Plamo Framework Setup](../guides/plamo-framework-setup.md)
+- [Extension Bundle Analysis](../guides/extension-bundle-analysis.md)
+
+---
+
+*Part of the Chrome Extension Guide by theluckystrike. More at zovo.one*
+>>>>>>> content/bundle-size-optimization
