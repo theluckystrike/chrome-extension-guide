@@ -329,3 +329,7 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 ---
 
 Built at [zovo.one](https://zovo.one) by [theluckystrike](https://github.com/theluckystrike)
+
+## Related Projects
+- [Claude Skills Guide](https://theluckystrike.github.io/claude-skills-guide/) — 700+ Claude Code tutorials
+- [Chrome Tips](https://theluckystrike.github.io/chrome-tips/) — Chrome performance optimization guides
