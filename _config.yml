@@ -12,6 +12,10 @@ kramdown:
 include:
   - google1a218412aeef37cf.html
 
+author:
+  name: Michael Lip
+  url: https://github.com/theluckystrike
+
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
