@@ -50,3 +50,38 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit URLs to IndexNow
+        run: |
+          SITE_URL="https://theluckystrike.github.io/chrome-extension-guide"
+          KEY="c4ded4558ba249bbbd828bbfd67ebe80"
+          SITEMAP_URL="${SITE_URL}/sitemap.xml"
+
+          # Fetch sitemap and extract URLs
+          URLS=$(curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+')
+          URL_COUNT=$(echo "$URLS" | grep -c .)
+
+          if [ "$URL_COUNT" -eq 0 ]; then
+            echo "No URLs found in sitemap. Skipping IndexNow submission."
+            exit 0
+          fi
+
+          # Build JSON payload with up to 10000 URLs
+          URL_ARRAY=$(echo "$URLS" | head -10000 | jq -R -s 'split("\n") | map(select(length > 0))')
+
+          # Submit to IndexNow
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"host\": \"theluckystrike.github.io\",
+              \"key\": \"${KEY}\",
+              \"keyLocation\": \"${SITE_URL}/${KEY}.txt\",
+              \"urlList\": ${URL_ARRAY}
+            }")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          echo "Submitted ${URL_COUNT} URLs to IndexNow (HTTP ${HTTP_CODE})"
