@@ -55,33 +55,29 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Submit URLs to IndexNow
+      - name: Submit to IndexNow
         run: |
           SITE_URL="https://theluckystrike.github.io/chrome-extension-guide"
           KEY="c4ded4558ba249bbbd828bbfd67ebe80"
           SITEMAP_URL="${SITE_URL}/sitemap.xml"
 
           # Fetch sitemap and extract URLs
-          URLS=$(curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+')
-          URL_COUNT=$(echo "$URLS" | grep -c .)
+          curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+' | head -10000 > /tmp/urls.txt
+          URL_COUNT=$(wc -l < /tmp/urls.txt)
 
           if [ "$URL_COUNT" -eq 0 ]; then
-            echo "No URLs found in sitemap. Skipping IndexNow submission."
+            echo "No URLs found in sitemap"
             exit 0
           fi
 
-          # Build JSON payload with up to 10000 URLs
-          URL_ARRAY=$(echo "$URLS" | head -10000 | jq -R -s 'split("\n") | map(select(length > 0))')
+          # Build JSON payload file (avoids argument list too long)
+          jq -R -s --arg host "theluckystrike.github.io" --arg key "$KEY" --arg keyloc "${SITE_URL}/${KEY}.txt" \
+            '{host: $host, key: $key, keyLocation: $keyloc, urlList: (split("\n") | map(select(length > 0)))}' \
+            /tmp/urls.txt > /tmp/indexnow-payload.json
 
-          # Submit to IndexNow
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+          # Submit to IndexNow using file-based payload
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json" \
-            -d "{
-              \"host\": \"theluckystrike.github.io\",
-              \"key\": \"${KEY}\",
-              \"keyLocation\": \"${SITE_URL}/${KEY}.txt\",
-              \"urlList\": ${URL_ARRAY}
-            }")
+            -d @/tmp/indexnow-payload.json)
 
-          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-          echo "Submitted ${URL_COUNT} URLs to IndexNow (HTTP ${HTTP_CODE})"
+          echo "Submitted $URL_COUNT URLs to IndexNow (HTTP $RESPONSE)"
