@@ -291,7 +291,8 @@
         
         {% comment %}Find next page{% endcomment %}
         {% assign total_pages = all_pages.size %}
-        {% if current_idx >= 0 and current_idx < total_pages | minus: 1 %}
+        {% assign last_idx = total_pages | minus: 1 %}
+        {% if current_idx >= 0 and current_idx < last_idx %}
           {% assign next_idx = current_idx | plus: 1 %}
           {% assign next_parts = all_pages[next_idx] | split: "|" %}
           {% assign next_title = next_parts[0] %}
