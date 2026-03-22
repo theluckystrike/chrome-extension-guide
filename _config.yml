@@ -21,6 +21,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
 
+permalink: "/:year/:month/:day/:title/"
+
 defaults:
   - scope:
       path: ""
