@@ -4,7 +4,6 @@ title: "Communication"
 description: "Chrome extensions for email, messaging, and team communication."
 permalink: /topics/communication/
 ---
-{% raw %}
 # Communication Extensions
 
 Extensions for email, messaging, and team collaboration.
@@ -13,4 +12,3 @@ Extensions for email, messaging, and team collaboration.
 {% for post in posts %}
 - [{{ post.title }}]({{ post.url }})
 {% endfor %}
-{% endraw %}

@@ -4,7 +4,6 @@ title: "Performance"
 description: "Chrome extension performance optimization. Memory management, profiling, and speed improvements."
 permalink: /topics/performance/
 ---
-{% raw %}
 # Performance
 
 Memory management, profiling, speed optimization, and building lightweight extensions.
@@ -18,4 +17,3 @@ Memory management, profiling, speed optimization, and building lightweight exten
 {% for post in posts2 %}{% unless posts contains post %}
 - [{{ post.title }}]({{ post.url }})
 {% endunless %}{% endfor %}
-{% endraw %}

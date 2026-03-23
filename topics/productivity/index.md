@@ -4,7 +4,6 @@ title: "Productivity Extensions"
 description: "Chrome extensions that actually make you more productive. Tab management, workflow automation, and focus tools."
 permalink: /topics/productivity/
 ---
-{% raw %}
 # Productivity Extensions
 
 Tab management, workflow automation, focus tools, and extensions that save you real time.
@@ -18,4 +17,3 @@ Tab management, workflow automation, focus tools, and extensions that save you r
 {% for post in posts2 %}{% unless posts contains post %}
 - [{{ post.title }}]({{ post.url }})
 {% endunless %}{% endfor %}
-{% endraw %}

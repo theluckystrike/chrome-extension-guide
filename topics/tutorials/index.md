@@ -4,7 +4,6 @@ title: "Tutorials"
 description: "Step-by-step Chrome extension tutorials. Build real extensions from scratch."
 permalink: /topics/tutorials/
 ---
-{% raw %}
 # Tutorials
 
 Hands-on guides to building Chrome extensions from scratch.
@@ -13,4 +12,3 @@ Hands-on guides to building Chrome extensions from scratch.
 {% for post in posts %}
 - [{{ post.title }}]({{ post.url }})
 {% endfor %}
-{% endraw %}

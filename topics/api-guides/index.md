@@ -4,7 +4,6 @@ title: "API Guides"
 description: "Chrome extension API documentation. Tabs, storage, messaging, alarms, and more."
 permalink: /topics/api-guides/
 ---
-{% raw %}
 # API Guides
 
 In-depth documentation for Chrome extension APIs with working examples.
@@ -13,4 +12,3 @@ In-depth documentation for Chrome extension APIs with working examples.
 {% for post in posts %}
 - [{{ post.title }}]({{ post.url }})
 {% endfor %}
-{% endraw %}

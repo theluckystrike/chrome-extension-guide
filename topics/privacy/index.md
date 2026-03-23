@@ -4,7 +4,6 @@ title: "Privacy & Security"
 description: "Chrome extension privacy and security guides. Permission audits, data protection, and safe browsing."
 permalink: /topics/privacy/
 ---
-{% raw %}
 # Privacy & Security
 
 Permission audits, data protection, secure development practices, and safe browsing extensions.
@@ -18,4 +17,3 @@ Permission audits, data protection, secure development practices, and safe brows
 {% for post in posts2 %}{% unless posts contains post %}
 - [{{ post.title }}]({{ post.url }})
 {% endunless %}{% endfor %}
-{% endraw %}

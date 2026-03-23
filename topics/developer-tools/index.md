@@ -4,7 +4,6 @@ title: "Developer Tools"
 description: "Chrome extensions for web developers. Debugging, performance profiling, API testing, and code inspection."
 permalink: /topics/developer-tools/
 ---
-{% raw %}
 # Developer Tools
 
 Extensions for debugging, performance profiling, API testing, and code inspection.
@@ -13,4 +12,3 @@ Extensions for debugging, performance profiling, API testing, and code inspectio
 {% for post in posts %}
 - [{{ post.title }}]({{ post.url }})
 {% endfor %}
-{% endraw %}
