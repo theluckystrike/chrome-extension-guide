@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<ul>
+{% for post in site.posts %}
+  {% assign found = false %}
+  {% if page.topic_categories %}
+    {% for cat in page.topic_categories %}
+      {% if post.categories contains cat %}
+        {% assign found = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if page.topic_keywords and found == false %}
+    {% for kw in page.topic_keywords %}
+      {% assign kw_down = kw | downcase %}
+      {% assign title_down = post.title | downcase %}
+      {% if title_down contains kw_down %}
+        {% assign found = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if found %}
+  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>

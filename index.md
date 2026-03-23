@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: home
 title: "Chrome Extension Guide — Find Extensions Worth Installing"
 description: "Independent Chrome extension reviews. Permission audits, performance testing, honest recommendations."
 ---
@@ -34,13 +34,6 @@ The Chrome Web Store has 200,000+ extensions and most of them are garbage. These
   <a href="/2025/01/16/chrome-extension-security-best-practices-2025/">Chrome Extension Security Best Practices</a>
   <p>Protect users from vulnerabilities with proper CSP, minimal permissions, and security audits.</p>
 </div>
-
-## Recently Updated
-
-{% assign sorted_pages = site.posts | sort: "date" | reverse %}
-{% for p in sorted_pages limit: 6 %}{% if p.title %}
-- [{{ p.title }}]({{ p.url }})
-{% endif %}{% endfor %}
 
 ## Browse by Topic
 
