@@ -35,7 +35,6 @@
   <meta name="twitter:site" content="@theluckystrike">
 
   {% if jekyll.environment == "production" and site.google_analytics %}
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -59,12 +58,8 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Zovo",
-      "url": "https://zovo.one",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://zovo.one/logo.png"
-      }
+      "name": "Chrome Extension Guide",
+      "url": "https://bestchromeextensions.com"
     },
     "url": "{{ page.url | absolute_url }}",
     "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
@@ -86,249 +81,61 @@
   </script>
   {% endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  {% if page.url != '/' and page.url != '/docs/' %}
-  {% assign url_parts = page.url | split: '/' | compact %}
-  {% assign category_slug = url_parts[1] %}
-  {% case category_slug %}
-    {% when 'permissions' %}
-      {% assign category_name = 'Permissions' %}
-    {% when 'api-reference' %}
-      {% assign category_name = 'API Reference' %}
-    {% when 'guides' %}
-      {% assign category_name = 'Guides' %}
-    {% when 'patterns' %}
-      {% assign category_name = 'Patterns' %}
-    {% when 'publishing' %}
-      {% assign category_name = 'Publishing' %}
-    {% when 'mv3' %}
-      {% assign category_name = 'MV3' %}
-    {% when 'tutorials' %}
-      {% assign category_name = 'Tutorials' %}
-    {% else %}
-      {% assign category_name = '' %}
-  {% endcase %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "{{ site.url }}{{ site.baseurl }}/"
-      }{% if category_name != '' %},
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "{{ category_name }}",
-        "item": "{{ site.url }}{{ site.baseurl }}/docs/{{ category_slug }}/"
-      }{% endif %}{% if page.title %},
-      {
-        "@type": "ListItem",
-        "position": {% if category_name != '' %}3{% else %}2{% endif %},
-        "name": "{{ page.title }}"
-      }
-      {% endif %}
-    ]
-  }
-  </script>
-  {% if page.url contains '/docs/' %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    "programmingLanguage": "JavaScript",
-    "runtimePlatform": "Chrome Extension",
-    "author": "theluckystrike"
-  }
-  </script>
-  {% endif %}
-  {% endif %}
-
-  <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
-
   <style>
-    .prev-next-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid #e5e7eb;
-      gap: 1rem;
-    }
-    
-    .prev-next-nav a {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem 1.5rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .prev-next-nav a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-    }
-    
-    .prev-next-nav .nav-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      opacity: 0.85;
-      margin-bottom: 0.25rem;
-    }
-    
-    .prev-next-nav .nav-title {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    
-    .prev-next-nav .prev-link {
-      align-items: flex-start;
-    }
-    
-    .prev-next-nav .next-link {
-      align-items: flex-end;
-      text-align: right;
-    }
-    
-    .prev-next-nav .empty-nav {
-      flex: 1;
-      padding: 1rem 1.5rem;
-      background: #f3f4f6;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ca3af;
-      font-size: 0.875rem;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.7; color: #1a1a2e; background: #fafafa; }
+    h1 { font-size: 1.8rem; margin-top: 2rem; color: #0f0f23; }
+    h2 { font-size: 1.4rem; margin-top: 1.8rem; color: #16213e; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3rem; }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #1a1a2e; color: #e0e0e0; padding: 16px; border-radius: 6px; overflow-x: auto; }
+    pre code { background: none; color: inherit; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+    th { background: #f5f5f5; font-weight: 600; }
+    blockquote { border-left: 3px solid #1a73e8; margin: 1rem 0; padding: 0.5rem 1rem; background: #f8f9fa; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: #666; font-size: 0.85rem; }
+    nav { padding: 1rem 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem; }
+    nav a { margin-right: 1.5rem; font-weight: 500; }
+    img { max-width: 100%; height: auto; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav class="sidebar">
-      <h2>Chrome Extension Guide</h2>
-      <ul>
-        <li><a href="{{ '/search/' | relative_url }}">Search</a></li>
-        <li><a href="{{ '/articles/' | relative_url }}">All Articles</a></li>
-        <li><a href="{{ '/categories/' | relative_url }}">Categories</a></li>
-        <li><a href="{{ '/tags/' | relative_url }}">Tags</a></li>
-        <li><a href="{{ '/docs/permissions/' | relative_url }}">Permissions</a></li>
-        <li><a href="{{ '/docs/api-reference/' | relative_url }}">API Reference</a></li>
-        <li><a href="{{ '/docs/guides/' | relative_url }}">Guides</a></li>
-        <li><a href="{{ '/docs/patterns/' | relative_url }}">Patterns</a></li>
-        <li><a href="{{ '/docs/publishing/' | relative_url }}">Publishing</a></li>
-        <li><a href="{{ '/docs/mv3/' | relative_url }}">MV3</a></li>
-      </ul>
-    </nav>
-    
-    <main class="content">
-      {% if page.url != '/' and page.url != '/docs/' %}
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ '/' | relative_url }}">Home</a>
-        {% if category_name != '' %}
-          <span class="breadcrumb-separator">&gt;</span>
-          <a href="{{ '/docs/' | relative_url }}{{ category_slug }}/">{{ category_name }}</a>
-        {% endif %}
-        {% if page.title %}
-          <span class="breadcrumb-separator">&gt;</span>
-          <span class="breadcrumb-current">{{ page.title }}</span>
-        {% endif %}
-      </nav>
-
-      {% if page.title %}
-      <h1>{{ page.title }}</h1>
-      {% assign words = content | number_of_words %}
-      {% assign minutes = words | divided_by: 200 %}
-      {% if minutes < 1 %}1 min read{% else %}{{ minutes }} min read{% endif %}
-      {% endif %}
-      {{ content }}
-      
-      {% comment %}Previous/Next Navigation{% endcomment %}
-      <div class="prev-next-nav">
-        {% comment %}Build flat list of all pages{% endcomment %}
-        {% assign all_pages = "" | split: "" %}
-        
-        {% for section in site.data.navigation.sections %}
-          {% for article in section.articles %}
-            {% assign page_info = article.title | append: "|" | append: article.slug %}
-            {% assign all_pages = all_pages | push: page_info %}
-          {% endfor %}
-        {% endfor %}
-        
-        {% comment %}Find current page index{% endcomment %}
-        {% assign current_idx = -1 %}
-        {% for p in all_pages %}
-          {% assign p_parts = p | split: "|" %}
-          {% assign p_slug = p_parts[1] %}
-          {% if page.url contains p_slug %}
-            {% assign current_idx = forloop.index0 %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
-        
-        {% comment %}Find previous page{% endcomment %}
-        {% if current_idx > 0 %}
-          {% assign prev_idx = current_idx | minus: 1 %}
-          {% assign prev_parts = all_pages[prev_idx] | split: "|" %}
-          {% assign prev_title = prev_parts[0] %}
-          {% assign prev_slug = prev_parts[1] %}
-          <a href="{{ prev_slug }}" class="prev-link">
-            <span class="nav-label">← Previous</span>
-            <span class="nav-title">{{ prev_title }}</span>
-          </a>
-        {% else %}
-          <div class="empty-nav">No previous article</div>
-        {% endif %}
-        
-        {% comment %}Find next page{% endcomment %}
-        {% assign total_pages = all_pages.size %}
-        {% assign last_idx = total_pages | minus: 1 %}
-        {% if current_idx >= 0 and current_idx < last_idx %}
-          {% assign next_idx = current_idx | plus: 1 %}
-          {% assign next_parts = all_pages[next_idx] | split: "|" %}
-          {% assign next_title = next_parts[0] %}
-          {% assign next_slug = next_parts[1] %}
-          <a href="{{ next_slug }}" class="next-link">
-            <span class="nav-label">Next →</span>
-            <span class="nav-title">{{ next_title }}</span>
-          </a>
-        {% else %}
-          <div class="empty-nav">No next article</div>
-        {% endif %}
-      </div>
-      {% endif %}
-    </main>
-  </div>
-  
+  <nav>
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <a href="{{ '/about/' | relative_url }}">About</a>
+    <a href="{{ '/docs/guides/' | relative_url }}">Guides</a>
+    <a href="{{ '/docs/tutorials/' | relative_url }}">Tutorials</a>
+    <a href="{{ '/docs/patterns/' | relative_url }}">Patterns</a>
+  </nav>
+  {% if page.url != '/' and page.url != '/docs/' %}
+  <nav aria-label="breadcrumb" style="font-size:0.85em;color:#666;margin-bottom:1em;border:none;padding:0;">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    {% if page.title %}
+      &rsaquo; <span>{{ page.title }}</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+  <main>
+    {% if page.date %}
+    <p style="font-size: 0.85rem; color: #888;">Last updated: {{ page.date | date: "%B %d, %Y" }}</p>
+    {% endif %}
+    {{ content }}
+  </main>
   <footer>
-    <p>Built by <a href="https://zovo.one">theluckystrike</a> at <a href="https://zovo.one">zovo.one</a> | <a href="https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn">Tab Suspender Pro</a></p>
+    <p>More guides:
+      <a href="https://securetoolsguide.com">Privacy Tools</a> ·
+      <a href="https://chrometipsguide.com">Chrome Tips</a> ·
+      <a href="https://bestchromeextensions.com">Extensions</a> ·
+      <a href="https://bestremotetools.com">AI Tools</a> ·
+      <a href="https://welikeremotestack.com">Remote Work</a> ·
+      <a href="https://claudecodeguides.com">Claude Code</a>
+    </p>
+    <p>&copy; 2026 Chrome Extension Guide &middot; <a href="/about/">About</a></p>
   </footer>
-  <div class="site-nav-footer" style="background:#f8f9fa;padding:20px;margin-top:40px;border-top:2px solid #e9ecef;text-align:center;">
-    <p style="margin-bottom:10px;font-weight:bold;color:#333;">Explore Our Developer Guides</p>
-    <nav>
-      <a href="https://bestchromeextensions.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Home</a> &middot;
-      <a href="https://chrometipsguide.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Chrome Tips</a> &middot;
-      <a href="https://bestchromeextensions.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Extension Guide</a> &middot;
-      <a href="https://theluckystrike.github.io/claude-skills-guide/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Claude Skills</a> &middot;
-      <a href="https://bestremotetools.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">AI Tools</a> &middot;
-      <a href="https://welikeremotestack.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Remote Work</a> &middot;
-      <a href="https://securetoolsguide.com/" style="margin:0 8px;color:#0366d6;text-decoration:none;">Privacy Tools</a>
-    </nav>
-    <p style="margin-top:10px;font-size:0.85em;color:#666;">&copy; 2026 <a href="https://bestchromeextensions.com/" style="color:#666;">theluckystrike Developer Guides</a></p>
-  </div>
   <script>
-    // Add loading="lazy" to all images in content
     document.addEventListener('DOMContentLoaded', function() {
-      var contentImages = document.querySelectorAll('.content img');
+      var contentImages = document.querySelectorAll('main img');
       contentImages.forEach(function(img) {
         if (!img.hasAttribute('loading')) {
           img.setAttribute('loading', 'lazy');
