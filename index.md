@@ -3,7 +3,7 @@ layout: default
 title: "Chrome Extension Guide — Find Extensions Worth Installing"
 description: "Independent Chrome extension reviews. Permission audits, performance testing, honest recommendations."
 ---
-{% raw %}
+
 # Chrome Extension Guide
 
 The Chrome Web Store has 200,000+ extensions and most of them are garbage. These guides help you find the ones worth installing — and warn you about the ones that will steal your data or slow your browser to a crawl.
@@ -37,7 +37,7 @@ The Chrome Web Store has 200,000+ extensions and most of them are garbage. These
 
 ## Recently Updated
 
-{% assign sorted_pages = site.posts | sort: "date" | reverse %}
+{% assign sorted_pages = site.pages | where_exp: "p", "p.path contains 'articles/'" | sort: "date" | reverse %}
 {% for p in sorted_pages limit: 6 %}{% if p.title %}
 - [{{ p.title }}]({{ p.url }})
 {% endif %}{% endfor %}
@@ -63,4 +63,3 @@ The Chrome Web Store has 200,000+ extensions and most of them are garbage. These
 ## About
 
 Chrome Extension Guide publishes independent reviews. [Read more →](/about/)
-{% endraw %}
