@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "text highlighter extension, highlight text chrome, web annotation extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-text-highlighter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-text-highlighter-chrome-extension/"
 ---
 
 # Build a Text Highlighter Chrome Extension: Complete 2025 Tutorial
@@ -691,5 +691,5 @@ Start by testing your extension thoroughly, then consider adding the extension i
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

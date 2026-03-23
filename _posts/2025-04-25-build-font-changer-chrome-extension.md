@@ -6,7 +6,7 @@ date: 2025-04-25
 categories: [Chrome-Extensions, Tutorials]
 tags: [fonts, typography, chrome-extension]
 keywords: "chrome extension change font, font changer chrome, custom font chrome extension, override website font chrome, typography extension chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/25/build-font-changer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/25/build-font-changer-chrome-extension/"
 ---
 
 # Build a Font Changer Chrome Extension: Customize Website Typography

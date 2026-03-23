@@ -6,7 +6,7 @@ date: 2025-03-26
 categories: [Chrome-Extensions, Monetization]
 tags: [stripe, payments, chrome-extension]
 keywords: "chrome extension stripe, payment chrome extension, stripe integration extension, monetize chrome extension stripe, chrome extension in-app purchases"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/26/chrome-extension-stripe-payment-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/03/26/chrome-extension-stripe-payment-integration/"
 ---
 
 # Integrate Stripe Payments in Chrome Extensions: Monetization Guide

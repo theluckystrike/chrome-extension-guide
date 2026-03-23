@@ -6,7 +6,7 @@ date: 2025-01-16
 categories: [Chrome-Extensions, Security]
 tags: [security, permissions, chrome-extension, best-practices]
 keywords: "chrome extension security, extension permissions best practices, secure chrome extension development, browser extension security audit, chrome extension vulnerabilities, CSP chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/01/16/chrome-extension-security-best-practices-2025/"
 ---
 
 # Chrome Extension Security Best Practices: Protect Your Users in 2025
@@ -325,4 +325,4 @@ Stay vigilant, keep your dependencies updated, and make security reviews a regul
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -6,7 +6,7 @@ date: 2025-04-07
 categories: [Chrome-Extensions, Tutorials]
 tags: [notifications, blocker, chrome-extension]
 keywords: "chrome extension notification blocker, block notifications chrome, stop website popups extension, notification permission blocker, chrome popup blocker extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/07/build-notification-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/07/build-notification-blocker-chrome-extension/"
 ---
 
 # Build a Notification Blocker Chrome Extension: Stop Annoying Website Popups

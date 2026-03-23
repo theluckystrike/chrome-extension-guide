@@ -2,7 +2,7 @@
 layout: default
 title: "How to Find and Fix Memory Leaks in Chrome Extensions"
 description: "Master memory leak debugging in Chrome extensions with DevTools heap snapshots, detached DOM detection, event listener analysis, and automated testing patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-memory-leak-detection/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-memory-leak-detection/"
 ---
 
 # How to Find and Fix Memory Leaks in Chrome Extensions

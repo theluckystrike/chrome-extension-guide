@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chrome extension github api, github chrome extension, chrome extension github integration, github api chrome extension, manifest v3 github"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-github-integration-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-github-integration-tutorial/"
 ---
 
 # Chrome Extension GitHub Integration: Complete Tutorial for 2025

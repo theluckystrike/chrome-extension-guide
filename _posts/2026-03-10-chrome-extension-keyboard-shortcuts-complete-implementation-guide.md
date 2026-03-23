@@ -6,7 +6,7 @@ date: 2026-03-10
 categories: [Chrome-Extensions, APIs, User-Experience]
 tags: [keyboard-shortcuts, chrome-commands, extension-development, user-experience]
 keywords: "chrome extension keyboard shortcuts, chrome.commands API, suggested_key, onCommand listener, keyboard shortcuts chrome extension, global hotkeys extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2026/03/10/chrome-extension-keyboard-shortcuts-complete-implementation-guide/"
+canonical_url: "https://bestchromeextensions.com/2026/03/10/chrome-extension-keyboard-shortcuts-complete-implementation-guide/"
 ---
 
 # Chrome Extension Keyboard Shortcuts: Complete Implementation Guide

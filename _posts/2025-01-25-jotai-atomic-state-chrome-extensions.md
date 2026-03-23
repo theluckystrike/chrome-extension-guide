@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "jotai chrome extension, atomic state extension, jotai popup state, chrome extension state management, react state chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/jotai-atomic-state-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/jotai-atomic-state-chrome-extensions/"
 ---
 
 # Jotai Atomic State in Chrome Extensions: Complete Implementation Guide
@@ -531,6 +531,6 @@ Start with simple atoms and progressively add complexity as your extension grows
 ## Additional Resources {#resources}
 
 - [Jotai Documentation](https://jotai.org/)
-- [Chrome Extension Development Guide](/chrome-extension-guide/)
+- [Chrome Extension Development Guide](/)
 - [Manifest V3 Reference](https://developer.chrome.com/docs/extensions/mv3/intro/)
 

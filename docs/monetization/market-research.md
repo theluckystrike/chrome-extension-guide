@@ -2,7 +2,7 @@
 layout: default
 title: "Market Research for Chrome Extensions — Developer Guide"
 description: "Learn how to identify your target audience, analyze Chrome Web Store trends, conduct keyword research, and validate demand for your Chrome extension."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/monetization/market-research/"
+canonical_url: "https://bestchromeextensions.com/monetization/market-research/"
 ---
 # Market Research for Chrome Extensions
 

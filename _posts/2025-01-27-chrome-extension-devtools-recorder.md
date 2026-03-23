@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api]
 keywords: "devtools recorder extension, test recorder chrome, user flow recorder, chrome devtools recorder, chrome extension recorder integration"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-devtools-recorder/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-extension-devtools-recorder/"
 ---
 
 # Chrome DevTools Recorder Extension Integration: Complete Developer Guide

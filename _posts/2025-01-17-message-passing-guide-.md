@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, guide]
 keywords: "chrome extension message passing, sendMessage chrome extension, port connect extension, runtime.sendMessage, chrome.runtime.onMessage, extension message API"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/message-passing-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/message-passing-guide/"
 ---
 
 # Chrome Extension Message Passing Complete Guide
@@ -420,10 +420,10 @@ As you build more complex extensions, you'll find these message passing patterns
 
 ## Related Articles
 
-- [Chrome Extension Service Worker Complete Guide](/chrome-extension-guide/2025/02/17/chrome-extension-service-worker-complete-guide/) - Deep dive into service workers and their lifecycle in Chrome extensions
-- [CSS Injection Chrome Extension Content Script Guide](/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject and manage CSS in web pages from extensions
+- [Chrome Extension Service Worker Complete Guide](/2025/02/17/chrome-extension-service-worker-complete-guide/) - Deep dive into service workers and their lifecycle in Chrome extensions
+- [CSS Injection Chrome Extension Content Script Guide](/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject and manage CSS in web pages from extensions
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
-- [Chrome Extension Event Pages vs Service Workers](/chrome-extension-guide/2025/01/18/chrome-extension-event-pages-vs-service-workers/) - Understand the differences between event pages and service workers
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
+- [Chrome Extension Event Pages vs Service Workers](/2025/01/18/chrome-extension-event-pages-vs-service-workers/) - Understand the differences between event pages and service workers
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

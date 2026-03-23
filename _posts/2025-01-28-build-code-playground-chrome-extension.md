@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "code playground extension, live code editor chrome, sandbox extension, chrome code editor extension, browser-based code playground, interactive coding extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-code-playground-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-code-playground-chrome-extension/"
 ---
 
 # Build a Code Playground Chrome Extension

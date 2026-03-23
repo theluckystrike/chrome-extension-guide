@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "code formatter extension, prettier chrome extension, code beautifier, chrome extension code formatter, format code in browser"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-code-formatter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-code-formatter-chrome-extension/"
 ---
 
 # Build a Code Formatter Chrome Extension: Complete Developer's Guide

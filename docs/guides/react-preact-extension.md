@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension with React or Preact — How to Build Modern Extension UIs"
 description: "A comprehensive guide to building Chrome extensions with React and Preact, covering popup development, options pages, content script injection, state management, and bundle optimization."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/react-preact-extension/"
+canonical_url: "https://bestchromeextensions.com/guides/react-preact-extension/"
 ---
 
 # Chrome Extension with React or Preact — How to Build Modern Extension UIs
@@ -453,7 +453,7 @@ Remove unused dependencies and consider lighter alternatives. For example, repla
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

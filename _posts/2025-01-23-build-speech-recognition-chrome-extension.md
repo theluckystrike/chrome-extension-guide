@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "speech recognition extension, voice to text chrome, dictation chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-speech-recognition-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/build-speech-recognition-chrome-extension/"
 ---
 
 # Build a Speech Recognition Chrome Extension: Complete 2025 Developer's Guide

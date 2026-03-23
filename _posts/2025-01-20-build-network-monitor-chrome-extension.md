@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [guides, chrome-extensions, development-tools]
 tags: [network monitor extension, http request logger chrome, network traffic extension, chrome devtools, web development, api monitoring]
 keywords: "network monitor extension, http request logger chrome, network traffic extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-network-monitor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-network-monitor-chrome-extension/"
 ---
 
 # Build a Network Monitor Chrome Extension

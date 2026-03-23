@@ -6,7 +6,7 @@ date: 2025-05-05
 categories: [Chrome-Extensions, Developer]
 tags: [tab-suspender-pro, api-development, developer-tools]
 keywords: "tab suspender api developers, manage api docs tabs, swagger tabs chrome, postman chrome tabs, developer documentation tab management"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/05/tab-suspender-pro-for-api-developers/"
+canonical_url: "https://bestchromeextensions.com/2025/05/05/tab-suspender-pro-for-api-developers/"
 ---
 
 # Tab Suspender Pro for API Developers: Manage Swagger, Postman, and Docs Tabs

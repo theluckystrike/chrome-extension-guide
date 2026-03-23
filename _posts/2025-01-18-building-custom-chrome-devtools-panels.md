@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "custom devtools panel, chrome extension devtools, inspector extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-custom-chrome-devtools-panels/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-custom-chrome-devtools-panels/"
 ---
 
 # Building Custom Chrome DevTools Panels: A Complete Developer Guide
@@ -470,4 +470,4 @@ As you continue to develop your custom devtools panels, remember to explore the 
 - [Advanced Chrome Extension Debugging Techniques](/2025/01/17/advanced-chrome-extension-debugging-techniques/) - Advanced debugging techniques for Chrome extensions
 - [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Security best practices for Chrome extensions
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "local font viewer extension, system fonts chrome, font browser extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-local-font-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-local-font-viewer-chrome-extension/"
 ---
 
 # Build a Local Font Viewer Chrome Extension: Complete Developer Guide

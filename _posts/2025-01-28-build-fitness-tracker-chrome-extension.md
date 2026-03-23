@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "fitness tracker extension, workout log chrome, exercise extension, chrome extension fitness tracker, workout tracking extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-fitness-tracker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-fitness-tracker-chrome-extension/"
 ---
 
 # Build a Fitness Tracker Chrome Extension: Complete Development Guide

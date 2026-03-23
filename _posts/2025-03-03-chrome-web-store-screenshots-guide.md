@@ -6,7 +6,7 @@ date: 2025-03-03
 categories: [Chrome-Extensions, Marketing]
 tags: [chrome-web-store, screenshots, marketing]
 keywords: "chrome web store screenshots, chrome extension screenshots, extension store listing design, chrome web store images, chrome extension promotional images"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/03/chrome-web-store-screenshots-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/03/chrome-web-store-screenshots-guide/"
 ---
 
 # Chrome Web Store Screenshots Guide: Create Listings That Convert

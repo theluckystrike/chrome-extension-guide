@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "chart js extension, charting chrome popup, graph extension, chartjs chrome extension, data visualization chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-chart-js/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-chart-js/"
 ---
 
 # Chart.js in Chrome Extension Popups: Complete Implementation Guide

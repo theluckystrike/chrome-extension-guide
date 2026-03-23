@@ -5,7 +5,7 @@ description: ": : Access to API — attach to tabs and use Chrome DevTools Proto
 permalink: /permissions/debugger/
 category: permissions
 order: 11
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/debugger/"
+canonical_url: "https://bestchromeextensions.com/permissions/debugger/"
 ---
 
 # debugger Permission — Chrome Extension Reference

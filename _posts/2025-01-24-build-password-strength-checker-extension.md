@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "password strength extension, password security checker, password analyzer chrome, build password strength checker chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-password-strength-checker-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/build-password-strength-checker-extension/"
 ---
 
 # Build a Password Strength Checker Extension: Complete Tutorial

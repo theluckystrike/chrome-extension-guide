@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [guides, chrome-extensions, web-development, performance]
 tags: [web vitals extension, core web vitals chrome, performance metrics extension, LCP, FID, CLS, web performance, chrome extension development]
 keywords: "web vitals extension, core web vitals chrome, performance metrics extension, LCP extension, FID measurement, CLS tracking, Chrome web vitals"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/core-web-vitals-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/core-web-vitals-chrome-extension/"
 ---
 
 # Core Web Vitals Chrome Extension: Measure LCP, FID and CLS

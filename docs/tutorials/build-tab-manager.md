@@ -2,14 +2,14 @@
 layout: default
 title: "Chrome Extension Tab Manager — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-tab-manager/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-manager/"
 ---
 # Build a Tab Manager Extension — Full Tutorial
 
 ## What We're Building {#what-were-building}
 - Popup showing all open tabs with search/filter
 - Close, pin, group, and deduplicate tabs
-- Uses `[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)`, `chrome.tabGroups`, `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging`
+- Uses `[chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)`, `chrome.tabGroups`, `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging`
 
 ## Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
@@ -40,7 +40,7 @@ import { createMessenger } from '@theluckystrike/webext-messaging';
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
 type Messages = {
-  getTabs: { request: void; response: [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).Tab[] };
+  getTabs: { request: void; response: [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).Tab[] };
   closeTab: { request: { tabId: number }; response: void };
   pinTab: { request: { tabId: number; pinned: boolean }; response: void };
   groupTabs: { request: { tabIds: number[]; title: string }; response: void };
@@ -68,19 +68,19 @@ searchInput.addEventListener('input', async (e) => {
 const messenger = createMessenger<Messages>();
 
 messenger.onMessage('getTabs', async () => {
-  return await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({});
+  return await [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).query({});
 });
 
 messenger.onMessage('closeTab', async ({ tabId }) => {
-  await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).remove(tabId);
+  await [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).remove(tabId);
 });
 
 messenger.onMessage('pinTab', async ({ tabId, pinned }) => {
-  await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).update(tabId, { pinned });
+  await [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).update(tabId, { pinned });
 });
 
 messenger.onMessage('groupTabs', async ({ tabIds, title }) => {
-  const groupId = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).group({ tabIds });
+  const groupId = await [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).group({ tabIds });
   await chrome.tabGroups.update(groupId, { title, color: 'blue' });
 });
 ```
@@ -117,7 +117,7 @@ function findDuplicates(tabs) {
 - Test with 100+ tabs — ensure performance is acceptable
 
 ## What You Learned {#what-you-learned}
-- `[chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)` query, create, remove, update, group APIs
+- `[chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` query, create, remove, update, group APIs
 - `chrome.tabGroups` for colored tab groups
 - Type-safe messaging between popup and background
 - Persisting UI state with storage
@@ -125,7 +125,7 @@ function findDuplicates(tabs) {
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -2,7 +2,7 @@
 layout: default
 title: "Cross-Browser Extension Development — Complete Guide"
 description: "A comprehensive guide to building browser extensions across Chrome, Firefox, Safari, and Edge using WebExtensions APIs with practical code examples and compatibility patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/cross-browser-extension-development/"
+canonical_url: "https://bestchromeextensions.com/guides/cross-browser-extension-development/"
 ---
 
 # Cross-Browser Extension Development

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Dom Observer Patterns — Best Practices"
 description: "Use MutationObserver for DOM changes."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/dom-observer-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/dom-observer-patterns/"
 ---
 
 # DOM Observer Patterns for Content Scripts

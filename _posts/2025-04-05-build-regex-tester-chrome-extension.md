@@ -6,7 +6,7 @@ date: 2025-04-05
 categories: [Chrome-Extensions, Tutorials]
 tags: [regex, tools, chrome-extension]
 keywords: "chrome extension regex tester, regex chrome extension, build regex tester extension, regular expression chrome, pattern matching extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/05/build-regex-tester-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/05/build-regex-tester-chrome-extension/"
 ---
 
 # Build a Regex Tester Chrome Extension: Interactive Pattern Matching Tool
@@ -901,5 +901,5 @@ Happy coding, and enjoy your new regex testing tool!
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Regex Reference on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/articles/manifest-v3-migration-guide/)
+- [Manifest V3 Migration Guide](/articles/manifest-v3-migration-guide/)
 

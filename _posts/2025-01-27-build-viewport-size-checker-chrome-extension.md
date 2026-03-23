@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "viewport checker extension, screen size chrome, responsive viewport"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-viewport-size-checker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-viewport-size-checker-chrome-extension/"
 ---
 
 # Build a Viewport Size Checker Chrome Extension: Complete Developer's Guide

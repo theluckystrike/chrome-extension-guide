@@ -6,7 +6,7 @@ date: 2025-03-29
 categories: [Chrome-Extensions, APIs]
 tags: [tts, text-to-speech, chrome-extension]
 keywords: "chrome extension text to speech, tts API chrome extension, chrome extension read aloud, screen reader chrome extension, chrome.tts API guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/29/chrome-extension-text-to-speech-tts-api/"
+canonical_url: "https://bestchromeextensions.com/2025/03/29/chrome-extension-text-to-speech-tts-api/"
 ---
 
 # Chrome Extension Text-to-Speech (TTS) API: Build a Screen Reader

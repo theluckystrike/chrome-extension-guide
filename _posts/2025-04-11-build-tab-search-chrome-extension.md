@@ -6,7 +6,7 @@ date: 2025-04-11
 categories: [Chrome-Extensions, Tutorials]
 tags: [tab-search, productivity, chrome-extension]
 keywords: "chrome extension tab search, search open tabs chrome, find tab chrome extension, tab finder extension, chrome tab search tool"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/11/build-tab-search-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/11/build-tab-search-chrome-extension/"
 ---
 
 # Build a Tab Search Chrome Extension: Find Any Open Tab Instantly

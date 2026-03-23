@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Testing Patterns — Best Practices"
 description: "Testing patterns for Chrome extension development."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/testing-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/testing-patterns/"
 ---
 
 # Testing Chrome Extensions

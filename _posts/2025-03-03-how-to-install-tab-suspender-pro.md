@@ -6,7 +6,7 @@ date: 2025-03-03
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, installation, beginner-guide]
 keywords: "install tab suspender pro, tab suspender pro setup, how to use tab suspender pro, tab suspender pro chrome install, tab suspender pro beginner guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/03/how-to-install-tab-suspender-pro/"
+canonical_url: "https://bestchromeextensions.com/2025/03/03/how-to-install-tab-suspender-pro/"
 ---
 
 # How to Install and Set Up Tab Suspender Pro: Complete Beginner's Guide

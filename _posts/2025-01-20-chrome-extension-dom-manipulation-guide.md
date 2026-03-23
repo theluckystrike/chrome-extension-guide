@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "dom manipulation extension, modify page chrome extension, content script dom, chrome extension dom manipulation, manipulate webpage chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/chrome-extension-dom-manipulation-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/chrome-extension-dom-manipulation-guide/"
 ---
 
 # Chrome Extension DOM Manipulation Guide: Master Content Script DOM Access

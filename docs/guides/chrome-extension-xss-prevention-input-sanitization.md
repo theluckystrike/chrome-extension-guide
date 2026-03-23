@@ -2,7 +2,7 @@
 layout: default
 title: "Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation"
 description: "Master XSS prevention in Chrome extensions with this comprehensive guide covering DOMPurify, Trusted Types, message sanitization, CSP, and modern browser security APIs."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-xss-prevention-input-sanitization/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-xss-prevention-input-sanitization/"
 ---
 
 # Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation
@@ -433,7 +433,7 @@ function sanitizeUserStyle(style) {
 
 Content Security Policy serves as your extension's primary defense against XSS attacks. A properly configured CSP restricts what resources can load and execute, significantly reducing the impact of any XSS vulnerabilities that slip through.
 
-For detailed CSP configuration, refer to our [Chrome Extension Content Security Policy](/chrome-extension-guide/guides/chrome-extension-content-security-policy/) guide. The following provides essential configuration for XSS prevention:
+For detailed CSP configuration, refer to our [Chrome Extension Content Security Policy](/guides/chrome-extension-content-security-policy/) guide. The following provides essential configuration for XSS prevention:
 
 ```json
 {
@@ -516,7 +516,7 @@ brew install owasp-zap
 zap-baseline.py -t chrome-extension://your-extension-id/options.html
 ```
 
-For comprehensive security testing, refer to our [Extension Security Audit](/chrome-extension-guide/guides/extension-security-audit/) guide which covers automated scanning, manual testing, and vulnerability assessment.
+For comprehensive security testing, refer to our [Extension Security Audit](/guides/extension-security-audit/) guide which covers automated scanning, manual testing, and vulnerability assessment.
 
 ## OWASP for Extensions
 
@@ -532,7 +532,7 @@ Key OWASP principles for extensions include:
 
 **Principle of Least Privilege**: Request minimum necessary permissions. Extensions with fewer permissions have smaller attack surfaces. Avoid the `<all_urls>` permission unless absolutely necessary.
 
-For additional security hardening techniques, see our [Chrome Extension Security Hardening](/chrome-extension-guide/guides/chrome-extension-security-hardening/) guide which covers comprehensive protection strategies including secure coding patterns, dependency management, and deployment security.
+For additional security hardening techniques, see our [Chrome Extension Security Hardening](/guides/chrome-extension-security-hardening/) guide which covers comprehensive protection strategies including secure coding patterns, dependency management, and deployment security.
 
 ## Security Checklist
 

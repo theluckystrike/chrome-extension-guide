@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Browser Action Click Handling — Best Practices"
 description: "Handle browser action (toolbar button) clicks with popup, badge, and command patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/browser-action-click-handling/"
+canonical_url: "https://bestchromeextensions.com/patterns/browser-action-click-handling/"
 ---
 
 # Browser Action Click Handling

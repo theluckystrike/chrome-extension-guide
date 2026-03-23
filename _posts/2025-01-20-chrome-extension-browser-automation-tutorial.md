@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "browser automation extension, automate web tasks chrome, macro extension, chrome automation tutorial, web task automation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/chrome-extension-browser-automation-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/chrome-extension-browser-automation-tutorial/"
 ---
 
 # Chrome Extension Browser Automation Tutorial: Master Web Task Automation

@@ -6,7 +6,7 @@ date: 2025-05-14
 categories: [Chrome-Extensions, Reference]
 tags: [tab-suspender-pro, features, reference]
 keywords: "tab suspender pro features, tab suspender feature list, tab suspender pro capabilities, chrome tab suspender features, tab management features"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/14/tab-suspender-pro-feature-comparison-chart/"
+canonical_url: "https://bestchromeextensions.com/2025/05/14/tab-suspender-pro-feature-comparison-chart/"
 ---
 
 # Tab Suspender Pro Feature Chart: Every Feature at a Glance

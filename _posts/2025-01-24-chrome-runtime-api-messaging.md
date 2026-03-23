@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.runtime api, extension messaging, onInstalled event, runtime connect, sendMessage, chrome extension communication"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-runtime-api-messaging/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-runtime-api-messaging/"
 ---
 
 # Chrome Runtime API: Complete Guide to Extension Messaging and Lifecycle

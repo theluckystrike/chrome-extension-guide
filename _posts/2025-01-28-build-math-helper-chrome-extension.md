@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "math helper extension, calculator chrome, equation solver extension, chrome math extension, mathematical chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-math-helper-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-math-helper-chrome-extension/"
 ---
 
 # Build a Math Helper Chrome Extension: Complete Guide 2025

@@ -6,7 +6,7 @@ date: 2025-03-12
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, suspend-all, chrome-performance]
 keywords: "suspend all tabs chrome, tab suspender pro suspend all, close all tabs save memory, one click suspend chrome tabs, tab suspender bulk suspend"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/12/tab-suspender-pro-suspend-all-tabs-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/12/tab-suspender-pro-suspend-all-tabs-guide/"
 ---
 
 # Tab Suspender Pro: How to Suspend All Tabs at Once and Save Gigabytes of RAM

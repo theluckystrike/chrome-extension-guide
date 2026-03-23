@@ -5,7 +5,7 @@ description: ": or : Block, redirect, or modify network requests using declarati
 permalink: /permissions/declarativeNetRequest/
 category: permissions
 order: 13
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequest/"
+canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequest/"
 ---
 
 # declarativeNetRequest Permission — Chrome Extension Reference

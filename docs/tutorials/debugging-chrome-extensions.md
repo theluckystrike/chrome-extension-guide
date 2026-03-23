@@ -2,7 +2,7 @@
 layout: default
 title: "Debugging Chrome Extensions: Tips, Tools, and Techniques"
 description: "Learn how to debug Chrome extensions effectively with this comprehensive tutorial covering DevTools, service worker inspection, content script debugging, and common error fixes."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/debugging-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/tutorials/debugging-chrome-extensions/"
 ---
 
 # Debugging Chrome Extensions: Tips, Tools, and Techniques
@@ -501,9 +501,9 @@ When encountering issues, systematically check:
 
 ## Related Articles
 
-- [Service Worker Debugging](/chrome-extension-guide/docs/guides/service-worker-debugging/) — Deep dive into debugging background service workers
-- [Common Errors and Fixes](/chrome-extension-guide/docs/guides/common-errors/) — Reference guide for frequent extension errors
-- [Extension Logging Patterns](/chrome-extension-guide/docs/patterns/logging-patterns/) — Best practices for logging in extensions
+- [Service Worker Debugging](/docs/guides/service-worker-debugging/) — Deep dive into debugging background service workers
+- [Common Errors and Fixes](/docs/guides/common-errors/) — Reference guide for frequent extension errors
+- [Extension Logging Patterns](/docs/patterns/logging-patterns/) — Best practices for logging in extensions
 
 ---
 

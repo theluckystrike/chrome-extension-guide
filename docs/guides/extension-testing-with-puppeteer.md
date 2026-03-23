@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Puppeteer Testing — Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-testing-with-puppeteer/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-testing-with-puppeteer/"
 ---
 # End-to-End Testing Chrome Extensions with Puppeteer
 

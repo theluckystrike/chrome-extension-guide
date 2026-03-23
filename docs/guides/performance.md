@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Performance Optimization — Developer Guide"
 description: "Optimize your Chrome extension performance with this guide covering profiling, lazy loading, and memory management."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/performance/"
+canonical_url: "https://bestchromeextensions.com/guides/performance/"
 ---
 # Performance Optimization for Chrome Extensions
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Testing Mv3 Extensions — Manifest V3 Guide"
 description: "Testing strategies for Manifest V3 Chrome extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/testing-mv3-extensions/"
+canonical_url: "https://bestchromeextensions.com/mv3/testing-mv3-extensions/"
 ---
 
 # Testing MV3 Extensions

@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome cookies api, manage cookies chrome extension, cookie extension tutorial, chrome.cookies api, cookie manipulation extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-cookies-api-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-cookies-api-complete-guide/"
 ---
 
 # Chrome Cookies API Complete Guide for Extensions
@@ -680,9 +680,9 @@ For more information about Chrome extension development, explore our other guide
 
 ## Related Articles
 
-- [Chrome Extension Local Storage vs Chrome Storage API](/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/) - Compare different storage options for Chrome extensions
-- [Chrome Extension Storage Patterns for Large Scale Data](/chrome-extension-guide/2025/01/27/chrome-extension-storage-patterns-large-scale-data/) - Learn advanced storage patterns for data-intensive extensions
-- [Chrome Extension State Management Patterns](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Master state management in your extensions
+- [Chrome Extension Local Storage vs Chrome Storage API](/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/) - Compare different storage options for Chrome extensions
+- [Chrome Extension Storage Patterns for Large Scale Data](/2025/01/27/chrome-extension-storage-patterns-large-scale-data/) - Learn advanced storage patterns for data-intensive extensions
+- [Chrome Extension State Management Patterns](/2025/01/17/chrome-extension-state-management-patterns/) - Master state management in your extensions
 
 ---
 
@@ -691,4 +691,4 @@ For more information about Chrome extension development, explore our other guide
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

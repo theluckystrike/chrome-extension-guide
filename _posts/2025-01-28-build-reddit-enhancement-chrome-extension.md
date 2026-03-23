@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "reddit enhancement extension, reddit tools chrome, reddit customizer, reddit chrome extension development, build reddit extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-reddit-enhancement-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-reddit-enhancement-chrome-extension/"
 ---
 
 # Build a Reddit Enhancement Chrome Extension: Complete 2025 Guide

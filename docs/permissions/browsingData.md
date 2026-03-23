@@ -5,7 +5,7 @@ description: "Remove browsing data (cache, cookies, history, downloads, password
 permalink: /permissions/browsingData/
 category: permissions
 order: 4
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/browsingData/"
+canonical_url: "https://bestchromeextensions.com/permissions/browsingData/"
 ---
 
 # browsingData Permission

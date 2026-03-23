@@ -7,7 +7,7 @@ date: 2025-01-15
 categories: [productivity, chrome-extensions, browser-performance]
 tags: [fix slow browser too many tabs, chrome tab management extension, reduce chrome memory usage, tab suspender extension, browser optimization, tab management]
 keywords: "fix slow browser too many tabs, chrome tab management extension, reduce chrome memory usage, tab suspender extension, chrome browser slow fix, browser performance optimization"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/15/fix-slow-browser-too-many-tabs-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/15/fix-slow-browser-too-many-tabs-chrome-extension/"
 ---
 
 # Fix Slow Browser From Too Many Tabs: Best Chrome Extensions for 2025
@@ -254,4 +254,4 @@ Take control of your browser performance today. Install Tab Suspender Pro, follo
 *For more tips on browser optimization and Chrome extension recommendations, explore our other guides on the Chrome Extension Guide website.*
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

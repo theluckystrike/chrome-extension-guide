@@ -6,7 +6,7 @@ date: 2025-02-24
 categories: [Chrome-Extensions, APIs]
 tags: [alarms, scheduling, chrome-extension]
 keywords: "chrome extension alarms API, schedule tasks chrome extension, periodic events chrome extension, chrome.alarms API guide, chrome extension timer, background tasks chrome extension, manifest v3 alarms, scheduled automation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/24/chrome-extension-alarms-api-scheduling-tasks/"
+canonical_url: "https://bestchromeextensions.com/2025/02/24/chrome-extension-alarms-api-scheduling-tasks/"
 ---
 
 # Chrome Extension Alarms API: Schedule Tasks and Periodic Events

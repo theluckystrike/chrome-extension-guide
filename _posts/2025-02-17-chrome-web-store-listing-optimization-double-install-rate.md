@@ -249,9 +249,9 @@ Localized listings often rank better in local-language searches. A German user s
 
 Optimizing your CWS listing is part of a broader extension growth strategy. Once you have a compelling listing, drive traffic through complementary channels.
 
-For deeper guidance on Chrome Web Store SEO, including advanced keyword research and external promotion strategies, see our comprehensive [Chrome Web Store SEO Guide](/chrome-extension-guide/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/). That guide covers topics like building external backlinks, optimizing your developer website for search, and leveraging social proof.
+For deeper guidance on Chrome Web Store SEO, including advanced keyword research and external promotion strategies, see our comprehensive [Chrome Web Store SEO Guide](/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/). That guide covers topics like building external backlinks, optimizing your developer website for search, and leveraging social proof.
 
-If you are also interested in monetizing your extension once you have built an install base, explore our [Extension Monetization Playbook](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) for strategies including freemium models, paid features, and ad integration within CWS guidelines.
+If you are also interested in monetizing your extension once you have built an install base, explore our [Extension Monetization Playbook](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) for strategies including freemium models, paid features, and ad integration within CWS guidelines.
 
 ---
 

@@ -5,7 +5,7 @@ description: ": : Access to API — configure Chrome's proxy settings : High —
 permalink: /permissions/proxy/
 category: permissions
 order: 32
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/proxy/"
+canonical_url: "https://bestchromeextensions.com/permissions/proxy/"
 ---
 
 # proxy Permission — Chrome Extension Reference

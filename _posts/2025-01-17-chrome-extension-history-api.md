@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome history api, browser history extension, history search chrome extension, chrome extension history api tutorial, chrome.history api, browser history search extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-history-api/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-history-api/"
 ---
 
 # Chrome History API Extension Tutorial: Build a Browser History Search Extension
@@ -684,10 +684,10 @@ Start building your extension today, and explore the full potential of the Chrom
 
 ## Related Articles
 
-- [Chrome Extension Bookmarks API Guide](/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/) - Learn to work with browser bookmarks
-- [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/03/08/chrome-extension-downloads-api-guide/) - Manage downloads from your extension
-- [Chrome Extension Browsing Data API](/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/) - Clear and manage browsing data
+- [Chrome Extension Bookmarks API Guide](/2025/03/04/chrome-extension-bookmarks-api-guide/) - Learn to work with browser bookmarks
+- [Chrome Extension Downloads API Guide](/2025/03/08/chrome-extension-downloads-api-guide/) - Manage downloads from your extension
+- [Chrome Extension Browsing Data API](/2025/03/04/chrome-extension-history-api-browsing-data/) - Clear and manage browsing data
 -e 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

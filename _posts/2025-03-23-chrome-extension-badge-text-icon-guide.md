@@ -6,7 +6,7 @@ date: 2025-03-23
 categories: [Chrome-Extensions, UI]
 tags: [badge, icon, chrome-extension]
 keywords: "chrome extension badge text, chrome.action.setBadgeText, extension icon badge, dynamic badge chrome extension, chrome extension status icon"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/23/chrome-extension-badge-text-icon-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/23/chrome-extension-badge-text-icon-guide/"
 ---
 
 # Chrome Extension Badge Text and Icon: Dynamic Status Indicators

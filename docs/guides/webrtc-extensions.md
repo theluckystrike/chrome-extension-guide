@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension WebRTC — Developer Guide"
 description: "Learn Chrome extension webrtc with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/webrtc-extensions/"
+canonical_url: "https://bestchromeextensions.com/guides/webrtc-extensions/"
 ---
 # Chrome Extensions and WebRTC
 
@@ -625,7 +625,7 @@ function cleanup(stream: MediaStream, recorder: MediaRecorder): void {
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

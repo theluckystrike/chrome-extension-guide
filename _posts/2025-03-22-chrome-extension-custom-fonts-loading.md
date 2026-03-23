@@ -6,7 +6,7 @@ date: 2025-03-22
 categories: [Chrome-Extensions, Design]
 tags: [fonts, typography, chrome-extension]
 keywords: "chrome extension custom fonts, load fonts chrome extension, font-face chrome extension, typography chrome extension popup, web fonts extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/22/chrome-extension-custom-fonts-loading/"
+canonical_url: "https://bestchromeextensions.com/2025/03/22/chrome-extension-custom-fonts-loading/"
 ---
 
 # Using Custom Fonts in Chrome Extensions: Complete Typography Guide

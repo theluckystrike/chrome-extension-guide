@@ -5,7 +5,7 @@ description: "Permission string: Grants access to API Query and restore recently
 permalink: /permissions/sessions/
 category: permissions
 order: 37
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/sessions/"
+canonical_url: "https://bestchromeextensions.com/permissions/sessions/"
 ---
 
 # sessions Permission

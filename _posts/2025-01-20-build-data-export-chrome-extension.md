@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "data export extension, export to csv chrome, web data exporter extension, chrome extension csv export, json export chrome extension, pdf export chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-data-export-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-data-export-chrome-extension/"
 ---
 
 # Build a Data Export Chrome Extension: CSV, JSON and PDF

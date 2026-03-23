@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "api tester extension, rest client chrome extension, http client extension, chrome extension development, build api tester, postman alternative chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-api-tester-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-api-tester-chrome-extension/"
 ---
 
 # Build an API Tester Chrome Extension: Complete Developer's Guide
@@ -1009,7 +1009,7 @@ The skills you've gained—working with Chrome's storage API, handling cross-ori
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

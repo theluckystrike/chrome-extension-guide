@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension state management, extension data flow, chrome storage patterns, background script state, manifest v3, state management]
 keywords: "chrome extension state management, extension data flow, chrome storage patterns, background script state, manifest v3 state"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-state-management-patterns/"
 ---
 
 # Chrome Extension State Management: Patterns for Complex Extensions
@@ -549,7 +549,7 @@ Key takeaways from this guide:
 
 By applying these patterns, you can build Chrome extensions that are reliable, performant, and maintainable — regardless of how complex your extension becomes.
 
-For more tutorials on Chrome extension development, explore our guides on [performance optimization](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) and [Manifest V3 best practices](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/).
+For more tutorials on Chrome extension development, explore our guides on [performance optimization](/2025/01/16/chrome-extension-performance-optimization-guide/) and [Manifest V3 best practices](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/).
 
 ---
 
@@ -561,4 +561,4 @@ For more tutorials on Chrome extension development, explore our guides on [perfo
 ---
 
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

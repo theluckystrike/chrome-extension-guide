@@ -6,7 +6,7 @@ date: 2025-03-28
 categories: [Chrome-Extensions, Performance]
 tags: [web-workers, performance, chrome-extension]
 keywords: "chrome extension web worker, web worker chrome extension, offload processing chrome extension, chrome extension heavy computation, parallel processing extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/28/chrome-extension-web-workers-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/28/chrome-extension-web-workers-guide/"
 ---
 
 # Web Workers in Chrome Extensions: Offload Heavy Processing

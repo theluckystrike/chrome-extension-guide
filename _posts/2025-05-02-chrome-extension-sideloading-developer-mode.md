@@ -6,7 +6,7 @@ date: 2025-05-02
 categories: [Chrome-Extensions, Development]
 tags: [sideloading, developer-mode, chrome-extension]
 keywords: "sideload chrome extension, chrome extension developer mode, install unpacked extension, load extension chrome, chrome extension local install"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/02/chrome-extension-sideloading-developer-mode/"
+canonical_url: "https://bestchromeextensions.com/2025/05/02/chrome-extension-sideloading-developer-mode/"
 ---
 
 # Sideloading Chrome Extensions: Developer Mode Installation Guide

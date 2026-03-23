@@ -11,7 +11,7 @@ You have built a Chrome extension that solves a real problem. Users are installi
 
 The Chrome extension ecosystem has matured into a legitimate business platform. Extensions generate anywhere from a few hundred dollars a month for niche utilities to tens of thousands for well-positioned products with strong conversion funnels. The key is choosing the right monetization model for your product, your audience, and your willingness to maintain infrastructure.
 
-This guide covers every proven monetization model available to Chrome extension developers in 2026. Each section explains when a model works, when it does not, and links to the detailed implementation article in the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) where you can go deeper.
+This guide covers every proven monetization model available to Chrome extension developers in 2026. Each section explains when a model works, when it does not, and links to the detailed implementation article in the [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) where you can go deeper.
 
 ---
 
@@ -61,7 +61,7 @@ async function cacheLicenseStatus(licenseData) {
 }
 ```
 
-**Deep dive:** Read the full [Freemium Model Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/freemium-model/) in the Extension Monetization Playbook for conversion optimization strategies, feature gating psychology, and real-world examples from 17+ extensions.
+**Deep dive:** Read the full [Freemium Model Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/freemium-model/) in the Extension Monetization Playbook for conversion optimization strategies, feature gating psychology, and real-world examples from 17+ extensions.
 
 ---
 
@@ -108,7 +108,7 @@ chrome.runtime.onMessageExternal.addListener(
 );
 ```
 
-**Deep dive:** The [Subscription Model Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/subscription-model/) covers monthly versus annual pricing math, churn reduction tactics, and hybrid pricing models that combine subscriptions with lifetime options.
+**Deep dive:** The [Subscription Model Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/subscription-model/) covers monthly versus annual pricing math, churn reduction tactics, and hybrid pricing models that combine subscriptions with lifetime options.
 
 ---
 
@@ -150,7 +150,7 @@ async function validateLicenseKey(key) {
 }
 ```
 
-**Deep dive:** The [One-Time Purchase Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/one-time-purchase/) explains pricing sweet spots, avoiding the lifetime deal trap, and strategies for generating ongoing revenue from single purchases.
+**Deep dive:** The [One-Time Purchase Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/one-time-purchase/) explains pricing sweet spots, avoiding the lifetime deal trap, and strategies for generating ongoing revenue from single purchases.
 
 ---
 
@@ -185,7 +185,7 @@ function getAffiliateRecommendation(context) {
 }
 ```
 
-**Deep dive:** The [Affiliate Revenue Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/affiliate-model/) covers program selection, compliance with Chrome Web Store policies, implementation patterns, and realistic income expectations from affiliate revenue.
+**Deep dive:** The [Affiliate Revenue Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/affiliate-model/) covers program selection, compliance with Chrome Web Store policies, implementation patterns, and realistic income expectations from affiliate revenue.
 
 ---
 
@@ -206,7 +206,7 @@ Sponsorship works when three conditions align: you have a clearly defined audien
 - Products with daily active usage where sponsor impressions accumulate
 - Extensions in categories where complementary paid products exist
 
-**Deep dive:** The [Sponsorship Model Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/sponsorship-model/) covers how to find sponsors, price sponsorship deals, maintain user trust with sponsored content, and structure long-term sponsorship relationships.
+**Deep dive:** The [Sponsorship Model Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/sponsorship-model/) covers how to find sponsors, price sponsorship deals, maintain user trust with sponsored content, and structure long-term sponsorship relationships.
 
 ---
 
@@ -254,7 +254,7 @@ async function callBackendAPI(endpoint, data) {
 }
 ```
 
-**Deep dive:** The [Extension as a Service Guide](https://theluckystrike.github.io/extension-monetization-playbook/articles/extension-as-a-service/) covers SaaS architecture patterns, pricing strategies for server-backed extensions, hybrid monetization, and the infrastructure decisions that determine margins.
+**Deep dive:** The [Extension as a Service Guide](https://bestchromeextensions.com/extension-monetization-playbook/articles/extension-as-a-service/) covers SaaS architecture patterns, pricing strategies for server-backed extensions, hybrid monetization, and the infrastructure decisions that determine margins.
 
 ---
 
@@ -270,7 +270,7 @@ The monetization lessons from Tab Suspender Pro are instructive precisely becaus
 
 **Growth challenges at small scale.** The Chrome Web Store algorithm favors established extensions with more reviews and higher install counts. Breaking through requires creative approaches: content marketing, cross-promotion with other extensions, and building community around the privacy and trust narrative.
 
-**Read the full case study:** [Tab Suspender Pro: Competing in a Crowded Market](https://theluckystrike.github.io/extension-monetization-playbook/tab-suspender-pro-and-competing-in-a-crowded-market) in the Extension Monetization Playbook.
+**Read the full case study:** [Tab Suspender Pro: Competing in a Crowded Market](https://bestchromeextensions.com/extension-monetization-playbook/tab-suspender-pro-and-competing-in-a-crowded-market) in the Extension Monetization Playbook.
 
 ---
 
@@ -293,11 +293,11 @@ Many successful extensions combine models. A freemium base with affiliate links 
 
 Implementing payments in Chrome extensions presents unique challenges due to Content Security Policy restrictions, sandboxed environments, and the absence of native payment support since Google deprecated Chrome Web Store payments in 2020. These resources cover the technical foundations:
 
-- **[Stripe in Extensions](https://theluckystrike.github.io/extension-monetization-playbook/articles/stripe-in-extensions/)** — Step-by-step Stripe Checkout integration with webhook handling
-- **[License Key System](https://theluckystrike.github.io/extension-monetization-playbook/articles/license-key-system/)** — Build license key generation, validation, and activation limits
-- **[Payment Integration Overview](https://theluckystrike.github.io/extension-monetization-playbook/articles/payment-integration-overview/)** — Compare payment providers, understand CSP constraints, and architect secure flows
-- **[Server-Side Validation](https://theluckystrike.github.io/extension-monetization-playbook/articles/server-side-validation/)** — Prevent license circumvention with proper backend validation
-- **[Paywall Patterns](https://theluckystrike.github.io/extension-monetization-playbook/articles/paywall-patterns/)** — UI patterns for upgrade prompts that convert without annoying users
+- **[Stripe in Extensions](https://bestchromeextensions.com/extension-monetization-playbook/articles/stripe-in-extensions/)** — Step-by-step Stripe Checkout integration with webhook handling
+- **[License Key System](https://bestchromeextensions.com/extension-monetization-playbook/articles/license-key-system/)** — Build license key generation, validation, and activation limits
+- **[Payment Integration Overview](https://bestchromeextensions.com/extension-monetization-playbook/articles/payment-integration-overview/)** — Compare payment providers, understand CSP constraints, and architect secure flows
+- **[Server-Side Validation](https://bestchromeextensions.com/extension-monetization-playbook/articles/server-side-validation/)** — Prevent license circumvention with proper backend validation
+- **[Paywall Patterns](https://bestchromeextensions.com/extension-monetization-playbook/articles/paywall-patterns/)** — UI patterns for upgrade prompts that convert without annoying users
 
 ## Related Articles
 
@@ -314,7 +314,7 @@ Implementing payments in Chrome extensions presents unique challenges due to Con
 
 ## Further Reading
 
-The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers every aspect of building a revenue-generating extension business, from choosing your first model to scaling as a solo developer. Start with the [Monetization Strategies Overview](https://theluckystrike.github.io/extension-monetization-playbook/articles/monetization-strategies-overview/) for the complete picture. The source code is available on [GitHub](https://github.com/theluckystrike/extension-monetization-playbook).
+The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers every aspect of building a revenue-generating extension business, from choosing your first model to scaling as a solo developer. Start with the [Monetization Strategies Overview](https://bestchromeextensions.com/extension-monetization-playbook/articles/monetization-strategies-overview/) for the complete picture. The source code is available on [GitHub](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ---
 

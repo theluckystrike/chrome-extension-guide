@@ -328,8 +328,8 @@ Now it's time to implement these strategies for your extension. Start with the p
 
 ## Related Guides
 
-- [Chrome Extension Monetization Strategies That Actually Work in 2025](https://theluckystrike.github.io/chrome-extension-guide/2025/02/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to turn your growing user base into sustainable revenue
-- [Chrome Extension Review Acquisition: Building 5-Star Ratings](https://theluckystrike.github.io/chrome-extension-guide/2025/02/chrome-extension-review-acquisition-5-star-ratings/) — Systematic strategies for building social proof
+- [Chrome Extension Monetization Strategies That Actually Work in 2025](https://bestchromeextensions.com/2025/02/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to turn your growing user base into sustainable revenue
+- [Chrome Extension Review Acquisition: Building 5-Star Ratings](https://bestchromeextensions.com/2025/02/chrome-extension-review-acquisition-5-star-ratings/) — Systematic strategies for building social proof
 
 ---
 

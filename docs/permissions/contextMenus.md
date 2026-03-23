@@ -5,7 +5,7 @@ description: "Grants access to the API Add custom items to the browser's right-c
 permalink: /permissions/contextMenus/
 category: permissions
 order: 9
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/contextMenus/"
+canonical_url: "https://bestchromeextensions.com/permissions/contextMenus/"
 ---
 
 # contextMenus Permission Reference

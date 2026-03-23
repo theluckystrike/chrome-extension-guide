@@ -3,7 +3,7 @@
 title: Chrome Extension State Management — A Deep Dive
 description: Master state management in Chrome extensions with real code examples, best practices, and common pitfalls to avoid.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/chrome-extension-state-management/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-state-management/"
 
 ---
 
@@ -27,7 +27,7 @@ Each context has its own JavaScript execution environment, meaning variables can
 
 The fundamental challenge is that state exists in multiple places simultaneously:
 
-1. **Persistent storage**: [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local, [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync, or IndexedDB
+1. **Persistent storage**: [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local, [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).sync, or IndexedDB
 2. **In-memory state**: Variables in each context's execution environment
 3. **UI state**: Current values displayed in popups, options pages, or injected DOM elements
 
@@ -37,9 +37,9 @@ Keeping these in sync is non-trivial because:
 - Content scripts can be injected or removed as the user navigates
 - Multiple tabs may each have their own content script instance
 
-## Pattern 1: Single Source of Truth with [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)
+## Pattern 1: Single Source of Truth with [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)
 
-The most reliable pattern is to treat `[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local` as your single source of truth. All contexts read from and write to storage, ensuring consistency across the extension.
+The most reliable pattern is to treat `[[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local` as your single source of truth. All contexts read from and write to storage, ensuring consistency across the extension.
 
 ### Basic Implementation
 
@@ -54,7 +54,7 @@ class ExtensionStateManager {
 
   // Initialize by loading from storage
   async init() {
-    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(this.namespace);
+    const result = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get(this.namespace);
     this.cache = new Map(Object.entries(result[this.namespace] || {}));
     this.notifyListeners();
   }
@@ -75,7 +75,7 @@ class ExtensionStateManager {
   async save() {
     const data = {};
     data[this.namespace] = Object.fromEntries(this.cache);
-    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set(data);
+    await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set(data);
   }
 
   // Subscribe to state changes
@@ -102,7 +102,7 @@ stateManager.init().then(() => {
 
 ```javascript
 // In any context (popup, content script, etc.)
-[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, areaName) => {
+[[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, areaName) => {
   if (areaName === 'local' && changes.myExtension) {
     const newValue = changes.myExtension.newValue;
     const oldValue = changes.myExtension.oldValue;
@@ -124,13 +124,13 @@ When state changes, you often need to notify all active contexts immediately. St
 // background.js - Broadcast state changes to all tabs
 async function broadcastStateChange(state) {
   // Get all tabs with the extension's content scripts
-  const tabs = await [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).query({
+  const tabs = await [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).query({
     url: '*://*.example.com/*' // Adjust to your target sites
   });
 
   // Send to each tab
   const promises = tabs.map(tab => 
-    [chrome.tabs](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sendMessage(tab.id, {
+    [chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).sendMessage(tab.id, {
       type: 'STATE_UPDATE',
       payload: state
     }).catch(() => {
@@ -204,7 +204,7 @@ class StateStore extends EventEmitter {
 
   async init() {
     // Load initial state from storage
-    const stored = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('appState');
+    const stored = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('appState');
     this.state = stored.appState || this.getDefaultState();
     this.initialized = true;
     this.emit('init', this.state);
@@ -239,7 +239,7 @@ class StateStore extends EventEmitter {
     obj[keys[keys.length - 1]] = value;
     
     // Persist to storage
-    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ appState: this.state });
+    await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ appState: this.state });
     
     // Emit change event
     this.emit('change', {
@@ -270,7 +270,7 @@ Always initialize your state explicitly rather than relying on implicit defaults
 ```javascript
 // ❌ Bad: Implicit defaults can cause issues
 let settings = {};
-[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings', result => {
+[[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('settings', result => {
   settings = result.settings || {};
 });
 
@@ -283,9 +283,9 @@ const DEFAULT_SETTINGS = {
 };
 
 async function initializeSettings() {
-  const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
+  const result = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
   const settings = { ...DEFAULT_SETTINGS, ...result.settings };
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ settings });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ settings });
   return settings;
 }
 ```
@@ -296,12 +296,12 @@ Prevent collisions by namespacing your storage keys:
 
 ```javascript
 // ❌ Bad: Simple keys can collide with other extensions
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ theme: 'dark' });
+await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ theme: 'dark' });
 
 // ✅ Good: Namespaced keys prevent collisions
 const NAMESPACE = 'myExtension_';
 
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({
   [`${NAMESPACE}theme`]: 'dark',
   [`${NAMESPACE}settings`]: { ... },
   [`${NAMESPACE}userData`]: { ... }
@@ -328,7 +328,7 @@ function debounce(func, wait) {
 
 // usage in a popup
 const saveSettings = debounce(async (newSettings) => {
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_settings: newSettings });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_settings: newSettings });
   console.log('Settings saved:', newSettings);
 }, 500);
 
@@ -369,7 +369,7 @@ chrome.runtime.onConnect.addListener((port) => {
 
 // Periodic heartbeat to maintain service worker
 setInterval(() => {
-  [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('heartbeat').then(result => {
+  [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('heartbeat').then(result => {
     console.log('Service worker heartbeat');
   });
 }, 25000); // Every 25 seconds
@@ -449,9 +449,9 @@ function validateSettings(input) {
 }
 
 // Usage
-const stored = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
+const stored = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('settings');
 const settings = validateSettings(stored.settings || {});
-await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ settings });
+await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ settings });
 ```
 
 ## Common Pitfalls to Avoid
@@ -472,7 +472,7 @@ document.getElementById('login').addEventListener('click', async () => {
 let userData = null;
 document.getElementById('login').addEventListener('click', async () => {
   userData = await fetchUserData();
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_user: userData });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_user: userData });
 });
 ```
 
@@ -483,7 +483,7 @@ Avoid infinite loops when synchronizing state:
 ```javascript
 // ❌ Bad: Infinite loop
 // content.js
-[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes) => {
+[[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes) => {
   if (changes.myExtension_data) {
     updateUI(changes.myExtension_data.newValue);
     // This might trigger another storage change, creating a loop
@@ -491,13 +491,13 @@ Avoid infinite loops when synchronizing state:
 });
 
 function updateUI(data) {
-  [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_data: processData(data) });
+  [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_data: processData(data) });
 }
 
 // ✅ Good: Check for actual changes
 let lastProcessedData = null;
 
-[[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, areaName) => {
+[[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).onChanged.addListener((changes, areaName) => {
   if (areaName === 'local' && changes.myExtension_data) {
     const newData = changes.myExtension_data.newValue;
     
@@ -525,13 +525,13 @@ async function saveLargeData(data) {
   
   if (used + dataSize > quota * 0.9) {
     // Warn user and offer to clean up old data
-    await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+    await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({
       myExtension_warning: 'Storage quota nearly full'
     });
     return false;
   }
   
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_largeData: data });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ myExtension_largeData: data });
   return true;
 }
 ```
@@ -554,7 +554,7 @@ async function getSyncStorage(key) {
       return null;
     }
     
-    const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).sync.get(key);
+    const result = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).sync.get(key);
     return result[key];
   } catch (error) {
     console.error('Storage error:', error);
@@ -570,9 +570,9 @@ Handle concurrent state updates properly:
 ```javascript
 // ❌ Bad: Race condition
 async function updateCounter() {
-  const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('counter');
+  const result = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('counter');
   const count = result.counter || 0;
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ counter: count + 1 });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ counter: count + 1 });
 }
 
 // ✅ Good: Use storage transactions or versioning
@@ -581,7 +581,7 @@ let updateVersion = 0;
 async function updateCounter() {
   const currentVersion = ++updateVersion;
   
-  const result = await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('counter');
+  const result = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('counter');
   const count = result.counter || 0;
   
   // Check if another update happened while we were processing
@@ -590,7 +590,7 @@ async function updateCounter() {
     return;
   }
   
-  await [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ counter: count + 1 });
+  await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ counter: count + 1 });
 }
 ```
 
@@ -683,7 +683,7 @@ const cachedData = await dbManager.get('cache', 'userData');
 State management in Chrome extensions requires careful consideration of the unique architectural constraints of extension contexts. By following these patterns and best practices—treating storage as the single source of truth, implementing proper event-driven architecture, validating data, and handling lifecycle events—you can build robust extensions that maintain consistent state across all contexts.
 
 Key takeaways:
-1. Always persist state to [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization) or IndexedDB
+1. Always persist state to [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) or IndexedDB
 2. Use event-driven patterns for cross-context communication
 3. Implement debouncing for frequent updates
 4. Validate all data when reading from storage
@@ -695,4 +695,4 @@ With these patterns in your toolkit, you'll be well-equipped to handle even the 
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.

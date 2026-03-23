@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Reading List Api — Best Practices"
 description: "Access Chrome Reading List with the Reading List API."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/reading-list-api/"
+canonical_url: "https://bestchromeextensions.com/patterns/reading-list-api/"
 ---
 
 # Reading List API Patterns

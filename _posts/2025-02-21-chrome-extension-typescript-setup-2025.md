@@ -6,7 +6,7 @@ date: 2025-02-21
 categories: [Chrome-Extensions, TypeScript]
 tags: [typescript, chrome-extension, setup]
 keywords: "chrome extension typescript, typescript chrome extension, chrome extension ts setup, manifest v3 typescript, type safe chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/21/chrome-extension-typescript-setup-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/02/21/chrome-extension-typescript-setup-2025/"
 ---
 
 # Chrome Extension Development with TypeScript in 2025: Complete Setup Guide

@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Web-Development, Animation]
 tags: [chrome-extension, animation, tutorial, web-animation-api]
 keywords: "web animation api extension, animation chrome extension, smooth transitions extension, WAAPI chrome extension, chrome extension ui animation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/web-animation-api-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/web-animation-api-chrome-extension/"
 ---
 
 # Web Animation API in Chrome Extensions: Smooth UI Transitions

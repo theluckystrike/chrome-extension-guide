@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "tab grouper extension, auto group tabs, organize tabs chrome, chrome tab manager, tab organization extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-smart-tab-grouper-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-smart-tab-grouper-chrome-extension/"
 ---
 
 # Build a Smart Tab Grouper Chrome Extension: Complete Developer's Guide

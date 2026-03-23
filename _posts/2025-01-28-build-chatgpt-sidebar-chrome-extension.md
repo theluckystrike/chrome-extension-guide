@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "chatgpt sidebar extension, ai sidebar chrome, openai assistant"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-chatgpt-sidebar-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-chatgpt-sidebar-chrome-extension/"
 ---
 
 # Build a ChatGPT Sidebar Chrome Extension: Complete Developer Guide

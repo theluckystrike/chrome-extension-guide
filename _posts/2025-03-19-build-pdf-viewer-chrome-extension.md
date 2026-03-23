@@ -6,7 +6,7 @@ date: 2025-03-19
 categories: [Chrome-Extensions, Tutorials]
 tags: [pdf, pdfjs, chrome-extension]
 keywords: "chrome extension pdf viewer, pdf.js chrome extension, build pdf reader extension, chrome extension open pdf, pdf extension chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/19/build-pdf-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/03/19/build-pdf-viewer-chrome-extension/"
 ---
 
 # Build a PDF Viewer Chrome Extension: Complete Tutorial with pdf.js

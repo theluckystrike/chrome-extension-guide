@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "sharp image extension, image resize chrome, image optimization extension, sharp chrome extension, image processing chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-sharp-images/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/chrome-extension-sharp-images/"
 ---
 
 # Sharp Image Processing in Chrome Extensions: Complete Guide for Developers

@@ -2,7 +2,7 @@
 layout: default
 title: "Cross-Browser Extension Development — Tutorial"
 description: "Learn how to build cross-browser Chrome extensions that work in Chrome, Firefox, Safari, and Edge with this comprehensive tutorial."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/cross-browser-compatibility/"
+canonical_url: "https://bestchromeextensions.com/tutorials/cross-browser-compatibility/"
 ---
 
 # Cross-Browser Extension Development
@@ -643,9 +643,9 @@ With these patterns, you can create extensions that provide a consistent experie
 
 ## Related Articles
 
-- [Cross-Browser Development Guide](https://theluckystrike.github.io/chrome-extension-guide/guides/cross-browser/) — Comprehensive guide to building cross-browser extensions
-- [Chrome Extension Migration: Firefox](https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-migration-firefox/) — Step-by-step Firefox porting guide
-- [Chrome Extension Migration: Edge](https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-migration-edge/) — Edge-specific migration guide
+- [Cross-Browser Development Guide](https://bestchromeextensions.com/guides/cross-browser/) — Comprehensive guide to building cross-browser extensions
+- [Chrome Extension Migration: Firefox](https://bestchromeextensions.com/guides/chrome-extension-migration-firefox/) — Step-by-step Firefox porting guide
+- [Chrome Extension Migration: Edge](https://bestchromeextensions.com/guides/chrome-extension-migration-edge/) — Edge-specific migration guide
 
 ---
 

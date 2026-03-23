@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script CSS Injection — Complete Guide with TypeScript"
 description: "Master CSS injection techniques in Chrome extension content scripts. Learn declarative vs programmatic injection, Shadow DOM isolation, dynamic stylesheets, and build production-ready extensions with TypeScript."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-script-css-injection/"
+canonical_url: "https://bestchromeextensions.com/guides/content-script-css-injection/"
 ---
 
 # Chrome Extension Content Script CSS Injection — Complete Guide with TypeScript

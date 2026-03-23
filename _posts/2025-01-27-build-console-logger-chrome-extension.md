@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "console logger extension, debug log chrome, javascript logger, chrome extension console log, console interceptor chrome extension, debugging chrome extension, log viewer extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-console-logger-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-console-logger-chrome-extension/"
 ---
 
 # Build a Console Logger Chrome Extension: Complete Developer Guide

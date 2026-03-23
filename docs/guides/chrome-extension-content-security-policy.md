@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3"
 description: "Chrome extension CSP in MV3: sandbox pages, eval alternatives, trusted types, nonce scripts, remote code, violation reporting, debugging, MV2 migration."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-content-security-policy/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-content-security-policy/"
 ---
 
 # Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3

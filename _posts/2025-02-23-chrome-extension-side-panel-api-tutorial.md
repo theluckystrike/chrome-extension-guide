@@ -6,7 +6,7 @@ date: 2025-02-23
 categories: [Chrome-Extensions, APIs]
 tags: [side-panel, chrome-extension, tutorial]
 keywords: "chrome extension side panel, chrome sidebar extension, side panel API chrome, build sidebar chrome extension, chrome extension sidepanel"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/23/chrome-extension-side-panel-api-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/02/23/chrome-extension-side-panel-api-tutorial/"
 ---
 
 # Chrome Extension Side Panel API: Build a Sidebar Extension in 2025

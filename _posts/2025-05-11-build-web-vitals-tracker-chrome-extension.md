@@ -6,7 +6,7 @@ date: 2025-05-11
 categories: [Chrome-Extensions, SEO]
 tags: [web-vitals, performance, chrome-extension]
 keywords: "chrome extension web vitals, core web vitals extension, LCP FID CLS chrome, build web vitals extension, google web vitals tracker"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/11/build-web-vitals-tracker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/11/build-web-vitals-tracker-chrome-extension/"
 ---
 
 # Build a Web Vitals Tracker Chrome Extension: Monitor LCP, FID, and CLS

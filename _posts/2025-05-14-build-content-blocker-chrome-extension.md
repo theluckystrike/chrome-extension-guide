@@ -6,7 +6,7 @@ date: 2025-05-14
 categories: [Chrome-Extensions, Tutorials]
 tags: [content-blocker, element-hider, chrome-extension]
 keywords: "chrome extension content blocker, hide elements chrome, block content chrome extension, element hider extension, chrome extension remove elements"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/14/build-content-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/14/build-content-blocker-chrome-extension/"
 ---
 
 # Build a Content Blocker Chrome Extension: Hide Distracting Page Elements

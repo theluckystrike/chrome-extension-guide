@@ -5,7 +5,7 @@ description: "Grants access to API Read, write, delete cookies for sites matchin
 permalink: /permissions/cookies/
 category: permissions
 order: 10
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/cookies/"
+canonical_url: "https://bestchromeextensions.com/permissions/cookies/"
 ---
 
 # cookies Permission Reference

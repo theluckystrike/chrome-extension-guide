@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome bookmarks api, bookmark manager extension, chrome bookmark extension, chrome.bookmarks API, manifest v3 bookmarks, chrome extension bookmarks tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-bookmarks-api-extension-development-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-bookmarks-api-extension-development-tutorial/"
 ---
 
 # Chrome Bookmarks API Extension Development Tutorial: Build a Bookmark Manager Extension
@@ -485,13 +485,13 @@ Start building your bookmark manager extension today, and take advantage of the 
 
 ## Related Articles
 
-- [Chrome Extension Bookmarks API: Build a Custom Bookmark Manager](https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-bookmarks-api-guide/)
-- [Chrome Extension History API: Access and Manage Browsing History](https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/chrome-extension-history-api-browsing-data/)
+- [Chrome Extension Bookmarks API: Build a Custom Bookmark Manager](https://bestchromeextensions.com/2025/03/04/chrome-extension-bookmarks-api-guide/)
+- [Chrome Extension History API: Access and Manage Browsing History](https://bestchromeextensions.com/2025/03/04/chrome-extension-history-api-browsing-data/)
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
-- [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+- [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://bestchromeextensions.com/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)
 ---
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

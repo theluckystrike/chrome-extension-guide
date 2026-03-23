@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Ab Testing — Best Practices"
 description: "Implement A/B testing patterns for Chrome extensions to experiment with features."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-ab-testing/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-ab-testing/"
 ---
 
 # A/B Testing Patterns for Chrome Extensions

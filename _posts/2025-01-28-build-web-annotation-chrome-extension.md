@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "web annotation extension, highlight text chrome, annotate web pages, chrome extension development tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-web-annotation-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-web-annotation-chrome-extension/"
 ---
 
 # Build a Web Annotation Chrome Extension: Complete 2025 Guide

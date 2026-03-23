@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Permissions: A Deep Dive — Developer Guide"
 description: "Master Chrome extension permissions with this comprehensive tutorial covering required vs optional permissions, host access, activeTab, declarativeContent, runtime requests, and minimum-privilege strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/permissions-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/tutorials/permissions-deep-dive/"
 ---
 
 # Chrome Extension Permissions: A Deep Dive

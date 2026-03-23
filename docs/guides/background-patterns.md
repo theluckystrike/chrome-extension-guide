@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Background Service Workers — Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/background-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/background-patterns/"
 ---
 # Background Service Worker Patterns
 
@@ -254,5 +254,5 @@ ensureInitialized();
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

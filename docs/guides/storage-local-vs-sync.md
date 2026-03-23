@@ -2,7 +2,7 @@
 layout: default
 title: "chrome.storage.local vs sync — Which Should You Use?"
 description: "Complete comparison of chrome.storage.local vs chrome.storage.sync for Chrome extensions. Learn when to use each storage type, quota limits, synchronization behavior, and best practices."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/storage-local-vs-sync/"
+canonical_url: "https://bestchromeextensions.com/guides/storage-local-vs-sync/"
 ---
 
 # chrome.storage.local vs sync — Which Should You Use?

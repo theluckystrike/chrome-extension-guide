@@ -97,7 +97,7 @@ Analyze competitors across these dimensions:
 
 Pricing signals quality in the Chrome Web Store. Some users equate higher prices with better products; others seek free alternatives. Your pricing strategy should align with your positioning. Premium pricing makes sense if you're delivering significantly more value than free alternatives. Free can work if you're building a user base for other monetization (affiliates, upsells, or a complementary paid product).
 
-For a deeper dive, see our [extension monetization strategies guide](/chrome-extension-guide/tags/monetization/) and our [pricing guide](/chrome-extension-guide/tags/pricing/).
+For a deeper dive, see our [extension monetization strategies guide](/tags/monetization/) and our [pricing guide](/tags/pricing/).
 
 ---
 
@@ -199,6 +199,6 @@ Start your competitive analysis before you write a single line of code. The insi
 
 ---
 
-*This guide is part of our [extension strategy series](/chrome-extension-guide/tags/strategy/). For more on monetizing your extension, see our [monetization strategies](/chrome-extension-guide/tags/monetization/) and [pricing guide](/chrome-extension-guide/tags/pricing/). For technical optimization tips, explore our [CWS optimization](/chrome-extension-guide/tags/cws-optimization/) resources.*
+*This guide is part of our [extension strategy series](/tags/strategy/). For more on monetizing your extension, see our [monetization strategies](/tags/monetization/) and [pricing guide](/tags/pricing/). For technical optimization tips, explore our [CWS optimization](/tags/cws-optimization/) resources.*
 
 *Built by theluckystrike at [zovo.one](https://zovo.one)*

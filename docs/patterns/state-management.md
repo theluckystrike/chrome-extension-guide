@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension State Management — Best Practices"
 description: "Centralized state management patterns for extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/state-management/"
+canonical_url: "https://bestchromeextensions.com/patterns/state-management/"
 ---
 
 # State Management Patterns

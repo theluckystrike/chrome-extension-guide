@@ -5,7 +5,7 @@ description: "Grants persistent access to tab metadata on all tabs in the browse
 permalink: /permissions/tabs/
 category: permissions
 order: 43
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tabs/"
+canonical_url: "https://bestchromeextensions.com/permissions/tabs/"
 ---
 
 # tabs Permission Reference

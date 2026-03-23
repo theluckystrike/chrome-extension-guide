@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Permissions API Complete Reference"
 description: "The Chrome Permissions API requests and manages optional permissions at runtime, enabling least-privilege extensions that request access only when needed by users."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/permissions-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/permissions-api/"
 ---
 
 # chrome.permissions API Reference

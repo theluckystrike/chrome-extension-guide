@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension vue, vuejs chrome extension, vue popup extension, vue chrome extension tutorial, manifest v3 vue"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-vue-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-vue-integration/"
 ---
 
 # Chrome Extension Development with Vue.js Guide: Build Modern Extensions

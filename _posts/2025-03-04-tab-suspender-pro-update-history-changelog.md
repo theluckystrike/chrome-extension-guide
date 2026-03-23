@@ -6,7 +6,7 @@ date: 2025-03-04
 categories: [Chrome-Extensions, Updates]
 tags: [tab-suspender-pro, changelog, updates]
 keywords: "tab suspender pro updates, tab suspender pro changelog, tab suspender pro new features, tab suspender pro version history"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/04/tab-suspender-pro-update-history-changelog/"
+canonical_url: "https://bestchromeextensions.com/2025/03/04/tab-suspender-pro-update-history-changelog/"
 ---
 
 # Tab Suspender Pro Update History: Every Feature and Improvement Tracked

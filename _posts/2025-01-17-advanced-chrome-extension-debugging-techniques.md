@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [debug chrome extension, chrome extension devtools debugging, chrome extension debugging, manifest v3 debugging, service worker debugging, content script debugging]
 keywords: "debug chrome extension, chrome extension devtools debugging, chrome extension debugging techniques, manifest v3 debugging, service worker debugging, content script debugging"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/advanced-chrome-extension-debugging-techniques/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/advanced-chrome-extension-debugging-techniques/"
 ---
 
 # Advanced Chrome Extension Debugging Techniques: A Complete Guide
@@ -298,8 +298,8 @@ The Chrome extension ecosystem continues to evolve, and debugging tools evolve w
 
 ## Related Articles
 
-- [Chrome Extension Testing & Automation: Complete Guide](/chrome-extension-guide/2025/01/16/chrome-extension-testing-automation-guide/) - Learn how to test Chrome extensions with comprehensive testing strategies.
-- [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Get started with Chrome extension development from scratch.
-- [Chrome Extension Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for peak performance.
+- [Chrome Extension Testing & Automation: Complete Guide](/2025/01/16/chrome-extension-testing-automation-guide/) - Learn how to test Chrome extensions with comprehensive testing strategies.
+- [Chrome Extension Development 2025: Complete Beginner's Guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Get started with Chrome extension development from scratch.
+- [Chrome Extension Performance Optimization Guide](/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for peak performance.
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

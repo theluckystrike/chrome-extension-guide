@@ -6,7 +6,7 @@ date: 2025-03-03
 categories: [Chrome-Extensions, Frameworks]
 tags: [vue, chrome-extension, tutorial]
 keywords: "chrome extension vue 3, vue chrome extension, build extension vue, vue 3 popup chrome extension, vue chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/03/chrome-extension-vue3-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/03/chrome-extension-vue3-complete-guide/"
 ---
 
 # Build a Chrome Extension with Vue 3: Complete Tutorial for 2025
@@ -886,8 +886,8 @@ Start building your Vue 3 Chrome extension today, and take advantage of the powe
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize your Vue 3 Chrome extension? The [Extension Monetization Playbook](https://theluckystrike.github.io/chrome-extension-guide/resources/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize your Vue 3 Chrome extension? The [Extension Monetization Playbook](https://bestchromeextensions.com/resources/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

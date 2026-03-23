@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Favicon Api — Best Practices"
 description: "Access and display favicons from web pages in your extension."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/favicon-api/"
+canonical_url: "https://bestchromeextensions.com/patterns/favicon-api/"
 ---
 
 # Favicon API and Patterns

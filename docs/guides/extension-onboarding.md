@@ -86,7 +86,7 @@ Effective Chrome extension onboarding balances education with action, giving use
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension auth, extension login flow, oauth chrome extension patterns, chrome extension authentication, manifest v3 auth, chrome identity api"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/authentication-patterns-for-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/authentication-patterns-for-chrome-extensions/"
 ---
 
 # Authentication Patterns for Chrome Extensions: A Complete Guide
@@ -115,9 +115,9 @@ Common authentication issues in Chrome extensions include token expiration not b
 
 ## Related Articles
 
-- [Chrome Extension OAuth2 Authentication Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
-- [Chrome Identity API and OAuth](https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-identity-api-oauth/) - Learn how to use Chrome Identity API for authentication
-- [Chrome Storage API Overview](https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/) - Securely store tokens and authentication state
+- [Chrome Extension OAuth2 Authentication Guide](https://bestchromeextensions.com/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
+- [Chrome Identity API and OAuth](https://bestchromeextensions.com/2025/01/24/chrome-identity-api-oauth/) - Learn how to use Chrome Identity API for authentication
+- [Chrome Storage API Overview](https://bestchromeextensions.com/2025/06/05/chrome-storage-api-overview/) - Securely store tokens and authentication state
 
 ---
 
@@ -139,4 +139,4 @@ As the Chrome extension platform continues to evolve, staying current with authe
 - [Chrome Identity API OAuth Guide](/2025/01/24/chrome-identity-api-oauth/) - Learn how to use the Chrome Identity API for authentication
 - [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Security best practices for Chrome extensions
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

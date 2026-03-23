@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "json editor extension, edit json chrome, json tree viewer, chrome extension json editor, build json chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-json-editor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/build-json-editor-chrome-extension/"
 ---
 
 # Build a JSON Editor Chrome Extension: Complete Developer's Guide
@@ -754,5 +754,5 @@ Now that you have the knowledge and code, go forth and build amazing Chrome exte
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Bookmark API — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/bookmark-api/"
+canonical_url: "https://bestchromeextensions.com/guides/bookmark-api/"
 ---
 # Bookmark API Guide
 
@@ -149,7 +149,7 @@ async function tagBookmark(id, tags) {
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

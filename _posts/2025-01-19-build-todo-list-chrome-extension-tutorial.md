@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-todo-list-chrome-extension-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-todo-list-chrome-extension-tutorial/"
 ---
 
 # Build a Todo List Chrome Extension Tutorial — Complete 2025 Guide

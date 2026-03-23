@@ -6,7 +6,7 @@ date: 2025-03-24
 categories: [Chrome-Extensions, UI]
 tags: [options-page, settings, chrome-extension]
 keywords: "chrome extension options page, extension settings page, chrome extension preferences UI, options_page chrome extension, chrome extension configuration page"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/24/chrome-extension-options-page-design/"
+canonical_url: "https://bestchromeextensions.com/2025/03/24/chrome-extension-options-page-design/"
 ---
 
 # Chrome Extension Options Page: Build a Professional Settings Interface
@@ -527,4 +527,4 @@ Remember to keep your options page simple for basic users while providing advanc
 
 Your options page is not just a collection of form fields—it is a crucial part of the user experience that can determine whether users keep your extension installed or abandon it for a competitor. Invest the time to do it right, and your users will thank you with positive reviews and long-term engagement.
 
-For more information on building professional Chrome extensions, explore our comprehensive guides on [Manifest V3 migration](/chrome-extension-guide/docs/mv3/migration-guide/), [Chrome storage APIs](/chrome-extension-guide/docs/storage/), and [extension performance optimization](/chrome-extension-guide/docs/performance/).
+For more information on building professional Chrome extensions, explore our comprehensive guides on [Manifest V3 migration](/docs/mv3/migration-guide/), [Chrome storage APIs](/docs/storage/), and [extension performance optimization](/docs/performance/).

@@ -6,7 +6,7 @@ date: 2025-05-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [search, multi-search, chrome-extension]
 keywords: "chrome extension search engine, custom search chrome, multi search chrome extension, search aggregator extension, build search extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/12/build-custom-search-engine-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/12/build-custom-search-engine-chrome-extension/"
 ---
 
 # Build a Custom Search Engine Chrome Extension: Search Multiple Sites at Once

@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "regex highlighter extension, pattern matcher chrome, regex helper, chrome regex tool, regex pattern matcher, text highlighter chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-regex-highlighter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-regex-highlighter-chrome-extension/"
 ---
 
 # Build a Regex Highlighter Chrome Extension

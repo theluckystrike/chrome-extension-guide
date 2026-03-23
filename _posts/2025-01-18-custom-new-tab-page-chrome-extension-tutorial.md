@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/custom-new-tab-page-chrome-extension-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/custom-new-tab-page-chrome-extension-tutorial/"
 ---
 
 # Custom New Tab Page Chrome Extension Tutorial — Complete Guide (2025)

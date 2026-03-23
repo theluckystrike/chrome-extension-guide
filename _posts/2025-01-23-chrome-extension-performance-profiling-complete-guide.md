@@ -244,7 +244,7 @@ Start by establishing performance baselines for your extension, then use profili
 
 Remember that performance is not a one-time concern. Implement automated testing to catch regressions, and regularly profile your extension as it evolves. With these practices in place, you can deliver extensions that are fast, efficient, and respectful of user resources.
 
-For more information on extension memory management, see our guide on [Chrome Memory Optimization for Extensions](/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/). For detailed debugging techniques, explore our [Advanced Chrome Extension Debugging](/chrome-extension-guide/2025/01/17/advanced-chrome-extension-debugging-techniques/) documentation.
+For more information on extension memory management, see our guide on [Chrome Memory Optimization for Extensions](/2025/01/15/chrome-memory-optimization-extensions-guide/). For detailed debugging techniques, explore our [Advanced Chrome Extension Debugging](/2025/01/17/advanced-chrome-extension-debugging-techniques/) documentation.
 
 ---
 

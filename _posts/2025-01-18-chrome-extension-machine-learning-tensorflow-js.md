@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [tutorials, chrome-extensions, machine-learning]
 tags: [chrome extension machine learning, tensorflow js extension, ai chrome extension, ml browser extension, tensorflow.js, browser ml, web ml, artificial intelligence]
 keywords: "chrome extension machine learning, tensorflow js extension, ai chrome extension, ml browser extension, tensorflow.js chrome, browser-based machine learning, web ml tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-machine-learning-tensorflow-js/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-machine-learning-tensorflow-js/"
 ---
 
 # Machine Learning in Chrome Extensions with TensorFlow.js

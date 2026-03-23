@@ -194,7 +194,7 @@ The golden rule of freemium onboarding: **show value before you ask for payment*
 3. **Use usage-based triggers.** If a user exceeds their free tier limit (e.g., number of tabs suspended per day), that is a perfect time to show the upgrade prompt.
 4. **Provide a trial period.** Let users experience premium features for a limited time. Once they taste the full power of your extension, they will not want to go back.
 
-For detailed implementation strategies, see our guide on [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/), which covers freemium models, Stripe integration, and subscription architecture in depth.
+For detailed implementation strategies, see our guide on [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/), which covers freemium models, Stripe integration, and subscription architecture in depth.
 
 ---
 
@@ -334,7 +334,7 @@ Start with the basics: a clear welcome page, progressive permissions, and a simp
 
 Remember: the first five minutes matter most. Make them count.
 
-For more guidance on building successful Chrome extensions, explore our [Chrome Extension UX Guide](/) and learn about [tracking analytics effectively](/). If you are monetizing your extension, the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) provides comprehensive strategies for freemium models, payment integration, and subscription management.
+For more guidance on building successful Chrome extensions, explore our [Chrome Extension UX Guide](/) and learn about [tracking analytics effectively](/). If you are monetizing your extension, the [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) provides comprehensive strategies for freemium models, payment integration, and subscription management.
 
 ---
 

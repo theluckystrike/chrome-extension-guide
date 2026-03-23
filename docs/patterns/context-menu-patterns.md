@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Context Menu Patterns — Best Practices"
 description: "Create dynamic and contextual right-click menus with the Chrome Context Menus API."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/context-menu-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/context-menu-patterns/"
 ---
 
 # Context Menu Patterns

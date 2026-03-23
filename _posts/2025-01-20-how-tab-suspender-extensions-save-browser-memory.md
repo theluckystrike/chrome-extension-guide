@@ -387,11 +387,11 @@ Whether implementing a custom solution or using a polished product like Tab Susp
 
 ## Turn Your Extension Into a Business
 
-Ready to monetize your tab management extension? The [Extension Monetization Playbook](/chrome-extension-guide/docs/guides/extension-monetization/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize your tab management extension? The [Extension Monetization Playbook](/docs/guides/extension-monetization/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 
-*For more guides on Chrome extension development and memory optimization, explore our comprehensive [permissions documentation](/chrome-extension-guide/permissions/tabs/).*
+*For more guides on Chrome extension development and memory optimization, explore our comprehensive [permissions documentation](/permissions/tabs/).*
 
 ---
 

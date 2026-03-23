@@ -14,7 +14,7 @@ Pricing is arguably the most consequential decision you'll make for your Chrome 
 
 This guide changes that. We'll cover competitive pricing analysis, willingness-to-pay research, tier design psychology, geographic pricing strategies, and real-world case studies from successful extension developers. By the end, you'll have a framework for setting prices that maximize revenue without alienating your user base.
 
-This guide complements our [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) overview and [Freemium Model](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/) guide. For implementation details, see our [Stripe Subscription Integration](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/) tutorial.
+This guide complements our [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) overview and [Freemium Model](/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/) guide. For implementation details, see our [Stripe Subscription Integration](/2025/02/20/chrome-extension-subscription-model-stripe-integration/) tutorial.
 
 ---
 
@@ -430,7 +430,7 @@ Pricing is not a one-time decision—it's an ongoing strategic conversation with
 
 Start with research, implement thoughtfully, measure obsessively, and iterate continuously. Your pricing should reflect the value you deliver while remaining accessible to your target users.
 
-For implementation details on accepting payments, see our [Stripe Integration Guide](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/). To understand how to convert free users to these prices, review our [Freemium Model Guide](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
+For implementation details on accepting payments, see our [Stripe Integration Guide](/2025/02/20/chrome-extension-subscription-model-stripe-integration/). To understand how to convert free users to these prices, review our [Freemium Model Guide](/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
 
 ---
 

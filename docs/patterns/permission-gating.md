@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Permission Gating — Best Practices"
 description: "Request permissions progressively with permission gating patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/permission-gating/"
+canonical_url: "https://bestchromeextensions.com/patterns/permission-gating/"
 ---
 
 # Permission Gating UI Patterns

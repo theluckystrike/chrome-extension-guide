@@ -2,7 +2,7 @@
 layout: default
 title: "Building Chrome Extensions with React — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with React, covering hooks for Chrome APIs, state management, and advanced patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/building-extension-with-react/"
+canonical_url: "https://bestchromeextensions.com/guides/building-extension-with-react/"
 ---
 
 # Building Chrome Extensions with React

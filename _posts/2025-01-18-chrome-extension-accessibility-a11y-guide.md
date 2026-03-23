@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension accessibility, a11y extension development, chrome extension a11y, wcag chrome extension, accessible chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-accessibility-a11y-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-accessibility-a11y-guide/"
 ---
 
 # Chrome Extension Accessibility (A11y) Guide: Building Inclusive Extensions
@@ -183,6 +183,6 @@ As Chrome extension development continues to evolve, accessibility standards and
 
 ## Related Articles
 
-- [Chrome Extension Keyboard Shortcuts Implementation Guide](/chrome-extension-guide/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/) - Implement keyboard navigation in your extensions
-- [Chrome Extension Internationalization (i18n) Guide](/chrome-extension-guide/2025/01/17/chrome-extension-internationalization-i18n-guide/) - Learn how to make your extension accessible globally
-- [Chrome Extension Dark Mode Implementation Guide](/chrome-extension-guide/2025/01/18/chrome-extension-dark-mode-implementation-guide/) - Implement accessible dark mode themes
+- [Chrome Extension Keyboard Shortcuts Implementation Guide](/2025/01/17/chrome-extension-keyboard-shortcuts-implementation-guide/) - Implement keyboard navigation in your extensions
+- [Chrome Extension Internationalization (i18n) Guide](/2025/01/17/chrome-extension-internationalization-i18n-guide/) - Learn how to make your extension accessible globally
+- [Chrome Extension Dark Mode Implementation Guide](/2025/01/18/chrome-extension-dark-mode-implementation-guide/) - Implement accessible dark mode themes

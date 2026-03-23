@@ -6,7 +6,7 @@ date: 2025-02-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [manifest-v3, service-worker, chrome-extension]
 keywords: "chrome extension service worker, manifest v3 service worker, background script to service worker, chrome extension mv3 migration"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/17/chrome-extension-service-worker-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/17/chrome-extension-service-worker-complete-guide/"
 ---
 
 # Chrome Extension Service Workers: The Complete 2025 Migration Guide
@@ -438,4 +438,4 @@ By following the patterns and practices outlined in this guide, you can build Ch
 
 ---
 
-*Ready to dive deeper into Chrome extension development? Explore our comprehensive [Chrome Extension Development Tutorial](/chrome-extension-guide/chrome-extension-development-2025-complete-beginners-guide/) for building your first extension from scratch.*
+*Ready to dive deeper into Chrome extension development? Explore our comprehensive [Chrome Extension Development Tutorial](/chrome-extension-development-2025-complete-beginners-guide/) for building your first extension from scratch.*

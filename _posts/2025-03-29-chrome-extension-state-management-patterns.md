@@ -6,7 +6,7 @@ date: 2025-03-29
 categories: [Chrome-Extensions, Architecture]
 tags: [state-management, patterns, chrome-extension]
 keywords: "chrome extension state management, extension data flow, chrome extension redux, state pattern chrome extension, manage state chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/29/chrome-extension-state-management-patterns/"
+canonical_url: "https://bestchromeextensions.com/2025/03/29/chrome-extension-state-management-patterns/"
 ---
 
 # State Management in Chrome Extensions: Patterns for Complex Applications

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Tab Management — Developer Guide"
 description: "Learn Chrome extension tab management with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-management/"
+canonical_url: "https://bestchromeextensions.com/guides/tab-management/"
 ---
 # Tab Management Patterns
 

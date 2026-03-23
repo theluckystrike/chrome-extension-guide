@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension hot reload, live reload extension development, chrome extension auto reload, manifest v3 hot reload, chrome extension development workflow"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-hot-reload-during-development/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-hot-reload-during-development/"
 ---
 
 # Chrome Extension Hot Reload During Development: The Complete Guide

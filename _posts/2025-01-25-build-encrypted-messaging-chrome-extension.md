@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, security, project]
 keywords: "encrypted messaging extension, e2e encryption chrome, secure chat extension, chrome extension encryption, Signal Protocol chrome, end-to-end encryption tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-encrypted-messaging-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-encrypted-messaging-chrome-extension/"
 ---
 
 # Build End-to-End Encrypted Messaging Chrome Extension

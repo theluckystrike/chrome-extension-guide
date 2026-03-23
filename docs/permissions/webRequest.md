@@ -5,7 +5,7 @@ description: "Grants access to API Observe HTTP/HTTPS requests at various lifecy
 permalink: /permissions/webRequest/
 category: permissions
 order: 49
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/webRequest/"
+canonical_url: "https://bestchromeextensions.com/permissions/webRequest/"
 ---
 
 # webRequest Permission Reference

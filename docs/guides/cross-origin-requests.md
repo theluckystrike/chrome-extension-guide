@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Cross-Origin Requests — CORS, Host Permissions, and Fetch API"
 description: "Learn how Chrome extensions handle cross-origin requests in Manifest V3, including host permissions, CORS rules, Fetch API usage from background scripts, and content script limitations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/cross-origin-requests/"
+canonical_url: "https://bestchromeextensions.com/guides/cross-origin-requests/"
 ---
 
 # Chrome Extension Cross-Origin Requests
@@ -121,7 +121,7 @@ Cross-origin requests in Chrome extensions require careful consideration of the 
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

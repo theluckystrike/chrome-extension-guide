@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "infinite scroll extension, lazy load list chrome, paginated ui extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-infinite-scroll/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-infinite-scroll/"
 ---
 
 # Infinite Scroll in Chrome Extension UI: Complete Implementation Guide

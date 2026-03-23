@@ -2,7 +2,7 @@
 layout: default
 title: "Optimizing Your Chrome Web Store Listing — Complete Guide"
 description: "Master Chrome Web Store listing optimization with this comprehensive guide. Learn SEO strategies, keyword research, icon design, screenshot optimization, and conversion tactics to maximize your extension's visibility and install rates."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/chrome-web-store-listing-optimization/"
+canonical_url: "https://bestchromeextensions.com/tutorials/chrome-web-store-listing-optimization/"
 ---
 
 # Optimizing Your Chrome Web Store Listing

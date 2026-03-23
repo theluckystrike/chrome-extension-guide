@@ -5,7 +5,7 @@ description: "The permission allows extensions to use declarative Net Request (D
 permalink: /permissions/declarativeNetRequestWithHostAccess/
 category: permissions
 order: 15
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequestWithHostAccess/"
+canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestWithHostAccess/"
 ---
 
 # declarativeNetRequestWithHostAccess

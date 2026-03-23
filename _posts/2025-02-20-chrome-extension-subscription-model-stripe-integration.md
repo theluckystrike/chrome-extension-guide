@@ -12,7 +12,7 @@ author: theluckystrike
 
 Building a sustainable Chrome extension business requires more than just a great product—it demands a monetization strategy that aligns with user value and provides predictable revenue. Subscription models have become the gold standard for browser extensions, offering recurring revenue that funds ongoing development while giving users continuous access to evolving features. This comprehensive guide walks you through implementing a complete subscription system using Stripe, from account setup to feature gating and churn prevention.
 
-This tutorial builds on our [Stripe integration foundation](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/) and [monetization strategies overview](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). For context on freemium conversion tactics, see our [freemium model guide](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
+This tutorial builds on our [Stripe integration foundation](/2025/01/18/chrome-extension-stripe-payment-integration/) and [monetization strategies overview](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). For context on freemium conversion tactics, see our [freemium model guide](/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/).
 
 This guide provides practical implementation details for developers building subscription-based Chrome extensions in 2025.
 
@@ -650,9 +650,9 @@ The extension ecosystem rewards developers who treat subscriptions as partnershi
 
 ## Related Resources
 
-- [Chrome Extension Stripe Payment Integration](/chrome-extension-guide/2025/01/18/chrome-extension-stripe-payment-integration/)
-- [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)
-- [Freemium Model for Chrome Extensions](/chrome-extension-guide/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/)
+- [Chrome Extension Stripe Payment Integration](/2025/01/18/chrome-extension-stripe-payment-integration/)
+- [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)
+- [Freemium Model for Chrome Extensions](/2025/02/22/chrome-extension-freemium-model-convert-free-to-paying/)
 
 ---
 

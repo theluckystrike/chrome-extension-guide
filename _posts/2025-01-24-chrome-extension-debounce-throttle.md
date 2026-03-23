@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Performance]
 tags: [chrome-extension, optimization]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-extension-debounce-throttle/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-extension-debounce-throttle/"
 ---
 
 # Mastering Debounce and Throttle in Chrome Extensions - Complete Guide

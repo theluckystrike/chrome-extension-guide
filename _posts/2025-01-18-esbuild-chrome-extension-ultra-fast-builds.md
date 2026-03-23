@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "esbuild chrome extension, fast build chrome extension, esbuild chrome extension setup, chrome extension build optimization"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/esbuild-chrome-extension-ultra-fast-builds/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/esbuild-chrome-extension-ultra-fast-builds/"
 ---
 
 # Esbuild for Chrome Extensions: Ultra Fast Builds That Will Transform Your Development Workflow

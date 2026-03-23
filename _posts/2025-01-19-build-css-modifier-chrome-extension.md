@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "css editor extension, modify website css chrome, style editor extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-css-modifier-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-css-modifier-chrome-extension/"
 ---
 
 # Build a CSS Modifier Chrome Extension: Complete Developer Guide

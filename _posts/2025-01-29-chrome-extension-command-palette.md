@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "command palette extension, command bar chrome, spotlight search extension, chrome extension command palette, command bar extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-command-palette/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-command-palette/"
 ---
 
 # Build a Command Palette Chrome Extension: Complete 2025 Guide

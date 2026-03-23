@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "speed dial extension, quick access chrome, bookmark dial extension, chrome speed dial, speed dial chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-speed-dial-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-speed-dial-chrome-extension/"
 ---
 
 # Build a Speed Dial Chrome Extension

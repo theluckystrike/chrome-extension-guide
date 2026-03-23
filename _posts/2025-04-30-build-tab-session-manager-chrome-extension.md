@@ -6,7 +6,7 @@ date: 2025-04-30
 categories: [Chrome-Extensions, Tutorials]
 tags: [session-manager, tabs, chrome-extension]
 keywords: "chrome extension session manager, save tab session chrome, restore tabs chrome extension, tab session saver, chrome extension save windows"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/30/build-tab-session-manager-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/30/build-tab-session-manager-chrome-extension/"
 ---
 
 # Build a Tab Session Manager Chrome Extension: Save and Restore Tab Groups

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Storage Encryption — Best Practices"
 description: "Encrypt data in extension storage for security."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/storage-encryption/"
+canonical_url: "https://bestchromeextensions.com/patterns/storage-encryption/"
 ---
 
 # Storage Encryption Pattern

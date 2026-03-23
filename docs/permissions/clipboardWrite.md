@@ -5,7 +5,7 @@ description: "Allows the extension to write content to the system clipboard usin
 permalink: /permissions/clipboardWrite/
 category: permissions
 order: 6
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/clipboardWrite/"
+canonical_url: "https://bestchromeextensions.com/permissions/clipboardWrite/"
 ---
 
 # clipboardWrite Permission

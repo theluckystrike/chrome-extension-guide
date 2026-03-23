@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Startup Performance — Best Practices"
 description: "Optimize extension startup performance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/startup-performance/"
+canonical_url: "https://bestchromeextensions.com/patterns/startup-performance/"
 ---
 
 # Startup Performance Patterns

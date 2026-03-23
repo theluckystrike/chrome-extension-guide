@@ -121,7 +121,7 @@ One of Tab Suspender Pro's most motivating features is the memory savings dashbo
 
 These numbers can be surprising. Users who typically keep 50+ tabs open often discover they are saving several gigabytes of memory. Seeing these statistics encourages continued use and helps you appreciate the impact the extension has on your browser's performance.
 
-For a deeper analysis of memory savings across different tab counts, see our [Tab Suspender Pro memory benchmark comparing 50, 100, and 200 tabs](/chrome-extension-guide/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/).
+For a deeper analysis of memory savings across different tab counts, see our [Tab Suspender Pro memory benchmark comparing 50, 100, and 200 tabs](/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/).
 
 ## Troubleshooting Common Issues
 
@@ -177,7 +177,7 @@ Auto Tab Discard is Chrome's built-in alternative, available through the chrome:
 
 OneTab takes a different approach, converting all your open tabs into a list rather than keeping them in the tab strip. This saves memory but changes your workflow significantly. Tab Suspender Pro preserves your tab organization while still saving resources, which many users find more intuitive.
 
-For a deeper comparison of these alternatives, see our guide on [Chrome tab management solutions](/chrome-extension-guide/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/).
+For a deeper comparison of these alternatives, see our guide on [Chrome tab management solutions](/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/).
 
 ## FAQ
 
@@ -214,11 +214,11 @@ For complete privacy details, review the extension's full privacy policy on the 
 
 ## Related Articles
 
-- [Tab Suspender Pro Memory Benchmark: 50, 100, and 200 Tabs](/chrome-extension-guide/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/)
-- [Chrome Tab Groups vs Tab Suspender - Which is Better](/chrome-extension-guide/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/)
-- [How Tab Suspender Extensions Save Your Laptop Battery Life](/chrome-extension-guide/2025/01/16/how-tab-suspender-saves-laptop-battery-life/)
-- [Fix Slow Browser - Too Many Tabs](/chrome-extension-guide/2025/01/15/fix-slow-browser-too-many-tabs-chrome-extension/)
+- [Tab Suspender Pro Memory Benchmark: 50, 100, and 200 Tabs](/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/)
+- [Chrome Tab Groups vs Tab Suspender - Which is Better](/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/)
+- [How Tab Suspender Extensions Save Your Laptop Battery Life](/2025/01/16/how-tab-suspender-saves-laptop-battery-life/)
+- [Fix Slow Browser - Too Many Tabs](/2025/01/15/fix-slow-browser-too-many-tabs-chrome-extension/)
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built by theluckystrike at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built by theluckystrike at [zovo.one](https://zovo.one).*

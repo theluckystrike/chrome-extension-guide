@@ -2,7 +2,7 @@
 layout: default
 title: "Profile Chrome Extension Performance: CPU, Memory, and Network Analysis with DevTools"
 description: "Master Chrome extension performance profiling with DevTools. Learn to use Performance tab, flame charts, heap snapshots, memory timeline, network waterfall analysis, service worker profiling, Lighthouse audits, and CI integration for automated regression testing."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-performance-profiling-devtools/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-profiling-devtools/"
 ---
 
 # Profile Chrome Extension Performance: CPU, Memory, and Network Analysis with DevTools

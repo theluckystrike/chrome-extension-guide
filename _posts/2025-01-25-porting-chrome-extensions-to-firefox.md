@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "port chrome extension firefox, firefox webextension, cross-browser extension, chrome to firefox extension migration, mozilla amO"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/port-chrome-extensions-to-firefox/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/port-chrome-extensions-to-firefox/"
 ---
 
 # Porting Chrome Extensions to Firefox: Complete Cross-Browser Guide

@@ -6,7 +6,7 @@ date: 2025-02-26
 categories: [Chrome-Extensions, Storage]
 tags: [storage-sync, chrome-extension, tutorial]
 keywords: "chrome extension storage sync, chrome.storage.sync, sync data chrome extension, cross device chrome extension, chrome extension cloud storage"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/26/chrome-extension-storage-sync-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/26/chrome-extension-storage-sync-api-guide/"
 ---
 
 # Chrome Extension Storage Sync API: Sync User Data Across Devices

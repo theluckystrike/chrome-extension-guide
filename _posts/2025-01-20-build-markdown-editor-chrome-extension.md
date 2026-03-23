@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "markdown editor extension, markdown preview chrome, md editor extension, build chrome extension markdown, markdown chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-markdown-editor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-markdown-editor-chrome-extension/"
 ---
 
 # Build a Markdown Editor Chrome Extension: Complete Step-by-Step Guide

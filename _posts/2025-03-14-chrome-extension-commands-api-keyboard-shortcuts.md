@@ -6,7 +6,7 @@ date: 2025-03-14
 categories: [Chrome-Extensions, APIs]
 tags: [commands, keyboard-shortcuts, chrome-extension]
 keywords: "chrome extension commands API, chrome extension keyboard shortcuts, global hotkey chrome extension, chrome.commands API, extension shortcut keys"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/14/chrome-extension-commands-api-keyboard-shortcuts/"
+canonical_url: "https://bestchromeextensions.com/2025/03/14/chrome-extension-commands-api-keyboard-shortcuts/"
 ---
 
 # Chrome Extension Commands API: Define Global Keyboard Shortcuts

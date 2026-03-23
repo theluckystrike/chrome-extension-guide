@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "lighthouse extension, performance audit chrome, web performance extension, lighthouse chrome extension, build chrome extension lighthouse, lighthouse runner extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-lighthouse-runner-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/build-lighthouse-runner-chrome-extension/"
 ---
 
 # Build a Lighthouse Runner Chrome Extension: Complete 2025 Tutorial

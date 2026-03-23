@@ -6,7 +6,7 @@ date: 2025-05-19
 categories: [Chrome-Extensions, APIs]
 tags: [protocol-handler, url-scheme, chrome-extension]
 keywords: "chrome extension protocol handler, custom url scheme chrome, register protocol chrome extension, chrome extension custom scheme, url handler extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/19/chrome-extension-custom-protocol-handler/"
+canonical_url: "https://bestchromeextensions.com/2025/05/19/chrome-extension-custom-protocol-handler/"
 ---
 
 # Chrome Extension Custom Protocol Handlers: Register Your Own URL Scheme

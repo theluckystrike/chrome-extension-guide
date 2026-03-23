@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Downloads API Complete Reference"
 description: "The Chrome Downloads API initiates, monitors, searches, pauses, resumes, cancels, and manages file downloads with full control over download locations and behavior."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/downloads-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/downloads-api/"
 ---
 
 # Chrome Downloads API Reference

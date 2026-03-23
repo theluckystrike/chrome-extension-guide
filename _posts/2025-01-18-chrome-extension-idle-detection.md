@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome idle api, detect user idle extension, inactive tab detection, chrome extension idle detection, chrome.idle API"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-idle-detection/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-idle-detection/"
 ---
 
 # Chrome Extension Idle Detection API Guide: Detect User Activity and Inactive Tabs
@@ -466,6 +466,6 @@ Start experimenting with the chrome.idle API today, and discover how you can mak
 To learn more about Chrome extension development and related APIs, explore these additional resources:
 
 - [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/docs/mv3/migration-guide/)
+- [Manifest V3 Migration Guide](/docs/mv3/migration-guide/)
 - [Chrome Idle API Reference](https://developer.chrome.com/docs/extensions/reference/api/idle)
 - [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) - An example extension using idle detection

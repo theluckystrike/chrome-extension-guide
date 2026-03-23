@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "display capture extension, screen recording chrome, getDisplayMedia extension, chrome display capture api, screen capture chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-display-capture/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-extension-display-capture/"
 ---
 
 # Display Capture API in Chrome Extensions: Complete Guide 2025

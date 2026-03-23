@@ -6,7 +6,7 @@ date: 2025-04-03
 categories: [Chrome-Extensions, Tutorials]
 tags: [reading-list, bookmarks, chrome-extension]
 keywords: "chrome extension reading list, save articles chrome extension, read later chrome extension, bookmark reading list extension, chrome reading queue"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/03/build-reading-list-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/03/build-reading-list-chrome-extension/"
 ---
 
 # Build a Reading List Chrome Extension: Save Articles for Later

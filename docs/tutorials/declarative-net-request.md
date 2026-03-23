@@ -2,7 +2,7 @@
 layout: default
 title: "declarativeNetRequest: Content Blocking in MV3 — Complete Tutorial"
 description: "Master declarativeNetRequest API in Chrome Extensions Manifest V3. Learn static vs dynamic rules, JSON syntax, migration from webRequest, and common use cases."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/declarative-net-request/"
+canonical_url: "https://bestchromeextensions.com/tutorials/declarative-net-request/"
 ---
 
 # declarativeNetRequest: Content Blocking in MV3
@@ -892,4 +892,4 @@ DNR provides better privacy, performance, and security than the old webRequest A
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

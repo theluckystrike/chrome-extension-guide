@@ -2,7 +2,7 @@
 layout: default
 title: "Building Omnibox Extensions for Chrome — Complete Tutorial"
 description: "A comprehensive tutorial on building Chrome extension omnibox experiences: keyword registration, input events, suggestions, rich suggestions, and integrating with search APIs."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/omnibox-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/omnibox-api-guide/"
 ---
 
 # Building Omnibox Extensions for Chrome
@@ -571,9 +571,9 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 
 ## Related Articles {#related-articles}
 
-- [Omnibox API Reference](/chrome-extension-guide/guides/omnibox-api/) — Complete API documentation and reference
-- [Omnibox Patterns](/chrome-extension-guide/patterns/omnibox-api/) — Advanced patterns and architectural guidance
-- [Commands API - Keyboard Shortcuts](/chrome-extension-guide/guides/commands-keyboard-shortcuts/) — Adding keyboard shortcuts to your extension
+- [Omnibox API Reference](/guides/omnibox-api/) — Complete API documentation and reference
+- [Omnibox Patterns](/patterns/omnibox-api/) — Advanced patterns and architectural guidance
+- [Commands API - Keyboard Shortcuts](/guides/commands-keyboard-shortcuts/) — Adding keyboard shortcuts to your extension
 
 ---
 

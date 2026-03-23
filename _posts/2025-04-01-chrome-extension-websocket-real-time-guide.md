@@ -6,7 +6,7 @@ date: 2025-04-01
 categories: [Chrome-Extensions, Networking]
 tags: [websocket, real-time, chrome-extension]
 keywords: "chrome extension websocket, websocket chrome extension, real-time data chrome extension, chrome extension live updates, websocket service worker extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/01/chrome-extension-websocket-real-time-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/04/01/chrome-extension-websocket-real-time-guide/"
 ---
 
 # WebSocket Communication in Chrome Extensions: Real-Time Data Guide

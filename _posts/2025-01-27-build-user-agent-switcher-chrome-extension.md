@@ -6,14 +6,14 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "user agent switcher extension, change user agent chrome, device emulator"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-user-agent-switcher-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-user-agent-switcher-chrome-extension/"
 ---
 
 # Build a User Agent Switcher Chrome Extension: Complete 2025 Guide
 
 User agent switching is one of the most valuable capabilities for web developers, QA testers, and digital marketers. Whether you need to test responsive designs across different devices, debug browser-specific issues, or verify how your website appears to various browsers, a user agent switcher extension provides the flexibility you need. In this comprehensive guide, we will walk you through building a fully functional user agent switcher Chrome extension using Manifest V3.
 
-This guide assumes you have basic knowledge of HTML, CSS, and JavaScript. If you are new to Chrome extension development, you might want to review our [complete beginner's guide to Chrome extension development](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) first.
+This guide assumes you have basic knowledge of HTML, CSS, and JavaScript. If you are new to Chrome extension development, you might want to review our [complete beginner's guide to Chrome extension development](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) first.
 
 ---
 
@@ -726,7 +726,7 @@ Once your user agent switcher extension is complete and tested, you can publish 
 3. **Set up payments**: Decide whether your extension is free or paid
 4. **Submit for review**: Google typically reviews submissions within 1-3 business days
 
-For a detailed guide to publishing, see our [Chrome Web Store publishing guide](/chrome-extension-guide/docs/publishing/).
+For a detailed guide to publishing, see our [Chrome Web Store publishing guide](/docs/publishing/).
 
 ---
 
@@ -742,7 +742,7 @@ You have now built a fully functional user agent switcher Chrome extension! This
 
 The skills you have learned building this extension apply to many other types of extensions. You can expand this project by adding custom user agents, URL-specific rules, keyboard shortcuts, and more.
 
-If you want to continue learning, explore our guides on [building other developer tools](/chrome-extension-guide/2025/01/16/best-chrome-extensions-for-developers-2025/), [extension performance optimization](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/), and [advanced Chrome extension patterns](/chrome-extension-guide/docs/guides/advanced-messaging-patterns/).
+If you want to continue learning, explore our guides on [building other developer tools](/2025/01/16/best-chrome-extensions-for-developers-2025/), [extension performance optimization](/2025/01/16/chrome-extension-performance-optimization-guide/), and [advanced Chrome extension patterns](/docs/guides/advanced-messaging-patterns/).
 
 ---
 
@@ -760,4 +760,4 @@ The user agent switcher you have built is a valuable tool that you can use in yo
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

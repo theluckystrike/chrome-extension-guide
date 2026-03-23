@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [guides, chrome-extensions, hardware, arduino]
 tags: [web serial api extension, arduino chrome extension, serial port extension, hardware chrome extension, chrome serial communication, serial port api]
 keywords: "web serial api extension, arduino chrome extension, serial port extension, hardware chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/web-serial-api-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/web-serial-api-chrome-extension/"
 ---
 
 # Web Serial API in Chrome Extensions: Connect to Arduino and Hardware
@@ -419,7 +419,7 @@ Start with simple projects like temperature monitoring, then progressively tackl
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

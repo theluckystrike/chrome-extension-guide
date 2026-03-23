@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "jest chrome extension testing, puppeteer extension test, testing chrome extensions, chrome extension unit testing, puppeteer chrome extension, jest puppeteer chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/"
 ---
 
 # Testing Chrome Extensions with Jest and Puppeteer: A Complete Guide

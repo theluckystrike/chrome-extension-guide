@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "ai summarizer extension, text summary chrome, article summarizer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-ai-text-summarizer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-ai-text-summarizer-chrome-extension/"
 ---
 
 # Build an AI Text Summarizer Chrome Extension: Complete Developer's Guide

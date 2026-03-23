@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Bundle Optimization — Best Practices"
 description: "Optimize extension bundle size with code splitting, tree shaking, and lazy loading."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/bundle-optimization/"
+canonical_url: "https://bestchromeextensions.com/patterns/bundle-optimization/"
 ---
 
 # Bundle Optimization Patterns for Chrome Extensions

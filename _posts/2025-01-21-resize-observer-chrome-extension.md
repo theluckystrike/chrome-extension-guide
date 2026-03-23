@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [guides, chrome-extensions, development]
 tags: [resize observer extension, responsive extension ui, dynamic sizing extension, chrome extension development, ui components]
 keywords: "resize observer extension, responsive extension ui, dynamic sizing extension, ResizeObserver chrome extension, responsive popup ui"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/resize-observer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/resize-observer-chrome-extension/"
 ---
 
 # ResizeObserver in Chrome Extensions: Responsive UI Components

@@ -6,7 +6,7 @@ date: 2025-05-09
 categories: [Chrome-Extensions, Growth]
 tags: [ab-testing, experiments, chrome-extension]
 keywords: "chrome extension ab testing, extension experiments, feature flags chrome extension, chrome extension rollout, a/b test extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/09/chrome-extension-ab-testing-experiments/"
+canonical_url: "https://bestchromeextensions.com/2025/05/09/chrome-extension-ab-testing-experiments/"
 ---
 
 # A/B Testing Chrome Extension Features: Run Experiments on Your Users

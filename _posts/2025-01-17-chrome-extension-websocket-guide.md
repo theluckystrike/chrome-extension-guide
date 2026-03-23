@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [guides, chrome-extensions, development, real-time]
 tags: [chrome extension websocket, real-time data chrome extension, websocket chrome extension, chrome extension real-time communication, webSocket API chrome extension, real-time chrome extension tutorial]
 keywords: "chrome extension websocket, real-time data chrome extension, websocket chrome extension, chrome extension real-time communication, webSocket API extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-websocket-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-websocket-guide/"
 ---
 
 # Real-time Chrome Extensions with WebSocket API: Complete 2025 Guide
@@ -618,9 +618,9 @@ Remember to test your extension under various network conditions, handle edge ca
 
 ## Related Articles
 
-- [WebSocket Client for Chrome Extensions](/chrome-extension-guide/2025/01/26/websocket-client-chrome-extension/) - Build a dedicated WebSocket client extension
-- [Socket.IO for Real-Time Chrome Extensions](/chrome-extension-guide/2025/01/29/socket-io-real-time-chrome-extensions/) - Implement Socket.IO for event-based communication
-- [Chrome Extension WebSocket and Real-Time Guide](/chrome-extension-guide/2025/04/01/chrome-extension-websocket-real-time-guide/) - Comprehensive real-time communication patterns
+- [WebSocket Client for Chrome Extensions](/2025/01/26/websocket-client-chrome-extension/) - Build a dedicated WebSocket client extension
+- [Socket.IO for Real-Time Chrome Extensions](/2025/01/29/socket-io-real-time-chrome-extensions/) - Implement Socket.IO for event-based communication
+- [Chrome Extension WebSocket and Real-Time Guide](/2025/04/01/chrome-extension-websocket-real-time-guide/) - Comprehensive real-time communication patterns
 
 ---
 

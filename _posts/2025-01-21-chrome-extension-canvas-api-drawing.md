@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [guides, chrome-extensions, development]
 tags: [chrome extension canvas, drawing extension, canvas api extension, graphics chrome extension, HTML5 canvas, chrome extension graphics]
 keywords: "chrome extension canvas, drawing extension, canvas api extension, graphics chrome extension, HTML5 canvas chrome extension, chrome extension drawing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-canvas-api-drawing/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/chrome-extension-canvas-api-drawing/"
 ---
 
 # Using Canvas API in Chrome Extensions for Drawing and Graphics
@@ -399,5 +399,5 @@ As you continue developing canvas-based extensions, explore the additional possi
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

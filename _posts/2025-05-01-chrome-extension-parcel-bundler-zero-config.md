@@ -6,7 +6,7 @@ date: 2025-05-01
 categories: [Chrome-Extensions, Build-Tools]
 tags: [parcel, bundling, chrome-extension]
 keywords: "chrome extension parcel, parcel bundler extension, zero config chrome extension build, parcel manifest v3, chrome extension build parcel"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/01/chrome-extension-parcel-bundler-zero-config/"
+canonical_url: "https://bestchromeextensions.com/2025/05/01/chrome-extension-parcel-bundler-zero-config/"
 ---
 
 # Chrome Extensions with Parcel: Zero-Config Bundling That Just Works
@@ -626,5 +626,5 @@ Give Parcel a try for your next Chrome extension project. You might find that "z
 
 - [Parcel Documentation](https://parceljs.org/)
 - [Chrome Extension Development Documentation](https://developer.chrome.com/docs/extensions/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/docs/mv3/migration-guide/)
-- [Chrome Extension Best Practices](/chrome-extension-guide/docs/best-practices/)
+- [Manifest V3 Migration Guide](/docs/mv3/migration-guide/)
+- [Chrome Extension Best Practices](/docs/best-practices/)

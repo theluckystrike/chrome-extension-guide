@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Screenshot Tool — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-screenshot-tool/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-screenshot-tool/"
 ---
 # Build a Screenshot Capture Extension — Full Tutorial
 
@@ -128,5 +128,5 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

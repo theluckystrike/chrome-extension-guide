@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [guides, chrome-extensions, development]
 tags: [drag drop chrome extension, file upload extension, drag and drop extension, file handler chrome, chrome extension development]
 keywords: "drag drop chrome extension, file upload extension, drag and drop extension, file handler chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/drag-drop-file-upload-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/drag-drop-file-upload-chrome-extension/"
 ---
 
 # Drag and Drop File Upload in Chrome Extensions: Complete Implementation Guide 2025

@@ -9,7 +9,9 @@ Install any package with: `npm install @theluckystrike/<package-name>`
 ## Storage {#storage}
 
 | Package | Description |
-|---------|-------------|
+|
+date: 2026-03-23
+---------|-------------|
 | [webext-storage](#webext-storage) | Typed Chrome storage wrapper with schema validation |
 | [chrome-storage-typed](#chrome-storage-typed) | Type-safe wrapper with automatic serialization |
 | [chrome-storage-plus](#chrome-storage-plus) | Storage with migrations, reactive subscriptions, and quota management |

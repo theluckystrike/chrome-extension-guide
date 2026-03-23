@@ -5,7 +5,7 @@ description: "Grants access to API (local, sync, session, managed) Allows persis
 permalink: /permissions/storage/
 category: permissions
 order: 39
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/storage/"
+canonical_url: "https://bestchromeextensions.com/permissions/storage/"
 ---
 
 # storage Permission Reference

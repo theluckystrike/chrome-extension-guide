@@ -6,7 +6,7 @@ date: 2025-03-20
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, notifications, settings]
 keywords: "tab suspender pro notifications, tab suspender notification settings, chrome extension notification control, tab suspend notification, tab suspender pro alerts"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/20/tab-suspender-pro-notification-preferences/"
+canonical_url: "https://bestchromeextensions.com/2025/03/20/tab-suspender-pro-notification-preferences/"
 ---
 
 # Tab Suspender Pro Notification Settings: Stay Informed Without Interruption

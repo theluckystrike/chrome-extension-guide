@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "extension localization, chrome i18n messages, _locales setup, chrome extension localization workflow, internationalize chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-localization-workflow-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-localization-workflow-guide/"
 ---
 
 # Chrome Extension Localization Workflow Guide: From Setup to Publishing

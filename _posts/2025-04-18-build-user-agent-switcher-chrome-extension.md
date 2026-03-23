@@ -6,7 +6,7 @@ date: 2025-04-18
 categories: [Chrome-Extensions, Tutorials]
 tags: [user-agent, testing, chrome-extension]
 keywords: "chrome extension user agent, user agent switcher chrome, switch user agent extension, mobile view desktop chrome, chrome extension device emulation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/18/build-user-agent-switcher-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/18/build-user-agent-switcher-chrome-extension/"
 ---
 
 # Build a User Agent Switcher Chrome Extension: Test Mobile Views on Desktop

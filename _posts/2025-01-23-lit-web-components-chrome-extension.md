@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "lit chrome extension, web components extension, lit element popup, lightweight ui extension, lit web components chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/lit-web-components-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/lit-web-components-chrome-extension/"
 ---
 
 # Building Chrome Extensions with Lit Web Components

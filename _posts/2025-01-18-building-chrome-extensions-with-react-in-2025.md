@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension react, react chrome extension tutorial, react popup extension, react chrome extension 2025, build chrome extension with react"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-chrome-extensions-with-react-in-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-chrome-extensions-with-react-in-2025/"
 ---
 
 # Building Chrome Extensions with React in 2025: Complete Tutorial
@@ -377,4 +377,4 @@ Start your react chrome extension project today, and join the thousands of devel
 - [Building Chrome Extensions with Svelte Complete Guide]({% post_url 2025-02-03-building-chrome-extensions-with-svelte-complete-guide %})
 - [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %})
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

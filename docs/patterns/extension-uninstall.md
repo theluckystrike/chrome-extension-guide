@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Uninstall — Best Practices"
 description: "Handle extension uninstallation and gather feedback."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-uninstall/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-uninstall/"
 ---
 
 # Extension Uninstall Patterns

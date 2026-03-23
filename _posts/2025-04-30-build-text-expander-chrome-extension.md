@@ -6,7 +6,7 @@ date: 2025-04-30
 categories: [Chrome-Extensions, Productivity]
 tags: [text-expander, productivity, chrome-extension]
 keywords: "chrome extension text expander, text shortcut chrome, build text expander extension, typing shortcut chrome extension, auto expand text chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/30/build-text-expander-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/30/build-text-expander-chrome-extension/"
 ---
 
 # Build a Text Expander Chrome Extension: Type Shortcuts, Get Full Text

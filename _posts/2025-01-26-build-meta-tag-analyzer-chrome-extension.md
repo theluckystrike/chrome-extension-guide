@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "meta tag analyzer extension, seo meta checker chrome, open graph checker extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-meta-tag-analyzer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-meta-tag-analyzer-chrome-extension/"
 ---
 
 # Build a Meta Tag Analyzer Chrome Extension: Complete Developer Guide

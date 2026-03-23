@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Privacy Policy Template — Publishing Guide"
 description: "Privacy policy template and guidelines for Chrome Web Store compliance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/privacy-policy-template/"
+canonical_url: "https://bestchromeextensions.com/publishing/privacy-policy-template/"
 ---
 
 # Privacy Policy Template for Chrome Extensions

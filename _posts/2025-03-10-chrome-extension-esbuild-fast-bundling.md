@@ -6,7 +6,7 @@ date: 2025-03-10
 categories: [Chrome-Extensions, Build-Tools]
 tags: [esbuild, bundling, chrome-extension, chrome extension esbuild, fast build chrome extension, esbuild manifest v3, chrome extension bundler]
 keywords: "chrome extension esbuild, esbuild chrome extension, fast build chrome extension, esbuild manifest v3, chrome extension bundler"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/10/chrome-extension-esbuild-fast-bundling/"
+canonical_url: "https://bestchromeextensions.com/2025/03/10/chrome-extension-esbuild-fast-bundling/"
 ---
 
 # Chrome Extension Bundling with esbuild: Ultra-Fast Build Setup

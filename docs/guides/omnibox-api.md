@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Omnibox API — How to Add Custom Address Bar Commands"
 description: "A comprehensive guide to the Chrome Omnibox API. Learn how to add custom address bar commands with keyword triggers, suggestions, default suggestions, onInputChanged handlers, and rich suggestions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/omnibox-api/"
+canonical_url: "https://bestchromeextensions.com/guides/omnibox-api/"
 ---
 
 # Chrome Extension Omnibox API — How to Add Custom Address Bar Commands

@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension push notifications, web push api, push api chrome extension, notification extension tutorial, manifest v3, service workers]
 keywords: "web push notification extension, push api chrome extension, notification extension tutorial, chrome push notification implementation, chrome extension push notifications service worker"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/web-push-notifications-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/web-push-notifications-chrome-extension/"
 ---
 
 # Implementing Web Push Notifications in Chrome Extensions

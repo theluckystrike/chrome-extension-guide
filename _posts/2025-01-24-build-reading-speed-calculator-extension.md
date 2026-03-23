@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "reading speed extension, reading time estimator, words per minute chrome, chrome extension tutorial, build reading calculator"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-reading-speed-calculator-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/build-reading-speed-calculator-extension/"
 ---
 
 # Build a Reading Speed Calculator Extension: Complete WPM Guide

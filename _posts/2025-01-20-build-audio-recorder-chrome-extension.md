@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [audio recorder extension, chrome extension development, mediarecorder api, voice recorder, manifest v3, tutorial]
 keywords: "audio recorder extension, record audio chrome, voice recorder extension, chrome audio recording, MediaRecorder API tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-audio-recorder-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-audio-recorder-chrome-extension/"
 ---
 
 # Build an Audio Recorder Chrome Extension

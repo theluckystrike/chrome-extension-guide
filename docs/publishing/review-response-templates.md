@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Review Responses — Templates for Handling User Feedback"
 description: "Learn how to professionally respond to Chrome Web Store reviews, handle common complaints, and turn critics into loyal users with proven response templates."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/review-response-templates/"
+canonical_url: "https://bestchromeextensions.com/publishing/review-response-templates/"
 ---
 
 # Chrome Extension Review Responses — Templates for Handling User Feedback

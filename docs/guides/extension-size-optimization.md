@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Size Optimization — Developer Guide"
 description: "Learn Chrome extension size optimization with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-size-optimization/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-size-optimization/"
 ---
 # Extension Size Optimization
 

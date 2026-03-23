@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension github actions, ci cd extension deployment, automated chrome extension build, github actions chrome web store"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-ci-cd-github-actions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-ci-cd-github-actions/"
 ---
 
 # CI/CD for Chrome Extensions with GitHub Actions: Complete 2025 Guide
@@ -452,6 +452,6 @@ Ready to monetize? The Extension Monetization Playbook covers freemium models, S
 
 ## Related Articles
 
-- [Chrome Extension Testing Automation Guide](/chrome-extension-guide/2025/01/16/chrome-extension-testing-automation-guide/) - Comprehensive testing strategies for extensions
-- [Testing Chrome Extensions with Jest and Puppeteer](/chrome-extension-guide/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/) - Unit and integration testing best practices
-- [Automated Testing Chrome Extensions](/chrome-extension-guide/2025/01/23/automated-testing-chrome-extensions/) - Advanced automation testing techniques
+- [Chrome Extension Testing Automation Guide](/2025/01/16/chrome-extension-testing-automation-guide/) - Comprehensive testing strategies for extensions
+- [Testing Chrome Extensions with Jest and Puppeteer](/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/) - Unit and integration testing best practices
+- [Automated Testing Chrome Extensions](/2025/01/23/automated-testing-chrome-extensions/) - Advanced automation testing techniques

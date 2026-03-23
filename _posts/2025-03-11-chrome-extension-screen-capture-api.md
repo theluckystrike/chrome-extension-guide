@@ -6,7 +6,7 @@ date: 2025-03-11
 categories: [Chrome-Extensions, APIs]
 tags: [screen-capture, screenshot, chrome-extension]
 keywords: "chrome extension screen capture, screenshot chrome extension, screen recording extension, chrome extension capture tab, chrome.tabCapture API"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/11/chrome-extension-screen-capture-api/"
+canonical_url: "https://bestchromeextensions.com/2025/03/11/chrome-extension-screen-capture-api/"
 ---
 
 # Chrome Extension Screen Capture: Build a Screenshot and Recording Tool

@@ -6,7 +6,7 @@ date: 2025-05-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [link-preview, hover, chrome-extension]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/17/build-link-preview-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/17/build-link-preview-chrome-extension/"
 ---
 
 # Build a Link Preview Chrome Extension: Hover to See Page Previews

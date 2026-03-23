@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "port chrome extension edge, edge extension development, chromium extension edge"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/porting-chrome-extensions-microsoft-edge/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/porting-chrome-extensions-microsoft-edge/"
 ---
 
 # Porting Chrome Extensions to Microsoft Edge: Complete 2025 Guide

@@ -6,7 +6,7 @@ date: 2025-02-28
 categories: [Chrome-Extensions, Build-Tools]
 tags: [vite, chrome-extension, build-tools]
 keywords: "chrome extension vite, vite chrome extension, fast chrome extension build, vite manifest v3, chrome extension hot reload vite"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/28/chrome-extension-vite-setup-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/28/chrome-extension-vite-setup-guide/"
 ---
 
 # Build Chrome Extensions with Vite: Fast Development Setup Guide 2025

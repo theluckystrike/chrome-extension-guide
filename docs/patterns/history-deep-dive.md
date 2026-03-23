@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension History Deep Dive — Best Practices"
 description: "Deep dive into the History API for browsing data access."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/history-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/patterns/history-deep-dive/"
 ---
 
 # Chrome Extension History Deep Dive

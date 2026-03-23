@@ -6,7 +6,7 @@ date: 2025-05-17
 categories: [Chrome-Extensions, Architecture]
 tags: [local-first, offline, chrome-extension]
 keywords: "chrome extension offline, local first extension, chrome extension no internet, offline chrome extension, service worker offline extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/17/chrome-extension-local-first-architecture/"
+canonical_url: "https://bestchromeextensions.com/2025/05/17/chrome-extension-local-first-architecture/"
 ---
 
 # Local-First Chrome Extensions: Build Extensions That Work Offline

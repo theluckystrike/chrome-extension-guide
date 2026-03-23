@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension rate limiting, throttle api calls extension, chrome extension API rate limit, rate limiting chrome extension, API throttling extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-api-rate-limiting/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-api-rate-limiting/"
 ---
 
 # API Rate Limiting in Chrome Extensions: The Complete 2025 Implementation Guide

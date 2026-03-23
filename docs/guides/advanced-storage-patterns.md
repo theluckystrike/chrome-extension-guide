@@ -2,7 +2,7 @@
 layout: default
 title: "Advanced Storage Patterns for Chrome Extensions — Developer Guide"
 description: "A comprehensive developer guide covering advanced storage patterns including quota management, data migration, conflict resolution, IndexedDB integration, and backup strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/advanced-storage-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/advanced-storage-patterns/"
 ---
 
 # Advanced Storage Patterns for Chrome Extensions

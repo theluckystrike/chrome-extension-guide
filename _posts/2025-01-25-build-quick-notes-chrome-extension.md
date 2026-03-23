@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "quick notes extension, fast notepad chrome, inline notes extension, build chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-quick-notes-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-quick-notes-chrome-extension/"
 ---
 
 # Build a Quick Notes Chrome Extension: Complete Step-by-Step Tutorial

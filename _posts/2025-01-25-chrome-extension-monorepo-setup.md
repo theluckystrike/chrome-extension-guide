@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [tutorials, chrome-extensions, development-tools]
 tags: [chrome extension monorepo, turborepo extension, pnpm workspace extension, monorepo browser extension, Turborepo, pnpm, web development, build tools]
 keywords: "chrome extension monorepo, turborepo extension, pnpm workspace extension, monorepo browser extension, Turborepo pnpm, Chrome extension build setup"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-monorepo-setup/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/chrome-extension-monorepo-setup/"
 ---
 
 # Chrome Extension Monorepo Setup with Turborepo and pnpm
@@ -635,6 +635,6 @@ To continue learning and improving your Chrome extension monorepo setup, explore
 - [Turborepo Documentation](https://turbo.build/repo/docs) — Official docs for advanced features
 - [pnpm Workspaces Guide](https://pnpm.io/workspaces) — Deep dive into workspace configuration
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/) — Official Chrome extension development docs
-- [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) — Learn about the latest Chrome extension platform
+- [Manifest V3 Migration Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/) — Learn about the latest Chrome extension platform
 
 Happy building!

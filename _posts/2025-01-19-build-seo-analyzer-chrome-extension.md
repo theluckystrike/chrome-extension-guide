@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-seo-analyzer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-seo-analyzer-chrome-extension/"
 ---
 
 # Build an SEO Analyzer Chrome Extension — Complete Tutorial
@@ -632,7 +632,7 @@ Start testing your extension today, refine the analysis logic based on your find
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 **Built by [theluckystrike](https://zovo.one)**

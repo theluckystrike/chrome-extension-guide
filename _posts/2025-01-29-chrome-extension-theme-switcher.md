@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "theme switcher extension, dark light mode chrome, theme toggle extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-theme-switcher/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-theme-switcher/"
 ---
 
 # Build a Theme Switcher for Chrome Extensions: Complete 2025 Guide

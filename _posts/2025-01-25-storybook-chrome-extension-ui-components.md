@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "storybook chrome extension, component library extension, ui testing extension, chrome extension ui components, storybook component library, extension component testing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/storybook-chrome-extension-ui-components/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/storybook-chrome-extension-ui-components/"
 ---
 
 # Storybook for Chrome Extension UI Components: Complete Guide

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-url-redirect-manager-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-url-redirect-manager-chrome-extension/"
 ---
 
 # Build a URL Redirect Manager Chrome Extension — Complete 2025 Guide

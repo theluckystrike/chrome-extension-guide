@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "rss reader extension, feed reader chrome, rss extension tutorial, build chrome extension rss, chrome rss feed reader"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-rss-reader-chrome-extension-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-rss-reader-chrome-extension-tutorial/"
 ---
 
 # Build an RSS Reader Chrome Extension: Complete Tutorial for 2025

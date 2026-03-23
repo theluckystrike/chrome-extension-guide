@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "unused css extension, dead css finder chrome, css coverage extension, find unused css, css unused rules finder"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-css-unused-finder-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-css-unused-finder-extension/"
 ---
 
 # Build a CSS Unused Rules Finder Extension: Complete Developer Guide

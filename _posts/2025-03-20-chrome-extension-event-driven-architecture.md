@@ -6,7 +6,7 @@ date: 2025-03-20
 categories: [Chrome-Extensions, Architecture]
 tags: [events, architecture, chrome-extension]
 keywords: "chrome extension event driven, chrome extension events, event page chrome extension, chrome extension lifecycle events, efficient chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/20/chrome-extension-event-driven-architecture/"
+canonical_url: "https://bestchromeextensions.com/2025/03/20/chrome-extension-event-driven-architecture/"
 ---
 
 # Chrome Extension Event-Driven Architecture: Efficient Resource Usage

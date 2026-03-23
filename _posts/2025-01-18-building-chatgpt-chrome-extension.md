@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chatgpt chrome extension, ai chrome extension, openai extension, chatgpt integration, build ai extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-chatgpt-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-chatgpt-chrome-extension/"
 ---
 
 # Building a ChatGPT Chrome Extension: Complete Integration Guide
@@ -610,7 +610,7 @@ Start experimenting with the code provided in this guide, and don't hesitate to 
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 **Built by [theluckystrike](https://zovo.one)**
@@ -619,6 +619,6 @@ Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.
 
 ## Related Articles
 
-- [Chrome Extension OAuth2 Authentication Guide](/chrome-extension-guide/2025/01/18/chrome-extension-oauth2-authentication-guide/) - Learn how to implement secure OAuth2 authentication
-- [Chrome Extension AI API Integration](/chrome-extension-guide/2025/03/21/chrome-extension-ai-api-integration/) - Explore more AI integration patterns for extensions
-- [Chrome Extension Message Passing Guide](/chrome-extension-guide/2025/01/17/message-passing-guide-/) - Master communication between extension components
+- [Chrome Extension OAuth2 Authentication Guide](/2025/01/18/chrome-extension-oauth2-authentication-guide/) - Learn how to implement secure OAuth2 authentication
+- [Chrome Extension AI API Integration](/2025/03/21/chrome-extension-ai-api-integration/) - Explore more AI integration patterns for extensions
+- [Chrome Extension Message Passing Guide](/2025/01/17/message-passing-guide-/) - Master communication between extension components

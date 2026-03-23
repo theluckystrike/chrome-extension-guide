@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "vite chrome extension, fast extension dev, vite mv3 template, chrome extension vite setup, vite chrome extension manifest v3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/vite-setup-chrome-extension-development/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/vite-setup-chrome-extension-development/"
 ---
 
 # Vite Setup for Chrome Extension Development: Complete Guide

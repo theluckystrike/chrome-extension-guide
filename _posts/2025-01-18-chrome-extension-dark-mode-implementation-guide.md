@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome extension dark mode, dark theme extension, css injection dark mode"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-dark-mode-implementation-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-dark-mode-implementation-guide/"
 ---
 
 # Chrome Extension Dark Mode Implementation Guide

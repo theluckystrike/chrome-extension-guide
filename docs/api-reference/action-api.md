@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Action API Complete Reference"
 description: "The Chrome Action API controls your extension's toolbar icon in Chrome, enabling popup triggers, badge updates, and dynamic icon changes in Manifest V3."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/action-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/action-api/"
 ---
 
 # Chrome Action API Reference

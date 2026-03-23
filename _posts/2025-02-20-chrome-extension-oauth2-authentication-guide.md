@@ -6,7 +6,7 @@ date: 2025-02-20
 categories: [Chrome-Extensions, Authentication]
 tags: [oauth2, authentication, chrome-extension, chrome extension oauth2, chrome extension authentication, google oauth chrome extension, chrome extension login, oauth2 manifest v3]
 keywords: "chrome extension oauth2, chrome extension authentication, google oauth chrome extension, chrome extension login, oauth2 manifest v3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/20/chrome-extension-oauth2-authentication-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/20/chrome-extension-oauth2-authentication-guide/"
 ---
 
 # Implementing OAuth2 in Chrome Extensions: Complete Authentication Guide

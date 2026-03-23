@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome password manager extension, secure password extension, credential storage extension, build password manager chrome extension, chrome extension encryption"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-password-manager-chrome-extension-securely/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-password-manager-chrome-extension-securely/"
 ---
 
 # Building a Password Manager Chrome Extension Securely: Complete Developer Guide
@@ -531,8 +531,8 @@ The complete source code for this secure password manager extension provides a s
 
 ## Related Articles
 
-- [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guidelines for extensions
-- [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implement robust CSP policies
-- [Chrome Extension Local Storage Encryption](/chrome-extension-guide/2025/01/22/chrome-extension-local-storage-encryption/) - Secure your local storage with encryption
+- [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guidelines for extensions
+- [Content Security Policy for Chrome Extensions](/2025/01/18/content-security-policy-chrome-extensions/) - Implement robust CSP policies
+- [Chrome Extension Local Storage Encryption](/2025/01/22/chrome-extension-local-storage-encryption/) - Secure your local storage with encryption
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "file handling extension, file association chrome, open with extension, chrome file handling API, file handling chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/file-handling-api-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/file-handling-api-chrome-extensions/"
 ---
 
 # File Handling API in Chrome Extensions: Complete Guide 2025

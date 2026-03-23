@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "citation manager extension, reference tool chrome, bibliography extension, chrome extension citation manager, build citation tool chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-citation-manager-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-citation-manager-chrome-extension/"
 ---
 
 # Build a Citation Manager Chrome Extension: Complete Developer's Guide

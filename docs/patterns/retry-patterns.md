@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Retry Patterns — Best Practices"
 description: "Implement retry and backoff strategies for network requests."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/retry-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/retry-patterns/"
 ---
 
 # Retry Patterns

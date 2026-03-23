@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "css gradient extension, gradient generator chrome, color gradient tool extension, css gradient tool, chrome extension gradient, gradient picker extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-css-gradient-generator-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-css-gradient-generator-chrome-extension/"
 ---
 
 # Build a CSS Gradient Generator Chrome Extension: Complete Step-by-Step Guide

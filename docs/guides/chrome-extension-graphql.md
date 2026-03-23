@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension GraphQL Integration — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-graphql/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-graphql/"
 ---
 # Integrating GraphQL APIs into Chrome Extensions
 

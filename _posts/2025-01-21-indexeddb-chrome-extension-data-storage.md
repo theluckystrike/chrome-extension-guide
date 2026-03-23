@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "indexeddb chrome extension, indexed db extension, client database extension, chrome extension storage API, offline data storage chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/indexeddb-chrome-extension-data-storage/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/indexeddb-chrome-extension-data-storage/"
 ---
 
 # IndexedDB in Chrome Extensions: Complete Guide to Client-Side Database Storage

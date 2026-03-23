@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome notifications api tutorial, push notifications chrome extension, chrome extension notification guide, chrome.webNotifications API, Manifest V3 notifications"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-notifications-api-guide/"
 ---
 
 # Chrome Extension Notifications API: Complete Guide for Developers
@@ -527,15 +527,15 @@ Continue exploring other Chrome Extension APIs to build even more powerful exten
 
 ## Related Articles
 
-- [Chrome Extension Badge Text and Icon Guide](/chrome-extension-guide/2025/01/18/chrome-extension-badge-text-and-icon-guide/) - Use badges to show notification counts and status.
-- [Chrome Extension Push Notifications: Web Push Integration](/chrome-extension-guide/2025/01/25/web-push-notifications-chrome-extension/) - Implement real-time push notifications for user engagement.
-- [Chrome Extension Notifications API Complete Guide](/chrome-extension-guide/2025/02/23/chrome-extension-notifications-api-complete-guide/) - Deep dive into advanced notification patterns and features.
+- [Chrome Extension Badge Text and Icon Guide](/2025/01/18/chrome-extension-badge-text-and-icon-guide/) - Use badges to show notification counts and status.
+- [Chrome Extension Push Notifications: Web Push Integration](/2025/01/25/web-push-notifications-chrome-extension/) - Implement real-time push notifications for user engagement.
+- [Chrome Extension Notifications API Complete Guide](/2025/02/23/chrome-extension-notifications-api-complete-guide/) - Deep dive into advanced notification patterns and features.
 
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

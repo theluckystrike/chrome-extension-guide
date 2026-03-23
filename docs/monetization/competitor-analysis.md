@@ -2,7 +2,7 @@
 layout: default
 title: "Competitor Analysis for Chrome Extensions — Developer Guide"
 description: "Learn how to identify competitors, analyze their features and pricing, find market gaps, and develop differentiation strategies for your Chrome extension."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/monetization/competitor-analysis/"
+canonical_url: "https://bestchromeextensions.com/monetization/competitor-analysis/"
 ---
 
 # Competitor Analysis for Chrome Extensions

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Power Api — Best Practices"
 description: "Manage power settings to prevent battery drain from extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/power-api/"
+canonical_url: "https://bestchromeextensions.com/patterns/power-api/"
 ---
 
 # Chrome Extension Power API Patterns

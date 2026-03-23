@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Chrome Web Store API — Developer Guide"
 description: "Learn how to use the Chrome Extension Chrome Web Store API with this developer guide covering methods, permissions, and implementation examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-web-store-api/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-web-store-api/"
 ---
 # Chrome Web Store Publish API
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Popup Communication — Best Practices"
 description: "Communicate between popups and background scripts."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-communication/"
+canonical_url: "https://bestchromeextensions.com/patterns/popup-communication/"
 ---
 
 # Popup Communication

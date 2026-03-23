@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "puppeteer core extension, browser automation chrome, headless chrome extension, puppeteer chrome extension backend, chrome extension automation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/puppeteer-core-chrome-extension-backend/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/puppeteer-core-chrome-extension-backend/"
 ---
 
 # Puppeteer Core in Chrome Extension Backend: Complete Guide for 2025

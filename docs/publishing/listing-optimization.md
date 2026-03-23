@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Listing Optimization — Publishing Guide"
 description: "Optimize your Chrome Web Store listing for better visibility, clicks, and conversions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/listing-optimization/"
+canonical_url: "https://bestchromeextensions.com/publishing/listing-optimization/"
 ---
 
 # Chrome Web Store Listing Optimization

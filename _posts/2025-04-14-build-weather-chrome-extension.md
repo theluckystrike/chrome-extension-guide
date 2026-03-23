@@ -6,7 +6,7 @@ date: 2025-04-14
 categories: [Chrome-Extensions, Tutorials]
 tags: [weather, api, chrome-extension]
 keywords: "chrome extension weather, build weather extension, weather forecast chrome, chrome extension weather API, weather widget extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/14/build-weather-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/14/build-weather-chrome-extension/"
 ---
 
 # Build a Weather Chrome Extension: Real-Time Forecasts in Your Browser

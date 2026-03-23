@@ -2,7 +2,7 @@
 layout: default
 title: "Tab Suspender Pro vs The Great Suspender: 2026 Feature and Security Comparison"
 description: "Comprehensive comparison of Tab Suspender Pro vs The Great Suspender extension covering security incidents, memory benchmarks, features, and migration guide."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-suspender-pro-vs-great-suspender-comparison/"
+canonical_url: "https://bestchromeextensions.com/guides/tab-suspender-pro-vs-great-suspender-comparison/"
 ---
 
 # Tab Suspender Pro vs The Great Suspender: 2026 Feature and Security Comparison

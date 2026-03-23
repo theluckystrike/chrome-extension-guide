@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "turndown extension, html markdown chrome, content converter extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-turndown/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/chrome-extension-turndown/"
 ---
 
 # Turndown HTML to Markdown in Chrome Extensions: Complete Implementation Guide

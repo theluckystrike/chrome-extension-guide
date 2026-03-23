@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension error tracking, extension crash reporting, chrome extension monitoring, chrome extension debugging, manifest v3 error handling, extension reliability"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/error-tracking-monitoring-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/error-tracking-monitoring-chrome-extensions/"
 ---
 
 # Error Tracking and Monitoring for Chrome Extensions: The Complete Guide

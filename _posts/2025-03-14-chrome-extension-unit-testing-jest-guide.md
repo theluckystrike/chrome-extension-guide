@@ -6,7 +6,7 @@ date: 2025-03-14
 categories: [Chrome-Extensions, Testing]
 tags: [jest, unit-testing, chrome-extension]
 keywords: "chrome extension jest, unit test chrome extension, jest chrome extension, test chrome extension code, chrome extension testing framework"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/14/chrome-extension-unit-testing-jest-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/14/chrome-extension-unit-testing-jest-guide/"
 ---
 
 # Unit Testing Chrome Extensions with Jest: Complete Testing Guide

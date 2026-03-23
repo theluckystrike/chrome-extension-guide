@@ -6,7 +6,7 @@ date: 2025-03-27
 categories: [Chrome-Extensions, Authentication]
 tags: [identity, google-login, chrome-extension]
 keywords: "chrome extension identity API, google sign in chrome extension, chrome.identity, chrome extension google login, google OAuth extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/27/chrome-extension-identity-api-google-login/"
+canonical_url: "https://bestchromeextensions.com/2025/03/27/chrome-extension-identity-api-google-login/"
 ---
 
 # Chrome Extension Identity API: Implement Google Sign-In Seamlessly

@@ -2,7 +2,7 @@
 layout: default
 title: "Alarms and Scheduling in Chrome Extensions — Developer Guide"
 description: "Master the chrome.alarms API for reliable background task scheduling in Manifest V3 extensions. Learn to create periodic and one-time alarms, replace setInterval, and implement cron-like patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/alarms-and-scheduling/"
+canonical_url: "https://bestchromeextensions.com/tutorials/alarms-and-scheduling/"
 ---
 
 # Alarms and Scheduling in Chrome Extensions

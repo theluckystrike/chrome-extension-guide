@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "clipboard manager extension, clipboard history chrome, copy paste manager, chrome extension clipboard, build clipboard extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-clipboard-manager-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-clipboard-manager-chrome-extension/"
 ---
 
 # Build a Clipboard Manager Chrome Extension: Complete Step-by-Step Tutorial

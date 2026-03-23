@@ -6,7 +6,7 @@ date: 2025-05-14
 categories: [Chrome-Extensions, Privacy]
 tags: [request-blocker, privacy, chrome-extension]
 keywords: "chrome extension request blocker, block trackers chrome, script blocker chrome extension, request filter extension, chrome extension block scripts"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/14/build-request-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/14/build-request-blocker-chrome-extension/"
 ---
 
 # Build a Request Blocker Chrome Extension: Block Trackers and Unwanted Scripts

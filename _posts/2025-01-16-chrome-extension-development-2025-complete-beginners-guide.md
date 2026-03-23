@@ -7,7 +7,7 @@ date: 2025-01-16
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension development, manifest v3, beginner guide, tutorial, "2025", service workers, content scripts]
 keywords: "chrome extension development guide 2025, build chrome extension tutorial, manifest v3 tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/"
 ---
 
 # Chrome Extension Development in 2025: Complete Beginner's Guide
@@ -32,7 +32,7 @@ If you know HTML, CSS, and JavaScript, you already have the skills to build a Ch
 
 ### Real-World Impact
 
-Chrome extensions solve real problems for real users. From [reducing Chrome memory usage by 80%](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/) to automating repetitive tasks, extensions have a direct and measurable impact on people's daily workflows.
+Chrome extensions solve real problems for real users. From [reducing Chrome memory usage by 80%](/docs/tab-suspender-pro-memory-guide/) to automating repetitive tasks, extensions have a direct and measurable impact on people's daily workflows.
 
 ### Monetization Opportunities
 
@@ -77,7 +77,7 @@ Here is a minimal Manifest V3 manifest:
 }
 ```
 
-Each field serves a specific purpose, and understanding them is fundamental to building effective extensions. For a deeper dive into manifest configuration, see our [Manifest V3 migration guide](/chrome-extension-guide/docs/mv3/migration-guide/).
+Each field serves a specific purpose, and understanding them is fundamental to building effective extensions. For a deeper dive into manifest configuration, see our [Manifest V3 migration guide](/docs/mv3/migration-guide/).
 
 ### Service Workers (Background Scripts)
 
@@ -110,7 +110,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-For advanced service worker patterns, check our [background service worker guide](/chrome-extension-guide/docs/guides/background-service-worker/).
+For advanced service worker patterns, check our [background service worker guide](/docs/guides/background-service-worker/).
 
 ### Content Scripts
 
@@ -236,7 +236,7 @@ my-extension/
     └── storage.js
 ```
 
-For larger projects, you might want to use a build system. Our [project structure guide](/chrome-extension-guide/docs/guides/chrome-extension-project-structure/) covers advanced patterns for scaling your extension codebase.
+For larger projects, you might want to use a build system. Our [project structure guide](/docs/guides/chrome-extension-project-structure/) covers advanced patterns for scaling your extension codebase.
 
 ### Loading Your Extension in Chrome
 
@@ -279,7 +279,7 @@ Let us build a complete, practical extension from scratch: a "Reading Time Estim
 }
 ```
 
-Notice that we only request the `activeTab` permission. Following the principle of least privilege — requesting only the permissions your extension actually needs — is critical for user trust and for passing Chrome Web Store review. Learn more in our [permissions guide](/chrome-extension-guide/docs/permissions/).
+Notice that we only request the `activeTab` permission. Following the principle of least privilege — requesting only the permissions your extension actually needs — is critical for user trust and for passing Chrome Web Store review. Learn more in our [permissions guide](/docs/permissions/).
 
 ### Step 2: Write the Content Script
 
@@ -405,7 +405,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-For advanced storage patterns, see our [Storage API tutorial](/chrome-extension-guide/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/).
+For advanced storage patterns, see our [Storage API tutorial](/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/).
 
 ### Tabs API
 
@@ -467,7 +467,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Learn more about alarms in our [alarms and scheduling guide](/chrome-extension-guide/docs/guides/alarms-scheduling/).
+Learn more about alarms in our [alarms and scheduling guide](/docs/guides/alarms-scheduling/).
 
 ---
 
@@ -493,7 +493,7 @@ For extensions that need to block or modify network requests (like ad blockers),
 
 MV3 enforces stricter content security policies. Remote code execution is prohibited — you cannot load and execute JavaScript from external servers. All code must be bundled with your extension.
 
-For detailed migration information, see our [complete MV3 migration guide](/chrome-extension-guide/docs/mv3/migration-guide/).
+For detailed migration information, see our [complete MV3 migration guide](/docs/mv3/migration-guide/).
 
 ---
 
@@ -527,7 +527,7 @@ Effective debugging is critical for productive extension development. Chrome pro
 - **Content script not injecting**: Verify your URL match patterns in the manifest. Use `chrome://extensions/` errors section to check for pattern syntax issues.
 - **Permissions errors**: Check the console for permission-related errors. You may need to add permissions to your manifest or request them at runtime.
 
-For a comprehensive debugging toolkit, see our [debugging tools guide](/chrome-extension-guide/docs/guides/chrome-extension-debugging-tools/).
+For a comprehensive debugging toolkit, see our [debugging tools guide](/docs/guides/chrome-extension-debugging-tools/).
 
 ---
 
@@ -576,7 +576,7 @@ const browser = await puppeteer.launch({
 });
 ```
 
-Learn more about testing strategies in our [comprehensive testing guide](/chrome-extension-guide/docs/guides/comprehensive-extension-testing/).
+Learn more about testing strategies in our [comprehensive testing guide](/docs/guides/comprehensive-extension-testing/).
 
 ---
 
@@ -600,7 +600,7 @@ Google reviews every extension submission. The review typically takes 1 to 3 bus
 - Misleading description or screenshots
 - Code that violates Chrome Web Store policies
 
-For a detailed walkthrough of the publishing process, see our [publishing guide](/chrome-extension-guide/docs/publishing/).
+For a detailed walkthrough of the publishing process, see our [publishing guide](/docs/publishing/).
 
 ### Post-Publication
 
@@ -637,7 +637,7 @@ Content scripts run on every matching page, so they should be as lightweight as 
 - Use dynamic imports to load code only when needed
 - Minimize the number of event listeners registered at startup
 
-For in-depth performance optimization techniques, read our [Chrome extension performance optimization guide](/chrome-extension-guide/docs/guides/chrome-extension-performance-optimization/).
+For in-depth performance optimization techniques, read our [Chrome extension performance optimization guide](/docs/guides/chrome-extension-performance-optimization/).
 
 ---
 
@@ -678,7 +678,7 @@ Define a strict Content Security Policy in your manifest to prevent code injecti
 }
 ```
 
-Review our [security hardening checklist](/chrome-extension-guide/docs/guides/chrome-extension-security-hardening/) for a comprehensive security audit.
+Review our [security hardening checklist](/docs/guides/chrome-extension-security-hardening/) for a comprehensive security audit.
 
 ---
 
@@ -688,13 +688,13 @@ Congratulations! You now have a solid foundation in Chrome extension development
 
 1. **Build something**: The best way to learn is by doing. Pick a problem you face daily and build an extension to solve it.
 
-2. **Explore advanced topics**: Dive into our guides on [state management](/chrome-extension-guide/docs/guides/chrome-extension-state-management/), [OAuth2 authentication](/chrome-extension-guide/docs/guides/chrome-extension-oauth2-authentication/), and [advanced messaging patterns](/chrome-extension-guide/docs/guides/advanced-messaging-patterns/).
+2. **Explore advanced topics**: Dive into our guides on [state management](/docs/guides/chrome-extension-state-management/), [OAuth2 authentication](/docs/guides/chrome-extension-oauth2-authentication/), and [advanced messaging patterns](/docs/guides/advanced-messaging-patterns/).
 
-3. **Learn from real extensions**: Study how production extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) handle tab management, memory optimization, and user preferences. See our [deep dive into how it reduces memory usage by 80%](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/).
+3. **Learn from real extensions**: Study how production extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) handle tab management, memory optimization, and user preferences. See our [deep dive into how it reduces memory usage by 80%](/docs/tab-suspender-pro-memory-guide/).
 
-4. **Check out developer tools**: Explore the [best Chrome extensions for web developers](/chrome-extension-guide/2025/01/16/best-chrome-extensions-for-developers-2025/) to enhance your own development workflow.
+4. **Check out developer tools**: Explore the [best Chrome extensions for web developers](/2025/01/16/best-chrome-extensions-for-developers-2025/) to enhance your own development workflow.
 
-5. **Optimize for performance**: Once you have a working extension, learn how to [optimize its performance](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) to deliver the best possible user experience.
+5. **Optimize for performance**: Once you have a working extension, learn how to [optimize its performance](/2025/01/16/chrome-extension-performance-optimization-guide/) to deliver the best possible user experience.
 
 6. **Join the community**: Engage with other extension developers on forums, Discord servers, and GitHub. Share your work and learn from others.
 
@@ -713,7 +713,7 @@ The Chrome extension ecosystem continues to evolve, and 2025 brings exciting opp
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

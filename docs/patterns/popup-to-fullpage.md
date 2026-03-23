@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Popup To Fullpage — Best Practices"
 description: "Open popups as full pages for enhanced functionality."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-to-fullpage/"
+canonical_url: "https://bestchromeextensions.com/patterns/popup-to-fullpage/"
 ---
 
 # Popup-to-Fullpage Pattern

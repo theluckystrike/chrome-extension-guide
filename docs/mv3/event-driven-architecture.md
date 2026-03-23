@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Event Driven Architecture — Manifest V3 Guide"
 description: "Build event-driven architectures with service workers in Manifest V3."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/event-driven-architecture/"
+canonical_url: "https://bestchromeextensions.com/mv3/event-driven-architecture/"
 ---
 
 # Event-Driven Architecture in MV3

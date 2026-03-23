@@ -2,7 +2,7 @@
 layout: default
 title: "Working with Bookmarks in Chrome Extensions — Developer Guide"
 description: "A comprehensive tutorial on using the Chrome Bookmarks API in extensions. Learn to create, read, update, delete bookmarks, organize folders, and handle bookmark events."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/bookmarks-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/bookmarks-api-guide/"
 ---
 
 # Working with Bookmarks in Chrome Extensions
@@ -790,9 +790,9 @@ bookmarks.create({
 
 ## Related Articles {#related-articles}
 
-- [Build a Bookmark Manager Extension](/chrome-extension-guide/tutorials/build-bookmark-manager/) — Build a complete bookmark manager with search, folder navigation, and duplicate detection
-- [Build a Bookmark Sorter Extension](/chrome-extension-guide/tutorials/build-bookmark-sorter/) — Automatically organize bookmarks by domain, date, or custom rules
-- [Chrome Bookmarks API Reference](/chrome-extension-guide/guides/bookmarks-api/) — Complete API reference with all methods and events
+- [Build a Bookmark Manager Extension](/tutorials/build-bookmark-manager/) — Build a complete bookmark manager with search, folder navigation, and duplicate detection
+- [Build a Bookmark Sorter Extension](/tutorials/build-bookmark-sorter/) — Automatically organize bookmarks by domain, date, or custom rules
+- [Chrome Bookmarks API Reference](/guides/bookmarks-api/) — Complete API reference with all methods and events
 
 ---
 

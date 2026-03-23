@@ -6,7 +6,7 @@ date: 2026-03-09
 categories: [tutorials, chrome-extensions, web-components]
 tags: [web components, chrome extension, TypeScript, custom elements, shadow dom, tutorial]
 keywords: "web components chrome extension, custom elements chrome extension, TypeScript chrome extension, shadow dom extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2026/03/09/web-components-chrome-extensions-guide/"
+canonical_url: "https://bestchromeextensions.com/2026/03/09/web-components-chrome-extensions-guide/"
 ---
 
 # Web Components in Chrome Extensions: Complete Guide with TypeScript

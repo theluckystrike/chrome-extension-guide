@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension User Scripts Api — Best Practices"
 description: "Use the User Scripts API for user-defined scripts."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/user-scripts-api/"
+canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-api/"
 ---
 
 # User Scripts API Patterns

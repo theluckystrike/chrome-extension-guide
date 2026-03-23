@@ -6,7 +6,7 @@ date: 2025-03-21
 categories: [Chrome-Extensions, AI]
 tags: [ai, api-integration, chrome-extension]
 keywords: "chrome extension AI, AI chrome extension, openai chrome extension, chatgpt chrome extension build, AI API chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/21/chrome-extension-ai-api-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/03/21/chrome-extension-ai-api-integration/"
 ---
 
 # Integrating AI APIs in Chrome Extensions: OpenAI, Claude, and Gemini

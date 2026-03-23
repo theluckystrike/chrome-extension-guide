@@ -6,7 +6,7 @@ date: 2025-05-08
 categories: [Chrome-Extensions, Graphics]
 tags: [webgl, 3d, chrome-extension]
 keywords: "chrome extension webgl, 3d graphics chrome extension, webgl extension popup, chrome extension canvas 3d, build webgl extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/08/chrome-extension-webgl-3d-graphics/"
+canonical_url: "https://bestchromeextensions.com/2025/05/08/chrome-extension-webgl-3d-graphics/"
 ---
 
 # WebGL in Chrome Extensions: Add 3D Graphics to Your Browser Extension
@@ -466,4 +466,4 @@ Start with simple projects like the rotating cube example in this guide, then gr
 
 The Chrome extension ecosystem is continually evolving, and WebGL capabilities are expanding with it. By mastering WebGL integration today, you'll be well-positioned to build the next generation of innovative Chrome extensions that captivate users and stand out in the Chrome Web Store.
 
-Ready to take your Chrome extension development skills to the next level? Explore our other guides on [Chrome extension performance optimization](/chrome-extension-guide/chrome-extension-performance-optimization-guide/), [Manifest V3 migration](/chrome-extension-guide/manifest-v3-migration-complete-guide-2025/), and [advanced debugging techniques](/chrome-extension-guide/advanced-chrome-extension-debugging-techniques/) to build professional-quality extensions that users love.
+Ready to take your Chrome extension development skills to the next level? Explore our other guides on [Chrome extension performance optimization](/chrome-extension-performance-optimization-guide/), [Manifest V3 migration](/manifest-v3-migration-complete-guide-2025/), and [advanced debugging techniques](/advanced-chrome-extension-debugging-techniques/) to build professional-quality extensions that users love.

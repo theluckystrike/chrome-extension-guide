@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Localization Workflow — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-localization-workflow/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-localization-workflow/"
 ---
 # Extension Localization Workflow
 

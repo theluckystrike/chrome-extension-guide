@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "security scanner extension, vulnerability checker chrome, site security, chrome extension security scanner, website vulnerability scanner, chrome security extension, build security extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-website-security-scanner-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/build-website-security-scanner-chrome-extension/"
 ---
 
 # Build a Website Security Scanner Chrome Extension: Complete 2025 Guide

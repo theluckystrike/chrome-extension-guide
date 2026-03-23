@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Rollup Setup — Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/rollup-extension-setup/"
+canonical_url: "https://bestchromeextensions.com/guides/rollup-extension-setup/"
 ---
 # Rollup Setup for Chrome Extensions
 

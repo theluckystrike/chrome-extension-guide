@@ -5,7 +5,7 @@ description: "Grants access to the API Schedule code to run at specific times or
 permalink: /permissions/alarms/
 category: permissions
 order: 2
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/alarms/"
+canonical_url: "https://bestchromeextensions.com/permissions/alarms/"
 ---
 
 # alarms Permission Reference

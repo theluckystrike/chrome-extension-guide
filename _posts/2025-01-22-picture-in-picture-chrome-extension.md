@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, picture-in-picture, video]
 keywords: "picture in picture extension, pip chrome extension, floating video chrome, pip video player, Document Picture-in-Picture API, chrome extension pip, floating video player extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/picture-in-picture-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/picture-in-picture-chrome-extension/"
 ---
 
 # Picture-in-Picture Chrome Extension: Build a Floating Video Player

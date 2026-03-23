@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "website monitor extension, uptime checker chrome, site down checker extension, build chrome extension, chrome extension development tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-website-uptime-monitor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-website-uptime-monitor-chrome-extension/"
 ---
 
 # Build a Website Uptime Monitor Chrome Extension: Complete 2025 Tutorial

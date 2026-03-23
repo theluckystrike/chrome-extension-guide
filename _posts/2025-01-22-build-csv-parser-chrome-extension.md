@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "csv parser extension, csv viewer chrome, spreadsheet extension, chrome extension development, parse csv chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-csv-parser-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-csv-parser-chrome-extension/"
 ---
 
 # Build a CSV Parser Chrome Extension: Complete Developer Guide

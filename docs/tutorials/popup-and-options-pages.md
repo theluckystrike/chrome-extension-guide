@@ -2,7 +2,7 @@
 layout: default
 title: "Building Popup and Options Pages for Chrome Extensions"
 description: "A comprehensive tutorial covering popup vs options page differences, popup lifecycle, options page types, UI frameworks, responsive design, settings storage, and dark mode support."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/popup-and-options-pages/"
+canonical_url: "https://bestchromeextensions.com/tutorials/popup-and-options-pages/"
 ---
 
 # Building Popup and Options Pages for Chrome Extensions
@@ -778,9 +778,9 @@ Here's a complete manifest.json showing how to configure both popup and options 
 
 ## Related Articles {#related-articles}
 
-- [Popup UI Best Practices](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/guides/popup-ui-best-practices.md) — Design patterns and best practices for creating professional popup interfaces
-- [Options Page Guide](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/guides/options-page.md) — Comprehensive guide to building Chrome extension options pages
-- [Storage Patterns](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/patterns/storage-migration.md) — Advanced storage patterns and migration strategies for extensions
+- [Popup UI Best Practices](https://github.com/theluckystrike/blob/main/docs/guides/popup-ui-best-practices.md) — Design patterns and best practices for creating professional popup interfaces
+- [Options Page Guide](https://github.com/theluckystrike/blob/main/docs/guides/options-page.md) — Comprehensive guide to building Chrome extension options pages
+- [Storage Patterns](https://github.com/theluckystrike/blob/main/docs/patterns/storage-migration.md) — Advanced storage patterns and migration strategies for extensions
 
 ---
 

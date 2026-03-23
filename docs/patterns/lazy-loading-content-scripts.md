@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Lazy Loading Content Scripts — Best Practices"
 description: "Optimize extension performance with lazy loading patterns for content scripts that only run when needed."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/lazy-loading-content-scripts/"
+canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading-content-scripts/"
 ---
 
 # Lazy Loading Content Scripts

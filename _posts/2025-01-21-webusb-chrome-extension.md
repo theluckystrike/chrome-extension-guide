@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, webusb, usb-device, hardware, tutorial]
 keywords: "webusb chrome extension, usb device extension, hardware chrome extension, webusb api, chrome extension usb, chrome webusb, usb communication chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/webusb-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/webusb-chrome-extension/"
 ---
 
 # WebUSB API in Chrome Extensions: Hardware Integration Guide

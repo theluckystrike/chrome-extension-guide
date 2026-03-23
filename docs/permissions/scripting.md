@@ -5,7 +5,7 @@ description: "Grants access to the API (MV3 replacement for ) Inject JavaScript 
 permalink: /permissions/scripting/
 category: permissions
 order: 35
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/scripting/"
+canonical_url: "https://bestchromeextensions.com/permissions/scripting/"
 ---
 
 # scripting Permission Reference

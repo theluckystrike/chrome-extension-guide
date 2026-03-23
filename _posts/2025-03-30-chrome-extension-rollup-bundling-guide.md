@@ -6,7 +6,7 @@ date: 2025-03-30
 categories: [Chrome-Extensions, Build-Tools]
 tags: [rollup, bundling, chrome-extension]
 keywords: "chrome extension rollup, rollup chrome extension, chrome extension tree shaking, rollup bundle extension, rollup manifest v3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/30/chrome-extension-rollup-bundling-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/30/chrome-extension-rollup-bundling-guide/"
 ---
 
 # Bundling Chrome Extensions with Rollup: Tree-Shaking and Code Splitting

@@ -6,7 +6,7 @@ date: 2025-03-22
 categories: [Chrome-Extensions, Migration]
 tags: [manifest-v3, migration, chrome-extension]
 keywords: "manifest v2 to v3 migration, chrome extension mv3 update, manifest v3 migration checklist, upgrade chrome extension mv3, mv2 deprecated chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/22/chrome-extension-mv2-to-v3-migration-checklist/"
+canonical_url: "https://bestchromeextensions.com/2025/03/22/chrome-extension-mv2-to-v3-migration-checklist/"
 ---
 
 # Manifest V2 to V3 Migration Checklist: Complete Chrome Extension Update Guide

@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api]
 keywords: "declarative content extension, page action rules, conditional extension action, chrome declarativeContent api, chrome.contentSettings api"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-declarative-content-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-declarative-content-api-guide/"
 ---
 
 # Chrome Declarative Content API Complete Guide

@@ -6,7 +6,7 @@ date: 2025-03-30
 categories: [Chrome-Extensions, Tutorials]
 tags: [dark-mode, theme, chrome-extension]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/30/build-dark-mode-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/03/30/build-dark-mode-chrome-extension/"
 ---
 
 # Build a Dark Mode Chrome Extension: Invert Colors and Apply Themes

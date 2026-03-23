@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [tutorials, chrome-extensions, solidjs]
 tags: [solidjs chrome extension, solid js extension, reactive extension ui, manifest v3, web components]
 keywords: "solidjs chrome extension, solid js extension, reactive extension ui, chrome extension solidjs tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/chrome-extension-solid-js/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/chrome-extension-solid-js/"
 ---
 
 # Building Chrome Extensions with SolidJS: Reactive and Fast

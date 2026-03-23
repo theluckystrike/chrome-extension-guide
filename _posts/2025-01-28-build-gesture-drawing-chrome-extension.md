@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "gesture drawing extension, sketch overlay chrome, web drawing tool, chrome extension drawing, drawing overlay extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-gesture-drawing-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-gesture-drawing-chrome-extension/"
 ---
 
 # Build a Gesture Drawing Chrome Extension: Complete Guide

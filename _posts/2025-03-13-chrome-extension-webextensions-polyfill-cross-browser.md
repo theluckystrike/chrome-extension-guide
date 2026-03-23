@@ -6,7 +6,7 @@ date: 2025-03-13
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [polyfill, cross-browser, chrome-extension]
 keywords: "webextensions polyfill, cross browser extension, chrome firefox extension, browser extension polyfill, write extension all browsers"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/13/chrome-extension-webextensions-polyfill-cross-browser/"
+canonical_url: "https://bestchromeextensions.com/2025/03/13/chrome-extension-webextensions-polyfill-cross-browser/"
 ---
 
 # WebExtensions Polyfill: Write Cross-Browser Extensions with One Codebase

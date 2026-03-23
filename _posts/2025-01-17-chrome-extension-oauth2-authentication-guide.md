@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [tutorials, chrome-extensions, authentication]
 tags: [chrome extension oauth2, extension authentication, chrome identity api, google login chrome extension, manifest v3, oauth tutorial]
 keywords: "chrome extension oauth2, extension authentication, chrome identity api, google login chrome extension, github oauth chrome extension, manifest v3 authentication"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-oauth2-authentication-guide/"
 ---
 
 # Chrome Extension OAuth2 Authentication: Connect to Google, GitHub & More
@@ -770,8 +770,8 @@ With these skills, you can build Chrome extensions that securely connect to Goog
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
-*This guide is part of the Chrome Extension Guide series. For more tutorials on Chrome extension development, explore our comprehensive guides on [Chrome extension development](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) and [publishing to the Chrome Web Store](/chrome-extension-guide/2025/01/17/publish-chrome-extension-web-store-2025-guide/).*
+*This guide is part of the Chrome Extension Guide series. For more tutorials on Chrome extension development, explore our comprehensive guides on [Chrome extension development](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) and [publishing to the Chrome Web Store](/2025/01/17/publish-chrome-extension-web-store-2025-guide/).*
 ---
 
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, API-Guide, Development-Tutorial]
 tags: [api-interceptor, http-requests, network, declarativeNetRequest, manifest-v3]
 keywords: "api interceptor extension, http request modifier chrome, request interceptor extension, chrome extension network interception, modify http requests chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/api-interceptor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/api-interceptor-chrome-extension/"
 ---
 
 # Build an API Request Interceptor Chrome Extension

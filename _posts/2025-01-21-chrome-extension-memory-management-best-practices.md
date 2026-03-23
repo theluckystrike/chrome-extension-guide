@@ -347,7 +347,7 @@ Memory management in Chrome extensions requires understanding Chrome's architect
 
 Start by profiling your current extension with the techniques outlined here. Identify your largest memory consumers and apply targeted optimizations. Implement lazy loading for features that don't need immediate initialization. Set up monitoring to catch regressions before they reach users.
 
-For more insights on extension development and monetization strategies, explore our [extension monetization playbook](/chrome-extension-guide/chrome-extension-ad-monetization-ethical-guide/) and learn how to build sustainable extensions. For detailed guidance on tab management and memory optimization, see our comprehensive [tab suspender guide](/chrome-extension-guide/how-tab-suspender-extensions-save-browser-memory/).
+For more insights on extension development and monetization strategies, explore our [extension monetization playbook](/chrome-extension-ad-monetization-ethical-guide/) and learn how to build sustainable extensions. For detailed guidance on tab management and memory optimization, see our comprehensive [tab suspender guide](/how-tab-suspender-extensions-save-browser-memory/).
 
 Remember: every megabyte your extension doesn't consume is a megabyte available for your users' other applications. Efficient memory management isn't just technical excellence—it's respect for your users' resources.
 

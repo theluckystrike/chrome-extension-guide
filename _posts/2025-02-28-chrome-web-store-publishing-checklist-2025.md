@@ -6,7 +6,7 @@ date: 2025-02-28
 categories: [Chrome-Extensions, Publishing]
 tags: [chrome-web-store, publishing, checklist]
 keywords: "chrome web store publish, publish chrome extension, chrome extension review process, chrome web store checklist, submit chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/28/chrome-web-store-publishing-checklist-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/02/28/chrome-web-store-publishing-checklist-2025/"
 ---
 
 # Chrome Web Store Publishing Checklist: Get Your Extension Approved Fast in 2025

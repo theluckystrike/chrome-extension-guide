@@ -2,7 +2,7 @@
 layout: default
 title: "Service Worker Lifecycle Mastery — Complete Guide for MV3 Extensions"
 description: "Master the Chrome Extension service worker lifecycle in Manifest V3. Learn to keep service workers alive, persist state, debug issues, and optimize performance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/service-worker-lifecycle-mastery/"
+canonical_url: "https://bestchromeextensions.com/guides/service-worker-lifecycle-mastery/"
 ---
 
 # Service Worker Lifecycle Mastery
@@ -555,11 +555,11 @@ This helps identify if your service worker is terminating too frequently, which 
 
 ## Related Articles
 
-- [Background Patterns](/chrome-extension-guide/guides/background-patterns/) - Common patterns for managing background tasks
-- [Alarms and Background Tasks](/chrome-extension-guide/guides/alarms-background-tasks/) - Deep dive into scheduling
-- [Migrating Background Pages to Service Workers](/chrome-extension-guide/guides/background-to-sw-migration/) - Step-by-step migration guide
-- [Caching Strategies](/chrome-extension-guide/guides/caching-strategies/) - Optimizing network requests
-- [Advanced Debugging](/chrome-extension-guide/guides/advanced-debugging/) - Debugging service worker issues
+- [Background Patterns](/guides/background-patterns/) - Common patterns for managing background tasks
+- [Alarms and Background Tasks](/guides/alarms-background-tasks/) - Deep dive into scheduling
+- [Migrating Background Pages to Service Workers](/guides/background-to-sw-migration/) - Step-by-step migration guide
+- [Caching Strategies](/guides/caching-strategies/) - Optimizing network requests
+- [Advanced Debugging](/guides/advanced-debugging/) - Debugging service worker issues
 
 ## Conclusion
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Iframe Communication — Best Practices"
 description: "Communicate with iframes in content scripts."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/iframe-communication/"
+canonical_url: "https://bestchromeextensions.com/patterns/iframe-communication/"
 ---
 
 # iframe Communication Patterns in Chrome Extensions

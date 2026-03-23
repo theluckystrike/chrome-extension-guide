@@ -6,7 +6,7 @@ date: 2025-03-06
 categories: [Chrome-Extensions, Testing]
 tags: [puppeteer, testing, automation]
 keywords: "chrome extension puppeteer, test chrome extension puppeteer, puppeteer extension testing, automate chrome extension test, chrome extension automation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/06/chrome-extension-testing-puppeteer/"
+canonical_url: "https://bestchromeextensions.com/2025/03/06/chrome-extension-testing-puppeteer/"
 ---
 
 # Testing Chrome Extensions with Puppeteer: Automated Browser Testing Guide

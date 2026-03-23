@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "youtube chrome extension, youtube enhancer, video controls extension, build youtube extension, chrome extension video player"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-youtube-enhancer/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-youtube-enhancer/"
 ---
 
 # Build a YouTube Enhancer Chrome Extension: Complete Developer Guide

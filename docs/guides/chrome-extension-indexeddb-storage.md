@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently"
 description: "Master IndexedDB for Chrome extensions. Learn efficient storage of large datasets, schema design, transactions, indexing, Dexie.js integration, offline-first patterns, and migration strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/chrome-extension-indexeddb-storage/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-indexeddb-storage/"
 ---
 
 # Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently
@@ -711,7 +711,7 @@ IndexedDB provides Chrome extension developers with enterprise-grade storage cap
 
 The key decisions involve choosing between raw IndexedDB and wrapper libraries like Dexie.js based on your team's familiarity and project complexity. For most extensions, Dexie's simpler API significantly reduces development time while maintaining performance. Combined with offline-first patterns, proper quota management, and thoughtful migration strategies, IndexedDB enables extensions that deliver excellent user experiences regardless of network conditions.
 
-For more insights into building production-ready Chrome extensions, explore the [Chrome Extension Guide](/chrome-extension-guide/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
+For more insights into building production-ready Chrome extensions, explore the [Chrome Extension Guide](/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
 
 Visit [zovo.one](https://zovo.one) for more browser optimization tools, extensions, and productivity resources.
 

@@ -6,7 +6,7 @@ date: 2025-03-25
 categories: [Chrome-Extensions, Backend]
 tags: [firebase, backend, chrome-extension]
 keywords: "chrome extension firebase, firebase chrome extension, chrome extension backend firebase, firebase auth chrome extension, firestore chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/25/chrome-extension-firebase-backend-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/25/chrome-extension-firebase-backend-guide/"
 ---
 
 # Using Firebase with Chrome Extensions: Authentication, Database, and Hosting

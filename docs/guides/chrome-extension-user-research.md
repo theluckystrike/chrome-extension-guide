@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension User Research — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-user-research/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-user-research/"
 ---
 # User Research and Feedback for Chrome Extensions
 

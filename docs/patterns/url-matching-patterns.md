@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Url Matching Patterns — Best Practices"
 description: "Match URLs with patterns for content script injection."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/url-matching-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/url-matching-patterns/"
 ---
 
 # URL Matching Patterns in Chrome Extensions

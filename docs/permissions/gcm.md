@@ -5,7 +5,7 @@ description: "Access to (Google Cloud Messaging) API for sending and receiving p
 permalink: /permissions/gcm/
 category: permissions
 order: 19
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/gcm/"
+canonical_url: "https://bestchromeextensions.com/permissions/gcm/"
 ---
 
 # gcm Permission

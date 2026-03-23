@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Enterprise Extensions — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/enterprise-extensions/"
+canonical_url: "https://bestchromeextensions.com/guides/enterprise-extensions/"
 ---
 # Enterprise Extensions Guide
 
@@ -401,6 +401,6 @@ For more information, see:
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

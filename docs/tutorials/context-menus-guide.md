@@ -2,7 +2,7 @@
 layout: default
 title: "Building Context Menus in Chrome Extensions — Developer Guide"
 description: "A comprehensive tutorial on building context menus in Chrome extensions. Learn to use chrome.contextMenus API, create different menu item types, handle clicks, and implement best practices."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/context-menus-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/context-menus-guide/"
 ---
 
 # Building Context Menus in Chrome Extensions
@@ -697,9 +697,9 @@ chrome.runtime.onInstalled.addListener(() => menuManager.initialize());
 
 ## Related Articles {#related-articles}
 
-- [Chrome Tabs API Guide](/chrome-extension-guide/tutorials/tabs-api-guide/) — Learn to query, create, and manage browser tabs, often used together with context menus
-- [Messaging Quickstart](/chrome-extension-guide/tutorials/messaging-quickstart/) — Communication patterns between background scripts and content scripts for context menu actions
-- [Build a Screenshot Tool Extension](/chrome-extension-guide/tutorials/build-screenshot-tool/) — Practical example combining context menus with screenshot capture functionality
+- [Chrome Tabs API Guide](/tutorials/tabs-api-guide/) — Learn to query, create, and manage browser tabs, often used together with context menus
+- [Messaging Quickstart](/tutorials/messaging-quickstart/) — Communication patterns between background scripts and content scripts for context menu actions
+- [Build a Screenshot Tool Extension](/tutorials/build-screenshot-tool/) — Practical example combining context menus with screenshot capture functionality
 
 ---
 

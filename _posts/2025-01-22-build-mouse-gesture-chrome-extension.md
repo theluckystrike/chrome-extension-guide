@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "mouse gesture extension, gesture control chrome, gesture shortcuts extension, build chrome extension gesture, chrome gesture recognition"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-mouse-gesture-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-mouse-gesture-chrome-extension/"
 ---
 
 # Build a Mouse Gesture Chrome Extension: Complete Developer's Guide

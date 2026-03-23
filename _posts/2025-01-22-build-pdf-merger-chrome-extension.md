@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "pdf merger extension, combine pdf chrome, pdf tools extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-pdf-merger-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-pdf-merger-chrome-extension/"
 ---
 
 # Build a PDF Merger Chrome Extension: Complete Developer Guide

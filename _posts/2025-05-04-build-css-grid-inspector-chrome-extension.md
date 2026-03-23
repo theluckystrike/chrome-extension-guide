@@ -6,7 +6,7 @@ date: 2025-05-04
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [css-grid, inspector, chrome-extension]
 keywords: "chrome extension css grid, grid inspector chrome, css grid overlay extension, visualize css grid chrome, grid debugging extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/04/build-css-grid-inspector-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/04/build-css-grid-inspector-chrome-extension/"
 ---
 
 # Build a CSS Grid Inspector Chrome Extension: Visualize Grid Layouts
@@ -710,4 +710,4 @@ Building a CSS Grid Inspector Chrome extension is an excellent project that comb
 
 The key components we covered include detecting grid containers using computed styles, rendering SVG overlays with precise positioning, creating a user-friendly popup interface, and managing state with Chrome's storage API. This foundation can be extended with additional features like track size annotations, area highlighting, and export functionality.
 
-For the complete implementation details and advanced patterns, check out our [detailed CSS Grid Debugger guide](/chrome-extension-guide/docs/guides/css-grid-debugger/) in the chrome-extension-guide documentation. Happy debugging!
+For the complete implementation details and advanced patterns, check out our [detailed CSS Grid Debugger guide](/docs/guides/css-grid-debugger/) in the chrome-extension-guide documentation. Happy debugging!

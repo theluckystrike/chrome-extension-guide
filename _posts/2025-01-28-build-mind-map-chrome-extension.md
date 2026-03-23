@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "mind map extension, brainstorm chrome, thought organizer extension, chrome mind mapping tool, visual brainstorming extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-mind-map-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-mind-map-chrome-extension/"
 ---
 
 # Build a Mind Map Chrome Extension: Complete Guide to Brainstorming in Your Browser

@@ -6,7 +6,7 @@ date: 2025-04-02
 categories: [Chrome-Extensions, Development]
 tags: [npm, packages, chrome-extension]
 keywords: "chrome extension npm, npm packages chrome extension, use npm in chrome extension, chrome extension node modules, third party libraries chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/02/chrome-extension-npm-packages-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/04/02/chrome-extension-npm-packages-guide/"
 ---
 
 # Using npm Packages in Chrome Extensions: Complete Dependency Guide

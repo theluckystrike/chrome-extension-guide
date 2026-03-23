@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "xpath helper extension, xpath selector chrome, xml query extension, chrome xpath tool, xpath finder chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-xpath-helper-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-xpath-helper-chrome-extension/"
 ---
 
 # Build an XPath Helper Chrome Extension - Complete Developer's Guide

@@ -6,7 +6,7 @@ date: 2025-04-04
 categories: [Chrome-Extensions, Frameworks]
 tags: [solidjs, reactive, chrome-extension]
 keywords: "chrome extension solid js, solidjs chrome extension, solid js popup chrome, reactive chrome extension, solid chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/04/chrome-extension-solid-js-reactive-ui/"
+canonical_url: "https://bestchromeextensions.com/2025/04/04/chrome-extension-solid-js-reactive-ui/"
 ---
 
 # Build Chrome Extensions with SolidJS: Fine-Grained Reactive UI

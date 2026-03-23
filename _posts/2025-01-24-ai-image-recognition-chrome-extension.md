@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [guides, chrome-extensions, machine-learning, tensorflow]
 tags: [ai image recognition extension, tensorflow js chrome extension, ml image classifier extension, machine learning chrome extension, image classification, object detection, TF.js, mobile net]
 keywords: "ai image recognition extension, tensorflow js chrome extension, ml image classifier extension, machine learning chrome extension, image classification tensorflow, chrome extension ML, object detection browser"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/ai-image-recognition-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/ai-image-recognition-chrome-extension/"
 ---
 
 # Build an AI Image Recognition Chrome Extension with TensorFlow.js

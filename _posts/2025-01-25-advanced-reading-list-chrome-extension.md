@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "reading list extension, read later chrome, save articles extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/advanced-reading-list-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/advanced-reading-list-chrome-extension/"
 ---
 
 # Build an Advanced Reading List Chrome Extension

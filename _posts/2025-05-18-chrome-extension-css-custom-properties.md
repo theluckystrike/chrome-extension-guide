@@ -6,7 +6,7 @@ date: 2025-05-18
 categories: [Chrome-Extensions, Styling]
 tags: [css-variables, theming, chrome-extension]
 keywords: "chrome extension css variables, css custom properties extension, dynamic styling chrome, themeable chrome extension, css variables popup"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/18/chrome-extension-css-custom-properties/"
+canonical_url: "https://bestchromeextensions.com/2025/05/18/chrome-extension-css-custom-properties/"
 ---
 
 # CSS Custom Properties in Chrome Extensions: Themeable and Dynamic Styling

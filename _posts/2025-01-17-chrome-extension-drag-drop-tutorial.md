@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension drag drop, drag api chrome extension, chrome extension file drop, html5 drag and drop chrome extension, chrome extension drag and drop tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-drag-drop-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-drag-drop-tutorial/"
 ---
 
 # Drag and Drop in Chrome Extensions: Complete Tutorial
@@ -423,10 +423,10 @@ With the techniques and examples in this guide, you have everything you need to 
 
 ## Related Articles
 
-- [Chrome Extension DOM Manipulation Guide](/chrome-extension-guide/2025/01/20/chrome-extension-dom-manipulation-guide/) - Learn advanced DOM manipulation techniques for extensions
-- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design intuitive popup interfaces for your extensions
-- [Chrome Extension Content Script Guide](/chrome-extension-guide/2025/03/16/chrome-extension-content-security-policy-csp/) - Master content scripts in your extensions
+- [Chrome Extension DOM Manipulation Guide](/2025/01/20/chrome-extension-dom-manipulation-guide/) - Learn advanced DOM manipulation techniques for extensions
+- [Chrome Extension Popup Design Best Practices](/2025/01/18/chrome-extension-popup-design-best-practices/) - Design intuitive popup interfaces for your extensions
+- [Chrome Extension Content Script Guide](/2025/03/16/chrome-extension-content-security-policy-csp/) - Master content scripts in your extensions
 -e 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "webextension polyfill, cross browser extension, firefox chrome extension, browser extension compatibility, extension development cross browser"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/webextension-polyfill-cross-browser-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/webextension-polyfill-cross-browser-extensions/"
 ---
 
 # WebExtension Polyfill for Cross-Browser Extensions: Complete Guide 2025

@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [web-request, network, declarativeNetRequest, manifest-v3]
 keywords: "chrome web request api, declarativeNetRequest guide, chrome extension network requests, block requests chrome extension, manifest v3 network interception"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-web-request-api-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-web-request-api-complete-guide/"
 ---
 
 # Chrome Web Request API: Complete Guide to Network Interception in Extensions
@@ -717,8 +717,8 @@ With the techniques and examples in this guide, you have everything needed to st
 
 ## Related Articles
 
-- [Declarative Net Request API Complete Tutorial](/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/) - Learn more about the declarativeNetRequest API with hands-on examples
-- [Chrome Extension Cross-Origin Requests Guide](/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/) - Understanding CORS and cross-origin communication in extensions
-- [Build Network Monitor Chrome Extension](/chrome-extension-guide/2025/01/20/build-network-monitor-chrome-extension/) - Build a practical extension for monitoring network requests
+- [Declarative Net Request API Complete Tutorial](/2025/01/18/declarative-net-request-api-complete-tutorial/) - Learn more about the declarativeNetRequest API with hands-on examples
+- [Chrome Extension Cross-Origin Requests Guide](/2025/01/18/chrome-extension-cross-origin-requests-guide/) - Understanding CORS and cross-origin communication in extensions
+- [Build Network Monitor Chrome Extension](/2025/01/20/build-network-monitor-chrome-extension/) - Build a practical extension for monitoring network requests
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

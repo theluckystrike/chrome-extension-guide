@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "qr code generator extension, qr chrome extension, create qr code extension, qr code chrome extension, chrome extension qr code generator"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-qr-code-generator-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-qr-code-generator-chrome-extension/"
 ---
 
 # Build a QR Code Generator Chrome Extension: Complete Developer Guide
@@ -543,5 +543,5 @@ Consider expanding your qr code generator extension with additional features suc
 Start building your qr code generator extension today and join the community of developers creating useful tools that enhance the Chrome browsing experience for users worldwide.
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

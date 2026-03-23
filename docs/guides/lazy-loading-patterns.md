@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Lazy Loading Patterns — Developer Guide"
 description: "Learn Chrome extension lazy loading patterns with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/lazy-loading-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/lazy-loading-patterns/"
 ---
 # Chrome Extension Lazy Loading Patterns
 
@@ -526,6 +526,6 @@ reportPerformance({
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

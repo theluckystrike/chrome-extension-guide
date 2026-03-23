@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [guides, chrome-extensions, development, tools]
 tags: [image compressor extension, compress images chrome, webp converter extension, chrome extension development, image optimization, browser tools]
 keywords: "image compressor extension, compress images chrome, webp converter extension, image compression tool, chrome extension image optimizer, bulk image compression, webp conversion chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/image-compressor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/image-compressor-chrome-extension/"
 ---
 
 # Build an Image Compressor Chrome Extension: Complete 2025 Developer Guide

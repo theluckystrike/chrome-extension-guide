@@ -5,7 +5,7 @@ description: "Learn how to restore suspended tabs in Tab Suspender Pro with clic
 date: 2025-03-18
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, restore, tab-management]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/18/tab-suspender-pro-restore-suspended-tabs/"
+canonical_url: "https://bestchromeextensions.com/2025/03/18/tab-suspender-pro-restore-suspended-tabs/"
 ---
 
 # Tab Suspender Pro: How to Restore Suspended Tabs Instantly

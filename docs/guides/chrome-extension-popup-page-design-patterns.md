@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Popup Page Design Patterns — Complete TypeScript Guide for 2026"
 description: "Master Chrome extension popup design with TypeScript. Learn MV3 patterns, state management, responsive layouts, and best practices for building professional popup UIs."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-popup-page-design-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-popup-page-design-patterns/"
 last_modified_at: 2026-01-20
 ---
 

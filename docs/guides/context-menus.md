@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Context Menus — How to Add Right-Click Menu Options"
 description: "Learn how to use the chrome.contextMenus API to create custom right-click menu options in Chrome extensions with dynamic menus, nested items, and event handling."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/context-menus/"
+canonical_url: "https://bestchromeextensions.com/guides/context-menus/"
 ---
 # Chrome Extension Context Menus — How to Add Right-Click Menu Options
 

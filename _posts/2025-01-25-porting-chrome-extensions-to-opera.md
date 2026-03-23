@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "opera extension development, opera addon, chromium opera extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/porting-chrome-extensions-to-opera/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/porting-chrome-extensions-to-opera/"
 ---
 
 # Porting Chrome Extensions to Opera: Complete 2025 Guide

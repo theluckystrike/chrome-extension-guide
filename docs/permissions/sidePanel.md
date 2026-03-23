@@ -5,7 +5,7 @@ description: "API 114+ None — this permission does not trigger a warning at in
 permalink: /permissions/sidePanel/
 category: permissions
 order: 38
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/sidePanel/"
+canonical_url: "https://bestchromeextensions.com/permissions/sidePanel/"
 ---
 
 # sidePanel Permission

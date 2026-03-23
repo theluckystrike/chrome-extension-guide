@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "webrtc video extension, video chat chrome extension, peer connection extension, chrome extension webrtc tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-webrtc-video/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/chrome-extension-webrtc-video/"
 ---
 
 # WebRTC Video Chat Chrome Extension Tutorial: Build Real-Time Communication

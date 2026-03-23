@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Logging Patterns — Best Practices"
 description: "Master logging patterns for debugging Chrome extensions across service workers, content scripts, and popups with structured logging, persistence, and remote error reporting."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/logging-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/logging-patterns/"
 ---
 
 # Logging Patterns for Chrome Extensions

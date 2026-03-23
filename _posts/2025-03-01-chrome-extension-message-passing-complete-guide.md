@@ -6,7 +6,7 @@ date: 2025-03-01
 categories: [Chrome-Extensions, Development]
 tags: [message-passing, chrome-extension, tutorial]
 keywords: "chrome extension message passing, chrome.runtime.sendMessage, chrome extension communication, message passing content script background, chrome extension ports"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/01/chrome-extension-message-passing-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/01/chrome-extension-message-passing-complete-guide/"
 ---
 
 # Chrome Extension Message Passing: Communication Between Components Guide
@@ -428,7 +428,7 @@ These communication patterns form the backbone of any non-trivial Chrome extensi
 
 - [Chrome Extension Messaging Documentation](https://developer.chrome.com/docs/extensions/mv3/messaging/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)
-- [Chrome Extension Development Basics](/chrome-extension-guide/chrome-extension-development-2025-complete-beginners-guide/)
+- [Chrome Extension Development Basics](/chrome-extension-development-2025-complete-beginners-guide/)
 - [Service Worker Lifecycle](https://developer.chrome.com/docs/extensions/mv3/service-workers/)
 
 ---

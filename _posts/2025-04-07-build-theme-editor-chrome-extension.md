@@ -6,7 +6,7 @@ date: 2025-04-07
 categories: [Chrome-Extensions, Tutorials]
 tags: [theme-editor, css, chrome-extension]
 keywords: "chrome extension theme editor, customize website chrome extension, css editor chrome extension, website theme chrome extension, change website colors extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/07/build-theme-editor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/07/build-theme-editor-chrome-extension/"
 ---
 
 # Build a Website Theme Editor Chrome Extension: Customize Any Site

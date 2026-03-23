@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Webpack Setup — Modern Build Configuration Guide"
 description: "Learn how to set up Webpack for Chrome extensions with this developer guide covering configuration, HMR, and best practices."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/webpack-setup/"
+canonical_url: "https://bestchromeextensions.com/guides/webpack-setup/"
 ---
 # Chrome Extension Webpack Setup — Modern Build Configuration Guide
 

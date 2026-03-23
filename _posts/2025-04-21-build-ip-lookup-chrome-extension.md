@@ -6,7 +6,7 @@ date: 2025-04-21
 categories: [Chrome-Extensions, Tutorials]
 tags: [ip-lookup, network, chrome-extension]
 keywords: "chrome extension ip lookup, ip address chrome extension, geolocation lookup chrome, network info chrome extension, ip finder extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/21/build-ip-lookup-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/21/build-ip-lookup-chrome-extension/"
 ---
 
 # Build an IP Lookup Chrome Extension: Geolocation and Network Info at a Click

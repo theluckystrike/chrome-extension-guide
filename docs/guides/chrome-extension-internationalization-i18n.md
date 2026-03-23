@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension i18n: Complete Internationalization Guide"
 description: "Learn how to internationalize your Chrome extension with this comprehensive guide covering chrome.i18n API, locales, RTL support, pluralization, and localization tools."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-internationalization-i18n/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-internationalization-i18n/"
 ---
 
 # Chrome Extension i18n: Complete Internationalization Guide

@@ -5,7 +5,7 @@ description: "Grants access to the API Show rich desktop notifications (basic, i
 permalink: /permissions/notifications/
 category: permissions
 order: 26
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/notifications/"
+canonical_url: "https://bestchromeextensions.com/permissions/notifications/"
 ---
 
 # notifications Permission Reference

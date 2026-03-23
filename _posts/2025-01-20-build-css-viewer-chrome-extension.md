@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [css viewer extension, chrome extension development, css tool extension, inspect css chrome, web development tools]
 keywords: "css viewer extension, inspect css chrome, css tool extension, chrome extension css, inspect element chrome, css properties viewer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-css-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-css-viewer-chrome-extension/"
 ---
 
 # Build a CSS Properties Viewer Chrome Extension
@@ -616,7 +616,7 @@ The current implementation already captures all computed styles. To add more fea
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 **Built by [theluckystrike](https://zovo.one)**

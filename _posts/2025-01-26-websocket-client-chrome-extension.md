@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Development, WebSocket]
 tags: [chrome-extension, websocket, debugging, development, guide]
 keywords: "websocket client extension, websocket debugger chrome, real-time debug extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/websocket-client-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/websocket-client-chrome-extension/"
 ---
 
 # Build a WebSocket Client Chrome Extension for Real-Time Debugging

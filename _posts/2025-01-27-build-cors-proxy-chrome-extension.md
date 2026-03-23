@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "cors proxy extension, cors bypass chrome, cross origin extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-cors-proxy-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-cors-proxy-chrome-extension/"
 ---
 
 # Build a CORS Proxy Chrome Extension: Complete Developer's Guide

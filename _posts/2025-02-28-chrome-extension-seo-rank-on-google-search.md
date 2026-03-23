@@ -402,9 +402,9 @@ The developers who succeed with SEO are those who treat it as an ongoing investm
 
 ## Related Guides
 
-- [Chrome Web Store Listing Optimization](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your CWS conversion rate
-- [Chrome Extension Landing Page Guide](/chrome-extension-guide/2025/02/23/chrome-extension-landing-page-convert-visitors-to-installs/) — Build landing pages that convert
-- [Extension Monetization Playbook](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Turn your traffic into revenue
+- [Chrome Web Store Listing Optimization](/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your CWS conversion rate
+- [Chrome Extension Landing Page Guide](/2025/02/23/chrome-extension-landing-page-convert-visitors-to-installs/) — Build landing pages that convert
+- [Extension Monetization Playbook](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Turn your traffic into revenue
 
 ---
 

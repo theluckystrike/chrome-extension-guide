@@ -6,7 +6,7 @@ date: 2025-04-16
 categories: [Chrome-Extensions, Tutorials]
 tags: [calculator, math, chrome-extension]
 keywords: "chrome extension calculator, build calculator extension, scientific calculator chrome, chrome extension math, calculator popup chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/16/build-calculator-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/16/build-calculator-chrome-extension/"
 ---
 
 # Build a Calculator Chrome Extension: Scientific Calculator in Your Browser

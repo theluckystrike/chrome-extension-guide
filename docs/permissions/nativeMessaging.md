@@ -5,7 +5,7 @@ description: "Enables communication between extension and native applications Tw
 permalink: /permissions/nativeMessaging/
 category: permissions
 order: 25
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/nativeMessaging/"
+canonical_url: "https://bestchromeextensions.com/permissions/nativeMessaging/"
 ---
 
 # nativeMessaging Permission

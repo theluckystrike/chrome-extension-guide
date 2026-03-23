@@ -6,7 +6,7 @@ date: 2025-02-18
 categories: [Chrome-Extensions, Testing]
 tags: [playwright, testing, automation, chrome-extension]
 keywords: "test chrome extension playwright, chrome extension e2e testing, playwright extension testing, automated chrome extension testing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/18/testing-chrome-extensions-with-playwright/"
+canonical_url: "https://bestchromeextensions.com/2025/02/18/testing-chrome-extensions-with-playwright/"
 ---
 
 # Testing Chrome Extensions with Playwright: Complete Automation Guide 2025

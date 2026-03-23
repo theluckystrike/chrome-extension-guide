@@ -448,4 +448,4 @@ Yes. Tab Suspender Pro works independently in each Chrome profile. You need to i
 
 ---
 
-Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike. Tab Suspender Pro available on the [Chrome Web Store](https://chromewebstore.google.com). Professional extension development at [zovo.one](https://zovo.one).
+Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. Tab Suspender Pro available on the [Chrome Web Store](https://chromewebstore.google.com). Professional extension development at [zovo.one](https://zovo.one).

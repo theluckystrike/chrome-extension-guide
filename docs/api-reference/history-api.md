@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome History API Complete Reference"
 description: "The Chrome History API searches, reads, adds, and deletes browser history entries, providing access to visit records with timestamps and URL information."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/history-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/history-api/"
 ---
 
 # Chrome History API Reference

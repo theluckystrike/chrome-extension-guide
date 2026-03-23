@@ -6,7 +6,7 @@ date: 2025-04-26
 categories: [Chrome-Extensions, Frameworks]
 tags: [plasmo, framework, chrome-extension]
 keywords: "plasmo chrome extension, plasmo framework, build extension plasmo, plasmo react extension, modern chrome extension plasmo"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/26/chrome-extension-plasmo-framework-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/04/26/chrome-extension-plasmo-framework-guide/"
 ---
 
 # Plasmo Framework for Chrome Extensions: Build Extensions Like Web Apps

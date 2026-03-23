@@ -7,7 +7,7 @@ date: 2025-01-16
 categories: [guides, chrome-extensions]
 tags: [performance optimization, chrome extension, speed, memory usage, service workers, content scripts, manifest v3]
 keywords: "chrome extension performance, optimize chrome extension, extension speed optimization"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/16/chrome-extension-performance-optimization-guide/"
 ---
 
 # Chrome Extension Performance Optimization: Speed Up Your Extension
@@ -46,7 +46,7 @@ Before optimizing, you need to know what to measure. Chrome provides several too
 
 **chrome://extensions/ Internals**: The extensions page shows active views, service worker status, and error logs that can indicate performance issues.
 
-For a deeper dive into profiling techniques, see our [performance profiling guide](/chrome-extension-guide/docs/guides/chrome-extension-performance-profiling/).
+For a deeper dive into profiling techniques, see our [performance profiling guide](/docs/guides/chrome-extension-performance-profiling/).
 
 ---
 
@@ -165,7 +165,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-For comprehensive service worker patterns, see our [service worker guide](/chrome-extension-guide/docs/guides/background-service-worker/).
+For comprehensive service worker patterns, see our [service worker guide](/docs/guides/background-service-worker/).
 
 ---
 
@@ -307,7 +307,7 @@ if (targetNode) {
 }
 ```
 
-For more content script optimization patterns, see our [content script injection patterns guide](/chrome-extension-guide/docs/guides/content-script-injection-patterns/).
+For more content script optimization patterns, see our [content script injection patterns guide](/docs/guides/content-script-injection-patterns/).
 
 ---
 
@@ -405,7 +405,7 @@ await storageCache.initialize(['settings', 'userData', 'tabState']);
 
 Exceeding these limits causes errors and data loss. Monitor your usage and implement cleanup routines for old data.
 
-For advanced storage patterns, see our [storage strategies guide](/chrome-extension-guide/docs/guides/advanced-storage-patterns/).
+For advanced storage patterns, see our [storage strategies guide](/docs/guides/advanced-storage-patterns/).
 
 ---
 
@@ -677,7 +677,7 @@ describe('Extension Performance', () => {
 });
 ```
 
-For CI/CD integration strategies, see our [CI/CD pipeline guide](/chrome-extension-guide/docs/guides/chrome-extension-ci-cd-pipeline/).
+For CI/CD integration strategies, see our [CI/CD pipeline guide](/docs/guides/chrome-extension-ci-cd-pipeline/).
 
 ---
 
@@ -708,7 +708,7 @@ All of this must happen with minimal CPU and memory overhead — otherwise the e
 
 5. **Minimal content script footprint**: The extension injects minimal or no content scripts into web pages, relying instead on the Tabs API and service worker logic.
 
-These techniques allow Tab Suspender Pro to [reduce Chrome memory usage by up to 80%](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/) while consuming negligible resources itself. For a deep dive into managing many tabs efficiently, see our [tab management for developers guide](/chrome-extension-guide/docs/chrome-tab-management-developers/).
+These techniques allow Tab Suspender Pro to [reduce Chrome memory usage by up to 80%](/docs/tab-suspender-pro-memory-guide/) while consuming negligible resources itself. For a deep dive into managing many tabs efficiently, see our [tab management for developers guide](/docs/chrome-tab-management-developers/).
 
 ---
 
@@ -762,12 +762,12 @@ Performance optimization is an ongoing practice, not a one-time task. As your ex
 
 Here are resources to continue your optimization journey:
 
-- **[Chrome Extension Development Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)**: If you are just getting started, build a strong foundation with best practices from the beginning
-- **[Best Chrome Extensions for Developers](/chrome-extension-guide/2025/01/16/best-chrome-extensions-for-developers-2025/)**: See how top developer extensions achieve excellent performance
-- **[Performance Profiling Deep Dive](/chrome-extension-guide/docs/guides/chrome-extension-performance-profiling/)**: Advanced profiling techniques for complex performance issues
-- **[Testing Strategies](/chrome-extension-guide/docs/guides/comprehensive-extension-testing/)**: Integrate performance testing into your development workflow
-- **[Tab Suspender Pro Memory Guide](/chrome-extension-guide/docs/tab-suspender-pro-memory-guide/)**: A real-world case study in browser performance optimization
-- **[Background Service Worker Patterns](/chrome-extension-guide/docs/guides/background-service-worker/)**: Master the event-driven architecture for optimal service worker performance
+- **[Chrome Extension Development Beginner's Guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)**: If you are just getting started, build a strong foundation with best practices from the beginning
+- **[Best Chrome Extensions for Developers](/2025/01/16/best-chrome-extensions-for-developers-2025/)**: See how top developer extensions achieve excellent performance
+- **[Performance Profiling Deep Dive](/docs/guides/chrome-extension-performance-profiling/)**: Advanced profiling techniques for complex performance issues
+- **[Testing Strategies](/docs/guides/comprehensive-extension-testing/)**: Integrate performance testing into your development workflow
+- **[Tab Suspender Pro Memory Guide](/docs/tab-suspender-pro-memory-guide/)**: A real-world case study in browser performance optimization
+- **[Background Service Worker Patterns](/docs/guides/background-service-worker/)**: Master the event-driven architecture for optimal service worker performance
 
 Remember: the fastest code is the code that does not run. Every feature, every listener, and every DOM operation has a cost. Build with intention, measure with rigor, and your users will reward you with loyalty and five-star reviews.
 
@@ -780,7 +780,7 @@ Remember: the fastest code is the code that does not run. Every feature, every l
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*
 
 ---
 
@@ -788,4 +788,4 @@ Remember: the fastest code is the code that does not run. Every feature, every l
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

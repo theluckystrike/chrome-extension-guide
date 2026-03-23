@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Scripting API: Programmatic Script and CSS Injection — Developer Guide"
 description: "A comprehensive guide to the Chrome Scripting API: executeScript, insertCSS/removeCSS, registerContentScripts, world targeting, injection targets, and migrating from MV2."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/scripting-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/scripting-api-guide/"
 ---
 
 # Chrome Scripting API: Programmatic Script and CSS Injection
@@ -634,9 +634,9 @@ chrome.scripting.executeScript({
 
 ## Related Articles {#related-articles}
 
-- [Content Scripts Guide](/chrome-extension-guide/tutorials/content-scripts-guide/) — Comprehensive guide to content script injection and isolation
-- [Permissions Deep Dive](/chrome-extension-guide/tutorials/permissions-deep-dive/) — Understanding extension permissions and security
-- [Messaging Quickstart](/chrome-extension-guide/tutorials/messaging-quickstart/) — Communication between extension components
+- [Content Scripts Guide](/tutorials/content-scripts-guide/) — Comprehensive guide to content script injection and isolation
+- [Permissions Deep Dive](/tutorials/permissions-deep-dive/) — Understanding extension permissions and security
+- [Messaging Quickstart](/tutorials/messaging-quickstart/) — Communication between extension components
 
 ---
 

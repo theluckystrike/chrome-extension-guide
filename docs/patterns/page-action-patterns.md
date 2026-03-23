@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Page Action Patterns — Best Practices"
 description: "Use page actions for tab-specific extension functionality."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/page-action-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/page-action-patterns/"
 ---
 
 # Page Action Patterns in MV3

@@ -6,7 +6,7 @@ date: 2025-02-20
 categories: [Chrome-Extensions, Privacy]
 tags: [tab-suspender-pro, privacy, security, tab management, chrome extension privacy]
 keywords: "tab suspender pro privacy, private tab manager chrome, chrome extension privacy, no tracking tab suspender, privacy focused chrome extensions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/20/tab-suspender-pro-privacy-first-tab-management/"
+canonical_url: "https://bestchromeextensions.com/2025/02/20/tab-suspender-pro-privacy-first-tab-management/"
 ---
 
 # Tab Suspender Pro: The Privacy-First Tab Manager That Never Phones Home

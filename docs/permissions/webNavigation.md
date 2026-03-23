@@ -5,7 +5,7 @@ description: "Access to the API for monitoring page navigation lifecycle across 
 permalink: /permissions/webNavigation/
 category: permissions
 order: 48
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/webNavigation/"
+canonical_url: "https://bestchromeextensions.com/permissions/webNavigation/"
 ---
 
 # webNavigation Permission

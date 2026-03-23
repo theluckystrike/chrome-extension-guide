@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Manifest Reference — Developer Guide"
 description: "Learn Chrome extension manifest reference with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/manifest-json-reference/"
+canonical_url: "https://bestchromeextensions.com/guides/manifest-json-reference/"
 ---
 # manifest.json Complete Reference
 

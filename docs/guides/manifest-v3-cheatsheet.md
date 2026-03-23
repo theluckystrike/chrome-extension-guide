@@ -2,7 +2,7 @@
 layout: default
 title: "Manifest V3 Cheatsheet — Quick Reference for Chrome Extension Developers"
 description: "Quick reference guide for Chrome Extension Manifest V3. Covers all essential fields, configurations, and best practices in table format."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/manifest-v3-cheatsheet/"
+canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-cheatsheet/"
 ---
 
 # Manifest V3 Cheatsheet

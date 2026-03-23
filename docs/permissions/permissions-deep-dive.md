@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Permissions Deep Dive"
 description: "The definitive reference for every Chrome extension permission: what each grants, what users see, and how to request only what you need."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/permissions-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/permissions/permissions-deep-dive/"
 --- 1. [How Permissions Work](#how-permissions-work)"
 permalink: /permissions/permissions-deep-dive/
 category: permissions

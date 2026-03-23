@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [guides, chrome-extensions, productivity]
 tags: [site blocker extension, block distracting sites, focus mode chrome, chrome extension development, productivity tools, website blocker]
 keywords: "site blocker extension, block distracting sites, focus mode chrome, chrome extension blocker, distraction free browser, productivity chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/distraction-free-site-blocker-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/distraction-free-site-blocker-extension/"
 ---
 
 # Build a Distraction-Free Site Blocker Chrome Extension

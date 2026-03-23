@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Chrome Web Store Rejection Fixes — Publishing Guide"
 description: "Fix common Chrome Web Store rejection issues and get your extension approved."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/chrome-web-store-rejection-fixes/"
+canonical_url: "https://bestchromeextensions.com/publishing/chrome-web-store-rejection-fixes/"
 ---
 
 # Chrome Web Store Rejection Fixes

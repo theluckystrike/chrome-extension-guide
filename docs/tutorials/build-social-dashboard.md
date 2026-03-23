@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Social Dashboard — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-social-dashboard/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-social-dashboard/"
 ---
 # Build a Social Media Dashboard Extension
 

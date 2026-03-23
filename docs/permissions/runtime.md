@@ -5,7 +5,7 @@ description: "The API provides extension information and utilities for messaging
 permalink: /permissions/runtime/
 category: permissions
 order: 34
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/runtime/"
+canonical_url: "https://bestchromeextensions.com/permissions/runtime/"
 ---
 
 # chrome.runtime API Reference

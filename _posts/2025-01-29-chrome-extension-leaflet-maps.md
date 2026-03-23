@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "leaflet chrome extension, map extension, interactive map chrome, leaflet maps chrome, chrome extension map integration"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-leaflet-maps/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-leaflet-maps/"
 ---
 
 # Leaflet Maps in Chrome Extensions: Complete Implementation Guide for 2025

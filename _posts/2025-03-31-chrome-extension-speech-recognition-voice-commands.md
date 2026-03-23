@@ -6,7 +6,7 @@ date: 2025-03-31
 categories: [Chrome-Extensions, APIs]
 tags: [speech-recognition, voice, chrome-extension]
 keywords: "chrome extension speech recognition, voice commands chrome extension, speech to text chrome extension, chrome extension voice control, web speech API extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/31/chrome-extension-speech-recognition-voice-commands/"
+canonical_url: "https://bestchromeextensions.com/2025/03/31/chrome-extension-speech-recognition-voice-commands/"
 ---
 
 # Chrome Extension Speech Recognition: Add Voice Commands to Your Browser
@@ -894,9 +894,9 @@ Take your voice extension development to the next level:
 
 6. **Publish and Iterate**: Release your extension on the Chrome Web Store and collect user feedback to continuously improve.
 
-For more advanced Chrome extension development topics, explore our comprehensive guides on [Chrome extension architecture](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/), [Storage API best practices](/chrome-extension-guide/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/), and [extension security hardening](/chrome-extension-guide/docs/guides/chrome-extension-security-hardening/).
+For more advanced Chrome extension development topics, explore our comprehensive guides on [Chrome extension architecture](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/), [Storage API best practices](/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/), and [extension security hardening](/docs/guides/chrome-extension-security-hardening/).
 
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

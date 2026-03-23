@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Advanced Permissions — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/advanced-permissions/"
+canonical_url: "https://bestchromeextensions.com/tutorials/advanced-permissions/"
 ---
 # Advanced Permission Patterns with @theluckystrike/webext-permissions
 
@@ -80,7 +80,7 @@ PERMISSION_DESCRIPTIONS['storage']; // Direct map access
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

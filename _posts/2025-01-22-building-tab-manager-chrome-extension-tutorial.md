@@ -56,7 +56,7 @@ Create a new directory for your extension and add the following `manifest.json`:
 
 This manifest declares the core permissions we'll need: `tabs` for tab operations, `tabGroups` for organizing tabs into groups, `storage` for saving sessions, and `commands` for keyboard shortcuts. The `action` key defines our popup interface, while `background` registers the service worker that handles background logic.
 
-For a detailed breakdown of all available permissions, check out our [Chrome Extension Permissions Guide](/chrome-extension-guide/docs/permissions/).
+For a detailed breakdown of all available permissions, check out our [Chrome Extension Permissions Guide](/docs/permissions/).
 
 ---
 
@@ -98,7 +98,7 @@ chrome.tabs.update(tabId, { pinned: true });
 chrome.tabs.remove(tabId);
 ```
 
-The `chrome.tabs.query()` method is particularly powerful as it allows filtering tabs based on multiple criteria. For a complete reference of all available methods and properties, see our [Chrome Tabs API Reference](/chrome-extension-guide/docs/api-reference/).
+The `chrome.tabs.query()` method is particularly powerful as it allows filtering tabs based on multiple criteria. For a complete reference of all available methods and properties, see our [Chrome Tabs API Reference](/docs/api-reference/).
 
 ---
 
@@ -340,7 +340,7 @@ function createTabElement(tab) {
 }
 ```
 
-For styling guidance, check out our [Chrome Extension UI Patterns](/chrome-extension-guide/docs/patterns/) documentation.
+For styling guidance, check out our [Chrome Extension UI Patterns](/docs/patterns/) documentation.
 
 ---
 
@@ -502,7 +502,7 @@ Once your extension is complete, it's time to publish it. The Chrome Web Store p
 4. Set pricing and distribution (Free or Paid)
 5. Submit for review
 
-For a comprehensive guide to the publishing process, see our [Chrome Extension Publishing Guide](/chrome-extension-guide/docs/publishing/).
+For a comprehensive guide to the publishing process, see our [Chrome Extension Publishing Guide](/docs/publishing/).
 
 ---
 
@@ -527,7 +527,7 @@ Consider these premium features for your tab manager:
 - **Custom Themes**: Branded color schemes
 - **Team Features**: Shared workspaces for collaboration
 
-For detailed monetization strategies, see our [Extension Monetization Playbook](/chrome-extension-guide/docs/guides/extension-monetization.md).
+For detailed monetization strategies, see our [Extension Monetization Playbook](/docs/guides/extension-monetization.md).
 
 ### Tab Suspender Pro: A Successful Example
 

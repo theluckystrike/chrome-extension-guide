@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension State Persistence — Best Practices"
 description: "Persist and sync extension state across sessions and devices."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-state-persistence/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-state-persistence/"
 ---
 
 # Extension State Persistence Patterns

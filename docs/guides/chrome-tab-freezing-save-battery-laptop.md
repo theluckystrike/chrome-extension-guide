@@ -3,7 +3,7 @@
 title: Chrome Tab Freezing to Save Battery — The Complete Laptop User's Guide
 description: Discover how chrome tabs draining battery laptop can destroy your battery life. Learn how a tab suspender battery life extension can add 2-3 hours to your laptop runtime with benchmarks and configuration guide.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/chrome-tab-freezing-save-battery-laptop/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-tab-freezing-save-battery-laptop/"
 
 ---
 
@@ -294,7 +294,7 @@ Tab Suspender Pro represents the most comprehensive solution for laptop users se
 3. **Experience the Difference**: Noticeably longer battery life within the first day
 4. **Optimize Your Workflow**: Adjust settings as you learn your usage patterns
 
-For developers interested in building similar battery-saving extensions, the [Chrome Extension Guide](/chrome-extension-guide/) provides comprehensive documentation on tab management APIs, idle detection, and background processing.
+For developers interested in building similar battery-saving extensions, the [Chrome Extension Guide](/) provides comprehensive documentation on tab management APIs, idle detection, and background processing.
 
 Ready to transform your laptop experience? Visit [zovo.one](https://zovo.one) for more browser optimization tools, productivity extensions, and resources to get the most out of your technology.
 

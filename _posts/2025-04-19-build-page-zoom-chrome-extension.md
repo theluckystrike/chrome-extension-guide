@@ -6,7 +6,7 @@ date: 2025-04-19
 categories: [Chrome-Extensions, Tutorials]
 tags: [zoom, accessibility, chrome-extension]
 keywords: "chrome extension zoom, page zoom chrome extension, custom zoom level chrome, zoom per website chrome, build zoom extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-page-zoom-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/19/build-page-zoom-chrome-extension/"
 ---
 
 # Build a Page Zoom Chrome Extension: Custom Zoom Levels Per Website
@@ -615,4 +615,4 @@ Ready to take your extension to the next level? Consider:
 3. **Implementing zoom animations** - Smooth transitions between zoom levels
 4. **Adding zoom history** - Quick access to recently used zoom levels
 
-Explore more Chrome extension tutorials in our comprehensive guide to [Chrome Extension Development](/chrome-extension-guide/chrome-extension-development-2025-complete-beginners-guide/).
+Explore more Chrome extension tutorials in our comprehensive guide to [Chrome Extension Development](/chrome-extension-development-2025-complete-beginners-guide/).

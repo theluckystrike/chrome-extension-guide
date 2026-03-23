@@ -6,7 +6,7 @@ date: 2025-05-06
 categories: [Chrome-Extensions, Tutorials]
 tags: [converter, utilities, chrome-extension]
 keywords: "chrome extension unit converter, convert units chrome, measurement converter extension, build converter chrome, unit conversion chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/06/build-unit-converter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/06/build-unit-converter-chrome-extension/"
 ---
 
 # Build a Unit Converter Chrome Extension: Convert Measurements on Any Page

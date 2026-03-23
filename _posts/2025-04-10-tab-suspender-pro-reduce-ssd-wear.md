@@ -5,7 +5,7 @@ description: "Learn how Tab Suspender Pro reduces SSD wear by minimizing Chrome 
 date: 2025-04-10
 categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, ssd, hardware]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/10/tab-suspender-pro-reduce-ssd-wear/"
+canonical_url: "https://bestchromeextensions.com/2025/04/10/tab-suspender-pro-reduce-ssd-wear/"
 ---
 
 # Tab Suspender Pro Reduces SSD Wear: How Tab Suspension Extends Drive Life

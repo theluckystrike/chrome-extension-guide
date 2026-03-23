@@ -6,7 +6,7 @@ date: 2025-04-02
 categories: [Chrome-Extensions, Architecture]
 tags: [monorepo, architecture, chrome-extension]
 keywords: "chrome extension monorepo, monorepo chrome extension, turborepo chrome extension, chrome extension workspace, manage multiple extensions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/02/chrome-extension-monorepo-setup-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/04/02/chrome-extension-monorepo-setup-guide/"
 ---
 
 # Chrome Extension Monorepo Setup: Manage Multiple Extensions in One Repo

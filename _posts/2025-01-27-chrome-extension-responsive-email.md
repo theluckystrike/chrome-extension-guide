@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "email preview extension, responsive email chrome, email tester, build email preview chrome extension, chrome extension email testing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-responsive-email/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-extension-responsive-email/"
 ---
 
 # How to Build a Responsive Email Preview Chrome Extension

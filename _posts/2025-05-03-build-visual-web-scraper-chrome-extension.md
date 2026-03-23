@@ -6,7 +6,7 @@ date: 2025-05-03
 categories: [Chrome-Extensions, Tutorials]
 tags: [web-scraper, visual, chrome-extension]
 keywords: "visual web scraper chrome, point click scraper extension, no code web scraper chrome, chrome extension visual scraping, easy web scraper extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/03/build-visual-web-scraper-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/03/build-visual-web-scraper-chrome-extension/"
 ---
 
 # Build a Visual Web Scraper Chrome Extension: Point-and-Click Data Extraction

@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "keyboard navigation extension, keyboard shortcuts ui, accessible navigation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-keyboard-navigation/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-keyboard-navigation/"
 ---
 
 # Mastering Keyboard Navigation in Chrome Extensions: A Complete Guide

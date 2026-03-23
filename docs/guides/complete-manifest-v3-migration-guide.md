@@ -2,7 +2,7 @@
 layout: default
 title: "The Complete Manifest V3 Migration Guide"
 description: "Everything you need to migrate a Chrome extension from Manifest V2 to Manifest V3. Written by a developer who migrated 20 production extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/complete-manifest-v3-migration-guide/"
+canonical_url: "https://bestchromeextensions.com/guides/complete-manifest-v3-migration-guide/"
 ---
 
 # The Complete Manifest V3 Migration Guide
@@ -197,7 +197,7 @@ The same host permission separation applies to optional permissions.
 
 #### Reference
 
-For complete field documentation, see [Manifest V3 Fields](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/guides/manifest-v3-fields.md). This reference provides detailed information on every field available in the manifest, including new fields introduced in MV3.
+For complete field documentation, see [Manifest V3 Fields](https://github.com/theluckystrike/blob/main/docs/guides/manifest-v3-fields.md). This reference provides detailed information on every field available in the manifest, including new fields introduced in MV3.
 
 ---
 
@@ -389,7 +389,7 @@ The service worker lifecycle includes several events you should understand:
 
 #### Reference
 
-For more details, see [Service Workers](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/service-workers.md) and [Service Worker Tips](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/service-worker-tips.md). These guides provide additional patterns and techniques for working with service workers effectively.
+For more details, see [Service Workers](https://github.com/theluckystrike/blob/main/docs/mv3/service-workers.md) and [Service Worker Tips](https://github.com/theluckystrike/blob/main/docs/mv3/service-worker-tips.md). These guides provide additional patterns and techniques for working with service workers effectively.
 
 ---
 
@@ -590,7 +590,7 @@ For typed rule building, consider [chrome-declarative-net](https://github.com/th
 
 #### Reference
 
-See [Declarative Net Request](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/declarative-net-request.md). This guide provides comprehensive information on the declarativeNetRequest API including advanced rule patterns, performance considerations, and troubleshooting.
+See [Declarative Net Request](https://github.com/theluckystrike/blob/main/docs/mv3/declarative-net-request.md). This guide provides comprehensive information on the declarativeNetRequest API including advanced rule patterns, performance considerations, and troubleshooting.
 
 ---
 
@@ -703,7 +703,7 @@ For generating valid CSP, use [extension-csp-builder](https://github.com/theluck
 
 #### Reference
 
-See [Content Security Policy](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/content-security-policy.md). This guide covers CSP in depth, including common configurations, troubleshooting, and advanced patterns.
+See [Content Security Policy](https://github.com/theluckystrike/blob/main/docs/mv3/content-security-policy.md). This guide covers CSP in depth, including common configurations, troubleshooting, and advanced patterns.
 
 ---
 
@@ -798,7 +798,7 @@ await chrome.scripting.executeScript({
 
 #### Reference
 
-See [Dynamic Content Scripts](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/dynamic-content-scripts.md). This guide covers all aspects of dynamic content script management in MV3.
+See [Dynamic Content Scripts](https://github.com/theluckystrike/blob/main/docs/mv3/dynamic-content-scripts.md). This guide covers all aspects of dynamic content script management in MV3.
 
 ---
 
@@ -890,7 +890,7 @@ For type-safe promise-based messaging, use [webext-messaging](https://github.com
 
 #### Reference
 
-See [Promise-Based APIs](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/promise-based-apis.md). This guide covers the promise-based API patterns in detail, including migration strategies and best practices.
+See [Promise-Based APIs](https://github.com/theluckystrike/blob/main/docs/mv3/promise-based-apis.md). This guide covers the promise-based API patterns in detail, including migration strategies and best practices.
 
 ---
 
@@ -996,7 +996,7 @@ Offscreen documents have their own lifecycle considerations:
 
 #### Reference
 
-See [Offscreen Documents](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/offscreen-documents.md). This guide covers advanced patterns for offscreen document management.
+See [Offscreen Documents](https://github.com/theluckystrike/blob/main/docs/mv3/offscreen-documents.md). This guide covers advanced patterns for offscreen document management.
 
 ---
 
@@ -1072,7 +1072,7 @@ Test your migrated extension in various environments:
 
 Reference
 
-See [Testing MV3 Extensions](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/testing-mv3-extensions.md). This comprehensive guide covers all aspects of testing MV3 extensions.
+See [Testing MV3 Extensions](https://github.com/theluckystrike/blob/main/docs/mv3/testing-mv3-extensions.md). This comprehensive guide covers all aspects of testing MV3 extensions.
 
 ---
 
@@ -1101,7 +1101,7 @@ Use this numbered checklist to track your migration progress. Each item represen
 19. Verify Chrome Web Store compatibility
 20. Submit for review if publishing to Chrome Web Store
 
-For the complete version, see [Migration Checklist](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/mv3/migration-checklist.md). This detailed checklist provides additional guidance for each item.
+For the complete version, see [Migration Checklist](https://github.com/theluckystrike/blob/main/docs/mv3/migration-checklist.md). This detailed checklist provides additional guidance for each item.
 
 ---
 

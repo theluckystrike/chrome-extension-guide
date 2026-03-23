@@ -688,15 +688,15 @@ Building Chrome extensions with Vue 3 combines the best of modern frontend devel
 
 The patterns covered in this guide—from popup development with composables to content script mounting with Shadow DOM—provide a foundation for building sophisticated extensions. Remember to optimize your builds for production, keep your bundle size small, and only request the permissions you truly need.
 
-For more guidance on extension development patterns and best practices, explore the [chrome-extension-guide docs](/chrome-extension-guide/docs/). When you are ready to monetize your extension, the [extension-monetization-playbook](/chrome-extension-guide/docs/extension-monetization-playbook/) provides strategies for building a sustainable extension business.
+For more guidance on extension development patterns and best practices, explore the [chrome-extension-guide docs](/docs/). When you are ready to monetize your extension, the [extension-monetization-playbook](/docs/extension-monetization-playbook/) provides strategies for building a sustainable extension business.
 
 ---
 
 **Related Resources:**
 
 - [chrome-extension-vue-starter](https://github.com/theluckystrike/chrome-extension-vue-starter) — Production-ready Vue 3 extension template
-- [Chrome Extension Development Guide](/chrome-extension-guide/) — Comprehensive documentation
-- [Extension Monetization Playbook](/chrome-extension-guide/docs/extension-monetization-playbook/) — Monetization strategies
+- [Chrome Extension Development Guide](/) — Comprehensive documentation
+- [Extension Monetization Playbook](/docs/extension-monetization-playbook/) — Monetization strategies
 
 ---
 

@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "keyboard macro extension, macro recorder chrome, automation shortcuts extension, chrome macro automation, chrome extension automation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/build-keyboard-macro-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/build-keyboard-macro-chrome-extension/"
 ---
 
 # Build a Keyboard Macro Chrome Extension: Complete 2025 Guide

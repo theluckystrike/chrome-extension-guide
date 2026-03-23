@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension User Onboarding — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/user-onboarding/"
+canonical_url: "https://bestchromeextensions.com/guides/user-onboarding/"
 ---
 # User Onboarding Guide
 
@@ -364,7 +364,7 @@ For more information on related topics, consult these additional guides:
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://theluckystrike.github.io/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
 
 ---
 

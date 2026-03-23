@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Accessibility Testing — Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-a11y-testing/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-a11y-testing/"
 ---
 # Accessibility Testing for Chrome Extensions
 

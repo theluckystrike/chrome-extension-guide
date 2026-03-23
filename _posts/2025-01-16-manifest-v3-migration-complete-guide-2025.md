@@ -6,7 +6,7 @@ date: 2025-01-16
 categories: [Chrome-Extensions, Development]
 tags: [manifest-v3, migration, chrome-extension-development, manifest v3 migration guide, mv2 to mv3 migration, manifest v3 service worker]
 keywords: "manifest v3 migration guide, chrome extension manifest v3, mv2 to mv3 migration, manifest v3 service worker, manifest v3 changes"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/01/16/manifest-v3-migration-complete-guide-2025/"
 ---
 
 # Manifest V3 Migration Guide: Update Your Chrome Extension in 2025
@@ -460,13 +460,13 @@ The Chrome extension ecosystem continues to evolve, and Manifest V3 represents a
 
 ## Related Articles
 
-- [Manifest V3 Service Worker Patterns: Anti-Patterns to Avoid](/chrome-extension-guide/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/) - Learn common pitfalls and best practices for MV3 service workers.
-- [Declarative Net Request API Complete Tutorial](/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/) - Master the declarativeNetRequest API for network request modification.
-- [Chrome Extension Web Store Publishing Checklist 2025](/chrome-extension-guide/2025/02/28/chrome-web-store-publishing-checklist-2025/) - Ensure your extension meets all publishing requirements.
+- [Manifest V3 Service Worker Patterns: Anti-Patterns to Avoid](/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/) - Learn common pitfalls and best practices for MV3 service workers.
+- [Declarative Net Request API Complete Tutorial](/2025/01/18/declarative-net-request-api-complete-tutorial/) - Master the declarativeNetRequest API for network request modification.
+- [Chrome Extension Web Store Publishing Checklist 2025](/2025/02/28/chrome-web-store-publishing-checklist-2025/) - Ensure your extension meets all publishing requirements.
 
 ---
 
-*Ready to publish your migrated extension? Check out our comprehensive guide to [publishing Chrome extensions to the Web Store](/chrome-extension-guide/2025/01/17/publish-chrome-extension-web-store-2025-guide/) for step-by-step instructions.*
+*Ready to publish your migrated extension? Check out our comprehensive guide to [publishing Chrome extensions to the Web Store](/2025/01/17/publish-chrome-extension-web-store-2025-guide/) for step-by-step instructions.*
 
 ---
 ## Turn Your Extension Into a Business
@@ -481,4 +481,4 @@ Ready to monetize? The Extension Monetization Playbook covers freemium models, S
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

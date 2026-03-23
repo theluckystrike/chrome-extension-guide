@@ -6,7 +6,7 @@ date: 2025-04-14
 categories: [Chrome-Extensions, Productivity]
 tags: [pomodoro, timer, chrome-extension]
 keywords: "chrome extension pomodoro, pomodoro timer chrome, build timer extension, focus timer chrome extension, pomodoro technique chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/14/build-pomodoro-timer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/14/build-pomodoro-timer-chrome-extension/"
 ---
 
 # Build a Pomodoro Timer Chrome Extension: Focus Intervals in Your Browser

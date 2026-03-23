@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, Development, Tutorials]
 tags: [chrome-extension, side-panel, manifest-v3, tutorial, development]
 keywords: "chrome side panel api, extension sidepanel tutorial, chrome extension side panel, manifest v3 side panel, chrome sidepanel api guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-side-panel-api-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-side-panel-api-tutorial/"
 ---
 
 # Chrome Side Panel API Tutorial for Extension Developers
@@ -595,8 +595,8 @@ As you continue developing your extension, remember to stay current with Chrome'
 
 ## Related Articles
 
-- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Design engaging and efficient popup interfaces
-- [Side Panel API Tutorial](/chrome-extension-guide/2025/02/23/chrome-extension-side-panel-api-tutorial/) - Advanced side panel implementation techniques
-- [Chrome Extension Options Page Design](/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/) - Build effective options and settings pages
+- [Chrome Extension Popup Design Best Practices](/2025/01/18/chrome-extension-popup-design-best-practices/) - Design engaging and efficient popup interfaces
+- [Side Panel API Tutorial](/2025/02/23/chrome-extension-side-panel-api-tutorial/) - Advanced side panel implementation techniques
+- [Chrome Extension Options Page Design](/2025/01/18/chrome-extension-options-page-design-guide/) - Build effective options and settings pages
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

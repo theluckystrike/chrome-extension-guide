@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "p5 js extension, creative coding chrome, generative art extension, p5.js chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/p5-js-creative-coding-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/p5-js-creative-coding-chrome-extension/"
 ---
 
 # p5.js Creative Coding in Chrome Extensions: Complete Guide
@@ -352,7 +352,7 @@ To continue your journey with p5.js and Chrome extensions, explore these valuabl
 Happy creative coding!---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

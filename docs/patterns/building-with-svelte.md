@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Building With Svelte — Best Practices"
 description: "Build Chrome extensions with Svelte framework."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/building-with-svelte/"
+canonical_url: "https://bestchromeextensions.com/patterns/building-with-svelte/"
 ---
 
 # Building Chrome Extensions with Svelte

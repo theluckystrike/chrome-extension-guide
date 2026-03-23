@@ -6,7 +6,7 @@ date: 2025-03-25
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, indicators, ui-features]
 keywords: "tab suspender pro indicator, suspended tab icon, tab suspender visual indicator, chrome tab suspended icon, tab state indicator extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/25/tab-suspender-pro-suspended-tab-indicator/"
+canonical_url: "https://bestchromeextensions.com/2025/03/25/tab-suspender-pro-suspended-tab-indicator/"
 ---
 
 # Tab Suspender Pro Suspended Tab Indicators: Know Your Tab State at a Glance

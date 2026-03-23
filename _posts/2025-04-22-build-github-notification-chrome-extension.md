@@ -6,7 +6,7 @@ date: 2025-04-22
 categories: [Chrome-Extensions, Tutorials]
 tags: [github, notifications, chrome-extension]
 keywords: "chrome extension github notifications, github notification extension, build github chrome extension, github alert chrome, pr notification extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/22/build-github-notification-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/22/build-github-notification-chrome-extension/"
 ---
 
 # Build a GitHub Notification Chrome Extension: Never Miss a PR or Issue

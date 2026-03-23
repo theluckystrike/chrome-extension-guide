@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "chrome extension design patterns, observer pattern extension, factory pattern chrome, chrome extension architecture, design patterns for chrome extensions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-design-patterns/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/chrome-extension-design-patterns/"
 ---
 
 # Design Patterns for Chrome Extension Development: A Comprehensive Guide

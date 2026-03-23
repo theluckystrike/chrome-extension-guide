@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Analytics Privacy — Best Practices"
 description: "Track extension analytics while maintaining user privacy with privacy-conscious telemetry patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-analytics-privacy/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-analytics-privacy/"
 ---
 
 # Privacy-First Analytics Patterns for Chrome Extensions

@@ -5,7 +5,7 @@ description: ": : Access to API — browse, search, and delete browsing history 
 permalink: /permissions/history/
 category: permissions
 order: 21
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/history/"
+canonical_url: "https://bestchromeextensions.com/permissions/history/"
 ---
 
 # history Permission — Chrome Extension Reference

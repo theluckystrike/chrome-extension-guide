@@ -3,7 +3,7 @@
 title: How to Fix Slow Chrome with Too Many Tabs — Tab Suspender Guide
 description: Is Chrome running slow with too many tabs? Learn how to fix slow Chrome with too many tabs using Tab Suspender Pro. Complete guide with benchmarks, tips, and solutions for 2026.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/how-fix-slow-chrome-too-many-tabs/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/how-fix-slow-chrome-too-many-tabs/"
 
 ---
 

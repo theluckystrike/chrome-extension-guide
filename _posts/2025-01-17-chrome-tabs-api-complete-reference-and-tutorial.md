@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [tutorials, chrome-extensions, api-reference]
 tags: [chrome tabs api, manage tabs chrome extension, tab manipulation api, chrome extension api, tabs api tutorial]
 keywords: "chrome tabs api, manage tabs chrome extension, tab manipulation api, chrome tabs api reference, chrome extension tabs tutorial, chrome.tabs api"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-tabs-api-complete-reference-and-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-tabs-api-complete-reference-and-tutorial/"
 ---
 
 # Chrome Tabs API Complete Reference and Tutorial
@@ -621,8 +621,8 @@ Start building your tab management extension today, and explore the full potenti
 
 ## Related Articles
 
-- [How to Manage 100+ Tabs Without Crashing](/chrome-extension-guide/2025/01/17/how-to-manage-100-tabs-chrome-without-crashing/) - Strategies for handling large numbers of tabs
-- [Tab Management Productivity Ultimate Guide](/chrome-extension-guide/2025/01/18/tab-management-productivity-ultimate-guide-2025/) - Complete guide to tab productivity
-- [Building a Tab Manager Chrome Extension](/chrome-extension-guide/2025/01/22/building-tab-manager-chrome-extension-tutorial/) - Step-by-step tab manager tutorial
+- [How to Manage 100+ Tabs Without Crashing](/2025/01/17/how-to-manage-100-tabs-chrome-without-crashing/) - Strategies for handling large numbers of tabs
+- [Tab Management Productivity Ultimate Guide](/2025/01/18/tab-management-productivity-ultimate-guide-2025/) - Complete guide to tab productivity
+- [Building a Tab Manager Chrome Extension](/2025/01/22/building-tab-manager-chrome-extension-tutorial/) - Step-by-step tab manager tutorial
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

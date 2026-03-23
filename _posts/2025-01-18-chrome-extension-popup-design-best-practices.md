@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, ui, tutorial]
 keywords: "chrome extension popup design, popup ui patterns, beautiful extension popup, chrome extension ui design, extension popup best practices, manifest v3 popup, popup design patterns"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-popup-design-best-practices/"
 ---
 
 # Chrome Extension Popup UI Design Best Practices: A Complete Guide

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "jira chrome extension, jira issue creator, atlassian extension, jira integration chrome extension, create jira issues from browser"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-jira-integration-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-jira-integration-chrome-extension/"
 ---
 
 # Build a Jira Integration Chrome Extension: Complete 2025 Guide

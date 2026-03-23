@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Email Tracker — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-email-tracker/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-email-tracker/"
 ---
 # Build an Email Productivity Tracker
 

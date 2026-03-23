@@ -2,7 +2,7 @@
 layout: default
 title: "Advanced Chrome Extension Messaging Patterns — Developer Guide"
 description: "Master advanced Chrome extension messaging patterns including port-based connections, typed protocols, error handling, and performance optimization for production extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/advanced-messaging-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/advanced-messaging-patterns/"
 ---
 # Advanced Messaging Patterns in Chrome Extensions
 
@@ -915,5 +915,5 @@ As Chrome extension capabilities continue to evolve—particularly with newoffsc
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

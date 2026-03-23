@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "zod extension, schema validation chrome, type-safe extension, chrome extension validation, zod chrome extension, type-safe chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-zod-validation/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-zod-validation/"
 ---
 
 # Zod Schema Validation in Chrome Extensions: Complete Type-Safe Guide 2025

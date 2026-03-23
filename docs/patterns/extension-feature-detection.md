@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Feature Detection — Best Practices"
 description: "Detect browser and API capabilities at runtime with feature detection patterns for cross-browser extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-feature-detection/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-detection/"
 ---
 
 # Extension Feature Detection Patterns

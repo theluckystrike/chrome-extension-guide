@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Permissions Cheatsheet — All Permissions at a Glance"
 description: "Complete reference for Chrome Extension permissions. Quick lookup table for all available permissions, their use cases, and security considerations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/permissions-cheatsheet/"
+canonical_url: "https://bestchromeextensions.com/guides/permissions-cheatsheet/"
 ---
 
 # Chrome Extension Permissions Cheatsheet
@@ -199,7 +199,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

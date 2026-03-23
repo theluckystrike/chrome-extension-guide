@@ -6,7 +6,7 @@ date: 2025-03-18
 categories: [Chrome-Extensions, Development]
 tags: [concurrency, patterns, chrome-extension]
 keywords: "chrome extension race condition, mutex chrome extension, chrome extension concurrency, async chrome extension patterns, chrome extension locking"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/18/chrome-extension-race-conditions-mutex-patterns/"
+canonical_url: "https://bestchromeextensions.com/2025/03/18/chrome-extension-race-conditions-mutex-patterns/"
 ---
 
 # Handling Race Conditions in Chrome Extensions: Mutex and Locking Patterns

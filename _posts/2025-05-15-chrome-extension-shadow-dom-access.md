@@ -6,7 +6,7 @@ date: 2025-05-15
 categories: [Chrome-Extensions, Advanced]
 tags: [shadow-dom, content-scripts, chrome-extension]
 keywords: "chrome extension shadow dom, access shadow dom extension, pierce shadow dom chrome, shadow root chrome extension, chrome extension closed shadow dom"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/15/chrome-extension-shadow-dom-access/"
+canonical_url: "https://bestchromeextensions.com/2025/05/15/chrome-extension-shadow-dom-access/"
 ---
 
 # Accessing Shadow DOM from Chrome Extensions: Content Script Techniques

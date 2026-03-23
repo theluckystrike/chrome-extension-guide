@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, guide]
 keywords: "chrome context menu extension, right click menu chrome extension, chrome extension context menus api, manifest v3 context menu, chrome contextmenu api tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/context-menus-api-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/context-menus-api-tutorial/"
 ---
 
 # Chrome Extension Context Menus API Tutorial
@@ -664,8 +664,8 @@ As you continue developing extensions, remember to test thoroughly across differ
 
 ## Related Articles
 
-- [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand which permissions your extension needs and how to request them properly
-- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/2025/01/18/chrome-extension-popup-design-best-practices/) - Learn how to design effective popup interfaces for your extensions
-- [Chrome Extension OAuth2 Authentication Guide](/chrome-extension-guide/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Implement secure authentication in your Chrome extensions
+- [Chrome Extension Permissions Explained](/2025/01/18/chrome-extension-permissions-explained/) - Understand which permissions your extension needs and how to request them properly
+- [Chrome Extension Popup Design Best Practices](/2025/01/18/chrome-extension-popup-design-best-practices/) - Learn how to design effective popup interfaces for your extensions
+- [Chrome Extension OAuth2 Authentication Guide](/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Implement secure authentication in your Chrome extensions
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

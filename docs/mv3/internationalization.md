@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Internationalization — Manifest V3 Guide"
 description: "Implement internationalization in Manifest V3 extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/mv3/internationalization/"
+canonical_url: "https://bestchromeextensions.com/mv3/internationalization/"
 ---
 
 # Internationalization in Chrome Extensions (MV3)

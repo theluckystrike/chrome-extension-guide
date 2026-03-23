@@ -6,7 +6,7 @@ date: 2025-04-09
 categories: [Chrome-Extensions, Tutorials]
 tags: [todo, productivity, chrome-extension]
 keywords: "chrome extension todo list, build todo extension, task manager chrome extension, chrome extension task list, simple todo chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/09/build-todo-list-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/09/build-todo-list-chrome-extension/"
 ---
 
 # Build a Todo List Chrome Extension: Productivity Right in Your Browser

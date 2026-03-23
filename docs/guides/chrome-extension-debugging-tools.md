@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Debugging Tools — Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-debugging-tools/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-debugging-tools/"
 ---
 # Chrome Extension Debugging Tools
 

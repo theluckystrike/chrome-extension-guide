@@ -6,7 +6,7 @@ date: 2025-03-01
 categories: [Chrome-Extensions, Security]
 tags: [permissions, security, chrome-extension, manifest-v3]
 keywords: "chrome extension permissions, chrome extension required permissions, optional permissions chrome extension, chrome extension permission warnings, manifest v3 permissions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/01/chrome-extension-permissions-explained/"
+canonical_url: "https://bestchromeextensions.com/2025/03/01/chrome-extension-permissions-explained/"
 ---
 
 # Chrome Extension Permissions Explained: What Every Developer Needs to Know

@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "port chrome extension safari, safari web extension, xcrun safari extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/porting-chrome-extensions-to-safari/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/porting-chrome-extensions-to-safari/"
 ---
 
 # Porting Chrome Extensions to Safari: Complete 2025 Guide

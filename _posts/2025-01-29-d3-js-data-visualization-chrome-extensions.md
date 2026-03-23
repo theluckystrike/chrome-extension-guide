@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "d3 chrome extension, data visualization extension, chart extension, d3.js chrome, interactive charts chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/d3-js-data-visualization-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/d3-js-data-visualization-chrome-extensions/"
 ---
 
 # D3.js Data Visualization in Chrome Extensions: Complete Guide

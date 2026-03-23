@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "screen sharing chrome extension, webrtc screen capture, share screen extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-screen-sharing-extension-with-webrtc/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/build-screen-sharing-extension-with-webrtc/"
 ---
 
 # Build Screen Sharing Extension with WebRTC: Complete Guide

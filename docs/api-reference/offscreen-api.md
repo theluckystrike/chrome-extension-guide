@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Offscreen API Complete Reference"
 description: "The Chrome Offscreen API creates offscreen documents for DOM access in Manifest V3, enabling operations that required background pages in MV2 like DOM scraping and canvas manipulation."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/offscreen-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/offscreen-api/"
 ---
 
 # chrome.offscreen API Reference

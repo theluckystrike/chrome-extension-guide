@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "pdf js extension, pdf viewer chrome, document reader extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-pdfjs/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/chrome-extension-pdfjs/"
 ---
 
 # PDF.js Document Viewer in Chrome Extensions: Complete Implementation Guide

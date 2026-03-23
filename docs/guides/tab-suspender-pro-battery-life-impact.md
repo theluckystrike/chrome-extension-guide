@@ -3,7 +3,7 @@
 title: "How Tab Suspension Extends Laptop Battery Life by 2+ Hours"
 description: "Discover how tab suspension technology can extend your laptop battery life by 2+ hours. Learn about CPU wake-ups, power profiling methodology, and real benchmarks comparing suspend vs discard."
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/tab-suspender-pro-battery-life-impact/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-battery-life-impact/"
 
 ---
 
@@ -475,13 +475,13 @@ Whether you're a road warrior working from coffee shops, a student in back-to-ba
 
 Ready to learn more about optimizing your Chrome experience? Explore these related guides:
 
-- [Automatic Tab Suspension Setup Guide](/chrome-extension-guide/docs/guides/automatic-tab-suspension-guide/)
-- [Tab Suspender Pro: Memory Reduction Guide](/chrome-extension-guide/docs/guides/tab-suspender-pro-reduce-memory/)
-- [Fix Slow Chrome: Complete Guide](/chrome-extension-guide/docs/guides/fix-slow-chrome-too-many-tabs/)
-- [Chrome Memory Optimization](/chrome-extension-guide/docs/guides/chrome-memory-optimization-developer-guide/)
+- [Automatic Tab Suspension Setup Guide](/docs/guides/automatic-tab-suspension-guide/)
+- [Tab Suspender Pro: Memory Reduction Guide](/docs/guides/tab-suspender-pro-reduce-memory/)
+- [Fix Slow Chrome: Complete Guide](/docs/guides/fix-slow-chrome-too-many-tabs/)
+- [Chrome Memory Optimization](/docs/guides/chrome-memory-optimization-developer-guide/)
 
 Visit [zovo.one](https://zovo.one) for more browser optimization tools, extensions, and productivity resources.
 
-For developers building tab management extensions, check out the [Chrome Extension Guide](/chrome-extension-guide/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
+For developers building tab management extensions, check out the [Chrome Extension Guide](/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
 
 ---

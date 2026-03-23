@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Vite Setup — Fast Development Environment"
 description: "Learn how to set up Vite for Chrome extensions with this developer guide covering configuration, HMR, and rapid development workflows."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/vite-setup/"
+canonical_url: "https://bestchromeextensions.com/guides/vite-setup/"
 ---
 # Chrome Extension Vite Setup — Fast Development Environment
 

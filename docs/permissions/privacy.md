@@ -5,7 +5,7 @@ description: "Access to API for reading/controlling Chrome's privacy settings. '
 permalink: /permissions/privacy/
 category: permissions
 order: 31
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/privacy/"
+canonical_url: "https://bestchromeextensions.com/permissions/privacy/"
 ---
 
 # privacy Permission

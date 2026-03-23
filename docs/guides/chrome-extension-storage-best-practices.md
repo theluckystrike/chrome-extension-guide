@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Storage Best Practices — Complete Developer Guide"
 description: "A comprehensive developer guide covering Chrome extension storage best practices including chrome.storage API areas, quota management, structured storage patterns, batch operations, encryption, and performance optimization."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-storage-best-practices/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-storage-best-practices/"
 ---
 
 # Chrome Extension Storage Best Practices

@@ -6,7 +6,7 @@ date: 2025-01-16
 categories: [Chrome-Extensions, Testing]
 tags: [testing, automation, puppeteer, chrome-extension]
 keywords: "chrome extension testing, test chrome extension, extension automation testing, puppeteer chrome extension test, chrome extension unit testing, chrome extension integration testing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/chrome-extension-testing-automation-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/16/chrome-extension-testing-automation-guide/"
 ---
 
 # Chrome Extension Testing & Automation: Complete Guide for 2025
@@ -627,8 +627,8 @@ Start implementing these testing practices today, and you will see the differenc
 
 ## Related Articles
 
-- [Chrome Extension Development 2025: Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions from scratch.
-- [Chrome Extension Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for better performance and user experience.
-- [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Secure your extension against common vulnerabilities.
+- [Chrome Extension Development 2025: Complete Beginner's Guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions from scratch.
+- [Chrome Extension Performance Optimization Guide](/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for better performance and user experience.
+- [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Secure your extension against common vulnerabilities.
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

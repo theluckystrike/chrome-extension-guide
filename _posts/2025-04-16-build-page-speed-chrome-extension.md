@@ -6,7 +6,7 @@ date: 2025-04-16
 categories: [Chrome-Extensions, Performance]
 tags: [page-speed, lighthouse, chrome-extension]
 keywords: "chrome extension page speed, build performance extension, lighthouse chrome extension, page speed analyzer, web vitals chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/16/build-page-speed-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/16/build-page-speed-chrome-extension/"
 ---
 
 # Build a Page Speed Analyzer Chrome Extension: Lighthouse Metrics at a Glance

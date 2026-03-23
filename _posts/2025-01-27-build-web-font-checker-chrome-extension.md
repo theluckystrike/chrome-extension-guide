@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "webfont checker extension, font loading chrome, typography extension, chrome extension font checker, web font analyzer extension, detect web fonts chrome extension, font loading performance extension, typography inspector chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-web-font-checker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-web-font-checker-chrome-extension/"
 ---
 
 # Build a Web Font Checker Chrome Extension: Complete Developer's Guide

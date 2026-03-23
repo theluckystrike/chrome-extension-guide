@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "react query chrome extension, data fetching extension, tanstack query extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/react-query-chrome-extension-data-fetching-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/react-query-chrome-extension-data-fetching-guide/"
 ---
 
 # React Query in Chrome Extensions: Complete Data Fetching Guide for 2025
@@ -151,7 +151,7 @@ Start implementing React Query in your Chrome extensions today, and experience t
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

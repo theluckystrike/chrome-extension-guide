@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chrome extension supabase, supabase auth extension, serverless extension backend, chrome extension backend tutorial, supabase chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-supabase-backend-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/chrome-extension-supabase-backend-tutorial/"
 ---
 
 # Chrome Extension Supabase Backend Tutorial: Build a Serverless Extension Backend

@@ -29,7 +29,7 @@ The problem extends beyond simple memory usage. Background tabs continue executi
 
 Tab suspender extensions address these issues by automatically detecting when you have not interacted with a tab for a configurable period and then either freezing the tab (stopping its execution while keeping it in memory) or completely suspending it (unloading the tab's content entirely from memory). When you return to a suspended tab, it is quickly restored to its previous state, including your scroll position and any form data you may have entered.
 
-For a deeper understanding of how Chrome manages memory and how tab suspension fits into a broader memory optimization strategy, read our [Chrome memory optimization developer guide](/chrome-extension-guide/docs/guides/chrome-memory-optimization-developer-guide/).
+For a deeper understanding of how Chrome manages memory and how tab suspension fits into a broader memory optimization strategy, read our [Chrome memory optimization developer guide](/docs/guides/chrome-memory-optimization-developer-guide/).
 
 ---
 
@@ -131,7 +131,7 @@ Beyond tab suspension, Workona offers features like tab search across all worksp
 
 Workona operates on a freemium model, with a free tier that includes basic workspace and suspension features. The paid tiers add advanced features like unlimited workspaces, enhanced search, and priority support. For teams, Workona offers collaborative features that allow sharing workspaces with colleagues.
 
-For developers interested in building similar freemium extension models, our [extension monetization guide](/chrome-extension-guide/docs/guides/extension-monetization/) provides detailed strategies for implementing subscription and freemium models effectively.
+For developers interested in building similar freemium extension models, our [extension monetization guide](/docs/guides/extension-monetization/) provides detailed strategies for implementing subscription and freemium models effectively.
 
 ---
 
@@ -199,7 +199,7 @@ Tab Suspender Pro explicitly states that all data stays on your device. The Marv
 
 If maximum privacy is your priority, consider these approaches. First, choose extensions with minimal permissions—Auto Tab Discard is a good option here. Second, prefer open-source extensions where you can verify the code does what it claims. Third, regularly audit your extensions and remove any you no longer use. Fourth, review the privacy policies of any extension before installing it.
 
-For more guidance on privacy considerations for Chrome extensions, see our comprehensive guide to [Chrome extension data privacy](/chrome-extension-guide/docs/guides/chrome-extension-data-privacy/).
+For more guidance on privacy considerations for Chrome extensions, see our comprehensive guide to [Chrome extension data privacy](/docs/guides/chrome-extension-data-privacy/).
 
 ---
 
@@ -231,7 +231,7 @@ Tab suspender extensions have become essential tools for Chrome users who want t
 
 Tab Suspender Pro earns our top recommendation for most users in 2025 due to its comprehensive feature set, excellent state preservation, and thoughtful design. However, each extension discussed in this guide has its strengths, and the right choice depends on your specific needs, privacy requirements, and workflow.
 
-Remember that tab suspension is just one part of a comprehensive browser optimization strategy. Combine your tab suspender with regular tab audits, thoughtful workspace organization, and the other techniques outlined in our [Chrome memory optimization guide](/chrome-extension-guide/docs/guides/chrome-memory-optimization-developer-guide/) for the best results.
+Remember that tab suspension is just one part of a comprehensive browser optimization strategy. Combine your tab suspender with regular tab audits, thoughtful workspace organization, and the other techniques outlined in our [Chrome memory optimization guide](/docs/guides/chrome-memory-optimization-developer-guide/) for the best results.
 
 ---
 

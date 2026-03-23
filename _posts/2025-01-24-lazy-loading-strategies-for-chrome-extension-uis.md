@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Performance]
 tags: [chrome-extension, optimization]
 keywords: "lazy loading extension, dynamic import chrome extension, code splitting extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/lazy-loading-strategies-for-chrome-extension-uis/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/lazy-loading-strategies-for-chrome-extension-uis/"
 ---
 
 # Lazy Loading Strategies for Chrome Extension UIs: Complete Guide

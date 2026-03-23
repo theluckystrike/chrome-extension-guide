@@ -6,7 +6,7 @@ date: 2025-03-09
 categories: [Chrome-Extensions, Frameworks]
 tags: [angular, chrome-extension, tutorial]
 keywords: "chrome extension angular, angular chrome extension, build extension angular, angular popup chrome, angular chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/09/build-chrome-extension-with-angular/"
+canonical_url: "https://bestchromeextensions.com/2025/03/09/build-chrome-extension-with-angular/"
 ---
 
 # Build a Chrome Extension with Angular: Complete Framework Guide 2025

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Error Handling — Patterns for Robust Error Recovery"
 description: "Comprehensive error handling in Chrome extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/error-handling/"
+canonical_url: "https://bestchromeextensions.com/patterns/error-handling/"
 ---
 
 # Error Handling Patterns

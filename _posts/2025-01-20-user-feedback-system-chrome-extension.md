@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "extension feedback system, user survey chrome extension, in-app feedback extension, chrome extension feedback form, user rating chrome extension, collect feedback chrome extension, chrome extension user feedback, extension review system"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/user-feedback-system-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/user-feedback-system-chrome-extension/"
 ---
 
 # Build a User Feedback System in Your Chrome Extension: Complete Guide

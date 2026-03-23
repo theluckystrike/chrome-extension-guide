@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Storage Sync Strategies — Developer Guide"
 description: "Master Chrome extension storage with sync vs local strategies, quota management, and migration patterns for robust data persistence."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-storage-sync-strategies/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-storage-sync-strategies/"
 ---
 
 # Chrome Storage Sync Strategies
@@ -679,7 +679,7 @@ By following these patterns and strategies, you'll build Chrome extensions with 
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

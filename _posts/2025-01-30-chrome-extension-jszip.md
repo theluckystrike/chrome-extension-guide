@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "jszip extension, zip file chrome, file compression extension, chrome extension zip, jszip chrome extension tutorial, compress files chrome extension, zip file creation extension, file compression library chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/chrome-extension-jszip/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/chrome-extension-jszip/"
 ---
 
 # JSZip File Compression in Chrome Extensions: Complete Implementation Guide

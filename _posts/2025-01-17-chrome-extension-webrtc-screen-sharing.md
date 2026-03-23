@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, webrtc, screen-sharing, tutorial]
 keywords: "chrome extension screen sharing, webrtc chrome extension, screen capture api, chrome screen capture extension, getDisplayMedia, WebRTC screen share"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-webrtc-screen-sharing/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-webrtc-screen-sharing/"
 ---
 
 # Build Screen Sharing with Chrome Extensions and WebRTC
@@ -443,10 +443,10 @@ Start building your screen sharing extension today, and explore the countless po
 
 ## Related Articles
 
-- [WebRTC Video Communication in Chrome Extensions](/chrome-extension-guide/2025/01/21/chrome-extension-webrtc-video/) - Learn how to implement WebRTC video calling features in your extensions
-- [Chrome Extension Screen Capture API](/chrome-extension-guide/2025/03/11/chrome-extension-screen-capture-api/) - Comprehensive guide to capturing screenshots and screen content
-- [WebRTC Data Channel for Chrome Extensions](/chrome-extension-guide/2025/01/22/chrome-extension-webrtc-data-channel/) - Build peer-to-peer data transfer functionality
+- [WebRTC Video Communication in Chrome Extensions](/2025/01/21/chrome-extension-webrtc-video/) - Learn how to implement WebRTC video calling features in your extensions
+- [Chrome Extension Screen Capture API](/2025/03/11/chrome-extension-screen-capture-api/) - Comprehensive guide to capturing screenshots and screen content
+- [WebRTC Data Channel for Chrome Extensions](/2025/01/22/chrome-extension-webrtc-data-channel/) - Build peer-to-peer data transfer functionality
 ---
 
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

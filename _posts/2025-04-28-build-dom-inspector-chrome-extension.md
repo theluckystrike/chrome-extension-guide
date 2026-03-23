@@ -6,7 +6,7 @@ date: 2025-04-28
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [dom, inspector, chrome-extension]
 keywords: "chrome extension dom inspector, dom tree chrome extension, html inspector extension, build element inspector chrome, page structure chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/build-dom-inspector-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/28/build-dom-inspector-chrome-extension/"
 ---
 
 # Build a DOM Inspector Chrome Extension: Explore Page Structure in Real Time

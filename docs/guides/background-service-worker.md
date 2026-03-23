@@ -3,7 +3,7 @@
 title: Chrome Extension Background Service Worker Guide — Complete MV3 Tutorial
 description: Master Chrome extension background service workers in Manifest V3. Learn TypeScript patterns for event handling, messaging, alarms, and building production-ready extensions like Tab Suspender Pro.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/background-service-worker/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/background-service-worker/"
 
 ---
 
@@ -593,7 +593,7 @@ Key takeaways:
 - Handle the service worker lifecycle gracefully
 - Implement proper error handling throughout
 
-For more advanced patterns and the complete reference, explore our [API Documentation](/chrome-extension-guide/docs/api-reference/) and check out how [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn) implements these patterns to manage browser memory effectively.
+For more advanced patterns and the complete reference, explore our [API Documentation](/docs/api-reference/) and check out how [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn) implements these patterns to manage browser memory effectively.
 
 ---
 
@@ -866,7 +866,7 @@ Key takeaways:
 - Debug using Chrome's built-in tools and logging strategies
 - Optimize for minimal wake-ups and efficient data transfer
 
-For more advanced patterns and the complete reference, explore our [API Documentation](/chrome-extension-guide/docs/api-reference/) and check out how [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn) implements these patterns to manage browser memory effectively.
+For more advanced patterns and the complete reference, explore our [API Documentation](/docs/api-reference/) and check out how [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn) implements these patterns to manage browser memory effectively.
 
 ---
 

@@ -2,7 +2,7 @@
 title: Chrome Extension Cross-Browser Development — Build for Chrome, Firefox, Edge, and Safari
 description: Learn how to create cross-browser extensions using WebExtension APIs, browser polyfills, manifest differences, and conditional code for Chrome, Firefox, Edge, and Safari.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/multi-browser-extension/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-extension/"
 
 ---
 

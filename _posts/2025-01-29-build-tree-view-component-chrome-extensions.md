@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "tree view extension, hierarchy display chrome, nested list component, chrome extension tree view, recursive tree component, expandable tree chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-tree-view-component-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/build-tree-view-component-chrome-extensions/"
 ---
 
 # Build a Tree View Component for Chrome Extensions: Complete Guide

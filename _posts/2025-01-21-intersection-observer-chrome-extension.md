@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [guides, chrome-extensions, development, performance]
 tags: [intersection observer extension, lazy load extension, scroll detection chrome, chrome extension lazy loading, intersection observer api, scroll detection extension]
 keywords: "intersection observer extension, lazy load extension, scroll detection chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/intersection-observer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/intersection-observer-chrome-extension/"
 ---
 
 # IntersectionObserver in Chrome Extensions: Lazy Loading and Scroll Detection

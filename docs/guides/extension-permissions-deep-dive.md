@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Permissions Deep Dive — Optional Permissions & Escalation UX"
 description: "Master Chrome extension permissions with this comprehensive guide covering optional permissions, permission escalation patterns, user experience best practices, and manifest V3 compliance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-permissions-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-permissions-deep-dive/"
 ---
 # Chrome Extension Permissions Deep Dive — Optional Permissions & Escalation UX
 

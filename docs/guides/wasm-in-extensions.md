@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension WebAssembly — Developer Guide"
 description: "Learn Chrome extension webassembly with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/wasm-in-extensions/"
+canonical_url: "https://bestchromeextensions.com/guides/wasm-in-extensions/"
 ---
 # WebAssembly in Chrome Extensions
 

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "recipe saver extension, save recipes chrome, cooking extension, chrome extension recipe, build recipe saver, manifest v3, recipe management"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-recipe-saver-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-recipe-saver-chrome-extension/"
 ---
 
 # Build a Recipe Saver Chrome Extension: Complete 2025 Developer's Guide

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Isolation — Developer Guide"
 description: "Learn Chrome extension content script isolation with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-script-isolation/"
+canonical_url: "https://bestchromeextensions.com/guides/content-script-isolation/"
 ---
 # Content Script Isolation Deep Dive
 

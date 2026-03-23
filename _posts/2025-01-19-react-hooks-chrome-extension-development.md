@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [tutorials, chrome-extensions]
 tags: [react hooks chrome extension, useEffect chrome extension, custom hooks extension, chrome extension react, manifest v3 react]
 keywords: "react hooks chrome extension, useEffect chrome extension, custom hooks extension, chrome extension react hooks, useState chrome extension, react chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/react-hooks-chrome-extension-development/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/react-hooks-chrome-extension-development/"
 ---
 
 # React Hooks for Chrome Extension Development: useState, useEffect and Custom Hooks

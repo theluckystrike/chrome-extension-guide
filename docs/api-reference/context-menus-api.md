@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Context Menus API Complete Reference"
 description: "The Chrome Context Menus API adds custom items to Chrome's right-click context menu, appearing on pages, links, images, selections, and other contexts."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/context-menus-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/context-menus-api/"
 ---
 
 # Chrome Context Menus API Reference

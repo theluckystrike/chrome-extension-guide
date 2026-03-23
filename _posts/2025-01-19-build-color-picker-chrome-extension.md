@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "color picker chrome extension, eyedropper extension, css color tool, chrome color picker, color picker extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-color-picker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-color-picker-chrome-extension/"
 ---
 
 # Build a Color Picker Chrome Extension: Complete Step-by-Step Guide

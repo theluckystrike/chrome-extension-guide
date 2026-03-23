@@ -5,7 +5,7 @@ description: "Learn how Tab Suspender Pro can dramatically improve performance o
 date: 2025-01-30
 categories: [Chrome-Extensions, Tab-Suspender-Pro]
 tags: [tab-suspender-pro, performance, productivity]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/tab-suspender-pro-old-computers/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/tab-suspender-pro-old-computers/"
 ---
 
 # Tab Suspender Pro for Old Computers: Complete Guide to Revive Your Slow PC

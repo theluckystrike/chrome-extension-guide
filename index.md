@@ -2,7 +2,10 @@
 layout: default
 title: "Chrome Extension Development Guide - 500+ Articles"
 description: "Comprehensive Chrome extension development guide with 500+ articles covering APIs, permissions, patterns, tutorials, and publishing. Start building production-ready extensions today."
+date: 2026-03-23
 ---
+{% raw %}
+
 
 <script type="application/ld+json">
 {
@@ -311,3 +314,4 @@ Start with the Quick Start section above, explore the categories that match your
 *Powered by <a href="https://zovo.one">zovo.one</a>*
 
 </div>
+{% endraw %}

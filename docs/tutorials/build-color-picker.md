@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Color Picker — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-color-picker/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-color-picker/"
 ---
 # Build a Color Picker Extension
 

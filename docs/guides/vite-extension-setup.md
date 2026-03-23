@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Vite Setup — Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/vite-extension-setup/"
+canonical_url: "https://bestchromeextensions.com/guides/vite-extension-setup/"
 ---
 # Vite Setup for Chrome Extensions
 

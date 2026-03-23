@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Injection — Static vs Programmatic Injection"
 description: "A comprehensive guide covering content script injection methods in Chrome extensions: manifest-based static injection, programmatic injection with chrome.scripting.executeScript, world types, CSS injection, and dynamic rules."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-script-injection/"
+canonical_url: "https://bestchromeextensions.com/guides/content-script-injection/"
 ---
 
 # Chrome Extension Content Script Injection — Static vs Programmatic Injection

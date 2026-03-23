@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.scripting api, executeScript mv3, dynamic script injection, registerContentScripts, chrome extension scripting, manifest v3 scripting"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/chrome-scripting-api-complete-reference/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-scripting-api-complete-reference/"
 ---
 
 # Chrome Scripting API Complete Reference: Dynamic Code Injection in MV3

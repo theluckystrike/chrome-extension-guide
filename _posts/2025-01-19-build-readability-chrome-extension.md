@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "readability extension, reader mode extension, clean article view, chrome extension development, reader mode chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-readability-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-readability-chrome-extension/"
 ---
 
 # Build a Readability Chrome Extension: Complete 2025 Developer Guide

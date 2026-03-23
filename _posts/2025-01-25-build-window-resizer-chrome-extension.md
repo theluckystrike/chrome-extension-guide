@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [tutorials, chrome-extensions]
 tags: [window resizer extension, resize browser chrome, responsive design extension, chrome extension development, chrome extension manifest v3, window management api, browser resize tool, responsive testing tool]
 keywords: "window resizer extension, resize browser chrome, responsive design extension, chrome extension window management, browser resize tool, responsive testing chrome extension, manifest v3 window api, chrome extension development guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-window-resizer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-window-resizer-chrome-extension/"
 ---
 
 # Build a Window Resizer Chrome Extension for Responsive Design

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Service Worker Async Cookbook — Best Practices"
 description: "Async patterns cookbook for service workers."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/service-worker-async-cookbook/"
+canonical_url: "https://bestchromeextensions.com/patterns/service-worker-async-cookbook/"
 ---
 
 Service Worker Async Patterns Cookbook

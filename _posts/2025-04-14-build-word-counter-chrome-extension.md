@@ -6,7 +6,7 @@ date: 2025-04-14
 categories: [Chrome-Extensions, Tutorials]
 tags: [word-counter, text, chrome-extension]
 keywords: "chrome extension word counter, count words chrome, text counter chrome extension, build word count extension, character counter chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/14/build-word-counter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/14/build-word-counter-chrome-extension/"
 ---
 
 # Build a Word Counter Chrome Extension: Count Text on Any Webpage

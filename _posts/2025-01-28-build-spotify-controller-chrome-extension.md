@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "spotify controller extension, spotify mini player chrome, music control extension, build spotify extension, chrome extension spotify player, spotify web api chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-spotify-controller-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-spotify-controller-chrome-extension/"
 ---
 
 # Build a Spotify Controller Chrome Extension: Complete Guide to Music Control Extensions

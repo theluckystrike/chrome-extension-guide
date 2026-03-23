@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Badge Action Ui — Best Practices"
 description: "Update badge text and colors to indicate extension state to users."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/badge-action-ui/"
+canonical_url: "https://bestchromeextensions.com/patterns/badge-action-ui/"
 ---
 
 # Badge and Action UI Patterns

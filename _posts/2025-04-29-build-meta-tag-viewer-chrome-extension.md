@@ -6,7 +6,7 @@ date: 2025-04-29
 categories: [Chrome-Extensions, SEO]
 tags: [meta-tags, seo, chrome-extension]
 keywords: "chrome extension meta tags, meta tag viewer chrome, seo meta inspector, build meta extension, head tag checker chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/29/build-meta-tag-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/29/build-meta-tag-viewer-chrome-extension/"
 ---
 
 # Build a Meta Tag Viewer Chrome Extension: SEO Head Tag Inspector

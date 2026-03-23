@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension AI & LLM Integration — Developer Guide"
 description: "Learn Chrome extension ai & llm integration with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/ai-llm-integration-extensions/"
+canonical_url: "https://bestchromeextensions.com/guides/ai-llm-integration-extensions/"
 ---
 # AI and LLM Integration in Chrome Extensions
 
@@ -344,5 +344,5 @@ For more advanced patterns and real-world implementations, explore the extension
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

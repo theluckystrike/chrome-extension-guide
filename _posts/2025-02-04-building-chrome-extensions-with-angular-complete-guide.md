@@ -43,7 +43,7 @@ Angular might not be ideal for every extension:
 - **Quick Prototypes**: Setting up an Angular project takes more time than plain HTML/JS
 - **Simple Content Scripts**: Content scripts that just inject small functionality rarely need Angular
 
-For smaller projects, consider frameworks like [React with our Chrome extension React setup guide](/chrome-extension-guide/docs/guides/chrome-extension-react-setup/) or even vanilla JavaScript with TypeScript.
+For smaller projects, consider frameworks like [React with our Chrome extension React setup guide](/docs/guides/chrome-extension-react-setup/) or even vanilla JavaScript with TypeScript.
 
 ---
 
@@ -102,7 +102,7 @@ Configure your `angular.json` to build for the extension:
 }
 ```
 
-For more details on setting up TypeScript with extensions, see our [TypeScript extension setup guide](/chrome-extension-guide/docs/guides/typescript-setup/).
+For more details on setting up TypeScript with extensions, see our [TypeScript extension setup guide](/docs/guides/typescript-setup/).
 
 ---
 
@@ -158,7 +158,7 @@ bootstrapApplication(PopupComponent, {
 }).catch(err => console.error(err));
 ```
 
-For popup design best practices, check our [popup design patterns guide](/chrome-extension-guide/docs/guides/popup-ui-best-practices/).
+For popup design best practices, check our [popup design patterns guide](/docs/guides/popup-ui-best-practices/).
 
 ---
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ### Communication Between Content Script and Angular
 
-Content scripts often need to communicate with your popup or background script. For content script isolation best practices, see our [content script isolation guide](/chrome-extension-guide/docs/guides/content-script-isolation/).
+Content scripts often need to communicate with your popup or background script. For content script isolation best practices, see our [content script isolation guide](/docs/guides/content-script-isolation/).
 
 ---
 
@@ -269,7 +269,7 @@ this.tabUpdates$.pipe(
 ).subscribe();
 ```
 
-For advanced messaging patterns, see our [advanced messaging patterns guide](/chrome-extension-guide/docs/guides/advanced-messaging-patterns/).
+For advanced messaging patterns, see our [advanced messaging patterns guide](/docs/guides/advanced-messaging-patterns/).
 
 ---
 
@@ -326,7 +326,7 @@ export class ChromeApiService {
 }
 ```
 
-For more storage patterns, see our [storage API tutorial](/chrome-extension-guide/docs/guides/storage-local-vs-sync/).
+For more storage patterns, see our [storage API tutorial](/docs/guides/storage-local-vs-sync/).
 
 ---
 
@@ -400,7 +400,7 @@ $popup-theme: mat.define-light-theme((
 }
 ```
 
-For more UI patterns, see our [extension design system guide](/chrome-extension-guide/docs/guides/chrome-extension-design-system/).
+For more UI patterns, see our [extension design system guide](/docs/guides/chrome-extension-design-system/).
 
 ---
 
@@ -590,7 +590,7 @@ Keep your background/service worker scripts outside Angular to avoid shipping th
 }
 ```
 
-For more optimization techniques, see our [extension performance optimization guide](/chrome-extension-guide/docs/guides/extension-performance-optimization/).
+For more optimization techniques, see our [extension performance optimization guide](/docs/guides/extension-performance-optimization/).
 
 ---
 
@@ -610,7 +610,7 @@ Key takeaways from this guide:
 
 ## Ready to Monetize Your Extension?
 
-Building a great extension is just the beginning. Learn how to turn your Angular extension into a revenue-generating product with our comprehensive [Extension Monetization Playbook](/chrome-extension-guide/docs/monetization/). We cover freemium models, Stripe integration, subscription architecture, and proven growth strategies.
+Building a great extension is just the beginning. Learn how to turn your Angular extension into a revenue-generating product with our comprehensive [Extension Monetization Playbook](/docs/monetization/). We cover freemium models, Stripe integration, subscription architecture, and proven growth strategies.
 
 ---
 

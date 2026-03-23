@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "rxjs chrome extension, reactive extension, observable chrome extension, rxjs chrome, reactive programming chrome, rxjs extension patterns"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/rxjs-reactive-programming-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/rxjs-reactive-programming-chrome-extensions/"
 ---
 
 # RxJS Reactive Programming in Chrome Extensions: Complete Guide

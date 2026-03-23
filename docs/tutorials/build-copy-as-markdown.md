@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Copy as Markdown — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-copy-as-markdown/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-copy-as-markdown/"
 ---
 # Build a Copy-as-Markdown Chrome Extension
 
@@ -200,7 +200,7 @@ This extension demonstrates core Chrome extension concepts: context menus, clipb
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

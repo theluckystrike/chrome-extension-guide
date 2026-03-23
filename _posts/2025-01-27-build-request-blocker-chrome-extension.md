@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "request blocker extension, block url chrome, network filter extension, chrome extension blocking, declarative net request"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-request-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-request-blocker-chrome-extension/"
 ---
 
 # Build a Request Blocker Chrome Extension: Complete Developer Guide 2025

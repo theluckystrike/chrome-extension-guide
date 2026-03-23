@@ -6,7 +6,7 @@ date: 2025-05-02
 categories: [Chrome-Extensions, Data]
 tags: [export, csv, chrome-extension]
 keywords: "chrome extension export data, export to csv chrome, chrome extension generate json, web scraping export chrome, download data chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/02/chrome-extension-data-export-csv-json/"
+canonical_url: "https://bestchromeextensions.com/2025/05/02/chrome-extension-data-export-csv-json/"
 ---
 
 # Chrome Extension Data Export: Generate CSV and JSON Files from Webpages

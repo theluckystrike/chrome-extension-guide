@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Service Worker Lifecycle — Complete Guide"
 description: "Master the Chrome extension service worker lifecycle in Manifest V3. Learn installation, idle shutdown, state management, alarm-based tasks, debugging, and warm-up strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-service-worker-lifecycle/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-service-worker-lifecycle/"
 ---
 
 # Chrome Extension Service Worker Lifecycle

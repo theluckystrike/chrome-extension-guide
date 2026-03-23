@@ -5,7 +5,7 @@ description: "Access to the API for reading and modifying Chrome's font preferen
 permalink: /permissions/fontSettings/
 category: permissions
 order: 18
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/fontSettings/"
+canonical_url: "https://bestchromeextensions.com/permissions/fontSettings/"
 ---
 
 # fontSettings Permission

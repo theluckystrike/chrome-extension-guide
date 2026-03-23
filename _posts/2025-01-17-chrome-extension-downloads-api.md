@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome downloads api, manage downloads chrome extension, file download extension, chrome.downloads API tutorial, Chrome extension download manager, Manifest V3 downloads"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-downloads-api/"
 ---
 
 # Chrome Downloads API Tutorial for Extension Developers
@@ -394,11 +394,11 @@ The key to building successful download extensions lies in proper error handling
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 
 As you continue to develop your extension, remember to test thoroughly across different network conditions and file types, and always consider the security implications of your download functionality. With the Chrome Downloads API, you have all the tools you need to create professional-grade download features that your users will appreciate.
 ---
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

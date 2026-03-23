@@ -36,7 +36,7 @@ The absence of a runtime also means there is no overhead from framework hooks, e
 
 Svelte's component syntax feels like writing enhanced HTML. Styles are scoped by default, reactivity is intuitive (no useState or useEffect hooks to master), and animations are built into the framework. For developers coming from vanilla JavaScript or templating backgrounds, Svelte offers a gentle learning curve while still delivering professional-grade results.
 
-For a deeper comparison of frameworks, see our [Chrome extension framework comparison guide](/chrome-extension-guide/docs/frameworks/).
+For a deeper comparison of frameworks, see our [Chrome extension framework comparison guide](/docs/frameworks/).
 
 ---
 
@@ -555,8 +555,8 @@ Ready to start building? Set up your first Svelte extension project today and ex
 
 **Related Resources:**
 - [Chrome Extension Svelte Starter](https://github.com/theluckystrike/chrome-extension-svelte-starter)
-- [Extension Monetization Playbook](/chrome-extension-guide/docs/monetization/)
-- [Chrome Extension Best Practices](/chrome-extension-guide/docs/best-practices/)
+- [Extension Monetization Playbook](/docs/monetization/)
+- [Chrome Extension Best Practices](/docs/best-practices/)
 
 ---
 

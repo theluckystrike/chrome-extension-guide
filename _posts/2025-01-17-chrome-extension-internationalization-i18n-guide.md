@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension i18n, internationalization chrome extension, localize browser extension, multi-language chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-internationalization-i18n-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-internationalization-i18n-guide/"
 ---
 
 # Chrome Extension Internationalization: Complete i18n Guide for Global Users
@@ -252,4 +252,4 @@ The effort you invest in internationalization today will pay dividends in user s
 -e 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

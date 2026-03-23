@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension First Extension — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-first-extension/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-first-extension/"
 ---
 # Building Your First Chrome Extension
 
@@ -90,7 +90,7 @@ button.addEventListener('click', () => {
   counter.textContent = `Clicks: ${count}`;
   
   // Store count in localStorage
-  [[chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ clickCount: count });
+  [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ clickCount: count });
 });
 ```
 
@@ -243,4 +243,4 @@ chrome.runtime.onInstalled.addListener(() => {
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.

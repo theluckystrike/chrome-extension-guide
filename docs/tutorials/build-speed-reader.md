@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Speed Reader — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-speed-reader/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-speed-reader/"
 ---
 # Build a Speed Reader Extension
 

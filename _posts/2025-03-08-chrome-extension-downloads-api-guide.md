@@ -6,7 +6,7 @@ date: 2025-03-08
 categories: [Chrome-Extensions, APIs]
 tags: [downloads, chrome-extension, tutorial]
 keywords: "chrome extension downloads API, chrome.downloads, download manager chrome extension, chrome extension file download, manage downloads chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/08/chrome-extension-downloads-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/08/chrome-extension-downloads-api-guide/"
 ---
 
 # Chrome Extension Downloads API: Build a Download Manager Extension

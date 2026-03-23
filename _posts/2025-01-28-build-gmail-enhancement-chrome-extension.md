@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "gmail enhancer extension, email tools chrome, gmail productivity, build gmail chrome extension, gmail api chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-gmail-enhancement-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-gmail-enhancement-chrome-extension/"
 ---
 
 # Build a Gmail Enhancement Chrome Extension: Complete Developer Guide

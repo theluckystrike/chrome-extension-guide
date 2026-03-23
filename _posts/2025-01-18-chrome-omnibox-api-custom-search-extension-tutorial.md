@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome omnibox api, address bar extension, custom search chrome extension, omnibox extension tutorial, chrome address bar search"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-omnibox-api-custom-search-extension-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-omnibox-api-custom-search-extension-tutorial/"
 ---
 
 # Chrome Omnibox API Custom Search Extension Tutorial

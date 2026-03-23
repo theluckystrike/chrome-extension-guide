@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Alarms API — How to Schedule Background Tasks in MV3"
 description: "Master the Chrome Alarms API for scheduling background tasks in Manifest V3 extensions. Learn about periodic tasks, service worker lifecycle management, and offscreen documents."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/alarms-background-tasks/"
+canonical_url: "https://bestchromeextensions.com/guides/alarms-background-tasks/"
 ---
 
 # Chrome Extension Alarms API — How to Schedule Background Tasks in MV3
@@ -149,5 +149,5 @@ For simpler scheduled tasks, alarms alone are sufficient. But when you need full
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

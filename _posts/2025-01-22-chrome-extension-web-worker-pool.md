@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "web worker pool extension, parallel processing chrome, multithreading extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-web-worker-pool/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-web-worker-pool/"
 ---
 
 # Web Worker Thread Pool in Chrome Extensions: Complete Guide to Parallel Processing
@@ -598,4 +598,4 @@ Start with a simple pool implementation and iterate based on your specific perfo
 
 Remember to handle the Chrome extension lifecycle properly, especially the service worker termination and restart behavior in Manifest V3. By following the patterns and best practices outlined in this guide, you'll be well-equipped to build high-performance extensions that deliver smooth user experiences even under heavy computational loads.
 
-For more advanced topics on Chrome extension performance, explore our guides on [service worker optimization](/chrome-extension-guide/docs/guides/chrome-extension-service-worker-optimization/) and [memory management in extensions](/chrome-extension-guide/docs/guides/chrome-extension-memory-optimization/).
+For more advanced topics on Chrome extension performance, explore our guides on [service worker optimization](/docs/guides/chrome-extension-service-worker-optimization/) and [memory management in extensions](/docs/guides/chrome-extension-memory-optimization/).

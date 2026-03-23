@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension options page, extension settings ui, options_page vs options_ui, chrome extension settings page design, manifest v3 options page"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-options-page-design-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-options-page-design-guide/"
 ---
 
 # Chrome Extension Options Page Design Guide: Best Practices for 2025
@@ -375,10 +375,10 @@ As Chrome continues to evolve, staying current with best practices and new APIs 
 
 To further enhance your extension development skills, explore these related topics:
 
-- [Chrome Extension Development Complete Beginner's Guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)
-- [Chrome Extension Popup Design Best Practices](/chrome-extension-guide/content/chrome-extension-popup-design/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/)
-- [Chrome Extension Security Best Practices](/chrome-extension-guide/content/chrome-extension-security-guide/)
+- [Chrome Extension Development Complete Beginner's Guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)
+- [Chrome Extension Popup Design Best Practices](/content/chrome-extension-popup-design/)
+- [Manifest V3 Migration Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/)
+- [Chrome Extension Security Best Practices](/content/chrome-extension-security-guide/)
 
 By mastering options page development, you are building a foundation for creating extensions that users can trust and depend on for years to come.
 

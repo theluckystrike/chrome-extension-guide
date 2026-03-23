@@ -5,7 +5,7 @@ description: "Permission string: Grants access to API Controls display and syste
 permalink: /permissions/power/
 category: permissions
 order: 30
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/power/"
+canonical_url: "https://bestchromeextensions.com/permissions/power/"
 ---
 
 # Power Permission

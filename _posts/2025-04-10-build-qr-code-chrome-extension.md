@@ -6,7 +6,7 @@ date: 2025-04-10
 categories: [Chrome-Extensions, Tutorials]
 tags: [qr-code, generator, chrome-extension]
 keywords: "chrome extension qr code, qr code generator chrome, build qr extension, chrome extension generate qr, share url qr chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/10/build-qr-code-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/10/build-qr-code-chrome-extension/"
 ---
 
 # Build a QR Code Generator Chrome Extension: Share Links Instantly

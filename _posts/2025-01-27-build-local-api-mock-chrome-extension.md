@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "api mock extension, mock server chrome, fake api extension, chrome extension api mock, local api mock chrome extension, mock network requests chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-local-api-mock-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-local-api-mock-chrome-extension/"
 ---
 
 # Build a Local API Mock Chrome Extension: Complete Developer Guide

@@ -7,7 +7,7 @@ date: 2025-01-15
 categories: [guides, chrome-extensions, productivity]
 tags: [chrome memory optimization, browser memory management, reduce chrome RAM usage, chrome using too much memory, tab management, memory optimization]
 keywords: "chrome memory optimization, reduce chrome RAM usage, browser memory management, chrome using too much memory"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/15/chrome-memory-optimization-extensions-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/15/chrome-memory-optimization-extensions-guide/"
 ---
 
 # Chrome Memory Optimization: Complete Guide to Managing Browser RAM in 2025
@@ -179,4 +179,4 @@ Remember that every system is different, and the optimal configuration depends o
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

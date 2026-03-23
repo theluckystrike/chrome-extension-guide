@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions]
 tags: [chrome-extension]
 keywords: "push notification extension, web push chrome, notification api extension, chrome push notifications, chrome extension notifications"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-push-notifications/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-push-notifications/"
 ---
 
 # Push Notification Chrome Extension Guide: Complete Implementation Tutorial

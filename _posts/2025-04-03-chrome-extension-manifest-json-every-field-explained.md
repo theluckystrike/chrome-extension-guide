@@ -6,7 +6,7 @@ date: 2025-04-03
 categories: [Chrome-Extensions, Reference]
 tags: [manifest, configuration, chrome-extension]
 keywords: "chrome extension manifest.json, manifest json fields, chrome extension manifest guide, manifest v3 all fields, chrome extension configuration file"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/03/chrome-extension-manifest-json-every-field-explained/"
+canonical_url: "https://bestchromeextensions.com/2025/04/03/chrome-extension-manifest-json-every-field-explained/"
 ---
 
 # Chrome Extension manifest.json: Every Field Explained with Examples

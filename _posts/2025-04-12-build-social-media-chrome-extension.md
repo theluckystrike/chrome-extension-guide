@@ -6,7 +6,7 @@ date: 2025-04-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [social-media, dashboard, chrome-extension]
 keywords: "chrome extension social media, social media dashboard extension, twitter chrome extension, linkedin chrome extension, social media tools chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/12/build-social-media-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/12/build-social-media-chrome-extension/"
 ---
 
 # Build a Social Media Dashboard Chrome Extension: Twitter, LinkedIn, and More

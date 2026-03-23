@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "dns lookup extension, domain info chrome, whois extension, chrome extension development, DNS checker chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-dns-lookup-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-dns-lookup-chrome-extension/"
 ---
 
 # Build a DNS Lookup Chrome Extension: Complete Developer Guide

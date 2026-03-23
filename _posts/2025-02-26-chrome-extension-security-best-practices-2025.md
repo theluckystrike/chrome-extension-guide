@@ -6,7 +6,7 @@ date: 2025-02-26
 categories: [Chrome-Extensions, Security]
 tags: [security, best-practices, chrome-extension]
 keywords: "chrome extension security, secure chrome extension, chrome extension vulnerabilities, extension security best practices, chrome extension permissions security"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/26/chrome-extension-security-best-practices-2025/"
+canonical_url: "https://bestchromeextensions.com/2025/02/26/chrome-extension-security-best-practices-2025/"
 ---
 
 # Chrome Extension Security Best Practices: Protect Your Users in 2025

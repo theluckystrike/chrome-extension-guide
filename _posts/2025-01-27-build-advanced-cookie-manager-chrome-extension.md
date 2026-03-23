@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "cookie manager extension, cookie jar chrome, manage site cookies, chrome extension cookies, cookie editor chrome, browser cookie management"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-advanced-cookie-manager-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-advanced-cookie-manager-chrome-extension/"
 ---
 
 # Build an Advanced Cookie Manager Chrome Extension

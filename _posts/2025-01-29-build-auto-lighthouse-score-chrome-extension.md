@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "lighthouse auto extension, performance score chrome, web vitals extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/build-auto-lighthouse-score-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/build-auto-lighthouse-score-chrome-extension/"
 ---
 
 # Build an Auto Lighthouse Score Chrome Extension: Complete Guide

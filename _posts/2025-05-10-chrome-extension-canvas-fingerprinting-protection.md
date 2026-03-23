@@ -6,7 +6,7 @@ date: 2025-05-10
 categories: [Chrome-Extensions, Privacy]
 tags: [fingerprinting, privacy, chrome-extension]
 keywords: "chrome extension canvas fingerprinting, fingerprint protection chrome, anti fingerprinting extension, browser fingerprint blocker, canvas fingerprint chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/10/chrome-extension-canvas-fingerprinting-protection/"
+canonical_url: "https://bestchromeextensions.com/2025/05/10/chrome-extension-canvas-fingerprinting-protection/"
 ---
 
 # Chrome Extension Canvas Fingerprinting Protection: Privacy Guide

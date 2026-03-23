@@ -834,6 +834,6 @@ Start with a simple implementation and iterate. The most important thing is to b
 
 ## Related Guides
 
-- [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to ethically monetize your extension while respecting user privacy
-- [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) — Understand how to request minimal permissions for your extension
-- [Chrome Web Store Listing Optimization](/chrome-extension-guide/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your store conversion rates with proven optimization techniques
+- [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) — Learn how to ethically monetize your extension while respecting user privacy
+- [Chrome Extension Permissions Explained](/2025/01/18/chrome-extension-permissions-explained/) — Understand how to request minimal permissions for your extension
+- [Chrome Web Store Listing Optimization](/2025/02/17/chrome-web-store-listing-optimization-double-install-rate/) — Maximize your store conversion rates with proven optimization techniques

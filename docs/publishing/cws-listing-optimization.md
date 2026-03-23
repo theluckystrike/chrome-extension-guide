@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Web Store Listing Optimization — How to Rank Higher and Get More Installs"
 description: "Complete guide to optimizing your Chrome Web Store listing for maximum visibility, higher rankings, and increased installs."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/cws-listing-optimization/"
+canonical_url: "https://bestchromeextensions.com/publishing/cws-listing-optimization/"
 ---
 
 # Chrome Web Store Listing Optimization — How to Rank Higher and Get More Installs

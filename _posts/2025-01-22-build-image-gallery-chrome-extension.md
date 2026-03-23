@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "image gallery extension, photo viewer chrome, image collection extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-image-gallery-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-image-gallery-chrome-extension/"
 ---
 
 # Build an Image Gallery Chrome Extension: Complete Developer's Guide

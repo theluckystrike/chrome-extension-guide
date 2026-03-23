@@ -2,7 +2,7 @@
 layout: default
 title: "Advanced Chrome Extension Debugging Techniques — Developer Guide"
 description: "Master advanced debugging techniques for Chrome extensions including DevTools Protocol, remote debugging, memory leak detection, performance profiling, and real-world case studies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-advanced-debugging-techniques/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-advanced-debugging-techniques/"
 ---
 # Advanced Debugging Techniques for Chrome Extensions
 

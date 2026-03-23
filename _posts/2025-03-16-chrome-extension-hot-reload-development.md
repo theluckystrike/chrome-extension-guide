@@ -6,7 +6,7 @@ date: 2025-03-16
 categories: [Chrome-Extensions, Development]
 tags: [hot-reload, development, chrome-extension]
 keywords: "chrome extension hot reload, auto reload chrome extension, chrome extension live reload, extension development refresh, watch mode chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/16/chrome-extension-hot-reload-development/"
+canonical_url: "https://bestchromeextensions.com/2025/03/16/chrome-extension-hot-reload-development/"
 ---
 
 # Chrome Extension Hot Reload: Auto-Refresh During Development

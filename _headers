@@ -1,0 +1,12 @@
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  X-Robots-Tag: noindex
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+/feed.xml
+  Content-Type: application/atom+xml; charset=utf-8
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

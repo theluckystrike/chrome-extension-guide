@@ -5,7 +5,7 @@ description: ": : Access to event for debugging rule matches"
 permalink: /permissions/declarativeNetRequestFeedback/
 category: permissions
 order: 14
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeNetRequestFeedback/"
+canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestFeedback/"
 ---
 
 # declarativeNetRequestFeedback Permission — Chrome Extension Reference

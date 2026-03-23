@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "svg chrome extension, svg editor extension, vector graphics extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/svg-manipulation-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/svg-manipulation-chrome-extensions/"
 ---
 
 # SVG Manipulation in Chrome Extensions: Complete Developer Guide

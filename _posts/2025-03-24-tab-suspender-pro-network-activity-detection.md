@@ -6,7 +6,7 @@ date: 2025-03-24
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, network-detection, smart-features]
 keywords: "tab suspender pro network detection, suspend tab downloading, tab suspender active download, chrome tab network activity, tab suspender smart detection"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/24/tab-suspender-pro-network-activity-detection/"
+canonical_url: "https://bestchromeextensions.com/2025/03/24/tab-suspender-pro-network-activity-detection/"
 ---
 
 # Tab Suspender Pro Network Activity Detection: Don't Suspend Active Downloads

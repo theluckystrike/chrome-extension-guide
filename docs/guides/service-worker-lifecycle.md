@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Service Worker Lifecycle — Events, Idle Timeout, and Persistence in MV3"
 description: "Master the Chrome extension service worker lifecycle in Manifest V3. Learn about install/activate events, the 30-second idle timeout, keepalive patterns, offscreen documents, and state persistence between wake-ups."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/service-worker-lifecycle/"
+canonical_url: "https://bestchromeextensions.com/guides/service-worker-lifecycle/"
 ---
 
 # Chrome Extension Service Worker Lifecycle — Events, Idle Timeout, and Persistence in MV3

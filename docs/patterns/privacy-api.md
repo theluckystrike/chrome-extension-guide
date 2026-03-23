@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Privacy Api — Best Practices"
 description: "Use the Privacy API to respect user privacy settings."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/privacy-api/"
+canonical_url: "https://bestchromeextensions.com/patterns/privacy-api/"
 ---
 
 # Chrome Extension Privacy API Patterns

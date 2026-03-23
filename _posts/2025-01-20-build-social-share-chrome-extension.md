@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [social share extension, share page chrome, social media sharing extension, chrome extension tutorial, manifest v3]
 keywords: "social share extension, share page chrome, social media sharing extension, build chrome extension share, chrome extension social sharing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-social-share-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-social-share-chrome-extension/"
 ---
 
 # Build a Social Share Chrome Extension
@@ -531,7 +531,7 @@ Building a social share extension is an excellent way to start your Chrome exten
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/docs/mv3/migration-guide/)
+- [Manifest V3 Migration Guide](/docs/mv3/migration-guide/)
 - [Sharing URLs for Social Platforms](https://developers.google.com/recaptcha/docs/share)
 
 Start building your social share extension today and share your creations with the world!

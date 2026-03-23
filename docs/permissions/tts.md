@@ -5,7 +5,7 @@ description: ": (consumer) or (provider) : — use to speak text aloud; — regi
 permalink: /permissions/tts/
 category: permissions
 order: 45
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tts/"
+canonical_url: "https://bestchromeextensions.com/permissions/tts/"
 ---
 
 # tts Permission — Chrome Extension Reference

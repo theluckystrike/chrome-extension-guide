@@ -6,7 +6,7 @@ date: 2025-03-13
 categories: [Chrome-Extensions, APIs]
 tags: [graphql, api-integration, chrome-extension]
 keywords: "chrome extension graphql, graphql chrome extension, chrome extension API integration, graphql popup chrome, apollo chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/13/chrome-extension-graphql-api-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/03/13/chrome-extension-graphql-api-integration/"
 ---
 
 # Integrating GraphQL APIs in Chrome Extensions: Complete Guide

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Alarm Scheduling Patterns — Best Practices"
 description: "Schedule tasks with the Alarms API."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/alarm-scheduling-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/alarm-scheduling-patterns/"
 ---
 
 # Alarm Scheduling Patterns

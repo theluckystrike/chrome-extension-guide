@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "web audio api extension, audio visualizer chrome, sound effects extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-web-audio-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/build-web-audio-chrome-extension/"
 ---
 
 # Build a Web Audio Chrome Extension: Complete 2025 Tutorial

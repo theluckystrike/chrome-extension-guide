@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension MV3 Migration Cheatsheet — Developer Guide"
 description: "Migrate your Chrome extension to Manifest V3 with this comprehensive guide covering API changes and required updates."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/mv3-migration-cheatsheet/"
+canonical_url: "https://bestchromeextensions.com/guides/mv3-migration-cheatsheet/"
 ---
 # MV2 to MV3 Migration Cheatsheet
 

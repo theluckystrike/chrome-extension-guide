@@ -6,7 +6,7 @@ date: 2025-04-10
 categories: [Chrome-Extensions, Productivity]
 tags: [website-blocker, focus, chrome-extension]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/10/build-website-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/10/build-website-blocker-chrome-extension/"
 ---
 
 # Build a Website Blocker Chrome Extension: Focus Mode for Productivity

@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [guides, chrome-extensions, rust, webassembly]
 tags: [rust chrome extension, wasm rust extension, webassembly rust chrome, rust wasm, chrome extension development, webassembly]
 keywords: "rust chrome extension, wasm rust extension, webassembly rust chrome, rust webassembly, chrome extension rust"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/rust-wasm-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/rust-wasm-chrome-extension/"
 ---
 
 # Building Chrome Extensions with Rust and WebAssembly

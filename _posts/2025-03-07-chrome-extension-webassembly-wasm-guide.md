@@ -6,7 +6,7 @@ date: 2025-03-07
 categories: [Chrome-Extensions, Performance]
 tags: [webassembly, wasm, chrome-extension]
 keywords: "chrome extension webassembly, wasm chrome extension, webassembly in extension, chrome extension wasm performance, rust wasm chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/07/chrome-extension-webassembly-wasm-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/07/chrome-extension-webassembly-wasm-guide/"
 ---
 
 # Using WebAssembly (WASM) in Chrome Extensions: Performance Guide

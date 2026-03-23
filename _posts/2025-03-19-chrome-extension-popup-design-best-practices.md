@@ -6,7 +6,7 @@ date: 2025-03-19
 categories: [Chrome-Extensions, Design]
 tags: [popup, ui-design, chrome-extension]
 keywords: "chrome extension popup design, extension popup UI, chrome extension popup size, popup best practices chrome, beautiful chrome extension popup"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/19/chrome-extension-popup-design-best-practices/"
+canonical_url: "https://bestchromeextensions.com/2025/03/19/chrome-extension-popup-design-best-practices/"
 ---
 
 # Chrome Extension Popup Design: UI/UX Best Practices for 2025

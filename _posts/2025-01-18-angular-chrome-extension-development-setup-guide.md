@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "angular chrome extension, chrome extension angular, angular popup extension, angular chrome extension setup, chrome extension with angular"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/angular-chrome-extension-development-setup-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/angular-chrome-extension-development-setup-guide/"
 ---
 
 # Angular Chrome Extension Development Setup Guide

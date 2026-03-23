@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Storybook Integration — Developer Guide"
 description: "Learn Chrome extension storybook integration with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-storybook/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-storybook/"
 ---
 # Setting Up Storybook for Chrome Extension Development
 
@@ -119,7 +119,7 @@ Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

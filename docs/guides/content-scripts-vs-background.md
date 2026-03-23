@@ -2,7 +2,7 @@
 layout: default
 title: "Content Scripts vs Background Workers — When to Use Each"
 description: "Complete comparison of content scripts vs background service workers in Chrome extensions. Learn when to use each, communication patterns, use cases, and best practices for extension architecture."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-scripts-vs-background/"
+canonical_url: "https://bestchromeextensions.com/guides/content-scripts-vs-background/"
 ---
 
 # Content Scripts vs Background Workers — When to Use Each
@@ -333,4 +333,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 Content scripts and background workers serve complementary roles in Chrome extensions. Use content scripts for direct page interaction and DOM manipulation. Use background workers for state management, cross-tab coordination, and extended API access. Effective extensions leverage both components through clean message passing architecture.
 
-For more on extension architecture, see our [Background Patterns](/chrome-extension-guide/guides/background-patterns/) and [Content Scripts Deep Dive](/chrome-extension-guide/guides/content-scripts-deep-dive/) guides.
+For more on extension architecture, see our [Background Patterns](/guides/background-patterns/) and [Content Scripts Deep Dive](/guides/content-scripts-deep-dive/) guides.

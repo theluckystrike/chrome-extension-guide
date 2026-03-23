@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, guide]
 keywords: "chrome alarms api, schedule tasks chrome extension, periodic background tasks extension, chrome extension timer, chrome alarms api tutorial, chrome.alarms API, manifest v3 alarms, scheduled chrome extension tasks"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/alarms-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/alarms-api-guide/"
 ---
 
 # Chrome Extension Alarms API: Schedule Tasks in Your Extension
@@ -445,8 +445,8 @@ Remember to test your alarm implementations thoroughly, especially across browse
 
 ## Related Articles
 
-- [Chrome Extension Notifications API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
-- [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.
-- [Chrome Extension Downloads API Guide](/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Implement file download functionality in your extension.
+- [Chrome Extension Notifications API Guide](/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
+- [Chrome Extension Service Worker Lifecycle Deep Dive](/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.
+- [Chrome Extension Downloads API Guide](/2025/01/17/chrome-extension-downloads-api/) - Implement file download functionality in your extension.
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

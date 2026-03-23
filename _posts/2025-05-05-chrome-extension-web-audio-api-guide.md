@@ -6,7 +6,7 @@ date: 2025-05-05
 categories: [Chrome-Extensions, APIs]
 tags: [web-audio, audio, chrome-extension]
 keywords: "chrome extension web audio, web audio API extension, audio processing chrome, chrome extension sound, build audio extension chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/05/chrome-extension-web-audio-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/05/05/chrome-extension-web-audio-api-guide/"
 ---
 
 # Web Audio API in Chrome Extensions: Build Audio Processing Tools

@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "localstorage viewer, storage inspector chrome, web storage extension, chrome storage api, local storage inspector"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-local-storage-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-local-storage-viewer-chrome-extension/"
 ---
 
 # Build a Local Storage Viewer Chrome Extension

@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "pomodoro chrome extension, timer extension, productivity timer extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-pomodoro-timer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-pomodoro-timer-chrome-extension/"
 ---
 
 # Build a Pomodoro Timer Chrome Extension: Complete Development Guide

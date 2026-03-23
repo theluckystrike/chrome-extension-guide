@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "har viewer extension, network trace chrome, http archive viewer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-har-file-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-har-file-viewer-chrome-extension/"
 ---
 
 # Build an HAR File Viewer Chrome Extension: Complete Developer's Guide
@@ -1392,4 +1392,4 @@ Remember to test thoroughly with real HAR files, gather user feedback, and itera
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

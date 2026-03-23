@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Storage Quota Management — Best Practices"
 description: "Manage storage quotas effectively."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/storage-quota-management/"
+canonical_url: "https://bestchromeextensions.com/patterns/storage-quota-management/"
 ---
 
 # Storage Quota Management

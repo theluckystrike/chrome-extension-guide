@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "lorem ipsum extension, placeholder text chrome, content filler, build chrome extension, chrome extension development tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-lorem-ipsum-generator-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-lorem-ipsum-generator-chrome-extension/"
 ---
 
 # Build a Lorem Ipsum Generator Chrome Extension: Complete Guide

@@ -6,7 +6,7 @@ date: 2025-03-10
 categories: [Chrome-Extensions, APIs]
 tags: [omnibox, address-bar, chrome-extension]
 keywords: "chrome extension omnibox, omnibox API chrome, address bar commands chrome extension, chrome extension custom search, chrome omnibox suggestions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/10/chrome-extension-omnibox-api-address-bar/"
+canonical_url: "https://bestchromeextensions.com/2025/03/10/chrome-extension-omnibox-api-address-bar/"
 ---
 
 # Chrome Extension Omnibox API: Add Custom Commands to the Address Bar

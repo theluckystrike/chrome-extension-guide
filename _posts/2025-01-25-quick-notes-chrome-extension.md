@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [guides, chrome-extensions, productivity]
 tags: [quick notes extension, fast notepad chrome, inline notes extension, chrome notepad, notes app chrome, sticky notes chrome]
 keywords: "quick notes extension, fast notepad chrome, inline notes extension, chrome notes app, sticky notes chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/quick-notes-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/quick-notes-chrome-extension/"
 ---
 
 # Build a Quick Notes Chrome Extension: Complete 2025 Developer's Guide

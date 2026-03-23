@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Service Worker Debugging — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/service-worker-debugging/"
+canonical_url: "https://bestchromeextensions.com/guides/service-worker-debugging/"
 ---
 # Service Worker Debugging Guide
 

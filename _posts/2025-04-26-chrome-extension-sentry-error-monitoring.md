@@ -6,7 +6,7 @@ date: 2025-04-26
 categories: [Chrome-Extensions, Monitoring]
 tags: [sentry, monitoring, chrome-extension]
 keywords: "chrome extension sentry, error monitoring extension, sentry chrome extension, crash reporting extension, chrome extension error tracking"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/26/chrome-extension-sentry-error-monitoring/"
+canonical_url: "https://bestchromeextensions.com/2025/04/26/chrome-extension-sentry-error-monitoring/"
 ---
 
 # Error Monitoring Chrome Extensions with Sentry: Complete Setup Guide

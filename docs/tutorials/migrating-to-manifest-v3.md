@@ -2,7 +2,7 @@
 layout: default
 title: "Migrating Your Chrome Extension from Manifest V2 to V3 — Complete Guide"
 description: "A comprehensive step-by-step tutorial for migrating Chrome extensions from Manifest V2 to V3, covering service workers, declarativeNetRequest, and more."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/migrating-to-manifest-v3/"
+canonical_url: "https://bestchromeextensions.com/tutorials/migrating-to-manifest-v3/"
 ---
 
 # Migrating Your Chrome Extension from Manifest V2 to V3

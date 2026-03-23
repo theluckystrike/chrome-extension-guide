@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Tab Management — Best Practices"
 description: "Implement advanced tab management features."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/tab-management/"
+canonical_url: "https://bestchromeextensions.com/patterns/tab-management/"
 ---
 
 # Tab Management Patterns

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "language learning extension, vocabulary chrome, translate selection, build chrome extension, chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-language-learning-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-language-learning-chrome-extension/"
 ---
 
 # Build a Language Learning Chrome Extension: Complete Developer's Guide

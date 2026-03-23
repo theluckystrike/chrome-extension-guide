@@ -2,7 +2,7 @@
 layout: default
 title: "Content Script Injection Patterns — Developer Guide"
 description: "Master advanced content script injection patterns in Chrome extensions with this comprehensive guide covering programmatic injection, CSS injection, shadow DOM integration, and world types."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-script-injection-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/content-script-injection-patterns/"
 ---
 
 # Content Script Injection Patterns

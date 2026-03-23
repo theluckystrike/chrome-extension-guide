@@ -5,7 +5,7 @@ description: ": : Full access to API — read, create, update, delete, move, sea
 permalink: /permissions/bookmarks/
 category: permissions
 order: 3
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/bookmarks/"
+canonical_url: "https://bestchromeextensions.com/permissions/bookmarks/"
 ---
 
 # bookmarks Permission — Chrome Extension Reference

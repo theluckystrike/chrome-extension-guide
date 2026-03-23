@@ -6,7 +6,7 @@ date: 2025-03-05
 categories: [Chrome-Extensions, APIs]
 tags: [native-messaging, chrome-extension, desktop-integration]
 keywords: "chrome extension native messaging, native messaging host, chrome extension desktop app, chrome extension native app communication, native messaging API chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/05/chrome-extension-native-messaging-host/"
+canonical_url: "https://bestchromeextensions.com/2025/03/05/chrome-extension-native-messaging-host/"
 ---
 
 # Chrome Extension Native Messaging: Communicate with Desktop Applications

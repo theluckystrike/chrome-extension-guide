@@ -5,7 +5,7 @@ description: "The permissions provide access to hardware and system information.
 permalink: /permissions/system/
 category: permissions
 order: 40
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/system/"
+canonical_url: "https://bestchromeextensions.com/permissions/system/"
 ---
 
 # System.* Permissions (Chrome Extension API)

@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "barcode scanner extension, qr reader chrome, barcode api extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-extension-barcode-detection/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-extension-barcode-detection/"
 ---
 
 # Complete Guide to Barcode Detection API in Chrome Extensions

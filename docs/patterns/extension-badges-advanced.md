@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Badges Advanced — Best Practices"
 description: "Advanced badge management and visualization."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-badges-advanced/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-badges-advanced/"
 ---
 
 # Advanced Badge Management Patterns

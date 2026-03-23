@@ -658,7 +658,7 @@ The Tab Suspender Pro architecture demonstrates production patterns: session sto
 
 Remember to implement proper migration strategies, monitor quota usage, and consider compression for text-heavy data. With these patterns in place, your extension will handle growth gracefully while maintaining excellent performance.
 
-For more on the Chrome Storage API, see the [Storage API Deep Dive](/chrome-extension-guide/api-reference/storage-api-deep-dive/) documentation. For TypeScript-ready storage with schema validation, check out the [@theluckystrike/webext-storage](/chrome-extension-guide/docs/packages/overview/#webext-storage) package.
+For more on the Chrome Storage API, see the [Storage API Deep Dive](/api-reference/storage-api-deep-dive/) documentation. For TypeScript-ready storage with schema validation, check out the [@theluckystrike/webext-storage](/docs/packages/overview/#webext-storage) package.
 
 ---
 

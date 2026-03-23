@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Security Hardening Guide — Protect Your Users"
 description: "Master security best practices for Chrome extensions including Content Security Policy, XSS prevention, secure messaging, permission minimization, code signing, and data protection strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-security-hardening/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-security-hardening/"
 ---
 
 # Chrome Extension Security Hardening Guide — Protect Your Users

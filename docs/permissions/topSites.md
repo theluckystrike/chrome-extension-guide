@@ -5,7 +5,7 @@ description: "Permission string: Grants access to API Returns the user's most vi
 permalink: /permissions/topSites/
 category: permissions
 order: 44
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/topSites/"
+canonical_url: "https://bestchromeextensions.com/permissions/topSites/"
 ---
 
 # topSites Permission

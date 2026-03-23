@@ -6,7 +6,7 @@ date: 2025-04-05
 categories: [Chrome-Extensions, Analytics]
 tags: [analytics, tracking, chrome-extension]
 keywords: "chrome extension analytics, track chrome extension usage, extension usage metrics, chrome extension telemetry, privacy-friendly analytics extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/05/chrome-extension-analytics-tracking-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/04/05/chrome-extension-analytics-tracking-guide/"
 ---
 
 # Chrome Extension Analytics: Track Usage Without Compromising Privacy

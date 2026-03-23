@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [guides, chrome-extensions, development, web-scraping]
 tags: [ethical web scraping extension, data extraction chrome, web scraper chrome extension guide, chrome extension scraping, responsible data collection, web scraping best practices]
 keywords: "ethical web scraping extension, data extraction chrome, web scraper chrome extension guide, chrome extension scraping, responsible data collection"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/ethical-web-scraping-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/ethical-web-scraping-chrome-extension/"
 ---
 
 # Ethical Web Scraping with Chrome Extensions: A Developer Guide

@@ -6,7 +6,7 @@ date: 2025-03-10
 categories: [Chrome-Extensions, APIs]
 tags: [cookies, chrome-extension, tutorial]
 keywords: "chrome extension cookies API, chrome.cookies, manage cookies chrome extension, read cookies chrome extension, cookie manager extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/10/chrome-extension-cookies-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/10/chrome-extension-cookies-api-guide/"
 ---
 
 # Chrome Extension Cookies API: Read, Write, and Manage Browser Cookies

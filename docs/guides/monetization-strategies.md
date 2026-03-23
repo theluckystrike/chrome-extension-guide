@@ -2,16 +2,16 @@
 
 ## Introduction
 - Monetizing Chrome extensions requires balancing revenue with user experience
-- Multiple models exist: [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model), subscriptions, one-time purchases, and hybrid approaches
-- Chrome Web Storepayments API was deprecated in 2020 — third-party [payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) processors are now required
+- Multiple models exist: [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model), subscriptions, one-time purchases, and hybrid approaches
+- Chrome Web Storepayments API was deprecated in 2020 — third-party [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processors are now required
 - This guide covers implementation patterns, code examples, and best practices
 
-## [Freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) Model Design
+## [Freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model Design
 
 ### Core Concept
-- Offer basic features free, [premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) features paid
+- Offer basic features free, [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) features paid
 - Free tier should provide genuine value — enough to demonstrate product worth
-- [Premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) tier should solve real pain points that free users experience
+- [Premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) tier should solve real pain points that free users experience
 
 ### Implementation Pattern
 ```javascript
@@ -25,8 +25,8 @@
 const PREMIUM_FEATURES = ['export-pdf', 'api-access', 'unlimited-history'];
 
 async function checkPremiumStatus() {
-  const { license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('license');
-  return license?.tier === '[premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)';
+  const { license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('license');
+  return license?.tier === '[premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)';
 }
 
 async function checkFeatureAccess(feature) {
@@ -42,14 +42,14 @@ async function checkFeatureAccess(feature) {
 - Pro: unlimited usage, advanced features ($5-15/month)
 - Enterprise: team management, SSO, dedicated support (custom pricing)
 
-## [Subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) Management
+## [Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Management
 
 ### Overview
 - Recurring revenue model providing predictable income
 - Requires ongoing value delivery to prevent churn
 - Can be monthly or annual (annual typically 20% discount)
 
-### [Subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) Tiers Example
+### [Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Tiers Example
 ```javascript
 const SUBSCRIPTION_TIERS = {
   free: {
@@ -106,27 +106,27 @@ async function activateLicense(key) {
   
   if (response.ok) {
     const license = await response.json();
-    await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ license });
+    await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ license });
     return { success: true, license };
   }
   return { success: false, error: 'Invalid license key' };
 }
 ```
 
-## [Payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) Processor Integration
+## [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Processor Integration
 
-### [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) Integration
+### [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Integration
 
 #### Setup
 ```javascript
-// Create [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) checkout session (server-side)
-const [stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) = require('[stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration)')(process.env.STRIPE_SECRET_KEY);
+// Create [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) checkout session (server-side)
+const [stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) = require('[stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)')(process.env.STRIPE_SECRET_KEY);
 
 async function createCheckoutSession(priceId, customerEmail, successUrl, cancelUrl) {
-  const session = await [stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration).checkout.sessions.create({
+  const session = await [stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration).checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [{ price: priceId, quantity: 1 }],
-    mode: '[subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)',
+    mode: '[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)',
     customer_email: customerEmail,
     success_url: successUrl,
     cancel_url: cancelUrl,
@@ -188,7 +188,7 @@ async function createCheckout(variantId, userEmail) {
 
 ### Gumroad Integration
 
-#### Simple Overlay [Payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration)
+#### Simple Overlay [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)
 ```javascript
 // Add Gumroad overlay to your extension
 function showGumroadOverlay(productId) {
@@ -249,7 +249,7 @@ app.post('/api/validate-license', async (req, res) => {
 const LICENSE_CACHE_DURATION = 60 * 60 * 1000; // 1 hour
 
 async function getValidLicense() {
-  const cached = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('license');
+  const cached = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('license');
   
   if (cached.license?.validatedAt > Date.now() - LICENSE_CACHE_DURATION) {
     return cached.license;
@@ -264,7 +264,7 @@ async function getValidLicense() {
   if (response.ok) {
     const license = await response.json();
     license.validatedAt = Date.now();
-    await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ license });
+    await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ license });
     return license;
   }
   
@@ -278,7 +278,7 @@ async function getValidLicense() {
 ```javascript
 const TRIAL_CONFIG = {
   duration: 14, // days
-  features: ['all-[premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)'], // all features during trial
+  features: ['all-[premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)'], // all features during trial
   limits: null // no limits during trial
 };
 
@@ -333,9 +333,9 @@ async function unlockPremiumFeatures() {
     permissions: ['scripting', 'cookies', 'webRequest']
   });
   
-  // Update storage to reflect [premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) status
-  await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
-    [premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model): true,
+  // Update storage to reflect [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) status
+  await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({
+    [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model): true,
     unlockedAt: new Date().toISOString()
   });
 }
@@ -354,13 +354,13 @@ class FeatureGate {
   }
   
   async canAccess(feature) {
-    const { license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('license');
+    const { license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('license');
     
     // Free feature
     if (!this.premiumFeatures.has(feature)) return true;
     
-    // [Premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) check
-    if (license?.tier === '[premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)' || license?.tier === 'enterprise') {
+    // [Premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) check
+    if (license?.tier === '[premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)' || license?.tier === 'enterprise') {
       return true;
     }
     
@@ -374,7 +374,7 @@ class FeatureGate {
   
   async requireFeature(feature) {
     if (!(await this.canAccess(feature))) {
-      throw new Error(`[Premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) feature: ${feature}`);
+      throw new Error(`[Premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) feature: ${feature}`);
     }
   }
 }
@@ -393,7 +393,7 @@ class UsageTracker {
   }
   
   async trackUsage(action, count = 1) {
-    const { usage, license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['usage', 'license']);
+    const { usage, license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get(['usage', 'license']);
     const tier = license?.tier || 'free';
     const limit = this.limits[tier]?.[action] || Infinity;
     
@@ -404,7 +404,7 @@ class UsageTracker {
       return { allowed: false, remaining: 0, limit };
     }
     
-    await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({
+    await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({
       usage: { ...usage, [action]: newCount }
     });
     
@@ -412,7 +412,7 @@ class UsageTracker {
   }
   
   async getRemainingUsage(action) {
-    const { usage, license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get(['usage', 'license']);
+    const { usage, license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get(['usage', 'license']);
     const tier = license?.tier || 'free';
     const limit = this.limits[tier]?.[action] || 0;
     const current = usage?.[action] || 0;
@@ -492,7 +492,7 @@ const WHITE_LABEL_CONFIG = {
 
 async function applyWhiteLabel(companyId) {
   const config = await fetch(`/api/white-label/${companyId}`).then(r => r.json());
-  await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ whiteLabel: config });
+  await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ whiteLabel: config });
   return config;
 }
 ```
@@ -535,17 +535,17 @@ const PRICING_DATA = [
 ];
 ```
 
-## [Payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) Webhook Handling
+## [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Webhook Handling
 
 ### Server-Side Webhook Handler
 ```javascript
 // Express.js webhook endpoint
-app.post('/webhooks/[payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration)', express.raw({ type: 'application/json' }), async (req, res) => {
-  const sig = req.headers['[stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration)-signature'];
+app.post('/webhooks/[payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['[stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)-signature'];
   let event;
   
   try {
-    event = [stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration).webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    event = [stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration).webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
@@ -554,10 +554,10 @@ app.post('/webhooks/[payment](https://theluckystrike.github.io/extension-monetiz
     case 'checkout.session.completed':
       await handleCheckoutComplete(event.data.object);
       break;
-    case 'customer.[subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model).updated':
+    case 'customer.[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model).updated':
       await handleSubscriptionUpdate(event.data.object);
       break;
-    case 'customer.[subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model).deleted':
+    case 'customer.[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model).deleted':
       await handleSubscriptionCanceled(event.data.object);
       break;
     case 'invoice.payment_failed':
@@ -572,9 +572,9 @@ async function handleCheckoutComplete(session) {
   const { customer_email, metadata } = session;
   await db.licenses.create({
     email: customer_email,
-    tier: '[premium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)',
+    tier: '[premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)',
     stripeCustomerId: session.customer,
-    subscriptionId: session.[subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model),
+    subscriptionId: session.[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model),
     createdAt: new Date()
   });
 }
@@ -611,9 +611,9 @@ class RevenueAnalytics {
     };
     
     // Store locally
-    const { events } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('events');
+    const { events } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('events');
     events.push(data);
-    await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.set({ events });
+    await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.set({ events });
     
     // Send to analytics backend
     await fetch('/api/analytics/track', {
@@ -630,7 +630,7 @@ class RevenueAnalytics {
 }
 ```
 
-## Code Example: Complete [Payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) Flow
+## Code Example: Complete [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Flow
 
 ### Extension Popup Implementation
 ```javascript
@@ -648,7 +648,7 @@ class ExtensionPaymentFlow {
   }
   
   async checkLicenseStatus() {
-    const { license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('license');
+    const { license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('license');
     
     if (!license) {
       this.showUpgradePrompt();
@@ -691,7 +691,7 @@ class ExtensionPaymentFlow {
   }
   
   async handleRestore() {
-    const { license } = await [chrome.storage](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).local.get('license');
+    const { license } = await [chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('license');
     
     if (license?.key) {
       const response = await fetch('/api/restore-purchase', {
@@ -716,17 +716,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## Reference Resources
 
-- [Chrome Web Store [Payments](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration)](https://developer.chrome.com/docs/webstore/money) - Official documentation on deprecated [payments](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) API and alternatives
+- [Chrome Web Store [Payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)](https://developer.chrome.com/docs/webstore/money) - Official documentation on deprecated [payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) API and alternatives
 - [Chrome Web Store Monetization](https://developer.chrome.com/docs/webstore/monetization) - Overview of monetization options
-- [[Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) Checkout Documentation](https://[stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration).com/docs/checkout) - [Payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration
+- [[Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Checkout Documentation](https://[stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration).com/docs/checkout) - [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration
 - [Lemon Squeezy Documentation](https://docs.lemonsqueezy.com) - Merchant of record for digital products
-- [Gumroad Documentation](https://gumroad.com/overlay) - Simple [payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) overlays
+- [Gumroad Documentation](https://gumroad.com/overlay) - Simple [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) overlays
 - [FTC Endorsement Guidelines](https://www.ftc.gov/endorsement) - Affiliate disclosure requirements
 
 ## Related Articles
 
 - [How to Monetize Your Chrome Extension — Complete Guide](../guides/monetization-overview.md) — Comprehensive overview of every monetization model with case studies
-- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Pricing psychology, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) tiers, and trial periods that convert
+- [SaaS Pricing Strategies](../monetization/saas-pricing.md) — Pricing psychology, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) tiers, and trial periods that convert
 - [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competitor pricing and find differentiation opportunities
 - [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate willingness to pay before setting your price
 - [User Interviews](../monetization/user-interviews.md) — Interview users to understand perceived value and price sensitivity
@@ -735,12 +735,12 @@ document.addEventListener('DOMContentLoaded', () => {
 - [Analytics and Telemetry](../guides/analytics-telemetry.md) — Track MRR, churn, and conversion metrics
 - [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md) — Optimize your listing to maximize install-to-trial conversions
 
-For end-to-end implementation guides on [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, license key systems, and paywall UI patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
+For end-to-end implementation guides on [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, license key systems, and paywall UI patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
 ## Conclusion
 - Choose a monetization model that matches your extension's value delivery
 - Always provide a free tier or trial to demonstrate value
-- Use established [payment](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) processors ([Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), Lemon Squeezy)
+- Use established [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processors ([Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), Lemon Squeezy)
 - Implement proper license validation for paid features
 - Track metrics to optimize pricing and conversion
 - Balance monetization with user experience to minimize churn

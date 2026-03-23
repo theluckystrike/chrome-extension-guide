@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Command Palette — Best Practices"
 description: "Implement a command palette for quick extension actions and navigation."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-command-palette/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-command-palette/"
 ---
 
 # Command Palette Pattern for Chrome Extensions

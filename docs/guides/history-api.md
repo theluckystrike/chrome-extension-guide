@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension History API — How to Search, Read, and Delete Browser History"
 description: "A comprehensive developer guide for building Chrome extensions using the History API with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/history-api/"
+canonical_url: "https://bestchromeextensions.com/guides/history-api/"
 ---
 # History API Guide
 
@@ -542,7 +542,7 @@ For complete API documentation, see: [developer.chrome.com/docs/extensions/refer
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

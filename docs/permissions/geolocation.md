@@ -5,7 +5,7 @@ description: ": (optional permission in MV3) Enables in extension pages MV3 chal
 permalink: /permissions/geolocation/
 category: permissions
 order: 20
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/geolocation/"
+canonical_url: "https://bestchromeextensions.com/permissions/geolocation/"
 ---
 
 # geolocation Permission

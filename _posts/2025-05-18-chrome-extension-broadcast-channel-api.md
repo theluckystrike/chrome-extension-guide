@@ -6,7 +6,7 @@ date: 2025-05-18
 categories: [Chrome-Extensions, APIs]
 tags: [broadcast-channel, communication, chrome-extension]
 keywords: "chrome extension broadcast channel, cross context communication extension, broadcast channel API chrome, chrome extension message between tabs, extension context communication"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/18/chrome-extension-broadcast-channel-api/"
+canonical_url: "https://bestchromeextensions.com/2025/05/18/chrome-extension-broadcast-channel-api/"
 ---
 
 # BroadcastChannel API in Chrome Extensions: Cross-Context Communication

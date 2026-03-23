@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "webpage archiver extension, save page offline, web archive chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-webpage-archiver-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-webpage-archiver-chrome-extension/"
 ---
 
 # Build a Webpage Archiver Chrome Extension: Complete 2025 Tutorial

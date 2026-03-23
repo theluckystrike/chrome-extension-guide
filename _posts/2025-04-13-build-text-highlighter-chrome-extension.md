@@ -6,7 +6,7 @@ date: 2025-04-13
 categories: [Chrome-Extensions, Tutorials]
 tags: [highlighter, annotation, chrome-extension]
 keywords: "chrome extension text highlighter, highlight text chrome extension, web annotation extension, build highlighter extension, chrome extension annotate"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/13/build-text-highlighter-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/13/build-text-highlighter-chrome-extension/"
 ---
 
 # Build a Text Highlighter Chrome Extension: Annotate and Save Web Content
@@ -894,4 +894,4 @@ Start building today, and transform the way users interact with web content thro
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

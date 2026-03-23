@@ -6,7 +6,7 @@ date: 2025-05-16
 categories: [Chrome-Extensions, Tutorials]
 tags: [favicon, customization, chrome-extension]
 keywords: "chrome extension favicon, change favicon chrome, custom tab icon extension, build favicon extension, chrome extension tab icon"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/16/build-favicon-changer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/16/build-favicon-changer-chrome-extension/"
 ---
 
 # Build a Favicon Changer Chrome Extension: Customize Tab Icons

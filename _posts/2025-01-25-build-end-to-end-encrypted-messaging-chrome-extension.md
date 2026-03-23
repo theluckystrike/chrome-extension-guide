@@ -6,14 +6,14 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "encrypted messaging extension, e2e encryption chrome, secure chat extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-end-to-end-encrypted-messaging-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-end-to-end-encrypted-messaging-chrome-extension/"
 ---
 
 # Build End-to-End Encrypted Messaging Chrome Extension: Complete 2025 Guide
 
 In an era where digital privacy concerns are at an all-time high, building an encrypted messaging extension represents one of the most valuable projects a Chrome extension developer can undertake. End-to-end encryption (E2EE) ensures that only the intended recipients can read messages—no servers, no intermediaries, not even the extension developer can access the plaintext content. This comprehensive guide will walk you through building a production-ready secure chat extension using modern cryptographic standards and Chrome's Manifest V3 architecture.
 
-This tutorial builds upon the foundational Chrome extension development concepts covered in our [beginner's guide](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/), so make sure you understand the basics before diving into this advanced topic. We will explore cryptographic libraries, key management strategies, secure message handling, and the architectural patterns that make modern encrypted communication possible.
+This tutorial builds upon the foundational Chrome extension development concepts covered in our [beginner's guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/), so make sure you understand the basics before diving into this advanced topic. We will explore cryptographic libraries, key management strategies, secure message handling, and the architectural patterns that make modern encrypted communication possible.
 
 ---
 

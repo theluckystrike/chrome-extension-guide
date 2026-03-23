@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Error Reporting — Developer Guide"
 description: "Learn Chrome extension error reporting with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-error-reporting/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-error-reporting/"
 ---
 # Error Reporting and Monitoring for Chrome Extensions
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Web Requests — How to Intercept and Modify Network Traffic"
 description: "A comprehensive guide to intercepting and modifying network traffic in Chrome extensions using chrome.webRequest API and declarativeNetRequest for Manifest V3."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/web-requests/"
+canonical_url: "https://bestchromeextensions.com/guides/web-requests/"
 ---
 
 # Chrome Extension Web Requests — How to Intercept and Modify Network Traffic

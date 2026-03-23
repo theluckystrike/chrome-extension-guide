@@ -6,7 +6,7 @@ date: 2025-04-08
 categories: [Chrome-Extensions, SEO]
 tags: [link-checker, seo, chrome-extension]
 keywords: "chrome extension link checker, broken link finder chrome, dead link checker extension, build link validator chrome, chrome extension check links"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/08/build-broken-link-checker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/08/build-broken-link-checker-chrome-extension/"
 ---
 
 # Build a Broken Link Checker Chrome Extension: Find Dead Links Instantly

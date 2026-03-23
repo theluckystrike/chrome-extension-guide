@@ -2,7 +2,7 @@
 layout: default
 title: "Best Practices for Chrome Extension Performance and Memory Usage"
 description: "Learn how to build high-performance Chrome extensions with minimal memory footprint. Discover optimization techniques, lazy loading strategies, and memory management best practices for Manifest V3."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-performance-best-practices/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-best-practices/"
 proficiency_level: "Intermediate"
 ---
 

@@ -6,7 +6,7 @@ date: 2025-04-28
 categories: [Chrome-Extensions, Accessibility]
 tags: [accessibility, wcag, chrome-extension]
 keywords: "chrome extension accessibility checker, wcag checker chrome, a11y scanner extension, build accessibility extension, accessibility audit chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/28/build-accessibility-checker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/28/build-accessibility-checker-chrome-extension/"
 ---
 
 # Build an Accessibility Checker Chrome Extension: WCAG Compliance Scanner

@@ -6,7 +6,7 @@ date: 2025-04-27
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, bookmarks, integration]
 keywords: "tab suspender pro bookmarks, save suspended tabs bookmarks, tab suspender bookmark integration, chrome bookmark tab sessions, organize tabs bookmarks"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/27/tab-suspender-pro-bookmark-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/04/27/tab-suspender-pro-bookmark-integration/"
 ---
 
 # Tab Suspender Pro and Bookmarks: Save Suspended Tabs as Bookmark Folders

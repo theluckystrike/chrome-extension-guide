@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "rollup chrome extension, rollup mv3, extension bundler, chrome extension build tool"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/rollup-configuration-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/rollup-configuration-chrome-extensions/"
 ---
 
 # Rollup Configuration for Chrome Extensions: Complete Guide

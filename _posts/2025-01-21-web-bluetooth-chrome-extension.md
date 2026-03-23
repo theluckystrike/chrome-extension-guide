@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, API-Guide, IoT]
 tags: [chrome-extension, bluetooth, iot, ble, tutorial]
 keywords: "web bluetooth extension, ble chrome extension, bluetooth device extension, iot chrome extension, chrome bluetooth api, web ble extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/web-bluetooth-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/web-bluetooth-chrome-extension/"
 ---
 
 # Web Bluetooth API in Chrome Extensions: Connect to IoT Devices

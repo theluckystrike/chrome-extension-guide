@@ -6,7 +6,7 @@ date: 2025-03-23
 categories: [Chrome-Extensions, Debugging]
 tags: [debugging, network, chrome-extension]
 keywords: "debug network chrome extension, chrome extension network tab, extension API requests debug, chrome extension fetch debug, network devtools extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/23/chrome-extension-network-debugging-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/23/chrome-extension-network-debugging-guide/"
 ---
 
 # Debugging Network Requests in Chrome Extensions: DevTools Deep Dive

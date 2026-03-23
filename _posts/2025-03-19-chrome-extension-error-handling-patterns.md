@@ -6,7 +6,7 @@ date: 2025-03-19
 categories: [Chrome-Extensions, Development]
 tags: [error-handling, best-practices, chrome-extension]
 keywords: "chrome extension error handling, chrome extension try catch, extension error logging, chrome extension crash recovery, handle errors chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/19/chrome-extension-error-handling-patterns/"
+canonical_url: "https://bestchromeextensions.com/2025/03/19/chrome-extension-error-handling-patterns/"
 ---
 
 # Chrome Extension Error Handling: Graceful Failures and User Feedback

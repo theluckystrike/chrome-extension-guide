@@ -5,7 +5,7 @@ description: "The permission grants extensions access to the API, which enables 
 permalink: /permissions/tabGroups/
 category: permissions
 order: 42
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tabGroups/"
+canonical_url: "https://bestchromeextensions.com/permissions/tabGroups/"
 ---
 
 # tabGroups Permission

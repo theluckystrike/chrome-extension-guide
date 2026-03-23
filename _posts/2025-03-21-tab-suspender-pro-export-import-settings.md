@@ -5,7 +5,7 @@ description: "Complete guide to exporting, importing, and backing up your Tab Su
 date: 2025-03-21
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, settings, backup]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/21/tab-suspender-pro-export-import-settings/"
+canonical_url: "https://bestchromeextensions.com/2025/03/21/tab-suspender-pro-export-import-settings/"
 ---
 
 # Tab Suspender Pro: Export, Import, and Backup Your Settings

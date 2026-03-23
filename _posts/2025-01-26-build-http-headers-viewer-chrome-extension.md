@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "http headers extension, request headers chrome, response headers viewer, chrome extension http headers, view http headers chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-http-headers-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-http-headers-viewer-chrome-extension/"
 ---
 
 # Build an HTTP Headers Viewer Chrome Extension

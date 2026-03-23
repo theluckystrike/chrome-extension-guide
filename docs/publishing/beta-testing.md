@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Beta Testing — Publishing Guide"
 description: "Learn how to beta test Chrome extensions using trusted testers, unlisted releases, and feature flags before full public launch."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/publishing/beta-testing/"
+canonical_url: "https://bestchromeextensions.com/publishing/beta-testing/"
 ---
 
 # Beta Testing Chrome Extensions

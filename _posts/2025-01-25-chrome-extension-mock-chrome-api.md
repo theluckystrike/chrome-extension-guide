@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "mock chrome api, chrome extension unit test, fake chrome api, mocking chrome extension apis, chrome extension testing best practices"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-mock-chrome-api/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/chrome-extension-mock-chrome-api/"
 ---
 
 # Mocking Chrome APIs for Extension Testing: Complete Guide

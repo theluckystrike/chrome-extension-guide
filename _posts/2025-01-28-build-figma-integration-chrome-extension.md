@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "figma chrome extension, design to code extension, figma tool, figma integration chrome extension, build figma extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-figma-integration-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-figma-integration-chrome-extension/"
 ---
 
 # Build a Figma Integration Chrome Extension: Complete Developer Guide

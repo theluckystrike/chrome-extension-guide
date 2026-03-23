@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Updates — How to Handle Version Upgrades and Data Migration"
 description: "A comprehensive guide to handling Chrome extension updates, version upgrades, data migration scripts, breaking changes, and rollback strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/extension-updates/"
+canonical_url: "https://bestchromeextensions.com/guides/extension-updates/"
 ---
 
 # Chrome Extension Updates — How to Handle Version Upgrades and Data Migration

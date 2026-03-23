@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "declarativeNetRequest tutorial, chrome network rules, mv3 network blocking, chrome.declarativeNetRequest API, Manifest V3 network request modification"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/declarative-net-request-api-complete-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/declarative-net-request-api-complete-tutorial/"
 ---
 
 # DeclarativeNetRequest API Complete Tutorial: Master Chrome Network Rules in Manifest V3

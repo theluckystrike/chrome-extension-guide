@@ -6,7 +6,7 @@ date: 2025-04-20
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, freelancer, productivity]
 keywords: "tab suspender pro freelancer, freelancer browser tabs, manage client tabs chrome, tab suspender project management, freelance chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/20/tab-suspender-pro-for-freelancers/"
+canonical_url: "https://bestchromeextensions.com/2025/04/20/tab-suspender-pro-for-freelancers/"
 ---
 
 # Tab Suspender Pro for Freelancers: Manage Client Tabs Across Projects

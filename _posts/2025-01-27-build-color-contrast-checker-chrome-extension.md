@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "contrast checker extension, wcag contrast chrome, accessibility color"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/build-color-contrast-checker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/build-color-contrast-checker-chrome-extension/"
 ---
 
 # Build a Color Contrast Checker Chrome Extension: Complete Guide

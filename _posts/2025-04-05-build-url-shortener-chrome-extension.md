@@ -6,7 +6,7 @@ date: 2025-04-05
 categories: [Chrome-Extensions, Tutorials]
 tags: [url-shortener, tutorial, chrome-extension]
 keywords: "chrome extension url shortener, build url shortener extension, shorten links chrome extension, chrome extension bitly, url shortener tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/05/build-url-shortener-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/05/build-url-shortener-chrome-extension/"
 ---
 
 # Build a URL Shortener Chrome Extension: Complete Tutorial with API Integration

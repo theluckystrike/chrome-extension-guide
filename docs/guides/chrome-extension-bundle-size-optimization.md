@@ -2,7 +2,7 @@
 layout: default
 title: "Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression"
 description: "Master Chrome extension bundle size optimization with tree-shaking, code splitting, and compression techniques. Learn webpack, vite, and rollup configurations to stay under Chrome Web Store limits."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-bundle-size-optimization/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-bundle-size-optimization/"
 proficiency_level: "Intermediate"
 ---
 
@@ -571,7 +571,7 @@ Chrome extension bundle size optimization requires attention throughout the deve
 
 Remember these key principles: respect the Chrome Web Store size limits while targeting smaller sizes for better user experience; configure your bundler specifically for extensions with proper chunk splitting and minification; use dynamic imports to defer non-critical code; share chunks between entry points to eliminate duplication; optimize all assets aggressively; and implement CI checks to prevent regressions.
 
-For more guidance on extension performance, see our guide on [Chrome Extension Performance Best Practices](/chrome-extension-guide/guides/chrome-extension-performance-best-practices/). If you're evaluating frameworks for your extension, our [WXT Framework Setup](/chrome-extension-guide/guides/wxt-framework-setup/) and [Plasmo Framework Setup](/chrome-extension-guide/guides/plasmo-framework-setup/) guides provide detailed configuration recommendations that include size optimization considerations.
+For more guidance on extension performance, see our guide on [Chrome Extension Performance Best Practices](/guides/chrome-extension-performance-best-practices/). If you're evaluating frameworks for your extension, our [WXT Framework Setup](/guides/wxt-framework-setup/) and [Plasmo Framework Setup](/guides/plasmo-framework-setup/) guides provide detailed configuration recommendations that include size optimization considerations.
 
 Start implementing these optimizations today, and your users will experience faster, more responsive extensions that respect their resources and provide excellent performance.
 

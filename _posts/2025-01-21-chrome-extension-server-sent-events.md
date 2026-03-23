@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "sse chrome extension, server sent events extension, real-time updates extension, chrome extension sse, event source chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-server-sent-events/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/chrome-extension-server-sent-events/"
 ---
 
 # Server-Sent Events in Chrome Extensions: Complete Guide

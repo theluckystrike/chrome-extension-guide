@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension WXT Framework — Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/wxt-framework-setup/"
+canonical_url: "https://bestchromeextensions.com/guides/wxt-framework-setup/"
 ---
 # WXT Framework Setup
 
@@ -175,7 +175,7 @@ This framework significantly reduces the boilerplate required for Chrome extensi
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

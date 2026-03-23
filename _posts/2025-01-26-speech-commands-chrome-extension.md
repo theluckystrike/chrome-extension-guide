@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [tutorials, chrome-extensions, productivity]
 tags: [voice command extension, hands-free browser, speech control chrome, chrome extension tutorial, voice recognition]
 keywords: "voice command extension, hands-free browser, speech control chrome, voice control chrome extension, chrome speech recognition"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/speech-commands-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/speech-commands-chrome-extension/"
 ---
 
 # Voice Command Chrome Extension: Hands-Free Browser Navigation

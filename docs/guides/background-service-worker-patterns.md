@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Background Service Worker Patterns — Alarms, Keep-Alive, and State Persistence"
 description: "Master Chrome extension service worker patterns for MV3. Learn about chrome.alarms API, keep-alive strategies, state persistence, and building robust background task handling."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/background-service-worker-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/background-service-worker-patterns/"
 ---
 
 # Chrome Extension Background Service Worker Patterns — Alarms, Keep-Alive, and State Persistence
@@ -707,7 +707,7 @@ background.initialize();
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

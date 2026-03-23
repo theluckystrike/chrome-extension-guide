@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension inject css, content script css injection, style page chrome extension, chrome extension content script CSS, inject styles chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/css-injection-chrome-extension-content-script-guide/"
 ---
 
 # CSS Injection in Chrome Extension Content Scripts: Complete Guide

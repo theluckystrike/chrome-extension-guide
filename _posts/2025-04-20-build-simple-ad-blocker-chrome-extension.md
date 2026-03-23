@@ -7,7 +7,7 @@ categories: [Chrome-Extensions, Tutorials]
 tags: [ad-blocker, declarativeNetRequest, chrome-extension]
 keywords: "chrome extension ad blocker, build ad blocker chrome, declarativeNetRequest ad block, simple ad blocker extension, chrome extension block ads mv3"
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/20/build-simple-ad-blocker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/20/build-simple-ad-blocker-chrome-extension/"
 ---
 
 # Build a Simple Ad Blocker Chrome Extension with declarativeNetRequest

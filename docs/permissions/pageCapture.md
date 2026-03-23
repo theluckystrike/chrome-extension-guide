@@ -5,7 +5,7 @@ description: "Access to the API for saving complete web pages as MHTML files. No
 permalink: /permissions/pageCapture/
 category: permissions
 order: 28
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/pageCapture/"
+canonical_url: "https://bestchromeextensions.com/permissions/pageCapture/"
 ---
 
 # pageCapture Permission

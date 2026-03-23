@@ -3,7 +3,7 @@
 title: How Tab Suspender Pro Reduces Chrome Memory Usage by 80% — Complete Guide
 description: Learn how Tab Suspender Pro can cut Chrome memory consumption by up to 80%. Expert benchmarks, comparison with other tab management tools, and step-by-step setup guide for 2026.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/tab-suspender-pro-reduce-memory/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-reduce-memory/"
 
 ---
 
@@ -263,7 +263,7 @@ Ready to reclaim your browser memory? Install Tab Suspender Pro now:
 
 **[Download Tab Suspender Pro from Chrome Web Store](https://chrome.google.com/webstore/detail/tab-suspender-pro/fgmfmglnlkajcjpfclofhkgecjmgbpip)**
 
-For more Chrome extension development resources, explore the [Chrome Extension Guide](/chrome-extension-guide/) — your complete reference for building powerful browser extensions.
+For more Chrome extension development resources, explore the [Chrome Extension Guide](/) — your complete reference for building powerful browser extensions.
 
 ---
 
@@ -473,7 +473,7 @@ Take the first step toward a faster, more efficient Chrome experience:
 
 Ready to optimize your entire browser setup? Visit [zovo.one](https://zovo.one) for more browser optimization tools, extensions, and productivity resources.
 
-For developers interested in building similar extensions, check out the [Chrome Extension Guide](/chrome-extension-guide/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
+For developers interested in building similar extensions, check out the [Chrome Extension Guide](/) — your complete reference for creating powerful browser extensions with the latest Chrome APIs.
 
 ---
 

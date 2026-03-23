@@ -1,7 +1,7 @@
 ---
 title: Building a GitHub Notifications Extension
 description: Learn how to build a Chrome extension that polls the GitHub API for unread notifications.
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-github-notifier/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-github-notifier/"
 ---
 
 # Chrome Extension Building a GitHub Notifications Extension — Complete Developer's Guide

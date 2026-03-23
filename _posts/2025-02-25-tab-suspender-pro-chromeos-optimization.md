@@ -5,7 +5,7 @@ description: "Learn how Tab Suspender Pro transforms ChromeOS performance by aut
 date: 2025-02-25
 categories: [Chrome-Extensions, ChromeOS]
 tags: [tab-suspender-pro, chromeos, chromebook]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/25/tab-suspender-pro-chromeos-optimization/"
+canonical_url: "https://bestchromeextensions.com/2025/02/25/tab-suspender-pro-chromeos-optimization/"
 ---
 
 # Tab Suspender Pro on ChromeOS: Maximize Your Chromebook Performance

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Idle Detection — Best Practices"
 description: "Detect user idle state with the Idle API to pause or resume extension activities."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/idle-detection/"
+canonical_url: "https://bestchromeextensions.com/patterns/idle-detection/"
 ---
 
 # Chrome Extension Idle Detection API Patterns

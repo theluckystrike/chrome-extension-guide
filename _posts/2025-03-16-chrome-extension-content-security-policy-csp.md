@@ -6,7 +6,7 @@ date: 2025-03-16
 categories: [Chrome-Extensions, Security]
 tags: [csp, security, chrome-extension]
 keywords: "chrome extension CSP, content security policy chrome extension, chrome extension inline script blocked, CSP manifest v3, chrome extension security headers"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/16/chrome-extension-content-security-policy-csp/"
+canonical_url: "https://bestchromeextensions.com/2025/03/16/chrome-extension-content-security-policy-csp/"
 ---
 
 # Chrome Extension Content Security Policy (CSP): What You Need to Know

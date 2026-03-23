@@ -5,7 +5,7 @@ description: "Access to the API for controlling per-site content settings (cooki
 permalink: /permissions/contentSettings/
 category: permissions
 order: 8
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/contentSettings/"
+canonical_url: "https://bestchromeextensions.com/permissions/contentSettings/"
 ---
 
 # contentSettings Permission

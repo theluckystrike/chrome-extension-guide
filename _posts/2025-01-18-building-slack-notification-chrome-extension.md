@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "slack chrome extension, notification extension, slack integration, chrome extension slack api, slack webhooks chrome, slack notification chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-slack-notification-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-slack-notification-chrome-extension/"
 ---
 
 # Building a Slack Notification Chrome Extension: Complete Developer's Guide
@@ -607,4 +607,4 @@ With the knowledge gained from this tutorial, you're well-equipped to create a s
 - [Chrome Extension Notifications API Guide]({% post_url 2025-01-17-chrome-extension-notifications-api-guide %}) - Master the Chrome notifications system for displaying alerts and updates.
 - [Chrome Identity API and OAuth Guide]({% post_url 2025-01-24-chrome-identity-api-oauth %}) - Explore Google's identity services for user authentication.
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

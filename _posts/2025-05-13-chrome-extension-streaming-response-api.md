@@ -6,7 +6,7 @@ date: 2025-05-13
 categories: [Chrome-Extensions, APIs]
 tags: [streaming, real-time, chrome-extension]
 keywords: "chrome extension streaming, streaming api chrome extension, server sent events extension, chrome extension real time data, stream response chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/13/chrome-extension-streaming-response-api/"
+canonical_url: "https://bestchromeextensions.com/2025/05/13/chrome-extension-streaming-response-api/"
 ---
 
 # Chrome Extension Streaming API Responses: Handle Real-Time Data Feeds

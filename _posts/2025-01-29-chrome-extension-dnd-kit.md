@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "dnd kit extension, drag drop library chrome, sortable extension, dnd-kit chrome extension, react drag and drop chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-dnd-kit/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-dnd-kit/"
 ---
 
 # Complete Guide to dnd-kit Drag and Drop in Chrome Extensions
@@ -475,8 +475,8 @@ dnd-kit is an excellent choice for implementing drag and drop functionality in C
 
 The key to success is starting with the basic implementation and progressively adding complexity as needed. Remember to optimize for Chrome's performance model, handle edge cases gracefully, maintain state persistence, and ensure accessibility for all users.
 
-For more information on building Chrome extensions with modern React patterns, explore the full [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) — your comprehensive resource for everything from getting started to publishing on the Chrome Web Store.
+For more information on building Chrome extensions with modern React patterns, explore the full [Chrome Extension Guide](https://bestchromeextensions.com/) — your comprehensive resource for everything from getting started to publishing on the Chrome Web Store.
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "color palette extension, color scheme chrome, palette generator, chrome extension color picker, build color extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/chrome-extension-color-palette/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/chrome-extension-color-palette/"
 ---
 
 # Build a Color Palette Generator Chrome Extension: Complete Guide

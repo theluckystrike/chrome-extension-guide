@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension csp, content security policy manifest v3, chrome extension content security policy, manifest v3 csp, csp chrome extension best practices"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/content-security-policy-chrome-extensions/"
 ---
 
 # Content Security Policy for Chrome Extensions: Complete Guide

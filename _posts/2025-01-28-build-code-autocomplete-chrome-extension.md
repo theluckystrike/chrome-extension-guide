@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "code autocomplete extension, ai code helper chrome, code suggestion"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-code-autocomplete-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-code-autocomplete-chrome-extension/"
 ---
 
 # Build a Code Autocomplete Chrome Extension: Complete Developer Guide

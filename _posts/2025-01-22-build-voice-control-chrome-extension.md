@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "voice control extension, voice commands chrome, speech to action extension, chrome voice assistant, voice activated chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-voice-control-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-voice-control-chrome-extension/"
 ---
 
 # Build a Voice Control Chrome Extension: Complete Implementation Guide

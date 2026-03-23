@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Cookies API — How to Read, Set, and Delete Browser Cookies"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/cookies-api/"
+canonical_url: "https://bestchromeextensions.com/guides/cookies-api/"
 ---
 # Chrome Extension Cookies API — How to Read, Set, and Delete Browser Cookies
 

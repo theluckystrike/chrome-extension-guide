@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [guides, chrome-extensions, webgpu, gpu-computing]
 tags: [webgpu chrome extension, gpu computing extension, webgpu api extension, chrome extension gpu, webgpu compute shaders, chrome extension performance]
 keywords: "webgpu chrome extension, gpu computing extension, webgpu api extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/webgpu-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/webgpu-chrome-extension/"
 ---
 
 # WebGPU in Chrome Extensions: GPU-Accelerated Computing

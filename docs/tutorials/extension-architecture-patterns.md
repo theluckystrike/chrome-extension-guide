@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Architecture Patterns"
 description: "Learn the essential architecture patterns for building robust Chrome extensions. Covers popup design, service workers, content scripts, side panels, DevTools integration, and modular code sharing."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/extension-architecture-patterns/"
+canonical_url: "https://bestchromeextensions.com/tutorials/extension-architecture-patterns/"
 ---
 
 # Chrome Extension Architecture Patterns
@@ -1135,9 +1135,9 @@ Use this matrix to choose the right architecture:
 
 ## Related Articles
 
-- [Extension Architecture Guide](/chrome-extension-guide/docs/guides/extension-architecture/) — Comprehensive guide to extension architecture fundamentals
-- [Background Service Workers](/chrome-extension-guide/docs/guides/service-workers/) — Deep dive into service worker implementation
-- [Content Scripts Deep Dive](/chrome-extension-guide/docs/guides/content-scripts-deep-dive/) — Advanced content script patterns and techniques
+- [Extension Architecture Guide](/docs/guides/extension-architecture/) — Comprehensive guide to extension architecture fundamentals
+- [Background Service Workers](/docs/guides/service-workers/) — Deep dive into service worker implementation
+- [Content Scripts Deep Dive](/docs/guides/content-scripts-deep-dive/) — Advanced content script patterns and techniques
 
 ---
 

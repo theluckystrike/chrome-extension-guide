@@ -6,7 +6,7 @@ date: 2025-05-04
 categories: [Chrome-Extensions, Explainers]
 tags: [tab-hibernation, performance, chrome-extension]
 keywords: "chrome tab hibernation, tab hibernation extension, chrome tab sleep mode, hibernating browser tabs, tab freezing chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/04/chrome-extension-tab-hibernation-explained/"
+canonical_url: "https://bestchromeextensions.com/2025/05/04/chrome-extension-tab-hibernation-explained/"
 ---
 
 # Chrome Tab Hibernation Explained: How Tab Suspenders Save Your Computer

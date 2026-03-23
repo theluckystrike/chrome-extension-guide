@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension End-to-End Testing Guide — Automated Browser Testing"
 description: "Master end-to-end testing for Chrome extensions using Puppeteer, Playwright, and automated browser testing. Learn to test extension UIs, background scripts, and cross-context communication."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/e2e-testing/"
+canonical_url: "https://bestchromeextensions.com/guides/e2e-testing/"
 ---
 
 # Chrome Extension End-to-End Testing Guide — Automated Browser Testing

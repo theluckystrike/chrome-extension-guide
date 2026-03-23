@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "css grid inspector, grid overlay chrome, css layout tools extension, grid inspector chrome extension, inspect css grid, chrome devtools grid, flexbox grid inspector, css grid debugger, web development grid tools, grid layout visualizer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/build-css-grid-inspector-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/build-css-grid-inspector-extension/"
 ---
 
 # Build a CSS Grid Inspector Extension

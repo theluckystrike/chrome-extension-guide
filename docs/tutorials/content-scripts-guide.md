@@ -2,7 +2,7 @@
 layout: default
 title: "Mastering Content Scripts in Chrome Extensions — Developer Guide"
 description: "A comprehensive guide to mastering content scripts in Chrome extensions: injection methods, isolated worlds, DOM access patterns, CSS injection, run_at timing, matching patterns, dynamic registration, page context communication, and shadow DOM interaction."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/content-scripts-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/content-scripts-guide/"
 ---
 
 # Mastering Content Scripts in Chrome Extensions
@@ -449,9 +449,9 @@ await chrome.scripting.executeScript({
 
 ## Related Articles {#related-articles}
 
-- [Content Script Injection](/chrome-extension-guide/guides/content-script-injection/) — Deep dive into static vs programmatic injection
-- [Content Script Isolation](/chrome-extension-guide/guides/content-script-isolation/) — Understanding isolated vs main worlds
-- [Content Script Patterns](/chrome-extension-guide/guides/content-script-patterns/) — Common patterns and best practices
+- [Content Script Injection](/guides/content-script-injection/) — Deep dive into static vs programmatic injection
+- [Content Script Isolation](/guides/content-script-isolation/) — Understanding isolated vs main worlds
+- [Content Script Patterns](/guides/content-script-patterns/) — Common patterns and best practices
 
 ---
 

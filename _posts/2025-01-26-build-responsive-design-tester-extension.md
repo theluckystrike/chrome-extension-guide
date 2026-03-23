@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "responsive tester extension, mobile view chrome, device simulator extension, responsive design testing tool, chrome responsive tester, viewport tester chrome extension, mobile emulator extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-responsive-design-tester-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-responsive-design-tester-extension/"
 ---
 
 # Build a Responsive Design Tester Extension

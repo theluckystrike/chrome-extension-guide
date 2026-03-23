@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "budget tracker extension, expense manager chrome, finance extension, build chrome extension, chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-budget-tracker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-budget-tracker-chrome-extension/"
 ---
 
 # Build a Budget Tracker Chrome Extension: Complete Development Guide

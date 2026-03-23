@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Linting & Code Quality — Developer Guide"
 description: "Learn Chrome extension linting & code quality with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/linting-code-quality/"
+canonical_url: "https://bestchromeextensions.com/guides/linting-code-quality/"
 ---
 # Code Quality and Linting for Chrome Extensions
 

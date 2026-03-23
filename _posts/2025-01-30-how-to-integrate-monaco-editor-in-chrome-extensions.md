@@ -6,7 +6,7 @@ date: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "monaco editor extension, vs code editor chrome, code editor extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/30/how-to-integrate-monaco-editor-in-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/30/how-to-integrate-monaco-editor-in-chrome-extensions/"
 ---
 
 # How to Integrate Monaco Editor in Chrome Extensions: Complete Guide

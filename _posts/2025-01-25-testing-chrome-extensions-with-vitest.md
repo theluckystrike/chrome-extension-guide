@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing, tooling]
 keywords: "vitest chrome extension, vitest extension test, fast extension testing, vitest chrome api mock, chrome extension unit testing vitest"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/testing-chrome-extensions-with-vitest/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/testing-chrome-extensions-with-vitest/"
 ---
 
 # Testing Chrome Extensions with Vitest: Fast & Modern Testing Guide

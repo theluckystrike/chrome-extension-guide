@@ -5,7 +5,7 @@ description: ": : Access to API for OAuth2 authentication : Medium — authentic
 permalink: /permissions/identity/
 category: permissions
 order: 22
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/identity/"
+canonical_url: "https://bestchromeextensions.com/permissions/identity/"
 ---
 
 # identity Permission — Chrome Extension Reference

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension State Machines — Developer Guide"
 description: "Learn Chrome extension state machines with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-state-machines/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-state-machines/"
 ---
 # State Machines for Chrome Extension Logic
 

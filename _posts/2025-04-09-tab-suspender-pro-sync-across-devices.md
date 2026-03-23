@@ -6,7 +6,7 @@ date: 2025-04-09
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, sync, cross-device]
 keywords: "tab suspender pro sync, sync chrome extension settings, tab suspender settings devices, chrome extension sync data, tab suspender cross device"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/09/tab-suspender-pro-sync-across-devices/"
+canonical_url: "https://bestchromeextensions.com/2025/04/09/tab-suspender-pro-sync-across-devices/"
 ---
 
 # Tab Suspender Pro Settings Sync: Same Configuration Across All Devices

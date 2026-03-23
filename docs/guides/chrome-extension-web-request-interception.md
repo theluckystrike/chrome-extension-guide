@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Web Request Interception — Complete Developer Guide"
 description: "Master webRequest API for Chrome extensions. Learn request modification, ad blocking patterns, and privacy tools with TypeScript examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-web-request-interception/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-web-request-interception/"
 ---
 
 # Chrome Extension Web Request Interception — Complete Developer Guide

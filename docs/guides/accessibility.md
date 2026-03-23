@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Accessibility Guide — Build Extensions Everyone Can Use"
 description: "Learn how to build accessible Chrome extensions with this developer guide covering ARIA attributes, keyboard navigation, screen reader support, color contrast, and focus management."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/accessibility/"
+canonical_url: "https://bestchromeextensions.com/guides/accessibility/"
 ---
 # Chrome Extension Accessibility Guide — Build Extensions Everyone Can Use
 
@@ -730,5 +730,5 @@ Before publishing your extension, verify:
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

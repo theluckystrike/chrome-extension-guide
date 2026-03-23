@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "prism js extension, code highlight chrome, syntax highlight extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/prism-js-syntax-highlighting-in-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/prism-js-syntax-highlighting-in-extensions/"
 ---
 
 # Prism.js Syntax Highlighting in Extensions: Complete Implementation Guide

@@ -5,7 +5,7 @@ description: "Access to the API for capturing the visible area of a tab as a med
 permalink: /permissions/tabCapture/
 category: permissions
 order: 41
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/tabCapture/"
+canonical_url: "https://bestchromeextensions.com/permissions/tabCapture/"
 ---
 
 # tabCapture Permission

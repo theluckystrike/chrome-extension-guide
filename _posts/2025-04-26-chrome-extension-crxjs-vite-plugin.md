@@ -6,7 +6,7 @@ date: 2025-04-26
 categories: [Chrome-Extensions, Build-Tools]
 tags: [crxjs, vite, chrome-extension]
 keywords: "crxjs chrome extension, crxjs vite plugin, fast chrome extension build, crxjs tutorial, chrome extension vite crxjs"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/26/chrome-extension-crxjs-vite-plugin/"
+canonical_url: "https://bestchromeextensions.com/2025/04/26/chrome-extension-crxjs-vite-plugin/"
 ---
 
 # CRXJS Vite Plugin: The Fastest Way to Build Chrome Extensions
@@ -355,4 +355,4 @@ Start your next extension project with CRXJS and Vite, and experience the fastes
 
 ---
 
-*Ready to dive deeper into Chrome extension development? Explore more guides on our [Chrome Extension Guide](/chrome-extension-guide/) to master extension architecture, optimization techniques, and publishing strategies.*
+*Ready to dive deeper into Chrome extension development? Explore more guides on our [Chrome Extension Guide](/) to master extension architecture, optimization techniques, and publishing strategies.*

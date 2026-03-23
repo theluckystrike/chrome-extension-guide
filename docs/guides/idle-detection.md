@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Idle Detection — Developer Guide"
 description: "Learn Chrome extension idle detection with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/idle-detection/"
+canonical_url: "https://bestchromeextensions.com/guides/idle-detection/"
 ---
 # Idle Detection API
 
@@ -367,7 +367,7 @@ Use these capabilities to implement auto-save, session timeouts, away status, an
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---
 

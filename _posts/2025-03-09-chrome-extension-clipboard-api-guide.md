@@ -6,7 +6,7 @@ date: 2025-03-09
 categories: [Chrome-Extensions, APIs]
 tags: [clipboard, chrome-extension, tutorial]
 keywords: "chrome extension clipboard, clipboard API chrome extension, copy paste chrome extension, chrome extension read clipboard, clipboard manager extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/09/chrome-extension-clipboard-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/09/chrome-extension-clipboard-api-guide/"
 ---
 
 # Chrome Extension Clipboard API: Copy, Paste, and Manage Clipboard Data

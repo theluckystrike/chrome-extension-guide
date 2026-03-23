@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [tutorials, chrome-extensions, web3]
 tags: [nft gallery extension, nft chrome extension, opensea api extension, web3 nft viewer, chrome extension tutorial, blockchain, ethereum]
 keywords: "nft gallery extension, nft chrome extension, opensea api extension, web3 nft viewer, nft portfolio tracker chrome extension, build nft extension, open sea api tutorial, chrome extension web3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/build-nft-gallery-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/build-nft-gallery-chrome-extension/"
 ---
 
 # Build an NFT Gallery Chrome Extension with OpenSea API
@@ -1262,13 +1262,13 @@ To take this extension further, consider adding:
 
 For more Chrome extension development resources, explore our guides on:
 
-- [Chrome Extension Development 2025](/chrome-extension-guide/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)
-- [Extension Performance Optimization](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/)
-- [Publishing Your Extension](/chrome-extension-guide/docs/publishing/)
+- [Chrome Extension Development 2025](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/)
+- [Extension Performance Optimization](/2025/01/16/chrome-extension-performance-optimization-guide/)
+- [Publishing Your Extension](/docs/publishing/)
 
 The Web3 ecosystem is evolving rapidly, and Chrome extensions provide a unique way to bring blockchain functionality directly to users' browsers. Start building today and help shape the future of Web3 UX!
 
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

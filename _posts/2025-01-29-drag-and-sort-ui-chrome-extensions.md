@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "drag sort extension, reorder list chrome, sortable interface extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/drag-and-sort-ui-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/drag-and-sort-ui-chrome-extensions/"
 ---
 
 # Drag and Sort UI in Chrome Extensions: Complete Implementation Guide

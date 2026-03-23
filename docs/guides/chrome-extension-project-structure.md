@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Project Structure — Developer Guide"
 description: "Learn Chrome extension project structure with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-project-structure/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-project-structure/"
 ---
 # Chrome Extension Project Structure
 
@@ -324,6 +324,6 @@ Remember: the goal is maintainability. If you can't find files, or changing one 
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

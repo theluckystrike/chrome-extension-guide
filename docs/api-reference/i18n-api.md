@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome i18n API Complete Reference"
 description: "The Chrome i18n API provides internationalization and localization support for Chrome extensions, enabling multilingual extensions without requiring any permissions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/i18n-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/i18n-api/"
 ---
 
 # chrome.i18n API Reference

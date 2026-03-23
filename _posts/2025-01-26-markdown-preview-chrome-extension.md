@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [guides, chrome-extensions, development-tools]
 tags: [markdown preview extension, live markdown chrome, markdown renderer extension, chrome extension development, markdown editor, markdown previewer]
 keywords: "markdown preview extension, live markdown chrome, markdown renderer extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/markdown-preview-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/markdown-preview-chrome-extension/"
 ---
 
 # Build a Live Markdown Preview Chrome Extension

@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome extension pdf viewer, pdf viewer extension, custom pdf reader extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/building-pdf-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/building-pdf-viewer-chrome-extension/"
 ---
 
 # Building a PDF Viewer Chrome Extension: Complete Developer Guide
@@ -449,9 +449,9 @@ Remember that successful extensions evolve based on user feedback and changing r
 
 ## Related Articles
 
-- [CSS Injection with Chrome Extension Content Scripts](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject content scripts for web page manipulation
-- [Chrome Downloads API Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-downloads-api/) - Handle file downloads in your extensions
-- [Manifest V3 Migration Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/) - Migrate your extension from Manifest V2 to V3
+- [CSS Injection with Chrome Extension Content Scripts](https://bestchromeextensions.com/2025/01/18/css-injection-chrome-extension-content-script-guide/) - Learn how to inject content scripts for web page manipulation
+- [Chrome Downloads API Guide](https://bestchromeextensions.com/2025/01/17/chrome-extension-downloads-api/) - Handle file downloads in your extensions
+- [Manifest V3 Migration Complete Guide](https://bestchromeextensions.com/2025/01/16/manifest-v3-migration-complete-guide-2025/) - Migrate your extension from Manifest V2 to V3
 
 ---
 ## Turn Your Extension Into a Business

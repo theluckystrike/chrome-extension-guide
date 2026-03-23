@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, API]
 tags: [chrome-extension, api]
 keywords: "payment request extension, checkout extension, web payment chrome, payment request api chrome extension, chrome payment api, payment integration extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/payment-request-api-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/payment-request-api-chrome-extensions/"
 ---
 
 # Payment Request API in Chrome Extensions: Complete Implementation Guide

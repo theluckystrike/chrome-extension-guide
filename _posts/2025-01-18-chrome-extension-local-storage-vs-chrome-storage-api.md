@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, ui, tutorial]
 keywords: "chrome extension local storage, chrome storage api vs localStorage, extension data persistence, chrome.storage API, localStorage chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/"
 ---
 
 # Chrome Extension Local Storage vs Chrome Storage API: Complete Guide

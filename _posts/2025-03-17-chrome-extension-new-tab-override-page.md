@@ -6,7 +6,7 @@ date: 2025-03-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [new-tab, override, chrome-extension]
 keywords: "chrome extension new tab, new tab override chrome extension, custom new tab page extension, chrome extension override pages, chrome newtab page"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/17/chrome-extension-new-tab-override-page/"
+canonical_url: "https://bestchromeextensions.com/2025/03/17/chrome-extension-new-tab-override-page/"
 ---
 
 # Chrome Extension New Tab Override: Build a Custom New Tab Page

@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "google docs extension, docs enhancer chrome, document tools, google docs plugin, chrome extension google docs"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-google-docs-plugin-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-google-docs-plugin-chrome-extension/"
 ---
 
 # Build a Google Docs Plugin Chrome Extension: Complete 2025 Guide

@@ -6,7 +6,7 @@ date: 2025-05-09
 categories: [Chrome-Extensions, APIs]
 tags: [resize-observer, responsive, chrome-extension]
 keywords: "chrome extension resize observer, responsive popup chrome, chrome extension resize, dynamic popup size, ResizeObserver extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/09/chrome-extension-resize-observer-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/05/09/chrome-extension-resize-observer-guide/"
 ---
 
 # ResizeObserver in Chrome Extensions: Responsive Popups and Panels

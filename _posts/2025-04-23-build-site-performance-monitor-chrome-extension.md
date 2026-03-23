@@ -6,7 +6,7 @@ date: 2025-04-23
 categories: [Chrome-Extensions, Performance]
 tags: [web-vitals, performance, chrome-extension]
 keywords: "chrome extension performance monitor, core web vitals extension, site speed chrome extension, build performance extension, web vitals dashboard chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/23/build-site-performance-monitor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/23/build-site-performance-monitor-chrome-extension/"
 ---
 
 # Build a Site Performance Monitor Chrome Extension: Core Web Vitals Dashboard
@@ -764,6 +764,6 @@ Start with this core implementation, test thoroughly, and iterate based on user 
 ## Additional Resources {#resources}
 
 - [Web Vitals Library Documentation](https://web.dev/articles/vitals)
-- [Chrome Extension Development Overview](/chrome-extension-guide/guides/overview/)
+- [Chrome Extension Development Overview](/guides/overview/)
 - [Chrome Web Store Publishing Guide](https://developer.chrome.com/docs/webstore/publish)
 - [Core Web Vitals Explained](https://web.dev/explore/core-web-vitals)

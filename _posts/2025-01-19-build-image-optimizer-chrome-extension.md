@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "image optimizer extension, compress images chrome, webp converter extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-image-optimizer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-image-optimizer-chrome-extension/"
 ---
 
 # Build an Image Optimizer Chrome Extension: Complete Guide

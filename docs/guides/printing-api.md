@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Printing API — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/printing-api/"
+canonical_url: "https://bestchromeextensions.com/guides/printing-api/"
 ---
 # Chrome Extension Printing API Guide
 

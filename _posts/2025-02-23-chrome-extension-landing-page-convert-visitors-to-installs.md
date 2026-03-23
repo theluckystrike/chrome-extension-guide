@@ -351,7 +351,7 @@ To recap what we covered:
 - Set up comprehensive analytics to measure performance
 - Ensure mobile responsiveness
 
-With your landing page in place, you can expand your marketing efforts. For deeper optimization of your Chrome Web Store listing itself, see our [Chrome Web Store Optimization Guide](/chrome-extension-guide/guides/chrome-web-store-optimization/). For broader marketing strategies, explore the [Extension Marketing Playbook](/chrome-extension-guide/guides/marketing-playbook/). And if you are thinking about monetizing your extension, our [Extension Monetization Guide](/chrome-extension-guide/guides/extension-monetization-playbook/) has you covered.
+With your landing page in place, you can expand your marketing efforts. For deeper optimization of your Chrome Web Store listing itself, see our [Chrome Web Store Optimization Guide](/guides/chrome-web-store-optimization/). For broader marketing strategies, explore the [Extension Marketing Playbook](/guides/marketing-playbook/). And if you are thinking about monetizing your extension, our [Extension Monetization Guide](/guides/extension-monetization-playbook/) has you covered.
 
 ---
 

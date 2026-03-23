@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension cors, cross origin extension, fetch api chrome extension, chrome extension cross origin requests, manifest v3 host permissions"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-cross-origin-requests-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-cross-origin-requests-guide/"
 ---
 
 # Cross-Origin Requests in Chrome Extensions: Complete CORS & Fetch API Guide
@@ -381,6 +381,6 @@ Remember that Chrome's extension platform continues to evolve. Stay current with
 
 ## Related Articles
 
-- [Chrome Web Request API Complete Guide](https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-web-request-api-complete-guide/) - Intercept and modify network requests
-- [Chrome Extension Permissions Explained](https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understand extension permissions and security
-- [Chrome Storage API Overview](https://theluckystrike.github.io/chrome-extension-guide/2025/06/05/chrome-storage-api-overview/) - Store data securely in your extensions
+- [Chrome Web Request API Complete Guide](https://bestchromeextensions.com/2025/01/17/chrome-web-request-api-complete-guide/) - Intercept and modify network requests
+- [Chrome Extension Permissions Explained](https://bestchromeextensions.com/2025/01/18/chrome-extension-permissions-explained/) - Understand extension permissions and security
+- [Chrome Storage API Overview](https://bestchromeextensions.com/2025/06/05/chrome-storage-api-overview/) - Store data securely in your extensions

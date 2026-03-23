@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework]
 keywords: "svelte chrome extension, svelte popup, svelte content script extension, build chrome extension with svelte, svelte chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/building-chrome-extensions-with-svelte/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/building-chrome-extensions-with-svelte/"
 ---
 
 # Building Chrome Extensions with Svelte: Complete Developer Guide

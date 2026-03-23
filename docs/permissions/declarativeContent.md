@@ -5,7 +5,7 @@ description: "Access to the API for showing/hiding your extension's action icon 
 permalink: /permissions/declarativeContent/
 category: permissions
 order: 12
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/permissions/declarativeContent/"
+canonical_url: "https://bestchromeextensions.com/permissions/declarativeContent/"
 ---
 
 # declarativeContent Permission

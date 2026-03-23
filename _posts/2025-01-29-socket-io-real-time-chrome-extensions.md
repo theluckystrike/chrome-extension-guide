@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "socket io extension, real-time chrome, websocket client extension, socket.io chrome extension manifest v3, real-time communication chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/socket-io-real-time-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/socket-io-real-time-chrome-extensions/"
 ---
 
 # Socket.io Real-Time in Chrome Extensions: Complete Implementation Guide

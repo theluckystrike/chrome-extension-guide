@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "coupon finder extension, deal finder chrome, promo code extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/build-coupon-finder-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/build-coupon-finder-chrome-extension/"
 ---
 
 # Build a Coupon Finder Chrome Extension: Complete Developer Guide

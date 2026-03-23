@@ -6,7 +6,7 @@ date: 2025-03-17
 categories: [Chrome-Extensions, UI]
 tags: [drag-drop, ui-design, chrome-extension]
 keywords: "chrome extension drag drop, drag and drop chrome extension, interactive chrome extension UI, chrome extension sortable list, draggable popup chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/17/chrome-extension-drag-and-drop-functionality/"
+canonical_url: "https://bestchromeextensions.com/2025/03/17/chrome-extension-drag-and-drop-functionality/"
 ---
 
 # Adding Drag and Drop to Chrome Extensions: Interactive UI Guide

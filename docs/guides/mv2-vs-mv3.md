@@ -2,7 +2,7 @@
 layout: default
 title: "Manifest V2 vs V3 — Complete Comparison for Chrome Extension Developers"
 description: "A comprehensive comparison of Manifest V2 vs V3 for Chrome extension developers. Learn about service workers, declarativeNetRequest, breaking changes, and migration strategies."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/mv2-vs-mv3/"
+canonical_url: "https://bestchromeextensions.com/guides/mv2-vs-mv3/"
 ---
 
 # Manifest V2 vs V3 — Complete Comparison for Chrome Extension Developers
@@ -220,4 +220,4 @@ MV3 consolidates these into a single `action` API:
 
 Manifest V3 brings significant improvements in security and performance, but requires careful migration planning. The service worker model, declarativeNetRequest, and removal of remote code are the biggest changes to adapt to. Start your migration early to ensure a smooth transition before MV2 is fully deprecated.
 
-For detailed migration guides, see our [MV3 Migration Guide](/chrome-extension-guide/guides/mv3-migration/) and [Background to Service Worker Migration](/chrome-extension-guide/guides/background-to-sw-migration/).
+For detailed migration guides, see our [MV3 Migration Guide](/guides/mv3-migration/) and [Background to Service Worker Migration](/guides/background-to-sw-migration/).

@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [tutorials, chrome-extensions, web3]
 tags: [crypto wallet extension, web3 chrome extension, ethereum extension, blockchain chrome extension, wallet development, dapp integration]
 keywords: "crypto wallet extension, web3 chrome extension, ethereum extension, blockchain chrome extension, chrome extension wallet, web3 integration guide"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/build-crypto-wallet-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/build-crypto-wallet-chrome-extension/"
 ---
 
 # Build a Crypto Wallet Chrome Extension: Web3 Integration Guide
@@ -1061,4 +1061,4 @@ The possibilities in the Web3 space are vast, and a secure, user-friendly wallet
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

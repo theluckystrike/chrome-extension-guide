@@ -6,7 +6,7 @@ date: 2025-02-21
 categories: [Chrome-Extensions, APIs]
 tags: [web-request, network, chrome-extension]
 keywords: "chrome extension web request, intercept network requests chrome, chrome extension modify requests, declarativeNetRequest chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/21/chrome-extension-web-request-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/21/chrome-extension-web-request-api-guide/"
 ---
 
 # Chrome Extension Web Request API: Intercept and Modify Network Requests

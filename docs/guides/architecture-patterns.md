@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Architecture Patterns — Developer Guide"
 description: "Learn Chrome extension architecture patterns with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/architecture-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/architecture-patterns/"
 ---
 # Extension Architecture Patterns
 
@@ -1075,6 +1075,6 @@ Start simple. Refactor toward complexity only when the code demands it.
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

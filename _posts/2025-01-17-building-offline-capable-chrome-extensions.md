@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension offline, service worker cache extension, offline chrome extension, chrome extension manifest v3, chrome extension pwa, chrome extension storage offline]
 keywords: "chrome extension offline, service worker cache extension, offline chrome extension, chrome extension manifest v3, chrome extension Cache API, chrome extension IndexedDB, chrome extension offline storage, chrome extension pwa support"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/building-offline-capable-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/building-offline-capable-chrome-extensions/"
 ---
 
 # Building Offline-Capable Chrome Extensions: A Complete Guide
@@ -595,13 +595,13 @@ Start implementing offline support in your extensions today, and provide your us
 
 ## Related Articles
 
-- [Chrome Storage API Patterns: Best Practices](/chrome-extension-guide/2025/01/24/chrome-storage-api-patterns/) - Master chrome.storage for efficient settings and data management.
-- [IndexedDB Chrome Extension Data Storage Guide](/chrome-extension-guide/2025/01/21/indexeddb-chrome-extension-data-storage/) - Learn how to use IndexedDB for large-scale structured data.
+- [Chrome Storage API Patterns: Best Practices](/2025/01/24/chrome-storage-api-patterns/) - Master chrome.storage for efficient settings and data management.
+- [IndexedDB Chrome Extension Data Storage Guide](/2025/01/21/indexeddb-chrome-extension-data-storage/) - Learn how to use IndexedDB for large-scale structured data.
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
-- [Chrome Extension Service Worker Lifecycle Deep Dive](/chrome-extension-guide/2025/01/25/chrome-extension-service-worker-lifecycle-deep-dive/) - Understand service worker lifecycle for reliable background processing.
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+- [Chrome Extension Service Worker Lifecycle Deep Dive](/2025/01/25/chrome-extension-service-worker-lifecycle-deep-dive/) - Understand service worker lifecycle for reliable background processing.
 ---
 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

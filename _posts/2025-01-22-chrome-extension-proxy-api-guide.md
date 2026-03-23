@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [guides, chrome-extensions, proxy, development]
 tags: [chrome proxy api, proxy extension development, route traffic chrome extension, chrome extension proxy, network routing]
 keywords: "chrome proxy api, proxy extension development, route traffic chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-proxy-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-proxy-api-guide/"
 ---
 
 # Chrome Extension Proxy API: Route Traffic Through Custom Proxies

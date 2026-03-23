@@ -262,7 +262,7 @@ Building a strong review portfolio for your Chrome extension requires patience, 
 
 Remember that reviews are a long-term game. Focus on building an excellent product, implementing thoughtful review acquisition flows, and responding professionally to all feedback. The 5-star ratings will follow.
 
-For more guidance on growing your Chrome extension, explore our [Chrome Web Store SEO guide](/chrome-extension-guide/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/) and [monetization strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) to build a complete growth framework.
+For more guidance on growing your Chrome extension, explore our [Chrome Web Store SEO guide](/2025/01/31/chrome-web-store-seo-rank-higher-get-more-installs/) and [monetization strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/) to build a complete growth framework.
 
 ---
 

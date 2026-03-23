@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Performance Audit: 50-Point Checklist"
 description: "A comprehensive 50-point performance audit checklist for Chrome extensions. Optimize startup time, content script injection, message passing, storage, DOM manipulation, bundle size, and more."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-performance-audit-checklist/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-audit-checklist/"
 proficiency_level: "Intermediate"
 ---
 

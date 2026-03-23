@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Performance Optimization — Speed Up Your Extension"
 description: "Master Chrome extension performance optimization with practical tips for faster load times, efficient code execution, and improved user experience."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/performance-optimization/"
+canonical_url: "https://bestchromeextensions.com/guides/performance-optimization/"
 ---
 # Chrome Extension Performance Optimization — Speed Up Your Extension
 

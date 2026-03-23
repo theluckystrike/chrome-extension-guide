@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "rest api tester extension, postman alternative chrome, api client extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-rest-api-testing-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-rest-api-testing-chrome-extension/"
 ---
 
 # Build a REST API Testing Chrome Extension: A Complete Developer's Guide

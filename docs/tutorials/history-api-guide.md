@@ -2,7 +2,7 @@
 layout: default
 title: "Working with Browser History in Chrome Extensions"
 description: "Learn how to use the chrome.history API to search, add, delete history entries, handle visit details, and build analytics features with privacy best practices."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/history-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/history-api-guide/"
 ---
 
 # Working with Browser History in Chrome Extensions
@@ -627,9 +627,9 @@ History data is sensitive and should be handled securely. Avoid logging URLs to 
 
 ## Related Articles
 
-- [Build a Browsing History Search Extension](/chrome-extension-guide/tutorials/build-browsing-history-search.html) - A complete tutorial on building a history search extension with filtering and export features
-- [Chrome Bookmarks API](/chrome-extension-guide/api-reference/bookmarks-api.html) - Learn how to work with the bookmarks API for similar data management features
-- [Extension Analytics and Telemetry](/chrome-extension-guide/patterns/analytics-telemetry.html) - Best practices for implementing analytics in your extension while respecting user privacy
+- [Build a Browsing History Search Extension](/tutorials/build-browsing-history-search.html) - A complete tutorial on building a history search extension with filtering and export features
+- [Chrome Bookmarks API](/api-reference/bookmarks-api.html) - Learn how to work with the bookmarks API for similar data management features
+- [Extension Analytics and Telemetry](/patterns/analytics-telemetry.html) - Best practices for implementing analytics in your extension while respecting user privacy
 
 ---
 
@@ -637,4 +637,4 @@ History data is sensitive and should be handled securely. Avoid logging URLs to 
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

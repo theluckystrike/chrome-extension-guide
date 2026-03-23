@@ -6,7 +6,7 @@ date: 2025-04-18
 categories: [Chrome-Extensions, Tutorials]
 tags: [clipboard, history, chrome-extension]
 keywords: "chrome extension clipboard history, clipboard manager chrome, copy history chrome extension, clipboard log extension, paste history chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/18/build-clipboard-history-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/18/build-clipboard-history-chrome-extension/"
 ---
 
 # Build a Clipboard History Chrome Extension: Never Lose Copied Text

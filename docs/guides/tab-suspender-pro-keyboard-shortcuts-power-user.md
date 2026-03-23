@@ -168,4 +168,4 @@ Deepen your understanding of Tab Suspender Pro and Chrome tab management:
 
 ---
 
-Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike. More at [zovo.one](https://zovo.one).
+Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. More at [zovo.one](https://zovo.one).

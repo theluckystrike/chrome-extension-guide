@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension URL Shortener — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-url-shortener/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-url-shortener/"
 ---
 # Build a URL Shortener Extension
 
@@ -144,7 +144,7 @@ Built: one-click shortening, custom aliases, clipboard feedback, QR codes, histo
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

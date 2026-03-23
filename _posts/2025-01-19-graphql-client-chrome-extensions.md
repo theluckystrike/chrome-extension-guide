@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "graphql chrome extension, apollo chrome extension, graphql api extension, chrome extension graphql client, manifest v3 graphql"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/graphql-client-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/graphql-client-chrome-extensions/"
 ---
 
 # GraphQL Client in Chrome Extensions: Complete Implementation Guide

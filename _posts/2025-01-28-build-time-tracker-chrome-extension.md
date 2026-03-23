@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "time tracker extension, time tracking chrome, productivity timer, chrome extension time tracker, build chrome extension, manifest v3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-time-tracker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-time-tracker-chrome-extension/"
 ---
 
 # Build a Time Tracker Chrome Extension: Complete 2025 Developer's Guide

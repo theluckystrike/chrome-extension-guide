@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Notifications — Developer Guide"
 description: "Design Chrome extension UI with this guide covering popup, options page, and side panel development patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/notifications-guide/"
+canonical_url: "https://bestchromeextensions.com/guides/notifications-guide/"
 ---
 # Rich Notifications in Chrome Extensions
 

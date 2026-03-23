@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Shadow DOM — How to Isolate Your UI from Host Pages"
 description: "Learn how to use Shadow DOM in Chrome extensions to create isolated UI components that are protected from host page styles and scripts."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/shadow-dom/"
+canonical_url: "https://bestchromeextensions.com/guides/shadow-dom/"
 ---
 
 # Chrome Extension Shadow DOM — How to Isolate Your UI from Host Pages

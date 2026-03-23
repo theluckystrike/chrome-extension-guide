@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [guides, chrome-extensions, productivity, tutorials]
 tags: [link saver extension, save links chrome, bookmark alternative extension, chrome extension development, manifest v3, local storage]
 keywords: "link saver extension, save links chrome, bookmark alternative extension, chrome extension tutorial, build chrome extension 2025"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-link-saver-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-link-saver-chrome-extension/"
 ---
 
 # Build a Link Saver Chrome Extension: Complete 2025 Developer Guide

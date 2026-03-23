@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "accessibility overlay extension, a11y checker chrome, wcag overlay extension, chrome accessibility tool, web accessibility checker"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/build-accessibility-overlay-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/build-accessibility-overlay-chrome-extension/"
 ---
 
 # Build an Accessibility Overlay Chrome Extension: Complete 2025 Tutorial

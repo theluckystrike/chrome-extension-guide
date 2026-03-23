@@ -2,7 +2,7 @@
 layout: default
 title: "Building Chrome Extensions with TypeScript — Developer Guide"
 description: "A comprehensive tutorial for building Chrome extensions with TypeScript, covering project setup, tsconfig configuration, typed Chrome APIs, messaging patterns, storage wrappers, and build tooling."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/building-with-typescript/"
+canonical_url: "https://bestchromeextensions.com/tutorials/building-with-typescript/"
 ---
 
 # Building Chrome Extensions with TypeScript
@@ -697,9 +697,9 @@ function debugJson<T>(label: string, value: T): void {
 
 ## Related Articles
 
-- [TypeScript Setup Guide](https://theluckystrike.github.io/chrome-extension-guide/guides/typescript-setup/) — Detailed TypeScript configuration for Chrome extensions
-- [TypeScript Extensions](https://theluckystrike.github.io/chrome-extension-guide/guides/typescript-extensions/) — Additional TypeScript patterns and practices
-- [Message Passing Best Practices](https://theluckystrike.github.io/chrome-extension-guide/guides/message-passing-best-practices/) — Comprehensive guide to typed messaging between extension components
+- [TypeScript Setup Guide](https://bestchromeextensions.com/guides/typescript-setup/) — Detailed TypeScript configuration for Chrome extensions
+- [TypeScript Extensions](https://bestchromeextensions.com/guides/typescript-extensions/) — Additional TypeScript patterns and practices
+- [Message Passing Best Practices](https://bestchromeextensions.com/guides/message-passing-best-practices/) — Comprehensive guide to typed messaging between extension components
 
 ---
 

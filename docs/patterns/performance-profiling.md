@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Performance Profiling — Best Practices"
 description: "Profile and optimize extension performance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/performance-profiling/"
+canonical_url: "https://bestchromeextensions.com/patterns/performance-profiling/"
 ---
 
 # Performance Profiling for Chrome Extensions

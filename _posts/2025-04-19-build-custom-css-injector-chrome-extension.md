@@ -6,7 +6,7 @@ date: 2025-04-19
 categories: [Chrome-Extensions, Tutorials]
 tags: [css, styling, chrome-extension]
 keywords: "chrome extension custom css, inject css chrome extension, stylish chrome extension build, custom stylesheet chrome, override css chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-custom-css-injector-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/19/build-custom-css-injector-chrome-extension/"
 ---
 
 # Build a Custom CSS Injector Chrome Extension: Restyle Any Website

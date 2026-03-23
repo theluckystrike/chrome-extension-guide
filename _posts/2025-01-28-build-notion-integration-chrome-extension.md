@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration, productivity]
 keywords: "notion chrome extension, notion clipper, save to notion extension, notoin integration chrome, chrome extension notion api, build notion extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-notion-integration-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-notion-integration-chrome-extension/"
 ---
 
 # Build a Notion Integration Chrome Extension: Complete Developer's Guide

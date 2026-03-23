@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Performance — Best Practices"
 description: "Optimize content script performance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/content-script-performance/"
+canonical_url: "https://bestchromeextensions.com/patterns/content-script-performance/"
 ---
 
 # Content Script Performance Optimization

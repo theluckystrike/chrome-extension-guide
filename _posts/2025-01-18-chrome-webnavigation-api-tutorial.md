@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome webnavigation api, page load detection extension, navigation events chrome, chrome extension navigation tracking, webnavigation api tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-webnavigation-api-tutorial/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-webnavigation-api-tutorial/"
 ---
 
 # Chrome WebNavigation API for Extension Developers

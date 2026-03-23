@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Content Script Patterns — Developer Guide"
 description: "Learn Chrome extension content script patterns with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/content-script-patterns/"
+canonical_url: "https://bestchromeextensions.com/guides/content-script-patterns/"
 ---
 # Content Script Patterns
 

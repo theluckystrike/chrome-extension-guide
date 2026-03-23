@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, Development, Privacy]
 tags: [chrome-extension, privacy, security, GDPR, guide]
 keywords: "chrome extension privacy, extension user data protection, GDPR chrome extension, chrome extension security best practices, privacy-first extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/privacy-first-chrome-extension-development-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/privacy-first-chrome-extension-development-guide/"
 ---
 
 # Privacy-First Chrome Extension Development Guide: Protecting User Data in 2025
@@ -143,10 +143,10 @@ Start implementing these privacy principles in your next extension project or au
 
 ## Related Articles
 
-- [Chrome Extension Security Best Practices 2025](/chrome-extension-guide/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guide for building secure Chrome extensions
-- [Chrome Extension Permissions Explained](/chrome-extension-guide/2025/01/18/chrome-extension-permissions-explained/) - Understanding and properly implementing extension permissions
+- [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guide for building secure Chrome extensions
+- [Chrome Extension Permissions Explained](/2025/01/18/chrome-extension-permissions-explained/) - Understanding and properly implementing extension permissions
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
-- [Content Security Policy for Chrome Extensions](/chrome-extension-guide/2025/01/18/content-security-policy-chrome-extensions/) - Implementing CSP to protect your extensions and users
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).
+- [Content Security Policy for Chrome Extensions](/2025/01/18/content-security-policy-chrome-extensions/) - Implementing CSP to protect your extensions and users
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

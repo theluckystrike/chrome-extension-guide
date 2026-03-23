@@ -6,7 +6,7 @@ date: 2025-04-27
 categories: [Chrome-Extensions, Tutorials]
 tags: [pagination, scroll, chrome-extension]
 keywords: "chrome extension auto pagination, infinite scroll extension, auto next page chrome, chrome extension auto scroll, pagination extension chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/27/build-auto-pagination-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/27/build-auto-pagination-chrome-extension/"
 ---
 
 # Build an Auto-Pagination Chrome Extension: Infinite Scrolling on Any Site

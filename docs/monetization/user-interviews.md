@@ -2,7 +2,7 @@
 layout: default
 title: "User Interviews for Chrome Extension Development — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/monetization/user-interviews/"
+canonical_url: "https://bestchromeextensions.com/monetization/user-interviews/"
 ---
 # User Interviews for Chrome Extension Development
 

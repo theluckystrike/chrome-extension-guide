@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension E2e Testing Patterns — Best Practices"
 description: "End-to-end testing patterns for Chrome extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/e2e-testing-patterns/"
+canonical_url: "https://bestchromeextensions.com/patterns/e2e-testing-patterns/"
 ---
 
 # End-to-End Testing Patterns for Chrome Extensions

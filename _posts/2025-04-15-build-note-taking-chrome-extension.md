@@ -6,7 +6,7 @@ date: 2025-04-15
 categories: [Chrome-Extensions, Tutorials]
 tags: [notes, productivity, chrome-extension]
 keywords: "chrome extension note taking, notes chrome extension, build note extension, quick notes chrome, chrome extension notepad"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/15/build-note-taking-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/15/build-note-taking-chrome-extension/"
 ---
 
 # Build a Note-Taking Chrome Extension: Capture Ideas While Browsing

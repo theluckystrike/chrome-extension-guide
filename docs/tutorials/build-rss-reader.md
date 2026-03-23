@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension RSS Reader — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-rss-reader/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-rss-reader/"
 ---
 # Build an RSS Reader Chrome Extension
 
@@ -343,7 +343,7 @@ The extension can be installed locally by loading the unpacked extension in Chro
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

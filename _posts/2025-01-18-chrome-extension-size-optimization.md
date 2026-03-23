@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "reduce extension size, optimize chrome extension bundle, small crx file, chrome extension optimization, extension size reduction"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-size-optimization/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-size-optimization/"
 ---
 
 # Chrome Extension Size Optimization: Complete Guide to Reduce Extension Size

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Sessions API Complete Reference"
 description: "The Chrome Sessions API queries and restores recently closed tabs and windows, including access to synced tabs from other devices signed into the same Chrome profile."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/api-reference/sessions-api/"
+canonical_url: "https://bestchromeextensions.com/api-reference/sessions-api/"
 ---
 
 # chrome.sessions API Reference

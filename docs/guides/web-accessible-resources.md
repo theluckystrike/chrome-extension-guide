@@ -11,7 +11,7 @@ In Manifest V3, declare resources in `manifest.json`:
 layout: default
 title: "Chrome Extension Web Accessible Resources — How to Share Files with Web Pages"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/web-accessible-resources/"
+canonical_url: "https://bestchromeextensions.com/guides/web-accessible-resources/"
 ---
 
 # Chrome Extension Web Accessible Resources — How to Share Files with Web Pages

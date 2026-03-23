@@ -6,7 +6,7 @@ date: 2025-03-12
 categories: [Chrome-Extensions, Accessibility]
 tags: [accessibility, a11y, chrome-extension]
 keywords: "chrome extension accessibility, a11y chrome extension, accessible popup chrome, screen reader chrome extension, WCAG chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/12/chrome-extension-accessibility-a11y-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/12/chrome-extension-accessibility-a11y-guide/"
 ---
 
 # Chrome Extension Accessibility (a11y): Build Extensions Everyone Can Use

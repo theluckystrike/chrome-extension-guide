@@ -6,7 +6,7 @@ date: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "webpack chrome extension, extension build tools, bundle extension, chrome extension webpack config, webpack manifest v3"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/18/chrome-extension-webpack-config/"
+canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-webpack-config/"
 ---
 
 # Webpack Configuration for Chrome Extensions: Complete 2025 Guide

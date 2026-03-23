@@ -6,7 +6,7 @@ date: 2025-05-04
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [cache, debugging, chrome-extension]
 keywords: "chrome extension cache viewer, browser cache inspector, chrome cache extension, view cached resources chrome, cache management extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/04/build-cache-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/04/build-cache-viewer-chrome-extension/"
 ---
 
 # Build a Cache Viewer Chrome Extension: Inspect Browser Cache Contents

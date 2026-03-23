@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Debugging Techniques — Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/advanced-debugging/"
+canonical_url: "https://bestchromeextensions.com/guides/advanced-debugging/"
 ---
 # Advanced Debugging Techniques for Chrome Extensions
 
@@ -886,5 +886,5 @@ Master these techniques and you will spend less time confused about what your ex
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

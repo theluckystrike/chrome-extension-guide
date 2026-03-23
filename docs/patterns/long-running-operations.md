@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Long Running Operations — Best Practices"
 description: "Handle long-running operations in service workers without timeout."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/long-running-operations/"
+canonical_url: "https://bestchromeextensions.com/patterns/long-running-operations/"
 ---
 
 # Long-Running Operations Patterns

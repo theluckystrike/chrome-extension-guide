@@ -3,7 +3,7 @@
 title: Chrome Extension Development Tutorial with TypeScript — Complete 2026 Guide
 description: Learn how to build production-ready Chrome extensions with TypeScript in 2026. Step-by-step tutorial covering manifest v3, background workers, content scripts, and best practices.
 layout: default
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/docs/guides/chrome-extension-development-tutorial-typescript-2026/"
+canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-development-tutorial-typescript-2026/"
 last_modified_at: 2026-01-15
 
 ---

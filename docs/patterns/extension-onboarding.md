@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Extension Onboarding — Best Practices"
 description: "Design effective onboarding flows for new extension users."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/extension-onboarding/"
+canonical_url: "https://bestchromeextensions.com/patterns/extension-onboarding/"
 ---
 
 # Extension Onboarding Patterns

@@ -6,7 +6,7 @@ date: 2025-04-08
 categories: [Chrome-Extensions, Tutorials]
 tags: [github, developer-tools, chrome-extension]
 keywords: "chrome extension github, github chrome extension build, github productivity extension, chrome extension github tools, developer chrome extension github"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/08/build-github-productivity-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/08/build-github-productivity-chrome-extension/"
 ---
 
 # Build a GitHub Productivity Chrome Extension: Enhance Your Developer Workflow

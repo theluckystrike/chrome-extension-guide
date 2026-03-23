@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Focus Mode — Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/build-focus-mode/"
+canonical_url: "https://bestchromeextensions.com/tutorials/build-focus-mode/"
 ---
 # Build a Site Blocker / Focus Mode Extension
 
@@ -257,9 +257,9 @@ async function startFocus() {
   currentPhase = 'work';
   phaseEndTime = Date.now() + data.pomodoroWork * 60000;
   breakTemporaryEnd = null;
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-tick', { periodInMinutes: 0.5 }); // Minimum alarm interval is 30 seconds
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroWork });
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('stats-update', { periodInMinutes: 1 });
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-tick', { periodInMinutes: 0.5 }); // Minimum alarm interval is 30 seconds
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroWork });
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('stats-update', { periodInMinutes: 1 });
   await updateBlockRules();
   updateBadge();
 }
@@ -267,7 +267,7 @@ async function startFocus() {
 async function stopFocus() {
   await storage.set({ focusActive: false });
   phaseEndTime = null; currentPhase = 'work'; breakTemporaryEnd = null;
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).clearAll();
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).clearAll();
   await updateBlockRules();
   chrome.action.setBadgeText({ text: '' });
 }
@@ -277,13 +277,13 @@ async function handlePhaseEnd() {
   if (currentPhase === 'work') {
     currentPhase = 'break';
     phaseEndTime = Date.now() + data.pomodoroBreak * 60000;
-    [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroBreak });
+    [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroBreak });
     const existing = await chrome.declarativeNetRequest.getDynamicRules();
     await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: existing.map(r => r.id), addRules: [] });
   } else {
     currentPhase = 'work';
     phaseEndTime = Date.now() + data.pomodoroWork * 60000;
-    [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroWork });
+    [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('pomodoro-phase', { delayInMinutes: data.pomodoroWork });
     await updateBlockRules();
   }
   updateBadge();
@@ -321,7 +321,7 @@ async function checkSchedule() {
   else if (!inSchedule && data.focusActive) { await stopFocus(); }
 }
 
-[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener(async (alarm) => {
+[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'pomodoro-phase') await handlePhaseEnd();
   else if (alarm.name === 'pomodoro-tick') updateBadge();
   else if (alarm.name === 'stats-update') await updateStats();
@@ -339,12 +339,12 @@ onMessage('get-timer', () => {
 onMessage('take-break', async () => {
   breakTemporaryEnd = Date.now() + 5 * 60000;
   await updateBlockRules();
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('break-end', { delayInMinutes: 5 });
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('break-end', { delayInMinutes: 5 });
   return { ok: true };
 });
 
 chrome.runtime.onInstalled.addListener(() => {
-  [chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization).create('schedule-check', { periodInMinutes: 1 });
+  [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('schedule-check', { periodInMinutes: 1 });
 });
 
 chrome.webNavigation?.onErrorOccurred?.addListener(async (details) => {
@@ -423,7 +423,7 @@ The Pomodoro logic in `background.js` (Step 4) cycles through phases:
 3. **Break ends** -- switches back to `'work'`, re-enables block rules, sets next work alarm.
 4. **Repeats** until the user stops focus mode.
 
-`[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)` is the correct MV3 timer mechanism. Service workers can be terminated at any time, making `setTimeout`/`setInterval` unreliable. The `pomodoro-tick` alarm keeps the badge current. The popup polls `get-timer` every second for its own display.
+`[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` is the correct MV3 timer mechanism. Service workers can be terminated at any time, making `setTimeout`/`setInterval` unreliable. The `pomodoro-tick` alarm keeps the badge current. The popup polls `get-timer` every second for its own display.
 
 ---
 
@@ -578,7 +578,7 @@ Run `npx rollup -c`, copy static assets to `dist/`, and load it.
 ## Key Takeaways {#key-takeaways}
 
 - **`declarativeNetRequest` dynamic rules** block sites at the network level without broad host permissions. Add/remove them at runtime based on focus state.
-- **`[chrome.alarms](https://theluckystrike.github.io/extension-monetization-playbook/monetization/api-monetization)`** is the correct MV3 timer. Service workers can terminate at any time, making `setTimeout`/`setInterval` unreliable.
+- **`[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)`** is the correct MV3 timer. Service workers can terminate at any time, making `setTimeout`/`setInterval` unreliable.
 - **Redirect to extension pages** via `{ type: 'redirect', redirect: { extensionPath: '/blocked.html' } }`.
 - **`@theluckystrike/webext-messaging`** replaces raw `chrome.runtime.sendMessage` with typed `sendMessage`/`onMessage` pairs.
 - **Badge text** gives at-a-glance timer status without opening the popup.
@@ -589,6 +589,6 @@ Run `npx rollup -c`, copy static assets to `dist/`, and load it.
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers [freemium](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

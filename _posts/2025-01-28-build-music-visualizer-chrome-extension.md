@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "music visualizer extension, audio visualization chrome, waveform extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-music-visualizer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-music-visualizer-chrome-extension/"
 ---
 
 # Build a Music Visualizer Chrome Extension: Complete 2025 Guide

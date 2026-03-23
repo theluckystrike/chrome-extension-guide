@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Manifest Optional Fields — Best Practices"
 description: "Explore optional manifest.json fields for enhanced extension functionality."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/manifest-optional-fields/"
+canonical_url: "https://bestchromeextensions.com/patterns/manifest-optional-fields/"
 ---
 
 # Optional Manifest.json Fields

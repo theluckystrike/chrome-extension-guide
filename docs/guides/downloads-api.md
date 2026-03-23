@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Downloads API — How to Download Files and Track Progress"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/downloads-api/"
+canonical_url: "https://bestchromeextensions.com/guides/downloads-api/"
 ---
 # Chrome Extension Downloads API — How to Download Files and Track Progress
 

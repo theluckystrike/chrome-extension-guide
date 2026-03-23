@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Rate Limiting — Best Practices"
 description: "Implement rate limiting to prevent API abuse and throttling."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/rate-limiting/"
+canonical_url: "https://bestchromeextensions.com/patterns/rate-limiting/"
 ---
 
 # Rate Limiting Patterns

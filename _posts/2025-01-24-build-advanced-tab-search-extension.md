@@ -6,7 +6,7 @@ date: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 author: theluckystrike
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/24/build-advanced-tab-search-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/24/build-advanced-tab-search-extension/"
 ---
 
 # Build an Advanced Tab Search Extension with Fuzzy Matching

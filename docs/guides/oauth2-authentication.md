@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension OAuth2 Authentication — How to Sign In Users with Google, GitHub, and More"
 description: "A comprehensive guide to implementing OAuth2 authentication in Chrome extensions using chrome.identity API, launchWebAuthFlow, token storage, refresh flows, and multi-provider setups."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/oauth2-authentication/"
+canonical_url: "https://bestchromeextensions.com/guides/oauth2-authentication/"
 ---
 
 # Chrome Extension OAuth2 Authentication — How to Sign In Users with Google, GitHub, and More
@@ -585,7 +585,7 @@ With these patterns, you can implement robust authentication that provides secur
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

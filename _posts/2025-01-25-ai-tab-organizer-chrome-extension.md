@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [guides, chrome-extensions, productivity, ai]
 tags: [ai tab organizer, smart tab grouping, auto organize tabs chrome, tab management, artificial intelligence, chrome extension development, machine learning]
 keywords: "ai tab organizer, smart tab grouping, auto organize tabs chrome, ai chrome extension, tab management ai, automatic tab organizer"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/ai-tab-organizer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/ai-tab-organizer-chrome-extension/"
 ---
 
 # Build an AI-Powered Tab Organizer Chrome Extension

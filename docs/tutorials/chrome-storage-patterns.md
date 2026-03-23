@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Storage Patterns for Extensions — Developer Guide"
 description: "Master chrome.storage API with patterns for local, sync, and session storage, quota management, structured data, migrations, and change listeners."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/chrome-storage-patterns/"
+canonical_url: "https://bestchromeextensions.com/tutorials/chrome-storage-patterns/"
 ---
 
 # Chrome Storage Patterns for Extensions
@@ -913,7 +913,7 @@ async function updateUserProfile(updates) {
 
 - [Storage Quickstart](storage-quickstart.md) — Get started with chrome.storage API fundamentals
 - [Advanced Storage](advanced-storage.md) — Deep dive into @theluckystrike/webext-storage library
-- [Performance Optimization](https://github.com/theluckystrike/chrome-extension-guide/blob/main/docs/tutorials/build-dev-dashboard.md) — Learn about optimizing extension performance including storage
+- [Performance Optimization](https://github.com/theluckystrike/blob/main/docs/tutorials/build-dev-dashboard.md) — Learn about optimizing extension performance including storage
 
 ---
 

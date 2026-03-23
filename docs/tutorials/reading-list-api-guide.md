@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Reading List API for Extensions — Developer Guide"
 description: "A comprehensive guide to using the chrome.readingList API in Chrome extensions. Learn to add, remove, query, and update reading list entries with code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/reading-list-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/reading-list-api-guide/"
 ---
 
 # Chrome Reading List API for Extensions
@@ -574,9 +574,9 @@ async function handleItemClick(entryId) {
 
 ## Related Articles {#related-articles}
 
-- [Build a Reading List Extension](/chrome-extension-guide/tutorials/build-reading-list/) — Build a complete reading list extension with side panel, sync storage, and notifications
-- [Bookmarks API Guide](/chrome-extension-guide/tutorials/bookmarks-api-guide/) — Learn how to use the Chrome Bookmarks API for persistent link storage
-- [History API Guide](/chrome-extension-guide/tutorials/history-api-guide/) — Explore the browsing history API for tracking and searching visited pages
+- [Build a Reading List Extension](/tutorials/build-reading-list/) — Build a complete reading list extension with side panel, sync storage, and notifications
+- [Bookmarks API Guide](/tutorials/bookmarks-api-guide/) — Learn how to use the Chrome Bookmarks API for persistent link storage
+- [History API Guide](/tutorials/history-api-guide/) — Explore the browsing history API for tracking and searching visited pages
 
 ---
 

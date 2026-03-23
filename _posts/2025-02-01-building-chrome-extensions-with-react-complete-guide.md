@@ -1006,10 +1006,10 @@ The extension demonstrates every pattern covered in this guide, from project set
 
 Now that you have the foundation, explore these resources to deepen your knowledge:
 
-- [Chrome Extension Manifest V3 Documentation](/chrome-extension-guide/docs/mv3/migration-guide/)
-- [Extension Monetization Playbook](/chrome-extension-guide/docs/monetization/)
+- [Chrome Extension Manifest V3 Documentation](/docs/mv3/migration-guide/)
+- [Extension Monetization Playbook](/docs/monetization/)
 - [chrome-extension-react-starter](https://github.com/theluckystrike/chrome-extension-react-starter) for production-ready code
-- [Performance Optimization Guide](/chrome-extension-guide/2025/01/16/chrome-extension-performance-optimization-guide/)
+- [Performance Optimization Guide](/2025/01/16/chrome-extension-performance-optimization-guide/)
 
 ---
 

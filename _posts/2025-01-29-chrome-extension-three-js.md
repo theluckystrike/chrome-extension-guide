@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "three js extension, 3d chrome popup, webgl three extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-three-js/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-three-js/"
 ---
 
 # Three.js 3D in Chrome Extensions: Complete Guide to WebGL Three Extension Development

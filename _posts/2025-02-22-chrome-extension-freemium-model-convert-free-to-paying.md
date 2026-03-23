@@ -39,7 +39,7 @@ Freemium offers a permanently free version with limited functionality alongside 
 - Community growth amplifies your product's value
 - You can afford to support a large free user base
 
-For a deeper dive into monetization strategies including freemium, see our [Chrome Extension Monetization Strategies guide](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/).
+For a deeper dive into monetization strategies including freemium, see our [Chrome Extension Monetization Strategies guide](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/).
 
 ---
 
@@ -86,7 +86,7 @@ Organize your features into a four-quadrant matrix based on two dimensions: how 
 - Free: Local password storage, basic generation
 - Premium: Cloud sync, emergency access, security monitoring
 
-For more on competitive pricing by category, see our [Chrome Extension Pricing Strategy guide](/chrome-extension-guide/2025/02/26-chrome-extension-pricing-strategy-what-to-charge/).
+For more on competitive pricing by category, see our [Chrome Extension Pricing Strategy guide](/2025/02/26-chrome-extension-pricing-strategy-what-to-charge/).
 
 ---
 
@@ -180,7 +180,7 @@ app.post('/api/validate-license', async (req, res) => {
 });
 ```
 
-For full payment integration guidance, see our [Stripe subscription tutorial](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/).
+For full payment integration guidance, see our [Stripe subscription tutorial](/2025/02/20/chrome-extension-subscription-model-stripe-integration/).
 
 ---
 
@@ -522,10 +522,10 @@ The freemium model has built billion-dollar businesses. Applied thoughtfully to 
 
 ## Related Resources
 
-- [Chrome Extension Monetization Strategies](/chrome-extension-guide/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)
-- [Chrome Extension Pricing Strategy](/chrome-extension-guide/2025/02/26-chrome-extension-pricing-strategy-what-to-charge/)
-- [Stripe Subscription Integration Tutorial](/chrome-extension-guide/2025/02/20/chrome-extension-subscription-model-stripe-integration/)
-- [Freemium Model Implementation Guide](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model)
+- [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)
+- [Chrome Extension Pricing Strategy](/2025/02/26-chrome-extension-pricing-strategy-what-to-charge/)
+- [Stripe Subscription Integration Tutorial](/2025/02/20/chrome-extension-subscription-model-stripe-integration/)
+- [Freemium Model Implementation Guide](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)
 
 ---
 

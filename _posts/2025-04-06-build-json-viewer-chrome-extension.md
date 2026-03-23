@@ -6,7 +6,7 @@ date: 2025-04-06
 categories: [Chrome-Extensions, Tutorials]
 tags: [json, viewer, chrome-extension]
 keywords: "chrome extension json viewer, build json formatter extension, json pretty print chrome, chrome extension format json, json viewer tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/06/build-json-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/06/build-json-viewer-chrome-extension/"
 ---
 
 # Build a JSON Viewer Chrome Extension: Pretty Print API Responses

@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "json viewer chrome extension, json formatter extension, pretty json extension, build chrome extension, chrome extension development"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/build-json-viewer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/build-json-viewer-chrome-extension/"
 ---
 
 # Build a JSON Viewer Chrome Extension: Complete Developer's Guide
@@ -1296,4 +1296,4 @@ The Chrome extension ecosystem offers incredible opportunities for developers to
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

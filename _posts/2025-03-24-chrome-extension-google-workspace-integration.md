@@ -6,7 +6,7 @@ date: 2025-03-24
 categories: [Chrome-Extensions, Integrations]
 tags: [google-workspace, gmail, chrome-extension]
 keywords: "chrome extension google workspace, gmail chrome extension, google drive extension, chrome extension google docs, google api chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/24/chrome-extension-google-workspace-integration/"
+canonical_url: "https://bestchromeextensions.com/2025/03/24/chrome-extension-google-workspace-integration/"
 ---
 
 # Chrome Extension Google Workspace Integration: Gmail, Drive, and Docs
@@ -380,8 +380,8 @@ Building Chrome extensions that integrate with Google Workspace opens up powerfu
 
 The Google Workspace APIs are well-documented and robust, but success requires attention to authentication security, performance optimization, and comprehensive error handling. Start with simple integrations and progressively add complexity as you understand the API behavior and user needs.
 
-For more guidance on Chrome extension development, explore the complete [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/)—your comprehensive resource for everything from [getting started](/chrome-extension-guide/docs/getting-started/) to [publishing on the Chrome Web Store](/chrome-extension-guide/docs/publishing/).
+For more guidance on Chrome extension development, explore the complete [Chrome Extension Guide](https://bestchromeextensions.com/)—your comprehensive resource for everything from [getting started](/docs/getting-started/) to [publishing on the Chrome Web Store](/docs/publishing/).
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

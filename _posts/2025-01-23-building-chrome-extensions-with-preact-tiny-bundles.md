@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework]
 keywords: "preact chrome extension, lightweight extension ui, preact popup, chrome extension preact, preact chrome extension tutorial, build chrome extension with preact"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/building-chrome-extensions-with-preact-tiny-bundles/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/building-chrome-extensions-with-preact-tiny-bundles/"
 ---
 
 # Building Chrome Extensions with Preact for Tiny Bundles: Complete Guide

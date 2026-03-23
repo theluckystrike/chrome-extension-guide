@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Bookmarks API — How to Create, Search, and Organize Bookmarks"
 description: "A comprehensive guide to using the Chrome Bookmarks API in extensions. Learn to create, search, organize bookmarks with CRUD operations, event listeners, and import/export features."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/bookmarks-api/"
+canonical_url: "https://bestchromeextensions.com/guides/bookmarks-api/"
 ---
 
 # Chrome Extension Bookmarks API — How to Create, Search, and Organize Bookmarks

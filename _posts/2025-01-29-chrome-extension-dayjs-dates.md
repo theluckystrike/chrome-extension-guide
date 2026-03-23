@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "dayjs extension, date manipulation chrome, time formatting extension, Day.js chrome extension, date handling chrome extension, javascript date library"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/chrome-extension-dayjs-dates/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-dayjs-dates/"
 ---
 
 # Day.js Date Handling in Chrome Extensions: Complete 2025 Guide

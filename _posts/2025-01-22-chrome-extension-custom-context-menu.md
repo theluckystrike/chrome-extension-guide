@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions]
 tags: [chrome-extension]
 keywords: "custom context menu, right click extension, context menu api chrome, chrome.contextMenus, context menu extension tutorial, build chrome extension context menu"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-custom-context-menu/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-custom-context-menu/"
 ---
 
 # Build Custom Context Menu Chrome Extension: Complete Guide

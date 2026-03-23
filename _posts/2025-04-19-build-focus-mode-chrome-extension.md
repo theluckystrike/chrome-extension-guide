@@ -6,7 +6,7 @@ date: 2025-04-19
 categories: [Chrome-Extensions, Productivity]
 tags: [focus-mode, reading, chrome-extension]
 keywords: "chrome extension focus mode, distraction free chrome, reading mode chrome extension, build focus extension, clean reading chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/19/build-focus-mode-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/19/build-focus-mode-chrome-extension/"
 ---
 
 # Build a Focus Mode Chrome Extension: Distraction-Free Reading Experience

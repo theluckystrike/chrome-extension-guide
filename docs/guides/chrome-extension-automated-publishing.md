@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Automated Publishing — Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-automated-publishing/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-automated-publishing/"
 ---
 # Automating Chrome Web Store Publishing with CI/CD
 
@@ -238,4 +238,4 @@ Configure to trigger CWS publish on release:
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

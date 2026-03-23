@@ -238,7 +238,7 @@ Email marketing transforms one-time extension installs into ongoing relationship
 
 Start small: add an email signup to your options page this week. Test one welcome sequence. Measure your results. Then iterate. Your email list will become one of your most valuable business assets.
 
-Ready to explore more growth strategies? Check out our guide on [extension monetization strategies]({% post_url 2025-02-16-chrome-extension-monetization-strategies-that-work-2025 %}) or learn about [effective user onboarding]({% post_url 2025-01-18-chrome-extension-user-onboarding-best-practices %}) to maximize your retention. For a comprehensive approach to turning your extension into a revenue-generating product, explore the [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/).
+Ready to explore more growth strategies? Check out our guide on [extension monetization strategies]({% post_url 2025-02-16-chrome-extension-monetization-strategies-that-work-2025 %}) or learn about [effective user onboarding]({% post_url 2025-01-18-chrome-extension-user-onboarding-best-practices %}) to maximize your retention. For a comprehensive approach to turning your extension into a revenue-generating product, explore the [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/).
 
 ---
 

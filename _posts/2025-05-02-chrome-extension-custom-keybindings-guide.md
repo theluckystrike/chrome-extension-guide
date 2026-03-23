@@ -6,7 +6,7 @@ date: 2025-05-02
 categories: [Chrome-Extensions, Productivity]
 tags: [keybindings, shortcuts, chrome-extension]
 keywords: "chrome extension keybindings, custom keyboard shortcuts extension, chrome extension hotkeys, global shortcuts chrome, chrome extension key commands"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/02/chrome-extension-custom-keybindings-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/05/02/chrome-extension-custom-keybindings-guide/"
 ---
 
 # Chrome Extension Custom Keybindings: Global Shortcuts for Any Action
@@ -261,4 +261,4 @@ The chrome extension keycommands you establish today lay the foundation for a mo
 
 ---
 
-*Ready to optimize your Chrome experience further? Explore our related guides on [Chrome extension development](/chrome-extension-guide/chrome-extension-development-2025-complete-beginners-guide/), [memory optimization](/chrome-extension-guide/chrome-extension-performance-optimization-guide/), and [tab management strategies](/chrome-extension-guide/how-tab-suspender-saves-laptop-battery-life/) to build a complete productivity toolkit.*
+*Ready to optimize your Chrome experience further? Explore our related guides on [Chrome extension development](/chrome-extension-development-2025-complete-beginners-guide/), [memory optimization](/chrome-extension-performance-optimization-guide/), and [tab management strategies](/how-tab-suspender-saves-laptop-battery-life/) to build a complete productivity toolkit.*

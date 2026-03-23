@@ -6,7 +6,7 @@ date: 2025-03-21
 categories: [Chrome-Extensions, Design]
 tags: [animation, css, chrome-extension]
 keywords: "chrome extension animation, animate chrome extension, css animation popup chrome, chrome extension transition effects, smooth UI chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/21/chrome-extension-animations-css-js/"
+canonical_url: "https://bestchromeextensions.com/2025/03/21/chrome-extension-animations-css-js/"
 ---
 
 # Adding Animations to Chrome Extensions: CSS and JavaScript Techniques

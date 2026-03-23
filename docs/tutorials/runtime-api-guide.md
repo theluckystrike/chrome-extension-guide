@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Runtime API: The Extension Lifecycle Hub"
 description: "A comprehensive guide to chrome.runtime API covering lifecycle events, message passing, extension URLs, and best practices for building robust Chrome extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/runtime-api-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/runtime-api-guide/"
 ---
 
 # Chrome Runtime API: The Extension Lifecycle Hub
@@ -863,9 +863,9 @@ port.onMessage.addListener(msg => console.log(msg));
 
 ## Related Articles {#related-articles}
 
-- [Chrome Runtime API Reference](/chrome-extension-guide/guides/runtime-api/) — Complete API reference with all methods, events, and type definitions
-- [Message Passing Best Practices](/chrome-extension-guide/guides/message-passing/) — Advanced patterns for inter-component communication
-- [Background Service Workers](/chrome-extension-guide/guides/service-worker-lifecycle/) — Understanding service worker lifecycle, debugging, and best practices
+- [Chrome Runtime API Reference](/guides/runtime-api/) — Complete API reference with all methods, events, and type definitions
+- [Message Passing Best Practices](/guides/message-passing/) — Advanced patterns for inter-component communication
+- [Background Service Workers](/guides/service-worker-lifecycle/) — Understanding service worker lifecycle, debugging, and best practices
 
 ---
 

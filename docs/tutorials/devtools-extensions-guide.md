@@ -2,7 +2,7 @@
 layout: default
 title: "Building DevTools Extensions for Chrome"
 description: "A comprehensive tutorial on building Chrome DevTools extensions. Learn to create custom panels, sidebars, use the inspectedWindow API, evaluate code in page context, intercept network requests, and extend the Elements panel."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/devtools-extensions-guide/"
+canonical_url: "https://bestchromeextensions.com/tutorials/devtools-extensions-guide/"
 ---
 
 # Building DevTools Extensions for Chrome
@@ -1123,4 +1123,4 @@ function logToDevToolsConsole(message) {
 ---
 
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "anime js extension, animation library chrome, smooth animation extension, anime.js chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/anime-js-animation-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/anime-js-animation-chrome-extensions/"
 ---
 
 # Anime.js Animation in Chrome Extensions: Complete Guide

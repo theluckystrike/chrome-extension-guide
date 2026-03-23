@@ -6,7 +6,7 @@ date: 2025-04-15
 categories: [Chrome-Extensions, Tutorials]
 tags: [price-tracker, ecommerce, chrome-extension]
 keywords: "chrome extension price tracker, amazon price tracker chrome, build price alert extension, chrome extension price monitor, price drop notification chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/15/build-price-tracker-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/15/build-price-tracker-chrome-extension/"
 ---
 
 # Build a Price Tracker Chrome Extension: Monitor Amazon and E-Commerce Prices

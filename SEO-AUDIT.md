@@ -3,7 +3,9 @@
 ## Summary
 
 | Metric | Count |
-|--------|-------|
+|---
+date: 2026-03-23
+-----|-------|
 | **Total articles** | 504 |
 | **Articles with front matter** | 454 |
 | **Articles without front matter** | 50 |
@@ -504,16 +506,16 @@
 
 | URL |
 |-----|
-| https://theluckystrike.github.io/chrome-extension-guide/docs/api-reference/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/guides/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/mv3/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/package-catalog/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/patterns/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/permissions/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/publishing/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/reference/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/tutorials/ |
-| https://theluckystrike.github.io/chrome-extension-guide/docs/ |
+| https://bestchromeextensions.com/docs/api-reference/ |
+| https://bestchromeextensions.com/docs/guides/ |
+| https://bestchromeextensions.com/docs/mv3/ |
+| https://bestchromeextensions.com/docs/package-catalog/ |
+| https://bestchromeextensions.com/docs/patterns/ |
+| https://bestchromeextensions.com/docs/permissions/ |
+| https://bestchromeextensions.com/docs/publishing/ |
+| https://bestchromeextensions.com/docs/reference/ |
+| https://bestchromeextensions.com/docs/tutorials/ |
+| https://bestchromeextensions.com/docs/ |
 
 ### Missing Sitemap Entries
 

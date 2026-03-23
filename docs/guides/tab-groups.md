@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Tab Groups API — How to Organize and Manage Tab Groups"
 description: "A comprehensive guide to using the Chrome Tab Groups API in extensions. Learn to create, organize, and manage tab groups with colors, titles, moving tabs between groups, and collapsing functionality."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/tab-groups/"
+canonical_url: "https://bestchromeextensions.com/guides/tab-groups/"
 ---
 
 # Chrome Extension Tab Groups API — How to Organize and Manage Tab Groups

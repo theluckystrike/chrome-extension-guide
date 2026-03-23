@@ -6,7 +6,7 @@ date: 2025-04-23
 categories: [Chrome-Extensions, Tutorials]
 tags: [api-tester, http, chrome-extension]
 keywords: "chrome extension api tester, api testing chrome, build postman extension, chrome extension http client, rest api chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/23/build-api-tester-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/23/build-api-tester-chrome-extension/"
 ---
 
 # Build an API Tester Chrome Extension: Postman Alternative in Your Browser

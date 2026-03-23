@@ -6,7 +6,7 @@ date: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "service worker lifecycle, mv3 service worker, extension background service, chrome extension background worker, manifest v3 service worker, chrome extension event handling, service worker termination, extension lifecycle management"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/20/chrome-extension-service-worker-lifecycle/"
+canonical_url: "https://bestchromeextensions.com/2025/01/20/chrome-extension-service-worker-lifecycle/"
 ---
 
 # Chrome Extension Service Worker Lifecycle Deep Dive: A Complete Guide

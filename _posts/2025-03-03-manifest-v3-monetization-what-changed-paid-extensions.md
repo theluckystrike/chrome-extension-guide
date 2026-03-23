@@ -72,7 +72,7 @@ The most common replacement patterns include:
 
 **Direct Payment Links** — Generating payment links from Stripe or PayPal and directing users through your extension's payment flow. Lower overhead but requires more manual handling.
 
-For a deeper dive into Stripe integration, see our [Stripe Integration Tutorial](/chrome-extension-guide/stripe-integration-tutorial/).
+For a deeper dive into Stripe integration, see our [Stripe Integration Tutorial](/stripe-integration-tutorial/).
 
 ---
 

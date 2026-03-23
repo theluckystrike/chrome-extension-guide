@@ -2,7 +2,7 @@
 layout: default
 title: "Building Accessible Chrome Extensions"
 description: "Learn how to build accessible Chrome extensions with proper ARIA attributes, keyboard navigation, screen reader support, focus management, color contrast, and WCAG compliance."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/accessibility-in-extensions/"
+canonical_url: "https://bestchromeextensions.com/tutorials/accessibility-in-extensions/"
 ---
 
 # Building Accessible Chrome Extensions
@@ -921,9 +921,9 @@ Use this checklist to ensure your extension meets WCAG 2.1 AA standards:
 
 ## Related Articles
 
-- [Chrome Extension Keyboard Navigation](/chrome-extension-guide/guides/chrome-extension-keyboard-navigation.html) - Learn how to implement comprehensive keyboard navigation patterns in your extensions
-- [Extension Accessibility Testing Guide](/chrome-extension-guide/guides/extension-a11y-testing.html) - Detailed testing methodologies and tools for verifying extension accessibility
-- [Building with React for Extensions](/chrome-extension-guide/patterns/building-with-react.html) - Using React to build accessible extension interfaces with proper component patterns
+- [Chrome Extension Keyboard Navigation](/guides/chrome-extension-keyboard-navigation.html) - Learn how to implement comprehensive keyboard navigation patterns in your extensions
+- [Extension Accessibility Testing Guide](/guides/extension-a11y-testing.html) - Detailed testing methodologies and tools for verifying extension accessibility
+- [Building with React for Extensions](/patterns/building-with-react.html) - Using React to build accessible extension interfaces with proper component patterns
 
 ---
 

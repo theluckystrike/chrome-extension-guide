@@ -6,7 +6,7 @@ date: 2025-05-10
 categories: [Chrome-Extensions, APIs]
 tags: [share-target, sharing, chrome-extension]
 keywords: "chrome extension share target, share to extension chrome, receive shared data extension, chrome extension share API, web share target extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/10/chrome-extension-share-target-api/"
+canonical_url: "https://bestchromeextensions.com/2025/05/10/chrome-extension-share-target-api/"
 ---
 
 # Chrome Extension Share Target API: Receive Shared Content from Other Apps

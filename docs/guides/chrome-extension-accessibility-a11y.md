@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices"
 description: "A comprehensive developer guide to building WCAG-compliant Chrome extensions with proper ARIA roles, keyboard navigation, screen reader support, focus management, and accessibility testing."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-extension-accessibility-a11y/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-accessibility-a11y/"
 ---
 
 # Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices
@@ -436,7 +436,7 @@ Use this checklist to verify your Chrome extension meets accessibility requireme
 - [ ] Focus management is correct during open/close flows
 - [ ] Extensions tested in Windows high contrast mode
 
-For more detailed guidance on implementing accessible extension UIs, see our [Popup UI Best Practices](/chrome-extension-guide/guides/popup-ui-best-practices/) guide. For comprehensive testing strategies, refer to our [Accessibility Testing Guide](/chrome-extension-guide/guides/extension-a11y-testing/).
+For more detailed guidance on implementing accessible extension UIs, see our [Popup UI Best Practices](/guides/popup-ui-best-practices/) guide. For comprehensive testing strategies, refer to our [Accessibility Testing Guide](/guides/extension-a11y-testing/).
 
 ---
 

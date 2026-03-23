@@ -6,7 +6,7 @@ date: 2025-03-28
 categories: [Chrome-Extensions, Backend]
 tags: [supabase, backend, chrome-extension]
 keywords: "chrome extension supabase, supabase chrome extension, chrome extension database supabase, supabase auth extension, real-time chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/28/chrome-extension-supabase-backend-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/28/chrome-extension-supabase-backend-guide/"
 ---
 
 # Chrome Extension with Supabase Backend: Auth, Database, and Real-Time

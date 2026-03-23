@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "zustand chrome extension, lightweight state management, zustand popup"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/zustand-state-management-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/zustand-state-management-chrome-extensions/"
 ---
 
 # Zustand State Management in Chrome Extensions: A Complete Guide
@@ -457,4 +457,4 @@ Remember to leverage Chrome's storage API for persistence, use TypeScript for be
 - [Zustand Official Documentation](https://docs.pmnd.rs/zustand)
 - [Chrome Extension Development Docs](https://developer.chrome.com/docs/extensions/mv3/)
 - [Chrome Storage API Reference](https://developer.chrome.com/docs/extensions/reference/storage/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/2025/01/16/manifest-v3-migration-complete-guide-2025/)
+- [Manifest V3 Migration Guide](/2025/01/16/manifest-v3-migration-complete-guide-2025/)

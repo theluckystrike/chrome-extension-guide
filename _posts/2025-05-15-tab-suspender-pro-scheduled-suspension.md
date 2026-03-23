@@ -5,7 +5,7 @@ description: "Master time-based tab suspension in Tab Suspender Pro with schedul
 date: 2025-05-15
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, scheduling, time-management]
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/15/tab-suspender-pro-scheduled-suspension/"
+canonical_url: "https://bestchromeextensions.com/2025/05/15/tab-suspender-pro-scheduled-suspension/"
 ---
 
 # Tab Suspender Pro Scheduled Suspension: Time-Based Tab Management Rules

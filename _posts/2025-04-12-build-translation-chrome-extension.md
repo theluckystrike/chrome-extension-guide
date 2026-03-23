@@ -6,7 +6,7 @@ date: 2025-04-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [translation, language, chrome-extension]
 keywords: "chrome extension translate, build translation extension, translate text chrome extension, chrome extension translator, language translation chrome"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/12/build-translation-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/12/build-translation-chrome-extension/"
 ---
 
 # Build a Translation Chrome Extension: Translate Selected Text Instantly

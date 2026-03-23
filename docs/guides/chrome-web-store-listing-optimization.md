@@ -4,7 +4,7 @@ title: "Chrome Web Store Listing Optimization Guide"
 seo_title: "CWS Listing Optimization | Chrome Extension Store SEO Guide 2025"
 description: "Master Chrome Web Store listing optimization with our comprehensive guide. Learn title optimization, screenshot design, locale strategies, A/B testing, and conversion tracking."
 keywords: "chrome web store listing, CWS optimization, chrome extension SEO, extension store optimization, CWS ranking factors"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/chrome-web-store-listing-optimization/"
+canonical_url: "https://bestchromeextensions.com/guides/chrome-web-store-listing-optimization/"
 ---
 
 # Chrome Web Store Listing Optimization Guide

@@ -68,7 +68,7 @@ While Tab Suspender Pro doesn't publicly disclose revenue, analysis of the exten
 
 The extension succeeded because it solved a genuine pain point (browser memory), offered clear free value, and introduced premium features that power users genuinely needed. The upgrade path felt natural rather than coercive.
 
-For a detailed guide on implementing freemium in your extension, see our [freemium model implementation guide](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model).
+For a detailed guide on implementing freemium in your extension, see our [freemium model implementation guide](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model).
 
 ---
 
@@ -98,7 +98,7 @@ One of the most critical strategic decisions you'll make is whether to offer sub
 
 For most Chrome extensions, subscriptions generate more revenue over time and create healthier businesses. The predictability of recurring revenue outweighs the simplicity benefits of one-time purchases. However, consider offering both—many successful extensions provide a monthly subscription alongside an annual plan (at a discount) and a lifetime option (at a premium).
 
-Our [subscription architecture guide](https://theluckystrike.github.io/extension-monetization-playbook/monetization/subscription-architecture) provides implementation details for building subscription systems.
+Our [subscription architecture guide](https://bestchromeextensions.com/extension-monetization-playbook/monetization/subscription-architecture) provides implementation details for building subscription systems.
 
 ---
 
@@ -127,7 +127,7 @@ Stripe has become the dominant payment processor for Chrome extensions. Its robu
 
 **Support multiple currencies.** If you have international users, configure Stripe to handle currency conversion. This prevents customers from seeing confusing foreign transaction fees.
 
-For a complete implementation tutorial, see our detailed [Stripe payment integration guide for Chrome extensions](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration).
+For a complete implementation tutorial, see our detailed [Stripe payment integration guide for Chrome extensions](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration).
 
 ---
 
@@ -197,7 +197,7 @@ const licenseSchema = defineSchema({
 const licenseStorage = createStorage(licenseSchema, 'local');
 ```
 
-For a complete license validation implementation, see our [extension monetization guide](https://theluckystrike.github.io/chrome-extension-guide/guides/extension-monetization/).
+For a complete license validation implementation, see our [extension monetization guide](https://bestchromeextensions.com/guides/extension-monetization/).
 
 ---
 
@@ -383,6 +383,6 @@ The Chrome extension ecosystem rewards developers who combine great products wit
 
 ---
 
-*This article is part of our comprehensive [Chrome Extension Monetization Guide](https://theluckystrike.github.io/chrome-extension-guide/guides/extension-monetization/). For implementation details, see our guides on [Stripe integration](https://theluckystrike.github.io/extension-monetization-playbook/monetization/stripe-integration), [subscription architecture](https://theluckystrike.github.io/extension-monetization-playbook/monetization/subscription-architecture), and [freemium model implementation](https://theluckystrike.github.io/extension-monetization-playbook/monetization/freemium-model).*
+*This article is part of our comprehensive [Chrome Extension Monetization Guide](https://bestchromeextensions.com/guides/extension-monetization/). For implementation details, see our guides on [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), [subscription architecture](https://bestchromeextensions.com/extension-monetization-playbook/monetization/subscription-architecture), and [freemium model implementation](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model).*
 
 *Built by theluckystrike at [zovo.one](https://zovo.one)*

@@ -6,7 +6,7 @@ date: 2025-04-22
 categories: [Chrome-Extensions, Tutorials]
 tags: [duplicate-tabs, cleanup, chrome-extension]
 keywords: "chrome extension duplicate tabs, find duplicate tabs chrome, remove duplicate tabs extension, chrome extension tab cleanup, duplicate tab finder"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/22/build-duplicate-tab-finder-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/22/build-duplicate-tab-finder-chrome-extension/"
 ---
 
 # Build a Duplicate Tab Finder Chrome Extension: Clean Up Your Browser

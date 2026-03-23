@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Alarms & Scheduling — Developer Guide"
 description: "Learn Chrome extension alarms & scheduling with this developer guide covering implementation, best practices, and code examples."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/alarms-scheduling/"
+canonical_url: "https://bestchromeextensions.com/guides/alarms-scheduling/"
 ---
 # Background Scheduling with chrome.alarms
 
@@ -178,5 +178,5 @@ async function updateSyncInterval(minutes) {
 
 ---
 ## Turn Your Extension Into a Business
-Ready to monetize? The [Extension Monetization Playbook](https://theluckystrike.github.io/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
+Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

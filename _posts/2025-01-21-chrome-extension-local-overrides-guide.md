@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [guides, chrome-extensions, development-tools]
 tags: [chrome local overrides, override website files, local file replacement chrome, chrome devtools, web development, debugging]
 keywords: "chrome local overrides, override website files, local file replacement chrome, chrome devtools overrides"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/chrome-extension-local-overrides-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/chrome-extension-local-overrides-guide/"
 ---
 
 # Chrome Local Overrides with Extensions: A Developer Guide

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Debugging Guide — DevTools Tips and Tricks"
 description: "Master Chrome extension debugging with this comprehensive guide covering DevTools, service worker inspection, content script debugging, and advanced troubleshooting techniques."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/guides/debugging-guide/"
+canonical_url: "https://bestchromeextensions.com/guides/debugging-guide/"
 ---
 
 # Chrome Extension Debugging Guide — DevTools Tips and Tricks

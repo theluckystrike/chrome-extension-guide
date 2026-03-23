@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "howler js extension, audio library chrome, sound player extension, howler.js chrome extension audio"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/howler-js-audio-chrome-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/howler-js-audio-chrome-extensions/"
 ---
 
 # Howler.js Audio in Chrome Extensions: Complete Implementation Guide
@@ -761,10 +761,10 @@ With these techniques and patterns, you can create Chrome extensions that delive
 ## Additional Resources
 
 - [Howler.js Documentation](https://howlerjs.com/)
-- [Chrome Extension Development Guide](/chrome-extension-guide/)
+- [Chrome Extension Development Guide](/)
 - [Chrome Storage API Reference](https://developer.chrome.com/docs/extensions/mv3/storage/)
 - [Manifest V3 Documentation](https://developer.chrome.com/docs/extensions/mv3/intro/)
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

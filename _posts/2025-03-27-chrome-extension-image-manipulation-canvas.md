@@ -6,7 +6,7 @@ date: 2025-03-27
 categories: [Chrome-Extensions, Media]
 tags: [canvas, image-processing, chrome-extension]
 keywords: "chrome extension image manipulation, canvas API chrome extension, image processing extension, resize image chrome extension, chrome extension canvas"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/27/chrome-extension-image-manipulation-canvas/"
+canonical_url: "https://bestchromeextensions.com/2025/03/27/chrome-extension-image-manipulation-canvas/"
 ---
 
 # Image Manipulation in Chrome Extensions: Canvas API and Processing Guide

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Throttle Debounce Extensions — Best Practices"
 description: "Throttle and debounce events in extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/throttle-debounce-extensions/"
+canonical_url: "https://bestchromeextensions.com/patterns/throttle-debounce-extensions/"
 ---
 
 # Throttle and Debounce Patterns for Chrome Extensions

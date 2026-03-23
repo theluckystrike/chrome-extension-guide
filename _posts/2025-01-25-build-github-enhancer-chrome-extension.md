@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "github enhancer extension, github tools chrome, github productivity extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/build-github-enhancer-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/build-github-enhancer-chrome-extension/"
 ---
 
 # Build a GitHub Enhancer Chrome Extension: Complete Developer Guide

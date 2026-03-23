@@ -6,7 +6,7 @@ date: 2025-05-15
 categories: [Chrome-Extensions, Battery]
 tags: [tab-suspender-pro, power-saving, battery]
 keywords: "tab suspender pro power saving, chrome power save extension, maximum battery chrome, tab suspender battery optimization, power efficient chrome browsing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/15/tab-suspender-pro-power-saving-mode/"
+canonical_url: "https://bestchromeextensions.com/2025/05/15/tab-suspender-pro-power-saving-mode/"
 ---
 
 # Tab Suspender Pro Power Saving Mode: Maximum Battery Life Configuration

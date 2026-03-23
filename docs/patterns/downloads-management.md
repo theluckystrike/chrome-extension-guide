@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Downloads Management — Best Practices"
 description: "Manage file downloads from extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/downloads-management/"
+canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 ---
 
 # Downloads Management Patterns

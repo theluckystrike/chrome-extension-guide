@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Desktop Capture — Best Practices"
 description: "Capture screen and audio with desktopCapture API."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/desktop-capture/"
+canonical_url: "https://bestchromeextensions.com/patterns/desktop-capture/"
 ---
 
 # Desktop Capture API Patterns

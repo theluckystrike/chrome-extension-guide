@@ -2,7 +2,7 @@
 layout: default
 title: "State Management Patterns for Chrome Extensions — Developer Guide"
 description: "Master state management in Chrome extensions with chrome.storage API, reactive state with webext-reactive-store, and cross-context patterns."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/tutorials/state-management-patterns/"
+canonical_url: "https://bestchromeextensions.com/tutorials/state-management-patterns/"
 ---
 
 # State Management Patterns for Chrome Extensions

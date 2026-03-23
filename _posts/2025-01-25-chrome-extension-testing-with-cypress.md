@@ -6,7 +6,7 @@ date: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "cypress chrome extension, cypress extension test, cypress e2e extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/25/chrome-extension-testing-with-cypress/"
+canonical_url: "https://bestchromeextensions.com/2025/01/25/chrome-extension-testing-with-cypress/"
 ---
 
 # Chrome Extension Testing with Cypress: Complete E2E Testing Guide

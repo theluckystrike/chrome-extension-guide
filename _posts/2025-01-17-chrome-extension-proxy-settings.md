@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome proxy extension, proxy settings api, vpn chrome extension, chrome.proxy api, proxy auto-config, manifest v3 proxy"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-proxy-settings/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-proxy-settings/"
 ---
 
 # Chrome Extension Proxy Settings API Guide: Build VPN and Proxy Extensions
@@ -696,4 +696,4 @@ The key to success lies in balancing functionality with simplicity. Users apprec
 ---
 
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

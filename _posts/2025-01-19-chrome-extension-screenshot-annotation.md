@@ -6,7 +6,7 @@ date: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "screenshot annotation extension, markup chrome extension, screen capture annotate, chrome extension screenshot tools, screenshot markup chrome, build screenshot extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/19/chrome-extension-screenshot-annotation/"
+canonical_url: "https://bestchromeextensions.com/2025/01/19/chrome-extension-screenshot-annotation/"
 ---
 
 # Build a Screenshot Annotation Chrome Extension: Complete Developer Guide

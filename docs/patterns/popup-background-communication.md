@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Popup-Background Communication — Patterns for Shared State"
 description: "Patterns for communicating between popup and background service worker in Chrome extensions."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-background-communication/"
+canonical_url: "https://bestchromeextensions.com/patterns/popup-background-communication/"
 ---
 
 # Chrome Extension Popup-Background Communication — Patterns for Shared State

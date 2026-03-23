@@ -6,7 +6,7 @@ date: 2025-04-21
 categories: [Chrome-Extensions, Tutorials]
 tags: [speed-dial, new-tab, chrome-extension]
 keywords: "chrome extension speed dial, speed dial new tab chrome, build speed dial extension, quick access chrome extension, favorite sites new tab"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/04/21/build-speed-dial-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/04/21/build-speed-dial-chrome-extension/"
 ---
 
 # Build a Speed Dial Chrome Extension: Quick Access to Your Favorite Sites

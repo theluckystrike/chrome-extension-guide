@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "site search extension, custom search chrome, search within site, chrome extension development, site-specific search"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/build-site-specific-search-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/build-site-specific-search-chrome-extension/"
 ---
 
 # Build a Site-Specific Search Chrome Extension: Complete Developer Guide

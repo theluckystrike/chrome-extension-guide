@@ -6,7 +6,7 @@ date: 2025-05-12
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [fetch, interceptor, chrome-extension]
 keywords: "chrome extension fetch interceptor, intercept fetch chrome, modify api calls extension, chrome extension api monitor, request interceptor extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/05/12/chrome-extension-fetch-interceptor-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/05/12/chrome-extension-fetch-interceptor-guide/"
 ---
 
 # Chrome Extension Fetch Interceptor: Monitor and Modify API Calls

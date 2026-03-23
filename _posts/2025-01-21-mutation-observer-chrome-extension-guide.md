@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "mutation observer extension, dom change detection, monitor page changes extension, chrome extension mutation observer, detect DOM changes extension, observe DOM changes chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/mutation-observer-chrome-extension-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/mutation-observer-chrome-extension-guide/"
 ---
 
 # MutationObserver in Chrome Extensions: Complete Guide to DOM Change Detection

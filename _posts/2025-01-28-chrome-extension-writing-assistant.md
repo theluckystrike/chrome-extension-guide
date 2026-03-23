@@ -6,7 +6,7 @@ date: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "writing assistant extension, grammar help chrome, writing tool"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/28/chrome-extension-writing-assistant/"
+canonical_url: "https://bestchromeextensions.com/2025/01/28/chrome-extension-writing-assistant/"
 ---
 
 # Build a Writing Assistant Chrome Extension: Complete 2025 Guide

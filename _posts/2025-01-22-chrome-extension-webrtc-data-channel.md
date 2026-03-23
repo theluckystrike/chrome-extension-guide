@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, API]
 tags: [chrome-extension, api]
 keywords: "webrtc data channel extension, peer data transfer chrome, p2p extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/chrome-extension-webrtc-data-channel/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-webrtc-data-channel/"
 ---
 
 # WebRTC Data Channel in Chrome Extensions: Complete Guide to Peer-to-Peer Data Transfer

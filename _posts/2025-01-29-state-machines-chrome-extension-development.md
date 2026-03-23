@@ -6,7 +6,7 @@ date: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns, state machine, xstate]
 keywords: "state machine extension, xstate chrome extension, finite state extension, chrome extension state management, chrome extension architecture patterns"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/29/state-machines-chrome-extension-development/"
+canonical_url: "https://bestchromeextensions.com/2025/01/29/state-machines-chrome-extension-development/"
 ---
 
 # State Machines in Chrome Extension Development: A Complete Guide for 2025

@@ -6,7 +6,7 @@ date: 2025-03-08
 categories: [Chrome-Extensions, APIs]
 tags: [tab-groups, chrome-extension, tutorial]
 keywords: "chrome extension tab groups, chrome.tabGroups API, tab groups chrome extension, organize tabs programmatically, chrome tab group extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/03/08/chrome-extension-tab-groups-api-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/03/08/chrome-extension-tab-groups-api-guide/"
 ---
 
 # Chrome Extension Tab Groups API: Programmatic Tab Organization

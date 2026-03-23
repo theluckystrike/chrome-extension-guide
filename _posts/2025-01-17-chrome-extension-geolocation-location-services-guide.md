@@ -6,7 +6,7 @@ date: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension geolocation, location based chrome extension, geolocation api extension, chrome geolocation api, extension location services"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/17/chrome-extension-geolocation-location-services-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-geolocation-location-services-guide/"
 ---
 
 # Chrome Extension Geolocation and Location Services Guide
@@ -370,10 +370,10 @@ Remember to always request only the location permissions you need, handle errors
 
 ## Related Articles
 
-- [Chrome Extension Permissions Explained: A Complete Guide](/chrome-extension-guide/2025/03/01/chrome-extension-permissions-explained/) - Understand extension permissions and security
-- [Chrome Extension Geolocation API Guide](/chrome-extension-guide/2025/04/01/chrome-extension-geolocation-api-guide/) - Deep dive into geolocation implementation
-- [Chrome Extension Web Bluetooth Guide](/chrome-extension-guide/2025/01/21/web-bluetooth-chrome-extension/) - Explore other powerful extension APIs
+- [Chrome Extension Permissions Explained: A Complete Guide](/2025/03/01/chrome-extension-permissions-explained/) - Understand extension permissions and security
+- [Chrome Extension Geolocation API Guide](/2025/04/01/chrome-extension-geolocation-api-guide/) - Deep dive into geolocation implementation
+- [Chrome Extension Web Bluetooth Guide](/2025/01/21/web-bluetooth-chrome-extension/) - Explore other powerful extension APIs
 -e 
 ---
 
-*Part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
+*Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*

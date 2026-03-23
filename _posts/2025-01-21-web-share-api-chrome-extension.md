@@ -6,7 +6,7 @@ date: 2025-01-21
 categories: [tutorials, chrome-extensions]
 tags: [web share api extension, native share chrome, share target extension, manifest v3, chrome extension api, sharing functionality]
 keywords: "web share api extension, native share chrome, share target extension, web share target api chrome, chrome extension sharing"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/21/web-share-api-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/21/web-share-api-chrome-extension/"
 ---
 
 # Web Share API in Chrome Extensions: Native Sharing Made Easy

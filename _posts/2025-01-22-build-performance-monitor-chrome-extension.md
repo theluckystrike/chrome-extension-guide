@@ -6,7 +6,7 @@ date: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "performance monitor extension, fps counter chrome, memory monitor extension, chrome extension performance, build chrome extension tutorial"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/22/build-performance-monitor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/22/build-performance-monitor-chrome-extension/"
 ---
 
 # Build a Performance Monitor Chrome Extension: Complete 2025 Guide
@@ -853,5 +853,5 @@ Start with the basic implementation in this guide, then progressively add featur
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Performance API Reference](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API)
 - [Chrome Performance Panel Guide](https://developer.chrome.com/docs/devtools/performance/)
-- [Manifest V3 Migration Guide](/chrome-extension-guide/docs/manifest-v3-migration/)
+- [Manifest V3 Migration Guide](/docs/manifest-v3-migration/)
 

@@ -2,7 +2,7 @@
 layout: default
 title: "Chrome Extension Popup To Tab — Best Practices"
 description: "Learn patterns for opening extension popups as full tabs for enhanced user experience and larger interfaces."
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/patterns/popup-to-tab/"
+canonical_url: "https://bestchromeextensions.com/patterns/popup-to-tab/"
 ---
 
 # Popup-to-Tab Pattern

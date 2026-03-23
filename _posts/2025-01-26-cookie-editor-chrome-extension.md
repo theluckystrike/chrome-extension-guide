@@ -6,7 +6,7 @@ date: 2025-01-26
 categories: [Chrome-Extensions, Development-Tutorial]
 tags: [chrome-extension, tutorial, cookie-editor]
 keywords: "cookie editor extension, manage cookies chrome, edit cookies extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/26/cookie-editor-chrome-extension/"
+canonical_url: "https://bestchromeextensions.com/2025/01/26/cookie-editor-chrome-extension/"
 ---
 
 # Build a Cookie Editor Chrome Extension

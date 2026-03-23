@@ -6,7 +6,7 @@ date: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "media session extension, media controls chrome, audio player extension, chrome media session api, media session chrome extension implementation"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/27/chrome-media-session-api-extensions/"
+canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-media-session-api-extensions/"
 ---
 
 # Chrome Media Session API for Extensions: Complete Implementation Guide
@@ -506,8 +506,8 @@ The key takeaways from this guide are:
 
 By following these patterns and best practices, your media session extension will provide a polished, professional user experience that stands out in the Chrome Web Store. Users will appreciate the seamless integration with their system's media controls, and your extension will feel like a native application rather than a basic browser tool.
 
-For more information on building Chrome extensions, explore the full [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) — your comprehensive resource for extension development from getting started to publishing.
+For more information on building Chrome extensions, explore the full [Chrome Extension Guide](https://bestchromeextensions.com/) — your comprehensive resource for extension development from getting started to publishing.
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://theluckystrike.github.io/chrome-extension-guide/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*

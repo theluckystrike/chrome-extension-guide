@@ -6,7 +6,7 @@ date: 2025-02-23
 categories: [Chrome-Extensions, APIs]
 tags: [notifications, chrome-extension, tutorial]
 keywords: "chrome extension notifications, chrome notifications API, desktop notifications chrome extension, push notification chrome extension"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/02/23/chrome-extension-notifications-api-complete-guide/"
+canonical_url: "https://bestchromeextensions.com/2025/02/23/chrome-extension-notifications-api-complete-guide/"
 ---
 
 # Chrome Extension Notifications API: Push Alerts and Desktop Notifications Guide

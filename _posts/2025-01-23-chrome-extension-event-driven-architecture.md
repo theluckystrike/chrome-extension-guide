@@ -6,7 +6,7 @@ date: 2025-01-23
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "event driven extension, chrome events api, extension event handling, chrome extension events, manifest v3 events"
-canonical_url: "https://theluckystrike.github.io/chrome-extension-guide/2025/01/23/chrome-extension-event-driven-architecture/"
+canonical_url: "https://bestchromeextensions.com/2025/01/23/chrome-extension-event-driven-architecture/"
 ---
 
 # Event-Driven Architecture in Chrome Extensions: A Complete Guide
