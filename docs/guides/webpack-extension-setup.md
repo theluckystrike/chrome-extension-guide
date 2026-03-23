@@ -1,24 +1,24 @@
 ---
 layout: default
-title: "Chrome Extension Webpack Setup — Developer Guide"
+title: "Chrome Extension Webpack Setup. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/webpack-extension-setup/"
 ---
 # Webpack Setup for Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 Webpack is a powerful and mature JavaScript bundler that provides excellent flexibility for Chrome extension development. While newer tools like Vite and esbuild offer faster development cycles, Webpack's extensive plugin ecosystem, sophisticated code splitting capabilities, and fine-grained control make it an excellent choice for complex extension projects requiring advanced customization.
 
 This guide covers setting up Webpack 5 for Chrome extension development, configuring multi-entry builds for different extension contexts, and establishing efficient development and production workflows.
 
-## Why Webpack {#why-webpack}
+Why Webpack {#why-webpack}
 
 Webpack offers several compelling advantages for Chrome extension development. First, its mature plugin ecosystem provides solutions for nearly any build requirement, from copying static assets to generating dynamic manifests. The code splitting capabilities are particularly powerful, allowing you to extract shared code between content scripts, background scripts, and popup pages into common chunks that reduce overall bundle size.
 
 Webpack's configuration system, while more complex than modern alternatives, offers unparalleled control over the bundling process. You can define complex module rules, implement custom plugins, and configure precise output behaviors that aren't easily achievable with simpler tools. Additionally, Webpack 5's Module Federation enables sophisticated patterns for sharing code between different parts of your extension or even between multiple extensions.
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 A typical Chrome extension project built with Webpack follows a structured directory layout:
 
@@ -49,7 +49,7 @@ tsconfig.json             # TypeScript configuration
 
 This structure keeps each extension context isolated while allowing shared code to be imported where needed. The manifest.json stays in the project root and gets copied to the dist folder during the build process.
 
-## Webpack Configuration {#webpack-configuration}
+Webpack Configuration {#webpack-configuration}
 
 The Webpack configuration for Chrome extensions requires setting up multiple entry points, each corresponding to a different extension context. Here is a comprehensive configuration:
 
@@ -145,7 +145,7 @@ module.exports = {
 
 This configuration defines four entry points: popup, options, background, and content script. Each entry produces a corresponding JavaScript file in the dist directory.
 
-## Key Plugins {#key-plugins}
+Key Plugins {#key-plugins}
 
 Several plugins are essential for Chrome extension builds. The CopyWebpackPlugin copies static assets and the manifest.json to the output directory. Configure patterns to match your project's asset structure:
 
@@ -163,7 +163,7 @@ The HtmlWebpackPlugin generates HTML pages for popup and options contexts, injec
 
 The MiniCssExtractPlugin extracts CSS into separate files in production builds, which is required for Chrome extensions since inline styles have limitations in certain contexts.
 
-## Module Rules {#module-rules}
+Module Rules {#module-rules}
 
 TypeScript support requires ts-loader or babel-loader. For best results with TypeScript, use ts-loader with fork-ts-checker-webpack-plugin for type checking during development:
 
@@ -203,7 +203,7 @@ Asset modules (Webpack 5 feature) handle images and fonts without additional loa
 }
 ```
 
-## Development Workflow {#development-workflow}
+Development Workflow {#development-workflow}
 
 Webpack's devServer has limitations with Chrome extensions because extensions require specific file structures and cannot use the typical devServer approach. Instead, use watch mode for development:
 
@@ -227,7 +227,7 @@ devtool: isDev ? 'cheap-module-source-map' : 'hidden-source-map'
 
 The `hidden-source-map` option generates source maps for production debugging without exposing them in the browser developer tools, keeping your source code private while still allowing error tracking services to parse stack traces.
 
-## Environment Variables {#environment-variables}
+Environment Variables {#environment-variables}
 
 Use DefinePlugin to inject environment variables into your code:
 
@@ -240,7 +240,7 @@ new DefinePlugin({
 
 Access these in your code via `process.env.API_URL`. Note that DefinePlugin evaluates expressions, so wrap values in JSON.stringify for strings.
 
-## Code Splitting {#code-splitting}
+Code Splitting {#code-splitting}
 
 Webpack's code splitting capabilities help reduce bundle size by extracting shared code:
 
@@ -261,7 +261,7 @@ optimization: {
 
 For Chrome extensions, be cautious with dynamic imports in content scripts, as Chrome handles them differently than regular web pages.
 
-## Production Optimization {#production-optimization}
+Production Optimization {#production-optimization}
 
 Production builds should enable minification and optimize bundle size. TerserPlugin handles JavaScript minification with options to remove console statements in production:
 
@@ -284,7 +284,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 new CssMinimizerPlugin(),
 ```
 
-## Module Federation {#module-federation}
+Module Federation {#module-federation}
 
 Webpack 5 Module Federation enables sophisticated code sharing between extension contexts or even between multiple extensions:
 
@@ -303,7 +303,7 @@ plugins: [
 
 This advanced feature is useful for large extension projects where popup, options, and background scripts share significant functionality.
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 For more information on related topics, see these guides:
 
@@ -311,9 +311,9 @@ For more information on related topics, see these guides:
 - [esbuild Extension Setup](./esbuild-extension-setup.md) - Ultra-fast builds with esbuild
 - [TypeScript Extensions](./typescript-extensions.md) - TypeScript configuration and type definitions for Chrome APIs
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Rollup Setup](../guides/rollup-extension-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

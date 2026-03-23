@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Rest Api Patterns — Best Practices"
+title: "Chrome Extension Rest Api Patterns. Best Practices"
 description: "Consume REST APIs securely in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/rest-api-patterns/"
 ---
@@ -9,11 +9,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/rest-api-patterns/"
 
 REST APIs remain the most common integration point for Chrome extensions. The Manifest V3 service worker lifecycle, network constraints, and storage limitations create unique challenges that require purpose-built patterns. This guide covers eight essential patterns with TypeScript implementations.
 
-> **Related guides:** [Error Handling](error-handling.md) | [OAuth and Identity](oauth-identity.md)
+> Related guides: [Error Handling](error-handling.md) | [OAuth and Identity](oauth-identity.md)
 
 ---
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 1. [Fetch Wrapper with Retry and Timeout](#1-fetch-wrapper-with-retry-and-timeout)
 2. [Request Intercepting with declarativeNetRequest](#2-request-intercepting-with-declarativenetrequest)
@@ -26,7 +26,7 @@ REST APIs remain the most common integration point for Chrome extensions. The Ma
 
 ---
 
-## 1. Fetch Wrapper with Retry and Timeout {#1-fetch-wrapper-with-retry-and-timeout}
+1. Fetch Wrapper with Retry and Timeout {#1-fetch-wrapper-with-retry-and-timeout}
 
 The built-in `fetch` API lacks timeout support and automatic retries. Wrap it to handle transient failures gracefully, especially when the service worker wakes to handle an event and the network may not be immediately available.
 
@@ -99,15 +99,15 @@ function sleep(ms: number): Promise<void> {
 }
 ```
 
-**Important:** Exponential backoff (`Math.pow(2, attempt)`) prevents hammering a struggling server. For 429 responses, respect the `Retry-After` header when present.
+Exponential backoff (`Math.pow(2, attempt)`) prevents hammering a struggling server. For 429 responses, respect the `Retry-After` header when present.
 
 ---
 
-## 2. Request Intercepting with declarativeNetRequest {#2-request-intercepting-with-declarativenetrequest}
+2. Request Intercepting with declarativeNetRequest {#2-request-intercepting-with-declarativenetrequest}
 
 Use `declarativeNetRequest` to modify outgoing requests declaratively -- adding headers, rewriting URLs, or blocking requests without running background JavaScript.
 
-### Static Rules (manifest.json) {#static-rules-manifestjson}
+Static Rules (manifest.json) {#static-rules-manifestjson}
 
 ```json
 {
@@ -148,7 +148,7 @@ Use `declarativeNetRequest` to modify outgoing requests declaratively -- adding 
 ]
 ```
 
-### Dynamic Rules for Runtime Configuration {#dynamic-rules-for-runtime-configuration}
+Dynamic Rules for Runtime Configuration {#dynamic-rules-for-runtime-configuration}
 
 ```typescript
 // background/dynamic-rules.ts
@@ -187,11 +187,11 @@ async function clearAuthHeaderRule(): Promise<void> {
 }
 ```
 
-**Advantage over fetch interceptors:** Rules execute even when the service worker is inactive, reducing wake-ups and improving performance.
+Advantage over fetch interceptors: Rules execute even when the service worker is inactive, reducing wake-ups and improving performance.
 
 ---
 
-## 3. API Response Caching Strategies {#3-api-response-caching-strategies}
+3. API Response Caching Strategies {#3-api-response-caching-strategies}
 
 Choose the right caching strategy based on data freshness requirements. Extensions cannot use the Cache API in service workers, so `chrome.storage` is the primary cache.
 
@@ -289,14 +289,14 @@ class ApiCache {
 export const apiCache = new ApiCache();
 ```
 
-**Strategy selection guide:**
+Strategy selection guide:
 - `cache-first` -- reference data that rarely changes (config, feature flags)
 - `network-first` -- user-facing data that should be fresh but works offline
 - `stale-while-revalidate` -- frequently accessed data where slight staleness is acceptable
 
 ---
 
-## 4. Rate Limiting and Request Queuing {#4-rate-limiting-and-request-queuing}
+4. Rate Limiting and Request Queuing {#4-rate-limiting-and-request-queuing}
 
 Prevent hitting API rate limits by queuing requests and enforcing a maximum concurrency.
 
@@ -381,7 +381,7 @@ const userData = await apiQueue.enqueue(
 
 ---
 
-## 5. Authentication: Bearer Tokens, API Keys, OAuth Refresh {#5-authentication-bearer-tokens-api-keys-oauth-refresh}
+5. Authentication: Bearer Tokens, API Keys, OAuth Refresh {#5-authentication-bearer-tokens-api-keys-oauth-refresh}
 
 Extensions use multiple auth strategies depending on the API. Here is a unified auth layer that supports all three common patterns.
 
@@ -515,7 +515,7 @@ See [OAuth and Identity](oauth-identity.md) for detailed flows including PKCE an
 
 ---
 
-## 6. Pagination Handling in Background {#6-pagination-handling-in-background}
+6. Pagination Handling in Background {#6-pagination-handling-in-background}
 
 Fetch all pages of a paginated API in the background and stream results to the UI as they arrive.
 
@@ -626,7 +626,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-## 7. Background Sync with chrome.alarms {#7-background-sync-with-chromealarms}
+7. Background Sync with chrome.alarms {#7-background-sync-with-chromealarms}
 
 Use `chrome.alarms` to periodically sync data when the extension is not in active use. This is the Manifest V3 replacement for persistent background pages with `setInterval`.
 
@@ -721,11 +721,11 @@ export async function forceSyncAll(): Promise<void> {
 }
 ```
 
-**Minimum interval:** `chrome.alarms` enforces a minimum of 30 seconds in production. In development (unpacked extension), there is no minimum.
+Minimum interval: `chrome.alarms` enforces a minimum of 30 seconds in production. In development (unpacked extension), there is no minimum.
 
 ---
 
-## 8. Error Handling and Offline Detection {#8-error-handling-and-offline-detection}
+8. Error Handling and Offline Detection {#8-error-handling-and-offline-detection}
 
 Build a comprehensive error handling layer that distinguishes between network errors, API errors, and auth failures, and adapts behavior when offline.
 
@@ -817,7 +817,7 @@ function classifyError(error: unknown, response?: Response): ApiError {
 }
 ```
 
-### Offline Detection and Recovery {#offline-detection-and-recovery}
+Offline Detection and Recovery {#offline-detection-and-recovery}
 
 ```typescript
 // background/connectivity.ts
@@ -887,7 +887,7 @@ class ConnectivityMonitor {
 export const connectivity = new ConnectivityMonitor();
 ```
 
-### Putting It Together: Resilient API Call {#putting-it-together-resilient-api-call}
+Putting It Together: Resilient API Call {#putting-it-together-resilient-api-call}
 
 ```typescript
 // background/resilient-fetch.ts
@@ -935,7 +935,7 @@ See [Error Handling](error-handling.md) for UI-level error display patterns and 
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | When to Use | Key Consideration |
 |---------|-------------|-------------------|
@@ -948,7 +948,7 @@ See [Error Handling](error-handling.md) for UI-level error display patterns and 
 | Background sync | Periodic data freshness | Minimum 30s alarm interval in prod |
 | Error handling | All network code | Classify errors for appropriate recovery |
 
-These patterns compose well together. A typical extension combines the fetch wrapper (pattern 1) with auth management (pattern 5), error handling (pattern 8), and one or more caching strategies (pattern 3) to build a robust API layer.
+These patterns compose well together. A typical extension combines the fetch wrapper (pattern 1) with auth management (pattern 5), error handling (pattern 8), and one or more caching strategies (pattern 3) to build a solid API layer.
 -e 
 ---
 

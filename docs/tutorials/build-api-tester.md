@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension API Tester — Developer Guide"
+title: "Chrome Extension API Tester. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-api-tester/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-api-tester/"
 
 Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests and view formatted responses.
 
-## Manifest {#manifest}
+Manifest {#manifest}
 
 ```json
 {
@@ -21,7 +21,7 @@ Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests a
 }
 ```
 
-## Sending Requests {#sending-requests}
+Sending Requests {#sending-requests}
 
 ```typescript
 async function sendRequest(req: { url: string; method: string; headers: Record<string,string>; body?: string; }): Promise<{ status: number; statusText: string; body: string; timing: number; }> {
@@ -31,7 +31,7 @@ async function sendRequest(req: { url: string; method: string; headers: Record<s
 }
 ```
 
-## Display Response {#display-response}
+Display Response {#display-response}
 
 ```typescript
 function displayResponse(res: { status: number; statusText: string; body: string; }): void {
@@ -42,7 +42,7 @@ function displayResponse(res: { status: number; statusText: string; body: string
 }
 ```
 
-## History Storage {#history-storage}
+History Storage {#history-storage}
 
 ```typescript
 async function saveHistory(req: any, res: any): Promise<void> {
@@ -52,7 +52,7 @@ async function saveHistory(req: any, res: any): Promise<void> {
 }
 ```
 
-## Environment Variables {#environment-variables}
+Environment Variables {#environment-variables}
 
 {% raw %}
 ```typescript
@@ -62,7 +62,7 @@ function substitute(text: string, vars: Record<string, string>): string {
 ```
 {% endraw %}
 
-## Export/Import {#exportimport}
+Export/Import {#exportimport}
 
 ```typescript
 function exportCollection(name: string, requests: any[]): void {
@@ -72,7 +72,7 @@ function exportCollection(name: string, requests: any[]): void {
 }
 ```
 
-## Send Handler {#send-handler}
+Send Handler {#send-handler}
 
 ```typescript
 async function handleSend(): Promise<void> {
@@ -88,7 +88,7 @@ async function handleSend(): Promise<void> {
 }
 ```
 
-## UI Structure {#ui-structure}
+UI Structure {#ui-structure}
 
 ```html
 <div class="url-bar">
@@ -101,14 +101,14 @@ async function handleSend(): Promise<void> {
 <div id="error"></div>
 ```
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 
 - Add Bearer token and Basic Auth helpers
 - Build history browser UI
 - Add response search/filter
 - Support WebSocket connections
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Cross-Origin Requests](/patterns/cross-origin-requests)
 - [Popup Patterns](/guides/popup-patterns)
@@ -118,7 +118,7 @@ async function handleSend(): Promise<void> {
 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Font Changer — Developer Guide"
+title: "Chrome Extension Font Changer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-font-changer/"
 ---
 # Build a Font Changer Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Change fonts on any webpage dynamically
 - Per-site font preferences (auto-apply based on domain)
 - Live font preview with instant updates
@@ -14,7 +14,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-font-changer/"
 - Google Fonts integration
 - Keyboard shortcut toggle (Alt+Shift+F)
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: activeTab, storage, scripting
 - host_permissions: https://fonts.googleapis.com/*
 - commands with Alt+Shift+F shortcut
@@ -22,7 +22,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-font-changer/"
 
 ---
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 ```json
 {
@@ -47,7 +47,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-font-changer/"
 
 ---
 
-## Step 2: Content Script - CSS Injection {#step-2-content-script-css-injection}
+Step 2: Content Script - CSS Injection {#step-2-content-script-css-injection}
 
 See [content-script-patterns.md](../guides/content-script-patterns.md) for injection strategies.
 
@@ -89,7 +89,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Step 3: Popup - Font Family Dropdown {#step-3-popup-font-family-dropdown}
+Step 3: Popup - Font Family Dropdown {#step-3-popup-font-family-dropdown}
 
 ```html
 <!-- popup.html -->
@@ -111,7 +111,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Step 4: Font Size Slider {#step-4-font-size-slider}
+Step 4: Font Size Slider {#step-4-font-size-slider}
 
 ```html
   <label>Font Size: <span id="fontSizeValue">16</span>px</label>
@@ -133,7 +133,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Step 5: Popup Logic - Event Handling {#step-5-popup-logic-event-handling}
+Step 5: Popup Logic - Event Handling {#step-5-popup-logic-event-handling}
 
 ```javascript
 // popup.js
@@ -171,7 +171,7 @@ function previewFonts() {
 
 ---
 
-## Step 6: Per-Site Preferences {#step-6-per-site-preferences}
+Step 6: Per-Site Preferences {#step-6-per-site-preferences}
 
 See [font-settings-api.md](../patterns/font-settings-api.md) for storage patterns.
 
@@ -198,7 +198,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 ---
 
-## Step 7: Apply/Reset with Live Preview {#step-7-applyreset-with-live-preview}
+Step 7: Apply/Reset with Live Preview {#step-7-applyreset-with-live-preview}
 
 ```javascript
 document.getElementById('applyBtn').addEventListener('click', () => {
@@ -217,7 +217,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 
 ---
 
-## Step 8: Google Fonts Integration {#step-8-google-fonts-integration}
+Step 8: Google Fonts Integration {#step-8-google-fonts-integration}
 
 ```javascript
 function loadGoogleFont(fontName) {
@@ -239,7 +239,7 @@ document.getElementById('fontFamily').addEventListener('change', (e) => {
 
 ---
 
-## CSS Specificity Tips {#css-specificity-tips}
+CSS Specificity Tips {#css-specificity-tips}
 
 - Use `!important` to override existing styles (as shown above)
 - Target `body, body *` for comprehensive coverage
@@ -247,7 +247,7 @@ document.getElementById('fontFamily').addEventListener('change', (e) => {
 - Test on complex sites like Wikipedia, news sites
 - Consider `font-display: swap` for Google Fonts
 
-## Keyboard Shortcut {#keyboard-shortcut}
+Keyboard Shortcut {#keyboard-shortcut}
 
 The manifest's `commands` API handles Alt+Shift+F:
 
@@ -270,7 +270,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 - [Theming & Dark Mode](../patterns/theming-dark-mode.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Font Settings API](../patterns/font-settings-api.md)

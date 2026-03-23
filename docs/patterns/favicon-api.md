@@ -1,29 +1,29 @@
 ---
 layout: default
-title: "Chrome Extension Favicon Api — Best Practices"
+title: "Chrome Extension Favicon Api. Best Practices"
 description: "Access and display favicons from web pages in your extension."
 canonical_url: "https://bestchromeextensions.com/patterns/favicon-api/"
 ---
 
 # Favicon API and Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Favicons are small icons that represent websites in browser tabs, bookmarks, and history. Chrome Extensions have rich APIs for accessing, manipulating, and displaying favicons in various contexts. This guide covers practical patterns for working with favicons in Chrome Extensions, from basic retrieval to advanced manipulation and extraction.
 
 Key facts:
-- **Favicon sizes**: Standard sizes are 16x16, 32x32, and 64x64 pixels
-- **Storage locations**: Favicons are cached in Chrome's internal database (`favicons` table in `Web Data`)
-- **API access**: Available through `chrome.tabs.Tab.favIconUrl` property and the `chrome://favicon/` URL scheme
-- **Fallback chain**: Tab favicon → Google S2 service → Default extension icon
+- Favicon sizes: Standard sizes are 16x16, 32x32, and 64x64 pixels
+- Storage locations: Favicons are cached in Chrome's internal database (`favicons` table in `Web Data`)
+- API access: Available through `chrome.tabs.Tab.favIconUrl` property and the `chrome://favicon/` URL scheme
+- Fallback chain: Tab favicon → Google S2 service → Default extension icon
 
 ---
 
-## Pattern 1: Getting Favicons via Chrome API {#pattern-1-getting-favicons-via-chrome-api}
+Pattern 1: Getting Favicons via Chrome API {#pattern-1-getting-favicons-via-chrome-api}
 
-The most straightforward way to get a favicon is through the `chrome.tabs.Tab.favIconUrl` property. However, this property may be empty for certain page types or during page load. This pattern implements a robust fallback chain.
+The most straightforward way to get a favicon is through the `chrome.tabs.Tab.favIconUrl` property. However, this property may be empty for certain page types or during page load. This pattern implements a solid fallback chain.
 
-### Basic Favicon Retrieval {#basic-favicon-retrieval}
+Basic Favicon Retrieval {#basic-favicon-retrieval}
 
 ```ts
 // background.ts
@@ -35,7 +35,7 @@ const schema = defineSchema({
 
 const storage = createStorage(schema);
 
-/**
+/
  * Retrieves the favicon URL for a given tab with fallback chain
  * Priority: Tab favIconUrl → Google S2 service → Default icon
  */
@@ -70,7 +70,7 @@ function isValidFaviconUrl(url: string): boolean {
          url.startsWith("chrome://");
 }
 
-/**
+/
  * Google S2 favicon service - reliable fallback for external sites
  * Format: https://www.google.com/s2/favicons?domain={hostname}&sz={size}
  */
@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Handling Missing or Broken Favicons {#handling-missing-or-broken-favicons}
+Handling Missing or Broken Favicons {#handling-missing-or-broken-favicons}
 
 ```ts
 // utils/favicon-utils.ts
@@ -103,7 +103,7 @@ export interface FaviconResult {
   size?: number;
 }
 
-/**
+/
  * Creates an image with error handling for broken favicons
  */
 async function loadFaviconWithFallback(
@@ -123,7 +123,7 @@ async function loadFaviconWithFallback(
   return getDefaultIcon();
 }
 
-/**
+/
  * Validates that a favicon URL loads successfully
  */
 async function validateFaviconUrl(url: string): Promise<boolean> {
@@ -135,7 +135,7 @@ async function validateFaviconUrl(url: string): Promise<boolean> {
   });
 }
 
-/**
+/
  * Checks if a data URL represents a valid image
  */
 function isValidDataUrl(dataUrl: string): boolean {
@@ -145,11 +145,11 @@ function isValidDataUrl(dataUrl: string): boolean {
 
 ---
 
-## Pattern 2: Favicon Cache Manager {#pattern-2-favicon-cache-manager}
+Pattern 2: Favicon Cache Manager {#pattern-2-favicon-cache-manager}
 
 Repeatedly fetching favicons from external services is slow and wastes bandwidth. This pattern implements an IndexedDB-based cache with LRU eviction to store favicons efficiently.
 
-### Cache Database Setup {#cache-database-setup}
+Cache Database Setup {#cache-database-setup}
 
 ```ts
 // background/favicon-cache.ts
@@ -190,7 +190,7 @@ async function getDb(): Promise<IDBPDatabase<FaviconCacheDB>> {
 }
 ```
 
-### Cache Operations with LRU Eviction {#cache-operations-with-lru-eviction}
+Cache Operations with LRU Eviction {#cache-operations-with-lru-eviction}
 
 ```ts
 // background/favicon-cache.ts (continued)
@@ -202,7 +202,7 @@ export class FaviconCache {
     this.db = await getDb();
   }
 
-  /**
+  /
    * Gets cached favicon or fetches and caches it
    */
   async getOrFetch(hostname: string): Promise<string | null> {
@@ -228,7 +228,7 @@ export class FaviconCache {
     return dataUrl;
   }
 
-  /**
+  /
    * Fetches favicon and converts to data URL
    */
   private async fetchFaviconAsDataUrl(hostname: string): Promise<string | null> {
@@ -253,7 +253,7 @@ export class FaviconCache {
     return null;
   }
 
-  /**
+  /
    * Stores favicon in cache with LRU eviction
    */
   private async set(hostname: string, dataUrl: string): Promise<void> {
@@ -273,7 +273,7 @@ export class FaviconCache {
     await this.evictIfNeeded();
   }
 
-  /**
+  /
    * LRU eviction when cache exceeds limits
    */
   private async evictIfNeeded(): Promise<void> {
@@ -295,7 +295,7 @@ export class FaviconCache {
     }
   }
 
-  /**
+  /
    * Evicts least recently used entries
    */
   private async evictLeastRecentlyUsed(count: number): Promise<void> {
@@ -312,7 +312,7 @@ export class FaviconCache {
     await tx.done;
   }
 
-  /**
+  /
    * Clears entire cache
    */
   async clear(): Promise<void> {
@@ -326,11 +326,11 @@ export const faviconCache = new FaviconCache();
 
 ---
 
-## Pattern 3: Favicon in Extension UI {#pattern-3-favicon-in-extension-ui}
+Pattern 3: Favicon in Extension UI {#pattern-3-favicon-in-extension-ui}
 
 Displaying favicons in popup lists (bookmarks, history, tabs) requires consistent sizing, fallback rendering, and proper high-DPI handling.
 
-### Favicon Display Component {#favicon-display-component}
+Favicon Display Component {#favicon-display-component}
 
 ```ts
 // components/FaviconDisplay.tsx
@@ -365,7 +365,7 @@ export function FaviconDisplay({
   `;
 }
 
-/**
+/
  * Generates a consistent color from hostname
  */
 function generateColorFromHostname(hostname: string): { bg: string; fg: string } {
@@ -381,7 +381,7 @@ function generateColorFromHostname(hostname: string): { bg: string; fg: string }
   };
 }
 
-/**
+/
  * Generates SVG fallback favicon with letter
  */
 function generateLetterFavicon(
@@ -409,7 +409,7 @@ function generateLetterFavicon(
 }
 ```
 
-### High-DPI Favicon Handling {#high-dpi-favicon-handling}
+High-DPI Favicon Handling {#high-dpi-favicon-handling}
 
 ```ts
 // utils/high-dpi-favicons.ts
@@ -419,7 +419,7 @@ export interface FaviconSource {
   pixelSize: number;
 }
 
-/**
+/
  * Selects optimal favicon for current display density
  */
 function selectOptimalFavicon(
@@ -439,7 +439,7 @@ function selectOptimalFavicon(
   );
 }
 
-/**
+/
  * Preloads favicons for performance
  */
 async function preloadFavicons(hostnames: string[]): Promise<void> {
@@ -465,11 +465,11 @@ async function preloadFavicons(hostnames: string[]): Promise<void> {
 
 ---
 
-## Pattern 4: Favicon Change Detection {#pattern-4-favicon-change-detection}
+Pattern 4: Favicon Change Detection {#pattern-4-favicon-change-detection}
 
 Monitoring favicon changes enables features like notification when a monitored site updates its branding, or tracking when pages update their icons.
 
-### Detecting Favicon Changes {#detecting-favicon-changes}
+Detecting Favicon Changes {#detecting-favicon-changes}
 
 ```ts
 // background/favicon-monitor.ts
@@ -489,13 +489,13 @@ interface MonitoredSite {
   onChange?: (newFavicon: string) => void;
 }
 
-/**
+/
  * Monitors tabs for favicon changes
  */
 class FaviconMonitor {
   private monitoredTabs = new Map<number, string>();
 
-  /**
+  /
    * Starts monitoring a tab for favicon changes
    */
   monitorTab(tabId: number, hostname: string): void {
@@ -506,14 +506,14 @@ class FaviconMonitor {
     });
   }
 
-  /**
+  /
    * Stops monitoring a tab
    */
   stopMonitoring(tabId: number): void {
     this.monitoredTabs.delete(tabId);
   }
 
-  /**
+  /
    * Handles tab updates and detects favicon changes
    */
   async handleTabUpdate(
@@ -530,7 +530,7 @@ class FaviconMonitor {
     this.monitoredTabs.set(tabId, changeInfo.favIconUrl);
   }
 
-  /**
+  /
    * Called when a monitored favicon changes
    */
   private async onFaviconChange(tabId: number, newFavicon: string): Promise<void> {
@@ -558,7 +558,7 @@ class FaviconMonitor {
     }
   }
 
-  /**
+  /
    * Shows notification when monitored site changes favicon
    */
   private async notifyFaviconChange(hostname: string, newFavicon: string): Promise<void> {
@@ -588,11 +588,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-## Pattern 5: Custom Favicon Override {#pattern-5-custom-favicon-override}
+Pattern 5: Custom Favicon Override {#pattern-5-custom-favicon-override}
 
 Sometimes you need to replace a page's favicon with a custom one for visual differentiation, branding, or accessibility purposes.
 
-### Content Script Favicon Replacement {#content-script-favicon-replacement}
+Content Script Favicon Replacement {#content-script-favicon-replacement}
 
 ```ts
 // content-scripts/favicon-override.ts
@@ -603,7 +603,7 @@ interface FaviconReplacement {
   sizes?: string;
 }
 
-/**
+/
  * Replaces page favicon with custom one
  */
 function replaceFavicon(replacement: FaviconReplacement): void {
@@ -620,7 +620,7 @@ function replaceFavicon(replacement: FaviconReplacement): void {
   document.head.appendChild(link);
 }
 
-/**
+/
  * Removes all existing favicon links
  */
 function removeExistingFavicons(): void {
@@ -637,7 +637,7 @@ function removeExistingFavicons(): void {
   });
 }
 
-/**
+/
  * Restores original favicons from stored references
  */
 function restoreOriginalFavicons(): void {
@@ -651,7 +651,7 @@ function restoreOriginalFavicons(): void {
   });
 }
 
-/**
+/
  * Captures original favicons before replacement
  */
 function captureOriginalFavicons(): void {
@@ -684,7 +684,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Background Script for Favicon Management {#background-script-for-favicon-management}
+Background Script for Favicon Management {#background-script-for-favicon-management}
 
 ```ts
 // background/favicon-manager.ts
@@ -703,7 +703,7 @@ interface FaviconRule {
   isEnabled: boolean;
 }
 
-/**
+/
  * Applies custom favicon to matching tabs
  */
 async function applyCustomFavicon(tabId: number, rule: FaviconRule): Promise<void> {
@@ -723,7 +723,7 @@ async function applyCustomFavicon(tabId: number, rule: FaviconRule): Promise<voi
   }
 }
 
-/**
+/
  * Removes custom favicon from tab
  */
 async function removeCustomFavicon(tabId: number): Promise<void> {
@@ -732,7 +732,7 @@ async function removeCustomFavicon(tabId: number): Promise<void> {
   });
 }
 
-/**
+/
  * Gets all custom favicon rules
  */
 async function getFaviconRules(): Promise<FaviconRule[]> {
@@ -747,11 +747,11 @@ async function getFaviconRules(): Promise<FaviconRule[]> {
 
 ---
 
-## Pattern 6: Favicon Generation {#pattern-6-favicon-generation}
+Pattern 6: Favicon Generation {#pattern-6-favicon-generation}
 
 Generate dynamic favicons using Canvas API in an offscreen document, useful for badges, notifications, or creating favicons from user-generated content.
 
-### Canvas-Based Favicon Generation {#canvas-based-favicon-generation}
+Canvas-Based Favicon Generation {#canvas-based-favicon-generation}
 
 ```ts
 // offscreen/favicon-generator.ts
@@ -764,7 +764,7 @@ interface FaviconOptions {
   borderRadius?: number;
 }
 
-/**
+/
  * Generates a favicon with text overlay using Canvas
  */
 function generateFaviconWithText(options: FaviconOptions): string {
@@ -802,7 +802,7 @@ function generateFaviconWithText(options: FaviconOptions): string {
   }) as unknown as string;
 }
 
-/**
+/
  * Helper to draw rounded rectangles
  */
 function roundRect(
@@ -826,7 +826,7 @@ function roundRect(
   ctx.closePath();
 }
 
-/**
+/
  * Creates badge overlay on existing favicon
  */
 async function createBadgeFavicon(
@@ -874,12 +874,12 @@ async function createBadgeFavicon(
 }
 ```
 
-### Generating Favicons from Domain First Letter {#generating-favicons-from-domain-first-letter}
+Generating Favicons from Domain First Letter {#generating-favicons-from-domain-first-letter}
 
 ```ts
 // utils/domain-favicon.ts
 
-/**
+/
  * Generates a favicon URL from domain first letter
  */
 function generateDomainFavicon(hostname: string): string {
@@ -904,7 +904,7 @@ function generateDomainFavicon(hostname: string): string {
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
-/**
+/
  * Generates consistent colors from hostname hash
  */
 function getConsistentColors(hostname: string): { bg: string; fg: string } {
@@ -923,11 +923,11 @@ function getConsistentColors(hostname: string): { bg: string; fg: string } {
 
 ---
 
-## Pattern 7: Favicon in Notifications and Badges {#pattern-7-favicon-in-notifications-and-badges}
+Pattern 7: Favicon in Notifications and Badges {#pattern-7-favicon-in-notifications-and-badges}
 
 Use site favicons in system notifications and create visual badges that combine site identity with status information.
 
-### Favicon in Chrome Notifications {#favicon-in-chrome-notifications}
+Favicon in Chrome Notifications {#favicon-in-chrome-notifications}
 
 ```ts
 // background/notification-favicons.ts
@@ -940,7 +940,7 @@ interface NotificationWithFavicon {
   priority?: number;
 }
 
-/**
+/
  * Creates a notification with the site's favicon
  */
 async function createNotificationWithFavicon(
@@ -980,7 +980,7 @@ async function createNotificationWithFavicon(
   });
 }
 
-/**
+/
  * Composites favicon with status indicator
  */
 async function createStatusNotificationFavicon(
@@ -988,9 +988,9 @@ async function createStatusNotificationFavicon(
   status: "success" | "warning" | "error"
 ): Promise<string> {
   const statusConfig = {
-    success: { color: "#4CAF50", symbol: "✓" },
+    success: { color: "#4CAF50", symbol: "" },
     warning: { color: "#FF9800", symbol: "!" },
-    error: { color: "#F44336", symbol: "✕" },
+    error: { color: "#F44336", symbol: "" },
   };
 
   const config = statusConfig[status];
@@ -1035,11 +1035,11 @@ async function createStatusNotificationFavicon(
 
 ---
 
-## Pattern 8: Favicon Extraction from Pages {#pattern-8-favicon-extraction-from-pages}
+Pattern 8: Favicon Extraction from Pages {#pattern-8-favicon-extraction-from-pages}
 
 Content scripts can extract all icon references from a page, helping extensions find the best available icon for a site.
 
-### Extracting All Icon References {#extracting-all-icon-references}
+Extracting All Icon References {#extracting-all-icon-references}
 
 ```ts
 // content-scripts/icon-extractor.ts
@@ -1053,7 +1053,7 @@ interface IconMetadata {
   estimatedWidth?: number;
 }
 
-/**
+/
  * Extracts all icon references from the current page
  */
 function extractAllIcons(): IconMetadata[] {
@@ -1109,7 +1109,7 @@ function extractAllIcons(): IconMetadata[] {
   return icons;
 }
 
-/**
+/
  * Parses a link element into IconMetadata
  */
 function parseIconElement(link: HTMLLinkElement): IconMetadata {
@@ -1126,7 +1126,7 @@ function parseIconElement(link: HTMLLinkElement): IconMetadata {
   };
 }
 
-/**
+/
  * Parses sizes attribute to get estimated width
  */
 function parseSizesAttribute(sizes: string | null): number | undefined {
@@ -1141,13 +1141,13 @@ function parseSizesAttribute(sizes: string | null): number | undefined {
 }
 ```
 
-### Selecting the Best Available Icon {#selecting-the-best-available-icon}
+Selecting the Best Available Icon {#selecting-the-best-available-icon}
 
 ```ts
 // utils/icon-selector.ts
 import { IconMetadata } from "../content-scripts/icon-extractor";
 
-/**
+/
  * Selects the best icon from available options
  */
 function selectBestIcon(
@@ -1185,7 +1185,7 @@ function selectBestIcon(
   return sorted[0] || null;
 }
 
-/**
+/
  * Resolves relative URLs to absolute
  */
 function resolveIconUrl(icon: IconMetadata, baseUrl: string): string {
@@ -1196,7 +1196,7 @@ function resolveIconUrl(icon: IconMetadata, baseUrl: string): string {
   }
 }
 
-/**
+/
  * Gets the best icon for a page and returns metadata
  */
 async function getBestIconForPage(): Promise<IconMetadata | null> {
@@ -1225,29 +1225,29 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Summary Table {#summary-table}
+Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
-| **1. Getting Favicons** | Basic favicon retrieval with fallback | `chrome.tabs.Tab.favIconUrl` | Low |
-| **2. Favicon Cache** | Performance optimization via IndexedDB | IndexedDB, Fetch API | High |
-| **3. Favicon in UI** | Display in popups, lists, toolbars | HTML/CSS, Canvas | Medium |
-| **4. Change Detection** | Monitor sites for favicon updates | `chrome.tabs.onUpdated` | Medium |
-| **5. Custom Override** | Replace page favicon with custom | Content script DOM | Medium |
-| **6. Favicon Generation** | Dynamic favicons from Canvas | OffscreenCanvas, Blob | High |
-| **7. Notifications** | Use favicons in system notifications | `chrome.notifications` | Low |
-| **8. Icon Extraction** | Find best icon from page markup | Content script DOM | Medium |
+| 1. Getting Favicons | Basic favicon retrieval with fallback | `chrome.tabs.Tab.favIconUrl` | Low |
+| 2. Favicon Cache | Performance optimization via IndexedDB | IndexedDB, Fetch API | High |
+| 3. Favicon in UI | Display in popups, lists, toolbars | HTML/CSS, Canvas | Medium |
+| 4. Change Detection | Monitor sites for favicon updates | `chrome.tabs.onUpdated` | Medium |
+| 5. Custom Override | Replace page favicon with custom | Content script DOM | Medium |
+| 6. Favicon Generation | Dynamic favicons from Canvas | OffscreenCanvas, Blob | High |
+| 7. Notifications | Use favicons in system notifications | `chrome.notifications` | Low |
+| 8. Icon Extraction | Find best icon from page markup | Content script DOM | Medium |
 
-### Key Takeaways {#key-takeaways}
+Key Takeaways {#key-takeaways}
 
-1. **Always use fallback chain**: Tab favicon → Google S2 → Default icon
-2. **Cache aggressively**: Favicons change rarely; cache for performance
-3. **Handle high-DPI**: Use 32px at 2x DPR for crisp display
-4. **Extract comprehensively**: Pages may have multiple icon sources
-5. **Generate dynamically**: Canvas enables custom badges and overlays
-6. **Monitor changes**: Track favicon updates for monitoring features
+1. Always use fallback chain: Tab favicon → Google S2 → Default icon
+2. Cache aggressively: Favicons change rarely; cache for performance
+3. Handle high-DPI: Use 32px at 2x DPR for crisp display
+4. Extract comprehensively: Pages may have multiple icon sources
+5. Generate dynamically: Canvas enables custom badges and overlays
+6. Monitor changes: Track favicon updates for monitoring features
 
-### Related APIs {#related-apis}
+Related APIs {#related-apis}
 
 - `chrome.tabs.Tab.favIconUrl` - Tab favicon property
 - `chrome://favicon/` URL scheme - for accessing cached favicons (requires `"favicon"` permission in MV3)

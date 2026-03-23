@@ -17,15 +17,15 @@ Network request manipulation in Chrome extensions has evolved significantly over
 
 ---
 
-## Understanding Network Request Interception in Chrome Extensions {#understanding-network-request-interception}
+Understanding Network Request Interception in Chrome Extensions {#understanding-network-request-interception}
 
-Before diving into implementation details, it is crucial to understand what network request interception means in the context of browser extensions. When a web page makes a request—whether to fetch HTML, load a script, retrieve an image, or make an API call—the browser processes this request through various stages. Chrome extensions can observe and potentially modify requests at different points in this lifecycle.
+Before diving into implementation details, it is crucial to understand what network request interception means in the context of browser extensions. When a web page makes a request, whether to fetch HTML, load a script, retrieve an image, or make an API call, the browser processes this request through various stages. Chrome extensions can observe and potentially modify requests at different points in this lifecycle.
 
 The Chrome Extension Web Request API provides a way to hook into these network events. You can observe requests as they are initiated, see the headers and body before they are sent, and even modify or block them entirely. This capability opens up a wide range of practical applications that millions of users rely on daily.
 
 Ad blockers use this technology to prevent unwanted requests from loading, saving bandwidth and improving page load times. Privacy extensions block tracking pixels and analytics scripts before they can transmit user data. Developer tools intercept API calls to debug applications, inspect headers, and analyze network behavior. Enterprise applications use request modification to inject corporate headers, enforce security policies, and control what resources employees can access.
 
-### The Evolution of Request APIs in Chrome
+The Evolution of Request APIs in Chrome
 
 Chrome's approach to network request interception has undergone significant changes. The original webRequest API provided extensive capabilities to observe and modify virtually any aspect of a network request. Developers could block requests, modify headers, redirect URLs, and even alter response bodies. This flexibility was powerful but raised concerns about potential abuse.
 
@@ -35,11 +35,11 @@ Understanding this evolution is important because it affects how you should appr
 
 ---
 
-## The declarativeNetRequest API: Modern Approach to Request Modification {#declarative-net-request-api}
+The declarativeNetRequest API: Modern Approach to Request Modification {#declarative-net-request-api}
 
 The declarativeNetRequest API represents Chrome's current recommendation for extensions that need to modify network requests. This API provides a declarative way to specify rules that Chrome applies automatically when processing network requests. Instead of writing code that intercepts each request individually, you define a set of rules, and Chrome handles the matching and application internally.
 
-### Setting Up Your Manifest
+Setting Up Your Manifest
 
 To use the declarativeNetRequest API, you need to declare the appropriate permissions in your extension's manifest.json file. The core permission you need is "declarativeNetRequest". You may also need "declarativeNetRequestWithHostAccess" if your rules need to match requests based on host patterns, or you can use the more restricted "declarativeNetRequestFeedback" for cases where you only need to observe rule matches without modifying requests.
 
@@ -61,7 +61,7 @@ Here is a basic manifest configuration for an extension using declarativeNetRequ
 
 For extensions that only need to modify requests on specific domains, you should replace "<all_urls>" with specific host patterns to follow the principle of least privilege.
 
-### Creating Rule Sets
+Creating Rule Sets
 
 Rules in declarativeNetRequest are defined in JSON files stored in your extension's _locales folder or in a rules directory. Each rule specifies conditions that determine when it should apply and an action that defines what should happen when those conditions are met.
 
@@ -85,7 +85,7 @@ The basic structure of a rule includes an ID, priority, action type, and conditi
 
 This rule blocks any script, image, or sub-frame request matching "example-ad-domain.com". The urlFilter supports regular expression patterns, giving you powerful matching capabilities.
 
-### Action Types Available
+Action Types Available
 
 The declarativeNetRequest API supports several action types that let you control how requests are handled. The "block" action prevents the request from completing entirely. The "allow" action permits requests that might otherwise be blocked by other rules. The "redirect" action sends the request to a different URL, which is useful for replacing blocked resources with alternatives or for URL transformation.
 
@@ -93,7 +93,7 @@ The "modifyHeaders" action lets you add, remove, or modify request and response 
 
 For advanced use cases, you can also use "requestHeaders" and "responseHeaders" modifiers to specifically target headers rather than the entire request.
 
-### Example: Building a Simple Ad Blocker
+Building a Simple Ad Blocker
 
 Let us walk through a practical example of building a simple ad blocker using declarativeNetRequest. This demonstrates the complete workflow from defining rules to testing your extension.
 
@@ -140,7 +140,7 @@ First, create a rules.json file in your extension's rules directory:
 ]
 ```
 
-This ruleset blocks common ad-serving domains while redirecting analytics scripts to a transparent GIF—a common technique to prevent tracking while avoiding JavaScript errors.
+This ruleset blocks common ad-serving domains while redirecting analytics scripts to a transparent GIF, a common technique to prevent tracking while avoiding JavaScript errors.
 
 Next, reference these rules in your manifest:
 
@@ -169,17 +169,17 @@ When you load this extension in Chrome and visit a page containing ads from thes
 
 ---
 
-## The webRequest API: Advanced Capabilities {#web-request-api}
+The webRequest API: Advanced Capabilities {#web-request-api}
 
 While declarativeNetRequest is recommended for most use cases, the traditional webRequest API remains available for scenarios requiring more granular control. This API provides an event-based model where your extension code receives callbacks for network events and can modify requests in more sophisticated ways.
 
-### When to Use webRequest
+When to Use webRequest
 
 The webRequest API is appropriate when you need capabilities that declarativeNetRequest does not support. This includes scenarios where you need to dynamically decide whether to block a request based on complex logic that cannot be expressed in static rules, when you need to read request bodies or response bodies, or when you need to modify requests in ways that require runtime computation.
 
 For example, if you are building an extension that blocks requests based on user preferences stored locally, or if you need to analyze request content before deciding what to do, webRequest provides the flexibility you need.
 
-### Setting Up webRequest Permissions
+Setting Up webRequest Permissions
 
 The webRequest API requires the "webRequest" permission along with host permissions that specify which URLs your extension can intercept. For Chrome Manifest V3, you also need to use the "blocking" or "async" option carefully, as these capabilities have restrictions.
 
@@ -203,7 +203,7 @@ Here is a manifest configuration for an extension using webRequest:
 }
 ```
 
-### Implementing Request Interception
+Implementing Request Interception
 
 With webRequest, you register event listeners that Chrome calls at various stages of request processing. The main events include onBeforeRequest (called before a request is sent), onBeforeSendHeaders (called before headers are sent), onSendHeaders (called after headers are sent), onHeadersReceived (called when response headers are received), onResponseStarted (called when the response body starts), and onCompleted (called when the request is finished).
 
@@ -235,7 +235,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 This code adds a custom header to XMLHttpRequest and script requests while removing the Do-Not-Track header. The "blocking" option ensures the request is held until our handler completes.
 
-### Important Limitations in Manifest V3
+Important Limitations in Manifest V3
 
 Chrome Manifest V3 introduced significant changes to how webRequest works. The most notable change is that you can no longer use the "blocking" option for most event listeners in the same way. Instead, you must use "async" callbacks or combine webRequest with declarativeNetRequest.
 
@@ -243,11 +243,11 @@ This change was made for privacy and performance reasons. Extensions can no long
 
 ---
 
-## Practical Applications and Real-World Examples {#practical-applications}
+Practical Applications and Real-World Examples {#practical-applications}
 
 Understanding the theoretical aspects of request interception is valuable, but seeing how these concepts apply to real-world scenarios helps cement your understanding. Let us explore several practical applications that demonstrate the versatility of these APIs.
 
-### Building a Privacy Protector Extension
+Building a Privacy Protector Extension
 
 Privacy extensions are among the most common users of network request modification. These extensions typically block tracking scripts, pixels, and analytics services that collect user data without consent. Building such an extension combines declarativeNetRequest rules with a user interface that lets users customize blocking behavior.
 
@@ -255,7 +255,7 @@ A comprehensive privacy extension might include rules that block known trackers,
 
 The key to a successful privacy extension is maintaining an up-to-date list of blocking rules. Many popular ad blockers use subscription-based rule sets that are updated daily or even more frequently. Your extension can fetch these rule updates from a remote server and apply them dynamically.
 
-### Creating a Developer Debugging Tool
+Creating a Developer Debugging Tool
 
 Developer tools often need to inspect network requests in detail, including viewing request bodies, response bodies, and timing information. While Chrome DevTools provides excellent built-in functionality, extensions can add specialized capabilities tailored to specific workflows.
 
@@ -263,7 +263,7 @@ A developer debugging extension might use webRequest to capture API calls and lo
 
 For example, you might create an extension that automatically captures all API responses, stores them locally, and provides a UI for searching and replaying past requests. This can be invaluable for debugging issues that are difficult to reproduce.
 
-### Implementing URL Redirects and Transformations
+Implementing URL Redirects and Transformations
 
 URL redirection is another common use case for network request modification. Extensions can redirect users away from unwanted content, enforce HTTPS connections, or transform URLs according to custom rules.
 
@@ -271,23 +271,23 @@ Consider an extension that automatically redirects search queries to privacy-res
 
 ---
 
-## Best Practices and Performance Considerations {#best-practices}
+Best Practices and Performance Considerations {#best-practices}
 
 When building extensions that modify network requests, following best practices ensures your extension is efficient, respectful of user privacy, and compliant with Chrome Web Store policies.
 
-### Rule Optimization
+Rule Optimization
 
 The efficiency of your declarativeNetRequest rules directly impacts your extension's performance. Optimize your rules by using specific URL filters rather than broad patterns, limiting the number of rules that need evaluation, and organizing rules by priority so the most common cases are handled quickly.
 
-Avoid using overly broad URL filters like ".*" unless absolutely necessary. Each request is checked against your rules, so more specific filters reduce the processing overhead. Similarly, limit the resource types your rules match to only those that are relevant—blocking images on a rule meant for scripts wastes processing cycles.
+Avoid using overly broad URL filters like ".*" unless absolutely necessary. Each request is checked against your rules, so more specific filters reduce the processing overhead. Similarly, limit the resource types your rules match to only those that are relevant, blocking images on a rule meant for scripts wastes processing cycles.
 
-### User Privacy Considerations
+User Privacy Considerations
 
 When building extensions that handle network requests, user privacy must be a primary concern. Even though you have access to network data, you should not collect or transmit this data without clear user consent and legitimate purpose.
 
 Follow these privacy principles: only collect data that is necessary for your extension's functionality, store data securely with appropriate encryption, provide clear disclosure of what data your extension accesses, and give users meaningful control over what your extension does.
 
-### Chrome Web Store Compliance
+Chrome Web Store Compliance
 
 Extensions that modify network requests face additional scrutiny during Chrome Web Store review. Google has specific policies around functionality that intercepts network requests, particularly for extensions that could be used to track users or modify content in unexpected ways.
 
@@ -295,7 +295,7 @@ To maximize your chances of approval, clearly describe your extension's function
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The Chrome Extension Web Request API and its modern counterpart, declarativeNetRequest, provide powerful capabilities for intercepting and modifying network requests. Whether you are building ad blockers, privacy tools, developer utilities, or enterprise applications, understanding these APIs is essential for creating effective Chrome extensions.
 
@@ -305,6 +305,6 @@ As Chrome continues to evolve its extension platform, staying current with the l
 
 ---
 
-## Additional Resources {#additional-resources}
+Additional Resources {#additional-resources}
 
 To continue learning about Chrome extension development and network request manipulation, explore these resources: the official Chrome Extensions documentation at developer.chrome.com/docs/extensions, the declarativeNetRequest API reference for detailed technical information, community forums where extension developers share insights and patterns, and open-source extensions that demonstrate various approaches to network modification.

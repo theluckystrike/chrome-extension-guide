@@ -6,9 +6,9 @@ An Extension Dependency Tracker monitors and visualizes dependencies between bro
 
 ## Architecture Overview
 
-- **Popup**: Quick dependency status view
-- **Sidebar**: Full visualization and management
-- **Background Service Worker**: Data collection and scheduling
+- Popup: Quick dependency status view
+- Sidebar: Full visualization and management
+- Background Service Worker: Data collection and scheduling
 
 ## manifest.json
 

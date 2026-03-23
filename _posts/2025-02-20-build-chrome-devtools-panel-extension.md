@@ -13,15 +13,15 @@ canonical_url: "https://bestchromeextensions.com/2025/02/20/build-chrome-devtool
 
 Chrome DevTools is the most powerful browser-based development environment available today. It provides web developers with a comprehensive suite of debugging, profiling, and inspection tools. But did you know you can extend DevTools itself? By building a custom DevTools panel extension, you can add entirely new functionality to Chrome's developer toolkit, creating specialized tools tailored to your workflow or your users' needs.
 
-In this complete tutorial, we will walk through building a custom Chrome DevTools panel extension from scratch. You will learn how to create a DevTools panel, communicate with the inspected page, leverage the Chrome Extensions API, and package your extension for distribution. By the end of this guide, you will have a fully functional DevTools panel extension that you can extend and customize further.
+In this complete tutorial, we will walk through building a custom Chrome DevTools panel extension from scratch. You will learn how to create a DevTools panel, communicate with the inspected page, use the Chrome Extensions API, and package your extension for distribution. By the end of this guide, you will have a fully functional DevTools panel extension that you can extend and customize further.
 
 ---
 
-## Understanding Chrome DevTools Panel Extensions {#understanding-devtools-panels}
+Understanding Chrome DevTools Panel Extensions {#understanding-devtools-panels}
 
 Before we dive into code, it is essential to understand what DevTools panel extensions are and how they differ from regular Chrome extensions.
 
-### What Are DevTools Panel Extensions?
+What Are DevTools Panel Extensions?
 
 A DevTools panel extension is a special type of Chrome extension that adds a custom tab to the Chrome DevTools window. When users open DevTools (F12 or right-click and Inspect), they will see your custom panel alongside built-in tabs like Elements, Console, Network, and Performance.
 
@@ -33,48 +33,48 @@ DevTools panels can:
 - Use Chrome Extension APIs to extend functionality beyond DevTools
 - Communicate bidirectionally with content scripts and background scripts
 
-### Use Cases for DevTools Panels
+Use Cases for DevTools Panels
 
 DevTools panel extensions are perfect for:
 
-1. **Custom Debugging Tools**: Build specialized debugging interfaces for your framework or library
-2. **Visual Inspectors**: Create visual property editors or component explorers
-3. **Performance Profilers**: Add custom performance monitoring and analysis tools
-4. **API Clients**: Build REST or GraphQL clients directly within DevTools
-5. **State Viewers**: Display application state in a human-readable format
-6. **Design Tools**: Add color pickers, measurement tools, or accessibility checkers
+1. Custom Debugging Tools: Build specialized debugging interfaces for your framework or library
+2. Visual Inspectors: Create visual property editors or component explorers
+3. Performance Profilers: Add custom performance monitoring and analysis tools
+4. API Clients: Build REST or GraphQL clients directly within DevTools
+5. State Viewers: Display application state in a human-readable format
+6. Design Tools: Add color pickers, measurement tools, or accessibility checkers
 
 Popular examples include React DevTools, Vue DevTools, Angular Augury, and various API testing tools that integrate directly into the browser's development environment.
 
 ---
 
-## Setting Up the Project Structure {#project-setup}
+Setting Up the Project Structure {#project-setup}
 
 Let us start by setting up the project structure for our DevTools panel extension. We will create a well-organized project that follows Chrome extension best practices.
 
-### Creating the Directory Structure
+Creating the Directory Structure
 
 Create a new folder for your extension and set up the following structure:
 
 ```
 devtools-panel-extension/
-├── manifest.json
-├── background.js
-├── devtools/
-│   ├── devtools.js
-│   └── panel.html
-├── content/
-│   └── content.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   └── icon128.png
-└── styles/
-    └── panel.css
+ manifest.json
+ background.js
+ devtools/
+    devtools.js
+    panel.html
+ content/
+    content.js
+ icons/
+    icon16.png
+    icon32.png
+    icon48.png
+    icon128.png
+ styles/
+     panel.css
 ```
 
-### The Manifest File
+The Manifest File
 
 Every Chrome extension starts with a `manifest.json` file. For DevTools panel extensions, we need to declare the DevTools page and ensure proper permissions.
 
@@ -105,11 +105,11 @@ The key difference from regular extensions is the `"devtools_page"` field, which
 
 ---
 
-## Creating the DevTools Page {#devtools-page}
+Creating the DevTools Page {#devtools-page}
 
 The DevTools page (`devtools.html`) is a special page that Chrome loads when DevTools opens. It does not have a visible UI but is responsible for registering your custom panel.
 
-### The DevTools HTML File
+The DevTools HTML File
 
 Create `devtools/devtools.html`:
 
@@ -125,7 +125,7 @@ Create `devtools/devtools.html`:
 </html>
 ```
 
-### Registering the Panel
+Registering the Panel
 
 Create `devtools/devtools.js`. This script runs in the context of the DevTools page and registers your custom panel:
 
@@ -152,18 +152,18 @@ chrome.devtools.panels.create(
 ```
 
 The `chrome.devtools.panels.create()` method takes four parameters:
-- **title**: The name displayed in the DevTools tab bar
-- **icon**: A 16x16 icon shown next to the title
-- **page**: The HTML file that contains your panel's UI
-- **callback**: A function called with the panel object after creation
+- title: The name displayed in the DevTools tab bar
+- icon: A 16x16 icon shown next to the title
+- page: The HTML file that contains your panel's UI
+- callback: A function called with the panel object after creation
 
 ---
 
-## Building the Panel UI {#panel-ui}
+Building the Panel UI {#panel-ui}
 
 Now let us create the actual panel interface that users will see. Our panel will demonstrate several key capabilities: inspecting the DOM, executing scripts in the context of the inspected page, and displaying information in real-time.
 
-### The Panel HTML
+The Panel HTML
 
 Create `devtools/devtools/panel.html`:
 
@@ -216,7 +216,7 @@ Create `devtools/devtools/panel.html`:
 </html>
 ```
 
-### Styling the Panel
+Styling the Panel
 
 Create `styles/panel.css` to make our panel look professional:
 
@@ -350,11 +350,11 @@ textarea:focus {
 
 ---
 
-## Implementing Panel Logic {#panel-logic}
+Implementing Panel Logic {#panel-logic}
 
 The panel JavaScript handles user interactions and communicates with the inspected page. This is where the real functionality lives.
 
-### The Panel JavaScript
+The Panel JavaScript
 
 Create `devtools/devtools/panel.js`:
 
@@ -533,24 +533,24 @@ function escapeHtml(text) {
 
 ---
 
-## Working with the Inspected Window {#inspected-window}
+Working with the Inspected Window {#inspected-window}
 
 One of the most powerful features of DevTools panel extensions is the ability to interact with the page being inspected. The `chrome.devtools.inspectedWindow` API provides this capability.
 
-### Key Inspected Window Methods
+Key Inspected Window Methods
 
 The `chrome.devtools.inspectedWindow` API offers several important methods:
 
-1. **`eval(expression, callback)`**: Executes JavaScript in the context of the inspected page
-2. **`getResources(callback)`**: Retrieves a list of resources loaded by the page
-3. **`reload()`**: Reloads the inspected page
-4. **`captureScreenshot(callback)`**: Captures a screenshot of the inspected page
+1. `eval(expression, callback)`: Executes JavaScript in the context of the inspected page
+2. `getResources(callback)`: Retrieves a list of resources loaded by the page
+3. `reload()`: Reloads the inspected page
+4. `captureScreenshot(callback)`: Captures a screenshot of the inspected page
 
-### Communication Patterns
+Communication Patterns
 
 There are several ways to communicate between your panel and the inspected page:
 
-**Direct Evaluation**: Use `chrome.devtools.inspectedWindow.eval()` to run code directly in the page context:
+Direct Evaluation: Use `chrome.devtools.inspectedWindow.eval()` to run code directly in the page context:
 
 ```javascript
 chrome.devtools.inspectedWindow.eval(
@@ -561,7 +561,7 @@ chrome.devtools.inspectedWindow.eval(
 );
 ```
 
-**PostMessage Communication**: Set up message passing between the panel and content scripts:
+PostMessage Communication: Set up message passing between the panel and content scripts:
 
 ```javascript
 // In panel.js
@@ -580,11 +580,11 @@ window.addEventListener("message", function(event) {
 
 ---
 
-## Advanced Features {#advanced-features}
+Advanced Features {#advanced-features}
 
 Now that we have covered the basics, let us explore some advanced features that can make your DevTools panel even more powerful.
 
-### Creating a Sidebar Pane
+Creating a Sidebar Pane
 
 Sidebar panes appear alongside the Elements panel and are perfect for displaying contextual information:
 
@@ -601,7 +601,7 @@ chrome.devtools.panels.elements.createSidebarPane(
 );
 ```
 
-### Accessing the Selection
+Accessing the Selection
 
 You can track the user's selection in the Elements panel:
 
@@ -617,7 +617,7 @@ chrome.devtools.panels.elements.onSelectionChanged.addListener(function() {
 });
 ```
 
-### Adding a Theme
+Adding a Theme
 
 DevTools supports both light and dark themes. Your panel should adapt accordingly:
 
@@ -634,11 +634,11 @@ chrome.devtools.panels.getThemeName(function(themeName) {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Testing is crucial to ensure your DevTools panel works correctly. Here is how to load and test your extension.
 
-### Loading the Extension
+Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
@@ -646,7 +646,7 @@ Testing is crucial to ensure your DevTools panel works correctly. Here is how to
 4. Open a new tab and press F12 to open DevTools
 5. Look for your custom panel in the DevTools tab bar
 
-### Debugging Tips
+Debugging Tips
 
 Use the DevTools console to debug your panel:
 
@@ -664,18 +664,18 @@ Check the background service worker console at `chrome://extensions/` by clickin
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once your DevTools panel extension is working, you can publish it to the Chrome Web Store.
 
-### Preparation
+Preparation
 
 1. Create icon files in the `icons/` folder (16, 32, 48, and 128 pixels)
 2. Test thoroughly across different pages and scenarios
 3. Create a detailed description for the store listing
 4. Prepare screenshots and a promotional image
 
-### Publishing Steps
+Publishing Steps
 
 1. Zip your extension directory (excluding development files)
 2. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/developer/dashboard)
@@ -685,7 +685,7 @@ Once your DevTools panel extension is working, you can publish it to the Chrome 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a custom Chrome DevTools panel extension from scratch. Throughout this tutorial, we covered:
 

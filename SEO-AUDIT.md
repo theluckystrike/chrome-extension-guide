@@ -6,16 +6,16 @@
 |---
 date: 2026-03-23
 -----|-------|
-| **Total articles** | 504 |
-| **Articles with front matter** | 454 |
-| **Articles without front matter** | 50 |
-| **Articles with SEO titles** | 443 |
-| **Articles with generic titles** | 11 |
-| **Articles missing titles** | 0 |
-| **Articles under 300 words** | 216 |
-| **Articles missing meta descriptions** | 50 |
-| **Articles with 0 internal links** | 143 |
-| **Sitemap entries** | 10 |
+| Total articles | 504 |
+| Articles with front matter | 454 |
+| Articles without front matter | 50 |
+| Articles with SEO titles | 443 |
+| Articles with generic titles | 11 |
+| Articles missing titles | 0 |
+| Articles under 300 words | 216 |
+| Articles missing meta descriptions | 50 |
+| Articles with 0 internal links | 143 |
+| Sitemap entries | 10 |
 
 ---
 
@@ -119,7 +119,7 @@ date: 2026-03-23
 | mv3/internationalization.md | 200 |
 | reference/storage-patterns.md | 200 |
 | patterns/storage-migration-strategies.md | 201 |
-| api-reference/context-menus-deep-dive.md | 201 |
+| api-reference/context-menus-deep detailed look.md | 201 |
 | guides/content-script-frameworks.md | 204 |
 | tutorials/build-font-changer.md | 204 |
 | tutorials/build-dark-mode.md | 204 |
@@ -244,7 +244,7 @@ date: 2026-03-23
 
 ---
 
-## Articles Missing Meta Descriptions
+Articles Missing Meta Descriptions
 
 > All 50 articles without front matter are also missing meta descriptions.
 
@@ -347,7 +347,7 @@ date: 2026-03-23
 
 ---
 
-## Articles With No Internal Links
+Articles With No Internal Links
 
 > These articles have no incoming internal links from other articles. They are "orphaned" content that needs cross-linking.
 
@@ -373,7 +373,7 @@ date: 2026-03-23
 | patterns/extension-to-extension.md |
 | patterns/favicon-api.md |
 | patterns/badge-action-ui.md |
-| patterns/history-deep-dive.md |
+| patterns/history-deep detailed look.md |
 | patterns/animation-patterns.md |
 | patterns/cookies-sessions.md |
 | patterns/building-with-svelte.md |
@@ -431,7 +431,7 @@ date: 2026-03-23
 | permissions/search.md |
 | permissions/management.md |
 | permissions/unlimitedStorage.md |
-| permissions/permissions-deep-dive.md |
+| permissions/permissions-deep detailed look.md |
 | permissions/tabCapture.md |
 | permissions/power.md |
 | permissions/webRequestBlocking.md |
@@ -498,11 +498,11 @@ date: 2026-03-23
 
 ---
 
-## Sitemap Analysis
+Sitemap Analysis
 
 > The current sitemap.xml only contains 10 entries (directory indexes), missing all 504 individual article pages.
 
-### Current Sitemap Entries
+Current Sitemap Entries
 
 | URL |
 |-----|
@@ -517,13 +517,13 @@ date: 2026-03-23
 | https://bestchromeextensions.com/docs/tutorials/ |
 | https://bestchromeextensions.com/docs/ |
 
-### Missing Sitemap Entries
+Missing Sitemap Entries
 
 > All 504 individual article pages should be in the sitemap.
 
 ---
 
-## Checklist for Remaining SEO Work
+Checklist for Remaining SEO Work
 
 - [ ] Add front matter to 50 articles missing it
 - [ ] Add meta descriptions to 50 articles missing them

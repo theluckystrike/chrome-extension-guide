@@ -12,24 +12,24 @@ Performance is the currency of Chrome extensions. Users expect instant responses
 
 This guide explores lazy loading and code splitting strategies specifically designed for Chrome extensions. You'll learn how to implement dynamic imports in service workers, create lazy content script modules, render popups on-demand, split your options page by route, and measure the real impact of these optimizations. By the end, you'll have practical patterns that can reduce your extension's perceived startup time by 60% or more.
 
-## Why Startup Time Matters for Extensions
+Why Startup Time Matters for Extensions
 
-Chrome extensions face unique performance challenges that web applications don't encounter. When a user clicks your extension's toolbar icon, Chrome needs to initialize your popup's JavaScript, render its DOM, and make it interactive—all within a window that appears instantly. If your bundle is too large, users see a blank popup that takes seconds to become usable.
+Chrome extensions face unique performance challenges that web applications don't encounter. When a user clicks your extension's toolbar icon, Chrome needs to initialize your popup's JavaScript, render its DOM, and make it interactive, all within a window that appears instantly. If your bundle is too large, users see a blank popup that takes seconds to become usable.
 
 The consequences extend beyond user experience. Google's review process increasingly considers performance, and extensions with poor metrics may receive lower visibility in the Web Store. More importantly, users abandon extensions that feel slow. Research shows that every 100ms of delay reduces user satisfaction significantly, and extension users are particularly intolerant of latency since they expect quick access to functionality.
 
-Service workers present another challenge. In Manifest V3, background service workers terminate after periods of inactivity. When Chrome needs to wake your service worker—due to an alarm, message, or browser event—it must reinitialize your entire runtime. A large bundle means longer cold starts, which can break time-sensitive operations like keyboard shortcuts or context menu actions.
+Service workers present another challenge. In Manifest V3, background service workers terminate after periods of inactivity. When Chrome needs to wake your service worker, due to an alarm, message, or browser event, it must reinitialize your entire runtime. A large bundle means longer cold starts, which can break time-sensitive operations like keyboard shortcuts or context menu actions.
 
-Modern bundlers like webpack, Rollup, and Vite support code splitting natively, but applying these techniques requires understanding how extension architectures differ from web apps. Let's explore the specific patterns that work for Chrome extensions.
+Modern bundlers like webpack, Rollup, and Vite support code splitting natively, but applying these techniques requires understanding how extension architectures differ from web apps.  the specific patterns that work for Chrome extensions.
 
-## Dynamic Import in Service Workers
+Dynamic Import in Service Workers
 
 The most impactful optimization for extension performance is splitting your service worker into lazy-loaded modules. Instead of importing everything statically, use dynamic `import()` to load code only when needed.
 
 Consider a service worker that handles messaging, alarms, and storage. Instead of a monolithic file:
 
 ```javascript
-// ❌ Static imports load everything on service worker initialization
+//  Static imports load everything on service worker initialization
 import { MessageHandler } from './message-handler.js';
 import { AlarmManager } from './alarm-manager.js';
 import { StorageManager } from './storage-manager.js';
@@ -41,7 +41,7 @@ chrome.alarms.onAlarm.addListener(AlarmManager.handle);
 Use dynamic imports to load modules on-demand:
 
 ```javascript
-// ✅ Dynamic imports load modules only when events occur
+//  Dynamic imports load modules only when events occur
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   const { MessageHandler } = await import('./message-handler.js');
   MessageHandler.handle(message, sender, sendResponse);
@@ -83,7 +83,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
 
 This approach lets you add features without increasing the initial bundle size. Each feature loads only when first requested.
 
-## Lazy Content Script Modules
+Lazy Content Script Modules
 
 Content scripts face similar challenges. Loading a massive script bundle into every page slows page execution and increases memory usage. Use dynamic imports to load code only when specific functionality is needed.
 
@@ -148,7 +148,7 @@ function setupMessageListener() {
 bootstrap.init();
 ```
 
-## On-Demand Popup Rendering
+On-Demand Popup Rendering
 
 The extension popup is often the most visible performance bottleneck. Users expect instant feedback when clicking the toolbar icon, but loading a full React or Vue application synchronously creates delays.
 
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 This approach ensures that users only download and parse the JavaScript for sections they actually view.
 
-## Route-Based Splitting in Options Page
+Route-Based Splitting in Options Page
 
 Options pages often become catch-all pages with numerous features, leading to large bundles. Apply route-based code splitting to load only relevant functionality:
 
@@ -278,7 +278,7 @@ function OptionsApp() {
 
 Each route becomes a separate chunk that loads only when users navigate to that section. The initial bundle contains only the router and basic layout.
 
-## Shared Dependency Chunks
+Shared Dependency Chunks
 
 When splitting your code, you'll likely have shared dependencies across modules. Extract these into separate chunks to avoid duplication:
 
@@ -320,7 +320,7 @@ module.exports = {
 
 This configuration creates separate chunks for React, common vendor libraries, and code shared across multiple modules. Users download vendor chunks once and cache them aggressively.
 
-For Chrome extensions specifically, certain APIs are available globally—avoid bundling polyfills that Chrome already provides:
+For Chrome extensions specifically, certain APIs are available globally, avoid bundling polyfills that Chrome already provides:
 
 ```javascript
 // webpack.config.js - Exclude Chrome-provided APIs
@@ -338,7 +338,7 @@ module.exports = {
 };
 ```
 
-## Preload Strategies
+Preload Strategies
 
 Sometimes you need to balance lazy loading with perceived performance. Preload strategies let you start loading resources before they're immediately needed:
 
@@ -388,13 +388,13 @@ chrome.action.onHovered.addListener((tabId) => {
 
 These techniques reduce perceived latency by starting the loading process before users explicitly request functionality.
 
-## Measuring Startup Impact
+Measuring Startup Impact
 
 Optimization without measurement is guesswork. Chrome provides several tools for measuring extension performance:
 
-**Chrome DevTools Performance Panel** captures extension activity during startup. Record a popup open action to see exactly when JavaScript executes, rendering occurs, and when the popup becomes interactive.
+Chrome DevTools Performance Panel captures extension activity during startup. Record a popup open action to see exactly when JavaScript executes, rendering occurs, and when the popup becomes interactive.
 
-**chrome.metricsPrivate API** records custom performance metrics:
+chrome.metricsPrivate API records custom performance metrics:
 
 ```javascript
 // Record extension startup time
@@ -402,7 +402,7 @@ chrome.metricsPrivate.recordTime('Extension.Startup.LoadTime',
   performance.now() - window.startTime);
 ```
 
-**Web Vitals extension** measures Core Web Vitals for extensions:
+Web Vitals extension measures Core Web Vitals for extensions:
 
 ```javascript
 // Measure Largest Contentful Paint in popup
@@ -413,27 +413,27 @@ new PerformanceObserver((entryList) => {
 }).observe({ type: 'largest-contentful-paint', buffered: true });
 ```
 
-**Bundle analysis** using webpack-bundle-analyzer or source-map-explorer reveals what's actually in your bundles:
+Bundle analysis using webpack-bundle-analyzer or source-map-explorer reveals what's actually in your bundles:
 
 ```bash
-# Add to your build script
+Add to your build script
 npx webpack --profile --json > stats.json
 npx webpack-bundle-analyzer stats.json
 ```
 
 Set baseline metrics before implementing lazy loading, then compare after to verify improvements.
 
-## Real Before/After Benchmarks
+Real Before/After Benchmarks
 
 Let's examine realistic improvements from implementing these patterns. Consider an extension with the following characteristics:
 
-**Before optimization:**
+Before optimization:
 - Service worker: 180KB (gzipped: 45KB)
 - Content script: 220KB (gzipped: 55KB)
 - Popup bundle: 350KB (gzipped: 85KB)
 - Options page: 400KB (gzipped: 95KB)
 
-**After implementing code splitting:**
+After implementing code splitting:
 
 The service worker splits into core (25KB) plus lazy modules:
 - Service worker core: 25KB (gzipped: 8KB)
@@ -451,7 +451,7 @@ Options page implements route splitting:
 - Router + layout: 40KB (gzipped: 14KB)
 - Route chunks: 360KB split across 5 routes
 
-**Performance improvement:**
+Performance improvement:
 
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
@@ -462,13 +462,13 @@ Options page implements route splitting:
 
 The key insight is that initial loads drop dramatically because users only download code for what they actually use. Total bundle size may increase slightly due to chunk overhead, but perceived performance improves significantly.
 
-## Framework-Specific Patterns
+Framework-Specific Patterns
 
 Each major framework has specific techniques for implementing lazy loading in extensions.
 
-### React
+React
 
-React 18 and later work seamlessly with Chrome extensions. Use `React.lazy()` and `Suspense`:
+React 18 and later work smoothly with Chrome extensions. Use `React.lazy()` and `Suspense`:
 
 ```javascript
 import { lazy, Suspense } from 'react';
@@ -503,7 +503,7 @@ function Router() {
 }
 ```
 
-### Vue
+Vue
 
 Vue 3's `<Suspense>` component and dynamic imports work identically to React:
 
@@ -529,7 +529,7 @@ export default {
 };
 ```
 
-### Svelte
+Svelte
 
 Svelte compiles to tiny bundles naturally, but you can still benefit from splitting:
 
@@ -570,17 +570,17 @@ Svelte's native await block simplifies conditional rendering:
 {/if}
 ```
 
-## Conclusion
+Conclusion
 
-Lazy loading and code splitting transform extension performance by loading code only when needed. Start with your service worker—it's often the highest-impact optimization since it affects every extension interaction. Then proceed to content scripts, popups, and options pages based on your users' usage patterns.
+Lazy loading and code splitting transform extension performance by loading code only when needed. Start with your service worker, it's often the highest-impact optimization since it affects every extension interaction. Then proceed to content scripts, popups, and options pages based on your users' usage patterns.
 
 Remember these core principles:
 
-- **Import dynamically, not statically** - Use `import()` for code that doesn't need immediate execution
-- **Split by feature or route** - Organize chunks around user-facing functionality
-- **Extract shared dependencies** - Vendor bundles cache across chunks
-- **Measure before and after** - Use DevTools and Chrome's metrics APIs to verify improvements
-- **Consider preload strategies** - Balance lazy loading with perceived performance
+- Import dynamically, not statically - Use `import()` for code that doesn't need immediate execution
+- Split by feature or route - Organize chunks around user-facing functionality
+- Extract shared dependencies - Vendor bundles cache across chunks
+- Measure before and after - Use DevTools and Chrome's metrics APIs to verify improvements
+- Consider preload strategies - Balance lazy loading with perceived performance
 
 For more on extension performance, see our guides on [Chrome Extension Bundle Size Optimization](/docs/guides/chrome-extension-bundle-size-optimization/) and [Chrome Extension Performance Best Practices](/docs/guides/chrome-extension-performance-best-practices/).
 

@@ -4,7 +4,7 @@ A comprehensive guide to building a production-ready Meeting Scheduler Chrome ex
 
 ## Overview
 
-This guide walks you through building a Chrome extension that allows users to schedule, manage, and track meetings directly from their browser. The extension integrates with calendar services, provides reminders, and offers a seamless UI experience.
+This guide walks you through building a Chrome extension that allows users to schedule, manage, and track meetings directly from their browser. The extension integrates with calendar services, provides reminders, and offers a smooth UI experience.
 
 ## Architecture and manifest.json Setup
 
@@ -12,31 +12,31 @@ This guide walks you through building a Chrome extension that allows users to sc
 
 ```
 meeting-scheduler/
-├── manifest.json
-├── package.json
-├── tsconfig.json
-├── src/
-│   ├── background/
-│   │   └── service-worker.ts
-│   ├── popup/
-│   │   ├── popup.ts
-│   │   ├── popup.html
-│   │   └── popup.css
-│   ├── content/
-│   │   └── content-script.ts
-│   ├── overlay/
-│   │   ├── overlay.ts
-│   │   ├── overlay.html
-│   │   └── overlay.css
-│   ├── shared/
-│   │   ├── types.ts
-│   │   ├── storage.ts
-│   │   └── constants.ts
-│   └── utils/
-│       ├── date-utils.ts
-│       └── notification-utils.ts
-└── public/
-    └── icons/
+ manifest.json
+ package.json
+ tsconfig.json
+ src/
+    background/
+       service-worker.ts
+    popup/
+       popup.ts
+       popup.html
+       popup.css
+    content/
+       content-script.ts
+    overlay/
+       overlay.ts
+       overlay.html
+       overlay.css
+    shared/
+       types.ts
+       storage.ts
+       constants.ts
+    utils/
+        date-utils.ts
+        notification-utils.ts
+ public/
+     icons/
 ```
 
 ### manifest.json Configuration
@@ -593,11 +593,11 @@ export class ErrorHandler {
 
 ### Edge Cases to Handle
 
-1. **Timezone handling**: Always store times in UTC, convert for display
-2. **Offline mode**: Queue changes when offline, sync when online
-3. **Calendar sync conflicts**: Detect and prompt user for resolution
-4. **Double-booking**: Warn when scheduling overlapping meetings
-5. **Expired meetings**: Auto-archive or delete past meetings
+1. Timezone handling: Always store times in UTC, convert for display
+2. Offline mode: Queue changes when offline, sync when online
+3. Calendar sync conflicts: Detect and prompt user for resolution
+4. Double-booking: Warn when scheduling overlapping meetings
+5. Expired meetings: Auto-archive or delete past meetings
 
 ## Testing Approach
 
@@ -667,11 +667,11 @@ test('complete meeting scheduling flow', async ({ page }) => {
 
 ## Performance Considerations
 
-1. **Lazy load content scripts**: Only load on matching URLs
-2. **Debounce storage writes**: Batch updates to reduce I/O
-3. **Use Web Workers**: Offload heavy computations
-4. **Minimize DOM updates**: Use virtual scrolling for long lists
-5. **Cache API responses**: Implement TTL-based caching
+1. Lazy load content scripts: Only load on matching URLs
+2. Debounce storage writes: Batch updates to reduce I/O
+3. Use Web Workers: Offload heavy computations
+4. Minimize DOM updates: Use virtual scrolling for long lists
+5. Cache API responses: Implement TTL-based caching
 
 ```typescript
 // Example: Debounced storage

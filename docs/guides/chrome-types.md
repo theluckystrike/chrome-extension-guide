@@ -42,7 +42,7 @@ npm install @anthropic/webext-types
     "rootDir": "./src",
     "types": ["@anthropic/chrome-types"]
   },
-  "include": ["src/**/*"]
+  "include": ["src//*"]
 }
 ```
 
@@ -203,10 +203,10 @@ interface StorageData { settings: Record<string, unknown>; }
 
 {% raw %}
 ```javascript
-/** @typedef {{ theme: string }} Config */
-/** @param {Config} config */
+/ @typedef {{ theme: string }} Config */
+/ @param {Config} config */
 async function initContentScript(config) {
-  /** @type {chrome.tabs.Tab[]} */
+  / @type {chrome.tabs.Tab[]} */
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   console.log(tab.title);
 }

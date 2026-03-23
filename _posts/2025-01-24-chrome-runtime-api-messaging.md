@@ -17,25 +17,25 @@ This guide provides an in-depth reference for every major feature of the Runtime
 
 ---
 
-## The Role of chrome.runtime {#role}
+The Role of chrome.runtime {#role}
 
 The Runtime API serves as the central nervous system of your extension. It provides:
 
-- **One-time messaging** between extension components (popup, content scripts, service worker, options page)
-- **Long-lived connections** for ongoing communication via ports
-- **Lifecycle events** like installation, updates, and browser startup
-- **Cross-extension messaging** for inter-extension communication
-- **Utility methods** for getting URLs, extension info, and platform details
+- One-time messaging between extension components (popup, content scripts, service worker, options page)
+- Long-lived connections for ongoing communication via ports
+- Lifecycle events like installation, updates, and browser startup
+- Cross-extension messaging for inter-extension communication
+- Utility methods for getting URLs, extension info, and platform details
 
 Unlike most Chrome APIs, `chrome.runtime` requires no special permissions. It is available in every extension context: service workers, popups, content scripts, options pages, and offscreen documents.
 
 ---
 
-## One-Time Messaging with sendMessage {#send-message}
+One-Time Messaging with sendMessage {#send-message}
 
 The simplest messaging pattern uses `chrome.runtime.sendMessage()` and `chrome.runtime.onMessage`. This is a fire-and-forget pattern where you send a single message and optionally receive a single response.
 
-### Sending from Content Script to Service Worker
+Sending from Content Script to Service Worker
 
 ```javascript
 // content-script.js
@@ -51,7 +51,7 @@ const response = await chrome.runtime.sendMessage({
 console.log('Analysis result:', response);
 ```
 
-### Receiving in the Service Worker
+Receiving in the Service Worker
 
 ```javascript
 // background.js (service worker)
@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Async Response Pattern
+Async Response Pattern
 
 If your message handler needs to perform asynchronous work before responding, you must return `true` from the `onMessage` listener to keep the message channel open:
 
@@ -89,9 +89,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-**Critical note:** Forgetting to return `true` for async responses is one of the most common bugs in Chrome extension development. Without it, the message channel closes immediately, and `sendResponse` becomes a no-op.
+Critical note: Forgetting to return `true` for async responses is one of the most common bugs in Chrome extension development. Without it, the message channel closes immediately, and `sendResponse` becomes a no-op.
 
-### Async/Await Alternative
+Async/Await Alternative
 
 You can also use an async wrapper, but you must still handle the `sendResponse` pattern correctly:
 
@@ -110,7 +110,7 @@ async function handleProcess(message) {
 }
 ```
 
-### Sending from Service Worker to a Content Script
+Sending from Service Worker to a Content Script
 
 To message a specific tab, use `chrome.tabs.sendMessage()`:
 
@@ -130,7 +130,7 @@ async function notifyTab(tabId, data) {
 }
 ```
 
-### Sending from Popup to Service Worker
+Sending from Popup to Service Worker
 
 Popups can communicate with the service worker using the same `chrome.runtime.sendMessage()`:
 
@@ -155,11 +155,11 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
 
 ---
 
-## Long-Lived Connections with connect {#connect}
+Long-Lived Connections with connect {#connect}
 
 For scenarios where you need ongoing, bidirectional communication, use `chrome.runtime.connect()` to establish a long-lived port connection.
 
-### Establishing a Connection
+Establishing a Connection
 
 ```javascript
 // content-script.js
@@ -184,7 +184,7 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-### Handling Connections in the Service Worker
+Handling Connections in the Service Worker
 
 ```javascript
 // background.js
@@ -232,7 +232,7 @@ function broadcastToContentScripts(message) {
 }
 ```
 
-### When to Use connect vs sendMessage
+When to Use connect vs sendMessage
 
 | Scenario | Best Choice |
 |----------|-------------|
@@ -245,11 +245,11 @@ function broadcastToContentScripts(message) {
 
 ---
 
-## Lifecycle Events {#lifecycle-events}
+Lifecycle Events {#lifecycle-events}
 
 The Runtime API provides events for managing your extension's lifecycle, including installation, updates, and browser startup.
 
-### onInstalled
+onInstalled
 
 The `chrome.runtime.onInstalled` event fires when your extension is installed, updated, or when Chrome is updated:
 
@@ -327,7 +327,7 @@ async function migrateV1ToV2() {
 }
 ```
 
-### onStartup
+onStartup
 
 The `chrome.runtime.onStartup` event fires when a Chrome profile that has your extension is started:
 
@@ -348,7 +348,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-### onSuspend (Service Worker Context)
+onSuspend (Service Worker Context)
 
 In Manifest V3, the service worker can be suspended at any time when idle. While there is no direct `onSuspend` event in MV3 (that was a MV2 event page concept), you should design your service worker to handle being terminated and restarted:
 
@@ -368,11 +368,11 @@ async function restoreState() {
 
 ---
 
-## Cross-Extension Messaging {#cross-extension}
+Cross-Extension Messaging {#cross-extension}
 
 Extensions can communicate with each other using `chrome.runtime.sendMessage()` with an explicit extension ID, or by using `chrome.runtime.onMessageExternal`.
 
-### Sending to Another Extension
+Sending to Another Extension
 
 ```javascript
 // Send a message to another extension by its ID
@@ -382,10 +382,10 @@ const response = await chrome.runtime.sendMessage(
 );
 ```
 
-### Receiving External Messages
+Receiving External Messages
 
 ```javascript
-// background.js — listen for messages from other extensions
+// background.js. listen for messages from other extensions
 chrome.runtime.onMessageExternal.addListener(
   (message, sender, sendResponse) => {
     // Verify the sender
@@ -407,7 +407,7 @@ chrome.runtime.onMessageExternal.addListener(
 );
 ```
 
-### Declaring External Connectivity
+Declaring External Connectivity
 
 To allow other extensions or websites to connect, declare it in your manifest:
 
@@ -424,7 +424,7 @@ To allow other extensions or websites to connect, declare it in your manifest:
 }
 ```
 
-### Web Page to Extension Communication
+Web Page to Extension Communication
 
 Websites listed in `externally_connectable` can send messages to your extension:
 
@@ -441,11 +441,11 @@ chrome.runtime.sendMessage(
 
 ---
 
-## Utility Methods {#utility-methods}
+Utility Methods {#utility-methods}
 
 The Runtime API includes several useful utility methods.
 
-### getURL
+getURL
 
 Convert a relative extension path to a fully qualified URL:
 
@@ -457,7 +457,7 @@ const iconUrl = chrome.runtime.getURL('icons/logo.png');
 // Useful for content scripts that need to display extension assets
 ```
 
-### getManifest
+getManifest
 
 Access the extension's manifest data:
 
@@ -468,7 +468,7 @@ console.log('Name:', manifest.name);
 console.log('Permissions:', manifest.permissions);
 ```
 
-### getPlatformInfo
+getPlatformInfo
 
 Detect the user's platform:
 
@@ -478,7 +478,7 @@ console.log('OS:', platform.os);       // 'win', 'mac', 'linux', 'cros', 'androi
 console.log('Arch:', platform.arch);    // 'x86-32', 'x86-64', 'arm', 'arm64'
 ```
 
-### id
+id
 
 The extension's unique ID:
 
@@ -486,7 +486,7 @@ The extension's unique ID:
 console.log('Extension ID:', chrome.runtime.id);
 ```
 
-### lastError
+lastError
 
 Check for errors after API calls (mainly relevant in callback-based code):
 
@@ -502,7 +502,7 @@ chrome.tabs.sendMessage(tabId, message, (response) => {
 
 With Promises, errors are thrown as exceptions instead, so you can use `try`/`catch`.
 
-### reload
+reload
 
 Reload the extension (useful for development or after updates):
 
@@ -510,7 +510,7 @@ Reload the extension (useful for development or after updates):
 chrome.runtime.reload();
 ```
 
-### setUninstallURL
+setUninstallURL
 
 Set a URL that opens when the user uninstalls your extension:
 
@@ -522,9 +522,9 @@ chrome.runtime.setUninstallURL(
 
 ---
 
-## Advanced Messaging Patterns {#advanced-patterns}
+Advanced Messaging Patterns {#advanced-patterns}
 
-### Message Router Pattern
+Message Router Pattern
 
 For extensions with many message types, use a router pattern to keep code organized:
 
@@ -577,7 +577,7 @@ function handleGetStatus(message, sender) {
 }
 ```
 
-### Request-Response with Timeout
+Request-Response with Timeout
 
 `sendMessage` does not have a built-in timeout. Implement one yourself:
 
@@ -610,12 +610,12 @@ try {
 }
 ```
 
-### Pub/Sub Pattern Across Components
+Pub/Sub Pattern Across Components
 
 Build an event bus that broadcasts messages to all interested components:
 
 ```javascript
-// background.js — Event hub
+// background.js. Event hub
 const subscribers = new Map();
 
 chrome.runtime.onConnect.addListener((port) => {
@@ -646,7 +646,7 @@ function publish(channel, data) {
   }
 }
 
-// In a content script or popup — subscribe to events
+// In a content script or popup. subscribe to events
 const port = chrome.runtime.connect({ name: 'subscribe:settings-changed' });
 port.onMessage.addListener((message) => {
   applyNewSettings(message);
@@ -655,18 +655,18 @@ port.onMessage.addListener((message) => {
 
 ---
 
-## Service Worker Lifecycle in MV3 {#service-worker-lifecycle}
+Service Worker Lifecycle in MV3 {#service-worker-lifecycle}
 
 Understanding the service worker lifecycle is critical for Manifest V3 extensions. Unlike MV2 background pages that could persist indefinitely, MV3 service workers are ephemeral.
 
-### Key Behaviors
+Key Behaviors
 
-1. **Startup**: The service worker starts when an event it listens to is dispatched.
-2. **Idle timeout**: The service worker is terminated after approximately 30 seconds of inactivity (no pending events, API calls, or message channels).
-3. **Restart**: The service worker restarts when a new event occurs.
-4. **No DOM**: Service workers have no access to `window`, `document`, or DOM APIs.
+1. Startup: The service worker starts when an event it listens to is dispatched.
+2. Idle timeout: The service worker is terminated after approximately 30 seconds of inactivity (no pending events, API calls, or message channels).
+3. Restart: The service worker restarts when a new event occurs.
+4. No DOM: Service workers have no access to `window`, `document`, or DOM APIs.
 
-### Keeping the Service Worker Alive
+Keeping the Service Worker Alive
 
 For long-running operations, use strategies to keep the worker active:
 
@@ -700,7 +700,7 @@ async function performLongRunningTask() {
 }
 ```
 
-### Handling Worker Restarts
+Handling Worker Restarts
 
 Design your service worker to be stateless or to restore state from storage:
 
@@ -727,9 +727,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Debugging Runtime Issues {#debugging}
+Debugging Runtime Issues {#debugging}
 
-### Common Error Messages
+Common Error Messages
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -737,12 +737,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 | "The message port closed before a response was received." | Handler did not return `true` for async response | Return `true` from `onMessage` when using async `sendResponse` |
 | "Extension context invalidated." | Extension was updated or reloaded while content script was running | Re-inject content scripts after update |
 
-### Handling Context Invalidation
+Handling Context Invalidation
 
 When your extension updates, existing content scripts lose their connection to the extension:
 
 ```javascript
-// content-script.js — graceful handling of context invalidation
+// content-script.js. graceful handling of context invalidation
 function safeSendMessage(message) {
   try {
     return chrome.runtime.sendMessage(message);
@@ -759,25 +759,25 @@ function safeSendMessage(message) {
 
 ---
 
-## Related Resources {#related}
+Related Resources {#related}
 
-- [Chrome Scripting API Complete Reference](/2025/01/24/chrome-scripting-api-complete-reference/) — Inject scripts into pages from your service worker
-- [Chrome Action API Guide](/2025/01/24/chrome-action-api-guide/) — Manage the toolbar icon and popup
-- [Chrome Storage API Patterns](/2025/01/24/chrome-storage-api-patterns/) — Persist data across service worker restarts
-- [Chrome Identity API: OAuth2 and Token Management](/2025/01/24/chrome-identity-api-oauth/) — Handle authentication tokens via runtime messaging
+- [Chrome Scripting API Complete Reference](/2025/01/24/chrome-scripting-api-complete-reference/). Inject scripts into pages from your service worker
+- [Chrome Action API Guide](/2025/01/24/chrome-action-api-guide/). Manage the toolbar icon and popup
+- [Chrome Storage API Patterns](/2025/01/24/chrome-storage-api-patterns/). Persist data across service worker restarts
+- [Chrome Identity API: OAuth2 and Token Management](/2025/01/24/chrome-identity-api-oauth/). Handle authentication tokens via runtime messaging
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
-The `chrome.runtime` API is the foundation of Chrome extension architecture. It connects all the pieces — service workers, content scripts, popups, and options pages — into a cohesive system. The messaging primitives (`sendMessage` and `connect`) enable every communication pattern from simple request-response to complex pub/sub architectures.
+The `chrome.runtime` API is the foundation of Chrome extension architecture. It connects all the pieces. service workers, content scripts, popups, and options pages. into a cohesive system. The messaging primitives (`sendMessage` and `connect`) enable every communication pattern from simple request-response to complex pub/sub architectures.
 
 Key takeaways:
 
 1. Use `sendMessage` for simple one-time request/response exchanges. Always return `true` from `onMessage` when using async `sendResponse`.
 2. Use `connect` for long-lived bidirectional communication, streaming data, or interactive tools.
 3. Handle the `onInstalled` event to set defaults, run migrations, and manage onboarding.
-4. Design service workers to be stateless — they can be terminated at any time and must restore state from storage on restart.
+4. Design service workers to be stateless. they can be terminated at any time and must restore state from storage on restart.
 5. Implement a message router pattern to keep complex extensions organized and maintainable.
 6. Always handle context invalidation and disconnection errors gracefully.
 

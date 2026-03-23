@@ -17,7 +17,7 @@ Whether you're building this extension as a side project, adding to your portfol
 
 ---
 
-## Why Build a Web Font Checker Extension {#why-build-web-font-checker}
+Why Build a Web Font Checker Extension {#why-build-web-font-checker}
 
 Web typography plays a crucial role in user experience, brand identity, and accessibility. However, managing fonts on the web is surprisingly complex. Font files must be loaded from servers, parsed by the browser, and rendered correctly before users see the intended typography. When things go wrong, websites can experience Flash of Invisible Text (FOIT), layout shifts when fonts finally load, or complete font rendering failures that leave pages unreadable.
 
@@ -27,17 +27,17 @@ The demand for such tools is significant. Web developers constantly battle with 
 
 ---
 
-## Extension Architecture Overview {#extension-architecture}
+Extension Architecture Overview {#extension-architecture}
 
 Before diving into code, let's understand the architecture that makes a web font checker extension work effectively. A well-structured extension follows the three-context model that Chrome extensions use, separating concerns between the service worker, popup interface, and content scripts that run on web pages.
 
-The **service worker** acts as the background controller, managing state, handling extension lifecycle events, and coordinating communication between different parts of the extension. The **popup** provides the user interface where users view font analysis results and interact with the extension's features. The **content script** runs directly on web pages, scanning the DOM to extract font information, measuring font loading times, and detecting typography patterns.
+The service worker acts as the background controller, managing state, handling extension lifecycle events, and coordinating communication between different parts of the extension. The popup provides the user interface where users view font analysis results and interact with the extension's features. The content script runs directly on web pages, scanning the DOM to extract font information, measuring font loading times, and detecting typography patterns.
 
 This separation allows each component to focus on its specific responsibilities. The content script handles the delicate work of inspecting the page without interfering with page functionality. The service worker manages data persistence and complex analysis that might take time. The popup provides a clean, responsive interface for viewing results. Understanding this architecture is essential before writing any code, as it influences every decision from manifest configuration to message passing patterns.
 
 ---
 
-## Setting Up the Manifest V3 Configuration {#manifest-configuration}
+Setting Up the Manifest V3 Configuration {#manifest-configuration}
 
 Every Chrome extension begins with the manifest.json file that declares the extension's capabilities, permissions, and structure. For a web font checker extension, we need careful permission selection to balance functionality with user privacy and Chrome Web Store approval requirements.
 
@@ -76,11 +76,11 @@ Every Chrome extension begins with the manifest.json file that declares the exte
 
 The permission choices here are intentional. We request `activeTab` and `scripting` permissions to inject and execute code on the current page, which is necessary for font analysis. The `storage` permission lets us save user preferences and cache analysis results. The broad `<all_urls>` host permission is necessary because users will want to check fonts on any website they visit.
 
-However, be aware that the `<all_urls>` permission may require you to explain your extension's need for this access when submitting to the Chrome Web Store. Document clearly why your extension needs to access all websites—specifically, that it needs to analyze typography on any webpage users visit. This is a legitimate use case for developer tools, and Chrome generally approves such requests with proper justification.
+However, be aware that the `<all_urls>` permission may require you to explain your extension's need for this access when submitting to the Chrome Web Store. Document clearly why your extension needs to access all websites, specifically, that it needs to analyze typography on any webpage users visit. This is a legitimate use case for developer tools, and Chrome generally approves such requests with proper justification.
 
 ---
 
-## Content Script: Scanning Font Information {#content-script}
+Content Script: Scanning Font Information {#content-script}
 
 The content script is the heart of font detection. It runs in the context of the webpage and can access the DOM to extract font information that wouldn't otherwise be visible to extension code. This is where we'll implement the core logic for detecting fonts, measuring loading performance, and gathering typography data.
 
@@ -267,11 +267,11 @@ The content script is the heart of font detection. It runs in the context of the
 
 This content script provides comprehensive font detection capabilities. The `detectFonts()` function walks through every element on the page, using `getComputedStyle()` to determine which fonts are actually being rendered. It builds a map of all unique fonts, tracking not just the font family but also the sizes, weights, and styles used with each font. This gives users a complete picture of typography usage on the page.
 
-The `detectWebFontSources()` function goes deeper, examining where fonts are loaded from. It checks `<link>` tags for external font stylesheets, parses CSS `@font-face` rules to find custom web fonts, and identifies which font providers are being used. This information is crucial for diagnosing font loading issues—if a font isn't loading, knowing where it's supposed to come from helps identify the problem.
+The `detectWebFontSources()` function goes deeper, examining where fonts are loaded from. It checks `<link>` tags for external font stylesheets, parses CSS `@font-face` rules to find custom web fonts, and identifies which font providers are being used. This information is crucial for diagnosing font loading issues, if a font isn't loading, knowing where it's supposed to come from helps identify the problem.
 
 ---
 
-## Service Worker: Managing Analysis Requests {#service-worker}
+Service Worker: Managing Analysis Requests {#service-worker}
 
 The service worker acts as the bridge between the content script and the popup interface. It handles the communication flow, manages state, and can perform additional analysis that doesn't require direct page access. Here's how to implement the background service worker:
 
@@ -383,7 +383,7 @@ The service worker uses `chrome.scripting.executeScript()` to run code in the co
 
 ---
 
-## Popup Interface: Displaying Results {#popup-interface}
+Popup Interface: Displaying Results {#popup-interface}
 
 The popup provides the user-facing interface where users interact with the extension. A well-designed popup should present font analysis results clearly, with options for further investigation and export capabilities. Here's an implementation using vanilla JavaScript:
 
@@ -523,7 +523,7 @@ The popup provides the user-facing interface where users interact with the exten
 </head>
 <body>
   <div class="header">
-    <h1>🔍 Web Font Checker</h1>
+    <h1> Web Font Checker</h1>
   </div>
   
   <button id="analyzeBtn" class="analyze-btn">Analyze Fonts on This Page</button>
@@ -671,11 +671,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Advanced Features: Font Performance Analysis {#advanced-features}
+Advanced Features: Font Performance Analysis {#advanced-features}
 
 A truly useful webfont checker extension goes beyond simple detection and provides actionable insights about font loading performance. Here are some advanced features you can implement to make your extension stand out:
 
-### Font Loading Performance Metrics
+Font Loading Performance Metrics
 
 Measuring font loading performance helps developers identify bottlenecks. You can detect Flash of Invisible Text (FOIT) by monitoring when fonts become available versus when content renders. Track the time between page load and font availability using the Font Loading API:
 
@@ -725,7 +725,7 @@ async function analyzeFontPerformance() {
 }
 ```
 
-### Font Fallback Detection
+Font Fallback Detection
 
 Analyzing fallback font chains helps ensure text remains readable even if custom fonts fail to load. This is crucial for accessibility and provides recommendations for better fallback configurations:
 
@@ -755,7 +755,7 @@ function analyzeFallbackFonts() {
 }
 ```
 
-### Google Fonts Integration
+Google Fonts Integration
 
 Many websites use Google Fonts, and your extension can provide specific insights about these commonly used fonts:
 
@@ -785,17 +785,17 @@ function identifyGoogleFonts(sources) {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before releasing your extension, thorough testing ensures it works correctly across different types of websites. Test your extension on pages with various font configurations:
 
-Test on pages using **Google Fonts** to verify detection works correctly. Test on pages with **custom self-hosted fonts** using @font-face rules. Test on pages with **multiple font weights and styles** to ensure all variations are detected. Test on pages with **font loading failures** to verify error handling. Test on **complex websites** with iframes, Shadow DOM, and dynamic content injection.
+Test on pages using Google Fonts to verify detection works correctly. Test on pages with custom self-hosted fonts using @font-face rules. Test on pages with multiple font weights and styles to ensure all variations are detected. Test on pages with font loading failures to verify error handling. Test on complex websites with iframes, Shadow DOM, and dynamic content injection.
 
 You can test your extension locally by navigating to `chrome://extensions/`, enabling Developer mode, clicking "Load unpacked", and selecting your extension's directory. Use the popup to analyze different websites and verify the results match what you see in browser developer tools.
 
 ---
 
-## Publishing to Chrome Web Store {#publishing}
+Publishing to Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, you can publish it to the Chrome Web Store. Prepare your store listing with clear screenshots showing the extension in action, a compelling description that explains the value of your tool, and appropriate categories and tags to help users discover your extension.
 
@@ -803,9 +803,9 @@ You'll need to pay a one-time developer registration fee of $5 to publish to the
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Building a web font checker extension is an excellent project that teaches you valuable skills in Chrome extension development while creating a genuinely useful tool for web developers and designers. The extension architecture we covered—separating concerns between content scripts, service workers, and popup interfaces—applies to virtually any Chrome extension you might build in the future.
+Building a web font checker extension is an excellent project that teaches you valuable skills in Chrome extension development while creating a genuinely useful tool for web developers and designers. The extension architecture we covered, separating concerns between content scripts, service workers, and popup interfaces, applies to virtually any Chrome extension you might build in the future.
 
 The key concepts you learned include how to use the DOM and computed styles to detect fonts, how to measure font loading performance using the Font Loading API, how to structure a Manifest V3 extension with proper permissions, and how to create a clean, responsive popup interface. These skills transfer directly to other developer tools and extension projects.
 

@@ -42,10 +42,10 @@ A well-designed welcome page sets expectations and guides users through initial 
 
 ### Key Elements
 
-1. **Clear value proposition** - What does this extension do? Why should I care?
-2. **Minimal required permissions** - Explain why each permission is needed
-3. **Quick start guide** - 3-5 steps maximum
-4. **Skip option** - Let power users bypass onboarding
+1. Clear value proposition - What does this extension do? Why should I care?
+2. Minimal required permissions - Explain why each permission is needed
+3. Quick start guide - 3-5 steps maximum
+4. Skip option - Let power users bypass onboarding
 
 ```html
 <!-- welcome.html -->
@@ -71,11 +71,11 @@ A well-designed welcome page sets expectations and guides users through initial 
     
     <div class="feature-list">
       <div class="feature">
-        <h3>🚀 Quick Setup</h3>
+        <h3> Quick Setup</h3>
         <p>Get started in under 60 seconds</p>
       </div>
       <div class="feature">
-        <h3>🔒 Privacy First</h3>
+        <h3> Privacy First</h3>
         <p>Your data stays on your device</p>
       </div>
     </div>
@@ -95,9 +95,9 @@ Requesting permissions at the right time significantly impacts conversion. Never
 
 ### Best Practices
 
-1. **Install-time**: Request only core permissions required for basic functionality
-2. **First-use**: Request additional permissions when users attempt a feature that needs them
-3. **Contextual**: Show why you need each permission immediately before requesting
+1. Install-time: Request only core permissions required for basic functionality
+2. First-use: Request additional permissions when users attempt a feature that needs them
+3. Contextual: Show why you need each permission immediately before requesting
 
 ```ts
 // Request permissions contextually when needed
@@ -426,9 +426,9 @@ Timing your rating prompt significantly affects conversion. Ask at moments of hi
 
 ### Optimal Timing Patterns
 
-1. **After successful feature completion** - User just accomplished something
-2. **After positive streak** - Multiple sessions without errors
-3. **Never after errors** - Wait at least 24 hours after any issue
+1. After successful feature completion - User just accomplished something
+2. After positive streak - Multiple sessions without errors
+3. Never after errors - Wait at least 24 hours after any issue
 
 ```ts
 class RatingPrompter {
@@ -470,16 +470,16 @@ class RatingPrompter {
 
 Effective onboarding balances guiding new users with respecting experienced ones. Key principles:
 
-1. **Use onInstalled** for initial setup and update detection
-2. **Design focused welcome pages** with clear value propositions
-3. **Request permissions contextually** when users need features
-4. **Apply progressive disclosure** to reveal complexity gradually
-5. **Enable feature discovery** through tooltips and tours
-6. **Consider wizard-style options** for complex configuration
-7. **Measure everything** to identify optimization opportunities
-8. **Communicate updates** without disrupting workflow
-9. **Collect uninstall feedback** to improve
-10. **Time rating prompts** at moments of maximum satisfaction
+1. Use onInstalled for initial setup and update detection
+2. Design focused welcome pages with clear value propositions
+3. Request permissions contextually when users need features
+4. Apply progressive disclosure to reveal complexity gradually
+5. Enable feature discovery through tooltips and tours
+6. Consider wizard-style options for complex configuration
+7. Measure everything to identify optimization opportunities
+8. Communicate updates without disrupting workflow
+9. Collect uninstall feedback to improve
+10. Time rating prompts at moments of maximum satisfaction
 
 ## References
 

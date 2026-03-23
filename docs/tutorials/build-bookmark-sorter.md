@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Bookmark Sorter — Developer Guide"
+title: "Chrome Extension Bookmark Sorter. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-bookmark-sorter/"
 ---
 # Build a Bookmark Sorter Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 A popup-based bookmark sorter that organizes bookmarks alphabetically, by date, finds duplicates, and enables bulk operations.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - Bookmark API (cross-ref `docs/guides/bookmark-api.md`)
 - Storage API for undo functionality (cross-ref `docs/guides/storage-api.md`)
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 ```
 bookmark-sorter/
   manifest.json
@@ -24,7 +24,7 @@ bookmark-sorter/
   background.js
 ```
 
-## Step 1: Manifest {#step-1-manifest}
+Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -36,7 +36,7 @@ bookmark-sorter/
 }
 ```
 
-## Step 2: Popup UI {#step-2-popup-ui}
+Step 2: Popup UI {#step-2-popup-ui}
 ```html
 <!DOCTYPE html>
 <html>
@@ -59,7 +59,7 @@ bookmark-sorter/
 </html>
 ```
 
-## Step 3: Reading Bookmark Tree {#step-3-reading-bookmark-tree}
+Step 3: Reading Bookmark Tree {#step-3-reading-bookmark-tree}
 ```javascript
 // Load all bookmarks into memory
 async function loadBookmarks() {
@@ -77,7 +77,7 @@ function flattenTree(nodes, result = []) {
 }
 ```
 
-## Step 4: Sorting Algorithms {#step-4-sorting-algorithms}
+Step 4: Sorting Algorithms {#step-4-sorting-algorithms}
 ```javascript
 // Sort alphabetically by title
 function sortAlphabetically(bookmarks) {
@@ -107,7 +107,7 @@ function sortByDomain(bookmarks) {
 }
 ```
 
-## Step 5: Moving Bookmarks {#step-5-moving-bookmarks}
+Step 5: Moving Bookmarks {#step-5-moving-bookmarks}
 ```javascript
 // Move bookmark to new position
 async function moveBookmark(bookmarkId, parentId, index) {
@@ -125,7 +125,7 @@ async function reorderBookmarks(orderedIds) {
 }
 ```
 
-## Step 6: Duplicate Detection {#step-6-duplicate-detection}
+Step 6: Duplicate Detection {#step-6-duplicate-detection}
 ```javascript
 function findDuplicates(bookmarks) {
   const urlMap = new Map();
@@ -152,7 +152,7 @@ async function removeDuplicates(duplicates) {
 }
 ```
 
-## Step 7: Bulk Operations {#step-7-bulk-operations}
+Step 7: Bulk Operations {#step-7-bulk-operations}
 ```javascript
 // Flatten nested folders
 async function flattenFolder(folderId) {
@@ -177,7 +177,7 @@ async function bulkDelete(ids) {
 }
 ```
 
-## Step 8: Search Functionality {#step-8-search-functionality}
+Step 8: Search Functionality {#step-8-search-functionality}
 ```javascript
 async function searchBookmarks(query) {
   if (!query) return loadBookmarks();
@@ -197,7 +197,7 @@ document.getElementById('search').addEventListener('input', (e) => {
 });
 ```
 
-## Handling Large Collections {#handling-large-collections}
+Handling Large Collections {#handling-large-collections}
 For 1000+ bookmarks, implement pagination:
 ```javascript
 const PAGE_SIZE = 50;
@@ -209,7 +209,7 @@ function getPage(bookmarks, page) {
 }
 ```
 
-## Undo Support {#undo-support}
+Undo Support {#undo-support}
 ```javascript
 async function saveState(bookmarks) {
   await chrome.storage.local.set({
@@ -229,7 +229,7 @@ async function undo() {
 }
 ```
 
-## Bookmark Event Listeners {#bookmark-event-listeners}
+Bookmark Event Listeners {#bookmark-event-listeners}
 ```javascript
 // background.js - Keep UI in sync
 chrome.bookmarks.onCreated.addListener(updatePopup);
@@ -242,7 +242,7 @@ function updatePopup() {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Bookmark API: `docs/guides/bookmark-api.md`
 - Storage API: `docs/guides/storage-api.md`
 - Permissions: `docs/permissions/bookmarks.md`

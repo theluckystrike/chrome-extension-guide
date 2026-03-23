@@ -49,9 +49,9 @@ Firefox still supports MV2, while Chrome deprecated it. Key differences:
 
 ### Namespace Overview
 
-- **Chrome**: Uses `chrome.*` namespace with callback-based APIs
-- **Firefox**: Supports both `chrome.*` and `browser.*` namespaces natively
-- **Best practice**: Use `browser.*` with WebExtensions polyfill for cross-browser compatibility
+- Chrome: Uses `chrome.*` namespace with callback-based APIs
+- Firefox: Supports both `chrome.*` and `browser.*` namespaces natively
+- Best practice: Use `browser.*` with WebExtensions polyfill for cross-browser compatibility
 
 ### Chrome Namespace (Callbacks)
 
@@ -226,7 +226,7 @@ Firefox has limited service worker support:
 }
 ```
 
-Note: Not all Chrome service worker APIs work in Firefox. Test thoroughly.
+Not all Chrome service worker APIs work in Firefox. Test thoroughly.
 
 ### Migration Pattern
 
@@ -663,12 +663,12 @@ browser.alarms.create('periodicSync', {
 
 Porting Chrome extensions to Firefox requires attention to:
 
-1. **Manifest differences**: Use MV3 with browser-specific settings
-2. **API namespaces**: Use `browser.*` with polyfill for cross-browser code
-3. **Async patterns**: Handle Promises and callbacks appropriately
-4. **Background scripts**: Understand service worker lifecycle differences
-5. **Packaging**: Adjust build process for Firefox distribution
-6. **Distribution**: Use AMO signing or self-hosted updates
-7. **Feature detection**: Always check API availability at runtime
+1. Manifest differences: Use MV3 with browser-specific settings
+2. API namespaces: Use `browser.*` with polyfill for cross-browser code
+3. Async patterns: Handle Promises and callbacks appropriately
+4. Background scripts: Understand service worker lifecycle differences
+5. Packaging: Adjust build process for Firefox distribution
+6. Distribution: Use AMO signing or self-hosted updates
+7. Feature detection: Always check API availability at runtime
 
 Following these patterns ensures a smooth porting experience with minimal browser-specific code.

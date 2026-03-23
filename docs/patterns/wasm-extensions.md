@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Wasm Extensions — Best Practices"
+title: "Chrome Extension Wasm Extensions. Best Practices"
 description: "Integrate WebAssembly modules into Chrome extensions for performance."
 canonical_url: "https://bestchromeextensions.com/patterns/wasm-extensions/"
 ---
@@ -9,13 +9,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/wasm-extensions/"
 
 WebAssembly (WASM) enables near-native performance for compute-heavy tasks inside Chrome extensions. This guide covers eight practical patterns for integrating WASM modules with Manifest V3, including loading strategies, memory management, caching, and Content Security Policy configuration.
 
-> **Cross-references:**
+> Cross-references:
 > - [Content Security Policy in MV3](../mv3/content-security-policy.md)
 > - [Performance Profiling](performance-profiling.md)
 
 ---
 
-## Pattern 1: Loading WASM in a Service Worker {#pattern-1-loading-wasm-in-a-service-worker}
+Pattern 1: Loading WASM in a Service Worker {#pattern-1-loading-wasm-in-a-service-worker}
 
 Service workers in MV3 support `WebAssembly.instantiate` but do not support `WebAssembly.instantiateStreaming` in all contexts. The safest approach is to fetch the binary and instantiate from an `ArrayBuffer`.
 
@@ -59,14 +59,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-**Gotchas:**
-- The WASM file can be fetched from the service worker using `chrome.runtime.getURL` without listing it in `web_accessible_resources`. However, if content scripts need to fetch the file, it **must** be listed in `web_accessible_resources`.
+Gotchas:
+- The WASM file can be fetched from the service worker using `chrome.runtime.getURL` without listing it in `web_accessible_resources`. However, if content scripts need to fetch the file, it must be listed in `web_accessible_resources`.
 - Service workers terminate after ~30 seconds of inactivity. The WASM instance is lost on termination and must be re-instantiated. Cache the compiled module (see Pattern 3) to speed up restarts.
 - `instantiateStreaming` may fail in service worker contexts on some Chrome versions. Always fall back to `ArrayBuffer`-based instantiation.
 
 ---
 
-## Pattern 2: Loading WASM in Content Scripts {#pattern-2-loading-wasm-in-content-scripts}
+Pattern 2: Loading WASM in Content Scripts {#pattern-2-loading-wasm-in-content-scripts}
 
 Content scripts run in an isolated world but can load WASM modules. The module must be declared in `web_accessible_resources` so the content script can fetch it.
 
@@ -112,14 +112,14 @@ async function analyzePageContent(): Promise<number> {
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - Exposing WASM files via `web_accessible_resources` makes them accessible to the host page. Scope `matches` to only the domains that need access.
 - Content scripts share the page's CSP constraints for network requests, but WASM compilation uses the extension's own CSP.
 - Large WASM modules in content scripts increase memory usage per tab. Consider offloading to the service worker and communicating results via messaging.
 
 ---
 
-## Pattern 3: WASM Module Caching with chrome.storage {#pattern-3-wasm-module-caching-with-chromestorage}
+Pattern 3: WASM Module Caching with chrome.storage {#pattern-3-wasm-module-caching-with-chromestorage}
 
 Compiling WASM from bytes is expensive. Cache the compiled module bytes in `chrome.storage.local` to avoid re-fetching on every service worker restart.
 
@@ -181,14 +181,14 @@ const instance = await instantiateCached(
 );
 ```
 
-**Gotchas:**
+Gotchas:
 - `chrome.storage.local` has a default quota of ~10 MB. Large WASM modules (several MB) can consume significant storage. Use `chrome.storage.local.getBytesInUse` to monitor.
 - Storing binary data as `number[]` increases size due to JSON serialization overhead. For modules over 1 MB, consider using IndexedDB instead (available in service workers since Chrome 108).
 - Always version your cache key so that extension updates load the new WASM binary.
 
 ---
 
-## Pattern 4: Memory Management for WASM Modules {#pattern-4-memory-management-for-wasm-modules}
+Pattern 4: Memory Management for WASM Modules {#pattern-4-memory-management-for-wasm-modules}
 
 WASM linear memory must be managed carefully, especially in long-running extension contexts where leaks accumulate.
 
@@ -268,14 +268,14 @@ class WasmMemoryManager {
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - WASM memory can only grow, never shrink. If your module allocates heavily, memory usage increases monotonically until the context (service worker or tab) is destroyed.
 - When the service worker restarts, all WASM memory is reclaimed. This is actually beneficial -- treat SW termination as automatic garbage collection.
 - The `memory.buffer` reference becomes invalid after `memory.grow()`. Always re-read `memory.buffer` after any operation that might grow memory.
 
 ---
 
-## Pattern 5: Passing Data Between JS and WASM {#pattern-5-passing-data-between-js-and-wasm}
+Pattern 5: Passing Data Between JS and WASM {#pattern-5-passing-data-between-js-and-wasm}
 
 WASM only understands numeric types natively. Strings, objects, and arrays must be serialized into linear memory.
 
@@ -372,14 +372,14 @@ const result = bridge.callWithJson<AnalysisInput, AnalysisResult>(
 );
 ```
 
-**Gotchas:**
+Gotchas:
 - JSON serialization adds overhead. For hot paths with numeric data, pass typed arrays directly into WASM memory instead of serializing to JSON.
 - Always `.slice()` when reading typed arrays from WASM memory. Without slicing, the returned view shares the WASM buffer and becomes invalid if memory grows or the module is freed.
 - String encoding must match between JS and WASM. Use UTF-8 consistently. If your WASM module is compiled from Rust, its `String` type is already UTF-8.
 
 ---
 
-## Pattern 6: WASM for Crypto Operations in Extensions {#pattern-6-wasm-for-crypto-operations-in-extensions}
+Pattern 6: WASM for Crypto Operations in Extensions {#pattern-6-wasm-for-crypto-operations-in-extensions}
 
 WASM excels at cryptographic operations that would be slow in pure JavaScript. This is useful for extensions that handle encryption, hashing, or signature verification client-side.
 
@@ -486,14 +486,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - For simple hashing (SHA-256, SHA-512), the Web Crypto API (`crypto.subtle`) is already fast and available in service workers. Use WASM only for algorithms not in Web Crypto (Argon2, scrypt, custom ciphers).
 - Memory-hard algorithms like Argon2 require significant WASM memory. Ensure the initial memory allocation in the WASM module is large enough, or configure `WebAssembly.Memory` with adequate `initial` and `maximum` pages.
 - Sensitive data (passwords, keys) stored in WASM linear memory is not automatically zeroed. Overwrite buffers with zeros after use.
 
 ---
 
-## Pattern 7: Performance Comparison -- JS vs WASM in Extensions {#pattern-7-performance-comparison-js-vs-wasm-in-extensions}
+Pattern 7: Performance Comparison -- JS vs WASM in Extensions {#pattern-7-performance-comparison-js-vs-wasm-in-extensions}
 
 Not everything benefits from WASM. Here is a framework for benchmarking and deciding when WASM is worthwhile.
 
@@ -601,7 +601,7 @@ async function runExtensionBenchmarks(
 }
 ```
 
-**When WASM wins in extensions:**
+When WASM wins in extensions:
 
 | Task | Typical Speedup | Notes |
 |---|---|---|
@@ -611,7 +611,7 @@ async function runExtensionBenchmarks(
 | Complex parsing | 2-4x | Binary formats, protocol buffers |
 | Math-heavy computation | 3-15x | Signal processing, simulations |
 
-**When JS is sufficient:**
+When JS is sufficient:
 
 | Task | Why JS Wins |
 |---|---|
@@ -621,14 +621,14 @@ async function runExtensionBenchmarks(
 | Chrome API calls | All chrome.* APIs are JS-only |
 | JSON handling | V8's native JSON.parse is very fast |
 
-**Gotchas:**
+Gotchas:
 - The marshaling cost (copying data between JS and WASM memory) can negate WASM's raw speed advantage for small inputs. Benchmark with realistic data sizes.
 - V8 optimizes hot JS code aggressively (TurboFan). Simple loops in JS may approach WASM speed after JIT compilation.
 - In service workers, WASM instantiation cost is paid on every wake-up unless you cache the compiled module (Pattern 3).
 
 ---
 
-## Pattern 8: CSP Considerations for WASM in MV3 {#pattern-8-csp-considerations-for-wasm-in-mv3}
+Pattern 8: CSP Considerations for WASM in MV3 {#pattern-8-csp-considerations-for-wasm-in-mv3}
 
 Manifest V3 enforces a strict Content Security Policy. WASM compilation requires explicitly opting in via CSP configuration.
 
@@ -648,7 +648,7 @@ Manifest V3 enforces a strict Content Security Policy. WASM compilation requires
 // }
 ```
 
-### Verifying WASM Loads Under CSP {#verifying-wasm-loads-under-csp}
+Verifying WASM Loads Under CSP {#verifying-wasm-loads-under-csp}
 
 ```typescript
 // csp-check.ts
@@ -681,7 +681,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-### Loading WASM Safely Across Contexts {#loading-wasm-safely-across-contexts}
+Loading WASM Safely Across Contexts {#loading-wasm-safely-across-contexts}
 
 ```typescript
 // wasm-loader.ts
@@ -757,24 +757,24 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-### CSP Quick Reference for WASM {#csp-quick-reference-for-wasm}
+CSP Quick Reference for WASM {#csp-quick-reference-for-wasm}
 
 | Directive | MV3 Default | Effect on WASM |
 |---|---|---|
-| `wasm-unsafe-eval` | **Not included by default** | Must be explicitly added to allow `WebAssembly.compile()` and `instantiate()` |
+| `wasm-unsafe-eval` | Not included by default | Must be explicitly added to allow `WebAssembly.compile()` and `instantiate()` |
 | `script-src 'self'` | Included | WASM files must be bundled with the extension |
-| `script-src 'unsafe-eval'` | **Forbidden** in MV3 | Cannot use `eval()`, but WASM is unaffected |
+| `script-src 'unsafe-eval'` | Forbidden in MV3 | Cannot use `eval()`, but WASM is unaffected |
 | No `wasm-unsafe-eval` | Default state | Blocks all WASM compilation |
 
-**Gotchas:**
-- MV3 does **not** automatically include `wasm-unsafe-eval` in the extension pages CSP. You **must** explicitly add `'wasm-unsafe-eval'` to `content_security_policy.extension_pages` in your manifest for WASM to work. Without it, `WebAssembly.compile()` and `WebAssembly.instantiate()` will be blocked by CSP.
+Gotchas:
+- MV3 does not automatically include `wasm-unsafe-eval` in the extension pages CSP. You must explicitly add `'wasm-unsafe-eval'` to `content_security_policy.extension_pages` in your manifest for WASM to work. Without it, `WebAssembly.compile()` and `WebAssembly.instantiate()` will be blocked by CSP.
 - Content scripts compile WASM under the extension's CSP, not the host page's CSP. This means WASM works in content scripts even on pages with restrictive CSPs.
 - Sandbox pages (`content_security_policy.sandbox`) can use `wasm-unsafe-eval` independently. This is useful for isolating WASM execution in an iframe.
 - Remote WASM files cannot be loaded in MV3. All WASM modules must be bundled in the extension package. Fetch from `chrome.runtime.getURL` only.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Best For | Key Consideration |
 |---|---|---|

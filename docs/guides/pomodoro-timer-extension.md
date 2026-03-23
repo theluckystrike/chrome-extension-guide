@@ -23,36 +23,36 @@ The Pomodoro Technique is a time management method that uses a timer to break wo
 
 ```
 pomodoro-timer/
-├── manifest.json
-├── package.json
-├── tsconfig.json
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry point
-│   │   ├── timer.ts          # Timer logic
-│   │   └── storage.ts        # Background storage utilities
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts          # Popup entry point
-│   │   ├── Popup.tsx         # React/Vanilla component
-│   │   └── popup.css
-│   ├── content/
-│   │   ├── content.ts        # Content script
-│   │   └── overlay.ts        # Visual overlay component
-│   ├── shared/
-│   │   ├── types.ts          # Shared TypeScript interfaces
-│   │   ├── constants.ts      # Timer durations, messages
-│   │   └── utils.ts          # Utility functions
-│   └── options/
-│       ├── options.html
-│       └── options.ts
-├── icons/
-│   ├── icon-16.png
-│   ├── icon-48.png
-│   └── icon-128.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json
+ package.json
+ tsconfig.json
+ src/
+    background/
+       index.ts          # Service worker entry point
+       timer.ts          # Timer logic
+       storage.ts        # Background storage utilities
+    popup/
+       popup.html
+       popup.ts          # Popup entry point
+       Popup.tsx         # React/Vanilla component
+       popup.css
+    content/
+       content.ts        # Content script
+       overlay.ts        # Visual overlay component
+    shared/
+       types.ts          # Shared TypeScript interfaces
+       constants.ts      # Timer durations, messages
+       utils.ts          # Utility functions
+    options/
+        options.html
+        options.ts
+ icons/
+    icon-16.png
+    icon-48.png
+    icon-128.png
+ _locales/
+     en/
+         messages.json
 ```
 
 ### Manifest Configuration (Manifest V3)
@@ -97,17 +97,17 @@ pomodoro-timer/
 
 Key manifest decisions explained:
 
-- **`"type": "module"`** in background allows ES6 modules in service worker
-- **`storage`** permission for persisting timer state and user preferences
-- **`alarms`** API for reliable timer execution even when popup is closed
-- **`notifications`** for break/work session alerts
-- **`activeTab`** for injecting overlay into current tab when needed
+- `"type": "module"` in background allows ES6 modules in service worker
+- `storage` permission for persisting timer state and user preferences
+- `alarms` API for reliable timer execution even when popup is closed
+- `notifications` for break/work session alerts
+- `activeTab` for injecting overlay into current tab when needed
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types (src/shared/types.ts)
+Shared Types (src/shared/types.ts)
 
 ```typescript
 // Timer states
@@ -159,7 +159,7 @@ export const ALARM_NAME = 'pomodoro-timer-alarm';
 export const TICK_ALARM_NAME = 'pomodoro-timer-tick';
 ```
 
-### Timer Logic (src/background/timer.ts)
+Timer Logic (src/background/timer.ts)
 
 ```typescript
 import { TimerStatus, TimerState, SessionType, TimerConfig, AppState, ALARM_NAME, TICK_ALARM_NAME } from '../shared/types';
@@ -409,9 +409,9 @@ export class PomodoroTimer {
 
 ---
 
-## UI Design (Popup/Sidebar/Content Script Overlay)
+UI Design (Popup/Sidebar/Content Script Overlay)
 
-### Popup UI (src/popup/Popup.tsx)
+Popup UI (src/popup/Popup.tsx)
 
 ```typescript
 import { TimerStatus, TimerConfig, SessionType, MessageType } from '../shared/types';
@@ -581,7 +581,7 @@ export class PopupView {
 }
 ```
 
-### Content Script Overlay (src/content/overlay.ts)
+Content Script Overlay (src/content/overlay.ts)
 
 ```typescript
 // Optional: Inject a floating timer overlay into web pages
@@ -677,9 +677,9 @@ if (document.readyState === 'loading') {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Permissions Required
+Permissions Required
 
 | Permission | Purpose |
 |------------|---------|
@@ -688,7 +688,7 @@ if (document.readyState === 'loading') {
 | `notifications` | Alert user when session completes |
 | `activeTab` | Inject overlay into current tab |
 
-### Chrome API Usage Patterns
+Chrome API Usage Patterns
 
 ```typescript
 // Storage - Use chrome.storage.local (not sync) for extension-specific data
@@ -732,9 +732,9 @@ chrome.runtime.sendMessage({ type: 'STATUS_UPDATE', payload: status });
 
 ---
 
-## State Management and Storage Patterns
+State Management and Storage Patterns
 
-### Storage Layer (src/background/storage.ts)
+Storage Layer (src/background/storage.ts)
 
 ```typescript
 import { AppState, TimerConfig, TimerStatus } from '../shared/types';
@@ -768,7 +768,7 @@ export async function setStorage(data: StoredData): Promise<void> {
 }
 ```
 
-### State Synchronization Pattern
+State Synchronization Pattern
 
 ```typescript
 // Always sync state when popup opens
@@ -791,9 +791,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Service Worker Lifecycle Handling
+Service Worker Lifecycle Handling
 
 ```typescript
 // background/index.ts - Handle service worker restart
@@ -817,7 +817,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
 ```typescript
 // 1. Timer running when browser closes - state persists in storage
@@ -855,9 +855,9 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing Timer Logic
+Unit Testing Timer Logic
 
 ```typescript
 // __tests__/timer.test.ts
@@ -913,7 +913,7 @@ describe('PomodoroTimer', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 // Use Puppeteer/Playwright for E2E testing
@@ -939,9 +939,9 @@ test('popup timer flow', async ({ page }) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Service Worker Optimization
+Service Worker Optimization
 
 ```typescript
 // 1. Keep service worker alive with periodic alarms
@@ -970,7 +970,7 @@ if ('requestIdleCallback' in window) {
 <script defer src="popup.js"></script>
 ```
 
-### Memory Management
+Memory Management
 
 ```typescript
 // Clean up event listeners when popup closes
@@ -990,17 +990,17 @@ document.addEventListener('visibilitychange', () => {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication Requirements
+Pre-Publication Requirements
 
-- [ ] **Manifest V3** compliance (no remote code, declarativeNetRequest for blocking)
+- [ ] Manifest V3 compliance (no remote code, declarativeNetRequest for blocking)
 - [ ] All icons provided (16, 48, 128 px minimum)
 - [ ] Privacy policy URL in developer dashboard
 - [ ] Store listing assets (screenshots, promotional image)
 - [ ] Version incremented in manifest.json
 
-### Testing Checklist
+Testing Checklist
 
 - [ ] Extension loads without errors in Chrome
 - [ ] Timer persists across browser restarts
@@ -1009,7 +1009,7 @@ document.addEventListener('visibilitychange', () => {
 - [ ] Works in Incognito mode (if applicable)
 - [ ] No console errors in production build
 
-### Submission Process
+Submission Process
 
 1. Package extension: `npm run build` then zip output
 2. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -1017,7 +1017,7 @@ document.addEventListener('visibilitychange', () => {
 4. Fill store listing (description, screenshots, categories)
 5. Submit for review (typically 1-3 days)
 
-### Post-Publication
+Post-Publication
 
 ```typescript
 // Version update pattern
@@ -1034,7 +1034,7 @@ document.addEventListener('visibilitychange', () => {
 
 ---
 
-## Conclusion
+Conclusion
 
 Building a Pomodoro timer extension demonstrates core Chrome extension development patterns including Manifest V3 configuration, service worker architecture, cross-context communication, Chrome APIs (storage, alarms, notifications), and production best practices. This guide provides a complete foundation that can be extended with features like:
 

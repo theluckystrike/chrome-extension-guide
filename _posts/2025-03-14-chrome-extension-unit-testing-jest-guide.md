@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Unit Testing Chrome Extensions with Jest: Complete Testing Guide"
-description: "Learn how to unit test Chrome extensions using Jest. This guide covers setting up Jest, mocking Chrome APIs, testing content scripts, service workers, and popup code for robust extension development."
+description: "Learn how to unit test Chrome extensions using Jest. This guide covers setting up Jest, mocking Chrome APIs, testing content scripts, service workers, and popup code for solid extension development."
 date: 2025-03-14
 categories: [Chrome-Extensions, Testing]
 tags: [jest, unit-testing, chrome-extension]
@@ -17,25 +17,25 @@ This comprehensive guide walks you through everything you need to know about uni
 
 ---
 
-## Understanding Chrome Extension Architecture for Testing {#extension-architecture}
+Understanding Chrome Extension Architecture for Testing {#extension-architecture}
 
 Before diving into Jest configuration, it's essential to understand the distinct components of a Chrome extension that require testing. Chrome extensions consist of several execution contexts, each with its own characteristics and testing requirements.
 
-The **background service worker** (or background script in Manifest V2) runs in an isolated environment with access to Chrome's extension APIs. This component handles events like browser actions, message passing, and long-running tasks. Testing the service worker requires mocking Chrome APIs since they aren't available in Node.js environments.
+The background service worker (or background script in Manifest V2) runs in an isolated environment with access to Chrome's extension APIs. This component handles events like browser actions, message passing, and long-running tasks. Testing the service worker requires mocking Chrome APIs since they aren't available in Node.js environments.
 
-**Content scripts** execute within the context of web pages, allowing extensions to interact with page DOM and communicate with the background script. These scripts run in a unique environment that combines web page access with limited Chrome API access. Testing content scripts often involves jsdom for DOM manipulation and careful mocking of chrome.runtime API methods.
+Content scripts execute within the context of web pages, allowing extensions to interact with page DOM and communicate with the background script. These scripts run in a unique environment that combines web page access with limited Chrome API access. Testing content scripts often involves jsdom for DOM manipulation and careful mocking of chrome.runtime API methods.
 
-**Popup pages** (the HTML interface that appears when clicking the extension icon) run in their own context and have access to Chrome APIs. These components typically require testing both their DOM behavior and their interaction with extension APIs.
+Popup pages (the HTML interface that appears when clicking the extension icon) run in their own context and have access to Chrome APIs. These components typically require testing both their DOM behavior and their interaction with extension APIs.
 
-**Options pages** and other HTML surfaces follow similar patterns to popup pages. Understanding these components helps you design appropriate test strategies for each piece of your extension.
+Options pages and other HTML surfaces follow similar patterns to popup pages. Understanding these components helps you design appropriate test strategies for each piece of your extension.
 
 ---
 
-## Setting Up Jest for Chrome Extension Development {#setting-up-jest}
+Setting Up Jest for Chrome Extension Development {#setting-up-jest}
 
 Getting Jest configured for Chrome extension testing requires careful setup. The key challenge is that Chrome's extension APIs aren't available in Node.js, so we need to mock them appropriately.
 
-### Installation and Basic Configuration
+Installation and Basic Configuration
 
 First, install Jest and necessary dependencies:
 
@@ -53,18 +53,18 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   testMatch: [
-    '**/__tests__/**/*.js',
-    '**/?(*.)+(spec|test).js'
+    '/__tests__//*.js',
+    '/?(*.)+(spec|test).js'
   ],
   collectCoverageFrom: [
-    '**/*.js',
-    '!**/*.test.js',
-    '!**/node_modules/**',
+    '/*.js',
+    '!/*.test.js',
+    '!/node_modules/',
   ],
 };
 ```
 
-### Creating the Jest Setup File
+Creating the Jest Setup File
 
 The setup file is crucial for mocking Chrome APIs and configuring testing utilities. Create `jest.setup.js`:
 
@@ -118,11 +118,11 @@ This setup provides a solid foundation for testing Chrome extension code. You ca
 
 ---
 
-## Testing Content Scripts with Jest {#testing-content-scripts}
+Testing Content Scripts with Jest {#testing-content-scripts}
 
 Content scripts present unique testing challenges because they operate within web pages while also needing to communicate with the extension's background components. Let's examine how to test these effectively.
 
-### Example: Testing a Content Script
+Testing a Content Script
 
 Consider a content script that highlights keywords on a page:
 
@@ -171,7 +171,7 @@ if (document.readyState === 'loading') {
 module.exports = { highlightKeywords, initHighlighter };
 ```
 
-### Writing Tests for Content Scripts
+Writing Tests for Content Scripts
 
 Create a test file that properly sets up the DOM environment:
 
@@ -235,11 +235,11 @@ describe('initHighlighter', () => {
 
 ---
 
-## Testing Service Workers and Background Scripts {#testing-service-workers}
+Testing Service Workers and Background Scripts {#testing-service-workers}
 
 Service workers in Manifest V3 operate differently from traditional background scripts. They don't persist in memory, which affects how we test them.
 
-### Example: Background Message Handler
+Background Message Handler
 
 ```javascript
 // background/background.js
@@ -288,7 +288,7 @@ chrome.runtime.onMessage.addListener(handleMessage);
 module.exports = { handleMessage, handleGetTabInfo, handleSaveData, handleFetchData };
 ```
 
-### Writing Tests for Service Workers
+Writing Tests for Service Workers
 
 ```javascript
 // __tests__/background/background.test.js
@@ -375,11 +375,11 @@ describe('handleMessage', () => {
 
 ---
 
-## Testing Popup Components {#testing-popup-components}
+Testing Popup Components {#testing-popup-components}
 
 Popup components combine DOM manipulation with Chrome API interactions, requiring a testing approach that addresses both aspects.
 
-### Example: Popup Script
+Popup Script
 
 ```javascript
 // popup/popup.js
@@ -424,11 +424,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 module.exports = {};
 ```
 
-### Testing Popup Logic
+Testing Popup Logic
 
 ```javascript
 // __tests__/popup/popup.test.js
-/**
+/
  * @jest-environment jsdom
  */
 
@@ -512,9 +512,9 @@ describe('Popup Functionality', () => {
 
 ---
 
-## Advanced Testing Patterns {#advanced-patterns}
+Advanced Testing Patterns {#advanced-patterns}
 
-### Mocking Chrome API Callbacks
+Mocking Chrome API Callbacks
 
 Chrome APIs often use callbacks instead of promises, which can make testing tricky. Here's how to handle this:
 
@@ -539,7 +539,7 @@ test('should handle chrome storage callback pattern', () => {
 });
 ```
 
-### Testing Event Handlers
+Testing Event Handlers
 
 Chrome extensions heavily use event-driven patterns. Testing these requires careful mocking:
 
@@ -560,25 +560,25 @@ describe('Event Handler Testing', () => {
 
 ---
 
-## Best Practices for Chrome Extension Testing {#best-practices}
+Best Practices for Chrome Extension Testing {#best-practices}
 
 Following these practices ensures your tests remain maintainable and provide genuine value:
 
-**Mock Chrome APIs consistently**: Create a shared mock configuration that all tests use. This ensures consistency and makes updates easier when Chrome API changes.
+Mock Chrome APIs consistently: Create a shared mock configuration that all tests use. This ensures consistency and makes updates easier when Chrome API changes.
 
-**Test each component in isolation**: Content scripts, background workers, and popup code have different execution contexts. Test each separately with appropriate mocks.
+Test each component in isolation: Content scripts, background workers, and popup code have different execution contexts. Test each separately with appropriate mocks.
 
-**Use descriptive test names**: Clearly describe what each test validates. Names like `should highlight matching keywords in text content` provide more value than `test 1`.
+Use descriptive test names: Clearly describe what each test validates. Names like `should highlight matching keywords in text content` provide more value than `test 1`.
 
-**Keep tests focused**: Each test should validate one specific behavior. This makes debugging easier and provides clearer feedback when something breaks.
+Keep tests focused: Each test should validate one specific behavior. This makes debugging easier and provides clearer feedback when something breaks.
 
-**Automate mock cleanup**: Use beforeEach and afterEach hooks to reset mocks between tests, preventing test pollution.
+Automate mock cleanup: Use beforeEach and afterEach hooks to reset mocks between tests, preventing test pollution.
 
-**Test error handling**: Ensure your code handles Chrome API failures gracefully by mocking error conditions and verifying appropriate responses.
+Test error handling: Ensure your code handles Chrome API failures gracefully by mocking error conditions and verifying appropriate responses.
 
 ---
 
-## Continuous Integration for Chrome Extensions {#ci-cd}
+Continuous Integration for Chrome Extensions {#ci-cd}
 
 Running tests in CI requires additional considerations. Here's a GitHub Actions workflow:
 
@@ -613,7 +613,7 @@ This workflow runs your Jest tests on every push, ensuring that changes don't br
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Unit testing Chrome extensions with Jest is essential for building reliable, maintainable extensions. While the unique architecture of extensions presents specific challenges, proper setup and testing patterns make comprehensive testing achievable.
 

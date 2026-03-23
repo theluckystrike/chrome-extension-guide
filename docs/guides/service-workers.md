@@ -8,12 +8,12 @@ Chrome Extension Manifest V3 (MV3) replaced persistent background pages with ser
 
 ### Lifecycle Phases
 
-1. **Registration**: Chrome reads `background.service_worker` from `manifest.json`
-2. **Installation**: `chrome.runtime.onInstalled` fires on first load or update
-3. **Activation**: Service worker becomes active, ready to handle events
-4. **Idle**: No events pending—SW enters idle state
-5. **Termination**: ~30 seconds after last event—SW is killed
-6. **Wake-up**: New event arrives—SW restarts from scratch
+1. Registration: Chrome reads `background.service_worker` from `manifest.json`
+2. Installation: `chrome.runtime.onInstalled` fires on first load or update
+3. Activation: Service worker becomes active, ready to handle events
+4. Idle: No events pending, SW enters idle state
+5. Termination: ~30 seconds after last event, SW is killed
+6. Wake-up: New event arrives, SW restarts from scratch
 
 ### Manifest Registration
 
@@ -35,11 +35,11 @@ Set `type: module` for ES modules support.
 All listeners MUST be registered at top level synchronously:
 
 ```javascript
-// ✅ CORRECT: Top-level registration
+//  CORRECT: Top-level registration
 chrome.alarms.onAlarm.addListener(handleAlarm);
 chrome.runtime.onMessage.addListener(handleMessage);
 
-// ❌ WRONG: Inside async (misses events)
+//  WRONG: Inside async (misses events)
 async function init() {
   chrome.alarms.onAlarm.addListener(handleAlarm); // Too late!
 }
@@ -50,7 +50,7 @@ init();
 
 ### chrome.storage vs Global Variables
 
-Never rely on global variables—they reset when the service worker terminates.
+Never rely on global variables, they reset when the service worker terminates.
 
 ```javascript
 // Store data
@@ -78,7 +78,7 @@ async function getConfig() {
 
 ## Alarms for Periodic Tasks
 
-Use `chrome.alarms` instead of `setInterval`—the latter doesn't work in service workers.
+Use `chrome.alarms` instead of `setInterval`, the latter doesn't work in service workers.
 
 ```javascript
 // Create periodic alarm
@@ -264,13 +264,13 @@ if (swTarget) {
 ### Lost State
 
 ```javascript
-// ❌ BAD: Expecting state to persist
+//  BAD: Expecting state to persist
 let userData = null;
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (!userData) userData = fetchUserData(); // Won't work after restart!
 });
 
-// ✅ GOOD: Always read from storage
+//  GOOD: Always read from storage
 chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
   const { userData } = await chrome.storage.local.get('userData');
   sendResponse(userData);
@@ -280,13 +280,13 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 ### Race Conditions
 
 ```javascript
-// ❌ BAD: Concurrent writes cause races
+//  BAD: Concurrent writes cause races
 async function updateCounter() {
   const { count } = await chrome.storage.local.get('count');
   await chrome.storage.local.set({ count: count + 1 });
 }
 
-// ✅ GOOD: Use storage change listener
+//  GOOD: Use storage change listener
 chrome.storage.onChanged.addListener((changes) => {
   if (changes.count) console.log('Count:', changes.count.newValue);
 });
@@ -312,7 +312,7 @@ chrome.runtime.onInstalled.addListener(() => setup()); // Then setup
 
 ## Summary
 
-- Design for termination—assume state will be lost
+- Design for termination, assume state will be lost
 - Register all listeners at top level synchronously
 - Use chrome.storage for persistent data
 - Use chrome.alarms for periodic tasks

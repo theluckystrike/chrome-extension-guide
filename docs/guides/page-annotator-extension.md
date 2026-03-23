@@ -8,26 +8,26 @@ The Page Annotator follows a multi-context architecture:
 
 ```
 page-annotator/
-├── manifest.json           # Extension manifest (MV3)
-├── src/
-│   ├── background/         # Service worker
-│   │   └── index.ts
-│   ├── content/            # Content script (injected into pages)
-│   │   ├── index.ts
-│   │   ├── overlay.ts      # Annotation overlay UI
-│   │   └── storage.ts      # Local annotation storage
-│   ├── popup/              # Popup UI
-│   │   ├── popup.html
-│   │   ├── popup.ts
-│   │   └── popup.css
-│   ├── shared/             # Shared types and utilities
-│   │   ├── types.ts
-│   │   └── messages.ts
-│   └── sidebar/            # Side panel for annotation list
-│       ├── sidebar.html
-│       ├── sidebar.ts
-│       └── sidebar.css
-└── icons/                  # Extension icons
+ manifest.json           # Extension manifest (MV3)
+ src/
+    background/         # Service worker
+       index.ts
+    content/            # Content script (injected into pages)
+       index.ts
+       overlay.ts      # Annotation overlay UI
+       storage.ts      # Local annotation storage
+    popup/              # Popup UI
+       popup.html
+       popup.ts
+       popup.css
+    shared/             # Shared types and utilities
+       types.ts
+       messages.ts
+    sidebar/            # Side panel for annotation list
+        sidebar.html
+        sidebar.ts
+        sidebar.css
+ icons/                  # Extension icons
 ```
 
 ## Manifest Setup
@@ -607,11 +607,11 @@ test('annotate page', async ({ page }) => {
 
 ## Performance Considerations
 
-1. **Lazy Load Annotations**: Only load annotations when sidebar opens
-2. **Debounce Storage Writes**: Batch annotation saves with debounce
-3. **Use CSS Containment**: Isolate annotation overlays
-4. **Limit DOM Queries**: Cache selector lookups
-5. **Service Worker Persistence**: Use `chrome.storage` for persistence, not memory
+1. Lazy Load Annotations: Only load annotations when sidebar opens
+2. Debounce Storage Writes: Batch annotation saves with debounce
+3. Use CSS Containment: Isolate annotation overlays
+4. Limit DOM Queries: Cache selector lookups
+5. Service Worker Persistence: Use `chrome.storage` for persistence, not memory
 
 ```typescript
 // Debounced storage save

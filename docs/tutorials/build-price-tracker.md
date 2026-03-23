@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "Chrome Extension Price Tracker — Developer Guide"
+title: "Chrome Extension Price Tracker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-price-tracker/"
 ---
 # Build a Price Tracker Extension
 
-Build a Chrome extension that detects product prices on e-commerce pages, tracks them over time, shows price history sparklines, sends notifications on price drops, and provides a side panel for managing all tracked products. Uses **@theluckystrike/webext-storage** for persistent product data and **[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)** for background price checking.
+Build a Chrome extension that detects product prices on e-commerce pages, tracks them over time, shows price history sparklines, sends notifications on price drops, and provides a side panel for managing all tracked products. Uses @theluckystrike/webext-storage for persistent product data and [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) for background price checking.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -16,7 +16,7 @@ Build a Chrome extension that detects product prices on e-commerce pages, tracks
 
 ---
 
-## Step 1: Project Setup and Manifest {#step-1-project-setup-and-manifest}
+Step 1: Project Setup and Manifest {#step-1-project-setup-and-manifest}
 
 ```bash
 mkdir price-tracker && cd price-tracker
@@ -90,7 +90,7 @@ Create `manifest.json`:
 
 ---
 
-## Step 2: Content Script to Detect Product Prices {#step-2-content-script-to-detect-product-prices}
+Step 2: Content Script to Detect Product Prices {#step-2-content-script-to-detect-product-prices}
 
 Create `src/content/price-detector.ts`. This script runs on supported e-commerce sites and extracts product info:
 
@@ -199,7 +199,7 @@ The content script uses site-specific CSS selectors to extract product titles, p
 
 ---
 
-## Step 3: Save Tracked Products with @theluckystrike/webext-storage {#step-3-save-tracked-products-with-theluckystrikewebext-storage}
+Step 3: Save Tracked Products with @theluckystrike/webext-storage {#step-3-save-tracked-products-with-theluckystrikewebext-storage}
 
 Create `src/storage.ts`:
 
@@ -319,7 +319,7 @@ Each product stores its full price history (trimmed to 90 days), lowest/highest 
 
 ---
 
-## Step 4: Background Price Checking with [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) {#step-4-background-price-checking-with-chromealarms}
+Step 4: Background Price Checking with [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) {#step-4-background-price-checking-with-chromealarms}
 
 Create `src/background.ts`:
 
@@ -465,7 +465,7 @@ The background worker iterates over all tracked products on each alarm cycle. Re
 
 ---
 
-## Step 5: Price History Sparkline in Popup {#step-5-price-history-sparkline-in-popup}
+Step 5: Price History Sparkline in Popup {#step-5-price-history-sparkline-in-popup}
 
 Create `popup/popup.html`:
 
@@ -638,7 +638,7 @@ The sparkline is a pure SVG element with no external charting library. Each pric
 
 ---
 
-## Step 6: Price Drop Notifications {#step-6-price-drop-notifications}
+Step 6: Price Drop Notifications {#step-6-price-drop-notifications}
 
 Price drop notifications fire from the background worker (Step 4) when:
 
@@ -649,7 +649,7 @@ Notifications use `requireInteraction: true` so they persist until acted on. The
 
 ---
 
-## Step 7: Side Panel with All Tracked Products {#step-7-side-panel-with-all-tracked-products}
+Step 7: Side Panel with All Tracked Products {#step-7-side-panel-with-all-tracked-products}
 
 Create `sidepanel/sidepanel.html`. See [patterns/side-panel.md](../patterns/side-panel.md) for side panel best practices.
 
@@ -774,13 +774,13 @@ The side panel renders a larger sparkline for each product. Users can set target
 
 ---
 
-## Step 8: Export and Import Tracked Products {#step-8-export-and-import-tracked-products}
+Step 8: Export and Import Tracked Products {#step-8-export-and-import-tracked-products}
 
 Export and import are wired up in the popup (Step 5). Export serializes the products array to a timestamped JSON file via `chrome.downloads`. Import reads a JSON file, validates the array, deduplicates by URL, and merges with existing data. This lets users back up tracked products, transfer between browsers, or share lists. See [patterns/data-sync.md](../patterns/data-sync.md) for more data portability patterns.
 
 ---
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 ```
 price-tracker/
@@ -801,23 +801,23 @@ price-tracker/
   sidepanel/sidepanel.html
 ```
 
-## Key Takeaways {#key-takeaways}
+Key Takeaways {#key-takeaways}
 
-- **Content scripts** with site-specific selectors reliably extract product data from major e-commerce sites
-- **[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)** is essential for periodic background work in MV3 -- `setInterval` does not survive service worker termination
-- **SVG sparklines** provide lightweight price history visualization without external charting dependencies
-- **Side panels** offer more screen real estate than popups, ideal for data-heavy views
-- **@theluckystrike/webext-storage** simplifies typed storage with reactive `onChange` for cross-context sync
-- **Export/import** via JSON gives users full control over their data
+- Content scripts with site-specific selectors reliably extract product data from major e-commerce sites
+- [chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) is essential for periodic background work in MV3 -- `setInterval` does not survive service worker termination
+- SVG sparklines provide lightweight price history visualization without external charting dependencies
+- Side panels offer more screen real estate than popups, ideal for data-heavy views
+- @theluckystrike/webext-storage simplifies typed storage with reactive `onChange` for cross-context sync
+- Export/import via JSON gives users full control over their data
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 
 - [patterns/side-panel.md](../patterns/side-panel.md) -- Side panel API patterns and best practices
 - [patterns/data-sync.md](../patterns/data-sync.md) -- Data portability and sync strategies
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 ---
 

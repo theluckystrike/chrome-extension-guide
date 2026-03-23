@@ -1,14 +1,14 @@
 # Screenshot Capture Patterns in Chrome Extensions
 
-Screenshot capture is one of the most requested features for Chrome extensions. Whether you're building a note-taking app, a bug reporting tool, or a design collaboration platform, the ability to capture and manipulate screen content opens up powerful possibilities. In this guide, we'll explore the various patterns for implementing screenshot functionality in your Chrome extension using Manifest V3.
+Screenshot capture is one of the most requested features for Chrome extensions. Whether you're building a note-taking app, a bug reporting tool, or a design collaboration platform, the ability to capture and manipulate screen content opens up powerful possibilities. we'll explore the various patterns for implementing screenshot functionality in your Chrome extension using Manifest V3.
 
 ## Understanding Screenshot APIs
 
 Chrome provides several APIs for capturing screenshots, each with distinct use cases and permission requirements:
 
-1. **tabs.captureVisibleTab** - Captures the visible area of the active tab
-2. **desktopCapture** - Captures entire screens, windows, or tabs (including off-screen content)
-3. **activeTab** - Limited capture with user permission
+1. tabs.captureVisibleTab - Captures the visible area of the active tab
+2. desktopCapture - Captures entire screens, windows, or tabs (including off-screen content)
+3. activeTab - Limited capture with user permission
 
 ## Required Permissions
 
@@ -328,16 +328,16 @@ async function saveToStorage(dataUrl: string, key: string): Promise<void> {
 
 ## Best Practices and Considerations
 
-1. **Permission Minimization**: Use `activeTab` permission instead of `<all_urls>` when possible to avoid scary permission warnings during installation.
+1. Permission Minimization: Use `activeTab` permission instead of `<all_urls>` when possible to avoid scary permission warnings during installation.
 
-2. **Performance**: For full-page captures, implement proper delays between scrolls to ensure images load completely.
+2. Performance: For full-page captures, implement proper delays between scrolls to ensure images load completely.
 
-3. **Cross-Origin Issues**: Be aware that capturing pages with cross-origin iframes may result in blank areas due to security restrictions.
+3. Cross-Origin Issues: Be aware that capturing pages with cross-origin iframes may result in blank areas due to security restrictions.
 
-4. **Format Selection**: Use PNG for lossless quality or JPEG with compression for smaller file sizes.
+4. Format Selection: Use PNG for lossless quality or JPEG with compression for smaller file sizes.
 
-5. **User Experience**: Always provide visual feedback during capture operations and allow users to preview before saving.
+5. User Experience: Always provide visual feedback during capture operations and allow users to preview before saving.
 
 ## Conclusion
 
-Screenshot capture in Chrome extensions offers powerful capabilities for various use cases. By understanding the different capture patterns—visible tab capture, full-page stitching, region selection, and desktop capture—you can choose the right approach for your extension's needs. Remember to handle permissions appropriately and provide good user experience throughout the capture workflow.
+Screenshot capture in Chrome extensions offers powerful capabilities for various use cases. By understanding the different capture patterns, visible tab capture, full-page stitching, region selection, and desktop capture, you can choose the right approach for your extension's needs. Remember to handle permissions appropriately and provide good user experience throughout the capture workflow.

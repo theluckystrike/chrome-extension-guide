@@ -1,24 +1,24 @@
 ---
 layout: default
-title: "Chrome Extension Speed Reader — Developer Guide"
+title: "Chrome Extension Speed Reader. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-speed-reader/"
 ---
 # Build a Speed Reader Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - RSVP (Rapid Serial Visual Presentation) speed reading
 - Extract article text from any web page
 - Adjustable speed (WPM), pause/resume
 - Reading progress and statistics
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: activeTab, storage, scripting
 - action with popup, commands for shortcuts
 
 ---
 
-## Step 1: Text Extraction {#step-1-text-extraction}
+Step 1: Text Extraction {#step-1-text-extraction}
 
 ```javascript
 // content-script.js
@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 ---
 
-## Step 2: RSVP Display {#step-2-rsvp-display}
+Step 2: RSVP Display {#step-2-rsvp-display}
 
 Show one word at a time with ORP (Optimal Recognition Point):
 
@@ -72,7 +72,7 @@ class RSVPReader {
 
 ---
 
-## Step 3: Speed Controls {#step-3-speed-controls}
+Step 3: Speed Controls {#step-3-speed-controls}
 
 ```javascript
 function adjustWPM(delta) {
@@ -94,7 +94,7 @@ function getDelay(word) {
 
 ---
 
-## Step 4: Progress & Stats {#step-4-progress-stats}
+Step 4: Progress & Stats {#step-4-progress-stats}
 
 ```javascript
 // Jump to position by clicking progress bar
@@ -122,7 +122,7 @@ const StatsManager = {
 
 ---
 
-## Step 5: Keyboard Shortcuts {#step-5-keyboard-shortcuts}
+Step 5: Keyboard Shortcuts {#step-5-keyboard-shortcuts}
 
 manifest.json:
 ```json
@@ -144,7 +144,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-## Related Documentation {#related-documentation}
+Related Documentation {#related-documentation}
 - [Permissions: activeTab](../permissions/activeTab.md)
 - [Permissions: scripting](../permissions/scripting.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

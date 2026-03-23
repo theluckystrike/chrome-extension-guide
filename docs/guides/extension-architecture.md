@@ -1,44 +1,44 @@
 ---
 layout: default
-title: "Chrome Extension Extension Architecture — Developer Guide"
+title: "Chrome Extension Extension Architecture. Developer Guide"
 description: "Learn Chrome extension extension architecture with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/extension-architecture/"
 ---
 # Chrome Extension Architecture Deep Dive
 
-## The Extension Component Model {#the-extension-component-model}
+The Extension Component Model {#the-extension-component-model}
 - How Chrome loads and isolates extension components
 - Process model: each component runs in its own context
 - Diagram description: Background SW <-> Content Scripts <-> Popup/Options <-> DevTools
 
-## Background Service Worker {#background-service-worker}
+Background Service Worker {#background-service-worker}
 - Entry point defined in `manifest.json` `"background": { "service_worker": "background.js" }`
 - Lifecycle: install -> activate -> idle -> terminate -> wake
 - No DOM access, no `window` object
 - Event-driven: must register listeners at top level
 - Persistence: use `chrome.storage` (via `@theluckystrike/webext-storage`) to persist state across restarts
-- Example: `const storage = createStorage(defineSchema({ lastRun: 'number' }), 'local')`
+- `const storage = createStorage(defineSchema({ lastRun: 'number' }), 'local')`
 
-## Content Scripts {#content-scripts}
+Content Scripts {#content-scripts}
 - Injected into web pages via `manifest.json` `"content_scripts"` or `chrome.scripting.executeScript`
 - Isolated world: shares DOM but NOT JavaScript scope with the page
 - Can access limited Chrome APIs: `chrome.runtime`, `chrome.storage`
 - Communication with background: use `@theluckystrike/webext-messaging`
-- Example: `const messenger = createMessenger<MyMessages>(); messenger.sendMessage('getData', { key: 'value' })`
+- `const messenger = createMessenger<MyMessages>(); messenger.sendMessage('getData', { key: 'value' })`
 
-## Popup and Options Pages {#popup-and-options-pages}
+Popup and Options Pages {#popup-and-options-pages}
 - Popup: triggered by clicking extension icon, lives as long as popup is open
 - Options: full page for extension settings, opened via right-click -> Options
 - Both have full Chrome API access like background
 - State management: use `@theluckystrike/webext-storage` `watch()` for reactive updates
-- Example: `storage.watch('theme', (newVal, oldVal) => updateUI(newVal))`
+- `storage.watch('theme', (newVal, oldVal) => updateUI(newVal))`
 
-## DevTools Pages {#devtools-pages}
+DevTools Pages {#devtools-pages}
 - Custom panels in Chrome DevTools
 - Access to `chrome.devtools.*` APIs
 - Communication pattern: DevTools -> Background -> Content Script
 
-## Inter-Component Communication Patterns {#inter-component-communication-patterns}
+Inter-Component Communication Patterns {#inter-component-communication-patterns}
 - Popup <-> Background: direct `chrome.runtime` messaging
 - Content <-> Background: `chrome.runtime.sendMessage` / `chrome.tabs.sendMessage`
 - Using `@theluckystrike/webext-messaging` for type-safe messaging across all components:
@@ -46,11 +46,11 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-architecture/"
   type Messages = {
     getUser: { request: { id: string }; response: User };
     saveData: { request: Data; response: void };
-# Chrome Extension Architecture Patterns
+Chrome Extension Architecture Patterns
 
 A comprehensive guide to designing scalable, maintainable Chrome extensions using modern architecture patterns. This guide covers foundational structures, state management, cross-context communication, and advanced patterns for building professional-grade extensions.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Models](#architecture-models)
   - [Single-Page Popup Architecture](#single-page-popup-architecture)
@@ -83,9 +83,9 @@ A comprehensive guide to designing scalable, maintainable Chrome extensions usin
 
 ---
 
-## Architecture Models
+Architecture Models
 
-### Single-Page Popup Architecture
+Single-Page Popup Architecture
 
 The simplest extension model where all functionality lives in a single popup. Best for utility extensions with limited features.
 
@@ -98,9 +98,9 @@ The simplest extension model where all functionality lives in a single popup. Be
 }
 ```
 
-**Use cases**: Clipboard managers, page analyzers, quick toggles.
+Use cases: Clipboard managers, page analyzers, quick toggles.
 
-### Multi-Page Extension with Options and Popup
+Multi-Page Extension with Options and Popup
 
 Separates user-facing features into distinct contexts. The popup provides quick actions while the options page handles configuration.
 
@@ -115,7 +115,7 @@ Separates user-facing features into distinct contexts. The popup provides quick 
 
 Communication between popup and options uses `chrome.runtime.sendMessage` and `chrome.storage`.
 
-### Sidebar-First Architecture
+Sidebar-First Architecture
 
 Uses the side panel API (Manifest V3) as the primary interface. More screen real estate than popups, persists while browsing.
 
@@ -127,9 +127,9 @@ Uses the side panel API (Manifest V3) as the primary interface. More screen real
 }
 ```
 
-**Best for**: Note-taking, reading tools, productivity boosters.
+Best for: Note-taking, reading tools, productivity boosters.
 
-### Content Script Overlay Architecture
+Content Script Overlay Architecture
 
 Content scripts act as the primary UI, overlaying elements on the page. Useful for page-specific enhancements.
 
@@ -141,7 +141,7 @@ overlay.innerHTML = '<div class="panel">...</div>';
 document.body.appendChild(overlay);
 ```
 
-### Background Processing Architecture
+Background Processing Architecture
 
 Service workers handle long-running tasks, periodic sync, and cross-tab coordination. The UI remains lightweight.
 
@@ -158,11 +158,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 ---
 
-## Data Flow Patterns
+Data Flow Patterns
 
-### Event-Driven vs Polling Patterns
+Event-Driven vs Polling Patterns
 
-**Event-driven** (recommended): Use Chrome's built-in events for responsiveness and efficiency.
+Event-driven (recommended): Use Chrome's built-in events for responsiveness and efficiency.
 
 ```javascript
 // Event-driven: Listen for tab updates
@@ -173,7 +173,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-**Polling** (avoid unless necessary): Use `setInterval` only when events aren't available.
+Polling (avoid unless necessary): Use `setInterval` only when events aren't available.
 
 ```javascript
 // Polling - use sparingly
@@ -182,15 +182,15 @@ setInterval(() => {
 }, 60000);
 ```
 
-### State Management Patterns
+State Management Patterns
 
 Extensions require state synchronization across multiple contexts. Choose based on complexity:
 
-1. **Local State**: Simple extensions with isolated features
-2. **Shared State via Storage**: Mid-complexity extensions
-3. **Centralized Store**: Complex applications
+1. Local State: Simple extensions with isolated features
+2. Shared State via Storage: Mid-complexity extensions
+3. Centralized Store: Complex applications
 
-### Centralized Store in Service Worker
+Centralized Store in Service Worker
 
 The service worker acts as the single source of truth, managing state for all contexts.
 
@@ -228,7 +228,7 @@ class ExtensionStore {
 const store = new ExtensionStore();
 ```
 
-### Reactive UI Updates from Storage Changes
+Reactive UI Updates from Storage Changes
 
 All contexts can subscribe to storage changes for real-time updates.
 
@@ -243,31 +243,31 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-## Code Organization
+Code Organization
 
-### Module Organization for Large Extensions
+Module Organization for Large Extensions
 
 Structure by feature rather than by file type for better maintainability.
 
 ```
 src/
-├── features/
-│   ├── bookmark-manager/
-│   │   ├── bookmark-manager.ts
-│   │   ├── BookmarkList.tsx
-│   │   └── bookmark-manager.test.ts
-│   └── note-taking/
-│       ├── note-taking.ts
-│       └── NoteEditor.tsx
-├── shared/
-│   ├── storage/
-│   ├── i18n/
-│   └── utils/
-└── background/
-    └── index.ts
+ features/
+    bookmark-manager/
+       bookmark-manager.ts
+       BookmarkList.tsx
+       bookmark-manager.test.ts
+    note-taking/
+        note-taking.ts
+        NoteEditor.tsx
+ shared/
+    storage/
+    i18n/
+    utils/
+ background/
+     index.ts
 ```
 
-### Shared Utilities Between Contexts
+Shared Utilities Between Contexts
 
 Use a shared module bundled separately for code used across contexts.
 
@@ -286,27 +286,27 @@ export function debounce(fn, delay) {
 }
 ```
 
-## Manifest.json as the Blueprint {#manifestjson-as-the-blueprint}
+Manifest.json as the Blueprint {#manifestjson-as-the-blueprint}
 - Structure overview: manifest_version, name, version, permissions, background, content_scripts, action
 - How Chrome reads the manifest to wire up components
 - Common mistakes: missing permissions, wrong paths, invalid JSON
 
-## Security Boundaries {#security-boundaries}
+Security Boundaries {#security-boundaries}
 - Content scripts can't access extension pages directly
 - Web pages can't access extension APIs
 - Extension pages can't access other extensions
 - CSP restrictions in MV3 (cross-ref: `docs/mv3/content-security-policy.md`)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-### Dependency Injection Patterns
+Dependency Injection Patterns
 
 Essential for testing and mocking Chrome APIs.
 
@@ -335,7 +335,7 @@ container.register('chromeStorage', () => ({
 }));
 ```
 
-### Plugin/Middleware Architecture
+Plugin/Middleware Architecture
 
 Extend functionality without modifying core code.
 
@@ -368,9 +368,9 @@ const loggingMiddleware = async (action) => {
 
 ---
 
-## Configuration & Features
+Configuration & Features
 
-### Configuration-Driven Behavior
+Configuration-Driven Behavior
 
 Externalize behavior to configuration for flexibility.
 
@@ -394,7 +394,7 @@ async function getFeatureConfig() {
 }
 ```
 
-### Feature Flag Architecture
+Feature Flag Architecture
 
 Roll out features gradually and enable testing.
 
@@ -424,9 +424,9 @@ export class FeatureFlags {
 
 ---
 
-## Advanced Patterns
+Advanced Patterns
 
-### Multi-Extension Communication
+Multi-Extension Communication
 
 Extensions can communicate via shared storage and messaging.
 
@@ -449,16 +449,16 @@ chrome.runtime.onMessageExternal.addListener(
 );
 ```
 
-### Extension Suite Architecture
+Extension Suite Architecture
 
 Multiple related extensions sharing code via internal package.
 
 ```
 packages/
-├── shared/              # Common utilities
-├── core/               # Core extension logic
-├── extension-a/       # Extension A
-└── extension-b/        # Extension B
+ shared/              # Common utilities
+ core/               # Core extension logic
+ extension-a/       # Extension A
+ extension-b/        # Extension B
 ```
 
 ```json
@@ -468,30 +468,30 @@ packages/
 }
 ```
 
-### Monorepo Structure for Extensions
+Monorepo Structure for Extensions
 
 Manage multiple extensions in one repository.
 
 ```
 my-extensions/
-├── package.json
-├── turbo.json
-├── apps/
-│   ├── my-extension/
-│   │   ├── manifest.json
-│   │   └── src/
-│   └── my-second-extension/
-│       ├── manifest.json
-│       └── src/
-└── packages/
-    └── shared-utils/
+ package.json
+ turbo.json
+ apps/
+    my-extension/
+       manifest.json
+       src/
+    my-second-extension/
+        manifest.json
+        src/
+ packages/
+     shared-utils/
 ```
 
 ---
 
-## Build System Setup
+Build System Setup
 
-### Webpack Configuration
+Webpack Configuration
 
 ```javascript
 // webpack.config.js
@@ -525,7 +525,7 @@ module.exports = [
 ];
 ```
 
-### Vite Configuration
+Vite Configuration
 
 ```javascript
 // vite.config.ts
@@ -545,7 +545,7 @@ export defineConfig({
 });
 ```
 
-### Tsup Configuration
+Tsup Configuration
 
 ```javascript
 // tsup.config.ts
@@ -562,7 +562,7 @@ export default defineConfig({
 
 ---
 
-## References
+References
 
 - [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/develop)
 - [Chrome Extensions API Reference](https://developer.chrome.com/docs/extensions/reference)

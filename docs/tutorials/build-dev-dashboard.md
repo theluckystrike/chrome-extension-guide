@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Dev Dashboard — Developer Guide"
+title: "Chrome Extension Dev Dashboard. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-dev-dashboard/"
 ---
 # Build a Developer Productivity Dashboard Extension -- Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 
 A new-tab override extension that replaces Chrome's default new tab page with a developer-focused productivity dashboard featuring:
 
@@ -16,14 +16,14 @@ A new-tab override extension that replaces Chrome's default new tab page with a 
 - Quick links manager persisted with `chrome.storage`
 - Dark theme using CSS custom properties
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 116+ with Manifest V3 support
 - Node.js 18+ and npm
 - A GitHub username (for the contribution widget)
 - Basic TypeScript and Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 
-## Step 1: Project Setup with Vite + TypeScript {#step-1-project-setup-with-vite-typescript}
+Step 1: Project Setup with Vite + TypeScript {#step-1-project-setup-with-vite-typescript}
 
 ```bash
 mkdir dev-dashboard && cd dev-dashboard
@@ -71,7 +71,7 @@ export default defineConfig({
 
 Add to `package.json` scripts: `"dev": "vite build --watch"` and `"build": "vite build"`.
 
-## Step 2: Manifest V3 with chrome_url_overrides {#step-2-manifest-v3-with-chrome-url-overrides}
+Step 2: Manifest V3 with chrome_url_overrides {#step-2-manifest-v3-with-chrome-url-overrides}
 
 `public/manifest.json` -- the `chrome_url_overrides` key tells Chrome to load our page on every new tab:
 
@@ -144,7 +144,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Step 3: GitHub Contribution Heatmap Widget {#step-3-github-contribution-heatmap-widget}
+Step 3: GitHub Contribution Heatmap Widget {#step-3-github-contribution-heatmap-widget}
 
 `src/widgets/github.ts` fetches contribution data and renders a heatmap grid:
 
@@ -204,7 +204,7 @@ export async function initGitHubWidget(username: string, container: HTMLElement)
 }
 ```
 
-## Step 4: Hacker News Top Stories Widget {#step-4-hacker-news-top-stories-widget}
+Step 4: Hacker News Top Stories Widget {#step-4-hacker-news-top-stories-widget}
 
 `src/widgets/hackernews.ts` fetches the top 10 stories from the official HN Firebase API:
 
@@ -262,7 +262,7 @@ export async function initHNWidget(container: HTMLElement): Promise<void> {
 }
 ```
 
-## Step 5: Pomodoro Timer with chrome.alarms {#step-5-pomodoro-timer-with-chromealarms}
+Step 5: Pomodoro Timer with chrome.alarms {#step-5-pomodoro-timer-with-chromealarms}
 
 `src/widgets/pomodoro.ts` -- timer state persists via `chrome.storage.local`, and `chrome.alarms` fires even if the tab is closed:
 
@@ -383,7 +383,7 @@ export async function initPomodoroWidget(container: HTMLElement): Promise<void> 
 }
 ```
 
-## Step 6: Quick Links Manager with chrome.storage {#step-6-quick-links-manager-with-chromestorage}
+Step 6: Quick Links Manager with chrome.storage {#step-6-quick-links-manager-with-chromestorage}
 
 `src/widgets/quicklinks.ts` -- links persist via `chrome.storage.sync` so they roam with the user's profile:
 
@@ -464,7 +464,7 @@ export async function initQuickLinksWidget(container: HTMLElement): Promise<void
 }
 ```
 
-## Step 7: Dark Theme with CSS Custom Properties {#step-7-dark-theme-with-css-custom-properties}
+Step 7: Dark Theme with CSS Custom Properties {#step-7-dark-theme-with-css-custom-properties}
 
 `src/styles/dashboard.css` -- all colors use custom properties so switching themes is a single class toggle:
 
@@ -571,7 +571,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .link-card:hover .link-delete { display: flex; }
 ```
 
-## Step 8: Wire It Up, Build, and Test {#step-8-wire-it-up-build-and-test}
+Step 8: Wire It Up, Build, and Test {#step-8-wire-it-up-build-and-test}
 
 `src/main.ts` initializes all widgets and the clock:
 
@@ -628,17 +628,17 @@ npm run build
 2. Click "Load unpacked" and select the `dist/` folder
 3. Open a new tab -- the Dev Dashboard appears
 
-### Testing Checklist {#testing-checklist}
+Testing Checklist {#testing-checklist}
 
-- **New tab override**: Opening a new tab shows the dashboard instead of Chrome's default page
-- **Clock**: Updates every second in the header
-- **GitHub widget**: Heatmap renders for the entered username; hover cells to see dates and counts
-- **Hacker News**: 10 stories listed with scores and metadata; links open in new tabs
-- **Pomodoro**: Start/stop and presets work; closing and reopening the tab preserves a running timer; alarm notification fires when time expires
-- **Quick links**: Add links via the form; click to open; hover to reveal delete; links persist across sessions via `chrome.storage.sync`
-- **DevTools**: Open the console on the new tab page for debug output; check `chrome://extensions/` for service worker errors
+- New tab override: Opening a new tab shows the dashboard instead of Chrome's default page
+- Clock: Updates every second in the header
+- GitHub widget: Heatmap renders for the entered username; hover cells to see dates and counts
+- Hacker News: 10 stories listed with scores and metadata; links open in new tabs
+- Pomodoro: Start/stop and presets work; closing and reopening the tab preserves a running timer; alarm notification fires when time expires
+- Quick links: Add links via the form; click to open; hover to reveal delete; links persist across sessions via `chrome.storage.sync`
+- DevTools: Open the console on the new tab page for debug output; check `chrome://extensions/` for service worker errors
 
-## Summary {#summary}
+Summary {#summary}
 
 This tutorial built a complete new-tab override extension with four independent widgets, persistent state via `chrome.storage`, background alarms via `chrome.alarms`, and a dark theme using CSS custom properties. Each widget is a standalone module in `src/widgets/`, making it straightforward to add new widgets or swap out data sources.
 -e 

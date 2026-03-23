@@ -13,79 +13,79 @@ canonical_url: "https://bestchromeextensions.com/2025/01/29/build-auto-lighthous
 
 In the fast-paced world of web development, performance is everything. Users expect lightning-fast experiences, and search engines reward performant websites with better rankings. Google Lighthouse has become the gold standard for measuring web performance, but manually running audits for every page you visit is time-consuming. What if you could automatically capture Lighthouse scores every time you browse the web?
 
-In this comprehensive guide, we will walk you through building a Chrome extension that automatically measures and displays Lighthouse performance scores for every page you visit. This lighthouse auto extension will give you instant insights into Core Web Vitals, helping you identify performance issues in real-time without leaving your browser.
+we will walk you through building a Chrome extension that automatically measures and displays Lighthouse performance scores for every page you visit. This lighthouse auto extension will give you instant insights into Core Web Vitals, helping you identify performance issues in real-time without leaving your browser.
 
 ---
 
-## Why Build a Lighthouse Auto Extension? {#why-build}
+Why Build a Lighthouse Auto Extension? {#why-build}
 
 The need for a performance score chrome extension stems from a fundamental problem: performance issues often go unnoticed until they cause measurable damage. By the time a developer runs a manual Lighthouse audit, the problem may have already impacted user experience and SEO rankings.
 
 A lighthouse auto extension solves this problem by making performance measurement passive and continuous. Every page load becomes an opportunity to gather performance data, creating a comprehensive view of how your web properties perform across different pages, devices, and network conditions.
 
-### The Business Case
+The Business Case
 
 Website performance directly impacts business metrics. Research consistently shows that:
 
-- **53% of mobile users abandon sites** that take more than 3 seconds to load
-- **A 1-second delay** in page load time can reduce conversions by 7%
-- **Google uses Core Web Vitals** as ranking signals, making performance directly tied to organic traffic
+- 53% of mobile users abandon sites that take more than 3 seconds to load
+- A 1-second delay in page load time can reduce conversions by 7%
+- Google uses Core Web Vitals as ranking signals, making performance directly tied to organic traffic
 
-By building a web vitals extension, you are not just creating a developer tool—you are creating a product that solves real business problems. Developers, QA engineers, product managers, and even executives can benefit from at-a-glance performance visibility.
+By building a web vitals extension, you are not just creating a developer tool, you are creating a product that solves real business problems. Developers, QA engineers, product managers, and even executives can benefit from at-a-glance performance visibility.
 
-### Technical Motivation
+Technical Motivation
 
 From a technical standpoint, building this extension teaches you several valuable skills:
 
-1. **Chrome Extension APIs**: You will work with tabs, scripting, storage, and the Chrome DevTools Protocol
-2. **Lighthouse Integration**: Learn how to programmatically invoke Lighthouse and parse its results
-3. **Real-time Data Processing**: Handle asynchronous performance data from page loads
-4. **UI/UX in Extensions**: Create non-intrusive overlays that enhance rather than hinder browsing
+1. Chrome Extension APIs: You will work with tabs, scripting, storage, and the Chrome DevTools Protocol
+2. Lighthouse Integration: Learn how to programmatically invoke Lighthouse and parse its results
+3. Real-time Data Processing: Handle asynchronous performance data from page loads
+4. UI/UX in Extensions: Create non-intrusive overlays that enhance rather than hinder browsing
 
 ---
 
-## Understanding the Architecture {#architecture}
+Understanding the Architecture {#architecture}
 
 Before writing any code, let us understand how our lighthouse auto extension will work. The architecture consists of three main components working in concert.
 
-### The Popup Interface
+The Popup Interface
 
 The user-facing component displays current page performance scores. It shows the key Lighthouse metrics at a glance: Performance, Accessibility, Best Practices, SEO, and Progressive Web App compliance. This interface connects to the background service worker to fetch the latest audit results for the active tab.
 
-### The Background Service Worker
+The Background Service Worker
 
 The service worker acts as the brain of the extension. It listens for tab updates, triggers Lighthouse audits, stores results, and manages communication between different parts of the extension. In Manifest V3, service workers replace the old background pages and provide better performance and security.
 
-### The Content Script
+The Content Script
 
 The content script runs in the context of web pages and can inject UI elements, intercept network requests, and interact with the page DOM. For our lighthouse auto extension, the content script may display an inline overlay showing real-time performance indicators without requiring the user to open the popup.
 
 ---
 
-## Setting Up the Project {#project-setup}
+Setting Up the Project {#project-setup}
 
 Let us start by creating the project structure. You will need a manifest file, background script, popup interface, and content script.
 
-### Directory Structure
+Directory Structure
 
 Create a new folder for your extension and set up the following structure:
 
 ```
 lighthouse-auto/
-├── manifest.json
-├── background.js
-├── popup.html
-├── popup.js
-├── popup.css
-├── content.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── lighthouse-worker.js
+ manifest.json
+ background.js
+ popup.html
+ popup.js
+ popup.css
+ content.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ lighthouse-worker.js
 ```
 
-### Manifest Configuration
+Manifest Configuration
 
 The manifest.json file defines our extension and its capabilities. For a lighthouse auto extension, we need careful permission management:
 
@@ -133,7 +133,7 @@ Pay close attention to the permissions we are requesting. The `activeTab` permis
 
 ---
 
-## Building the Background Service Worker {#background-worker}
+Building the Background Service Worker {#background-worker}
 
 The background service worker is where the magic happens. It listens for tab updates, triggers Lighthouse audits, and stores the results for later retrieval.
 
@@ -211,11 +211,11 @@ This background script automatically triggers an audit whenever a page loads or 
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup provides users with quick access to performance scores. Let us build a clean, informative interface.
 
-### popup.html
+popup.html
 
 ```html
 <!DOCTYPE html>
@@ -282,7 +282,7 @@ The popup provides users with quick access to performance scores. Let us build a
 </html>
 ```
 
-### popup.css
+popup.css
 
 ```css
 * {
@@ -415,7 +415,7 @@ footer {
 }
 ```
 
-### popup.js
+popup.js
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -483,7 +483,7 @@ function updateLastAudit(timestamp) {
 
 ---
 
-## Adding Content Script Functionality {#content-script}
+Adding Content Script Functionality {#content-script}
 
 The content script allows us to show performance indicators directly on the page. This makes the extension even more useful by providing instant visual feedback without requiring users to open the popup.
 
@@ -496,7 +496,7 @@ function createPerformanceIndicator() {
   indicator.id = 'lighthouse-indicator';
   indicator.innerHTML = `
     <div class="lh-indicator-content">
-      <span class="lh-icon">⚡</span>
+      <span class="lh-icon"></span>
       <span class="lh-text">Lighthouse</span>
       <span class="lh-score">--</span>
     </div>
@@ -580,11 +580,11 @@ if (document.readyState === 'loading') {
 
 ---
 
-## Integrating Real Lighthouse Audits {#lighthouse-integration}
+Integrating Real Lighthouse Audits {#lighthouse-integration}
 
 In the examples above, we simulated Lighthouse scores for demonstration. For a production extension, you need to integrate the actual Lighthouse library. Here is how to do it properly.
 
-### Using Lighthouse Programmatically
+Using Lighthouse Programmatically
 
 The Chrome Extensions API does not provide direct access to Lighthouse, so you need to load it from a worker or inline script. Here is a production-ready approach:
 
@@ -647,14 +647,14 @@ This approach loads the Lighthouse JavaScript library and executes it in the con
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your lighthouse auto extension in various scenarios:
 
-1. **Different page types**: Test on simple HTML pages, SPAs, pages with heavy JavaScript, and pages with iframes
-2. **Network conditions**: Test on fast and slow connections to ensure audits complete appropriately
-3. **Error handling**: Test on pages that fail to load, require authentication, or have CORS restrictions
-4. **Performance**: Ensure the extension does not significantly impact page load times
+1. Different page types: Test on simple HTML pages, SPAs, pages with heavy JavaScript, and pages with iframes
+2. Network conditions: Test on fast and slow connections to ensure audits complete appropriately
+3. Error handling: Test on pages that fail to load, require authentication, or have CORS restrictions
+4. Performance: Ensure the extension does not significantly impact page load times
 
 To test your extension in Chrome:
 
@@ -665,52 +665,52 @@ To test your extension in Chrome:
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, you can publish it to reach millions of users:
 
-1. **Prepare your store listing**: Create compelling screenshots, write a detailed description, and choose appropriate categories and keywords
-2. **Comply with policies**: Review Chrome Web Store policies to ensure your extension meets all requirements
-3. **Create a developer account**: Sign up at the Chrome Web Store developer dashboard
-4. **Upload your package**: Use the developer dashboard to upload a ZIP file of your extension
-5. **Submit for review**: Google reviews extensions for policy compliance before publishing
+1. Prepare your store listing: Create compelling screenshots, write a detailed description, and choose appropriate categories and keywords
+2. Comply with policies: Review Chrome Web Store policies to ensure your extension meets all requirements
+3. Create a developer account: Sign up at the Chrome Web Store developer dashboard
+4. Upload your package: Use the developer dashboard to upload a ZIP file of your extension
+5. Submit for review: Google reviews extensions for policy compliance before publishing
 
 For your web vitals extension, emphasize how it helps developers and marketers monitor Core Web Vitals in their marketing efforts.
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 As you enhance your lighthouse auto extension, consider adding these advanced features:
 
-### Historical Data Tracking
+Historical Data Tracking
 
 Store Lighthouse scores over time to create performance dashboards. This helps identify trends and regressions before they become major issues.
 
-### Custom Throttling Profiles
+Custom Throttling Profiles
 
 Allow users to simulate different network conditions like 3G, 4G, or custom throttling profiles.
 
-### Score Comparison
+Score Comparison
 
 Compare scores between different versions of a website or between your site and competitors.
 
-### Alerting System
+Alerting System
 
 Notify users when scores drop below thresholds, helping them catch performance regressions early.
 
-### Export Capabilities
+Export Capabilities
 
 Export audit results to CSV, JSON, or integrate with CI/CD pipelines for automated performance testing.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a lighthouse auto extension is a rewarding project that teaches you valuable Chrome Extension development skills while creating a genuinely useful tool. By automatically measuring performance scores, you help developers, QA teams, and website owners maintain optimal performance without manual effort.
 
 The extension we built today provides instant visibility into Lighthouse metrics, helps identify performance issues in real-time, and creates a foundation for more advanced features. Whether you use it for personal projects, client work, or publish it to the Chrome Web Store, this web vitals extension addresses a real need in the web development community.
 
-Remember that performance is not just a technical concern—it directly impacts user experience, SEO rankings, and business metrics. By making performance measurement automatic and continuous, you empower yourself and your team to build faster, better web experiences.
+Remember that performance is not just a technical concern, it directly impacts user experience, SEO rankings, and business metrics. By making performance measurement automatic and continuous, you empower yourself and your team to build faster, better web experiences.
 
 Start building your lighthouse auto extension today, and join the community of developers who are making the web faster for everyone.

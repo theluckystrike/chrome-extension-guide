@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The `chrome.runtime` API is the cornerstone of Chrome extension development, providing essential functionality for extension lifecycle management, message passing, and resource access. This API enables communication between different extension components, handles installation and update events, and provides access to extension metadata. Understanding the Runtime API is fundamental to building robust and well-architected Chrome extensions.
+The `chrome.runtime` API is the cornerstone of Chrome extension development, providing essential functionality for extension lifecycle management, message passing, and resource access. This API enables communication between different extension components, handles installation and update events, and provides access to extension metadata. Understanding the Runtime API is fundamental to building solid and well-architected Chrome extensions.
 
 The Runtime API serves multiple critical purposes: facilitating inter-component communication through message passing, managing extension state across browser sessions, and providing utilities for common extension tasks. Whether you're building a simple extension or a complex application with multiple components, the Runtime API will be an essential part of your toolkit.
 
@@ -77,7 +77,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-Important: Always return `true` from your listener if you intend to send an asynchronous response using the sendResponse callback. If you return false or don't return anything, the message channel will close before your async operation completes.
+Always return `true` from your listener if you intend to send an asynchronous response using the sendResponse callback. If you return false or don't return anything, the message channel will close before your async operation completes.
 
 ## Persistent Connections
 
@@ -360,7 +360,7 @@ The onSuspend event should be used sparingly and for lightweight operations only
 
 ### chrome.runtime.sendNativeMessage
 
-The `chrome.runtime.sendNativeMessage` method enables communication with native applications installed on the user's computer. This powerful feature allows extensions to leverage system-level capabilities, interact with command-line tools, or communicate with companion applications. Native messaging requires a registered native host application.
+The `chrome.runtime.sendNativeMessage` method enables communication with native applications installed on the user's computer. This powerful feature allows extensions to use system-level capabilities, interact with command-line tools, or communicate with companion applications. Native messaging requires a registered native host application.
 
 ```javascript
 // Sending a message to a native application
@@ -455,7 +455,7 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-Important: `chrome.runtime.lastError` is only valid within the callback function. It is cleared after the callback completes. This is a common source of bugs where developers check the error outside the callback scope.
+`chrome.runtime.lastError` is only valid within the callback function. It is cleared after the callback completes. This is a common source of bugs where developers check the error outside the callback scope.
 
 ## Best Practices
 

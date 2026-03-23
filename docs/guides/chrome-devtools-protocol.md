@@ -208,13 +208,13 @@ This is an important consideration for user experience. Users should be aware wh
 
 ### Best Practices
 
-1. **Attach only when needed** - Attach to tabs only when performing debugging operations and detach when done.
+1. Attach only when needed - Attach to tabs only when performing debugging operations and detach when done.
 
-2. **Inform users** - Clearly communicate in your extension's UI when debugger functionality is active.
+2. Inform users - Clearly communicate in your extension's UI when debugger functionality is active.
 
-3. **Handle detach events** - Listen for `chrome.debugger.onDetach` to handle cases where the debugger disconnects unexpectedly (e.g., user closes the tab).
+3. Handle detach events - Listen for `chrome.debugger.onDetach` to handle cases where the debugger disconnects unexpectedly (e.g., user closes the tab).
 
-4. **Handle permissions gracefully** - Users must grant explicit permission for debugger access in some cases.
+4. Handle permissions gracefully - Users must grant explicit permission for debugger access in some cases.
 
 ```javascript
 // Handle unexpected detach
@@ -263,7 +263,7 @@ async function performDebugging(tabId) {
 }
 ```
 
-Note: The debugger automatically detaches when the extension is unloaded or the tab is closed, but explicit detachment is best practice.
+The debugger automatically detaches when the extension is unloaded or the tab is closed, but explicit detachment is best practice.
 
 ## Code Examples
 
@@ -359,10 +359,10 @@ async function scrapeDOM(tabId, selector) {
 
 The debugger API provides powerful capabilities that can access sensitive data:
 
-- **User consent** - Chrome may prompt users to allow debugger access
-- **Scope limitations** - Debugger only works on tabs the user has access to
-- **HTTPS requirement** - Debugger connections should use HTTPS when possible
-- **Extension lifecycle** - Debugger automatically detaches when extension is disabled
+- User consent - Chrome may prompt users to allow debugger access
+- Scope limitations - Debugger only works on tabs the user has access to
+- HTTPS requirement - Debugger connections should use HTTPS when possible
+- Extension lifecycle - Debugger automatically detaches when extension is disabled
 
 ## Reference
 

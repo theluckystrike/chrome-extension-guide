@@ -1,50 +1,50 @@
 ---
 layout: default
-title: "Chrome Extension Extension To Extension — Best Practices"
+title: "Chrome Extension Extension To Extension. Best Practices"
 description: "Implement communication between different Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-to-extension/"
 ---
 
 # Extension-to-Extension Communication Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Chrome extensions can communicate with each other — send messages, share data, and expose APIs. This is useful for extension suites (a family of extensions that work together), plugin architectures (one core extension that others extend), and integration points (your extension coordinating with a well-known third-party extension). This guide covers practical patterns for building reliable, secure inter-extension communication.
+Chrome extensions can communicate with each other. send messages, share data, and expose APIs. This is useful for extension suites (a family of extensions that work together), plugin architectures (one core extension that others extend), and integration points (your extension coordinating with a well-known third-party extension). This guide covers practical patterns for building reliable, secure inter-extension communication.
 
 ---
 
-## The Communication Model {#the-communication-model}
+The Communication Model {#the-communication-model}
 
 ```
-┌─────────────────────┐         ┌─────────────────────┐
-│   Extension A       │         │   Extension B       │
-│   (ID: aaaa...)     │         │   (ID: bbbb...)     │
-│                     │         │                     │
-│  ┌───────────────┐  │  msg    │  ┌───────────────┐  │
-│  │  Background   │──┼─────────┼─▶│  Background   │  │
-│  │  Service      │  │         │  │  Service      │  │
-│  │  Worker       │◀─┼─────────┼──│  Worker       │  │
-│  └───────────────┘  │  reply  │  └───────────────┘  │
-│                     │         │                     │
-│  ┌───────────────┐  │         │  ┌───────────────┐  │
-│  │ Content Script│  │  DOM    │  │ Content Script│  │
-│  │ (shared page) │◀─┼─events──┼─▶│ (shared page) │  │
-│  └───────────────┘  │         │  └───────────────┘  │
-└─────────────────────┘         └─────────────────────┘
+         
+   Extension A                   Extension B       
+   (ID: aaaa...)                 (ID: bbbb...)     
+                                                   
+      msg        
+    Background     Background     
+    Service                     Service        
+    Worker         Worker         
+      reply      
+                                                   
+                 
+   Content Script    DOM       Content Script  
+   (shared page) events (shared page)   
+                 
+         
 ```
 
 Extensions communicate through two primary channels:
-- **`chrome.runtime.sendMessage`** with an explicit extension ID — direct background-to-background messaging
-- **DOM events and shared resources** — content scripts on the same page can use `CustomEvent` or shared web accessible resources
+- `chrome.runtime.sendMessage` with an explicit extension ID. direct background-to-background messaging
+- DOM events and shared resources. content scripts on the same page can use `CustomEvent` or shared web accessible resources
 
 ---
 
-## Pattern 1: Sending Messages to Another Extension {#pattern-1-sending-messages-to-another-extension}
+Pattern 1: Sending Messages to Another Extension {#pattern-1-sending-messages-to-another-extension}
 
 Use `chrome.runtime.sendMessage` with the target extension's ID as the first argument:
 
 ```ts
-// Extension A — sending a message to Extension B
+// Extension A. sending a message to Extension B
 const EXTENSION_B_ID = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 
 interface TranslateRequest {
@@ -86,17 +86,17 @@ const result = await requestTranslation("Hello world", "es");
 console.log(result.translated); // "Hola mundo"
 ```
 
-**Important:** The receiving extension must declare itself as externally connectable (see Pattern 2), or the message will silently fail.
+The receiving extension must declare itself as externally connectable (see Pattern 2), or the message will silently fail.
 
 ---
 
-## Pattern 2: Externally Connectable Manifest Configuration {#pattern-2-externally-connectable-manifest-configuration}
+Pattern 2: Externally Connectable Manifest Configuration {#pattern-2-externally-connectable-manifest-configuration}
 
 The receiving extension must whitelist sender extension IDs in its manifest:
 
 ```json
 {
-  "name": "Extension B — Translation Service",
+  "name": "Extension B. Translation Service",
   "externally_connectable": {
     "ids": [
       "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -109,7 +109,7 @@ The receiving extension must whitelist sender extension IDs in its manifest:
 Then handle external messages in the background service worker:
 
 ```ts
-// Extension B — background.ts
+// Extension B. background.ts
 chrome.runtime.onMessageExternal.addListener(
   (message, sender, sendResponse) => {
     // sender.id is the calling extension's ID
@@ -139,7 +139,7 @@ async function handleTranslation(
 For long-lived connections, use `chrome.runtime.connect`:
 
 ```ts
-// Extension A — long-lived connection to Extension B
+// Extension A. long-lived connection to Extension B
 const port = chrome.runtime.connect(EXTENSION_B_ID, {
   name: "translation-stream",
 });
@@ -153,7 +153,7 @@ port.postMessage({ action: "translate", text: "Goodbye", targetLang: "fr" });
 ```
 
 ```ts
-// Extension B — handle long-lived connections
+// Extension B. handle long-lived connections
 chrome.runtime.onConnectExternal.addListener((port) => {
   console.log(`Connection from ${port.sender?.id}, name: ${port.name}`);
 
@@ -183,12 +183,12 @@ You can also allow web pages to connect by adding `matches` to `externally_conne
 
 ---
 
-## Pattern 3: Shared Web Accessible Resources {#pattern-3-shared-web-accessible-resources}
+Pattern 3: Shared Web Accessible Resources {#pattern-3-shared-web-accessible-resources}
 
 When two extensions have content scripts on the same page, they can share data through web accessible resources:
 
 ```json
-// Extension B — manifest.json
+// Extension B. manifest.json
 {
   "web_accessible_resources": [
     {
@@ -203,7 +203,7 @@ When two extensions have content scripts on the same page, they can share data t
 The `extension_ids` field (MV3) allows other extensions to load the resource directly:
 
 ```ts
-// Extension A — content script or background
+// Extension A. content script or background
 // Fetch Extension B's schema to understand its API
 const EXTENSION_B_ID = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 
@@ -224,12 +224,12 @@ This is useful for exposing static configuration, API schemas, or shared assets 
 
 ---
 
-## Pattern 4: Typed Message Protocol {#pattern-4-typed-message-protocol}
+Pattern 4: Typed Message Protocol {#pattern-4-typed-message-protocol}
 
 Define a shared protocol so both extensions have type safety at their boundary:
 
 ```ts
-// shared/protocol.ts — publish as an npm package or copy to both extensions
+// shared/protocol.ts. publish as an npm package or copy to both extensions
 
 export const PROTOCOL_VERSION = "1.0.0";
 
@@ -283,7 +283,7 @@ export function isValidEnvelope(msg: unknown): msg is ExtEnvelope {
 Use the protocol on both sides:
 
 ```ts
-// Extension A — sending typed messages
+// Extension A. sending typed messages
 import { createEnvelope, type ExtResponse, isValidEnvelope } from "./shared/protocol";
 
 async function getDataFromPartner(key: string): Promise<unknown> {
@@ -315,7 +315,7 @@ async function getDataFromPartner(key: string): Promise<unknown> {
 ```
 
 ```ts
-// Extension B — handling typed messages
+// Extension B. handling typed messages
 import { createEnvelope, isValidEnvelope, type ExtRequest } from "./shared/protocol";
 
 chrome.runtime.onMessageExternal.addListener(
@@ -367,7 +367,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 ---
 
-## Pattern 5: Version Negotiation {#pattern-5-version-negotiation}
+Pattern 5: Version Negotiation {#pattern-5-version-negotiation}
 
 When two extensions evolve independently, they need to agree on a protocol version:
 
@@ -395,7 +395,7 @@ export function isMinorCompatible(
 ```
 
 ```ts
-// Extension A — negotiate before using the API
+// Extension A. negotiate before using the API
 const PROTOCOL_VERSION = "1.2.0";
 
 async function negotiateVersion(
@@ -447,11 +447,11 @@ async function safeGetData(key: string): Promise<unknown> {
 For breaking changes, maintain backward-compatible handlers:
 
 ```ts
-// Extension B — background.ts
+// Extension B. background.ts
 chrome.runtime.onMessageExternal.addListener(
   (message, sender, sendResponse) => {
     if (!isValidEnvelope(message)) {
-      // Legacy v0 messages — handle for backward compatibility
+      // Legacy v0 messages. handle for backward compatibility
       if (message.type === "getData") {
         handleLegacyGetData(message, sendResponse);
         return true;
@@ -469,7 +469,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 ---
 
-## Pattern 6: Detecting If Another Extension Is Installed {#pattern-6-detecting-if-another-extension-is-installed}
+Pattern 6: Detecting If Another Extension Is Installed {#pattern-6-detecting-if-another-extension-is-installed}
 
 There is no `chrome.management.get` for other extensions. Use these techniques to detect a partner extension:
 
@@ -513,7 +513,7 @@ async function isExtensionAvailable(extensionId: string): Promise<boolean> {
 // content.ts (Extension B)
 document.documentElement.setAttribute("data-ext-b-installed", "1.2.0");
 
-// content.ts (Extension A) — check for the marker
+// content.ts (Extension A). check for the marker
 function isPartnerExtensionActive(): boolean {
   return document.documentElement.hasAttribute("data-ext-b-installed");
 }
@@ -570,12 +570,12 @@ export async function discoverAllPartners(
 
 ---
 
-## Pattern 7: Shared Storage via Web Accessible JSON {#pattern-7-shared-storage-via-web-accessible-json}
+Pattern 7: Shared Storage via Web Accessible JSON {#pattern-7-shared-storage-via-web-accessible-json}
 
 For one-way data sharing (one extension publishes, others consume), use a web accessible page that bridges to extension storage:
 
 ```ts
-// Extension B — the "publisher" extension
+// Extension B. the "publisher" extension
 // Write status that other extensions can read
 
 async function publishStatus(): Promise<void> {
@@ -593,7 +593,7 @@ async function publishStatus(): Promise<void> {
 Since you cannot dynamically write files to the extension package, use a web accessible HTML page that reads from storage and serves data via `postMessage`:
 
 ```html
-<!-- Extension B — public/status.html (web accessible) -->
+<!-- Extension B. public/status.html (web accessible) -->
 <!DOCTYPE html>
 <html>
 <head><script src="status-bridge.js"></script></head>
@@ -602,7 +602,7 @@ Since you cannot dynamically write files to the extension package, use a web acc
 ```
 
 ```ts
-// Extension B — public/status-bridge.ts
+// Extension B. public/status-bridge.ts
 // This page runs in the extension's origin, so it can access chrome.storage
 
 chrome.storage.local.get("publicStatus", (result) => {
@@ -634,7 +634,7 @@ window.addEventListener("message", (event) => {
 ```
 
 ```ts
-// Extension A — reading partner status via iframe bridge
+// Extension A. reading partner status via iframe bridge
 async function getPartnerStatus(
   extensionId: string
 ): Promise<unknown> {
@@ -672,17 +672,17 @@ async function getPartnerStatus(
 
 ---
 
-## Pattern 8: Validating Sender Extension Identity {#pattern-8-validating-sender-extension-identity}
+Pattern 8: Validating Sender Extension Identity {#pattern-8-validating-sender-extension-identity}
 
-Always verify `sender.id` before processing external messages — any extension (or web page, if configured) can send you messages:
+Always verify `sender.id` before processing external messages. any extension (or web page, if configured) can send you messages:
 
 ```ts
-// Extension B — background.ts
+// Extension B. background.ts
 
 // Allowlist of trusted extension IDs
 const TRUSTED_EXTENSIONS = new Set([
-  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",  // Extension A — companion
-  "cccccccccccccccccccccccccccccccc",  // Extension C — premium add-on
+  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",  // Extension A. companion
+  "cccccccccccccccccccccccccccccccc",  // Extension C. premium add-on
 ]);
 
 // Permission levels for different callers
@@ -816,7 +816,7 @@ export function getRateLimiter(extensionId: string): TokenBucketLimiter {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -829,7 +829,7 @@ export function getRateLimiter(extensionId: string): TokenBucketLimiter {
 | Shared storage via JSON bridge | One-way data publishing to other extensions |
 | Sender identity validation | Preventing unauthorized access from unknown extensions |
 
-Inter-extension communication opens powerful integration possibilities, but it also opens an attack surface. Always validate `sender.id`, enforce per-extension permissions, rate-limit external callers, and negotiate protocol versions before exchanging data. The `externally_connectable` manifest key is your first line of defense — only list extension IDs you explicitly trust.
+Inter-extension communication opens powerful integration possibilities, but it also opens an attack surface. Always validate `sender.id`, enforce per-extension permissions, rate-limit external callers, and negotiate protocol versions before exchanging data. The `externally_connectable` manifest key is your first line of defense. only list extension IDs you explicitly trust.
 -e 
 ---
 

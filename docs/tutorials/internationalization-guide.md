@@ -1,45 +1,45 @@
 ---
 layout: default
-title: "Internationalizing Your Chrome Extension — Developer Guide"
+title: "Internationalizing Your Chrome Extension. Developer Guide"
 description: "Learn how to build a multilingual Chrome extension with complete i18n support, RTL languages, locale fallback, and Chrome Web Store localization."
 canonical_url: "https://bestchromeextensions.com/tutorials/internationalization-guide/"
 ---
 
 # Internationalizing Your Chrome Extension
 
-## Overview {#overview}
+Overview {#overview}
 
 Internationalization (i18n) is essential for reaching a global audience with your Chrome extension. Chrome provides a built-in i18n system that requires no permissions and supports over 50 languages, including right-to-left (RTL) scripts like Arabic, Hebrew, and Persian.
 
 This tutorial covers the complete workflow for adding multilingual support to your extension, from setting up the `_locales` directory to publishing localized listings in the Chrome Web Store.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - A Chrome Extension project with a `manifest.json` file
 - Basic understanding of JSON format
 - Familiarity with JavaScript/TypeScript
 
-## Step 1: Set Up the _locales Directory {#step-1-set-up-locales}
+Step 1: Set Up the _locales Directory {#step-1-set-up-locales}
 
 Create the `_locales` directory in your extension's root folder. Each supported language gets its own subdirectory named using the [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes):
 
 ```
 my-extension/
-├── _locales/
-│   ├── en/messages.json      # English (default)
-│   ├── es/messages.json      # Spanish
-│   ├── fr/messages.json      # French
-│   ├── de/messages.json      # German
-│   ├── ja/messages.json     # Japanese
-│   ├── ar/messages.json      # Arabic (RTL)
-│   └── zh_CN/messages.json  # Chinese (Simplified)
-├── manifest.json
-├── background.js
-├── popup.html
-└── styles.css
+ _locales/
+    en/messages.json      # English (default)
+    es/messages.json      # Spanish
+    fr/messages.json      # French
+    de/messages.json      # German
+    ja/messages.json     # Japanese
+    ar/messages.json      # Arabic (RTL)
+    zh_CN/messages.json  # Chinese (Simplified)
+ manifest.json
+ background.js
+ popup.html
+ styles.css
 ```
 
-### Configure Default Locale
+Configure Default Locale
 
 Add the `default_locale` field to your `manifest.json`:
 
@@ -53,13 +53,13 @@ Add the `default_locale` field to your `manifest.json`:
 }
 ```
 
-**Important:** The `default_locale` field is required if you use `__MSG_*__` placeholders in your manifest. It specifies the fallback locale when a user's language isn't available.
+The `default_locale` field is required if you use `__MSG_*__` placeholders in your manifest. It specifies the fallback locale when a user's language isn't available.
 
-## Step 2: Create messages.json Files {#step-2-create-messages}
+Step 2: Create messages.json Files {#step-2-create-messages}
 
 Each locale directory must contain a `messages.json` file with translation strings.
 
-### English (Default) — `_locales/en/messages.json`
+English (Default). `_locales/en/messages.json`
 
 ```json
 {
@@ -118,7 +118,7 @@ Each locale directory must contain a `messages.json` file with translation strin
 }
 ```
 
-### Spanish — `_locales/es/messages.json`
+Spanish. `_locales/es/messages.json`
 
 ```json
 {
@@ -177,7 +177,7 @@ Each locale directory must contain a `messages.json` file with translation strin
 }
 ```
 
-### Arabic (RTL) — `_locales/ar/messages.json`
+Arabic (RTL). `_locales/ar/messages.json`
 
 ```json
 {
@@ -236,9 +236,9 @@ Each locale directory must contain a `messages.json` file with translation strin
 }
 ```
 
-## Step 3: Use Messages in Your Extension {#step-3-use-messages}
+Step 3: Use Messages in Your Extension {#step-3-use-messages}
 
-### In manifest.json
+In manifest.json
 
 Reference messages using the `__MSG_key_name__` syntax:
 
@@ -249,7 +249,7 @@ Reference messages using the `__MSG_key_name__` syntax:
 }
 ```
 
-### In HTML Files
+In HTML Files
 
 ```html
 <!-- popup.html -->
@@ -272,7 +272,7 @@ Reference messages using the `__MSG_key_name__` syntax:
 </html>
 ```
 
-### In JavaScript/TypeScript
+In JavaScript/TypeScript
 
 The `chrome.i18n` API provides methods for retrieving translated strings:
 
@@ -296,7 +296,7 @@ const items = chrome.i18n.getMessage("items_count", [5]);
 console.log(items); // "You have 5 item(s)"
 ```
 
-### Automatic HTML Translation
+Automatic HTML Translation
 
 Create a helper function to translate all elements with `data-i18n` attributes:
 
@@ -326,11 +326,11 @@ chrome.i18n.getAcceptLanguages((languages) => {
 });
 ```
 
-## Step 4: Handle RTL Languages {#step-4-handle-rtl}
+Step 4: Handle RTL Languages {#step-4-handle-rtl}
 
 For languages like Arabic, Hebrew, and Persian that read right-to-left, you need to adjust your CSS.
 
-### Detect RTL in JavaScript
+Detect RTL in JavaScript
 
 ```javascript
 // Check if the current locale is RTL
@@ -347,7 +347,7 @@ if (isRTL()) {
 }
 ```
 
-### CSS for RTL Support
+CSS for RTL Support
 
 ```css
 /* styles.css */
@@ -396,7 +396,7 @@ body.rtl .icon {
 }
 ```
 
-### Using `dir` Attribute
+Using `dir` Attribute
 
 Set the `dir` attribute dynamically:
 
@@ -413,16 +413,16 @@ function updateDocumentDirection() {
 document.addEventListener("DOMContentLoaded", updateDocumentDirection);
 ```
 
-## Step 5: Understand Locale Fallback Chain {#step-5-locale-fallback}
+Step 5: Understand Locale Fallback Chain {#step-5-locale-fallback}
 
 Chrome uses a fallback chain when a translation isn't available in the user's preferred language:
 
-1. **User's preferred language** (e.g., `fr_FR`)
-2. **Language without region** (e.g., `fr`)
-3. **Default locale** (specified in `default_locale`)
-4. **English (en)** as final fallback
+1. User's preferred language (e.g., `fr_FR`)
+2. Language without region (e.g., `fr`)
+3. Default locale (specified in `default_locale`)
+4. English (en) as final fallback
 
-### Example Fallback Chain
+Example Fallback Chain
 
 If user's language is `fr_FR` and you only have `fr` and `en`:
 
@@ -430,7 +430,7 @@ If user's language is `fr_FR` and you only have `fr` and `en`:
 fr_FR → fr → en (default_locale) → en (hardcoded)
 ```
 
-### Check Available Languages
+Check Available Languages
 
 ```javascript
 // Get languages accepted by the browser
@@ -445,7 +445,7 @@ console.log("UI Language:", uiLanguage);
 // Output: "fr-FR"
 ```
 
-### Handle Missing Translations Gracefully
+Handle Missing Translations Gracefully
 
 ```javascript
 function getMessageSafe(key, substitutions) {
@@ -458,7 +458,7 @@ function getMessageSafe(key, substitutions) {
 }
 ```
 
-## Step 6: Use Predefined Messages {#step-6-predefined-messages}
+Step 6: Use Predefined Messages {#step-6-predefined-messages}
 
 Chrome provides built-in messages for common UI elements:
 
@@ -471,7 +471,7 @@ Chrome provides built-in messages for common UI elements:
 | `@@bidi_start_edge` | Start edge position | `left` or `right` |
 | `@@bidi_end_edge` | End edge position | `right` or `left` |
 
-### Using Predefined Messages
+Using Predefined Messages
 
 ```javascript
 // Get extension ID (useful for dynamic resource URLs)
@@ -488,18 +488,18 @@ document.documentElement.setAttribute("dir",
 );
 ```
 
-## Step 7: Testing Locales {#step-7-testing-locales}
+Step 7: Testing Locales {#step-7-testing-locales}
 
-### Test in Chrome
+Test in Chrome
 
 1. Open `chrome://extensions/`
-2. Enable **Developer mode**
-3. Click **Load unpacked** and select your extension folder
+2. Enable Developer mode
+3. Click Load unpacked and select your extension folder
 4. Click the extension icon → puzzle piece → manage
 5. Under "Language", select a different language
 6. Restart Chrome or reload the extension
 
-### Programmatic Testing
+Programmatic Testing
 
 ```javascript
 // Test different languages
@@ -519,7 +519,7 @@ async function testLanguage(locale) {
 ["en", "es", "fr", "de", "ar", "zh_CN"].forEach(testLanguage);
 ```
 
-### Using Chrome Flags
+Using Chrome Flags
 
 You can force Chrome to use a specific language for testing:
 
@@ -527,30 +527,30 @@ You can force Chrome to use a specific language for testing:
 2. Add `--lang=es` to the target path
 3. Restart Chrome
 
-### Extension Reloader Extension
+Extension Reloader Extension
 
 Install the [Extension Reloader](https://chrome.google.com/webstore/detail/extension-reloader/fimgfedafeadlierhkkfjlppnodhabdm) extension to quickly reload your extension during development.
 
-## Step 8: Chrome Web Store Localized Listings {#step-8-cws-localized-listings}
+Step 8: Chrome Web Store Localized Listings {#step-8-cws-localized-listings}
 
 When publishing to the Chrome Web Store, you can provide localized listings for different regions and languages.
 
-### Store Listing Fields to Localize
+Store Listing Fields to Localize
 
-- **Title** - Extension name
-- **Description** - Detailed description
-- **Short Description** - Brief summary
-- **Promotional Graphics** - Store banners (may need region-specific images)
+- Title - Extension name
+- Description - Detailed description
+- Short Description - Brief summary
+- Promotional Graphics - Store banners (may need region-specific images)
 
-### Upload Localized Screenshots
+Upload Localized Screenshots
 
 1. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/developer/dashboard)
 2. Select your extension
-3. Go to **Store Listing**
-4. Scroll to **Localized listings**
+3. Go to Store Listing
+4. Scroll to Localized listings
 5. Add translations for each target language/region
 
-### Example: English Store Listing
+English Store Listing
 
 ```
 Title: My Weather Extension
@@ -558,7 +558,7 @@ Description: Get real-time weather updates for your location.
 Features: - Current temperature - 7-day forecast - Severe weather alerts
 ```
 
-### Example: Spanish Store Listing
+Spanish Store Listing
 
 ```
 Title: Mi Extensión del Clima
@@ -566,39 +566,39 @@ Description: Obtén actualizaciones del clima en tiempo real para tu ubicación.
 Características: - Temperatura actual - Pronóstico de 7 días - Alertas de clima severo
 ```
 
-### Best Practices for Store Listings
+Best Practices for Store Listings
 
-1. **Don't just translate** - Adapt content for cultural differences
-2. **Keep titles under 45 characters** to avoid truncation
-3. **Use screenshots** that show localized UI
-4. **Test in multiple languages** before publishing
+1. Don't just translate - Adapt content for cultural differences
+2. Keep titles under 45 characters to avoid truncation
+3. Use screenshots that show localized UI
+4. Test in multiple languages before publishing
 
-## Complete Example Project Structure {#complete-example}
+Complete Example Project Structure {#complete-example}
 
 ```
 weather-extension/
-├── _locales/
-│   ├── en/messages.json
-│   ├── es/messages.json
-│   ├── fr/messages.json
-│   ├── de/messages.json
-│   ├── ja/messages.json
-│   ├── ar/messages.json
-│   └── zh_CN/messages.json
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   ├── popup.js
-│   └── styles.css
-├── images/
-│   ├── icon-16.png
-│   ├── icon-48.png
-│   └── icon-128.png
-└── README.md
+ _locales/
+    en/messages.json
+    es/messages.json
+    fr/messages.json
+    de/messages.json
+    ja/messages.json
+    ar/messages.json
+    zh_CN/messages.json
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.js
+    styles.css
+ images/
+    icon-16.png
+    icon-48.png
+    icon-128.png
+ README.md
 ```
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -626,7 +626,7 @@ weather-extension/
 }
 ```
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
 - [i18n API Reference](/docs/api-reference/i18n-api/) - Complete reference for the chrome.i18n API
 - [Accessibility in Extensions](/docs/guides/accessibility/) - Building accessible extensions for all users

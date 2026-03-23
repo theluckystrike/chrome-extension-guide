@@ -9,12 +9,12 @@ canonical_url: "https://bestchromeextensions.com/api-reference/web-navigation-ap
 
 The `chrome.webNavigation` API provides methods to track navigation events in tabs. It offers detailed insight into the navigation lifecycle, enabling extensions to monitor and respond to page loads, frame updates, and navigation errors.
 
-## Overview {#overview}
-- **Purpose**: Track navigation events in tabs with detailed lifecycle information
-- **Permission required**: `"webNavigation"` in manifest
-- **Availability**: All Chrome extension contexts (background, popup, content scripts via connection)
+Overview {#overview}
+- Purpose: Track navigation events in tabs with detailed lifecycle information
+- Permission required: `"webNavigation"` in manifest
+- Availability: All Chrome extension contexts (background, popup, content scripts via connection)
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 ```json
 {
   "permissions": [
@@ -23,9 +23,9 @@ The `chrome.webNavigation` API provides methods to track navigation events in ta
 }
 ```
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
-### chrome.webNavigation.getFrame(details) {#chromewebnavigationgetframedetails}
+chrome.webNavigation.getFrame(details) {#chromewebnavigationgetframedetails}
 Retrieves information about a specific frame in a tab. Frames are identified by `tabId` and `frameId`.
 
 ```typescript
@@ -44,7 +44,7 @@ console.log(frameInfo);
 // }
 ```
 
-### chrome.webNavigation.getAllFrames(details) {#chromewebnavigationgetallframesdetails}
+chrome.webNavigation.getAllFrames(details) {#chromewebnavigationgetallframesdetails}
 Retrieves information about all frames in a tab.
 
 ```typescript
@@ -61,11 +61,11 @@ Returns an array of frame objects, each containing:
 - `url`: URL of the frame
 - `documentId`: Unique document identifier (Chrome 106+)
 
-## Navigation Events (In Order) {#navigation-events-in-order}
+Navigation Events (In Order) {#navigation-events-in-order}
 
 The navigation lifecycle fires events in a specific order as a page loads:
 
-### 1. onBeforeNavigate {#1-onbeforenavigate}
+1. onBeforeNavigate {#1-onbeforenavigate}
 Fires when navigation is about to begin. This is the earliest event in the navigation lifecycle.
 
 ```typescript
@@ -74,8 +74,8 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
 }, { url: [{ hostSuffix: "example.com" }] });
 ```
 
-### 2. onCommitted {#2-oncommitted}
-Fires when the navigation is committed—the browser has decided to load the new document. The server response has been received.
+2. onCommitted {#2-oncommitted}
+Fires when the navigation is committed, the browser has decided to load the new document. The server response has been received.
 
 ```typescript
 chrome.webNavigation.onCommitted.addListener((details) => {
@@ -84,7 +84,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-### 3. onDOMContentLoaded {#3-ondomcontentloaded}
+3. onDOMContentLoaded {#3-ondomcontentloaded}
 Fires when the DOM is fully parsed, but external resources may still be loading.
 
 ```typescript
@@ -93,7 +93,7 @@ chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
 });
 ```
 
-### 4. onCompleted {#4-oncompleted}
+4. onCompleted {#4-oncompleted}
 Fires when the page and all its resources (images, scripts, etc.) are fully loaded.
 
 ```typescript
@@ -102,9 +102,9 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## Additional Events {#additional-events}
+Additional Events {#additional-events}
 
-### onCreatedNavigationTarget {#oncreatednavigationtarget}
+onCreatedNavigationTarget {#oncreatednavigationtarget}
 Fires when a new tab or window is opened (e.g., via link with target="_blank").
 
 ```typescript
@@ -115,7 +115,7 @@ chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
 });
 ```
 
-### onReferenceFragmentUpdated {#onreferencefragmentupdated}
+onReferenceFragmentUpdated {#onreferencefragmentupdated}
 Fires when the fragment identifier (hash) of a URL changes.
 
 ```typescript
@@ -125,7 +125,7 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
 });
 ```
 
-### onTabReplaced {#ontabreplaced}
+onTabReplaced {#ontabreplaced}
 Fires when a tab is replaced by another (commonly due to prerendering or Chrome's back-forward cache).
 
 ```typescript
@@ -136,7 +136,7 @@ chrome.webNavigation.onTabReplaced.addListener((details) => {
 });
 ```
 
-### onHistoryStateUpdated {#onhistorystateupdated}
+onHistoryStateUpdated {#onhistorystateupdated}
 Fires when the history state is changed via `pushState` or `replaceState` (SPA navigation).
 
 ```typescript
@@ -146,7 +146,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-### onErrorOccurred {#onerroroccurred}
+onErrorOccurred {#onerroroccurred}
 Fires when a navigation error occurs.
 
 ```typescript
@@ -156,7 +156,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-## Transition Types {#transition-types}
+Transition Types {#transition-types}
 
 The `transitionType` property describes how the navigation was initiated:
 
@@ -171,7 +171,7 @@ The `transitionType` property describes how the navigation was initiated:
 | `"reload"` | Page reload |
 | `"keyword"` | Keyword from address bar |
 
-## Event Filtering {#event-filtering}
+Event Filtering {#event-filtering}
 
 All event listeners support filtering to reduce unnecessary callbacks:
 
@@ -192,13 +192,13 @@ chrome.webNavigation.onCompleted.addListener(
 Filter properties include:
 - `url`: Array of UrlFilter objects (supports hostSuffix, hostEquals, pathPrefix, schemes, etc.)
 
-## Frame Details {#frame-details}
+Frame Details {#frame-details}
 
-### Frame IDs {#frame-ids}
+Frame IDs {#frame-ids}
 - `frameId: 0` = Main (top-level) frame
 - `frameId > 0` = Subframes (iframes)
 
-### documentId {#documentid}
+documentId {#documentid}
 Introduced in Chrome 106+, `documentId` provides a unique identifier for each document instance. This is more reliable than URL for tracking specific page loads, especially with SPAs.
 
 ```typescript
@@ -208,9 +208,9 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Track all navigation events for a tab {#track-all-navigation-events-for-a-tab}
+Track all navigation events for a tab {#track-all-navigation-events-for-a-tab}
 ```typescript
 const tabId = 123;
 
@@ -227,7 +227,7 @@ events.forEach(eventName => {
 });
 ```
 
-### Filter to specific domains {#filter-to-specific-domains}
+Filter to specific domains {#filter-to-specific-domains}
 ```typescript
 chrome.webNavigation.onCompleted.addListener(
   (details) => {
@@ -241,7 +241,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-### Detect SPA navigation via onHistoryStateUpdated {#detect-spa-navigation-via-onhistorystateupdated}
+Detect SPA navigation via onHistoryStateUpdated {#detect-spa-navigation-via-onhistorystateupdated}
 ```typescript
 // Track client-side routing in SPAs
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
@@ -251,7 +251,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-### Monitor new tab creation {#monitor-new-tab-creation}
+Monitor new tab creation {#monitor-new-tab-creation}
 ```typescript
 chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
   console.log(`Opened ${details.url} in tab ${details.tabId}`);
@@ -259,16 +259,16 @@ chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
 });
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - [Web Navigation Guide](../guides/web-navigation.md)
 - [Web Navigation Advanced](../guides/web-navigation-advanced.md)
 - [Permissions: webNavigation](../permissions/webNavigation.md)
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I track page loads?
+How do I track page loads?
 Use chrome.webNavigation.onCompleted.addListener to be notified when a page finishes loading.
 
-### Can I get the transition type?
+Can I get the transition type?
 Yes, the navigation event includes a transitionType property (like "link", "typed", "bookmark").
 
 ---

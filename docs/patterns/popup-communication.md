@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Popup Communication — Best Practices"
+title: "Chrome Extension Popup Communication. Best Practices"
 description: "Communicate between popups and background scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-communication/"
 ---
 
 # Popup Communication
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extension popups present unique communication challenges due to their ephemeral lifecycle. Understanding these challenges and implementing proper patterns is essential for building reliable extensions. Popups are created when the user clicks the extension icon and are destroyed when they lose focus or the user clicks elsewhere. This lifecycle means you cannot rely on persistent connections or in-memory state between popup opens.
 
-This guide covers the essential patterns for building robust popup-to-background, popup-to-content script, and popup-to-service-worker communication in your Chrome extension. These patterns ensure your extension works reliably regardless of how users interact with it.
+This guide covers the essential patterns for building solid popup-to-background, popup-to-content script, and popup-to-service-worker communication in your Chrome extension. These patterns ensure your extension works reliably regardless of how users interact with it.
 
-## Popup Lifecycle {#popup-lifecycle}
+Popup Lifecycle {#popup-lifecycle}
 
 The popup lifecycle is fundamentally different from other extension contexts. Understanding this lifecycle is critical for proper implementation:
 
@@ -55,11 +55,11 @@ The popup lifecycle means you should:
 - Save state to storage frequently during use
 - Use event-based updates rather than polling
 
-## Loading Data from Storage
+Loading Data from Storage
 
-## Loading Data from Storage {#loading-data-from-storage}
+Loading Data from Storage {#loading-data-from-storage}
 
-Because popups are created fresh each time, you must load data from storage on initialization. Here's a robust pattern:
+Because popups are created fresh each time, you must load data from storage on initialization. Here's a solid pattern:
 
 ```typescript
 interface PopupData {
@@ -149,9 +149,9 @@ async function init(): Promise<void> {
 }
 ```
 
-## Sending Commands via runtime.sendMessage {#sending-commands-via-runtimesendmessage}
+Sending Commands via runtime.sendMessage {#sending-commands-via-runtimesendmessage}
 
-The primary method for sending messages from popup to background is `chrome.runtime.sendMessage`. Here's a robust implementation with timeout handling:
+The primary method for sending messages from popup to background is `chrome.runtime.sendMessage`. Here's a solid implementation with timeout handling:
 
 ```typescript
 type MessageType = 'ACTION' | 'GET_DATA' | 'UPDATE_SETTINGS';
@@ -167,7 +167,7 @@ interface MessageResponse {
   error?: string;
 }
 
-/**
+/
  * Send a message to the background script with timeout handling
  */
 async function sendMessage<T = MessageResponse>(
@@ -252,7 +252,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Real-Time Updates with Ports {#real-time-updates-with-ports}
+Real-Time Updates with Ports {#real-time-updates-with-ports}
 
 For persistent connections that survive popup reopens, use `chrome.runtime.connect`:
 
@@ -349,12 +349,12 @@ window.addEventListener('unload', () => {
 });
 ```
 
-## Popup to Content Script via tabs.sendMessage {#popup-to-content-script-via-tabssendmessage}
+Popup to Content Script via tabs.sendMessage {#popup-to-content-script-via-tabssendmessage}
 
 Communicating with content scripts requires first identifying the target tab:
 
 ```typescript
-/**
+/
  * Send a message to the content script of the current active tab
  */
 async function sendToContentScript(
@@ -406,7 +406,7 @@ async function getPageData(): Promise<unknown> {
 }
 ```
 
-## State Preservation in storage.session {#state-preservation-in-storagesession}
+State Preservation in storage.session {#state-preservation-in-storagesession}
 
 Use `chrome.storage.session` for ephemeral state that persists across popup opens but doesn't sync:
 
@@ -476,7 +476,7 @@ window.addEventListener('beforeunload', async () => {
 });
 ```
 
-## Preloading in Background {#preloading-in-background}
+Preloading in Background {#preloading-in-background}
 
 Preload data in the background before the popup opens for faster perceived performance:
 
@@ -500,7 +500,7 @@ chrome.action.onHovered.addListener(async (tab) => {
 });
 ```
 
-## Loading Indicators and Error States {#loading-indicators-and-error-states}
+Loading Indicators and Error States {#loading-indicators-and-error-states}
 
 Always provide visual feedback during async operations:
 
@@ -577,9 +577,9 @@ async function handleButtonClick(): Promise<void> {
 }
 ```
 
-## Common Use Cases
+Common Use Cases
 
-### 1. User Authentication State
+1. User Authentication State
 Checking and displaying user login status in the popup:
 
 ```javascript
@@ -594,7 +594,7 @@ async function checkAuthStatus(): Promise<void> {
 }
 ```
 
-### 2. Settings Synchronization
+2. Settings Synchronization
 Syncing settings changes across extension contexts:
 
 ```javascript
@@ -610,7 +610,7 @@ async function updateSetting(key: string, value: unknown): Promise<void> {
 }
 ```
 
-### 3. Tab-Specific Actions
+3. Tab-Specific Actions
 Performing actions on the current active tab:
 
 ```javascript
@@ -623,22 +623,22 @@ async function getActiveTabInfo(): Promise<chrome.tabs.Tab> {
 }
 ```
 
-## Best Practices
+Best Practices
 
-1. **Always handle timeouts**: Network operations and message passing can fail
-2. **Use storage.session for ephemeral state**: Don't rely on in-memory state
-3. **Implement reconnection logic**: Ports can disconnect unexpectedly
-4. **Provide loading states**: Users need feedback during async operations
-5. **Handle errors gracefully**: Show meaningful error messages
-6. **Save state frequently**: Don't wait until popup closes to persist data
-7. **Test edge cases**: Popup can be closed at any time during operations
-8. **Use TypeScript**: Type safety helps catch communication errors
-9. **Document message protocols**: Clear contracts between contexts
-10. **Consider fallback strategies**: If one communication method fails, try alternatives
+1. Always handle timeouts: Network operations and message passing can fail
+2. Use storage.session for ephemeral state: Don't rely on in-memory state
+3. Implement reconnection logic: Ports can disconnect unexpectedly
+4. Provide loading states: Users need feedback during async operations
+5. Handle errors gracefully: Show meaningful error messages
+6. Save state frequently: Don't wait until popup closes to persist data
+7. Test edge cases: Popup can be closed at any time during operations
+8. Use TypeScript: Type safety helps catch communication errors
+9. Document message protocols: Clear contracts between contexts
+10. Consider fallback strategies: If one communication method fails, try alternatives
 
-## Related Patterns
+Related Patterns
 
-## Related {#related}
+Related {#related}
 
 - [Popup State Persistence](./popup-state-persistence.md)
 - [Popup-to-Tab](./popup-to-tab.md)

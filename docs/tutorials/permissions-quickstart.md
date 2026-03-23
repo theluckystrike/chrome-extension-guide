@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Chrome Extension Permissions Quickstart — Developer Guide"
+title: "Chrome Extension Permissions Quickstart. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/permissions-quickstart/"
 ---
 # Permissions Quickstart
 
-## Overview {#overview}
+Overview {#overview}
 `@theluckystrike/webext-permissions` simplifies Chrome's runtime permissions API with human-readable descriptions, batch operations, and proper error handling.
 
-## Install {#install}
+Install {#install}
 npm install @theluckystrike/webext-permissions
 
-## Background: Manifest V3 Permissions {#background-manifest-v3-permissions}
+Background: Manifest V3 Permissions {#background-manifest-v3-permissions}
 Brief explainer on required vs optional permissions in manifest.json. This library helps with optional runtime permissions.
 
 ```json
@@ -22,9 +22,9 @@ Brief explainer on required vs optional permissions in manifest.json. This libra
 }
 ```
 
-## Step 1: Check If a Permission Is Granted {#step-1-check-if-a-permission-is-granted}
+Step 1: Check If a Permission Is Granted {#step-1-check-if-a-permission-is-granted}
 
-### Single — `checkPermission(permission)` {#single-checkpermissionpermission}
+Single. `checkPermission(permission)` {#single-checkpermissionpermission}
 ```ts
 import { checkPermission } from "@theluckystrike/webext-permissions";
 
@@ -34,16 +34,16 @@ const result = await checkPermission("tabs");
 
 Returns `PermissionResult`: `{ permission: string; granted: boolean; description: string }`
 
-### Batch — `checkPermissions(permissions)` {#batch-checkpermissionspermissions}
+Batch. `checkPermissions(permissions)` {#batch-checkpermissionspermissions}
 ```ts
 import { checkPermissions } from "@theluckystrike/webext-permissions";
 
 const results = await checkPermissions(["tabs", "bookmarks", "history"]);
 ```
 
-## Step 2: Request Permissions {#step-2-request-permissions}
+Step 2: Request Permissions {#step-2-request-permissions}
 
-### Single — `requestPermission(permission)` {#single-requestpermissionpermission}
+Single. `requestPermission(permission)` {#single-requestpermissionpermission}
 ```ts
 import { requestPermission } from "@theluckystrike/webext-permissions";
 
@@ -56,7 +56,7 @@ document.getElementById("grant-tabs")?.addEventListener("click", async () => {
 
 Returns `RequestResult`: `{ granted: boolean; error?: string }`
 
-### Batch — `requestPermissions(permissions)` {#batch-requestpermissionspermissions}
+Batch. `requestPermissions(permissions)` {#batch-requestpermissionspermissions}
 ```ts
 import { requestPermissions } from "@theluckystrike/webext-permissions";
 
@@ -65,7 +65,7 @@ const result = await requestPermissions(["tabs", "bookmarks"]);
 
 Chrome shows ONE prompt for all. User declines = `granted: false`.
 
-## Step 3: Remove Permissions {#step-3-remove-permissions}
+Step 3: Remove Permissions {#step-3-remove-permissions}
 
 ```ts
 import { removePermission } from "@theluckystrike/webext-permissions";
@@ -73,7 +73,7 @@ import { removePermission } from "@theluckystrike/webext-permissions";
 const removed = await removePermission("tabs"); // boolean
 ```
 
-## Step 4: List Granted Permissions {#step-4-list-granted-permissions}
+Step 4: List Granted Permissions {#step-4-list-granted-permissions}
 
 ```ts
 import { getGrantedPermissions } from "@theluckystrike/webext-permissions";
@@ -84,9 +84,9 @@ const granted = await getGrantedPermissions();
 
 Uses `chrome.permissions.getAll()` under the hood.
 
-## Step 5: Human-Readable Descriptions {#step-5-human-readable-descriptions}
+Step 5: Human-Readable Descriptions {#step-5-human-readable-descriptions}
 
-### `describePermission(permission)` {#describepermissionpermission}
+`describePermission(permission)` {#describepermissionpermission}
 ```ts
 import { describePermission } from "@theluckystrike/webext-permissions";
 
@@ -95,7 +95,7 @@ describePermission("bookmarks");  // "Read and modify bookmarks"
 describePermission("unknown");    // 'Use the "unknown" API' (fallback)
 ```
 
-### `listPermissions()` {#listpermissions}
+`listPermissions()` {#listpermissions}
 ```ts
 import { listPermissions } from "@theluckystrike/webext-permissions";
 
@@ -103,7 +103,7 @@ const all = listPermissions();
 // PermissionResult[] for all 50+ known Chrome permissions
 ```
 
-### `PERMISSION_DESCRIPTIONS` {#permission-descriptions}
+`PERMISSION_DESCRIPTIONS` {#permission-descriptions}
 ```ts
 import { PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
 
@@ -113,11 +113,11 @@ PERMISSION_DESCRIPTIONS.cookies   // "Read and modify cookies"
 PERMISSION_DESCRIPTIONS.history   // "Read and modify browsing history"
 ```
 
-## Step 6: Complete Example — Permission Manager UI {#step-6-complete-example-permission-manager-ui}
+Step 6: Complete Example. Permission Manager UI {#step-6-complete-example-permission-manager-ui}
 
 Full example: render a list of optional permissions with Grant/Revoke buttons using `checkPermissions`, `requestPermission`, `removePermission`, and `describePermission`.
 
-## API Reference Summary {#api-reference-summary}
+API Reference Summary {#api-reference-summary}
 
 | Function | Returns |
 |----------|---------|
@@ -131,7 +131,7 @@ Full example: render a list of optional permissions with Grant/Revoke buttons us
 | `listPermissions()` | `PermissionResult[]` |
 | `PERMISSION_DESCRIPTIONS` | `Record<string, string>` |
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 - [Storage Quickstart](storage-quickstart.md)
 - [Messaging Quickstart](messaging-quickstart.md)
 -e 

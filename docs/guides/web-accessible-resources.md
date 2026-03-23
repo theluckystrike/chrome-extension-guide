@@ -9,16 +9,16 @@ Web Accessible Resources allow extension resources to be accessible from web pag
 In Manifest V3, declare resources in `manifest.json`:
 ---
 layout: default
-title: "Chrome Extension Web Accessible Resources — How to Share Files with Web Pages"
+title: "Chrome Extension Web Accessible Resources. How to Share Files with Web Pages"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/web-accessible-resources/"
 ---
 
-# Chrome Extension Web Accessible Resources — How to Share Files with Web Pages
+# Chrome Extension Web Accessible Resources. How to Share Files with Web Pages
 
 Web Accessible Resources (WAR) is a critical manifest configuration in Chrome Extensions that determines which extension files can be loaded by web pages. This mechanism bridges the gap between your extension's bundled resources and the broader web ecosystem, enabling powerful use cases while maintaining security boundaries.
 
-## Understanding web_accessible_resources in Manifest V3
+Understanding web_accessible_resources in Manifest V3
 
 The `web_accessible_resources` manifest field declares which files within your extension can be accessed by external web pages. In Manifest V3, this configuration is more structured than ever, requiring explicit declaration of both the resources and the contexts that can access them.
 
@@ -43,16 +43,16 @@ The `web_accessible_resources` manifest field declares which files within your e
 }
 ```
 
-### Manifest V2 Differences
+Manifest V2 Differences
 
 MV2 uses a simpler array format:
 Each entry in the `web_accessible_resources` array contains two key properties: `resources` specifies the file patterns (using glob patterns), and `matches` defines which web pages can access those resources. This granular approach replaces the simpler array format from Manifest V2, giving developers precise control over resource accessibility.
 
-### Key Changes from Manifest V2
+Key Changes from Manifest V2
 
 In Manifest V2, `web_accessible_resources` was a simple array of file paths. Manifest V3 introduces a more sophisticated structure that requires explicit match patterns. This change addresses long-standing security concerns about extensions inadvertently exposing internal resources to malicious websites. When migrating from MV2 to MV3, you must review and update this configuration to ensure your extension continues functioning correctly.
 
-## Using extension:// URLs
+Using extension:// URLs
 
 Once configured, web-accessible resources are accessed through special `extension://` URLs. These URLs follow a predictable pattern that includes your extension's unique ID:
 
@@ -71,7 +71,7 @@ document.body.appendChild(img);
 
 The `chrome.runtime.getURL()` method is the recommended way to generate these URLs, as it automatically handles your extension's ID and ensures correct URL formatting. This method is available in both content scripts and background scripts, making it versatile for various extension components.
 
-## The use_dynamic_url Feature
+The use_dynamic_url Feature
 
 Chrome 120+ introduced the `use_dynamic_url` property, adding another layer of security to web-accessible resources. When enabled, this feature changes the URL format for resources each time the extension updates, preventing websites from hardcoding and relying on specific extension resource URLs.
 
@@ -92,7 +92,7 @@ Chrome 120+ introduced the `use_dynamic_url` property, adding another layer of s
 
 MV2 resources are accessible from any page by default, while MV3 requires explicit `matches` patterns.
 
-## Resource Matching: matches and extension_ids
+Resource Matching: matches and extension_ids
 
 The `matches` array uses URL patterns similar to content scripts:
 
@@ -112,7 +112,7 @@ The `extension_ids` array restricts access to specific extensions:
 }
 ```
 
-## use_dynamic_url for Fingerprinting Protection
+use_dynamic_url for Fingerprinting Protection
 
 The `use_dynamic_url` property generates unique, non-predictable URLs for each resource, preventing fingerprinting:
 
@@ -124,7 +124,7 @@ The `use_dynamic_url` property generates unique, non-predictable URLs for each r
 }
 ```
 
-### How Dynamic URLs Work
+How Dynamic URLs Work
 
 Instead of predictable URLs like:
 ```
@@ -138,7 +138,7 @@ chrome-extension://extension-id/12345678/images/logo.png
 
 This prevents websites from detecting your extension by checking for known resource paths.
 
-## Accessing Resources from Content Scripts
+Accessing Resources from Content Scripts
 
 Content scripts can use `chrome.runtime.getURL()` to build resource URLs:
 
@@ -159,7 +159,7 @@ link.href = styleUrl;
 document.head.appendChild(link);
 ```
 
-## Accessing Resources from Web Pages
+Accessing Resources from Web Pages
 
 Web pages can only access resources if they're declared with matching patterns:
 
@@ -169,11 +169,11 @@ const img = document.createElement('img');
 img.src = 'chrome-extension://EXTENSION_ID/images/logo.png';
 ```
 
-**Note**: Web pages cannot determine your extension ID or access resources without explicit declaration.
+Web pages cannot determine your extension ID or access resources without explicit declaration.
 
-## Dynamic Resource Access Patterns
+Dynamic Resource Access Patterns
 
-### Loading Resources on Demand
+Loading Resources on Demand
 
 ```javascript
 // background.js - Handle dynamic resource requests
@@ -194,7 +194,7 @@ async function getResourceUrl(resourcePath) {
 }
 ```
 
-### Caching Behavior
+Caching Behavior
 
 Resources loaded via `chrome.runtime.getURL()` are cached by the browser:
 
@@ -214,9 +214,9 @@ To force refresh, append a query parameter:
 const url = chrome.runtime.getURL('images/logo.png') + '?v=' + Date.now();
 ```
 
-## Images, Fonts, and Stylesheets as Web Accessible Resources
+Images, Fonts, and Stylesheets as Web Accessible Resources
 
-### Images
+Images
 
 ```json
 {
@@ -231,7 +231,7 @@ img.src = chrome.runtime.getURL('images/extension-logo.png');
 document.body.appendChild(img);
 ```
 
-### Fonts
+Fonts
 
 ```json
 {
@@ -253,34 +253,34 @@ With `use_dynamic_url: true`, the extension URL changes after each update. This 
 
 The dynamic URL follows the pattern: `chrome-extension://<dynamic-id>/path/to/resource`, where the ID changes with each extension update.
 
-## Security Implications
+Security Implications
 
 Exposing extension resources to the web introduces potential security risks that must be carefully considered. Understanding these implications helps you make informed decisions about what to expose and to whom.
 
-### Risks of Over-Exposure
+Risks of Over-Exposure
 
 Declaring `<all_urls>` as the match pattern for sensitive resources can expose internal extension files to any website. This includes:
 - Potentially revealing proprietary code or data
 - Enabling website fingerprinting of your extension
 - Creating vectors for information disclosure attacks
 
-### Best Practices
+Best Practices
 
 Follow these security guidelines when configuring web-accessible resources:
 
-1. **Limit to specific domains**: Instead of `<all_urls>`, use specific domain patterns like `https://trusted-app.com/*` whenever possible.
+1. Limit to specific domains: Instead of `<all_urls>`, use specific domain patterns like `https://trusted-app.com/*` whenever possible.
 
-2. **Restrict file types**: Only expose resources that genuinely need to be accessible. Avoid exposing JavaScript files unless absolutely necessary.
+2. Restrict file types: Only expose resources that genuinely need to be accessible. Avoid exposing JavaScript files unless absolutely necessary.
 
-3. **Validate request origins**: If your resources are accessed dynamically, implement origin checking in your extension logic.
+3. Validate request origins: If your resources are accessed dynamically, implement origin checking in your extension logic.
 
-4. **Consider using chrome.runtime.sendMessage**: For sensitive data, consider message-based communication instead of direct resource access.
+4. Consider using chrome.runtime.sendMessage: For sensitive data, consider message-based communication instead of direct resource access.
 
-## Serving Images and Fonts
+Serving Images and Fonts
 
 One of the most common use cases for web-accessible resources is serving images and fonts to web pages. This enables extensions to enhance web content with custom visual assets.
 
-### Image Serving
+Image Serving
 
 ```javascript
 // In content script - setting custom icons on web pages
@@ -301,7 +301,7 @@ async function getIconAsDataUrl(iconPath) {
 }
 ```
 
-### Font Serving
+Font Serving
 
 ```json
 {
@@ -329,7 +329,7 @@ style.textContent = `
 document.head.appendChild(style);
 ```
 
-### Stylesheets
+Stylesheets
 
 ```json
 {
@@ -345,9 +345,9 @@ link.href = chrome.runtime.getURL('css/injected.css');
 document.head.appendChild(link);
 ```
 
-## Injecting UI Components from Extension Resources
+Injecting UI Components from Extension Resources
 
-### Shadow DOM Injection
+Shadow DOM Injection
 
 ```javascript
 // content.js
@@ -374,7 +374,7 @@ async function injectExtensionUI() {
 }
 ```
 
-### Inline Templates
+Inline Templates
 
 ```html
 <!-- ui/panel.html -->
@@ -400,9 +400,9 @@ async function injectExtensionUI() {
 </template>
 ```
 
-## Using Iframes with Extension Pages in Content Scripts
+Using Iframes with Extension Pages in Content Scripts
 
-### Inline Iframe
+Inline Iframe
 
 ```javascript
 function createExtensionIframe() {
@@ -413,7 +413,7 @@ function createExtensionIframe() {
 }
 ```
 
-### Communication with Iframe
+Communication with Iframe
 
 ```javascript
 // content.js - Sending to iframe
@@ -428,15 +428,15 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-## Security Implications
+Security Implications
 
-### Risks of Exposed Resources
+Risks of Exposed Resources
 
-1. **Information Disclosure**: Sensitive data in resources can be exposed
-2. **Fingerprinting**: Predictable resource URLs enable extension detection
-3. **XSS via Resources**: If user input can influence resource loading
+1. Information Disclosure: Sensitive data in resources can be exposed
+2. Fingerprinting: Predictable resource URLs enable extension detection
+3. XSS via Resources: If user input can influence resource loading
 
-### Mitigation Strategies
+Mitigation Strategies
 
 ```json
 {
@@ -454,16 +454,16 @@ window.addEventListener('message', (event) => {
 }
 ```
 
-### Best Practices
+Best Practices
 
-- **Least Privilege**: Only expose resources that must be accessible
-- **Use Dynamic URLs**: Enable `use_dynamic_url` when fingerprinting protection is needed
-- **Restrict Matches**: Use specific URL patterns instead of `<all_urls>`
-- **Validate Origins**: In content scripts, verify message origins
+- Least Privilege: Only expose resources that must be accessible
+- Use Dynamic URLs: Enable `use_dynamic_url` when fingerprinting protection is needed
+- Restrict Matches: Use specific URL patterns instead of `<all_urls>`
+- Validate Origins: In content scripts, verify message origins
 
-## Extension Fingerprinting Risks and Mitigation
+Extension Fingerprinting Risks and Mitigation
 
-### Fingerprinting Methods
+Fingerprinting Methods
 
 Websites can detect extensions by:
 
@@ -471,7 +471,7 @@ Websites can detect extensions by:
 2. Looking for extension-related DOM elements
 3. Detecting injected iframes or scripts
 
-### Protection with use_dynamic_url
+Protection with use_dynamic_url
 
 ```json
 {
@@ -486,20 +486,20 @@ This makes resource URLs unpredictable and prevents:
 - Cache-based detection
 - Known extension ID detection
 
-## Reference
+Reference
 
 - [Web Accessible Resources - Chrome Extensions](https://developer.chrome.com/docs/extensions/develop/concepts/manifest/web-accessible-resources)
 - [Manifest V3 - web_accessible_resources](https://developer.chrome.com/docs/extensions/mv3/manifest/web_accessible_resources/)
-## Common Use Cases
+Common Use Cases
 
 Web-accessible resources power several important extension functionalities:
 
-- **Content script styling**: Injecting extension-controlled images into web pages
-- **Dynamic theming**: Allowing web applications to use extension-bundled assets
-- **Font enhancements**: Providing custom fonts for web page typography
-- **Data visualization**: Serving chart assets or image sprites to web content
-- **Icon systems**: Exposing icon libraries for consistent visual presentation
+- Content script styling: Injecting extension-controlled images into web pages
+- Dynamic theming: Allowing web applications to use extension-bundled assets
+- Font enhancements: Providing custom fonts for web page typography
+- Data visualization: Serving chart assets or image sprites to web content
+- Icon systems: Exposing icon libraries for consistent visual presentation
 
-## Conclusion
+Conclusion
 
 Web Accessible Resources provide essential functionality for Chrome extensions that need to share assets with web pages. By understanding the Manifest V3 configuration, leveraging `use_dynamic_url` for enhanced security, and following best practices, you can effectively implement resource sharing while minimizing security risks. Always audit your `web_accessible_resources` configuration regularly to ensure it follows the principle of least privilege.

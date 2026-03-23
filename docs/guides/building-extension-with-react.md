@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Building Chrome Extensions with React — Developer Guide"
+title: "Building Chrome Extensions with React. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with React, covering hooks for Chrome APIs, state management, and advanced patterns."
 canonical_url: "https://bestchromeextensions.com/guides/building-extension-with-react/"
 ---
@@ -9,23 +9,23 @@ canonical_url: "https://bestchromeextensions.com/guides/building-extension-with-
 
 Building Chrome extensions with React provides a powerful combination of modern UI development and browser API access. This guide covers advanced React patterns specifically tailored for extension development, including custom hooks for Chrome APIs, cross-context state management, and architecture patterns that scale.
 
-## Understanding Extension Contexts {#understanding-extension-contexts}
+Understanding Extension Contexts {#understanding-extension-contexts}
 
-Chrome extensions run in multiple isolated contexts, each with different capabilities and limitations. Understanding these contexts is crucial for building robust React applications:
+Chrome extensions run in multiple isolated contexts, each with different capabilities and limitations. Understanding these contexts is crucial for building solid React applications:
 
-- **Popup**: Short-lived, terminates when closed
-- **Options Page**: Long-lived, accessible via chrome://extensions
-- **Side Panel**: Persistent, shares lifetime with browser
-- **Content Scripts**: Injected into web pages, isolated from page JavaScript
-- **Background Service Worker**: Event-driven, no DOM access
+- Popup: Short-lived, terminates when closed
+- Options Page: Long-lived, accessible via chrome://extensions
+- Side Panel: Persistent, shares lifetime with browser
+- Content Scripts: Injected into web pages, isolated from page JavaScript
+- Background Service Worker: Event-driven, no DOM access
 
 Each context requires its own React root, but they can share state through chrome.storage and message passing.
 
-## Custom Hooks for Chrome APIs {#custom-hooks-for-chrome-apis}
+Custom Hooks for Chrome APIs {#custom-hooks-for-chrome-apis}
 
 Creating reusable hooks for Chrome APIs is essential for clean, maintainable extension code. Here are the essential hooks every React extension developer should implement:
 
-### useChromeStorage Hook
+useChromeStorage Hook
 
 The storage API is the backbone of extension state persistence. Create a typed hook that handles both sync and local storage:
 
@@ -111,9 +111,9 @@ export function useChromeStorage<T>({
 }
 ```
 
-### useChromeMessages Hook
+useChromeMessages Hook
 
-Communication between extension contexts requires a robust message passing system. This hook provides a clean React-friendly interface:
+Communication between extension contexts requires a solid message passing system. This hook provides a clean React-friendly interface:
 
 ```typescript
 // hooks/useChromeMessages.ts
@@ -198,7 +198,7 @@ export function useChromeMessages({
 }
 ```
 
-### useChromeTabs Hook
+useChromeTabs Hook
 
 Managing browser tabs is a common requirement. This hook provides reactive tab state:
 
@@ -311,9 +311,9 @@ export function useChromeTabs(options: UseChromeTabsOptions = {}) {
 }
 ```
 
-## State Management Patterns {#state-management-patterns}
+State Management Patterns {#state-management-patterns}
 
-### Zustand for Extension State
+Zustand for Extension State
 
 Zustand is ideal for extensions because it doesn't require context providers and works across different extension contexts:
 
@@ -394,7 +394,7 @@ export const useExtensionStore = create<ExtensionState>()(
 );
 ```
 
-### Cross-Context State Synchronization
+Cross-Context State Synchronization
 
 Synchronize state between popup, options page, and background using a broadcast channel pattern:
 
@@ -446,42 +446,42 @@ export const useSyncStore = create<SyncStore>((set, get) => {
 });
 ```
 
-## Extension Architecture Patterns {#extension-architecture-patterns}
+Extension Architecture Patterns {#extension-architecture-patterns}
 
-### Feature-Based Directory Structure
+Feature-Based Directory Structure
 
 Organize your extension by feature rather than by file type:
 
 ```
 src/
-├── features/
-│   ├── bookmarking/
-│   │   ├── components/
-│   │   │   ├── BookmarkButton.tsx
-│   │   │   └── BookmarkList.tsx
-│   │   ├── hooks/
-│   │   │   └── useBookmarks.ts
-│   │   ├── store/
-│   │   │   └── bookmarkStore.ts
-│   │   └── index.ts
-│   ├── note-taking/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── store/
-│   │   └── index.ts
-│   └── settings/
-├── shared/
-│   ├── components/
-│   ├── hooks/
-│   └── utils/
-├── popup/
-├── options/
-├── sidepanel/
-├── background/
-└── content/
+ features/
+    bookmarking/
+       components/
+          BookmarkButton.tsx
+          BookmarkList.tsx
+       hooks/
+          useBookmarks.ts
+       store/
+          bookmarkStore.ts
+       index.ts
+    note-taking/
+       components/
+       hooks/
+       store/
+       index.ts
+    settings/
+ shared/
+    components/
+    hooks/
+    utils/
+ popup/
+ options/
+ sidepanel/
+ background/
+ content/
 ```
 
-### Background-Initiated UI Updates
+Background-Initiated UI Updates
 
 For features that require the background script to drive UI updates:
 
@@ -534,7 +534,7 @@ class ExtensionStateManager {
 }
 ```
 
-## Content Script React Integration {#content-script-react-integration}
+Content Script React Integration {#content-script-react-integration}
 
 Injecting React into web pages requires special handling:
 
@@ -592,9 +592,9 @@ if (!document.getElementById('extension-root')) {
 }
 ```
 
-## Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
-### Memoization Strategies
+Memoization Strategies
 
 React extensions face unique performance challenges due to multiple contexts and communication overhead:
 
@@ -640,7 +640,7 @@ export function useDebouncedStorage<T>(
 }
 ```
 
-### Lazy Loading Extension Features
+Lazy Loading Extension Features
 
 Reduce initial load time by lazy loading features:
 
@@ -676,7 +676,7 @@ function FeatureLoader() {
 }
 ```
 
-## Related Guides {#related-guides}
+Related Guides {#related-guides}
 
 - [React Setup Guide](./chrome-extension-react-setup.md)
 - [Content Script Frameworks](./content-script-frameworks.md)

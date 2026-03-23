@@ -17,51 +17,51 @@ In this comprehensive tutorial, we will build a fully functional URL shortener C
 
 ---
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before we begin building our URL shortener extension, make sure you have the following:
 
-1. **Google Chrome Browser** - The extension will be built for Chrome, though it can be easily adapted for other browsers.
-2. **A Bitly Account** - You will need a Bitly account to generate an API access token. Bitly offers a free tier that allows you to shorten a limited number of links per month.
-3. **A Code Editor** - We recommend using Visual Studio Code, Sublime Text, or any editor you prefer.
-4. **Basic Knowledge of HTML, CSS, and JavaScript** - This tutorial assumes you are familiar with web development fundamentals.
+1. Google Chrome Browser - The extension will be built for Chrome, though it can be easily adapted for other browsers.
+2. A Bitly Account - You will need a Bitly account to generate an API access token. Bitly offers a free tier that allows you to shorten a limited number of links per month.
+3. A Code Editor - We recommend using Visual Studio Code, Sublime Text, or any editor you prefer.
+4. Basic Knowledge of HTML, CSS, and JavaScript - This tutorial assumes you are familiar with web development fundamentals.
 
 ---
 
-## Understanding the Architecture {#understanding-architecture}
+Understanding the Architecture {#understanding-architecture}
 
-Our Chrome extension will consist of several key components that work together to provide a seamless URL shortening experience:
+Our Chrome extension will consist of several key components that work together to provide a smooth URL shortening experience:
 
-- **manifest.json** - The configuration file that defines our extension's properties, permissions, and components.
-- **popup.html** - The user interface that appears when clicking the extension icon.
-- **popup.js** - The JavaScript logic that handles user interactions and API calls.
-- **popup.css** - Styling to make our extension look professional and user-friendly.
-- **background.js** - A service worker that can handle long-running tasks and events.
+- manifest.json - The configuration file that defines our extension's properties, permissions, and components.
+- popup.html - The user interface that appears when clicking the extension icon.
+- popup.js - The JavaScript logic that handles user interactions and API calls.
+- popup.css - Styling to make our extension look professional and user-friendly.
+- background.js - A service worker that can handle long-running tasks and events.
 
 We will use the Bitly API v4 to shorten URLs. The API requires an access token for authentication, which you can obtain from your Bitly account settings.
 
 ---
 
-## Step 1: Setting Up the Project Structure {#step-1-setup}
+Step 1: Setting Up the Project Structure {#step-1-setup}
 
 Create a new folder for your extension project. Inside this folder, create the following file structure:
 
 ```
 url-shortener-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-├── icon.png
-└── README.md
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ background.js
+ icon.png
+ README.md
 ```
 
 The icon.png file should be a 128x128 pixel image that represents your extension. You can use any image editing tool to create a simple icon, or download a placeholder from icon finder websites.
 
 ---
 
-## Step 2: Creating the Manifest File {#step-2-manifest}
+Step 2: Creating the Manifest File {#step-2-manifest}
 
 The manifest.json file is the foundation of every Chrome extension. It tells Chrome about your extension's name, version, permissions, and the files that comprise it. For our URL shortener, we will use Manifest V3, which is the latest version of the Chrome extension platform.
 
@@ -102,15 +102,15 @@ Create a file named manifest.json and add the following content:
 
 Let us break down the key components of this manifest:
 
-- **manifest_version**: We are using version 3, which is the current standard for Chrome extensions.
-- **permissions**: We request access to the active tab (to get the current URL), clipboard writing (to copy shortened links), and storage (to save user preferences and history).
-- **host_permissions**: We specifically allow access to the Bitly API domain.
-- **action**: This defines what happens when the user clicks the extension icon - in our case, it opens the popup.
-- **background**: We include a service worker for handling background tasks.
+- manifest_version: We are using version 3, which is the current standard for Chrome extensions.
+- permissions: We request access to the active tab (to get the current URL), clipboard writing (to copy shortened links), and storage (to save user preferences and history).
+- host_permissions: We specifically allow access to the Bitly API domain.
+- action: This defines what happens when the user clicks the extension icon - in our case, it opens the popup.
+- background: We include a service worker for handling background tasks.
 
 ---
 
-## Step 3: Building the Popup UI {#step-3-popup-ui}
+Step 3: Building the Popup UI {#step-3-popup-ui}
 
 The popup is the interface users interact with when they click our extension icon. It should be clean, intuitive, and provide all the functionality users need in a single view.
 
@@ -128,7 +128,7 @@ Create popup.html and add the following:
 <body>
   <div class="container">
     <header>
-      <h1>🔗 URL Shortener</h1>
+      <h1> URL Shortener</h1>
     </header>
     
     <main>
@@ -143,7 +143,7 @@ Create popup.html and add the following:
         <label>Shortened URL:</label>
         <div class="url-display">
           <input type="text" id="shortened-url" readonly>
-          <button id="copy-btn" class="icon-btn" title="Copy to clipboard">📋</button>
+          <button id="copy-btn" class="icon-btn" title="Copy to clipboard"></button>
         </div>
       </div>
       
@@ -180,7 +180,7 @@ This HTML structure provides:
 
 ---
 
-## Step 4: Styling the Extension {#step-4-styling}
+Step 4: Styling the Extension {#step-4-styling}
 
 Now let us add some CSS to make our extension look professional. Create popup.css:
 
@@ -400,7 +400,7 @@ This CSS provides a clean, modern design with:
 
 ---
 
-## Step 5: Implementing the JavaScript Logic {#step-5-javascript}
+Step 5: Implementing the JavaScript Logic {#step-5-javascript}
 
 Now comes the core functionality. Create popup.js:
 
@@ -494,9 +494,9 @@ copyBtn.addEventListener('click', async () => {
   const url = shortenedUrlInput.value;
   try {
     await navigator.clipboard.writeText(url);
-    copyBtn.textContent = '✓';
+    copyBtn.textContent = '';
     setTimeout(() => {
-      copyBtn.textContent = '📋';
+      copyBtn.textContent = '';
     }, 2000);
   } catch (error) {
     showError('Failed to copy to clipboard');
@@ -614,16 +614,16 @@ function hideResult() {
 
 This JavaScript handles:
 
-1. **Initialization** - Loading saved API token and getting the current tab URL
-2. **API Token Management** - Saving and retrieving the Bitly API token from Chrome storage
-3. **URL Shortening** - Making API calls to Bitly and handling responses
-4. **Clipboard Operations** - Copying shortened URLs to the clipboard
-5. **History Management** - Saving shortened URLs to local storage for reference
-6. **Error Handling** - Displaying user-friendly error messages
+1. Initialization - Loading saved API token and getting the current tab URL
+2. API Token Management - Saving and retrieving the Bitly API token from Chrome storage
+3. URL Shortening - Making API calls to Bitly and handling responses
+4. Clipboard Operations - Copying shortened URLs to the clipboard
+5. History Management - Saving shortened URLs to local storage for reference
+6. Error Handling - Displaying user-friendly error messages
 
 ---
 
-## Step 6: Creating the Background Service Worker {#step-6-background}
+Step 6: Creating the Background Service Worker {#step-6-background}
 
 While our popup handles most of the functionality, adding a background service worker allows for additional capabilities like keyboard shortcuts and context menus.
 
@@ -706,19 +706,19 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 ---
 
-## Step 7: Testing Your Extension {#step-7-testing}
+Step 7: Testing Your Extension {#step-7-testing}
 
 Now that we have created all the files, it is time to test our extension:
 
-1. **Open Chrome** and navigate to `chrome://extensions/`
-2. Enable **Developer mode** in the top right corner
-3. Click **Load unpacked** and select your extension folder
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable Developer mode in the top right corner
+3. Click Load unpacked and select your extension folder
 4. The extension icon should appear in your Chrome toolbar
 5. Click the icon to open the popup
 6. Enter a Bitly API token (see below for how to get one)
 7. Click "Shorten URL" to test the functionality
 
-### Getting a Bitly API Token
+Getting a Bitly API Token
 
 To use the extension, you need a Bitly API token:
 
@@ -729,21 +729,21 @@ To use the extension, you need a Bitly API token:
 
 ---
 
-## Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
+Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store:
 
-1. **Prepare your extension**:
+1. Prepare your extension:
    - Create a 128x128 pixel icon
    - Write a detailed description
    - Take screenshots of your extension in action
    - Create a promotional tile image (440x280 pixels)
 
-2. **Zip your extension**:
+2. Zip your extension:
    - Select all files in your extension folder
    - Create a ZIP file (do not include the parent folder)
 
-3. **Submit to Chrome Web Store**:
+3. Submit to Chrome Web Store:
    - Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/developer/dashboard)
    - Create a developer account (one-time $5 fee)
    - Click "Add new item" and upload your ZIP file
@@ -754,51 +754,51 @@ The review process typically takes a few hours to a few days. Once approved, you
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 Once you have the basic URL shortener working, here are some enhancements you can add:
 
-### 1. Multiple Shortener Services
+1. Multiple Shortener Services
 Integrate with other URL shortening services like TinyURL, Rebrandly, or custom self-hosted solutions. This provides redundancy and flexibility.
 
-### 2. Link History Dashboard
+2. Link History Dashboard
 Create a more comprehensive history view that shows all previously shortened URLs, their click counts (if using Bitly's analytics), and allows for easy management.
 
-### 3. Bulk URL Shortening
+3. Bulk URL Shortening
 Add functionality to shorten multiple URLs at once, useful for social media managers who need to shorten several links for a campaign.
 
-### 4. Custom Short Domains
+4. Custom Short Domains
 Allow users to connect their own custom short domains for branded, professional-looking shortened URLs.
 
-### 5. QR Code Generation
+5. QR Code Generation
 Add the ability to generate QR codes for shortened URLs, useful for offline marketing materials.
 
 ---
 
-## Troubleshooting Common Issues {#troubleshooting}
+Troubleshooting Common Issues {#troubleshooting}
 
-### API Token Not Working
+API Token Not Working
 - Ensure you are using the correct token format (Bearer token)
 - Check that your Bitly account is active
 - Verify the token has not expired
 
-### CORS Errors
+CORS Errors
 - Manifest V3 handles CORS differently than V2
 - Ensure you have the correct host_permissions in manifest.json
 - Use the fetch API within the extension context
 
-### Clipboard Not Working
+Clipboard Not Working
 - Some Chrome versions require explicit permissions
 - Ensure clipboardWrite is in your manifest permissions
 
-### Extension Not Loading
+Extension Not Loading
 - Check for syntax errors in JSON files
 - Ensure all file paths in manifest.json are correct
 - Look for errors in the Chrome extensions page
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional URL shortener Chrome extension with Bitly API integration. This extension demonstrates key concepts in Chrome extension development including:
 

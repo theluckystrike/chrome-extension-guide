@@ -17,23 +17,23 @@ This extension will not only display Core Web Vitals but also provide actionable
 
 ---
 
-## Understanding Page Speed Metrics and Core Web Vitals {#understanding-page-speed-metrics}
+Understanding Page Speed Metrics and Core Web Vitals {#understanding-page-speed-metrics}
 
 Before diving into the code, it is essential to understand the metrics we will be measuring and why they matter. Google has established a set of user-centric metrics called Core Web Vitals that measure real-world user experience for loading performance, interactivity, and visual stability.
 
-### The Three Core Web Vitals
+The Three Core Web Vitals
 
-**Largest Contentful Paint (LCP)** measures loading performance. Specifically, it marks the time at which the largest text or image element becomes visible within the viewport. To provide a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading. Pages with an LCP of 2.5 seconds or less are considered to have good performance.
+Largest Contentful Paint (LCP) measures loading performance. Specifically, it marks the time at which the largest text or image element becomes visible within the viewport. To provide a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading. Pages with an LCP of 2.5 seconds or less are considered to have good performance.
 
-**First Input Delay (FID)** measures interactivity. It records the time from when a user first interacts with a page (clicking a link, tapping a button) to the time when the browser is actually able to begin processing event handlers in response to that interaction. Pages should have an FID of 100 milliseconds or less to ensure good interactivity.
+First Input Delay (FID) measures interactivity. It records the time from when a user first interacts with a page (clicking a link, tapping a button) to the time when the browser is actually able to begin processing event handlers in response to that interaction. Pages should have an FID of 100 milliseconds or less to ensure good interactivity.
 
-**Cumulative Layout Shift (CLS)** measures visual stability. It quantifies how much the page's content shifts unexpectedly during the loading phase. Pages should maintain a CLS of 0.1 or less to provide a good user experience. Unexpected layout shifts frustrate users and can lead to accidental clicks, particularly on mobile devices.
+Cumulative Layout Shift (CLS) measures visual stability. It quantifies how much the page's content shifts unexpectedly during the loading phase. Pages should maintain a CLS of 0.1 or less to provide a good user experience. Unexpected layout shifts frustrate users and can lead to accidental clicks, particularly on mobile devices.
 
 Beyond Core Web Vitals, our extension will also track additional performance metrics such as First Contentful Paint (FCP), Time to First Byte (TTFB), and Total Blocking Time (TBT). These metrics provide a comprehensive view of page performance and help identify specific bottlenecks.
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a manifest file that describes its configuration, permissions, and components. Let us start by setting up our project structure with the necessary files.
 
@@ -68,7 +68,7 @@ This manifest uses Manifest V3, the latest version of the Chrome extension platf
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It should display the performance metrics in a clear, organized, and visually appealing format. Let us create an intuitive user interface that presents complex data in an easy-to-understand way.
 
@@ -152,7 +152,7 @@ The popup interface is designed with a clean card-based layout that displays eac
 
 ---
 
-## Styling the Extension {#styling}
+Styling the Extension {#styling}
 
 The CSS file styles the popup to create a modern, professional appearance. We use a clean design with color-coded performance indicators that change based on whether metrics meet Google's recommended thresholds.
 
@@ -329,7 +329,7 @@ The styling uses a purple gradient theme that gives the extension a modern, dist
 
 ---
 
-## Implementing the Performance Analysis Logic {#analysis-logic}
+Implementing the Performance Analysis Logic {#analysis-logic}
 
 The JavaScript files handle the core functionality. The popup script manages user interactions and displays results, while the content script runs on the target page to collect performance data. This separation of concerns keeps the code modular and maintainable.
 
@@ -602,7 +602,7 @@ The Performance Observer APIs are particularly powerful because they allow us to
 
 ---
 
-## Testing and Debugging Your Extension {#testing-debugging}
+Testing and Debugging Your Extension {#testing-debugging}
 
 Before deploying your extension, thorough testing is essential to ensure it works correctly across different pages and scenarios. Chrome provides developer tools that make testing and debugging extensions straightforward.
 
@@ -614,7 +614,7 @@ Pay attention to edge cases such as pages that fail to load, pages with very lon
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic extension working, consider adding advanced features to make it more powerful and useful. One valuable addition would be historical tracking, storing previous analysis results to compare performance over time.
 
@@ -626,7 +626,7 @@ You might also consider adding support for auditing specific resources. The Perf
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a page speed analyzer Chrome extension is an excellent project that combines practical utility with valuable learning opportunities. Throughout this guide, you have learned how to set up a Chrome extension project, create an intuitive user interface, implement performance measurement using the browser's Performance API, and present the results in a clear, actionable format.
 

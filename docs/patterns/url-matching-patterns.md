@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Url Matching Patterns — Best Practices"
+title: "Chrome Extension Url Matching Patterns. Best Practices"
 description: "Match URLs with patterns for content script injection."
 canonical_url: "https://bestchromeextensions.com/patterns/url-matching-patterns/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/url-matching-patterns/
 
 URL matching patterns in Chrome extensions define which URLs an extension can access or interact with. Understanding these patterns is essential for configuring permissions, content scripts, and network request rules.
 
-## Syntax Overview {#syntax-overview}
+Syntax Overview {#syntax-overview}
 
 Match patterns follow the scheme: `<scheme>://<host>/<path>`
 
@@ -17,7 +17,7 @@ Match patterns follow the scheme: `<scheme>://<host>/<path>`
 <scheme>://<host><path>
 ```
 
-## Scheme Options {#scheme-options}
+Scheme Options {#scheme-options}
 
 | Scheme | Description |
 |--------|-------------|
@@ -27,7 +27,7 @@ Match patterns follow the scheme: `<scheme>://<host>/<path>`
 | `ftp` | FTP URLs |
 | `file` | Local file URLs |
 
-## Host Patterns {#host-patterns}
+Host Patterns {#host-patterns}
 
 | Pattern | Example | Description |
 |---------|---------|-------------|
@@ -36,7 +36,7 @@ Match patterns follow the scheme: `<scheme>://<host>/<path>`
 | All hosts | `*` or `*.` | Matches any host |
 | No host | `file://` | Matches local files |
 
-## Path Patterns {#path-patterns}
+Path Patterns {#path-patterns}
 
 | Pattern | Example | Description |
 |---------|---------|-------------|
@@ -45,9 +45,9 @@ Match patterns follow the scheme: `<scheme>://<host>/<path>`
 | All paths | `/*` | Matches any path |
 | No path | (empty) | Matches all paths |
 
-## Special Patterns {#special-patterns}
+Special Patterns {#special-patterns}
 
-### &lt;all_urls&gt; {#ltall-urlsgt}
+&lt;all_urls&gt; {#ltall-urlsgt}
 
 The special pattern `<all_urls>` matches all URLs. Use sparingly due to security implications.
 
@@ -57,14 +57,14 @@ The special pattern `<all_urls>` matches all URLs. Use sparingly due to security
 
 Equivalent to: `*://*/*`
 
-## Where Match Patterns Are Used {#where-match-patterns-are-used}
+Where Match Patterns Are Used {#where-match-patterns-are-used}
 
-- **`content_scripts`** matches / exclude_matches - Inject scripts on specific pages
-- **`host_permissions`** - Access to network requests and page content
-- **`web_accessible_resources`** - Make extension resources accessible to web pages
-- **`declarativeNetRequest`** - Block or modify network requests
+- `content_scripts` matches / exclude_matches - Inject scripts on specific pages
+- `host_permissions` - Access to network requests and page content
+- `web_accessible_resources` - Make extension resources accessible to web pages
+- `declarativeNetRequest` - Block or modify network requests
 
-## Glob Patterns in Content Scripts {#glob-patterns-in-content-scripts}
+Glob Patterns in Content Scripts {#glob-patterns-in-content-scripts}
 
 Content scripts support additional glob patterns via `include_globs` and `exclude_globs`:
 
@@ -78,7 +78,7 @@ Content scripts support additional glob patterns via `include_globs` and `exclud
 }
 ```
 
-### Match Patterns vs Glob Patterns {#match-patterns-vs-glob-patterns}
+Match Patterns vs Glob Patterns {#match-patterns-vs-glob-patterns}
 
 | Feature | Match Patterns | Glob Patterns |
 |---------|-----------------|---------------|
@@ -86,30 +86,30 @@ Content scripts support additional glob patterns via `include_globs` and `exclud
 | Location | `matches`, `exclude_matches` | `include_globs`, `exclude_globs` |
 | Wildcard position | Only at start of host | Anywhere in path |
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### All HTTPS Sites {#all-https-sites}
+All HTTPS Sites {#all-https-sites}
 ```
 https://*/*
 ```
 
-### Specific Domain and All Subdomains {#specific-domain-and-all-subdomains}
+Specific Domain and All Subdomains {#specific-domain-and-all-subdomains}
 ```
 *://*.example.com/*
 ```
 
-### Specific Path {#specific-path}
+Specific Path {#specific-path}
 ```
 https://example.com/dashboard/*
 ```
 
-### Multiple Specific Domains {#multiple-specific-domains}
+Multiple Specific Domains {#multiple-specific-domains}
 ```
 *://example.com/*
 *://api.example.com/*
 ```
 
-## The URLPattern API (Modern Alternative) {#the-urlpattern-api-modern-alternative}
+The URLPattern API (Modern Alternative) {#the-urlpattern-api-modern-alternative}
 
 Chrome 100+ provides a newer programmatic API:
 
@@ -125,23 +125,23 @@ if (pattern.test('https://api.example.com/api/users')) {
 }
 ```
 
-## Security Implications {#security-implications}
+Security Implications {#security-implications}
 
-**Always request minimum necessary permissions.**
+Always request minimum necessary permissions.
 
 - Avoid `<all_urls>` when possible
 - Use specific domains instead of wildcards
 - Consider using declarativeNetRequest for network control instead of host permissions
 - Test patterns thoroughly before distribution
 
-## Common Mistakes {#common-mistakes}
+Common Mistakes {#common-mistakes}
 
-1. **Missing scheme**: Using `example.com/*` instead of `https://example.com/*`
-2. **Missing path**: Not including `/*` at the end
-3. **Overly broad patterns**: Using `*://*/*` when only `https://example.com/*` is needed
-4. **Confusing glob and match patterns**: Using glob syntax in `matches` field
+1. Missing scheme: Using `example.com/*` instead of `https://example.com/*`
+2. Missing path: Not including `/*` at the end
+3. Overly broad patterns: Using `*://*/*` when only `https://example.com/*` is needed
+4. Confusing glob and match patterns: Using glob syntax in `matches` field
 
-## Testing Patterns Programmatically {#testing-patterns-programmatically}
+Testing Patterns Programmatically {#testing-patterns-programmatically}
 
 ```javascript
 // Test if a URL matches a pattern
@@ -161,7 +161,7 @@ testMatchPattern('https://api.example.com/users', 'https://*.example.com/*');
 // true
 ```
 
-## Related Documentation {#related-documentation}
+Related Documentation {#related-documentation}
 
 - [Permissions Model](../guides/permissions-model.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

@@ -2,7 +2,7 @@
 layout: default
 title: "Service Workers in Chrome Extensions: A Deep Dive"
 description: "Master Chrome Extension service workers: lifecycle, event-driven architecture, state management, keeping workers alive, alarm patterns, updates, and debugging."
-canonical_url: "https://bestchromeextensions.com/tutorials/service-workers-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/tutorials/service-workers-deep detailed look/"
 ---
 
 # Service Workers in Chrome Extensions: A Deep Dive
@@ -11,29 +11,29 @@ Service workers are the backbone of Chrome Extensions in Manifest V3. They serve
 
 This guide covers everything from the fundamental lifecycle phases to advanced patterns for keeping your service worker alive, handling updates, and debugging effectively.
 
-## 1. Service Worker Lifecycle {#1-service-worker-lifecycle}
+1. Service Worker Lifecycle {#1-service-worker-lifecycle}
 
 Unlike traditional web service workers, extension service workers have a more predictable lifecycle but still require careful management. Understanding each phase is critical for writing reliable extension code.
 
-### Lifecycle Phase Diagram
+Lifecycle Phase Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        SERVICE WORKER LIFECYCLE                            │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
-  │  FETCH   │───▶│  INSTALL  │───▶│ ACTIVATE │───▶│  IDLE    │───▶│TERMINATE │
-  │  (load)  │    │          │    │          │    │  (wait)  │    │ (sleep)  │
-  └──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
-       │              │               │               │               │
-       │              ▼               ▼               ▼               │
-       │        ┌──────────┐   ┌──────────┐   ┌──────────┐          │
-       │        │  Event   │   │  Event   │   │  Event   │          │
-       └───────▶│ Waiting  │   │  Waiting │   │  Waiting │◀─────────┘
-                └──────────┘   └──────────┘   └──────────┘
+                        SERVICE WORKER LIFECYCLE                            
+
+
+                  
+    FETCH     INSTALL   ACTIVATE   IDLE    TERMINATE 
+    (load)                                    (wait)       (sleep)  
+                  
+                                                                  
+                                                                  
+                               
+                 Event        Event        Event             
+        Waiting       Waiting      Waiting 
+                      
                                        
-   ═══════════════════════════════════════════════════════════════════════
+   
    
    INSTALL:    Cache assets, initialize DB, setup global state
    ACTIVATE:   Clean old data, migrate schemas, claim tabs
@@ -42,7 +42,7 @@ Unlike traditional web service workers, extension service workers have a more pr
    WAITING:    Event arrived, waking up (or already running)
 ```
 
-### 1.1 Installation Phase {#1-1-installation-phase}
+1.1 Installation Phase {#1-1-installation-phase}
 
 The installation phase occurs when the extension is first installed or the service worker file changes. This is your opportunity to prepare the environment.
 
@@ -98,7 +98,7 @@ async function handleUpdate(previousVersion) {
 }
 ```
 
-### 1.2 Activation Phase {#1-2-activation-phase}
+1.2 Activation Phase {#1-2-activation-phase}
 
 The activation phase runs after installation completes. Use this phase to clean up data from previous versions and prepare the extension for use.
 
@@ -131,54 +131,54 @@ async function cleanupOldData() {
 }
 ```
 
-### 1.3 Idle and Termination {#1-3-idle-and-termination}
+1.3 Idle and Termination {#1-3-idle-and-termination}
 
-This is the most critical aspect of extension service workers to understand. Chrome terminates idle service workers to conserve memory, and you cannot prevent this behavior—you can only respond to it.
+This is the most critical aspect of extension service workers to understand. Chrome terminates idle service workers to conserve memory, and you cannot prevent this behavior, you can only respond to it.
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    IDLE & TERMINATION FLOW                      │
-└─────────────────────────────────────────────────────────────────┘
+
+                    IDLE & TERMINATION FLOW                      
+
 
   Service Worker Running
-          │
-          ▼ (No events for ~30 seconds)
-  ┌──────────────────┐
-  │      IDLE        │◀─────────────────────────────────────┐
-  │  (waiting state)  │                                      │
-  └──────────────────┘                                      │
-          │                                                 │
-          │ (Still no events after ~30 more seconds)       │
-          ▼                                                 │
-  ┌──────────────────┐                                      │
-  │   TERMINATED     │                                      │
-  │ (memory freed)   │───── Event Arrives ──────────────────┘
-  │                  │              │
-  │  All variables   │              ▼
-  │  are destroyed   │      ┌──────────────────┐
-  │                  │      │   RESTART/RELOAD │
-  └──────────────────┘      │ (fresh instance) │
-                            └──────────────────┘
+          
+           (No events for ~30 seconds)
+  
+        IDLE        
+    (waiting state)                                        
+                                        
+                                                           
+           (Still no events after ~30 more seconds)       
+                                                           
+                                        
+     TERMINATED                                           
+   (memory freed)    Event Arrives 
+                                  
+    All variables                 
+    are destroyed         
+                             RESTART/RELOAD 
+         (fresh instance) 
+                            
 ```
 
 Key points about termination:
-- **No guarantees**: Chrome can terminate your service worker at any time after ~30 seconds of inactivity
-- **Ephemeral state**: All in-memory variables are lost on termination
-- **Event-driven wake**: The service worker starts fresh when an event arrives
-- **No control**: You cannot prevent termination, only respond to it
+- No guarantees: Chrome can terminate your service worker at any time after ~30 seconds of inactivity
+- Ephemeral state: All in-memory variables are lost on termination
+- Event-driven wake: The service worker starts fresh when an event arrives
+- No control: You cannot prevent termination, only respond to it
 
-## 2. Event-Driven Architecture {#2-event-driven-architecture}
+2. Event-Driven Architecture {#2-event-driven-architecture}
 
 Chrome extensions are fundamentally event-driven. Your service worker responds to events from Chrome APIs, other extension components, and web pages. Understanding this architecture is essential for writing correct extension code.
 
-### 2.1 Event Types and Handlers {#2-1-event-types-and-handlers}
+2.1 Event Types and Handlers {#2-1-event-types-and-handlers}
 
 ```javascript
 // background.js
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // CHROME API EVENTS
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Extension lifecycle events
 chrome.runtime.onInstalled.addListener((details) => { /* ... */ });
@@ -208,9 +208,9 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => { /* ... */ 
 // Storage changes
 chrome.storage.onChanged.addListener((changes, areaName) => { /* ... */ });
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // EXTENSION SPECIFIC EVENTS
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Context menu clicks
 chrome.contextMenus.onClicked.addListener((info, tab) => { /* ... */ });
@@ -221,9 +221,9 @@ chrome.commands.onCommand.addListener((command) => { /* ... */ });
 // Badge updates (click events on extension icon)
 chrome.action.onClicked.addListener((tab) => { /* ... */ });
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // WEB REQUEST / DECLARATIVE NET REQUEST
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // For network interception (use declarativeNetRequest in MV3)
 chrome.webRequest.onBeforeRequest.addListener(
@@ -237,19 +237,19 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((e) => {
 });
 ```
 
-### 2.2 Proper Event Handler Registration {#2-2-proper-event-handler-registration}
+2.2 Proper Event Handler Registration {#2-2-proper-event-handler-registration}
 
 Event handlers must be registered at the top level of your service worker file, not inside functions. Chrome scans the file at load time to determine which events to listen for.
 
 ```javascript
-// ✅ CORRECT: Top-level event registration
+//  CORRECT: Top-level event registration
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url?.includes('example.com')) {
     console.log('Page loaded:', tab.url);
   }
 });
 
-// ❌ WRONG: Registering inside a function won't work reliably
+//  WRONG: Registering inside a function won't work reliably
 function setupTabListener() {
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     // This may not work if the SW was terminated
@@ -257,7 +257,7 @@ function setupTabListener() {
 }
 ```
 
-### 2.3 Async Event Handling {#2-3-async-event-handling}
+2.3 Async Event Handling {#2-3-async-event-handling}
 
 When handling events asynchronously, use `event.waitUntil()` to prevent the service worker from terminating before your async work completes.
 
@@ -290,65 +290,65 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## 3. Persistent vs Ephemeral State {#3-persistent-vs-ephemeral-state}
+3. Persistent vs Ephemeral State {#3-persistent-vs-ephemeral-state}
 
 Understanding the difference between persistent (storage) and ephemeral (memory) state is crucial for building reliable extensions.
 
-### 3.1 State Comparison
+3.1 State Comparison
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    STATE MANAGEMENT IN EXTENSIONS                           │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-  ┌─────────────────────┐         ┌─────────────────────┐
-  │    EPHEMERAL        │         │    PERSISTENT       │
-  │    (In-Memory)      │         │    (Storage)        │
-  ├─────────────────────┤         ├─────────────────────┤
-  │ • Global variables  │         │ • chrome.storage   │
-  │ • Class instances    │         │ • IndexedDB        │
-  │ • Cached data        │         │ • chrome.cookies   │
-  │ • Open connections   │         │ • Cache API        │
-  └─────────────────────┘         └─────────────────────┘
-              │                               │
-              │      TERMINATION              │
-              └───────────────┬───────────────┘
-                              │
-                              ▼
-              ┌───────────────────────────────────────┐
-              │         ALL EPHEMERAL STATE           │
-              │            IS DESTROYED               │
-              │                                       │
-              │   let cachedData = getData();         │
-              │   // After termination:               │
-              │   // cachedData = undefined 💀         │
-              └───────────────────────────────────────┘
+                    STATE MANAGEMENT IN EXTENSIONS                           
+
+
+           
+      EPHEMERAL                     PERSISTENT       
+      (In-Memory)                   (Storage)        
+           
+   • Global variables            • chrome.storage   
+   • Class instances              • IndexedDB        
+   • Cached data                  • chrome.cookies   
+   • Open connections             • Cache API        
+           
+                                             
+                    TERMINATION              
+              
+                              
+                              
+              
+                       ALL EPHEMERAL STATE           
+                          IS DESTROYED               
+                                                     
+                 let cachedData = getData();         
+                 // After termination:               
+                 // cachedData = undefined          
+              
 ```
 
-### 3.2 Safe State Management Pattern {#3-2-safe-state-management-pattern}
+3.2 Safe State Management Pattern {#3-2-safe-state-management-pattern}
 
 Always assume your service worker will be terminated at any time. Design your state management accordingly:
 
 ```javascript
 // background.js
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // EPHEMERAL STATE (will be lost on termination)
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // These variables are NOT reliable across terminations
 let cachedUserData = null;
 let activeTabCount = 0;
 let connectionStatus = 'disconnected';
 
-// ⚠️ DANGER: Don't rely on in-memory state
+//  DANGER: Don't rely on in-memory state
 function getCachedData() {
   return cachedUserData; // Will be null after SW restart!
 }
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // PERSISTENT STATE (reliable across terminations)
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Use chrome.storage for persistent state
 const STORAGE_KEYS = {
@@ -381,9 +381,9 @@ async function updateUserPreferences(newPrefs) {
   });
 }
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // RESPONSING TO STORAGE CHANGES
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
   if (changes[STORAGE_KEYS.USER_PREFERENCES]) {
@@ -394,9 +394,9 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-### 3.3 Initialization Pattern {#3-3-initialization-pattern}
+3.3 Initialization Pattern {#3-3-initialization-pattern}
 
-Implement a robust initialization pattern that rebuilds state from storage when the service worker starts:
+Implement a solid initialization pattern that rebuilds state from storage when the service worker starts:
 
 ```javascript
 // background.js
@@ -460,42 +460,42 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## 4. Keeping Service Workers Alive {#4-keeping-service-workers-alive}
+4. Keeping Service Workers Alive {#4-keeping-service-workers-alive}
 
 You cannot prevent Chrome from terminating idle service workers, but you can use various strategies to minimize disruption and handle termination gracefully.
 
-### 4.1 The Reality of Service Worker Lifetime
+4.1 The Reality of Service Worker Lifetime
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                  SERVICE WORKER LIFETIME REALITY                           │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-  ┌─────────────────────────────────────────────────────────────────────────┐
-  │  WHAT YOU CANNOT DO:                                                   │
-  │  ✗ Prevent Chrome from terminating idle SWs                            │
-  │  ✗ Keep a persistent process running                                    │
-  │  ✗ Rely on in-memory state between events                              │
-  │                                                                         │
-  │  WHAT YOU CAN DO:                                                      │
-  │  ✓ Use chrome.alarms to schedule wake-ups                              │
-  │  ✓ Use event.waitUntil() for async operations                          │
-  │  ✓ Design for stateless/restartable operations                          │
-  │  ✓ Use storage for persistent state                                    │
-  │  ✓ Minimize wake-up latency with quick initialization                  │
-  └─────────────────────────────────────────────────────────────────────────┘
+                  SERVICE WORKER LIFETIME REALITY                           
+
+
+  
+    WHAT YOU CANNOT DO:                                                   
+     Prevent Chrome from terminating idle SWs                            
+     Keep a persistent process running                                    
+     Rely on in-memory state between events                              
+                                                                           
+    WHAT YOU CAN DO:                                                      
+     Use chrome.alarms to schedule wake-ups                              
+     Use event.waitUntil() for async operations                          
+     Design for stateless/restartable operations                          
+     Use storage for persistent state                                    
+     Minimize wake-up latency with quick initialization                  
+  
 ```
 
-### 4.2 Alarm-Based Patterns {#4-2-alarm-based-patterns}
+4.2 Alarm-Based Patterns {#4-2-alarm-based-patterns}
 
 The `chrome.alarms` API is the primary mechanism for scheduled tasks in extensions:
 
 ```javascript
 // background.js
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // ALARM-BASED PERIODIC TASKS
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Create an alarm that fires every 5 minutes
 chrome.alarms.create('periodicSync', {
@@ -525,9 +525,9 @@ async function handlePeriodicSync() {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // ONE-TIME ALARMS FOR SPECIFIC SCHEDULES
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 function scheduleReminder(minutesFromNow, reminderId) {
   chrome.alarms.create(`reminder-${reminderId}`, {
@@ -557,9 +557,9 @@ function scheduleDailyAt(hour, minute, alarmName) {
 // Usage: Run daily at 9 AM
 scheduleDailyAt(9, 0, 'dailyReport');
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // ALARM WITH CUSTOM DATA
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Note: Alarms don't support custom data directly
 // Use storage to store task parameters
@@ -578,7 +578,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### 4.3 Message-Based Keep-Alive {#4-3-message-based-keep-alive}
+4.3 Message-Based Keep-Alive {#4-3-message-based-keep-alive}
 
 While you cannot keep the service worker alive indefinitely, you can use messages to trigger it when needed:
 
@@ -601,7 +601,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### 4.4 Long-Running Task Pattern {#4-4-long-running-task-pattern}
+4.4 Long-Running Task Pattern {#4-4-long-running-task-pattern}
 
 For tasks that might take longer than the service worker allows, use the Offscreen Document API:
 
@@ -626,54 +626,54 @@ async function createOffscreenDocument() {
 // Or simply design your extension to handle interruption gracefully
 ```
 
-## 5. Handling Extension Updates {#5-handling-extension-updates}
+5. Handling Extension Updates {#5-handling-extension-updates}
 
 When your extension updates, the service worker goes through a specific update process that you need to handle properly.
 
-### 5.1 Update Process Diagram
+5.1 Update Process Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        EXTENSION UPDATE FLOW                                │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-  ┌────────────────┐
-  │  Old SW is     │
-  │  Running       │
-  └───────┬────────┘
-          │
-          ▼ (User updates extension or Chrome restarts)
-  ┌────────────────┐
-  │  New version   │
-  │  detected      │
-  └───────┬────────┘
-          │
-          ▼ (Chrome loads new SW file)
-  ┌────────────────┐
-  │  onInstalled  │───── details.reason === 'update'
-  │  (NEW SW)      │
-  └───────┬────────┘
-          │
-          ▼
-  ┌────────────────┐
-  │  Old SW        │
-  │  terminated   │──── (if still running)
-  └───────┬────────┘
-          │
-          ▼
-  ┌────────────────┐
-  │  New SW        │
-  │  activated     │
-  └───────┬────────┘
-          │
-          ▼
-  ┌────────────────┐
-  │  onStartup     │
-  │  (first tab)   │
-  └────────────────┘
+                        EXTENSION UPDATE FLOW                                
+
+
+  
+    Old SW is     
+    Running       
+  
+          
+           (User updates extension or Chrome restarts)
+  
+    New version   
+    detected      
+  
+          
+           (Chrome loads new SW file)
+  
+    onInstalled   details.reason === 'update'
+    (NEW SW)      
+  
+          
+          
+  
+    Old SW        
+    terminated    (if still running)
+  
+          
+          
+  
+    New SW        
+    activated     
+  
+          
+          
+  
+    onStartup     
+    (first tab)   
+  
 ```
 
-### 5.2 Implementing Update Handlers {#5-2-implementing-update-handlers}
+5.2 Implementing Update Handlers {#5-2-implementing-update-handlers}
 
 ```javascript
 // background.js
@@ -796,7 +796,7 @@ chrome.runtime.onUpdateAvailable.addListener((details) => {
 });
 ```
 
-### 5.3 Graceful Reload Pattern {#5-3-graceful-reload-pattern}
+5.3 Graceful Reload Pattern {#5-3-graceful-reload-pattern}
 
 When you need to reload the extension programmatically:
 
@@ -817,54 +817,54 @@ chrome.runtime.onUpdateReady.addListener(() => {
 });
 ```
 
-## 6. Debugging Service Workers in DevTools {#6-debugging-service-workers-in-devtools}
+6. Debugging Service Workers in DevTools {#6-debugging-service-workers-in-devtools}
 
 Debugging service workers requires a different approach than regular web pages due to their ephemeral nature.
 
-### 6.1 Accessing the Service Worker {#6-1-accessing-the-service-worker}
+6.1 Accessing the Service Worker {#6-1-accessing-the-service-worker}
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    ACCESSING EXTENSION SERVICE WORKER                       │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+                    ACCESSING EXTENSION SERVICE WORKER                       
+
 
   Method 1: Chrome DevTools
-  ──────────────────────────
+  
   1. Open chrome://extensions/
   2. Enable "Developer mode" (top right)
   3. Find your extension
   4. Click "Service Worker" link in "Inspect views" section
   
   Method 2: From Extension Popup
-  ─────────────────────────────
+  
   1. Click your extension icon
   2. Right-click anywhere in the popup
   3. Select "Inspect popup"
   4. In the popup DevTools, click the "Service Worker" link
   
   Method 3: Direct URL
-  ───────────────────
+  
   chrome-extension://<extension-id>/background.html
   (For older extensions with background page)
   
   Method 4: From Content Script
-  ────────────────────────────
+  
   In content script console:
   chrome.runtime.sendMessage({ type: 'PING' }, (response) => {
     console.log('SW Status:', response);
   });
 ```
 
-### 6.2 Console Logging Strategies {#6-2-console-logging-strategies}
+6.2 Console Logging Strategies {#6-2-console-logging-strategies}
 
 Because service workers can terminate before you see console output, use these strategies:
 
 ```javascript
 // background.js
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // IMMEDIATE LOGGING (most reliable)
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 console.log('[SW] Service worker started');
 console.info('[SW] Current state:', appState);
@@ -876,9 +876,9 @@ console.log(JSON.stringify({
   version: chrome.runtime.getManifest().version,
 }));
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // PERSISTENT LOGGING (write to storage before termination)
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 const LOG_KEY = 'debugLogs';
 const MAX_LOGS = 100;
@@ -907,9 +907,9 @@ function logDebug(message, data = {}) {
 // Use this for important events
 logDebug('Processing message', { type: 'DATA_REQUEST', tabId: 123 });
 
-// ─────────────────────────────────────────────────────────────────────
+// 
 // STORAGE LISTENER FOR DEBUGGING
-// ─────────────────────────────────────────────────────────────────────
+// 
 
 // Add a debug endpoint via message
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -932,126 +932,126 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### 6.3 Common Debugging Issues {#6-3-common-debugging-issues}
+6.3 Common Debugging Issues {#6-3-common-debugging-issues}
 
 ```javascript
 // background.js
 
 // Issue 1: Event handlers not firing
-// ─────────────────────────────────
+// 
 // Solution: Ensure handlers are registered at top level
 
-// ✅ Correct
+//  Correct
 chrome.tabs.onUpdated.addListener((tabId, info) => { /* ... */ });
 
-// ❌ Wrong - handler inside function
+//  Wrong - handler inside function
 function setupTabListener() {
   chrome.tabs.onUpdated.addListener((tabId, info) => { /* ... */ });
 }
 
 
 // Issue 2: Async operations not completing
-// ───────────────────────────────────────
+// 
 // Solution: Always use waitUntil for async operations
 
 chrome.tabs.onUpdated.addListener((tabId, info) => {
   if (info.status === 'complete') {
-    // ✅ Return promise
+    //  Return promise
     return fetchData(tabId).then(processData);
     
-    // ❌ No return - SW may terminate before complete
+    //  No return - SW may terminate before complete
     fetchData(tabId).then(processData);
   }
 });
 
 
 // Issue 3: State lost after termination
-// ─────────────────────────────────────
+// 
 // Solution: Always read from storage, not memory
 
 let cachedData; // Unreliable!
 
 async function getData() {
-  // ✅ Read from storage every time
+  //  Read from storage every time
   const result = await chrome.storage.local.get('data');
   return result.data;
 }
 
 
 // Issue 4: Messages not received
-// ───────────────────────────────
+// 
 // Solution: Check sender context and ensure async response
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // ✅ Return true for async response
+  //  Return true for async response
   doAsyncWork().then(() => sendResponse({ done: true }));
   return true; // Keep channel open
   
-  // ❌ Forgot return - response won't be sent
+  //  Forgot return - response won't be sent
   // doAsyncWork().then(() => sendResponse({ done: true }));
 });
 ```
 
-### 6.4 DevTools Panel Tips {#6-4-devtools-panel-tips}
+6.4 DevTools Panel Tips {#6-4-devtools-panel-tips}
 
 When debugging in the Service Worker DevTools:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     SERVICE WORKER DEVTOOLS TIPS                            │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+                     SERVICE WORKER DEVTOOLS TIPS                            
+
 
   Console Tab
-  ───────────
+  
   • Check "Preserve log" to keep logs across SW restarts
   • Use filtered logging: logDebug() writes to storage
   • Console shows messages from all wake-up cycles
   
   Sources Tab
-  ───────────
+  
   • Set breakpoints in your service worker code
   • Use "Pause on uncaught exceptions"
   • Watch "Scope" variables - they'll be null after restart!
   
   Application Tab (for extensions)
-  ─────────────────────────────────
+  
   • Check "Extension Service Worker" section
   • View storage (chrome.storage)
   • Clear storage when needed
   • Check "Background services" for registered events
   
   Network Tab
-  ───────────
+  
   • See requests made by service worker
   • Note: Requests may appear when SW wakes up
   • Check "Other" section for chrome-extension:// requests
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 Chrome Extension service workers are fundamentally different from traditional web service workers. Key takeaways:
 
-1. **Lifecycle**: Understand the install → activate → idle → terminate cycle. Your SW will be terminated after ~30 seconds of inactivity.
+1. Lifecycle: Understand the install → activate → idle → terminate cycle. Your SW will be terminated after ~30 seconds of inactivity.
 
-2. **Event-Driven**: All code runs in response to events. Register handlers at the top level of your SW file.
+2. Event-Driven: All code runs in response to events. Register handlers at the top level of your SW file.
 
-3. **Ephemeral State**: Never rely on in-memory variables. Use `chrome.storage` for persistence and always reinitialize on SW start.
+3. Ephemeral State: Never rely on in-memory variables. Use `chrome.storage` for persistence and always reinitialize on SW start.
 
-4. **Keep-Alive Patterns**: Use `chrome.alarms` for scheduled tasks. Use `event.waitUntil()` for async operations. Design for interruption.
+4. Keep-Alive Patterns: Use `chrome.alarms` for scheduled tasks. Use `event.waitUntil()` for async operations. Design for interruption.
 
-5. **Updates**: Handle the `onInstalled` event with proper migration logic for version updates.
+5. Updates: Handle the `onInstalled` event with proper migration logic for version updates.
 
-6. **Debugging**: Use persistent logging, check DevTools Console with "Preserve log", and understand that console state resets on each SW wake-up.
+6. Debugging: Use persistent logging, check DevTools Console with "Preserve log", and understand that console state resets on each SW wake-up.
 
 By following these patterns, you'll build extensions that are robust, maintainable, and handle the unique challenges of the extension service worker lifecycle.
 
 ---
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Service Worker Lifecycle](/docs/guides/service-worker-lifecycle/) — Detailed guide to understanding SW lifecycle phases and events
-- [Service Worker Debugging](/docs/guides/service-worker-debugging/) — Advanced debugging techniques for extension service workers
-- [Service Worker Debugger](/docs/guides/service-worker-debugger/) — Tools and strategies for diagnosing SW issues
+- [Service Worker Lifecycle](/docs/guides/service-worker-lifecycle/). Detailed guide to understanding SW lifecycle phases and events
+- [Service Worker Debugging](/docs/guides/service-worker-debugging/). Advanced debugging techniques for extension service workers
+- [Service Worker Debugger](/docs/guides/service-worker-debugger/). Tools and strategies for diagnosing SW issues
 
 ---
 

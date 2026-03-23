@@ -225,7 +225,7 @@ async function goodWrite(data) {
 Create a reusable utility for optimized storage operations:
 
 ```javascript
-// utils/storage优化.js
+// utils/storage.js
 
 class OptimizedStorage {
   constructor(namespace = 'default') {
@@ -697,8 +697,8 @@ module.exports = {
 {
   "name": "my-extension",
   "sideEffects": [
-    "**/*.css",
-    "**/*.scss",
+    "/*.css",
+    "/*.scss",
     "./src/initialization.js"
   ]
 }
@@ -1362,4 +1362,4 @@ Performance optimization is an ongoing process. Start by measuring your extensio
 
 Regular profiling should be part of your development workflow. Use Chrome DevTools to identify bottlenecks, measure the impact of changes, and ensure your extension remains fast as you add new features.
 
-Remember that every millisecond counts—users notice slow extensions, and browser resource competition means your extension directly impacts their browsing experience. Following these patterns will help you build a performant, responsive Chrome extension.
+Remember that every millisecond counts, users notice slow extensions, and browser resource competition means your extension directly impacts their browsing experience. Following these patterns will help you build a performant, responsive Chrome extension.

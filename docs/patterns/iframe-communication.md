@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Iframe Communication — Best Practices"
+title: "Chrome Extension Iframe Communication. Best Practices"
 description: "Communicate with iframes in content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/iframe-communication/"
 ---
@@ -9,11 +9,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/iframe-communication/"
 
 iframes are ubiquitous on the web, and Chrome extensions frequently need to communicate with them, embed them, or use them as sandboxed execution environments. This guide covers eight patterns for working with iframes in Manifest V3 extensions, from basic message passing to advanced UI injection techniques.
 
-> **Related guides:** [Content Script Isolation](content-script-isolation.md) | [Web Accessible Resources](../mv3/web-accessible-resources.md)
+> Related guides: [Content Script Isolation](content-script-isolation.md) | [Web Accessible Resources](../mv3/web-accessible-resources.md)
 
 ---
 
-## Pattern 1: Content Script to Page iframe Communication {#pattern-1-content-script-to-page-iframe-communication}
+Pattern 1: Content Script to Page iframe Communication {#pattern-1-content-script-to-page-iframe-communication}
 
 Content scripts can access iframes on the host page, but cross-origin restrictions apply. For same-origin iframes, you can inject directly. For cross-origin iframes, use `window.postMessage`.
 
@@ -82,14 +82,14 @@ function broadcastToIframes(message: unknown): void {
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - Content scripts run in an isolated world. They can see the page DOM (including iframes) but do not share JavaScript variables with the page.
 - Never use `"*"` as the target origin when sending sensitive data. Always specify the exact expected origin.
 - Some iframes use the `sandbox` attribute without `allow-same-origin`, which gives them an opaque origin. `postMessage` to these frames must use `"*"` as the target origin.
 
 ---
 
-## Pattern 2: Extension iframe in Content Script (Shadow DOM) {#pattern-2-extension-iframe-in-content-script-shadow-dom}
+Pattern 2: Extension iframe in Content Script (Shadow DOM) {#pattern-2-extension-iframe-in-content-script-shadow-dom}
 
 Inject an extension-hosted iframe into a page using Shadow DOM to isolate styles and prevent the host page from interfering with your UI.
 
@@ -187,14 +187,14 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - The iframe `src` must point to a file listed in `web_accessible_resources` in your manifest. Without this, the browser blocks the load.
 - Using `mode: "closed"` for the shadow root prevents page scripts from traversing into your DOM, but determined actors can still detect the host element.
 - The extension iframe runs in the extension origin, so it has access to `chrome.*` APIs. Content scripts always have access to `chrome.runtime.getURL()` as part of the `chrome.runtime` API subset available to content scripts.
 
 ---
 
-## Pattern 3: Cross-Origin iframe Messaging with postMessage {#pattern-3-cross-origin-iframe-messaging-with-postmessage}
+Pattern 3: Cross-Origin iframe Messaging with postMessage {#pattern-3-cross-origin-iframe-messaging-with-postmessage}
 
 When communicating across origins, a structured protocol with handshake, validation, and typed messages prevents security issues and race conditions.
 
@@ -353,14 +353,14 @@ class IframeBridge {
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - Always wrap messages in a unique key (`PROTOCOL_KEY`) to distinguish your protocol from other `postMessage` traffic on the page.
 - The `event.source` check is critical. Without it, any iframe or window on the page could spoof messages matching your origin.
 - `postMessage` is asynchronous and unordered. If ordering matters, add sequence numbers to your protocol.
 
 ---
 
-## Pattern 4: Sandboxed iframe for Untrusted Content {#pattern-4-sandboxed-iframe-for-untrusted-content}
+Pattern 4: Sandboxed iframe for Untrusted Content {#pattern-4-sandboxed-iframe-for-untrusted-content}
 
 Chrome extensions can use sandboxed pages to run untrusted code (such as user-provided templates or third-party scripts) without access to extension APIs.
 
@@ -459,14 +459,14 @@ const html = await renderTemplate(
 );
 ```
 
-**Gotchas:**
+Gotchas:
 - Sandboxed pages have a `null` origin. You must use `"*"` as the target origin when posting messages to them. Validate `event.source` instead.
 - Sandboxed pages cannot use `chrome.*` APIs, `fetch` to extension resources, or navigate to extension pages. They are fully isolated.
 - The `sandbox` manifest key only works for pages listed explicitly. Dynamically created iframes with `sandbox` attributes are a different mechanism entirely.
 
 ---
 
-## Pattern 5: iframe Permission and CSP Considerations {#pattern-5-iframe-permission-and-csp-considerations}
+Pattern 5: iframe Permission and CSP Considerations {#pattern-5-iframe-permission-and-csp-considerations}
 
 Chrome extensions enforce a Content Security Policy that affects which iframes can be embedded and what they can do. Understanding these constraints prevents silent failures.
 
@@ -560,7 +560,7 @@ document.addEventListener("securitypolicyviolation", (event) => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - Extension pages default to `script-src 'self'`. Adding `frame-src` to the CSP is required to embed external URLs in extension page iframes.
 - The `sandbox` attribute on an iframe and the `sandbox` manifest key are independent. The manifest key creates a sandboxed extension page; the attribute restricts any iframe.
 - `allow-same-origin` in a sandbox re-enables origin-based checks. Without it, the iframe has a `null` origin and cannot use cookies, localStorage, or origin-validated postMessage.
@@ -568,7 +568,7 @@ document.addEventListener("securitypolicyviolation", (event) => {
 
 ---
 
-## Pattern 6: Detecting and Interacting with Page iframes {#pattern-6-detecting-and-interacting-with-page-iframes}
+Pattern 6: Detecting and Interacting with Page iframes {#pattern-6-detecting-and-interacting-with-page-iframes}
 
 Content scripts may need to find, filter, and interact with iframes already present on the host page. This requires careful DOM traversal and timing.
 
@@ -691,14 +691,14 @@ function waitForIframeLoad(
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - `iframe.contentDocument` returns `null` for cross-origin iframes. Accessing it does not throw; it simply returns `null`. However, accessing properties on a cross-origin `contentWindow` does throw.
 - Dynamically created iframes may start with `about:blank` and change their `src` later. Wait for the `load` event before reading the final URL.
 - MV3 content scripts can be configured with `"all_frames": true` in the manifest to automatically inject into all matching iframes, avoiding manual injection.
 
 ---
 
-## Pattern 7: Extension Popup with Embedded iframes {#pattern-7-extension-popup-with-embedded-iframes}
+Pattern 7: Extension Popup with Embedded iframes {#pattern-7-extension-popup-with-embedded-iframes}
 
 Extension popups can embed iframes to load external dashboards, previews, or dynamically generated content. This pattern requires careful CSP and sizing management.
 
@@ -794,14 +794,14 @@ new MutationObserver(reportHeight).observe(document.body, {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - Chrome extension popups have a maximum width of 800px and maximum height of 600px. The iframe must fit within these constraints.
 - Popups close when they lose focus. If the iframe navigates to an external site that opens a new window, the popup will close and the iframe state is lost.
 - For embedding extension pages, use `chrome.runtime.getURL()`. For external URLs, ensure the domain is listed in `frame-src` within your CSP.
 
 ---
 
-## Pattern 8: iframe-Based UI Injection Patterns {#pattern-8-iframe-based-ui-injection-patterns}
+Pattern 8: iframe-Based UI Injection Patterns {#pattern-8-iframe-based-ui-injection-patterns}
 
 Instead of directly manipulating the host page DOM, inject a full UI as an iframe. This provides complete style isolation and avoids conflicts with the page's CSS and JavaScript.
 
@@ -1024,7 +1024,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - The injected iframe page must be listed in `web_accessible_resources` with appropriate `matches` patterns. Without this, the page URL is not loadable from the host page context.
 - `z-index: 2147483647` is the maximum 32-bit integer. Some aggressive pages set high z-index values; this ensures your UI stays on top.
 - Dragging requires disabling `pointer-events` on the iframe during the drag operation. Otherwise, the iframe captures mouse events and breaks the drag.
@@ -1032,7 +1032,7 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Best For | Key Constraint |
 |---------|----------|----------------|
@@ -1045,7 +1045,7 @@ chrome.runtime.onMessage.addListener((message) => {
 | Popup Embedded iframes | Rich popup interfaces | 800x600px popup size limit |
 | UI Injection | Full extension panels on pages | Shadow DOM for style isolation |
 
-> **See also:** [Content Script Isolation](content-script-isolation.md) for understanding the isolated world that content scripts run in. [Web Accessible Resources](../mv3/web-accessible-resources.md) for configuring which extension files can be loaded from web pages.
+> See also: [Content Script Isolation](content-script-isolation.md) for understanding the isolated world that content scripts run in. [Web Accessible Resources](../mv3/web-accessible-resources.md) for configuring which extension files can be loaded from web pages.
 -e 
 ---
 

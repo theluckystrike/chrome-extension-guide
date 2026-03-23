@@ -15,27 +15,27 @@ In an era where digital health monitoring has become essential, building a fitne
 
 Chrome extensions have evolved significantly with Manifest V3, offering improved security, better performance, and new capabilities that make building complex applications like fitness trackers more accessible than ever. In this tutorial, we will cover everything from setting up your development environment to implementing workout logging features, creating intuitive user interfaces, and deploying your extension to the Chrome Web Store.
 
-The demand for fitness tracking solutions continues to grow as more people become conscious of their health and wellness. A well-designed workout log Chrome extension can help users maintain consistency in their exercise routines, track progress over time, and achieve their fitness goals. By building this extension, you will gain valuable experience working with Chrome's storage APIs, popup interfaces, and persistent background processes—all essential skills for any Chrome extension developer.
+The demand for fitness tracking solutions continues to grow as more people become conscious of their health and wellness. A well-designed workout log Chrome extension can help users maintain consistency in their exercise routines, track progress over time, and achieve their fitness goals. By building this extension, you will gain valuable experience working with Chrome's storage APIs, popup interfaces, and persistent background processes, all essential skills for any Chrome extension developer.
 
 ---
 
-## Why Build a Fitness Tracker Chrome Extension {#why-build-fitness-tracker}
+Why Build a Fitness Tracker Chrome Extension {#why-build-fitness-tracker}
 
-The fitness technology market has experienced unprecedented growth, with millions of people using various apps and devices to monitor their health. A fitness tracker extension offers unique advantages over traditional mobile apps because it integrates seamlessly with users' daily browsing activities. Users can quickly log their workouts without switching between applications, making it more likely they will maintain consistent tracking habits.
+The fitness technology market has experienced unprecedented growth, with millions of people using various apps and devices to monitor their health. A fitness tracker extension offers unique advantages over traditional mobile apps because it integrates smoothly with users' daily browsing activities. Users can quickly log their workouts without switching between applications, making it more likely they will maintain consistent tracking habits.
 
 Building an exercise extension for Chrome also provides an excellent learning opportunity for developers. You will work with several Chrome-specific APIs including chrome.storage for persistent data, chrome.alarms for scheduling reminders, and chrome.notifications for delivering motivational alerts. These skills are transferable to many other extension projects you might undertake.
 
-From a business perspective, fitness tracker extensions represent a lucrative opportunity. The freemium model works exceptionally well in this category—offering basic workout logging for free while reserving advanced features like detailed analytics, custom workout plans, and progress visualizations for premium users. Additionally, the Chrome Web Store provides access to billions of potential users, making it an ideal distribution platform.
+From a business perspective, fitness tracker extensions represent a lucrative opportunity. The freemium model works exceptionally well in this category, offering basic workout logging for free while reserving advanced features like detailed analytics, custom workout plans, and progress visualizations for premium users. Additionally, the Chrome Web Store provides access to billions of potential users, making it an ideal distribution platform.
 
 ---
 
-## Project Planning and Feature Set {#project-planning}
+Project Planning and Feature Set {#project-planning}
 
 Before diving into code, let us outline the features our fitness tracker extension will include. A successful workout log Chrome extension should provide the following core functionality:
 
-### Core Features
+Core Features
 
-First, we need robust workout logging capabilities. Users should be able to create new workout entries quickly, specifying the type of exercise, duration, intensity level, and any notes they want to add. The extension should support various exercise categories including cardio, strength training, flexibility, and sports-specific activities.
+First, we need solid workout logging capabilities. Users should be able to create new workout entries quickly, specifying the type of exercise, duration, intensity level, and any notes they want to add. The extension should support various exercise categories including cardio, strength training, flexibility, and sports-specific activities.
 
 Second, exercise history viewing is essential. Users need to be able to browse their past workouts, filter by date range or exercise type, and quickly access details about previous sessions. This historical data becomes invaluable for tracking progress and staying motivated.
 
@@ -47,25 +47,25 @@ Finally, data export capabilities ensure users can back up their workout data or
 
 ---
 
-## Setting Up Your Development Environment {#development-environment}
+Setting Up Your Development Environment {#development-environment}
 
 Every Chrome extension begins with a well-organized project structure. Create a new folder for your extension and set up the following files and directories:
 
 ```
 fitness-tracker-extension/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── background/
-│   └── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── utils/
-    └── storage.js
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ background/
+    background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ utils/
+     storage.js
 ```
 
 The manifest.json file serves as the foundation of your extension. For Manifest V3, the current standard, your manifest should include the required fields and specify the permissions your extension needs:
@@ -99,11 +99,11 @@ This configuration grants your extension access to storage for saving workout da
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the primary interface users interact with when using your fitness tracker extension. It should be clean, intuitive, and provide quick access to essential features without overwhelming the user.
 
-### HTML Structure
+HTML Structure
 
 Create popup/popup.html with a well-organized structure:
 
@@ -189,7 +189,7 @@ Create popup/popup.html with a well-organized structure:
 </html>
 ```
 
-### Styling the Popup
+Styling the Popup
 
 Create popup/popup.css to make your extension visually appealing:
 
@@ -343,11 +343,11 @@ footer {
 
 ---
 
-## Implementing the JavaScript Logic {#javascript-logic}
+Implementing the JavaScript Logic {#javascript-logic}
 
 The popup.js file handles all user interactions and communicates with the storage API. This is where the core functionality of your fitness tracker extension comes to life.
 
-### Storage Utility
+Storage Utility
 
 First, create utils/storage.js to handle data persistence:
 
@@ -416,7 +416,7 @@ const Storage = {
 };
 ```
 
-### Popup Functionality
+Popup Functionality
 
 Now create popup/popup.js to connect the UI with storage:
 
@@ -490,13 +490,13 @@ function setupFormHandler() {
 
 function formatExerciseType(type) {
   const types = {
-    running: '🏃 Running',
-    cycling: '🚴 Cycling',
-    swimming: '🏊 Swimming',
-    strength: '💪 Strength Training',
-    yoga: '🧘 Yoga',
-    hiit: '⚡ HIIT',
-    other: '🏋️ Other'
+    running: ' Running',
+    cycling: ' Cycling',
+    swimming: ' Swimming',
+    strength: ' Strength Training',
+    yoga: ' Yoga',
+    hiit: ' HIIT',
+    other: ' Other'
   };
   return types[type] || type;
 }
@@ -516,7 +516,7 @@ function formatDate(dateString) {
 
 ---
 
-## Implementing Background Service Worker {#background-service}
+Implementing Background Service Worker {#background-service}
 
 The background service worker handles tasks that run independently of the popup, such as scheduled reminders and notifications. Create background/background.js:
 
@@ -572,7 +572,7 @@ function calculateDelay(hour, minute) {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your fitness tracker extension. Load it into Chrome by following these steps:
 
@@ -590,7 +590,7 @@ Test all features extensively:
 
 ---
 
-## Publishing to Chrome Web Store {#publishing}
+Publishing to Chrome Web Store {#publishing}
 
 Once your extension is thoroughly tested, you can publish it to reach millions of users:
 
@@ -607,7 +607,7 @@ Your fitness tracker extension is now ready to help users achieve their fitness 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a fitness tracker Chrome extension is an excellent project that teaches valuable skills while addressing a real market need. You have learned how to create a complete extension from scratch, including the popup interface, storage system, background service worker, and notification features.
 

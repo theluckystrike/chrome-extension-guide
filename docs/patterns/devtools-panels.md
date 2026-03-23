@@ -1,50 +1,50 @@
 ---
 layout: default
-title: "Chrome Extension Devtools Panels — Best Practices"
+title: "Chrome Extension Devtools Panels. Best Practices"
 description: "Create custom DevTools panels for extension debugging."
 canonical_url: "https://bestchromeextensions.com/patterns/devtools-panels/"
 ---
 
 # DevTools Panel Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extensions can extend the DevTools with custom panels, sidebar panes, and deep integration with the inspected page. This guide covers production patterns for building DevTools extensions: creating panels, communicating with the inspected page, watching network traffic, and persisting panel state.
 
-> **Manifest requirement:** DevTools pages require `"devtools_page": "devtools.html"` in your manifest. The DevTools page runs once per open DevTools window and acts as the entry point for all `chrome.devtools.*` APIs.
+> Manifest requirement: DevTools pages require `"devtools_page": "devtools.html"` in your manifest. The DevTools page runs once per open DevTools window and acts as the entry point for all `chrome.devtools.*` APIs.
 
 ---
 
-## Pattern 1: Creating a Custom DevTools Panel {#pattern-1-creating-a-custom-devtools-panel}
+Pattern 1: Creating a Custom DevTools Panel {#pattern-1-creating-a-custom-devtools-panel}
 
 Register a new top-level tab in DevTools:
 
 ```ts
-// devtools.ts — Runs in the DevTools page context
+// devtools.ts. Runs in the DevTools page context
 chrome.devtools.panels.create(
   "My Extension",        // Tab title
   "icons/panel-32.png",  // Icon path (relative to extension root)
   "panel.html",          // Panel HTML page
   (panel) => {
-    // Panel created — set up lifecycle hooks
+    // Panel created. set up lifecycle hooks
     let panelWindow: Window | null = null;
 
     panel.onShown.addListener((win) => {
       panelWindow = win;
-      // Panel is now visible — start updating UI
+      // Panel is now visible. start updating UI
       win.document.dispatchEvent(new CustomEvent("panel-shown"));
     });
 
     panel.onHidden.addListener(() => {
       panelWindow = null;
-      // Panel hidden — pause expensive operations
+      // Panel hidden. pause expensive operations
     });
   }
 );
 ```
 
 ```html
-<!-- devtools.html — Minimal shell, just loads the script -->
+<!-- devtools.html. Minimal shell, just loads the script -->
 <!DOCTYPE html>
 <html>
   <body>
@@ -54,7 +54,7 @@ chrome.devtools.panels.create(
 ```
 
 ```ts
-// panel.ts — Runs inside panel.html
+// panel.ts. Runs inside panel.html
 document.addEventListener("panel-shown", () => {
   refreshData();
 });
@@ -67,7 +67,7 @@ async function refreshData() {
 
 ---
 
-## Pattern 2: DevTools Sidebar Pane for Elements Panel {#pattern-2-devtools-sidebar-pane-for-elements-panel}
+Pattern 2: DevTools Sidebar Pane for Elements Panel {#pattern-2-devtools-sidebar-pane-for-elements-panel}
 
 Add a sidebar pane that updates when the user selects a DOM element:
 
@@ -129,7 +129,7 @@ function updateSidebarWithObject(
 
 ---
 
-## Pattern 3: Inspected Window Evaluation {#pattern-3-inspected-window-evaluation}
+Pattern 3: Inspected Window Evaluation {#pattern-3-inspected-window-evaluation}
 
 Execute code in the context of the inspected page. This is the primary way DevTools panels interact with page content:
 
@@ -207,12 +207,12 @@ async function evaluateInContentScript(expression: string) {
 
 ---
 
-## Pattern 4: DevTools to Background Communication {#pattern-4-devtools-to-background-communication}
+Pattern 4: DevTools to Background Communication {#pattern-4-devtools-to-background-communication}
 
 DevTools pages cannot use `chrome.runtime.onMessage` directly. Use a persistent connection:
 
 ```ts
-// devtools.ts — Establish a long-lived connection
+// devtools.ts. Establish a long-lived connection
 const port = chrome.runtime.connect({ name: "devtools" });
 
 // Send the inspected tab ID so the background knows which tab we're debugging
@@ -231,12 +231,12 @@ port.onMessage.addListener((msg) => {
 
 // Clean up when DevTools closes
 port.onDisconnect.addListener(() => {
-  // Connection lost — DevTools window was closed
+  // Connection lost. DevTools window was closed
 });
 ```
 
 ```ts
-// background.ts — Track active DevTools connections
+// background.ts. Track active DevTools connections
 const devtoolsConnections = new Map<number, chrome.runtime.Port>();
 
 chrome.runtime.onConnect.addListener((port) => {
@@ -290,7 +290,7 @@ function handleDevToolsMessage(
 ```
 
 ```ts
-// panel.ts — Communicate through the DevTools page relay
+// panel.ts. Communicate through the DevTools page relay
 function sendToBackground(message: unknown) {
   // Post to the devtools.html page, which relays via port
   window.parent.postMessage({ direction: "to-background", payload: message }, "*");
@@ -305,7 +305,7 @@ window.addEventListener("message", (event) => {
 
 ---
 
-## Pattern 5: Network Request Inspection from DevTools {#pattern-5-network-request-inspection-from-devtools}
+Pattern 5: Network Request Inspection from DevTools {#pattern-5-network-request-inspection-from-devtools}
 
 Capture and analyze HTTP traffic from the inspected tab:
 
@@ -396,7 +396,7 @@ function categorizeRequest(mimeType: string): string {
 
 ---
 
-## Pattern 6: Custom Panel with React/Framework Integration {#pattern-6-custom-panel-with-reactframework-integration}
+Pattern 6: Custom Panel with React/Framework Integration {#pattern-6-custom-panel-with-reactframework-integration}
 
 Mount a React application inside a DevTools panel:
 
@@ -423,7 +423,7 @@ chrome.devtools.panels.create(
     });
 
     panel.onHidden.addListener(() => {
-      // Don't unmount — just pause updates
+      // Don't unmount. just pause updates
     });
   }
 );
@@ -496,7 +496,7 @@ function MetricCard({ label, value }: { label: string; value: string | number })
 
 ---
 
-## Pattern 7: DevTools Panel State Persistence {#pattern-7-devtools-panel-state-persistence}
+Pattern 7: DevTools Panel State Persistence {#pattern-7-devtools-panel-state-persistence}
 
 Preserve panel state across DevTools close/reopen cycles using `chrome.storage.session`:
 
@@ -572,7 +572,7 @@ document.getElementById("tab-network")?.addEventListener("click", () => {
 
 ---
 
-## Pattern 8: Resource and Source Watching {#pattern-8-resource-and-source-watching}
+Pattern 8: Resource and Source Watching {#pattern-8-resource-and-source-watching}
 
 Monitor resource changes and source file updates in the inspected page:
 
@@ -612,7 +612,7 @@ chrome.devtools.inspectedWindow.onResourceAdded.addListener((resource) => {
 ```
 
 ```ts
-// panel.ts — Source change tracker UI
+// panel.ts. Source change tracker UI
 interface ResourceChange {
   url: string;
   type: string;
@@ -681,7 +681,7 @@ function formatTime(ts: number): string {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

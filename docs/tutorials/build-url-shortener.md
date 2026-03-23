@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Chrome Extension URL Shortener — Developer Guide"
+title: "Chrome Extension URL Shortener. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-url-shortener/"
 ---
 # Build a URL Shortener Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Shorten current page URL with one click
 - Copy short URL to clipboard automatically  
 - View history of shortened URLs
 - QR code generation for short URLs
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -26,7 +26,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-url-shortener/"
 
 See: `permissions/activeTab.md`, `permissions/clipboardWrite.md`, `permissions/contextMenus.md`, `patterns/clipboard-patterns.md`
 
-## Step 1: URL Shortening API {#step-1-url-shortening-api}
+Step 1: URL Shortening API {#step-1-url-shortening-api}
 Use is.gd API (no key required).
 
 ```typescript
@@ -40,9 +40,9 @@ async function shortenUrl(url: string, alias?: string): Promise<string> {
 }
 ```
 
-## Step 2: One-Click Shortening {#step-2-one-click-shortening}
+Step 2: One-Click Shortening {#step-2-one-click-shortening}
 
-> **Note:** `chrome.action.onClicked` only fires when no `default_popup` is set in the manifest. To use this one-click mode, remove `"default_popup": "popup.html"` from the `action` field. If you prefer the popup UI (Step 3), skip this step.
+> Note: `chrome.action.onClicked` only fires when no `default_popup` is set in the manifest. To use this one-click mode, remove `"default_popup": "popup.html"` from the `action` field. If you prefer the popup UI (Step 3), skip this step.
 
 ```typescript
 chrome.action.onClicked.addListener(async (tab) => {
@@ -56,14 +56,14 @@ chrome.action.onClicked.addListener(async (tab) => {
       func: (text) => navigator.clipboard.writeText(text),
       args: [shortUrl]
     });
-    chrome.action.setBadgeText({ text: '✓', tabId: tab.id });
+    chrome.action.setBadgeText({ text: '', tabId: tab.id });
     chrome.action.setBadgeBackgroundColor({ color: '#4CAF50', tabId: tab.id });
     setTimeout(() => chrome.action.setBadgeText({ text: '', tabId: tab.id }), 2000);
-  } catch { chrome.action.setBadgeText({ text: '✗', tabId: tab.id }); }
+  } catch { chrome.action.setBadgeText({ text: '', tabId: tab.id }); }
 });
 ```
 
-## Step 3: Popup UI {#step-3-popup-ui}
+Step 3: Popup UI {#step-3-popup-ui}
 ```html
 <!-- popup.html -->
 <div><h3>URL Shortener</h3>
@@ -95,7 +95,7 @@ document.getElementById('shortenBtn').addEventListener('click', async () => {
 });
 ```
 
-## Step 4: QR Code Generation {#step-4-qr-code-generation}
+Step 4: QR Code Generation {#step-4-qr-code-generation}
 ```typescript
 function generateQRCode(url: string): void {
   const canvas = document.createElement('canvas');
@@ -115,7 +115,7 @@ function generateQRCode(url: string): void {
 }
 ```
 
-## Step 5: History {#step-5-history}
+Step 5: History {#step-5-history}
 ```typescript
 document.getElementById('viewHistory').addEventListener('click', async () => {
   const history = await storage.get('history') || [];
@@ -124,7 +124,7 @@ document.getElementById('viewHistory').addEventListener('click', async () => {
 });
 ```
 
-## Step 6: Context Menu {#step-6-context-menu}
+Step 6: Context Menu {#step-6-context-menu}
 See `patterns/context-menu-patterns.md`.
 
 ```typescript
@@ -138,12 +138,12 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Summary {#summary}
+Summary {#summary}
 Built: one-click shortening, custom aliases, clipboard feedback, QR codes, history, context menu.
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

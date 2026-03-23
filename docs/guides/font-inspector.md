@@ -22,57 +22,57 @@ A Font Inspector is a developer tool that analyzes and displays typography infor
 The Font Inspector follows a three-context architecture that separates concerns across the service worker, popup, and content scripts.
 
 ```
-┌─────────────────┐     chrome.runtime     ┌─────────────────┐
-│     Popup       │ ◄───────────────────► │   Service       │
-│  (UI Context)   │    message passing    │   Worker        │
-└────────┬────────┘                       └────────┬────────┘
-         │                                          │
-         │           chrome.runtime                 │
-         └──────────────────────────────────────────┘
-                          │
-                          ▼
-                ┌─────────────────┐
-                │  Content Script │
-                │  (Page Context) │
-                └─────────────────┘
+     chrome.runtime     
+     Popup            Service       
+  (UI Context)       message passing       Worker        
+                       
+                                                   
+                    chrome.runtime                 
+         
+                          
+                          
+                
+                  Content Script 
+                  (Page Context) 
+                
 ```
 
 ### Directory Structure
 
 ```
 font-inspector/
-├── manifest.json
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry
-│   │   ├── font-analyzer.ts  # Font analysis logic
-│   │   └── storage.ts        # Storage utilities
-│   ├── popup/
-│   │   ├── index.html        # Popup HTML
-│   │   ├── index.tsx         # React/Preact entry
-│   │   ├── App.tsx           # Main component
-│   │   └── styles.css        # Popup styles
-│   ├── content/
-│   │   ├── index.ts          # Content script entry
-│   │   ├── font-scanner.ts   # DOM font scanning
-│   │   └── overlay.ts        # Page overlay UI
-│   ├── shared/
-│   │   ├── types.ts          # Shared TypeScript types
-│   │   └── constants.ts      # Shared constants
-│   └── components/           # Reusable UI components
-├── icons/
-│   ├── icon-16.png
-│   ├── icon-48.png
-│   └── icon-128.png
-├── package.json
-├── tsconfig.json
-├── webpack.config.js
-└── README.md
+ manifest.json
+ src/
+    background/
+       index.ts          # Service worker entry
+       font-analyzer.ts  # Font analysis logic
+       storage.ts        # Storage utilities
+    popup/
+       index.html        # Popup HTML
+       index.tsx         # React/Preact entry
+       App.tsx           # Main component
+       styles.css        # Popup styles
+    content/
+       index.ts          # Content script entry
+       font-scanner.ts   # DOM font scanning
+       overlay.ts        # Page overlay UI
+    shared/
+       types.ts          # Shared TypeScript types
+       constants.ts      # Shared constants
+    components/           # Reusable UI components
+ icons/
+    icon-16.png
+    icon-48.png
+    icon-128.png
+ package.json
+ tsconfig.json
+ webpack.config.js
+ README.md
 ```
 
 ---
 
-## Manifest.json Setup
+Manifest.json Setup
 
 The manifest defines the extension's capabilities and permissions. For a Font Inspector, we need access to active tabs, storage, and script injection.
 
@@ -127,9 +127,9 @@ The manifest defines the extension's capabilities and permissions. For a Font In
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types
+Shared Types
 
 Define TypeScript interfaces that are shared across all contexts:
 
@@ -187,7 +187,7 @@ export interface ExtensionMessage {
 }
 ```
 
-### Content Script - Font Scanner
+Content Script - Font Scanner
 
 The content script runs in the page context and extracts font information from DOM elements:
 
@@ -202,7 +202,7 @@ export class FontScanner {
     'canvas', 'svg', 'video', 'audio'
   ];
 
-  /**
+  /
    * Scans all text elements on the page and collects font information
    */
   async scanPage(): Promise<PageFontAnalysis> {
@@ -294,7 +294,7 @@ export class FontScanner {
 }
 ```
 
-### Service Worker - Font Analyzer
+Service Worker - Font Analyzer
 
 The background service worker coordinates font analysis and manages state:
 
@@ -398,9 +398,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup UI with React/Preact
+Popup UI with React/Preact
 
 The popup provides quick access to font inspection tools:
 
@@ -532,7 +532,7 @@ function FontCard({ font }: { font: FontInfo }) {
 ```
 {% endraw %}
 
-### Content Script Overlay
+Content Script Overlay
 
 For interactive font inspection, inject an overlay directly into the page:
 
@@ -669,9 +669,9 @@ export class FontOverlay {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions
+Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -680,7 +680,7 @@ export class FontOverlay {
 | `scripting` | Execute scripts to analyze page fonts |
 | `tabs` | Get tab information for context |
 
-### Host Permissions
+Host Permissions
 
 ```json
 "host_permissions": ["<all_urls>"]
@@ -688,7 +688,7 @@ export class FontOverlay {
 
 This is required to analyze fonts on any webpage. For stricter security, you can limit to specific domains.
 
-### API Usage Patterns
+API Usage Patterns
 
 ```typescript
 // Accessing tab information
@@ -710,9 +710,9 @@ const { key } = await chrome.storage.local.get('key');
 
 ---
 
-## State Management
+State Management
 
-### Storage Patterns
+Storage Patterns
 
 Use chrome.storage with typed wrappers:
 
@@ -764,9 +764,9 @@ export const storageManager = new StorageManager();
 
 ---
 
-## Error Handling
+Error Handling
 
-### Content Script Error Handling
+Content Script Error Handling
 
 ```typescript
 // src/content/index.ts
@@ -802,7 +802,7 @@ try {
 }
 ```
 
-### Service Worker Error Handling
+Service Worker Error Handling
 
 ```typescript
 // src/background/index.ts
@@ -822,9 +822,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing with Vitest
+Unit Testing with Vitest
 
 ```typescript
 // tests/font-scanner.test.ts
@@ -858,7 +858,7 @@ describe('FontScanner', () => {
 });
 ```
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 
 ```typescript
 // tests/integration.spec.ts
@@ -884,14 +884,14 @@ test('extension popup displays fonts', async ({ page }) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimize Font Scanning
+Optimize Font Scanning
 
-1. **Limit scanned elements**: Only scan visible elements in viewport
-2. **Debounce analysis**: Don't re-scan on every DOM change
-3. **Cache results**: Store analysis in chrome.storage
-4. **Use requestIdleCallback**: Defer non-critical work
+1. Limit scanned elements: Only scan visible elements in viewport
+2. Debounce analysis: Don't re-scan on every DOM change
+3. Cache results: Store analysis in chrome.storage
+4. Use requestIdleCallback: Defer non-critical work
 
 ```typescript
 // Debounced font scanning
@@ -916,7 +916,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '100px' });
 ```
 
-### Memory Management
+Memory Management
 
 - Clean up event listeners when popup closes
 - Release references to DOM elements
@@ -924,36 +924,36 @@ const observer = new IntersectionObserver((entries) => {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
 Before publishing to Chrome Web Store:
 
-1. **Manifest Review**
+1. Manifest Review
    - [ ] All permissions are necessary and minimal
    - [ ] Host permissions are scoped appropriately
    - [ ] Icons are provided in all required sizes (16, 48, 128)
 
-2. **Testing**
+2. Testing
    - [ ] Extension works in Incognito mode
    - [ ] No console errors on multiple test pages
    - [ ] All features work across different domains
 
-3. **Store Assets**
+3. Store Assets
    - [ ] Screenshots (1280x800 or 640x400)
    - [ ] Promotional icon (128x128)
    - [ ] Privacy policy URL (if collecting data)
 
-4. **Manifest Fields**
+4. Manifest Fields
    - [ ] Short description (< 132 characters)
    - [ ] Version follows semver
    - [ ] `default_locale` if using i18n
 
-5. **Build**
+5. Build
    - [ ] Run production build
    - [ ] Verify no source maps in production
    - [ ] Test packed .crx file
 
-### Build Configuration
+Build Configuration
 
 ```javascript
 // webpack.config.js
@@ -975,13 +975,13 @@ module.exports = {
 
 ---
 
-## Summary
+Summary
 
 Building a Font Inspector extension requires careful consideration of Chrome's extension architecture. Key takeaways:
 
-1. **Architecture**: Use the three-context model (popup, service worker, content script) for clean separation
-2. **TypeScript**: Leverage shared types for type safety across contexts
-3. **Permissions**: Request only necessary permissions; use activeTab when possible
-4. **Performance**: Debounce scanning, cache results, and use modern APIs
-5. **Testing**: Combine unit tests with integration tests using Playwright
-6. **Publishing**: Follow Chrome Web Store guidelines and test thoroughly before submission
+1. Architecture: Use the three-context model (popup, service worker, content script) for clean separation
+2. TypeScript: Use shared types for type safety across contexts
+3. Permissions: Request only necessary permissions; use activeTab when possible
+4. Performance: Debounce scanning, cache results, and use modern APIs
+5. Testing: Combine unit tests with integration tests using Playwright
+6. Publishing: Follow Chrome Web Store guidelines and test thoroughly before submission

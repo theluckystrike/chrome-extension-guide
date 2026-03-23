@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/api-reference/cookies-api/"
 
 The `chrome.cookies` API provides full CRUD operations for querying and modifying browser cookies. Requires `"cookies"` permission plus host permissions.
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -18,9 +18,9 @@ The `chrome.cookies` API provides full CRUD operations for querying and modifyin
 }
 ```
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
-### chrome.cookies.get {#chromecookiesget}
+chrome.cookies.get {#chromecookiesget}
 
 Retrieves a single cookie by name and URL.
 
@@ -28,7 +28,7 @@ Retrieves a single cookie by name and URL.
 chrome.cookies.get({ url: string, name: string, storeId?: string }, callback): void;
 ```
 
-### chrome.cookies.getAll {#chromecookiesgetall}
+chrome.cookies.getAll {#chromecookiesgetall}
 
 Retrieves all cookies matching filters.
 
@@ -42,7 +42,7 @@ chrome.cookies.getAll({ domain: ".example.com" }, (cookies) => {
 });
 ```
 
-### chrome.cookies.set {#chromecookiesset}
+chrome.cookies.set {#chromecookiesset}
 
 Sets or updates a cookie. Parameters: url (required), name, value, domain, path, secure, httpOnly, sameSite ("no_restriction" | "lax" | "strict" | "unspecified"), expirationDate, storeId.
 
@@ -62,7 +62,7 @@ chrome.cookies.set({
 });
 ```
 
-### chrome.cookies.remove {#chromecookiesremove}
+chrome.cookies.remove {#chromecookiesremove}
 
 Removes a cookie by name and URL.
 
@@ -70,7 +70,7 @@ Removes a cookie by name and URL.
 chrome.cookies.remove({ url: string, name: string, storeId?: string }, callback): void;
 ```
 
-### chrome.cookies.getAllCookieStores {#chromecookiesgetallcookiestores}
+chrome.cookies.getAllCookieStores {#chromecookiesgetallcookiestores}
 
 Returns all available cookie stores. IDs: "0" (default), "1" (incognito).
 
@@ -78,13 +78,13 @@ Returns all available cookie stores. IDs: "0" (default), "1" (incognito).
 chrome.cookies.getAllCookieStores(callback): void;
 ```
 
-## Cookie Object {#cookie-object}
+Cookie Object {#cookie-object}
 
 Properties: name, value, domain, hostOnly, path, secure, httpOnly, sameSite, session, expirationDate, storeId.
 
-## Events {#events}
+Events {#events}
 
-### chrome.cookies.onChanged {#chromecookiesonchanged}
+chrome.cookies.onChanged {#chromecookiesonchanged}
 
 Fires when a cookie is set or removed. Cause values: "evicted" | "expired" | "explicit" | "expired_overwrite" | "overwrite".
 
@@ -98,9 +98,9 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Get All Cookies for a Domain {#get-all-cookies-for-a-domain}
+Get All Cookies for a Domain {#get-all-cookies-for-a-domain}
 
 ```javascript
 chrome.cookies.getAll({ domain: "example.com" }, (cookies) => {
@@ -108,7 +108,7 @@ chrome.cookies.getAll({ domain: "example.com" }, (cookies) => {
 });
 ```
 
-### Set a Cookie {#set-a-cookie}
+Set a Cookie {#set-a-cookie}
 
 ```javascript
 const expiry = Math.floor(Date.now() / 1000) + (24 * 60 * 60);
@@ -124,7 +124,7 @@ chrome.cookies.set({
 });
 ```
 
-### Delete All Cookies for a Site {#delete-all-cookies-for-a-site}
+Delete All Cookies for a Site {#delete-all-cookies-for-a-site}
 
 ```javascript
 chrome.cookies.getAll({ domain: domain }, (cookies) => {
@@ -134,7 +134,7 @@ chrome.cookies.getAll({ domain: domain }, (cookies) => {
 });
 ```
 
-### Monitor Cookie Changes {#monitor-cookie-changes}
+Monitor Cookie Changes {#monitor-cookie-changes}
 
 ```javascript
 chrome.cookies.onChanged.addListener((changeInfo) => {
@@ -144,17 +144,17 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 });
 ```
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookies API Guide](../guides/cookies-api.md)
 - [Session Management Patterns](../patterns/cookies-sessions.md)
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I read cookies for a specific domain?
+How do I read cookies for a specific domain?
 Use chrome.cookies.getAll() with a "domain" parameter to filter cookies by domain.
 
-### Can I set cookies from my extension?
+Can I set cookies from my extension?
 Yes, use chrome.cookies.set() to create or update cookies. Note that HttpOnly cookies cannot be set.
 
 ---

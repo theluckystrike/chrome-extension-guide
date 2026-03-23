@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Action Api — Manifest V3 Guide"
+title: "Chrome Extension Action Api. Manifest V3 Guide"
 description: "Use the Action API for toolbar buttons in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/action-api/"
 ---
@@ -11,18 +11,18 @@ The Chrome Extension Manifest V3 (MV3) unified the `browserAction` and `pageActi
 
 ---
 
-## Overview {#overview}
+Overview {#overview}
 
 In Manifest V2, Chrome had two separate APIs for extension actions:
 
-- **`browserAction`**: Appears in the Chrome toolbar, always visible
-- **`pageAction`**: Appears in the address bar, only for specific pages
+- `browserAction`: Appears in the Chrome toolbar, always visible
+- `pageAction`: Appears in the address bar, only for specific pages
 
-In MV3, these are merged into a single **`chrome.action`** API that works as either type depending on how you configure it.
+In MV3, these are merged into a single `chrome.action` API that works as either type depending on how you configure it.
 
 ---
 
-## Migration Table {#migration-table}
+Migration Table {#migration-table}
 
 | MV2 | MV3 |
 |-----|-----|
@@ -33,9 +33,9 @@ In MV3, these are merged into a single **`chrome.action`** API that works as eit
 
 ---
 
-## Manifest Change {#manifest-change}
+Manifest Change {#manifest-change}
 
-### Before (MV2) {#before-mv2}
+Before (MV2) {#before-mv2}
 
 ```json
 {
@@ -50,7 +50,7 @@ In MV3, these are merged into a single **`chrome.action`** API that works as eit
 }
 ```
 
-### After (MV3) {#after-mv3}
+After (MV3) {#after-mv3}
 
 ```json
 {
@@ -67,7 +67,7 @@ In MV3, these are merged into a single **`chrome.action`** API that works as eit
 
 ---
 
-## Action API Methods {#action-api-methods}
+Action API Methods {#action-api-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -88,7 +88,7 @@ All setter/getter methods accept an optional `tabId` parameter to target specifi
 
 ---
 
-## Per-Tab vs Global {#per-tab-vs-global}
+Per-Tab vs Global {#per-tab-vs-global}
 
 Most Action API methods accept an optional `tabId` parameter:
 
@@ -110,7 +110,7 @@ When `tabId` is omitted, the operation applies globally.
 
 ---
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 The `@theluckystrike/webext-messaging` package enables communication between your popup, content scripts, and service worker. Here's how to use it with the Action API:
 
@@ -137,13 +137,13 @@ async function toggleFeature(enabled: boolean) {
 
 // Listen for messages from service worker
 messenger.onMessage("feature-status", (message) => {
-  chrome.action.setBadgeText({ text: message.active ? "●" : "" });
+  chrome.action.setBadgeText({ text: message.active ? "" : "" });
 });
 ```
 
 ---
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 The `@theluckystrike/webext-storage` package provides typed storage with automatic persistence. This is essential for maintaining badge state across service worker restarts.
 
@@ -192,11 +192,11 @@ restoreBadgeState();
 
 ---
 
-## Dynamic Popup {#dynamic-popup}
+Dynamic Popup {#dynamic-popup}
 
 By default, clicking an action with a popup opens that popup. To handle clicks programmatically, you can disable the popup:
 
-### Disable popup to use onClicked {#disable-popup-to-use-onclicked}
+Disable popup to use onClicked {#disable-popup-to-use-onclicked}
 
 ```ts
 // Remove popup to enable onClicked event
@@ -208,7 +208,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-### Re-enable popup {#re-enable-popup}
+Re-enable popup {#re-enable-popup}
 
 ```ts
 // Restore popup
@@ -217,9 +217,9 @@ chrome.action.setPopup({ popup: "popup.html" });
 
 ---
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Badge Counter {#badge-counter}
+Badge Counter {#badge-counter}
 
 ```ts
 async function incrementBadge(tabId: number) {
@@ -230,7 +230,7 @@ async function incrementBadge(tabId: number) {
 }
 ```
 
-### Toggle On/Off {#toggle-onoff}
+Toggle On/Off {#toggle-onoff}
 
 ```ts
 let isEnabled = false;
@@ -250,7 +250,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Per-Tab State {#per-tab-state}
+Per-Tab State {#per-tab-state}
 
 ```ts
 const tabStates = new Map<number, boolean>();
@@ -264,13 +264,13 @@ chrome.action.onClicked.addListener((tab) => {
   tabStates.set(tab.id, next);
   
   chrome.action.setBadgeText({
-    text: next ? "●" : "",
+    text: next ? "" : "",
     tabId: tab.id
   });
 });
 ```
 
-### Dynamic Popup {#dynamic-popup}
+Dynamic Popup {#dynamic-popup}
 
 ```ts
 // Set different popups based on context
@@ -285,11 +285,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 ---
 
-## Gotchas {#gotchas}
+Gotchas {#gotchas}
 
-### onClicked only fires without popup {#onclicked-only-fires-without-popup}
+onClicked only fires without popup {#onclicked-only-fires-without-popup}
 
-If you set a popup with `setPopup` or in the manifest, `onClicked` will **not** fire. Remove the popup to use the click event:
+If you set a popup with `setPopup` or in the manifest, `onClicked` will not fire. Remove the popup to use the click event:
 
 ```ts
 // This will NOT trigger onClicked
@@ -299,15 +299,15 @@ chrome.action.setPopup({ popup: "popup.html" });
 chrome.action.setPopup({ popup: "" });
 ```
 
-### Badge text limit {#badge-text-limit}
+Badge text limit {#badge-text-limit}
 
-Badge text should use **4 or fewer characters** due to limited space. Longer text may be truncated depending on character width:
+Badge text should use 4 or fewer characters due to limited space. Longer text may be truncated depending on character width:
 
 ```ts
 chrome.action.setBadgeText({ text: "12345" }); // May be truncated visually
 ```
 
-### Per-tab state lost on navigation {#per-tab-state-lost-on-navigation}
+Per-tab state lost on navigation {#per-tab-state-lost-on-navigation}
 
 Per-tab badge state is cleared when the user navigates to a new URL in that tab. Use storage to persist state:
 
@@ -316,13 +316,13 @@ Per-tab badge state is cleared when the user navigates to a new URL in that tab.
 await storage.set("tabState", { [tabId]: { active: true } });
 ```
 
-### Service worker restarts {#service-worker-restarts}
+Service worker restarts {#service-worker-restarts}
 
 Badge state set directly on `chrome.action` is lost when the service worker terminates. Always use `@theluckystrike/webext-storage` to persist state.
 
 ---
 
-## Find-and-Replace Migration {#find-and-replace-migration}
+Find-and-Replace Migration {#find-and-replace-migration}
 
 Use these simple substitutions to migrate from MV2 to MV3:
 
@@ -334,7 +334,7 @@ Use these simple substitutions to migrate from MV2 to MV3:
 | `"page_action"` | `"action"` |
 | `tab.id` in badge methods | `tabId: tab.id` |
 
-### Example transformation {#example-transformation}
+Example transformation {#example-transformation}
 
 ```ts
 // MV2
@@ -346,7 +346,7 @@ chrome.action.setBadgeText({ text: "5", tabId: tab.id });
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 - MV3 unifies `browserAction` and `pageAction` into `chrome.action`
 - Most methods support per-tab targeting via optional `tabId`

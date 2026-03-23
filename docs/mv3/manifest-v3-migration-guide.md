@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Chrome Extension Manifest V3 Migration Guide — Manifest V3 Guide"
+title: "Chrome Extension Manifest V3 Migration Guide. Manifest V3 Guide"
 description: "Complete guide to migrating your Chrome extension from Manifest V2 to Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/manifest-v3-migration-guide/"
 ---
 
 # Manifest V3 Migration Guide
 
-## Quick Checklist {#quick-checklist}
+Quick Checklist {#quick-checklist}
 1. Change `"manifest_version": 2` → `3`
 2. Replace `"background": { "scripts": [...] }` → `"background": { "service_worker": "background.js" }`
 3. Replace `"browser_action"` / `"page_action"` → `"action"`
@@ -19,7 +19,7 @@ canonical_url: "https://bestchromeextensions.com/mv3/manifest-v3-migration-guide
 9. Replace `chrome.tabs.insertCSS` → `chrome.scripting.insertCSS`
 10. Handle service worker lifecycle (no persistent state)
 
-## Manifest Changes {#manifest-changes}
+Manifest Changes {#manifest-changes}
 ```json
 // MV2
 {
@@ -39,15 +39,15 @@ canonical_url: "https://bestchromeextensions.com/mv3/manifest-v3-migration-guide
 }
 ```
 
-## Background Script → Service Worker {#background-script-service-worker}
+Background Script → Service Worker {#background-script-service-worker}
 
-### No DOM Access {#no-dom-access}
+No DOM Access {#no-dom-access}
 ```typescript
 // MV2 (had DOM in background page)
 const parser = new DOMParser();
 const doc = parser.parseFromString(html, 'text/html');
 
-// MV3 — use offscreen document
+// MV3. use offscreen document
 await chrome.offscreen.createDocument({
   url: 'offscreen.html',
   reasons: ['DOM_PARSER'],
@@ -55,13 +55,13 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-### No Persistent State {#no-persistent-state}
+No Persistent State {#no-persistent-state}
 ```typescript
 // MV2
 let count = 0;
 chrome.browserAction.onClicked.addListener(() => count++);
 
-// MV3 — use storage
+// MV3. use storage
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const storage = createStorage(defineSchema({ count: 'number' }), 'local');
 chrome.action.onClicked.addListener(async () => {
@@ -70,17 +70,17 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### No setInterval/setTimeout (long-running) {#no-setintervalsettimeout-long-running}
+No setInterval/setTimeout (long-running) {#no-setintervalsettimeout-long-running}
 ```typescript
 // MV2
 setInterval(() => poll(), 60000);
 
-// MV3 — use alarms
+// MV3. use alarms
 chrome.alarms.create('poll', { periodInMinutes: 1 });
 chrome.alarms.onAlarm.addListener(a => { if (a.name === 'poll') poll(); });
 ```
 
-## Web Request → Declarative Net Request {#web-request-declarative-net-request}
+Web Request → Declarative Net Request {#web-request-declarative-net-request}
 ```typescript
 // MV2 (blocking webRequest)
 chrome.webRequest.onBeforeRequest.addListener(
@@ -99,7 +99,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }]
 ```
 
-## Scripting API Changes {#scripting-api-changes}
+Scripting API Changes {#scripting-api-changes}
 ```typescript
 // MV2
 chrome.tabs.executeScript(tabId, { code: 'alert("hi")' });
@@ -116,7 +116,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-## Action API {#action-api}
+Action API {#action-api}
 ```typescript
 // MV2
 chrome.browserAction.setIcon({ path: 'icon.png' });
@@ -127,16 +127,16 @@ chrome.action.setIcon({ path: 'icon.png' });
 chrome.action.onClicked.addListener(handler);
 ```
 
-## Content Security Policy {#content-security-policy}
+Content Security Policy {#content-security-policy}
 ```json
-// MV2 — allowed remote scripts
+// MV2. allowed remote scripts
 { "content_security_policy": "script-src 'self' https://cdn.example.com; object-src 'self'" }
 
-// MV3 — no remote scripts, no eval
+// MV3. no remote scripts, no eval
 { "content_security_policy": { "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'" } }
 ```
 
-## Messaging with @theluckystrike/webext-messaging {#messaging-with-theluckystrikewebext-messaging}
+Messaging with @theluckystrike/webext-messaging {#messaging-with-theluckystrikewebext-messaging}
 ```typescript
 // Works the same in MV2 and MV3
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -145,15 +145,15 @@ const m = createMessenger<Msgs>();
 // Handles SW lifecycle automatically
 ```
 
-## Common Migration Pitfalls {#common-migration-pitfalls}
-- Listeners inside async functions — lost on SW restart
-- Global variables — reset on termination
-- DOM APIs in service worker — use offscreen document
-- `XMLHttpRequest` — use `fetch()` instead
-- `localStorage` — use `chrome.storage`
-- `window` object — not available in SW
+Common Migration Pitfalls {#common-migration-pitfalls}
+- Listeners inside async functions. lost on SW restart
+- Global variables. reset on termination
+- DOM APIs in service worker. use offscreen document
+- `XMLHttpRequest`. use `fetch()` instead
+- `localStorage`. use `chrome.storage`
+- `window` object. not available in SW
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - `docs/guides/mv2-to-mv3-migration.md`
 - `docs/mv3/service-workers.md`
 - `docs/mv3/event-driven-architecture.md`

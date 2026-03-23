@@ -4,7 +4,7 @@ A comprehensive guide to creating a production-ready website blocker extension u
 
 ## Overview
 
-Website blocker extensions are among the most popular types of productivity tools. This guide covers building a robust blocker using Manifest V3, TypeScript, and modern Chrome APIs.
+Website blocker extensions are among the most popular types of productivity tools. This guide covers building a solid blocker using Manifest V3, TypeScript, and modern Chrome APIs.
 
 ## Architecture and manifest.json Setup
 
@@ -48,28 +48,28 @@ The extension uses Manifest V3 with the declarativeNetRequest API for efficient,
 
 ```
 website-blocker/
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry
-│   │   ├── blocker.ts        # Blocking logic
-│   │   └── storage.ts        # Storage management
-│   ├── popup/
-│   │   ├── index.tsx         # Popup React component
-│   │   ├── App.tsx           # Main popup UI
-│   │   └── styles.css        # Popup styles
-│   ├── shared/
-│   │   ├── types.ts          # TypeScript interfaces
-│   │   └── constants.ts      # Shared constants
-│   └── content/
-│       └── overlay.ts        # Block page overlay
-├── public/
-│   ├── popup.html
-│   ├── blocked.html          # Custom block page
-│   └── icons/
-├── dist/                     # Compiled output
-├── manifest.json
-├── tsconfig.json
-└── package.json
+ src/
+    background/
+       index.ts          # Service worker entry
+       blocker.ts        # Blocking logic
+       storage.ts        # Storage management
+    popup/
+       index.tsx         # Popup React component
+       App.tsx           # Main popup UI
+       styles.css        # Popup styles
+    shared/
+       types.ts          # TypeScript interfaces
+       constants.ts      # Shared constants
+    content/
+        overlay.ts        # Block page overlay
+ public/
+    popup.html
+    blocked.html          # Custom block page
+    icons/
+ dist/                     # Compiled output
+ manifest.json
+ tsconfig.json
+ package.json
 ```
 
 ## Core Implementation with TypeScript
@@ -398,7 +398,7 @@ export function App() {
 </head>
 <body>
   <div class="container">
-    <h1>🚫 Site Blocked</h1>
+    <h1> Site Blocked</h1>
     <p>This website has been blocked by your Website Blocker extension.</p>
     <div class="timer">
       <p>Stay focused! You've got this.</p>
@@ -423,9 +423,9 @@ export function App() {
 
 The declarativeNetRequest API is the recommended way to block requests in MV3:
 
-- **Privacy-friendly**: No access to request content
-- **Efficient**: Rules evaluated by browser, not extension
-- **No host permission for blocking**: Only needed for reading URLs
+- Privacy-friendly: No access to request content
+- Efficient: Rules evaluated by browser, not extension
+- No host permission for blocking: Only needed for reading URLs
 
 ## State Management and Storage Patterns
 
@@ -463,9 +463,9 @@ chrome.tabs.query({}, (tabs) => {
 
 ### Common Issues and Solutions
 
-1. **Rules not updating**: Ensure `updateDynamicRules` is called after storage changes
-2. **Pattern matching failures**: Validate regex patterns before saving
-3. **Storage quota exceeded**: Implement cleanup of old blocked sites
+1. Rules not updating: Ensure `updateDynamicRules` is called after storage changes
+2. Pattern matching failures: Validate regex patterns before saving
+3. Storage quota exceeded: Implement cleanup of old blocked sites
 
 ```typescript
 // Validate URL pattern before adding

@@ -1,34 +1,34 @@
 ---
 layout: default
-title: "Chrome Extension Management API — Developer Guide"
+title: "Chrome Extension Management API. Developer Guide"
 description: "Learn how to use the Chrome Extension Management API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/management-api/"
 ---
 # Chrome Extension Management API
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
 The `chrome.management` API provides powerful capabilities for managing installed extensions and apps within Chrome. This API enables you to query extension information, control their enabled/disabled state, uninstall extensions programmatically, and listen for installation/uninstallation events. It's essential for building extension manager dashboards, enterprise policy tools, and productivity applications that help users organize their browser environment.
 
-## Permissions and Setup {#permissions-and-setup}
+Permissions and Setup {#permissions-and-setup}
 
-### Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 To use the `chrome.management` API, you need to declare the `"management"` permission in your extension's `manifest.json`:
-# Chrome Management API
+Chrome Management API
 
-## Overview
+Overview
 The `chrome.management` API provides powerful capabilities for managing installed extensions and apps within Chrome. It enables querying extension information, controlling enabled/disabled state, uninstalling extensions, and listening for installation events. Essential for building extension managers, enterprise policy tools, and productivity applications.
 
-## Required Permission
+Required Permission
 ```json
 {
   "permissions": ["management"]
 }
 ```
-Note: The "management" permission is considered a "strong" permission requiring review during Chrome Web Store submission.
+The "management" permission is considered a "strong" permission requiring review during Chrome Web Store submission.
 
-### Permission Scope {#permission-scope}
+Permission Scope {#permission-scope}
 
 The `"management"` permission is considered a "strong" permission and requires review during Chrome Web Store submission. However, it cannot be used with `activeTab` or on Chrome Web Store listing pages. The permission grants access to:
 
@@ -37,14 +37,14 @@ The `"management"` permission is considered a "strong" permission and requires r
 - Uninstall any extension (with user confirmation)
 - Listen to installation and state change events
 
-## Getting Extension Information {#getting-extension-information}
+Getting Extension Information {#getting-extension-information}
 
-### Listing All Installed Extensions {#listing-all-installed-extensions}
+Listing All Installed Extensions {#listing-all-installed-extensions}
 
 The `chrome.management.getAll()` method returns an array of all installed extensions and apps:
-## Core Methods
+Core Methods
 
-### chrome.management.getAll()
+chrome.management.getAll()
 Returns all installed extensions and apps:
 ```javascript
 async function getAllExtensions() {
@@ -55,11 +55,11 @@ async function getAllExtensions() {
 }
 ```
 
-### Getting a Specific Extension {#getting-a-specific-extension}
+Getting a Specific Extension {#getting-a-specific-extension}
 
 Use `chrome.management.get()` with an extension ID to get details about a specific extension:
 
-### chrome.management.get(id)
+chrome.management.get(id)
 Get info about a specific extension:
 ```javascript
 async function getExtensionInfo(extensionId) {
@@ -72,11 +72,11 @@ async function getExtensionInfo(extensionId) {
 }
 ```
 
-### Extension Info Object Structure {#extension-info-object-structure}
+Extension Info Object Structure {#extension-info-object-structure}
 
 The `ExtensionInfo` object returned by the API contains comprehensive information:
 
-### chrome.management.getSelf()
+chrome.management.getSelf()
 Get info about your own extension:
 ```javascript
 async function getSelfInfo() {
@@ -85,9 +85,9 @@ async function getSelfInfo() {
 // Returns: { id, version, name, enabled, mayDisable, installType, ... }
 ```
 
-## Working with Extension Icons {#working-with-extension-icons}
+Working with Extension Icons {#working-with-extension-icons}
 
-### Displaying Extension Icons {#displaying-extension-icons}
+Displaying Extension Icons {#displaying-extension-icons}
 
 Icons are stored in the `icons` array with different sizes. Here's how to properly display them:
 
@@ -126,9 +126,9 @@ async function getIconAsDataUrl(extensionId, size = 128) {
 }
 ```
 
-## Enabling and Disabling Extensions {#enabling-and-disabling-extensions}
+Enabling and Disabling Extensions {#enabling-and-disabling-extensions}
 
-### Programmatic Control {#programmatic-control}
+Programmatic Control {#programmatic-control}
 
 The API allows you to enable or disable extensions programmatically:
 
@@ -154,7 +154,7 @@ async function disableExtension(extensionId) {
 }
 
 // Toggle extension state
-### chrome.management.setEnabled(id, enabled)
+chrome.management.setEnabled(id, enabled)
 Enable or disable an extension:
 ```javascript
 async function toggleExtension(extensionId) {
@@ -162,7 +162,7 @@ async function toggleExtension(extensionId) {
   await chrome.management.setEnabled(extensionId, !ext.enabled);
 }
 
-### Checking Can Enable/Disable {#checking-can-enabledisable}
+Checking Can Enable/Disable {#checking-can-enabledisable}
 
 Not all extensions can be enabled or disabled. Check before attempting:
 
@@ -184,7 +184,7 @@ if (!canDisable) {
 }
 ```
 
-### Disabling with Reason {#disabling-with-reason}
+Disabling with Reason {#disabling-with-reason}
 
 Some extensions can be disabled programmatically with a reason:
 
@@ -193,15 +193,15 @@ async function disableExtension(extensionId) {
 }
 ```
 
-### chrome.management.uninstall() and uninstallSelf()
+chrome.management.uninstall() and uninstallSelf()
 Uninstall extensions programmatically:
 ```javascript
 // Uninstall another extension (shows confirmation dialog)
 await chrome.management.uninstall(extensionId, { showConfirmDialog: true });
 
-## Uninstalling Extensions {#uninstalling-extensions}
+Uninstalling Extensions {#uninstalling-extensions}
 
-### Programmatic Uninstall {#programmatic-uninstall}
+Programmatic Uninstall {#programmatic-uninstall}
 
 Uninstall extensions with user confirmation:
 
@@ -227,7 +227,7 @@ async function uninstallWithConfirmation(extensionId) {
 }
 ```
 
-### Silent Uninstall {#silent-uninstall}
+Silent Uninstall {#silent-uninstall}
 
 For enterprise or internal use, you can silently uninstall without confirmation:
 
@@ -242,7 +242,7 @@ async function silentUninstall(extensionId) {
 }
 ```
 
-### Self-Uninstall {#self-uninstall}
+Self-Uninstall {#self-uninstall}
 
 Extensions can uninstall themselves:
 
@@ -254,7 +254,7 @@ await chrome.management.uninstall(extensionId, { showConfirmDialog: false });
 chrome.management.uninstallSelf({ showConfirmDialog: true });
 ```
 
-### chrome.management.getPermissionWarningsById(id)
+chrome.management.getPermissionWarningsById(id)
 Get permission warnings before installation:
 ```javascript
 async function checkPermissionWarnings(extensionId) {
@@ -263,14 +263,14 @@ async function checkPermissionWarnings(extensionId) {
 }
 ```
 
-## Listening to Events {#listening-to-events}
+Listening to Events {#listening-to-events}
 
 The Management API provides several events for monitoring extension state changes:
 
-### onInstalled Event {#oninstalled-event}
-## Events
+onInstalled Event {#oninstalled-event}
+Events
 
-### onInstalled
+onInstalled
 Listen for new extension installations:
 ```javascript
 chrome.management.onInstalled.addListener((extensionInfo) => {
@@ -278,11 +278,11 @@ chrome.management.onInstalled.addListener((extensionInfo) => {
 });
 ```
 
-### onUninstalled Event {#onuninstalled-event}
+onUninstalled Event {#onuninstalled-event}
 
 Listen for extension uninstallations:
 
-### onUninstalled
+onUninstalled
 Listen for uninstallations:
 ```javascript
 chrome.management.onUninstalled.addListener((extensionId) => {
@@ -290,18 +290,18 @@ chrome.management.onUninstalled.addListener((extensionId) => {
 });
 ```
 
-### onEnabled Event {#onenabled-event}
+onEnabled Event {#onenabled-event}
 
 Listen for extensions being enabled:
 
-### onEnabled / onDisabled
+onEnabled / onDisabled
 Listen for state changes:
 ```javascript
 chrome.management.onEnabled.addListener((extensionInfo) => {
   console.log('Enabled:', extensionInfo.name);
 });
 
-### onDisabled Event {#ondisabled-event}
+onDisabled Event {#ondisabled-event}
 
 Listen for extensions being disabled:
 
@@ -311,12 +311,12 @@ chrome.management.onDisabled.addListener((extensionInfo) => {
 });
 ```
 
-### Complete Event Listener Setup {#complete-event-listener-setup}
+Complete Event Listener Setup {#complete-event-listener-setup}
 
 Here's a comprehensive example combining all events:
-## Use Cases
+Use Cases
 
-### Extension Manager Dashboard
+Extension Manager Dashboard
 ```javascript
 class ExtensionEventMonitor {
   constructor() {
@@ -372,9 +372,9 @@ class ExtensionEventMonitor {
 }
 ```
 
-## Building an Extension Manager Dashboard {#building-an-extension-manager-dashboard}
+Building an Extension Manager Dashboard {#building-an-extension-manager-dashboard}
 
-### Complete Dashboard Example {#complete-dashboard-example}
+Complete Dashboard Example {#complete-dashboard-example}
 
 Here's a full example of building an extension manager dashboard:
 
@@ -406,7 +406,7 @@ class ExtensionManager {
 }
 ```
 
-### Conflict Detection
+Conflict Detection
 Detect extensions with conflicting permissions:
 ```javascript
 async function detectConflicts() {
@@ -423,11 +423,11 @@ async function detectConflicts() {
 }
 ```
 
-### Advanced Dashboard Features {#advanced-dashboard-features}
+Advanced Dashboard Features {#advanced-dashboard-features}
 
 #### Search and Filter
 
-### Dependency Checking
+Dependency Checking
 Check if required extensions are installed:
 ```javascript
 async function checkDependencies(requiredIds) {
@@ -439,7 +439,7 @@ async function checkDependencies(requiredIds) {
 }
 ```
 
-## ExtensionInfo Properties
+ExtensionInfo Properties
 Key properties returned by the API:
 - `id`: Unique extension identifier
 - `name`, `version`, `description`: Basic info
@@ -451,7 +451,7 @@ Key properties returned by the API:
 - `mayDisable`: Whether user can disable this extension
 - `disabledReason`: Reason if disabled (e.g., "permissions_increase")
 
-## Important Limitations
+Important Limitations
 1. Cannot manage extensions installed by enterprise policy in some cases
 2. Built-in Chrome extensions cannot be disabled
 3. Self-uninstall always requires user confirmation
@@ -486,9 +486,9 @@ class ExtensionUsageTracker {
 }
 ```
 
-## Common Patterns and Best Practices {#common-patterns-and-best-practices}
+Common Patterns and Best Practices {#common-patterns-and-best-practices}
 
-### Extension Self-Detection {#extension-self-detection}
+Extension Self-Detection {#extension-self-detection}
 
 ```javascript
 // Check if running within an extension context
@@ -502,7 +502,7 @@ async function getSelfInfo() {
 }
 ```
 
-### Error Handling {#error-handling}
+Error Handling {#error-handling}
 
 ```javascript
 // Robust error handling for management API
@@ -529,7 +529,7 @@ async function safeManagementOperation(operation, ...args) {
 }
 ```
 
-### Permission Checking {#permission-checking}
+Permission Checking {#permission-checking}
 
 ```javascript
 // Check if your extension has management permission
@@ -552,17 +552,17 @@ async function canManageExtension(extensionId) {
 }
 ```
 
-## Limitations and Considerations {#limitations-and-considerations}
+Limitations and Considerations {#limitations-and-considerations}
 
-### Important Limitations {#important-limitations}
+Important Limitations {#important-limitations}
 
-1. **Cannot manage itself**: Extensions cannot disable or uninstall themselves without user confirmation
-2. **Policy-installed extensions**: Extensions installed by enterprise policy may have restricted management capabilities
-3. **Built-in extensions**: Some Chrome built-in extensions cannot be disabled
-4. **Permission requirements**: Managing other extensions requires the broad `"management"` permission
-5. **User gesture requirement**: Some operations may require user interaction
+1. Cannot manage itself: Extensions cannot disable or uninstall themselves without user confirmation
+2. Policy-installed extensions: Extensions installed by enterprise policy may have restricted management capabilities
+3. Built-in extensions: Some Chrome built-in extensions cannot be disabled
+4. Permission requirements: Managing other extensions requires the broad `"management"` permission
+5. User gesture requirement: Some operations may require user interaction
 
-### Privacy Considerations {#privacy-considerations}
+Privacy Considerations {#privacy-considerations}
 
 When building extension managers, be mindful of:
 
@@ -571,20 +571,20 @@ When building extension managers, be mindful of:
 - Be transparent about what extension information you're accessing
 - Consider the security implications of enabling/disabling extensions
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The `chrome.management` API is a powerful tool for building extension management solutions. From simple enable/disable toggles to comprehensive dashboards with security analysis, this API provides the foundation for managing Chrome's extension ecosystem. Remember to handle edge cases like policy-installed extensions and always provide good UX with proper error handling and user feedback.
 
 For more information, see the official [Chrome Management API documentation](https://developer.chrome.com/docs/extensions/reference/management/).
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Management API Reference](../api-reference/management-api.md)
 - [Extension Configuration](../patterns/extension-configuration.md)
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-## Reference
+Reference
 Official documentation: https://developer.chrome.com/docs/extensions/reference/api/management

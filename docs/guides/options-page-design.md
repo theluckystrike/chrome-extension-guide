@@ -2,13 +2,13 @@
 
 ## Introduction
 - Options pages allow users to configure extension behavior
-- Critical for user experience — poorly designed settings frustrate users
+- Critical for user experience. poorly designed settings frustrate users
 - Modern extensions should support both full-page and embedded options
 - Reference: https://developer.chrome.com/docs/extensions/develop/ui/options-page
 
 ## Options Page vs options_ui (Embedded)
-- **Full-page options**: Opens in a new tab via `chrome://extensions` > "Extension options"
-- **Embedded options**: Displays inline within the extensions management page
+- Full-page options: Opens in a new tab via `chrome://extensions` > "Extension options"
+- Embedded options: Displays inline within the extensions management page
 - Configure in manifest.json:
 
 ```json
@@ -26,8 +26,8 @@
 - Prefer embedded for quick access; full-page for complex settings
 
 ## Full Page vs Embedded Options
-- **Full-page**: Opens in new tab, more screen real estate,独立浏览上下文
-- **Embedded**: Quick access, consistent with Chrome UI, limited space
+- Full-page: Opens in new tab, more screen real estate,
+- Embedded: Quick access, consistent with Chrome UI, limited space
 - Embedded options cannot use certain APIs (e.g., some chrome:// URLs)
 - Consider supporting both with responsive design
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 ```
 
 ## Real-time Save with chrome.storage
-- Avoid "Save" buttons when possible — use auto-save
+- Avoid "Save" buttons when possible. use auto-save
 - Use `chrome.storage.onChanged` to react to external changes
 
 ```javascript
@@ -118,10 +118,10 @@ document.getElementById('importBtn').addEventListener('change', async (e) => {
 }
 ```
 
-- Note: Sync requires user to be signed into Chrome
+- Sync requires user to be signed into Chrome
 
 ## Default Values Handling
-- Always define defaults — first-run experience matters
+- Always define defaults. first-run experience matters
 - Use a dedicated defaults object, export for consistency
 
 ```javascript

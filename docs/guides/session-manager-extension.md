@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A Session Manager extension allows users to save, organize, and restore browser sessions—collections of tabs and windows that can be named, tagged, and quickly restored. This guide covers building a complete MV3 session manager with TypeScript, covering architecture, implementation, UI design, storage, testing, and publishing.
+A Session Manager extension allows users to save, organize, and restore browser sessions, collections of tabs and windows that can be named, tagged, and quickly restored. This guide covers building a complete MV3 session manager with TypeScript, covering architecture, implementation, UI design, storage, testing, and publishing.
 
 ## Architecture Overview
 
@@ -10,35 +10,35 @@ A Session Manager extension allows users to save, organize, and restore browser 
 
 ```
 session-manager-extension/
-├── manifest.json           # Extension manifest (MV3)
-├── src/
-│   ├── background/
-│   │   ├── index.ts        # Service worker entry point
-│   │   ├── sessions.ts     # Session CRUD operations
-│   │   └── commands.ts    # Keyboard shortcut handlers
-│   ├── popup/
-│   │   ├── popup.ts        # Popup entry point
-│   │   ├── PopupApp.tsx    # Main popup component
-│   │   └── components/     # UI components
-│   ├── sidebar/
-│   │   ├── sidebar.ts      # Side panel entry
-│   │   └── SidebarApp.tsx  # Side panel UI
-│   ├── content/
-│   │   └── overlay.ts      # In-page session overlay
-│   ├── shared/
-│   │   ├── types.ts        # TypeScript interfaces
-│   │   ├── storage.ts      # Storage abstraction
-│   │   └── messaging.ts    # Message handling
-│   └── utils/
-│       ├── logger.ts       # Logging utility
-│       └── errors.ts       # Error handling
-├── styles/
-│   └── popup.css
-├── icons/
-│   └── icon-*.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json           # Extension manifest (MV3)
+ src/
+    background/
+       index.ts        # Service worker entry point
+       sessions.ts     # Session CRUD operations
+       commands.ts    # Keyboard shortcut handlers
+    popup/
+       popup.ts        # Popup entry point
+       PopupApp.tsx    # Main popup component
+       components/     # UI components
+    sidebar/
+       sidebar.ts      # Side panel entry
+       SidebarApp.tsx  # Side panel UI
+    content/
+       overlay.ts      # In-page session overlay
+    shared/
+       types.ts        # TypeScript interfaces
+       storage.ts      # Storage abstraction
+       messaging.ts    # Message handling
+    utils/
+        logger.ts       # Logging utility
+        errors.ts       # Error handling
+ styles/
+    popup.css
+ icons/
+    icon-*.png
+ _locales/
+     en/
+         messages.json
 ```
 
 ## Manifest Configuration (MV3)

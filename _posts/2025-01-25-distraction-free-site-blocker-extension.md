@@ -19,11 +19,11 @@ This guide covers everything from project setup to advanced features like schedu
 
 ---
 
-## Understanding the Architecture of a Site Blocker Extension {#architecture-overview}
+Understanding the Architecture of a Site Blocker Extension {#architecture-overview}
 
 Before diving into code, it is essential to understand how site blocker extensions work at a fundamental level. Unlike traditional web applications, Chrome extensions operate with elevated privileges that allow them to intercept network requests, modify browser behavior, and persist data across sessions.
 
-### How Site Blocking Works in Manifest V3
+How Site Blocking Works in Manifest V3
 
 Chrome's Manifest V3 introduced significant changes to how extensions can block network requests. The old approach using the webRequest API with blocking permissions has been replaced by the declarativeNetRequest API, which provides a more privacy-focused and performant way to block requests. Instead of inspecting every single network request in real-time, you define rules in advance, and Chrome's engine applies them efficiently.
 
@@ -31,7 +31,7 @@ The declarativeNetRequest API works by matching incoming requests against a set 
 
 Your extension will need to manage several key components: a user interface for adding and removing blocked sites, a storage system for persisting the blocklist, a rule generation system that compiles your blocklist into declarativeNetRequest rules, and optional features like scheduling and focus mode chrome functionality.
 
-### Core Components and File Structure
+Core Components and File Structure
 
 A well-organized site blocker extension follows a clear directory structure that separates concerns and makes maintenance easier. The typical structure includes the manifest.json file that defines extension metadata and permissions, a background service worker that handles rule updates and storage operations, a popup HTML and JavaScript for the user interface, content scripts if you want to show blocking notifications on blocked pages, and options page for advanced configuration.
 
@@ -39,11 +39,11 @@ Understanding this architecture ensures your extension remains maintainable as y
 
 ---
 
-## Setting Up Your Development Environment {#project-setup}
+Setting Up Your Development Environment {#project-setup}
 
 Every Chrome extension begins with a properly configured manifest.json file. This JSON file tells Chrome about your extension's capabilities, permissions, and the files it should load.
 
-### Creating the Manifest
+Creating the Manifest
 
 For a site blocker extension using Manifest V3, your manifest.json will need several specific permissions. The declarativeNetRequest permission allows you to define blocking rules, storage permission enables persisting the user's blocklist, and scripting permission lets you inject content scripts to show blocking notifications.
 
@@ -82,17 +82,17 @@ For a site blocker extension using Manifest V3, your manifest.json will need sev
 
 Notice that we do not include the "webRequestBlocking" permission, as that is no longer available in Manifest V3. Instead, we rely entirely on declarativeNetRequest, which provides equivalent functionality with better performance and privacy.
 
-### Creating the Directory Structure
+Creating the Directory Structure
 
 Create your extension directory with all necessary folders and files. The icons folder should contain PNG images at the specified sizes, while the root directory holds your JavaScript and HTML files. Starting with this organized structure prevents confusion as your project grows.
 
 ---
 
-## Implementing the Background Service Worker {#background-service-worker}
+Implementing the Background Service Worker {#background-service-worker}
 
 The background service worker serves as the central nervous system of your extension. It handles communication between components, manages storage, and generates the blocking rules that declarativeNetRequest uses.
 
-### Initializing Storage and Rules
+Initializing Storage and Rules
 
 Your background script needs to initialize default settings when the extension first installs, load the user's blocklist from storage, generate declarativeNetRequest rules from the blocklist, and listen for changes to update rules accordingly.
 
@@ -161,11 +161,11 @@ This code demonstrates the core logic for maintaining and updating your blocking
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup provides quick access to your extension's most common functions. Users should be able to see which sites are blocked, add or remove sites from the blocklist, toggle focus mode on or off, and access the full options page for advanced configuration.
 
-### HTML Structure
+HTML Structure
 
 ```html
 <!-- popup.html -->
@@ -194,7 +194,7 @@ The popup provides quick access to your extension's most common functions. Users
 </head>
 <body>
   <div class="header">
-    <span class="title">🛡️ Focus Guard</span>
+    <span class="title"> Focus Guard</span>
   </div>
   
   <div class="focus-toggle">
@@ -216,7 +216,7 @@ The popup provides quick access to your extension's most common functions. Users
 </html>
 ```
 
-### Popup JavaScript Logic
+Popup JavaScript Logic
 
 ```javascript
 // popup.js
@@ -289,7 +289,7 @@ This popup implementation provides a clean, functional interface for managing bl
 
 ---
 
-## Implementing Content Script for Blocking Notifications {#content-script}
+Implementing Content Script for Blocking Notifications {#content-script}
 
 When a user tries to visit a blocked site, they should see a clear, helpful message rather than a blank page. The content script handles this by detecting when a page has been blocked and displaying an appropriate notification.
 
@@ -315,7 +315,7 @@ async function checkBlockedStatus() {
 function showBlockPage(hostname) {
   document.body.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 20px;">
-      <h1 style="font-size: 48px; margin-bottom: 20px;">🛡️</h1>
+      <h1 style="font-size: 48px; margin-bottom: 20px;"></h1>
       <h2 style="font-size: 28px; margin-bottom: 16px;">Site Blocked</h2>
       <p style="font-size: 18px; margin-bottom: 24px; opacity: 0.9;">${hostname} is on your blocked sites list</p>
       <p style="font-size: 14px; opacity: 0.7; max-width: 400px;">You're staying focused! This site was blocked to help you maintain productivity. Take a deep breath and get back to work.</p>
@@ -337,11 +337,11 @@ The content script replaces the blocked page with a helpful message that reinfor
 
 ---
 
-## Adding Advanced Features {#advanced-features}
+Adding Advanced Features {#advanced-features}
 
 A basic site blocker is useful, but advanced features transform your extension into a truly powerful productivity tool. Consider implementing focus mode chrome functionality, scheduled blocking, custom block pages, and statistics tracking.
 
-### Implementing Focus Mode
+Implementing Focus Mode
 
 Focus mode provides an all-or-nothing approach to blocking. When enabled, it can block all non-essential websites while allowing access only to whitelisted domains. This is particularly useful for deep work sessions.
 
@@ -384,7 +384,7 @@ async function applyFocusMode(enabled, blockedSites) {
 }
 ```
 
-### Scheduled Blocking
+Scheduled Blocking
 
 Many users want different blocking rules at different times. You can implement scheduled blocking that automatically enables focus mode during work hours and disables it during breaks.
 
@@ -417,7 +417,7 @@ setInterval(checkSchedule, 60000);
 checkSchedule(); // Initial check
 ```
 
-### Tracking Block Statistics
+Tracking Block Statistics
 
 Understanding your productivity patterns helps users improve their habits. Track how many times each site has been blocked and display this information in the popup.
 
@@ -438,7 +438,7 @@ chrome.declarativeNetRequest.onRequestDenied.addListener((request) => {
 
 ---
 
-## Testing Your Extension Locally {#testing}
+Testing Your Extension Locally {#testing}
 
 Before publishing to the Chrome Web Store, thoroughly test your extension in development mode. Load your unpacked extension by navigating to chrome://extensions, enabling Developer mode, and clicking Load unpacked. Select your extension directory and test all features thoroughly.
 
@@ -448,7 +448,7 @@ Pay particular attention to edge cases: very long domain names, internationalize
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once testing is complete, prepare your extension for publication. Create a zip file containing all your extension files except the .git folder and any development-specific files. Navigate to the Chrome Web Store Developer Dashboard, create a new listing, upload your zip file, fill in the required metadata including description and screenshots, and submit for review.
 
@@ -456,7 +456,7 @@ Chrome's review process typically takes a few hours to a few days. Ensure your e
 
 ---
 
-## Conclusion and Future Enhancements {#conclusion}
+Conclusion and Future Enhancements {#conclusion}
 
 Building a site blocker extension teaches valuable skills while solving a genuine problem affecting millions of productivity-conscious users. You have learned how to work with Chrome's declarativeNetRequest API, implement persistent storage, create intuitive user interfaces, and deploy extensions to the Chrome Web Store.
 

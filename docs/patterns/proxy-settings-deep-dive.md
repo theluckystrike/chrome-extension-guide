@@ -1,27 +1,27 @@
 ---
 layout: default
-title: "Chrome Extension Proxy Settings Deep Dive — Best Practices"
+title: "Chrome Extension Proxy Settings Deep Dive. Best Practices"
 description: "Configure proxy settings programmatically in extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings-deep-dive/"
+canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings-deep detailed look/"
 ---
 
 # Proxy Settings Deep Dive
 
-## Overview {#overview}
+Overview {#overview}
 
-The Chrome Proxy Settings API (`chrome.proxy`) enables extensions to programmatically control Chrome's proxy configuration. This deep dive covers advanced patterns, technical details, and implementation strategies for building robust proxy management extensions.
+The Chrome Proxy Settings API (`chrome.proxy`) enables extensions to programmatically control Chrome's proxy configuration. This detailed look covers advanced patterns, technical details, and implementation strategies for building solid proxy management extensions.
 
-**Permission Required**: `"proxy"` in manifest  
-**Primary API**: `chrome.proxy.settings`  
-**Error API**: `chrome.proxy.onProxyError`
+Permission Required: `"proxy"` in manifest  
+Primary API: `chrome.proxy.settings`  
+Error API: `chrome.proxy.onProxyError`
 
 ---
 
-## chrome.proxy.settings API {#chromeproxysettings-api}
+chrome.proxy.settings API {#chromeproxysettings-api}
 
 The `chrome.proxy.settings` API uses the `ChromeSetting` pattern, providing get, set, and clear operations:
 
-### Setting Proxy Configuration {#setting-proxy-configuration}
+Setting Proxy Configuration {#setting-proxy-configuration}
 
 ```javascript
 chrome.proxy.settings.set({
@@ -40,7 +40,7 @@ chrome.proxy.settings.set({
 });
 ```
 
-### Getting Current Configuration {#getting-current-configuration}
+Getting Current Configuration {#getting-current-configuration}
 
 ```javascript
 chrome.proxy.settings.get({ incognito: false }, (config) => {
@@ -48,7 +48,7 @@ chrome.proxy.settings.get({ incognito: false }, (config) => {
 });
 ```
 
-### Clearing Configuration {#clearing-configuration}
+Clearing Configuration {#clearing-configuration}
 
 ```javascript
 chrome.proxy.settings.clear({}, () => {
@@ -58,7 +58,7 @@ chrome.proxy.settings.clear({}, () => {
 
 ---
 
-## Proxy Modes {#proxy-modes}
+Proxy Modes {#proxy-modes}
 
 | Mode | Description | Use Case |
 |------|-------------|----------|
@@ -70,9 +70,9 @@ chrome.proxy.settings.clear({}, () => {
 
 ---
 
-## Fixed Servers Configuration {#fixed-servers-configuration}
+Fixed Servers Configuration {#fixed-servers-configuration}
 
-### Single Proxy for All Protocols {#single-proxy-for-all-protocols}
+Single Proxy for All Protocols {#single-proxy-for-all-protocols}
 
 ```javascript
 const config = {
@@ -94,7 +94,7 @@ const config = {
 };
 ```
 
-### Per-Protocol Proxies {#per-protocol-proxies}
+Per-Protocol Proxies {#per-protocol-proxies}
 
 ```javascript
 const perProtocolConfig = {
@@ -110,11 +110,11 @@ const perProtocolConfig = {
 
 ---
 
-## PAC Script Configuration {#pac-script-configuration}
+PAC Script Configuration {#pac-script-configuration}
 
 Proxy Auto-Configuration (PAC) scripts enable dynamic, URL-based proxy routing:
 
-### Inline PAC Script {#inline-pac-script}
+Inline PAC Script {#inline-pac-script}
 
 ```javascript
 const pacConfig = {
@@ -144,18 +144,18 @@ const pacConfig = {
 };
 ```
 
-### PAC Script Return Values {#pac-script-return-values}
+PAC Script Return Values {#pac-script-return-values}
 
-- `"DIRECT"` — Connect directly without proxy
-- `"PROXY host:port"` — Use specified proxy
-- `"SOCKS host:port"` — Use SOCKS proxy
-- `"PROXY host1:port1; PROXY host2:port2"` — Try first, fall back to second
+- `"DIRECT"`. Connect directly without proxy
+- `"PROXY host:port"`. Use specified proxy
+- `"SOCKS host:port"`. Use SOCKS proxy
+- `"PROXY host1:port1; PROXY host2:port2"`. Try first, fall back to second
 
 ---
 
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 
-### Listening for Proxy Errors {#listening-for-proxy-errors}
+Listening for Proxy Errors {#listening-for-proxy-errors}
 
 ```javascript
 chrome.proxy.onProxyError.addListener((details) => {
@@ -178,7 +178,7 @@ chrome.proxy.onProxyError.addListener((details) => {
 });
 ```
 
-### Connection Testing {#connection-testing}
+Connection Testing {#connection-testing}
 
 ```javascript
 async function testProxyConnection(host, port) {
@@ -201,9 +201,9 @@ async function testProxyConnection(host, port) {
 
 ---
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### VPN/Proxy Switcher Extensions {#vpnproxy-switcher-extensions}
+VPN/Proxy Switcher Extensions {#vpnproxy-switcher-extensions}
 
 Build a toggle switch between different proxy profiles:
 
@@ -227,7 +227,7 @@ async function toggleProxy(enabled, profile) {
 }
 ```
 
-### Development Proxies {#development-proxies}
+Development Proxies {#development-proxies}
 
 Route traffic through local development proxies:
 
@@ -247,7 +247,7 @@ const devConfig = {
 };
 ```
 
-### Content Filtering {#content-filtering}
+Content Filtering {#content-filtering}
 
 Filter content based on domain categories:
 
@@ -270,23 +270,23 @@ const filteredConfig = {
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
-- [permissions/proxy.md](../permissions/proxy.md) — Permission requirements
-- [patterns/proxy-settings.md](./proxy-settings.md) — Basic proxy patterns
-- [network-interception.md](./network-interception.md) — Network request handling
+- [permissions/proxy.md](../permissions/proxy.md). Permission requirements
+- [patterns/proxy-settings.md](./proxy-settings.md). Basic proxy patterns
+- [network-interception.md](./network-interception.md). Network request handling
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 The `chrome.proxy.settings` API provides comprehensive control over Chrome's proxy configuration. Key points:
 
-1. **Use `chrome.proxy.settings.set()`** for all configuration changes
-2. **Choose the right mode**: `fixed_servers` for simple setups, `pac_script` for complex routing
-3. **Always implement error handling** with fallback to direct connection
-4. **Use bypass lists** to exclude local traffic from proxying
-5. **Handle authentication** via `chrome.webRequest.onAuthRequired`
+1. Use `chrome.proxy.settings.set()` for all configuration changes
+2. Choose the right mode: `fixed_servers` for simple setups, `pac_script` for complex routing
+3. Always implement error handling with fallback to direct connection
+4. Use bypass lists to exclude local traffic from proxying
+5. Handle authentication via `chrome.webRequest.onAuthRequired`
 -e 
 ---
 

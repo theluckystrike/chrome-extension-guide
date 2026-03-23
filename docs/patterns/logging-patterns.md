@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Logging Patterns — Best Practices"
+title: "Chrome Extension Logging Patterns. Best Practices"
 description: "Master logging patterns for debugging Chrome extensions across service workers, content scripts, and popups with structured logging, persistence, and remote error reporting."
 canonical_url: "https://bestchromeextensions.com/patterns/logging-patterns/"
 ---
@@ -12,13 +12,13 @@ multiple contexts -- service workers, content scripts, popups, and DevTools pane
 This guide covers eight proven logging patterns that help you build observable,
 debuggable extensions.
 
-**Related guides:**
+Related guides:
 - [Error Handling Patterns](error-handling.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)
 
 ---
 
-## 1. Structured Logging with Log Levels {#1-structured-logging-with-log-levels}
+1. Structured Logging with Log Levels {#1-structured-logging-with-log-levels}
 
 A structured logger gives you consistent output and the ability to filter by severity.
 Define standard log levels and route them through a single interface.
@@ -89,7 +89,7 @@ gives you a single place to adjust formatting, filtering, and output destination
 
 ---
 
-## 2. Context-Aware Logging {#2-context-aware-logging}
+2. Context-Aware Logging {#2-context-aware-logging}
 
 Chrome extensions run in multiple execution contexts. Each context has its own
 console, making it hard to correlate logs. Tag every log entry with its source context
@@ -144,7 +144,7 @@ chrome.runtime.sendMessage({
 
 ---
 
-## 3. Persisting Logs to chrome.storage {#3-persisting-logs-to-chromestorage}
+3. Persisting Logs to chrome.storage {#3-persisting-logs-to-chromestorage}
 
 Console logs vanish when a service worker goes idle or a popup closes. Persist
 important logs to `chrome.storage.local` so you can review them later.
@@ -185,13 +185,13 @@ Integrate this with the structured logger by calling `persistLog` inside each lo
 method for entries at or above a threshold (e.g., WARN and ERROR). Avoid persisting
 DEBUG-level logs in production -- they will quickly fill your storage quota.
 
-**Storage quota note:** `chrome.storage.local` has a 10 MB limit by default. Request
+Storage quota note: `chrome.storage.local` has a 10 MB limit by default. Request
 the `unlimitedStorage` permission if your extension generates heavy log volume during
 development.
 
 ---
 
-## 4. Remote Error Reporting (Sentry Integration) {#4-remote-error-reporting-sentry-integration}
+4. Remote Error Reporting (Sentry Integration) {#4-remote-error-reporting-sentry-integration}
 
 For production extensions, ship errors to a remote reporting service so you can
 monitor real-world failures. Sentry works well with Chrome extensions.
@@ -237,16 +237,16 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 ```
 
 Key considerations for remote reporting in extensions:
-- **Privacy:** Never send page URLs or user data without explicit consent. Strip PII
+- Privacy: Never send page URLs or user data without explicit consent. Strip PII
   in the `beforeSend` hook.
-- **Rate limiting:** Sentry has built-in rate limiting, but also debounce on the
+- Rate limiting: Sentry has built-in rate limiting, but also debounce on the
   client side to avoid flooding during cascading failures.
-- **CSP compliance:** Add the Sentry domain to your `manifest.json` content security
+- CSP compliance: Add the Sentry domain to your `manifest.json` content security
   policy if you use Manifest V3's strict CSP.
 
 ---
 
-## 5. Log Filtering and Search in DevTools Panel {#5-log-filtering-and-search-in-devtools-panel}
+5. Log Filtering and Search in DevTools Panel {#5-log-filtering-and-search-in-devtools-panel}
 
 Build a custom DevTools panel that displays your persisted logs with filtering
 controls. This is far more usable than scanning multiple console windows.
@@ -308,7 +308,7 @@ chrome.devtools.panels.create('My Extension Logs', '', 'devtools-panel.html');
 
 ---
 
-## 6. Performance Timing Logs {#6-performance-timing-logs}
+6. Performance Timing Logs {#6-performance-timing-logs}
 
 Track how long operations take. This is critical for identifying bottlenecks in
 content scripts that manipulate the DOM or service workers that process large datasets.
@@ -383,7 +383,7 @@ function logWithThreshold(entry, thresholdMs = 1000) {
 
 ---
 
-## 7. User Action Audit Trail {#7-user-action-audit-trail}
+7. User Action Audit Trail {#7-user-action-audit-trail}
 
 Record user interactions for debugging user-reported issues. An audit trail lets you
 reconstruct what the user did before a bug occurred.
@@ -456,7 +456,7 @@ automatically. This drastically reduces the back-and-forth needed to reproduce i
 
 ---
 
-## 8. Production vs Development Logging Configuration {#8-production-vs-development-logging-configuration}
+8. Production vs Development Logging Configuration {#8-production-vs-development-logging-configuration}
 
 Use different logging configurations for development and production builds. In
 development, log everything. In production, log only warnings and errors, and route
@@ -547,16 +547,16 @@ export default defineConfig({
 
 ---
 
-## Putting It All Together {#putting-it-all-together}
+Putting It All Together {#putting-it-all-together}
 
 Combine these patterns into a unified logging module for your extension:
 
-1. **Create a structured logger** (Pattern 1) with **context awareness** (Pattern 2).
-2. **Persist important logs** (Pattern 3) and **report errors remotely** (Pattern 4).
-3. **Build a DevTools panel** (Pattern 5) for exploring persisted logs during development.
-4. **Add performance tracking** (Pattern 6) to catch regressions early.
-5. **Record an audit trail** (Pattern 7) to make bug reports actionable.
-6. **Switch configurations** (Pattern 8) so production builds stay lean and quiet.
+1. Create a structured logger (Pattern 1) with context awareness (Pattern 2).
+2. Persist important logs (Pattern 3) and report errors remotely (Pattern 4).
+3. Build a DevTools panel (Pattern 5) for exploring persisted logs during development.
+4. Add performance tracking (Pattern 6) to catch regressions early.
+5. Record an audit trail (Pattern 7) to make bug reports actionable.
+6. Switch configurations (Pattern 8) so production builds stay lean and quiet.
 
 Each pattern works independently, so adopt them incrementally. Start with structured
 logging and context tags, then layer on persistence and remote reporting as your

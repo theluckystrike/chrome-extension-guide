@@ -15,33 +15,33 @@ Creating a page speed analyzer extension is one of the most valuable projects yo
 
 The demand for page speed analysis tools has skyrocketed since Google announced that Core Web Vitals would become ranking factors. This means there's never been a better time to build a page speed extension that helps users understand how their websites perform across multiple dimensions of user experience. Whether you're building this extension for personal use, to distribute to others, or as a portfolio project, this tutorial will provide you with all the knowledge you need to create a professional-grade tool.
 
-Throughout this guide, we'll cover everything from setting up your development environment to implementing advanced features like real-time performance monitoring and detailed metric breakdowns. We'll use Manifest V3, the latest version of the Chrome extension platform, and leverage powerful APIs like the Performance Observer API to measure real-world user experiences. By the end of this tutorial, you'll have a complete, working extension that you can customize and extend according to your needs.
+Throughout this guide, we'll cover everything from setting up your development environment to implementing advanced features like real-time performance monitoring and detailed metric breakdowns. We'll use Manifest V3, the latest version of the Chrome extension platform, and use powerful APIs like the Performance Observer API to measure real-world user experiences. By the end of this tutorial, you'll have a complete, working extension that you can customize and extend according to your needs.
 
 ---
 
-## Understanding Page Speed Analysis Fundamentals {#understanding-page-speed-fundamentals}
+Understanding Page Speed Analysis Fundamentals {#understanding-page-speed-fundamentals}
 
-Before diving into code, it's essential to understand what we mean by "page speed" and how modern web performance measurement works. Page speed isn't just about how quickly a page loads—it's a multifaceted concept that encompasses multiple metrics, each measuring different aspects of the user experience. Understanding these metrics is crucial because they'll form the foundation of your extension's functionality.
+Before diving into code, it's essential to understand what we mean by "page speed" and how modern web performance measurement works. Page speed isn't just about how quickly a page loads, it's a multifaceted concept that encompasses multiple metrics, each measuring different aspects of the user experience. Understanding these metrics is crucial because they'll form the foundation of your extension's functionality.
 
-### Core Web Vitals Explained
+Core Web Vitals Explained
 
 Core Web Vitals are Google's set of standardized metrics that measure real-world user experience for loading performance, interactivity, and visual stability. These metrics have become the industry standard for measuring page speed and are directly related to search engine rankings. Your page speed extension will primarily focus on measuring these three vital metrics.
 
-**Largest Contentful Paint (LCP)** measures loading performance. Specifically, it measures when the largest content element in the viewport becomes visible. For a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading. Elements that typically constitute the largest contentful paint include hero images, large text blocks, or video posters. Understanding LCP helps developers identify issues with server response times, resource load times, and render-blocking resources.
+Largest Contentful Paint (LCP) measures loading performance. Specifically, it measures when the largest content element in the viewport becomes visible. For a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading. Elements that typically constitute the largest contentful paint include hero images, large text blocks, or video posters. Understanding LCP helps developers identify issues with server response times, resource load times, and render-blocking resources.
 
-**First Input Delay (FID)** measures interactivity. It records the time between when a user first interacts with a page (clicking a link, tapping a button, or using a custom control) and when the browser is actually able to begin processing that interaction. A good FID score is less than 100 milliseconds. High FID values typically indicate that the main thread is blocked by JavaScript execution, preventing the browser from responding to user inputs.
+First Input Delay (FID) measures interactivity. It records the time between when a user first interacts with a page (clicking a link, tapping a button, or using a custom control) and when the browser is actually able to begin processing that interaction. A good FID score is less than 100 milliseconds. High FID values typically indicate that the main thread is blocked by JavaScript execution, preventing the browser from responding to user inputs.
 
-**Cumulative Layout Shift (CLS)** measures visual stability. It quantifies how much the page's content shifts unexpectedly during loading. A good CLS score is less than 0.1. Layout shifts occur when visible elements change their position between frames, which can be frustrating for users who are trying to interact with page content. Common causes include images without dimensions, ads injected dynamically, and late-loading fonts.
+Cumulative Layout Shift (CLS) measures visual stability. It quantifies how much the page's content shifts unexpectedly during loading. A good CLS score is less than 0.1. Layout shifts occur when visible elements change their position between frames, which can be frustrating for users who are trying to interact with page content. Common causes include images without dimensions, ads injected dynamically, and late-loading fonts.
 
 Beyond Core Web Vitals, there are numerous other performance metrics that provide valuable insights into page performance. First Contentful Paint (FCP) measures when the first piece of content is rendered, Time to First Byte (TTFB) measures server responsiveness, and Total Blocking Time (TBT) measures the total amount of time between First Contentful Paint and when the page is fully interactive. Your extension should consider displaying these additional metrics to provide comprehensive performance analysis.
 
 ---
 
-## Setting Up Your Chrome Extension Project {#setting-up-chrome-extension-project}
+Setting Up Your Chrome Extension Project {#setting-up-chrome-extension-project}
 
 Now that you understand the fundamentals, let's set up the project structure for your page speed analyzer extension. We'll use Manifest V3, which is the current standard for Chrome extensions and offers improved security and performance compared to older versions.
 
-### Creating the Project Structure
+Creating the Project Structure
 
 Create a new directory for your extension and set up the basic files. Your project structure should include a manifest file, background service worker, popup HTML and JavaScript, and content scripts. Let's organize this structure thoughtfully to ensure maintainability and scalability.
 
@@ -85,17 +85,17 @@ The manifest.json file is the heart of your Chrome extension. It tells Chrome ab
 
 This manifest grants your extension the necessary permissions to analyze the currently active tab. The "activeTab" permission ensures users must explicitly invoke your extension on a specific tab, maintaining user privacy. The "scripting" permission allows you to inject content scripts that can measure performance metrics directly in the page context.
 
-### Creating Simple Icon Placeholders
+Creating Simple Icon Placeholders
 
 For development purposes, you can create simple placeholder icons. Later, you can replace these with professionally designed graphics. Create PNG files in your images directory, or you can use any image editing tool to generate basic icons in the required sizes (16x16, 48x48, and 128x128 pixels).
 
 ---
 
-## Implementing the Performance Analysis Engine {#implementing-performance-analysis-engine}
+Implementing the Performance Analysis Engine {#implementing-performance-analysis-engine}
 
 The core of your page speed extension is the performance analysis logic. This is where you'll measure Web Vitals and other performance metrics. We'll implement this logic in a content script that runs in the context of the analyzed webpage.
 
-### Creating the Performance Measurement Script
+Creating the Performance Measurement Script
 
 Create a file called `performance-measure.js` in your project directory. This script will use the Performance Observer API to measure Web Vitals and other important metrics. The Performance Observer API is the modern way to collect performance data in the browser, and it provides accurate, real-world measurements.
 
@@ -267,7 +267,7 @@ Create a file called `performance-measure.js` in your project directory. This sc
 
 This content script is the core of your performance measurement system. It uses Performance Observer to watch for Core Web Vitals events in real-time, measures navigation timing metrics, and collects resource timing data. The script sends all collected metrics back to the extension via window.postMessage, which the popup can then listen for and display.
 
-### Implementing the Background Service Worker
+Implementing the Background Service Worker
 
 The background service worker acts as the coordinator between your content script and the popup. It handles the communication between different parts of your extension and manages the extension's state. Create `background.js` in your project root:
 
@@ -316,11 +316,11 @@ This background service worker listens for messages from both the content script
 
 ---
 
-## Building the User Interface {#building-the-user-interface}
+Building the User Interface {#building-the-user-interface}
 
 The popup is what users interact with when they click your extension icon. It should be clean, informative, and easy to understand at a glance. Let's create a well-designed popup interface.
 
-### Creating the Popup HTML
+Creating the Popup HTML
 
 Create `popup/popup.html` with a professional layout:
 
@@ -412,7 +412,7 @@ Create `popup/popup.html` with a professional layout:
 </html>
 ```
 
-### Creating the Popup Styles
+Creating the Popup Styles
 
 Create `popup/popup.css` with a modern, clean design:
 
@@ -652,7 +652,7 @@ header h1 {
 }
 ```
 
-### Implementing Popup Logic
+Implementing Popup Logic
 
 Create `popup/popup.js` to handle the popup functionality:
 
@@ -865,17 +865,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Testing Your Extension {#testing-your-extension}
+Testing Your Extension {#testing-your-extension}
 
 Now that you've built all the components, it's time to test your extension. Chrome provides easy ways to load unpacked extensions for testing.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 Open Chrome and navigate to `chrome://extensions/`. Enable "Developer mode" using the toggle in the top-right corner. Click "Load unpacked" and select your extension's directory. Your extension should now appear in the extension toolbar.
 
 Click the extension icon to open the popup. You should see the "Analyze Page Speed" button. Click it to analyze the current page. The extension will inject the content script and measure the page's performance metrics.
 
-### Testing Tips
+Testing Tips
 
 When testing your page speed extension, consider testing on various types of websites to ensure your extension handles different scenarios correctly. Test on simple static pages, complex web applications, single-page applications, and pages with heavy JavaScript. This will help you identify any edge cases or issues in your implementation.
 
@@ -883,58 +883,58 @@ Pay attention to how quickly metrics appear after clicking the analyze button. I
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features-and-enhancements}
+Advanced Features and Enhancements {#advanced-features-and-enhancements}
 
 Once you have the basic extension working, consider adding these advanced features to make your extension more powerful and useful.
 
-### Lighthouse Integration
+Lighthouse Integration
 
 Integrate with Google's Lighthouse API to provide more comprehensive performance audits. Lighthouse provides detailed recommendations for improving page performance, accessibility, best practices, and SEO. You can use the Lighthouse CI (Continuous Integration) tool or create a custom integration that runs Lighthouse in the background and presents the results in your popup.
 
-### Historical Tracking
+Historical Tracking
 
 Add the ability to track page performance over time. Store metrics in chrome.storage and allow users to view historical data, compare performance across multiple sessions, and identify trends. This feature is particularly useful for developers who want to monitor the impact of changes on their website's performance.
 
-### Export and Reporting
+Export and Reporting
 
 Implement features that allow users to export performance reports in various formats such as JSON, CSV, or PDF. You could also add email report functionality or integration with third-party monitoring services. This makes your extension more useful for professional workflows and reporting requirements.
 
-### Performance Budgets
+Performance Budgets
 
 Allow users to set performance budgets and receive notifications when pages exceed those thresholds. For example, a user might want to be notified whenever LCP exceeds 2.5 seconds. This feature would require additional permissions and background monitoring but would provide significant value for ongoing performance maintenance.
 
 ---
 
-## Best Practices and Optimization {#best-practices-and-optimization}
+Best Practices and Optimization {#best-practices-and-optimization}
 
 When building and deploying your page speed extension, follow these best practices to ensure a high-quality product.
 
-### Manifest V3 Compliance
+Manifest V3 Compliance
 
 Ensure your extension fully complies with Manifest V3 requirements. This includes using service workers instead of background pages, declaring all permissions explicitly, and following Chrome Web Store policies. Manifest V3 has stricter requirements around remote code execution, so keep all your extension code within the extension package itself.
 
-### Performance Optimization
+Performance Optimization
 
 Your extension should be lightweight and performant itself. Avoid loading unnecessary libraries, minimize the size of your JavaScript files, and use lazy loading where appropriate. Remember that users will judge your page speed extension partly based on how quickly it loads and responds.
 
-### Error Handling
+Error Handling
 
-Implement robust error handling throughout your extension. Pages can have various security restrictions, network issues, or other problems that prevent successful analysis. Your extension should gracefully handle these situations and provide helpful error messages to users rather than failing silently or confusingly.
+Implement solid error handling throughout your extension. Pages can have various security restrictions, network issues, or other problems that prevent successful analysis. Your extension should gracefully handle these situations and provide helpful error messages to users rather than failing silently or confusingly.
 
-### User Privacy
+User Privacy
 
 Be transparent about what data your extension collects and how it uses it. If you're storing metrics or tracking performance over time, make this clear in your extension's description and privacy policy. Use chrome.storage.local for any local data storage rather than sending data to external servers unless explicitly necessary and disclosed.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a page speed analyzer extension is an excellent project that combines practical utility with valuable learning opportunities. You've learned how to measure Core Web Vitals, interact with Chrome's extension APIs, build a clean user interface, and create a complete extension that's ready for testing and deployment.
 
-The extension you built today measures LCP, FID, and CLS—the three Core Web Vitals that Google uses for search ranking. It also captures additional performance metrics that provide deeper insights into page performance. With these measurements, users can quickly assess how well their websites perform and identify areas for improvement.
+The extension you built today measures LCP, FID, and CLS, the three Core Web Vitals that Google uses for search ranking. It also captures additional performance metrics that provide deeper insights into page performance. With these measurements, users can quickly assess how well their websites perform and identify areas for improvement.
 
 As you continue development, consider adding more advanced features like Lighthouse integration, historical tracking, and automated reporting. These enhancements can transform your basic extension into a powerful tool that professionals use daily for website performance monitoring and optimization.
 
 Remember that the Chrome extension ecosystem is constantly evolving. Keep your extension up to date with the latest Chrome APIs and best practices. Subscribe to the Chrome for Developers blog to stay informed about changes that might affect your extension. With dedication and continued learning, you can build a truly valuable tool that helps developers create faster, better web experiences.
 
-The skills you've developed through this project—understanding web performance metrics, working with Chrome extension APIs, building responsive user interfaces, and implementing robust error handling—will serve you well in future Chrome extension development endeavors. Good luck with your page speed analyzer extension!
+The skills you've developed through this project, understanding web performance metrics, working with Chrome extension APIs, building responsive user interfaces, and implementing solid error handling, will serve you well in future Chrome extension development endeavors. Good luck with your page speed analyzer extension!

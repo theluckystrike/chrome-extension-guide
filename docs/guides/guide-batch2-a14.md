@@ -1,6 +1,6 @@
 # Grammar Checker Extension Patterns
 
-Building a grammar checker extension for Chrome is a sophisticated undertaking that combines text analysis, API integration, and seamless user experience design. This guide covers the architectural patterns, implementation strategies, and TypeScript code examples needed to create a production-ready grammar checking extension.
+Building a grammar checker extension for Chrome is a sophisticated undertaking that combines text analysis, API integration, and smooth user experience design. This guide covers the architectural patterns, implementation strategies, and TypeScript code examples needed to create a production-ready grammar checking extension.
 
 ## Table of Contents
 
@@ -19,30 +19,30 @@ Building a grammar checker extension for Chrome is a sophisticated undertaking t
 
 A grammar checker extension typically operates across multiple Chrome extension contexts:
 
-- **Content Script**: Detects text selection, highlights errors in-place, provides contextual UI
-- **Service Worker**: Handles API communication with grammar checking services, manages caching
-- **Popup**: Quick access to toggle features, view error summary, access settings
-- **Options Page**: Full configuration UI for language selection, API keys, preferences
+- Content Script: Detects text selection, highlights errors in-place, provides contextual UI
+- Service Worker: Handles API communication with grammar checking services, manages caching
+- Popup: Quick access to toggle features, view error summary, access settings
+- Options Page: Full configuration UI for language selection, API keys, preferences
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Extension Context                        │
-├─────────────────┬───────────────────┬───────────────────────┤
-│   Content       │   Service Worker  │   Popup / Options     │
-│   Script        │                   │                       │
-├─────────────────┼───────────────────┼───────────────────────┤
-│ • Selection     │ • API calls       │ • UI controls         │
-│ • Error         │ • Caching         │ • Settings            │
-│   highlighting │ • Rate limiting   │ • Statistics          │
-│ • Context menu  │ • Message routing │                       │
-└─────────────────┴───────────────────┴───────────────────────┘
+
+                      Extension Context                        
+
+   Content          Service Worker     Popup / Options     
+   Script                                                  
+
+ • Selection      • API calls        • UI controls         
+ • Error          • Caching          • Settings            
+   highlighting  • Rate limiting    • Statistics          
+ • Context menu   • Message routing                        
+
 ```
 
 ---
 
-## Core Components
+Core Components
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -79,9 +79,9 @@ A grammar checker extension typically operates across multiple Chrome extension 
 
 ---
 
-## Text Selection Detection Pattern
+Text Selection Detection Pattern
 
-The foundation of a grammar checker is detecting when users select text. Here's a robust TypeScript implementation:
+The foundation of a grammar checker is detecting when users select text. Here's a solid TypeScript implementation:
 
 ```typescript
 // content/text-selection.ts
@@ -182,7 +182,7 @@ export { TextSelectionDetector, TextSelection };
 
 ---
 
-## Content Script Integration
+Content Script Integration
 
 The content script orchestrates the UI overlay and communicates with the background service worker:
 
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Background Service Worker for API Communication
+Background Service Worker for API Communication
 
 The service worker handles API communication with grammar checking services and implements caching:
 
@@ -580,9 +580,9 @@ new GrammarServiceWorker();
 
 ---
 
-## Storage and Settings Management
+Storage and Settings Management
 
-A robust settings system using Chrome's storage API:
+A solid settings system using Chrome's storage API:
 
 ```typescript
 // shared/settings.ts
@@ -656,9 +656,9 @@ export { SettingsManager, ExtensionSettings, DEFAULT_SETTINGS };
 
 ---
 
-## Performance Optimization
+Performance Optimization
 
-### Debouncing and Throttling
+Debouncing and Throttling
 
 ```typescript
 // shared/utils.ts
@@ -691,7 +691,7 @@ export function throttle<T extends (...args: any[]) => any>(
 }
 ```
 
-### Web Worker for Heavy Processing
+Web Worker for Heavy Processing
 
 For complex grammar analysis, offload to a Web Worker:
 
@@ -733,20 +733,20 @@ function analyzeText(text: string, rules: any[]): any[] {
 
 ---
 
-## Summary
+Summary
 
 Building a grammar checker extension requires careful consideration of multiple architectural patterns:
 
-1. **Selection Detection**: Use debounced event listeners across mouseup, keyup, and selectionchange
-2. **Error Highlighting**: Leverage DOM manipulation with proper cleanup
-3. **API Communication**: Implement caching, rate limiting, and error handling in the service worker
-4. **Settings Management**: Use Chrome's storage API with reactive updates
-5. **Performance**: Offload heavy processing to Web Workers, use debouncing/throttling
+1. Selection Detection: Use debounced event listeners across mouseup, keyup, and selectionchange
+2. Error Highlighting: Use DOM manipulation with proper cleanup
+3. API Communication: Implement caching, rate limiting, and error handling in the service worker
+4. Settings Management: Use Chrome's storage API with reactive updates
+5. Performance: Offload heavy processing to Web Workers, use debouncing/throttling
 
 These patterns scale well and provide a solid foundation for a professional-grade grammar checking extension. Remember to handle edge cases like contenteditable elements, text areas, and different document structures for maximum compatibility.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

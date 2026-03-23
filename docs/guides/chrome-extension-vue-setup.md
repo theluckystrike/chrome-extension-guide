@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Vue Setup — Developer Guide"
+title: "Chrome Extension Vue Setup. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-vue-setup/"
 ---
@@ -8,14 +8,14 @@ canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-vue-set
 
 This guide covers building Chrome extensions with Vue 3, covering project initialization, architecture patterns, and best practices for modern extension development.
 
-## Recommended Stack {#recommended-stack}
+Recommended Stack {#recommended-stack}
 
-- **Vue 3** - Latest features including Composition API and reactivity
-- **TypeScript** - Type safety across your extension
-- **Vite** - Fast dev server and optimized builds
-- **vite-plugin-web-extension** or **CRXJS** - Hot reload for Chrome extensions
+- Vue 3 - Latest features including Composition API and reactivity
+- TypeScript - Type safety across your extension
+- Vite - Fast dev server and optimized builds
+- vite-plugin-web-extension or CRXJS - Hot reload for Chrome extensions
 
-## Project Initialization {#project-initialization}
+Project Initialization {#project-initialization}
 
 Create a new Vue project using create-vue:
 
@@ -55,26 +55,26 @@ export default defineConfig({
 });
 ```
 
-## Multiple Vue Entry Points {#multiple-vue-entry-points}
+Multiple Vue Entry Points {#multiple-vue-entry-points}
 
 Chrome extensions have multiple entry points (popup, options page, side panel). Each should be a separate Vue app:
 
 ```
 src/
-├── popup/       # Browser action popup
-│   ├── main.ts
-│   └── Popup.vue
-├── options/     # Extension options page
-│   ├── main.ts
-│   └── Options.vue
-├── sidepanel/   # Side panel page
-│   ├── main.ts
-│   └── Sidepanel.vue
-└── content/     # Content scripts
-    └── content.ts
+ popup/       # Browser action popup
+    main.ts
+    Popup.vue
+ options/     # Extension options page
+    main.ts
+    Options.vue
+ sidepanel/   # Side panel page
+    main.ts
+    Sidepanel.vue
+ content/     # Content scripts
+     content.ts
 ```
 
-## Composition API Composable Helpers {#composition-api-composable-helpers}
+Composition API Composable Helpers {#composition-api-composable-helpers}
 
 Create reusable composables for Chrome API integration:
 
@@ -131,7 +131,7 @@ export function useAlarm(name: string) {
 }
 ```
 
-## Pinia State Management {#pinia-state-management}
+Pinia State Management {#pinia-state-management}
 
 Use Pinia for state management across extension contexts:
 
@@ -153,7 +153,7 @@ export const useExtensionStore = defineStore('extension', {
 });
 ```
 
-## Content Scripts with Vue {#content-scripts-with-vue}
+Content Scripts with Vue {#content-scripts-with-vue}
 
 Mount Vue components in content scripts using shadow DOM for style isolation:
 
@@ -173,11 +173,11 @@ shadow.appendChild(mountPoint);
 createApp(ContentApp).mount(mountPoint);
 ```
 
-## Vue DevTools {#vue-devtools}
+Vue DevTools {#vue-devtools}
 
 Vue DevTools works in extension pages. Open DevTools on popup, options, or side panel pages to inspect Vue component trees and state.
 
-## Routing {#routing}
+Routing {#routing}
 
 Use hash routing for extension pages since they run from `chrome-extension://`:
 
@@ -194,19 +194,19 @@ const router = createRouter({
 });
 ```
 
-## Styling Options {#styling-options}
+Styling Options {#styling-options}
 
-- **Tailwind CSS** - Utility-first, configure content paths for extension
-- **UnoCSS** - On-demand atomic CSS engine
-- **Scoped Styles** - Vue's built-in scoped CSS
+- Tailwind CSS - Utility-first, configure content paths for extension
+- UnoCSS - On-demand atomic CSS engine
+- Scoped Styles - Vue's built-in scoped CSS
 
-## Testing {#testing}
+Testing {#testing}
 
-- **Vitest** - Fast unit testing with Vite
-- **Vue Test Utils** - Component testing
-- **jest-chrome** - Mock Chrome extension APIs
+- Vitest - Fast unit testing with Vite
+- Vue Test Utils - Component testing
+- jest-chrome - Mock Chrome extension APIs
 
-## Auto-Imports {#auto-imports}
+Auto-Imports {#auto-imports}
 
 Use unplugin-auto-import for automatic composable imports:
 
@@ -216,21 +216,21 @@ npm install -D unplugin-auto-import
 
 Configure in vite.config.ts for Chrome API helpers.
 
-## Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
-- **Lazy Loading** - Use defineAsyncComponent for route-based code splitting
-- **Async Components** - Load features on demand
-- **Keep Alive** - Cache component states in popup
+- Lazy Loading - Use defineAsyncComponent for route-based code splitting
+- Async Components - Load features on demand
+- Keep Alive - Cache component states in popup
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
-- `docs/guides/vite-extension-setup.md` — general Vite configuration
-- `docs/patterns/building-with-vue.md` — Vue architecture patterns
-- `docs/patterns/content-script-vue.md` — content script patterns
+- `docs/guides/vite-extension-setup.md`. general Vite configuration
+- `docs/patterns/building-with-vue.md`. Vue architecture patterns
+- `docs/patterns/content-script-vue.md`. content script patterns
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Content Script with Vue](../patterns/content-script-vue.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)

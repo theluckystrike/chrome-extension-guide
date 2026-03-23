@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Image Manipulation — Best Practices"
+title: "Chrome Extension Image Manipulation. Best Practices"
 description: "Process and manipulate images in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/image-manipulation/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/image-manipulation/"
 
 This guide covers patterns for handling images in Chrome extensions, including capture, processing, and optimization.
 
-## Capturing Tab Screenshots {#capturing-tab-screenshots}
+Capturing Tab Screenshots {#capturing-tab-screenshots}
 
 Use `chrome.tabs.captureVisibleTab()` to capture the visible portion of a tab. This API requires the `activeTab` permission.
 
@@ -24,7 +24,7 @@ async function captureTabScreenshot(windowId) {
 }
 ```
 
-**Permissions required:**
+Permissions required:
 ```json
 {
   "permissions": ["activeTab"],
@@ -32,7 +32,7 @@ async function captureTabScreenshot(windowId) {
 }
 ```
 
-## Using OffscreenCanvas in Service Workers {#using-offscreencanvas-in-service-workers}
+Using OffscreenCanvas in Service Workers {#using-offscreencanvas-in-service-workers}
 
 Service workers don't have access to the DOM, so use `OffscreenCanvas` for image processing:
 
@@ -53,7 +53,7 @@ async function processImage(imageDataUrl, width, height) {
 }
 ```
 
-## Image Resizing {#image-resizing}
+Image Resizing {#image-resizing}
 
 ```javascript
 async function resizeImage(imageSource, newWidth, newHeight) {
@@ -72,7 +72,7 @@ async function resizeImage(imageSource, newWidth, newHeight) {
 }
 ```
 
-## Converting Image Formats {#converting-image-formats}
+Converting Image Formats {#converting-image-formats}
 
 ```javascript
 async function convertFormat(imageSource, format, quality = 0.92) {
@@ -94,7 +94,7 @@ async function convertFormat(imageSource, format, quality = 0.92) {
 const webpImage = await convertFormat(screenshot, 'webp', 0.8);
 ```
 
-## Base64 Encoding/Decoding {#base64-encodingdecoding}
+Base64 Encoding/Decoding {#base64-encodingdecoding}
 
 ```javascript
 // Blob to Base64
@@ -119,7 +119,7 @@ async function base64ToBlob(base64, mimeType = 'image/png') {
 }
 ```
 
-## Blob URLs for Efficient Memory {#blob-urls-for-efficient-memory}
+Blob URLs for Efficient Memory {#blob-urls-for-efficient-memory}
 
 ```javascript
 // Create Blob URL from processed image
@@ -133,7 +133,7 @@ function revokeBlobUrl(url) {
 }
 ```
 
-## Image Compression {#image-compression}
+Image Compression {#image-compression}
 
 ```javascript
 async function compressImage(imageSource, maxSizeKB, quality = 0.9) {
@@ -158,7 +158,7 @@ async function compressImage(imageSource, maxSizeKB, quality = 0.9) {
 }
 ```
 
-## Dynamic Badge Icons {#dynamic-badge-icons}
+Dynamic Badge Icons {#dynamic-badge-icons}
 
 ```javascript
 // Set dynamic badge icon from image data
@@ -183,7 +183,7 @@ async function setBadgeIcon(imageDataUrl) {
 }
 ```
 
-## Using createImageBitmap() in Service Workers {#using-createimagebitmap-in-service-workers}
+Using createImageBitmap() in Service Workers {#using-createimagebitmap-in-service-workers}
 
 ```javascript
 // Efficient bitmap handling in workers
@@ -195,7 +195,7 @@ async function processInWorker(worker, imageBlob) {
 }
 ```
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
 - [Tabs API Reference](../api_reference/tabs-api.md)
 - [Offscreen Documents Pattern](./offscreen-documents.md)

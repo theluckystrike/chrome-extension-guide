@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Shadow Dom Content Script Ui — Best Practices"
+title: "Chrome Extension Shadow Dom Content Script Ui. Best Practices"
 description: "Create isolated UI components in shadow DOM from content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-content-script-ui/"
 ---
@@ -60,7 +60,7 @@ This pattern loads CSS once and reuses it across multiple shadow roots. Chrome c
 
 Tailwind Inside Shadow DOM
 
-Tailwind works inside shadow DOM, but the setup differs from standard web development. The simplest path uses inline styles or generates atomic classes at runtime. A more robust approach injects the Tailwind output as a constructable stylesheet.
+Tailwind works inside shadow DOM, but the setup differs from standard web development. The simplest path uses inline styles or generates atomic classes at runtime. A more solid approach injects the Tailwind output as a constructable stylesheet.
 
 ```javascript
 async function loadTailwind() {
@@ -146,7 +146,7 @@ Most extensions use z-index values near the maximum safe integer to stay above p
 
 Event Handling Across the Boundary
 
-Events from inside shadow DOM bubble to the document normally. The event target remains the element inside shadow DOM, but listeners on the host element or document will still receive the event. To communicate between the shadow DOM and the page, standard event delegation works seamlessly.
+Events from inside shadow DOM bubble to the document normally. The event target remains the element inside shadow DOM, but listeners on the host element or document will still receive the event. To communicate between the shadow DOM and the page, standard event delegation works smoothly.
 
 If you need to forward events from the page into your shadow DOM, add listeners on the host element and manually dispatch events inside.
 

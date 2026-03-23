@@ -19,27 +19,27 @@ This tutorial covers everything from understanding the architecture of HTTP head
 
 ---
 
-## Understanding HTTP Headers and Their Importance {#understanding-http-headers}
+Understanding HTTP Headers and Their Importance {#understanding-http-headers}
 
 Before diving into the implementation, it is essential to understand what HTTP headers are and why they matter. HTTP headers are key-value pairs sent in both request and response messages that provide additional context about the communication. They can be categorized into several types based on their purpose and the context in which they appear.
 
-### Request Headers
+Request Headers
 
 Request headers are sent by the client (your browser) when making an HTTP request. They provide information about the client, the resource being requested, and how the client wants to handle the response. Understanding request headers chrome functionality is crucial for debugging client-server interactions.
 
-The most common request headers include **Accept**, which tells the server what types of content the client can process (such as text/html, application/json, or image/webp). The **Accept-Language** header indicates the client's preferred languages, while **Accept-Encoding** specifies supported compression algorithms like gzip or br. The **User-Agent** header identifies the client software, and **Authorization** carries authentication credentials for protected resources.
+The most common request headers include Accept, which tells the server what types of content the client can process (such as text/html, application/json, or image/webp). The Accept-Language header indicates the client's preferred languages, while Accept-Encoding specifies supported compression algorithms like gzip or br. The User-Agent header identifies the client software, and Authorization carries authentication credentials for protected resources.
 
-Other important request headers include **Cookie**, which sends previously stored cookies back to the server, **Referer** (note the historical misspelling) indicating the URL of the page that linked to the requested resource, and **Cache-Control** for specifying caching directives. The **Host** header is particularly important as it specifies the domain name of the server and optionally the port number.
+Other important request headers include Cookie, which sends previously stored cookies back to the server, Referer (note the historical misspelling) indicating the URL of the page that linked to the requested resource, and Cache-Control for specifying caching directives. The Host header is particularly important as it specifies the domain name of the server and optionally the port number.
 
-### Response Headers
+Response Headers
 
 Response headers are sent by the server in response to a client request. They provide information about the server, the requested resource, and instructions for how the client should handle the response. Building a response headers viewer is one of the most useful features of an http headers extension.
 
-Critical response headers include **Content-Type**, which specifies the media type of the response (such as text/html or application/json), and **Content-Length** indicating the size of the response body. The **Cache-Control** header in responses tells the client how to cache the resource, while **Set-Cookie** is used by servers to send cookies to clients.
+Critical response headers include Content-Type, which specifies the media type of the response (such as text/html or application/json), and Content-Length indicating the size of the response body. The Cache-Control header in responses tells the client how to cache the resource, while Set-Cookie is used by servers to send cookies to clients.
 
-Security-related response headers have become increasingly important. **Content-Security-Policy** helps prevent cross-site scripting and data injection attacks. **Strict-Transport-Security** (HSTS) forces HTTPS connections. **X-Frame-Options** prevents clickjacking attacks, and **X-Content-Type-Options** stops browsers from MIME-type sniffing. The **Access-Control-Allow-Origin** header is crucial for Cross-Origin Resource Sharing (CORS) in web applications.
+Security-related response headers have become increasingly important. Content-Security-Policy helps prevent cross-site scripting and data injection attacks. Strict-Transport-Security (HSTS) forces HTTPS connections. X-Frame-Options prevents clickjacking attacks, and X-Content-Type-Options stops browsers from MIME-type sniffing. The Access-Control-Allow-Origin header is crucial for Cross-Origin Resource Sharing (CORS) in web applications.
 
-### Why Build a Dedicated HTTP Headers Extension
+Why Build a Dedicated HTTP Headers Extension
 
 While Chrome DevTools Network tab provides comprehensive header information, a dedicated http headers extension offers several advantages. First, it provides quicker access without opening DevTools, which requires multiple keystrokes and changes your debugging context. Second, a well-designed extension can present header information in a more readable and searchable format. Third, you can add custom features like header history, filtering, and alerts that are not available in DevTools.
 
@@ -47,11 +47,11 @@ For developers working with APIs, having a quick way to view request headers chr
 
 ---
 
-## Project Architecture and Manifest Configuration {#project-architecture}
+Project Architecture and Manifest Configuration {#project-architecture}
 
 Every Chrome extension begins with its manifest file. For our HTTP headers viewer extension, we will use Manifest V3, the latest version of the Chrome extension platform. Manifest V3 introduces several changes from V2, including stricter security requirements and changes to how background scripts operate.
 
-### Setting Up the Manifest
+Setting Up the Manifest
 
 Create a new directory for your extension and add the manifest.json file:
 
@@ -88,21 +88,21 @@ Create a new directory for your extension and add the manifest.json file:
 }
 ```
 
-The manifest declares several key permissions. The **activeTab** permission allows the extension to access the currently active tab when the user invokes it, providing a good balance between functionality and privacy. The **scripting** permission enables us to inject content scripts to extract header information. The **host_permissions** with `<all_urls>` allows the extension to access header information from any website.
+The manifest declares several key permissions. The activeTab permission allows the extension to access the currently active tab when the user invokes it, providing a good balance between functionality and privacy. The scripting permission enables us to inject content scripts to extract header information. The host_permissions with `<all_urls>` allows the extension to access header information from any website.
 
-### Understanding Extension Components
+Understanding Extension Components
 
-Our HTTP headers viewer extension will consist of several interconnected components that work together to provide a seamless user experience. Understanding these components and how they communicate is crucial for building a robust extension.
+Our HTTP headers viewer extension will consist of several interconnected components that work together to provide a smooth user experience. Understanding these components and how they communicate is crucial for building a solid extension.
 
-The **popup** is what users see when they click the extension icon. This will display the header information in a user-friendly format. The **background service worker** handles long-running tasks and manages communication between different parts of the extension. The **content script** runs in the context of web pages and extracts header information that is only available through browser APIs.
+The popup is what users see when they click the extension icon. This will display the header information in a user-friendly format. The background service worker handles long-running tasks and manages communication between different parts of the extension. The content script runs in the context of web pages and extracts header information that is only available through browser APIs.
 
 ---
 
-## Implementing the Core Functionality {#core-functionality}
+Implementing the Core Functionality {#core-functionality}
 
 Now let us implement the main functionality of our HTTP headers viewer extension. We will use the chrome.debugger API to capture network events, which provides more detailed header information than the declarativeNetRequest API.
 
-### The Background Service Worker
+The Background Service Worker
 
 The background service worker acts as the central hub for our extension. It initializes the debugger when needed and coordinates communication between the popup and content scripts. Create a background.js file with the following implementation:
 
@@ -158,7 +158,7 @@ async function handleGetHeaders(tabId) {
 }
 ```
 
-### The Popup Interface
+The Popup Interface
 
 The popup provides the user interface for viewing headers. We will create a clean, intuitive interface that displays both request and response headers in separate sections. Create popup.html:
 
@@ -362,7 +362,7 @@ The popup provides the user interface for viewing headers. We will create a clea
 </html>
 ```
 
-### The Popup JavaScript
+The Popup JavaScript
 
 The popup script handles user interactions and displays the header data. It communicates with the background script to fetch header information and provides filtering and export functionality:
 
@@ -585,11 +585,11 @@ window.exportHeaders = function(type) {
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Now let us implement more advanced features to make our HTTP headers extension truly powerful. These features will set our extension apart from basic header viewers and provide real value to users.
 
-### Header History and Session Tracking
+Header History and Session Tracking
 
 One valuable feature is tracking header changes across page navigations within a session. This helps developers understand how headers change as users interact with their applications. We will use Chrome's storage API to persist header history:
 
@@ -642,7 +642,7 @@ async function clearHistory() {
 }
 ```
 
-### Header Analysis and Recommendations
+Header Analysis and Recommendations
 
 Our extension can analyze headers and provide recommendations for improving security, performance, and SEO. This adds significant value beyond simply displaying headers:
 
@@ -715,7 +715,7 @@ function analyzeHeaders(headers) {
 }
 ```
 
-### Real-time Header Monitoring
+Real-time Header Monitoring
 
 For advanced debugging, implementing real-time header monitoring can be incredibly useful. This feature watches for header changes as the user navigates or as JavaScript modifies headers:
 
@@ -791,23 +791,23 @@ window.headerMonitor = new HeaderMonitor();
 
 ---
 
-## Testing and Debugging Your Extension {#testing-debugging}
+Testing and Debugging Your Extension {#testing-debugging}
 
 Testing Chrome extensions requires a different approach than regular web applications. Let us explore the best practices for testing our HTTP headers viewer extension.
 
-### Loading Your Extension
+Loading Your Extension
 
 To test your extension in Chrome, follow these steps. First, navigate to chrome://extensions in your Chrome browser. Enable Developer mode using the toggle in the top-right corner. Click the "Load unpacked" button and select your extension directory. Your extension should now appear in the extension toolbar.
 
 When making changes to your extension, you need to reload it. Click the reload icon on your extension card in chrome://extensions, or simply click the extension icon and look for the reload option in the context menu.
 
-### Using Chrome DevTools for Extension Development
+Using Chrome DevTools for Extension Development
 
 Chrome provides dedicated DevTools for extension development. Access these by navigating to chrome://extensions and clicking the "service worker" link under your extension. This opens the DevTools console for the background service worker, where you can view logs, set breakpoints, and debug runtime errors.
 
 For debugging the popup, right-click your extension icon and select "Inspect popup". This opens the DevTools specifically for the popup context.
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
 When developing your HTTP headers extension, you may encounter several common issues. The debugger attachment failing is typically caused by another debugger already being attached or insufficient permissions. Ensure you have the proper permissions and that no other extension or tool is using the debugger API.
 
@@ -817,7 +817,7 @@ Storage quota exceeded errors can occur when storing large amounts of header his
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have thoroughly tested your HTTP headers viewer extension, you can publish it to the Chrome Web Store to reach millions of users. The publishing process involves several steps to ensure your extension meets quality and security standards.
 
@@ -829,7 +829,7 @@ After submission, Google reviews your extension for policy compliance and functi
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building an HTTP Headers Viewer Chrome Extension is an excellent project that teaches you fundamental concepts of Chrome extension development while creating a genuinely useful tool. Throughout this guide, you have learned how to architect a Manifest V3 extension, implement header capture using the Debugger API, create intuitive user interfaces, and add advanced features like history tracking and security analysis.
 

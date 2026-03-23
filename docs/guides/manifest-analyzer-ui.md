@@ -24,17 +24,17 @@ The Manifest Analyzer follows a standard MV3 architecture:
 
 ```
 manifest-analyzer/
-├── manifest.json
-├── background/service-worker.ts
-├── popup/
-│   ├── popup.html
-│   ├── popup.ts
-│   └── popup.css
-├── lib/
-│   ├── manifest-parser.ts
-│   ├── manifest-validator.ts
-│   └── types.ts
-└── icons/
+ manifest.json
+ background/service-worker.ts
+ popup/
+    popup.html
+    popup.ts
+    popup.css
+ lib/
+    manifest-parser.ts
+    manifest-validator.ts
+    types.ts
+ icons/
 ```
 
 ### Manifest Configuration
@@ -60,9 +60,9 @@ manifest-analyzer/
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types
+Shared Types
 
 ```typescript
 export interface ChromeManifest {
@@ -106,7 +106,7 @@ export interface ManifestInfo {
 }
 ```
 
-### Manifest Parser
+Manifest Parser
 
 ```typescript
 import { ChromeManifest, ManifestInfo } from "./types";
@@ -186,7 +186,7 @@ export class ManifestParser {
 }
 ```
 
-### Manifest Validator
+Manifest Validator
 
 ```typescript
 import { ChromeManifest, ValidationError } from "./types";
@@ -252,9 +252,9 @@ export class ManifestValidator {
 
 ---
 
-## UI Design
+UI Design
 
-### Popup HTML
+Popup HTML
 
 ```html
 <!DOCTYPE html>
@@ -306,7 +306,7 @@ export class ManifestValidator {
 </html>
 ```
 
-### Popup CSS
+Popup CSS
 
 ```css
 :root { --primary: #4285f4; --success: #34a853; --warning: #fbbc04; --error: #ea4335; --bg: #ffffff; --surface: #f8f9fa; --border: #e8eaed; --text: #202124; --text-secondary: #5f6368; }
@@ -347,7 +347,7 @@ textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 
 .warning { color: var(--warning); }
 ```
 
-### Popup Logic
+Popup Logic
 
 ```typescript
 import { ManifestParser } from "../lib/manifest-parser";
@@ -407,9 +407,9 @@ class PopupApp {
     const output = document.getElementById('validation-output');
     if (output) {
       let html = '';
-      if (info.errors.length) html += '<div class="errors">' + info.errors.map(e => `<div class="error">❌ ${e.field}: ${e.message}</div>`).join('') + '</div>';
-      if (info.warnings.length) html += '<div class="warnings">' + info.warnings.map(w => `<div class="warning">⚠️ ${w.field}: ${w.message}</div>`).join('') + '</div>';
-      if (!info.errors.length && !info.warnings.length) html = '<div class="success">✅ Manifest is valid!</div>';
+      if (info.errors.length) html += '<div class="errors">' + info.errors.map(e => `<div class="error"> ${e.field}: ${e.message}</div>`).join('') + '</div>';
+      if (info.warnings.length) html += '<div class="warnings">' + info.warnings.map(w => `<div class="warning"> ${w.field}: ${w.message}</div>`).join('') + '</div>';
+      if (!info.errors.length && !info.warnings.length) html = '<div class="success"> Manifest is valid!</div>';
       output.innerHTML = html;
     }
     const tree = document.getElementById('manifest-tree');
@@ -441,7 +441,7 @@ class PopupApp {
       const userExtensions = extensions.filter(ext => !ext.isInstalled && ext.type === 'extension');
       list.innerHTML = userExtensions.map(ext => `
         <div class="extension-item" data-id="${ext.id}">
-          <div class="extension-icon">${ext.icons?.[48] ? `<img src="${ext.icons[48]}" width="32">` : '📦'}</div>
+          <div class="extension-icon">${ext.icons?.[48] ? `<img src="${ext.icons[48]}" width="32">` : ''}</div>
           <div class="extension-info"><div class="extension-name">${ext.name}</div><div class="extension-id">${ext.id}</div></div>
           <button class="btn analyze-ext-btn" data-id="${ext.id}">Analyze</button>
         </div>`).join('');
@@ -494,9 +494,9 @@ document.addEventListener('DOMContentLoaded', () => new PopupApp());
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions
+Required Permissions
 
 ```json
 {
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => new PopupApp());
 }
 ```
 
-### API Usage Patterns
+API Usage Patterns
 
 ```typescript
 // Storage - Persist analysis history
@@ -533,9 +533,9 @@ async function getCurrentTab(): Promise<chrome.tabs.Tab | null> {
 
 ---
 
-## State Management
+State Management
 
-### State Store Implementation
+State Store Implementation
 
 ```typescript
 import { ManifestInfo } from "./types";
@@ -604,9 +604,9 @@ class StateManager {
 
 ---
 
-## Error Handling
+Error Handling
 
-### Error Types and Handling
+Error Types and Handling
 
 ```typescript
 class ManifestAnalyzerError extends Error {
@@ -658,9 +658,9 @@ function handleEdgeCases(manifest: ChromeManifest): ValidationError[] {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests with Vitest
+Unit Tests with Vitest
 
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -716,7 +716,7 @@ describe('ManifestValidator', () => {
 });
 ```
 
-### Integration Tests with Playwright
+Integration Tests with Playwright
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -759,9 +759,9 @@ test.describe('Manifest Analyzer Popup', () => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimizations
+Optimizations
 
 ```typescript
 class PerformanceOptimizer {
@@ -801,41 +801,41 @@ class PerformanceOptimizer {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Submission Requirements
+Pre-Submission Requirements
 
 ```markdown
-## Publishing Checklist
+Publishing Checklist
 
-### Code Quality
+Code Quality
 - [ ] All TypeScript compiles without errors
 - [ ] No console.log in production code
 - [ ] No hardcoded API keys or secrets
 - [ ] Code is minified for production
 
-### Manifest Configuration
+Manifest Configuration
 - [ ] manifest_version is 3
 - [ ] All required fields present
 - [ ] Permissions are minimized
 - [ ] Description < 132 characters
 - [ ] Icons: 16x16, 48x48, 128x128
 
-### Testing
+Testing
 - [ ] Manual testing in Chrome
 - [ ] Popup works correctly
 - [ ] Storage operations work
 
-### Store Assets
+Store Assets
 - [ ] Screenshots (1280x800 or 640x400)
 - [ ] Promotional tile (440x280)
 - [ ] Privacy practices document
 
-### Documentation
+Documentation
 - [ ] README with features
 - [ ] Installation instructions
 
-### Chrome Web Store Submission
+Chrome Web Store Submission
 1. Upload zip (max 50MB)
 2. Fill store listing
 3. Upload assets
@@ -843,7 +843,7 @@ class PerformanceOptimizer {
 5. Submit for review
 ```
 
-### Build Configuration (vite.config.ts)
+Build Configuration (vite.config.ts)
 
 ```typescript
 import { defineConfig } from 'vite';
@@ -866,18 +866,18 @@ export default defineConfig({
 
 ---
 
-## Summary
+Summary
 
 Building a Manifest Analyzer Chrome extension requires attention to:
 
-1. **Architecture**: Standard MV3 structure with clear separation
-2. **TypeScript**: Full type safety with shared types across contexts
-3. **UI Design**: Intuitive interface with tabs, error display, and tree-view
-4. **Chrome APIs**: Use storage, management, scripting appropriately
-5. **State Management**: Reactive state with observer pattern
-6. **Error Handling**: Result types with proper error feedback
-7. **Testing**: Unit tests for logic, integration tests for UI
-8. **Performance**: Cache results, debounce operations, use Web Workers
-9. **Publishing**: Follow checklist to avoid rejection
+1. Architecture: Standard MV3 structure with clear separation
+2. TypeScript: Full type safety with shared types across contexts
+3. UI Design: Intuitive interface with tabs, error display, and tree-view
+4. Chrome APIs: Use storage, management, scripting appropriately
+5. State Management: Reactive state with observer pattern
+6. Error Handling: Result types with proper error feedback
+7. Testing: Unit tests for logic, integration tests for UI
+8. Performance: Cache results, debounce operations, use Web Workers
+9. Publishing: Follow checklist to avoid rejection
 
 This guide provides all the building blocks to create a professional Manifest Analyzer extension for Chrome developers.

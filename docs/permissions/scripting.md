@@ -10,12 +10,12 @@ canonical_url: "https://bestchromeextensions.com/permissions/scripting/"
 
 # scripting Permission Reference
 
-## What It Does {#what-it-does}
+What It Does {#what-it-does}
 - Grants access to the `chrome.scripting` API (MV3 replacement for `chrome.tabs.executeScript`)
 - Inject JavaScript and CSS into web pages programmatically
 - Key methods: `executeScript()`, `insertCSS()`, `removeCSS()`, `registerContentScripts()`, `unregisterContentScripts()`, `getRegisteredContentScripts()`
 
-## MV3 Change {#mv3-change}
+MV3 Change {#mv3-change}
 In MV2, script injection used `chrome.tabs.executeScript()`. In MV3, use `chrome.scripting.executeScript()` instead. The `scripting` permission is required.
 
 | Action | MV2 | MV3 |
@@ -24,7 +24,7 @@ In MV2, script injection used `chrome.tabs.executeScript()`. In MV3, use `chrome
 | Inject CSS | `chrome.tabs.insertCSS()` | `chrome.scripting.insertCSS()` |
 | Dynamic content scripts | N/A | `chrome.scripting.registerContentScripts()` |
 
-## Host Permissions Required {#host-permissions-required}
+Host Permissions Required {#host-permissions-required}
 `scripting` needs host permissions for target pages, UNLESS combined with `activeTab`:
 
 ```json
@@ -35,7 +35,7 @@ In MV2, script injection used `chrome.tabs.executeScript()`. In MV3, use `chrome
 { "permissions": ["scripting", "activeTab"] }
 ```
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 ```json
 {
   "permissions": ["scripting", "activeTab"],
@@ -43,7 +43,7 @@ In MV2, script injection used `chrome.tabs.executeScript()`. In MV3, use `chrome
 }
 ```
 
-## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, describePermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -55,7 +55,7 @@ console.log(result.granted);
 PERMISSION_DESCRIPTIONS.scripting; // "Inject scripts into web pages"
 ```
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: popup requests background to inject script, get results back:
 
@@ -97,7 +97,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store injection preferences:
 
@@ -118,7 +118,7 @@ storage.watch("autoInjectEnabled", (enabled) => {
 });
 ```
 
-## Key Methods {#key-methods}
+Key Methods {#key-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -131,33 +131,33 @@ storage.watch("autoInjectEnabled", (enabled) => {
 | `unregisterContentScripts({ ids })` | Remove dynamic content scripts |
 | `getRegisteredContentScripts()` | List registered dynamic scripts |
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 1. Click-to-extract with activeTab + scripting
 2. Dynamic content script registration
 3. Theme/CSS injection from options page
 4. Page analysis tools
 5. Web scraping helpers
 
-## Gotchas {#gotchas}
-- `executeScript` with `func` serializes the function — no closures, no outer scope access
+Gotchas {#gotchas}
+- `executeScript` with `func` serializes the function. no closures, no outer scope access
 - Use `args` parameter to pass data into injected functions
 - Cannot inject into `chrome://`, `chrome-extension://`, or Chrome Web Store pages
 - `activeTab` + `scripting` is the most privacy-friendly combo for click-triggered injection
 - Dynamic content scripts persist across extension restarts (unlike MV2)
 
-## Related Permissions {#related-permissions}
-- [activeTab](activeTab.md) — temporary host access, pairs perfectly with scripting
-- [tabs](tabs.md) — read tab URLs to decide what to inject
+Related Permissions {#related-permissions}
+- [activeTab](activeTab.md). temporary host access, pairs perfectly with scripting
+- [tabs](tabs.md). read tab URLs to decide what to inject
 
-## API Reference {#api-reference}
+API Reference {#api-reference}
 - [Chrome scripting API docs](https://developer.chrome.com/docs/extensions/reference/api/scripting)
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I inject scripts in Chrome extension?
+How do I inject scripts in Chrome extension?
 Use chrome.scripting.executeScript() to inject JavaScript into web pages. You'll need the "scripting" permission and appropriate host permissions.
 
-### Can I inject CSS with the scripting API?
+Can I inject CSS with the scripting API?
 Yes, use chrome.scripting.insertCSS() to inject CSS styles into pages.
 ---
 

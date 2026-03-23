@@ -19,7 +19,7 @@ This guide covers everything from understanding the restrictions to implementing
 
 ---
 
-## Understanding Manifest V3 Restrictions on Code Execution {#understanding-mv3-restrictions}
+Understanding Manifest V3 Restrictions on Code Execution {#understanding-mv3-restrictions}
 
 Manifest V3 introduced significant changes to how extensions can execute code, particularly in content scripts and background service workers. The most notable restriction involves the removal of remote code execution, meaning extensions can no longer load and execute code from external URLs. This change was designed to prevent malicious extensions from downloading and running untrusted code after installation.
 
@@ -27,7 +27,7 @@ The eval() function specifically faces several obstacles in Manifest V3. In cont
 
 Background service workers in Manifest V3 also have limited access to dynamic code execution. While you can still use eval() in the background context, doing so is strongly discouraged and may trigger warnings during the Chrome Web Store review process. The recommended approach involves including all necessary code in the extension bundle and avoiding runtime code generation.
 
-### Why eval() Was Restricted
+Why eval() Was Restricted
 
 The decision to restrict eval() and similar dynamic code execution methods stems from multiple security concerns. First, eval() makes security auditing extremely difficult because the code being executed is determined at runtime rather than during installation. This opacity allows malicious extensions to hide malicious behavior from reviewers.
 
@@ -37,11 +37,11 @@ Third, dynamic code execution complicates Chrome's extension sandboxing model. T
 
 ---
 
-## Alternative 1: chrome.scripting.executeScript() {#execute-script-alternative}
+Alternative 1: chrome.scripting.executeScript() {#execute-script-alternative}
 
 The primary recommended alternative to eval() for content scripts is chrome.scripting.executeScript(). This API provides a secure and declarative way to inject code into web pages while maintaining clear separation between extension code and web page code.
 
-### Basic Implementation
+Basic Implementation
 
 The chrome.scripting.executeScript() method allows you to inject JavaScript files or inline code into target pages. Here is a practical example demonstrating how to replace eval()-based code execution with this safer alternative:
 
@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This approach differs fundamentally from eval() because the code being injected is either a function reference or a string defined in your extension bundle. Chrome can audit this code during the review process, and users can inspect what your extension does before installing.
 
-### Passing Data Between Contexts
+Passing Data Between Contexts
 
 One common use case for eval() was executing code that referenced data available only at runtime. The chrome.scripting API handles this through the args parameter, which allows you to pass serializable data into the injected function:
 
@@ -106,11 +106,11 @@ The args parameter accepts only JSON-serializable values, which actually improve
 
 ---
 
-## Alternative 2: Dynamic Function Constructor with Sandboxing {#dynamic-function-alternative}
+Alternative 2: Dynamic Function Constructor with Sandboxing {#dynamic-function-alternative}
 
 For scenarios requiring more flexibility than chrome.scripting.executeScript() provides, the Function constructor offers a middle ground between full eval() access and completely static code. While not as restricted as eval(), using the Function constructor with proper precautions provides a controlled way to execute dynamic logic.
 
-### Safe Dynamic Function Pattern
+Safe Dynamic Function Pattern
 
 The Function constructor creates functions from string arguments, similar to eval() but with slightly different scoping behavior. When combined with proper input validation and sandboxing, it provides a manageable approach to dynamic code execution:
 
@@ -180,7 +180,7 @@ executor.execute(`
 
 This pattern provides several advantages over raw eval(). The function constructor creates functions rather than executing code directly, which provides slightly better scoping. The explicit parameter list gives you control over what globals are available. The timeout mechanism prevents runaway code from consuming unlimited resources.
 
-### Integrating with Content Scripts
+Integrating with Content Scripts
 
 When you need dynamic logic in content scripts, combine the Function constructor with message passing to keep sensitive code in the background:
 
@@ -223,11 +223,11 @@ function executeTemplate(template, data) {
 
 ---
 
-## Alternative 3: Template-Based Code Generation {#template-based-alternative}
+Alternative 3: Template-Based Code Generation {#template-based-alternative}
 
 For extensions that need to generate similar code patterns repeatedly, template-based approaches provide a clean alternative to eval(). This method uses predefined code templates with placeholder substitution, ensuring all executed code follows auditable patterns.
 
-### Template Engine Implementation
+Template Engine Implementation
 
 ```javascript
 class TemplateCodeGenerator {
@@ -311,11 +311,11 @@ chrome.scripting.executeScript({
 
 ---
 
-## Alternative 4: Web Workers for Isolated Execution {#web-workers-alternative}
+Alternative 4: Web Workers for Isolated Execution {#web-workers-alternative}
 
 Web Workers provide excellent isolation for computationally intensive code while avoiding the restrictions that affect direct code execution. This approach is particularly valuable for extensions that perform complex calculations or data processing.
 
-### Implementing Extension Web Workers
+Implementing Extension Web Workers
 
 ```javascript
 // Background service worker - creates and manages worker
@@ -401,11 +401,11 @@ Web Workers offer significant advantages including true parallel execution, comp
 
 ---
 
-## Alternative 5: Precompiled Function Registry {#function-registry-alternative}
+Alternative 5: Precompiled Function Registry {#function-registry-alternative}
 
 For extensions that need to support multiple code paths based on user configuration, a precompiled function registry provides flexibility without runtime code generation. This pattern maintains a collection of predefined functions that can be enabled or combined based on configuration.
 
-### Registry Implementation
+Registry Implementation
 
 ```javascript
 class FunctionRegistry {
@@ -487,11 +487,11 @@ This pattern provides excellent auditability because all possible code paths are
 
 ---
 
-## Best Practices for Dynamic Code in Manifest V3 {#best-practices}
+Best Practices for Dynamic Code in Manifest V3 {#best-practices}
 
 Regardless of which alternative you choose, following security best practices ensures your extension remains secure and passes Chrome Web Store review.
 
-### Security Checklist
+Security Checklist
 
 Always validate and sanitize any input that influences code execution. Even when using safer alternatives, unsanitized input can lead to unexpected behavior or security vulnerabilities. Use strict type checking and bounds validation before incorporating data into generated code or passing it to executed functions.
 
@@ -501,7 +501,7 @@ Keep sensitive operations in the background service worker whenever possible. Th
 
 Document your code execution patterns clearly for reviewers. Chrome Web Store reviewers need to understand why your extension uses dynamic code execution and how it remains secure. Include comments and documentation explaining the purpose of any eval()-like patterns in your code.
 
-### Performance Considerations
+Performance Considerations
 
 Dynamic code execution carries performance overhead that can impact extension responsiveness. The Function constructor and template-based approaches involve parsing and compilation steps that take time. For frequently-called code paths, consider precompiling functions and caching results.
 
@@ -511,17 +511,17 @@ When using chrome.scripting.executeScript(), minimize the frequency of injection
 
 ---
 
-## Migration Strategies for Existing Extensions {#migration-strategies}
+Migration Strategies for Existing Extensions {#migration-strategies}
 
 Migrating from Manifest V2 eval()-based code to Manifest V3 alternatives requires careful planning. Start by auditing your existing code to identify all locations where dynamic code execution occurs.
 
-### Audit and Categorize
+Audit and Categorize
 
 Group your dynamic code uses into categories based on their purpose. Code that generates user-specific configurations might map well to the template-based approach. Complex calculations could benefit from Web Workers. UI manipulation code should use chrome.scripting.executeScript().
 
 For each category, evaluate which alternative provides the best balance of security, performance, and development complexity. Some uses might not require dynamic execution at all and can be refactored to use static code with configuration.
 
-### Incremental Migration
+Incremental Migration
 
 Migrate incrementally rather than attempting a complete rewrite. Start with the simplest use cases that map cleanly to alternatives, then address more complex scenarios. This approach reduces risk and allows you to validate each migration step.
 
@@ -550,7 +550,7 @@ function executeCode(code, context) {
 
 ---
 
-## Conclusion
+Conclusion
 
 Manifest V3's restrictions on eval() and dynamic code execution, while challenging, have driven the development of better patterns for extension development. The alternatives explored in this guide each address specific use cases while maintaining security and auditability.
 
@@ -562,6 +562,6 @@ The techniques in this guide provide a foundation for building robust, secure, a
 
 ---
 
-## Additional Resources
+Additional Resources
 
 For more information on Chrome extension development and Manifest V3, consult the official Chrome Extension Documentation and the Manifest V3 migration guide. The Chrome Extensions community forums provide valuable insights from developers working through similar migration challenges.

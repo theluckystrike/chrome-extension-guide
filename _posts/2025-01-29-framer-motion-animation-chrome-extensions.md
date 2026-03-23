@@ -17,9 +17,9 @@ This comprehensive guide explores how to integrate Framer Motion into your Chrom
 
 ---
 
-## Why Use Framer Motion in Chrome Extensions?
+Why Use Framer Motion in Chrome Extensions?
 
-Chrome extensions built with React have unique animation requirements that differ from traditional web applications. Extensions must work seamlessly across different pages, handle popup lifecycle events, and maintain performance while respecting the browser's resource constraints. Framer Motion addresses these challenges with a declarative approach to animation that integrates naturally with React's component model.
+Chrome extensions built with React have unique animation requirements that differ from traditional web applications. Extensions must work smoothly across different pages, handle popup lifecycle events, and maintain performance while respecting the browser's resource constraints. Framer Motion addresses these challenges with a declarative approach to animation that integrates naturally with React's component model.
 
 The library provides several compelling advantages for extension developers. First, its declarative syntax makes animations easy to read and maintain. Instead of manually calculating animation frames or managing CSS transitions, you define what you want to animate and let Framer Motion handle the complexity. Second, Framer Motion includes gesture recognition out of the box, enabling touch and mouse interactions that feel natural in extension popups and side panels.
 
@@ -27,7 +27,7 @@ Performance is another critical consideration. Chrome extensions run in a constr
 
 ---
 
-## Setting Up Framer Motion in Your Chrome Extension Project
+Setting Up Framer Motion in Your Chrome Extension Project
 
 Before implementing animations, you need to add Framer Motion to your extension's dependencies. If you are using a modern React setup with a bundler like Vite or Webpack, installation is straightforward.
 
@@ -47,11 +47,11 @@ For Chrome extensions specifically, there are a few configuration considerations
 
 ---
 
-## Basic Animation Concepts for Extension Developers
+Basic Animation Concepts for Extension Developers
 
 Understanding Framer Motion's core concepts prepares you for building sophisticated animations in your extension. The library wraps standard React elements with motion components, adding animation capabilities while preserving the original element's functionality.
 
-### The Motion Component Wrapper
+The Motion Component Wrapper
 
 Every standard HTML element has a corresponding motion component that accepts animation props. For example, you would use `motion.div` instead of a regular `div` when you want to animate it. This wrapper component accepts properties like `initial`, `animate`, `transition`, and `exit` that define how the element should behave.
 
@@ -77,7 +77,7 @@ function AnimatedButton() {
 
 This example demonstrates several key concepts. The `initial` prop defines the starting state, `animate` specifies the target state, and `transition` controls how the animation progresses. The `whileHover` and `whileTap` props create interactive animations that respond to user input, perfect for buttons and interactive elements in your extension popup.
 
-### Animation Variants for Complex Sequences
+Animation Variants for Complex Sequences
 
 When you need to coordinate multiple elements animating together, Framer Motion's variant system provides an elegant solution. Variants let you define named animation states that you can trigger across multiple components simultaneously.
 
@@ -116,11 +116,11 @@ This pattern is particularly useful for extension settings panels, onboarding fl
 
 ---
 
-## Implementing Common Animation Patterns in Extensions
+Implementing Common Animation Patterns in Extensions
 
 Chrome extensions typically feature several common interface patterns that benefit from thoughtful animation. Understanding how to implement these patterns helps you create extensions that feel professional and responsive.
 
-### Popup Open and Close Animations
+Popup Open and Close Animations
 
 The extension popup is often the first thing users interact with, making its animation particularly important. A well-designed popup animation provides visual feedback that helps users understand the extension's presence and responsiveness.
 
@@ -150,7 +150,7 @@ function ExtensionPopup({ isOpen }) {
 
 The `AnimatePresence` component enables exit animations, allowing elements to animate out before being removed from the DOM. This creates smooth transitions when closing the popup or navigating between views.
 
-### Tab and View Transitions
+Tab and View Transitions
 
 Many extensions feature multiple views or tabs within their popup. Smooth transitions between these views improve the user experience by providing clear visual feedback about navigation.
 
@@ -182,7 +182,7 @@ function TabContainer() {
 
 Using `mode="wait"` ensures the exiting view completes its animation before the new view begins animating in, preventing visual clutter and creating a clean transition.
 
-### List Item Animations
+List Item Animations
 
 Extension popups often display lists of items, whether bookmarks, tabs, or search results. Animating these lists makes the interface feel more alive and provides feedback when items are added, removed, or reordered.
 
@@ -224,11 +224,11 @@ The `layout` prop automatically animates position changes when items are reorder
 
 ---
 
-## Advanced Framer Motion Techniques for Extensions
+Advanced Framer Motion Techniques for Extensions
 
 Once you have mastered the basics, several advanced techniques can further enhance your extension's animations.
 
-### Gesture-Based Interactions
+Gesture-Based Interactions
 
 Framer Motion's gesture system supports drag, pan, hover, and tap interactions. These gestures are particularly valuable in extension contexts where screen space is limited and direct manipulation feels natural.
 
@@ -250,7 +250,7 @@ function DraggableCard() {
 
 This pattern could power features like draggable widgets, swipable cards, or interactive elements in your extension's interface.
 
-### Scroll Animations for Longer Extensions
+Scroll Animations for Longer Extensions
 
 If your extension includes a longer popup or a dedicated options page, scroll-triggered animations can add visual interest as users navigate content.
 
@@ -273,7 +273,7 @@ function ScrollRevealSection() {
 
 {% raw %}The `whileInView` prop triggers animations when elements enter the viewport, and `viewport={{ once: true }}` ensures the animation only plays the first time, preventing distraction during repeated visits.{% endraw %}
 
-### Orchestrating Complex Animation Sequences
+Orchestrating Complex Animation Sequences
 
 For onboarding flows or tutorial screens, you might need to coordinate multiple animations in sequence. Framer Motion's `useAnimation` hook provides programmatic control over animations.
 
@@ -302,11 +302,11 @@ This approach gives you fine-grained control over timing and enables dynamic seq
 
 ---
 
-## Performance Optimization for Extension Animations
+Performance Optimization for Extension Animations
 
 While Framer Motion handles most performance considerations automatically, following best practices ensures your extension remains responsive across different devices and usage scenarios.
 
-### Use Transform Properties
+Use Transform Properties
 
 Always animate transform properties (translate, scale, rotate) rather than layout properties like width, height, or margin. Transforms are hardware-accelerated and do not trigger browser reflows, resulting in smoother animations.
 
@@ -322,7 +322,7 @@ Always animate transform properties (translate, scale, rotate) rather than layou
 
 When you must animate size changes, use the layout animations feature which automatically calculates transforms for smoother performance.
 
-### Minimize Animated Properties
+Minimize Animated Properties
 
 Each property you animate requires the browser to calculate and apply values. Keeping the number of animated properties minimal improves performance.
 
@@ -338,7 +338,7 @@ Each property you animate requires the browser to calculate and apply values. Ke
 ```
 {% endraw %}
 
-### Lazy Loading for Complex Animations
+Lazy Loading for Complex Animations
 
 For extensions with heavy animation requirements, consider lazy loading components that contain complex animations to speed up initial load times.
 
@@ -356,15 +356,15 @@ function ExtensionPopup() {
 
 ---
 
-## Best Practices for Extension Animation Design
+Best Practices for Extension Animation Design
 
 Beyond technical implementation, consider these design principles when adding animations to your Chrome extension.
 
-### Purpose Over Aesthetics
+Purpose Over Aesthetics
 
 Every animation should serve a purpose, whether guiding user attention, providing feedback, or improving navigation. Avoid animations that exist solely for visual appeal without functional benefit.
 
-### Respect User Preferences
+Respect User Preferences
 
 Some users prefer reduced motion for accessibility reasons. Framer Motion supports detecting and respecting these preferences.
 
@@ -388,35 +388,35 @@ function AccessibleComponent() {
 ```
 {% endraw %}
 
-### Consistent Timing
+Consistent Timing
 
 Establish consistent animation durations throughout your extension. Sudden changes in animation speed feel jarring and unprofessional. A typical range is 150-300ms for micro-interactions and 300-500ms for larger transitions.
 
 ---
 
-## Common Pitfalls and How to Avoid Them
+Common Pitfalls and How to Avoid Them
 
 Even experienced developers encounter challenges when implementing animations in Chrome extensions. Understanding common pitfalls helps you avoid frustrating debugging sessions and ensures a smoother development process.
 
-### Popup Lifecycle and Animation State
+Popup Lifecycle and Animation State
 
 Chrome extension popups have a unique lifecycle that can interrupt animations if not handled correctly. When a popup closes, React unmounts the entire component tree, potentially cutting off animations mid-flight. Using `AnimatePresence` with the `mode="wait"` option helps manage this transition, but you should also consider saving animation state if persistence is important.
 
 The extension popup also unloads when users click outside the popup or press Escape. This behavior differs from traditional web applications where components remain mounted. To handle this, avoid relying on local component state for critical data that needs to persist across popup open and close events.
 
-### Debugging Animation Issues
+Debugging Animation Issues
 
 When animations behave unexpectedly, Framer Motion provides helpful debugging tools. The `layout` prop mentioned earlier can sometimes cause unexpected results with complex nested structures. If you encounter visual glitches, try removing the `layout` prop temporarily to isolate the issue.
 
 Performance profiling in Chrome DevTools can identify animations causing jank or excessive CPU usage. Look for long frames or frequent recalculations in the Performance tab. If animations are running on the main thread for too long, consider simplifying the animation or reducing the number of simultaneous animated elements.
 
-### Cross-Browser Compatibility
+Cross-Browser Compatibility
 
 While Framer Motion works well in most modern browsers, Chrome extensions can load in environments with varying capabilities. Test your animated extension across different Chrome versions and consider fallback behaviors for users on older systems. The library's built-in fallbacks for features like gesture support help, but manual testing remains valuable.
 
 ---
 
-## Conclusion
+Conclusion
 
 Framer Motion provides Chrome extension developers with a powerful, flexible toolkit for creating polished, professional animations. From basic transitions to complex gesture-driven interfaces, the library's declarative approach makes animation code readable and maintainable.
 

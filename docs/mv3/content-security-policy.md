@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Content Security Policy — Manifest V3 Guide"
+title: "Chrome Extension Content Security Policy. Manifest V3 Guide"
 description: "Understand and work with Content Security Policy restrictions in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/content-security-policy/"
 ---
@@ -9,33 +9,33 @@ canonical_url: "https://bestchromeextensions.com/mv3/content-security-policy/"
 
 A comprehensive guide to Content Security Policy changes in Manifest V3 and how to migrate your extension.
 
-## Overview {#overview}
+Overview {#overview}
 
-Manifest V3 (MV3) enforces a **stricter Content Security Policy (CSP)** compared to Manifest V2. The most significant changes are:
+Manifest V3 (MV3) enforces a stricter Content Security Policy (CSP) compared to Manifest V2. The most significant changes are:
 
-- **No `eval()`** — Dynamic code execution is no longer allowed
-- **No `new Function()`** — Function constructor is blocked
-- **No remote code** — All scripts must be bundled locally
-- **No inline scripts** — Inline scripts are blocked; move all code to external .js files
+- No `eval()`. Dynamic code execution is no longer allowed
+- No `new Function()`. Function constructor is blocked
+- No remote code. All scripts must be bundled locally
+- No inline scripts. Inline scripts are blocked; move all code to external .js files
 
 These changes improve security but require code refactoring for many extensions.
 
 ---
 
-## Key Changes Table {#key-changes-table}
+Key Changes Table {#key-changes-table}
 
 | Feature | MV2 | MV3 | Notes |
 |---------|-----|-----|-------|
-| `eval()` | ✅ Allowed | ❌ Blocked | Use JSON.parse or a proper parser |
-| `new Function()` | ✅ Allowed | ❌ Blocked | Use alternative implementations |
-| Remote scripts | ✅ Allowed | ❌ Blocked | Bundle all dependencies locally |
-| Inline scripts | ✅ Allowed | ❌ Blocked | Move to separate .js files |
-| Data URIs | ✅ Allowed | ⚠️ Restricted | Allowed in some contexts |
-| WebAssembly | ⚠️ Limited | ✅ Allowed | Enabled by default in MV3 |
+| `eval()` |  Allowed |  Blocked | Use JSON.parse or a proper parser |
+| `new Function()` |  Allowed |  Blocked | Use alternative implementations |
+| Remote scripts |  Allowed |  Blocked | Bundle all dependencies locally |
+| Inline scripts |  Allowed |  Blocked | Move to separate .js files |
+| Data URIs |  Allowed |  Restricted | Allowed in some contexts |
+| WebAssembly |  Limited |  Allowed | Enabled by default in MV3 |
 
 ---
 
-## Default MV3 CSP {#default-mv3-csp}
+Default MV3 CSP {#default-mv3-csp}
 
 Manifest V3 extensions have this default CSP:
 
@@ -44,9 +44,9 @@ script-src 'self' 'wasm-unsafe-eval'; object-src 'self';
 ```
 
 Breaking it down:
-- `'self'` — Only extension's own scripts
-- `'wasm-unsafe-eval'` — WebAssembly is allowed (but marked unsafe-eval)
-- `object-src 'self'` — Only extension's own resources
+- `'self'`. Only extension's own scripts
+- `'wasm-unsafe-eval'`. WebAssembly is allowed (but marked unsafe-eval)
+- `object-src 'self'`. Only extension's own resources
 
 You can customize this in `manifest.json`:
 
@@ -61,9 +61,9 @@ You can customize this in `manifest.json`:
 
 ---
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
-In MV3, CSP is now an **object** with two keys:
+In MV3, CSP is now an object with two keys:
 
 ```json
 {
@@ -81,11 +81,11 @@ In MV3, CSP is now an **object** with two keys:
 
 ---
 
-## Problem 1: `eval()` and `new Function()` {#problem-1-eval-and-new-function}
+Problem 1: `eval()` and `new Function()` {#problem-1-eval-and-new-function}
 
 These are the most common migration issues. Both are blocked in MV3.
 
-### ❌ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
+ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
 
 ```javascript
 // Using eval() to parse JSON
@@ -95,7 +95,7 @@ const data = eval('(' + jsonString + ')');
 const fn = new Function('return ' + jsonString);
 ```
 
-### ✅ MV3 Compatible {#mv3-compatible}
+ MV3 Compatible {#mv3-compatible}
 
 ```javascript
 // Use JSON.parse for JSON
@@ -106,24 +106,24 @@ import { parse } from './parser.js';
 const data = parse(jsonString);
 ```
 
-### Replacing Template Engines {#replacing-template-engines}
+Replacing Template Engines {#replacing-template-engines}
 
 If a library uses `eval()` internally, consider alternatives:
 
 | Library | MV2 | MV3 Alternative |
 |---------|-----|-----------------|
-| Handlebars | ✅ | Use precompiled templates |
-| Lodash templates | ✅ | Use precompiled or esbuild |
-| Underscore.js | ✅ | Use precompiled templates |
-| Custom eval | ❌ | Use JSON.parse or a parser |
+| Handlebars |  | Use precompiled templates |
+| Lodash templates |  | Use precompiled or esbuild |
+| Underscore.js |  | Use precompiled templates |
+| Custom eval |  | Use JSON.parse or a parser |
 
 ---
 
-## Problem 2: Remote Scripts {#problem-2-remote-scripts}
+Problem 2: Remote Scripts {#problem-2-remote-scripts}
 
 MV3 requires all scripts to be bundled locally. No loading from CDN.
 
-### ❌ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
+ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
 
 ```html
 <script src="https://cdn.example.com/library.js"></script>
@@ -136,11 +136,11 @@ MV3 requires all scripts to be bundled locally. No loading from CDN.
 }]
 ```
 
-### ✅ MV3 Compatible {#mv3-compatible}
+ MV3 Compatible {#mv3-compatible}
 
-1. **Download the dependency**
-2. **Place it in your extension**
-3. **Reference locally**
+1. Download the dependency
+2. Place it in your extension
+3. Reference locally
 
 ```bash
 npm install library-name
@@ -156,7 +156,7 @@ cp node_modules/library-name/dist/library.js extension/lib/
 }
 ```
 
-### Bundling with Build Tools {#bundling-with-build-tools}
+Bundling with Build Tools {#bundling-with-build-tools}
 
 For complex dependencies, use a bundler:
 
@@ -174,11 +174,11 @@ export default {
 
 ---
 
-## Problem 3: Inline Scripts {#problem-3-inline-scripts}
+Problem 3: Inline Scripts {#problem-3-inline-scripts}
 
 Inline scripts (`<script>` tags and inline event handlers) are blocked.
 
-### ❌ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
+ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
 
 ```html
 <!-- Inline script -->
@@ -195,7 +195,7 @@ Inline scripts (`<script>` tags and inline event handlers) are blocked.
 </style>
 ```
 
-### ✅ MV3 Compatible {#mv3-compatible}
+ MV3 Compatible {#mv3-compatible}
 
 ```html
 <!-- Move to external file -->
@@ -210,7 +210,7 @@ Inline scripts (`<script>` tags and inline event handlers) are blocked.
 document.getElementById('myButton').addEventListener('click', handleClick);
 ```
 
-### Converting Inline Event Handlers {#converting-inline-event-handlers}
+Converting Inline Event Handlers {#converting-inline-event-handlers}
 
 | Inline (MV2) | External (MV3) |
 |--------------|----------------|
@@ -220,32 +220,32 @@ document.getElementById('myButton').addEventListener('click', handleClick);
 
 ---
 
-## Problem 4: Dynamic Code Generation {#problem-4-dynamic-code-generation}
+Problem 4: Dynamic Code Generation {#problem-4-dynamic-code-generation}
 
-If you absolutely need dynamic code execution, use **sandboxed pages**.
+If you absolutely need dynamic code execution, use sandboxed pages.
 
-### Architecture {#architecture}
+Architecture {#architecture}
 
 ```
-┌─────────────────────────────────────┐
-│  Extension Page                     │
-│  (CSP: script-src 'self')          │
-│         │                           │
-│         │ postMessage               │
-│         ▼                           │
-│  ┌─────────────────────────────┐   │
-│  │  Sandbox Page               │   │
-│  │  (CSP: sandbox allow-scripts)│   │
-│  │  - Can use eval/Function    │   │
-│  │  - Returns results via      │   │
-│  │    postMessage              │   │
-│  └─────────────────────────────┘   │
-└─────────────────────────────────────┘
+
+  Extension Page                     
+  (CSP: script-src 'self')          
+                                    
+          postMessage               
+                                    
+     
+    Sandbox Page                  
+    (CSP: sandbox allow-scripts)   
+    - Can use eval/Function       
+    - Returns results via         
+      postMessage                 
+     
+
 ```
 
-### Implementation {#implementation}
+Implementation {#implementation}
 
-**manifest.json:**
+manifest.json:
 
 ```json
 {
@@ -255,7 +255,7 @@ If you absolutely need dynamic code execution, use **sandboxed pages**.
 }
 ```
 
-**sandbox.html:**
+sandbox.html:
 
 ```html
 <!DOCTYPE html>
@@ -269,7 +269,7 @@ If you absolutely need dynamic code execution, use **sandboxed pages**.
 </html>
 ```
 
-**sandbox.js:**
+sandbox.js:
 
 ```javascript
 // This runs in sandbox with relaxed CSP
@@ -286,7 +286,7 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-**Extension page (popup.js):**
+Extension page (popup.js):
 
 ```javascript
 function executeInSandbox(code) {
@@ -312,21 +312,21 @@ function executeInSandbox(code) {
 }
 ```
 
-> **Note:** The `@theluckystrike/webext-messaging` library handles all this complexity for you with a clean, CSP-safe API.
+> Note: The `@theluckystrike/webext-messaging` library handles all this complexity for you with a clean, CSP-safe API.
 
 ---
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
-The `@theluckystrike/webext-messaging` library is designed to be **fully CSP-compliant**. It uses native `chrome.runtime.sendMessage` and `chrome.runtime.onMessage` APIs—no `eval()`, no inline scripts, no dynamic code.
+The `@theluckystrike/webext-messaging` library is designed to be fully CSP-compliant. It uses native `chrome.runtime.sendMessage` and `chrome.runtime.onMessage` APIs, no `eval()`, no inline scripts, no dynamic code.
 
-### Installation {#installation}
+Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-messaging
 ```
 
-### Basic Usage {#basic-usage}
+Basic Usage {#basic-usage}
 
 ```typescript
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -349,26 +349,26 @@ messenger.on('data-updated', (data) => {
 });
 ```
 
-### Why it's CSP-safe {#why-its-csp-safe}
+Why it's CSP-safe {#why-its-csp-safe}
 
-- **No eval()** — Uses native Chrome messaging APIs
-- **No inline scripts** — All event handlers use `addEventListener`
-- **No dynamic code** — Pure function calls, no string-to-code conversion
-- **TypeScript support** — Full type safety
+- No eval(). Uses native Chrome messaging APIs
+- No inline scripts. All event handlers use `addEventListener`
+- No dynamic code. Pure function calls, no string-to-code conversion
+- TypeScript support. Full type safety
 
 ---
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-The `@theluckystrike/webext-storage` library provides **CSP-compliant** storage operations using Chrome's `chrome.storage` API.
+The `@theluckystrike/webext-storage` library provides CSP-compliant storage operations using Chrome's `chrome.storage` API.
 
-### Installation {#installation}
+Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-storage
 ```
 
-### Basic Usage {#basic-usage}
+Basic Usage {#basic-usage}
 
 ```typescript
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -398,20 +398,20 @@ async function loadSettings() {
 }
 ```
 
-### Why it's CSP-safe {#why-its-csp-safe}
+Why it's CSP-safe {#why-its-csp-safe}
 
-- **No eval()** — Direct chrome.storage API calls
-- **No dynamic serialization** — Type-safe schema validation
-- **No inline scripts** — Event handlers via addEventListener
-- **Synchronous & async** — Supports both sync and async patterns
+- No eval(). Direct chrome.storage API calls
+- No dynamic serialization. Type-safe schema validation
+- No inline scripts. Event handlers via addEventListener
+- Synchronous & async. Supports both sync and async patterns
 
 ---
 
-## Content Scripts CSP {#content-scripts-csp}
+Content Scripts CSP {#content-scripts-csp}
 
 Content scripts have a unique relationship with the host page's CSP.
 
-### Page's CSP vs Extension's CSP {#pages-csp-vs-extensions-csp}
+Page's CSP vs Extension's CSP {#pages-csp-vs-extensions-csp}
 
 | Context | CSP Applied |
 |---------|-------------|
@@ -419,20 +419,20 @@ Content scripts have a unique relationship with the host page's CSP.
 | Content script | Not subject to the page's CSP; content scripts can use `chrome.runtime` APIs freely |
 | Extension pages | Extension's CSP (your `content_security_policy`) |
 
-### Implications {#implications}
+Implications {#implications}
 
-1. **Content scripts** run in an isolated world and are not restricted by the host page's CSP
-2. **Messages to extension** use `chrome.runtime.sendMessage` (CSP-exempt)
-3. **Inline handlers in page** — You cannot use them, use `addEventListener`
+1. Content scripts run in an isolated world and are not restricted by the host page's CSP
+2. Messages to extension use `chrome.runtime.sendMessage` (CSP-exempt)
+3. Inline handlers in page. You cannot use them, use `addEventListener`
 
-### ❌ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
+ MV2 (Will Fail in MV3) {#mv2-will-fail-in-mv3}
 
 ```html
 <!-- Inline event handler in HTML -- blocked by CSP -->
 <button onclick="chrome.runtime.sendMessage({ action: 'doSomething' })">Click</button>
 ```
 
-### ✅ MV3 Compatible {#mv3-compatible}
+ MV3 Compatible {#mv3-compatible}
 
 ```javascript
 // Content script or extension page -- use addEventListener or .onclick property
@@ -441,15 +441,15 @@ document.querySelector('button').addEventListener('click', () => {
 });
 ```
 
-> **Note:** JavaScript `.onclick` property assignment is NOT blocked by CSP. Only HTML `onclick="..."` attribute inline handlers are blocked.
+> Note: JavaScript `.onclick` property assignment is NOT blocked by CSP. Only HTML `onclick="..."` attribute inline handlers are blocked.
 
 ---
 
-## WebAssembly {#webassembly}
+WebAssembly {#webassembly}
 
-WebAssembly (Wasm) is **allowed by default** in MV3.
+WebAssembly (Wasm) is allowed by default in MV3.
 
-### Default CSP Includes Wasm {#default-csp-includes-wasm}
+Default CSP Includes Wasm {#default-csp-includes-wasm}
 
 ```
 script-src 'self' 'wasm-unsafe-eval'; object-src 'self';
@@ -457,7 +457,7 @@ script-src 'self' 'wasm-unsafe-eval'; object-src 'self';
 
 The `'wasm-unsafe-eval'` directive allows Wasm compilation.
 
-### Using Wasm in Your Extension {#using-wasm-in-your-extension}
+Using Wasm in Your Extension {#using-wasm-in-your-extension}
 
 ```javascript
 // Load Wasm module
@@ -470,7 +470,7 @@ async function loadWasmModule() {
 }
 ```
 
-### If You Need to Disable Wasm {#if-you-need-to-disable-wasm}
+If You Need to Disable Wasm {#if-you-need-to-disable-wasm}
 
 For maximum security, you can remove `'wasm-unsafe-eval'`:
 
@@ -482,51 +482,51 @@ For maximum security, you can remove `'wasm-unsafe-eval'`:
 }
 ```
 
-> **Warning:** This will break any Wasm-based functionality in your extension.
+> Warning: This will break any Wasm-based functionality in your extension.
 
 ---
 
-## Common Libraries That Need Fixes {#common-libraries-that-need-fixes}
+Common Libraries That Need Fixes {#common-libraries-that-need-fixes}
 
 Some popular libraries have features that violate MV3's CSP. Here's how to handle them:
 
 | Library | Issue | Solution |
 |---------|-------|----------|
-| **Handlebars** | Uses `eval` for runtime compilation | Precompile templates, use `handlebars-runtime` |
-| **Lodash (template)** | Uses `new Function` for templates | Precompile templates |
-| **jQuery** | Works fine | Use latest version |
-| **Angular.js (1.x)** | Uses `ng-bind` with expressions | Refactor to use components |
-| **Moment.js** | Works fine | Use latest version |
-| **Underscore.js** | Uses `new Function` for templates | Precompile templates |
-| **CoffeeScript** | Compiles to `eval` | Precompile to JS |
-| **Babel (runtime)** | May use `eval` | Use `@babel/standalone` precompiled |
+| Handlebars | Uses `eval` for runtime compilation | Precompile templates, use `handlebars-runtime` |
+| Lodash (template) | Uses `new Function` for templates | Precompile templates |
+| jQuery | Works fine | Use latest version |
+| Angular.js (1.x) | Uses `ng-bind` with expressions | Refactor to use components |
+| Moment.js | Works fine | Use latest version |
+| Underscore.js | Uses `new Function` for templates | Precompile templates |
+| CoffeeScript | Compiles to `eval` | Precompile to JS |
+| Babel (runtime) | May use `eval` | Use `@babel/standalone` precompiled |
 
-### Handlebars Migration Example {#handlebars-migration-example}
+Handlebars Migration Example {#handlebars-migration-example}
 
 {% raw %}
 ```javascript
-// ❌ MV2 - Runtime compilation (uses eval)
+//  MV2 - Runtime compilation (uses eval)
 const template = Handlebars.compile('<div>{{name}}</div>');
 const html = template({ name: 'World' });
 
-// ✅ MV3 - Precompiled templates
+//  MV3 - Precompiled templates
 import template from './templates/hello.js';
 const html = template({ name: 'World' });
 ```
 {% endraw %}
 
 ```bash
-# Precompile Handlebars
+Precompile Handlebars
 npx handlebars template.hbs -f templates/hello.js
 ```
 
 ---
 
-## Migration Checklist {#migration-checklist}
+Migration Checklist {#migration-checklist}
 
 Use this checklist when migrating from MV2 to MV3:
 
-### Phase 1: Inventory {#phase-1-inventory}
+Phase 1: Inventory {#phase-1-inventory}
 
 - [ ] List all `eval()` calls in your codebase
 - [ ] List all `new Function()` usages
@@ -535,28 +535,28 @@ Use this checklist when migrating from MV2 to MV3:
 - [ ] Identify all inline event handlers (`onclick`, etc.)
 - [ ] Check all dependencies for eval/new Function usage
 
-### Phase 2: Replace Dynamic Code {#phase-2-replace-dynamic-code}
+Phase 2: Replace Dynamic Code {#phase-2-replace-dynamic-code}
 
 - [ ] Replace `eval()` with `JSON.parse()` or a parser
 - [ ] Replace `new Function()` with function references
 - [ ] Replace inline `<script>` tags with external files
 - [ ] Replace inline event handlers with `addEventListener`
 
-### Phase 3: Bundle Dependencies {#phase-3-bundle-dependencies}
+Phase 3: Bundle Dependencies {#phase-3-bundle-dependencies}
 
 - [ ] Download all remote scripts
 - [ ] Place scripts in extension directory
 - [ ] Update manifest.json to reference local files
 - [ ] Configure bundler for complex dependencies
 
-### Phase 4: Verify {#phase-4-verify}
+Phase 4: Verify {#phase-4-verify}
 
 - [ ] Test in Chrome with MV3
 - [ ] Check for CSP violations in chrome://extensions
 - [ ] Test all dynamic functionality
 - [ ] Test WebAssembly if used
 
-### Phase 5: Use CSP-Safe Libraries {#phase-5-use-csp-safe-libraries}
+Phase 5: Use CSP-Safe Libraries {#phase-5-use-csp-safe-libraries}
 
 - [ ] Use `@theluckystrike/webext-messaging` for messaging
 - [ ] Use `@theluckystrike/webext-storage` for storage
@@ -564,15 +564,15 @@ Use this checklist when migrating from MV2 to MV3:
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 MV3's stricter CSP significantly improves extension security but requires migration effort:
 
-1. **No dynamic code** — Replace `eval()` and `new Function()`
-2. **No remote scripts** — Bundle everything locally
-3. **No inline scripts** — Use external files and `addEventListener`
-4. **Use sandbox pages** — For rare cases requiring dynamic code
-5. **Use @theluckystrike libraries** — They're designed for CSP compliance
+1. No dynamic code. Replace `eval()` and `new Function()`
+2. No remote scripts. Bundle everything locally
+3. No inline scripts. Use external files and `addEventListener`
+4. Use sandbox pages. For rare cases requiring dynamic code
+5. Use @theluckystrike libraries. They're designed for CSP compliance
 
 The `@theluckystrike/webext-messaging` and `@theluckystrike/webext-storage` libraries provide clean, CSP-safe APIs that work out of the box with Manifest V3.
 -e 

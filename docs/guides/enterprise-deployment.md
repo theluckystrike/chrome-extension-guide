@@ -21,7 +21,7 @@ This guide covers deploying Chrome extensions in enterprise environments using m
 
 ## Managed Storage with chrome.storage.managed
 
-The `chrome.storage.managed` API allows IT administrators to push configuration to extensions via enterprise policies. Unlike `chrome.storage.local` and `chrome.storage.sync`, managed storage is read-only from the extension's perspective—users cannot modify these values.
+The `chrome.storage.managed` API allows IT administrators to push configuration to extensions via enterprise policies. Unlike `chrome.storage.local` and `chrome.storage.sync`, managed storage is read-only from the extension's perspective, users cannot modify these values.
 
 ### How It Works
 
@@ -90,38 +90,38 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
 ---
 
-## Force-Installing Extensions via Google Admin Console
+Force-Installing Extensions via Google Admin Console
 
 Google Admin Console provides a centralized way to install extensions for all users in your organization.
 
-### Prerequisites
+Prerequisites
 
 - Google Workspace Business, Enterprise, or Education subscription
 - Chrome Browser Cloud Management (CBCM) enabled
 - Extension published to Chrome Web Store or uploaded as private app
 
-### Steps to Force-Install
+Steps to Force-Install
 
-1. Sign in to **Google Admin Console** (admin.google.com)
-2. Navigate to **Devices** > **Chrome** > **Apps & Extensions**
+1. Sign in to Google Admin Console (admin.google.com)
+2. Navigate to Devices > Chrome > Apps & Extensions
 3. Select the organizational unit (OU) for deployment
-4. Click **+ Add** and select **Add from Chrome Web Store**
-5. Search for your extension and click **Select**
+4. Click + Add and select Add from Chrome Web Store
+5. Search for your extension and click Select
 6. Configure installation settings:
-   - **Force installation**: Users cannot disable or remove
-   - **Allow installation**: Optional for users
-   - **Set sandbox mode**: If needed
-7. Click **Save**
+   - Force installation: Users cannot disable or remove
+   - Allow installation: Optional for users
+   - Set sandbox mode: If needed
+7. Click Save
 
-### Extension Settings Configuration
+Extension Settings Configuration
 
 In the same Admin Console interface, you can configure:
 
-- **Extension settings**: Set policies that map to `chrome.storage.managed`
-- **Runtime host permissions**: Grant additional permissions
-- **App launch settings**: Configure how the extension starts
+- Extension settings: Set policies that map to `chrome.storage.managed`
+- Runtime host permissions: Grant additional permissions
+- App launch settings: Configure how the extension starts
 
-### Force-Installation Behavior
+Force-Installation Behavior
 
 - Extension is automatically installed on all managed devices
 - Users cannot disable, remove, or update the extension
@@ -130,16 +130,16 @@ In the same Admin Console interface, you can configure:
 
 ---
 
-## Group Policy Deployment on Windows
+Group Policy Deployment on Windows
 
 Windows Group Policy provides another mechanism for enterprise Chrome extension deployment, especially useful for organizations not using Google Workspace.
 
-### Required Policy Files
+Required Policy Files
 
 1. Download Chrome Browser template from [Chrome Enterprise Help](https://chromeenterprise.google/policies/)
 2. Import the ADMX files into your Group Policy Management Console
 
-### Key Policies for Extensions
+Key Policies for Extensions
 
 | Policy | Description |
 |--------|-------------|
@@ -148,7 +148,7 @@ Windows Group Policy provides another mechanism for enterprise Chrome extension 
 | `ExtensionInstallBlocklist` | Block specific extensions |
 | `UpdatePolicy` | Control extension update behavior |
 
-### Configuring Force Installation
+Configuring Force Installation
 
 ```
 Computer Configuration > Administrative Templates > Google Chrome > Extensions
@@ -160,28 +160,27 @@ Set `ExtensionInstallForcelist` with format:
 [publisher],[extension_id];[publisher],[extension_id];
 ```
 
-Example:
 ```
 google.com;cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx
 ```
 
 The update URL (CRX download URL) is required for automatic updates.
 
-### Example: PowerShell Script for Deployment
+PowerShell Script for Deployment
 
 ```powershell
-# Create registry key for force installation
+Create registry key for force installation
 $policyPath = "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist"
 
 if (-not (Test-Path $policyPath)) {
     New-Item -Path $policyPath -Force | Out-Null
 }
 
-# Add extension ID with update URL
+Add extension ID with update URL
 $extension = "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
 Set-ItemProperty -Path $policyPath -Name "1" -Value $extension
 
-# Set update policy to automatic
+Set update policy to automatic
 $updatePath = "HKLM:\SOFTWARE\Policies\Google\Chrome\Update2"
 if (-not (Test-Path $updatePath)) {
     New-Item -Path $updatePath -Force | Out-Null
@@ -191,16 +190,16 @@ Set-ItemProperty -Path $updatePath -Name "UpdatePolicyOverride" -Value "auto"
 
 ---
 
-## MDM Deployment on macOS
+MDM Deployment on macOS
 
 Mobile Device Management (MDM) solutions like Jamf, Microsoft Intune, or Apple Business Manager can deploy Chrome extensions to macOS devices.
 
-### Using Configuration Profiles
+Using Configuration Profiles
 
 1. Create a configuration profile with Chrome settings
 2. Deploy to target devices via MDM
 
-### Profile Structure for Force Installation
+Profile Structure for Force Installation
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -240,7 +239,7 @@ Mobile Device Management (MDM) solutions like Jamf, Microsoft Intune, or Apple B
 </plist>
 ```
 
-### Deploying via Jamf Pro
+Deploying via Jamf Pro
 
 1. Create a new Configuration Profile in Jamf Pro
 2. Add Application & Custom Settings payload
@@ -249,35 +248,35 @@ Mobile Device Management (MDM) solutions like Jamf, Microsoft Intune, or Apple B
 
 ---
 
-## Blocklisting and Allowlisting
+Blocklisting and Allowlisting
 
 Organizations can control which extensions users can install through blocklisting and allowlisting.
 
-### Blocklisting Extensions
+Blocklisting Extensions
 
 Block specific extensions globally or for certain OUs.
 
-**Google Admin Console:**
-1. Navigate to **Devices** > **Chrome** > **Apps & Extensions**
+Google Admin Console:
+1. Navigate to Devices > Chrome > Apps & Extensions
 2. Select the OU
-3. Add extensions to the **Block apps** list
+3. Add extensions to the Block apps list
 
-**Group Policy:**
+Group Policy:
 ```
 Computer Configuration > Administrative Templates > Google Chrome > Extensions
 ```
 Set `ExtensionInstallBlocklist` to list extension IDs to block.
 
-### Allowlisting Extensions
+Allowlisting Extensions
 
 Restrict users to only install extensions you've explicitly approved.
 
-**Google Admin Console:**
-1. Go to **Apps** > **Google Workspace** > **Chrome Browser**
+Google Admin Console:
+1. Go to Apps > Google Workspace > Chrome Browser
 2. Enable "Allow users to install approved apps and extensions only"
 3. Create an approved app list
 
-**Extension Settings for Allowlist:**
+Extension Settings for Allowlist:
 
 ```json
 {
@@ -291,7 +290,7 @@ Restrict users to only install extensions you've explicitly approved.
 }
 ```
 
-### Whitelist by Organizational Unit
+Whitelist by Organizational Unit
 
 ```json
 {
@@ -306,26 +305,26 @@ Restrict users to only install extensions you've explicitly approved.
 
 ---
 
-## Chrome Browser Cloud Management
+Chrome Browser Cloud Management
 
 Chrome Browser Cloud Management (CBCM) provides a cloud-based management console for Chrome Browser and extensions, even for organizations not using Google Workspace.
 
-### Setting Up CBCM
+Setting Up CBCM
 
 1. Sign up at [chromeenterprise.google/management](https://chromeenterprise.google/management/)
 2. Enroll your browser instances using the enrollment token
 3. Configure policies in the CBCM console
 
-### CBCM Features
+CBCM Features
 
-- **Dashboard**: View enrolled browsers, extension status, and policy compliance
-- **Policy Management**: Configure and deploy policies to browser instances
-- **Extension Management**: Force-install, allow, or block extensions
-- **Reporting**: Track extension usage, version compliance, and security status
+- Dashboard: View enrolled browsers, extension status, and policy compliance
+- Policy Management: Configure and deploy policies to browser instances
+- Extension Management: Force-install, allow, or block extensions
+- Reporting: Track extension usage, version compliance, and security status
 
-### Using CBCM for Extension Deployment
+Using CBCM for Extension Deployment
 
-1. In CBCM console, go to **Extensions** > **Add extension**
+1. In CBCM console, go to Extensions > Add extension
 2. Choose from Web Store or upload CRX
 3. Configure deployment settings (force install, optional, blocked)
 4. Target specific OUs or groups
@@ -333,16 +332,16 @@ Chrome Browser Cloud Management (CBCM) provides a cloud-based management console
 
 ---
 
-## Update URLs and Self-Hosted Manifests
+Update URLs and Self-Hosted Manifests
 
 For organizations with strict security requirements, you may need to host extensions internally rather than relying on the Chrome Web Store.
 
-### Setting Up Self-Hosted Updates
+Setting Up Self-Hosted Updates
 
 1. Host the extension CRX file on your internal server
 2. Create an update manifest XML file
 
-### Update Manifest Format
+Update Manifest Format
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -353,7 +352,7 @@ For organizations with strict security requirements, you may need to host extens
 </gupdate>
 ```
 
-### Configuring Extension to Use Custom Update URL
+Configuring Extension to Use Custom Update URL
 
 ```json
 {
@@ -364,7 +363,7 @@ For organizations with strict security requirements, you may need to host extens
 }
 ```
 
-### Hosting Extensions on Google Drive
+Hosting Extensions on Google Drive
 
 For smaller deployments, you can host CRX files on Google Drive:
 
@@ -379,7 +378,7 @@ For smaller deployments, you can host CRX files on Google Drive:
 </gupdate>
 ```
 
-### Security Considerations
+Security Considerations
 
 - Use HTTPS for all update URLs
 - Sign CRX files with your organization's certificate
@@ -388,30 +387,30 @@ For smaller deployments, you can host CRX files on Google Drive:
 
 ---
 
-## Version Pinning and Rollback
+Version Pinning and Rollback
 
 Enterprise environments often require strict control over which extension versions are deployed.
 
-### Pinning Versions
+Pinning Versions
 
-**Google Admin Console:**
+Google Admin Console:
 1. Select the extension in Apps & Extensions
 2. Disable automatic updates
 3. Manually select the version to deploy
 
-**Group Policy:**
+Group Policy:
 ```
 Computer Configuration > Administrative Templates > Google Chrome > Extensions
 ```
 Set `UpdatePolicyOverride` to `manual` or `cached`.
 
-### Rolling Back Versions
+Rolling Back Versions
 
 1. In Admin Console, find the extension
 2. Select a previous version from the version dropdown
 3. Save changes
 
-### Implementing Rollback in Self-Hosted
+Implementing Rollback in Self-Hosted
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -426,7 +425,7 @@ Set `UpdatePolicyOverride` to `manual` or `cached`.
 </gupdate>
 ```
 
-### Version Management Best Practices
+Version Management Best Practices
 
 - Test new versions in a pilot group before full deployment
 - Maintain a version history for rollback
@@ -435,11 +434,11 @@ Set `UpdatePolicyOverride` to `manual` or `cached`.
 
 ---
 
-## Building Enterprise-Ready Extensions
+Building Enterprise-Ready Extensions
 
 Enterprise extensions require additional considerations beyond standard development.
 
-### Security Best Practices
+Security Best Practices
 
 ```javascript
 // background.js - Security best practices
@@ -476,7 +475,7 @@ function signRequest(payload, secretKey) {
 }
 ```
 
-### Error Handling and Logging
+Error Handling and Logging
 
 ```javascript
 // background.js - Enterprise-grade logging
@@ -537,7 +536,7 @@ class EnterpriseLogger {
 const logger = new EnterpriseLogger();
 ```
 
-### Supporting Managed Config
+Supporting Managed Config
 
 ```javascript
 // background.js - Full managed config support
@@ -586,7 +585,7 @@ function getDefaultConfiguration() {
 }
 ```
 
-### Testing Enterprise Features
+Testing Enterprise Features
 
 ```javascript
 // tests/enterprise.test.js
@@ -630,18 +629,18 @@ describe('Enterprise Configuration', () => {
 
 ---
 
-## Testing with Managed Policies Locally
+Testing with Managed Policies Locally
 
 You can test managed storage and policies locally before deploying to production.
 
-### Using Chrome Flags
+Using Chrome Flags
 
 1. Open `chrome://extensions`
 2. Enable "Developer mode"
 3. Find your extension and look for "Inspect views" > "Service worker" or "background page"
 4. Right-click and inspect
 
-### Simulating Managed Storage
+Simulating Managed Storage
 
 ```javascript
 // Create a mock managed storage for local testing
@@ -675,22 +674,22 @@ chrome.storage.managed.get = (keys, callback) => {
 console.log('Mock managed storage configured');
 ```
 
-### Using Enterprise Policy Testing
+Using Enterprise Policy Testing
 
-**For Chrome Web Store extensions:**
+For Chrome Web Store extensions:
 1. Go to `chrome://policy`
 2. Look for ExtensionSettings policy
 3. Click "Reload policies"
 
-**For local development:**
+For local development:
 ```bash
-# Chrome launch with custom policy
+Chrome launch with custom policy
 chrome \
   --load-extension=/path/to/extension \
   --policy-user-data-dir=/tmp/chrome-policy-test
 ```
 
-### Testing with group-policy-json
+Testing with group-policy-json
 
 You can create a `gpolicy.json` file to test policies:
 
@@ -711,9 +710,9 @@ You can create a `gpolicy.json` file to test policies:
 
 ---
 
-## Code Examples
+Code Examples
 
-### Complete Extension with Enterprise Features
+Complete Extension with Enterprise Features
 
 ```javascript
 // background.js - Complete enterprise extension example
@@ -866,7 +865,7 @@ class EnterpriseExtension {
 new EnterpriseExtension();
 ```
 
-### manifest.json for Enterprise Extension
+manifest.json for Enterprise Extension
 
 ```json
 {
@@ -893,7 +892,7 @@ new EnterpriseExtension();
 
 ---
 
-## References
+References
 
 - [Chrome Enterprise Deployment Documentation](https://developer.chrome.com/docs/extensions/develop/migration/enterprise)
 - [Chrome Browser Cloud Management](https://chromeenterprise.google/management/)
@@ -905,9 +904,9 @@ new EnterpriseExtension();
 
 ---
 
-## Conclusion
+Conclusion
 
-Deploying Chrome extensions in enterprise environments requires careful consideration of storage, deployment mechanisms, security, and ongoing management. By implementing `chrome.storage.managed`, supporting force-installation via Admin Console or Group Policy, and following enterprise best practices, you can create robust extensions that meet organizational security and compliance requirements.
+Deploying Chrome extensions in enterprise environments requires careful consideration of storage, deployment mechanisms, security, and ongoing management. By implementing `chrome.storage.managed`, supporting force-installation via Admin Console or Group Policy, and following enterprise best practices, you can create solid extensions that meet organizational security and compliance requirements.
 
 Remember to:
 - Always test enterprise features in a controlled environment

@@ -19,11 +19,11 @@ This project is perfect for beginners who want to learn Chrome extension develop
 
 ---
 
-## Why Build a Note Taking Extension {#why-build-notes-extension}
+Why Build a Note Taking Extension {#why-build-notes-extension}
 
 Before we start coding, let us discuss why building a note taking extension is an excellent project choice. Browser notepad extensions are among the most popular categories in the Chrome Web Store for several compelling reasons.
 
-First, they solve an immediate pain point. Every internet user needs to capture information quickly while browsing. Whether it is a recipe you found, a product you want to buy later, or an idea for a project, having instant access to a notepad inside the browser eliminates friction. Users do not need to open a separate application, minimize their browser, or worry about syncing between devices.
+First, they solve an immediate problem. Every internet user needs to capture information quickly while browsing. Whether it is a recipe you found, a product you want to buy later, or an idea for a project, having instant access to a notepad inside the browser eliminates friction. Users do not need to open a separate application, minimize their browser, or worry about syncing between devices.
 
 Second, note taking extensions are technically achievable for beginners. You do not need complex backend infrastructure or database connections. Modern Chrome extensions can store data locally using the chrome.storage API or localStorage, making the entire application client-side. This simplifies development significantly and reduces hosting costs to zero.
 
@@ -31,7 +31,7 @@ Third, there is significant demand in the market. Quick notes chrome extensions 
 
 ---
 
-## Project Overview and Features {#project-overview}
+Project Overview and Features {#project-overview}
 
 Our quick note Chrome extension will include the following features. A popup interface that appears when clicking the extension icon in the browser toolbar. A text area for entering notes with auto-save functionality that persists data automatically without requiring a save button. Multiple note support allowing users to create, edit, and delete individual notes. Keyboard shortcuts for power users who want to open the extension quickly. A clean, minimalist design that focuses on functionality without visual clutter.
 
@@ -39,7 +39,7 @@ This feature set strikes the right balance between simplicity and usefulness. It
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension needs a specific file structure to function correctly. Let us set up our project directory first. Create a new folder named quick-note-extension in your development workspace. Inside this folder, we will create the following files and directories.
 
@@ -66,11 +66,11 @@ Let us start by creating the manifest.json file, which is the most critical comp
 }
 ```
 
-This manifest uses Manifest V3, which is the current standard for Chrome extensions. We declare the storage permission so our extension can save notes persistently. The action property defines what happens when users click the extension icon—in this case, it opens our popup.html file.
+This manifest uses Manifest V3, which is the current standard for Chrome extensions. We declare the storage permission so our extension can save notes persistently. The action property defines what happens when users click the extension icon, in this case, it opens our popup.html file.
 
 ---
 
-## Building the Popup Interface {#building-popup-interface}
+Building the Popup Interface {#building-popup-interface}
 
 Now let us create the popup.html file that defines what users see when they click our extension. We will build a clean, functional interface that emphasizes ease of use.
 
@@ -108,7 +108,7 @@ This HTML structure is straightforward. We have a header with the extension titl
 
 ---
 
-## Styling the Extension {#styling-extension}
+Styling the Extension {#styling-extension}
 
 Now we need to make our extension visually appealing. Create the popup.css file with the following styles.
 
@@ -241,7 +241,7 @@ These styles create a modern, clean interface that follows current design trends
 
 ---
 
-## Implementing JavaScript Logic {#implementing-javascript}
+Implementing JavaScript Logic {#implementing-javascript}
 
 Now we come to the core functionality. The popup.js file handles all the interactive logic, including creating notes, saving them to storage, loading them when the popup opens, and deleting notes.
 
@@ -400,7 +400,7 @@ The timestamp formatting function provides human-readable time differences, show
 
 ---
 
-## Creating the Extension Icon {#creating-icon}
+Creating the Extension Icon {#creating-icon}
 
 Every Chrome extension needs an icon. For development purposes, you can create a simple PNG file. The icon should be 48x48 pixels or larger. You can create a basic icon using any image editor or even a simple colored square. For production, you would want a professionally designed icon, but for testing, any 48x48 PNG will work.
 
@@ -408,9 +408,9 @@ Save your icon file as icon.png in the project folder. If you do not have an ico
 
 ---
 
-## Testing the Extension {#testing-extension}
+Testing the Extension {#testing-extension}
 
-Now comes the exciting part—testing our extension in Chrome. Follow these steps to load your extension and see it in action.
+Now comes the exciting part, testing our extension in Chrome. Follow these steps to load your extension and see it in action.
 
 First, open Chrome and navigate to chrome://extensions/ in the address bar. Alternatively, you can access this through the Chrome menu by selecting "Extensions" and then "Manage Extensions."
 
@@ -420,13 +420,13 @@ Third, click the "Load unpacked" button and select your quick-note-extension fol
 
 Fourth, look for the puzzle piece icon in your Chrome toolbar. Click it to see your extension listed. Pin it to your toolbar for easier access by clicking the pin icon next to your extension.
 
-Fifth, click the Quick Note extension icon to open the popup. Try creating a new note by clicking the "+ New Note" button. Type something in the textarea. Close the popup and reopen it—your note should still be there thanks to the chrome.storage API.
+Fifth, click the Quick Note extension icon to open the popup. Try creating a new note by clicking the "+ New Note" button. Type something in the textarea. Close the popup and reopen it, your note should still be there thanks to the chrome.storage API.
 
 Congratulations! Your note taking extension is now working. You have built a functional browser notepad extension that can help you capture thoughts instantly while browsing.
 
 ---
 
-## Adding Keyboard Shortcuts {#adding-keyboard-shortcuts}
+Adding Keyboard Shortcuts {#adding-keyboard-shortcuts}
 
 To make the extension even more powerful, let us add a keyboard shortcut so users can open it instantly without reaching for the mouse. We need to update our manifest.json file to include the commands permission and define a keyboard shortcut.
 
@@ -460,11 +460,11 @@ Update your manifest.json to include keyboard commands:
 }
 ```
 
-Now users can press Ctrl+Shift+N (or Command+Shift+N on Mac) to instantly open their notes. This keyboard shortcut integrates seamlessly with Chrome's existing shortcuts and provides a frictionless way to capture thoughts.
+Now users can press Ctrl+Shift+N (or Command+Shift+N on Mac) to instantly open their notes. This keyboard shortcut integrates smoothly with Chrome's existing shortcuts and provides a frictionless way to capture thoughts.
 
 ---
 
-## Enhancing User Experience {#enhancing-user-experience}
+Enhancing User Experience {#enhancing-user-experience}
 
 Now that our core functionality works, let us add some polish to make the extension truly stand out. We will add a few enhancements that improve the user experience significantly.
 
@@ -511,7 +511,7 @@ These small improvements make the extension feel more responsive and professiona
 
 ---
 
-## Understanding Chrome Storage API {#understanding-chrome-storage}
+Understanding Chrome Storage API {#understanding-chrome-storage}
 
 The chrome.storage API is fundamental to building persistent Chrome extensions. Let us explore how it works and why we chose it over other storage options.
 
@@ -530,7 +530,7 @@ Keep in mind that sync storage has a smaller quota (about 100KB) compared to loc
 
 ---
 
-## Publishing to Chrome Web Store {#publishing-to-store}
+Publishing to Chrome Web Store {#publishing-to-store}
 
 Once you have tested your extension thoroughly and added any final touches, you might want to share it with the world by publishing it to the Chrome Web Store. Here is how to do that.
 
@@ -544,7 +544,7 @@ Fourth, submit your extension for review. Google typically reviews new extension
 
 ---
 
-## Summary and Next Steps {#summary}
+Summary and Next Steps {#summary}
 
 Congratulations! You have successfully built a complete quick note Chrome extension from scratch. In this tutorial, we covered the essential concepts of Chrome extension development, including Manifest V3 configuration, popup interfaces with HTML and CSS, JavaScript logic for CRUD operations, the chrome.storage API for data persistence, keyboard shortcuts for power users, and preparation for publishing to the Chrome Web Store.
 

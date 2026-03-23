@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Command Palette — Best Practices"
+title: "Chrome Extension Command Palette. Best Practices"
 description: "Build command palettes for quick access to features."
 canonical_url: "https://bestchromeextensions.com/patterns/command-palette/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/command-palette/"
 
 The command palette pattern brings VS Code-style functionality to Chrome Extensions, combining keyboard shortcuts, fuzzy search, and quick actions into a unified interface that users love.
 
-## Overview {#overview}
+Overview {#overview}
 
 A command palette provides:
 - Quick access to all extension features via keyboard
@@ -19,32 +19,32 @@ A command palette provides:
 
 ---
 
-## Architecture {#architecture}
+Architecture {#architecture}
 
 The command palette consists of three interconnected components:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Content Script                          │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
-│  │  Palette UI │◄───│  Key Handler│    │ Shadow DOM  │    │
-│  │  (injected) │    │  (Ctrl+Shift+K)   │  (isolated) │    │
-│  └──────┬──────┘         └──────┬──────┘              │    │
-│         │                       │                      │    │
-└─────────┼───────────────────────┼──────────────────────┼────┘
-          │                       │                      │
-          │        chrome.runtime.sendMessage            │
-          ▼                       ▼                      │
-┌─────────────────────────────────────────────────────────────┐
-│                    Service Worker                           │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
-│  │   Command   │    │    Message  │    │   Handler   │    │
-│  │  Registry   │◄───│   Listener │───►│   Executor  │    │
-│  └─────────────┘    └─────────────┘    └─────────────┘    │
-└─────────────────────────────────────────────────────────────┘
+
+                    Content Script                          
+              
+    Palette UI   Key Handler     Shadow DOM      
+    (injected)       (Ctrl+Shift+K)     (isolated)     
+                             
+                                                          
+
+                                                       
+                  chrome.runtime.sendMessage            
+                                                       
+
+                    Service Worker                           
+              
+     Command           Message         Handler       
+    Registry      Listener    Executor      
+              
+
 ```
 
-### Component Responsibilities {#component-responsibilities}
+Component Responsibilities {#component-responsibilities}
 
 | Component | Responsibility |
 |-----------|----------------|
@@ -54,7 +54,7 @@ The command palette consists of three interconnected components:
 
 ---
 
-## Pattern 1: Command Registry {#pattern-1-command-registry}
+Pattern 1: Command Registry {#pattern-1-command-registry}
 
 Define commands as objects with metadata for search and execution:
 
@@ -105,7 +105,7 @@ export function getCommands(): Command[] {
 
 ---
 
-## Pattern 2: Keyboard Trigger {#pattern-2-keyboard-trigger}
+Pattern 2: Keyboard Trigger {#pattern-2-keyboard-trigger}
 
 Use `chrome.commands` to define the palette shortcut in your manifest:
 
@@ -146,7 +146,7 @@ function showCommandPalette() {
 
 ---
 
-## Pattern 3: Palette UI with Shadow DOM {#pattern-3-palette-ui-with-shadow-dom}
+Pattern 3: Palette UI with Shadow DOM {#pattern-3-palette-ui-with-shadow-dom}
 
 Inject an isolated modal overlay using Shadow DOM for style encapsulation:
 
@@ -232,7 +232,7 @@ export function createPalette(commands: PaletteItem[]): HTMLElement {
 
 ---
 
-## Pattern 4: Fuzzy Search & Keyboard Navigation {#pattern-4-fuzzy-search-keyboard-navigation}
+Pattern 4: Fuzzy Search & Keyboard Navigation {#pattern-4-fuzzy-search-keyboard-navigation}
 
 Implement fuzzy filtering and keyboard-driven selection:
 
@@ -294,7 +294,7 @@ export function handleKeyboardNavigation(
 
 ---
 
-## Pattern 5: Action Execution {#pattern-5-action-execution}
+Pattern 5: Action Execution {#pattern-5-action-execution}
 
 Send selected command to service worker for execution:
 
@@ -328,7 +328,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Complete Integration {#complete-integration}
+Complete Integration {#complete-integration}
 
 Putting it all together in your content script:
 
@@ -428,24 +428,24 @@ function closePalette() {
 
 ---
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Shadow DOM isolation** — Prevent page styles from affecting your palette
-2. **Fuzzy matching** — Use fuzzy search for forgiving input matching
-3. **Debounce queries** — For large command sets, debounce search input
-4. **Keyboard-first** — Ensure full navigation without mouse
-5. **Recent commands** — Track and prioritize recently used commands
-6. **Loading states** — Show loading indicators for async commands
-7. **Error handling** — Display errors in the palette for failed commands
+1. Shadow DOM isolation. Prevent page styles from affecting your palette
+2. Fuzzy matching. Use fuzzy search for forgiving input matching
+3. Debounce queries. For large command sets, debounce search input
+4. Keyboard-first. Ensure full navigation without mouse
+5. Recent commands. Track and prioritize recently used commands
+6. Loading states. Show loading indicators for async commands
+7. Error handling. Display errors in the palette for failed commands
 
 ---
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
-- [Keyboard Shortcuts API](/docs/patterns/keyboard-shortcuts-api) — Global shortcut configuration
-- [Commands Keyboard Shortcuts](/docs/guides/commands-keyboard-shortcuts.md) — Shortcut best practices
-- [Content Script Patterns](/docs/guides/content-script-patterns.md) — Safe script injection
-- [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced) — Complex Shadow DOM patterns
+- [Keyboard Shortcuts API](/docs/patterns/keyboard-shortcuts-api). Global shortcut configuration
+- [Commands Keyboard Shortcuts](/docs/guides/commands-keyboard-shortcuts.md). Shortcut best practices
+- [Content Script Patterns](/docs/guides/content-script-patterns.md). Safe script injection
+- [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced). Complex Shadow DOM patterns
 -e 
 ---
 

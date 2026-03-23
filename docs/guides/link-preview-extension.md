@@ -279,7 +279,7 @@ export class PreviewError extends Error {
 export async function withRetry<T>(fn: () => Promise<T>, retries = 3): Promise<T> {
   for (let i = 0; i < retries; i++) {
     try { return await fn(); }
-    catch (e) { if (i === retries - 1) throw e; await new Promise(r => setTimeout(r, 1000 * 2 ** i)); }
+    catch (e) { if (i === retries - 1) throw e; await new Promise(r => setTimeout(r, 1000 * 2  i)); }
   }
   throw new Error('Unreachable');
 }
@@ -311,12 +311,12 @@ describe('LinkPreview', () => {
 
 ## Performance Considerations
 
-- **Debounce** hover events (150-300ms delay)
-- **Cache** metadata in chrome.storage (24hr TTL)
-- **Lazy load** preview images with `loading="lazy"`
-- **Throttle** DOM observations with MutationObserver
-- **Limit** concurrent fetches to 3
-- **Clean up** overlay on page unload
+- Debounce hover events (150-300ms delay)
+- Cache metadata in chrome.storage (24hr TTL)
+- Lazy load preview images with `loading="lazy"`
+- Throttle DOM observations with MutationObserver
+- Limit concurrent fetches to 3
+- Clean up overlay on page unload
 
 ## Publishing Checklist
 

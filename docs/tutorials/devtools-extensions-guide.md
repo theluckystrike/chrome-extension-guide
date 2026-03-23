@@ -11,7 +11,7 @@ Chrome DevTools extensions allow you to extend Chrome's built-in developer tools
 
 This tutorial covers all aspects of building DevTools extensions, from manifest configuration to advanced communication patterns.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before starting, ensure you have:
 - Chrome 88 or later (for full DevTools API support)
@@ -19,7 +19,7 @@ Before starting, ensure you have:
 - Understanding of Chrome extension architecture (manifest V3)
 - Knowledge of the extension's background service worker concept
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 DevTools extensions require specific manifest configuration using the `devtools_page` field:
 
@@ -41,9 +41,9 @@ DevTools extensions require specific manifest configuration using the `devtools_
 ```
 
 Key manifest entries:
-- `devtools_page` — Required. Points to an HTML file that loads the DevTools initialization script
-- `permissions` — Additional permissions your extension needs
-- `background` — Service worker for long-running tasks and communication
+- `devtools_page`. Required. Points to an HTML file that loads the DevTools initialization script
+- `permissions`. Additional permissions your extension needs
+- `background`. Service worker for long-running tasks and communication
 
 ```html
 <!-- devtools.html -->
@@ -60,7 +60,7 @@ Key manifest entries:
 </html>
 ```
 
-## Step 2: DevTools Page Lifecycle {#step-2-devtools-page-lifecycle}
+Step 2: DevTools Page Lifecycle {#step-2-devtools-page-lifecycle}
 
 The DevTools page (`devtools.js`) is loaded every time DevTools opens. Understanding its lifecycle is crucial:
 
@@ -132,7 +132,7 @@ window.addEventListener('unload', () => {
 });
 ```
 
-### Lifecycle Events Summary
+Lifecycle Events Summary
 
 | Event | Description |
 |-------|-------------|
@@ -142,7 +142,7 @@ window.addEventListener('unload', () => {
 | Tab changes | New `devtools.js` instance loads |
 | DevTools close | Resources released |
 
-## Step 3: Creating Custom Panels {#step-3-creating-custom-panels}
+Step 3: Creating Custom Panels {#step-3-creating-custom-panels}
 
 Custom panels appear as new tabs in DevTools. Here's how to create a fully functional panel:
 
@@ -346,7 +346,7 @@ chrome.devtools.panels.create(
 </html>
 ```
 
-## Step 4: Creating Custom Sidebars {#step-4-creating-custom-sidebars}
+Step 4: Creating Custom Sidebars {#step-4-creating-custom-sidebars}
 
 Sidebars appear alongside existing panels like Elements, Console, or Network. This is perfect for showing contextual information:
 
@@ -441,7 +441,7 @@ chrome.devtools.panels.network.createSidebarPane(
 );
 ```
 
-## Step 5: Using the inspectedWindow API {#step-5-using-the-inspectedwindow-api}
+Step 5: Using the inspectedWindow API {#step-5-using-the-inspectedwindow-api}
 
 The `chrome.devtools.inspectedWindow` API provides access to the inspected page:
 
@@ -516,7 +516,7 @@ function captureScreenshot() {
 }
 ```
 
-## Step 6: Eval in Inspected Page Context {#step-6-eval-in-inspected-page-context}
+Step 6: Eval in Inspected Page Context {#step-6-eval-in-inspected-page-context}
 
 Running code in the inspected page context requires understanding content scripts and page context:
 
@@ -630,7 +630,7 @@ async function safeEval(expression) {
 }
 ```
 
-## Step 7: Network Request Interception {#step-7-network-request-interception}
+Step 7: Network Request Interception {#step-7-network-request-interception}
 
 Monitor and analyze network requests using the HAR (HTTP Archive) API:
 
@@ -707,7 +707,7 @@ function simulateRequest() {
 }
 ```
 
-## Step 8: Extending the Elements Panel {#step-8-extending-the-elements-panel}
+Step 8: Extending the Elements Panel {#step-8-extending-the-elements-panel}
 
 Add custom functionality to the Elements panel through sidebars and context menus:
 
@@ -845,7 +845,7 @@ chrome.devtools.inspectedWindow.eval(
 );
 ```
 
-## Step 9: Communication Between DevTools and Background {#step-9-communication-between-devtools-and-background}
+Step 9: Communication Between DevTools and Background {#step-9-communication-between-devtools-and-background}
 
 DevTools pages can communicate with the background service worker and other extension components:
 
@@ -970,27 +970,27 @@ function handleBackgroundMessage(data) {
 }
 ```
 
-### Communication Flow Diagram
+Communication Flow Diagram
 
 ```
-┌─────────────────┐     chrome.runtime.sendMessage      ┌──────────────────┐
-│                 │ ─────────────────────────────────► │                  │
-│  DevTools Page  │                                     │  Background     │
-│  (devtools.js)  │ ◄────────────────────────────────── │  Service Worker │
-│                 │     chrome.runtime.onMessage        │  (background.js)│
-└─────────────────┘                                     └──────────────────┘
-        │                                                        │
-        │ chrome.tabs.sendMessage                               │
-        ▼                                                        ▼
-┌─────────────────┐                                     ┌──────────────────┐
-│  Content Page  │                                     │   Popup/Options  │
-│ (injected.js)  │                                     │    (HTML/JS)     │
-└─────────────────┘                                     └──────────────────┘
+     chrome.runtime.sendMessage      
+                                     
+  DevTools Page                                         Background     
+  (devtools.js)      Service Worker 
+                      chrome.runtime.onMessage          (background.js)
+                                     
+                                                                
+         chrome.tabs.sendMessage                               
+                                                                
+                                     
+  Content Page                                          Popup/Options  
+ (injected.js)                                           (HTML/JS)     
+                                     
 ```
 
-## Step 10: Advanced Patterns {#step-10-advanced-patterns}
+Step 10: Advanced Patterns {#step-10-advanced-patterns}
 
-### Theme Support
+Theme Support
 
 ```javascript
 // devtools.js
@@ -1008,7 +1008,7 @@ if (currentTheme === 'dark') {
 // Note: Theme changes require DevTools reload
 ```
 
-### Panel State Persistence
+Panel State Persistence
 
 ```javascript
 // devtools.js
@@ -1040,7 +1040,7 @@ function setupAutoSave() {
 }
 ```
 
-### Debugging Tips
+Debugging Tips
 
 ```javascript
 // devtools.js
@@ -1075,7 +1075,7 @@ function logToDevToolsConsole(message) {
 }
 ```
 
-## Testing Your Extension {#testing-your-extension}
+Testing Your Extension {#testing-your-extension}
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -1085,42 +1085,42 @@ function logToDevToolsConsole(message) {
 6. Check the Console for initialization messages
 7. Test sidebars in the Elements panel
 
-## Common Issues and Solutions {#common-issues-and-solutions}
+Common Issues and Solutions {#common-issues-and-solutions}
 
-### DevTools Page Not Loading
+DevTools Page Not Loading
 
 - Verify `devtools_page` is correctly set in manifest
 - Check that the HTML file exists and loads correctly
 - Look for JavaScript errors in the console
 
-### Communication Failures
+Communication Failures
 
 - Use `chrome.runtime.lastError` to check for errors
 - Ensure message listeners are properly set up
 - Verify the extension has required permissions
 
-### Eval Not Working
+Eval Not Working
 
 - Some page scripts may block evaluation
 - Use try-catch in evaluated code
 - Check for CSP (Content Security Policy) restrictions
 
-### Styles Not Matching
+Styles Not Matching
 
 - DevTools uses its own stylesheet isolation
 - Use explicit pixel values when needed
 - Test in both light and dark themes
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Chrome DevTools API Guide](../guides/devtools-api.html) — Complete reference for the chrome.devtools APIs
-- [Chrome Debugger API Guide](../guides/chrome-debugger-api.html) — Programmatic debugging with the Debugger API
-- [Chrome DevTools Protocol Guide](../guides/chrome-devtools-protocol.html) — Using Chrome DevTools Protocol for advanced debugging
+- [Chrome DevTools API Guide](../guides/devtools-api.html). Complete reference for the chrome.devtools APIs
+- [Chrome Debugger API Guide](../guides/chrome-debugger-api.html). Programmatic debugging with the Debugger API
+- [Chrome DevTools Protocol Guide](../guides/chrome-devtools-protocol.html). Using Chrome DevTools Protocol for advanced debugging
 
 ---
 
 *Part of the [Chrome Extension Guide](https://github.com/theluckystrike/chrome-extension-guide) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

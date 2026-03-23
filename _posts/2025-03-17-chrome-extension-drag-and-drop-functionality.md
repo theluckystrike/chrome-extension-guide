@@ -15,9 +15,9 @@ Drag and drop functionality transforms static Chrome extension interfaces into i
 
 ---
 
-## Why Drag and Drop Matters for Chrome Extensions {#why-drag-and-drop-matters}
+Why Drag and Drop Matters for Chrome Extensions {#why-drag-and-drop-matters}
 
-Chrome extensions operate within the constraints of the browser's popup system and content script environment. Unlike traditional web applications, extensions must work seamlessly across different contexts while maintaining performance and responsiveness. Adding drag and drop functionality addresses several key user experience needs that are particularly relevant to extension interfaces.
+Chrome extensions operate within the constraints of the browser's popup system and content script environment. Unlike traditional web applications, extensions must work smoothly across different contexts while maintaining performance and responsiveness. Adding drag and drop functionality addresses several key user experience needs that are particularly relevant to extension interfaces.
 
 The primary advantage of drag and drop in extensions is intuitive reordering. Users naturally understand the concept of grabbing an item and moving it to a new position. When building tab management extensions like Tab Suspender Pro, allowing users to manually prioritize which tabs should stay active while others suspend creates a personalized experience that pure algorithmic approaches cannot match.
 
@@ -27,11 +27,11 @@ The visual feedback that drag and drop provides also reduces cognitive load. Ins
 
 ---
 
-## Understanding the HTML5 Drag and Drop API {#html5-drag-and-drop-api}
+Understanding the HTML5 Drag and Drop API {#html5-drag-and-drop-api}
 
 The HTML5 Drag and Drop API provides the foundation for implementing drag and drop functionality in Chrome extensions. This native browser API requires no external libraries and works consistently across modern browsers, including Chrome. Understanding the core concepts of this API is essential before moving to more advanced libraries.
 
-### The Draggable Attribute
+The Draggable Attribute
 
 Any HTML element can become draggable by adding the `draggable` attribute and setting its value to `true`. This simple addition tells the browser that the element can be picked up and moved. However, making an element draggable is only the first step; you must also handle the drag events to define what happens during the drag operation.
 
@@ -44,7 +44,7 @@ Any HTML element can become draggable by adding the `draggable` attribute and se
 
 When implementing drag and drop in Chrome extension popups, remember that the popup dimensions are limited. Design your draggable elements to fit comfortably within the typical popup size of 400x600 pixels, with consideration for touch devices where the hit areas need to be larger.
 
-### Drag Events
+Drag Events
 
 The HTML5 API defines several events that fire at different points during the drag interaction. The `dragstart` event fires when the user begins dragging an element. This is your opportunity to set the drag data using the `dataTransfer` object, which stores information that will be available during the drop operation.
 
@@ -87,11 +87,11 @@ dropZone.addEventListener('drop', (e) => {
 
 ---
 
-## Building Sortable Lists in Extension Popups {#building-sortable-lists}
+Building Sortable Lists in Extension Popups {#building-sortable-lists}
 
 Sortable lists are among the most common use cases for drag and drop in Chrome extensions. Whether you're organizing bookmarks, reordering a task list, or managing saved items, implementing smooth sorting functionality significantly improves the user experience.
 
-### Basic Sortable List Implementation
+Basic Sortable List Implementation
 
 Creating a sortable list requires defining both the draggable items and the drop zones. In most implementations, each item serves as both a draggable element and a potential drop zone, allowing items to be reordered relative to each other.
 
@@ -158,7 +158,7 @@ function getDragAfterElement(container, y) {
 
 This implementation calculates the midpoint of each element and determines where to insert the dragged item based on the mouse position. The result is smooth, intuitive reordering that feels natural to users.
 
-### Styling for Visual Feedback
+Styling for Visual Feedback
 
 Visual feedback is crucial for making drag and drop interfaces usable. Users need clear indication of which element is being dragged, where it can be dropped, and whether the drop action is valid.
 
@@ -195,11 +195,11 @@ The grab cursor indicates that an element can be dragged, while the grabbing cur
 
 ---
 
-## Advanced Patterns for Extension Interfaces {#advanced-patterns}
+Advanced Patterns for Extension Interfaces {#advanced-patterns}
 
 Beyond basic sortable lists, Chrome extensions often require more sophisticated drag and drop implementations. These advanced patterns address common extension use cases while handling the unique constraints of the extension environment.
 
-### Drag and Drop Between Popup and Content Script
+Drag and Drop Between Popup and Content Script
 
 Some extensions need to allow users to drag elements from the extension popup into the web page content area. This pattern is useful for extensions that let users save items from websites to their extension's storage. Implementing cross-context drag and drop requires careful coordination between the popup and content scripts.
 
@@ -245,7 +245,7 @@ function initiateDrag(itemData) {
 }
 ```
 
-### Native Drag and Drop vs Libraries
+Native Drag and Drop vs Libraries
 
 While the HTML5 Drag and Drop API provides all the functionality needed for most use cases, many developers prefer using libraries like SortableJS for complex implementations. SortableJS offers smooth animations, multi-list support, and cross-container dragging out of the box.
 
@@ -277,7 +277,7 @@ The library approach offers several advantages for complex interfaces. Animation
 
 ---
 
-## Handling State Persistence {#handling-state-persistence}
+Handling State Persistence {#handling-state-persistence}
 
 When implementing drag and drop reordering, you must persist the new order so that it persists across extension restarts. Chrome's storage API provides the mechanism for saving and restoring the user's arrangement.
 
@@ -324,11 +324,11 @@ sortableList.addEventListener('dragend', async () => {
 
 ---
 
-## Best Practices and Common Pitfalls {#best-practices}
+Best Practices and Common Pitfalls {#best-practices}
 
 Implementing drag and drop in Chrome extensions requires attention to several important considerations that affect both functionality and user experience.
 
-### Performance Considerations
+Performance Considerations
 
 Drag operations can trigger frequent event fires, so optimize your handlers to avoid performance issues. Use event delegation where possible rather than attaching listeners to individual items, and minimize DOM manipulations during the drag operation.
 
@@ -347,11 +347,11 @@ sortableList.addEventListener('dragend', (e) => {
 });
 ```
 
-### Touch Device Support
+Touch Device Support
 
 The HTML5 Drag and Drop API has limited or no support on touch devices. If your extension needs to work on Chromebooks or tablets, consider using a library like Dragula or the touch polyfill for SortableJS. Test your implementation thoroughly on actual touch devices to ensure the experience works as expected.
 
-### Accessibility Concerns
+Accessibility Concerns
 
 Drag and drop interfaces present challenges for users who rely on keyboard navigation or screen readers. Implement keyboard alternatives such as move buttons or keyboard shortcuts for reordering. Ensure that screen readers can announce the drag operation and current position.
 
@@ -368,7 +368,7 @@ item.addEventListener('keydown', (e) => {
 });
 ```
 
-### Implementing Keyboard Reordering
+Implementing Keyboard Reordering
 
 A complete keyboard-based reordering system:
 
@@ -461,7 +461,7 @@ class KeyboardReorderManager {
 }
 ```
 
-### Touch Implementation with Touch Events
+Touch Implementation with Touch Events
 
 For broader device support, implement touch-based drag and drop:
 
@@ -542,9 +542,9 @@ class TouchDraggable {
 
 ---
 
-## Real-World Extension Examples
+Real-World Extension Examples
 
-### Example 1: Bookmark Manager Extension
+Example 1: Bookmark Manager Extension
 
 A complete bookmark manager with drag and drop organization:
 
@@ -617,7 +617,7 @@ class BookmarkManager {
 }
 ```
 
-### Example 2: Task Board with Multiple Lists
+Example 2: Task Board with Multiple Lists
 
 Kanban-style task management across multiple columns:
 
@@ -712,69 +712,69 @@ class TaskBoard {
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Drag and drop functionality transforms Chrome extension interfaces from static forms into interactive applications that users find intuitive and engaging. By mastering the HTML5 Drag and Drop API or leveraging libraries like SortableJS, you can implement professional-grade reordering, file handling, and cross-context drag operations.
 
 Remember to persist the user's arrangement using chrome.storage, optimize performance for smooth animations, and consider accessibility for all users. With these techniques in your toolkit, you're well-equipped to build extensions that feel polished, responsive, and truly interactive.
 
-The patterns covered in this guide apply broadly across different extension types—from tab managers to task organizers, from bookmark tools to file handlers. Start with the basic sortable list implementation and progressively add more advanced features as your extension grows. Your users will appreciate the attention to detail that thoughtful drag and drop implementation provides.
+The patterns covered in this guide apply broadly across different extension types, from tab managers to task organizers, from bookmark tools to file handlers. Start with the basic sortable list implementation and progressively add more advanced features as your extension grows. Your users will appreciate the attention to detail that thoughtful drag and drop implementation provides.
 
 ---
 
-## Practical Actionable Advice: Implementation Quick Start
+Practical Actionable Advice: Implementation Quick Start
 
-### Quick Implementation Checklist
+Quick Implementation Checklist
 
 Use this checklist when adding drag and drop to your extension:
 
-1. **Choose Your Approach**
+1. Choose Your Approach
    - Native HTML5 API: No dependencies, more code to write
    - SortableJS: Quickest implementation, cross-browser support
    - React DnD: If using React, most comprehensive solution
 
-2. **Core Implementation Steps**
+2. Core Implementation Steps
    - Add `draggable="true"` to interactive elements
    - Implement dragstart, dragover, drop handlers
    - Add visual feedback (ghost elements, drop indicators)
    - Persist order to chrome.storage
    - Test on multiple browsers
 
-3. **Must-Have Features**
+3. Must-Have Features
    - Visual feedback during drag
    - Drop zone highlighting  
    - Smooth animations
    - Touch device support
    - Keyboard alternatives
 
-### Common Mistakes to Avoid
+Common Mistakes to Avoid
 
-- **Don't skip dragover**: Must call `preventDefault()` to enable drops
-- **Don't forget dataTransfer**: Store identifying data for retrieval on drop
-- **Don't skip touch support**: Many users on Chromebooks/tablets
-- **Don't forget persistence**: Save order to chrome.storage immediately
-- **Don't skip cleanup**: Remove event listeners when popup closes
+- Don't skip dragover: Must call `preventDefault()` to enable drops
+- Don't forget dataTransfer: Store identifying data for retrieval on drop
+- Don't skip touch support: Many users on Chromebooks/tablets
+- Don't forget persistence: Save order to chrome.storage immediately
+- Don't skip cleanup: Remove event listeners when popup closes
 
-### Performance Optimization Tips
+Performance Optimization Tips
 
-- **Debounce storage writes**: Don't write on every tiny movement
-- **Use CSS transforms**: Animate with transform, not top/left
-- **Limit observation scope**: Only observe necessary elements
-- **Use requestAnimationFrame**: For smooth visual updates
+- Debounce storage writes: Don't write on every tiny movement
+- Use CSS transforms: Animate with transform, not top/left
+- Limit observation scope: Only observe necessary elements
+- Use requestAnimationFrame: For smooth visual updates
 
-### Extension-Specific Examples
+Extension-Specific Examples
 
-**Tab Manager Extension:**
+Tab Manager Extension:
 - Drag tabs to reorder priority
 - Drag to create tab groups
 - Drop URLs to add to queue
 
-**Task Manager Extension:**
+Task Manager Extension:
 - Drag tasks to reorder
 - Drag to assign to projects
 - Drag files to attach
 
-**Bookmark Organizer:**
+Bookmark Organizer:
 - Drag to reorganize folders
 - Drag to create new folders
 - Drag to move between folders

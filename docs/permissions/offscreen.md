@@ -12,7 +12,7 @@ canonical_url: "https://bestchromeextensions.com/permissions/offscreen/"
 
 The `offscreen` permission enables the Chrome `chrome.offscreen` API, which allows extensions to create offscreen documents for performing operations that require DOM access from the extension's service worker context. This is a Manifest V3-only feature that replaces the background page DOM access available in Manifest V2.
 
-## Overview {#overview}
+Overview {#overview}
 
 | Property | Value |
 |----------|-------|
@@ -23,9 +23,9 @@ The `offscreen` permission enables the Chrome `chrome.offscreen` API, which allo
 
 The offscreen document is a hidden HTML document that runs in the context of your extension but has no visible UI. It provides a way to perform DOM-related operations from the service worker, which otherwise has no access to the DOM.
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
-### createDocument {#createdocument}
+createDocument {#createdocument}
 
 Creates an offscreen document with the specified parameters:
 
@@ -37,12 +37,12 @@ chrome.offscreen.createDocument({
 });
 ```
 
-**Parameters:**
+Parameters:
 - `url` (string): Path to the HTML file relative to the extension root
 - `reasons` (array): Array of `chrome.offscreen.Reason` enum values
 - `justification` (string): Explanation of why the offscreen document is needed (required for Chrome Web Store review)
 
-### closeDocument {#closedocument}
+closeDocument {#closedocument}
 
 Closes the currently open offscreen document:
 
@@ -50,7 +50,7 @@ Closes the currently open offscreen document:
 await chrome.offscreen.closeDocument();
 ```
 
-### hasDocument {#hasdocument}
+hasDocument {#hasdocument}
 
 Checks whether an offscreen document currently exists (Chrome 116+):
 
@@ -58,7 +58,7 @@ Checks whether an offscreen document currently exists (Chrome 116+):
 const exists = await chrome.offscreen.hasDocument();
 ```
 
-## Reason Enum Values {#reason-enum-values}
+Reason Enum Values {#reason-enum-values}
 
 The `chrome.offscreen.Reason` enum provides various reasons for creating an offscreen document. Chrome supports the following reasons:
 
@@ -80,11 +80,11 @@ The `chrome.offscreen.Reason` enum provides various reasons for creating an offs
 | `MATCH_MEDIA` | Media query matching |
 | `GEOLOCATION` | Geolocation API access |
 
-## Constraints {#constraints}
+Constraints {#constraints}
 
-### One Document Limit {#one-document-limit}
+One Document Limit {#one-document-limit}
 
-Only **one offscreen document** can exist at a time per extension. Attempting to create a new one while one already exists will result in an error. Always check with `hasDocument()` before creating:
+Only one offscreen document can exist at a time per extension. Attempting to create a new one while one already exists will result in an error. Always check with `hasDocument()` before creating:
 
 ```javascript
 async function createOffscreenIfNeeded() {
@@ -100,15 +100,15 @@ async function createOffscreenIfNeeded() {
 }
 ```
 
-### Reason Requirement {#reason-requirement}
+Reason Requirement {#reason-requirement}
 
-At least **one reason** must be specified when creating the document. Providing an empty array will cause an error.
+At least one reason must be specified when creating the document. Providing an empty array will cause an error.
 
-### No UI Visibility {#no-ui-visibility}
+No UI Visibility {#no-ui-visibility}
 
-The offscreen document has **no visible UI** to the user. It exists purely in memory and is not rendered in any window.
+The offscreen document has no visible UI to the user. It exists purely in memory and is not rendered in any window.
 
-### Communication via Messaging {#communication-via-messaging}
+Communication via Messaging {#communication-via-messaging}
 
 Since the offscreen document runs in isolation, communication with your service worker or content scripts must use `chrome.runtime` messaging:
 
@@ -123,7 +123,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 
 To use the offscreen API, declare the permission in your `manifest.json`:
 
@@ -141,11 +141,11 @@ To use the offscreen API, declare the permission in your `manifest.json`:
 }
 ```
 
-Note: The `offscreen` permission is only available in Manifest V3. It is not available in Manifest V2.
+The `offscreen` permission is only available in Manifest V3. It is not available in Manifest V2.
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### DOM Parsing {#dom-parsing}
+DOM Parsing {#dom-parsing}
 
 Parse HTML content that cannot be handled directly in the service worker:
 
@@ -169,7 +169,7 @@ async function parseHTML(html) {
 }
 ```
 
-### Audio Playback {#audio-playback}
+Audio Playback {#audio-playback}
 
 Play audio from the background service worker context:
 
@@ -188,7 +188,7 @@ async function playAudio(audioUrl) {
 }
 ```
 
-### Clipboard Operations {#clipboard-operations}
+Clipboard Operations {#clipboard-operations}
 
 Perform advanced clipboard operations:
 
@@ -215,7 +215,7 @@ async function readClipboard() {
 }
 ```
 
-### Geolocation {#geolocation}
+Geolocation {#geolocation}
 
 Access geolocation from the background context:
 
@@ -238,9 +238,9 @@ async function getLocation() {
 }
 ```
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Guard Pattern {#guard-pattern}
+Guard Pattern {#guard-pattern}
 
 Always check if an offscreen document exists before creating:
 
@@ -258,7 +258,7 @@ async function ensureOffscreen(reason) {
 }
 ```
 
-### Complete Workflow {#complete-workflow}
+Complete Workflow {#complete-workflow}
 
 A complete example of creating, communicating, and closing:
 
@@ -284,23 +284,23 @@ async function scrapePageData(url) {
 }
 ```
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 
 - [MV3 Offscreen Documents](mv3/offscreen-documents.md) - Detailed guide on using offscreen documents
 - [Offscreen Document Patterns](patterns/offscreen-documents.md) - Common patterns and best practices
 - [Geolocation Permission](permissions/geolocation.md) - Related permission for location access
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Chrome Extensions Documentation: Offscreen Documents](https://developer.chrome.com/docs/extensions/mv3/offscreen/)
 - [chrome.offscreen API Reference](https://developer.chrome.com/docs/extensions/reference/offscreen/)
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### What are offscreen documents in Manifest V3?
+What are offscreen documents in Manifest V3?
 Offscreen documents are hidden pages that extension can create to perform tasks that require a DOM, like playing audio or using certain APIs.
 
-### How do I create an offscreen document?
+How do I create an offscreen document?
 Use chrome.offscreen.createDocument() with a specified reason and the HTML file to load. Only one offscreen document can exist per extension at a time.
 ---
 

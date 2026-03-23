@@ -1,32 +1,32 @@
 ---
 layout: default
-title: "Chrome Extension User Scripts Api — Best Practices"
+title: "Chrome Extension User Scripts Api. Best Practices"
 description: "Use the User Scripts API for user-defined scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-api/"
 ---
 
 # User Scripts API Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-The Chrome User Scripts API (`chrome.userScripts`) enables extensions to dynamically register and manage user-provided scripts at runtime. Unlike traditional `content_scripts` defined in the manifest, user scripts can be added, updated, and removed dynamically by users or the extension itself—similar to how Greasemonkey and Tampermonkey work.
+The Chrome User Scripts API (`chrome.userScripts`) enables extensions to dynamically register and manage user-provided scripts at runtime. Unlike traditional `content_scripts` defined in the manifest, user scripts can be added, updated, and removed dynamically by users or the extension itself, similar to how Greasemonkey and Tampermonkey work.
 
 This guide covers practical patterns for building user script management features in your Chrome extension, from basic registration to full Greasemonkey compatibility.
 
 ---
 
-## Pattern 1: User Scripts API Basics {#pattern-1-user-scripts-api-basics}
+Pattern 1: User Scripts API Basics {#pattern-1-user-scripts-api-basics}
 
-### Understanding the User Scripts API {#understanding-the-user-scripts-api}
+Understanding the User Scripts API {#understanding-the-user-scripts-api}
 
 The User Scripts API allows dynamic script injection with several key advantages over traditional content scripts:
 
-- **User-configurable**: Users can add their own scripts without reinstalling the extension
-- **Dynamic registration**: Scripts can be registered/unregistered at runtime
-- **MAIN world execution**: Scripts can access and be accessed by page JavaScript
-- **Isolated execution**: Scripts run in the `USER_SCRIPT` world by default, providing isolation
+- User-configurable: Users can add their own scripts without reinstalling the extension
+- Dynamic registration: Scripts can be registered/unregistered at runtime
+- MAIN world execution: Scripts can access and be accessed by page JavaScript
+- Isolated execution: Scripts run in the `USER_SCRIPT` world by default, providing isolation
 
-### Required Manifest Configuration {#required-manifest-configuration}
+Required Manifest Configuration {#required-manifest-configuration}
 
 ```json
 {
@@ -44,7 +44,7 @@ The User Scripts API allows dynamic script injection with several key advantages
 
 The `userScripts` permission is required in the `permissions` array. You'll also need appropriate `host_permissions` for the URLs where scripts should run.
 
-### Basic Registration Example {#basic-registration-example}
+Basic Registration Example {#basic-registration-example}
 
 ```typescript
 // types/userScripts.ts
@@ -85,63 +85,63 @@ async function registerHelloWorldScript(): Promise<void> {
 }
 ```
 
-### Difference from Content Scripts {#difference-from-content-scripts}
+Difference from Content Scripts {#difference-from-content-scripts}
 
 | Feature | Content Scripts | User Scripts |
 |---------|-----------------|--------------|
-| **Manifest definition** | Static in manifest.json | Dynamic at runtime |
-| **User customization** | Not user-editable | Users can add/edit |
-| **World** | Isolated world only | USER_SCRIPT or MAIN |
-| **Update without reinstall** | No | Yes |
-| **Cross-extension sharing** | Limited | Full access |
+| Manifest definition | Static in manifest.json | Dynamic at runtime |
+| User customization | Not user-editable | Users can add/edit |
+| World | Isolated world only | USER_SCRIPT or MAIN |
+| Update without reinstall | No | Yes |
+| Cross-extension sharing | Limited | Full access |
 
 ---
 
-## Pattern 2: Registering User Scripts at Runtime {#pattern-2-registering-user-scripts-at-runtime}
+Pattern 2: Registering User Scripts at Runtime {#pattern-2-registering-user-scripts-at-runtime}
 
-### The RegisteredUserScript Interface {#the-registereduserscript-interface}
+The RegisteredUserScript Interface {#the-registereduserscript-interface}
 
 ```typescript
 // types/userScriptTypes.ts
 
 // Complete RegisteredUserScript interface
 interface RegisteredUserScript {
-  /** Unique identifier for this script */
+  / Unique identifier for this script */
   id: string;
   
-  /** Match patterns for URLs where this script runs */
+  / Match patterns for URLs where this script runs */
   matches: string[];
   
-  /** JavaScript files or code to inject */
+  / JavaScript files or code to inject */
   js?: Array<{
     file?: string;
     code?: string;
   }>;
   
-  /** CSS files to inject */
+  / CSS files to inject */
   css?: Array<{
     file?: string;
     code?: string;
   }>;
   
-  /** When to run the script */
+  / When to run the script */
   runAt?: 'document_start' | 'document_end' | 'document_idle';
   
-  /** Execution world - USER_SCRIPT or MAIN */
+  / Execution world - USER_SCRIPT or MAIN */
   world?: 'USER_SCRIPT' | 'MAIN';
   
-  /** How many frames to inject into */
+  / How many frames to inject into */
   allFrames?: boolean;
   
-  /** Match about:blank and about:srcdoc */
+  / Match about:blank and about:srcdoc */
   matchAboutBlank?: boolean;
   
-  /** Run only in top frame */
+  / Run only in top frame */
   matchOriginAsFallback?: boolean;
 }
 ```
 
-### Registering Scripts with Code {#registering-scripts-with-code}
+Registering Scripts with Code {#registering-scripts-with-code}
 
 ```typescript
 // services/userScriptManager.ts
@@ -201,13 +201,13 @@ class UserScriptManager {
 }
 ```
 
-### Updating Scripts with `update()` {#updating-scripts-with-update}
+Updating Scripts with `update()` {#updating-scripts-with-update}
 
 ```typescript
 // services/userScriptUpdater.ts
 
 class UserScriptUpdater {
-  /**
+  /
    * Update existing user scripts with new configuration
    */
   async updateScript(
@@ -222,7 +222,7 @@ class UserScriptUpdater {
     ]);
   }
 
-  /**
+  /
    * Replace script code while keeping the same ID
    */
   async updateScriptCode(
@@ -242,7 +242,7 @@ class UserScriptUpdater {
     await chrome.userScripts.update([update]);
   }
 
-  /**
+  /
    * Bulk update multiple scripts
    */
   async bulkUpdate(
@@ -256,7 +256,7 @@ class UserScriptUpdater {
     await chrome.userScripts.update(scripts);
   }
 
-  /**
+  /
    * Toggle script enabled state
    */
   async toggleScript(id: string, enabled: boolean): Promise<void> {
@@ -280,34 +280,34 @@ class UserScriptUpdater {
 }
 ```
 
-### Unregistering Scripts {#unregistering-scripts}
+Unregistering Scripts {#unregistering-scripts}
 
 ```typescript
 // services/userScriptCleanup.ts
 
 class UserScriptCleanup {
-  /**
+  /
    * Unregister a single script by ID
    */
   async unregisterScript(id: string): Promise<void> {
     await chrome.userScripts.unregister({ ids: [id] });
   }
 
-  /**
+  /
    * Unregister multiple scripts by IDs
    */
   async unregisterMultiple(ids: string[]): Promise<void> {
     await chrome.userScripts.unregister({ ids });
   }
 
-  /**
+  /
    * Unregister all user scripts
    */
   async unregisterAll(): Promise<void> {
     await chrome.userScripts.unregister({});
   }
 
-  /**
+  /
    * Unregister scripts matching a predicate
    */
   async unregisterWhere(
@@ -323,7 +323,7 @@ class UserScriptCleanup {
     return toUnregister;
   }
 
-  /**
+  /
    * Gracefully handle unregister errors
    */
   async safeUnregister(ids: string[]): Promise<{
@@ -352,9 +352,9 @@ class UserScriptCleanup {
 
 ---
 
-## Pattern 3: User Script Editor UI {#pattern-3-user-script-editor-ui}
+Pattern 3: User Script Editor UI {#pattern-3-user-script-editor-ui}
 
-### Options Page with Code Editor {#options-page-with-code-editor}
+Options Page with Code Editor {#options-page-with-code-editor}
 
 ```typescript
 // options/editor.ts
@@ -578,9 +578,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Pattern 4: Match Pattern Management {#pattern-4-match-pattern-management}
+Pattern 4: Match Pattern Management {#pattern-4-match-pattern-management}
 
-### Match Pattern Validation {#match-pattern-validation}
+Match Pattern Validation {#match-pattern-validation}
 
 ```typescript
 // utils/matchPattern.ts
@@ -602,7 +602,7 @@ class MatchPatternValidator {
     'file:///*'
   ];
 
-  /**
+  /
    * Validate a single match pattern
    */
   validate(pattern: string): ValidationResult {
@@ -654,7 +654,7 @@ class MatchPatternValidator {
     return { valid: errors.length === 0, errors, warnings };
   }
 
-  /**
+  /
    * Validate multiple patterns
    */
   validateMultiple(patterns: string[]): ValidationResult {
@@ -674,7 +674,7 @@ class MatchPatternValidator {
     };
   }
 
-  /**
+  /
    * Check if a URL matches a pattern
    */
   matches(url: string, pattern: string): boolean {
@@ -683,7 +683,7 @@ class MatchPatternValidator {
     return regex.test(url);
   }
 
-  /**
+  /
    * Convert a match pattern to a RegExp
    */
   private patternToRegex(pattern: string): RegExp {
@@ -703,7 +703,7 @@ class MatchPatternValidator {
 export const matchPatternValidator = new MatchPatternValidator();
 ```
 
-### Match Pattern UI Helper {#match-pattern-ui-helper}
+Match Pattern UI Helper {#match-pattern-ui-helper}
 
 ```typescript
 // components/matchPatternInput.ts
@@ -788,11 +788,11 @@ class MatchPatternInput {
     if (!validationEl) return;
 
     if (result.valid && result.warnings.length === 0) {
-      validationEl.innerHTML = '<span class="valid">✓ Valid patterns</span>';
+      validationEl.innerHTML = '<span class="valid"> Valid patterns</span>';
     } else if (result.valid) {
-      validationEl.innerHTML = `<span class="warning">⚠ ${result.warnings.join('<br>')}</span>`;
+      validationEl.innerHTML = `<span class="warning"> ${result.warnings.join('<br>')}</span>`;
     } else {
-      validationEl.innerHTML = `<span class="error">✗ ${result.errors.join('<br>')}</span>`;
+      validationEl.innerHTML = `<span class="error"> ${result.errors.join('<br>')}</span>`;
     }
   }
 
@@ -826,14 +826,14 @@ class MatchPatternInput {
 
 ---
 
-## Pattern 5: Script World Configuration {#pattern-5-script-world-configuration}
+Pattern 5: Script World Configuration {#pattern-5-script-world-configuration}
 
-### Understanding Script Worlds {#understanding-script-worlds}
+Understanding Script Worlds {#understanding-script-worlds}
 
 ```typescript
 // types/worldTypes.ts
 
-/**
+/
  * USER_SCRIPT world: Isolated from page, limited Chrome API access
  * MAIN world: Same as page JavaScript, full page access
  */
@@ -844,7 +844,7 @@ interface WorldConfiguration {
   csp?: string;
 }
 
-/**
+/
  * Configure the user script world with custom CSP
  */
 async function configureUserScriptWorld(csp: string): Promise<void> {
@@ -858,7 +858,7 @@ async function configureUserScriptWorld(csp: string): Promise<void> {
   }
 }
 
-/**
+/
  * Get current world configuration
  */
 async function getWorldConfiguration(): Promise<WorldConfiguration | null> {
@@ -873,7 +873,7 @@ async function getWorldConfiguration(): Promise<WorldConfiguration | null> {
 }
 ```
 
-### World Selection Strategy {#world-selection-strategy}
+World Selection Strategy {#world-selection-strategy}
 
 ```typescript
 // services/worldSelector.ts
@@ -887,7 +887,7 @@ interface ScriptRequirements {
 }
 
 class WorldSelector {
-  /**
+  /
    * Determine the best world for a script based on its requirements
    */
   selectWorld(requirements: ScriptRequirements): ScriptWorld {
@@ -911,7 +911,7 @@ class WorldSelector {
     return 'MAIN';
   }
 
-  /**
+  /
    * Generate recommendation based on script content analysis
    */
   analyzeAndRecommend(code: string): {
@@ -978,13 +978,13 @@ class WorldSelector {
 export const worldSelector = new WorldSelector();
 ```
 
-### CSP Configuration {#csp-configuration}
+CSP Configuration {#csp-configuration}
 
 ```typescript
 // services/cspManager.ts
 
 interface CSPConfig {
-  /**
+  /
    * Content Security Policy for user script world
    * Default: "script-src 'self' 'unsafe-eval'; object-src 'self';"
    */
@@ -998,28 +998,28 @@ class CSPManager {
   private readonly relaxedCSP =
     "script-src 'self' 'unsafe-eval' 'unsafe-inline'; object-src 'self' blob:;";
 
-  /**
+  /
    * Apply CSP for user script world
    */
   async configureCSP(csp: string): Promise<void> {
     await chrome.userScripts.configureWorld({ csp });
   }
 
-  /**
+  /
    * Configure CSP for scripts that need inline scripts
    */
   async enableInlineScripts(): Promise<void> {
     await this.configureCSP(this.relaxedCSP);
   }
 
-  /**
+  /
    * Configure strict CSP for security-sensitive scripts
    */
   async enableStrictCSP(): Promise<void> {
     await this.configureCSP(this.defaultCSP);
   }
 
-  /**
+  /
    * Allow specific external scripts
    */
   async allowExternalScripts(...urls: string[]): Promise<void> {
@@ -1031,9 +1031,9 @@ class CSPManager {
 
 ---
 
-## Pattern 6: User Script Libraries {#pattern-6-user-script-libraries}
+Pattern 6: User Script Libraries {#pattern-6-user-script-libraries}
 
-### Library Injection System {#library-injection-system}
+Library Injection System {#library-injection-system}
 
 ```typescript
 // services/libraryManager.ts
@@ -1060,21 +1060,21 @@ class UserScriptLibraryManager {
     this.storage = new Storage('user-script-libraries');
   }
 
-  /**
+  /
    * Register a library for use in user scripts
    */
   async registerLibrary(library: Library): Promise<void> {
     this.libraries.set(library.id, library);
   }
 
-  /**
+  /
    * Define load order for libraries
    */
   setDependencies(dependencies: Dependency[]): void {
     this.dependencies = dependencies.sort((a, b) => a.loadOrder - b.loadOrder);
   }
 
-  /**
+  /
    * Get all library code combined in load order
    */
   async getCombinedLibraryCode(): Promise<string> {
@@ -1092,7 +1092,7 @@ class UserScriptLibraryManager {
     return codes.join('\n\n');
   }
 
-  /**
+  /
    * Load library code from URL
    */
   private async loadLibraryCode(library: Library): Promise<string> {
@@ -1112,7 +1112,7 @@ class UserScriptLibraryManager {
     }
   }
 
-  /**
+  /
    * Get code for built-in utility libraries
    */
   private getBuiltInLibraryCode(libraryId: string): string | null {
@@ -1147,7 +1147,7 @@ class UserScriptLibraryManager {
     return builtInLibs[libraryId] || null;
   }
 
-  /**
+  /
    * Inject libraries with a user script
    */
   async injectWithLibraries(
@@ -1174,20 +1174,20 @@ class UserScriptLibraryManager {
 }
 ```
 
-### Shared Utility Pattern {#shared-utility-pattern}
+Shared Utility Pattern {#shared-utility-pattern}
 
 ```typescript
 // services/sharedUtilities.ts
 
-/**
+/
  * Utilities that can be shared across multiple user scripts
  */
 class UserScriptSharedUtils {
-  /**
+  /
    * Safe DOM manipulation utilities
    */
   static dom = {
-    /**
+    /
      * Query selector with type safety
      */
     query<T extends Element = Element>(
@@ -1197,7 +1197,7 @@ class UserScriptSharedUtils {
       return parent.querySelector(selector) as T | null;
     },
 
-    /**
+    /
      * Query all elements with type safety
      */
     queryAll<T extends Element = Element>(
@@ -1207,7 +1207,7 @@ class UserScriptSharedUtils {
       return Array.from(parent.querySelectorAll(selector)) as T[];
     },
 
-    /**
+    /
      * Create element with attributes
      */
     create<K extends keyof HTMLElementTagNameMap>(
@@ -1224,11 +1224,11 @@ class UserScriptSharedUtils {
     }
   };
 
-  /**
+  /
    * Event utilities
    */
   static events = {
-    /**
+    /
      * One-time event listener
      */
     once<T extends Event>(
@@ -1242,7 +1242,7 @@ class UserScriptSharedUtils {
       });
     },
 
-    /**
+    /
      * Delegate event handler
      */
     delegate<T extends Event>(
@@ -1260,7 +1260,7 @@ class UserScriptSharedUtils {
     }
   };
 
-  /**
+  /
    * Storage utilities (compatible with page context)
    */
   static storage = {
@@ -1295,9 +1295,9 @@ if (typeof window !== 'undefined') {
 
 ---
 
-## Pattern 7: Greasemonkey/Tampermonkey Compatibility {#pattern-7-greasemonkeytampermonkey-compatibility}
+Pattern 7: Greasemonkey/Tampermonkey Compatibility {#pattern-7-greasemonkeytampermonkey-compatibility}
 
-### Userscript Metadata Block Parser {#userscript-metadata-block-parser}
+Userscript Metadata Block Parser {#userscript-metadata-block-parser}
 
 ```typescript
 // parsers/userscriptMetadata.ts
@@ -1321,7 +1321,7 @@ class UserscriptMetadataParser {
   private readonly METADATA_START = '==UserScript==';
   private readonly METADATA_END = '==/UserScript==';
 
-  /**
+  /
    * Parse userscript metadata block from code
    */
   parse(code: string): UserscriptMetadata {
@@ -1398,14 +1398,14 @@ class UserscriptMetadataParser {
     return metadata;
   }
 
-  /**
+  /
    * Parse multi-value metadata (supports @value entries)
    */
   private parseMultiValue(value: string): string[] {
     return value.split(/\s+/).filter(v => v.length > 0);
   }
 
-  /**
+  /
    * Parse @resource entries
    */
   private parseResources(value: string): Array<{ name: string; url: string }> {
@@ -1421,7 +1421,7 @@ class UserscriptMetadataParser {
     return resources;
   }
 
-  /**
+  /
    * Generate metadata block from parsed metadata
    */
   generate(metadata: UserscriptMetadata): string {
@@ -1456,7 +1456,7 @@ class UserscriptMetadataParser {
     return lines.join('\n');
   }
 
-  /**
+  /
    * Check if code has valid metadata block
    */
   hasValidMetadata(code: string): boolean {
@@ -1470,12 +1470,12 @@ class UserscriptMetadataParser {
 export const metadataParser = new UserscriptMetadataParser();
 ```
 
-### GM_API Shim Implementation {#gm-api-shim-implementation}
+GM_API Shim Implementation {#gm-api-shim-implementation}
 
 ```typescript
 // shims/gmApiShim.ts
 
-/**
+/
  * Greasemonkey/Tampermonkey API shims for user scripts
  * These provide compatibility with existing userscripts
  */
@@ -1487,7 +1487,7 @@ class GMApiShim {
     this.storage = new Storage('gm-api-storage');
   }
 
-  /**
+  /
    * Shim for GM_getValue
    */
   async GM_getValue<T>(key: string, defaultValue?: T): Promise<T | undefined> {
@@ -1495,7 +1495,7 @@ class GMApiShim {
     return stored[key] ?? defaultValue;
   }
 
-  /**
+  /
    * Shim for GM_setValue
    */
   async GM_setValue<T>(key: string, value: T): Promise<void> {
@@ -1504,7 +1504,7 @@ class GMApiShim {
     await this.storage.set('gm-values', stored);
   }
 
-  /**
+  /
    * Shim for GM_deleteValue
    */
   async GM_deleteValue(key: string): Promise<void> {
@@ -1513,7 +1513,7 @@ class GMApiShim {
     await this.storage.set('gm-values', stored);
   }
 
-  /**
+  /
    * Shim for GM_listValues
    */
   async GM_listValues(): Promise<string[]> {
@@ -1521,7 +1521,7 @@ class GMApiShim {
     return Object.keys(stored);
   }
 
-  /**
+  /
    * Shim for GM_xmlhttpRequest
    */
   GM_xmlhttpRequest(
@@ -1590,7 +1590,7 @@ class GMApiShim {
     xhr.send(details.data);
   }
 
-  /**
+  /
    * Shim for GM_notification
    */
   GM_notification(
@@ -1626,7 +1626,7 @@ class GMApiShim {
     );
   }
 
-  /**
+  /
    * Shim for GM_addStyle
    */
   GM_addStyle(css: string): HTMLStyleElement {
@@ -1636,7 +1636,7 @@ class GMApiShim {
     return style;
   }
 
-  /**
+  /
    * Shim for GM_registerMenuCommand
    */
   GM_registerMenuCommand(
@@ -1659,7 +1659,7 @@ class GMApiShim {
     return id;
   }
 
-  /**
+  /
    * Shim for GM_unregisterMenuCommand
    */
   GM_unregisterMenuCommand(menuCommandId: string): void {
@@ -1694,7 +1694,7 @@ function injectGMApiShim(): void {
 }
 ```
 
-### Importing .user.js Files {#importing-userjs-files}
+Importing .user.js Files {#importing-userjs-files}
 
 ```typescript
 // services/userscriptImporter.ts
@@ -1717,7 +1717,7 @@ class UserscriptImporter {
     this.storage = new Storage('imported-scripts');
   }
 
-  /**
+  /
    * Import a .user.js file from a URL
    */
   async importFromUrl(url: string): Promise<ImportResult> {
@@ -1741,7 +1741,7 @@ class UserscriptImporter {
     }
   }
 
-  /**
+  /
    * Import from code string
    */
   importFromCode(code: string, sourceUrl?: string): ImportResult {
@@ -1776,7 +1776,7 @@ class UserscriptImporter {
     };
   }
 
-  /**
+  /
    * Import multiple scripts from a URL list
    */
   async importFromUrlList(urls: string[]): Promise<ImportResult[]> {
@@ -1795,7 +1795,7 @@ class UserscriptImporter {
     return results;
   }
 
-  /**
+  /
    * Save imported script to storage
    */
   private async saveScript(
@@ -1833,14 +1833,14 @@ class UserscriptImporter {
     }
   }
 
-  /**
+  /
    * List all imported scripts
    */
   async listImportedScripts(): Promise<any[]> {
     return this.storage.get<any[]>('imported-scripts', []);
   }
 
-  /**
+  /
    * Delete imported script
    */
   async deleteImportedScript(id: string): Promise<void> {
@@ -1853,9 +1853,9 @@ class UserscriptImporter {
 
 ---
 
-## Pattern 8: User Script Lifecycle Management {#pattern-8-user-script-lifecycle-management}
+Pattern 8: User Script Lifecycle Management {#pattern-8-user-script-lifecycle-management}
 
-### Enable/Disable Without Unregistering {#enabledisable-without-unregistering}
+Enable/Disable Without Unregistering {#enabledisable-without-unregistering}
 
 ```typescript
 // services/scriptLifecycle.ts
@@ -1893,7 +1893,7 @@ class UserScriptLifecycleManager {
     });
   }
 
-  /**
+  /
    * Enable a script without full re-registration
    */
   async enableScript(id: string): Promise<void> {
@@ -1907,7 +1907,7 @@ class UserScriptLifecycleManager {
     await this.saveStates();
   }
 
-  /**
+  /
    * Disable a script without unregistering
    */
   async disableScript(id: string): Promise<void> {
@@ -1921,14 +1921,14 @@ class UserScriptLifecycleManager {
     await this.saveStates();
   }
 
-  /**
+  /
    * Check if a script is enabled
    */
   isEnabled(id: string): boolean {
     return this.enabledIds.has(id);
   }
 
-  /**
+  /
    * Record script execution
    */
   async recordExecution(id: string, success: boolean, error?: string): Promise<void> {
@@ -1954,21 +1954,21 @@ class UserScriptLifecycleManager {
     await this.saveStates();
   }
 
-  /**
+  /
    * Get execution statistics
    */
   getStats(id: string): ScriptLifecycleState | undefined {
     return this.states.get(id);
   }
 
-  /**
+  /
    * Get all enabled script IDs for registration
    */
   getEnabledIds(): string[] {
     return Array.from(this.enabledIds);
   }
 
-  /**
+  /
    * Get all disabled script IDs
    */
   getDisabledIds(allIds: string[]): string[] {
@@ -1981,7 +1981,7 @@ class UserScriptLifecycleManager {
 }
 ```
 
-### Execution Logging and Error Reporting {#execution-logging-and-error-reporting}
+Execution Logging and Error Reporting {#execution-logging-and-error-reporting}
 
 ```typescript
 // services/executionLogger.ts
@@ -2006,7 +2006,7 @@ class UserScriptExecutionLogger {
     this.setupMessageListener();
   }
 
-  /**
+  /
    * Listen for execution messages from content scripts
    */
   private setupMessageListener(): void {
@@ -2019,7 +2019,7 @@ class UserScriptExecutionLogger {
     });
   }
 
-  /**
+  /
    * Log an execution event
    */
   async log(execution: Omit<ExecutionLog, 'id' | 'timestamp'>): Promise<void> {
@@ -2046,7 +2046,7 @@ class UserScriptExecutionLogger {
     }
   }
 
-  /**
+  /
    * Get recent logs with optional filtering
    */
   async getLogs(filter?: {
@@ -2075,7 +2075,7 @@ class UserScriptExecutionLogger {
     return logs;
   }
 
-  /**
+  /
    * Get error summary for a script
    */
   async getErrorSummary(scriptId: string): Promise<{
@@ -2096,7 +2096,7 @@ class UserScriptExecutionLogger {
     };
   }
 
-  /**
+  /
    * Handle script errors - could send to external service
    */
   private handleScriptError(execution: Omit<ExecutionLog, 'id' | 'timestamp'>): void {
@@ -2104,7 +2104,7 @@ class UserScriptExecutionLogger {
     console.error('User script error:', execution.scriptName, execution.error);
   }
 
-  /**
+  /
    * Clear old logs
    */
   async clearLogs(olderThan?: number): Promise<number> {
@@ -2122,7 +2122,7 @@ class UserScriptExecutionLogger {
 }
 ```
 
-### Auto-Update from Remote URLs {#auto-update-from-remote-urls}
+Auto-Update from Remote URLs {#auto-update-from-remote-urls}
 
 ```typescript
 // services/autoUpdater.ts
@@ -2142,7 +2142,7 @@ class UserScriptAutoUpdater {
     this.storage = new Storage('auto-update');
   }
 
-  /**
+  /
    * Check for updates to a user script
    */
   async checkForUpdate(
@@ -2178,7 +2178,7 @@ class UserScriptAutoUpdater {
     }
   }
 
-  /**
+  /
    * Start auto-update polling
    */
   startAutoUpdate(
@@ -2190,7 +2190,7 @@ class UserScriptAutoUpdater {
     }, checkInterval);
   }
 
-  /**
+  /
    * Check all scripts with update URLs
    */
   private async checkAllScripts(
@@ -2217,7 +2217,7 @@ class UserScriptAutoUpdater {
     }
   }
 
-  /**
+  /
    * Parse version from userscript metadata
    */
   private parseVersionFromCode(code: string): { version?: string } {
@@ -2227,7 +2227,7 @@ class UserScriptAutoUpdater {
     };
   }
 
-  /**
+  /
    * Compare semantic versions
    */
   private compareVersions(a: string, b: string): number {
@@ -2245,7 +2245,7 @@ class UserScriptAutoUpdater {
     return 0;
   }
 
-  /**
+  /
    * Mark a script for auto-update
    */
   async addToAutoUpdate(
@@ -2262,7 +2262,7 @@ class UserScriptAutoUpdater {
     await this.storage.set('scripts-to-update', filtered);
   }
 
-  /**
+  /
    * Remove from auto-update
    */
   async removeFromAutoUpdate(scriptId: string): Promise<void> {
@@ -2275,29 +2275,29 @@ class UserScriptAutoUpdater {
 
 ---
 
-## Summary Table {#summary-table}
+Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Complexity |
 |---------|----------|----------|------------|
-| **Pattern 1: Basics** | Basic script registration | `chrome.userScripts.register()` | Low |
-| **Pattern 2: Runtime Registration** | Dynamic script management | `update()`, `unregister()` | Medium |
-| **Pattern 3: Editor UI** | User script editing | CodeMirror/Monaco + storage | High |
-| **Pattern 4: Match Patterns** | URL filtering | Match pattern validation | Medium |
-| **Pattern 5: World Config** | Script isolation | `configureWorld()`, CSP | Medium |
-| **Pattern 6: Libraries** | Shared utilities | `@require` equivalent | Medium |
-| **Pattern 7: GM Compatibility** | Userscript migration | Metadata parsing, GM_* shims | High |
-| **Pattern 8: Lifecycle** | Script state management | Enable/disable, logging, updates | High |
+| Pattern 1: Basics | Basic script registration | `chrome.userScripts.register()` | Low |
+| Pattern 2: Runtime Registration | Dynamic script management | `update()`, `unregister()` | Medium |
+| Pattern 3: Editor UI | User script editing | CodeMirror/Monaco + storage | High |
+| Pattern 4: Match Patterns | URL filtering | Match pattern validation | Medium |
+| Pattern 5: World Config | Script isolation | `configureWorld()`, CSP | Medium |
+| Pattern 6: Libraries | Shared utilities | `@require` equivalent | Medium |
+| Pattern 7: GM Compatibility | Userscript migration | Metadata parsing, GM_* shims | High |
+| Pattern 8: Lifecycle | Script state management | Enable/disable, logging, updates | High |
 
-### Key Takeaways {#key-takeaways}
+Key Takeaways {#key-takeaways}
 
-1. **Start with USER_SCRIPT world** for security; only use MAIN when page access is required
-2. **Always validate match patterns** before registration to prevent errors
-3. **Use `@theluckystrike/webext-storage`** for persistent script configuration
-4. **Implement GM API shims** for maximum compatibility with existing userscripts
-5. **Track execution state** to provide users with enable/disable functionality
-6. **Consider CSP implications** when enabling inline scripts or external resources
+1. Start with USER_SCRIPT world for security; only use MAIN when page access is required
+2. Always validate match patterns before registration to prevent errors
+3. Use `@theluckystrike/webext-storage` for persistent script configuration
+4. Implement GM API shims for maximum compatibility with existing userscripts
+5. Track execution state to provide users with enable/disable functionality
+6. Consider CSP implications when enabling inline scripts or external resources
 
-### Additional Resources {#additional-resources}
+Additional Resources {#additional-resources}
 
 - [Chrome User Scripts API Reference](https://developer.chrome.com/docs/extensions/mv3/user_scripts/)
 - [Match Pattern Syntax](https://developer.chrome.com/docs/extensions/mv3/match_patterns/)

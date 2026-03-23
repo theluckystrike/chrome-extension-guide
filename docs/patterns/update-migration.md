@@ -1,45 +1,45 @@
 ---
 layout: default
-title: "Chrome Extension Update Migration — Best Practices"
+title: "Chrome Extension Update Migration. Best Practices"
 description: "Handle extension updates and migrations smoothly."
 canonical_url: "https://bestchromeextensions.com/patterns/update-migration/"
 ---
 
 # Extension Update and Migration Strategies
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome auto-updates extensions silently. When users receive a new version, your service worker restarts, storage schemas may be outdated, context menus disappear, and alarms are cleared. Without proper migration code, updates break features and lose user data. This guide covers practical patterns for handling installs, updates, schema migrations, permission changes, and rollback strategies.
 
 ---
 
-## The Update Lifecycle {#the-update-lifecycle}
+The Update Lifecycle {#the-update-lifecycle}
 
 ```
-┌──────────────────────────────────────────────────────┐
-│              Chrome Updates Your Extension            │
-│                                                      │
-│  1. New .crx downloaded and unpacked                 │
-│  2. Old service worker terminated                    │
-│  3. New service worker starts                        │
-│  4. runtime.onInstalled fires (reason: "update")     │
-│  5. Context menus, alarms, rules — all gone          │
-│  6. Storage data — still there (old schema)          │
-│                                                      │
-│  Your job: re-register ephemeral state,              │
-│            migrate storage, handle breaking changes   │
-└──────────────────────────────────────────────────────┘
+
+              Chrome Updates Your Extension            
+                                                      
+  1. New .crx downloaded and unpacked                 
+  2. Old service worker terminated                    
+  3. New service worker starts                        
+  4. runtime.onInstalled fires (reason: "update")     
+  5. Context menus, alarms, rules. all gone          
+  6. Storage data. still there (old schema)          
+                                                      
+  Your job: re-register ephemeral state,              
+            migrate storage, handle breaking changes   
+
 ```
 
 Key facts:
-- **Storage persists** across updates — `chrome.storage.local` and `chrome.storage.sync` survive
-- **Ephemeral state is lost** — context menus, alarms, declarativeNetRequest rules must be re-registered
-- **Service worker restarts** — all global variables and in-memory state are gone
-- **`previousVersion`** is available in the `onInstalled` details for update events
+- Storage persists across updates. `chrome.storage.local` and `chrome.storage.sync` survive
+- Ephemeral state is lost. context menus, alarms, declarativeNetRequest rules must be re-registered
+- Service worker restarts. all global variables and in-memory state are gone
+- `previousVersion` is available in the `onInstalled` details for update events
 
 ---
 
-## Pattern 1: Handling onInstalled Events {#pattern-1-handling-oninstalled-events}
+Pattern 1: Handling onInstalled Events {#pattern-1-handling-oninstalled-events}
 
 The `chrome.runtime.onInstalled` event fires for three distinct reasons. Handle each one explicitly:
 
@@ -82,7 +82,7 @@ async function handleExtensionUpdate(
 }
 
 async function handleChromeUpdate(): Promise<void> {
-  // Chrome itself updated — re-register ephemeral state
+  // Chrome itself updated. re-register ephemeral state
   // No schema migration needed
   await registerEphemeralState();
 }
@@ -90,7 +90,7 @@ async function handleChromeUpdate(): Promise<void> {
 
 ---
 
-## Pattern 2: Storage Schema Versioning {#pattern-2-storage-schema-versioning}
+Pattern 2: Storage Schema Versioning {#pattern-2-storage-schema-versioning}
 
 Always store a version number alongside your data. Define typed interfaces for each version:
 
@@ -170,7 +170,7 @@ export const migrations: Migration[] = [
 
 ---
 
-## Pattern 3: Incremental Migration Runner {#pattern-3-incremental-migration-runner}
+Pattern 3: Incremental Migration Runner {#pattern-3-incremental-migration-runner}
 
 Always migrate through every intermediate version (v1 -> v2 -> v3), never skip steps. Each migration is small, testable, and reversible:
 
@@ -229,9 +229,9 @@ Incremental (GOOD):   v1 → v2 (rename field) → v3 (add object)
 
 ---
 
-## Pattern 4: Context Menu and Alarm Re-registration {#pattern-4-context-menu-and-alarm-re-registration}
+Pattern 4: Context Menu and Alarm Re-registration {#pattern-4-context-menu-and-alarm-re-registration}
 
-Context menus, alarms, and declarativeNetRequest rules are **ephemeral** — Chrome clears them on update. Re-register on install, update, and every service worker startup:
+Context menus, alarms, and declarativeNetRequest rules are ephemeral. Chrome clears them on update. Re-register on install, update, and every service worker startup:
 
 ```ts
 // lib/ephemeral-state.ts
@@ -289,7 +289,7 @@ Register on both install/update and every service worker start:
 
 chrome.runtime.onInstalled.addListener(() => registerEphemeralState());
 
-// Also on every SW start — context menus survive restarts but
+// Also on every SW start. context menus survive restarts but
 // re-registering is safe since we removeAll() first
 registerEphemeralState();
 ```
@@ -325,7 +325,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-## Pattern 5: Handling Breaking Permission Changes {#pattern-5-handling-breaking-permission-changes}
+Pattern 5: Handling Breaking Permission Changes {#pattern-5-handling-breaking-permission-changes}
 
 When an update requires new permissions, Chrome won't grant them automatically. Use `optional_permissions` and request at runtime:
 
@@ -396,7 +396,7 @@ chrome.permissions.onRemoved.addListener(async (permissions) => {
 
 ---
 
-## Pattern 6: Post-Update Changelog Notification {#pattern-6-post-update-changelog-notification}
+Pattern 6: Post-Update Changelog Notification {#pattern-6-post-update-changelog-notification}
 
 Let users know what changed without being intrusive. Only open tabs for major updates:
 
@@ -464,9 +464,9 @@ function compareVersions(a: string, b: string): number {
 
 ---
 
-## Pattern 7: Rollback Strategies When Migrations Fail {#pattern-7-rollback-strategies-when-migrations-fail}
+Pattern 7: Rollback Strategies When Migrations Fail {#pattern-7-rollback-strategies-when-migrations-fail}
 
-A robust migration runner tracks state and can automatically roll back:
+A solid migration runner tracks state and can automatically roll back:
 
 ```ts
 // lib/robust-migrate.ts
@@ -550,7 +550,7 @@ export async function rollbackToVersion(
 
 ---
 
-## Pattern 8: Testing Migrations with Mock Storage {#pattern-8-testing-migrations-with-mock-storage}
+Pattern 8: Testing Migrations with Mock Storage {#pattern-8-testing-migrations-with-mock-storage}
 
 Migrations are critical code paths. Test every version transition with fixture data:
 
@@ -658,7 +658,7 @@ export function createMockStorage(
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -671,7 +671,7 @@ export function createMockStorage(
 | Rollback strategies | Recover user data when a migration fails |
 | Testing migrations | Catch migration bugs before they reach users |
 
-Extension updates are invisible to users — until something breaks. Always version your storage schema, migrate incrementally with backups, re-register ephemeral state on every startup, and test your migration chain from every historical schema version to the current one. The ten minutes you spend writing migration tests will save you from a one-star review that says "lost all my settings after update."
+Extension updates are invisible to users. until something breaks. Always version your storage schema, migrate incrementally with backups, re-register ephemeral state on every startup, and test your migration chain from every historical schema version to the current one. The ten minutes you spend writing migration tests will save you from a one-star review that says "lost all my settings after update."
 -e 
 ---
 

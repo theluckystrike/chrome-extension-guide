@@ -21,7 +21,7 @@ Content scripts run in an isolated world within web pages. Only a subset of `chr
 | `chrome.i18n.getUILanguage()` | Get browser language |
 
 ### NOT Available (Must Message Service Worker) {#not-available-must-message-service-worker}
-- `chrome.tabs.*` — use `chrome.runtime.sendMessage` to ask SW
+- `chrome.tabs.*`. use `chrome.runtime.sendMessage` to ask SW
 - `chrome.bookmarks.*`
 - `chrome.history.*`
 - `chrome.downloads.*`
@@ -82,7 +82,7 @@ console.log(window.myPageVar); // undefined
 }
 ```
 ```typescript
-// Runs in page's world — can access page JS variables
+// Runs in page's world. can access page JS variables
 // BUT: cannot use chrome.* APIs
 // Must use window.postMessage to communicate with ISOLATED world scripts
 console.log(window.myPageVar); // accessible!
@@ -165,10 +165,10 @@ document.head.appendChild(style);
 
 ## Web APIs Available {#web-apis-available}
 Content scripts have access to all standard Web APIs:
-- `fetch()` — subject to the same CORS rules as the host page (since Chrome 83); use the service worker for cross-origin requests
+- `fetch()`. subject to the same CORS rules as the host page (since Chrome 83); use the service worker for cross-origin requests
 - `XMLHttpRequest`
-- `localStorage` — accesses the host page's localStorage (not the extension's); use `chrome.storage` instead
-- `navigator.*` — standard navigator APIs
+- `localStorage`. accesses the host page's localStorage (not the extension's); use `chrome.storage` instead
+- `navigator.*`. standard navigator APIs
 - `MutationObserver`
 - `IntersectionObserver`
 - `ResizeObserver`
@@ -179,7 +179,7 @@ Content scripts have access to all standard Web APIs:
 ## fetch() in Content Scripts {#fetch-in-content-scripts}
 ```typescript
 // fetch from content script uses the HOST PAGE's origin (not the extension's)
-// Subject to CORS since Chrome 83 — send cross-origin requests from the service worker instead
+// Subject to CORS since Chrome 83. send cross-origin requests from the service worker instead
 const response = await fetch('https://api.example.com/data');
 const data = await response.json();
 ```
@@ -206,7 +206,7 @@ document.body.appendChild(host);
 ```
 
 ## Security Notes {#security-notes}
-- Content scripts share the page's DOM — page can observe your DOM changes
+- Content scripts share the page's DOM. page can observe your DOM changes
 - Use Shadow DOM for sensitive UI
 - Never inject secrets into the page DOM
 - Be cautious with `eval()` or `innerHTML` from page data (XSS risk)

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Shadow Dom Advanced — Best Practices"
+title: "Chrome Extension Shadow Dom Advanced. Best Practices"
 description: "Advanced shadow DOM patterns for extension UI components."
 canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-advanced/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-advanced/"
 
 Shadow DOM gives content scripts a private DOM subtree that host page styles cannot penetrate. This guide covers eight advanced patterns for building robust, accessible extension UI with Shadow DOM in Manifest V3.
 
-## Pattern Summary {#pattern-summary}
+Pattern Summary {#pattern-summary}
 
 | # | Pattern | Use Case |
 |---|---------|----------|
@@ -24,7 +24,7 @@ Shadow DOM gives content scripts a private DOM subtree that host page styles can
 
 ---
 
-## Pattern 1: Closed vs Open Shadow DOM for Extension UI {#pattern-1-closed-vs-open-shadow-dom-for-extension-ui}
+Pattern 1: Closed vs Open Shadow DOM for Extension UI {#pattern-1-closed-vs-open-shadow-dom-for-extension-ui}
 
 Open shadow roots are accessible via `element.shadowRoot`. Closed roots return `null`, preventing host-page scripts from inspecting or modifying extension UI.
 
@@ -54,12 +54,12 @@ const shadow = createExtensionHost("closed");
 
 When to use each:
 
-- **Closed** -- Default choice for content-script UI. Prevents page scripts from tampering with your DOM. You must keep a reference to the `ShadowRoot` yourself since `element.shadowRoot` returns `null`.
-- **Open** -- Useful during development or when you intentionally want the page to interact with your elements.
+- Closed -- Default choice for content-script UI. Prevents page scripts from tampering with your DOM. You must keep a reference to the `ShadowRoot` yourself since `element.shadowRoot` returns `null`.
+- Open -- Useful during development or when you intentionally want the page to interact with your elements.
 
 ---
 
-## Pattern 2: Constructable Stylesheets (adoptedStyleSheets) {#pattern-2-constructable-stylesheets-adoptedstylesheets}
+Pattern 2: Constructable Stylesheets (adoptedStyleSheets) {#pattern-2-constructable-stylesheets-adoptedstylesheets}
 
 Constructable stylesheets let you create `CSSStyleSheet` objects in JavaScript and share them across multiple shadow roots without duplicating `<style>` elements.
 
@@ -109,7 +109,7 @@ Calling `sheet.replaceSync(newCSS)` at runtime instantly updates every shadow ro
 
 ---
 
-## Pattern 3: Slotted Content for Customizable Widgets {#pattern-3-slotted-content-for-customizable-widgets}
+Pattern 3: Slotted Content for Customizable Widgets {#pattern-3-slotted-content-for-customizable-widgets}
 
 Slots let an extension widget accept content from the host page's light DOM, useful when building overlay-style UIs that wrap existing page content.
 
@@ -169,7 +169,7 @@ shadow.innerHTML = `
 
 ---
 
-## Pattern 4: Shadow DOM Event Handling (Event Retargeting, Composed Events) {#pattern-4-shadow-dom-event-handling-event-retargeting-composed-events}
+Pattern 4: Shadow DOM Event Handling (Event Retargeting, Composed Events) {#pattern-4-shadow-dom-event-handling-event-retargeting-composed-events}
 
 Events originating inside a shadow root are retargeted: listeners on the host element see `event.target` as the host, not the internal element. Only events with `composed: true` cross shadow boundaries.
 
@@ -213,7 +213,7 @@ function emitFromShadow(shadow: ShadowRoot): void {
 
 ---
 
-## Pattern 5: Forms Inside Shadow DOM (formAssociated, ElementInternals) {#pattern-5-forms-inside-shadow-dom-formassociated-elementinternals}
+Pattern 5: Forms Inside Shadow DOM (formAssociated, ElementInternals) {#pattern-5-forms-inside-shadow-dom-formassociated-elementinternals}
 
 Form-associated custom elements participate in native form submission and validation through `ElementInternals`.
 
@@ -267,7 +267,7 @@ customElements.define("ext-rating", ExtRating);
 
 ---
 
-## Pattern 6: Shadow DOM with CSS Custom Properties for Theming {#pattern-6-shadow-dom-with-css-custom-properties-for-theming}
+Pattern 6: Shadow DOM with CSS Custom Properties for Theming {#pattern-6-shadow-dom-with-css-custom-properties-for-theming}
 
 CSS custom properties pierce shadow boundaries, making them the standard mechanism for theming shadow DOM components.
 
@@ -318,7 +318,7 @@ function watchSystemTheme(host: HTMLElement): void {
 
 ---
 
-## Pattern 7: Nested Shadow DOM (Component Composition) {#pattern-7-nested-shadow-dom-component-composition}
+Pattern 7: Nested Shadow DOM (Component Composition) {#pattern-7-nested-shadow-dom-component-composition}
 
 Complex extension UIs benefit from nesting shadow roots -- an outer shell with inner sub-components, each with isolated styles.
 
@@ -379,7 +379,7 @@ function buildDashboard(shadow: ShadowRoot): void {
 
 ---
 
-## Pattern 8: Accessibility in Shadow DOM (ARIA, Focus Delegation) {#pattern-8-accessibility-in-shadow-dom-aria-focus-delegation}
+Pattern 8: Accessibility in Shadow DOM (ARIA, Focus Delegation) {#pattern-8-accessibility-in-shadow-dom-aria-focus-delegation}
 
 Shadow DOM requires explicit attention to accessibility. Use `delegatesFocus`, ARIA attributes, and proper tab ordering.
 
@@ -455,11 +455,11 @@ Accessibility checklist for shadow DOM components:
 
 ---
 
-## Key Takeaways {#key-takeaways}
+Key Takeaways {#key-takeaways}
 
-- Prefer **closed** Shadow DOM for content-script UI to prevent host-page tampering.
-- Use **constructable stylesheets** to share styles efficiently across multiple shadow roots.
-- Expose theming through **CSS custom properties** which pierce the shadow boundary by design.
+- Prefer closed Shadow DOM for content-script UI to prevent host-page tampering.
+- Use constructable stylesheets to share styles efficiently across multiple shadow roots.
+- Expose theming through CSS custom properties which pierce the shadow boundary by design.
 - Dispatch custom events with `composed: true` and `bubbles: true` to cross shadow boundaries.
 - Use `ElementInternals` for form-associated custom elements that participate in native validation.
 - Set `delegatesFocus: true` and explicit ARIA attributes to maintain accessibility.

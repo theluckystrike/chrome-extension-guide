@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Webrtc Screen Sharing — Best Practices"
+title: "Chrome Extension Webrtc Screen Sharing. Best Practices"
 description: "Implement screen sharing with WebRTC in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/webrtc-screen-sharing/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/webrtc-screen-sharing/
 
 This guide covers WebRTC-based screen and tab capture patterns for Chrome extensions, including desktop capture, tab capture, and streaming implementations.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Declare the required permissions in your manifest:
 
@@ -23,7 +23,7 @@ Declare the required permissions in your manifest:
 
 ---
 
-## chrome.desktopCapture.getMediaStreamId() {#chromedesktopcapturegetmediastreamid}
+chrome.desktopCapture.getMediaStreamId() {#chromedesktopcapturegetmediastreamid}
 
 Get a stream ID for tab, screen, or window capture:
 
@@ -61,7 +61,7 @@ async function startCapture(streamId: string): Promise<MediaStream> {
 
 ---
 
-## chrome.tabCapture.capture() {#chrometabcapturecapture}
+chrome.tabCapture.capture() {#chrometabcapturecapture}
 
 Capture a specific tab's audio and video:
 
@@ -95,7 +95,7 @@ async function captureTab(tabId: number): Promise<MediaStream> {
 
 ---
 
-## getDisplayMedia in Extension Pages {#getdisplaymedia-in-extension-pages}
+getDisplayMedia in Extension Pages {#getdisplaymedia-in-extension-pages}
 
 Use getDisplayMedia in extension contexts (popup, options, side panel):
 
@@ -127,7 +127,7 @@ async function startScreenShare(): Promise<MediaStream | null> {
 
 ---
 
-## MediaRecorder for Recording {#mediarecorder-for-recording}
+MediaRecorder for Recording {#mediarecorder-for-recording}
 
 Record captured streams locally:
 
@@ -161,7 +161,7 @@ class StreamRecorder {
 
 ---
 
-## Streaming via WebRTC Peer Connections {#streaming-via-webrtc-peer-connections}
+Streaming via WebRTC Peer Connections {#streaming-via-webrtc-peer-connections}
 
 Stream captured content to a remote peer:
 
@@ -183,7 +183,7 @@ async function streamToPeer(
 
 ---
 
-## Canvas Frame Processing {#canvas-frame-processing}
+Canvas Frame Processing {#canvas-frame-processing}
 
 Process video frames using canvas:
 
@@ -217,7 +217,7 @@ class FrameProcessor {
 
 ---
 
-## MV3 Considerations {#mv3-considerations}
+MV3 Considerations {#mv3-considerations}
 
 Capture APIs require extension page context. Use offscreen documents for background capture:
 
@@ -240,7 +240,7 @@ async function createCaptureOffscreen(): Promise<void> {
 
 ---
 
-## Privacy Best Practices {#privacy-best-practices}
+Privacy Best Practices {#privacy-best-practices}
 
 - Always display a visual indicator when capture is active
 - Show the extension icon in the tab's favicon area during capture
@@ -249,7 +249,7 @@ async function createCaptureOffscreen(): Promise<void> {
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [guides/desktop-capture.md](../guides/desktop-capture.md)
 - [guides/tab-capture.md](../guides/tab-capture.md)

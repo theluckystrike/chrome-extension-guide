@@ -17,15 +17,15 @@ This comprehensive guide walks you through creating a fully functional Focus Mod
 
 ---
 
-## Understanding Focus Mode and Its Importance
+Understanding Focus Mode and Its Importance
 
-### The Problem with Modern Web Design
+The Problem with Modern Web Design
 
 Today's websites are designed with monetization and engagement as primary goals, not user experience or reading comfort. The typical news article now includes multiple advertisements interspersed with content, social media sharing buttons that follow you as you scroll, related articles pop-ups that interrupt your flow, newsletter subscription modals that block your view, and auto-playing videos that hijack your audio. For readers seeking to consume content efficiently, these elements create significant friction.
 
 Research consistently shows that the human brain struggles to maintain focus when faced with visual clutter and interruptions. Each distraction requires mental energy to dismiss or ignore, depleting cognitive resources that could be directed toward understanding and retaining the actual content. This is particularly problematic for long-form content such as in-depth articles, technical documentation, and educational materials where sustained attention is essential for comprehension.
 
-### The Solution: A Dedicated Focus Mode Extension
+The Solution: A Dedicated Focus Mode Extension
 
 A well-designed Focus Mode extension addresses these issues by providing users with a streamlined reading environment. The core philosophy is simple: present only the content the user wants to read, remove everything else. This means hiding or neutralizing advertisements, removing navigation elements that might lead away from the current page, eliminating social sharing widgets, blocking auto-playing media, and applying typography choices that optimize readability.
 
@@ -33,15 +33,15 @@ What makes Focus Mode particularly valuable is its accessibility. Users should b
 
 ---
 
-## Technical Architecture Overview
+Technical Architecture Overview
 
-### Manifest V3 Requirements
+Manifest V3 Requirements
 
 Our Focus Mode extension will be built using Chrome's Manifest V3, which represents the current standard for Chrome extension development. Manifest V3 introduces several important changes from its predecessor, including enhanced security requirements, modified background script behavior, and new capabilities for content scripts.
 
 The manifest file serves as the blueprint for our extension, declaring permissions, defining the extension's components, and specifying how different parts of the extension interact. For our Focus Mode extension, we will need permissions to access the active tab's content, inject scripts into web pages, and store user preferences.
 
-### Core Components
+Core Components
 
 Our extension consists of four primary components that work together to deliver the focus reading experience:
 
@@ -55,31 +55,31 @@ The options page allows users to customize their Focus Mode experience with pref
 
 ---
 
-## Step-by-Step Implementation
+Step-by-Step Implementation
 
-### Setting Up the Project Structure
+Setting Up the Project Structure
 
 Begin by creating a new directory for your extension project. Inside this directory, create the following file structure:
 
 ```
 focus-mode-extension/
-├── manifest.json
-├── popup.html
-├── popup.css
-├── popup.js
-├── content.js
-├── background.js
-├── options.html
-├── options.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.css
+ popup.js
+ content.js
+ background.js
+ options.html
+ options.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 This structure keeps our extension organized and maintainable, with clear separation between the user interface, content manipulation logic, and background processing.
 
-### Creating the Manifest
+Creating the Manifest
 
 The manifest.json file defines our extension's capabilities and structure. Here is the complete implementation:
 
@@ -116,7 +116,7 @@ The manifest.json file defines our extension's capabilities and structure. Here 
 
 This manifest declares the minimum permissions required for our extension to function. We use the activeTab permission to access only the current tab when the user activates the extension, and scripting permission to inject our content script.
 
-### Building the Popup Interface
+Building the Popup Interface
 
 The popup provides the primary user interface for controlling Focus Mode. Create popup.html with the following structure:
 
@@ -170,7 +170,7 @@ The popup provides the primary user interface for controlling Focus Mode. Create
 
 The popup presents users with a clean, intuitive interface containing a prominent toggle switch to activate or deactivate Focus Mode, followed by customization options for font size, theme, and line spacing. This design ensures users can quickly enable focus mode while also providing depth for those who want to customize their reading experience.
 
-### Styling the Popup
+Styling the Popup
 
 Create popup.css to style our interface:
 
@@ -305,7 +305,7 @@ button:hover {
 
 The styling creates a professional, modern interface that aligns with Chrome's design language while providing clear visual feedback for all interactions.
 
-### Popup JavaScript Logic
+Popup JavaScript Logic
 
 The popup.js file handles user interactions and communicates with other extension components:
 
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 The popup script manages state persistence using Chrome's storage API, ensuring that user preferences are remembered across browser sessions. It also handles real-time communication with the content script to apply changes immediately.
 
-### The Content Script: Core Focus Mode Logic
+The Content Script: Core Focus Mode Logic
 
 The content script is where the magic happens. This JavaScript file runs within web pages and performs the actual transformation to create the distraction-free reading experience:
 
@@ -601,7 +601,7 @@ function addCloseButton() {
 
   const closeButton = document.createElement('button');
   closeButton.id = 'focus-mode-close';
-  closeButton.innerHTML = '✕ Exit Focus Mode';
+  closeButton.innerHTML = ' Exit Focus Mode';
   closeButton.style.cssText = `
     position: fixed;
     top: 20px;
@@ -659,7 +659,7 @@ chrome.storage.sync.get(['focusEnabled', 'fontSize', 'lineHeight', 'theme'], fun
 
 This content script implements intelligent content detection by searching for common article containers and falling back to analyzing text content to identify the main reading area. Once identified, it creates an overlay that presents only the relevant content with customizable typography and theme options.
 
-### Background Service Worker
+Background Service Worker
 
 The background.js file handles extension-wide events and facilitates communication:
 
@@ -699,32 +699,32 @@ chrome.commands.onCommand.addListener(function(command) {
 
 ---
 
-## Testing Your Extension
+Testing Your Extension
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 To test your extension during development, open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Click the Load unpacked button and select your extension's directory. Your Focus Mode extension should now appear in the toolbar.
 
-### Testing the Functionality
+Testing the Functionality
 
 Click the extension icon to open the popup. Toggle Focus Mode on and navigate to various websites to test how well it identifies content. Try different settings for font size, line height, and themes. Test the keyboard shortcut if you configured one.
 
 Pay attention to how the extension handles different types of websites: news articles, blog posts, documentation, and long-form content. Note any areas where content detection might need improvement and refine your selectors accordingly.
 
-### Publishing to the Chrome Web Store
+Publishing to the Chrome Web Store
 
 Once you are satisfied with your extension, you can publish it to the Chrome Web Store. Create your icons at the required sizes (16, 48, and 128 pixels), then zip your extension directory. Navigate to the Chrome Web Store developer dashboard, create a new listing, upload your zip file, and complete the required information. After review, your extension will be available for installation by anyone.
 
 ---
 
-## Advanced Features to Consider
+Advanced Features to Consider
 
 As you enhance your Focus Mode extension, consider adding features such as text-to-speech support for hands-free reading, customizable keyboard shortcuts, automatic activation rules for specific websites, reading progress tracking, highlighting and note-taking capabilities, and export functionality to save focused articles for offline reading.
 
 ---
 
-## Conclusion
+Conclusion
 
-Building a Focus Mode Chrome extension is both a practical project that solves a real problem and an excellent way to learn Chrome extension development. The techniques covered in this guide—including Manifest V3 configuration, content script injection, popup interface design, and user preference storage—form the foundation for building more sophisticated extensions.
+Building a Focus Mode Chrome extension is both a practical project that solves a real problem and an excellent way to learn Chrome extension development. The techniques covered in this guide, including Manifest V3 configuration, content script injection, popup interface design, and user preference storage, form the foundation for building more sophisticated extensions.
 
 The completed extension provides immediate value to users seeking distraction-free reading experiences while demonstrating the power of Chrome's extension APIs. As you continue to develop and refine the extension based on user feedback, you will gain deeper insights into browser extension architecture and the nuances of creating exceptional user experiences on the web.

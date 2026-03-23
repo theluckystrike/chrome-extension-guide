@@ -15,7 +15,7 @@ API request interception represents one of the most valuable capabilities availa
 
 ---
 
-## Understanding API Interception in Chrome Extensions {#understanding-api-interception}
+Understanding API Interception in Chrome Extensions {#understanding-api-interception}
 
 Chrome extensions can intercept, analyze, and modify network requests through several APIs, each with different capabilities and limitations. The primary approaches include the DeclarativeNetRequest API for Manifest V3 extensions, the Web Request API for legacy extensions, and content script-based interception for specific page-level scenarios.
 
@@ -27,30 +27,30 @@ For most use cases, DeclarativeNetRequest provides the best balance of functiona
 
 ---
 
-## Setting Up Your Extension Project {#setting-up-project}
+Setting Up Your Extension Project {#setting-up-project}
 
 Before implementing API interception functionality, you need to set up a proper Chrome extension project structure. Create a new directory for your extension and add the necessary configuration files.
 
-### Project Structure
+Project Structure
 
 Create the following directory structure for your API interceptor extension:
 
 ```
 api-interceptor/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   └── popup.js
-├── rules/
-│   └── rules.json
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.js
+ rules/
+    rules.json
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### Manifest Configuration
+Manifest Configuration
 
 Your manifest.json defines the extension's permissions and capabilities. For API interception, you need to declare the appropriate permissions:
 
@@ -86,11 +86,11 @@ The `declarativeNetRequestWithHostAccess` permission allows your extension to mo
 
 ---
 
-## Implementing the DeclarativeNetRequest API {#implementing-declarative-net-request}
+Implementing the DeclarativeNetRequest API {#implementing-declarative-net-request}
 
 DeclarativeNetRequest uses a rule-based system where you define conditions and actions. Rules are evaluated by Chrome internally, ensuring that sensitive request data remains private while still enabling powerful request manipulation.
 
-### Understanding Rule Structure
+Understanding Rule Structure
 
 Each rule consists of an ID, priority, action, and condition. The condition determines when the rule applies, while the action defines what happens when conditions are met:
 
@@ -111,7 +111,7 @@ Each rule consists of an ID, priority, action, and condition. The condition dete
 }
 ```
 
-### Creating Interception Rules
+Creating Interception Rules
 
 Create a rules/rules.json file with various rule types to demonstrate different interception capabilities:
 
@@ -175,11 +175,11 @@ These rules demonstrate four fundamental interception capabilities: blocking unw
 
 ---
 
-## Implementing the Background Service Worker {#background-service-worker}
+Implementing the Background Service Worker {#background-service-worker}
 
 The background service worker handles rule management and communicates with other extension components. It loads rules on startup, allows dynamic rule updates, and provides an interface for the popup to manage interception settings.
 
-### Background Script Implementation
+Background Script Implementation
 
 Create the background.js file with comprehensive rule management functionality:
 
@@ -305,11 +305,11 @@ This background service worker provides comprehensive rule management, state tog
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup provides users with a graphical interface to manage interception rules and view matched requests.
 
-### Popup HTML
+Popup HTML
 
 Create the popup/popup.html file:
 
@@ -547,7 +547,7 @@ Create the popup/popup.html file:
 </html>
 ```
 
-### Popup JavaScript
+Popup JavaScript
 
 Create the popup/popup.js file to handle user interactions:
 
@@ -651,11 +651,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Advanced Interception Techniques {#advanced-techniques}
+Advanced Interception Techniques {#advanced-techniques}
 
 Beyond basic request blocking and header modification, you can implement more sophisticated interception patterns for complex use cases.
 
-### Dynamic Rule Generation
+Dynamic Rule Generation
 
 For applications requiring runtime rule generation based on user configuration, implement dynamic rule creation in your background script:
 
@@ -720,7 +720,7 @@ function escapeRegex(string) {
 }
 ```
 
-### Request and Response Logging
+Request and Response Logging
 
 Implement comprehensive logging for debugging and analytics:
 
@@ -759,7 +759,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(async (info) => {
 });
 ```
 
-### Using Web Request API for Complex Scenarios
+Using Web Request API for Complex Scenarios
 
 For scenarios requiring access to request bodies or response content, you may need to use the Web Request API with appropriate manifest declarations:
 
@@ -830,18 +830,18 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Proper testing ensures your interceptor works correctly across different scenarios.
 
-### Loading Your Extension
+Loading Your Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right
 3. Click "Load unpacked" and select your extension directory
 4. The extension icon should appear in your toolbar
 
-### Testing Interception Rules
+Testing Interception Rules
 
 Use the following approach to verify your rules work correctly:
 
@@ -868,7 +868,7 @@ async function testInterception() {
 }
 ```
 
-### Debugging Tips
+Debugging Tips
 
 When developing interception extensions, keep these debugging strategies in mind:
 
@@ -876,32 +876,32 @@ Use the Chrome DevTools Network panel to verify requests are being intercepted. 
 
 ---
 
-## Best Practices and Considerations {#best-practices}
+Best Practices and Considerations {#best-practices}
 
 When building API interceptor extensions, follow these guidelines for optimal results.
 
-### Permission Management
+Permission Management
 
 Request only the minimum permissions necessary for your extension's functionality. Use `declarativeNetRequestWithHostAccess` instead of broader permissions when possible. Clearly explain to users why your extension needs network access. Consider implementing optional host permissions for specific domains rather than requesting `<all_urls>` access.
 
-### Performance Optimization
+Performance Optimization
 
 Keep your rule sets small and efficient. Use URL filters that are as specific as possible to reduce evaluation time. Avoid complex regex patterns that may slow down request processing. Consider using the `isUrlFilterCaseSensitive` option when appropriate.
 
-### Privacy and Security
+Privacy and Security
 
 Never log or transmit sensitive user data without explicit consent. Store interception data locally rather than sending it to external servers. Implement user controls for what data gets logged. Provide clear privacy policies explaining data handling practices.
 
-### User Experience
+User Experience
 
 Provide clear visual feedback when interception is active. Allow users to easily enable and disable interception. Offer whitelisting for domains that should not be intercepted. Include undo functionality for destructive operations like rule deletion.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building an API request interceptor Chrome extension provides powerful capabilities for developers and users alike. Through this guide, you have learned how to implement comprehensive request interception using the DeclarativeNetRequest API, create dynamic rule management systems, build user-friendly popup interfaces, and follow best practices for privacy and performance.
 
-The techniques covered here enable you to build developer tools, API testing utilities, privacy enhancers, and content filters. As Chrome continues to evolve its extension platform, the declarative approach ensures your extensions remain compliant while maintaining robust functionality.
+The techniques covered here enable you to build developer tools, API testing utilities, privacy enhancers, and content filters. As Chrome continues to evolve its extension platform, the declarative approach ensures your extensions remain compliant while maintaining solid functionality.
 
 Experiment with the examples provided, extend them with additional features, and adapt them to your specific use cases. The foundation you have built understanding API interception will serve as a valuable skill for countless Chrome extension projects.

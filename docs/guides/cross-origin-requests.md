@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Cross-Origin Requests — CORS, Host Permissions, and Fetch API"
+title: "Chrome Extension Cross-Origin Requests. CORS, Host Permissions, and Fetch API"
 description: "Learn how Chrome extensions handle cross-origin requests in Manifest V3, including host permissions, CORS rules, Fetch API usage from background scripts, and content script limitations."
 canonical_url: "https://bestchromeextensions.com/guides/cross-origin-requests/"
 ---
 
 # Chrome Extension Cross-Origin Requests
 
-## Overview {#overview}
+Overview {#overview}
 
 Cross-origin requests are a fundamental part of building Chrome extensions that interact with external APIs or fetch resources from third-party servers. Unlike regular web pages, Chrome extensions have a unique permission model that determines which origins they can access. Understanding how this works is essential for building extensions that can reliably communicate with external services.
 
 In Manifest V3, the extension's ability to make cross-origin requests is controlled by host permissions declared in the manifest file. These permissions determine the scope of network access your extension will have, and getting them right is crucial for both functionality and user trust.
 
-## Host Permissions {#host-permissions}
+Host Permissions {#host-permissions}
 
 Host permissions in Chrome extensions specify which origins an extension can access. Unlike API permissions that grant access to specific Chrome APIs, host permissions allow your extension to make network requests to specified domains. You declare host permissions in the `host_permissions` field of your manifest.json file.
 
@@ -31,7 +31,7 @@ The permission `https://api.example.com/*` grants access to all paths on that do
 
 When requesting host permissions, always be as specific as possible. Instead of requesting `<all_urls>`, specify the exact domains your extension needs to access. This follows the principle of least privilege and gives users more confidence in installing your extension.
 
-## CORS in Manifest V3 {#cors-in-mv3}
+CORS in Manifest V3 {#cors-in-mv3}
 
 Cross-Origin Resource Sharing (CORS) behaves differently in Chrome extensions compared to regular web pages. The same-origin policy still applies, but Chrome extensions have special privileges that modify how CORS works.
 
@@ -41,7 +41,7 @@ However, this relaxed CORS policy only applies within extension contexts. When y
 
 The service worker acts as a privileged bridge for cross-origin communication. Your content script can send a message to the background service worker, which then makes the cross-origin request on behalf of the extension. The service worker has the necessary permissions to bypass CORS, and it can send the response back to your content script through the messaging API.
 
-## Fetch from Background Service Worker {#fetch-from-background}
+Fetch from Background Service Worker {#fetch-from-background}
 
 The recommended approach for making cross-origin requests in Manifest V3 is to perform them from the background service worker. This approach leverages the extension's privileged position and avoids the CORS limitations of content scripts.
 
@@ -72,7 +72,7 @@ This pattern keeps your sensitive logic in the privileged extension context whil
 
 For more complex scenarios, you might want to implement request queuing, caching, or authentication token management in the service worker. This centralizes your network logic and makes it easier to maintain and debug.
 
-## Content Script Limitations {#content-script-limitations}
+Content Script Limitations {#content-script-limitations}
 
 Content scripts run in the context of web pages, which means they inherit the page's origin for network requests. This is a fundamental aspect of how content scripts work in Chrome extensions. When a content script makes a fetch request, it's subject to the same CORS restrictions as any JavaScript running on that page.
 
@@ -81,21 +81,21 @@ This limitation exists for security reasons. Allowing content scripts to bypass 
 To work around this limitation, always route your cross-origin requests through the background service worker. Your content script should not make direct fetch calls to external APIs. Instead, use the messaging API to communicate with the service worker, which handles the actual network request.
 
 ```javascript
-// ❌ Don't do this in content scripts
+//  Don't do this in content scripts
 fetch("https://api.example.com/data")
   .then((response) => response.json())
   .then((data) => console.log(data));
 
-// ✅ Do this instead - send message to background
+//  Do this instead - send message to background
 chrome.runtime.sendMessage(
   { type: "FETCH_API", url: "https://api.example.com/data" },
   (response) => console.log(response.data)
 );
 ```
 
-Understanding this limitation is crucial for designing robust extensions. Plan your architecture to keep network logic in the service worker, and use content scripts only for page interaction and DOM manipulation.
+Understanding this limitation is crucial for designing solid extensions. Plan your architecture to keep network logic in the service worker, and use content scripts only for page interaction and DOM manipulation.
 
-## Content Security Policy Headers {#csp-headers}
+Content Security Policy Headers {#csp-headers}
 
 Chrome extensions are subject to Content Security Policy (CSP) restrictions defined by the browser and the extension manifest. The default CSP in Manifest V3 is restrictive and affects what types of network requests you can make and from which contexts.
 
@@ -115,12 +115,12 @@ When designing your extension's CSP, consider which origins need to be accessibl
 
 If your extension needs to make requests to many different domains dynamically, you might need to use the `connect-src` directive carefully or implement a proxy pattern through your own server. Always test your extension with the strictest CSP settings possible to ensure it will work in production environments.
 
-## Summary {#summary}
+Summary {#summary}
 
 Cross-origin requests in Chrome extensions require careful consideration of the permission model and context from which requests are made. Host permissions in the manifest control which domains your extension can access. The background service worker serves as the recommended location for cross-origin network requests, as it bypasses CORS restrictions that apply to content scripts. Content scripts are limited to the page's origin for network requests and must use message passing to communicate with the service worker for external API calls. Finally, Content Security Policy headers provide an additional layer of control over what network requests are allowed. By understanding these concepts, you can build extensions that securely and reliably interact with external services.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

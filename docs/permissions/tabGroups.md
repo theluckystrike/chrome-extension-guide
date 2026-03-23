@@ -10,24 +10,24 @@ canonical_url: "https://bestchromeextensions.com/permissions/tabGroups/"
 
 # tabGroups Permission
 
-## Overview {#overview}
+Overview {#overview}
 
 The `tabGroups` permission grants extensions access to the `chrome.tabGroups` API, which enables programmatic management of tab groups in Google Chrome. Tab groups allow users to organize their tabs into named, color-coded collections that can be collapsed, expanded, and rearranged.
 
-### Permission String {#permission-string}
+Permission String {#permission-string}
 
 ```json
 "permissions": ["tabGroups"]
 ```
 
-### What It Grants {#what-it-grants}
+What It Grants {#what-it-grants}
 
 - Full access to `chrome.tabGroups` API
 - Ability to query, create, update, and move tab groups
 - Access to tab group events for real-time updates
 - Does NOT automatically grant access to individual tab properties
 
-### Manifest Requirements {#manifest-requirements}
+Manifest Requirements {#manifest-requirements}
 
 ```json
 {
@@ -40,11 +40,11 @@ The `tabGroups` permission is often used together with the `"tabs"` permission, 
 
 ---
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
 The `chrome.tabGroups` API provides the following methods for interacting with tab groups:
 
-### `chrome.tabGroups.get(groupId)` {#chrometabgroupsgetgroupid}
+`chrome.tabGroups.get(groupId)` {#chrometabgroupsgetgroupid}
 
 Retrieves details about a specific tab group.
 
@@ -54,14 +54,14 @@ chrome.tabGroups.get(groupId, (group) => {
 });
 ```
 
-**Parameters:**
+Parameters:
 - `groupId` (integer): The ID of the tab group to retrieve.
 
-**Returns:** A `TabGroup` object containing the group's properties.
+Returns: A `TabGroup` object containing the group's properties.
 
 ---
 
-### `chrome.tabGroups.query(queryInfo)` {#chrometabgroupsqueryqueryinfo}
+`chrome.tabGroups.query(queryInfo)` {#chrometabgroupsqueryqueryinfo}
 
 Queries tab groups based on specified properties.
 
@@ -73,7 +73,7 @@ chrome.tabGroups.query({ windowId: chrome.windows.WINDOW_ID_CURRENT },
   });
 ```
 
-**queryInfo properties:**
+queryInfo properties:
 - `collapsed` (boolean): Whether the group is collapsed.
 - `color` (string): The color of the group.
 - `title` (string): The title of the group (partial match).
@@ -81,7 +81,7 @@ chrome.tabGroups.query({ windowId: chrome.windows.WINDOW_ID_CURRENT },
 
 ---
 
-### `chrome.tabGroups.update(groupId, updateProperties)` {#chrometabgroupsupdategroupid-updateproperties}
+`chrome.tabGroups.update(groupId, updateProperties)` {#chrometabgroupsupdategroupid-updateproperties}
 
 Updates the properties of a tab group.
 
@@ -93,14 +93,14 @@ chrome.tabGroups.update(groupId, {
 });
 ```
 
-**updateProperties:**
+updateProperties:
 - `collapsed` (boolean): Whether the group should be collapsed.
 - `color` (string): The new color for the group.
 - `title` (string): The new title for the group.
 
 ---
 
-### `chrome.tabGroups.move(groupId, moveProperties)` {#chrometabgroupsmovegroupid-moveproperties}
+`chrome.tabGroups.move(groupId, moveProperties)` {#chrometabgroupsmovegroupid-moveproperties}
 
 Moves a tab group to a new position or window.
 
@@ -111,13 +111,13 @@ chrome.tabGroups.move(groupId, {
 });
 ```
 
-**moveProperties:**
+moveProperties:
 - `index` (integer): The new index position in the tab strip.
 - `windowId` (integer): The ID of the target window (optional).
 
 ---
 
-## Tab Group Colors {#tab-group-colors}
+Tab Group Colors {#tab-group-colors}
 
 Tab groups support eight distinct colors for visual organization:
 
@@ -132,13 +132,13 @@ Tab groups support eight distinct colors for visual organization:
 | `purple`    | Purple creative   |
 | `cyan`      | Cyan highlight    |
 
-### Color Type Definition {#color-type-definition}
+Color Type Definition {#color-type-definition}
 
 ```typescript
 type Color = 'grey' | 'blue' | 'red' | 'yellow' | 'green' | 'pink' | 'purple' | 'cyan';
 ```
 
-### Setting Color When Creating a Group {#setting-color-when-creating-a-group}
+Setting Color When Creating a Group {#setting-color-when-creating-a-group}
 
 ```javascript
 chrome.tabs.group({ tabIds: [tab1.id, tab2.id] }, (groupId) => {
@@ -148,11 +148,11 @@ chrome.tabs.group({ tabIds: [tab1.id, tab2.id] }, (groupId) => {
 
 ---
 
-## Events {#events}
+Events {#events}
 
 The `chrome.tabGroups` API provides four events for monitoring group changes:
 
-### `chrome.tabGroups.onCreated` {#chrometabgroupsoncreated}
+`chrome.tabGroups.onCreated` {#chrometabgroupsoncreated}
 
 Fires when a new tab group is created.
 
@@ -164,7 +164,7 @@ chrome.tabGroups.onCreated.addListener((group) => {
 
 ---
 
-### `chrome.tabGroups.onUpdated` {#chrometabgroupsonupdated}
+`chrome.tabGroups.onUpdated` {#chrometabgroupsonupdated}
 
 Fires when group properties (title, color, collapsed state) change.
 
@@ -176,7 +176,7 @@ chrome.tabGroups.onUpdated.addListener((group) => {
 
 ---
 
-### `chrome.tabGroups.onRemoved` {#chrometabgroupsonremoved}
+`chrome.tabGroups.onRemoved` {#chrometabgroupsonremoved}
 
 Fires when a tab group is closed (ungrouped).
 
@@ -188,7 +188,7 @@ chrome.tabGroups.onRemoved.addListener((group) => {
 
 ---
 
-### `chrome.tabGroups.onMoved` {#chrometabgroupsonmoved}
+`chrome.tabGroups.onMoved` {#chrometabgroupsonmoved}
 
 Fires when a group is moved between windows or positions.
 
@@ -200,14 +200,14 @@ chrome.tabGroups.onMoved.addListener((group) => {
 
 ---
 
-## Creating Tab Groups {#creating-tab-groups}
+Creating Tab Groups {#creating-tab-groups}
 
 Creating tab groups requires the `"tabs"` permission in addition to `"tabGroups"`. The process involves:
 
-1. **Grouping tabs** using `chrome.tabs.group()`
-2. **Updating the group** with title and color using `chrome.tabGroups.update()`
+1. Grouping tabs using `chrome.tabs.group()`
+2. Updating the group with title and color using `chrome.tabGroups.update()`
 
-### Basic Creation {#basic-creation}
+Basic Creation {#basic-creation}
 
 ```javascript
 async function createTabGroup(tabIds, title, color) {
@@ -224,7 +224,7 @@ async function createTabGroup(tabIds, title, color) {
 createTabGroup([tab1.id, tab2.id], "Research", "purple");
 ```
 
-### Removing from Groups {#removing-from-groups}
+Removing from Groups {#removing-from-groups}
 
 To remove tabs from a group (ungroup):
 
@@ -236,9 +236,9 @@ chrome.tabs.ungroup(tabIds, () => {
 
 ---
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Workspace Organization {#workspace-organization}
+Workspace Organization {#workspace-organization}
 
 Group tabs by project or task for a clutter-free browsing experience:
 
@@ -255,7 +255,7 @@ chrome.tabs.query({ title: "*project*" }, (tabs) => {
 });
 ```
 
-### Auto-Categorization {#auto-categorization}
+Auto-Categorization {#auto-categorization}
 
 Automatically group tabs by domain:
 
@@ -280,7 +280,7 @@ chrome.tabs.onCreated.addListener(async (tab) => {
 });
 ```
 
-### Session Management {#session-management}
+Session Management {#session-management}
 
 Save and restore tab group state:
 
@@ -309,7 +309,7 @@ async function restoreGroupState(state) {
 }
 ```
 
-### Tab Decluttering {#tab-decluttering}
+Tab Decluttering {#tab-decluttering}
 
 Collapse inactive groups to reduce visual clutter:
 
@@ -333,7 +333,7 @@ chrome.tabGroups.onUpdated.addListener(async (group) => {
 
 ---
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -350,7 +350,7 @@ chrome.tabGroups.onUpdated.addListener(async (group) => {
 }
 ```
 
-### Manifest V2 Compatibility {#manifest-v2-compatibility}
+Manifest V2 Compatibility {#manifest-v2-compatibility}
 
 For Manifest V2 extensions:
 
@@ -368,7 +368,7 @@ For Manifest V2 extensions:
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [tabs Permission](./tabs.md) - Required for creating groups
 - [guides/tab-management.md](../guides/tab-management.md) - General tab management
@@ -377,17 +377,17 @@ For Manifest V2 extensions:
 
 ---
 
-## Related Extensions {#related-extensions}
+Related Extensions {#related-extensions}
 
 For persistent storage of tab group configurations, consider using:
-- **@theluckystrike/webext-storage**: Save and restore tab group states across sessions
+- @theluckystrike/webext-storage: Save and restore tab group states across sessions
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I organize tabs into groups?
+How do I organize tabs into groups?
 Use chrome.tabGroups API to create, update, and delete tab groups. Users can also manually organize tabs into color-coded groups.
 
-### Are tab groups available on all platforms?
+Are tab groups available on all platforms?
 Tab groups are available on Chrome desktop (Windows, Mac, Linux) and ChromeOS.
 ---
 

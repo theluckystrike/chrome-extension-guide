@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Chrome Extension Lazy Loading Content Scripts — Best Practices"
+title: "Chrome Extension Lazy Loading Content Scripts. Best Practices"
 description: "Optimize extension performance with lazy loading patterns for content scripts that only run when needed."
 canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading-content-scripts/"
 ---
 
 # Lazy Loading Content Scripts
 On-demand and conditional content script injection for Chrome Extensions (MV3).
-## Static vs Dynamic {#static-vs-dynamic}
-**Static (manifest.json)** - Always injected:
+Static vs Dynamic {#static-vs-dynamic}
+Static (manifest.json) - Always injected:
 ```json
 { "content_scripts": [{ "matches": ["<all_urls>"], "js": ["content.js"] }] }
 ```
-**Dynamic (chrome.scripting.executeScript)** - On-demand:
+Dynamic (chrome.scripting.executeScript) - On-demand:
 ```javascript
 chrome.action.onClicked.addListener(async (tab) => {
   await chrome.scripting.executeScript({
@@ -21,11 +21,11 @@ chrome.action.onClicked.addListener(async (tab) => {
   });
 });
 ```
-## When to Lazy Load {#when-to-lazy-load}
+When to Lazy Load {#when-to-lazy-load}
 - Heavy scripts with complex DOM manipulation
 - User-triggered features (clicks, context menus)
 - Conditional features based on page state
-## Trigger Patterns {#trigger-patterns}
+Trigger Patterns {#trigger-patterns}
 ```javascript
 // Icon click
 chrome.action.onClicked.addListener(async (tab) => {
@@ -46,7 +46,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   }
 });
 ```
-## World: ISOLATED vs MAIN {#world-isolated-vs-main}
+World: ISOLATED vs MAIN {#world-isolated-vs-main}
 ```javascript
 // ISOLATED (default) - sandboxed
 await chrome.scripting.executeScript({
@@ -59,14 +59,14 @@ await chrome.scripting.executeScript({
   func: () => window.pageVar
 });
 ```
-## Injection Targets {#injection-targets}
+Injection Targets {#injection-targets}
 ```javascript
 // All frames
 await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['content.js'] });
 // Specific frame
 await chrome.scripting.executeScript({ target: { tabId: tab.id, frameIds: [frameId] }, files: ['content.js'] });
 ```
-## Check If Injected {#check-if-injected}
+Check If Injected {#check-if-injected}
 ```javascript
 async function injectIfNeeded(tabId) {
   const results = await chrome.scripting.executeScript({
@@ -78,7 +78,7 @@ async function injectIfNeeded(tabId) {
   }
 }
 ```
-## Bootstrap + Lazy Load {#bootstrap-lazy-load}
+Bootstrap + Lazy Load {#bootstrap-lazy-load}
 ```javascript
 // bootstrap.js (static)
 document.addEventListener('click', async (e) => {
@@ -96,12 +96,12 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   }
 });
 ```
-## CSS Injection {#css-injection}
+CSS Injection {#css-injection}
 ```javascript
 await chrome.scripting.insertCSS({ target: { tabId }, files: ['style.css'] });
 await chrome.scripting.removeCSS({ target: { tabId }, files: ['style.css'] });
 ```
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 ```javascript
 try {
   await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['content.js'] });
@@ -110,7 +110,7 @@ try {
   else if (error.message.includes('No tab with id')) console.log('Tab closed');
 }
 ```
-## Related {#related}
+Related {#related}
 - [Lazy Loading Patterns Guide](../../guides/lazy-loading-patterns.md)
 - [Scripting API Reference](../../api-reference/scripting-api.md)
 - [Dynamic Content Scripts (MV3)](../../mv3/dynamic-content-scripts.md)

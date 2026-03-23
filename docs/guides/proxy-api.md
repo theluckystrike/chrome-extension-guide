@@ -4,7 +4,7 @@
 
 The Chrome Proxy API (`chrome.proxy`) controls Chrome's proxy settings, routing all browser traffic through specified servers. Requires `"proxy"` permission in manifest.json.
 
-- **Reference**: [developer.chrome.com/docs/extensions/reference/api/proxy](https://developer.chrome.com/docs/extensions/reference/api/proxy)
+- Reference: [developer.chrome.com/docs/extensions/reference/api/proxy](https://developer.chrome.com/docs/extensions/reference/api/proxy)
 
 ## Proxy Modes
 
@@ -196,7 +196,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ## Important Considerations
 
-**Check level of control:**
+Check level of control:
 ```javascript
 chrome.proxy.settings.get({}, (config) => {
   if (config.levelOfControl === "controlled_by_other_extensions") {
@@ -205,13 +205,13 @@ chrome.proxy.settings.get({}, (config) => {
 });
 ```
 
-**Incognito mode:** Use `scope: "incognito_persistent"` or `"incognito_session_only"`.
+Incognito mode: Use `scope: "incognito_persistent"` or `"incognito_session_only"`.
 
-**Security:**
-1. Never hardcode credentials — Chrome handles proxy auth
+Security:
+1. Never hardcode credentials. Chrome handles proxy auth
 2. Use optional_permissions when possible
 3. Be transparent about traffic routing
-4. PAC errors are silent — test thoroughly
+4. PAC errors are silent. test thoroughly
 
 ## Related
 

@@ -50,12 +50,12 @@ jobs:
 
 ---
 
-## Automated Building and Bundling
+Automated Building and Bundling
 
 Build your extension in CI before any deployment:
 
 ```yaml
-# .github/workflows/build.yml
+.github/workflows/build.yml
 name: Build
 
 jobs:
@@ -83,13 +83,13 @@ jobs:
 Use Web-ext or webpack with extensions support for bundling:
 
 ```bash
-# Using web-ext for packaging
+Using web-ext for packaging
 npx web-ext build --source-dir dist --artifacts-dir web-ext-build
 ```
 
 ---
 
-## Automated Testing in CI
+Automated Testing in CI
 
 Run unit and integration tests in your pipeline:
 
@@ -103,7 +103,7 @@ Run unit and integration tests in your pipeline:
     files: ./coverage/lcov.info
 ```
 
-### Test Configuration
+Test Configuration
 
 ```json
 // package.json
@@ -118,12 +118,12 @@ Run unit and integration tests in your pipeline:
 
 ---
 
-## Chrome Extension Linting
+Chrome Extension Linting
 
 Use specialized linters for extension code:
 
 ```yaml
-# .github/workflows/lint.yml
+.github/workflows/lint.yml
 name: Lint
 
 jobs:
@@ -139,7 +139,7 @@ jobs:
         run: npx @extensionjs/cli lint
 ```
 
-### ESLint Configuration
+ESLint Configuration
 
 ```javascript
 // .eslintrc.js
@@ -157,7 +157,7 @@ module.exports = {
 
 ---
 
-## Manifest Validation in CI
+Manifest Validation in CI
 
 Validate your manifest.json before building:
 
@@ -166,12 +166,12 @@ Validate your manifest.json before building:
   run: |
     npx @webextension-toolbox/validate-manifest manifest.json
     
-# Or use Chrome's official validator
+Or use Chrome's official validator
 - name: Check manifest
   run: npx chrome-manifest-loader validate
 ```
 
-### Manifest Validation Script
+Manifest Validation Script
 
 ```javascript
 // scripts/validate-manifest.js
@@ -204,12 +204,12 @@ validateManifest();
 
 ---
 
-## Version Bumping Automation
+Version Bumping Automation
 
 Automate version updates using standard-version or semantic-release:
 
 ```yaml
-# .github/workflows/release.yml
+.github/workflows/release.yml
 name: Release
 
 on:
@@ -238,7 +238,7 @@ jobs:
         run: git push origin main --follow-tags
 ```
 
-### Version Bump Script
+Version Bump Script
 
 ```yaml
 - name: Update manifest version
@@ -250,7 +250,7 @@ jobs:
 
 ---
 
-## Changelog Generation
+Changelog Generation
 
 Generate changelogs automatically:
 
@@ -265,7 +265,7 @@ Generate changelogs automatically:
     git commit -m "docs: update changelog"
 ```
 
-### Standard Version Configuration
+Standard Version Configuration
 
 ```json
 // package.json
@@ -284,15 +284,15 @@ Generate changelogs automatically:
 
 ---
 
-## Automated Chrome Web Store Upload
+Automated Chrome Web Store Upload
 
-### Using chrome-webstore-upload-cli
+Using chrome-webstore-upload-cli
 
 ```bash
-# Install the CLI
+Install the CLI
 npm install -g chrome-webstore-upload-cli
 
-# Upload extension
+Upload extension
 npx chrome-webstore-upload-cli upload \
   --extension-id $CWS_EXTENSION_ID \
   --client-id $CWS_CLIENT_ID \
@@ -301,7 +301,7 @@ npx chrome-webstore-upload-cli upload \
   --upload-source dist/extension.zip
 ```
 
-### GitHub Action for CWS Upload
+GitHub Action for CWS Upload
 
 {% raw %}
 ```yaml
@@ -318,7 +318,7 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-## Staged Rollout Automation
+Staged Rollout Automation
 
 Control your rollout percentage:
 
@@ -333,7 +333,7 @@ Control your rollout percentage:
       --publish-target trustedTesters  # or public with rolloutPercentage
 ```
 
-### Rollout Strategy
+Rollout Strategy
 
 | Stage | Percentage | Use Case |
 |-------|------------|----------|
@@ -343,22 +343,22 @@ Control your rollout percentage:
 
 ---
 
-## Firefox Add-on Store Automation
+Firefox Add-on Store Automation
 
 Use web-ext for Firefox:
 
 ```bash
-# Install web-ext
+Install web-ext
 npm install -g web-ext
 
-# Sign and upload to AMO
+Sign and upload to AMO
 web-ext sign \
   --source-dir dist \
   --api-key $AMO_API_KEY \
   --api-secret $AMO_API_SECRET
 ```
 
-### Firefox CI Configuration
+Firefox CI Configuration
 
 ```yaml
 - name: Publish to Firefox
@@ -373,7 +373,7 @@ web-ext sign \
 
 ---
 
-## Edge Add-ons Store Automation
+Edge Add-ons Store Automation
 
 ```yaml
 - name: Publish to Edge
@@ -388,13 +388,13 @@ web-ext sign \
 
 ---
 
-## Multi-Browser CI Matrix
+Multi-Browser CI Matrix
 
 Run builds for multiple browsers simultaneously:
 
 {% raw %}
 ```yaml
-# .github/workflows/multi-browser.yml
+.github/workflows/multi-browser.yml
 name: Multi-Browser CI
 
 on:
@@ -424,27 +424,27 @@ jobs:
 
 ---
 
-## Release Branch Strategy
+Release Branch Strategy
 
 Follow a structured release workflow:
 
 ```
 main (production)
-  │
-  ├── develop (development)
-  │     │
-  │     └── feature/new-feature
-  │
-  └── release/v1.2.0 (release branch)
-        │
-        └── hotfix/critical-fix
+  
+   develop (development)
+       
+        feature/new-feature
+  
+   release/v1.2.0 (release branch)
+        
+         hotfix/critical-fix
 ```
 
-### Release Branch Workflow
+Release Branch Workflow
 
 {% raw %}
 ```yaml
-# Create release branch
+Create release branch
 - name: Create release branch
   run: |
     git checkout -b release/v${{ github.event.inputs.version }}
@@ -455,12 +455,12 @@ main (production)
 
 ---
 
-## Tag-Based Releases
+Tag-Based Releases
 
 Trigger releases on git tags:
 
 ```yaml
-# .github/workflows/publish.yml
+.github/workflows/publish.yml
 name: Publish
 
 on:
@@ -491,7 +491,7 @@ jobs:
 
 ---
 
-## Artifact Management
+Artifact Management
 
 Store and manage build artifacts:
 
@@ -506,7 +506,7 @@ Store and manage build artifacts:
     retention-days: 90
 ```
 
-### Download Artifacts in Subsequent Jobs
+Download Artifacts in Subsequent Jobs
 
 ```yaml
 - name: Download artifacts
@@ -517,12 +517,12 @@ Store and manage build artifacts:
 
 ---
 
-## E2E Tests in CI with Puppeteer
+E2E Tests in CI with Puppeteer
 
 Test your extension in a real browser:
 
 ```yaml
-# .github/workflows/e2e.yml
+.github/workflows/e2e.yml
 name: E2E Tests
 
 jobs:
@@ -542,7 +542,7 @@ jobs:
         run: pnpm test:e2e
 ```
 
-### Puppeteer Test Example
+Puppeteer Test Example
 
 ```javascript
 // tests/e2e/extension.spec.js
@@ -563,7 +563,7 @@ test('extension popup loads', async ({ page }) => {
 
 ---
 
-## Secret Management for Store Credentials
+Secret Management for Store Credentials
 
 Store credentials securely in GitHub Secrets:
 
@@ -580,11 +580,11 @@ Store credentials securely in GitHub Secrets:
 
 ---
 
-## Complete CI/CD Pipeline Example
+Complete CI/CD Pipeline Example
 
 {% raw %}
 ```yaml
-# .github/workflows/release.yml
+.github/workflows/release.yml
 name: Release Pipeline
 
 on:
@@ -654,7 +654,7 @@ jobs:
 
 ---
 
-## References
+References
 
 - [Chrome Web Store Publishing API](https://developer.chrome.com/docs/webstore/using-api)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -663,8 +663,8 @@ jobs:
 
 ---
 
-## Related Guides
+Related Guides
 
-- [Publishing Guide](../publishing/publishing-guide.md) — Manual publishing
-- [Version Management](../publishing/version-management.md) — Version strategies
-- [Cross-Browser Extensions](./cross-browser-extensions.md) — Multi-browser support
+- [Publishing Guide](../publishing/publishing-guide.md). Manual publishing
+- [Version Management](../publishing/version-management.md). Version strategies
+- [Cross-Browser Extensions](./cross-browser-extensions.md). Multi-browser support

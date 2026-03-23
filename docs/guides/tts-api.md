@@ -19,7 +19,7 @@ Add `"tts"` to your `manifest.json` permissions:
 
 No special host permissions are required for basic TTS functionality.
 
-## chrome.tts.speak — Speaking Text
+## chrome.tts.speak. Speaking Text
 
 The primary method for speaking text with optional configuration:
 ```javascript
@@ -71,7 +71,7 @@ chrome.tts.speak('Second sentence.', { enqueue: true });
 chrome.tts.speak('Important!', { enqueue: false }); // default
 ```
 
-## chrome.tts.stop — Stopping Speech
+## chrome.tts.stop. Stopping Speech
 
 Immediately halts any ongoing or queued speech:
 ```javascript
@@ -101,7 +101,7 @@ chrome.tts.isSpeaking((speaking) => {
 });
 ```
 
-## chrome.tts.getVoices — Available Voices
+## chrome.tts.getVoices. Available Voices
 
 Retrieve all available TTS voices on the system:
 ```javascript
@@ -139,7 +139,7 @@ chrome.tts.getVoices((voices) => {
 });
 ```
 
-## chrome.tts.isSpeaking — Check Speech State
+## chrome.tts.isSpeaking. Check Speech State
 
 Determine if speech is currently in progress:
 ```javascript
@@ -159,7 +159,7 @@ async function checkSpeaking() {
 }
 ```
 
-## TtsEvent Types — Monitoring Speech
+## TtsEvent Types. Monitoring Speech
 
 Events provide feedback during speech synthesis. Pass an `onEvent` callback in options:
 ```javascript
@@ -336,11 +336,11 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 - Firefox has limited TTS support
 
 ## Best Practices
-1. **Always check for errors** using `chrome.runtime.lastError`
-2. **Provide visual feedback** when speech starts/ends
-3. **Allow voice customization** - not all voices are available everywhere
-4. **Handle interruptions gracefully** - users may trigger new speech
-5. **Test with different rates** - default rate may be too fast/slow
+1. Always check for errors using `chrome.runtime.lastError`
+2. Provide visual feedback when speech starts/ends
+3. Allow voice customization - not all voices are available everywhere
+4. Handle interruptions gracefully - users may trigger new speech
+5. Test with different rates - default rate may be too fast/slow
 
 ## Reference
 - Official Docs: https://developer.chrome.com/docs/extensions/reference/api/tts

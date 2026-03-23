@@ -17,19 +17,19 @@ In this tutorial, we will build a fully functional Chrome extension that allows 
 
 ---
 
-## Why Build an Image Gallery Extension? {#why-build-image-gallery-extension}
+Why Build an Image Gallery Extension? {#why-build-image-gallery-extension}
 
 The demand for image gallery extensions continues to grow as users consume more visual content online. An image gallery extension serves multiple purposes in a user's browsing experience, making it one of the most useful categories of Chrome extensions you can create.
 
-First, consider the utility factor. Users constantly encounter images they want to save while browsing—inspiration from design websites, photos from travel blogs, reference images for creative projects, or product images from shopping sites. A well-designed image collection extension gives users the ability to capture these visuals with a single click, organize them into custom galleries, and access them later from any device.
+First, consider the utility factor. Users constantly encounter images they want to save while browsing, inspiration from design websites, photos from travel blogs, reference images for creative projects, or product images from shopping sites. A well-designed image collection extension gives users the ability to capture these visuals with a single click, organize them into custom galleries, and access them later from any device.
 
 Second, the photo viewer chrome functionality provides immediate value. Instead of right-clicking and saving each image individually, users can instantly add images to their collection with minimal friction. The extension becomes a personal visual bookmark system that understands the importance of images in modern web browsing.
 
-Finally, from a development perspective, building an image gallery extension teaches you valuable skills that transfer to other projects. You'll work with Chrome's extension APIs, learn about content scripts and message passing, handle file storage, and create responsive user interfaces—all essential competencies for Chrome extension development.
+Finally, from a development perspective, building an image gallery extension teaches you valuable skills that transfer to other projects. You'll work with Chrome's extension APIs, learn about content scripts and message passing, handle file storage, and create responsive user interfaces, all essential competencies for Chrome extension development.
 
 ---
 
-## Project Setup and Directory Structure {#project-setup}
+Project Setup and Directory Structure {#project-setup}
 
 Before writing any code, we need to set up our project structure properly. A well-organized directory structure makes development smoother and your extension easier to maintain.
 
@@ -37,26 +37,26 @@ Create a new folder for your project and set up the following directory structur
 
 ```
 image-gallery-extension/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   ├── popup.js
-│   └── popup.css
-├── content/
-│   ├── content.js
-│   └── content.css
-├── gallery/
-│   ├── gallery.html
-│   ├── gallery.js
-│   └── gallery.css
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── utils/
-    ├── image-utils.js
-    └── storage-utils.js
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.js
+    popup.css
+ content/
+    content.js
+    content.css
+ gallery/
+    gallery.html
+    gallery.js
+    gallery.css
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ utils/
+     image-utils.js
+     storage-utils.js
 ```
 
 This structure separates your extension into logical components. The popup directory handles the small interface that appears when clicking the extension icon. The content script runs on web pages to detect and capture images. The gallery directory contains the main interface where users view their collected images. The utils folder holds helper functions for image processing and storage.
@@ -65,7 +65,7 @@ Initialize a new npm project if you plan to use any build tools, though for this
 
 ---
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the backbone of any Chrome extension. It tells Chrome about your extension's permissions, files, and capabilities. For our image gallery extension, we need specific permissions to access web pages and store data.
 
@@ -110,7 +110,7 @@ The `host_permissions` set to `<all_urls>` allows your extension to work on any 
 
 ---
 
-## Building the Content Script for Image Detection {#content-script}
+Building the Content Script for Image Detection {#content-script}
 
 The content script is the part of your extension that runs on web pages to detect and capture images. This is where the core functionality of finding images begins.
 
@@ -216,7 +216,7 @@ The script also adds visual feedback by highlighting images when users hover ove
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It needs to be simple, fast, and provide immediate access to the core functionality.
 
@@ -240,10 +240,10 @@ Create popup.html:
     
     <div class="actions">
       <button id="collectBtn" class="primary-btn">
-        <span class="icon">📷</span> Collect Images
+        <span class="icon"></span> Collect Images
       </button>
       <button id="openGalleryBtn" class="secondary-btn">
-        <span class="icon">🖼️</span> Open Gallery
+        <span class="icon"></span> Open Gallery
       </button>
     </div>
     
@@ -451,7 +451,7 @@ The popup provides a clean interface with two main actions: collecting images fr
 
 ---
 
-## Building the Gallery View {#gallery-view}
+Building the Gallery View {#gallery-view}
 
 The gallery is where users view and organize their collected images. This needs to be a full-featured interface with sorting, filtering, and viewing capabilities.
 
@@ -469,7 +469,7 @@ Create gallery.html:
 <body>
   <header class="gallery-header">
     <div class="header-content">
-      <h1>🖼️ My Image Collection</h1>
+      <h1> My Image Collection</h1>
       <div class="header-actions">
         <button id="clearAllBtn" class="danger-btn">Clear All</button>
       </div>
@@ -502,7 +502,7 @@ Create gallery.html:
     </div>
     
     <div id="emptyState" class="empty-state" style="display: none;">
-      <div class="empty-icon">📷</div>
+      <div class="empty-icon"></div>
       <h2>No Images Yet</h2>
       <p>Start collecting images from websites using the extension popup!</p>
     </div>
@@ -879,7 +879,7 @@ This gallery implementation provides a complete image collection extension exper
 
 ---
 
-## The Background Service Worker {#background-worker}
+The Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and coordinates between different parts of your extension.
 
@@ -934,7 +934,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Testing Your Extension {#testing-extension}
+Testing Your Extension {#testing-extension}
 
 Before deploying your extension, you need to test it thoroughly in Chrome's developer mode.
 
@@ -954,27 +954,27 @@ Make sure your extension handles edge cases gracefully, such as pages with no im
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 Once you have the basic image gallery extension working, consider adding these advanced features to make your extension stand out:
 
-**Thumbnail Generation**: Instead of storing full-resolution images, generate thumbnails to reduce storage usage and improve loading speed. You can use the Canvas API in your content script to create smaller versions before saving.
+Thumbnail Generation: Instead of storing full-resolution images, generate thumbnails to reduce storage usage and improve loading speed. You can use the Canvas API in your content script to create smaller versions before saving.
 
-**Drag and Drop Organization**: Allow users to create custom galleries and drag images between them. This requires updating your data structure to support gallery organization.
+Drag and Drop Organization: Allow users to create custom galleries and drag images between them. This requires updating your data structure to support gallery organization.
 
-**Cloud Sync**: Implement synchronization across devices using Chrome's sync storage or a backend service. This allows users to access their image collections from any computer.
+Cloud Sync: Implement synchronization across devices using Chrome's sync storage or a backend service. This allows users to access their image collections from any computer.
 
-**Image Metadata Editing**: Allow users to add notes, tags, or ratings to their saved images. This turns your extension into a more comprehensive image management tool.
+Image Metadata Editing: Allow users to add notes, tags, or ratings to their saved images. This turns your extension into a more comprehensive image management tool.
 
-**Export Options**: Provide ways to export images, such as downloading individual images, exporting entire galleries as ZIP files, or sharing to social media.
+Export Options: Provide ways to export images, such as downloading individual images, exporting entire galleries as ZIP files, or sharing to social media.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building an image gallery Chrome extension is an excellent project that teaches you fundamental concepts of extension development while creating something genuinely useful. Throughout this guide, we've covered the complete development process from project setup to creating a fully functional photo viewer chrome extension.
 
-The image collection extension you built includes essential features like automatic image detection from web pages, a clean popup interface for quick actions, a comprehensive gallery view with sorting and filtering, and a full-screen image viewer. These components work together seamlessly to provide users with an excellent experience for collecting and organizing images from across the web.
+The image collection extension you built includes essential features like automatic image detection from web pages, a clean popup interface for quick actions, a comprehensive gallery view with sorting and filtering, and a full-screen image viewer. These components work together smoothly to provide users with an excellent experience for collecting and organizing images from across the web.
 
 Remember that the best extensions solve real problems for users. As you continue to develop your image gallery extension, gather feedback from users and iteratively improve the features that matter most to them. Whether you add cloud sync, advanced organization features, or integration with other services, you're building valuable skills in Chrome extension development.
 

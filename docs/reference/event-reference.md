@@ -168,10 +168,10 @@ chrome.permissions.onAdded.addListener((p) => {});
 ### Register at Top Level {#register-at-top-level}
 
 ```javascript
-// ✅ CORRECT
+//  CORRECT
 chrome.tabs.onUpdated.addListener((id, info, tab) => {});
 
-// ❌ WRONG
+//  WRONG
 async function init() { chrome.tabs.onUpdated.addListener((id, info, tab) => {}); }
 init();
 ```

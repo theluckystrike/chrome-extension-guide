@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Chrome Extension Extension Ab Testing — Best Practices"
+title: "Chrome Extension Extension Ab Testing. Best Practices"
 description: "Implement A/B testing patterns for Chrome extensions to experiment with features."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-ab-testing/"
 ---
 
 # A/B Testing Patterns for Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 A/B testing (or experimentation) enables data-driven feature decisions by comparing user responses to different variants. Unlike feature flags that toggle on/off, experiments assign users to cohorts and measure outcomes. This pattern covers client-side experimentation with consistent bucketing, remote configuration, and analytics integration.
 
@@ -15,7 +15,7 @@ See also: [Feature Flags](./feature-flags.md), [Feature Flags Implementation](./
 
 ---
 
-## Consistent User Bucketing {#consistent-user-bucketing}
+Consistent User Bucketing {#consistent-user-bucketing}
 
 Assign users to variants consistently using deterministic hashing. The user's ID (extension install ID or anonymous token) combined with experiment ID produces a stable bucket.
 
@@ -33,11 +33,11 @@ export function getBucket(userId, experimentId, variantCount = 2) {
 }
 ```
 
-This ensures the same user always lands in the same variant. Never use PII (email, name) as input—use only anonymous identifiers.
+This ensures the same user always lands in the same variant. Never use PII (email, name) as input, use only anonymous identifiers.
 
 ---
 
-## Experiment Manager Class {#experiment-manager-class}
+Experiment Manager Class {#experiment-manager-class}
 
 Centralized manager to load experiments, assign variants, and persist assignments:
 
@@ -94,7 +94,7 @@ export const experimentManager = new ExperimentManager();
 
 ---
 
-## Variant Renderer {#variant-renderer}
+Variant Renderer {#variant-renderer}
 
 Apply variants to UI consistently in content scripts or popup:
 
@@ -123,7 +123,7 @@ export async function renderWithVariant(rootElement, userId) {
 
 ---
 
-## Analytics Integration {#analytics-integration}
+Analytics Integration {#analytics-integration}
 
 Track experiment outcomes alongside variant assignment:
 
@@ -144,7 +144,7 @@ Always include the variant in conversion events to enable segmented analysis.
 
 ---
 
-## Gradual Rollouts {#gradual-rollouts}
+Gradual Rollouts {#gradual-rollouts}
 
 Use percentage-based gates for staged rollouts:
 
@@ -167,7 +167,7 @@ Start at 5-10%, monitor metrics, then increase. Always keep control group.
 
 ---
 
-## Experiment Lifecycle {#experiment-lifecycle}
+Experiment Lifecycle {#experiment-lifecycle}
 
 | Phase | Actions |
 |-------|---------|
@@ -180,7 +180,7 @@ Archive concluded experiments and clear their assignments from storage to preven
 
 ---
 
-## Privacy Considerations {#privacy-considerations}
+Privacy Considerations {#privacy-considerations}
 
 - Never bucket by PII; use install ID or anonymous token
 - Store assignments locally only; never send to analytics raw
@@ -189,7 +189,7 @@ Archive concluded experiments and clear their assignments from storage to preven
 
 ---
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Feature Flags](./feature-flags.md) - Toggle features independently
 - [Extension Feature Flags Implementation](./extension-feature-flags-impl.md) - Detailed flag patterns

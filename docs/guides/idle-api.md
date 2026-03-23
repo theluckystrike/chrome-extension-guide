@@ -4,11 +4,11 @@ The Chrome Idle API (`chrome.idle`) enables extensions to detect when users beco
 
 ## Core Functions
 
-- `chrome.idle.queryState` — Query current idle state on demand
-- `chrome.idle.setDetectionInterval` — Configure idle detection threshold
-- `chrome.idle.onStateChanged` — Listen for real-time state changes
+- `chrome.idle.queryState`. Query current idle state on demand
+- `chrome.idle.setDetectionInterval`. Configure idle detection threshold
+- `chrome.idle.onStateChanged`. Listen for real-time state changes
 
-> **Reference**: [developer.chrome.com/docs/extensions/reference/api/idle](https://developer.chrome.com/docs/extensions/reference/api/idle)
+> Reference: [developer.chrome.com/docs/extensions/reference/api/idle](https://developer.chrome.com/docs/extensions/reference/api/idle)
 
 ## Permissions
 
@@ -34,8 +34,8 @@ chrome.idle.queryState(60, (state) => {
 
 ## chrome.idle.setDetectionInterval
 
-- **Default**: 60 seconds
-- **Minimum**: 15 seconds (Chrome enforces this)
+- Default: 60 seconds
+- Minimum: 15 seconds (Chrome enforces this)
 
 ```javascript
 chrome.idle.setDetectionInterval(60);   // Default
@@ -73,7 +73,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 function performAutoLock() {
   chrome.storage.local.remove(["authToken", "sessionData"]);
-  chrome.action.setBadgeText({ text: "🔒" });
+  chrome.action.setBadgeText({ text: "" });
 }
 ```
 
@@ -121,7 +121,7 @@ chrome.idle.onStateChanged.addListener((state) => {
   if (state === "active") chrome.action.setBadgeText({ text: "" });
   else if (state === "locked") {
     chrome.storage.local.remove(["tempData", "sensitiveInfo"]);
-    chrome.action.setBadgeText({ text: "🔒" });
+    chrome.action.setBadgeText({ text: "" });
   }
 });
 ```
@@ -137,9 +137,9 @@ chrome.idle.onStateChanged.addListener((state) => {
 ## Summary
 
 The Chrome Idle API provides:
-- **`queryState()`** — Check current idle state
-- **`setDetectionInterval()`** — Configure sensitivity (15-60+ seconds)
-- **`onStateChanged`** — Listen for real-time changes
-- **States**: `active`, `idle`, `locked`
+- `queryState()`. Check current idle state
+- `setDetectionInterval()`. Configure sensitivity (15-60+ seconds)
+- `onStateChanged`. Listen for real-time changes
+- States: `active`, `idle`, `locked`
 
 Common use cases: auto-save, security locks, activity analytics, power management.

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Declarative Net Request — Manifest V3 Guide"
+title: "Chrome Extension Declarative Net Request. Manifest V3 Guide"
 description: "Use Declarative Net Request API for network request filtering in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/declarative-net-request/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/mv3/declarative-net-request/"
 
 > The Declarative Net Request API is the MV3 replacement for the deprecated `webRequestBlocking` API.
 
-## Overview {#overview}
+Overview {#overview}
 
 In Manifest V2 (MV2), extensions could use `webRequestBlocking` to intercept and modify network requests in real-time. However, this API presented significant performance and privacy concerns because:
 
@@ -17,27 +17,27 @@ In Manifest V2 (MV2), extensions could use `webRequestBlocking` to intercept and
 - It blocked threads while processing requests
 - It had unlimited access to request/response bodies
 
-**In Manifest V3 (MV3), `webRequestBlocking` is completely removed.** Instead, extensions use the **Declarative Net Request** API, which allows Chrome to handle network requests based on predefined rules without exposing raw request data to extensions.
+In Manifest V3 (MV3), `webRequestBlocking` is completely removed. Instead, extensions use the Declarative Net Request API, which allows Chrome to handle network requests based on predefined rules without exposing raw request data to extensions.
 
 With DNR, you declare rules that tell Chrome how to handle requests, and Chrome executes these rules internally. This provides better privacy, performance, and security.
 
-## MV2 vs MV3 Comparison {#mv2-vs-mv3-comparison}
+MV2 vs MV3 Comparison {#mv2-vs-mv3-comparison}
 
 | Feature | MV2 (webRequest) | MV3 (Declarative Net Request) |
 |---------|------------------|------------------------------|
-| **Block requests** | ✅ `webRequestBlocking` | ✅ `declarativeNetRequest` |
-| **Modify headers** | ✅ `webRequestBlocking` | ✅ `modifyHeaders` action |
-| **Redirect requests** | ✅ `webRequestBlocking` | ✅ `redirect` action |
-| **Access request body** | ✅ Yes | ❌ No |
-| **Access response body** | ✅ Yes | ❌ No |
-| **Non-blocking execution** | ❌ Blocks thread | ✅ Declarative, async |
-| **Rule updates** | Requires reload | Dynamic rules at runtime |
+| Block requests |  `webRequestBlocking` |  `declarativeNetRequest` |
+| Modify headers |  `webRequestBlocking` |  `modifyHeaders` action |
+| Redirect requests |  `webRequestBlocking` |  `redirect` action |
+| Access request body |  Yes |  No |
+| Access response body |  Yes |  No |
+| Non-blocking execution |  Blocks thread |  Declarative, async |
+| Rule updates | Requires reload | Dynamic rules at runtime |
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 To use Declarative Net Request, you need to add the appropriate permissions and configuration to your `manifest.json`.
 
-### Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 ```json
 {
@@ -47,7 +47,7 @@ To use Declarative Net Request, you need to add the appropriate permissions and 
 }
 ```
 
-### Feedback Permission (Optional) {#feedback-permission-optional}
+Feedback Permission (Optional) {#feedback-permission-optional}
 
 If you need to know which rules were matched (for logging or user feedback):
 
@@ -59,7 +59,7 @@ If you need to know which rules were matched (for logging or user feedback):
 }
 ```
 
-### Static Rules Configuration {#static-rules-configuration}
+Static Rules Configuration {#static-rules-configuration}
 
 Static rules are defined in a JSON file and bundled with the extension:
 
@@ -80,7 +80,7 @@ Static rules are defined in a JSON file and bundled with the extension:
 }
 ```
 
-### Dynamic Rules {#dynamic-rules}
+Dynamic Rules {#dynamic-rules}
 
 Dynamic rules can be added or modified at runtime by the extension:
 
@@ -95,9 +95,9 @@ Dynamic rules can be added or modified at runtime by the extension:
 }
 ```
 
-> **Note:** Dynamic rules don't require any manifest configuration—they're managed entirely through the API.
+> Note: Dynamic rules don't require any manifest configuration, they're managed entirely through the API.
 
-## Rule Structure {#rule-structure}
+Rule Structure {#rule-structure}
 
 Rules are defined in JSON format with the following structure:
 
@@ -115,7 +115,7 @@ Rules are defined in JSON format with the following structure:
 }
 ```
 
-### Key Properties {#key-properties}
+Key Properties {#key-properties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -124,7 +124,7 @@ Rules are defined in JSON format with the following structure:
 | `action` | object | What to do when matched |
 | `condition` | object | Matching conditions |
 
-### Condition Properties {#condition-properties}
+Condition Properties {#condition-properties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -138,20 +138,20 @@ Rules are defined in JSON format with the following structure:
 | `tabIds` | array | Specific tab IDs to match |
 | `excludeTabIds` | array | Tab IDs to exclude |
 
-## Action Types {#action-types}
+Action Types {#action-types}
 
 The `action.type` property determines what happens when a rule matches:
 
 | Action Type | Description | Available in MV3 |
 |-------------|-------------|------------------|
-| `block` | Block the request entirely | ✅ |
-| `allow` | Allow the request (取消阻止) | ✅ |
-| `redirect` | Redirect to a different URL | ✅ |
-| `upgradeScheme` | Upgrade HTTP to HTTPS | ✅ |
-| `modifyHeaders` | Add, remove, or modify request/response headers | ✅ |
-| `allowAllRequests` | Allow all requests in a frame hierarchy | ✅ |
+| `block` | Block the request entirely |  |
+| `allow` | Allow the request () |  |
+| `redirect` | Redirect to a different URL |  |
+| `upgradeScheme` | Upgrade HTTP to HTTPS |  |
+| `modifyHeaders` | Add, remove, or modify request/response headers |  |
+| `allowAllRequests` | Allow all requests in a frame hierarchy |  |
 
-### Example: Block Action {#example-block-action}
+Block Action {#example-block-action}
 
 ```json
 {
@@ -165,7 +165,7 @@ The `action.type` property determines what happens when a rule matches:
 }
 ```
 
-### Example: Redirect Action {#example-redirect-action}
+Redirect Action {#example-redirect-action}
 
 ```json
 {
@@ -184,7 +184,7 @@ The `action.type` property determines what happens when a rule matches:
 }
 ```
 
-## Static Rules File Example {#static-rules-file-example}
+Static Rules File Example {#static-rules-file-example}
 
 Create a rules file at `rules/block-trackers.json`:
 
@@ -241,11 +241,11 @@ Create a rules file at `rules/block-trackers.json`:
 ]
 ```
 
-## Dynamic Rules (Runtime) {#dynamic-rules-runtime}
+Dynamic Rules (Runtime) {#dynamic-rules-runtime}
 
 Static rules are compiled with your extension, but dynamic rules can be added, updated, or removed at runtime. This is useful for user-configurable blocking lists.
 
-### Adding Dynamic Rules {#adding-dynamic-rules}
+Adding Dynamic Rules {#adding-dynamic-rules}
 
 ```typescript
 import { chromeStorage } from "@theluckystrike/webext-storage";
@@ -284,7 +284,7 @@ async function updateBlockingRules(domains: string[]) {
 updateBlockingRules(blockedDomains);
 ```
 
-### Retrieving Dynamic Rules {#retrieving-dynamic-rules}
+Retrieving Dynamic Rules {#retrieving-dynamic-rules}
 
 ```typescript
 async function getCurrentBlockingRules() {
@@ -303,7 +303,7 @@ getCurrentBlockingRules().then(rules => {
 });
 ```
 
-### Getting Matched Rules (with Feedback Permission) {#getting-matched-rules-with-feedback-permission}
+Getting Matched Rules (with Feedback Permission) {#getting-matched-rules-with-feedback-permission}
 
 If you have the `declarativeNetRequestFeedback` permission, you can track which rules matched:
 
@@ -320,7 +320,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
 });
 ```
 
-## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 The `@theluckystrike/webext-permissions` library provides type-safe permission checking for Declarative Net Request:
 
@@ -345,14 +345,14 @@ if (permissions.declarativeNetRequest) {
 }
 ```
 
-### Permission Descriptions {#permission-descriptions}
+Permission Descriptions {#permission-descriptions}
 
 | Permission | Description |
 |------------|-------------|
 | `declarativeNetRequest` | Block or modify network requests |
 | `declarativeNetRequestFeedback` | Receive feedback on matched rules |
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 For communication between popup/options pages and the background script when managing blocking rules:
 
@@ -407,7 +407,7 @@ async function updateBlockingList(domains: string[]) {
 }
 ```
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Persist user-configured blocking rules using `@theluckystrike/webext-storage`:
 
@@ -475,18 +475,18 @@ async function saveAndApplyRules(domains: string[]) {
 }
 ```
 
-## Rule Limits {#rule-limits}
+Rule Limits {#rule-limits}
 
 Each extension has limits on the number of rules it can declare:
 
 | Rule Type | Limit | Description |
 |-----------|-------|-------------|
-| **Static Rules** | 30,000 (guaranteed minimum) | Defined in JSON files, bundled with extension (up to 100 rulesets, 50 enabled at once) |
-| **Dynamic Rules** | 30,000 | Added/removed at runtime |
-| **Session Rules** | 5,000 | Temporary rules for current session |
-| **Regex Rules** | 1,000 | Rules using `regexFilter` |
+| Static Rules | 30,000 (guaranteed minimum) | Defined in JSON files, bundled with extension (up to 100 rulesets, 50 enabled at once) |
+| Dynamic Rules | 30,000 | Added/removed at runtime |
+| Session Rules | 5,000 | Temporary rules for current session |
+| Regex Rules | 1,000 | Rules using `regexFilter` |
 
-### Checking Available Rules {#checking-available-rules}
+Checking Available Rules {#checking-available-rules}
 
 ```typescript
 async function checkRuleLimits() {
@@ -502,7 +502,7 @@ async function getAllRuleCounts() {
 }
 ```
 
-## Header Modification Example {#header-modification-example}
+Header Modification Example {#header-modification-example}
 
 The `modifyHeaders` action type allows you to add, remove, or modify HTTP headers:
 
@@ -528,7 +528,7 @@ The `modifyHeaders` action type allows you to add, remove, or modify HTTP header
 }
 ```
 
-### Header Operations {#header-operations}
+Header Operations {#header-operations}
 
 | Operation | Description |
 |-----------|-------------|
@@ -536,7 +536,7 @@ The `modifyHeaders` action type allows you to add, remove, or modify HTTP header
 | `append` | Append to existing header value |
 | `remove` | Remove header entirely |
 
-### Programmatic Header Modification {#programmatic-header-modification}
+Programmatic Header Modification {#programmatic-header-modification}
 
 ```typescript
 async function addCustomHeaders() {
@@ -563,13 +563,13 @@ async function addCustomHeaders() {
 }
 ```
 
-## Migration from webRequestBlocking {#migration-from-webrequestblocking}
+Migration from webRequestBlocking {#migration-from-webrequestblocking}
 
 Migrating from MV2's `webRequestBlocking` to MV3's Declarative Net Request requires restructuring how your extension handles network requests.
 
-### Step 1: Remove MV2 Permissions {#step-1-remove-mv2-permissions}
+Step 1: Remove MV2 Permissions {#step-1-remove-mv2-permissions}
 
-**Before (manifest.json - MV2):**
+Before (manifest.json - MV2):
 ```json
 {
   "permissions": [
@@ -582,7 +582,7 @@ Migrating from MV2's `webRequestBlocking` to MV3's Declarative Net Request requi
 }
 ```
 
-**After (manifest.json - MV3):**
+After (manifest.json - MV3):
 ```json
 {
   "permissions": [
@@ -594,9 +594,9 @@ Migrating from MV2's `webRequestBlocking` to MV3's Declarative Net Request requi
 }
 ```
 
-### Step 2: Convert Blocking Rules {#step-2-convert-blocking-rules}
+Step 2: Convert Blocking Rules {#step-2-convert-blocking-rules}
 
-**Before (MV2 background.js):**
+Before (MV2 background.js):
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
@@ -610,7 +610,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-**After (MV3):**
+After (MV3):
 
 Create `rules/block-trackers.json`:
 ```json
@@ -642,9 +642,9 @@ Update `manifest.json`:
 }
 ```
 
-### Step 3: Convert Header Modifications {#step-3-convert-header-modifications}
+Step 3: Convert Header Modifications {#step-3-convert-header-modifications}
 
-**Before (MV2):**
+Before (MV2):
 ```javascript
 chrome.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
@@ -656,7 +656,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-**After (MV3):**
+After (MV3):
 ```json
 {
   "id": 1,
@@ -674,9 +674,9 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 }
 ```
 
-### Step 4: Convert Redirects {#step-4-convert-redirects}
+Step 4: Convert Redirects {#step-4-convert-redirects}
 
-**Before (MV2):**
+Before (MV2):
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
@@ -689,7 +689,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-**After (MV3):**
+After (MV3):
 ```json
 {
   "id": 1,
@@ -707,7 +707,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }
 ```
 
-### Step 5: Use Dynamic Rules for User Configuration {#step-5-use-dynamic-rules-for-user-configuration}
+Step 5: Use Dynamic Rules for User Configuration {#step-5-use-dynamic-rules-for-user-configuration}
 
 If your MV2 extension allowed users to add custom blocking rules, migrate to dynamic rules:
 
@@ -733,17 +733,17 @@ async function addUserRule(url: string) {
 }
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 Declarative Net Request replaces `webRequestBlocking` entirely in Manifest V3:
 
-- ✅ **Block requests** — Full support
-- ✅ **Redirect requests** — Full support  
-- ✅ **Modify headers** — Full support
-- ✅ **Upgrade to HTTPS** — Built-in action type
-- ✅ **Dynamic rules** — Runtime rule management
-- ✅ **Better performance** — No thread blocking
-- ✅ **Better privacy** — No raw request data exposure
+-  Block requests. Full support
+-  Redirect requests. Full support  
+-  Modify headers. Full support
+-  Upgrade to HTTPS. Built-in action type
+-  Dynamic rules. Runtime rule management
+-  Better performance. No thread blocking
+-  Better privacy. No raw request data exposure
 
 Use static rules for pre-defined blocking lists bundled with your extension, and dynamic rules for user-configurable features.
 -e 

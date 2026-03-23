@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension MV3 Migration Cheatsheet — Developer Guide"
+title: "Chrome Extension MV3 Migration Cheatsheet. Developer Guide"
 description: "Migrate your Chrome extension to Manifest V3 with this comprehensive guide covering API changes and required updates."
 canonical_url: "https://bestchromeextensions.com/guides/mv3-migration-cheatsheet/"
 ---
@@ -12,7 +12,7 @@ A practical, side-by-side reference for migrating Chrome extensions from Manifes
 
 ---
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 1. [Manifest Version Key](#1-manifest-version-key)
 2. [Background Pages to Service Workers](#2-background-pages-to-service-workers)
@@ -33,11 +33,11 @@ A practical, side-by-side reference for migrating Chrome extensions from Manifes
 
 ---
 
-## 1. Manifest Version Key {#1-manifest-version-key}
+1. Manifest Version Key {#1-manifest-version-key}
 
-### manifest.json {#manifestjson}
+manifest.json {#manifestjson}
 
-**MV2:**
+MV2:
 ```json
 {
   "manifest_version": 2,
@@ -46,7 +46,7 @@ A practical, side-by-side reference for migrating Chrome extensions from Manifes
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "manifest_version": 3,
@@ -57,13 +57,13 @@ A practical, side-by-side reference for migrating Chrome extensions from Manifes
 
 ---
 
-## 2. Background Pages to Service Workers {#2-background-pages-to-service-workers}
+2. Background Pages to Service Workers {#2-background-pages-to-service-workers}
 
 Service workers have no DOM access. There is no `window`, `document`, or `XMLHttpRequest`. They are short-lived and terminate after ~30 seconds of inactivity.
 
-### Manifest {#manifest}
+Manifest {#manifest}
 
-**MV2:**
+MV2:
 ```json
 {
   "background": {
@@ -73,7 +73,7 @@ Service workers have no DOM access. There is no `window`, `document`, or `XMLHtt
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "background": {
@@ -85,11 +85,11 @@ Service workers have no DOM access. There is no `window`, `document`, or `XMLHtt
 
 > Only a single file is allowed in `service_worker`. Use `"type": "module"` and `import` statements to pull in other files.
 
-### No DOM Access {#no-dom-access}
+No DOM Access {#no-dom-access}
 
-**MV2:**
+MV2:
 ```js
-// background.js — MV2 had full DOM access
+// background.js. MV2 had full DOM access
 const parser = new DOMParser();
 const doc = parser.parseFromString(html, "text/html");
 const img = document.createElement("canvas");
@@ -99,9 +99,9 @@ xhr.open("GET", url);
 xhr.send();
 ```
 
-**MV3:**
+MV3:
 ```ts
-// background.ts — no DOM, no XMLHttpRequest
+// background.ts. no DOM, no XMLHttpRequest
 // Use fetch() for network requests
 const response = await fetch(url);
 const data = await response.json();
@@ -115,9 +115,9 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-### Event Listeners Must Be Top-Level {#event-listeners-must-be-top-level}
+Event Listeners Must Be Top-Level {#event-listeners-must-be-top-level}
 
-**MV2:**
+MV2:
 ```js
 // Could register listeners anywhere, anytime
 setTimeout(() => {
@@ -125,7 +125,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-**MV3:**
+MV3:
 ```ts
 // ALL listeners must be registered synchronously at the top level.
 // If registered inside async callbacks, the SW may terminate before
@@ -139,17 +139,17 @@ function handleMessage(msg: unknown, sender: chrome.runtime.MessageSender, sendR
 }
 ```
 
-> Deep dive: [Service Worker Lifecycle](service-worker-lifecycle.md) | [Service Workers (MV3)](../mv3/service-workers.md)
+> Detailed look: [Service Worker Lifecycle](service-worker-lifecycle.md) | [Service Workers (MV3)](../mv3/service-workers.md)
 
 ---
 
-## 3. Persistent Background to Event-Driven Alarms {#3-persistent-background-to-event-driven-alarms}
+3. Persistent Background to Event-Driven Alarms {#3-persistent-background-to-event-driven-alarms}
 
 MV2 background pages could stay alive forever. MV3 service workers terminate when idle. Use `chrome.alarms` for periodic work.
 
-**MV2:**
+MV2:
 ```js
-// background.js — persistent, runs forever
+// background.js. persistent, runs forever
 let count = 0;
 
 setInterval(() => {
@@ -159,16 +159,16 @@ setInterval(() => {
 }, 60000);
 ```
 
-**MV3:**
+MV3:
 ```ts
-// background.ts — event-driven, non-persistent
+// background.ts. event-driven, non-persistent
 chrome.runtime.onInstalled.addListener(() => {
   chrome.alarms.create("heartbeat", { periodInMinutes: 1 });
 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === "heartbeat") {
-    // Retrieve persisted state — no in-memory globals survive termination
+    // Retrieve persisted state. no in-memory globals survive termination
     const { count } = await chrome.storage.session.get({ count: 0 });
     await chrome.storage.session.set({ count: count + 1 });
     await checkForUpdates();
@@ -180,13 +180,13 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-## 4. browser_action / page_action to action {#4-browser-action-page-action-to-action}
+4. browser_action / page_action to action {#4-browser-action-page-action-to-action}
 
 MV3 merges `browser_action` and `page_action` into a single `action` key.
 
-### Manifest {#manifest}
+Manifest {#manifest}
 
-**MV2:**
+MV2:
 ```json
 {
   "browser_action": {
@@ -208,7 +208,7 @@ or
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "action": {
@@ -221,11 +221,11 @@ or
 
 ---
 
-## 5. chrome.browserAction to chrome.action {#5-chromebrowseraction-to-chromeaction}
+5. chrome.browserAction to chrome.action {#5-chromebrowseraction-to-chromeaction}
 
 Every `chrome.browserAction.*` and `chrome.pageAction.*` call becomes `chrome.action.*`.
 
-**MV2:**
+MV2:
 ```js
 chrome.browserAction.setBadgeText({ text: "5" });
 chrome.browserAction.setBadgeBackgroundColor({ color: "#FF0000" });
@@ -237,7 +237,7 @@ chrome.browserAction.onClicked.addListener((tab) => {
 chrome.pageAction.show(tabId);
 ```
 
-**MV3:**
+MV3:
 ```ts
 chrome.action.setBadgeText({ text: "5" });
 chrome.action.setBadgeBackgroundColor({ color: "#FF0000" });
@@ -253,11 +253,11 @@ chrome.action.disable(tabId);
 
 ---
 
-## 6. Callback-Based APIs to Promise-Based APIs {#6-callback-based-apis-to-promise-based-apis}
+6. Callback-Based APIs to Promise-Based APIs {#6-callback-based-apis-to-promise-based-apis}
 
 All `chrome.*` APIs return Promises in MV3. Callbacks still work but Promises with `async`/`await` are preferred.
 
-**MV2:**
+MV2:
 ```js
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
@@ -271,7 +271,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 ```
 
-**MV3:**
+MV3:
 ```ts
 try {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -286,17 +286,17 @@ try {
 
 ---
 
-## 7. chrome.extension.getURL to chrome.runtime.getURL {#7-chromeextensiongeturl-to-chromeruntimegeturl}
+7. chrome.extension.getURL to chrome.runtime.getURL {#7-chromeextensiongeturl-to-chromeruntimegeturl}
 
 `chrome.extension.getURL` is removed in MV3.
 
-**MV2:**
+MV2:
 ```js
 const imageUrl = chrome.extension.getURL("images/icon.png");
 const pageUrl = chrome.extension.getURL("options.html");
 ```
 
-**MV3:**
+MV3:
 ```ts
 const imageUrl = chrome.runtime.getURL("images/icon.png");
 const pageUrl = chrome.runtime.getURL("options.html");
@@ -304,11 +304,11 @@ const pageUrl = chrome.runtime.getURL("options.html");
 
 ---
 
-## 8. executeScript Changes {#8-executescript-changes}
+8. executeScript Changes {#8-executescript-changes}
 
 `chrome.tabs.executeScript` is replaced by `chrome.scripting.executeScript` with a different call signature. Add `"scripting"` to your `permissions`.
 
-**MV2:**
+MV2:
 ```js
 chrome.tabs.executeScript(tabId, {
   code: 'document.title',
@@ -326,7 +326,7 @@ chrome.tabs.insertCSS(tabId, {
 });
 ```
 
-**MV3:**
+MV3:
 ```ts
 // manifest.json: add "scripting" to permissions
 // Inline code uses a function, not a string
@@ -351,26 +351,26 @@ await chrome.scripting.insertCSS({
 
 > Key differences:
 > - `target` object instead of `tabId` as first argument
-> - `func` (a real function) instead of `code` (a string) — no `eval`
+> - `func` (a real function) instead of `code` (a string). no `eval`
 > - `files` array instead of `file` string
 > - Results are an array of `InjectionResult` objects with a `result` property
 
 ---
 
-## 9. Content Security Policy Changes {#9-content-security-policy-changes}
+9. Content Security Policy Changes {#9-content-security-policy-changes}
 
 MV3 uses an object format and disallows `unsafe-eval` and remote code.
 
-### Manifest {#manifest}
+Manifest {#manifest}
 
-**MV2:**
+MV2:
 ```json
 {
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.example.com; object-src 'self'"
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "content_security_policy": {
@@ -379,9 +379,9 @@ MV3 uses an object format and disallows `unsafe-eval` and remote code.
 }
 ```
 
-### Code Impact {#code-impact}
+Code Impact {#code-impact}
 
-**MV2:**
+MV2:
 ```js
 // These all worked in MV2
 eval("console.log('hello')");
@@ -391,7 +391,7 @@ setTimeout("alert('hi')", 100);
 // <script src="https://cdn.example.com/lib.js"></script>
 ```
 
-**MV3:**
+MV3:
 ```ts
 // None of the above are allowed. Instead:
 // - Bundle all dependencies locally
@@ -406,11 +406,11 @@ setTimeout(() => {
 
 ---
 
-## 10. webRequest Blocking to declarativeNetRequest {#10-webrequest-blocking-to-declarativenetrequest}
+10. webRequest Blocking to declarativeNetRequest {#10-webrequest-blocking-to-declarativenetrequest}
 
 Blocking web requests (modifying/canceling) now requires `declarativeNetRequest` with static or dynamic JSON rules. Observational (non-blocking) `webRequest` listeners are still available.
 
-**MV2:**
+MV2:
 ```js
 // manifest.json: "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
 chrome.webRequest.onBeforeRequest.addListener(
@@ -424,7 +424,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-**MV3:**
+MV3:
 ```ts
 // manifest.json:
 // "permissions": ["declarativeNetRequest"],
@@ -467,13 +467,13 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 
 ---
 
-## 11. localStorage in Background to chrome.storage.session {#11-localstorage-in-background-to-chromestoragesession}
+11. localStorage in Background to chrome.storage.session {#11-localstorage-in-background-to-chromestoragesession}
 
 `localStorage` and `sessionStorage` are not available in service workers. Use `chrome.storage.session` for ephemeral data and `chrome.storage.local` for persistent data.
 
-**MV2:**
+MV2:
 ```js
-// background.js — had access to localStorage
+// background.js. had access to localStorage
 localStorage.setItem("token", "abc123");
 const token = localStorage.getItem("token");
 
@@ -481,26 +481,26 @@ const token = localStorage.getItem("token");
 let cache = {};
 ```
 
-**MV3:**
+MV3:
 ```ts
-// chrome.storage.session — in-memory, persists across SW restarts but cleared on browser restart, extension reload/update/disable
+// chrome.storage.session. in-memory, persists across SW restarts but cleared on browser restart, extension reload/update/disable
 await chrome.storage.session.set({ token: "abc123" });
 const { token } = await chrome.storage.session.get("token");
 
-// chrome.storage.local — persists across restarts
+// chrome.storage.local. persists across restarts
 await chrome.storage.local.set({ preferences: { theme: "dark" } });
 const { preferences } = await chrome.storage.local.get("preferences");
 ```
 
-> Deep dive: [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) | [Storage Changes (MV3)](../mv3/storage-changes.md)
+> Detailed look: [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) | [Storage Changes (MV3)](../mv3/storage-changes.md)
 
 ---
 
-## 12. setTimeout / setInterval to chrome.alarms {#12-settimeout-setinterval-to-chromealarms}
+12. setTimeout / setInterval to chrome.alarms {#12-settimeout-setinterval-to-chromealarms}
 
 Timers are unreliable in service workers because the SW can terminate at any time. Use `chrome.alarms` for anything longer than a few seconds.
 
-**MV2:**
+MV2:
 ```js
 // These survived indefinitely in a persistent background page
 setTimeout(() => {
@@ -512,7 +512,7 @@ setInterval(() => {
 }, 60000); // every minute
 ```
 
-**MV3:**
+MV3:
 ```ts
 // One-time delayed work
 chrome.alarms.create("delayedWork", { delayInMinutes: 5 });
@@ -539,11 +539,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 ---
 
-## 13. Host Permissions {#13-host-permissions}
+13. Host Permissions {#13-host-permissions}
 
 URL-based permissions move out of `permissions` and into `host_permissions`.
 
-**MV2:**
+MV2:
 ```json
 {
   "permissions": [
@@ -555,7 +555,7 @@ URL-based permissions move out of `permissions` and into `host_permissions`.
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "permissions": [
@@ -572,11 +572,11 @@ URL-based permissions move out of `permissions` and into `host_permissions`.
 
 ---
 
-## 14. web_accessible_resources {#14-web-accessible-resources}
+14. web_accessible_resources {#14-web-accessible-resources}
 
 The flat array is replaced by an array of objects that specify which origins can access each resource.
 
-**MV2:**
+MV2:
 ```json
 {
   "web_accessible_resources": [
@@ -587,7 +587,7 @@ The flat array is replaced by an array of objects that specify which origins can
 }
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "web_accessible_resources": [
@@ -605,11 +605,11 @@ The flat array is replaced by an array of objects that specify which origins can
 
 ---
 
-## 15. Typed Storage with @theluckystrike/webext-storage {#15-typed-storage-with-theluckystrikewebext-storage}
+15. Typed Storage with @theluckystrike/webext-storage {#15-typed-storage-with-theluckystrikewebext-storage}
 
 Instead of migrating raw `localStorage` calls to raw `chrome.storage` calls, use `@theluckystrike/webext-storage` for a typed, schema-driven approach.
 
-**MV2:**
+MV2:
 ```js
 // Untyped, error-prone, scattered localStorage calls
 localStorage.setItem("settings", JSON.stringify({ theme: "dark", fontSize: 14 }));
@@ -617,7 +617,7 @@ const raw = localStorage.getItem("settings");
 const settings = raw ? JSON.parse(raw) : { theme: "light", fontSize: 12 };
 ```
 
-**MV3:**
+MV3:
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
 
@@ -633,11 +633,11 @@ const schema = defineSchema({
 
 const storage = createStorage(schema);
 
-// Typed get — returns the correct type with defaults applied
+// Typed get. returns the correct type with defaults applied
 const settings = await storage.get("settings");
 // settings: { theme: "light" | "dark"; fontSize: number }
 
-// Typed set — compiler catches invalid keys/values
+// Typed set. compiler catches invalid keys/values
 await storage.set("settings", { theme: "dark", fontSize: 14 });
 
 // Set multiple keys at once
@@ -659,17 +659,17 @@ await storage.remove("token");
 await storage.clear();
 ```
 
-> Full API reference: [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+> Full API reference: [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
 
 ---
 
-## 16. Typed Messaging with @theluckystrike/webext-messaging {#16-typed-messaging-with-theluckystrikewebext-messaging}
+16. Typed Messaging with @theluckystrike/webext-messaging {#16-typed-messaging-with-theluckystrikewebext-messaging}
 
 Instead of raw `chrome.runtime.sendMessage` with untyped payloads, use `@theluckystrike/webext-messaging` for type-safe, structured messaging.
 
-**MV2:**
+MV2:
 ```js
-// background.js — untyped listener
+// background.js. untyped listener
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "getCount") {
     sendResponse({ count: 42 });
@@ -680,13 +680,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   return true; // keep channel open for async
 });
 
-// popup.js — untyped sender, easy to misspell msg.type
+// popup.js. untyped sender, easy to misspell msg.type
 chrome.runtime.sendMessage({ type: "getCount" }, (response) => {
   console.log(response.count);
 });
 ```
 
-**MV3:**
+MV3:
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
 
@@ -698,17 +698,17 @@ type Messages = {
 
 const messenger = createMessenger<Messages>();
 
-// background.ts — typed handler
+// background.ts. typed handler
 messenger.onMessage("getCount", async () => {
   return { count: 42 };
 });
 
 messenger.onMessage("increment", async ({ by }) => {
-  // by: number — fully typed
+  // by: number. fully typed
   return { ok: true };
 });
 
-// popup.ts — typed sender, autocomplete for message names and payloads
+// popup.ts. typed sender, autocomplete for message names and payloads
 const { count } = await messenger.send("getCount");
 
 // Send to a specific tab's content script
@@ -723,7 +723,7 @@ await messenger.sendTab(tabId, "increment", { by: 1 });
 
 ---
 
-## Quick Reference Table {#quick-reference-table}
+Quick Reference Table {#quick-reference-table}
 
 | MV2 | MV3 |
 |-----|-----|
@@ -746,21 +746,21 @@ await messenger.sendTab(tabId, "increment", { by: 1 });
 
 ---
 
-## Further Reading {#further-reading}
+Further Reading {#further-reading}
 
-- [Migration Checklist](../mv3/migration-checklist.md) — step-by-step task list
-- [Service Workers (MV3)](../mv3/service-workers.md) — technical details
-- [Service Worker Lifecycle](service-worker-lifecycle.md) — lifecycle deep dive
-- [Action API](../mv3/action-api.md) — full action API reference
-- [Promise-Based APIs](../mv3/promise-based-apis.md) — async patterns
-- [Content Security Policy](../mv3/content-security-policy.md) — CSP rules
-- [Declarative Net Request](../mv3/declarative-net-request.md) — network rules
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) — storage patterns
-- [Alarms API](../api-reference/alarms-api.md) — scheduling reference
+- [Migration Checklist](../mv3/migration-checklist.md). step-by-step task list
+- [Service Workers (MV3)](../mv3/service-workers.md). technical details
+- [Service Worker Lifecycle](service-worker-lifecycle.md). lifecycle detailed look
+- [Action API](../mv3/action-api.md). full action API reference
+- [Promise-Based APIs](../mv3/promise-based-apis.md). async patterns
+- [Content Security Policy](../mv3/content-security-policy.md). CSP rules
+- [Declarative Net Request](../mv3/declarative-net-request.md). network rules
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md). storage patterns
+- [Alarms API](../api-reference/alarms-api.md). scheduling reference
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [MV2 to MV3 Migration](../guides/mv2-to-mv3-migration.md)
 - [MV3 Migration Guide](../mv3/manifest-v3-migration-guide.md)

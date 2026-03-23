@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Security Best Practices — Developer Guide"
+title: "Chrome Extension Security Best Practices. Developer Guide"
 description: "Learn essential security practices for Chrome extensions including CSP configuration, XSS prevention, secure messaging, and credential storage."
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-security/"
 ---
 # Chrome Extension Security Best Practices
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Understand the Chrome extension security threat landscape
 - Implement Content Security Policy (CSP) configuration
 - Prevent cross-site scripting (XSS) vulnerabilities
@@ -17,7 +17,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-secu
 - Audit third-party dependencies
 - Prepare for Chrome Web Store (CWS) review
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: minimal set required
 - host_permissions: restricted to necessary domains
 - content_security_policy: strict CSP in manifest
@@ -25,11 +25,11 @@ canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-secu
 
 ---
 
-## Step 1: Content Security Policy (CSP) Configuration {#step-1-content-security-policy-csp}
+Step 1: Content Security Policy (CSP) Configuration {#step-1-content-security-policy-csp}
 
 CSP is your first line of defense against XSS and code injection attacks. Chrome Extensions Manifest V3 enforces a strict default CSP.
 
-### Default CSP in MV3
+Default CSP in MV3
 
 ```json
 {
@@ -39,7 +39,7 @@ CSP is your first line of defense against XSS and code injection attacks. Chrome
 }
 ```
 
-### Tightening CSP for Your Extension
+Tightening CSP for Your Extension
 
 ```json
 {
@@ -49,23 +49,23 @@ CSP is your first line of defense against XSS and code injection attacks. Chrome
 }
 ```
 
-### Best Practices for CSP
+Best Practices for CSP
 
-- **Never use `'unsafe-eval'`** — Blocks `eval()`, `new Function()`, and similar dynamic code execution
-- **Never use `'unsafe-inline'`** in scripts — Prevents inline script execution
-- **Avoid `'self'` for connect-src** — Explicitly list allowed API endpoints
-- **Use `'self'` sparingly** — Only include trusted local resources
-- **Separate policies** — Use different CSP for different contexts if needed
+- Never use `'unsafe-eval'`. Blocks `eval()`, `new Function()`, and similar dynamic code execution
+- Never use `'unsafe-inline'` in scripts. Prevents inline script execution
+- Avoid `'self'` for connect-src. Explicitly list allowed API endpoints
+- Use `'self'` sparingly. Only include trusted local resources
+- Separate policies. Use different CSP for different contexts if needed
 
 ```javascript
-// ❌ NEVER DO THIS - Dangerous CSP
+//  NEVER DO THIS - Dangerous CSP
 {
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'unsafe-eval' 'unsafe-inline'; connect-src *;"
   }
 }
 
-// ✅ SECURE CSP - Your goal
+//  SECURE CSP - Your goal
 {
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://api.trusted.com;"
@@ -75,26 +75,26 @@ CSP is your first line of defense against XSS and code injection attacks. Chrome
 
 ---
 
-## Step 2: XSS Prevention {#step-2-xss-prevention}
+Step 2: XSS Prevention {#step-2-xss-prevention}
 
 Cross-site scripting (XSS) is the most common vulnerability in extensions. Attackers can inject malicious scripts through user input, web page content, or extension messages.
 
-### Safe DOM Manipulation
+Safe DOM Manipulation
 
 Always use safe DOM methods and avoid `innerHTML` with untrusted content:
 
 ```javascript
-// ❌ DANGEROUS - Vulnerable to XSS
+//  DANGEROUS - Vulnerable to XSS
 function displayUserName(name) {
   document.getElementById('username').innerHTML = name;
 }
 
-// ✅ SAFE - Using textContent
+//  SAFE - Using textContent
 function displayUserName(name) {
   document.getElementById('username').textContent = name;
 }
 
-// ✅ SAFE - Using DOM APIs with escaping
+//  SAFE - Using DOM APIs with escaping
 function displayUserName(name) {
   const element = document.getElementById('username');
   element.textContent = '';
@@ -102,14 +102,14 @@ function displayUserName(name) {
 }
 ```
 
-### Sanitizing HTML from Untrusted Sources
+Sanitizing HTML from Untrusted Sources
 
 When you must render HTML, use a sanitization library:
 
 ```javascript
 import DOMPurify from 'dompurify';
 
-// ✅ SAFE - Sanitize before rendering
+//  SAFE - Sanitize before rendering
 function displayFormattedContent(htmlContent) {
   const clean = DOMPurify.sanitize(htmlContent, {
     ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p', 'br'],
@@ -118,31 +118,31 @@ function displayFormattedContent(htmlContent) {
   document.getElementById('content').innerHTML = clean;
 }
 
-// ❌ DANGEROUS - Never trust raw HTML from web pages
+//  DANGEROUS - Never trust raw HTML from web pages
 function displayFromPage() {
   const pageContent = document.querySelector('.user-input').innerHTML;
   document.getElementById('output').innerHTML = pageContent;
 }
 ```
 
-### Content Script XSS Prevention
+Content Script XSS Prevention
 
 Content scripts run in the context of web pages, making them especially vulnerable:
 
 ```javascript
 // Content script - reading from web page
-// ❌ DANGEROUS - Page can manipulate this
+//  DANGEROUS - Page can manipulate this
 function getPageTitle() {
   return document.title; // Page can set title to malicious content
 }
 
-// ✅ SAFE - Always sanitize data from pages
+//  SAFE - Always sanitize data from pages
 function getPageTitle() {
   const title = document.title;
   return DOMPurify.sanitize(title);
 }
 
-// ✅ SAFEST - Restrict to specific data types
+//  SAFEST - Restrict to specific data types
 function getPageTitle() {
   const title = document.title;
   return typeof title === 'string' ? title.slice(0, 200) : '';
@@ -151,30 +151,30 @@ function getPageTitle() {
 
 ---
 
-## Step 3: Secure Messaging Between Contexts {#step-3-secure-messaging}
+Step 3: Secure Messaging Between Contexts {#step-3-secure-messaging}
 
 Chrome extensions have multiple contexts: background scripts, content scripts, popup pages, and options pages. Secure communication is critical.
 
-### Validating Message Sources
+Validating Message Sources
 
 Always validate the sender of messages:
 
 ```javascript
 // Background script receiving messages
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // ✅ Validate sender has expected properties
+  //  Validate sender has expected properties
   if (!sender.id || sender.id !== chrome.runtime.id) {
     console.error('Message from unknown extension');
     return false;
   }
 
-  // ✅ Validate message structure
+  //  Validate message structure
   if (!message || typeof message.action !== 'string') {
     console.error('Invalid message format');
     return false;
   }
 
-  // ✅ Check sender context
+  //  Check sender context
   if (sender.contextType === chrome.runtime.ContextType.CONTENT_SCRIPT) {
     // Validate content script messages extra carefully
     if (!validateContentScriptMessage(message)) {
@@ -193,7 +193,7 @@ function validateContentScriptMessage(message) {
 }
 ```
 
-### Type-Safe Messaging Pattern
+Type-Safe Messaging Pattern
 
 Use TypeScript interfaces for type-safe messaging:
 
@@ -239,12 +239,12 @@ function handleMessage(message: ExtensionMessage): void {
 }
 ```
 
-### Avoiding Message Spoofing
+Avoiding Message Spoofing
 
 Never trust messages from content scripts without validation:
 
 ```javascript
-// ❌ DANGEROUS - Trusting content script blindly
+//  DANGEROUS - Trusting content script blindly
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'deleteAllData') {
     clearAllData(); // Content script could be compromised
@@ -252,7 +252,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// ✅ SAFE - Verify request legitimacy
+//  SAFE - Verify request legitimacy
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'deleteAllData') {
     // Require user confirmation for destructive actions
@@ -274,14 +274,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 4: Safe Storage of Credentials {#step-4-safe-storage-of-credentials}
+Step 4: Safe Storage of Credentials {#step-4-safe-storage-of-credentials}
 
 Never store sensitive credentials in plain text. Use Chrome's identity system and secure storage.
 
-### Using Chrome Identity for OAuth
+Using Chrome Identity for OAuth
 
 ```javascript
-// ✅ SAFE - Use Chrome Identity for authentication
+//  SAFE - Use Chrome Identity for authentication
 function authenticateUser() {
   chrome.identity.launchWebAuthFlow(
     {
@@ -307,10 +307,10 @@ function storeTokenSecurely(token) {
 }
 ```
 
-### Storing Sensitive Data Safely
+Storing Sensitive Data Safely
 
 ```javascript
-// ✅ SAFE - Use chrome.storage.session for sensitive data
+//  SAFE - Use chrome.storage.session for sensitive data
 function saveCredentials(credentials) {
   // Session storage is cleared when browser closes
   chrome.storage.session.set({
@@ -319,12 +319,12 @@ function saveCredentials(credentials) {
   });
 }
 
-// ❌ NEVER - Don't use localStorage for sensitive data
+//  NEVER - Don't use localStorage for sensitive data
 function badPractice() {
   localStorage.setItem('apiKey', 'secret-key'); // Accessible to content scripts!
 }
 
-// ✅ SAFE - Use chrome.storage.local with encryption
+//  SAFE - Use chrome.storage.local with encryption
 import { encrypt, decrypt } from './crypto-utils';
 
 async function saveSecureData(data) {
@@ -341,10 +341,10 @@ async function getSecureData() {
 }
 ```
 
-### Credential Validation Schema
+Credential Validation Schema
 
 ```javascript
-// ✅ SAFE - Validate stored data types
+//  SAFE - Validate stored data types
 const credentialSchema = {
   apiKey: (value) => typeof value === 'string' && value.length > 0,
   expiresAt: (value) => typeof value === 'number' && value > Date.now(),
@@ -363,14 +363,14 @@ function validateCredentials(data) {
 
 ---
 
-## Step 5: Permission Minimization {#step-5-permission-minimization}
+Step 5: Permission Minimization {#step-5-permission-minimization}
 
-Follow the principle of least privilege — only request permissions you actively need.
+Follow the principle of least privilege. only request permissions you actively need.
 
-### Use Optional Permissions
+Use Optional Permissions
 
 ```javascript
-// ✅ RECOMMENDED - Request permissions at runtime
+//  RECOMMENDED - Request permissions at runtime
 async function requestOptionalPermission(permission) {
   const result = await chrome.permissions.request({
     permissions: [permission]
@@ -402,7 +402,7 @@ async function useTabsFeature() {
 }
 ```
 
-### Use activeTab Instead of Host Permissions
+Use activeTab Instead of Host Permissions
 
 ```json
 {
@@ -412,7 +412,7 @@ async function useTabsFeature() {
 ```
 
 ```javascript
-// ✅ BETTER - Use activeTab for page access
+//  BETTER - Use activeTab for page access
 chrome.action.onClicked.addListener(async (tab) => {
   // activeTab gives temporary access to the current tab
   await chrome.scripting.executeScript({
@@ -422,7 +422,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Manifest Permission Strategy
+Manifest Permission Strategy
 
 ```json
 {
@@ -443,14 +443,14 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Step 6: Code Injection Risks {#step-6-code-injection-risks}
+Step 6: Code Injection Risks {#step-6-code-injection-risks}
 
 Avoid patterns that could allow code injection through your extension.
 
-### Preventing Dynamic Code Execution
+Preventing Dynamic Code Execution
 
 ```javascript
-// ❌ DANGEROUS - Never use eval or similar
+//  DANGEROUS - Never use eval or similar
 function badPatterns() {
   eval('console.log("injected")'); // Blocked by CSP
   new Function('return "injected"')(); // Blocked by CSP
@@ -458,7 +458,7 @@ function badPatterns() {
   document.write('<script>evil()</script>'); // XSS risk
 }
 
-// ✅ SAFE - Use direct function calls
+//  SAFE - Use direct function calls
 function safePatterns() {
   console.log('safe log');
   const fn = () => 'safe';
@@ -466,10 +466,10 @@ function safePatterns() {
 }
 ```
 
-### Safe Use of chrome.scripting
+Safe Use of chrome.scripting
 
 ```javascript
-// ✅ SAFE - Inject known code
+//  SAFE - Inject known code
 async function injectContentScript(tabId) {
   await chrome.scripting.executeScript({
     target: { tabId },
@@ -477,16 +477,16 @@ async function injectContentScript(tabId) {
   });
 }
 
-// ❌ DANGEROUS - Never inject code from web page
+//  DANGEROUS - Never inject code from web page
 async function badInjection(tabId, pageCode) {
   await chrome.scripting.executeScript({
     target: { tabId },
-    // ❌ NEVER DO THIS
+    //  NEVER DO THIS
     args: [pageCode] // Page controls this!
   });
 }
 
-// ✅ SAFE - Inject pre-defined functions
+//  SAFE - Inject pre-defined functions
 async function injectWithConfig(tabId, config) {
   // Define injection as a function - no user input in code
   const injection = (cfg) => {
@@ -504,15 +504,15 @@ async function injectWithConfig(tabId, config) {
 }
 ```
 
-### Avoiding DOM Clobbering
+Avoiding DOM Clobbering
 
 ```javascript
 // Content script - be careful with global variables
-// ❌ DANGEROUS - Web page can override
+//  DANGEROUS - Web page can override
 window.extensionData = { apiKey: 'secret' };
 // Page can do: <div id="extensionData">...</div> to clobber
 
-// ✅ SAFE - Use closures or chrome.storage
+//  SAFE - Use closures or chrome.storage
 (function() {
   const apiKey = 'secret'; // Not on window
   function getApiKey() { return apiKey; }
@@ -523,27 +523,27 @@ window.extensionData = { apiKey: 'secret' };
 
 ---
 
-## Step 7: Third-Party Dependency Auditing {#step-7-third-party-dependency-auditing}
+Step 7: Third-Party Dependency Auditing {#step-7-third-party-dependency-auditing}
 
 Vulnerabilities in dependencies can compromise your entire extension.
 
-### Regular Dependency Auditing
+Regular Dependency Auditing
 
 ```bash
-# Audit dependencies for known vulnerabilities
+Audit dependencies for known vulnerabilities
 npm audit
 
-# Audit with fix suggestions
+Audit with fix suggestions
 npm audit fix
 
-# Use Snyk for continuous monitoring
+Use Snyk for continuous monitoring
 npx snyk test
 
-# Check for outdated packages
+Check for outdated packages
 npm outdated
 ```
 
-### Locking Dependency Versions
+Locking Dependency Versions
 
 ```json
 // package.json
@@ -557,12 +557,12 @@ npm outdated
 }
 ```
 
-### Subresource Integrity for CDN Dependencies
+Subresource Integrity for CDN Dependencies
 
 If you must use CDN resources (not recommended for extensions):
 
 ```html
-<!-- ✅ SAFE - With integrity check -->
+<!--  SAFE - With integrity check -->
 <script 
   src="https://cdn.example.com/library.js"
   integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6R9i8G5SiAA1mbqE4F3R4"
@@ -570,7 +570,7 @@ If you must use CDN resources (not recommended for extensions):
 </script>
 ```
 
-### Bundling Dependencies
+Bundling Dependencies
 
 ```javascript
 // webpack.config.js - Bundle all dependencies
@@ -588,21 +588,21 @@ module.exports = {
 
 ---
 
-## Step 8: Chrome Web Store Review Requirements {#step-8-chrome-web-store-review-requirements}
+Step 8: Chrome Web Store Review Requirements {#step-8-chrome-web-store-review-requirements}
 
 Prepare for CWS review by following security best practices.
 
-### Common Rejection Reasons
+Common Rejection Reasons
 
-1. **Remote code execution** — Don't load code from external sources
-2. **Obfuscated code** — Use readable, non-obfuscated code
-3. **Excessive permissions** — Request only necessary permissions
-4. **Sensitive data exposure** — Don't store credentials in insecure locations
+1. Remote code execution. Don't load code from external sources
+2. Obfuscated code. Use readable, non-obfuscated code
+3. Excessive permissions. Request only necessary permissions
+4. Sensitive data exposure. Don't store credentials in insecure locations
 
-### Pre-Submission Checklist
+Pre-Submission Checklist
 
 ```markdown
-## Security Checklist
+Security Checklist
 
 - [ ] No `eval()` or dynamic code execution
 - [ ] No remote code or external scripts
@@ -618,11 +618,11 @@ Prepare for CWS review by following security best practices.
 - [ ] Privacy policy provided (if collecting data)
 ```
 
-### Reviewer Notes Template
+Reviewer Notes Template
 
 ```javascript
 // Include clear comments for reviewers
-/**
+/
  * Secure message handler
  * - Validates sender origin before processing
  * - Uses strict allowlist for actions
@@ -635,26 +635,26 @@ function handleMessage(message, sender) {
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
-- [Security Best Practices](../guides/security-best-practices.md) — Overview of extension security
-- [Security Hardening](../guides/security-hardening.md) — Advanced hardening techniques
-- [Extension Security Audit](../guides/extension-security-audit.md) — How to audit your extension
+- [Security Best Practices](../guides/security-best-practices.md). Overview of extension security
+- [Security Hardening](../guides/security-hardening.md). Advanced hardening techniques
+- [Extension Security Audit](../guides/extension-security-audit.md). How to audit your extension
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 You learned essential Chrome extension security practices:
 
-1. **CSP Configuration** — Set strict Content Security Policy to block XSS and code injection
-2. **XSS Prevention** — Use safe DOM methods, sanitize all untrusted input
-3. **Secure Messaging** — Validate all messages, use type-safe patterns
-4. **Credential Storage** — Use chrome.identity for OAuth, chrome.storage.session for tokens
-5. **Permission Minimization** — Request only necessary permissions, use activeTab
-6. **Code Injection Prevention** — Never use dynamic code execution, avoid DOM clobbering
-7. **Dependency Auditing** — Regularly audit and update dependencies
-8. **CWS Review** — Prepare for Chrome Web Store security review
+1. CSP Configuration. Set strict Content Security Policy to block XSS and code injection
+2. XSS Prevention. Use safe DOM methods, sanitize all untrusted input
+3. Secure Messaging. Validate all messages, use type-safe patterns
+4. Credential Storage. Use chrome.identity for OAuth, chrome.storage.session for tokens
+5. Permission Minimization. Request only necessary permissions, use activeTab
+6. Code Injection Prevention. Never use dynamic code execution, avoid DOM clobbering
+7. Dependency Auditing. Regularly audit and update dependencies
+8. CWS Review. Prepare for Chrome Web Store security review
 
 Test your extension security with the Chrome Extension Security Checklist and conduct regular audits.
 

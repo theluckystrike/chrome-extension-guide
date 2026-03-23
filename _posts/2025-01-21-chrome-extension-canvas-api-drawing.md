@@ -17,7 +17,7 @@ Whether you are building a simple screenshot annotation tool or a full-fledged i
 
 ---
 
-## Understanding Canvas API in the Context of Chrome Extensions {#understanding-canvas-api}
+Understanding Canvas API in the Context of Chrome Extensions {#understanding-canvas-api}
 
 The HTML5 Canvas API provides a bitmap canvas that you can manipulate through JavaScript to draw shapes, images, text, and animations. In Chrome extensions, this powerful API can be used in multiple contexts: within popup windows, options pages, content scripts, or even in dedicated extension pages. Each context offers unique opportunities and constraints that you must understand to build effective drawing extensions.
 
@@ -27,11 +27,11 @@ In Chrome extensions specifically, you might use the Canvas API for several purp
 
 ---
 
-## Setting Up Canvas in Your Chrome Extension {#setting-up-canvas}
+Setting Up Canvas in Your Chrome Extension {#setting-up-canvas}
 
 Before you can begin drawing with the Canvas API, you need to properly set up the canvas element within your extension. The implementation varies slightly depending on where you want the canvas to appear, but the core principles remain consistent across all extension contexts.
 
-### Creating a Canvas Element
+Creating a Canvas Element
 
 The first step involves adding a canvas element to your HTML. In a popup or options page, this might look like a standard HTML element. For content scripts, you might create the canvas dynamically and inject it into the page. Here is a basic example of setting up a canvas element:
 
@@ -41,7 +41,7 @@ The first step involves adding a canvas element to your HTML. In a popup or opti
 
 When working with Chrome extensions, you have to consider the manifest version you are using. Manifest V3, which became mandatory in 2023, has some restrictions on how extensions can execute code. The canvas element itself can be included in any HTML file within your extension, but the JavaScript that manipulates it must comply with the extension's Content Security Policy.
 
-### Obtaining the 2D Context
+Obtaining the 2D Context
 
 Once you have the canvas element, you need to obtain the 2D rendering context to begin drawing. This is accomplished through the getContext method, which returns a CanvasRenderingContext2D object:
 
@@ -52,7 +52,7 @@ const ctx = canvas.getContext('2d');
 
 The context object is your primary interface for all drawing operations. It provides properties like fillStyle, strokeStyle, lineWidth, and font, along with methods like fillRect, strokeRect, beginPath, moveTo, lineTo, arc, and many others. Mastering this context object is fundamental to effective canvas programming.
 
-### Handling High-DPI Displays
+Handling High-DPI Displays
 
 One critical consideration when setting up canvas in Chrome extensions is device pixel ratio. Modern displays, especially on high-resolution screens, have pixel densities that exceed the traditional 96 DPI. To ensure your graphics look sharp, you need to account for this when creating your canvas:
 
@@ -70,11 +70,11 @@ This adjustment ensures that your drawings appear crisp on Retina displays and o
 
 ---
 
-## Core Drawing Operations with Canvas API {#core-drawing-operations}
+Core Drawing Operations with Canvas API {#core-drawing-operations}
 
 With the canvas set up, you can now explore the fundamental drawing operations available through the Canvas API. These operations form the building blocks for any drawing or graphics functionality in your extension.
 
-### Drawing Shapes
+Drawing Shapes
 
 The Canvas API provides straightforward methods for drawing basic shapes. Rectangles are the simplest, with fillRect() for filled rectangles and strokeRect() for outlined rectangles. For more complex shapes, you use the path API, which involves beginning a path, defining its components, and then either filling or stroking the result:
 
@@ -91,7 +91,7 @@ ctx.fill();
 
 Circles and arcs are drawn using the arc() method, which takes the center point, radius, start angle, end angle, and an optional counterclockwise parameter. The angles are measured in radians, with zero pointing to the right and increasing clockwise. This path-based approach gives you complete control over complex shapes.
 
-### Working with Colors and Styles
+Working with Colors and Styles
 
 The Canvas API offers extensive styling options beyond simple colors. You can use solid colors through any valid CSS color format, including hex codes, RGB, RGBA, HSL, and HSLA. Beyond solid colors, the API supports gradients and patterns:
 
@@ -108,7 +108,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 For patterns, you can create a repeating image or another canvas as a pattern, giving you tremendous flexibility in filling shapes with complex visuals. These styling capabilities are essential for creating visually appealing drawing extensions.
 
-### Lines and Stroke Styling
+Lines and Stroke Styling
 
 When drawing lines, you have control over numerous stroke properties. The lineWidth property controls thickness, lineCap determines how line endings appear (butt, round, or square), and lineJoin controls how connected lines appear (miter, round, or bevel). For drawing extensions, these properties significantly impact the visual quality of user-created artwork:
 
@@ -124,11 +124,11 @@ Understanding these stroke properties allows you to implement professional-quali
 
 ---
 
-## Implementing Drawing Tools in Your Extension {#implementing-drawing-tools}
+Implementing Drawing Tools in Your Extension {#implementing-drawing-tools}
 
 Building a functional drawing extension requires implementing various drawing tools that users expect. These typically include freehand drawing, shapes, text, eraser, and color selection. Each tool requires careful implementation to provide a smooth user experience.
 
-### Freehand Drawing
+Freehand Drawing
 
 Freehand drawing is the foundation of any drawing extension. The implementation involves tracking mouse or touch events and drawing lines between successive positions. The key is to respond to mousedown, mousemove, and mouseup events:
 
@@ -159,7 +159,7 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
 
 This basic implementation can be enhanced with pressure sensitivity support, smoothing algorithms, and tool-specific settings. For a professional drawing experience, you might also want to implement interpolation between points to ensure smooth curves even when the mouse moves quickly.
 
-### Shape Tools
+Shape Tools
 
 Beyond freehand drawing, most users expect shape tools that create precise geometric shapes. These tools work differently from freehand drawing: instead of drawing continuously as the mouse moves, they show a preview of the shape as the user drags, then finalize the shape on mouseup:
 
@@ -192,9 +192,9 @@ canvas.addEventListener('mousemove', (e) => {
 
 This pattern allows users to see what they are creating before finalizing, which is essential for precision drawing work. You can apply similar logic to circles, lines, polygons, and other geometric shapes.
 
-### Color Picker and Brush Settings
+Color Picker and Brush Settings
 
-A complete drawing extension needs robust color and brush customization. The Canvas API makes it straightforward to change colors and brush sizes dynamically:
+A complete drawing extension needs solid color and brush customization. The Canvas API makes it straightforward to change colors and brush sizes dynamically:
 
 ```javascript
 function setBrushColor(color) {
@@ -214,11 +214,11 @@ For a more sophisticated implementation, you might add additional brush types su
 
 ---
 
-## Working with Images in Canvas Extensions {#working-with-images}
+Working with Images in Canvas Extensions {#working-with-images}
 
 Many Chrome extension canvas implementations involve working with existing images. Whether you are building an image editor, screenshot annotation tool, or visual data display, understanding how to manipulate images within canvas is crucial.
 
-### Drawing Images to Canvas
+Drawing Images to Canvas
 
 The drawImage() method is your primary tool for rendering images onto canvas. This versatile method can draw an image at specific coordinates, scale it, or crop a portion:
 
@@ -239,7 +239,7 @@ img.src = 'path/to/image.png';
 
 When loading images in Chrome extensions, you can use URLs, data URLs, or extension-relative paths. For content scripts, you might extract images from the page itself using the page's DOM.
 
-### Exporting Canvas Content
+Exporting Canvas Content
 
 A critical feature for any drawing extension is the ability to save or export the user's work. The Canvas API provides toDataURL() and toBlob() methods for this purpose:
 
@@ -256,7 +256,7 @@ function saveCanvas() {
 
 For more control over export, you can use toBlob() which allows you to specify quality for JPEG exports and process the blob asynchronously. This is particularly useful when implementing features like saving to cloud storage or copying to clipboard.
 
-### Image Manipulation Operations
+Image Manipulation Operations
 
 Beyond simply displaying images, canvas enables pixel-level manipulation. Common operations include cropping, rotating, scaling, filtering, and adjusting brightness or contrast. These operations are essential for image editing extensions:
 
@@ -271,11 +271,11 @@ For more advanced manipulation, you can access individual pixel data through get
 
 ---
 
-## Performance Optimization for Canvas Extensions {#performance-optimization}
+Performance Optimization for Canvas Extensions {#performance-optimization}
 
 Canvas operations can be computationally expensive, especially when dealing with large images or complex drawings. Optimizing your implementation ensures a smooth user experience and helps your extension perform well across different hardware configurations.
 
-### Minimizing Redraws
+Minimizing Redraws
 
 One of the most important optimization strategies is to minimize unnecessary redraws. Instead of redrawing everything on every frame, you can use offscreen canvases to cache complex elements:
 
@@ -297,7 +297,7 @@ function render() {
 
 This approach is particularly valuable when you have complex static elements that rarely change. It can dramatically improve performance for extensions with layered content.
 
-### Using requestAnimationFrame
+Using requestAnimationFrame
 
 For animations or real-time drawing, always use requestAnimationFrame() instead of setInterval() or setTimeout(). This ensures your drawing happens at the optimal time in the browser's render cycle:
 
@@ -312,7 +312,7 @@ function animate() {
 
 requestAnimationFrame automatically pauses when the tab is not visible, saving CPU resources. It also provides consistent timing that works well with the browser's display refresh rate.
 
-### Memory Management
+Memory Management
 
 Canvas can consume significant memory, especially at large sizes. Be mindful of creating too many canvas elements or storing large amounts of image data in memory. When you no longer need canvas content, properly clean up:
 
@@ -331,11 +331,11 @@ In Chrome extensions, memory management is particularly important because extens
 
 ---
 
-## Advanced Canvas Techniques {#advanced-techniques}
+Advanced Canvas Techniques {#advanced-techniques}
 
-Once you master the fundamentals, several advanced techniques can take your Chrome extension canvas implementation to the next level.
+Once you master the fundamentals, several advanced techniques can take your Chrome extension canvas implementation to the better.
 
-### OffscreenCanvas and Web Workers
+OffscreenCanvas and Web Workers
 
 For computationally intensive operations, OffscreenCanvas allows you to render canvas content in a Web Worker, keeping your main thread responsive:
 
@@ -354,7 +354,7 @@ const bitmap = offscreen.transferToImageBitmap();
 
 This technique is especially valuable for image processing extensions that need to handle large files without freezing the user interface.
 
-### Image Capture and Streaming
+Image Capture and Streaming
 
 Chrome extensions can use canvas to capture viewport content, screenshots, or even stream video. The chrome.desktopCapture API combined with canvas enables powerful capture functionality:
 
@@ -375,7 +375,7 @@ This capability is the foundation for screenshot, screen recording, and annotati
 
 ---
 
-## Best Practices for Chrome Extension Canvas Development {#best-practices}
+Best Practices for Chrome Extension Canvas Development {#best-practices}
 
 Following established best practices ensures your extension is reliable, performant, and user-friendly.
 
@@ -389,7 +389,7 @@ Finally, thoroughly test your extension in the context of Chrome extension archi
 
 ---
 
-## Conclusion
+Conclusion
 
 The Canvas API opens tremendous possibilities for creating powerful drawing and graphics functionality in Chrome extensions. From simple screenshot annotation tools to sophisticated image editors, the techniques covered in this guide provide a solid foundation for building professional-quality graphics extensions.
 
@@ -398,6 +398,6 @@ Remember to start with proper canvas setup, master the core drawing operations, 
 As you continue developing canvas-based extensions, explore the additional possibilities offered by advanced features like WebGL for 3D graphics, the ImageBitmap API for efficient image processing, and the increasingly powerful capabilities of modern Chrome extensions. The canvas ecosystem continues to evolve, offering exciting opportunities for innovative extension developers.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

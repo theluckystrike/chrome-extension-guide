@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Site Stats — Developer Guide"
+title: "Chrome Extension Site Stats. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-site-stats/"
 ---
 # Build a Website Statistics Extension
 
-## Overview {#overview}
+Overview {#overview}
 Build an extension that tracks time spent on websites, visit frequency, and generates daily/weekly reports with idle detection and data export.
 
-## Step 1: Manifest {#step-1-manifest}
+Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -22,7 +22,7 @@ Build an extension that tracks time spent on websites, visit frequency, and gene
 }
 ```
 
-## Step 2: Background Service Worker - Tab Tracking {#step-2-background-service-worker-tab-tracking}
+Step 2: Background Service Worker - Tab Tracking {#step-2-background-service-worker-tab-tracking}
 ```javascript
 // background.js - Track active tab changes
 let currentTab = null;
@@ -55,7 +55,7 @@ async function saveTimeForCurrentTab() {
 }
 ```
 
-## Step 3: Time Tracking Logic {#step-3-time-tracking-logic}
+Step 3: Time Tracking Logic {#step-3-time-tracking-logic}
 ```javascript
 // Storage schema for per-domain time accumulation
 const STORAGE_KEYS = {
@@ -88,7 +88,7 @@ async function updateSiteStats(domain, duration) {
 }
 ```
 
-## Step 4: Popup - Today's Top Sites {#step-4-popup-todays-top-sites}
+Step 4: Popup - Today's Top Sites {#step-4-popup-todays-top-sites}
 ```html
 <!-- popup.html -->
 <style>
@@ -131,7 +131,7 @@ async function loadTodayStats() {
 loadTodayStats();
 ```
 
-## Step 5: Weekly Report with CSS Bar Chart {#step-5-weekly-report-with-css-bar-chart}
+Step 5: Weekly Report with CSS Bar Chart {#step-5-weekly-report-with-css-bar-chart}
 ```javascript
 // Weekly report in popup or separate page
 async function getWeeklyReport() {
@@ -157,7 +157,7 @@ async function getWeeklyReport() {
 </style>
 ```
 
-## Step 6: Idle Detection {#step-6-idle-detection}
+Step 6: Idle Detection {#step-6-idle-detection}
 ```javascript
 // Pause tracking when user is idle
 const IDLE_THRESHOLD = 60; // seconds
@@ -179,7 +179,7 @@ chrome.idle.onStateChanged.addListener(async (state) => {
 });
 ```
 
-## Step 7: Options Page - Blacklist {#step-7-options-page-blacklist}
+Step 7: Options Page - Blacklist {#step-7-options-page-blacklist}
 ```html
 <!-- options.html -->
 <input type="text" id="blacklist" placeholder="domain.com, example.org">
@@ -197,7 +197,7 @@ chrome.idle.onStateChanged.addListener(async (state) => {
 </script>
 ```
 
-## Step 8: Data Retention & Cleanup {#step-8-data-retention-cleanup}
+Step 8: Data Retention & Cleanup {#step-8-data-retention-cleanup}
 ```javascript
 // Auto-cleanup old data (older than 30 days)
 chrome.alarms.create('cleanup', { periodInMinutes: 1440 }); // daily
@@ -219,7 +219,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 9: Export Data as CSV {#step-9-export-data-as-csv}
+Step 9: Export Data as CSV {#step-9-export-data-as-csv}
 ```javascript
 async function exportToCSV() {
   const data = await chrome.storage.local.get(['site_times', 'daily_stats']);
@@ -238,15 +238,15 @@ async function exportToCSV() {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - [Tabs API](../api-reference/tabs-api.md)
 - [Idle Detection Patterns](../patterns/idle-detection.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
 -e 
 ---
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---

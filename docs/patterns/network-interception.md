@@ -1,49 +1,49 @@
 ---
 layout: default
-title: "Chrome Extension Network Interception — Best Practices"
+title: "Chrome Extension Network Interception. Best Practices"
 description: "Intercept and modify network requests with the Declarative Net Request API."
 canonical_url: "https://bestchromeextensions.com/patterns/network-interception/"
 ---
 
 # Network Request Interception Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Chrome's `declarativeNetRequest` (DNR) API replaced the blocking `webRequest` API in MV3. Instead of intercepting requests in JavaScript, you declare JSON rules that Chrome's network stack evaluates natively — delivering better performance and privacy. This guide covers practical patterns for building, managing, and debugging DNR rules.
+Chrome's `declarativeNetRequest` (DNR) API replaced the blocking `webRequest` API in MV3. Instead of intercepting requests in JavaScript, you declare JSON rules that Chrome's network stack evaluates natively. delivering better performance and privacy. This guide covers practical patterns for building, managing, and debugging DNR rules.
 
 ---
 
-## How DNR Works {#how-dnr-works}
+How DNR Works {#how-dnr-works}
 
 ```
-┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
-│  Browser Tab │────>│  Network Stack   │────>│   Server     │
-│  (request)   │     │                  │     │              │
-└──────────────┘     │  ┌────────────┐  │     └──────────────┘
-                     │  │ DNR Engine │  │
-                     │  │            │  │
-                     │  │ - block    │  │
-                     │  │ - redirect │  │
-                     │  │ - modify   │  │
-                     │  │   headers  │  │
-                     │  └────────────┘  │
-                     └──────────────────┘
+          
+  Browser Tab >  Network Stack   >   Server     
+  (request)                                             
+              
+                        DNR Engine   
+                                     
+                        - block      
+                        - redirect   
+                        - modify     
+                          headers    
+                         
+                     
 ```
 
 Key concepts:
-- **Static rules**: Declared in JSON files, bundled with the extension, limited by `GUARANTEED_MINIMUM_STATIC_RULES`
-- **Dynamic rules**: Added/removed at runtime via API, persist across sessions (up to 30,000)
-- **Session rules**: Added/removed at runtime, cleared when the browser restarts (up to 5,000)
-- **Rule priority**: Higher number = higher priority; ties broken by action type
+- Static rules: Declared in JSON files, bundled with the extension, limited by `GUARANTEED_MINIMUM_STATIC_RULES`
+- Dynamic rules: Added/removed at runtime via API, persist across sessions (up to 30,000)
+- Session rules: Added/removed at runtime, cleared when the browser restarts (up to 5,000)
+- Rule priority: Higher number = higher priority; ties broken by action type
 
 ---
 
-## Pattern 1: Rule Structure and Priorities {#pattern-1-rule-structure-and-priorities}
+Pattern 1: Rule Structure and Priorities {#pattern-1-rule-structure-and-priorities}
 
-Every DNR rule has the same shape — an `id`, a `priority`, an `action`, and a `condition`. Understanding this structure is essential:
+Every DNR rule has the same shape. an `id`, a `priority`, an `action`, and a `condition`. Understanding this structure is essential:
 
 ```ts
-// rules.ts — Type-safe rule builder
+// rules.ts. Type-safe rule builder
 
 interface DNRRule {
   id: number;
@@ -55,9 +55,9 @@ interface DNRRule {
 // Priority determines which rule wins when multiple rules match
 // Action type breaks ties: allow > allowAllRequests > block > upgradeScheme > redirect > modifyHeaders
 const PRIORITY = {
-  ALLOWLIST: 100, // highest — let trusted domains through
-  BLOCK: 50,      // mid — block known bad patterns
-  MODIFY: 10,     // low — header tweaks, cosmetic changes
+  ALLOWLIST: 100, // highest. let trusted domains through
+  BLOCK: 50,      // mid. block known bad patterns
+  MODIFY: 10,     // low. header tweaks, cosmetic changes
 } as const;
 
 const blockTracker: DNRRule = {
@@ -102,7 +102,7 @@ Static rules live in a JSON file referenced by `manifest.json`:
 
 ---
 
-## Pattern 2: Dynamic Rules — Add/Remove at Runtime {#pattern-2-dynamic-rules-addremove-at-runtime}
+Pattern 2: Dynamic Rules. Add/Remove at Runtime {#pattern-2-dynamic-rules-addremove-at-runtime}
 
 Dynamic rules let users customize blocking behavior without shipping a new extension version:
 
@@ -183,9 +183,9 @@ async function replaceAllRules(
 
 ---
 
-## Pattern 3: Request Blocking by URL Pattern {#pattern-3-request-blocking-by-url-pattern}
+Pattern 3: Request Blocking by URL Pattern {#pattern-3-request-blocking-by-url-pattern}
 
-DNR supports two URL matching syntaxes — `urlFilter` (lightweight pattern) and `regexFilter` (full regex). Prefer `urlFilter` when possible since it's faster:
+DNR supports two URL matching syntaxes. `urlFilter` (lightweight pattern) and `regexFilter` (full regex). Prefer `urlFilter` when possible since it's faster:
 
 ```ts
 // rules/blocking.ts
@@ -223,7 +223,7 @@ const blockingRules: chrome.declarativeNetRequest.Rule[] = [
     },
   },
 
-  // Block with regex — use sparingly (limited to 1,000 regex rules)
+  // Block with regex. use sparingly (limited to 1,000 regex rules)
   {
     id: 102,
     priority: 50,
@@ -257,7 +257,7 @@ const blockingRules: chrome.declarativeNetRequest.Rule[] = [
 
 ---
 
-## Pattern 4: Request Header Modification {#pattern-4-request-header-modification}
+Pattern 4: Request Header Modification {#pattern-4-request-header-modification}
 
 Add, remove, or overwrite request headers. Common uses include injecting auth tokens, stripping tracking headers, or setting custom headers:
 
@@ -340,11 +340,11 @@ async function setApiToken(token: string): Promise<void> {
 }
 ```
 
-Note: Use **session rules** for sensitive values like auth tokens — they are cleared when the browser closes, unlike dynamic rules which persist.
+Use session rules for sensitive values like auth tokens. they are cleared when the browser closes, unlike dynamic rules which persist.
 
 ---
 
-## Pattern 5: Response Header Modification (CSP, CORS) {#pattern-5-response-header-modification-csp-cors}
+Pattern 5: Response Header Modification (CSP, CORS) {#pattern-5-response-header-modification-csp-cors}
 
 Modify response headers to relax Content Security Policy for your extension's content scripts or enable cross-origin requests:
 
@@ -427,13 +427,13 @@ const addSecurityHeaders: chrome.declarativeNetRequest.Rule = {
 };
 ```
 
-> **Permission required**: Add `"declarativeNetRequestWithHostAccess"` to your manifest's `permissions` array to modify headers. Pair it with appropriate `host_permissions`.
+> Permission required: Add `"declarativeNetRequestWithHostAccess"` to your manifest's `permissions` array to modify headers. Pair it with appropriate `host_permissions`.
 
 ---
 
-## Pattern 6: Redirect Rules (URL Rewriting) {#pattern-6-redirect-rules-url-rewriting}
+Pattern 6: Redirect Rules (URL Rewriting) {#pattern-6-redirect-rules-url-rewriting}
 
-Redirect requests to different URLs — useful for replacing CDN resources, routing through proxies, or migrating API endpoints:
+Redirect requests to different URLs. useful for replacing CDN resources, routing through proxies, or migrating API endpoints:
 
 ```ts
 // rules/redirects.ts
@@ -531,7 +531,7 @@ When redirecting to an extension resource, make sure the file is listed in `web_
 
 ---
 
-## Pattern 7: Rule Conditions — Resource Types, Domains, Methods {#pattern-7-rule-conditions-resource-types-domains-methods}
+Pattern 7: Rule Conditions. Resource Types, Domains, Methods {#pattern-7-rule-conditions-resource-types-domains-methods}
 
 Fine-grained conditions prevent rules from matching too broadly. This is critical for performance and to avoid breaking pages:
 
@@ -642,7 +642,7 @@ async function blockOnTab(tabId: number, domain: string): Promise<void> {
 }
 ```
 
-### Resource Type Reference {#resource-type-reference}
+Resource Type Reference {#resource-type-reference}
 
 | Resource Type | Matches |
 |--------------|---------|
@@ -659,7 +659,7 @@ async function blockOnTab(tabId: number, domain: string): Promise<void> {
 
 ---
 
-## Pattern 8: Debugging Rules with getMatchedRules {#pattern-8-debugging-rules-with-getmatchedrules}
+Pattern 8: Debugging Rules with getMatchedRules {#pattern-8-debugging-rules-with-getmatchedrules}
 
 `getMatchedRules` shows which rules fired and on what requests. Essential for development and user-facing diagnostics:
 
@@ -775,16 +775,16 @@ Add the debug permission to your manifest for development:
 }
 ```
 
-> **Tip**: `declarativeNetRequestFeedback` is only needed for `getMatchedRules` and `onRuleMatchedDebug`. Remove it from production builds if you don't expose rule diagnostics to users.
+> Tip: `declarativeNetRequestFeedback` is only needed for `getMatchedRules` and `onRuleMatchedDebug`. Remove it from production builds if you don't expose rule diagnostics to users.
 
 ---
 
-## Common Pitfalls {#common-pitfalls}
+Common Pitfalls {#common-pitfalls}
 
-### 1. Forgetting resourceTypes {#1-forgetting-resourcetypes}
+1. Forgetting resourceTypes {#1-forgetting-resourcetypes}
 
 ```ts
-// WRONG: resourceTypes is required — omitting it means the rule matches nothing
+// WRONG: resourceTypes is required. omitting it means the rule matches nothing
 {
   id: 1,
   priority: 1,
@@ -807,7 +807,7 @@ Add the debug permission to your manifest for development:
 }
 ```
 
-### 2. Rule ID Collisions {#2-rule-id-collisions}
+2. Rule ID Collisions {#2-rule-id-collisions}
 
 ```ts
 // Dynamic and session rules share the same ID namespace.
@@ -817,7 +817,7 @@ const DYNAMIC_ID_BASE = 10_000;
 const SESSION_ID_BASE = 50_000;
 ```
 
-### 3. Regex Rule Limits {#3-regex-rule-limits}
+3. Regex Rule Limits {#3-regex-rule-limits}
 
 ```ts
 // Chrome limits regex rules to 1,000 across static + dynamic + session.
@@ -829,11 +829,11 @@ console.log(`Using ${regexCount} of 1,000 regex rule slots`);
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | When to Use |
 |---------|------------|
-| Rule structure & priorities | Every DNR implementation — understand the evaluation model |
+| Rule structure & priorities | Every DNR implementation. understand the evaluation model |
 | Dynamic rules | User-configurable blocking, runtime-generated rules |
 | URL pattern blocking | Ad/tracker blocking, content filtering |
 | Request header modification | Auth injection, fingerprint stripping |
@@ -842,7 +842,7 @@ console.log(`Using ${regexCount} of 1,000 regex rule slots`);
 | Rule conditions | Scoping rules to specific tabs, domains, or methods |
 | getMatchedRules debugging | Development, diagnostics, rule verification |
 
-The `declarativeNetRequest` API trades flexibility for performance — you define what to match and Chrome handles the rest at the network layer. For most use cases this is a clear win: faster execution, lower memory usage, and no need to keep a service worker alive just to inspect traffic.
+The `declarativeNetRequest` API trades flexibility for performance. you define what to match and Chrome handles the rest at the network layer. For most use cases this is a clear win: faster execution, lower memory usage, and no need to keep a service worker alive just to inspect traffic.
 -e 
 ---
 

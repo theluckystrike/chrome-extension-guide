@@ -15,9 +15,9 @@ The Display Capture API represents one of the most powerful capabilities availab
 
 ---
 
-## Understanding Display Capture in Chrome Extensions {#understanding-display-capture}
+Understanding Display Capture in Chrome Extensions {#understanding-display-capture}
 
-Display capture allows Chrome extensions to capture the contents of a user's screen, specific windows, or application tabs. This functionality is powered by the `getDisplayMedia()` API, which is part of the broader Media Capture and Streams API standard. Originally designed for web applications, this powerful API has been adapted to work seamlessly within Chrome extensions, providing developers with the ability to create sophisticated screen recording and sharing functionality.
+Display capture allows Chrome extensions to capture the contents of a user's screen, specific windows, or application tabs. This functionality is powered by the `getDisplayMedia()` API, which is part of the broader Media Capture and Streams API standard. Originally designed for web applications, this powerful API has been adapted to work smoothly within Chrome extensions, providing developers with the ability to create sophisticated screen recording and sharing functionality.
 
 The Display Capture API enables users to select what they want to share through Chrome's built-in picker UI. Users can choose to share their entire screen, a specific window, or a particular browser tab. This flexibility is crucial for respecting user privacy while providing the exact content capture capabilities your extension needs. The API returns a MediaStream object that can be recorded, streamed to other users, or processed in real-time for various purposes.
 
@@ -27,7 +27,7 @@ The distinction between display capture and other capture methods is important. 
 
 ---
 
-## Prerequisites and Permissions {#prerequisites-permissions}
+Prerequisites and Permissions {#prerequisites-permissions}
 
 Before implementing display capture in your Chrome extension, you need to configure the necessary permissions in your `manifest.json` file. For Manifest V3 extensions, which is the current standard, you'll need to declare the `desktopCapture` permission in your manifest. This permission enables your extension to access the various capture APIs available in Chrome.
 
@@ -55,7 +55,7 @@ Chrome also requires that extensions using display capture include appropriate p
 
 ---
 
-## Implementing getDisplayMedia in Your Extension {#implementing-getdisplaymedia}
+Implementing getDisplayMedia in Your Extension {#implementing-getdisplaymedia}
 
 The core of display capture implementation involves calling the `navigator.mediaDevices.getDisplayMedia()` method from within your extension's JavaScript code. This method triggers the browser's native screen picker UI, allowing users to select what they want to share. The method returns a Promise that resolves to a MediaStream object containing the captured video and audio tracks.
 
@@ -91,7 +91,7 @@ Audio capture is particularly powerful in Chrome extensions. You can capture sys
 
 ---
 
-## Handling MediaStream Objects {#handling-mediastream}
+Handling MediaStream Objects {#handling-mediastream}
 
 Once you've successfully obtained a MediaStream from getDisplayMedia(), you have numerous options for processing and using the captured content. Understanding how to work with MediaStream objects is essential for building functional screen recording and sharing features in your extension.
 
@@ -142,7 +142,7 @@ The MediaRecorder provides flexibility in how you handle recorded data. You can 
 
 ---
 
-## Advanced Implementation Patterns {#advanced-patterns}
+Advanced Implementation Patterns {#advanced-patterns}
 
 Building production-ready display capture extensions requires implementing several advanced patterns beyond basic capture functionality. These patterns address real-world concerns like user experience, error handling, performance optimization, and cross-browser compatibility.
 
@@ -175,9 +175,9 @@ Implementing efficient video processing can significantly impact your extension'
 
 ---
 
-## Common Challenges and Solutions {#common-challenges}
+Common Challenges and Solutions {#common-challenges}
 
-Even experienced developers encounter challenges when implementing display capture in Chrome extensions. Understanding these common issues and their solutions will help you build more robust applications and avoid pitfalls that could frustrate users or cause your extension to fail review.
+Even experienced developers encounter challenges when implementing display capture in Chrome extensions. Understanding these common issues and their solutions will help you build more solid applications and avoid pitfalls that could frustrate users or cause your extension to fail review.
 
 One frequent issue involves resolution and scaling problems. When capturing high-resolution displays, the resulting video can appear blurry or scaled incorrectly in playback. This often happens because the captured video's dimensions don't match the display's actual pixel dimensions. To address this, always check and respect the actual track settings after capture:
 
@@ -216,7 +216,7 @@ try {
 
 ---
 
-## Best Practices for Production Extensions {#best-practices}
+Best Practices for Production Extensions {#best-practices}
 
 When deploying display capture extensions to real users, following best practices ensures a positive user experience and helps your extension succeed in the Chrome Web Store. These practices cover everything from user interface design to technical implementation details.
 
@@ -230,7 +230,7 @@ Finally, thorough testing is essential. Test your extension with different types
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The Display Capture API in Chrome extensions provides powerful capabilities for building sophisticated screen recording, sharing, and collaboration tools. By understanding the API's requirements, implementing proper permissions, and following best practices for user experience and performance, you can create extensions that delight users and solve real problems.
 

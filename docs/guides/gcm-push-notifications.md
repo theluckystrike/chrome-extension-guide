@@ -52,9 +52,9 @@ The `chrome.gcm` API provides methods for sending and receiving messages through
 ### Getting Your Sender ID
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project and find your **Project Number** (Sender ID)
+2. Create a new project and find your Project Number (Sender ID)
 3. Enable "Firebase Cloud Messaging" API
-4. Get your **Server Key** from Firebase Console
+4. Get your Server Key from Firebase Console
 
 ### Registration Implementation
 
@@ -459,10 +459,10 @@ async function refreshSubscription() {
 
 ## Common Issues
 
-1. **Messages not received** - Check service worker, permissions, network
-2. **Permission denied** - User blocked notifications; guide to enable
-3. **GCM registration fails** - Verify Sender ID and Firebase config
-4. **Web Push subscription fails** - Verify VAPID key format
+1. Messages not received - Check service worker, permissions, network
+2. Permission denied - User blocked notifications; guide to enable
+3. GCM registration fails - Verify Sender ID and Firebase config
+4. Web Push subscription fails - Verify VAPID key format
 
 ## Related Documentation
 

@@ -1,89 +1,89 @@
 ---
 layout: default
-title: "Chrome Extension Message Passing — Developer Guide"
+title: "Chrome Extension Message Passing. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/message-passing-best-practices/"
 ---
 # Message Passing Best Practices
 
-## Overview {#overview}
+Overview {#overview}
 
-Effective communication between extension components is critical for building robust Chrome extensions. This guide covers the recommended patterns for message passing, common pitfalls to avoid, and how to build type-safe, reliable messaging systems in your extension.
+Effective communication between extension components is critical for building solid Chrome extensions. This guide covers the recommended patterns for message passing, common pitfalls to avoid, and how to build type-safe, reliable messaging systems in your extension.
 
-## Chrome Extension Message Flow Architecture
+Chrome Extension Message Flow Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    CHROME EXTENSION MESSAGE PASSING FLOW                    │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+                    CHROME EXTENSION MESSAGE PASSING FLOW                    
+
 
     CONTENT SCRIPT                    BACKGROUND SERVICE WORKER                 POPUP / OPTIONS
     (injected in page)                (central hub)                            (UI extension pages)
-    ─────────────────                 ───────────────────────                   ───────────────────
+                                        
 
-         │                                    │                                      │
-         │   chrome.runtime.sendMessage()     │                                      │
-         ├───────────────────────────────────►│                                      │
-         │     { type: 'GET_DATA' }           │                                      │
-         │                                    │                                      │
-         │                                    │  ┌─────────────────────────────┐     │
-         │                                    │  │  Message Router/Handler    │     │
-         │                                    │  │  - Validates message       │     │
-         │                                    │  │  - Routes to appropriate   │     │
-         │                                    │  │    handler                 │     │
-         │                                    │  └─────────────────────────────┘     │
-         │                                    │                                      │
-         │   ◄────────────────────────────────┤                                      │
-         │     { data: {...} } response       │                                      │
-         │                                    │                                      │
-         │                                    │      chrome.runtime.sendMessage()    │
-         │                                    ├───────────────────────────────────►  │
-         │                                    │      { type: 'UPDATE_UI' }           │
-         │                                    │                                      │
-         │                                    │      ◄────────────────────────────────
-         │                                    │      { success: true }              
-         │                                                                              
-         │                                                                              
-    ──────────────                    ───────────────────────                   ───────────────────
+                                                                                   
+            chrome.runtime.sendMessage()                                           
+                                               
+              { type: 'GET_DATA' }                                                 
+                                                                                   
+                                                    
+                                                 Message Router/Handler         
+                                                 - Validates message            
+                                                 - Routes to appropriate        
+                                                   handler                      
+                                                    
+                                                                                   
+                                                  
+              { data: {...} } response                                             
+                                                                                   
+                                                   chrome.runtime.sendMessage()    
+                                               
+                                                   { type: 'UPDATE_UI' }           
+                                                                                   
+                                                   
+                                                   { success: true }              
+                                                                                       
+                                                                                       
+                                           
     Page Context                       Background Context                       Extension Context
     (isolated world)                   (service worker)                          (privileged APIs)
 
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         CONNECTION PORTS (chrome.runtime.connect)            │
-└─────────────────────────────────────────────────────────────────────────────┘
 
-    TAB 1 ─────────────┐
-    (content script)    │     chrome.tabs.connect(tabId, { name: 'stream' })
-                        ├─────────────────────────┐
-    TAB 2 ─────────────┤                         │
-    (content script)   │                         ▼
-                        │              ┌─────────────────────┐
-    POPUP ──────────────┼──────────────►│   BACKGROUND SW     │◄── Persistent
-                        │              │   Port Manager      │     Connection
-                        │              └─────────────────────┘     (auto-reconnect)
-                        │                         │
-    TAB 3 ─────────────┘                         │
-    (content script)                              ▼
-                                       ┌─────────────────────┐
-                                       │   Message Stream    │
-                                       │   Bi-directional    │
-                                       └─────────────────────┘
+                         CONNECTION PORTS (chrome.runtime.connect)            
+
+
+    TAB 1 
+    (content script)         chrome.tabs.connect(tabId, { name: 'stream' })
+                        
+    TAB 2                          
+    (content script)                            
+                                      
+    POPUP    BACKGROUND SW      Persistent
+                                         Port Manager           Connection
+                                           (auto-reconnect)
+                                                 
+    TAB 3                          
+    (content script)                              
+                                       
+                                          Message Stream    
+                                          Bi-directional    
+                                       
 
 ![Chrome Extension message passing architecture diagram showing content scripts, background service worker, and popup communication flows](docs/images/message-passing-architecture.svg)
 
-## Choose the Right Method
+Choose the Right Method
 
-## Choose the Right Method {#choose-the-right-method}
+Choose the Right Method {#choose-the-right-method}
 
 Chrome provides several messaging APIs, each suited for different use cases:
 
-- **One-time messages**: Use `chrome.runtime.sendMessage` for simple request-response patterns between the background service worker and content scripts or popup.
-- **Targeted to tab**: Use `chrome.tabs.sendMessage` when you need to send a message specifically to a content script running in a particular tab.
-- **Persistent connection**: Use `chrome.runtime.connect` when you need streaming or frequent messages between components. Ports maintain an open channel and handle reconnection automatically.
-- **Cross-extension**: Use `runtime.sendMessage` with the `extensionId` parameter to communicate with other extensions.
+- One-time messages: Use `chrome.runtime.sendMessage` for simple request-response patterns between the background service worker and content scripts or popup.
+- Targeted to tab: Use `chrome.tabs.sendMessage` when you need to send a message specifically to a content script running in a particular tab.
+- Persistent connection: Use `chrome.runtime.connect` when you need streaming or frequent messages between components. Ports maintain an open channel and handle reconnection automatically.
+- Cross-extension: Use `runtime.sendMessage` with the `extensionId` parameter to communicate with other extensions.
 
-## Message Structure {#message-structure}
+Message Structure {#message-structure}
 
 Always structure your messages consistently for maintainability and type safety:
 
@@ -107,9 +107,9 @@ export const MessageTypes = {
 
 For TypeScript projects, consider using `@theluckystrike/webext-messaging` which provides typed wrappers and reduces boilerplate.
 
-## Common Pitfalls {#common-pitfalls}
+Common Pitfalls {#common-pitfalls}
 
-### Unchecked lastError {#unchecked-lasterror}
+Unchecked lastError {#unchecked-lasterror}
 
 Always check `chrome.runtime.lastError` in callbacks. This is a common source of silent failures:
 
@@ -131,7 +131,7 @@ chrome.runtime.sendMessage({ type: 'PING' }, (response) => {
 
 For promise-based calls, catch rejected promises to handle errors properly. The common error "Could not establish connection. Receiving end does not exist." indicates the content script isn't loaded.
 
-### Missing return true {#missing-return-true}
+Missing return true {#missing-return-true}
 
 The `onMessage` listener MUST return `true` if you intend to send an asynchronous response:
 
@@ -159,7 +159,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 ```
 
-### Dead Listeners {#dead-listeners}
+Dead Listeners {#dead-listeners}
 
 Content script listeners die when the page navigates. This is especially problematic for SPAs:
 
@@ -167,7 +167,7 @@ Content script listeners die when the page navigates. This is especially problem
 - Check if a content script exists before sending messages using a ping-pong pattern
 - Use `chrome.runtime.onConnect` for automatic reconnection handling
 
-## Async Response Pattern {#async-response-pattern}
+Async Response Pattern {#async-response-pattern}
 
 Here's a complete example of the recommended async response pattern:
 
@@ -194,9 +194,9 @@ async function getTabData(tabId) {
 }
 ```
 
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 
-Implement robust error handling in your messaging layer:
+Implement solid error handling in your messaging layer:
 
 - Wrap `sendMessage` calls in try-catch blocks
 - Add manual timeouts for responses to prevent hanging
@@ -222,18 +222,18 @@ function sendMessageWithTimeout(message, timeout = 5000) {
 }
 ```
 
-## Performance {#performance}
+Performance {#performance}
 
 Keep your messaging performant:
 
-- **Keep messages small**: Avoid sending large objects or serializing DOM elements
-- **Use ports for frequent messages**: Connections have less overhead than repeated message calls
-- **Batch updates**: Instead of sending a message per item, collect changes and send bulk updates
-- **Consider structured clone**: Be aware of what can be passed through the messaging system
+- Keep messages small: Avoid sending large objects or serializing DOM elements
+- Use ports for frequent messages: Connections have less overhead than repeated message calls
+- Batch updates: Instead of sending a message per item, collect changes and send bulk updates
+- Consider structured clone: Be aware of what can be passed through the messaging system
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Type-Safe Message Handler with Router {#type-safe-message-handler-with-router}
+Type-Safe Message Handler with Router {#type-safe-message-handler-with-router}
 
 ```js
 // message-router.js
@@ -253,7 +253,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 ```
 
-### Error-Resilient SendMessage Wrapper {#error-resilient-sendmessage-wrapper}
+Error-Resilient SendMessage Wrapper {#error-resilient-sendmessage-wrapper}
 
 ```js
 // messaging-utils.js
@@ -275,7 +275,7 @@ export async function sendMessageSafe(message) {
 }
 ```
 
-### Port-Based Streaming Pattern {#port-based-streaming-pattern}
+Port-Based Streaming Pattern {#port-based-streaming-pattern}
 
 ```js
 // background.js - Create port
@@ -295,7 +295,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Message Timeout Utility {#message-timeout-utility}
+Message Timeout Utility {#message-timeout-utility}
 
 ```js
 // with-timeout.js
@@ -315,15 +315,15 @@ const response = await withTimeout(
 );
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Message Passing Patterns](/reference/message-passing-patterns.md)
 - [Advanced Messaging Tutorial](/tutorials/advanced-messaging.md)
 - [Messaging Quickstart](/tutorials/messaging-quickstart.md)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Messaging Protocols](../patterns/extension-messaging-protocols.md)
 - [Message Passing Patterns](../reference/message-passing-patterns.md)

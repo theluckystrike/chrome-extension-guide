@@ -13,49 +13,49 @@ canonical_url: "https://bestchromeextensions.com/2025/05/14/build-content-blocke
 
 The modern web is filled with distractions. From persistent pop-ups and notification banners to social media widgets and recommendation sidebars, unwanted page elements can significantly impact your browsing experience and productivity. Fortunately, Chrome extensions provide a powerful solution: the ability to hide, block, or remove any element on any webpage.
 
-In this comprehensive guide, we will walk you through building a complete content blocker Chrome extension from scratch. Whether you want to create a personal tool to eliminate distractions or publish an extension for thousands of users, this tutorial covers everything you need to know about DOM manipulation, content scripts, and the Manifest V3 architecture.
+we will walk you through building a complete content blocker Chrome extension from scratch. Whether you want to create a personal tool to eliminate distractions or publish an extension for thousands of users, this tutorial covers everything you need to know about DOM manipulation, content scripts, and the Manifest V3 architecture.
 
 ---
 
-## Why Build a Content Blocker Extension? {#why-build}
+Why Build a Content Blocker Extension? {#why-build}
 
 Content blocker and element hider extensions are among the most popular categories in the Chrome Web Store. They solve real problems for real users:
 
-- **Productivity**: Remove social media feeds, news tickers, and other time-wasting elements
-- **Focus**: Hide distracting advertisements and promotional banners
-- **Accessibility**: Eliminate annoying animations or auto-playing videos
-- **Privacy**: Block tracking pixels and cookie consent dialogs
-- **Customization**: Remove elements that simply annoy you on specific websites
+- Productivity: Remove social media feeds, news tickers, and other time-wasting elements
+- Focus: Hide distracting advertisements and promotional banners
+- Accessibility: Eliminate annoying animations or auto-playing videos
+- Privacy: Block tracking pixels and cookie consent dialogs
+- Customization: Remove elements that simply annoy you on specific websites
 
 The demand for these tools is enormous. Extensions like uBlock Origin and Element Hider have millions of active users. While building a full-featured ad blocker is complex, creating a focused element hider extension is an excellent project for developers of all skill levels.
 
 ---
 
-## Understanding the Architecture {#architecture}
+Understanding the Architecture {#architecture}
 
 Before writing any code, let's understand how Chrome extensions work with content blocking.
 
-### How Content Scripts Work
+How Content Scripts Work
 
-Chrome extensions can inject JavaScript into web pages using **content scripts**. These scripts run in the context of the loaded page, giving them full access to the DOM (Document Object Model). This means content scripts can:
+Chrome extensions can inject JavaScript into web pages using content scripts. These scripts run in the context of the loaded page, giving them full access to the DOM (Document Object Model). This means content scripts can:
 
 - Select and modify any element on the page
 - Listen for DOM changes and react dynamically
 - Store user preferences using Chrome's storage API
 - Communicate with the extension's background service worker
 
-### The Extension Components
+The Extension Components
 
 Our content blocker extension will consist of:
 
-1. **manifest.json** - Configuration file defining permissions and components
-2. **content.js** - The script that runs on web pages to hide elements
-3. **popup.html/js** - User interface for configuring which elements to block
-4. **background.js** - Service worker for handling extension lifecycle
+1. manifest.json - Configuration file defining permissions and components
+2. content.js - The script that runs on web pages to hide elements
+3. popup.html/js - User interface for configuring which elements to block
+4. background.js - Service worker for handling extension lifecycle
 
 ---
 
-## Step 1: Create the Manifest File {#manifest}
+Step 1: Create the Manifest File {#manifest}
 
 Every Chrome extension starts with a manifest.json file. For a content blocker using Manifest V3, we need to declare specific permissions.
 
@@ -103,14 +103,14 @@ Create a new folder for your extension and add the following manifest.json:
 
 Key permissions explained:
 
-- **storage**: Allows saving user preferences (blocked selectors)
-- **activeTab**: Access to the current tab when user interacts with extension
-- **scripting**: Execute scripts and modify page content
-- **host_permissions**: Specifies which websites can be affected (<all_urls> means all websites)
+- storage: Allows saving user preferences (blocked selectors)
+- activeTab: Access to the current tab when user interacts with extension
+- scripting: Execute scripts and modify page content
+- host_permissions: Specifies which websites can be affected (<all_urls> means all websites)
 
 ---
 
-## Step 2: Create the Content Script {#content-script}
+Step 2: Create the Content Script {#content-script}
 
 The content script is the heart of our extension. It runs on every page and applies the blocking rules. Create content.js:
 
@@ -237,7 +237,7 @@ This content script handles:
 
 ---
 
-## Step 3: Create the Popup Interface {#popup}
+Step 3: Create the Popup Interface {#popup}
 
 The popup provides users with an interface to manage their blocking rules. Create popup.html:
 
@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Step 4: Create the Background Service Worker {#background}
+Step 4: Create the Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events. Create background.js:
 
@@ -593,7 +593,7 @@ chrome.contextMenus?.onClicked.addListener((info, tab) => {
 
 ---
 
-## Step 5: Create Extension Icons {#icons}
+Step 5: Create Extension Icons {#icons}
 
 Your extension needs icons. Create a simple icons folder with placeholder PNG files. For testing, you can create basic colored squares, but for publishing, design professional icons.
 
@@ -605,7 +605,7 @@ At minimum, you need:
 
 ---
 
-## Step 6: Testing Your Extension {#testing}
+Step 6: Testing Your Extension {#testing}
 
 Now let's test our content blocker extension:
 
@@ -617,7 +617,7 @@ Now let's test our content blocker extension:
 6. Add some custom selectors and click "Save Rules"
 7. Refresh the page to see the blocking in action
 
-### Debugging Tips
+Debugging Tips
 
 If elements aren't being hidden:
 
@@ -626,32 +626,32 @@ If elements aren't being hidden:
 3. Ensure the content script is loading (check the Extensions page)
 4. Make sure the page hasn't already loaded the elements before your script runs
 
-### Common Selector Issues
+Common Selector Issues
 
 ```javascript
-// ❌ Wrong: Using jQuery-style selectors
+//  Wrong: Using jQuery-style selectors
 $('.ad-container')
 
-// ✅ Correct: Standard CSS selectors
+//  Correct: Standard CSS selectors
 '.ad-container'
 
-// ❌ Wrong: Partial attribute matching without proper syntax
+//  Wrong: Partial attribute matching without proper syntax
 'class*="ad"'
 
-// ✅ Correct: Full attribute selector
+//  Correct: Full attribute selector
 '[class*="ad-"]'
 
-// ✅ Multiple attributes
+//  Multiple attributes
 'div.advertisement.promo'
 ```
 
 ---
 
-## Advanced Features to Consider {#advanced}
+Advanced Features to Consider {#advanced}
 
 Once you have the basic extension working, consider adding these advanced features:
 
-### 1. Site-Specific Rules
+1. Site-Specific Rules
 
 Allow different blocking rules for different websites:
 
@@ -663,7 +663,7 @@ const siteRules = {
 };
 ```
 
-### 2. Element Blocker Mode
+2. Element Blocker Mode
 
 Let users click on elements to block them directly:
 
@@ -677,7 +677,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-### 3. Import/Export Rules
+3. Import/Export Rules
 
 Allow users to share their blocking configurations:
 
@@ -700,7 +700,7 @@ const importRules = (file) => {
 };
 ```
 
-### 4. Blocking Statistics
+4. Blocking Statistics
 
 Track and display how many elements have been blocked:
 
@@ -716,33 +716,33 @@ function trackBlock(count) {
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 When you're ready to share your extension with the world:
 
-1. **Prepare your listing**:
+1. Prepare your listing:
    - Write a compelling description
    - Create screenshots and a promotional image
    - Choose appropriate categories and tags
 
-2. **Comply with policies**:
+2. Comply with policies:
    - Review Chrome Web Store policies
    - Ensure your extension doesn't violate any rules
    - Provide a valid privacy policy if needed
 
-3. **Submit for review**:
+3. Submit for review:
    - Zip your extension folder
    - Upload to Chrome Web Store Developer Dashboard
    - Wait for review (usually 24-72 hours)
 
-4. **Maintain and update**:
+4. Maintain and update:
    - Respond to user reviews
    - Update regularly for compatibility
    - Fix bugs quickly
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a content blocker Chrome extension is an excellent project that teaches you valuable skills:
 

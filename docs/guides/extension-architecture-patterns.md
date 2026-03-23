@@ -1,16 +1,16 @@
 ---
 layout: default
-title: "Chrome Extension Architecture Patterns — MVC, MVVM & Event-Driven — Developer Guide"
+title: "Chrome Extension Architecture Patterns. MVC, MVVM & Event-Driven. Developer Guide"
 description: "Master Chrome extension architecture patterns including MVC, MVVM, and event-driven designs with practical code examples and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/extension-architecture-patterns/"
 ---
 # Extension Architecture Patterns
 
-Building a Chrome extension that scales requires more than just connecting components—it demands a clear architectural pattern that organizes code, manages state, and handles communication between isolated contexts. While the Chrome extension platform provides multiple execution environments (service workers, content scripts, popups, options pages), choosing the right architecture pattern determines how maintainable your extension becomes as features accumulate.
+Building a Chrome extension that scales requires more than just connecting components, it demands a clear architectural pattern that organizes code, manages state, and handles communication between isolated contexts. While the Chrome extension platform provides multiple execution environments (service workers, content scripts, popups, options pages), choosing the right architecture pattern determines how maintainable your extension becomes as features accumulate.
 
-This guide explores three proven architectural patterns for Chrome extensions: **Model-View-Controller (MVC)**, **Model-View-ViewModel (MVVM)**, and **Event-Driven Architecture**. Each pattern addresses specific challenges in extension development, from managing state across contexts to handling the asynchronous nature of Chrome's APIs.
+This guide explores three proven architectural patterns for Chrome extensions: Model-View-Controller (MVC), Model-View-ViewModel (MVVM), and Event-Driven Architecture. Each pattern addresses specific challenges in extension development, from managing state across contexts to handling the asynchronous nature of Chrome's APIs.
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 - [Why Architecture Patterns Matter](#why-architecture-patterns-matter)
 - [Model-View-Controller (MVC) for Extensions](#model-view-controller-mvc-for-extensions)
@@ -21,59 +21,59 @@ This guide explores three proven architectural patterns for Chrome extensions: *
 
 ---
 
-## Why Architecture Patterns Matter {#why-architecture-patterns-matter}
+Why Architecture Patterns Matter {#why-architecture-patterns-matter}
 
 Chrome extensions present unique architectural challenges that web applications don't face:
 
-1. **Multiple Isolated Contexts**: Your extension runs across service workers, content scripts, popups, options pages, and potentially offscreen documents—each with different capabilities and limitations.
+1. Multiple Isolated Contexts: Your extension runs across service workers, content scripts, popups, options pages, and potentially offscreen documents, each with different capabilities and limitations.
 
-2. **Asynchronous Chrome APIs**: Most `chrome.*` APIs are asynchronous, requiring careful handling of promises and callbacks.
+2. Asynchronous Chrome APIs: Most `chrome.*` APIs are asynchronous, requiring careful handling of promises and callbacks.
 
-3. **Cross-Context Communication**: Data and events must be passed between isolated worlds using message passing.
+3. Cross-Context Communication: Data and events must be passed between isolated worlds using message passing.
 
-4. **State Persistence**: Unlike single-page applications, extensions must persist state across service worker restarts, browser sessions, and device changes.
+4. State Persistence: Unlike single-page applications, extensions must persist state across service worker restarts, browser sessions, and device changes.
 
-5. **Lifecycle Management**: Service workers terminate after inactivity, content scripts reload with page navigation, and popups exist only while open.
+5. Lifecycle Management: Service workers terminate after inactivity, content scripts reload with page navigation, and popups exist only while open.
 
 A well-chosen architecture pattern addresses these challenges by providing clear separation of concerns, predictable data flow, and established patterns for cross-context communication.
 
 ---
 
-## Model-View-Controller (MVC) for Extensions {#model-view-controller-mvc-for-extensions}
+Model-View-Controller (MVC) for Extensions {#model-view-controller-mvc-for-extensions}
 
 MVC separates an application into three interconnected components, each handling a specific aspect of your extension:
 
-- **Model**: Data and business logic
-- **View**: UI rendering and user interface
-- **Controller**: Input handling and coordination
+- Model: Data and business logic
+- View: UI rendering and user interface
+- Controller: Input handling and coordination
 
-### Applying MVC to Chrome Extensions
+Applying MVC to Chrome Extensions
 
 In an extension context, MVC maps naturally to Chrome's component model:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     Service Worker                          │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐  │
-│  │   Model     │    │ Controller  │    │    Event Bus    │  │
-│  │ (Storage,   │◄───│ (Handlers,  │───►│  (Message      │  │
-│  │  APIs)      │    │  Orchestration)   │   Passing)      │  │
-│  └─────────────┘    └─────────────┘    └─────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                           │ ▲
-                           │ │ Messages
-                           ▼ │
-┌─────────────────────────────────────────────────────────────┐
-│                   Content Script / Popup                    │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐  │
-│  │   Model     │    │ Controller  │    │      View       │  │
-│  │ (Local      │◄───│ (User       │───►│   (DOM/React/   │  │
-│  │  State)     │    │  Actions)   │    │    UI)          │  │
-│  └─────────────┘    └─────────────┘    └─────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+
+                     Service Worker                          
+            
+     Model          Controller          Event Bus      
+   (Storage,    (Handlers,    (Message        
+    APIs)            Orchestration)      Passing)        
+            
+
+                            
+                             Messages
+                            
+
+                   Content Script / Popup                    
+            
+     Model          Controller            View         
+   (Local       (User          (DOM/React/     
+    State)           Actions)           UI)            
+            
+
 ```
 
-### Implementation Example
+Implementation Example
 
 Here's how to implement MVC in a Manifest V3 extension:
 
@@ -165,7 +165,7 @@ export class BookmarkController {
 }
 ```
 
-### When to Use MVC
+When to Use MVC
 
 MVC works well when:
 
@@ -176,21 +176,21 @@ MVC works well when:
 
 ---
 
-## Model-View-ViewModel (MVVM) for Extensions {#model-view-viewmodel-mvvm-for-extensions}
+Model-View-ViewModel (MVVM) for Extensions {#model-view-viewmodel-mvvm-for-extensions}
 
-MVVM extends MVC by adding a **ViewModel** layer that handles view logic and state synchronization. This pattern is particularly powerful for extensions using modern UI frameworks like React, Vue, or Svelte.
+MVVM extends MVC by adding a ViewModel layer that handles view logic and state synchronization. This pattern is particularly powerful for extensions using modern UI frameworks like React, Vue, or Svelte.
 
-### Key Concepts
+Key Concepts
 
-- **Model**: Same as MVC—data and business logic
-- **View**: UI components (React components, for example)
-- **ViewModel**: Bridges the Model and View, handling:
+- Model: Same as MVC, data and business logic
+- View: UI components (React components, for example)
+- ViewModel: Bridges the Model and View, handling:
   - State management
   - Data transformation for display
   - User action handling
   - Two-way data binding
 
-### Implementation Example with React
+Implementation Example with React
 
 ```javascript
 // models/extension-model.js
@@ -347,26 +347,26 @@ export function SettingsPanel({ model }) {
 }
 ```
 
-### MVVM Benefits for Extensions
+MVVM Benefits for Extensions
 
-1. **Reactive Data Flow**: State changes automatically update the UI
-2. **Testability**: ViewModels can be tested without DOM manipulation
-3. **Framework Compatibility**: Natural fit for React, Vue, Svelte
-4. **Separation of Concerns**: UI logic in ViewModel, business logic in Model
+1. Reactive Data Flow: State changes automatically update the UI
+2. Testability: ViewModels can be tested without DOM manipulation
+3. Framework Compatibility: Natural fit for React, Vue, Svelte
+4. Separation of Concerns: UI logic in ViewModel, business logic in Model
 
 ---
 
-## Event-Driven Architecture {#event-driven-architecture}
+Event-Driven Architecture {#event-driven-architecture}
 
-Event-driven architecture (EDA) is fundamental to Chrome extensions. Every interaction—from user clicks to tab updates—flows through events. This pattern treats events as first-class citizens, enabling loose coupling between components.
+Event-driven architecture (EDA) is fundamental to Chrome extensions. Every interaction, from user clicks to tab updates, flows through events. This pattern treats events as first-class citizens, enabling loose coupling between components.
 
-### Core Components
+Core Components
 
-1. **Event Emitters**: Components that produce events (user actions, Chrome API events)
-2. **Event Bus / Message Bus**: Central hub for routing events
-3. **Event Handlers**: Components that react to events
+1. Event Emitters: Components that produce events (user actions, Chrome API events)
+2. Event Bus / Message Bus: Central hub for routing events
+3. Event Handlers: Components that react to events
 
-### Implementation Example
+Implementation Example
 
 ```javascript
 // event-bus/EventBus.js
@@ -549,7 +549,7 @@ export class EventDrivenService {
 }
 ```
 
-### Cross-Context Event Communication
+Cross-Context Event Communication
 
 For events that need to span multiple contexts (service worker to content script), use Chrome's message passing:
 
@@ -595,7 +595,7 @@ eventBus.on(ExtensionEvents.SETTINGS_UPDATED, (event) => {
 });
 ```
 
-### When to Use Event-Driven Architecture
+When to Use Event-Driven Architecture
 
 Event-driven architecture is ideal when:
 
@@ -607,44 +607,44 @@ Event-driven architecture is ideal when:
 
 ---
 
-## Choosing the Right Pattern {#choosing-the-right-pattern}
+Choosing the Right Pattern {#choosing-the-right-pattern}
 
 | Factor | MVC | MVVM | Event-Driven |
 |--------|-----|------|---------------|
-| **Complexity** | Medium | Medium-High | Low-High |
-| **UI Framework** | Any | React/Vue/Svelte | Any |
-| **State Management** | Manual | Reactive | Event-based |
-| **Testability** | Good | Excellent | Good |
-| **Learning Curve** | Low | Medium | Medium |
-| **Best For** | Simple-medium extensions | Complex UI with React | Highly interactive apps |
+| Complexity | Medium | Medium-High | Low-High |
+| UI Framework | Any | React/Vue/Svelte | Any |
+| State Management | Manual | Reactive | Event-based |
+| Testability | Good | Excellent | Good |
+| Learning Curve | Low | Medium | Medium |
+| Best For | Simple-medium extensions | Complex UI with React | Highly interactive apps |
 
-### Decision Guide
+Decision Guide
 
-**Choose MVC if:**
+Choose MVC if:
 - Your extension is relatively simple
 - You prefer explicit data flow
 - You're building a traditional extension without modern frameworks
 
-**Choose MVVM if:**
+Choose MVVM if:
 - Using React, Vue, or Svelte
 - You need reactive state management
 - Complex UI with many interdependent components
 
-**Choose Event-Driven if:**
+Choose Event-Driven if:
 - Many async operations and Chrome API events
 - Loose coupling is a priority
 - You need to coordinate across multiple contexts
 
 ---
 
-## Hybrid Approaches {#hybrid-approaches}
+Hybrid Approaches {#hybrid-approaches}
 
 Most real-world extensions combine patterns. A common hybrid approach:
 
-1. **Service Worker**: Event-driven core that listens to Chrome APIs
-2. **Models**: Shared data layer accessible to all contexts
-3. **ViewModels**: Used in popup/options for reactive UI
-4. **Controllers**: Handle specific feature logic in content scripts
+1. Service Worker: Event-driven core that listens to Chrome APIs
+2. Models: Shared data layer accessible to all contexts
+3. ViewModels: Used in popup/options for reactive UI
+4. Controllers: Handle specific feature logic in content scripts
 
 ```javascript
 // A practical hybrid approach
@@ -681,18 +681,18 @@ class ContentController {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
-- **MVC** provides clear separation of concerns and works well for medium-sized extensions
-- **MVVM** excels when using modern UI frameworks and requires reactive data flow
-- **Event-Driven** architecture is fundamental to Chrome extensions and enables loose coupling
-- **Hybrid approaches** often provide the best balance for complex extensions
+- MVC provides clear separation of concerns and works well for medium-sized extensions
+- MVVM excels when using modern UI frameworks and requires reactive data flow
+- Event-Driven architecture is fundamental to Chrome extensions and enables loose coupling
+- Hybrid approaches often provide the best balance for complex extensions
 
 Choose a pattern based on your extension's complexity, team familiarity, and UI framework choice. Start simple and evolve your architecture as requirements grow.
 
 ---
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)

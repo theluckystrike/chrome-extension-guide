@@ -17,27 +17,27 @@ In this tutorial, you'll learn how to capture all open tabs and windows, store t
 
 ---
 
-## Why Build a Tab Session Manager? {#why-build}
+Why Build a Tab Session Manager? {#why-build}
 
 The average Chrome user has between 20 and 50 tabs open at any given time, according to recent browser usage studies. This tab overload leads to memory issues, decreased productivity, and the dreaded "too many tabs" notification. While Chrome offers some built-in session management through sync and history, it lacks the granular control that power users need.
 
 A custom tab session manager extension solves several key problems:
 
-- **Project-based organization**: Save different tab sets for different projects or clients
-- **Quick context switching**: Restore a complete working environment in seconds
-- **Accidental closure recovery**: Retrieve tabs after browser crashes or unexpected closures
-- **Multi-window management**: Handle multiple browser windows with different session states
-- **Tab group preservation**: Maintain Chrome's tab groups when saving and restoring
+- Project-based organization: Save different tab sets for different projects or clients
+- Quick context switching: Restore a complete working environment in seconds
+- Accidental closure recovery: Retrieve tabs after browser crashes or unexpected closures
+- Multi-window management: Handle multiple browser windows with different session states
+- Tab group preservation: Maintain Chrome's tab groups when saving and restoring
 
-Building your own session manager gives you complete control over how sessions are stored, organized, and restored—features you won't find in basic browser functionality or existing extensions.
+Building your own session manager gives you complete control over how sessions are stored, organized, and restored, features you won't find in basic browser functionality or existing extensions.
 
 ---
 
-## Understanding the Chrome Tabs and Windows APIs {#chrome-apis}
+Understanding the Chrome Tabs and Windows APIs {#chrome-apis}
 
 Before diving into code, you need to understand the core Chrome APIs that make session management possible. The extension will primarily interact with three key APIs:
 
-### The Tabs API
+The Tabs API
 
 The `chrome.tabs` API provides methods for creating, modifying, and organizing tabs. For session management, you'll use methods like:
 
@@ -48,7 +48,7 @@ The `chrome.tabs` API provides methods for creating, modifying, and organizing t
 
 Each tab object contains essential properties including URL, title, favIconUrl, pinned status, and groupId (for tab groups).
 
-### The Windows API
+The Windows API
 
 The `chrome.windows` API manages browser windows:
 
@@ -59,7 +59,7 @@ The `chrome.windows` API manages browser windows:
 
 Window objects include properties like id, type, state, tabs array, and incognito status.
 
-### The Storage API
+The Storage API
 
 For persisting sessions, you'll use `chrome.storage`:
 
@@ -71,26 +71,26 @@ For a session manager with potentially large session data, `chrome.storage.local
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup}
+Project Setup and Manifest Configuration {#project-setup}
 
 Let's start building the extension. First, create your project structure:
 
 ```bash
 tab-session-manager/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-├── options.html
-├── options.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ background.js
+ options.html
+ options.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### The Manifest File
+The Manifest File
 
 Create your `manifest.json` with the required permissions:
 
@@ -127,11 +127,11 @@ The key permissions here are `tabs`, `storage`, and `windows`. The `host_permiss
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the main user interface for your extension. It displays saved sessions and allows users to save current sessions or restore existing ones.
 
-### HTML Structure
+HTML Structure
 
 Create `popup.html`:
 
@@ -149,7 +149,7 @@ Create `popup.html`:
     <header>
       <h1>Tab Session Manager</h1>
       <button id="saveSessionBtn" class="primary-btn">
-        <span class="icon">💾</span> Save Current Session
+        <span class="icon"></span> Save Current Session
       </button>
     </header>
 
@@ -178,7 +178,7 @@ Create `popup.html`:
 </html>
 ```
 
-### Styling the Popup
+Styling the Popup
 
 Create `popup.css` for a clean, modern interface:
 
@@ -346,11 +346,11 @@ h2 {
 
 ---
 
-## Implementing the Core Logic {#core-logic}
+Implementing the Core Logic {#core-logic}
 
 Now let's build the JavaScript functionality. The popup script handles the user interface, while a background script manages the core session operations.
 
-### Popup Script
+Popup Script
 
 Create `popup.js`:
 
@@ -521,7 +521,7 @@ function renderSessions() {
     <div class="session-card" data-id="${session.id}">
       <div class="session-header">
         <span class="session-name">${escapeHtml(session.name)}</span>
-        <button class="delete-session" data-id="${session.id}" title="Delete">🗑️</button>
+        <button class="delete-session" data-id="${session.id}" title="Delete"></button>
       </div>
       <div class="session-meta">
         <span>${session.tabCount} tabs</span>
@@ -597,11 +597,11 @@ function showNotification(message) {
 
 ---
 
-## Adding Advanced Features {#advanced-features}
+Adding Advanced Features {#advanced-features}
 
 Now let's enhance the extension with more powerful capabilities.
 
-### Tab Group Support
+Tab Group Support
 
 Modern Chrome supports tab groups, and your session manager should preserve them:
 
@@ -644,7 +644,7 @@ async function saveSessionWithGroups() {
 }
 ```
 
-### Keyboard Shortcuts
+Keyboard Shortcuts
 
 Add keyboard shortcuts for power users in your manifest:
 
@@ -683,21 +683,21 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension:
 
-1. **Load the extension**: Navigate to `chrome://extensions`, enable Developer Mode, and click "Load unpacked"
-2. **Test saving**: Open various tabs across multiple windows and test the save functionality
-3. **Test restoring**: Verify that tabs open with correct URLs and preserve pinned status
-4. **Test deletion**: Confirm sessions are properly removed
-5. **Test persistence**: Reload Chrome and verify sessions persist
-6. **Test keyboard shortcuts**: Verify commands work as expected
+1. Load the extension: Navigate to `chrome://extensions`, enable Developer Mode, and click "Load unpacked"
+2. Test saving: Open various tabs across multiple windows and test the save functionality
+3. Test restoring: Verify that tabs open with correct URLs and preserve pinned status
+4. Test deletion: Confirm sessions are properly removed
+5. Test persistence: Reload Chrome and verify sessions persist
+6. Test keyboard shortcuts: Verify commands work as expected
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
-**Issue**: Tabs not restoring with correct URLs  
-**Solution**: Some URLs (like chrome:// URLs) have restrictions. Add error handling:
+Issue: Tabs not restoring with correct URLs  
+Solution: Some URLs (like chrome:// URLs) have restrictions. Add error handling:
 
 ```javascript
 try {
@@ -707,8 +707,8 @@ try {
 }
 ```
 
-**Issue**: Storage quota exceeded  
-**Solution**: Implement session cleanup or compression for older sessions:
+Issue: Storage quota exceeded  
+Solution: Implement session cleanup or compression for older sessions:
 
 ```javascript
 async function cleanupOldSessions() {
@@ -725,14 +725,14 @@ async function cleanupOldSessions() {
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once testing is complete, prepare for publication:
 
-1. **Create store listing**: Prepare screenshots, description, and promotional graphics
-2. **Package the extension**: Use the "Pack extension" button in chrome://extensions
-3. **Create developer account**: Sign up at the Chrome Web Store Developer Dashboard
-4. **Upload and submit**: Upload your CRX file and submit for review
+1. Create store listing: Prepare screenshots, description, and promotional graphics
+2. Package the extension: Use the "Pack extension" button in chrome://extensions
+3. Create developer account: Sign up at the Chrome Web Store Developer Dashboard
+4. Upload and submit: Upload your CRX file and submit for review
 
 Ensure your extension follows Chrome Web Store policies, particularly around:
 - Clear user data handling policies
@@ -742,16 +742,16 @@ Ensure your extension follows Chrome Web Store policies, particularly around:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 You've built a fully functional Tab Session Manager Chrome extension! This extension demonstrates core Chrome extension concepts including:
 
-- **Tabs API**: Capturing and recreating browser tabs
-- **Windows API**: Managing multiple browser windows
-- **Storage API**: Persisting data locally with Chrome Storage
-- **Manifest V3**: Following modern Chrome extension standards
-- **Popup UI**: Creating intuitive user interfaces
-- **Event handling**: Responding to user interactions and system events
+- Tabs API: Capturing and recreating browser tabs
+- Windows API: Managing multiple browser windows
+- Storage API: Persisting data locally with Chrome Storage
+- Manifest V3: Following modern Chrome extension standards
+- Popup UI: Creating intuitive user interfaces
+- Event handling: Responding to user interactions and system events
 
 The extension you built can be extended with many additional features:
 - Session synchronization across devices using `chrome.storage.sync`

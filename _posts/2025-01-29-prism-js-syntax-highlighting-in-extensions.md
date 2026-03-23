@@ -17,35 +17,35 @@ Whether you are building a code viewer extension, a documentation tool, or any e
 
 ---
 
-## Understanding Prism.js and Its Role in Chrome Extensions {#understanding-prismjs}
+Understanding Prism.js and Its Role in Chrome Extensions {#understanding-prismjs}
 
-Prism.js is a lightweight, robust syntax highlighting library written in JavaScript. It supports over 200 programming languages and comes with various themes out of the box. What makes Prism.js particularly well-suited for Chrome extensions is its minimal footprint, modular architecture, and excellent performance characteristics.
+Prism.js is a lightweight, solid syntax highlighting library written in JavaScript. It supports over 200 programming languages and comes with various themes out of the box. What makes Prism.js particularly well-suited for Chrome extensions is its minimal footprint, modular architecture, and excellent performance characteristics.
 
-### Why Choose Prism.js for Your Extension
+Why Choose Prism.js for Your Extension
 
 The decision to use Prism.js in your Chrome extension comes with several compelling advantages. First, its file size is remarkably small even with multiple language support, which matters significantly when every kilobyte counts in extension performance. Second, Prism.js uses a simple API that makes integration straightforward regardless of your extension's complexity. Third, the library is actively maintained with regular updates and improvements.
 
 Chrome extensions often need to work across different web pages and contexts. Prism.js handles this gracefully because it can run in both content scripts and popup contexts, giving you flexibility in where and how you implement syntax highlighting. The library also supports automatic language detection and manual language specification, allowing users to control how code is highlighted.
 
-### Core Components of Prism.js
+Core Components of Prism.js
 
 Understanding the core components helps you make informed decisions during implementation. The Prism core provides the highlighting engine, tokenization system, and plugin framework. Language components add support for specific programming languages, with each language file containing the grammar rules for that syntax. Themes control the visual appearance of highlighted code, with options ranging from minimal light themes to vibrant dark themes.
 
-Plugins extend Prism's functionality in various ways. The Copy to Clipboard plugin adds convenient copy buttons to code blocks. The Line Numbers plugin adds line numbering. The Highlight Keywords plugin allows custom keyword highlighting. These plugins integrate seamlessly and can be included or excluded based on your extension's needs.
+Plugins extend Prism's functionality in various ways. The Copy to Clipboard plugin adds convenient copy buttons to code blocks. The Line Numbers plugin adds line numbering. The Highlight Keywords plugin allows custom keyword highlighting. These plugins integrate smoothly and can be included or excluded based on your extension's needs.
 
 ---
 
-## Setting Up Prism.js in Your Chrome Extension {#setting-up-prismjs}
+Setting Up Prism.js in Your Chrome Extension {#setting-up-prismjs}
 
 Implementing Prism.js in a Chrome extension requires careful consideration of how the library will be loaded and applied. The approach differs slightly depending on whether you are highlighting code in content scripts, popup pages, or options pages.
 
-### Including Prism.js Files in Your Extension
+Including Prism.js Files in Your Extension
 
 The first step involves adding the necessary Prism.js files to your extension's directory structure. You need the core library file, language components for the languages you want to support, and a theme CSS file. For a typical extension supporting JavaScript, HTML, and CSS, your extension directory would include prism-core.min.js, prism-javascript.min.js, prism-css.min.js, prism-markup.min.js, and a theme like prism-tomorrow.min.css.
 
 Download these files from the official Prism.js website or repository. Pay attention to the minified versions for production use, as they significantly reduce the extension's total size. You might also consider using a build tool to create a custom Prism bundle that includes only the languages your extension actually needs.
 
-### Loading Prism.js in Content Scripts
+Loading Prism.js in Content Scripts
 
 Content scripts run in the context of web pages, which presents unique challenges for loading external libraries. The recommended approach involves bundling Prism.js directly with your extension rather than loading it from external CDNs. This ensures reliability regardless of internet connectivity and avoids potential conflicts with page scripts.
 
@@ -72,7 +72,7 @@ Content scripts run in the context of web pages, which presents unique challenge
 
 This approach ensures that Prism.js is applied to code elements on the page. Remember that your content script must properly inject Prism and handle cases where the library might already exist on the page or where the DOM elements appear dynamically.
 
-### Loading Prism.js in Extension Pages
+Loading Prism.js in Extension Pages
 
 For popup pages and options pages, loading Prism.js is more straightforward since these pages are not subject to the same constraints as content scripts. You can include Prism.js files directly in your HTML using standard script and link tags.
 
@@ -99,11 +99,11 @@ This simple setup works perfectly for static content in your extension pages. Fo
 
 ---
 
-## Implementing Code Highlighting in Content Scripts {#implementing-content-scripts}
+Implementing Code Highlighting in Content Scripts {#implementing-content-scripts}
 
-Creating a robust content script implementation requires handling various edge cases and ensuring reliable operation across different websites. This section provides a production-ready approach to syntax highlighting in content scripts.
+Creating a solid content script implementation requires handling various edge cases and ensuring reliable operation across different websites. This section provides a production-ready approach to syntax highlighting in content scripts.
 
-### Creating a Reusable Highlighting Module
+Creating a Reusable Highlighting Module
 
 A well-designed content script separates the Prism integration logic into a reusable module. This makes your code more maintainable and easier to test. Consider creating a dedicated file that handles all Prism-related functionality.
 
@@ -198,7 +198,7 @@ var PrismHighlighter = (function() {
 
 This module provides flexible language detection and handles the highlighting process cleanly. You can include this in your content script and call it as needed.
 
-### Handling Dynamic Content
+Handling Dynamic Content
 
 Modern web applications frequently load content dynamically through JavaScript. Your content script needs to handle this scenario to ensure all code gets highlighted. The MutationObserver API provides an elegant solution for detecting new content.
 
@@ -244,23 +244,23 @@ Modern web applications frequently load content dynamically through JavaScript. 
 })();
 ```
 
-This observer ensures that any dynamically added code elements get highlighted automatically, providing a seamless experience for users regardless of how the page loads content.
+This observer ensures that any dynamically added code elements get highlighted automatically, providing a smooth experience for users regardless of how the page loads content.
 
 ---
 
-## Styling and Customization {#styling-customization}
+Styling and Customization {#styling-customization}
 
 Prism.js themes control the visual appearance of highlighted code. Understanding how to customize these themes and create your own ensures your extension presents code in a way that matches your design vision.
 
-### Choosing and Applying Themes
+Choosing and Applying Themes
 
 Prism.js ships with several themes that you can use directly or customize. The themes range from minimalist to elaborate, with options like Tomorrow Night, Monokai, and Solarized Light being particularly popular. To use a theme, simply include its CSS file in your extension.
 
 For most extensions, one of the existing themes will work well without modification. However, you might find that the default theme doesn't perfectly match your extension's color scheme or that certain token colors are difficult to read. In these cases, customization becomes necessary.
 
-### Customizing Theme Colors
+Customizing Theme Colors
 
-Customizing a Prism theme involves overriding the token color definitions. Each token type—keyword, string, comment, function, and so on—has an associated CSS class that controls its appearance. You can create a custom CSS file that overrides specific colors.
+Customizing a Prism theme involves overriding the token color definitions. Each token type, keyword, string, comment, function, and so on, has an associated CSS class that controls its appearance. You can create a custom CSS file that overrides specific colors.
 
 ```css
 /* custom-prism-theme.css */
@@ -338,7 +338,7 @@ code[class*="language-"] {
 
 This custom theme uses a dark background with carefully chosen colors optimized for readability. You can adjust these values to match your extension's design language or to improve accessibility.
 
-### Responsive Code Display
+Responsive Code Display
 
 Code blocks need special handling on smaller screens. Long lines of code can break your layout or require excessive horizontal scrolling, which provides a poor user experience. Implementing responsive code display ensures your highlighted code looks good on all devices.
 
@@ -396,11 +396,11 @@ These responsive styles ensure that code wraps appropriately on smaller screens 
 
 ---
 
-## Advanced Features and Optimization {#advanced-features}
+Advanced Features and Optimization {#advanced-features}
 
 Once you have the basic Prism.js implementation working, you can enhance your extension with advanced features that improve usability and performance.
 
-### Implementing Copy-to-Clipboard Functionality
+Implementing Copy-to-Clipboard Functionality
 
 Adding a copy button to code blocks provides significant user value. Users can easily copy code snippets without manually selecting and copying text, which is particularly useful on mobile devices or with long code blocks.
 
@@ -444,7 +444,7 @@ function addCopyButtons() {
 
 This implementation adds a copy button to each code block and provides visual feedback when copying succeeds or fails.
 
-### Performance Optimization Techniques
+Performance Optimization Techniques
 
 When working with many code blocks or large code snippets, performance becomes a concern. Several optimization techniques help maintain smooth user experience.
 
@@ -496,9 +496,9 @@ observer.callback = function() {
 };
 ```
 
-### Handling Multiple Languages
+Handling Multiple Languages
 
-Extensions that display code from various sources need robust multi-language support. Implement automatic language detection to improve user experience without requiring manual language specification.
+Extensions that display code from various sources need solid multi-language support. Implement automatic language detection to improve user experience without requiring manual language specification.
 
 ```javascript
 // Automatic language detection
@@ -543,11 +543,11 @@ While automatic detection is not perfect, it provides a reasonable default that 
 
 ---
 
-## Troubleshooting Common Issues {#troubleshooting}
+Troubleshooting Common Issues {#troubleshooting}
 
 Even with careful implementation, you may encounter issues when integrating Prism.js into your Chrome extension. Understanding common problems and their solutions helps you resolve issues quickly.
 
-### Prism Not Defined Errors
+Prism Not Defined Errors
 
 One of the most common issues involves Prism not being available when your content script runs. This happens because the loading order of scripts is not guaranteed. Using the manifest's "run_at" property to control when your content script loads can resolve this.
 
@@ -566,7 +566,7 @@ One of the most common issues involves Prism not being available when your conte
 
 By specifying "run_at": "document_idle", you ensure that your script runs after the DOM is complete but before the "load" event fires, giving the page time to settle.
 
-### Conflicts with Page Scripts
+Conflicts with Page Scripts
 
 Sometimes, the website where your content script runs already uses Prism.js, and conflicts can arise. In these cases, scoping your Prism usage to avoid interfering with the page's instance becomes necessary.
 
@@ -586,7 +586,7 @@ Sometimes, the website where your content script runs already uses Prism.js, and
 
 This approach allows you to work with your own Prism instance without affecting the page's syntax highlighting.
 
-### Styles Not Applying
+Styles Not Applying
 
 If highlighting appears to work but styles are not applied correctly, check for CSS specificity issues or missing theme files. Ensure your extension's CSS is properly loaded and that the theme file is included in your manifest.
 
@@ -606,7 +606,7 @@ Also verify that your CSS selectors match Prism's expected class names, as the l
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Implementing Prism.js syntax highlighting in your Chrome extension transforms raw code blocks into beautiful, readable, and professional-looking content. This guide covered the essential aspects of integration, from initial setup through advanced customization and optimization.
 

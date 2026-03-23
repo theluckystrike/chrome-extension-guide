@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building Chrome Extensions with Vue.js — Complete Developer Guide (2025)"
+title: "Building Chrome Extensions with Vue.js. Complete Developer Guide (2025)"
 description: "Build Chrome extensions with Vue 3 and the Composition API. Covers popup UI, content scripts, Pinia state management, production builds, and deployment."
 date: 2025-02-02
 categories: [tutorials, frameworks]
@@ -8,29 +8,29 @@ tags: [vue, vue3, chrome-extension, vue-chrome-extension, composition-api]
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with Vue.js — Complete Developer Guide (2025)
+# Building Chrome Extensions with Vue.js. Complete Developer Guide (2025)
 
-Vue.js has become one of the most popular choices for building Chrome extensions in 2025. Its reactive data binding, Composition API, and seamless integration with modern build tools make it an excellent framework for extension development. Whether you are building a simple popup tool or a complex extension with content scripts, background workers, and options pages, Vue 3 provides the flexibility and performance you need.
+Vue.js has become one of the most popular choices for building Chrome extensions in 2025. Its reactive data binding, Composition API, and smooth integration with modern build tools make it an excellent framework for extension development. Whether you are building a simple popup tool or a complex extension with content scripts, background workers, and options pages, Vue 3 provides the flexibility and performance you need.
 
 This guide walks you through building Chrome extensions with Vue 3 from project setup to production deployment. We cover the modern development workflow using Vite and CRXJS, dive into the Composition API for popup development, explore content script mounting patterns, and discuss state management with Pinia. By the end, you will have the knowledge to build production-ready Chrome extensions with Vue.
 
 ---
 
-## Why Use Vue 3 for Chrome Extensions? {#why-vue-3}
+Why Use Vue 3 for Chrome Extensions? {#why-vue-3}
 
 Vue 3 brings several advantages that make it particularly well-suited for Chrome extension development. The Composition API, introduced in Vue 3, provides a flexible way to organize logic across your extension's different components. You can extract reusable behavior into composables, making your code more maintainable and testable.
 
 The framework's small bundle size is crucial for Chrome extensions, where every kilobyet affects load time and user experience. Vue 3's tree-shaking capabilities ensure that only the code you use ends up in your final build. This is particularly important for extension popups, which need to open quickly when users click the extension icon.
 
-Vue's reactive system integrates naturally with Chrome's storage APIs, allowing you to create seamless data synchronization between your extension's components. Whether you are persisting user preferences, caching data from external APIs, or sharing state between popup and content scripts, Vue's reactivity makes the process intuitive.
+Vue's reactive system integrates naturally with Chrome's storage APIs, allowing you to create smooth data synchronization between your extension's components. Whether you are persisting user preferences, caching data from external APIs, or sharing state between popup and content scripts, Vue's reactivity makes the process intuitive.
 
 ---
 
-## Project Setup: Vite + Vue 3 + CRXJS {#vite-crxjs-setup}
+Project Setup: Vite + Vue 3 + CRXJS {#vite-crxjs-setup}
 
 The modern Vue 3 extension development workflow centers around Vite for fast development and building, combined with CRXJS for packaging Chrome extensions. This combination provides hot module replacement during development and produces optimized builds ready for the Chrome Web Store.
 
-### Creating Your Project
+Creating Your Project
 
 Start by creating a new Vue project with Vite:
 
@@ -46,7 +46,7 @@ Next, install CRXJS as a development dependency to enable Chrome extension build
 npm install -D @crxjs/plugin-vite
 ```
 
-### Configuring Vite for Chrome Extension
+Configuring Vite for Chrome Extension
 
 Create or update your `vite.config.js` to incorporate the CRXJS plugin:
 
@@ -98,11 +98,11 @@ The CRXJS plugin automatically handles the complexity of building multiple entry
 
 ---
 
-## Building the Popup with Composition API {#popup-composition-api}
+Building the Popup with Composition API {#popup-composition-api}
 
 The popup is the most visible part of your extension, and Vue 3's Composition API makes building reactive popup interfaces straightforward. The Composition API allows you to group related logic together, making your popup code easier to maintain as it grows.
 
-### Basic Popup Structure
+Basic Popup Structure
 
 Your main `App.vue` for the popup might look like this:
 
@@ -152,7 +152,7 @@ const handleSave = async () => {
 ```
 {% endraw %}
 
-### Leveraging Composables for Reusable Logic
+Leveraging Composables for Reusable Logic
 
 The Composition API truly shines when you create custom composables. Instead of repeating storage logic across your popup, options page, and background scripts, you extract it into reusable functions. This pattern keeps your code DRY and makes testing individual pieces easier.
 
@@ -190,11 +190,11 @@ This composable can be used identically in your popup, options page, or any othe
 
 ---
 
-## Content Script Vue Mounting {#content-script-mounting}
+Content Script Vue Mounting {#content-script-mounting}
 
 Content scripts run in the context of web pages, not the extension's popup. While they share the extension's JavaScript runtime, they cannot directly access the DOM of your popup or options page. Vue can still power your content scripts, but the mounting pattern differs slightly from typical SPA development.
 
-### Mounting Vue to Page Elements
+Mounting Vue to Page Elements
 
 The key difference is that content scripts mount Vue to specific elements already present in the page, rather than controlling the entire page. This approach lets you enhance existing websites with Vue-powered features:
 
@@ -262,7 +262,7 @@ const extractPageData = () => {
 ```
 {% endraw %}
 
-### Shadow DOM for Style Isolation
+Shadow DOM for Style Isolation
 
 Content script styles can leak into the page and page styles can affect your Vue components. Using the Shadow DOM provides complete style isolation:
 
@@ -286,11 +286,11 @@ This approach ensures your content script styling never conflicts with page styl
 
 ---
 
-## Options Page with Vue Router {#options-page-vue-router}
+Options Page with Vue Router {#options-page-vue-router}
 
 Complex extensions often benefit from a multi-page options or settings interface. Vue Router handles navigation between different settings sections, providing a familiar SPA experience within the extension context.
 
-### Setting Up Vue Router
+Setting Up Vue Router
 
 Configure Vue Router for your options page:
 
@@ -313,7 +313,7 @@ export const router = createRouter({
 })
 ```
 
-### Integrating Router in Options Page
+Integrating Router in Options Page
 
 Your options page entry point connects Vue Router:
 
@@ -349,11 +349,11 @@ CRXJS automatically generates both `index.html` for the popup and `options.html`
 
 ---
 
-## State Management with Pinia {#pinia-state-management}
+State Management with Pinia {#pinia-state-management}
 
 For larger extensions with complex state requirements, Pinia provides a powerful state management solution. Pinia stores can hold extension-wide state accessible from popup, options page, background scripts, and content scripts through Chrome's message passing or storage synchronization.
 
-### Creating a Pinia Store
+Creating a Pinia Store
 
 ```javascript
 // stores/extensionStore.js
@@ -408,7 +408,7 @@ export const useExtensionStore = defineStore('extension', () => {
 })
 ```
 
-### Using the Store Across Components
+Using the Store Across Components
 
 In your popup or options page:
 
@@ -442,11 +442,11 @@ const toggleTheme = () => {
 
 ---
 
-## Chrome Storage Composables {#chrome-storage-composables}
+Chrome Storage Composables {#chrome-storage-composables}
 
 While the basic storage composable we covered earlier handles simple use cases, real extensions often need more sophisticated storage patterns. Creating specialized composables for different storage needs keeps your code organized.
 
-### Async Storage with Retry Logic
+Async Storage with Retry Logic
 
 ```javascript
 // composables/useRobustStorage.js
@@ -500,7 +500,7 @@ export function useRobustStorage() {
 }
 ```
 
-### Sync Storage for Settings
+Sync Storage for Settings
 
 For settings that need to sync across devices through the user's Google account:
 
@@ -535,11 +535,11 @@ export function useSyncStorage(key, defaultValue) {
 
 ---
 
-## Vue DevTools in Extension Context {#vue-devtools-extension}
+Vue DevTools in Extension Context {#vue-devtools-extension}
 
 Debugging Vue applications inside Chrome extensions requires some special consideration. The extension context differs from regular web pages, which affects how Vue DevTools works.
 
-### Enabling Vue DevTools
+Enabling Vue DevTools
 
 Install Vue DevTools in your extension during development:
 
@@ -573,7 +573,7 @@ export default defineConfig({
 })
 ```
 
-### Debugging Popup and Options Pages
+Debugging Popup and Options Pages
 
 Popup and options pages can be inspected like regular web pages. Right-click the extension popup and select "Inspect" to open DevTools. Vue DevTools will be available in the DevTools panel, allowing you to inspect components, props, and reactive state.
 
@@ -581,11 +581,11 @@ Content scripts present more of a challenge since they run in the context of web
 
 ---
 
-## Build Optimization for Production {#build-optimization}
+Build Optimization for Production {#build-optimization}
 
 Production builds for Chrome extensions require careful optimization to ensure fast load times and small bundle sizes. Vite and the CRXJS plugin provide good defaults, but there are additional optimizations you should consider.
 
-### Code Splitting
+Code Splitting
 
 Configure code splitting to separate vendor code from your application code:
 
@@ -606,7 +606,7 @@ export default defineConfig({
 
 This creates separate chunks that can be cached independently. When you update your application code but not Vue itself, users do not need to re-download the vendor chunk.
 
-### Tree Shaking Unused Code
+Tree Shaking Unused Code
 
 Ensure you are importing only what you need:
 
@@ -619,7 +619,7 @@ import { useStorage } from '@vueuse/core'
 import * as Vue from 'vue'  // This prevents tree shaking
 ```
 
-### Asset Optimization
+Asset Optimization
 
 Compress images and other assets:
 
@@ -638,7 +638,7 @@ export default defineConfig({
 })
 ```
 
-### Manifest Configuration for Performance
+Manifest Configuration for Performance
 
 In your `manifest.json`, declare only the permissions your extension actually needs. Unnecessary permissions slow down the installation process and may trigger warnings for users:
 
@@ -658,23 +658,23 @@ Use activeTab permission instead of host permissions when possible, as it is les
 
 ---
 
-## Comparing Vue with React for Chrome Extensions {#vue-vs-react}
+Comparing Vue with React for Chrome Extensions {#vue-vs-react}
 
 The choice between Vue and React for Chrome extension development often comes down to team preference and existing codebase. However, there are some practical differences worth considering.
 
-### Bundle Size
+Bundle Size
 
 Vue's runtime is slightly smaller than React's, which can be significant for extension popups where every kilobyte affects perceived performance. A minimal Vue 3 application typically ships around 30-40KB gzipped, while React with ReactDOM is closer to 40-50KB.
 
-### Learning Curve
+Learning Curve
 
 Vue's single-file components combine template, script, and style in one file, which some developers find more intuitive than React's pattern of separating JSX, CSS-in-JS, and props. For teams new to frontend frameworks, Vue's gentler learning curve can mean faster onboarding.
 
-### Ecosystem and Libraries
+Ecosystem and Libraries
 
 React's ecosystem is larger, with more third-party libraries available. However, Vue's ecosystem is mature enough that most extension use cases are well-covered. Libraries like VueUse provide composables that mirror many React hooks patterns.
 
-### Integration with Chrome APIs
+Integration with Chrome APIs
 
 Both frameworks integrate equally well with Chrome's extension APIs. The difference is purely syntactic. Vue's Composition API and React's hooks serve similar purposes, and both work well with chrome.storage, chrome.runtime, and other extension APIs.
 
@@ -682,21 +682,21 @@ Ultimately, choose the framework your team is most comfortable with. The [chrome
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building Chrome extensions with Vue 3 combines the best of modern frontend development with the unique requirements of browser extensions. The Composition API provides excellent code organization, Pinia handles state management elegantly, and Vite with CRXJS delivers a smooth development workflow.
 
-The patterns covered in this guide—from popup development with composables to content script mounting with Shadow DOM—provide a foundation for building sophisticated extensions. Remember to optimize your builds for production, keep your bundle size small, and only request the permissions you truly need.
+The patterns covered in this guide, from popup development with composables to content script mounting with Shadow DOM, provide a foundation for building sophisticated extensions. Remember to optimize your builds for production, keep your bundle size small, and only request the permissions you truly need.
 
 For more guidance on extension development patterns and best practices, explore the [chrome-extension-guide docs](/docs/). When you are ready to monetize your extension, the [extension-monetization-playbook](/docs/extension-monetization-playbook/) provides strategies for building a sustainable extension business.
 
 ---
 
-**Related Resources:**
+Related Resources:
 
-- [chrome-extension-vue-starter](https://github.com/theluckystrike/chrome-extension-vue-starter) — Production-ready Vue 3 extension template
-- [Chrome Extension Development Guide](/) — Comprehensive documentation
-- [Extension Monetization Playbook](/docs/extension-monetization-playbook/) — Monetization strategies
+- [chrome-extension-vue-starter](https://github.com/theluckystrike/chrome-extension-vue-starter). Production-ready Vue 3 extension template
+- [Chrome Extension Development Guide](/). Comprehensive documentation
+- [Extension Monetization Playbook](/docs/extension-monetization-playbook/). Monetization strategies
 
 ---
 

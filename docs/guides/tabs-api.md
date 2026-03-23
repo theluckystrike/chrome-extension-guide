@@ -2,9 +2,9 @@
 
 ## Overview
 
-The Chrome Tabs API provides powerful methods to manage browser tabs—creating, updating, moving, grouping, and listening for tab events. This guide covers all essential methods with practical code examples for building tab management extensions.
+The Chrome Tabs API provides powerful methods to manage browser tabs, creating, updating, moving, grouping, and listening for tab events. This guide covers all essential methods with practical code examples for building tab management extensions.
 
-**Required Permission:** `"tabs"` (or granular host permissions for specific URLs)
+Required Permission: `"tabs"` (or granular host permissions for specific URLs)
 
 ## Tab Properties
 
@@ -35,7 +35,7 @@ Every tab object contains these key properties:
 
 ## Finding & Getting Tabs
 
-### chrome.tabs.query — Finding Tabs with Filters
+### chrome.tabs.query. Finding Tabs with Filters
 
 Query tabs using a `QueryInfo` object to filter by various properties:
 
@@ -76,7 +76,7 @@ chrome.tabs.query({ windowId: 2 }, (tabs) => { /* tabs in window 2 */ });
 chrome.tabs.query({ groupId: 5 }, (tabs) => { /* tabs in group 5 */ });
 ```
 
-### chrome.tabs.get — Getting a Tab by ID
+### chrome.tabs.get. Getting a Tab by ID
 
 ```javascript
 // Get a specific tab by ID
@@ -91,7 +91,7 @@ const tab = await chrome.tabs.get(42);
 console.log(tab.url);
 ```
 
-### chrome.tabs.getCurrent — Getting the Current Tab
+### chrome.tabs.getCurrent. Getting the Current Tab
 
 Get the tab where the calling script is running (useful in popup or content script):
 
@@ -107,9 +107,9 @@ const currentTab = await chrome.tabs.getCurrent();
 
 ---
 
-## Creating & Updating Tabs
+Creating & Updating Tabs
 
-### chrome.tabs.create — Opening New Tabs
+chrome.tabs.create. Opening New Tabs
 
 ```javascript
 // Basic: open a URL in a new tab
@@ -140,7 +140,7 @@ for (const url of urls) {
 }
 ```
 
-### chrome.tabs.update — Modifying Tab Properties
+chrome.tabs.update. Modifying Tab Properties
 
 ```javascript
 // Navigate a tab to a new URL
@@ -175,9 +175,9 @@ chrome.tabs.update(tabId, {
 
 ---
 
-## Closing & Organizing Tabs
+Closing & Organizing Tabs
 
-### chrome.tabs.remove — Closing Tabs
+chrome.tabs.remove. Closing Tabs
 
 ```javascript
 // Close a single tab
@@ -193,7 +193,7 @@ chrome.tabs.query({ windowId: windowId }, (tabs) => {
 });
 ```
 
-### chrome.tabs.move — Reordering Tabs
+chrome.tabs.move. Reordering Tabs
 
 ```javascript
 // Move a tab to a new position in the same window
@@ -209,7 +209,7 @@ chrome.tabs.move(tabId, { windowId: targetWindowId, index: 0 });
 chrome.tabs.move([tabId1, tabId2], { index: 3 });
 ```
 
-### chrome.tabs.duplicate — Duplicating a Tab
+chrome.tabs.duplicate. Duplicating a Tab
 
 ```javascript
 // Duplicate a tab (opens a copy at the next index)
@@ -221,9 +221,9 @@ chrome.tabs.duplicate(tabId, (newTab) => {
 
 ---
 
-## Navigation & Reloading
+Navigation & Reloading
 
-### chrome.tabs.reload — Refreshing Tabs
+chrome.tabs.reload. Refreshing Tabs
 
 ```javascript
 // Basic reload
@@ -236,7 +236,7 @@ chrome.tabs.reload(tabId, { bypassCache: true });
 chrome.tabs.reload(tabId, { bypassCache: true });
 ```
 
-### chrome.tabs.goBack / goForward — Navigation History
+chrome.tabs.goBack / goForward. Navigation History
 
 ```javascript
 // Go back in history
@@ -257,9 +257,9 @@ chrome.tabs.canGoForward(tabId, (canGoForward) => {
 
 ---
 
-## Tab Groups
+Tab Groups
 
-### chrome.tabs.group — Adding Tabs to a Group
+chrome.tabs.group. Adding Tabs to a Group
 
 ```javascript
 // Create a new group and add tabs
@@ -271,7 +271,7 @@ chrome.tabs.group({ tabIds: [tabId1, tabId2, tabId3] }, (groupId) => {
 chrome.tabs.group({ groupId: existingGroupId, tabIds: [tabId4] });
 ```
 
-### chrome.tabs.ungroup — Removing Tabs from Groups
+chrome.tabs.ungroup. Removing Tabs from Groups
 
 ```javascript
 // Remove tabs from their group (becomes ungrouped)
@@ -286,9 +286,9 @@ chrome.tabGroups.delete(groupId);
 
 ---
 
-## Screenshots & Messaging
+Screenshots & Messaging
 
-### chrome.tabs.captureVisibleTab — Taking Screenshots
+chrome.tabs.captureVisibleTab. Taking Screenshots
 
 ```javascript
 // Capture visible area as data URL
@@ -308,7 +308,7 @@ chrome.tabs.captureVisibleTab(windowId, {
 // Use chrome.scripting.executeScript to capture full scroll height
 ```
 
-### chrome.tabs.sendMessage — Messaging Content Scripts
+chrome.tabs.sendMessage. Messaging Content Scripts
 
 ```javascript
 // Send message to a specific tab's content script
@@ -324,9 +324,9 @@ chrome.tabs.sendMessage(tabId, { action: 'doSomething' })
 
 ---
 
-## Tab Events
+Tab Events
 
-### chrome.tabs.onCreated — New Tab Events
+chrome.tabs.onCreated. New Tab Events
 
 ```javascript
 chrome.tabs.onCreated.addListener((tab) => {
@@ -336,7 +336,7 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 ```
 
-### chrome.tabs.onUpdated — Tab Property Changes
+chrome.tabs.onUpdated. Tab Property Changes
 
 ```javascript
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -361,7 +361,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### chrome.tabs.onRemoved — Tab Close Events
+chrome.tabs.onRemoved. Tab Close Events
 
 ```javascript
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -371,7 +371,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 ```
 
-### chrome.tabs.onActivated — Tab Switch Events
+chrome.tabs.onActivated. Tab Switch Events
 
 ```javascript
 chrome.tabs.onActivated.addListener((activeInfo) => {
@@ -385,7 +385,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 ```
 
-### chrome.tabs.onMoved — Tab Reorder Events
+chrome.tabs.onMoved. Tab Reorder Events
 
 ```javascript
 chrome.tabs.onMoved.addListener((tabId, moveInfo) => {
@@ -395,7 +395,7 @@ chrome.tabs.onMoved.addListener((tabId, moveInfo) => {
 });
 ```
 
-### chrome.tabs.onAttached / onDetached — Tab Window Changes
+chrome.tabs.onAttached / onDetached. Tab Window Changes
 
 ```javascript
 // When a tab is moved to a different window
@@ -411,7 +411,7 @@ chrome.tabs.onDetached.addListener((tabId, detachInfo) => {
 });
 ```
 
-### chrome.tabs.onReplaced — Tab Replacement Events
+chrome.tabs.onReplaced. Tab Replacement Events
 
 ```javascript
 chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
@@ -422,7 +422,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 
 ---
 
-## QueryInfo Patterns for Common Use Cases
+QueryInfo Patterns for Common Use Cases
 
 ```javascript
 // Get all browser tabs
@@ -450,7 +450,7 @@ chrome.tabs.query({ incognito: false }, (tabs) => { /* ... */ });
 
 ---
 
-## Building a Tab Manager Extension
+Building a Tab Manager Extension
 
 Here's a complete example combining multiple APIs:
 
@@ -533,13 +533,13 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 ---
 
-## Reference
+Reference
 
-- **Official Documentation:** [developer.chrome.com/docs/extensions/reference/api/tabs](https://developer.chrome.com/docs/extensions/reference/api/tabs)
-- **Manifest V3 Migration:** Tabs API is fully supported in MV3
-- **Permissions:** Use `"tabs"` for full access or granular host permissions for specific URLs
-- **Promises:** Most methods return Promises in MV3—prefer async/await over callbacks
+- Official Documentation: [developer.chrome.com/docs/extensions/reference/api/tabs](https://developer.chrome.com/docs/extensions/reference/api/tabs)
+- Manifest V3 Migration: Tabs API is fully supported in MV3
+- Permissions: Use `"tabs"` for full access or granular host permissions for specific URLs
+- Promises: Most methods return Promises in MV3, prefer async/await over callbacks
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

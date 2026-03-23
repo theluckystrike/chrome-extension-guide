@@ -8,10 +8,10 @@ Password manager extensions provide secure credential storage, form autofill, an
 
 A password manager extension typically consists of several components:
 
-- **Background Service Worker**: Handles secure storage, encryption, and communication
-- **Popup UI**: Quick access to credentials and password generation
-- **Content Scripts**: Detects login forms and performs autofill
-- **Options Page**: Full vault management interface
+- Background Service Worker: Handles secure storage, encryption, and communication
+- Popup UI: Quick access to credentials and password generation
+- Content Scripts: Detects login forms and performs autofill
+- Options Page: Full vault management interface
 
 ## Secure Storage Patterns
 
@@ -313,13 +313,13 @@ class PasswordGenerator {
 
 ## Security Best Practices
 
-1. **Never store master password**: Use it only to derive the encryption key in memory
-2. **Use AES-GCM encryption**: Provides authenticated encryption
-3. **Implement auto-lock**: Lock vault after inactivity timeout
-4. **Clear sensitive data from memory**: Use secure cleanup on unload
-5. **Validate URLs before autofill**: Prevent credential phishing
-6. **Use Content Security Policy**: Restrict script execution
-7. **Implement clipboard timeout**: Clear copied passwords after use
+1. Never store master password: Use it only to derive the encryption key in memory
+2. Use AES-GCM encryption: Provides authenticated encryption
+3. Implement auto-lock: Lock vault after inactivity timeout
+4. Clear sensitive data from memory: Use secure cleanup on unload
+5. Validate URLs before autofill: Prevent credential phishing
+6. Use Content Security Policy: Restrict script execution
+7. Implement clipboard timeout: Clear copied passwords after use
 
 ```typescript
 class SecurityManager {

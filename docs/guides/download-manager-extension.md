@@ -1,6 +1,6 @@
 # Building a Download Manager Chrome Extension
 
-A comprehensive guide to building a production-ready Download Manager extension with TypeScript, modern UI patterns, and robust state management.
+A comprehensive guide to building a production-ready Download Manager extension with TypeScript, modern UI patterns, and solid state management.
 
 ## Overview
 
@@ -18,29 +18,29 @@ A Download Manager extension provides enhanced download capabilities beyond Chro
 
 ```
 download-manager/
-├── manifest.json
-├── tsconfig.json
-├── webpack.config.js
-├── src/
-│   ├── background/
-│   │   ├── service-worker.ts
-│   │   ├── download-manager.ts
-│   │   └── storage.ts
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts
-│   │   └── popup.css
-│   ├── components/
-│   │   ├── DownloadItem.ts
-│   │   ├── DownloadQueue.ts
-│   │   └── ProgressBar.ts
-│   ├── types/
-│   │   └── index.ts
-│   └── utils/
-│       ├── logger.ts
-│       └── formatters.ts
-└── assets/
-    └── icons/
+ manifest.json
+ tsconfig.json
+ webpack.config.js
+ src/
+    background/
+       service-worker.ts
+       download-manager.ts
+       storage.ts
+    popup/
+       popup.html
+       popup.ts
+       popup.css
+    components/
+       DownloadItem.ts
+       DownloadQueue.ts
+       ProgressBar.ts
+    types/
+       index.ts
+    utils/
+        logger.ts
+        formatters.ts
+ assets/
+     icons/
 ```
 
 ### manifest.json Configuration
@@ -480,11 +480,11 @@ class PopupController {
       case 'downloading':
         return `<button class="pause-btn" data-action="pause" data-id="${item.id}">⏸</button>`;
       case 'paused':
-        return `<button class="resume-btn" data-action="resume" data-id="${item.id}">▶</button>`;
+        return `<button class="resume-btn" data-action="resume" data-id="${item.id}"></button>`;
       case 'completed':
-        return `<button class="open-btn" data-action="open" data-id="${item.id}">📂</button>`;
+        return `<button class="open-btn" data-action="open" data-id="${item.id}"></button>`;
       default:
-        return `<button class="cancel-btn" data-action="cancel" data-id="${item.id}">✕</button>`;
+        return `<button class="cancel-btn" data-action="cancel" data-id="${item.id}"></button>`;
     }
   }
 
@@ -505,11 +505,11 @@ class PopupController {
   private getStatusIcon(status: DownloadStatus): string {
     const icons: Record<DownloadStatus, string> = {
       pending: '⏳',
-      downloading: '⬇️',
-      paused: '⏸️',
-      completed: '✅',
-      failed: '❌',
-      cancelled: '🚫'
+      downloading: '',
+      paused: '⏸',
+      completed: '',
+      failed: '',
+      cancelled: ''
     };
     return icons[status];
   }
@@ -792,11 +792,11 @@ describe('Download Manager Integration', () => {
 
 ### Optimization Tips
 
-1. **Batch Storage Updates**: Don't save to storage on every progress update
-2. **Debounce UI Updates**: Update UI at most once per second
-3. **Use Offscreen Documents**: For long-running operations
-4. **Lazy Load**: Load download history on demand
-5. **Efficient Data Structures**: Use Maps for O(1) lookups
+1. Batch Storage Updates: Don't save to storage on every progress update
+2. Debounce UI Updates: Update UI at most once per second
+3. Use Offscreen Documents: For long-running operations
+4. Lazy Load: Load download history on demand
+5. Efficient Data Structures: Use Maps for O(1) lookups
 
 ```typescript
 // Debounced storage saves

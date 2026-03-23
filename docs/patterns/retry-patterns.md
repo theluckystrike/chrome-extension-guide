@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Chrome Extension Retry Patterns — Best Practices"
+title: "Chrome Extension Retry Patterns. Best Practices"
 description: "Implement retry and backoff strategies for network requests."
 canonical_url: "https://bestchromeextensions.com/patterns/retry-patterns/"
 ---
 
 # Retry Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Retry patterns are essential for handling transient failures in network requests and API calls. Chrome extensions often depend on external services, making reliable retry logic critical for a good user experience. The goal is to balance reliability with responsiveness—retrying failed operations enough to succeed, but not so much that users wait unnecessarily or overwhelm struggling services.
+Retry patterns are essential for handling transient failures in network requests and API calls. Chrome extensions often depend on external services, making reliable retry logic critical for a good user experience. The goal is to balance reliability with responsiveness, retrying failed operations enough to succeed, but not so much that users wait unnecessarily or overwhelm struggling services.
 
-## Simple Retry {#simple-retry}
+Simple Retry {#simple-retry}
 
 The most basic approach is to retry a failed operation N times with a fixed delay between attempts:
 
@@ -30,9 +30,9 @@ async function fetchWithRetry(url, options, maxRetries = 3, delay = 1000) {
 }
 ```
 
-Simple retries work best for idempotent operations—requests that produce the same result regardless of how many times they're executed. Limit retries to 3-5 maximum to avoid frustrating users with long waits.
+Simple retries work best for idempotent operations, requests that produce the same result regardless of how many times they're executed. Limit retries to 3-5 maximum to avoid frustrating users with long waits.
 
-## Exponential Backoff {#exponential-backoff}
+Exponential Backoff {#exponential-backoff}
 
 Exponential backoff dramatically improves reliability by doubling the delay after each failed attempt:
 
@@ -55,9 +55,9 @@ async function fetchWithBackoff(url, options, maxRetries = 5) {
 }
 ```
 
-This pattern produces delays like 1s, 2s, 4s, 8s, 16s—giving services time to recover. The jitter (random component) prevents all your users from retrying at exactly the same moment if there's a widespread outage.
+This pattern produces delays like 1s, 2s, 4s, 8s, 16s, giving services time to recover. The jitter (random component) prevents all your users from retrying at exactly the same moment if there's a widespread outage.
 
-## Retry with Circuit Breaker {#retry-with-circuit-breaker}
+Retry with Circuit Breaker {#retry-with-circuit-breaker}
 
 Circuit breakers prevent your extension from hammering a broken service:
 
@@ -102,11 +102,11 @@ class CircuitBreaker {
 ```
 
 States:
-- **Closed**: Normal operation, requests go through
-- **Open**: Too many failures, reject requests immediately
-- **Half-Open**: After timeout, allow one test request
+- Closed: Normal operation, requests go through
+- Open: Too many failures, reject requests immediately
+- Half-Open: After timeout, allow one test request
 
-## SW-Aware Retry {#sw-aware-retry}
+SW-Aware Retry {#sw-aware-retry}
 
 Service workers in extensions can be terminated between retries. Persist retry state:
 
@@ -137,7 +137,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 This ensures retries continue even if the service worker is unloaded between attempts.
 
-## What to Retry {#what-to-retry}
+What to Retry {#what-to-retry}
 
 Retry these conditions:
 - Network errors: connection failed, DNS errors, timeouts
@@ -160,7 +160,7 @@ function getRetryAfter(response) {
 }
 ```
 
-## What NOT to Retry {#what-not-to-retry}
+What NOT to Retry {#what-not-to-retry}
 
 Never retry these operations:
 - HTTP 400 (Bad Request): Your request is malformed
@@ -170,7 +170,7 @@ Never retry these operations:
 - Non-idempotent operations (e.g., POST that creates data)
 - User-initiated actions that need immediate feedback
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 See also:
 - [Rate Limiting](./rate-limiting.md) - Preventing throttling

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Element Hider — Developer Guide"
+title: "Chrome Extension Element Hider. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-element-hider/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-element-hider/"
 
 In this tutorial, we'll build a Chrome extension that lets users click to hide any page element, with persistent storage per site.
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with `activeTab` and `storage` permissions:
 
@@ -26,11 +26,11 @@ Create `manifest.json` with `activeTab` and `storage` permissions:
 }
 ```
 
-## Step 2: Toggle Hide Mode {#step-2-toggle-hide-mode}
+Step 2: Toggle Hide Mode {#step-2-toggle-hide-mode}
 
 Add a browser action popup (`popup.html` + `popup.js`) with a toggle button to enable/disable hide mode. When enabled, the extension icon changes state.
 
-## Step 3: Hover Highlight (Content Script) {#step-3-hover-highlight-content-script}
+Step 3: Hover Highlight (Content Script) {#step-3-hover-highlight-content-script}
 
 In `content.js`, add mouseover/mouseout listeners to highlight elements:
 
@@ -45,7 +45,7 @@ document.addEventListener('mouseout', (e) => {
 });
 ```
 
-## Step 4: Click to Hide {#step-4-click-to-hide}
+Step 4: Click to Hide {#step-4-click-to-hide}
 
 On click, set `element.style.display = 'none'` and capture the element's CSS selector:
 
@@ -57,9 +57,9 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-## Step 5: Generate Unique CSS Selector {#step-5-generate-unique-css-selector}
+Step 5: Generate Unique CSS Selector {#step-5-generate-unique-css-selector}
 
-Create a function to generate a robust CSS selector:
+Create a function to generate a solid CSS selector:
 
 ```javascript
 function generateSelector(element) {
@@ -77,7 +77,7 @@ function generateSelector(element) {
 }
 ```
 
-## Step 6: Save to Storage {#step-6-save-to-storage}
+Step 6: Save to Storage {#step-6-save-to-storage}
 
 Store hidden selectors per domain:
 
@@ -92,7 +92,7 @@ async function saveHiddenElement(selector) {
 }
 ```
 
-## Step 7: Auto-Apply on Page Revisit {#step-7-auto-apply-on-page-revisit}
+Step 7: Auto-Apply on Page Revisit {#step-7-auto-apply-on-page-revisit}
 
 On page load, retrieve saved selectors and inject CSS to hide them:
 
@@ -108,14 +108,14 @@ async function applyHiddenElements() {
 }
 ```
 
-## Step 8: Management UI {#step-8-management-ui}
+Step 8: Management UI {#step-8-management-ui}
 
 In the popup, list hidden elements per site with restore buttons. Add:
 
-- **Undo last hide**: Remove the most recent selector from storage
-- **Clear all**: Remove all hidden elements for current domain
+- Undo last hide: Remove the most recent selector from storage
+- Clear all: Remove all hidden elements for current domain
 
-## Handling Dynamic Content {#handling-dynamic-content}
+Handling Dynamic Content {#handling-dynamic-content}
 
 Use `MutationObserver` to reapply hiding rules when DOM changes:
 
@@ -126,11 +126,11 @@ const observer = new MutationObserver(() => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - See [Content Script Patterns](../guides/content-script-patterns.md) for communication strategies
 - See [DOM Observer Patterns](../patterns/dom-observer-patterns.md) for dynamic content handling
-- See [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) for storage optimization
+- See [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) for storage optimization
 -e 
 ---
 

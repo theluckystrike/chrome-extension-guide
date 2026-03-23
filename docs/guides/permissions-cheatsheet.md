@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Permissions Cheatsheet — All Permissions at a Glance"
+title: "Chrome Extension Permissions Cheatsheet. All Permissions at a Glance"
 description: "Complete reference for Chrome Extension permissions. Quick lookup table for all available permissions, their use cases, and security considerations."
 canonical_url: "https://bestchromeextensions.com/guides/permissions-cheatsheet/"
 ---
@@ -11,7 +11,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Core Permissions {#core-permissions}
+Core Permissions {#core-permissions}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -28,20 +28,20 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Network & Requests {#network-requests}
+Network & Requests {#network-requests}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
 | `declarativeNetRequest` | `chrome.declarativeNetRequest` | Block/redirect network requests declaratively | High |
-| `declarativeNetRequestWithHostAccess` | — | Use DNR with host permissions | High |
+| `declarativeNetRequestWithHostAccess` |. | Use DNR with host permissions | High |
 | `webRequest` | `chrome.webRequest` | Observe network requests | High |
-| `webRequestBlocking` | — | Block/modify requests (limited in MV3) | High |
-| `webRequestAuthProvider` | — | Handle authentication challenges | High |
-| `declarativeNetRequestFeedback` | — | Get feedback on DNR rules | High |
+| `webRequestBlocking` |. | Block/modify requests (limited in MV3) | High |
+| `webRequestAuthProvider` |. | Handle authentication challenges | High |
+| `declarativeNetRequestFeedback` |. | Get feedback on DNR rules | High |
 
 ---
 
-## Data & Privacy APIs {#data-privacy}
+Data & Privacy APIs {#data-privacy}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -56,17 +56,17 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Identity & Authentication {#identity-auth}
+Identity & Authentication {#identity-auth}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
 | `identity` | `chrome.identity` | OAuth2 authentication flow | High |
-| `identity.email` | — | Get user's email address | Medium |
+| `identity.email` |. | Get user's email address | Medium |
 | `management` | `chrome.management` | Manage other extensions/apps | Medium |
 
 ---
 
-## System & Hardware {#system-hardware}
+System & Hardware {#system-hardware}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -83,11 +83,11 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Content & Page Access {#content-page}
+Content & Page Access {#content-page}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
-| `activeTab` | — | Access current tab after click | Low |
+| `activeTab` |. | Access current tab after click | Low |
 | `scripting` | `chrome.scripting` | Inject scripts into pages | Medium |
 | `contentSettings` | `chrome.contentSettings` | Control content settings (cookies, JS, etc.) | High |
 | `pageCapture` | `chrome.pageCapture` | Save pages as MHTML | Medium |
@@ -97,7 +97,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Search & Navigation {#search-navigation}
+Search & Navigation {#search-navigation}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -108,14 +108,14 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Special APIs {#special-apis}
+Special APIs {#special-apis}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
 | `commands` | `chrome.commands` | Register keyboard shortcuts | Low |
 | `i18n` | `chrome.i18n` | Internationalization support | Low |
 | `offscreen` | `chrome.offscreen` | Create offscreen documents (MV3) | Low |
-| `unlimitedStorage` | — | Bypass storage quota limits | Low |
+| `unlimitedStorage` |. | Bypass storage quota limits | Low |
 | `nativeMessaging` | `chrome.runtime` | Communicate with native apps | High |
 | `proxy` | `chrome.proxy` | Manage proxy settings | High |
 | `vpnProvider` | `chrome.vpnProvider` | Create VPN configurations | High |
@@ -125,7 +125,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Optional Permissions {#optional-permissions}
+Optional Permissions {#optional-permissions}
 
 | Permission | Description | Trigger |
 |------------|-------------|---------|
@@ -141,7 +141,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Manifest V2 vs V3 Permissions {#mv2-mv3}
+Manifest V2 vs V3 Permissions {#mv2-mv3}
 
 | Category | MV2 | MV3 | Notes |
 |----------|-----|-----|-------|
@@ -152,15 +152,15 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Permission Risks & Best Practices {#best-practices}
+Permission Risks & Best Practices {#best-practices}
 
 | Risk Level | Permissions | Recommendation |
 |------------|-------------|-----------------|
-| **High** | `cookies`, `history`, `debugger`, `webRequest` | Avoid if possible; use minimal access |
-| **Medium** | `tabs`, `bookmarks`, `downloads`, `scripting` | Request only what's needed |
-| **Low** | `storage`, `alarms`, `i18n`, `contextMenus` | Generally safe to use |
+| High | `cookies`, `history`, `debugger`, `webRequest` | Avoid if possible; use minimal access |
+| Medium | `tabs`, `bookmarks`, `downloads`, `scripting` | Request only what's needed |
+| Low | `storage`, `alarms`, `i18n`, `contextMenus` | Generally safe to use |
 
-### Security Tips
+Security Tips
 
 - Request permissions dynamically when needed, not at install
 - Use `activeTab` instead of `tabs` when possible
@@ -170,7 +170,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Quick Lookup Table {#quick-lookup}
+Quick Lookup Table {#quick-lookup}
 
 | Need To... | Use Permission |
 |------------|-----------------|
@@ -190,15 +190,15 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
-- [Permissions Deep Dive](/permissions/permissions-deep-dive/) — Detailed permission explanations
-- [Permission Strategy](/guides/extension-permissions-strategy/) — Best practices for permission requests
-- [Manifest V3 Migration](/guides/mv2-to-mv3-migration/) — Migrating from MV2 to MV3
-- [Security Best Practices](/guides/security-best-practices/) — Extension security guidelines
+- [Permissions Deep Dive](/permissions/permissions-deep detailed look/). Detailed permission explanations
+- [Permission Strategy](/guides/extension-permissions-strategy/). Best practices for permission requests
+- [Manifest V3 Migration](/guides/mv2-to-mv3-migration/). Migrating from MV2 to MV3
+- [Security Best Practices](/guides/security-best-practices/). Extension security guidelines
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

@@ -408,18 +408,18 @@ Permissions directly affect your extension's review process and visibility in th
 
 Extensions with excessive or unnecessary permissions face:
 
-1. **Extended Review Times**: Permissions outside core functionality trigger manual review
-2. **Rejection Risk**: Extensions requesting more permissions than needed may be rejected
-3. **Visibility Impact**: Permission warnings can reduce installation rates by 50% or more
-4. **Trust Damage**: Users are increasingly cautious about permissions
+1. Extended Review Times: Permissions outside core functionality trigger manual review
+2. Rejection Risk: Extensions requesting more permissions than needed may be rejected
+3. Visibility Impact: Permission warnings can reduce installation rates by 50% or more
+4. Trust Damage: Users are increasingly cautious about permissions
 
 ### Best Practices for Store Approval
 
-1. **Use optional permissions** for non-essential features
-2. **Prefer activeTab** over broad host permissions when possible
-3. **Document permission need** in your store listing's "How this extension uses data" section
-4. **Minimize host permissions** to specific domains rather than wildcards
-5. **Avoid `<all_urls>`** unless absolutely necessary
+1. Use optional permissions for non-essential features
+2. Prefer activeTab over broad host permissions when possible
+3. Document permission need in your store listing's "How this extension uses data" section
+4. Minimize host permissions to specific domains rather than wildcards
+5. Avoid `<all_urls>` unless absolutely necessary
 
 ```json
 {
@@ -433,16 +433,16 @@ Extensions with excessive or unnecessary permissions face:
   ],
 ---
 layout: default
-title: "Chrome Extension Permissions Best Practices — Minimize Permissions for Maximum Trust"
+title: "Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust"
 description: "Learn how to implement the principle of least privilege in your Chrome extension, use optional permissions effectively, and understand the difference between activeTab and host permissions."
 canonical_url: "https://bestchromeextensions.com/guides/permissions-best-practices/"
 ---
 
-# Chrome Extension Permissions Best Practices — Minimize Permissions for Maximum Trust
+# Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust
 
-When building Chrome extensions, the permissions you request directly impact user trust, installation rates, and Chrome Web Store approval. Understanding how to properly manage permissions isn't just about following technical requirements—it's about respecting your users' privacy and security. This guide covers the essential best practices for handling permissions in your Chrome extension.
+When building Chrome extensions, the permissions you request directly impact user trust, installation rates, and Chrome Web Store approval. Understanding how to properly manage permissions isn't just about following technical requirements, it's about respecting your users' privacy and security. This guide covers the essential best practices for handling permissions in your Chrome extension.
 
-## The Principle of Least Privilege
+The Principle of Least Privilege
 
 The principle of least privilege is a fundamental security concept that should guide every decision you make about permissions. Simply put, your extension should request only the minimum permissions necessary to function, and nothing more. This principle protects both your users and your extension from potential abuse.
 
@@ -450,7 +450,7 @@ When users install an extension, they're increasingly savvy about what permissio
 
 The principle extends beyond initial development. As your extension evolves, regularly audit your permissions. Features you planned might have been cut, or alternative APIs might have become available. A quarterly permissions review can reveal opportunities to reduce your permission footprint.
 
-## Optional Permissions: A User-First Approach
+Optional Permissions: A User-First Approach
 
 Optional permissions represent one of the most powerful tools in your toolkit for building trust. Unlike required permissions that block installation, optional permissions allow users to install your extension with minimal friction and then grant additional capabilities as needed.
 
@@ -484,7 +484,7 @@ async function enableCloudSync() {
 }
 ```
 
-## Understanding Permission Warnings
+Understanding Permission Warnings
 
 Chrome displays permission warnings when users attempt to install your extension, and these warnings can significantly impact installation rates. Understanding what triggers these warnings and how to minimize them is crucial for user adoption.
 
@@ -494,11 +494,11 @@ Some permissions trigger warnings that might not be necessary for your use case.
 
 When you cannot avoid a permission that triggers a warning, use the permissions justification field in your manifest to explain why your extension needs it. A well-written justification won't remove the warning, but it helps users understand your legitimate need.
 
-## activeTab vs Host Permissions: Making the Right Choice
+activeTab vs Host Permissions: Making the Right Choice
 
 One of the most important permission decisions you'll make is between `activeTab` and host permissions. This choice significantly affects both security and user experience.
 
-The `activeTab` permission grants your extension access to the current tab only when the user explicitly invokes it—typically by clicking your extension's action icon or using a keyboard shortcut. This is the most privacy-friendly option because users must consciously activate your extension for each use. With `activeTab`, your extension cannot silently read page content or modify websites.
+The `activeTab` permission grants your extension access to the current tab only when the user explicitly invokes it, typically by clicking your extension's action icon or using a keyboard shortcut. This is the most privacy-friendly option because users must consciously activate your extension for each use. With `activeTab`, your extension cannot silently read page content or modify websites.
 
 Host permissions, specified as `<all_urls>` or specific patterns like `https://*.example.com/*`, grant ongoing access to matching websites. This access persists from installation and allows your extension to read and modify page content at any time. While sometimes necessary, broad host permissions trigger significant warnings and reduce user trust.
 
@@ -513,11 +513,11 @@ In most cases, prefer `activeTab` over host permissions. If your extension only 
 
 This minimal permission set clearly communicates to reviewers and users what the extension needs and why.
 
-## User Trust and Permission Warnings
+User Trust and Permission Warnings
 
 Permission warnings directly impact user decisions to install your extension. Understanding and mitigating these warnings is crucial for success.
 
-### Understanding Warning Messages
+Understanding Warning Messages
 
 Chrome displays warnings based on the permissions you request. Some generate significant warnings:
 
@@ -530,9 +530,9 @@ Chrome displays warnings based on the permissions you request. Some generate sig
 
 This combination shows multiple warnings including "Read and change your data on all websites" and "Read and change your browsing history."
 
-### Strategies for Building Trust
+Strategies for Building Trust
 
-1. **Explain permissions in your extension**: Use your popup or options page to explain why each permission is needed
+1. Explain permissions in your extension: Use your popup or options page to explain why each permission is needed
 
 ```typescript
 // In your popup or options page
@@ -549,7 +549,7 @@ function displayPermissionExplanation(): void {
 }
 ```
 
-2. **Request permissions contextually**: Ask for permissions when the user is about to use a feature that needs them
+2. Request permissions contextually: Ask for permissions when the user is about to use a feature that needs them
 
 ```typescript
 async function handleUserActionRequiringPermission(
@@ -570,7 +570,7 @@ async function handleUserActionRequiringPermission(
 }
 ```
 
-3. **Provide graceful degradation**: When permissions are denied, offer an alternative experience
+3. Provide graceful degradation: When permissions are denied, offer an alternative experience
 
 ```typescript
 async function safeUseFeature(): Promise<void> {
@@ -589,17 +589,17 @@ async function safeUseFeature(): Promise<void> {
 }
 ```
 
-## Typed Patterns with chrome-permissions-guard
+Typed Patterns with chrome-permissions-guard
 
 For TypeScript projects, the `@theluckystrike/chrome-permissions-guard` package provides type-safe permission checking and request patterns. This helps prevent runtime errors and improves developer experience.
 
-### Installation
+Installation
 
 ```bash
 npm install @theluckystrike/chrome-permissions-guard
 ```
 
-### Basic Usage
+Basic Usage
 
 ```typescript
 import {
@@ -632,7 +632,7 @@ async function requestFeaturePermissions(): Promise<boolean> {
 
 The guard provides compile-time checking that you're only working with permissions your extension actually declares, preventing runtime errors from typos or invalid permission names.
 
-### Advanced Patterns
+Advanced Patterns
 
 ```typescript
 import {
@@ -710,7 +710,7 @@ class ExtensionPermissions {
 export const permissions = new ExtensionPermissions();
 ```
 
-## Complete Example: Permission-Aware Extension
+Complete Example: Permission-Aware Extension
 
 Here's a complete example demonstrating best practices in a real extension:
 
@@ -857,22 +857,22 @@ async function handleFeatureRequest(feature: string): Promise<boolean> {
 }
 ```
 
-## Summary
+Summary
 
 Effective permission management is critical for building successful Chrome extensions. Key takeaways:
 
-1. **Prefer optional permissions** over required ones when possible
-2. **Use `activeTab`** instead of broad host permissions for user-initiated actions
-3. **Separate API permissions from host permissions** in Manifest V3
-4. **Request permissions contextually** when users need specific features
-5. **Provide graceful degradation** when permissions are denied
-6. **Use type-safe patterns** like `@theluckystrike/chrome-permissions-guard` for better developer experience
-7. **Document your permissions** in the Chrome Web Store listing
+1. Prefer optional permissions over required ones when possible
+2. Use `activeTab` instead of broad host permissions for user-initiated actions
+3. Separate API permissions from host permissions in Manifest V3
+4. Request permissions contextually when users need specific features
+5. Provide graceful degradation when permissions are denied
+6. Use type-safe patterns like `@theluckystrike/chrome-permissions-guard` for better developer experience
+7. Document your permissions in the Chrome Web Store listing
 
 By following these best practices, you'll create extensions that users trust, that pass review smoothly, and that maintain strong security postures. Remember: every permission you don't request is a permission that can't be exploited.
 This configuration allows your extension to access the current tab when activated, but never automatically. Users maintain full control over when your extension can interact with their browsing.
 
-## The Trust Impact of Permissions
+The Trust Impact of Permissions
 
 User trust is the foundation of a successful Chrome extension. Every permission you request communicates something about your intentions, and excessive permissions signal potential problems to savvy users.
 
@@ -882,7 +882,7 @@ Beyond installation, permissions affect reviews and ratings. Users who feel an e
 
 For extensions distributed through the Chrome Web Store, permission choices also affect review outcomes. Google's review process examines whether your requested permissions are appropriate for your extension's functionality. Extensions that request more permissions than necessary may face longer review times or rejection.
 
-## Conclusion
+Conclusion
 
 Managing permissions effectively requires balancing functionality with respect for user privacy and security. By following the principle of least privilege, leveraging optional permissions wisely, understanding permission warnings, choosing `activeTab` over broad host permissions, and considering the trust impact of every permission request, you build extensions that users can trust.
 

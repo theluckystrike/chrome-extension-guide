@@ -4,7 +4,7 @@ The Chrome VPN Provider API (`chrome.vpnProvider`) enables ChromeOS extensions t
 
 ## Platform Requirements
 
-The `chrome.vpnProvider` API is **exclusively available on ChromeOS**.
+The `chrome.vpnProvider` API is exclusively available on ChromeOS.
 
 ```json
 {
@@ -42,7 +42,7 @@ chrome.vpnProvider.createConfig(
 );
 ```
 
-**Properties:**
+Properties:
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -88,7 +88,7 @@ chrome.vpnProvider.onPlatformMessage.addListener((message, callback) => {
 });
 ```
 
-**Message Types:**
+Message Types:
 
 | Type | Description | Properties |
 |------|-------------|------------|
@@ -317,9 +317,9 @@ new SimpleVpnProvider();
 
 ## Best Practices
 
-1. **Verify server certificates** to prevent MITM attacks
-2. **Use strong encryption** for all tunneled traffic
-3. **Handle disconnection gracefully** - clean up resources properly
-4. **Store credentials securely** using Chrome Storage with encryption
-5. **Test on ChromeOS thoroughly** before publishing
-6. **Communicate platform limitations** clearly to users
+1. Verify server certificates to prevent MITM attacks
+2. Use strong encryption for all tunneled traffic
+3. Handle disconnection gracefully - clean up resources properly
+4. Store credentials securely using Chrome Storage with encryption
+5. Test on ChromeOS thoroughly before publishing
+6. Communicate platform limitations clearly to users

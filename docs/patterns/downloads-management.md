@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Downloads Management — Best Practices"
+title: "Chrome Extension Downloads Management. Best Practices"
 description: "Manage file downloads from extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 
 This guide covers patterns for managing downloads in Chrome extensions using the Downloads API.
 
-## Starting Downloads {#starting-downloads}
+Starting Downloads {#starting-downloads}
 
 Use `chrome.downloads.download()` to initiate downloads:
 
@@ -25,13 +25,13 @@ async function startDownload(url, filename) {
 }
 ```
 
-**Options:**
+Options:
 - `url`: The URL to download
 - `filename`: Custom filename (optional, auto-generated if omitted)
 - `saveAs`: Show "Save As" dialog (`true`/`false`)
 - `method`: HTTP method (default: 'GET')
 
-## Monitoring Progress {#monitoring-progress}
+Monitoring Progress {#monitoring-progress}
 
 Listen to `chrome.downloads.onChanged` to track download progress:
 
@@ -47,14 +47,14 @@ chrome.downloads.onChanged.addListener((downloadDelta) => {
 });
 ```
 
-## Download States {#download-states}
+Download States {#download-states}
 
 Downloads transition through these states:
 - `in_progress`: Download is actively downloading
 - `interrupted`: Download was interrupted (check `error` for reason)
 - `complete`: Download finished successfully
 
-## Progress UI in Popup {#progress-ui-in-popup}
+Progress UI in Popup {#progress-ui-in-popup}
 
 Display download progress in your extension popup:
 
@@ -66,7 +66,7 @@ function updateProgressBar(downloadId, percent) {
 }
 ```
 
-## Filename Generation {#filename-generation}
+Filename Generation {#filename-generation}
 
 Generate dynamic filenames with timestamps:
 
@@ -78,7 +78,7 @@ function generateFilename(baseName, extension) {
 }
 ```
 
-## File Type Handling {#file-type-handling}
+File Type Handling {#file-type-handling}
 
 Set appropriate MIME types and extensions:
 
@@ -90,7 +90,7 @@ const fileTypes = {
 };
 ```
 
-## Batch Downloads {#batch-downloads}
+Batch Downloads {#batch-downloads}
 
 Queue multiple downloads with concurrency control:
 
@@ -112,7 +112,7 @@ async function batchDownload(urls, concurrency = 3) {
 }
 ```
 
-## Download from Generated Data {#download-from-generated-data}
+Download from Generated Data {#download-from-generated-data}
 
 Create downloads from Blob URLs for generated content:
 
@@ -125,7 +125,7 @@ async function downloadDataAsFile(data, filename, mimeType) {
 }
 ```
 
-## Cancel, Pause, Resume {#cancel-pause-resume}
+Cancel, Pause, Resume {#cancel-pause-resume}
 
 ```javascript
 chrome.downloads.cancel(downloadId);    // Cancel download
@@ -133,14 +133,14 @@ chrome.downloads.pause(downloadId);    // Pause download
 chrome.downloads.resume(downloadId);   // Resume paused download
 ```
 
-## Open and Show Files {#open-and-show-files}
+Open and Show Files {#open-and-show-files}
 
 ```javascript
 chrome.downloads.open(downloadId);    // Open downloaded file
 chrome.downloads.show(downloadId);    // Show in file manager
 ```
 
-## Download History {#download-history}
+Download History {#download-history}
 
 Query past downloads:
 
@@ -151,7 +151,7 @@ async function getDownloadHistory() {
 }
 ```
 
-## Shelf Control {#shelf-control}
+Shelf Control {#shelf-control}
 
 Control the download shelf (bottom bar):
 
@@ -160,7 +160,7 @@ chrome.downloads.setShelfEnabled(false);  // Hide download shelf
 chrome.downloads.setShelfEnabled(true);   // Show download shelf
 ```
 
-## Related Documentation {#related-documentation}
+Related Documentation {#related-documentation}
 
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Downloads Permissions](../permissions/downloads.md)

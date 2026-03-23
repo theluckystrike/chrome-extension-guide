@@ -1,22 +1,22 @@
 ---
 layout: default
-title: "Chrome Extension Content Script Isolation — Developer Guide"
+title: "Chrome Extension Content Script Isolation. Developer Guide"
 description: "Learn Chrome extension content script isolation with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/content-script-isolation/"
 ---
 # Content Script Isolation Deep Dive
 
-## Introduction {#introduction}
-- Content scripts run in an "isolated world" — they share the DOM but NOT the JavaScript scope
+Introduction {#introduction}
+- Content scripts run in an "isolated world". they share the DOM but NOT the JavaScript scope
 - This is Chrome's security model for extensions interacting with web pages
 
-## The Isolated World Model {#the-isolated-world-model}
+The Isolated World Model {#the-isolated-world-model}
 - Content script's `window` !== page's `window`
 - Content script can read/modify DOM elements, but can't access page's JS variables or functions
 - Page can't access content script's variables or Chrome APIs
 - Both worlds see the same DOM tree
 
-## What Content Scripts CAN Access {#what-content-scripts-can-access}
+What Content Scripts CAN Access {#what-content-scripts-can-access}
 - Full DOM (document.querySelector, createElement, etc.)
 - `chrome.runtime` (for messaging)
 - `chrome.storage` (direct access)
@@ -24,20 +24,20 @@ canonical_url: "https://bestchromeextensions.com/guides/content-script-isolation
 - `fetch()` with extension's permissions (not page's CORS)
 - `XMLHttpRequest`
 
-## What Content Scripts CANNOT Access {#what-content-scripts-cannot-access}
+What Content Scripts CANNOT Access {#what-content-scripts-cannot-access}
 - Page's JavaScript variables (`window.myApp` etc.)
 - Page's event listeners
 - Other Chrome APIs (no `chrome.tabs`, `chrome.bookmarks`, etc.)
 - Variables from other content scripts (other extensions)
 
-## Accessing Page JavaScript {#accessing-page-javascript}
+Accessing Page JavaScript {#accessing-page-javascript}
 
-### Method 1: window.postMessage {#method-1-windowpostmessage}
+Method 1: window.postMessage {#method-1-windowpostmessage}
 ```javascript
-// content.js — send to page
+// content.js. send to page
 window.postMessage({ type: "FROM_EXTENSION", data: "hello" }, "*");
 
-// content.js — receive from page
+// content.js. receive from page
 window.addEventListener("message", (event) => {
   if (event.data.type === "FROM_PAGE") {
     console.log("Page says:", event.data.data);
@@ -53,9 +53,9 @@ window.addEventListener("message", (event) => {
 });
 ```
 
-### Method 2: Main World Injection (MV3) {#method-2-main-world-injection-mv3}
+Method 2: Main World Injection (MV3) {#method-2-main-world-injection-mv3}
 ```javascript
-// background.js — inject script into main world
+// background.js. inject script into main world
 chrome.scripting.executeScript({
   target: { tabId: tab.id },
   world: "MAIN",  // Runs in page's JS context!
@@ -67,15 +67,15 @@ chrome.scripting.executeScript({
 - `world: "MAIN"` gives full access to page JavaScript
 - Security risk: code runs with page's permissions, not extension's
 
-### Method 3: Script Tag Injection {#method-3-script-tag-injection}
+Method 3: Script Tag Injection {#method-3-script-tag-injection}
 ```javascript
-// content.js — inject a script tag into the page
+// content.js. inject a script tag into the page
 const script = document.createElement("script");
 script.src = chrome.runtime.getURL("inject.js"); // Must be web_accessible_resource
 document.head.appendChild(script);
 ```
 
-## Communication Architecture {#communication-architecture}
+Communication Architecture {#communication-architecture}
 ```
 Page JS <-- window.postMessage --> Content Script <-- chrome.runtime --> Background SW
 ```
@@ -87,40 +87,40 @@ Page JS <-- window.postMessage --> Content Script <-- chrome.runtime --> Backgro
   ```
 - Use `window.postMessage` for content <-> page JS
 
-## CSP and Content Scripts {#csp-and-content-scripts}
+CSP and Content Scripts {#csp-and-content-scripts}
 - Content scripts are NOT subject to the page's CSP
 - Content scripts ARE subject to the extension's CSP
 - Injected `<script>` tags ARE subject to the page's CSP (may be blocked)
 - `chrome.scripting.executeScript` with `world: "MAIN"` bypasses page CSP
 
-## Debugging Isolation {#debugging-isolation}
+Debugging Isolation {#debugging-isolation}
 - DevTools Console: switch context dropdown from "top" to your extension name
 - "top" = page context, extension name = content script context
 - `console.log` in content script appears in page's DevTools (but in extension context)
 - Use Sources panel -> Content scripts section to set breakpoints
 
-## Security Best Practices {#security-best-practices}
-- Never trust data from the page — sanitize everything
-- Validate `window.postMessage` events — check `event.origin` or use `event.data.type` filtering
+Security Best Practices {#security-best-practices}
+- Never trust data from the page. sanitize everything
+- Validate `window.postMessage` events. check `event.origin` or use `event.data.type` filtering
 - Don't expose sensitive extension data to the page via DOM
 - Use `@theluckystrike/webext-messaging` for secure extension-internal communication
-- Minimize main world injection — only when absolutely needed
+- Minimize main world injection. only when absolutely needed
 
-## Common Patterns {#common-patterns}
-- **Page data extraction**: Read DOM, send to background for processing
-- **UI injection**: Create extension UI elements in page DOM
-- **Page function hooking**: Main world injection to intercept/modify page behavior
-- **Form autofill**: Content script fills form fields from stored data (`@theluckystrike/webext-storage`)
+Common Patterns {#common-patterns}
+- Page data extraction: Read DOM, send to background for processing
+- UI injection: Create extension UI elements in page DOM
+- Page function hooking: Main world injection to intercept/modify page behavior
+- Form autofill: Content script fills form fields from stored data (`@theluckystrike/webext-storage`)
 
-## Common Mistakes {#common-mistakes}
-- Trying to access `window.myVar` from content script — it's a different `window`
+Common Mistakes {#common-mistakes}
+- Trying to access `window.myVar` from content script. it's a different `window`
 - Forgetting that injected `<script>` tags run in page context, not extension context
-- Not filtering `window.postMessage` events — any page script can send messages
-- Expecting content script to have access to `chrome.tabs` — it doesn't
+- Not filtering `window.postMessage` events. any page script can send messages
+- Expecting content script to have access to `chrome.tabs`. it doesn't
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Content Script Isolation](../patterns/content-script-isolation.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

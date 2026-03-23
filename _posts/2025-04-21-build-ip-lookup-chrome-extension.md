@@ -15,7 +15,7 @@ In today's interconnected digital world, understanding network information has b
 
 This comprehensive tutorial will guide you through creating a fully functional IP lookup Chrome extension using Manifest V3. You will learn how to design the extension architecture, integrate with IP geolocation APIs, create an intuitive user interface, and publish your extension to the Chrome Web Store. By the end of this guide, you will have a production-ready extension that provides real-time network information at the click of a button.
 
-## Why Build an IP Lookup Chrome Extension? {#why-build-ip-lookup}
+Why Build an IP Lookup Chrome Extension? {#why-build-ip-lookup}
 
 Before diving into the technical implementation, let us explore why creating an IP lookup Chrome extension is a worthwhile project. The demand for network diagnostic tools continues to grow as more people become aware of their digital privacy and need tools to understand their online presence.
 
@@ -25,7 +25,7 @@ Building this extension teaches you several valuable skills that apply to broade
 
 The extension you build will be genuinely useful. Unlike many learning projects that exist only to demonstrate concepts, an IP lookup tool solves real problems. Developers use such tools daily to verify that their applications are routing traffic correctly, to test geolocation functionality, and to debug integration issues with third-party services.
 
-## Understanding the Extension Architecture {#extension-architecture}
+Understanding the Extension Architecture {#extension-architecture}
 
 Chrome extensions following Manifest V3 have a specific architectural pattern that you need to understand before writing code. The architecture separates different parts of your extension into distinct components that communicate through well-defined interfaces.
 
@@ -37,7 +37,7 @@ The background service worker handles operations that need to run independently 
 
 Content scripts allow your extension to interact with web page content. While not strictly necessary for a basic IP lookup extension, adding content script capabilities lets users look up the IP addresses of websites they are currently visiting, which significantly enhances the utility.
 
-## Setting Up Your Development Environment {#development-environment}
+Setting Up Your Development Environment {#development-environment}
 
 Before writing any code, you need to set up a proper development environment. This involves creating the project structure, configuring your text editor, and testing that your development tools work correctly.
 
@@ -47,7 +47,7 @@ You will need a good code editor. Visual Studio Code is an excellent choice for 
 
 For testing your extension during development, you will load it directly into Chrome rather than publishing it first. Chrome provides a special mode for developers that allows you to load unpacked extensions for testing. This workflow lets you make changes and see them reflected immediately without going through the full publication process.
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the foundation of every Chrome extension. It tells Chrome about your extension's capabilities, permissions, and structure. For our IP lookup extension, we need to specify the correct permissions and declare our popup and any background scripts.
 
@@ -90,7 +90,7 @@ This manifest declares several important elements. The permissions array specifi
 
 Note that Manifest V3 requires you to explicitly declare all host permissions separately from regular permissions. This is a security improvement that makes it clearer to users what external services your extension can access.
 
-## Designing the Popup Interface {#popup-interface}
+Designing the Popup Interface {#popup-interface}
 
 The popup interface is what users see when they click your extension icon. Designing a good popup is crucial because users judge your extension by its appearance and responsiveness. Your popup should be clean, informative, and easy to use.
 
@@ -135,13 +135,13 @@ This HTML structure provides three main sections. The header displays your exten
 
 The CSS styling should be clean and professional. Use a consistent color scheme that looks good in Chrome's popup environment, and make sure text is readable even in the limited popup space. Consider dark mode support since many developers prefer dark themes.
 
-## Implementing the JavaScript Logic {#javascript-logic}
+Implementing the JavaScript Logic {#javascript-logic}
 
 The JavaScript in your popup handles all the functionality. This includes capturing user input, making API calls to IP geolocation services, parsing the responses, and updating the display with results. Let us break down each component.
 
 First, you need to select your API provider. Several free and paid services provide IP geolocation data, each with different features, rate limits, and response formats. For a production extension, you would likely use a paid service like ipapi.co or ipinfo.io, but for learning and basic use, free tiers work well.
 
-Here is a robust implementation that handles API calls gracefully:
+Here is a solid implementation that handles API calls gracefully:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -250,7 +250,7 @@ This JavaScript code provides a complete implementation of the IP lookup functio
 
 One important aspect of this implementation is the use of the Fetch API for making HTTP requests. This is the modern standard for web requests and works well within Chrome extensions. The async/await pattern makes the code readable and easy to follow.
 
-## Adding Advanced Features {#advanced-features}
+Adding Advanced Features {#advanced-features}
 
 Once you have the basic functionality working, consider adding features that differentiate your extension from basic IP lookup tools. These enhancements make your extension more valuable and increase the likelihood that users will keep it installed.
 
@@ -262,7 +262,7 @@ A dark mode toggle respects user preferences and improves the extension's appear
 
 An options page allows advanced configuration. While not necessary for a basic extension, adding an options page lets users configure default behaviors, choose their preferred API provider, or set custom styling preferences.
 
-## Handling API Rate Limits and Errors {#error-handling}
+Handling API Rate Limits and Errors {#error-handling}
 
 Robust error handling distinguishes professional extensions from amateur attempts. Users will encounter various errors, including network failures, API rate limits, invalid IP addresses, and service outages. Your extension should handle each case gracefully and provide helpful feedback.
 
@@ -272,7 +272,7 @@ Implement exponential backoff for retry logic. When a request fails temporarily,
 
 Cache results to reduce API calls. If a user looks up the same IP multiple times, serve the cached result rather than making another API request. This improves response time and reduces your API usage. Store cache data with timestamps and expire entries after a reasonable period.
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing ensures it works correctly across different scenarios. Chrome provides developer tools that make testing extensions straightforward.
 
@@ -282,7 +282,7 @@ Test various IP addresses to ensure your extension handles different input forma
 
 Test the extension in incognito mode to verify it works correctly when privacy protections are enabled. Some APIs might behave differently or be unavailable in incognito, and your extension should handle these cases gracefully.
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working correctly, you can publish it to the Chrome Web Store for millions of users to discover and install. The publication process involves preparing your extension, creating a developer account, and submitting your extension for review.
 
@@ -292,7 +292,7 @@ Create a developer account through the Chrome Web Store developer dashboard. The
 
 Submit your extension for review. Google's review process checks for policy compliance, proper functionality, and user safety. Most submissions review within a few hours to a few days. If rejected, you receive feedback explaining what needs to be addressed.
 
-## Conclusion and Next Steps {#conclusion}
+Conclusion and Next Steps {#conclusion}
 
 Building an IP lookup Chrome extension is an excellent project that teaches valuable skills while producing a genuinely useful tool. You have learned how to structure a Manifest V3 extension, create responsive popup interfaces, make API calls, handle errors gracefully, and prepare extensions for publication.
 

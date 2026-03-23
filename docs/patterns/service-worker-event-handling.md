@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Service Worker Event Handling — Best Practices"
+title: "Chrome Extension Service Worker Event Handling. Best Practices"
 description: "Handle service worker events properly."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-event-handling/"
 ---
@@ -9,17 +9,17 @@ canonical_url: "https://bestchromeextensions.com/patterns/service-worker-event-h
 
 This document outlines essential patterns for handling events in Chrome Extension Manifest V3 service workers.
 
-## Top-Level Listener Registration {#top-level-listener-registration}
+Top-Level Listener Registration {#top-level-listener-registration}
 
-**Critical Rule**: Always register all event listeners at the top level of your service worker file, not inside any function or event handler.
+Critical Rule: Always register all event listeners at the top level of your service worker file, not inside any function or event handler.
 
 ```javascript
-// ✅ CORRECT: Top-level registration
+//  CORRECT: Top-level registration
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Extension installed');
 });
 
-// ❌ WRONG: Registration inside onInstalled
+//  WRONG: Registration inside onInstalled
 chrome.runtime.onInstalled.addListener(() => {
   chrome.declarativeContent.onPageChanged.addListener(() => {
     // This listener may not be registered properly!
@@ -27,11 +27,11 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Why This Matters {#why-this-matters}
+Why This Matters {#why-this-matters}
 
 Chrome records all event listeners during the service worker's first run. If you register listeners inside `onInstalled` or other handlers, they may not be properly registered, causing events to be missed.
 
-## Async Event Handlers {#async-event-handlers}
+Async Event Handlers {#async-event-handlers}
 
 Service workers must return promises for asynchronous operations. Chrome waits for all returned promises to resolve before considering the event handled.
 
@@ -62,7 +62,7 @@ async function initializeExtension(reason) {
 }
 ```
 
-## Multiple Listeners Per Event {#multiple-listeners-per-event}
+Multiple Listeners Per Event {#multiple-listeners-per-event}
 
 You can register multiple listeners for the same event type:
 
@@ -76,7 +76,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Using Filters to Reduce Wake-ups {#using-filters-to-reduce-wake-ups}
+Using Filters to Reduce Wake-ups {#using-filters-to-reduce-wake-ups}
 
 Filters allow you to specify which events your service worker should handle, reducing unnecessary wake-ups:
 
@@ -95,7 +95,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-## Event Batching with chrome.declarativeNetRequest {#event-batching-with-chromedeclarativenetrequest}
+Event Batching with chrome.declarativeNetRequest {#event-batching-with-chromedeclarativenetrequest}
 
 For network events, use declarative rules to batch and process events efficiently:
 
@@ -111,7 +111,7 @@ For network events, use declarative rules to batch and process events efficientl
 ]
 ```
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)

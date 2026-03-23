@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Building Side Panel Extensions in Chrome — Complete Tutorial"
+title: "Building Side Panel Extensions in Chrome. Complete Tutorial"
 description: "Learn how to build Chrome extensions with side panels. This comprehensive tutorial covers the chrome.sidePanel API, per-tab vs global panels, lifecycle management, UI design, messaging, and responsive design patterns."
 canonical_url: "https://bestchromeextensions.com/tutorials/side-panel-guide/"
 ---
@@ -11,14 +11,14 @@ Side panels provide a powerful way to create persistent, always-accessible UI fo
 
 This tutorial walks you through building a complete side panel extension from scratch, covering everything from manifest configuration to responsive design.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before starting, ensure you have:
 - Chrome 114 or later (the Side Panel API was introduced in this version)
 - Basic familiarity with HTML, CSS, and JavaScript
 - Understanding of Chrome extension architecture (manifest V3)
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 The side panel requires specific manifest configuration. Create a new extension project:
 
@@ -46,11 +46,11 @@ The side panel requires specific manifest configuration. Create a new extension 
 ```
 
 Key manifest entries:
-- `permissions: ["sidePanel"]` — Required to use the side panel API
-- `side_panel.default_path` — The default HTML file shown when the panel opens
-- `action.default_title` — Tooltip shown when hovering over the extension icon
+- `permissions: ["sidePanel"]`. Required to use the side panel API
+- `side_panel.default_path`. The default HTML file shown when the panel opens
+- `action.default_title`. Tooltip shown when hovering over the extension icon
 
-## Step 2: Create the Side Panel HTML {#step-2-create-the-side-panel-html}
+Step 2: Create the Side Panel HTML {#step-2-create-the-side-panel-html}
 
 Create `sidepanel.html` with a clean, functional layout:
 
@@ -67,7 +67,7 @@ Create `sidepanel.html` with a clean, functional layout:
   <div class="panel-container">
     <header class="panel-header">
       <h1>Page Notes</h1>
-      <button id="settings-btn" aria-label="Settings">⚙️</button>
+      <button id="settings-btn" aria-label="Settings"></button>
     </header>
     
     <div class="page-info" id="page-info">
@@ -94,7 +94,7 @@ Create `sidepanel.html` with a clean, functional layout:
 </html>
 ```
 
-## Step 3: Styling for Responsive Design {#step-3-styling-for-responsive-design}
+Step 3: Styling for Responsive Design {#step-3-styling-for-responsive-design}
 
 The side panel can be resized by users, so your CSS must handle varying widths gracefully:
 
@@ -244,7 +244,7 @@ body {
 }
 ```
 
-## Step 4: Side Panel JavaScript Logic {#step-4-side-panel-javascript-logic}
+Step 4: Side Panel JavaScript Logic {#step-4-side-panel-javascript-logic}
 
 Create `sidepanel.js` to handle the panel's functionality:
 
@@ -353,7 +353,7 @@ async function init() {
 document.addEventListener('DOMContentLoaded', init);
 ```
 
-## Step 5: Configure Side Panel Behavior {#step-5-configure-side-panel-behavior}
+Step 5: Configure Side Panel Behavior {#step-5-configure-side-panel-behavior}
 
 Create `background.js` to configure how the side panel opens:
 
@@ -405,11 +405,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-## Step 6: Understanding Per-Tab vs Global Panels {#step-6-understanding-per-tab-vs-global-panels}
+Step 6: Understanding Per-Tab vs Global Panels {#step-6-understanding-per-tab-vs-global-panels}
 
 The side panel API supports two modes of operation:
 
-### Global Side Panel
+Global Side Panel
 
 A single panel that works across all tabs:
 
@@ -425,7 +425,7 @@ const options = await chrome.sidePanel.getOptions({});
 console.log(options.path); // 'global-panel.html'
 ```
 
-### Per-Tab Side Panel
+Per-Tab Side Panel
 
 Different content for different tabs:
 
@@ -443,14 +443,14 @@ const tabOptions = await chrome.sidePanel.getOptions({
 });
 ```
 
-### When to Use Each Mode
+When to Use Each Mode
 
 | Mode | Use Case |
 |------|----------|
 | Global | Settings panel, bookmark manager, universal tools |
 | Per-Tab | Context-aware tools, page-specific notes, URL analyzers |
 
-## Step 7: Side Panel Lifecycle {#step-7-side-panel-lifecycle}
+Step 7: Side Panel Lifecycle {#step-7-side-panel-lifecycle}
 
 Understanding when the side panel is active helps manage resources:
 
@@ -473,12 +473,12 @@ async function isSidePanelVisible(tabId) {
 }
 ```
 
-## Step 8: Communicating with Content Scripts {#step-8-communicating-with-content-scripts}
+Step 8: Communicating with Content Scripts {#step-8-communicating-with-content-scripts}
 
 Your side panel often needs to interact with the page content:
 
 ```javascript
-// sidepanel.js — Send message to content script
+// sidepanel.js. Send message to content script
 
 // Get the current active tab
 const [tab] = await chrome.tabs.query({ 
@@ -500,7 +500,7 @@ chrome.tabs.sendMessage(tab.id, {
 ```
 
 ```javascript
-// content-script.js — Listen for messages
+// content-script.js. Listen for messages
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'getPageData') {
@@ -520,17 +520,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Step 9: Programmatic Opening with User Activation {#step-9-programmatic-opening-with-user-activation}
+Step 9: Programmatic Opening with User Activation {#step-9-programmatic-opening-with-user-activation}
 
 The `chrome.sidePanel.open()` method requires user activation:
 
 ```javascript
-// This works — triggered by user action
+// This works. triggered by user action
 document.getElementById('open-panel-btn').addEventListener('click', async () => {
   await chrome.sidePanel.open({ windowId: chrome.windows.WINDOW_ID_CURRENT });
 });
 
-// This FAILS — no user activation
+// This FAILS. no user activation
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'auto-open') {
     // Won't work without user gesture
@@ -539,7 +539,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-### Workaround for Programmatic Opening
+Workaround for Programmatic Opening
 
 Use keyboard shortcuts defined in the manifest:
 
@@ -567,9 +567,9 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Step 10: Advanced Patterns {#step-10-advanced-patterns}
+Step 10: Advanced Patterns {#step-10-advanced-patterns}
 
-### Multiple Panel Paths
+Multiple Panel Paths
 
 Support different experiences for different contexts:
 
@@ -597,7 +597,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### Dynamic Content Loading
+Dynamic Content Loading
 
 Load content on demand to improve performance:
 
@@ -617,7 +617,7 @@ async function loadTabSpecificContent() {
 }
 ```
 
-### State Persistence
+State Persistence
 
 Save and restore panel state:
 
@@ -637,7 +637,7 @@ async function restorePanelState() {
 }
 ```
 
-## Testing Your Extension {#testing-your-extension}
+Testing Your Extension {#testing-your-extension}
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -646,34 +646,34 @@ async function restorePanelState() {
 5. Resize the panel to test responsive design
 6. Navigate to different websites to test per-tab panels
 
-## Common Issues and Solutions {#common-issues-and-solutions}
+Common Issues and Solutions {#common-issues-and-solutions}
 
-### Panel Not Opening
+Panel Not Opening
 
 - Verify `sidePanel` permission is in manifest
 - Check that `side_panel.default_path` points to an existing file
 - Ensure `chrome.sidePanel.open()` is called with user activation
 
-### Styles Not Loading
+Styles Not Loading
 
 - Use relative paths in `<link>` and `<script>` tags
 - Check the console in the side panel (right-click → Inspect)
 
-### Message Passing Fails
+Message Passing Fails
 
 - Content script may not be injected; use `chrome.tabs.sendMessage` with error handling
 - Ensure the content script matches the URL patterns
 
-### Memory Leaks
+Memory Leaks
 
 - Clean up event listeners in the side panel
 - Use `chrome.tabs.onRemoved` to clean up tab-specific storage
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Chrome Extension Side Panel API](../guides/side-panel.md) — Deep dive into the sidePanel API methods and options
-- [Message Passing Between Extension Components](../guides/message-passing.md) — Learn how to communicate between different parts of your extension
-- [Storage API Guide](../guides/storage-api.md) — Persisting data with chrome.storage
+- [Chrome Extension Side Panel API](../guides/side-panel.md). Detailed look into the sidePanel API methods and options
+- [Message Passing Between Extension Components](../guides/message-passing.md). Learn how to communicate between different parts of your extension
+- [Storage API Guide](../guides/storage-api.md). Persisting data with chrome.storage
 
 ---
 

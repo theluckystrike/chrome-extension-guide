@@ -618,7 +618,7 @@ The Chrome Power API is essential for building extensions that need to maintain 
 1. Use `chrome.power.requestKeepAwake(level)` to prevent sleep, with `'display'` being the battery-friendly default
 2. Always pair requests with `chrome.power.releaseKeepAwake()` to avoid battery drain
 3. Implement timeouts and user preferences for responsible power management
-4. Choose the appropriate level based on your use case—display for visual content, system for background processing
+4. Choose the appropriate level based on your use case, display for visual content, system for background processing
 5. Follow battery-conscious design patterns to create extensions that respect user resources
 
 By implementing these patterns, your extensions will provide reliable functionality while maintaining responsible power consumption.

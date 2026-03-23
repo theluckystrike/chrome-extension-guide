@@ -11,17 +11,17 @@ canonical_url: "https://bestchromeextensions.com/2025/01/19/build-json-viewer-ch
 
 # Build a JSON Viewer Chrome Extension: Complete Developer's Guide
 
-JSON (JavaScript Object Notation) has become the universal language of data exchange on the web. Every developer works with JSON daily — whether parsing API responses, debugging network requests, or inspecting configuration files. Yet browsers still display JSON as unstructured, hard-to-read text. This creates a genuine problem that affects millions of developers worldwide.
+JSON (JavaScript Object Notation) has become the universal language of data exchange on the web. Every developer works with JSON daily. whether parsing API responses, debugging network requests, or inspecting configuration files. Yet browsers still display JSON as unstructured, hard-to-read text. This creates a genuine problem that affects millions of developers worldwide.
 
-In this comprehensive guide, we will build a fully functional JSON viewer Chrome extension from scratch. By the end of this tutorial, you will have created an extension that automatically formats raw JSON data, provides syntax highlighting, enables tree navigation, and allows users to copy specific values. This is a practical project that solves real developer pain points, and it demonstrates many essential Chrome extension development concepts.
+we will build a fully functional JSON viewer Chrome extension from scratch. By the end of this tutorial, you will have created an extension that automatically formats raw JSON data, provides syntax highlighting, enables tree navigation, and allows users to copy specific values. This is a practical project that solves real developer problems, and it demonstrates many essential Chrome extension development concepts.
 
 ---
 
-## Why Build a JSON Viewer Extension? {#why-build-json-viewer}
+Why Build a JSON Viewer Extension? {#why-build-json-viewer}
 
 Before we dive into the code, let us consider why a JSON viewer extension is a valuable project to build in 2025.
 
-### The Problem with Raw JSON
+The Problem with Raw JSON
 
 When you make an API request in your browser or view a JSON file, Chrome typically displays it as unformatted text. Consider this example of a typical API response:
 
@@ -31,54 +31,54 @@ When you make an API request in your browser or view a JSON file, Chrome typical
 
 This raw format makes it incredibly difficult to understand the data structure, locate specific values, or identify nested objects. Developers often resort to copying and pasting into online JSON formatters, which disrupts their workflow and wastes valuable time.
 
-### Market Demand for JSON Tools
+Market Demand for JSON Tools
 
 The demand for good JSON viewer extensions is substantial. A quick search in the Chrome Web Store reveals that JSON formatter extensions have millions of users. This category consistently ranks among the most popular developer tools. Building a JSON viewer demonstrates your ability to create practical, user-focused extensions that solve real problems.
 
-### Learning Opportunities
+Learning Opportunities
 
 This project covers numerous essential Chrome extension development skills:
 
-- **Content script injection**: Automatically detecting and formatting JSON on web pages
-- **DOM manipulation**: Creating interactive UI elements within web pages
-- **Message passing**: Communicating between content scripts and popup interfaces
-- **Storage API**: Persisting user preferences across sessions
-- **Chrome DevTools integration**: Debugging and testing your extension
+- Content script injection: Automatically detecting and formatting JSON on web pages
+- DOM manipulation: Creating interactive UI elements within web pages
+- Message passing: Communicating between content scripts and popup interfaces
+- Storage API: Persisting user preferences across sessions
+- Chrome DevTools integration: Debugging and testing your extension
 
 Let us start building.
 
 ---
 
-## Project Architecture {#project-architecture}
+Project Architecture {#project-architecture}
 
 Our JSON viewer extension will consist of three main components:
 
-1. **The Popup Interface**: A toolbar popup where users can toggle formatting, adjust settings, and access formatting controls
-2. **The Content Script**: Injected into web pages to detect and format JSON data
-3. **The Background Service Worker**: Handles extension lifecycle events and manages state
+1. The Popup Interface: A toolbar popup where users can toggle formatting, adjust settings, and access formatting controls
+2. The Content Script: Injected into web pages to detect and format JSON data
+3. The Background Service Worker: Handles extension lifecycle events and manages state
 
 Here is the complete project structure:
 
 ```
 json-viewer-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── content.js
-├── content.css
-├── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── utils/
-    └── jsonFormatter.js
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ content.js
+ content.css
+ background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ utils/
+     jsonFormatter.js
 ```
 
 ---
 
-## Step 1: Creating the Manifest {#step-1-manifest}
+Step 1: Creating the Manifest {#step-1-manifest}
 
 Every Chrome extension begins with the manifest file. This JSON configuration tells Chrome about your extension's capabilities, permissions, and file structure.
 
@@ -126,13 +126,13 @@ Every Chrome extension begins with the manifest file. This JSON configuration te
 
 Key manifest configuration points worth explaining:
 
-**Permissions**: We request `activeTab` for accessing the current tab, `storage` for persisting user preferences, and `scripting` for programmatic script injection. The `host_permissions` with `<all_urls>` allows the content script to run on all websites, which is necessary since JSON can appear anywhere on the web.
+Permissions: We request `activeTab` for accessing the current tab, `storage` for persisting user preferences, and `scripting` for programmatic script injection. The `host_permissions` with `<all_urls>` allows the content script to run on all websites, which is necessary since JSON can appear anywhere on the web.
 
-**Content Scripts**: We use `run_at: "document_end"` to ensure our script runs after the page fully loads, ensuring we can access all page content including dynamically loaded JSON.
+Content Scripts: We use `run_at: "document_end"` to ensure our script runs after the page fully loads, ensuring we can access all page content including dynamically loaded JSON.
 
 ---
 
-## Step 2: Building the JSON Formatter Utility {#step-2-formatter}
+Step 2: Building the JSON Formatter Utility {#step-2-formatter}
 
 Before creating the UI components, let us build the core JSON formatting logic. This utility will handle the heavy lifting of parsing and rendering JSON data.
 
@@ -192,7 +192,7 @@ export class JsonFormatter {
     html += `<span class="json-bracket">${bracket}</span>`;
     
     if (!isEmpty) {
-      html += `<span class="json-toggle">▼</span>`;
+      html += `<span class="json-toggle"></span>`;
       html += `<div class="json-children">`;
       
       entries.forEach(([k, v], index) => {
@@ -224,7 +224,7 @@ export class JsonFormatter {
     html += `<span class="json-bracket">${bracket}</span>`;
     
     if (!isEmpty) {
-      html += `<span class="json-toggle">▼</span>`;
+      html += `<span class="json-toggle"></span>`;
       html += `<div class="json-children">`;
       
       arr.forEach((item, index) => {
@@ -344,7 +344,7 @@ This formatter handles various JSON structures including nested objects, arrays,
 
 ---
 
-## Step 3: Creating the Content Script {#step-3-content-script}
+Step 3: Creating the Content Script {#step-3-content-script}
 
 The content script is the heart of our extension. It runs in the context of web pages and handles JSON detection, formatting, and user interactions.
 
@@ -468,7 +468,7 @@ class JsonViewerExtension {
       toggle.addEventListener('click', (e) => {
         const parent = e.target.closest('.collapsible');
         parent.classList.toggle('collapsed');
-        e.target.textContent = parent.classList.contains('collapsed') ? '▶' : '▼';
+        e.target.textContent = parent.classList.contains('collapsed') ? '' : '';
       });
     });
 
@@ -511,7 +511,7 @@ class JsonViewerExtension {
     this.viewerContainer.querySelectorAll('.collapsible').forEach(el => {
       el.classList.add('collapsed');
       const toggle = el.querySelector('.json-toggle');
-      if (toggle) toggle.textContent = '▶';
+      if (toggle) toggle.textContent = '';
     });
   }
 
@@ -519,7 +519,7 @@ class JsonViewerExtension {
     this.viewerContainer.querySelectorAll('.collapsible').forEach(el => {
       el.classList.remove('collapsed');
       const toggle = el.querySelector('.json-toggle');
-      if (toggle) toggle.textContent = '▼';
+      if (toggle) toggle.textContent = '';
     });
   }
 
@@ -572,7 +572,7 @@ This content script provides a full-featured JSON viewing experience with collap
 
 ---
 
-## Step 4: Styling the Content Script {#step-4-content-css}
+Step 4: Styling the Content Script {#step-4-content-css}
 
 The CSS provides the visual styling for the JSON viewer overlay.
 
@@ -753,7 +753,7 @@ The CSS provides the visual styling for the JSON viewer overlay.
 
 ---
 
-## Step 5: Building the Popup Interface {#step-5-popup}
+Step 5: Building the Popup Interface {#step-5-popup}
 
 The popup provides quick access to the extension's settings without needing to navigate to a full options page.
 
@@ -1089,7 +1089,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Step 6: Background Service Worker {#step-6-background}
+Step 6: Background Service Worker {#step-6-background}
 
 The service worker handles extension lifecycle events and can manage extension-wide state.
 
@@ -1132,11 +1132,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 7: Loading and Testing {#step-7-testing}
+Step 7: Loading and Testing {#step-7-testing}
 
 Now that all the files are created, let us load the extension into Chrome and test it.
 
-### Loading Your Extension
+Loading Your Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top-right corner
@@ -1144,7 +1144,7 @@ Now that all the files are created, let us load the extension into Chrome and te
 4. Select the folder containing your extension files
 5. The extension icon should appear in your toolbar
 
-### Testing the Extension
+Testing the Extension
 
 Create a test HTML file to verify the JSON viewer works correctly:
 
@@ -1206,18 +1206,18 @@ When you load this test page, your extension should automatically detect the JSO
 
 ---
 
-## Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
+Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
 
 Once you have thoroughly tested your extension, you can publish it to reach millions of users.
 
-### Preparing for Publication
+Preparing for Publication
 
-1. **Create icon files**: You need 16x16, 48x48, and 128x128 PNG icons
-2. **Write a compelling description**: Explain what your extension does and its key features
-3. **Take screenshots**: Capture screenshots showing your extension in action
-4. **Create a privacy policy**: Required for extensions that access web content
+1. Create icon files: You need 16x16, 48x48, and 128x128 PNG icons
+2. Write a compelling description: Explain what your extension does and its key features
+3. Take screenshots: Capture screenshots showing your extension in action
+4. Create a privacy policy: Required for extensions that access web content
 
-### Submitting Your Extension
+Submitting Your Extension
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Click "New Item" and upload your extension as a ZIP file
@@ -1228,49 +1228,49 @@ Google's review process typically takes 1-3 business days. Ensure your extension
 
 ---
 
-## Enhancements and Future Improvements {#enhancements}
+Enhancements and Future Improvements {#enhancements}
 
 Your JSON viewer extension has a solid foundation. Here are some ideas for additional features you could add:
 
-### Advanced Features
+Advanced Features
 
-1. **JSON Schema Validation**: Validate JSON against JSON Schema to ensure data structure matches expectations
-2. **Search and Filter**: Add the ability to search for specific keys or values within large JSON objects
-3. **Diff View**: Compare two JSON objects and highlight differences
-4. **Export Options**: Export formatted JSON to file or copy as various formats (minified, YAML, etc.)
-5. **Multiple Tabs**: Support viewing multiple JSON objects in tabs within the viewer panel
+1. JSON Schema Validation: Validate JSON against JSON Schema to ensure data structure matches expectations
+2. Search and Filter: Add the ability to search for specific keys or values within large JSON objects
+3. Diff View: Compare two JSON objects and highlight differences
+4. Export Options: Export formatted JSON to file or copy as various formats (minified, YAML, etc.)
+5. Multiple Tabs: Support viewing multiple JSON objects in tabs within the viewer panel
 
-### Performance Optimizations
+Performance Optimizations
 
-1. **Lazy Rendering**: Only render visible portions of very large JSON objects
-2. **Web Workers**: Move JSON parsing to a web worker to avoid blocking the main thread
-3. **Virtual Scrolling**: Implement virtual scrolling for large lists to maintain smooth performance
+1. Lazy Rendering: Only render visible portions of very large JSON objects
+2. Web Workers: Move JSON parsing to a web worker to avoid blocking the main thread
+3. Virtual Scrolling: Implement virtual scrolling for large lists to maintain smooth performance
 
 ---
 
-## Troubleshooting Common Issues {#troubleshooting}
+Troubleshooting Common Issues {#troubleshooting}
 
 Here are solutions to common problems you might encounter:
 
-### Extension Not Loading
+Extension Not Loading
 
 - Check for syntax errors in your manifest.json
 - Ensure all file paths in the manifest are correct
 - Look for errors in `chrome://extensions/` error messages
 
-### Content Script Not Injecting
+Content Script Not Injecting
 
 - Verify the content script matches are correct
 - Check that the page has finished loading (use `run_at: "document_end"`)
 - Look for console errors in the page's DevTools
 
-### JSON Not Being Detected
+JSON Not Being Detected
 
 - Ensure the JSON is properly formatted (valid syntax)
 - Check that script elements have the correct type attribute
 - Verify the detection logic handles your specific JSON format
 
-### Popup Not Working
+Popup Not Working
 
 - Make sure the popup HTML and JS files are correctly linked
 - Check that the popup.js is included as a module if using ES6 imports
@@ -1278,7 +1278,7 @@ Here are solutions to common problems you might encounter:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have built a fully functional JSON viewer Chrome extension from scratch. This project demonstrates essential Chrome extension development concepts including content scripts, popup interfaces, the Storage API, message passing, and extension lifecycle management.
 
@@ -1286,14 +1286,14 @@ The extension you built solves a real problem faced by millions of developers da
 
 Remember these key principles as you continue developing Chrome extensions:
 
-- **Start with user problems**: Build extensions that solve real pain points
-- **Follow Manifest V3**: The latest platform provides better security and performance
-- **Request minimal permissions**: Only ask for what your extension needs
-- **Test thoroughly**: Test across different websites and edge cases
-- **Iterate based on feedback**: Listen to users and improve continuously
+- Start with user problems: Build extensions that solve real problems
+- Follow Manifest V3: The latest platform provides better security and performance
+- Request minimal permissions: Only ask for what your extension needs
+- Test thoroughly: Test across different websites and edge cases
+- Iterate based on feedback: Listen to users and improve continuously
 
-The Chrome extension ecosystem offers incredible opportunities for developers to create tools that impact millions of users. Your JSON viewer is just the beginning — let your creativity guide you to building even more powerful extensions.
+The Chrome extension ecosystem offers incredible opportunities for developers to create tools that impact millions of users. Your JSON viewer is just the beginning. let your creativity guide you to building even more powerful extensions.
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. your comprehensive resource for Chrome extension development.*

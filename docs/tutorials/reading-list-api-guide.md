@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Reading List API for Extensions — Developer Guide"
+title: "Chrome Reading List API for Extensions. Developer Guide"
 description: "A comprehensive guide to using the chrome.readingList API in Chrome extensions. Learn to add, remove, query, and update reading list entries with code examples."
 canonical_url: "https://bestchromeextensions.com/tutorials/reading-list-api-guide/"
 ---
 
 # Chrome Reading List API for Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 The Chrome Reading List API (`chrome.readingList`) allows extensions to interact with Chrome's built-in Reading List feature. This API enables users to save web pages for later reading, similar to bookmarks but with a focus on content consumption workflow. The Reading List is synchronized across devices via the user's Google account, making it a powerful way to save content for later consumption across desktop and mobile.
 
 This API is particularly useful for building extensions that help users curate content, research topics, or save articles for offline reading. Unlike custom storage solutions, entries in the Reading List automatically sync across all devices where the user is signed in to Chrome.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before using the Reading List API, add the `"readingList"` permission to your `manifest.json`:
 
@@ -26,13 +26,13 @@ Before using the Reading List API, add the `"readingList"` permission to your `m
 }
 ```
 
-**Important Notes:**
-- The Reading List API requires **Manifest V3**
-- The API is only available in **Chrome 120+**
+Important Notes:
+- The Reading List API requires Manifest V3
+- The API is only available in Chrome 120+
 - Entries sync automatically when the user is signed into Chrome
 - No additional storage permissions are required for basic operations
 
-## Understanding Reading List Entries {#understanding-entries}
+Understanding Reading List Entries {#understanding-entries}
 
 Each Reading List entry is represented by a `ReadingListItem` with these properties:
 
@@ -49,9 +49,9 @@ Each Reading List entry is represented by a `ReadingListItem` with these propert
 | `isDeleted` | boolean | Whether the item has been removed |
 | `excerpt` | string | Auto-generated page excerpt |
 
-## Adding Entries {#adding-entries}
+Adding Entries {#adding-entries}
 
-### Add Current Page to Reading List
+Add Current Page to Reading List
 
 ```javascript
 // Add the current tab to the reading list
@@ -68,7 +68,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Add Entry with Custom Title
+Add Entry with Custom Title
 
 ```javascript
 // Add with a custom title
@@ -82,7 +82,7 @@ chrome.readingList.add({
 });
 ```
 
-### Check Before Adding
+Check Before Adding
 
 ```javascript
 // Check if URL already exists in reading list
@@ -102,9 +102,9 @@ addIfNotExists("New Article", "https://example.com/new")
   .then(entry => console.log("Entry:", entry));
 ```
 
-## Querying the Reading List {#querying}
+Querying the Reading List {#querying}
 
-### Get All Entries
+Get All Entries
 
 ```javascript
 // Get all reading list entries
@@ -116,7 +116,7 @@ chrome.readingList.query({}).then(items => {
 });
 ```
 
-### Filter by Read Status
+Filter by Read Status
 
 ```javascript
 // Get only unread items
@@ -130,7 +130,7 @@ chrome.readingList.query({ isRead: true }).then(readItems => {
 });
 ```
 
-### Search by Title or URL
+Search by Title or URL
 
 ```javascript
 // Search for items matching a query
@@ -148,7 +148,7 @@ chrome.readingList.query({
 });
 ```
 
-### Advanced Query Example
+Advanced Query Example
 
 ```javascript
 // Get unread items, sorted by date added
@@ -169,9 +169,9 @@ async function getRecentlyVisited(limit = 10) {
 }
 ```
 
-## Updating Entries {#updating-entries}
+Updating Entries {#updating-entries}
 
-### Mark as Read or Unread
+Mark as Read or Unread
 
 ```javascript
 // Mark an item as read
@@ -189,7 +189,7 @@ chrome.readingList.update("entry-id", {
 });
 ```
 
-### Update Title
+Update Title
 
 ```javascript
 // Update the title of an entry
@@ -200,7 +200,7 @@ chrome.readingList.update("entry-id", {
 });
 ```
 
-### Toggle Read Status
+Toggle Read Status
 
 ```javascript
 // Toggle read status
@@ -216,9 +216,9 @@ async function toggleReadStatus(entryId) {
 }
 ```
 
-## Removing Entries {#removing-entries}
+Removing Entries {#removing-entries}
 
-### Remove a Single Entry
+Remove a Single Entry
 
 ```javascript
 // Remove an entry by ID
@@ -227,7 +227,7 @@ chrome.readingList.remove("entry-id").then(() => {
 });
 ```
 
-### Remove Multiple Entries
+Remove Multiple Entries
 
 ```javascript
 // Remove multiple entries
@@ -242,7 +242,7 @@ removeMultiple(["id1", "id2", "id3"])
   .then(() => console.log("All removed"));
 ```
 
-### Clear All Read Items
+Clear All Read Items
 
 ```javascript
 // Remove all items marked as read
@@ -257,7 +257,7 @@ async function clearReadItems() {
 }
 ```
 
-### Clear All Entries
+Clear All Entries
 
 ```javascript
 // Clear the entire reading list
@@ -272,11 +272,11 @@ async function clearAll() {
 }
 ```
 
-## Reading List Events {#events}
+Reading List Events {#events}
 
 Listen for changes to keep your extension in sync with the reading list.
 
-### Listen for Entry Added
+Listen for Entry Added
 
 ```javascript
 chrome.readingList.onEntryAdded.addListener((entry) => {
@@ -285,7 +285,7 @@ chrome.readingList.onEntryAdded.addListener((entry) => {
 });
 ```
 
-### Listen for Entry Removed
+Listen for Entry Removed
 
 ```javascript
 chrome.readingList.onEntryRemoved.addListener((entry) => {
@@ -294,7 +294,7 @@ chrome.readingList.onEntryRemoved.addListener((entry) => {
 });
 ```
 
-### Listen for Entry Updated
+Listen for Entry Updated
 
 ```javascript
 chrome.readingList.onEntryUpdated.addListener((entry) => {
@@ -304,22 +304,22 @@ chrome.readingList.onEntryUpdated.addListener((entry) => {
 });
 ```
 
-### Complete Event Handler
+Complete Event Handler
 
 ```javascript
 // background.js - Complete event handling
 chrome.readingList.onEntryAdded.addListener((entry) => {
-  console.log(`📖 Added: "${entry.title}"`);
+  console.log(` Added: "${entry.title}"`);
   updateBadgeCount();
 });
 
 chrome.readingList.onEntryRemoved.addListener((entry) => {
-  console.log(`🗑️ Removed: "${entry.title}"`);
+  console.log(` Removed: "${entry.title}"`);
   updateBadgeCount();
 });
 
 chrome.readingList.onEntryUpdated.addListener((entry) => {
-  console.log(`✏️ Updated: "${entry.title}" - Read: ${entry.isRead}`);
+  console.log(` Updated: "${entry.title}" - Read: ${entry.isRead}`);
   updateBadgeCount();
 });
 
@@ -334,9 +334,9 @@ async function updateBadgeCount() {
 }
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Save for Later Extension
+Save for Later Extension
 
 Build an extension that lets users quickly save pages to their reading list with a single click:
 
@@ -369,7 +369,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 }
 ```
 
-### Research Tools
+Research Tools
 
 Create a research assistant that tracks articles for later review:
 
@@ -399,7 +399,7 @@ async function getResearchByTag(tag) {
 }
 ```
 
-### Content Curation
+Content Curation
 
 Build a content curation tool for collecting and organizing articles:
 
@@ -442,7 +442,7 @@ class ReadingListCuration {
 const curator = new ReadingListCuration();
 ```
 
-## Complete Service Example {#complete-example}
+Complete Service Example {#complete-example}
 
 Here's a complete service class that wraps the Reading List API with promise-based methods:
 
@@ -548,7 +548,7 @@ class ReadingListService {
 window.ReadingListService = ReadingListService;
 ```
 
-### Using the Service
+Using the Service
 
 ```javascript
 const readingList = new ReadingListService();
@@ -572,11 +572,11 @@ async function handleItemClick(entryId) {
 }
 ```
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Build a Reading List Extension](/tutorials/build-reading-list/) — Build a complete reading list extension with side panel, sync storage, and notifications
-- [Bookmarks API Guide](/tutorials/bookmarks-api-guide/) — Learn how to use the Chrome Bookmarks API for persistent link storage
-- [History API Guide](/tutorials/history-api-guide/) — Explore the browsing history API for tracking and searching visited pages
+- [Build a Reading List Extension](/tutorials/build-reading-list/). Build a complete reading list extension with side panel, sync storage, and notifications
+- [Bookmarks API Guide](/tutorials/bookmarks-api-guide/). Learn how to use the Chrome Bookmarks API for persistent link storage
+- [History API Guide](/tutorials/history-api-guide/). Explore the browsing history API for tracking and searching visited pages
 
 ---
 

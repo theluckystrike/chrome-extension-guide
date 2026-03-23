@@ -17,7 +17,7 @@ In this tutorial, you will learn how to build a Chrome extension using Manifest 
 
 ---
 
-## Why Build a Password Strength Checker Extension? {#why-build-password-strength-extension}
+Why Build a Password Strength Checker Extension? {#why-build-password-strength-extension}
 
 The need for password security tools has never been greater. According to recent cybersecurity studies, over 80% of data breaches involve compromised passwords. Users often create weak passwords because they lack understanding of what makes a password secure or simply do not have tools to evaluate their password strength in real-time.
 
@@ -27,7 +27,7 @@ From a development perspective, this project teaches you valuable skills includi
 
 ---
 
-## Project Overview and Architecture {#project-overview}
+Project Overview and Architecture {#project-overview}
 
 Before diving into the code, let us establish a clear understanding of what our password strength checker extension will do. The extension will inject a content script into password input fields across websites, monitor user input in real-time, evaluate the password against multiple strength criteria, and display a visual indicator showing the password strength level.
 
@@ -37,7 +37,7 @@ The extension architecture follows the Manifest V3 specification, which is the c
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension begins with a manifest file that defines the extension's capabilities and permissions. Create a new folder for your project and add the following manifest.json file:
 
@@ -76,7 +76,7 @@ This manifest file grants the extension the necessary permissions to run on all 
 
 ---
 
-## Creating the Password Analysis Logic {#password-analysis-logic}
+Creating the Password Analysis Logic {#password-analysis-logic}
 
 The core of our extension lies in the password analysis algorithm. Create a new file called `analyzer.js` that will contain the strength evaluation logic. This separation of concerns makes the code maintainable and allows for easy updates to the analysis algorithm without modifying other parts of the extension.
 
@@ -215,7 +215,7 @@ This analyzer provides a comprehensive evaluation system that considers multiple
 
 ---
 
-## Creating the Content Script {#content-script}
+Creating the Content Script {#content-script}
 
 The content script is the bridge between the extension and web pages. It detects password input fields, monitors user input, and displays the strength indicator. Create `content.js`:
 
@@ -473,7 +473,7 @@ This content script provides comprehensive password field detection and real-tim
 
 ---
 
-## Styling the Strength Indicator {#styling}
+Styling the Strength Indicator {#styling}
 
 Create a stylesheet that makes the strength indicator visually appealing and compatible with different website designs:
 
@@ -562,7 +562,7 @@ The styles include dark mode support and ensure the indicator is visible regardl
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 While the content script handles inline analysis, users often want additional information and settings. Create a popup interface:
 
@@ -607,12 +607,12 @@ While the content script handles inline analysis, users often want additional in
       align-items: center;
     }
     .criteria li::before {
-      content: '○';
+      content: '';
       margin-right: 8px;
       color: #999;
     }
     .criteria li.met::before {
-      content: '●';
+      content: '';
       color: #28a745;
     }
     .tips {
@@ -691,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension in development mode. Open Chrome and navigate to `chrome://extensions/`. Enable "Developer mode" in the top right corner. Click "Load unpacked" and select your extension folder.
 
@@ -701,7 +701,7 @@ Pay attention to how the indicator appears on different website designs. The ext
 
 ---
 
-## Best Practices and Security Considerations {#best-practices}
+Best Practices and Security Considerations {#best-practices}
 
 When building password-related extensions, security must be the top priority. Never store or transmit password data. Our implementation analyzes passwords locally within the content script and does not send any data anywhere. This is crucial for user trust and for passing Chrome Web Store review.
 
@@ -713,7 +713,7 @@ Implement proper error handling to prevent the extension from breaking websites.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have tested the extension thoroughly, you can publish it to the Chrome Web Store. First, create a ZIP file of your extension folder, making sure to exclude any development files. Navigate to the Chrome Web Store Developer Dashboard and create a new item. Upload your ZIP file and fill in the required information including the extension name, description, and screenshots.
 
@@ -721,7 +721,7 @@ The review process typically takes a few days. During review, Google will check 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have built a complete password strength checker extension that provides real-time analysis, visual feedback, and helpful suggestions for improving password security. This project demonstrates essential Chrome extension development concepts including Manifest V3 configuration, content script injection, DOM manipulation, and cross-browser compatibility.
 

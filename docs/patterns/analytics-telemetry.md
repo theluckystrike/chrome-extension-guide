@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Analytics Telemetry — Best Practices"
+title: "Chrome Extension Analytics Telemetry. Best Practices"
 description: "Implement analytics and telemetry in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/analytics-telemetry/"
 ---
 
 # Extension Analytics and Telemetry
 
-## Overview {#overview}
+Overview {#overview}
 
 Understanding how users interact with your extension is critical for prioritizing features and catching regressions. However, Chrome extensions face unique constraints: no third-party analytics scripts in service workers, strict Content Security Policy, and heightened user expectations around privacy. This guide covers production patterns for building a privacy-respecting, first-party analytics system entirely within your extension.
 
-> **Key principle:** Collect the minimum data needed to make product decisions. Never collect PII, browsing history, or page content. Always provide a clear opt-out.
+> Key principle: Collect the minimum data needed to make product decisions. Never collect PII, browsing history, or page content. Always provide a clear opt-out.
 
 ---
 
-## Pattern 1: Privacy-Respecting Analytics Architecture {#pattern-1-privacy-respecting-analytics-architecture}
+Pattern 1: Privacy-Respecting Analytics Architecture {#pattern-1-privacy-respecting-analytics-architecture}
 
 Build a self-contained analytics layer that runs entirely in your service worker:
 
@@ -130,7 +130,7 @@ export class Analytics {
         await storage.set("analyticsQueue", [...queue, ...current]);
       }
     } catch {
-      // Network error — re-enqueue
+      // Network error. re-enqueue
       const current = (await storage.get("analyticsQueue")) ?? [];
       await storage.set("analyticsQueue", [...queue, ...current]);
     }
@@ -148,14 +148,14 @@ export const analytics = new Analytics({
 
 ---
 
-## Pattern 2: Event Tracking Without Third-Party Scripts {#pattern-2-event-tracking-without-third-party-scripts}
+Pattern 2: Event Tracking Without Third-Party Scripts {#pattern-2-event-tracking-without-third-party-scripts}
 
 Chrome extensions cannot load remote scripts in service workers. All tracking must be first-party:
 
 ```ts
 // analytics/tracker.ts
 
-// Type-safe event catalog — define every event your extension can emit
+// Type-safe event catalog. define every event your extension can emit
 type EventMap = {
   "extension.installed": { source: "store" | "sideload" | "update" };
   "extension.updated": { from: string; to: string };
@@ -174,7 +174,7 @@ export function createTracker(analytics: Analytics) {
   };
 }
 
-// background.ts — Wire up lifecycle events
+// background.ts. Wire up lifecycle events
 const tracker = createTracker(analytics);
 
 chrome.runtime.onInstalled.addListener((details) => {
@@ -190,7 +190,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 ```
 
 ```ts
-// popup.ts — Track popup interactions
+// popup.ts. Track popup interactions
 import { createMessenger } from "@theluckystrike/webext-messaging";
 
 type Messages = {
@@ -217,7 +217,7 @@ document.getElementById("settings-btn")?.addEventListener("click", () => {
 
 ---
 
-## Pattern 3: Feature Usage Measurement {#pattern-3-feature-usage-measurement}
+Pattern 3: Feature Usage Measurement {#pattern-3-feature-usage-measurement}
 
 Track which features are used, how often, and for how long:
 
@@ -282,7 +282,7 @@ function onAnnotationToolClosed() {
 
 ---
 
-## Pattern 4: Error Telemetry and Crash Reporting {#pattern-4-error-telemetry-and-crash-reporting}
+Pattern 4: Error Telemetry and Crash Reporting {#pattern-4-error-telemetry-and-crash-reporting}
 
 Capture unhandled errors and report them without leaking sensitive data:
 
@@ -380,7 +380,7 @@ chrome.action.onClicked.addListener(
 
 ---
 
-## Pattern 5: Opt-In/Opt-Out Consent Management {#pattern-5-opt-inopt-out-consent-management}
+Pattern 5: Opt-In/Opt-Out Consent Management {#pattern-5-opt-inopt-out-consent-management}
 
 Implement a transparent consent flow that respects user choice:
 
@@ -426,7 +426,7 @@ export async function setConsent(granted: boolean) {
       "analyticsQueue",
       "analyticsSession",
     ]);
-    analytics.track("consent.denied", {}); // This won't send — analytics is off
+    analytics.track("consent.denied", {}); // This won't send. analytics is off
   }
 }
 
@@ -445,7 +445,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 ```
 
 ```html
-<!-- consent.html — Clean, honest consent UI -->
+<!-- consent.html. Clean, honest consent UI -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -496,7 +496,7 @@ document.getElementById("decline")?.addEventListener("click", async () => {
 
 ---
 
-## Pattern 6: Batched Event Submission {#pattern-6-batched-event-submission}
+Pattern 6: Batched Event Submission {#pattern-6-batched-event-submission}
 
 Queue events locally and submit them in batches to reduce network overhead:
 
@@ -525,7 +525,7 @@ export class EventBatcher {
     });
 
     // Flush before the service worker terminates
-    // (best-effort — no guarantee this fires)
+    // (best-effort. no guarantee this fires)
     self.addEventListener("beforeunload", () => {
       if (this.queue.length > 0) {
         this.flushSync();
@@ -592,7 +592,7 @@ export class EventBatcher {
     }
   }
 
-  /** Synchronous fallback using sendBeacon (last resort) */
+  / Synchronous fallback using sendBeacon (last resort) */
   private flushSync() {
     if (this.queue.length === 0) return;
     const payload = JSON.stringify({ batch: this.queue });
@@ -604,7 +604,7 @@ export class EventBatcher {
 
 ---
 
-## Pattern 7: Session and Daily Active User Tracking {#pattern-7-session-and-daily-active-user-tracking}
+Pattern 7: Session and Daily Active User Tracking {#pattern-7-session-and-daily-active-user-tracking}
 
 Count active users without storing any user-identifying information:
 
@@ -684,11 +684,11 @@ let sessionStart = Date.now();
 
 chrome.idle.onStateChanged.addListener((state) => {
   if (state === "active") {
-    // User returned — start a new session
+    // User returned. start a new session
     sessionStart = Date.now();
     analytics.track("session.start", {});
   } else if (state === "idle" || state === "locked") {
-    // User left — end the session
+    // User left. end the session
     const duration = Date.now() - sessionStart;
     analytics.track("session.end", {
       duration_ms: duration,
@@ -702,7 +702,7 @@ chrome.idle.setDetectionInterval(300); // 5 minutes
 
 ---
 
-## Pattern 8: A/B Testing Infrastructure for Extensions {#pattern-8-ab-testing-infrastructure-for-extensions}
+Pattern 8: A/B Testing Infrastructure for Extensions {#pattern-8-ab-testing-infrastructure-for-extensions}
 
 Run experiments to test UI variations and feature flags:
 
@@ -835,7 +835,7 @@ document.getElementById("save-btn")?.addEventListener("click", async () => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

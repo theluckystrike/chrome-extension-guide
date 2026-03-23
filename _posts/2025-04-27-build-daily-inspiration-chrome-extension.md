@@ -16,11 +16,11 @@ This project is perfect for developers looking to create their first Chrome exte
 
 ---
 
-## Why Build a Daily Inspiration Chrome Extension {#why-build-inspiration-extension}
+Why Build a Daily Inspiration Chrome Extension {#why-build-inspiration-extension}
 
 The Chrome Web Store is filled with productivity tools, ad blockers, and utility extensions, but there is a growing demand for extensions that improve mental wellness and daily motivation. A daily inspiration extension serves multiple purposes that make it an excellent project choice.
 
-First, the development complexity is manageable for beginners while still teaching important concepts about Chrome extension architecture. You will learn about manifest files, content scripts, local storage, and new tab overrides—skills that transfer to any future extension project. The extension solves a genuine problem: users want positive reinforcement and motivation without seeking it out actively.
+First, the development complexity is manageable for beginners while still teaching important concepts about Chrome extension architecture. You will learn about manifest files, content scripts, local storage, and new tab overrides, skills that transfer to any future extension project. The extension solves a genuine problem: users want positive reinforcement and motivation without seeking it out actively.
 
 Second, the motivational quotes niche has proven commercial viability. Extensions like Momentum and Unsplash's daily photo extension demonstrate that users appreciate delightful surprises when opening new tabs. Adding inspiring quotes creates an emotional connection with your extension that keeps users engaged.
 
@@ -30,7 +30,7 @@ Finally, building a daily inspiration extension teaches you about API integratio
 
 ---
 
-## Understanding Chrome Extension Architecture {#extension-architecture}
+Understanding Chrome Extension Architecture {#extension-architecture}
 
 Before diving into code, let us establish a solid understanding of how Chrome extensions work and specifically how new tab pages function within the extension ecosystem.
 
@@ -44,7 +44,7 @@ Modern Chrome extensions use Manifest V3, which introduced several changes from 
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Let us begin building our extension by creating the necessary project structure. Create a new folder for your project and add the following files: manifest.json, newtab.html, newtab.css, newtab.js, and quotes.js.
 
@@ -72,7 +72,7 @@ The manifest declares our extension name as "Daily Inspiration," specifies versi
 
 ---
 
-## Creating the Quote Data Module {#quote-data-module}
+Creating the Quote Data Module {#quote-data-module}
 
 Now let us create the quotes.js file that will store our collection of motivational quotes. Having a dedicated data file makes it easy to add, remove, or update quotes without touching the main logic of our extension.
 
@@ -143,7 +143,7 @@ const quotes = [
     author: "Albert Einstein"
   },
   {
-    text: "Two roads diverged in a wood, and I—I took the one less traveled by.",
+    text: "Two roads diverged in a wood, and I, I took the one less traveled by.",
     author: "Robert Frost"
   },
   {
@@ -151,7 +151,7 @@ const quotes = [
     author: "Frank Sinatra"
   },
   {
-    text: "People often say that motivation doesn't last. Well, neither does bathing — that's why we recommend it daily.",
+    text: "People often say that motivation doesn't last. Well, neither does bathing. that's why we recommend it daily.",
     author: "Zig Ziglar"
   },
   {
@@ -170,7 +170,7 @@ This collection provides a solid starting point with twenty diverse quotes from 
 
 ---
 
-## Building the New Tab Interface {#new-tab-interface}
+Building the New Tab Interface {#new-tab-interface}
 
 Now we create the HTML structure for our new tab page. The newtab.html file defines the visual layout that users will see every time they open a new tab. We want a clean, inspiring design that makes the quote the focal point.
 
@@ -226,9 +226,9 @@ The HTML structure is intentionally simple, consisting of a container with a hea
 
 ---
 
-## Styling Your Extension {#styling-the-extension}
+Styling Your Extension {#styling-the-extension}
 
-The CSS file transforms our simple HTML into a visually appealing experience. Good design in extensions matters—users spend time looking at your new tab page, so it should be pleasant and inspiring.
+The CSS file transforms our simple HTML into a visually appealing experience. Good design in extensions matters, users spend time looking at your new tab page, so it should be pleasant and inspiring.
 
 ```css
 * {
@@ -290,7 +290,7 @@ header {
 }
 
 .quote cite::before {
-  content: "— ";
+  content: ",  ";
 }
 
 footer {
@@ -356,7 +356,7 @@ The styling creates a beautiful gradient background with a modern, readable quot
 
 ---
 
-## Implementing the Core Functionality {#javascript-implementation}
+Implementing the Core Functionality {#javascript-implementation}
 
 Now we bring everything together with the JavaScript logic. The newtab.js file handles displaying quotes, managing the date, and saving user favorites using Chrome's storage API.
 
@@ -455,9 +455,9 @@ The JavaScript handles several important functions. First, it displays the curre
 
 ---
 
-## Loading and Testing Your Extension {#testing-the-extension}
+Loading and Testing Your Extension {#testing-the-extension}
 
-With all files created, you can now load your extension into Chrome for testing. This is an exciting moment—watching your creation come to life in the browser.
+With all files created, you can now load your extension into Chrome for testing. This is an exciting moment, watching your creation come to life in the browser.
 
 Open Chrome and navigate to chrome://extensions/ in the address bar. Enable "Developer mode" using the toggle switch in the top right corner. This reveals additional options for extension developers.
 
@@ -465,13 +465,13 @@ Click the "Load unpacked" button that appears after enabling developer mode. Sel
 
 Now for the fun part: open a new tab. Instead of the usual Chrome new tab page, you should see your daily inspiration extension with a beautiful gradient background and a motivational quote. Click the "New Quote" button to cycle through different quotes, and try saving your favorites.
 
-If you do not see your extension, check the following common issues. Ensure all file names match exactly—what you declare in the manifest must correspond to your actual files. Verify that the manifest.json has valid JSON syntax. Make sure the icons folder exists with the required icon files, or remove the icons section from the manifest for now.
+If you do not see your extension, check the following common issues. Ensure all file names match exactly, what you declare in the manifest must correspond to your actual files. Verify that the manifest.json has valid JSON syntax. Make sure the icons folder exists with the required icon files, or remove the icons section from the manifest for now.
 
 ---
 
-## Enhancing Your Extension {#enhancing-the-extension}
+Enhancing Your Extension {#enhancing-the-extension}
 
-Once you have the basic extension working, you can add numerous enhancements to make it even more valuable to users. Here are some ideas to take your extension to the next level.
+Once you have the basic extension working, you can add numerous enhancements to make it even more valuable to users. Here are some ideas to take your extension to the better.
 
 Consider adding an API integration to fetch quotes from external services. APIs like type.fit, quotable.io, or zenquotes.io provide thousands of quotes that you can fetch dynamically. This eliminates the need to manually maintain a quotes database and ensures users always have fresh content.
 
@@ -479,19 +479,19 @@ Implement multiple themes that users can choose from. Allow them to select diffe
 
 Add a favorites management page where users can view and manage their saved quotes. This requires creating a separate HTML page and adding it to the extension's options page in the manifest. Users appreciate being able to revisit inspiring quotes they have saved.
 
-Consider adding time-based greetings that show different quotes based on the time of day—motivational quotes for morning, encouraging quotes for afternoon, and reflective quotes for evening.
+Consider adding time-based greetings that show different quotes based on the time of day, motivational quotes for morning, encouraging quotes for afternoon, and reflective quotes for evening.
 
 Implement quote sharing functionality that allows users to share quotes directly to social media or copy them to the clipboard with a single click.
 
 ---
 
-## Publishing Your Extension {#publishing-your-extension}
+Publishing Your Extension {#publishing-your-extension}
 
 When you are ready to share your extension with the world, you can publish it to the Chrome Web Store. This process requires a Google Developer account and a small one-time registration fee.
 
 First, create your extension icons if you have not already. You need 16x16, 48x48, and 128x128 pixel icons. These appear in the Chrome toolbar, the extension management page, and the Web Store listing. Design icons that represent your extension's purpose clearly.
 
-Next, create a ZIP file containing all your extension files. Do not include the containing folder—just the files themselves. Ensure your manifest.json is at the root of the ZIP.
+Next, create a ZIP file containing all your extension files. Do not include the containing folder, just the files themselves. Ensure your manifest.json is at the root of the ZIP.
 
 Navigate to the Chrome Web Store Developer Dashboard and create a new item. Upload your ZIP file and fill in the required information: extension name, description, and category. Upload screenshots and a promotional tile that showcase your extension's best features.
 
@@ -499,14 +499,14 @@ After submitting, Google reviews your extension to ensure it meets their policie
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete Daily Inspiration Chrome Extension from scratch. You learned about Chrome extension architecture, manifest configuration, HTML and CSS for the user interface, JavaScript for dynamic functionality, and Chrome storage for persisting user data.
 
 This project demonstrates the power and simplicity of Chrome extension development. What seemed like a complex undertaking is actually quite manageable once you understand the basic components. You now have the foundation to build more sophisticated extensions or enhance this one with additional features.
 
-The daily inspiration extension you created fills a genuine need—users want moments of motivation throughout their workday, and delivering that through the browser they use every day creates meaningful value. Whether you keep it for personal use or publish it to the Chrome Web Store, you have created something that can positively impact people's lives.
+The daily inspiration extension you created fills a genuine need, users want moments of motivation throughout their workday, and delivering that through the browser they use every day creates meaningful value. Whether you keep it for personal use or publish it to the Chrome Web Store, you have created something that can positively impact people's lives.
 
-Remember that the best extensions evolve based on user feedback. Encourage users to share their thoughts, track which quotes resonate most, and continuously improve your creation. The journey of building great software is never truly complete—it is a continuous process of learning, iterating, and delivering value.
+Remember that the best extensions evolve based on user feedback. Encourage users to share their thoughts, track which quotes resonate most, and continuously improve your creation. The journey of building great software is never truly complete, it is a continuous process of learning, iterating, and delivering value.
 
 Now go forth and inspire!

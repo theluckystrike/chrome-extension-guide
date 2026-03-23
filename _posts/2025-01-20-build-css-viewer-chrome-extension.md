@@ -11,13 +11,13 @@ canonical_url: "https://bestchromeextensions.com/2025/01/20/build-css-viewer-chr
 
 # Build a CSS Properties Viewer Chrome Extension
 
-If you have ever used the built-in Chrome DevTools to debug styling issues, you know how powerful CSS inspection can be. But what if you could have quick access to CSS properties directly in your browser toolbar without opening the developer tools? A CSS properties viewer extension provides exactly that functionality — a streamlined way to inspect CSS chrome elements and view computed styles at a glance.
+If you have ever used the built-in Chrome DevTools to debug styling issues, you know how powerful CSS inspection can be. But what if you could have quick access to CSS properties directly in your browser toolbar without opening the developer tools? A CSS properties viewer extension provides exactly that functionality. a streamlined way to inspect CSS chrome elements and view computed styles at a glance.
 
-In this comprehensive guide, we will walk you through building a fully functional CSS viewer extension using Chrome's Manifest V3 architecture. Whether you are a beginner looking to understand Chrome extension development or an experienced developer wanting to add a useful tool to your arsenal, this tutorial has everything you need.
+we will walk you through building a fully functional CSS viewer extension using Chrome's Manifest V3 architecture. Whether you are a beginner looking to understand Chrome extension development or an experienced developer wanting to add a useful tool to your arsenal, this tutorial has everything you need.
 
 ---
 
-## Why Build a CSS Viewer Extension? {#why-build-css-viewer}
+Why Build a CSS Viewer Extension? {#why-build-css-viewer}
 
 The web development ecosystem is filled with tools for inspecting and debugging CSS, but having a dedicated CSS tool extension offers several distinct advantages. First and foremost, it provides instant access to CSS information without requiring you to open the full Chrome DevTools panel, which can be intimidating for newcomers and time-consuming for experienced developers who just need a quick peek at specific styles.
 
@@ -27,51 +27,51 @@ From a learning perspective, creating a CSS viewer extension is an excellent pro
 
 ---
 
-## Understanding the Extension Architecture {#extension-architecture}
+Understanding the Extension Architecture {#extension-architecture}
 
 Before we dive into the code, let us understand the core components that make up our CSS viewer extension. Chrome extensions built with Manifest V3 consist of several parts that work together to deliver functionality.
 
-### The Manifest File
+The Manifest File
 
 The manifest.json file serves as the configuration hub for your extension. It defines the extension name, version, permissions, and declares which scripts and resources the extension will use. For our CSS viewer, we will need permissions to access the active tab and execute scripts within page contexts.
 
-### Content Scripts
+Content Scripts
 
 Content scripts are JavaScript files that run in the context of web pages. They can read and modify the DOM, access computed styles, and interact with page elements. This is where the core CSS inspection logic will live.
 
-### Popup Interface
+Popup Interface
 
 The popup is what users see when they click the extension icon in the Chrome toolbar. This provides our user interface for selecting elements and displaying CSS properties.
 
-### Background Service Worker
+Background Service Worker
 
 The background service worker handles events and can coordinate between different parts of the extension. While our CSS viewer might not heavily rely on this, understanding its role is important for more complex extensions.
 
 ---
 
-## Setting Up the Project Structure {#project-setup}
+Setting Up the Project Structure {#project-setup}
 
 Let us start by creating the necessary files for our extension. Create a new folder for your project and set up the following structure:
 
 ```
 css-viewer-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── content.js
-├── background.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ content.js
+ background.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 This structure keeps our files organized and makes it easy to manage different components of the extension. Each file has a specific purpose that we will explore in detail throughout this guide.
 
 ---
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the backbone of any Chrome extension. Here is the complete manifest for our CSS viewer extension:
 
@@ -110,7 +110,7 @@ This manifest declares that our extension requires permission to access the acti
 
 ---
 
-## Building the Content Script {#content-script}
+Building the Content Script {#content-script}
 
 The content script is where the magic happens. This JavaScript file runs within the context of each web page and has access to the DOM and computed styles. Let us build a comprehensive content script that can inspect any element:
 
@@ -213,7 +213,7 @@ This content script provides the foundation for inspecting elements. When the us
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup provides the user interface for interacting with our CSS viewer. Let us create a clean and functional popup:
 
@@ -234,7 +234,7 @@ The popup provides the user interface for interacting with our CSS viewer. Let u
     
     <div class="actions">
       <button id="inspectBtn" class="btn primary">
-        <span class="icon">🔍</span>
+        <span class="icon"></span>
         Inspect Element
       </button>
     </div>
@@ -264,7 +264,7 @@ The popup provides a clean interface with an inspect button and a panel to displ
 
 ---
 
-## Styling the Popup {#popup-styling}
+Styling the Popup {#popup-styling}
 
 Now let us add some styling to make our popup visually appealing:
 
@@ -429,7 +429,7 @@ The styling ensures a clean, modern look that matches Chrome's own interface des
 
 ---
 
-## Implementing Popup Logic {#popup-logic}
+Implementing Popup Logic {#popup-logic}
 
 Now let us connect everything with the popup JavaScript:
 
@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cancel inspection
       await chrome.tabs.sendMessage(tab.id, { action: 'disableInspection' });
       inspectBtn.classList.remove('active');
-      inspectBtn.innerHTML = '<span class="icon">🔍</span> Inspect Element';
+      inspectBtn.innerHTML = '<span class="icon"></span> Inspect Element';
       isInspecting = false;
     }
   });
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message.action === 'elementSelected') {
       isInspecting = false;
       inspectBtn.classList.remove('active');
-      inspectBtn.innerHTML = '<span class="icon">🔍</span> Inspect Element';
+      inspectBtn.innerHTML = '<span class="icon"></span> Inspect Element';
       
       // Display element info
       elementTag.textContent = message.tagName;
@@ -518,7 +518,7 @@ This JavaScript handles the communication between the popup and the content scri
 
 ---
 
-## Adding the Background Service Worker {#background-worker}
+Adding the Background Service Worker {#background-worker}
 
 While our CSS viewer primarily uses content scripts and popups, the background service worker can add additional functionality:
 
@@ -544,7 +544,7 @@ This background script provides a foundation for more advanced features like mai
 
 ---
 
-## Testing Your Extension {#testing-extension}
+Testing Your Extension {#testing-extension}
 
 Before publishing your extension, thorough testing is essential. Load your extension in Chrome by following these steps:
 
@@ -558,65 +558,65 @@ Pay special attention to how the extension handles different types of websites, 
 
 ---
 
-## Enhancing Your CSS Viewer {#enhancing-extension}
+Enhancing Your CSS Viewer {#enhancing-extension}
 
 Now that you have a working CSS viewer extension, here are several ways to enhance it:
 
-### Add Property Categories
+Add Property Categories
 
 Organize CSS properties into categories like Layout, Typography, Colors, and Animation. This makes it easier for users to find relevant properties quickly.
 
-### Implement Style Copying
+Implement Style Copying
 
 Add functionality to copy individual property values or entire style blocks to the clipboard. This is useful for developers who want to quickly grab specific styles for reuse.
 
-### Add Hover Preview
+Add Hover Preview
 
 When hovering over properties in the popup, show a preview of what that property does. This is especially helpful for developers who are learning CSS.
 
-### Support Multiple Elements
+Support Multiple Elements
 
 Allow users to select multiple elements and compare their styles side by side. This is valuable for debugging styling inconsistencies.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have tested your extension thoroughly, you can publish it to the Chrome Web Store. Create a developer account, prepare your store listing with appropriate screenshots and descriptions, and submit for review. Make sure to optimize your listing with relevant keywords like "css viewer extension," "inspect css chrome," and "css tool extension" to improve discoverability.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a CSS properties viewer extension is an excellent project that teaches you fundamental Chrome extension development concepts while creating a genuinely useful tool. You have learned how to create Manifest V3 configurations, build content scripts that interact with web pages, design popup interfaces, and implement communication between different extension components.
 
 The extension you built today provides a solid foundation that can be extended with many additional features. Whether you use it as a personal tool or publish it for others to benefit from, you have gained valuable experience in Chrome extension development that will serve you well in future projects.
 
-Remember to test extensively across different websites and browsers, and consider gathering user feedback to guide future improvements. The Chrome extension ecosystem offers tremendous opportunities for developers who can identify problems and create elegant solutions — and now you have the skills to do exactly that.
+Remember to test extensively across different websites and browsers, and consider gathering user feedback to guide future improvements. The Chrome extension ecosystem offers tremendous opportunities for developers who can identify problems and create elegant solutions. and now you have the skills to do exactly that.
 
 ---
 
-## Frequently Asked Questions {#faq}
+Frequently Asked Questions {#faq}
 
-**How do I inspect CSS in Chrome quickly?**
+How do I inspect CSS in Chrome quickly?
 
 The easiest way is to right-click on any element and select "Inspect" to open DevTools. However, with our CSS viewer extension, you can get quick access to CSS properties directly from the toolbar without opening the full DevTools panel.
 
-**Can this extension view inherited CSS properties?**
+Can this extension view inherited CSS properties?
 
 Yes, the getComputedStyle() method returns all applied styles including inherited ones. You can further enhance the extension to filter and display only inherited properties if needed.
 
-**Is this extension compatible with all websites?**
+Is this extension compatible with all websites?
 
 Our extension uses content scripts that run on web pages, which means it should work on most websites. However, some sites with strict Content Security Policy (CSP) restrictions may limit functionality.
 
-**How do I add more CSS properties to view?**
+How do I add more CSS properties to view?
 
 The current implementation already captures all computed styles. To add more features, you can modify the content script to include specific property groups or add custom analysis features.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
-**Built by [theluckystrike](https://zovo.one)**
+Built by [theluckystrike](https://zovo.one)

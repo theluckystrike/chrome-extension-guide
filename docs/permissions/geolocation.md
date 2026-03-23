@@ -10,13 +10,13 @@ canonical_url: "https://bestchromeextensions.com/permissions/geolocation/"
 
 # geolocation Permission
 
-## Overview {#overview}
+Overview {#overview}
 
-- **Permission string**: `"geolocation"` (optional permission in MV3)
+- Permission string: `"geolocation"` (optional permission in MV3)
 - Enables `navigator.geolocation` in extension pages
 - MV3 challenge: service workers cannot use Geolocation API directly
 
-## Web API (not chrome.* API) {#web-api-not-chrome-api}
+Web API (not chrome.* API) {#web-api-not-chrome-api}
 
 ```javascript
 navigator.geolocation.getCurrentPosition(success, error?, options?)
@@ -24,7 +24,7 @@ navigator.geolocation.watchPosition(success, error?, options?)
 navigator.geolocation.clearWatch(watchId)
 ```
 
-## Position Options {#position-options}
+Position Options {#position-options}
 
 | Option | Type | Description |
 |--------|------|-------------|
@@ -32,14 +32,14 @@ navigator.geolocation.clearWatch(watchId)
 | `timeout` | number | Milliseconds to wait for position |
 | `maximumAge` | number | Accept cached position if younger than this (ms) |
 
-## Position Object {#position-object}
+Position Object {#position-object}
 
 - `coords.latitude`, `coords.longitude`, `coords.accuracy`
 - `coords.altitude`, `coords.altitudeAccuracy` (may be null)
 - `coords.heading`, `coords.speed` (may be null)
 - `timestamp`
 
-## MV3: Service Worker Workaround {#mv3-service-worker-workaround}
+MV3: Service Worker Workaround {#mv3-service-worker-workaround}
 
 Service workers do not have access to `navigator.geolocation`. Use an offscreen document with `GEOLOCATION` reason:
 
@@ -82,7 +82,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -99,7 +99,7 @@ Or declare geolocation as required:
 }
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
 - Local weather widget
 - Nearby store/restaurant finder
@@ -107,9 +107,9 @@ Or declare geolocation as required:
 - Travel distance calculator
 - Geo-fencing alerts
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Get position from popup (direct) {#get-position-from-popup-direct}
+Get position from popup (direct) {#get-position-from-popup-direct}
 
 ```typescript
 navigator.geolocation.getCurrentPosition(
@@ -119,7 +119,7 @@ navigator.geolocation.getCurrentPosition(
 );
 ```
 
-### Watch position with error handling {#watch-position-with-error-handling}
+Watch position with error handling {#watch-position-with-error-handling}
 
 ```typescript
 const watchId = navigator.geolocation.watchPosition(
@@ -134,7 +134,7 @@ const watchId = navigator.geolocation.watchPosition(
 navigator.geolocation.clearWatch(watchId);
 ```
 
-### Get position from service worker via offscreen {#get-position-from-service-worker-via-offscreen}
+Get position from service worker via offscreen {#get-position-from-service-worker-via-offscreen}
 
 ```typescript
 // background.ts
@@ -154,18 +154,18 @@ async function getLocation() {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [permissions/offscreen.md](./offscreen.md)
 - [mv3/offscreen-documents.md](../mv3/offscreen-documents.md)
 - [patterns/offscreen-documents.md](../patterns/offscreen-documents.md)
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I get user's location in a Chrome extension?
+How do I get user's location in a Chrome extension?
 Use the standard Geolocation API (navigator.geolocation) in your content script. The "geolocation" permission is only needed for the background script.
 
-### Can extensions override geolocation for testing?
+Can extensions override geolocation for testing?
 Yes, Chrome DevTools allows you to override geolocation for testing purposes in your content scripts.
 ---
 

@@ -2,17 +2,17 @@
 
 ## Overview
 
-Email checker extensions are powerful tools that help users validate, verify, and manage email addresses directly from their browser. These extensions can detect email addresses on webpages, validate their format, check if they're from disposable email providers, verify if emails are deliverable, and even integrate with email verification APIs. This guide covers the architecture, implementation patterns, and best practices for building a robust email checker extension using TypeScript and Chrome's APIs.
+Email checker extensions are powerful tools that help users validate, verify, and manage email addresses directly from their browser. These extensions can detect email addresses on webpages, validate their format, check if they're from disposable email providers, verify if emails are deliverable, and even integrate with email verification APIs. This guide covers the architecture, implementation patterns, and best practices for building a solid email checker extension using TypeScript and Chrome's APIs.
 
 ## Core Architecture
 
 An email checker extension typically consists of several key components working together:
 
-1. **Content Script** - Detects and extracts email addresses from webpage content
-2. **Background Service Worker** - Handles API calls, caching, and long-running tasks
-3. **Popup UI** - Provides user interface for manual email checking
-4. **Options Page** - Configures API keys, preferences, and notification settings
-5. **Storage Layer** - Persists user preferences and checking history
+1. Content Script - Detects and extracts email addresses from webpage content
+2. Background Service Worker - Handles API calls, caching, and long-running tasks
+3. Popup UI - Provides user interface for manual email checking
+4. Options Page - Configures API keys, preferences, and notification settings
+5. Storage Layer - Persists user preferences and checking history
 
 ### Manifest Configuration
 
@@ -68,7 +68,7 @@ class EmailDetector {
   private emailPattern = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
   private processedElements = new WeakSet<Element>();
 
-  /**
+  /
    * Scans the entire page for email addresses
    */
   scanPage(): EmailMatch[] {
@@ -127,7 +127,7 @@ class EmailDetector {
     return matches;
   }
 
-  /**
+  /
    * Adds visual indicators to detected emails
    */
   highlightEmails(matches: EmailMatch[]): void {
@@ -183,7 +183,7 @@ class EmailVerificationService {
   private cache = new Map<string, { result: VerificationResult; timestamp: number }>();
   private cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
 
-  /**
+  /
    * Verify an email address using external API
    */
   async verifyEmail(email: string, config: ApiConfig): Promise<VerificationResult> {
@@ -313,7 +313,7 @@ class EmailVerificationService {
     };
   }
 
-  /**
+  /
    * Save verification result to extension storage
    */
   private async saveToHistory(email: string, result: VerificationResult): Promise<void> {
@@ -395,13 +395,13 @@ async function verifySingleEmail(email: string, tabId: number): Promise<void> {
 }
 
 function showResultNotification(result: VerificationResult): void {
-  const status = result.isValid ? '✅ Valid' : '❌ Invalid';
+  const status = result.isValid ? ' Valid' : ' Invalid';
   const details = [];
   
-  if (result.isDisposable) details.push('🚫 Disposable');
-  if (result.isRisky) details.push('⚠️ Risky');
-  if (result.details?.roleBased) details.push('👤 Role Account');
-  if (result.details?.freeProvider) details.push('📧 Free Provider');
+  if (result.isDisposable) details.push(' Disposable');
+  if (result.isRisky) details.push(' Risky');
+  if (result.details?.roleBased) details.push(' Role Account');
+  if (result.details?.freeProvider) details.push(' Free Provider');
 
   chrome.notifications.create({
     type: 'basic',
@@ -477,18 +477,18 @@ class PopupController {
     if (!container) return;
 
     const statusClass = result.isValid ? 'status-valid' : 'status-invalid';
-    const statusText = result.isValid ? '✅ Valid Email' : '❌ Invalid Email';
+    const statusText = result.isValid ? ' Valid Email' : ' Invalid Email';
 
     container.innerHTML = `
       <div class="result-card ${statusClass}">
         <div class="status">${statusText}</div>
         <div class="score">Score: ${result.score}/100</div>
         <ul class="details">
-          ${result.isDisposable ? '<li>🚫 Disposable Email</li>' : ''}
-          ${result.isRisky ? '<li>⚠️ Risky Email</li>' : ''}
-          ${result.details?.roleBased ? '<li>👤 Role-based Account</li>' : ''}
-          ${result.details?.freeProvider ? '<li>📧 Free Provider</li>' : ''}
-          ${result.details?.catchAll ? '<li>🔄 Catch-all Domain</li>' : ''}
+          ${result.isDisposable ? '<li> Disposable Email</li>' : ''}
+          ${result.isRisky ? '<li> Risky Email</li>' : ''}
+          ${result.details?.roleBased ? '<li> Role-based Account</li>' : ''}
+          ${result.details?.freeProvider ? '<li> Free Provider</li>' : ''}
+          ${result.details?.catchAll ? '<li> Catch-all Domain</li>' : ''}
         </ul>
       </div>
     `;
@@ -587,7 +587,7 @@ class RateLimiter {
 - Consider implementing local-only validation for privacy-sensitive users
 
 ### 4. Error Handling
-Implement robust error handling for network failures and API issues:
+Implement solid error handling for network failures and API issues:
 
 ```typescript
 try {

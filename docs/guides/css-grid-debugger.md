@@ -48,26 +48,26 @@ The extension uses Manifest V3 with precise permissions for DOM inspection and s
 
 ```
 css-grid-debugger/
-├── src/
-│   ├── background/
-│   │   └── background.ts
-│   ├── content/
-│   │   ├── content-script.ts
-│   │   ├── grid-analyzer.ts
-│   │   ├── overlay-renderer.ts
-│   │   └── types.ts
-│   ├── popup/
-│   │   ├── popup.ts
-│   │   └── popup.html
-│   ├── shared/
-│   │   ├── storage.ts
-│   │   └── messaging.ts
-│   └── utils/
-│       ├── dom.ts
-│       └── logger.ts
-├── manifest.json
-├── tsconfig.json
-└── webpack.config.js
+ src/
+    background/
+       background.ts
+    content/
+       content-script.ts
+       grid-analyzer.ts
+       overlay-renderer.ts
+       types.ts
+    popup/
+       popup.ts
+       popup.html
+    shared/
+       storage.ts
+       messaging.ts
+    utils/
+        dom.ts
+        logger.ts
+ manifest.json
+ tsconfig.json
+ webpack.config.js
 ```
 
 ### Type Definitions (src/content/types.ts)
@@ -825,12 +825,12 @@ const debouncedAnalyze = debounce(() => {
 
 ### Edge Cases to Handle
 
-1. **Nested grids**: Analyze recursively and render overlays for each container
-2. **Anonymous grid items**: Handle text nodes wrapped in grid containers
-3. **Subgrid support**: Detect and visualize subgrid relationships
-4. **Responsive grids**: Re-analyze on window resize
-5. **iframe isolation**: Cannot access cross-origin iframes
-6. **Shadow DOM**: Use `querySelectorAll` with shadow roots
+1. Nested grids: Analyze recursively and render overlays for each container
+2. Anonymous grid items: Handle text nodes wrapped in grid containers
+3. Subgrid support: Detect and visualize subgrid relationships
+4. Responsive grids: Re-analyze on window resize
+5. iframe isolation: Cannot access cross-origin iframes
+6. Shadow DOM: Use `querySelectorAll` with shadow roots
 
 ## Testing Approach
 
@@ -898,11 +898,11 @@ describe('Extension Integration', () => {
 
 ### Optimizations
 
-1. **Debounce resize handlers**: Prevent excessive re-renders
-2. **Use requestAnimationFrame**: Smooth overlay positioning
-3. **Cache computed styles**: Avoid repeated `getComputedStyle` calls
-4. **Limit DOM queries**: Cache element references
-5. **Use CSS transforms**: GPU-accelerated overlay positioning
+1. Debounce resize handlers: Prevent excessive re-renders
+2. Use requestAnimationFrame: Smooth overlay positioning
+3. Cache computed styles: Avoid repeated `getComputedStyle` calls
+4. Limit DOM queries: Cache element references
+5. Use CSS transforms: GPU-accelerated overlay positioning
 
 ```typescript
 // Efficient overlay positioning

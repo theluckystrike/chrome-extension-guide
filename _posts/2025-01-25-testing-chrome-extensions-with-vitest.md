@@ -13,37 +13,37 @@ canonical_url: "https://bestchromeextensions.com/2025/01/25/testing-chrome-exten
 
 When it comes to testing Chrome extensions, developers have traditionally relied on Jest as the default testing framework. However, Vitest has emerged as a powerful alternative that offers significantly faster execution times, better TypeScript support out of the box, and a more modern developer experience. If you are building Chrome extensions in 2025 and have not yet explored Vitest, you are missing out on a testing experience that can dramatically improve your development workflow and reduce the time waiting for tests to complete.
 
-This comprehensive guide will walk you through everything you need to know about testing Chrome extensions with Vitest. We will cover the fundamental reasons why Vitest is an excellent choice for extension testing, walk through the complete setup process, explore various testing scenarios including content scripts, service workers, and background scripts, and discuss advanced techniques for mocking Chrome APIs. By the end of this guide, you will have a complete understanding of how to implement a robust testing strategy for your Chrome extensions using Vitest.
+This comprehensive guide will walk you through everything you need to know about testing Chrome extensions with Vitest. We will cover the fundamental reasons why Vitest is an excellent choice for extension testing, walk through the complete setup process, explore various testing scenarios including content scripts, service workers, and background scripts, and discuss advanced techniques for mocking Chrome APIs. By the end of this guide, you will have a complete understanding of how to implement a solid testing strategy for your Chrome extensions using Vitest.
 
 ---
 
-## Why Choose Vitest for Chrome Extension Testing {#why-vitest}
+Why Choose Vitest for Chrome Extension Testing {#why-vitest}
 
 The Chrome extension development ecosystem has evolved significantly, and with it, the expectations for testing frameworks have changed. Vitest, created by the same team behind Vite, brings several compelling advantages that make it particularly well-suited for testing Chrome extensions.
 
-### Blazing Fast Test Execution
+Blazing Fast Test Execution
 
 The most immediately noticeable benefit of Vitest is its exceptional speed. Unlike Jest, which runs in a Node.js environment and requires transformation of modern JavaScript syntax, Vitest leverages Vite's native ESM support and on-demand compilation. This means your tests start almost instantly and run significantly faster. For Chrome extension developers who frequently run tests during development, this speed difference can save hours of cumulative wait time over the course of a project. In our testing, Vitest consistently runs tests two to five times faster than Jest, depending on the complexity of the test suite.
 
-### Native TypeScript Support
+Native TypeScript Support
 
-Chrome extension development increasingly relies on TypeScript for better type safety and maintainability. Vitest provides first-class TypeScript support without requiring additional configuration or plugins. You can write your tests in TypeScript directly, and Vitest will handle the type checking and compilation seamlessly. This integration extends to type inference for mocks and fixtures, making your test code as type-safe as your production code.
+Chrome extension development increasingly relies on TypeScript for better type safety and maintainability. Vitest provides first-class TypeScript support without requiring additional configuration or plugins. You can write your tests in TypeScript directly, and Vitest will handle the type checking and compilation smoothly. This integration extends to type inference for mocks and fixtures, making your test code as type-safe as your production code.
 
-### Hot Module Replacement
+Hot Module Replacement
 
 During test development, the ability to see results quickly is crucial. Vitest supports HMR (Hot Module Replacement) for test files, meaning you can modify a test and see the results immediately without waiting for a full test rerun. This feature is particularly valuable when debugging failing tests or experimenting with different test scenarios.
 
-### Jest-Compatible API
+Jest-Compatible API
 
 If you are currently using Jest, the transition to Vitest is remarkably smooth. Vitest provides a Jest-compatible API, meaning most of your existing test code will work with minimal or no modifications. The familiar `describe`, `it`, `expect`, `beforeEach`, and `afterEach` functions work exactly as you would expect. This compatibility extends to most Jest-specific matchers and utilities, making the learning curve minimal for teams already familiar with Jest.
 
 ---
 
-## Setting Up Vitest for Chrome Extensions {#setup}
+Setting Up Vitest for Chrome Extensions {#setup}
 
 Setting up Vitest for Chrome extension testing requires careful configuration to handle the unique aspects of extension architecture. Let us walk through the complete setup process step by step.
 
-### Installing Dependencies
+Installing Dependencies
 
 First, create a new directory for your extension or navigate to an existing project. If you are starting from scratch, initialize a new npm project and install the necessary dependencies:
 
@@ -55,7 +55,7 @@ npm install --save-dev webextensions-polyfill
 
 The `webextensions-polyfill` package provides compatibility between the Firefox and Chrome extension APIs, making your code more portable. The `jsdom` environment is essential for simulating browser globals that your extension code expects.
 
-### Configuring Vitest
+Configuring Vitest
 
 Create a `vitest.config.ts` file in your project root with the following configuration:
 
@@ -68,11 +68,11 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    include: ['src/**/*.{test,spec}.{js,ts}'],
+    include: ['src//*.{test,spec}.{js,ts}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.{js,ts}'],
+      include: ['src//*.{js,ts}'],
     },
   },
   resolve: {
@@ -85,7 +85,7 @@ export default defineConfig({
 
 The `environment: 'jsdom'` setting is crucial as it provides the DOM APIs that Chrome extensions expect. The `setupFiles` option allows you to define global mocks and configurations that apply to all tests.
 
-### Creating the Setup File
+Creating the Setup File
 
 Create a `vitest.setup.ts` file to configure global mocks and prepare the test environment:
 
@@ -145,11 +145,11 @@ This setup file provides a basic mock of the Chrome API that you can expand base
 
 ---
 
-## Testing Content Scripts with Vitest {#content-scripts}
+Testing Content Scripts with Vitest {#content-scripts}
 
 Content scripts run in the context of web pages and have unique testing requirements. They interact with the DOM, communicate with the extension's background scripts, and must handle various page states gracefully. Let us explore how to test content scripts effectively using Vitest.
 
-### Setting Up Content Script Tests
+Setting Up Content Script Tests
 
 Create a test file for your content script:
 
@@ -204,7 +204,7 @@ describe('Content Script: Page Analyzer', () => {
 });
 ```
 
-### Testing DOM Manipulation
+Testing DOM Manipulation
 
 Content scripts frequently manipulate the DOM to add UI elements or modify page content. Here is how to test these interactions:
 
@@ -252,11 +252,11 @@ describe('Content Script: DOM Manipulation', () => {
 
 ---
 
-## Testing Service Workers and Background Scripts {#service-workers}
+Testing Service Workers and Background Scripts {#service-workers}
 
 Service workers in Manifest V3 extensions run in a special background context and handle events like alarms, messages, and browser notifications. Testing these requires careful handling of Chrome's event-based API.
 
-### Mocking Service Worker Events
+Mocking Service Worker Events
 
 Service workers use event-driven architecture, which presents unique testing challenges:
 
@@ -304,7 +304,7 @@ describe('Service Worker: Message Handler', () => {
 });
 ```
 
-### Testing Alarm Handlers
+Testing Alarm Handlers
 
 Chrome alarms are commonly used in extensions for scheduled tasks:
 
@@ -350,11 +350,11 @@ describe('Service Worker: Alarm Handler', () => {
 
 ---
 
-## Advanced Mocking Strategies {#advanced-mocking}
+Advanced Mocking Strategies {#advanced-mocking}
 
 As your extension grows more complex, you will need sophisticated mocking strategies to handle the full range of Chrome APIs and external dependencies.
 
-### Creating a Comprehensive Chrome Mock
+Creating a Comprehensive Chrome Mock
 
 For larger projects, consider creating a dedicated mock factory:
 
@@ -454,7 +454,7 @@ describe('Advanced Mocking Example', () => {
 
 ---
 
-## Testing Extension Utility Functions {#utilities}
+Testing Extension Utility Functions {#utilities}
 
 Many extensions contain pure utility functions that are easy to test and form the backbone of your extension's logic. These are ideal candidates for Vitest testing.
 
@@ -508,7 +508,7 @@ describe('Utility: Data Formatter', () => {
 
 ---
 
-## Integration Testing with Vitest {#integration}
+Integration Testing with Vitest {#integration}
 
 Integration tests verify that different parts of your extension work together correctly. For Chrome extensions, this often involves testing communication between content scripts and background scripts.
 
@@ -547,11 +547,11 @@ describe('Integration: Content Script to Background Communication', () => {
 
 ---
 
-## Running Tests Effectively {#running-tests}
+Running Tests Effectively {#running-tests}
 
 Now that you have your tests set up, let us explore how to run them effectively and integrate them into your development workflow.
 
-### Configuring npm Scripts
+Configuring npm Scripts
 
 Add the following scripts to your `package.json`:
 
@@ -587,11 +587,11 @@ npm run test:ui
 
 ---
 
-## Best Practices for Extension Testing {#best-practices}
+Best Practices for Extension Testing {#best-practices}
 
 Following established best practices ensures your test suite remains maintainable and valuable throughout your extension's lifecycle.
 
-### Organize Tests Close to Source
+Organize Tests Close to Source
 
 Keep test files alongside the code they test. This makes it easier to find and update tests when code changes:
 
@@ -607,7 +607,7 @@ src/
     parser.test.ts
 ```
 
-### Use Descriptive Test Names
+Use Descriptive Test Names
 
 Write test names that clearly describe what is being tested and what the expected outcome is:
 
@@ -623,7 +623,7 @@ it('should work', async () => {
 });
 ```
 
-### Test Edge Cases
+Test Edge Cases
 
 Do not just test the happy path. Include tests for error conditions, empty inputs, and unusual scenarios:
 
@@ -640,7 +640,7 @@ it('should handle network errors gracefully', async () => {
 });
 ```
 
-### Keep Tests Independent
+Keep Tests Independent
 
 Each test should be able to run in isolation. Avoid relying on execution order or shared state between tests:
 
@@ -670,11 +670,11 @@ describe('User Preferences', () => {
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Testing Chrome extensions with Vitest offers a modern, fast, and developer-friendly experience that significantly improves upon traditional testing approaches. The framework's speed advantages alone make it worth the switch, but its native TypeScript support, HMR capabilities, and Jest-compatible API make it an exceptional choice for extension developers.
 
-In this guide, we covered the essential aspects of setting up Vitest for Chrome extension testing, from basic configuration to advanced mocking strategies. We explored how to test content scripts, service workers, utility functions, and integration scenarios. We also discussed best practices that will help you maintain a robust and reliable test suite as your extension grows.
+we covered the essential aspects of setting up Vitest for Chrome extension testing, from basic configuration to advanced mocking strategies. We explored how to test content scripts, service workers, utility functions, and integration scenarios. We also discussed best practices that will help you maintain a solid and reliable test suite as your extension grows.
 
 The key takeaways are straightforward: Vitest provides the speed and modern features that Chrome extension development needs, proper mocking of Chrome APIs is essential for meaningful tests, organizing tests alongside source code improves maintainability, and comprehensive testing of edge cases ensures your extension works reliably in production.
 

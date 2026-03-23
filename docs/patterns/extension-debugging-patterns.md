@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Debugging Patterns — Best Practices"
+title: "Chrome Extension Extension Debugging Patterns. Best Practices"
 description: "Master debugging techniques for Chrome extensions across all execution contexts."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-debugging-patterns/"
 ---
@@ -9,44 +9,44 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-debugging-pa
 
 This document covers common debugging patterns for Chrome extension development across different contexts.
 
-## Service Worker Debugging {#service-worker-debugging}
+Service Worker Debugging {#service-worker-debugging}
 
 Service workers run in the background and require special debugging approaches:
 
-- **Access**: Navigate to `chrome://serviceworker-internals` to see all registered service workers
-- **Inspect**: Go to `chrome://extensions`, enable "Developer mode", and click "Inspect view" for your service worker
-- **Console**: Each service worker has a separate DevTools window - logs appear here, not in the page's console
+- Access: Navigate to `chrome://serviceworker-internals` to see all registered service workers
+- Inspect: Go to `chrome://extensions`, enable "Developer mode", and click "Inspect view" for your service worker
+- Console: Each service worker has a separate DevTools window - logs appear here, not in the page's console
 
-## Popup Debugging {#popup-debugging}
+Popup Debugging {#popup-debugging}
 
-The popup context is短暂 and closes on blur:
+The popup context is and closes on blur:
 
-- **Inspect**: Right-click the extension icon and select "Inspect popup" (or use the context menu in chrome://extensions)
-- **Alternative**: Use `chrome.action.openPopup()` from the background console to open the popup
-- **Workaround**: Pin the popup to the toolbar to prevent it from closing when clicking elsewhere
+- Inspect: Right-click the extension icon and select "Inspect popup" (or use the context menu in chrome://extensions)
+- Alternative: Use `chrome.action.openPopup()` from the background console to open the popup
+- Workaround: Pin the popup to the toolbar to prevent it from closing when clicking elsewhere
 
-## Content Script Debugging {#content-script-debugging}
+Content Script Debugging {#content-script-debugging}
 
 Content scripts run in the context of web pages:
 
-- **Sources Panel**: Open DevTools on any page with your content script injected, then go to the "Sources" tab and look for the "Content scripts" section
-- **File Recognition**: Content scripts appear with a special icon or under the "Content scripts" folder
-- **Breakpoints**: Set breakpoints directly in the content script from this panel
+- Sources Panel: Open DevTools on any page with your content script injected, then go to the "Sources" tab and look for the "Content scripts" section
+- File Recognition: Content scripts appear with a special icon or under the "Content scripts" folder
+- Breakpoints: Set breakpoints directly in the content script from this panel
 
-## Background Console (Service Worker) {#background-console-service-worker}
+Background Console (Service Worker) {#background-console-service-worker}
 
 The background/service worker console is separate from page consoles:
 
 - Access via `chrome://extensions` > "Inspect view" on your service worker
 - All `console.log`, `console.error`, etc. from the service worker appear here
-- Note: The console clears on service worker restart - use persistent logging if needed
+- The console clears on service worker restart - use persistent logging if needed
 
-## Message Passing Debugging {#message-passing-debugging}
+Message Passing Debugging {#message-passing-debugging}
 
 Debugging communication between extension contexts:
 
-- **Log at Both Ends**: Add console logs at both sender and receiver to verify messages
-- **Check runtime.lastError**: Always check `chrome.runtime.lastError` in callbacks:
+- Log at Both Ends: Add console logs at both sender and receiver to verify messages
+- Check runtime.lastError: Always check `chrome.runtime.lastError` in callbacks:
   ```javascript
   chrome.runtime.sendMessage({msg: 'hello'}, (response) => {
     if (chrome.runtime.lastError) {
@@ -54,17 +54,17 @@ Debugging communication between extension contexts:
     }
   });
   ```
-- **Verify Context**: Ensure the receiving end exists before sending
+- Verify Context: Ensure the receiving end exists before sending
 
-## Storage Debugging {#storage-debugging}
+Storage Debugging {#storage-debugging}
 
 Inspect extension storage:
 
-- **Dump All Data**: Use `chrome.storage.local.get(null, console.log)` to retrieve all stored data
-- **Sync Storage**: Use `chrome.storage.sync.get(null, console.log)` for sync storage
-- **Monitor Changes**: Use the `chrome.storage.onChanged` listener to track changes
+- Dump All Data: Use `chrome.storage.local.get(null, console.log)` to retrieve all stored data
+- Sync Storage: Use `chrome.storage.sync.get(null, console.log)` for sync storage
+- Monitor Changes: Use the `chrome.storage.onChanged` listener to track changes
 
-## Permission Debugging {#permission-debugging}
+Permission Debugging {#permission-debugging}
 
 Verify active permissions at runtime:
 
@@ -76,15 +76,15 @@ chrome.permissions.getAll((permissions) => {
 
 This helps diagnose permission-related issues, especially with optional permissions.
 
-## Network Debugging {#network-debugging}
+Network Debugging {#network-debugging}
 
 Extension network requests appear in different places:
 
-- **Page Network Tab**: Extension requests often appear in the Network tab of the page's DevTools
-- **Service Worker**: Network requests made from the service worker appear in the service worker's DevTools
-- **Filter**: Use "XHR" or "Fetch" filters to find extension API calls
+- Page Network Tab: Extension requests often appear in the Network tab of the page's DevTools
+- Service Worker: Network requests made from the service worker appear in the service worker's DevTools
+- Filter: Use "XHR" or "Fetch" filters to find extension API calls
 
-## Breakpoints Across Contexts {#breakpoints-across-contexts}
+Breakpoints Across Contexts {#breakpoints-across-contexts}
 
 Each extension context has its own DevTools:
 
@@ -93,16 +93,16 @@ Each extension context has its own DevTools:
 - Service worker breakpoints in service worker DevTools
 - Popup breakpoints in popup DevTools
 
-## Common Errors {#common-errors}
+Common Errors {#common-errors}
 
-### "Receiving end does not exist" {#receiving-end-does-not-exist}
+"Receiving end does not exist" {#receiving-end-does-not-exist}
 
 This typically means:
 - The content script is not injected into the current page
 - The target tab doesn't exist or has been closed
 - The receiving extension context has been invalidated
 
-### "Extension context invalidated" {#extension-context-invalidated}
+"Extension context invalidated" {#extension-context-invalidated}
 
 This occurs after:
 - Extension update (service worker restarts)
@@ -110,19 +110,19 @@ This occurs after:
 
 Re-establish connections after these events.
 
-## Useful Console Methods {#useful-console-methods}
+Useful Console Methods {#useful-console-methods}
 
 - `console.table()` - Display structured data in table format (great for arrays/objects)
 - `console.trace()` - Print stack traces for understanding call paths
 
-## Source Maps in Extensions {#source-maps-in-extensions}
+Source Maps in Extensions {#source-maps-in-extensions}
 
 For bundled extensions:
 - Ensure your build process generates source maps
 - Source maps allow you to debug original TypeScript/JavaScript files
 - Load unpacked extension for development to enable proper source map support
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Debugging Extensions Guide](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

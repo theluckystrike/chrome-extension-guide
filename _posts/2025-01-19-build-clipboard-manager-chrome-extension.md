@@ -19,11 +19,11 @@ This project is perfect for developers who want to learn Chrome extension develo
 
 ---
 
-## Why Build a Clipboard Manager Extension {#why-build-clipboard-extension}
+Why Build a Clipboard Manager Extension {#why-build-clipboard-extension}
 
 Before we start coding, let us discuss why building a clipboard manager extension is an excellent project choice. Copy paste manager tools are among the most popular categories in the Chrome Web Store for several compelling reasons.
 
-First, they solve an immediate pain point. Every computer user experiences the frustration of losing important copied content. Whether it is a URL you spent time finding, a code snippet you need for a project, or contact information you typed out, accidentally overwriting it is infuriating. A clipboard history chrome extension eliminates this problem by keeping a persistent record of everything you copy.
+First, they solve an immediate problem. Every computer user experiences the frustration of losing important copied content. Whether it is a URL you spent time finding, a code snippet you need for a project, or contact information you typed out, accidentally overwriting it is infuriating. A clipboard history chrome extension eliminates this problem by keeping a persistent record of everything you copy.
 
 Second, clipboard manager extensions are technically achievable for developers of all skill levels. You do not need complex backend infrastructure or database connections. Modern Chrome extensions can monitor clipboard changes and store history locally using the chrome.storage API, making the entire application client-side. This simplifies development significantly and reduces hosting costs to zero.
 
@@ -31,7 +31,7 @@ Third, there is significant demand in the market. Clipboard manager chrome exten
 
 ---
 
-## Project Overview and Features {#project-overview}
+Project Overview and Features {#project-overview}
 
 Our clipboard manager extension will include the following features. First, automatic clipboard monitoring that tracks every copy action and stores it in history. Second, a popup interface displaying the clipboard history list with the most recent items at the top. Third, search functionality allowing users to quickly find specific items in their history. Fourth, pin functionality to keep important items at the top of the list permanently. Fifth, one-click re-copy that copies any historical item back to the clipboard. Sixth, delete functionality to remove individual items from history. Seventh, clear all option to reset the clipboard history. Eighth, storage persistence using chrome.storage to maintain history across browser sessions.
 
@@ -39,7 +39,7 @@ This feature set strikes the right balance between simplicity and usefulness. It
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension needs a specific file structure to function correctly. Let us set up our project directory first. Create a new folder named clipboard-manager-extension in your development workspace. Inside this folder, we will create the following files and directories.
 
@@ -80,11 +80,11 @@ Let us start by creating the manifest.json file, which is the most critical comp
 }
 ```
 
-This manifest uses Manifest V3, which is the current standard for Chrome extensions. We declare the storage permission so our extension can save clipboard history persistently. The clipboardRead and clipboardWrite permissions allow us to monitor and modify clipboard content. The background service worker enables continuous clipboard monitoring even when the popup is closed. The action property defines what happens when users click the extension icon—in this case, it opens our popup.html file.
+This manifest uses Manifest V3, which is the current standard for Chrome extensions. We declare the storage permission so our extension can save clipboard history persistently. The clipboardRead and clipboardWrite permissions allow us to monitor and modify clipboard content. The background service worker enables continuous clipboard monitoring even when the popup is closed. The action property defines what happens when users click the extension icon, in this case, it opens our popup.html file.
 
 ---
 
-## Creating the Background Service Worker {#background-service-worker}
+Creating the Background Service Worker {#background-service-worker}
 
 The background service worker is the heart of our clipboard manager extension. It runs continuously in the background, monitoring the clipboard for changes and storing them in our history. Let us create the background.js file.
 
@@ -221,7 +221,7 @@ This background service worker implements several key features. First, it uses p
 
 ---
 
-## Building the Popup Interface {#building-popup-interface}
+Building the Popup Interface {#building-popup-interface}
 
 Now let us create the popup.html file that defines what users see when they click our extension. We will build a clean, functional interface that emphasizes ease of use.
 
@@ -266,7 +266,7 @@ This HTML structure provides a clean interface with a header containing the exte
 
 ---
 
-## Styling the Popup {#styling-popup}
+Styling the Popup {#styling-popup}
 
 Now let us create the popup.css file to make our extension visually appealing. We will use a modern, clean design with good visual hierarchy.
 
@@ -464,7 +464,7 @@ This CSS provides a polished, modern interface with proper spacing, typography, 
 
 ---
 
-## Implementing Popup Logic {#implementing-popup-logic}
+Implementing Popup Logic {#implementing-popup-logic}
 
 Now let us create the popup.js file that handles user interactions and displays the clipboard history.
 
@@ -672,7 +672,7 @@ This JavaScript implements all the interactive features of our clipboard manager
 
 ---
 
-## Creating Extension Icons {#creating-icons}
+Creating Extension Icons {#creating-icons}
 
 Every Chrome extension needs icons to display in the browser toolbar and Chrome Web Store. You will need to create three icon sizes: 16x16, 48x48, and 128x128 pixels. Create an icons folder in your project directory and add the following icons.
 
@@ -682,7 +682,7 @@ If you do not have icons ready, you can use a placeholder approach by creating a
 
 ---
 
-## Testing the Extension {#testing-extension}
+Testing the Extension {#testing-extension}
 
 Now that we have created all the necessary files, let us test our clipboard manager extension. First, make sure your project structure looks like this.
 
@@ -696,7 +696,7 @@ If you encounter any issues, right-click the extension icon and select Inspect p
 
 ---
 
-## Understanding the Clipboard API Limitations {#clipboard-api-limitations}
+Understanding the Clipboard API Limitations {#clipboard-api-limitations}
 
 It is important to understand some limitations of the clipboard API in Chrome extensions. The polling approach we use in background.js works well for most use cases but has some considerations.
 
@@ -704,13 +704,13 @@ First, there is a slight delay in detecting clipboard changes due to the one-sec
 
 Second, the clipboard API requires the page to be on a secure context (HTTPS) or localhost. This should not be an issue for extension background scripts, but it is worth noting.
 
-Third, some websites may use techniques to prevent clipboard access or may have their own clipboard event handling that could interfere with detection. Our implementation is robust enough for most use cases.
+Third, some websites may use techniques to prevent clipboard access or may have their own clipboard event handling that could interfere with detection. Our implementation is solid enough for most use cases.
 
 Fourth, large clipboard items may impact storage and performance. Consider adding character limits in a production version if needed.
 
 ---
 
-## Enhancements and Future Improvements {#future-improvements}
+Enhancements and Future Improvements {#future-improvements}
 
 Our clipboard manager extension is fully functional, but there are many enhancements you could add to make it even more powerful. Here are some suggestions for future improvements.
 
@@ -728,7 +728,7 @@ Sixth, add export and import functionality to backup and restore clipboard histo
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete clipboard manager extension for Chrome. This extension includes all the essential features of a copy paste manager: automatic clipboard monitoring, history storage, search functionality, pin and delete options, and persistent storage across browser sessions.
 
@@ -740,14 +740,14 @@ Building a clipboard history chrome extension is an excellent portfolio project 
 
 ---
 
-## Project Files Summary {#project-summary}
+Project Files Summary {#project-summary}
 
 Here is a summary of all the files we created in this tutorial. The manifest.json file configures the extension with proper permissions and background service worker. The background.js file handles clipboard monitoring and storage. The popup.html file defines the user interface. The popup.css file provides the styling. The popup.js file implements user interactions and history display.
 
 You now have a complete, working clipboard manager extension that solves real problems for users. Consider adding some final touches like improving the icons, adding a nice icon badge showing the number of items, and testing across different scenarios before using it daily or sharing it with others.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

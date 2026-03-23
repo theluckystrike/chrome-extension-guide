@@ -27,10 +27,10 @@ document.getElementById('submitFeedback').addEventListener('click', async () => 
 ```
 
 ### Feedback Types
-- **General feedback**: Suggestions, questions
-- **Bug report**: Issues, errors, unexpected behavior
-- **Feature request**: New functionality ideas
-- **Rating**: 1-5 star or thumbs up/down
+- General feedback: Suggestions, questions
+- Bug report: Issues, errors, unexpected behavior
+- Feature request: New functionality ideas
+- Rating: 1-5 star or thumbs up/down
 
 ## setUninstallURL for Exit Surveys
 
@@ -292,7 +292,7 @@ async function submitFeatureRequest(data) {
       },
       body: JSON.stringify({
         title: request.title,
-        body: `**Use Case:** ${request.useCase}\n\n**Description:** ${request.description}`,
+        body: `Use Case: ${request.useCase}\n\nDescription: ${request.description}`,
         labels: ['feature-request']
       })
     }
@@ -319,7 +319,7 @@ async function showTopFeatures() {
   
   return features.map(f => `
     <div class="feature-vote">
-      <button onclick="voteForFeature('${f.id}')">▲</button>
+      <button onclick="voteForFeature('${f.id}')"></button>
       <span>${f.votes}</span>
       <h4>${f.title}</h4>
     </div>
@@ -381,7 +381,7 @@ function initBetaFeedback() {
 ## Best Practices
 
 ### Feedback Timing
-- Don't ask immediately after install — let users explore first
+- Don't ask immediately after install. let users explore first
 - Prompt for feedback after successful feature usage
 - Space out NPS surveys (once per quarter max)
 - Exit surveys only on uninstall, not downgrade
@@ -390,7 +390,7 @@ function initBetaFeedback() {
 - Always explain what data is collected
 - Get explicit consent for optional data (screenshots, system info)
 - Anonymize user data where possible
-- Comply with GDPR — allow data deletion requests
+- Comply with GDPR. allow data deletion requests
 
 ### Feedback Analytics
 - Track feedback trends over time

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Migrating Your Chrome Extension from Manifest V2 to V3 — Complete Guide"
+title: "Migrating Your Chrome Extension from Manifest V2 to V3. Complete Guide"
 description: "A comprehensive step-by-step tutorial for migrating Chrome extensions from Manifest V2 to V3, covering service workers, declarativeNetRequest, and more."
 canonical_url: "https://bestchromeextensions.com/tutorials/migrating-to-manifest-v3/"
 ---
@@ -11,15 +11,15 @@ Google began disabling Manifest V2 extensions in June 2024, with full removal fr
 
 ---
 
-## Key Differences Between Manifest V2 and V3
+Key Differences Between Manifest V2 and V3
 
 Understanding the fundamental changes in MV3 is essential before starting your migration. Here are the most significant differences:
 
-### 1. Background Pages → Service Workers
+1. Background Pages → Service Workers
 
 In Manifest V2, background pages were persistent HTML pages that stayed open as long as your extension was installed. They had full access to the DOM and could run continuously.
 
-In Manifest V3, background pages are replaced by **service workers** — event-driven scripts that:
+In Manifest V3, background pages are replaced by service workers. event-driven scripts that:
 - Load when needed and terminate when idle
 - Don't have access to the DOM or `window` object
 - Use `chrome.alarms` instead of `setTimeout`/`setInterval`
@@ -38,7 +38,7 @@ background: {
 }
 ```
 
-### 2. Blocking webRequest → declarativeNetRequest
+2. Blocking webRequest → declarativeNetRequest
 
 Manifest V2 allowed you to block or modify network requests using `chrome.webRequest` with the `blocking` permission. This was powerful but required broad permissions.
 
@@ -69,7 +69,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }
 ```
 
-### 3. Remotely Hosted Code Removal
+3. Remotely Hosted Code Removal
 
 Manifest V2 allowed loading external scripts via `<script src="https://...">`. This was a security risk as it allowed malicious code injection.
 
@@ -88,7 +88,7 @@ document.head.appendChild(script);
 // <script src="library.js"></script>
 ```
 
-### 4. Promise-Based APIs
+4. Promise-Based APIs
 
 Many Chrome extension APIs now return Promises instead of using callbacks. This makes async code cleaner and more maintainable.
 
@@ -105,11 +105,11 @@ console.log(result.key);
 
 ---
 
-## Step-by-Step Migration Checklist
+Step-by-Step Migration Checklist
 
 Follow this checklist to migrate your extension systematically:
 
-### Step 1: Update manifest.json
+Step 1: Update manifest.json
 
 ```json
 {
@@ -140,11 +140,11 @@ Key changes:
 - Move host permissions from `"permissions"` to `"host_permissions"`
 - `"background": { "scripts": [...] }` → `"background": { "service_worker": "..." }`
 
-### Step 2: Migrate Background Script to Service Worker
+Step 2: Migrate Background Script to Service Worker
 
-1. **Remove all DOM references** — Service workers don't have DOM access
-2. **Replace XHR with fetch** — Use `fetch()` instead of `XMLHttpRequest`
-3. **Replace timers with alarms**:
+1. Remove all DOM references. Service workers don't have DOM access
+2. Replace XHR with fetch. Use `fetch()` instead of `XMLHttpRequest`
+3. Replace timers with alarms:
    ```javascript
    // Instead of setTimeout(fn, delay)
    chrome.alarms.create('myAlarm', { delayInMinutes: 5 });
@@ -155,9 +155,9 @@ Key changes:
      }
    });
    ```
-4. **Move state to storage** — Use `chrome.storage` instead of global variables
+4. Move state to storage. Use `chrome.storage` instead of global variables
 
-### Step 3: Migrate webRequest to declarativeNetRequest
+Step 3: Migrate webRequest to declarativeNetRequest
 
 1. Create a `rules.json` file:
    ```json
@@ -195,7 +195,7 @@ Key changes:
    });
    ```
 
-### Step 4: Update Action API
+Step 4: Update Action API
 
 Replace all `chrome.browserAction.*` calls with `chrome.action.*`:
 
@@ -209,7 +209,7 @@ chrome.action.setBadgeText({ text: '5' });
 chrome.action.setPopup({ popup: 'popup.html' });
 ```
 
-### Step 5: Handle Offscreen Documents
+Step 5: Handle Offscreen Documents
 
 If your extension needs DOM access (for canvas, audio, clipboard, etc.), use offscreen documents:
 
@@ -229,7 +229,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-### Step 6: Update Permissions
+Step 6: Update Permissions
 
 1. Move URL patterns to `host_permissions`:
    ```json
@@ -241,7 +241,7 @@ chrome.runtime.sendMessage({
 2. Remove unused permissions
 3. Consider using `optional_permissions` for features that don't need to work immediately
 
-### Step 7: Fix Content Security Policy
+Step 7: Fix Content Security Policy
 
 Remove any CSP that allows `unsafe-eval` or remote scripts:
 
@@ -255,9 +255,9 @@ Remove any CSP that allows `unsafe-eval` or remote scripts:
 
 ---
 
-## Common Migration Pitfalls
+Common Migration Pitfalls
 
-### Pitfall 1: Forgetting Service Worker Termination
+Pitfall 1: Forgetting Service Worker Termination
 
 Service workers can be terminated at any time. Don't rely on in-memory state:
 
@@ -276,7 +276,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-### Pitfall 2: Not Registering Event Listeners at Top Level
+Pitfall 2: Not Registering Event Listeners at Top Level
 
 Event listeners must be registered synchronously at the top level of your service worker:
 
@@ -295,7 +295,7 @@ async function init() {
 }
 ```
 
-### Pitfall 3: Using Timers Instead of Alarms
+Pitfall 3: Using Timers Instead of Alarms
 
 `setTimeout` and `setInterval` don't work reliably in service workers:
 
@@ -310,7 +310,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Pitfall 4: Not Handling Promise-Based APIs Correctly
+Pitfall 4: Not Handling Promise-Based APIs Correctly
 
 Remember that `chrome.storage` is always async in MV3:
 
@@ -327,35 +327,35 @@ console.log(result.value);
 
 ---
 
-## Testing After Migration
+Testing After Migration
 
-### 1. Test Service Worker Lifecycle
+1. Test Service Worker Lifecycle
 
 Open `chrome://extensions`, enable your extension, and:
 - Check that the service worker appears in the "Service Workers" section
 - Test that it terminates after being idle
 - Verify it restarts when events fire
 
-### 2. Test Background Script Behavior
+2. Test Background Script Behavior
 
 - Verify all event listeners are firing correctly
 - Test that state persists across service worker restarts
 - Check that alarms work as expected
 
-### 3. Test Network Blocking
+3. Test Network Blocking
 
 - Verify declarativeNetRequest rules are blocking/modifying correctly
 - Test redirect behavior
 - Check that header modifications work
 
-### 4. Test All Features
+4. Test All Features
 
 - Test the popup
 - Test content scripts
 - Test any background tasks
 - Verify all permissions are working
 
-### 5. Check for Errors
+5. Check for Errors
 
 - Look for errors in `chrome://extensions` (Extensions page)
 - Check the service worker console
@@ -363,7 +363,7 @@ Open `chrome://extensions`, enable your extension, and:
 
 ---
 
-## Migration Tools
+Migration Tools
 
 For automated assistance with your migration, check out the [Chrome Extension Manifest V3 Migrator](https://github.com/GoogleChromeLabs/mv3-migrate) tool. This CLI tool can help automate parts of the migration process, including:
 
@@ -378,14 +378,14 @@ npx @chrome-extension/mv3-migrate --help
 
 ---
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [MV3 Migration Checklist](mv3/migration-checklist.html) — Quick reference checklist for all migration steps
-- [Service Workers Guide](mv3/service-workers.html) — Deep dive into MV3 service worker architecture
-- [Declarative Net Request API](mv3/declarative-net-request.html) — Complete guide to network request modification
-- [Manifest V3 Overview](mv3/index.html) — Introduction to all MV3 changes and new features
-- [Promise-Based APIs](mv3/promise-based-apis.html) — Working with Promises in Chrome extension APIs
-- [Offscreen Documents](mv3/offscreen-documents.html) — Handling DOM operations in MV3
+- [MV3 Migration Checklist](mv3/migration-checklist.html). Quick reference checklist for all migration steps
+- [Service Workers Guide](mv3/service-workers.html). Detailed look into MV3 service worker architecture
+- [Declarative Net Request API](mv3/declarative-net-request.html). Complete guide to network request modification
+- [Manifest V3 Overview](mv3/index.html). Introduction to all MV3 changes and new features
+- [Promise-Based APIs](mv3/promise-based-apis.html). Working with Promises in Chrome extension APIs
+- [Offscreen Documents](mv3/offscreen-documents.html). Handling DOM operations in MV3
 
 ---
 

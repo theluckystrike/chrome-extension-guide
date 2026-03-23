@@ -17,17 +17,17 @@ The integration of screen capture capabilities within Chrome extensions opens up
 
 ---
 
-## Understanding the Screen Capture API in Chrome Extensions {#understanding-screen-capture-api}
+Understanding the Screen Capture API in Chrome Extensions {#understanding-screen-capture-api}
 
 Chrome provides the `getDisplayMedia` API as part of the Media Capture and Streams specification, which allows web applications and extensions to capture screen content in real-time. This API is the foundation upon which all screen sharing functionality is built in modern Chrome extensions.
 
 The `getDisplayMedia` method works similarly to the familiar `getUserMedia` API used for camera and microphone access, but instead of capturing input devices, it prompts the user to select a screen, window, or browser tab to share. When invoked, Chrome displays a native picker UI that lets users choose exactly what they want to share, providing granular control over their privacy.
 
-For Chrome extensions specifically, the Screen Capture API requires proper permissions in the manifest file and user consent through the picker dialog. Unlike traditional web applications, Chrome extensions can leverage additional capabilities and maintain persistent states that make them ideal for building dedicated screen sharing tools.
+For Chrome extensions specifically, the Screen Capture API requires proper permissions in the manifest file and user consent through the picker dialog. Unlike traditional web applications, Chrome extensions can use additional capabilities and maintain persistent states that make them ideal for building dedicated screen sharing tools.
 
 The API returns a MediaStream object that contains video tracks representing the screen content. This stream can then be processed, recorded, or transmitted to other participants using WebRTC. Understanding how to properly capture, handle, and transmit these streams is crucial for building reliable screen sharing applications.
 
-### Key Capabilities of the Screen Capture API
+Key Capabilities of the Screen Capture API
 
 The Screen Capture API provides several powerful features that make it suitable for various use cases. First, it supports capturing entire displays, individual application windows, or specific browser tabs. This flexibility allows users to choose exactly what content to share, whether it is their entire desktop for a presentation or a single application window for focused demonstration.
 
@@ -37,11 +37,11 @@ Additionally, the API provides automatic content type detection, meaning Chrome 
 
 ---
 
-## Setting Up the Chrome Extension Project {#project-setup}
+Setting Up the Chrome Extension Project {#project-setup}
 
 Every Chrome extension begins with the manifest file, and screen sharing extensions require specific permissions to access the capture functionality. Let us set up a proper Manifest V3 configuration for our screen sharing extension.
 
-### Creating the Manifest
+Creating the Manifest
 
 Create a new directory for your extension and add the manifest.json file with the necessary permissions. The key permission needed is `"desktopCapture"`, which grants the extension access to screen capture capabilities.
 
@@ -75,7 +75,7 @@ Create a new directory for your extension and add the manifest.json file with th
 
 The `desktopCapture` permission is the critical addition that enables screen sharing functionality. The `storage` permission allows you to save user preferences, while `tabs` permission enables accessing tab information for enhanced functionality.
 
-### Setting Up the Popup Interface
+Setting Up the Popup Interface
 
 The popup serves as the main user interface for initiating screen sharing. Create a simple HTML file that provides controls for starting and stopping screen capture.
 
@@ -141,11 +141,11 @@ This popup provides a clean interface for users to initiate and terminate screen
 
 ---
 
-## Implementing Screen Capture Logic {#implementing-screen-capture}
+Implementing Screen Capture Logic {#implementing-screen-capture}
 
 The core functionality of screen sharing is implemented in the popup JavaScript file. This handles the invocation of the Screen Capture API and manages the resulting media streams.
 
-### Capturing the Screen
+Capturing the Screen
 
 Create the popup.js file with the screen capture implementation:
 
@@ -226,11 +226,11 @@ This implementation properly handles the screen capture lifecycle, including use
 
 ---
 
-## Building WebRTC Peer Connections {#building-webrtc-connections}
+Building WebRTC Peer Connections {#building-webrtc-connections}
 
 Once you have captured the screen stream, the next step is transmitting it to other participants using WebRTC. WebRTC provides real-time communication capabilities that enable low-latency streaming of screen content.
 
-### Understanding WebRTC for Screen Sharing
+Understanding WebRTC for Screen Sharing
 
 WebRTC (Web Real-Time Communication) is a free, open-source project that provides web browsers and mobile applications with real-time communication capabilities. For screen sharing, WebRTC handles the transmission of video and audio streams between peers with minimal latency.
 
@@ -238,7 +238,7 @@ The three main components of WebRTC relevant to screen sharing are the MediaStre
 
 When implementing WebRTC for screen sharing, you create an RTCPeerConnection, add the screen capture stream as a track, and then exchange session descriptions with the remote peer to establish the connection.
 
-### Implementing the Background Service Worker
+Implementing the Background Service Worker
 
 The background service worker acts as the central hub for managing WebRTC connections and coordinating screen sharing sessions. Create background.js with the WebRTC implementation:
 
@@ -324,11 +324,11 @@ This background service worker provides the foundation for WebRTC screen sharing
 
 ---
 
-## Advanced Screen Sharing Features {#advanced-features}
+Advanced Screen Sharing Features {#advanced-features}
 
 Building a production-ready screen sharing extension requires implementing additional features that enhance usability, performance, and user experience.
 
-### Source Type Selection
+Source Type Selection
 
 Allowing users to specifically choose what they want to share improves the user experience. You can customize the getDisplayMedia prompt behavior using the `selfBrowserSurface` and `systemSurface` constraints:
 
@@ -346,7 +346,7 @@ const stream = await navigator.mediaDevices.getDisplayMedia({
 
 These constraints help guide users toward appropriate sharing sources for your application's specific use case, reducing confusion and improving the quality of shared content.
 
-### Stream Quality Management
+Stream Quality Management
 
 Different use cases require different quality settings. For presentations, you might prioritize higher resolution, while for remote support sessions, lower latency might be more important. Implement quality presets that users can choose from:
 
@@ -375,7 +375,7 @@ const qualityPresets = {
 
 By allowing users to select their preferred quality mode, you can optimize the screen sharing experience for their specific needs.
 
-### Handling Stream Changes
+Handling Stream Changes
 
 Users may change their shared source during an active session. The Screen Capture API provides events to handle these transitions gracefully:
 
@@ -395,15 +395,15 @@ Properly handling these events ensures a smooth user experience even when unexpe
 
 ---
 
-## Testing and Debugging Extensions {#testing-debugging}
+Testing and Debugging Extensions {#testing-debugging}
 
 Developing screen sharing extensions requires careful testing to ensure compatibility across different scenarios and configurations.
 
-### Loading the Extension
+Loading the Extension
 
 To test your extension, open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner, then click Load unpacked and select your extension's directory. The extension will appear in your browser's toolbar, ready for testing.
 
-### Debugging Tips
+Debugging Tips
 
 When debugging screen sharing extensions, use the Chrome DevTools for the extension's popup and background service worker. Right-click on the extension icon and select "Inspect popup" to open DevTools for the popup. For background worker debugging, click the service worker link on the extensions page.
 
@@ -411,25 +411,25 @@ Common issues include permission errors, which typically stem from incorrect man
 
 ---
 
-## Best Practices and Security Considerations {#best-practices}
+Best Practices and Security Considerations {#best-practices}
 
 Building secure and reliable screen sharing extensions requires following established best practices and security guidelines.
 
-### User Privacy
+User Privacy
 
 Always prioritize user privacy by clearly explaining what is being captured and transmitted. Never capture or transmit screen content without explicit user consent through the getDisplayMedia prompt. Implement visual indicators showing when sharing is active, and ensure users can easily stop sharing at any time.
 
-### Performance Optimization
+Performance Optimization
 
 Screen sharing can be resource-intensive. Optimize performance by adjusting video quality based on network conditions, using hardware acceleration when available, properly cleaning up streams and connections when they are no longer needed, and implementing efficient encoding settings to balance quality and performance.
 
-### Error Handling
+Error Handling
 
 Implement comprehensive error handling to provide users with meaningful feedback when issues occur. Handle permission denied errors gracefully, provide fallback options when screen capture fails, and maintain clear communication about connection status throughout the sharing session.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a screen sharing Chrome extension with WebRTC opens up extensive possibilities for creating collaborative applications. This guide covered the essential components: configuring Manifest V3 with appropriate permissions, implementing the Screen Capture API for capturing screen content, establishing WebRTC peer connections for real-time transmission, and adding advanced features for production-ready applications.
 
@@ -441,7 +441,7 @@ Start building your screen sharing extension today, and explore the countless po
 
 ---
 
-## Related Articles
+Related Articles
 
 - [WebRTC Video Communication in Chrome Extensions](/2025/01/21/chrome-extension-webrtc-video/) - Learn how to implement WebRTC video calling features in your extensions
 - [Chrome Extension Screen Capture API](/2025/03/11/chrome-extension-screen-capture-api/) - Comprehensive guide to capturing screenshots and screen content

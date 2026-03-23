@@ -17,17 +17,17 @@ This comprehensive guide will walk you through every aspect of using custom font
 
 ---
 
-## Understanding Font Loading in Chrome Extensions {#understanding-font-loading}
+Understanding Font Loading in Chrome Extensions {#understanding-font-loading}
 
 Chrome extensions are essentially web applications that run within the Chrome browser. This means you can use standard web technologies to load and display custom fonts. However, there are some unique considerations and constraints that differentiate extension font loading from regular web pages.
 
-### The Extension Sandbox
+The Extension Sandbox
 
-Chrome extensions run in a sandboxed environment with access to specific Chrome APIs. The files that make up your extension—HTML, CSS, JavaScript, and assets like fonts—must be bundled together in the extension package. This has important implications for font loading:
+Chrome extensions run in a sandboxed environment with access to specific Chrome APIs. The files that make up your extension, HTML, CSS, JavaScript, and assets like fonts, must be bundled together in the extension package. This has important implications for font loading:
 
-First, any font files you want to use must be included in your extension package. You cannot reference fonts from external servers in the same way you would on a regular website, especially for content scripts that run on arbitrary web pages. Second, the paths to font files must be relative to your extension's root directory, which requires careful organization of your project structure. Third, there are size considerations—large font files can significantly increase your extension's package size, affecting both installation time and the Chrome Web Store's soft limits.
+First, any font files you want to use must be included in your extension package. You cannot reference fonts from external servers in the same way you would on a regular website, especially for content scripts that run on arbitrary web pages. Second, the paths to font files must be relative to your extension's root directory, which requires careful organization of your project structure. Third, there are size considerations, large font files can significantly increase your extension's package size, affecting both installation time and the Chrome Web Store's soft limits.
 
-### Font Loading Methods Overview
+Font Loading Methods Overview
 
 There are three primary methods for loading custom fonts in Chrome extensions:
 
@@ -37,32 +37,32 @@ Each method has its place, and we will explore all of them in detail throughout 
 
 ---
 
-## Method 1: Hosting Fonts in Your Extension Package {#hosting-fonts-locally}
+Method 1: Hosting Fonts in Your Extension Package {#hosting-fonts-locally}
 
-The most reliable approach to custom fonts in Chrome extensions is to include font files directly in your extension package. This method works in all extension contexts—popup pages, options pages, content scripts, and background pages.
+The most reliable approach to custom fonts in Chrome extensions is to include font files directly in your extension package. This method works in all extension contexts, popup pages, options pages, content scripts, and background pages.
 
-### Step 1: Organize Your Font Files
+Step 1: Organize Your Font Files
 
 Create a dedicated folder for fonts in your extension directory. A common structure is to place fonts in an `assets/fonts` or simply `fonts` folder at the root of your extension:
 
 ```
 my-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── styles.css
-├── content.js
-├── fonts/
-│   ├── Roboto-Regular.ttf
-│   ├── Roboto-Bold.ttf
-│   └── OpenSans-Italic.ttf
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ styles.css
+ content.js
+ fonts/
+    Roboto-Regular.ttf
+    Roboto-Bold.ttf
+    OpenSans-Italic.ttf
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### Step 2: Declare Fonts in Your CSS
+Step 2: Declare Fonts in Your CSS
 
 Once your font files are in place, you need to declare them using the CSS @font-face rule. This tells the browser where to find each font file and defines the font family name you will use in your styles:
 
@@ -100,7 +100,7 @@ h1, h2, h3 {
 }
 ```
 
-### Step 3: Configure Manifest for Font Files
+Step 3: Configure Manifest for Font Files
 
 While font files do not need to be explicitly listed in the manifest (they are automatically included when referenced in CSS), it is good practice to ensure they are accessible. For Manifest V3, you do not need special permissions for local font files.
 
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-### Supporting Multiple Font Formats
+Supporting Multiple Font Formats
 
 Different browsers support different font formats. For maximum compatibility, you may want to include multiple formats:
 
@@ -133,11 +133,11 @@ The WOFF2 format offers the best compression, making it ideal for extensions whe
 
 ---
 
-## Method 2: Using Web Fonts from Google Fonts {#using-google-fonts}
+Method 2: Using Web Fonts from Google Fonts {#using-google-fonts}
 
 For popup pages and options pages, you can use Google Fonts or other web font services. This method is convenient because you do not need to host font files yourself, but it has limitations for content scripts.
 
-### Loading Google Fonts in Popup Pages
+Loading Google Fonts in Popup Pages
 
 To use Google Fonts in your extension's popup or options page, add the Google Fonts link to your HTML file's head section:
 
@@ -184,7 +184,7 @@ h1 {
 }
 ```
 
-### Limitations for Content Scripts
+Limitations for Content Scripts
 
 Using web fonts from external services in content scripts is problematic for several reasons. First, content scripts run in the context of web pages, and those pages may have Content Security Policy (CSP) restrictions that prevent loading external font resources. Second, even when external fonts load, they may cause a flash of unstyled text (FOUT) as the fonts load, creating a poor user experience. Third, relying on external resources for content scripts introduces dependencies that can break if the external service is unavailable.
 
@@ -192,22 +192,22 @@ For these reasons, hosting fonts locally is strongly recommended for content scr
 
 ---
 
-## Method 3: Using Font Files as Data URIs {#data-uri-fonts}
+Method 3: Using Font Files as Data URIs {#data-uri-fonts}
 
 For small font files or icon fonts, you can convert font files to base64 data URIs and embed them directly in your CSS. This approach eliminates separate font file requests and can improve loading performance in some cases.
 
-### Converting Fonts to Data URIs
+Converting Fonts to Data URIs
 
 You can use various tools to convert font files to base64. For example, using a command-line tool:
 
 ```bash
-# Using base64 command (macOS/Linux)
+Using base64 command (macOS/Linux)
 base64 -i fonts/MyFont.ttf -o font-base64.txt
 ```
 
 Or you can use online converters that generate the complete CSS @font-face rule with the embedded data URI.
 
-### Implementing Data URI Fonts
+Implementing Data URI Fonts
 
 Once you have the base64 encoded font, embed it in your CSS:
 
@@ -220,7 +220,7 @@ Once you have the base64 encoded font, embed it in your CSS:
 }
 ```
 
-### Pros and Cons of Data URI Fonts
+Pros and Cons of Data URI Fonts
 
 The advantages of data URI fonts include fewer HTTP requests (useful for extensions with limited file counts) and no separate font files to manage. The disadvantages include larger CSS file sizes, harder to maintain and update fonts, and the entire font must be loaded even if you only use a few characters.
 
@@ -228,11 +228,11 @@ This method is best suited for icon fonts or small custom fonts where the trade-
 
 ---
 
-## Typography Best Practices for Extension Popups {#popup-typography}
+Typography Best Practices for Extension Popups {#popup-typography}
 
 The popup is often the first thing users see when interacting with your extension, making typography crucial for creating a positive first impression.
 
-### Optimal Font Sizes
+Optimal Font Sizes
 
 Chrome extension popups have limited screen real estate. Follow these font size guidelines:
 
@@ -268,7 +268,7 @@ button, .btn {
 }
 ```
 
-### Responsive Typography
+Responsive Typography
 
 Users may resize your popup, so use flexible units where appropriate:
 
@@ -286,7 +286,7 @@ p {
 }
 ```
 
-### Font Stacks and Fallbacks
+Font Stacks and Fallbacks
 
 Always provide sensible fallback fonts in case your custom font fails to load:
 
@@ -306,15 +306,15 @@ The `-apple-system` and `BlinkMacSystemFont` values ensure good system fonts are
 
 ---
 
-## Implementing Fonts in Content Scripts {#content-script-fonts}
+Implementing Fonts in Content Scripts {#content-script-fonts}
 
 Content scripts face unique challenges for font loading because they operate within the context of web pages, not your extension.
 
-### The Font Loading Challenge
+The Font Loading Challenge
 
 When your content script runs on a user's web page, it inherits the page's CSS and may conflict with existing styles. The Content Security Policy of the host page may block external font requests, and you need to ensure your fonts do not break the page's existing design.
 
-### Best Practices for Content Script Fonts
+Best Practices for Content Script Fonts
 
 Use specific selectors and the !important flag sparingly to avoid conflicts:
 
@@ -340,7 +340,7 @@ Use specific selectors and the !important flag sparingly to avoid conflicts:
 }
 ```
 
-### Loading Fonts Safely in Content Scripts
+Loading Fonts Safely in Content Scripts
 
 When using locally hosted fonts in content scripts, ensure the fonts are loaded before your content appears:
 
@@ -376,22 +376,22 @@ Note the use of `chrome.runtime.getURL()` to get the correct path to font files 
 
 ---
 
-## Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
 Font files can be large, and loading them affects your extension's performance and user experience.
 
-### Subsetting Fonts
+Subsetting Fonts
 
 If you only need specific characters, create a subset font that includes only those characters. This can reduce file size significantly:
 
 ```bash
-# Using pyftsubset from fonttools
+Using pyftsubset from fonttools
 pyftsubset fonts/MyFont.ttf --unicodes=U+0020-007F --output-file=fonts/MyFont-Latin.ttf
 ```
 
 This creates a font file with only Latin characters, which is often sufficient for UI text.
 
-### Font Display Swap
+Font Display Swap
 
 Use `font-display: swap` to ensure text remains visible while fonts load:
 
@@ -407,7 +407,7 @@ Use `font-display: swap` to ensure text remains visible while fonts load:
 
 This tells the browser to use a fallback font initially, then swap to your custom font once it loads. Without this, users might see blank text while fonts load.
 
-### Lazy Loading Fonts
+Lazy Loading Fonts
 
 For larger extensions with many font weights, consider lazy loading fonts that are not immediately needed:
 
@@ -426,27 +426,27 @@ document.querySelector('.settings-button').addEventListener('click', loadOptiona
 
 ---
 
-## Common Pitfalls and How to Avoid Them {#common-pitfalls}
+Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
 Understanding common mistakes helps you avoid them in your own projects.
 
-### Pitfall 1: Ignoring Font File Paths
+Pitfall 1: Ignoring Font File Paths
 
 One of the most common issues is incorrect file paths. Remember that paths in CSS are relative to the CSS file, not the HTML file:
 
 ```
 Extension structure:
-├── popup/
-│   ├── popup.html
-│   └── css/
-│       └── styles.css    <-- fonts are relative to this file
-└── fonts/
-    └── MyFont.ttf
+ popup/
+    popup.html
+    css/
+        styles.css    <-- fonts are relative to this file
+ fonts/
+     MyFont.ttf
 ```
 
 In styles.css, use: `url('../fonts/MyFont.ttf')`
 
-### Pitfall 2: Forgetting Font Weights and Styles
+Pitfall 2: Forgetting Font Weights and Styles
 
 If you define a font family for normal text but forget to define bold or italic variants, browsers will try to synthesize them or fall back to system fonts:
 
@@ -467,21 +467,21 @@ If you define a font family for normal text but forget to define bold or italic 
 }
 ```
 
-### Pitfall 3: Not Testing in Real Conditions
+Pitfall 3: Not Testing in Real Conditions
 
 Always test your extension with fonts fully loaded in a real Chrome environment. Incognito mode, disabled extensions, and slow network conditions can all affect font loading behavior.
 
-### Pitfall 4: Exceeding Package Size Limits
+Pitfall 4: Exceeding Package Size Limits
 
 Google has a soft size limit of 100MB for extensions. Large font files can quickly push you over this limit. Use WOFF2 compression, subset fonts to only necessary characters, and consider using system fonts for less critical text.
 
 ---
 
-## Example: Complete Popup with Custom Fonts {#complete-example}
+Complete Popup with Custom Fonts {#complete-example}
 
 Here is a complete example bringing together everything we have learned:
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -499,7 +499,7 @@ Here is a complete example bringing together everything we have learned:
 }
 ```
 
-### popup.html
+popup.html
 
 ```html
 <!DOCTYPE html>
@@ -537,7 +537,7 @@ Here is a complete example bringing together everything we have learned:
 </html>
 ```
 
-### popup.css
+popup.css
 
 ```css
 /* Define custom fonts */
@@ -651,13 +651,13 @@ small {
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Custom fonts can significantly enhance the visual appeal and branding of your Chrome extension. By hosting fonts locally in your extension package, you ensure reliable loading across all contexts—popup pages, options pages, and content scripts. Using Google Fonts works well for popup and options pages but should be avoided for content scripts due to CSP and performance concerns.
+Custom fonts can significantly enhance the visual appeal and branding of your Chrome extension. By hosting fonts locally in your extension package, you ensure reliable loading across all contexts, popup pages, options pages, and content scripts. Using Google Fonts works well for popup and options pages but should be avoided for content scripts due to CSP and performance concerns.
 
 Remember the key best practices: use WOFF2 format for optimal compression, implement font-display swap for good user experience, define all font weights and styles you need, and always provide sensible fallback fonts. Test your implementation thoroughly in real Chrome environments, and monitor your extension's package size when adding custom fonts.
 
-With the techniques and code examples in this guide, you are well-equipped to implement beautiful, consistent typography in your Chrome extensions. Good typography not only looks professional but also improves readability and user engagement—investment that pays dividends in user satisfaction and extension success.
+With the techniques and code examples in this guide, you are well-equipped to implement beautiful, consistent typography in your Chrome extensions. Good typography not only looks professional but also improves readability and user engagement, investment that pays dividends in user satisfaction and extension success.
 
 ---
 

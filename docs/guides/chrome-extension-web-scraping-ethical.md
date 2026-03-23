@@ -15,7 +15,7 @@ Web scraping remains one of the most powerful uses for Chrome extensions. Runnin
 
 This guide takes an ethics-first approach. Every technique is paired with guidance on when and how to use it responsibly. You will learn to extract data with content scripts, observe DOM mutations in single-page applications, export data in CSV and JSON formats, and implement rate limiting that respects the servers you interact with.
 
-## Table of Contents
+Table of Contents
 
 1. [Content Script Data Extraction Patterns](#content-script-patterns)
 2. [DOM Traversal Techniques](#dom-traversal)
@@ -27,11 +27,11 @@ This guide takes an ethics-first approach. Every technique is paired with guidan
 8. [Responsible Resource Management](#responsible-resources)
 9. [Complete Example: Job Listing Aggregator](#complete-example)
 
-## Content Script Data Extraction Patterns {#content-script-patterns}
+Content Script Data Extraction Patterns {#content-script-patterns}
 
 Content scripts are the workhorse of extension-based scraping. They execute in the context of web pages and can read anything visible in the DOM. The key difference from server-side scrapers is that content scripts see the page *after* JavaScript has finished rendering it, which makes them ideal for modern web applications.
 
-### Declarative Injection via Manifest
+Declarative Injection via Manifest
 
 The simplest way to inject a content script is through `manifest.json`. The extension runtime handles injection automatically when the user navigates to a matching URL:
 
@@ -53,7 +53,7 @@ The simplest way to inject a content script is through `manifest.json`. The exte
 
 The `run_at: "document_idle"` value ensures the script runs after the initial DOM is complete and the page is unlikely to change dramatically. This avoids race conditions where you scrape a half-loaded page.
 
-### Programmatic Injection for On-Demand Scraping
+Programmatic Injection for On-Demand Scraping
 
 When scraping should only happen on user request, inject scripts programmatically from the background service worker:
 
@@ -95,7 +95,7 @@ function extractPageData(): Record<string, unknown> {
 
 Programmatic injection gives you fine-grained control and pairs well with the `activeTab` permission, which avoids broad host permission requests that might alarm users or trigger Chrome Web Store review scrutiny.
 
-### Typed Data Models
+Typed Data Models
 
 Define TypeScript interfaces for the data you extract. This prevents accidental schema drift and makes downstream processing predictable:
 
@@ -122,19 +122,19 @@ interface ScrapeResult<T> {
 }
 ```
 
-## DOM Traversal Techniques {#dom-traversal}
+DOM Traversal Techniques {#dom-traversal}
 
 Extracting structured data from the DOM requires reliable selectors and defensive coding. Pages change layouts frequently, so your selectors need to be resilient.
 
-### Selector Strategies Ranked by Reliability
+Selector Strategies Ranked by Reliability
 
 Not all CSS selectors are equally durable. Here they are ranked from most to least reliable:
 
-1. **Data attributes** (`[data-product-id]`) - Explicitly semantic, rarely change
-2. **ARIA attributes** (`[aria-label="Add to cart"]`) - Accessibility-driven, stable
-3. **Semantic HTML** (`article`, `main`, `nav`) - Structurally meaningful
-4. **Stable class names** (`.product-card`, `.price-display`) - Often stable in component-based apps
-5. **Generated class names** (`.css-1a2b3c`, `.sc-hKgILt`) - Unstable, change on every build
+1. Data attributes (`[data-product-id]`) - Explicitly semantic, rarely change
+2. ARIA attributes (`[aria-label="Add to cart"]`) - Accessibility-driven, stable
+3. Semantic HTML (`article`, `main`, `nav`) - Structurally meaningful
+4. Stable class names (`.product-card`, `.price-display`) - Often stable in component-based apps
+5. Generated class names (`.css-1a2b3c`, `.sc-hKgILt`) - Unstable, change on every build
 
 Always prefer selectors higher in this list. When forced to use lower-ranked selectors, combine them with structural context to increase resilience:
 
@@ -171,7 +171,7 @@ function extractPrice(container: Element): number | null {
 }
 ```
 
-### Extracting Tabular Data
+Extracting Tabular Data
 
 Tables are among the easiest structures to scrape reliably because the HTML spec defines their semantics:
 
@@ -195,7 +195,7 @@ function extractTable(tableSelector: string): Record<string, string>[] {
 }
 ```
 
-### Walking the DOM Tree
+Walking the DOM Tree
 
 Sometimes you need to traverse the DOM manually. `TreeWalker` is more efficient than recursive `querySelectorAll` for deep trees:
 
@@ -226,11 +226,11 @@ function extractTextNodes(root: Element): string[] {
 }
 ```
 
-## MutationObserver for Dynamic Content {#mutation-observers}
+MutationObserver for Dynamic Content {#mutation-observers}
 
 Modern web pages constantly update their DOM. Content loads lazily, infinite scroll adds elements, and SPAs swap entire sections. `MutationObserver` lets you react to these changes without polling.
 
-### Basic Observer Setup
+Basic Observer Setup
 
 ```typescript
 class ContentObserver {
@@ -333,7 +333,7 @@ class ContentObserver {
 }
 ```
 
-### Observing Infinite Scroll
+Observing Infinite Scroll
 
 Infinite scroll is one of the most common dynamic patterns. Combine `IntersectionObserver` with `MutationObserver` for reliable extraction:
 
@@ -369,11 +369,11 @@ function observeInfiniteScroll(
 }
 ```
 
-## Handling Single-Page Applications {#spa-handling}
+Handling Single-Page Applications {#spa-handling}
 
 SPAs present unique challenges because navigation happens without full page reloads. The URL changes, content swaps, but no new `document` is created. Your content script stays active across "navigations," but needs to detect route changes.
 
-### Detecting SPA Navigation
+Detecting SPA Navigation
 
 ```typescript
 class SPANavigationDetector {
@@ -420,7 +420,7 @@ detector.onNavigate((oldUrl, newUrl) => {
 });
 ```
 
-### Waiting for Content to Stabilize
+Waiting for Content to Stabilize
 
 After a SPA navigation, the DOM often goes through several intermediate states before settling. Instead of arbitrary `setTimeout` calls, wait for the DOM to stabilize:
 
@@ -478,7 +478,7 @@ function waitForStableDOM(
 }
 ```
 
-### Shadow DOM Traversal
+Shadow DOM Traversal
 
 Some frameworks (and all Web Components) use Shadow DOM, which hides content from normal `querySelector` calls. You need to traverse shadow roots explicitly:
 
@@ -504,11 +504,11 @@ function queryShadowDom(
 }
 ```
 
-## Rate Limiting and Polite Scraping {#rate-limiting}
+Rate Limiting and Polite Scraping {#rate-limiting}
 
 This is where ethics and engineering intersect. Scraping without rate limiting can degrade service for other users, trigger anti-bot measures, and may constitute a denial-of-service attack. Responsible scraping treats the target server as a shared resource.
 
-### Token Bucket Rate Limiter
+Token Bucket Rate Limiter
 
 The token bucket algorithm is the gold standard for rate limiting. It allows short bursts while enforcing an average rate:
 
@@ -555,7 +555,7 @@ class TokenBucketRateLimiter {
 const limiter = new TokenBucketRateLimiter(2, 1, 500);
 ```
 
-### Respecting robots.txt
+Respecting robots.txt
 
 Even though your extension runs in the browser, checking `robots.txt` is an important ethical signal:
 
@@ -620,7 +620,7 @@ interface RobotsRules {
 }
 ```
 
-### Backoff on Errors
+Backoff on Errors
 
 When a server returns 429 (Too Many Requests) or 5xx errors, back off exponentially:
 
@@ -667,11 +667,11 @@ async function fetchWithBackoff(
 }
 ```
 
-## Data Export Formats {#data-export}
+Data Export Formats {#data-export}
 
 Scraped data is only useful if you can get it out of the extension and into tools like spreadsheets, databases, or analysis scripts.
 
-### CSV Export
+CSV Export
 
 CSV is the most universally compatible format. Every spreadsheet application, database, and data tool can import it:
 
@@ -713,7 +713,7 @@ function downloadCSV(csv: string, filename: string): void {
 
 The `\uFEFF` BOM prefix ensures Excel opens the CSV with correct UTF-8 encoding.
 
-### JSON Export with Metadata
+JSON Export with Metadata
 
 JSON preserves types and nesting. Include metadata so you know where the data came from:
 
@@ -758,7 +758,7 @@ function downloadJSON(json: string, filename: string): void {
 }
 ```
 
-### Streaming Large Datasets to IndexedDB
+Streaming Large Datasets to IndexedDB
 
 For datasets that exceed `chrome.storage.local` limits, use IndexedDB as a staging area:
 
@@ -829,37 +829,37 @@ class ScrapedDataStore {
 }
 ```
 
-## Legal and Ethical Considerations {#legal-ethical}
+Legal and Ethical Considerations {#legal-ethical}
 
 Web scraping sits at the intersection of technology, law, and ethics. As extension developers, we operate in a space that is especially sensitive because our code runs in users' browsers and interacts directly with third-party websites.
 
-### Legal Landscape
+Legal Landscape
 
 The legality of scraping varies by jurisdiction and circumstance:
 
-- **United States**: The Computer Fraud and Abuse Act (CFAA) prohibits unauthorized access to computers. The 2022 *hiQ Labs v. LinkedIn* Supreme Court ruling clarified that scraping publicly accessible data is generally not a CFAA violation, but scraping behind authentication or in violation of explicit terms may be.
+- United States: The Computer Fraud and Abuse Act (CFAA) prohibits unauthorized access to computers. The 2022 *hiQ Labs v. LinkedIn* Supreme Court ruling clarified that scraping publicly accessible data is generally not a CFAA violation, but scraping behind authentication or in violation of explicit terms may be.
 
-- **European Union**: GDPR imposes strict rules on collecting personal data. If your scraper collects names, email addresses, or other PII from EU residents, you need a lawful basis for processing and must handle data subject requests.
+- European Union: GDPR imposes strict rules on collecting personal data. If your scraper collects names, email addresses, or other PII from EU residents, you need a lawful basis for processing and must handle data subject requests.
 
-- **General principle**: Scraping publicly available, non-personal data for personal or research purposes carries the lowest legal risk. Commercial scraping of copyrighted or personal data carries the highest.
+- General principle: Scraping publicly available, non-personal data for personal or research purposes carries the lowest legal risk. Commercial scraping of copyrighted or personal data carries the highest.
 
-### Ethical Guidelines for Extension Developers
+Ethical Guidelines for Extension Developers
 
-1. **Minimize data collection**: Only extract what you actually need. If you need product prices, do not also scrape user reviews, profile images, or metadata you will not use.
+1. Minimize data collection: Only extract what you actually need. If you need product prices, do not also scrape user reviews, profile images, or metadata you will not use.
 
-2. **Respect explicit opt-outs**: If a site's `robots.txt` disallows scraping or their ToS explicitly prohibit it, respect that. Your extension should check `robots.txt` before scraping a new domain.
+2. Respect explicit opt-outs: If a site's `robots.txt` disallows scraping or their ToS explicitly prohibit it, respect that. Your extension should check `robots.txt` before scraping a new domain.
 
-3. **Rate limit aggressively**: A scraper running in the browser shares the user's connection. Aggressive scraping can slow down the user's browsing, trigger CAPTCHAs on their session, or get their IP temporarily banned. Conservative rate limits (one request per second or slower) protect both the server and the user.
+3. Rate limit aggressively: A scraper running in the browser shares the user's connection. Aggressive scraping can slow down the user's browsing, trigger CAPTCHAs on their session, or get their IP temporarily banned. Conservative rate limits (one request per second or slower) protect both the server and the user.
 
-4. **Be transparent with users**: Your extension description and privacy policy should clearly state what data is collected, how it is stored, and whether it is transmitted to external servers.
+4. Be transparent with users: Your extension description and privacy policy should clearly state what data is collected, how it is stored, and whether it is transmitted to external servers.
 
-5. **Never bypass authentication or access controls**: Accessing content behind login walls, paywalls, or other access controls is both ethically wrong and likely illegal.
+5. Never bypass authentication or access controls: Accessing content behind login walls, paywalls, or other access controls is both ethically wrong and likely illegal.
 
-6. **Handle errors gracefully**: If a site blocks your scraper, do not attempt to circumvent the block. Back off, notify the user, and suggest manual alternatives.
+6. Handle errors gracefully: If a site blocks your scraper, do not attempt to circumvent the block. Back off, notify the user, and suggest manual alternatives.
 
-7. **Do not scrape personal data without consent**: Collecting email addresses, phone numbers, or other PII from websites for unsolicited contact or data brokering is a violation of privacy laws in most jurisdictions.
+7. Do not scrape personal data without consent: Collecting email addresses, phone numbers, or other PII from websites for unsolicited contact or data brokering is a violation of privacy laws in most jurisdictions.
 
-### Chrome Web Store Compliance
+Chrome Web Store Compliance
 
 Google's Chrome Web Store policies add another layer of requirements:
 
@@ -868,11 +868,11 @@ Google's Chrome Web Store policies add another layer of requirements:
 - Extensions that scrape personal data may be rejected or removed
 - The extension's stated purpose must be honest about scraping functionality
 
-## Responsible Resource Management {#responsible-resources}
+Responsible Resource Management {#responsible-resources}
 
 Scraping extensions consume browser resources: memory for storing extracted data, CPU for DOM traversal, and network bandwidth for any API calls. Responsible resource management ensures your extension does not degrade the user's browsing experience.
 
-### Memory Management
+Memory Management
 
 Scraping can accumulate large amounts of data in memory. Flush extracted data to storage regularly and release references:
 
@@ -903,7 +903,7 @@ class MemoryAwareScraper {
 }
 ```
 
-### Tab and CPU Awareness
+Tab and CPU Awareness
 
 Extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro) demonstrate responsible resource management by automatically suspending inactive tabs to reduce memory and CPU usage. Your scraping extension should adopt similar principles:
 
@@ -966,11 +966,11 @@ function createResponsiveScraper(
 }
 ```
 
-## Complete Example: Job Listing Aggregator {#complete-example}
+Complete Example: Job Listing Aggregator {#complete-example}
 
 Let us bring everything together with a practical example: a Chrome extension that ethically scrapes job listings from a careers page, respects rate limits, handles SPA navigation, and exports data in both CSV and JSON formats.
 
-### Manifest
+Manifest
 
 ```json
 {
@@ -996,7 +996,7 @@ Let us bring everything together with a practical example: a Chrome extension th
 }
 ```
 
-### Content Script
+Content Script
 
 ```typescript
 // content.ts
@@ -1104,7 +1104,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Background Service Worker
+Background Service Worker
 
 ```typescript
 // background.ts
@@ -1140,7 +1140,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This example demonstrates every principle covered in this guide: typed data models, resilient selectors, rate limiting, MutationObserver-based infinite scroll handling, dual export formats, and a background service worker that coordinates storage.
 
-## Conclusion
+Conclusion
 
 Ethical web scraping with Chrome extensions is about more than just extracting data. It requires a commitment to respecting server resources, user privacy, and legal boundaries. The techniques in this guide -- content script injection, DOM traversal, MutationObserver patterns, SPA navigation detection, and rate limiting -- give you the tools to build powerful scrapers. The ethical guidelines give you the framework to use those tools responsibly.
 

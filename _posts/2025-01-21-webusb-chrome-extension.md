@@ -17,7 +17,7 @@ WebUSB, which stands for Web Universal Serial Bus, is a JavaScript API that enab
 
 ---
 
-## Understanding WebUSB and Its Application in Chrome Extensions {#understanding-webusb}
+Understanding WebUSB and Its Application in Chrome Extensions {#understanding-webusb}
 
 The WebUSB API provides a standardized way for web pages to access USB devices without requiring users to install separate drivers or native applications. When used within Chrome extensions, WebUSB enables direct communication between your extension and physical hardware devices connected to the user's computer. This capability transforms Chrome from a mere content viewer into a powerful hardware interaction platform.
 
@@ -25,19 +25,19 @@ Chrome extensions benefit from WebUSB in several unique ways compared to standal
 
 The WebUSB API operates on a request-response model where the browser acts as an intermediary between the web page (or extension) and the USB device. When a page requests access to a USB device, Chrome presents a permission prompt to the user, similar to how camera or microphone permissions work. Once granted, the page can enumerate available devices, open connections, and exchange data through defined endpoints. This architecture provides a security boundary while still allowing deep access to device capabilities.
 
-### Why Hardware Integration Matters for Chrome Extensions
+Why Hardware Integration Matters for Chrome Extensions
 
-Hardware integration through WebUSB enables Chrome extensions to serve as bridges between physical devices and web-based services. Consider a scenario where you are building an extension for a 3D printer manufacturer. Instead of requiring users to install separate desktop software, your extension could directly communicate with the printer over USB, sending print jobs, monitoring progress, and configuring settings—all from within the browser.
+Hardware integration through WebUSB enables Chrome extensions to serve as bridges between physical devices and web-based services. Consider a scenario where you are building an extension for a 3D printer manufacturer. Instead of requiring users to install separate desktop software, your extension could directly communicate with the printer over USB, sending print jobs, monitoring progress, and configuring settings, all from within the browser.
 
 Similarly, educational technology companies can use WebUSB to create extensions that interface with laboratory equipment, allowing students to collect sensor data directly into browser-based analysis tools. Arduino and microcontroller enthusiasts can build extensions that upload firmware, monitor serial output, and interact with custom hardware projects. The possibilities span across industries including manufacturing, healthcare, education, entertainment, and IoT device management.
 
 ---
 
-## Setting Up Your Chrome Extension for WebUSB {#project-setup}
+Setting Up Your Chrome Extension for WebUSB {#project-setup}
 
 Every Chrome extension that uses WebUSB requires proper configuration in the manifest file and appropriate permissions to access USB devices. This section guides you through setting up a Manifest V3 extension with WebUSB capabilities.
 
-### Creating the Manifest Configuration
+Creating the Manifest Configuration
 
 The manifest.json file serves as the foundation of your extension and defines what capabilities your extension has access to. For WebUSB functionality, you need to include the appropriate permissions and declare any specific devices your extension intends to work with.
 
@@ -70,7 +70,7 @@ The manifest.json file serves as the foundation of your extension and defines wh
 
 The critical permission here is `"usb"`, which grants your extension the ability to interact with USB devices. The `"storage"` permission enables you to remember user preferences and device associations. The host permissions are included if your extension needs to communicate with a web server as part of its functionality, such as uploading data collected from devices or downloading firmware updates.
 
-### Declaring Device Filters
+Declaring Device Filters
 
 For a more refined approach, you can declare specific USB device filters in your manifest. This approach is particularly useful when your extension is designed to work with particular hardware products. By declaring device filters, you provide users with clear information about what devices your extension supports, and Chrome can provide more meaningful permission prompts.
 
@@ -98,11 +98,11 @@ In this example, the extension declares support for Arduino devices with specifi
 
 ---
 
-## Device Discovery and Connection {#device-discovery}
+Device Discovery and Connection {#device-discovery}
 
 The first step in communicating with a USB device is discovering and connecting to it. The WebUSB API provides methods for enumerating available devices and establishing connections with selected devices.
 
-### Enumerating Available Devices
+Enumerating Available Devices
 
 The `navigator.usb.getDevices()` method returns a promise that resolves to an array of USB devices that the origin (or extension) has previously been granted permission to access. This method only returns devices that the user has explicitly authorized, ensuring privacy and security.
 
@@ -128,7 +128,7 @@ async function getAuthorizedDevices() {
 
 This function retrieves all previously authorized devices, which is useful for applications that need to reconnect to known devices on page load or extension startup.
 
-### Requesting Device Access
+Requesting Device Access
 
 For devices that have not yet been authorized, you need to request access using the `navigator.usb.requestDevice()` method. This method triggers a browser-native device picker dialog where users can select which device to connect to.
 
@@ -170,11 +170,11 @@ The requestDevice method takes a filters array that specifies which types of dev
 
 ---
 
-## Establishing Communication with USB Devices {#communication}
+Establishing Communication with USB Devices {#communication}
 
 Once you have access to a USB device, the next step is to establish communication. This involves opening the device connection, selecting a configuration, and claiming an interface that provides access to endpoints for data transfer.
 
-### Opening and Configuring the Device
+Opening and Configuring the Device
 
 USB devices can have multiple configurations, and each configuration defines a set of interfaces. To communicate with a device, you must first open it and then select an appropriate configuration.
 
@@ -203,7 +203,7 @@ async function connectToDevice(device) {
 
 The open() method establishes a connection to the device, while selectConfiguration() prepares the device for communication by activating a specific configuration. Most USB devices have only one configuration, but more complex devices may offer multiple configurations for different operating modes.
 
-### Claiming Interfaces and Transferring Data
+Claiming Interfaces and Transferring Data
 
 USB interfaces represent functional units within a device, and each interface contains one or more endpoints for data transfer. To communicate with an interface, you must first claim it, which gives your extension exclusive access to that interface.
 
@@ -242,11 +242,11 @@ This example demonstrates the two primary types of USB transfers: OUT transfers 
 
 ---
 
-## Working with Different Transfer Types {#transfer-types}
+Working with Different Transfer Types {#transfer-types}
 
 Understanding the different USB transfer types is essential for implementing effective device communication. Each transfer type serves specific purposes and has different performance characteristics.
 
-### Control Transfers
+Control Transfers
 
 Control transfers are used for device configuration, status queries, and other critical operations. They typically involve sending command packets to the device and receiving responses. Control transfers have the highest priority and are guaranteed to complete.
 
@@ -283,7 +283,7 @@ async function getDeviceDescriptor(device) {
 
 Control transfers are essential during the initial device setup phase and for sending device-specific commands. The requestType parameter specifies the direction (IN or OUT), type (standard, class, or vendor), and recipient (device, interface, endpoint, or other).
 
-### Interrupt Transfers
+Interrupt Transfers
 
 Interrupt transfers are designed for small amounts of data that need to be transferred with bounded latency. They are commonly used for status updates, button presses, and other asynchronous events from the device.
 
@@ -326,11 +326,11 @@ Interrupt transfers are ideal for receiving status updates from devices such as 
 
 ---
 
-## Implementing a Complete USB Device Manager Extension {#complete-example}
+Implementing a Complete USB Device Manager Extension {#complete-example}
 
 Now that you understand the fundamentals, let us build a complete Chrome extension that demonstrates practical USB device management. This extension will discover devices, connect to them, send commands, and display responses.
 
-### The Background Service Worker
+The Background Service Worker
 
 The background service worker handles device discovery and maintains the connection state. It communicates with the popup interface through message passing.
 
@@ -440,7 +440,7 @@ function deviceInfo(device) {
 }
 ```
 
-### The Popup Interface
+The Popup Interface
 
 The popup provides a user-friendly interface for interacting with USB devices.
 
@@ -538,7 +538,7 @@ The popup provides a user-friendly interface for interacting with USB devices.
 </html>
 ```
 
-### The Popup JavaScript
+The Popup JavaScript
 
 The popup script handles user interactions and communicates with the background service worker.
 
@@ -615,11 +615,11 @@ document.getElementById('sendBtn').addEventListener('click', () => {
 
 ---
 
-## Security Best Practices {#security}
+Security Best Practices {#security}
 
 When working with USB devices through Chrome extensions, security should be your primary concern. USB devices have direct access to system-level resources, and improper handling can lead to security vulnerabilities.
 
-### Validate All Data
+Validate All Data
 
 Always validate and sanitize data received from USB devices. Never assume that data from a device is safe or properly formatted. Implement input validation at every layer of your application to prevent malformed data from causing issues.
 
@@ -662,7 +662,7 @@ function parseDeviceResponse(data) {
 }
 ```
 
-### Implement Proper Error Handling
+Implement Proper Error Handling
 
 USB communication can fail for many reasons, including device disconnection, cable problems, and protocol errors. Implement comprehensive error handling to gracefully manage these situations.
 
@@ -689,21 +689,21 @@ async function safeDeviceOperation(device, operation) {
 }
 ```
 
-### Request Minimum Necessary Permissions
+Request Minimum Necessary Permissions
 
 Only request access to the devices and interfaces that your extension actually needs. Avoid requesting broad USB permissions when specific device filters would suffice. This follows the principle of least privilege and reduces the potential impact of security vulnerabilities.
 
 ---
 
-## Testing and Debugging WebUSB Extensions {#testing-debugging}
+Testing and Debugging WebUSB Extensions {#testing-debugging}
 
 Testing WebUSB extensions requires special considerations since they involve hardware interaction. This section covers strategies for testing your extension effectively.
 
-### Chrome USB Debugging Features
+Chrome USB Debugging Features
 
 Chrome provides built-in debugging features for USB devices. Navigate to chrome://inspect/#devices to view connected USB devices and their details. This page shows device information, including vendor and product IDs, which is invaluable for debugging connection issues.
 
-### Simulated Testing
+Simulated Testing
 
 During development, you can use virtual USB drivers to simulate device connections. Software such as USB Redirector or Virtual USB devices allows you to create virtual COM ports that behave like physical USB devices, enabling testing without actual hardware.
 
@@ -753,32 +753,32 @@ class MockUSBDevice {
 
 ---
 
-## Common Use Cases and Real-World Applications {#use-cases}
+Common Use Cases and Real-World Applications {#use-cases}
 
 WebUSB in Chrome extensions enables numerous practical applications across different domains. Understanding these use cases can inspire your own implementations and help you design effective solutions.
 
-### Firmware Upload and Programming
+Firmware Upload and Programming
 
 One of the most common WebUSB use cases is firmware programming for microcontrollers and embedded devices. Extensions can send binary data to devices to update firmware, bootloader, or configuration parameters. This approach eliminates the need for separate programming software and provides a streamlined user experience.
 
-### Data Acquisition and Logging
+Data Acquisition and Logging
 
 Scientific instruments, sensors, and data loggers often use USB connections for data transfer. Chrome extensions can collect data from these devices in real-time, process it, and either display it locally or transmit it to cloud services for analysis. This capability is particularly valuable for educational and research applications.
 
-### Hardware Configuration and Diagnostics
+Hardware Configuration and Diagnostics
 
 Many devices require configuration or provide diagnostic information through USB connections. Extensions can provide user-friendly interfaces for changing device settings, running diagnostics, and retrieving status information without requiring specialized software installation.
 
-### Custom Input Devices
+Custom Input Devices
 
 Specialized input devices such as barcode scanners, RFID readers, and custom controllers can be integrated through WebUSB. The extension can capture input from these devices and perform actions based on the received data, enabling sophisticated workflows that combine multiple input sources.
 
 ---
 
-## Conclusion
+Conclusion
 
 Integrating USB devices with Chrome extensions through the WebUSB API opens up remarkable possibilities for hardware-interaction applications. From firmware programming and data acquisition to custom input devices and industrial equipment control, the ability to communicate with USB devices directly from extensions transforms Chrome into a powerful hardware integration platform.
 
-This guide has covered the essential aspects of implementing WebUSB in Chrome extensions, including manifest configuration, device discovery, communication patterns, security best practices, and testing strategies. By following these patterns and principles, you can build robust and secure extensions that provide seamless hardware integration experiences.
+This guide has covered the essential aspects of implementing WebUSB in Chrome extensions, including manifest configuration, device discovery, communication patterns, security best practices, and testing strategies. By following these patterns and principles, you can build solid and secure extensions that provide smooth hardware integration experiences.
 
 As web technologies continue to evolve, the boundary between web applications and physical hardware continues to blur. WebUSB represents a significant step toward a more connected web where browsers can serve as universal interfaces for both digital and physical resources. Start experimenting with WebUSB today, and unlock the full potential of hardware integration in your Chrome extensions.

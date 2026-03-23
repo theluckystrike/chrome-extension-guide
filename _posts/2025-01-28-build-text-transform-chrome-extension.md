@@ -17,17 +17,17 @@ This comprehensive guide will walk you through building a fully functional text 
 
 ---
 
-## Understanding the Architecture of Text Transform Extensions {#understanding-architecture}
+Understanding the Architecture of Text Transform Extensions {#understanding-architecture}
 
-Before diving into code, it's essential to understand the architecture that powers text transformation extensions in Chrome. Modern Chrome extensions built on Manifest V3 have specific requirements and best practices that differ from older Manifest V2 implementations. Understanding these architectural considerations will help you build a more robust and maintainable extension.
+Before diving into code, it's essential to understand the architecture that powers text transformation extensions in Chrome. Modern Chrome extensions built on Manifest V3 have specific requirements and best practices that differ from older Manifest V2 implementations. Understanding these architectural considerations will help you build a more solid and maintainable extension.
 
-### The Manifest V3 Foundation
+The Manifest V3 Foundation
 
 Chrome extensions in 2025 must use Manifest V3, which introduced significant changes to how extensions operate. The most notable change relevant to text transformation extensions is the replacement of background pages with service workers. Service workers are event-driven and can be terminated when idle, which means your extension needs to handle state management carefully. However, for text transformation utilities that primarily operate in the popup context, this architectural shift has minimal impact on the core functionality.
 
 Your extension will primarily interact with users through a popup interface, where users can input text, select transformation options, and view the results. The transformation logic itself will execute in the popup's JavaScript context, making it immediately responsive without requiring communication with a background service worker. This direct execution model provides an excellent user experience with zero latency for text transformations.
 
-### Core Components You'll Build
+Core Components You'll Build
 
 Every text transform Chrome extension consists of several essential components working together. The manifest.json file defines the extension's metadata, permissions, and UI components. The popup HTML provides the user interface where users interact with the extension. The popup JavaScript contains the transformation logic and handles user interactions. Finally, the CSS styles ensure the extension looks professional and matches Chrome's design language.
 
@@ -35,7 +35,7 @@ For this project, we'll build an extension that offers multiple text transformat
 
 ---
 
-## Setting Up Your Project Structure {#project-setup}
+Setting Up Your Project Structure {#project-setup}
 
 Every successful Chrome extension begins with proper project organization. Creating a logical directory structure from the start will save significant time as your extension grows in complexity. Let's establish the foundation for our text transform extension.
 
@@ -43,20 +43,20 @@ Create a new directory for your extension project and organize it with the follo
 
 ```
 text-transform-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── icons/
-│   ├── icon-16.png
-│   ├── icon-48.png
-│   └── icon-128.png
-└── background.js (optional, for future features)
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ icons/
+    icon-16.png
+    icon-48.png
+    icon-128.png
+ background.js (optional, for future features)
 ```
 
 This structure follows Chrome's recommended conventions and separates concerns cleanly. The popup files handle all user-facing functionality, while the icons directory stores the extension's visual identity. You'll need to create basic icon files or use placeholder images during development, which you can replace with professional designs later.
 
-### Creating the Manifest File
+Creating the Manifest File
 
 The manifest.json file serves as the blueprint for your Chrome extension. It tells Chrome about your extension's capabilities, permissions, and interface. For a text transform extension, we need relatively minimal permissions since the extension operates entirely within the popup context without needing access to user browsing data or external APIs.
 
@@ -87,11 +87,11 @@ Notice that we haven't requested any permissions beyond the defaults. Our text t
 
 ---
 
-## Building the User Interface {#building-ui}
+Building the User Interface {#building-ui}
 
 The popup interface represents the primary touchpoint between your extension and its users. A well-designed interface makes the extension intuitive and pleasant to use, while a poorly designed one frustrates users even if the underlying functionality works perfectly. Let's create a clean, functional interface that showcases all our transformation options.
 
-### The HTML Structure
+The HTML Structure
 
 Our popup HTML should provide clear areas for text input, transformation options, and output display. We'll use a two-panel design that allows users to see both the original and transformed text simultaneously, making it easy to compare changes.
 
@@ -148,7 +148,7 @@ Our popup HTML should provide clear areas for text input, transformation options
 
 This HTML structure provides a clean layout with clear sections for input, transformation buttons, and output. The button elements use data attributes to identify which transformation to apply, making the JavaScript logic more maintainable. The output textarea is marked as readonly so users can select and copy the result but not accidentally edit it.
 
-### Styling with CSS
+Styling with CSS
 
 Chrome extensions should feel native to the browser, which means adopting design patterns that Chrome users are already familiar with. Our CSS will create a clean, modern interface that follows Chrome's visual language while remaining unique enough to stand out.
 
@@ -294,11 +294,11 @@ This CSS creates a polished, professional appearance with careful attention to s
 
 ---
 
-## Implementing the Transformation Logic {#transformation-logic}
+Implementing the Transformation Logic {#transformation-logic}
 
 The heart of any text transform extension is the JavaScript that performs the actual text manipulations. We'll create a comprehensive set of transformation functions that handle various use cases, from simple case conversion to more complex formatting operations. The key is to make the functions pure and reusable, allowing them to be easily tested and extended.
 
-### Core Transformation Functions
+Core Transformation Functions
 
 ```javascript
 // popup.js
@@ -429,15 +429,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-This JavaScript implementation provides a robust foundation for text transformations. Each transformation function is pure and testable, taking input text and returning the transformed result. The event handling code connects the UI to the transformation logic, providing feedback to users through the status display.
+This JavaScript implementation provides a solid foundation for text transformations. Each transformation function is pure and testable, taking input text and returning the transformed result. The event handling code connects the UI to the transformation logic, providing feedback to users through the status display.
 
 ---
 
-## Testing Your Extension Locally {#testing-extension}
+Testing Your Extension Locally {#testing-extension}
 
 Before publishing your extension, you need to test it thoroughly to ensure all features work as expected. Chrome provides built-in support for loading unpacked extensions directly from your development directory, making the testing process straightforward and efficient.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 To load your extension for testing, follow these steps:
 
@@ -447,7 +447,7 @@ Once Developer mode is enabled, you'll see new buttons appear in the top toolbar
 
 You should now see your extension's icon appear in the Chrome toolbar. Click the icon to open the popup and test all the transformation functions. Try entering various types of text, including simple sentences, code snippets with camelCase variables, and text with mixed formatting. Verify that each transformation produces the expected output.
 
-### Debugging Common Issues
+Debugging Common Issues
 
 Even well-written extensions can encounter issues during development. The Chrome DevTools provide powerful debugging capabilities specifically for extensions. Right-click anywhere in your popup and select "Inspect" to open the DevTools panel for your extension. This panel works just like the standard DevTools, allowing you to set breakpoints, inspect variables, and view console output.
 
@@ -455,17 +455,17 @@ Common issues to watch for include JavaScript errors that prevent the popup from
 
 ---
 
-## Enhancing and Extending Your Extension {#enhancing-extension}
+Enhancing and Extending Your Extension {#enhancing-extension}
 
 Now that you have a functional text transform extension, consider adding features that will make it even more valuable to users. The foundation we've built is modular and extensible, making it easy to add new transformations without modifying the existing code structure significantly.
 
-### Additional Transformation Ideas
+Additional Transformation Ideas
 
 Consider adding these popular transformations that users frequently request: slugify, which creates URL-friendly versions of text by converting to lowercase and replacing spaces with hyphens; reverse words, which reverses the order of words while keeping each word intact; remove duplicates, which eliminates duplicate lines from selected text; Base64 encode and decode for working with encoded data; and JSON prettify for formatting and validating JSON strings.
 
 Each new transformation follows the same pattern as the existing ones: create a function that takes text input and returns the transformed result, then add a button to the HTML and register it in the JavaScript. This consistency makes the codebase easy to maintain and extend.
 
-### Adding Keyboard Shortcuts
+Adding Keyboard Shortcuts
 
 Power users often prefer keyboard shortcuts over clicking buttons. Chrome extensions can register global keyboard shortcuts that work even when the extension popup isn't open. To add this feature, you'll need to update your manifest.json to declare the shortcuts you want to use, then implement the background service worker that handles shortcut events.
 
@@ -473,23 +473,23 @@ For example, you could add shortcuts like Ctrl+Shift+U for uppercase, Ctrl+Shift
 
 ---
 
-## Publishing Your Extension {#publishing-extension}
+Publishing Your Extension {#publishing-extension}
 
 Once you've thoroughly tested your extension and added all the features you want, you're ready to share it with the world. The Chrome Web Store provides a platform for reaching millions of Chrome users, and the publishing process is straightforward once you've prepared your extension for distribution.
 
-### Preparing for Publication
+Preparing for Publication
 
 Before uploading to the Chrome Web Store, verify that your extension meets all the store's policies and requirements. Ensure your icon files are properly sized and look professional, since they're the first thing potential users see. Write a compelling description that clearly explains what your extension does and why users should install it. Take screenshots or create a promotional image that showcases your extension's interface and key features.
 
 You'll need to create a developer account with Google if you don't already have one, and pay a one-time registration fee. This account gives you access to the Chrome Web Store developer dashboard where you can upload and manage your extensions.
 
-### The Review Process
+The Review Process
 
 After submitting your extension, it goes through Google's review process to ensure it meets security, privacy, and functionality standards. Text transformation utilities typically pass review quickly since they don't require dangerous permissions or access to sensitive user data. Once approved, your extension becomes available in the Chrome Web Store, where users can discover it through search or by visiting your promotional links.
 
 ---
 
-## Conclusion
+Conclusion
 
 Building a text transform Chrome extension is an excellent project that teaches fundamental concepts of Chrome extension development while creating something genuinely useful. You've learned how to set up a Manifest V3 extension, create an intuitive user interface with HTML and CSS, implement text transformation logic in JavaScript, test your extension locally, and prepare it for distribution.
 

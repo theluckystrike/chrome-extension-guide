@@ -5,69 +5,69 @@ Complete reference for Chrome extension storage APIs and patterns.
 ## Chrome Storage API Comparison
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                      CHROME EXTENSION STORAGE API COMPARISON                    │
-└─────────────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐
-│     STORAGE.LOCAL   │   │    STORAGE.SYNC     │   │   STORAGE.SESSION   │   │   STORAGE.MANAGED   │
-│                     │   │                     │   │                     │   │                     │
-│  ┌───────────────┐  │   │  ┌───────────────┐  │   │  ┌───────────────┐  │   │  ┌───────────────┐  │
-│  │  10 MB quota* │  │   │  │ 100 KB total  │  │   │  │  10 MB quota  │  │   │  │  Read-only    │  │
-│  │  (unlimited)  │  │   │  │  8 KB per item│  │   │  │               │  │   │  │               │  │
-│  └───────────────┘  │   │  └───────────────┘  │   │  └───────────────┘  │   │  └───────────────┘  │
-│                     │   │                     │   │                     │   │                     │
-│  ✓ Persists        │   │  ✓ Syncs across    │   │  ✗ Cleared on      │   │  ✓ Enterprise     │
-│    permanently     │   │    devices          │   │    restart         │   │    policies       │
-│                     │   │                     │   │                     │   │                     │
-│  ✓ No API rate      │   │  ✗ Rate limits:    │   │  ✓ No sync        │   │  ✗ No write       │
-│    limits           │   │    1800 writes/hr  │   │    overhead        │   │    access         │
-│                     │   │                     │   │                     │   │                     │
-└─────────────────────┘   └─────────────────────┘   └─────────────────────┘   └─────────────────────┘
-         │                         │                        │                         │
-         ▼                         ▼                        ▼                         ▼
-   ┌─────────────┐          ┌─────────────┐          ┌─────────────┐          ┌─────────────┐
-   │   Large     │          │  User       │          │  Temporary  │          │  Config    │
-   │   data,     │          │  prefs,     │          │  session    │          │  from IT   │
-   │   caches,   │          │  theme,     │          │  state,     │          │  admin     │
-   │   complex   │          │  sync data  │          │  sensitive  │          │            │
-   │   objects   │          │             │          │  flags      │          │            │
-   └─────────────┘          └─────────────┘          └─────────────┘          └─────────────┘
+                      CHROME EXTENSION STORAGE API COMPARISON                    
 
 
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           STORAGE LIFECYCLE EXAMPLE                            │
-└─────────────────────────────────────────────────────────────────────────────────┘
+         
+     STORAGE.LOCAL          STORAGE.SYNC           STORAGE.SESSION         STORAGE.MANAGED   
+                                                                                             
+                         
+    10 MB quota*         100 KB total           10 MB quota           Read-only      
+    (unlimited)           8 KB per item                                              
+                         
+                                                                                             
+   Persists              Syncs across          Cleared on            Enterprise     
+    permanently            devices                 restart                policies       
+                                                                                             
+   No API rate            Rate limits:          No sync              No write       
+    limits                  1800 writes/hr         overhead               access         
+                                                                                             
+         
+                                                                                   
+                                                                                   
+                                 
+      Large                 User                   Temporary              Config    
+      data,                 prefs,                 session                from IT   
+      caches,               theme,                 state,                 admin     
+      complex               sync data              sensitive                        
+      objects                                      flags                            
+                                 
+
+
+
+                           STORAGE LIFECYCLE EXAMPLE                            
+
 
   Extension Install              User Changes Setting            Browser Restart
-        │                              │                              │
-        ▼                              ▼                              ▼
-  ┌─────────────┐                ┌─────────────┐                ┌─────────────┐
-  │ local: {}   │                │ local:      │                │ local:      │
-  │ sync: {}    │   ───────►     │   {theme:   │    ──────►     │   {theme:   │
-  │ session: {} │                │    'dark'}  │                │    'dark'}  │
-  └─────────────┘                │ session: {} │                │ session: {} │
-                                  └─────────────┘                └─────────────┘
-                                                                              ▲
-                                                                              │
-                                                      session cleared ───────┘
+                                                                    
+                                                                    
+                                  
+   local: {}                    local:                       local:      
+   sync: {}               {theme:               {theme:   
+   session: {}                     'dark'}                      'dark'}  
+                   session: {}                  session: {} 
+                                                  
+                                                                              
+                                                                              
+                                                      session cleared 
 
 
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              CHANGE LISTENERS                                   │
-└─────────────────────────────────────────────────────────────────────────────────┘
+
+                              CHANGE LISTENERS                                   
+
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
     // Fires in ALL extension contexts when storage changes
     // Use areaName to filter: 'local' | 'sync' | 'session'
   });
 
-  Background SW ◄─────────────────────► Popup ◄─────────────────────► Content Script
-       │                                     │                                    │
-       │   onChanged fires in ALL contexts  │                                    │
-       │◄────────────────────────────────────│◄───────────────────────────────────┘
-       │
-       │
+  Background SW  Popup  Content Script
+                                                                                
+          onChanged fires in ALL contexts                                      
+       
+       
+       
 ```
 
 ![Chrome Extension storage API comparison diagram showing local, sync, session, and managed storage areas with quota and synchronization details](docs/images/storage-api-comparison.svg)
@@ -291,10 +291,10 @@ chrome.storage.sync.getBytesInUse(null, (bytes) => {
 ```
 
 ## Common Mistakes {#common-mistakes}
-- Exceeding sync quota (100KB total, 8KB per item) — use local for large data
-- Not handling `null` returns from `get()` — always provide defaults
-- Storing sensitive data (passwords, tokens) in sync storage — use local
-- Not debouncing frequent writes — hit rate limits on sync
+- Exceeding sync quota (100KB total, 8KB per item). use local for large data
+- Not handling `null` returns from `get()`. always provide defaults
+- Storing sensitive data (passwords, tokens) in sync storage. use local
+- Not debouncing frequent writes. hit rate limits on sync
 - Forgetting `chrome.storage.onChanged` fires across ALL contexts
 -e 
 ---

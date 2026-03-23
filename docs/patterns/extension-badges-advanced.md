@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Extension Badges Advanced — Best Practices"
+title: "Chrome Extension Extension Badges Advanced. Best Practices"
 description: "Advanced badge management and visualization."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-badges-advanced/"
 ---
 
 # Advanced Badge Management Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Building on the foundational badge patterns in [Badge Management](badge-management.md), this guide covers advanced techniques for complex badge scenarios: intelligent number formatting, persistent badge state, accessibility-aware designs, performance optimization, and sophisticated status indicators. These patterns are essential for production extensions requiring robust badge behavior.
+Building on the foundational badge patterns in [Badge Management](badge-management.md), this guide covers advanced techniques for complex badge scenarios: intelligent number formatting, persistent badge state, accessibility-aware designs, performance optimization, and sophisticated status indicators. These patterns are essential for production extensions requiring solid badge behavior.
 
 ---
 
-## Per-Tab Badge Management {#per-tab-badge-management}
+Per-Tab Badge Management {#per-tab-badge-management}
 
-### Tab-Specific Badge Updates {#tab-specific-badge-updates}
+Tab-Specific Badge Updates {#tab-specific-badge-updates}
 
 The `tabId` parameter enables granular badge control per tab, allowing different counts or states across tabs:
 
@@ -43,7 +43,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 ```
 
-### When to Use Per-Tab vs Global Badges {#when-to-use-per-tab-vs-global-badges}
+When to Use Per-Tab vs Global Badges {#when-to-use-per-tab-vs-global-badges}
 
 | Scenario | Badge Type | Rationale |
 |----------|------------|-----------|
@@ -54,9 +54,9 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-## Smart Badge Text Formatting {#smart-badge-text-formatting}
+Smart Badge Text Formatting {#smart-badge-text-formatting}
 
-### Number Abbreviation {#number-abbreviation}
+Number Abbreviation {#number-abbreviation}
 
 Handle large numbers elegantly with abbreviated formats:
 
@@ -70,7 +70,7 @@ function formatBadgeCount(count) {
 }
 ```
 
-### Truncation with Context {#truncation-with-context}
+Truncation with Context {#truncation-with-context}
 
 Always respect the 4-character maximum:
 
@@ -83,10 +83,10 @@ function truncateText(text) {
 
 function formatStatus(status) {
   const statusMap = {
-    'connected': '✓',
-    'disconnected': '✕',
+    'connected': '',
+    'disconnected': '',
     'syncing': '↻',
-    'warning': '⚠',
+    'warning': '',
     'error': '!'
   };
   return statusMap[status] || truncateText(status.toUpperCase());
@@ -95,9 +95,9 @@ function formatStatus(status) {
 
 ---
 
-## Contextual Badge Colors {#contextual-badge-colors}
+Contextual Badge Colors {#contextual-badge-colors}
 
-### Color Semantics {#color-semantics}
+Color Semantics {#color-semantics}
 
 Use consistent color coding for user recognition:
 
@@ -129,20 +129,20 @@ function setBadgeWithContext(tabId, count, state) {
 
 ---
 
-## Status Indicator Badges {#status-indicator-badges}
+Status Indicator Badges {#status-indicator-badges}
 
-### Single-Character Indicators {#single-character-indicators}
+Single-Character Indicators {#single-character-indicators}
 
 Compact status without numbers:
 
 ```js
 const STATUS_INDICATORS = {
   dot: ' ',        // Colored dot (single space renders as dot)
-  check: '✓',      // Success/connected
-  warn: '⚠',       // Warning
+  check: '',      // Success/connected
+  warn: '',       // Warning
   error: '!',      // Error state
   sync: '↻',       // Syncing/processing
-  star: '★',       // Favorited/important
+  star: '',       // Favorited/important
   new: '·'         // New content indicator
 };
 
@@ -169,11 +169,11 @@ function setStatusBadge(tabId, status) {
 
 ---
 
-## Badge Persistence {#badge-persistence}
+Badge Persistence {#badge-persistence}
 
-### Restoring State After Service Worker Restart {#restoring-state-after-service-worker-restart}
+Restoring State After Service Worker Restart {#restoring-state-after-service-worker-restart}
 
-Service worker badges reset on restart—restore from storage:
+Service worker badges reset on restart, restore from storage:
 
 ```js
 class PersistentBadgeManager {
@@ -226,9 +226,9 @@ badgeManager.init();
 
 ---
 
-## Combining Badge with Title {#combining-badge-with-title}
+Combining Badge with Title {#combining-badge-with-title}
 
-### Dual Information Architecture {#dual-information-architecture}
+Dual Information Architecture {#dual-information-architecture}
 
 Use badge for quick visual summary, title for detailed information:
 
@@ -253,9 +253,9 @@ setBadgeWithFullInfo(tabId, 42, 'syncing', 'Last sync: 2 min ago');
 
 ---
 
-## Accessibility Considerations {#accessibility-considerations}
+Accessibility Considerations {#accessibility-considerations}
 
-### Ensuring Badge Visibility {#ensuring-badge-visibility}
+Ensuring Badge Visibility {#ensuring-badge-visibility}
 
 ```js
 const ACCESSIBLE_COLORS = {
@@ -290,9 +290,9 @@ function setAccessibleBadge(tabId, status) {
 
 ---
 
-## Performance: Debouncing Badge Updates {#performance-debouncing-badge-updates}
+Performance: Debouncing Badge Updates {#performance-debouncing-badge-updates}
 
-### Prevent Excessive API Calls {#prevent-excessive-api-calls}
+Prevent Excessive API Calls {#prevent-excessive-api-calls}
 
 ```js
 function debounce(func, wait) {
@@ -322,9 +322,9 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Animated Notification Badge {#animated-notification-badge}
+Animated Notification Badge {#animated-notification-badge}
 
-### Attention-Grabbing Patterns (Use Sparingly) {#attention-grabbing-patterns-use-sparingly}
+Attention-Grabbing Patterns (Use Sparingly) {#attention-grabbing-patterns-use-sparingly}
 
 ```js
 class AnimatedBadge {
@@ -349,7 +349,7 @@ class AnimatedBadge {
     let visible = true;
     this.interval = setInterval(() => {
       chrome.action.setBadgeText({ 
-        text: visible ? '●' : '', 
+        text: visible ? '' : '', 
         tabId: this.tabId 
       });
       visible = !visible;
@@ -376,7 +376,7 @@ chrome.tabs.onActivated.addListener(({ tabId }) => {
 
 ---
 
-## Complete Example: Status Badge Manager {#complete-example-status-badge-manager}
+Complete Example: Status Badge Manager {#complete-example-status-badge-manager}
 
 ```js
 class StatusBadgeManager {
@@ -439,7 +439,7 @@ const badgeManager = new StatusBadgeManager();
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Action API Reference](../api-reference/action-api.md) - Complete chrome.action API documentation
 - [Badge and Action UI Patterns](badge-action-ui.md) - Related UI patterns and icon management

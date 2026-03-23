@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Chrome Extension Reading List — Developer Guide"
+title: "Chrome Extension Reading List. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-list/"
 ---
-# Build a Reading List Extension — Full Tutorial
+# Build a Reading List Extension. Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 - Save current page to reading list with one click
 - Side panel UI showing saved articles (cross-ref `docs/mv3/side-panel.md`)
 - Mark as read, delete, search, sync across devices
 - Uses `sidePanel`, `activeTab`, `storage`, `alarms`, `contextMenus`, `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging`
 
-## manifest.json {#manifestjson}
+manifest.json {#manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -25,8 +25,8 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-list/"
 }
 ```
 
-## Step 1: Save Current Page {#step-1-save-current-page}
-- `chrome.action.onClicked` — save active tab's URL + title + timestamp
+Step 1: Save Current Page {#step-1-save-current-page}
+- `chrome.action.onClicked`. save active tab's URL + title + timestamp
 - Also via context menu: "Add to Reading List"
 - Store with `@theluckystrike/webext-storage`:
 ```typescript
@@ -36,14 +36,14 @@ const storage = createStorage(defineSchema({
 }), 'sync');  // sync = available across devices
 ```
 
-## Step 2: Side Panel UI {#step-2-side-panel-ui}
+Step 2: Side Panel UI {#step-2-side-panel-ui}
 - List view of saved articles with title, domain, date
 - Read/unread indicator (bold = unread)
 - Click to open article in new tab
 - Swipe or button to mark read / delete
 - Search bar to filter articles
 
-## Step 3: Background Service Worker {#step-3-background-service-worker}
+Step 3: Background Service Worker {#step-3-background-service-worker}
 ```typescript
 const messenger = createMessenger<Messages>();
 
@@ -64,7 +64,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Step 4: Badge showing unread count {#step-4-badge-showing-unread-count}
+Step 4: Badge showing unread count {#step-4-badge-showing-unread-count}
 ```javascript
 storage.watch('unreadCount', (count) => {
   chrome.action.setBadgeText({ text: count > 0 ? String(count) : "" });
@@ -72,7 +72,7 @@ storage.watch('unreadCount', (count) => {
 });
 ```
 
-## Step 5: Daily Digest Notification {#step-5-daily-digest-notification}
+Step 5: Daily Digest Notification {#step-5-daily-digest-notification}
 ```javascript
 chrome.alarms.create("dailyDigest", { periodInMinutes: 1440 }); // 24 hours
 chrome.alarms.onAlarm.addListener(async (alarm) => {
@@ -85,23 +85,23 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 6: Side Panel Reactive Updates {#step-6-side-panel-reactive-updates}
+Step 6: Side Panel Reactive Updates {#step-6-side-panel-reactive-updates}
 ```javascript
-// sidepanel.js — live updates when articles change
+// sidepanel.js. live updates when articles change
 storage.watch('articles', (newValue) => {
   const articles = JSON.parse(newValue || '[]');
   renderArticleList(articles);
 });
 ```
 
-## Testing {#testing}
+Testing {#testing}
 - Save multiple pages, verify they appear in side panel
 - Test mark as read, delete, search
 - Test sync: save on one device, check on another (sync storage)
 - Test daily digest notification
 - Test duplicate prevention (same URL)
 
-## What You Learned {#what-you-learned}
+What You Learned {#what-you-learned}
 - Side Panel API for persistent UI
 - Context menus for "save" actions
 - Sync storage for cross-device data

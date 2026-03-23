@@ -14,10 +14,10 @@ This guide walks you through each step of the publishing process, covering accou
 
 Before you can publish anything to the Chrome Web Store, you need a developer account. Here's how to set one up:
 
-1. **Navigate to the Chrome Web Store Developer Dashboard**: Visit https://chrome.google.com/webstore/developer/signup
-2. **Sign in with your Google account**: Use the account you want associated with your extension
-3. **Pay the registration fee**: A one-time $5 registration fee is required (this was recently changed from $5 per year)
-4. **Complete your developer profile**: Add your developer name (this appears on your extension's store listing), a contact email, and your website URL
+1. Navigate to the Chrome Web Store Developer Dashboard: Visit https://chrome.google.com/webstore/developer/signup
+2. Sign in with your Google account: Use the account you want associated with your extension
+3. Pay the registration fee: A one-time $5 registration fee is required (this was recently changed from $5 per year)
+4. Complete your developer profile: Add your developer name (this appears on your extension's store listing), a contact email, and your website URL
 
 The $5 fee is a one-time payment that grants you lifetime publishing privileges. This fee helps reduce spam and low-quality submissions. Note that you cannot use a Google Workspace account for developer registration - you must use a personal Google account.
 
@@ -33,9 +33,9 @@ Before submitting your extension, you need to prepare several required and recom
 
 The Chrome Web Store requires three icon sizes:
 
-- **128x128 pixels**: Displayed in the store listing and during installation
-- **48x48 pixels**: Used in the Chrome extensions management page
-- **16x16 pixels**: Used in the browser toolbar
+- 128x128 pixels: Displayed in the store listing and during installation
+- 48x48 pixels: Used in the Chrome extensions management page
+- 16x16 pixels: Used in the browser toolbar
 
 All icons must be PNG format with alpha transparency. They should represent your extension clearly at small sizes - avoid complex designs, text, or fine details that won't be visible. Your icons should be consistent with your brand and distinctive enough to stand out among thousands of extensions.
 
@@ -45,10 +45,10 @@ Design your icons as square images (the 128x128 will be used as the primary). Us
 
 You must provide at least one screenshot, but up to five are allowed. Screenshots should showcase your extension's functionality and user interface. Here are the requirements and best practices:
 
-- **Minimum size**: 1280x800 or 640x400 pixels
-- **Maximum file size**: 2MB per screenshot
-- **Format**: PNG or JPEG
-- **Recommended**: Include 1-2 screenshots showing the main features
+- Minimum size: 1280x800 or 640x400 pixels
+- Maximum file size: 2MB per screenshot
+- Format: PNG or JPEG
+- Recommended: Include 1-2 screenshots showing the main features
 
 For best results, create screenshots that tell a story. Show the popup in action, demonstrate a key feature, or display your options page. Use annotation to highlight important elements, but don't clutter the images. Consider creating both horizontal and vertical screenshots since the store displays them differently on various devices.
 
@@ -61,10 +61,10 @@ Your description is crucial for conversions. It appears in search results and on
 Write your description in clear, concise language. Lead with the problem your extension solves, then explain how it works. Use bullet points for features to make them scannable. Include relevant keywords naturally for discoverability, but avoid keyword stuffing. Update your description when you add new features.
 
 Here's a template structure:
-- **First sentence**: What your extension does (the value proposition)
-- **Second paragraph**: Who it's for and what problem it solves
-- **Bullet points**: Key features
-- **Final paragraph**: Call to action or trust indicators
+- First sentence: What your extension does (the value proposition)
+- Second paragraph: Who it's for and what problem it solves
+- Bullet points: Key features
+- Final paragraph: Call to action or trust indicators
 
 ### Categories
 
@@ -156,11 +156,11 @@ If your extension only stores local preferences and doesn't communicate external
 
 Your privacy policy should be a dedicated page on your website (or a separate document) and must include:
 
-1. **Data collection**: What data you collect and how
-2. **Data usage**: How you use the collected data
-3. **Data sharing**: Whether you share data with third parties
-4. **User rights**: How users can access or delete their data
-5. **Contact information**: How users can reach you with concerns
+1. Data collection: What data you collect and how
+2. Data usage: How you use the collected data
+3. Data sharing: Whether you share data with third parties
+4. User rights: How users can access or delete their data
+5. Contact information: How users can reach you with concerns
 
 Keep your privacy policy clear and honest. Vague language or omissions can result in rejection. Update it when your data practices change.
 
@@ -239,25 +239,25 @@ The Chrome Web Store Developer Dashboard (https://chrome.google.com/webstore/dev
 
 ### Submission Process
 
-1. **Click "New Item"**: In the dashboard, select "New Item" to start a new submission
-2. **Upload your .zip file**: Drag and drop or browse to select your packaged extension
-3. **Wait for extraction**: The store will analyze your extension (this may take a few minutes)
-4. **Fill in store listing details**: Add your description, screenshots, category, and other metadata
-5. **Submit for review**: Complete the submission and send for review
+1. Click "New Item": In the dashboard, select "New Item" to start a new submission
+2. Upload your .zip file: Drag and drop or browse to select your packaged extension
+3. Wait for extraction: The store will analyze your extension (this may take a few minutes)
+4. Fill in store listing details: Add your description, screenshots, category, and other metadata
+5. Submit for review: Complete the submission and send for review
 
 ### Store Listing Details
 
 The store listing form includes:
 
-- **Extension name**: This is set from your manifest but can be adjusted
-- **Short description**: A brief tagline (appears in search)
-- **Detailed description**: Full description (use the full 30,000 characters strategically)
-- **Category**: Select the most appropriate category
-- **Language**: Primary language for your listing
-- **Screenshots**: Upload your prepared screenshots
-- **Promotional video**: Optional but recommended
-- **Privacy policy link**: Required if applicable
-- **Support link**: Link to your support page or email
+- Extension name: This is set from your manifest but can be adjusted
+- Short description: A brief tagline (appears in search)
+- Detailed description: Full description (use the full 30,000 characters strategically)
+- Category: Select the most appropriate category
+- Language: Primary language for your listing
+- Screenshots: Upload your prepared screenshots
+- Promotional video: Optional but recommended
+- Privacy policy link: Required if applicable
+- Support link: Link to your support page or email
 
 ## Store Listing Optimization
 
@@ -328,24 +328,24 @@ Extensions are reviewed for:
 
 Understanding common rejection reasons helps you avoid them:
 
-1. **Repetitive functionality**: Too similar to existing extensions or built-in Chrome features
-2. **Vague functionality**: Not clearly explaining what the extension does
-3. **Poor quality**: Bugs, crashes, or broken features
-4. **Excessive permissions**: Requesting more than needed
-5. **Misrepresentation**: Screenshots or description don't match actual functionality
-6. **Privacy issues**: Collecting data without disclosure or proper policy
-7. **Monetization violations**: Improper use of payments or ads
-8. **Code issues**: Obfuscated code, external code loading problems
+1. Repetitive functionality: Too similar to existing extensions or built-in Chrome features
+2. Vague functionality: Not clearly explaining what the extension does
+3. Poor quality: Bugs, crashes, or broken features
+4. Excessive permissions: Requesting more than needed
+5. Misrepresentation: Screenshots or description don't match actual functionality
+6. Privacy issues: Collecting data without disclosure or proper policy
+7. Monetization violations: Improper use of payments or ads
+8. Code issues: Obfuscated code, external code loading problems
 
 ### Responding to Rejections
 
 If your extension is rejected, you'll receive an email with feedback. Here's how to respond effectively:
 
-1. **Read the feedback carefully**: Understand exactly what the reviewer found problematic
-2. **Don't take it personally**: Focus on fixing the issue
-3. **Address each point**: Modify your extension or listing to address all concerns
-4. **Respond professionally**: In the dashboard, provide a detailed response explaining your changes
-5. **Be patient**: Wait for the next review cycle
+1. Read the feedback carefully: Understand exactly what the reviewer found problematic
+2. Don't take it personally: Focus on fixing the issue
+3. Address each point: Modify your extension or listing to address all concerns
+4. Respond professionally: In the dashboard, provide a detailed response explaining your changes
+5. Be patient: Wait for the next review cycle
 
 If you believe the rejection was in error, provide clear evidence supporting your position. Maintain a professional tone - reviewers are more likely to help cooperative developers.
 
@@ -356,9 +356,9 @@ Managing updates is crucial for maintaining a quality extension and keeping user
 ### Version Bumping
 
 Every update requires a version number increase in manifest.json. Follow semantic versioning:
-- **Major** (1.0.0 → 2.0.0): Breaking changes or significant new features
-- **Minor** (1.0.0 → 1.1.0): New features backward compatible
-- **Patch** (1.0.0 → 1.0.1): Bug fixes
+- Major (1.0.0 → 2.0.0): Breaking changes or significant new features
+- Minor (1.0.0 → 1.1.0): New features backward compatible
+- Patch (1.0.0 → 1.0.1): Bug fixes
 
 Never reuse version numbers or skip versions. The Chrome Web Store will reject duplicate versions.
 
@@ -444,20 +444,20 @@ Understanding your extension's performance helps you make informed decisions.
 ### Chrome Web Store Analytics
 
 The developer dashboard provides built-in analytics:
-- **Downloads**: Total and daily/weekly/monthly
-- **Active users**: Users who have the extension installed and enabled
-- **User reviews**: Ratings and review counts
-- **Conversion rate**: Views to downloads percentage
+- Downloads: Total and daily/weekly/monthly
+- Active users: Users who have the extension installed and enabled
+- User reviews: Ratings and review counts
+- Conversion rate: Views to downloads percentage
 
 Access analytics from the dashboard by clicking on your extension and selecting the "Stats" tab.
 
 ### Understanding Metrics
 
 Key metrics to track:
-- **Downloads**: Raw installation count
-- **Active users**: More meaningful than downloads (excludes uninstalls)
-- **Ratings**: Average star rating
-- **Conversion rate**: (Downloads / Store listing views) × 100
+- Downloads: Raw installation count
+- Active users: More meaningful than downloads (excludes uninstalls)
+- Ratings: Average star rating
+- Conversion rate: (Downloads / Store listing views) × 100
 
 A typical conversion rate is 10-30% for well-optimized listings. Lower rates may indicate issues with your listing or extension.
 

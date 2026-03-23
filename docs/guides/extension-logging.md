@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Logging & Debugging — Developer Guide"
+title: "Chrome Extension Logging & Debugging. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-logging/"
 ---
 # Extension Logging Guide
 
-## Introduction {#introduction}
-Logging in Chrome extensions is challenging because logs are spread across multiple DevTools windows — background service worker, popup, options page, and content scripts each have their own console. This guide covers structured logging patterns that work reliably across all extension contexts.
+Introduction {#introduction}
+Logging in Chrome extensions is challenging because logs are spread across multiple DevTools windows. background service worker, popup, options page, and content scripts each have their own console. This guide covers structured logging patterns that work reliably across all extension contexts.
 
-## 1. Structured Log Format {#1-structured-log-format}
+1. Structured Log Format {#1-structured-log-format}
 Use a consistent format across all contexts so logs are searchable and parseable:
 
 ```typescript
@@ -31,7 +31,7 @@ const LOG_LEVELS: Record<LogLevel, number> = {
 };
 ```
 
-## 2. Conditional Log Levels {#2-conditional-log-levels}
+2. Conditional Log Levels {#2-conditional-log-levels}
 Only output logs at or above the configured level to reduce noise:
 
 ```typescript
@@ -55,7 +55,7 @@ function log(level: LogLevel, message: string, data?: unknown) {
 }
 ```
 
-## 3. Console Styling with Context Labels {#3-console-styling-with-context-labels}
+3. Console Styling with Context Labels {#3-console-styling-with-context-labels}
 Use `%c` formatting to add colored context labels that make logs scannable:
 
 ```typescript
@@ -71,7 +71,7 @@ function styledLog(context: string, message: string, ...args: unknown[]) {
 }
 ```
 
-## 4. Centralizing Logs to Background {#4-centralizing-logs-to-background}
+4. Centralizing Logs to Background {#4-centralizing-logs-to-background}
 Content scripts and popup logs are in separate DevTools windows. Send logs to the background service worker for unified viewing:
 
 ```typescript
@@ -88,7 +88,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-## 5. Persistent Log Storage with Circular Buffer {#5-persistent-log-storage-with-circular-buffer}
+5. Persistent Log Storage with Circular Buffer {#5-persistent-log-storage-with-circular-buffer}
 Store recent logs in `chrome.storage.session` so they're available even after service worker restarts:
 
 ```typescript
@@ -104,7 +104,7 @@ async function persistLog(entry: LogEntry) {
 }
 ```
 
-## 6. Debug Mode Toggle {#6-debug-mode-toggle}
+6. Debug Mode Toggle {#6-debug-mode-toggle}
 Enable verbose logging only when needed to diagnose issues:
 
 ```typescript
@@ -124,7 +124,7 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 ```
 
-## 7. Log Export for Bug Reports {#7-log-export-for-bug-reports}
+7. Log Export for Bug Reports {#7-log-export-for-bug-reports}
 Allow users to export logs as a JSON file for debugging issues:
 
 ```typescript
@@ -139,7 +139,7 @@ async function exportLogs() {
 }
 ```
 
-## 8. Production Logging: Strip Debug Logs {#8-production-logging-strip-debug-logs}
+8. Production Logging: Strip Debug Logs {#8-production-logging-strip-debug-logs}
 Use build tools to remove debug logs in production. With esbuild:
 
 ```javascript
@@ -157,24 +157,24 @@ require('esbuild').build({
 
 Or use a custom plugin to strip all logging calls in production builds.
 
-## 9. Viewing Logs Across Contexts {#9-viewing-logs-across-contexts}
-- **Service worker logs**: `chrome://serviceworker-internals` → find your extension → "Inspect"
-- **Content script logs**: Appear in the page's DevTools console under the extension's context
-- **Popup/options logs**: Right-click extension icon → "Inspect popup" or navigate to options page
+9. Viewing Logs Across Contexts {#9-viewing-logs-across-contexts}
+- Service worker logs: `chrome://serviceworker-internals` → find your extension → "Inspect"
+- Content script logs: Appear in the page's DevTools console under the extension's context
+- Popup/options logs: Right-click extension icon → "Inspect popup" or navigate to options page
 
-## 10. Performance Considerations {#10-performance-considerations}
-- Avoid logging in hot paths (e.g., scroll handlers) — use throttling
+10. Performance Considerations {#10-performance-considerations}
+- Avoid logging in hot paths (e.g., scroll handlers). use throttling
 - Use lazy serialization for complex objects: `() => expensiveComputation()` instead of serializing upfront
 - Disable structured logging in performance-critical code paths
 
-## Related Guides {#related-guides}
-- [Debugging Extensions](./debugging-extensions.md) — General debugging techniques
-- [Service Worker Debugging](./service-worker-debugging.md) — Background worker specifics
-- [Extension Error Reporting](./extension-error-reporting.md) — Collecting and reporting errors
+Related Guides {#related-guides}
+- [Debugging Extensions](./debugging-extensions.md). General debugging techniques
+- [Service Worker Debugging](./service-worker-debugging.md). Background worker specifics
+- [Extension Error Reporting](./extension-error-reporting.md). Collecting and reporting errors
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Logging Patterns](../patterns/logging-patterns.md)
 - [Error Reporting](../guides/extension-error-reporting.md)

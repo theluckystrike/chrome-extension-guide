@@ -9,13 +9,13 @@ This guide covers building a sophisticated color picker Chrome extension with ey
 ### Project Structure
 ```
 color-picker-advanced/
-├── manifest.json
-├── src/
-│   ├── background/service-worker.ts
-│   ├── popup/popup.html, popup.ts, popup.css
-│   ├── content-script/eye-dropper.ts
-│   └── shared/types.ts, color-utils.ts, storage.ts
-└── assets/icons/
+ manifest.json
+ src/
+    background/service-worker.ts
+    popup/popup.html, popup.ts, popup.css
+    content-script/eye-dropper.ts
+    shared/types.ts, color-utils.ts, storage.ts
+ assets/icons/
 ```
 
 ### Manifest Configuration
@@ -122,9 +122,9 @@ export function formatColor(color: Color, format: ColorFormat): string {
     <section class="preview">
       <div id="color-preview"></div>
       <div class="color-values">
-        <div class="row"><label>HEX</label><input id="hex-value" readonly><button class="copy">📋</button></div>
-        <div class="row"><label>RGB</label><input id="rgb-value" readonly><button class="copy">📋</button></div>
-        <div class="row"><label>HSL</label><input id="hsl-value" readonly><button class="copy">📋</button></div>
+        <div class="row"><label>HEX</label><input id="hex-value" readonly><button class="copy"></button></div>
+        <div class="row"><label>RGB</label><input id="rgb-value" readonly><button class="copy"></button></div>
+        <div class="row"><label>HSL</label><input id="hsl-value" readonly><button class="copy"></button></div>
       </div>
     </section>
     <section class="picker">
@@ -132,8 +132,8 @@ export function formatColor(color: Color, format: ColorFormat): string {
       <input type="range" id="hue-slider" min="0" max="360" value="0">
     </section>
     <section class="actions">
-      <button id="eye-dropper-btn">🔍 Pick from Screen</button>
-      <button id="save-btn">💾 Save</button>
+      <button id="eye-dropper-btn"> Pick from Screen</button>
+      <button id="save-btn"> Save</button>
     </section>
     <section class="history">
       <h3>Recent</h3>
@@ -285,12 +285,12 @@ export function createColorMemoized(hex: string): Color {
 
 ## Publishing Checklist
 
-1. **Manifest**: Validate with Chrome Manifest Validator
-2. **Icons**: 16, 32, 48, 128px PNG with transparency
-3. **Permissions**: Use minimum required; document rationale
-4. **Testing**: Chrome, Edge, keyboard shortcuts, eye dropper, storage limits
-5. **Privacy Policy**: Local storage only, no data collection, no external requests
-6. **Store Listing**: Title, description, screenshots, categories, analytics
+1. Manifest: Validate with Chrome Manifest Validator
+2. Icons: 16, 32, 48, 128px PNG with transparency
+3. Permissions: Use minimum required; document rationale
+4. Testing: Chrome, Edge, keyboard shortcuts, eye dropper, storage limits
+5. Privacy Policy: Local storage only, no data collection, no external requests
+6. Store Listing: Title, description, screenshots, categories, analytics
 
 ### Sample Privacy Section
 ```markdown

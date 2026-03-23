@@ -1,5 +1,5 @@
 ---
-title: Chrome Extension Cross-Browser Development — Build for Chrome, Firefox, Edge, and Safari
+title: Chrome Extension Cross-Browser Development. Build for Chrome, Firefox, Edge, and Safari
 description: Learn how to create cross-browser extensions using WebExtension APIs, browser polyfills, manifest differences, and conditional code for Chrome, Firefox, Edge, and Safari.
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-extension/"
@@ -10,15 +10,15 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-exten
 
 Building extensions that work across multiple browsers maximizes your reach and ensures users can choose their preferred browser without losing functionality. The WebExtension API provides a standardized foundation, but each browser implements it differently. This guide covers the strategies, tools, and best practices for creating truly cross-browser extensions.
 
-## Understanding the WebExtension API
+Understanding the WebExtension API
 
-The WebExtension API is the cornerstone of cross-browser extension development. Originally designed by Mozilla and adopted by Chrome, Edge, and Safari, it provides a unified JavaScript API for browser extensions. However, compatibility is not automatic—understanding the nuances of each browser's implementation is essential.
+The WebExtension API is the cornerstone of cross-browser extension development. Originally designed by Mozilla and adopted by Chrome, Edge, and Safari, it provides a unified JavaScript API for browser extensions. However, compatibility is not automatic, understanding the nuances of each browser's implementation is essential.
 
 Chrome was the first major browser to adopt WebExtensions, setting the baseline for API design. Firefox followed closely, maintaining high compatibility with Chrome's APIs while adding its own extensions. Microsoft Edge, rebuilt on Chromium, shares significant API overlap with Chrome but includes some unique features. Safari's WebExtension support, introduced in Safari 14, implements the WebExtension API with notable differences in behavior and available APIs.
 
 The key principle is that most core APIs work similarly across browsers, but feature completeness varies. Before starting development, check the [MDN Browser Compatibility Data](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_compatibility_for_manifest.json) to verify API support for your target browsers.
 
-## Using Browser Polyfills
+Using Browser Polyfills
 
 Browser polyfills are libraries that bridge API gaps between browsers, allowing your extension code to use a consistent interface regardless of the browser. The most popular solution is the `webextension-polyfill` package, which provides Promise-based wrappers for callback-style APIs.
 
@@ -43,17 +43,17 @@ The polyfill handles API differences automatically, transforming Chrome's callba
 
 However, polyfills cannot solve all compatibility issues. They cannot add APIs that don't exist in a browser, and they cannot work around fundamental behavioral differences. For those cases, you'll need conditional code.
 
-## Handling Manifest Differences
+Handling Manifest Differences
 
 The `manifest.json` file defines your extension's configuration, and browser-specific manifest keys require careful handling. While Manifest V3 is the current standard across all major browsers, subtle differences exist in supported keys and their behavior.
 
-### Browser-Specific Manifest Keys
+Browser-Specific Manifest Keys
 
 Some manifest keys are unique to specific browsers:
 
-- **Chrome and Edge**: Support `action` for declarative content scripts and `declarative_net_request` with specific match patterns
-- **Firefox**: Supports `browser_specific_settings` for Firefox-specific configuration
-- **Safari**: Requires additional Safari-specific keys in the `__MSExtension` dictionary within `info.plist` after conversion
+- Chrome and Edge: Support `action` for declarative content scripts and `declarative_net_request` with specific match patterns
+- Firefox: Supports `browser_specific_settings` for Firefox-specific configuration
+- Safari: Requires additional Safari-specific keys in the `__MSExtension` dictionary within `info.plist` after conversion
 
 Use manifest conditional keys to handle browser-specific configurations:
 
@@ -77,7 +77,7 @@ Use manifest conditional keys to handle browser-specific configurations:
 }
 ```
 
-### Managing Multiple Manifest Files
+Managing Multiple Manifest Files
 
 For complex projects, maintain separate manifest files for each target browser:
 
@@ -92,11 +92,11 @@ src/
 
 Use a build tool like Webpack or Rollup to merge the appropriate manifest with shared configuration during the build process. This approach provides full control over browser-specific settings while keeping your source code unified.
 
-## Implementing Conditional Code
+Implementing Conditional Code
 
 Despite using polyfills and careful manifest configuration, some features require browser-specific code. Use feature detection and browser identification to implement conditional logic safely.
 
-### Feature Detection
+Feature Detection
 
 Always prefer feature detection over browser detection:
 
@@ -111,7 +111,7 @@ if (browser.storage.session) {
 }
 ```
 
-### Browser Detection
+Browser Detection
 
 When feature detection isn't sufficient, use the `browser` runtime object to identify the browser:
 
@@ -135,7 +135,7 @@ const currentBrowser = getBrowserInfo();
 
 Use browser detection sparingly and isolate it in utility functions to keep your main code clean and testable.
 
-### Conditional Imports
+Conditional Imports
 
 For larger browser-specific code blocks, use dynamic imports:
 
@@ -154,17 +154,17 @@ async function getBrowserUtils() {
 }
 ```
 
-## Testing Across Browsers
+Testing Across Browsers
 
 Comprehensive testing is critical for cross-browser extensions. Each browser has unique developer tools, extension formats, and loading mechanisms.
 
-### Local Testing Workflow
+Local Testing Workflow
 
 Test your extension in each target browser during development:
 
-1. **Chrome and Edge**: Use Developer Mode in `chrome://extensions` and load unpacked extensions
-2. **Firefox**: Use `about:debugging` or the WebExtension Developer Toolbar
-3. **Safari**: Enable the Developer menu in Safari preferences, then use the Extensions tab
+1. Chrome and Edge: Use Developer Mode in `chrome://extensions` and load unpacked extensions
+2. Firefox: Use `about:debugging` or the WebExtension Developer Toolbar
+3. Safari: Enable the Developer menu in Safari preferences, then use the Extensions tab
 
 Create a testing checklist for each browser:
 
@@ -175,13 +175,13 @@ Create a testing checklist for each browser:
 - Storage operations work as expected
 - Native messaging (if applicable) functions correctly
 
-### Automated Testing
+Automated Testing
 
 Use browser automation tools to verify cross-browser functionality:
 
-- **Playwright**: Test extension behavior across Chromium-based browsers
-- **Puppeteer**: Chrome-specific extension testing
-- **Selenium**: Cross-browser automation with WebDriver
+- Playwright: Test extension behavior across Chromium-based browsers
+- Puppeteer: Chrome-specific extension testing
+- Selenium: Cross-browser automation with WebDriver
 
 Write integration tests that verify core functionality across all target browsers:
 
@@ -197,13 +197,13 @@ test('extension popup loads', async ({ page, context }) => {
 });
 ```
 
-### CI/CD Considerations
+CI/CD Considerations
 
 Set up continuous integration to test across multiple browsers:
 
 {% raw %}
 ```yaml
-# .github/workflows/test.yml
+.github/workflows/test.yml
 jobs:
   test:
     strategy:
@@ -216,18 +216,18 @@ jobs:
 ```
 {% endraw %}
 
-## Publishing to Multiple Stores
+Publishing to Multiple Stores
 
 Each browser has its own extension store with different submission processes:
 
-- **Chrome Web Store**: Google's marketplace, largest user base
-- **Mozilla Add-ons**: Firefox's official extension gallery
-- **Microsoft Edge Add-ons**: Integrated with Windows Store
-- **Apple App Store**: Safari extensions (requires Apple Developer membership)
+- Chrome Web Store: Google's marketplace, largest user base
+- Mozilla Add-ons: Firefox's official extension gallery
+- Microsoft Edge Add-ons: Integrated with Windows Store
+- Apple App Store: Safari extensions (requires Apple Developer membership)
 
 Prepare store-specific screenshots, descriptions, and metadata. Review each store's policies to ensure compliance before submission.
 
-## Conclusion
+Conclusion
 
 Cross-browser extension development requires careful planning and attention to browser-specific differences. Use the WebExtension API as your foundation, implement polyfills for API consistency, handle manifest differences strategically, and test thoroughly across all target browsers. With these practices, you can reach users regardless of their browser preference while maintaining a single codebase.
 

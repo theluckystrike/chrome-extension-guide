@@ -11,11 +11,11 @@ canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-web-request-a
 
 # Chrome Web Request API: Complete Guide to Network Interception in Extensions
 
-Network interception represents one of the most powerful capabilities available to Chrome extension developers. Whether you are building an ad blocker, developer tool, privacy enhancer, or content filter, understanding how to intercept, analyze, and modify network requests is essential. This comprehensive guide explores the Chrome Web Request API and its Manifest V3 replacement, declarativeNetRequest, providing you with everything needed to build robust network control extensions.
+Network interception represents one of the most powerful capabilities available to Chrome extension developers. Whether you are building an ad blocker, developer tool, privacy enhancer, or content filter, understanding how to intercept, analyze, and modify network requests is essential. This comprehensive guide explores the Chrome Web Request API and its Manifest V3 replacement, declarativeNetRequest, providing you with everything needed to build solid network control extensions.
 
 ---
 
-## Understanding Network Request Interception in Chrome Extensions {#understanding-network-interception}
+Understanding Network Request Interception in Chrome Extensions {#understanding-network-interception}
 
 Chrome extensions have historically provided two primary APIs for network request manipulation: the Web Request API and the declarativeNetRequest API. Understanding the differences between these APIs and when to use each is crucial for building modern, compliant extensions.
 
@@ -23,7 +23,7 @@ The Web Request API has been available since early Chrome versions and offers gr
 
 The declarativeNetRequest API emerged as the privacy-focused replacement in Manifest V3. Instead of inspecting individual requests in real-time, extensions define declarative rules that Chrome evaluates internally. This approach prevents extensions from accessing sensitive request data while still enabling powerful request blocking and modification capabilities. For most use cases, declarativeNetRequest should be your default choice in modern extensions.
 
-### When to Use Each API
+When to Use Each API
 
 Choose the Web Request API when you need to perform complex, dynamic analysis of network traffic that cannot be expressed as static rules. This includes scenarios where you need to make blocking decisions based on request bodies, analyze response content in real-time, or implement sophisticated logging that requires access to full request and response details.
 
@@ -31,11 +31,11 @@ Choose declarativeNetRequest when you need to block or modify requests based on 
 
 ---
 
-## The DeclarativeNetRequest API: Modern Network Control {#declarative-net-request}
+The DeclarativeNetRequest API: Modern Network Control {#declarative-net-request}
 
 DeclarativeNetRequest provides a rule-based system for blocking and modifying network requests. Extensions define rules in JSON format, and Chrome evaluates these rules internally without exposing request content to extension code. This architecture significantly improves user privacy while maintaining the effectiveness of network filtering.
 
-### Setting Up Your Manifest
+Setting Up Your Manifest
 
 Before implementing declarativeNetRequest functionality, you need proper manifest configuration. Your manifest.json must declare the declarativeNetRequest permission along with any host permissions for the URLs you intend to modify. Here is a complete manifest configuration example:
 
@@ -59,21 +59,21 @@ Before implementing declarativeNetRequest functionality, you need proper manifes
 
 The `declarativeNetRequestWithHostAccess` permission allows your extension to modify requests to websites while still maintaining the privacy benefits of the declarative approach. If you only need to block requests without accessing content, you can use the more restricted `declarativeNetRequest` permission alone.
 
-### Understanding Rule Structure
+Understanding Rule Structure
 
 DeclarativeNetRequest rules follow a structured JSON format that defines conditions and actions. Each rule consists of an ID, priority, action, and condition. The condition determines when the rule applies, while the action defines what happens when conditions are met.
 
 The primary rule types include:
 
-**Block rules** prevent requests from being made entirely. When a request matches a block rule, Chrome cancels the request before it is sent, returning a simulated error to the page. This is useful for blocking ads, tracking scripts, or unwanted content.
+Block rules prevent requests from being made entirely. When a request matches a block rule, Chrome cancels the request before it is sent, returning a simulated error to the page. This is useful for blocking ads, tracking scripts, or unwanted content.
 
-**Allow rules** bypass other rules for matching requests. When a request matches an allow rule, Chrome proceeds with the request without evaluating other blocking rules. This enables whitelisting functionality.
+Allow rules bypass other rules for matching requests. When a request matches an allow rule, Chrome proceeds with the request without evaluating other blocking rules. This enables whitelisting functionality.
 
-**Modify rules** can add, remove, or modify request and response headers. This capability is essential for implementing features like cookie management, CORS modifications, or custom header injection.
+Modify rules can add, remove, or modify request and response headers. This capability is essential for implementing features like cookie management, CORS modifications, or custom header injection.
 
-**Redirect rules** send requests to different URLs. This powerful feature enables URL rewriting, domain forwarding, and sophisticated traffic routing.
+Redirect rules send requests to different URLs. This powerful feature enables URL rewriting, domain forwarding, and sophisticated traffic routing.
 
-### Creating Your First Rules
+Creating Your First Rules
 
 Let us build a practical example that demonstrates blocking ads, allowing specific domains, and modifying headers. First, create a rules.json file in your extension directory:
 
@@ -131,7 +131,7 @@ Let us build a practical example that demonstrates blocking ads, allowing specif
 
 These rules demonstrate the four primary action types. The first two rules block common advertising domains, the third allows a trusted site to bypass blocking rules, and the fourth adds a custom header to API requests.
 
-### Loading Rules in Your Extension
+Loading Rules in Your Extension
 
 To use these rules in your extension, you need to load them programmatically using the chrome.declarativeNetRequest API. Create a background service worker to manage rule loading:
 
@@ -192,17 +192,17 @@ The updateDynamicRules method allows you to add and remove rules at runtime. Thi
 
 ---
 
-## The Web Request API: Legacy but Powerful {#web-request-api}
+The Web Request API: Legacy but Powerful {#web-request-api}
 
 While declarativeNetRequest is the recommended approach for most use cases, the Web Request API remains relevant for specific scenarios requiring dynamic, fine-grained request analysis. Understanding this API helps when maintaining legacy extensions or when you genuinely need capabilities that declarativeNetRequest cannot provide.
 
-### Manifest V3 Restrictions
+Manifest V3 Restrictions
 
 In Manifest V3, the Web Request API can only be used with the "blocking" option in the background service worker context. This means you cannot actively block or modify requests synchronously in the same way you could in Manifest V2. Instead, you must use the async pattern with Promises or callbacks.
 
 Additionally, Web Request usage now requires host permissions that exactly match the URLs you intend to intercept. The `<all_urls>` wildcard is generally not approved for Web Request usage in the Chrome Web Store unless you can demonstrate a compelling need.
 
-### Implementing Web Request Listeners
+Implementing Web Request Listeners
 
 When you genuinely need Web Request functionality, here is how to implement it properly in Manifest V3:
 
@@ -227,17 +227,17 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 Note that the blocking option requires the webRequestBlocking permission in your manifest, and your extension will face additional review scrutiny for Chrome Web Store approval.
 
-### Use Cases Requiring Web Request
+Use Cases Requiring Web Request
 
 The Web Request API remains necessary for scenarios including request body inspection and modification, response body analysis, dynamic authentication token handling, and complex multi-step request transformation logic. For all other scenarios, declarativeNetRequest provides a cleaner, more privacy-preserving solution.
 
 ---
 
-## Advanced DeclarativeNetRequest Techniques {#advanced-techniques}
+Advanced DeclarativeNetRequest Techniques {#advanced-techniques}
 
 Mastering declarativeNetRequest requires understanding advanced features like rule priorities, resource type filtering, regex patterns, and rule set management.
 
-### Rule Priorities and Conflict Resolution
+Rule Priorities and Conflict Resolution
 
 When multiple rules match a request, Chrome uses priority values to determine which action applies. Higher priority rules take precedence over lower priority ones. You can set priorities explicitly using the priority field in your rule definition:
 
@@ -255,11 +255,11 @@ When multiple rules match a request, Chrome uses priority values to determine wh
 
 This system allows you to implement sophisticated rule layering, where general blocking rules can be overridden by specific allow rules with higher priorities.
 
-### Resource Type Filtering
+Resource Type Filtering
 
 The resourceTypes array in rule conditions determines which types of network requests a rule applies to. Chrome supports numerous resource types including main_frame, sub_frame, script, image, stylesheet, object, xmlhttprequest, ping, csp_report, media, websocket, and other. Proper resource type filtering ensures your rules apply only to relevant request types, improving both effectiveness and performance.
 
-### Regular Expression Matching
+Regular Expression Matching
 
 For complex URL patterns that cannot be expressed with simple wildcard matching, you can use regex filters:
 
@@ -277,7 +277,7 @@ For complex URL patterns that cannot be expressed with simple wildcard matching,
 
 Regex patterns provide flexibility but come with performance considerations. Chrome must evaluate regex patterns for every request, so prefer simple URL filters when possible.
 
-### Static Rule Sets vs Dynamic Rules
+Static Rule Sets vs Dynamic Rules
 
 DeclarativeNetRequest supports two types of rule sets: static rules defined in your extension package and dynamic rules added at runtime. Static rules are defined in the manifest and cannot be changed without updating the extension. Dynamic rules can be added, removed, or modified by your extension at any time.
 
@@ -285,26 +285,26 @@ Static rules are ideal for default filtering rules that ship with your extension
 
 ---
 
-## Building a Complete Network Control Extension {#complete-example}
+Building a Complete Network Control Extension {#complete-example}
 
 Let us build a practical extension that demonstrates comprehensive network control using declarativeNetRequest. This extension will block ads, allow user-specified domains, modify headers for debugging, and provide a simple UI for managing rules.
 
-### Project Structure
+Project Structure
 
 Create the following file structure:
 
 ```
 network-controller/
-├── manifest.json
-├── background.js
-├── popup.html
-├── popup.js
-├── popup.css
-└── rules/
-    └── default-rules.json
+ manifest.json
+ background.js
+ popup.html
+ popup.js
+ popup.css
+ rules/
+     default-rules.json
 ```
 
-### Complete Manifest Configuration
+Complete Manifest Configuration
 
 ```json
 {
@@ -339,7 +339,7 @@ network-controller/
 }
 ```
 
-### Background Service Worker Implementation
+Background Service Worker Implementation
 
 ```javascript
 // background.js
@@ -433,7 +433,7 @@ async function addAllowDomain(domain) {
 }
 ```
 
-### Popup Interface
+Popup Interface
 
 ```html
 <!-- popup.html -->
@@ -480,7 +480,7 @@ async function addAllowDomain(domain) {
 </html>
 ```
 
-### Popup JavaScript
+Popup JavaScript
 
 ```javascript
 // popup.js
@@ -534,7 +534,7 @@ const DEFAULT_BLOCK_RULES = [
 ];
 ```
 
-### Popup Styles
+Popup Styles
 
 ```css
 /* popup.css */
@@ -683,39 +683,39 @@ input:checked + .slider::before {
 
 ---
 
-## Best Practices and Performance Optimization {#best-practices}
+Best Practices and Performance Optimization {#best-practices}
 
 Building effective network control extensions requires attention to performance, privacy, and user experience. Follow these guidelines to create extensions that are both powerful and responsible.
 
-### Rule Optimization
+Rule Optimization
 
 Keep your rule set as small and specific as possible. Each rule Chrome evaluates adds overhead to request processing. Use resource type filtering to ensure rules only apply to relevant request types. Prefer URL filter patterns over regular expressions when possible, as regex matching is significantly slower.
 
-### Privacy Considerations
+Privacy Considerations
 
 Always use declarativeNetRequest unless you have a compelling reason requiring Web Request. Never collect or transmit request data without explicit user consent. Be transparent about what your extension does and provide clear privacy policies.
 
-### User Experience
+User Experience
 
 Provide visual feedback when requests are blocked or modified. Allow users to easily whitelist domains. Implement toggle controls so users can enable or disable functionality without uninstalling your extension.
 
-### Testing and Debugging
+Testing and Debugging
 
 Chrome provides the chrome.declarativeNetRequest.onRuleMatchedDebug event for testing rule matching. Use this during development to verify your rules work as expected. The Chrome extension debugging console also provides valuable information about rule evaluation.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The Chrome Web Request API and declarativeNetRequest provide powerful capabilities for intercepting and controlling network requests in Chrome extensions. By understanding when to use each API, implementing proper rule structures, and following best practices for privacy and performance, you can build sophisticated network control extensions that enhance user browsing experiences while maintaining compliance with Chrome Web Store policies and user privacy expectations.
 
 For most modern extension projects, declarativeNetRequest should be your primary tool. Its privacy-preserving design, performance advantages, and simpler review process make it the clear choice for ad blocking, content filtering, and general network request manipulation. Reserve Web Request for scenarios that genuinely require dynamic request analysis that cannot be expressed through declarative rules.
 
-With the techniques and examples in this guide, you have everything needed to start building powerful network control extensions that leverage the full potential of Chrome's extension platform.
+With the techniques and examples in this guide, you have everything needed to start building powerful network control extensions that use the full potential of Chrome's extension platform.
 
 ---
 
-## Related Articles
+Related Articles
 
 - [Declarative Net Request API Complete Tutorial](/2025/01/18/declarative-net-request-api-complete-tutorial/) - Learn more about the declarativeNetRequest API with hands-on examples
 - [Chrome Extension Cross-Origin Requests Guide](/2025/01/18/chrome-extension-cross-origin-requests-guide/) - Understanding CORS and cross-origin communication in extensions

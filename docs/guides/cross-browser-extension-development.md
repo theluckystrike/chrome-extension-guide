@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Cross-Browser Extension Development — Complete Guide"
+title: "Cross-Browser Extension Development. Complete Guide"
 description: "A comprehensive guide to building browser extensions across Chrome, Firefox, Safari, and Edge using WebExtensions APIs with practical code examples and compatibility patterns."
 canonical_url: "https://bestchromeextensions.com/guides/cross-browser-extension-development/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/guides/cross-browser-extension-
 
 Building extensions that work across multiple browsers maximizes your reach and ensures a consistent experience for all users. This guide covers the WebExtensions standard, browser-specific considerations, compatibility patterns, and distribution strategies for Chrome, Firefox, Safari, and Edge. Whether you're starting fresh or porting an existing extension, these patterns will help you achieve true cross-browser compatibility.
 
-## Table of Contents
+Table of Contents
 
 - [Understanding the WebExtensions Standard](#understanding-the-webextensions-standard)
 - [Browser Compatibility Matrix](#browser-compatibility-matrix)
@@ -22,23 +22,23 @@ Building extensions that work across multiple browsers maximizes your reach and 
 
 ---
 
-## Understanding the WebExtensions Standard
+Understanding the WebExtensions Standard
 
 The WebExtensions API provides a unified system for developing browser extensions that works across Chrome, Firefox, Edge, and Safari. Originally created by Mozilla for Firefox and subsequently adopted by Google (Chrome), Microsoft (Edge), and Apple (Safari), this standardized approach dramatically reduces the effort required to support multiple browsers.
 
 At its core, WebExtensions defines a common set of APIs for core extension functionality:
 
-- **Manifest file** (manifest.json) - Declares extension capabilities
-- **Background scripts** - Handle events and long-running tasks
-- **Content scripts** - Interact with web pages
-- **Popup/Options pages** - User interfaces
-- **Browser action** - Toolbar buttons and badges
+- Manifest file (manifest.json) - Declares extension capabilities
+- Background scripts - Handle events and long-running tasks
+- Content scripts - Interact with web pages
+- Popup/Options pages - User interfaces
+- Browser action - Toolbar buttons and badges
 
-The key insight is that while the APIs are standardized, implementations vary in subtle but important ways. Understanding these differences is crucial for building robust cross-browser extensions.
+The key insight is that while the APIs are standardized, implementations vary in subtle but important ways. Understanding these differences is crucial for building solid cross-browser extensions.
 
 ---
 
-## Browser Compatibility Matrix
+Browser Compatibility Matrix
 
 Before diving into implementation, understanding browser support for key APIs helps you plan feature availability:
 
@@ -58,11 +58,11 @@ This table represents general availability. Always check the official Mozilla De
 
 ---
 
-## Manifest Configuration for Multiple Browsers
+Manifest Configuration for Multiple Browsers
 
 The manifest.json file is the entry point for cross-browser compatibility. Different browsers require different fields and configurations.
 
-### Basic Manifest Structure
+Basic Manifest Structure
 
 ```json
 {
@@ -104,7 +104,7 @@ The manifest.json file is the entry point for cross-browser compatibility. Diffe
 }
 ```
 
-### Browser-Specific Settings
+Browser-Specific Settings
 
 Firefox requires the `browser_specific_settings` field for extension identity, while Safari needs similar configuration for its App Store requirements:
 
@@ -137,17 +137,17 @@ The `gecko.id` is required for Firefox and must be a valid email format or UUID.
 
 ---
 
-## API Polyfills and Feature Detection
+API Polyfills and Feature Detection
 
 The `webextension-polyfill` library provides Promise-based wrappers that normalize API differences across browsers:
 
-### Installation
+Installation
 
 ```bash
 npm install webextension-polyfill
 ```
 
-### Basic Usage
+Basic Usage
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -177,7 +177,7 @@ async function notifyBackground(action: string, data: unknown): Promise<void> {
 }
 ```
 
-### Feature Detection Pattern
+Feature Detection Pattern
 
 Instead of assuming API availability, implement feature detection:
 
@@ -224,11 +224,11 @@ This pattern allows your extension to gracefully degrade or adapt based on avail
 
 ---
 
-## Handling Browser-Specific Differences
+Handling Browser-Specific Differences
 
 Even with the WebExtensions standard, browsers implement APIs differently. Here are common differences and how to handle them.
 
-### Tab API Differences
+Tab API Differences
 
 Safari's Tabs API has limitations compared to Chrome and Firefox:
 
@@ -259,7 +259,7 @@ async function getTabInfo(tabId: number): Promise<TabInfo> {
 }
 ```
 
-### Storage API Quotas
+Storage API Quotas
 
 Storage limits vary by browser:
 
@@ -298,7 +298,7 @@ async function saveToSync(key: string, data: unknown): Promise<boolean> {
 }
 ```
 
-### Service Worker Lifecycle
+Service Worker Lifecycle
 
 Firefox and Safari handle service worker lifecycle differently:
 
@@ -344,11 +344,11 @@ browser.runtime.onStartup.addListener(() => {
 
 ---
 
-## Testing Across Browsers
+Testing Across Browsers
 
 Comprehensive testing is essential for cross-browser compatibility.
 
-### Local Testing Setup
+Local Testing Setup
 
 Create browser-specific test configurations:
 
@@ -374,7 +374,7 @@ export function getBrowserVersion(): string {
 }
 ```
 
-### Automated Testing with Playwright
+Automated Testing with Playwright
 
 ```typescript
 // test/cross-browser.test.ts
@@ -403,14 +403,14 @@ for (const browserConfig of browsers) {
 }
 ```
 
-### Manual Testing Checklist
+Manual Testing Checklist
 
 Create a systematic testing approach:
 
 ```markdown
-## Cross-Browser Testing Checklist
+Cross-Browser Testing Checklist
 
-### Chrome
+Chrome
 - [ ] Extension loads in browser action
 - [ ] Popup opens and functions
 - [ ] Content script injects correctly
@@ -418,18 +418,18 @@ Create a systematic testing approach:
 - [ ] Storage operations work
 - [ ] Context menus function
 
-### Firefox
+Firefox
 - [ ] Extension loads from about:addons
 - [ ] All Chrome features work identically
 - [ ] No console errors
 - [ ] Storage sync functions
 
-### Edge
+Edge
 - [ ] Extension loads from Edge Add-ons
 - [ ] All Chrome features work identically
 - [ ] IE/Edge compatibility mode (if applicable)
 
-### Safari
+Safari
 - [ ] Extension appears in Safari menu
 - [ ] Popup opens
 - [ ] Content script injection
@@ -439,11 +439,11 @@ Create a systematic testing approach:
 
 ---
 
-## Distribution and Publishing Strategies
+Distribution and Publishing Strategies
 
 Each browser has its own extension store with different requirements and review processes.
 
-### Store Comparison
+Store Comparison
 
 | Store | Review Time | Dev Account | Fee |
 |-------|-------------|-------------|-----|
@@ -452,36 +452,36 @@ Each browser has its own extension store with different requirements and review 
 | Microsoft Edge | 1-3 days | Microsoft Account | Free |
 | Safari App Store | 1-2 weeks | Apple Developer | $99/year |
 
-### Publishing with web-ext
+Publishing with web-ext
 
 The `web-ext` tool simplifies Firefox distribution:
 
 ```bash
-# Install web-ext
+Install web-ext
 npm install -g web-ext
 
-# Sign and publish to Firefox
+Sign and publish to Firefox
 web-ext sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
 
-# Build for development
+Build for development
 web-ext build --ignore-files="*.map"
 ```
 
-### Using Extension Build Tools
+Using Extension Build Tools
 
 Modern build tools like WXT and Plasmo provide built-in cross-browser support:
 
 ```bash
-# Create extension with WXT
+Create extension with WXT
 npm create wxt@latest my-extension
 
-# WXT handles browser-specific builds automatically
+WXT handles browser-specific builds automatically
 npx wxt build --browser=firefox
 npx wxt build --browser=chromium
 npx wxt build --browser=safari
 ```
 
-### Version Management
+Version Management
 
 Maintain a clear versioning strategy:
 
@@ -496,25 +496,25 @@ The version must follow semver (major.minor.patch). Use `version_name` for a hum
 
 ---
 
-## Common Pitfalls and Solutions
+Common Pitfalls and Solutions
 
-### Pitfall 1: Assuming All APIs Are Available
+Pitfall 1: Assuming All APIs Are Available
 
 ```typescript
-// ❌ Bad: Assumes native messaging is available
+//  Bad: Assumes native messaging is available
 const hasNativeMessaging = browser.runtime.sendNativeMessage;
 
-// ✅ Good: Feature detection
+//  Good: Feature detection
 const hasNativeMessaging = typeof browser.runtime?.sendNativeMessage === 'function';
 ```
 
-### Pitfall 2: Ignoring Storage Limits
+Pitfall 2: Ignoring Storage Limits
 
 ```typescript
-// ❌ Bad: No size checking before saving
+//  Bad: No size checking before saving
 await browser.storage.local.set({ largeData: bigObject });
 
-// ✅ Good: Check size and warn user
+//  Good: Check size and warn user
 async function safeSet(key: string, value: unknown): Promise<void> {
   const serialized = JSON.stringify(value);
   if (serialized.length > 5 * 1024 * 1024) {
@@ -524,16 +524,16 @@ async function safeSet(key: string, value: unknown): Promise<void> {
 }
 ```
 
-### Pitfall 3: Chrome-Only Manifest Fields
+Pitfall 3: Chrome-Only Manifest Fields
 
 ```typescript
-// ❌ Bad: Chrome-specific field in base manifest
+//  Bad: Chrome-specific field in base manifest
 {
   "action": { ... },
   "options_page": "options.html" // Deprecated in MV3
 }
 
-// ✅ Good: Use browser-specific overrides or feature detection
+//  Good: Use browser-specific overrides or feature detection
 {
   "action": { ... },
   "options_ui": {
@@ -543,12 +543,12 @@ async function safeSet(key: string, value: unknown): Promise<void> {
 }
 ```
 
-### Pitfall 4: Service Worker Not Reloading
+Pitfall 4: Service Worker Not Reloading
 
 Firefox and Safari handle SW lifecycle differently:
 
 ```typescript
-// ✅ Good: Handle all SW lifecycle events
+//  Good: Handle all SW lifecycle events
 browser.runtime.onInstalled.addListener(() => {
   console.log('Extension installed/updated');
 });
@@ -566,14 +566,14 @@ async function forceUpdate(): Promise<void> {
 }
 ```
 
-### Pitfall 5: Content Script Isolation Issues
+Pitfall 5: Content Script Isolation Issues
 
 ```typescript
-// ❌ Bad: Assuming DOM is fully loaded
+//  Bad: Assuming DOM is fully loaded
 const element = document.querySelector('.target');
 element.addEventListener('click', handleClick);
 
-// ✅ Good: Wait for DOM and use mutation observers
+//  Good: Wait for DOM and use mutation observers
 function waitForElement(selector: string): Promise<Element> {
   return new Promise((resolve) => {
     const existing = document.querySelector(selector);
@@ -597,17 +597,17 @@ function waitForElement(selector: string): Promise<Element> {
 
 ---
 
-## Conclusion
+Conclusion
 
-Cross-browser extension development requires careful attention to API differences, feature detection, and testing strategies. By leveraging the WebExtensions standard, using polyfills like `webextension-polyfill`, and implementing robust feature detection, you can create extensions that provide consistent functionality across Chrome, Firefox, Edge, and Safari.
+Cross-browser extension development requires careful attention to API differences, feature detection, and testing strategies. By leveraging the WebExtensions standard, using polyfills like `webextension-polyfill`, and implementing solid feature detection, you can create extensions that provide consistent functionality across Chrome, Firefox, Edge, and Safari.
 
 Key takeaways:
 
-1. **Use the WebExtensions standard** as your foundation
-2. **Implement feature detection** rather than assuming API availability
-3. **Test on all target browsers** before releasing
-4. **Handle storage quotas** appropriately for each browser
-5. **Use build tools** that handle browser-specific configurations
+1. Use the WebExtensions standard as your foundation
+2. Implement feature detection rather than assuming API availability
+3. Test on all target browsers before releasing
+4. Handle storage quotas appropriately for each browser
+5. Use build tools that handle browser-specific configurations
 
 Following these patterns ensures your extension reaches the widest possible audience while maintaining a quality experience across all supported browsers.
 

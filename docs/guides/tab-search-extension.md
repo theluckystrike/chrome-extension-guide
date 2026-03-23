@@ -7,26 +7,26 @@ This guide walks through creating a Tab Search extension that allows users to qu
 A Tab Search extension consists of several interconnected components:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Extension Popup                          │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │ Search Input│  │ Results List│  │ Tab Preview Panel   │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Background Service                       │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │ Tab Indexer │  │ State Mgmt  │  │ Event Handlers      │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Chrome APIs                              │
-│  chrome.tabs  │  chrome.storage  │  chrome.commands        │
-└─────────────────────────────────────────────────────────────┘
+
+                    Extension Popup                          
+        
+   Search Input   Results List   Tab Preview Panel     
+        
+
+                              
+                              
+
+                    Background Service                       
+        
+   Tab Indexer    State Mgmt     Event Handlers        
+        
+
+                              
+                              
+
+                    Chrome APIs                              
+  chrome.tabs    chrome.storage    chrome.commands        
+
 ```
 
 ## Manifest.json Setup
@@ -321,7 +321,7 @@ class PopupController implements UIController {
         <div class="title">${this.highlightMatches(result.tab.title, result.matches)}</div>
         <div class="url">${result.tab.url}</div>
       </div>
-      ${result.tab.pinned ? '<span class="pin-icon">📌</span>' : ''}
+      ${result.tab.pinned ? '<span class="pin-icon"></span>' : ''}
     `;
     
     div.addEventListener('click', () => this.activateTab(result.tab.id));

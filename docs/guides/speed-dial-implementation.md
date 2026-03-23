@@ -369,11 +369,11 @@ test('side panel loads and displays dials', async ({ extensionId }) => {
 
 ## Performance Considerations
 
-1. **Lazy Loading**: Only load visible items in large grids
-2. **Image Caching**: Use chrome.storage to cache favicons/thumbnails
-3. **Debounced Saves**: Debounce storage writes during drag operations
-4. **Virtual Scrolling**: For 50+ items, use virtual scrolling
-5. **Service Worker**: Keep background minimal; offload to offscreen documents for heavy tasks
+1. Lazy Loading: Only load visible items in large grids
+2. Image Caching: Use chrome.storage to cache favicons/thumbnails
+3. Debounced Saves: Debounce storage writes during drag operations
+4. Virtual Scrolling: For 50+ items, use virtual scrolling
+5. Service Worker: Keep background minimal; offload to offscreen documents for heavy tasks
 
 ```typescript
 // Debounced storage save

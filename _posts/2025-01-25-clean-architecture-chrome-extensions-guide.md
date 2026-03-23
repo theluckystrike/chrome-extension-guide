@@ -13,17 +13,17 @@ canonical_url: "https://bestchromeextensions.com/2025/01/25/clean-architecture-c
 
 As Chrome extensions grow in complexity, developers often encounter a common problem: the codebase becomes increasingly difficult to maintain, test, and extend. What starts as a simple popup script evolves into a tangled web of dependencies between content scripts, background service workers, and popup UI. This is where clean architecture for Chrome extensions becomes essential.
 
-Clean architecture, also known as hexagonal architecture or ports and adapters architecture, provides a systematic approach to organizing code that separates concerns, maximizes testability, and keeps your extension maintainable as it scales. In this guide, we will explore how to apply these proven software design principles specifically to Chrome extension development.
+Clean architecture, also known as hexagonal architecture or ports and adapters architecture, provides a systematic approach to organizing code that separates concerns, maximizes testability, and keeps your extension maintainable as it scales. we will explore how to apply these proven software design principles specifically to Chrome extension development.
 
 ---
 
-## Understanding Clean Architecture Fundamentals {#understanding-clean-architecture}
+Understanding Clean Architecture Fundamentals {#understanding-clean-architecture}
 
-Clean architecture is not a specific framework or library—it is a set of guidelines for structuring your code to achieve separation of concerns. The core principle is that business logic should be independent of external concerns like user interfaces, databases, and frameworks.
+Clean architecture is not a specific framework or library, it is a set of guidelines for structuring your code to achieve separation of concerns. The core principle is that business logic should be independent of external concerns like user interfaces, databases, and frameworks.
 
 At its heart, clean architecture defines several concentric layers, each with specific responsibilities:
 
-### The Domain Layer (Core Business Logic)
+The Domain Layer (Core Business Logic)
 
 The innermost layer contains your business rules and entities. This layer has no dependencies on external frameworks or technologies. In a Chrome extension context, this might include:
 
@@ -31,11 +31,11 @@ The innermost layer contains your business rules and entities. This layer has no
 - Business rules for processing information
 - Domain services that encapsulate core functionality
 
-### The Application Layer (Use Cases)
+The Application Layer (Use Cases)
 
 This layer contains application-specific business rules. It orchestrates the flow of data between the domain layer and external entities. Use cases here represent specific actions your extension can perform, such as "SaveBookmark," "AnalyzePage," or "SyncData."
 
-### The Infrastructure Layer (External Interfaces)
+The Infrastructure Layer (External Interfaces)
 
 This layer implements interfaces defined in the application layer. It contains code that interacts with external systems:
 
@@ -44,69 +44,69 @@ This layer implements interfaces defined in the application layer. It contains c
 - Database implementations
 - UI frameworks
 
-### The Presentation Layer (UI)
+The Presentation Layer (UI)
 
-The outermost layer handles everything related to the user interface—popup pages, options pages, content script UIs, and DevTools panels.
+The outermost layer handles everything related to the user interface, popup pages, options pages, content script UIs, and DevTools panels.
 
 The key insight of clean architecture is that dependencies should only point inward. Inner layers know nothing about outer layers, making it possible to change implementations in outer layers without affecting your core business logic.
 
 ---
 
-## Why Chrome Extensions Need Clean Architecture {#why-extensions-need-clean-architecture}
+Why Chrome Extensions Need Clean Architecture {#why-extensions-need-clean-architecture}
 
 Chrome extensions present unique architectural challenges that make clean architecture particularly valuable:
 
-### Multiple Entry Points
+Multiple Entry Points
 
 Unlike traditional web applications with a single entry point, Chrome extensions have multiple contexts: popup scripts, background service workers, content scripts, options pages, and DevTools panels. Each runs in its own JavaScript environment, creating complexity in sharing code and state.
 
-### Manifest V3 Constraints
+Manifest V3 Constraints
 
 The transition to Manifest V3 introduced significant architectural changes. Service workers replaced background pages, declarative Net Request replaced webRequest, and there are stricter limitations on executing code in content scripts. These constraints make flexible architecture even more important.
 
-### Lifecycle Management
+Lifecycle Management
 
 Extensions must handle various lifecycle events: installation, updates, enable/disable, and browser restarts. Service workers have their own lifecycle with termination and wake-up. Clean architecture helps isolate this complexity.
 
-### Testing Challenges
+Testing Challenges
 
 Testing Chrome extensions is inherently complex due to the browser environment. Clean architecture's emphasis on separating business logic from Chrome APIs makes it significantly easier to write unit tests that don't require a full browser environment.
 
 ---
 
-## Implementing Clean Architecture in Chrome Extensions {#implementing-clean-architecture}
+Implementing Clean Architecture in Chrome Extensions {#implementing-clean-architecture}
 
 Now let's explore practical implementation strategies for applying clean architecture to your Chrome extension projects.
 
-### Project Structure
+Project Structure
 
 A well-organized project structure is the foundation of clean architecture. Here's a recommended layout:
 
 ```
 my-extension/
-├── src/
-│   ├── domain/                 # Core business logic
-│   │   ├── entities/          # Data models
-│   │   ├── services/         # Domain services
-│   │   └── interfaces/       # Port definitions
-│   ├── application/          # Use cases
-│   │   └── usecases/         # Application use cases
-│   ├── infrastructure/       # External adapters
-│   │   ├── chrome/           # Chrome API adapters
-│   │   ├── storage/          # Storage implementations
-│   │   └── api/              # External API clients
-│   └── presentation/         # UI components
-│       ├── popup/           # Popup script
-│       ├── background/      # Service worker
-│       ├── content/         # Content scripts
-│       └── options/         # Options page
-├── tests/
-│   ├── unit/                # Unit tests
-│   └── integration/         # Integration tests
-└── manifest.json
+ src/
+    domain/                 # Core business logic
+       entities/          # Data models
+       services/         # Domain services
+       interfaces/       # Port definitions
+    application/          # Use cases
+       usecases/         # Application use cases
+    infrastructure/       # External adapters
+       chrome/           # Chrome API adapters
+       storage/          # Storage implementations
+       api/              # External API clients
+    presentation/         # UI components
+        popup/           # Popup script
+        background/      # Service worker
+        content/         # Content scripts
+        options/         # Options page
+ tests/
+    unit/                # Unit tests
+    integration/         # Integration tests
+ manifest.json
 ```
 
-### Defining Domain Entities
+Defining Domain Entities
 
 Start by defining your core domain entities independent of any framework:
 
@@ -133,7 +133,7 @@ export class Bookmark {
 }
 ```
 
-### Creating Port Interfaces
+Creating Port Interfaces
 
 Define interfaces (ports) that your application layer will use. These ports abstract away the implementation details:
 
@@ -162,7 +162,7 @@ export class BookmarkRepositoryPort {
 }
 ```
 
-### Implementing Infrastructure Adapters
+Implementing Infrastructure Adapters
 
 Now implement the actual Chrome-specific adapters that conform to your port interfaces:
 
@@ -218,7 +218,7 @@ export class ChromeBookmarkRepository extends BookmarkRepositoryPort {
 }
 ```
 
-### Building Application Use Cases
+Building Application Use Cases
 
 Create use cases that orchestrate your domain logic:
 
@@ -269,7 +269,7 @@ export class CreateBookmarkUseCase {
 }
 ```
 
-### Dependency Injection in the Presentation Layer
+Dependency Injection in the Presentation Layer
 
 Finally, wire everything together in your presentation layer using dependency injection:
 
@@ -307,11 +307,11 @@ async function refreshBookmarksList() {
 
 ---
 
-## Communication Between Extension Parts {#extension-communication}
+Communication Between Extension Parts {#extension-communication}
 
 One of the most challenging aspects of Chrome extension development is managing communication between different contexts. Clean architecture provides guidance here as well.
 
-### Message Broadcasting
+Message Broadcasting
 
 Implement a message bus pattern for decoupled communication:
 
@@ -357,7 +357,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### State Synchronization
+State Synchronization
 
 For extensions that need to share state between contexts, implement a proper synchronization mechanism:
 
@@ -405,7 +405,7 @@ export class StateManager {
 
 ---
 
-## Testing Clean Architecture Code {#testing-clean-architecture}
+Testing Clean Architecture Code {#testing-clean-architecture}
 
 One of the greatest benefits of clean architecture is testability. Because your domain logic has no dependencies on Chrome APIs, you can test it in isolation:
 
@@ -464,41 +464,41 @@ describe('CreateBookmarkUseCase', () => {
 });
 ```
 
-This test runs without any Chrome APIs, making it fast and reliable. You can run these tests in any JavaScript environment—Node.js, Jest, or Vitest.
+This test runs without any Chrome APIs, making it fast and reliable. You can run these tests in any JavaScript environment, Node.js, Jest, or Vitest.
 
 ---
 
-## Best Practices and Common Pitfalls {#best-practices}
+Best Practices and Common Pitfalls {#best-practices}
 
 As you implement clean architecture in your Chrome extension projects, keep these best practices in mind:
 
-### Do: Start Simple
+Do: Start Simple
 
 Don't over-engineer from the start. Begin with a simple structure and introduce more layers as complexity grows. A small extension doesn't need the full clean architecture treatment.
 
-### Do: Use Dependency Injection
+Do: Use Dependency Injection
 
 Inject your dependencies rather than creating them inside your use cases. This makes testing easier and allows you to swap implementations.
 
-### Don't: Mix Business Logic with Chrome APIs
+Don't: Mix Business Logic with Chrome APIs
 
 Keep your domain logic pure. If you find yourself calling `chrome.storage` or `chrome.tabs` inside your use cases, that's a sign something needs to be refactored.
 
-### Do: Define Clear Boundaries
+Do: Define Clear Boundaries
 
 Be intentional about what lives in each layer. Document the responsibilities of each module and enforce boundaries through code reviews.
 
-### Don't: Create God Objects
+Don't: Create God Objects
 
-Avoid creating massive service objects that do everything. Follow the single responsibility principle—each class or function should do one thing well.
+Avoid creating massive service objects that do everything. Follow the single responsibility principle, each class or function should do one thing well.
 
-### Do: Use TypeScript
+Do: Use TypeScript
 
 TypeScript's type system helps enforce architectural boundaries. Define interfaces for your ports and use type annotations throughout your code.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Clean architecture provides a proven framework for building maintainable, testable Chrome extensions. By separating your business logic from infrastructure concerns, you create code that is easier to understand, test, and extend.
 
@@ -506,4 +506,4 @@ The initial investment in setting up clean architecture pays dividends as your e
 
 Start with the basics: define your domain entities, create clear interfaces, and implement adapters for Chrome APIs. As your extension evolves, these architectural patterns will help you maintain control over complexity and build extensions that stand the test of time.
 
-Remember, the goal is not to follow architecture patterns blindly, but to create code that serves your users effectively. Clean architecture is a tool to achieve that goal—one that has proven its value in countless production applications across the software industry.
+Remember, the goal is not to follow architecture patterns blindly, but to create code that serves your users effectively. Clean architecture is a tool to achieve that goal, one that has proven its value in countless production applications across the software industry.

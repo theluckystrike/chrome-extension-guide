@@ -1,49 +1,49 @@
 ---
 layout: default
-title: "Chrome Extension with React or Preact — How to Build Modern Extension UIs"
+title: "Chrome Extension with React or Preact. How to Build Modern Extension UIs"
 description: "A comprehensive guide to building Chrome extensions with React and Preact, covering popup development, options pages, content script injection, state management, and bundle optimization."
 canonical_url: "https://bestchromeextensions.com/guides/react-preact-extension/"
 ---
 
-# Chrome Extension with React or Preact — How to Build Modern Extension UIs
+# Chrome Extension with React or Preact. How to Build Modern Extension UIs
 
 Building Chrome extensions with modern UI frameworks like React and Preact has become the standard approach for creating sophisticated, maintainable extension interfaces. While traditional extensions relied on vanilla JavaScript and direct DOM manipulation, leveraging React or Preact provides component-based architecture, declarative UI patterns, and a rich ecosystem of libraries that dramatically improve developer productivity and user experience.
 
 This guide walks you through building Chrome extension UIs with React and Preact, covering popup development, options pages, content script injection, state management patterns, and bundle size optimization strategies that keep your extension fast and efficient.
 
-## Why Use React or Preact for Extensions {#why-react-preact}
+Why Use React or Preact for Extensions {#why-react-preact}
 
-React and Preact each offer distinct advantages for extension development. React provides the largest ecosystem, extensive documentation, and seamless integration with popular tooling. Its component model maps naturally to extension UIs, where you often have distinct interfaces for popup, options, and side panel contexts. The virtual DOM ensures efficient updates, which is particularly valuable in extension contexts where resources are more constrained than in regular web applications.
+React and Preact each offer distinct advantages for extension development. React provides the largest ecosystem, extensive documentation, and smooth integration with popular tooling. Its component model maps naturally to extension UIs, where you often have distinct interfaces for popup, options, and side panel contexts. The virtual DOM ensures efficient updates, which is particularly valuable in extension contexts where resources are more constrained than in regular web applications.
 
-Preact presents a compelling alternative when bundle size is critical. At just 3KB, Preact offers React-compatible APIs with a fraction of the overhead. For extensions where every kilobyte matters—particularly for content script injection across numerous pages—Preact's minimal footprint can mean the difference between a snappy user experience and one that feels sluggish. Preact's compatibility layer allows you to use most React packages with minimal configuration.
+Preact presents a compelling alternative when bundle size is critical. At just 3KB, Preact offers React-compatible APIs with a fraction of the overhead. For extensions where every kilobyte matters, particularly for content script injection across numerous pages, Preact's minimal footprint can mean the difference between a snappy user experience and one that feels sluggish. Preact's compatibility layer allows you to use most React packages with minimal configuration.
 
 Both frameworks benefit from strong TypeScript support, enabling type-safe extension development that catches errors before runtime. The choice between them often comes down to your specific requirements: choose React for maximum ecosystem access and team familiarity, choose Preact when minimizing bundle size is paramount.
 
-## Setting Up Your Project {#setting-up-project}
+Setting Up Your Project {#setting-up-project}
 
 Begin with a project structure that separates different extension contexts while enabling code sharing:
 
 ```
 src/
-├── popup/
-│   ├── popup.tsx          # Popup entry point
-│   ├── PopupApp.tsx       # Main popup component
-│   └── components/       # Popup-specific components
-├── options/
-│   ├── options.tsx        # Options page entry
-│   ├── OptionsApp.tsx    # Main options component
-│   └── components/       # Options-specific components
-├── content/
-│   ├── content.tsx       # Content script entry
-│   ├── ContentApp.tsx    # Injected UI component
-│   └── components/       # Shared content components
-├── shared/                # Components and utilities shared across contexts
-│   ├── components/        # Reusable UI components
-│   ├── hooks/            # Custom hooks
-│   ├── store/            # State management
-│   └── utils/            # Utility functions
-└── background/
-    └── service-worker.ts  # Background service worker
+ popup/
+    popup.tsx          # Popup entry point
+    PopupApp.tsx       # Main popup component
+    components/       # Popup-specific components
+ options/
+    options.tsx        # Options page entry
+    OptionsApp.tsx    # Main options component
+    components/       # Options-specific components
+ content/
+    content.tsx       # Content script entry
+    ContentApp.tsx    # Injected UI component
+    components/       # Shared content components
+ shared/                # Components and utilities shared across contexts
+    components/        # Reusable UI components
+    hooks/            # Custom hooks
+    store/            # State management
+    utils/            # Utility functions
+ background/
+     service-worker.ts  # Background service worker
 ```
 
 Configure your build tool to handle multiple entry points. Using Vite with the CRXJS plugin, your configuration would specify each HTML entry:
@@ -68,7 +68,7 @@ export default defineConfig({
 });
 ```
 
-## Building the Popup with React {#building-popup}
+Building the Popup with React {#building-popup}
 
 The extension popup is often the primary interaction point for users, making its design and performance critical. React's component model excels here, allowing you to build complex, interactive interfaces that remain maintainable.
 
@@ -141,7 +141,7 @@ export function PopupApp() {
 }
 ```
 
-## Creating the Options Page {#options-page}
+Creating the Options Page {#options-page}
 
 The options page serves as your extension's settings hub, typically requiring more screen real estate and more complex configuration interfaces than the popup. React's form handling capabilities shine here, especially when combined with state management libraries.
 
@@ -203,7 +203,7 @@ export function GeneralSettings() {
 }
 ```
 
-## Content Script UI Injection {#content-script-injection}
+Content Script UI Injection {#content-script-injection}
 
 Injecting React components into web pages requires careful consideration of style isolation and DOM interaction. The Shadow DOM provides essential encapsulation, preventing your extension's styles from bleeding into the host page and vice versa.
 
@@ -286,7 +286,7 @@ const observer = new MutationObserver(() => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-## State Management Patterns {#state-management}
+State Management Patterns {#state-management}
 
 Managing state across extension contexts requires understanding Chrome's storage APIs and message passing system. Several patterns work well depending on your complexity needs.
 
@@ -371,7 +371,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Bundle Size Optimization {#bundle-optimization}
+Bundle Size Optimization {#bundle-optimization}
 
 Extension bundle size directly impacts load times and user perception of performance. Chrome extensions have a 128KB limit for each JavaScript file in MV3, making optimization essential for larger applications.
 
@@ -440,19 +440,19 @@ npx source-map-explorer dist/*.js
 
 Remove unused dependencies and consider lighter alternatives. For example, replace moment.js with date-fns or dayjs, or use native browser APIs where possible.
 
-## Related Guides {#related-guides}
+Related Guides {#related-guides}
 
-- [Chrome Extension React Setup](./chrome-extension-react-setup.md) — Detailed React setup for extensions
-- [Building with React](../patterns/building-with-react.md) — React patterns specific to extensions
-- [Content Script React](../patterns/content-script-react.md) — React in content script contexts
-- [Vite Extension Setup](./vite-extension-setup.md) — Build tool configuration
-- [Bundle Optimization](../patterns/bundle-optimization.md) — Advanced optimization techniques
+- [Chrome Extension React Setup](./chrome-extension-react-setup.md). Detailed React setup for extensions
+- [Building with React](../patterns/building-with-react.md). React patterns specific to extensions
+- [Content Script React](../patterns/content-script-react.md). React in content script contexts
+- [Vite Extension Setup](./vite-extension-setup.md). Build tool configuration
+- [Bundle Optimization](../patterns/bundle-optimization.md). Advanced optimization techniques
 
-## Related Articles
+Related Articles
 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

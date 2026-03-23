@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Web Workers Extensions — Best Practices"
+title: "Chrome Extension Web Workers Extensions. Best Practices"
 description: "Use Web Workers for background processing in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/web-workers-extensions/"
 ---
 
 # Web Workers in Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 Web Workers run scripts on background threads, keeping the main thread responsive. In MV3 extensions, Workers cannot be created directly from service workers, but offscreen documents, popup pages, and other extension pages support them fully. This guide covers eight production-ready patterns for using Web Workers effectively.
 
 ---
 
-## Quick Reference {#quick-reference}
+Quick Reference {#quick-reference}
 
 | Pattern | Where | Use Case | Complexity |
 |---|---|---|---|
@@ -28,7 +28,7 @@ Web Workers run scripts on background threads, keeping the main thread responsiv
 
 ---
 
-## Pattern 1: Web Workers in Offscreen Documents {#pattern-1-web-workers-in-offscreen-documents}
+Pattern 1: Web Workers in Offscreen Documents {#pattern-1-web-workers-in-offscreen-documents}
 
 Offscreen documents are the primary host for Web Workers in MV3 since service workers cannot create them. Create the offscreen document, then spawn workers inside it.
 
@@ -88,11 +88,11 @@ function heavyComputation(data: number[]): number {
 }
 ```
 
-Offscreen documents are extension pages, so the worker script does **not** need to be listed in `web_accessible_resources`. It can be loaded directly by path since the offscreen document runs in the extension origin.
+Offscreen documents are extension pages, so the worker script does not need to be listed in `web_accessible_resources`. It can be loaded directly by path since the offscreen document runs in the extension origin.
 
 ---
 
-## Pattern 2: SharedWorker Patterns in Extension Pages {#pattern-2-sharedworker-patterns-in-extension-pages}
+Pattern 2: SharedWorker Patterns in Extension Pages {#pattern-2-sharedworker-patterns-in-extension-pages}
 
 SharedWorkers allow multiple extension pages (popup, options, side panel) to share a single worker instance and its state.
 
@@ -145,7 +145,7 @@ SharedWorkers persist as long as at least one page holds a reference. They termi
 
 ---
 
-## Pattern 3: Worker for CPU-Intensive Tasks {#pattern-3-worker-for-cpu-intensive-tasks}
+Pattern 3: Worker for CPU-Intensive Tasks {#pattern-3-worker-for-cpu-intensive-tasks}
 
 Offload heavy computation to keep the UI responsive. Common use cases: data transformation, image processing, JSON parsing of large payloads.
 
@@ -185,7 +185,7 @@ self.addEventListener("message", async (e: MessageEvent) => {
 
 ---
 
-## Pattern 4: Typed Message Protocol Between Worker and Main Thread {#pattern-4-typed-message-protocol-between-worker-and-main-thread}
+Pattern 4: Typed Message Protocol Between Worker and Main Thread {#pattern-4-typed-message-protocol-between-worker-and-main-thread}
 
 Define a strongly-typed protocol to prevent runtime errors from mismatched messages.
 
@@ -258,7 +258,7 @@ const { rows } = await client.send("parse-csv", { csv: rawText, delimiter: "," }
 
 ---
 
-## Pattern 5: Worker Pool for Parallel Processing {#pattern-5-worker-pool-for-parallel-processing}
+Pattern 5: Worker Pool for Parallel Processing {#pattern-5-worker-pool-for-parallel-processing}
 
 Distribute work across multiple workers for true parallelism on multi-core machines.
 
@@ -333,7 +333,7 @@ const results = await Promise.all(chunks.map((c) => pool.exec(c)));
 
 ---
 
-## Pattern 6: Transferable Objects for Zero-Copy Data Passing {#pattern-6-transferable-objects-for-zero-copy-data-passing}
+Pattern 6: Transferable Objects for Zero-Copy Data Passing {#pattern-6-transferable-objects-for-zero-copy-data-passing}
 
 Transferable objects move ownership of memory instead of copying. Critical for large ArrayBuffers.
 
@@ -365,7 +365,7 @@ Transferable types include `ArrayBuffer`, `MessagePort`, `ImageBitmap`, `Offscre
 
 ---
 
-## Pattern 7: Worker Lifecycle Management {#pattern-7-worker-lifecycle-management}
+Pattern 7: Worker Lifecycle Management {#pattern-7-worker-lifecycle-management}
 
 Create workers on demand and terminate them after an idle period to save memory.
 
@@ -432,7 +432,7 @@ const result = await managed.exec({ task: "analyze", data: input });
 
 ---
 
-## Pattern 8: Comlink for RPC-Style Worker Communication {#pattern-8-comlink-for-rpc-style-worker-communication}
+Pattern 8: Comlink for RPC-Style Worker Communication {#pattern-8-comlink-for-rpc-style-worker-communication}
 
 Comlink (by Google) wraps `postMessage` into a proxy-based RPC interface, eliminating manual message protocol boilerplate.
 
@@ -491,7 +491,7 @@ Comlink adds ~4KB gzipped and eliminates boilerplate for request IDs, message ro
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | # | Pattern | Key Takeaway |
 |---|---|---|
@@ -504,7 +504,7 @@ Comlink adds ~4KB gzipped and eliminates boilerplate for request IDs, message ro
 | 7 | Lifecycle Management | Create on demand, terminate after idle timeout to save memory |
 | 8 | Comlink RPC | Proxy-based API eliminates message protocol boilerplate |
 
-**General guidance:**
+General guidance:
 
 - Always host Workers in offscreen documents, not service workers.
 - Use transferable objects for any data over 1MB.

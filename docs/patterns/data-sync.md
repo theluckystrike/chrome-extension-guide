@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Data Sync — Best Practices"
+title: "Chrome Extension Data Sync. Best Practices"
 description: "Sync extension data across devices with sync storage."
 canonical_url: "https://bestchromeextensions.com/patterns/data-sync/"
 ---
 
 # Data Synchronization Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extensions that store user data face a deceptively hard problem: keeping that data consistent across devices, respecting quota limits, and recovering gracefully when things go wrong. The `chrome.storage.sync` API handles the transport layer, but conflict resolution, delta tracking, and migration are your responsibility. This guide covers eight practical patterns for reliable data synchronization.
 
 ---
 
-## Storage Area Comparison {#storage-area-comparison}
+Storage Area Comparison {#storage-area-comparison}
 
 | Property | `storage.local` | `storage.sync` | `storage.session` |
 |----------|-----------------|----------------|--------------------|
@@ -27,9 +27,9 @@ Chrome extensions that store user data face a deceptively hard problem: keeping 
 
 ---
 
-## Pattern 1: Cross-Device Settings with chrome.storage.sync {#pattern-1-cross-device-settings-with-chromestoragesync}
+Pattern 1: Cross-Device Settings with chrome.storage.sync {#pattern-1-cross-device-settings-with-chromestoragesync}
 
-The simplest sync pattern — store user preferences that follow them across devices:
+The simplest sync pattern. store user preferences that follow them across devices:
 
 ```ts
 // types.ts
@@ -78,19 +78,19 @@ saveButton.addEventListener("click", async () => {
 });
 ```
 
-### Gotcha: Sync Is Eventually Consistent {#gotcha-sync-is-eventually-consistent}
+Gotcha: Sync Is Eventually Consistent {#gotcha-sync-is-eventually-consistent}
 
-Changes written on device A may take seconds to minutes to appear on device B. Never assume immediate consistency — always treat `storage.sync` as an eventually-consistent store.
+Changes written on device A may take seconds to minutes to appear on device B. Never assume immediate consistency. always treat `storage.sync` as an eventually-consistent store.
 
 ---
 
-## Pattern 2: Conflict Resolution Strategies {#pattern-2-conflict-resolution-strategies}
+Pattern 2: Conflict Resolution Strategies {#pattern-2-conflict-resolution-strategies}
 
 When two devices edit the same data before sync completes, you need a strategy.
 
-### Last-Write-Wins (LWW) {#last-write-wins-lww}
+Last-Write-Wins (LWW) {#last-write-wins-lww}
 
-The simplest approach — timestamp every change, keep the newest:
+The simplest approach. timestamp every change, keep the newest:
 
 ```ts
 // conflict-lww.ts
@@ -125,7 +125,7 @@ async function getDeviceId(): Promise<string> {
 }
 ```
 
-### Field-Level Merge {#field-level-merge}
+Field-Level Merge {#field-level-merge}
 
 For complex objects, merge at the field level instead of replacing the whole object:
 
@@ -160,7 +160,7 @@ function mergeFields(
 // Result: both changes are preserved
 ```
 
-### Set Union for Collections {#set-union-for-collections}
+Set Union for Collections {#set-union-for-collections}
 
 For arrays like blocklists, union is often safer than replacement:
 
@@ -193,7 +193,7 @@ function applyOperations(operations: SetOperation[]): Set<string> {
 
 ---
 
-## Pattern 3: Optimistic UI Updates with storage.onChanged {#pattern-3-optimistic-ui-updates-with-storageonchanged}
+Pattern 3: Optimistic UI Updates with storage.onChanged {#pattern-3-optimistic-ui-updates-with-storageonchanged}
 
 Update the UI immediately on local write, then reconcile when the real sync fires:
 
@@ -238,7 +238,7 @@ class SettingsStore {
     this.cache = optimistic;
     this.notifyListeners(optimistic);
 
-    // 2. Persist — if this fails, the onChanged listener will correct the UI
+    // 2. Persist. if this fails, the onChanged listener will correct the UI
     try {
       await chrome.storage.sync.set({ settings: optimistic });
     } catch (error) {
@@ -259,12 +259,12 @@ store.subscribe((settings) => {
 });
 ```
 
-### Handling Cross-Context Updates {#handling-cross-context-updates}
+Handling Cross-Context Updates {#handling-cross-context-updates}
 
 The `storage.onChanged` event fires in every extension context (popup, options, content scripts, service worker). This means you get free cross-context reactivity:
 
 ```ts
-// content.ts — automatically reacts to settings changed in the popup
+// content.ts. automatically reacts to settings changed in the popup
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== "sync") return;
 
@@ -276,11 +276,11 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-## Pattern 4: Quota Management {#pattern-4-quota-management}
+Pattern 4: Quota Management {#pattern-4-quota-management}
 
 Sync storage is small. You must plan for it.
 
-### Checking Usage Before Write {#checking-usage-before-write}
+Checking Usage Before Write {#checking-usage-before-write}
 
 ```ts
 // quota.ts
@@ -330,7 +330,7 @@ async function safeSync(key: string, value: unknown): Promise<boolean> {
 }
 ```
 
-### Splitting Large Data Across Keys {#splitting-large-data-across-keys}
+Splitting Large Data Across Keys {#splitting-large-data-across-keys}
 
 When a single object exceeds 8 KB, split it across multiple keys:
 
@@ -387,7 +387,7 @@ async function removeChunked(prefix: string): Promise<void> {
 
 ---
 
-## Pattern 5: Background Sync with External APIs {#pattern-5-background-sync-with-external-apis}
+Pattern 5: Background Sync with External APIs {#pattern-5-background-sync-with-external-apis}
 
 Sync extension data with your own server using the service worker:
 
@@ -482,7 +482,7 @@ async function getAuthToken(): Promise<string> {
 }
 ```
 
-### Exponential Backoff on Failure {#exponential-backoff-on-failure}
+Exponential Backoff on Failure {#exponential-backoff-on-failure}
 
 ```ts
 // backoff.ts
@@ -492,7 +492,7 @@ async function syncWithBackoff(maxRetries = 5): Promise<void> {
       await performSync();
       return;
     } catch {
-      const delay = Math.min(1000 * 2 ** attempt, 60_000);
+      const delay = Math.min(1000 * 2  attempt, 60_000);
       const jitter = Math.random() * 1000;
       await new Promise((resolve) => setTimeout(resolve, delay + jitter));
     }
@@ -503,7 +503,7 @@ async function syncWithBackoff(maxRetries = 5): Promise<void> {
 
 ---
 
-## Pattern 6: Delta Sync {#pattern-6-delta-sync}
+Pattern 6: Delta Sync {#pattern-6-delta-sync}
 
 Only sync what changed, not the entire dataset:
 
@@ -576,7 +576,7 @@ async function syncDeltasToServer(lastSyncTime: number): Promise<void> {
 
 ---
 
-## Pattern 7: Import/Export User Data as JSON Backup {#pattern-7-importexport-user-data-as-json-backup}
+Pattern 7: Import/Export User Data as JSON Backup {#pattern-7-importexport-user-data-as-json-backup}
 
 Let users take their data with them:
 
@@ -685,7 +685,7 @@ document.getElementById("import-input")!.addEventListener("change", async (e) =>
 
 ---
 
-## Pattern 8: Migration Between Storage Areas {#pattern-8-migration-between-storage-areas}
+Pattern 8: Migration Between Storage Areas {#pattern-8-migration-between-storage-areas}
 
 Move data from `storage.local` to `storage.sync` (or vice versa) during upgrades:
 
@@ -733,7 +733,7 @@ async function migrateStorageArea(config: MigrationConfig): Promise<void> {
 }
 ```
 
-### Version-Based Migration Runner {#version-based-migration-runner}
+Version-Based Migration Runner {#version-based-migration-runner}
 
 ```ts
 // migration-runner.ts
@@ -800,7 +800,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | When To Use |
 |---------|-------------|

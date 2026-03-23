@@ -1,30 +1,30 @@
 ---
 layout: default
-title: "debugger Permission — Chrome Extension Reference"
-description: ": : Access to API — attach to tabs and use Chrome DevTools Protocol (CDP) : Very High — full CDP access can..."
+title: "debugger Permission. Chrome Extension Reference"
+description: ": : Access to API. attach to tabs and use Chrome DevTools Protocol (CDP) : Very High. full CDP access can..."
 permalink: /permissions/debugger/
 category: permissions
 order: 11
 canonical_url: "https://bestchromeextensions.com/permissions/debugger/"
 ---
 
-# debugger Permission — Chrome Extension Reference
+# debugger Permission. Chrome Extension Reference
 
-## Overview {#overview}
-- **Permission string**: `"debugger"`
-- **What it grants**: Access to `chrome.debugger` API — attach to tabs and use Chrome DevTools Protocol (CDP)
-- **Risk level**: Very High — full CDP access can read/modify page content, intercept network, access cookies
-- **User prompt**: "Access the page debugger backend" and "Read and change all your data on all websites"
+Overview {#overview}
+- Permission string: `"debugger"`
+- What it grants: Access to `chrome.debugger` API. attach to tabs and use Chrome DevTools Protocol (CDP)
+- Risk level: Very High. full CDP access can read/modify page content, intercept network, access cookies
+- User prompt: "Access the page debugger backend" and "Read and change all your data on all websites"
 - `@theluckystrike/webext-permissions`: `describePermission('debugger')`
 
-## manifest.json {#manifestjson}
+manifest.json {#manifestjson}
 ```json
 { "permissions": ["debugger"] }
 ```
 
-## Key APIs {#key-apis}
+Key APIs {#key-apis}
 
-### chrome.debugger.attach(target, version, callback) {#chromedebuggerattachtarget-version-callback}
+chrome.debugger.attach(target, version, callback) {#chromedebuggerattachtarget-version-callback}
 ```javascript
 chrome.debugger.attach({ tabId: tab.id }, "1.3", () => {
   // Attached to tab, can now send CDP commands
@@ -32,7 +32,7 @@ chrome.debugger.attach({ tabId: tab.id }, "1.3", () => {
 });
 ```
 
-### chrome.debugger.sendCommand(target, method, params?, callback?) {#chromedebuggersendcommandtarget-method-params-callback}
+chrome.debugger.sendCommand(target, method, params?, callback?) {#chromedebuggersendcommandtarget-method-params-callback}
 ```javascript
 // Get page DOM
 chrome.debugger.sendCommand({ tabId }, "DOM.getDocument", {}, (result) => {
@@ -46,11 +46,11 @@ chrome.debugger.sendCommand({ tabId }, "Page.captureScreenshot", { format: "png"
 chrome.debugger.sendCommand({ tabId }, "Network.enable", {});
 ```
 
-### chrome.debugger.detach(target, callback) {#chromedebuggerdetachtarget-callback}
-### chrome.debugger.getTargets(callback) {#chromedebuggergettargetscallback}
+chrome.debugger.detach(target, callback) {#chromedebuggerdetachtarget-callback}
+chrome.debugger.getTargets(callback) {#chromedebuggergettargetscallback}
 - List all debuggable targets (tabs, service workers, etc.)
 
-### chrome.debugger.onEvent {#chromedebuggeronevent}
+chrome.debugger.onEvent {#chromedebuggeronevent}
 ```javascript
 chrome.debugger.onEvent.addListener((source, method, params) => {
   if (method === "Network.responseReceived") {
@@ -59,45 +59,45 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 });
 ```
 
-### chrome.debugger.onDetach {#chromedebuggerondetach}
+chrome.debugger.onDetach {#chromedebuggerondetach}
 - Fires when debugger is detached (user closed infobar, tab closed, etc.)
 
-## Chrome DevTools Protocol (CDP) Domains {#chrome-devtools-protocol-cdp-domains}
-- **DOM**: Read/modify page DOM tree
-- **Network**: Monitor/intercept all network requests
-- **Page**: Navigate, screenshot, PDF generation
-- **Runtime**: Execute JavaScript in page context
-- **CSS**: Read/modify stylesheets
-- **Console**: Capture console messages
-- **Emulation**: Device emulation, geolocation override
+Chrome DevTools Protocol (CDP) Domains {#chrome-devtools-protocol-cdp-domains}
+- DOM: Read/modify page DOM tree
+- Network: Monitor/intercept all network requests
+- Page: Navigate, screenshot, PDF generation
+- Runtime: Execute JavaScript in page context
+- CSS: Read/modify stylesheets
+- Console: Capture console messages
+- Emulation: Device emulation, geolocation override
 - Full CDP docs: chromedevtools.github.io/devtools-protocol/
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Screenshot Capture {#screenshot-capture}
+Screenshot Capture {#screenshot-capture}
 - Attach, `Page.captureScreenshot`, detach
 - Full page: set viewport first with `Emulation.setDeviceMetricsOverride`
 
-### Network Monitor {#network-monitor}
+Network Monitor {#network-monitor}
 - `Network.enable` then listen for `Network.requestWillBeSent`, `Network.responseReceived`
 - Get response bodies with `Network.getResponseBody`
 
-### Performance Profiling {#performance-profiling}
+Performance Profiling {#performance-profiling}
 - `Performance.enable`, `Performance.getMetrics`
 - `Tracing.start`/`Tracing.end` for detailed traces
 
-### Automated Testing {#automated-testing}
+Automated Testing {#automated-testing}
 - Navigate pages, click elements, fill forms via CDP
 - Assert DOM state, check network requests
 
-## Security & UX Considerations {#security-ux-considerations}
-- Chrome shows prominent "debugging" infobar — user will see it
-- Extremely powerful — CWS review will be thorough
+Security & UX Considerations {#security-ux-considerations}
+- Chrome shows prominent "debugging" infobar. user will see it
+- Extremely powerful. CWS review will be thorough
 - Only use when no other API can accomplish the task
-- Consider `optional_permissions` — request only when needed
+- Consider `optional_permissions`. request only when needed
 - Store debug preferences with `@theluckystrike/webext-storage`
 
-## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, requestPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -108,14 +108,14 @@ console.log(result.granted);
 
 PERMISSION_DESCRIPTIONS.debugger; // "Access the page debugger backend"
 
-// This is a very high-risk permission — consider optional_permissions
+// This is a very high-risk permission. consider optional_permissions
 if (!result.granted) {
   const req = await requestPermission("debugger");
   if (!req.granted) return;
 }
 ```
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: popup triggers debug actions, background manages CDP sessions:
 
@@ -176,7 +176,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Store debug session preferences and captured data:
 
@@ -198,7 +198,7 @@ storage.watch("networkLogEnabled", (enabled) => {
 });
 ```
 
-## Practical Example: Full-Page Screenshot {#practical-example-full-page-screenshot}
+Practical Example: Full-Page Screenshot {#practical-example-full-page-screenshot}
 
 ```ts
 async function captureFullPage(tabId: number): Promise<string> {
@@ -239,31 +239,31 @@ async function captureFullPage(tabId: number): Promise<string> {
 }
 ```
 
-## Gotchas {#gotchas}
-- **Chrome shows a persistent "debugging" infobar** — users will see "Extension is debugging this browser" at the top of the tab. There is no way to suppress this. Attach and detach quickly to minimize user disruption.
-- **Only one debugger per tab** — if another extension (or DevTools) is already attached to a tab, `attach()` will fail. Always handle the `"Cannot attach to this target"` error gracefully.
-- **`onDetach` fires when the user dismisses the infobar** — the user can cancel debugging at any time by clicking the infobar's close button. Always listen for `onDetach` with reason `"canceled_by_user"` and clean up state accordingly.
-- **CDP commands are async but not always Promise-based** — in older Chrome versions, `sendCommand` uses callbacks. In MV3, most are Promise-based, but always check for errors.
-- **Chrome Web Store scrutiny is intense** — extensions using `debugger` get extra review. Document clearly why you need CDP access, and consider whether `scripting` or `activeTab` could achieve the same goal.
+Gotchas {#gotchas}
+- Chrome shows a persistent "debugging" infobar. users will see "Extension is debugging this browser" at the top of the tab. There is no way to suppress this. Attach and detach quickly to minimize user disruption.
+- Only one debugger per tab. if another extension (or DevTools) is already attached to a tab, `attach()` will fail. Always handle the `"Cannot attach to this target"` error gracefully.
+- `onDetach` fires when the user dismisses the infobar. the user can cancel debugging at any time by clicking the infobar's close button. Always listen for `onDetach` with reason `"canceled_by_user"` and clean up state accordingly.
+- CDP commands are async but not always Promise-based. in older Chrome versions, `sendCommand` uses callbacks. In MV3, most are Promise-based, but always check for errors.
+- Chrome Web Store scrutiny is intense. extensions using `debugger` get extra review. Document clearly why you need CDP access, and consider whether `scripting` or `activeTab` could achieve the same goal.
 
-## Common Errors {#common-errors}
-- `"Cannot attach to this target"` — already attached or target not debuggable
-- User dismissed infobar — `onDetach` fires with `"canceled_by_user"`
-- CDP version mismatch — use `"1.3"` for broadest compatibility
+Common Errors {#common-errors}
+- `"Cannot attach to this target"`. already attached or target not debuggable
+- User dismissed infobar. `onDetach` fires with `"canceled_by_user"`
+- CDP version mismatch. use `"1.3"` for broadest compatibility
 - Multiple extensions can't debug same tab simultaneously
 
-## Related {#related}
+Related {#related}
 - [Chrome debugger API docs](https://developer.chrome.com/docs/extensions/reference/api/debugger)
 - [Chrome DevTools Protocol reference](https://chromedevtools.github.io/devtools-protocol/)
-- [scripting](scripting.md) — lighter-weight alternative for script injection
-- [activeTab](activeTab.md) — temporary tab access without full debugging
+- [scripting](scripting.md). lighter-weight alternative for script injection
+- [activeTab](activeTab.md). temporary tab access without full debugging
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### What is the chrome.debugger API used for?
+What is the chrome.debugger API used for?
 The chrome.debugger API allows extensions to instrument network traffic, debug JavaScript, and interact with pages using the Chrome DevTools Protocol.
 
-### Why does debugger require a permission warning?
+Why does debugger require a permission warning?
 The debugger API provides powerful capabilities that can intercept and modify page content, which is why it triggers a permission warning.
 ---
 

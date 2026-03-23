@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Context Detection — Best Practices"
+title: "Chrome Extension Extension Context Detection. Best Practices"
 description: "Detect execution context in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-context-detection/"
 ---
@@ -9,9 +9,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-context-dete
 
 Chrome extensions run code in multiple distinct contexts, each with different APIs and constraints. Detecting which context your code is executing in is essential for building robust, portable extensions.
 
-## Context Detection Techniques {#context-detection-techniques}
+Context Detection Techniques {#context-detection-techniques}
 
-### Service Worker Detection {#service-worker-detection}
+Service Worker Detection {#service-worker-detection}
 
 ```javascript
 const isServiceWorker = typeof ServiceWorkerGlobalScope !== 'undefined' && self instanceof ServiceWorkerGlobalScope;
@@ -19,7 +19,7 @@ const isServiceWorker = typeof ServiceWorkerGlobalScope !== 'undefined' && self 
 
 Service workers run in a background context without DOM access. They have access to most Chrome APIs but not to `window` or `document`.
 
-### Content Script Detection {#content-script-detection}
+Content Script Detection {#content-script-detection}
 
 ```javascript
 const isContentScript = typeof window !== 'undefined' && 
@@ -29,7 +29,7 @@ const isContentScript = typeof window !== 'undefined' &&
 
 Content scripts run in the context of web pages but have access to a modified `chrome.runtime` API. They share the page's DOM but have isolated `chrome.storage`.
 
-### Popup Detection {#popup-detection}
+Popup Detection {#popup-detection}
 
 ```javascript
 const isPopup = typeof window !== 'undefined' && 
@@ -39,7 +39,7 @@ const isPopup = typeof window !== 'undefined' &&
 
 The popup runs in a short-lived window with access to the full extension API. It closes when the user clicks outside or presses Escape.
 
-### Options Page Detection {#options-page-detection}
+Options Page Detection {#options-page-detection}
 
 ```javascript
 const isOptionsPage = typeof window !== 'undefined' && 
@@ -49,7 +49,7 @@ const isOptionsPage = typeof window !== 'undefined' &&
 
 Options pages are dedicated HTML pages for extension settings. They persist until closed by the user.
 
-### Side Panel Detection {#side-panel-detection}
+Side Panel Detection {#side-panel-detection}
 
 ```javascript
 const isSidePanel = typeof chrome.sidePanel !== 'undefined' && 
@@ -58,7 +58,7 @@ const isSidePanel = typeof chrome.sidePanel !== 'undefined' &&
 
 Side panels are available in Manifest V3 and provide a persistent sidebar experience.
 
-### DevTools Panel Detection {#devtools-panel-detection}
+DevTools Panel Detection {#devtools-panel-detection}
 
 ```javascript
 const isDevTools = typeof chrome.devtools !== 'undefined' && 
@@ -67,7 +67,7 @@ const isDevTools = typeof chrome.devtools !== 'undefined' &&
 
 DevTools extensions add custom panels and sidebars to Chrome's developer tools.
 
-### Offscreen Document Detection {#offscreen-document-detection}
+Offscreen Document Detection {#offscreen-document-detection}
 
 ```javascript
 const isOffscreen = typeof window !== 'undefined' && 
@@ -76,18 +76,18 @@ const isOffscreen = typeof window !== 'undefined' &&
 
 Offscreen documents handle long-running tasks with DOM access in Manifest V3.
 
-## Why Context Detection Matters {#why-context-detection-matters}
+Why Context Detection Matters {#why-context-detection-matters}
 
 Different contexts have different API availability:
 
-- **Service Workers**: No DOM, event-driven lifecycle
-- **Content Scripts**: Limited API access, shares page JavaScript context
-- **Popup/Options**: Full API access, ephemeral lifecycle
-- **Side Panel**: Persistent, full API access
+- Service Workers: No DOM, event-driven lifecycle
+- Content Scripts: Limited API access, shares page JavaScript context
+- Popup/Options: Full API access, ephemeral lifecycle
+- Side Panel: Persistent, full API access
 
 Security constraints also vary. Content scripts inherit the page's CSP and may be restricted by site scripts.
 
-## Building Isomorphic Utilities {#building-isomorphic-utilities}
+Building Isomorphic Utilities {#building-isomorphic-utilities}
 
 Create a context detector utility:
 
@@ -126,7 +126,7 @@ export function detectContext() {
 }
 ```
 
-## Context-Aware Logger {#context-aware-logger}
+Context-Aware Logger {#context-aware-logger}
 
 ```javascript
 import { detectContext } from './context-detector';
@@ -142,7 +142,7 @@ export function createLogger(prefix) {
 }
 ```
 
-## Platform Abstraction Layer {#platform-abstraction-layer}
+Platform Abstraction Layer {#platform-abstraction-layer}
 
 ```javascript
 import { detectContext } from './context-detector';
@@ -167,7 +167,7 @@ export const platform = {
 };
 ```
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Content Script API](../reference/content-script-api.md)

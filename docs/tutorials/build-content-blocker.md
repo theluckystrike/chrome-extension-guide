@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Chrome Extension Content Blocker — Developer Guide"
+title: "Chrome Extension Content Blocker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-content-blocker/"
 ---
-# Build a Content Blocker Extension — Full Tutorial
+# Build a Content Blocker Extension. Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 - Productivity-focused site blocker
 - Block distracting sites during work hours
 - Uses `declarativeNetRequest` for efficient blocking, `@theluckystrike/webext-storage` for block list, `chrome.alarms` for scheduling
 
-## manifest.json {#manifestjson}
+manifest.json {#manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -30,12 +30,12 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-content-blocker
 }
 ```
 
-## Step 1: Static Rules (rules.json) {#step-1-static-rules-rulesjson}
+Step 1: Static Rules (rules.json) {#step-1-static-rules-rulesjson}
 - Default blocked sites (social media, news, etc.)
 - Rule structure: id, priority, action (redirect to blocked page), condition (urlFilter)
 - Redirect to extension's `blocked.html` page
 
-## Step 2: Dynamic Rules for User-Added Sites {#step-2-dynamic-rules-for-user-added-sites}
+Step 2: Dynamic Rules for User-Added Sites {#step-2-dynamic-rules-for-user-added-sites}
 ```javascript
 async function addBlockedSite(domain) {
   const ruleId = await getNextRuleId();
@@ -55,19 +55,19 @@ async function addBlockedSite(domain) {
 }
 ```
 
-## Step 3: Blocked Page (blocked.html) {#step-3-blocked-page-blockedhtml}
+Step 3: Blocked Page (blocked.html) {#step-3-blocked-page-blockedhtml}
 - Friendly message: "This site is blocked during focus time"
 - Show which domain was blocked
 - "Take a break" timer option (5-minute bypass)
 - "Back to work" button
 
-## Step 4: Popup UI {#step-4-popup-ui}
+Step 4: Popup UI {#step-4-popup-ui}
 - List of blocked sites with add/remove
 - Schedule: set work hours (e.g., 9 AM - 5 PM)
 - Quick toggle: enable/disable all blocking
 - Badge showing "ON"/"OFF" status
 
-## Step 5: Scheduling with chrome.alarms {#step-5-scheduling-with-chromealarms}
+Step 5: Scheduling with chrome.alarms {#step-5-scheduling-with-chromealarms}
 ```javascript
 // background.js
 chrome.alarms.create("startBlocking", { when: getNextWorkStart() });
@@ -79,7 +79,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Step 6: Enable/Disable Blocking {#step-6-enabledisable-blocking}
+Step 6: Enable/Disable Blocking {#step-6-enabledisable-blocking}
 ```javascript
 async function enableBlocking() {
   await chrome.declarativeNetRequest.updateEnabledRulesets({
@@ -97,7 +97,7 @@ async function disableBlocking() {
 }
 ```
 
-## Step 7: Storage with @theluckystrike/webext-storage {#step-7-storage-with-theluckystrikewebext-storage}
+Step 7: Storage with @theluckystrike/webext-storage {#step-7-storage-with-theluckystrikewebext-storage}
 ```typescript
 const storage = createStorage(defineSchema({
   blockedSites: 'string',   // JSON array
@@ -108,9 +108,9 @@ const storage = createStorage(defineSchema({
 }), 'sync');
 ```
 
-## Testing {#testing}
+Testing {#testing}
 - Add sites to block list, verify they redirect to blocked.html
-- Test scheduling — set short intervals for testing
+- Test scheduling. set short intervals for testing
 - Test toggle on/off
 - Cross-ref: `docs/permissions/declarativeNetRequest.md`, `docs/mv3/declarative-net-request.md`
 -e 

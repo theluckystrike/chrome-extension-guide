@@ -8,14 +8,14 @@ Translation extensions are among the most useful browser extensions, enabling us
 
 A translation extension typically consists of several key components:
 
-1. **Popup UI** - Quick translation interface accessible from the toolbar
-2. **Content Script** - Page-level translation (selections, hover translation)
-3. **Background Service Worker** - Handles API calls, caching, and state management
-4. **Options Page** - User preferences and language settings
+1. Popup UI - Quick translation interface accessible from the toolbar
+2. Content Script - Page-level translation (selections, hover translation)
+3. Background Service Worker - Handles API calls, caching, and state management
+4. Options Page - User preferences and language settings
 
 ## Core Translation Service
 
-The foundation of any translation extension is the translation service. Here's a robust TypeScript implementation:
+The foundation of any translation extension is the translation service. Here's a solid TypeScript implementation:
 
 ```typescript
 // src/services/TranslationService.ts
@@ -164,7 +164,7 @@ export class LanguageDetector {
     'ar', 'hi', 'nl', 'pl', 'tr', 'vi', 'th', 'id', 'sv', 'da'
   ];
 
-  /**
+  /
    * Simple character-based language detection
    * For production, use a proper ML model or API
    */
@@ -349,8 +349,8 @@ class PopupController {
   private getLanguageName(code: string): string {
     const names: Record<string, string> = {
       en: 'English', es: 'Español', fr: 'Français', de: 'Deutsch',
-      it: 'Italiano', pt: 'Português', ru: 'Русский', ja: '日本語',
-      ko: '한국어', zh: '中文', ar: 'العربية', hi: 'हिन्दी',
+      it: 'Italiano', pt: 'Português', ru: 'Русский', ja: '',
+      ko: '', zh: '', ar: 'العربية', hi: 'हिन्दी',
       nl: 'Nederlands', pl: 'Polski', tr: 'Türkçe', vi: 'Tiếng Việt'
     };
     return names[code] || code;
@@ -692,12 +692,12 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ## Best Practices
 
-1. **Use free APIs initially** - Start with LibreTranslate or Google Translate API's free tier
-2. **Implement caching** - Reduce API calls and improve response times
-3. **Handle rate limits** - Queue requests and show user-friendly errors
-4. **Respect user privacy** - Don't send more data than necessary to translation APIs
-5. **Support offline** - Cache common translations for offline access
-6. **Provide feedback** - Show loading states and clear error messages
+1. Use free APIs initially - Start with LibreTranslate or Google Translate API's free tier
+2. Implement caching - Reduce API calls and improve response times
+3. Handle rate limits - Queue requests and show user-friendly errors
+4. Respect user privacy - Don't send more data than necessary to translation APIs
+5. Support offline - Cache common translations for offline access
+6. Provide feedback - Show loading states and clear error messages
 
 ## Conclusion
 

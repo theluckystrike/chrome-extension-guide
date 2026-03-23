@@ -246,11 +246,11 @@ async function checkOverrideEnabled() {
 ## User Expectations and UX
 
 ### Key UX Principles
-1. **Speed**: Load within 200ms - users expect instant new tabs
-2. **Familiarity**: Keep search prominent, easy navigation
-3. **Consistency**: Match Chrome's visual style where appropriate
-4. **Respect Privacy**: Clearly explain data usage
-5. **Customization**: Let users personalize their experience
+1. Speed: Load within 200ms - users expect instant new tabs
+2. Familiarity: Keep search prominent, easy navigation
+3. Consistency: Match Chrome's visual style where appropriate
+4. Respect Privacy: Clearly explain data usage
+5. Customization: Let users personalize their experience
 
 ### Recommended Features
 - Minimal setup required

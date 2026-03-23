@@ -1,14 +1,14 @@
 ---
 layout: guide
-title: Chrome Extension Analytics — How to Track Usage, Events, and User Behavior
+title: Chrome Extension Analytics. How to Track Usage, Events, and User Behavior
 description: Learn how to implement GA4 analytics in Chrome extensions, track custom events, segment users, analyze funnels, and maintain privacy compliance with MV3.
 ---
 
-# Chrome Extension Analytics — How to Track Usage, Events, and User Behavior
+# Chrome Extension Analytics. How to Track Usage, Events, and User Behavior
 
-Understanding how users interact with your Chrome extension is crucial for making data-driven decisions and improving the user experience. This guide covers implementing comprehensive analytics in your extension, from Google Analytics 4 integration to advanced event tracking, user segmentation, and funnel analysis—all while maintaining privacy compliance and adhering to Manifest V3 requirements.
+Understanding how users interact with your Chrome extension is crucial for making data-driven decisions and improving the user experience. This guide covers implementing comprehensive analytics in your extension, from Google Analytics 4 integration to advanced event tracking, user segmentation, and funnel analysis, all while maintaining privacy compliance and adhering to Manifest V3 requirements.
 
-## Setting Up Google Analytics 4 in Extensions
+Setting Up Google Analytics 4 in Extensions
 
 Google Analytics 4 provides powerful tracking capabilities that work well within Chrome extensions, though the implementation differs slightly from standard web applications. The key challenge is that extensions run in isolated contexts, so you need to ensure GA4 tags can properly collect data while respecting browser security boundaries.
 
@@ -52,11 +52,11 @@ class ExtensionAnalytics {
 }
 ```
 
-## Custom Event Tracking Strategies
+Custom Event Tracking Strategies
 
 Beyond basic page views, custom events provide the insights that matter most for extension-specific behaviors. Track feature usage patterns, user interactions with browser APIs, and background task executions to understand how your extension delivers value.
 
-Define a consistent event naming convention that captures the what, where, and outcome of each interaction. Use a hierarchical structure like `feature_action_result`—for example, `bookmark_created`, `popup_opened`, or `settings_updated`. This makes it easy to segment and analyze events in GA4.
+Define a consistent event naming convention that captures the what, where, and outcome of each interaction. Use a hierarchical structure like `feature_action_result`, for example, `bookmark_created`, `popup_opened`, or `settings_updated`. This makes it easy to segment and analyze events in GA4.
 
 ```javascript
 // Track feature usage from popup
@@ -76,7 +76,7 @@ contentScriptAnalytics.sendEvent('content_script_action', {
 
 Consider implementing automatic event tracking for common extension interactions. Listen to chrome.runtime lifecycle events, chrome.tabs events, and chrome.storage changes to capture meaningful data without manual instrumentation at every touchpoint.
 
-## User Segmentation and Cohorts
+User Segmentation and Cohorts
 
 Understanding different user behaviors requires segmenting your audience based on usage patterns, engagement levels, or demographic characteristics. GA4's built-in audience builder works well, but you can also create custom segments directly in your extension logic to personalize the experience.
 
@@ -102,9 +102,9 @@ async function updateUserSegment(userId) {
 }
 ```
 
-## Funnel Analysis for Conversion Optimization
+Funnel Analysis for Conversion Optimization
 
-Funnel analysis reveals where users drop off during key workflows—whether that's completing onboarding, setting up initial configuration, or converting to paid features. Map out each step in your critical user journeys and track completion rates at each stage.
+Funnel analysis reveals where users drop off during key workflows, whether that's completing onboarding, setting up initial configuration, or converting to paid features. Map out each step in your critical user journeys and track completion rates at each stage.
 
 For an extension with a freemium model, your conversion funnel might look like: installation → first feature use → settings configuration → premium prompt shown → upgrade initiated → purchase completed. Identify the highest-drop-off stages and prioritize improvements there.
 
@@ -137,7 +137,7 @@ function trackFunnelStep(funnelName, stepName, properties = {}) {
 }
 ```
 
-## Privacy-Compliant Tracking
+Privacy-Compliant Tracking
 
 Chrome Web Store policies and privacy regulations require transparent, consent-based analytics practices. Never track personally identifiable information, browsing history, or sensitive browser data. Instead, focus on aggregate usage metrics and anonymous identifiers.
 
@@ -159,7 +159,7 @@ async function initializeAnalytics() {
 }
 ```
 
-## Manifest V3 Considerations
+Manifest V3 Considerations
 
 Manifest V3 introduces several changes that affect analytics implementation. Service workers replace background pages, which means you cannot rely on page unload events and must handle analytics differently. The `chrome.storage` API remains available but operates asynchronously, requiring careful handling of async patterns.
 

@@ -4,7 +4,7 @@ The Chrome Extensions i18n API provides a powerful system for creating multiling
 
 ## Overview
 
-Chrome's built-in internationalization system allows extensions to display user interface in the user's preferred language, support multiple locales, handle dynamic content with placeholders, and support RTL languages. The i18n system requires **no permissions**.
+Chrome's built-in internationalization system allows extensions to display user interface in the user's preferred language, support multiple locales, handle dynamic content with placeholders, and support RTL languages. The i18n system requires no permissions.
 
 ## Directory Structure
 
@@ -12,16 +12,16 @@ Extensions use a standardized directory structure:
 
 ```
 my-extension/
-├── _locales/
-│   ├── en/messages.json      # English (default)
-│   ├── es/messages.json      # Spanish
-│   ├── fr/messages.json      # French
-│   └── zh_CN/messages.json   # Chinese
-├── manifest.json
-└── styles.css
+ _locales/
+    en/messages.json      # English (default)
+    es/messages.json      # Spanish
+    fr/messages.json      # French
+    zh_CN/messages.json   # Chinese
+ manifest.json
+ styles.css
 ```
 
-The `default_locale` field in manifest.json is **required**:
+The `default_locale` field in manifest.json is required:
 
 ```json
 { "name": "__MSG_extension_name__", "default_locale": "en" }

@@ -13,30 +13,30 @@ canonical_url: "https://bestchromeextensions.com/2025/05/04/build-css-grid-inspe
 
 CSS Grid has revolutionized web design by providing a powerful two-dimensional layout system. However, debugging grid layouts remains challenging for many developers. Understanding the exact placement of grid tracks, gaps, and areas requires visual tools that most browsers don't provide out of the box. This is where building a custom CSS Grid Inspector Chrome extension becomes invaluable.
 
-In this comprehensive guide, we'll walk you through creating a production-ready CSS Grid Inspector extension that visualizes grid layouts with colorful overlays, displays grid line numbers, shows track sizes, and helps developers understand complex grid configurations at a glance.
+we'll walk you through creating a production-ready CSS Grid Inspector extension that visualizes grid layouts with colorful overlays, displays grid line numbers, shows track sizes, and helps developers understand complex grid configurations at a glance.
 
 ---
 
-## Why You Need a CSS Grid Inspector Extension
+Why You Need a CSS Grid Inspector Extension
 
 Modern web development increasingly relies on CSS Grid for building sophisticated layouts. From dashboard interfaces to magazine-style layouts, grids are everywhere. Yet, the browser's native DevTools, while helpful, don't always provide the quick visual feedback developers need when iterating on designs.
 
 A dedicated CSS Grid Inspector Chrome extension offers several advantages over browser DevTools:
 
-1. **Instant Visual Feedback**: Toggle grid overlays on/off with a single click without opening DevTools
-2. **Customizable Visualizations**: Choose colors, show/hide specific grid information, and adjust opacity levels
-3. **Persistent Settings**: Remember your preferences across browsing sessions
-4. **Streamlined Workflow**: Access grid debugging directly from the extension popup instead of navigating complex DevTools panels
+1. Instant Visual Feedback: Toggle grid overlays on/off with a single click without opening DevTools
+2. Customizable Visualizations: Choose colors, show/hide specific grid information, and adjust opacity levels
+3. Persistent Settings: Remember your preferences across browsing sessions
+4. Streamlined Workflow: Access grid debugging directly from the extension popup instead of navigating complex DevTools panels
 
 Whether you're building responsive layouts, working with named grid areas, or experimenting with auto-fill and auto-fit, having a dedicated tool accelerates your development workflow significantly.
 
 ---
 
-## Project Setup and Manifest Configuration
+Project Setup and Manifest Configuration
 
 Every Chrome extension starts with the manifest file. For our CSS Grid Inspector, we'll use Manifest V3, which provides improved security and performance.
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -76,44 +76,44 @@ This configuration grants the extension the necessary permissions to analyze and
 
 ---
 
-## Core Architecture
+Core Architecture
 
 Our extension follows a modular architecture with three main components:
 
-1. **Content Script**: Runs in the context of web pages, detects grid containers, and renders overlays
-2. **Background Service Worker**: Handles communication between content scripts and the popup
-3. **Popup UI**: Provides user controls for toggling visualizations and adjusting settings
+1. Content Script: Runs in the context of web pages, detects grid containers, and renders overlays
+2. Background Service Worker: Handles communication between content scripts and the popup
+3. Popup UI: Provides user controls for toggling visualizations and adjusting settings
 
-### Project Structure
+Project Structure
 
 ```
 css-grid-inspector/
-├── src/
-│   ├── content/
-│   │   ├── content-script.ts    # Main content script entry point
-│   │   ├── grid-analyzer.ts    # Grid detection and analysis logic
-│   │   ├── overlay-renderer.ts # Drawing grid overlays
-│   │   └── types.ts            # TypeScript type definitions
-│   ├── popup/
-│   │   ├── popup.ts            # Popup logic
-│   │   └── popup.html          # Popup UI
-│   ├── background/
-│   │   └── background.ts       # Service worker
-│   └── shared/
-│       ├── storage.ts          # Storage utilities
-│       └── messaging.ts        # Message handling
-├── icons/                       # Extension icons
-├── manifest.json
-└── tsconfig.json
+ src/
+    content/
+       content-script.ts    # Main content script entry point
+       grid-analyzer.ts    # Grid detection and analysis logic
+       overlay-renderer.ts # Drawing grid overlays
+       types.ts            # TypeScript type definitions
+    popup/
+       popup.ts            # Popup logic
+       popup.html          # Popup UI
+    background/
+       background.ts       # Service worker
+    shared/
+        storage.ts          # Storage utilities
+        messaging.ts        # Message handling
+ icons/                       # Extension icons
+ manifest.json
+ tsconfig.json
 ```
 
 ---
 
-## Detecting CSS Grid Containers
+Detecting CSS Grid Containers
 
 The heart of our extension lies in accurately detecting CSS Grid containers on any webpage. We need to query elements with `display: grid` or `display: inline-grid` and gather their computed styles.
 
-### grid-analyzer.ts
+grid-analyzer.ts
 
 ```typescript
 interface GridContainer {
@@ -181,11 +181,11 @@ This analyzer efficiently scans the DOM for grid containers and extracts all rel
 
 ---
 
-## Rendering Grid Overlays
+Rendering Grid Overlays
 
-Now comes the visual part—rendering colorful overlays that show grid lines, track sizes, and areas. We'll use SVG overlays positioned absolutely over each grid container.
+Now comes the visual part, rendering colorful overlays that show grid lines, track sizes, and areas. We'll use SVG overlays positioned absolutely over each grid container.
 
-### overlay-renderer.ts
+overlay-renderer.ts
 
 ```typescript
 import { GridContainer } from './grid-analyzer';
@@ -460,7 +460,7 @@ This renderer creates beautiful SVG-based overlays showing grid lines, track bou
 
 ---
 
-## Content Script Entry Point
+Content Script Entry Point
 
 Now we connect everything in the content script:
 
@@ -532,11 +532,11 @@ function disableInspector(): void {
 
 ---
 
-## Building the Popup Interface
+Building the Popup Interface
 
 The popup provides users with controls to toggle the inspector and customize visualizations:
 
-### popup.html
+popup.html
 
 ```html
 <!DOCTYPE html>
@@ -605,7 +605,7 @@ The popup provides users with controls to toggle the inspector and customize vis
 </html>
 ```
 
-### popup.ts
+popup.ts
 
 ```typescript
 let isEnabled = false;
@@ -667,32 +667,32 @@ document.getElementById('overlayOpacity')?.addEventListener('input', updateSetti
 
 ---
 
-## Testing Your Extension
+Testing Your Extension
 
 Before publishing, thoroughly test your extension:
 
-1. **Load Unpacked**: Open `chrome://extensions/`, enable Developer mode, click "Load unpacked", and select your extension directory
-2. **Test on Various Sites**: Try the extension on sites with simple and complex grid layouts
-3. **Verify Overlays**: Confirm that grid lines align precisely with actual grid tracks
-4. **Test Settings**: Toggle each option and verify they work as expected
-5. **Performance Check**: Ensure the extension doesn't cause noticeable page slowdowns
+1. Load Unpacked: Open `chrome://extensions/`, enable Developer mode, click "Load unpacked", and select your extension directory
+2. Test on Various Sites: Try the extension on sites with simple and complex grid layouts
+3. Verify Overlays: Confirm that grid lines align precisely with actual grid tracks
+4. Test Settings: Toggle each option and verify they work as expected
+5. Performance Check: Ensure the extension doesn't cause noticeable page slowdowns
 
 ---
 
-## Advanced Features to Consider
+Advanced Features to Consider
 
 Once you have the basic inspector working, consider adding these advanced features:
 
-- **Nested Grid Support**: Visualize grids within grids at different nesting levels
-- **Gap Visualization**: Highlight grid gaps with different colors
-- **Track Size Labels**: Show exact pixel/percentage values for each track
-- **Export Configuration**: Copy grid layout as CSS or JSON
-- **Responsive Preview**: Test grid behavior across viewport sizes
-- **Dark Mode Support**: Auto-detect and adapt to dark/light themes
+- Nested Grid Support: Visualize grids within grids at different nesting levels
+- Gap Visualization: Highlight grid gaps with different colors
+- Track Size Labels: Show exact pixel/percentage values for each track
+- Export Configuration: Copy grid layout as CSS or JSON
+- Responsive Preview: Test grid behavior across viewport sizes
+- Dark Mode Support: Auto-detect and adapt to dark/light themes
 
 ---
 
-## Publishing to Chrome Web Store
+Publishing to Chrome Web Store
 
 When ready to share your extension:
 
@@ -704,7 +704,7 @@ When ready to share your extension:
 
 ---
 
-## Conclusion
+Conclusion
 
 Building a CSS Grid Inspector Chrome extension is an excellent project that combines DOM manipulation, SVG graphics, and Chrome extension APIs. The extension we built provides instant visual feedback for grid layouts, making it easier to debug and understand CSS Grid implementations.
 

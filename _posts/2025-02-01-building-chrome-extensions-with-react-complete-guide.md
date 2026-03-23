@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building Chrome Extensions with React — Complete Developer Guide (2025)"
+title: "Building Chrome Extensions with React. Complete Developer Guide (2025)"
 description: "Step-by-step guide to building Chrome extensions with React. Covers project setup, popup UI, content scripts, state management, hot reload, and production."
 date: 2025-02-01
 categories: [tutorials, frameworks]
@@ -8,17 +8,17 @@ tags: [react, chrome-extension, react-chrome-extension, popup-ui, content-script
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with React — Complete Developer Guide (2025)
+# Building Chrome Extensions with React. Complete Developer Guide (2025)
 
 React has become the go-to framework for building modern Chrome extensions. Its component-based architecture, efficient rendering, and vast ecosystem make it an ideal choice for creating polished, maintainable extension UIs. This guide walks you through building production-ready Chrome extensions with React in 2025, from project scaffolding to publishing.
 
 ---
 
-## Why Use React for Chrome Extensions {#why-react}
+Why Use React for Chrome Extensions {#why-react}
 
 Building Chrome extensions with vanilla JavaScript works, but React transforms the development experience in several critical ways.
 
-### Component-Based Architecture
+Component-Based Architecture
 
 React's component model maps perfectly to extension development. Your popup, options page, and content script UI can all be built from reusable components. This consistency means developers can work across different parts of the extension without learning different patterns.
 
@@ -44,23 +44,23 @@ function SettingsPanel({ settings, onUpdate }) {
 }
 ```
 
-### State Management
+State Management
 
 React's state management patterns (useState, useReducer, Context) solve real problems in extensions. Between service worker restarts and communication across isolated contexts, having predictable state handling is invaluable.
 
-### Rich Ecosystem
+Rich Ecosystem
 
-Need a date picker? A form library? Data visualization? The React ecosystem has battle-tested solutions for everything. Extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) leverage React to deliver complex feature sets with polished UIs.
+Need a date picker? A form library? Data visualization? The React ecosystem has battle-tested solutions for everything. Extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) use React to deliver complex feature sets with polished UIs.
 
-### Developer Experience
+Developer Experience
 
 Hot module replacement, TypeScript support, and modern tooling make development enjoyable. You get immediate feedback as you build, without constantly reloading your extension in Chrome.
 
 ---
 
-## Advanced React Patterns for Extensions
+Advanced React Patterns for Extensions
 
-### Custom Hooks for Chrome APIs
+Custom Hooks for Chrome APIs
 
 Create reusable hooks for Chrome extension APIs:
 
@@ -121,7 +121,7 @@ function SettingsPanel() {
 }
 ```
 
-### Message Passing with React Query
+Message Passing with React Query
 
 Combine React Query with Chrome messaging for efficient data fetching:
 
@@ -165,7 +165,7 @@ export function useUpdateSettings() {
 }
 ```
 
-### Context for Extension-Wide State
+Context for Extension-Wide State
 
 Share state across components:
 
@@ -223,7 +223,7 @@ export function useExtension() {
 ```
 {% endraw %}
 
-### Managing Content Script Communication
+Managing Content Script Communication
 
 Handle communication with content scripts:
 
@@ -268,9 +268,9 @@ export function useContentScript(tabId: number | undefined) {
 
 ---
 
-## Testing React Extensions
+Testing React Extensions
 
-### Unit Testing with Jest
+Unit Testing with Jest
 
 {% raw %}
 ```typescript
@@ -316,7 +316,7 @@ describe('SettingsPanel', () => {
 ```
 {% endraw %}
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 
 ```typescript
 // tests/extension.spec.ts
@@ -347,9 +347,9 @@ test('popup interacts with service worker', async ({ page, extension }) => {
 
 ---
 
-## Performance Optimization
+Performance Optimization
 
-### Code Splitting for Extension Pages
+Code Splitting for Extension Pages
 
 Split your bundle for faster popup loading:
 
@@ -371,7 +371,7 @@ function PopupApp() {
 }
 ```
 
-### Memoization Strategies
+Memoization Strategies
 
 Prevent unnecessary re-renders:
 
@@ -406,7 +406,7 @@ const SettingsSection = memo(function SettingsSection({
 });
 ```
 
-### Optimizing Bundle Size
+Optimizing Bundle Size
 
 Configure Vite to remove development code from production:
 
@@ -431,11 +431,11 @@ export default defineConfig({
 
 ---
 
-## Project Scaffolding: Vite + React + CRXJS {#project-scaffolding}
+Project Scaffolding: Vite + React + CRXJS {#project-scaffolding}
 
 The fastest way to start is with a modern build toolchain. We'll use Vite for development, React for UI, and CRXJS for Chrome-specific builds.
 
-### Quick Start with the Starter Kit
+Quick Start with the Starter Kit
 
 For a production-ready foundation, use the [chrome-extension-react-starter](https://github.com/theluckystrike/chrome-extension-react-starter) repository. It includes:
 
@@ -446,18 +446,18 @@ For a production-ready foundation, use the [chrome-extension-react-starter](http
 - Popup and options page templates
 
 ```bash
-# Clone the starter
+Clone the starter
 git clone https://github.com/theluckystrike/chrome-extension-react-starter.git my-extension
 cd my-extension
 
-# Install dependencies
+Install dependencies
 npm install
 
-# Start development
+Start development
 npm run dev
 ```
 
-### Manual Setup
+Manual Setup
 
 To understand the full setup, let's build it ourselves.
 
@@ -541,11 +541,11 @@ Run `npm run dev`, open Chrome at `chrome://extensions/`, enable Developer Mode,
 
 ---
 
-## Popup Component Architecture {#popup-architecture}
+Popup Component Architecture {#popup-architecture}
 
 The popup is your extension's command center. With React, you can build sophisticated interfaces that rival native applications.
 
-### Basic Popup Structure
+Basic Popup Structure
 
 ```tsx
 // App.tsx
@@ -585,7 +585,7 @@ export default function App() {
 }
 ```
 
-### Styling for Popups
+Styling for Popups
 
 Extension popups have a fixed maximum size. Style appropriately:
 
@@ -615,11 +615,11 @@ header {
 
 ---
 
-## Content Scripts with React {#content-scripts}
+Content Scripts with React {#content-scripts}
 
 Injecting React into web pages requires a different approach than the popup. Content scripts run in an isolated world, but you can mount React components to specific DOM nodes.
 
-### Creating a Content Script Component
+Creating a Content Script Component
 
 ```tsx
 // components/PageOverlay.tsx
@@ -648,7 +648,7 @@ export function PageOverlay({ pageUrl }: PageOverlayProps) {
 }
 ```
 
-### Injecting the Component
+Injecting the Component
 
 ```tsx
 // content.tsx - Entry point
@@ -693,11 +693,11 @@ Configure the content script in your manifest:
 
 ---
 
-## Options Page with React Router {#options-page}
+Options Page with React Router {#options-page}
 
 For complex extensions, you need multiple configuration screens. React Router handles this elegantly.
 
-### Setting Up React Router
+Setting Up React Router
 
 ```tsx
 // options/App.tsx
@@ -748,11 +748,11 @@ export default defineConfig({
 
 ---
 
-## State Management with Zustand/Jotai {#state-management}
+State Management with Zustand/Jotai {#state-management}
 
 Modern state libraries simplify extension state handling. Zustand and Jotai both work well with Chrome's unique architecture.
 
-### Zustand for Extension State
+Zustand for Extension State
 
 ```typescript
 // store/extensionStore.ts
@@ -798,7 +798,7 @@ export const useExtensionStore = create<ExtensionState>()(
 );
 ```
 
-### Using the Store in Components
+Using the Store in Components
 
 ```tsx
 // components/SettingsPanel.tsx
@@ -824,9 +824,9 @@ export function SettingsPanel() {
 
 ---
 
-## Chrome.Storage React Hooks {#storage-hooks}
+Chrome.Storage React Hooks {#storage-hooks}
 
-Abstracting chrome.storage into React hooks makes data persistence seamless.
+Abstracting chrome.storage into React hooks makes data persistence smooth.
 
 ```typescript
 // hooks/useChromeStorage.ts
@@ -871,11 +871,11 @@ if (isLoading) return <LoadingSpinner />;
 
 ---
 
-## Hot Module Reload Setup {#hot-reload}
+Hot Module Reload Setup {#hot-reload}
 
 Nothing slows development like constant manual reloads. Configure HMR for instant updates.
 
-### CRXJS HMR Configuration
+CRXJS HMR Configuration
 
 The CRXJS plugin handles most of this automatically when you run `npm run dev`. However, for content scripts, you'll need manual setup:
 
@@ -899,7 +899,7 @@ export default defineConfig({
 });
 ```
 
-### Manual Reload Handler
+Manual Reload Handler
 
 For the service worker, Chrome doesn't support HMR directly. Add a reload listener:
 
@@ -919,11 +919,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Production Build and CRX Packaging {#production-build}
+Production Build and CRX Packaging {#production-build}
 
 When ready to publish, create a proper production build.
 
-### Build Configuration
+Build Configuration
 
 ```typescript
 // vite.config.ts
@@ -952,7 +952,7 @@ export default defineConfig({
 });
 ```
 
-### Creating the CRX Package
+Creating the CRX Package
 
 Run the build command:
 
@@ -966,18 +966,18 @@ For automated Chrome Web Store uploads, configure the upload process in your CI/
 
 ---
 
-## Publishing to Chrome Web Store {#publishing}
+Publishing to Chrome Web Store {#publishing}
 
 The final step is making your extension available to millions of Chrome users.
 
-### Preparing for Publication
+Preparing for Publication
 
-1. **Create store assets**: 1280x800 screenshots, 440x280 promotional tile
-2. **Write compelling copy**: Clear name, description highlighting key features
-3. **Configure pricing**: Free or one-time purchase ($0.99 - $9.99 typical)
-4. **Privacy policy**: Required if you collect any user data
+1. Create store assets: 1280x800 screenshots, 440x280 promotional tile
+2. Write compelling copy: Clear name, description highlighting key features
+3. Configure pricing: Free or one-time purchase ($0.99 - $9.99 typical)
+4. Privacy policy: Required if you collect any user data
 
-### Upload Process
+Upload Process
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Create a new item and upload your ZIP file (dist folder compressed)
@@ -988,7 +988,7 @@ Review times vary from 24 hours to several days. Ensure your extension follows [
 
 ---
 
-## Real-World Example: Tab Suspender Pro Architecture
+Real-World Example: Tab Suspender Pro Architecture
 
 Production extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) demonstrate React's power in extensions. Its architecture includes:
 
@@ -1002,7 +1002,7 @@ The extension demonstrates every pattern covered in this guide, from project set
 
 ---
 
-## Next Steps
+Next Steps
 
 Now that you have the foundation, explore these resources to deepen your knowledge:
 
@@ -1013,11 +1013,11 @@ Now that you have the foundation, explore these resources to deepen your knowled
 
 ---
 
-## Testing React Components in Extensions {#testing}
+Testing React Components in Extensions {#testing}
 
 Testing React components in the extension environment requires special considerations.
 
-### Unit Testing with Vitest
+Unit Testing with Vitest
 
 Set up Vitest for fast, modern testing:
 
@@ -1054,7 +1054,7 @@ describe('SettingsPanel', () => {
 });
 ```
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 
 Test the full extension in a real Chrome environment:
 
@@ -1077,7 +1077,7 @@ test('popup opens and displays settings', async ({ extension }) => {
 });
 ```
 
-### Mocking Chrome APIs
+Mocking Chrome APIs
 
 Use Chrome's stubbed APIs for consistent testing:
 
@@ -1101,11 +1101,11 @@ export const chrome = {
 
 ---
 
-## Performance Optimization for React Extensions {#performance}
+Performance Optimization for React Extensions {#performance}
 
 Optimize your React extension for fast load times and smooth interactions.
 
-### Code Splitting
+Code Splitting
 
 Split your bundle to load only what's needed:
 
@@ -1122,7 +1122,7 @@ function App() {
 }
 ```
 
-### Memoization Strategies
+Memoization Strategies
 
 Prevent unnecessary re-renders:
 
@@ -1149,7 +1149,7 @@ const SettingsItem = memo(({ label, value, onChange }) => (
 ));
 ```
 
-### Extension-Specific Optimizations
+Extension-Specific Optimizations
 
 ```typescript
 // Minimize popup render on open

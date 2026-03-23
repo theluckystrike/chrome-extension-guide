@@ -17,7 +17,7 @@ Understanding how to properly configure auto-suspend rules transforms your brows
 
 ---
 
-## How Auto-Suspend Works in Tab Suspender Pro {#how-auto-suspend-works}
+How Auto-Suspend Works in Tab Suspender Pro {#how-auto-suspend-works}
 
 Before diving into configuration, it is essential to understand the underlying mechanism that makes automatic suspension possible. Tab Suspender Pro monitors user activity across all open tabs, tracking interactions such as clicks, scrolls, keyboard input, and media playback. When a tab remains inactive for a configurable period, the extension triggers the suspension process, which essentially pauses the tab's execution without closing it.
 
@@ -25,13 +25,13 @@ When a tab suspends, Chrome frees up the memory and CPU resources that were dedi
 
 The auto-suspend system operates on a sophisticated detection mechanism that distinguishes between genuine user activity and automated processes. For example, if a webpage has auto-playing video or running animations, Tab Suspender Pro recognizes this as active content and prevents suspension. Similarly, tabs playing audio, downloading files, or running critical web applications can be configured to remain active regardless of inactivity time.
 
-When you return to a suspended tab, clicking on it instantly restores it to full functionality. Tab Suspender Pro reloads the page content from memory cache, making the restoration process nearly instantaneous in most cases. This seamless experience means you never lose your place on any webpage, even after hours of suspension.
+When you return to a suspended tab, clicking on it instantly restores it to full functionality. Tab Suspender Pro reloads the page content from memory cache, making the restoration process nearly instantaneous in most cases. This smooth experience means you never lose your place on any webpage, even after hours of suspension.
 
 The extension runs quietly in the background, constantly evaluating your open tabs against the rules you have configured. This evaluation happens continuously, ensuring that tabs are suspended or awakened as needed without requiring manual intervention. Understanding this flow helps you design effective rule sets that match your browsing habits perfectly.
 
 ---
 
-## Configuring Time-Based Auto-Suspend Rules {#configuring-time-based-rules}
+Configuring Time-Based Auto-Suspend Rules {#configuring-time-based-rules}
 
 Time-based rules form the foundation of most Tab Suspender Pro configurations. These rules suspend tabs after a specified period of inactivity, making them perfect for users who frequently leave tabs open while working on other tasks. Setting up time-based rules is straightforward, but mastering the various options allows for highly customized control.
 
@@ -47,23 +47,23 @@ One powerful feature of time-based rules is the ability to set different timeout
 
 ---
 
-## URL Pattern Rules for Targeted Suspension {#url-pattern-rules}
+URL Pattern Rules for Targeted Suspension {#url-pattern-rules}
 
 While time-based rules provide general automation, URL pattern rules allow precise targeting of specific websites or page types. These rules use pattern matching to identify tabs based on their web addresses, enabling granular control over which sites suspend and when. Understanding URL pattern syntax opens up powerful possibilities for customized tab management.
 
-Tab Suspender Pro supports wildcards and regular expressions for URL matching. The simplest pattern matching uses literal strings—if you enter "youtube.com," the rule applies to all URLs containing that domain. Wildcards extend this capability: "*.google.com" matches any Google subdomain, while "*/docs/*" targets any URL containing that path segment.
+Tab Suspender Pro supports wildcards and regular expressions for URL matching. The simplest pattern matching uses literal strings, if you enter "youtube.com," the rule applies to all URLs containing that domain. Wildcards extend this capability: "*.google.com" matches any Google subdomain, while "*/docs/*" targets any URL containing that path segment.
 
 Creating URL exclusion rules is perhaps the most common use of pattern matching. Most users want certain critical sites to never suspend automatically. Banking websites, ongoing downloads, music players, and communication tools should remain active regardless of other settings. By adding these domains to your exclusion list, you ensure they never accidentally suspend while you are away.
 
-Conversely, you can create "always suspend" rules for sites you know you leave open but rarely use. Newsletter archives, reference documentation, and bookmark repositories are perfect candidates. Creating a rule that immediately suspends these sites upon opening—or after a very short inactivity period—keeps your browser lean without requiring manual management.
+Conversely, you can create "always suspend" rules for sites you know you leave open but rarely use. Newsletter archives, reference documentation, and bookmark repositories are perfect candidates. Creating a rule that immediately suspends these sites upon opening, or after a very short inactivity period, keeps your browser lean without requiring manual management.
 
-URL pattern rules can combine with time-based rules for sophisticated behavior. For example, you might create a rule that suspends all news sites after 10 minutes of inactivity, while YouTube gets 30 minutes because you often leave videos playing in the background. These layered rules work together seamlessly, with more specific rules taking precedence over general ones.
+URL pattern rules can combine with time-based rules for sophisticated behavior. For example, you might create a rule that suspends all news sites after 10 minutes of inactivity, while YouTube gets 30 minutes because you often leave videos playing in the background. These layered rules work together smoothly, with more specific rules taking precedence over general ones.
 
 The pattern matching system also supports negative matching, allowing you to create rules that exclude specific URLs within a broader category. This fine-grained control ensures that your automation works exactly as intended, catching the tabs you want to suspend while preserving the ones you need to keep active.
 
 ---
 
-## Tab Count Threshold Rules for Dynamic Management {#tab-count-threshold-rules}
+Tab Count Threshold Rules for Dynamic Management {#tab-count-threshold-rules}
 
 Sometimes static rules based on time or URL patterns are not enough. Tab count threshold rules add a dynamic dimension to your automation, triggering suspension based on how many tabs you have open. This approach adapts to your browsing intensity, automatically taking action when tab accumulation threatens performance.
 
@@ -79,7 +79,7 @@ Threshold rules also support "suspend all except active" mode, which suspends ev
 
 ---
 
-## Combining Multiple Rules for Complex Scenarios {#combining-multiple-rules}
+Combining Multiple Rules for Complex Scenarios {#combining-multiple-rules}
 
 Real-world browsing scenarios rarely fit into simple single-rule configurations. Tab Suspender Pro excels at combining multiple rule types into cohesive strategies that handle various situations elegantly. Understanding how rules interact and prioritize creates opportunities for sophisticated automation that feels almost intelligent.
 
@@ -95,13 +95,13 @@ Rule combinations also support time-based activation. You might have aggressive 
 
 ---
 
-## Per-Window Settings for Contextual Control {#per-window-settings}
+Per-Window Settings for Contextual Control {#per-window-settings}
 
-Modern Chrome users often work with multiple windows simultaneously—a work window for professional tasks, a research window for investigations, and a personal window for leisure browsing. Tab Suspender Pro recognizes this reality and provides comprehensive per-window settings that let you tailor suspension behavior to each context independently.
+Modern Chrome users often work with multiple windows simultaneously, a work window for professional tasks, a research window for investigations, and a personal window for leisure browsing. Tab Suspender Pro recognizes this reality and provides comprehensive per-window settings that let you tailor suspension behavior to each context independently.
 
 Each Chrome window can have its own rule set, its own timeout durations, and its own threshold limits. This isolation means that opening a new window for a specific purpose automatically applies the appropriate automation strategy. You do not need to manually adjust settings when switching between work and personal browsing.
 
-Setting up per-window rules begins with window identification. Tab Suspender Pro can identify windows by their title patterns, the URLs they contain, or simply by their position in your window list. The most common approach uses title patterns—you might name your work window "Work - Chrome" and configure rules specifically for windows with that title.
+Setting up per-window rules begins with window identification. Tab Suspender Pro can identify windows by their title patterns, the URLs they contain, or simply by their position in your window list. The most common approach uses title patterns, you might name your work window "Work - Chrome" and configure rules specifically for windows with that title.
 
 Per-window settings also control whether a window's tabs can be suspended by global rules or only by window-specific rules. This isolation provides additional safety for critical windows while allowing aggressive automation in others. You might keep your research window completely separate from your main browsing window's automation.
 
@@ -111,7 +111,7 @@ The per-window system also handles new window creation intelligently. You can co
 
 ---
 
-## Scheduling Suspension Windows for Time-Based Automation {#scheduling-suspension-windows}
+Scheduling Suspension Windows for Time-Based Automation {#scheduling-suspension-windows}
 
 Beyond simple inactivity timeouts, Tab Suspender Pro offers comprehensive scheduling capabilities that let you define specific time windows when auto-suspend is active or inactive. This temporal control creates automation that aligns perfectly with your daily routine, suspending tabs during focused work periods while allowing them to remain open during leisure time.
 
@@ -127,9 +127,9 @@ Advanced users can create complex schedule hierarchies with multiple overlapping
 
 ---
 
-## Conclusion: Mastering Auto-Suspend for Effortless Tab Management
+Conclusion: Mastering Auto-Suspend for Effortless Tab Management
 
-Tab Suspender Pro's auto-suspend rules system represents a quantum leap in browser productivity tools. By understanding how each rule type works—time-based rules, URL patterns, tab count thresholds, and scheduling—you can create a personalized automation strategy that handles tab management completely in the background. The key is starting simple and gradually adding complexity as you discover what works best for your specific workflow.
+Tab Suspender Pro's auto-suspend rules system represents a quantum leap in browser productivity tools. By understanding how each rule type works, time-based rules, URL patterns, tab count thresholds, and scheduling, you can create a personalized automation strategy that handles tab management completely in the background. The key is starting simple and gradually adding complexity as you discover what works best for your specific workflow.
 
 The combination of these rule types creates possibilities limited only by your imagination. Whether you need aggressive cleanup during work hours, protective exceptions for critical sites, or dynamic thresholds that adapt to your tab consumption, Tab Suspender Pro delivers. Take time to experiment with different configurations, use the preview mode to validate your rules, and enjoy the liberation of automatic tab management that just works.
 

@@ -1,20 +1,20 @@
 ---
 layout: default
-title: "Chrome Extension Downloads API — How to Download Files and Track Progress"
+title: "Chrome Extension Downloads API. How to Download Files and Track Progress"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/downloads-api/"
 ---
-# Chrome Extension Downloads API — How to Download Files and Track Progress
+# Chrome Extension Downloads API. How to Download Files and Track Progress
 
-## Overview {#overview}
+Overview {#overview}
 The Chrome Downloads API (`chrome.downloads`) enables extensions to initiate file downloads, monitor their progress, and manage downloaded files programmatically. This API is essential for extensions that need to save content, cache resources, or provide download management features.
 
-### Permissions and Requirements
+Permissions and Requirements
 - Requires `"downloads"` permission in your `manifest.json`
 - The Download Manager API provides full control over downloads: initiation, searching, opening, and showing files in the folder
 - Works in both service workers and popup/options pages
 
-## Initiating Downloads {#initiating-downloads}
+Initiating Downloads {#initiating-downloads}
 The `chrome.downloads.download()` method initiates a download and returns a promise with the download ID:
 
 ```javascript
@@ -40,7 +40,7 @@ chrome.downloads.download({
 });
 ```
 
-### Download Options
+Download Options
 The `download()` method accepts several options to customize download behavior:
 
 | Option | Type | Description |
@@ -54,7 +54,7 @@ The `download()` method accepts several options to customize download behavior:
 | `body` | string | Request body for POST requests |
 | `incognito` | boolean | Download in incognito mode |
 
-## File Naming Strategies {#file-naming-strategies}
+File Naming Strategies {#file-naming-strategies}
 Proper file naming is crucial for user experience and organization. Here are common patterns:
 
 ```javascript
@@ -85,7 +85,7 @@ chrome.downloads.download({
 });
 ```
 
-## Searching Downloads {#searching-downloads}
+Searching Downloads {#searching-downloads}
 Use `chrome.downloads.search()` to find downloads by various criteria:
 
 ```javascript
@@ -120,7 +120,7 @@ chrome.downloads.search({
 });
 ```
 
-### Search Query Options
+Search Query Options
 - `query`: Search in URL and filename
 - `state`: 'in_progress', 'interrupted', 'complete'
 - `startedAfter`, `startedBefore`, `endedAfter`, `endedBefore`: Date filters
@@ -128,7 +128,7 @@ chrome.downloads.search({
 - `limit`: Maximum results (default: 100)
 - `orderBy`: Sort field (default: '-startTime')
 
-## Tracking Progress and Events {#tracking-progress-and-events}
+Tracking Progress and Events {#tracking-progress-and-events}
 Monitor download progress using event listeners:
 
 ```javascript
@@ -167,7 +167,7 @@ chrome.downloads.onInterrupted.addListener((downloadItem) => {
 });
 ```
 
-## Opening and Showing Downloads {#opening-and-showing-downloads}
+Opening and Showing Downloads {#opening-and-showing-downloads}
 After a download completes, you can open the file or show it in the folder:
 
 ```javascript
@@ -191,7 +191,7 @@ chrome.downloads.search({ state: 'complete' }, (downloads) => {
 });
 ```
 
-### Download Item Properties
+Download Item Properties
 Key properties available on download items:
 
 - `id`: Unique download identifier
@@ -204,8 +204,8 @@ Key properties available on download items:
 - `startTime`, `endTime`: Timestamps
 - `exists`: Whether file still exists on disk
 
-## Error Handling {#error-handling}
-Implement robust error handling for downloads:
+Error Handling {#error-handling}
+Implement solid error handling for downloads:
 
 ```javascript
 chrome.downloads.download({
@@ -238,12 +238,12 @@ chrome.downloads.download({
 });
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 - Always check `chrome.runtime.lastError` after async API calls
 - Use `conflictAction: 'uniquify'` to prevent accidental overwrites
 - Monitor download progress for large files to keep users informed
 - Clean up old downloads using `chrome.downloads.removeFile()` when no longer needed
 - Use the Downloads API in combination with the File System Access API for advanced file operations
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 The Chrome Downloads API provides powerful capabilities for managing file downloads in your extension. From initiating downloads with custom settings to tracking progress in real-time and opening completed files, this API enables sophisticated download management features. Remember to request the appropriate permissions and implement proper error handling for a polished user experience.

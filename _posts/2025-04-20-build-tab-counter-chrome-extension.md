@@ -17,9 +17,9 @@ In this comprehensive tutorial, we will walk through the complete process of cre
 
 ---
 
-## Why Build a Tab Counter Extension? {#why-build-tab-counter}
+Why Build a Tab Counter Extension? {#why-build-tab-counter}
 
-Before we dive into the code, let us consider why a tab counter extension is worth building. First and foremost, it addresses a real pain point that millions of Chrome users experience daily. Having a visible tab count in your browser toolbar serves as a gentle reminder to close unnecessary tabs and maintain a manageable workflow. Unlike complex tab management solutions that require significant user interaction, a simple tab counter provides at-a-glance awareness without adding cognitive overhead.
+Before we dive into the code, let us consider why a tab counter extension is worth building. First and foremost, it addresses a real problem that millions of Chrome users experience daily. Having a visible tab count in your browser toolbar serves as a gentle reminder to close unnecessary tabs and maintain a manageable workflow. Unlike complex tab management solutions that require significant user interaction, a simple tab counter provides at-a-glance awareness without adding cognitive overhead.
 
 From a development perspective, building a tab counter extension teaches you several essential skills. You will learn how to interact with the Chrome Tabs API to retrieve tab information, how to use browser action badges to display dynamic content, and how to listen for events that indicate changes to the tab state. These concepts form the foundation for virtually every Chrome extension you will build in the future.
 
@@ -27,7 +27,7 @@ Additionally, a tab counter extension is remarkably lightweight and fast. Unlike
 
 ---
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before we begin building the tab counter extension, you will need a few things set up on your development machine. First and foremost, you need Google Chrome or a Chromium-based browser installed. This is essential for testing your extension during development. You will also need a text editor or IDE for writing code. Visual Studio Code is an excellent choice for Chrome extension development because it offers helpful extensions for JavaScript and JSON syntax highlighting.
 
@@ -37,7 +37,7 @@ Finally, you need a way to load your extension into Chrome for testing. Chrome p
 
 ---
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 Every Chrome extension follows a specific file structure, and understanding this structure is crucial to building successful extensions. For our tab counter extension, we will create a simple project with three essential files: the manifest file, a background script, and optionally, a popup interface.
 
@@ -52,7 +52,7 @@ For a minimal tab counter that displays the count in the browser action badge, w
 
 ---
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest file is the backbone of every Chrome extension. It defines the extension is name, version, permissions, and the scripts that Chrome should load. For our tab counter extension, we will use Manifest V3, which is the current standard for Chrome extensions.
 
@@ -86,7 +86,7 @@ Finally, the `action` section configures the browser action. This is the icon th
 
 ---
 
-## Implementing the Background Script {#background-script}
+Implementing the Background Script {#background-script}
 
 Now we need to create the background script that will count tabs and update the badge. Create a file named `background.js` in your project folder and add the following code:
 
@@ -131,7 +131,7 @@ We also listen for `onInstalled` and `onStartup` events to ensure the badge is u
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we have created both the manifest and background script, it is time to test our extension in Chrome. Follow these steps to load your extension:
 
@@ -146,11 +146,11 @@ If the extension is not working as expected, check the following common issues. 
 
 ---
 
-## Enhancing the Extension {#enhancing-extension}
+Enhancing the Extension {#enhancing-extension}
 
 While our basic tab counter extension works well, there are several enhancements we can add to make it more useful. In this section, we will explore some optional improvements that demonstrate additional Chrome Extension APIs and patterns.
 
-### Adding a Popup Interface
+Adding a Popup Interface
 
 Many users prefer to have more detailed information about their tabs. We can add a popup that displays not just the total tab count, but also additional statistics like the number of tabs per window. To do this, we need to create a popup HTML file and update our manifest.
 
@@ -217,7 +217,7 @@ Finally, update your manifest to include the popup:
 
 Now when users click on the extension icon, they will see a popup with additional information about their tabs and windows.
 
-### Adding Storage for Preferences
+Adding Storage for Preferences
 
 If you want to allow users to customize how the tab count is displayed, you can use the Chrome Storage API to save their preferences. This demonstrates how to persist data across browser sessions, which is essential for many extensions.
 
@@ -248,7 +248,7 @@ function updateTabCount() {
 
 Users can then set their preferred color using the storage API from a separate options page.
 
-### Handling Large Tab Counts
+Handling Large Tab Counts
 
 If a user has more than 99 tabs open, the badge will not display the full number because Chrome badges are limited to two characters. You can handle this gracefully by showing "99+" for any count over 99:
 
@@ -268,31 +268,31 @@ This small enhancement prevents the badge from overflowing and provides a clear 
 
 ---
 
-## Best Practices and Optimization {#best-practices}
+Best Practices and Optimization {#best-practices}
 
 When building Chrome extensions, it is important to follow best practices that ensure your extension is performant, secure, and maintainable. Here are some recommendations specific to tab counter extensions:
 
-### Minimize API Calls
+Minimize API Calls
 
 While our current implementation updates the badge on every tab event, this is generally fine for most users. However, if you are building a more complex extension, you should be mindful of how often you query the tabs API. Each call to `chrome.tabs.query` requires Chrome to gather information from all open tabs, which can be resource-intensive if done excessively.
 
 For a simple tab counter, the current approach is perfectly acceptable. But if you were building a more feature-rich extension, you might consider using the `chrome.tabs.onActivated` event instead of updating on every single change, or implementing a debounce mechanism that limits how often the count is refreshed.
 
-### Handle Permissions Carefully
+Handle Permissions Carefully
 
 Always request only the permissions your extension absolutely needs. For our tab counter, we only need the `tabs` permission. Avoid requesting unnecessary permissions like `<all_urls>` or `cookies` unless your extension specifically requires them. Not only does this improve security, but it also makes users more confident about installing your extension.
 
-### Test Across Scenarios
+Test Across Scenarios
 
 Be sure to test your extension in various scenarios. What happens when you have multiple Chrome windows open? What happens when you use tab groups? What happens in Incognito mode? Our current implementation handles all of these scenarios correctly because we query all tabs in all windows, but it is worth verifying this behavior yourself.
 
-### Consider Manifest V3 Compliance
+Consider Manifest V3 Compliance
 
 Google is continuously evolving the Chrome extension platform, and Manifest V3 represents the current direction of the ecosystem. Make sure your extension follows V3 best practices, such as using service workers instead of background pages and avoiding remotely hosted code. Our tab counter extension is fully compliant with Manifest V3 standards.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have built and tested your tab counter extension, you may want to publish it to the Chrome Web Store so others can benefit from it. The publishing process involves creating a zip file of your extension, setting up a developer account, and submitting your extension for review.
 
@@ -306,7 +306,7 @@ After submitting your extension, it will go through a review process. Google is 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional tab counter Chrome extension from scratch. Throughout this tutorial, you learned how to create a Manifest V3 extension, interact with the Chrome Tabs API, display dynamic content in the browser action badge, and handle tab-related events for real-time updates.
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Managing Downloads in Chrome Extensions — Developer Guide"
+title: "Managing Downloads in Chrome Extensions. Developer Guide"
 description: "Learn how to use the Chrome Downloads API to initiate, monitor, pause, resume, and manage file downloads in your Chrome extension."
 canonical_url: "https://bestchromeextensions.com/tutorials/downloads-api-guide/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/downloads-api-guide/"
 
 The `chrome.downloads` API provides powerful capabilities for managing file downloads directly from your Chrome extension. This guide covers everything from initiating downloads to handling the download shelf, with practical code examples for common operations.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Basic understanding of Chrome extension architecture
 - Familiarity with service workers and event handling
@@ -17,7 +17,7 @@ The `chrome.downloads` API provides powerful capabilities for managing file down
 
 For a complete API reference, see: [Downloads API Reference](../api-reference/downloads-api.md)
 
-## 1. Setting Up Permissions {#1-setting-up-permissions}
+1. Setting Up Permissions {#1-setting-up-permissions}
 
 Before using the Downloads API, add the required permissions to your manifest:
 
@@ -47,7 +47,7 @@ For additional capabilities, you may need:
 }
 ```
 
-## 2. Initiating Downloads {#2-initiating-downloads}
+2. Initiating Downloads {#2-initiating-downloads}
 
 The `chrome.downloads.download()` method initiates a download. It returns a `Promise` with the download ID:
 
@@ -84,7 +84,7 @@ async function downloadBlob(blob, filename) {
 }
 ```
 
-### Download Options {#download-options}
+Download Options {#download-options}
 
 | Option | Type | Description |
 |--------|------|-------------|
@@ -96,7 +96,7 @@ async function downloadBlob(blob, filename) {
 | `body` | string | Request body for POST |
 | `incognito` | boolean | Download in incognito mode |
 
-## 3. Monitoring Download Progress {#3-monitoring-download-progress}
+3. Monitoring Download Progress {#3-monitoring-download-progress}
 
 Listen to download events to track progress in real-time:
 
@@ -134,7 +134,7 @@ chrome.downloads.onError.addListener((downloadItem) => {
 });
 ```
 
-### Querying Downloads {#querying-downloads}
+Querying Downloads {#querying-downloads}
 
 Search for downloads using `chrome.downloads.search()`:
 
@@ -167,7 +167,7 @@ async function findDownloads(query) {
 }
 ```
 
-## 4. Pausing, Resuming, and Cancelling {#4-pausing-resuming-and-cancelling}
+4. Pausing, Resuming, and Cancelling {#4-pausing-resuming-and-cancelling}
 
 Control download lifecycle with pause, resume, and cancel operations:
 
@@ -201,7 +201,7 @@ async function checkCanResume(downloadId) {
 }
 ```
 
-### Erasing Downloads {#erasing-downloads}
+Erasing Downloads {#erasing-downloads}
 
 Remove download history without deleting the file:
 
@@ -224,7 +224,7 @@ async function clearIncompleteDownloads() {
 }
 ```
 
-## 5. File Naming and Conflict Resolution {#5-file-naming-and-conflict-resolution}
+5. File Naming and Conflict Resolution {#5-file-naming-and-conflict-resolution}
 
 Handle filename conflicts and customize download locations:
 
@@ -265,7 +265,7 @@ async function downloadToFolder(url, subfolder, filename) {
 }
 ```
 
-### Conflict Action Values
+Conflict Action Values
 
 | Value | Behavior |
 |-------|----------|
@@ -274,7 +274,7 @@ async function downloadToFolder(url, subfolder, filename) {
 | `overwrite` | Replace existing file |
 | `prompt` | Ask user via saveAs dialog |
 
-## 6. Opening Downloaded Files {#6-opening-downloaded-files}
+6. Opening Downloaded Files {#6-opening-downloaded-files}
 
 After a download completes, you can open the file programmatically:
 
@@ -301,9 +301,9 @@ async function getFilePath(downloadId) {
 }
 ```
 
-Note: The `downloads.open` permission is required for `chrome.downloads.open()`.
+The `downloads.open` permission is required for `chrome.downloads.open()`.
 
-## 7. Download Shelf Interaction {#7-download-shelf-interaction}
+7. Download Shelf Interaction {#7-download-shelf-interaction}
 
 Control the download shelf visibility:
 
@@ -317,7 +317,7 @@ async function showDownloadShelf() {
 // (Note: This is not directly exposed, but you can infer from events)
 ```
 
-### Download Item States
+Download Item States
 
 | State | Description |
 |-------|-------------|
@@ -325,7 +325,7 @@ async function showDownloadShelf() {
 | `interrupted` | Stopped due to error or user action |
 | `complete` | Successfully finished |
 
-### Danger Types
+Danger Types
 
 | Danger | Description |
 |--------|-------------|
@@ -336,7 +336,7 @@ async function showDownloadShelf() {
 | `unwanted` | May be unwanted software |
 | `rare` | Rarely downloaded |
 
-## 8. MIME Type Handling {#8-mime-type-handling}
+8. MIME Type Handling {#8-mime-type-handling}
 
 Handle different MIME types appropriately:
 
@@ -368,7 +368,7 @@ async function getDownloadMimeType(downloadId) {
 }
 ```
 
-## 9. Complete Example: Download Manager {#9-complete-example}
+9. Complete Example: Download Manager {#9-complete-example}
 
 Here's a practical implementation of a download manager:
 
@@ -465,19 +465,19 @@ class DownloadManager {
 const manager = new DownloadManager();
 ```
 
-## 10. Best Practices {#10-best-practices}
+10. Best Practices {#10-best-practices}
 
-1. **Always handle errors**: Use try/catch and listen to `onError` events
-2. **Check file size**: Warn users before downloading large files
-3. **Use meaningful filenames**: Help users find downloads later
-4. **Respect user privacy**: Don't track downloads without consent
-5. **Clean up old entries**: Periodically erase completed downloads from history
+1. Always handle errors: Use try/catch and listen to `onError` events
+2. Check file size: Warn users before downloading large files
+3. Use meaningful filenames: Help users find downloads later
+4. Respect user privacy: Don't track downloads without consent
+5. Clean up old entries: Periodically erase completed downloads from history
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Downloads API Reference](../api-reference/downloads-api.md) — Complete API documentation
-- [Download Management Patterns](../guides/download-management.md) — Advanced patterns and strategies
-- [Downloads Permission](../permissions/downloads.md) — Permission requirements and security
+- [Downloads API Reference](../api-reference/downloads-api.md). Complete API documentation
+- [Download Management Patterns](../guides/download-management.md). Advanced patterns and strategies
+- [Downloads Permission](../permissions/downloads.md). Permission requirements and security
 
 ---
 

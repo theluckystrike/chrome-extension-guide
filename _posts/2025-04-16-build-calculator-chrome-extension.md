@@ -13,11 +13,11 @@ canonical_url: "https://bestchromeextensions.com/2025/04/16/build-calculator-chr
 
 Have you ever needed to quickly calculate something while browsing the web? Maybe you are comparing prices, converting currencies, or working through a mathematical problem while reading an article. Opening a separate calculator application breaks your workflow and costs precious seconds. This is exactly the problem that a Chrome extension calculator solves.
 
-In this comprehensive guide, we will walk through building a fully functional scientific calculator Chrome extension from scratch. You will learn how to create a popup-based extension using Manifest V3, implement mathematical operations with JavaScript, style an intuitive user interface, and publish your creation to the Chrome Web Store. By the end of this tutorial, you will have a professional-grade calculator extension that lives right in your browser toolbar.
+we will walk through building a fully functional scientific calculator Chrome extension from scratch. You will learn how to create a popup-based extension using Manifest V3, implement mathematical operations with JavaScript, style an intuitive user interface, and publish your creation to the Chrome Web Store. By the end of this tutorial, you will have a professional-grade calculator extension that lives right in your browser toolbar.
 
 ---
 
-## Why Build a Calculator Chrome Extension? {#why-build-calculator-extension}
+Why Build a Calculator Chrome Extension? {#why-build-calculator-extension}
 
 Calculator extensions are among the most useful and popular types of browser extensions. They fill a genuine need that Chrome's built-in tools do not address. While Chrome has some basic functionality, a dedicated scientific calculator extension offers significant advantages that make the development effort worthwhile.
 
@@ -31,7 +31,7 @@ The calculator extension also presents monetization opportunities. You can offer
 
 ---
 
-## Understanding Chrome Extension Architecture {#extension-architecture}
+Understanding Chrome Extension Architecture {#extension-architecture}
 
 Before we write any code, it is essential to understand how Chrome extensions are structured. A Chrome extension is essentially a collection of files that run in the Chrome browser and extend its functionality. These files work together to create the user experience.
 
@@ -45,7 +45,7 @@ This popup architecture is perfect for calculator extensions because it provides
 
 ---
 
-## Step 1: Create the Manifest File {#create-manifest}
+Step 1: Create the Manifest File {#create-manifest}
 
 Every Chrome extension begins with the manifest.json file. This file is the blueprint that Chrome uses to understand and load your extension. For our scientific calculator, we need to configure several important settings.
 
@@ -82,7 +82,7 @@ Notice that we do not require any permissions for this basic calculator. Because
 
 ---
 
-## Step 2: Build the Calculator Interface {#build-interface}
+Step 2: Build the Calculator Interface {#build-interface}
 
 Now we need to create the popup.html file that defines our calculator's user interface. This HTML file will contain the display area where results appear and the button grid where users input numbers and operations.
 
@@ -161,7 +161,7 @@ The button layout includes scientific functions like sine, cosine, tangent, loga
 
 ---
 
-## Step 3: Style Your Calculator {#style-calculator}
+Step 3: Style Your Calculator {#style-calculator}
 
 The visual design of your calculator extension significantly impacts user experience. A well-designed calculator feels intuitive and pleasant to use, while a poorly designed one frustrates users. Let us create a modern, professional-looking calculator with popup.css.
 
@@ -313,7 +313,7 @@ Button interactions include hover and active states that provide visual feedback
 
 ---
 
-## Step 4: Implement Calculator Logic {#implement-logic}
+Step 4: Implement Calculator Logic {#implement-logic}
 
 Now comes the most important part: making the calculator actually work. We will create popup.js to handle all the mathematical operations, button interactions, and display updates. This JavaScript file will implement a full scientific calculator with support for basic arithmetic, trigonometric functions, logarithms, and more.
 
@@ -541,7 +541,7 @@ class ScientificCalculator {
     expressionString = expressionString.replace(/log\(/g, 'Math.log10(');
     expressionString = expressionString.replace(/ln\(/g, 'Math.log(');
     expressionString = expressionString.replace(/√\(/g, 'Math.sqrt(');
-    expressionString = expressionString.replace(/\^2/g, '**2');
+    expressionString = expressionString.replace(/\^2/g, '2');
 
     try {
       let result = eval(expressionString);
@@ -585,7 +585,7 @@ Error handling is built in to prevent the calculator from crashing when users en
 
 ---
 
-## Step 5: Create Extension Icons {#create-icons}
+Step 5: Create Extension Icons {#create-icons}
 
 Every Chrome extension needs icons to represent it in the browser toolbar and Chrome Web Store. You need to create three icon sizes: 16x16, 48x48, and 128x128 pixels. These icons should be PNG files placed in an icons folder.
 
@@ -597,7 +597,7 @@ If you do not have custom icons, Chrome will use a default placeholder, but your
 
 ---
 
-## Step 6: Test Your Extension {#test-extension}
+Step 6: Test Your Extension {#test-extension}
 
 Before publishing your extension, you need to test it locally to ensure everything works correctly. Chrome provides a simple way to load unpacked extensions for testing.
 
@@ -611,7 +611,7 @@ Test edge cases as well. Try dividing by zero, entering very large numbers, and 
 
 ---
 
-## Step 7: Publish to Chrome Web Store {#publish-extension}
+Step 7: Publish to Chrome Web Store {#publish-extension}
 
 Once you have tested your extension and confirmed it works correctly, you can publish it to the Chrome Web Store to share with other users. The publishing process requires a Google account and a small one-time developer registration fee.
 
@@ -625,7 +625,7 @@ After submitting, Google will review your extension. The review process typicall
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete scientific calculator Chrome extension from scratch. This project demonstrates the fundamental concepts of Chrome extension development and provides a useful tool that you can use daily.
 

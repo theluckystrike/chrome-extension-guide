@@ -17,17 +17,17 @@ Whether you are migrating from Webpack or starting fresh, this guide covers ever
 
 ---
 
-## Why Use Rollup for Chrome Extensions? {#why-rollup}
+Why Use Rollup for Chrome Extensions? {#why-rollup}
 
 Chrome extensions have unique requirements that make Rollup an excellent choice for bundling. Unlike traditional web applications, extensions must manage multiple entry points including background service workers, content scripts, popup pages, options pages, and side panels. Rollup's modular architecture handles these complex build scenarios elegantly.
 
-### The Case for Rollup in Extension Development
+The Case for Rollup in Extension Development
 
 Rollup offers several compelling advantages for Chrome extension development. First, its native ES module support means you can write modern JavaScript without worrying about compatibility issues. Second, Rollup's tree-shaking capability removes unused code, resulting in smaller bundle sizes which directly impact extension performance and loading times. Third, the plugin ecosystem provides solutions for every aspect of extension bundling, from handling multiple entry points to processing different file types.
 
 Many developers initially choose Webpack for their extension projects, but often find the configuration complexity overwhelming. Rollup's simpler configuration model makes it easier to understand and maintain, while still providing all the features needed for production-ready extensions. The transition from Webpack to Rollup typically results in faster build times and smaller output files.
 
-### Understanding the Chrome Extension Build Requirements
+Understanding the Chrome Extension Build Requirements
 
 Chrome extensions built with Manifest V3 have specific build requirements that influence your Rollup configuration. Each extension component runs in a different context: background service workers run in a special extension context, content scripts run in the context of web pages, and popup or options pages run as standard web pages within the extension. Your bundler must handle these contexts correctly while ensuring all dependencies are properly bundled.
 
@@ -35,11 +35,11 @@ The background service worker in Manifest V3 presents unique challenges. Unlike 
 
 ---
 
-## Setting Up Rollup for Your Chrome Extension {#setting-up-rollup}
+Setting Up Rollup for Your Chrome Extension {#setting-up-rollup}
 
 Getting started with Rollup for Chrome extensions requires installing the necessary packages and creating a configuration file. This section walks you through the complete setup process.
 
-### Installing Required Dependencies
+Installing Required Dependencies
 
 Begin by installing Rollup and the plugins you will need for your extension build. The core packages include Rollup itself, the Node resolve plugin for finding modules, and the CommonJS plugin for handling CommonJS dependencies. You will also need plugins for processing different file types and minifying the output.
 
@@ -51,7 +51,7 @@ The Node resolve plugin allows Rollup to find modules in your node_modules folde
 
 For Chrome extensions, you will also want to consider additional plugins for specific tasks. The Babel plugin can transpile modern JavaScript for broader browser compatibility if needed. The TypeScript plugin enables TypeScript support. The copy plugin helps with copying static assets like icons and HTML files to the build output.
 
-### Creating Your Rollup Configuration File
+Creating Your Rollup Configuration File
 
 Create a `rollup.config.js` file in your project root to configure Rollup for your Chrome extension. The configuration defines input entry points, output formats, and plugins to use during the build process.
 
@@ -99,11 +99,11 @@ This configuration defines multiple entry points for different extension compone
 
 ---
 
-## Configuring Rollup for Manifest V3 Specifics {#manifest-v3-configuration}
+Configuring Rollup for Manifest V3 Specifics {#manifest-v3-configuration}
 
 Manifest V3 introduced several changes that require specific consideration in your Rollup configuration. Understanding these requirements ensures your extension builds correctly and passes Chrome Web Store validation.
 
-### Handling Service Workers
+Handling Service Workers
 
 The background service worker in Manifest V3 must be a single JavaScript file. This means your Rollup configuration must bundle all dependencies into one file for the background entry point. The configuration shown above achieves this by specifying `background.js` as a separate entry point with all dependencies inlined.
 
@@ -126,7 +126,7 @@ export default {
 };
 ```
 
-### Managing Content Scripts
+Managing Content Scripts
 
 Content scripts run in the context of web pages, which creates unique challenges for bundling. Unlike service workers or popup pages, content scripts share the page's global scope, meaning your bundled code must not pollute the global namespace unintentionally. Rollup's module format options help control how code is wrapped and exposed.
 
@@ -157,11 +157,11 @@ The IIFE format wraps the bundled code in an immediately invoked function, preve
 
 ---
 
-## Optimizing Your Extension Build {#optimizing-builds}
+Optimizing Your Extension Build {#optimizing-builds}
 
 Optimization is crucial for Chrome extensions, where load time directly impacts user experience and Chrome's extension performance metrics. This section covers techniques to make your extension faster and smaller.
 
-### Tree Shaking and Code Splitting
+Tree Shaking and Code Splitting
 
 Rollup's tree-shaking capability automatically removes unused code from your final bundles. To maximize tree-shaking effectiveness, write your code using ES modules with named exports rather than default exports. Named exports allow Rollup to analyze which parts of a module are actually used.
 
@@ -197,7 +197,7 @@ if (isOptionsPage) {
 }
 ```
 
-### Minification and Compression
+Minification and Compression
 
 The Terser plugin provides extensive minification options that can significantly reduce your bundle size. Beyond basic minification, Terser can perform advanced optimizations like shortening variable names, removing whitespace and comments, and inlining functions.
 
@@ -226,7 +226,7 @@ const productionConfig = terser({
 
 These options provide aggressive minification, but some options like `unsafe` transformations may cause issues with certain code patterns. Always test your extension thoroughly after enabling aggressive minification.
 
-### Handling External Dependencies
+Handling External Dependencies
 
 Some dependencies should not be bundled but instead marked as external. Chrome's built-in APIs, accessed through the `chrome` global object, should always be marked external so Rollup does not try to bundle them.
 
@@ -248,11 +248,11 @@ For dependencies that are available globally in Chrome extensions or that you wa
 
 ---
 
-## Handling Static Assets and HTML Files {#static-assets}
+Handling Static Assets and HTML Files {#static-assets}
 
 Chrome extensions require various static assets including HTML files, images, icons, and CSS files. While Rollup primarily processes JavaScript, you can configure it to handle these assets or use additional plugins.
 
-### Using the Copy Plugin
+Using the Copy Plugin
 
 The @rollup/plugin-copy plugin allows you to copy static files to your distribution directory during the build process. This is essential for including HTML files, icons, and other non-JavaScript assets.
 
@@ -276,7 +276,7 @@ export default {
 };
 ```
 
-### Processing CSS with Rollup
+Processing CSS with Rollup
 
 For CSS processing, you have several options. The simplest approach is to copy CSS files using the copy plugin. For more advanced CSS processing including PostCSS support, use the postcss plugin.
 
@@ -300,11 +300,11 @@ The extract option writes CSS to a separate file, while minimize enables CSS min
 
 ---
 
-## Advanced Rollup Configurations {#advanced-configurations}
+Advanced Rollup Configurations {#advanced-configurations}
 
 As your extension grows in complexity, you may need more sophisticated Rollup configurations. This section covers advanced patterns for handling complex extension architectures.
 
-### Multi-Page Extension Build
+Multi-Page Extension Build
 
 Large extensions often have multiple pages beyond just popup and options. Side panels, new tab pages, and devtools pages each require their own build configuration. You can create separate Rollup configurations for each page type or use a single configuration with multiple entry points.
 
@@ -337,7 +337,7 @@ const pageConfig = defineConfig({
 export default [baseConfig, pageConfig];
 ```
 
-### TypeScript Support
+TypeScript Support
 
 Adding TypeScript support to your Rollup configuration enables type checking and improved developer experience. The @rollup/plugin-typescript plugin handles TypeScript compilation and integrates with your tsconfig.json.
 
@@ -362,7 +362,7 @@ export default {
 
 TypeScript provides compile-time type checking that catches errors before runtime, making your extension more reliable. The integration with Rollup ensures TypeScript is compiled during the build process without requiring a separate build step.
 
-### Environment-Specific Builds
+Environment-Specific Builds
 
 Different build environments require different configurations. Development builds should include source maps for debugging, while production builds should be minified and optimized. Environment variables help control these differences.
 
@@ -396,11 +396,11 @@ if (process.env.DEBUG) {
 
 ---
 
-## Common Issues and Solutions {#troubleshooting}
+Common Issues and Solutions {#troubleshooting}
 
 Even with careful configuration, you may encounter issues when building Chrome extensions with Rollup. This section addresses common problems and their solutions.
 
-### Module Resolution Issues
+Module Resolution Issues
 
 One of the most common issues is module resolution failures, where Rollup cannot find imported modules. This often happens with packages that have complex export configurations or that use non-standard file extensions.
 
@@ -420,7 +420,7 @@ export default {
 
 Adding all possible extensions to the resolve plugin often resolves these issues. If problems persist, you may need to explicitly configure specific packages as external or use the alias plugin to point to correct implementations.
 
-### Chrome API Compatibility
+Chrome API Compatibility
 
 The `chrome` global object is not available during the build process, which can cause issues if code tries to access Chrome APIs at module load time. Ensure all Chrome API calls happen inside functions that are only called at runtime in the extension context.
 
@@ -435,13 +435,13 @@ export async function getSettings() {
 }
 ```
 
-### Circular Dependencies
+Circular Dependencies
 
 Circular dependencies can cause issues in bundled code. Rollup handles some circular dependencies correctly, but complex circular reference patterns may cause unexpected behavior. Restructure your code to minimize circular dependencies, or use the `output.inlineDynamicImports` option for problematic entry points.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Rollup provides a powerful and flexible solution for building Chrome extensions in 2025. Its simple configuration model, excellent tree-shaking capabilities, and comprehensive plugin ecosystem make it ideal for extension projects of any size. By following the patterns and configurations in this guide, you can create efficient, optimized builds that result in fast-loading extensions that perform well and pass Chrome Web Store review.
 

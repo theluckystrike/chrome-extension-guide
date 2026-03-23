@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/api-reference/history-api/"
 
 The `chrome.history` API lets you search, read, add, and delete browser history entries. Each history item represents a unique URL the user has visited, and each URL can have multiple visit records with timestamps.
 
-## Permissions {#permissions}
+Permissions {#permissions}
 
 ```json
 {
@@ -17,15 +17,15 @@ The `chrome.history` API lets you search, read, add, and delete browser history 
 }
 ```
 
-Triggers the "Read and change your browsing history" warning. This is a high-sensitivity permission — use `optional_permissions` when possible.
+Triggers the "Read and change your browsing history" warning. This is a high-sensitivity permission. use `optional_permissions` when possible.
 
 See the [history permission reference](../permissions/history.md) for details.
 
-## Data Model {#data-model}
+Data Model {#data-model}
 
 History has two related object types:
 
-### HistoryItem {#historyitem}
+HistoryItem {#historyitem}
 
 Represents a unique URL in the user's history.
 
@@ -38,7 +38,7 @@ Represents a unique URL in the user's history.
 | `visitCount` | `number \| undefined` | Total number of visits |
 | `typedCount` | `number \| undefined` | Times the URL was typed in the address bar |
 
-### VisitItem {#visititem}
+VisitItem {#visititem}
 
 Represents a single visit to a URL.
 
@@ -50,11 +50,11 @@ Represents a single visit to a URL.
 | `referringVisitId` | `string` | ID of the visit that referred to this one |
 | `transition` | `TransitionType` | How the user navigated here |
 
-**TransitionType values:** `"link"`, `"typed"`, `"auto_bookmark"`, `"auto_subframe"`, `"manual_subframe"`, `"generated"`, `"auto_toplevel"`, `"form_submit"`, `"reload"`, `"keyword"`, `"keyword_generated"`.
+TransitionType values: `"link"`, `"typed"`, `"auto_bookmark"`, `"auto_subframe"`, `"manual_subframe"`, `"generated"`, `"auto_toplevel"`, `"form_submit"`, `"reload"`, `"keyword"`, `"keyword_generated"`.
 
-## Core Methods {#core-methods}
+Core Methods {#core-methods}
 
-### chrome.history.search(query) {#chromehistorysearchquery}
+chrome.history.search(query) {#chromehistorysearchquery}
 
 Search browsing history. Returns `HistoryItem[]`.
 
@@ -89,7 +89,7 @@ const thisWeek = await chrome.history.search({
 });
 ```
 
-**Query properties:**
+Query properties:
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `text` | `string` | required | Search term (empty string matches all) |
@@ -97,7 +97,7 @@ const thisWeek = await chrome.history.search({
 | `endTime` | `number` | now | End of time range |
 | `maxResults` | `number` | 100 | Max items to return (0 = unlimited, capped at ~2^31) |
 
-### chrome.history.getVisits(details) {#chromehistorygetvisitsdetails}
+chrome.history.getVisits(details) {#chromehistorygetvisitsdetails}
 
 Get all visit records for a specific URL.
 
@@ -114,7 +114,7 @@ visits.forEach((visit) => {
 });
 ```
 
-### chrome.history.addUrl(details) {#chromehistoryaddurldetails}
+chrome.history.addUrl(details) {#chromehistoryaddurldetails}
 
 Add a URL to the browser's history as if the user visited it.
 
@@ -127,7 +127,7 @@ await chrome.history.addUrl({
 await chrome.history.addUrl({ url: "https://example.com/page" });
 ```
 
-### chrome.history.deleteUrl(details) {#chromehistorydeleteurldetails}
+chrome.history.deleteUrl(details) {#chromehistorydeleteurldetails}
 
 Delete all history entries for a specific URL.
 
@@ -137,7 +137,7 @@ await chrome.history.deleteUrl({
 });
 ```
 
-### chrome.history.deleteRange(range) {#chromehistorydeleterangerange}
+chrome.history.deleteRange(range) {#chromehistorydeleterangerange}
 
 Delete all history entries within a time range.
 
@@ -150,18 +150,18 @@ await chrome.history.deleteRange({
 });
 ```
 
-### chrome.history.deleteAll() {#chromehistorydeleteall}
+chrome.history.deleteAll() {#chromehistorydeleteall}
 
 Delete the user's entire browsing history.
 
 ```ts
 await chrome.history.deleteAll();
-// This is irreversible — use with extreme caution
+// This is irreversible. use with extreme caution
 ```
 
-## Events {#events}
+Events {#events}
 
-### chrome.history.onVisited {#chromehistoryonvisited}
+chrome.history.onVisited {#chromehistoryonvisited}
 
 Fires every time the user visits a URL. Provides the `HistoryItem` with updated visit count.
 
@@ -173,7 +173,7 @@ chrome.history.onVisited.addListener((result) => {
 });
 ```
 
-### chrome.history.onVisitRemoved {#chromehistoryonvisitremoved}
+chrome.history.onVisitRemoved {#chromehistoryonvisitremoved}
 
 Fires when history entries are deleted (by the user or programmatically).
 
@@ -187,7 +187,7 @@ chrome.history.onVisitRemoved.addListener((removed) => {
 });
 ```
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Build a history search and analytics feature:
 
@@ -249,7 +249,7 @@ msg.onMessage({
 });
 ```
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Track browsing patterns over time:
 
@@ -283,9 +283,9 @@ chrome.history.onVisited.addListener(async (result) => {
 });
 ```
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Get browsing activity for today {#get-browsing-activity-for-today}
+Get browsing activity for today {#get-browsing-activity-for-today}
 
 ```ts
 async function getTodayHistory() {
@@ -300,7 +300,7 @@ async function getTodayHistory() {
 }
 ```
 
-### Check if a URL was visited recently {#check-if-a-url-was-visited-recently}
+Check if a URL was visited recently {#check-if-a-url-was-visited-recently}
 
 ```ts
 async function wasVisitedRecently(url: string, withinMs: number): Promise<boolean> {
@@ -310,7 +310,7 @@ async function wasVisitedRecently(url: string, withinMs: number): Promise<boolea
 }
 ```
 
-### Get most visited domains {#get-most-visited-domains}
+Get most visited domains {#get-most-visited-domains}
 
 ```ts
 async function topDomains(days: number, limit: number) {
@@ -336,34 +336,34 @@ async function topDomains(days: number, limit: number) {
 }
 ```
 
-## Gotchas {#gotchas}
+Gotchas {#gotchas}
 
-1. **`search()` defaults to last 24 hours.** Set `startTime: 0` to search all history. Without this, you'll miss older entries.
+1. `search()` defaults to last 24 hours. Set `startTime: 0` to search all history. Without this, you'll miss older entries.
 
-2. **`maxResults` defaults to 100.** Set it to `0` for unlimited results when you need comprehensive data.
+2. `maxResults` defaults to 100. Set it to `0` for unlimited results when you need comprehensive data.
 
-3. **`text: ""` matches everything.** This is how you do a time-range-only query. It's not a bug — it's the API design.
+3. `text: ""` matches everything. This is how you do a time-range-only query. It's not a bug. it's the API design.
 
-4. **`deleteAll()` is irreversible.** No confirmation dialog. Your extension is responsible for confirming with the user.
+4. `deleteAll()` is irreversible. No confirmation dialog. Your extension is responsible for confirming with the user.
 
-5. **Visit counts include subframes.** A single page load with iframes may generate multiple `onVisited` events. Filter by `transition` type if needed.
+5. Visit counts include subframes. A single page load with iframes may generate multiple `onVisited` events. Filter by `transition` type if needed.
 
-6. **History items don't store visit timestamps directly.** `lastVisitTime` is only the most recent visit. Use `getVisits()` to get all individual visit timestamps.
+6. History items don't store visit timestamps directly. `lastVisitTime` is only the most recent visit. Use `getVisits()` to get all individual visit timestamps.
 
-7. **Incognito history is never stored.** The History API has no access to incognito browsing data.
+7. Incognito history is never stored. The History API has no access to incognito browsing data.
 
-## Related {#related}
+Related {#related}
 
 - [history permission](../permissions/history.md)
 - [Bookmarks API](bookmarks-api.md)
 - [Tabs API](tabs-api.md)
 - [Chrome history API docs](https://developer.chrome.com/docs/extensions/reference/api/history)
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I search browsing history?
+How do I search browsing history?
 Use chrome.history.search() with a query and time range to find matching history entries.
 
-### Can I add entries to browser history?
+Can I add entries to browser history?
 No, extensions cannot add entries to the user's browsing history for privacy reasons.
 
 ---

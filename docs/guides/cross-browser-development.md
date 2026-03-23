@@ -10,7 +10,7 @@ The WebExtensions API provides a cross-browser system for developing extensions.
 
 ---
 
-## Browser Compatibility Table
+Browser Compatibility Table
 
 | API | Chrome | Firefox | Edge | Safari |
 |-----|--------|---------|------|--------|
@@ -24,7 +24,7 @@ Reference: https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Brow
 
 ---
 
-## webextension-polyfill Setup
+webextension-polyfill Setup
 
 ```bash
 npm install webextension-polyfill
@@ -38,7 +38,7 @@ browser.runtime.onMessage.addListener((msg) => console.log(msg));
 
 ---
 
-## Manifest Differences
+Manifest Differences
 
 ```json
 {
@@ -56,7 +56,7 @@ Firefox requires `browser_specific_settings.gecko.id`. Safari requires Xcode + A
 
 ---
 
-## API Namespace & Promise Support
+API Namespace & Promise Support
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -67,7 +67,7 @@ Chrome MV3 and Firefox 121+ have native Promise support. Use webextension-polyfi
 
 ---
 
-## Service Worker vs Background Page
+Service Worker vs Background Page
 
 | Browser | Service Worker |
 |---------|---------------|
@@ -79,7 +79,7 @@ MV3 uses service workers; MV2 used persistent background pages (deprecated in Ch
 
 ---
 
-## DeclarativeNetRequest vs webRequest
+DeclarativeNetRequest vs webRequest
 
 ```json
 { "permissions": ["declarativeNetRequest"] }
@@ -95,7 +95,7 @@ DNR: Chrome 84+, Firefox 113+, Safari 17.2+ (no static rules). webRequest works 
 
 ---
 
-## Side Panel Support
+Side Panel Support
 
 ```json
 { "side_panel": { "default_path": "sidepanel.html" }, "permissions": ["sidePanel"] }
@@ -109,7 +109,7 @@ Chrome 114+, Firefox 120+, Safari 16.4+.
 
 ---
 
-## Storage API Compatibility
+Storage API Compatibility
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -121,7 +121,7 @@ Storage limits: 10MB local, 100KB sync. Safari: local only.
 
 ---
 
-## Browser Detection
+Browser Detection
 
 ```typescript
 const getBrowser = () => {
@@ -134,7 +134,7 @@ const hasSidePanel = 'sidePanel' in chrome;
 
 ---
 
-## Build System for Multi-Browser
+Build System for Multi-Browser
 
 ```javascript
 module.exports = {
@@ -152,13 +152,13 @@ module.exports = {
 
 ---
 
-## Multi-Manifest Strategy
+Multi-Manifest Strategy
 
 ```
 src/manifest/
-├── manifest.base.json
-├── manifest.chrome.json
-└── manifest.firefox.json
+ manifest.base.json
+ manifest.chrome.json
+ manifest.firefox.json
 ```
 
 ```javascript
@@ -170,7 +170,7 @@ fs.writeFileSync('dist/manifest.json', JSON.stringify({ ...base, ...browser }, n
 
 ---
 
-## CI Testing
+CI Testing
 
 {% raw %}
 ```yaml
@@ -186,7 +186,7 @@ jobs:
 
 ---
 
-## Firefox Add-ons Store Submission
+Firefox Add-ons Store Submission
 
 1. Create account at addons.mozilla.org
 2. Add `browser_specific_settings.gecko.id` to manifest
@@ -199,7 +199,7 @@ web-ext sign --api-key=$AMO_CLIENT_ID --api-secret=$AMO_CLIENT_SECRET --source-d
 
 ---
 
-## Edge Add-ons Store Submission
+Edge Add-ons Store Submission
 
 1. Register at partner.microsoft.com
 2. Package as .zip (not .crx)
@@ -207,7 +207,7 @@ web-ext sign --api-key=$AMO_CLIENT_ID --api-secret=$AMO_CLIENT_SECRET --source-d
 
 ---
 
-## Safari Web Extension Conversion
+Safari Web Extension Conversion
 
 Requirements: macOS with Xcode 15+, Apple Developer Program membership.
 
@@ -223,7 +223,7 @@ Requirements: macOS with Xcode 15+, Apple Developer Program membership.
 
 ---
 
-## Safari App Store Submission
+Safari App Store Submission
 
 1. Create app record in App Store Connect
 2. Build: `xcodebuild -workspace MyExtension.xcworkspace -scheme MyExtension -configuration Release archive`
@@ -232,9 +232,9 @@ Requirements: macOS with Xcode 15+, Apple Developer Program membership.
 
 ---
 
-## Code Examples
+Code Examples
 
-### Universal Messaging
+Universal Messaging
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -248,7 +248,7 @@ export async function sendMessage(message: object): Promise<void> {
 }
 ```
 
-### Cross-Browser Storage
+Cross-Browser Storage
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -262,7 +262,7 @@ export async function getItem<T>(key: string): Promise<T | null> {
 
 ---
 
-## Best Practices
+Best Practices
 
 1. Use webextension-polyfill for consistent Promise APIs
 2. Test early and often in target browsers

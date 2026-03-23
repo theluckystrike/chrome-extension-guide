@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Native Messaging — Best Practices"
+title: "Chrome Extension Native Messaging. Best Practices"
 description: "Communicate with native applications via native messaging."
 canonical_url: "https://bestchromeextensions.com/patterns/native-messaging/"
 ---
 
 # Native Messaging Patterns
 
-## Overview {#overview}
+Overview {#overview}
 Native messaging enables Chrome extensions to communicate with native applications. Two modes:
-- **Connection-based**: `chrome.runtime.connectNative()` for persistent communication
-- **One-shot**: `chrome.runtime.sendNativeMessage()` for single requests
+- Connection-based: `chrome.runtime.connectNative()` for persistent communication
+- One-shot: `chrome.runtime.sendNativeMessage()` for single requests
 
-## Connection Management {#connection-management}
-### Auto-Reconnecting Port {#auto-reconnecting-port}
+Connection Management {#connection-management}
+Auto-Reconnecting Port {#auto-reconnecting-port}
 ```javascript
 function createNativeConnection(appId) {
   const port = chrome.runtime.connectNative(appId);
@@ -22,7 +22,7 @@ function createNativeConnection(appId) {
   return port;
 }
 ```
-### Backoff Reconnection {#backoff-reconnection}
+Backoff Reconnection {#backoff-reconnection}
 ```javascript
 class NativeConnectionManager {
   constructor(appId) { this.appId = appId; this.retryCount = 0; }
@@ -33,15 +33,15 @@ class NativeConnectionManager {
   attemptReconnection() { if (this.retryCount >= 5) return; setTimeout(() => this.connect(), 1000 * Math.pow(2, this.retryCount++)); }
 }
 ```
-### Heartbeat Detection {#heartbeat-detection}
+Heartbeat Detection {#heartbeat-detection}
 ```javascript
 class HeartbeatConnection {
   constructor(appId, interval = 30000) { this.port = chrome.runtime.connectNative(appId); this.timer = setInterval(() => this.port?.postMessage({ type: 'heartbeat' }), interval); }
 }
 ```
 
-## Request-Response Pattern {#request-response-pattern}
-### Promise Wrapper {#promise-wrapper}
+Request-Response Pattern {#request-response-pattern}
+Promise Wrapper {#promise-wrapper}
 ```javascript
 function sendNativeMessage(appId, message, timeout = 30000) {
   return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ function sendNativeMessage(appId, message, timeout = 30000) {
   });
 }
 ```
-### Message ID Correlation {#message-id-correlation}
+Message ID Correlation {#message-id-correlation}
 ```javascript
 class RequestResponseManager {
   constructor() { this.pending = new Map(); this.messageId = 0; }
@@ -67,8 +67,8 @@ class RequestResponseManager {
 }
 ```
 
-## Streaming Data {#streaming-data}
-### Chunking Large Payloads (1MB limit) {#chunking-large-payloads-1mb-limit}
+Streaming Data {#streaming-data}
+Chunking Large Payloads (1MB limit) {#chunking-large-payloads-1mb-limit}
 ```javascript
 const MAX_SIZE = 1024 * 1024;
 function sendLargeMessage(port, data) {
@@ -77,15 +77,15 @@ function sendLargeMessage(port, data) {
   port.postMessage({ type: 'chunked', total: chunks.length, chunks });
 }
 ```
-### Progress Tracking {#progress-tracking}
+Progress Tracking {#progress-tracking}
 ```javascript
 class ProgressConnection {
   constructor(appId, onProgress) { this.port = chrome.runtime.connectNative(appId); this.port.onMessage.addListener((msg) => { if (msg.type === 'progress') onProgress(msg.percent, msg.stage); }); }
 }
 ```
 
-## Error Recovery {#error-recovery}
-### Host Not Found {#host-not-found}
+Error Recovery {#error-recovery}
+Host Not Found {#host-not-found}
 ```javascript
 async function checkNativeHost(appId) {
   return new Promise((resolve) => {
@@ -95,7 +95,7 @@ async function checkNativeHost(appId) {
   });
 }
 ```
-### Crash Recovery {#crash-recovery}
+Crash Recovery {#crash-recovery}
 ```javascript
 async function sendWithRecovery(appId, message) {
   try { return await sendNativeMessage(appId, message); }
@@ -103,8 +103,8 @@ async function sendWithRecovery(appId, message) {
 }
 ```
 
-## Security {#security}
-### Input Validation {#input-validation}
+Security {#security}
+Input Validation {#input-validation}
 ```javascript
 function validateMessage(message) {
   if (!message || typeof message !== 'object') throw new Error('Invalid message format');
@@ -116,14 +116,14 @@ function handleMessage(message) {
   switch (message.action) { case 'updateBadge': chrome.action.setBadgeText({ text: message.value }); break; case 'showNotification': chrome.notifications.create(message.options); break; }
 }
 ```
-### Structured Message Format {#structured-message-format}
+Structured Message Format {#structured-message-format}
 ```javascript
 const request = { type: 'request', action: 'getData', requestId: Date.now(), payload: {} };
 const response = { type: 'response', requestId: 123, data: {}, error: null };
 ```
 
-## Native Host Tips {#native-host-tips}
-### 32-bit Length Prefix Protocol {#32-bit-length-prefix-protocol}
+Native Host Tips {#native-host-tips}
+32-bit Length Prefix Protocol {#32-bit-length-prefix-protocol}
 ```python
 import struct, sys, json
 def read_message():
@@ -136,12 +136,12 @@ def write_message(message):
     sys.stdout.buffer.flush()
 while (msg := read_message()) is not None: write_message(process(msg))
 ```
-### Host Installer Detection {#host-installer-detection}
+Host Installer Detection {#host-installer-detection}
 ```javascript
 async function detectHost(appId) { try { const port = chrome.runtime.connectNative(appId); port.disconnect(); return { installed: true }; } catch (error) { return { installed: false, instructions: 'Download from https://example.com/downloads' }; } }
 ```
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 - [Native Messaging Permission](./permissions/native-messaging.md)
 - [Message Passing Patterns](./reference/message-passing-patterns.md)
 -e 

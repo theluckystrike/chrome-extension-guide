@@ -18,7 +18,7 @@ chrome.storage.local.get('key', (result) => {
   console.log(result.key);
 });
 ```
-**Quota**: 10MB default, unlimited with `"unlimitedStorage"` permission.
+Quota: 10MB default, unlimited with `"unlimitedStorage"` permission.
 
 ### chrome.storage.sync
 
@@ -30,7 +30,7 @@ chrome.storage.sync.get(['theme', 'fontSize'], (result) => {
   console.log(result.theme, result.fontSize);
 });
 ```
-**Quota**: 100KB total, 8KB per item.
+Quota: 100KB total, 8KB per item.
 
 ### chrome.storage.session
 
@@ -42,7 +42,7 @@ chrome.storage.session.get('tempData', (result) => {
   console.log(result.tempData);
 });
 ```
-**Quota**: 10MB.
+Quota: 10MB.
 
 ### chrome.storage.managed
 

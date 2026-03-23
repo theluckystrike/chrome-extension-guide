@@ -1,14 +1,14 @@
 # Building a Dark Mode Toggler Chrome Extension
 
-Dark mode has become an essential feature for modern web applications and browser extensions. Users increasingly prefer reduced eye strain and better battery life on OLED displays. Building a dark mode toggler extension requires understanding CSS manipulation, content script injection, and state management across browser contexts. This guide covers building a robust dark mode toggler from scratch.
+Dark mode has become an essential feature for modern web applications and browser extensions. Users increasingly prefer reduced eye strain and better battery life on OLED displays. Building a dark mode toggler extension requires understanding CSS manipulation, content script injection, and state management across browser contexts. This guide covers building a solid dark mode toggler from scratch.
 
 ## Understanding Dark Mode Implementation Approaches
 
 There are three primary approaches to implementing dark mode in web pages:
 
-1. **CSS Variables/Custom Properties** - Modern websites use CSS custom properties (`:root { --bg-color: #ffffff; }`) that can be swapped
-2. **CSS Class Toggle** - Adding/removing a `.dark` class on the `<html>` or `<body>` element
-3. **Color Scheme Override** - Using `color-scheme: dark` CSS property
+1. CSS Variables/Custom Properties - Modern websites use CSS custom properties (`:root { --bg-color: #ffffff; }`) that can be swapped
+2. CSS Class Toggle - Adding/removing a `.dark` class on the `<html>` or `<body>` element
+3. Color Scheme Override - Using `color-scheme: dark` CSS property
 
 A well-designed dark mode toggler should support all three approaches to maximize compatibility across websites.
 
@@ -16,22 +16,22 @@ A well-designed dark mode toggler should support all three approaches to maximiz
 
 ```
 dark-mode-toggler/
-├── src/
-│   ├── background/
-│   │   └── service-worker.ts
-│   ├── content/
-│   │   └── dark-mode-injector.ts
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts
-│   │   └── styles.css
-│   ├── options/
-│   │   ├── options.html
-│   │   └── options.ts
-│   └── shared/
-│       └── types.ts
-├── manifest.json
-└── tsconfig.json
+ src/
+    background/
+       service-worker.ts
+    content/
+       dark-mode-injector.ts
+    popup/
+       popup.html
+       popup.ts
+       styles.css
+    options/
+       options.html
+       options.ts
+    shared/
+        types.ts
+ manifest.json
+ tsconfig.json
 ```
 
 ## Manifest Configuration
@@ -104,7 +104,7 @@ class DarkModeInjector {
     }
   }
 
-  /**
+  /
    * Inject dark mode styles into the page
    */
   inject(): void {
@@ -127,7 +127,7 @@ class DarkModeInjector {
     }
   }
 
-  /**
+  /
    * Remove dark mode styles from the page
    */
   eject(): void {
@@ -140,7 +140,7 @@ class DarkModeInjector {
     document.documentElement.style.colorScheme = 'light';
   }
 
-  /**
+  /
    * Toggle dark mode on/off
    */
   toggle(): boolean {
@@ -153,14 +153,14 @@ class DarkModeInjector {
     }
   }
 
-  /**
+  /
    * Check if dark mode is currently active
    */
   isActive(): boolean {
     return this.styleElement !== null;
   }
 
-  /**
+  /
    * Generate CSS custom properties based on config
    */
   private generateCSS(): string {
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   function updateUI(enabled: boolean) {
-    toggle.textContent = enabled ? '🌙 Dark Mode ON' : '☀️ Enable Dark Mode';
+    toggle.textContent = enabled ? ' Dark Mode ON' : ' Enable Dark Mode';
     toggle.classList.toggle('active', enabled);
     status.textContent = enabled ? 'Active' : 'Inactive';
     status.className = enabled ? 'status active' : 'status';
@@ -421,12 +421,12 @@ export { getSiteConfig, SiteConfig };
 
 ## Best Practices
 
-1. **Respect User System Preferences**: Use `matchMedia('(prefers-color-scheme: dark)')` to respect OS-level dark mode settings
-2. **Smooth Transitions**: Add CSS transitions for color changes to avoid jarring switches
-3. **Persist State**: Store dark mode preference per-site in `chrome.storage.local`
-4. **Performance**: Use `requestAnimationFrame` for style updates to prevent layout thrashing
-5. **Accessibility**: Ensure sufficient contrast ratios in your dark theme colors
+1. Respect User System Preferences: Use `matchMedia('(prefers-color-scheme: dark)')` to respect OS-level dark mode settings
+2. Smooth Transitions: Add CSS transitions for color changes to avoid jarring switches
+3. Persist State: Store dark mode preference per-site in `chrome.storage.local`
+4. Performance: Use `requestAnimationFrame` for style updates to prevent layout thrashing
+5. Accessibility: Ensure sufficient contrast ratios in your dark theme colors
 
 ## Conclusion
 
-Building a dark mode toggler requires careful handling of CSS injection, state management, and cross-context communication. The patterns shown here provide a solid foundation for creating a robust dark mode extension that works across various websites while respecting user preferences and performance considerations.
+Building a dark mode toggler requires careful handling of CSS injection, state management, and cross-context communication. The patterns shown here provide a solid foundation for creating a solid dark mode extension that works across various websites while respecting user preferences and performance considerations.

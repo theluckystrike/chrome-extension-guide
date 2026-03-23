@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Page Ruler — Developer Guide"
+title: "Chrome Extension Page Ruler. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-ruler/"
 ---
 # Build a Page Ruler Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Drag to measure distances on any web page
 - Pixel and REM unit support
 - Element snap mode to align with page elements
@@ -19,14 +19,14 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-page-ruler/"
 - Multiple simultaneous measurements
 - Keyboard modifiers for precise control
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: activeTab, storage, scripting
 - action with popup for settings
 - commands for keyboard shortcuts
 
 ---
 
-## Step 1: Ruler Overlay System {#step-1-ruler-overlay-system}
+Step 1: Ruler Overlay System {#step-1-ruler-overlay-system}
 
 Create a canvas overlay that covers the entire viewport:
 
@@ -69,7 +69,7 @@ class RulerOverlay {
 
 ---
 
-## Step 2: Drag Measurement {#step-2-drag-measurement}
+Step 2: Drag Measurement {#step-2-drag-measurement}
 
 Handle mouse events to draw measurement lines:
 
@@ -128,7 +128,7 @@ interactionLayer.addEventListener('mouseup', (e) => ruler.handleMouseUp(e));
 
 ---
 
-## Step 3: Crosshair Guides {#step-3-crosshair-guides}
+Step 3: Crosshair Guides {#step-3-crosshair-guides}
 
 Draw horizontal and vertical guide lines:
 
@@ -169,7 +169,7 @@ Draw horizontal and vertical guide lines:
 
 ---
 
-## Step 4: Element Snap Mode {#step-4-element-snap-mode}
+Step 4: Element Snap Mode {#step-4-element-snap-mode}
 
 Snap to DOM element boundaries:
 
@@ -225,7 +225,7 @@ Snap to DOM element boundaries:
 
 ---
 
-## Step 5: Dimension Display {#step-5-dimension-display}
+Step 5: Dimension Display {#step-5-dimension-display}
 
 Show measurements with labels:
 
@@ -253,7 +253,7 @@ Show measurements with labels:
     // Draw dimension label
     const midX = (sx + ex) / 2;
     const midY = (sy + ey) / 2;
-    const pixels = Math.sqrt((ex - sx) ** 2 + (ey - sy) ** 2);
+    const pixels = Math.sqrt((ex - sx)  2 + (ey - sy)  2);
     const rem = (pixels / 16).toFixed(1);
     
     this.ctx.font = '12px sans-serif';
@@ -266,7 +266,7 @@ Show measurements with labels:
 
 ---
 
-## Step 6: Unit Conversion & Color Sampling {#step-6-unit-conversion-color-sampling}
+Step 6: Unit Conversion & Color Sampling {#step-6-unit-conversion-color-sampling}
 
 ```javascript
 // content-script/utils.js
@@ -305,7 +305,7 @@ export function sampleColor(x, y) {
 
 ---
 
-## Step 7: Keyboard Modifiers {#step-7-keyboard-modifiers}
+Step 7: Keyboard Modifiers {#step-7-keyboard-modifiers}
 
 ```javascript
 // content-script/ruler-overlay.js (continued)
@@ -338,7 +338,7 @@ export function sampleColor(x, y) {
 
 ---
 
-## Step 8: Background Script {#step-8-background-script}
+Step 8: Background Script {#step-8-background-script}
 
 ```javascript
 // background.js
@@ -363,15 +363,15 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-## Usage Tips {#usage-tips}
-1. **Click and drag** to create a measurement
-2. **Press S** to toggle element snap mode
-3. **Press C** to copy color at endpoint
-4. **Press U** to cycle through units
-5. **Press Delete** to clear all measurements
-6. **Click the extension icon** to toggle ruler on/off
+Usage Tips {#usage-tips}
+1. Click and drag to create a measurement
+2. Press S to toggle element snap mode
+3. Press C to copy color at endpoint
+4. Press U to cycle through units
+5. Press Delete to clear all measurements
+6. Click the extension icon to toggle ruler on/off
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - [Dynamic Content Injection](../patterns/dynamic-content-injection.md)
 - [DOM Observer Patterns](../patterns/dom-observer-patterns.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

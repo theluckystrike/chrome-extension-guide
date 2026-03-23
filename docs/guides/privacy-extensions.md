@@ -8,13 +8,13 @@ Privacy-focused extensions are increasingly in demand as users become more consc
 
 Privacy by design means embedding privacy considerations into every layer of your extension's architecture. The seven foundational principles are:
 
-1. **Proactive not Reactive**: Anticipate privacy risks before they occur
-2. **Privacy as Default**: Ensure privacy protections are active without user configuration
-3. **Privacy Embedded in Design**: Integrate privacy into the extension's core, not as an add-on
-4. **Full Functionality**: Achieve both privacy and business goals without compromise
-5. **End-to-End Security**: Protect data throughout its entire lifecycle
-6. **Visibility and Transparency**: Operate openly with verifiable practices
-7. **Respect for User Privacy**: Maintain strong privacy defaults with user-centric options
+1. Proactive not Reactive: Anticipate privacy risks before they occur
+2. Privacy as Default: Ensure privacy protections are active without user configuration
+3. Privacy Embedded in Design: Integrate privacy into the extension's core, not as an add-on
+4. Full Functionality: Achieve both privacy and business goals without compromise
+5. End-to-End Security: Protect data throughout its entire lifecycle
+6. Visibility and Transparency: Operate openly with verifiable practices
+7. Respect for User Privacy: Maintain strong privacy defaults with user-centric options
 
 ### Implementation Blueprint
 
@@ -39,10 +39,10 @@ Data minimization means collecting only the information strictly necessary for y
 
 ### Practical Strategies
 
-- **Audit every data point**: Before collecting any information, ask: "Does this serve a core function?"
-- **Use pseudonymous identifiers**: Instead of email addresses, use hashed or generated IDs
-- **Aggregate before transmitting**: Send counts and statistics rather than individual events
-- **Implement data expiration**: Auto-delete data older than necessary retention periods
+- Audit every data point: Before collecting any information, ask: "Does this serve a core function?"
+- Use pseudonymous identifiers: Instead of email addresses, use hashed or generated IDs
+- Aggregate before transmitting: Send counts and statistics rather than individual events
+- Implement data expiration: Auto-delete data older than necessary retention periods
 
 ```javascript
 // Example: Minimal data collection pattern
@@ -85,7 +85,7 @@ class PrivacyAwareAnalytics {
 
 ### Local-First Architecture
 
-The safest approach for user data is processing everything locally. Chrome's storage APIs provide robust local storage that never sends data to external servers:
+The safest approach for user data is processing everything locally. Chrome's storage APIs provide solid local storage that never sends data to external servers:
 
 ```javascript
 // Use chrome.storage.local for sensitive data
@@ -103,9 +103,9 @@ const saveSyncPreferences = async (preferences) => {
 
 Only send data to external servers when absolutely required (e.g., cloud sync, API-backed features). When you must:
 
-- **Encrypt before transmission**: Never send plaintext sensitive data
-- **Use minimal payloads**: Send only what's required
-- **Process on server when possible**: Do heavy computation server-side rather than uploading raw data
+- Encrypt before transmission: Never send plaintext sensitive data
+- Use minimal payloads: Send only what's required
+- Process on server when possible: Do heavy computation server-side rather than uploading raw data
 
 ```javascript
 // Secure external communication pattern
@@ -553,7 +553,7 @@ const setReferrerPolicy = () => {
 
 ## 11. User-Agent Spoofing Considerations
 
-User-agent spoofing is controversial—it can break websites but is sometimes necessary for privacy. Implement carefully:
+User-agent spoofing is controversial, it can break websites but is sometimes necessary for privacy. Implement carefully:
 
 ```javascript
 // User-Agent management (use with caution)
@@ -585,10 +585,10 @@ The Chrome Web Store has strict privacy requirements:
 
 ### Mandatory Disclosures
 
-- **Data collection declaration**: List all data your extension accesses
-- **Privacy policy URL**: Required if collecting ANY user data
-- **Third-party disclosure**: Document all analytics, APIs, and services
-- **User communications**: How you handle data deletion requests
+- Data collection declaration: List all data your extension accesses
+- Privacy policy URL: Required if collecting ANY user data
+- Third-party disclosure: Document all analytics, APIs, and services
+- User communications: How you handle data deletion requests
 
 ### CWS Privacy Practices Form
 
@@ -606,9 +606,9 @@ Complete the privacy practices disclosure honestly:
 
 ### Key Requirements
 
-- **Lawful basis**: Identify your legal basis (consent, contract, legitimate interest)
-- **Consent management**: Request consent before collecting non-essential data
-- **Data subject rights**: Implement features for:
+- Lawful basis: Identify your legal basis (consent, contract, legitimate interest)
+- Consent management: Request consent before collecting non-essential data
+- Data subject rights: Implement features for:
   - Right to access (data export)
   - Right to rectification (data editing)
   - Right to erasure (account deletion)
@@ -656,10 +656,10 @@ class GDPRCompliance {
 
 ### California Consumer Privacy Act
 
-- **Right to know**: What data you collect and how you use it
-- **Right to delete**: Request deletion of personal information
-- **Right to opt-out**: Opt-out of data "sales" (provide even if not selling)
-- **Non-discrimination**: Don't deny service for exercising rights
+- Right to know: What data you collect and how you use it
+- Right to delete: Request deletion of personal information
+- Right to opt-out: Opt-out of data "sales" (provide even if not selling)
+- Non-discrimination: Don't deny service for exercising rights
 
 ### Implementation
 

@@ -1,22 +1,22 @@
 ---
 layout: default
-title: "Chrome Extension Popup Patterns — Developer Guide"
+title: "Chrome Extension Popup Patterns. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/popup-patterns/"
 ---
 # Popup Patterns
 
-## Overview {#overview}
+Overview {#overview}
 The popup is the most common UI surface for Chrome extensions. It opens when the user clicks the toolbar icon and closes when they click away. This guide covers patterns for building effective popups with the @theluckystrike/webext-* toolkit.
 
-## Popup Lifecycle {#popup-lifecycle}
+Popup Lifecycle {#popup-lifecycle}
 - Opens on toolbar icon click
 - Runs fresh each time (no state persisted in memory)
 - Closes when focus is lost
 - Has its own document (popup.html)
 - Can communicate with background via messaging
 
-## Manifest Setup {#manifest-setup}
+Manifest Setup {#manifest-setup}
 ```json
 {
   "action": {
@@ -26,7 +26,7 @@ The popup is the most common UI surface for Chrome extensions. It opens when the
 }
 ```
 
-## Pattern 1: Display Data from Background {#pattern-1-display-data-from-background}
+Pattern 1: Display Data from Background {#pattern-1-display-data-from-background}
 
 Popup requests data from background service worker:
 
@@ -54,7 +54,7 @@ async function render() {
 render();
 ```
 
-## Pattern 2: Quick Settings Toggle {#pattern-2-quick-settings-toggle}
+Pattern 2: Quick Settings Toggle {#pattern-2-quick-settings-toggle}
 
 Toggle a feature on/off from popup, persisted in storage:
 
@@ -84,7 +84,7 @@ async function init() {
 }
 ```
 
-## Pattern 3: Current Tab Context {#pattern-3-current-tab-context}
+Pattern 3: Current Tab Context {#pattern-3-current-tab-context}
 
 Show info about the active tab:
 
@@ -96,7 +96,7 @@ async function showCurrentTab() {
 }
 ```
 
-## Pattern 4: Action Buttons (Run on Current Page) {#pattern-4-action-buttons-run-on-current-page}
+Pattern 4: Action Buttons (Run on Current Page) {#pattern-4-action-buttons-run-on-current-page}
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -115,7 +115,7 @@ document.getElementById("extract")?.addEventListener("click", async () => {
 });
 ```
 
-## Pattern 5: Form Input with Storage {#pattern-5-form-input-with-storage}
+Pattern 5: Form Input with Storage {#pattern-5-form-input-with-storage}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -147,7 +147,7 @@ document.getElementById("save-note")?.addEventListener("click", async () => {
 });
 ```
 
-## Pattern 6: Loading States and Error Handling {#pattern-6-loading-states-and-error-handling}
+Pattern 6: Loading States and Error Handling {#pattern-6-loading-states-and-error-handling}
 
 ```ts
 import { MessagingError } from "@theluckystrike/webext-messaging";
@@ -178,7 +178,7 @@ async function loadData() {
 }
 ```
 
-## Pattern 7: Badge Updates from Popup {#pattern-7-badge-updates-from-popup}
+Pattern 7: Badge Updates from Popup {#pattern-7-badge-updates-from-popup}
 
 ```ts
 // Update badge after action
@@ -188,14 +188,14 @@ document.getElementById("mark-read")?.addEventListener("click", async () => {
 });
 ```
 
-## Popup Size and Layout Tips {#popup-size-and-layout-tips}
+Popup Size and Layout Tips {#popup-size-and-layout-tips}
 - Default max size: 800x600px (set via CSS, not manifest)
 - Use `body { width: 350px; min-height: 200px; }` for consistent sizing
-- Popups close on blur — don't use modal dialogs
+- Popups close on blur. don't use modal dialogs
 - Links with target="_blank" open in new tab (popup stays open briefly)
 - Use `chrome.tabs.create()` for navigation (popup closes)
 
-## Complete popup.html Template {#complete-popuphtml-template}
+Complete popup.html Template {#complete-popuphtml-template}
 
 Provide a minimal but complete template:
 - HTML structure with header, content area, footer
@@ -203,16 +203,16 @@ Provide a minimal but complete template:
 - CSS for dark/light theme support
 - Loading/error/content states
 
-## Gotchas {#gotchas}
-- Popup re-initializes every time it opens — always load state from storage
-- No persistent connections — use messaging for each request
+Gotchas {#gotchas}
+- Popup re-initializes every time it opens. always load state from storage
+- No persistent connections. use messaging for each request
 - `window.close()` closes the popup programmatically
 - Console logs appear in the popup's own DevTools (right-click popup > Inspect)
 - Popup HTML must be a local file (no remote URLs)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Popup Communication](../patterns/popup-communication.md)
 - [Popup Data Loading](../patterns/popup-data-loading.md)

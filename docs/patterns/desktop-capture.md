@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Desktop Capture — Best Practices"
+title: "Chrome Extension Desktop Capture. Best Practices"
 description: "Capture screen and audio with desktopCapture API."
 canonical_url: "https://bestchromeextensions.com/patterns/desktop-capture/"
 ---
 
 # Desktop Capture API Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome's `chrome.desktopCapture` API enables extensions to capture screen content, windows, and tabs. This guide covers eight production-ready patterns for screen recording, screenshots, window picking, audio capture, live preview, WebRTC streaming, and privacy-safe implementation.
 
 ---
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -24,11 +24,11 @@ Chrome's `chrome.desktopCapture` API enables extensions to capture screen conten
 }
 ```
 
-The `desktopCapture` permission is required in the manifest. Note that this permission doesn't require host permissions — the actual capture is triggered by user action via `chrome.desktopCapture.chooseDesktopMedia()`, which always shows a user picker.
+The `desktopCapture` permission is required in the manifest. Note that this permission doesn't require host permissions. the actual capture is triggered by user action via `chrome.desktopCapture.chooseDesktopMedia()`, which always shows a user picker.
 
 ---
 
-## Pattern 1: DesktopCapture API Basics {#pattern-1-desktopcapture-api-basics}
+Pattern 1: DesktopCapture API Basics {#pattern-1-desktopcapture-api-basics}
 
 The `chrome.desktopCapture.chooseDesktopMedia()` method displays a system picker UI where users select what to share:
 
@@ -49,7 +49,7 @@ async function startBasicCapture(
     chrome.desktopCapture.chooseDesktopMedia(types, (id) => resolve(id));
   });
 
-  // User cancelled — streamId is empty
+  // User cancelled. streamId is empty
   if (!streamId) {
     console.log("User cancelled capture selection");
     return null;
@@ -96,7 +96,7 @@ Key points:
 
 ---
 
-## Pattern 2: Screen Recording Extension {#pattern-2-screen-recording-extension}
+Pattern 2: Screen Recording Extension {#pattern-2-screen-recording-extension}
 
 Recording screen capture to a file requires combining desktop capture with the MediaRecorder API in an offscreen document:
 
@@ -265,7 +265,7 @@ async function saveRecording(blob: Blob, filename: string): Promise<void> {
 
 ---
 
-## Pattern 3: Screenshot from Desktop Capture {#pattern-3-screenshot-from-desktop-capture}
+Pattern 3: Screenshot from Desktop Capture {#pattern-3-screenshot-from-desktop-capture}
 
 Capture a single frame from a video stream:
 
@@ -405,7 +405,7 @@ async function captureWithOptions(options: ScreenshotOptions): Promise<Blob> {
 
 ---
 
-## Pattern 4: Window Picker UI {#pattern-4-window-picker-ui}
+Pattern 4: Window Picker UI {#pattern-4-window-picker-ui}
 
 Configure the picker to filter to specific source types:
 
@@ -493,11 +493,11 @@ document.getElementById("pick-screen-only")!.addEventListener("click", async () 
 });
 ```
 
-> **Note:** The `chooseDesktopMedia` API doesn't directly support filtering sources client-side. To limit the capture options, pass a filtered array of `DesktopCaptureSourceType` values (e.g., `["screen"]` or `["window"]`). There is no `getSources` method on the `chrome.desktopCapture` API.
+> Note: The `chooseDesktopMedia` API doesn't directly support filtering sources client-side. To limit the capture options, pass a filtered array of `DesktopCaptureSourceType` values (e.g., `["screen"]` or `["window"]`). There is no `getSources` method on the `chrome.desktopCapture` API.
 
 ---
 
-## Pattern 5: Audio Capture {#pattern-5-audio-capture}
+Pattern 5: Audio Capture {#pattern-5-audio-capture}
 
 Capturing system audio or tab audio requires specific constraints:
 
@@ -611,11 +611,11 @@ async function captureWithAudio(sourceTypes: chrome.desktopCapture.DesktopCaptur
 }
 ```
 
-> **Important:** System audio capture is only available on Chrome OS, Linux, and Windows. macOS does not support capturing system audio through the Desktop Capture API.
+> Important: System audio capture is only available on Chrome OS, Linux, and Windows. macOS does not support capturing system audio through the Desktop Capture API.
 
 ---
 
-## Pattern 6: Live Preview {#pattern-6-live-preview}
+Pattern 6: Live Preview {#pattern-6-live-preview}
 
 Display captured content in the extension popup or a floating PiP window:
 
@@ -776,7 +776,7 @@ async function setupSidePanelPreview(sidePanel: chrome.sidePanel) {
 
 ---
 
-## Pattern 7: Streaming to WebRTC {#pattern-7-streaming-to-webrtc}
+Pattern 7: Streaming to WebRTC {#pattern-7-streaming-to-webrtc}
 
 Broadcast captured content to remote peers using WebRTC:
 
@@ -961,7 +961,7 @@ document.getElementById("stop-stream")!.addEventListener("click", () => {
 
 ---
 
-## Pattern 8: Permission and Privacy Patterns {#pattern-8-permission-and-privacy-patterns}
+Pattern 8: Permission and Privacy Patterns {#pattern-8-permission-and-privacy-patterns}
 
 Privacy-safe implementation with consent indicators and auto-stop:
 
@@ -1133,11 +1133,11 @@ chrome.action.onClicked.addListener(async (tab) => {
 const activeStreams = new Map<number, MediaStream>();
 ```
 
-> **Privacy Note:** Always ensure screen capture is initiated by explicit user action (button click, keyboard shortcut). Never programmatically start capture without user consent. Display clear indicators when capture is active, and provide easy ways for users to stop capture.
+> Privacy Note: Always ensure screen capture is initiated by explicit user action (button click, keyboard shortcut). Never programmatically start capture without user consent. Display clear indicators when capture is active, and provide easy ways for users to stop capture.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|
@@ -1150,7 +1150,7 @@ const activeStreams = new Map<number, MediaStream>();
 | WebRTC Streaming | Broadcast to remote peers | `RTCPeerConnection` with captured stream |
 | Privacy Patterns | User consent, indicators, auto-stop | Badge API, notifications, event listeners |
 
-The Desktop Capture API requires the `desktopCapture` permission but does not require host permissions. The user must always explicitly select what to capture via the system picker — extensions cannot silently capture without user action. Always implement privacy-safe patterns: show clear indicators when capture is active, provide easy stop mechanisms, and log capture sessions for transparency.
+The Desktop Capture API requires the `desktopCapture` permission but does not require host permissions. The user must always explicitly select what to capture via the system picker. extensions cannot silently capture without user action. Always implement privacy-safe patterns: show clear indicators when capture is active, provide easy stop mechanisms, and log capture sessions for transparency.
 -e 
 ---
 

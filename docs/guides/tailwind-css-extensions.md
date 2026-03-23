@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Tailwind CSS — Developer Guide"
+title: "Chrome Extension Tailwind CSS. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/tailwind-css-extensions/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/guides/tailwind-css-extensions/
 
 Tailwind CSS brings utility-first styling to Chrome extension development, offering rapid UI with minimal CSS. This guide covers integrating Tailwind into extension contexts while handling unique browser extension constraints.
 
-## Setting Up Tailwind {#setting-up-tailwind}
+Setting Up Tailwind {#setting-up-tailwind}
 
 Install and initialize:
 
@@ -22,16 +22,16 @@ Configure `tailwind.config.js`:
 ```javascript
 module.exports = {
   content: [
-    "./src/**/*.{html,js,ts,jsx,tsx}",
-    "./popup/**/*.{html,js,ts,jsx,tsx}",
-    "./options/**/*.{html,js,ts,jsx,tsx}",
+    "./src//*.{html,js,ts,jsx,tsx}",
+    "./popup//*.{html,js,ts,jsx,tsx}",
+    "./options//*.{html,js,ts,jsx,tsx}",
   ],
   theme: { extend: {} },
   plugins: [],
 }
 ```
 
-## Popup and Options Pages {#popup-and-options-pages}
+Popup and Options Pages {#popup-and-options-pages}
 
 Popup and options pages run in privileged extension contexts, making Tailwind setup straightforward. These pages behave like standard web pages without page style interference.
 
@@ -42,7 +42,7 @@ Popup and options pages run in privileged extension contexts, making Tailwind se
 </div>
 ```
 
-## Content Scripts with Shadow DOM {#content-scripts-with-shadow-dom}
+Content Scripts with Shadow DOM {#content-scripts-with-shadow-dom}
 
 Content scripts face a challenge: injected styles leak into the host page. Shadow DOM with `adoptedStyleSheets` provides isolation.
 
@@ -67,7 +67,7 @@ shadow.innerHTML = `<div class="p-4 bg-white rounded">Action</div>`;
 
 This keeps your Tailwind styles isolated from page CSS.
 
-## Using shadcn/ui Components {#using-shadcnui-components}
+Using shadcn/ui Components {#using-shadcnui-components}
 
 shadcn/ui provides accessible components built on Radix UI. Install dependencies:
 
@@ -80,7 +80,7 @@ Configure `tailwind.config.js`:
 ```javascript
 module.exports = {
   darkMode: ['class'],
-  content: ['./src/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  content: ['./src//*.{ts,tsx}', './components//*.{ts,tsx}'],
   plugins: [require('tailwindcss-animate')],
 }
 ```
@@ -101,7 +101,7 @@ export function ExtensionPopup() {
 }
 ```
 
-## Preventing Style Conflicts {#preventing-style-conflicts}
+Preventing Style Conflicts {#preventing-style-conflicts}
 
 Use a scoped prefix to avoid collisions:
 
@@ -111,7 +111,7 @@ module.exports = { prefix: 'ext-' }
 
 Apply prefixed classes: `<div class="ext-flex ext-items-center">`.
 
-## Build Size Optimization {#build-size-optimization}
+Build Size Optimization {#build-size-optimization}
 
 Extensions demand aggressive optimization:
 
@@ -127,7 +127,7 @@ export default {
 
 This removes unused styles and keeps your extension package lean.
 
-## Extension-Specific Configuration {#extension-specific-configuration}
+Extension-Specific Configuration {#extension-specific-configuration}
 
 Popups max out around 400x600 pixels. Configure Tailwind:
 
@@ -146,9 +146,9 @@ Use these constraints in your popup layout for responsive designs within extensi
 
 For more extension development patterns and tools, explore the resources at zovo.one.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Design System](../guides/chrome-extension-design-system.md)

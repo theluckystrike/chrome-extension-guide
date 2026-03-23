@@ -17,81 +17,81 @@ In this comprehensive tutorial, we will walk through building a production-ready
 
 ---
 
-## Why Build a Webpage Archiver Extension? {#why-build-webpage-archiver}
+Why Build a Webpage Archiver Extension? {#why-build-webpage-archiver}
 
 Before we dive into the code, let us explore why building a webpage archiver extension is a worthwhile project in 2025.
 
-### The Problem with Link Rot
+The Problem with Link Rot
 
 Link rot is a genuine issue affecting the web. Studies have shown that approximately 20% of links in academic papers are no longer functional, and the same applies to blog posts, news articles, and documentation. When a website goes offline or removes content, all that valuable information is lost forever.
 
 A webpage archiver extension solves this problem by allowing users to save complete web pages locally, including all HTML, CSS, images, and JavaScript. This creates a self-contained archive that can be accessed even without an internet connection.
 
-### Use Cases for a Webpage Archiver
+Use Cases for a Webpage Archiver
 
 There are many practical applications for a webpage archiver extension:
 
-- **Research and Academia**: Save articles, papers, and reference materials for offline reading and future reference.
-- **Documentation Preservation**: Keep local copies of important technical documentation that might change or disappear.
-- **Offline Reading**: Save news articles, blog posts, and tutorials for reading during commutes or travel.
-- **Content Backup**: Create backups of your own web content before making changes to your site.
-- **Archive Quality**: Some websites have paywalls or require subscriptions. Saving locally lets you retain access to content you have already viewed.
+- Research and Academia: Save articles, papers, and reference materials for offline reading and future reference.
+- Documentation Preservation: Keep local copies of important technical documentation that might change or disappear.
+- Offline Reading: Save news articles, blog posts, and tutorials for reading during commutes or travel.
+- Content Backup: Create backups of your own web content before making changes to your site.
+- Archive Quality: Some websites have paywalls or require subscriptions. Saving locally lets you retain access to content you have already viewed.
 
 ---
 
-## Understanding Chrome's Page Capture APIs {#understanding-apis}
+Understanding Chrome's Page Capture APIs {#understanding-apis}
 
 Chrome provides several APIs that enable webpage archiving functionality. Understanding these APIs is crucial for building an effective archiver extension.
 
-### The chrome.pageCapture API
+The chrome.pageCapture API
 
 The primary API we will use is `chrome.pageCapture`. This API allows extensions to save the content of a tab as an MHTML file. MHTML (MIME HTML) is a web page archive format that bundles all resources (images, CSS, JavaScript) into a single file.
 
 The `chrome.pageCapture.saveAsMHTML` method is the core function we will use. It takes a tab ID as input and returns a blob containing the complete MHTML representation of the page.
 
-### Key Capabilities
+Key Capabilities
 
 The chrome.pageCapture API offers several important capabilities:
 
-- **Complete Page Capture**: Saves the entire DOM, including dynamically loaded content.
-- **Resource Bundling**: Embeds all external resources (images, stylesheets, scripts) directly into the MHTML file.
-- **Single File Output**: Creates a single, self-contained file that is easy to store and share.
-- **Native Format**: Produces standard MHTML that browsers can open directly.
+- Complete Page Capture: Saves the entire DOM, including dynamically loaded content.
+- Resource Bundling: Embeds all external resources (images, stylesheets, scripts) directly into the MHTML file.
+- Single File Output: Creates a single, self-contained file that is easy to store and share.
+- Native Format: Produces standard MHTML that browsers can open directly.
 
-### Limitations to Consider
+Limitations to Consider
 
 While chrome.pageCapture is powerful, it has some limitations:
 
-- **No Captured Screenshots**: It does not capture visual screenshots; it captures the HTML content.
-- **Some Dynamic Content**: Content loaded via complex JavaScript frameworks may not render perfectly.
-- **Cross-Origin Restrictions**: Some cross-origin resources may not be captured due to CORS policies.
+- No Captured Screenshots: It does not capture visual screenshots; it captures the HTML content.
+- Some Dynamic Content: Content loaded via complex JavaScript frameworks may not render perfectly.
+- Cross-Origin Restrictions: Some cross-origin resources may not be captured due to CORS policies.
 
 ---
 
-## Project Structure and Setup {#project-structure}
+Project Structure and Setup {#project-structure}
 
 Let us set up our Chrome extension project with the proper structure.
 
-### Directory Structure
+Directory Structure
 
 ```
 webpage-archiver/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── background/
-│   └── background.js
-├── content/
-│   └── content.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ background/
+    background.js
+ content/
+    content.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### Manifest V3 Configuration
+Manifest V3 Configuration
 
 Our `manifest.json` file will define the extension's permissions and components:
 
@@ -133,11 +133,11 @@ The manifest requests three key permissions:
 
 ---
 
-## Implementing the Background Service Worker {#background-service-worker}
+Implementing the Background Service Worker {#background-service-worker}
 
 The background service worker handles the core archiving logic. It communicates with the popup and manages the saved archives.
 
-### Background Script Implementation
+Background Script Implementation
 
 Create `background/background.js`:
 
@@ -267,11 +267,11 @@ The background script handles all the heavy lifting: capturing pages, converting
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup provides the user interface for our extension. It allows users to save the current page and view their saved archives.
 
-### HTML Structure
+HTML Structure
 
 Create `popup/popup.html`:
 
@@ -316,7 +316,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-### CSS Styling
+CSS Styling
 
 Create `popup/popup.css`:
 
@@ -534,7 +534,7 @@ header h1 {
 }
 ```
 
-### Popup JavaScript
+Popup JavaScript
 
 Create `popup/popup.js`:
 
@@ -728,7 +728,7 @@ The popup provides a clean, intuitive interface for saving and managing archived
 
 ---
 
-## Adding Content Script Functionality {#content-script}
+Adding Content Script Functionality {#content-script}
 
 While our main functionality works through the background script, we can add a content script for enhanced features like a context menu option.
 
@@ -751,7 +751,7 @@ function addFloatingButton() {
   
   const button = document.createElement('button');
   button.id = 'webpage-archiver-floating-btn';
-  button.innerHTML = '💾';
+  button.innerHTML = '';
   button.title = 'Save page with Webpage Archiver';
   button.style.cssText = `
     position: fixed;
@@ -780,9 +780,9 @@ function addFloatingButton() {
       tabTitle: document.title
     }, (response) => {
       if (response.success) {
-        button.textContent = '✅';
+        button.textContent = '';
         setTimeout(() => {
-          button.textContent = '💾';
+          button.textContent = '';
         }, 2000);
       }
     });
@@ -816,18 +816,18 @@ The content script is optional but demonstrates how you could extend the extensi
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we have built the extension, let us discuss how to test it properly.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. The extension should now appear in your toolbar
 
-### Testing the Extension
+Testing the Extension
 
 1. Navigate to any web page you want to archive
 2. Click the extension icon in your toolbar
@@ -838,52 +838,52 @@ Now that we have built the extension, let us discuss how to test it properly.
 7. Click "View" to open the archived page in a new tab
 8. Verify that the archived page displays correctly offline
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
 If you encounter issues during testing:
 
-- **Extension not loading**: Check for errors in `manifest.json` syntax
-- **Save button disabled**: Ensure you are not on a restricted page (chrome://, about:, etc.)
-- **Archives not displaying**: Check the extension console for storage errors
-- **View not working**: Ensure the MHTML file is being created correctly
+- Extension not loading: Check for errors in `manifest.json` syntax
+- Save button disabled: Ensure you are not on a restricted page (chrome://, about:, etc.)
+- Archives not displaying: Check the extension console for storage errors
+- View not working: Ensure the MHTML file is being created correctly
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 This basic implementation provides solid foundation. Here are some advanced features you could add to make your extension more powerful:
 
-### 1. Automatic Background Saving
+1. Automatic Background Saving
 
 Implement a feature that automatically saves pages in the background based on user-defined rules, such as saving pages that match certain URL patterns.
 
-### 2. Cloud Sync
+2. Cloud Sync
 
 Add cloud storage integration (Google Drive, Dropbox, etc.) to sync archives across devices and provide backup protection.
 
-### 3. Search Functionality
+3. Search Functionality
 
 Implement full-text search across all saved archives to help users find specific content quickly.
 
-### 4. Export Options
+4. Export Options
 
 Add the ability to export archives in different formats (PDF, HTML folder, etc.) for better portability.
 
-### 5. Organization Features
+5. Organization Features
 
 Add folders, tags, and categories to help users organize their archives effectively.
 
-### 6. Bookmark Integration
+6. Bookmark Integration
 
 Allow users to import their Chrome bookmarks and automatically archive them.
 
-### 7. Batch Operations
+7. Batch Operations
 
 Implement functionality to archive multiple tabs at once, which is especially useful for researchers collecting multiple sources.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have tested your extension thoroughly, you can publish it to the Chrome Web Store:
 
@@ -897,7 +897,7 @@ When publishing, ensure your extension follows Google's policies and provides ge
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a webpage archiver Chrome extension is an excellent project that combines practical utility with important development skills. Throughout this tutorial, we have covered:
 
@@ -912,11 +912,11 @@ The extension we built provides a complete solution for saving web pages offline
 
 As you continue developing the extension, consider adding advanced features like cloud sync, search functionality, and organization tools. With a solid foundation, you can transform this basic archiver into a powerful tool that serves researchers, students, professionals, and anyone who values preserving web content.
 
-The ability to save pages offline is more important than ever in our connected world. By building this extension, you are not just learning Chrome extension development—you are creating a tool that helps preserve knowledge and information for the future.
+The ability to save pages offline is more important than ever in our connected world. By building this extension, you are not just learning Chrome extension development, you are creating a tool that helps preserve knowledge and information for the future.
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 To continue learning and improving your extension, explore these resources:
 

@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Oauth Identity — Best Practices"
+title: "Chrome Extension Oauth Identity. Best Practices"
 description: "Implement OAuth 2.0 for user authentication."
 canonical_url: "https://bestchromeextensions.com/patterns/oauth-identity/"
 ---
 
 # OAuth and Identity Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Chrome extensions that need user authentication face unique challenges: the extension popup disappears when it loses focus, service workers terminate between requests, and token storage must survive browser restarts. Chrome provides `chrome.identity` with two authentication flows — `getAuthToken` for Google accounts and `launchWebAuthFlow` for everything else. This guide covers eight practical patterns for building a complete, type-safe authentication layer in a Manifest V3 extension.
+Chrome extensions that need user authentication face unique challenges: the extension popup disappears when it loses focus, service workers terminate between requests, and token storage must survive browser restarts. Chrome provides `chrome.identity` with two authentication flows. `getAuthToken` for Google accounts and `launchWebAuthFlow` for everything else. This guide covers eight practical patterns for building a complete, type-safe authentication layer in a Manifest V3 extension.
 
 ---
 
-## Auth Flow Comparison {#auth-flow-comparison}
+Auth Flow Comparison {#auth-flow-comparison}
 
 | Feature | `getAuthToken` | `launchWebAuthFlow` |
 |---------|---------------|---------------------|
@@ -26,9 +26,9 @@ Chrome extensions that need user authentication face unique challenges: the exte
 
 ---
 
-## Pattern 1: Google OAuth with chrome.identity.getAuthToken {#pattern-1-google-oauth-with-chromeidentitygetauthtoken}
+Pattern 1: Google OAuth with chrome.identity.getAuthToken {#pattern-1-google-oauth-with-chromeidentitygetauthtoken}
 
-The simplest auth flow — Chrome manages the token lifecycle for Google accounts:
+The simplest auth flow. Chrome manages the token lifecycle for Google accounts:
 
 ```json
 // manifest.json (partial)
@@ -72,7 +72,7 @@ export async function getGoogleUserInfo(): Promise<GoogleUserInfo> {
   );
 
   if (!response.ok) {
-    // Token may be stale — remove and retry once
+    // Token may be stale. remove and retry once
     if (response.status === 401) {
       await removeCachedToken(token);
       const freshToken = await getGoogleToken();
@@ -93,13 +93,13 @@ async function removeCachedToken(token: string): Promise<void> {
 }
 ```
 
-### Gotcha: Token Caching {#gotcha-token-caching}
+Gotcha: Token Caching {#gotcha-token-caching}
 
 `getAuthToken` returns a cached token on subsequent calls. If the token is revoked server-side, your API calls will fail with 401. Always call `removeCachedAuthToken` before retrying.
 
 ---
 
-## Pattern 2: Non-Google Providers with launchWebAuthFlow {#pattern-2-non-google-providers-with-launchwebauthflow}
+Pattern 2: Non-Google Providers with launchWebAuthFlow {#pattern-2-non-google-providers-with-launchwebauthflow}
 
 For GitHub, Twitter, or any other OAuth 2.0 provider, use `launchWebAuthFlow`:
 
@@ -146,7 +146,7 @@ export async function launchOAuthFlow(
 
   const params = new URL(responseUrl).searchParams;
   if (params.get("state") !== state) {
-    throw new Error("OAuth state mismatch — possible CSRF attack");
+    throw new Error("OAuth state mismatch. possible CSRF attack");
   }
 
   const code = params.get("code");
@@ -181,13 +181,13 @@ async function exchangeCodeForToken(
 }
 ```
 
-### Gotcha: Redirect URL Format {#gotcha-redirect-url-format}
+Gotcha: Redirect URL Format {#gotcha-redirect-url-format}
 
-`chrome.identity.getRedirectURL()` returns `https://<extension-id>.chromiumapp.org/`. Register this exact URL with your OAuth provider. During development, the extension ID changes if unpacked — pin it with the `key` field in manifest.json.
+`chrome.identity.getRedirectURL()` returns `https://<extension-id>.chromiumapp.org/`. Register this exact URL with your OAuth provider. During development, the extension ID changes if unpacked. pin it with the `key` field in manifest.json.
 
 ---
 
-## Pattern 3: Token Storage and Refresh Cycle {#pattern-3-token-storage-and-refresh-cycle}
+Pattern 3: Token Storage and Refresh Cycle {#pattern-3-token-storage-and-refresh-cycle}
 
 Store tokens securely and manage refresh cycles without leaking credentials:
 
@@ -254,7 +254,7 @@ async function refreshAccessToken(
     });
 
     if (!response.ok) {
-      // Refresh token is revoked — clear everything
+      // Refresh token is revoked. clear everything
       await clearTokens();
       return null;
     }
@@ -281,13 +281,13 @@ export async function clearTokens(): Promise<void> {
 }
 ```
 
-### Why Split Storage? {#why-split-storage}
+Why Split Storage? {#why-split-storage}
 
-Access tokens go in `chrome.storage.session` so they vanish when the browser closes — reducing the window of exposure. Refresh tokens go in `chrome.storage.local` so the user doesn't have to re-authenticate after every restart.
+Access tokens go in `chrome.storage.session` so they vanish when the browser closes. reducing the window of exposure. Refresh tokens go in `chrome.storage.local` so the user doesn't have to re-authenticate after every restart.
 
 ---
 
-## Pattern 4: Typed Auth State Machine {#pattern-4-typed-auth-state-machine}
+Pattern 4: Typed Auth State Machine {#pattern-4-typed-auth-state-machine}
 
 Model authentication as an explicit state machine to eliminate impossible states:
 
@@ -361,7 +361,7 @@ export class AuthStateMachine {
       type: "AUTH_STATE_CHANGED",
       state: this.state,
     }).catch(() => {
-      // No listeners — expected when popup is closed
+      // No listeners. expected when popup is closed
     });
   }
 
@@ -382,11 +382,11 @@ export class AuthStateMachine {
 }
 ```
 
-The state machine guarantees that the UI never shows a stale state. If sign-in fails, the UI shows the error state — not a loading spinner stuck forever.
+The state machine guarantees that the UI never shows a stale state. If sign-in fails, the UI shows the error state. not a loading spinner stuck forever.
 
 ---
 
-## Pattern 5: Multi-Account Support {#pattern-5-multi-account-support}
+Pattern 5: Multi-Account Support {#pattern-5-multi-account-support}
 
 Some extensions need to manage multiple authenticated accounts simultaneously:
 
@@ -497,7 +497,7 @@ export class MultiAccountManager {
 
 ---
 
-## Pattern 6: Silent Token Refresh in Service Workers {#pattern-6-silent-token-refresh-in-service-workers}
+Pattern 6: Silent Token Refresh in Service Workers {#pattern-6-silent-token-refresh-in-service-workers}
 
 Service workers terminate after ~30 seconds of inactivity. Use alarms to keep tokens fresh:
 
@@ -523,7 +523,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (token) {
       console.log("[auth] Token refreshed silently");
     } else {
-      console.warn("[auth] Silent refresh failed — user must re-authenticate");
+      console.warn("[auth] Silent refresh failed. user must re-authenticate");
       chrome.action.setBadgeText({ text: "!" });
       chrome.action.setBadgeBackgroundColor({ color: "#e53935" });
     }
@@ -538,13 +538,13 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-### Gotcha: Alarm Minimum Interval {#gotcha-alarm-minimum-interval}
+Gotcha: Alarm Minimum Interval {#gotcha-alarm-minimum-interval}
 
 `chrome.alarms` enforces a minimum period of 1 minute for unpacked extensions and 1 minute for packed. You cannot use alarms for sub-minute refresh checks. If your tokens expire faster than that, refresh them on-demand before each API call instead.
 
 ---
 
-## Pattern 7: Logout and Token Revocation {#pattern-7-logout-and-token-revocation}
+Pattern 7: Logout and Token Revocation {#pattern-7-logout-and-token-revocation}
 
 A proper logout must revoke tokens server-side, clear local state, and update the UI:
 
@@ -576,7 +576,7 @@ export async function logout(
       await chrome.identity.removeCachedAuthToken({ token: result.token });
     }
   } catch {
-    // Not using Google auth — skip
+    // Not using Google auth. skip
   }
 
   // 3. Clear stored tokens
@@ -610,15 +610,15 @@ async function revokeRemoteToken(): Promise<void> {
 }
 ```
 
-### Why Revoke Remotely? {#why-revoke-remotely}
+Why Revoke Remotely? {#why-revoke-remotely}
 
 Clearing local tokens is not enough. If the token was exfiltrated (XSS, compromised dependency), it remains valid until it expires. Remote revocation invalidates it immediately. Always revoke on logout.
 
 ---
 
-## Pattern 8: Auth-Gated UI {#pattern-8-auth-gated-ui}
+Pattern 8: Auth-Gated UI {#pattern-8-auth-gated-ui}
 
-The popup should render different views based on authentication state — a login screen for unauthenticated users, a dashboard for authenticated ones:
+The popup should render different views based on authentication state. a login screen for unauthenticated users, a dashboard for authenticated ones:
 
 ```ts
 // popup/popup.ts
@@ -708,11 +708,11 @@ function renderForState(state: AuthState): void {
 initPopup();
 ```
 
-The background script handles the `SIGN_IN` and `SIGN_OUT` messages and dispatches events to the auth state machine. The popup is purely a renderer — it reads state and sends commands, nothing else.
+The background script handles the `SIGN_IN` and `SIGN_OUT` messages and dispatches events to the auth state machine. The popup is purely a renderer. it reads state and sends commands, nothing else.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

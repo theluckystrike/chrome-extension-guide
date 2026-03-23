@@ -1,6 +1,6 @@
 # Chrome Alarms API
 
-The Chrome Alarms API provides robust background task scheduling in Manifest V3 extensions, replacing unreliable `setInterval`/`setTimeout` calls.
+The Chrome Alarms API provides solid background task scheduling in Manifest V3 extensions, replacing unreliable `setInterval`/`setTimeout` calls.
 
 ## Why Use chrome.alarms
 
@@ -20,9 +20,9 @@ In Manifest V2, developers used `setInterval()` and `setTimeout()` in background
 | `periodInMinutes` | number | Repeat interval in minutes |
 | `when` | number | Unix timestamp for exact firing time |
 
-**Minimum interval:** 1 minute in production; shorter in dev allowed.
+Minimum interval: 1 minute in production; shorter in dev allowed.
 
-## chrome.alarms.create — Creating Alarms
+## chrome.alarms.create. Creating Alarms
 
 ### One-Time Alarm
 ```javascript
@@ -46,7 +46,7 @@ chrome.alarms.create("breakTimer", { delayInMinutes: 5 });
 chrome.alarms.create("dataSync", { periodInMinutes: 15 });
 ```
 
-## chrome.alarms.get — Getting a Specific Alarm
+## chrome.alarms.get. Getting a Specific Alarm
 
 ```javascript
 chrome.alarms.get("pomodoroTimer", (alarm) => {
@@ -57,28 +57,28 @@ chrome.alarms.get("pomodoroTimer", (alarm) => {
 // Promise-based: const alarm = await chrome.alarms.get("name");
 ```
 
-## chrome.alarms.getAll — Listing All Active Alarms
+## chrome.alarms.getAll. Listing All Active Alarms
 
 ```javascript
 chrome.alarms.getAll((alarms) => alarms.forEach(a => console.log(a.name)));
 // Promise-based: const all = await chrome.alarms.getAll();
 ```
 
-## chrome.alarms.clear — Removing a Specific Alarm
+## chrome.alarms.clear. Removing a Specific Alarm
 
 ```javascript
 chrome.alarms.clear("pomodoroTimer", (wasCleared) => console.log(wasCleared));
 // Promise-based: await chrome.alarms.clear("name");
 ```
 
-## chrome.alarms.clearAll — Removing All Alarms
+## chrome.alarms.clearAll. Removing All Alarms
 
 ```javascript
 chrome.alarms.clearAll();
 // Promise-based: await chrome.alarms.clearAll();
 ```
 
-## chrome.alarms.onAlarm — Event Listener
+## chrome.alarms.onAlarm. Event Listener
 
 Register at the top level of your service worker:
 

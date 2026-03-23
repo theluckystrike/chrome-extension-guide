@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Web Accessible Resources — Best Practices"
+title: "Chrome Extension Web Accessible Resources. Best Practices"
 description: "Configure web accessible resources in Manifest V3 for content script and page access."
 canonical_url: "https://bestchromeextensions.com/patterns/web-accessible-resources/"
 ---
 
 # Web Accessible Resources Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The [web accessible resources reference](../mv3/web-accessible-resources.md) covers manifest configuration. This guide focuses on practical patterns: injecting UI into pages, secure resource loading, dynamic resource URLs, fingerprint protection, and communication between web pages and extension resources.
 
 ---
 
-## How Web Accessible Resources Work {#how-web-accessible-resources-work}
+How Web Accessible Resources Work {#how-web-accessible-resources-work}
 
 Web accessible resources are extension files that web pages can load. In MV3, you must declare which origins can access which resources:
 
@@ -28,16 +28,16 @@ Web accessible resources are extension files that web pages can load. In MV3, yo
 }
 ```
 
-Without this declaration, web pages cannot load `chrome-extension://<id>/widget.html` — the request will fail.
+Without this declaration, web pages cannot load `chrome-extension://<id>/widget.html`. the request will fail.
 
 ---
 
-## Pattern 1: Injecting a Full UI Widget {#pattern-1-injecting-a-full-ui-widget}
+Pattern 1: Injecting a Full UI Widget {#pattern-1-injecting-a-full-ui-widget}
 
 Use web accessible resources to inject complex UI into web pages via iframes:
 
 ```ts
-// content.ts — Inject an extension iframe into the page
+// content.ts. Inject an extension iframe into the page
 function injectWidget() {
   const iframe = document.createElement("iframe");
   iframe.src = chrome.runtime.getURL("widget.html");
@@ -65,7 +65,7 @@ function injectWidget() {
 ```
 
 ```html
-<!-- widget.html — Served from extension, loaded in page context -->
+<!-- widget.html. Served from extension, loaded in page context -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,10 +84,10 @@ function injectWidget() {
 </html>
 ```
 
-### Communication Between Iframe and Content Script {#communication-between-iframe-and-content-script}
+Communication Between Iframe and Content Script {#communication-between-iframe-and-content-script}
 
 ```ts
-// widget.js — Inside the extension iframe
+// widget.js. Inside the extension iframe
 document.getElementById("close-widget")?.addEventListener("click", () => {
   // Send message to parent content script
   window.parent.postMessage({ type: "ext-widget-close" }, "*");
@@ -102,7 +102,7 @@ window.addEventListener("message", (event) => {
 ```
 
 ```ts
-// content.ts — Listen for messages from the widget iframe
+// content.ts. Listen for messages from the widget iframe
 window.addEventListener("message", (event) => {
   // Verify the message is from our iframe
   if (event.data?.type === "ext-widget-close") {
@@ -122,12 +122,12 @@ function sendToWidget(data: unknown) {
 
 ---
 
-## Pattern 2: Injecting CSS from Extension {#pattern-2-injecting-css-from-extension}
+Pattern 2: Injecting CSS from Extension {#pattern-2-injecting-css-from-extension}
 
 Load extension-bundled stylesheets into web pages:
 
 ```ts
-// content.ts — Inject extension CSS
+// content.ts. Inject extension CSS
 function injectExtensionCSS() {
   const link = document.createElement("link");
   link.rel = "stylesheet";
@@ -165,7 +165,7 @@ Declare in manifest:
 
 ---
 
-## Pattern 3: Extension Images in Web Pages {#pattern-3-extension-images-in-web-pages}
+Pattern 3: Extension Images in Web Pages {#pattern-3-extension-images-in-web-pages}
 
 Display extension-bundled images in content scripts:
 
@@ -183,7 +183,7 @@ const logo = createExtensionImage("images/logo.png", "Extension logo");
 document.getElementById("my-ext-container")?.appendChild(logo);
 ```
 
-### SVG Icons {#svg-icons}
+SVG Icons {#svg-icons}
 
 ```ts
 // Load SVG as inline content for CSS styling
@@ -200,7 +200,7 @@ async function inlineExtensionSVG(path: string): Promise<SVGElement> {
 
 ---
 
-## Pattern 4: Dynamic Resource URL Generation {#pattern-4-dynamic-resource-url-generation}
+Pattern 4: Dynamic Resource URL Generation {#pattern-4-dynamic-resource-url-generation}
 
 Generate URLs at runtime for resources that depend on state:
 
@@ -215,7 +215,7 @@ function getThemedResource(resource: string): string {
 // "resources": ["themes/light/*", "themes/dark/*"]
 ```
 
-### URL with Cache Busting {#url-with-cache-busting}
+URL with Cache Busting {#url-with-cache-busting}
 
 ```ts
 // Force reload of cached resources after extension update
@@ -227,7 +227,7 @@ function getVersionedURL(path: string): string {
 
 ---
 
-## Pattern 5: Secure Resource Access {#pattern-5-secure-resource-access}
+Pattern 5: Secure Resource Access {#pattern-5-secure-resource-access}
 
 Restrict which origins can access your resources to prevent fingerprinting and data exfiltration:
 
@@ -251,7 +251,7 @@ Restrict which origins can access your resources to prevent fingerprinting and d
 }
 ```
 
-### Dynamic URLs (Chrome 110+) {#dynamic-urls-chrome-110}
+Dynamic URLs (Chrome 110+) {#dynamic-urls-chrome-110}
 
 Dynamic URLs change on every browser session, preventing fingerprinting:
 
@@ -267,12 +267,12 @@ const dynamicUrl = chrome.runtime.getURL("content-injected.css");
 
 ---
 
-## Pattern 6: Injecting Scripts into the Page World {#pattern-6-injecting-scripts-into-the-page-world}
+Pattern 6: Injecting Scripts into the Page World {#pattern-6-injecting-scripts-into-the-page-world}
 
 Sometimes you need to run code in the page's JavaScript context (not the isolated content script world). Web accessible resources enable this:
 
 ```ts
-// content.ts — Inject a script that runs in the page's world
+// content.ts. Inject a script that runs in the page's world
 function injectPageScript(scriptPath: string) {
   const script = document.createElement("script");
   script.src = chrome.runtime.getURL(scriptPath);
@@ -285,7 +285,7 @@ injectPageScript("page-script.js");
 ```
 
 ```ts
-// page-script.js — Runs in the page's world, can access page variables
+// page-script.js. Runs in the page's world, can access page variables
 // This file MUST be declared in web_accessible_resources
 
 // Intercept fetch calls (page world only)
@@ -303,7 +303,7 @@ window.fetch = async function (...args) {
 ```
 
 ```ts
-// content.ts — Receive messages from page script
+// content.ts. Receive messages from page script
 window.addEventListener("message", (event) => {
   if (event.source !== window) return;
   if (event.data?.type === "ext-fetch-intercepted") {
@@ -317,10 +317,10 @@ window.addEventListener("message", (event) => {
 });
 ```
 
-### MV3 Alternative: chrome.scripting.executeScript with MAIN world {#mv3-alternative-chromescriptingexecutescript-with-main-world}
+MV3 Alternative: chrome.scripting.executeScript with MAIN world {#mv3-alternative-chromescriptingexecutescript-with-main-world}
 
 ```ts
-// background.ts — Preferred MV3 approach (no web_accessible_resources needed)
+// background.ts. Preferred MV3 approach (no web_accessible_resources needed)
 chrome.scripting.executeScript({
   target: { tabId },
   world: "MAIN",
@@ -333,12 +333,12 @@ chrome.scripting.executeScript({
 
 ---
 
-## Pattern 7: Font Loading {#pattern-7-font-loading}
+Pattern 7: Font Loading {#pattern-7-font-loading}
 
 Load custom fonts from your extension:
 
 ```css
-/* injected-styles.css — declared as web accessible */
+/* injected-styles.css. declared as web accessible */
 @font-face {
   font-family: "ExtensionFont";
   src: url("chrome-extension://__MSG_@@extension_id__/fonts/custom.woff2") format("woff2");
@@ -366,12 +366,12 @@ function loadExtensionFont() {
 
 ---
 
-## Pattern 8: Resource Preloading {#pattern-8-resource-preloading}
+Pattern 8: Resource Preloading {#pattern-8-resource-preloading}
 
 Preload web accessible resources for faster injection:
 
 ```ts
-// content.ts — Preload resources that will be needed
+// content.ts. Preload resources that will be needed
 function preloadExtensionResources() {
   const resources = [
     "widget.html",
@@ -402,9 +402,9 @@ if (document.readyState === "loading") {
 
 ---
 
-## Security Considerations {#security-considerations}
+Security Considerations {#security-considerations}
 
-### Extension Fingerprinting {#extension-fingerprinting}
+Extension Fingerprinting {#extension-fingerprinting}
 
 Any web page in your `matches` list can probe for your extension by trying to load its resources:
 
@@ -422,13 +422,13 @@ Mitigations:
 3. Minimize the number of web accessible resources
 4. Never make sensitive configuration files web accessible
 
-### Content Security Policy {#content-security-policy}
+Content Security Policy {#content-security-policy}
 
 Web accessible resources loaded in iframes respect the extension's CSP, not the page's. This provides isolation but means your widget code runs under extension CSP rules.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|
@@ -441,7 +441,7 @@ Web accessible resources loaded in iframes respect the extension's CSP, not the 
 | Resource preloading | Faster widget initialization |
 | Secure access | Restrict to specific origins only |
 
-Web accessible resources are the bridge between your extension and the web page. Use them deliberately — expose only what's needed, restrict access to specific origins, and prefer `use_dynamic_url` to prevent fingerprinting.
+Web accessible resources are the bridge between your extension and the web page. Use them deliberately. expose only what's needed, restrict access to specific origins, and prefer `use_dynamic_url` to prevent fingerprinting.
 -e 
 ---
 

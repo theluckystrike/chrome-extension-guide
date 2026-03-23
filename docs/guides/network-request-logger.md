@@ -7,16 +7,16 @@ A network request logger captures and displays HTTP requests made by the browser
 The extension consists of three main components: service worker (central hub for webRequest events), content scripts (page overlays), and popup/side panel (UI display).
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  Content Script │────▶│  Service Worker  │◀────│ Popup/Side Panel│
-│  (Page Overlay) │     │  (Event Handler) │     │  (UI Display)   │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-                               │
-                               ▼
-                        ┌──────────────────┐
-                        │  chrome.storage  │
-                        │  (Persistence)   │
-                        └──────────────────┘
+          
+  Content Script   Service Worker   Popup/Side Panel
+  (Page Overlay)        (Event Handler)        (UI Display)   
+          
+                               
+                               
+                        
+                          chrome.storage  
+                          (Persistence)   
+                        
 ```
 
 ## Manifest Configuration
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => new PopupController());
 | `tabs` | Communicate with tab-specific content scripts |
 | `host_permissions` | `<all_urls>` or specific patterns |
 
-Note: webRequest is **observe-only** in MV3. Use declarativeNetRequest for blocking capabilities.
+webRequest is observe-only in MV3. Use declarativeNetRequest for blocking capabilities.
 
 ## State Management
 
@@ -264,11 +264,11 @@ describe('NetworkLogger', () => {
 
 ## Performance Considerations
 
-1. **Debounce message passing** - Batch updates every 100ms instead of individual messages
-2. **Limit in-memory storage** - Prune requests beyond configured maximum (default 1000)
-3. **Use Maps for O(1) lookups** - Efficient request ID lookups
-4. **Lazy load details** - Fetch full request details only when expanded
-5. **Virtualize long lists** - Use virtualization for 1000+ items in UI
+1. Debounce message passing - Batch updates every 100ms instead of individual messages
+2. Limit in-memory storage - Prune requests beyond configured maximum (default 1000)
+3. Use Maps for O(1) lookups - Efficient request ID lookups
+4. Lazy load details - Fetch full request details only when expanded
+5. Virtualize long lists - Use virtualization for 1000+ items in UI
 
 ## Publishing Checklist
 

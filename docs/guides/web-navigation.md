@@ -1,31 +1,31 @@
 ---
 layout: default
-title: "Chrome Extension Web Navigation — Developer Guide"
+title: "Chrome Extension Web Navigation. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/web-navigation/"
 ---
 # Web Navigation API Guide
 
-## Overview {#overview}
+Overview {#overview}
 - Requires `"webNavigation"` permission
 - Track page navigation lifecycle across all tabs and frames
 - Powerful URL filtering to listen only to specific sites
 
-## Navigation Events (in order) {#navigation-events-in-order}
-# WebNavigation API Guide
+Navigation Events (in order) {#navigation-events-in-order}
+WebNavigation API Guide
 
 The Chrome `webNavigation` API provides comprehensive navigation event tracking for browser extensions. This guide covers all events, methods, filtering, and practical implementation.
 
-## Required Permission
+Required Permission
 
 ```json
 { "permissions": ["webNavigation"] }
 ```
 
-## Navigation Events
+Navigation Events
 
-### onBeforeNavigate
-Fires when navigation is about to start—earliest lifecycle event.
+onBeforeNavigate
+Fires when navigation is about to start, earliest lifecycle event.
 
 ```javascript
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
@@ -33,8 +33,8 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
 }, { url: [{ hostSuffix: 'example.com' }] });
 ```
 
-### onCommitted
-Navigation committed—browser decided to load the new document.
+onCommitted
+Navigation committed, browser decided to load the new document.
 
 ```javascript
 chrome.webNavigation.onCommitted.addListener((details) => {
@@ -42,7 +42,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-### onDOMContentLoaded
+onDOMContentLoaded
 DOM fully constructed, external resources may still load.
 
 ```javascript
@@ -51,7 +51,7 @@ chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
 });
 ```
 
-### onCompleted
+onCompleted
 Page and all resources fully loaded.
 
 ```javascript
@@ -60,7 +60,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-### onErrorOccurred
+onErrorOccurred
 Error during navigation.
 
 ```javascript
@@ -69,10 +69,10 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-## URL Filtering {#url-filtering}
-## SPA Navigation Events
+URL Filtering {#url-filtering}
+SPA Navigation Events
 
-### onHistoryStateUpdated
+onHistoryStateUpdated
 Fires for `history.pushState()` or `history.replaceState()` in SPAs.
 
 ```javascript
@@ -81,7 +81,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-### Filter Properties {#filter-properties}
+Filter Properties {#filter-properties}
 - `hostContains`, `hostEquals`, `hostPrefix`, `hostSuffix`
 - `pathContains`, `pathEquals`, `pathPrefix`, `pathSuffix`
 - `queryContains`, `queryEquals`, `queryPrefix`, `querySuffix`
@@ -89,8 +89,8 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 - `schemes` (array of scheme strings)
 - `ports` (array of port numbers or ranges)
 
-## Frame Navigation {#frame-navigation}
-### onReferenceFragmentUpdated
+Frame Navigation {#frame-navigation}
+onReferenceFragmentUpdated
 URL fragment (hash) changes.
 
 ```javascript
@@ -99,9 +99,9 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
 });
 ```
 
-## Tab and Window Events
+Tab and Window Events
 
-### onCreatedNavigationTarget
+onCreatedNavigationTarget
 New tab/window via `window.open()` or `target="_blank"`.
 
 ```javascript
@@ -110,7 +110,7 @@ chrome.webNavigation.onCreatedNavigationTarget.addListener((details) => {
 });
 ```
 
-### onTabReplaced
+onTabReplaced
 Tab replaced by prerendering or back-forward cache.
 
 ```javascript
@@ -119,9 +119,9 @@ chrome.webNavigation.onTabReplaced.addListener((details) => {
 });
 ```
 
-## Frame Information Methods
+Frame Information Methods
 
-### getFrame
+getFrame
 Get details about a specific frame.
 
 ```javascript
@@ -130,7 +130,7 @@ chrome.webNavigation.getFrame({ tabId: tabId, frameId: frameId }, (frame) => {
 });
 ```
 
-### getAllFrames
+getAllFrames
 Get all frames in a tab.
 
 ```javascript
@@ -139,21 +139,21 @@ chrome.webNavigation.getAllFrames({ tabId: tabId }, (frames) => {
 });
 ```
 
-## Transition Types {#transition-types}
-- `"link"` — clicked a link
-- `"typed"` — typed in address bar
-- `"auto_bookmark"` — from bookmark
-- `"auto_subframe"` — automatic iframe load
-- `"manual_subframe"` — user-initiated iframe navigation
-- `"generated"` — from omnibox suggestion
-- `"start_page"` — start/home page
-- `"form_submit"` — form submission
-- `"reload"` — page reload
-- `"keyword"` — omnibox keyword
-- `"keyword_generated"` — search keyword result
+Transition Types {#transition-types}
+- `"link"`. clicked a link
+- `"typed"`. typed in address bar
+- `"auto_bookmark"`. from bookmark
+- `"auto_subframe"`. automatic iframe load
+- `"manual_subframe"`. user-initiated iframe navigation
+- `"generated"`. from omnibox suggestion
+- `"start_page"`. start/home page
+- `"form_submit"`. form submission
+- `"reload"`. page reload
+- `"keyword"`. omnibox keyword
+- `"keyword_generated"`. search keyword result
 
-## SPA Navigation Detection {#spa-navigation-detection}
-## Transition Types
+SPA Navigation Detection {#spa-navigation-detection}
+Transition Types
 
 | Type | Description |
 |------|-------------|
@@ -166,7 +166,7 @@ chrome.webNavigation.getAllFrames({ tabId: tabId }, (frames) => {
 | `reload` | Page reload |
 | `forward_back` | Forward/back button |
 
-## Transition Qualifiers
+Transition Qualifiers
 
 ```javascript
 chrome.webNavigation.onCommitted.addListener((d) => {
@@ -175,10 +175,10 @@ chrome.webNavigation.onCommitted.addListener((d) => {
 });
 ```
 
-## Tracking Page Visits {#tracking-page-visits}
+Tracking Page Visits {#tracking-page-visits}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
-## URL Filters
+URL Filters
 
 Efficient filtering reduces processing by matching in the browser:
 
@@ -195,9 +195,9 @@ chrome.webNavigation.onCompleted.addListener(cb, { url: [{ urlMatches: '.*\\.git
 chrome.webNavigation.onCompleted.addListener(cb, { url: [{ schemes: ['https'] }] });
 ```
 
-**Filter Properties:** `hostContains`, `hostEquals`, `hostPrefix`, `hostSuffix`, `pathContains`, `pathEquals`, `pathPrefix`, `pathSuffix`, `queryContains`, `urlContains`, `urlEquals`, `urlPrefix`, `urlSuffix`, `urlMatches`, `schemes`, `ports`
+Filter Properties: `hostContains`, `hostEquals`, `hostPrefix`, `hostSuffix`, `pathContains`, `pathEquals`, `pathPrefix`, `pathSuffix`, `queryContains`, `urlContains`, `urlEquals`, `urlPrefix`, `urlSuffix`, `urlMatches`, `schemes`, `ports`
 
-## Building a Navigation Tracker Extension
+Building a Navigation Tracker Extension
 
 ```javascript
 // background.js
@@ -247,7 +247,7 @@ chrome.webNavigation.onTabReplaced.addListener(d => {
 });
 ```
 
-**Manifest:**
+Manifest:
 ```json
 {
   "manifest_version": 3,
@@ -257,8 +257,8 @@ chrome.webNavigation.onTabReplaced.addListener(d => {
 }
 ```
 
-## webNavigation vs tabs.onUpdated {#webnavigation-vs-tabsonupdated}
-## webNavigation vs tabs.onUpdated
+webNavigation vs tabs.onUpdated {#webnavigation-vs-tabsonupdated}
+webNavigation vs tabs.onUpdated
 
 | Feature | webNavigation | tabs.onUpdated |
 |---------|--------------|----------------|
@@ -268,23 +268,23 @@ chrome.webNavigation.onTabReplaced.addListener(d => {
 | SPA events | Yes | No |
 | Permission | `webNavigation` | `tabs` |
 
-## Common Mistakes {#common-mistakes}
-- Forgetting `frameId === 0` check — events fire for ALL frames
+Common Mistakes {#common-mistakes}
+- Forgetting `frameId === 0` check. events fire for ALL frames
 - Not handling SPA navigations (onHistoryStateUpdated)
-- Ignoring `onErrorOccurred` — failed navigations still matter
+- Ignoring `onErrorOccurred`. failed navigations still matter
 - Heavy processing in event handlers slowing navigation
 - Not using URL filters (processing every navigation is wasteful)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Web Navigation API](../api-reference/web-navigation-api.md)
 - [URL Handling](../patterns/navigation-url-handling.md)
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-## Common Mistakes
+Common Mistakes
 
 - Not filtering by `frameId === 0` for main frame only
 - Missing SPA navigation handling (onHistoryStateUpdated)
@@ -292,7 +292,7 @@ chrome.webNavigation.onTabReplaced.addListener(d => {
 - Heavy processing in event handlers
 - Not using URL filters
 
-## Reference
+Reference
 
 [developer.chrome.com/docs/extensions/reference/api/webNavigation](https://developer.chrome.com/docs/extensions/reference/api/webNavigation)
 

@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Extension Feature Flags Impl — Best Practices"
+title: "Chrome Extension Extension Feature Flags Impl. Best Practices"
 description: "Implement feature flags with storage and remote configuration."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-flags-impl/"
 ---
 
 # Extension Feature Flag Implementation
 
-## Overview {#overview}
+Overview {#overview}
 
 Feature flags in Chrome extensions require specific implementations due to the extension's unique runtime model. This guide covers practical patterns for implementing flags in browser extensions.
 
 ---
 
-## Local Flags {#local-flags}
+Local Flags {#local-flags}
 
 Store flags in `chrome.storage.local` or `chrome.storage.sync`. Local flags are toggled via an options page, ideal for user preferences and experimental features.
 
@@ -51,7 +51,7 @@ Toggle flags in your options page with a simple checkbox UI.
 
 ---
 
-## Build-Time Flags {#build-time-flags}
+Build-Time Flags {#build-time-flags}
 
 Define flags at build time for different environments (dev, staging, prod). Use environment variables or build configuration.
 
@@ -71,7 +71,7 @@ Build-time flags cannot be changed at runtime but reduce bundle size by eliminat
 
 ---
 
-## Remote Flags {#remote-flags}
+Remote Flags {#remote-flags}
 
 Fetch flags from your server and cache locally. Use `chrome.alarms` for periodic refresh.
 
@@ -115,12 +115,12 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 ---
 
-## Flag Types {#flag-types}
+Flag Types {#flag-types}
 
-### Boolean Flags {#boolean-flags}
+Boolean Flags {#boolean-flags}
 Simple on/off control for features.
 
-### Percentage Rollout {#percentage-rollout}
+Percentage Rollout {#percentage-rollout}
 Gradually enable for X% of users using consistent hashing.
 
 ```js
@@ -132,7 +132,7 @@ function getPercentageBucket(userId, flagName, percentage) {
 }
 ```
 
-### User Segment Flags {#user-segment-flags}
+User Segment Flags {#user-segment-flags}
 Target specific user groups (beta users, premium, etc.).
 
 ```js
@@ -145,7 +145,7 @@ async function getUserSegmentFlag(flagName) {
 
 ---
 
-## Default Values {#default-values}
+Default Values {#default-values}
 
 Always define defaults for when storage is empty or a flag is missing.
 
@@ -163,7 +163,7 @@ function getFlag(key, fallback = false) {
 
 ---
 
-## Flag Evaluation {#flag-evaluation}
+Flag Evaluation {#flag-evaluation}
 
 Check flags at feature entry points and gate entire code paths.
 
@@ -183,7 +183,7 @@ async function initFeature() {
 
 ---
 
-## UI Gating {#ui-gating}
+UI Gating {#ui-gating}
 
 Conditionally render UI elements based on flag state.
 
@@ -204,7 +204,7 @@ async function renderSettings() {
 
 ---
 
-## Code Gating {#code-gating}
+Code Gating {#code-gating}
 
 Conditionally register event listeners or features.
 
@@ -224,7 +224,7 @@ function registerFeatureHandlers() {
 
 ---
 
-## A/B Testing {#ab-testing}
+A/B Testing {#ab-testing}
 
 Random assignment with persistent user bucket.
 
@@ -243,18 +243,18 @@ async function assignUserBucket(experimentId, variants) {
 
 ---
 
-## Flag Lifecycle {#flag-lifecycle}
+Flag Lifecycle {#flag-lifecycle}
 
-1. **Experimental**: Limited internal testing, may be unstable
-2. **Beta**: Broader testing, user opt-in
-3. **Stable**: Available to all users
-4. **Removed**: Feature is permanent or deprecated
+1. Experimental: Limited internal testing, may be unstable
+2. Beta: Broader testing, user opt-in
+3. Stable: Available to all users
+4. Removed: Feature is permanent or deprecated
 
 Document flags with lifecycle status and planned removal date.
 
 ---
 
-## Cleanup {#cleanup}
+Cleanup {#cleanup}
 
 Remove flag checks when features become permanent.
 
@@ -271,7 +271,7 @@ if (flags.newFeature) renderNewUI();
 
 ---
 
-## Developer Mode {#developer-mode}
+Developer Mode {#developer-mode}
 
 Add an options page section for toggling experimental features.
 
@@ -291,7 +291,7 @@ function renderDevSettings(flags) {
 
 ---
 
-## Analytics {#analytics}
+Analytics {#analytics}
 
 Track flag state with usage events.
 
@@ -311,7 +311,7 @@ function trackFeatureUsage(featureName, flags) {
 
 ---
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Feature Flags](./feature-flags.md)
 - [Extension Configuration](./extension-configuration.md)

@@ -1,47 +1,47 @@
 ---
 layout: default
-title: "Chrome Extension Error Handling — Patterns for Robust Error Recovery"
+title: "Chrome Extension Error Handling. Patterns for Robust Error Recovery"
 description: "Comprehensive error handling in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/error-handling/"
 ---
 
 # Error Handling Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-Chrome extensions run code across multiple contexts — background service workers, content scripts, popup pages, and options pages. An unhandled error in one context can silently break functionality without any visible feedback. This guide covers practical patterns for catching, typing, isolating, retrying, and reporting errors across every extension context.
+Chrome extensions run code across multiple contexts. background service workers, content scripts, popup pages, and options pages. An unhandled error in one context can silently break functionality without any visible feedback. This guide covers practical patterns for catching, typing, isolating, retrying, and reporting errors across every extension context.
 
 ---
 
-## The Error Landscape {#the-error-landscape}
+The Error Landscape {#the-error-landscape}
 
 ```
-┌──────────────────────────────────────────────────────┐
-│                  Extension Contexts                   │
-│                                                      │
-│  ┌──────────────┐  ┌──────────┐  ┌───────────────┐  │
-│  │  Background   │  │  Popup   │  │Content Script │  │
-│  │  (SW)         │  │  (UI)    │  │  (per tab)    │  │
-│  │              │  │          │  │               │  │
-│  │ - fetch fail │  │ - render │  │ - DOM errors  │  │
-│  │ - alarm err  │  │   errors │  │ - msg timeout │  │
-│  │ - msg errors │  │ - state  │  │ - host page   │  │
-│  └──────┬───────┘  └────┬─────┘  └───────┬───────┘  │
-│         │               │                │           │
-│         └───────────┬───┘────────────────┘           │
-│                     │                                │
-│            ┌────────▼────────┐                       │
-│            │  Error Pipeline │                       │
-│            │  (collect/report)│                       │
-│            └─────────────────┘                       │
-└──────────────────────────────────────────────────────┘
+
+                  Extension Contexts                   
+                                                      
+        
+    Background       Popup     Content Script   
+    (SW)             (UI)        (per tab)      
+                                               
+   - fetch fail    - render    - DOM errors    
+   - alarm err       errors    - msg timeout   
+   - msg errors    - state     - host page     
+        
+                                                   
+                    
+                                                     
+                                   
+              Error Pipeline                        
+              (collect/report)                       
+                                   
+
 ```
 
 Each context has its own global scope, its own error events, and its own failure modes. A centralized strategy is essential.
 
 ---
 
-## Pattern 1: Centralized Error Handler {#pattern-1-centralized-error-handler}
+Pattern 1: Centralized Error Handler {#pattern-1-centralized-error-handler}
 
 Create a single error handler module that works in every context:
 
@@ -100,7 +100,7 @@ export function handleError(
       type: "ERROR_REPORT",
       payload: report,
     }).catch(() => {
-      // Extension context may be invalid — nothing we can do
+      // Extension context may be invalid. nothing we can do
     });
   }
 }
@@ -156,7 +156,7 @@ window.addEventListener("error", (event) => {
 
 ---
 
-## Pattern 2: Typed Error Classes {#pattern-2-typed-error-classes}
+Pattern 2: Typed Error Classes {#pattern-2-typed-error-classes}
 
 Define extension-specific error types so catch blocks can make intelligent decisions:
 
@@ -234,7 +234,7 @@ export class NetworkError extends ExtensionError {
 export class ContextInvalidatedError extends ExtensionError {
   constructor() {
     super(
-      "Extension context invalidated — extension was updated or reloaded",
+      "Extension context invalidated. extension was updated or reloaded",
       "CONTEXT_INVALIDATED",
       false // not recoverable without a page reload
     );
@@ -260,11 +260,11 @@ async function fetchData(url: string): Promise<unknown> {
     return await response.json();
   } catch (error) {
     if (error instanceof NetworkError && error.status === 429) {
-      // Rate limited — retry with backoff (see Pattern 4)
+      // Rate limited. retry with backoff (see Pattern 4)
       return retryWithBackoff(() => fetchData(url));
     }
     if (error instanceof ContextInvalidatedError) {
-      // Nothing to do — extension is gone
+      // Nothing to do. extension is gone
       return null;
     }
     handleError(error, "high", { url });
@@ -275,7 +275,7 @@ async function fetchData(url: string): Promise<unknown> {
 
 ---
 
-## Pattern 3: Graceful Degradation for Missing Permissions {#pattern-3-graceful-degradation-for-missing-permissions}
+Pattern 3: Graceful Degradation for Missing Permissions {#pattern-3-graceful-degradation-for-missing-permissions}
 
 Optional permissions can be revoked at any time. Always check before using gated APIs:
 
@@ -360,9 +360,9 @@ chrome.permissions.onAdded.addListener((permissions) => {
 
 ---
 
-## Pattern 4: Retry with Exponential Backoff {#pattern-4-retry-with-exponential-backoff}
+Pattern 4: Retry with Exponential Backoff {#pattern-4-retry-with-exponential-backoff}
 
-Network calls from extensions fail often — the user might be offline, the API might be rate-limiting, or the service worker might wake mid-request:
+Network calls from extensions fail often. the user might be offline, the API might be rate-limiting, or the service worker might wake mid-request:
 
 ```ts
 // lib/retry.ts
@@ -456,12 +456,12 @@ async function callExternalApi(endpoint: string): Promise<unknown> {
 
 ---
 
-## Pattern 5: Error Boundaries for Extension UI {#pattern-5-error-boundaries-for-extension-ui}
+Pattern 5: Error Boundaries for Extension UI {#pattern-5-error-boundaries-for-extension-ui}
 
 Popup and options pages built with frameworks need error boundaries to avoid a blank white page:
 
 ```ts
-// ui/error-boundary.ts — Framework-agnostic fallback renderer
+// ui/error-boundary.ts. Framework-agnostic fallback renderer
 
 export function renderErrorFallback(
   container: HTMLElement,
@@ -508,7 +508,7 @@ export function renderErrorFallback(
 
 {% raw %}
 ```tsx
-// ui/ErrorBoundary.tsx — React error boundary for popup/options
+// ui/ErrorBoundary.tsx. React error boundary for popup/options
 
 import React, { Component, type ReactNode, type ErrorInfo } from "react";
 import { handleError } from "../lib/error-handler";
@@ -573,7 +573,7 @@ export function App() {
 
 ---
 
-## Pattern 6: Content Script Error Isolation {#pattern-6-content-script-error-isolation}
+Pattern 6: Content Script Error Isolation {#pattern-6-content-script-error-isolation}
 
 Content scripts share the page's DOM. An uncaught exception can break page functionality or leak extension internals. Wrap all content script entry points:
 
@@ -587,7 +587,7 @@ function main() {
     initializeFeatures();
   } catch (error) {
     handleError(error, "high", { phase: "init" });
-    // Do NOT re-throw — don't crash the host page
+    // Do NOT re-throw. don't crash the host page
   }
 }
 
@@ -674,7 +674,7 @@ main();
 
 ---
 
-## Pattern 7: Logging and Error Reporting Pipeline {#pattern-7-logging-and-error-reporting-pipeline}
+Pattern 7: Logging and Error Reporting Pipeline {#pattern-7-logging-and-error-reporting-pipeline}
 
 Build a pipeline that captures errors across all contexts and periodically ships them:
 
@@ -745,7 +745,7 @@ export class ErrorReporter {
         });
         clearErrorBuffer();
       } catch {
-        // Network failed — errors stay in buffer for next flush
+        // Network failed. errors stay in buffer for next flush
       }
     } else {
       clearErrorBuffer();
@@ -758,7 +758,7 @@ export class ErrorReporter {
       const merged = [...errorLog, ...reports].slice(-200);
       await chrome.storage.local.set({ errorLog: merged });
     } catch {
-      // Storage quota exceeded or context invalid — drop silently
+      // Storage quota exceeded or context invalid. drop silently
     }
   }
 }
@@ -784,7 +784,7 @@ reporter.start();
 View collected errors from the options page:
 
 ```ts
-// options.ts — Display error log for debugging
+// options.ts. Display error log for debugging
 async function displayErrorLog(): Promise<void> {
   const { errorLog = [] } = await chrome.storage.local.get("errorLog");
 
@@ -822,14 +822,14 @@ async function displayErrorLog(): Promise<void> {
 
 ---
 
-## Pattern 8: chrome.runtime.lastError Handling {#pattern-8-chromeruntimelasterror-handling}
+Pattern 8: chrome.runtime.lastError Handling {#pattern-8-chromeruntimelasterror-handling}
 
 Many Chrome APIs use `chrome.runtime.lastError` instead of throwing. Failing to check it produces "Unchecked runtime.lastError" console warnings and silently swallows errors:
 
 ```ts
 // lib/chrome-api.ts
 
-/**
+/
  * Wraps a callback-style Chrome API call in a Promise that properly
  * checks chrome.runtime.lastError.
  */
@@ -852,12 +852,12 @@ export function chromeAsync<T>(
 // Usage with various Chrome APIs
 import { chromeAsync } from "./lib/chrome-api";
 
-// Tabs — sendMessage requires lastError check
+// Tabs. sendMessage requires lastError check
 async function sendToTab(tabId: number, message: unknown): Promise<unknown> {
   return chromeAsync((cb) => chrome.tabs.sendMessage(tabId, message, cb));
 }
 
-// Cookies — get requires lastError check
+// Cookies. get requires lastError check
 async function getCookie(
   url: string,
   name: string
@@ -934,7 +934,7 @@ export async function broadcastMessage(message: unknown): Promise<void> {
     await chrome.runtime.sendMessage(message);
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
-    // Expected when popup/options are closed — not an error
+    // Expected when popup/options are closed. not an error
     if (msg.includes("Receiving end does not exist")) {
       return;
     }
@@ -948,7 +948,7 @@ export async function broadcastMessage(message: unknown): Promise<void> {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -961,7 +961,7 @@ export async function broadcastMessage(message: unknown): Promise<void> {
 | Reporting pipeline | Aggregating and shipping errors for debugging |
 | lastError handling | Silent failures from callback-based Chrome APIs |
 
-Treat errors as first-class data in your extension. Type them, catch them at every boundary, degrade gracefully when you can, and ship them to a pipeline so you can debug what users actually hit. The worst extension bug is the one nobody sees — because the error was silently swallowed.
+Treat errors as first-class data in your extension. Type them, catch them at every boundary, degrade gracefully when you can, and ship them to a pipeline so you can debug what users actually hit. The worst extension bug is the one nobody sees. because the error was silently swallowed.
 -e 
 ---
 

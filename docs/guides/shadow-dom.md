@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Shadow DOM — How to Isolate Your UI from Host Pages"
+title: "Chrome Extension Shadow DOM. How to Isolate Your UI from Host Pages"
 description: "Learn how to use Shadow DOM in Chrome extensions to create isolated UI components that are protected from host page styles and scripts."
 canonical_url: "https://bestchromeextensions.com/guides/shadow-dom/"
 ---
 
-# Chrome Extension Shadow DOM — How to Isolate Your UI from Host Pages
+# Chrome Extension Shadow DOM. How to Isolate Your UI from Host Pages
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
 When building Chrome extensions, one of the most persistent challenges is ensuring your extension's UI remains consistent and functional regardless of the web page it runs on. Host pages can have aggressive CSS rules, JavaScript frameworks, and conflicting styles that inadvertently affect your extension's popups, side panels, or injected content. Shadow DOM provides a powerful solution by creating a boundary that isolates your UI from the surrounding document.
 
 Shadow DOM is a web standard that encapsulates DOM subtrees and their styles, preventing external styles from leaking in and internal styles from leaking out. For Chrome extension developers, this technology is invaluable for building robust, predictable user interfaces that work consistently across millions of websites.
 
-## Creating Shadow Roots {#creating-shadow-roots}
+Creating Shadow Roots {#creating-shadow-roots}
 
 The foundation of Shadow DOM is the shadow root, which serves as the boundary between your component and the host page. Creating a shadow root is straightforward: select an element in your host document and call the `attachShadow()` method with the mode set to `"open"` or `"closed"`.
 
@@ -42,9 +42,9 @@ shadowRoot.innerHTML = `
 
 The difference between `"open"` and `"closed"` modes matters for debugging. With `"open"`, you can access the shadow root from the console using `element.shadowRoot`. With `"closed"`, the property returns `null`, which provides minimal security benefit but makes debugging more difficult. For extension development, always use `"open"` mode.
 
-## Style Isolation {#style-isolation}
+Style Isolation {#style-isolation}
 
-One of Shadow DOM's most compelling features is style isolation. Styles defined inside a shadow tree don't affect the host page, and host page styles don't penetrate the shadow boundary—except through explicitly defined CSS custom properties.
+One of Shadow DOM's most compelling features is style isolation. Styles defined inside a shadow tree don't affect the host page, and host page styles don't penetrate the shadow boundary, except through explicitly defined CSS custom properties.
 
 ```javascript
 const shadowRoot = hostElement.attachShadow({ mode: 'open' });
@@ -83,7 +83,7 @@ However, be aware that some styles still penetrate the shadow boundary. Inherite
 }
 ```
 
-## Event Handling {#event-handling}
+Event Handling {#event-handling}
 
 Events originating from within a shadow tree appear to bubble from the host element, which is convenient for event delegation. However, the event's target and composed path require careful handling when your extension needs to identify the actual source of an interaction.
 
@@ -104,9 +104,9 @@ For cross-origin communication between your shadow DOM components and the rest o
 
 One important caveat: some events don't cross the shadow boundary by default. Form-associated events and certain media events use a composed flag. If you need these events, you'll need to handle them differently or reconsider your architecture.
 
-## Framework Integration {#framework-integration}
+Framework Integration {#framework-integration}
 
-Modern JavaScript frameworks like React, Vue, and Svelte can work seamlessly with Shadow DOM, but they require some configuration to render into a shadow root correctly.
+Modern JavaScript frameworks like React, Vue, and Svelte can work smoothly with Shadow DOM, but they require some configuration to render into a shadow root correctly.
 
 For React, you'll need to create a custom renderer or use the `createShadowRoot` utility:
 
@@ -161,7 +161,7 @@ export default {
 
 Regardless of your framework, always ensure your styles are included within the shadow root rather than injected into the document head.
 
-## Manifest V3 Considerations {#mv3-considerations}
+Manifest V3 Considerations {#mv3-considerations}
 
 Manifest V3 brings several changes that affect Shadow DOM usage in extensions. Most notably, the transition to service workers affects how your extension loads and manages its UI components.
 
@@ -198,6 +198,6 @@ if (document.readyState === 'loading') {
 
 For side panels and popups, Shadow DOM is less critical because they render in their own document context, completely separate from host pages. However, if you're injecting UI into web pages through content scripts, Shadow DOM becomes essential for maintaining a professional, consistent experience.
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Shadow DOM provides Chrome extension developers with a robust mechanism for UI isolation that protects your components from hostile or simply cluttered host page environments. By creating explicit boundaries, you ensure your extension's UI remains visually consistent, functionally reliable, and maintainable across the vast diversity of websites your users will visit. Whether you're building a simple content script overlay or a complex framework-powered interface, Shadow DOM should be a core part of your development toolkit.
+Shadow DOM provides Chrome extension developers with a solid mechanism for UI isolation that protects your components from hostile or simply cluttered host page environments. By creating explicit boundaries, you ensure your extension's UI remains visually consistent, functionally reliable, and maintainable across the vast diversity of websites your users will visit. Whether you're building a simple content script overlay or a complex framework-powered interface, Shadow DOM should be a core part of your development toolkit.

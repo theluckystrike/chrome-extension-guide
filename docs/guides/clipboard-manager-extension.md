@@ -5,12 +5,12 @@ A clipboard manager extension stores, searches, and retrieves clipboard history.
 
 ## Architecture Overview
 ```
-┌──────────────┐    chrome.runtime    ┌─────────────────────┐
-│   Popup UI   │◄─────────────────────►│  Service Worker     │
-│  - Search    │                       │  - Clipboard polling│
-│  - Item list │                       │  - Storage management│
-└──────────────┘                       └──────────┬──────────┘
-                                                   │
+    chrome.runtime    
+   Popup UI     Service Worker     
+  - Search                             - Clipboard polling
+  - Item list                          - Storage management
+                       
+                                                   
                                           chrome.storage
 ```
 
@@ -228,8 +228,8 @@ export class PopupController {
         <div class="meta">${item.type} • ${this.timeAgo(item.timestamp)}</div>
         <div class="actions">
           <button class="copy">Copy</button>
-          <button class="fav">${item.favorite ? '★' : '☆'}</button>
-          <button class="del">✕</button>
+          <button class="fav">${item.favorite ? '' : ''}</button>
+          <button class="del"></button>
         </div>
       </div>
     `).join('');
@@ -357,10 +357,10 @@ test('copy button works', async ({ page }) => {
 ```
 
 ## Performance Considerations
-- **Virtual scrolling** for large lists (>100 items)
-- **Debounced search** (300ms delay)
-- **Lazy load** storage with compression for large content
-- **Cleanup timer** to remove old items periodically
+- Virtual scrolling for large lists (>100 items)
+- Debounced search (300ms delay)
+- Lazy load storage with compression for large content
+- Cleanup timer to remove old items periodically
 
 ## Publishing Checklist
 

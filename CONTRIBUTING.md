@@ -31,12 +31,12 @@ We welcome pull requests for:
 
 #### PR Process
 
-1. **Fork the repository** and create a feature branch from `main`
-2. **Make your changes** following the code style guidelines
-3. **Test your changes** to ensure they work correctly
-4. **Update documentation** if your changes affect the API or usage
-5. **Submit a pull request** to the `main` branch
-6. **Respond to review feedback** and make necessary changes
+1. Fork the repository and create a feature branch from `main`
+2. Make your changes following the code style guidelines
+3. Test your changes to ensure they work correctly
+4. Update documentation if your changes affect the API or usage
+5. Submit a pull request to the `main` branch
+6. Respond to review feedback and make necessary changes
 
 When submitting a PR, please include:
 - A clear description of what the PR does
@@ -65,7 +65,7 @@ git push origin your-feature-branch
 
 ### General Guidelines
 
-- Use **TypeScript** for all code contributions
+- Use TypeScript for all code contributions
 - Follow existing code conventions in the repository
 - Keep code clean and well-commented
 - Write meaningful commit messages
@@ -91,7 +91,6 @@ git push origin your-feature-branch
 - Keep the first line under 72 characters
 - Reference issues and PRs when applicable
 
-Example:
 ```
 Add TypeScript types for storage API
 

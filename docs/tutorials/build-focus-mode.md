@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "Chrome Extension Focus Mode — Developer Guide"
+title: "Chrome Extension Focus Mode. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-focus-mode/"
 ---
 # Build a Site Blocker / Focus Mode Extension
 
-Build a Chrome extension that blocks distracting sites during focus sessions, runs a Pomodoro timer, tracks daily statistics, and supports scheduled auto-activation. Uses **@theluckystrike/webext-storage** for persistent data and **@theluckystrike/webext-messaging** for popup-to-background communication.
+Build a Chrome extension that blocks distracting sites during focus sessions, runs a Pomodoro timer, tracks daily statistics, and supports scheduled auto-activation. Uses @theluckystrike/webext-storage for persistent data and @theluckystrike/webext-messaging for popup-to-background communication.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -16,7 +16,7 @@ Build a Chrome extension that blocks distracting sites during focus sessions, ru
 
 ---
 
-## Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
+Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
 
 ```bash
 mkdir focus-mode-ext && cd focus-mode-ext
@@ -50,7 +50,7 @@ Create `manifest.json`:
 
 ---
 
-## Step 2: Popup UI with Blocklist Management {#step-2-popup-ui-with-blocklist-management}
+Step 2: Popup UI with Blocklist Management {#step-2-popup-ui-with-blocklist-management}
 
 Create `popup/popup.html`:
 
@@ -121,7 +121,7 @@ hr { border: none; border-top: 1px solid #21262d; margin: 12px 0; }
 
 ---
 
-## Step 3: Focus Mode Toggle and Popup Logic {#step-3-focus-mode-toggle-and-popup-logic}
+Step 3: Focus Mode Toggle and Popup Logic {#step-3-focus-mode-toggle-and-popup-logic}
 
 Create `popup/popup.js`:
 
@@ -221,7 +221,7 @@ The popup communicates with the background via `sendMessage`. The timer display 
 
 ---
 
-## Step 4: declarativeNetRequest Rules and Blocking {#step-4-declarativenetrequest-rules-and-blocking}
+Step 4: declarativeNetRequest Rules and Blocking {#step-4-declarativenetrequest-rules-and-blocking}
 
 Create `background.js` -- this file handles rules, the Pomodoro timer, stats, schedule, and messaging:
 
@@ -357,14 +357,14 @@ chrome.webNavigation?.onErrorOccurred?.addListener(async (details) => {
 
 Each blocklist entry becomes a dynamic rule with `urlFilter: "||example.com"` targeting `main_frame` resources. The redirect sends users to the extension's `blocked.html` page.
 
-> **Important:** For `declarativeNetRequest` redirects to extension pages, `blocked.html` must be listed in `web_accessible_resources` in your manifest. Add:
+> Important: For `declarativeNetRequest` redirects to extension pages, `blocked.html` must be listed in `web_accessible_resources` in your manifest. Add:
 > ```json
 > "web_accessible_resources": [{ "resources": ["blocked.html"], "matches": ["<all_urls>"] }]
 > ```
 
 ---
 
-## Step 5: "Stay Focused" Blocked Page {#step-5-stay-focused-blocked-page}
+Step 5: "Stay Focused" Blocked Page {#step-5-stay-focused-blocked-page}
 
 Create `blocked.html`:
 
@@ -414,43 +414,43 @@ When `declarativeNetRequest` redirects a blocked URL, users see this page with r
 
 ---
 
-## Step 6: Pomodoro Timer with Work/Break Cycles {#step-6-pomodoro-timer-with-workbreak-cycles}
+Step 6: Pomodoro Timer with Work/Break Cycles {#step-6-pomodoro-timer-with-workbreak-cycles}
 
 The Pomodoro logic in `background.js` (Step 4) cycles through phases:
 
-1. **Start** -- `phaseEndTime = now + workMinutes`, creates `pomodoro-phase` alarm.
-2. **Work ends** -- `handlePhaseEnd()` switches to `'break'`, removes block rules, sets break alarm.
-3. **Break ends** -- switches back to `'work'`, re-enables block rules, sets next work alarm.
-4. **Repeats** until the user stops focus mode.
+1. Start -- `phaseEndTime = now + workMinutes`, creates `pomodoro-phase` alarm.
+2. Work ends -- `handlePhaseEnd()` switches to `'break'`, removes block rules, sets break alarm.
+3. Break ends -- switches back to `'work'`, re-enables block rules, sets next work alarm.
+4. Repeats until the user stops focus mode.
 
 `[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` is the correct MV3 timer mechanism. Service workers can be terminated at any time, making `setTimeout`/`setInterval` unreliable. The `pomodoro-tick` alarm keeps the badge current. The popup polls `get-timer` every second for its own display.
 
 ---
 
-## Step 7: Daily Usage Statistics {#step-7-daily-usage-statistics}
+Step 7: Daily Usage Statistics {#step-7-daily-usage-statistics}
 
 Two metrics are tracked per day:
 
-- **`focusMinutes`** -- incremented every minute during work phases via the `stats-update` alarm.
-- **`blocksCount`** -- incremented when a blocked domain is detected. Note: `declarativeNetRequest` redirects do not trigger `webNavigation.onErrorOccurred` (since it is a redirect, not a network error). For accurate block counting, use `chrome.declarativeNetRequest.onRuleMatchedDebug` (development only) or track redirects to `blocked.html` via `chrome.webNavigation.onCompleted` checking if the URL matches your blocked page.
+- `focusMinutes` -- incremented every minute during work phases via the `stats-update` alarm.
+- `blocksCount` -- incremented when a blocked domain is detected. Note: `declarativeNetRequest` redirects do not trigger `webNavigation.onErrorOccurred` (since it is a redirect, not a network error). For accurate block counting, use `chrome.declarativeNetRequest.onRuleMatchedDebug` (development only) or track redirects to `blocked.html` via `chrome.webNavigation.onCompleted` checking if the URL matches your blocked page.
 
 The stats object auto-resets on date change by comparing `data.stats.date` to today's ISO date string. The popup reads and displays these values on init.
 
 ---
 
-## Step 8: Allowlist for Breaks {#step-8-allowlist-for-breaks}
+Step 8: Allowlist for Breaks {#step-8-allowlist-for-breaks}
 
 The "Take 5-min Break" button calls `sendMessage('take-break')`. The background sets `breakTemporaryEnd` to 5 minutes ahead, clears all block rules, and schedules a `break-end` alarm. When it fires, rules are reinstated. This is independent of the Pomodoro cycle -- blocking lifts but the timer keeps running.
 
 ---
 
-## Step 9: Badge Showing Remaining Focus Time {#step-9-badge-showing-remaining-focus-time}
+Step 9: Badge Showing Remaining Focus Time {#step-9-badge-showing-remaining-focus-time}
 
 `updateBadge()` calculates remaining minutes from `phaseEndTime` and sets badge text (e.g., "23m"). The badge background is green during work phases and blue during breaks. It clears when focus mode stops. The `pomodoro-tick` alarm calls `updateBadge()` regularly.
 
 ---
 
-## Step 10: Options Page with Schedule {#step-10-options-page-with-schedule}
+Step 10: Options Page with Schedule {#step-10-options-page-with-schedule}
 
 Create `options/options.html`:
 
@@ -546,7 +546,7 @@ The `schedule-check` alarm runs every minute (registered in `onInstalled`). It c
 
 ---
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 ```
 focus-mode-ext/
@@ -559,7 +559,7 @@ focus-mode-ext/
   icons/   (icon16.png, icon48.png, icon128.png)
 ```
 
-## Bundling {#bundling}
+Bundling {#bundling}
 
 ```bash
 npm install -D rollup @rollup/plugin-node-resolve
@@ -575,20 +575,20 @@ export default ['popup/popup.js', 'background.js', 'options/options.js'].map(inp
 
 Run `npx rollup -c`, copy static assets to `dist/`, and load it.
 
-## Key Takeaways {#key-takeaways}
+Key Takeaways {#key-takeaways}
 
-- **`declarativeNetRequest` dynamic rules** block sites at the network level without broad host permissions. Add/remove them at runtime based on focus state.
-- **`[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)`** is the correct MV3 timer. Service workers can terminate at any time, making `setTimeout`/`setInterval` unreliable.
-- **Redirect to extension pages** via `{ type: 'redirect', redirect: { extensionPath: '/blocked.html' } }`.
-- **`@theluckystrike/webext-messaging`** replaces raw `chrome.runtime.sendMessage` with typed `sendMessage`/`onMessage` pairs.
-- **Badge text** gives at-a-glance timer status without opening the popup.
-- **Auto-scheduling** via a periodic alarm lets focus mode activate during configured work hours without user action.
+- `declarativeNetRequest` dynamic rules block sites at the network level without broad host permissions. Add/remove them at runtime based on focus state.
+- `[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` is the correct MV3 timer. Service workers can terminate at any time, making `setTimeout`/`setInterval` unreliable.
+- Redirect to extension pages via `{ type: 'redirect', redirect: { extensionPath: '/blocked.html' } }`.
+- `@theluckystrike/webext-messaging` replaces raw `chrome.runtime.sendMessage` with typed `sendMessage`/`onMessage` pairs.
+- Badge text gives at-a-glance timer status without opening the popup.
+- Auto-scheduling via a periodic alarm lets focus mode activate during configured work hours without user action.
 -e 
 ---
 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

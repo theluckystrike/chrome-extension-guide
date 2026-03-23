@@ -136,7 +136,7 @@ async fetchAllFlags(): Promise<ChromeFlag[]> {
 }
 ```
 
-**Edge Cases:** No flags page open (prompt user), Extension reload (re-fetch), Flag conflicts (warn user), Stale cache (validate age).
+Edge Cases: No flags page open (prompt user), Extension reload (re-fetch), Flag conflicts (warn user), Stale cache (validate age).
 
 ## Testing
 ```typescript
@@ -157,10 +157,10 @@ describe('FlagService', () => {
 
 ## Performance Considerations
 
-1. **Lazy Loading**: Load flags only when popup opens
-2. **Caching**: Cache flags with TTL to reduce page fetches
-3. **Debouncing**: Debounce search input
-4. **Virtual List**: Use virtual scrolling for large flag lists
+1. Lazy Loading: Load flags only when popup opens
+2. Caching: Cache flags with TTL to reduce page fetches
+3. Debouncing: Debounce search input
+4. Virtual List: Use virtual scrolling for large flag lists
 
 ```typescript
 const debounce = (fn: Function, delay: number) => { let timeoutId: NodeJS.Timeout; return (...args: any[]) => { clearTimeout(timeoutId); timeoutId = setTimeout(() => fn(...args), delay); }; };

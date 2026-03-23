@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Incognito Handling — Best Practices"
+title: "Chrome Extension Incognito Handling. Best Practices"
 description: "Handle incognito mode in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/incognito-handling/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/incognito-handling/"
 
 Chrome's incognito mode provides privacy-focused browsing where no history, cookies, or site data persist after the session ends. Extensions must handle incognito contexts thoughtfully to respect user privacy.
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 The `incognito` field in manifest.json controls how your extension behaves in incognito windows:
 
@@ -21,7 +21,7 @@ The `incognito` field in manifest.json controls how your extension behaves in in
 }
 ```
 
-### Spanning Mode (Default) {#spanning-mode-default}
+Spanning Mode (Default) {#spanning-mode-default}
 
 In spanning mode, your extension runs in the same background process for both regular and incognito windows. This means:
 - Single global state shared between modes
@@ -29,7 +29,7 @@ In spanning mode, your extension runs in the same background process for both re
 - Cookies and site data from incognito are accessible but tracked together
 - This is the default behavior for backward compatibility
 
-### Split Mode {#split-mode}
+Split Mode {#split-mode}
 
 In split mode, your extension maintains separate instances for incognito windows:
 - Separate JavaScript execution context
@@ -37,9 +37,9 @@ In split mode, your extension maintains separate instances for incognito windows
 - Each incognito window gets its own isolated storage
 - Better privacy isolation but requires more complex handling
 
-## Detecting Incognito Context {#detecting-incognito-context}
+Detecting Incognito Context {#detecting-incognito-context}
 
-### Checking Tab Incognito Status {#checking-tab-incognito-status}
+Checking Tab Incognito Status {#checking-tab-incognito-status}
 
 ```javascript
 // Check if a specific tab is in incognito mode
@@ -55,7 +55,7 @@ if (window.location.href.includes('incognito')) {
 }
 ```
 
-### Checking Incognito Access Permission {#checking-incognito-access-permission}
+Checking Incognito Access Permission {#checking-incognito-access-permission}
 
 ```javascript
 // Check if extension is allowed in incognito mode
@@ -74,7 +74,7 @@ async function checkIncognitoAccess() {
 }
 ```
 
-### Detecting in Service Workers {#detecting-in-service-workers}
+Detecting in Service Workers {#detecting-in-service-workers}
 
 ```javascript
 // Service workers only run in the main context
@@ -96,7 +96,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-## Cookie Handling in Incognito {#cookie-handling-in-incognito}
+Cookie Handling in Incognito {#cookie-handling-in-incognito}
 
 Incognito windows use separate cookie stores:
 
@@ -126,9 +126,9 @@ async function listCookieStores() {
 }
 ```
 
-## Privacy-Aware Implementation {#privacy-aware-implementation}
+Privacy-Aware Implementation {#privacy-aware-implementation}
 
-### Respecting User Privacy {#respecting-user-privacy}
+Respecting User Privacy {#respecting-user-privacy}
 
 ```javascript
 // Don't track or save data from incognito sessions
@@ -155,7 +155,7 @@ async function saveUserActivity(data) {
 }
 ```
 
-### Conditional Storage in Split Mode {#conditional-storage-in-split-mode}
+Conditional Storage in Split Mode {#conditional-storage-in-split-mode}
 
 ```javascript
 // Handle split mode storage appropriately
@@ -179,7 +179,7 @@ async function getContextualData(key, tabId) {
 }
 ```
 
-## User Configuration {#user-configuration}
+User Configuration {#user-configuration}
 
 Users must manually enable your extension in incognito mode:
 
@@ -202,15 +202,15 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Default to Spanning**: Only use "split" mode if you truly need isolation
-2. **Respect Privacy**: Never persist or track data from incognito sessions
-3. **Clear UI Indicators**: Show users when operating in incognito mode
-4. **Handle Permissions**: Request incognito permission explicitly if needed
-5. **Cookie Awareness**: Remember cookie stores are separate in incognito
+1. Default to Spanning: Only use "split" mode if you truly need isolation
+2. Respect Privacy: Never persist or track data from incognito sessions
+3. Clear UI Indicators: Show users when operating in incognito mode
+4. Handle Permissions: Request incognito permission explicitly if needed
+5. Cookie Awareness: Remember cookie stores are separate in incognito
 
-## Related Documentation {#related-documentation}
+Related Documentation {#related-documentation}
 
 - [Cookie Permissions](../permissions/cookies.md)
 - [Cookie Sessions Pattern](./cookies-sessions.md)

@@ -12,11 +12,11 @@ keywords: "animation inspector extension, css animation chrome, transition debug
 
 Animation debugging has long been one of the most challenging aspects of web development. Whether you're fine-tuning a subtle hover effect, debugging a complex keyframe sequence, or troubleshooting a transition that refuses to behave as expected, having the right tools can mean the difference between hours of frustration and quick, efficient problem resolution. While Chrome DevTools provides some animation inspection capabilities, building a dedicated animation inspector extension gives you customized control, deeper analysis, and the ability to capture animations exactly how you need them.
 
-In this comprehensive guide, I'll walk you through building a production-ready Animation Inspector Chrome Extension from scratch. You'll learn how to intercept and analyze CSS animations and transitions, visualize keyframe data, measure timing performance, and present all this information in an intuitive user interface. By the end, you'll have a fully functional extension that you can use in your own projects or publish to the Chrome Web Store.
+I'll walk you through building a production-ready Animation Inspector Chrome Extension from scratch. You'll learn how to intercept and analyze CSS animations and transitions, visualize keyframe data, measure timing performance, and present all this information in an intuitive user interface. By the end, you'll have a fully functional extension that you can use in your own projects or publish to the Chrome Web Store.
 
 ---
 
-## Why Build an Animation Inspector Extension? {#why-build}
+Why Build an Animation Inspector Extension? {#why-build}
 
 The Chrome DevTools Animation Inspector, accessible through the Performance panel, offers basic animation playback controls. However, it has significant limitations that motivated developers to create custom solutions. The built-in tool lacks persistent animation history, makes it difficult to compare multiple animations side by side, and provides limited export capabilities for sharing animation data with designers or team members.
 
@@ -26,39 +26,39 @@ The developer tools category on the Chrome Web Store shows strong demand, with s
 
 ---
 
-## Understanding the Extension Architecture {#architecture}
+Understanding the Extension Architecture {#architecture}
 
 Before diving into code, let's establish the architecture for our Animation Inspector extension. Chrome extensions following Manifest V3 (the current standard) consist of several interconnected components, and understanding how they work together is essential for success.
 
-### Core Components
+Core Components
 
-The **manifest.json** file serves as the configuration center, declaring permissions, defining the extension's entry points, and specifying which files Chrome should load. Our extension requires the activeTab permission to access page content and the scripting API to inject our analysis code into web pages.
+The manifest.json file serves as the configuration center, declaring permissions, defining the extension's entry points, and specifying which files Chrome should load. Our extension requires the activeTab permission to access page content and the scripting API to inject our analysis code into web pages.
 
-**Background scripts** (service workers in Manifest V3) handle long-running tasks, coordinate between different parts of the extension, and manage browser events. Our background script will manage the extension's state and handle communication between the popup and content scripts.
+Background scripts (service workers in Manifest V3) handle long-running tasks, coordinate between different parts of the extension, and manage browser events. Our background script will manage the extension's state and handle communication between the popup and content scripts.
 
-**Content scripts** run in the context of web pages, giving us access to the DOM and CSSOM needed to analyze animations. This is where the magic happens—intercepting animation events, reading computed styles, and collecting keyframe data.
+Content scripts run in the context of web pages, giving us access to the DOM and CSSOM needed to analyze animations. This is where the magic happens, intercepting animation events, reading computed styles, and collecting keyframe data.
 
-**Popup UI** provides the user interface that appears when clicking the extension icon. This is where developers will spend most of their time, so we'll make it informative and intuitive.
+Popup UI provides the user interface that appears when clicking the extension icon. This is where developers will spend most of their time, so we'll make it informative and intuitive.
 
 ---
 
-## Step 1: Setting Up the Project Structure {#project-setup}
+Step 1: Setting Up the Project Structure {#project-setup}
 
 Create a new directory for your extension project and set up the following file structure:
 
 ```
 animation-inspector/
-├── manifest.json
-├── popup.html
-├── popup.css
-├── popup.js
-├── content.js
-├── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── README.md
+ manifest.json
+ popup.html
+ popup.css
+ popup.js
+ content.js
+ background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ README.md
 ```
 
 Start by creating the manifest.json file with the required permissions and configuration:
@@ -101,7 +101,7 @@ The manifest declares that we need the activeTab permission (for accessing the c
 
 ---
 
-## Step 2: Building the Content Script for Animation Detection {#content-script}
+Step 2: Building the Content Script for Animation Detection {#content-script}
 
 The content script is the heart of our extension. It runs in the context of every web page and collects animation data using the Web Animations API and by observing CSS changes.
 
@@ -314,7 +314,7 @@ This content script uses the Web Animations API to intercept and analyze animati
 
 ---
 
-## Step 3: Creating the Popup Interface {#popup-ui}
+Step 3: Creating the Popup Interface {#popup-ui}
 
 The popup provides the user interface for interacting with your extension. Let's create a clean, informative UI that displays animation data clearly.
 
@@ -828,7 +828,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 4: Setting Up Background Communication {#background}
+Step 4: Setting Up Background Communication {#background}
 
 The background script manages communication between the popup and content scripts. Create background.js:
 
@@ -864,7 +864,7 @@ console.log('Animation Inspector background service worker started');
 
 ---
 
-## Step 5: Testing Your Extension {#testing}
+Step 5: Testing Your Extension {#testing}
 
 Now that all the components are in place, let's test the extension:
 
@@ -920,11 +920,11 @@ Open this page and use your extension to detect the animation and transition.
 
 ---
 
-## Step 6: Enhancing with Advanced Features {#advanced-features}
+Step 6: Enhancing with Advanced Features {#advanced-features}
 
 Once the basic extension is working, consider adding these advanced features:
 
-### Animation Playback Controls
+Animation Playback Controls
 
 Add the ability to pause and replay animations directly from the popup:
 
@@ -948,7 +948,7 @@ function replayAnimation(animationId) {
 }
 ```
 
-### Performance Metrics
+Performance Metrics
 
 Add FPS monitoring and performance analysis:
 
@@ -966,7 +966,7 @@ function analyzePerformance(animation) {
 }
 ```
 
-### Export Functionality
+Export Functionality
 
 Allow exporting animation data for sharing with designers:
 
@@ -993,7 +993,7 @@ function exportAnimationData(animation) {
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 When you're ready to share your extension with the world, follow these steps:
 
@@ -1008,7 +1008,7 @@ Use keywords naturally throughout your description: "Animation Inspector," "CSS 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building an Animation Inspector Chrome Extension is an excellent project that teaches you advanced extension development concepts while creating a genuinely useful tool. You've learned how to intercept Web Animations API events, analyze CSS transitions, build a modern popup interface, and package everything for distribution.
 
@@ -1020,7 +1020,7 @@ Remember to test thoroughly across different websites, gather user feedback, and
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 To continue learning and improving your extension, explore these resources:
 

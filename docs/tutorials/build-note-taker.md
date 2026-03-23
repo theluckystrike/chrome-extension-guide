@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Note Taker — Developer Guide"
+title: "Chrome Extension Note Taker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-note-taker/"
 ---
 # Build a Note-Taking Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 Build a quick note-taking extension with page-linked notes, side panel editing, tag organization, and export capabilities.
 
 - Quick note-taking from any web page
@@ -14,7 +14,7 @@ Build a quick note-taking extension with page-linked notes, side panel editing, 
 - Side panel for note editing
 - Search and organize notes by tag
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -34,9 +34,9 @@ Build a quick note-taking extension with page-linked notes, side panel editing, 
 }
 ```
 
-## Step 1: Quick Note Capture {#step-1-quick-note-capture}
+Step 1: Quick Note Capture {#step-1-quick-note-capture}
 
-### Toolbar and Side Panel {#toolbar-and-side-panel}
+Toolbar and Side Panel {#toolbar-and-side-panel}
 Click the extension icon to open the side panel with a note editor.
 
 ```typescript
@@ -48,7 +48,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Context Menu {#context-menu}
+Context Menu {#context-menu}
 Add "Add to notes" to capture selected text from any page.
 
 ```typescript
@@ -72,7 +72,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-### Keyboard Shortcut {#keyboard-shortcut}
+Keyboard Shortcut {#keyboard-shortcut}
 Use the Commands API for quick capture via `Ctrl+Shift+N`.
 
 ```typescript
@@ -84,9 +84,9 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
 });
 ```
 
-## Step 2: Note Storage {#step-2-note-storage}
+Step 2: Note Storage {#step-2-note-storage}
 
-### Using @theluckystrike/webext-storage {#using-theluckystrikewebext-storage}
+Using @theluckystrike/webext-storage {#using-theluckystrikewebext-storage}
 Store notes with structured schema and automatic sync.
 
 ```typescript
@@ -111,7 +111,7 @@ interface Note {
 }
 ```
 
-### Auto-Save with Debounce {#auto-save-with-debounce}
+Auto-Save with Debounce {#auto-save-with-debounce}
 Implement auto-save to prevent excessive storage writes.
 
 ```typescript
@@ -128,7 +128,7 @@ function debounceSave(note: Note) {
 }
 ```
 
-### Storage.sync vs storage.local {#storagesync-vs-storagelocal}
+Storage.sync vs storage.local {#storagesync-vs-storagelocal}
 Use `storage.sync` for small notes that need cross-device sync, `storage.local` for larger data.
 
 ```typescript
@@ -139,9 +139,9 @@ const syncStorage = createStorage(noteSchema, 'sync');
 const localStorage = createStorage(largeDataSchema, 'local');
 ```
 
-## Step 3: Side Panel Editor {#step-3-side-panel-editor}
+Step 3: Side Panel Editor {#step-3-side-panel-editor}
 
-### contentEditable Rich Text {#contenteditable-rich-text}
+contentEditable Rich Text {#contenteditable-rich-text}
 Build a simple rich text editor with contentEditable.
 
 ```html
@@ -176,7 +176,7 @@ editor.addEventListener('input', () => {
 });
 ```
 
-### Auto-Link URLs {#auto-link-urls}
+Auto-Link URLs {#auto-link-urls}
 Automatically convert URLs in notes to clickable links.
 
 ```typescript
@@ -186,9 +186,9 @@ function autoLink(text: string): string {
 }
 ```
 
-## Step 4: Page-Linked Notes {#step-4-page-linked-notes}
+Step 4: Page-Linked Notes {#step-4-page-linked-notes}
 
-### Associate Notes with URLs {#associate-notes-with-urls}
+Associate Notes with URLs {#associate-notes-with-urls}
 Link notes to the current page for context.
 
 ```typescript
@@ -205,7 +205,7 @@ async function getNotesForPage(url: string): Promise<Note[]> {
 }
 ```
 
-### Badge Count {#badge-count}
+Badge Count {#badge-count}
 Show badge with count of notes for current page.
 
 ```typescript
@@ -222,9 +222,9 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 ```
 
-## Step 5: Tags and Organization {#step-5-tags-and-organization}
+Step 5: Tags and Organization {#step-5-tags-and-organization}
 
-### Adding Tags {#adding-tags}
+Adding Tags {#adding-tags}
 Allow users to add and manage tags for categorization.
 
 ```typescript
@@ -243,7 +243,7 @@ async function addTagToNote(noteId: string, tag: string): Promise<void> {
 }
 ```
 
-### Search Notes {#search-notes}
+Search Notes {#search-notes}
 Full-text search across all notes.
 
 ```typescript
@@ -259,7 +259,7 @@ async function searchNotes(query: string): Promise<Note[]> {
 }
 ```
 
-### Color-Coded Tags {#color-coded-tags}
+Color-Coded Tags {#color-coded-tags}
 Display tags with colors for visual organization.
 
 ```html
@@ -276,9 +276,9 @@ Display tags with colors for visual organization.
 </style>
 ```
 
-## Step 6: Export {#step-6-export}
+Step 6: Export {#step-6-export}
 
-### Export Formats {#export-formats}
+Export Formats {#export-formats}
 Support plain text, markdown, and JSON export.
 
 ```typescript
@@ -293,7 +293,7 @@ function exportAsJSON(notes: Note[]): string {
 }
 ```
 
-### Copy to Clipboard {#copy-to-clipboard}
+Copy to Clipboard {#copy-to-clipboard}
 Quick copy functionality for individual notes.
 
 ```typescript
@@ -303,7 +303,7 @@ async function copyNoteToClipboard(note: Note): Promise<void> {
 }
 ```
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 - [permissions/sidePanel.md](../permissions/sidepanel.md)
 - [patterns/side-panel.md](../patterns/side-panel.md)
 - [patterns/state-management.md](../patterns/state-management.md)
@@ -311,7 +311,7 @@ async function copyNoteToClipboard(note: Note): Promise<void> {
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

@@ -64,36 +64,36 @@ The extension uses Manifest V3 with a modular architecture:
 
 ```
 image-compressor/
-├── src/
-│   ├── background/
-│   │   ├── background.ts
-│   │   └── contextMenus.ts
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts
-│   │   ├── popup.css
-│   │   └── components/
-│   ├── sidepanel/
-│   │   ├── sidepanel.html
-│   │   ├── sidepanel.ts
-│   │   └── sidepanel.css
-│   ├── content/
-│   │   ├── content.ts
-│   │   ├── overlay.ts
-│   │   └── content.css
-│   ├── core/
-│   │   ├── compressor.ts
-│   │   ├── imageProcessor.ts
-│   │   └── utils.ts
-│   ├── types/
-│   │   └── index.ts
-│   └── storage/
-│       └── storage.ts
-├── icons/
-├── manifest.json
-├── tsconfig.json
-├── webpack.config.js
-└── package.json
+ src/
+    background/
+       background.ts
+       contextMenus.ts
+    popup/
+       popup.html
+       popup.ts
+       popup.css
+       components/
+    sidepanel/
+       sidepanel.html
+       sidepanel.ts
+       sidepanel.css
+    content/
+       content.ts
+       overlay.ts
+       content.css
+    core/
+       compressor.ts
+       imageProcessor.ts
+       utils.ts
+    types/
+       index.ts
+    storage/
+        storage.ts
+ icons/
+ manifest.json
+ tsconfig.json
+ webpack.config.js
+ package.json
 ```
 
 ## Core Implementation with TypeScript
@@ -561,12 +561,12 @@ test('popup compresses image successfully', async ({ page }) => {
 
 ## Performance Considerations
 
-1. **Web Workers**: Offload compression to Web Workers to prevent UI blocking
-2. **Lazy Loading**: Load compression logic only when needed
-3. **Object URL Revocation**: Always revoke object URLs after use to prevent memory leaks
-4. **Chunked Processing**: Process large images in chunks
-5. **Debouncing**: Debounce user input for quality slider
-6. **Service Worker Caching**: Cache static assets for faster load times
+1. Web Workers: Offload compression to Web Workers to prevent UI blocking
+2. Lazy Loading: Load compression logic only when needed
+3. Object URL Revocation: Always revoke object URLs after use to prevent memory leaks
+4. Chunked Processing: Process large images in chunks
+5. Debouncing: Debounce user input for quality slider
+6. Service Worker Caching: Cache static assets for faster load times
 
 ```typescript
 // Using Web Worker for compression

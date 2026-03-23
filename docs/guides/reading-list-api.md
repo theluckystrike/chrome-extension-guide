@@ -1,20 +1,20 @@
 ---
 layout: default
-title: "Chrome Extension Reading List API — How to Add and Manage Reading List Items"
+title: "Chrome Extension Reading List API. How to Add and Manage Reading List Items"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/reading-list-api/"
 ---
 # Reading List API Guide
 
-## Overview {#overview}
+Overview {#overview}
 - Requires `"readingList"` permission (cross-ref `docs/permissions/readingList.md`)
 - Allows extensions to add, query, and remove items from Chrome's Reading List
 - Reading List is a cross-device feature that syncs via the user's Google account
 - Available in Chrome 120+ and Manifest V3
 
-The Reading List API provides programmatic access to Chrome's built-in "Read Later" functionality. This feature, accessible via the browser's sidebar or bookmarking UI, allows users to save web pages for offline or later reading. Extensions can leverage this API to create powerful reading list managers, content curation tools, or integrations with third-party services.
+The Reading List API provides programmatic access to Chrome's built-in "Read Later" functionality. This feature, accessible via the browser's sidebar or bookmarking UI, allows users to save web pages for offline or later reading. Extensions can use this API to create powerful reading list managers, content curation tools, or integrations with third-party services.
 
-## Permission {#permission}
+Permission {#permission}
 Add the `"readingList"` permission to your `manifest.json`:
 
 ```json
@@ -25,9 +25,9 @@ Add the `"readingList"` permission to your `manifest.json`:
 }
 ```
 
-Note: The Reading List API does not require host permissions for the URLs you're adding—you can add any URL to the reading list without explicit host match patterns.
+The Reading List API does not require host permissions for the URLs you're adding, you can add any URL to the reading list without explicit host match patterns.
 
-## Adding Entries {#adding-entries}
+Adding Entries {#adding-entries}
 Use `chrome.readingList.add()` to save a new item to the reading list:
 
 ```javascript
@@ -51,7 +51,7 @@ The `add()` method accepts an object with the following properties:
 - `hasBeenRead` (boolean): Whether the item should be marked as read (default: false)
 - `creationTime` (optional number): Unix timestamp for when the item was created
 
-## Querying Entries {#querying-entries}
+Querying Entries {#querying-entries}
 Use `chrome.readingList.query()` to retrieve items from the reading list:
 
 ```javascript
@@ -78,7 +78,7 @@ The `query()` method accepts an object with optional properties:
 - `url` (string): Filter by URL
 - `hasBeenRead` (boolean): Filter by read status
 
-## Removing Entries {#removing-entries}
+Removing Entries {#removing-entries}
 Use `chrome.readingList.remove()` to delete an item:
 
 ```javascript
@@ -97,7 +97,7 @@ chrome.readingList.query({ hasBeenRead: false }, (items) => {
 });
 ```
 
-## Updating Entries {#updating-entries}
+Updating Entries {#updating-entries}
 Use `chrome.readingList.update()` to modify an existing item:
 
 ```javascript
@@ -120,9 +120,9 @@ chrome.readingList.update({
 
 The `update()` method allows changing `title`, `hasBeenRead`, and `url` properties.
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Save on Command
+Save on Command
 Create a keyboard shortcut to quickly save the current tab:
 
 ```javascript
@@ -138,7 +138,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-### Reading List Manager
+Reading List Manager
 Build a popup UI that displays all reading list items:
 
 ```javascript
@@ -153,7 +153,7 @@ chrome.readingList.query({}, (items) => {
 });
 ```
 
-### Content Curation
+Content Curation
 Integrate with external services to automatically save articles:
 
 ```javascript
@@ -169,14 +169,14 @@ function saveToReadingList(article) {
 }
 ```
 
-## Limitations and Considerations {#limitations}
+Limitations and Considerations {#limitations}
 
-1. **Sync Behavior**: Reading List items sync across the user's devices via their Google account. Changes made by your extension will appear on all devices.
+1. Sync Behavior: Reading List items sync across the user's devices via their Google account. Changes made by your extension will appear on all devices.
 
-2. **Privacy Trust**: Users must trust extensions with reading list access, as it reveals their saved content.
+2. Privacy Trust: Users must trust extensions with reading list access, as it reveals their saved content.
 
-3. **No Bulk Operations**: Each add, update, or remove operation is individual. For bulk operations, implement proper error handling and consider rate limiting.
+3. No Bulk Operations: Each add, update, or remove operation is individual. For bulk operations, implement proper error handling and consider rate limiting.
 
-4. **URL Validation**: The API requires valid URLs. Invalid URLs will result in an error.
+4. URL Validation: The API requires valid URLs. Invalid URLs will result in an error.
 
-5. **Manifest V3 Only**: This API is only available in Manifest V3 extensions, not V2.
+5. Manifest V3 Only: This API is only available in Manifest V3 extensions, not V2.

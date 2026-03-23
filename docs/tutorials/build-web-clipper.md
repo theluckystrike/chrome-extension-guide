@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Web Clipper — Developer Guide"
+title: "Chrome Extension Web Clipper. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-web-clipper/"
 ---
 # Build a Web Clipper Extension -- Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 
 A Notion/Evernote-style web clipper Chrome extension that lets you save content from any page:
 
@@ -18,7 +18,7 @@ A Notion/Evernote-style web clipper Chrome extension that lets you save content 
 - Side panel for managing and browsing saved clips
 - Export clips as Markdown or JSON
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 116+ with Manifest V3 and Side Panel API support
 - Node.js 18+ and npm
@@ -32,7 +32,7 @@ npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 mkdir -p src public
 ```
 
-## Step 1: Manifest with activeTab, Storage, and Side Panel Permissions {#step-1-manifest-with-activetab-storage-and-side-panel-permissions}
+Step 1: Manifest with activeTab, Storage, and Side Panel Permissions {#step-1-manifest-with-activetab-storage-and-side-panel-permissions}
 
 `public/manifest.json`:
 
@@ -65,7 +65,7 @@ Key permissions:
 - `storage` -- for persisting clips in `chrome.storage.local`
 - `sidePanel` -- for the clip manager sidebar
 
-## Step 2: Action Popup with Clip Options {#step-2-action-popup-with-clip-options}
+Step 2: Action Popup with Clip Options {#step-2-action-popup-with-clip-options}
 
 `public/popup.html`:
 
@@ -149,7 +149,7 @@ document.getElementById('open-panel')!.addEventListener('click', () => {
 });
 ```
 
-## Step 3: Content Script -- Extract Page Metadata {#step-3-content-script-extract-page-metadata}
+Step 3: Content Script -- Extract Page Metadata {#step-3-content-script-extract-page-metadata}
 
 `src/content.ts` runs on every page and responds to messages from the background script. It extracts structured metadata using Open Graph tags and standard meta elements:
 
@@ -208,7 +208,7 @@ messenger.onMessage('getMetadata', async () => {
 });
 ```
 
-## Step 4: Selection Clipper with Markdown Conversion {#step-4-selection-clipper-with-markdown-conversion}
+Step 4: Selection Clipper with Markdown Conversion {#step-4-selection-clipper-with-markdown-conversion}
 
 Add the selection handler to `src/content.ts`. This converts the selected HTML to Markdown by walking the DOM tree:
 
@@ -226,7 +226,7 @@ function htmlToMarkdown(html: string): string {
     const children = Array.from(el.childNodes).map(walk).join('');
 
     switch (tag) {
-      case 'strong': case 'b': return `**${children}**`;
+      case 'strong': case 'b': return `${children}`;
       case 'em': case 'i': return `*${children}*`;
       case 'code': return `\`${children}\``;
       case 'a': return `[${children}](${(el as HTMLAnchorElement).href})`;
@@ -259,7 +259,7 @@ messenger.onMessage('getSelection', async () => {
 });
 ```
 
-## Step 5: Full Page Article Extraction (Reader Mode Parsing) {#step-5-full-page-article-extraction-reader-mode-parsing}
+Step 5: Full Page Article Extraction (Reader Mode Parsing) {#step-5-full-page-article-extraction-reader-mode-parsing}
 
 Add the article extractor to `src/content.ts`. This is a simplified reader-mode parser that identifies the main content node using scoring heuristics:
 
@@ -305,7 +305,7 @@ messenger.onMessage('getArticle', async () => {
 });
 ```
 
-## Step 6: Screenshot Capture with chrome.tabs.captureVisibleTab {#step-6-screenshot-capture-with-chrometabscapturevisibletab}
+Step 6: Screenshot Capture with chrome.tabs.captureVisibleTab {#step-6-screenshot-capture-with-chrometabscapturevisibletab}
 
 The background service worker handles all clip actions and screenshot capture. `src/background.ts`:
 
@@ -462,7 +462,7 @@ messenger.onMessage('openSidePanel', async () => {
 
 The `captureVisibleTab` call captures only the currently visible viewport as a PNG data URL. No extra permissions are needed beyond `activeTab` because the capture happens in response to the user clicking the extension action.
 
-## Step 7: Side Panel -- Clip Storage and Management {#step-7-side-panel-clip-storage-and-management}
+Step 7: Side Panel -- Clip Storage and Management {#step-7-side-panel-clip-storage-and-management}
 
 `public/sidepanel.html`:
 
@@ -605,7 +605,7 @@ function renderClips(clips: Clip[], searchQuery: string, typeFilter: string): vo
 })();
 ```
 
-## Step 8: Export Clips as Markdown or JSON {#step-8-export-clips-as-markdown-or-json}
+Step 8: Export Clips as Markdown or JSON {#step-8-export-clips-as-markdown-or-json}
 
 Add the export function to `src/sidepanel.ts`:
 
@@ -621,11 +621,11 @@ async function exportClips(format: 'markdown' | 'json'): Promise<void> {
       const header = [
         `# ${clip.title}`,
         '',
-        `- **URL:** ${clip.url}`,
-        `- **Type:** ${clip.type}`,
-        `- **Date:** ${formatDate(clip.createdAt)}`,
-        clip.metadata.author ? `- **Author:** ${clip.metadata.author}` : '',
-        clip.metadata.siteName ? `- **Site:** ${clip.metadata.siteName}` : '',
+        `- URL: ${clip.url}`,
+        `- Type: ${clip.type}`,
+        `- Date: ${formatDate(clip.createdAt)}`,
+        clip.metadata.author ? `- Author: ${clip.metadata.author}` : '',
+        clip.metadata.siteName ? `- Site: ${clip.metadata.siteName}` : '',
         '',
         '---',
         '',
@@ -662,7 +662,7 @@ async function exportClips(format: 'markdown' | 'json'): Promise<void> {
 
 This produces a clean Markdown file with YAML-like frontmatter for each clip, or a structured JSON array. The download triggers via a temporary Blob URL -- no server needed.
 
-## Build, Load, and Test {#build-load-and-test}
+Build, Load, and Test {#build-load-and-test}
 
 Compile with `npx tsc` or your bundler of choice, targeting entry points `popup.ts`, `content.ts`, `background.ts`, and `sidepanel.ts` alongside the HTML and manifest in `dist/`.
 
@@ -672,22 +672,22 @@ Load the extension:
 2. Click "Load unpacked" and select the `dist/` folder
 3. Navigate to any page and click the extension icon
 
-### Testing Checklist {#testing-checklist}
+Testing Checklist {#testing-checklist}
 
-- **Clip Full Page**: Visit an article, click "Clip Full Page" -- check the side panel for the saved Markdown clip
-- **Clip Selection**: Highlight text, click "Clip Selection" -- verify bold, links, and headings survive conversion
-- **Clip Screenshot**: Click "Clip Screenshot" -- verify the PNG preview renders in the side panel
-- **Side Panel**: Search, filter by type, delete clips, and copy content to clipboard
-- **Export**: Click "Export MD" or "Export JSON" -- verify the downloaded file is well-formed
-- **Metadata**: Verify title, URL, author, and site name are correctly extracted from meta tags
+- Clip Full Page: Visit an article, click "Clip Full Page" -- check the side panel for the saved Markdown clip
+- Clip Selection: Highlight text, click "Clip Selection" -- verify bold, links, and headings survive conversion
+- Clip Screenshot: Click "Clip Screenshot" -- verify the PNG preview renders in the side panel
+- Side Panel: Search, filter by type, delete clips, and copy content to clipboard
+- Export: Click "Export MD" or "Export JSON" -- verify the downloaded file is well-formed
+- Metadata: Verify title, URL, author, and site name are correctly extracted from meta tags
 
-### Debugging Tips {#debugging-tips}
+Debugging Tips {#debugging-tips}
 
 - Run `chrome.storage.local.get(null, console.log)` in the service worker console to inspect stored clips
 - Content script errors appear in the page's DevTools console, not the extension's
 - If `captureVisibleTab` fails, ensure the capture runs in response to a user click so `activeTab` is granted
 
-## Summary {#summary}
+Summary {#summary}
 
 This tutorial built a complete web clipper extension with three capture modes (full page, selection, screenshot), a content script that extracts metadata and converts HTML to Markdown, a side panel for managing clips, and export functionality. The extension uses `@theluckystrike/webext-storage` for typed persistent storage and `@theluckystrike/webext-messaging` for type-safe communication between popup, background, and content scripts.
 -e 

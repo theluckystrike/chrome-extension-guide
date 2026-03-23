@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Notifications — How to Send Desktop Alerts and Updates"
+title: "Chrome Extension Notifications. How to Send Desktop Alerts and Updates"
 description: "Learn how to use the chrome.notifications API to send desktop notifications in Chrome extensions. Covers notification types, buttons, images, event handlers, and limits."
 canonical_url: "https://bestchromeextensions.com/guides/notifications/"
 ---
 
-# Chrome Extension Notifications — How to Send Desktop Alerts and Updates
+# Chrome Extension Notifications. How to Send Desktop Alerts and Updates
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
 The `chrome.notifications` API enables Chrome extensions to display desktop notifications to users, even when the extension's popup or service worker is not actively running. This API is essential for building user engagement features, alerting users to important events, and providing real-time updates without requiring users to keep your extension's interface open.
 
 Desktop notifications appear in the system's notification center and persist until the user dismisses them or they timeout. This makes them perfect for scenarios like monitoring tasks, message alerts, background synchronization status, and time-sensitive updates.
 
-## Adding the Notifications Permission {#adding-the-notifications-permission}
+Adding the Notifications Permission {#adding-the-notifications-permission}
 
 Before using the notifications API, you must declare the appropriate permissions in your extension's `manifest.json` file:
 
@@ -25,7 +25,7 @@ Before using the notifications API, you must declare the appropriate permissions
 
 For Manifest V3 extensions, the notifications API works within the service worker context. However, note that the notification will be displayed by the Chrome browser itself, not by your extension's running process.
 
-## Creating Basic Notifications {#creating-basic-notifications}
+Creating Basic Notifications {#creating-basic-notifications}
 
 The `chrome.notifications.create()` method is the primary way to display notifications. This method accepts a unique notification ID and a notification options object:
 
@@ -42,13 +42,13 @@ chrome.notifications.create("notification-id-1", {
 });
 ```
 
-The notification ID is important—you can use it to update or clear specific notifications later. If you pass an empty string or null as the ID, Chrome will generate a unique ID automatically.
+The notification ID is important, you can use it to update or clear specific notifications later. If you pass an empty string or null as the ID, Chrome will generate a unique ID automatically.
 
-## Notification Types {#notification-types}
+Notification Types {#notification-types}
 
 Chrome supports several notification types that determine how the notification appears:
 
-### Basic Notification
+Basic Notification
 
 The most common type, displaying an icon, title, and message:
 
@@ -61,7 +61,7 @@ The most common type, displaying an icon, title, and message:
 }
 ```
 
-### Image Notification
+Image Notification
 
 Displays a larger image, ideal for visual content:
 
@@ -75,7 +75,7 @@ Displays a larger image, ideal for visual content:
 }
 ```
 
-### List Notification
+List Notification
 
 Shows multiple items in a structured format:
 
@@ -93,7 +93,7 @@ Shows multiple items in a structured format:
 }
 ```
 
-### Progress Notification
+Progress Notification
 
 Displays a progress bar for ongoing operations:
 
@@ -107,7 +107,7 @@ Displays a progress bar for ongoing operations:
 }
 ```
 
-## Adding Buttons to Notifications {#adding-buttons-to-notifications}
+Adding Buttons to Notifications {#adding-buttons-to-notifications}
 
 Interactive buttons make notifications more powerful by allowing users to take action directly from the notification:
 
@@ -128,11 +128,11 @@ chrome.notifications.create("notification-with-buttons", {
 
 When users click these buttons, your extension receives the event through the `chrome.notifications.onButtonClicked` listener.
 
-## Handling Notification Events {#handling-notification-events}
+Handling Notification Events {#handling-notification-events}
 
 Your extension can respond to user interactions with notifications through several event listeners:
 
-### Click Events
+Click Events
 
 Triggered when users click the notification body:
 
@@ -145,7 +145,7 @@ chrome.notifications.onClicked.addListener(function(notificationId) {
 });
 ```
 
-### Button Click Events
+Button Click Events
 
 Triggered when users click action buttons:
 
@@ -159,16 +159,16 @@ chrome.notifications.onButtonClicked.addListener(function(notificationId, button
   } else if (buttonIndex === 1) {
     // Handle Decline action
     declineFriendRequest(notificationId);
-# Chrome Extension Notifications API
+Chrome Extension Notifications API
 
-## Introduction
+Introduction
 - `chrome.notifications` API allows extensions to display system notifications to users
 - Notifications appear in the system's notification center (Windows, macOS, Linux) or notification shade (Chrome OS, Android)
 - Requires `"notifications"` permission in manifest.json
 - Works in both MV2 (background pages) and MV3 (service workers)
 - Reference: https://developer.chrome.com/docs/extensions/reference/api/notifications
 
-## manifest.json
+manifest.json
 ```json
 {
   "permissions": ["notifications"],
@@ -181,9 +181,9 @@ chrome.notifications.onButtonClicked.addListener(function(notificationId, button
 ```
 - Icon is shown in the notification; use extension icons or custom notification-specific icons
 
-## Creating Notifications
+Creating Notifications
 
-### Basic Notification
+Basic Notification
 ```javascript
 chrome.notifications.create("notification-id-1", {
   type: "basic",
@@ -200,7 +200,7 @@ chrome.notifications.create("notification-id-1", {
 - `iconUrl`: Path to icon image (relative to extension root)
 - `priority`: -2 to 2 (higher = more important, 0 is default)
 
-### Notification with Image
+Notification with Image
 ```javascript
 chrome.notifications.create("notification-with-image", {
   type: "image",
@@ -213,7 +213,7 @@ chrome.notifications.create("notification-with-image", {
 ```
 - `imageUrl`: Large image displayed in notification (up to 320x320 in most systems)
 
-### List Notification
+List Notification
 ```javascript
 chrome.notifications.create("notification-list", {
   type: "list",
@@ -231,7 +231,7 @@ chrome.notifications.create("notification-list", {
 - `items`: Array of up to 3 items (varies by platform)
 - Each item has `title` and `message` properties
 
-### Progress Notification
+Progress Notification
 ```javascript
 chrome.notifications.create("download-progress", {
   type: "progress",
@@ -245,7 +245,7 @@ chrome.notifications.create("download-progress", {
 - `progress`: Integer 0-100 (or -1 for indeterminate)
 - Useful for long-running operations like downloads, sync, uploads
 
-## NotificationOptions Reference
+NotificationOptions Reference
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -261,7 +261,7 @@ chrome.notifications.create("download-progress", {
 | `progress` | number | Progress value 0-100 (type: "progress" only) |
 | `requireInteraction` | boolean | Keep on screen until user interacts (MV3 only) |
 
-### Buttons
+Buttons
 ```javascript
 chrome.notifications.create("with-buttons", {
   type: "basic",
@@ -277,9 +277,9 @@ chrome.notifications.create("with-buttons", {
 - Maximum 2 buttons per notification
 - Each button has `title` and optional `iconUrl`
 
-## Handling Notification Events
+Handling Notification Events
 
-### onClicked - User clicked notification body
+onClicked - User clicked notification body
 ```javascript
 chrome.notifications.onClicked.addListener((notificationId) => {
   if (notificationId === "notification-id-1") {
@@ -291,7 +291,7 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-### Notification Closed Events
+Notification Closed Events
 
 Fired when notifications are dismissed or timeout:
 
@@ -301,7 +301,7 @@ chrome.notifications.onClosed.addListener(function(notificationId, byUser) {
 });
 ```
 
-## Using Images in Notifications {#using-images-in-notifications}
+Using Images in Notifications {#using-images-in-notifications}
 
 Image notifications require the `notifications` permission and work best with appropriately sized images. The recommended icon size is 128x128 pixels for best display quality across different screen resolutions:
 
@@ -317,13 +317,13 @@ chrome.notifications.create("image-notification", {
 
 Note that image URLs must be relative paths within your extension or absolute URLs from a web accessible resource. The image will be scaled to fit the notification area.
 
-## Managing Notification Limits {#managing-notification-limits}
+Managing Notification Limits {#managing-notification-limits}
 
 Chrome enforces limits on notifications to prevent abuse and ensure good user experience:
 
-- **Maximum active notifications**: Chrome typically allows up to 3 visible notifications at once
-- **Auto-clear behavior**: Notifications may be automatically cleared when new ones exceed the limit
-- **User preferences**: Users can disable notifications entirely through Chrome settings
+- Maximum active notifications: Chrome typically allows up to 3 visible notifications at once
+- Auto-clear behavior: Notifications may be automatically cleared when new ones exceed the limit
+- User preferences: Users can disable notifications entirely through Chrome settings
 
 Best practices for handling limits:
 
@@ -350,20 +350,20 @@ function clearNotification() {
 }
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
 When implementing notifications in your Chrome extension:
 
-1. **Request permissions sparingly** – Only request the notifications permission when truly needed
-2. **Respect user preferences** – Allow users to opt out of notifications within your extension
-3. **Use appropriate notification types** – Choose the right type for your use case (progress for ongoing tasks, list for multiple items)
-4. **Handle errors gracefully** – Always check for `chrome.runtime.lastError` in callbacks
-5. **Test on multiple platforms** – Notification appearance varies across operating systems
+1. Request permissions sparingly – Only request the notifications permission when truly needed
+2. Respect user preferences – Allow users to opt out of notifications within your extension
+3. Use appropriate notification types – Choose the right type for your use case (progress for ongoing tasks, list for multiple items)
+4. Handle errors gracefully – Always check for `chrome.runtime.lastError` in callbacks
+5. Test on multiple platforms – Notification appearance varies across operating systems
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The `chrome.notifications` API provides a powerful way to engage users with your Chrome extension through desktop alerts and interactive notifications. By understanding the different notification types, implementing button interactions, and respecting platform limits, you can create compelling notification experiences that keep users informed and engaged with your extension's functionality.
-### onButtonClicked - User clicked a button
+onButtonClicked - User clicked a button
 ```javascript
 chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
   if (notificationId === "with-buttons") {
@@ -378,7 +378,7 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 });
 ```
 
-### onClosed - Notification was dismissed
+onClosed - Notification was dismissed
 ```javascript
 chrome.notifications.onClosed.addListener((notificationId, byUser) => {
   console.log(`Notification ${notificationId} closed by ${byUser ? 'user' : 'system'}`);
@@ -386,9 +386,9 @@ chrome.notifications.onClosed.addListener((notificationId, byUser) => {
 });
 ```
 
-## Updating Notifications
+Updating Notifications
 
-### Update Progress
+Update Progress
 ```javascript
 // Update progress bar
 chrome.notifications.update("download-progress", {
@@ -401,7 +401,7 @@ chrome.notifications.update("download-progress", {
 });
 ```
 
-### Update to Show Completion
+Update to Show Completion
 ```javascript
 // Change from progress to complete
 chrome.notifications.update("download-progress", {
@@ -411,9 +411,9 @@ chrome.notifications.update("download-progress", {
 });
 ```
 
-## Clearing Notifications
+Clearing Notifications
 
-### Clear Single Notification
+Clear Single Notification
 ```javascript
 chrome.notifications.clear("notification-id-1", (wasCleared) => {
   if (wasCleared) {
@@ -422,7 +422,7 @@ chrome.notifications.clear("notification-id-1", (wasCleared) => {
 });
 ```
 
-### Clear All Notifications
+Clear All Notifications
 ```javascript
 chrome.notifications.getAll((notifications) => {
   Object.keys(notifications).forEach(id => {
@@ -431,7 +431,7 @@ chrome.notifications.getAll((notifications) => {
 });
 ```
 
-## Template Use Cases
+Template Use Cases
 
 | Template | Best For |
 |----------|----------|
@@ -440,9 +440,9 @@ chrome.notifications.getAll((notifications) => {
 | `list` | Multiple items (emails, messages, updates) |
 | `progress` | Long-running operations (downloads, sync, upload) |
 
-## Combining with chrome.alarms
+Combining with chrome.alarms
 
-### Scheduled Notifications
+Scheduled Notifications
 ```javascript
 // Schedule a notification for later
 chrome.alarms.create("reminder-alarm", {
@@ -465,7 +465,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Periodic Summary Notifications
+Periodic Summary Notifications
 ```javascript
 // Daily digest at 9 AM
 chrome.alarms.create("daily-digest", {
@@ -501,27 +501,27 @@ function getNext9AM() {
 }
 ```
 
-## Best Practices
+Best Practices
 
-### Don't Spam Users
+Don't Spam Users
 - Only send notifications for genuinely important events
-- Respect user attention — avoid excessive notifications
+- Respect user attention. avoid excessive notifications
 - Consider adding a user preference for notification frequency
-- Use `priority` wisely — reserve high priority for critical alerts
+- Use `priority` wisely. reserve high priority for critical alerts
 
-### Respect User Choices
+Respect User Choices
 ```javascript
 // Check if notifications are permitted
 chrome.notifications.getPermissionLevel((level) => {
   if (level === "granted") {
     // Can show notifications
   } else if (level === "denied") {
-    // Can't show notifications — show in-app message instead
+    // Can't show notifications. show in-app message instead
   }
 });
 ```
 
-### Clear After Purpose
+Clear After Purpose
 ```javascript
 // Auto-clear successful notifications after a delay
 chrome.notifications.onClicked.addListener((id) => {
@@ -530,7 +530,7 @@ chrome.notifications.onClicked.addListener((id) => {
 });
 ```
 
-### Handle Permission Denied
+Handle Permission Denied
 ```javascript
 async function showNotification(title, message) {
   const level = await new Promise(resolve => 
@@ -546,7 +546,7 @@ async function showNotification(title, message) {
 }
 ```
 
-### Use Meaningful IDs
+Use Meaningful IDs
 ```javascript
 // Good: Descriptive, unique IDs
 chrome.notifications.create(`download-${fileId}`, { /* ... */ });
@@ -555,16 +555,16 @@ chrome.notifications.create(`download-${fileId}`, { /* ... */ });
 chrome.notifications.create("notification", { /* ... */ });
 ```
 
-## Common Mistakes
+Common Mistakes
 - Not checking permission before creating notifications
-- Using the same notification ID without updating — overwrites previous
-- Exceeding character limits — content may be truncated
-- Too many buttons — only first 2 are shown on most platforms
-- Not handling `onClicked` — clicks do nothing by default
-- Creating notifications in content scripts — must be in background/service worker
-- Using progress type incorrectly — progress must be 0-100 or -1
+- Using the same notification ID without updating. overwrites previous
+- Exceeding character limits. content may be truncated
+- Too many buttons. only first 2 are shown on most platforms
+- Not handling `onClicked`. clicks do nothing by default
+- Creating notifications in content scripts. must be in background/service worker
+- Using progress type incorrectly. progress must be 0-100 or -1
 
-## Complete Example
+Complete Example
 ```javascript
 // background.js
 
@@ -600,22 +600,22 @@ chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
   }
 });
 
-// Clear on click — focus app instead
+// Clear on click. focus app instead
 chrome.notifications.onClicked.addListener((id) => {
   chrome.notifications.clear(id);
   chrome.windows.create({ url: "dashboard.html" });
 });
 ```
 
-## Summary
+Summary
 - Use `chrome.notifications.create()` with proper `NotificationOptions`
 - Choose the right template type for your use case
 - Handle `onClicked`, `onButtonClicked`, and `onClosed` events
 - Use `update()` and `clear()` to manage notification lifecycle
 - Combine with `chrome.alarms` for scheduled/scheduled notifications
-- Always respect users — don't spam notifications
+- Always respect users. don't spam notifications
 - Check permission status before creating notifications
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

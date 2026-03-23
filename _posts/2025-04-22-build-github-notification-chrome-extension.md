@@ -13,21 +13,21 @@ canonical_url: "https://bestchromeextensions.com/2025/04/22/build-github-notific
 
 If you work with GitHub professionally, you know how easy it is to miss important pull requests, issue assignments, or review requests. The native GitHub notifications are good, but they require you to visit the site constantly or rely on email alerts that often get buried in your inbox. Building a custom GitHub notification Chrome extension gives you real-time desktop notifications directly in your browser, ensuring you never miss a critical update again.
 
-In this comprehensive guide, we will walk through building a fully functional GitHub notification Chrome extension using Manifest V3, the GitHub REST API, and Chrome's notification system. By the end of this tutorial, you will have a working extension that monitors your repositories, tracks pull requests, watches for issue updates, and sends instant browser notifications when important events occur.
+we will walk through building a fully functional GitHub notification Chrome extension using Manifest V3, the GitHub REST API, and Chrome's notification system. By the end of this tutorial, you will have a working extension that monitors your repositories, tracks pull requests, watches for issue updates, and sends instant browser notifications when important events occur.
 
 ---
 
-## Why Build a GitHub Notification Extension? {#why-build}
+Why Build a GitHub Notification Extension? {#why-build}
 
 The default GitHub notification system has several limitations that a custom extension can address effectively. Understanding these challenges will help you design a better extension that solves real problems for developers.
 
-### The Problem with Default Notifications
+The Problem with Default Notifications
 
 GitHub's native notification system requires you to either check the notifications page manually or rely on email alerts. Email notifications suffer from several issues: they are easily missed, can get filtered as spam, lack real-time urgency, and do not provide quick-action buttons to respond immediately. Additionally, email notifications cannot differentiate between high-priority items like review requests on your code and lower-priority updates like new comments on issues you are watching.
 
 A custom Chrome extension solves these problems by providing instant browser-based notifications that appear the moment an event occurs. Users can click on notifications to jump directly to the relevant GitHub page, take quick actions, or dismiss alerts without leaving their current workflow. This creates a much more efficient workflow for developers who need to stay on top of multiple repositories.
 
-### Benefits of a Custom Extension
+Benefits of a Custom Extension
 
 Building your own GitHub notification extension provides several advantages over existing solutions. First, you have complete control over which events trigger notifications, allowing you to filter noise and focus only on what matters. You can set up different notification rules for different repositories, prioritizing critical projects while silencing less urgent updates.
 
@@ -37,17 +37,17 @@ Finally, building this extension is an excellent learning opportunity. You will 
 
 ---
 
-## Project Architecture and Prerequisites {#architecture}
+Project Architecture and Prerequisites {#architecture}
 
 Before writing any code, let us establish a solid architectural foundation for our extension. Understanding the components and how they interact will make the development process much smoother.
 
-### Extension Components Overview
+Extension Components Overview
 
 Our GitHub notification extension will consist of five main components working together. The manifest file defines extension metadata and permissions. The background service worker handles API polling and manages notification scheduling. The popup interface provides users with configuration options and a quick status view. The content scripts handle any page-specific modifications, and the options page allows users to configure their notification preferences and GitHub authentication.
 
 This modular architecture follows Chrome's best practices for Manifest V3 extensions and ensures clean separation of concerns. Each component has a specific responsibility, making the code easier to maintain and extend.
 
-### Prerequisites and Tools
+Prerequisites and Tools
 
 To follow this guide effectively, you will need a few prerequisites. You should have a basic understanding of JavaScript, HTML, and CSS, as these are the core technologies for Chrome extensions. Familiarity with asynchronous JavaScript patterns, particularly Promises and async/await, is essential since we will be making API calls that require handling asynchronous responses.
 
@@ -55,7 +55,7 @@ You will also need Node.js installed on your development machine to run local se
 
 ---
 
-## Step 1: Setting Up the Manifest File {#manifest}
+Step 1: Setting Up the Manifest File {#manifest}
 
 Every Chrome extension begins with the manifest.json file. This file tells Chrome about your extension's capabilities, permissions, and file structure. For our GitHub notification extension, we will use Manifest V3, which is the current standard.
 
@@ -99,7 +99,7 @@ This manifest declares the permissions our extension needs. The "notifications" 
 
 ---
 
-## Step 2: Implementing the Background Service Worker {#background}
+Step 2: Implementing the Background Service Worker {#background}
 
 The background service worker is the heart of our extension. It runs continuously in the background, periodically fetching notifications from the GitHub API and displaying alerts when new items are found.
 
@@ -244,7 +244,7 @@ This background script handles several critical functions. First, it sets up an 
 
 ---
 
-## Step 3: Creating the Popup Interface {#popup}
+Step 3: Creating the Popup Interface {#popup}
 
 The popup interface provides users with quick access to their notification status and configuration options. It displays recent notifications and allows users to enter their GitHub personal access token.
 
@@ -500,7 +500,7 @@ async function loadNotifications() {
 
 ---
 
-## Step 4: Creating Simple Icons {#icons}
+Step 4: Creating Simple Icons {#icons}
 
 For your extension to work properly, you need to create icon files. Create a simple "icons" folder and add placeholder icon files. For development purposes, you can create simple colored squares using any image editing tool or use online services to generate Chrome extension icons.
 
@@ -508,7 +508,7 @@ Ensure you have icon16.png (16x16 pixels), icon48.png (48x48 pixels), and icon12
 
 ---
 
-## Step 5: Generating a GitHub Personal Access Token {#token}
+Step 5: Generating a GitHub Personal Access Token {#token}
 
 To fetch notifications from GitHub, your extension needs authentication. Personal Access Tokens (PAT) are the recommended approach for personal extensions. Here is how to create one:
 
@@ -526,7 +526,7 @@ Important security note: Never commit your token to version control or share it 
 
 ---
 
-## Step 6: Testing Your Extension {#testing}
+Step 6: Testing Your Extension {#testing}
 
 Now that you have all the components in place, it is time to test your extension in Chrome:
 
@@ -541,29 +541,29 @@ Within a few minutes, you should start seeing notifications appear when there ar
 
 ---
 
-## Step 7: Enhancing and Polishing {#enhancing}
+Step 7: Enhancing and Polishing {#enhancing}
 
-While the basic extension works well, several enhancements can make it more professional and useful. Consider adding these features to take your extension to the next level.
+While the basic extension works well, several enhancements can make it more professional and useful. Consider adding these features to take your extension to the better.
 
-### Filtering and Custom Rules
+Filtering and Custom Rules
 
 Implement a filtering system that allows users to specify which repositories or notification types they care about. Some users may only want notifications for pull requests where they are the reviewer, while others may want alerts for all issue comments on specific repositories.
 
-### Sound Alerts
+Sound Alerts
 
 Add optional sound notifications for high-priority events. You can use the Chrome audio API to play custom sounds when critical notifications arrive, ensuring users notice important updates even when they are not looking at their screen.
 
-### Badge Customization
+Badge Customization
 
 Allow users to customize the badge color and behavior. Some developers prefer always-visible badges, while others may want badges only during working hours or when specific conditions are met.
 
-### Dark Mode
+Dark Mode
 
 While the popup already uses dark theme colors, adding an option to toggle between light and dark modes would improve accessibility and user preference accommodation.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have tested your extension thoroughly and added any desired enhancements, you can publish it to the Chrome Web Store. First, create a zip file containing all your extension files. Then, navigate to the Chrome Web Store Developer Dashboard, create a new item, and upload your zip file. Fill in the store listing details with compelling descriptions and screenshots, then submit for review.
 
@@ -571,7 +571,7 @@ After approval, your extension will be available to millions of Chrome users wor
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a GitHub notification Chrome extension is an excellent project that combines practical utility with valuable technical learning. You have learned how to work with Manifest V3, implement background service workers, interact with the GitHub API, create intuitive user interfaces, and handle browser notifications.
 

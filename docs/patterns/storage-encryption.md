@@ -1,36 +1,36 @@
 ---
 layout: default
-title: "Chrome Extension Storage Encryption — Best Practices"
+title: "Chrome Extension Storage Encryption. Best Practices"
 description: "Encrypt data in extension storage for security."
 canonical_url: "https://bestchromeextensions.com/patterns/storage-encryption/"
 ---
 
 # Storage Encryption Pattern
 
-## Overview {#overview}
+Overview {#overview}
 
 Encrypt sensitive data before storing in `chrome.storage` using the Web Crypto API for browser-native cryptography. This pattern provides key derivation from user password to secure sensitive information like passwords, tokens, and API keys.
 
-## Why Encrypt Storage {#why-encrypt-storage}
+Why Encrypt Storage {#why-encrypt-storage}
 
-- **chrome.storage is not encrypted at rest** - Data is stored in plain text and can be accessed locally
-- **Other extensions cannot read your storage** - But local machine access is still a vector
-- **Required for sensitive data** - Passwords, authentication tokens, personal data, and API keys
-- **Compliance requirements** - GDPR, CCPA, and other data protection regulations
+- chrome.storage is not encrypted at rest - Data is stored in plain text and can be accessed locally
+- Other extensions cannot read your storage - But local machine access is still a vector
+- Required for sensitive data - Passwords, authentication tokens, personal data, and API keys
+- Compliance requirements - GDPR, CCPA, and other data protection regulations
 
-## Web Crypto API Approach {#web-crypto-api-approach}
+Web Crypto API Approach {#web-crypto-api-approach}
 
 Use SubtleCrypto (built into modern browsers, no dependencies):
-- **AES-GCM** for authenticated encryption (confidentiality + integrity)
-- **PBKDF2** for key derivation from user password  
-- **Random IV** per encryption for semantic security
+- AES-GCM for authenticated encryption (confidentiality + integrity)
+- PBKDF2 for key derivation from user password  
+- Random IV per encryption for semantic security
 
 ```js
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 ```
 
-## Key Derivation (PBKDF2) {#key-derivation-pbkdf2}
+Key Derivation (PBKDF2) {#key-derivation-pbkdf2}
 
 Derive a key from master password using PBKDF2 with SHA-256:
 
@@ -48,11 +48,11 @@ async function deriveKey(password, salt) {
 }
 ```
 
-## Encrypt/Decrypt Flow {#encryptdecrypt-flow}
+Encrypt/Decrypt Flow {#encryptdecrypt-flow}
 
-**Encryption:** User password → PBKDF2 key derivation → AES-GCM encrypt with random IV → Store {iv, ciphertext, salt}
+Encryption: User password → PBKDF2 key derivation → AES-GCM encrypt with random IV → Store {iv, ciphertext, salt}
 
-**Decryption:** Retrieve stored bundle → Re-derive key with salt → AES-GCM decrypt with IV → Parse result
+Decryption: Retrieve stored bundle → Re-derive key with salt → AES-GCM decrypt with IV → Parse result
 
 ```js
 async function encrypt(data, password) {
@@ -75,7 +75,7 @@ async function decrypt(bundle, password) {
 }
 ```
 
-## Session Key Caching {#session-key-caching}
+Session Key Caching {#session-key-caching}
 
 Cache derived key in `chrome.storage.session` (memory only, not persisted):
 
@@ -110,7 +110,7 @@ class SecureStorage {
 }
 ```
 
-## What NOT to Do {#what-not-to-do}
+What NOT to Do {#what-not-to-do}
 
 - Never store encryption keys in `chrome.storage.local` (use session only)
 - Never use custom crypto - use Web Crypto API
@@ -118,9 +118,9 @@ class SecureStorage {
 - Never hardcode keys or salts in source code
 - Never reuse IVs - generate fresh for each operation
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Master Password Setup {#master-password-setup}
+Master Password Setup {#master-password-setup}
 
 ```js
 async function setupMasterPassword(password) {
@@ -137,7 +137,7 @@ async function setupMasterPassword(password) {
 }
 ```
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 
 - [Security Best Practices](../guides/security-best-practices.md)
 - [Security Hardening](../guides/security-hardening.md)

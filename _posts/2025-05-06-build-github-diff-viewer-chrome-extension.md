@@ -11,21 +11,21 @@ canonical_url: "https://bestchromeextensions.com/2025/05/06/build-github-diff-vi
 
 # Build a GitHub Diff Viewer Chrome Extension: Enhanced Code Review Experience
 
-Code review is one of the most critical processes in modern software development. Whether you are reviewing pull requests, comparing branches, or auditing changes before merging, the default GitHub diff viewer has limitations that can slow down your workflow. Building a custom **GitHub diff viewer Chrome extension** gives you complete control over how you visualize and interact with code changes, transforming your code review experience into something far more powerful and efficient.
+Code review is one of the most critical processes in modern software development. Whether you are reviewing pull requests, comparing branches, or auditing changes before merging, the default GitHub diff viewer has limitations that can slow down your workflow. Building a custom GitHub diff viewer Chrome extension gives you complete control over how you visualize and interact with code changes, transforming your code review experience into something far more powerful and efficient.
 
-In this comprehensive guide, we will walk through the complete process of building a **GitHub PR Chrome extension** that enhances the default diff viewing capabilities. From setting up your development environment to implementing advanced features like syntax highlighting improvements, inline comment navigation, and custom diff filtering, this tutorial covers everything you need to create a production-ready extension that will dramatically improve your code review workflow.
+we will walk through the complete process of building a GitHub PR Chrome extension that enhances the default diff viewing capabilities. From setting up your development environment to implementing advanced features like syntax highlighting improvements, inline comment navigation, and custom diff filtering, this tutorial covers everything you need to create a production-ready extension that will dramatically improve your code review workflow.
 
-## Why Build a Custom GitHub Diff Viewer Extension
+Why Build a Custom GitHub Diff Viewer Extension
 
-The default GitHub diff viewer serves its purpose well, but it lacks several features that experienced developers often crave. A custom **better GitHub diff** extension can add side-by-side diff toggling with unified view persistence, improved syntax highlighting with language-specific theming, keyboard shortcuts for quick navigation between changed files and code sections, collapsible unchanged code blocks to reduce visual clutter, customizable diff color schemes that match your preferred IDE, and quick navigation to specific changed hunks within large files.
+The default GitHub diff viewer serves its purpose well, but it lacks several features that experienced developers often crave. A custom better GitHub diff extension can add side-by-side diff toggling with unified view persistence, improved syntax highlighting with language-specific theming, keyboard shortcuts for quick navigation between changed files and code sections, collapsible unchanged code blocks to reduce visual clutter, customizable diff color schemes that match your preferred IDE, and quick navigation to specific changed hunks within large files.
 
 By building this extension yourself, you gain full control over these features and can tailor them to your specific workflow needs. Moreover, you will learn valuable skills in Chrome extension development that can be applied to countless other projects.
 
-## Setting Up Your Chrome Extension Project
+Setting Up Your Chrome Extension Project
 
 Every Chrome extension starts with a manifest file. For extensions built in 2025, you will use Manifest V3, which is the current standard and offers improved security and performance. Create a new directory for your project and begin with the fundamental files.
 
-### Creating the Manifest File
+Creating the Manifest File
 
 The manifest.json file serves as the blueprint for your extension. It defines the extension name, version, permissions, and the scripts that will run on GitHub pages.
 
@@ -72,27 +72,27 @@ The manifest.json file serves as the blueprint for your extension. It defines th
 
 The manifest declares that our extension will run on all GitHub pages, inject our content script and styles, and provide a popup for user configuration. The host permissions allow the extension to access GitHub's pages and modify their content.
 
-### Setting Up the Development Environment
+Setting Up the Development Environment
 
 Create the following directory structure for your extension:
 
 ```
 github-diff-viewer/
-├── manifest.json
-├── content.js
-├── popup.html
-├── popup.js
-├── styles.css
-├── background.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ content.js
+ popup.html
+ popup.js
+ styles.css
+ background.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 For development, you will load your extension directly into Chrome. Open chrome://extensions, enable Developer mode in the top right corner, click "Load unpacked," and select your project directory. Any changes you make to the files will require you to click the refresh icon on your extension card or restart the extension.
 
-## Understanding GitHub's Diff Page Structure
+Understanding GitHub's Diff Page Structure
 
 Before writing the code that enhances GitHub's diff viewer, you need to understand how GitHub structures its diff pages in the DOM. GitHub uses specific HTML elements and classes to represent diff content.
 
@@ -102,11 +102,11 @@ Lines are represented by table rows with the class `diff-line`, and each line nu
 
 Your content script will interact with these elements to add functionality. Use Chrome DevTools to inspect the diff pages and understand any changes GitHub may have made to their structure.
 
-## Implementing Core Features in Content.js
+Implementing Core Features in Content.js
 
 The content script is the heart of your extension. It runs on GitHub pages and modifies the DOM to add enhanced functionality. Let us build the core features step by step.
 
-### Feature One: Enhanced Syntax Highlighting Toggle
+Feature One: Enhanced Syntax Highlighting Toggle
 
 GitHub already provides syntax highlighting, but you can improve it with better contrast and customizable themes. Add a toggle that switches between GitHub's default colors and your custom highlighting.
 
@@ -142,7 +142,7 @@ GitHub already provides syntax highlighting, but you can improve it with better 
     }
 ```
 
-### Feature Two: Collapsible Unchanged Code Blocks
+Feature Two: Collapsible Unchanged Code Blocks
 
 Large diffs often contain hunks with substantial unchanged code between actual changes. Adding the ability to collapse these sections dramatically improves readability.
 
@@ -201,7 +201,7 @@ Large diffs often contain hunks with substantial unchanged code between actual c
     }
 ```
 
-### Feature Three: Quick Navigation Between Files
+Feature Three: Quick Navigation Between Files
 
 Pull requests with many files can be difficult to navigate. Add a floating file navigation panel that allows quick jumping between changed files.
 
@@ -245,7 +245,7 @@ Pull requests with many files can be difficult to navigate. Add a floating file 
         const toggleBtn = document.createElement('button');
         toggleBtn.id = 'gdvp-nav-toggle';
         toggleBtn.className = 'gdvp-nav-toggle';
-        toggleBtn.textContent = '☰';
+        toggleBtn.textContent = '';
         toggleBtn.addEventListener('click', () => {
             navPanel.classList.toggle('open');
         });
@@ -254,7 +254,7 @@ Pull requests with many files can be difficult to navigate. Add a floating file 
     }
 ```
 
-### Feature Four: Keyboard Shortcuts for Power Users
+Feature Four: Keyboard Shortcuts for Power Users
 
 Add essential keyboard shortcuts that make navigating diffs much faster. Common shortcuts include pressing N for next change, P for previous change, T to toggle all unchanged sections, and F to focus the file navigation panel.
 
@@ -336,7 +336,7 @@ Add essential keyboard shortcuts that make navigating diffs much faster. Common 
     }
 ```
 
-## Styling Your Extension with CSS
+Styling Your Extension with CSS
 
 The CSS file provides visual enhancements that make your extension stand out while maintaining consistency with GitHub's design language.
 
@@ -561,7 +561,7 @@ The CSS file provides visual enhancements that make your extension stand out whi
 }
 ```
 
-## Building the Popup Interface
+Building the Popup Interface
 
 The popup provides a user interface for configuring your extension's settings without needing to dig into code. It also serves as the entry point that users see when clicking the extension icon.
 
@@ -666,7 +666,7 @@ The popup provides a user interface for configuring your extension's settings wi
     
     <div class="setting-group">
         <label class="setting-label">File Filter Pattern</label>
-        <input type="text" id="fileFilter" placeholder="e.g., src/**/*.js">
+        <input type="text" id="fileFilter" placeholder="e.g., src//*.js">
     </div>
     
     <div class="shortcuts-info">
@@ -713,11 +713,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Advanced Features and Optimizations
+Advanced Features and Optimizations
 
 Now that you have the core functionality in place, consider adding these advanced features to make your extension truly exceptional.
 
-### File Filtering and Search
+File Filtering and Search
 
 Add the ability to filter displayed files based on patterns. This proves invaluable in large pull requests where you only want to review specific parts of the codebase.
 
@@ -746,7 +746,7 @@ Add the ability to filter displayed files based on patterns. This proves invalua
     }
 ```
 
-### Split View Enhancement
+Split View Enhancement
 
 GitHub offers split view for diffs, but you can enhance it with synchronized scrolling, which ensures that when you scroll one side, the other side scrolls proportionally to keep changes aligned.
 
@@ -782,7 +782,7 @@ GitHub offers split view for diffs, but you can enhance it with synchronized scr
     }
 ```
 
-### Statistics Dashboard
+Statistics Dashboard
 
 Add a quick stats overlay showing total additions, deletions, and files changed in the current diff view.
 
@@ -796,9 +796,9 @@ Add a quick stats overlay showing total additions, deletions, and files changed 
         const statsDiv = document.createElement('div');
         statsDiv.className = 'gdvp-stats';
         statsDiv.innerHTML = `
-            <span class="gdvp-stat-files">📄 ${files} files</span>
-            <span class="gdvp-stat-additions">➕ ${additions} additions</span>
-            <span class="gdvp-stat-deletions">➖ ${deletions} deletions</span>
+            <span class="gdvp-stat-files"> ${files} files</span>
+            <span class="gdvp-stat-additions"> ${additions} additions</span>
+            <span class="gdvp-stat-deletions"> ${deletions} deletions</span>
         `;
         
         const header = document.querySelector('.pr-toolbar');
@@ -808,20 +808,20 @@ Add a quick stats overlay showing total additions, deletions, and files changed 
     }
 ```
 
-## Testing Your Extension
+Testing Your Extension
 
 Thorough testing ensures your extension works correctly across different scenarios. Test on various pull request sizes, from single-file changes to massive PRs with hundreds of files. Verify that all keyboard shortcuts work as expected and that navigation between changes functions properly.
 
 Test the extension with different GitHub plans, as feature availability may vary. Check that the extension works in both unified and split diff views and validate that file filtering correctly matches and hides files. Also ensure your popup settings persist correctly between browser sessions.
 
-## Publishing Your Extension
+Publishing Your Extension
 
 Once your extension is polished and tested, you can publish it to the Chrome Web Store. Create a developer account, prepare your store listing with screenshots and detailed descriptions, and upload your extension as a ZIP file. After review, your extension will be available to millions of Chrome users.
 
-## Conclusion
+Conclusion
 
-Building a **GitHub diff viewer Chrome extension** is an excellent project that combines practical utility with valuable learning opportunities. You have created an extension that adds meaningful features to one of the most-used developer tools on the web, improving your own code review workflow while developing skills applicable to countless other extension projects.
+Building a GitHub diff viewer Chrome extension is an excellent project that combines practical utility with valuable learning opportunities. You have created an extension that adds meaningful features to one of the most-used developer tools on the web, improving your own code review workflow while developing skills applicable to countless other extension projects.
 
 The extension you built today includes collapsible unchanged sections for focused review, file navigation for quick jumping between changes, keyboard shortcuts for power users, enhanced syntax highlighting theming, diff statistics at a glance, and synchronized split view scrolling. These features transform how you interact with code reviews and can be extended further based on your specific needs.
 
-Remember that Chrome extension development is iterative. Start with your core features, gather feedback from users, and continuously improve your extension. The Chrome Web Store provides excellent analytics to understand how your extension is being used and what features deserve more attention. Your journey to building the ultimate **enhanced code review extension** has only just begun.
+Remember that Chrome extension development is iterative. Start with your core features, gather feedback from users, and continuously improve your extension. The Chrome Web Store provides excellent analytics to understand how your extension is being used and what features deserve more attention. Your journey to building the ultimate enhanced code review extension has only just begun.

@@ -1,21 +1,21 @@
 ---
 layout: default
 title: "Chrome Runtime API: The Extension Lifecycle Hub"
-description: "A comprehensive guide to chrome.runtime API covering lifecycle events, message passing, extension URLs, and best practices for building robust Chrome extensions."
+description: "A comprehensive guide to chrome.runtime API covering lifecycle events, message passing, extension URLs, and best practices for building solid Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/tutorials/runtime-api-guide/"
 ---
 
 # Chrome Runtime API: The Extension Lifecycle Hub
 
-## Overview {#overview}
+Overview {#overview}
 
 The `chrome.runtime` API is the central nervous system of every Chrome extension. It connects all components together, manages the extension lifecycle, and provides essential utilities for inter-component communication. Whether you're initializing default settings on first install, passing messages between your popup and background service worker, or handling browser updates, the Runtime API is your gateway to building robust, well-coordinated extensions.
 
 This tutorial covers everything you need to master the Runtime API: lifecycle events that fire during installation and updates, message passing patterns for component communication, resource management utilities, and best practices for error handling.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
-The `chrome.runtime` API requires no special permissions—it's available to all extension contexts by default. However, certain features have specific requirements:
+The `chrome.runtime` API requires no special permissions, it's available to all extension contexts by default. However, certain features have specific requirements:
 
 | Feature | Required Permission |
 |---------|---------------------|
@@ -32,11 +32,11 @@ The `chrome.runtime` API requires no special permissions—it's available to all
 }
 ```
 
-## Extension Lifecycle Events {#lifecycle-events}
+Extension Lifecycle Events {#lifecycle-events}
 
 The Runtime API provides several events that fire at key moments in your extension's lifecycle. Understanding these events is crucial for proper initialization, migration, and cleanup.
 
-### chrome.runtime.onInstalled {#oninstalled}
+chrome.runtime.onInstalled {#oninstalled}
 
 The `onInstalled` event fires when your extension is first installed, updated to a new version, or when Chrome itself is updated. This is your opportunity to initialize default settings, set up data structures, or migrate data from previous versions.
 
@@ -118,7 +118,7 @@ function compareVersions(v1, v2) {
 }
 ```
 
-**The `details` object contains:**
+The `details` object contains:
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -126,9 +126,9 @@ function compareVersions(v1, v2) {
 | `previousVersion` | string? | Previous extension version (only for `"update"`) |
 | `id` | string? | Extension ID (only when installed as a temporary extension) |
 
-### chrome.runtime.onStartup {#onstartup}
+chrome.runtime.onStartup {#onstartup}
 
-The `onStartup` event fires each time a Chrome profile starts, including browser launch and profile switching. Unlike `onInstalled`, this fires on every browser startup—making it perfect for initializing session-specific state or checking scheduled tasks.
+The `onStartup` event fires each time a Chrome profile starts, including browser launch and profile switching. Unlike `onInstalled`, this fires on every browser startup, making it perfect for initializing session-specific state or checking scheduled tasks.
 
 ```javascript
 chrome.runtime.onStartup.addListener(() => {
@@ -183,9 +183,9 @@ async function syncWithServer() {
 }
 ```
 
-### chrome.runtime.onSuspend {#onsuspend}
+chrome.runtime.onSuspend {#onsuspend}
 
-The `onSuspend` event fires just before the service worker is terminated due to inactivity. This is your last chance to save state, but you should not rely on it for critical operations—Chrome may terminate the service worker without warning.
+The `onSuspend` event fires just before the service worker is terminated due to inactivity. This is your last chance to save state, but you should not rely on it for critical operations, Chrome may terminate the service worker without warning.
 
 ```javascript
 chrome.runtime.onSuspend.addListener(() => {
@@ -217,11 +217,11 @@ function saveCurrentState() {
 }
 ```
 
-**Important:** Design your extension to handle unexpected termination gracefully. Don't rely solely on `onSuspend` for critical data persistence.
+Design your extension to handle unexpected termination gracefully. Don't rely solely on `onSuspend` for critical data persistence.
 
-## Extension URLs and Resources {#urls-and-resources}
+Extension URLs and Resources {#urls-and-resources}
 
-### chrome.runtime.getURL {#geturl}
+chrome.runtime.getURL {#geturl}
 
 The `getURL` method converts relative paths to fully-qualified extension URLs. This is essential for accessing extension resources from content scripts or popup pages.
 
@@ -259,7 +259,7 @@ document.getElementById('logo').src = chrome.runtime.getURL('images/logo.png');
 
 The returned URL format is: `chrome-extension://<extension-id>/path/to/resource`
 
-### chrome.runtime.getManifest {#getmanifest}
+chrome.runtime.getManifest {#getmanifest}
 
 Get access to your extension's manifest at runtime for dynamic behavior based on configuration.
 
@@ -300,7 +300,7 @@ async function initializeFeatures() {
 }
 ```
 
-### Extension ID Management {#extension-id}
+Extension ID Management {#extension-id}
 
 Every extension has a unique ID. Understanding how to work with this ID is important for cross-extension communication and debugging.
 
@@ -328,11 +328,11 @@ async function sendMessageToAnotherExtension(extensionId, message) {
 }
 ```
 
-## Message Passing Fundamentals {#message-passing}
+Message Passing Fundamentals {#message-passing}
 
 Chrome extensions consist of multiple components that need to communicate: background service workers, content scripts, popups, options pages, and more. The Runtime API provides two primary mechanisms for this communication.
 
-### One-Time Messages: sendMessage and onMessage {#sendmessage}
+One-Time Messages: sendMessage and onMessage {#sendmessage}
 
 Use `sendMessage` for simple request-response patterns where you need a single reply.
 
@@ -408,7 +408,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-### Persistent Connections: connect and onConnect {#connect}
+Persistent Connections: connect and onConnect {#connect}
 
 Use `connect` for ongoing communication, streaming data, or when you need bidirectional messaging.
 
@@ -495,7 +495,7 @@ function startDataStream(port, config) {
 }
 ```
 
-### Complete Message Passing Example {#message-passing-example}
+Complete Message Passing Example {#message-passing-example}
 
 Here's a comprehensive example showing how different extension components communicate:
 
@@ -593,7 +593,7 @@ document.getElementById('btn').addEventListener('click', async () => {
 });
 ```
 
-## Error Handling: chrome.runtime.lastError {#error-handling}
+Error Handling: chrome.runtime.lastError {#error-handling}
 
 The `lastError` property is crucial for error handling in extension APIs. Many Chrome extension APIs use callbacks rather than promises, and errors are communicated through this global property rather than thrown exceptions.
 
@@ -685,11 +685,11 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 });
 ```
 
-## Extension Management Utilities {#management-utilities}
+Extension Management Utilities {#management-utilities}
 
-### chrome.runtime.reload {#reload}
+chrome.runtime.reload {#reload}
 
-Reload the extension without requiring manual reinstall—essential for development and some production scenarios.
+Reload the extension without requiring manual reinstall, essential for development and some production scenarios.
 
 ```javascript
 // Reload the extension (only works from background or extension pages)
@@ -711,9 +711,9 @@ document.getElementById('reload-btn')?.addEventListener('click', () => {
 // Best practice: Add to your popup or options page
 ```
 
-### chrome.runtime.setUninstallURL {#setuninstallurl}
+chrome.runtime.setUninstallURL {#setuninstallurl}
 
-Set a URL to open when users uninstall your extension—perfect for collecting feedback or showing a thank-you page.
+Set a URL to open when users uninstall your extension, perfect for collecting feedback or showing a thank-you page.
 
 ```javascript
 // Set uninstall URL on extension startup
@@ -742,7 +742,7 @@ function setUninstallURL() {
 // 0 = Unknown, 1 = User uninstalled, 2 = Superseded, 3 = Chrome uninstalled
 ```
 
-## Service Class Pattern {#service-pattern}
+Service Class Pattern {#service-pattern}
 
 Here's a complete service class that encapsulates Runtime API functionality:
 
@@ -861,11 +861,11 @@ const port = runtime.connect('my-app');
 port.onMessage.addListener(msg => console.log(msg));
 ```
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Chrome Runtime API Reference](/guides/runtime-api/) — Complete API reference with all methods, events, and type definitions
-- [Message Passing Best Practices](/guides/message-passing/) — Advanced patterns for inter-component communication
-- [Background Service Workers](/guides/service-worker-lifecycle/) — Understanding service worker lifecycle, debugging, and best practices
+- [Chrome Runtime API Reference](/guides/runtime-api/). Complete API reference with all methods, events, and type definitions
+- [Message Passing Best Practices](/guides/message-passing/). Advanced patterns for inter-component communication
+- [Background Service Workers](/guides/service-worker-lifecycle/). Understanding service worker lifecycle, debugging, and best practices
 
 ---
 

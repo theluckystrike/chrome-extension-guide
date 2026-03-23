@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Reading Progress — Developer Guide"
+title: "Chrome Extension Reading Progress. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-progress/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-progres
 
 This tutorial walks through building a Chrome extension that tracks reading progress, saves position, and displays reading statistics.
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with the required permissions:
 
@@ -31,7 +31,7 @@ Create `manifest.json` with the required permissions:
 
 The `activeTab` permission allows access to the current tab, while `storage` enables persisting reading positions and stats.
 
-## Step 2: Content Script Setup {#step-2-content-script-setup}
+Step 2: Content Script Setup {#step-2-content-script-setup}
 
 Create `content.js` to inject the progress bar:
 
@@ -52,7 +52,7 @@ progressBar.style.cssText = `
 document.body.appendChild(progressBar);
 ```
 
-## Step 3: Scroll Position Tracking {#step-3-scroll-position-tracking}
+Step 3: Scroll Position Tracking {#step-3-scroll-position-tracking}
 
 Calculate reading progress using scroll mathematics:
 
@@ -79,7 +79,7 @@ function getArticleContent() {
 }
 ```
 
-## Step 4: Progress Bar Rendering {#step-4-progress-bar-rendering}
+Step 4: Progress Bar Rendering {#step-4-progress-bar-rendering}
 
 Update the progress bar width based on scroll position:
 
@@ -96,7 +96,7 @@ function updateProgressBar() {
 }
 ```
 
-## Step 5: Save Position to Storage {#step-5-save-position-to-storage}
+Step 5: Save Position to Storage {#step-5-save-position-to-storage}
 
 Persist reading position keyed by URL:
 
@@ -116,7 +116,7 @@ function saveProgress() {
 }
 ```
 
-## Step 6: Resume Reading Position {#step-6-resume-reading-position}
+Step 6: Resume Reading Position {#step-6-resume-reading-position}
 
 Restore saved position when revisiting a page:
 
@@ -140,7 +140,7 @@ function restoreProgress() {
 restoreProgress();
 ```
 
-## Step 7: Reading Statistics {#step-7-reading-statistics}
+Step 7: Reading Statistics {#step-7-reading-statistics}
 
 Track reading time and statistics:
 
@@ -176,7 +176,7 @@ function updateStats() {
 }
 ```
 
-## Step 8: Popup for Reading History {#step-8-popup-for-reading-history}
+Step 8: Popup for Reading History {#step-8-popup-for-reading-history}
 
 Create `popup.html` to display reading statistics:
 
@@ -193,7 +193,7 @@ Create `popup.html` to display reading statistics:
   </style>
 </head>
 <body>
-  <h2>📚 Reading Stats</h2>
+  <h2> Reading Stats</h2>
   <div class="stat">
     <div class="stat-label">Total Reading Time</div>
     <div class="stat-value" id="totalTime">0 min</div>
@@ -221,7 +221,7 @@ chrome.storage.local.get('readingStats', (result) => {
 });
 ```
 
-## Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
 Use passive listeners and throttling for smooth performance:
 
@@ -245,7 +245,7 @@ function throttle(func, limit) {
 }
 ```
 
-## Badge Updates {#badge-updates}
+Badge Updates {#badge-updates}
 
 Update the extension badge to show progress:
 
@@ -259,7 +259,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-## Auto-Detection {#auto-detection}
+Auto-Detection {#auto-detection}
 
 Automatically detect article pages vs non-article pages:
 
@@ -277,10 +277,10 @@ function isArticlePage() {
 }
 ```
 
-## Related Guides {#related-guides}
+Related Guides {#related-guides}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
 - [Throttle & Debounce Patterns](../patterns/throttle-debounce-extensions.md)
 -e 
 ---

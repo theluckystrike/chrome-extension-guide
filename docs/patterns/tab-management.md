@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Tab Management — Best Practices"
+title: "Chrome Extension Tab Management. Best Practices"
 description: "Implement advanced tab management features."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-management/"
 ---
 
 # Tab Management Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome's `chrome.tabs` API is the backbone of most extensions. This guide provides production patterns for managing tabs at scale: singleton tabs, tab groups, lifecycle tracking, batch operations, state machines, pinned tabs, per-tab badges, and window-tab relationships. Each pattern includes TypeScript code ready for your service worker.
 
-> **Permissions**: Most patterns require `"tabs"` in your manifest. Tab groups require `"tabGroups"`. Badge updates need `"action"`.
+> Permissions: Most patterns require `"tabs"` in your manifest. Tab groups require `"tabGroups"`. Badge updates need `"action"`.
 
 ---
 
-## Pattern 1: Singleton Tabs (Open or Focus Existing) {#pattern-1-singleton-tabs-open-or-focus-existing}
+Pattern 1: Singleton Tabs (Open or Focus Existing) {#pattern-1-singleton-tabs-open-or-focus-existing}
 
 Avoid opening duplicate extension pages. If the tab already exists, focus it:
 
@@ -36,7 +36,7 @@ async function openSingletonTab(path: string): Promise<chrome.tabs.Tab> {
     return existing;
   }
 
-  // No existing tab — create one
+  // No existing tab. create one
   return chrome.tabs.create({ url: extensionUrl });
 }
 
@@ -69,7 +69,7 @@ async function openOrFocusUrl(targetUrl: string): Promise<chrome.tabs.Tab> {
 
 ---
 
-## Pattern 2: Tab Groups — Create, Color, Collapse {#pattern-2-tab-groups-create-color-collapse}
+Pattern 2: Tab Groups. Create, Color, Collapse {#pattern-2-tab-groups-create-color-collapse}
 
 Organize related tabs into color-coded, collapsible groups:
 
@@ -147,7 +147,7 @@ chrome.tabGroups.onRemoved.addListener((group) => {
 
 ---
 
-## Pattern 3: Tab Lifecycle Tracking {#pattern-3-tab-lifecycle-tracking}
+Pattern 3: Tab Lifecycle Tracking {#pattern-3-tab-lifecycle-tracking}
 
 Build a complete picture of tab activity using created/updated/removed events:
 
@@ -233,14 +233,14 @@ initializeRegistry();
 
 ---
 
-## Pattern 4: Batch Tab Operations {#pattern-4-batch-tab-operations}
+Pattern 4: Batch Tab Operations {#pattern-4-batch-tab-operations}
 
 Close duplicates, sort tabs by URL, and move tabs between windows:
 
 ```ts
 // background.ts
 
-// Close duplicate tabs — keep the earliest instance
+// Close duplicate tabs. keep the earliest instance
 async function closeDuplicateTabs(): Promise<number> {
   const tabs = await chrome.tabs.query({ currentWindow: true });
   const seen = new Map<string, number>();
@@ -321,7 +321,7 @@ async function closeOldTabs(maxAgeMs: number): Promise<number> {
 
 ---
 
-## Pattern 5: Tab State Machine {#pattern-5-tab-state-machine}
+Pattern 5: Tab State Machine {#pattern-5-tab-state-machine}
 
 Model tab status transitions explicitly to avoid race conditions:
 
@@ -406,7 +406,7 @@ function getTabsInState(state: TabState): number[] {
 
 ---
 
-## Pattern 6: Pinned Tab Management {#pattern-6-pinned-tab-management}
+Pattern 6: Pinned Tab Management {#pattern-6-pinned-tab-management}
 
 Enforce pinned tabs for important pages and protect them from accidental closure:
 
@@ -467,7 +467,7 @@ async function savePinnedTabUrls(): Promise<void> {
 
 ---
 
-## Pattern 7: Tab-Specific Badge and Title Updates {#pattern-7-tab-specific-badge-and-title-updates}
+Pattern 7: Tab-Specific Badge and Title Updates {#pattern-7-tab-specific-badge-and-title-updates}
 
 Show per-tab counters and dynamic titles on the extension action icon:
 
@@ -486,7 +486,7 @@ async function updateTabBadge(tabId: number, state: Partial<TabBadgeState>): Pro
   const merged = { ...current, ...state };
   badgeStates.set(tabId, merged);
 
-  // Badge text — empty string hides the badge
+  // Badge text. empty string hides the badge
   const text = merged.count > 0 ? String(merged.count) : "";
   await chrome.action.setBadgeText({ text, tabId });
 
@@ -546,7 +546,7 @@ async function setTabIcon(tabId: number, variant: "active" | "inactive" | "error
 
 ---
 
-## Pattern 8: Window and Tab Relationship Management {#pattern-8-window-and-tab-relationship-management}
+Pattern 8: Window and Tab Relationship Management {#pattern-8-window-and-tab-relationship-management}
 
 Track which tabs belong to which windows and handle cross-window operations:
 
@@ -646,7 +646,7 @@ chrome.tabs.onAttached.addListener((tabId, attachInfo) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

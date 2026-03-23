@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Dependency Injection — Best Practices"
+title: "Chrome Extension Extension Dependency Injection. Best Practices"
 description: "Implement dependency injection for cleaner extension architecture."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-dependency-injection/"
 ---
@@ -9,15 +9,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-dependency-i
 
 Patterns for writing testable Chrome extensions using dependency injection to decouple from global chrome.* APIs.
 
-## Problem {#problem}
+Problem {#problem}
 
 Chrome extension APIs (`chrome.storage`, `chrome.runtime`, `chrome.alarms`) are global singletons. This makes unit testing difficult because you cannot easily mock or replace these globals in your test environment.
 
-## Solution: Inject Chrome API Dependencies {#solution-inject-chrome-api-dependencies}
+Solution: Inject Chrome API Dependencies {#solution-inject-chrome-api-dependencies}
 
 Wrap chrome.* APIs in interfaces/classes and inject them as dependencies rather than importing globals directly.
 
-## Service Layer Pattern {#service-layer-pattern}
+Service Layer Pattern {#service-layer-pattern}
 
 Create services that accept chrome API objects as constructor parameters:
 
@@ -42,7 +42,7 @@ export class StorageService {
 }
 ```
 
-## Factory Pattern for Production vs Test {#factory-pattern-for-production-vs-test}
+Factory Pattern for Production vs Test {#factory-pattern-for-production-vs-test}
 
 Create factories that provide real or mock implementations:
 
@@ -61,7 +61,7 @@ export function createMockStorageService(initialData = {}) {
 }
 ```
 
-## Module-Level Injection {#module-level-injection}
+Module-Level Injection {#module-level-injection}
 
 Export factory functions that accept dependencies:
 
@@ -79,7 +79,7 @@ export function createMessageService(runtime = chrome.runtime) {
 }
 ```
 
-## Context-Aware Injection {#context-aware-injection}
+Context-Aware Injection {#context-aware-injection}
 
 Provide different implementations for background scripts vs content scripts:
 
@@ -99,7 +99,7 @@ export function createServiceRegistry(context) {
 }
 ```
 
-## Injectable Alarm Service {#injectable-alarm-service}
+Injectable Alarm Service {#injectable-alarm-service}
 
 ```javascript
 // alarm-service.js
@@ -118,7 +118,7 @@ export class AlarmService {
 }
 ```
 
-## TypeScript Interfaces {#typescript-interfaces}
+TypeScript Interfaces {#typescript-interfaces}
 
 Define contracts for injectable services:
 
@@ -134,14 +134,14 @@ interface IMessageService {
 }
 ```
 
-## Benefits {#benefits}
+Benefits {#benefits}
 
-- **Unit testable**: Replace real chrome APIs with mocks
-- **Swappable implementations**: Easy to switch between local/sync/session storage
-- **Clear dependencies**: All dependencies are explicit in constructor
-- **No framework needed**: Lightweight approach using constructor parameters
+- Unit testable: Replace real chrome APIs with mocks
+- Swappable implementations: Easy to switch between local/sync/session storage
+- Clear dependencies: All dependencies are explicit in constructor
+- No framework needed: Lightweight approach using constructor parameters
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Unit Testing Guide](../guides/chrome-extension-unit-testing.md)
 - [API Mocking Guide](../guides/chrome-extension-api-mocking.md)

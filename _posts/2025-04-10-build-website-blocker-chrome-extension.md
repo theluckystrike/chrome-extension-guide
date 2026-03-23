@@ -11,46 +11,46 @@ canonical_url: "https://bestchromeextensions.com/2025/04/10/build-website-blocke
 
 # Build a Website Blocker Chrome Extension: Focus Mode for Productivity
 
-In today's digitally driven world, maintaining concentration has become increasingly challenging. Social media platforms, news websites, and entertainment portals constantly compete for our attention, often derailing productivity sessions in mere seconds. Whether you're a developer trying to complete a coding project, a student preparing for exams, or a professional working on important deadlines, learning how to build a **chrome extension website blocker** can transform your workflow and help you reclaim focus.
+In today's digitally driven world, maintaining concentration has become increasingly challenging. Social media platforms, news websites, and entertainment portals constantly compete for our attention, often derailing productivity sessions in mere seconds. Whether you're a developer trying to complete a coding project, a student preparing for exams, or a professional working on important deadlines, learning how to build a chrome extension website blocker can transform your workflow and help you reclaim focus.
 
-This comprehensive guide will walk you through creating a fully functional **focus mode chrome extension** that blocks distracting websites, provides customizable timers, and delivers detailed productivity analytics. By the end of this tutorial, you'll have a production-ready extension that can be published to the Chrome Web Store and potentially help thousands of users combat digital distractions.
+This comprehensive guide will walk you through creating a fully functional focus mode chrome extension that blocks distracting websites, provides customizable timers, and delivers detailed productivity analytics. By the end of this tutorial, you'll have a production-ready extension that can be published to the Chrome Web Store and potentially help thousands of users combat digital distractions.
 
 ---
 
-## Why Build a Website Blocker Chrome Extension?
+Why Build a Website Blocker Chrome Extension?
 
-The demand for effective **productivity blocker chrome** solutions has never been higher. Millions of users actively search for tools to help them stay focused, making this one of the most popular extension categories in the Chrome Web Store. Building this type of extension offers several compelling benefits:
+The demand for effective productivity blocker chrome solutions has never been higher. Millions of users actively search for tools to help them stay focused, making this one of the most popular extension categories in the Chrome Web Store. Building this type of extension offers several compelling benefits:
 
-### Market Opportunity
+Market Opportunity
 
-The productivity app market continues to grow exponentially as remote work becomes the norm. Users are actively seeking chrome extension website blocker solutions that integrate seamlessly with their browsing experience. By building a site blocker extension, you're addressing a proven market need with significant download potential.
+The productivity app market continues to grow exponentially as remote work becomes the norm. Users are actively seeking chrome extension website blocker solutions that integrate smoothly with their browsing experience. By building a site blocker extension, you're addressing a proven market need with significant download potential.
 
-### Technical Learning Experience
+Technical Learning Experience
 
-Creating a **focus mode chrome extension** teaches you essential Chrome extension development skills that transfer to virtually any extension project:
+Creating a focus mode chrome extension teaches you essential Chrome extension development skills that transfer to virtually any extension project:
 
-- **Declarative Net Request API**: The modern, privacy-focused way to block network requests in Manifest V3
-- **Storage API**: For persisting user preferences, blocklists, and productivity data
-- **Alarms API**: For scheduling focus sessions and timed blocks
-- **Notifications API**: For alerting users when they attempt to visit blocked sites
-- **Message Passing**: For seamless communication between popup, background scripts, and content scripts
-- **Chrome Storage Sync**: For synchronizing settings across devices
+- Declarative Net Request API: The modern, privacy-focused way to block network requests in Manifest V3
+- Storage API: For persisting user preferences, blocklists, and productivity data
+- Alarms API: For scheduling focus sessions and timed blocks
+- Notifications API: For alerting users when they attempt to visit blocked sites
+- Message Passing: For smooth communication between popup, background scripts, and content scripts
+- Chrome Storage Sync: For synchronizing settings across devices
 
-### Real-World Impact
+Real-World Impact
 
 Perhaps most importantly, building a website blocker chrome extension allows you to create a tool that genuinely improves people's lives. Students use these extensions to focus on studies, professionals use them to meet deadlines, and anyone seeking to reduce screen time can benefit from a well-designed focus mode chrome extension.
 
 ---
 
-## Understanding the Chrome Extension Architecture
+Understanding the Chrome Extension Architecture
 
 Before diving into code, let's establish a solid understanding of how Chrome extensions work, particularly for blocking functionality.
 
-### Manifest V3 Requirements
+Manifest V3 Requirements
 
-Chrome's Manifest V3 (MV3) introduced significant changes to how extensions can block content. Unlike the previous Manifest V2, where you could use the webRequest API to block requests synchronously, MV3 requires using the Declarative Net Request (DNR) API. This approach is more privacy-conscious because extensions no longer need to inspect every network request—instead, you define blocking rules that Chrome evaluates internally.
+Chrome's Manifest V3 (MV3) introduced significant changes to how extensions can block content. Unlike the previous Manifest V2, where you could use the webRequest API to block requests synchronously, MV3 requires using the Declarative Net Request (DNR) API. This approach is more privacy-conscious because extensions no longer need to inspect every network request, instead, you define blocking rules that Chrome evaluates internally.
 
-For our **chrome extension website blocker**, we'll need the following key permissions:
+For our chrome extension website blocker, we'll need the following key permissions:
 
 - `storage`: To save user preferences and blocklists
 - `alarms`: To trigger focus session timers
@@ -58,44 +58,44 @@ For our **chrome extension website blocker**, we'll need the following key permi
 - `declarativeNetRequest`: To define and manage blocking rules
 - `declarativeNetRequestWithHostAccess`: To block specific website hosts
 
-### Extension Components Overview
+Extension Components Overview
 
 Our focus mode chrome extension will consist of several interconnected components:
 
-1. **Manifest File**: Configuration and permissions declaration
-2. **Background Service Worker**: Manages blocking rules and alarm triggers
-3. **Popup Interface**: User-facing controls for managing blocklists and timers
-4. **Content Script**: Injected into pages to provide visual feedback when sites are blocked
-5. **Options Page**: Advanced settings and customization options
+1. Manifest File: Configuration and permissions declaration
+2. Background Service Worker: Manages blocking rules and alarm triggers
+3. Popup Interface: User-facing controls for managing blocklists and timers
+4. Content Script: Injected into pages to provide visual feedback when sites are blocked
+5. Options Page: Advanced settings and customization options
 
 ---
 
-## Step-by-Step Implementation Guide
+Step-by-Step Implementation Guide
 
 Let's build our website blocker chrome extension step by step.
 
-### Step 1: Project Structure Setup
+Step 1: Project Structure Setup
 
 Create a new directory for your extension and set up the following file structure:
 
 ```
 focus-blocker/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   ├── popup.js
-│   └── popup.css
-├── content.js
-├── options.html
-├── options.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.js
+    popup.css
+ content.js
+ options.html
+ options.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### Step 2: Creating the Manifest File
+Step 2: Creating the Manifest File
 
 The manifest.json file is the heart of your chrome extension website blocker. Here's the complete configuration:
 
@@ -137,7 +137,7 @@ The manifest.json file is the heart of your chrome extension website blocker. He
 
 This manifest declares all necessary permissions for our productivity blocker chrome extension. The `declarativeNetRequest` permission is essential for the actual website blocking functionality.
 
-### Step 3: Implementing the Background Service Worker
+Step 3: Implementing the Background Service Worker
 
 The background service worker manages blocking rules, handles alarms for focus sessions, and coordinates communication between different parts of your chrome extension website blocker. Create `background.js`:
 
@@ -277,7 +277,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 
 This background script handles all the core functionality of your chrome extension website blocker, including managing blocking rules, handling focus mode timers, and tracking statistics.
 
-### Step 4: Building the Popup Interface
+Step 4: Building the Popup Interface
 
 The popup is what users interact with most frequently. Create an intuitive interface in `popup/popup.html`:
 
@@ -293,7 +293,7 @@ The popup is what users interact with most frequently. Create an intuitive inter
 <body>
   <div class="container">
     <header>
-      <h1>🎯 Focus Mode</h1>
+      <h1> Focus Mode</h1>
       <p class="subtitle">Block distracting websites and boost productivity</p>
     </header>
 
@@ -319,7 +319,7 @@ The popup is what users interact with most frequently. Create an intuitive inter
     </section>
 
     <section class="stats-section">
-      <h2>📊 Today's Stats</h2>
+      <h2> Today's Stats</h2>
       <div class="stat-item">
         <span class="stat-label">Sites Blocked:</span>
         <span class="stat-value" id="blockedCount">0</span>
@@ -331,7 +331,7 @@ The popup is what users interact with most frequently. Create an intuitive inter
     </section>
 
     <section class="quick-block">
-      <h2>🚫 Quick Block</h2>
+      <h2> Quick Block</h2>
       <div class="quick-actions">
         <button class="btn btn-add" id="addCurrentSite">Block Current Site</button>
         <button class="btn btn-secondary" id="openOptions">Manage Blocklist</button>
@@ -339,7 +339,7 @@ The popup is what users interact with most frequently. Create an intuitive inter
     </section>
 
     <footer>
-      <a href="#" id="optionsLink">⚙️ Advanced Settings</a>
+      <a href="#" id="optionsLink"> Advanced Settings</a>
     </footer>
   </div>
   <script src="popup.js"></script>
@@ -347,7 +347,7 @@ The popup is what users interact with most frequently. Create an intuitive inter
 </html>
 ```
 
-### Step 5: Styling the Popup
+Step 5: Styling the Popup
 
 Create visually appealing styles in `popup/popup.css`:
 
@@ -552,7 +552,7 @@ footer a:hover {
 }
 ```
 
-### Step 6: Implementing Popup Functionality
+Step 6: Implementing Popup Functionality
 
 The popup JavaScript connects the UI to the background service worker:
 
@@ -630,9 +630,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           blocklist
         });
         
-        alert(`✅ ${hostname} has been added to your blocklist!`);
+        alert(` ${hostname} has been added to your blocklist!`);
       } else {
-        alert(`ℹ️ ${hostname} is already in your blocklist!`);
+        alert(`ℹ ${hostname} is already in your blocklist!`);
       }
     }
   });
@@ -653,7 +653,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-### Step 7: Creating the Options Page
+Step 7: Creating the Options Page
 
 The options page allows users to manage their blocklist and customize settings:
 
@@ -715,7 +715,7 @@ The options page allows users to manage their blocklist and customize settings:
   </style>
 </head>
 <body>
-  <h1>⚙️ Focus Mode Settings</h1>
+  <h1> Focus Mode Settings</h1>
   
   <div class="section">
     <h2>Manage Blocklist</h2>
@@ -745,7 +745,7 @@ The options page allows users to manage their blocklist and customize settings:
 </html>
 ```
 
-### Step 8: Implementing Options Page Logic
+Step 8: Implementing Options Page Logic
 
 Create `options.js` to handle the blocklist management:
 
@@ -801,7 +801,7 @@ function renderBlocklist(blocklist) {
     item.innerHTML = `
       <input type="checkbox" ${site.enabled ? 'checked' : ''} data-index="${index}">
       <span class="pattern">${site.pattern}</span>
-      <span class="delete" data-index="${index}">✕</span>
+      <span class="delete" data-index="${index}"></span>
     `;
     container.appendChild(item);
   });
@@ -846,27 +846,27 @@ function renderBlocklist(blocklist) {
 
 ---
 
-## Testing Your Website Blocker Chrome Extension
+Testing Your Website Blocker Chrome Extension
 
 Now that you've built all the components, let's test your focus mode chrome extension:
 
-1. **Load the extension**:
+1. Load the extension:
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" in the top right corner
    - Click "Load unpacked" and select your `focus-blocker` directory
 
-2. **Verify basic functionality**:
+2. Verify basic functionality:
    - Click the extension icon to open the popup
    - Toggle Focus Mode on and verify the status changes
    - Try to visit a blocked website (like facebook.com)
    - You should see a "This page has been blocked" message
 
-3. **Test the blocklist**:
+3. Test the blocklist:
    - Click "Manage Blocklist" to open options
    - Add a new website to block
    - Enable Focus Mode and verify the new site is blocked
 
-4. **Test the timer**:
+4. Test the timer:
    - Select a short duration (like 5 minutes for testing)
    - Enable Focus Mode
    - Wait for the timer to complete
@@ -874,54 +874,54 @@ Now that you've built all the components, let's test your focus mode chrome exte
 
 ---
 
-## Advanced Features to Consider
+Advanced Features to Consider
 
-Once you have the basic **chrome extension website blocker** working, consider adding these advanced features:
+Once you have the basic chrome extension website blocker working, consider adding these advanced features:
 
-### 1. Whitelist Mode
+1. Whitelist Mode
 Instead of blocking specific sites, allow only certain sites (the inverse of blocking). This is useful for work environments where you want to restrict browsing to work-related domains only.
 
-### 2. Schedule-Based Blocking
+2. Schedule-Based Blocking
 Implement automatic focus mode activation based on time schedules. Users can set "work hours" during which distracting sites are automatically blocked.
 
-### 3. Gradual Blocking
+3. Gradual Blocking
 Instead of immediately blocking, show a countdown that allows users to close the tab or click "Wait 5 more minutes." This reduces frustration while still encouraging focus.
 
-### 4. Productivity Analytics
+4. Productivity Analytics
 Track and display detailed statistics about focus sessions, blocked attempts, and productivity trends over time. Users love seeing their progress visualized.
 
-### 5. Cloud Sync
+5. Cloud Sync
 Implement chrome.storage.sync to allow users to synchronize their blocklist and settings across multiple devices.
 
-### 6. Browser Action Badges
+6. Browser Action Badges
 Display a badge showing the remaining focus time directly on the extension icon for quick glanceability.
 
 ---
 
-## Publishing Your Chrome Extension Website Blocker
+Publishing Your Chrome Extension Website Blocker
 
-When you're ready to share your **focus mode chrome extension** with the world:
+When you're ready to share your focus mode chrome extension with the world:
 
-1. **Prepare your listing**:
+1. Prepare your listing:
    - Create compelling screenshots showing the popup, options page, and blocked page
    - Write a detailed description highlighting key features
    - Choose appropriate categories and tags
 
-2. **Verify compliance**:
+2. Verify compliance:
    - Ensure your extension follows Chrome Web Store policies
    - Verify you have proper icon sizes (128x128, 48x48, 16x16)
    - Test thoroughly to ensure no errors or crashes
 
-3. **Submit for review**:
+3. Submit for review:
    - Create a developer account if you don't have one
    - Upload your extension as a ZIP file
    - Pay the one-time developer registration fee ($5)
 
 ---
 
-## Conclusion
+Conclusion
 
-Building a **chrome extension website blocker** is an excellent project that combines practical utility with valuable technical learning. You've now created a fully functional focus mode chrome extension that demonstrates:
+Building a chrome extension website blocker is an excellent project that combines practical utility with valuable technical learning. You've now created a fully functional focus mode chrome extension that demonstrates:
 
 - How to use the Declarative Net Request API for website blocking
 - How to implement focus timers with the Alarms API
@@ -931,6 +931,6 @@ Building a **chrome extension website blocker** is an excellent project that com
 
 This foundation opens doors to building more sophisticated productivity tools, from full-featured project management extensions to advanced content filtering solutions. The skills you've learned here are directly transferable to virtually any Chrome extension project you might tackle in the future.
 
-Remember, the best extensions solve real problems, and with digital distractions at an all-time high, a well-designed **productivity blocker chrome** extension addresses a genuine need. With further development, customization, and user feedback, your focus mode chrome extension has the potential to help thousands of users reclaim their attention and boost their productivity.
+Remember, the best extensions solve real problems, and with digital distractions at an all-time high, a well-designed productivity blocker chrome extension addresses a genuine need. With further development, customization, and user feedback, your focus mode chrome extension has the potential to help thousands of users reclaim their attention and boost their productivity.
 
 Start building today, and transform the way people work online!

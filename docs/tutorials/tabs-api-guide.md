@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Working with the Chrome Tabs API — Developer Guide"
+title: "Working with the Chrome Tabs API. Developer Guide"
 description: "Learn how to query, create, update, and manipulate browser tabs using the Chrome Tabs API. Covers tab events, groups, pinning, capture, and script injection."
 canonical_url: "https://bestchromeextensions.com/tutorials/tabs-api-guide/"
 ---
 # Working with the Chrome Tabs API
 
-## Overview {#overview}
+Overview {#overview}
 
 The Chrome Tabs API (`chrome.tabs`) is one of the most frequently used APIs in browser extensions. It allows you to query browser tabs, create new tabs, update existing ones, and listen for tab lifecycle events. Whether you're building a tab manager, a productivity tool, or an extension that needs to coordinate across pages, the Tabs API provides the foundation.
 
 This guide covers the core operations: querying tabs, creating and managing tabs, working with tab events, tab groups, pinning and moving tabs, capturing visible tab content, injecting scripts, and communication patterns between extension components and tabs.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Before working with the Tabs API, ensure you've declared the appropriate permissions in your `manifest.json`:
 
@@ -30,11 +30,11 @@ For more advanced operations like capturing tab content or accessing tab groups,
 }
 ```
 
-## Querying Tabs {#querying-tabs}
+Querying Tabs {#querying-tabs}
 
 The `chrome.tabs.query()` method is your primary tool for finding tabs. It accepts a query object and returns a promise that resolves to an array of matching `Tab` objects.
 
-### Basic Queries {#basic-queries}
+Basic Queries {#basic-queries}
 
 ```ts
 // Get all tabs in the current window
@@ -48,7 +48,7 @@ const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true 
 console.log(activeTab.url, activeTab.title);
 ```
 
-### Querying by State {#querying-by-state}
+Querying by State {#querying-by-state}
 
 ```ts
 // Get all pinned tabs
@@ -64,7 +64,7 @@ const loadingTabs = await chrome.tabs.query({ status: "loading" });
 const windowTabs = await chrome.tabs.query({ windowId: 12345 });
 ```
 
-### Querying by URL Pattern {#querying-by-url-pattern}
+Querying by URL Pattern {#querying-by-url-pattern}
 
 ```ts
 // Get all tabs matching a URL pattern
@@ -83,7 +83,7 @@ const webTabs = await chrome.tabs.query({
 });
 ```
 
-### Understanding the Tab Object {#understanding-the-tab-object}
+Understanding the Tab Object {#understanding-the-tab-object}
 
 The `Tab` object contains numerous properties:
 
@@ -107,11 +107,11 @@ interface Tab {
 }
 ```
 
-## Creating Tabs {#creating-tabs}
+Creating Tabs {#creating-tabs}
 
 Use `chrome.tabs.create()` to open new tabs:
 
-### Basic Tab Creation {#basic-tab-creation}
+Basic Tab Creation {#basic-tab-creation}
 
 ```ts
 // Open a URL in a new tab
@@ -126,7 +126,7 @@ const newTabInWindow = await chrome.tabs.create({
 });
 ```
 
-### Advanced Tab Creation {#advanced-tab-creation}
+Advanced Tab Creation {#advanced-tab-creation}
 
 ```ts
 // Open a URL in a new tab at a specific position
@@ -157,7 +157,7 @@ const openerTab = await chrome.tabs.create({
 const blankTab = await chrome.tabs.create({});
 ```
 
-### Opening Special URLs {#opening-special-urls}
+Opening Special URLs {#opening-special-urls}
 
 ```ts
 // Open new tab page
@@ -170,11 +170,11 @@ await chrome.tabs.create({ url: "chrome://extensions" });
 await chrome.tabs.create({ url: "chrome://downloads" });
 ```
 
-## Updating Tabs {#updating-tabs}
+Updating Tabs {#updating-tabs}
 
 Use `chrome.tabs.update()` to modify existing tabs:
 
-### Basic Updates {#basic-updates}
+Basic Updates {#basic-updates}
 
 ```ts
 // Navigate a tab to a new URL
@@ -191,7 +191,7 @@ await chrome.tabs.goBack(tab.id!);
 await chrome.tabs.goForward(tab.id!);
 ```
 
-### Updating Tab Properties {#updating-tab-properties}
+Updating Tab Properties {#updating-tab-properties}
 
 ```ts
 // Pin or unpin a tab
@@ -206,7 +206,7 @@ await chrome.tabs.update(tab.id!, { muted: false });
 await chrome.tabs.update(tab.id!, { title: "My Custom Title" });
 ```
 
-## Removing Tabs {#removing-tabs}
+Removing Tabs {#removing-tabs}
 
 Use `chrome.tabs.remove()` to close tabs:
 
@@ -230,11 +230,11 @@ const tabsToClose = allTabs.filter(t => t.id !== keepTab.id).map(t => t.id!);
 await chrome.tabs.remove(tabsToClose);
 ```
 
-## Tab Events {#tab-events}
+Tab Events {#tab-events}
 
 The Tabs API provides events for monitoring tab lifecycle changes:
 
-### onCreated {#oncreated}
+onCreated {#oncreated}
 
 Fired when a new tab is created:
 
@@ -249,7 +249,7 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 ```
 
-### onUpdated {#onupdated}
+onUpdated {#onupdated}
 
 Fired when a tab is updated (URL changes, loading completes, etc.):
 
@@ -283,7 +283,7 @@ chrome.tabs.onUpdated.addListener(
 );
 ```
 
-### onRemoved {#onremoved}
+onRemoved {#onremoved}
 
 Fired when a tab is closed:
 
@@ -295,7 +295,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 ```
 
-### onActivated {#onactivated}
+onActivated {#onactivated}
 
 Fired when the active tab in a window changes:
 
@@ -310,7 +310,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 ```
 
-### Other Useful Events {#other-useful-events}
+Other Useful Events {#other-useful-events}
 
 ```ts
 // Fired when a tab moves to a different position in its window
@@ -334,11 +334,11 @@ chrome.tabs.onZoomChange.addListener((zoomChangeInfo) => {
 });
 ```
 
-## Tab Groups {#tab-groups}
+Tab Groups {#tab-groups}
 
 Chrome's tab groups feature allows you to organize related tabs. The `chrome.tabGroups` API (available in Chrome 88+) provides group management:
 
-### Creating Tab Groups {#creating-tab-groups}
+Creating Tab Groups {#creating-tab-groups}
 
 ```ts
 // Create a new tab group
@@ -352,7 +352,7 @@ await chrome.tabGroups.update(group, {
 });
 ```
 
-### Managing Tab Groups {#managing-tab-groups}
+Managing Tab Groups {#managing-tab-groups}
 
 ```ts
 // Get all tab groups in a window
@@ -376,7 +376,7 @@ await chrome.tabGroups.update(group, {
 await chrome.tabGroups.remove(group);
 ```
 
-### Querying Tab Groups {#querying-tab-groups}
+Querying Tab Groups {#querying-tab-groups}
 
 ```ts
 // Find all groups
@@ -391,9 +391,9 @@ const currentWindowGroups = await chrome.tabGroups.query({
 const specificGroup = await chrome.tabGroups.get(12345);
 ```
 
-## Moving and Pinning Tabs {#moving-and-pinning-tabs}
+Moving and Pinning Tabs {#moving-and-pinning-tabs}
 
-### Moving Tabs {#moving-tabs}
+Moving Tabs {#moving-tabs}
 
 ```ts
 // Move a tab to a specific position
@@ -409,7 +409,7 @@ await chrome.tabs.move(12345, {
 await chrome.tabs.move([12345, 12346, 12347], { index: 0 });
 ```
 
-### Pinning Tabs {#pinning-tabs}
+Pinning Tabs {#pinning-tabs}
 
 Pinned tabs stay at the left edge of the tab strip and show only the favicon:
 
@@ -430,7 +430,7 @@ for (const tab of pinned) {
 }
 ```
 
-### Example: Reorder Tabs by Domain {#example-reorder-tabs-by-domain}
+Reorder Tabs by Domain {#example-reorder-tabs-by-domain}
 
 ```ts
 async function groupTabsByDomain() {
@@ -460,11 +460,11 @@ async function groupTabsByDomain() {
 }
 ```
 
-## Capturing Visible Tab {#capturing-visible-tab}
+Capturing Visible Tab {#capturing-visible-tab}
 
 The `chrome.tabs.captureVisibleTab()` method captures the visible area of a tab as a data URL:
 
-### Basic Capture {#basic-capture}
+Basic Capture {#basic-capture}
 
 ```ts
 // Capture the visible tab in the current window
@@ -481,7 +481,7 @@ const jpegDataUrl = await chrome.tabs.captureVisibleTab(undefined, {
 });
 ```
 
-### Capture Options {#capture-options}
+Capture Options {#capture-options}
 
 ```ts
 // Get available capture formats
@@ -496,7 +496,7 @@ const thumbnail = await chrome.tabs.captureVisibleTab(undefined, {
 });
 ```
 
-### Practical Example: Save Screenshot {#practical-example-save-screenshot}
+Practical Example: Save Screenshot {#practical-example-save-screenshot}
 
 ```ts
 async function saveTabScreenshot(tabId: number): Promise<string> {
@@ -519,13 +519,13 @@ async function saveTabScreenshot(tabId: number): Promise<string> {
 }
 ```
 
-Note: Capturing requires the `tabCapture` permission and only works for tabs with http(s) URLs.
+Capturing requires the `tabCapture` permission and only works for tabs with http(s) URLs.
 
-## Injecting Scripts into Tabs {#injecting-scripts-into-tabs}
+Injecting Scripts into Tabs {#injecting-scripts-into-tabs}
 
 There are two ways to inject scripts: using the Tabs API directly or the Scripting API:
 
-### Using chrome.tabs.executeScript (Legacy) {#using-chrome-tabs-executescript}
+Using chrome.tabs.executeScript (Legacy) {#using-chrome-tabs-executescript}
 
 ```ts
 // Inject a script into the active tab
@@ -551,7 +551,7 @@ await chrome.tabs.insertCSS(tab.id!, {
 });
 ```
 
-### Using chrome.scripting (Recommended) {#using-chrome-scripting-recommended}
+Using chrome.scripting (Recommended) {#using-chrome-scripting-recommended}
 
 The Scripting API (available in Manifest V3) is the recommended approach:
 
@@ -588,7 +588,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-### Injecting into Multiple Tabs {#injecting-into-multiple-tabs}
+Injecting into Multiple Tabs {#injecting-into-multiple-tabs}
 
 ```ts
 // Inject the same script into multiple tabs
@@ -603,7 +603,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-### Injecting with World Context {#injecting-with-world-context}
+Injecting with World Context {#injecting-with-world-context}
 
 In Manifest V3, you can inject scripts into the "MAIN" world (same as page) or "ISOLATED" world:
 
@@ -622,9 +622,9 @@ await chrome.scripting.executeScript({
 // Default is "ISOLATED" world (like traditional content scripts)
 ```
 
-## Tab Communication Patterns {#tab-communication-patterns}
+Tab Communication Patterns {#tab-communication-patterns}
 
-### From Extension to Tab {#from-extension-to-tab}
+From Extension to Tab {#from-extension-to-tab}
 
 ```ts
 // Send a message from background/popup to a content script
@@ -647,7 +647,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### From Tab to Extension {#from-tab-to-extension}
+From Tab to Extension {#from-tab-to-extension}
 
 ```ts
 // In the content script, send messages to the extension
@@ -661,7 +661,7 @@ function notifyExtension() {
 }
 ```
 
-### Tab-to-Tab Communication {#tab-to-tab-communication}
+Tab-to-Tab Communication {#tab-to-tab-communication}
 
 ```ts
 // First tab sends to background, which forwards to second tab
@@ -681,7 +681,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-### Long-Lived Connections {#long-lived-connections}
+Long-Lived Connections {#long-lived-connections}
 
 For ongoing communication, use ports:
 
@@ -710,7 +710,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Real-World Example: Popup to Content Script {#real-world-example-popup-to-content-script}
+Real-World Example: Popup to Content Script {#real-world-example-popup-to-content-script}
 
 ```ts
 // popup.ts - Get current tab and send message
@@ -735,17 +735,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-### 1. Use Filtered Listeners {#use-filtered-listeners}
+1. Use Filtered Listeners {#use-filtered-listeners}
 
 ```ts
-// ❌ Bad: Fires for every tab change
+//  Bad: Fires for every tab change
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   // Check condition manually
 });
 
-// ✅ Good: Filter at registration level
+//  Good: Filter at registration level
 chrome.tabs.onUpdated.addListener(
   (tabId, changeInfo, tab) => {
     console.log("Specific URL changed");
@@ -754,13 +754,13 @@ chrome.tabs.onUpdated.addListener(
 );
 ```
 
-### 2. Handle Missing Tab IDs {#handle-missing-tab-ids}
+2. Handle Missing Tab IDs {#handle-missing-tab-ids}
 
 ```ts
-// ❌ Bad: May crash if tab doesn't exist
+//  Bad: May crash if tab doesn't exist
 await chrome.tabs.update(someId, { url: "https://example.com" });
 
-// ✅ Good: Use try-catch or check existence
+//  Good: Use try-catch or check existence
 try {
   await chrome.tabs.update(someId, { url: "https://example.com" });
 } catch (e) {
@@ -774,18 +774,18 @@ if (tabs.length > 0) {
 }
 ```
 
-### 3. Be Mindful of Permissions {#be-mindful-of-permissions}
+3. Be Mindful of Permissions {#be-mindful-of-permissions}
 
 ```ts
-// ❌ Bad: Request all URLs unnecessarily
+//  Bad: Request all URLs unnecessarily
 "permissions": ["tabs", "<all_urls>"]
 
-// ✅ Good: Use host permissions or activeTab
+//  Good: Use host permissions or activeTab
 "permissions": ["activeTab"],
 "host_permissions": ["*://*.example.com/*"]
 ```
 
-### 4. Clean Up Event Listeners {#clean-up-event-listeners}
+4. Clean Up Event Listeners {#clean-up-event-listeners}
 
 ```ts
 // In service workers, listeners are persistent but you should still manage state
@@ -804,20 +804,20 @@ function stopListening() {
 }
 ```
 
-### 5. Use Async/Await Consistently {#use-async-await-consistently}
+5. Use Async/Await Consistently {#use-async-await-consistently}
 
 ```ts
-// ❌ Bad: Mixing callbacks and promises
+//  Bad: Mixing callbacks and promises
 chrome.tabs.query({}, (tabs) => {
   chrome.tabs.create({ url: "https://example.com" }, () => {});
 });
 
-// ✅ Good: Consistent async/await
+//  Good: Consistent async/await
 const tabs = await chrome.tabs.query({});
 await chrome.tabs.create({ url: "https://example.com" });
 ```
 
-## API Reference Summary {#api-reference-summary}
+API Reference Summary {#api-reference-summary}
 
 | Method | Description |
 |--------|-------------|
@@ -840,11 +840,11 @@ await chrome.tabs.create({ url: "https://example.com" });
 | `chrome.tabs.onMoved` | Tab moved |
 | `chrome.tabs.onZoomChange` | Tab zoom changed |
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Tabs API Deep Dive](tabs-api-deep-dive.md) — Comprehensive reference for all Tabs API methods and properties
-- [Tab Management Guide](tab-management.md) — Best practices for building tab management extensions
-- [Content Scripts Guide](content-scripts-guide.md) — Learn how content scripts work with the tabs API
+- [Tabs API Deep Dive](tabs-api-deep detailed look.md). Comprehensive reference for all Tabs API methods and properties
+- [Tab Management Guide](tab-management.md). Best practices for building tab management extensions
+- [Content Scripts Guide](content-scripts-guide.md). Learn how content scripts work with the tabs API
 
 ---
 

@@ -5,7 +5,7 @@
 script-src 'self';
 object-src 'self';
 ```
-MV3 does NOT allow `unsafe-inline`, `unsafe-eval`, or remote script sources. Chrome no longer grants `wasm-unsafe-eval` by default — extensions that use WebAssembly must explicitly add `'wasm-unsafe-eval'` to their `extension_pages` CSP declaration.
+MV3 does NOT allow `unsafe-inline`, `unsafe-eval`, or remote script sources. Chrome no longer grants `wasm-unsafe-eval` by default. extensions that use WebAssembly must explicitly add `'wasm-unsafe-eval'` to their `extension_pages` CSP declaration.
 
 ## Customizing CSP in Manifest {#customizing-csp-in-manifest}
 ```json
@@ -21,19 +21,19 @@ MV3 does NOT allow `unsafe-inline`, `unsafe-eval`, or remote script sources. Chr
 Applies to popup, options page, side panel, any extension HTML.
 
 ### Allowed {#allowed}
-- `'self'` — scripts from extension package
-- `'wasm-unsafe-eval'` — WebAssembly execution
-- `blob:` — blob URLs
-- `filesystem:` — filesystem URLs
+- `'self'`. scripts from extension package
+- `'wasm-unsafe-eval'`. WebAssembly execution
+- `blob:`. blob URLs
+- `filesystem:`. filesystem URLs
 
 ### NOT Allowed (MV3) {#not-allowed-mv3}
-- `'unsafe-inline'` — inline scripts blocked
-- `'unsafe-eval'` — eval() blocked
-- Remote URLs (`https://cdn.example.com`) — remote scripts blocked
+- `'unsafe-inline'`. inline scripts blocked
+- `'unsafe-eval'`. eval() blocked
+- Remote URLs (`https://cdn.example.com`). remote scripts blocked
 - `data:` URLs for scripts
 
 ## Sandbox Pages {#sandbox-pages}
-Sandbox pages have relaxed CSP — can use `eval()` and inline scripts.
+Sandbox pages have relaxed CSP. can use `eval()` and inline scripts.
 ```json
 {
   "sandbox": {
@@ -44,16 +44,16 @@ Sandbox pages have relaxed CSP — can use `eval()` and inline scripts.
   }
 }
 ```
-**Limitations**: Sandbox pages cannot use `chrome.*` APIs. Communicate via `postMessage`.
+Limitations: Sandbox pages cannot use `chrome.*` APIs. Communicate via `postMessage`.
 
 ## Content Script CSP {#content-script-csp}
-Content scripts are subject to the **page's CSP**, not the extension's. Implications:
+Content scripts are subject to the page's CSP, not the extension's. Implications:
 - `eval()` may be blocked by the page
 - Inline event handlers may not work
 - Inject scripts via DOM rather than inline
 
 ```typescript
-// WRONG — may violate page CSP
+// WRONG. may violate page CSP
 element.setAttribute('onclick', 'handleClick()');
 
 // CORRECT
@@ -125,7 +125,7 @@ const worker = new Worker('worker.js');
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
-// These libraries work fine under default CSP — no eval needed
+// These libraries work fine under default CSP. no eval needed
 ```
 
 ## MV2 vs MV3 CSP Differences {#mv2-vs-mv3-csp-differences}

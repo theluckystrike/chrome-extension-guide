@@ -4,10 +4,10 @@
 Analytics and telemetry are essential for understanding how users interact with your Chrome extension. This guide covers privacy-respecting analytics design, integration patterns, custom backend solutions, and compliance requirements.
 
 ## 1. Privacy-Respecting Analytics Design
-- **Data minimization**: Collect only what you need
-- **Anonymization by default**: Never send identifiable data without consent
-- **Consent-first**: Obtain explicit user consent before collecting telemetry
-- **Local-first**: Process data locally when possible
+- Data minimization: Collect only what you need
+- Anonymization by default: Never send identifiable data without consent
+- Consent-first: Obtain explicit user consent before collecting telemetry
+- Local-first: Process data locally when possible
 
 ## 2. Google Analytics 4 Integration
 ```bash

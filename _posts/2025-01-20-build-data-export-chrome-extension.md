@@ -19,7 +19,7 @@ The project will teach you essential Chrome extension development skills includi
 
 ---
 
-## Why Build a Data Export Extension {#why-build-data-export-extension}
+Why Build a Data Export Extension {#why-build-data-export-extension}
 
 Data export extensions are among the most useful tools in the Chrome Web Store ecosystem. They bridge the gap between web content and offline data analysis, enabling users to transform dynamic web pages into structured datasets. There are several compelling reasons to build this type of extension.
 
@@ -31,7 +31,7 @@ Third, the technical challenges involved are manageable for developers at interm
 
 ---
 
-## Project Overview and Features {#project-overview}
+Project Overview and Features {#project-overview}
 
 Our data export extension will include a comprehensive feature set designed for maximum utility. First, intelligent data detection that automatically identifies tabular data, lists, and structured elements on any webpage. Second, flexible format selection allowing users to choose between CSV, JSON, and PDF export formats. Third, column selection capability enabling users to choose which fields to include in the export. Fourth, preview functionality showing a sample of the data before export. Fifth, batch export support for exporting multiple pages of data. Sixth, export history storing previous exports for quick access. Seventh, custom delimiter options for CSV exports including comma, semicolon, and tab delimiters. Eighth, encoding selection supporting UTF-8 and other common encodings.
 
@@ -39,7 +39,7 @@ This feature set balances sophistication with usability. The extension will auto
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file organization to function correctly. Let us set up our project directory first. Create a new folder named data-export-extension in your development workspace. Inside this folder, we will create the following files and directories.
 
@@ -92,9 +92,9 @@ This manifest declares the permissions our extension needs. The storage permissi
 
 ---
 
-## Building the Content Script for Data Detection {#content-script-data-detection}
+Building the Content Script for Data Detection {#content-script-data-detection}
 
-The content script is the heart of our data export extension. It runs in the context of each webpage and is responsible for detecting extractable data, analyzing the page structure, and preparing data for export. Let us create a robust content script that can handle various data structures.
+The content script is the heart of our data export extension. It runs in the context of each webpage and is responsible for detecting extractable data, analyzing the page structure, and preparing data for export. Let us create a solid content script that can handle various data structures.
 
 ```javascript
 // content.js - Data detection and extraction
@@ -203,7 +203,7 @@ The message listener handles communication between the popup and content script.
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup interface is what users interact with when they click our extension icon. It should provide a clean, intuitive interface for selecting data and choosing export options. Let us create the HTML structure first.
 
@@ -277,7 +277,7 @@ This HTML structure provides a logical flow for the user. The detected data sect
 
 ---
 
-## Styling the Popup {#popup-styling}
+Styling the Popup {#popup-styling}
 
 The popup CSS should be clean, professional, and easy to read. Users should be able to quickly identify data and understand their options. Let us create the stylesheet.
 
@@ -450,7 +450,7 @@ These styles create a clean, modern interface that follows Chrome extension desi
 
 ---
 
-## Implementing Export Logic {#export-logic}
+Implementing Export Logic {#export-logic}
 
 The popup JavaScript coordinates the entire export process. It requests data from the content script, processes it according to user selections, and triggers downloads. Let us create the main popup script.
 
@@ -690,7 +690,7 @@ This popup script handles the complete export workflow. It communicates with the
 
 ---
 
-## Adding PDF Export Support {#pdf-export}
+Adding PDF Export Support {#pdf-export}
 
 For PDF export, we need to integrate a library. The simplest approach is to use jsPDF, a popular JavaScript PDF generation library. Let us update our manifest to include the library and modify the popup to support PDF generation.
 
@@ -765,7 +765,7 @@ This PDF implementation creates formatted documents with headers, metadata, and 
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before deploying your extension, thorough testing ensures everything works correctly. Load your extension in Chrome by navigating to chrome://extensions, enabling Developer Mode, and clicking Load Unpacked. Select your extension folder to install it.
 
@@ -775,7 +775,7 @@ Pay special attention to error handling. What happens when no data is detected? 
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store. First, create a developer account at the Chrome Web Store if you do not have one. Package your extension by going to chrome://extensions and clicking Pack Extension. Select your extension folder and optionally specify a private key.
 
@@ -787,7 +787,7 @@ Submit your extension for review. Google reviews typically complete within a few
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have built a complete data export Chrome extension capable of detecting, extracting, and exporting web data in multiple formats. This extension demonstrates core Chrome extension development concepts including content script injection, message passing, file generation, and download handling.
 
@@ -798,7 +798,7 @@ Consider extending this project with additional features. Add support for schedu
 Building useful tools for yourself and others is one of the most rewarding aspects of extension development. Your data export extension solves real problems for researchers, marketers, and data analysts. With further development and refinement, it has the potential to become a valuable asset in the Chrome Web Store.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 *Built by theluckystrike at zovo.one*

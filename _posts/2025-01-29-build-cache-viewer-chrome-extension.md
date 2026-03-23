@@ -13,15 +13,15 @@ canonical_url: "https://bestchromeextensions.com/2025/01/29/build-cache-viewer-c
 
 Browser caching is one of the most critical performance optimization techniques used by websites worldwide. When you visit a webpage, Chrome stores various resources locally in its cache to speed up subsequent visits. However, as developers and power users, we often need visibility into what is being cached, how large these cached files are, and how to manage them effectively. This is where a custom Cache Viewer Chrome Extension becomes an invaluable tool.
 
-In this comprehensive guide, we will walk through building a fully functional Cache Viewer extension using Manifest V3. Whether you want to inspect cached images, analyze JavaScript files, debug loading issues, or simply understand how caching works in Chrome, this tutorial provides everything you need to create a powerful cache inspection utility.
+we will walk through building a fully functional Cache Viewer extension using Manifest V3. Whether you want to inspect cached images, analyze JavaScript files, debug loading issues, or simply understand how caching works in Chrome, this tutorial provides everything you need to create a powerful cache inspection utility.
 
 ---
 
-## Understanding Browser Cache in Chrome {#understanding-browser-cache}
+Understanding Browser Cache in Chrome {#understanding-browser-cache}
 
 Before diving into the implementation, it is essential to understand how browser caching works in Chrome and what exactly we can access through extension APIs.
 
-### How Chrome Stores Cache Data
+How Chrome Stores Cache Data
 
 Chrome uses several caching mechanisms to store web content locally. The primary cache types include the HTTP cache, which stores responses based on HTTP headers like Cache-Control and ETag, the disk cache, which persists cached content across browser sessions, and the memory cache, which stores recently accessed resources for extremely fast retrieval.
 
@@ -29,7 +29,7 @@ When you visit a website, Chrome stores various types of resources in the cache,
 
 The Chrome cache is stored in the user's profile directory, typically in a folder named Cache or Code Cache. While extensions cannot directly access this raw cache directory due to sandboxing restrictions, Chrome provides the chrome.cache API that allows authorized extensions to interact with the cache storage.
 
-### What Data Can We Access
+What Data Can We Access
 
 Through the chrome.cache API, extensions can access several types of cache information. You can retrieve the size of the cache storage, read individual cached responses including headers and content, search for specific cached entries based on URLs or patterns, and in some cases, remove specific items from the cache.
 
@@ -37,11 +37,11 @@ It is important to note that the chrome.cache API has certain limitations. Not a
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup}
+Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest file. Let us create a proper Manifest V3 configuration for our Cache Viewer extension.
 
-### Creating the Manifest
+Creating the Manifest
 
 Create a new directory for your extension and add a manifest.json file with the following configuration:
 
@@ -74,33 +74,33 @@ Create a new directory for your extension and add a manifest.json file with the 
 
 The permissions we include are carefully selected. The storage permission allows us to save user preferences and extension state. The tabs permission provides access to tab information, which helps us understand which pages have been cached. The host permissions with `<all_urls>` enable the extension to access cache information across all websites.
 
-### Setting Up the Extension Directory
+Setting Up the Extension Directory
 
 Create the following directory structure for your Cache Viewer extension:
 
 ```
 cache-viewer-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-├── content.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ background.js
+ content.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 For icons, you can create simple placeholder PNG files or use any icon creation tool to generate appropriately sized images. The icons directory must exist even if you use placeholder images for development.
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the primary user interface for our Cache Viewer extension. Let us create a clean, functional interface that displays cache information and provides management capabilities.
 
-### HTML Structure
+HTML Structure
 
 Create popup.html with the following structure:
 
@@ -161,7 +161,7 @@ Create popup.html with the following structure:
 
 This HTML structure provides a complete user interface with header statistics, action buttons, a cache entry list, and filtering capabilities. The design is clean and focused on usability.
 
-### Styling the Popup
+Styling the Popup
 
 Create popup.css to style the interface:
 
@@ -353,11 +353,11 @@ The CSS provides a modern, clean design with proper spacing, colors, and visual 
 
 ---
 
-## Implementing the Extension Logic {#extension-logic}
+Implementing the Extension Logic {#extension-logic}
 
 Now let us implement the JavaScript logic that powers our Cache Viewer extension.
 
-### Background Service Worker
+Background Service Worker
 
 Create background.js to handle extension lifecycle and caching:
 
@@ -472,7 +472,7 @@ async function getTabCache(tabId) {
 
 The background service worker handles all the heavy lifting and communicates with the popup through message passing. This architecture follows Chrome's best practices for extension development.
 
-### Popup Logic
+Popup Logic
 
 Create popup.js to handle user interactions:
 
@@ -646,17 +646,17 @@ This JavaScript handles all user interactions, communicates with the background 
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Now that we have a basic working extension, let us explore several advanced features that can make your Cache Viewer even more powerful.
 
-### Cache Analysis Dashboard
+Cache Analysis Dashboard
 
 Consider adding a visual dashboard that displays cache statistics over time. You can use Chart.js or a similar library to create line graphs showing cache usage trends, pie charts displaying cache breakdown by content type, and bar charts comparing cache sizes across different domains.
 
 To implement this, you would extend the background.js to store historical data in chrome.storage.local, then create a new popup tab or modal that displays these visualizations.
 
-### Export Functionality
+Export Functionality
 
 Power users often need to export cache data for further analysis. Implement an export feature that allows users to download cache information as JSON, CSV, or a formatted report. This is particularly useful for debugging production issues or auditing cache behavior.
 
@@ -675,25 +675,25 @@ function exportCacheData(entries) {
 }
 ```
 
-### Real-time Monitoring
+Real-time Monitoring
 
 Implement a real-time cache monitoring feature that updates the display when new resources are cached. You can achieve this by periodically polling the cache API or by using Chrome's webRequest API to detect when new resources are loaded.
 
-### Cache Prewarming
+Cache Prewarming
 
 Advanced users might want to prewarm the cache for frequently visited sites. Implement a feature that allows users to specify URLs to preload into the cache, improving perceived load times for those sites.
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing is essential to ensure everything works correctly.
 
-### Loading the Extension Locally
+Loading the Extension Locally
 
 To test your extension in Chrome, navigate to chrome://extensions/, enable Developer mode using the toggle in the top right corner, click the Load unpacked button, and select your extension directory. The extension will appear in your toolbar, and you can test all the functionality.
 
-### Debugging Tips
+Debugging Tips
 
 If you encounter issues, use Chrome's developer tools to debug your extension. Right-click anywhere in your extension popup and select Inspect to open the popup's developer tools. You can also access background script logs through the Service Workers section in chrome://extensions/.
 
@@ -701,7 +701,7 @@ Common issues include permission errors, which you can resolve by checking your 
 
 ---
 
-## Publishing to Chrome Web Store {#publishing}
+Publishing to Chrome Web Store {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store. Create a zip file of your extension directory, excluding unnecessary files like .git or node_modules. Navigate to the Chrome Web Store Developer Dashboard, create a new item, upload your zip file, fill in the store listing details including description, screenshots, and category, and submit for review.
 
@@ -709,9 +709,9 @@ Make sure to follow Chrome's policies regarding extensions and provide accurate 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Congratulations! You have now built a complete Cache Viewer Chrome Extension from scratch. This extension provides valuable insights into browser caching behavior, helping developers debug performance issues and understand how their websites utilize cache storage.
+Congratulations! You have now built a complete Cache Viewer Chrome Extension from scratch. This extension provides valuable insights into browser caching behavior, helping developers debug performance issues and understand how their websites use cache storage.
 
 The extension demonstrates several important Chrome extension development concepts, including Manifest V3 configuration, popup interface design, background service worker architecture, message passing between components, and user interaction handling.
 

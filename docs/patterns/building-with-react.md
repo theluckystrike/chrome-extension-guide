@@ -1,91 +1,91 @@
 ---
 layout: default
-title: "Chrome Extension Building With React — Best Practices"
+title: "Chrome Extension Building With React. Best Practices"
 description: "Build Chrome extensions with React."
 canonical_url: "https://bestchromeextensions.com/patterns/building-with-react/"
 ---
 
 # Building Chrome Extensions with React
 
-## Overview {#overview}
+Overview {#overview}
 
-React is a natural fit for Chrome extension UIs — popups, options pages, side panels, and even content script overlays are all component trees that benefit from declarative rendering. But extension projects have unique build requirements: multiple HTML entry points, separate service worker bundles, Shadow DOM mounting, and Chrome API integration that doesn't fit standard React patterns. This guide covers practical patterns for structuring, building, and optimizing a React-based Chrome extension.
+React is a natural fit for Chrome extension UIs. popups, options pages, side panels, and even content script overlays are all component trees that benefit from declarative rendering. But extension projects have unique build requirements: multiple HTML entry points, separate service worker bundles, Shadow DOM mounting, and Chrome API integration that doesn't fit standard React patterns. This guide covers practical patterns for structuring, building, and optimizing a React-based Chrome extension.
 
 ---
 
-## Extension + React Architecture {#extension-react-architecture}
+Extension + React Architecture {#extension-react-architecture}
 
 ```
-┌───────────────────────────────────────────────────┐
-│                  Chrome Extension                  │
-│                                                    │
-│  ┌──────────┐  ┌──────────┐  ┌───────────────┐   │
-│  │  Popup   │  │ Options  │  │  Side Panel   │   │
-│  │  (React) │  │  (React) │  │   (React)     │   │
-│  └────┬─────┘  └────┬─────┘  └──────┬────────┘   │
-│       │              │               │             │
-│       └──────┬───────┘───────────────┘             │
-│              │                                     │
-│     ┌────────▼────────┐    ┌────────────────┐     │
-│     │ Shared Components│    │  Background SW │     │
-│     │ Hooks / Context  │    │  (no React)    │     │
-│     └─────────────────┘    └────────────────┘     │
-│                                                    │
-│  ┌────────────────────────────────────────────┐   │
-│  │  Content Script (React in Shadow DOM)       │   │
-│  └────────────────────────────────────────────┘   │
-└───────────────────────────────────────────────────┘
+
+                  Chrome Extension                  
+                                                    
+         
+    Popup      Options      Side Panel      
+    (React)     (React)      (React)        
+         
+                                                 
+                    
+                                                   
+              
+      Shared Components      Background SW      
+      Hooks / Context        (no React)         
+              
+                                                    
+     
+    Content Script (React in Shadow DOM)          
+     
+
 ```
 
 Each UI surface is a separate React root with its own entry point. They share components, hooks, and context providers through a common `src/shared/` directory. The background service worker has no DOM and does not use React.
 
 ---
 
-## Pattern 1: Project Structure {#pattern-1-project-structure}
+Pattern 1: Project Structure {#pattern-1-project-structure}
 
 Organize code by entry point, with shared code extracted to a common directory:
 
 ```
 my-extension/
-├── public/
-│   ├── manifest.json
-│   ├── popup.html
-│   ├── options.html
-│   ├── sidepanel.html
-│   └── icons/
-├── src/
-│   ├── background/
-│   │   └── index.ts              # Service worker (no React)
-│   ├── popup/
-│   │   ├── index.tsx             # React root for popup
-│   │   ├── App.tsx
-│   │   └── components/
-│   ├── options/
-│   │   ├── index.tsx             # React root for options
-│   │   ├── App.tsx
-│   │   └── components/
-│   ├── sidepanel/
-│   │   ├── index.tsx             # React root for side panel
-│   │   └── App.tsx
-│   ├── content/
-│   │   ├── index.tsx             # Content script mount
-│   │   └── Overlay.tsx
-│   └── shared/
-│       ├── components/           # Shared UI components
-│       │   ├── Button.tsx
-│       │   ├── StatusBadge.tsx
-│       │   └── SettingsForm.tsx
-│       ├── hooks/                # Chrome API hooks
-│       │   ├── useStorage.ts
-│       │   ├── useTab.ts
-│       │   └── useMessage.ts
-│       ├── context/
-│       │   └── StorageContext.tsx
-│       └── lib/
-│           └── chrome-api.ts
-├── vite.config.ts
-├── tsconfig.json
-└── package.json
+ public/
+    manifest.json
+    popup.html
+    options.html
+    sidepanel.html
+    icons/
+ src/
+    background/
+       index.ts              # Service worker (no React)
+    popup/
+       index.tsx             # React root for popup
+       App.tsx
+       components/
+    options/
+       index.tsx             # React root for options
+       App.tsx
+       components/
+    sidepanel/
+       index.tsx             # React root for side panel
+       App.tsx
+    content/
+       index.tsx             # Content script mount
+       Overlay.tsx
+    shared/
+        components/           # Shared UI components
+           Button.tsx
+           StatusBadge.tsx
+           SettingsForm.tsx
+        hooks/                # Chrome API hooks
+           useStorage.ts
+           useTab.ts
+           useMessage.ts
+        context/
+           StorageContext.tsx
+        lib/
+            chrome-api.ts
+ vite.config.ts
+ tsconfig.json
+ package.json
 ```
 
 Each entry point HTML file loads its own script bundle:
@@ -125,7 +125,7 @@ root.render(
 
 ---
 
-## Pattern 2: Vite Configuration for Multiple Entry Points {#pattern-2-vite-configuration-for-multiple-entry-points}
+Pattern 2: Vite Configuration for Multiple Entry Points {#pattern-2-vite-configuration-for-multiple-entry-points}
 
 Vite handles multiple entry points cleanly. Configure it to build each UI surface and the background worker as separate bundles:
 
@@ -163,10 +163,10 @@ export default defineConfig({
 });
 ```
 
-The background service worker needs special handling — it must be a single file without dynamic imports (service workers don't support them in MV3):
+The background service worker needs special handling. it must be a single file without dynamic imports (service workers don't support them in MV3):
 
 ```ts
-// vite.config.ts — additional config for background
+// vite.config.ts. additional config for background
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -227,7 +227,7 @@ The manifest references the built output:
 
 ---
 
-## Pattern 3: Shared Components Across Surfaces {#pattern-3-shared-components-across-surfaces}
+Pattern 3: Shared Components Across Surfaces {#pattern-3-shared-components-across-surfaces}
 
 Extract reusable components into `src/shared/` so popup, options, and side panel stay consistent:
 
@@ -371,7 +371,7 @@ export function App() {
 
 {% raw %}
 ```tsx
-// src/options/App.tsx — same components, different layout
+// src/options/App.tsx. same components, different layout
 import { SettingsForm } from "@shared/components/SettingsForm";
 
 export function App() {
@@ -387,7 +387,7 @@ export function App() {
 
 ---
 
-## Pattern 4: React Context for chrome.storage Integration {#pattern-4-react-context-for-chromestorage-integration}
+Pattern 4: React Context for chrome.storage Integration {#pattern-4-react-context-for-chromestorage-integration}
 
 Create a context provider that syncs React state with `chrome.storage` and listens for external changes (from other extension pages or the background):
 
@@ -473,7 +473,7 @@ export function StorageProvider({
   const set = useCallback(
     async (key: string, value: unknown) => {
       await storage.set({ [key]: value });
-      // Optimistic update — onChanged listener will confirm
+      // Optimistic update. onChanged listener will confirm
       setData((prev) => ({ ...prev, [key]: value }));
     },
     [storage]
@@ -506,7 +506,7 @@ export function useStorageContext(): StorageContextValue {
 
 ---
 
-## Pattern 5: Custom Hooks for Chrome APIs {#pattern-5-custom-hooks-for-chrome-apis}
+Pattern 5: Custom Hooks for Chrome APIs {#pattern-5-custom-hooks-for-chrome-apis}
 
 Wrap Chrome APIs in hooks that handle lifecycle, cleanup, and error states:
 
@@ -638,7 +638,7 @@ export function useSendMessage() {
 
 ---
 
-## Pattern 6: Content Script React Mounting with Shadow DOM {#pattern-6-content-script-react-mounting-with-shadow-dom}
+Pattern 6: Content Script React Mounting with Shadow DOM {#pattern-6-content-script-react-mounting-with-shadow-dom}
 
 Content scripts need isolation from the host page's styles. Mount React inside a Shadow DOM container:
 
@@ -763,12 +763,12 @@ export function Overlay({ onClose }: OverlayProps) {
 
 ---
 
-## Pattern 7: Hot Module Reload During Development {#pattern-7-hot-module-reload-during-development}
+Pattern 7: Hot Module Reload During Development {#pattern-7-hot-module-reload-during-development}
 
 Vite's HMR works out of the box for popup and options pages when served via the dev server. Content scripts and service workers need extra handling:
 
 ```ts
-// vite.config.ts — dev server configuration
+// vite.config.ts. dev server configuration
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -836,7 +836,7 @@ watchNonHmrEntries();
 Add a content script auto-reload mechanism for development:
 
 ```ts
-// src/content/dev-reload.ts — only included in dev builds
+// src/content/dev-reload.ts. only included in dev builds
 
 if (import.meta.env.DEV) {
   // Re-inject content script when the background sends a reload signal
@@ -860,12 +860,12 @@ if (import.meta.env.DEV) {
 
 ---
 
-## Pattern 8: Production Build Optimization {#pattern-8-production-build-optimization}
+Pattern 8: Production Build Optimization {#pattern-8-production-build-optimization}
 
 Optimize the production bundle for Chrome Web Store distribution:
 
 ```ts
-// vite.config.ts — production optimizations
+// vite.config.ts. production optimizations
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -915,11 +915,11 @@ export default defineConfig({
 
 Key optimizations:
 
-- **Shared vendor chunk**: React and ReactDOM are loaded once and shared across popup, options, and side panel via a `vendor-react` chunk
-- **Shared code chunk**: Components in `src/shared/` are bundled once
-- **Flat bundles for SW and content**: Background and content scripts must be self-contained since service workers don't support dynamic imports and content scripts need predictable file names
-- **No source maps in production**: Reduces package size for Chrome Web Store submission
-- **Console stripping**: Removes debug logging from the shipped bundle
+- Shared vendor chunk: React and ReactDOM are loaded once and shared across popup, options, and side panel via a `vendor-react` chunk
+- Shared code chunk: Components in `src/shared/` are bundled once
+- Flat bundles for SW and content: Background and content scripts must be self-contained since service workers don't support dynamic imports and content scripts need predictable file names
+- No source maps in production: Reduces package size for Chrome Web Store submission
+- Console stripping: Removes debug logging from the shipped bundle
 
 Add a build verification script:
 
@@ -967,7 +967,7 @@ console.log("Build verification passed.");
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -980,7 +980,7 @@ console.log("Build verification passed.");
 | HMR development | Fast feedback loop for popup/options, watch mode for content/background |
 | Production optimization | Code splitting, vendor chunks, and build verification |
 
-React and Chrome extensions work well together once you set up the build pipeline correctly. The critical insight is that each UI surface is its own React application — they share code through imports, not through a single React tree. Keep your background service worker React-free, mount content script UIs in Shadow DOM, and let Vite handle the multi-entry bundling.
+React and Chrome extensions work well together once you set up the build pipeline correctly. The critical insight is that each UI surface is its own React application. they share code through imports, not through a single React tree. Keep your background service worker React-free, mount content script UIs in Shadow DOM, and let Vite handle the multi-entry bundling.
 -e 
 ---
 

@@ -26,7 +26,7 @@ Chrome's internal pages use the `chrome://` URL scheme. These are built-in pages
 
 ### Important Limitations {#important-limitations}
 
-Extensions **cannot** inject content scripts into `chrome://` pages. This is a deliberate security restriction. You also cannot use `chrome://` URLs in the `matches` field of content script declarations.
+Extensions cannot inject content scripts into `chrome://` pages. This is a deliberate security restriction. You also cannot use `chrome://` URLs in the `matches` field of content script declarations.
 
 ```json
 // This will NOT work
@@ -100,7 +100,7 @@ Chrome supports several `about:` URLs for built-in pages:
 
 ### Special Case: about:blank {#special-case-aboutblank}
 
-**Important**: Content scripts **can** run on `about:blank` pages. This makes it useful for extensions that need to create blank pages for intermediate processing or when using the page as a canvas for content script operations.
+Content scripts can run on `about:blank` pages. This makes it useful for extensions that need to create blank pages for intermediate processing or when using the page as a canvas for content script operations.
 
 ## data: URLs {#data-urls}
 
@@ -108,8 +108,8 @@ Data URLs embed content directly in the URL itself using the format `data:{mime-
 
 ### Limitations for Extensions {#limitations-for-extensions}
 
-- Content scripts **do NOT** run on `data:` URLs
-- You **cannot** navigate to `data:` URLs using `chrome.tabs.update()`
+- Content scripts do NOT run on `data:` URLs
+- You cannot navigate to `data:` URLs using `chrome.tabs.update()`
 - However, `data:` URLs can be used within extension pages for:
   - Inline images
   - Iframe sources
@@ -153,8 +153,8 @@ Accessing local files requires special handling in Chrome extensions.
 
 ### Requirements {#requirements}
 
-- The extension must have **"Allow access to file URLs"** enabled in `chrome://extensions`
-- This permission is **not enabled by default** for security reasons
+- The extension must have "Allow access to file URLs" enabled in `chrome://extensions`
+- This permission is not enabled by default for security reasons
 - Content scripts can match `file://` URLs when the appropriate permission is granted
 
 ```json
@@ -188,7 +188,7 @@ Understanding what your match patterns can and cannot match is critical for prop
 
 ### What `<all_urls>` Does NOT Match {#what-all-urls-does-not-match}
 
-The `<all_urls>` special value does **NOT** match:
+The `<all_urls>` special value does NOT match:
 
 - `chrome://*` URLs
 - `chrome-extension://` URLs
@@ -196,7 +196,7 @@ The `<all_urls>` special value does **NOT** match:
 - `data:` URLs
 - `blob:` URLs
 
-Note: `<all_urls>` **does** match `file://` URLs, but the user must enable "Allow access to file URLs" for the extension. The `*://*/*` pattern matches only `http` and `https` URLs (not `file://`).
+`<all_urls>` does match `file://` URLs, but the user must enable "Allow access to file URLs" for the extension. The `*://*/*` pattern matches only `http` and `https` URLs (not `file://`).
 
 ### Recommended Patterns {#recommended-patterns}
 
@@ -235,8 +235,8 @@ Note: `<all_urls>` **does** match `file://` URLs, but the user must enable "Allo
 
 ### Special Cases {#special-cases}
 
-- **about:blank**: Accessible and can run content scripts
-- **Your own extension**: Can always access `chrome-extension://` your own extension's resources
+- about:blank: Accessible and can run content scripts
+- Your own extension: Can always access `chrome-extension://` your own extension's resources
 
 ## Cross-References {#cross-references}
 

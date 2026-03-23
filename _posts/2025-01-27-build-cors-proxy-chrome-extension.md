@@ -11,59 +11,59 @@ canonical_url: "https://bestchromeextensions.com/2025/01/27/build-cors-proxy-chr
 
 # Build a CORS Proxy Chrome Extension: Complete Developer's Guide
 
-Cross-Origin Resource Sharing (CORS) is one of the most common pain points for web developers. Whether you're building a development tool, scraping data, or integrating APIs, CORS restrictions can bring your project to a halt. The good news? You can solve this with a CORS proxy Chrome extension that you build yourself.
+Cross-Origin Resource Sharing (CORS) is one of the most common problems for web developers. Whether you're building a development tool, scraping data, or integrating APIs, CORS restrictions can bring your project to a halt. The good news? You can solve this with a CORS proxy Chrome extension that you build yourself.
 
-In this comprehensive guide, we'll walk through the entire process of creating a production-ready CORS proxy extension using Manifest V3. By the end, you'll have a fully functional extension that can bypass CORS restrictions directly from your browser, a valuable tool for any developer's toolkit.
+we'll walk through the entire process of creating a production-ready CORS proxy extension using Manifest V3. By the end, you'll have a fully functional extension that can bypass CORS restrictions directly from your browser, a valuable tool for any developer's toolkit.
 
 ---
 
-## Understanding CORS and Why You Need a Proxy {#understanding-cors}
+Understanding CORS and Why You Need a Proxy {#understanding-cors}
 
 Before we dive into code, let's establish a solid understanding of what CORS is and why a proxy extension is so useful.
 
-### What is CORS?
+What is CORS?
 
 Cross-Origin Resource Sharing (CORS) is a security mechanism implemented by web browsers. It restricts web pages from making requests to a different domain, protocol, or port than the one that served the web page. This is a fundamental security feature designed to prevent malicious websites from making unauthorized requests on behalf of users.
 
 When your JavaScript code running on `example.com` tries to fetch data from `api.otherdomain.com`, the browser enforces the Same-Origin Policy. If `api.otherdomain.com` doesn't explicitly allow requests from `example.com` through CORS headers, the request fails with a CORS error.
 
-### Common CORS Error Scenarios
+Common CORS Error Scenarios
 
 Developers encounter CORS errors in many situations:
 
-1. **Local Development**: You're running a React app on localhost:3000 and trying to fetch from localhost:5000
-2. **API Integration**: Third-party APIs don't include your domain in their allowed origins
-3. **Web Scraping**: You want to fetch data from websites that don't enable CORS
-4. **Testing**: You're testing APIs locally that are designed for production domains
+1. Local Development: You're running a React app on localhost:3000 and trying to fetch from localhost:5000
+2. API Integration: Third-party APIs don't include your domain in their allowed origins
+3. Web Scraping: You want to fetch data from websites that don't enable CORS
+4. Testing: You're testing APIs locally that are designed for production domains
 
-### Why a Chrome Extension?
+Why a Chrome Extension?
 
 A CORS proxy Chrome extension offers several advantages over traditional proxy solutions:
 
-- **No Server Required**: The extension handles everything locally in your browser
-- **Easy to Distribute**: Users can install it directly from the Chrome Web Store
-- **Always Available**: It's just a click away in your browser toolbar
-- **Privacy-Focused**: Data stays on your machine rather than going through a third-party proxy server
+- No Server Required: The extension handles everything locally in your browser
+- Easy to Distribute: Users can install it directly from the Chrome Web Store
+- Always Available: It's just a click away in your browser toolbar
+- Privacy-Focused: Data stays on your machine rather than going through a third-party proxy server
 
 ---
 
-## Architecture of Our CORS Proxy Extension {#architecture}
+Architecture of Our CORS Proxy Extension {#architecture}
 
 Our extension will work by intercepting requests and routing them through a proxy endpoint. Here's the high-level architecture:
 
-1. **Background Service Worker**: Handles the core proxy logic and manages requests
-2. **Popup UI**: Allows users to toggle the proxy on/off and configure settings
-3. **Content Scripts**: Can inject the proxy URL into page scripts automatically
+1. Background Service Worker: Handles the core proxy logic and manages requests
+2. Popup UI: Allows users to toggle the proxy on/off and configure settings
+3. Content Scripts: Can inject the proxy URL into page scripts automatically
 
 For this implementation, we'll use a public CORS proxy service (like cors-anywhere or your own proxy server) to handle the actual proxying. This keeps our extension lightweight while providing full functionality.
 
 ---
 
-## Step-by-Step Implementation {#implementation}
+Step-by-Step Implementation {#implementation}
 
 Let's build the extension! We'll create each file systematically.
 
-### Step 1: Manifest Configuration (manifest.json)
+Step 1: Manifest Configuration (manifest.json)
 
 Every Chrome extension needs a manifest file. We'll use Manifest V3, which is the current standard:
 
@@ -101,11 +101,11 @@ Every Chrome extension needs a manifest file. We'll use Manifest V3, which is th
 ```
 
 Key points about this manifest:
-- **host_permissions**: We need access to all URLs since CORS affects any website
-- **storage**: To save user preferences (proxy enabled/disabled)
-- **scripting**: To inject content scripts that modify requests
+- host_permissions: We need access to all URLs since CORS affects any website
+- storage: To save user preferences (proxy enabled/disabled)
+- scripting: To inject content scripts that modify requests
 
-### Step 2: Background Service Worker (background.js)
+Step 2: Background Service Worker (background.js)
 
 The background service worker is the brain of our extension. It handles the toggle state and communicates with the popup:
 
@@ -191,7 +191,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Step 3: Popup Interface (popup.html and popup.css)
+Step 3: Popup Interface (popup.html and popup.css)
 
 The popup provides a simple UI for users to toggle the proxy:
 
@@ -364,7 +364,7 @@ h1 {
 }
 ```
 
-### Step 4: Popup Logic (popup.js)
+Step 4: Popup Logic (popup.js)
 
 ```javascript
 // popup.js - Popup UI Logic
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Step 5: Content Script for Automatic Proxying (content.js)
+Step 5: Content Script for Automatic Proxying (content.js)
 
 This content script intercepts fetch and XMLHttpRequest to automatically route requests through the proxy:
 
@@ -527,7 +527,7 @@ console.log('[CORS Bypass] Content script loaded, proxy enabled:', proxyEnabled)
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now let's test our extension:
 
@@ -549,45 +549,45 @@ fetch('https://api.github.com/users/theluckystrike')
 
 ---
 
-## Deployment to Chrome Web Store {#deployment}
+Deployment to Chrome Web Store {#deployment}
 
 When you're ready to distribute your extension:
 
-1. **Create a zip file** of your extension folder (excluding development files)
-2. **Go to Chrome Web Store Developer Dashboard**
-3. **Create a new item** and upload your zip file
-4. **Fill in** the store listing (description, screenshots, category)
-5. **Submit for review**
+1. Create a zip file of your extension folder (excluding development files)
+2. Go to Chrome Web Store Developer Dashboard
+3. Create a new item and upload your zip file
+4. Fill in the store listing (description, screenshots, category)
+5. Submit for review
 
 Your extension will be reviewed by Google (usually within a few hours to a few days).
 
 ---
 
-## Advanced Features to Consider {#advanced}
+Advanced Features to Consider {#advanced}
 
 Here are some enhancements you might want to add:
 
-1. **Proxy Health Checks**: Automatically detect when a proxy is down and switch to backup
-2. **Request Logging**: Show a log of proxied requests for debugging
-3. **Whitelist/Blacklist**: Allow users to specify which domains should be proxied
-4. **Keyboard Shortcuts**: Add Chrome commands for quick toggle
-5. **Analytics**: Track usage patterns to improve the extension
+1. Proxy Health Checks: Automatically detect when a proxy is down and switch to backup
+2. Request Logging: Show a log of proxied requests for debugging
+3. Whitelist/Blacklist: Allow users to specify which domains should be proxied
+4. Keyboard Shortcuts: Add Chrome commands for quick toggle
+5. Analytics: Track usage patterns to improve the extension
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Building a CORS proxy Chrome extension is a practical project that solves real-world problems. In this guide, we covered:
+Building a CORS proxy Chrome extension is a practical project that solves real-world problems. we covered:
 
-- **Understanding CORS** and why it exists
-- **Manifest V3 configuration** with proper permissions
-- **Background service worker** for state management
-- **Popup UI** for user interaction
-- **Content script** that intercepts fetch and XHR requests
+- Understanding CORS and why it exists
+- Manifest V3 configuration with proper permissions
+- Background service worker for state management
+- Popup UI for user interaction
+- Content script that intercepts fetch and XHR requests
 
 This extension is now ready for personal use or distribution through the Chrome Web Store. Remember to always use such tools responsibly and respect the terms of service of APIs you're accessing.
 
-The CORS proxy extension you build today can serve as a foundation for more advanced browser tools. You might eventually expand it into a full-featured developer toolkit that includes request debugging, response inspection, and automated testing capabilities. The principles you've learned here—intercepting network requests, managing extension state, and creating intuitive user interfaces—apply to virtually any Chrome extension you might want to build.
+The CORS proxy extension you build today can serve as a foundation for more advanced browser tools. You might eventually expand it into a full-featured developer toolkit that includes request debugging, response inspection, and automated testing capabilities. The principles you've learned here, intercepting network requests, managing extension state, and creating intuitive user interfaces, apply to virtually any Chrome extension you might want to build.
 
 If you encounter any issues during development, Chrome provides excellent debugging tools. You can access service worker logs through the Extensions page, inspect content script execution in the Elements panel, and monitor network requests in the Network tab. These tools are invaluable for troubleshooting and optimizing your extension.
 

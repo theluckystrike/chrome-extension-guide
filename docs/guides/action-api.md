@@ -124,7 +124,7 @@ Key migration differences:
 ```
 
 ## Building Dynamic Toolbar Extensions
-Example: Toggle extension state with visual feedback.
+Toggle extension state with visual feedback.
 
 ```javascript
 chrome.action.onClicked.addListener((tab) => {

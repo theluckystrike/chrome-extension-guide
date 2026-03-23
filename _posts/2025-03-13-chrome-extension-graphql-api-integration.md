@@ -17,7 +17,7 @@ Whether you are building a productivity extension that pulls data from a GraphQL
 
 ---
 
-## Why GraphQL for Chrome Extensions? {#why-graphql}
+Why GraphQL for Chrome Extensions? {#why-graphql}
 
 Before diving into implementation, it is worth understanding why GraphQL is an excellent choice for Chrome extension development. Unlike REST APIs that require multiple endpoints for different data needs, GraphQL allows you to request exactly the data you need in a single query. This efficiency is particularly valuable in Chrome extensions where network requests are costly and payload sizes affect performance.
 
@@ -27,7 +27,7 @@ Modern GraphQL servers often support subscriptions for real-time data, which can
 
 ---
 
-## Setting Up Your Chrome Extension Project {#setting-up-project}
+Setting Up Your Chrome Extension Project {#setting-up-project}
 
 Every Chrome extension project begins with the manifest file. For GraphQL integration, you will typically work with Manifest V3, which is the current standard. Your manifest should declare the necessary permissions for making network requests to your GraphQL endpoint.
 
@@ -55,7 +55,7 @@ If you are using a GraphQL client like Apollo, you will also need to configure t
 
 ---
 
-## Installing and Configuring Apollo Client {#apollo-client}
+Installing and Configuring Apollo Client {#apollo-client}
 
 Apollo Client is the most popular GraphQL client for JavaScript applications, and it works well in Chrome extensions with some configuration. You will need to install Apollo Client and the necessary dependencies in your extension project.
 
@@ -101,7 +101,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
 ---
 
-## GraphQL Queries in Popup Scripts {#popup-queries}
+GraphQL Queries in Popup Scripts {#popup-queries}
 
 The popup is one of the most common places to display GraphQL data in a Chrome extension. Users interact with the popup to view information, trigger actions, or see relevant data. Implementing GraphQL queries in popup scripts follows familiar patterns but requires some Chrome-specific considerations.
 
@@ -148,7 +148,7 @@ For better user experience, implement error handling that provides meaningful fe
 
 ---
 
-## Using GraphQL in Background Service Workers {#background-workers}
+Using GraphQL in Background Service Workers {#background-workers}
 
 Background service workers in Manifest V3 are essential for handling long-running tasks, managing alarms, and processing messages from content scripts. They are also ideal locations for GraphQL operations that need to run independently of popup or content script contexts.
 
@@ -198,7 +198,7 @@ Background workers in Manifest V3 have event-driven lifetimes and can be termina
 
 ---
 
-## Content Scripts and GraphQL Communication {#content-scripts}
+Content Scripts and GraphQL Communication {#content-scripts}
 
 Content scripts run in the context of web pages and can interact with the page DOM. When you need to display GraphQL data on specific web pages or enhance pages with external data, content scripts communicate with background scripts or popup to access GraphQL data.
 
@@ -258,7 +258,7 @@ This message-passing architecture keeps your GraphQL client secure in the extens
 
 ---
 
-## Handling Authentication and Security {#authentication-security}
+Handling Authentication and Security {#authentication-security}
 
 Security is paramount when integrating GraphQL APIs in Chrome extensions. Your extension likely accesses user data or performs actions on behalf of users, making proper authentication essential. There are several approaches to handling authentication in Chrome extensions with GraphQL.
 
@@ -291,7 +291,7 @@ Implement proper error handling for authentication failures. When tokens expire,
 
 ---
 
-## Optimizing Performance {#performance-optimization}
+Optimizing Performance {#performance-optimization}
 
 Performance optimization is critical for Chrome extensions that use GraphQL. Users expect responsive extensions, and poorly optimized implementations can significantly impact browser performance. Several strategies help ensure your extension remains fast and efficient.
 
@@ -327,7 +327,7 @@ Consider lazy loading GraphQL modules to reduce the initial bundle size. Import 
 
 ---
 
-## Error Handling and Debugging {#error-handling}
+Error Handling and Debugging {#error-handling}
 
 Robust error handling distinguishes professional Chrome extensions from amateur implementations. GraphQL errors can occur at multiple levels: network failures, server errors, validation errors, and authentication problems. Your extension must handle each type gracefully.
 
@@ -358,7 +358,7 @@ Use Chrome DevTools to monitor network requests and inspect your GraphQL operati
 
 ---
 
-## Testing Your GraphQL Integration {#testing}
+Testing Your GraphQL Integration {#testing}
 
 Testing Chrome extensions with GraphQL requires careful setup to mock network requests and verify behavior. Several approaches work well depending on what you are testing.
 
@@ -385,12 +385,12 @@ End-to-end testing with tools like Puppeteer can verify the entire extension flo
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Integrating GraphQL APIs in Chrome extensions opens up powerful possibilities for building data-rich, interactive extensions. The combination of GraphQL's efficient data fetching with Chrome extension architecture enables experiences that were difficult to achieve with traditional REST APIs.
 
 Remember to properly configure host permissions, handle authentication securely, and implement appropriate caching and error handling. The patterns covered in this guide provide a solid foundation for building production-ready Chrome extensions with GraphQL.
 
-As you develop your extension, continue to optimize performance by minimizing payload sizes, implementing smart caching strategies, and testing under realistic conditions. With proper implementation, your GraphQL-powered Chrome extension will provide a seamless, responsive experience that users will appreciate.
+As you develop your extension, continue to optimize performance by minimizing payload sizes, implementing smart caching strategies, and testing under realistic conditions. With proper implementation, your GraphQL-powered Chrome extension will provide a smooth, responsive experience that users will appreciate.
 
-The Chrome extension ecosystem continues to evolve, and GraphQL adoption is growing. By mastering these integration patterns now, you are well-positioned to build sophisticated extensions that leverage the full power of modern API architectures.
+The Chrome extension ecosystem continues to evolve, and GraphQL adoption is growing. By mastering these integration patterns now, you are well-positioned to build sophisticated extensions that use the full power of modern API architectures.

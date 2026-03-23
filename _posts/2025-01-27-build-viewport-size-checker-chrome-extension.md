@@ -11,43 +11,43 @@ canonical_url: "https://bestchromeextensions.com/2025/01/27/build-viewport-size-
 
 # Build a Viewport Size Checker Chrome Extension: Complete Developer's Guide
 
-In the world of modern web development, understanding how your website renders across different viewport sizes is crucial. Whether you're building responsive layouts, debugging CSS issues, or testing breakpoints, having a reliable viewport checker extension in your browser can save countless hours of manual testing. In this comprehensive guide, we'll walk you through building a fully functional Viewport Size Checker Chrome Extension that displays real-time viewport dimensions, device information, and provides useful tools for responsive design development.
+In the world of modern web development, understanding how your website renders across different viewport sizes is crucial. Whether you're building responsive layouts, debugging CSS issues, or testing breakpoints, having a reliable viewport checker extension in your browser can save countless hours of manual testing. we'll walk you through building a fully functional Viewport Size Checker Chrome Extension that displays real-time viewport dimensions, device information, and provides useful tools for responsive design development.
 
-The demand for responsive web design has never been higher. With users accessing websites from an ever-growing variety of devices — from large desktop monitors to small mobile phones — developers need robust tools to ensure their designs work seamlessly across all screen sizes. A custom viewport checker extension gives you instant access to viewport information without relying on browser DevTools, making it an essential addition to any developer's toolkit.
+The demand for responsive web design has never been higher. With users accessing websites from an ever-growing variety of devices. from large desktop monitors to small mobile phones. developers need solid tools to ensure their designs work smoothly across all screen sizes. A custom viewport checker extension gives you instant access to viewport information without relying on browser DevTools, making it an essential addition to any developer's toolkit.
 
-## Why Build a Viewport Checker Extension?
+Why Build a Viewport Checker Extension?
 
 Before diving into the code, let's explore why a viewport checker extension is valuable for web developers. Traditional methods of checking viewport sizes involve opening Chrome DevTools, toggling the device toolbar, and manually reading dimensions. While DevTools is powerful, having a dedicated extension provides several advantages:
 
-**Instant Access**: A viewport checker extension displays dimensions directly in your browser toolbar, accessible with a single click. No need to open DevTools panels or switch contexts.
+Instant Access: A viewport checker extension displays dimensions directly in your browser toolbar, accessible with a single click. No need to open DevTools panels or switch contexts.
 
-**Real-Time Monitoring**: The best viewport checker extensions update in real-time as you resize windows or navigate between pages, providing immediate feedback on how viewport sizes change.
+Real-Time Monitoring: The best viewport checker extensions update in real-time as you resize windows or navigate between pages, providing immediate feedback on how viewport sizes change.
 
-**Custom Features**: Building your own extension allows you to add features tailored to your specific workflow, whether that's breakpoint indicators, device frame overlays, or export functionality.
+Custom Features: Building your own extension allows you to add features tailored to your specific workflow, whether that's breakpoint indicators, device frame overlays, or export functionality.
 
-**Learning Opportunity**: Creating a Chrome extension is an excellent way to learn the extension development workflow, manifest versioning, and browser API usage — skills that transfer to many other extension projects.
+Learning Opportunity: Creating a Chrome extension is an excellent way to learn the extension development workflow, manifest versioning, and browser API usage. skills that transfer to many other extension projects.
 
-## Project Architecture and File Structure
+Project Architecture and File Structure
 
-Our viewport checker extension will consist of several key components working together to provide a seamless user experience. Let's examine the file structure we'll create:
+Our viewport checker extension will consist of several key components working together to provide a smooth user experience. Let's examine the file structure we'll create:
 
 ```
 viewport-checker/
-├── manifest.json          # Extension configuration and permissions
-├── popup.html             # Extension popup UI
-├── popup.js               # Popup logic and viewport calculations
-├── popup.css              # Styling for the popup
-├── content.js             # Content script for page interaction
-├── background.js          # Background service worker
-└── icons/                 # Extension icons
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json          # Extension configuration and permissions
+ popup.html             # Extension popup UI
+ popup.js               # Popup logic and viewport calculations
+ popup.css              # Styling for the popup
+ content.js             # Content script for page interaction
+ background.js          # Background service worker
+ icons/                 # Extension icons
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 Each file serves a specific purpose in our extension architecture. The manifest.json defines our extension's capabilities and permissions, while the popup files handle the user interface. Content scripts allow us to interact with web pages, and the background service worker manages communication between components.
 
-## Creating the Manifest File
+Creating the Manifest File
 
 Every Chrome extension begins with a manifest.json file that declares the extension's configuration, permissions, and capabilities. For our viewport checker, we'll use Manifest V3, which is the current standard and provides improved security and performance.
 
@@ -89,9 +89,9 @@ Every Chrome extension begins with a manifest.json file that declares the extens
 
 This manifest declares the essential permissions our extension needs. We request "activeTab" permission to access information about the current tab, and "storage" permission to save user preferences. The "action" key defines our popup, and "content_scripts" allows us to inject JavaScript into web pages to measure viewport dimensions.
 
-## Building the Content Script
+Building the Content Script
 
-The content script is the heart of our viewport measurement logic. It runs in the context of web pages and can access the DOM to retrieve accurate viewport information. Let's create a robust content script:
+The content script is the heart of our viewport measurement logic. It runs in the context of web pages and can access the DOM to retrieve accurate viewport information. Let's create a solid content script:
 
 ```javascript
 // content.js - Runs in the context of web pages
@@ -207,7 +207,7 @@ The content script is the heart of our viewport measurement logic. It runs in th
 
 This content script provides comprehensive viewport information including not just the basic innerWidth and innerHeight, but also screen dimensions, device pixel ratio for retina displays, breakpoint detection based on common responsive frameworks, and orientation information. The resize listener includes debouncing to prevent excessive updates during window dragging.
 
-## Creating the Background Service Worker
+Creating the Background Service Worker
 
 The background service worker acts as a central hub for communication between our extension's components. It manages state and facilitates message passing:
 
@@ -251,7 +251,7 @@ chrome.runtime.onUpdateAvailable.addListener(() => {
 
 The background service worker caches viewport information for quick access and updates the extension badge to show the current viewport width at a glance. This provides immediate feedback even before clicking on the extension.
 
-## Building the Popup Interface
+Building the Popup Interface
 
 The popup provides the main user interface for our extension. Let's create an attractive and functional popup:
 
@@ -320,10 +320,10 @@ The popup provides the main user interface for our extension. Let's create an at
     
     <footer class="popup-footer">
       <button id="copy-btn" class="action-btn">
-        <span class="btn-icon">📋</span> Copy Info
+        <span class="btn-icon"></span> Copy Info
       </button>
       <button id="refresh-btn" class="action-btn secondary">
-        <span class="btn-icon">🔄</span> Refresh
+        <span class="btn-icon"></span> Refresh
       </button>
     </footer>
   </div>
@@ -335,7 +335,7 @@ The popup provides the main user interface for our extension. Let's create an at
 
 The popup presents information in a clear, organized layout with primary dimensions prominently displayed, device information in a grid format, and a visual representation of the viewport relative to the screen.
 
-## Styling the Popup
+Styling the Popup
 
 Let's create attractive CSS styling for our popup:
 
@@ -544,7 +544,7 @@ body {
 
 The styling creates a modern, visually appealing popup with a gradient header, organized information sections, and interactive buttons with hover effects.
 
-## Implementing Popup Logic
+Implementing Popup Logic
 
 Finally, let's create the JavaScript for the popup:
 
@@ -634,9 +634,9 @@ Orientation: ${info.orientation}`;
           
           navigator.clipboard.writeText(text).then(function() {
             const btn = document.getElementById('copy-btn');
-            btn.innerHTML = '<span class="btn-icon">✓</span> Copied!';
+            btn.innerHTML = '<span class="btn-icon"></span> Copied!';
             setTimeout(function() {
-              btn.innerHTML = '<span class="btn-icon">📋</span> Copy Info';
+              btn.innerHTML = '<span class="btn-icon"></span> Copy Info';
             }, 2000);
           });
         }
@@ -653,44 +653,44 @@ Orientation: ${info.orientation}`;
 
 The popup JavaScript handles retrieving viewport information, updating the UI dynamically, copying information to the clipboard, and refreshing the current tab.
 
-## Testing Your Extension
+Testing Your Extension
 
 Now that we've created all the necessary files, let's test our extension:
 
-1. **Create the icons directory** and add placeholder icons (or use any PNG images named icon16.png, icon48.png, and icon128.png)
+1. Create the icons directory and add placeholder icons (or use any PNG images named icon16.png, icon48.png, and icon128.png)
 
-2. **Open Chrome and navigate to** `chrome://extensions/`
+2. Open Chrome and navigate to `chrome://extensions/`
 
-3. **Enable Developer mode** using the toggle in the top right corner
+3. Enable Developer mode using the toggle in the top right corner
 
-4. **Click "Load unpacked"** and select your extension directory
+4. Click "Load unpacked" and select your extension directory
 
-5. **Test the extension** by visiting any website and clicking the extension icon
+5. Test the extension by visiting any website and clicking the extension icon
 
 You should see the popup displaying real-time viewport dimensions, device information, and breakpoint detection. The extension badge will show the current viewport width.
 
-## Enhancements and Future Improvements
+Enhancements and Future Improvements
 
 This viewport checker extension provides a solid foundation that you can extend with additional features:
 
-**Breakpoint Overlays**: Add the ability to visually overlay common breakpoint markers on web pages to see exactly where your design will break.
+Breakpoint Overlays: Add the ability to visually overlay common breakpoint markers on web pages to see exactly where your design will break.
 
-**History Tracking**: Record viewport sizes over time as you navigate, creating a log of all the viewports you've tested.
+History Tracking: Record viewport sizes over time as you navigate, creating a log of all the viewports you've tested.
 
-**Screenshot Capture**: Add functionality to capture screenshots at specific viewport sizes for documentation.
+Screenshot Capture: Add functionality to capture screenshots at specific viewport sizes for documentation.
 
-**Custom Breakpoints**: Allow users to define their own breakpoint thresholds based on their specific design requirements.
+Custom Breakpoints: Allow users to define their own breakpoint thresholds based on their specific design requirements.
 
-**Export Functionality**: Export viewport data in various formats (JSON, CSV) for testing reports.
+Export Functionality: Export viewport data in various formats (JSON, CSV) for testing reports.
 
-**Integration with Design Tools**: Export dimensions directly to Figma, Sketch, or other design tools.
+Integration with Design Tools: Export dimensions directly to Figma, Sketch, or other design tools.
 
-## Conclusion
+Conclusion
 
 Building a viewport checker extension is an excellent project that combines practical utility with valuable learning opportunities. You've learned how to create a Manifest V3 extension, implement content scripts for DOM access, build background service workers for state management, and design attractive popup interfaces.
 
 This extension solves a real problem for web developers: quickly accessing viewport information without leaving the browser context. The real-time updates, comprehensive device information, and visual representation make it an invaluable tool for responsive design development.
 
-As you continue developing Chrome extensions, remember that the techniques learned here — message passing between components, content script injection, and popup interface design — apply to virtually any extension project you undertake. The Chrome Web Store offers vast opportunities for developers to share useful tools with millions of users.
+As you continue developing Chrome extensions, remember that the techniques learned here. message passing between components, content script injection, and popup interface design. apply to virtually any extension project you undertake. The Chrome Web Store offers vast opportunities for developers to share useful tools with millions of users.
 
 Start building your viewport checker today, and customize it to match your specific development workflow. The foundation is solid, and the possibilities for enhancement are virtually unlimited.

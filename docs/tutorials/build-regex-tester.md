@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Regex Tester — Developer Guide"
+title: "Chrome Extension Regex Tester. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-regex-tester/"
 ---
 # Build a Regex Tester Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Test regex patterns against text with real-time highlighting
 - Display capture groups (numbered and named)
 - Save favorite patterns to storage, built-in pattern library
 
 ---
 
-## Step 1: Manifest {#step-1-manifest}
+Step 1: Manifest {#step-1-manifest}
 
 ```json
 { "name": "Regex Tester", "version": "1.0", "manifest_version": 3, "action": { "default_popup": "popup.html" }, "permissions": ["storage"] }
@@ -21,7 +21,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-regex-tester/"
 
 ---
 
-## Step 2: Popup UI {#step-2-popup-ui}
+Step 2: Popup UI {#step-2-popup-ui}
 
 ```html
 <input type="text" id="regexInput" placeholder="Regex...">
@@ -33,7 +33,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-regex-tester/"
 
 ---
 
-## Step 3: Real-Time Matching {#step-3-real-time-matching}
+Step 3: Real-Time Matching {#step-3-real-time-matching}
 
 Debounce for performance (see [patterns/throttle-debounce-extensions.md](../../patterns/throttle-debounce-extensions.md)):
 
@@ -51,7 +51,7 @@ Wrap `new RegExp()` in try/catch for invalid regex handling.
 
 ---
 
-## Step 4: Match Highlighting {#step-4-match-highlighting}
+Step 4: Match Highlighting {#step-4-match-highlighting}
 
 ```javascript
 function renderMatches(matches) {
@@ -68,7 +68,7 @@ function renderMatches(matches) {
 
 ---
 
-## Step 5: Capture Groups {#step-5-capture-groups}
+Step 5: Capture Groups {#step-5-capture-groups}
 
 ```javascript
 function showGroups(match) {
@@ -81,7 +81,7 @@ function showGroups(match) {
 
 ---
 
-## Step 6: Match Info {#step-6-match-info}
+Step 6: Match Info {#step-6-match-info}
 
 ```javascript
 function updateMatchInfo(matches) {
@@ -92,9 +92,9 @@ function updateMatchInfo(matches) {
 
 ---
 
-## Step 7: Save Patterns {#step-7-save-patterns}
+Step 7: Save Patterns {#step-7-save-patterns}
 
-Store with chrome.storage (see [api-reference/storage-api-deep-dive.md](../../api-reference/storage-api-deep-dive.md)):
+Store with chrome.storage (see [api-reference/storage-api-deep detailed look.md](../../api-reference/storage-api-deep detailed look.md)):
 
 ```javascript
 document.getElementById('savePattern').addEventListener('click', () => {
@@ -105,7 +105,7 @@ document.getElementById('savePattern').addEventListener('click', () => {
 
 ---
 
-## Step 8: Pattern Library {#step-8-pattern-library}
+Step 8: Pattern Library {#step-8-pattern-library}
 
 ```javascript
 const library = [
@@ -118,7 +118,7 @@ const library = [
 
 ---
 
-## Export Matches {#export-matches}
+Export Matches {#export-matches}
 
 JSON: `JSON.stringify(matches.map(m=>({match:m[0],index:m.index,groups:m.slice(1)}))))`
 
@@ -126,9 +126,9 @@ Text: `matches.map((m,i)=>\`Match \${i+1}: \${m[0]}\`).join('\n')`
 
 ---
 
-## Related {#related}
+Related {#related}
 - [guides/popup-patterns.md](../../guides/popup-patterns.md)
-- [api-reference/storage-api-deep-dive.md](../../api-reference/storage-api-deep-dive.md)
+- [api-reference/storage-api-deep detailed look.md](../../api-reference/storage-api-deep detailed look.md)
 - [patterns/throttle-debounce-extensions.md](../../patterns/throttle-debounce-extensions.md)
 -e 
 ---

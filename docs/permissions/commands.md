@@ -10,10 +10,10 @@ canonical_url: "https://bestchromeextensions.com/permissions/commands/"
 
 # commands (Manifest Key)
 
-## What It Is {#what-it-is}
+What It Is {#what-it-is}
 `commands` is a manifest key (not a `permissions` entry) that defines keyboard shortcuts. Enables the `chrome.commands` API.
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "commands": {
@@ -29,21 +29,21 @@ canonical_url: "https://bestchromeextensions.com/permissions/commands/"
 }
 ```
 
-## User Warning {#user-warning}
-None — keyboard shortcuts do not trigger a permission warning.
+User Warning {#user-warning}
+None. keyboard shortcuts do not trigger a permission warning.
 
-## Special Commands {#special-commands}
-- `_execute_action` — triggers `chrome.action.onClicked` or opens the popup
-- `_execute_side_panel` — opens the extension's side panel
+Special Commands {#special-commands}
+- `_execute_action`. triggers `chrome.action.onClicked` or opens the popup
+- `_execute_side_panel`. opens the extension's side panel
 
-## Key Format Rules {#key-format-rules}
+Key Format Rules {#key-format-rules}
 - Must include `Ctrl` or `Alt` (Mac: `Command` or `MacCtrl`)
 - `Shift` is optional modifier
 - Media keys: `MediaNextTrack`, `MediaPlayPause`, `MediaPrevTrack`, `MediaStop`
 - Maximum 4 suggested shortcuts per extension
 - Users override at `chrome://extensions/shortcuts`
 
-## API Access {#api-access}
+API Access {#api-access}
 ```typescript
 chrome.commands.onCommand.addListener((command: string) => {
   if (command === 'toggle-feature') { /* handle */ }
@@ -53,7 +53,7 @@ const commands = await chrome.commands.getAll();
 commands.forEach(cmd => console.log(`${cmd.name}: ${cmd.shortcut || 'not set'}`));
 ```
 
-## Global Shortcuts {#global-shortcuts}
+Global Shortcuts {#global-shortcuts}
 ```json
 {
   "commands": {
@@ -66,7 +66,7 @@ commands.forEach(cmd => console.log(`${cmd.name}: ${cmd.shortcut || 'not set'}`)
 }
 ```
 
-## Storage Integration {#storage-integration}
+Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 const schema = defineSchema({ shortcutAction: 'string' });
@@ -80,68 +80,68 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Common Use Cases
+Common Use Cases
 
-### Quick Access to Extension Features
+Quick Access to Extension Features
 Add keyboard shortcuts for frequently used extension features. This is especially useful for productivity tools where users need rapid access without clicking through menus.
 
-### Popup/Side Panel Trigger
+Popup/Side Panel Trigger
 Use `_execute_action` or `_execute_side_panel` to open your extension's UI via keyboard. This provides a quick way to access your extension from anywhere in the browser.
 
-### Power User Features
+Power User Features
 Enable power users to perform complex actions with a single keystroke. For example, a note-taking extension might use a shortcut to quickly capture the current page as a note.
 
-### Toggle Functionality
+Toggle Functionality
 Allow users to toggle features on and off, such as enabling/disabling a reading mode, turning on a dark theme, or activating a focus mode.
 
-### Media Control
+Media Control
 For extensions that handle media playback, use media keys to provide playback controls that work even when the extension's UI isn't visible.
 
-## Best Practices
+Best Practices
 
-### Provide Sensible Defaults
+Provide Sensible Defaults
 Always provide suggested shortcuts, but understand that users can override them. Choose shortcuts that won't conflict with common browser or OS shortcuts.
 
-### Support Both Platforms
+Support Both Platforms
 When defining shortcuts, always specify keys for both `default` (Windows/Linux) and `mac` platforms. Remember that Mac uses `Command` instead of `Ctrl`.
 
-### Limit to Four Suggestions
+Limit to Four Suggestions
 Chrome only allows four suggested shortcuts. Prioritize the most important ones and let users customize additional shortcuts through the shortcuts page.
 
-### Use Global Shortcuts Judiciously
+Use Global Shortcuts Judiciously
 Global shortcuts (those that work even when Chrome isn't focused) are limited to Ctrl+Shift+[0-9]. Use them sparingly as they can conflict with other applications.
 
-### Provide User Customization
+Provide User Customization
 Allow users to see and modify shortcuts. Direct them to `chrome://extensions/shortcuts` or provide a settings UI in your extension.
 
-### Handle Command Events Safely
+Handle Command Events Safely
 Command listeners should be resilient. If a command triggers an action that fails, provide feedback to the user rather than silently failing.
 
-### Test Across Platforms
+Test Across Platforms
 Test your shortcuts on both Windows and macOS. What works on one platform might not work as expected on another due to different keyboard layouts and modifier key behavior.
 
-## When to Use
+When to Use
 
-## When to Use {#when-to-use}
+When to Use {#when-to-use}
 - Add keyboard shortcuts for common actions
 - Open popup/side panel via hotkey
 - Power-user features
 
-## Limitations {#limitations}
+Limitations {#limitations}
 - Max 4 suggested key bindings
 - Some key combos reserved by OS/browser
 - `global: true` limited to Ctrl+Shift+[0-9]
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Guide: `docs/guides/commands-keyboard-shortcuts.md`
 - Related: `docs/permissions/activeTab.md`
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I add keyboard shortcuts to my Chrome extension?
+How do I add keyboard shortcuts to my Chrome extension?
 Declare commands in your manifest.json with "commands" key, then handle them in your background script with chrome.commands.onCommand.addListener.
 
-### What keyboard shortcuts are reserved in Chrome?
+What keyboard shortcuts are reserved in Chrome?
 Ctrl+Shift+1 through Ctrl+Shift+9 are reserved by Chrome for switching to specific tabs. Your extension cannot override these.
 ---
 

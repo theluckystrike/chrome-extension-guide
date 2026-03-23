@@ -6,59 +6,59 @@ Comprehensive reference for browser compatibility of Chrome Extension APIs acros
 
 | API | Chrome | Firefox | Edge | Safari |
 |-----|--------|---------|------|--------|
-| `chrome.storage` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.runtime` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.tabs` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.alarms` | ✅ Full | ✅ Full | ✅ Full | ⚠️ Limited |
-| `chrome.action` | ✅ Full (MV3) | ✅ Full | ✅ Full | ⚠️ Partial |
-| `chrome.scripting` | ✅ Full (MV3) | ⚠️ Limited | ✅ Full | ⚠️ Limited |
-| `chrome.sidePanel` | ✅ Chrome only | ❌ No | ✅ Full | ❌ No |
-| `chrome.declarativeNetRequest` | ✅ Full | ✅ Full | ✅ Full | ❌ No |
-| `chrome.notifications` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.contextMenus` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.commands` | ✅ Full | ✅ Full | ✅ Full | ⚠️ Limited |
-| `chrome.bookmarks` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.history` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.downloads` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.cookies` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.webNavigation` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.i18n` | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| `chrome.identity` | ✅ Full | ✅ Full | ✅ Full | ⚠️ Limited |
-| `chrome.offscreen` | ✅ Chrome only | ❌ No | ✅ Full | ❌ No |
+| `chrome.storage` |  Full |  Full |  Full |  Full |
+| `chrome.runtime` |  Full |  Full |  Full |  Full |
+| `chrome.tabs` |  Full |  Full |  Full |  Full |
+| `chrome.alarms` |  Full |  Full |  Full |  Limited |
+| `chrome.action` |  Full (MV3) |  Full |  Full |  Partial |
+| `chrome.scripting` |  Full (MV3) |  Limited |  Full |  Limited |
+| `chrome.sidePanel` |  Chrome only |  No |  Full |  No |
+| `chrome.declarativeNetRequest` |  Full |  Full |  Full |  No |
+| `chrome.notifications` |  Full |  Full |  Full |  Full |
+| `chrome.contextMenus` |  Full |  Full |  Full |  Full |
+| `chrome.commands` |  Full |  Full |  Full |  Limited |
+| `chrome.bookmarks` |  Full |  Full |  Full |  Full |
+| `chrome.history` |  Full |  Full |  Full |  Full |
+| `chrome.downloads` |  Full |  Full |  Full |  Full |
+| `chrome.cookies` |  Full |  Full |  Full |  Full |
+| `chrome.webNavigation` |  Full |  Full |  Full |  Full |
+| `chrome.i18n` |  Full |  Full |  Full |  Full |
+| `chrome.identity` |  Full |  Full |  Full |  Limited |
+| `chrome.offscreen` |  Chrome only |  No |  Full |  No |
 
 ## Manifest Version Support {#manifest-version-support}
 
 | Feature | MV2 | MV3 |
 |---------|-----|-----|
-| Service Workers | ❌ No | ✅ Yes |
-| `action` API | ⚠️ `browser_action` | ✅ `action` |
-| Declarative Net Request | ✅ Yes | ✅ Yes |
-| Side Panel | ❌ No | ✅ Yes |
-| Offscreen Documents | ❌ No | ✅ Yes |
+| Service Workers |  No |  Yes |
+| `action` API |  `browser_action` |  `action` |
+| Declarative Net Request |  Yes |  Yes |
+| Side Panel |  No |  Yes |
+| Offscreen Documents |  No |  Yes |
 
 ### Browser Manifest Support {#browser-manifest-support}
 
-- **Chrome**: MV2 (deprecated), MV3 (current), MV4 (beta)
-- **Firefox**: MV2 (supported), MV3 (supported), MV4 (experimental)
-- **Edge**: MV2 (deprecated), MV3 (current)
-- **Safari**: MV2, MV3 (14+)
+- Chrome: MV2 (deprecated), MV3 (current), MV4 (beta)
+- Firefox: MV2 (supported), MV3 (supported), MV4 (experimental)
+- Edge: MV2 (deprecated), MV3 (current)
+- Safari: MV2, MV3 (14+)
 
 ## Namespace Differences {#namespace-differences}
 
 | Aspect | Chrome | Firefox | Recommended |
 |--------|--------|---------|-------------|
 | API Namespace | `chrome.*` | `browser.*` | Use polyfill |
-| Callback Style | ✅ Default | ⚠️ Promises | Use polyfill |
-| Promise Support | ✅ MV3 | ✅ Default | Use promises |
+| Callback Style |  Default |  Promises | Use polyfill |
+| Promise Support |  MV3 |  Default | Use promises |
 
 ## Promise Support {#promise-support}
 
 All browsers support Promises in Manifest V3. In Manifest V2:
 
-- **Chrome**: Callbacks only (except some newer APIs)
-- **Firefox**: Native Promise support
-- **Edge**: Callbacks only
-- **Safari**: Callbacks only
+- Chrome: Callbacks only (except some newer APIs)
+- Firefox: Native Promise support
+- Edge: Callbacks only
+- Safari: Callbacks only
 
 ## Using WebExtension Polyfill {#using-webextension-polyfill}
 

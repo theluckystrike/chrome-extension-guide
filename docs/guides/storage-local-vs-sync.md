@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "chrome.storage.local vs sync — Which Should You Use?"
+title: "chrome.storage.local vs sync. Which Should You Use?"
 description: "Complete comparison of chrome.storage.local vs chrome.storage.sync for Chrome extensions. Learn when to use each storage type, quota limits, synchronization behavior, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/storage-local-vs-sync/"
 ---
 
-# chrome.storage.local vs sync — Which Should You Use?
+# chrome.storage.local vs sync. Which Should You Use?
 
-## Introduction
+Introduction
 
 Choosing the right storage API is crucial for Chrome extension performance and user experience. The `chrome.storage` API offers two distinct options: `local` and `sync`. Each serves different use cases and has unique characteristics around storage limits, sync behavior, and performance. This guide helps you decide which storage type is right for your extension.
 
-## Overview
+Overview
 
 The `chrome.storage` API was designed specifically for extensions, providing better capabilities than `localStorage` or cookies. It offers automatic JSON serialization, event-driven change listeners, and native integration with Chrome's sync infrastructure.
 
@@ -25,18 +25,18 @@ chrome.storage.sync.set({ key: 'value' });
 chrome.storage.sync.get(['key'], (result) => {});
 ```
 
-## Storage Quotas Comparison
+Storage Quotas Comparison
 
 | Aspect | chrome.storage.local | chrome.storage.sync |
 |--------|---------------------|---------------------|
-| **Storage Limit** | 10 MB (unlimited for unpacked) | 100 KB (sync'd), more with quota |
-| **Per-Key Limit** | No strict limit | ~8 KB per key recommended |
-| **Items Limit** | ~ millions | ~512 items recommended |
-| **User Sync** | No | Yes, across devices |
+| Storage Limit | 10 MB (unlimited for unpacked) | 100 KB (sync'd), more with quota |
+| Per-Key Limit | No strict limit | ~8 KB per key recommended |
+| Items Limit | ~ millions | ~512 items recommended |
+| User Sync | No | Yes, across devices |
 
-## Local Storage
+Local Storage
 
-### Characteristics
+Characteristics
 
 `chrome.storage.local` stores data exclusively on the current device. Data remains available regardless of whether the user is signed into Chrome or has sync enabled.
 
@@ -57,15 +57,15 @@ chrome.storage.local.get({
 });
 ```
 
-### Best Use Cases
+Best Use Cases
 
 Local storage is ideal for:
-- **Large data caches**: Store significant amounts of data without worrying about quota limits
-- **Device-specific settings**: Preferences that should not sync across devices
-- **Offline-first data**: Information that must work without network connectivity
-- **Temporary data**: Cached API responses, session data, or computed results
+- Large data caches: Store significant amounts of data without worrying about quota limits
+- Device-specific settings: Preferences that should not sync across devices
+- Offline-first data: Information that must work without network connectivity
+- Temporary data: Cached API responses, session data, or computed results
 
-### Pros and Cons
+Pros and Cons
 
 | Pros | Cons |
 |------|------|
@@ -74,9 +74,9 @@ Local storage is ideal for:
 | Faster for large datasets | No cross-device continuity |
 | Works fully offline | Cannot share preferences |
 
-## Sync Storage
+Sync Storage
 
-### Characteristics
+Characteristics
 
 `chrome.storage.sync` automatically synchronizes data across all Chrome instances where the user is signed in. Changes propagate to all devices when online.
 
@@ -96,26 +96,26 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-### Best Use Cases
+Best Use Cases
 
 Sync storage is ideal for:
-- **User preferences**: Settings users expect to have on any device
-- **Cross-device state**: Data that should persist across installations
-- **Lightweight settings**: Small amounts of frequently-changed data
-- **Account-related data**: User configurations tied to their account
+- User preferences: Settings users expect to have on any device
+- Cross-device state: Data that should persist across installations
+- Lightweight settings: Small amounts of frequently-changed data
+- Account-related data: User configurations tied to their account
 
-### Pros and Cons
+Pros and Cons
 
 | Pros | Cons |
 |------|------|
 | Automatic cross-device sync | Limited storage capacity (100 KB) |
-| Seamless user experience | Potential sync delays |
+| Smooth user experience | Potential sync delays |
 | Preserves data on device switch | Requires Chrome sign-in |
 | Real-time change notifications | Slower than local for large data |
 
-## Performance Comparison
+Performance Comparison
 
-### Write Performance
+Write Performance
 
 ```javascript
 // Benchmark local storage
@@ -136,13 +136,13 @@ Local storage is typically faster for writes because:
 - Direct write to local database
 - No conflict resolution processing
 
-### Read Performance
+Read Performance
 
 Both storage types have similar read speeds when data is cached. First reads may be slightly slower for sync storage due to potential network fetching.
 
-## Data Conflict Resolution
+Data Conflict Resolution
 
-### Sync Conflicts
+Sync Conflicts
 
 When the same key is modified on multiple devices while offline, Chrome uses a last-write-wins strategy:
 
@@ -175,9 +175,9 @@ async function setWithConflictCheck(key, newValue) {
 }
 ```
 
-## Storage Encryption
+Storage Encryption
 
-### Sensitive Data
+Sensitive Data
 
 For sensitive information, both local and sync storage are encrypted at rest by Chrome OS and Windows (when using DPAPI). For additional security:
 
@@ -197,9 +197,9 @@ async function secureRetrieve(key) {
 }
 ```
 
-## Migration Between Storage Types
+Migration Between Storage Types
 
-### Moving Data
+Moving Data
 
 If your requirements change, you can migrate data between storage types:
 
@@ -214,7 +214,7 @@ async function migrateToSync() {
 }
 ```
 
-### Bulk Operations
+Bulk Operations
 
 Both storage types support bulk operations:
 
@@ -229,16 +229,16 @@ chrome.storage.local.set({
 chrome.storage.local.get(['cache', 'timestamp'], (result) => {});
 ```
 
-## Decision Guide
+Decision Guide
 
 Use this flowchart to decide:
 
-1. **Need cross-device sync?** → Use `chrome.storage.sync`
-2. **Data > 100 KB?** → Use `chrome.storage.local`
-3. **Device-specific data?** → Use `chrome.storage.local`
-4. **Offline-critical data?** → Use `chrome.storage.local`
-5. **User preferences/settings?** → Use `chrome.storage.sync`
+1. Need cross-device sync? → Use `chrome.storage.sync`
+2. Data > 100 KB? → Use `chrome.storage.local`
+3. Device-specific data? → Use `chrome.storage.local`
+4. Offline-critical data? → Use `chrome.storage.local`
+5. User preferences/settings? → Use `chrome.storage.sync`
 
-## Conclusion
+Conclusion
 
 Choose `chrome.storage.local` for large datasets, device-specific data, and performance-critical operations. Choose `chrome.storage.sync` for user preferences, cross-device continuity, and small configuration data. For many extensions, using both types together provides the optimal balance of capacity, sync capabilities, and performance.

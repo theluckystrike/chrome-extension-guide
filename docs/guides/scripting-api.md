@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Chrome Extension Scripting API — Developer Guide"
+title: "Chrome Extension Scripting API. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/scripting-api/"
 ---
 # Scripting API Guide
 
-## Overview {#overview}
-# Chrome Scripting API Guide
+Overview {#overview}
+Chrome Scripting API Guide
 
 The Chrome Scripting API (`chrome.scripting`) is the modern way to inject JavaScript and CSS into web pages in Manifest V3 extensions. It replaces the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` methods from Manifest V2.
 
-## Required Permission
+Required Permission
 
 The Scripting API is essential for extensions that need to:
 - Inject JavaScript into web pages programmatically
@@ -19,7 +19,7 @@ The Scripting API is essential for extensions that need to:
 - Register content scripts at runtime based on conditions
 - Work with different execution worlds (MAIN vs ISOLATED)
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 To use the Scripting API, you must declare the `"scripting"` permission in your manifest.json:
 Add the `scripting` permission to your `manifest.json`:
@@ -28,13 +28,13 @@ Add the `scripting` permission to your `manifest.json`:
 { "permissions": ["scripting"] }
 ```
 
-## chrome.scripting.executeScript
+chrome.scripting.executeScript
 
-## ExecuteScript Basics {#executescript-basics}
+ExecuteScript Basics {#executescript-basics}
 
 The `chrome.scripting.executeScript()` method injects JavaScript code into a page. This is the primary method for programmatically running content scripts.
 
-### Basic Syntax {#basic-syntax}
+Basic Syntax {#basic-syntax}
 Inject JavaScript into web pages using files or functions:
 
 ```javascript
@@ -63,8 +63,8 @@ chrome.scripting.executeScript({
 });
 ```
 
-### Injecting Files {#injecting-files}
-## chrome.scripting.insertCSS
+Injecting Files {#injecting-files}
+chrome.scripting.insertCSS
 
 Inject CSS into pages:
 
@@ -80,7 +80,7 @@ chrome.scripting.insertCSS({
 });
 ```
 
-### Return Values {#return-values}
+Return Values {#return-values}
 
 The executeScript method returns the results of the injected function for each frame:
 
@@ -106,11 +106,11 @@ chrome.scripting.executeScript(
 );
 ```
 
-## Injecting CSS {#injecting-css}
+Injecting CSS {#injecting-css}
 
 The Scripting API provides methods for dynamically manipulating CSS in web pages.
 
-### insertCSS {#insertcss}
+insertCSS {#insertcss}
 
 Insert CSS into a page to style its content:
 
@@ -146,8 +146,8 @@ chrome.scripting.insertCSS(
 );
 ```
 
-### removeCSS {#removecss}
-## chrome.scripting.removeCSS
+removeCSS {#removecss}
+chrome.scripting.removeCSS
 
 Remove previously injected CSS:
 
@@ -158,7 +158,7 @@ chrome.scripting.removeCSS({
 });
 ```
 
-## chrome.scripting.registerContentScripts
+chrome.scripting.registerContentScripts
 
 Register content scripts dynamically at runtime:
 
@@ -172,7 +172,7 @@ chrome.scripting.registerContentScripts([{
 }], () => console.log('Registered'));
 ```
 
-## chrome.scripting.unregisterContentScripts
+chrome.scripting.unregisterContentScripts
 
 Unregister scripts:
 
@@ -181,7 +181,7 @@ chrome.scripting.unregisterContentScripts();
 chrome.scripting.unregisterContentScripts({ ids: ['my-script'] });
 ```
 
-## chrome.scripting.getRegisteredContentScripts
+chrome.scripting.getRegisteredContentScripts
 
 List all registered scripts:
 
@@ -189,7 +189,7 @@ List all registered scripts:
 chrome.scripting.getRegisteredContentScripts((scripts) => console.log(scripts));
 ```
 
-## chrome.scripting.updateContentScripts
+chrome.scripting.updateContentScripts
 
 Update registered scripts:
 
@@ -200,7 +200,7 @@ chrome.scripting.updateContentScripts([{
 }], () => console.log('Updated'));
 ```
 
-## InjectionTarget Properties
+InjectionTarget Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -208,10 +208,10 @@ chrome.scripting.updateContentScripts([{
 | frameIds | number[] | Specific frame IDs |
 | allFrames | boolean | Inject into all frames |
 
-## ScriptInjection: files vs func
+ScriptInjection: files vs func
 
-- **files**: Array of file paths to inject
-- **func**: Function to serialize and execute in target context
+- files: Array of file paths to inject
+- func: Function to serialize and execute in target context
 
 ```javascript
 // Use args to pass data to func
@@ -222,7 +222,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-## ExecutionWorld
+ExecutionWorld
 
 | World | Description |
 |-------|-------------|
@@ -244,7 +244,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-## RunAt
+RunAt
 
 Control script execution timing:
 
@@ -262,14 +262,14 @@ chrome.scripting.executeScript({
 });
 ```
 
-## Migrating from chrome.tabs.executeScript (MV2)
+Migrating from chrome.tabs.executeScript (MV2)
 
-**MV2:**
+MV2:
 ```javascript
 chrome.tabs.executeScript(tabId, { file: 'script.js', allFrames: true });
 ```
 
-**MV3:**
+MV3:
 ```javascript
 chrome.scripting.executeScript({
   target: { tabId, allFrames: true },
@@ -279,7 +279,7 @@ chrome.scripting.executeScript({
 
 Changes: API moved to `chrome.scripting`, `file` → `files` (array), target is an object.
 
-## Building a User Script Manager
+Building a User Script Manager
 
 ```javascript
 class UserScriptManager {
@@ -307,18 +307,18 @@ const mgr = new UserScriptManager();
 await mgr.register({ id: 'demo', matches: ['<all_urls>'], js: ['main.js'] });
 ```
 
-## Security Considerations
+Security Considerations
 
-### Principle of Least Privilege
+Principle of Least Privilege
 Request only necessary host permissions:
 ```json
 { "host_permissions": ["https://*.example.com/*"] }
 ```
 
-### Avoid MAIN World Execution
-Page scripts can access code in MAIN world—use ISOLATED (default) when possible.
+Avoid MAIN World Execution
+Page scripts can access code in MAIN world, use ISOLATED (default) when possible.
 
-### Validate Targets Before Injection
+Validate Targets Before Injection
 ```javascript
 async function safeExecute(tabId, script) {
   const tab = await chrome.tabs.get(tabId);
@@ -327,8 +327,8 @@ async function safeExecute(tabId, script) {
 }
 ```
 
-### Handle CSP Restrictions
-Some pages block injection via CSP—handle gracefully:
+Handle CSP Restrictions
+Some pages block injection via CSP, handle gracefully:
 ```javascript
 chrome.scripting.executeScript({
   target: { tabId: tab.id },
@@ -336,7 +336,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-## Complete Example: Text Highlighter
+Complete Example: Text Highlighter
 
 ```javascript
 chrome.runtime.onMessage.addListener((req, sender) => {
@@ -348,7 +348,7 @@ async function highlightText(text, tabId) {
     target: { tabId },
     css: '.ext-highlight { background: yellow; }'
   });
-  // insertCSS returns Promise<void> — no injection results
+  // insertCSS returns Promise<void>. no injection results
 }
 
 async function removeHighlight(tabId) {
@@ -359,11 +359,11 @@ async function removeHighlight(tabId) {
 }
 ```
 
-## Dynamic Content Script Registration {#dynamic-content-script-registration}
+Dynamic Content Script Registration {#dynamic-content-script-registration}
 
 The `chrome.scripting.registerContentScripts()` method allows you to register content scripts programmatically at runtime, without requiring them to be declared in the manifest.
 
-### Registering Scripts {#registering-scripts}
+Registering Scripts {#registering-scripts}
 
 ```javascript
 chrome.scripting.registerContentScripts([
@@ -381,7 +381,7 @@ chrome.scripting.registerContentScripts([
 });
 ```
 
-### Script Registration Options {#script-registration-options}
+Script Registration Options {#script-registration-options}
 
 The registration object supports several options:
 
@@ -410,7 +410,7 @@ chrome.scripting.registerContentScripts([
 ]);
 ```
 
-### Managing Registered Scripts {#managing-registered-scripts}
+Managing Registered Scripts {#managing-registered-scripts}
 
 You can get and unregister content scripts:
 
@@ -427,11 +427,11 @@ chrome.scripting.unregisterContentScripts({ ids: ['my-script'] });
 chrome.scripting.unregisterContentScripts();
 ```
 
-## World Isolation: MAIN vs ISOLATED {#world-isolation-main-vs-isolated}
+World Isolation: MAIN vs ISOLATED {#world-isolation-main-vs-isolated}
 
 Chrome extensions execute content scripts in one of two JavaScript worlds:
 
-### ISOLATED World (Default) {#isolated-world-default}
+ISOLATED World (Default) {#isolated-world-default}
 
 Content scripts run in the Isolated World, separate from the page's JavaScript:
 
@@ -454,7 +454,7 @@ chrome.scripting.executeScript(
 // Page JavaScript cannot access myExtensionVar
 ```
 
-### MAIN World {#main-world}
+MAIN World {#main-world}
 
 The MAIN world shares the page's JavaScript context:
 
@@ -477,7 +477,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### When to Use MAIN World {#when-to-use-main-world}
+When to Use MAIN World {#when-to-use-main-world}
 
 Use the MAIN world when you need to:
 - Interact with page's JavaScript frameworks (React, Angular, Vue)
@@ -485,18 +485,18 @@ Use the MAIN world when you need to:
 - Call page-defined functions
 - Work with page's SPA router state
 
-### When to Use ISOLATED World {#when-to-use-isolated-world}
+When to Use ISOLATED World {#when-to-use-isolated-world}
 
 Use the ISOLATED world (default) when:
 - Avoiding conflicts with page JavaScript
 - Security is a concern (isolation protects against page JS accessing extension code)
 - Working primarily with DOM manipulation
 
-## Targeting Specific Tabs and Frames {#targeting-specific-tabs-and-frames}
+Targeting Specific Tabs and Frames {#targeting-specific-tabs-and-frames}
 
 The Scripting API allows precise targeting of where code should execute.
 
-### Targeting Specific Tabs {#targeting-specific-tabs}
+Targeting Specific Tabs {#targeting-specific-tabs}
 
 ```javascript
 // Get the active tab and inject
@@ -533,7 +533,7 @@ async function injectIntoActiveTab() {
 }
 ```
 
-### Targeting Specific Frames {#targeting-specific-frames}
+Targeting Specific Frames {#targeting-specific-frames}
 
 ```javascript
 // Inject only into a specific frame by frameId
@@ -553,7 +553,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Finding Frame IDs {#finding-frame-ids}
+Finding Frame IDs {#finding-frame-ids}
 
 To find frame IDs, you can use the debugging API:
 
@@ -582,11 +582,11 @@ chrome.scripting.executeScript(
 );
 ```
 
-## MV3 Migration from chrome.tabs.executeScript {#mv3-migration-from-chrometabsexecutescript}
+MV3 Migration from chrome.tabs.executeScript {#mv3-migration-from-chrometabsexecutescript}
 
 If you're migrating from Manifest V2, here's how to convert your code:
 
-### MV2 Code {#mv2-code}
+MV2 Code {#mv2-code}
 
 ```javascript
 // Manifest V2 - chrome.tabs.executeScript
@@ -603,7 +603,7 @@ chrome.tabs.executeScript(
 );
 ```
 
-### MV3 Equivalent {#mv3-equivalent}
+MV3 Equivalent {#mv3-equivalent}
 
 ```javascript
 // Manifest V3 - chrome.scripting.executeScript
@@ -627,7 +627,7 @@ chrome.scripting.executeScript(
 );
 ```
 
-### Permission Changes {#permission-changes}
+Permission Changes {#permission-changes}
 
 | MV2 Permission | MV3 Permission |
 |---------------|----------------|
@@ -635,14 +635,14 @@ chrome.scripting.executeScript(
 | `"<all_urls>"` | `"host_permissions": ["<all_urls>"]` |
 | Automatic on page load | Must use `registerContentScripts` or inject on demand |
 
-### Key Differences {#key-differences}
+Key Differences {#key-differences}
 
-1. **Permissions**: MV3 requires explicit host permissions for each site
-2. **Promise-based**: MV3 supports promises (can use async/await)
-3. **World option**: MV3 adds the `world` option for MAIN/ISOLATED choice
-4. **No more automatic injection**: Use `registerContentScripts` for automatic loading
+1. Permissions: MV3 requires explicit host permissions for each site
+2. Promise-based: MV3 supports promises (can use async/await)
+3. World option: MV3 adds the `world` option for MAIN/ISOLATED choice
+4. No more automatic injection: Use `registerContentScripts` for automatic loading
 
-### Full Migration Example {#full-migration-example}
+Full Migration Example {#full-migration-example}
 
 ```javascript
 // MV2 Background Script
@@ -675,7 +675,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 });
 ```
 
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 
 Proper error handling is crucial when working with the Scripting API:
 
@@ -722,11 +722,11 @@ Common errors include:
 - `"Permission denied"` - Host permission missing
 - `"Frame not found"` - Frame was destroyed before injection
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Use activeTab when possible**: This grants temporary access to the active tab without broad host permissions
+1. Use activeTab when possible: This grants temporary access to the active tab without broad host permissions
 
-2. **Check tab permissions before injecting**:
+2. Check tab permissions before injecting:
    ```javascript
    async function canInject(tabId) {
      try {
@@ -741,17 +741,17 @@ Common errors include:
    }
    ```
 
-3. **Use content script registration for automatic injection**: Register scripts in the manifest or dynamically for pages that need them always
+3. Use content script registration for automatic injection: Register scripts in the manifest or dynamically for pages that need them always
 
-4. **Prefer functions over strings**: Using `func` instead of `code` is safer and more performant
+4. Prefer functions over strings: Using `func` instead of `code` is safer and more performant
 
-5. **Handle frame hierarchies carefully**: Remember that `allFrames` includes all frames, including iframes from different origins
+5. Handle frame hierarchies carefully: Remember that `allFrames` includes all frames, including iframes from different origins
 
-6. **Clean up injected CSS**: Remove injected styles when they're no longer needed to avoid memory leaks
+6. Clean up injected CSS: Remove injected styles when they're no longer needed to avoid memory leaks
 
-7. **Use world appropriately**: Only use MAIN world when necessary, as it can expose extension code to page scripts
+7. Use world appropriately: Only use MAIN world when necessary, as it can expose extension code to page scripts
 
-## Summary {#summary}
+Summary {#summary}
 
 The Scripting API is essential for Manifest V3 extensions that need to:
 - Programmatically inject JavaScript or CSS into web pages
@@ -759,41 +759,41 @@ The Scripting API is essential for Manifest V3 extensions that need to:
 - Work with both isolated and main execution contexts
 - Precisely target specific tabs, frames, or all frames
 
-Understanding the differences between ISOLATED and MAIN worlds, proper error handling, and the migration path from Manifest V2 will help you build robust and secure extensions.
+Understanding the differences between ISOLATED and MAIN worlds, proper error handling, and the migration path from Manifest V2 will help you build solid and secure extensions.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Scripting API Reference](../api-reference/scripting-api.md)
 - [Content Script Injection](../patterns/content-script-injection.md)
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-## Reference
+Reference
 
 - [Chrome Scripting API](https://developer.chrome.com/docs/extensions/reference/api/scripting)
 - [Content Scripts Guide](https://developer.chrome.com/docs/extensions/mv3/content_scripts/)
 - [Manifest V3 Migration](https://developer.chrome.com/docs/extensions/mv3/intro/)
-title: "Chrome Extension Scripting API — Dynamic Script and CSS Injection in MV3"
+title: "Chrome Extension Scripting API. Dynamic Script and CSS Injection in MV3"
 description: A comprehensive guide to dynamic script and CSS injection in Chrome Extensions using the Manifest V3 Scripting API
 author: theluckystrike
 date: 2024
 ---
 
-# Chrome Extension Scripting API — Dynamic Script and CSS Injection in MV3
+Chrome Extension Scripting API. Dynamic Script and CSS Injection in MV3
 
 The Chrome Extension Scripting API is one of the most powerful additions in Manifest V3, enabling developers to dynamically inject JavaScript and CSS into web pages at runtime. This capability opens up endless possibilities for building feature-rich extensions that can interact with any webpage, modify its appearance, or extract data on demand.
 
-## Understanding chrome.scripting.executeScript
+Understanding chrome.scripting.executeScript
 
 The `chrome.scripting.executeScript` method is the primary way to inject JavaScript code into web pages programmatically. Unlike the deprecated `chrome.tabs.executeScript` from Manifest V2, this new API provides more flexibility and better performance characteristics.
 
-### Basic Usage
+Basic Usage
 
 To execute a script, you need to specify the target tab and the script content:
 
@@ -806,7 +806,7 @@ chrome.scripting.executeScript({
 
 The API supports two injection methods: file-based and function-based. File-based injection loads scripts from extension resources, while function-based injection executes a JavaScript function directly within the page context.
 
-### Function Injection
+Function Injection
 
 Function injection is particularly useful when you need to pass dynamic data to your script:
 
@@ -821,13 +821,13 @@ chrome.scripting.executeScript({
 });
 ```
 
-This approach eliminates the need to create temporary script files and allows for seamless data passing between your extension background and the injected code.
+This approach eliminates the need to create temporary script files and allows for smooth data passing between your extension background and the injected code.
 
-## Working with CSS: insertCSS and removeCSS
+Working with CSS: insertCSS and removeCSS
 
 The Scripting API provides similar functionality for CSS manipulation through `chrome.scripting.insertCSS` and `chrome.scripting.removeCSS`. These methods allow you to dynamically add or remove stylesheets without modifying the page's permanent CSS.
 
-### Inserting CSS
+Inserting CSS
 
 ```javascript
 chrome.scripting.insertCSS({
@@ -845,7 +845,7 @@ chrome.scripting.insertCSS({
 });
 ```
 
-### Removing CSS
+Removing CSS
 
 To remove previously injected CSS, use the `removeCSS` method:
 
@@ -858,7 +858,7 @@ chrome.scripting.removeCSS({
 
 This is particularly useful for toggle features where you want to apply and remove styles dynamically based on user interaction.
 
-## Registering Content Scripts with registerContentScripts
+Registering Content Scripts with registerContentScripts
 
 The `chrome.scripting.registerContentScripts` method allows you to programmatically register content scripts that automatically inject when matching conditions are met. This is useful for extensions that need to run on specific websites or under certain conditions.
 
@@ -874,11 +874,11 @@ chrome.scripting.registerContentScripts([{
 
 Unlike declarativeNetRequest rules, content scripts registered this way can manipulate the DOM directly and communicate with the extension background script.
 
-## The World Parameter: MAIN and ISOLATED
+The World Parameter: MAIN and ISOLATED
 
 One of the most significant additions to the Scripting API is the `world` parameter, which allows you to specify which execution context to use: `'MAIN'` or `'ISOLATED'`.
 
-### ISOLATED World (Default)
+ISOLATED World (Default)
 
 By default, scripts run in the isolated world, which is separate from the page's JavaScript context. This provides security benefits but means your scripts cannot access page variables directly:
 
@@ -893,7 +893,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-### MAIN World
+MAIN World
 
 The `'MAIN'` world allows your injected scripts to share the same JavaScript context as the webpage. This enables direct access to page variables and functions:
 
@@ -910,11 +910,11 @@ chrome.scripting.executeScript({
 
 However, be cautious when using MAIN world as it exposes your extension code to the webpage and vice versa, potentially creating security vulnerabilities.
 
-## File vs Function Injection: When to Use Each
+File vs Function Injection: When to Use Each
 
 Choosing between file and function injection depends on your use case:
 
-### File Injection
+File Injection
 
 Best for:
 - Large scripts that would be cumbersome to inline
@@ -922,7 +922,7 @@ Best for:
 - Sharing code across multiple injection points
 - Complex logic with multiple dependencies
 
-### Function Injection
+Function Injection
 
 Best for:
 - Small scripts with dynamic parameters
@@ -930,18 +930,18 @@ Best for:
 - When you need to pass data from the extension context
 - Simple DOM manipulations that don't warrant a separate file
 
-## Best Practices and Performance Considerations
+Best Practices and Performance Considerations
 
 When using the Scripting API, keep these performance tips in mind:
 
-1. **Minimize injection frequency**: Avoid injecting scripts repeatedly. Cache the results and reuse them when possible.
+1. Minimize injection frequency: Avoid injecting scripts repeatedly. Cache the results and reuse them when possible.
 
-2. **Use runAt strategically**: Set `runAt` to `document_idle` (default) for most cases, but use `document_start` when you need to inject CSS before the page renders to prevent flash of unstyled content.
+2. Use runAt strategically: Set `runAt` to `document_idle` (default) for most cases, but use `document_start` when you need to inject CSS before the page renders to prevent flash of unstyled content.
 
-3. **Clean up after yourself**: Always remove injected CSS and scripts when they're no longer needed to prevent memory leaks and unintended side effects.
+3. Clean up after yourself: Always remove injected CSS and scripts when they're no longer needed to prevent memory leaks and unintended side effects.
 
-4. **Handle errors gracefully**: The Scripting API returns promises, so always handle potential errors with proper try-catch blocks or `.catch()` handlers.
+4. Handle errors gracefully: The Scripting API returns promises, so always handle potential errors with proper try-catch blocks or `.catch()` handlers.
 
-## Conclusion
+Conclusion
 
 The Chrome Extension Scripting API provides powerful tools for dynamic content injection in Manifest V3. By understanding `executeScript`, `insertCSS`, `removeCSS`, and `registerContentScripts`, along with the `world` parameter, you can build sophisticated extensions that can interact with any webpage dynamically and efficiently.

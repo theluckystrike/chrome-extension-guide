@@ -11,17 +11,17 @@ canonical_url: "https://bestchromeextensions.com/2025/03/28/chrome-extension-sup
 
 # Chrome Extension with Supabase Backend: Auth, Database, and Real-Time
 
-Building a Chrome extension is only half the battle. When you need to store user data, authenticate users across devices, or sync information in real-time, you need a robust backend. Supabase is an open-source Firebase alternative that provides exactly what modern Chrome extensions need: authentication, a PostgreSQL database, and real-time subscriptions — all with a generous free tier that is perfect for getting started.
+Building a Chrome extension is only half the battle. When you need to store user data, authenticate users across devices, or sync information in real-time, you need a solid backend. Supabase is an open-source Firebase alternative that provides exactly what modern Chrome extensions need: authentication, a PostgreSQL database, and real-time subscriptions. all with a generous free tier that is perfect for getting started.
 
-In this comprehensive guide, we will walk through building a Chrome extension that connects to Supabase for user authentication, database operations, and real-time data synchronization. Whether you are building a note-taking extension, a productivity tool, or a team collaboration app, this guide will give you the foundation you need.
+we will walk through building a Chrome extension that connects to Supabase for user authentication, database operations, and real-time data synchronization. Whether you are building a note-taking extension, a productivity tool, or a team collaboration app, this guide will give you the foundation you need.
 
 ---
 
-## Why Supabase for Chrome Extensions? {#why-supabase}
+Why Supabase for Chrome Extensions? {#why-supabase}
 
 Before we dive into the code, let us understand why Supabase is an excellent choice for Chrome extension backends. Supabase provides a complete backend-as-a-service platform built on PostgreSQL, one of the most reliable and feature-rich database systems in the world. Unlike other solutions, Supabase gives you a real SQL database, which means you can perform complex queries, joins, and aggregations that would be difficult or impossible with NoSQL alternatives.
 
-### Key Benefits of Supabase for Extensions
+Key Benefits of Supabase for Extensions
 
 Supabase offers several advantages that make it particularly well-suited for Chrome extension development. First, the authentication system is drop-in ready. You can add email/password login, OAuth providers like Google and GitHub, and even magic link authentication with just a few lines of code. This means your extension can have user accounts without building your own auth system from scratch.
 
@@ -33,13 +33,13 @@ Fourth, the client libraries are excellent. Supabase provides official JavaScrip
 
 ---
 
-## Setting Up Your Supabase Project {#setting-up-supabase}
+Setting Up Your Supabase Project {#setting-up-supabase}
 
 The first step is to create a Supabase project and get your credentials. Head over to supabase.com and create a new project. Choose a name like "chrome-extension-demo" and set a secure password for your database. Once your project is ready, you will be taken to the dashboard where you can find your project URL and anon public key.
 
-In the Supabase dashboard, navigate to the Settings section and then to API. Here you will find your Project URL and the `anon` public key. Keep these credentials handy — you will need them to connect your Chrome extension to Supabase.
+In the Supabase dashboard, navigate to the Settings section and then to API. Here you will find your Project URL and the `anon` public key. Keep these credentials handy. you will need them to connect your Chrome extension to Supabase.
 
-### Creating Your Database Schema
+Creating Your Database Schema
 
 Now let us set up the database tables your extension will use. In the Supabase dashboard, click on the Table Editor in the left sidebar and create a new table called "profiles". This table will store additional user information beyond what Supabase Auth provides automatically.
 
@@ -53,7 +53,7 @@ Finally, enable real-time for the notes table. Go to the Database section, find 
 
 ---
 
-## Installing Supabase in Your Extension {#installing-supabase}
+Installing Supabase in Your Extension {#installing-supabase}
 
 Now it is time to integrate Supabase into your Chrome extension. If you are starting from scratch, create a new Chrome extension project using the manifest V3 format. If you already have an extension, you can add Supabase to it.
 
@@ -73,7 +73,7 @@ For Chrome extensions, it is best to use a build system like Vite, Webpack, or P
 
 ---
 
-## Initializing the Supabase Client {#initializing-client}
+Initializing the Supabase Client {#initializing-client}
 
 With Supabase installed, the next step is to initialize the client in your extension code. Create a new file called supabase.js in your extension directory. This file will handle the connection to your Supabase project.
 
@@ -92,11 +92,11 @@ One important consideration for Chrome extensions is where to initialize the cli
 
 ---
 
-## Adding Authentication to Your Extension {#authentication}
+Adding Authentication to Your Extension {#authentication}
 
 User authentication is often the first feature extension developers need. Supabase Auth makes this straightforward with support for multiple authentication methods. Let us implement email/password authentication as well as Google OAuth.
 
-### Email and Password Login
+Email and Password Login
 
 For basic email/password authentication, you need forms for sign up and sign in. In your popup HTML, create input fields for email and password, along with buttons for signing up and signing in. Then handle the button clicks in your JavaScript.
 
@@ -141,9 +141,9 @@ async function signIn(email, password) {
 }
 ```
 
-The sign-in response includes both the user object and a session object. The session contains an access token that Supabase uses to authenticate database requests. You do not need to manually handle this token — the Supabase client automatically manages it.
+The sign-in response includes both the user object and a session object. The session contains an access token that Supabase uses to authenticate database requests. You do not need to manually handle this token. the Supabase client automatically manages it.
 
-### Google OAuth
+Google OAuth
 
 For a better user experience, you can also offer Google OAuth. This allows users to sign in with their Google account without creating a new password. To set this up, you need to configure Google as an authentication provider in your Supabase dashboard.
 
@@ -167,7 +167,7 @@ async function signInWithGoogle() {
 }
 ```
 
-### Managing Auth State
+Managing Auth State
 
 Your extension needs to respond to authentication state changes. Supabase provides a method to listen for changes:
 
@@ -187,11 +187,11 @@ This is particularly useful for updating your popup UI whenever the user signs i
 
 ---
 
-## Database Operations in Your Extension {#database-operations}
+Database Operations in Your Extension {#database-operations}
 
 Now that users can authenticate, let us perform database operations. We will create, read, update, and delete notes using the Supabase client.
 
-### Creating Data
+Creating Data
 
 To create a new note in the database:
 
@@ -226,7 +226,7 @@ async function createNote(title, content) {
 
 The Supabase client automatically includes the user's authentication token with database requests. The Row Level Security policies we set up earlier ensure that this note is only accessible to the authenticated user.
 
-### Reading Data
+Reading Data
 
 To fetch all notes for the current user:
 
@@ -265,7 +265,7 @@ async function getNote(noteId) {
 }
 ```
 
-### Updating Data
+Updating Data
 
 To update an existing note:
 
@@ -290,7 +290,7 @@ async function updateNote(noteId, updates) {
 }
 ```
 
-### Deleting Data
+Deleting Data
 
 To delete a note:
 
@@ -312,11 +312,11 @@ async function deleteNote(noteId) {
 
 ---
 
-## Real-Time Updates {#real-time-updates}
+Real-Time Updates {#real-time-updates}
 
 One of Supabase's most powerful features is real-time database subscriptions. This allows your extension to receive instant updates when data changes, either from other devices or from other parts of your extension.
 
-### Subscribing to Changes
+Subscribing to Changes
 
 To listen for changes to the notes table:
 
@@ -344,7 +344,7 @@ function subscribeToNotes(callback) {
 
 The payload contains information about what changed. For INSERT events, payload.new contains the new row data. For UPDATE events, payload.old contains the previous data and payload.new contains the updated data. For DELETE events, payload.old contains the deleted row data.
 
-### Filtering Real-Time Events
+Filtering Real-Time Events
 
 By default, you receive all changes to the table. To filter for only your user's notes, you can add a filter to the subscription:
 
@@ -372,7 +372,7 @@ async function subscribeToUserNotes(userId, callback) {
 
 This is important for performance and security. You do not want to receive updates for notes that belong to other users, and filtering at the subscription level reduces unnecessary network traffic.
 
-### Using Real-Time in Your Extension
+Using Real-Time in Your Extension
 
 Real-time subscriptions are particularly useful in several scenarios. First, if your extension supports multiple devices, real-time updates ensure that users see their notes update across all devices instantly. Second, if your extension has a background script that processes data, real-time notifications can trigger that processing. Third, for collaborative features where multiple users work on the same data, real-time updates provide immediate feedback.
 
@@ -405,32 +405,32 @@ async function initPopup() {
 
 ---
 
-## Best Practices for Extension Backend Development {#best-practices}
+Best Practices for Extension Backend Development {#best-practices}
 
 As your extension grows, there are several best practices you should follow to ensure reliability and performance.
 
-### Error Handling
+Error Handling
 
 Always implement comprehensive error handling. Network requests can fail, users can lose internet connectivity, and database operations can encounter constraints. Handle each error case gracefully and provide helpful feedback to users.
 
-### State Management
+State Management
 
 Use chrome.storage to persist authentication state and user preferences. This allows your extension to restore its state when the user reopens the popup after closing it. The Supabase session can be automatically persisted, but you may want to cache other data for performance.
 
-### Security Considerations
+Security Considerations
 
 Never expose your Supabase service role key in extension code. The service role bypasses Row Level Security and should only be used in server-side applications. The anon key is safe to include in your extension because it is designed to be public. RLS policies protect user data regardless of what key is used in the client.
 
-### Performance Optimization
+Performance Optimization
 
 Minimize the amount of data you fetch. Use select() to specify only the columns you need, use pagination for large datasets, and implement caching where appropriate. The Supabase client supports all of these optimizations.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Supabase provides an excellent backend solution for Chrome extensions. With its built-in authentication, PostgreSQL database, and real-time capabilities, you can build sophisticated extensions that rival native applications in functionality. The generous free tier lets you start building without upfront costs, and the straightforward pricing makes growth predictable.
 
-In this guide, we covered setting up Supabase, connecting it to your extension, implementing authentication with both email/password and OAuth, performing CRUD operations on your database, and subscribing to real-time updates. With these foundations, you can build everything from simple note-taking apps to complex collaborative tools.
+we covered setting up Supabase, connecting it to your extension, implementing authentication with both email/password and OAuth, performing CRUD operations on your database, and subscribing to real-time updates. With these foundations, you can build everything from simple note-taking apps to complex collaborative tools.
 
-The Chrome extension ecosystem continues to evolve, and having a robust backend like Supabase opens up possibilities that were previously difficult to implement. Start with this guide, experiment with the features, and build something amazing.
+The Chrome extension ecosystem continues to evolve, and having a solid backend like Supabase opens up possibilities that were previously difficult to implement. Start with this guide, experiment with the features, and build something amazing.

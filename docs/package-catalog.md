@@ -105,7 +105,7 @@ npm install @theluckystrike/chrome-sync-engine
 
 ---
 
-## Tabs & Windows {#tabs-windows}
+Tabs & Windows {#tabs-windows}
 
 | Package | Description |
 |---------|-------------|
@@ -117,7 +117,7 @@ npm install @theluckystrike/chrome-sync-engine
 | [chrome-workspace-manager](#chrome-workspace-manager) | Tab workspace management |
 | [webext-sidePanel](#webext-sidepanel) | Promise-based wrapper for Chrome SidePanel API |
 
-### webext-tabs {#webext-tabs}
+webext-tabs {#webext-tabs}
 
 Common tab query patterns as typed helpers for Chrome extensions.
 
@@ -131,7 +131,7 @@ npm install @theluckystrike/webext-tabs
 - Typed tab event subscriptions
 - Batch operations (close, move, highlight)
 
-### chrome-tabs-manager {#chrome-tabs-manager}
+chrome-tabs-manager {#chrome-tabs-manager}
 
 Type-safe wrapper for the Chrome tabs API with query helpers and event subscriptions.
 
@@ -145,7 +145,7 @@ npm install @theluckystrike/chrome-tabs-manager
 - Typed event subscriptions for tab lifecycle
 - Multi-filter query support
 
-### webext-tabGroups {#webext-tabgroups}
+webext-tabGroups {#webext-tabgroups}
 
 Typed Chrome tabGroups helper for extension developers.
 
@@ -159,7 +159,7 @@ npm install @theluckystrike/webext-tabGroups
 - Color and title management
 - Group collapse/expand control
 
-### chrome-tab-groups-api {#chrome-tab-groups-api}
+chrome-tab-groups-api {#chrome-tab-groups-api}
 
 Tab Groups API wrapper.
 
@@ -173,7 +173,7 @@ npm install @theluckystrike/chrome-tab-groups-api
 - Move tabs between groups
 - Persist and restore group layouts
 
-### webext-windows {#webext-windows}
+webext-windows {#webext-windows}
 
 Typed Chrome windows helper for extension developers.
 
@@ -187,7 +187,7 @@ npm install @theluckystrike/webext-windows
 - Window type filtering (normal, popup, panel)
 - Focus and bounds management
 
-### chrome-workspace-manager {#chrome-workspace-manager}
+chrome-workspace-manager {#chrome-workspace-manager}
 
 Tab workspace management for Chrome extensions.
 
@@ -201,7 +201,7 @@ npm install @theluckystrike/chrome-workspace-manager
 - Named workspace profiles
 - Cross-window workspace management
 
-### webext-sidePanel {#webext-sidepanel}
+webext-sidePanel {#webext-sidepanel}
 
 Promise-based wrapper for Chrome SidePanel API.
 
@@ -217,7 +217,7 @@ npm install @theluckystrike/webext-sidePanel
 
 ---
 
-## UI Components {#ui-components}
+UI Components {#ui-components}
 
 | Package | Description |
 |---------|-------------|
@@ -234,7 +234,7 @@ npm install @theluckystrike/webext-sidePanel
 | [webext-form-validator](#webext-form-validator) | Form validation |
 | [chrome-onboarding-flow](#chrome-onboarding-flow) | Onboarding flow builder |
 
-### webext-popup-router {#webext-popup-router}
+webext-popup-router {#webext-popup-router}
 
 Hash-based popup page router with transitions.
 
@@ -248,7 +248,7 @@ npm install @theluckystrike/webext-popup-router
 - Page transition animations
 - Route guards and middleware
 
-### webext-command-palette {#webext-command-palette}
+webext-command-palette {#webext-command-palette}
 
 Command palette (Ctrl+K) for Chrome extensions.
 
@@ -262,7 +262,7 @@ npm install @theluckystrike/webext-command-palette
 - Keyboard-first navigation
 - Customizable appearance and key bindings
 
-### webext-modal-dialog {#webext-modal-dialog}
+webext-modal-dialog {#webext-modal-dialog}
 
 Modal dialogs for Chrome extensions.
 
@@ -276,7 +276,7 @@ npm install @theluckystrike/webext-modal-dialog
 - Promise-based API for user responses
 - Focus trapping and keyboard accessibility
 
-### webext-error-boundary {#webext-error-boundary}
+webext-error-boundary {#webext-error-boundary}
 
 Error boundary UI for Chrome extensions.
 
@@ -290,7 +290,7 @@ npm install @theluckystrike/webext-error-boundary
 - Customizable fallback UI
 - Error reporting callbacks
 
-### webext-empty-state {#webext-empty-state}
+webext-empty-state {#webext-empty-state}
 
 Empty state components for Chrome extensions.
 
@@ -304,7 +304,7 @@ npm install @theluckystrike/webext-empty-state
 - Action button integration
 - Customizable message and description
 
-### webext-skeleton-loader {#webext-skeleton-loader}
+webext-skeleton-loader {#webext-skeleton-loader}
 
 Skeleton loading placeholders for Chrome extensions.
 
@@ -318,7 +318,7 @@ npm install @theluckystrike/webext-skeleton-loader
 - Multiple layout presets (list, card, table)
 - Configurable shimmer animation
 
-### webext-split-view {#webext-split-view}
+webext-split-view {#webext-split-view}
 
 Resizable panel layout for Chrome extensions.
 
@@ -332,7 +332,7 @@ npm install @theluckystrike/webext-split-view
 - Drag-to-resize with min/max constraints
 - Persist panel sizes across sessions
 
-### webext-theme-engine {#webext-theme-engine}
+webext-theme-engine {#webext-theme-engine}
 
 Dynamic themes for Chrome extensions.
 
@@ -346,7 +346,7 @@ npm install @theluckystrike/webext-theme-engine
 - CSS custom property theming
 - Runtime theme switching
 
-### webext-form-autofill {#webext-form-autofill}
+webext-form-autofill {#webext-form-autofill}
 
 Form autofill for Chrome extensions.
 
@@ -360,7 +360,7 @@ npm install @theluckystrike/webext-form-autofill
 - Field matching heuristics
 - Privacy-aware data handling
 
-### webext-form-state {#webext-form-state}
+webext-form-state {#webext-form-state}
 
 Form state persistence for Chrome extensions.
 
@@ -374,7 +374,7 @@ npm install @theluckystrike/webext-form-state
 - Automatic save and restore
 - Dirty state tracking
 
-### webext-form-validator {#webext-form-validator}
+webext-form-validator {#webext-form-validator}
 
 Form validation for Chrome extensions.
 
@@ -388,7 +388,7 @@ npm install @theluckystrike/webext-form-validator
 - Real-time field validation
 - Custom error messages
 
-### chrome-onboarding-flow {#chrome-onboarding-flow}
+chrome-onboarding-flow {#chrome-onboarding-flow}
 
 Onboarding flow builder for Chrome extensions.
 
@@ -404,7 +404,7 @@ npm install @theluckystrike/chrome-onboarding-flow
 
 ---
 
-## Messaging & Communication {#messaging-communication}
+Messaging & Communication {#messaging-communication}
 
 | Package | Description |
 |---------|-------------|
@@ -414,7 +414,7 @@ npm install @theluckystrike/chrome-onboarding-flow
 | [webext-runtime](#webext-runtime) | Typed Chrome runtime helper |
 | [webext-gcm](#webext-gcm) | Google Cloud Messaging helper |
 
-### webext-messaging {#webext-messaging}
+webext-messaging {#webext-messaging}
 
 Promise-based typed message passing for Chrome extensions.
 
@@ -428,7 +428,7 @@ npm install @theluckystrike/webext-messaging
 - Background-to-content and content-to-background messaging
 - Error wrapping with `MessagingError` class
 
-### webext-event-bus {#webext-event-bus}
+webext-event-bus {#webext-event-bus}
 
 Pub/sub event bus for Chrome extensions.
 
@@ -442,7 +442,7 @@ npm install @theluckystrike/webext-event-bus
 - Wildcard event matching
 - Cross-context event propagation
 
-### webext-content-bridge {#webext-content-bridge}
+webext-content-bridge {#webext-content-bridge}
 
 Type-safe RPC bridge for Chrome extensions.
 
@@ -456,7 +456,7 @@ npm install @theluckystrike/webext-content-bridge
 - Automatic request/response matching
 - Timeout and retry configuration
 
-### webext-runtime {#webext-runtime}
+webext-runtime {#webext-runtime}
 
 Typed Chrome runtime helper for extension developers.
 
@@ -470,7 +470,7 @@ npm install @theluckystrike/webext-runtime
 - Platform and extension info queries
 - Message passing utilities
 
-### webext-gcm {#webext-gcm}
+webext-gcm {#webext-gcm}
 
 Typed Chrome GCM helper for extension developers.
 
@@ -486,7 +486,7 @@ npm install @theluckystrike/webext-gcm
 
 ---
 
-## Security & Permissions {#security-permissions}
+Security & Permissions {#security-permissions}
 
 | Package | Description |
 |---------|-------------|
@@ -498,7 +498,7 @@ npm install @theluckystrike/webext-gcm
 | [chrome-declarative-net](#chrome-declarative-net) | DeclarativeNetRequest rule builder |
 | [chrome-request-filter](#chrome-request-filter) | Request filtering via DNR |
 
-### webext-permissions {#webext-permissions}
+webext-permissions {#webext-permissions}
 
 Runtime permission checking and requesting for Chrome extensions.
 
@@ -512,7 +512,7 @@ npm install @theluckystrike/webext-permissions
 - Human-readable permission descriptions (50+ permissions)
 - Batch permission operations
 
-### chrome-permissions-guard {#chrome-permissions-guard}
+chrome-permissions-guard {#chrome-permissions-guard}
 
 Type-safe wrapper for the Chrome permissions API with request, check, and event helpers.
 
@@ -526,7 +526,7 @@ npm install @theluckystrike/chrome-permissions-guard
 - Destroyed-state detection for safety
 - Generic preservation across permission checks
 
-### webext-contentSettings {#webext-contentsettings}
+webext-contentSettings {#webext-contentsettings}
 
 Chrome extension contentSettings API wrapper for TypeScript.
 
@@ -540,7 +540,7 @@ npm install @theluckystrike/webext-contentSettings
 - Typed get/set/clear operations
 - Pattern-based site matching
 
-### webext-privacy {#webext-privacy}
+webext-privacy {#webext-privacy}
 
 Chrome extension privacy API wrapper for TypeScript.
 
@@ -554,7 +554,7 @@ npm install @theluckystrike/webext-privacy
 - Network, website, and services privacy configuration
 - Typed setting values with get/set/clear
 
-### webext-declarativeNetRequest {#webext-declarativenetrequest}
+webext-declarativeNetRequest {#webext-declarativenetrequest}
 
 Chrome extension declarativeNetRequest API wrapper for TypeScript.
 
@@ -568,7 +568,7 @@ npm install @theluckystrike/webext-declarativeNetRequest
 - Dynamic and session rule support
 - Rule matching and debugging helpers
 
-### chrome-declarative-net {#chrome-declarative-net}
+chrome-declarative-net {#chrome-declarative-net}
 
 DeclarativeNetRequest rule builder for MV3.
 
@@ -582,7 +582,7 @@ npm install @theluckystrike/chrome-declarative-net
 - Block, redirect, and modify header rules
 - Rule priority and condition helpers
 
-### chrome-request-filter {#chrome-request-filter}
+chrome-request-filter {#chrome-request-filter}
 
 Request filtering via declarativeNetRequest.
 
@@ -598,7 +598,7 @@ npm install @theluckystrike/chrome-request-filter
 
 ---
 
-## Browser APIs {#browser-apis}
+Browser APIs {#browser-apis}
 
 | Package | Description |
 |---------|-------------|
@@ -628,7 +628,7 @@ npm install @theluckystrike/chrome-request-filter
 | [webext-tts](#webext-tts) | Typed Chrome TTS helper |
 | [webext-webRequest](#webext-webrequest) | Ergonomic webRequest API wrapper |
 
-### webext-action {#webext-action}
+webext-action {#webext-action}
 
 Typed Chrome action helper for extension developers.
 
@@ -642,7 +642,7 @@ npm install @theluckystrike/webext-action
 - Per-tab action configuration
 - Click event handling
 
-### webext-alarms {#webext-alarms}
+webext-alarms {#webext-alarms}
 
 Typed Chrome alarms helper for extension developers.
 
@@ -656,7 +656,7 @@ npm install @theluckystrike/webext-alarms
 - Typed alarm event listeners
 - Minimum interval enforcement
 
-### chrome-alarms-cron {#chrome-alarms-cron}
+chrome-alarms-cron {#chrome-alarms-cron}
 
 Cron-like scheduler for MV3 Chrome extensions using the chrome.alarms API.
 
@@ -670,7 +670,7 @@ npm install @theluckystrike/chrome-alarms-cron
 - Minimum delay/period clamped to 1 minute
 - Named schedules with get/cancel support
 
-### webext-badge {#webext-badge}
+webext-badge {#webext-badge}
 
 Typed badge text and color management for Chrome extensions.
 
@@ -684,7 +684,7 @@ npm install @theluckystrike/webext-badge
 - Per-tab badge configuration
 - Clear and reset helpers
 
-### webext-bookmarks {#webext-bookmarks}
+webext-bookmarks {#webext-bookmarks}
 
 Typed bookmark helpers for Chrome extensions.
 
@@ -698,7 +698,7 @@ npm install @theluckystrike/webext-bookmarks
 - Search and tree traversal
 - Bookmark event subscriptions
 
-### webext-clipboard {#webext-clipboard}
+webext-clipboard {#webext-clipboard}
 
 Typed clipboard helpers for Chrome extensions.
 
@@ -712,7 +712,7 @@ npm install @theluckystrike/webext-clipboard
 - Image clipboard support
 - Clipboard change detection
 
-### webext-context-menu {#webext-context-menu}
+webext-context-menu {#webext-context-menu}
 
 Typed context menu builder with nested menus for Chrome extensions.
 
@@ -726,7 +726,7 @@ npm install @theluckystrike/webext-context-menu
 - Typed click handlers with context info
 - `registerMenus()` for batch creation
 
-### webext-cookies {#webext-cookies}
+webext-cookies {#webext-cookies}
 
 Promise-based wrapper for Chrome Cookies API.
 
@@ -740,7 +740,7 @@ npm install @theluckystrike/webext-cookies
 - Cookie store enumeration
 - Cookie change event listeners
 
-### webext-debugger {#webext-debugger}
+webext-debugger {#webext-debugger}
 
 Typed Chrome debugger helper for extension developers.
 
@@ -754,7 +754,7 @@ npm install @theluckystrike/webext-debugger
 - Send typed debugger commands
 - Event stream handling
 
-### webext-devtools {#webext-devtools}
+webext-devtools {#webext-devtools}
 
 Promise-based wrapper for Chrome DevTools API.
 
@@ -768,7 +768,7 @@ npm install @theluckystrike/webext-devtools
 - Inspect element integration
 - Network and resource access
 
-### webext-downloads {#webext-downloads}
+webext-downloads {#webext-downloads}
 
 Typed download helpers for Chrome extensions.
 
@@ -782,7 +782,7 @@ npm install @theluckystrike/webext-downloads
 - Download progress tracking
 - File open and show in folder
 
-### webext-history {#webext-history}
+webext-history {#webext-history}
 
 Typed history helpers for Chrome extensions.
 
@@ -796,7 +796,7 @@ npm install @theluckystrike/webext-history
 - Add and delete history entries
 - Visit detail retrieval
 
-### webext-i18n {#webext-i18n}
+webext-i18n {#webext-i18n}
 
 Internationalization toolkit for Chrome extensions.
 
@@ -810,7 +810,7 @@ npm install @theluckystrike/webext-i18n
 - Message placeholders and substitutions
 - Locale detection and fallback
 
-### webext-identity {#webext-identity}
+webext-identity {#webext-identity}
 
 Typed Chrome identity helper for extension developers.
 
@@ -824,7 +824,7 @@ npm install @theluckystrike/webext-identity
 - Token management and caching
 - Profile information retrieval
 
-### webext-idle {#webext-idle}
+webext-idle {#webext-idle}
 
 Chrome extension idle API wrapper for TypeScript.
 
@@ -838,7 +838,7 @@ npm install @theluckystrike/webext-idle
 - Set idle detection interval
 - Idle state change listeners
 
-### webext-keyboard-shortcuts {#webext-keyboard-shortcuts}
+webext-keyboard-shortcuts {#webext-keyboard-shortcuts}
 
 Keyboard shortcuts for Chrome extensions.
 
@@ -852,7 +852,7 @@ npm install @theluckystrike/webext-keyboard-shortcuts
 - Shortcut conflict detection
 - Cross-platform key normalization
 
-### webext-notifications {#webext-notifications}
+webext-notifications {#webext-notifications}
 
 Typed notification wrapper with click handlers for Chrome extensions.
 
@@ -866,7 +866,7 @@ npm install @theluckystrike/webext-notifications
 - Typed click and button handlers
 - Notification update and clear
 
-### webext-offscreen {#webext-offscreen}
+webext-offscreen {#webext-offscreen}
 
 Typed offscreen document creation and messaging for Chrome extensions.
 
@@ -880,7 +880,7 @@ npm install @theluckystrike/webext-offscreen
 - Message passing to/from offscreen context
 - Automatic document lifecycle management
 
-### webext-omnibox {#webext-omnibox}
+webext-omnibox {#webext-omnibox}
 
 Typed Chrome omnibox helper for extension developers.
 
@@ -894,7 +894,7 @@ npm install @theluckystrike/webext-omnibox
 - Typed input change and accept handlers
 - Rich suggestion formatting
 
-### webext-pageCapture {#webext-pagecapture}
+webext-pageCapture {#webext-pagecapture}
 
 Typed Chrome pageCapture helper for extension developers.
 
@@ -908,7 +908,7 @@ npm install @theluckystrike/webext-pageCapture
 - Promise-based capture API
 - Tab targeting by ID
 
-### webext-power {#webext-power}
+webext-power {#webext-power}
 
 Chrome extension power API wrapper for TypeScript.
 
@@ -922,7 +922,7 @@ npm install @theluckystrike/webext-power
 - System and display level control
 - Typed power management levels
 
-### webext-proxy {#webext-proxy}
+webext-proxy {#webext-proxy}
 
 Typed Chrome proxy helper for extension developers.
 
@@ -936,7 +936,7 @@ npm install @theluckystrike/webext-proxy
 - PAC script support
 - Proxy error event handling
 
-### webext-scripting {#webext-scripting}
+webext-scripting {#webext-scripting}
 
 Promise-based wrapper for Chrome Scripting API.
 
@@ -950,7 +950,7 @@ npm install @theluckystrike/webext-scripting
 - Register content scripts dynamically
 - World isolation (MAIN vs ISOLATED)
 
-### webext-tts {#webext-tts}
+webext-tts {#webext-tts}
 
 Typed Chrome TTS helper for extension developers.
 
@@ -964,7 +964,7 @@ npm install @theluckystrike/webext-tts
 - Speech event callbacks (start, end, error)
 - Queue and interrupt management
 
-### webext-webRequest {#webext-webrequest}
+webext-webRequest {#webext-webrequest}
 
 Ergonomic wrapper for Chrome webRequest API.
 
@@ -980,7 +980,7 @@ npm install @theluckystrike/webext-webRequest
 
 ---
 
-## Utilities & Tools {#utilities-tools}
+Utilities & Tools {#utilities-tools}
 
 | Package | Description |
 |---------|-------------|
@@ -998,7 +998,7 @@ npm install @theluckystrike/webext-webRequest
 | [chrome-reading-list-api](#chrome-reading-list-api) | Reading List API |
 | [chrome-tts-api](#chrome-tts-api) | Text-to-Speech API |
 
-### chrome-extension-toolkit {#chrome-extension-toolkit}
+chrome-extension-toolkit {#chrome-extension-toolkit}
 
 Modern, comprehensive ecosystem for building Chrome Extensions.
 
@@ -1012,7 +1012,7 @@ npm install @theluckystrike/chrome-extension-toolkit
 - 40+ exported functions and types
 - ESM + CJS + TypeScript declarations
 
-### chrome-extension-testing {#chrome-extension-testing}
+chrome-extension-testing {#chrome-extension-testing}
 
 Testing utilities for Chrome extensions with realistic Chrome API mocks.
 
@@ -1026,7 +1026,7 @@ npm install @theluckystrike/chrome-extension-testing
 - Pre-configured mock tabs, windows, and storage
 - Reset helpers for test isolation
 
-### webext-hot-reload {#webext-hot-reload}
+webext-hot-reload {#webext-hot-reload}
 
 Dev hot reload for Chrome extensions.
 
@@ -1040,7 +1040,7 @@ npm install @theluckystrike/webext-hot-reload
 - Background script and content script reload
 - Development-only with zero production impact
 
-### webext-url-parser {#webext-url-parser}
+webext-url-parser {#webext-url-parser}
 
 URL pattern matching for Chrome extensions.
 
@@ -1054,7 +1054,7 @@ npm install @theluckystrike/webext-url-parser
 - Wildcard and regex support
 - URL component extraction
 
-### chrome-extension-publisher {#chrome-extension-publisher}
+chrome-extension-publisher {#chrome-extension-publisher}
 
 CLI tool to publish Chrome extensions to Web Store automatically.
 
@@ -1068,7 +1068,7 @@ npm install @theluckystrike/chrome-extension-publisher
 - CI/CD integration support
 - Version bump and zip packaging
 
-### chrome-release-notes {#chrome-release-notes}
+chrome-release-notes {#chrome-release-notes}
 
 Release notes generator for Chrome extensions.
 
@@ -1082,7 +1082,7 @@ npm install @theluckystrike/chrome-release-notes
 - Conventional commit support
 - Markdown and HTML output
 
-### chrome-update-notifier {#chrome-update-notifier}
+chrome-update-notifier {#chrome-update-notifier}
 
 Notify users about Chrome extension updates.
 
@@ -1096,7 +1096,7 @@ npm install @theluckystrike/chrome-update-notifier
 - Show update notification with changelog
 - First-install vs update differentiation
 
-### chrome-scroll-tracker {#chrome-scroll-tracker}
+chrome-scroll-tracker {#chrome-scroll-tracker}
 
 Scroll depth tracking for Chrome extensions.
 
@@ -1110,7 +1110,7 @@ npm install @theluckystrike/chrome-scroll-tracker
 - Milestone callbacks (25%, 50%, 75%, 100%)
 - Throttled event handling
 
-### chrome-state-machine {#chrome-state-machine}
+chrome-state-machine {#chrome-state-machine}
 
 Finite state machine for Chrome extensions.
 
@@ -1124,7 +1124,7 @@ npm install @theluckystrike/chrome-state-machine
 - Guard conditions and side effects
 - State persistence across service worker restarts
 
-### chrome-tab-profiler {#chrome-tab-profiler}
+chrome-tab-profiler {#chrome-tab-profiler}
 
 Page performance profiler for Chrome extensions.
 
@@ -1138,7 +1138,7 @@ npm install @theluckystrike/chrome-tab-profiler
 - Memory usage tracking
 - Performance report generation
 
-### chrome-download-manager {#chrome-download-manager}
+chrome-download-manager {#chrome-download-manager}
 
 Downloads API wrapper for Chrome extensions.
 
@@ -1152,7 +1152,7 @@ npm install @theluckystrike/chrome-download-manager
 - Progress tracking with callbacks
 - Batch download operations
 
-### chrome-reading-list-api {#chrome-reading-list-api}
+chrome-reading-list-api {#chrome-reading-list-api}
 
 Reading List API for Chrome extensions.
 
@@ -1166,7 +1166,7 @@ npm install @theluckystrike/chrome-reading-list-api
 - Query reading list items
 - Mark entries as read/unread
 
-### chrome-tts-api {#chrome-tts-api}
+chrome-tts-api {#chrome-tts-api}
 
 Text-to-Speech API for Chrome extensions.
 
@@ -1182,7 +1182,7 @@ npm install @theluckystrike/chrome-tts-api
 
 ---
 
-## System APIs {#system-apis}
+System APIs {#system-apis}
 
 | Package | Description |
 |---------|-------------|
@@ -1196,7 +1196,7 @@ npm install @theluckystrike/chrome-tts-api
 | [webext-printingMetrics](#webext-printingmetrics) | Printing Metrics API |
 | [webext-vpnProvider](#webext-vpnprovider) | VPN Provider API |
 
-### webext-system-cpu {#webext-system-cpu}
+webext-system-cpu {#webext-system-cpu}
 
 Typed Chrome system.cpu API wrapper for extension developers.
 
@@ -1210,7 +1210,7 @@ npm install @theluckystrike/webext-system-cpu
 - Per-processor usage statistics
 - Typed processor info interface
 
-### webext-system-memory {#webext-system-memory}
+webext-system-memory {#webext-system-memory}
 
 Typed Chrome system.memory API wrapper for extension developers.
 
@@ -1224,7 +1224,7 @@ npm install @theluckystrike/webext-system-memory
 - Memory capacity reporting
 - Typed memory info interface
 
-### webext-system-storage {#webext-system-storage}
+webext-system-storage {#webext-system-storage}
 
 Typed Chrome system.storage API wrapper for extension developers.
 
@@ -1238,7 +1238,7 @@ npm install @theluckystrike/webext-system-storage
 - Available capacity queries
 - Storage attach/detach events
 
-### webext-system-display {#webext-system-display}
+webext-system-display {#webext-system-display}
 
 Typed Chrome system.display API wrapper for extension developers.
 
@@ -1252,7 +1252,7 @@ npm install @theluckystrike/webext-system-display
 - Display change event listeners
 - Multi-monitor support
 
-### webext-management {#webext-management}
+webext-management {#webext-management}
 
 Type-safe wrapper for Chrome's Management API.
 
@@ -1266,7 +1266,7 @@ npm install @theluckystrike/webext-management
 - Extension info and permission queries
 - Install/uninstall event listeners
 
-### webext-enterprise {#webext-enterprise}
+webext-enterprise {#webext-enterprise}
 
 Type-safe wrapper for Chrome's Enterprise API.
 
@@ -1280,7 +1280,7 @@ npm install @theluckystrike/webext-enterprise
 - Managed storage access
 - Enterprise policy helpers
 
-### webext-fileSystemProvider {#webext-filesystemprovider}
+webext-fileSystemProvider {#webext-filesystemprovider}
 
 Type-safe wrapper for Chrome's File System Provider API.
 
@@ -1294,7 +1294,7 @@ npm install @theluckystrike/webext-fileSystemProvider
 - File operation handlers (read, write, stat)
 - Directory listing and metadata
 
-### webext-printingMetrics {#webext-printingmetrics}
+webext-printingMetrics {#webext-printingmetrics}
 
 Type-safe wrapper for Chrome's Printing Metrics API.
 
@@ -1308,7 +1308,7 @@ npm install @theluckystrike/webext-printingMetrics
 - Printer and job status queries
 - Print completion event listeners
 
-### webext-vpnProvider {#webext-vpnprovider}
+webext-vpnProvider {#webext-vpnprovider}
 
 Type-safe wrapper for Chrome's VPN Provider API.
 
@@ -1324,7 +1324,7 @@ npm install @theluckystrike/webext-vpnProvider
 
 ---
 
-Built by [theluckystrike](https://github.com/theluckystrike) — [zovo.one](https://zovo.one)
+Built by [theluckystrike](https://github.com/theluckystrike). [zovo.one](https://zovo.one)
 -e 
 ---
 

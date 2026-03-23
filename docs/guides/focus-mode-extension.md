@@ -12,23 +12,23 @@ A Focus Mode extension provides users with tools to block distracting websites, 
 
 ```
 src/
-├── manifest.json           # Extension configuration
-├── background/
-│   └── service-worker.ts   # Background service worker
-├── popup/
-│   ├── popup.html          # Popup UI
-│   ├── popup.ts            # Popup logic
-│   └── styles.css          # Popup styles
-├── content/
-│   └── overlay.ts          # Full-page overlay (injected)
-├── core/
-│   ├── focus-session.ts    # Core focus session logic
-│   ├── storage.ts          # Storage management
-│   └── blocklist.ts        # Site blocklist management
-├── types/
-│   └── index.ts            # TypeScript interfaces
-└── utils/
-    └── logger.ts           # Logging utility
+ manifest.json           # Extension configuration
+ background/
+    service-worker.ts   # Background service worker
+ popup/
+    popup.html          # Popup UI
+    popup.ts            # Popup logic
+    styles.css          # Popup styles
+ content/
+    overlay.ts          # Full-page overlay (injected)
+ core/
+    focus-session.ts    # Core focus session logic
+    storage.ts          # Storage management
+    blocklist.ts        # Site blocklist management
+ types/
+    index.ts            # TypeScript interfaces
+ utils/
+     logger.ts           # Logging utility
 ```
 
 ### manifest.json
@@ -643,11 +643,11 @@ test('Focus session lifecycle', async ({ page, extension }) => {
 
 ### Optimization Tips
 
-1. **Lazy Load Content Scripts**: Use dynamic import for heavy modules
-2. **Minimize Storage Operations**: Batch reads/writes with `chrome.storage.session`
-3. **Debounce Message Passing**: Aggregate rapid state updates
-4. **Use Declarative Net Request**: Block sites at network level (more efficient than content scripts)
-5. **Cache DOM Elements**: Avoid repeated `querySelector` calls
+1. Lazy Load Content Scripts: Use dynamic import for heavy modules
+2. Minimize Storage Operations: Batch reads/writes with `chrome.storage.session`
+3. Debounce Message Passing: Aggregate rapid state updates
+4. Use Declarative Net Request: Block sites at network level (more efficient than content scripts)
+5. Cache DOM Elements: Avoid repeated `querySelector` calls
 
 ```typescript
 // Use chrome.storage.session for temporary data
@@ -709,16 +709,16 @@ function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number) 
 
 This guide covered the essential components for building a Focus Mode Chrome extension:
 
-1. **Manifest V3** configuration with proper permissions
-2. **TypeScript types** for type safety across components
-3. **Storage management** using chrome.storage API
-4. **Session management** with chrome.alarms for scheduling
-5. **Site blocking** using declarativeNetRequest API
-6. **Popup UI** with real-time timer updates
-7. **Content script overlay** for visual blocking feedback
-8. **Message passing** between extension components
-9. **Error handling** for edge cases and recovery
-10. **Testing strategies** for unit and integration tests
+1. Manifest V3 configuration with proper permissions
+2. TypeScript types for type safety across components
+3. Storage management using chrome.storage API
+4. Session management with chrome.alarms for scheduling
+5. Site blocking using declarativeNetRequest API
+6. Popup UI with real-time timer updates
+7. Content script overlay for visual blocking feedback
+8. Message passing between extension components
+9. Error handling for edge cases and recovery
+10. Testing strategies for unit and integration tests
 
 For production, consider adding:
 - Statistics tracking and analytics

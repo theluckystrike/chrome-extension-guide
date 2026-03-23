@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Copy as Markdown — Developer Guide"
+title: "Chrome Extension Copy as Markdown. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-copy-as-markdown/"
 ---
@@ -8,13 +8,13 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-copy-as-markdow
 
 This tutorial guides you through building a Chrome extension that converts web content to Markdown format. The extension will copy selected HTML, links, and page titles as clean Markdown.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome browser
 - Basic JavaScript knowledge
 - Code editor (VS Code recommended)
 
-## Step 1: Create the Manifest {#step-1-create-the-manifest}
+Step 1: Create the Manifest {#step-1-create-the-manifest}
 
 The manifest defines permissions and the extension's configuration. For this extension, we need three key permissions:
 
@@ -38,7 +38,7 @@ The manifest defines permissions and the extension's configuration. For this ext
 }
 ```
 
-## Step 2: Set Up Context Menus {#step-2-set-up-context-menus}
+Step 2: Set Up Context Menus {#step-2-set-up-context-menus}
 
 Create the background script to register context menu items for different copy scenarios. The extension supports three context menu types: selection text, links, and the page itself.
 
@@ -65,7 +65,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Step 3: Build the HTML-to-Markdown Converter {#step-3-build-the-html-to-markdown-converter}
+Step 3: Build the HTML-to-Markdown Converter {#step-3-build-the-html-to-markdown-converter}
 
 Create a utility function that converts HTML elements to Markdown. This converter handles headings (`h1`-`h6`), bold (`strong`, `b`), italic (`em`, `i`), links (`a`), lists (`ul`, `ol`), images (`img`), and code blocks (`pre`, `code`).
 
@@ -82,7 +82,7 @@ function htmlToMarkdown(html) {
   });
   
   // Handle bold and italic
-  el.replaceWith('**' + el.textContent + '**'); // bold
+  el.replaceWith('' + el.textContent + ''); // bold
   el.replaceWith('*' + el.textContent + '*');   // italic
   
   // Handle links: <a href="url">text</a> -> [text](url)
@@ -95,7 +95,7 @@ function htmlToMarkdown(html) {
 }
 ```
 
-## Step 4: Handle Text Selection {#step-4-handle-text-selection}
+Step 4: Handle Text Selection {#step-4-handle-text-selection}
 
 When users select text on a page, retrieve the HTML content using `window.getSelection()`. Pass this to the converter to generate Markdown. This approach preserves formatting better than using `textContent` alone.
 
@@ -116,7 +116,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Step 5: Copy Links as Markdown {#step-5-copy-links-as-markdown}
+Step 5: Copy Links as Markdown {#step-5-copy-links-as-markdown}
 
 When right-clicking a link, extract the URL and text to format as `[text](url)`. The context menu provides `info.linkText` and `info.linkUrl` for this purpose.
 
@@ -127,7 +127,7 @@ if (info.menuItemId === "copyLink") {
 }
 ```
 
-## Step 6: Copy Page Title and URL {#step-6-copy-page-title-and-url}
+Step 6: Copy Page Title and URL {#step-6-copy-page-title-and-url}
 
 For copying the entire page, use the tab's title and URL. This creates a reference link in Markdown: `[Page Title](https://example.com)`.
 
@@ -138,7 +138,7 @@ if (info.menuItemId === "copyPage") {
 }
 ```
 
-## Step 7: Add a Popup with Preview {#step-7-add-a-popup-with-preview}
+Step 7: Add a Popup with Preview {#step-7-add-a-popup-with-preview}
 
 Create `popup.html` to show a preview of the converted Markdown before copying. This gives users confidence that the conversion worked correctly.
 
@@ -162,9 +162,9 @@ Create `popup.html` to show a preview of the converted Markdown before copying. 
 </html>
 ```
 
-## Advanced Features {#advanced-features}
+Advanced Features {#advanced-features}
 
-### Table Conversion {#table-conversion}
+Table Conversion {#table-conversion}
 
 Convert HTML tables to Markdown pipe tables with proper alignment:
 
@@ -178,28 +178,28 @@ function tableToMarkdown(table) {
 }
 ```
 
-### Markdown Flavor Options {#markdown-flavor-options}
+Markdown Flavor Options {#markdown-flavor-options}
 
 Support different Markdown flavors (GFM, CommonMark) by adding an options page. GFM supports tables, task lists, and strikethrough, while CommonMark is more strict.
 
-### Copy Notification {#copy-notification}
+Copy Notification {#copy-notification}
 
 Provide visual feedback when content is copied using the Chrome notifications API or a simple toast in the popup.
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - See [Clipboard Patterns](/patterns/clipboard-patterns.md) for best practices
 - Reference [Context Menus API](/api-reference/context-menus-api.md) for full API details
 - Check [Context Menu Patterns](/patterns/context-menu-patterns.md) for UI patterns
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 This extension demonstrates core Chrome extension concepts: context menus, clipboard access, and content script injection. With these foundations, you can extend functionality to support more Markdown features or integrate with note-taking apps.
 -e 
 ---
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---

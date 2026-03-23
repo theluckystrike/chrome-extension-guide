@@ -6,17 +6,17 @@ This comprehensive guide walks you through the complete process of publishing Ch
 
 Before publishing your first extension, you need to create a Chrome Web Store developer account:
 
-1. **Navigate to the Chrome Web Store Developer Dashboard**: Visit [https://chrome.google.com/webstore/developer/signup](https://chrome.google.com/webstore/developer/signup)
-2. **Accept the Developer Agreement**: Read and accept the Chrome Web Store Developer Agreement
-3. **Pay the Registration Fee**: A one-time $5 USD registration fee is required (as of 2024)
-4. **Verify Your Email**: Google will send a verification email to complete account creation
+1. Navigate to the Chrome Web Store Developer Dashboard: Visit [https://chrome.google.com/webstore/developer/signup](https://chrome.google.com/webstore/developer/signup)
+2. Accept the Developer Agreement: Read and accept the Chrome Web Store Developer Agreement
+3. Pay the Registration Fee: A one-time $5 USD registration fee is required (as of 2024)
+4. Verify Your Email: Google will send a verification email to complete account creation
 
 The registration fee is a one-time payment that grants you lifetime publishing privileges. You can publish multiple extensions under a single developer account.
 
 ### Account Types
 
-- **Individual Account**: Suitable for solo developers, displays your personal name
-- **Company Account**: Requires Google Workspace, displays company name with verified badge
+- Individual Account: Suitable for solo developers, displays your personal name
+- Company Account: Requires Google Workspace, displays company name with verified badge
 
 ## 2. Preparing Listing Assets
 
@@ -32,7 +32,7 @@ Your extension's visual presentation significantly impacts its conversion rate. 
 | 32x32 | Windows low DPI |
 | 16x16 | Favicon |
 
-**Best Practices for Icons:**
+Best Practices for Icons:
 - Use a simple, recognizable design
 - Ensure the icon works on both light and dark backgrounds
 - Avoid text in icons (not scalable)
@@ -43,12 +43,12 @@ Your extension's visual presentation significantly impacts its conversion rate. 
 
 You must provide at least one screenshot, but we recommend 4-8:
 
-- **Minimum size**: 1280x800 or 640x400 pixels
-- **Maximum**: 10 screenshots per language
-- **Formats**: PNG or JPEG
-- **Recommended**: Show actual functionality, not just the icon
+- Minimum size: 1280x800 or 640x400 pixels
+- Maximum: 10 screenshots per language
+- Formats: PNG or JPEG
+- Recommended: Show actual functionality, not just the icon
 
-**Screenshot Best Practices:**
+Screenshot Best Practices:
 1. Show the popup/extension in action
 2. Highlight key features
 3. Use consistent styling
@@ -78,11 +78,11 @@ The summary appears in search results and should:
 ### Detailed Description (Unlimited)
 
 Structure your detailed description:
-1. **First paragraph**: Hook readers with the problem you solve
-2. **Key features**: Bullet list of 3-6 main features
-3. **How it works**: Brief explanation of functionality
-4. **Privacy**: Clear statement about data handling
-5. **Support**: Link to support resources
+1. First paragraph: Hook readers with the problem you solve
+2. Key features: Bullet list of 3-6 main features
+3. How it works: Brief explanation of functionality
+4. Privacy: Clear statement about data handling
+5. Support: Link to support resources
 
 ### Writing Tips
 
@@ -111,20 +111,20 @@ Have questions? Contact us at [support email/link]
 ### Categories
 
 Choose the most relevant category:
-- **Productivity**: Tools that enhance workflow
-- **Shopping**: Price comparisons, coupons, deals
-- **Social & Communication**: Communication tools
-- **News & Weather**: Content aggregators
-- **Games**: Browser games
-- **Utilities**: General-purpose tools
-- **Fun**: Entertainment extensions
-- **By Google**: Google's own extensions
+- Productivity: Tools that enhance workflow
+- Shopping: Price comparisons, coupons, deals
+- Social & Communication: Communication tools
+- News & Weather: Content aggregators
+- Games: Browser games
+- Utilities: General-purpose tools
+- Fun: Entertainment extensions
+- By Google: Google's own extensions
 
 ### Language Strategy
 
-- **Primary Language**: Start with English, add more as needed
-- **Target Markets**: Consider languages spoken in your target regions
-- **Translation Quality**: Use professional translation, not machine translation
+- Primary Language: Start with English, add more as needed
+- Target Markets: Consider languages spoken in your target regions
+- Translation Quality: Use professional translation, not machine translation
 
 ## 5. Privacy Practices Disclosure Requirements
 
@@ -134,10 +134,10 @@ The Chrome Web Store has strict privacy requirements:
 
 You must complete the privacy disclosure form for every extension, declaring:
 
-1. **Data Collection**: What data your extension collects
-2. **Data Usage**: How collected data is used
-3. **User Control**: How users can control their data
-4. **Data Deletion**: How users can request data deletion
+1. Data Collection: What data your extension collects
+2. Data Usage: How collected data is used
+3. User Control: How users can control their data
+4. Data Deletion: How users can request data deletion
 
 ### Disclosure Requirements
 
@@ -170,16 +170,16 @@ Your extension must have a clearly defined purpose that cannot be broken down in
 
 ### Requirements
 
-1. **Clear Purpose**: State what your extension does in 2-3 sentences
-2. **Consistent Functionality**: All features must relate to the stated purpose
-3. **No Feature Creep**: Avoid adding unrelated features
-4. **No Misleading Behavior**: Don't隐藏 functionality
+1. Clear Purpose: State what your extension does in 2-3 sentences
+2. Consistent Functionality: All features must relate to the stated purpose
+3. No Feature Creep: Avoid adding unrelated features
+4. No Misleading Behavior: Don't functionality
 
 ### Examples
 
-✅ **Compliant**: "A simple password manager that securely stores and auto-fills your passwords"
+ Compliant: "A simple password manager that securely stores and auto-fills your passwords"
 
-❌ **Non-compliant**: "A password manager that also changes your desktop wallpaper and plays music"
+ Non-compliant: "A password manager that also changes your desktop wallpaper and plays music"
 
 ## 7. Permission Justifications for Review
 
@@ -198,10 +198,10 @@ When requesting permissions, you must justify each one:
 
 ### Best Practices for Permissions
 
-1. **Request Minimum Necessary**: Only request essential permissions
-2. **Use Optional Permissions**: Make permissions optional when possible
-3. **Explain Clearly**: Provide detailed justification for each permission
-4. **Consider Alternatives**: Can you achieve the same with fewer permissions?
+1. Request Minimum Necessary: Only request essential permissions
+2. Use Optional Permissions: Make permissions optional when possible
+3. Explain Clearly: Provide detailed justification for each permission
+4. Consider Alternatives: Can you achieve the same with fewer permissions?
 
 ```json
 // manifest.json - Use optional permissions
@@ -215,17 +215,17 @@ When requesting permissions, you must justify each one:
 
 ### Review Timeline
 
-- **Initial Review**: Typically 1-7 days, can take up to several weeks
-- **Updates**: Usually faster (24-72 hours)
-- **Complex Extensions**: May take longer due to manual review
+- Initial Review: Typically 1-7 days, can take up to several weeks
+- Updates: Usually faster (24-72 hours)
+- Complex Extensions: May take longer due to manual review
 
 ### What Reviewers Look For
 
-1. **Functionality**: Does the extension work as described?
-2. **Policy Compliance**: Does it meet all store policies?
-3. **Security**: Is the code safe and doesn't contain malware?
-4. **User Experience**: Is the UI/UX acceptable?
-5. **Accurate Disclosure**: Are permissions and privacy practices accurately represented?
+1. Functionality: Does the extension work as described?
+2. Policy Compliance: Does it meet all store policies?
+3. Security: Is the code safe and doesn't contain malware?
+4. User Experience: Is the UI/UX acceptable?
+5. Accurate Disclosure: Are permissions and privacy practices accurately represented?
 
 ### During Review
 
@@ -238,20 +238,20 @@ When requesting permissions, you must justify each one:
 
 ### Top Rejection Reasons
 
-1. **Vague Purpose**: "Tool to help with productivity" - Too generic
-2. **Excessive Permissions**: Requesting more than needed
-3. **Broken Functionality**: Bugs, crashes, or non-working features
-4. **Poor User Experience**: Confusing UI, misleading interactions
-5. **Privacy Issues**: Undisclosed data collection
-6. **Single Purpose Violation**: Adding unrelated features
+1. Vague Purpose: "Tool to help with productivity" - Too generic
+2. Excessive Permissions: Requesting more than needed
+3. Broken Functionality: Bugs, crashes, or non-working features
+4. Poor User Experience: Confusing UI, misleading interactions
+5. Privacy Issues: Undisclosed data collection
+6. Single Purpose Violation: Adding unrelated features
 
 ### How to Avoid Rejections
 
 ```javascript
-// ❌ Bad: Excessive permissions
+//  Bad: Excessive permissions
 "permissions": ["tabs", "history", "cookies", "webRequest", "debugger"]
 
-// ✅ Good: Minimal permissions
+//  Good: Minimal permissions
 "permissions": ["activeTab", "storage"]
 ```
 
@@ -271,11 +271,11 @@ If your extension is rejected, you can appeal:
 
 ### Appeal Steps
 
-1. **Review Rejection Reason**: Carefully read the rejection email
-2. **Fix Issues**: Address all problems mentioned
-3. **Submit Appeal**: Use the "Appeal" button in developer dashboard
-4. **Provide Details**: Explain how you addressed each issue
-5. **Wait**: Appeals typically take 2-7 days
+1. Review Rejection Reason: Carefully read the rejection email
+2. Fix Issues: Address all problems mentioned
+3. Submit Appeal: Use the "Appeal" button in developer dashboard
+4. Provide Details: Explain how you addressed each issue
+5. Wait: Appeals typically take 2-7 days
 
 ### Writing an Effective Appeal
 
@@ -344,10 +344,10 @@ Staged rollouts help you test updates before full release:
 
 ### Staged Rollout Strategy
 
-1. **Start Small**: Begin with 1-5%
-2. **Monitor Metrics**: Watch for errors and crashes
-3. **Gradually Increase**: Move to 25%, then 50%, then 100%
-4. **Roll Back if Needed**: If issues arise, pause and investigate
+1. Start Small: Begin with 1-5%
+2. Monitor Metrics: Watch for errors and crashes
+3. Gradually Increase: Move to 25%, then 50%, then 100%
+4. Roll Back if Needed: If issues arise, pause and investigate
 
 ## 13. Version Numbering Conventions
 
@@ -359,9 +359,9 @@ Chrome Web Store follows semantic versioning:
 MAJOR.MINOR.PATCH
 ```
 
-- **MAJOR**: Incompatible API changes
-- **MINOR**: New functionality (backward compatible)
-- **PATCH**: Bug fixes (backward compatible)
+- MAJOR: Incompatible API changes
+- MINOR: New functionality (backward compatible)
+- PATCH: Bug fixes (backward compatible)
 
 ### Version Naming
 
@@ -424,17 +424,17 @@ The Chrome Web Store provides analytics:
 
 | Metric | Description |
 |--------|-------------|
-| **Users** | Daily/Weekly/Monthly active users |
-| **Installs** | Total installations |
-| **Uninstalls** | Users who removed the extension |
-| **Ratings** | Average star rating |
-| **Reviews** | User reviews and ratings |
+| Users | Daily/Weekly/Monthly active users |
+| Installs | Total installations |
+| Uninstalls | Users who removed the extension |
+| Ratings | Average star rating |
+| Reviews | User reviews and ratings |
 
 ### Interpreting Metrics
 
-- **Conversion Rate**: Install clicks / Store listing views
-- **Churn Rate**: Uninstalls / (Installs + Uninstalls)
-- **Rating Trends**: Monitor over time
+- Conversion Rate: Install clicks / Store listing views
+- Churn Rate: Uninstalls / (Installs + Uninstalls)
+- Rating Trends: Monitor over time
 
 ## 17. Monetization Options
 
@@ -482,9 +482,9 @@ function getFeature() {
 
 ### Revenue Share
 
-- **70/30 Split**: Developers receive 70% of transaction value
-- **Transaction Fees**: Google takes 30%
-- **Payment Threshold**: $1.00 minimum for most countries
+- 70/30 Split: Developers receive 70% of transaction value
+- Transaction Fees: Google takes 30%
+- Payment Threshold: $1.00 minimum for most countries
 
 ## 19. Transferring Extension Ownership
 
@@ -551,13 +551,13 @@ Before publishing your extension, verify:
 
 For the most up-to-date information, consult:
 
-- **Developer Documentation**: [https://developer.chrome.com/docs/webstore/publish](https://developer.chrome.com/docs/webstore/publish)
-- **Program Policies**: [https://developer.chrome.com/docs/webstore/program-policies](https://developer.chrome.com/docs/webstore/program-policies)
-- **API Reference**: [https://developer.chrome.com/docs/extensions/reference](https://developer.chrome.com/docs/extensions/reference)
-- **Best Practices**: [https://developer.chrome.com/docs/webstore/best-practices](https://developer.chrome.com/docs/webstore/best-practices)
+- Developer Documentation: [https://developer.chrome.com/docs/webstore/publish](https://developer.chrome.com/docs/webstore/publish)
+- Program Policies: [https://developer.chrome.com/docs/webstore/program-policies](https://developer.chrome.com/docs/webstore/program-policies)
+- API Reference: [https://developer.chrome.com/docs/extensions/reference](https://developer.chrome.com/docs/extensions/reference)
+- Best Practices: [https://developer.chrome.com/docs/webstore/best-practices](https://developer.chrome.com/docs/webstore/best-practices)
 
 ---
 
-**Last Updated**: 2024
+Last Updated: 2024
 
-**Contributing**: This guide is part of the Chrome Extension Guide repository. Pull requests welcome!
+Contributing: This guide is part of the Chrome Extension Guide repository. Pull requests welcome!

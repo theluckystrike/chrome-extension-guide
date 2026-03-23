@@ -40,7 +40,7 @@ Reading mode extensions typically:
 
 ## Content Extraction Patterns
 
-The core challenge is extracting the main article content while filtering out noise. Here's a robust extraction strategy:
+The core challenge is extracting the main article content while filtering out noise. Here's a solid extraction strategy:
 
 ```ts
 // content/extractor.ts
@@ -257,7 +257,7 @@ class ReadingModeController {
   private render(article: ExtractionResult): string {
     return `
       <div class="rm-toolbar">
-        <button class="rm-close" aria-label="Close reading mode">✕</button>
+        <button class="rm-close" aria-label="Close reading mode"></button>
         <div class="rm-settings">
           <button class="rm-settings-toggle" aria-label="Settings">Aa</button>
           <div class="rm-settings-panel hidden">
@@ -439,9 +439,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ## Performance Considerations
 
-1. **Lazy load content**: Only extract content when user activates reading mode
-2. **Cache extractions**: Store extracted content in sessionStorage to avoid re-parsing
-3. **Debounce settings**: Save preferences with a debounce to reduce storage writes
+1. Lazy load content: Only extract content when user activates reading mode
+2. Cache extractions: Store extracted content in sessionStorage to avoid re-parsing
+3. Debounce settings: Save preferences with a debounce to reduce storage writes
 
 ```ts
 // Debounce utility for settings

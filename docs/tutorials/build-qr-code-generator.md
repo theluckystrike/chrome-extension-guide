@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension QR Code Generator — Developer Guide"
+title: "Chrome Extension QR Code Generator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-qr-code-generator/"
 ---
-# Build a QR Code Generator Extension — Full Tutorial
+# Build a QR Code Generator Extension. Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 - Popup UI with current tab URL auto-populated
 - Custom text/URL input field for any content
 - QR code generation using Canvas API (no external library needed)
@@ -17,14 +17,14 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-qr-code-generat
 - History of recently generated codes stored locally
 - Clean, minimal popup design with instant generation
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
-- No external QR library required — we'll use a lightweight pure JS implementation
+- No external QR library required. we'll use a lightweight pure JS implementation
 
 ---
 
-## Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
+Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
 
 ```bash
 mkdir qrcodegen-ext && cd qrcodegen-ext
@@ -53,12 +53,12 @@ npm init -y
 
 ---
 
-## Step 2: QR Code Generation Library (Pure JS) {#step-2-qr-code-generation-library-pure-js}
+Step 2: QR Code Generation Library (Pure JS) {#step-2-qr-code-generation-library-pure-js}
 
-Create `qrcode.js` — a minimal QR generator using Canvas:
+Create `qrcode.js`. a minimal QR generator using Canvas:
 
 ```js
-// qrcode.js — Pure JS QR Code generator
+// qrcode.js. Pure JS QR Code generator
 export function generateQR(text, size = 256, ecLevel = 'M') {
   const moduleCount = getModuleCount(text, ecLevel);
   const modules = generateModules(text, moduleCount, ecLevel);
@@ -114,7 +114,7 @@ Cross-ref: For clipboard patterns, see `docs/patterns/clipboard-patterns.md`.
 
 ---
 
-## Step 3: Popup UI {#step-3-popup-ui}
+Step 3: Popup UI {#step-3-popup-ui}
 
 Create `popup.html`:
 
@@ -185,7 +185,7 @@ Cross-ref: For popup patterns, see `docs/guides/popup-patterns.md`.
 
 ---
 
-## Step 4: Popup Logic {#step-4-popup-logic}
+Step 4: Popup Logic {#step-4-popup-logic}
 
 Create `popup.js`:
 
@@ -244,7 +244,7 @@ document.getElementById('download-btn').addEventListener('click', () => {
 
 ---
 
-## Step 5: Context Menu Integration {#step-5-context-menu-integration}
+Step 5: Context Menu Integration {#step-5-context-menu-integration}
 
 Add to `background.js`:
 
@@ -268,16 +268,16 @@ Cross-ref: For context menu patterns, see `docs/patterns/context-menu-patterns.m
 
 ---
 
-## Step 6: Testing and Building {#step-6-testing-and-building}
+Step 6: Testing and Building {#step-6-testing-and-building}
 
 1. Load unpacked in `chrome://extensions/`
-2. Click extension icon — popup shows with current tab URL
-3. Modify content, size, or error correction — QR updates instantly
+2. Click extension icon. popup shows with current tab URL
+3. Modify content, size, or error correction. QR updates instantly
 4. Test copy and download buttons
 5. Right-click any page → "Generate QR Code"
 6. Build with `zip -r qrcodegen.zip .`
 
-## Summary {#summary}
+Summary {#summary}
 - Pure JS QR generation using Canvas API
 - Configurable size and error correction
 - Clipboard and download functionality
@@ -291,6 +291,6 @@ This extension demonstrates core extension patterns: popup UI, background servic
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

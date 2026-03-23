@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension E2e Testing Patterns — Best Practices"
+title: "Chrome Extension E2e Testing Patterns. Best Practices"
 description: "End-to-end testing patterns for Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/e2e-testing-patterns/"
 ---
@@ -9,22 +9,22 @@ canonical_url: "https://bestchromeextensions.com/patterns/e2e-testing-patterns/"
 
 End-to-end testing for Chrome extensions presents unique challenges compared to standard web application testing. Extensions operate across multiple contexts -- popups, content scripts, service workers, and options pages -- each requiring distinct testing strategies. This guide covers eight essential patterns for building a reliable E2E test suite using Playwright, the tool best suited for extension testing due to its first-class Chromium support.
 
-> **Related guides:** For unit and integration testing fundamentals, see [Testing Patterns](testing-patterns.md). For automating your test pipeline, see [CI/CD Pipeline](../guides/ci-cd-pipeline.md).
+> Related guides: For unit and integration testing fundamentals, see [Testing Patterns](testing-patterns.md). For automating your test pipeline, see [CI/CD Pipeline](../guides/ci-cd-pipeline.md).
 
 ---
 
-## Pattern 1: Playwright Setup for Extension Testing {#pattern-1-playwright-setup-for-extension-testing}
+Pattern 1: Playwright Setup for Extension Testing {#pattern-1-playwright-setup-for-extension-testing}
 
 Playwright supports loading Chrome extensions via its Chromium channel with persistent contexts. The key requirement is launching a browser instance with the extension pre-loaded.
 
-### Installation and Configuration {#installation-and-configuration}
+Installation and Configuration {#installation-and-configuration}
 
 ```bash
 npm install -D @playwright/test
 npx playwright install chromium
 ```
 
-### Base Test Configuration {#base-test-configuration}
+Base Test Configuration {#base-test-configuration}
 
 ```typescript
 // playwright.config.ts
@@ -41,14 +41,14 @@ export default defineConfig({
     {
       name: "extension",
       use: {
-        // Extensions require a persistent context — see fixtures below
+        // Extensions require a persistent context. see fixtures below
       },
     },
   ],
 });
 ```
 
-### Custom Fixture for Extension Context {#custom-fixture-for-extension-context}
+Custom Fixture for Extension Context {#custom-fixture-for-extension-context}
 
 ```typescript
 // e2e/fixtures.ts
@@ -88,11 +88,11 @@ The persistent context is mandatory because Chromium does not support extensions
 
 ---
 
-## Pattern 2: Loading Unpacked Extension in Test Browser {#pattern-2-loading-unpacked-extension-in-test-browser}
+Pattern 2: Loading Unpacked Extension in Test Browser {#pattern-2-loading-unpacked-extension-in-test-browser}
 
 Reliable extension loading requires a built distribution directory and careful argument handling. The extension must be fully built before tests run.
 
-### Build-Then-Test Script {#build-then-test-script}
+Build-Then-Test Script {#build-then-test-script}
 
 ```json
 {
@@ -103,7 +103,7 @@ Reliable extension loading requires a built distribution directory and careful a
 }
 ```
 
-### Verifying the Extension Loaded {#verifying-the-extension-loaded}
+Verifying the Extension Loaded {#verifying-the-extension-loaded}
 
 ```typescript
 // e2e/extension-loaded.spec.ts
@@ -132,10 +132,10 @@ test("manifest permissions are granted", async ({ context, extensionId }) => {
 });
 ```
 
-### Handling Multiple Extension Builds {#handling-multiple-extension-builds}
+Handling Multiple Extension Builds {#handling-multiple-extension-builds}
 
 ```typescript
-// e2e/fixtures.ts — variant for dev vs prod builds
+// e2e/fixtures.ts. variant for dev vs prod builds
 const extensionPath = path.resolve(
   __dirname,
   process.env.EXT_BUILD === "dev" ? "../dist-dev" : "../dist"
@@ -144,11 +144,11 @@ const extensionPath = path.resolve(
 
 ---
 
-## Pattern 3: Testing Popup Interactions {#pattern-3-testing-popup-interactions}
+Pattern 3: Testing Popup Interactions {#pattern-3-testing-popup-interactions}
 
 Extension popups are standard HTML pages accessible at `chrome-extension://<id>/popup.html`. Unlike real popup behavior (which auto-closes on blur), navigating directly to the URL keeps the page stable for testing.
 
-### Basic Popup Test {#basic-popup-test}
+Basic Popup Test {#basic-popup-test}
 
 ```typescript
 // e2e/popup.spec.ts
@@ -183,7 +183,7 @@ test("popup toggle updates state", async ({ context, extensionId }) => {
 });
 ```
 
-### Testing Popup-to-Background Communication {#testing-popup-to-background-communication}
+Testing Popup-to-Background Communication {#testing-popup-to-background-communication}
 
 ```typescript
 test("popup sends message to service worker", async ({
@@ -205,11 +205,11 @@ test("popup sends message to service worker", async ({
 
 ---
 
-## Pattern 4: Testing Content Script Injection {#pattern-4-testing-content-script-injection}
+Pattern 4: Testing Content Script Injection {#pattern-4-testing-content-script-injection}
 
 Content scripts run in the context of web pages. Testing them requires navigating to a target page and verifying that the extension modifies the DOM as expected.
 
-### Basic Content Script Test {#basic-content-script-test}
+Basic Content Script Test {#basic-content-script-test}
 
 ```typescript
 // e2e/content-script.spec.ts
@@ -235,10 +235,10 @@ test("content script does not inject on non-matching URLs", async ({
 });
 ```
 
-### Using a Local Test Server {#using-a-local-test-server}
+Using a Local Test Server {#using-a-local-test-server}
 
 ```typescript
-// e2e/fixtures.ts — add a local server for controlled testing
+// e2e/fixtures.ts. add a local server for controlled testing
 import { createServer } from "http";
 
 export const test = base.extend<{
@@ -260,14 +260,14 @@ export const test = base.extend<{
 });
 ```
 
-### Testing Content Script Isolation {#testing-content-script-isolation}
+Testing Content Script Isolation {#testing-content-script-isolation}
 
 ```typescript
 test("content script does not leak into page scope", async ({ context }) => {
   const page = await context.newPage();
   await page.goto("https://example.com");
 
-  // Evaluate in the page's main world — extension globals should not exist
+  // Evaluate in the page's main world. extension globals should not exist
   const hasLeak = await page.evaluate(() => {
     return typeof (window as any).__myExtensionInternal !== "undefined";
   });
@@ -277,11 +277,11 @@ test("content script does not leak into page scope", async ({ context }) => {
 
 ---
 
-## Pattern 5: Testing Service Worker Messaging {#pattern-5-testing-service-worker-messaging}
+Pattern 5: Testing Service Worker Messaging {#pattern-5-testing-service-worker-messaging}
 
 Service worker tests verify that the background script responds correctly to runtime messages from popups, content scripts, and other extension pages.
 
-### Direct Message Testing {#direct-message-testing}
+Direct Message Testing {#direct-message-testing}
 
 ```typescript
 // e2e/service-worker.spec.ts
@@ -317,11 +317,11 @@ test("service worker handles unknown message types gracefully", async ({
 });
 ```
 
-### Testing Event-Driven Behavior {#testing-event-driven-behavior}
+Testing Event-Driven Behavior {#testing-event-driven-behavior}
 
 ```typescript
 test("service worker handles tab update events", async ({ context }) => {
-  // Open a page — this triggers onUpdated in the service worker
+  // Open a page. this triggers onUpdated in the service worker
   const page = await context.newPage();
   await page.goto("https://example.com");
 
@@ -341,11 +341,11 @@ test("service worker handles tab update events", async ({ context }) => {
 
 ---
 
-## Pattern 6: Testing chrome.storage Operations {#pattern-6-testing-chromestorage-operations}
+Pattern 6: Testing chrome.storage Operations {#pattern-6-testing-chromestorage-operations}
 
 Storage is the backbone of most extension state management. These tests verify reads, writes, and change listeners behave correctly across contexts.
 
-### Storage CRUD Operations {#storage-crud-operations}
+Storage CRUD Operations {#storage-crud-operations}
 
 ```typescript
 // e2e/storage.spec.ts
@@ -407,7 +407,7 @@ test("storage.onChanged fires across contexts", async ({
 });
 ```
 
-### Testing Storage Quotas {#testing-storage-quotas}
+Testing Storage Quotas {#testing-storage-quotas}
 
 ```typescript
 test("handles storage quota errors", async ({ context, extensionId }) => {
@@ -430,14 +430,14 @@ test("handles storage quota errors", async ({ context, extensionId }) => {
 
 ---
 
-## Pattern 7: CI/CD Integration with Headless Chrome {#pattern-7-cicd-integration-with-headless-chrome}
+Pattern 7: CI/CD Integration with Headless Chrome {#pattern-7-cicd-integration-with-headless-chrome}
 
 Running extension E2E tests in CI requires special configuration since extensions cannot run in fully headless mode (as of Chromium 129+, `--headless=new` does support extensions in some configurations, but the classic approach uses `xvfb`).
 
-### GitHub Actions Configuration {#github-actions-configuration}
+GitHub Actions Configuration {#github-actions-configuration}
 
 ```yaml
-# .github/workflows/e2e.yml
+.github/workflows/e2e.yml
 name: E2E Tests
 on: [push, pull_request]
 
@@ -470,10 +470,10 @@ jobs:
           path: playwright-report/
 ```
 
-### Playwright CI Configuration {#playwright-ci-configuration}
+Playwright CI Configuration {#playwright-ci-configuration}
 
 ```typescript
-// playwright.config.ts — CI-aware settings
+// playwright.config.ts. CI-aware settings
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
@@ -488,7 +488,7 @@ export default defineConfig({
 });
 ```
 
-### Xvfb Wrapper for Local Linux Testing {#xvfb-wrapper-for-local-linux-testing}
+Xvfb Wrapper for Local Linux Testing {#xvfb-wrapper-for-local-linux-testing}
 
 ```json
 {
@@ -511,11 +511,11 @@ fi
 
 ---
 
-## Pattern 8: Visual Regression Testing for Extension UI {#pattern-8-visual-regression-testing-for-extension-ui}
+Pattern 8: Visual Regression Testing for Extension UI {#pattern-8-visual-regression-testing-for-extension-ui}
 
 Visual regression testing catches unintended UI changes in popups, options pages, and injected content script elements. Playwright's built-in screenshot comparison makes this straightforward.
 
-### Snapshot Testing for Popup UI {#snapshot-testing-for-popup-ui}
+Snapshot Testing for Popup UI {#snapshot-testing-for-popup-ui}
 
 ```typescript
 // e2e/visual.spec.ts
@@ -545,7 +545,7 @@ test("popup dark mode matches snapshot", async ({ context, extensionId }) => {
 });
 ```
 
-### Component-Level Visual Tests {#component-level-visual-tests}
+Component-Level Visual Tests {#component-level-visual-tests}
 
 ```typescript
 test("settings panel matches snapshot", async ({ context, extensionId }) => {
@@ -557,7 +557,7 @@ test("settings panel matches snapshot", async ({ context, extensionId }) => {
 });
 ```
 
-### Updating Baselines {#updating-baselines}
+Updating Baselines {#updating-baselines}
 
 When intentional UI changes are made, update the reference screenshots:
 
@@ -565,7 +565,7 @@ When intentional UI changes are made, update the reference screenshots:
 npx playwright test --update-snapshots
 ```
 
-### Multi-Resolution Testing {#multi-resolution-testing}
+Multi-Resolution Testing {#multi-resolution-testing}
 
 ```typescript
 const viewports = [
@@ -592,7 +592,7 @@ for (const vp of viewports) {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Key Technique | Primary Use Case |
 |---|---|---|

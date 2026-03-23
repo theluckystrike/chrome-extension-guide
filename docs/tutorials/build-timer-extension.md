@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Timer Extension — Developer Guide"
+title: "Chrome Extension Timer Extension. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-timer-extension/"
 ---
 # Build a Countdown Timer Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Custom countdown timers with hours, minutes, seconds input
 - Multiple simultaneous timers with list management
 - Badge countdown showing time remaining
@@ -14,7 +14,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-timer-extension
 - Quick preset buttons (5min, 15min, 30min)
 - Service worker restart recovery
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: alarms, notifications, storage
 - host_permissions: all_urls (for audio playback)
 - action with popup
@@ -22,7 +22,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-timer-extension
 
 ---
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Define required permissions in manifest.json:
 
@@ -48,7 +48,7 @@ See [permissions/alarms.md](../permissions/alarms.md) and [permissions/notificat
 
 ---
 
-## Step 2: Popup UI with Timer Input {#step-2-popup-ui-with-timer-input}
+Step 2: Popup UI with Timer Input {#step-2-popup-ui-with-timer-input}
 
 Create the timer interface with input fields and controls:
 
@@ -78,7 +78,7 @@ Create the timer interface with input fields and controls:
 
 ---
 
-## Step 3: Timer State with chrome.storage.session {#step-3-timer-state-with-chromestoragesession}
+Step 3: Timer State with chrome.storage.session {#step-3-timer-state-with-chromestoragesession}
 
 Use session storage for fast, ephemeral timer state:
 
@@ -106,7 +106,7 @@ See [storage-quickstart.md](../tutorials/storage-quickstart.md).
 
 ---
 
-## Step 4: Background Alarms {#step-4-background-alarms}
+Step 4: Background Alarms {#step-4-background-alarms}
 
 Create one alarm per timer with chrome.alarms API:
 
@@ -128,13 +128,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Note: Alarms have a 1-minute minimum. For precise countdown display, use storage timestamps and calculate remaining time in the popup.
+Alarms have a 1-minute minimum. For precise countdown display, use storage timestamps and calculate remaining time in the popup.
 
 See [api-reference/alarms-api.md](../api-reference/alarms-api.md).
 
 ---
 
-## Step 5: Badge Countdown {#step-5-badge-countdown}
+Step 5: Badge Countdown {#step-5-badge-countdown}
 
 Display remaining time on the extension badge:
 
@@ -159,7 +159,7 @@ See [patterns/badge-action-ui.md](../patterns/badge-action-ui.md).
 
 ---
 
-## Step 6: Notification on Completion {#step-6-notification-on-completion}
+Step 6: Notification on Completion {#step-6-notification-on-completion}
 
 Notify users when timers complete with sound:
 
@@ -183,7 +183,7 @@ See [api-reference/notifications-api.md](../api-reference/notifications-api.md).
 
 ---
 
-## Step 7: Multiple Timer Management {#step-7-multiple-timer-management}
+Step 7: Multiple Timer Management {#step-7-multiple-timer-management}
 
 Support multiple simultaneous timers with list view:
 
@@ -216,7 +216,7 @@ async function getAllTimers() {
 
 ---
 
-## Step 8: Service Worker Restart Recovery {#step-8-service-worker-restart-recovery}
+Step 8: Service Worker Restart Recovery {#step-8-service-worker-restart-recovery}
 
 Reconstruct timer state from storage and alarms on restart:
 
@@ -245,7 +245,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 Your countdown timer extension now includes:
 - Custom duration input with preset buttons

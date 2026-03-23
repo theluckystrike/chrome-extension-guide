@@ -17,75 +17,75 @@ This comprehensive rss extension tutorial will guide you through the complete pr
 
 ---
 
-## Why Build an RSS Reader Chrome Extension? {#why-rss-extension}
+Why Build an RSS Reader Chrome Extension? {#why-rss-extension}
 
 Before diving into code, let us explore why creating an RSS reader extension remains a valuable project in 2025. Despite the rise of social media platforms, RSS technology has experienced a remarkable renaissance. Privacy-conscious users, information professionals, and power users have increasingly turned to RSS feeds to escape algorithmic curation and maintain direct relationships with their favorite content sources.
 
-Building your own rss reader extension provides several compelling advantages. First, you gain complete control over your data—unlike third-party services that may track your reading habits, your personal extension keeps everything local. Second, you can customize the reading experience exactly to your preferences, from visual design to notification behaviors. Third, the development process itself offers an excellent opportunity to master Chrome Extension development fundamentals that apply to countless other projects.
+Building your own rss reader extension provides several compelling advantages. First, you gain complete control over your data, unlike third-party services that may track your reading habits, your personal extension keeps everything local. Second, you can customize the reading experience exactly to your preferences, from visual design to notification behaviors. Third, the development process itself offers an excellent opportunity to master Chrome Extension development fundamentals that apply to countless other projects.
 
 The demand for quality feed reader chrome extensions remains strong. Users actively search for rss extension tutorial content, indicating a vibrant community of developers and enthusiasts looking to build or customize their reading tools. By following this guide, you will not only create a useful product but also position yourself to serve this engaged audience.
 
 ---
 
-## Project Architecture and Technology Stack {#architecture}
+Project Architecture and Technology Stack {#architecture}
 
-Our RSS reader Chrome extension will employ a modern architecture built on Chrome Extension Manifest V3. This version of the Chrome extension platform introduces significant changes from the older Manifest V2, including enhanced security requirements, service worker取代 background pages, and new APIs for declarative automation.
+Our RSS reader Chrome extension will employ a modern architecture built on Chrome Extension Manifest V3. This version of the Chrome extension platform introduces significant changes from the older Manifest V2, including enhanced security requirements, service worker background pages, and new APIs for declarative automation.
 
-### Core Technologies
+Core Technologies
 
 The extension will use the following technologies:
 
-- **Manifest V3**: The latest Chrome extension manifest format providing improved security and performance
-- **Service Workers**:取代 traditional background pages for event handling and periodic updates
-- **Chrome Storage API**: For persisting feed subscriptions and user preferences locally
-- **Chrome Alarms API**: For scheduling periodic feed refreshes
-- **Vanilla JavaScript**: No heavy frameworks, keeping the extension lightweight and fast
-- **RSS Parsing**: Using a lightweight XML parser compatible with extension sandbox environment
+- Manifest V3: The latest Chrome extension manifest format providing improved security and performance
+- Service Workers: traditional background pages for event handling and periodic updates
+- Chrome Storage API: For persisting feed subscriptions and user preferences locally
+- Chrome Alarms API: For scheduling periodic feed refreshes
+- Vanilla JavaScript: No heavy frameworks, keeping the extension lightweight and fast
+- RSS Parsing: Using a lightweight XML parser compatible with extension sandbox environment
 
-### Extension Components
+Extension Components
 
 Our feed reader chrome extension consists of four main components:
 
-1. **Popup Interface**: A compact view showing recent articles from subscribed feeds
-2. **Options Page**: A full-featured page for managing feeds and preferences
-3. **Background Service Worker**: Handles feed fetching, parsing, and storage operations
-4. **Content Scripts**: Optional scripts for detecting RSS feeds on web pages
+1. Popup Interface: A compact view showing recent articles from subscribed feeds
+2. Options Page: A full-featured page for managing feeds and preferences
+3. Background Service Worker: Handles feed fetching, parsing, and storage operations
+4. Content Scripts: Optional scripts for detecting RSS feeds on web pages
 
 ---
 
-## Setting Up the Project Structure {#project-setup}
+Setting Up the Project Structure {#project-setup}
 
 Begin by creating the project directory and essential files. Open your terminal and create the following structure:
 
 ```bash
 rss-reader-extension/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── options/
-│   ├── options.html
-│   ├── options.css
-│   └── options.js
-├── background/
-│   └── service-worker.js
-├── lib/
-│   └── rss-parser.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ options/
+    options.html
+    options.css
+    options.js
+ background/
+    service-worker.js
+ lib/
+    rss-parser.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ _locales/
+     en/
+         messages.json
 ```
 
 This structure follows Chrome extension best practices, separating concerns between different parts of the extension while maintaining a logical organization that scales well as features grow.
 
 ---
 
-## Creating the Manifest File {#manifest}
+Creating the Manifest File {#manifest}
 
 The manifest.json file serves as the blueprint for your Chrome extension. It defines permissions, declares resources, and specifies how Chrome should load your extension. Create manifest.json with the following content:
 
@@ -130,7 +130,7 @@ This manifest requests only the permissions essential for our rss reader extensi
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup serves as the quick-access window users see when clicking your extension icon. It should display recent articles concisely while providing clear navigation to the full options page. Create popup.html:
 
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Creating the Options Page {#options-page}
+Creating the Options Page {#options-page}
 
 The options page allows users to add, remove, and manage their RSS feed subscriptions. This is a critical component of any feed reader chrome extension. Create options.html:
 
@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Implementing the Background Service Worker {#service-worker}
+Implementing the Background Service Worker {#service-worker}
 
 The service worker handles feed fetching, parsing, and periodic updates. This is where the core rss extension tutorial logic lives. Create background/service-worker.js:
 
@@ -950,7 +950,7 @@ function showNotification(message) {
 
 ---
 
-## Testing Your RSS Reader Extension {#testing}
+Testing Your RSS Reader Extension {#testing}
 
 Now that you have built all the components, it is time to test your feed reader chrome extension. Follow these steps to load your extension in Chrome:
 
@@ -961,30 +961,30 @@ Now that you have built all the components, it is time to test your feed reader 
 
 Test the following functionality:
 
-- **Adding feeds**: Open the options page and add an RSS feed URL like `https://feeds.bbci.co.uk/news/rss.xml`
-- **Viewing articles**: Click the extension icon to see the popup with recent articles
-- **Managing feeds**: Return to the options page to add more feeds or delete existing ones
-- **Auto-refresh**: Wait for the 30-minute interval or click the refresh button in the popup
+- Adding feeds: Open the options page and add an RSS feed URL like `https://feeds.bbci.co.uk/news/rss.xml`
+- Viewing articles: Click the extension icon to see the popup with recent articles
+- Managing feeds: Return to the options page to add more feeds or delete existing ones
+- Auto-refresh: Wait for the 30-minute interval or click the refresh button in the popup
 
 ---
 
-## Best Practices and Enhancements {#best-practices}
+Best Practices and Enhancements {#best-practices}
 
 As you continue developing your rss reader extension, consider implementing these enhancements:
 
-### Performance Optimization
+Performance Optimization
 
 - Implement lazy loading for articles in the popup
 - Cache parsed feed data to reduce processing overhead
 - Use the Chrome Cache API for frequently accessed feeds
 
-### User Experience Improvements
+User Experience Improvements
 
 - Add keyboard shortcuts for quick feed navigation
 - Implement search functionality within articles
 - Add support for OPML import/export for feed management
 
-### Advanced Features
+Advanced Features
 
 - Integrate with Chrome's reading list API
 - Add offline support using the Cache API
@@ -992,7 +992,7 @@ As you continue developing your rss reader extension, consider implementing thes
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete RSS reader Chrome extension from scratch. This rss extension tutorial covered all the essential aspects of Chrome extension development, including Manifest V3 configuration, popup and options page creation, service worker implementation, and feed parsing.
 
@@ -1000,4 +1000,4 @@ Your feed reader chrome extension now provides users with a powerful tool for co
 
 Remember that the RSS ecosystem continues to evolve. Keep your extension updated with new Chrome APIs, monitor user feedback, and consider adding features like OPML import, article search, and offline reading to make your extension truly stand out in the Chrome Web Store.
 
-Building an RSS reader extension is not just about creating a useful tool—it is about empowering users to take control of their information diet in an age of algorithmic curation. Your extension represents a return to the open, decentralized web that RSS was designed to enable.
+Building an RSS reader extension is not just about creating a useful tool, it is about empowering users to take control of their information diet in an age of algorithmic curation. Your extension represents a return to the open, decentralized web that RSS was designed to enable.

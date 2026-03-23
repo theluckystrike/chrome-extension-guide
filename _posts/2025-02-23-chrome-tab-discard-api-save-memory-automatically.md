@@ -11,31 +11,31 @@ canonical_url: "https://bestchromeextensions.com/2025/02/23/chrome-tab-discard-a
 
 # Chrome Tab Discard API: How Extensions Save Memory by Suspending Tabs
 
-Modern Chrome users frequently juggle dozens—or even hundreds—of open tabs. Each tab consumes significant system resources even when sitting idle in the background. Chrome typically uses between 150MB and 300MB of RAM per tab, meaning that 50 open tabs can consume over 10GB of memory. This massive resource consumption leads to sluggish performance, browser crashes, and reduced productivity.
+Modern Chrome users frequently juggle dozens, or even hundreds, of open tabs. Each tab consumes significant system resources even when sitting idle in the background. Chrome typically uses between 150MB and 300MB of RAM per tab, meaning that 50 open tabs can consume over 10GB of memory. This massive resource consumption leads to sluggish performance, browser crashes, and reduced productivity.
 
-The **chrome.tabs.discard API** provides extension developers with a powerful tool to combat this memory crisis. By intelligently suspending inactive tabs, extensions can free up gigabytes of RAM while keeping tabs accessible in the browser's tab strip. This comprehensive guide explores every aspect of the Tab Discard API, from basic concepts to advanced implementation patterns used by popular extensions like Tab Suspender Pro.
+The chrome.tabs.discard API provides extension developers with a powerful tool to combat this memory crisis. By intelligently suspending inactive tabs, extensions can free up gigabytes of RAM while keeping tabs accessible in the browser's tab strip. This comprehensive guide explores every aspect of the Tab Discard API, from basic concepts to advanced implementation patterns used by popular extensions like Tab Suspender Pro.
 
 ---
 
-## Understanding Tab Discarding {#understanding-tab-discarding}
+Understanding Tab Discarding {#understanding-tab-discarding}
 
 Before diving into the API details, it's essential to understand what actually happens when Chrome discards a tab. This knowledge helps you design better suspension strategies and manage user expectations.
 
-### What Happens During Tab Discard
+What Happens During Tab Discard
 
 When Chrome discards a tab, several important things occur:
 
-1. **DOM and JavaScript State Unloaded**: The renderer process terminates, releasing all JavaScript heap memory, DOM nodes, and active connections. This is the primary source of memory savings.
+1. DOM and JavaScript State Unloaded: The renderer process terminates, releasing all JavaScript heap memory, DOM nodes, and active connections. This is the primary source of memory savings.
 
-2. **Page Resources Released**: Images, stylesheets, cached scripts, and other page assets are unloaded from memory. Chrome may keep a minimal thumbnail in the tab strip.
+2. Page Resources Released: Images, stylesheets, cached scripts, and other page assets are unloaded from memory. Chrome may keep a minimal thumbnail in the tab strip.
 
-3. **Favicon and Title Preserved**: The tab remains visible in the tab strip with its title, favicon, and thumbnail intact. Users can still see what each tab contains.
+3. Favicon and Title Preserved: The tab remains visible in the tab strip with its title, favicon, and thumbnail intact. Users can still see what each tab contains.
 
-4. **Tab Remains in Tab Strip**: Unlike closed tabs, discarded tabs stay visible. Clicking a discarded tab triggers Chrome to reload it on demand.
+4. Tab Remains in Tab Strip: Unlike closed tabs, discarded tabs stay visible. Clicking a discarded tab triggers Chrome to reload it on demand.
 
-5. **History Preserved**: The navigation history remains intact. Back and forward buttons work after reloading the tab.
+5. History Preserved: The navigation history remains intact. Back and forward buttons work after reloading the tab.
 
-### Discarded vs. Closed Tabs
+Discarded vs. Closed Tabs
 
 Understanding the distinction between discarded and closed tabs is crucial for your extension's logic:
 
@@ -47,37 +47,37 @@ Understanding the distinction between discarded and closed tabs is crucial for y
 | Memory usage | Minimal (~1-5MB) | None |
 | Quick restore | Yes (instant reload) | N/A |
 
-### Chrome's Built-in Memory Saver
+Chrome's Built-in Memory Saver
 
 Chrome includes a built feature called "Memory Saver" (formerly "Tab Groups" with memory optimization). However, this automatic feature has limitations:
 
-- **Limited Control**: Users cannot customize which tabs get suspended
-- **Aggressive Timing**: May suspend tabs too quickly or not quickly enough
-- **No Whitelist**: Cannot protect specific sites or patterns
-- **No Advanced Rules**: Cannot consider factors like audio playback or form data
+- Limited Control: Users cannot customize which tabs get suspended
+- Aggressive Timing: May suspend tabs too quickly or not quickly enough
+- No Whitelist: Cannot protect specific sites or patterns
+- No Advanced Rules: Cannot consider factors like audio playback or form data
 
 Extension-based tab suspenders provide granular control that Chrome's built-in solution lacks, making them essential power users and professionals managing large tab collections.
 
 ---
 
-## The chrome.tabs.discard API Reference {#tabs-discard-api}
+The chrome.tabs.discard API Reference {#tabs-discard-api}
 
-The chrome.tabs.discard API provides programmatic control over tab discarding. Let's explore the complete API with TypeScript type definitions.
+The chrome.tabs.discard API provides programmatic control over tab discarding.  the complete API with TypeScript type definitions.
 
-### API Overview
+API Overview
 
 ```typescript
 // TypeScript type definitions for the Tab Discard API
 
 interface ChromeTabsDiscardAPI {
-  /**
+  /
    * Discards a tab from memory
    * @param tabId - The ID of the tab to discard
    * @returns Promise resolving to the discarded Tab object
    */
   discard(tabId: number): Promise<chrome.tabs.Tab>;
   
-  /**
+  /
    * Discards a tab using the active window if no tabId specified
    * @param tabIdOrWindowId - Optional tab ID or window ID
    * @returns Promise resolving to the discarded Tab
@@ -93,7 +93,7 @@ interface Tab extends chrome.tabs.Tab {
 }
 ```
 
-### Querying Discarded Tabs
+Querying Discarded Tabs
 
 You can filter for discarded tabs using the chrome.tabs.query method:
 
@@ -114,9 +114,9 @@ async function getWindowTabs(windowId: number): Promise<chrome.tabs.Tab[]> {
 }
 ```
 
-### Typed Wrapper Implementation
+Typed Wrapper Implementation
 
-Here's a robust TypeScript wrapper around the discard API:
+Here's a solid TypeScript wrapper around the discard API:
 
 ```typescript
 // services/TabDiscardService.ts
@@ -136,7 +136,7 @@ interface TabQueryOptions {
 }
 
 export class TabDiscardService {
-  /**
+  /
    * Discards a specific tab by ID
    */
   async discardTab(tabId: number): Promise<DiscardResult> {
@@ -163,7 +163,7 @@ export class TabDiscardService {
     }
   }
 
-  /**
+  /
    * Query tabs with advanced filtering options
    */
   async queryTabs(options: TabQueryOptions): Promise<chrome.tabs.Tab[]> {
@@ -196,7 +196,7 @@ export class TabDiscardService {
     });
   }
 
-  /**
+  /
    * Check if a tab can be safely discarded
    */
   canDiscard(tab: chrome.tabs.Tab): boolean {
@@ -224,11 +224,11 @@ export const tabDiscardService = new TabDiscardService();
 
 ---
 
-## Building a Smart Tab Suspender {#smart-tab-suspender}
+Building a Smart Tab Suspender {#smart-tab-suspender}
 
 Now let's build a complete tab suspension engine that monitors user activity and automatically suspends idle tabs.
 
-### TabSuspenderEngine Implementation
+TabSuspenderEngine Implementation
 
 ```typescript
 // engine/TabSuspenderEngine.ts
@@ -280,7 +280,7 @@ export class TabSuspenderEngine {
     }
   }
 
-  /**
+  /
    * Start the tab suspension engine
    */
   async start(): Promise<void> {
@@ -302,7 +302,7 @@ export class TabSuspenderEngine {
     console.log('[TabSuspender] Engine started');
   }
 
-  /**
+  /
    * Stop the suspension engine
    */
   stop(): void {
@@ -317,7 +317,7 @@ export class TabSuspenderEngine {
     console.log('[TabSuspender] Engine stopped');
   }
 
-  /**
+  /
    * Set up Chrome API event listeners
    */
   private setupEventListeners(): void {
@@ -352,7 +352,7 @@ export class TabSuspenderEngine {
     // Event listeners are automatically cleaned up when extension reloads
   }
 
-  /**
+  /
    * Main logic: check all tabs and suspend eligible ones
    */
   private async checkAndSuspendTabs(): Promise<void> {
@@ -381,7 +381,7 @@ export class TabSuspenderEngine {
     }
   }
 
-  /**
+  /
    * Determine if a tab should be considered for suspension
    */
   private shouldSuspend(tab: chrome.tabs.Tab): boolean {
@@ -403,7 +403,7 @@ export class TabSuspenderEngine {
     return true;
   }
 
-  /**
+  /
    * Get the idle time for a specific tab
    */
   private getTabIdleTime(tabId: number): number {
@@ -413,7 +413,7 @@ export class TabSuspenderEngine {
     return (Date.now() - lastActive.getTime()) / 1000 / 60; // minutes
   }
 
-  /**
+  /
    * Suspend a single tab
    */
   private async suspendTab(tab: chrome.tabs.Tab): Promise<void> {
@@ -440,7 +440,7 @@ export class TabSuspenderEngine {
     }
   }
 
-  /**
+  /
    * Handle tab activation (potential restore)
    */
   private async handleTabActivated(tabId: number): Promise<void> {
@@ -457,14 +457,14 @@ export class TabSuspenderEngine {
     }
   }
 
-  /**
+  /
    * Get current statistics
    */
   getStats(): SuspensionStats {
     return { ...this.stats };
   }
 
-  /**
+  /
    * Update configuration at runtime
    */
   updateConfig(newConfig: Partial<SuspenderConfig>): void {
@@ -483,11 +483,11 @@ This TabSuspenderEngine class provides approximately 150 lines of core suspensio
 
 ---
 
-## Whitelist and Protection Rules {#whitelist-protection-rules}
+Whitelist and Protection Rules {#whitelist-protection-rules}
 
-A robust tab suspender needs sophisticated rules to protect important tabs. Let's implement a comprehensive rule system.
+A solid tab suspender needs sophisticated rules to protect important tabs. Let's implement a comprehensive rule system.
 
-### SuspensionRules Class
+SuspensionRules Class
 
 ```typescript
 // models/SuspensionRules.ts
@@ -531,7 +531,7 @@ export class SuspensionRules {
     this.config = { ...DEFAULT_RULE_CONFIG, ...config };
   }
 
-  /**
+  /
    * Evaluate if a tab can be suspended based on all rules
    */
   canSuspend(context: RuleEvaluationContext): boolean {
@@ -591,7 +591,7 @@ export class SuspensionRules {
     return true;
   }
 
-  /**
+  /
    * Match URL against pattern (supports wildcards and regex)
    */
   private matchPattern(url: string, pattern: string): boolean {
@@ -609,7 +609,7 @@ export class SuspensionRules {
     }
   }
 
-  /**
+  /
    * Add a URL to the whitelist
    */
   addToWhitelist(pattern: string): void {
@@ -618,7 +618,7 @@ export class SuspensionRules {
     }
   }
 
-  /**
+  /
    * Remove a URL from the whitelist
    */
   removeFromWhitelist(pattern: string): void {
@@ -628,7 +628,7 @@ export class SuspensionRules {
     }
   }
 
-  /**
+  /
    * Check if URL matches any whitelist pattern
    */
   isWhitelisted(url: string): boolean {
@@ -637,28 +637,28 @@ export class SuspensionRules {
     );
   }
 
-  /**
+  /
    * Update configuration
    */
   updateConfig(config: Partial<RuleConfig>): void {
     this.config = { ...this.config, ...config };
   }
 
-  /**
+  /
    * Get current configuration
    */
   getConfig(): RuleConfig {
     return { ...this.config };
   }
 
-  /**
+  /
    * Export rules for storage
    */
   exportRules(): string {
     return JSON.stringify(this.config, null, 2);
   }
 
-  /**
+  /
    * Import rules from storage
    */
   importRules(json: string): void {
@@ -673,19 +673,19 @@ export class SuspensionRules {
 ```
 
 Key protection rules implemented:
-- **URL pattern whitelist**: Protect specific domains or paths
-- **Pinned tabs**: Never suspend pinned tabs
-- **Audio playback**: Detect and protect tabs with Tab.audible
-- **Form data**: Check for unsaved form inputs via content scripts
-- **Active tab**: Never suspend the currently focused tab
+- URL pattern whitelist: Protect specific domains or paths
+- Pinned tabs: Never suspend pinned tabs
+- Audio playback: Detect and protect tabs with Tab.audible
+- Form data: Check for unsaved form inputs via content scripts
+- Active tab: Never suspend the currently focused tab
 
 ---
 
-## Memory Measurement {#memory-measurement}
+Memory Measurement {#memory-measurement}
 
 Understanding memory usage helps validate your extension's effectiveness. Let's build a memory monitoring system.
 
-### MemoryMonitor Class
+MemoryMonitor Class
 
 ```typescript
 // services/MemoryMonitor.ts
@@ -717,7 +717,7 @@ export class MemoryMonitor {
     this.startMonitoring();
   }
 
-  /**
+  /
    * Get system memory information
    */
   async getSystemMemory(): Promise<chrome.system.memory.MemoryInfo | null> {
@@ -729,7 +729,7 @@ export class MemoryMonitor {
     }
   }
 
-  /**
+  /
    * Capture a memory snapshot
    */
   async captureSnapshot(): Promise<MemorySnapshot> {
@@ -758,9 +758,9 @@ export class MemoryMonitor {
     return snapshot;
   }
 
-  /**
+  /
    * Get memory usage for a specific tab
-   * Note: chrome.processes API provides detailed per-process memory
+   * chrome.processes API provides detailed per-process memory
    */
   async getTabMemory(tabId: number): Promise<number> {
     try {
@@ -794,7 +794,7 @@ export class MemoryMonitor {
     }
   }
 
-  /**
+  /
    * Calculate estimated memory savings from discarding
    */
   async calculateSavings(): Promise<{
@@ -816,7 +816,7 @@ export class MemoryMonitor {
     };
   }
 
-  /**
+  /
    * Get historical snapshots
    */
   getHistory(limit?: number): MemorySnapshot[] {
@@ -824,7 +824,7 @@ export class MemoryMonitor {
     return limit ? history.slice(-limit) : history;
   }
 
-  /**
+  /
    * Start periodic monitoring
    */
   private startMonitoring(): void {
@@ -837,7 +837,7 @@ export class MemoryMonitor {
     this.captureSnapshot();
   }
 
-  /**
+  /
    * Get formatted memory report
    */
   async getMemoryReport(): Promise<string> {
@@ -867,11 +867,11 @@ Memory Saved: ~${savings.estimatedSavingsMB} MB
 
 ---
 
-## Tab Lifecycle Events {#tab-lifecycle-events}
+Tab Lifecycle Events {#tab-lifecycle-events}
 
 Understanding tab lifecycle helps manage the complete suspension and restoration flow.
 
-### TabLifecycleManager Implementation
+TabLifecycleManager Implementation
 
 ```typescript
 // managers/TabLifecycleManager.ts
@@ -902,7 +902,7 @@ export class TabLifecycleManager {
     this.setupChromeListeners();
   }
 
-  /**
+  /
    * Set up Chrome API event listeners for lifecycle tracking
    */
   private setupChromeListeners(): void {
@@ -937,7 +937,7 @@ export class TabLifecycleManager {
     });
   }
 
-  /**
+  /
    * Track when a tab is discarded (manually or via API)
    */
   async trackDiscard(tabId: number): Promise<void> {
@@ -954,7 +954,7 @@ export class TabLifecycleManager {
     }
   }
 
-  /**
+  /
    * Track when a discarded tab is restored (user clicks it)
    */
   async trackRestore(tabId: number): Promise<void> {
@@ -963,7 +963,7 @@ export class TabLifecycleManager {
     });
   }
 
-  /**
+  /
    * Register event handler
    */
   on(eventType: LifecycleEventType, handler: EventHandler): void {
@@ -973,7 +973,7 @@ export class TabLifecycleManager {
     this.handlers.get(eventType)!.push(handler);
   }
 
-  /**
+  /
    * Unregister event handler
    */
   off(eventType: LifecycleEventType, handler: EventHandler): void {
@@ -986,7 +986,7 @@ export class TabLifecycleManager {
     }
   }
 
-  /**
+  /
    * Emit lifecycle event
    */
   private emit(type: LifecycleEventType, tabId: number, data?: Record<string, unknown>): void {
@@ -1016,7 +1016,7 @@ export class TabLifecycleManager {
     }
   }
 
-  /**
+  /
    * Get event history
    */
   getHistory(eventType?: LifecycleEventType, limit?: number): LifecycleEvent[] {
@@ -1029,7 +1029,7 @@ export class TabLifecycleManager {
     return limit ? events.slice(-limit) : events;
   }
 
-  /**
+  /
    * Get statistics about lifecycle events
    */
   getStats(): Record<string, number> {
@@ -1048,11 +1048,11 @@ export const lifecycleManager = new TabLifecycleManager();
 
 ---
 
-## User Experience Patterns {#user-experience-patterns}
+User Experience Patterns {#user-experience-patterns}
 
 A great extension needs thoughtful UI/UX. Let's build a comprehensive state manager for user-facing features.
 
-### UI State Manager
+UI State Manager
 
 ```typescript
 // managers/UIStateManager.ts
@@ -1099,7 +1099,7 @@ export class UIStateManager {
     this.loadPreferences();
   }
 
-  /**
+  /
    * Update suspended tab count and refresh badge
    */
   async updateSuspendedCount(count: number): Promise<void> {
@@ -1112,7 +1112,7 @@ export class UIStateManager {
     this.notifyListeners();
   }
 
-  /**
+  /
    * Update total tab count
    */
   async updateTotalTabs(count: number): Promise<void> {
@@ -1120,7 +1120,7 @@ export class UIStateManager {
     this.notifyListeners();
   }
 
-  /**
+  /
    * Update browser action badge
    */
   private async updateBadge(count: number): Promise<void> {
@@ -1138,7 +1138,7 @@ export class UIStateManager {
     this.state.badgeText = text;
   }
 
-  /**
+  /
    * Show notification before suspending a tab
    */
   async showSuspendNotification(tabTitle: string, delaySeconds: number): Promise<void> {
@@ -1164,7 +1164,7 @@ export class UIStateManager {
     });
   }
 
-  /**
+  /
    * Show notification after suspending
    */
   async showSuspendedNotification(count: number): Promise<void> {
@@ -1179,7 +1179,7 @@ export class UIStateManager {
     });
   }
 
-  /**
+  /
    * Restore all suspended tabs
    */
   async restoreAllSuspendedTabs(): Promise<number> {
@@ -1201,7 +1201,7 @@ export class UIStateManager {
     return restored;
   }
 
-  /**
+  /
    * Pause/resume auto-suspension
    */
   setPaused(paused: boolean): void {
@@ -1217,7 +1217,7 @@ export class UIStateManager {
     this.notifyListeners();
   }
 
-  /**
+  /
    * Subscribe to state changes
    */
   subscribe(listener: (state: UIState) => void): () => void {
@@ -1229,7 +1229,7 @@ export class UIStateManager {
     this.listeners.forEach(listener => listener(this.state));
   }
 
-  /**
+  /
    * Update preferences
    */
   updatePreferences(prefs: Partial<UserPreferences>): void {
@@ -1265,14 +1265,14 @@ export class UIStateManager {
     }
   }
 
-  /**
+  /
    * Get current state
    */
   getState(): UIState {
     return { ...this.state };
   }
 
-  /**
+  /
    * Get current preferences
    */
   getPreferences(): UserPreferences {
@@ -1282,27 +1282,27 @@ export class UIStateManager {
 ```
 
 Key UX patterns implemented:
-- **Badge count**: Shows number of suspended tabs
-- **Notifications**: Warns before suspending, confirms after
-- **Restore all**: One-click restoration of all suspended tabs
-- **Pause/resume**: Toggle auto-suspension temporarily
+- Badge count: Shows number of suspended tabs
+- Notifications: Warns before suspending, confirms after
+- Restore all: One-click restoration of all suspended tabs
+- Pause/resume: Toggle auto-suspension temporarily
 
 ---
 
-## Performance Benchmarks {#performance-benchmarks}
+Performance Benchmarks {#performance-benchmarks}
 
 Let's establish a methodology for measuring memory savings and present expected results.
 
-### Benchmark Methodology
+Benchmark Methodology
 
 To accurately measure memory savings from tab suspension, follow this testing approach:
 
-1. **Baseline Measurement**: Record Chrome's memory usage with N tabs (none discarded)
-2. **Suspension**: Apply tab suspension to achieve M discarded tabs
-3. **Post-Suspension Measurement**: Record Chrome's memory usage after discarding
-4. **Calculation**: Savings = Baseline - Post-Suspension
+1. Baseline Measurement: Record Chrome's memory usage with N tabs (none discarded)
+2. Suspension: Apply tab suspension to achieve M discarded tabs
+3. Post-Suspension Measurement: Record Chrome's memory usage after discarding
+4. Calculation: Savings = Baseline - Post-Suspension
 
-### Expected Memory Savings
+Expected Memory Savings
 
 | Tab Count | Active Tabs | Discarded Tels | Memory (Baseline) | Memory (After) | Savings | Savings % |
 |-----------|-------------|----------------|-------------------|----------------|---------|-----------|
@@ -1311,7 +1311,7 @@ To accurately measure memory savings from tab suspension, follow this testing ap
 | 100 | 15 | 85 | 15.2 GB | 5.1 GB | 10.1 GB | 66% |
 | 200 | 20 | 180 | 30.1 GB | 8.9 GB | 21.2 GB | 70% |
 
-### Per-Tab Memory Analysis
+Per-Tab Memory Analysis
 
 Individual tab memory varies significantly based on content:
 
@@ -1324,16 +1324,16 @@ Individual tab memory varies significantly based on content:
 | Video streaming | 300-500 MB | ~2 MB |
 | Complex web apps | 400-800 MB | ~2 MB |
 
-**Average memory freed per discarded tab: 100-300 MB**
+Average memory freed per discarded tab: 100-300 MB
 
-### Real-World Test Results
+Real-World Test Results
 
 Testing with typical browsing patterns (email, social media, news, productivity tools):
 
-- **10 tabs**: 1.2 GB → 650 MB (550 MB saved, 46% reduction)
-- **25 tabs**: 3.8 GB → 1.4 GB (2.4 GB saved, 63% reduction)
-- **50 tabs**: 8.2 GB → 2.9 GB (5.3 GB saved, 65% reduction)
-- **100 tabs**: 16.5 GB → 5.8 GB (10.7 GB saved, 65% reduction)
+- 10 tabs: 1.2 GB → 650 MB (550 MB saved, 46% reduction)
+- 25 tabs: 3.8 GB → 1.4 GB (2.4 GB saved, 63% reduction)
+- 50 tabs: 8.2 GB → 2.9 GB (5.3 GB saved, 65% reduction)
+- 100 tabs: 16.5 GB → 5.8 GB (10.7 GB saved, 65% reduction)
 
 The actual savings depend on:
 - Types of websites open (video-heavy sites save more)
@@ -1343,11 +1343,11 @@ The actual savings depend on:
 
 ---
 
-## Tab Suspender Pro Implementation {#tab-suspender-pro}
+Tab Suspender Pro Implementation {#tab-suspender-pro}
 
 Let's examine how Tab Suspender Pro implements these APIs to deliver superior performance beyond Chrome's built-in Memory Saver.
 
-### Smart Detection Algorithm
+Smart Detection Algorithm
 
 Tab Suspender Pro uses a multi-factor decision tree for suspension:
 
@@ -1363,7 +1363,7 @@ interface DetectionContext {
 }
 
 export class SmartDetectionEngine {
-  /**
+  /
    * Calculate tab importance score based on multiple factors
    */
   calculateImportance(context: DetectionContext): number {
@@ -1394,7 +1394,7 @@ export class SmartDetectionEngine {
     return Math.max(0, Math.min(100, score));
   }
 
-  /**
+  /
    * Determine if tab should be suspended
    */
   shouldSuspend(context: DetectionContext): {
@@ -1438,7 +1438,7 @@ export class SmartDetectionEngine {
     };
   }
 
-  /**
+  /
    * Check if URL is a productivity site
    */
   private isProductivitySite(url?: string): boolean {
@@ -1454,7 +1454,7 @@ export class SmartDetectionEngine {
     return url ? patterns.some(p => p.test(url)) : false;
   }
 
-  /**
+  /
    * Check if URL is a communication site
    */
   private isCommunicationSite(url?: string): boolean {
@@ -1470,7 +1470,7 @@ export class SmartDetectionEngine {
 }
 ```
 
-### Why Tab Suspender Pro Outperforms Memory Saver
+Why Tab Suspender Pro Outperforms Memory Saver
 
 | Feature | Chrome Memory Saver | Tab Suspender Pro |
 |---------|--------------------|--------------------|
@@ -1489,18 +1489,18 @@ Tab Suspender Pro's algorithm considers multiple factors that Chrome's simple ap
 
 ---
 
-## Conclusion
+Conclusion
 
-The chrome.tabs.discard API opens powerful possibilities for extension developers seeking to solve the universal problem of browser memory consumption. By implementing intelligent suspension engines with robust rule systems, memory monitoring, and thoughtful user experience patterns, you can create extensions that dramatically improve browser performance.
+The chrome.tabs.discard API opens powerful possibilities for extension developers seeking to solve the universal problem of browser memory consumption. By implementing intelligent suspension engines with solid rule systems, memory monitoring, and thoughtful user experience patterns, you can create extensions that dramatically improve browser performance.
 
 Key takeaways from this guide:
 
-1. **Tab discarding releases 100-300 MB per tab** while keeping tabs visible and restorable
-2. **The chrome.tabs.discard API** provides programmatic control with TypeScript type safety
-3. **Smart detection requires multiple factors**: idle time, tab importance, memory pressure, and user activity
-4. **Protection rules are essential** for pinned tabs, audio playback, form data, and whitelisted sites
-5. **Memory monitoring validates effectiveness** and helps optimize suspension thresholds
-6. **UX patterns matter**: badges, notifications, and quick actions improve user adoption
+1. Tab discarding releases 100-300 MB per tab while keeping tabs visible and restorable
+2. The chrome.tabs.discard API provides programmatic control with TypeScript type safety
+3. Smart detection requires multiple factors: idle time, tab importance, memory pressure, and user activity
+4. Protection rules are essential for pinned tabs, audio playback, form data, and whitelisted sites
+5. Memory monitoring validates effectiveness and helps optimize suspension thresholds
+6. UX patterns matter: badges, notifications, and quick actions improve user adoption
 
 With these techniques, you can build tab suspension extensions that rival or exceed popular solutions like Tab Suspender Pro, delivering real value to users struggling with browser performance.
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Caching Strategies — Best Practices"
+title: "Chrome Extension Caching Strategies. Best Practices"
 description: "Implement effective caching strategies for Chrome extensions using storage and cache APIs."
 canonical_url: "https://bestchromeextensions.com/patterns/caching-strategies/"
 ---
@@ -12,13 +12,13 @@ any moment, content scripts run in isolated worlds, and storage APIs have specif
 quota limits. Effective caching bridges these gaps, keeping your extension fast and
 responsive without redundant network requests or expensive recomputation.
 
-**Related guides:**
+Related guides:
 - [Memory Management Patterns](memory-management.md)
 - [IndexedDB for Extensions](indexeddb-extensions.md)
 
 ---
 
-## 1. In-Memory Cache with TTL in the Service Worker {#1-in-memory-cache-with-ttl-in-the-service-worker}
+1. In-Memory Cache with TTL in the Service Worker {#1-in-memory-cache-with-ttl-in-the-service-worker}
 
 The simplest cache is a JavaScript `Map` with time-to-live expiration. This works
 well for short-lived data that does not need to survive a service worker restart.
@@ -79,14 +79,14 @@ cache.set('user-profile', { name: 'Alice' }, 300_000); // 5 min TTL
 const profile = cache.get('user-profile');
 ```
 
-**Limitation:** In Manifest V3, the service worker can be terminated after 30 seconds
+Limitation: In Manifest V3, the service worker can be terminated after 30 seconds
 of inactivity. Everything in this cache disappears when that happens. Use this pattern
 only for data you can cheaply re-fetch, or combine it with a persistent layer
 (Pattern 2).
 
 ---
 
-## 2. chrome.storage as a Persistent Cache Layer {#2-chromestorage-as-a-persistent-cache-layer}
+2. chrome.storage as a Persistent Cache Layer {#2-chromestorage-as-a-persistent-cache-layer}
 
 Use `chrome.storage.local` as a durable cache that survives service worker restarts.
 Wrap it with TTL logic so entries auto-expire.
@@ -148,19 +148,19 @@ await cache.set('feed-data', feedItems, 600_000); // 10 min TTL
 const feed = await cache.get('feed-data');
 ```
 
-**Performance note:** `chrome.storage.local` operations are asynchronous and involve
+Performance note: `chrome.storage.local` operations are asynchronous and involve
 serialization overhead. For data accessed on every page load, consider combining this
 with an in-memory cache (Pattern 1) -- read from memory first, fall back to storage,
 and populate memory on cache miss.
 
 ---
 
-## 3. Cache Invalidation Strategies {#3-cache-invalidation-strategies}
+3. Cache Invalidation Strategies {#3-cache-invalidation-strategies}
 
 Stale data causes bugs. Define explicit invalidation strategies instead of relying
 solely on TTL.
 
-### Event-driven invalidation {#event-driven-invalidation}
+Event-driven invalidation {#event-driven-invalidation}
 
 Invalidate cache entries when relevant events occur:
 
@@ -201,7 +201,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
 });
 ```
 
-### Version-based invalidation {#version-based-invalidation}
+Version-based invalidation {#version-based-invalidation}
 
 Invalidate all caches when your extension updates:
 
@@ -215,7 +215,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-### Tag-based invalidation {#tag-based-invalidation}
+Tag-based invalidation {#tag-based-invalidation}
 
 Group cache entries by tags so you can invalidate related entries at once:
 
@@ -246,7 +246,7 @@ async function invalidateByTag(cache, tag) {
 
 ---
 
-## 4. Stale-While-Revalidate Pattern {#4-stale-while-revalidate-pattern}
+4. Stale-While-Revalidate Pattern {#4-stale-while-revalidate-pattern}
 
 Return cached data immediately for a responsive UI, then fetch fresh data in the
 background and update the cache. This pattern prioritizes perceived performance.
@@ -329,7 +329,7 @@ open shows fresh data.
 
 ---
 
-## 5. IndexedDB for Large Cached Datasets {#5-indexeddb-for-large-cached-datasets}
+5. IndexedDB for Large Cached Datasets {#5-indexeddb-for-large-cached-datasets}
 
 `chrome.storage.local` serializes everything to JSON and has a 10 MB default limit.
 For large datasets -- images, API response collections, offline data -- use IndexedDB.
@@ -431,7 +431,7 @@ and `File` objects directly -- useful for caching images or binary API responses
 
 ---
 
-## 6. Cache Warming on Extension Install {#6-cache-warming-on-extension-install}
+6. Cache Warming on Extension Install {#6-cache-warming-on-extension-install}
 
 Pre-populate caches when the extension is installed or updated so the user gets a
 fast experience from the very first interaction.
@@ -494,7 +494,7 @@ install event.
 
 ---
 
-## 7. Per-Tab Caching in Content Scripts {#7-per-tab-caching-in-content-scripts}
+7. Per-Tab Caching in Content Scripts {#7-per-tab-caching-in-content-scripts}
 
 Content scripts often need to cache data specific to the current page. Since content
 scripts run in an isolated world, their in-memory caches are naturally scoped to the
@@ -567,12 +567,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## 8. Cache Size Management and Eviction Policies {#8-cache-size-management-and-eviction-policies}
+8. Cache Size Management and Eviction Policies {#8-cache-size-management-and-eviction-policies}
 
 Without size limits, caches grow unbounded and eventually hit storage quotas or degrade
 performance. Implement eviction policies to keep caches under control.
 
-### LRU (Least Recently Used) eviction {#lru-least-recently-used-eviction}
+LRU (Least Recently Used) eviction {#lru-least-recently-used-eviction}
 
 ```javascript
 // lru-cache.js
@@ -607,7 +607,7 @@ class LRUCache {
 }
 ```
 
-### Size-based eviction for storage caches {#size-based-eviction-for-storage-caches}
+Size-based eviction for storage caches {#size-based-eviction-for-storage-caches}
 
 Track the approximate byte size of cached entries and evict when a threshold is
 reached:
@@ -659,7 +659,7 @@ async function cacheWithSizeCheck(cache, key, value, ttlMs) {
 }
 ```
 
-### Storage quota monitoring {#storage-quota-monitoring}
+Storage quota monitoring {#storage-quota-monitoring}
 
 Check how much quota your extension is using and warn when it gets high:
 
@@ -679,7 +679,7 @@ async function checkStorageUsage() {
 
 ---
 
-## Choosing the Right Caching Strategy {#choosing-the-right-caching-strategy}
+Choosing the Right Caching Strategy {#choosing-the-right-caching-strategy}
 
 | Scenario | Recommended Pattern |
 |---|---|

@@ -15,23 +15,23 @@ The demand for image compression tools has never been higher in 2025. With websi
 
 Building an image compressor extension represents an excellent project for developers looking to create practical tools that solve real-world problems. Unlike cloud-based compression services that require uploading images to external servers, our extension will process everything locally in the browser, ensuring user privacy, eliminating upload wait times, and reducing bandwidth costs. This approach aligns perfectly with the growing emphasis on privacy-conscious tools and offline-first applications.
 
-This guide assumes you have basic knowledge of JavaScript and HTML/CSS, but we'll cover each concept thoroughly so even intermediate developers can follow along. By the end of this article, you'll have a complete, deployable Chrome extension that can compress images, convert between formats, and handle batch processing—all running entirely within the browser.
+This guide assumes you have basic knowledge of JavaScript and HTML/CSS, but we'll cover each concept thoroughly so even intermediate developers can follow along. By the end of this article, you'll have a complete, deployable Chrome extension that can compress images, convert between formats, and handle batch processing, all running entirely within the browser.
 
 ---
 
-## Understanding Image Compression Fundamentals {#image-compression-fundamentals}
+Understanding Image Compression Fundamentals {#image-compression-fundamentals}
 
 Before diving into code, it's essential to understand how image compression works and why it matters for web performance. Image compression falls into two primary categories: lossless and lossy compression. Understanding the difference between these approaches will help you make informed decisions when building your extension.
 
-### Lossless vs Lossy Compression
+Lossless vs Lossy Compression
 
 Lossless compression reduces file size without removing any image data. The original image can be perfectly reconstructed from the compressed version. Formats like PNG support lossless compression, making them ideal for images with text, diagrams, or graphics requiring precise detail. However, lossless compression typically achieves only 20-40% file size reduction, which may not be sufficient for web optimization purposes.
 
-Lossy compression, on the other hand, achieves much higher compression ratios by permanently removing some image data. This approach works by discarding information that human perception is less likely to notice—for example, slight color variations in areas with uniform tones. JPEG compression is the most common lossy format and can achieve 70-90% size reduction while maintaining visually acceptable quality. The key challenge is finding the right balance between compression ratio and visual quality.
+Lossy compression, on the other hand, achieves much higher compression ratios by permanently removing some image data. This approach works by discarding information that human perception is less likely to notice, for example, slight color variations in areas with uniform tones. JPEG compression is the most common lossy format and can achieve 70-90% size reduction while maintaining visually acceptable quality. The key challenge is finding the right balance between compression ratio and visual quality.
 
 Modern browsers also support WebP and AVIF formats, which offer superior compression efficiency compared to traditional JPEG and PNG. WebP, developed by Google, provides both lossy and lossless compression and typically achieves 25-35% smaller file sizes than JPEG at equivalent quality. Building a webp converter extension gives users access to these efficiency gains without requiring them to use command-line tools or external services.
 
-### Browser-Based Compression Techniques
+Browser-Based Compression Techniques
 
 The Canvas API provides the simplest approach to image compression in Chrome extensions. By drawing an image onto a canvas element and then exporting it with a quality parameter, you can reduce file sizes significantly. This method works well for JPEG and WebP formats and requires no external libraries.
 
@@ -39,11 +39,11 @@ For more advanced compression, the ImageCodec API and various JavaScript librari
 
 ---
 
-## Setting Up Your Chrome Extension Project {#project-setup}
+Setting Up Your Chrome Extension Project {#project-setup}
 
 Let's begin building our image compressor extension. First, you'll need to create the project structure and manifest file that defines your extension's capabilities and permissions.
 
-### Creating the Manifest File
+Creating the Manifest File
 
 Every Chrome extension requires a manifest.json file that declares the extension's configuration, permissions, and components. For our image compressor, we'll need permissions to access the active tab and potentially access files on the user's system.
 
@@ -78,37 +78,37 @@ Every Chrome extension requires a manifest.json file that declares the extension
 
 This manifest declares the permissions our compression extension needs. The storage permission allows us to save user preferences, while downloads enables saving compressed images. The activeTab permission lets us interact with the current page to find and process images.
 
-### Project Directory Structure
+Project Directory Structure
 
 Create a well-organized directory structure for your extension:
 
 ```
 image-compressor/
-├── manifest.json
-├── background.js
-├── popup.html
-├── popup.js
-├── content.js
-├── styles.css
-├── compression-worker.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json
+ background.js
+ popup.html
+ popup.js
+ content.js
+ styles.css
+ compression-worker.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ _locales/
+     en/
+         messages.json
 ```
 
 This structure separates concerns between the popup UI, background service worker, and content scripts. The compression logic resides in a dedicated worker file, keeping the main thread responsive during heavy processing.
 
 ---
 
-## Building the Core Compression Engine {#compression-engine}
+Building the Core Compression Engine {#compression-engine}
 
 The heart of your image compressor extension is the compression engine that processes images. We'll build this using the Canvas API and add support for format conversion.
 
-### Implementing the Image Compressor Class
+Implementing the Image Compressor Class
 
 Create a compression-worker.js file that handles all image processing:
 
@@ -197,9 +197,9 @@ class ImageCompressor {
 }
 ```
 
-This compressor class provides a robust foundation for image processing. The calculateDimensions method ensures images are resized to fit within specified maximum dimensions while maintaining aspect ratio. The compressBatch method allows processing multiple images, which is essential for bulk compression workflows.
+This compressor class provides a solid foundation for image processing. The calculateDimensions method ensures images are resized to fit within specified maximum dimensions while maintaining aspect ratio. The compressBatch method allows processing multiple images, which is essential for bulk compression workflows.
 
-### Adding WebP Conversion Support
+Adding WebP Conversion Support
 
 The outputFormat parameter in our compressor enables WebP conversion, one of the most requested features for image optimization extensions. WebP typically achieves 25-35% smaller file sizes compared to JPEG at equivalent quality, making it excellent for web performance optimization.
 
@@ -221,11 +221,11 @@ The extension automatically handles format detection and conversion, so users do
 
 ---
 
-## Creating the User Interface {#user-interface}
+Creating the User Interface {#user-interface}
 
 The popup interface is what users interact with when using your extension. A well-designed UI makes compression settings intuitive and provides clear feedback about the compression process.
 
-### Building the Popup HTML
+Building the Popup HTML
 
 Create popup.html with a clean, functional design:
 
@@ -248,7 +248,7 @@ Create popup.html with a clean, functional design:
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" multiple accept="image/*" hidden>
         <div class="drop-content">
-          <span class="icon">📁</span>
+          <span class="icon"></span>
           <p>Drop images here or click to select</p>
           <p class="hint">Supports JPG, PNG, GIF, WebP</p>
         </div>
@@ -295,7 +295,7 @@ Create popup.html with a clean, functional design:
 
 This interface provides drag-and-drop file selection, adjustable quality settings, format selection, and dimension constraints. The clean layout makes it easy for users to understand and use the extension without documentation.
 
-### Styling the Interface
+Styling the Interface
 
 Create styles.css with a modern, professional appearance:
 
@@ -470,7 +470,7 @@ This styling creates a professional, cohesive appearance that matches Chrome's M
 
 ---
 
-## Implementing the Popup Logic {#popup-logic}
+Implementing the Popup Logic {#popup-logic}
 
 Now create popup.js to handle user interactions and coordinate with the compression engine:
 
@@ -612,11 +612,11 @@ This script handles file selection, drag-and-drop, compression processing, and f
 
 ---
 
-## Loading and Testing Your Extension {#testing}
+Loading and Testing Your Extension {#testing}
 
 Now that you've built all the components, it's time to load your extension into Chrome and test its functionality.
 
-### Installing the Extension
+Installing the Extension
 
 1. Open Chrome and navigate to chrome://extensions/
 2. Enable "Developer mode" using the toggle in the top right corner
@@ -624,7 +624,7 @@ Now that you've built all the components, it's time to load your extension into 
 4. Select your extension's project folder
 5. The extension icon should appear in your Chrome toolbar
 
-### Testing the Extension
+Testing the Extension
 
 Test the extension with various image types and sizes:
 
@@ -638,32 +638,32 @@ Document any issues you encounter and iterate on your implementation. Common iss
 
 ---
 
-## Advanced Features and Optimization {#advanced-features}
+Advanced Features and Optimization {#advanced-features}
 
 Once the basic extension is working, consider adding advanced features to make it more useful:
 
-### Background Processing
+Background Processing
 
 For large images or batch processing, move compression to a Web Worker to prevent UI freezing. The current implementation works well for typical use cases, but heavy processing can block the popup interface.
 
-### Format Detection
+Format Detection
 
 Automatically detect the best output format based on the input. PNG files with transparency might benefit from WebP with alpha channel, while photographs typically compress better as JPEG or WebP.
 
-### Presets
+Presets
 
 Add preset configurations for common use cases:
 - "Web Ready" - optimized for website images
 - "Email" - maximum compression for attachments
 - "High Quality" - minimal compression for archival
 
-### History and Storage
+History and Storage
 
 Use the Chrome Storage API to save compression history, favorite settings, and manage previously compressed images.
 
 ---
 
-## Conclusion
+Conclusion
 
 Building an image compressor Chrome extension is an excellent project that combines practical utility with meaningful technical challenges. Your extension now provides users with a privacy-focused, fast, and free tool for image optimization without requiring external services or uploads.
 

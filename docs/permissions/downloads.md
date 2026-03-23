@@ -10,7 +10,7 @@ canonical_url: "https://bestchromeextensions.com/permissions/downloads/"
 
 # downloads Permission Reference
 
-## What It Does {#what-it-does}
+What It Does {#what-it-does}
 - Grants access to `chrome.downloads` API
 - Start downloads programmatically from any extension context
 - Monitor download progress, pause, resume, and cancel
@@ -18,18 +18,18 @@ canonical_url: "https://bestchromeextensions.com/permissions/downloads/"
 - Open downloaded files in the system default application
 - Show downloaded files in the system file manager
 
-This is a medium-warning permission — users will see a prompt when installing your extension.
+This is a medium-warning permission. users will see a prompt when installing your extension.
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
-### Basic downloads permission {#basic-downloads-permission}
+Basic downloads permission {#basic-downloads-permission}
 ```json
 {
   "permissions": ["downloads"]
 }
 ```
 
-### With file opening capability {#with-file-opening-capability}
+With file opening capability {#with-file-opening-capability}
 ```json
 {
   "permissions": ["downloads", "downloads.open"]
@@ -38,7 +38,7 @@ This is a medium-warning permission — users will see a prompt when installing 
 
 The `downloads` permission is required for all download functionality. The additional `downloads.open` permission is needed only if you want to open files after download completes.
 
-## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -50,7 +50,7 @@ console.log(result.granted);     // true (if in manifest)
 PERMISSION_DESCRIPTIONS.downloads; // "Manage downloads"
 ```
 
-## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: Popup or content script triggers downloads via background:
 
@@ -109,7 +109,7 @@ msg.onMessage({
 });
 ```
 
-### Download event forwarding {#download-event-forwarding}
+Download event forwarding {#download-event-forwarding}
 ```ts
 // background.ts - Forward download events to popup
 chrome.downloads.onChanged.addListener((downloadDelta) => {
@@ -118,7 +118,7 @@ chrome.downloads.onChanged.addListener((downloadDelta) => {
 });
 ```
 
-## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
 Track download preferences and maintain download history:
 
@@ -178,7 +178,7 @@ async function openOnComplete(downloadDelta: chrome.downloads.DownloadDelta) {
 }
 ```
 
-## Key API Methods {#key-api-methods}
+Key API Methods {#key-api-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -191,12 +191,12 @@ async function openOnComplete(downloadDelta: chrome.downloads.DownloadDelta) {
 | `downloads.open(downloadId)` | Open downloaded file (requires `downloads.open` permission) |
 | `downloads.show(downloadId)` | Show downloaded file in system file manager |
 | `downloads.showDefaultFolder()` | Open default downloads folder |
-| `downloads.onCreated` | Event — fires when a download starts |
-| `downloads.onChanged` | Event — fires when download state or progress changes |
-| `downloads.onErased` | Event — fires when download is removed from history |
-| `downloads.onDeterminingFilename` | Event — modify filename before download starts |
+| `downloads.onCreated` | Event. fires when a download starts |
+| `downloads.onChanged` | Event. fires when download state or progress changes |
+| `downloads.onErased` | Event. fires when download is removed from history |
+| `downloads.onDeterminingFilename` | Event. modify filename before download starts |
 
-## Download Options {#download-options}
+Download Options {#download-options}
 
 ```ts
 interface DownloadOptions {
@@ -219,14 +219,14 @@ interface HeaderPair {
 }
 ```
 
-### conflictAction options {#conflictaction-options}
-- `"uniquify"` (default) — append a unique suffix to avoid conflicts
-- `"overwrite"` — replace existing file
-- `"prompt"` — ask user via dialog
+conflictAction options {#conflictaction-options}
+- `"uniquify"` (default). append a unique suffix to avoid conflicts
+- `"overwrite"`. replace existing file
+- `"prompt"`. ask user via dialog
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Bulk downloader {#bulk-downloader}
+Bulk downloader {#bulk-downloader}
 ```ts
 async function downloadAll(urls: string[], folder: string) {
   const queue = [...urls];
@@ -248,7 +248,7 @@ async function downloadAll(urls: string[], folder: string) {
 }
 ```
 
-### Download manager UI {#download-manager-ui}
+Download manager UI {#download-manager-ui}
 ```ts
 // In popup or options page
 async function renderDownloadManager() {
@@ -277,7 +277,7 @@ function getProgressPercent(download: chrome.downloads.DownloadItem): number {
 }
 ```
 
-### Export data as file {#export-data-as-file}
+Export data as file {#export-data-as-file}
 ```ts
 function exportAsJson(data: unknown, filename: string) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -294,39 +294,39 @@ function exportAsJson(data: unknown, filename: string) {
 await exportAsJson({ users: ["alice", "bob"] }, "export/users.json");
 ```
 
-## Gotchas {#gotchas}
+Gotchas {#gotchas}
 
-- **Filename is relative to downloads directory** — you cannot specify an absolute path. The file will always be saved in the user's default downloads folder or a subfolder within it.
+- Filename is relative to downloads directory. you cannot specify an absolute path. The file will always be saved in the user's default downloads folder or a subfolder within it.
 
-- **`downloads.open` requires separate permission** — if you need to open files after download, add `"downloads.open"` to your permissions array. This triggers an additional permission prompt.
+- `downloads.open` requires separate permission. if you need to open files after download, add `"downloads.open"` to your permissions array. This triggers an additional permission prompt.
 
-- **Use `onDeterminingFilename` to control final path** — this event fires before the download starts and lets you modify the filename based on MIME type, URL, or other criteria.
+- Use `onDeterminingFilename` to control final path. this event fires before the download starts and lets you modify the filename based on MIME type, URL, or other criteria.
 
-- **Downloads persist across extension updates** — the download continues even if your extension updates, but your event listeners must be re-registered after service worker restarts.
+- Downloads persist across extension updates. the download continues even if your extension updates, but your event listeners must be re-registered after service worker restarts.
 
-- **Service worker termination** — in MV3, the background service worker can terminate. Use `chrome.downloads.onChanged` to track progress; don't rely on in-memory state.
+- Service worker termination. in MV3, the background service worker can terminate. Use `chrome.downloads.onChanged` to track progress; don't rely on in-memory state.
 
-- **`search()` has no pagination** — returns all matches. For large download histories, filter by state or date to reduce results.
+- `search()` has no pagination. returns all matches. For large download histories, filter by state or date to reduce results.
 
-- **Blob URLs must be created in the same context** — if creating a download from a blob in a content script, pass the blob URL to the background for download.
+- Blob URLs must be created in the same context. if creating a download from a blob in a content script, pass the blob URL to the background for download.
 
-- **POST requests with body require `method: "POST"`** — and ensure `body` is properly encoded.
+- POST requests with body require `method: "POST"`. and ensure `body` is properly encoded.
 
-## Related Permissions {#related-permissions}
-- [storage](storage.md) — track download history and preferences
-- [notifications](notifications.md) — alert user when downloads complete
-- [tabs](tabs.md) — get URLs from tabs to feed into downloads
+Related Permissions {#related-permissions}
+- [storage](storage.md). track download history and preferences
+- [notifications](notifications.md). alert user when downloads complete
+- [tabs](tabs.md). get URLs from tabs to feed into downloads
 
-## API Reference {#api-reference}
+API Reference {#api-reference}
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Chrome downloads API docs](https://developer.chrome.com/docs/extensions/reference/api/downloads)
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I download a file in Chrome extension?
+How do I download a file in Chrome extension?
 Use chrome.downloads.download() to initiate downloads from your extension. You can specify the URL, filename, and other options.
 
-### Can extensions download files to a custom location?
+Can extensions download files to a custom location?
 Yes, but users will be prompted to choose a location, or you can use the downloads API's "saveAs" option set to false with appropriate permissions.
 ---
 

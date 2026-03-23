@@ -282,18 +282,18 @@ async function groupByContent(tabIds: number[]): Promise<void> {
 
 ## Common Mistakes
 
-- **Not checking for existing groups** before creating duplicates
-- **Ignoring the `groupId: -1`** which indicates an ungrouped tab
-- **Assuming group IDs persist** across browser restarts - they don't
-- **Creating too many groups** which defeats the purpose of organization
-- **Not handling async operations** when grouping multiple tabs
-- **Forgetting to request `"tabs"` permission** for full tab URL access
+- Not checking for existing groups before creating duplicates
+- Ignoring the `groupId: -1` which indicates an ungrouped tab
+- Assuming group IDs persist across browser restarts - they don't
+- Creating too many groups which defeats the purpose of organization
+- Not handling async operations when grouping multiple tabs
+- Forgetting to request `"tabs"` permission for full tab URL access
 
 ## Best Practices
 
-1. **Use meaningful group titles** that describe the category
-2. **Apply consistent color coding** (e.g., work = blue, personal = green)
-3. **Implement undo functionality** for ungrouping operations
-4. **Provide manual override** so users can customize groups
-5. **Save group configurations** for session restoration
-6. **Debounce auto-grouping** to avoid excessive operations
+1. Use meaningful group titles that describe the category
+2. Apply consistent color coding (e.g., work = blue, personal = green)
+3. Implement undo functionality for ungrouping operations
+4. Provide manual override so users can customize groups
+5. Save group configurations for session restoration
+6. Debounce auto-grouping to avoid excessive operations

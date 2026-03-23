@@ -11,31 +11,31 @@ Everything you need to migrate a Chrome extension from Manifest V2 to Manifest V
 
 ---
 
-## Why Migrate Now
+Why Migrate Now
 
 Chrome Web Store has been progressively tightening restrictions on Manifest V2 extensions. Understanding the timeline and implications helps you plan your migration strategically. The Chrome extension ecosystem has undergone a fundamental transformation, and extensions that remain on MV2 will eventually become non-functional. This guide provides the comprehensive information you need to successfully migrate your extension and ensure continued functionality for your users.
 
-### Chrome MV2 Deprecation Timeline
+Chrome MV2 Deprecation Timeline
 
 Google announced the deprecation of Manifest V2 in 2022, with the following key milestones that every extension developer must understand and plan around:
 
-- **January 2023**: New Manifest V2 extensions no longer featured on Chrome Web Store. This marked the beginning of the end for MV2, as new extensions could not gain visibility through the Chrome Web Store discovery mechanisms.
+- January 2023: New Manifest V2 extensions no longer featured on Chrome Web Store. This marked the beginning of the end for MV2, as new extensions could not gain visibility through the Chrome Web Store discovery mechanisms.
 
-- **June 2023**: Existing Manifest V2 extensions could no longer be updated with new features. This freeze meant that while existing installations continued to work, developers could not improve or fix their MV2 extensions.
+- June 2023: Existing Manifest V2 extensions could no longer be updated with new features. This freeze meant that while existing installations continued to work, developers could not improve or fix their MV2 extensions.
 
-- **January 2024**: Manifest V2 extensions removed from the Chrome Web Store entirely, except for enterprise extensions. This was the point of no return for most consumer-facing extensions.
+- January 2024: Manifest V2 extensions removed from the Chrome Web Store entirely, except for enterprise extensions. This was the point of no return for most consumer-facing extensions.
 
-- **June 2025**: Enterprise users lose access to MV2 extensions. Even the enterprise exception, which provided a lifeline for business-critical extensions, is now being phased out.
+- June 2025: Enterprise users lose access to MV2 extensions. Even the enterprise exception, which provided a lifeline for business-critical extensions, is now being phased out.
 
-- **2026 and beyond**: Chrome continues to tighten restrictions, and future Chrome versions will progressively reduce functionality available to MV2 extensions until they become completely non-functional.
+- 2026 and beyond: Chrome continues to tighten restrictions, and future Chrome versions will progressively reduce functionality available to MV2 extensions until they become completely non-functional.
 
-### What Happens to MV2 Extensions
+What Happens to MV2 Extensions
 
 Once the timeline completes, MV2 extensions will stop functioning entirely. Users will see errors when attempting to load them. Extensions still on MV2 will become unusable for all Chrome users, not just those on the stable channel. The Chrome team has been clear that this is not a temporary measure or a negotiating position - the migration to MV3 is mandatory for any extension that wishes to continue functioning.
 
 The implications extend beyond just the extension itself. If your extension provides functionality that users rely upon, you have a responsibility to migrate it. Users who have installed your extension expect it to continue working, and failing to migrate means abandoning those users to an increasingly broken experience.
 
-### Enterprise Extension Exceptions
+Enterprise Extension Exceptions
 
 Enterprise administrators can use enterprise policies to allow specific MV2 extensions within their organization. However, this is a temporary measure that should not be relied upon for long-term planning:
 
@@ -49,11 +49,11 @@ Enterprise administrators can use enterprise policies to allow specific MV2 exte
 
 ---
 
-## Before You Start
+Before You Start
 
 Successful migration requires preparation. Understanding your current extension state and having the right tools available makes the migration significantly smoother. Rushing into migration without proper preparation leads to avoidable mistakes and extended debugging sessions.
 
-### Automated Migration
+Automated Migration
 
 Manual migration is tedious and error-prone. Fortunately, several tools automate the mechanical parts of the transition, allowing you to focus on the business logic that requires human attention.
 
@@ -63,7 +63,7 @@ The mv3-migrate tool can transform most boilerplate code automatically, but you 
 
 Additionally, mv3-migrate handles common patterns like the background page to service worker conversion, but it may miss more complex patterns. Always test thoroughly after running any automated migration tool.
 
-### Validate Your Current Manifest
+Validate Your Current Manifest
 
 Before making changes, understand what you currently have. Running analysis tools on your existing extension prevents surprises later and helps you identify potential issues before they become blockers.
 
@@ -71,7 +71,7 @@ Run [crx-manifest-validator](https://github.com/theluckystrike/crx-manifest-vali
 
 The manifest validator checks for issues like incorrect permission names, missing required fields, deprecated APIs being referenced, and configuration that will cause problems in the Chrome Web Store review process. Fixing these issues before migration ensures your migrated extension passes review the first time.
 
-### Audit Your Current Codebase
+Audit Your Current Codebase
 
 Before beginning migration, conduct a thorough audit of your extension codebase:
 
@@ -89,11 +89,11 @@ This audit becomes your migration roadmap and helps you estimate the scope of wo
 
 ---
 
-## Step-by-Step Migration
+Step-by-Step Migration
 
 This section provides detailed, step-by-step instructions for each phase of the migration process. Follow these steps in order, as each step builds upon the previous one. Skipping steps or working out of order leads to incomplete migration and difficult-to-debug issues.
 
-### 1. Update manifest.json
+1. Update manifest.json
 
 The manifest.json file is the entry point for any Chrome extension. Making these changes first establishes the MV3 foundation upon which all other changes depend. A correctly configured manifest is essential for your extension to even load in Chrome.
 
@@ -201,7 +201,7 @@ For complete field documentation, see [Manifest V3 Fields](https://github.com/th
 
 ---
 
-### 2. Replace Background Pages with Service Workers
+2. Replace Background Pages with Service Workers
 
 This is the most significant architectural change in MV3. Background pages were persistent pages that stayed loaded in the browser, maintaining memory state and DOM access. Service workers are event-driven processes that terminate when idle and must reinitialize when events occur. This fundamental architectural shift affects nearly every aspect of extension development.
 
@@ -377,15 +377,15 @@ Understanding the service worker lifecycle is crucial for building reliable MV3 
 
 The service worker lifecycle includes several events you should understand:
 
-- **onInstalled**: Fires when the extension is first installed or updated. Use this for one-time initialization.
+- onInstalled: Fires when the extension is first installed or updated. Use this for one-time initialization.
 
-- **onStartup**: Fires when Chrome starts. Use this to restore state and start background processes.
+- onStartup: Fires when Chrome starts. Use this to restore state and start background processes.
 
-- **onUpdateAvailable**: Fires when a new extension version is available. Use this to notify users or prepare for update.
+- onUpdateAvailable: Fires when a new extension version is available. Use this to notify users or prepare for update.
 
-- **Service Worker Idle**: After approximately 30 seconds without events, the service worker is terminated to save resources.
+- Service Worker Idle: After approximately 30 seconds without events, the service worker is terminated to save resources.
 
-- **Service Worker Wake**: When an event occurs, Chrome may start a new service worker instance to handle it.
+- Service Worker Wake: When an event occurs, Chrome may start a new service worker instance to handle it.
 
 #### Reference
 
@@ -393,7 +393,7 @@ For more details, see [Service Workers](https://github.com/theluckystrike/blob/m
 
 ---
 
-### 3. Migrate webRequest to declarativeNetRequest
+3. Migrate webRequest to declarativeNetRequest
 
 The webRequest API allowed you to observe and modify network requests. In MV3, you must use declarativeNetRequest instead, which is more restrictive but more performant and improves user privacy by preventing extensions from observing user browsing activity.
 
@@ -594,7 +594,7 @@ See [Declarative Net Request](https://github.com/theluckystrike/blob/main/docs/m
 
 ---
 
-### 4. Update Content Security Policy
+4. Update Content Security Policy
 
 MV3 enforces stricter Content Security Policy rules. These changes prevent extensions from executing remote code, improving security for users. While these restrictions can be inconvenient, they significantly reduce the attack surface of extensions.
 
@@ -707,7 +707,7 @@ See [Content Security Policy](https://github.com/theluckystrike/blob/main/docs/m
 
 ---
 
-### 5. Update Content Scripts
+5. Update Content Scripts
 
 Content scripts have several changes in MV3 related to resource access and registration. Understanding these changes ensures your content scripts continue to work correctly after migration.
 
@@ -802,7 +802,7 @@ See [Dynamic Content Scripts](https://github.com/theluckystrike/blob/main/docs/m
 
 ---
 
-### 6. Migrate to Promise-Based APIs
+6. Migrate to Promise-Based APIs
 
 All chrome.* APIs now support promises. This simplifies asynchronous code significantly and eliminates callback hell. While callbacks still work, the promise-based approach is preferred for new code.
 
@@ -894,7 +894,7 @@ See [Promise-Based APIs](https://github.com/theluckystrike/blob/main/docs/mv3/pr
 
 ---
 
-### 7. Handle Offscreen Documents
+7. Handle Offscreen Documents
 
 Service workers cannot access the DOM. When you need DOM operations from your background script, use offscreen documents. This feature allows extensions to perform DOM-based operations in a context that is separate from both the service worker and content scripts.
 
@@ -1000,11 +1000,11 @@ See [Offscreen Documents](https://github.com/theluckystrike/blob/main/docs/mv3/o
 
 ---
 
-## Testing Your Migration
+Testing Your Migration
 
 Testing MV3 extensions requires different tooling than MV2. The following tools help verify your migration is correct and your extension functions properly in the new environment.
 
-### Use chrome-extension-testing
+Use chrome-extension-testing
 
 Use [chrome-extension-testing](https://github.com/theluckystrike/chrome-extension-testing) for Chrome API mocks. This library provides test utilities for common extension patterns:
 
@@ -1026,7 +1026,7 @@ describe('My Extension', () => {
 
 This library mocks the Chrome API surface, allowing you to write unit tests that run in Node.js rather than requiring a full Chrome environment.
 
-### Run crx-permission-analyzer
+Run crx-permission-analyzer
 
 Run [crx-permission-analyzer](https://github.com/theluckystrike/crx-permission-analyzer) to audit permissions. It identifies over-permissioned extensions and suggests minimum-required permissions. This tool helps you achieve the principle of least privilege:
 
@@ -1036,7 +1036,7 @@ npx crx-permission-analyzer ./path/to/extension
 
 The tool analyzes your manifest and provides a report of required permissions, optional permissions, and permissions that may not actually be needed based on your code.
 
-### Run crx-extension-size-analyzer
+Run crx-extension-size-analyzer
 
 Run [crx-extension-size-analyzer](https://github.com/theluckystrike/crx-extension-size-analyzer) to check bundle size. Large extensions may indicate unused dependencies that survived the migration:
 
@@ -1046,7 +1046,7 @@ npx crx-extension-size-analyzer ./path/to/extension
 
 This tool breaks down your extension's size by file and dependency, helping you identify opportunities for optimization.
 
-### Manual Testing Checklist
+Manual Testing Checklist
 
 Beyond automated testing, perform manual testing:
 
@@ -1061,7 +1061,7 @@ Beyond automated testing, perform manual testing:
 - Test context menu actions
 - Test keyboard shortcuts
 
-### Test in Multiple Environments
+Test in Multiple Environments
 
 Test your migrated extension in various environments:
 
@@ -1076,7 +1076,7 @@ See [Testing MV3 Extensions](https://github.com/theluckystrike/blob/main/docs/mv
 
 ---
 
-## Migration Checklist
+Migration Checklist
 
 Use this numbered checklist to track your migration progress. Each item represents a critical step that must be completed for a successful migration:
 
@@ -1105,11 +1105,11 @@ For the complete version, see [Migration Checklist](https://github.com/theluckys
 
 ---
 
-## Starting Fresh
+Starting Fresh
 
 If your extension is small or heavily dependent on MV2 patterns, consider starting from a modern template. Starting fresh allows you to build on modern best practices from the beginning, avoiding the technical debt that accumulates during migration.
 
-### MV3 Minimal Starter
+MV3 Minimal Starter
 
 [MV3 Minimal Starter](https://github.com/theluckystrike/chrome-extension-mv3-minimal) provides a zero-dependency starting point with modern JavaScript, proper service worker setup, and minimal boilerplate. This template is ideal for:
 
@@ -1117,7 +1117,7 @@ If your extension is small or heavily dependent on MV2 patterns, consider starti
 - Extensions that are simple enough that migration is impractical
 - Learning MV3 development without the complexity of a full framework
 
-### React Starter
+React Starter
 
 [React Starter](https://github.com/theluckystrike/chrome-extension-react-starter) is ideal for building React applications as Chrome extensions. Includes build tooling and hot reload, making development comfortable. This template is ideal for:
 
@@ -1125,7 +1125,7 @@ If your extension is small or heavily dependent on MV2 patterns, consider starti
 - Teams familiar with React
 - Applications that benefit from React's component model
 
-### Full Stack Starter
+Full Stack Starter
 
 [Full Stack Starter](https://github.com/theluckystrike/chrome-extension-full-stack) supports complex extensions with background service workers, content scripts, popup, options page, and proper TypeScript configuration. This template is ideal for:
 
@@ -1135,7 +1135,7 @@ If your extension is small or heavily dependent on MV2 patterns, consider starti
 
 ---
 
-## Common Migration Errors and Fixes
+Common Migration Errors and Fixes
 
 Here are the most common issues developers encounter during MV3 migration, with solutions:
 
@@ -1160,7 +1160,7 @@ Here are the most common issues developers encounter during MV3 migration, with 
 
 ---
 
-## Conclusion
+Conclusion
 
 Migrating from Manifest V2 to Manifest V3 requires understanding several key architectural changes. The transition from persistent background pages to ephemeral service workers is the most significant. Plan for thorough testing, as timing-related bugs often surface only under specific conditions that are difficult to reproduce in development.
 

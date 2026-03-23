@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Side Panel — Best Practices"
+title: "Chrome Extension Side Panel. Best Practices"
 description: "Implement side panels in Manifest V3 with the chrome.sidePanel API."
 canonical_url: "https://bestchromeextensions.com/patterns/side-panel/"
 ---
 
 # Side Panel Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The [Side Panel API reference](../mv3/side-panel.md) covers the basics. This guide provides production patterns for building rich side panel experiences: tab-specific panels, navigation, real-time page interaction, persistent state, and responsive layouts.
 
 ---
 
-## Pattern 1: Tab-Specific Side Panels {#pattern-1-tab-specific-side-panels}
+Pattern 1: Tab-Specific Side Panels {#pattern-1-tab-specific-side-panels}
 
 Show different content based on which tab is active:
 
@@ -56,7 +56,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 ---
 
-## Pattern 2: Open Side Panel from Action Click {#pattern-2-open-side-panel-from-action-click}
+Pattern 2: Open Side Panel from Action Click {#pattern-2-open-side-panel-from-action-click}
 
 Replace the popup with a side panel toggle:
 
@@ -79,7 +79,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Pattern 3: Side Panel with In-Page Navigation {#pattern-3-side-panel-with-in-page-navigation}
+Pattern 3: Side Panel with In-Page Navigation {#pattern-3-side-panel-with-in-page-navigation}
 
 Build a SPA-like experience within the side panel:
 
@@ -165,12 +165,12 @@ const router = new SidePanelRouter("app");
 
 ---
 
-## Pattern 4: Real-Time Page Interaction {#pattern-4-real-time-page-interaction}
+Pattern 4: Real-Time Page Interaction {#pattern-4-real-time-page-interaction}
 
 The side panel can communicate with the active tab's content script:
 
 ```ts
-// sidepanel.ts — Send commands to the active page
+// sidepanel.ts. Send commands to the active page
 import { createMessenger } from "@theluckystrike/webext-messaging";
 
 type Messages = {
@@ -216,7 +216,7 @@ document.getElementById("highlight-btn")?.addEventListener("click", async () => 
 ```
 
 ```ts
-// content.ts — Respond to side panel commands
+// content.ts. Respond to side panel commands
 import { createMessenger } from "@theluckystrike/webext-messaging";
 
 const msg = createMessenger<Messages>();
@@ -263,7 +263,7 @@ msg.onMessage("highlight-text", async ({ query, color }) => {
 
 ---
 
-## Pattern 5: Persistent Side Panel State {#pattern-5-persistent-side-panel-state}
+Pattern 5: Persistent Side Panel State {#pattern-5-persistent-side-panel-state}
 
 The side panel stays open across tab switches, but its JavaScript context reloads. Persist state:
 
@@ -324,7 +324,7 @@ document.addEventListener("scroll", () => {
 
 ---
 
-## Pattern 6: Responsive Side Panel Layout {#pattern-6-responsive-side-panel-layout}
+Pattern 6: Responsive Side Panel Layout {#pattern-6-responsive-side-panel-layout}
 
 Side panels can be resized by the user. Handle varying widths:
 
@@ -408,15 +408,15 @@ body {
 
 ---
 
-## Pattern 7: Side Panel with Background Sync {#pattern-7-side-panel-with-background-sync}
+Pattern 7: Side Panel with Background Sync {#pattern-7-side-panel-with-background-sync}
 
 Keep the side panel updated with live data from the service worker:
 
 ```ts
-// background.ts — Push updates to side panel
+// background.ts. Push updates to side panel
 function broadcastToSidePanel(data: unknown) {
   chrome.runtime.sendMessage({ type: "side-panel-update", data }).catch(() => {
-    // Side panel may not be open — ignore
+    // Side panel may not be open. ignore
   });
 }
 
@@ -431,7 +431,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 ```
 
 ```ts
-// sidepanel.ts — Receive live updates
+// sidepanel.ts. Receive live updates
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "side-panel-update") {
     updateUI(msg.data);
@@ -441,10 +441,10 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Pattern 8: Disabling Side Panel Per-Site {#pattern-8-disabling-side-panel-per-site}
+Pattern 8: Disabling Side Panel Per-Site {#pattern-8-disabling-side-panel-per-site}
 
 ```ts
-// background.ts — Disable side panel on specific sites
+// background.ts. Disable side panel on specific sites
 const BLOCKED_SITES = ["chrome://", "chrome-extension://", "about:"];
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
@@ -461,7 +461,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

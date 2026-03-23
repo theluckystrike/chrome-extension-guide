@@ -29,7 +29,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 - Fires: before SW termination (~30s idle)
-- Limited time — save critical state immediately
+- Limited time. save critical state immediately
 - Use `@theluckystrike/webext-storage` for persistence
 
 ### onUpdateAvailable {#onupdateavailable}
@@ -155,10 +155,10 @@ async function getState() {
 ```
 
 ## Common Mistakes {#common-mistakes}
-- Registering listeners inside `onInstalled` — they won't exist on subsequent wake-ups
-- Confusing `onInstalled` with `onStartup` — different triggers
-- Not handling `onSuspend` — lose unsaved state
-- Expecting event order guarantees between different APIs — race conditions possible
+- Registering listeners inside `onInstalled`. they won't exist on subsequent wake-ups
+- Confusing `onInstalled` with `onStartup`. different triggers
+- Not handling `onSuspend`. lose unsaved state
+- Expecting event order guarantees between different APIs. race conditions possible
 - Using `onMessage` without returning `true` for async responses
 -e 
 ---

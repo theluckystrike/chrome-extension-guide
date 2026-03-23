@@ -10,20 +10,20 @@ Understanding the distinction between these worker types is critical for extensi
 
 | Aspect | Extension Service Worker | Web Worker | SharedWorker |
 |--------|-------------------------|------------|--------------|
-| **Context** | Background event handler | Isolated thread | Shared isolated thread |
-| **Lifecycle** | Ephemeral, wakes on events | Created/destroyed by page | Persists while pages connected |
-| **Chrome APIs** | Full access | No direct access | No direct access |
-| **DOM Access** | None | None | None |
-| **Multiple Instances** | One per extension | One per page/context | One across same-origin pages |
-| **Communication** | chrome.runtime APIs | postMessage | postMessage |
+| Context | Background event handler | Isolated thread | Shared isolated thread |
+| Lifecycle | Ephemeral, wakes on events | Created/destroyed by page | Persists while pages connected |
+| Chrome APIs | Full access | No direct access | No direct access |
+| DOM Access | None | None | None |
+| Multiple Instances | One per extension | One per page/context | One across same-origin pages |
+| Communication | chrome.runtime APIs | postMessage | postMessage |
 
-The extension service worker (`background.service_worker`) is NOT a Web Worker—it's a special Chrome context that handles extension events. It cannot create Web Workers directly, but can spawn offscreen documents that can.
+The extension service worker (`background.service_worker`) is NOT a Web Worker, it's a special Chrome context that handles extension events. It cannot create Web Workers directly, but can spawn offscreen documents that can.
 
 ```javascript
-// ❌ This won't work in service worker
+//  This won't work in service worker
 const worker = new Worker('worker.js'); // TypeError: Not supported
 
-// ✅ Use offscreen document instead
+//  Use offscreen document instead
 await chrome.offscreen.createDocument({
   url: 'offscreen.html',
   reasons: ['WORKERS'],
@@ -128,7 +128,7 @@ function processData(data, options) {
 
 ## SharedWorker for Sharing State Between Extension Pages
 
-SharedWorkers allow multiple extension pages to share a single worker instance and communicate through it—perfect for sharing state across popup, options, and side panel.
+SharedWorkers allow multiple extension pages to share a single worker instance and communicate through it, perfect for sharing state across popup, options, and side panel.
 
 ### manifest.json Configuration
 
@@ -296,7 +296,7 @@ store.subscribe((state) => {
 
 ## Offscreen Documents as DOM-Capable Workers
 
-Offscreen documents provide a background context with DOM access—bridge the gap between service workers and web workers:
+Offscreen documents provide a background context with DOM access, bridge the gap between service workers and web workers:
 
 ```json
 {
@@ -437,7 +437,7 @@ self.onmessage = (event) => {
 
 ### MessageChannel for Direct Communication
 
-MessageChannel creates a direct channel between two contexts—useful for popup-to-content-script communication:
+MessageChannel creates a direct channel between two contexts, useful for popup-to-content-script communication:
 
 ```javascript
 // popup.js
@@ -628,13 +628,13 @@ function parseCSV(content, options) {
 
 ## Limitations in MV3
 
-- **No Web Workers in Service Worker**: Cannot create Web Workers directly in the background service worker
-- **No Direct Chrome API Access**: Workers must communicate via message passing
-- **Memory Limits**: Each extension has memory limits; workers count against this
-- **No DOM Access**: Workers cannot access the DOM; use offscreen documents for DOM tasks
-- **File URL Restrictions**: Worker files must be extension resources, not arbitrary URLs
-- **Extension Context**: Workers share the extension's origin but have isolated JavaScript contexts
-- **Module Workers**: Must use `{ type: 'module' }` for import statements
+- No Web Workers in Service Worker: Cannot create Web Workers directly in the background service worker
+- No Direct Chrome API Access: Workers must communicate via message passing
+- Memory Limits: Each extension has memory limits; workers count against this
+- No DOM Access: Workers cannot access the DOM; use offscreen documents for DOM tasks
+- File URL Restrictions: Worker files must be extension resources, not arbitrary URLs
+- Extension Context: Workers share the extension's origin but have isolated JavaScript contexts
+- Module Workers: Must use `{ type: 'module' }` for import statements
 
 ## Related Guides
 

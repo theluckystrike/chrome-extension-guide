@@ -30,7 +30,7 @@ Commands are declared in the manifest under the `"commands"` key. Each command h
 }
 ```
 
-## chrome.commands.getAll — Listing All Registered Commands
+## chrome.commands.getAll. Listing All Registered Commands
 Use `chrome.commands.getAll()` to retrieve all commands registered by your extension, including user-modified shortcuts.
 
 ```javascript
@@ -45,7 +45,7 @@ chrome.commands.getAll((commands) => {
 
 This returns an array of `Command` objects with properties: `name`, `description`, `shortcut`, and `isGlobal`.
 
-## chrome.commands.onCommand — Keyboard Shortcut Handler
+## chrome.commands.onCommand. Keyboard Shortcut Handler
 Listen for when users trigger a command using `onCommand.addListener()`:
 
 ```javascript
@@ -78,8 +78,8 @@ function openDialog() {
 ## Special Commands: _execute_action and _execute_page_action
 Chrome provides two built-in commands for triggering UI elements:
 
-- `_execute_action` — Triggers the extension's action (toolbar icon click)
-- `_execute_page_action` — Triggers the page action (legacy)
+- `_execute_action`. Triggers the extension's action (toolbar icon click)
+- `_execute_page_action`. Triggers the page action (legacy)
 
 ```json
 {
@@ -105,9 +105,9 @@ Chrome provides two built-in commands for triggering UI elements:
 | Search | Search | Command (⌘) |
 
 ### Common Patterns
-- **Ctrl+Shift+Key**: Less likely to conflict with browser shortcuts
-- **Alt+Key**: Good for extension-specific actions
-- **Function keys (F1-F12)**: Available but may conflict with browser/devtools
+- Ctrl+Shift+Key: Less likely to conflict with browser shortcuts
+- Alt+Key: Good for extension-specific actions
+- Function keys (F1-F12): Available but may conflict with browser/devtools
 
 ```json
 {
@@ -143,12 +143,12 @@ Always provide platform-specific keybindings using the `suggested_key` object:
 ```
 
 ### Key Naming Conventions
-- **Ctrl** vs **Command**: Use `Ctrl` for Windows/Linux, `Command` for macOS
-- **Plus signs**: Separate keys with `+` (e.g., `Ctrl+Shift+A`)
-- **Spaces**: Allowed in descriptions but not in key strings
+- Ctrl vs Command: Use `Ctrl` for Windows/Linux, `Command` for macOS
+- Plus signs: Separate keys with `+` (e.g., `Ctrl+Shift+A`)
+- Spaces: Allowed in descriptions but not in key strings
 
 ## User-Customizable Shortcuts
-Users can customize shortcuts via **chrome://extensions/shortcuts** or the extensions management page. Your extension receives these customizations automatically through `onCommand`.
+Users can customize shortcuts via chrome://extensions/shortcuts or the extensions management page. Your extension receives these customizations automatically through `onCommand`.
 
 ```javascript
 // Check user's current shortcut
@@ -177,13 +177,13 @@ By default, commands only work when the extension has focus. Use `global` proper
 }
 ```
 
-**Note**: Global shortcuts require the `"commands"` permission and may require user approval. They cannot use Ctrl+Shift+Key combinations (reserved by Chrome).
+Global shortcuts require the `"commands"` permission and may require user approval. They cannot use Ctrl+Shift+Key combinations (reserved by Chrome).
 
 ## Default Key Combination Best Practices
-1. **Avoid conflicts**: Don't use single keys or common browser shortcuts
-2. **Use modifiers**: Always include at least one modifier (Ctrl, Alt, Shift)
-3. **Provide macOS equivalents**: Mac users expect Command-based shortcuts
-4. **Document fallbacks**: Let users know they can customize in chrome://extensions
+1. Avoid conflicts: Don't use single keys or common browser shortcuts
+2. Use modifiers: Always include at least one modifier (Ctrl, Alt, Shift)
+3. Provide macOS equivalents: Mac users expect Command-based shortcuts
+4. Document fallbacks: Let users know they can customize in chrome://extensions
 
 ### Recommended Patterns
 - `Ctrl+Shift+[0-9]`: Number shortcuts for quick access

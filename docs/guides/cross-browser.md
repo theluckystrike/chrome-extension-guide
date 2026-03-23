@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Cross-Browser Development — Developer Guide"
+title: "Chrome Extension Cross-Browser Development. Developer Guide"
 description: "Learn Chrome extension cross-browser development with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/cross-browser/"
 ---
@@ -8,39 +8,39 @@ canonical_url: "https://bestchromeextensions.com/guides/cross-browser/"
 
 Building extensions that work across Chrome, Firefox, Edge, and Safari requires understanding each browser's WebExtension implementation, API availability, and submission requirements. This guide covers the essential patterns and techniques for achieving true cross-browser compatibility.
 
-## Browser Comparison Table {#browser-comparison-table}
+Browser Comparison Table {#browser-comparison-table}
 
 | Feature | Chrome | Firefox | Edge | Safari |
 |---------|--------|---------|------|--------|
-| Manifest V3 | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| Service Workers | ✅ | ✅ (background scripts) | ✅ | ✅ (since Safari 16.4) |
-| `chrome.*` namespace | ✅ Native | ✅ Via Polyfill | ✅ Native | ✅ Native |
-| `browser.*` namespace | ✅ Native (since Chrome 146) | ✅ Native | ✅ Alias | ✅ Alias |
-| Promise-based APIs | ✅ | ✅ | ✅ | ✅ Partial |
-| sidePanel API | ✅ | ❌ | ✅ | ❌ |
-| declarativeNetRequest | ✅ | ✅ | ✅ | ✅ |
-| offscreenDocument | ✅ | ❌ | ✅ | ❌ |
-| tabGroups | ✅ | ❌ | ✅ | ❌ |
-| side_panel in manifest | ✅ | ❌ | ✅ | ❌ |
+| Manifest V3 |  Full |  Full |  Full |  Full |
+| Service Workers |  |  (background scripts) |  |  (since Safari 16.4) |
+| `chrome.*` namespace |  Native |  Via Polyfill |  Native |  Native |
+| `browser.*` namespace |  Native (since Chrome 146) |  Native |  Alias |  Alias |
+| Promise-based APIs |  |  |  |  Partial |
+| sidePanel API |  |  |  |  |
+| declarativeNetRequest |  |  |  |  |
+| offscreenDocument |  |  |  |  |
+| tabGroups |  |  |  |  |
+| side_panel in manifest |  |  |  |  |
 
-### Namespace Differences {#namespace-differences}
+Namespace Differences {#namespace-differences}
 
-- **Chrome**: Supports both `chrome.*` and `browser.*` natively (native `browser.*` since Chrome 146)
-- **Edge**: Uses `chrome.*` APIs natively with callbacks
-- **Firefox**: Prefers `browser.*` namespace with Promises (WebExtension standard)
-- **Safari**: Supports both but with limited Promise support in some APIs
+- Chrome: Supports both `chrome.*` and `browser.*` natively (native `browser.*` since Chrome 146)
+- Edge: Uses `chrome.*` APIs natively with callbacks
+- Firefox: Prefers `browser.*` namespace with Promises (WebExtension standard)
+- Safari: Supports both but with limited Promise support in some APIs
 
-## WebExtension Polyfill {#webextension-polyfill}
+WebExtension Polyfill {#webextension-polyfill}
 
 The [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) normalizes API differences across browsers by providing a Promise-based `browser.*` interface that works everywhere.
 
-### Installation {#installation}
+Installation {#installation}
 
 ```bash
 npm install webextension-polyfill
 ```
 
-### Usage {#usage}
+Usage {#usage}
 
 ```javascript
 // Instead of chrome.* with callbacks:
@@ -57,7 +57,7 @@ const response = await browser.runtime.sendMessage('ext-id', {
 console.log(response);
 ```
 
-### Setup in Background Script {#setup-in-background-script}
+Setup in Background Script {#setup-in-background-script}
 
 ```javascript
 // background.js
@@ -66,7 +66,7 @@ import browser from 'webextension-polyfill';
 // Automatically normalizes chrome.* to browser.*
 ```
 
-### Setup in Content Script {#setup-in-content-script}
+Setup in Content Script {#setup-in-content-script}
 
 ```javascript
 // content.js
@@ -75,13 +75,13 @@ import browser from 'webextension-polyfill';
 // Use browser.runtime instead of chrome.runtime
 ```
 
-> **Note**: The polyfill doesn't add missing APIs—it only normalizes the interface (Promises vs callbacks, `browser.*` vs `chrome.*`).
+> Note: The polyfill doesn't add missing APIs, it only normalizes the interface (Promises vs callbacks, `browser.*` vs `chrome.*`).
 
-## Feature Detection Pattern {#feature-detection-pattern}
+Feature Detection Pattern {#feature-detection-pattern}
 
 Always check if an API exists before using it. This prevents errors when running on browsers that don't support certain features.
 
-### Basic Detection {#basic-detection}
+Basic Detection {#basic-detection}
 
 ```javascript
 // Check for sidePanel API (Chrome/Edge only)
@@ -108,7 +108,7 @@ if (chrome.offscreen) {
 }
 ```
 
-### Advanced Detection with Defaults {#advanced-detection-with-defaults}
+Advanced Detection with Defaults {#advanced-detection-with-defaults}
 
 ```javascript
 const BrowserFeatures = {
@@ -126,11 +126,11 @@ const BrowserFeatures = {
 };
 ```
 
-## Build Configuration {#build-configuration}
+Build Configuration {#build-configuration}
 
 Use a build tool to generate browser-specific builds from a shared codebase.
 
-### Vite with Multiple Targets {#vite-with-multiple-targets}
+Vite with Multiple Targets {#vite-with-multiple-targets}
 
 ```javascript
 // vite.config.js
@@ -151,7 +151,7 @@ export default defineConfig({
 });
 ```
 
-### Webpack Multi-Build {#webpack-multi-build}
+Webpack Multi-Build {#webpack-multi-build}
 
 ```javascript
 // webpack.config.js
@@ -173,7 +173,7 @@ module.exports = [
 ];
 ```
 
-### Separate Manifests per Browser {#separate-manifests-per-browser}
+Separate Manifests per Browser {#separate-manifests-per-browser}
 
 ```
 src/
@@ -196,13 +196,13 @@ const merged = { ...base, ...override };
 console.log(JSON.stringify(merged, null, 2));
 ```
 
-## Key Differences {#key-differences}
+Key Differences {#key-differences}
 
-### Service Worker vs Background Scripts {#service-worker-vs-background-scripts}
+Service Worker vs Background Scripts {#service-worker-vs-background-scripts}
 
-- **Chrome/Edge (MV3)**: Use service workers (no persistent background context)
-- **Firefox (MV3)**: Uses non-persistent background scripts (not event pages; service worker support is in progress)
-- **Safari (MV3)**: Supports service workers since Safari 16.4
+- Chrome/Edge (MV3): Use service workers (no persistent background context)
+- Firefox (MV3): Uses non-persistent background scripts (not event pages; service worker support is in progress)
+- Safari (MV3): Supports service workers since Safari 16.4
 
 ```javascript
 // Detect current environment
@@ -218,10 +218,10 @@ if (isServiceWorker) {
 }
 ```
 
-### Host Permissions Placement {#host-permissions-placement}
+Host Permissions Placement {#host-permissions-placement}
 
-- **MV2**: Host permissions in `permissions` array
-- **MV3**: Host permissions in `host_permissions` array (separate from API permissions)
+- MV2: Host permissions in `permissions` array
+- MV3: Host permissions in `host_permissions` array (separate from API permissions)
 
 ```json
 {
@@ -235,9 +235,9 @@ if (isServiceWorker) {
 }
 ```
 
-Firefox and Safari handle host permissions differently—always test permission-related functionality.
+Firefox and Safari handle host permissions differently, always test permission-related functionality.
 
-### Sidebar vs SidePanel {#sidebar-vs-sidepanel}
+Sidebar vs SidePanel {#sidebar-vs-sidepanel}
 
 | Feature | Chrome/Edge SidePanel | Firefox Sidebar |
 |---------|----------------------|------------------|
@@ -257,10 +257,10 @@ function openSidebar() {
 }
 ```
 
-### DNR vs webRequest {#dnr-vs-webrequest}
+DNR vs webRequest {#dnr-vs-webrequest}
 
-- **declarativeNetRequest (DNR)**: Newer, privacy-focused, supported in Chrome, Edge, Firefox
-- **webRequest**: Older, more powerful, blocked in MV3 for blocking requests
+- declarativeNetRequest (DNR): Newer, privacy-focused, supported in Chrome, Edge, Firefox
+- webRequest: Older, more powerful, blocked in MV3 for blocking requests
 
 ```javascript
 // Universal request blocking
@@ -284,9 +284,9 @@ if (chrome.declarativeNetRequest) {
 }
 ```
 
-## Store Submission {#store-submission}
+Store Submission {#store-submission}
 
-### Chrome Web Store (CWS) {#chrome-web-store-cws}
+Chrome Web Store (CWS) {#chrome-web-store-cws}
 
 1. Zip your extension (`dist/` folder, not source)
 2. Upload via Developer Dashboard
@@ -294,21 +294,21 @@ if (chrome.declarativeNetRequest) {
 4. Review typically takes hours to days
 5. Publish instantly after approval
 
-### Firefox Add-ons (AMO) {#firefox-add-ons-amo}
+Firefox Add-ons (AMO) {#firefox-add-ons-amo}
 
 1. Sign via Mozilla Add-ons Developer Hub
 2. No listing fee
 3. Review: automated + manual (varies)
 4. Can auto-update via Update URL
 
-### Edge Add-ons {#edge-add-ons}
+Edge Add-ons {#edge-add-ons}
 
 1. Use Partner Center Dashboard
 2. Free developer registration
 3. Review takes 3-5 business days typically
 4. Must meet Microsoft Store policies
 
-### Safari App Store {#safari-app-store}
+Safari App Store {#safari-app-store}
 
 1. Requires Apple Developer Program ($99/year)
 2. Must use Xcode to build and package
@@ -316,33 +316,33 @@ if (chrome.declarativeNetRequest) {
 4. Submit through App Store Connect
 5. Review takes 1-2 weeks typically
 
-## Review Process Differences {#review-process-differences}
+Review Process Differences {#review-process-differences}
 
 | Store | Fee | Review Time | Auto-Update | Notes |
 |-------|-----|-------------|-------------|-------|
-| Chrome Web Store | $5 (one-time) | Hours-Days | ✅ | Strict policy enforcement |
-| Firefox AMO | Free | Days-Weeks | ✅ | Less strict, but quality matters |
-| Edge Add-ons | Free | 3-5 business days | ✅ | Microsoft Store policies |
-| Safari | $99/year | 1-2 weeks | ✅ | Requires Xcode packaging |
+| Chrome Web Store | $5 (one-time) | Hours-Days |  | Strict policy enforcement |
+| Firefox AMO | Free | Days-Weeks |  | Less strict, but quality matters |
+| Edge Add-ons | Free | 3-5 business days |  | Microsoft Store policies |
+| Safari | $99/year | 1-2 weeks |  | Requires Xcode packaging |
 
-## Testing Across Browsers {#testing-across-browsers}
+Testing Across Browsers {#testing-across-browsers}
 
-### Separate Browser Profiles {#separate-browser-profiles}
+Separate Browser Profiles {#separate-browser-profiles}
 
 Create dedicated profiles for development to avoid conflicts:
 
 ```bash
-# Chrome
+Chrome
 chrome --remote-debugging-port=9222 --user-data-dir=./chrome-dev-profile
 
-# Firefox
+Firefox
 firefox -P firefox-dev-profile -no-remote
 
-# Edge
+Edge
 msedge --remote-debugging-port=9222 --user-data-dir=./edge-dev-profile
 ```
 
-### Playwright for Automation {#playwright-for-automation}
+Playwright for Automation {#playwright-for-automation}
 
 ```javascript
 // test/extension.spec.js
@@ -360,7 +360,7 @@ test('extension popup works', async ({ page }) => {
 });
 ```
 
-### Manual Testing Checklist {#manual-testing-checklist}
+Manual Testing Checklist {#manual-testing-checklist}
 
 - [ ] Install on Chrome, test all features
 - [ ] Install on Firefox, test all features
@@ -370,7 +370,7 @@ test('extension popup works', async ({ page }) => {
 - [ ] Test extension updates
 - [ ] Test with all permission levels
 
-## Abstraction Layer Pattern {#abstraction-layer-pattern}
+Abstraction Layer Pattern {#abstraction-layer-pattern}
 
 Create a browser-api.ts wrapper to centralize feature detection and API normalization:
 
@@ -413,9 +413,9 @@ export async function openSidePanel(path: string): Promise<void> {
 }
 ```
 
-## Common Mistakes {#common-mistakes}
+Common Mistakes {#common-mistakes}
 
-### ❌ Assuming chrome.* Works Everywhere {#assuming-chrome-works-everywhere}
+ Assuming chrome.* Works Everywhere {#assuming-chrome-works-everywhere}
 
 ```javascript
 // BAD: Will fail on Firefox
@@ -426,7 +426,7 @@ import browser from 'webextension-polyfill';
 await browser.runtime.sendMessage({ data: 'hello' });
 ```
 
-### ❌ Chrome-Only APIs Without Detection {#chrome-only-apis-without-detection}
+ Chrome-Only APIs Without Detection {#chrome-only-apis-without-detection}
 
 ```javascript
 // BAD: Will throw error on Firefox
@@ -438,7 +438,7 @@ if (chrome.sidePanel) {
 }
 ```
 
-### ❌ Safari Xcode Requirement {#safari-xcode-requirement}
+ Safari Xcode Requirement {#safari-xcode-requirement}
 
 Safari extensions require:
 - macOS machine
@@ -448,7 +448,7 @@ Safari extensions require:
 
 Don't target Safari without accounting for the build complexity.
 
-### ❌ Ignoring Manifest Differences {#ignoring-manifest-differences}
+ Ignoring Manifest Differences {#ignoring-manifest-differences}
 
 ```json
 {
@@ -464,11 +464,11 @@ Don't target Safari without accounting for the build complexity.
 }
 ```
 
-## Works With Our Packages {#works-with-our-packages}
+Works With Our Packages {#works-with-our-packages}
 
 The following packages from @theluckystrike are designed for cross-browser compatibility:
 
-### @theluckystrike/webext-messaging {#theluckystrikewebext-messaging}
+@theluckystrike/webext-messaging {#theluckystrikewebext-messaging}
 
 A Promise-based messaging library that works across all browsers:
 
@@ -482,7 +482,7 @@ await msg.sendToBackground({ action: 'getData' });
 await msg.sendToContent(tabId, { action: 'updateUI' });
 ```
 
-### @theluckystrike/webext-storage {#theluckystrikewebext-storage}
+@theluckystrike/webext-storage {#theluckystrikewebext-storage}
 
 Promise-based storage abstraction with cross-browser support:
 
@@ -498,9 +498,9 @@ const settings = await storage.get('settings');
 
 Both packages handle the Promise/callback normalization and provide consistent APIs across Chrome, Firefox, Edge, and Safari.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Cross-Browser Compatibility](../patterns/cross-browser-compatibility.md)
 - [Safari Porting](../guides/chrome-extension-safari-porting.md)

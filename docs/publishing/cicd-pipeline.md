@@ -1,20 +1,20 @@
 ---
-title: "Chrome Extension CI/CD Pipeline — Automated Testing and CWS Publishing with GitHub Actions"
+title: "Chrome Extension CI/CD Pipeline. Automated Testing and CWS Publishing with GitHub Actions"
 slug: /publishing/cicd-pipeline/
-description: "Learn how to build a robust CI/CD pipeline for Chrome extensions using GitHub Actions, covering automated testing, zip packaging, CWS API upload, semantic versioning, and environment secret management."
+description: "Learn how to build a solid CI/CD pipeline for Chrome extensions using GitHub Actions, covering automated testing, zip packaging, CWS API upload, semantic versioning, and environment secret management."
 ---
 
-# Chrome Extension CI/CD Pipeline — Automated Testing and CWS Publishing with GitHub Actions
+# Chrome Extension CI/CD Pipeline. Automated Testing and CWS Publishing with GitHub Actions
 
 Building a reliable continuous integration and continuous deployment (CI/CD) pipeline is essential for maintaining Chrome extensions at scale. A well-designed pipeline automates testing, ensures consistent builds, handles packaging, and streamlines the publication process to the Chrome Web Store (CWS). This guide walks you through creating a comprehensive GitHub Actions workflow that covers every stage from code commit to automated publishing.
 
-## Why CI/CD Matters for Chrome Extensions
+Why CI/CD Matters for Chrome Extensions
 
 Chrome extensions present unique challenges that make CI/CD pipelines particularly valuable. Unlike traditional web applications, extensions must work across multiple Chrome versions, handle browser-specific APIs, and pass Chrome Web Store review processes. Manual deployment is error-prone and doesn't scale when managing multiple extension versions or a team of contributors.
 
-A robust CI/CD pipeline provides several key benefits. First, it ensures every pull request goes through automated testing before merging, catching bugs early. Second, it creates consistent, reproducible builds that eliminate the "works on my machine" problems. Third, it automates the repetitive tasks of packaging and uploading, saving developer time. Fourth, it provides a clear audit trail of what's been deployed and when.
+A solid CI/CD pipeline provides several key benefits. First, it ensures every pull request goes through automated testing before merging, catching bugs early. Second, it creates consistent, reproducible builds that eliminate the "works on my machine" problems. Third, it automates the repetitive tasks of packaging and uploading, saving developer time. Fourth, it provides a clear audit trail of what's been deployed and when.
 
-## Setting Up GitHub Actions for Extension Development
+Setting Up GitHub Actions for Extension Development
 
 GitHub Actions provides an excellent foundation for extension CI/CD because it's tightly integrated with GitHub repositories and offers generous free tier for public repositories. To get started, create a `.github/workflows` directory in your extension repository and add your first workflow file.
 
@@ -52,7 +52,7 @@ jobs:
 
 This basic structure runs on every push and pull request, ensuring that your extension's tests pass before any code is merged to main.
 
-## Automated Testing Strategies for Extensions
+Automated Testing Strategies for Extensions
 
 Testing Chrome extensions requires a multi-layered approach because extensions combine JavaScript, HTML, CSS, and browser-specific APIs. Your testing strategy should include unit tests for logic, integration tests for API interactions, and end-to-end tests that verify the extension works correctly in a real Chrome environment.
 
@@ -85,7 +85,7 @@ For integration testing, consider using tools like Puppeteer or Playwright to la
 
 When writing tests for Chrome extensions, pay special attention to testing service worker lifecycle events, message passing between contexts, and storage operations. These are common sources of bugs and often the hardest to debug.
 
-## Building and Packaging Your Extension
+Building and Packaging Your Extension
 
 The build step transforms your source code into a distributable extension package. For most projects, this involves transpiling TypeScript or modern JavaScript, bundling modules, and copying static assets. Tools like Webpack, Rollup, or Vite work well for this purpose.
 
@@ -144,7 +144,7 @@ package:
 
 Be careful about what you include in your package. The Chrome Web Store has strict policies about what files are allowed, and including unnecessary files can cause rejection or increase your extension's size unnecessarily.
 
-## Publishing to the Chrome Web Store with CWS API
+Publishing to the Chrome Web Store with CWS API
 
 The Chrome Web Store API (formerly called the uploader API) allows you to programmatically upload and publish extensions. This is essential for automated publishing and eliminates the need for manual uploads through the developer dashboard.
 
@@ -188,7 +188,7 @@ publish:
 
 This job only runs when a release is published, giving you control over when changes go live. Setting `publish: true` automatically publishes the extension after review (if auto-publishing is enabled in your dashboard) or submits it for review.
 
-## Implementing Semantic Release
+Implementing Semantic Release
 
 Semantic versioning brings predictability to your release process by enforcing a consistent versioning scheme. Combined with conventional commits, it allows tools to automatically determine version numbers and generate changelogs.
 
@@ -209,11 +209,11 @@ Configure semantic-release to publish to both npm (if you have a package) and cr
 
 For Chrome extensions, you'll want to ensure the version in your `manifest.json` matches the semantic version. Consider using a plugin or build script that reads the computed version and updates your manifest before building.
 
-## Managing Environment Secrets Safely
+Managing Environment Secrets Safely
 
 Secret management is critical for security because your pipeline needs access to sensitive credentials but those credentials should never be exposed in logs or error messages.
 
-GitHub's secret storage encrypts values at rest and only decrypts them during workflow runs. Never print secrets to logs—even in error messages. Use the `no_log` option in conditional steps when necessary:
+GitHub's secret storage encrypts values at rest and only decrypts them during workflow runs. Never print secrets to logs, even in error messages. Use the `no_log` option in conditional steps when necessary:
 
 {% raw %}
 ```yaml
@@ -230,11 +230,11 @@ Consider using different secrets for different environments. For example, you mi
 
 Rotate your secrets periodically and immediately if you suspect they've been compromised. GitHub makes it easy to update secrets, and your pipeline will use the new values on the next run.
 
-## Putting It All Together
+Putting It All Together
 
 A complete CI/CD pipeline for Chrome extensions typically involves multiple coordinated workflows. The primary workflow runs on every push and pull request, running tests and building the extension. A separate release workflow triggers on version tags, handling packaging and publishing.
 
-Here's how the pieces fit together: when you merge a pull request, the test job runs and ensures all tests pass. When you're ready to release, you either create a release through the GitHub UI or push a version tag. Either approach triggers the build, package, and publish jobs in sequence.
+when you merge a pull request, the test job runs and ensures all tests pass. When you're ready to release, you either create a release through the GitHub UI or push a version tag. Either approach triggers the build, package, and publish jobs in sequence.
 
 Monitor your pipeline's performance and reliability over time. If builds start failing frequently or taking too long, investigate the cause. Common issues include flaky tests, dependency problems, and rate limiting from external services. Set up notifications so you're alerted when the pipeline fails.
 

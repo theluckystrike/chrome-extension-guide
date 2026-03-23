@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Focus Timer — Developer Guide"
+title: "Chrome Extension Focus Timer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-focus-timer/"
 ---
 # Build a Focus Timer (Pomodoro) Extension
 
-## Overview {#overview}
+Overview {#overview}
 Build a Pomodoro timer extension with configurable work/break intervals, site blocking during focus sessions, notifications, and session history.
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -28,7 +28,7 @@ Build a Pomodoro timer extension with configurable work/break intervals, site bl
 }
 ```
 
-## Timer with chrome.alarms {#timer-with-chromealarms}
+Timer with chrome.alarms {#timer-with-chromealarms}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -55,7 +55,7 @@ async function startFocus() {
 }
 ```
 
-## Messaging {#messaging}
+Messaging {#messaging}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -83,7 +83,7 @@ m.onMessage('GET_STATUS', async () => {
 });
 ```
 
-## Alarm Handlers {#alarm-handlers}
+Alarm Handlers {#alarm-handlers}
 ```typescript
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'focus-end') {
@@ -116,7 +116,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## Site Blocking During Focus {#site-blocking-during-focus}
+Site Blocking During Focus {#site-blocking-during-focus}
 ```typescript
 async function enableSiteBlocking() {
   const sites = JSON.parse(await storage.get('blockedSites') || '["twitter.com","reddit.com","youtube.com"]');
@@ -140,7 +140,7 @@ async function disableSiteBlocking() {
 }
 ```
 
-## Badge Countdown {#badge-countdown}
+Badge Countdown {#badge-countdown}
 ```typescript
 async function updateBadge(state: string, minutes?: number) {
   if (state === 'focus') {
@@ -157,7 +157,7 @@ async function updateBadge(state: string, minutes?: number) {
 }
 ```
 
-## Notification Actions {#notification-actions}
+Notification Actions {#notification-actions}
 ```typescript
 chrome.notifications.onButtonClicked.addListener(async (notifId, buttonIndex) => {
   if (notifId === 'focus-done' && buttonIndex === 0) {
@@ -170,7 +170,7 @@ chrome.notifications.onButtonClicked.addListener(async (notifId, buttonIndex) =>
 });
 ```
 
-## Service Worker Restart Recovery {#service-worker-restart-recovery}
+Service Worker Restart Recovery {#service-worker-restart-recovery}
 ```typescript
 chrome.runtime.onStartup.addListener(async () => {
   const state = await storage.get('timerState');
@@ -186,14 +186,14 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Permission: `docs/permissions/alarms.md`, `docs/permissions/declarativeNetRequest.md`
 - MV3: `docs/mv3/event-driven-architecture.md`
 - Guide: `docs/guides/notifications-guide.md`
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

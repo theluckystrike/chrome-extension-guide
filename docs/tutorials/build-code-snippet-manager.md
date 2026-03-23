@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Code Snippet Manager — Developer Guide"
+title: "Chrome Extension Code Snippet Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-code-snippet-manager/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-code-snippet-ma
 
 In this tutorial, we'll build a Chrome extension that lets you save, organize, and retrieve code snippets from any web page.
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with the necessary permissions:
 
@@ -24,11 +24,11 @@ Create `manifest.json` with the necessary permissions:
 ```
 
 Key permissions:
-- **contextMenus**: Right-click to save selected code
-- **storage**: Persist snippets locally
-- **activeTab**: Access current tab's content
+- contextMenus: Right-click to save selected code
+- storage: Persist snippets locally
+- activeTab: Access current tab's content
 
-## Step 2: Context Menu for Saving Code {#step-2-context-menu-for-saving-code}
+Step 2: Context Menu for Saving Code {#step-2-context-menu-for-saving-code}
 
 In `background.js`, create the context menu:
 
@@ -46,7 +46,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Step 3: Popup UI {#step-3-popup-ui}
+Step 3: Popup UI {#step-3-popup-ui}
 
 Create `popup.html` with search, filter, and snippet list:
 
@@ -58,7 +58,7 @@ Create `popup.html` with search, filter, and snippet list:
 
 Style with `popup.css` for a clean, searchable interface.
 
-## Step 4: IndexedDB Storage {#step-4-indexeddb-storage}
+Step 4: IndexedDB Storage {#step-4-indexeddb-storage}
 
 For large snippet collections, use IndexedDB via an offscreen document:
 
@@ -73,7 +73,7 @@ dbRequest.onupgradeneeded = (e) => {
 
 See [patterns/indexeddb-extensions.md](../../patterns/indexeddb-extensions.md).
 
-## Step 5: Syntax Highlighting {#step-5-syntax-highlighting}
+Step 5: Syntax Highlighting {#step-5-syntax-highlighting}
 
 Use a lightweight highlighter like Prism.js or Highlight.js:
 
@@ -83,7 +83,7 @@ function highlightCode(code, language) {
 }
 ```
 
-## Step 6: Copy to Clipboard {#step-6-copy-to-clipboard}
+Step 6: Copy to Clipboard {#step-6-copy-to-clipboard}
 
 Add one-click copy functionality:
 
@@ -95,7 +95,7 @@ async function copyToClipboard(text) {
 
 See [patterns/clipboard-patterns.md](../../patterns/clipboard-patterns.md).
 
-## Step 7: Tags and Categories {#step-7-tags-and-categories}
+Step 7: Tags and Categories {#step-7-tags-and-categories}
 
 Organize snippets with tags:
 
@@ -109,7 +109,7 @@ const snippet = {
 };
 ```
 
-## Step 8: Import/Export {#step-8-importexport}
+Step 8: Import/Export {#step-8-importexport}
 
 Export snippets as JSON:
 
@@ -124,7 +124,7 @@ function exportSnippets() {
 
 Import via file input and parse JSON.
 
-## Content Script: Detect Code Blocks {#content-script-detect-code-blocks}
+Content Script: Detect Code Blocks {#content-script-detect-code-blocks}
 
 Create `content.js` to detect code on pages:
 
@@ -138,14 +138,14 @@ codeBlocks.forEach(block => {
 });
 ```
 
-## Options Page {#options-page}
+Options Page {#options-page}
 
 Create `options.html` for:
 - Default language preference
 - Storage cleanup/management
 - Theme settings
 
-## Summary {#summary}
+Summary {#summary}
 
 This extension demonstrates:
 - Context menus for quick saving

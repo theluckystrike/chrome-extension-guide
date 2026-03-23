@@ -1,26 +1,26 @@
 ---
 layout: default
-title: "Chrome Extension Devtools Extension Patterns — Best Practices"
+title: "Chrome Extension Devtools Extension Patterns. Best Practices"
 description: "Build custom DevTools panels and extensions for advanced debugging."
 canonical_url: "https://bestchromeextensions.com/patterns/devtools-extension-patterns/"
 ---
 
 # DevTools Extension Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome DevTools extensions extend Chrome's developer tools with custom panels, sidebar panes, and deep integration with the inspected page. DevTools pages run in a privileged context with access to the `chrome.devtools.*` APIs, enabling rich debugging and inspection tooling.
 
-> **Manifest requirement:** Set `"devtools_page": "devtools.html"` in manifest.json. The DevTools page loads when DevTools opens and serves as the entry point for all DevTools APIs.
+> Manifest requirement: Set `"devtools_page": "devtools.html"` in manifest.json. The DevTools page loads when DevTools opens and serves as the entry point for all DevTools APIs.
 
 ---
 
-## DevTools Page Lifecycle {#devtools-page-lifecycle}
+DevTools Page Lifecycle {#devtools-page-lifecycle}
 
 The `devtools.html` page runs once per DevTools window opening. Use it to register panels and establish communication:
 
 ```ts
-// devtools.ts — Entry point for all DevTools functionality
+// devtools.ts. Entry point for all DevTools functionality
 chrome.devtools.panels.create(
   "My Panel",
   "icons/panel-16.png",
@@ -42,7 +42,7 @@ backgroundPort.postMessage({ type: "devtools-opened", tabId: chrome.devtools.ins
 
 ---
 
-## Creating Custom Panels {#creating-custom-panels}
+Creating Custom Panels {#creating-custom-panels}
 
 Panels appear as top-level tabs in DevTools. They contain full HTML pages with complete framework support:
 
@@ -58,10 +58,10 @@ chrome.devtools.panels.create(
 );
 ```
 
-Panels can include React, Vue, or any other framework — they're standard HTML pages embedded in DevTools:
+Panels can include React, Vue, or any other framework. they're standard HTML pages embedded in DevTools:
 
 ```tsx
-// network-panel.tsx — Full React support in panels
+// network-panel.tsx. Full React support in panels
 import { createRoot } from "react-dom/client";
 import { NetworkPanel } from "./NetworkPanel";
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Sidebar Panes for Elements Panel {#sidebar-panes-for-elements-panel}
+Sidebar Panes for Elements Panel {#sidebar-panes-for-elements-panel}
 
 Add contextual sidebars to the Elements panel that update when users select DOM elements:
 
@@ -97,7 +97,7 @@ chrome.devtools.panels.elements.createSidebarPane(
 
 ---
 
-## Accessing the Inspected Page {#accessing-the-inspected-page}
+Accessing the Inspected Page {#accessing-the-inspected-page}
 
 Use `chrome.devtools.inspectedWindow.eval()` to execute code in the page context:
 
@@ -122,7 +122,7 @@ function highlightElement(selector: string) {
 
 ---
 
-## Network Monitoring {#network-monitoring}
+Network Monitoring {#network-monitoring}
 
 Capture and analyze HTTP traffic using the Network API:
 
@@ -145,7 +145,7 @@ chrome.devtools.network.getHAR((har) => {
 
 ---
 
-## Theme Detection {#theme-detection}
+Theme Detection {#theme-detection}
 
 Detect whether DevTools is in light or dark mode:
 
@@ -159,7 +159,7 @@ document.documentElement.classList.toggle("dark-mode", themeName === "dark");
 
 ---
 
-## Resource Tracking {#resource-tracking}
+Resource Tracking {#resource-tracking}
 
 Monitor all resources loaded by the inspected page:
 
@@ -179,21 +179,21 @@ chrome.devtools.inspectedWindow.onResourceAdded.addListener((resource) => {
 
 ---
 
-## Communication Architecture {#communication-architecture}
+Communication Architecture {#communication-architecture}
 
 DevTools pages cannot directly access content scripts. Use message passing through the background service worker:
 
 ```
-┌─────────────┐     Messaging      ┌────────────────┐
-│ DevTools    │ ◄───────────────► │ Background     │
-│ (devtools)  │                    │ (service worker)│
-└─────────────┘                    └────────────────┘
-                                         │
-                                         ▼
-                                  ┌────────────────┐
-                                  │ Content Script │
-                                  │ (page context) │
-                                  └────────────────┘
+     Messaging      
+ DevTools       Background     
+ (devtools)                       (service worker)
+                    
+                                         
+                                         
+                                  
+                                   Content Script 
+                                   (page context) 
+                                  
 ```
 
 ```ts
@@ -207,7 +207,7 @@ port.postMessage({ type: "page-state", data: {...} });
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | API | Purpose |
 |-----|---------|
@@ -220,7 +220,7 @@ port.postMessage({ type: "page-state", data: {...} });
 
 ---
 
-## Related Documentation {#related-documentation}
+Related Documentation {#related-documentation}
 
 - [DevTools API Reference](../api-reference/devtools-api.md)
 - [Building DevTools Extensions](../guides/devtools-extensions.md)

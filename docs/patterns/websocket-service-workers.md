@@ -1,24 +1,24 @@
 ---
 layout: default
-title: "Chrome Extension Websocket Service Workers — Best Practices"
+title: "Chrome Extension Websocket Service Workers. Best Practices"
 description: "Use WebSockets in service workers."
 canonical_url: "https://bestchromeextensions.com/patterns/websocket-service-workers/"
 ---
 
 # WebSocket Connections from Service Workers
 
-## Overview {#overview}
+Overview {#overview}
 
-WebSockets provide real-time, bidirectional communication — but MV3 service workers are a hostile environment for persistent connections. The service worker can terminate after 30 seconds of inactivity, destroying any open WebSocket. This guide covers eight patterns for maintaining reliable WebSocket connections in Chrome extensions, from offscreen document hosting to graceful fallback strategies.
+WebSockets provide real-time, bidirectional communication. but MV3 service workers are a hostile environment for persistent connections. The service worker can terminate after 30 seconds of inactivity, destroying any open WebSocket. This guide covers eight patterns for maintaining reliable WebSocket connections in Chrome extensions, from offscreen document hosting to graceful fallback strategies.
 
 ---
 
-## Pattern 1: WebSocket Basics in MV3 Service Workers {#pattern-1-websocket-basics-in-mv3-service-workers}
+Pattern 1: WebSocket Basics in MV3 Service Workers {#pattern-1-websocket-basics-in-mv3-service-workers}
 
 You _can_ open a WebSocket directly in a service worker, but the connection dies when Chrome terminates it:
 
 ```ts
-// background.ts — Direct WebSocket (fragile)
+// background.ts. Direct WebSocket (fragile)
 let socket: WebSocket | null = null;
 
 function connect(url: string): void {
@@ -36,16 +36,16 @@ function connect(url: string): void {
   socket.onclose = (event) => {
     console.warn(`WebSocket closed: ${event.code}`);
     socket = null;
-    // Service worker will terminate soon — no reliable reconnection
+    // Service worker will terminate soon. no reliable reconnection
   };
 }
 ```
 
-The core problem: Chrome terminates idle service workers after ~30 seconds. Direct connections are only suitable for short-lived, request-response exchanges — not persistent subscriptions.
+The core problem: Chrome terminates idle service workers after ~30 seconds. Direct connections are only suitable for short-lived, request-response exchanges. not persistent subscriptions.
 
 ---
 
-## Pattern 2: Offscreen Document as a Persistent WebSocket Host {#pattern-2-offscreen-document-as-a-persistent-websocket-host}
+Pattern 2: Offscreen Document as a Persistent WebSocket Host {#pattern-2-offscreen-document-as-a-persistent-websocket-host}
 
 Move the WebSocket into an offscreen document, which runs in a normal page context and is not subject to service worker lifecycle limits:
 
@@ -82,7 +82,7 @@ export const offscreen = new OffscreenManager();
 ```
 
 ```ts
-// offscreen-ws.ts — Runs inside the offscreen document
+// offscreen-ws.ts. Runs inside the offscreen document
 let socket: WebSocket | null = null;
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
@@ -113,7 +113,7 @@ function connectSocket(url: string): void {
 
 ---
 
-## Pattern 3: Reconnection with Exponential Backoff {#pattern-3-reconnection-with-exponential-backoff}
+Pattern 3: Reconnection with Exponential Backoff {#pattern-3-reconnection-with-exponential-backoff}
 
 Network failures and server restarts are inevitable. Use exponential backoff with jitter:
 
@@ -168,7 +168,7 @@ class ReconnectingWebSocket {
       this.onStateChange("failed");
       return;
     }
-    const delay = Math.min(this.baseDelay * 2 ** this.attempt, this.maxDelay);
+    const delay = Math.min(this.baseDelay * 2  this.attempt, this.maxDelay);
     const jitter = delay * 0.3 * Math.random();
     this.attempt++;
     this.timer = setTimeout(() => this.createSocket(), delay + jitter);
@@ -178,7 +178,7 @@ class ReconnectingWebSocket {
 
 ---
 
-## Pattern 4: Message Queuing During Disconnections {#pattern-4-message-queuing-during-disconnections}
+Pattern 4: Message Queuing During Disconnections {#pattern-4-message-queuing-during-disconnections}
 
 Buffer outbound messages while the socket is down and flush them on reconnect:
 
@@ -235,7 +235,7 @@ const ws = new ReconnectingWebSocket(
 
 ---
 
-## Pattern 5: Heartbeat / Ping-Pong Keep-Alive {#pattern-5-heartbeat-ping-pong-keep-alive}
+Pattern 5: Heartbeat / Ping-Pong Keep-Alive {#pattern-5-heartbeat-ping-pong-keep-alive}
 
 Detect dead connections before the TCP timeout by exchanging periodic heartbeats:
 
@@ -284,7 +284,7 @@ const heartbeat = new HeartbeatManager(25_000, 10_000,
 
 ---
 
-## Pattern 6: Typed WebSocket Message Protocol {#pattern-6-typed-websocket-message-protocol}
+Pattern 6: Typed WebSocket Message Protocol {#pattern-6-typed-websocket-message-protocol}
 
 Define a compile-time-safe protocol for all WebSocket messages:
 
@@ -346,12 +346,12 @@ send("chat:send", { text: "Hello!", replyTo: "msg-123" });
 
 ---
 
-## Pattern 7: Broadcasting WebSocket Events to Popup and Content Scripts {#pattern-7-broadcasting-websocket-events-to-popup-and-content-scripts}
+Pattern 7: Broadcasting WebSocket Events to Popup and Content Scripts {#pattern-7-broadcasting-websocket-events-to-popup-and-content-scripts}
 
 WebSocket data arrives in the offscreen document but must reach the popup, side panel, and content scripts:
 
 ```ts
-// background.ts — Central event broadcaster
+// background.ts. Central event broadcaster
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "ws-message") broadcastToAll(msg.data);
   if (msg.type === "ws-state") broadcastStatus(msg.state === "open");
@@ -391,7 +391,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-## Pattern 8: Fallback from WebSocket to Polling {#pattern-8-fallback-from-websocket-to-polling}
+Pattern 8: Fallback from WebSocket to Polling {#pattern-8-fallback-from-websocket-to-polling}
 
 When the offscreen document is unavailable (already in use, or older Chrome), fall back to HTTP polling from the service worker:
 
@@ -437,14 +437,14 @@ async function createTransport(onMessage: (data: unknown) => void) {
       return createOffscreenTransport(onMessage);
     }
   }
-  console.warn("Offscreen unavailable — falling back to HTTP polling");
+  console.warn("Offscreen unavailable. falling back to HTTP polling");
   return new PollingTransport(5000, onMessage);
 }
 ```
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

@@ -17,45 +17,45 @@ This tutorial assumes you have basic knowledge of HTML, CSS, and JavaScript. By 
 
 ---
 
-## Why Build Email Productivity Extensions in 2025? {#why-email-extensions}
+Why Build Email Productivity Extensions in 2025? {#why-email-extensions}
 
 The demand for email productivity tools continues to grow as professionals seek ways to manage increasing email volumes. Here is why building an email Chrome extension is a lucrative endeavor:
 
-### Market Demand
+Market Demand
 
 Studies show that the average professional receives approximately 121 emails per day and spends nearly 28% of their workweek reading and responding to emails. Chrome extensions that can reduce this burden have proven market demand. Extensions like Mailtrack, Streak, and Yesware have millions of users, demonstrating that there is substantial opportunity in this space.
 
-### Integration Opportunities
+Integration Opportunities
 
-Both Gmail and Outlook offer robust web interfaces with extensive developer APIs. These platforms provide hooks for extensions to interact with email content, track interactions, and enhance the user experience. Understanding how to leverage these APIs effectively is a valuable skill that extends beyond email extensions.
+Both Gmail and Outlook offer solid web interfaces with extensive developer APIs. These platforms provide hooks for extensions to interact with email content, track interactions, and enhance the user experience. Understanding how to use these APIs effectively is a valuable skill that extends beyond email extensions.
 
-### Recurring Value
+Recurring Value
 
 Unlike one-off tools, email productivity extensions become embedded in users' daily workflows. This creates strong retention and provides opportunities for monetization through premium features, subscriptions, or freemium models.
 
 ---
 
-## Project Planning and Architecture {#project-planning}
+Project Planning and Architecture {#project-planning}
 
 Before writing any code, let us plan the extension architecture. Our email productivity extension will include the following features:
 
-1. **Email Tracking**: Notify users when their emails are opened
-2. **Quick Templates**: One-click insertion of pre-written responses
-3. **Follow-up Reminders**: Automatic reminders to follow up on unanswered emails
-4. **Email Analytics**: Display open rates and response times
-5. **Gmail and Outlook Support**: Work seamlessly with both platforms
+1. Email Tracking: Notify users when their emails are opened
+2. Quick Templates: One-click insertion of pre-written responses
+3. Follow-up Reminders: Automatic reminders to follow up on unanswered emails
+4. Email Analytics: Display open rates and response times
+5. Gmail and Outlook Support: Work smoothly with both platforms
 
-### Technology Stack
+Technology Stack
 
-- **Manifest V3**: The latest Chrome extension platform
-- **Content Scripts**: For injecting functionality into email interfaces
-- **Background Service Workers**: For handling tracking pixels and notifications
-- **Chrome Storage API**: For persisting user preferences and data
-- **Chrome Notifications API**: For displaying alerts
+- Manifest V3: The latest Chrome extension platform
+- Content Scripts: For injecting functionality into email interfaces
+- Background Service Workers: For handling tracking pixels and notifications
+- Chrome Storage API: For persisting user preferences and data
+- Chrome Notifications API: For displaying alerts
 
 ---
 
-## Step 1: Creating the Manifest File {#manifest-file}
+Step 1: Creating the Manifest File {#manifest-file}
 
 Every Chrome extension begins with the manifest.json file. This file defines the extension's permissions, entry points, and capabilities. Create a new folder for your project and add the following manifest.json:
 
@@ -103,19 +103,19 @@ Every Chrome extension begins with the manifest.json file. This file defines the
 }
 ```
 
-### Understanding Manifest Permissions
+Understanding Manifest Permissions
 
 The permissions we have defined are essential for our extension's functionality:
 
-- **storage**: Saves user preferences, templates, and tracking data
-- **notifications**: Alerts users about email opens and follow-up reminders
-- **tabs** and **activeTab**: Access information about current browser tabs
-- **scripting**: Inject content scripts into web pages
-- **host_permissions**: Grants access to Gmail and Outlook domains
+- storage: Saves user preferences, templates, and tracking data
+- notifications: Alerts users about email opens and follow-up reminders
+- tabs and activeTab: Access information about current browser tabs
+- scripting: Inject content scripts into web pages
+- host_permissions: Grants access to Gmail and Outlook domains
 
 ---
 
-## Step 2: Building the Popup Interface {#popup-interface}
+Step 2: Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It serves as the command center for our extension. Create popup.html:
 
@@ -138,11 +138,11 @@ The popup is what users see when they click the extension icon. It serves as the
     <section class="quick-actions">
       <h2>Quick Actions</h2>
       <button id="trackEmails" class="action-btn">
-        <span class="icon">📬</span>
+        <span class="icon"></span>
         Track New Email
       </button>
       <button id="insertTemplate" class="action-btn">
-        <span class="icon">📝</span>
+        <span class="icon"></span>
         Insert Template
       </button>
       <button id="setReminder" class="action-btn">
@@ -381,7 +381,7 @@ function showNotification(message) {
 
 ---
 
-## Step 3: Content Scripts for Email Integration {#content-scripts}
+Step 3: Content Scripts for Email Integration {#content-scripts}
 
 Content scripts are the heart of our extension. They run in the context of web pages and can interact with the DOM to add functionality to Gmail and Outlook. Create content.js:
 
@@ -651,7 +651,7 @@ if (document.readyState === 'loading') {
 
 ---
 
-## Step 4: Background Service Worker {#background-worker}
+Step 4: Background Service Worker {#background-worker}
 
 The background service worker handles tasks that need to run independently of web pages, such as monitoring for email opens and managing follow-up reminders. Create background.js:
 
@@ -744,33 +744,33 @@ chrome.action.onClicked.addListener((tab) => {
 
 ---
 
-## Step 5: Testing Your Extension {#testing}
+Step 5: Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension:
 
-1. **Load unpacked extension**: Go to chrome://extensions, enable Developer Mode, and click "Load unpacked"
-2. **Test in Gmail**: Open Gmail and verify all features work
-3. **Test in Outlook**: Repeat the process for Outlook
-4. **Check console logs**: Look for any errors in the background service worker and content script consoles
+1. Load unpacked extension: Go to chrome://extensions, enable Developer Mode, and click "Load unpacked"
+2. Test in Gmail: Open Gmail and verify all features work
+3. Test in Outlook: Repeat the process for Outlook
+4. Check console logs: Look for any errors in the background service worker and content script consoles
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
-- **Content script not loading**: Ensure host_permissions in manifest.json include the correct URL patterns
-- **Storage not persisting**: Check that you are using the correct storage API (chrome.storage.local vs chrome.storage.sync)
-- **Notifications not showing**: Verify that the extension has notification permissions
+- Content script not loading: Ensure host_permissions in manifest.json include the correct URL patterns
+- Storage not persisting: Check that you are using the correct storage API (chrome.storage.local vs chrome.storage.sync)
+- Notifications not showing: Verify that the extension has notification permissions
 
 ---
 
-## Step 6: Publishing to Chrome Web Store {#publishing}
+Step 6: Publishing to Chrome Web Store {#publishing}
 
 Once testing is complete, follow these steps to publish:
 
-1. **Create developer account**: Sign up at the Chrome Web Store developer dashboard
-2. **Prepare assets**: Create promotional screenshots, a detailed description, and icon files
-3. **Package extension**: Use "Pack extension" in chrome://extensions or create a ZIP file
-4. **Submit for review**: Upload your packaged extension and submit for review
+1. Create developer account: Sign up at the Chrome Web Store developer dashboard
+2. Prepare assets: Create promotional screenshots, a detailed description, and icon files
+3. Package extension: Use "Pack extension" in chrome://extensions or create a ZIP file
+4. Submit for review: Upload your packaged extension and submit for review
 
-### Store Listing Best Practices
+Store Listing Best Practices
 
 - Use clear, benefit-driven titles
 - Write detailed descriptions highlighting key features
@@ -779,9 +779,9 @@ Once testing is complete, follow these steps to publish:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Building an email productivity Chrome extension is a rewarding project that can reach millions of users. In this guide, you have learned how to create a Manifest V3 extension with email tracking, templates, and follow-up reminders. The architecture we have built provides a solid foundation for adding more advanced features like email analytics, CRM integration, or AI-powered responses.
+Building an email productivity Chrome extension is a rewarding project that can reach millions of users. you have learned how to create a Manifest V3 extension with email tracking, templates, and follow-up reminders. The architecture we have built provides a solid foundation for adding more advanced features like email analytics, CRM integration, or AI-powered responses.
 
 Remember that successful extensions solve real problems for users. Continue gathering feedback, iterating on features, and improving the user experience. With dedication and proper execution, your email productivity extension could become an indispensable tool for professionals worldwide.
 

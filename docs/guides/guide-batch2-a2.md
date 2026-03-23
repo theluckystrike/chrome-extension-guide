@@ -2,7 +2,7 @@
 
 ## Introduction
 
-PDF handling in Chrome extensions opens up powerful possibilities for document processing, from viewing and annotation to extraction and conversion. Whether you're building a document viewer, form filler, or PDF analyzer, understanding the available APIs and libraries is essential for creating robust extension functionality.
+PDF handling in Chrome extensions opens up powerful possibilities for document processing, from viewing and annotation to extraction and conversion. Whether you're building a document viewer, form filler, or PDF analyzer, understanding the available APIs and libraries is essential for creating solid extension functionality.
 
 This guide covers the architecture, libraries, and patterns for handling PDFs effectively in Chrome extensions using TypeScript.
 
@@ -10,28 +10,28 @@ This guide covers the architecture, libraries, and patterns for handling PDFs ef
 
 Chrome extensions can handle PDFs in several ways, each with distinct trade-offs:
 
-1. **Native PDF Viewer Integration** - Use Chrome's built-in PDF viewer
-2. **PDF.js Rendering** - Client-side PDF rendering using Mozilla's library
-3. **PDF-lib Modification** - Create and modify PDFs programmatically
-4. **Backend Processing** - Offload heavy processing to a server
+1. Native PDF Viewer Integration - Use Chrome's built-in PDF viewer
+2. PDF.js Rendering - Client-side PDF rendering using Mozilla's library
+3. PDF-lib Modification - Create and modify PDFs programmatically
+4. Backend Processing - Offload heavy processing to a server
 
 Choose based on your use case: viewing needs PDF.js, modification needs PDF-lib, and complex analysis might need backend support.
 
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Chrome Extension                         │
-├─────────────┬─────────────────┬───────────────────────────┤
-│  Content    │  Background     │  Popup                    │
-│  Script     │  Service Worker │  UI                       │
-├─────────────┴─────────────────┴───────────────────────────┤
-│                    PDF Processing Layer                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │  PDF.js     │  │  PDF-lib    │  │  PDF Parser         │  │
-│  │  (render)   │  │  (modify)   │  │  (extract data)     │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+
+                    Chrome Extension                         
+
+  Content      Background       Popup                    
+  Script       Service Worker   UI                       
+
+                    PDF Processing Layer                     
+        
+    PDF.js         PDF-lib        PDF Parser           
+    (render)       (modify)       (extract data)       
+        
+
 ```
 
 ## Using PDF.js for Rendering
@@ -188,7 +188,7 @@ interface PDFModificationOptions {
 }
 
 class PDFEditor {
-  /**
+  /
    * Add a watermark to all pages of a PDF
    */
   async addWatermark(
@@ -219,7 +219,7 @@ class PDFEditor {
     return pdfDoc.save();
   }
 
-  /**
+  /
    * Fill form fields in a PDF
    */
   async fillFormFields(
@@ -248,7 +248,7 @@ class PDFEditor {
     return pdfDoc.save();
   }
 
-  /**
+  /
    * Merge multiple PDFs into one
    */
   async mergePDFs(pdfBuffers: Uint8Array[]): Promise<Uint8Array> {
@@ -266,7 +266,7 @@ class PDFEditor {
     return mergedPdf.save();
   }
 
-  /**
+  /
    * Extract text content from PDF
    */
   async extractText(pdfData: Uint8Array): Promise<string> {
@@ -364,7 +364,7 @@ Chrome extensions have specific APIs for handling file downloads and storage:
 ```typescript
 // background/download-manager.ts
 class PDFDownloadManager {
-  /**
+  /
    * Save modified PDF to user's downloads
    */
   async savePDF(pdfData: Uint8Array, filename: string): Promise<number> {
@@ -392,7 +392,7 @@ class PDFDownloadManager {
     return downloadId;
   }
 
-  /**
+  /
    * Store PDF in extension storage (for small files)
    */
   async storePDFLocally(
@@ -403,7 +403,7 @@ class PDFDownloadManager {
     await chrome.storage.local.set({ [key]: base64 });
   }
 
-  /**
+  /
    * Retrieve PDF from extension storage
    */
   async retrievePDF(key: string): Promise<Uint8Array | null> {

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Size Optimization — Developer Guide"
+title: "Chrome Extension Size Optimization. Developer Guide"
 description: "Learn Chrome extension size optimization with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/extension-size-optimization/"
 ---
@@ -8,44 +8,44 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-size-optimizat
 
 Learn how to reduce your Chrome extension's bundle size for faster installs, better performance, and smoother Chrome Web Store reviews.
 
-## Overview {#overview}
+Overview {#overview}
 
 Smaller extensions offer tangible benefits beyond just saving disk space:
 
-- **Faster installations**: Users can install your extension more quickly, especially on slower connections
-- **Reduced memory footprint**: Smaller bundles use less memory when loaded
-- **Faster updates**: Update propagation is quicker when the delta is smaller
-- **Better CWS review**: Google may scrutinize large extensions more closely during review
+- Faster installations: Users can install your extension more quickly, especially on slower connections
+- Reduced memory footprint: Smaller bundles use less memory when loaded
+- Faster updates: Update propagation is quicker when the delta is smaller
+- Better CWS review: Google may scrutinize large extensions more closely during review
 
 Target bundle sizes: background/service worker under 100KB, content scripts under 50KB.
 
-## Measuring Size {#measuring-size}
+Measuring Size {#measuring-size}
 
 Before optimizing, you need accurate measurements of your extension's size.
 
-### Checking Package Size {#checking-package-size}
+Checking Package Size {#checking-package-size}
 
 ```bash
-# Build your extension, then check the CRX/ZIP size
+Build your extension, then check the CRX/ZIP size
 npm run build
 ls -lh dist/*.zip   # or *.crx depending on your build
 ```
 
-### Bundle Analysis {#bundle-analysis}
+Bundle Analysis {#bundle-analysis}
 
 Use visualization tools to understand what's contributing to your bundle size:
 
 ```bash
-# Webpack bundle analyzer
+Webpack bundle analyzer
 npx webpack-bundle-analyzer dist/manifest.json
 
-# Or for esbuild
+Or for esbuild
 npx esbuild-visualizer --metadata=dist/.esbuild-meta.json --filename=dist/visualizer.html
 ```
 
 These tools generate treemaps showing which dependencies and modules contribute most to size.
 
-### Chrome DevTools {#chrome-devtools}
+Chrome DevTools {#chrome-devtools}
 
 Use Chrome DevTools to see actual loaded file sizes:
 
@@ -54,11 +54,11 @@ Use Chrome DevTools to see actual loaded file sizes:
 3. Click on your extension's service worker or background page
 4. Open DevTools and check the Sources panel for file sizes
 
-## Tree Shaking {#tree-shaking}
+Tree Shaking {#tree-shaking}
 
 Tree shaking removes unused code from your final bundle, dramatically reducing size.
 
-### Enable ES Modules {#enable-es-modules}
+Enable ES Modules {#enable-es-modules}
 
 Use ES modules with `import`/`export` for effective tree shaking:
 
@@ -76,7 +76,7 @@ import * as utils from './utils.js';
 const { debounce } = require('./utils.js');
 ```
 
-### Build Tool Configuration {#build-tool-configuration}
+Build Tool Configuration {#build-tool-configuration}
 
 Modern bundlers like esbuild, webpack, and Vite support tree shaking automatically when you use ES modules:
 
@@ -94,11 +94,11 @@ export default {
 
 Avoid CommonJS (`require()`, `module.exports`) as it prevents effective tree shaking.
 
-## Code Splitting {#code-splitting}
+Code Splitting {#code-splitting}
 
 Code splitting separates your bundle into smaller chunks that load on-demand.
 
-### Separate Entry Points {#separate-entry-points}
+Separate Entry Points {#separate-entry-points}
 
 Each extension context should have its own entry point:
 
@@ -116,7 +116,7 @@ module.exports = {
 
 This ensures the popup doesn't load content script code, and vice versa.
 
-### Dynamic Imports {#dynamic-imports}
+Dynamic Imports {#dynamic-imports}
 
 Load features on-demand rather than at startup:
 
@@ -135,7 +135,7 @@ async function showChart() {
 button.addEventListener('click', showChart);
 ```
 
-### Lazy Load Extension Pages {#lazy-load-extension-pages}
+Lazy Load Extension Pages {#lazy-load-extension-pages}
 
 For options pages or rarely-used features, use dynamic imports:
 
@@ -147,23 +147,23 @@ if (userClicksAdvancedFeature) {
 }
 ```
 
-## Dependency Management {#dependency-management}
+Dependency Management {#dependency-management}
 
 Dependencies often form the largest portion of extension bundles.
 
-### Audit Dependencies {#audit-dependencies}
+Audit Dependencies {#audit-dependencies}
 
 Regularly review what you're importing:
 
 ```bash
-# List installed packages
+List installed packages
 npm list --depth=0
 
-# Check for unused packages
+Check for unused packages
 npx depcruise --validate . | grep "unused"
 ```
 
-### Replace Heavy Libraries {#replace-heavy-libraries}
+Replace Heavy Libraries {#replace-heavy-libraries}
 
 Many popular libraries have lighter alternatives:
 
@@ -185,7 +185,7 @@ import { debounce, throttle } from 'lodash-es';
 import moment from 'moment';
 ```
 
-### Prefer No-Dependency Solutions {#prefer-no-dependency-solutions}
+Prefer No-Dependency Solutions {#prefer-no-dependency-solutions}
 
 For simple tasks, write your own utilities:
 
@@ -201,7 +201,7 @@ function debounce(fn, delay) {
 }
 ```
 
-### Bundle Dependencies {#bundle-dependencies}
+Bundle Dependencies {#bundle-dependencies}
 
 Don't use CDN links for dependencies. Bundle everything:
 
@@ -213,21 +213,21 @@ Don't use CDN links for dependencies. Bundle everything:
 <script src="library.bundle.js"></script>
 ```
 
-## Asset Optimization {#asset-optimization}
+Asset Optimization {#asset-optimization}
 
 Images and other assets can significantly impact extension size.
 
-### Image Compression {#image-compression}
+Image Compression {#image-compression}
 
 ```bash
-# Convert PNG to WebP (smaller file size)
+Convert PNG to WebP (smaller file size)
 cwebp input.png -o output.webp
 
-# Or use sharp for batch processing
+Or use sharp for batch processing
 npx sharp -i "icons/*.png" -o "icons/" -f webp
 ```
 
-### Use SVG Icons {#use-svg-icons}
+Use SVG Icons {#use-svg-icons}
 
 SVG icons are scalable and typically smaller than PNG equivalents:
 
@@ -242,34 +242,34 @@ SVG icons are scalable and typically smaller than PNG equivalents:
 <img src="icon32.png" width="32" height="32">
 ```
 
-### Include Only Required Icon Sizes {#include-only-required-icon-sizes}
+Include Only Required Icon Sizes {#include-only-required-icon-sizes}
 
 Only include icon sizes your extension actually uses:
 
 ```
 icons/
-├── icon16.png   # Toolbar, context menus
-├── icon32.png   # Toolbar @2x
-├── icon48.png   # Extensions page
-└── icon128.png  # Web Store listing
+ icon16.png   # Toolbar, context menus
+ icon32.png   # Toolbar @2x
+ icon48.png   # Extensions page
+ icon128.png  # Web Store listing
 ```
 
 Remove unused icons from your `icons` field in manifest.json.
 
-### Remove Unused Assets {#remove-unused-assets}
+Remove Unused Assets {#remove-unused-assets}
 
 ```bash
-# Find unused images in your source
+Find unused images in your source
 npx unimported
 ```
 
 Regularly audit and remove images, fonts, or other assets you no longer use.
 
-## Minification {#minification}
+Minification {#minification}
 
 Minification removes unnecessary characters from code without changing functionality.
 
-### Configure Build Tools {#configure-build-tools}
+Configure Build Tools {#configure-build-tools}
 
 ```javascript
 // esbuild - built-in minification
@@ -284,7 +284,7 @@ module.exports = {
 };
 ```
 
-### Remove Console Logs in Production {#remove-console-logs-in-production}
+Remove Console Logs in Production {#remove-console-logs-in-production}
 
 ```javascript
 // webpack.config.js - drop console.* calls in production
@@ -298,7 +298,7 @@ new TerserPlugin({
 });
 ```
 
-### Source Maps {#source-maps}
+Source Maps {#source-maps}
 
 Generate source maps for debugging but exclude them from the CRX package:
 
@@ -312,11 +312,11 @@ module.exports = {
 // Exclude from CRX: they won't be bundled automatically
 ```
 
-## Content Script Size {#content-script-size}
+Content Script Size {#content-script-size}
 
 Content scripts run on every matching page, so keeping them minimal is crucial.
 
-### Minimal Content Scripts {#minimal-content-scripts}
+Minimal Content Scripts {#minimal-content-scripts}
 
 ```javascript
 // GOOD: Lightweight content script
@@ -333,7 +333,7 @@ async function onMessage(request) {
 }
 ```
 
-### Message-Based Architecture {#message-based-architecture}
+Message-Based Architecture {#message-based-architecture}
 
 Keep content scripts thin and delegate heavy work to the service worker:
 
@@ -349,7 +349,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-### Minimal CSS Injection {#minimal-css-injection}
+Minimal CSS Injection {#minimal-css-injection}
 
 ```javascript
 // Inject only the CSS you need
@@ -361,7 +361,7 @@ style.textContent = `
 document.head.appendChild(style);
 ```
 
-## Before/After Checklist {#beforeafter-checklist}
+Before/After Checklist {#beforeafter-checklist}
 
 Run through this checklist before publishing:
 
@@ -376,15 +376,15 @@ Run through this checklist before publishing:
 - [ ] Bundle size under 100KB for background, under 50KB for content scripts
 - [ ] No unused icon sizes included
 
-## See Also {#see-also}
+See Also {#see-also}
 
-- [Performance Optimization](performance.md) — Comprehensive performance guide
-- [CI/CD Pipeline](ci-cd-pipeline.md) — Automate builds and publishing
-- [Size Limits Reference](../reference/size-limits.md) — Official size limits and quotas
+- [Performance Optimization](performance.md). Comprehensive performance guide
+- [CI/CD Pipeline](ci-cd-pipeline.md). Automate builds and publishing
+- [Size Limits Reference](../reference/size-limits.md). Official size limits and quotas
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Bundle Analysis](../guides/extension-bundle-analysis.md)

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Manifest V3 Cheatsheet — Quick Reference for Chrome Extension Developers"
+title: "Manifest V3 Cheatsheet. Quick Reference for Chrome Extension Developers"
 description: "Quick reference guide for Chrome Extension Manifest V3. Covers all essential fields, configurations, and best practices in table format."
 canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-cheatsheet/"
 ---
@@ -11,7 +11,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Required Fields {#required-fields}
+Required Fields {#required-fields}
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
@@ -22,7 +22,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Extension Components {#extension-components}
+Extension Components {#extension-components}
 
 | Component | Key | Required | Description |
 |-----------|-----|----------|-------------|
@@ -34,7 +34,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Common Permissions {#common-permissions}
+Common Permissions {#common-permissions}
 
 | Permission | Use Case | Required Field |
 |------------|----------|----------------|
@@ -56,7 +56,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Host Permissions {#host-permissions}
+Host Permissions {#host-permissions}
 
 | Pattern Type | Example | Matches |
 |--------------|---------|---------|
@@ -68,7 +68,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Action API (Toolbar Button) {#action-api}
+Action API (Toolbar Button) {#action-api}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -79,7 +79,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Content Scripts Configuration {#content-scripts}
+Content Scripts Configuration {#content-scripts}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -92,7 +92,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Web Accessible Resources {#web-accessible-resources}
+Web Accessible Resources {#web-accessible-resources}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -112,7 +112,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## File Restrictions (Security) {#file-restrictions}
+File Restrictions (Security) {#file-restrictions}
 
 | Rule | Description |
 |------|-------------|
@@ -123,7 +123,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Manifest V2 to V3 Key Differences {#mv2-vs-mv3}
+Manifest V2 to V3 Key Differences {#mv2-vs-mv3}
 
 | MV2 | MV3 | Notes |
 |-----|-----|-------|
@@ -136,7 +136,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Chrome Version Support {#chrome-version-support}
+Chrome Version Support {#chrome-version-support}
 
 | Feature | Minimum Chrome Version |
 |---------|------------------------|
@@ -148,7 +148,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Testing Tips {#testing-tips}
+Testing Tips {#testing-tips}
 
 | Action | How To |
 |--------|--------|
@@ -161,9 +161,9 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Quick Reference Snippets {#quick-reference}
+Quick Reference Snippets {#quick-reference}
 
-### Minimum Manifest V3
+Minimum Manifest V3
 
 ```json
 {
@@ -180,7 +180,7 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 }
 ```
 
-### With Content Scripts
+With Content Scripts
 
 ```json
 {
@@ -196,8 +196,8 @@ Quick reference for Chrome Extension developers working with Manifest V3. This c
 
 ---
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
-- [Manifest V3 Migration Guide](/guides/mv2-to-mv3-migration/) — Full migration checklist
-- [Permissions Reference](/permissions/) — Detailed permission documentation
-- [Service Worker Lifecycle](/guides/service-worker-lifecycle/) — Background script events
+- [Manifest V3 Migration Guide](/guides/mv2-to-mv3-migration/). Full migration checklist
+- [Permissions Reference](/permissions/). Detailed permission documentation
+- [Service Worker Lifecycle](/guides/service-worker-lifecycle/). Background script events

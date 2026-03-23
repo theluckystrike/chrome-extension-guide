@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Web Accessible Resources in Chrome Extensions — Tutorial"
+title: "Web Accessible Resources in Chrome Extensions. Tutorial"
 description: "Learn how to use web accessible resources in Chrome Extensions to inject UI, load assets, and secure your extension in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/tutorials/web-accessible-resources/"
 ---
 
 # Web Accessible Resources in Chrome Extensions
 
-Web Accessible Resources are a fundamental feature of Chrome Extensions that allow your extension's files to be loaded and used in contexts outside the extension itself — specifically in web pages and content scripts. This tutorial covers everything you need to know to use them effectively in Manifest V3.
+Web Accessible Resources are a fundamental feature of Chrome Extensions that allow your extension's files to be loaded and used in contexts outside the extension itself. specifically in web pages and content scripts. This tutorial covers everything you need to know to use them effectively in Manifest V3.
 
-## What You'll Learn
+What You'll Learn
 
 - What web accessible resources are and why they're needed
 - How to configure `web_accessible_resources` in your manifest
@@ -21,13 +21,13 @@ Web Accessible Resources are a fundamental feature of Chrome Extensions that all
 
 ---
 
-## What Are Web Accessible Resources?
+What Are Web Accessible Resources?
 
-By default, Chrome extensions are sandboxed — their files cannot be accessed by external web pages. Web Accessible Resources provide a controlled way to expose specific extension files to:
+By default, Chrome extensions are sandboxed. their files cannot be accessed by external web pages. Web Accessible Resources provide a controlled way to expose specific extension files to:
 
-- **Content scripts** that need to inject UI elements into web pages
-- **Web pages** that you want to allow access to certain assets
-- **Other extensions** that need to share resources
+- Content scripts that need to inject UI elements into web pages
+- Web pages that you want to allow access to certain assets
+- Other extensions that need to share resources
 
 Common use cases include:
 
@@ -38,9 +38,9 @@ Common use cases include:
 
 ---
 
-## Manifest Configuration
+Manifest Configuration
 
-### Basic Manifest V3 Setup
+Basic Manifest V3 Setup
 
 In Manifest V3, you declare web accessible resources as an array of objects, each with `resources` and `matches` properties:
 
@@ -66,7 +66,7 @@ Each entry contains:
 | `matches` | URL patterns that can access these resources |
 | `extension_ids` | (Optional) Specific extension IDs that can access the resources |
 
-### Matching Patterns
+Matching Patterns
 
 The `matches` property uses the same pattern syntax as content scripts:
 
@@ -77,7 +77,7 @@ The `matches` property uses the same pattern syntax as content scripts:
 | `https://example.com/path/*` | Specific path and below |
 | `https://*/*` | Any HTTPS page |
 
-### Restricting to Specific Extensions
+Restricting to Specific Extensions
 
 You can limit access to your resources to specific extensions using `extension_ids`:
 
@@ -91,11 +91,11 @@ You can limit access to your resources to specific extensions using `extension_i
 
 ---
 
-## use_dynamic_url for Fingerprinting Protection
+use_dynamic_url for Fingerprinting Protection
 
 One of the most important features in Manifest V3 is `use_dynamic_url`. This property generates unique, non-predictable URLs for each resource, preventing websites from detecting your extension through known resource paths.
 
-### Enabling Dynamic URLs
+Enabling Dynamic URLs
 
 ```json
 {
@@ -105,7 +105,7 @@ One of the most important features in Manifest V3 is `use_dynamic_url`. This pro
 }
 ```
 
-### How It Works
+How It Works
 
 Instead of predictable URLs like:
 ```
@@ -117,7 +117,7 @@ Dynamic URLs change per session or navigation:
 chrome-extension://extension-id/12345678/images/logo.png
 ```
 
-### Why It Matters
+Why It Matters
 
 Without dynamic URLs, websites can detect your extension by:
 
@@ -129,7 +129,7 @@ Dynamic URLs prevent all of these detection methods, improving user privacy and 
 
 ---
 
-## Accessing Resources from Content Scripts
+Accessing Resources from Content Scripts
 
 Content scripts can easily access extension resources using `chrome.runtime.getURL()`:
 
@@ -150,7 +150,7 @@ link.href = styleUrl;
 document.head.appendChild(link);
 ```
 
-### Loading Resources Dynamically
+Loading Resources Dynamically
 
 For larger resources like HTML templates or complex UI:
 
@@ -184,7 +184,7 @@ async function loadExtensionUI() {
 
 ---
 
-## Accessing Resources from Web Pages
+Accessing Resources from Web Pages
 
 Web pages can only access your extension's resources if:
 
@@ -198,13 +198,13 @@ img.src = 'chrome-extension://YOUR_EXTENSION_ID/images/logo.png';
 document.body.appendChild(img);
 ```
 
-**Important**: Web pages cannot discover your extension ID on their own — they need to be explicitly told the URL or you need to inject the resource through a content script.
+Web pages cannot discover your extension ID on their own. they need to be explicitly told the URL or you need to inject the resource through a content script.
 
 ---
 
-## Common Patterns
+Common Patterns
 
-### Injecting a Floating UI Panel
+Injecting a Floating UI Panel
 
 This pattern creates a floating panel that persists across page navigation:
 
@@ -236,7 +236,7 @@ function createFloatingPanel() {
       }
     </style>
     <div class="panel">
-      <span class="close-btn">✕</span>
+      <span class="close-btn"></span>
       <h3>Extension Panel</h3>
       <p>Content here</p>
     </div>
@@ -254,7 +254,7 @@ if (!document.getElementById('extension-panel-container')) {
 }
 ```
 
-### Loading Custom Fonts
+Loading Custom Fonts
 
 ```json
 {
@@ -277,7 +277,7 @@ function loadCustomFont() {
 }
 ```
 
-### Using Iframes for Extension Pages
+Using Iframes for Extension Pages
 
 ```javascript
 // content.js
@@ -291,15 +291,15 @@ function createExtensionIframe() {
 
 ---
 
-## Security Implications
+Security Implications
 
-### Potential Risks
+Potential Risks
 
-1. **Information Disclosure**: Sensitive data in exposed resources can be accessed by any matching page
-2. **Extension Fingerprinting**: Predictable URLs allow websites to detect your extension
-3. **XSS Vulnerabilities**: If user input influences resource loading
+1. Information Disclosure: Sensitive data in exposed resources can be accessed by any matching page
+2. Extension Fingerprinting: Predictable URLs allow websites to detect your extension
+3. XSS Vulnerabilities: If user input influences resource loading
 
-### Best Practices
+Best Practices
 
 #### 1. Follow Least Privilege
 
@@ -357,9 +357,9 @@ window.addEventListener('message', (event) => {
 
 ---
 
-## Manifest V2 vs V3 Differences
+Manifest V2 vs V3 Differences
 
-### Key Changes
+Key Changes
 
 | Feature | Manifest V2 | Manifest V3 |
 |---------|-------------|-------------|
@@ -368,7 +368,7 @@ window.addEventListener('message', (event) => {
 | Dynamic URLs | Not available | `use_dynamic_url` property |
 | Extension IDs | Predictable | Can be randomized |
 
-### MV2 Example
+MV2 Example
 
 ```json
 {
@@ -383,7 +383,7 @@ window.addEventListener('message', (event) => {
 
 In MV2, resources are accessible from any web page by default. MV3 requires explicit `matches` patterns for security.
 
-### Migration Checklist
+Migration Checklist
 
 When migrating from MV2 to MV3:
 
@@ -395,7 +395,7 @@ When migrating from MV2 to MV3:
 
 ---
 
-## Summary
+Summary
 
 Web Accessible Resources are essential for building Chrome Extensions that interact with web pages. Key takeaways:
 
@@ -408,11 +408,11 @@ Web Accessible Resources are essential for building Chrome Extensions that inter
 
 ---
 
-## Related Articles
+Related Articles
 
-- [Content Script Injection](/docs/guides/content-script-injection/) — Learn different methods for injecting content scripts and UI into web pages
-- [Manifest V3 Fields Reference](/docs/guides/manifest-v3-fields/) — Complete reference for all Manifest V3 configuration options
-- [Security Best Practices](/docs/guides/security-best-practices/) — Essential security guidelines for Chrome Extensions
+- [Content Script Injection](/docs/guides/content-script-injection/). Learn different methods for injecting content scripts and UI into web pages
+- [Manifest V3 Fields Reference](/docs/guides/manifest-v3-fields/). Complete reference for all Manifest V3 configuration options
+- [Security Best Practices](/docs/guides/security-best-practices/). Essential security guidelines for Chrome Extensions
 
 ---
 

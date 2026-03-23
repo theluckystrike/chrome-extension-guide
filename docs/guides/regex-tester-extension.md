@@ -24,32 +24,32 @@ A Regex Tester extension requires several components working together: a popup f
 
 ```
 regex-tester/
-├── manifest.json
-├── background/
-│   ├── background.ts
-│   └── service-worker.ts
-├── popup/
-│   ├── popup.html
-│   ├── popup.ts
-│   └── popup.css
-├── content/
-│   ├── content.ts
-│   └── content.css
-├── shared/
-│   ├── types.ts
-│   ├── regex-engine.ts
-│   └── storage.ts
-├── icons/
-│   ├── icon-16.png
-│   ├── icon-48.png
-│   └── icon-128.png
-├── sidepanel/
-│   ├── sidepanel.html
-│   ├── sidepanel.ts
-│   └── sidepanel.css
-└── tests/
-    ├── regex-engine.test.ts
-    └── integration.test.ts
+ manifest.json
+ background/
+    background.ts
+    service-worker.ts
+ popup/
+    popup.html
+    popup.ts
+    popup.css
+ content/
+    content.ts
+    content.css
+ shared/
+    types.ts
+    regex-engine.ts
+    storage.ts
+ icons/
+    icon-16.png
+    icon-48.png
+    icon-128.png
+ sidepanel/
+    sidepanel.html
+    sidepanel.ts
+    sidepanel.css
+ tests/
+     regex-engine.test.ts
+     integration.test.ts
 ```
 
 ### Manifest Configuration (manifest.json)
@@ -106,11 +106,11 @@ The extension uses a modular architecture with clear separation between UI compo
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
 This section provides complete TypeScript implementations for the core components of the Regex Tester extension.
 
-### Shared Types (shared/types.ts)
+Shared Types (shared/types.ts)
 
 ```typescript
 export interface RegexMatch {
@@ -157,13 +157,13 @@ export interface ExtensionState {
 }
 ```
 
-### Regex Engine (shared/regex-engine.ts)
+Regex Engine (shared/regex-engine.ts)
 
 ```typescript
 import { RegexMatch, RegexResult, RegexOptions } from './types';
 
 export class RegexEngine {
-  /**
+  /
    * Executes a regex pattern against an input string
    */
   static execute(pattern: string, input: string, flags: string): RegexResult {
@@ -204,7 +204,7 @@ export class RegexEngine {
     }
   }
 
-  /**
+  /
    * Validates a regex pattern without executing it
    */
   static validate(pattern: string, flags: string): { valid: boolean; error?: string } {
@@ -219,7 +219,7 @@ export class RegexEngine {
     }
   }
 
-  /**
+  /
    * Converts options object to flags string
    */
   static optionsToFlags(options: RegexOptions['flags']): string {
@@ -244,7 +244,7 @@ export class RegexEngine {
 }
 ```
 
-### Service Worker (background/service-worker.ts)
+Service Worker (background/service-worker.ts)
 
 ```typescript
 import { SavedPattern, ExtensionState } from '../shared/types';
@@ -339,9 +339,9 @@ async function handleOpenSidePanel(sendResponse: (response: any) => void) {
 
 ---
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup UI (popup/popup.ts)
+Popup UI (popup/popup.ts)
 
 ```typescript
 interface PopupState {
@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Side Panel Implementation
+Side Panel Implementation
 
 The side panel provides a persistent testing environment that stays open while browsing. Configure it in manifest.json and implement the same logic as the popup but with additional features like saved patterns management.
 
@@ -544,9 +544,9 @@ class SidePanelController extends PopupController {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions Explained
+Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -555,11 +555,11 @@ class SidePanelController extends PopupController {
 | `activeTab` | Access current tab for content script injection |
 | `scripting` | Execute scripts in pages for overlay feature |
 
-### Host Permissions
+Host Permissions
 
 Use `<all_urls>` sparingly. For a regex tester that needs to work on any page, this is necessary. For more restricted use cases, specify exact patterns.
 
-### Chrome API Usage Patterns
+Chrome API Usage Patterns
 
 Always use asynchronous APIs and handle errors appropriately:
 
@@ -591,9 +591,9 @@ chrome.runtime.onMessage.addListener(
 
 ---
 
-## State Management and Storage
+State Management and Storage
 
-### Storage Keys and Data Schema
+Storage Keys and Data Schema
 
 ```typescript
 const STORAGE_KEYS = {
@@ -611,7 +611,7 @@ interface Preferences {
 }
 ```
 
-### State Synchronization Pattern
+State Synchronization Pattern
 
 Use chrome.storage to share state between popup, side panel, and background:
 
@@ -646,9 +646,9 @@ class StateManager {
 
 ---
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Comprehensive Error Handling
+Comprehensive Error Handling
 
 ```typescript
 class SafeRegexEngine {
@@ -720,20 +720,20 @@ class SafeRegexEngine {
 }
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
-- **Empty pattern**: Return early with appropriate message
-- **Invalid regex syntax**: Catch and display syntax errors
-- **Catastrophic backtracking**: Detect dangerous patterns like nested quantifiers
-- **Very long input strings**: Implement input length limits (e.g., 100KB)
-- **Unicode edge cases**: Handle surrogate pairs correctly with 'u' flag
-- **Zero-width matches**: Prevent infinite loops in global matching
+- Empty pattern: Return early with appropriate message
+- Invalid regex syntax: Catch and display syntax errors
+- Catastrophic backtracking: Detect dangerous patterns like nested quantifiers
+- Very long input strings: Implement input length limits (e.g., 100KB)
+- Unicode edge cases: Handle surrogate pairs correctly with 'u' flag
+- Zero-width matches: Prevent infinite loops in global matching
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing the Regex Engine
+Unit Testing the Regex Engine
 
 ```typescript
 import { describe, it, expect } from 'vitest';
@@ -771,7 +771,7 @@ describe('RegexEngine', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 Test the full flow from popup through service worker to storage:
 
@@ -807,17 +807,17 @@ describe('Extension Integration', () => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Strategies
+Optimization Strategies
 
-1. **Debounce Input**: Wait 150-300ms before executing regex on user input
-2. **Web Workers**: Move heavy regex operations to a web worker for non-blocking UI
-3. **Lazy Loading**: Load saved patterns only when needed
-4. **Limit History**: Cap stored matches and history items
-5. **Use chrome.storage.local**: Faster than sync storage for local-only data
+1. Debounce Input: Wait 150-300ms before executing regex on user input
+2. Web Workers: Move heavy regex operations to a web worker for non-blocking UI
+3. Lazy Loading: Load saved patterns only when needed
+4. Limit History: Cap stored matches and history items
+5. Use chrome.storage.local: Faster than sync storage for local-only data
 
-### Memory Management
+Memory Management
 
 ```typescript
 class MemoryManager {
@@ -844,9 +844,9 @@ class MemoryManager {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication Requirements
+Pre-Publication Requirements
 
 - [ ] Test on Chrome, Edge, and Brave browsers
 - [ ] Verify all icons are present (16, 48, 128px)
@@ -857,15 +857,15 @@ class MemoryManager {
 - [ ] Write compelling short and long descriptions
 - [ ] Set up OAuth2 for sensitive permissions (if needed)
 
-### Store Listing Best Practices
+Store Listing Best Practices
 
-1. **Name**: Clear and descriptive (e.g., "Regex Tester Pro")
-2. **Short Description**: 45 characters max, explain the value
-3. **Long Description**: 5000 characters, include features and use cases
-4. **Screenshots**: Show the actual UI, highlight key features
-5. **Category**: Choose the most relevant category
+1. Name: Clear and descriptive (e.g., "Regex Tester Pro")
+2. Short Description: 45 characters max, explain the value
+3. Long Description: 5000 characters, include features and use cases
+4. Screenshots: Show the actual UI, highlight key features
+5. Category: Choose the most relevant category
 
-### Post-Publication
+Post-Publication
 
 - Monitor user reviews and feedback
 - Set up crash reporting with chrome.runtime.reportErrors
@@ -874,8 +874,8 @@ class MemoryManager {
 
 ---
 
-## Conclusion
+Conclusion
 
-Building a production-ready Regex Tester extension requires careful attention to architecture, type safety, error handling, and user experience. This guide covered the essential patterns and implementations needed to create a robust Chrome extension. Follow these patterns, test thoroughly, and you'll have a reliable tool that users can depend on for their regex testing needs.
+Building a production-ready Regex Tester extension requires careful attention to architecture, type safety, error handling, and user experience. This guide covered the essential patterns and implementations needed to create a solid Chrome extension. Follow these patterns, test thoroughly, and you'll have a reliable tool that users can depend on for their regex testing needs.
 
 For more information on Chrome extension development, see the [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/).

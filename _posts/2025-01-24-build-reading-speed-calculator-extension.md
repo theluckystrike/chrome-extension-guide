@@ -11,13 +11,13 @@ canonical_url: "https://bestchromeextensions.com/2025/01/24/build-reading-speed-
 
 # Build a Reading Speed Calculator Extension: Complete WPM Guide
 
-Have you ever wondered how long it will take you to read an article before diving in? Whether you are a student planning study time, a professional estimating document review duration, or a content creator wanting to help your audience, a reading speed extension can be an invaluable tool. In this comprehensive guide, we will walk you through building a fully functional Chrome extension that calculates reading time based on words per minute (WPM), giving users instant estimates of how long any web content will take to read.
+ how long it will take you to read an article before diving in? Whether you are a student planning study time, a professional estimating document review duration, or a content creator wanting to help your audience, a reading speed extension can be an invaluable tool. we will walk you through building a fully functional Chrome extension that calculates reading time based on words per minute (WPM), giving users instant estimates of how long any web content will take to read.
 
-The demand for reading time estimator tools has grown significantly as online content continues to explode. Users increasingly want to know before they click whether they have time to read an article. This presents a fantastic opportunity for developers to create useful Chrome extensions that solve real problems. By the end of this tutorial, you will have built a complete reading speed extension that works seamlessly in Chrome and provides accurate reading time estimates for any web page.
+The demand for reading time estimator tools has grown significantly as online content continues to explode. Users increasingly want to know before they click whether they have time to read an article. This presents a fantastic opportunity for developers to create useful Chrome extensions that solve real problems. By the end of this tutorial, you will have built a complete reading speed extension that works smoothly in Chrome and provides accurate reading time estimates for any web page.
 
 ---
 
-## Understanding Reading Speed and WPM Calculations {#understanding-reading-speed}
+Understanding Reading Speed and WPM Calculations {#understanding-reading-speed}
 
 Before diving into code, it is essential to understand the fundamentals of reading speed measurement. Words per minute (WPM) serves as the standard metric for measuring reading speed across the globe. The average adult reads at approximately 200 to 250 WPM, though this varies significantly based on reading purpose, content complexity, and individual capability.
 
@@ -29,7 +29,7 @@ Your reading speed calculator extension will need to count words accurately, app
 
 ---
 
-## Setting Up the Chrome Extension Project {#project-setup}
+Setting Up the Chrome Extension Project {#project-setup}
 
 Every Chrome extension begins with a manifest file that defines the extension's metadata, permissions, and capabilities. For our reading speed calculator extension, we will use Manifest V3, which is the current standard and offers improved security and performance compared to older versions.
 
@@ -64,7 +64,7 @@ The popup.html file defines the user interface that appears when users click you
 
 ---
 
-## Building the Extension User Interface {#building-ui}
+Building the Extension User Interface {#building-ui}
 
 The popup interface is the primary way users interact with your reading speed extension. It should be clean, informative, and easy to use. Create the popup.html file with the following structure:
 
@@ -200,7 +200,7 @@ The popup interface is the primary way users interact with your reading speed ex
 </head>
 <body>
   <div class="container">
-    <h1>📖 Reading Speed Calculator</h1>
+    <h1> Reading Speed Calculator</h1>
     <div id="result" class="result-box" style="display: none;">
       <div class="reading-time" id="readingTime">-</div>
       <div class="reading-time-label">Estimated Reading Time</div>
@@ -234,7 +234,7 @@ This interface provides a clean, modern design with a gradient background and wh
 
 ---
 
-## Implementing the Core Logic with JavaScript {#core-logic}
+Implementing the Core Logic with JavaScript {#core-logic}
 
 The JavaScript file handles all the functionality: extracting text from the current page, counting words, calculating reading time, and updating the UI. Create popup.js with the following implementation:
 
@@ -352,7 +352,7 @@ The calculateReadingTime function uses the standard formula of dividing word cou
 
 ---
 
-## Enhancing the Extension with Additional Features {#enhancing-features}
+Enhancing the Extension with Additional Features {#enhancing-features}
 
 Now that the core functionality works, let us add some enhancements that make the extension more useful and professional. First, we will add support for different reading modes: casual reading, careful reading, and speed reading. Each mode has different WPM assumptions and provides better estimates for different use cases.
 
@@ -454,7 +454,7 @@ This content script tracks both scroll progress and actual time spent reading, a
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Chrome provides excellent developer tools for testing and debugging extensions. To test your reading speed calculator extension, open Chrome and navigate to chrome://extensions/. Enable "Developer mode" using the toggle in the top right corner, then click "Load unpacked" and select your extension directory.
 
@@ -466,17 +466,17 @@ Common issues to watch for include incorrectly counting numbers as words, includ
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you have thoroughly tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. This process requires creating a developer account, preparing promotional assets, and following Google's guidelines.
 
-First, create a developer account at the Chrome Web Store developer dashboard. There is a one-time registration fee of $5. Then, package your extension into a ZIP file, including all necessary files: manifest.json, popup.html, popup.js, content.js (if applicable), and icons. Do not include the icons directory structure—include the icon files directly in the root of the ZIP.
+First, create a developer account at the Chrome Web Store developer dashboard. There is a one-time registration fee of $5. Then, package your extension into a ZIP file, including all necessary files: manifest.json, popup.html, popup.js, content.js (if applicable), and icons. Do not include the icons directory structure, include the icon files directly in the root of the ZIP.
 
 When submitting your extension, provide clear descriptions using your target keywords naturally: "reading speed calculator," "words per minute," "reading time estimator," and "Chrome extension." These keywords help users find your extension when searching the Chrome Web Store. Include screenshots that show the extension in action and write compelling descriptions that highlight the value proposition.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have built a complete reading speed calculator Chrome extension that provides valuable functionality to users. This extension demonstrates several important concepts in Chrome extension development, including using the Scripting API to access page content, creating responsive popup interfaces, storing user preferences, and implementing content scripts for page-level features.
 
@@ -484,4 +484,4 @@ The reading speed extension you created calculates reading time based on words p
 
 This project can be extended in many directions. You could add features like reading history tracking, the ability to save articles for later reading, integration with note-taking apps, or even social features that let users compare reading habits. The foundation you have built provides a solid starting point for adding these enhancements.
 
-Building useful Chrome extensions is an excellent way to develop real skills in web development while creating tools that solve genuine problems. The reading speed calculator addresses a real user need—knowing how much time content will take to read—making it a valuable addition to any browser. As you continue your Chrome extension development journey, keep focusing on solving real problems and creating positive user experiences.
+Building useful Chrome extensions is an excellent way to develop real skills in web development while creating tools that solve genuine problems. The reading speed calculator addresses a real user need, knowing how much time content will take to read, making it a valuable addition to any browser. As you continue your Chrome extension development journey, keep focusing on solving real problems and creating positive user experiences.

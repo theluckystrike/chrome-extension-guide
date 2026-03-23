@@ -10,11 +10,11 @@ Node.js 18+, TypeScript knowledge, Chrome browser
 
 ```
 stock-ticker/
-├── src/
-│   ├── background/service-worker.ts
-│   ├── popup/popup.html, popup.ts, styles.css
-│   ├── services/StockAPI.ts, types/stock.ts
-├── manifest.json, tsconfig.json, webpack.config.js
+ src/
+    background/service-worker.ts
+    popup/popup.html, popup.ts, styles.css
+    services/StockAPI.ts, types/stock.ts
+ manifest.json, tsconfig.json, webpack.config.js
 ```
 
 ## Step 1: manifest.json
@@ -150,7 +150,7 @@ chrome.runtime.onInstalled.addListener(() => refreshStockPrices());
 <body>
   <div class="popup-container">
     <header class="header">
-      <h1>📈 Stock Ticker</h1>
+      <h1> Stock Ticker</h1>
       <button id="refreshBtn" class="refresh-btn">↻</button>
     </header>
     <div id="stockList" class="stock-list"></div>
@@ -203,7 +203,7 @@ function renderStocks(prices: Record<string, Stock>): void {
       <div class="stock-symbol">${stock.symbol}</div>
       <div class="stock-price">$${stock.price.toFixed(2)}</div>
       <div class="stock-change ${up ? 'positive' : 'negative'}">
-        ${up ? '▲' : '▼'} ${Math.abs(stock.change).toFixed(2)} (${stock.changePercent.toFixed(2)}%)
+        ${up ? '' : ''} ${Math.abs(stock.change).toFixed(2)} (${stock.changePercent.toFixed(2)}%)
       </div>`;
     list.appendChild(card);
   });
@@ -286,8 +286,8 @@ test('popup displays stocks', async ({ page }) => {
 
 ## Best Practices
 
-1. **Rate limiting**: Cache requests to avoid API limits
-2. **Error handling**: Wrap API calls in try-catch
-3. **Type safety**: Use TypeScript interfaces
-4. **Performance**: Use chrome.storage (not localStorage)
-5. **Security**: Validate all user input
+1. Rate limiting: Cache requests to avoid API limits
+2. Error handling: Wrap API calls in try-catch
+3. Type safety: Use TypeScript interfaces
+4. Performance: Use chrome.storage (not localStorage)
+5. Security: Validate all user input

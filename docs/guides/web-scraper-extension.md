@@ -8,10 +8,10 @@ A web scraper extension allows users to extract data from web pages efficiently.
 
 The extension architecture consists of several components working together:
 
-- **Content Script**: Injected into web pages to extract DOM data
-- **Background Service Worker**: Handles data processing, storage, and cross-tab coordination
-- **Popup UI**: Quick-access interface for starting/scraping operations
-- **Side Panel**: Full-featured interface for complex scraping tasks
+- Content Script: Injected into web pages to extract DOM data
+- Background Service Worker: Handles data processing, storage, and cross-tab coordination
+- Popup UI: Quick-access interface for starting/scraping operations
+- Side Panel: Full-featured interface for complex scraping tasks
 
 ### Manifest Configuration
 
@@ -606,11 +606,11 @@ export function createAbortController(): { abort: () => void; signal: AbortSigna
 
 ### Edge Cases to Handle
 
-1. **SPA Navigation**: Listen for URL changes in SPAs
-2. **Iframes**: Handle cross-origin iframe restrictions
-3. **Dynamic Content**: Wait for lazy-loaded content
-4. **Rate Limiting**: Implement delays between requests
-5. **Session Expiry**: Handle authentication timeouts
+1. SPA Navigation: Listen for URL changes in SPAs
+2. Iframes: Handle cross-origin iframe restrictions
+3. Dynamic Content: Wait for lazy-loaded content
+4. Rate Limiting: Implement delays between requests
+5. Session Expiry: Handle authentication timeouts
 
 ## Testing Approach
 
@@ -677,11 +677,11 @@ test('scraper popup functionality', async ({ page }) => {
 
 ### Optimization Tips
 
-1. **Limit DOM Access**: Cache selector results
-2. **Use WeakRef**: Avoid memory leaks with large page data
-3. **Chunk Processing**: Process large element lists in batches
-4. **Lazy Loading**: Load side panel only when needed
-5. **Service Worker Optimization**: Minimize cold starts
+1. Limit DOM Access: Cache selector results
+2. Use WeakRef: Avoid memory leaks with large page data
+3. Chunk Processing: Process large element lists in batches
+4. Lazy Loading: Load side panel only when needed
+5. Service Worker Optimization: Minimize cold starts
 
 ```ts
 // performance.ts

@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Offscreen Documents — Best Practices"
+title: "Chrome Extension Offscreen Documents. Best Practices"
 description: "Use offscreen documents for DOM operations and long-running tasks in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/patterns/offscreen-documents/"
 ---
 
 # Offscreen Document Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The [offscreen documents reference](../mv3/offscreen-documents.md) covers the basics. This guide provides production-ready patterns for managing offscreen document lifecycle, typed communication, and real-world use cases like canvas processing, audio playback, clipboard access, and Web Worker delegation.
 
 ---
 
-## Pattern 1: Singleton Manager {#pattern-1-singleton-manager}
+Pattern 1: Singleton Manager {#pattern-1-singleton-manager}
 
 Only one offscreen document can exist at a time. Use a manager to handle creation, reuse, and cleanup:
 
@@ -27,7 +27,7 @@ class OffscreenManager {
   async ensure(reason: OffscreenReason, justification: string): Promise<void> {
     if (await this.exists()) return;
 
-    // Prevent race conditions — multiple callers might try to create simultaneously
+    // Prevent race conditions. multiple callers might try to create simultaneously
     if (this.creating) {
       await this.creating;
       return;
@@ -94,7 +94,7 @@ const result = await offscreen.withDocument(
 
 ---
 
-## Pattern 2: Typed Message Protocol {#pattern-2-typed-message-protocol}
+Pattern 2: Typed Message Protocol {#pattern-2-typed-message-protocol}
 
 Define a typed protocol between the service worker and offscreen document:
 
@@ -157,12 +157,12 @@ messenger.onMessage("parse-html", async ({ html }) => {
 
 ---
 
-## Pattern 3: Canvas Image Processing {#pattern-3-canvas-image-processing}
+Pattern 3: Canvas Image Processing {#pattern-3-canvas-image-processing}
 
 Service workers can't use Canvas. Offscreen documents handle image manipulation:
 
 ```ts
-// offscreen.ts — Image processing handlers
+// offscreen.ts. Image processing handlers
 messenger.onMessage("resize-image", async ({ dataUrl, maxWidth, maxHeight }) => {
   const img = new Image();
   await new Promise<void>((resolve, reject) => {
@@ -249,7 +249,7 @@ async function annotateScreenshot(req: AnnotateRequest): Promise<string> {
 
 ---
 
-## Pattern 4: Audio Playback {#pattern-4-audio-playback}
+Pattern 4: Audio Playback {#pattern-4-audio-playback}
 
 Service workers can't use the Audio API. Offscreen documents handle sound:
 
@@ -265,7 +265,7 @@ Service workers can't use the Audio API. Offscreen documents handle sound:
 ```
 
 ```ts
-// offscreen.ts — Audio handler
+// offscreen.ts. Audio handler
 const player = document.getElementById("player") as HTMLAudioElement;
 
 messenger.onMessage("play-sound", async ({ url, volume }) => {
@@ -282,7 +282,7 @@ messenger.onMessage("play-sound", async ({ url, volume }) => {
 ```
 
 ```ts
-// background.ts — Play notification sound
+// background.ts. Play notification sound
 async function playNotificationSound() {
   await offscreen.ensure(
     chrome.offscreen.Reason.AUDIO_PLAYBACK,
@@ -294,17 +294,17 @@ async function playNotificationSound() {
     volume: 0.7,
   });
 
-  // Don't close immediately — let audio finish
+  // Don't close immediately. let audio finish
   setTimeout(() => offscreen.close(), 5000);
 }
 ```
 
 ---
 
-## Pattern 5: Clipboard Access {#pattern-5-clipboard-access}
+Pattern 5: Clipboard Access {#pattern-5-clipboard-access}
 
 ```ts
-// offscreen.ts — Clipboard operations
+// offscreen.ts. Clipboard operations
 messenger.onMessage("read-clipboard", async () => {
   const text = await navigator.clipboard.readText();
   return { text };
@@ -336,12 +336,12 @@ async function readClipboard(): Promise<string> {
 
 ---
 
-## Pattern 6: Web Worker Delegation {#pattern-6-web-worker-delegation}
+Pattern 6: Web Worker Delegation {#pattern-6-web-worker-delegation}
 
 Offscreen documents can spawn Web Workers for CPU-intensive tasks:
 
 ```ts
-// offscreen.ts — Delegate to Web Worker
+// offscreen.ts. Delegate to Web Worker
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "heavy-compute") {
     const worker = new Worker("compute-worker.js");
@@ -386,7 +386,7 @@ self.onmessage = (e) => {
 
 ---
 
-## Pattern 7: Auto-Close Idle Documents {#pattern-7-auto-close-idle-documents}
+Pattern 7: Auto-Close Idle Documents {#pattern-7-auto-close-idle-documents}
 
 Chrome may close offscreen documents after ~30 seconds of inactivity. Handle this gracefully:
 
@@ -403,7 +403,7 @@ async function sendToOffscreen<T>(
   try {
     return await chrome.runtime.sendMessage(message);
   } catch (error) {
-    // Document was closed between our check and message — recreate
+    // Document was closed between our check and message. recreate
     if (String(error).includes("Could not establish connection")) {
       await offscreen.close(); // clean up stale state
       await offscreen.ensure(reason, justification);
@@ -416,13 +416,13 @@ async function sendToOffscreen<T>(
 
 ---
 
-## Pattern 8: Multiple Reason Handling {#pattern-8-multiple-reason-handling}
+Pattern 8: Multiple Reason Handling {#pattern-8-multiple-reason-handling}
 
 Only one offscreen document exists at a time, but it can handle multiple types of work:
 
 ```ts
-// offscreen.ts — Multi-purpose offscreen document
-// Register ALL handlers — the document serves whatever request arrives
+// offscreen.ts. Multi-purpose offscreen document
+// Register ALL handlers. the document serves whatever request arrives
 
 // DOM parsing
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -447,7 +447,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 ```
 
 ```ts
-// background.ts — Create with the primary reason, reuse for others
+// background.ts. Create with the primary reason, reuse for others
 await offscreen.ensure(
   chrome.offscreen.Reason.DOM_PARSER,
   "Parse HTML and process images"
@@ -467,7 +467,7 @@ const imageResult = await chrome.runtime.sendMessage({
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

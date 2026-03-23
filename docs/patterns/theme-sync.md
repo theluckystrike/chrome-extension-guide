@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Chrome Extension Theme Sync — Best Practices"
+title: "Chrome Extension Theme Sync. Best Practices"
 description: "Synchronize extension themes with browser themes."
 canonical_url: "https://bestchromeextensions.com/patterns/theme-sync/"
 ---
 
 # Theme Sync Pattern
 
-## Overview {#overview}
+Overview {#overview}
 
 - Sync extension theme with system/browser dark mode
 - Consistent theming across popup, options, side panel, content script UI
@@ -15,7 +15,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/theme-sync/"
 
 ---
 
-## Detecting System Theme {#detecting-system-theme}
+Detecting System Theme {#detecting-system-theme}
 
 Use `window.matchMedia` to detect the system's color scheme preference in popup, options, and side panel contexts:
 
@@ -37,11 +37,11 @@ function watchSystemTheme(callback: (theme: "light" | "dark") => void): () => vo
 }
 ```
 
-**Important**: `matchMedia` is not available in service workers. Use an offscreen document if you need to detect system theme in the background context.
+`matchMedia` is not available in service workers. Use an offscreen document if you need to detect system theme in the background context.
 
 ---
 
-## Theme Storage {#theme-storage}
+Theme Storage {#theme-storage}
 
 Store the user's theme preference using `chrome.storage.sync` for cross-device synchronization:
 
@@ -65,7 +65,7 @@ Three modes: "light" (forced light), "dark" (forced dark), "system" (auto-detect
 
 ---
 
-## CSS Implementation {#css-implementation}
+CSS Implementation {#css-implementation}
 
 Use CSS custom properties with a `data-theme` attribute for clean theming:
 
@@ -101,7 +101,7 @@ Apply the theme attribute to `document.documentElement` in each UI context.
 
 ---
 
-## Cross-Context Consistency {#cross-context-consistency}
+Cross-Context Consistency {#cross-context-consistency}
 
 Sync theme across all extension contexts using `chrome.storage.onChanged`:
 
@@ -140,7 +140,7 @@ chrome.runtime.sendMessage({ type: "GET_THEME" }, (response) => {
 
 ---
 
-## Service Worker Theme Awareness {#service-worker-theme-awareness}
+Service Worker Theme Awareness {#service-worker-theme-awareness}
 
 The service worker cannot access `matchMedia`. Rely on stored preference and broadcast changes:
 
@@ -166,7 +166,7 @@ Forward theme changes to all open contexts using message passing.
 
 ---
 
-## Transition Animation {#transition-animation}
+Transition Animation {#transition-animation}
 
 Smooth theme transitions prevent jarring visual changes:
 
@@ -185,7 +185,7 @@ Smooth theme transitions prevent jarring visual changes:
 
 ---
 
-## Code Examples Summary {#code-examples-summary}
+Code Examples Summary {#code-examples-summary}
 
 | Component | Purpose |
 |-----------|---------|
@@ -196,7 +196,7 @@ Smooth theme transitions prevent jarring visual changes:
 
 ---
 
-## Cross-references {#cross-references}
+Cross-references {#cross-references}
 
 - [Theming Dark Mode](./theming-dark-mode.md) - Extended dark mode patterns
 - [State Management](./state-management.md) - Centralized state patterns

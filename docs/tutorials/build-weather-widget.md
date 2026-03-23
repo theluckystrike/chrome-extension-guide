@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Weather Widget — Developer Guide"
+title: "Chrome Extension Weather Widget. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-weather-widget/"
 ---
 # Build a Weather Widget Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Current weather display in popup
 - Temperature badge on extension icon
 - Location-based or manual city selection
@@ -14,13 +14,13 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-weather-widget/
 - Offline mode with cached data
 - Options page for customization
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - OpenWeatherMap API key (free tier at openweathermap.org)
 - Chrome 88+ or Edge 88+
 
 ---
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with required permissions:
 
@@ -41,7 +41,7 @@ Required permissions: `alarms` for periodic updates, `storage` for caching. Geol
 
 ---
 
-## Step 2: Popup UI {#step-2-popup-ui}
+Step 2: Popup UI {#step-2-popup-ui}
 
 Create `popup.html` and `popup.js`:
 
@@ -87,7 +87,7 @@ async function loadWeather() {
 
 ---
 
-## Step 3: Weather API Integration {#step-3-weather-api-integration}
+Step 3: Weather API Integration {#step-3-weather-api-integration}
 
 Use OpenWeatherMap free tier. Endpoint: `https://api.openweathermap.org/data/2.5/weather`
 
@@ -95,7 +95,7 @@ Response includes: `main.temp`, `main.feels_like`, `weather[0].description`, `we
 
 ---
 
-## Step 4: Background Polling {#step-4-background-polling}
+Step 4: Background Polling {#step-4-background-polling}
 
 In `background.js`, set up periodic updates:
 
@@ -124,7 +124,7 @@ See [Alarms API](../api-reference/alarms-api.md) for more details.
 
 ---
 
-## Step 5: Geolocation {#step-5-geolocation}
+Step 5: Geolocation {#step-5-geolocation}
 
 Get user's location in popup:
 
@@ -146,7 +146,7 @@ Handle permission denied error gracefully.
 
 ---
 
-## Step 6: Options Page {#step-6-options-page}
+Step 6: Options Page {#step-6-options-page}
 
 Create `options.html` for user settings:
 
@@ -174,7 +174,7 @@ See [Options Page](../guides/options-page.md) for full guide.
 
 ---
 
-## Step 7: Badge Temperature {#step-7-badge-temperature}
+Step 7: Badge Temperature {#step-7-badge-temperature}
 
 Display temperature on extension icon:
 
@@ -190,7 +190,7 @@ See [Badge Action UI](../patterns/badge-action-ui.md) for styling options.
 
 ---
 
-## Step 8: Caching & Offline Mode {#step-8-caching-offline-mode}
+Step 8: Caching & Offline Mode {#step-8-caching-offline-mode}
 
 Cache API responses to reduce calls and enable offline use:
 
@@ -212,7 +212,7 @@ async function getCachedOrFetch(url) {
 
 ---
 
-## Error Handling Summary {#error-handling-summary}
+Error Handling Summary {#error-handling-summary}
 
 | Error | Message | Solution |
 |-------|---------|----------|
@@ -223,7 +223,7 @@ async function getCachedOrFetch(url) {
 
 ---
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 - Add 5-day forecast
 - Support multiple locations
 - Add weather notifications

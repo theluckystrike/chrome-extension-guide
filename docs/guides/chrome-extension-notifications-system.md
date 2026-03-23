@@ -9,36 +9,36 @@ permalink: /guides/chrome-extension-notifications-system/
 
 Notifications are one of the most powerful features for engaging users in Chrome extensions. When implemented correctly, they keep users informed about important events, drive return visits, and create meaningful touchpoints without overwhelming them. This comprehensive guide covers every aspect of notification systems in Chrome extensions, from system-level desktop notifications to in-page toast components, badge management, and intelligent scheduling.
 
-## Introduction: Notifications as a User Engagement Tool
+Introduction: Notifications as a User Engagement Tool
 
 Chrome extensions have access to multiple notification mechanisms, each suited for different use cases and user experience requirements. Understanding when and how to use each type is essential for building extensions that users find valuable rather than annoying.
 
-### Types of Notifications Available to Extensions
+Types of Notifications Available to Extensions
 
-**System Tray Notifications** (chrome.notifications API): These appear in the operating system's notification center and persist until dismissed. They support rich content including images, action buttons, and progress indicators. System notifications are ideal for time-sensitive alerts, important updates, and events that warrant interrupting the user's workflow.
+System Tray Notifications (chrome.notifications API): These appear in the operating system's notification center and persist until dismissed. They support rich content including images, action buttons, and progress indicators. System notifications are ideal for time-sensitive alerts, important updates, and events that warrant interrupting the user's workflow.
 
-**Badge Text and Icon**: The extension icon in the Chrome toolbar can display a small text overlay (the badge) showing numbers like unread counts or status indicators. This lightweight notification mechanism doesn't interrupt the user but provides persistent visual feedback. Combined with dynamic icon changes, badges communicate state changes without requiring any user interaction.
+Badge Text and Icon: The extension icon in the Chrome toolbar can display a small text overlay (the badge) showing numbers like unread counts or status indicators. This lightweight notification mechanism doesn't interrupt the user but provides persistent visual feedback. Combined with dynamic icon changes, badges communicate state changes without requiring any user interaction.
 
-**In-Page Notifications**: These are custom UI elements injected into web pages via content scripts. Toast notifications slide in from corners of the page, while panels can display more substantial content. In-page notifications work well for page-specific alerts, context-aware tips, and feedback related to the current page.
+In-Page Notifications: These are custom UI elements injected into web pages via content scripts. Toast notifications slide in from corners of the page, while panels can display more substantial content. In-page notifications work well for page-specific alerts, context-aware tips, and feedback related to the current page.
 
-**Popup-Based Notifications**: The extension's popup can display its own notification UI. While this requires users to open the popup, it provides complete control over the notification appearance and behavior without system-level constraints.
+Popup-Based Notifications: The extension's popup can display its own notification UI. While this requires users to open the popup, it provides complete control over the notification appearance and behavior without system-level constraints.
 
-### When to Notify vs. When Not to Notify
+When to Notify vs. When Not to Notify
 
 Notification fatigue is a real problem that leads users to disable notifications entirely or uninstall extensions that spam them. Before sending any notification, ask these questions:
 
-1. **Is this time-sensitive?** If the information will be equally valuable hours later, don't interrupt the user now.
-2. **Does the user explicitly want this?** Respect opt-in preferences and per-category settings.
-3. **Could this wait for a batched update?** Instead of five notifications about five items changing, send one summary notification.
-4. **Is this truly important?** Marketing messages, upsells, and promotional content should never use system notifications—violating Chrome Web Store policies and annoying users.
+1. Is this time-sensitive? If the information will be equally valuable hours later, don't interrupt the user now.
+2. Does the user explicitly want this? Respect opt-in preferences and per-category settings.
+3. Could this wait for a batched update? Instead of five notifications about five items changing, send one summary notification.
+4. Is this truly important? Marketing messages, upsells, and promotional content should never use system notifications, violating Chrome Web Store policies and annoying users.
 
 The best notification systems are opt-in, configurable, and respect user attention. For strategies on using notifications to reduce churn and retain users, see the [Extension Monetization Guide](/guides/extension-monetization/).
 
-## Chrome Notifications API
+Chrome Notifications API
 
 The chrome.notifications API is the primary way to send desktop notifications that appear in the system notification center. These notifications work even when Chrome is minimized or in the background.
 
-### Permission Setup in Manifest.json
+Permission Setup in Manifest.json
 
 Before using the notifications API, declare the permission in your manifest:
 
@@ -55,16 +55,16 @@ Before using the notifications API, declare the permission in your manifest:
 
 For Manifest V2, use `"background": {"page": "background.html"}` instead of service_worker. The notifications API is available in both versions, but MV3 service workers have additional considerations for maintaining notification state across restarts.
 
-### Notification Types
+Notification Types
 
 Chrome supports four notification templates, each with different visual layouts:
 
-- **basic**: Displays an icon, title, and message—simple and universally supported
-- **image**: Adds a large image area below the message—great for previews
-- **list**: Shows multiple list items—useful for showing several items at once
-- **progress**: Displays a progress bar—perfect for sync status or download progress
+- basic: Displays an icon, title, and message, simple and universally supported
+- image: Adds a large image area below the message, great for previews
+- list: Shows multiple list items, useful for showing several items at once
+- progress: Displays a progress bar, perfect for sync status or download progress
 
-### NotificationService Class Implementation
+NotificationService Class Implementation
 
 Here's a comprehensive TypeScript class that handles all notification types:
 
@@ -245,7 +245,7 @@ class NotificationService {
 }
 ```
 
-### Usage Examples
+Usage Examples
 
 ```typescript
 const notifications = NotificationService.getInstance();
@@ -289,11 +289,11 @@ for (let i = 0; i <= 100; i += 10) {
 }
 ```
 
-## Badge Text and Icon
+Badge Text and Icon
 
 Badge notifications provide lightweight, always-visible indicators on the extension icon. They're perfect for showing unread counts, pending items, or status indicators without interrupting the user.
 
-### Badge Text API
+Badge Text API
 
 The `chrome.action.setBadgeText` method displays text on the extension icon. The text is limited to 4 characters, so use short numbers or characters:
 
@@ -308,7 +308,7 @@ chrome.action.setBadgeText({ text: '' });
 chrome.action.setBadgeText({ text: '3', tabId: 123 });
 ```
 
-### Badge Background Color
+Badge Background Color
 
 Customize the badge background color to convey different states:
 
@@ -326,7 +326,7 @@ chrome.action.setBadgeBackgroundColor({ color: '#FFA500' });
 chrome.action.setBadgeBackgroundColor({ color: '#4285F4', tabId: 123 });
 ```
 
-### Dynamic Icon Changes
+Dynamic Icon Changes
 
 Use `chrome.action.setIcon` to change the entire icon based on state:
 
@@ -340,7 +340,7 @@ chrome.action.setIcon({
 });
 ```
 
-### BadgeManager Class
+BadgeManager Class
 
 This class provides comprehensive badge management across tabs:
 
@@ -461,7 +461,7 @@ class BadgeManager {
 }
 ```
 
-### Usage Example
+Usage Example
 
 ```typescript
 const badgeManager = BadgeManager.getInstance();
@@ -493,11 +493,11 @@ await badgeManager.decrement();
 await badgeManager.clear();
 ```
 
-## Chrome Alarms API
+Chrome Alarms API
 
 The Chrome Alarms API enables scheduled background tasks that persist across service worker restarts. This is essential for periodic sync, reminders, and time-triggered notifications.
 
-### Required Permission
+Required Permission
 
 ```json
 {
@@ -508,9 +508,9 @@ The Chrome Alarms API enables scheduled background tasks that persist across ser
 }
 ```
 
-### AlarmScheduler Class
+AlarmScheduler Class
 
-This class provides robust alarm management with named alarms and event handlers:
+This class provides solid alarm management with named alarms and event handlers:
 
 ```typescript
 interface AlarmConfig {
@@ -645,7 +645,7 @@ class AlarmScheduler {
 }
 ```
 
-### Usage Example
+Usage Example
 
 ```typescript
 const scheduler = AlarmScheduler.getInstance();
@@ -681,15 +681,15 @@ scheduler.registerHandler('dailyReminder', async (alarm) => {
 await scheduler.scheduleDaily('dailyReminder', 9, 0);
 ```
 
-### MV3 Service Worker Considerations
+MV3 Service Worker Considerations
 
 In Manifest V3, service workers can be terminated after periods of inactivity. The Alarms API is specifically designed to wake service workers when alarms fire, but there are important considerations:
 
-1. **Alarms persist across restarts**: When you create an alarm with `chrome.alarms.create()`, it survives browser restarts and service worker terminations.
+1. Alarms persist across restarts: When you create an alarm with `chrome.alarms.create()`, it survives browser restarts and service worker terminations.
 
-2. **Minimum alarm interval**: The minimum reliable interval is 1 minute in production. Shorter intervals may work in development but are not guaranteed in production.
+2. Minimum alarm interval: The minimum reliable interval is 1 minute in production. Shorter intervals may work in development but are not guaranteed in production.
 
-3. **Check alarm status on startup**: When your service worker starts, check existing alarms and restore state:
+3. Check alarm status on startup: When your service worker starts, check existing alarms and restore state:
 
 ```typescript
 // In service worker
@@ -701,11 +701,11 @@ chrome.alarms.getAll((alarms) => {
 });
 ```
 
-## Notification Click Handling
+Notification Click Handling
 
 Making notifications interactive significantly improves their usefulness. Users can take immediate action without navigating to the extension.
 
-### Click Event Handlers
+Click Event Handlers
 
 The chrome.notifications API provides three event types:
 
@@ -713,7 +713,7 @@ The chrome.notifications API provides three event types:
 - `onButtonClicked`: Fired when an action button is clicked
 - `onClosed`: Fired when the notification is dismissed (by user or timeout)
 
-### NotificationRouter Class
+NotificationRouter Class
 
 This class maps notification IDs to appropriate handlers based on notification type:
 
@@ -813,7 +813,7 @@ class NotificationRouter {
 }
 ```
 
-### Usage Example
+Usage Example
 
 ```typescript
 const router = NotificationRouter.getInstance();
@@ -851,11 +851,11 @@ const reminderId = await notifications.create(
 router.createReminderRoute(reminderId, 'task-456');
 ```
 
-## In-Page Notifications
+In-Page Notifications
 
-In-page notifications appear directly within web pages, providing context-aware alerts that don't rely on the operating system's notification system. These are particularly useful for page-specific features,实时 feedback, and contextual information.
+In-page notifications appear directly within web pages, providing context-aware alerts that don't rely on the operating system's notification system. These are particularly useful for page-specific features, feedback, and contextual information.
 
-### InPageNotifier Class with Shadow DOM
+InPageNotifier Class with Shadow DOM
 
 This implementation uses Shadow DOM to ensure styles don't conflict with the host page:
 
@@ -918,10 +918,10 @@ class InPageNotifier {
 
   private getTypeStyles(type: string): { bg: string; border: string; icon: string } {
     const types: Record<string, { bg: string; border: string; icon: string }> = {
-      info: { bg: '#E3F2FD', border: '#2196F3', icon: 'ℹ️' },
-      success: { bg: '#E8F5E9', border: '#4CAF50', icon: '✅' },
-      warning: { bg: '#FFF3E0', border: '#FF9800', icon: '⚠️' },
-      error: { bg: '#FFEBEE', border: '#F44336', icon: '❌' },
+      info: { bg: '#E3F2FD', border: '#2196F3', icon: 'ℹ' },
+      success: { bg: '#E8F5E9', border: '#4CAF50', icon: '' },
+      warning: { bg: '#FFF3E0', border: '#FF9800', icon: '' },
+      error: { bg: '#FFEBEE', border: '#F44336', icon: '' },
     };
     return types[type] || types.info;
   }
@@ -1056,7 +1056,7 @@ class InPageNotifier {
 }
 ```
 
-### Usage in Content Script
+Usage in Content Script
 
 ```typescript
 // In content script
@@ -1082,11 +1082,11 @@ notifier.info('Sync Complete', 'Your data has been synchronized.');
 notifier.error('Connection Lost', 'Please check your internet connection.');
 ```
 
-## Notification Preferences
+Notification Preferences
 
 Respecting user preferences is crucial for a positive user experience. The options page should allow users to control which notifications they receive.
 
-### NotificationPreferences Class
+NotificationPreferences Class
 
 This class manages notification settings with chrome.storage.sync for cross-device synchronization:
 
@@ -1239,7 +1239,7 @@ class NotificationPreferences {
 }
 ```
 
-### Usage in Background Service Worker
+Usage in Background Service Worker
 
 ```typescript
 const preferences = NotificationPreferences.getInstance();
@@ -1265,11 +1265,11 @@ async function maybeSendNotification(
 }
 ```
 
-## Smart Notification Timing
+Smart Notification Timing
 
 Sending notifications at the right time dramatically impacts their effectiveness. Intelligent timing considers user activity, notification batching, and rate limiting.
 
-### NotificationThrottler Class
+NotificationThrottler Class
 
 ```typescript
 interface ThrottleConfig {
@@ -1417,7 +1417,7 @@ class NotificationThrottler {
 }
 ```
 
-### Usage Example
+Usage Example
 
 ```typescript
 const throttler = NotificationThrottler.getInstance();
@@ -1481,9 +1481,9 @@ async function notifyPriceDrops(products: Product[]): Promise<void> {
 }
 ```
 
-## Notification Patterns for Common Use Cases
+Notification Patterns for Common Use Cases
 
-### Price Drop Alerts (E-Commerce Monitoring)
+Price Drop Alerts (E-Commerce Monitoring)
 
 ```typescript
 interface ProductPrice {
@@ -1522,14 +1522,14 @@ async function checkPriceAlerts(products: ProductPrice[]): Promise<void> {
     const product = drops[0];
     const savings = product.previousPrice - product.currentPrice;
     await notifications.showWithImage(
-      '💰 Price Drop Alert!',
+      ' Price Drop Alert!',
       `${product.name} dropped by $${savings.toFixed(2)}`,
       product.imageUrl
     );
   } else {
     // Batch multiple drops
     await notifications.showList(
-      `💰 ${drops.length} Price Drops!`,
+      ` ${drops.length} Price Drops!`,
       drops.map(p => ({
         title: p.name,
         message: `$${p.currentPrice} (was $${p.previousPrice})`
@@ -1541,7 +1541,7 @@ async function checkPriceAlerts(products: ProductPrice[]): Promise<void> {
 }
 ```
 
-### New Content Notifications (RSS/Social Media)
+New Content Notifications (RSS/Social Media)
 
 ```typescript
 interface NewContent {
@@ -1561,9 +1561,9 @@ async function notifyNewContent(items: NewContent[]): Promise<void> {
   if (!preferences.isEnabled('updates')) return;
 
   const iconMap: Record<string, string> = {
-    article: '📄',
-    video: '🎬',
-    post: '💬',
+    article: '',
+    video: '',
+    post: '',
   };
 
   if (items.length === 1) {
@@ -1586,7 +1586,7 @@ async function notifyNewContent(items: NewContent[]): Promise<void> {
 }
 ```
 
-### Reminder/Timer Notifications (Productivity)
+Reminder/Timer Notifications (Productivity)
 
 ```typescript
 interface Reminder {
@@ -1661,7 +1661,7 @@ async function scheduleReminder(reminder: Reminder): Promise<void> {
 }
 ```
 
-### Security Alerts (Password Breach/unsafe Site)
+Security Alerts (Password Breach/unsafe Site)
 
 ```typescript
 interface SecurityAlert {
@@ -1690,7 +1690,7 @@ async function notifySecurityAlert(alert: SecurityAlert): Promise<void> {
   const id = await notifications.create(
     {
       type: 'basic',
-      title: `🔒 ${alert.title}`,
+      title: ` ${alert.title}`,
       message: alert.message,
       priority: config.priority,
       buttons,
@@ -1718,9 +1718,9 @@ async function notifySecurityAlert(alert: SecurityAlert): Promise<void> {
 }
 ```
 
-## Best Practices and Common Mistakes
+Best Practices and Common Mistakes
 
-### Always Provide a Way to Disable Notifications
+Always Provide a Way to Disable Notifications
 
 This cannot be overstated. Users must have complete control over which notifications they receive. Include:
 
@@ -1728,17 +1728,17 @@ This cannot be overstated. Users must have complete control over which notificat
 - Per-category notification settings
 - Clear indication of when notifications are disabled
 
-### Use Appropriate Urgency Levels
+Use Appropriate Urgency Levels
 
 The `priority` parameter (0-2) affects how Chrome handles notifications:
 
-- **Priority 0**: Normal—good for non-critical updates
-- **Priority 1**: High—appears more prominently
-- **Priority 2**: Critical—reserved for urgent situations, may show when Do Not Disturb is active
+- Priority 0: Normal, good for non-critical updates
+- Priority 1: High, appears more prominently
+- Priority 2: Critical, reserved for urgent situations, may show when Do Not Disturb is active
 
 Use priority 2 sparingly. Overusing urgent notifications desensitizes users and may violate Chrome Web Store policies.
 
-### Keep Notification Text Concise
+Keep Notification Text Concise
 
 System notifications have limited space. Follow these guidelines:
 
@@ -1746,7 +1746,7 @@ System notifications have limited space. Follow these guidelines:
 - Message: Maximum 200 characters
 - Buttons: Maximum 2 action buttons with short labels
 
-### Don't Use Notifications for Marketing
+Don't Use Notifications for Marketing
 
 The Chrome Web Store explicitly prohibits using notifications for promotional purposes. This includes:
 
@@ -1756,13 +1756,13 @@ The Chrome Web Store explicitly prohibits using notifications for promotional pu
 
 Violations can result in extension removal. For strategies on monetizing extensions while respecting users, see the [Extension Monetization Guide](/guides/extension-monetization/).
 
-### Test on Different Operating Systems
+Test on Different Operating Systems
 
 Notification rendering varies significantly across platforms:
 
-- **Windows**: Shows in Action Center, supports rich formatting
-- **macOS**: Shows in Notification Center, follows macOS design
-- **Linux**: Varies by desktop environment (Unity, GNOME, etc.)
+- Windows: Shows in Action Center, supports rich formatting
+- macOS: Shows in Notification Center, follows macOS design
+- Linux: Varies by desktop environment (Unity, GNOME, etc.)
 
 Test your notifications on all target platforms. Pay attention to:
 
@@ -1771,7 +1771,7 @@ Test your notifications on all target platforms. Pay attention to:
 - Button interaction
 - Sound and vibration settings
 
-### Clear Notifications When Appropriate
+Clear Notifications When Appropriate
 
 Don't let notifications pile up:
 
@@ -1779,7 +1779,7 @@ Don't let notifications pile up:
 - Update notifications rather than create new ones
 - Respect the `requireInteraction` flag for critical notifications that need explicit dismissal
 
-### Handle Permission Denial Gracefully
+Handle Permission Denial Gracefully
 
 Some users deny notification permissions. Your extension should:
 

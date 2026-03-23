@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension AI Writing Assistant — Developer Guide"
+title: "Chrome Extension AI Writing Assistant. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-ai-writing-assistant/"
 ---
@@ -16,7 +16,7 @@ Uses `@theluckystrike/webext-storage` for all storage operations and
 
 ---
 
-## Step 1: Manifest and Project Structure {#step-1-manifest-and-project-structure}
+Step 1: Manifest and Project Structure {#step-1-manifest-and-project-structure}
 
 ```json
 {
@@ -36,14 +36,14 @@ Uses `@theluckystrike/webext-storage` for all storage operations and
 }
 ```
 
-- **activeTab** -- temporary access to the current tab on user action
-- **sidePanel** -- persistent UI alongside the page
-- **storage** -- API key, templates, and usage data
-- **contextMenus** -- right-click "Improve Writing" on selected text
+- activeTab -- temporary access to the current tab on user action
+- sidePanel -- persistent UI alongside the page
+- storage -- API key, templates, and usage data
+- contextMenus -- right-click "Improve Writing" on selected text
 
 ---
 
-## Step 2: Side Panel UI {#step-2-side-panel-ui}
+Step 2: Side Panel UI {#step-2-side-panel-ui}
 
 Create `sidepanel.html` with a text input area, template buttons, and output display:
 
@@ -96,7 +96,7 @@ Template buttons toggle an `active` class and show/hide the custom prompt textar
 
 ---
 
-## Step 3: Content Script -- Text Field Detection {#step-3-content-script-text-field-detection}
+Step 3: Content Script -- Text Field Detection {#step-3-content-script-text-field-detection}
 
 `content.js` detects `<textarea>`, `<input type="text">`, and `contenteditable`
 elements. It handles three message types:
@@ -168,7 +168,7 @@ the Selection/Range API to replace content at the cursor position.
 
 ---
 
-## Step 4: Context Menu -- "Improve Writing" {#step-4-context-menu-improve-writing}
+Step 4: Context Menu -- "Improve Writing" {#step-4-context-menu-improve-writing}
 
 Right-clicking selected text shows an "Improve Writing" option that opens the side
 panel with the selection pre-filled. This is registered in the background script:
@@ -197,7 +197,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 ---
 
-## Step 5: Background Service Worker -- API Calls {#step-5-background-service-worker-api-calls}
+Step 5: Background Service Worker -- API Calls {#step-5-background-service-worker-api-calls}
 
 The full `background.js` handles context menus, API routing, and usage tracking.
 It supports both OpenAI and Anthropic as configurable providers:
@@ -307,7 +307,7 @@ async function callAnthropic(apiKey, systemPrompt, userText) {
 
 ---
 
-## Step 6: Options Page -- API Key Configuration {#step-6-options-page-api-key-configuration}
+Step 6: Options Page -- API Key Configuration {#step-6-options-page-api-key-configuration}
 
 `options.html` lets users set their provider, API key, and daily token budget.
 Keys are stored in `chrome.storage.local`, which is sandboxed to the extension.
@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Step 7: Streaming Response Display {#step-7-streaming-response-display}
+Step 7: Streaming Response Display {#step-7-streaming-response-display}
 
 `sidepanel.js` wires everything together -- template selection, API requests via
 the background worker, and a character-by-character streaming animation:
@@ -499,7 +499,7 @@ here keeps the code simpler while providing a similar UX.
 
 ---
 
-## Step 8: Insert Improved Text Back into the Page {#step-8-insert-improved-text-back-into-the-page}
+Step 8: Insert Improved Text Back into the Page {#step-8-insert-improved-text-back-into-the-page}
 
 The insertion flow:
 
@@ -515,7 +515,7 @@ additional handling.
 
 ---
 
-## Step 9: Prompt Templates {#step-9-prompt-templates}
+Step 9: Prompt Templates {#step-9-prompt-templates}
 
 Templates are defined in `PROMPT_TEMPLATES` in `background.js`. Adding a new
 template requires two changes:
@@ -536,7 +536,7 @@ No other code changes needed -- the system is fully data-driven.
 
 ---
 
-## Step 10: Usage Tracking and Token Budget {#step-10-usage-tracking-and-token-budget}
+Step 10: Usage Tracking and Token Budget {#step-10-usage-tracking-and-token-budget}
 
 Token estimation uses a simple heuristic (~1 token per 4 characters for English).
 The daily budget resets automatically by comparing `budgetDate` to today's date.
@@ -556,7 +556,7 @@ provides visual feedback: green (normal), orange (>80%), red (exceeded).
 
 ---
 
-## Testing {#testing}
+Testing {#testing}
 
 1. Load unpacked at `chrome://extensions/` with Developer mode enabled.
 2. Open Settings, enter your API key (OpenAI or Anthropic).
@@ -565,14 +565,14 @@ provides visual feedback: green (normal), orange (>80%), red (exceeded).
 5. Try the context menu: right-click selected text, choose "Improve Writing."
 6. Click "Insert into Page" to replace the selection.
 
-**Troubleshooting:**
+Troubleshooting:
 - "No API key" -- save a key in Settings.
 - "Budget exceeded" -- increase the limit or click Reset in Settings.
 - Insert fails -- ensure the text field is focused before clicking Insert.
 
 ---
 
-## Architecture {#architecture}
+Architecture {#architecture}
 
 ```
   content.js                    sidepanel.js

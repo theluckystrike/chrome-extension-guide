@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension GraphQL Integration — Developer Guide"
+title: "Chrome Extension GraphQL Integration. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-graphql/"
 ---
@@ -8,9 +8,9 @@ canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-graphql
 
 This guide covers best practices for integrating GraphQL APIs into Chrome extensions, focusing on bundle size, caching, and extension-specific constraints.
 
-## Client Setup {#client-setup}
+Client Setup {#client-setup}
 
-### Lightweight Clients vs Apollo {#lightweight-clients-vs-apollo}
+Lightweight Clients vs Apollo {#lightweight-clients-vs-apollo}
 
 For Chrome extensions, prefer lightweight GraphQL clients over full-featured ones like Apollo:
 
@@ -20,9 +20,9 @@ For Chrome extensions, prefer lightweight GraphQL clients over full-featured one
 | urql | ~15KB | Caching, exchanges |
 | Apollo Client | ~40KB+ | Full cache, subscriptions |
 
-**Why lightweight matters**: Extensions have strict bundle size limits. Every KB impacts load time and memory usage.
+Why lightweight matters: Extensions have strict bundle size limits. Every KB impacts load time and memory usage.
 
-### graphql-request Setup {#graphql-request-setup}
+graphql-request Setup {#graphql-request-setup}
 
 ```typescript
 // src/utils/graphql.ts
@@ -41,7 +41,7 @@ export async function query<T>(query: string, variables?: Record<string, unknown
 }
 ```
 
-## Fetch-Based Queries from Service Worker {#fetch-based-queries-from-service-worker}
+Fetch-Based Queries from Service Worker {#fetch-based-queries-from-service-worker}
 
 Service workers support `fetch` natively. Use fetch-based clients directly:
 
@@ -76,9 +76,9 @@ async function fetchUser(id: string): Promise<User> {
 }
 ```
 
-## Caching Strategies {#caching-strategies}
+Caching Strategies {#caching-strategies}
 
-### Client-Side Cache in chrome.storage {#client-side-cache-in-chromestorage}
+Client-Side Cache in chrome.storage {#client-side-cache-in-chromestorage}
 
 Store query results in chrome.storage for persistence across extension restarts:
 
@@ -106,7 +106,7 @@ export async function setCached<T>(key: string, data: T, ttlSeconds = 300): Prom
 }
 ```
 
-### Normalized Caching with urql {#normalized-caching-with-urql}
+Normalized Caching with urql {#normalized-caching-with-urql}
 
 urql provides normalized caching that tracks entities across queries:
 
@@ -119,9 +119,9 @@ export const urqlClient = createClient({
 });
 ```
 
-## Subscriptions {#subscriptions}
+Subscriptions {#subscriptions}
 
-Service workers cannot maintain WebSocket connections. Use an **offscreen document** for subscriptions:
+Service workers cannot maintain WebSocket connections. Use an offscreen document for subscriptions:
 
 ```typescript
 // offscreen.ts (offscreen document)
@@ -144,9 +144,9 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-## Authentication {#authentication}
+Authentication {#authentication}
 
-### Bearer Token in Headers {#bearer-token-in-headers}
+Bearer Token in Headers {#bearer-token-in-headers}
 
 ```typescript
 export function createAuthenticatedClient(token: string): GraphQLClient {
@@ -158,7 +158,7 @@ export function createAuthenticatedClient(token: string): GraphQLClient {
 }
 ```
 
-### Token Refresh Flow {#token-refresh-flow}
+Token Refresh Flow {#token-refresh-flow}
 
 ```typescript
 async function getValidToken(): Promise<string> {
@@ -176,9 +176,9 @@ async function getValidToken(): Promise<string> {
 }
 ```
 
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 
-### GraphQL Errors vs Network Errors {#graphql-errors-vs-network-errors}
+GraphQL Errors vs Network Errors {#graphql-errors-vs-network-errors}
 
 ```typescript
 interface GraphQLResponse<T> {
@@ -207,7 +207,7 @@ async function handleGraphQLResponse<T>(response: Response): Promise<T> {
 
 See [Extension Error Reporting](../guides/extension-error-reporting.md) for logging strategies.
 
-## Batching Queries {#batching-queries}
+Batching Queries {#batching-queries}
 
 Combine multiple queries to reduce network calls:
 
@@ -220,14 +220,14 @@ const results = await batchRequests(endpoint, [
 ]);
 ```
 
-## Code Generation {#code-generation}
+Code Generation {#code-generation}
 
 Use graphql-codegen for type-safe operations:
 
 ```yaml
-# codegen.yml
+codegen.yml
 schema: https://api.example.com/graphql
-documents: "src/**/*.graphql"
+documents: "src//*.graphql"
 generates:
   src/generated/graphql.ts:
     plugins:
@@ -241,7 +241,7 @@ import { GetUserDocument, GetUserQuery } from '../generated/graphql';
 const result = await client.query<GetUserQuery>(GetUserDocument, { id: '1' });
 ```
 
-## Offline Support {#offline-support}
+Offline Support {#offline-support}
 
 Queue mutations when offline, replay when online:
 
@@ -272,7 +272,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## Testing {#testing}
+Testing {#testing}
 
 Mock the GraphQL server for unit tests:
 
@@ -290,13 +290,13 @@ const handlers = [
 export const graphQLHandlers = handlers;
 ```
 
-## Performance Tips {#performance-tips}
+Performance Tips {#performance-tips}
 
-- **Request only needed fields**: GraphQL's main advantage is fetching precisely what you need
-- **Use fragments**: Share field selections across queries
-- **EnablePersistedQueries**: Reduce request size by sending query IDs instead of full queries
+- Request only needed fields: GraphQL's main advantage is fetching precisely what you need
+- Use fragments: Share field selections across queries
+- EnablePersistedQueries: Reduce request size by sending query IDs instead of full queries
 
-## Bundle Optimization {#bundle-optimization}
+Bundle Optimization {#bundle-optimization}
 
 Tree-shake unused GraphQL features:
 
@@ -307,15 +307,15 @@ import { request } from 'graphql-request';
 import { ApolloClient, InMemoryCache } from '@apollo/client'; // heavier
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Cross-Origin Requests](../patterns/cross-origin-requests.md)
 - [WebSocket in Service Workers](../patterns/websocket-service-workers.md)
 - [Extension Error Reporting](../guides/extension-error-reporting.md)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [GraphQL Patterns](../patterns/graphql-extensions.md)
 - [REST API Patterns](../guides/rest-api-patterns.md)

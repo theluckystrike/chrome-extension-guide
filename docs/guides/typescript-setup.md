@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension TypeScript Setup — Type-Safe Extension Development"
+title: "Chrome Extension TypeScript Setup. Type-Safe Extension Development"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/typescript-setup/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/guides/typescript-setup/"
 
 TypeScript brings type safety, better tooling, and maintainability to Chrome extension development. This guide covers the definitive setup for TypeScript in Manifest V3 extensions, from compiler configuration to advanced patterns for typed messaging and storage.
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 - [Base tsconfig.json for Chrome Extensions](#base-tsconfigjson-for-chrome-extensions)
 - [Chrome API Type Definitions](#chrome-api-type-definitions)
@@ -25,7 +25,7 @@ TypeScript brings type safety, better tooling, and maintainability to Chrome ext
 
 ---
 
-## Base tsconfig.json for Chrome Extensions {#base-tsconfigjson-for-chrome-extensions}
+Base tsconfig.json for Chrome Extensions {#base-tsconfigjson-for-chrome-extensions}
 
 Chrome extensions run in a browser environment, but the service worker context lacks DOM APIs. A well-tuned `tsconfig.json` accounts for these constraints.
 
@@ -67,12 +67,12 @@ Chrome extensions run in a browser environment, but the service worker context l
     // Resolve JSON imports (useful for manifest)
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src//*.ts"],
   "exclude": ["node_modules", "dist"]
 }
 ```
 
-### Key Setting Rationale {#key-setting-rationale}
+Key Setting Rationale {#key-setting-rationale}
 
 | Setting | Value | Why |
 |---------|-------|-----|
@@ -85,11 +85,11 @@ Chrome extensions run in a browser environment, but the service worker context l
 
 ---
 
-## Chrome API Type Definitions {#chrome-api-type-definitions}
+Chrome API Type Definitions {#chrome-api-type-definitions}
 
 Several npm packages provide TypeScript definitions for the `chrome.*` namespace. Understanding the differences matters.
 
-### Package Comparison {#package-comparison}
+Package Comparison {#package-comparison}
 
 | Package | Source | Notes |
 |---------|--------|-------|
@@ -97,13 +97,13 @@ Several npm packages provide TypeScript definitions for the `chrome.*` namespace
 | `@anthropic-ai/chrome-types` | Deprecated / unavailable | Do not use |
 | `@types/chrome` | DefinitelyTyped community | Widely used, may lag behind Chrome releases |
 
-### Installation and Setup {#installation-and-setup}
+Installation and Setup {#installation-and-setup}
 
 ```bash
-# Option 1: chrome-types (auto-generated from Chromium, most accurate)
+Option 1: chrome-types (auto-generated from Chromium, most accurate)
 npm install -D chrome-types
 
-# Option 2: @types/chrome (DefinitelyTyped, widely used)
+Option 2: @types/chrome (DefinitelyTyped, widely used)
 npm install -D @types/chrome
 ```
 
@@ -126,7 +126,7 @@ Alternatively, use a triple-slash directive at the top of files that use Chrome 
 /// <reference types="chrome" />
 ```
 
-### Verifying Types Work {#verifying-types-work}
+Verifying Types Work {#verifying-types-work}
 
 ```typescript
 // This should compile without errors
@@ -143,11 +143,11 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 ---
 
-## Multiple tsconfig Files for Different Contexts {#multiple-tsconfig-files-for-different-contexts}
+Multiple tsconfig Files for Different Contexts {#multiple-tsconfig-files-for-different-contexts}
 
 Chrome extensions have three distinct execution contexts, each with different available APIs. Use separate tsconfig files to enforce correct API usage per context.
 
-### Directory Structure {#directory-structure}
+Directory Structure {#directory-structure}
 
 ```
 my-extension/
@@ -171,7 +171,7 @@ my-extension/
   tsconfig.popup.json
 ```
 
-### Background Script Config {#background-script-config}
+Background Script Config {#background-script-config}
 
 The service worker has no DOM access. Exclude DOM from `lib`:
 
@@ -186,15 +186,15 @@ The service worker has no DOM access. Exclude DOM from `lib`:
     "types": ["chrome-types"]
   },
   "include": [
-    "src/background/**/*.ts",
-    "src/shared/**/*.ts"
+    "src/background//*.ts",
+    "src/shared//*.ts"
   ]
 }
 ```
 
 Using `"lib": ["ES2022", "WebWorker"]` instead of `"DOM"` prevents accidentally referencing `document`, `window`, or other DOM globals in the service worker -- the compiler will flag them as errors.
 
-### Content Script Config {#content-script-config}
+Content Script Config {#content-script-config}
 
 Content scripts have DOM access but limited Chrome API access:
 
@@ -209,13 +209,13 @@ Content scripts have DOM access but limited Chrome API access:
     "types": ["chrome-types"]
   },
   "include": [
-    "src/content/**/*.ts",
-    "src/shared/**/*.ts"
+    "src/content//*.ts",
+    "src/shared//*.ts"
   ]
 }
 ```
 
-### Popup/Options Page Config {#popupoptions-page-config}
+Popup/Options Page Config {#popupoptions-page-config}
 
 Popup pages are standard web pages with full DOM and Chrome API access:
 
@@ -231,17 +231,17 @@ Popup pages are standard web pages with full DOM and Chrome API access:
     "types": ["chrome-types"]
   },
   "include": [
-    "src/popup/**/*.ts",
-    "src/popup/**/*.tsx",
-    "src/shared/**/*.ts"
+    "src/popup//*.ts",
+    "src/popup//*.tsx",
+    "src/shared//*.ts"
   ]
 }
 ```
 
-### Running Type Checks Per Context {#running-type-checks-per-context}
+Running Type Checks Per Context {#running-type-checks-per-context}
 
 ```bash
-# Check each context independently
+Check each context independently
 npx tsc --project tsconfig.background.json --noEmit
 npx tsc --project tsconfig.content.json --noEmit
 npx tsc --project tsconfig.popup.json --noEmit
@@ -262,7 +262,7 @@ Add these to `package.json` scripts:
 
 ---
 
-## Project References for Shared Types {#project-references-for-shared-types}
+Project References for Shared Types {#project-references-for-shared-types}
 
 TypeScript project references let you split a project into smaller pieces with explicit dependency relationships. This is ideal for extension contexts that share types.
 
@@ -293,7 +293,7 @@ TypeScript project references let you split a project into smaller pieces with e
     "moduleResolution": "bundler",
     "strict": true
   },
-  "include": ["src/shared/**/*.ts"]
+  "include": ["src/shared//*.ts"]
 }
 ```
 
@@ -313,7 +313,7 @@ Each context config then references the shared project:
     "strict": true,
     "types": ["chrome-types"]
   },
-  "include": ["src/background/**/*.ts"],
+  "include": ["src/background//*.ts"],
   "references": [
     { "path": "./tsconfig.shared.json" }
   ]
@@ -328,16 +328,16 @@ npx tsc --build
 
 ---
 
-## Shared Message Types and Storage Schemas {#shared-message-types-and-storage-schemas}
+Shared Message Types and Storage Schemas {#shared-message-types-and-storage-schemas}
 
 Define a single source of truth for message payloads and storage shapes used across all contexts.
 
-### Message Type Definitions {#message-type-definitions}
+Message Type Definitions {#message-type-definitions}
 
 ```typescript
 // src/shared/messages.ts
 
-/** All possible message types in the extension */
+/ All possible message types in the extension */
 export type MessageType =
   | 'FETCH_DATA'
   | 'UPDATE_SETTINGS'
@@ -345,14 +345,14 @@ export type MessageType =
   | 'TAB_ACTIVATED'
   | 'BADGE_UPDATE';
 
-/** Base message shape */
+/ Base message shape */
 interface BaseMessage<T extends MessageType, P = void> {
   type: T;
   payload: P;
   timestamp: number;
 }
 
-/** Message payloads by type */
+/ Message payloads by type */
 export type FetchDataMessage = BaseMessage<'FETCH_DATA', {
   url: string;
   options?: RequestInit;
@@ -379,7 +379,7 @@ export type BadgeUpdateMessage = BaseMessage<'BADGE_UPDATE', {
   color?: string;
 }>;
 
-/** Union of all messages */
+/ Union of all messages */
 export type ExtensionMessage =
   | FetchDataMessage
   | UpdateSettingsMessage
@@ -387,7 +387,7 @@ export type ExtensionMessage =
   | TabActivatedMessage
   | BadgeUpdateMessage;
 
-/** Response types mapped to message types */
+/ Response types mapped to message types */
 export type MessageResponseMap = {
   FETCH_DATA: { data: unknown; status: number };
   UPDATE_SETTINGS: { success: boolean };
@@ -397,12 +397,12 @@ export type MessageResponseMap = {
 };
 ```
 
-### Storage Schema {#storage-schema}
+Storage Schema {#storage-schema}
 
 ```typescript
 // src/shared/storage.ts
 
-/** Shape of data in chrome.storage.local */
+/ Shape of data in chrome.storage.local */
 export interface LocalStorageSchema {
   settings: {
     theme: 'light' | 'dark';
@@ -420,7 +420,7 @@ export interface LocalStorageSchema {
   }>;
 }
 
-/** Shape of data in chrome.storage.sync */
+/ Shape of data in chrome.storage.sync */
 export interface SyncStorageSchema {
   preferences: {
     fontSize: number;
@@ -432,7 +432,7 @@ export interface SyncStorageSchema {
 
 ---
 
-## Path Aliases for Clean Imports {#path-aliases-for-clean-imports}
+Path Aliases for Clean Imports {#path-aliases-for-clean-imports}
 
 Path aliases prevent deeply nested relative imports like `../../../shared/types`.
 
@@ -463,7 +463,7 @@ import { ExtensionMessage } from '@shared/messages';
 import { LocalStorageSchema } from '@shared/storage';
 ```
 
-### Vite Alias Configuration {#vite-alias-configuration}
+Vite Alias Configuration {#vite-alias-configuration}
 
 Vite needs its own alias configuration to resolve these paths at build time:
 
@@ -486,14 +486,14 @@ export default defineConfig({
 
 ---
 
-## Declaration Files for Chrome APIs {#declaration-files-for-chrome-apis}
+Declaration Files for Chrome APIs {#declaration-files-for-chrome-apis}
 
 When Chrome types packages lag behind the latest APIs or you use experimental features, write ambient declaration files to fill the gaps.
 
 ```typescript
 // src/types/chrome-extensions.d.ts
 
-/**
+/
  * Ambient declarations for Chrome APIs not yet in published types.
  * Remove entries as official types catch up.
  */
@@ -542,15 +542,15 @@ Include the declaration file in your tsconfig:
 ```jsonc
 {
   "include": [
-    "src/**/*.ts",
-    "src/types/**/*.d.ts"
+    "src//*.ts",
+    "src/types//*.d.ts"
   ]
 }
 ```
 
 ---
 
-## Strict Mode Recommendations {#strict-mode-recommendations}
+Strict Mode Recommendations {#strict-mode-recommendations}
 
 Enable all strict checks. Each one prevents a real category of bugs in extension code.
 
@@ -569,9 +569,9 @@ Enable all strict checks. Each one prevents a real category of bugs in extension
 }
 ```
 
-### Why Each Flag Matters for Extensions {#why-each-flag-matters-for-extensions}
+Why Each Flag Matters for Extensions {#why-each-flag-matters-for-extensions}
 
-**`strictNullChecks`** (included in `strict`): Chrome APIs frequently return `undefined`. Tabs may not exist, storage may be empty.
+`strictNullChecks` (included in `strict`): Chrome APIs frequently return `undefined`. Tabs may not exist, storage may be empty.
 
 ```typescript
 // Without strictNullChecks -- silent bug
@@ -583,7 +583,7 @@ const tab = await chrome.tabs.get(tabId);
 console.log(tab.url?.length); // Must handle undefined
 ```
 
-**`noUncheckedIndexedAccess`**: Storage data and message payloads often use dynamic keys.
+`noUncheckedIndexedAccess`: Storage data and message payloads often use dynamic keys.
 
 ```typescript
 const data = await chrome.storage.local.get('settings');
@@ -591,7 +591,7 @@ const data = await chrome.storage.local.get('settings');
 // With: data['settings'] is typed as unknown | undefined -- must check
 ```
 
-**`exactOptionalPropertyTypes`**: Prevents passing `undefined` where a property should be omitted entirely. Relevant for Chrome API options objects.
+`exactOptionalPropertyTypes`: Prevents passing `undefined` where a property should be omitted entirely. Relevant for Chrome API options objects.
 
 ```typescript
 // With exactOptionalPropertyTypes
@@ -609,7 +609,7 @@ const opts: NotificationOptions = { title: 'Hi' };
 
 ---
 
-## Build Configuration with Vite and TypeScript {#build-configuration-with-vite-and-typescript}
+Build Configuration with Vite and TypeScript {#build-configuration-with-vite-and-typescript}
 
 Vite provides fast builds with native ESM support. Here is a complete Vite setup for a Chrome extension.
 
@@ -659,7 +659,7 @@ export default defineConfig({
 });
 ```
 
-### Package Scripts {#package-scripts}
+Package Scripts {#package-scripts}
 
 ```json
 {
@@ -672,7 +672,7 @@ export default defineConfig({
 }
 ```
 
-### Using CRXJS Vite Plugin {#using-crxjs-vite-plugin}
+Using CRXJS Vite Plugin {#using-crxjs-vite-plugin}
 
 The `@crxjs/vite-plugin` simplifies extension builds by reading `manifest.json` directly:
 
@@ -694,20 +694,20 @@ This approach lets Vite auto-discover entry points from the manifest and handles
 
 ---
 
-## Common TypeScript Errors and Fixes {#common-typescript-errors-and-fixes}
+Common TypeScript Errors and Fixes {#common-typescript-errors-and-fixes}
 
-### Error: Property does not exist on type 'chrome' {#error-property-does-not-exist-on-type-chrome}
+Error: Property does not exist on type 'chrome' {#error-property-does-not-exist-on-type-chrome}
 
-**Cause**: Missing or outdated type definitions.
+Cause: Missing or outdated type definitions.
 
 ```bash
-# Fix: install or update chrome types
+Fix: install or update chrome types
 npm install -D chrome-types@latest
 ```
 
-### Error: Cannot find name 'document' in service worker {#error-cannot-find-name-document-in-service-worker}
+Error: Cannot find name 'document' in service worker {#error-cannot-find-name-document-in-service-worker}
 
-**Cause**: Using DOM APIs in a service worker context.
+Cause: Using DOM APIs in a service worker context.
 
 ```typescript
 // Wrong: DOM not available in service worker
@@ -717,9 +717,9 @@ document.getElementById('app'); // Error with WebWorker lib
 chrome.tabs.sendMessage(tabId, { type: 'GET_ELEMENT' });
 ```
 
-### Error: Type 'void' is not assignable to type 'boolean | undefined' {#error-type-void-is-not-assignable-to-type-boolean-undefined}
+Error: Type 'void' is not assignable to type 'boolean | undefined' {#error-type-void-is-not-assignable-to-type-boolean-undefined}
 
-**Cause**: `onMessage` listener return type mismatch. The listener must return `true` to indicate it will send an asynchronous response.
+Cause: `onMessage` listener return type mismatch. The listener must return `true` to indicate it will send an asynchronous response.
 
 ```typescript
 // Wrong
@@ -735,9 +735,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Error: Argument of type 'string' is not assignable to parameter {#error-argument-of-type-string-is-not-assignable-to-parameter}
+Error: Argument of type 'string' is not assignable to parameter {#error-argument-of-type-string-is-not-assignable-to-parameter}
 
-**Cause**: Chrome APIs expect string literal unions, not plain `string`.
+Cause: Chrome APIs expect string literal unions, not plain `string`.
 
 ```typescript
 // Wrong
@@ -749,9 +749,9 @@ const reason: chrome.runtime.OnInstalledReason = 'install';
 if (details.reason === reason) { } // Proper literal type
 ```
 
-### Error: Promise returned but not awaited {#error-promise-returned-but-not-awaited}
+Error: Promise returned but not awaited {#error-promise-returned-but-not-awaited}
 
-**Cause**: MV3 Chrome APIs return promises, but older patterns used callbacks.
+Cause: MV3 Chrome APIs return promises, but older patterns used callbacks.
 
 ```typescript
 // Old callback style (still works but types may conflict)
@@ -763,11 +763,11 @@ const result = await chrome.storage.local.get(['key']);
 
 ---
 
-## Type Guards for Message Handling {#type-guards-for-message-handling}
+Type Guards for Message Handling {#type-guards-for-message-handling}
 
 Type guards narrow the `ExtensionMessage` union to specific message types, giving you safe access to payload properties.
 
-### Basic Type Guard {#basic-type-guard}
+Basic Type Guard {#basic-type-guard}
 
 ```typescript
 import type { ExtensionMessage, MessageType } from '@shared/messages';
@@ -797,7 +797,7 @@ chrome.runtime.onMessage.addListener((message: ExtensionMessage, sender, sendRes
 });
 ```
 
-### Exhaustive Message Handler {#exhaustive-message-handler}
+Exhaustive Message Handler {#exhaustive-message-handler}
 
 Use a `switch` statement with `never` checking to ensure all message types are handled:
 
@@ -828,7 +828,7 @@ function handleMessage(message: ExtensionMessage): void {
 }
 ```
 
-### Runtime Validation {#runtime-validation}
+Runtime Validation {#runtime-validation}
 
 For messages received from external sources (other extensions or web pages), validate at runtime:
 
@@ -851,9 +851,9 @@ function isValidExtensionMessage(value: unknown): value is ExtensionMessage {
 
 ---
 
-## Generic Patterns for Typed Storage and Messaging {#generic-patterns-for-typed-storage-and-messaging}
+Generic Patterns for Typed Storage and Messaging {#generic-patterns-for-typed-storage-and-messaging}
 
-### Typed Storage Wrapper {#typed-storage-wrapper}
+Typed Storage Wrapper {#typed-storage-wrapper}
 
 Wrap `chrome.storage` with generics so that keys and values are always type-safe:
 
@@ -934,7 +934,7 @@ await localStorage.get('invalid');
 await localStorage.set('settings', { wrong: true });
 ```
 
-### Typed Message Sender {#typed-message-sender}
+Typed Message Sender {#typed-message-sender}
 
 ```typescript
 // src/shared/typed-messaging.ts
@@ -944,14 +944,14 @@ import type {
   MessageResponseMap,
 } from './messages';
 
-/** Send a typed message and get a typed response */
+/ Send a typed message and get a typed response */
 export async function sendMessage<T extends MessageType>(
   message: Extract<ExtensionMessage, { type: T }>
 ): Promise<MessageResponseMap[T]> {
   return chrome.runtime.sendMessage(message);
 }
 
-/** Send a typed message to a specific tab */
+/ Send a typed message to a specific tab */
 export async function sendTabMessage<T extends MessageType>(
   tabId: number,
   message: Extract<ExtensionMessage, { type: T }>
@@ -959,7 +959,7 @@ export async function sendTabMessage<T extends MessageType>(
   return chrome.tabs.sendMessage(tabId, message);
 }
 
-/** Helper to create a properly typed message */
+/ Helper to create a properly typed message */
 export function createMessage<T extends MessageType>(
   type: T,
   payload: Extract<ExtensionMessage, { type: T }>['payload']
@@ -989,7 +989,7 @@ const response = await sendMessage(message);
 const bad = createMessage('FETCH_DATA', { theme: 'dark' });
 ```
 
-### Typed Event Emitter for Internal Communication {#typed-event-emitter-for-internal-communication}
+Typed Event Emitter for Internal Communication {#typed-event-emitter-for-internal-communication}
 
 ```typescript
 // src/shared/typed-events.ts
@@ -1028,22 +1028,22 @@ export const events = new TypedEventEmitter();
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 A well-configured TypeScript setup for Chrome extensions involves:
 
-1. **Separate tsconfig files** per execution context to prevent DOM usage in service workers and enforce API boundaries.
-2. **Project references** for shared types that are consumed by all contexts.
-3. **Strict compiler flags** to catch the null-safety and type-narrowing bugs that Chrome APIs are prone to.
-4. **Typed wrappers** around `chrome.storage` and `chrome.runtime.sendMessage` to eliminate `any` at API boundaries.
-5. **Type guards** and exhaustive switches for message handling to ensure every message type is accounted for.
-6. **Path aliases** synced between `tsconfig.json` and your bundler for clean imports across contexts.
+1. Separate tsconfig files per execution context to prevent DOM usage in service workers and enforce API boundaries.
+2. Project references for shared types that are consumed by all contexts.
+3. Strict compiler flags to catch the null-safety and type-narrowing bugs that Chrome APIs are prone to.
+4. Typed wrappers around `chrome.storage` and `chrome.runtime.sendMessage` to eliminate `any` at API boundaries.
+5. Type guards and exhaustive switches for message handling to ensure every message type is accounted for.
+6. Path aliases synced between `tsconfig.json` and your bundler for clean imports across contexts.
 
 These patterns scale from small utility extensions to complex multi-context applications with dozens of message types and storage schemas.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Dev Tools](../guides/chrome-extension-dev-tools.md)
 - [Webpack Setup](../guides/webpack-extension-setup.md)

@@ -20,7 +20,7 @@ Add `devtools_page` to manifest.json:
 
 ## chrome.devtools.inspectedWindow
 
-Access the inspected page—get tab ID, reload, evaluate code, access resources.
+Access the inspected page, get tab ID, reload, evaluate code, access resources.
 
 ```javascript
 // Get inspected tab ID
@@ -146,7 +146,7 @@ chrome.devtools.panels.create(
 
 ## Communication: DevTools ↔ Service Worker
 
-DevTools pages can't directly reach content scripts—use background as relay.
+DevTools pages can't directly reach content scripts, use background as relay.
 
 ### DevTools Side
 

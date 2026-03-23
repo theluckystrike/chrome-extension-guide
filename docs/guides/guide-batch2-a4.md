@@ -2,15 +2,15 @@
 
 ## Introduction
 
-Form autofill is one of the most practical features you can build in a Chrome extension. Whether it's personal information (name, address, phone), payment details, or frequently used text snippets, autofill saves users countless hours of repetitive data entry. This guide covers the architecture, implementation patterns, and best practices for building a robust form autofill extension.
+Form autofill is one of the most practical features you can build in a Chrome extension. Whether it's personal information (name, address, phone), payment details, or frequently used text snippets, autofill saves users countless hours of repetitive data entry. This guide covers the architecture, implementation patterns, and best practices for building a solid form autofill extension.
 
 ## Understanding the Architecture
 
 Form autofill extensions typically work in one of three ways:
 
-1. **Content Script Injection** - Inject JavaScript into web pages to detect and fill forms
-2. **Declarative Net Request** - Use Chrome's declarative automation rules
-3. **Side Panel + Messaging** - Keep autofill data in a side panel and communicate with content scripts
+1. Content Script Injection - Inject JavaScript into web pages to detect and fill forms
+2. Declarative Net Request - Use Chrome's declarative automation rules
+3. Side Panel + Messaging - Keep autofill data in a side panel and communicate with content scripts
 
 For most use cases, a combination of content scripts and the `chrome.storage` API provides the best balance of flexibility and security.
 
@@ -320,20 +320,20 @@ function calculateMatchScore(profile: AutofillProfile, pageInfo: PageInfo): numb
 
 ## Best Practices Summary
 
-1. **Use semantic field detection** - Don't rely solely on input names; check labels, placeholders, and types
-2. **Trigger proper events** - Always dispatch `input` and `change` events after filling
-3. **Encrypt sensitive data** - Never store plain text passwords or payment info
-4. **Provide manual override** - Users should be able to edit fields before submission
-5. **Support multiple profiles** - Let users create profiles for different contexts (work, personal, shopping)
-6. **Respect privacy** - Be transparent about what data you collect and store
-7. **Handle dynamic forms** - Use MutationObserver for SPAs with dynamically loaded forms
+1. Use semantic field detection - Don't rely solely on input names; check labels, placeholders, and types
+2. Trigger proper events - Always dispatch `input` and `change` events after filling
+3. Encrypt sensitive data - Never store plain text passwords or payment info
+4. Provide manual override - Users should be able to edit fields before submission
+5. Support multiple profiles - Let users create profiles for different contexts (work, personal, shopping)
+6. Respect privacy - Be transparent about what data you collect and store
+7. Handle dynamic forms - Use MutationObserver for SPAs with dynamically loaded forms
 
 ## Common Pitfalls
 
-- **Overly aggressive filling** - Don't fill hidden fields or fields users have explicitly cleared
-- **Not handling autocomplete** - Some browsers override your values; test thoroughly
-- **Missing error handling** - Forms may be on different domains with CORS restrictions
-- **Performance issues** - Don't scan the entire DOM on every page load; use event delegation
+- Overly aggressive filling - Don't fill hidden fields or fields users have explicitly cleared
+- Not handling autocomplete - Some browsers override your values; test thoroughly
+- Missing error handling - Forms may be on different domains with CORS restrictions
+- Performance issues - Don't scan the entire DOM on every page load; use event delegation
 
 ## Related Resources
 

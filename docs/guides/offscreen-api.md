@@ -56,11 +56,11 @@ const hasDocument = await chrome.offscreen.hasDocument();
 | `WEB_RTC` | WebRTC peer connections |
 
 ## Lifecycle and Limits
-- **One document per extension**: Only ONE offscreen document can exist at a time
-- **Lifetime tied to extension**: Document closes when extension is updated or Chrome exits
-- **Replacing reasons**: Calling createDocument with different reasons replaces existing document
-- **Service worker lifecycle**: Document survives service worker termination but not extension updates
-- **Memory considerations**: Close documents when not needed to free resources
+- One document per extension: Only ONE offscreen document can exist at a time
+- Lifetime tied to extension: Document closes when extension is updated or Chrome exits
+- Replacing reasons: Calling createDocument with different reasons replaces existing document
+- Service worker lifecycle: Document survives service worker termination but not extension updates
+- Memory considerations: Close documents when not needed to free resources
 
 ## Communication via chrome.runtime Messaging
 Service worker communicates with offscreen document using message passing:
@@ -232,27 +232,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ## Best Practices
 
-1. **Always check document existence** before creating or sending messages:
+1. Always check document existence before creating or sending messages:
    ```javascript
    if (!await chrome.offscreen.hasDocument()) {
      await createOffscreen();
    }
    ```
 
-2. **Close documents when done** to free memory:
+2. Close documents when done to free memory:
    ```javascript
    await chrome.offscreen.closeDocument();
    ```
 
-3. **Provide clear justification** - Chrome reviews may ask for clarification
+3. Provide clear justification - Chrome reviews may ask for clarification
 
-4. **Use single offscreen document** for multiple operations to avoid recreation overhead
+4. Use single offscreen document for multiple operations to avoid recreation overhead
 
-5. **Handle message timeouts** - Service workers may terminate during long operations
+5. Handle message timeouts - Service workers may terminate during long operations
 
-6. **Store context in chrome.storage** - Persist state since offscreen can be recreated
+6. Store context in chrome.storage - Persist state since offscreen can be recreated
 
-7. **Use meaningful Reason enums** - Match the actual use case exactly
+7. Use meaningful Reason enums - Match the actual use case exactly
 
 ## Error Handling
 ```javascript

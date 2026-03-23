@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Clipboard Manager — Developer Guide"
+title: "Chrome Extension Clipboard Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-clipboard-manager/"
 ---
 # Build a Clipboard Manager Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 Popup clipboard history with search, pinned favorites, one-click paste. Uses offscreen document for clipboard access in MV3.
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 ```
 clipboard-manager/
   manifest.json
@@ -22,7 +22,7 @@ clipboard-manager/
   content.js
 ```
 
-## Step 1: Manifest {#step-1-manifest}
+Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -41,7 +41,7 @@ clipboard-manager/
 }
 ```
 
-## Step 2: Content Script {#step-2-content-script}
+Step 2: Content Script {#step-2-content-script}
 ```javascript
 // Detect copy events on any page
 document.addEventListener('copy', () => {
@@ -49,14 +49,14 @@ document.addEventListener('copy', () => {
 });
 ```
 
-## Step 3: Offscreen Document {#step-3-offscreen-document}
+Step 3: Offscreen Document {#step-3-offscreen-document}
 ```html
 <!-- offscreen.html -->
 <!DOCTYPE html>
 <html><body><textarea id="cb"></textarea><script src="offscreen.js"></script></body></html>
 ```
 ```javascript
-// offscreen.js — clipboard read/write in MV3
+// offscreen.js. clipboard read/write in MV3
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const ta = document.getElementById('cb');
   if (msg.type === 'READ_CLIPBOARD') {
@@ -75,7 +75,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Step 4: Background Service Worker {#step-4-background-service-worker}
+Step 4: Background Service Worker {#step-4-background-service-worker}
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -151,7 +151,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Step 5: Popup {#step-5-popup}
+Step 5: Popup {#step-5-popup}
 ```html
 <!DOCTYPE html>
 <html>
@@ -207,7 +207,7 @@ body { width: 350px; max-height: 500px; margin: 0; font-family: system-ui; backg
 </html>
 ```
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 - Image clipboard support
 - Rich text preview
 - Sync pinned items across devices

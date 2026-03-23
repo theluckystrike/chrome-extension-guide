@@ -378,8 +378,8 @@ const constraints = {
 
 ## Platform Limitations
 
-- **System audio**: Windows and macOS only
-- **Tab audio**: All platforms (tab must be audible)
+- System audio: Windows and macOS only
+- Tab audio: All platforms (tab must be audible)
 - Enterprise environments may block capture
 
 ## Conclusion
@@ -391,4 +391,4 @@ The Chrome Desktop Capture API enables powerful screen capture extensions. Key p
 - Handle stream lifecycle and errors properly
 - Request only necessary permissions
 
-Build robust screenshot and recording extensions with these foundations.
+Build solid screenshot and recording extensions with these foundations.

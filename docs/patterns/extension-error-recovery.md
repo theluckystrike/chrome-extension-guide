@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Error Recovery — Best Practices"
+title: "Chrome Extension Extension Error Recovery. Best Practices"
 description: "Recover gracefully from errors in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-error-recovery/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-error-recove
 
 Resilience patterns for building self-healing Chrome extensions.
 
-## Service Worker Crash Recovery {#service-worker-crash-recovery}
+Service Worker Crash Recovery {#service-worker-crash-recovery}
 
 Service workers can terminate after inactivity. Re-register listeners and restore state on wake:
 
@@ -32,7 +32,7 @@ async function restoreStateFromStorage() {
 }
 ```
 
-## Content Script Disconnection {#content-script-disconnection}
+Content Script Disconnection {#content-script-disconnection}
 
 Catch "Extension context invalidated" errors and reload:
 
@@ -53,7 +53,7 @@ function sendMessageSafely(message) {
 }
 ```
 
-## Storage Corruption Recovery {#storage-corruption-recovery}
+Storage Corruption Recovery {#storage-corruption-recovery}
 
 Validate data on load, fallback to defaults if invalid:
 
@@ -72,7 +72,7 @@ async function loadStorageWithFallback(key, schema, defaults) {
 }
 ```
 
-## Network Failures {#network-failures}
+Network Failures {#network-failures}
 
 Implement exponential backoff with jitter:
 
@@ -91,7 +91,7 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
 }
 ```
 
-## Alarm Recovery {#alarm-recovery}
+Alarm Recovery {#alarm-recovery}
 
 Check and recreate missing alarms on startup:
 
@@ -108,7 +108,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Runtime.lastError Check {#runtimelasterror-check}
+Runtime.lastError Check {#runtimelasterror-check}
 
 Always check after async chrome API calls:
 
@@ -122,7 +122,7 @@ chrome.storage.local.set({ key: 'value' }, () => {
 });
 ```
 
-## Unhandled Rejection Handling {#unhandled-rejection-handling}
+Unhandled Rejection Handling {#unhandled-rejection-handling}
 
 Catch unhandled promise rejections in service worker:
 
@@ -134,7 +134,7 @@ self.addEventListener('unhandledrejection', (event) => {
 });
 ```
 
-## Port Auto-Reconnect {#port-auto-reconnect}
+Port Auto-Reconnect {#port-auto-reconnect}
 
 Maintain long-lived connections with auto-reconnect:
 
@@ -153,7 +153,7 @@ function createReconnectingPort(name) {
 }
 ```
 
-## State Validation & Auto-Repair {#state-validation-auto-repair}
+State Validation & Auto-Repair {#state-validation-auto-repair}
 
 Periodic validation with automatic repair:
 
@@ -168,7 +168,7 @@ setInterval(async () => {
 }, 60000);
 ```
 
-## User Notification {#user-notification}
+User Notification {#user-notification}
 
 Inform users of recovery actions non-intrusively:
 
@@ -180,7 +180,7 @@ function notifyUser(message) {
 }
 ```
 
-## Diagnostic Mode {#diagnostic-mode}
+Diagnostic Mode {#diagnostic-mode}
 
 Enable verbose logging when debugging persistent issues:
 
@@ -195,14 +195,14 @@ function debugLog(context, data) {
 }
 ```
 
-## Self-Healing Pattern Summary {#self-healing-pattern-summary}
+Self-Healing Pattern Summary {#self-healing-pattern-summary}
 
-1. **Detect**: Validate state, catch errors, monitor connectivity
-2. **Log**: Record issues with context for debugging
-3. **Recover**: Apply fallback, retry, reload, or restore
-4. **Report**: Notify users, send to telemetry if persistent
+1. Detect: Validate state, catch errors, monitor connectivity
+2. Log: Record issues with context for debugging
+3. Recover: Apply fallback, retry, reload, or restore
+4. Report: Notify users, send to telemetry if persistent
 
-## Cross-Reference {#cross-reference}
+Cross-Reference {#cross-reference}
 
 - [Error Handling Reference](../reference/error-handling.md)
 - [Retry Patterns](./retry-patterns.md)

@@ -1,53 +1,53 @@
 ---
 layout: default
-title: "Chrome Extension Drag And Drop — Best Practices"
+title: "Chrome Extension Drag And Drop. Best Practices"
 description: "Implement drag and drop in extension UIs."
 canonical_url: "https://bestchromeextensions.com/patterns/drag-and-drop/"
 ---
 
 # Drag and Drop in Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
-Drag and drop brings natural, tactile interaction to extension UIs — sortable bookmark lists in popups, file uploads into side panels, and content script overlays that let users drag page elements into the extension. But extensions add complexity: popups live in isolated windows, content scripts share the DOM with host pages, and cross-context communication requires message passing. This guide covers practical drag-and-drop patterns for every extension surface, from basic sortable lists to accessible keyboard alternatives.
+Drag and drop brings natural, tactile interaction to extension UIs. sortable bookmark lists in popups, file uploads into side panels, and content script overlays that let users drag page elements into the extension. But extensions add complexity: popups live in isolated windows, content scripts share the DOM with host pages, and cross-context communication requires message passing. This guide covers practical drag-and-drop patterns for every extension surface, from basic sortable lists to accessible keyboard alternatives.
 
 ---
 
-## Extension Drag-and-Drop Architecture {#extension-drag-and-drop-architecture}
+Extension Drag-and-Drop Architecture {#extension-drag-and-drop-architecture}
 
 ```
-┌──────────────────────────────────────────────────────┐
-│  Web Page (Content Script)                           │
-│                                                      │
-│  ┌──────────┐  drag   ┌──────────────┐              │
-│  │ Draggable│ ──────> │ Drop Overlay │              │
-│  │ Element  │         │ (injected)   │              │
-│  └──────────┘         └──────┬───────┘              │
-│                              │ message              │
-├──────────────────────────────┼───────────────────────┤
-│  Extension Contexts          │                       │
-│                              ▼                       │
-│  ┌──────────┐    ┌──────────────────┐               │
-│  │  Popup   │    │  Service Worker  │               │
-│  │ Sortable │    │  (coordinator)   │               │
-│  │  Lists   │    └────────┬─────────┘               │
-│  └──────────┘             │                          │
-│                  ┌────────▼─────────┐               │
-│                  │   Side Panel     │               │
-│                  │   Drop Target    │               │
-│                  └──────────────────┘               │
-└──────────────────────────────────────────────────────┘
+
+  Web Page (Content Script)                           
+                                                      
+    drag                 
+   Draggable >  Drop Overlay               
+   Element            (injected)                 
+                         
+                               message              
+
+  Extension Contexts                                 
+                                                     
+                     
+    Popup         Service Worker                 
+   Sortable       (coordinator)                  
+    Lists                      
+                                         
+                                 
+                     Side Panel                    
+                     Drop Target                   
+                                 
+
 ```
 
 Key constraints:
-- **Popup windows** close on blur — dragging outside the popup will close it
-- **Content scripts** share the page DOM, so drag listeners compete with host page handlers
-- **Cross-context drags** (page to side panel) require message passing — native drag events do not cross boundaries
-- **File drops** need careful `preventDefault()` to avoid navigating the page away
+- Popup windows close on blur. dragging outside the popup will close it
+- Content scripts share the page DOM, so drag listeners compete with host page handlers
+- Cross-context drags (page to side panel) require message passing. native drag events do not cross boundaries
+- File drops need careful `preventDefault()` to avoid navigating the page away
 
 ---
 
-## Pattern 1: Sortable Lists in Popup UI {#pattern-1-sortable-lists-in-popup-ui}
+Pattern 1: Sortable Lists in Popup UI {#pattern-1-sortable-lists-in-popup-ui}
 
 Build drag-and-drop reordering for lists in popup or side panel HTML. This pattern tracks the drag source and target using data attributes and swaps elements on drop:
 
@@ -69,7 +69,7 @@ function initSortableList(container: HTMLUListElement): void {
     draggedItem = target;
     target.classList.add("dragging");
 
-    // Required for Firefox — set some data to enable the drag
+    // Required for Firefox. set some data to enable the drag
     e.dataTransfer!.effectAllowed = "move";
     e.dataTransfer!.setData("text/plain", target.dataset.sortableId!);
   });
@@ -159,9 +159,9 @@ Minimal CSS for drag feedback:
 
 ---
 
-## Pattern 2: File Drop Into Extension Popup {#pattern-2-file-drop-into-extension-popup}
+Pattern 2: File Drop Into Extension Popup {#pattern-2-file-drop-into-extension-popup}
 
-Accept file drops in the popup for processing — image conversion, text extraction, config imports:
+Accept file drops in the popup for processing. image conversion, text extraction, config imports:
 
 ```ts
 // popup.ts
@@ -248,7 +248,7 @@ initFileDrop(dropZone, {
 
 ---
 
-## Pattern 3: Content Script Drag-and-Drop Overlays {#pattern-3-content-script-drag-and-drop-overlays}
+Pattern 3: Content Script Drag-and-Drop Overlays {#pattern-3-content-script-drag-and-drop-overlays}
 
 Inject a drop overlay onto web pages that captures dragged content. This pattern creates a floating overlay that appears when the user drags items, and relays the dropped data to the service worker:
 
@@ -375,7 +375,7 @@ initContentDragListener();
 
 ---
 
-## Pattern 4: Cross-Context Drag (Page to Side Panel) {#pattern-4-cross-context-drag-page-to-side-panel}
+Pattern 4: Cross-Context Drag (Page to Side Panel) {#pattern-4-cross-context-drag-page-to-side-panel}
 
 Native HTML drag events cannot cross extension context boundaries. This pattern bridges the gap by using `chrome.runtime` messaging to relay drag data from a content script to the side panel:
 
@@ -390,7 +390,7 @@ interface CrossContextDragMessage {
   };
 }
 
-// content-script.ts — detect drags and relay via messaging
+// content-script.ts. detect drags and relay via messaging
 document.addEventListener("dragstart", (e: DragEvent) => {
   const selection = document.getSelection()?.toString();
   const link = (e.target as HTMLElement).closest("a");
@@ -410,7 +410,7 @@ document.addEventListener("dragend", () => {
   } satisfies CrossContextDragMessage);
 });
 
-// background.ts — relay to the side panel
+// background.ts. relay to the side panel
 chrome.runtime.onMessage.addListener(
   (msg: CrossContextDragMessage, sender) => {
     if (msg.type === "DRAG_START" || msg.type === "DRAG_END") {
@@ -424,13 +424,13 @@ chrome.runtime.onMessage.addListener(
           },
         })
         .catch(() => {
-          // Side panel may not be open — ignore
+          // Side panel may not be open. ignore
         });
     }
   }
 );
 
-// side-panel.ts — receive and display
+// side-panel.ts. receive and display
 const dropIndicator = document.getElementById("drop-indicator")!;
 const collectedItems = document.getElementById("collected-items")!;
 
@@ -469,11 +469,11 @@ function addCollectedItem(
 }
 ```
 
-> **Limitation**: You cannot detect the actual "drop" moment inside the side panel from a content script drag. The `dragend` event fires when the user releases the mouse, and you relay whatever data was captured at `dragstart`. For true drop semantics, instruct users to click a "Confirm" button in the side panel after the item appears.
+> Limitation: You cannot detect the actual "drop" moment inside the side panel from a content script drag. The `dragend` event fires when the user releases the mouse, and you relay whatever data was captured at `dragstart`. For true drop semantics, instruct users to click a "Confirm" button in the side panel after the item appears.
 
 ---
 
-## Pattern 5: Custom Drag Previews and Ghost Images {#pattern-5-custom-drag-previews-and-ghost-images}
+Pattern 5: Custom Drag Previews and Ghost Images {#pattern-5-custom-drag-previews-and-ghost-images}
 
 Replace the browser's default translucent clone with a custom drag image for better visual communication:
 
@@ -575,7 +575,7 @@ function setCanvasDragPreview(
 
 ---
 
-## Pattern 6: Drop Zone Visual Feedback and Validation {#pattern-6-drop-zone-visual-feedback-and-validation}
+Pattern 6: Drop Zone Visual Feedback and Validation {#pattern-6-drop-zone-visual-feedback-and-validation}
 
 Provide clear visual indicators for valid, invalid, and active drop states. This pattern validates drag contents before the user drops, using the `dataTransfer.types` array:
 
@@ -695,12 +695,12 @@ CSS states driven by `data-drop-state`:
 
 ---
 
-## Pattern 7: Drag Data Types — Text, URLs, Files, and Custom MIME {#pattern-7-drag-data-types-text-urls-files-and-custom-mime}
+Pattern 7: Drag Data Types. Text, URLs, Files, and Custom MIME {#pattern-7-drag-data-types-text-urls-files-and-custom-mime}
 
 The `DataTransfer` API supports multiple data formats simultaneously. Set multiple types on drag so different drop targets can consume the most appropriate format:
 
 ```ts
-// popup.ts — setting multiple data types on a draggable item
+// popup.ts. setting multiple data types on a draggable item
 interface BookmarkItem {
   id: string;
   title: string;
@@ -718,19 +718,19 @@ function initBookmarkDrag(
     const dt = e.dataTransfer!;
     dt.effectAllowed = "copyMove";
 
-    // Plain text — works everywhere
+    // Plain text. works everywhere
     dt.setData("text/plain", bookmark.url);
 
-    // URL — recognized by browsers and OS drop targets
+    // URL. recognized by browsers and OS drop targets
     dt.setData("text/uri-list", bookmark.url);
 
-    // Rich HTML — pastes nicely into rich text editors
+    // Rich HTML. pastes nicely into rich text editors
     dt.setData(
       "text/html",
       `<a href="${bookmark.url}">${bookmark.title}</a>`
     );
 
-    // Custom MIME — only your extension understands this
+    // Custom MIME. only your extension understands this
     dt.setData(
       "application/x-ext-bookmark",
       JSON.stringify(bookmark)
@@ -782,11 +782,11 @@ Data type cheat sheet:
 | `Files` | User drags from OS | `e.dataTransfer.files` | File uploads |
 | `application/x-*` | `setData("application/x-myapp", ...)` | `getData("application/x-myapp")` | Custom extension data |
 
-> **Security note**: During `dragover`, you can inspect `dataTransfer.types` (the list of MIME types) but you **cannot** read the actual data values. Data is only accessible inside the `drop` handler. This is a browser security restriction.
+> Security note: During `dragover`, you can inspect `dataTransfer.types` (the list of MIME types) but you cannot read the actual data values. Data is only accessible inside the `drop` handler. This is a browser security restriction.
 
 ---
 
-## Pattern 8: Accessible Drag-and-Drop With Keyboard Alternatives {#pattern-8-accessible-drag-and-drop-with-keyboard-alternatives}
+Pattern 8: Accessible Drag-and-Drop With Keyboard Alternatives {#pattern-8-accessible-drag-and-drop-with-keyboard-alternatives}
 
 Drag-and-drop is inherently mouse-centric. Every drag interaction must have a keyboard-accessible alternative for users who rely on assistive technology:
 
@@ -940,7 +940,7 @@ function renderKeyboardHelp(container: HTMLElement): void {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Context | Key Technique |
 |---------|---------|---------------|
@@ -953,15 +953,15 @@ function renderKeyboardHelp(container: HTMLElement): void {
 | Multiple data types | Any UI | Set `text/plain`, `text/uri-list`, `text/html`, custom MIME |
 | Keyboard accessible | Popup / Side Panel | `aria-grabbed` + arrow key reorder + live region announcements |
 
-## Common Pitfalls {#common-pitfalls}
+Common Pitfalls {#common-pitfalls}
 
-1. **Popup closes on external drag** — You cannot drag items out of a popup. If you need cross-boundary drag, use the side panel instead.
-2. **Missing `preventDefault()`** — Failing to prevent default on `dragover` means `drop` will never fire. Always call `e.preventDefault()` in your `dragover` handler.
-3. **`dragenter`/`dragleave` bubbling** — These events fire for every child element. Use a counter (`dragCounter++`/`dragCounter--`) to track the real enter/leave boundary.
-4. **Cannot read data during `dragover`** — `dataTransfer.getData()` returns empty strings in `dragover` for security. Only `dataTransfer.types` is available.
-5. **Firefox requires `setData()`** — Firefox will not start a drag unless you call `e.dataTransfer.setData()` with at least one value in the `dragstart` handler.
+1. Popup closes on external drag. You cannot drag items out of a popup. If you need cross-boundary drag, use the side panel instead.
+2. Missing `preventDefault()`. Failing to prevent default on `dragover` means `drop` will never fire. Always call `e.preventDefault()` in your `dragover` handler.
+3. `dragenter`/`dragleave` bubbling. These events fire for every child element. Use a counter (`dragCounter++`/`dragCounter--`) to track the real enter/leave boundary.
+4. Cannot read data during `dragover`. `dataTransfer.getData()` returns empty strings in `dragover` for security. Only `dataTransfer.types` is available.
+5. Firefox requires `setData()`. Firefox will not start a drag unless you call `e.dataTransfer.setData()` with at least one value in the `dragstart` handler.
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
 - [MDN Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 - [Chrome Side Panel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)

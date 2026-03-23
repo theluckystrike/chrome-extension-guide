@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Enterprise Policies — Best Practices"
+title: "Chrome Extension Enterprise Policies. Best Practices"
 description: "Support enterprise deployment with Chrome policies."
 canonical_url: "https://bestchromeextensions.com/patterns/enterprise-policies/"
 ---
@@ -9,15 +9,14 @@ canonical_url: "https://bestchromeextensions.com/patterns/enterprise-policies/"
 
 Enterprise environments impose strict requirements on Chrome extensions: managed configuration, forced installation, policy-driven feature flags, and compliance logging. This guide covers eight patterns for building extensions that integrate cleanly with Google Admin Console and enterprise policy infrastructure.
 
-> **Cross-references:** [Security Hardening](../guides/security-hardening.md) | [Management Permission](../permissions/management.md)
+> Cross-references: [Security Hardening](../guides/security-hardening.md) | [Management Permission](../permissions/management.md)
 
 ---
 
-## 1. Detecting Managed/Enterprise Environment {#1-detecting-managedenterprise-environment}
+1. Detecting Managed/Enterprise Environment {#1-detecting-managedenterprise-environment}
 
 Determine at runtime whether your extension is running in a managed (enterprise) context so you can adjust behavior accordingly.
 
-**Explanation:**
 Chrome exposes `chrome.storage.managed` for enterprise-configured values. If the storage area is empty or inaccessible, the extension is running in an unmanaged environment. You can also check `chrome.runtime.id` against force-installed extension behavior or inspect the install type via `chrome.management.getSelf()`.
 
 ```typescript
@@ -64,18 +63,17 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - `chrome.storage.managed.get()` throws an error (not an empty object) when no managed schema is defined or the extension is unmanaged. Always wrap in try/catch.
-- `chrome.management.getSelf()` does **not** require the `management` permission. It is one of the few `chrome.management` methods (along with `getPermissionWarningsByManifest()` and `uninstallSelf()`) that works without declaring the permission.
+- `chrome.management.getSelf()` does not require the `management` permission. It is one of the few `chrome.management` methods (along with `getPermissionWarningsByManifest()` and `uninstallSelf()`) that works without declaring the permission.
 - An extension can be managed (has policies) without being force-installed, and vice versa. Check both signals.
 
 ---
 
-## 2. Reading Enterprise Policies with chrome.storage.managed {#2-reading-enterprise-policies-with-chromestoragemanaged}
+2. Reading Enterprise Policies with chrome.storage.managed {#2-reading-enterprise-policies-with-chromestoragemanaged}
 
 Read and react to administrator-configured policies stored in Chrome's managed storage area.
 
-**Explanation:**
 Managed storage is a read-only storage area populated by IT administrators via Google Admin Console or Windows Group Policy. Your extension defines expected keys and types in a managed schema file, and administrators set the values. The extension reads them like any other storage area but cannot write to it.
 
 ```typescript
@@ -109,7 +107,7 @@ async function readPolicies(): Promise<ExtensionPolicies> {
   }
 }
 
-/**
+/
  * Read a single policy with type safety.
  */
 async function getPolicy<K extends keyof ExtensionPolicies>(
@@ -128,18 +126,17 @@ const serverUrl = await getPolicy("serverUrl");
 const allowedDomains = await getPolicy("allowedDomains");
 ```
 
-**Gotchas:**
+Gotchas:
 - Managed storage is strictly read-only. Calling `chrome.storage.managed.set()` will throw.
 - Policy values can be any JSON-serializable type: strings, numbers, booleans, arrays, and nested objects. Define your schema carefully to match what admins will configure.
 - If the administrator has not set a value for a key, it will be absent from the result even if the schema defines a default. Always merge with your own defaults.
 
 ---
 
-## 3. Schema for Managed Storage (managed_schema.json) {#3-schema-for-managed-storage-managed-schemajson}
+3. Schema for Managed Storage (managed_schema.json) {#3-schema-for-managed-storage-managed-schemajson}
 
 Define the structure of your managed storage so Google Admin Console and Chrome know what policies your extension accepts.
 
-**Explanation:**
 The `managed_schema.json` file (referenced from `manifest.json` under `storage.managed_schema`) uses JSON Schema format to declare every policy key, its type, description, and optional default. Chrome validates incoming policy values against this schema and ignores non-conforming values.
 
 ```typescript
@@ -195,7 +192,7 @@ const managedSchema = {
   },
 };
 
-/**
+/
  * Validate policies at runtime against expected types.
  * Useful as a safety net even though Chrome validates the schema.
  */
@@ -226,7 +223,7 @@ function validatePolicies(
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - The schema file must be valid JSON, not JSONC (no comments). Chrome silently ignores a malformed schema.
 - The `type` field must use JSON Schema types: `"string"`, `"integer"`, `"number"`, `"boolean"`, `"array"`, `"object"`. Using TypeScript types will fail.
 - Properties not listed in the schema are silently dropped. If an admin sets a key that is not in your schema, it will not appear in `chrome.storage.managed.get()`.
@@ -234,11 +231,10 @@ function validatePolicies(
 
 ---
 
-## 4. Force-Installed Extension Behavior {#4-force-installed-extension-behavior}
+4. Force-Installed Extension Behavior {#4-force-installed-extension-behavior}
 
 Handle the unique constraints and capabilities of extensions that are force-installed by enterprise policy.
 
-**Explanation:**
 Force-installed extensions (install type `"admin"`) cannot be uninstalled by the user, may have elevated permissions granted by policy, and should behave more conservatively (no onboarding flows, no review prompts). They may also receive different update schedules controlled by the organization.
 
 ```typescript
@@ -262,7 +258,7 @@ async function getForceInstallConfig(): Promise<ForceInstallConfig> {
   };
 }
 
-/**
+/
  * Adapt the extension's first-run experience based on install type.
  */
 async function handleFirstRun(): Promise<void> {
@@ -286,7 +282,7 @@ async function handleFirstRun(): Promise<void> {
   });
 }
 
-/**
+/
  * Check if specific permissions were granted by policy.
  * Policy-granted permissions cannot be revoked by the user.
  */
@@ -306,18 +302,17 @@ async function checkPolicyPermissions(): Promise<{
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - Force-installed extensions still go through `chrome.runtime.onInstalled` but the user never sees Chrome Web Store install UI. Do not assume the user initiated the install.
 - The `"admin"` install type covers both Google Admin Console deployments and Windows Group Policy / macOS configuration profile deployments.
 - Force-installed extensions can be granted host permissions via policy (`runtime_allowed_hosts`), bypassing the normal permission prompt. Your extension should still validate it has the permissions before using them.
 
 ---
 
-## 5. Policy-Based Feature Flags {#5-policy-based-feature-flags}
+5. Policy-Based Feature Flags {#5-policy-based-feature-flags}
 
 Use managed storage policies to enable or disable features, allowing IT administrators to customize extension behavior per organization.
 
-**Explanation:**
 Feature flags via managed storage give admins granular control without requiring extension updates. Define each feature as a boolean or enum policy, read the values at startup, and gate functionality accordingly. Cache the resolved flags in local storage for fast synchronous access in content scripts.
 
 ```typescript
@@ -405,24 +400,23 @@ class PolicyFeatureFlags {
 export const featureFlags = new PolicyFeatureFlags();
 ```
 
-**Gotchas:**
-- By default, content scripts **can** access `chrome.storage.managed` (as well as `local` and `sync`). However, this can be restricted by calling `chrome.storage.managed.setAccessLevel()`. If you need to ensure content scripts always have access regardless of access level settings, caching the resolved flags in `chrome.storage.local` is a safe fallback strategy.
+Gotchas:
+- By default, content scripts can access `chrome.storage.managed` (as well as `local` and `sync`). However, this can be restricted by calling `chrome.storage.managed.setAccessLevel()`. If you need to ensure content scripts always have access regardless of access level settings, caching the resolved flags in `chrome.storage.local` is a safe fallback strategy.
 - Policy changes can arrive at any time (e.g., when the admin pushes a new configuration). Always listen for `onChanged` and react dynamically.
 - Validate enum-type flags against known values. If an admin sets an unexpected string, fall back to the default rather than crashing.
 
 ---
 
-## 6. Enterprise Extension Deployment via Google Admin Console {#6-enterprise-extension-deployment-via-google-admin-console}
+6. Enterprise Extension Deployment via Google Admin Console {#6-enterprise-extension-deployment-via-google-admin-console}
 
 Structure your extension for deployment through Google Workspace admin controls.
 
-**Explanation:**
 Google Admin Console allows IT administrators to force-install, pin, or block extensions for their organization. Your extension must be published to the Chrome Web Store (public, unlisted, or private). The admin configures the extension ID, update URL, and managed policies through the Admin Console or a JSON policy file.
 
 ```typescript
 // deployment-config.ts
 
-/**
+/
  * Generate the policy JSON template that IT admins paste into
  * Google Admin Console under Apps > Chrome > Apps & Extensions.
  *
@@ -449,7 +443,7 @@ function generatePolicyTemplate(extensionId: string): object {
   };
 }
 
-/**
+/
  * Self-report deployment information for admin dashboards.
  */
 async function reportDeploymentInfo(): Promise<{
@@ -476,7 +470,7 @@ async function reportDeploymentInfo(): Promise<{
   return info;
 }
 
-/**
+/
  * Verify the extension is running from the expected source.
  * Prevents sideloaded copies from connecting to corporate APIs.
  */
@@ -495,18 +489,17 @@ function verifyDeploymentIntegrity(): boolean {
 }
 ```
 
-**Gotchas:**
+Gotchas:
 - The `update_url` for Chrome Web Store extensions is always `https://clients2.google.com/service/update2/crx`. For self-hosted extensions (rare in enterprise), you must provide your own update XML endpoint.
 - Extensions published as "Private" in Chrome Web Store are only visible to users in the publisher's Google Workspace domain. This is the recommended distribution for internal enterprise tools.
 - Extension IDs change between development (unpacked) and production (CWS). Do not hardcode IDs in policy templates without noting this distinction.
 
 ---
 
-## 7. Reporting and Compliance Logging {#7-reporting-and-compliance-logging}
+7. Reporting and Compliance Logging {#7-reporting-and-compliance-logging}
 
 Log extension activity for enterprise audit trails and compliance monitoring.
 
-**Explanation:**
 Enterprise environments require detailed audit logs: who did what, when, and what policies were in effect. Your extension should log significant actions to an enterprise logging endpoint. The logging infrastructure must be resilient (queue and retry on network failure) and respectful of privacy policies.
 
 ```typescript
@@ -617,7 +610,7 @@ export const complianceLogger = new ComplianceLogger();
 // complianceLogger.log("data_exported", { format: "csv", recordCount: 1250 });
 ```
 
-**Gotchas:**
+Gotchas:
 - Service workers can be terminated at any time. Persist the audit queue to `chrome.storage.local` after every write so entries survive restarts.
 - Do not log sensitive user data (passwords, tokens, PII) unless your organization's privacy policy explicitly permits it and the data is encrypted in transit and at rest.
 - Rate-limit your logging endpoint calls. Batching entries and flushing on an interval (rather than per-event) prevents overwhelming the server and the extension's network budget.
@@ -625,11 +618,10 @@ export const complianceLogger = new ComplianceLogger();
 
 ---
 
-## 8. Handling Policy Changes at Runtime {#8-handling-policy-changes-at-runtime}
+8. Handling Policy Changes at Runtime {#8-handling-policy-changes-at-runtime}
 
 React to real-time policy updates pushed by administrators without requiring extension restart.
 
-**Explanation:**
 When an administrator changes a policy in Google Admin Console, Chrome propagates the change to the device on its next policy sync (typically within minutes). The `chrome.storage.managed.onChanged` event fires when policies update. Your extension should handle these changes gracefully, applying them immediately where possible and notifying the user when a restart is required.
 
 ```typescript
@@ -652,7 +644,7 @@ class PolicyChangeManager {
     );
   }
 
-  /**
+  /
    * Register a handler for changes to a specific policy key.
    */
   on(key: string, handler: PolicyChangeHandler): () => void {
@@ -669,7 +661,7 @@ class PolicyChangeManager {
     };
   }
 
-  /**
+  /
    * Register a handler for any policy change.
    */
   onAny(handler: PolicyChangeHandler): () => void {
@@ -747,7 +739,7 @@ policyManager.onAny(async (key, oldValue, newValue) => {
 });
 ```
 
-**Gotchas:**
+Gotchas:
 - `chrome.storage.managed.onChanged` does not fire on extension startup. You must do an initial read via `chrome.storage.managed.get()` to establish the baseline state.
 - Policy sync timing is controlled by Chrome and the enterprise admin console, not by your extension. Changes can take several minutes to propagate after an admin makes them.
 - Some policy changes (e.g., switching API endpoints or disabling major features) may require notifying the user. Use `chrome.notifications` to display a non-intrusive message rather than silently changing behavior.

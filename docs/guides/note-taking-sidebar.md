@@ -9,26 +9,26 @@ A note-taking sidebar extension provides users with a persistent panel to captur
 The extension follows a clean architecture with clear separation of concerns:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Side Panel (UI)                        │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │  Note List  │  │  Editor     │  │  Toolbar            │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                           │ Message Passing
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│              Background Service Worker                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │  Storage    │  │  Sync       │  │  Context Menu       │  │
-│  │  Manager    │  │  Service    │  │  Handler            │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   Chrome Storage (Sync)                     │
-└─────────────────────────────────────────────────────────────┘
+
+                      Side Panel (UI)                        
+        
+    Note List      Editor         Toolbar              
+        
+
+                            Message Passing
+                           
+
+              Background Service Worker                     
+        
+    Storage        Sync           Context Menu         
+    Manager        Service        Handler              
+        
+
+                           
+                           
+
+                   Chrome Storage (Sync)                     
+
 ```
 
 ## Manifest Configuration
@@ -501,11 +501,11 @@ test.describe('Note Taking Sidebar', () => {
 
 ## Best Practices
 
-1. **Auto-save**: Implement debounced auto-save to prevent excessive storage writes
-2. **Sync**: Use `chrome.storage.sync` for cross-device persistence
-3. **Performance**: Virtualize long note lists for better performance
-4. **Error handling**: Wrap storage operations in try-catch blocks
-5. **Security**: Sanitize note content before rendering to prevent XSS
+1. Auto-save: Implement debounced auto-save to prevent excessive storage writes
+2. Sync: Use `chrome.storage.sync` for cross-device persistence
+3. Performance: Virtualize long note lists for better performance
+4. Error handling: Wrap storage operations in try-catch blocks
+5. Security: Sanitize note content before rendering to prevent XSS
 ---
 
 ## Turn Your Extension Into a Business

@@ -17,11 +17,11 @@ If you have been building Chrome extensions with vanilla JavaScript or React, yo
 
 ---
 
-## Why SolidJS for Chrome Extensions? {#why-solidjs}
+Why SolidJS for Chrome Extensions? {#why-solidjs}
 
 Chrome extensions present unique challenges that make SolidJS an excellent choice. The popup interface must load quickly, respond instantly to user interactions, and maintain a small bundle size. Traditional React-based extensions often ship more JavaScript than necessary because React's virtual DOM diffing algorithm requires runtime overhead. SolidJS takes a fundamentally different approach that addresses these concerns directly.
 
-### Fine-Grained Reactivity Explained
+Fine-Grained Reactivity Explained
 
 SolidJS uses a reactive primitive system based on signals and effects. Unlike React's reconciliation process that re-renders entire component trees when state changes, SolidJS compiles reactive statements into direct DOM updates. When you modify a signal, only the specific DOM nodes bound to that signal receive updates. This surgical precision eliminates the overhead of virtual DOM diffing entirely.
 
@@ -51,7 +51,7 @@ function Popup() {
 
 This code looks similar to React, but under the hood, the compilation process transforms this into efficient DOM operations. The reactive primitives create subscriptions that connect directly to the DOM without intermediate virtual DOM representation.
 
-### Bundle Size Advantages
+Bundle Size Advantages
 
 SolidJS's small footprint is remarkable. The core library ships at approximately 7KB gzipped, compared to React's 40KB+ for the core plus additional bytes for ReactDOM. For Chrome extensions where every kilobyte affects load time and perceived performance, this difference is significant.
 
@@ -59,31 +59,31 @@ The implications extend beyond initial load times. Smaller bundles mean faster p
 
 ---
 
-## Setting Up Your SolidJS Chrome Extension Project {#project-setup}
+Setting Up Your SolidJS Chrome Extension Project {#project-setup}
 
 Creating a SolidJS-powered Chrome extension requires proper tooling configuration. While you can set up everything manually, using a template designed for this purpose accelerates development significantly.
 
-### Prerequisites and Installation
+Prerequisites and Installation
 
 Ensure you have Node.js installed, then create your project using a SolidJS-compatible bundler. Vite, the modern build tool, has excellent support for SolidJS through official plugins.
 
 ```bash
-# Create a new Vite project with SolidJS template
+Create a new Vite project with SolidJS template
 npm create vite@latest my-solid-extension -- --template solid-ts
 
-# Navigate to the project
+Navigate to the project
 cd my-solid-extension
 
-# Install dependencies
+Install dependencies
 npm install
 
-# Install Chrome extension-related dependencies
+Install Chrome extension-related dependencies
 npm install -D vite-plugin-chrome-extension-manifest
 ```
 
 The `vite-plugin-chrome-extension-manifest` plugin handles the complexities of generating the `manifest.json` file from your configuration, ensuring Manifest V3 compliance while keeping your extension architecture clean.
 
-### Configuring Vite for Chrome Extensions
+Configuring Vite for Chrome Extensions
 
 Modify your `vite.config.ts` to properly build a Chrome extension:
 
@@ -125,11 +125,11 @@ This configuration generates a proper Chrome extension structure with Manifest V
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the most common extension UI component, serving as the primary interaction point for users. SolidJS excels at building responsive, data-driven popup interfaces.
 
-### Creating Reactive Components
+Creating Reactive Components
 
 Building a feature-rich popup requires organizing your code into reusable components. SolidJS's component model encourages composition while maintaining the performance benefits of fine-grained reactivity.
 
@@ -193,9 +193,9 @@ export function TabInfo() {
 
 This component demonstrates SolidJS's control flow components: `<Show>` for conditional rendering and `<For>` for lists. Unlike React's map function that requires keys for reconciliation, Solid's `<For>` component optimizes list rendering by tracking items through references.
 
-### State Management with Stores
+State Management with Stores
 
-For more complex extensions with multiple related state values, SolidJS provides stores that work seamlessly with the reactivity system.
+For more complex extensions with multiple related state values, SolidJS provides stores that work smoothly with the reactivity system.
 
 ```typescript
 // stores/extensionStore.ts
@@ -239,11 +239,11 @@ The store's nested reactivity allows fine-grained updates. Changing `state.setti
 
 ---
 
-## Communicating with Background Scripts {#background-communication}
+Communicating with Background Scripts {#background-communication}
 
 Chrome extensions use message passing for communication between content scripts, popup, and background service workers. SolidJS provides patterns that make this communication elegant and type-safe.
 
-### Setting Up Message Handling
+Setting Up Message Handling
 
 Create a messaging system that leverages TypeScript for type safety across your extension:
 
@@ -280,7 +280,7 @@ export function useMessageSender() {
 }
 ```
 
-### Integrating with Background Scripts
+Integrating with Background Scripts
 
 Your background service worker can handle messages from the popup:
 
@@ -311,11 +311,11 @@ This pattern maintains clean separation between your SolidJS popup and the exten
 
 ---
 
-## Content Script Integration {#content-scripts}
+Content Script Integration {#content-scripts}
 
 SolidJS can also power content scripts that run within web pages, though the approach differs slightly from popup development due to the isolated world context.
 
-### Mounting SolidJS in Content Scripts
+Mounting SolidJS in Content Scripts
 
 Content scripts share the page's DOM but run in an isolated JavaScript context. To render SolidJS components in this environment:
 
@@ -339,11 +339,11 @@ The content script approach works well for overlay widgets, page analyzers, and 
 
 ---
 
-## Performance Optimization Techniques {#performance-optimization}
+Performance Optimization Techniques {#performance-optimization}
 
 Building performant Chrome extensions requires attention to several optimization strategies specific to the extension environment.
 
-### Lazy Loading and Code Splitting
+Lazy Loading and Code Splitting
 
 Vite automatically code-splits based on dynamic imports, but you can further optimize by lazy loading non-critical components:
 
@@ -368,7 +368,7 @@ function Popup() {
 }
 ```
 
-### Memoization with createMemo
+Memoization with createMemo
 
 For expensive computations that depend on reactive data, `createMemo` caches results and only recalculates when dependencies change:
 
@@ -402,11 +402,11 @@ This pattern prevents unnecessary recalculations, crucial for extensions that pr
 
 ---
 
-## Testing Your SolidJS Extension {#testing}
+Testing Your SolidJS Extension {#testing}
 
 Reliable extensions require thorough testing across multiple contexts: popup, content scripts, and background workers.
 
-### Unit Testing Components
+Unit Testing Components
 
 SolidJS components can be tested using solid-testing-library:
 
@@ -422,7 +422,7 @@ describe('TabInfo', () => {
 });
 ```
 
-### Extension-Specific Testing
+Extension-Specific Testing
 
 Chrome provides testing utilities that work well with SolidJS:
 
@@ -439,11 +439,11 @@ describe('Extension Popup', () => {
 
 ---
 
-## Deployment and Publishing {#deployment}
+Deployment and Publishing {#deployment}
 
 Once your SolidJS extension is ready, building for production follows standard Chrome Web Store procedures with some considerations for framework-based extensions.
 
-### Production Build
+Production Build
 
 Generate the production build with optimizations:
 
@@ -453,16 +453,16 @@ npm run build
 
 The output in the `dist` folder contains your extension files ready for packaging. Review the generated manifest and ensure all required files are included.
 
-### Chrome Web Store Submission
+Chrome Web Store Submission
 
 When submitting your extension, highlight SolidJS benefits in your description: blazing-fast performance, small bundle size, and modern development experience. The store listing should emphasize the user-facing benefits while your documentation can explore the technical advantages.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 SolidJS offers a compelling framework for Chrome extension development, bringing fine-grained reactivity to browser extension UI in a way that outperforms traditional virtual DOM approaches. The combination of small bundle sizes, direct DOM updates, and a gentle learning curve for developers familiar with React makes SolidJS an excellent choice for your next extension project.
 
-The patterns covered in this guide—reactive components, stores for state management, message passing for background communication, and performance optimization techniques—provide a solid foundation for building production-ready Chrome extensions. As the extension ecosystem continues to evolve, SolidJS's compiler-first approach positions your extensions for the future while delivering exceptional user experiences today.
+The patterns covered in this guide, reactive components, stores for state management, message passing for background communication, and performance optimization techniques, provide a solid foundation for building production-ready Chrome extensions. As the extension ecosystem continues to evolve, SolidJS's compiler-first approach positions your extensions for the future while delivering exceptional user experiences today.
 
 Start building with SolidJS and experience the difference that true reactive UI makes in Chrome extension development.

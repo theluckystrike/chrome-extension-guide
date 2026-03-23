@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Cleanup Patterns — Best Practices"
+title: "Chrome Extension Extension Cleanup Patterns. Best Practices"
 description: "Clean up resources when extensions or tabs are closed."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-cleanup-patterns/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-cleanup-patt
 
 Proper cleanup ensures extensions leave no trace when disabled, uninstalled, or updated. This document covers essential patterns for graceful shutdown.
 
-## Uninstall URL {#uninstall-url}
+Uninstall URL {#uninstall-url}
 
 Set an exit survey URL when users uninstall your extension:
 
@@ -18,7 +18,7 @@ Set an exit survey URL when users uninstall your extension:
 chrome.runtime.setUninstallURL('https://yourdomain.com/uninstall-survey');
 ```
 
-## Content Script Cleanup {#content-script-cleanup}
+Content Script Cleanup {#content-script-cleanup}
 
 Remove injected elements, event listeners, and observers when content scripts unload:
 
@@ -70,7 +70,7 @@ cleanup.addObserver(observer);
 window.addEventListener('unload', () => cleanup.cleanup());
 ```
 
-## Service Worker State Preservation {#service-worker-state-preservation}
+Service Worker State Preservation {#service-worker-state-preservation}
 
 Save state before the service worker terminates:
 
@@ -85,7 +85,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-## Port Disconnect Handling {#port-disconnect-handling}
+Port Disconnect Handling {#port-disconnect-handling}
 
 Clean up when communication ports are disconnected:
 
@@ -102,7 +102,7 @@ chrome.runtime.onConnect.addListener(port => {
 });
 ```
 
-## Alarm Cleanup {#alarm-cleanup}
+Alarm Cleanup {#alarm-cleanup}
 
 Clear all alarms when a feature is disabled:
 
@@ -114,7 +114,7 @@ function disableFeature(featureId) {
 }
 ```
 
-## Context Menu Cleanup {#context-menu-cleanup}
+Context Menu Cleanup {#context-menu-cleanup}
 
 Remove all context menu items:
 
@@ -125,7 +125,7 @@ chrome.contextMenus.removeAll(() => {
 });
 ```
 
-## Storage Migration Cleanup {#storage-migration-cleanup}
+Storage Migration Cleanup {#storage-migration-cleanup}
 
 Remove obsolete keys during version upgrades:
 
@@ -142,7 +142,7 @@ chrome.runtime.onInstalled.addListener(details => {
 });
 ```
 
-## Tab Cleanup {#tab-cleanup}
+Tab Cleanup {#tab-cleanup}
 
 Close extension-opened tabs on uninstall:
 
@@ -155,7 +155,7 @@ chrome.runtime.onUninstalled.addListener(() => {
 });
 ```
 
-## CSS Cleanup {#css-cleanup}
+CSS Cleanup {#css-cleanup}
 
 Remove dynamically injected styles:
 
@@ -171,7 +171,7 @@ chrome.runtime.onMessage.addListener(msg => {
 });
 ```
 
-## Memory Leak Prevention {#memory-leak-prevention}
+Memory Leak Prevention {#memory-leak-prevention}
 
 Nullify references and clear intervals:
 
@@ -185,7 +185,7 @@ intervalId = null;
 someObject.reference = null;
 ```
 
-## Comprehensive Cleanup Manager {#comprehensive-cleanup-manager}
+Comprehensive Cleanup Manager {#comprehensive-cleanup-manager}
 
 ```javascript
 // cleanup-manager.js
@@ -221,7 +221,7 @@ manager.register(() => chrome.notifications.clear());
 manager.executeAll();
 ```
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Service Worker Lifecycle](../patterns/service-worker-lifecycle.md)
 - [Content Script Lifecycle](../patterns/content-script-lifecycle.md)

@@ -1,6 +1,6 @@
 # VPN Extension Patterns
 
-Building a VPN extension requires understanding the unique constraints and capabilities of browser extensions. Unlike traditional VPN applications, Chrome extensions operate within the browser's security sandbox while still providing powerful network control capabilities. This guide explores the architectural patterns and implementation strategies for creating robust VPN extensions using Chrome's Proxy API and related APIs.
+Building a VPN extension requires understanding the unique constraints and capabilities of browser extensions. Unlike traditional VPN applications, Chrome extensions operate within the browser's security sandbox while still providing powerful network control capabilities. This guide explores the architectural patterns and implementation strategies for creating solid VPN extensions using Chrome's Proxy API and related APIs.
 
 ## Table of Contents
 
@@ -20,37 +20,37 @@ A VPN extension in Chrome doesn't create a true VPN tunnel in the traditional se
 
 The architecture consists of three main components:
 
-1. **Popup UI**: User interface for connecting/disconnecting and viewing status
-2. **Service Worker**: Handles proxy configuration and maintains connection state
-3. **Background Logic**: Manages server communication, authentication, and tunnel establishment
+1. Popup UI: User interface for connecting/disconnecting and viewing status
+2. Service Worker: Handles proxy configuration and maintains connection state
+3. Background Logic: Manages server communication, authentication, and tunnel establishment
 
 ### Directory Structure
 
 ```
 vpn-extension/
-├── manifest.json
-├── background/
-│   └── service-worker.ts
-├── popup/
-│   ├── popup.html
-│   ├── popup.ts
-│   └── popup.css
-├── shared/
-│   ├── types.ts
-│   └── constants.ts
-└── icons/
-    ├── icon-16.png
-    ├── icon-48.png
-    └── icon-128.png
+ manifest.json
+ background/
+    service-worker.ts
+ popup/
+    popup.html
+    popup.ts
+    popup.css
+ shared/
+    types.ts
+    constants.ts
+ icons/
+     icon-16.png
+     icon-48.png
+     icon-128.png
 ```
 
 ---
 
-## Chrome Proxy API Fundamentals
+Chrome Proxy API Fundamentals
 
 The `chrome.proxy` API is the core of any VPN extension. It allows you to configure Chrome's proxy settings programmatically.
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -77,7 +77,7 @@ The `chrome.proxy` API is the core of any VPN extension. It allows you to config
 }
 ```
 
-### Basic Proxy Configuration
+Basic Proxy Configuration
 
 ```typescript
 // shared/types.ts
@@ -108,7 +108,7 @@ export interface VPNState {
 
 ---
 
-## Service Worker Implementation
+Service Worker Implementation
 
 The service worker handles all proxy-related operations and maintains the extension's state.
 
@@ -313,9 +313,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Connection Management Patterns
+Connection Management Patterns
 
-For a production VPN extension, you need robust connection management that handles network changes, automatic reconnection, and server switching.
+For a production VPN extension, you need solid connection management that handles network changes, automatic reconnection, and server switching.
 
 ```typescript
 // background/connection-manager.ts
@@ -417,9 +417,9 @@ export class ConnectionManager {
 
 ---
 
-## UI State Management
+UI State Management
 
-The popup UI needs to reflect the current VPN state and provide seamless user interaction.
+The popup UI needs to reflect the current VPN state and provide smooth user interaction.
 
 ```typescript
 // popup/popup.ts
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Error Handling and Fallback
+Error Handling and Fallback
 
 Robust error handling is critical for VPN extensions, as network conditions can change unexpectedly.
 
@@ -636,19 +636,19 @@ export class VPNErrorHandler {
 
 ---
 
-## Security Considerations
+Security Considerations
 
 When building VPN extensions, security must be a top priority.
 
-### Key Security Practices
+Key Security Practices
 
-1. **Credential Storage**: Never store credentials in plain text. Use `chrome.storage.encrypted` or server-side token management.
+1. Credential Storage: Never store credentials in plain text. Use `chrome.storage.encrypted` or server-side token management.
 
-2. **Secure Communication**: Always use TLS 1.3+ for communication with VPN servers.
+2. Secure Communication: Always use TLS 1.3+ for communication with VPN servers.
 
-3. **Minimal Permissions**: Request only the permissions your extension absolutely needs.
+3. Minimal Permissions: Request only the permissions your extension absolutely needs.
 
-4. **Code Obfuscation**: Consider obfuscating sensitive logic in production builds.
+4. Code Obfuscation: Consider obfuscating sensitive logic in production builds.
 
 ```typescript
 // background/security.ts
@@ -690,14 +690,14 @@ export class SecurityManager {
 
 ---
 
-## Conclusion
+Conclusion
 
 Building a VPN extension requires careful consideration of Chrome's proxy API, service worker lifecycle management, and network error handling. The patterns outlined in this guide provide a solid foundation for creating reliable, secure VPN extensions.
 
 Key takeaways:
 - Use the Proxy API for traffic routing
-- Implement robust reconnection logic for network changes
+- Implement solid reconnection logic for network changes
 - Maintain clean state management between popup and service worker
 - Prioritize security in credential handling and server communication
 
-With these patterns, you can create a VPN extension that provides a seamless and secure browsing experience for your users.
+With these patterns, you can create a VPN extension that provides a smooth and secure browsing experience for your users.

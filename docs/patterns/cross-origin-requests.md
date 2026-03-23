@@ -1,22 +1,22 @@
 ---
 layout: default
-title: "Chrome Extension Cross Origin Requests — Best Practices"
+title: "Chrome Extension Cross Origin Requests. Best Practices"
 description: "Handle cross-origin requests in Chrome extensions with CORS workarounds and background fetch patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/cross-origin-requests/"
 ---
 
 # Cross-Origin Request Patterns for Chrome Extensions
 
-This guide covers making cross-origin HTTP requests from Chrome extensions, including permission configuration, content script limitations, and robust request handling patterns.
+This guide covers making cross-origin HTTP requests from Chrome extensions, including permission configuration, content script limitations, and solid request handling patterns.
 
-## Extension Privileges vs Content Scripts {#extension-privileges-vs-content-scripts}
+Extension Privileges vs Content Scripts {#extension-privileges-vs-content-scripts}
 
 Chrome extensions have different CORS capabilities depending on where the code runs:
 
-- **Background service worker, popup, and options pages**: Can use `fetch()` or `XMLHttpRequest` to request any URL that matches declared `host_permissions` in manifest.json—no CORS restrictions apply
-- **Content scripts**: Are subject to the parent page's CORS policy and cannot make direct cross-origin requests; must relay through the background service worker
+- Background service worker, popup, and options pages: Can use `fetch()` or `XMLHttpRequest` to request any URL that matches declared `host_permissions` in manifest.json, no CORS restrictions apply
+- Content scripts: Are subject to the parent page's CORS policy and cannot make direct cross-origin requests; must relay through the background service worker
 
-## Host Permissions Configuration {#host-permissions-configuration}
+Host Permissions Configuration {#host-permissions-configuration}
 
 Declare required host permissions in your manifest:
 
@@ -31,13 +31,13 @@ Declare required host permissions in your manifest:
 }
 ```
 
-Use `<all_urls>` sparingly—it grants access to all websites:
+Use `<all_urls>` sparingly, it grants access to all websites:
 
 ```json
 "host_permissions": ["<all_urls>"]
 ```
 
-### Optional Host Permissions {#optional-host-permissions}
+Optional Host Permissions {#optional-host-permissions}
 
 Request permissions on-demand for extensions in the Chrome Web Store:
 
@@ -50,7 +50,7 @@ async function requestHostPermission(host) {
 }
 ```
 
-## Fetch from Service Worker {#fetch-from-service-worker}
+Fetch from Service Worker {#fetch-from-service-worker}
 
 The background service worker uses the standard Fetch API with no CORS restrictions when proper host permissions are declared:
 
@@ -69,7 +69,7 @@ async function fetchFromBackground(url, options = {}) {
 }
 ```
 
-## Cookie Handling {#cookie-handling}
+Cookie Handling {#cookie-handling}
 
 Access cookies in cross-origin requests using the `credentials` option:
 
@@ -95,9 +95,9 @@ async function setCookie(url, name, value) {
 }
 ```
 
-## Error Handling Patterns {#error-handling-patterns}
+Error Handling Patterns {#error-handling-patterns}
 
-Implement robust error handling for network failures, HTTP errors, and timeouts:
+Implement solid error handling for network failures, HTTP errors, and timeouts:
 
 ```javascript
 async function fetchWithTimeout(url, options = {}, timeout = 10000) {
@@ -134,7 +134,7 @@ class HttpError extends Error {
 }
 ```
 
-## Caching Responses {#caching-responses}
+Caching Responses {#caching-responses}
 
 Cache API responses using the Cache API or chrome.storage for offline support:
 
@@ -164,7 +164,7 @@ function isFresh(response) {
 }
 ```
 
-## Rate Limiting {#rate-limiting}
+Rate Limiting {#rate-limiting}
 
 Implement rate limiting to avoid API bans:
 
@@ -190,7 +190,7 @@ const rateLimiter = {
 };
 ```
 
-## Request Queuing {#request-queuing}
+Request Queuing {#request-queuing}
 
 Queue sequential API calls to maintain order:
 
@@ -212,7 +212,7 @@ async function queuedFetch(url) {
 }
 ```
 
-## Authentication Headers {#authentication-headers}
+Authentication Headers {#authentication-headers}
 
 Add Bearer tokens or API keys to requests:
 
@@ -229,7 +229,7 @@ async function fetchWithAuth(url, token, options = {}) {
 }
 ```
 
-## Content Script Proxy Pattern {#content-script-proxy-pattern}
+Content Script Proxy Pattern {#content-script-proxy-pattern}
 
 Content scripts must relay requests through the background:
 
@@ -255,7 +255,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Web Request Patterns](/guides/web-request-patterns.md)
 - [Network Interception](/patterns/network-interception.md)

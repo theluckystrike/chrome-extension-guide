@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension GitHub Actions CI/CD — Developer Guide"
+title: "Chrome Extension GitHub Actions CI/CD. Developer Guide"
 description: "Learn Chrome extension github actions ci/cd with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/github-actions-extension-ci-cd/"
 ---
@@ -8,7 +8,7 @@ canonical_url: "https://bestchromeextensions.com/guides/github-actions-extension
 
 Automating your extension pipeline with GitHub Actions eliminates manual build steps, reduces human error, and gives you confidence that every change works before it reaches users. This guide walks through setting up continuous integration and deployment for a Chrome extension project.
 
-## Getting Started with Workflows {#getting-started-with-workflows}
+Getting Started with Workflows {#getting-started-with-workflows}
 
 GitHub Actions uses workflow files stored in `.github/workflows/` at your repository root. Each workflow is a YAML file that defines triggers, jobs, and steps. For extensions, you'll typically want workflows that run on pull requests and pushes to your main branch.
 
@@ -43,7 +43,7 @@ jobs:
       - run: npm test
 ```
 
-## Linting and Type Checking in CI {#linting-and-type-checking-in-ci}
+Linting and Type Checking in CI {#linting-and-type-checking-in-ci}
 
 Linting catches stylistic issues and potential bugs before they reach production. ESLint is the standard choice for JavaScript and TypeScript projects, and most extension frameworks come with sensible defaults. Run linting as a separate step in your workflow so failures are clear.
 
@@ -51,7 +51,7 @@ Type checking with TypeScript adds another layer of safety. Even if your product
 
 Consider running linting and type checking in parallel with your build step if your setup supports it. This reduces overall CI time while still catching all issues before merge.
 
-## End-to-End Testing with Headless Chrome {#end-to-end-testing-with-headless-chrome}
+End-to-End Testing with Headless Chrome {#end-to-end-testing-with-headless-chrome}
 
 Unit tests verify individual functions work correctly, but extensions interact with browser APIs and web pages in complex ways. End-to-end tests run your extension in a real browser environment, loading the extension and interacting with it as a user would.
 
@@ -76,7 +76,7 @@ const { chromium } = require('playwright');
 
 Run these tests in your CI pipeline on every pull request. Use headless mode since CI environments typically don't have displays. Make sure your build step produces the extension files before the test step runs.
 
-## Building and Packaging the Zip {#building-and-packaging-the-zip}
+Building and Packaging the Zip {#building-and-packaging-the-zip}
 
 Chrome Web Store requires a zip file containing your extension. Most build tools like Vite, Webpack, or Rollup can produce this, but you may need a separate step to create the archive. The extension contents must include your manifest.json, all JavaScript files, CSS, HTML, and assets.
 
@@ -92,7 +92,7 @@ Chrome Web Store requires a zip file containing your extension. Most build tools
 
 Store the generated zip as a workflow artifact so you can download and test it manually before publishing. This artifact also serves as a build record you can reference later if you need to debug issues with a specific release.
 
-## Automated Publishing to Chrome Web Store {#automated-publishing-to-chrome-web-store}
+Automated Publishing to Chrome Web Store {#automated-publishing-to-chrome-web-store}
 
 Manual uploads to the Chrome Web Store are time-consuming and error-prone. The chrome-webstore-upload-cli package automates this process, taking your credentials and zip file and handling the upload for you. You'll need to obtain your Chrome Web Store developer credentials and store them as secrets in your GitHub repository.
 
@@ -113,7 +113,7 @@ Manual uploads to the Chrome Web Store are time-consuming and error-prone. The c
 
 This workflow publishes only when you create a version tag, giving you control over when releases go live. The publish-target option lets you publish to the default track, test track, or internal testing depending on your needs.
 
-## Multi-Browser Build Matrix {#multi-browser-build-matrix}
+Multi-Browser Build Matrix {#multi-browser-build-matrix}
 
 If your extension targets multiple browsers, run your CI pipeline across all of them. GitHub Actions matrix strategy lets you define multiple browser environments and run tests in each one. Firefox uses the same extension format as Chrome for Manifest V2, but Manifest V3 extensions may need adjustments.
 
@@ -133,13 +133,13 @@ jobs:
 
 Testing across browsers catches API differences and ensures your extension works for all users regardless of their browser choice.
 
-## PR Preview Builds {#pr-preview-builds}
+PR Preview Builds {#pr-preview-builds}
 
 Every pull request should produce a downloadable artifact that reviewers can load and test. This preview build lets team members verify changes work as expected before merging. Store the extension zip as an artifact and provide a link in the PR comments.
 
 GitHub Actions can automatically comment on pull requests with download links using the pull-request action. This makes it easy for reviewers to grab the latest build and install it in their browser.
 
-## Version Bumping Automation {#version-bumping-automation}
+Version Bumping Automation {#version-bumping-automation}
 
 Keeping version numbers synchronized across package.json, manifest.json, and git tags is tedious. Tools like standard-version or release-please automate this process. When you're ready to release, these tools bump the version, generate a changelog, and create a git tag.
 
@@ -151,7 +151,7 @@ Keeping version numbers synchronized across package.json, manifest.json, and git
 
 Combine version bumping with your publishing workflow so that tagging a release automatically bumps the version, builds the extension, and publishes it to the Chrome Web Store.
 
-## Summary {#summary}
+Summary {#summary}
 
 Setting up CI/CD for your extension takes some initial effort but pays dividends quickly. Every pull request gets validated automatically, your extension builds consistently, and publishing becomes a single command. As your project grows, add more sophisticated checks like security scanning, performance benchmarking, and automated accessibility testing.
 
@@ -159,9 +159,9 @@ For extensions that need to reach users quickly and reliably, GitHub Actions pro
 
 If you're looking to streamline your extension development workflow further, zovo.one offers additional tools and resources for modern extension development.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md)
 - [Automated Publishing](../guides/chrome-extension-automated-publishing.md)

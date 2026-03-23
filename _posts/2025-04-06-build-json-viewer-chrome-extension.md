@@ -15,7 +15,7 @@ Working with JSON data is an everyday task for web developers. Whether you are d
 
 By the end of this guide, you will have created an extension that automatically detects JSON content on web pages, formats it with syntax highlighting, allows collapsible tree navigation, and provides copy functionality. This is a practical project that will teach you essential Chrome extension development skills while producing a tool you can actually use in your daily development workflow.
 
-## Why Build a JSON Viewer Extension? {#why-build-json-viewer}
+Why Build a JSON Viewer Extension? {#why-build-json-viewer}
 
 JSON (JavaScript Object Notation) has become the universal data format for web APIs. However, raw JSON responses are often minified, compressed into a single line, and virtually impossible to read without formatting. While browser developer tools do include JSON formatting capabilities, they require manual navigation and often lack features like search, collapsible sections, and customizable themes.
 
@@ -23,7 +23,7 @@ Building your own JSON viewer extension gives you complete control over the user
 
 The Chrome Web Store already has JSON viewer extensions with millions of downloads, demonstrating strong user demand. However, building your own gives you the freedom to create something unique, learn the underlying concepts, and potentially publish your own version if you add innovative features.
 
-## Project Overview and Features {#project-overview}
+Project Overview and Features {#project-overview}
 
 Before writing any code, let us define what our JSON viewer extension will do. We will build an extension with the following features:
 
@@ -39,7 +39,7 @@ Fifth, theme support. The extension will include both light and dark themes to a
 
 These features provide a solid foundation while keeping the project manageable for a tutorial. You can always add more advanced features later, such as JSON validation, search functionality, or JSONPath queries.
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension needs a well-organized structure. Let us set up our project files. Create a new folder for your extension and add the following files:
 
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 The popup script handles button clicks and sends messages to the content script. It also manages the auto-format setting using Chrome's storage API.
 
-## Implementing the Content Script {#content-script}
+Implementing the Content Script {#content-script}
 
 The content script is where the real magic happens. This script runs on web pages and handles JSON detection, formatting, and rendering. Let us create content.js:
 
@@ -367,7 +367,7 @@ function createTreeView(data, key = null) {
     
     const header = document.createElement('span');
     header.className = 'json-toggle';
-    header.textContent = '▼ ';
+    header.textContent = ' ';
     const bracket = document.createElement('span');
     bracket.textContent = '[';
     header.appendChild(bracket);
@@ -377,7 +377,7 @@ function createTreeView(data, key = null) {
     items.className = 'json-children';
     
     if (data.length === 0) {
-      header.innerHTML = '▼ []';
+      header.innerHTML = ' []';
     } else {
       data.forEach((item, index) => {
         const itemContainer = document.createElement('div');
@@ -402,7 +402,7 @@ function createTreeView(data, key = null) {
     header.addEventListener('click', function() {
       this.classList.toggle('collapsed');
       items.style.display = this.classList.contains('collapsed') ? 'none' : 'block';
-      this.textContent = this.classList.contains('collapsed') ? '▶ ' : '▼ ';
+      this.textContent = this.classList.contains('collapsed') ? ' ' : ' ';
     });
     
     return wrapper;
@@ -420,7 +420,7 @@ function createTreeView(data, key = null) {
       header.textContent = '{}';
       wrapper.appendChild(header);
     } else {
-      header.textContent = '▼ {';
+      header.textContent = ' {';
       wrapper.appendChild(header);
       
       const items = document.createElement('div');
@@ -449,7 +449,7 @@ function createTreeView(data, key = null) {
     header.addEventListener('click', function() {
       this.classList.toggle('collapsed');
       items.style.display = this.classList.contains('collapsed') ? 'none' : 'block';
-      this.textContent = this.classList.contains('collapsed') ? '▶ {' : '▼ {';
+      this.textContent = this.classList.contains('collapsed') ? ' {' : ' {';
     });
     
     return wrapper;
@@ -575,7 +575,7 @@ chrome.storage.local.get(['autoFormat'], function(result) {
 
 This content script is comprehensive and handles multiple JSON detection methods. It creates a collapsible tree view with syntax highlighting and includes all necessary styles.
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we have created all the necessary files, let us test the extension. Open Chrome and navigate to chrome://extensions/. Enable Developer mode in the top right corner if it is not already enabled. Click the Load unpacked button and select your extension folder.
 
@@ -583,7 +583,7 @@ Once loaded, you should see the JSON Viewer Pro icon in your Chrome toolbar. Nav
 
 If you encounter issues, right-click the extension icon and select Inspect popup to view console logs. Common issues include missing files, incorrect file paths in the manifest, or JavaScript errors in the content script.
 
-## Enhancing Your Extension {#enhancements}
+Enhancing Your Extension {#enhancements}
 
 Now that you have a working JSON viewer, consider adding these enhancements to make it even more useful:
 
@@ -597,13 +597,13 @@ Fourth, export options. Add buttons to download the formatted JSON as a file or 
 
 Fifth, URL patterns. Modify the content script to only run on specific URLs where JSON is commonly found, improving performance on other pages.
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you are satisfied with your extension, you can publish it to the Chrome Web Store. Create a zip file of your extension folder (excluding any development files). Sign in to the Chrome Web Store Developer Dashboard, add a new item, upload your zip file, and fill in the store listing details including name, description, and screenshots.
 
 The publishing process includes a review period where Google checks for policy violations. Ensure your extension follows the Chrome Web Store policies, particularly around user data handling and functionality.
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 You have successfully built a fully functional JSON viewer Chrome extension from scratch. This project covered essential Chrome extension development concepts including Manifest V3 configuration, popup development, content scripts, message passing between components, and dynamic DOM manipulation.
 
@@ -611,4 +611,4 @@ The extension you built includes automatic JSON detection, pretty printing with 
 
 JSON viewer extensions remain one of the most popular categories in the Chrome Web Store, indicating strong ongoing demand. With the foundation you have built in this tutorial, you have everything you need to enhance this extension further or build other Chrome extensions for different use cases.
 
-Remember that the best extensions solve real problems. As you continue developing, consider what pain points you encounter in your daily development work and how you might build tools to address them. Chrome extension development is an incredibly accessible way to create software that impacts millions of users worldwide.
+Remember that the best extensions solve real problems. As you continue developing, consider what problems you encounter in your daily development work and how you might build tools to address them. Chrome extension development is an incredibly accessible way to create software that impacts millions of users worldwide.

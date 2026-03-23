@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Manifest V3 Fields — Developer Guide"
+title: "Chrome Extension Manifest V3 Fields. Developer Guide"
 description: "Learn Chrome extension manifest v3 fields with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-fields/"
 ---
@@ -12,7 +12,7 @@ Every field available in a Chrome Extension MV3 manifest.json, explained with va
 
 ---
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 1. [Required Fields](#1-required-fields)
 2. [Recommended Fields](#2-recommended-fields)
@@ -36,9 +36,9 @@ Every field available in a Chrome Extension MV3 manifest.json, explained with va
 
 ---
 
-## 1. Required Fields {#1-required-fields}
+1. Required Fields {#1-required-fields}
 
-### manifest_version {#manifest-version}
+manifest_version {#manifest-version}
 
 ```json
 { "manifest_version": 3 }
@@ -46,7 +46,7 @@ Every field available in a Chrome Extension MV3 manifest.json, explained with va
 
 Must be the integer `3`. MV2 is deprecated and blocked on the Chrome Web Store.
 
-### name {#name}
+name {#name}
 
 ```json
 { "name": "My Extension" }
@@ -54,7 +54,7 @@ Must be the integer `3`. MV2 is deprecated and blocked on the Chrome Web Store.
 
 Display name shown in the Web Store, toolbar, and `chrome://extensions`. Max 75 characters. Supports `__MSG_name__` for i18n.
 
-### version {#version}
+version {#version}
 
 ```json
 { "version": "1.2.3" }
@@ -66,9 +66,9 @@ Valid: `"1"`, `"1.0"`, `"1.0.0"`, `"1.0.0.1"`. Invalid: `"1.0.0-beta"`, `"v1.0"`
 
 ---
 
-## 2. Recommended Fields {#2-recommended-fields}
+2. Recommended Fields {#2-recommended-fields}
 
-### description {#description}
+description {#description}
 
 ```json
 { "description": "A short summary of what this extension does" }
@@ -76,7 +76,7 @@ Valid: `"1"`, `"1.0"`, `"1.0.0"`, `"1.0.0.1"`. Invalid: `"1.0.0-beta"`, `"v1.0"`
 
 Max 132 characters. Shown in Web Store and `chrome://extensions`.
 
-### icons {#icons}
+icons {#icons}
 
 ```json
 { "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" } }
@@ -91,7 +91,7 @@ Max 132 characters. Shown in Web Store and `chrome://extensions`.
 
 PNG format. SVG not supported. Missing sizes are scaled from nearest available.
 
-### default_locale {#default-locale}
+default_locale {#default-locale}
 
 ```json
 { "default_locale": "en" }
@@ -99,7 +99,7 @@ PNG format. SVG not supported. Missing sizes are scaled from nearest available.
 
 Required if `_locales/` directory exists. Must match a subdirectory name.
 
-### version_name {#version-name}
+version_name {#version-name}
 
 ```json
 { "version_name": "1.2.3 beta" }
@@ -109,7 +109,7 @@ Human-readable version for display. Does not affect update logic.
 
 ---
 
-## 3. action {#3-action}
+3. action {#3-action}
 
 Toolbar button. Replaces MV2's `browser_action` and `page_action`.
 
@@ -133,7 +133,7 @@ If `default_popup` is omitted, `chrome.action.onClicked` fires on click. If set,
 
 ---
 
-## 4. background {#4-background}
+4. background {#4-background}
 
 ```json
 { "background": { "service_worker": "background.js", "type": "module" } }
@@ -148,7 +148,7 @@ Only one entry point. Use modules or a bundler for multiple files. No DOM, no `w
 
 ---
 
-## 5. content_scripts {#5-content-scripts}
+5. content_scripts {#5-content-scripts}
 
 ```json
 {
@@ -182,13 +182,13 @@ Only one entry point. Use modules or a bundler for multiple files. No DOM, no `w
 | `include_globs` | string[] | `[]` | Additional glob filter (must also match `matches`) |
 | `exclude_globs` | string[] | `[]` | Glob patterns to skip |
 
-**run_at**: `document_start` runs after CSS but before DOM/scripts. `document_end` runs after DOM completes (like DOMContentLoaded). `document_idle` runs after `document_end` or `window.onload`, whichever is first.
+run_at: `document_start` runs after CSS but before DOM/scripts. `document_end` runs after DOM completes (like DOMContentLoaded). `document_idle` runs after `document_end` or `window.onload`, whichever is first.
 
 ---
 
-## 6. permissions, optional_permissions, host_permissions {#6-permissions-optional-permissions-host-permissions}
+6. permissions, optional_permissions, host_permissions {#6-permissions-optional-permissions-host-permissions}
 
-### permissions {#permissions}
+permissions {#permissions}
 
 Granted at install. User sees these during installation.
 
@@ -203,7 +203,7 @@ Key notes:
 - `tabs` -- needed for `Tab.url`, `Tab.title`, `Tab.favIconUrl`
 - `unlimitedStorage` -- removes 10 MB limit on `chrome.storage.local`
 
-### optional_permissions {#optional-permissions}
+optional_permissions {#optional-permissions}
 
 Requested at runtime via `chrome.permissions.request()`. Not shown at install.
 
@@ -211,7 +211,7 @@ Requested at runtime via `chrome.permissions.request()`. Not shown at install.
 { "optional_permissions": ["bookmarks", "history"] }
 ```
 
-### host_permissions {#host-permissions}
+host_permissions {#host-permissions}
 
 URL patterns for sites the extension can access.
 
@@ -221,7 +221,7 @@ URL patterns for sites the extension can access.
 
 Match pattern format: `<scheme>://<host>/<path>`. Special: `<all_urls>`. In MV3, users can restrict host access at runtime.
 
-### optional_host_permissions {#optional-host-permissions}
+optional_host_permissions {#optional-host-permissions}
 
 ```json
 { "optional_host_permissions": ["https://*/*"] }
@@ -231,7 +231,7 @@ Request at runtime with `chrome.permissions.request({ origins: [...] })`.
 
 ---
 
-## 7. web_accessible_resources {#7-web-accessible-resources}
+7. web_accessible_resources {#7-web-accessible-resources}
 
 Files web pages can access via `chrome.runtime.getURL()`.
 
@@ -259,7 +259,7 @@ Either `matches` or `extension_ids` must be provided.
 
 ---
 
-## 8. content_security_policy {#8-content-security-policy}
+8. content_security_policy {#8-content-security-policy}
 
 ```json
 {
@@ -277,7 +277,7 @@ Either `matches` or `extension_ids` must be provided.
 
 ---
 
-## 9. commands {#9-commands}
+9. commands {#9-commands}
 
 ```json
 {
@@ -300,7 +300,7 @@ Key combos must include `Ctrl` or `Alt`. Keys: `A`-`Z`, `0`-`9`, `Comma`, `Perio
 
 ---
 
-## 10. omnibox {#10-omnibox}
+10. omnibox {#10-omnibox}
 
 ```json
 { "omnibox": { "keyword": "ext" } }
@@ -329,7 +329,7 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 
 ---
 
-## 11. devtools_page {#11-devtools-page}
+11. devtools_page {#11-devtools-page}
 
 ```json
 { "devtools_page": "devtools.html" }
@@ -350,7 +350,7 @@ The DevTools page cannot access the inspected page directly. Use `chrome.devtool
 
 ---
 
-## 12. chrome_url_overrides {#12-chrome-url-overrides}
+12. chrome_url_overrides {#12-chrome-url-overrides}
 
 ```json
 { "chrome_url_overrides": { "newtab": "newtab.html" } }
@@ -360,7 +360,7 @@ Overridable pages: `newtab`, `history`, `bookmarks`. One per key. Only one exten
 
 ---
 
-## 13. options_ui {#13-options-ui}
+13. options_ui {#13-options-ui}
 
 ```json
 { "options_ui": { "page": "options.html", "open_in_tab": false } }
@@ -373,7 +373,7 @@ Overridable pages: `newtab`, `history`, `bookmarks`. One per key. Only one exten
 
 ---
 
-## 14. side_panel {#14-side-panel}
+14. side_panel {#14-side-panel}
 
 ```json
 { "side_panel": { "default_path": "sidepanel.html" } }
@@ -383,7 +383,7 @@ Requires `"sidePanel"` permission. Opens beside page content. Control programmat
 
 ---
 
-## 15. externally_connectable {#15-externally-connectable}
+15. externally_connectable {#15-externally-connectable}
 
 ```json
 {
@@ -405,7 +405,7 @@ If omitted, all extensions can connect but no web pages can.
 
 ---
 
-## 16. storage {#16-storage}
+16. storage {#16-storage}
 
 Declares a managed storage schema for enterprise policy configuration.
 
@@ -436,7 +436,7 @@ Managed storage is read-only from the extension's perspective.
 
 ---
 
-## 17. declarative_net_request {#17-declarative-net-request}
+17. declarative_net_request {#17-declarative-net-request}
 
 ```json
 {
@@ -453,7 +453,7 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 
 ---
 
-## 18. Additional Fields {#18-additional-fields}
+18. Additional Fields {#18-additional-fields}
 
 | Field | Example | Description |
 |-------|---------|-------------|
@@ -470,7 +470,7 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 
 ---
 
-## 19. Complete Example Manifest {#19-complete-example-manifest}
+19. Complete Example Manifest {#19-complete-example-manifest}
 
 ```json
 {
@@ -535,7 +535,7 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 
 ---
 
-## Further Reading {#further-reading}
+Further Reading {#further-reading}
 
 - [Extension Architecture](extension-architecture.md)
 - [Permissions Model](permissions-model.md)
@@ -543,9 +543,9 @@ Max 100 static rulesets (since Chrome 120; was 50 before), 50 enabled simultaneo
 - [Content Script Patterns](content-script-patterns.md)
 - [Service Worker Lifecycle](service-worker-lifecycle.md)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Manifest Fields](../reference/manifest-fields.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

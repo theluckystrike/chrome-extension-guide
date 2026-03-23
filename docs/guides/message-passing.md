@@ -223,11 +223,11 @@ class MessageBus {
 
 ## Summary
 
-1. **One-time messages**: Use `sendMessage` for request/response
-2. **Persistent connections**: Use `connect` for ongoing communication
-3. **External messaging**: Configure `externally_connectable` for web pages
-4. **Native messaging**: Use `nativeMessaging` for system integration
-5. **Error handling**: Always wrap message calls in try/catch
-6. **Performance**: Debounce high-frequency messages and reuse ports
+1. One-time messages: Use `sendMessage` for request/response
+2. Persistent connections: Use `connect` for ongoing communication
+3. External messaging: Configure `externally_connectable` for web pages
+4. Native messaging: Use `nativeMessaging` for system integration
+5. Error handling: Always wrap message calls in try/catch
+6. Performance: Debounce high-frequency messages and reuse ports
 
 See [Chrome Extensions Messaging Documentation](https://developer.chrome.com/docs/extensions/develop/concepts/messaging).

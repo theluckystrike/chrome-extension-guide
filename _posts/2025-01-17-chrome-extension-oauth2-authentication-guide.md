@@ -17,29 +17,29 @@ This comprehensive guide will walk you through implementing OAuth2 authenticatio
 
 ---
 
-## Why OAuth2 Matters for Chrome Extensions {#why-oauth2-matters}
+Why OAuth2 Matters for Chrome Extensions {#why-oauth2-matters}
 
 OAuth2 is the industry-standard protocol for authorization, enabling your extension to access user data without requiring them to share their passwords. When implemented correctly, OAuth2 provides several key benefits for Chrome extension developers.
 
-### Security Benefits
+Security Benefits
 
 With OAuth2, your extension never sees or stores user passwords. Instead, it receives access tokens that can be revoked at any time by the user through their account settings. This approach significantly reduces the security risk surface compared to traditional username/password authentication. Additionally, OAuth2 supports scoped access, meaning you can request only the permissions your extension actually needs.
 
-### User Experience Advantages
+User Experience Advantages
 
-Users are increasingly wary of entering passwords into browser extensions. By implementing OAuth2, you leverage trusted authentication flows from major providers like Google, GitHub, and Microsoft. Users can authenticate with a single click using their existing accounts, eliminating the need to create and remember yet another password.
+Users are increasingly wary of entering passwords into browser extensions. By implementing OAuth2, you use trusted authentication flows from major providers like Google, GitHub, and Microsoft. Users can authenticate with a single click using their existing accounts, eliminating the need to create and remember yet another password.
 
-### Platform Integration
+Platform Integration
 
-OAuth2 tokens enable your extension to integrate seamlessly with the services users already use. Imagine building an extension that automatically backs up browser bookmarks to Google Drive, or one that creates GitHub issues from browser interactions. These integrations become possible when you properly implement OAuth2 authentication.
+OAuth2 tokens enable your extension to integrate smoothly with the services users already use. Imagine building an extension that automatically backs up browser bookmarks to Google Drive, or one that creates GitHub issues from browser interactions. These integrations become possible when you properly implement OAuth2 authentication.
 
 ---
 
-## Understanding Chrome Identity API {#chrome-identity-api}
+Understanding Chrome Identity API {#chrome-identity-api}
 
 Chrome provides the `chrome.identity` API specifically for handling authentication in extensions. This API simplifies OAuth2 implementation by managing the authentication flow and token storage.
 
-### LaunchWebAuthFlow
+LaunchWebAuthFlow
 
 The `chrome.identity.launchWebAuthFlow` method is the primary way to initiate OAuth2 authentication in Chrome extensions. It opens a popup window where users can authenticate with the service provider. Once authenticated, the provider redirects back to your extension with an authorization code that can be exchanged for access tokens.
 
@@ -74,11 +74,11 @@ async function authenticateWithOAuth() {
 }
 ```
 
-### GetRedirectURL
+GetRedirectURL
 
 The `chrome.identity.getRedirectURL()` method generates a proper redirect URI for your extension. This URL follows the pattern `https://[extension-id].chromiumapp.org/[path]`. Using this method ensures Chrome can properly route the authentication response back to your extension.
 
-### Token Management
+Token Management
 
 The Chrome Identity API also provides methods for token management:
 
@@ -88,11 +88,11 @@ The Chrome Identity API also provides methods for token management:
 
 ---
 
-## Setting Up OAuth for Google {#google-oauth-setup}
+Setting Up OAuth for Google {#google-oauth-setup}
 
-Google provides robust OAuth2 support and is one of the most common authentication providers for Chrome extensions. Let us walk through the complete setup process.
+Google provides solid OAuth2 support and is one of the most common authentication providers for Chrome extensions. Let us walk through the complete setup process.
 
-### Creating a Google Cloud Project
+Creating a Google Cloud Project
 
 First, you need to create a project in the Google Cloud Console:
 
@@ -103,7 +103,7 @@ First, you need to create a project in the Google Cloud Console:
 5. Add the scopes your extension needs (for example, `https://www.googleapis.com/auth/drive.file`)
 6. Add your extension's ID to authorized JavaScript origins
 
-### Getting Your Client ID
+Getting Your Client ID
 
 After configuring the consent screen:
 
@@ -113,7 +113,7 @@ After configuring the consent screen:
 4. Add your extension's ID to the authorized list
 5. Copy the client ID for use in your extension
 
-### Manifest Configuration
+Manifest Configuration
 
 Add the required permissions and identities to your `manifest.json`:
 
@@ -136,7 +136,7 @@ Add the required permissions and identities to your `manifest.json`:
 }
 ```
 
-### Implementing Google Authentication
+Implementing Google Authentication
 
 Here is a complete implementation for authenticating with Google:
 
@@ -204,11 +204,11 @@ const googleAuth = new GoogleAuth();
 
 ---
 
-## Setting Up OAuth for GitHub {#github-oauth-setup}
+Setting Up OAuth for GitHub {#github-oauth-setup}
 
 GitHub OAuth is equally important for extensions that interact with repositories, issues, or GitHub Actions. The setup process differs slightly from Google but follows the same principles.
 
-### Creating a GitHub OAuth App
+Creating a GitHub OAuth App
 
 1. Go to GitHub Settings > Developer settings > OAuth Apps
 2. Click "New OAuth App"
@@ -218,7 +218,7 @@ GitHub OAuth is equally important for extensions that interact with repositories
    - Authorization callback URL: Use `https://[extension-id].chromiumapp.org/`
 4. Copy the Client ID and generate a Client Secret
 
-### Manifest Configuration for GitHub
+Manifest Configuration for GitHub
 
 GitHub OAuth requires different manifest configuration since it does not use the built-in `oauth2` property:
 
@@ -235,7 +235,7 @@ GitHub OAuth requires different manifest configuration since it does not use the
 }
 ```
 
-### Implementing GitHub Authentication
+Implementing GitHub Authentication
 
 ```javascript
 // github-auth.js - GitHub OAuth2 Implementation
@@ -343,11 +343,11 @@ class GitHubAuth {
 
 ---
 
-## Secure Token Storage {#secure-token-storage}
+Secure Token Storage {#secure-token-storage}
 
 Properly storing OAuth tokens is critical for security. Chrome provides several storage options, each with different security characteristics.
 
-### Using chrome.storage
+Using chrome.storage
 
 The recommended approach for storing tokens is using `chrome.storage`:
 
@@ -401,7 +401,7 @@ class TokenStorage {
 }
 ```
 
-### Best Practices for Token Security
+Best Practices for Token Security
 
 Always follow these security guidelines when handling OAuth tokens:
 
@@ -415,11 +415,11 @@ Implement proper token revocation. When users log out or revoke access, remove t
 
 ---
 
-## Handling Token Refresh {#handling-token-refresh}
+Handling Token Refresh {#handling-token-refresh}
 
-Access tokens expire, and your extension needs to handle refresh gracefully to maintain seamless user experience.
+Access tokens expire, and your extension needs to handle refresh gracefully to maintain smooth user experience.
 
-### Implementing Automatic Token Refresh
+Implementing Automatic Token Refresh
 
 ```javascript
 // token-refresh.js - Automatic Token Refresh
@@ -497,11 +497,11 @@ class TokenManager {
 
 ---
 
-## Error Handling and Edge Cases {#error-handling}
+Error Handling and Edge Cases {#error-handling}
 
 Robust error handling ensures your extension remains functional even when authentication issues arise.
 
-### Common OAuth Errors
+Common OAuth Errors
 
 ```javascript
 // error-handling.js - OAuth Error Handling
@@ -593,7 +593,7 @@ class OAuthErrorHandler {
 }
 ```
 
-### Network Error Handling
+Network Error Handling
 
 ```javascript
 // network-errors.js - Network Error Handling
@@ -657,7 +657,7 @@ class NetworkErrorHandler {
 
 ---
 
-## Complete Example: Multi-Provider Authentication {#complete-example}
+Complete Example: Multi-Provider Authentication {#complete-example}
 
 Here is a complete, production-ready example combining all the concepts:
 
@@ -746,7 +746,7 @@ const auth = new ExtensionAuth();
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Implementing OAuth2 authentication in Chrome extensions enables powerful integrations with external services while maintaining strong security. By leveraging the Chrome Identity API, properly managing tokens, and following best practices for error handling, you can create secure and reliable authentication flows for your extensions.
 
@@ -758,7 +758,7 @@ With these skills, you can build Chrome extensions that securely connect to Goog
 
 ---
 
-## Related Articles
+Related Articles
 
 - [Chrome Extension OAuth2 Authentication Guide]({% post_url 2025-02-20-chrome-extension-oauth2-authentication-guide %})
 - [Chrome Identity API OAuth Guide]({% post_url 2025-01-24-chrome-identity-api-oauth %})
@@ -766,7 +766,7 @@ With these skills, you can build Chrome extensions that securely connect to Goog
 
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

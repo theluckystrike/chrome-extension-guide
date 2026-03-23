@@ -17,27 +17,27 @@ In this tutorial, you will learn how to create a Chrome extension that allows us
 
 ---
 
-## Understanding Regex Highlighter Extensions {#understanding-regex-highlighters}
+Understanding Regex Highlighter Extensions {#understanding-regex-highlighters}
 
-### Why Build a Regex Highlighter?
+Why Build a Regex Highlighter?
 
 A regex highlighter extension serves multiple purposes for developers and non-developers alike. For developers, it provides immediate visual feedback when crafting and testing regular expressions. Instead of switching between a regex testing website and your code, you can test patterns directly in the context where they will be used. This is particularly valuable when working with complex HTML documents, log files, or data extraction tasks.
 
 Beyond development work, regex highlighters are invaluable for content editors, data analysts, and anyone who works with structured text. A marketing team member might use pattern matching to find email addresses across a webpage for outreach. A data analyst might identify phone numbers, dates, or currency amounts scattered through document archives. The applications are virtually limitless, making this a versatile tool for any Chrome user.
 
-### How Regex Highlighter Extensions Work
+How Regex Highlighter Extensions Work
 
-At its core, a regex highlighter extension works by injecting JavaScript into web pages that scans text content against a user-defined pattern. When matches are found, the extension wraps them in styled HTML elements that create the visual highlight effect. This process involves several key components working together seamlessly.
+At its core, a regex highlighter extension works by injecting JavaScript into web pages that scans text content against a user-defined pattern. When matches are found, the extension wraps them in styled HTML elements that create the visual highlight effect. This process involves several key components working together smoothly.
 
 The extension's popup provides the user interface where users input their regex patterns and configure highlight options. The content script runs on each webpage, performing the actual text scanning and highlighting. The background script, while not strictly necessary for this basic implementation, can handle extension lifecycle events and coordinate between different parts of the extension. Together, these components create a cohesive user experience that feels like a native feature of the browser.
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup}
+Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest file, and our regex highlighter is no exception. Let us set up a proper Manifest V3 configuration that defines the extension's capabilities and permissions.
 
-### Creating the Manifest
+Creating the Manifest
 
 Create a new directory for your project and add the following manifest.json file:
 
@@ -70,17 +70,17 @@ Create a new directory for your project and add the following manifest.json file
 
 This manifest defines several important elements. The permissions array specifies what the extension can access. We include "activeTab" to work with the current tab, "storage" to save user preferences and recent patterns, and "scripting" to execute content scripts that perform the highlighting. The action section defines our popup, which is the interface users will interact with.
 
-### Creating Icon Assets
+Creating Icon Assets
 
 Every extension needs icons to represent it in the Chrome toolbar and extension management pages. For development purposes, you can create simple placeholder icons or use the following approach to generate basic icons programmatically. Create an icons directory and add three PNG files: icon16.png (16x16 pixels), icon48.png (48x48 pixels), and icon128.png (128x128 pixels). These can be simple colored squares or more elaborate designs representing pattern matching.
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the user-facing part of our extension where users input their regex patterns and control the highlighting behavior. Let us create a clean, functional interface.
 
-### HTML Structure
+HTML Structure
 
 Create popup.html with the following structure:
 
@@ -344,11 +344,11 @@ This popup interface provides all the controls users need to work with regex pat
 
 ---
 
-## Implementing Popup Logic {#popup-logic}
+Implementing Popup Logic {#popup-logic}
 
 Now let us create the JavaScript that handles user interactions in the popup. This script will validate regex patterns, communicate with content scripts, and manage user preferences.
 
-### Popup JavaScript
+Popup JavaScript
 
 Create popup.js with the following implementation:
 
@@ -524,11 +524,11 @@ This popup script handles all user interactions and communicates with the conten
 
 ---
 
-## Creating the Content Script {#content-script}
+Creating the Content Script {#content-script}
 
 The content script is the heart of our extension. It runs on every webpage and performs the actual text scanning and highlighting. This script receives messages from the popup and manipulates the DOM to create visual highlights.
 
-### Content Script Implementation
+Content Script Implementation
 
 Create a file named content.js in your project directory:
 
@@ -657,11 +657,11 @@ This content script uses the TreeWalker API to efficiently traverse all text nod
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we have created all the necessary files, let us test our regex highlighter extension. Follow these steps to load it into Chrome and verify it works correctly.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 Open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Click the Load unpacked button and select your project directory. The extension should appear in your extension list with the name "Regex Highlighter."
 
@@ -669,7 +669,7 @@ Once loaded, navigate to any webpage with text content. Click the extension icon
 
 Try different patterns and flags to explore the extension's capabilities. The case insensitive flag is useful for matching text regardless of capitalization. The multiline flag changes how ^ and $ anchors work, treating line breaks as delimiters. The global flag ensures all matches are highlighted, not just the first one.
 
-### Debugging Common Issues
+Debugging Common Issues
 
 If the extension does not work as expected, open the Chrome DevTools for the page you are testing. Check the console for any error messages that might indicate issues with the content script. Common problems include invalid regex patterns, which are caught and displayed in the popup status message.
 
@@ -677,33 +677,33 @@ Another common issue is highlighting not appearing on dynamically loaded content
 
 ---
 
-## Advanced Features and Improvements {#advanced-features}
+Advanced Features and Improvements {#advanced-features}
 
 Now that you have a working regex highlighter, consider adding these advanced features to make it even more powerful and useful.
 
-### Real-Time Highlighting
+Real-Time Highlighting
 
 Instead of clicking the Highlight button, you could implement real-time highlighting that updates as users type their regex patterns. This would require debouncing the input to avoid excessive processing and could provide immediate feedback about pattern validity and match count.
 
-### Match Navigation
+Match Navigation
 
 Add buttons to navigate between matches, similar to the find functionality built into browsers. This would involve tracking all match positions and providing next/previous buttons in the popup to scroll the page to each match sequentially.
 
-### Multiple Pattern Support
+Multiple Pattern Support
 
 Allow users to define multiple regex patterns simultaneously, each with its own color. This is useful for comparing different patterns or highlighting different types of content in distinct colors.
 
-### Export Functionality
+Export Functionality
 
 Add the ability to export highlighted content or matched text to a file. This could be valuable for data extraction tasks where users want to capture all matches for further processing.
 
-### Keyboard Shortcuts
+Keyboard Shortcuts
 
 Implement keyboard shortcuts to quickly activate the extension and toggle highlighting. Chrome supports commands in the manifest that can bind specific key combinations to extension actions.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 You have successfully built a fully functional regex highlighter Chrome extension. This project demonstrates several important concepts in Chrome extension development, including content scripts for page manipulation, popup interfaces for user interaction, message passing between extension components, and the storage API for persisting user preferences.
 
@@ -711,4 +711,4 @@ The extension you created is practical and immediately useful for developers and
 
 As you continue developing Chrome extensions, remember that Manifest V3 has specific requirements around background scripts, permissions, and content script execution. Our regex highlighter follows these best practices and provides a solid foundation for more complex extensions.
 
-Consider expanding this project with the advanced features outlined above, or use it as a starting point for other Chrome extension ideas. The skills you have learned here—working with content scripts, building popup interfaces, handling user input, and managing extension state—transfer directly to any Chrome extension project you undertake in the future.
+Consider expanding this project with the advanced features outlined above, or use it as a starting point for other Chrome extension ideas. The skills you have learned here, working with content scripts, building popup interfaces, handling user input, and managing extension state, transfer directly to any Chrome extension project you undertake in the future.

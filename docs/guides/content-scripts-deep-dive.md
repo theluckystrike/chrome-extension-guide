@@ -8,14 +8,14 @@ Understanding the distinction between these two execution contexts is fundamenta
 
 | Aspect | Content Scripts | Background Service Workers |
 |--------|-----------------|---------------------------|
-| **Execution Context** | Runs in page context | Runs in extension context |
-| **DOM Access** | Full access to page DOM | No direct DOM access |
-| **Page JavaScript** | Can interact with page JS | Cannot access page variables |
-| **Lifetime** | Tied to page lifecycle | Ephemeral, can be terminated |
-| **Communication** | Uses message passing | Uses message passing |
-| **Chrome APIs** | Limited subset | Full access |
+| Execution Context | Runs in page context | Runs in extension context |
+| DOM Access | Full access to page DOM | No direct DOM access |
+| Page JavaScript | Can interact with page JS | Cannot access page variables |
+| Lifetime | Tied to page lifecycle | Ephemeral, can be terminated |
+| Communication | Uses message passing | Uses message passing |
+| Chrome APIs | Limited subset | Full access |
 
-Content scripts share the DOM with the page but run in an isolated world—a separate JavaScript execution environment. This means page JavaScript cannot see extension variables, and extension variables cannot directly interact with page JavaScript objects.
+Content scripts share the DOM with the page but run in an isolated world, a separate JavaScript execution environment. This means page JavaScript cannot see extension variables, and extension variables cannot directly interact with page JavaScript objects.
 
 ## Static vs Programmatic Injection
 
@@ -34,7 +34,7 @@ Declare content scripts in the manifest for automatic injection:
 }
 ```
 
-Static declarations are simple but inflexible—the script loads every time a matching page loads, with no runtime control.
+Static declarations are simple but inflexible, the script loads every time a matching page loads, with no runtime control.
 
 ### Programmatic Injection (chrome.scripting.executeScript)
 
@@ -57,7 +57,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Programmatic injection offers fine-grained control—you can inject based on user actions, specific conditions, or runtime state. This is the preferred approach for most modern extensions.
+Programmatic injection offers fine-grained control, you can inject based on user actions, specific conditions, or runtime state. This is the preferred approach for most modern extensions.
 
 ### Injecting Functions (Not Just Files)
 
@@ -102,7 +102,7 @@ Control which URLs your content scripts run on using match patterns:
 
 Pattern syntax:
 - `*` matches any characters within a path segment
-- `**` matches any characters across path segments
+- `` matches any characters across path segments
 - No scheme matches both http and https
 
 ### Globs for Complex Matching
@@ -181,13 +181,13 @@ Injects after `DOMContentLoaded` and when the page is idle:
 }
 ```
 
-This is the default and most common choice—safe for most DOM operations.
+This is the default and most common choice, safe for most DOM operations.
 
-**Recommendation**: Use `document_idle` unless you have a specific reason otherwise. It's the safest for general DOM manipulation.
+Use `document_idle` unless you have a specific reason otherwise. It's the safest for general DOM manipulation.
 
 ## Isolated World vs Main World
 
-Content scripts run in an isolated world—separate from the page's JavaScript context.
+Content scripts run in an isolated world, separate from the page's JavaScript context.
 
 ### Isolated World (Default)
 
@@ -204,7 +204,7 @@ The isolated world has these characteristics:
 - Separate global scope
 - No sharing of JavaScript variables with page
 - Can still access DOM (shared with main world)
-- Useful for security—page scripts can't interfere
+- Useful for security, page scripts can't interfere
 
 ### Injecting into Main World
 
@@ -222,7 +222,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-**Caution**: Code in the MAIN world can be detected by page scripts and may conflict with page JavaScript. Use sparingly.
+Caution: Code in the MAIN world can be detected by page scripts and may conflict with page JavaScript. Use sparingly.
 
 ## Communication: Content Script ↔ Service Worker
 
@@ -365,7 +365,7 @@ observer.observe(document.body, {
 
 ### Best Practices
 
-1. **Check element existence before manipulation**:
+1. Check element existence before manipulation:
 ```javascript
 const element = document.querySelector('.target');
 if (element) {
@@ -373,7 +373,7 @@ if (element) {
 }
 ```
 
-2. **Use event delegation** for dynamic elements:
+2. Use event delegation for dynamic elements:
 ```javascript
 document.addEventListener('click', (e) => {
   if (e.target.matches('.dynamic-button')) {
@@ -382,7 +382,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-3. **Debounce rapid DOM changes**:
+3. Debounce rapid DOM changes:
 ```javascript
 function debounce(fn, delay) {
   let timeoutId;
@@ -442,7 +442,7 @@ function injectThemeColors(theme) {
 
 ## Shadow DOM for UI Isolation
 
-Shadow DOM provides style isolation—your extension UI won't be affected by page styles, and page styles won't affect your UI.
+Shadow DOM provides style isolation, your extension UI won't be affected by page styles, and page styles won't affect your UI.
 
 ### Creating an Isolated Widget
 
@@ -504,9 +504,9 @@ function createExtensionWidget() {
 
 ### Benefits of Shadow DOM
 
-1. **Style Isolation**: Page CSS won't affect your component
-2. **No Global Pollution**: Your class names won't conflict
-3. **Event Boundary**: Events bubble but you control what's exposed
+1. Style Isolation: Page CSS won't affect your component
+2. No Global Pollution: Your class names won't conflict
+3. Event Boundary: Events bubble but you control what's exposed
 
 ```javascript
 // Even if page defines .widget { display: none !important; }
@@ -648,18 +648,18 @@ console.log('Annotation widget loaded');
 
 ## Key Takeaways
 
-1. **Choose injection method wisely**: Static for universal functionality, programmatic for conditional features.
+1. Choose injection method wisely: Static for universal functionality, programmatic for conditional features.
 
-2. **Respect page context**: Use isolated world by default; only use MAIN world when necessary.
+2. Respect page context: Use isolated world by default; only use MAIN world when necessary.
 
-3. **Communicate via message passing**: chrome.runtime.sendMessage and ports are your communication channels.
+3. Communicate via message passing: chrome.runtime.sendMessage and ports are your communication channels.
 
-4. **Use Shadow DOM for UI components**: Provides style isolation and prevents conflicts.
+4. Use Shadow DOM for UI components: Provides style isolation and prevents conflicts.
 
-5. **Consider timing**: Use `run_at` appropriately—document_start for CSS, document_idle for DOM manipulation.
+5. Consider timing: Use `run_at` appropriately, document_start for CSS, document_idle for DOM manipulation.
 
-6. **Handle dynamic content**: MutationObservers and event delegation handle SPAs and dynamic pages.
+6. Handle dynamic content: MutationObservers and event delegation handle SPAs and dynamic pages.
 
-7. **Test thoroughly**: Content scripts run in unpredictable page environments—defensive coding is essential.
+7. Test thoroughly: Content scripts run in unpredictable page environments, defensive coding is essential.
 
 For more details, see the [official Chrome documentation](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts).

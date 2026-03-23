@@ -4,27 +4,27 @@ description: Learn how to build a Chrome extension that enhances GitHub with fil
 canonical_url: "https://bestchromeextensions.com/tutorials/build-github-enhancer/"
 ---
 
-# Chrome Extension Building a GitHub UI Enhancer Extension — Complete Developer's Guide
+# Chrome Extension Building a GitHub UI Enhancer Extension. Complete Developer's Guide
 
 Learn how to build powerful Chrome extensions with this comprehensive guide covering practical implementation and best practices. This guide provides step-by-step instructions for creating professional-grade extensions.
 This tutorial walks you through creating a Chrome extension that enhances GitHub's UI with productivity features.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - Chrome browser (version 88+)
 - GitHub account
 - Basic knowledge of JavaScript and Chrome extensions
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 ```
 github-enhancer/
-├── manifest.json
-├── content.js
-├── popup/popup.html, popup.js
-├── utils/api.js
-├── utils/dom.js
+ manifest.json
+ content.js
+ popup/popup.html, popup.js
+ utils/api.js
+ utils/dom.js
 ```
 
-## Step 1: Manifest Configuration {#step-1-manifest-configuration}
+Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Configure the manifest with content scripts matching GitHub URLs:
 
@@ -43,7 +43,7 @@ Configure the manifest with content scripts matching GitHub URLs:
 }
 ```
 
-## Step 2: Detect GitHub Page Type {#step-2-detect-github-page-type}
+Step 2: Detect GitHub Page Type {#step-2-detect-github-page-type}
 
 Identify which GitHub page type the user is viewing using URL patterns:
 
@@ -66,7 +66,7 @@ function detectPageType(url) {
 
 Reference: [URL Matching Patterns](/docs/patterns/url-matching-patterns.md)
 
-## Step 3: File Tree Sidebar {#step-3-file-tree-sidebar}
+Step 3: File Tree Sidebar {#step-3-file-tree-sidebar}
 
 Build a file tree sidebar using GitHub API or DOM scraping:
 
@@ -83,7 +83,7 @@ async function buildFileTreeSidebar() {
 }
 ```
 
-## Step 4: Copy Raw File Button {#step-4-copy-raw-file-button}
+Step 4: Copy Raw File Button {#step-4-copy-raw-file-button}
 
 Add a copy button to file headers:
 
@@ -104,7 +104,7 @@ function addCopyButton() {
 }
 ```
 
-## Step 5: Repo Size Display {#step-5-repo-size-display}
+Step 5: Repo Size Display {#step-5-repo-size-display}
 
 Fetch and display repository size in the header:
 
@@ -125,7 +125,7 @@ async function displayRepoSize() {
 }
 ```
 
-## Step 6: Enhanced Diff View {#step-6-enhanced-diff-view}
+Step 6: Enhanced Diff View {#step-6-enhanced-diff-view}
 
 Add word-level diff highlighting in PR files:
 
@@ -141,7 +141,7 @@ function enhanceDiffView() {
 }
 ```
 
-## Step 7: Quick Actions with Keyboard Shortcuts {#step-7-quick-actions-with-keyboard-shortcuts}
+Step 7: Quick Actions with Keyboard Shortcuts {#step-7-quick-actions-with-keyboard-shortcuts}
 
 Implement keyboard shortcuts for common GitHub actions:
 
@@ -158,7 +158,7 @@ document.addEventListener('keydown', (e) => {
 
 Reference: [Keyboard Shortcuts API](/docs/guides/keyboard-shortcuts.md)
 
-## Step 8: Settings Popup {#step-8-settings-popup}
+Step 8: Settings Popup {#step-8-settings-popup}
 
 Create a settings popup to toggle features:
 
@@ -184,7 +184,7 @@ document.querySelectorAll('input').forEach(input => {
 });
 ```
 
-## SPA Navigation Handling {#spa-navigation-handling}
+SPA Navigation Handling {#spa-navigation-handling}
 
 GitHub uses Turbo/PJAX for navigation. Use MutationObserver to detect page changes:
 
@@ -202,7 +202,7 @@ observer.observe(document.body, {
 
 Reference: [DOM Observer Patterns](/docs/patterns/dom-observer-patterns.md), [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md)
 
-## GitHub API Rate Limits {#github-api-rate-limits}
+GitHub API Rate Limits {#github-api-rate-limits}
 
 Handle rate limits by caching responses and using auth tokens:
 
@@ -226,7 +226,7 @@ async function fetchWithCache(url) {
 
 Reference: [Content Script Patterns](/docs/guides/content-script-patterns.md)
 
-## Summary {#summary}
+Summary {#summary}
 
 This tutorial covered building a GitHub UI enhancer with:
 - Manifest configuration for GitHub domains
@@ -242,7 +242,7 @@ This tutorial covered building a GitHub UI enhancer with:
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

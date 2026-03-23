@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "search Permission"
-description: "Access to the API for triggering searches using the user's default search engine. None — this permission does not trigger a warning at install time."
+description: "Access to the API for triggering searches using the user's default search engine. None. this permission does not trigger a warning at install time."
 permalink: /permissions/search/
 category: permissions
 order: 36
@@ -10,20 +10,20 @@ canonical_url: "https://bestchromeextensions.com/permissions/search/"
 
 # search Permission
 
-## What It Grants {#what-it-grants}
+What It Grants {#what-it-grants}
 Access to the `chrome.search` API for triggering searches using the user's default search engine.
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "permissions": ["search"]
 }
 ```
 
-## User Warning {#user-warning}
-None — this permission does not trigger a warning at install time.
+User Warning {#user-warning}
+None. this permission does not trigger a warning at install time.
 
-## API Access {#api-access}
+API Access {#api-access}
 Single method:
 ```typescript
 await chrome.search.query({
@@ -32,14 +32,14 @@ await chrome.search.query({
 });
 ```
 
-## Parameters {#parameters}
+Parameters {#parameters}
 | Parameter | Type | Description |
 |---|---|---|
 | `text` | string | The search query (required) |
 | `disposition` | string | Where to show results: `CURRENT_TAB`, `NEW_TAB`, `NEW_WINDOW` |
 | `tabId` | number | Tab to show results in (only with `CURRENT_TAB`) |
 
-## Disposition Options {#disposition-options}
+Disposition Options {#disposition-options}
 ```typescript
 // Search in current tab
 await chrome.search.query({ text: 'query', disposition: 'CURRENT_TAB' });
@@ -54,7 +54,7 @@ await chrome.search.query({ text: 'query', disposition: 'NEW_WINDOW' });
 await chrome.search.query({ text: 'query', disposition: 'CURRENT_TAB', tabId: 123 });
 ```
 
-## Search Launcher Pattern {#search-launcher-pattern}
+Search Launcher Pattern {#search-launcher-pattern}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -72,7 +72,7 @@ m.onMessage('QUICK_SEARCH', async ({ query, where }) => {
 });
 ```
 
-## Keyboard Shortcut Search {#keyboard-shortcut-search}
+Keyboard Shortcut Search {#keyboard-shortcut-search}
 ```typescript
 // manifest.json: "commands": { "quick-search": { "suggested_key": { "default": "Ctrl+Shift+S" } } }
 
@@ -91,7 +91,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Context Menu Search {#context-menu-search}
+Context Menu Search {#context-menu-search}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -108,38 +108,38 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-## Important Notes {#important-notes}
+Important Notes {#important-notes}
 
-## search API Important Notes and Limitations
+search API Important Notes and Limitations
 - Uses the user's default search engine (you cannot choose which engine)
-- Does NOT return search results — only opens the search page
-- Simple API — just triggers browser search
+- Does NOT return search results. only opens the search page
+- Simple API. just triggers browser search
 
-## When to use {#when-to-use}
+When to use {#when-to-use}
 - Quick-search extensions
 - Context menu "search for this" features
 - Omnibox alternatives
 - Keyboard shortcut search triggers
 
-## When NOT to use {#when-not-to-use}
-- If you need search results programmatically — use a search API directly (Google Custom Search, etc.)
-- If you want to control which search engine — not possible with this API
+When NOT to use {#when-not-to-use}
+- If you need search results programmatically. use a search API directly (Google Custom Search, etc.)
+- If you want to control which search engine. not possible with this API
 
-## Permission Check {#permission-check}
+Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('search');
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Related: `docs/guides/omnibox-api.md`
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I create a search provider in Chrome?
+How do I create a search provider in Chrome?
 Use chrome.search to interact with Chrome's default search provider. Your extension can perform searches and get information about the current search provider.
 
-### Can I add custom search engines?
+Can I add custom search engines?
 The search API doesn't allow creating new search engines, but you can interact with existing ones.
 ---
 

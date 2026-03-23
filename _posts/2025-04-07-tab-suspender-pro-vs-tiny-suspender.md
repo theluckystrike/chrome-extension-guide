@@ -17,11 +17,11 @@ Understanding the differences between these two approaches matters more than eve
 
 ---
 
-## Feature Set Comparison {#feature-set-comparison}
+Feature Set Comparison {#feature-set-comparison}
 
 Tab Suspender Pro and Tiny Suspender occupy different positions on the feature spectrum, and understanding these differences is crucial for making an informed decision.
 
-### Tab Suspender Pro: The Power User's Choice
+Tab Suspender Pro: The Power User's Choice
 
 Tab Suspender Pro provides an extensive array of configuration options that appeal to users who want complete control over how tabs are suspended. The extension offers multiple suspension triggers including time-based suspension, inactivity detection, and manual whitelisting. You can configure different suspension rules for different websites, creating complex workflows that match specific browsing patterns.
 
@@ -31,7 +31,7 @@ One standout feature in Tab Suspender Pro is its customizable suspension page. W
 
 Additional capabilities include the ability to create tab groups with different suspension rules, support for container tabs in Firefox, and an API that allows advanced users to script custom suspension behaviors. The pro version also offers auto-resume functionality that wakes tabs based on specific triggers, such as when you click on a bookmark or receive a notification mentioning a suspended tab.
 
-### Tiny Suspender: Simplicity First
+Tiny Suspender: Simplicity First
 
 Tiny Suspender takes a dramatically different approach, focusing on core functionality without unnecessary complexity. The extension provides straightforward tab suspension with minimal configuration required. Out of the box, it suspends inactive tabs after a configurable period of inactivity, which addresses the primary use case for most users without requiring extensive setup.
 
@@ -41,11 +41,11 @@ Despite its minimal approach, Tiny Suspender includes some thoughtful additions.
 
 ---
 
-## UI Complexity Differences {#ui-complexity-differences}
+UI Complexity Differences {#ui-complexity-differences}
 
 The user interface philosophy differs substantially between these two extensions, reflecting their target audiences and design philosophies.
 
-### Tab Suspender Pro Interface
+Tab Suspender Pro Interface
 
 Tab Suspender Pro presents users with a comprehensive settings interface that resembles a control panel. The popup window includes multiple tabs and sections for different configuration categories. Navigation involves clicking through various panels to access different features, which can feel overwhelming for users seeking quick adjustments.
 
@@ -53,7 +53,7 @@ The settings page extends beyond the popup into a full browser tab, offering det
 
 The popup interface itself displays extensive information including memory savings, active suspension rules, and quick toggles for common actions. While information-rich, this density can feel cluttered compared to minimalist alternatives. Power users typically appreciate having all this information accessible, but casual users might find it intimidating.
 
-### Tiny Suspender Interface
+Tiny Suspender Interface
 
 Tiny Suspender embraces a minimalist design philosophy throughout its interface. The popup window is compact, displaying only essential information: the current number of suspended tabs, memory saved, and simple toggle controls. This streamlined approach prioritizes quick access to core functions over comprehensive configuration.
 
@@ -63,11 +63,11 @@ The visual design follows a clean, uncluttered aesthetic. Icons are minimal, tex
 
 ---
 
-## Resource Footprint {#resource-footprint}
+Resource Footprint {#resource-footprint}
 
 Beyond functionality and interface, the actual resource consumption of these extensions themselves deserves examination. After all, installing a tab suspender that consumes significant memory defeats part of the purpose.
 
-### Tab Suspender Pro Resource Usage
+Tab Suspender Pro Resource Usage
 
 As a full-featured extension, Tab Suspender Pro naturally consumes more resources than its minimalist counterpart. The extension maintains background processes for monitoring tab activity, managing suspension rules, and handling synchronization features. This results in a higher baseline memory footprint compared to Tiny Suspender.
 
@@ -75,7 +75,7 @@ The pro version typically uses between 15-30 MB of RAM in an idle state, with ad
 
 The extension's background service worker runs continuously, periodically checking tab activity and applying suspension rules. This constant operation ensures responsive suspension behavior but requires ongoing resources. Users report that the extension remains lightweight enough for most use cases, but the comparison to Tiny Suspender reveals a clear difference in resource philosophy.
 
-### Tiny Suspender Resource Usage
+Tiny Suspender Resource Usage
 
 Tiny Suspender was explicitly designed to minimize its own resource consumption. The extension uses approximately 5-10 MB of RAM in an idle state, representing a fraction of Tab Suspender Pro's footprint. This minimal resource usage aligns with the extension's core philosophy of providing essential functionality without unnecessary overhead.
 
@@ -85,11 +85,11 @@ For users focused on maximizing available memory for their actual browsing activ
 
 ---
 
-## Which Is Better for Casual vs Power Users {#casual-vs-power-users}
+Which Is Better for Casual vs Power Users {#casual-vs-power-users}
 
 The choice between these extensions often comes down to user type and specific needs. Understanding which user profile matches each extension helps simplify the decision-making process.
 
-### Tab Suspender Pro for Power Users
+Tab Suspender Pro for Power Users
 
 Power users who maintain complex workflows, multiple browser profiles, or specific tab management strategies will find Tab Suspender Pro's comprehensive feature set valuable. If you require different suspension rules for different types of websites, need to exclude certain domains while aggressively suspending others, or want detailed analytics about your browsing habits, the pro version provides necessary capabilities.
 
@@ -97,7 +97,7 @@ Users who work across multiple devices benefit significantly from the synchroniz
 
 Power users who frequently manage large numbers of tabs, particularly those who use tab grouping features or maintain persistent workspaces, will appreciate Tab Suspender Pro's ability to handle complex scenarios. The bulk management capabilities alone justify the extension's more comprehensive approach for users who regularly work with dozens of suspended tabs.
 
-### Tiny Suspender for Casual Users
+Tiny Suspender for Casual Users
 
 Casual users who simply want to reduce memory consumption without investing time in configuration will find Tiny Suspender meets their needs effectively. The extension works immediately upon installation with sensible defaults, requiring minimal setup to achieve meaningful results.
 
@@ -107,11 +107,11 @@ The minimalist approach also appeals to users who prefer their browser to remain
 
 ---
 
-## Suspension Reliability {#suspension-reliability}
+Suspension Reliability {#suspension-reliability}
 
 Both extensions handle the core function of suspending tabs effectively, but differences in implementation affect reliability in specific scenarios.
 
-### Tab Suspender Pro Reliability
+Tab Suspender Pro Reliability
 
 Tab Suspender Pro's sophisticated rule engine provides reliable suspension across a wide variety of scenarios. The extension handles complex page states correctly, properly detecting when tabs contain unsaved content or active form inputs. Advanced users can configure exception handling for specific scenarios, ensuring tabs are suspended only when it is safe to do so.
 
@@ -119,7 +119,7 @@ The pro version handles edge cases better than minimalist alternatives. Tabs wit
 
 However, the complexity of Tab Suspender Pro's rule system can occasionally lead to unexpected behavior when rules interact or when website behaviors change. Users report occasional need to adjust rules after website updates, though the extension's flexibility allows quick corrections when issues arise.
 
-### Tiny Suspender Reliability
+Tiny Suspender Reliability
 
 Tiny Suspender handles basic tab suspension reliably in most scenarios. The extension correctly identifies inactive tabs and suspends them appropriately, with the whitelisting feature preventing unwanted suspension of important sites. For the primary use case of suspending inactive tabs to save memory, the extension performs consistently.
 
@@ -129,11 +129,11 @@ However, Tiny Suspender's simplicity becomes a limitation in complex scenarios. 
 
 ---
 
-## Verdict {#verdict}
+Verdict {#verdict}
 
 Choosing between Tab Suspender Pro and Tiny Suspender ultimately depends on your specific needs, technical comfort level, and priorities in browser extensions.
 
-Tab Suspender Pro excels for users who want comprehensive control over their tab management experience. The extensive feature set, robust customization options, and cross-device synchronization make it ideal for power users, developers, and anyone who maintains complex browsing workflows. The higher resource consumption and steeper learning curve are reasonable trade-offs for the functionality provided. If you find yourself frequently adjusting tab management strategies, needing different rules for different scenarios, or wanting detailed analytics about your browser usage, Tab Suspender Pro delivers the capabilities you need.
+Tab Suspender Pro excels for users who want comprehensive control over their tab management experience. The extensive feature set, solid customization options, and cross-device synchronization make it ideal for power users, developers, and anyone who maintains complex browsing workflows. The higher resource consumption and steeper learning curve are reasonable trade-offs for the functionality provided. If you find yourself frequently adjusting tab management strategies, needing different rules for different scenarios, or wanting detailed analytics about your browser usage, Tab Suspender Pro delivers the capabilities you need.
 
 Tiny Suspender represents an excellent choice for users who prioritize simplicity and efficiency above all else. The lightweight resource footprint, intuitive interface, and minimal configuration requirements make it accessible to virtually any browser user. Casual browsers, users with limited technical expertise, and those who simply want a "set it and forget it" solution will appreciate what Tiny Suspender offers. The extension accomplishes its core mission effectively while staying out of your way.
 

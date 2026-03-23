@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Cors Extension Patterns — Best Practices"
+title: "Chrome Extension Cors Extension Patterns. Best Practices"
 description: "Handle CORS issues in Chrome extensions with background scripts and proxy patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/cors-extension-patterns/"
 ---
@@ -9,12 +9,12 @@ canonical_url: "https://bestchromeextensions.com/patterns/cors-extension-pattern
 
 Understanding CORS (Cross-Origin Resource Sharing) in Chrome extensions requires recognizing that different extension contexts have different CORS behaviors.
 
-## Context Overview {#context-overview}
+Context Overview {#context-overview}
 
-### Background Service Worker {#background-service-worker}
-- **No CORS restrictions** when `host_permissions` are declared in `manifest.json`
+Background Service Worker {#background-service-worker}
+- No CORS restrictions when `host_permissions` are declared in `manifest.json`
 - Can fetch any URL granted by permissions
-- Example: Background can directly call external APIs
+- Background can directly call external APIs
 
 ```javascript
 // background.js
@@ -29,13 +29,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-### Popup and Options Pages {#popup-and-options-pages}
+Popup and Options Pages {#popup-and-options-pages}
 - Same behavior as background service worker
 - No CORS issues when proper permissions are granted
 - Execute within extension's own origin
 
-### Content Scripts (Key Gotcha!) {#content-scripts-key-gotcha}
-- **Subject to the host page's CORS policy**
+Content Scripts (Key Gotcha!) {#content-scripts-key-gotcha}
+- Subject to the host page's CORS policy
 - Running in the context of the web page, not the extension
 - Cannot make cross-origin requests directly
 
@@ -46,7 +46,7 @@ fetch('https://api.example.com/data') // CORS error!
   .catch(err => console.error(err));
 ```
 
-## Content Script Workaround: Message Background {#content-script-workaround-message-background}
+Content Script Workaround: Message Background {#content-script-workaround-message-background}
 
 Relay cross-origin requests through the background script:
 
@@ -69,7 +69,7 @@ fetchViaBackground('https://api.example.com/data')
   .then(data => console.log(data));
 ```
 
-## Extension Origin {#extension-origin}
+Extension Origin {#extension-origin}
 
 The extension has its own origin: `chrome-extension://[EXTENSION_ID]`
 
@@ -77,7 +77,7 @@ The extension has its own origin: `chrome-extension://[EXTENSION_ID]`
 - Can access other extension's resources only if exposed
 - Has its own storage and cookie contexts
 
-## Cookies and Credentials {#cookies-and-credentials}
+Cookies and Credentials {#cookies-and-credentials}
 
 For cross-origin requests requiring cookies:
 
@@ -101,13 +101,13 @@ Requires in `manifest.json`:
 }
 ```
 
-## CORS Preflight {#cors-preflight}
+CORS Preflight {#cors-preflight}
 
-- Extensions **skip preflight** for simple requests when `host_permissions` are granted
+- Extensions skip preflight for simple requests when `host_permissions` are granted
 - No preflight OPTIONS request for GET, POST with simple headers
 - Custom headers may still trigger preflight in some cases
 
-## Common Errors and Solutions {#common-errors-and-solutions}
+Common Errors and Solutions {#common-errors-and-solutions}
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -115,7 +115,7 @@ Requires in `manifest.json`:
 | `No permission` | Missing host_permissions | Add required domains to manifest |
 | Opaque response | Using `no-cors` mode | Cannot read response body |
 
-## Restricted Headers {#restricted-headers}
+Restricted Headers {#restricted-headers}
 
 Cannot set these headers programmatically:
 - `Host`
@@ -123,21 +123,21 @@ Cannot set these headers programmatically:
 - `Cookie` (auto-handled by browser)
 - `Origin` (set automatically)
 
-## Opaque Responses {#opaque-responses}
+Opaque Responses {#opaque-responses}
 
 When using `mode: 'no-cors'`:
 - Response type becomes "opaque"
 - Cannot read status code, headers, or body
 - Only useful for analytics/pings that don't need response
 
-## Testing CORS in Extensions {#testing-cors-in-extensions}
+Testing CORS in Extensions {#testing-cors-in-extensions}
 
-1. **DevTools Network Tab**: Look for CORS errors in console
-2. **Background script test**: Direct fetch should work
-3. **Content script test**: Should fail without relay
+1. DevTools Network Tab: Look for CORS errors in console
+2. Background script test: Direct fetch should work
+3. Content script test: Should fail without relay
 4. Check extension permissions in `chrome://extensions`
 
-## Host Permissions Best Practices {#host-permissions-best-practices}
+Host Permissions Best Practices {#host-permissions-best-practices}
 
 ```json
 {
@@ -152,9 +152,9 @@ When using `mode: 'no-cors'`:
 - Avoid `<all_urls>` unless required
 - Consider dynamic permissions for user-initiated requests
 
-## Cross-Origin Request Patterns {#cross-origin-request-patterns}
+Cross-Origin Request Patterns {#cross-origin-request-patterns}
 
-### Background Fetch Proxy {#background-fetch-proxy}
+Background Fetch Proxy {#background-fetch-proxy}
 ```javascript
 // background.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -168,7 +168,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Cookie-Aware Fetcher {#cookie-aware-fetcher}
+Cookie-Aware Fetcher {#cookie-aware-fetcher}
 ```javascript
 // background.js
 async function fetchWithCookies(url, cookieDomain) {
@@ -181,7 +181,7 @@ async function fetchWithCookies(url, cookieDomain) {
 }
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Cross-Origin Requests](./cross-origin-requests.md)
 - [Security Best Practices](../guides/security-best-practices.md)

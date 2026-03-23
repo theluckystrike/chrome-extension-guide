@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Notification Center — Developer Guide"
+title: "Chrome Extension Notification Center. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-notification-center/"
 ---
@@ -8,13 +8,13 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-notification-ce
 
 This tutorial demonstrates how to build a comprehensive notification center for your Chrome extension using the side panel, notifications API, storage, and alarms.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 114+ (for side panel support)
 - Basic knowledge of Manifest V3
 - Understanding of service workers
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 Add these permissions to your `manifest.json`:
 
@@ -36,7 +36,7 @@ For detailed permission explanations, see:
 - [permissions/notifications.md](../permissions/notifications.md)
 - [permissions/sidePanel.md](../permissions/sidePanel.md)
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 Configure your extension to use the side panel:
 
@@ -55,11 +55,11 @@ Configure your extension to use the side panel:
 }
 ```
 
-## Notification Types {#notification-types}
+Notification Types {#notification-types}
 
 Chrome notifications support four types (`basic`, `image`, `list`, `progress`):
 
-### Basic Notification {#basic-notification}
+Basic Notification {#basic-notification}
 
 ```javascript
 chrome.notifications.create('notification-id', {
@@ -71,7 +71,7 @@ chrome.notifications.create('notification-id', {
 });
 ```
 
-### List Notification {#list-notification}
+List Notification {#list-notification}
 
 ```javascript
 chrome.notifications.create('list-notification', {
@@ -86,7 +86,7 @@ chrome.notifications.create('list-notification', {
 });
 ```
 
-### Progress Notification {#progress-notification}
+Progress Notification {#progress-notification}
 
 ```javascript
 chrome.notifications.create('progress-notification', {
@@ -98,7 +98,7 @@ chrome.notifications.create('progress-notification', {
 });
 ```
 
-## Notification History Storage {#notification-history-storage}
+Notification History Storage {#notification-history-storage}
 
 Store notification history using `@theluckystrike/webext-storage`:
 
@@ -148,7 +148,7 @@ export async function getUnreadCount() {
 }
 ```
 
-## Side Panel Implementation {#side-panel-implementation}
+Side Panel Implementation {#side-panel-implementation}
 
 Create `sidepanel.html`:
 
@@ -169,7 +169,7 @@ Create `sidepanel.html`:
 </html>
 ```
 
-## Communication with Service Worker {#communication-with-service-worker}
+Communication with Service Worker {#communication-with-service-worker}
 
 Use `@theluckystrike/webext-messaging` for communication:
 
@@ -210,7 +210,7 @@ messaging.onMessage((message, sender) => {
 });
 ```
 
-## Button Click Handlers {#button-click-handlers}
+Button Click Handlers {#button-click-handlers}
 
 Handle notification button clicks:
 
@@ -257,7 +257,7 @@ chrome.notifications.create('with-buttons', {
 });
 ```
 
-## Badge with Unread Count {#badge-with-unread-count}
+Badge with Unread Count {#badge-with-unread-count}
 
 Update the extension badge to show unread count:
 
@@ -277,7 +277,7 @@ export async function updateBadge() {
 await updateBadge();
 ```
 
-## Scheduled Notifications with Alarms {#scheduled-notifications-with-alarms}
+Scheduled Notifications with Alarms {#scheduled-notifications-with-alarms}
 
 Schedule notifications using the alarms API:
 
@@ -319,20 +319,20 @@ async function sendScheduledNotification() {
 }
 ```
 
-## Complete Flow {#complete-flow}
+Complete Flow {#complete-flow}
 
 Here's the complete flow:
 
-1. **Service Worker** creates notification via `chrome.notifications.create()`
+1. Service Worker creates notification via `chrome.notifications.create()`
 2. User clicks button or notification
-3. **Service Worker** handles click via `onButtonClicked` or `onClicked`
+3. Service Worker handles click via `onButtonClicked` or `onClicked`
 4. Notification is saved to storage with `saveNotification()`
 5. Badge updates with `updateBadge()`
-6. **Side Panel** receives updates via messaging
+6. Side Panel receives updates via messaging
 7. User views history in side panel
 8. Notifications marked as read via `markAsRead()`
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
 - Always handle notification permissions gracefully
 - Limit stored history to prevent storage bloat
@@ -340,7 +340,7 @@ Here's the complete flow:
 - Clear badges when notifications are read
 - Test with Chrome's notification permissions
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
 - [Chrome Notifications API](https://developer.chrome.com/docs/extensions/reference/notifications/)
 - [Side Panel API](https://developer.chrome.com/docs/extensions/reference/sidePanel/)

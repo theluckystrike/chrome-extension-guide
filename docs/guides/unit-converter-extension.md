@@ -12,25 +12,25 @@ The extension uses a modular architecture with clear separation of concerns:
 
 ```
 unit-converter/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.ts
-│   └── popup.css
-├── background/
-│   └── service-worker.ts
-├── content-script/
-│   └── content-script.ts
-├── shared/
-│   ├── types.ts
-│   ├── conversion.ts
-│   └── storage.ts
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── tests/
-    └── conversion.test.ts
+ manifest.json
+ popup/
+    popup.html
+    popup.ts
+    popup.css
+ background/
+    service-worker.ts
+ content-script/
+    content-script.ts
+ shared/
+    types.ts
+    conversion.ts
+    storage.ts
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ tests/
+     conversion.test.ts
 ```
 
 ### manifest.json Configuration
@@ -991,24 +991,24 @@ class OptimizedPopup {
 
 ### Chrome Web Store Submission
 
-1. **Create ZIP package**:
+1. Create ZIP package:
    ```bash
    zip -r unit-converter.zip manifest.json popup/ background/ shared/ icons/ content-script/
    ```
 
-2. **Store Listing Details**:
+2. Store Listing Details:
    - Title: "Unit Converter"
    - Description: Clear, concise explanation
    - Category: Utilities
    - Screenshots: At least one 1280x800 or 640x400
    - Small promo tile: 440x280
 
-3. **Privacy Practices**:
+3. Privacy Practices:
    - Answer all privacy questionnaire questions
    - If using storage, explain data usage
    - No remote code or external scripts
 
-4. **Submit for Review**:
+4. Submit for Review:
    - Upload ZIP to Chrome Web Store
    - Pay one-time developer fee ($5)
    - Submit for review (usually 1-3 days)
@@ -1024,14 +1024,14 @@ class OptimizedPopup {
 
 This guide covered building a complete Unit Converter Chrome extension with:
 
-- **Manifest V3** architecture with proper file organization
-- **TypeScript** for type safety and maintainable code
-- **Popup UI** for quick conversions
-- **Content script** for in-page overlay conversions
-- **Chrome Storage API** for state persistence
-- **Robust error handling** for edge cases
-- **Testing strategies** including unit and integration tests
-- **Performance optimizations** for fast execution
-- **Publishing checklist** for Chrome Web Store submission
+- Manifest V3 architecture with proper file organization
+- TypeScript for type safety and maintainable code
+- Popup UI for quick conversions
+- Content script for in-page overlay conversions
+- Chrome Storage API for state persistence
+- Robust error handling for edge cases
+- Testing strategies including unit and integration tests
+- Performance optimizations for fast execution
+- Publishing checklist for Chrome Web Store submission
 
 The extension demonstrates core Chrome extension patterns that can be extended for more complex functionality like currency conversion, unit favorites, conversion history, and more.

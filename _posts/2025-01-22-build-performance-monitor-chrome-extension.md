@@ -13,25 +13,25 @@ canonical_url: "https://bestchromeextensions.com/2025/01/22/build-performance-mo
 
 Creating a performance monitor extension is one of the most useful projects you can undertake as a Chrome extension developer. Whether you're a web developer wanting to track your application's performance, a power user curious about browser metrics, or a developer building tools for other developers, a performance monitor extension provides real-time insights that were previously only available through browser developer tools.
 
-In this comprehensive guide, we'll walk through building a complete performance monitor Chrome extension with fps counter chrome functionality, memory monitoring, and additional metrics like CPU usage and network request tracking. We'll use Manifest V3 (the current standard) and modern JavaScript practices to create a professional-grade extension.
+we'll walk through building a complete performance monitor Chrome extension with fps counter chrome functionality, memory monitoring, and additional metrics like CPU usage and network request tracking. We'll use Manifest V3 (the current standard) and modern JavaScript practices to create a professional-grade extension.
 
 ---
 
-## Why Build a Performance Monitor Extension? {#why-build}
+Why Build a Performance Monitor Extension? {#why-build}
 
 The demand for performance monitoring tools in browsers has never been higher. Web applications are becoming increasingly complex, and users expect smooth, lag-free experiences. A performance monitor extension serves multiple purposes:
 
-**For Developers**: Debug performance issues in real-time without switching between developer tools and your application. Monitor frame rates during animations, track memory leaks, and identify bottlenecks before they impact users.
+For Developers: Debug performance issues in real-time without switching between developer tools and your application. Monitor frame rates during animations, track memory leaks, and identify bottlenecks before they impact users.
 
-**For Power Users**: Understand what tab or extension is consuming the most resources. Detect memory hogs, monitor CPU usage, and optimize their browsing experience accordingly.
+For Power Users: Understand what tab or extension is consuming the most resources. Detect memory hogs, monitor CPU usage, and optimize their browsing experience accordingly.
 
-**For QA Engineers**: Reproduce and document performance issues with concrete data. Capture performance metrics during testing cycles.
+For QA Engineers: Reproduce and document performance issues with concrete data. Capture performance metrics during testing cycles.
 
 The Chrome browser provides rich APIs through the chrome.debugger and chrome.performance APIs that make building such an extension possible. Let's dive in and build it step by step.
 
 ---
 
-## Prerequisites and Project Setup {#prerequisites}
+Prerequisites and Project Setup {#prerequisites}
 
 Before we begin, make sure you have:
 
@@ -44,26 +44,26 @@ Let's set up our project structure:
 
 ```
 performance-monitor/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── background/
-│   └── background.js
-├── content/
-│   └── content.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ background/
+    background.js
+ content/
+    content.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 Create a new folder for your extension and set up the manifest file first.
 
 ---
 
-## Creating the Manifest V3 Configuration {#manifest}
+Creating the Manifest V3 Configuration {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. For our performance monitor extension, we'll request the necessary permissions to access performance metrics:
 
@@ -104,7 +104,7 @@ This manifest requests minimal permissions while still allowing us to monitor pe
 
 ---
 
-## Implementing the FPS Counter Chrome Feature {#fps-counter}
+Implementing the FPS Counter Chrome Feature {#fps-counter}
 
 The fps (frames per second) counter is essential for measuring UI smoothness. A smooth user interface typically requires 60 fps, which means each frame has approximately 16.67 milliseconds to render. When fps drops below 30, users typically perceive lag.
 
@@ -220,15 +220,15 @@ This content script uses the `requestAnimationFrame` API for accurate fps measur
 
 ---
 
-## Building the Memory Monitor Extension Features {#memory-monitor}
+Building the Memory Monitor Extension Features {#memory-monitor}
 
 Memory monitoring is crucial for detecting memory leaks and understanding how web applications consume resources. Our memory monitor extension feature provides detailed insights:
 
-**Used JS Heap Size**: The total amount of memory being used by JavaScript objects, including strings, arrays, and typed arrays.
+Used JS Heap Size: The total amount of memory being used by JavaScript objects, including strings, arrays, and typed arrays.
 
-**Total JS Heap Size**: The total allocated memory, which may be larger than used size due to memory fragmentation.
+Total JS Heap Size: The total allocated memory, which may be larger than used size due to memory fragmentation.
 
-**Heap Size Limit**: The maximum amount of memory the browser will allocate before throwing an out-of-memory error.
+Heap Size Limit: The maximum amount of memory the browser will allocate before throwing an out-of-memory error.
 
 The memory API returns these values in bytes. For display purposes, we'll want to convert them to more readable formats:
 
@@ -307,7 +307,7 @@ This enhanced memory monitoring class provides trend analysis and potential leak
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click on the extension icon. It should display all the performance metrics in a clear, readable format:
 
@@ -728,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Background Service Worker {#background-worker}
+Background Service Worker {#background-worker}
 
 The background service worker coordinates communication between the content script and the popup:
 
@@ -773,68 +773,68 @@ setInterval(() => {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we've built all the components, let's test our performance monitor extension:
 
-1. **Load the extension in Chrome**:
+1. Load the extension in Chrome:
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" in the top right corner
    - Click "Load unpacked" and select your extension folder
 
-2. **Test the FPS counter**:
+2. Test the FPS counter:
    - Open any website with animations (try a site like YouTube or a canvas animation demo)
    - Click the extension icon to open the popup
    - You should see real-time FPS updates
 
-3. **Test the memory monitor**:
+3. Test the memory monitor:
    - Open multiple tabs and observe memory changes
    - The memory percentage should update every 2 seconds
 
-4. **Test the popup controls**:
+4. Test the popup controls:
    - Click "Pause" to stop monitoring
    - Click "Reset" to clear all metrics
    - Verify the chart updates correctly
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 Once you have the basic performance monitor working, consider adding these advanced features:
 
-### Network Request Monitoring
+Network Request Monitoring
 
 Track network requests using the `chrome.webRequest` API to monitor:
 - Number of active requests
 - Total data transferred
 - Request latency
 
-### Long Task Detection
+Long Task Detection
 
 Use the `PerformanceObserver` API to detect "long tasks" that block the main thread for more than 50ms.
 
-### Custom Metrics Dashboard
+Custom Metrics Dashboard
 
 Create a full-page dashboard (rather than just a popup) to display:
 - Historical charts with date range selection
 - Export data to CSV/JSON
 - Alert thresholds and notifications
 
-### Battery Impact Monitoring
+Battery Impact Monitoring
 
 Use the `navigator.getBattery()` API to track how your extension and the monitored page affect battery life.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a performance monitor extension is an excellent project that teaches you many important concepts in Chrome extension development:
 
-- **Content scripts** for injecting code into web pages
-- **Message passing** between different extension components
-- **Chrome APIs** for accessing browser performance data
-- **Real-time data visualization** in the popup interface
-- **Service workers** for background processing
+- Content scripts for injecting code into web pages
+- Message passing between different extension components
+- Chrome APIs for accessing browser performance data
+- Real-time data visualization in the popup interface
+- Service workers for background processing
 
 The performance monitor extension you build today can be the foundation for a powerful suite of developer tools. Whether you keep it for personal use or publish it on the Chrome Web Store, understanding how to measure and optimize performance is an invaluable skill for any web developer.
 
@@ -848,7 +848,7 @@ Start with the basic implementation in this guide, then progressively add featur
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Performance API Reference](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API)

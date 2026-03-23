@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Context Aware Actions — Best Practices"
+title: "Chrome Extension Context Aware Actions. Best Practices"
 description: "Implement context-aware actions based on page and user state."
 canonical_url: "https://bestchromeextensions.com/patterns/context-aware-actions/"
 ---
 
 # Context-Aware Extension Actions
 
-## Overview {#overview}
+Overview {#overview}
 
-The `chrome.action` API provides powerful methods to make your extension's toolbar button respond to the current tab context. By passing the `tabId` parameter to action API calls, you can display different icons, badges, popups, and titles for each tab — enabling site-specific behavior and toggle states.
+The `chrome.action` API provides powerful methods to make your extension's toolbar button respond to the current tab context. By passing the `tabId` parameter to action API calls, you can display different icons, badges, popups, and titles for each tab. enabling site-specific behavior and toggle states.
 
 ---
 
-## Dynamic Icon Based on State {#dynamic-icon-based-on-state}
+Dynamic Icon Based on State {#dynamic-icon-based-on-state}
 
 Change the icon based on whether the extension is active for a specific tab:
 
@@ -39,7 +39,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Dynamic Badge Per Tab {#dynamic-badge-per-tab}
+Dynamic Badge Per Tab {#dynamic-badge-per-tab}
 
 Display different badge text and colors for each tab:
 
@@ -62,7 +62,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Dynamic Popup Per Context {#dynamic-popup-per-context}
+Dynamic Popup Per Context {#dynamic-popup-per-context}
 
 Show different popup pages based on the current site:
 
@@ -83,7 +83,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Dynamic Title for Contextual Tooltip {#dynamic-title-for-contextual-tooltip}
+Dynamic Title for Contextual Tooltip {#dynamic-title-for-contextual-tooltip}
 
 Provide contextual information via the hover tooltip:
 
@@ -96,7 +96,7 @@ chrome.action.setTitle({
 
 ---
 
-## Enabling/Disabling Per Tab {#enablingdisabling-per-tab}
+Enabling/Disabling Per Tab {#enablingdisabling-per-tab}
 
 Control whether the action button is clickable on a per-tab basis:
 
@@ -113,7 +113,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Declarative Approach with chrome.declarativeContent {#declarative-approach-with-chromedeclarativecontent}
+Declarative Approach with chrome.declarativeContent {#declarative-approach-with-chromedeclarativecontent}
 
 Automatically show/hide the action based on page conditions without content scripts:
 
@@ -144,7 +144,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-## Resetting to Defaults {#resetting-to-defaults}
+Resetting to Defaults {#resetting-to-defaults}
 
 To clear tab-specific overrides and fall back to global/manifest defaults:
 
@@ -153,11 +153,11 @@ chrome.action.setPopup({ tabId, popup: '' });    // Clears tab-specific popup (e
 chrome.action.setTitle({ tabId, title: '' });     // Clears tab-specific title, falls back to manifest
 ```
 
-Note: Tab-specific overrides are automatically cleared when the tab is closed.
+Tab-specific overrides are automatically cleared when the tab is closed.
 
 ---
 
-## Combining with activeTab Permission {#combining-with-activetab-permission}
+Combining with activeTab Permission {#combining-with-activetab-permission}
 
 Use `activeTab` for on-demand permissions while maintaining context-aware UI:
 
@@ -188,20 +188,20 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Toggle states**: Show active/inactive icon based on page-specific mode
-- **Site-specific tools**: Different popup for YouTube, GitHub, etc.
-- **Page-aware badges**: Show unread counts, error indicators per tab
-- **Conditional availability**: Disable action on restricted pages like chrome:// URLs
+- Toggle states: Show active/inactive icon based on page-specific mode
+- Site-specific tools: Different popup for YouTube, GitHub, etc.
+- Page-aware badges: Show unread counts, error indicators per tab
+- Conditional availability: Disable action on restricted pages like chrome:// URLs
 
 ---
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
-- [Badge Action UI](./badge-action-ui.md) — Comprehensive badge and action button patterns
-- [Declarative Content](./declarative-content.md) — Automatic show/hide based on page conditions
-- [Action API Reference](../../api-reference/action-api.md) — Full chrome.action API documentation
+- [Badge Action UI](./badge-action-ui.md). Comprehensive badge and action button patterns
+- [Declarative Content](./declarative-content.md). Automatic show/hide based on page conditions
+- [Action API Reference](../../api-reference/action-api.md). Full chrome.action API documentation
 -e 
 ---
 

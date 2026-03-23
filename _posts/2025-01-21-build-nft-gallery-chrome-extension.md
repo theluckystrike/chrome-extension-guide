@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Build an NFT Gallery Chrome Extension with OpenSea API"
-description: "Learn how to build a powerful NFT gallery Chrome extension using the OpenSea API. This comprehensive guide covers Web3 integration, API authentication, portfolio tracking, and creating a seamless NFT viewing experience in your browser."
+description: "Learn how to build a powerful NFT gallery Chrome extension using the OpenSea API. This comprehensive guide covers Web3 integration, API authentication, portfolio tracking, and creating a smooth NFT viewing experience in your browser."
 date: 2025-01-21
 categories: [tutorials, chrome-extensions, web3]
 tags: [nft gallery extension, nft chrome extension, opensea api extension, web3 nft viewer, chrome extension tutorial, blockchain, ethereum]
@@ -13,58 +13,58 @@ canonical_url: "https://bestchromeextensions.com/2025/01/21/build-nft-gallery-ch
 
 The NFT ecosystem has exploded in recent years, with millions of digital collectibles traded across Ethereum, Polygon, and other blockchain networks. For crypto enthusiasts and collectors, keeping track of their NFT portfolio often means juggling multiple marketplaces, wallets, and tracking tools. What if you could have your entire NFT gallery accessible directly from your browser toolbar?
 
-In this comprehensive guide, we will build a fully functional NFT Gallery Chrome Extension using the OpenSea API. By the end of this tutorial, you will have an extension that allows users to connect their wallet, view their NFT collection, check floor prices, and explore NFT details — all without leaving the browser.
+we will build a fully functional NFT Gallery Chrome Extension using the OpenSea API. By the end of this tutorial, you will have an extension that allows users to connect their wallet, view their NFT collection, check floor prices, and explore NFT details. all without leaving the browser.
 
 This project is perfect for developers who want to combine their Chrome extension skills with Web3 development. Whether you are building for personal use or planning to publish to the Chrome Web Store, this guide covers everything from API setup to advanced features.
 
 ---
 
-## Why Build an NFT Gallery Extension? {#why-build-nft-extension}
+Why Build an NFT Gallery Extension? {#why-build-nft-extension}
 
 Before diving into code, let us explore why NFT gallery extensions are valuable and what makes them different from traditional web applications.
 
-### The Current NFT Landscape
+The Current NFT Landscape
 
 NFTs (Non-Fungible Tokens) have evolved beyond simple JPEG images. Today, they represent digital ownership of art, music, game items, domain names, and even real-world assets. Major marketplaces like OpenSea, Blur, and LooksRare process billions of dollars in trading volume monthly.
 
 For NFT collectors, this means managing assets across multiple collections and blockchains. A dedicated Chrome extension can simplify this by providing instant access to portfolio data without navigating through multiple websites.
 
-### Advantages of a Browser Extension
+Advantages of a Browser Extension
 
 Browser extensions offer unique advantages for NFT portfolio management:
 
-- **Instant Access**: Users can check their collection with a single click from any webpage
-- **Background Updates**: The extension can periodically refresh data without user intervention
-- **Persistent Presence**: Unlike web apps that require logging in each time, extensions maintain state
-- **Cross-Site Functionality**: Extensions can interact with NFT data regardless of which marketplace the user is viewing
+- Instant Access: Users can check their collection with a single click from any webpage
+- Background Updates: The extension can periodically refresh data without user intervention
+- Persistent Presence: Unlike web apps that require logging in each time, extensions maintain state
+- Cross-Site Functionality: Extensions can interact with NFT data regardless of which marketplace the user is viewing
 
-### Use Cases for Your Extension
+Use Cases for Your Extension
 
 Your NFT Gallery extension can serve multiple purposes:
 
-1. **Portfolio Viewer**: Display all NFTs owned by a wallet address
-2. **Price Tracker**: Show floor prices and recent sales for collections
-3. **Watchlist**: Monitor specific collections without owning them
-4. **Quick Viewer**: Preview NFT details when browsing marketplace pages
+1. Portfolio Viewer: Display all NFTs owned by a wallet address
+2. Price Tracker: Show floor prices and recent sales for collections
+3. Watchlist: Monitor specific collections without owning them
+4. Quick Viewer: Preview NFT details when browsing marketplace pages
 
 For this tutorial, we will focus on building a comprehensive portfolio viewer that combines all these features.
 
 ---
 
-## Understanding the OpenSea API {#understanding-opensea-api}
+Understanding the OpenSea API {#understanding-opensea-api}
 
 The OpenSea API is the most comprehensive NFT data API available, providing access to asset information, collection data, ownership details, and trading history. Understanding how to use this API effectively is crucial for building your extension.
 
-### API Overview
+API Overview
 
 OpenSea offers several API endpoints that are essential for our extension:
 
-- **Assets API**: Retrieve NFT details including image, name, description, and attributes
-- **Collections API**: Get collection statistics, floor prices, and metadata
-- **Owners API**: Find out which addresses own specific NFTs
-- **Events API**: Track transfers, sales, and other on-chain events
+- Assets API: Retrieve NFT details including image, name, description, and attributes
+- Collections API: Get collection statistics, floor prices, and metadata
+- Owners API: Find out which addresses own specific NFTs
+- Events API: Track transfers, sales, and other on-chain events
 
-### Authentication Requirements
+Authentication Requirements
 
 The OpenSea API requires an API key for most endpoints. Here is how to obtain one:
 
@@ -74,9 +74,9 @@ The OpenSea API requires an API key for most endpoints. Here is how to obtain on
 4. Create a new API key with appropriate permissions
 5. Copy and securely store your key
 
-For development, the API key is free. However, be aware of rate limits — the API allows a certain number of requests per second depending on your plan.
+For development, the API key is free. However, be aware of rate limits. the API allows a certain number of requests per second depending on your plan.
 
-### API Response Format
+API Response Format
 
 OpenSea returns data in a standardized JSON format. Here is an example response for a single NFT asset:
 
@@ -107,39 +107,39 @@ Understanding this structure helps us design our extension's data handling layer
 
 ---
 
-## Project Setup and Structure {#project-setup}
+Project Setup and Structure {#project-setup}
 
 Now let us set up our Chrome extension project with the proper structure for an NFT gallery application.
 
-### Directory Structure
+Directory Structure
 
 Create the following project structure:
 
 ```
 nft-gallery-extension/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── content/
-│   └── content.js
-├── utils/
-│   ├── api.js
-│   └── storage.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ content/
+    content.js
+ utils/
+    api.js
+    storage.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ _locales/
+     en/
+         messages.json
 ```
 
 This structure follows Chrome extension best practices, separating concerns between different components.
 
-### Manifest Configuration
+Manifest Configuration
 
 The manifest.json file defines our extension capabilities:
 
@@ -183,11 +183,11 @@ Key points to notice:
 
 ---
 
-## Building the API Layer {#building-api-layer}
+Building the API Layer {#building-api-layer}
 
 The API layer handles all communication with OpenSea. Creating a robust, error-resistant API client is essential for a good user experience.
 
-### API Utility Module
+API Utility Module
 
 Create `utils/api.js`:
 
@@ -287,18 +287,18 @@ export default openSeaAPI;
 
 This API layer includes several important features:
 
-- **Caching**: Reduces API calls and improves performance
-- **Error Handling**: Graceful error reporting for failed requests
-- **Pagination Support**: Handles cursor-based pagination for large collections
-- **Configurable Limits**: Users can fetch different numbers of assets
+- Caching: Reduces API calls and improves performance
+- Error Handling: Graceful error reporting for failed requests
+- Pagination Support: Handles cursor-based pagination for large collections
+- Configurable Limits: Users can fetch different numbers of assets
 
 ---
 
-## Storage Management {#storage-management}
+Storage Management {#storage-management}
 
 Persistent storage is crucial for remembering user preferences and wallet addresses.
 
-### Storage Utility Module
+Storage Utility Module
 
 Create `utils/storage.js`:
 
@@ -365,11 +365,11 @@ export { STORAGE_KEYS };
 
 ---
 
-## Building the Popup UI {#building-popup-ui}
+Building the Popup UI {#building-popup-ui}
 
 The popup is the main interface users interact with. It needs to be clean, responsive, and provide quick access to portfolio information.
 
-### Popup HTML
+Popup HTML
 
 Create `popup/popup.html`:
 
@@ -475,7 +475,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-### Popup CSS
+Popup CSS
 
 Create `popup/popup.css`:
 
@@ -807,7 +807,7 @@ body {
 }
 ```
 
-### Popup JavaScript
+Popup JavaScript
 
 Create `popup/popup.js`:
 
@@ -1031,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Background Service Worker {#background-service-worker}
+Background Service Worker {#background-service-worker}
 
 The background service worker handles periodic tasks and manages extension lifecycle events.
 
@@ -1076,13 +1076,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 ---
 
-## Advanced Features {#advanced-features}
+Advanced Features {#advanced-features}
 
 Now that we have a working NFT gallery extension, let us explore several advanced features that can make your extension truly stand out.
 
-### Adding Wallet Connection with MetaMask
+Adding Wallet Connection with MetaMask
 
-For a more seamless experience, you can integrate MetaMask wallet connection:
+For a more smooth experience, you can integrate MetaMask wallet connection:
 
 ```javascript
 // Add to popup.js
@@ -1116,7 +1116,7 @@ document.getElementById('connectMetaMask').addEventListener('click', async () =>
 });
 ```
 
-### Collection Watchlist
+Collection Watchlist
 
 Add the ability to watch specific collections:
 
@@ -1139,7 +1139,7 @@ async function removeFromWatchlist(collectionSlug) {
 }
 ```
 
-### Floor Price Alerts
+Floor Price Alerts
 
 Implement price tracking with notifications:
 
@@ -1182,11 +1182,11 @@ async function checkFloorPrices() {
 
 ---
 
-## Testing Your Extension {#testing-extension}
+Testing Your Extension {#testing-extension}
 
 Testing is crucial for a production-ready extension. Here is how to test your NFT Gallery:
 
-### Manual Testing
+Manual Testing
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable Developer mode
@@ -1195,15 +1195,15 @@ Testing is crucial for a production-ready extension. Here is how to test your NF
 5. Enter a known wallet address (you can find sample addresses on Etherscan)
 6. Verify that NFTs load correctly
 
-### Test Wallet Addresses
+Test Wallet Addresses
 
 Here are some popular wallet addresses you can use for testing:
 
-- **Bored Ape Yacht Club Creator**: `0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D`
-- **CryptoPunks Creator**: `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`
-- **Pudgy Penguins**: `0xBd3531dA5CF5857e7CfAA92426880bBd73534B98`
+- Bored Ape Yacht Club Creator: `0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D`
+- CryptoPunks Creator: `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`
+- Pudgy Penguins: `0xBd3531dA5CF5857e7CfAA92426880bBd73534B98`
 
-### Debugging Tips
+Debugging Tips
 
 - Use `chrome://extensions/` and click "service worker" to see console logs
 - Inspect popup with right-click → Inspect popup
@@ -1211,25 +1211,25 @@ Here are some popular wallet addresses you can use for testing:
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and polished, follow these steps to publish:
 
-### Prepare for Submission
+Prepare for Submission
 
-1. **Create icons**: Generate 16x16, 48x48, and 128x128 PNG icons
-2. **Write description**: Clearly explain features and permissions
-3. **Create screenshots**: Capture 1280x800 screenshots of your extension
-4. **Privacy policy**: Required since the extension makes network requests
+1. Create icons: Generate 16x16, 48x48, and 128x128 PNG icons
+2. Write description: Clearly explain features and permissions
+3. Create screenshots: Capture 1280x800 screenshots of your extension
+4. Privacy policy: Required since the extension makes network requests
 
-### Submission Process
+Submission Process
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Create a new item and upload your extension as a ZIP file
 3. Fill in the store listing details
 4. Submit for review
 
-### Store Listing Best Practices
+Store Listing Best Practices
 
 - Use a clear, descriptive title
 - Highlight key features in bullet points
@@ -1238,27 +1238,27 @@ Once your extension is tested and polished, follow these steps to publish:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You have built a fully functional NFT Gallery Chrome Extension using the OpenSea API. This extension demonstrates several key concepts:
 
-- **API Integration**: Connecting to external APIs (OpenSea) from a Chrome extension
-- **Storage Management**: Persisting user preferences and wallet addresses
-- **Popup UI**: Creating a responsive, attractive user interface
-- **Background Processing**: Handling periodic updates and notifications
-- **Web3 Concepts**: Working with blockchain addresses and NFT data
+- API Integration: Connecting to external APIs (OpenSea) from a Chrome extension
+- Storage Management: Persisting user preferences and wallet addresses
+- Popup UI: Creating a responsive, attractive user interface
+- Background Processing: Handling periodic updates and notifications
+- Web3 Concepts: Working with blockchain addresses and NFT data
 
-### Future Enhancements
+Future Enhancements
 
 To take this extension further, consider adding:
 
-1. **Multi-chain support**: Add support for Polygon, Solana, and other chains
-2. **Portfolio analytics**: Charts showing portfolio value over time
-3. **Trait filtering**: Filter NFTs by attributes and rarity
-4. **Collection comparison**: Compare multiple collections side by side
-5. **Sell/Transfer features**: Integrate with marketplace listing APIs
+1. Multi-chain support: Add support for Polygon, Solana, and other chains
+2. Portfolio analytics: Charts showing portfolio value over time
+3. Trait filtering: Filter NFTs by attributes and rarity
+4. Collection comparison: Compare multiple collections side by side
+5. Sell/Transfer features: Integrate with marketplace listing APIs
 
-### Continue Learning
+Continue Learning
 
 For more Chrome extension development resources, explore our guides on:
 
@@ -1271,4 +1271,4 @@ The Web3 ecosystem is evolving rapidly, and Chrome extensions provide a unique w
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. your comprehensive resource for Chrome extension development.*

@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension AI & LLM Integration — Developer Guide"
+title: "Chrome Extension AI & LLM Integration. Developer Guide"
 description: "Learn Chrome extension ai & llm integration with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/ai-llm-integration-extensions/"
 ---
 # AI and LLM Integration in Chrome Extensions
 
-## Architecture Overview {#architecture-overview}
+Architecture Overview {#architecture-overview}
 
 Integrating AI and large language models into Chrome extensions requires careful architectural decisions about where API calls happen and how data flows between components.
 
@@ -16,9 +16,9 @@ Content scripts should never make direct API calls to LLM services. They run in 
 
 Popup scripts can provide user-facing AI features, but remember that the popup only lives while the user interacts with it. For long-running AI operations or streaming responses, use the service worker as the intermediary.
 
-## Calling External LLM APIs {#calling-external-llm-apis}
+Calling External LLM APIs {#calling-external-llm-apis}
 
-### OpenAI Integration {#openai-integration}
+OpenAI Integration {#openai-integration}
 
 ```javascript
 // background.js
@@ -43,7 +43,7 @@ async function callOpenAI(prompt, apiKey) {
 
 Store your API key securely and retrieve it only when needed. Never hardcode keys in your extension source.
 
-### Anthropic Integration {#anthropic-integration}
+Anthropic Integration {#anthropic-integration}
 
 ```javascript
 // background.js
@@ -69,11 +69,11 @@ async function callAnthropic(prompt, apiKey) {
 
 Both APIs follow similar patterns, but response formats differ. Build wrapper functions that normalize the output so your extension works with multiple providers.
 
-## Chrome Built-in AI APIs {#chrome-built-in-ai-apis}
+Chrome Built-in AI APIs {#chrome-built-in-ai-apis}
 
 Chrome provides experimental AI APIs that run locally on the user's machine. These offer privacy benefits and no API costs, though capabilities differ from cloud-based LLMs.
 
-### Prompt API {#prompt-api}
+Prompt API {#prompt-api}
 
 The Prompt API lets you interface with on-device language models:
 
@@ -88,7 +88,7 @@ if ('ai' in self && 'languageModel' in self.ai) {
 
 This API requires user permission and may not be available on all systems. Always check for availability and provide fallbacks.
 
-### Summarizer API {#summarizer-api}
+Summarizer API {#summarizer-api}
 
 For text summarization specifically, the Summarizer API offers a streamlined interface:
 
@@ -97,7 +97,7 @@ const summarizer = await self.ai.summarizer.create();
 const summary = await summarizer.summarize(document.body.innerText);
 ```
 
-### Translator API {#translator-api}
+Translator API {#translator-api}
 
 The Translator API handles language detection and translation:
 
@@ -111,7 +111,7 @@ const translated = await translator.translate('Hello world');
 
 These built-in APIs are evolving rapidly. Check Chrome's documentation for the latest capabilities and browser compatibility.
 
-## Streaming Responses {#streaming-responses}
+Streaming Responses {#streaming-responses}
 
 For longer AI responses, streaming provides a better user experience by showing tokens as they arrive:
 
@@ -167,7 +167,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Secure API Key Management {#secure-api-key-management}
+Secure API Key Management {#secure-api-key-management}
 
 Never store API keys in plain text or in localStorage, which content scripts can access. Use chrome.storage.session for sensitive data:
 
@@ -186,7 +186,7 @@ async function getApiKey() {
 
 The session storage is isolated from web page context and clears when the browser closes or the extension reloads. For persistent storage of API keys, consider chrome.storage.local with encryption, though users should be aware that local storage carries some risk.
 
-## Token Usage and Cost Control {#token-usage-and-cost-control}
+Token Usage and Cost Control {#token-usage-and-cost-control}
 
 LLM API calls incur costs based on tokens processed. Track usage to prevent unexpected charges:
 
@@ -231,7 +231,7 @@ async function rateLimitedRequest(fn) {
 }
 ```
 
-## Context Menu AI Actions {#context-menu-ai-actions}
+Context Menu AI Actions {#context-menu-ai-actions}
 
 Add AI-powered options to Chrome's right-click menu for quick access to features:
 
@@ -258,9 +258,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-## Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
-### Debouncing {#debouncing}
+Debouncing {#debouncing}
 
 For AI features that trigger on user input, debounce to avoid excessive API calls:
 
@@ -279,7 +279,7 @@ const debouncedAnalyze = debounce(async (text) => {
 }, 500);
 ```
 
-### Caching Responses {#caching-responses}
+Caching Responses {#caching-responses}
 
 Cache common queries to reduce API calls and improve response times:
 
@@ -301,7 +301,7 @@ async function cachedAIRequest(prompt) {
 }
 ```
 
-### Offline Fallback {#offline-fallback}
+Offline Fallback {#offline-fallback}
 
 When the user is offline or AI services are unavailable, provide graceful degradation:
 
@@ -325,15 +325,15 @@ async function smartAIRequest(prompt) {
 }
 ```
 
-## Best Practices Summary {#best-practices-summary}
+Best Practices Summary {#best-practices-summary}
 
 Keep your AI extension performant and secure by following these principles. Make API calls from the background service worker only, never expose keys to content scripts, implement streaming for long responses to improve perceived latency, track token usage to control costs, and always provide fallback mechanisms for when AI services are unavailable.
 
 For more advanced patterns and real-world implementations, explore the extensions ecosystem on zovo.one where developers share production-ready solutions for Chrome extension development.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Chrome Built-in AI APIs](../guides/chrome-built-in-ai-apis.md)
 - [OAuth Identity](../guides/identity-oauth.md)
@@ -343,6 +343,6 @@ For more advanced patterns and real-world implementations, explore the extension
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

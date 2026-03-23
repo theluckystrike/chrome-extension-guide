@@ -11,25 +11,25 @@ canonical_url: "https://bestchromeextensions.com/2025/04/19/build-page-zoom-chro
 
 # Build a Page Zoom Chrome Extension: Custom Zoom Levels Per Website
 
-Have you ever visited a website with text that's too small to read comfortably, or a site with massive images that require constant scrolling? Maybe you need different zoom levels for different websites—your favorite news site at 110%, a documentation site at 125%, and your email at 100%. The built-in Chrome zoom works globally, but what if you want custom zoom levels per website? That's exactly what we'll build in this comprehensive guide.
+Have you ever visited a website with text that's too small to read comfortably, or a site with massive images that require constant scrolling? Maybe you need different zoom levels for different websites, your favorite news site at 110%, a documentation site at 125%, and your email at 100%. The built-in Chrome zoom works globally, but what if you want custom zoom levels per website? That's exactly what we'll build in this comprehensive guide.
 
-Building a page zoom Chrome extension with per-site zoom levels is a practical project that teaches you fundamental concepts of Chrome extension development. You'll work with the Chrome Storage API, content scripts, popup interfaces, and the zoom API—skills that transfer to countless other extension projects.
+Building a page zoom Chrome extension with per-site zoom levels is a practical project that teaches you fundamental concepts of Chrome extension development. You'll work with the Chrome Storage API, content scripts, popup interfaces, and the zoom API, skills that transfer to countless other extension projects.
 
-In this tutorial, we'll create a fully functional Chrome extension that remembers your preferred zoom level for each website and automatically applies it when you visit. Let's dive in.
+In this tutorial, we'll create a fully functional Chrome extension that remembers your preferred zoom level for each website and automatically applies it when you visit. 
 
 ---
 
-## Why Build a Custom Zoom Extension? {#why-build-zoom-extension}
+Why Build a Custom Zoom Extension? {#why-build-zoom-extension}
 
 Before we write code, let's understand why a custom zoom extension is valuable. Chrome's built-in zoom feature works at the browser level, applying the same zoom to all websites. While useful, this one-size-fits-all approach has limitations:
 
-### The Problem with Global Zoom
+The Problem with Global Zoom
 
 When you set Chrome's zoom to 120%, every website displays at 120%. This creates issues: some sites look perfectly sized while others appear oversized or broken at that zoom level. Text might overflow containers, images might misalign, and responsive designs might break.
 
 Some users need 150% zoom for certain sites due to vision impairment, while keeping other sites at default zoom. Others prefer smaller zoom on information-dense sites like Reddit or Hacker News to see more content at once.
 
-### The Solution: Per-Site Zoom Levels
+The Solution: Per-Site Zoom Levels
 
 A custom zoom extension solves this by storing zoom preferences for each domain. When you visit a website, the extension checks if you have a saved preference and applies it automatically. You get the perfect zoom level for every site, without manual adjustment.
 
@@ -42,14 +42,14 @@ This approach demonstrates several key Chrome extension concepts:
 
 ---
 
-## Project Architecture {#project-architecture}
+Project Architecture {#project-architecture}
 
 Our zoom extension will consist of four main components:
 
-1. **manifest.json** - The extension configuration file
-2. **popup.html/popup.js** - The user interface for setting zoom levels
-3. **content.js** - Injected script that applies zoom on each page
-4. **background.js** - Service worker for handling extension events
+1. manifest.json - The extension configuration file
+2. popup.html/popup.js - The user interface for setting zoom levels
+3. content.js - Injected script that applies zoom on each page
+4. background.js - Service worker for handling extension events
 
 Here's how these components work together:
 
@@ -60,7 +60,7 @@ Here's how these components work together:
 
 ---
 
-## Step 1: Creating the Manifest {#step-1-manifest}
+Step 1: Creating the Manifest {#step-1-manifest}
 
 Every Chrome extension starts with a manifest.json file. We'll use Manifest V3, the current standard:
 
@@ -105,24 +105,24 @@ Every Chrome extension starts with a manifest.json file. We'll use Manifest V3, 
 }
 ```
 
-### Understanding the Permissions
+Understanding the Permissions
 
 Let's break down the permissions we need:
 
-- **storage**: Allows us to save zoom preferences per domain
-- **activeTab**: Access to the currently active tab when user interacts with extension
-- **tabs**: Access to tab information including URLs
-- **zoom**: Permission to read and modify zoom settings
+- storage: Allows us to save zoom preferences per domain
+- activeTab: Access to the currently active tab when user interacts with extension
+- tabs: Access to tab information including URLs
+- zoom: Permission to read and modify zoom settings
 
 The host_permissions of `<all_urls>` ensures our extension can work on any website. Content scripts match all URLs so the zoom applies everywhere.
 
 ---
 
-## Step 2: Building the Popup Interface {#step-2-popup}
+Step 2: Building the Popup Interface {#step-2-popup}
 
 The popup is what users see when they click our extension icon. It displays the current zoom level and allows users to adjust it:
 
-### popup.html
+popup.html
 
 ```html
 <!DOCTYPE html>
@@ -221,7 +221,7 @@ The popup is what users see when they click our extension icon. It displays the 
 </html>
 ```
 
-### popup.js
+popup.js
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -344,7 +344,7 @@ The popup handles user interactions, saves zoom preferences to storage, and appl
 
 ---
 
-## Step 3: Content Script for Automatic Zoom {#step-3-content-script}
+Step 3: Content Script for Automatic Zoom {#step-3-content-script}
 
 The content script runs on every page and applies the saved zoom level when the page loads:
 
@@ -401,7 +401,7 @@ The content script listens for page loads and applies saved zoom preferences. Wh
 
 ---
 
-## Step 4: Background Service Worker {#step-4-background}
+Step 4: Background Service Worker {#step-4-background}
 
 The background service worker handles extension lifecycle events and can manage zoom settings:
 
@@ -435,11 +435,11 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 console.log('Page Zoom background service worker loaded');
 ```
 
-The background script ensures that when users switch between tabs, the correct zoom level is applied to each site. This provides a seamless experience across browsing sessions.
+The background script ensures that when users switch between tabs, the correct zoom level is applied to each site. This provides a smooth experience across browsing sessions.
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that we've built all the components, let's test the extension:
 
@@ -457,30 +457,30 @@ Test the functionality:
 
 ---
 
-## Extension Structure Summary {#summary}
+Extension Structure Summary {#summary}
 
 Here's the complete file structure for our zoom extension:
 
 ```
 zoom-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── content.js
-├── background.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ content.js
+ background.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 Once you have the basic extension working, here are some enhancements to consider:
 
-### 1. Zoom Presets
+1. Zoom Presets
 
 Add preset buttons for common zoom levels (50%, 75%, 100%, 125%, 150%, 200%):
 
@@ -488,7 +488,7 @@ Add preset buttons for common zoom levels (50%, 75%, 100%, 125%, 150%, 200%):
 const presets = [50, 75, 100, 125, 150, 200];
 ```
 
-### 2. Keyboard Shortcuts
+2. Keyboard Shortcuts
 
 Add keyboard shortcuts for quick zoom adjustments:
 
@@ -509,7 +509,7 @@ Add keyboard shortcuts for quick zoom adjustments:
 }
 ```
 
-### 3. Export/Import Settings
+3. Export/Import Settings
 
 Allow users to backup and restore their zoom preferences:
 
@@ -522,7 +522,7 @@ async function exportSettings() {
 }
 ```
 
-### 4. Per-Page vs Per-Site Zoom
+4. Per-Page vs Per-Site Zoom
 
 Store zoom settings at the page level (including path) for even more granularity:
 
@@ -532,24 +532,24 @@ const key = `${domain}${pathname}`; // e.g., example.com/products
 
 ---
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
 When building and maintaining your zoom extension, keep these best practices in mind:
 
-### Performance
+Performance
 
 - Use Chrome Storage instead of localStorage for better extension integration
 - Minimize content script overhead by running only necessary code
 - Use event-driven architecture instead of polling
 
-### User Experience
+User Experience
 
 - Provide visual feedback when zoom changes
 - Support keyboard shortcuts for power users
 - Remember the last zoom level for quick access
 - Handle edge cases like chrome:// URLs and about: pages
 
-### Privacy
+Privacy
 
 - Clearly explain what data your extension collects (if any)
 - Use local storage instead of sync storage unless cross-device sync is needed
@@ -557,25 +557,25 @@ When building and maintaining your zoom extension, keep these best practices in 
 
 ---
 
-## Troubleshooting Common Issues {#troubleshooting}
+Troubleshooting Common Issues {#troubleshooting}
 
 Here are solutions to common problems you might encounter:
 
-### Zoom Not Applying
+Zoom Not Applying
 
 If zoom isn't being applied, check:
 - Content script is loaded (check Console for errors)
 - Storage permissions are correct in manifest
 - Tab ID is valid when calling chrome.tabs.setZoom
 
-### Storage Not Persisting
+Storage Not Persisting
 
 If preferences aren't saved:
 - Verify the domain key is being extracted correctly
 - Check that chrome.storage.local.set is being called
 - Look for console errors in the service worker
 
-### Zoom Conflicts
+Zoom Conflicts
 
 If other extensions interfere with zoom:
 - Use chrome.tabs.setZoomSettings to control zoom behavior
@@ -583,16 +583,16 @@ If other extensions interfere with zoom:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 You've now built a complete Chrome extension for custom zoom levels per website. This project demonstrates core Chrome extension concepts including:
 
-- **Manifest V3 configuration** with proper permissions
-- **Popup interface** for user interaction
-- **Chrome Storage API** for persisting preferences
-- **Content scripts** for page-level functionality
-- **Background service workers** for cross-tab functionality
-- **Zoom API** for controlling page zoom levels
+- Manifest V3 configuration with proper permissions
+- Popup interface for user interaction
+- Chrome Storage API for persisting preferences
+- Content scripts for page-level functionality
+- Background service workers for cross-tab functionality
+- Zoom API for controlling page zoom levels
 
 These skills transfer directly to other extension projects. You can now build features like:
 - Dark mode toggles per site
@@ -606,13 +606,13 @@ Remember to test thoroughly across different websites, handle edge cases gracefu
 
 ---
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 
-Ready to take your extension to the next level? Consider:
+Ready to take your extension to the better? Consider:
 
-1. **Publishing to the Chrome Web Store** - Follow the [official publishing guide](https://developer.chrome.com/docs/webstore/publish)
-2. **Adding Manifest V2 support** - For users on older Chrome versions
-3. **Implementing zoom animations** - Smooth transitions between zoom levels
-4. **Adding zoom history** - Quick access to recently used zoom levels
+1. Publishing to the Chrome Web Store - Follow the [official publishing guide](https://developer.chrome.com/docs/webstore/publish)
+2. Adding Manifest V2 support - For users on older Chrome versions
+3. Implementing zoom animations - Smooth transitions between zoom levels
+4. Adding zoom history - Quick access to recently used zoom levels
 
 Explore more Chrome extension tutorials in our comprehensive guide to [Chrome Extension Development](/chrome-extension-development-2025-complete-beginners-guide/).

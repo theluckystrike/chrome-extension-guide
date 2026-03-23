@@ -2,7 +2,7 @@
 
 ## Overview
 - Requires `"webRequest"` permission plus host permissions for URLs you want to intercept
-- Provides hooks into the HTTP request lifecycle — observe, block, or modify requests
+- Provides hooks into the HTTP request lifecycle. observe, block, or modify requests
 - Events fire at different stages: before request, send headers, headers received, completion, errors
 - In Manifest V2, blocking listeners could modify requests; in MV3, most blocking is deprecated
 
@@ -16,7 +16,7 @@ onHeadersReceived → onAuthRequired → onResponseStarted →
 onCompleted / onErrorOccurred
 ```
 
-### onBeforeRequest — Intercepting Requests
+### onBeforeRequest. Intercepting Requests
 Fired when a request is about to occur. Use to:
 - Cancel requests (`blocking: true`)
 - Redirect requests
@@ -56,7 +56,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-### onBeforeSendHeaders — Modifying Request Headers
+### onBeforeSendHeaders. Modifying Request Headers
 Fired before request headers are sent. Use to:
 - Add custom headers
 - Modify existing headers (User-Agent, Referer, etc.)
@@ -86,8 +86,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-### onSendHeaders — Observing Sent Headers
-Fired after request headers have been sent. Read-only — cannot modify. Useful for:
+### onSendHeaders. Observing Sent Headers
+Fired after request headers have been sent. Read-only. cannot modify. Useful for:
 - Logging/monitoring
 - Analytics
 - Debugging
@@ -102,7 +102,7 @@ chrome.webRequest.onSendHeaders.addListener(
 );
 ```
 
-### onHeadersReceived — Response Headers
+### onHeadersReceived. Response Headers
 Fired when response headers are received. Use to:
 - Modify response headers
 - Set cookies
@@ -132,7 +132,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 ```
 
-### onAuthRequired — Handling Authentication
+### onAuthRequired. Handling Authentication
 Fired when the server requests authentication (401/407). Use to:
 - Provide credentials automatically
 - Cancel authentication
@@ -153,7 +153,7 @@ chrome.webRequest.onAuthRequired.addListener(
 );
 ```
 
-### onResponseStarted — Response Body Starts
+### onResponseStarted. Response Body Starts
 Fired when first byte of response is received. Read-only observer.
 
 ```javascript
@@ -165,7 +165,7 @@ chrome.webRequest.onResponseStarted.addListener(
 );
 ```
 
-### onCompleted — Request Completed
+### onCompleted. Request Completed
 Fired when request completes successfully. Read-only.
 
 ```javascript
@@ -177,7 +177,7 @@ chrome.webRequest.onCompleted.addListener(
 );
 ```
 
-### onErrorOccurred — Request Failed
+### onErrorOccurred. Request Failed
 Fired when request fails (network error, timeout, etc.).
 
 ```javascript
@@ -306,9 +306,9 @@ Manifest V3 runs extension logic in service workers, which are:
 ### What's Changed
 | Feature | MV2 | MV3 |
 |---------|-----|-----|
-| Blocking listeners | ✅ | ❌ (in service worker) |
-| `webRequestBlocking` permission | ✅ | ❌ (removed) |
-| Access to request body | ✅ | Limited |
+| Blocking listeners |  |  (in service worker) |
+| `webRequestBlocking` permission |  |  (removed) |
+| Access to request body |  | Limited |
 
 ### The Workaround: Declarative Net Request
 MV3 introduces `declarativeNetRequest` for declarative rules:
@@ -547,8 +547,8 @@ chrome.webRequest.onAuthRequired.addListener(
 - MV3 Migration Guide: https://developer.chrome.com/docs/extensions/mv3/intro/
 
 ## Common Mistakes
-- Using blocking in MV3 service workers — use `declarativeNetRequest` instead
-- Missing host permissions — need permissions for URLs you're intercepting
+- Using blocking in MV3 service workers. use `declarativeNetRequest` instead
+- Missing host permissions. need permissions for URLs you're intercepting
 - Confusing `onSendHeaders` (observer) with `onBeforeSendHeaders` (can modify)
 - Not handling async operations in non-blocking listeners
-- Too broad URL filters — can impact performance significantly
+- Too broad URL filters. can impact performance significantly

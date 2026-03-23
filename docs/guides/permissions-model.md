@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Permissions Model — Developer Guide"
+title: "Chrome Extension Permissions Model. Developer Guide"
 description: "Manage Chrome extension permissions with this guide covering manifest declarations, optional permissions, and security best practices."
 canonical_url: "https://bestchromeextensions.com/guides/permissions-model/"
 ---
@@ -8,11 +8,11 @@ canonical_url: "https://bestchromeextensions.com/guides/permissions-model/"
 
 The permissions system is one of the most critical security mechanisms in Chrome extensions. Understanding how to properly request, manage, and respect permissions is essential for building trustworthy extensions that users feel confident installing. This guide covers the complete permissions model in Manifest V3, from basic concepts to advanced patterns for minimum-privilege design.
 
-## Understanding Permission Types {#understanding-permission-types}
+Understanding Permission Types {#understanding-permission-types}
 
 Chrome extensions support two primary categories of permissions: required permissions declared in the manifest at install time, and optional permissions that can be requested at runtime. Each category serves different use cases and has distinct implications for user trust and extension capabilities.
 
-### Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 Required permissions are declared in the `manifest.json` file under the `permissions` key. These permissions are requested when the user installs the extension and cannot be granted later without user interaction. Users see all required permissions in the installation dialog, and any concerning permissions generate warnings that may deter installation.
 
@@ -36,7 +36,7 @@ Common required permissions include `storage` for persistent data, `tabs` for ta
 
 The key principle is that required permissions should only include those absolutely necessary for the extension's core functionality. If a permission is only needed for specific features or user-triggered actions, it should be declared as optional instead.
 
-### Optional Permissions {#optional-permissions}
+Optional Permissions {#optional-permissions}
 
 Optional permissions provide a more granular approach to permission management. These are declared in the `optional_permissions` field and must be explicitly requested at runtime using the Permissions API. This approach significantly improves the user experience by deferring permission requests until the user actually needs them.
 
@@ -57,11 +57,11 @@ Optional permissions offer several advantages. First, users can install the exte
 
 The decision between required and optional permissions should be based on the extension's default behavior. If the core functionality absolutely requires a permission, it should be required. If the permission enables enhanced features that users explicitly invoke, it should be optional.
 
-## Host Permissions and Match Patterns {#host-permissions-and-match-patterns}
+Host Permissions and Match Patterns {#host-permissions-and-match-patterns}
 
 Host permissions control an extension's access to websites and web resources. They are one of the most sensitive permission categories because they determine what data the extension can read and modify on web pages. Understanding match patterns is essential for implementing the principle of least privilege.
 
-### Match Pattern Syntax {#match-pattern-syntax}
+Match Pattern Syntax {#match-pattern-syntax}
 
 Match patterns use a specialized syntax that allows precise specification of URLs. The basic format is `<scheme>://<host><path>`, with wildcards providing flexibility:
 
@@ -81,7 +81,7 @@ Match patterns use a specialized syntax that allows precise specification of URL
 }
 ```
 
-### Best Practices for Host Permissions {#best-practices-for-host-permissions}
+Best Practices for Host Permissions {#best-practices-for-host-permissions}
 
 Always request the minimum host access necessary for your extension's functionality. If your extension only needs to read data from a specific domain, do not request access to all domains. This reduces the potential impact of a security compromise and increases user trust.
 
@@ -95,11 +95,11 @@ Always request the minimum host access necessary for your extension's functional
 
 When working with user-configurable host access, consider using optional host permissions. This allows users to grant access to specific sites they choose rather than having the extension access everything by default.
 
-## Runtime Permission Requests {#runtime-permission-requests}
+Runtime Permission Requests {#runtime-permission-requests}
 
 The Chrome Permissions API enables extensions to request optional permissions at runtime. This is a critical mechanism for implementing the principle of least privilege, as it allows extensions to function with minimal permissions until the user specifically needs additional capabilities.
 
-### Requesting Optional Permissions {#requesting-optional-permissions}
+Requesting Optional Permissions {#requesting-optional-permissions}
 
 The `chrome.permissions.request()` method initiates a runtime permission request. The user will see a prompt asking them to grant the specific permission. The method returns a Promise that resolves to `true` if the permission was granted and `false` if it was denied.
 
@@ -131,7 +131,7 @@ async function requestNotificationPermission(): Promise<boolean> {
 
 The `chrome.permissions.contains()` method is essential for checking whether a permission is already granted before attempting to request it. This prevents unnecessary prompts and provides a clean user experience.
 
-### Checking Current Permissions {#checking-current-permissions}
+Checking Current Permissions {#checking-current-permissions}
 
 Before performing any operation that requires a specific permission, always verify that the permission is granted. The `contains()` method provides this capability:
 
@@ -150,7 +150,7 @@ async function getBookmarks(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
 }
 ```
 
-### Removing Permissions {#removing-permissions}
+Removing Permissions {#removing-permissions}
 
 Users can revoke permissions at any time through the extensions management page. Your extension should handle this gracefully by checking permissions before using related features and providing appropriate feedback:
 
@@ -173,11 +173,11 @@ chrome.permissions.onAdded.addListener((permissions) => {
 });
 ```
 
-## Understanding Permission Warnings {#understanding-permission-warnings}
+Understanding Permission Warnings {#understanding-permission-warnings}
 
 Permission warnings are displayed to users during installation and serve as the primary mechanism for informed consent. Understanding what triggers warnings and how to minimize them is crucial for user trust.
 
-### Common Permission Warnings {#common-permission-warnings}
+Common Permission Warnings {#common-permission-warnings}
 
 Certain permissions trigger prominent warnings because they provide broad access to user data or browser behavior:
 
@@ -187,11 +187,11 @@ Certain permissions trigger prominent warnings because they provide broad access
 | `tabs` | "Read your browsing history" |
 | `<all_urls>` | "Read and change all your data on all websites" |
 
-Note: Some permissions like `cookies` and `webRequest` do not trigger their own install-time warnings. Warnings depend on the combination of permissions and host access requested.
+Some permissions like `cookies` and `webRequest` do not trigger their own install-time warnings. Warnings depend on the combination of permissions and host access requested.
 
 When multiple sensitive permissions are combined, the warning becomes more severe, which can significantly reduce installation rates.
 
-### Minimizing Warning Impact {#minimizing-warning-impact}
+Minimizing Warning Impact {#minimizing-warning-impact}
 
 The most effective strategy is to minimize the permissions that trigger warnings. Consider these approaches:
 
@@ -208,11 +208,11 @@ The most effective strategy is to minimize the permissions that trigger warnings
 
 The `activeTab` permission is particularly valuable because it provides access to the currently active tab only when the user explicitly invokes the extension, and it does not trigger a warning at installation time.
 
-## The activeTab Permission {#the-activetab-permission}
+The activeTab Permission {#the-activetab-permission}
 
 The `activeTab` permission is a security-focused feature that grants an extension temporary access to the active tab when the user activates it. This permission was specifically designed to balance user security with developer needs.
 
-### How activeTab Works {#how-activetab-works}
+How activeTab Works {#how-activetab-works}
 
 When `activeTab` is declared, the extension does not have access to any tabs by default. Access is granted only in the following scenarios:
 
@@ -232,7 +232,7 @@ When `activeTab` is declared, the extension does not have access to any tabs by 
 
 This approach means that at any given time, the extension has zero tab access unless the user explicitly triggers it. This is dramatically more secure than the `tabs` permission, which provides access to all tabs at all times.
 
-### When to Use activeTab {#when-to-use-activetab}
+When to Use activeTab {#when-to-use-activetab}
 
 The `activeTab` permission is ideal for:
 
@@ -262,7 +262,7 @@ async function getActiveTabContent(): Promise<string | null> {
 }
 ```
 
-### activeTab Limitations {#activetab-limitations}
+activeTab Limitations {#activetab-limitations}
 
 The `activeTab` permission has specific constraints that make it unsuitable for some use cases:
 
@@ -273,13 +273,13 @@ The `activeTab` permission has specific constraints that make it unsuitable for 
 
 For background monitoring or automation scenarios, you will need to use standard permissions like `tabs` or `scripting` with host permissions, accepting the associated warning.
 
-## Minimum-Privilege Extension Design {#minimum-privilege-extension-design}
+Minimum-Privilege Extension Design {#minimum-privilege-extension-design}
 
 The principle of minimum privilege dictates that an extension should request only the permissions it absolutely needs to function, and nothing more. This principle should guide every permission-related decision in extension development.
 
-### Design Patterns {#design-patterns}
+Design Patterns {#design-patterns}
 
-**Feature-Based Permission Gating**
+Feature-Based Permission Gating
 
 Structure your extension to use optional permissions for feature-specific capabilities:
 
@@ -320,7 +320,7 @@ class FeatureManager {
 }
 ```
 
-**Runtime Permission Checks**
+Runtime Permission Checks
 
 Always verify permissions before performing sensitive operations:
 
@@ -343,7 +343,7 @@ class SecureDataHandler {
 }
 ```
 
-**Permission-Efficient Content Script Injection**
+Permission-Efficient Content Script Injection
 
 Inject content scripts only when needed rather than declaratively in the manifest:
 
@@ -370,7 +370,7 @@ async function injectContentScript(tabId: number, url: string): Promise<void> {
 }
 ```
 
-### Progressive Enhancement {#progressive-enhancement}
+Progressive Enhancement {#progressive-enhancement}
 
 Design your extension to work with minimal permissions and enhance functionality when additional permissions are granted:
 
@@ -410,7 +410,7 @@ class ExtensionCore {
 }
 ```
 
-### User Control and Transparency {#user-control-and-transparency}
+User Control and Transparency {#user-control-and-transparency}
 
 Always provide users with clear information about what permissions are needed and why:
 
@@ -445,11 +445,11 @@ class PermissionUI {
 }
 ```
 
-## Security Considerations {#security-considerations}
+Security Considerations {#security-considerations}
 
 Proper permission management is essential for extension security. Follow these additional security practices:
 
-### Validate Permission Scope {#validate-permission-scope}
+Validate Permission Scope {#validate-permission-scope}
 
 ```typescript
 // Always validate that you have permission before accessing data
@@ -469,7 +469,7 @@ async function secureFetch(url: string): Promise<string> {
 }
 ```
 
-### Handle Permission Revocation {#handle-permission-revocation}
+Handle Permission Revocation {#handle-permission-revocation}
 
 ```typescript
 // Gracefully handle when users revoke permissions
@@ -492,7 +492,7 @@ chrome.permissions.onRemoved.addListener(async (removed) => {
 });
 ```
 
-### Avoid Overprivileged Background Scripts {#avoid-overprivileged-background-scripts}
+Avoid Overprivileged Background Scripts {#avoid-overprivileged-background-scripts}
 
 In Manifest V3, background scripts run as service workers with a limited lifecycle. Avoid patterns that require persistent background access to sensitive APIs:
 
@@ -516,22 +516,22 @@ chrome.declarativeContent.onPageChanged.addRules([{
 }]);
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
-The Chrome extension permissions model provides a robust framework for building secure extensions. Key principles to remember:
+The Chrome extension permissions model provides a solid framework for building secure extensions. Key principles to remember:
 
-1. **Prefer optional permissions** over required ones whenever possible
-2. **Use activeTab** for on-demand page access instead of broad tab permissions
-3. **Request specific host permissions** rather than universal access
-4. **Check permissions before use** rather than assuming they exist
-5. **Handle permission changes** gracefully when users revoke access
-6. **Explain permissions to users** with clear rationale for each request
+1. Prefer optional permissions over required ones whenever possible
+2. Use activeTab for on-demand page access instead of broad tab permissions
+3. Request specific host permissions rather than universal access
+4. Check permissions before use rather than assuming they exist
+5. Handle permission changes gracefully when users revoke access
+6. Explain permissions to users with clear rationale for each request
 
 By following these patterns, you can build extensions that respect user privacy, maintain security, and provide excellent user experience while still delivering powerful functionality.
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Permission Gating](../patterns/permission-gating.md)
 - [Permissions Strategy](../guides/extension-permissions-strategy.md)

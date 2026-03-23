@@ -1,25 +1,25 @@
 ---
 layout: default
-title: "Chrome Extension Design System — Developer Guide"
+title: "Chrome Extension Design System. Developer Guide"
 description: "Learn Chrome extension design system with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-design-system/"
 ---
 # Design System for Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 Building consistent, professional UI for Chrome extensions requires understanding the unique constraints and patterns of extension surfaces. This guide covers design principles for creating extensions that feel native to Chrome.
 
-## Popup Constraints {#popup-constraints}
+Popup Constraints {#popup-constraints}
 Chrome imposes specific constraints on popup dimensions:
 - Maximum size: 800px width × 600px height
 - Minimum size: 25px width × 25px height
 - Default size: determined automatically by content dimensions
 - Content is automatically sized to fit within constraints
 
-## Design Language {#design-language}
+Design Language {#design-language}
 Match Chrome's native appearance for a cohesive experience:
 
-### Typography {#typography}
+Typography {#typography}
 Use system font stack for native feel across platforms:
 ```css
 :root {
@@ -30,7 +30,7 @@ Use system font stack for native feel across platforms:
 }
 ```
 
-### Colors {#colors}
+Colors {#colors}
 Follow Chrome's color palette for UI elements:
 ```css
 :root {
@@ -45,10 +45,10 @@ Follow Chrome's color palette for UI elements:
 }
 ```
 
-### Spacing {#spacing}
+Spacing {#spacing}
 Use 8px grid system: 4px, 8px, 12px, 16px, 24px, 32px for consistent spacing.
 
-## Dark Mode Support {#dark-mode-support}
+Dark Mode Support {#dark-mode-support}
 Support both light and dark themes using CSS media queries:
 ```css
 :root {
@@ -65,9 +65,9 @@ Support both light and dark themes using CSS media queries:
 }
 ```
 
-## Layout Patterns {#layout-patterns}
+Layout Patterns {#layout-patterns}
 
-### Fixed Header + Scrollable Content {#fixed-header-scrollable-content}
+Fixed Header + Scrollable Content {#fixed-header-scrollable-content}
 ```css
 .popup-container {
   display: flex;
@@ -95,19 +95,19 @@ Support both light and dark themes using CSS media queries:
 }
 ```
 
-### Bottom Action Bar {#bottom-action-bar}
+Bottom Action Bar {#bottom-action-bar}
 Place primary actions in a fixed footer for easy thumb access on mobile and consistent UX.
 
-## Icon Design {#icon-design}
+Icon Design {#icon-design}
 Create icons at multiple sizes for toolbar and Chrome Web Store:
-- 16×16px — toolbar (1x)
-- 32×32px — toolbar (2x)
-- 48×48px — extension management
-- 128×128px — Chrome Web Store listing
+- 16×16px. toolbar (1x)
+- 32×32px. toolbar (2x)
+- 48×48px. extension management
+- 128×128px. Chrome Web Store listing
 
 Design for both light and dark browser themes using transparent backgrounds or inverted variants.
 
-## Popup vs Side Panel vs Options Page {#popup-vs-side-panel-vs-options-page}
+Popup vs Side Panel vs Options Page {#popup-vs-side-panel-vs-options-page}
 
 | Surface | Use Case |
 |---------|----------|
@@ -115,10 +115,10 @@ Design for both light and dark browser themes using transparent backgrounds or i
 | Side Panel | Persistent tools, reading/viewing content, multi-step workflows |
 | Options Page | Full settings, complex configuration, extensive forms |
 
-## Responsive Design {#responsive-design}
+Responsive Design {#responsive-design}
 Design within popup constraints using flexbox and percentage widths. Test at minimum (25×25) and default sizes.
 
-## CSS Custom Properties {#css-custom-properties}
+CSS Custom Properties {#css-custom-properties}
 Define comprehensive theming system:
 ```css
 :root {
@@ -136,7 +136,7 @@ Define comprehensive theming system:
 }
 ```
 
-## Animation {#animation}
+Animation {#animation}
 Keep animations subtle and purposeful:
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -147,27 +147,27 @@ Keep animations subtle and purposeful:
 }
 ```
 
-## Accessibility {#accessibility}
+Accessibility {#accessibility}
 Follow WCAG 2.1 AA guidelines:
 - Keyboard navigation for all interactive elements
 - ARIA labels for icons and custom controls
 - Focus management on popup open/close
 - Minimum 4.5:1 contrast ratio for text
 
-## Common UI Components {#common-ui-components}
+Common UI Components {#common-ui-components}
 - Toggle switches for boolean settings
 - Search bars with clear button
 - Settings forms with labeled inputs
 - Scrollable lists with virtual scrolling for large datasets
 
-## Cross-References {#cross-references}
-- [Accessibility Guide](accessibility.md) — Full accessibility requirements
-- [Popup Patterns](popup-patterns.md) — Implementation patterns
-- [Options Page](options-page.md) — Settings page design
+Cross-References {#cross-references}
+- [Accessibility Guide](accessibility.md). Full accessibility requirements
+- [Popup Patterns](popup-patterns.md). Implementation patterns
+- [Options Page](options-page.md). Settings page design
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [CSS Injection](../guides/chrome-extension-css-injection.md)
 - [Dark Mode](../guides/theming-dark-mode.md)
@@ -177,5 +177,5 @@ Follow WCAG 2.1 AA guidelines:
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

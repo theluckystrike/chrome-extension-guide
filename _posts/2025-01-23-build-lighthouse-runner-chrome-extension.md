@@ -13,43 +13,43 @@ canonical_url: "https://bestchromeextensions.com/2025/01/23/build-lighthouse-run
 
 Web performance has become a critical factor in user experience, search engine rankings, and conversion rates. As developers and site owners strive to deliver lightning-fast experiences, having the right tools at your fingertips is essential. Google's Lighthouse has emerged as the gold standard for performance auditing, but running audits typically requires opening DevTools or using command-line tools. What if you could bring powerful performance auditing directly into your browser workflow?
 
-In this comprehensive tutorial, you'll learn how to build a Lighthouse Runner Chrome Extension that allows you to run performance audits with a single click, view results in a beautiful popup interface, and integrate seamlessly with your development workflow. By the end of this guide, you'll have a fully functional extension that brings the power of Lighthouse to your browser toolbar.
+In this comprehensive tutorial, you'll learn how to build a Lighthouse Runner Chrome Extension that allows you to run performance audits with a single click, view results in a beautiful popup interface, and integrate smoothly with your development workflow. By the end of this guide, you'll have a fully functional extension that brings the power of Lighthouse to your browser toolbar.
 
 ---
 
-## Understanding Lighthouse and Chrome Extension Architecture {#understanding-lighthouse}
+Understanding Lighthouse and Chrome Extension Architecture {#understanding-lighthouse}
 
 Before diving into the code, it's essential to understand the foundational technologies you'll be working with and how they integrate together to create a powerful performance auditing tool.
 
-### What is Google Lighthouse?
+What is Google Lighthouse?
 
 Google Lighthouse is an open-source, automated tool for improving the quality of web pages. It provides audits for performance, accessibility, progressive web apps, SEO, and more. Lighthouse can be run from Chrome DevTools, from the command line, or as a Node module. The tool generates a detailed report with scores and actionable recommendations for improvement.
 
 The Lighthouse engine works by navigating to a URL, running a series of audits against the page, and generating a comprehensive report. Each audit evaluates a specific aspect of the page, such as first contentful paint, time to interactive, cumulative layout shift, and first input delay. These metrics collectively determine the overall performance score.
 
-For developers, having quick access to Lighthouse is crucial for iterative development. The ability to run performance audits directly from the browser—without switching contexts or opening additional tools—can significantly streamline the development workflow. This is exactly what we'll build in this tutorial.
+For developers, having quick access to Lighthouse is crucial for iterative development. The ability to run performance audits directly from the browser, without switching contexts or opening additional tools, can significantly streamline the development workflow. This is exactly what we'll build in this tutorial.
 
-### Chrome Extension Architecture Overview
+Chrome Extension Architecture Overview
 
-Chrome extensions are web applications that extend the functionality of the Chrome browser. They consist of several components that work together to deliver a seamless user experience. Understanding these components is crucial for building a well-structured extension.
+Chrome extensions are web applications that extend the functionality of the Chrome browser. They consist of several components that work together to deliver a smooth user experience. Understanding these components is crucial for building a well-structured extension.
 
-The **manifest file** (manifest.json) serves as the blueprint of your extension. It defines the extension's name, version, permissions, and the various components it includes. In Manifest V3—the current standard—you'll specify background scripts, content scripts, popup pages, and any additional resources.
+The manifest file (manifest.json) serves as the blueprint of your extension. It defines the extension's name, version, permissions, and the various components it includes. In Manifest V3, the current standard, you'll specify background scripts, content scripts, popup pages, and any additional resources.
 
-**Background scripts** run in the background and handle events, manage state, and coordinate between different parts of the extension. They have access to Chrome APIs that aren't available to regular web pages.
+Background scripts run in the background and handle events, manage state, and coordinate between different parts of the extension. They have access to Chrome APIs that aren't available to regular web pages.
 
-**Popup pages** are the small interfaces that appear when you click the extension icon in the toolbar. These are perfect for quick actions and displaying results in a compact format.
+Popup pages are the small interfaces that appear when you click the extension icon in the toolbar. These are perfect for quick actions and displaying results in a compact format.
 
-**Content scripts** are JavaScript files that run in the context of web pages. They can modify page content, inject styles, and communicate with background scripts.
+Content scripts are JavaScript files that run in the context of web pages. They can modify page content, inject styles, and communicate with background scripts.
 
-For our Lighthouse Runner extension, we'll leverage the popup interface for user interaction and results display, while using background scripts to handle the heavy lifting of running Lighthouse audits.
+For our Lighthouse Runner extension, we'll use the popup interface for user interaction and results display, while using background scripts to handle the heavy lifting of running Lighthouse audits.
 
 ---
 
-## Setting Up Your Development Environment {#development-environment}
+Setting Up Your Development Environment {#development-environment}
 
 Every great project starts with proper setup. Let's configure our development environment and create the foundation for our Lighthouse Runner extension.
 
-### Prerequisites
+Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
@@ -60,30 +60,30 @@ Before you begin, ensure you have the following installed on your system:
 
 You'll also need to understand how to load unpacked extensions in Chrome. Navigate to chrome://extensions, enable "Developer mode" in the top right corner, and use the "Load unpacked" button to test your extension during development.
 
-### Creating the Project Structure
+Creating the Project Structure
 
 Create a new directory for your extension project and set up the following file structure:
 
 ```
 lighthouse-runner/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── background/
-│   └── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── utils/
-    └── lighthouse-helper.js
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ background/
+    background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ utils/
+     lighthouse-helper.js
 ```
 
 This structure separates concerns logically, making your code maintainable and easy to extend. The popup directory contains everything needed for the user interface, while the background directory holds scripts that run independently of any particular webpage.
 
-### Configuring the Manifest File
+Configuring the Manifest File
 
 The manifest.json file is the heart of your Chrome extension. Here's the configuration for our Lighthouse Runner:
 
@@ -121,11 +121,11 @@ This manifest declares the necessary permissions for our extension. The "activeT
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It needs to be intuitive, informative, and fast. Let's build a polished interface that makes running audits and viewing results a breeze.
 
-### HTML Structure
+HTML Structure
 
 Create the popup.html file with a clean, modern layout:
 
@@ -207,7 +207,7 @@ Create the popup.html file with a clean, modern layout:
 
 This HTML structure provides a clear hierarchy: header with branding, main content area with controls and results, and a footer. The results section is hidden by default and revealed only after an audit completes.
 
-### Styling the Popup
+Styling the Popup
 
 Create popup.css to give your extension a professional, polished look:
 
@@ -427,11 +427,11 @@ This CSS provides a clean, modern interface following Google's design language. 
 
 ---
 
-## Implementing the Core Functionality {#core-functionality}
+Implementing the Core Functionality {#core-functionality}
 
-Now comes the heart of our extension—connecting the popup interface to Lighthouse's powerful auditing engine. We'll create the JavaScript files that make everything work together.
+Now comes the heart of our extension, connecting the popup interface to Lighthouse's powerful auditing engine. We'll create the JavaScript files that make everything work together.
 
-### The Popup Script
+The Popup Script
 
 The popup script handles user interactions and communicates with the background script:
 
@@ -542,9 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-This script manages the popup's interactivity: capturing user input, sending messages to the background script, handling the loading state, and displaying results. It also implements color coding for scores—green for good (90+), orange for needs improvement (50-89), and red for poor (below 50).
+This script manages the popup's interactivity: capturing user input, sending messages to the background script, handling the loading state, and displaying results. It also implements color coding for scores, green for good (90+), orange for needs improvement (50-89), and red for poor (below 50).
 
-### The Background Script
+The Background Script
 
 The background script serves as the bridge between the popup and Lighthouse. It handles the actual Lighthouse execution:
 
@@ -598,18 +598,18 @@ async function loadLighthouse() {
 
 ---
 
-## Testing and Refining Your Extension {#testing}
+Testing and Refining Your Extension {#testing}
 
 With the core functionality implemented, it's time to test your extension and refine it based on real-world usage.
 
-### Loading Your Extension in Chrome
+Loading Your Extension in Chrome
 
 1. Open Chrome and navigate to chrome://extensions
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension's directory
 4. Pin your extension to the toolbar for easy access
 
-### Testing the Audit Functionality
+Testing the Audit Functionality
 
 Click your extension icon, and you should see the popup interface. Try running an audit on a known website. Watch for:
 
@@ -618,45 +618,45 @@ Click your extension icon, and you should see the popup interface. Try running a
 - Correct error handling for invalid URLs or failed audits
 - Responsive layout across different screen sizes
 
-### Optimization Tips
+Optimization Tips
 
 As you test, consider these improvements:
 
-**Performance**: Lighthouse audits can take 30-60 seconds. Add progress indicators to keep users informed. Consider caching recent results to avoid re-running audits for the same URL.
+Performance: Lighthouse audits can take 30-60 seconds. Add progress indicators to keep users informed. Consider caching recent results to avoid re-running audits for the same URL.
 
-**Error Handling**: Network issues, timeouts, and blocked resources can cause audits to fail. Implement robust error messages that guide users toward solutions.
+Error Handling: Network issues, timeouts, and blocked resources can cause audits to fail. Implement solid error messages that guide users toward solutions.
 
-**User Experience**: Add keyboard shortcuts for power users. Consider adding history functionality to track audit results over time.
+User Experience: Add keyboard shortcuts for power users. Consider adding history functionality to track audit results over time.
 
 ---
 
-## Advanced Features and Extensions {#advanced-features}
+Advanced Features and Extensions {#advanced-features}
 
 Once you have the basic Lighthouse Runner working, consider adding these advanced features to make your extension truly standout.
 
-### Export and Share Results
+Export and Share Results
 
-Add functionality to export audit results in various formats—JSON for developers, PDF reports for stakeholders, or shareable links.
+Add functionality to export audit results in various formats, JSON for developers, PDF reports for stakeholders, or shareable links.
 
-### Automated Scheduled Audits
+Automated Scheduled Audits
 
 Use Chrome's alarm API to run periodic audits on specified URLs. This is valuable for monitoring the performance of web applications over time.
 
-### Comparison Tools
+Comparison Tools
 
 Implement a feature that compares current audit results with previous runs, highlighting improvements or regressions in key metrics.
 
-### Integration with CI/CD
+Integration with CI/CD
 
 Create a build script that exports Lighthouse results in formats compatible with popular CI/CD platforms, enabling automated performance regression testing.
 
 ---
 
-## Deployment and Distribution {#deployment}
+Deployment and Distribution {#deployment}
 
 When your extension is ready for the world, you'll want to publish it to the Chrome Web Store.
 
-### Preparing for Release
+Preparing for Release
 
 Before publishing, ensure your extension meets Chrome's policies:
 
@@ -665,7 +665,7 @@ Before publishing, ensure your extension meets Chrome's policies:
 - Write a compelling description with relevant keywords
 - Test thoroughly across different Chrome versions and platforms
 
-### Publishing Process
+Publishing Process
 
 1. Create a developer account at the Chrome Web Store
 2. Package your extension as a ZIP file
@@ -675,9 +675,9 @@ Before publishing, ensure your extension meets Chrome's policies:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Building a Lighthouse Runner Chrome Extension is an excellent project that combines web development skills with practical utility. You've learned how to create the core components of a Chrome extension—manifest configuration, popup interface, and background scripts—and how to integrate Google's Lighthouse for powerful performance auditing.
+Building a Lighthouse Runner Chrome Extension is an excellent project that combines web development skills with practical utility. You've learned how to create the core components of a Chrome extension, manifest configuration, popup interface, and background scripts, and how to integrate Google's Lighthouse for powerful performance auditing.
 
 This extension serves as a foundation that you can continue to expand. The principles you've learned here apply to building any Chrome extension, from simple utilities to complex development tools.
 
@@ -689,25 +689,25 @@ Now it's your turn to take this foundation and make it your own. Add your unique
 
 ---
 
-## Frequently Asked Questions {#faq}
+Frequently Asked Questions {#faq}
 
-**Can I use this extension offline?**
+Can I use this extension offline?
 
 Lighthouse requires an internet connection to run audits since it needs to load the target webpage and its resources. However, you can view previously cached results offline.
 
-**How long does an audit take?**
+How long does an audit take?
 
 Audit duration depends on the complexity of the target page. Simple pages may complete in 10-20 seconds, while complex web applications can take 60 seconds or longer.
 
-**Are the results accurate compared to DevTools?**
+Are the results accurate compared to DevTools?
 
 Yes, the Lighthouse used in extensions is the same engine that powers Chrome DevTools. Results are identical whether you use DevTools or your extension.
 
-**Can I audit local development servers?**
+Can I audit local development servers?
 
 Yes, as long as the server is accessible from Chrome. You can enter localhost URLs directly in the extension.
 
-**Does this work with all websites?**
+Does this work with all websites?
 
 Some websites may block automated audits or require authentication. For password-protected pages, you'll need to use Chrome's DevTools Lighthouse panel while logged in.
 

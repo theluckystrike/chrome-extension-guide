@@ -16,21 +16,21 @@ The Chrome Side Panel API represents one of the most significant additions to th
 
 In this comprehensive tutorial, you'll learn how to build production-ready side panel extensions using TypeScript, with real-world examples inspired by extensions like Tab Suspender Pro. We'll cover everything from basic setup to advanced patterns including per-tab customization, service worker communication, and responsive design considerations.
 
-## Understanding the Side Panel API
+Understanding the Side Panel API
 
 The Side Panel API addresses a fundamental limitation of traditional extension popups: their ephemeral nature. When users click away from a popup, it closes, forcing them to reopen it for each interaction. Side panels solve this by remaining open throughout the browsing session, enabling use cases that were previously impractical:
 
-- **Research assistants** that analyze page content as users browse
-- **Note-taking tools** that persist across multiple pages
-- **AI-powered companions** that maintain context during research sessions
-- **Reading aids** like dictionaries and translators that users reference continuously
-- **Tab management interfaces** similar to Tab Suspender Pro that provide ongoing tab oversight
+- Research assistants that analyze page content as users browse
+- Note-taking tools that persist across multiple pages
+- AI-powered companions that maintain context during research sessions
+- Reading aids like dictionaries and translators that users reference continuously
+- Tab management interfaces similar to Tab Suspender Pro that provide ongoing tab oversight
 
 The API provides fine-grained control over which panel displays for each tab, enabling context-aware experiences that adapt to the website being viewed.
 
-## Manifest Configuration
+Manifest Configuration
 
-### Basic Setup
+Basic Setup
 
 Every side panel extension requires specific manifest configuration. Here's the complete TypeScript-friendly setup:
 
@@ -80,7 +80,7 @@ The `side_panel` key accepts three properties:
 | `default_title` | string | Accessible title for screen readers |
 | `default_icon` | object | 16x16 icon for the panel header |
 
-### TypeScript Type Definitions
+TypeScript Type Definitions
 
 Chrome provides type definitions for the Side Panel API. Install the types:
 
@@ -110,13 +110,13 @@ interface SidePanelConfig {
 }
 ```
 
-## Core API Methods
+Core API Methods
 
-### Opening the Side Panel
+Opening the Side Panel
 
 There are two primary ways to open the side panel: user-triggered via the toolbar icon, and programmatically via the API.
 
-**User-Triggered Opening:**
+User-Triggered Opening:
 
 Configure the panel to open automatically when users click the extension icon:
 
@@ -132,7 +132,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-**Programmatic Opening:**
+Programmatic Opening:
 
 For more control, open the panel programmatically:
 
@@ -160,7 +160,7 @@ async function openSidePanelForTab(tabId: number): Promise<void> {
 
 Note that `chrome.sidePanel.open()` requires a user gesture in most contexts. Attempting to open the panel without user interaction will fail.
 
-### Configuring Panel Options
+Configuring Panel Options
 
 The `setOptions` method controls which panel displays for each tab:
 
@@ -192,7 +192,7 @@ async function setCurrentTabPanel(panelPath: string): Promise<void> {
 }
 ```
 
-### Reading Panel Configuration
+Reading Panel Configuration
 
 Retrieve the current panel configuration:
 
@@ -216,7 +216,7 @@ async function getGlobalPanelConfig(): Promise<chrome.sidePanel.SidePanelConfig 
 }
 ```
 
-### Panel Behavior Configuration
+Panel Behavior Configuration
 
 Control whether clicking the extension icon opens the side panel:
 
@@ -241,11 +241,11 @@ async function getPanelBehavior(): Promise<boolean> {
 }
 ```
 
-## Per-Tab vs Global Side Panels
+Per-Tab vs Global Side Panels
 
 One of the Side Panel API's most powerful features is the ability to display different panels based on the active tab's context. This enables sophisticated, context-aware experiences.
 
-### Context-Aware Panel Selection
+Context-Aware Panel Selection
 
 Here's how Tab Suspender Pro uses per-tab panels to provide relevant tab management interfaces:
 
@@ -296,7 +296,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 });
 ```
 
-### Global Panels for Universal Features
+Global Panels for Universal Features
 
 Some features should always be accessible regardless of the active tab:
 
@@ -316,11 +316,11 @@ async function setGlobalQuickActionsPanel(): Promise<void> {
 }
 ```
 
-## Communication Between Side Panel and Service Worker
+Communication Between Side Panel and Service Worker
 
 The side panel operates in its own execution context, separate from the service worker. Communication between these contexts uses Chrome's message passing system.
 
-### Sending Messages from Panel to Service Worker
+Sending Messages from Panel to Service Worker
 
 ```typescript
 // sidepanel/panel.ts - Sending messages to background
@@ -369,7 +369,7 @@ async function suspendTab(tabId: number): Promise<boolean> {
 }
 ```
 
-### Receiving Messages in Service Worker
+Receiving Messages in Service Worker
 
 ```typescript
 // background/service-worker.ts
@@ -432,7 +432,7 @@ async function handleSuspendTab(
 }
 ```
 
-### Using Long-Lived Connections
+Using Long-Lived Connections
 
 For continuous communication, establish a long-lived port connection:
 
@@ -495,7 +495,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### State Sharing with chrome.storage
+State Sharing with chrome.storage
 
 For persistent state that survives service worker restarts:
 
@@ -537,11 +537,11 @@ async function saveExtensionState(state: Partial<ExtensionState>): Promise<void>
 }
 ```
 
-## Lifecycle and Persistence
+Lifecycle and Persistence
 
 Understanding the side panel's lifecycle is crucial for building reliable extensions.
 
-### Panel Lifecycle Events
+Panel Lifecycle Events
 
 ```typescript
 // sidepanel/panel.ts - Handle lifecycle
@@ -573,7 +573,7 @@ function refreshPanelData(): void {
 }
 ```
 
-### Handling Service Worker Restarts
+Handling Service Worker Restarts
 
 The service worker can terminate while the panel remains open. Handle reconnection gracefully:
 
@@ -626,7 +626,7 @@ class PanelConnectionManager {
 }
 ```
 
-## Responsive Design for Variable Panel Widths
+Responsive Design for Variable Panel Widths
 
 The side panel can resize from 300px to 600px width, controlled by users. Your panel must adapt:
 
@@ -685,7 +685,7 @@ body.medium .full-description { display: none; }
 body.expanded .tab-preview { max-height: 200px; }
 ```
 
-## Building a Production Extension: Tab Manager Example
+Building a Production Extension: Tab Manager Example
 
 Here's a complete example combining all concepts:
 
@@ -835,7 +835,7 @@ class TabManagerPanel {
       <div class="tab-item ${tab.suspended ? 'suspended' : ''}">
         <img src="${tab.favicon}" class="tab-favicon" />
         <span class="tab-title">${this.escapeHtml(tab.title)}</span>
-        ${tab.pinned ? '<span class="pin-icon">📌</span>' : ''}
+        ${tab.pinned ? '<span class="pin-icon"></span>' : ''}
       </div>
     `).join('');
   }
@@ -859,18 +859,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Side Panel vs Popup: Making the Right Choice
+Side Panel vs Popup: Making the Right Choice
 
 | Feature | Side Panel | Popup |
 |---------|-----------|-------|
-| **Persistence** | Stays open during navigation | Closes on blur |
-| **Width** | Resizable 300-600px | Fixed ~300px |
-| **Height** | Full viewport height | Limited ~400px |
-| **Lifetime** | Independent of user action | Triggered by click |
-| **Multiple panels** | Per-tab customization | Single panel |
-| **Resource usage** | Higher (always rendered) | Lower (on-demand) |
+| Persistence | Stays open during navigation | Closes on blur |
+| Width | Resizable 300-600px | Fixed ~300px |
+| Height | Full viewport height | Limited ~400px |
+| Lifetime | Independent of user action | Triggered by click |
+| Multiple panels | Per-tab customization | Single panel |
+| Resource usage | Higher (always rendered) | Lower (on-demand) |
 
-### Choose Side Panel When Building:
+Choose Side Panel When Building:
 - Research tools that analyze multiple pages
 - Note-taking with persistent access
 - AI assistants requiring ongoing context
@@ -878,14 +878,14 @@ document.addEventListener('DOMContentLoaded', () => {
 - Reading aids (dictionaries, translators)
 - Site-specific tools
 
-### Choose Popup When Building:
+Choose Popup When Building:
 - Quick actions (bookmark, copy, toggle)
 - Settings and configuration forms
 - One-time notifications
 - Simple interactions under 3 seconds
 - Resource-constrained environments
 
-## Performance Best Practices
+Performance Best Practices
 
 Side panels consume resources while open. Optimize for performance:
 
@@ -925,7 +925,7 @@ const handleResize = debounce(() => {
 window.addEventListener('resize', handleResize);
 ```
 
-## Security Considerations
+Security Considerations
 
 Follow security best practices:
 
@@ -957,14 +957,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 }
 ```
 
-## Conclusion
+Conclusion
 
 The Chrome Side Panel API opens exciting possibilities for extension developers. Unlike traditional popups, side panels provide persistent, context-aware interfaces that transform the user experience. Throughout this tutorial, you've learned how to:
 
 - Configure the manifest for side panel support
 - Use TypeScript for type-safe development
 - Implement per-tab and global panel configurations
-- Establish robust communication between panel and service worker
+- Establish solid communication between panel and service worker
 - Handle lifecycle events and service worker restarts
 - Build responsive interfaces that adapt to panel width
 - Apply performance optimizations for production extensions

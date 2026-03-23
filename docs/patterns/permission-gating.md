@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Permission Gating — Best Practices"
+title: "Chrome Extension Permission Gating. Best Practices"
 description: "Request permissions progressively with permission gating patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/permission-gating/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/permission-gating/"
 
 Guide for implementing UI patterns that gate features behind optional permissions in Chrome extensions.
 
-## Progressive Permission Requests {#progressive-permission-requests}
+Progressive Permission Requests {#progressive-permission-requests}
 
 Show features as locked or disabled until the user grants the required permission. Request permission only when the user clicks to access the gated feature.
 
@@ -31,7 +31,7 @@ class GatedFeature {
 }
 ```
 
-## Permission State Checking {#permission-state-checking}
+Permission State Checking {#permission-state-checking}
 
 Use `chrome.permissions.contains()` to determine the current UI state. Check permissions on extension load and cache results.
 
@@ -61,11 +61,11 @@ class PermissionManager {
 }
 ```
 
-## Storing Permission Grants {#storing-permission-grants}
+Storing Permission Grants {#storing-permission-grants}
 
 Cache permission state in `chrome.storage` for faster UI rendering on extension startup.
 
-## Permission Revocation Handling {#permission-revocation-handling}
+Permission Revocation Handling {#permission-revocation-handling}
 
 Listen to `chrome.permissions.onRemoved` to update UI when users revoke permissions via extension settings.
 
@@ -75,34 +75,34 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 });
 ```
 
-## Inline Prompts vs Settings Page {#inline-prompts-vs-settings-page}
+Inline Prompts vs Settings Page {#inline-prompts-vs-settings-page}
 
-- **Inline prompts**: Request permissions contextually when user interacts with a feature
-- **Dedicated settings page**: Allow users to manage all permissions in one place
+- Inline prompts: Request permissions contextually when user interacts with a feature
+- Dedicated settings page: Allow users to manage all permissions in one place
 
-## Explaining Why Permissions Are Needed {#explaining-why-permissions-are-needed}
+Explaining Why Permissions Are Needed {#explaining-why-permissions-are-needed}
 
 Display contextual help text explaining the benefit before requesting permission. Build trust by being transparent.
 
-## Graceful Degradation {#graceful-degradation}
+Graceful Degradation {#graceful-degradation}
 
 Provide fallback behavior when permission is denied. Users can still use basic features without optional permissions.
 
-## Re-prompting Strategies {#re-prompting-strategies}
+Re-prompting Strategies {#re-prompting-strategies}
 
 Don't spam users with repeated requests. Show a non-intrusive banner instead after initial denial.
 
-## UI Components {#ui-components}
+UI Components {#ui-components}
 
-- **Permission cards**: Visual cards showing locked/unlocked feature state
-- **Feature gates**: UI elements that block access until permission granted
-- **Upgrade prompts**: Call-to-action prompts requesting additional permissions
+- Permission cards: Visual cards showing locked/unlocked feature state
+- Feature gates: UI elements that block access until permission granted
+- Upgrade prompts: Call-to-action prompts requesting additional permissions
 
-## Testing Permission Flows {#testing-permission-flows}
+Testing Permission Flows {#testing-permission-flows}
 
-Note: `chrome.permissions.request()` can only be called from a user gesture (click handler).
+`chrome.permissions.request()` can only be called from a user gesture (click handler).
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Permissions Model](../guides/permissions-model.md)
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md)

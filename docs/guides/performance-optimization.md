@@ -1,32 +1,32 @@
 ---
 layout: default
-title: "Chrome Extension Performance Optimization — Speed Up Your Extension"
+title: "Chrome Extension Performance Optimization. Speed Up Your Extension"
 description: "Master Chrome extension performance optimization with practical tips for faster load times, efficient code execution, and improved user experience."
 canonical_url: "https://bestchromeextensions.com/guides/performance-optimization/"
 ---
-# Chrome Extension Performance Optimization — Speed Up Your Extension
+# Chrome Extension Performance Optimization. Speed Up Your Extension
 
-## Overview {#overview}
+Overview {#overview}
 
 Performance is critical for Chrome extensions. Users expect instant responses, and a slow extension leads to poor reviews, uninstalls, and frustrated users. This guide covers essential optimization techniques to make your extension lightning-fast, from reducing startup time to optimizing runtime performance.
 
 Chrome extensions face unique performance challenges: the service worker can be terminated at any time, content scripts inject into every page, and memory usage directly impacts browser performance. Understanding these challenges and applying the right optimization strategies will significantly improve your extension's speed and reliability.
 
-## Optimize Service Worker Startup {#optimize-service-worker-startup}
+Optimize Service Worker Startup {#optimize-service-worker-startup}
 
 The service worker is your extension's backbone, but it can be terminated after 30 seconds of inactivity. When it wakes up, every millisecond counts. Keep your startup logic lean and defer non-essential initialization.
 
-### Lazy Load Modules {#lazy-load-modules}
+Lazy Load Modules {#lazy-load-modules}
 
 Avoid importing heavy modules at the top of your service worker. Use dynamic imports to load code only when needed:
 
 ```javascript
-// ❌ Bad: Load all modules upfront
+//  Bad: Load all modules upfront
 import { heavyAnalytics } from './analytics.js';
 import { complexParser } from './parser.js';
 import { dataProcessor } from './processor.js';
 
-// ✅ Good: Lazy load on demand
+//  Good: Lazy load on demand
 async function handleMessage(request) {
   if (request.type === 'analytics') {
     const { heavyAnalytics } = await import('./analytics.js');
@@ -39,12 +39,12 @@ async function handleMessage(request) {
 }
 ```
 
-### Defer Non-Critical Initialization {#defer-non-critical-initialization}
+Defer Non-Critical Initialization {#defer-non-critical-initialization}
 
 Only initialize what's immediately needed. Postpone analytics, sync operations, and background tasks:
 
 ```javascript
-// ❌ Bad: Initialize everything on startup
+//  Bad: Initialize everything on startup
 chrome.runtime.onInstalled.addListener(() => {
   syncData();
   loadExtensions();
@@ -52,7 +52,7 @@ chrome.runtime.onInstalled.addListener(() => {
   setupBackgroundTasks();
 });
 
-// ✅ Good: Defer non-critical operations
+//  Good: Defer non-critical operations
 chrome.runtime.onInstalled.addListener(() => {
   // Critical: Load user preferences immediately
   loadPreferences();
@@ -63,11 +63,11 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Minimize Content Script Impact {#minimize-content-script-impact}
+Minimize Content Script Impact {#minimize-content-script-impact}
 
 Content scripts run on every matching page, so optimization here has massive impact. Users notice slow page loads caused by heavy content scripts.
 
-### Use Declarative Net Request for Blocking {#use-declarative-net-request-for-blocking}
+Use Declarative Net Request for Blocking {#use-declarative-net-request-for-blocking}
 
 Instead of content scripts that intercept requests, use declarative net request rules:
 
@@ -93,7 +93,7 @@ Instead of content scripts that intercept requests, use declarative net request 
 
 This is much faster than blocking in content scripts because the browser handles it at the network level.
 
-### Run Content Scripts Conditionally {#run-content-scripts-conditionally}
+Run Content Scripts Conditionally {#run-content-scripts-conditionally}
 
 Limit when your content script runs using match patterns and dynamic conditions:
 
@@ -112,30 +112,30 @@ Limit when your content script runs using match patterns and dynamic conditions:
 
 Use `document_idle` instead of `document_start` unless you absolutely need early access. This lets the page load first, improving perceived performance.
 
-### Communicate Efficiently Between Contexts {#communicate-efficiently-between-contexts}
+Communicate Efficiently Between Contexts {#communicate-efficiently-between-contexts}
 
 Minimize message passing overhead by batching operations:
 
 ```javascript
-// ❌ Bad: Multiple individual messages
+//  Bad: Multiple individual messages
 for (const item of items) {
   chrome.runtime.sendMessage({ type: 'PROCESS', data: item });
 }
 
-// ✅ Good: Batch the data
+//  Good: Batch the data
 chrome.runtime.sendMessage({ 
   type: 'PROCESS_BATCH', 
   data: items 
 });
 ```
 
-## Optimize Storage Operations {#optimize-storage-operations}
+Optimize Storage Operations {#optimize-storage-operations}
 
-Storage operations can be slow. Chrome provides multiple storage APIs—choose the right one for your use case.
+Storage operations can be slow. Chrome provides multiple storage APIs, choose the right one for your use case.
 
-### Use chrome.storage.session for Ephemeral Data {#use-chromestoragesession-for-ephemeral-data}
+Use chrome.storage.session for Ephemeral Data {#use-chromestoragesession-for-ephemeral-data}
 
-For data that doesn't need to persist, use session storage—it's faster and doesn't write to disk:
+For data that doesn't need to persist, use session storage, it's faster and doesn't write to disk:
 
 ```javascript
 // Store temporary computation results
@@ -148,17 +148,17 @@ await chrome.storage.session.set({
 const { computedCache } = await chrome.storage.session.get('computedCache');
 ```
 
-### Batch Storage Operations {#batch-storage-operations}
+Batch Storage Operations {#batch-storage-operations}
 
 Group multiple storage operations into single calls:
 
 ```javascript
-// ❌ Bad: Multiple individual writes
+//  Bad: Multiple individual writes
 await chrome.storage.local.set({ key1: value1 });
 await chrome.storage.local.set({ key2: value2 });
 await chrome.storage.local.set({ key3: value3 });
 
-// ✅ Good: Single batched write
+//  Good: Single batched write
 await chrome.storage.local.set({
   key1: value1,
   key2: value2,
@@ -166,11 +166,11 @@ await chrome.storage.local.set({
 });
 ```
 
-## Efficient Event Handling {#efficient-event-handling}
+Efficient Event Handling {#efficient-event-handling}
 
-### Use chrome.alarms Instead of setInterval {#use-chromealarms-instead-of-setinterval}
+Use chrome.alarms Instead of setInterval {#use-chromealarms-instead-of-setinterval}
 
-The service worker doesn't support `setInterval` reliably—it may be throttled or stopped. Use chrome.alarms for scheduled tasks:
+The service worker doesn't support `setInterval` reliably, it may be throttled or stopped. Use chrome.alarms for scheduled tasks:
 
 ```javascript
 // Create a repeating alarm
@@ -186,7 +186,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Debounce Expensive Operations {#debounce-expensive-operations}
+Debounce Expensive Operations {#debounce-expensive-operations}
 
 Prevent rapid repeated calls by debouncing:
 
@@ -209,11 +209,11 @@ document.addEventListener('input', (e) => {
 });
 ```
 
-## Optimize Bundle Size {#optimize-bundle-size}
+Optimize Bundle Size {#optimize-bundle-size}
 
 A smaller bundle loads faster. Use these techniques to keep your extension lean:
 
-### Tree Shaking and Code Splitting {#tree-shaking-and-code-splitting}
+Tree Shaking and Code Splitting {#tree-shaking-and-code-splitting}
 
 Configure your bundler to eliminate dead code:
 
@@ -231,16 +231,16 @@ module.exports = {
 };
 ```
 
-### Remove Unused Dependencies {#remove-unused-dependencies}
+Remove Unused Dependencies {#remove-unused-dependencies}
 
 Audit your dependencies regularly:
 
 ```bash
-# Find unused packages
+Find unused packages
 npx depcruise --include-only "^src/" . --output-type json | jq '.modules[] | select(.dependencies[]? | .valid == false)'
 ```
 
-## Use Performance APIs {#use-performance-apis}
+Use Performance APIs {#use-performance-apis}
 
 Measure where time is actually spent:
 
@@ -260,7 +260,7 @@ measurePerformance('Data processing', () => {
 });
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 Optimizing Chrome extension performance requires attention to multiple areas: service worker startup time, content script efficiency, storage operations, and bundle size. Apply these techniques systematically:
 

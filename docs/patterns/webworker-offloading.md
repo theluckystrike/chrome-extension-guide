@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Webworker Offloading — Best Practices"
+title: "Chrome Extension Webworker Offloading. Best Practices"
 description: "Offload heavy computation to Web Workers."
 canonical_url: "https://bestchromeextensions.com/patterns/webworker-offloading/"
 ---
@@ -9,19 +9,19 @@ canonical_url: "https://bestchromeextensions.com/patterns/webworker-offloading/"
 
 Web Workers enable running computationally intensive tasks off the main thread, keeping extension UIs responsive.
 
-## Where Workers Are Available {#where-workers-are-available}
+Where Workers Are Available {#where-workers-are-available}
 
 Web Workers work in these extension contexts:
-- **Popup pages** - Keep UI animations smooth during heavy processing
-- **Options pages** - Process large datasets without freezing settings
-- **Side panel** - Handle data transformations without blocking user interaction
-- **Offscreen documents** - Run background CPU-intensive operations
+- Popup pages - Keep UI animations smooth during heavy processing
+- Options pages - Process large datasets without freezing settings
+- Side panel - Handle data transformations without blocking user interaction
+- Offscreen documents - Run background CPU-intensive operations
 
-**Not available** in:
+Not available in:
 - Service workers (use offscreen documents instead)
 - Content scripts (use offscreen documents for heavy computation)
 
-## Creating a Worker {#creating-a-worker}
+Creating a Worker {#creating-a-worker}
 
 ```javascript
 // In an extension page (popup, options, side panel)
@@ -33,7 +33,7 @@ const worker = new Worker(chrome.runtime.getURL('worker.js'), {
 });
 ```
 
-## Offscreen Document + Worker Pipeline {#offscreen-document-worker-pipeline}
+Offscreen Document + Worker Pipeline {#offscreen-document-worker-pipeline}
 
 For background CPU-intensive tasks, combine offscreen documents with Workers:
 
@@ -54,15 +54,15 @@ worker.onmessage = (e) => {
 };
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Data processing**: Filter, sort, aggregate large datasets
-- **Encryption/decryption**: Crypto operations without blocking UI
-- **Image manipulation**: Resize, compress, apply filters
-- **CSV/JSON parsing**: Parse large files without freezing popup
-- **Complex calculations**: Statistics, projections, algorithms
+- Data processing: Filter, sort, aggregate large datasets
+- Encryption/decryption: Crypto operations without blocking UI
+- Image manipulation: Resize, compress, apply filters
+- CSV/JSON parsing: Parse large files without freezing popup
+- Complex calculations: Statistics, projections, algorithms
 
-## Message Passing {#message-passing}
+Message Passing {#message-passing}
 
 ```javascript
 // Main thread
@@ -77,7 +77,7 @@ self.onmessage = (e) => {
 };
 ```
 
-## Transferable Objects {#transferable-objects}
+Transferable Objects {#transferable-objects}
 
 Use transferable objects for zero-copy transfer of large data:
 
@@ -94,7 +94,7 @@ worker.onmessage = (e) => {
 worker.postMessage({ imageData }, [imageData.data.buffer]);
 ```
 
-## SharedWorker for Shared State {#sharedworker-for-shared-state}
+SharedWorker for Shared State {#sharedworker-for-shared-state}
 
 SharedWorkers allow multiple extension pages to share state:
 
@@ -104,7 +104,7 @@ shared.port.postMessage({ action: 'increment' });
 shared.port.onmessage = (e) => { console.log('Count:', e.data); };
 ```
 
-## Worker Termination {#worker-termination}
+Worker Termination {#worker-termination}
 
 Always terminate workers when no longer needed:
 
@@ -116,7 +116,7 @@ window.addEventListener('unload', () => worker.terminate());
 worker.onmessage = () => worker.terminate();
 ```
 
-## Error Handling {#error-handling}
+Error Handling {#error-handling}
 
 ```javascript
 worker.onerror = (e) => {
@@ -130,9 +130,9 @@ try {
 }
 ```
 
-## Bundling Workers {#bundling-workers}
+Bundling Workers {#bundling-workers}
 
-**Vite:**
+Vite:
 ```javascript
 // vite.config.js
 export default {
@@ -143,7 +143,7 @@ export default {
 // Import: import Worker from './worker.js?worker'
 ```
 
-**Webpack:**
+Webpack:
 ```javascript
 // webpack.config.js
 module.exports = {
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Offscreen Documents](./offscreen-documents.md)
 - [Performance Guide](../guides/performance.md)

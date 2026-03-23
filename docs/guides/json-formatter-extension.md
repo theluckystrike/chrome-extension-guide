@@ -21,33 +21,33 @@ A comprehensive guide to building a production-ready JSON formatter extension us
 
 A JSON Formatter extension typically consists of three main components:
 
-1. **Popup UI** - Quick access for manual JSON formatting
-2. **Content Script Overlay** - Format JSON directly on web pages
-3. **Background Service Worker** - Handles persistent state and cross-context communication
+1. Popup UI - Quick access for manual JSON formatting
+2. Content Script Overlay - Format JSON directly on web pages
+3. Background Service Worker - Handles persistent state and cross-context communication
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Extension Architecture               │
-├─────────────────────────────────────────────────────────┤
-│  Popup (popup.ts)     │  Content Script (content.ts)   │
-│  - Input textarea    │  - Overlay injection           │
-│  - Format button     │  - Selection listener           │
-│  - Copy/Download     │  - Page mutation observer       │
-└──────────┬───────────┴──────────────┬──────────────────┘
-           │                           │
-           └───────────┬───────────────┘
-                       ▼
-           ┌─────────────────────────┐
-           │  Background (service    │
-           │  worker)                │
-           │  - Storage sync         │
-           │  - Settings management  │
-           └─────────────────────────┘
+
+                    Extension Architecture               
+
+  Popup (popup.ts)       Content Script (content.ts)   
+  - Input textarea      - Overlay injection           
+  - Format button       - Selection listener           
+  - Copy/Download       - Page mutation observer       
+
+                                      
+           
+                       
+           
+             Background (service    
+             worker)                
+             - Storage sync         
+             - Settings management  
+           
 ```
 
 ---
 
-## Manifest V3 Setup
+Manifest V3 Setup
 
 Create your `manifest.json` with the necessary permissions and configuration:
 
@@ -94,7 +94,7 @@ Create your `manifest.json` with the necessary permissions and configuration:
 }
 ```
 
-### Permission Strategy
+Permission Strategy
 
 | Permission | Purpose | Required |
 |------------|---------|----------|
@@ -106,31 +106,31 @@ Create your `manifest.json` with the necessary permissions and configuration:
 
 ---
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Project Structure
+Project Structure
 
 ```
 src/
-├── background/
-│   ├── index.ts
-│   └── service-worker.ts
-├── popup/
-│   ├── popup.ts
-│   ├── popup.html
-│   └── popup.css
-├── content/
-│   ├── content.ts
-│   └── content.css
-├── shared/
-│   ├── types.ts
-│   ├── json-formatter.ts
-│   └── storage.ts
-└── utils/
-    └── logger.ts
+ background/
+    index.ts
+    service-worker.ts
+ popup/
+    popup.ts
+    popup.html
+    popup.css
+ content/
+    content.ts
+    content.css
+ shared/
+    types.ts
+    json-formatter.ts
+    storage.ts
+ utils/
+     logger.ts
 ```
 
-### Shared Types (src/shared/types.ts)
+Shared Types (src/shared/types.ts)
 
 ```typescript
 // Type definitions for the JSON Formatter extension
@@ -183,12 +183,12 @@ export const DEFAULT_SETTINGS: UserSettings = {
 };
 ```
 
-### Core Formatter (src/shared/json-formatter.ts)
+Core Formatter (src/shared/json-formatter.ts)
 
 ```typescript
 import type { FormatterOptions, FormatResult } from './types';
 
-/**
+/
  * Core JSON formatting logic with validation and transformation
  */
 export class JsonFormatter {
@@ -205,7 +205,7 @@ export class JsonFormatter {
     };
   }
 
-  /**
+  /
    * Format JSON string with options
    */
   format(input: string): FormatResult {
@@ -266,7 +266,7 @@ export class JsonFormatter {
     }
   }
 
-  /**
+  /
    * Minify JSON by removing all whitespace
    */
   minify(input: string): FormatResult {
@@ -294,7 +294,7 @@ export class JsonFormatter {
     }
   }
 
-  /**
+  /
    * Validate JSON without formatting
    */
   validate(input: string): { valid: boolean; error?: string } {
@@ -309,7 +309,7 @@ export class JsonFormatter {
     }
   }
 
-  /**
+  /
    * Recursively sort object keys alphabetically
    */
   private sortObjectKeys(obj: unknown): unknown {
@@ -331,7 +331,7 @@ export class JsonFormatter {
     return obj;
   }
 
-  /**
+  /
    * Apply basic syntax highlighting to JSON string
    * Returns HTML with span elements for different token types
    */
@@ -361,9 +361,9 @@ export const createFormatter = (options?: FormatterOptions): JsonFormatter =>
 
 ---
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup Implementation (src/popup/popup.ts)
+Popup Implementation (src/popup/popup.ts)
 
 ```typescript
 import { createFormatter, DEFAULT_SETTINGS, type UserSettings } from '../shared/types';
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-### Content Script Overlay (src/content/content.ts)
+Content Script Overlay (src/content/content.ts)
 
 ```typescript
 // Content script for in-page JSON formatting
@@ -463,7 +463,7 @@ interface JsonOverlay {
 
 let activeOverlay: JsonOverlay | null = null;
 
-/**
+/
  * Create a floating overlay for JSON display
  */
 function createOverlay(content: string): JsonOverlay {
@@ -498,7 +498,7 @@ function createOverlay(content: string): JsonOverlay {
   };
 }
 
-/**
+/
  * Listen for messages from popup or background
  */
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -519,7 +519,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   return true;
 });
 
-/**
+/
  * Handle text selection for quick formatting
  */
 document.addEventListener('mouseup', (event) => {
@@ -535,20 +535,20 @@ document.addEventListener('mouseup', (event) => {
 
 ---
 
-## State Management
+State Management
 
-### Storage Service (src/shared/storage.ts)
+Storage Service (src/shared/storage.ts)
 
 ```typescript
 import type { UserSettings } from './types';
 
 const STORAGE_KEY = 'json-formatter-settings';
 
-/**
+/
  * Chrome storage abstraction with type safety
  */
 export const storage = {
-  /**
+  /
    * Get settings from chrome.storage.local
    */
   async getSettings(): Promise<UserSettings> {
@@ -561,7 +561,7 @@ export const storage = {
     }
   },
 
-  /**
+  /
    * Save settings to chrome.storage.local
    */
   async setSettings(settings: Partial<UserSettings>): Promise<void> {
@@ -575,7 +575,7 @@ export const storage = {
     }
   },
 
-  /**
+  /
    * Reset to default settings
    */
   async resetSettings(): Promise<void> {
@@ -599,14 +599,14 @@ function getDefaultSettings(): UserSettings {
 
 ---
 
-## Error Handling
+Error Handling
 
-### Best Practices for Error Handling
+Best Practices for Error Handling
 
-1. **Always wrap async Chrome API calls in try-catch**
-2. **Provide meaningful error messages to users**
-3. **Log errors for debugging while protecting user privacy**
-4. **Handle edge cases gracefully**
+1. Always wrap async Chrome API calls in try-catch
+2. Provide meaningful error messages to users
+3. Log errors for debugging while protecting user privacy
+4. Handle edge cases gracefully
 
 ```typescript
 // Example error handling pattern
@@ -642,7 +642,7 @@ async function safeFormat(input: string): Promise<FormatResult> {
 }
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
 | Edge Case | Handling |
 |-----------|----------|
@@ -655,9 +655,9 @@ async function safeFormat(input: string): Promise<FormatResult> {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing with Vitest
+Unit Testing with Vitest
 
 ```typescript
 // __tests__/json-formatter.test.ts
@@ -708,7 +708,7 @@ describe('JsonFormatter', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 Use Playwright for testing the popup and content script interactions:
 
@@ -734,15 +734,15 @@ test('popup formats JSON correctly', async ({ page }) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Strategies
+Optimization Strategies
 
-1. **Lazy Load Heavy Libraries** - Only load syntax highlighters when needed
-2. **Debounce Input Handling** - Prevent excessive re-formatting while typing
-3. **Use Web Workers** - Offload heavy JSON processing for large files
-4. **Cache Formatted Results** - Avoid re-formatting unchanged input
-5. **Limit Content Script** - Use `run_at: document_idle` to not block page load
+1. Lazy Load Heavy Libraries - Only load syntax highlighters when needed
+2. Debounce Input Handling - Prevent excessive re-formatting while typing
+3. Use Web Workers - Offload heavy JSON processing for large files
+4. Cache Formatted Results - Avoid re-formatting unchanged input
+5. Limit Content Script - Use `run_at: document_idle` to not block page load
 
 ```typescript
 // Debounced formatter for real-time preview
@@ -771,11 +771,11 @@ inputArea.addEventListener('input', () => {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
 Before publishing to Chrome Web Store:
 
-### Pre-Submission
+Pre-Submission
 
 - [ ] Update version in manifest.json
 - [ ] Run production build with minification
@@ -786,7 +786,7 @@ Before publishing to Chrome Web Store:
 - [ ] Verify keyboard accessibility
 - [ ] Test dark/light theme support
 
-### Store Listing
+Store Listing
 
 - [ ] Write compelling title and description
 - [ ] Create promotional screenshots (1280x800)
@@ -794,7 +794,7 @@ Before publishing to Chrome Web Store:
 - [ ] Set up privacy policy if needed
 - [ ] Choose appropriate categories
 
-### Post-Submission
+Post-Submission
 
 - [ ] Monitor review feedback
 - [ ] Set up crash reporting
@@ -803,15 +803,15 @@ Before publishing to Chrome Web Store:
 
 ---
 
-## Conclusion
+Conclusion
 
 This guide covered the essential components for building a production-ready JSON Formatter Chrome extension. Key takeaways:
 
-1. **Use Manifest V3** with the latest Chrome APIs
-2. **TypeScript** provides type safety and better developer experience
-3. **Modular architecture** separates concerns between popup, content script, and background
-4. **Proper error handling** ensures a smooth user experience
-5. **Comprehensive testing** prevents regressions
-6. **Performance optimization** handles large JSON files gracefully
+1. Use Manifest V3 with the latest Chrome APIs
+2. TypeScript provides type safety and better developer experience
+3. Modular architecture separates concerns between popup, content script, and background
+4. Proper error handling ensures a smooth user experience
+5. Comprehensive testing prevents regressions
+6. Performance optimization handles large JSON files gracefully
 
 For the complete source code and more examples, refer to the extension examples directory.

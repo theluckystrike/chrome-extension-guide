@@ -17,9 +17,9 @@ Browser analytics chrome extensions represent one of the most valuable categorie
 
 ---
 
-## Why Build a Tab Statistics Extension {#why-build-tab-statistics}
+Why Build a Tab Statistics Extension {#why-build-tab-statistics}
 
-The modern browser has evolved from a simple document viewer into a comprehensive work environment. Professionals across industries rely on Chrome to manage email, documentation, communication tools, research materials, and development environments—all within the same browser window. This shift has created an unprecedented need for tools that help users understand and optimize their browser usage.
+The modern browser has evolved from a simple document viewer into a comprehensive work environment. Professionals across industries rely on Chrome to manage email, documentation, communication tools, research materials, and development environments, all within the same browser window. This shift has created an unprecedented need for tools that help users understand and optimize their browser usage.
 
 A well-designed tab usage dashboard addresses several critical needs. First, it provides visibility into browsing patterns that most users never consciously observe. You might discover that you frequently switch between certain sets of tabs, or that specific types of content consume more of your attention than others. Second, these insights enable data-driven decisions about how you organize your work. Finally, tracking over time helps measure improvements in your workflow efficiency.
 
@@ -27,7 +27,7 @@ From a development perspective, building a tab statistics extension teaches fund
 
 ---
 
-## Understanding the Chrome Extension Architecture {#extension-architecture}
+Understanding the Chrome Extension Architecture {#extension-architecture}
 
 Before diving into code, let us establish a solid understanding of the Chrome extension architecture. Chrome extensions consist of several components that work together to provide extended functionality beyond the browser's core features.
 
@@ -37,7 +37,7 @@ Understanding the communication flow between these components is crucial. The ba
 
 ---
 
-## Setting Up Your Development Environment {#development-environment}
+Setting Up Your Development Environment {#development-environment}
 
 Every successful Chrome extension project begins with proper setup. Create a dedicated folder for your project and organize your files systematically from the start. This organization becomes increasingly important as your extension grows in complexity.
 
@@ -66,7 +66,7 @@ This manifest configuration establishes the foundation for our extension. The se
 
 ---
 
-## Implementing Background Data Collection {#background-data-collection}
+Implementing Background Data Collection {#background-data-collection}
 
 The heart of any tab statistics extension lies in its data collection mechanism. Our background script needs to track several key metrics: when tabs are opened and closed, how long each tab remains active, which domains you visit most frequently, and patterns in your browsing behavior throughout the day.
 
@@ -173,7 +173,7 @@ This background script establishes a comprehensive tracking system. It captures 
 
 ---
 
-## Creating the Dashboard Interface {#dashboard-interface}
+Creating the Dashboard Interface {#dashboard-interface}
 
 The popup interface serves as the window into your browsing data. A well-designed tab usage dashboard should present complex information clearly while remaining responsive and fast-loading. We will create an interactive dashboard with multiple views: overview statistics, domain breakdown, and time-based analysis.
 
@@ -234,7 +234,7 @@ The HTML structure provides a clean foundation for displaying our statistics. Th
 
 ---
 
-## Styling Your Dashboard {#dashboard-styling}
+Styling Your Dashboard {#dashboard-styling}
 
 Effective visualization requires thoughtful design. Your popup CSS should balance visual appeal with information clarity, ensuring users can quickly interpret their browsing data. Use a modern, clean aesthetic with appropriate spacing and typography.
 
@@ -446,7 +446,7 @@ The styling creates a professional dashboard appearance with clear visual hierar
 
 ---
 
-## Implementing Dashboard Logic {#dashboard-logic}
+Implementing Dashboard Logic {#dashboard-logic}
 
 The popup JavaScript connects your interface to the collected data, transforming raw statistics into visual representations that users can understand and act upon. This script retrieves data from Chrome Storage, calculates derived metrics, and updates the DOM elements.
 
@@ -550,7 +550,7 @@ This JavaScript implementation provides complete dashboard functionality. It loa
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 With the core functionality in place, you can enhance your tab statistics extension with additional features that provide even deeper insights into browsing behavior.
 
@@ -562,7 +562,7 @@ You might also consider adding productivity scoring based on domain categorizati
 
 ---
 
-## Testing and Deployment {#testing-deployment}
+Testing and Deployment {#testing-deployment}
 
 Before publishing your extension to the Chrome Web Store, thorough testing ensures a smooth user experience. Load your extension in developer mode by navigating to chrome://extensions, enabling Developer mode, and clicking "Load unpacked." Test all functionality across different scenarios: opening and closing tabs, switching between windows, and using the extension with multiple browser profiles.
 
@@ -572,7 +572,7 @@ Prepare your store listing with compelling screenshots, a detailed description e
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a tab statistics dashboard extension represents an excellent opportunity to create a genuinely useful tool while developing transferable Chrome extension development skills. The combination of event-driven background processing, persistent storage, and interactive UI creation prepares you for more complex extension projects.
 

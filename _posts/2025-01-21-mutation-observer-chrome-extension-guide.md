@@ -17,17 +17,17 @@ This comprehensive guide will walk you through everything you need to know about
 
 ---
 
-## Understanding MutationObserver and Its Importance in Extensions {#understanding-mutation-observer}
+Understanding MutationObserver and Its Importance in Extensions {#understanding-mutation-observer}
 
 The MutationObserver API is a Web API that provides the ability to watch for changes being made to the DOM tree. Unlike older approaches like the deprecated Mutation Events API, MutationObserver is designed to be highly performant and doesn't block the main thread, making it ideal for use in production Chrome extensions where performance and user experience are paramount.
 
-### Why DOM Change Detection Matters for Extension Developers
+Why DOM Change Detection Matters for Extension Developers
 
 Modern web applications are increasingly dynamic. Single-page applications (SPAs) load content asynchronously, social media platforms continuously update their feeds, and countless websites use JavaScript frameworks that manipulate the DOM extensively after the initial page load. For Chrome extension developers, this presents both a challenge and an opportunity. The challenge lies in detecting when the content you're interested in becomes available, while the opportunity exists in building powerful features that respond to these changes in real-time.
 
 Consider several practical scenarios where MutationObserver becomes essential: building an extension that highlights new comments as they appear on a social media feed, creating a tool that automatically saves form inputs before they're submitted, developing a price tracking extension that monitors e-commerce pages for discount announcements, or implementing a content filter that blocks or modifies elements as they load. Each of these use cases requires the ability to detect DOM mutations reliably and efficiently.
 
-### How MutationObserver Works
+How MutationObserver Works
 
 MutationObserver works by observing changes to a target node and its subtree. When you create a MutationObserver, you provide a callback function that will be invoked whenever a mutation occurs that matches your configuration. The observer doesn't directly return the mutations; instead, it batches them and calls your callback asynchronously, which is a key performance optimization that prevents the callback from firing excessively during rapid DOM changes.
 
@@ -35,11 +35,11 @@ The observer can be configured to watch for three types of mutations: child list
 
 ---
 
-## Setting Up MutationObserver in Your Chrome Extension {#setting-up-mutation-observer}
+Setting Up MutationObserver in Your Chrome Extension {#setting-up-mutation-observer}
 
 Implementing MutationObserver in a Chrome extension requires careful consideration of where and how the code runs. Since Chrome extensions use content scripts that operate in the context of web pages, the implementation differs slightly from using MutationObserver in a regular web page.
 
-### Content Script Implementation
+Content Script Implementation
 
 Content scripts in Chrome extensions run in the context of web pages, which means you can directly use the MutationObserver API just as you would in a regular JavaScript file. Here's a basic implementation pattern:
 
@@ -86,7 +86,7 @@ observer.observe(document.body, observerConfig);
 // observer.disconnect();
 ```
 
-### Service Worker Implementation Considerations
+Service Worker Implementation Considerations
 
 Service workers in Chrome extensions run in a separate background context and don't have direct access to the DOM of web pages. Therefore, you cannot use MutationObserver directly in service workers. Instead, you need to implement the observer in your content scripts and communicate with the service worker using message passing when significant changes occur.
 
@@ -114,11 +114,11 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 ---
 
-## Advanced MutationObserver Patterns for Extensions {#advanced-patterns}
+Advanced MutationObserver Patterns for Extensions {#advanced-patterns}
 
-While the basic implementation covers many use cases, advanced scenarios require additional patterns and considerations. Let's explore techniques for handling specific use cases and optimizing performance.
+While the basic implementation covers many use cases, advanced scenarios require additional patterns and considerations.  techniques for handling specific use cases and optimizing performance.
 
-### Detecting Specific Element Types
+Detecting Specific Element Types
 
 When you want to detect changes to specific types of elements rather than all DOM mutations, you can combine MutationObserver with element filtering:
 
@@ -158,7 +158,7 @@ observeSpecificElements('.comment', (commentElement) => {
 });
 ```
 
-### Handling Dynamic Frameworks and SPA Navigation
+Handling Dynamic Frameworks and SPA Navigation
 
 Single-page applications and sites using modern frameworks like React, Vue, or Angular present unique challenges because they often replace entire sections of the DOM without triggering traditional page loads. Your extension needs to handle these scenarios gracefully.
 
@@ -218,7 +218,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-### Performance Optimization Techniques
+Performance Optimization Techniques
 
 MutationObserver can fire very frequently on pages with lots of JavaScript activity. Optimizing your implementation is crucial for maintaining good extension performance:
 
@@ -291,11 +291,11 @@ observer.start();
 
 ---
 
-## Common Use Cases and Practical Examples {#common-use-cases}
+Common Use Cases and Practical Examples {#common-use-cases}
 
 Now that you understand the implementation patterns, let's explore practical use cases that demonstrate the power of MutationObserver in Chrome extensions.
 
-### Use Case 1: Dynamic Content Highlighter
+Use Case 1: Dynamic Content Highlighter
 
 Build an extension that highlights specific keywords or elements as they appear on any webpage:
 
@@ -358,7 +358,7 @@ class ContentHighlighter {
 }
 ```
 
-### Use Case 2: Form Change Monitor
+Use Case 2: Form Change Monitor
 
 Create an extension that monitors form inputs and saves data automatically:
 
@@ -440,7 +440,7 @@ class FormChangeMonitor {
 }
 ```
 
-### Use Case 3: Infinite Scroll Detector
+Use Case 3: Infinite Scroll Detector
 
 Monitor when new content loads via infinite scrolling:
 
@@ -488,15 +488,15 @@ scrollDetector.init();
 
 ---
 
-## Best Practices and Troubleshooting {#best-practices}
+Best Practices and Troubleshooting {#best-practices}
 
 When implementing MutationObserver in Chrome extensions, following best practices ensures your extension remains performant, reliable, and maintainable.
 
-### Essential Best Practices
+Essential Best Practices
 
-**Always disconnect the observer when appropriate.** Failing to disconnect MutationObserver instances can lead to memory leaks and unnecessary CPU usage. Implement cleanup in your extension's unload handler or when navigating away from pages you want to monitor.
+Always disconnect the observer when appropriate. Failing to disconnect MutationObserver instances can lead to memory leaks and unnecessary CPU usage. Implement cleanup in your extension's unload handler or when navigating away from pages you want to monitor.
 
-**Use attribute filtering for performance.** If you only need to watch specific attributes, use the `attributeFilter` option to limit observations:
+Use attribute filtering for performance. If you only need to watch specific attributes, use the `attributeFilter` option to limit observations:
 
 ```javascript
 observer.observe(target, {
@@ -505,7 +505,7 @@ observer.observe(target, {
 });
 ```
 
-**Implement debouncing for high-frequency changes.** Pages with animations or continuous DOM manipulation can trigger many mutations. Debouncing helps you process changes efficiently:
+Implement debouncing for high-frequency changes. Pages with animations or continuous DOM manipulation can trigger many mutations. Debouncing helps you process changes efficiently:
 
 ```javascript
 const debouncedCallback = debounce((mutations) => {
@@ -513,11 +513,11 @@ const debouncedCallback = debounce((mutations) => {
 }, 100);
 ```
 
-**Use subtree wisely.** Setting `subtree: true` significantly increases the number of mutations you'll receive. Only use it when necessary, and consider using more specific target elements when possible.
+Use subtree wisely. Setting `subtree: true` significantly increases the number of mutations you'll receive. Only use it when necessary, and consider using more specific target elements when possible.
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
-**Observer doesn't fire:** Make sure you're observing an element that exists in the DOM. If you're running code before the DOM is ready, wait for the `DOMContentLoaded` event or use a check:
+Observer doesn't fire: Make sure you're observing an element that exists in the DOM. If you're running code before the DOM is ready, wait for the `DOMContentLoaded` event or use a check:
 
 ```javascript
 const target = document.querySelector('#your-element');
@@ -526,13 +526,13 @@ if (target) {
 }
 ```
 
-**Performance issues:** If your extension causes noticeable page slowdowns, consider these optimizations:
+Performance issues: If your extension causes noticeable page slowdowns, consider these optimizations:
 - Reduce the frequency of processing by increasing debounce time
 - Use more specific selectors to limit what you're watching
 - Process changes asynchronously using requestIdleCallback or setTimeout
 - Consider using more efficient alternatives like IntersectionObserver for visibility detection
 
-**SPA navigation issues:** For single-page applications, implement URL change detection to reinitialize your observers when the "page" changes:
+SPA navigation issues: For single-page applications, implement URL change detection to reinitialize your observers when the "page" changes:
 
 ```javascript
 // Check for URL changes in SPAs
@@ -548,14 +548,14 @@ new MutationObserver(() => {
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-The MutationObserver API is an incredibly powerful tool for Chrome extension developers. It provides a performant, reliable way to detect and respond to DOM changes in real-time, enabling you to build sophisticated extensions that work seamlessly with modern dynamic web applications.
+The MutationObserver API is an incredibly powerful tool for Chrome extension developers. It provides a performant, reliable way to detect and respond to DOM changes in real-time, enabling you to build sophisticated extensions that work smoothly with modern dynamic web applications.
 
 Throughout this guide, we've covered the fundamental concepts of MutationObserver, implementation patterns for both content scripts and service workers, advanced techniques for handling complex scenarios like SPA navigation and specific element detection, practical use cases that demonstrate real-world applications, and best practices for maintaining optimal performance.
 
 By mastering MutationObserver, you can create extensions that respond dynamically to webpage content, monitor for specific changes that matter to your users, and build powerful automation tools that work with any website regardless of how it loads content. The key is to start with simple implementations, test thoroughly, and progressively add complexity as needed.
 
-Remember to always consider performance implications when watching for DOM changes, implement proper cleanup to prevent memory leaks, and test your extension across different types of websites including single-page applications and sites with heavy JavaScript activity. With these skills and knowledge, you're well-equipped to build robust Chrome extensions that leverage the full power of DOM change detection.
+Remember to always consider performance implications when watching for DOM changes, implement proper cleanup to prevent memory leaks, and test your extension across different types of websites including single-page applications and sites with heavy JavaScript activity. With these skills and knowledge, you're well-equipped to build solid Chrome extensions that use the full power of DOM change detection.
 
 Start implementing MutationObserver in your extensions today, and unlock new possibilities for creating dynamic, responsive Chrome extension experiences that your users will love.

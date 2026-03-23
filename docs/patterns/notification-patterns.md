@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Notification Patterns — Best Practices"
+title: "Chrome Extension Notification Patterns. Best Practices"
 description: "Create and manage notifications in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/notification-patterns/"
 ---
 
 # Notification Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The `chrome.notifications` API lets extensions surface timely information outside the browser window. Used well, notifications keep users informed without interrupting their workflow. Used poorly, they train users to disable your extension entirely. This guide covers eight patterns for building a notification system that respects attention, handles platform differences, and scales gracefully.
 
 ---
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -26,13 +26,13 @@ The `chrome.notifications` API lets extensions surface timely information outsid
 
 ---
 
-## Pattern 1: Notification Types {#pattern-1-notification-types}
+Pattern 1: Notification Types {#pattern-1-notification-types}
 
 Chrome supports four notification template types. Each serves a different purpose.
 
-### Basic Notification {#basic-notification}
+Basic Notification {#basic-notification}
 
-The workhorse — a title, message, and optional icon:
+The workhorse. a title, message, and optional icon:
 
 ```ts
 // basic.ts
@@ -55,9 +55,9 @@ await showBasicNotification(
 );
 ```
 
-### Image Notification {#image-notification}
+Image Notification {#image-notification}
 
-Includes a large image below the text — useful for previews:
+Includes a large image below the text. useful for previews:
 
 ```ts
 // image.ts
@@ -83,9 +83,9 @@ await showImageNotification(
 );
 ```
 
-### List Notification {#list-notification}
+List Notification {#list-notification}
 
-Displays multiple items — good for summaries:
+Displays multiple items. good for summaries:
 
 ```ts
 // list.ts
@@ -116,9 +116,9 @@ await showListNotification("3 New Messages", "From your watched threads", [
 ]);
 ```
 
-### Progress Notification {#progress-notification}
+Progress Notification {#progress-notification}
 
-Shows a progress bar — ideal for long-running operations:
+Shows a progress bar. ideal for long-running operations:
 
 ```ts
 // progress.ts
@@ -158,7 +158,7 @@ await showBasicNotification("Export Complete", "Your data is ready.");
 
 ---
 
-## Pattern 2: Click Handling and Deep Linking {#pattern-2-click-handling-and-deep-linking}
+Pattern 2: Click Handling and Deep Linking {#pattern-2-click-handling-and-deep-linking}
 
 Notifications are useless if clicking them does nothing. Route clicks to the right place:
 
@@ -221,7 +221,7 @@ chrome.notifications.onClosed.addListener((notificationId) => {
 });
 ```
 
-### Deep Linking to Extension Pages {#deep-linking-to-extension-pages}
+Deep Linking to Extension Pages {#deep-linking-to-extension-pages}
 
 ```ts
 // deep-link.ts
@@ -241,7 +241,7 @@ await showActionableNotification(
 
 ---
 
-## Pattern 3: Notification Buttons with Action Routing {#pattern-3-notification-buttons-with-action-routing}
+Pattern 3: Notification Buttons with Action Routing {#pattern-3-notification-buttons-with-action-routing}
 
 Notifications support up to two buttons. Use them for quick actions:
 
@@ -314,7 +314,7 @@ await showNotificationWithButtons(
 
 ---
 
-## Pattern 4: Rate Limiting Notifications {#pattern-4-rate-limiting-notifications}
+Pattern 4: Rate Limiting Notifications {#pattern-4-rate-limiting-notifications}
 
 Nothing gets an extension uninstalled faster than notification spam. Enforce limits:
 
@@ -394,7 +394,7 @@ async function rateLimitedNotify(
 }
 ```
 
-### Per-Category Rate Limiting {#per-category-rate-limiting}
+Per-Category Rate Limiting {#per-category-rate-limiting}
 
 Different notification types deserve different limits:
 
@@ -437,7 +437,7 @@ const categoryLimiter = new CategoryRateLimiter({
 
 ---
 
-## Pattern 5: Notification Queuing and Priority {#pattern-5-notification-queuing-and-priority}
+Pattern 5: Notification Queuing and Priority {#pattern-5-notification-queuing-and-priority}
 
 When multiple notifications fire at once, queue and prioritize them:
 
@@ -538,11 +538,11 @@ notificationQueue.enqueue({
 
 ---
 
-## Pattern 6: Persistent vs Transient Notifications {#pattern-6-persistent-vs-transient-notifications}
+Pattern 6: Persistent vs Transient Notifications {#pattern-6-persistent-vs-transient-notifications}
 
 Some notifications should stick around. Others should disappear quickly.
 
-### Transient Notifications with Auto-Clear {#transient-notifications-with-auto-clear}
+Transient Notifications with Auto-Clear {#transient-notifications-with-auto-clear}
 
 ```ts
 // transient.ts
@@ -560,7 +560,7 @@ async function showTransientNotification(
   return id;
 }
 
-// Quick confirmation — disappears after 3 seconds
+// Quick confirmation. disappears after 3 seconds
 await showTransientNotification(
   {
     type: "basic",
@@ -572,7 +572,7 @@ await showTransientNotification(
 );
 ```
 
-### Persistent Notifications that Require Acknowledgment {#persistent-notifications-that-require-acknowledgment}
+Persistent Notifications that Require Acknowledgment {#persistent-notifications-that-require-acknowledgment}
 
 ```ts
 // persistent.ts
@@ -622,7 +622,7 @@ function logDismissal(id: string): void {
 }
 ```
 
-### Priority Matrix {#priority-matrix}
+Priority Matrix {#priority-matrix}
 
 | Scenario | `requireInteraction` | Auto-clear | Example |
 |----------|---------------------|------------|---------|
@@ -634,7 +634,7 @@ function logDismissal(id: string): void {
 
 ---
 
-## Pattern 7: Notification Grouping and Replacement {#pattern-7-notification-grouping-and-replacement}
+Pattern 7: Notification Grouping and Replacement {#pattern-7-notification-grouping-and-replacement}
 
 Avoid flooding the user with duplicate notifications by grouping and replacing:
 
@@ -727,7 +727,7 @@ async function onNewMessage(threadId: string, sender: string): Promise<void> {
 }
 ```
 
-### Simple Replacement by ID {#simple-replacement-by-id}
+Simple Replacement by ID {#simple-replacement-by-id}
 
 For simpler cases, just reuse the notification ID:
 
@@ -760,7 +760,7 @@ await showOrUpdateNotification("sync-status", {
 
 ---
 
-## Pattern 8: Platform-Aware Notification Strategies {#pattern-8-platform-aware-notification-strategies}
+Pattern 8: Platform-Aware Notification Strategies {#pattern-8-platform-aware-notification-strategies}
 
 Chrome notifications render differently across operating systems. Account for the differences:
 
@@ -827,7 +827,7 @@ async function getPlatformConfig(): Promise<PlatformNotificationConfig> {
 }
 ```
 
-### Adaptive Notification Builder {#adaptive-notification-builder}
+Adaptive Notification Builder {#adaptive-notification-builder}
 
 ```ts
 // adaptive.ts
@@ -920,7 +920,7 @@ await chrome.notifications.create(options);
 
 ---
 
-## User Preference Integration {#user-preference-integration}
+User Preference Integration {#user-preference-integration}
 
 Always let users control their notification experience:
 
@@ -976,11 +976,11 @@ async function shouldNotify(category: string): Promise<boolean> {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Key Takeaway |
 |---------|-------------|
-| Notification types | Use the right template — basic, image, list, or progress — for the content |
+| Notification types | Use the right template. basic, image, list, or progress. for the content |
 | Click handling + deep linking | Every notification should have a meaningful click action |
 | Button actions | Two buttons max; use for approve/deny or quick-action workflows |
 | Rate limiting | Cap frequency per category; never spam the user |
@@ -989,7 +989,7 @@ async function shouldNotify(category: string): Promise<boolean> {
 | Grouping + replacement | Collapse related notifications; reuse IDs to update in place |
 | Platform-aware strategies | macOS ignores image/progress/list types; adapt gracefully |
 
-The best notification is the one the user actually wants to see. Default to fewer notifications, let users configure categories and quiet hours, and always provide a clear action on click. When in doubt, don't notify — surface the information in your popup or side panel instead.
+The best notification is the one the user actually wants to see. Default to fewer notifications, let users configure categories and quiet hours, and always provide a clear action on click. When in doubt, don't notify. surface the information in your popup or side panel instead.
 -e 
 ---
 

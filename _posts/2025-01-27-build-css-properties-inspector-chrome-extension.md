@@ -13,75 +13,75 @@ canonical_url: "https://bestchromeextensions.com/2025/01/27/build-css-properties
 
 CSS debugging is one of the most time-consuming tasks in web development. Every developer has spent minutes (or hours) trying to understand why a particular style is not being applied, tracing through the cascade, or hunting down the exact selector that's overriding their intended styles. While Chrome DevTools provides excellent built-in inspection capabilities, creating a custom CSS inspector extension allows you to tailor the debugging experience to your specific needs, add custom features, and potentially build a valuable tool for the developer community.
 
-In this comprehensive guide, we'll walk through building a complete CSS Properties Inspector Chrome Extension from scratch. You'll learn how to access computed styles, inspect DOM elements, display CSS properties in a user-friendly interface, and package everything as a production-ready extension using Manifest V3.
+we'll walk through building a complete CSS Properties Inspector Chrome Extension from scratch. You'll learn how to access computed styles, inspect DOM elements, display CSS properties in a user-friendly interface, and package everything as a production-ready extension using Manifest V3.
 
 ---
 
-## Why Build a CSS Inspector Extension? {#why-build-css-inspector}
+Why Build a CSS Inspector Extension? {#why-build-css-inspector}
 
-The Chrome DevTools Elements panel already provides robust CSS inspection capabilities. However, building your own CSS inspector extension offers several compelling advantages:
+The Chrome DevTools Elements panel already provides solid CSS inspection capabilities. However, building your own CSS inspector extension offers several compelling advantages:
 
-### Custom Workflow Integration
+Custom Workflow Integration
 
-Every developer has unique debugging workflows. A custom CSS inspector can be designed to match your specific needs, whether you prefer a minimal overlay, a dedicated panel, or quick-access popup. You can integrate it seamlessly into your existing development process without switching contexts.
+Every developer has unique debugging workflows. A custom CSS inspector can be designed to match your specific needs, whether you prefer a minimal overlay, a dedicated panel, or quick-access popup. You can integrate it smoothly into your existing development process without switching contexts.
 
-### Specialized Features
+Specialized Features
 
-While DevTools is comprehensive, a dedicated extension can offer specialized features that address specific pain points. For example, you might want to highlight only inherited properties, show only CSS custom properties (variables), filter by specific property categories, or export styles in a particular format.
+While DevTools is comprehensive, a dedicated extension can offer specialized features that address specific problems. For example, you might want to highlight only inherited properties, show only CSS custom properties (variables), filter by specific property categories, or export styles in a particular format.
 
-### Learning Opportunity
+Learning Opportunity
 
-Building a CSS inspector is an excellent way to deep-dive into Chrome's extension APIs, the computed style system, and DOM manipulation. The skills you develop—such as content scripts, message passing, and working with the page's execution context—are transferable to many other extension projects.
+Building a CSS inspector is an excellent way to deep detailed look into Chrome's extension APIs, the computed style system, and DOM manipulation. The skills you develop, such as content scripts, message passing, and working with the page's execution context, are transferable to many other extension projects.
 
-### Potential for Distribution
+Potential for Distribution
 
 If your CSS inspector solves real problems well, there's a market for it. Developers are always looking for tools that improve their productivity, and a well-designed CSS debugging extension could gain significant traction in the Chrome Web Store.
 
 ---
 
-## Project Architecture Overview {#project-architecture}
+Project Architecture Overview {#project-architecture}
 
 Before writing any code, let's outline the architecture of our CSS Properties Inspector extension:
 
-### Components
+Components
 
-1. **Manifest V3 Configuration** - Defines permissions, content scripts, and extension metadata
-2. **Content Script** - Injected into web pages to capture element information and computed styles
-3. **Popup Interface** - User-friendly display showing selected element's CSS properties
-4. **Background Service Worker** - Handles communication between content script and popup
-5. **DevTools Panel** (Optional) - Advanced integration with Chrome DevTools
+1. Manifest V3 Configuration - Defines permissions, content scripts, and extension metadata
+2. Content Script - Injected into web pages to capture element information and computed styles
+3. Popup Interface - User-friendly display showing selected element's CSS properties
+4. Background Service Worker - Handles communication between content script and popup
+5. DevTools Panel (Optional) - Advanced integration with Chrome DevTools
 
-### Key Chrome APIs
+Key Chrome APIs
 
-- **window.getComputedStyle()** - Retrieves all computed styles for an element
-- **CSS.supports()** - Checks if a browser supports specific CSS properties
-- **chrome.runtime** - Handles message passing between components
-- **chrome.devtools** - For advanced DevTools integration
+- window.getComputedStyle() - Retrieves all computed styles for an element
+- CSS.supports() - Checks if a browser supports specific CSS properties
+- chrome.runtime - Handles message passing between components
+- chrome.devtools - For advanced DevTools integration
 
 ---
 
-## Step 1: Setting Up the Project Structure {#step-1-setup}
+Step 1: Setting Up the Project Structure {#step-1-setup}
 
 Create a new folder for your extension and set up the basic file structure:
 
 ```bash
 css-inspector-extension/
-├── manifest.json
-├── popup.html
-├── popup.css
-├── popup.js
-├── content.js
-├── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── README.md
+ manifest.json
+ popup.html
+ popup.css
+ popup.js
+ content.js
+ background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ README.md
 ```
 
 ---
 
-## Step 2: Creating the Manifest {#step-2-manifest}
+Step 2: Creating the Manifest {#step-2-manifest}
 
 The manifest.json file is the heart of every Chrome extension. Here's our configuration for a CSS inspector:
 
@@ -128,13 +128,13 @@ The manifest.json file is the heart of every Chrome extension. Here's our config
 
 Key points to note:
 
-- **host_permissions**: We need access to all URLs because CSS inspection should work on any website
-- **activeTab permission**: Allows us to interact with the currently active tab
-- **content_scripts**: Injected into every page to enable element selection
+- host_permissions: We need access to all URLs because CSS inspection should work on any website
+- activeTab permission: Allows us to interact with the currently active tab
+- content_scripts: Injected into every page to enable element selection
 
 ---
 
-## Step 3: Building the Content Script {#step-3-content-script}
+Step 3: Building the Content Script {#step-3-content-script}
 
 The content script runs in the context of each web page and is responsible for capturing element information. This is where the magic happens:
 
@@ -198,7 +198,7 @@ function enableInspectingMode() {
   // Add visual indicator
   const indicator = document.createElement('div');
   indicator.id = 'css-inspector-indicator';
-  indicator.innerHTML = '🔍 Click to inspect element (ESC to exit)';
+  indicator.innerHTML = ' Click to inspect element (ESC to exit)';
   Object.assign(indicator.style, {
     position: 'fixed',
     top: '0',
@@ -353,14 +353,14 @@ document.addEventListener('keydown', (event) => {
 
 This content script provides the core functionality:
 
-- **Inspecting Mode**: Click the extension icon to enter inspecting mode, then hover over elements to see them highlighted and click to select
-- **Computed Styles**: Uses `window.getComputedStyle()` to retrieve all CSS properties as the browser renders them
-- **Element Information**: Collects tag name, ID, classes, attributes, inline styles, and an XPath for easy identification
-- **Visual Highlighting**: Creates an overlay showing which element is being hovered/selected
+- Inspecting Mode: Click the extension icon to enter inspecting mode, then hover over elements to see them highlighted and click to select
+- Computed Styles: Uses `window.getComputedStyle()` to retrieve all CSS properties as the browser renders them
+- Element Information: Collects tag name, ID, classes, attributes, inline styles, and an XPath for easy identification
+- Visual Highlighting: Creates an overlay showing which element is being hovered/selected
 
 ---
 
-## Step 4: Creating the Popup Interface {#step-4-popup}
+Step 4: Creating the Popup Interface {#step-4-popup}
 
 The popup provides the user interface for viewing and interacting with the inspected element's styles:
 
@@ -378,7 +378,7 @@ The popup provides the user interface for viewing and interacting with the inspe
   <div class="container">
     <header>
       <h1>CSS Properties Inspector</h1>
-      <button id="inspect-btn" class="btn primary">🔍 Inspect Element</button>
+      <button id="inspect-btn" class="btn primary"> Inspect Element</button>
     </header>
     
     <div id="element-info" class="section">
@@ -613,7 +613,7 @@ footer {
 
 ---
 
-## Step 5: Building the Popup JavaScript {#step-5-popup-js}
+Step 5: Building the Popup JavaScript {#step-5-popup-js}
 
 The popup JavaScript handles user interactions and displays the fetched styles:
 
@@ -660,7 +660,7 @@ async function toggleInspectingMode() {
   
   if (isInspecting) {
     await chrome.tabs.sendMessage(currentTabId, { action: 'stopInspecting' });
-    btn.textContent = '🔍 Inspect Element';
+    btn.textContent = ' Inspect Element';
     btn.classList.remove('inspecting-mode');
     isInspecting = false;
   } else {
@@ -803,7 +803,7 @@ async function copyAllStyles() {
   
   const btn = document.getElementById('copy-all-btn');
   const originalText = btn.textContent;
-  btn.textContent = '✓ Copied!';
+  btn.textContent = ' Copied!';
   setTimeout(() => btn.textContent = originalText, 2000);
 }
 
@@ -854,7 +854,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Reset inspecting mode
     isInspecting = false;
     const btn = document.getElementById('inspect-btn');
-    btn.textContent = '🔍 Inspect Element';
+    btn.textContent = ' Inspect Element';
     btn.classList.remove('inspecting-mode');
   }
 });
@@ -862,7 +862,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 6: Setting Up Background Script {#step-6-background}
+Step 6: Setting Up Background Script {#step-6-background}
 
 The background script manages communication between components:
 
@@ -894,16 +894,16 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Step 7: Testing Your Extension {#step-7-testing}
+Step 7: Testing Your Extension {#step-7-testing}
 
 Now let's test our CSS inspector extension:
 
-1. **Load the Extension**:
+1. Load the Extension:
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" in the top right
    - Click "Load unpacked" and select your extension folder
 
-2. **Test the Features**:
+2. Test the Features:
    - Click the extension icon in the toolbar
    - Click "Inspect Element" to enter inspection mode
    - Hover over elements to see the highlight
@@ -911,18 +911,18 @@ Now let's test our CSS inspector extension:
    - Use the filter and category dropdowns
    - Try copying and exporting styles
 
-3. **Debug Common Issues**:
+3. Debug Common Issues:
    - If styles don't appear, check the console for errors
    - Ensure content scripts are loading correctly
    - Verify the popup can communicate with the content script
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 Once you have the basic CSS inspector working, here are some advanced features to consider:
 
-### 1. CSS Variable Tracking
+1. CSS Variable Tracking
 
 Track all CSS custom properties (variables) and show where they're defined:
 
@@ -942,7 +942,7 @@ function getCSSVariables(element) {
 }
 ```
 
-### 2. Box Model Visualization
+2. Box Model Visualization
 
 Create a visual representation of the box model showing margin, border, padding, and content areas:
 
@@ -973,7 +973,7 @@ function getBoxModel(element) {
 }
 ```
 
-### 3. Style Inheritance Chain
+3. Style Inheritance Chain
 
 Trace the inheritance chain to show which styles come from which parent elements:
 
@@ -999,7 +999,7 @@ function getInheritanceChain(element) {
 }
 ```
 
-### 4. DevTools Panel Integration
+4. DevTools Panel Integration
 
 For a more advanced implementation, create a DevTools panel instead of a popup:
 
@@ -1028,59 +1028,59 @@ chrome.devtools.panels.create(
 
 ---
 
-## Best Practices and Optimization {#best-practices}
+Best Practices and Optimization {#best-practices}
 
-### Performance Considerations
+Performance Considerations
 
-- **Lazy Loading**: Only fetch computed styles when needed, not on every page load
-- **Throttling**: Add debouncing to mouseover events during inspection mode to avoid excessive calculations
-- **Caching**: Cache style calculations if the same element is inspected multiple times
-- **Minimal DOM Manipulation**: Use document fragments for batch DOM updates
+- Lazy Loading: Only fetch computed styles when needed, not on every page load
+- Throttling: Add debouncing to mouseover events during inspection mode to avoid excessive calculations
+- Caching: Cache style calculations if the same element is inspected multiple times
+- Minimal DOM Manipulation: Use document fragments for batch DOM updates
 
-### Security Best Practices
+Security Best Practices
 
-- **Content Security Policy**: Ensure your extension complies with CSP requirements
-- **Input Sanitization**: Sanitize any user input before displaying it
-- **Avoid eval()**: Use safer alternatives for any dynamic code execution
-- **Minimize Permissions**: Request only the permissions your extension truly needs
+- Content Security Policy: Ensure your extension complies with CSP requirements
+- Input Sanitization: Sanitize any user input before displaying it
+- Avoid eval(): Use safer alternatives for any dynamic code execution
+- Minimize Permissions: Request only the permissions your extension truly needs
 
-### User Experience
+User Experience
 
-- **Clear Feedback**: Always provide visual feedback for user actions
-- **Keyboard Shortcuts**: Implement keyboard shortcuts for power users
-- **Persistence**: Remember user's last inspected element across page navigations
-- **Accessibility**: Ensure your extension works with screen readers
+- Clear Feedback: Always provide visual feedback for user actions
+- Keyboard Shortcuts: Implement keyboard shortcuts for power users
+- Persistence: Remember user's last inspected element across page navigations
+- Accessibility: Ensure your extension works with screen readers
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is complete and tested:
 
-1. **Prepare for Publication**:
+1. Prepare for Publication:
    - Create a compelling description and screenshots
    - Write clear installation and usage instructions
    - Choose appropriate categories and tags
 
-2. **Package the Extension**:
+2. Package the Extension:
    - In Chrome extensions, click "Pack extension"
    - Select your extension folder
    - Note the generated .crx file and private key
 
-3. **Submit to Chrome Web Store**:
+3. Submit to Chrome Web Store:
    - Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/developer/dashboard)
    - Create a new item and upload your .zip file
    - Fill in all required information
    - Submit for review
 
-4. **Maintain and Update**:
+4. Maintain and Update:
    - Monitor user feedback and reviews
    - Fix bugs promptly
    - Add new features based on user requests
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a CSS Properties Inspector Chrome Extension is an excellent project that teaches you valuable skills in Chrome extension development while creating a genuinely useful tool. The extension we built in this guide provides:
 
@@ -1095,7 +1095,7 @@ Remember to test thoroughly across different websites, gather user feedback, and
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 - [Chrome Extension Development Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)

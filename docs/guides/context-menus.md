@@ -1,16 +1,16 @@
 ---
 layout: default
-title: "Chrome Extension Context Menus — How to Add Right-Click Menu Options"
+title: "Chrome Extension Context Menus. How to Add Right-Click Menu Options"
 description: "Learn how to use the chrome.contextMenus API to create custom right-click menu options in Chrome extensions with dynamic menus, nested items, and event handling."
 canonical_url: "https://bestchromeextensions.com/guides/context-menus/"
 ---
-# Chrome Extension Context Menus — How to Add Right-Click Menu Options
+# Chrome Extension Context Menus. How to Add Right-Click Menu Options
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
-The `chrome.contextMenus` API allows Chrome extensions to add custom items to the browser's context menu—the menu that appears when a user right-clicks on a page, link, image, or other element. This powerful API enables developers to create intuitive right-click workflows that enhance user productivity and provide quick access to extension functionality directly from the browser interface.
+The `chrome.contextMenus` API allows Chrome extensions to add custom items to the browser's context menu, the menu that appears when a user right-clicks on a page, link, image, or other element. This powerful API enables developers to create intuitive right-click workflows that enhance user productivity and provide quick access to extension functionality directly from the browser interface.
 
-## Adding the Required Permission {#adding-the-required-permission}
+Adding the Required Permission {#adding-the-required-permission}
 
 To use the contextMenus API, you must declare the `"contextMenus"` permission in your extension's `manifest.json` file. This permission is required regardless of whether you're creating simple or complex menu structures.
 
@@ -20,9 +20,9 @@ To use the contextMenus API, you must declare the `"contextMenus"` permission in
   "name": "My Context Menu Extension",
   "version": "1.0",
   "permissions": ["contextMenus"]
-# Context Menus API Guide
+Context Menus API Guide
 
-## Overview
+Overview
 The Chrome Context Menus API allows extensions to add custom items to Chrome's right-click context menu. This powerful API enables users to perform actions on specific page elements, selected text, links, images, and other content directly from the context menu.
 
 - Requires `"contextMenus"` permission in manifest.json
@@ -30,7 +30,7 @@ The Chrome Context Menus API allows extensions to add custom items to Chrome's r
 - Items can be shown conditionally based on context types (selection, link, image, etc.)
 - Supports nested menus, checkboxes, radio buttons, and separators
 
-## manifest.json Setup
+manifest.json Setup
 
 ```json
 {
@@ -46,15 +46,15 @@ The Chrome Context Menus API allows extensions to add custom items to Chrome's r
 
 Note that context menus require a background service worker to handle menu click events. Make sure your extension has a properly configured background section in the manifest.
 
-## Creating Basic Context Menu Items {#creating-basic-context-menu-items}
+Creating Basic Context Menu Items {#creating-basic-context-menu-items}
 
 The foundation of any context menu implementation is the `chrome.contextMenus.create()` method. This method accepts an object that defines the menu item's properties, including its title, ID, and the contexts where it should appear.
 
-# Chrome Context Menus API
+Chrome Context Menus API
 
 The Chrome Context Menus API adds items to Chrome's right-click menu, enabling contextual interactions with text selections, links, images, or entire pages.
 
-## Required Permission
+Required Permission
 
 ```json
 {
@@ -64,9 +64,9 @@ The Chrome Context Menus API adds items to Chrome's right-click menu, enabling c
 }
 ```
 
-## Core Methods
+Core Methods
 
-### chrome.contextMenus.create()
+chrome.contextMenus.create()
 
 Creates a new context menu item:
 
@@ -81,11 +81,11 @@ chrome.contextMenus.create({
 
 The `contexts` array specifies where your menu item will appear. Common context values include `"page"` (anywhere on the page), `"selection"` (when text is selected), `"link"` (on hyperlinks), `"image"` (on images), and `"editable"` (in text input fields). You can also use `"all"` to show your menu item in every possible context.
 
-## Menu Types and Their Uses {#menu-types-and-their-uses}
+Menu Types and Their Uses {#menu-types-and-their-uses}
 
 The contextMenus API supports several menu item types that serve different purposes within your extension's menu hierarchy.
 
-### Normal Items
+Normal Items
 
 Normal menu items are the standard clickable options that perform actions when selected. They can display text and optional icons, and they trigger events in your extension's background script.
 
@@ -97,7 +97,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### Checkbox Items
+Checkbox Items
   id: "search-selection",
   title: "Search '%s'",
   contexts: ["selection"]
@@ -108,7 +108,7 @@ chrome.contextMenus.create({
 
 Key properties: `id`, `title`, `contexts`, `parentId`, `checked`, `visible`, `enabled`, `icons` (Chrome 128+).
 
-### chrome.contextMenus.update()
+chrome.contextMenus.update()
 
 Modifies an existing item:
 
@@ -116,7 +116,7 @@ Modifies an existing item:
 chrome.contextMenus.update("search-selection", { title: "Find '%s' in Google" });
 ```
 
-### chrome.contextMenus.remove()
+chrome.contextMenus.remove()
 
 Removes a specific item:
 
@@ -124,7 +124,7 @@ Removes a specific item:
 chrome.contextMenus.remove("search-selection", () => {});
 ```
 
-### chrome.contextMenus.removeAll()
+chrome.contextMenus.removeAll()
 
 Clears all context menus created by your extension:
 
@@ -132,7 +132,7 @@ Clears all context menus created by your extension:
 chrome.contextMenus.removeAll(() => {});
 ```
 
-## Context Types
+Context Types
 
 | ContextType | Description |
 |-------------|-------------|
@@ -146,7 +146,7 @@ chrome.contextMenus.removeAll(() => {});
 | `editable` | Right-click in input/textarea |
 | `action` | Extension action icon click |
 
-## Item Types
+Item Types
 
 ```javascript
 // Normal item
@@ -162,7 +162,7 @@ chrome.contextMenus.create({ id: "opt1", title: "Option 1", type: "radio", check
 chrome.contextMenus.create({ id: "sep1", type: "separator" });
 ```
 
-## Parent-Child Hierarchies
+Parent-Child Hierarchies
 
 Create nested menus:
 
@@ -177,7 +177,7 @@ Checkbox items provide a binary on/off state that persists across browser sessio
 ```javascript
 chrome.contextMenus.create({
   id: "enable-feature",
-### chrome.contextMenus.create()
+chrome.contextMenus.create()
 
 The primary method for adding items to the context menu. Menu items should be created in the `chrome.runtime.onInstalled` event listener to ensure they persist across service worker restarts.
 
@@ -193,16 +193,16 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-**Key Properties:**
+Key Properties:
 - `id` (required): Unique string identifier for the menu item
 - `title`: Display text shown in the context menu; use `%s` as placeholder for contextual data
 - `contexts`: Array of context types determining when the item appears
 - `type`: Menu item type - "normal", "checkbox", "radio", or "separator"
 - `parentId`: ID of parent menu for creating nested submenus
 
-### Menu Item Types
+Menu Item Types
 
-**Normal (default):** Standard clickable menu item
+Normal (default): Standard clickable menu item
 ```javascript
 chrome.contextMenus.create({
   id: "normalItem",
@@ -211,7 +211,7 @@ chrome.contextMenus.create({
 });
 ```
 
-**Checkbox:** Toggleable item with on/off state
+Checkbox: Toggleable item with on/off state
 ```javascript
 chrome.contextMenus.create({
   id: "toggleFeature",
@@ -222,7 +222,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### Radio Items
+Radio Items
 
 Radio items function as a group where only one option can be selected at a time. They are ideal for providing mutually exclusive choices, such as choosing an action mode or selecting from preset options.
 
@@ -237,7 +237,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### Separator Items
+Separator Items
 
 Separators create visual divisions between related menu items, helping users navigate through complex menus by grouping related options together.
 
@@ -248,11 +248,11 @@ chrome.contextMenus.create({
 });
 ```
 
-## Dynamic Menus {#dynamic-menus}
+Dynamic Menus {#dynamic-menus}
 
 One of the most powerful features of the contextMenus API is the ability to create dynamic menus that change based on context, user actions, or stored data. Unlike static menus defined at installation, dynamic menus can be created and updated in response to runtime conditions.
 
-### Creating Dynamic Menus at Runtime
+Creating Dynamic Menus at Runtime
 
 ```javascript
 // Create a dynamic menu based on current tab
@@ -274,11 +274,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-## Nested Menus and Hierarchical Structures {#nested-menus-and-hierarchical-structures}
+Nested Menus and Hierarchical Structures {#nested-menus-and-hierarchical-structures}
 
 Creating nested menu structures allows you to organize related options into logical groups, improving the user experience for complex extensions. You achieve this by using parent IDs to establish hierarchical relationships between menu items.
 
-### Building Menu Hierarchies
+Building Menu Hierarchies
 
 ```javascript
 // Create parent menu
@@ -312,11 +312,11 @@ chrome.contextMenus.create({
 });
 ```
 
-## Event Handling {#event-handling}
+Event Handling {#event-handling}
 
 When a user clicks on a context menu item, your extension receives an event containing information about the clicked item and the context where it was triggered. The `chrome.contextMenus.onClicked` event is the primary handler for menu item interactions.
 
-### Handling Menu Clicks
+Handling Menu Clicks
 
 ```javascript
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -342,7 +342,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     case "child-action-1":
       // Handle child menu item
       chrome.tabs.sendMessage(tab.id, { action: "action-one" });
-**Radio:** Mutually exclusive options within a group
+Radio: Mutually exclusive options within a group
 ```javascript
 chrome.contextMenus.create({
   id: "option1",
@@ -360,7 +360,7 @@ chrome.contextMenus.create({
 });
 ```
 
-**Separator:** Visual divider between menu sections
+Separator: Visual divider between menu sections
 ```javascript
 chrome.contextMenus.create({
   id: "separator1",
@@ -369,7 +369,7 @@ chrome.contextMenus.create({
 });
 ```
 
-## Context Types
+Context Types
 
 Context types determine when menu items appear. You can specify multiple contexts to show an item in various situations.
 
@@ -409,7 +409,7 @@ chrome.contextMenus.create({
 });
 ```
 
-## Nested Menus (Submenus)
+Nested Menus (Submenus)
 
 Create hierarchical menu structures using the `parentId` property.
 
@@ -454,9 +454,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Handling Click Events
+Handling Click Events
 
-### chrome.contextMenus.onClicked
+chrome.contextMenus.onClicked
 
 The `onClicked` event fires when a user clicks a context menu item. The callback receives two parameters: `info` containing click details and `tab` representing the active tab.
 
@@ -504,23 +504,23 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 The `info` object provides valuable context about the menu click, including the `menuItemId` (the ID of clicked item), `pageUrl` (URL of the page where click occurred), `pageTitle` (title of the page), `selectionText` (any selected text), `linkUrl` (if clicking on a link), and `srcUrl` (if clicking on an image or media).
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
 When implementing context menus in your Chrome extension, consider the following best practices to ensure a smooth user experience and maintainable code.
 
-### Menu Organization
+Menu Organization
 
 Keep your context menus organized and intuitive. Use separators to group related items, and limit the number of top-level items to avoid overwhelming users. When possible, use nested menus to create logical hierarchies.
 
-### Performance Considerations
+Performance Considerations
 
 Context menu items should be created efficiently. If you need to create many items dynamically, consider caching and updating existing items rather than recreating them. Also, remove unused menu items to prevent memory leaks.
 
-### User Feedback
+User Feedback
 
 Provide visual feedback when users interact with your menu items, especially for actions that take time to complete. Consider using the Chrome notifications API or updating the extension badge to indicate processing status.
 
-## Cleaning Up {#cleaning-up}
+Cleaning Up {#cleaning-up}
 
 When your extension no longer needs context menu items, or during development when you need to reset the menu state, use the `chrome.contextMenus.removeAll()` method to remove all items at once.
 
@@ -532,7 +532,7 @@ chrome.contextMenus.removeAll(() => {
 ```
 
 This is particularly useful in your extension's uninstall handler or when resetting settings that affect menu visibility.
-### OnClickData Properties
+OnClickData Properties
 
 The `info` object contains contextual information about the click:
 
@@ -549,9 +549,9 @@ The `info` object contains contextual information about the click:
 | `checked` | Current checked state for checkbox/radio items |
 | `wasChecked` | Previous checked state before this click |
 
-## Dynamic Menu Updates
+Dynamic Menu Updates
 
-### chrome.contextMenus.update()
+chrome.contextMenus.update()
 
 Modify existing menu items dynamically based on user actions or application state.
 
@@ -580,7 +580,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 });
 ```
 
-### chrome.contextMenus.remove() and removeAll()
+chrome.contextMenus.remove() and removeAll()
 
 Remove specific items or all context menu items.
 
@@ -595,9 +595,9 @@ chrome.contextMenus.removeAll();
 chrome.contextMenus.remove("parentMenu");
 ```
 
-## Pattern: Context-Aware Actions
+Pattern: Context-Aware Actions
 
-### Selected Text Processing
+Selected Text Processing
 
 A common pattern is performing actions on selected text, such as searching, translating, or dictionary lookup.
 
@@ -637,7 +637,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-### Element-Specific Actions
+Element-Specific Actions
 
 Perform different actions based on what element was clicked.
 
@@ -662,7 +662,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Using @theluckystrike/extension-context-menu
+Using @theluckystrike/extension-context-menu
 
 For more advanced context menu functionality, consider using the `@theluckystrike/extension-context-menu` package, which provides TypeScript support and additional utilities.
 
@@ -693,7 +693,7 @@ manager.onClick.addListener((info) => {
     // Process selection
 `info` properties: `menuItemId`, `pageUrl`, `linkUrl`, `srcUrl`, `selectionText`, `editable`.
 
-## Dynamic Menus
+Dynamic Menus
 
 Update menus based on context:
 
@@ -704,7 +704,7 @@ chrome.contextMenus.onShown.addListener((info, tab) => {
 chrome.contextMenus.onHidden.addListener(() => {});
 ```
 
-## URL Filtering
+URL Filtering
 
 ```javascript
 chrome.contextMenus.create({
@@ -722,7 +722,7 @@ chrome.contextMenus.create({
 });
 ```
 
-## Icons (Chrome 128+)
+Icons (Chrome 128+)
 
 ```javascript
 chrome.contextMenus.create({
@@ -733,14 +733,14 @@ chrome.contextMenus.create({
 });
 ```
 
-## Complete Example: Productivity Menu
+Complete Example: Productivity Menu
 
 ```javascript
 // background.js
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: "search", title: "🔍 Search '%s'", contexts: ["selection"] });
-  chrome.contextMenus.create({ id: "translate", title: "🌐 Translate", contexts: ["selection"] });
-  chrome.contextMenus.create({ id: "copy", title: "📋 Copy", contexts: ["selection", "link"] });
+  chrome.contextMenus.create({ id: "search", title: " Search '%s'", contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "translate", title: " Translate", contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "copy", title: " Copy", contexts: ["selection", "link"] });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -759,17 +759,17 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-## Best Practices
+Best Practices
 
-1. **Create menus in onInstalled:** Always create context menus within the `chrome.runtime.onInstalled` event listener. This ensures menus are created only once and persist across service worker restarts.
+1. Create menus in onInstalled: Always create context menus within the `chrome.runtime.onInstalled` event listener. This ensures menus are created only once and persist across service worker restarts.
 
-2. **Use descriptive IDs:** Choose clear, meaningful ID strings for menu items. This makes debugging and maintaining code easier.
+2. Use descriptive IDs: Choose clear, meaningful ID strings for menu items. This makes debugging and maintaining code easier.
 
-3. **Limit menu items:** Too many menu items clutter the context menu. Prioritize the most common actions and consider using submenus for less frequently used options.
+3. Limit menu items: Too many menu items clutter the context menu. Prioritize the most common actions and consider using submenus for less frequently used options.
 
-4. **Use appropriate contexts:** Only show menu items when relevant. Use "selection" for text operations, "link" for link-specific actions, and "image" for image-related features.
+4. Use appropriate contexts: Only show menu items when relevant. Use "selection" for text operations, "link" for link-specific actions, and "image" for image-related features.
 
-5. **Use documentUrlPatterns:** Limit menu items to specific websites using the `documentUrlPatterns` property for a more targeted experience.
+5. Use documentUrlPatterns: Limit menu items to specific websites using the `documentUrlPatterns` property for a more targeted experience.
 
 ```javascript
 chrome.contextMenus.create({
@@ -780,17 +780,17 @@ chrome.contextMenus.create({
 });
 ```
 
-6. **Handle all cases gracefully:** Always check if expected properties exist (e.g., `info.selectionText`, `info.linkUrl`) before using them.
+6. Handle all cases gracefully: Always check if expected properties exist (e.g., `info.selectionText`, `info.linkUrl`) before using them.
 
-## Common Mistakes
+Common Mistakes
 
-- **Creating menus outside onInstalled:** This causes duplicate menu items every time the service worker restarts.
-- **Forgetting the id field:** Required in Manifest V3 (was optional in MV2).
-- **Not handling all menuItemId values:** Use a switch statement or object map to handle all possible menu item IDs.
-- **Assuming selectionText exists:** Always check `if (info.selectionText)` before using it.
-- **Not using checked state for checkboxes:** Store and restore checkbox states using chrome.storage.
+- Creating menus outside onInstalled: This causes duplicate menu items every time the service worker restarts.
+- Forgetting the id field: Required in Manifest V3 (was optional in MV2).
+- Not handling all menuItemId values: Use a switch statement or object map to handle all possible menu item IDs.
+- Assuming selectionText exists: Always check `if (info.selectionText)` before using it.
+- Not using checked state for checkboxes: Store and restore checkbox states using chrome.storage.
 
-## Reference
+Reference
 
 - [Chrome Context Menus API Documentation](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)
@@ -801,7 +801,7 @@ chrome.contextMenus.create({
 4. Be specific with URL patterns
 5. Use icons for discoverability (Chrome 128+)
 
-## Reference
+Reference
 
 - [Chrome Context Menus API](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
 - [Samples](https://developer.chrome.com/docs/extensions/mv3/samples#contextmenus)

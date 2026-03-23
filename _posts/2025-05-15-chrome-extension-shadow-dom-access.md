@@ -17,7 +17,7 @@ Understanding shadow DOM is no longer optional for extension developers. With ma
 
 ---
 
-## Understanding Shadow DOM and Its Impact on Extensions {#understanding-shadow-dom}
+Understanding Shadow DOM and Its Impact on Extensions {#understanding-shadow-dom}
 
 To effectively work with shadow DOM in Chrome extensions, you must first understand what shadow DOM is and why it exists. Shadow DOM is a web standard that allows developers to encapsulate components, keeping their styles and markup separate from the main document. When a web page uses shadow DOM, elements inside a shadow root are not accessible through normal DOM queries. Calling document.querySelector('.my-element') will not find elements that exist inside a shadow DOM created by the page.
 
@@ -25,11 +25,11 @@ This encapsulation works through a mechanism called shadow trees. A host element
 
 For Chrome extension content scripts, this presents a fundamental problem. Content scripts run in the context of the web page but have access to the DOM. However, when the page uses shadow DOM, content scripts cannot directly access the encapsulated elements using standard query methods. The content script can see the host element, but everything inside the shadow root is effectively invisible to normal queries. This is where specialized techniques become necessary for Chrome extension developers.
 
-The situation becomes even more complex when dealing with closed shadow roots. Some websites intentionally use closed shadow roots to prevent external access, similar to how private fields work in JavaScript classes. While this is relatively rare, it does happen, particularly with sensitive components or when websites want to prevent exactly the kind of extension interaction we are discussing. Understanding both scenarios is essential for building robust Chrome extensions.
+The situation becomes even more complex when dealing with closed shadow roots. Some websites intentionally use closed shadow roots to prevent external access, similar to how private fields work in JavaScript classes. While this is relatively rare, it does happen, particularly with sensitive components or when websites want to prevent exactly the kind of extension interaction we are discussing. Understanding both scenarios is essential for building solid Chrome extensions.
 
 ---
 
-## Accessing Open Shadow DOM from Content Scripts {#accessing-open-shadow-dom}
+Accessing Open Shadow DOM from Content Scripts {#accessing-open-shadow-dom}
 
 Accessing open shadow DOM from Chrome extension content scripts is straightforward once you understand the technique. The key insight is that shadow roots, even open ones, are not included in normal document queries. However, once you have a reference to a shadow root, you can query within it just like the regular document. The challenge is obtaining that initial reference to the shadow root.
 
@@ -80,7 +80,7 @@ This technique works reliably for open shadow DOM, which is the default mode whe
 
 ---
 
-## Piercing Shadow DOM Chains {#piercing-shadow-dom-chains}
+Piercing Shadow DOM Chains {#piercing-shadow-dom-chains}
 
 Real-world websites often have nested shadow DOM, where shadow roots contain other elements that also have their own shadow roots. This creates a shadow DOM chain that your content script must traverse. Understanding how to pierce through these chains is essential for working with complex modern web applications.
 
@@ -121,7 +121,7 @@ Another important consideration is performance when working with shadow DOM chai
 
 ---
 
-## Handling Closed Shadow DOM in Extensions {#handling-closed-shadow-dom}
+Handling Closed Shadow DOM in Extensions {#handling-closed-shadow-dom}
 
 Closed shadow DOM presents a significantly more challenging scenario for Chrome extension developers. When a shadow root is created with the mode set to 'closed', the shadowRoot property returns null from outside the shadow tree. There is no direct way to access the contents of a closed shadow root from JavaScript running in the regular document context, including content scripts.
 
@@ -141,7 +141,7 @@ Another consideration is that some websites use closed shadow DOM as an attempt 
 
 ---
 
-## Practical Extension Patterns for Shadow DOM {#practical-extension-patterns}
+Practical Extension Patterns for Shadow DOM {#practical-extension-patterns}
 
 Now that you understand the theory, let us examine practical patterns for incorporating shadow DOM access into your Chrome extension. These patterns represent real-world approaches that extension developers use to successfully interact with shadow DOM on modern websites.
 
@@ -217,7 +217,7 @@ const ShadowDOMUtils = {
 
 Integrating this utility into your extension requires proper configuration. In your manifest.json, ensure your content script is properly configured to run at the appropriate time. For pages using shadow DOM heavily, you might need to run your content script at document_idle to ensure the page has fully loaded and constructed all shadow roots.
 
-Another practical pattern involves using MutationObserver to handle dynamically created shadow DOM. Many modern frameworks create shadow DOM after the initial page load, in response to user interactions or after asynchronous data loads. A robust extension should monitor for new shadow hosts and update its references accordingly.
+Another practical pattern involves using MutationObserver to handle dynamically created shadow DOM. Many modern frameworks create shadow DOM after the initial page load, in response to user interactions or after asynchronous data loads. A solid extension should monitor for new shadow hosts and update its references accordingly.
 
 ```javascript
 // Watching for new shadow hosts
@@ -254,9 +254,9 @@ function observeShadowDOMChanges(callback) {
 
 ---
 
-## Common Pitfalls and Troubleshooting {#common-pitfalls}
+Common Pitfalls and Troubleshooting {#common-pitfalls}
 
-Working with shadow DOM in Chrome extensions involves several common pitfalls that can cause hours of frustration if you are not aware of them. Understanding these issues in advance will save you significant debugging time and help you write more robust code.
+Working with shadow DOM in Chrome extensions involves several common pitfalls that can cause hours of frustration if you are not aware of them. Understanding these issues in advance will save you significant debugging time and help you write more solid code.
 
 The most common pitfall is assuming that querySelectorAll on the document will find elements inside shadow roots. This is simply not how shadow DOM works. The query will only find elements in the regular document tree, not inside any shadow trees. You must explicitly traverse into each shadow root to find elements within. This catches many developers off guard because they expect shadow DOM elements to behave like regular nested elements.
 
@@ -268,7 +268,7 @@ Finally, be aware that some websites actively try to prevent extension access to
 
 ---
 
-## Conclusion and Best Practices {#conclusion}
+Conclusion and Best Practices {#conclusion}
 
 Accessing shadow DOM from Chrome extensions requires understanding the unique challenges that shadow encapsulation presents. Open shadow DOM is straightforward to work with once you know the technique: find the shadow host, access its shadowRoot property, and query within that shadow root. Nested shadow DOM chains require recursive traversal, following each shadow root in sequence to reach deeply buried elements.
 

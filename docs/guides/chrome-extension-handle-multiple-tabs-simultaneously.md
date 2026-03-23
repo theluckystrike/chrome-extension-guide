@@ -11,7 +11,7 @@ Building Chrome extensions that effectively manage multiple tabs simultaneously 
 
 This comprehensive guide walks you through building TypeScript-powered Chrome extensions that can track, coordinate, and control multiple tabs in various scenarios. You'll learn patterns used in production extensions serving thousands of users, with complete code examples you can adapt for your own projects.
 
-## Table of Contents
+Table of Contents
 
 - [Understanding the Chrome Tabs API](#understanding-the-chrome-tabs-api)
 - [Core Concepts for Multi-Tab Management](#core-concepts-for-multi-tab-management)
@@ -26,11 +26,11 @@ This comprehensive guide walks you through building TypeScript-powered Chrome ex
 - [Testing Your Multi-Tab Extension](#testing-your-multi-tab-extension)
 - [Frequently Asked Questions](#frequently-asked-questions)
 
-## Understanding the Chrome Tabs API
+Understanding the Chrome Tabs API
 
 The `chrome.tabs` API is the foundation for any extension that works with browser tabs. In Manifest V3, this API provides methods to query, create, update, and remove tabs, along with powerful event listeners that notify your extension when tab states change.
 
-### Key Tab Properties
+Key Tab Properties
 
 When working with tabs, you'll primarily interact with these properties:
 
@@ -50,9 +50,9 @@ interface ChromeTab {
 }
 ```
 
-Understanding these properties is crucial for building robust multi-tab functionality. Tab Suspender Pro, for instance, uses these properties extensively to determine which tabs are eligible for suspension and how to restore them.
+Understanding these properties is crucial for building solid multi-tab functionality. Tab Suspender Pro, for instance, uses these properties extensively to determine which tabs are eligible for suspension and how to restore them.
 
-### Required Permissions
+Required Permissions
 
 To work with tabs, you need to declare the appropriate permissions in your manifest:
 
@@ -72,11 +72,11 @@ To work with tabs, you need to declare the appropriate permissions in your manif
 
 For read-only access to tab information in the active tab, you can use the more restricted `activeTab` permission instead, which only grants access when the user clicks your extension.
 
-## Core Concepts for Multi-Tab Management
+Core Concepts for Multi-Tab Management
 
 Before diving into code, let's establish the core concepts that power successful multi-tab extensions.
 
-### Tab Identity and Lifecycle
+Tab Identity and Lifecycle
 
 Each tab in Chrome has a unique identifier that remains constant throughout its lifetime within a session. However, tab IDs can be reused after a tab is closed, so always handle the case where a tab ID might reference a non-existent tab.
 
@@ -104,7 +104,7 @@ class TabTracker {
 }
 ```
 
-### Tab Windows vs Tab Groups
+Tab Windows vs Tab Groups
 
 Chrome distinguishes between windows (containers for tabs) and tab groups (optional organization within a window). Your extension needs to handle both:
 
@@ -127,31 +127,31 @@ async function getAllWindows(): Promise<WindowInfo[]> {
 }
 ```
 
-## Setting Up Your TypeScript Project
+Setting Up Your TypeScript Project
 
 Let's create a well-structured TypeScript project for multi-tab management. We'll use a modern setup with proper typing and build configuration.
 
-### Project Structure
+Project Structure
 
 ```
 my-extension/
-├── src/
-│   ├── background/
-│   │   └── service-worker.ts
-│   ├── content-scripts/
-│   │   └── tracker.ts
-│   ├── popup/
-│   │   └── popup.ts
-│   ├── shared/
-│   │   ├── types.ts
-│   │   └── utils.ts
-│   └── index.ts
-├── manifest.json
-├── tsconfig.json
-└── package.json
+ src/
+    background/
+       service-worker.ts
+    content-scripts/
+       tracker.ts
+    popup/
+       popup.ts
+    shared/
+       types.ts
+       utils.ts
+    index.ts
+ manifest.json
+ tsconfig.json
+ package.json
 ```
 
-### TypeScript Configuration
+TypeScript Configuration
 
 ```json
 {
@@ -166,22 +166,22 @@ my-extension/
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*"],
+  "include": ["src//*"],
   "exclude": ["node_modules"]
 }
 ```
 
-### Installing Type Definitions
+Installing Type Definitions
 
 ```bash
 npm install --save-dev @types/chrome
 ```
 
-## Tracking Tab State Across Your Extension
+Tracking Tab State Across Your Extension
 
 One of the most important aspects of multi-tab management is maintaining accurate state information about all open tabs. This is particularly crucial for extensions like Tab Suspender Pro that need to make decisions based on the current state of multiple tabs.
 
-### Building a Tab State Manager
+Building a Tab State Manager
 
 ```typescript
 import { ChromeTab, TabState, SuspendReason } from '../shared/types';
@@ -278,7 +278,7 @@ class TabStateManager {
 export const tabStateManager = new TabStateManager();
 ```
 
-### Defining Shared Types
+Defining Shared Types
 
 ```typescript
 // src/shared/types.ts
@@ -309,11 +309,11 @@ export interface MultiTabOperation {
 }
 ```
 
-## Working with Tab Groups
+Working with Tab Groups
 
 Chrome's tab groups API allows users to organize tabs visually. Your extension can create, modify, and delete tab groups, as well as move tabs between groups.
 
-### Creating and Managing Tab Groups
+Creating and Managing Tab Groups
 
 ```typescript
 class TabGroupManager {
@@ -349,11 +349,11 @@ class TabGroupManager {
 export const tabGroupManager = new TabGroupManager();
 ```
 
-## Implementing Bulk Tab Operations
+Implementing Bulk Tab Operations
 
 Extensions like Tab Suspender Pro often need to perform operations on multiple tabs simultaneously. This section covers patterns for efficiently managing bulk operations.
 
-### Batch Suspending Tabs
+Batch Suspending Tabs
 
 ```typescript
 interface SuspendOptions {
@@ -438,7 +438,7 @@ class BulkTabOperations {
 export const bulkOperations = new BulkTabOperations();
 ```
 
-### Moving Multiple Tabs
+Moving Multiple Tabs
 
 ```typescript
 class TabMover {
@@ -492,11 +492,11 @@ class TabMover {
 export const tabMover = new TabMover();
 ```
 
-## Handling Tab Events Effectively
+Handling Tab Events Effectively
 
 Efficient event handling is crucial for extensions that manage multiple tabs. Poorly implemented event listeners can lead to performance issues and unexpected behavior.
 
-### Debouncing Tab Events
+Debouncing Tab Events
 
 ```typescript
 class DebouncedTabEventHandler {
@@ -542,7 +542,7 @@ const eventHandler = new DebouncedTabEventHandler((tabId) => {
 });
 ```
 
-### Using Filtered Listeners
+Using Filtered Listeners
 
 Chrome provides filtered events that can significantly improve performance by only firing for matching tabs:
 
@@ -564,11 +564,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-## Real-World Example: Building a Tab Manager
+Real-World Example: Building a Tab Manager
 
 Let's put everything together to build a comprehensive tab manager similar to features found in Tab Suspender Pro. This example demonstrates how all the pieces fit together.
 
-### Complete Tab Manager Implementation
+Complete Tab Manager Implementation
 
 ```typescript
 // src/background/tab-manager.ts
@@ -718,11 +718,11 @@ class TabManager {
 export const tabManager = new TabManager();
 ```
 
-## Performance Considerations
+Performance Considerations
 
 When building extensions that handle multiple tabs, performance should be a primary concern. Here are key strategies for maintaining optimal performance.
 
-### Minimizing API Calls
+Minimizing API Calls
 
 ```typescript
 class OptimizedTabAccessor {
@@ -750,7 +750,7 @@ class OptimizedTabAccessor {
 }
 ```
 
-### Using tabIds Efficiently
+Using tabIds Efficiently
 
 Always prefer operations that accept multiple tab IDs over iterating:
 
@@ -764,7 +764,7 @@ for (const tabId of tabIds) {
 await chrome.tabs.update(tabIds, { muted: true });
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
 Robust error handling is essential for production extensions dealing with multiple tabs.
 
@@ -813,7 +813,7 @@ class SafeTabOperations {
 }
 ```
 
-## Testing Your Multi-Tab Extension
+Testing Your Multi-Tab Extension
 
 Testing extensions that manage multiple tabs requires careful planning. Here are effective strategies:
 
@@ -853,9 +853,9 @@ describe('TabStateManager', () => {
 });
 ```
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I handle tabs in incognito mode?
+How do I handle tabs in incognito mode?
 
 Incognito tabs require special handling. Use the `incognito` property to identify them, and be aware that some APIs behave differently for incognito windows. You can query incognito tabs specifically:
 
@@ -863,19 +863,19 @@ Incognito tabs require special handling. Use the `incognito` property to identif
 const incognitoTabs = await chrome.tabs.query({ incognito: true });
 ```
 
-### Can I access tabs across all windows?
+Can I access tabs across all windows?
 
 Yes, but you need to request the appropriate permissions. The `tabs` permission allows access to all tabs in all windows, while `activeTab` limits access to the current active tab.
 
-### What's the maximum number of tabs I can manage?
+What's the maximum number of tabs I can manage?
 
 Chrome doesn't impose a hard limit, but performance degrades with hundreds of tabs. Tab Suspender Pro recommends limiting bulk operations to 10-20 tabs at a time to prevent browser slowdown.
 
-### How do I handle tab IDs being reused?
+How do I handle tab IDs being reused?
 
 Always verify a tab exists before performing operations. Use try-catch blocks and check for `chrome.runtime.lastError`. Implement a cleanup mechanism to remove stale tab IDs from your internal state.
 
-### Can I detect when a user is using multiple monitors?
+Can I detect when a user is using multiple monitors?
 
 Yes, use the Windows API to get information about window positions:
 

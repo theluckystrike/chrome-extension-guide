@@ -235,17 +235,17 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ## Best Practices
 
-1. **Always handle permissions gracefully** - Users may revoke camera/microphone access at any time
-2. **Use `getUserMedia` constraints properly** - Test various resolution and frame rate combinations
-3. **Implement proper cleanup** - Close peer connections and stop tracks when done
-4. **Handle ICE server failures** - Provide fallback servers and connection state monitoring
-5. **Consider MV2 to MV3 differences** - Background pages in MV2 stay alive; service workers in MV3 need reconnection logic
+1. Always handle permissions gracefully - Users may revoke camera/microphone access at any time
+2. Use `getUserMedia` constraints properly - Test various resolution and frame rate combinations
+3. Implement proper cleanup - Close peer connections and stop tracks when done
+4. Handle ICE server failures - Provide fallback servers and connection state monitoring
+5. Consider MV2 to MV3 differences - Background pages in MV2 stay alive; service workers in MV3 need reconnection logic
 
 ## Common Use Cases
 
-- **Screen recording extensions**: Capture tabs or windows for tutorial creation
-- **Meeting boosters**: Add functionality to existing video conferencing platforms
-- **Peer-to-peer file transfer**: Direct browser-to-browser file sharing
-- **Live streaming tools**: Broadcast captured content to RTMP servers
+- Screen recording extensions: Capture tabs or windows for tutorial creation
+- Meeting boosters: Add functionality to existing video conferencing platforms
+- Peer-to-peer file transfer: Direct browser-to-browser file sharing
+- Live streaming tools: Broadcast captured content to RTMP servers
 
-WebRTC in Chrome extensions opens powerful real-time communication possibilities. By understanding the unique constraints of extension architecture and implementing proper state management, you can build robust video, audio, and data streaming features.
+WebRTC in Chrome extensions opens powerful real-time communication possibilities. By understanding the unique constraints of extension architecture and implementing proper state management, you can build solid video, audio, and data streaming features.

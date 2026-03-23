@@ -21,37 +21,37 @@ A color palette generator extension extracts colors from web pages, generates ha
 
 A color palette generator typically requires three main contexts:
 
-1. **Popup**: Primary UI for quick color sampling and palette display
-2. **Content Script**: Color extraction from page elements via DOM analysis
-3. **Service Worker**: Background processing, storage, and cross-tab coordination
+1. Popup: Primary UI for quick color sampling and palette display
+2. Content Script: Color extraction from page elements via DOM analysis
+3. Service Worker: Background processing, storage, and cross-tab coordination
 
 ```
 color-palette-generator/
-├── manifest.json
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry
-│   │   ├── colorExtractor.ts # Page color analysis
-│   │   └── paletteGenerator.ts # Color harmony algorithms
-│   ├── popup/
-│   │   ├── index.html
-│   │   ├── index.tsx         # Popup React/TS entry
-│   │   └── styles.css
-│   ├── content/
-│   │   └── index.ts          # Content script for page injection
-│   ├── shared/
-│   │   ├── types.ts          # Shared type definitions
-│   │   ├── colorUtils.ts     # Color conversion utilities
-│   │   └── storage.ts        # Storage abstractions
-│   └── components/           # Reusable UI components
-├── icons/
-├── package.json
-└── tsconfig.json
+ manifest.json
+ src/
+    background/
+       index.ts          # Service worker entry
+       colorExtractor.ts # Page color analysis
+       paletteGenerator.ts # Color harmony algorithms
+    popup/
+       index.html
+       index.tsx         # Popup React/TS entry
+       styles.css
+    content/
+       index.ts          # Content script for page injection
+    shared/
+       types.ts          # Shared type definitions
+       colorUtils.ts     # Color conversion utilities
+       storage.ts        # Storage abstractions
+    components/           # Reusable UI components
+ icons/
+ package.json
+ tsconfig.json
 ```
 
 ---
 
-## Manifest Configuration
+Manifest Configuration
 
 The manifest.json defines extension capabilities and permissions. Here's a complete MV3 configuration:
 
@@ -98,9 +98,9 @@ The manifest.json defines extension capabilities and permissions. Here's a compl
 
 ---
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Shared Types
+Shared Types
 
 ```typescript
 // src/shared/types.ts
@@ -153,7 +153,7 @@ export interface ExtensionSettings {
 }
 ```
 
-### Color Utilities
+Color Utilities
 
 ```typescript
 // src/shared/colorUtils.ts
@@ -252,7 +252,7 @@ export function generateHarmony(baseColor: Color, type: string): Color[] {
 }
 ```
 
-### Content Script - Color Extraction
+Content Script - Color Extraction
 
 ```typescript
 // src/content/index.ts
@@ -326,7 +326,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Service Worker - Background Processing
+Service Worker - Background Processing
 
 ```typescript
 // src/background/index.ts
@@ -449,9 +449,9 @@ interface ExtractionOptions {
 
 ---
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup Interface
+Popup Interface
 
 The popup provides the primary user interface for color manipulation:
 
@@ -582,7 +582,7 @@ export default Popup;
 ```
 {% endraw %}
 
-### Sidebar Overlay Option
+Sidebar Overlay Option
 
 For more complex color editing, implement a sidebar:
 
@@ -603,9 +603,9 @@ document.getElementById('extract-btn')?.addEventListener('click', async () => {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions
+Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -614,7 +614,7 @@ document.getElementById('extract-btn')?.addEventListener('click', async () => {
 | `scripting` | Execute scripts in page context |
 | `<all_urls>` | Access colors from any website |
 
-### API Usage Patterns
+API Usage Patterns
 
 ```typescript
 // Proper error handling for Chrome API calls
@@ -638,9 +638,9 @@ async function withTab<T>(tabId: number, fn: (tab: chrome.tabs.Tab) => Promise<T
 
 ---
 
-## State Management
+State Management
 
-### Storage Patterns
+Storage Patterns
 
 ```typescript
 // src/shared/storage.ts
@@ -706,9 +706,9 @@ export const paletteStore = new PaletteStore();
 
 ---
 
-## Error Handling
+Error Handling
 
-### Comprehensive Error Boundaries
+Comprehensive Error Boundaries
 
 ```typescript
 // src/shared/errors.ts
@@ -752,20 +752,20 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
-1. **Empty pages**: Return informative message
-2. **Same-origin restrictions**: Use scripting API
-3. **Large pages**: Limit color extraction depth
-4. **Color-blind users**: Provide accessible color suggestions
-5. **Dark/Light mode**: Adapt UI accordingly
-6. **Iframe content**: May require additional permissions
+1. Empty pages: Return informative message
+2. Same-origin restrictions: Use scripting API
+3. Large pages: Limit color extraction depth
+4. Color-blind users: Provide accessible color suggestions
+5. Dark/Light mode: Adapt UI accordingly
+6. Iframe content: May require additional permissions
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing Color Utilities
+Unit Testing Color Utilities
 
 ```typescript
 // tests/colorUtils.test.ts
@@ -797,7 +797,7 @@ describe('Color Utilities', () => {
 });
 ```
 
-### Integration Testing with Puppeteer
+Integration Testing with Puppeteer
 
 ```typescript
 // tests/integration/popup.test.ts
@@ -822,9 +822,9 @@ test('popup extracts colors from page', async ({ page }) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Strategies
+Optimization Strategies
 
 ```typescript
 // 1. Lazy load content scripts
@@ -865,7 +865,7 @@ function getCachedColor(hex: string): Color {
 }
 ```
 
-### Memory Management
+Memory Management
 
 - Limit stored palettes to prevent storage bloat
 - Use WeakMap for DOM element color associations
@@ -874,9 +874,9 @@ function getCachedColor(hex: string): Color {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Submission Requirements
+Pre-Submission Requirements
 
 - [ ] All icons generated (16, 48, 128px)
 - [ ] Privacy policy written and hosted
@@ -884,25 +884,25 @@ function getCachedColor(hex: string): Color {
 - [ ] Screenshots and promotional images
 - [ ] Manifest passes Chrome Web Store validation
 
-### Manifest Validation
+Manifest Validation
 
 ```bash
-# Use Chrome Extension Manifest Validator
+Use Chrome Extension Manifest Validator
 npx @chrome-extension-validator/validate manifest.json
 
-# Or pack and test locally
+Or pack and test locally
 chrome://extensions -> Developer mode -> Pack extension
 ```
 
-### Store Listing
+Store Listing
 
-1. **Title**: Clear, descriptive (max 45 chars)
-2. **Short description**: Key features (max 132 chars)
-3. **Long description**: Detailed feature list
-4. **Category**: Developer Tools or Accessibility
-5. **Language**: Primary language selection
+1. Title: Clear, descriptive (max 45 chars)
+2. Short description: Key features (max 132 chars)
+3. Long description: Detailed feature list
+4. Category: Developer Tools or Accessibility
+5. Language: Primary language selection
 
-### Post-Publishing
+Post-Publishing
 
 - Monitor crash reports in Chrome Web Store dashboard
 - Respond to user reviews promptly
@@ -911,20 +911,20 @@ chrome://extensions -> Developer mode -> Pack extension
 
 ---
 
-## Conclusion
+Conclusion
 
 Building a color palette generator extension requires careful consideration of architecture, user experience, and Chrome platform constraints. This guide covered essential patterns for creating a production-ready extension:
 
-- **MV3 manifest** with minimal permissions
-- **TypeScript** for type safety across contexts
-- **Service worker** for background processing
-- **Content scripts** for page color extraction
-- **Popup UI** for quick palette generation
-- **Storage patterns** for saving user data
-- **Error handling** for robustness
-- **Testing strategies** for reliability
-- **Performance optimization** for responsiveness
-- **Publishing workflow** for distribution
+- MV3 manifest with minimal permissions
+- TypeScript for type safety across contexts
+- Service worker for background processing
+- Content scripts for page color extraction
+- Popup UI for quick palette generation
+- Storage patterns for saving user data
+- Error handling for robustness
+- Testing strategies for reliability
+- Performance optimization for responsiveness
+- Publishing workflow for distribution
 
 With these patterns, you can extend the foundation to include advanced features like:
 - Color contrast checking (WCAG compliance)
@@ -936,7 +936,7 @@ With these patterns, you can extend the foundation to include advanced features 
 The complete source code for this extension pattern is available in the examples directory.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

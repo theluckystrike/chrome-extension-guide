@@ -1,18 +1,18 @@
 ---
 layout: default
-title: "Chrome Extension Clipboard API — How to Copy and Paste Programmatically"
+title: "Chrome Extension Clipboard API. How to Copy and Paste Programmatically"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/clipboard-api/"
 ---
 # Clipboard API Guide
 
-## Overview {#overview}
+Overview {#overview}
 - Modern approach: `navigator.clipboard` API
 - Legacy fallback: `document.execCommand()` for older browsers
 - Requires permissions in Manifest V3 for certain operations
 - Offscreen documents needed for background script clipboard access in MV3
 
-## Using the Clipboard API (Modern) {#using-clipboard-api}
+Using the Clipboard API (Modern) {#using-clipboard-api}
 
 The `navigator.clipboard` API provides a modern, promise-based interface for clipboard operations. This is the recommended approach for content scripts and pages where the API is available.
 
@@ -48,11 +48,11 @@ async function copyHtml(html, plainText) {
 }
 ```
 
-## Permissions {#permissions}
+Permissions {#permissions}
 
 For clipboard operations, permissions requirements vary based on your extension's architecture and target use cases.
 
-### Manifest V3 Permissions
+Manifest V3 Permissions
 
 ```json
 {
@@ -65,7 +65,7 @@ For clipboard operations, permissions requirements vary based on your extension'
 
 The `clipboardWrite` permission allows your extension to write to the clipboard without user interaction. The `clipboardRead` permission requires explicit user gesture (such as a click) to read clipboard contents, unless your extension is the currently active tab.
 
-### Host Permissions
+Host Permissions
 
 If you need clipboard access for specific websites, you can request host permissions:
 
@@ -77,7 +77,7 @@ If you need clipboard access for specific websites, you can request host permiss
 }
 ```
 
-## execCommand Fallback {#execCommand-fallback}
+execCommand Fallback {#execCommand-fallback}
 
 For older browsers or environments where `navigator.clipboard` isn't available, use the legacy `document.execCommand()` approach. This method requires a visible textarea or input element.
 
@@ -125,11 +125,11 @@ function fallbackPaste() {
 }
 ```
 
-## Offscreen Documents in Manifest V3 {#offscreen-documents}
+Offscreen Documents in Manifest V3 {#offscreen-documents}
 
 In Manifest V3, service workers cannot access the DOM directly, which means `navigator.clipboard` isn't available in the background script. Use offscreen documents to perform clipboard operations that require DOM access.
 
-### Creating an Offscreen Document
+Creating an Offscreen Document
 
 ```javascript
 // In your background service worker
@@ -159,7 +159,7 @@ async function copyWithOffscreen(text) {
 }
 ```
 
-### Offscreen Document Handler
+Offscreen Document Handler
 
 ```javascript
 // In offscreen.html
@@ -180,15 +180,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Security Considerations {#security}
+Security Considerations {#security}
 
 When working with clipboard operations in Chrome extensions, several security concerns must be addressed to protect user data and maintain trust.
 
-### User Gesture Requirements
+User Gesture Requirements
 
 The Clipboard API requires a user gesture (such as a click or keypress) for read operations in most contexts. This prevents malicious extensions from silently reading sensitive data from the clipboard. Always trigger clipboard read operations in response to explicit user actions.
 
-### Data Validation
+Data Validation
 
 Always validate and sanitize clipboard data before using it:
 
@@ -208,7 +208,7 @@ async function safePaste() {
 }
 ```
 
-### Sensitive Data Handling
+Sensitive Data Handling
 
 Be cautious when writing sensitive data to the clipboard. Consider implementing a feature that clears clipboard data after a timeout:
 
@@ -230,11 +230,11 @@ async function copySensitiveData(data, clearAfterMs = 30000) {
 }
 ```
 
-### Cross-Origin Restrictions
+Cross-Origin Restrictions
 
 Clipboard operations are subject to cross-origin restrictions. Ensure your extension has appropriate permissions and that the page has focus when attempting to read clipboard contents.
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
 Follow these recommendations for reliable clipboard functionality across different extension contexts:
 

@@ -1,54 +1,54 @@
 ---
 layout: default
-title: "Chrome Extension Content Script Isolation — Best Practices"
+title: "Chrome Extension Content Script Isolation. Best Practices"
 description: "Maintain proper isolation between content scripts and page scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-isolation/"
 ---
 
 # Content Script Isolation Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
-The [content script isolation reference](../guides/content-script-isolation.md) explains how Chrome's isolated worlds work. This guide provides practical patterns for working within — and across — isolation boundaries: safe DOM interaction, cross-world communication, Shadow DOM encapsulation, defending against hostile pages, and managing multiple content scripts.
+The [content script isolation reference](../guides/content-script-isolation.md) explains how Chrome's isolated worlds work. This guide provides practical patterns for working within. and across. isolation boundaries: safe DOM interaction, cross-world communication, Shadow DOM encapsulation, defending against hostile pages, and managing multiple content scripts.
 
 ---
 
-## The Isolation Model {#the-isolation-model}
+The Isolation Model {#the-isolation-model}
 
 ```
-┌─────────────────────────────────────────┐
-│                  Web Page                │
-│                                         │
-│  ┌───────────────┐  ┌────────────────┐  │
-│  │  Page World   │  │ Isolated World │  │
-│  │               │  │ (Content Script)│  │
-│  │ - page JS     │  │ - extension JS │  │
-│  │ - page vars   │  │ - chrome.* APIs│  │
-│  │ - page libs   │  │ - own globals  │  │
-│  └───────┬───────┘  └───────┬────────┘  │
-│          │                  │           │
-│          └──────┬───────────┘           │
-│                 │                       │
-│          ┌──────▼──────┐                │
-│          │  Shared DOM │                │
-│          └─────────────┘                │
-└─────────────────────────────────────────┘
+
+                  Web Page                
+                                         
+      
+    Page World      Isolated World   
+                    (Content Script)  
+   - page JS        - extension JS   
+   - page vars      - chrome.* APIs  
+   - page libs      - own globals    
+      
+                                       
+                     
+                                        
+                          
+            Shared DOM                 
+                          
+
 ```
 
 Both worlds see the same DOM, but they have separate JavaScript execution contexts. This means:
 - Content scripts can't access `window.jQuery` or any page-defined variable
 - The page can't access `chrome.runtime` or any content script variable
-- DOM elements and events are shared — both can add/read/modify them
-- Prototype chains are separate — `Array.prototype` modifications in one world don't affect the other
+- DOM elements and events are shared. both can add/read/modify them
+- Prototype chains are separate. `Array.prototype` modifications in one world don't affect the other
 
 ---
 
-## Pattern 1: Safe DOM Access {#pattern-1-safe-dom-access}
+Pattern 1: Safe DOM Access {#pattern-1-safe-dom-access}
 
 The page can override built-in DOM methods. Protect against tampered prototypes:
 
 ```ts
-// content.ts — Capture native references before page scripts can modify them
+// content.ts. Capture native references before page scripts can modify them
 
 // Save references at content script load time (document_start)
 const nativeQuerySelector = Document.prototype.querySelector;
@@ -110,12 +110,12 @@ Use with `run_at: "document_start"` to capture native references before any page
 
 ---
 
-## Pattern 2: Shadow DOM Encapsulation {#pattern-2-shadow-dom-encapsulation}
+Pattern 2: Shadow DOM Encapsulation {#pattern-2-shadow-dom-encapsulation}
 
 Inject UI that is completely isolated from the page's CSS and JavaScript:
 
 ```ts
-// content.ts — Create a fully encapsulated UI
+// content.ts. Create a fully encapsulated UI
 function createIsolatedUI() {
   const host = document.createElement("div");
   host.id = "my-ext-host";
@@ -123,10 +123,10 @@ function createIsolatedUI() {
   // closed mode: page JS can't access shadow internals
   const shadow = host.attachShadow({ mode: "closed" });
 
-  // Styles are scoped to the shadow DOM — no page CSS leaks in
+  // Styles are scoped to the shadow DOM. no page CSS leaks in
   shadow.innerHTML = `
     <style>
-      /* Reset everything — start fresh */
+      /* Reset everything. start fresh */
       :host {
         all: initial !important;
         position: fixed !important;
@@ -136,7 +136,7 @@ function createIsolatedUI() {
         font-family: system-ui, sans-serif !important;
       }
 
-      /* Your extension styles — completely isolated */
+      /* Your extension styles. completely isolated */
       .panel {
         width: 320px;
         background: #fff;
@@ -183,15 +183,15 @@ function createIsolatedUI() {
 }
 ```
 
-### Why Closed Shadow DOM? {#why-closed-shadow-dom}
+Why Closed Shadow DOM? {#why-closed-shadow-dom}
 
 ```ts
-// mode: "open" — page JS can access your shadow root
+// mode: "open". page JS can access your shadow root
 const hostOpen = div.attachShadow({ mode: "open" });
 // A hostile page could do: document.querySelector('#my-ext-host').shadowRoot
 // and read/modify your extension's injected UI
 
-// mode: "closed" — page JS cannot access shadow internals
+// mode: "closed". page JS cannot access shadow internals
 const hostClosed = div.attachShadow({ mode: "closed" });
 // document.querySelector('#my-ext-host').shadowRoot === null
 // Your reference to the shadow root is the only way in
@@ -199,14 +199,14 @@ const hostClosed = div.attachShadow({ mode: "closed" });
 
 ---
 
-## Pattern 3: Cross-World Communication {#pattern-3-cross-world-communication}
+Pattern 3: Cross-World Communication {#pattern-3-cross-world-communication}
 
 Content scripts (isolated world) and page scripts (main world) can communicate through the shared DOM:
 
-### Using window.postMessage {#using-windowpostmessage}
+Using window.postMessage {#using-windowpostmessage}
 
 ```ts
-// content.ts — Listen for page messages
+// content.ts. Listen for page messages
 window.addEventListener("message", (event) => {
   // Always verify the source
   if (event.source !== window) return;
@@ -235,10 +235,10 @@ function sendToPage(type: string, payload: unknown) {
 }
 ```
 
-### Using Custom DOM Events {#using-custom-dom-events}
+Using Custom DOM Events {#using-custom-dom-events}
 
 ```ts
-// content.ts — More targeted than postMessage
+// content.ts. More targeted than postMessage
 const EVENT_PREFIX = "myext";
 
 function listenToPage(eventName: string, handler: (detail: unknown) => void) {
@@ -264,10 +264,10 @@ listenToPage("request-data", (detail) => {
 });
 ```
 
-### Using Shared DOM Elements (Data Channel) {#using-shared-dom-elements-data-channel}
+Using Shared DOM Elements (Data Channel) {#using-shared-dom-elements-data-channel}
 
 ```ts
-// content.ts — Hidden element as a data channel
+// content.ts. Hidden element as a data channel
 function createDataChannel(): HTMLElement {
   const channel = document.createElement("div");
   channel.id = "my-ext-data-channel";
@@ -300,12 +300,12 @@ function sendViaChannel(data: unknown) {
 
 ---
 
-## Pattern 4: Defending Against Hostile Pages {#pattern-4-defending-against-hostile-pages}
+Pattern 4: Defending Against Hostile Pages {#pattern-4-defending-against-hostile-pages}
 
 Pages can try to interfere with your content script. Defensive patterns:
 
 ```ts
-// content.ts — Defense against page manipulation
+// content.ts. Defense against page manipulation
 
 // 1. Don't trust page-controlled DOM values
 function safeGetText(selector: string): string {
@@ -350,7 +350,7 @@ function isRateLimited(): boolean {
 
 ---
 
-## Pattern 5: Multiple Content Scripts {#pattern-5-multiple-content-scripts}
+Pattern 5: Multiple Content Scripts {#pattern-5-multiple-content-scripts}
 
 When you have multiple content scripts or need modular organization:
 
@@ -379,7 +379,7 @@ When you have multiple content scripts or need modular organization:
 Coordinate between scripts:
 
 ```ts
-// content/init.ts — Runs first at document_start
+// content/init.ts. Runs first at document_start
 // Capture native references, set up shared state
 
 (globalThis as any).__extShared = {
@@ -390,7 +390,7 @@ Coordinate between scripts:
 ```
 
 ```ts
-// content/main.ts — Runs at document_idle
+// content/main.ts. Runs at document_idle
 const shared = (globalThis as any).__extShared;
 if (!shared?.initialized) {
   console.error("Init script did not run");
@@ -402,7 +402,7 @@ const el = shared.nativeQuerySelector("#target");
 
 ---
 
-## Pattern 6: Programmatic Injection with World Selection {#pattern-6-programmatic-injection-with-world-selection}
+Pattern 6: Programmatic Injection with World Selection {#pattern-6-programmatic-injection-with-world-selection}
 
 MV3 lets you choose which world to inject into:
 
@@ -410,20 +410,20 @@ MV3 lets you choose which world to inject into:
 // background.ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
 
-// Inject into the ISOLATED world (default) — has chrome.* APIs
+// Inject into the ISOLATED world (default). has chrome.* APIs
 async function injectContentScript(tabId: number) {
   await chrome.scripting.executeScript({
     target: { tabId },
     files: ["content/analyzer.js"],
-    world: "ISOLATED", // default — extension APIs available
+    world: "ISOLATED", // default. extension APIs available
   });
 }
 
-// Inject into the MAIN world — access page JavaScript
+// Inject into the MAIN world. access page JavaScript
 async function injectPageScript(tabId: number) {
   await chrome.scripting.executeScript({
     target: { tabId },
-    world: "MAIN", // page world — no chrome.* APIs
+    world: "MAIN", // page world. no chrome.* APIs
     func: () => {
       // Can access page globals: React, jQuery, app state
       const reactRoot = document.getElementById("root");
@@ -450,7 +450,7 @@ async function analyzeTab(tabId: number) {
 
 ---
 
-## Pattern 7: CSS Isolation Without Shadow DOM {#pattern-7-css-isolation-without-shadow-dom}
+Pattern 7: CSS Isolation Without Shadow DOM {#pattern-7-css-isolation-without-shadow-dom}
 
 When Shadow DOM is overkill, use aggressive CSS scoping:
 
@@ -497,12 +497,12 @@ function injectScopedUI() {
 
 ---
 
-## Pattern 8: Context Invalidation Handling {#pattern-8-context-invalidation-handling}
+Pattern 8: Context Invalidation Handling {#pattern-8-context-invalidation-handling}
 
 When an extension updates, existing content scripts lose their connection to the background:
 
 ```ts
-// content.ts — Handle extension context invalidation
+// content.ts. Handle extension context invalidation
 function isContextValid(): boolean {
   try {
     chrome.runtime.id;
@@ -515,7 +515,7 @@ function isContextValid(): boolean {
 // Wrap all chrome.* API calls
 async function safeSendMessage(message: unknown): Promise<unknown> {
   if (!isContextValid()) {
-    console.warn("Extension context invalidated — reloading page");
+    console.warn("Extension context invalidated. reloading page");
     cleanup();
     // Optionally notify the user
     showBanner("Extension was updated. Please refresh the page.");
@@ -558,7 +558,7 @@ function showBanner(message: string) {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -571,7 +571,7 @@ function showBanner(message: string) {
 | CSS scoping | Style isolation without Shadow DOM |
 | Context invalidation | Graceful handling of extension updates |
 
-Content script isolation is Chrome's security boundary. Work with it: use the isolated world for extension logic, inject into the main world only when you need page variables, and encapsulate your UI with Shadow DOM. Never trust data from the page — validate everything that crosses the isolation boundary.
+Content script isolation is Chrome's security boundary. Work with it: use the isolated world for extension logic, inject into the main world only when you need page variables, and encapsulate your UI with Shadow DOM. Never trust data from the page. validate everything that crosses the isolation boundary.
 -e 
 ---
 

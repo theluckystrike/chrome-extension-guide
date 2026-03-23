@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Cross-Browser Extension Development — Tutorial"
+title: "Cross-Browser Extension Development. Tutorial"
 description: "Learn how to build cross-browser Chrome extensions that work in Chrome, Firefox, Safari, and Edge with this comprehensive tutorial."
 canonical_url: "https://bestchromeextensions.com/tutorials/cross-browser-compatibility/"
 ---
@@ -9,13 +9,13 @@ canonical_url: "https://bestchromeextensions.com/tutorials/cross-browser-compati
 
 Building browser extensions that work across Chrome, Firefox, Safari, and Edge requires understanding the WebExtensions API standard, browser-specific differences, and strategies for handling API incompatibilities. This tutorial covers everything you need to create truly cross-browser extensions.
 
-## Prerequisites
+Prerequisites
 
 - Basic knowledge of Chrome extension development
 - Understanding of manifest.json structure
 - Familiarity with JavaScript/TypeScript async patterns
 
-## 1. Understanding the WebExtensions Standard {#1-understanding-webextensions-standard}
+1. Understanding the WebExtensions Standard {#1-understanding-webextensions-standard}
 
 The WebExtensions API provides a cross-browser system for developing browser extensions. Originally developed by Mozilla and later adopted by Chrome, Edge, and Safari, it provides a common set of APIs for:
 
@@ -25,35 +25,35 @@ The WebExtensions API provides a cross-browser system for developing browser ext
 - Options pages
 - Browser actions
 
-### Browser Implementation Status
+Browser Implementation Status
 
 | Browser | WebExtensions Support | Manifest V3 | Primary Namespace |
 |---------|----------------------|-------------|-------------------|
-| Chrome | Full | ✅ Full | `chrome.*` |
-| Firefox | Full | ✅ Full | `browser.*` |
-| Edge | Full | ✅ Full | `chrome.*` |
-| Safari | Partial | ✅ Full | `chrome.*` / `browser.*` |
+| Chrome | Full |  Full | `chrome.*` |
+| Firefox | Full |  Full | `browser.*` |
+| Edge | Full |  Full | `chrome.*` |
+| Safari | Partial |  Full | `chrome.*` / `browser.*` |
 
-## 2. Chrome vs Firefox vs Safari vs Edge Differences {#2-browser-differences}
+2. Chrome vs Firefox vs Safari vs Edge Differences {#2-browser-differences}
 
 Each browser implements the WebExtensions API with some variations. Understanding these differences is crucial for cross-browser development.
 
-### API Availability Comparison
+API Availability Comparison
 
 | Feature | Chrome | Firefox | Edge | Safari |
 |---------|--------|---------|------|--------|
-| Manifest V3 | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| Service Workers | ✅ | ✅ (background) | ✅ | ✅ (16.4+) |
-| sidePanel API | ✅ | ❌ | ✅ | ❌ |
-| offscreenDocument | ✅ | ❌ | ✅ | ❌ |
-| tabGroups | ✅ | ❌ | ✅ | ❌ |
-| declarativeNetRequest | ✅ | ✅ | ✅ | ✅ |
-| scripting API | ✅ | ✅ | ✅ | ✅ |
-| nativeMessaging | ✅ | ✅ | ✅ | ✅ |
-| cookies API | ✅ | ✅ | ✅ | ✅ |
-| identity API | ✅ | ✅ | ✅ | ✅ |
+| Manifest V3 |  Full |  Full |  Full |  Full |
+| Service Workers |  |  (background) |  |  (16.4+) |
+| sidePanel API |  |  |  |  |
+| offscreenDocument |  |  |  |  |
+| tabGroups |  |  |  |  |
+| declarativeNetRequest |  |  |  |  |
+| scripting API |  |  |  |  |
+| nativeMessaging |  |  |  |  |
+| cookies API |  |  |  |  |
+| identity API |  |  |  |  |
 
-### Namespace Differences
+Namespace Differences
 
 ```javascript
 // Chrome: Uses chrome.* namespace with callbacks (traditional)
@@ -73,7 +73,7 @@ browser.runtime.sendMessage({ action: 'ping' })
 // Safari: Supports both with limited Promise support in some APIs
 ```
 
-### Key Behavioral Differences
+Key Behavioral Differences
 
 | Aspect | Chrome | Firefox | Edge | Safari |
 |--------|--------|---------|------|--------|
@@ -82,17 +82,17 @@ browser.runtime.sendMessage({ action: 'ping' })
 | CSP in content scripts | Strict | Moderate | Strict | Strict |
 | Cookie access | All | All | All | Limited |
 
-## 3. Using the WebExtension Polyfill {#3-webextension-polyfill}
+3. Using the WebExtension Polyfill {#3-webextension-polyfill}
 
 The [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) library normalizes API differences across browsers by providing a Promise-based `browser.*` interface that works everywhere.
 
-### Installation
+Installation
 
 ```bash
 npm install webextension-polyfill
 ```
 
-### Basic Usage
+Basic Usage
 
 ```javascript
 // Before (Chrome-specific with callbacks)
@@ -109,7 +109,7 @@ const response = await browser.runtime.sendMessage({
 console.log(response);
 ```
 
-### Setup in Background Script
+Setup in Background Script
 
 ```javascript
 // background.js
@@ -125,7 +125,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Setup in Content Script
+Setup in Content Script
 
 ```javascript
 // content.js
@@ -139,27 +139,27 @@ const response = await browser.runtime.sendMessage({
 console.log(response);
 ```
 
-### Polyfill Limitations
+Polyfill Limitations
 
-> **Important**: The polyfill doesn't add missing APIs—it only normalizes the interface. For APIs like `sidePanel` that don't exist in Firefox, you still need conditional code.
+> Important: The polyfill doesn't add missing APIs, it only normalizes the interface. For APIs like `sidePanel` that don't exist in Firefox, you still need conditional code.
 
-## 4. Manifest Differences Across Browsers {#4-manifest-differences}
+4. Manifest Differences Across Browsers {#4-manifest-differences}
 
 While Manifest V3 is the standard, there are differences in how browsers handle certain manifest fields.
 
-### Manifest Field Compatibility
+Manifest Field Compatibility
 
 | Field | Chrome | Firefox | Edge | Safari |
 |-------|--------|---------|------|--------|
 | `manifest_version` | 3 | 3 | 3 | 3 |
-| `background.service_worker` | ✅ | ❌ (use `background.scripts`) | ✅ | ✅ |
-| `background.scripts` | ❌ | ✅ | ❌ | ❌ |
-| `side_panel` | ✅ | ❌ | ✅ | ❌ |
-| `action` | ✅ | ✅ | ✅ | ✅ |
-| `host_permissions` | ✅ | ✅ | ✅ | ✅ |
-| `optional_host_permissions` | ✅ | ✅ | ✅ | ❌ |
+| `background.service_worker` |  |  (use `background.scripts`) |  |  |
+| `background.scripts` |  |  |  |  |
+| `side_panel` |  |  |  |  |
+| `action` |  |  |  |  |
+| `host_permissions` |  |  |  |  |
+| `optional_host_permissions` |  |  |  |  |
 
-### Cross-Browser Manifest Example
+Cross-Browser Manifest Example
 
 ```json
 {
@@ -200,7 +200,7 @@ While Manifest V3 is the standard, there are differences in how browsers handle 
 }
 ```
 
-### Firefox-Specific Background
+Firefox-Specific Background
 
 ```javascript
 // For Firefox compatibility, create firefox-specific manifest
@@ -214,7 +214,7 @@ While Manifest V3 is the standard, there are differences in how browsers handle 
 }
 ```
 
-### Building for Multiple Browsers
+Building for Multiple Browsers
 
 Use a build tool to generate browser-specific manifests:
 
@@ -242,11 +242,11 @@ const firefoxManifest = {
 };
 ```
 
-## 5. Feature Detection Pattern {#5-feature-detection}
+5. Feature Detection Pattern {#5-feature-detection}
 
 Always check if an API exists before using it. This prevents errors when running on browsers that don't support certain features.
 
-### Basic Feature Detection
+Basic Feature Detection
 
 ```javascript
 // Check for sidePanel API (Chrome/Edge only)
@@ -275,7 +275,7 @@ if (chrome.declarativeNetRequest) {
 }
 ```
 
-### Advanced Feature Detection Helper
+Advanced Feature Detection Helper
 
 ```javascript
 // features.js
@@ -301,11 +301,11 @@ const BrowserFeatures = {
 export default BrowserFeatures;
 ```
 
-## 6. Conditional Code Patterns {#6-conditional-code}
+6. Conditional Code Patterns {#6-conditional-code}
 
 Write code that adapts to the browser's capabilities.
 
-### Environment Detection
+Environment Detection
 
 ```javascript
 // browser-detection.js
@@ -325,7 +325,7 @@ const isEdge = () => getBrowserInfo() === 'edge';
 const isSafari = () => getBrowserInfo() === 'safari';
 ```
 
-### Conditional API Usage
+Conditional API Usage
 
 ```javascript
 // api-wrapper.js
@@ -373,7 +373,7 @@ export const setBadge = (text, color) => {
 };
 ```
 
-### Polyfill-Aware Messaging
+Polyfill-Aware Messaging
 
 ```javascript
 // messaging.js
@@ -415,27 +415,27 @@ export const onMessage = (callback) => {
 };
 ```
 
-## 7. Testing Across Browsers {#7-testing-across-browsers}
+7. Testing Across Browsers {#7-testing-across-browsers}
 
 Testing cross-browser extensions requires multiple strategies.
 
-### Local Development Testing
+Local Development Testing
 
 ```bash
-# Chrome
-# Load unpacked extension from chrome://extensions
+Chrome
+Load unpacked extension from chrome://extensions
 
-# Firefox
-# Load temporary add-on from about:debugging
+Firefox
+Load temporary add-on from about:debugging
 
-# Edge
-# Load unpacked from edge://extensions
+Edge
+Load unpacked from edge://extensions
 
-# Safari
-# Enable Developer menu > Show Extension Builder
+Safari
+Enable Developer menu > Show Extension Builder
 ```
 
-### Automated Testing with Playwright
+Automated Testing with Playwright
 
 ```javascript
 // test-cross-browser.mjs
@@ -457,7 +457,7 @@ test.describe('Cross-browser Extension Tests', () => {
 });
 ```
 
-### Browser-Specific Test Files
+Browser-Specific Test Files
 
 ```javascript
 // __tests__/chrome/api-compat.test.js
@@ -479,7 +479,7 @@ describe('Firefox API Compatibility', () => {
 });
 ```
 
-### Testing Feature Detection
+Testing Feature Detection
 
 ```javascript
 // __tests__/feature-detection.test.js
@@ -499,50 +499,50 @@ describe('Feature Detection', () => {
 });
 ```
 
-## 8. Publishing to Multiple Stores {#8-publishing-to-multiple-stores}
+8. Publishing to Multiple Stores {#8-publishing-to-multiple-stores}
 
 Each browser has its own extension store with different submission requirements.
 
-### Store Comparison
+Store Comparison
 
 | Store | Developer Fee | Review Time | Auto-Update | Account Required |
 |-------|---------------|-------------|--------------|------------------|
-| Chrome Web Store | $5 one-time | 1-3 days | ✅ | Google Account |
-| Firefox Add-ons | Free | 1-7 days | ✅ | Mozilla Account |
-| Microsoft Edge | Free | 1-3 days | ✅ | Microsoft Account |
-| Safari App Store | $99/year | 1-2 weeks | ✅ | Apple Developer |
+| Chrome Web Store | $5 one-time | 1-3 days |  | Google Account |
+| Firefox Add-ons | Free | 1-7 days |  | Mozilla Account |
+| Microsoft Edge | Free | 1-3 days |  | Microsoft Account |
+| Safari App Store | $99/year | 1-2 weeks |  | Apple Developer |
 
-### Chrome Web Store Submission
+Chrome Web Store Submission
 
 ```bash
-# Package extension
+Package extension
 zip -r extension.zip manifest.json background.js popup.html popup.js content.js icons/
 
-# Upload via Chrome Web Store Developer Dashboard
-# https://chrome.google.com/webstore/developer/dashboard
+Upload via Chrome Web Store Developer Dashboard
+https://chrome.google.com/webstore/developer/dashboard
 ```
 
-### Firefox Add-ons Submission
+Firefox Add-ons Submission
 
 ```bash
-# Create .xpi file (Firefox-specific ZIP)
+Create .xpi file (Firefox-specific ZIP)
 zip -r extension.xpi manifest.json background.js popup.html popup.js content.js icons/
 
-# Sign via Mozilla
-# Submit at https://addons.mozilla.org/developers/
+Sign via Mozilla
+Submit at https://addons.mozilla.org/developers/
 ```
 
-### Edge Add-ons Submission
+Edge Add-ons Submission
 
 ```bash
-# Package as .zip for Edge
+Package as .zip for Edge
 zip -r extension.zip manifest.json background.js popup.html popup.js content.js icons/
 
-# Submit via Microsoft Edge Add-ons site
-# https://partner.microsoft.com/dashboard/microsoft-edge/overview
+Submit via Microsoft Edge Add-ons site
+https://partner.microsoft.com/dashboard/microsoft-edge/overview
 ```
 
-### Safari Web Extension
+Safari Web Extension
 
 Safari requires additional setup through Xcode:
 
@@ -552,7 +552,7 @@ Safari requires additional setup through Xcode:
 4. Build and test in Safari
 5. Submit via App Store Connect
 
-### Cross-Platform Build Script
+Cross-Platform Build Script
 
 ```javascript
 // scripts/build-all.js
@@ -596,7 +596,7 @@ async function buildBrowser(browser) {
 buildAll();
 ```
 
-### Store-Specific Features
+Store-Specific Features
 
 ```javascript
 // Track which store the user installed from
@@ -616,36 +616,36 @@ const trackInstall = (store) => {
 
 ---
 
-## Common Pitfalls
+Common Pitfalls
 
-1. **Assuming all APIs exist**: Always use feature detection before calling browser-specific APIs
-2. **Ignoring Firefox's persistent background**: Firefox uses persistent: false by default
-3. **Not testing in all browsers**: What works in Chrome may fail in Firefox
-4. **Forgetting Safari limitations**: Safari has the most restrictions
-5. **Using Chrome-only APIs**: Avoid chrome.* exclusive features for cross-browser extensions
+1. Assuming all APIs exist: Always use feature detection before calling browser-specific APIs
+2. Ignoring Firefox's persistent background: Firefox uses persistent: false by default
+3. Not testing in all browsers: What works in Chrome may fail in Firefox
+4. Forgetting Safari limitations: Safari has the most restrictions
+5. Using Chrome-only APIs: Avoid chrome.* exclusive features for cross-browser extensions
 
 ---
 
-## Summary
+Summary
 
 Cross-browser extension development requires:
 
-- **Understanding the WebExtensions standard** as the common foundation
-- **Using the webextension-polyfill** for consistent Promise-based APIs
-- **Implementing feature detection** to handle API differences
-- **Writing conditional code** for browser-specific functionality
-- **Testing across all target browsers** before release
-- **Following store-specific guidelines** for each platform
+- Understanding the WebExtensions standard as the common foundation
+- Using the webextension-polyfill for consistent Promise-based APIs
+- Implementing feature detection to handle API differences
+- Writing conditional code for browser-specific functionality
+- Testing across all target browsers before release
+- Following store-specific guidelines for each platform
 
 With these patterns, you can create extensions that provide a consistent experience across Chrome, Firefox, Edge, and Safari.
 
 ---
 
-## Related Articles
+Related Articles
 
-- [Cross-Browser Development Guide](https://bestchromeextensions.com/guides/cross-browser/) — Comprehensive guide to building cross-browser extensions
-- [Chrome Extension Migration: Firefox](https://bestchromeextensions.com/guides/chrome-extension-migration-firefox/) — Step-by-step Firefox porting guide
-- [Chrome Extension Migration: Edge](https://bestchromeextensions.com/guides/chrome-extension-migration-edge/) — Edge-specific migration guide
+- [Cross-Browser Development Guide](https://bestchromeextensions.com/guides/cross-browser/). Comprehensive guide to building cross-browser extensions
+- [Chrome Extension Migration: Firefox](https://bestchromeextensions.com/guides/chrome-extension-migration-firefox/). Step-by-step Firefox porting guide
+- [Chrome Extension Migration: Edge](https://bestchromeextensions.com/guides/chrome-extension-migration-edge/). Edge-specific migration guide
 
 ---
 

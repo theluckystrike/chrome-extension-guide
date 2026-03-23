@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Chrome Extension DevTools Extensions — Developer Guide"
+title: "Chrome Extension DevTools Extensions. Developer Guide"
 description: "Learn Chrome extension devtools extensions with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/devtools-extensions/"
 ---
 # Building DevTools Extensions
 
-## Introduction {#introduction}
+Introduction {#introduction}
 - Extend Chrome DevTools with custom panels, sidebars, and functionality
 - Use cases: React DevTools, Redux DevTools, performance profilers, API inspectors
 - Requires `"devtools_page"` in manifest.json
 
-## manifest.json Setup {#manifestjson-setup}
+manifest.json Setup {#manifestjson-setup}
 ```json
 {
   "devtools_page": "devtools.html"
@@ -20,13 +20,13 @@ canonical_url: "https://bestchromeextensions.com/guides/devtools-extensions/"
 - No special permission needed for basic DevTools panels
 - The devtools page is a hidden HTML page that runs when DevTools is open
 
-## DevTools Page (devtools.html / devtools.js) {#devtools-page-devtoolshtml-devtoolsjs}
+DevTools Page (devtools.html / devtools.js) {#devtools-page-devtoolshtml-devtoolsjs}
 ```html
 <!DOCTYPE html>
 <html><body><script src="devtools.js"></script></body></html>
 ```
 ```javascript
-// devtools.js — runs once when DevTools opens for a tab
+// devtools.js. runs once when DevTools opens for a tab
 chrome.devtools.panels.create(
   "My Panel",           // Panel title in DevTools tab bar
   "icon.png",           // 16x16 icon
@@ -38,13 +38,13 @@ chrome.devtools.panels.create(
 );
 ```
 
-## chrome.devtools.panels API {#chromedevtoolspanels-api}
+chrome.devtools.panels API {#chromedevtoolspanels-api}
 
-### create() — Custom Panels {#create-custom-panels}
+create(). Custom Panels {#create-custom-panels}
 - Creates a new tab in DevTools (like Elements, Console, Network)
 - `panel.html` has full DOM, can use frameworks (React, Vue, etc.)
 
-### elements.createSidebarPane() — Elements Sidebar {#elementscreatesidebarpane-elements-sidebar}
+elements.createSidebarPane(). Elements Sidebar {#elementscreatesidebarpane-elements-sidebar}
 ```javascript
 chrome.devtools.panels.elements.createSidebarPane("My Sidebar", (sidebar) => {
   sidebar.setPage("sidebar.html");
@@ -55,15 +55,15 @@ chrome.devtools.panels.elements.createSidebarPane("My Sidebar", (sidebar) => {
 ```
 - Adds a pane to the Elements panel sidebar (next to Styles, Computed, etc.)
 
-### themes {#themes}
+themes {#themes}
 ```javascript
 const theme = chrome.devtools.panels.themeName; // "default" or "dark"
 ```
 - Match your panel UI to the user's DevTools theme
 
-## chrome.devtools.inspectedWindow API {#chromedevtoolsinspectedwindow-api}
+chrome.devtools.inspectedWindow API {#chromedevtoolsinspectedwindow-api}
 
-### eval() — Execute in Inspected Page {#eval-execute-in-inspected-page}
+eval(). Execute in Inspected Page {#eval-execute-in-inspected-page}
 ```javascript
 chrome.devtools.inspectedWindow.eval(
   "document.querySelectorAll('img').length",
@@ -74,17 +74,17 @@ chrome.devtools.inspectedWindow.eval(
 );
 ```
 - Runs JavaScript in the context of the inspected page
-- **Not** subject to extension CSP (runs in page context)
+- Not subject to extension CSP (runs in page context)
 - Use for reading page state, not for persistent modifications
 
-### getResources() — List Page Resources {#getresources-list-page-resources}
+getResources(). List Page Resources {#getresources-list-page-resources}
 ```javascript
 chrome.devtools.inspectedWindow.getResources((resources) => {
   resources.forEach(r => console.log(r.url, r.type));
 });
 ```
 
-### reload(options) {#reloadoptions}
+reload(options) {#reloadoptions}
 ```javascript
 chrome.devtools.inspectedWindow.reload({
   injectedScript: "window.__DEVTOOLS_HOOK__ = true;"
@@ -92,16 +92,16 @@ chrome.devtools.inspectedWindow.reload({
 ```
 - Reload the inspected page with optional injected script
 
-### tabId {#tabid}
+tabId {#tabid}
 ```javascript
 const tabId = chrome.devtools.inspectedWindow.tabId;
 ```
 - Get the tab ID of the page being inspected
 - Use with `@theluckystrike/webext-messaging` `sendTabMessage()` to communicate with content scripts
 
-## chrome.devtools.network API {#chromedevtoolsnetwork-api}
+chrome.devtools.network API {#chromedevtoolsnetwork-api}
 
-### getHAR() — HTTP Archive {#gethar-http-archive}
+getHAR(). HTTP Archive {#gethar-http-archive}
 ```javascript
 chrome.devtools.network.getHAR((harLog) => {
   harLog.entries.forEach(entry => {
@@ -110,7 +110,7 @@ chrome.devtools.network.getHAR((harLog) => {
 });
 ```
 
-### onRequestFinished {#onrequestfinished}
+onRequestFinished {#onrequestfinished}
 ```javascript
 chrome.devtools.network.onRequestFinished.addListener((request) => {
   request.getContent((body, encoding) => {
@@ -120,7 +120,7 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
 ```
 - Monitor network requests in real-time
 
-## Communication Architecture {#communication-architecture}
+Communication Architecture {#communication-architecture}
 ```
 DevTools Page <-> Background Service Worker <-> Content Script <-> Inspected Page
 ```
@@ -137,35 +137,35 @@ DevTools Page <-> Background Service Worker <-> Content Script <-> Inspected Pag
   });
   ```
 
-## Panel UI Best Practices {#panel-ui-best-practices}
+Panel UI Best Practices {#panel-ui-best-practices}
 - Use the DevTools theme (`chrome.devtools.panels.themeName`) for colors
-- Keep panels lightweight — DevTools already uses significant memory
+- Keep panels lightweight. DevTools already uses significant memory
 - Lazy-load panel content (use `onShown`/`onHidden` events)
 - Store panel preferences with `@theluckystrike/webext-storage`
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Network Inspector Panel {#network-inspector-panel}
+Network Inspector Panel {#network-inspector-panel}
 - Listen to `onRequestFinished`, filter by domain/type
 - Display in custom table with search/filter
 
-### Page State Inspector {#page-state-inspector}
+Page State Inspector {#page-state-inspector}
 - Use `inspectedWindow.eval()` to read page state
 - Display React/Vue component trees, global variables, etc.
 
-### Performance Monitor {#performance-monitor}
+Performance Monitor {#performance-monitor}
 - Track `onRequestFinished` timing data
 - Display charts and metrics in custom panel
 
-## Common Mistakes {#common-mistakes}
-- Trying to access `chrome.devtools.*` outside the devtools page — only available in devtools context
-- Panel pages don't have access to `chrome.devtools.*` — communicate via messaging to devtools.js
-- `inspectedWindow.eval()` runs in page context, not extension context — can't access Chrome APIs there
+Common Mistakes {#common-mistakes}
+- Trying to access `chrome.devtools.*` outside the devtools page. only available in devtools context
+- Panel pages don't have access to `chrome.devtools.*`. communicate via messaging to devtools.js
+- `inspectedWindow.eval()` runs in page context, not extension context. can't access Chrome APIs there
 - Forgetting that DevTools pages are destroyed when DevTools closes
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [DevTools Patterns](../patterns/devtools-extension-patterns.md)
 - [Debugging Extensions](../guides/debugging-extensions.md)

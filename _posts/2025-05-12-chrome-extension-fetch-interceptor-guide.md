@@ -13,31 +13,31 @@ canonical_url: "https://bestchromeextensions.com/2025/05/12/chrome-extension-fet
 
 Web developers often need to inspect, debug, or modify network requests flowing between their applications and backend APIs. Whether you're building a developer tool, debugging an application, creating an API monitor, or implementing advanced functionality like request caching, understanding how to intercept and manipulate fetch requests in Chrome extensions is an essential skill.
 
-In this comprehensive guide, we'll explore how to create a Chrome extension fetch interceptor that can monitor, log, and modify API calls in real-time. We'll cover the technical implementation, practical use cases, and provide complete working code examples that you can adapt for your own projects.
+we'll explore how to create a Chrome extension fetch interceptor that can monitor, log, and modify API calls in real-time. We'll cover the technical implementation, practical use cases, and provide complete working code examples that you can adapt for your own projects.
 
 ---
 
-## Understanding Fetch Interception in Chrome Extensions {#understanding-fetch-interception}
+Understanding Fetch Interception in Chrome Extensions {#understanding-fetch-interception}
 
 The Fetch API is the modern standard for making HTTP requests in JavaScript. Unlike the older XMLHttpRequest, Fetch provides a cleaner, promise-based interface that has become the backbone of modern web application networking. However, by default, fetch requests operate silently in the background, making it challenging to monitor or modify them without explicit instrumentation.
 
-Chrome extensions offer a powerful solution through the `declarativeNetRequest` API and the ability to intercept requests at various stages. With Manifest V3, Google introduced significant changes to how extensions can interact with network requests, prioritizing user privacy and security while still providing robust capabilities for legitimate use cases.
+Chrome extensions offer a powerful solution through the `declarativeNetRequest` API and the ability to intercept requests at various stages. With Manifest V3, Google introduced significant changes to how extensions can interact with network requests, prioritizing user privacy and security while still providing solid capabilities for legitimate use cases.
 
 A fetch interceptor extension can serve multiple purposes:
 
-- **API Monitoring**: Track all API calls made by a web application for debugging and analytics
-- **Request Modification**: Alter headers, query parameters, or request bodies before they reach the server
-- **Response Manipulation**: Modify API responses for testing or development purposes
-- **Request Blocking**: Prevent certain requests from being made based on custom rules
-- **Caching**: Implement custom caching strategies to reduce network traffic
+- API Monitoring: Track all API calls made by a web application for debugging and analytics
+- Request Modification: Alter headers, query parameters, or request bodies before they reach the server
+- Response Manipulation: Modify API responses for testing or development purposes
+- Request Blocking: Prevent certain requests from being made based on custom rules
+- Caching: Implement custom caching strategies to reduce network traffic
 
 ---
 
-## Setting Up Your Chrome Extension Project {#setting-up-project}
+Setting Up Your Chrome Extension Project {#setting-up-project}
 
 Before diving into the implementation, let's set up a basic Chrome extension project structure. You'll need the following files:
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -77,9 +77,9 @@ The manifest declares the necessary permissions for intercepting network request
 
 ---
 
-## Implementing the Fetch Interceptor Logic {#implementing-interceptor}
+Implementing the Fetch Interceptor Logic {#implementing-interceptor}
 
-### The Background Service Worker
+The Background Service Worker
 
 The background service worker serves as the central hub for managing fetch interception rules. Here's a complete implementation:
 
@@ -220,11 +220,11 @@ export function cleanup() {
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup provides a user interface for viewing and managing captured requests:
 
-### popup.html
+popup.html
 
 ```html
 <!DOCTYPE html>
@@ -333,7 +333,7 @@ The popup provides a user interface for viewing and managing captured requests:
 </head>
 <body>
   <div class="header">
-    <h1>� Fetch Interceptor Pro</h1>
+    <h1> Fetch Interceptor Pro</h1>
   </div>
   <div class="controls">
     <button id="clearBtn" class="btn-secondary">Clear All</button>
@@ -350,7 +350,7 @@ The popup provides a user interface for viewing and managing captured requests:
 </html>
 ```
 
-### popup.js
+popup.js
 
 ```javascript
 // popup.js
@@ -481,9 +481,9 @@ ${JSON.stringify(request.responseHeaders, null, 2)}
 
 ---
 
-## Advanced Interception Techniques {#advanced-techniques}
+Advanced Interception Techniques {#advanced-techniques}
 
-### Intercepting Request Bodies
+Intercepting Request Bodies
 
 For POST, PUT, and PATCH requests, you often need to inspect or modify the request body. While the `declarativeNetRequest` API doesn't directly support body interception, you can use content scripts with the `webRequest` API:
 
@@ -527,7 +527,7 @@ For POST, PUT, and PATCH requests, you often need to inspect or modify the reque
 })();
 ```
 
-### Modifying Responses on the Fly
+Modifying Responses on the Fly
 
 To modify API responses, you can create a more sophisticated interceptor:
 
@@ -573,51 +573,51 @@ function getModificationRule(url) {
 
 ---
 
-## Use Cases for Fetch Interceptors {#use-cases}
+Use Cases for Fetch Interceptors {#use-cases}
 
-### 1. API Development and Debugging
+1. API Development and Debugging
 
 Developers can use fetch interceptors to debug API calls, inspect request and response headers, and identify issues in real-time. This is particularly useful when working with complex APIs or debugging production issues.
 
-### 2. API Monitoring and Analytics
+2. API Monitoring and Analytics
 
 Create monitoring tools that track API call patterns, response times, and error rates. This data can help identify performance bottlenecks and reliability issues.
 
-### 3. Mock API Responses
+3. Mock API Responses
 
 During development, intercept API calls and return mock data to work independently of backend services. This accelerates frontend development and enables testing edge cases.
 
-### 4. Security Auditing
+4. Security Auditing
 
 Monitor sensitive API calls to identify potential security vulnerabilities, such as exposed credentials or sensitive data in request bodies.
 
-### 5. Rate Limiting and Throttling
+5. Rate Limiting and Throttling
 
 Implement client-side rate limiting to prevent overwhelming APIs or to test how your application handles rate limit responses.
 
 ---
 
-## Best Practices and Considerations {#best-practices}
+Best Practices and Considerations {#best-practices}
 
-### Performance Impact
+Performance Impact
 
 Be mindful of the performance impact when intercepting requests. Minimize the amount of processing done in interceptors, especially for high-frequency API calls.
 
-### Privacy and Security
+Privacy and Security
 
 Only capture requests that are necessary for your extension's functionality. Avoid storing sensitive data like authentication tokens unless absolutely required, and implement proper data encryption.
 
-### Manifest V3 Limitations
+Manifest V3 Limitations
 
 Remember that Manifest V3 has stricter limitations compared to V2. The `declarativeNetRequest` API doesn't support blocking loads or modifying request bodies directly. Plan your implementation accordingly.
 
-### User Consent and Transparency
+User Consent and Transparency
 
 Clearly communicate to users what data your extension collects and how it's used. Provide options for users to control what gets monitored.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a Chrome extension fetch interceptor is a powerful way to monitor, debug, and modify API calls in real-time. With the `declarativeNetRequest` API and content script techniques demonstrated in this guide, you can create sophisticated tools for API development, debugging, monitoring, and more.
 
@@ -627,7 +627,7 @@ Start by implementing the basic structure from this guide, then customize it to 
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

@@ -13,11 +13,11 @@ canonical_url: "https://bestchromeextensions.com/2025/04/12/build-translation-ch
 
 Have you ever been reading a webpage in a foreign language and wished you could instantly translate just a few words without leaving the page? Perhaps you're researching topics in multiple languages, communicating with international clients, or simply exploring content from around the world. A translation Chrome extension that translates selected text with a single right-click or keyboard shortcut can dramatically improve your browsing experience and productivity.
 
-In this comprehensive guide, we will walk you through the complete process of building a translation Chrome extension from scratch. You'll learn how to use the Chrome Extension Manifest V3, capture selected text from any webpage, integrate with translation APIs, display translations in a sleek popup, and publish your extension to the Chrome Web Store. By the end of this tutorial, you'll have a fully functional translation extension that you can use daily and share with the world.
+we will walk you through the complete process of building a translation Chrome extension from scratch. You'll learn how to use the Chrome Extension Manifest V3, capture selected text from any webpage, integrate with translation APIs, display translations in a sleek popup, and publish your extension to the Chrome Web Store. By the end of this tutorial, you'll have a fully functional translation extension that you can use daily and share with the world.
 
 ---
 
-## Why Build a Translation Chrome Extension? {#why-build-translation-extension}
+Why Build a Translation Chrome Extension? {#why-build-translation-extension}
 
 The demand for translation tools continues to grow as the internet becomes increasingly globalized. Users frequently encounter content in languages they don't understand, whether it's product reviews from international shoppers, technical documentation in foreign languages, or social media posts from around the world. While browser-based translation tools exist, they often require copying and pasting text into separate tabs or using keyboard shortcuts that interrupt your workflow.
 
@@ -27,7 +27,7 @@ Moreover, translation extensions are among the most popular categories in the Ch
 
 ---
 
-## Prerequisites and Setup {#prerequisites}
+Prerequisites and Setup {#prerequisites}
 
 Before we dive into coding, let's ensure you have everything you need to build this extension. You'll need a basic understanding of HTML, CSS, and JavaScript, as these are the core technologies used in Chrome extension development. No prior experience with Chrome extensions is required, but familiarity with web development concepts will help you follow along more easily.
 
@@ -35,17 +35,17 @@ You'll also need Google Chrome installed on your computer for testing your exten
 
 Let's start by creating the project directory structure. Create a new folder called `translation-extension` and add the following files and folders:
 
-- manifest.json — The configuration file that tells Chrome about your extension
-- popup.html — The HTML for the extension's popup interface
-- popup.js — The JavaScript that handles popup interactions
-- popup.css — The styling for the popup
-- content.js — A content script that captures selected text
-- background.js — A service worker for handling background tasks
-- icons/ — A folder containing your extension icons
+- manifest.json. The configuration file that tells Chrome about your extension
+- popup.html. The HTML for the extension's popup interface
+- popup.js. The JavaScript that handles popup interactions
+- popup.css. The styling for the popup
+- content.js. A content script that captures selected text
+- background.js. A service worker for handling background tasks
+- icons/. A folder containing your extension icons
 
 ---
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. It defines the extension's permissions, resources, and behavior. For our translation extension, we need to specify the manifest version (Manifest V3 is the current standard), declare the permissions we need, and configure the popup and background scripts.
 
@@ -89,7 +89,7 @@ This manifest file grants our extension the ability to add context menu items, s
 
 ---
 
-## Building the Content Script {#content-script}
+Building the Content Script {#content-script}
 
 The content script is the part of your extension that runs in the context of web pages. It can read and modify page content, detect user interactions like text selection, and communicate with other parts of your extension. For our translation extension, the content script will listen for text selection events and send the selected text to the background script or popup.
 
@@ -126,7 +126,7 @@ This script listens for the mouseup event, which fires when a user releases the 
 
 ---
 
-## Creating the Background Service Worker {#background-service-worker}
+Creating the Background Service Worker {#background-service-worker}
 
 The background service worker in Manifest V3 handles tasks that need to run independently of any particular webpage. For our translation extension, the background script will create the context menu item that appears when users right-click on selected text, and it will manage communication between different parts of the extension.
 
@@ -168,7 +168,7 @@ The background script creates a context menu item labeled "Translate" that appea
 
 ---
 
-## Designing the Popup Interface {#popup-interface}
+Designing the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon in the Chrome toolbar. For our translation extension, the popup will display the selected text, allow users to choose source and target languages, show the translation result, and provide options to copy the translation or swap languages.
 
@@ -249,7 +249,7 @@ The popup interface is clean and intuitive, with dropdown menus for selecting so
 
 ---
 
-## Styling the Popup {#popup-styling}
+Styling the Popup {#popup-styling}
 
 Create `popup.css` to make your extension visually appealing:
 
@@ -401,9 +401,9 @@ The CSS provides a clean, modern interface with proper spacing, readable typogra
 
 ---
 
-## Implementing Translation Logic {#translation-logic}
+Implementing Translation Logic {#translation-logic}
 
-Now comes the most important part — making the translation actually work. Create `popup.js` to handle the user interactions and communicate with the translation API:
+Now comes the most important part. making the translation actually work. Create `popup.js` to handle the user interactions and communicate with the translation API:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', function() {
@@ -512,15 +512,15 @@ This JavaScript file handles all the interactivity in the popup. It retrieves an
 
 ---
 
-## Creating Extension Icons {#extension-icons}
+Creating Extension Icons {#extension-icons}
 
 Every Chrome extension needs icons in various sizes. For development purposes, you can create simple placeholder images. The Chrome Web Store requires 16x16, 48x48, and 128x128 pixel icons. Create an `icons` folder and add placeholder PNG images in those sizes. You can use any image editing software or even generate simple colored squares for testing.
 
-For a production extension, you should design professional-looking icons that represent translation functionality — common choices include globe icons, language bubbles, or arrow symbols indicating conversion between languages.
+For a production extension, you should design professional-looking icons that represent translation functionality. common choices include globe icons, language bubbles, or arrow symbols indicating conversion between languages.
 
 ---
 
-## Testing Your Extension {#testing-extension}
+Testing Your Extension {#testing-extension}
 
 Now that we've created all the necessary files, let's test the extension in Chrome. Open Chrome and navigate to `chrome://extensions/`. Enable "Developer mode" using the toggle in the top right corner. Click "Load unpacked" and select your `translation-extension` folder.
 
@@ -530,7 +530,7 @@ If you encounter any issues, check the extension's background page for error mes
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once you're satisfied with your extension and have tested it thoroughly, you can publish it to the Chrome Web Store. First, create a developer account at the Chrome Web Store if you don't already have one. Package your extension by going to `chrome://extensions/`, clicking "Pack extension", and selecting your extension folder.
 
@@ -538,7 +538,7 @@ You'll receive a `.zip` file and a key file. Upload the `.zip` file to the Chrom
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You've successfully built a fully functional translation Chrome extension from scratch. This project demonstrates many fundamental concepts in Chrome extension development, including Manifest V3 configuration, content scripts for interacting with web pages, background service workers for managing extension state, popup interfaces for user interaction, and integration with external APIs.
 

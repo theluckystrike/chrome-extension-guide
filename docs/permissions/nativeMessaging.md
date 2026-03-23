@@ -10,24 +10,24 @@ canonical_url: "https://bestchromeextensions.com/permissions/nativeMessaging/"
 
 # nativeMessaging Permission
 
-## Overview {#overview}
-- **Permission string:** `"nativeMessaging"`
+Overview {#overview}
+- Permission string: `"nativeMessaging"`
 - Enables communication between extension and native applications
-- Two modes: **connection-based** (persistent) and **message-based** (one-shot)
+- Two modes: connection-based (persistent) and message-based (one-shot)
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 ```json
 { "permissions": ["nativeMessaging"] }
 ```
 
-**User warning:** "Communicate with cooperating native applications"
+User warning: "Communicate with cooperating native applications"
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
-### Persistent Connection {#persistent-connection}
+Persistent Connection {#persistent-connection}
 `chrome.runtime.connectNative(hostName)` returns Port for persistent connection.
 
-**Port Methods:** `Port.postMessage(msg)`, `Port.onMessage`, `Port.onDisconnect`
+Port Methods: `Port.postMessage(msg)`, `Port.onMessage`, `Port.onDisconnect`
 
 ```typescript
 const port = chrome.runtime.connectNative('com.example.myhost');
@@ -38,8 +38,8 @@ port.onDisconnect.addListener(() => {
 port.postMessage({ action: 'startMonitoring' });
 ```
 
-### One-Shot Messages {#one-shot-messages}
-`chrome.runtime.sendNativeMessage(hostName, message)` — single request/response.
+One-Shot Messages {#one-shot-messages}
+`chrome.runtime.sendNativeMessage(hostName, message)`. single request/response.
 
 ```typescript
 const response = await chrome.runtime.sendNativeMessage('com.example.myhost', {
@@ -48,9 +48,9 @@ const response = await chrome.runtime.sendNativeMessage('com.example.myhost', {
 console.log(response.version);
 ```
 
-## Native Messaging Host Setup {#native-messaging-host-setup}
+Native Messaging Host Setup {#native-messaging-host-setup}
 
-### Host Manifest (JSON) {#host-manifest-json}
+Host Manifest (JSON) {#host-manifest-json}
 ```json
 {
   "name": "com.example.myhost",
@@ -61,19 +61,19 @@ console.log(response.version);
 }
 ```
 
-### Registration by OS {#registration-by-os}
+Registration by OS {#registration-by-os}
 | OS | Path |
 |---|---|
 | macOS | `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.example.myhost.json` |
 | Linux | `~/.config/google-chrome/NativeMessagingHosts/com.example.myhost.json` |
 | Windows | Registry: `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.example.myhost` |
 
-## Message Format {#message-format}
+Message Format {#message-format}
 - 32-bit message length prefix (native byte order) + UTF-8 JSON payload
 - Maximum: 1 MB incoming, 4 GB outgoing from host
 - Host reads from stdin, writes to stdout
 
-## Native Host Example (Python) {#native-host-example-python}
+Native Host Example (Python) {#native-host-example-python}
 ```python
 import struct, sys, json
 
@@ -94,21 +94,21 @@ while (msg := read_message()):
         send_message({'version': '1.0.0'})
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 - File system access beyond browser sandbox
 - Native app integration (password managers, VPNs)
 - Hardware access (USB, Bluetooth via native helper)
 - System services and legacy app bridges
 
-## Security Considerations {#security-considerations}
+Security Considerations {#security-considerations}
 - `allowed_origins` must list specific extension IDs only
 - Host app path must be absolute
 - Validate all messages in both directions
 - Host process runs with user privileges
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### One-Shot Message Pattern {#one-shot-message-pattern}
+One-Shot Message Pattern {#one-shot-message-pattern}
 ```typescript
 async function sendNativeMessage(hostName: string, message: object) {
   try {
@@ -121,7 +121,7 @@ async function sendNativeMessage(hostName: string, message: object) {
 const version = await sendNativeMessage('com.example.myhost', { action: 'getVersion' });
 ```
 
-### Persistent Connection with Reconnect {#persistent-connection-with-reconnect}
+Persistent Connection with Reconnect {#persistent-connection-with-reconnect}
 ```typescript
 class NativeHostConnection {
   private port: chrome.runtime.Port | null = null;
@@ -141,7 +141,7 @@ class NativeHostConnection {
 }
 ```
 
-### Error Handling {#error-handling}
+Error Handling {#error-handling}
 ```typescript
 chrome.runtime.connectNative('com.example.myhost', (port) => {
   if (chrome.runtime.lastError) {
@@ -155,20 +155,20 @@ chrome.runtime.connectNative('com.example.myhost', (port) => {
 });
 ```
 
-## Common Errors {#common-errors}
-- "Native host has exited" — host crashed or wrong path
-- "Specified native messaging host not found" — manifest location incorrect
-- "Access to the specified native messaging host is forbidden" — extension ID not in `allowed_origins`
+Common Errors {#common-errors}
+- "Native host has exited". host crashed or wrong path
+- "Specified native messaging host not found". manifest location incorrect
+- "Access to the specified native messaging host is forbidden". extension ID not in `allowed_origins`
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Related: `docs/reference/message-passing-patterns.md`
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I communicate with a native app?
+How do I communicate with a native app?
 Use chrome.runtime.sendNativeMessage() to send messages to a native application configured in your manifest. The app must register a messaging host.
 
-### Is nativeMessaging secure?
+Is nativeMessaging secure?
 NativeMessaging is secure but requires user consent and careful validation of messages to prevent injection attacks.
 ---
 

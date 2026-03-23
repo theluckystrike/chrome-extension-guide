@@ -17,7 +17,7 @@ Lazy loading is a design pattern that defers the initialization of resources unt
 
 ---
 
-## Understanding Chrome Extension Startup Performance {#understanding-startup-performance}
+Understanding Chrome Extension Startup Performance {#understanding-startup-performance}
 
 Before diving into implementation, it is crucial to understand how Chrome extensions load and what factors affect their startup performance. Chrome extensions consist of several components that can each impact overall loading time, including the service worker, popup HTML and JavaScript, content scripts, background pages, and various static assets like images and stylesheets.
 
@@ -25,7 +25,7 @@ When a user opens Chrome with multiple extensions installed, each extension's se
 
 The Chrome team has introduced various mechanisms to help developers manage extension lifecycle, including the distinction between persistent background pages in Manifest V2 and service workers in Manifest V3. Understanding these differences is crucial because the lazy loading strategies you employ will vary depending on which manifest version you target and which extension components you are optimizing.
 
-### Why Startup Time Matters for User Retention
+Why Startup Time Matters for User Retention
 
 The importance of fast startup performance extends beyond mere user experience metrics. When users install your extension, they form an immediate impression based on how quickly it becomes functional. A slow-loading extension creates the perception of being poorly built or resource-heavy, leading to negative reviews in the Chrome Web Store and potential uninstallations.
 
@@ -33,11 +33,11 @@ Furthermore, extensions with poor startup performance can trigger Chrome's memor
 
 ---
 
-## Implementing Lazy Loading for Extension Components {#implementing-lazy-loading}
+Implementing Lazy Loading for Extension Components {#implementing-lazy-loading}
 
 The most straightforward application of lazy loading in Chrome extensions involves deferring the loading of your popup interface, options page, and other UI components until the user actually interacts with them. This approach is particularly effective because many users may never open your extension's popup or options page during a given browsing session.
 
-### Dynamic Import for JavaScript Modules
+Dynamic Import for JavaScript Modules
 
 Modern JavaScript provides native support for dynamic imports, which allows you to split your code into separate chunks that load on demand. Instead of bundling all your functionality into a single popup.js file, you can create a lightweight entry point that dynamically imports additional modules when specific features are needed.
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 This pattern dramatically reduces the initial bundle size that Chrome must parse and execute when opening your popup. Users who only need basic functionality never pay the cost of loading advanced features, resulting in faster time-to-interactive for the most common use cases.
 
-### Lazy Loading Popup Content
+Lazy Loading Popup Content
 
 Beyond code splitting, you can also implement lazy loading for visual content within your popup. If your extension displays lists of items, charts, or other data-driven content, consider showing a loading skeleton first and then populating the content asynchronously.
 
@@ -93,11 +93,11 @@ This technique creates the perception of faster loading because the skeleton app
 
 ---
 
-## Service Worker Lazy Initialization {#service-worker-lazy-init}
+Service Worker Lazy Initialization {#service-worker-lazy-init}
 
 The service worker in Manifest V3 extensions serves as the background script handling events, alarms, and message passing. However, not all extensions need their service worker to be fully initialized at browser startup. By carefully structuring your event listeners and using lazy initialization patterns, you can ensure that your service worker activates only when necessary.
 
-### Event-Driven Service Worker Architecture
+Event-Driven Service Worker Architecture
 
 Instead of running initialization code at the top level of your service worker, wrap your startup logic in event listeners that Chrome will dispatch when relevant events occur. This approach allows Chrome to keep your service worker in a dormant state until it receives an event it needs to handle.
 
@@ -147,7 +147,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 This pattern ensures that your service worker consumes minimal resources during idle periods while still being fully functional when events arrive. Chrome can suspend your service worker after a period of inactivity, and it will automatically wake up when the next relevant event occurs.
 
-### Using Declarative Net Request for Performance
+Using Declarative Net Request for Performance
 
 If your extension uses background scripts to modify network requests, consider using the Declarative Net Request API instead of programmatic request interception. This API allows Chrome to handle network modifications at the browser level, eliminating the need to keep your service worker active for every network request.
 
@@ -170,11 +170,11 @@ By moving logic from your service worker to declarative rules, you reduce the fr
 
 ---
 
-## Content Script Lazy Loading Strategies {#content-script-lazy-loading}
+Content Script Lazy Loading Strategies {#content-script-lazy-loading}
 
 Content scripts inject into web pages and can significantly impact page load time if they initialize too aggressively. Implementing lazy loading for content scripts requires a different approach than popup or service worker optimization.
 
-### Conditional Content Script Loading
+Conditional Content Script Loading
 
 The Manifest V3 format allows you to specify when content scripts should run using the matches and run_at properties. However, you can achieve more granular control by programmatically injecting scripts only when specific conditions are met.
 
@@ -200,7 +200,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This approach keeps your content script lightweight by splitting functionality into separate files that load on demand. Users who do not need advanced features never pay the cost of loading that code into every page.
 
-### Intersection Observer for Deferred Execution
+Intersection Observer for Deferred Execution
 
 For content scripts that perform visual modifications or track user interactions, you can use the Intersection Observer API to defer execution until elements actually become visible in the viewport. This is particularly useful for extensions that inject UI elements like toolbars, overlays, or sidebars.
 
@@ -227,11 +227,11 @@ By waiting until elements approach the viewport, you can delay expensive operati
 
 ---
 
-## Code Splitting with Build Tools {#code-splitting-build-tools}
+Code Splitting with Build Tools {#code-splitting-build-tools}
 
 Modern JavaScript build tools like Webpack, Rollup, Vite, and esbuild provide built-in support for code splitting. Configuring your build tool properly can automate much of the lazy loading implementation while ensuring optimal bundle sizes.
 
-### Webpack Code Splitting Configuration
+Webpack Code Splitting Configuration
 
 Webpack offers several strategies for code splitting that work well with Chrome extensions. The splitChunks optimization can automatically separate vendor code from your application code, while dynamic imports create separate chunks for features loaded on demand.
 
@@ -261,7 +261,7 @@ module.exports = {
 
 With this configuration, large dependencies like React, Vue, or data visualization libraries will be placed in separate chunks that load only when needed. Users who do not trigger features requiring those libraries will not download them at all.
 
-### Dynamic Imports with Vite
+Dynamic Imports with Vite
 
 Vite provides excellent support for dynamic imports and works particularly well with Chrome extension projects. By using Vite's built-in code splitting, you can create an extension that loads components on demand without additional configuration.
 
@@ -291,11 +291,11 @@ Vite handles the chunk generation automatically, producing separate JavaScript f
 
 ---
 
-## Measuring and Optimizing Performance {#measuring-optimizing}
+Measuring and Optimizing Performance {#measuring-optimizing}
 
 Implementing lazy loading is only the first step in optimizing your extension's performance. You need to measure the impact of your changes and identify remaining bottlenecks to ensure continuous improvement.
 
-### Chrome Extension Performance Metrics
+Chrome Extension Performance Metrics
 
 Chrome provides several tools for measuring extension performance, including the Extensions Performance Dashboard and Chrome's built-in Task Manager. Access the Task Manager by right-clicking Chrome's title bar and selecting Task Manager, then look for your extension to see its memory and CPU usage.
 
@@ -318,7 +318,7 @@ async function initialize() {
 }
 ```
 
-### Memory Management and Cleanup
+Memory Management and Cleanup
 
 Lazy loading can introduce memory leaks if you do not properly clean up resources when features are no longer needed. Ensure that your extension releases references to DOM elements, event listeners, and data structures when users navigate away or close your popup.
 
@@ -363,11 +363,11 @@ By implementing proper cleanup, you prevent memory from accumulating over time, 
 
 ---
 
-## Advanced Lazy Loading Patterns {#advanced-patterns}
+Advanced Lazy Loading Patterns {#advanced-patterns}
 
 As you become more comfortable with lazy loading fundamentals, you can explore advanced patterns that provide even greater performance benefits.
 
-### Prefetching and Preloading
+Prefetching and Preloading
 
 While lazy loading defers loading until needed, prefetching loads resources slightly before they are likely to be needed, creating a balance between immediate responsiveness and resource conservation. You can use Chrome's link prefetching API or predict user behavior to preload content.
 
@@ -385,7 +385,7 @@ function prefetchNextAction() {
 }
 ```
 
-### Web Worker Lazy Loading
+Web Worker Lazy Loading
 
 Offloading computations to Web Workers keeps your UI responsive, but loading Workers can be expensive. Consider lazy loading Workers on demand rather than at extension startup.
 
@@ -401,7 +401,7 @@ async function getComputationWorker() {
 
 ---
 
-## Conclusion: Building Faster Extensions
+Conclusion: Building Faster Extensions
 
 Lazy loading is an essential technique for any Chrome extension developer who wants to deliver a premium user experience. By understanding how your extension loads and interacts with Chrome's systems, you can implement targeted optimizations that dramatically improve startup time, reduce memory consumption, and keep users satisfied.
 

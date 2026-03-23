@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Dependency Injection — Testable and Modular Extension Code"
+title: "Chrome Extension Dependency Injection. Testable and Modular Extension Code"
 description: "Learn how to apply dependency injection patterns in Chrome extensions for testable, maintainable, and modular code."
 canonical_url: "https://bestchromeextensions.com/patterns/dependency-injection/"
 ---
@@ -9,22 +9,22 @@ canonical_url: "https://bestchromeextensions.com/patterns/dependency-injection/"
 
 Dependency injection (DI) is a design pattern that helps you write loosely coupled, testable code by inverting the control of dependencies. In Chrome extensions, where you deal with browser APIs, background scripts, and content scripts, applying DI can dramatically improve your code's maintainability and testability.
 
-## Why Dependency Injection Matters in Extensions {#why-di-matters}
+Why Dependency Injection Matters in Extensions {#why-di-matters}
 
 Chrome extensions present unique challenges that make dependency injection particularly valuable:
 
-- **Chrome API dependencies**: Your code directly calls `chrome.storage`, `chrome.tabs`, `chrome.runtime`, and other browser APIs
-- **Platform-specific behavior**: Extensions run in different contexts (background worker, content script, popup)
-- **Testing limitations**: You cannot unit test Chrome APIs in Node.js environments without mocking
+- Chrome API dependencies: Your code directly calls `chrome.storage`, `chrome.tabs`, `chrome.runtime`, and other browser APIs
+- Platform-specific behavior: Extensions run in different contexts (background worker, content script, popup)
+- Testing limitations: You cannot unit test Chrome APIs in Node.js environments without mocking
 
 Without DI, your business logic becomes tightly coupled to Chrome's APIs, making it impossible to run automated tests without launching a full browser instance.
 
-## The Problem: Tightly Coupled Code {#the-problem}
+The Problem: Tightly Coupled Code {#the-problem}
 
 Consider this typical extension service without dependency injection:
 
 ```typescript
-// ❌ Bad: Tightly coupled to Chrome APIs
+//  Bad: Tightly coupled to Chrome APIs
 class BookmarkService {
   async addBookmark(url: string, title: string) {
     const bookmarks = await chrome.bookmarks.create({ url, title });
@@ -40,12 +40,12 @@ class BookmarkService {
 
 This code cannot be tested without mocking Chrome's global objects, which is fragile and error-prone.
 
-## Solution: Inject Dependencies {#solution-inject-dependencies}
+Solution: Inject Dependencies {#solution-inject-dependencies}
 
 The solution is to define interfaces for your dependencies and inject them:
 
 ```typescript
-// ✅ Good: Dependencies are injected
+//  Good: Dependencies are injected
 interface BookmarkStorage {
   create(config: { url: string; title: string }): Promise<BookmarkTreeNode>;
   getTree(): Promise<BookmarkTreeNode[]>;
@@ -72,7 +72,7 @@ class BookmarkService {
 
 Now you can easily test `BookmarkService` by passing mock implementations.
 
-## Factory Patterns for Extension Contexts {#factory-patterns}
+Factory Patterns for Extension Contexts {#factory-patterns}
 
 Chrome extensions run in multiple contexts, each with different API availability. Use factory functions to create context-appropriate implementations:
 
@@ -99,7 +99,7 @@ class ChromeBookmarkStorage implements BookmarkStorage {
 
 This approach lets you use real Chrome APIs in the background context while providing test doubles for popups or options pages.
 
-## Service Layers with DI {#service-layers}
+Service Layers with DI {#service-layers}
 
 Organize your extension into clear service layers:
 
@@ -146,7 +146,7 @@ function createBackgroundServices() {
 
 This layered architecture makes it trivial to swap implementations or add new features.
 
-## Mocking Chrome APIs for Testing {#mocking-chrome-apis}
+Mocking Chrome APIs for Testing {#mocking-chrome-apis}
 
 Create a test utilities module that provides mock implementations:
 
@@ -206,41 +206,41 @@ describe('BookmarkService', () => {
 });
 ```
 
-## Module Boundaries {#module-boundaries}
+Module Boundaries {#module-boundaries}
 
 Define clear boundaries between your extension's modules:
 
 | Layer | Responsibility | Dependencies |
 |-------|---------------|--------------|
-| **Adapters** | Wrap Chrome APIs | None (pure Chrome calls) |
-| **Services** | Business logic | Adapters via interfaces |
-| **Controllers** | Handle user input | Services |
-| **Composers** | Wire everything together | All above |
+| Adapters | Wrap Chrome APIs | None (pure Chrome calls) |
+| Services | Business logic | Adapters via interfaces |
+| Controllers | Handle user input | Services |
+| Composers | Wire everything together | All above |
 
 Keep these boundaries explicit in your file structure:
 
 ```
 src/
-├── adapters/
-│   ├── chrome-storage.ts
-│   └── chrome-bookmarks.ts
-├── services/
-│   ├── bookmark-service.ts
-│   └── settings-service.ts
-├── controllers/
-│   └── popup-controller.ts
-└── composition/
-    └── background-compose.ts
+ adapters/
+    chrome-storage.ts
+    chrome-bookmarks.ts
+ services/
+    bookmark-service.ts
+    settings-service.ts
+ controllers/
+    popup-controller.ts
+ composition/
+     background-compose.ts
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Always use interfaces** for your dependencies, never concrete types
-2. **Inject at construction** — pass dependencies through constructors
-3. **Use composition roots** — create all dependencies in one place (usually your entry point)
-4. **Keep adapters thin** — adapters should only translate API calls, not contain business logic
-5. **Name dependencies clearly** — use descriptive names like `bookmarkStorage` rather than `storage`
+1. Always use interfaces for your dependencies, never concrete types
+2. Inject at construction. pass dependencies through constructors
+3. Use composition roots. create all dependencies in one place (usually your entry point)
+4. Keep adapters thin. adapters should only translate API calls, not contain business logic
+5. Name dependencies clearly. use descriptive names like `bookmarkStorage` rather than `storage`
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Dependency injection transforms Chrome extension development from writing untestable scripts to building maintainable applications. By abstracting Chrome APIs behind interfaces, you gain the ability to thoroughly test your business logic without browser dependencies. The initial setup cost pays dividends in code quality, refactoring confidence, and team productivity.

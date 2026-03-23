@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Bundle Optimization — Best Practices"
+title: "Chrome Extension Bundle Optimization. Best Practices"
 description: "Optimize extension bundle size with code splitting, tree shaking, and lazy loading."
 canonical_url: "https://bestchromeextensions.com/patterns/bundle-optimization/"
 ---
@@ -9,15 +9,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/bundle-optimization/"
 
 Chrome extensions ship as self-contained bundles downloaded by users, making bundle size a direct factor in install conversion and update speed. Unlike web apps served from CDNs, every kilobyte in an extension package is stored locally and re-downloaded on each update. This guide covers eight patterns for optimizing extension bundles, from code splitting across extension contexts to production build configuration.
 
-> **Related guides:** For runtime performance analysis, see [Performance Profiling](performance-profiling.md). For enforcing code quality standards that support these patterns, see [Linting & Code Quality](../guides/linting-code-quality.md).
+> Related guides: For runtime performance analysis, see [Performance Profiling](performance-profiling.md). For enforcing code quality standards that support these patterns, see [Linting & Code Quality](../guides/linting-code-quality.md).
 
 ---
 
-## Pattern 1: Code Splitting Per Extension Context {#pattern-1-code-splitting-per-extension-context}
+Pattern 1: Code Splitting Per Extension Context {#pattern-1-code-splitting-per-extension-context}
 
 Chrome extensions run code in distinct contexts -- service workers, content scripts, popups, options pages, and side panels. Each context has different API access and lifecycle characteristics. Bundling all code into a single file wastes bytes by shipping irrelevant code to each context.
 
-### Webpack Multi-Entry Configuration {#webpack-multi-entry-configuration}
+Webpack Multi-Entry Configuration {#webpack-multi-entry-configuration}
 
 ```javascript
 // webpack.config.js
@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 
-### Vite Multi-Entry Configuration {#vite-multi-entry-configuration}
+Vite Multi-Entry Configuration {#vite-multi-entry-configuration}
 
 ```typescript
 // vite.config.ts
@@ -67,12 +67,12 @@ export default defineConfig({
 });
 ```
 
-### Why Content Scripts Need Special Treatment {#why-content-scripts-need-special-treatment}
+Why Content Scripts Need Special Treatment {#why-content-scripts-need-special-treatment}
 
 Content scripts are injected into web pages and cannot load additional chunks via dynamic imports or script tags. They must be self-contained single files. Configure your bundler to exclude content scripts from chunk splitting:
 
 ```javascript
-// webpack.config.js — content script isolation
+// webpack.config.js. content script isolation
 module.exports = {
   optimization: {
     splitChunks: {
@@ -86,11 +86,11 @@ module.exports = {
 
 ---
 
-## Pattern 2: Tree Shaking for Chrome API Imports {#pattern-2-tree-shaking-for-chrome-api-imports}
+Pattern 2: Tree Shaking for Chrome API Imports {#pattern-2-tree-shaking-for-chrome-api-imports}
 
 Many extension utility libraries export dozens of helpers, but a given context may only use a handful. Tree shaking eliminates dead code, but only works reliably with ES module syntax.
 
-### Ensuring Sideeffect-Free Modules {#ensuring-sideeffect-free-modules}
+Ensuring Sideeffect-Free Modules {#ensuring-sideeffect-free-modules}
 
 ```json
 // package.json
@@ -107,10 +107,10 @@ For modules that do have side effects (e.g., polyfills), declare them explicitly
 }
 ```
 
-### Writing Tree-Shakeable Chrome API Wrappers {#writing-tree-shakeable-chrome-api-wrappers}
+Writing Tree-Shakeable Chrome API Wrappers {#writing-tree-shakeable-chrome-api-wrappers}
 
 ```typescript
-// src/lib/storage.ts — each function is independently importable
+// src/lib/storage.ts. each function is independently importable
 export function getLocal<T>(key: string): Promise<T | undefined> {
   return chrome.storage.local.get(key).then((r) => r[key] as T | undefined);
 }
@@ -127,27 +127,27 @@ export function getSync<T>(key: string): Promise<T | undefined> {
 // Default object exports defeat tree shaking
 ```
 
-### Verifying Tree Shaking Works {#verifying-tree-shaking-works}
+Verifying Tree Shaking Works {#verifying-tree-shaking-works}
 
 Use webpack's stats output or rollup's `--treeshake` flag to audit what gets included:
 
 ```bash
-# Webpack — generate stats for analysis
+Webpack. generate stats for analysis
 npx webpack --profile --json=stats.json
 npx webpack-bundle-analyzer stats.json
 
-# Vite/Rollup — visualize output
+Vite/Rollup. visualize output
 npx vite build --mode production
 npx rollup-plugin-visualizer
 ```
 
 ---
 
-## Pattern 3: Dynamic Imports in Extension Pages {#pattern-3-dynamic-imports-in-extension-pages}
+Pattern 3: Dynamic Imports in Extension Pages {#pattern-3-dynamic-imports-in-extension-pages}
 
 Extension pages (popup, options, side panel) run in the extension's own origin and fully support dynamic `import()`. This allows deferring heavy modules until they are actually needed.
 
-### Route-Based Splitting in Options Page {#route-based-splitting-in-options-page}
+Route-Based Splitting in Options Page {#route-based-splitting-in-options-page}
 
 ```typescript
 // src/options/index.tsx
@@ -170,7 +170,7 @@ function OptionsApp() {
 }
 ```
 
-### Feature-Gated Dynamic Imports {#feature-gated-dynamic-imports}
+Feature-Gated Dynamic Imports {#feature-gated-dynamic-imports}
 
 ```typescript
 // Load a heavy library only when the user triggers a specific feature
@@ -181,7 +181,7 @@ async function handleExportClicked() {
 }
 ```
 
-### Service Worker Caveat {#service-worker-caveat}
+Service Worker Caveat {#service-worker-caveat}
 
 Service workers support dynamic `import()` in Chrome 116+ when declared as an ES module in the manifest:
 
@@ -198,11 +198,11 @@ Without `"type": "module"`, dynamic imports in the service worker will fail sile
 
 ---
 
-## Pattern 4: Shared Chunks Between Popup and Options {#pattern-4-shared-chunks-between-popup-and-options}
+Pattern 4: Shared Chunks Between Popup and Options {#pattern-4-shared-chunks-between-popup-and-options}
 
 When popup and options pages share UI components or utility functions, extracting shared code into a common chunk avoids duplication.
 
-### Webpack Shared Chunks {#webpack-shared-chunks}
+Webpack Shared Chunks {#webpack-shared-chunks}
 
 ```javascript
 // webpack.config.js
@@ -237,7 +237,7 @@ module.exports = {
 };
 ```
 
-### HTML Template Updates {#html-template-updates}
+HTML Template Updates {#html-template-updates}
 
 Shared chunks must be loaded in the HTML pages that reference them:
 
@@ -256,17 +256,17 @@ Shared chunks must be loaded in the HTML pages that reference them:
 </html>
 ```
 
-### Measuring the Impact {#measuring-the-impact}
+Measuring the Impact {#measuring-the-impact}
 
 Compare before and after sizes to verify that shared chunking actually reduces total bundle size. Duplication only matters when shared modules are large enough to justify the extra HTTP request (on extension pages, this is a local file read, so the threshold is low):
 
 ```bash
-# Before shared chunks
+Before shared chunks
 popup.js    180 KB
 options.js  210 KB
 Total:      390 KB
 
-# After shared chunks
+After shared chunks
 popup.js     45 KB
 options.js   75 KB
 shared.js    90 KB
@@ -276,19 +276,19 @@ Total:      265 KB  (32% reduction)
 
 ---
 
-## Pattern 5: Asset Optimization (Images, Icons, Fonts) {#pattern-5-asset-optimization-images-icons-fonts}
+Pattern 5: Asset Optimization (Images, Icons, Fonts) {#pattern-5-asset-optimization-images-icons-fonts}
 
 Extension packages include icons, promotional images, and sometimes custom fonts. These static assets often account for a significant portion of the total package size.
 
-### Icon Optimization {#icon-optimization}
+Icon Optimization {#icon-optimization}
 
 Chrome requires icons at specific sizes (16, 32, 48, 128 px). Use optimized PNGs or, for simple icons, SVG where supported:
 
 ```bash
-# Optimize PNGs with pngquant
+Optimize PNGs with pngquant
 pngquant --quality=65-80 --output icons/icon-128.png icons/icon-128-original.png
 
-# Generate all required sizes from a single high-res source
+Generate all required sizes from a single high-res source
 for size in 16 32 48 128; do
   npx sharp-cli resize $size $size \
     --input icons/icon-source.png \
@@ -296,12 +296,12 @@ for size in 16 32 48 128; do
 done
 ```
 
-### Font Subsetting {#font-subsetting}
+Font Subsetting {#font-subsetting}
 
 If your extension includes custom fonts, subset them to only the characters you actually use:
 
 ```bash
-# Subset a font to Latin characters only
+Subset a font to Latin characters only
 npx glyphhanger --whitelist="U+0000-00FF" --subset=fonts/CustomFont.woff2
 ```
 
@@ -314,10 +314,10 @@ npx glyphhanger --whitelist="U+0000-00FF" --subset=fonts/CustomFont.woff2
 }
 ```
 
-### Image Compression in Build Pipeline {#image-compression-in-build-pipeline}
+Image Compression in Build Pipeline {#image-compression-in-build-pipeline}
 
 ```javascript
-// vite.config.ts — automatic image optimization
+// vite.config.ts. automatic image optimization
 import imagemin from "vite-plugin-imagemin";
 
 export default defineConfig({
@@ -337,7 +337,7 @@ export default defineConfig({
 });
 ```
 
-### Avoiding Unnecessary Assets {#avoiding-unnecessary-assets}
+Avoiding Unnecessary Assets {#avoiding-unnecessary-assets}
 
 Audit your manifest for unused web-accessible resources. Every file declared in `web_accessible_resources` is included in the package even if no code references it:
 
@@ -354,11 +354,11 @@ Audit your manifest for unused web-accessible resources. Every file declared in 
 
 ---
 
-## Pattern 6: Monitoring Bundle Size with size-limit {#pattern-6-monitoring-bundle-size-with-size-limit}
+Pattern 6: Monitoring Bundle Size with size-limit {#pattern-6-monitoring-bundle-size-with-size-limit}
 
 Preventing bundle bloat requires automated size monitoring. The `size-limit` tool integrates with CI to fail builds when bundles exceed defined thresholds.
 
-### Installation and Configuration {#installation-and-configuration}
+Installation and Configuration {#installation-and-configuration}
 
 ```bash
 npm install -D size-limit @size-limit/file
@@ -385,7 +385,7 @@ npm install -D size-limit @size-limit/file
     },
     {
       "name": "Total Package",
-      "path": "dist/**/*.{js,css,html,json,png,woff2}",
+      "path": "dist//*.{js,css,html,json,png,woff2}",
       "limit": "500 KB"
     }
   ],
@@ -396,11 +396,11 @@ npm install -D size-limit @size-limit/file
 }
 ```
 
-### CI Integration {#ci-integration}
+CI Integration {#ci-integration}
 
 {% raw %}
 ```yaml
-# .github/workflows/size.yml
+.github/workflows/size.yml
 name: Bundle Size Check
 on: [pull_request]
 
@@ -420,13 +420,13 @@ jobs:
 ```
 {% endraw %}
 
-### Budget Tracking Over Time {#budget-tracking-over-time}
+Budget Tracking Over Time {#budget-tracking-over-time}
 
 Add a script to log sizes to a JSON file for historical tracking:
 
 ```bash
 #!/bin/bash
-# scripts/log-size.sh
+scripts/log-size.sh
 BUILD_SIZE=$(du -sb dist | cut -f1)
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 echo "{\"date\":\"$DATE\",\"size\":$BUILD_SIZE}" >> .size-history.json
@@ -434,20 +434,20 @@ echo "{\"date\":\"$DATE\",\"size\":$BUILD_SIZE}" >> .size-history.json
 
 ---
 
-## Pattern 7: Lazy Loading UI Components in Side Panel {#pattern-7-lazy-loading-ui-components-in-side-panel}
+Pattern 7: Lazy Loading UI Components in Side Panel {#pattern-7-lazy-loading-ui-components-in-side-panel}
 
 Side panels persist longer than popups and can benefit from progressive loading. Load the initial view immediately, then fetch heavier components as the user navigates.
 
-### Progressive Loading Strategy {#progressive-loading-strategy}
+Progressive Loading Strategy {#progressive-loading-strategy}
 
 ```typescript
 // src/side-panel/index.tsx
 import { lazy, Suspense, useState } from "react";
 
-// Immediate — the default view loads with the panel
+// Immediate. the default view loads with the panel
 import Dashboard from "./views/Dashboard";
 
-// Deferred — loaded only when accessed
+// Deferred. loaded only when accessed
 const DetailView = lazy(() => import("./views/DetailView"));
 const SettingsView = lazy(() => import("./views/SettingsView"));
 const HistoryView = lazy(() => import("./views/HistoryView"));
@@ -469,7 +469,7 @@ function SidePanel() {
 }
 ```
 
-### Preloading on Hover {#preloading-on-hover}
+Preloading on Hover {#preloading-on-hover}
 
 Anticipate navigation by preloading chunks when the user hovers over a nav item:
 
@@ -498,7 +498,7 @@ function NavItem({
 />;
 ```
 
-### Skeleton Screens for Perceived Performance {#skeleton-screens-for-perceived-performance}
+Skeleton Screens for Perceived Performance {#skeleton-screens-for-perceived-performance}
 
 ```typescript
 function ViewSkeleton() {
@@ -531,11 +531,11 @@ function ViewSkeleton() {
 
 ---
 
-## Pattern 8: Production Build Configuration {#pattern-8-production-build-configuration}
+Pattern 8: Production Build Configuration {#pattern-8-production-build-configuration}
 
 The final optimization step is configuring your bundler for production: minification, source map strategy, and dead code elimination.
 
-### Webpack Production Config {#webpack-production-config}
+Webpack Production Config {#webpack-production-config}
 
 ```javascript
 // webpack.config.prod.js
@@ -572,7 +572,7 @@ module.exports = {
 };
 ```
 
-### Vite Production Config {#vite-production-config}
+Vite Production Config {#vite-production-config}
 
 ```typescript
 // vite.config.ts
@@ -594,7 +594,7 @@ export default defineConfig({
 });
 ```
 
-### Source Map Strategy {#source-map-strategy}
+Source Map Strategy {#source-map-strategy}
 
 Extensions have a specific source map consideration: if you publish source maps inside the `.crx` package, anyone who downloads the extension can read your source code. Options:
 
@@ -607,12 +607,12 @@ Extensions have a specific source map consideration: if you publish source maps 
 For production, generate hidden source maps and upload them to your error tracking service (e.g., Sentry):
 
 ```bash
-# Upload source maps to Sentry, then delete them from dist
+Upload source maps to Sentry, then delete them from dist
 npx sentry-cli sourcemaps upload --release="$VERSION" dist/
 rm dist/*.map
 ```
 
-### Complete Build Script {#complete-build-script}
+Complete Build Script {#complete-build-script}
 
 ```json
 {
@@ -625,10 +625,10 @@ rm dist/*.map
 }
 ```
 
-### Environment-Specific Builds {#environment-specific-builds}
+Environment-Specific Builds {#environment-specific-builds}
 
 ```javascript
-// webpack.config.js — conditional configuration
+// webpack.config.js. conditional configuration
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -642,7 +642,7 @@ module.exports = {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Key Technique | Typical Savings |
 |---|---|---|

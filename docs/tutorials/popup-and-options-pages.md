@@ -9,23 +9,23 @@ canonical_url: "https://bestchromeextensions.com/tutorials/popup-and-options-pag
 
 Popups and options pages are the two primary user interfaces in Chrome extensions. Understanding when and how to use each, along with their unique constraints and capabilities, is essential for building polished, professional extensions. This tutorial covers everything you need to know to create effective popup and options page experiences for your users.
 
-## Popup vs Options Page: Understanding the Differences {#popup-vs-options}
+Popup vs Options Page: Understanding the Differences {#popup-vs-options}
 
 Before diving into implementation, it's crucial to understand the fundamental differences between popups and options pages, as each serves a distinct purpose in your extension's user experience.
 
-**Popups** are the quick-access interface that appears when users click your extension icon in the browser toolbar. They're designed for immediate, focused interactions—toggle a feature on/off, view recent activity, or perform a quick action. Popups are ephemeral by nature: they open when clicked and close when the user clicks outside or presses Escape. This makes them perfect for single-purpose interactions that don't require extensive configuration.
+Popups are the quick-access interface that appears when users click your extension icon in the browser toolbar. They're designed for immediate, focused interactions, toggle a feature on/off, view recent activity, or perform a quick action. Popups are ephemeral by nature: they open when clicked and close when the user clicks outside or presses Escape. This makes them perfect for single-purpose interactions that don't require extensive configuration.
 
-**Options pages** are the dedicated settings interface where users configure how your extension behaves. They're accessed through the extension's context menu or the extensions management page. Options pages support complex forms, detailed configurations, and thorough customization. Unlike popups, options pages remain open as long as the user needs them, allowing for thoughtful configuration without time pressure.
+Options pages are the dedicated settings interface where users configure how your extension behaves. They're accessed through the extension's context menu or the extensions management page. Options pages support complex forms, detailed configurations, and thorough customization. Unlike popups, options pages remain open as long as the user needs them, allowing for thoughtful configuration without time pressure.
 
-The key distinction is intent: use popups for quick actions and immediate feedback, use options pages for detailed configuration and settings management. Many successful extensions use both—a popup for daily interactions and an options page for initial setup and advanced customization.
+The key distinction is intent: use popups for quick actions and immediate feedback, use options pages for detailed configuration and settings management. Many successful extensions use both, a popup for daily interactions and an options page for initial setup and advanced customization.
 
-## Popup Lifecycle: Understanding Opens and Closes {#popup-lifecycle}
+Popup Lifecycle: Understanding Opens and Closes {#popup-lifecycle}
 
 Understanding the popup lifecycle is essential because Chrome handles popups differently from regular web pages. The popup's code executes differently depending on whether it's opening or closing, and this affects how you manage state and initialization.
 
-### How Popups Load
+How Popups Load
 
-When a user clicks your extension icon, Chrome creates a new instance of your popup HTML page. This means every time the popup opens, the page starts from a fresh state—your JavaScript executes from the top, and any in-memory data from previous sessions is lost. This is a critical distinction from regular web apps:
+When a user clicks your extension icon, Chrome creates a new instance of your popup HTML page. This means every time the popup opens, the page starts from a fresh state, your JavaScript executes from the top, and any in-memory data from previous sessions is lost. This is a critical distinction from regular web apps:
 
 ```javascript
 // popup.js - This runs EVERY time the popup opens
@@ -44,7 +44,7 @@ async function init() {
 document.addEventListener('DOMContentLoaded', init);
 ```
 
-### Handling Popup Closure
+Handling Popup Closure
 
 Popups close automatically when users click outside the popup, press Escape, or navigate to a different page. Chrome does not fire a `beforeunload` event predictably, so you shouldn't rely on it for saving state. Instead, save changes immediately as they happen:
 
@@ -68,7 +68,7 @@ function showToast(message) {
 }
 ```
 
-### Communicating with Background Scripts
+Communicating with Background Scripts
 
 Since popups open and close frequently, they often need to communicate with background service workers to share state. The background script acts as the source of truth, while the popup queries for current state:
 
@@ -99,13 +99,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Options Page Types: Embedded vs Full Page {#options-page-types}
+Options Page Types: Embedded vs Full Page {#options-page-types}
 
 Chrome extensions support two distinct options page configurations, each with unique characteristics suited to different use cases.
 
-### Embedded Options
+Embedded Options
 
-Embedded options render within Chrome's extensions management page, creating a seamless experience that feels part of the browser. They're configured simply in your manifest:
+Embedded options render within Chrome's extensions management page, creating a smooth experience that feels part of the browser. They're configured simply in your manifest:
 
 ```json
 {
@@ -117,7 +117,7 @@ Embedded options load within an iframe-like environment with constrained dimensi
 
 The advantages of embedded options include faster load times (Chrome caches the frame), automatic styling that matches Chrome's interface, and a straightforward configuration that works reliably across browsers. However, you're limited in styling customization and must work within the provided frame.
 
-### Full-Page Options
+Full-Page Options
 
 Full-page options open in a dedicated browser tab, giving you complete control over the user experience. This is the preferred approach for modern Manifest V3 extensions:
 
@@ -166,11 +166,11 @@ Full-page options are ideal for complex settings interfaces with multiple sectio
 </html>
 ```
 
-## UI Frameworks in Popups: React, Svelte, Vue {#ui-frameworks}
+UI Frameworks in Popups: React, Svelte, Vue {#ui-frameworks}
 
 While you can build popup UIs with vanilla JavaScript, many developers prefer using modern UI frameworks for their productivity benefits. Each framework has distinct characteristics that affect popup development.
 
-### React in Popups
+React in Popups
 
 React's component-based architecture works well for popup development, though you need to configure your build system correctly:
 
@@ -224,7 +224,7 @@ export default function PopupApp() {
 
 React adds bundle size overhead, which impacts popup load time. Use code splitting and load only what's needed for the initial render. For simple popups, consider whether React's overhead is justified.
 
-### Svelte in Popups
+Svelte in Popups
 
 Svelte's compile-time approach produces smaller bundles, making it excellent for popup development:
 
@@ -282,7 +282,7 @@ Svelte's compile-time approach produces smaller bundles, making it excellent for
 </style>
 ```
 
-### Vue in Popups
+Vue in Popups
 
 Vue offers a good balance between developer experience and bundle size:
 
@@ -354,13 +354,13 @@ export default {
 </style>
 ```
 
-## Responsive Design for Popup Constraints {#responsive-design}
+Responsive Design for Popup Constraints {#responsive-design}
 
 Chrome imposes strict size constraints on popups that directly impact your design decisions. Understanding these constraints and designing within them is essential for creating usable interfaces.
 
-### Size Constraints
+Size Constraints
 
-Chrome extension popups have hard limits: maximum width of **600 pixels** and maximum height of **600 pixels**. Unlike regular web pages, users cannot resize popups—the dimensions are determined by your content, up to these maximums.
+Chrome extension popups have hard limits: maximum width of 600 pixels and maximum height of 600 pixels. Unlike regular web pages, users cannot resize popups, the dimensions are determined by your content, up to these maximums.
 
 Design your popup to be compact and focused. Aim for widths between 280-400 pixels for most use cases, which provides enough space for meaningful interaction without feeling cramped:
 
@@ -380,7 +380,7 @@ Design your popup to be compact and focused. Aim for widths between 280-400 pixe
 }
 ```
 
-### Responsive Patterns
+Responsive Patterns
 
 Use CSS flexbox and grid for layouts that adapt to available space. Avoid fixed pixel widths and embrace fluid or percentage-based approaches:
 
@@ -408,7 +408,7 @@ Use CSS flexbox and grid for layouts that adapt to available space. Avoid fixed 
 }
 ```
 
-### Handling Different Viewports
+Handling Different Viewports
 
 Users access Chrome on various devices with different screen sizes. Test your popup at different zoom levels, as Chrome allows zooming popup content:
 
@@ -432,11 +432,11 @@ Users access Chrome on various devices with different screen sizes. Test your po
 }
 ```
 
-## Saving and Loading Settings {#saving-loading-settings}
+Saving and Loading Settings {#saving-loading-settings}
 
 Effective settings management requires understanding Chrome's storage API and implementing patterns that ensure data integrity and user experience.
 
-### Using chrome.storage
+Using chrome.storage
 
 The chrome.storage API provides persistent storage specifically designed for extensions. It differs from localStorage in important ways: operations are asynchronous, data persists across extension restarts, and you can choose between sync and local storage areas.
 
@@ -473,7 +473,7 @@ async function resetSetting(key) {
 }
 ```
 
-### Complete Settings Implementation
+Complete Settings Implementation
 
 Here's a comprehensive example showing a full implementation pattern:
 
@@ -555,12 +555,12 @@ const unwatch = settings.watch('theme', (newTheme) => {
 unwatch();
 ```
 
-### Storage sync vs Local
+Storage sync vs Local
 
 Choose the right storage area for your use case:
 
-- **storage.sync**: For user preferences that should follow across devices. Quota: ~100KB. Best for: theme, notification preferences, simple toggles.
-- **storage.local**: For larger data that doesn't need syncing. Quota: ~10MB. Best for: cached data, large configurations, extension state.
+- storage.sync: For user preferences that should follow across devices. Quota: ~100KB. Best for: theme, notification preferences, simple toggles.
+- storage.local: For larger data that doesn't need syncing. Quota: ~10MB. Best for: cached data, large configurations, extension state.
 
 ```javascript
 // Settings that sync across devices
@@ -576,11 +576,11 @@ await chrome.storage.local.set({
 });
 ```
 
-## Dark Mode Support {#dark-mode-support}
+Dark Mode Support {#dark-mode-support}
 
 Modern extensions should support dark mode, respecting system preferences while allowing users to override the default. This requires both CSS theming and JavaScript detection of user preferences.
 
-### CSS Custom Properties for Theming
+CSS Custom Properties for Theming
 
 Use CSS custom properties (variables) for maintainable theming:
 
@@ -638,7 +638,7 @@ button:hover {
 }
 ```
 
-### Detecting System Preferences
+Detecting System Preferences
 
 Use JavaScript to detect system theme preference:
 
@@ -665,7 +665,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 });
 ```
 
-### Complete Theme Implementation
+Complete Theme Implementation
 
 Here's a full implementation combining storage, detection, and UI:
 
@@ -740,7 +740,7 @@ document.addEventListener('DOMContentLoaded', initTheme);
 </select>
 ```
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 Here's a complete manifest.json showing how to configure both popup and options page:
 
@@ -776,11 +776,11 @@ Here's a complete manifest.json showing how to configure both popup and options 
 }
 ```
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Popup UI Best Practices](https://github.com/theluckystrike/blob/main/docs/guides/popup-ui-best-practices.md) — Design patterns and best practices for creating professional popup interfaces
-- [Options Page Guide](https://github.com/theluckystrike/blob/main/docs/guides/options-page.md) — Comprehensive guide to building Chrome extension options pages
-- [Storage Patterns](https://github.com/theluckystrike/blob/main/docs/patterns/storage-migration.md) — Advanced storage patterns and migration strategies for extensions
+- [Popup UI Best Practices](https://github.com/theluckystrike/blob/main/docs/guides/popup-ui-best-practices.md). Design patterns and best practices for creating professional popup interfaces
+- [Options Page Guide](https://github.com/theluckystrike/blob/main/docs/guides/options-page.md). Comprehensive guide to building Chrome extension options pages
+- [Storage Patterns](https://github.com/theluckystrike/blob/main/docs/patterns/storage-migration.md). Advanced storage patterns and migration strategies for extensions
 
 ---
 

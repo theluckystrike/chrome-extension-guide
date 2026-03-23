@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Csp Workarounds — Best Practices"
+title: "Chrome Extension Csp Workarounds. Best Practices"
 description: "Navigate Content Security Policy restrictions in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/csp-workarounds/"
 ---
@@ -9,16 +9,16 @@ canonical_url: "https://bestchromeextensions.com/patterns/csp-workarounds/"
 
 Chrome Extensions in Manifest V3 operate under strict Content Security Policy (CSP) constraints that differ significantly from web pages. Understanding these constraints and their workarounds is essential for building secure, functional extensions.
 
-## MV3 CSP Constraints {#mv3-csp-constraints}
+MV3 CSP Constraints {#mv3-csp-constraints}
 
 The default CSP for MV3 extensions prohibits three key capabilities:
-- **No `eval()`** - Code execution from strings is forbidden
-- **No inline scripts** - `<script>` tags with inline code are blocked
-- **No remote code** - Loading and executing external scripts is not allowed
+- No `eval()` - Code execution from strings is forbidden
+- No inline scripts - `<script>` tags with inline code are blocked
+- No remote code - Loading and executing external scripts is not allowed
 
-## Replacing `eval()` {#replacing-eval}
+Replacing `eval()` {#replacing-eval}
 
-### Function Constructor Alternatives {#function-constructor-alternatives}
+Function Constructor Alternatives {#function-constructor-alternatives}
 
 Instead of `eval()`, use the `Function` constructor with careful input validation:
 
@@ -27,7 +27,7 @@ Instead of `eval()`, use the `Function` constructor with careful input validatio
 const safeCompute = new Function('a', 'b', 'return a + b');
 ```
 
-### Structured Data Parsing {#structured-data-parsing}
+Structured Data Parsing {#structured-data-parsing}
 
 For dynamic data processing, use built-in parsing methods:
 
@@ -36,9 +36,9 @@ const data = JSON.parse(userInput);
 const result = data.reduce((acc, item) => acc + item.value, 0);
 ```
 
-## Replacing Inline Scripts {#replacing-inline-scripts}
+Replacing Inline Scripts {#replacing-inline-scripts}
 
-### Move to Separate .js Files {#move-to-separate-js-files}
+Move to Separate .js Files {#move-to-separate-js-files}
 
 All executable code should reside in external JavaScript files:
 
@@ -50,7 +50,7 @@ All executable code should reside in external JavaScript files:
 <script src="background.js"></script>
 ```
 
-### Event Listeners {#event-listeners}
+Event Listeners {#event-listeners}
 
 Use event-driven patterns instead of inline event handlers:
 
@@ -58,9 +58,9 @@ Use event-driven patterns instead of inline event handlers:
 document.getElementById('btn').addEventListener('click', handleClick);
 ```
 
-## Replacing Remote Code {#replacing-remote-code}
+Replacing Remote Code {#replacing-remote-code}
 
-### Bundle All Code Locally {#bundle-all-code-locally}
+Bundle All Code Locally {#bundle-all-code-locally}
 
 All functionality must be included in the extension package:
 
@@ -72,7 +72,7 @@ All functionality must be included in the extension package:
 }
 ```
 
-### Config-Driven Behavior {#config-driven-behavior}
+Config-Driven Behavior {#config-driven-behavior}
 
 Use configuration objects to control behavior without remote code:
 
@@ -81,9 +81,9 @@ const features = { enableFeatureX: true, theme: 'dark' };
 if (features.enableFeatureX) { /* ... */ }
 ```
 
-## Dynamic Code Patterns {#dynamic-code-patterns}
+Dynamic Code Patterns {#dynamic-code-patterns}
 
-### Safe Template Engines {#safe-template-engines}
+Safe Template Engines {#safe-template-engines}
 
 Use template libraries that don't rely on `eval()`:
 
@@ -92,7 +92,7 @@ import { html } from 'lit-html';
 const template = html`<p>Hello, ${name}!</p>`;
 ```
 
-### Safe Alternatives to innerHTML {#safe-alternatives-to-innerhtml}
+Safe Alternatives to innerHTML {#safe-alternatives-to-innerhtml}
 
 Use DOMParser or template elements:
 
@@ -103,11 +103,11 @@ const safeElement = doc.body.firstChild;
 container.appendChild(safeElement);
 ```
 
-## Sandboxed Pages {#sandboxed-pages}
+Sandboxed Pages {#sandboxed-pages}
 
 For pages requiring `eval()` (e.g., legacy template engines), use sandboxing:
 
-### Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -117,7 +117,7 @@ For pages requiring `eval()` (e.g., legacy template engines), use sandboxing:
 }
 ```
 
-### Using postMessage for Communication {#using-postmessage-for-communication}
+Using postMessage for Communication {#using-postmessage-for-communication}
 
 ```javascript
 // Main page
@@ -130,7 +130,7 @@ window.addEventListener('message', (e) => {
 });
 ```
 
-## WebAssembly Alternative {#webassembly-alternative}
+WebAssembly Alternative {#webassembly-alternative}
 
 For computationally intensive logic, consider WebAssembly:
 
@@ -139,14 +139,14 @@ const wasmModule = await WebAssembly.instantiate(wasmBytes);
 const result = wasmModule.exports.compute(input);
 ```
 
-## Content Script CSP {#content-script-csp}
+Content Script CSP {#content-script-csp}
 
 Content scripts inherit the host page's CSP plus the extension's CSP. This means:
 - Inline scripts in the page are blocked
 - External resources may be restricted by page CSP
 - Extension APIs remain available regardless of page CSP
 
-## Debugging CSP Violations {#debugging-csp-violations}
+Debugging CSP Violations {#debugging-csp-violations}
 
 Check the console for CSP violation messages:
 
@@ -157,7 +157,7 @@ allowed in the Content-Security-Policy.
 
 Use Chrome's extension debugger to identify specific violation sources.
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [CSP Reference](../reference/csp-reference.md)
 - [MV3 Content Security Policy](../mv3/content-security-policy.md)

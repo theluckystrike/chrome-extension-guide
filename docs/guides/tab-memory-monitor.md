@@ -8,10 +8,10 @@ A Tab Memory Monitor extension helps users track and visualize memory usage acro
 
 The extension follows a modular architecture:
 
-- **Background Service Worker**: Collects memory data periodically via `chrome.alarms`
-- **Popup/Sidebar**: Displays real-time memory stats in a clean UI
-- **Content Script**: Collects per-tab memory metrics from `performance.memory`
-- **Storage**: Uses `chrome.storage.local` for persistence and `chrome.runtime` for messaging
+- Background Service Worker: Collects memory data periodically via `chrome.alarms`
+- Popup/Sidebar: Displays real-time memory stats in a clean UI
+- Content Script: Collects per-tab memory metrics from `performance.memory`
+- Storage: Uses `chrome.storage.local` for persistence and `chrome.runtime` for messaging
 
 ## manifest.json Configuration
 
@@ -566,10 +566,10 @@ describe('Memory Collection', () => {
 
 ### Memory Efficiency
 
-1. **Limit Snapshot Retention**: Keep only last 1000 snapshots to prevent storage bloat
-2. **Use Structured Clone**: Chrome's `JSON.parse(JSON.stringify())` for deep copies
-3. **Lazy Loading**: Load only visible tabs in popup, paginate results
-4. **Efficient Sorting**: Sort in background worker, not UI thread
+1. Limit Snapshot Retention: Keep only last 1000 snapshots to prevent storage bloat
+2. Use Structured Clone: Chrome's `JSON.parse(JSON.stringify())` for deep copies
+3. Lazy Loading: Load only visible tabs in popup, paginate results
+4. Efficient Sorting: Sort in background worker, not UI thread
 
 ### Service Worker Optimization
 
@@ -639,10 +639,10 @@ chrome.runtime.onUninstalled.addListener(async () => {
 
 This guide covered the essential components for building a Tab Memory Monitor extension. Key takeaways:
 
-1. **Use chrome.alarms** for periodic background collection (not setInterval)
-2. **Content scripts** are required to access `performance.memory` per-tab
-3. **chrome.storage.local** provides persistent storage with quota limits
-4. **Handle errors gracefully** with try-catch and storage migration
-5. **Test thoroughly** across browsers before publishing
+1. Use chrome.alarms for periodic background collection (not setInterval)
+2. Content scripts are required to access `performance.memory` per-tab
+3. chrome.storage.local provides persistent storage with quota limits
+4. Handle errors gracefully with try-catch and storage migration
+5. Test thoroughly across browsers before publishing
 
 The complete source code is available in the examples directory of this repository.

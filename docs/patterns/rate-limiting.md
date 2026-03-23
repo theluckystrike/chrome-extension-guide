@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Rate Limiting — Best Practices"
+title: "Chrome Extension Rate Limiting. Best Practices"
 description: "Implement rate limiting to prevent API abuse and throttling."
 canonical_url: "https://bestchromeextensions.com/patterns/rate-limiting/"
 ---
 
 # Rate Limiting Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Handle API rate limits and quota management in extensions. Prevents 429 errors and storage sync quota exhaustion. Applies to external APIs and Chrome API quotas.
 
 ---
 
-## Chrome API Quotas {#chrome-api-quotas}
+Chrome API Quotas {#chrome-api-quotas}
 
 | API | Quota | Notes |
 |-----|-------|-------|
@@ -25,7 +25,7 @@ Batch writes: `await chrome.storage.sync.set({a:1,b:2})` not separate calls.
 
 ---
 
-## Token Bucket {#token-bucket}
+Token Bucket {#token-bucket}
 
 ```ts
 class Bucket {
@@ -43,7 +43,7 @@ Store in `chrome.storage.session` for SW restart survival.
 
 ---
 
-## Debouncing & Throttling {#debouncing-throttling}
+Debouncing & Throttling {#debouncing-throttling}
 
 ```ts
 // Debounced writer
@@ -59,21 +59,21 @@ async a():Promise<boolean>{const A=await chrome.alarms.get(this.n);if(!A){await 
 
 ---
 
-## Exponential Backoff {#exponential-backoff}
+Exponential Backoff {#exponential-backoff}
 
 ```ts
 async function retry(url:string,max=5,base=1000):Promise<Response>{
   for(let i=0;i<=max;i++){
     const r=await fetch(url);
     if(r.ok||(r.status!==429&&r.status<500))return r;
-    await new Promise(x=>setTimeout(x,Math.min(base*2**i*(0.8+Math.random()*0.4),30000)));
+    await new Promise(x=>setTimeout(x,Math.min(base*2i*(0.8+Math.random()*0.4),30000)));
   }throw new Error('max');
 }
 ```
 
 ---
 
-## Request Queue {#request-queue}
+Request Queue {#request-queue}
 
 ```ts
 class Q{
@@ -86,7 +86,7 @@ class Q{
 
 ---
 
-## Batching Storage {#batching-storage}
+Batching Storage {#batching-storage}
 
 ```ts
 class Batch{
@@ -100,7 +100,7 @@ Listen to `chrome.alarms.onAlarm` to flush.
 
 ---
 
-## External API Tips {#external-api-tips}
+External API Tips {#external-api-tips}
 
 - Cache with TTL in `chrome.storage.local`
 - Use ETag/If-None-Match
@@ -109,7 +109,7 @@ Listen to `chrome.alarms.onAlarm` to flush.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use | Benefit |
 |---------|-----|---------|
@@ -121,7 +121,7 @@ Listen to `chrome.alarms.onAlarm` to flush.
 
 ---
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Error Handling](./error-handling.md)
 - [State Management](./state-management.md)

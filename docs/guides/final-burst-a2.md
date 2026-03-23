@@ -10,29 +10,29 @@ The Habit Tracker extension follows a modular architecture:
 
 ```
 src/
-├── manifest.json          # Extension configuration
-├── background/
-│   └── service-worker.ts  # Handles alarms, sync, notifications
-├── popup/
-│   ├── popup.ts           # Popup entry point
-│   ├── components/        # UI components
-│   └── styles.css         # Popup styles
-├── content/
-│   └── content-script.ts  # Injected for additional features
-├── shared/
-│   ├── types.ts           # TypeScript interfaces
-│   ├── storage.ts         # Storage abstraction layer
-│   └── utils.ts           # Helper functions
-└── options/
-    └── options.ts          # Settings page
+ manifest.json          # Extension configuration
+ background/
+    service-worker.ts  # Handles alarms, sync, notifications
+ popup/
+    popup.ts           # Popup entry point
+    components/        # UI components
+    styles.css         # Popup styles
+ content/
+    content-script.ts  # Injected for additional features
+ shared/
+    types.ts           # TypeScript interfaces
+    storage.ts         # Storage abstraction layer
+    utils.ts           # Helper functions
+ options/
+     options.ts          # Settings page
 ```
 
 ### Key Components
 
-- **Service Worker**: Manages alarms, background sync, and notifications
-- **Popup**: Quick access to mark habits complete
-- **Options Page**: Configure habits, reminder times, and preferences
-- **Shared Types**: Consistent TypeScript interfaces across all modules
+- Service Worker: Manages alarms, background sync, and notifications
+- Popup: Quick access to mark habits complete
+- Options Page: Configure habits, reminder times, and preferences
+- Shared Types: Consistent TypeScript interfaces across all modules
 
 ## manifest.json
 
@@ -392,14 +392,14 @@ async function renderHabits(): Promise<void> {
     <div class="habit-card ${habit.completedToday ? 'completed' : ''}">
       <div class="habit-info">
         <h3>${habit.name}</h3>
-        <p class="streak">🔥 ${habit.currentStreak} day streak</p>
+        <p class="streak"> ${habit.currentStreak} day streak</p>
       </div>
       <button 
         class="complete-btn ${habit.completedToday ? 'done' : ''}"
         data-habit-id="${habit.id}"
         ${habit.completedToday ? 'disabled' : ''}
       >
-        ${habit.completedToday ? '✓' : '○'}
+        ${habit.completedToday ? '' : ''}
       </button>
     </div>
   `).join('');
@@ -594,9 +594,9 @@ body {
 ## Chrome APIs Used
 
 ### 1. chrome.storage.sync
-- **Purpose**: Cross-device data persistence
-- **Usage**: Store habits, logs, and settings
-- **Quota**: ~100KB, syncs automatically
+- Purpose: Cross-device data persistence
+- Usage: Store habits, logs, and settings
+- Quota: ~100KB, syncs automatically
 
 ```typescript
 await chrome.storage.sync.set({ key: value });
@@ -604,8 +604,8 @@ const data = await chrome.storage.sync.get('key');
 ```
 
 ### 2. chrome.alarms
-- **Purpose**: Schedule periodic tasks
-- **Usage**: Daily reminder checks
+- Purpose: Schedule periodic tasks
+- Usage: Daily reminder checks
 
 ```typescript
 chrome.alarms.create('reminder', {
@@ -615,8 +615,8 @@ chrome.alarms.create('reminder', {
 ```
 
 ### 3. chrome.notifications
-- **Purpose**: System notifications
-- **Usage**: Habit reminders
+- Purpose: System notifications
+- Usage: Habit reminders
 
 ```typescript
 chrome.notifications.create({
@@ -627,8 +627,8 @@ chrome.notifications.create({
 ```
 
 ### 4. chrome.runtime
-- **Purpose**: Extension lifecycle
-- **Usage**: Message passing, install events
+- Purpose: Extension lifecycle
+- Usage: Message passing, install events
 
 ## Testing Approach
 
@@ -690,12 +690,12 @@ npm run package
 
 ## Best Practices
 
-1. **Always use TypeScript** for type safety
-2. **Modular architecture** - separate concerns into different modules
-3. **Error handling** - wrap async operations in try-catch
-4. **Storage efficiency** - batch operations when possible
-5. **User privacy** - only request necessary permissions
-6. **Offline first** - handle sync failures gracefully
+1. Always use TypeScript for type safety
+2. Modular architecture - separate concerns into different modules
+3. Error handling - wrap async operations in try-catch
+4. Storage efficiency - batch operations when possible
+5. User privacy - only request necessary permissions
+6. Offline first - handle sync failures gracefully
 
 ## Conclusion
 

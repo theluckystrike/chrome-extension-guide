@@ -1,36 +1,36 @@
 ---
 layout: default
-title: "declarativeNetRequest: Content Blocking in MV3 — Complete Tutorial"
+title: "declarativeNetRequest: Content Blocking in MV3. Complete Tutorial"
 description: "Master declarativeNetRequest API in Chrome Extensions Manifest V3. Learn static vs dynamic rules, JSON syntax, migration from webRequest, and common use cases."
 canonical_url: "https://bestchromeextensions.com/tutorials/declarative-net-request/"
 ---
 
 # declarativeNetRequest: Content Blocking in MV3
 
-> Learn how to block, redirect, and modify network requests in Manifest V3 using the Declarative Net Request API — the MV3 replacement for webRequestBlocking.
+> Learn how to block, redirect, and modify network requests in Manifest V3 using the Declarative Net Request API. the MV3 replacement for webRequestBlocking.
 
-## What is declarativeNetRequest? {#what-is-declarativenetrequest}
+What is declarativeNetRequest? {#what-is-declarativenetrequest}
 
-The **Declarative Net Request** API (DNR) is Chrome's recommended way to intercept and modify network requests in Manifest V3 extensions. It was introduced as the replacement for the deprecated `webRequestBlocking` API that existed in Manifest V2.
+The Declarative Net Request API (DNR) is Chrome's recommended way to intercept and modify network requests in Manifest V3 extensions. It was introduced as the replacement for the deprecated `webRequestBlocking` API that existed in Manifest V2.
 
-Unlike the old `webRequestBlocking` API — which gave extensions raw access to network data and could block browser threads while processing — DNR uses a **declarative approach**. You define rules in advance, and Chrome applies them internally without your extension needing to process each request.
+Unlike the old `webRequestBlocking` API. which gave extensions raw access to network data and could block browser threads while processing. DNR uses a declarative approach. You define rules in advance, and Chrome applies them internally without your extension needing to process each request.
 
-### Why DNR Replaced webRequestBlocking {#why-dnr-replaced-webrequestblocking}
+Why DNR Replaced webRequestBlocking {#why-dnr-replaced-webrequestblocking}
 
 The old `webRequestBlocking` API presented significant problems:
 
-- **Privacy concerns**: Extensions had access to all raw network request/response data
-- **Performance issues**: The API was synchronous and could block browser threads
-- **Security risks**: Unlimited access to request bodies created attack surfaces
-- **Noisy API**: Every request triggered callback functions in your extension
+- Privacy concerns: Extensions had access to all raw network request/response data
+- Performance issues: The API was synchronous and could block browser threads
+- Security risks: Unlimited access to request bodies created attack surfaces
+- Noisy API: Every request triggered callback functions in your extension
 
 DNR solves these by having you declare rules upfront. Chrome matches requests against these rules internally, so your extension never sees the raw network data.
 
-## Static vs Dynamic Rules {#static-vs-dynamic-rules}
+Static vs Dynamic Rules {#static-vs-dynamic-rules}
 
 DNR supports two types of rules, each with different use cases:
 
-### Static Rules {#static-rules}
+Static Rules {#static-rules}
 
 Static rules are defined in JSON files bundled with your extension. They are:
 - Declared in `manifest.json` under `declarative_net_request.rule_resources`
@@ -38,7 +38,7 @@ Static rules are defined in JSON files bundled with your extension. They are:
 - Updated only when the extension is reloaded
 - Perfect for predefined blocklists (ads, trackers)
 
-**Manifest configuration:**
+Manifest configuration:
 ```json
 {
   "name": "My Ad Blocker",
@@ -56,7 +56,7 @@ Static rules are defined in JSON files bundled with your extension. They are:
 }
 ```
 
-**Example rules file (rules/ads.json):**
+Example rules file (rules/ads.json):
 ```json
 [
   {
@@ -71,7 +71,7 @@ Static rules are defined in JSON files bundled with your extension. They are:
 ]
 ```
 
-### Dynamic Rules {#dynamic-rules}
+Dynamic Rules {#dynamic-rules}
 
 Dynamic rules are added, updated, or removed at runtime by your extension code. They are:
 - Managed entirely through JavaScript API calls
@@ -79,7 +79,7 @@ Dynamic rules are added, updated, or removed at runtime by your extension code. 
 - Perfect for user-configurable features (custom blocklists)
 - Share the same 30,000 rule limit as static rules
 
-**Adding dynamic rules:**
+Adding dynamic rules:
 ```javascript
 async function addBlockedDomain(domain) {
   const escapedDomain = domain.replace(/\./g, "\\.");
@@ -98,17 +98,17 @@ async function addBlockedDomain(domain) {
 }
 ```
 
-### Key Differences {#key-differences}
+Key Differences {#key-differences}
 
 | Aspect | Static Rules | Dynamic Rules |
 |--------|--------------|---------------|
-| **Where defined** | JSON files in extension | JavaScript at runtime |
-| **Update mechanism** | Extension reload required | API calls anytime |
-| **Use case** | Predefined blocklists | User-configurable features |
-| **Rule count** | Part of 30,000 limit | Part of 30,000 limit |
-| **Maximum rulesets** | 100 files, 50 enabled | Unlimited |
+| Where defined | JSON files in extension | JavaScript at runtime |
+| Update mechanism | Extension reload required | API calls anytime |
+| Use case | Predefined blocklists | User-configurable features |
+| Rule count | Part of 30,000 limit | Part of 30,000 limit |
+| Maximum rulesets | 100 files, 50 enabled | Unlimited |
 
-## Rule Syntax and Conditions {#rule-syntax-and-conditions}
+Rule Syntax and Conditions {#rule-syntax-and-conditions}
 
 Each DNR rule is a JSON object with four main properties:
 
@@ -121,7 +121,7 @@ Each DNR rule is a JSON object with four main properties:
 }
 ```
 
-### Rule Properties {#rule-properties}
+Rule Properties {#rule-properties}
 
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
@@ -130,7 +130,7 @@ Each DNR rule is a JSON object with four main properties:
 | `action` | object | Yes | What to do when matched |
 | `condition` | object | Yes | Matching criteria |
 
-### Condition Properties {#condition-properties}
+Condition Properties {#condition-properties}
 
 The `condition` object defines when a rule should trigger:
 
@@ -145,7 +145,7 @@ The `condition` object defines when a rule should trigger:
 | `tabIds` | array | Specific tab IDs to match |
 | `excludeTabIds` | array | Tab IDs to exclude |
 
-### URL Filter Syntax {#url-filter-syntax}
+URL Filter Syntax {#url-filter-syntax}
 
 DNR uses a special filter syntax (not regex) for `urlFilter`:
 
@@ -157,7 +157,7 @@ DNR uses a special filter syntax (not regex) for `urlFilter`:
 | `\|` | Anchor to start/end | `\|https://` matches URLs starting with `https://` |
 | `\` | Escape special chars | `ads\.example\\.com` matches literal `ads.example.com` |
 
-**Common patterns:**
+Common patterns:
 ```json
 // Block all requests to a domain
 "urlFilter": "||tracker.example.com"
@@ -172,7 +172,7 @@ DNR uses a special filter syntax (not regex) for `urlFilter`:
 "urlFilter": "tracking"
 ```
 
-### Regex Filters {#regex-filters}
+Regex Filters {#regex-filters}
 
 For more complex matching, use `regexFilter` instead of `urlFilter`:
 
@@ -188,13 +188,13 @@ For more complex matching, use `regexFilter` instead of `urlFilter`:
 }
 ```
 
-> **Note:** Regex filters are limited to 1,000 rules per extension.
+> Note: Regex filters are limited to 1,000 rules per extension.
 
-## Action Types {#action-types}
+Action Types {#action-types}
 
 The `action.type` property determines what happens when a rule matches:
 
-### Block {#action-block}
+Block {#action-block}
 
 Completely blocks the network request:
 
@@ -210,7 +210,7 @@ Completely blocks the network request:
 }
 ```
 
-### Redirect {#action-redirect}
+Redirect {#action-redirect}
 
 Redirects the request to a different URL:
 
@@ -231,7 +231,7 @@ Redirects the request to a different URL:
 }
 ```
 
-**Redirect options:**
+Redirect options:
 ```json
 // Redirect to a specific URL
 "redirect": { "url": "https://example.com/blocked.html" }
@@ -243,7 +243,7 @@ Redirects the request to a different URL:
 "redirect": { "transform": { "scheme": "https" } }
 ```
 
-### ModifyHeaders {#action-modifyheaders}
+ModifyHeaders {#action-modifyheaders}
 
 Add, remove, or modify HTTP headers:
 
@@ -269,14 +269,14 @@ Add, remove, or modify HTTP headers:
 }
 ```
 
-**Header operations:**
+Header operations:
 | Operation | Description |
 |-----------|-------------|
 | `set` | Set value (add if not exists, replace if exists) |
 | `append` | Append to existing value |
 | `remove` | Remove header entirely |
 
-### Allow {#action-allow}
+Allow {#action-allow}
 
 Allow a request (useful for exceptions):
 
@@ -292,7 +292,7 @@ Allow a request (useful for exceptions):
 }
 ```
 
-### upgradeScheme {#action-upgradescheme}
+upgradeScheme {#action-upgradescheme}
 
 Automatically upgrade HTTP to HTTPS:
 
@@ -308,7 +308,7 @@ Automatically upgrade HTTP to HTTPS:
 }
 ```
 
-### allowAllRequests {#action-allowallrequests}
+allowAllRequests {#action-allowallrequests}
 
 Allow all requests in a frame hierarchy:
 
@@ -324,11 +324,11 @@ Allow all requests in a frame hierarchy:
 }
 ```
 
-## Rule Priorities {#rule-priorities}
+Rule Priorities {#rule-priorities}
 
 Rule priority determines which rule wins when multiple rules match the same request.
 
-### How Priority Works {#how-priority-works}
+How Priority Works {#how-priority-works}
 
 1. Rules are sorted by priority (highest first)
 2. First matching rule wins
@@ -353,7 +353,7 @@ Rule priority determines which rule wins when multiple rules match the same requ
 
 In this example, scripts from `trusted.com` are allowed (priority 2) while all other scripts are blocked (priority 1).
 
-### Priority with Redirects {#priority-with-redirects}
+Priority with Redirects {#priority-with-redirects}
 
 When redirecting, ensure higher priority rules come first:
 
@@ -377,16 +377,16 @@ When redirecting, ensure higher priority rules come first:
 ]
 ```
 
-## Testing Rules {#testing-rules}
+Testing Rules {#testing-rules}
 
-### Using chrome://extensions {#using-chrome-extensions}
+Using chrome://extensions {#using-chrome-extensions}
 
 1. Load your unpacked extension
 2. Enable "Developer mode" 
 3. Click "Reload" after modifying rules
 4. For dynamic rules, call `updateDynamicRules` in console
 
-### Debugging with declarativeNetRequestFeedback {#debugging-with-feedback}
+Debugging with declarativeNetRequestFeedback {#debugging-with-feedback}
 
 Add the feedback permission to see which rules match:
 
@@ -406,9 +406,9 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
 });
 ```
 
-> **Note:** This event is for debugging only and may impact performance.
+> Note: This event is for debugging only and may impact performance.
 
-### Using Test APIs {#using-test-apis}
+Using Test APIs {#using-test-apis}
 
 ```javascript
 // Check available static rule count
@@ -421,7 +421,7 @@ const result = await chrome.declarativeNetRequest.testMatchURL(testURL);
 console.log("Would match:", result);
 ```
 
-### Common Testing Issues {#common-testing-issues}
+Common Testing Issues {#common-testing-issues}
 
 | Issue | Solution |
 |-------|----------|
@@ -430,9 +430,9 @@ console.log("Would match:", result);
 | Redirect loop | Verify redirect URL doesn't match another rule |
 | Headers not modified | Use correct header names (case-sensitive) |
 
-## Common Use Cases {#common-use-cases}
+Common Use Cases {#common-use-cases}
 
-### Ad Blocking {#ad-blocking}
+Ad Blocking {#ad-blocking}
 
 ```json
 [
@@ -466,7 +466,7 @@ console.log("Would match:", result);
 ]
 ```
 
-### Privacy Protection {#privacy-protection}
+Privacy Protection {#privacy-protection}
 
 Block trackers and analytics:
 
@@ -498,7 +498,7 @@ Block trackers and analytics:
 ]
 ```
 
-### CORS Workaround {#cors-workaround}
+CORS Workaround {#cors-workaround}
 
 Add CORS headers to bypass cross-origin restrictions:
 
@@ -521,7 +521,7 @@ Add CORS headers to bypass cross-origin restrictions:
 ]
 ```
 
-### Redirect to HTTPS {#redirect-to-https}
+Redirect to HTTPS {#redirect-to-https}
 
 Force HTTPS on specific domains:
 
@@ -539,7 +539,7 @@ Force HTTPS on specific domains:
 ]
 ```
 
-### Custom Block Page {#custom-block-page}
+Custom Block Page {#custom-block-page}
 
 Redirect blocked requests to a custom page:
 
@@ -560,13 +560,13 @@ Redirect blocked requests to a custom page:
 ]
 ```
 
-## Limitations and Workarounds {#limitations-and-workarounds}
+Limitations and Workarounds {#limitations-and-workarounds}
 
-### Cannot Access Request/Response Bodies {#cannot-access-bodies}
+Cannot Access Request/Response Bodies {#cannot-access-bodies}
 
-**Limitation:** DNR cannot read or modify HTTP request/response bodies.
+Limitation: DNR cannot read or modify HTTP request/response bodies.
 
-**Workaround:** Use `declarativeNetRequest` for headers only, combine with content scripts for body modification:
+Workaround: Use `declarativeNetRequest` for headers only, combine with content scripts for body modification:
 
 ```javascript
 // In content script - modify page content after load
@@ -575,11 +575,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Limited to Predefined Actions {#limited-actions}
+Limited to Predefined Actions {#limited-actions}
 
-**Limitation:** Only supports specific action types (block, redirect, modifyHeaders, etc.)
+Limitation: Only supports specific action types (block, redirect, modifyHeaders, etc.)
 
-**Workaround:** Use redirect to send requests to your extension for processing:
+Workaround: Use redirect to send requests to your extension for processing:
 
 ```javascript
 // Redirect to extension, handle in service worker
@@ -591,11 +591,11 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 ```
 
-### No Regex Lookbehind {#no-regex-lookbehind}
+No Regex Lookbehind {#no-regex-lookbehind}
 
-**Limitation:** DNR regex doesn't support lookbehind assertions.
+Limitation: DNR regex doesn't support lookbehind assertions.
 
-**Workaround:** Use multiple rules or simplify patterns:
+Workaround: Use multiple rules or simplify patterns:
 
 ```json
 [
@@ -604,16 +604,16 @@ document.addEventListener('DOMContentLoaded', () => {
 ]
 ```
 
-### Rule Limits {#rule-limits}
+Rule Limits {#rule-limits}
 
-**Limitation:** 30,000 static rules, 30,000 dynamic rules, 1,000 regex rules.
+Limitation: 30,000 static rules, 30,000 dynamic rules, 1,000 regex rules.
 
-**Workarounds:**
+Workarounds:
 - Use domain patterns instead of individual URLs
 - Use blocklists from trusted sources
 - Implement rule sharing between static and dynamic
 
-### Session Rules (MV3.2+) {#session-rules}
+Session Rules (MV3.2+) {#session-rules}
 
 For temporary rules that don't persist:
 
@@ -629,13 +629,13 @@ await chrome.declarativeNetRequest.updateSessionRules({
 });
 ```
 
-## Migration from webRequest {#migration-from-webrequest}
+Migration from webRequest {#migration-from-webrequest}
 
 If you're migrating from MV2's `webRequestBlocking`, here's the pattern conversion:
 
-### Blocking Requests {#migration-blocking}
+Blocking Requests {#migration-blocking}
 
-**MV2 (webRequest):**
+MV2 (webRequest):
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => ({ cancel: true }),
@@ -644,7 +644,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-**MV3 (declarativeNetRequest):**
+MV3 (declarativeNetRequest):
 ```json
 {
   "id": 1,
@@ -657,9 +657,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 }
 ```
 
-### Redirecting Requests {#migration-redirect}
+Redirecting Requests {#migration-redirect}
 
-**MV2:**
+MV2:
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => ({ redirectUrl: "https://example.com/blocked.html" }),
@@ -668,7 +668,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "id": 1,
@@ -683,9 +683,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 }
 ```
 
-### Modifying Headers {#migration-headers}
+Modifying Headers {#migration-headers}
 
-**MV2:**
+MV2:
 ```javascript
 chrome.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
@@ -697,7 +697,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-**MV3:**
+MV3:
 ```json
 {
   "id": 1,
@@ -714,7 +714,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 }
 ```
 
-### Dynamic User Rules {#migration-dynamic}
+Dynamic User Rules {#migration-dynamic}
 
 For user-configured rules that were dynamic in MV2:
 
@@ -741,9 +741,9 @@ async function addUserBlockedSite(domain) {
 }
 ```
 
-## Complete Example: Ad Blocker Extension {#complete-example}
+Complete Example: Ad Blocker Extension {#complete-example}
 
-### manifest.json {#example-manifest}
+manifest.json {#example-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -769,7 +769,7 @@ async function addUserBlockedSite(domain) {
 }
 ```
 
-### rules/default-rules.json {#example-rules}
+rules/default-rules.json {#example-rules}
 ```json
 [
   {
@@ -802,7 +802,7 @@ async function addUserBlockedSite(domain) {
 ]
 ```
 
-### background.js (Dynamic Rules) {#example-background}
+background.js (Dynamic Rules) {#example-background}
 ```javascript
 // Load user rules from storage on startup
 chrome.runtime.onInstalled.addListener(async () => {
@@ -865,31 +865,31 @@ async function removeBlockedSite(domain) {
 }
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 The Declarative Net Request API is the modern way to block and modify network requests in Chrome extensions:
 
-- **Static rules** — Predefined in JSON files, perfect for bundled blocklists
-- **Dynamic rules** — Runtime-configurable, ideal for user preferences
-- **Action types** — Block, redirect, modifyHeaders, allow, upgradeScheme
-- **Rule priorities** — Control which rule wins when multiple match
-- **Migration** — Direct patterns from webRequestBlocking to DNR
+- Static rules. Predefined in JSON files, perfect for bundled blocklists
+- Dynamic rules. Runtime-configurable, ideal for user preferences
+- Action types. Block, redirect, modifyHeaders, allow, upgradeScheme
+- Rule priorities. Control which rule wins when multiple match
+- Migration. Direct patterns from webRequestBlocking to DNR
 
 DNR provides better privacy, performance, and security than the old webRequest API while maintaining most blocking capabilities.
 
 ---
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Build a Content Blocker Extension](build-content-blocker.html) — Step-by-step guide to building a complete ad blocker
-- [Build a Site Blocker Extension](build-site-blocker.html) — Create a productivity-focused site blocker with scheduling
-- [Manifest V3 Migration Guide](mv3/manifest-v3-migration-guide.html) — Complete guide to migrating from MV2 to MV3
-- [Declarative Net Request API Reference](mv3/declarative-net-request.html) — Full API documentation
+- [Build a Content Blocker Extension](build-content-blocker.html). Step-by-step guide to building a complete ad blocker
+- [Build a Site Blocker Extension](build-site-blocker.html). Create a productivity-focused site blocker with scheduling
+- [Manifest V3 Migration Guide](mv3/manifest-v3-migration-guide.html). Complete guide to migrating from MV2 to MV3
+- [Declarative Net Request API Reference](mv3/declarative-net-request.html). Full API documentation
 
 ---
 
 *Part of the [Chrome Extension Guide](https://github.com/theluckystrike/chrome-extension-guide) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

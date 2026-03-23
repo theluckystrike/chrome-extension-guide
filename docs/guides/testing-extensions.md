@@ -1,44 +1,44 @@
 ---
 layout: default
-title: "Chrome Extension Testing Extensions — Developer Guide"
+title: "Chrome Extension Testing Extensions. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/testing-extensions/"
 ---
 # Testing Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 Testing extensions is tricky because they run across multiple contexts (background, popup, content scripts) and depend on Chrome APIs. This guide covers strategies from unit tests to manual testing.
 
-## Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
-1. **Unit tests** — test pure logic, schema definitions, message types
-2. **Integration tests** — test with mocked Chrome APIs
-3. **E2E tests** — test the loaded extension in a real browser (Puppeteer/Playwright)
-4. **Manual testing** — load unpacked and verify
+Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
+1. Unit tests. test pure logic, schema definitions, message types
+2. Integration tests. test with mocked Chrome APIs
+3. E2E tests. test the loaded extension in a real browser (Puppeteer/Playwright)
+4. Manual testing. load unpacked and verify
 
-## Unit Testing Setup {#unit-testing-setup}
+Unit Testing Setup {#unit-testing-setup}
 
-### Install dependencies {#install-dependencies}
+Install dependencies {#install-dependencies}
 ```bash
 npm install -D vitest @anthropic-ai/claude-code
-# Testing Chrome Extensions Comprehensively
+Testing Chrome Extensions Comprehensively
 
 A guide to testing Chrome Extensions (Manifest V3) covering unit tests, integration tests, E2E tests, and manual verification.
 
-## Overview
+Overview
 
-Extensions run across service workers, content scripts, popup pages, and options pages. A robust testing strategy covers all contexts:
+Extensions run across service workers, content scripts, popup pages, and options pages. A solid testing strategy covers all contexts:
 
 ```
 Manual Testing → E2E (Playwright/Puppeteer) → Integration (Mocked APIs) → Unit Tests
 ```
 
-## 1. Unit Testing with Vitest
+1. Unit Testing with Vitest
 
 ```bash
 npm install -D vitest @vitest/coverage-v8 jsdom
 ```
 
-### vitest.config.ts {#vitestconfigts}
+vitest.config.ts {#vitestconfigts}
 ```ts
 import { defineConfig } from "vitest/config";
 
@@ -56,9 +56,9 @@ describe('parseUrl', () => {
 });
 ```
 
-## Testing @theluckystrike/webext-storage {#testing-theluckystrikewebext-storage}
+Testing @theluckystrike/webext-storage {#testing-theluckystrikewebext-storage}
 
-### Test schema definitions {#test-schema-definitions}
+Test schema definitions {#test-schema-definitions}
 ```ts
 import { defineSchema } from "@theluckystrike/webext-storage";
 
@@ -77,7 +77,7 @@ describe("schema", () => {
 });
 ```
 
-### Mock chrome.storage for integration tests {#mock-chromestorage-for-integration-tests}
+Mock chrome.storage for integration tests {#mock-chromestorage-for-integration-tests}
 ```ts
 // __mocks__/chrome.ts
 const store: Record<string, unknown> = {};
@@ -110,7 +110,7 @@ const mockStorage = {
 (globalThis as any).chrome = { storage: mockStorage, runtime: { lastError: null } };
 ```
 
-### Test storage operations {#test-storage-operations}
+Test storage operations {#test-storage-operations}
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
@@ -138,9 +138,9 @@ describe("TypedStorage", () => {
 });
 ```
 
-## Testing @theluckystrike/webext-messaging {#testing-theluckystrikewebext-messaging}
+Testing @theluckystrike/webext-messaging {#testing-theluckystrikewebext-messaging}
 
-### Test message type definitions {#test-message-type-definitions}
+Test message type definitions {#test-message-type-definitions}
 ```ts
 // Compile-time type testing
 type Messages = {
@@ -154,7 +154,7 @@ import { createMessenger } from "@theluckystrike/webext-messaging";
 const msg = createMessenger<Messages>();
 ```
 
-### Mock chrome.runtime for messaging tests {#mock-chromeruntime-for-messaging-tests}
+Mock chrome.runtime for messaging tests {#mock-chromeruntime-for-messaging-tests}
 ```ts
 const listeners: Function[] = [];
 
@@ -175,7 +175,7 @@ const listeners: Function[] = [];
         const idx = listeners.indexOf(fn);
         if (idx >= 0) listeners.splice(idx, 1);
       }),
-## 2. Mocking Chrome APIs
+2. Mocking Chrome APIs
 
 ```typescript
 // test/__mocks__/chrome.ts
@@ -196,9 +196,9 @@ export const createChromeMock = () => ({
 beforeAll(() => { globalThis.chrome = createChromeMock() as any; });
 ```
 
-## Testing @theluckystrike/webext-permissions {#testing-theluckystrikewebext-permissions}
+Testing @theluckystrike/webext-permissions {#testing-theluckystrikewebext-permissions}
 
-### Mock chrome.permissions {#mock-chromepermissions}
+Mock chrome.permissions {#mock-chromepermissions}
 ```ts
 const grantedPermissions = new Set(["storage"]);
 
@@ -224,7 +224,7 @@ const grantedPermissions = new Set(["storage"]);
 };
 ```
 
-### Test permission checks {#test-permission-checks}
+Test permission checks {#test-permission-checks}
 ```ts
 import { checkPermission, describePermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
 
@@ -242,7 +242,7 @@ describe("permissions", () => {
 
   it("should have all descriptions", () => {
     expect(Object.keys(PERMISSION_DESCRIPTIONS).length).toBeGreaterThan(40);
-## 3. Testing Content Scripts
+3. Testing Content Scripts
 
 ```typescript
 // src/content_scripts/scraper.test.ts
@@ -256,8 +256,8 @@ describe('scraper', () => {
 });
 ```
 
-## E2E Testing with Puppeteer {#e2e-testing-with-puppeteer}
-## 4. Testing Service Worker Handlers
+E2E Testing with Puppeteer {#e2e-testing-with-puppeteer}
+4. Testing Service Worker Handlers
 
 ```typescript
 // src/background/handlers.test.ts
@@ -271,7 +271,7 @@ describe('handlers', () => {
 });
 ```
 
-## Manual Testing Checklist {#manual-testing-checklist}
+Manual Testing Checklist {#manual-testing-checklist}
 - [ ] Load unpacked extension in chrome://extensions
 - [ ] Test popup opens and displays correctly
 - [ ] Test all popup actions
@@ -285,15 +285,15 @@ describe('handlers', () => {
 - [ ] Check DevTools console for errors in each context
 - [ ] Test on Chrome stable (not just dev)
 
-## Debugging Tips {#debugging-tips}
+Debugging Tips {#debugging-tips}
 - Background: `chrome://extensions` > service worker "Inspect"
 - Popup: right-click popup > "Inspect"
 - Content script: page DevTools > Console (select extension context in dropdown)
 - Storage: DevTools > Application > Extension Storage
 - Network: DevTools > Network tab (for fetch calls from background)
 
-## CI Setup (GitHub Actions) {#ci-setup-github-actions}
-## 5. Testing Popup UI Components
+CI Setup (GitHub Actions) {#ci-setup-github-actions}
+5. Testing Popup UI Components
 
 ```typescript
 // src/popup/components/Toggle.test.ts
@@ -308,7 +308,7 @@ describe('Toggle', () => {
 });
 ```
 
-## 6. Integration Testing with Puppeteer
+6. Integration Testing with Puppeteer
 
 ```typescript
 // e2e/puppeteer.test.ts
@@ -320,7 +320,7 @@ test('loads extension', async () => {
 });
 ```
 
-## 7. Integration Testing with Playwright
+7. Integration Testing with Playwright
 
 ```typescript
 // e2e/playwright.test.ts
@@ -335,7 +335,7 @@ test('popup works', async () => {
 });
 ```
 
-## 8. Loading Unpacked Extensions
+8. Loading Unpacked Extensions
 
 ```typescript
 // test/utils/load-extension.ts
@@ -344,7 +344,7 @@ export function getChromeArgs(path: string): string[] {
 }
 ```
 
-## 9. End-to-End Workflows
+9. End-to-End Workflows
 
 ```typescript
 // e2e/user-journey.test.ts
@@ -356,7 +356,7 @@ test('complete flow', async ({ browser }) => {
 });
 ```
 
-## 10. Testing Message Passing
+10. Testing Message Passing
 
 ```typescript
 // test/messaging.test.ts
@@ -370,7 +370,7 @@ describe('messaging', () => {
 });
 ```
 
-## 11. Testing Storage Operations
+11. Testing Storage Operations
 
 ```typescript
 // test/storage.test.ts
@@ -385,7 +385,7 @@ describe('storage', () => {
 });
 ```
 
-## 12. Testing declarativeNetRequest
+12. Testing declarativeNetRequest
 
 ```typescript
 // test/dnr.test.ts
@@ -399,7 +399,7 @@ describe('declarativeNetRequest', () => {
 });
 ```
 
-## 13. Snapshot Testing for UI
+13. Snapshot Testing for UI
 
 ```typescript
 // src/popup/snapshot.test.ts
@@ -409,16 +409,16 @@ describe('snapshots', () => {
 });
 ```
 
-## 14. Code Coverage
+14. Code Coverage
 
 ```bash
 npm run test:coverage  # vitest --coverage
 ```
 
-## 15. CI/CD Setup
+15. CI/CD Setup
 
 ```yaml
-# .github/workflows/test.yml
+.github/workflows/test.yml
 name: Test
 on: [push, pull_request]
 jobs:
@@ -432,22 +432,22 @@ jobs:
       - run: npm run test:e2e
 ```
 
-## Related Guides {#related-guides}
+Related Guides {#related-guides}
 - [Background Patterns](background-patterns.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)
 ```
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Testing Strategies](../guides/chrome-extension-testing-strategies.md)
 - [E2E Testing Patterns](../patterns/e2e-testing-patterns.md)
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-## 16. GitHub Actions for Extension Tests
+16. GitHub Actions for Extension Tests
 
 ```yaml
 jobs:
@@ -461,7 +461,7 @@ jobs:
 {% endraw %}
 ```
 
-## 17. Testing Across Chrome Versions
+17. Testing Across Chrome Versions
 
 ```typescript
 // test/cross-version.test.ts
@@ -475,7 +475,7 @@ test.describe('cross-version', () => {
 });
 ```
 
-## 18. Manual Testing Checklist
+18. Manual Testing Checklist
 
 - [ ] Load unpacked in chrome://extensions (Developer mode on)
 - [ ] Verify toolbar icon appears
@@ -490,7 +490,7 @@ test.describe('cross-version', () => {
 - [ ] Test in Incognito mode
 - [ ] Test on Chrome stable
 
-## 19. Debugging Test Failures
+19. Debugging Test Failures
 
 ```typescript
 // Debug helper
@@ -503,11 +503,11 @@ const debugChrome = (name: string, fn: Function) => async (...args: any[]) => {
 // Fixes: chrome undefined → add mock; async issues → await setTimeout; load fails → check manifest
 ```
 
-## 20. Reference
+20. Reference
 
 - Debug guide: https://developer.chrome.com/docs/extensions/get-started/tutorial/debug
 
-## Related Guides
+Related Guides
 
 - [Testing Strategies](chrome-extension-testing-strategies.md)
 - [Puppeteer](extension-testing-with-puppeteer.md)

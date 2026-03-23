@@ -10,40 +10,40 @@ canonical_url: "https://bestchromeextensions.com/permissions/fontSettings/"
 
 # fontSettings Permission
 
-## What It Grants {#what-it-grants}
+What It Grants {#what-it-grants}
 Access to the `chrome.fontSettings` API for reading and modifying Chrome's font preferences (default fonts, sizes, per-script fonts).
 
-## Manifest {#manifest}
+Manifest {#manifest}
 ```json
 {
   "permissions": ["fontSettings"]
 }
 ```
 
-## User Warning {#user-warning}
-None — this permission does not trigger a warning at install time.
+User Warning {#user-warning}
+None. this permission does not trigger a warning at install time.
 
-## API Access {#api-access}
+API Access {#api-access}
 
-### Font Management {#font-management}
-- `chrome.fontSettings.getFont({ genericFamily, script? })` — get font for a family/script
-- `chrome.fontSettings.setFont({ genericFamily, fontId, script? })` — set font for a family/script
-- `chrome.fontSettings.getFontList()` — list all available fonts on the system
-- `chrome.fontSettings.clearFont({ genericFamily, script? })` — reset to default
+Font Management {#font-management}
+- `chrome.fontSettings.getFont({ genericFamily, script? })`. get font for a family/script
+- `chrome.fontSettings.setFont({ genericFamily, fontId, script? })`. set font for a family/script
+- `chrome.fontSettings.getFontList()`. list all available fonts on the system
+- `chrome.fontSettings.clearFont({ genericFamily, script? })`. reset to default
 
-### Font Size Management {#font-size-management}
+Font Size Management {#font-size-management}
 - `chrome.fontSettings.getDefaultFontSize()` / `setDefaultFontSize({ pixelSize })`
 - `chrome.fontSettings.getDefaultFixedFontSize()` / `setDefaultFixedFontSize({ pixelSize })`
 - `chrome.fontSettings.getMinimumFontSize()` / `setMinimumFontSize({ pixelSize })`
 - `chrome.fontSettings.clearDefaultFontSize()` / `clearDefaultFixedFontSize()` / `clearMinimumFontSize()`
 
-### Events {#events}
+Events {#events}
 - `chrome.fontSettings.onFontChanged`
 - `chrome.fontSettings.onDefaultFontSizeChanged`
 - `chrome.fontSettings.onDefaultFixedFontSizeChanged`
 - `chrome.fontSettings.onMinimumFontSizeChanged`
 
-## Generic Font Families {#generic-font-families}
+Generic Font Families {#generic-font-families}
 | Family | Description |
 |---|---|
 | `standard` | Default body text font |
@@ -54,9 +54,9 @@ None — this permission does not trigger a warning at install time.
 | `fantasy` | Decorative font |
 | `math` | Math font |
 
-## Basic Usage {#basic-usage}
+Basic Usage {#basic-usage}
 
-## How to Use fontSettings API
+How to Use fontSettings API
 ```typescript
 // Get current serif font
 const { fontId } = await chrome.fontSettings.getFont({ genericFamily: 'serif' });
@@ -76,7 +76,7 @@ await chrome.fontSettings.setDefaultFontSize({ pixelSize: 18 });
 await chrome.fontSettings.setMinimumFontSize({ pixelSize: 12 });
 ```
 
-## Script-Specific Fonts {#script-specific-fonts}
+Script-Specific Fonts {#script-specific-fonts}
 ```typescript
 // Set font for Japanese text
 await chrome.fontSettings.setFont({
@@ -93,7 +93,7 @@ await chrome.fontSettings.setFont({
 });
 ```
 
-## Accessibility Extension Pattern {#accessibility-extension-pattern}
+Accessibility Extension Pattern {#accessibility-extension-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -128,7 +128,7 @@ m.onMessage('RESET_FONTS', async () => {
 });
 ```
 
-## Monitor Font Changes {#monitor-font-changes}
+Monitor Font Changes {#monitor-font-changes}
 ```typescript
 chrome.fontSettings.onFontChanged.addListener((details) => {
   console.log(`Font changed: ${details.genericFamily} → ${details.fontId} (script: ${details.script})`);
@@ -139,31 +139,31 @@ chrome.fontSettings.onDefaultFontSizeChanged.addListener((details) => {
 });
 ```
 
-## When to Use {#when-to-use}
+When to Use {#when-to-use}
 - Accessibility extensions (dyslexia-friendly fonts, larger text)
 - Reading customization tools
 - Typography/font management extensions
 - Localization tools (script-specific fonts)
 
-## When NOT to Use {#when-not-to-use}
-- If you only need to style specific pages — use content scripts with CSS injection
-- For temporary font changes — use CSS, not this API (changes are persistent)
+When NOT to Use {#when-not-to-use}
+- If you only need to style specific pages. use content scripts with CSS injection
+- For temporary font changes. use CSS, not this API (changes are persistent)
 
-## Permission Check {#permission-check}
+Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('fontSettings');
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Related: `docs/guides/accessibility.md`
 
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I access font settings in Chrome?
+How do I access font settings in Chrome?
 The chrome.fontSettings API allows extensions to get and set the default font size, serif font, and other font-related preferences.
 
-### Can extensions install custom fonts?
+Can extensions install custom fonts?
 No, the fontSettings API cannot install fonts. It can only manage existing system and Chrome font settings.
 ---
 

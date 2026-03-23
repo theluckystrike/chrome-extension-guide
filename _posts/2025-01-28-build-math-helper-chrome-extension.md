@@ -17,70 +17,70 @@ Whether you are a student needing quick calculations during online research, a p
 
 ---
 
-## Why Build a Math Helper Chrome Extension? {#why-build-math-extension}
+Why Build a Math Helper Chrome Extension? {#why-build-math-extension}
 
 The demand for quick, accessible mathematical tools within browsers continues to grow. A math helper extension offers several compelling advantages over standalone calculator applications or web-based alternatives.
 
-### Immediate Accessibility
+Immediate Accessibility
 
 Unlike opening a separate application or navigating to a calculator website, a Chrome extension sits directly in your browser toolbar, ready to perform calculations instantly. This proximity to your workflow means you can calculate percentages, convert units, or solve equations without interrupting your current task. Students conducting research can quickly verify calculations without leaving their tabs, while professionals can perform financial estimates during online meetings.
 
-### Context-Aware Calculations
+Context-Aware Calculations
 
 A well-designed math helper extension can access the content on your current webpage, enabling context-aware calculations. For example, if you are reading an article with numerical data, your extension could extract those numbers and perform batch calculations. This level of integration is impossible with standalone calculator applications.
 
-### Personalization and Features
+Personalization and Features
 
 Building your own math helper extension means you can customize every feature to match your specific needs. Whether you require scientific calculator functions, unit conversions, currency calculations, or algebraic equation solving, you have complete control over the feature set. Many users prefer having precisely the functions they need without the bloat of comprehensive but complex alternatives.
 
-### Learning Opportunity
+Learning Opportunity
 
-Creating a math helper extension is an excellent project for developers looking to expand their Chrome extension development skills. It involves working with popup interfaces, background scripts, content scripts, and local storage—all fundamental concepts in extension development. The mathematical logic also provides an interesting challenge in parsing and evaluating expressions safely.
+Creating a math helper extension is an excellent project for developers looking to expand their Chrome extension development skills. It involves working with popup interfaces, background scripts, content scripts, and local storage, all fundamental concepts in extension development. The mathematical logic also provides an interesting challenge in parsing and evaluating expressions safely.
 
 ---
 
-## Extension Architecture Overview {#architecture-overview}
+Extension Architecture Overview {#architecture-overview}
 
 Before diving into code, it is essential to understand the architecture of a Chrome extension and how its components work together for a math helper application.
 
-### Core Components
+Core Components
 
 A math helper extension typically consists of three main components: the popup interface, the background service worker, and optional content scripts. The popup provides the user interface where users input calculations, while the background script handles more complex operations and stores user preferences. Content scripts can extract mathematical content from webpages when needed.
 
-### Manifest V3 Requirements
+Manifest V3 Requirements
 
 Chrome extensions now use Manifest V3, which introduced several important changes from the older Manifest V2. The most significant change for a math helper extension is the transition from background pages to service workers. Service workers are event-driven and cannot maintain persistent state in the same way background pages could, which affects how we structure our extension's logic.
 
 In Manifest V3, all extension files must be declared in the manifest.json file, including the HTML for popups, JavaScript for functionality, and CSS for styling. Permissions must be explicitly requested, though a basic math helper extension typically requires minimal permissions since it primarily performs local calculations.
 
-### State Management
+State Management
 
 Since service workers can be terminated by the browser when inactive, our math helper extension needs to handle state carefully. For simple calculations, the popup can handle everything locally without needing persistent background state. For more advanced features like calculation history or user preferences, we can use the chrome.storage API to persist data between sessions.
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Let us begin by setting up the project structure for our math helper extension. Create a new directory for your extension and add the following essential files.
 
-### Directory Structure
+Directory Structure
 
 ```text
 math-helper-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ background.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 This structure separates concerns cleanly: the manifest declares our extension, the popup folder contains our user interface, background.js handles any background processing, and icons provide the visual representation in the Chrome toolbar.
 
-### Creating the Manifest
+Creating the Manifest
 
 The manifest.json file defines our extension's configuration and capabilities. For a math helper extension, we need to declare the popup, specify any permissions, and define the extension's metadata.
 
@@ -111,11 +111,11 @@ This manifest declares a popup-based extension with storage permissions for savi
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is the primary interface users interact with when using your math helper extension. It should be clean, intuitive, and responsive while providing quick access to all mathematical functions.
 
-### HTML Structure
+HTML Structure
 
 Create the popup.html file with a well-organized structure that separates the calculator display, input area, and function buttons.
 
@@ -191,15 +191,15 @@ Create the popup.html file with a well-organized structure that separates the ca
 </html>
 ```
 
-This HTML structure provides three distinct modes: a standard calculator, a unit converter, and an equation solver. The tab system allows users to switch between functions seamlessly while maintaining a compact interface suitable for a browser popup.
+This HTML structure provides three distinct modes: a standard calculator, a unit converter, and an equation solver. The tab system allows users to switch between functions smoothly while maintaining a compact interface suitable for a browser popup.
 
 ---
 
-## Styling the Extension {#styling}
+Styling the Extension {#styling}
 
 The CSS should create a modern, clean appearance that feels professional and responsive. Users often keep extensions visible while working, so visual clarity is important.
 
-### Popup CSS
+Popup CSS
 
 ```css
 * {
@@ -368,11 +368,11 @@ This styling creates a cohesive, professional appearance with a dark display are
 
 ---
 
-## Implementing Calculator Logic {#calculator-logic}
+Implementing Calculator Logic {#calculator-logic}
 
 The JavaScript handles all the mathematical operations, including parsing expressions, performing calculations, and managing the user interface state.
 
-### Popup JavaScript
+Popup JavaScript
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -637,43 +637,43 @@ This JavaScript implementation provides comprehensive functionality across all t
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing ensures everything works correctly across different scenarios and user interactions.
 
-### Loading the Extension
+Loading the Extension
 
 To test your extension in Chrome, navigate to chrome://extensions/ in your browser address bar. Enable Developer mode using the toggle in the top-right corner. Click the Load unpacked button and select your extension's directory. Your extension should now appear in the Chrome toolbar.
 
-### Testing Calculator Functions
+Testing Calculator Functions
 
-Verify that all basic operations work correctly: addition, subtraction, multiplication, and division. Test edge cases such as dividing by zero, using very large numbers, and entering multiple decimal points. The keyboard support should work seamlessly for users who prefer typing calculations.
+Verify that all basic operations work correctly: addition, subtraction, multiplication, and division. Test edge cases such as dividing by zero, using very large numbers, and entering multiple decimal points. The keyboard support should work smoothly for users who prefer typing calculations.
 
-### Testing Unit Conversions
+Testing Unit Conversions
 
 Check each conversion type by entering known values and verifying the results. For example, 1000 meters should equal 1 kilometer, and 0 degrees Celsius should equal 32 degrees Fahrenheit. Test both positive and negative values, especially for temperature conversions.
 
-### Testing Equation Solver
+Testing Equation Solver
 
 Enter various linear equations to verify the solver works correctly. Test equations like "2x+4=10" (solution: 3), "x-5=0" (solution: 5), and "3x=15" (solution: 5). Also verify that invalid inputs display appropriate error messages.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once testing is complete and you are satisfied with your math helper extension, you can publish it to the Chrome Web Store.
 
-### Preparing for Publication
+Preparing for Publication
 
 Before uploading, create your store listing with clear screenshots, a compelling description, and appropriate category tags. Your description should highlight key features like the calculator, unit converter, and equation solver. Use relevant keywords naturally throughout the description to improve search visibility for users searching for terms like math helper extension, calculator chrome, and equation solver extension.
 
-### Upload Process
+Upload Process
 
 Package your extension as a ZIP file containing all necessary files except the .git directory. Navigate to the Chrome Web Store Developer Dashboard, create a new item, and upload your ZIP file. Fill in the store listing details, submit for review, and wait for Google's approval, which typically takes a few hours to several days.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a math helper extension for Chrome is a rewarding project that combines useful functionality with practical web development skills. Throughout this guide, you have learned how to set up a proper Manifest V3 extension, create an intuitive popup interface with multiple modes, implement calculator logic with safe evaluation, build a comprehensive unit converter, and develop a linear equation solver.
 

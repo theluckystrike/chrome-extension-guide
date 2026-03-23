@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Building Omnibox Extensions for Chrome — Complete Tutorial"
+title: "Building Omnibox Extensions for Chrome. Complete Tutorial"
 description: "A comprehensive tutorial on building Chrome extension omnibox experiences: keyword registration, input events, suggestions, rich suggestions, and integrating with search APIs."
 canonical_url: "https://bestchromeextensions.com/tutorials/omnibox-api-guide/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/omnibox-api-guide/"
 
 The Chrome Omnibox API transforms your extension into a powerful command center accessible directly from the address bar. This tutorial walks you through building feature-rich omnibox experiences, from basic keyword registration to advanced search integration with real-time suggestions.
 
-## Overview {#overview}
+Overview {#overview}
 
 The omnibox (Chrome's address bar) provides a powerful interface for extensions to create custom search experiences, command palettes, and quick-action tools. When users type your defined keyword followed by a space, they enter your extension's context, where you can provide real-time suggestions and execute actions based on their input.
 
@@ -18,14 +18,14 @@ Key capabilities include:
 - Real-time suggestions as users type
 - Rich suggestions with descriptions and formatting
 - Default suggestions for initial display
-- Seamless navigation on selection
+- Smooth navigation on selection
 - Integration with external search APIs
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
-### Basic Keyword Registration
+Basic Keyword Registration
 
-The first step is registering your extension's keyword in the manifest. Unlike most APIs, the Omnibox doesn't require a permission—only the `omnibox` key in your manifest.
+The first step is registering your extension's keyword in the manifest. Unlike most APIs, the Omnibox doesn't require a permission, only the `omnibox` key in your manifest.
 
 ```json
 {
@@ -44,7 +44,7 @@ The first step is registering your extension's keyword in the manifest. Unlike m
 
 The `keyword` field defines what users type to activate your extension. Choose something short, memorable, and unlikely to conflict with search engines.
 
-### Multiple Keywords (Advanced)
+Multiple Keywords (Advanced)
 
 You can also provide localized keywords:
 
@@ -57,11 +57,11 @@ You can also provide localized keywords:
 }
 ```
 
-## Event Handling {#event-handling}
+Event Handling {#event-handling}
 
 The Omnibox API provides three core events that form the lifecycle of user interaction: input started, input changed, and input entered.
 
-### onInputStarted
+onInputStarted
 
 Fired when the user activates your keyword in the omnibox (types your keyword followed by a space). This is your opportunity to initialize state and prepare for input.
 
@@ -80,7 +80,7 @@ chrome.omnibox.onInputStarted.addListener(() => {
 });
 ```
 
-### onInputChanged
+onInputChanged
 
 Fired each time the user changes their input while in your extension's context. This is where you'll typically fetch and provide suggestions.
 
@@ -120,7 +120,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
 });
 ```
 
-### onInputEntered
+onInputEntered
 
 Fired when the user presses Enter or selects a suggestion. This is where you handle the final action.
 
@@ -140,7 +140,7 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 });
 ```
 
-### onInputCancelled
+onInputCancelled
 
 Fired when the user exits omnibox mode without making a selection. Use this to clean up any state.
 
@@ -152,9 +152,9 @@ chrome.omnibox.onInputCancelled.addListener(() => {
 });
 ```
 
-## Providing Suggestions {#providing-suggestions}
+Providing Suggestions {#providing-suggestions}
 
-### Basic Suggestions
+Basic Suggestions
 
 The `suggest()` method accepts an array of suggestion objects. Each suggestion requires:
 
@@ -166,15 +166,15 @@ chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
   const suggestions = [
     {
       content: 'bookmarks',
-      description: '📚 Browse your bookmarks'
+      description: ' Browse your bookmarks'
     },
     {
       content: 'history',
-      description: '🕐 Search browsing history'
+      description: ' Search browsing history'
     },
     {
       content: 'tabs',
-      description: '🔖 Manage open tabs'
+      description: ' Manage open tabs'
     }
   ];
   
@@ -182,7 +182,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
 });
 ```
 
-### Rich Suggestions
+Rich Suggestions
 
 For more sophisticated suggestions, you can use XML-style formatting in descriptions:
 
@@ -219,7 +219,7 @@ Formatting options available:
 - `<match>`: Highlights matching text
 - `<url>`: Displays as a clickable link (read-only)
 
-### Default Suggestions
+Default Suggestions
 
 The default suggestion appears in the omnibox input field itself and is what gets submitted if the user presses Enter without selecting a suggestion.
 
@@ -239,9 +239,9 @@ chrome.omnibox.setDefaultSuggestion({
 
 The `%s` placeholder is replaced with the current user input.
 
-## Navigation on Selection {#navigation}
+Navigation on Selection {#navigation}
 
-### Basic URL Navigation
+Basic URL Navigation
 
 The most common pattern is navigating to a URL based on user input:
 
@@ -254,7 +254,7 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 });
 ```
 
-### Different Behaviors Based on Input
+Different Behaviors Based on Input
 
 You can implement context-aware navigation:
 
@@ -285,7 +285,7 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 });
 ```
 
-### Opening in New Tab
+Opening in New Tab
 
 ```javascript
 chrome.omnibox.onInputEntered.addListener((text) => {
@@ -295,9 +295,9 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 });
 ```
 
-## Combining with Search APIs {#search-apis}
+Combining with Search APIs {#search-apis}
 
-### Integrating with External Search Services
+Integrating with External Search Services
 
 Here's a complete example that integrates with an external search API:
 
@@ -365,7 +365,7 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 });
 ```
 
-### Debouncing API Requests
+Debouncing API Requests
 
 For better performance, debounce your API calls:
 
@@ -387,7 +387,7 @@ function fetchSuggestions(text, suggestCallback) {
 }
 ```
 
-### Caching Suggestions
+Caching Suggestions
 
 Cache results to reduce API calls:
 
@@ -418,11 +418,11 @@ chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
 });
 ```
 
-## Complete Example {#complete-example}
+Complete Example {#complete-example}
 
 Here's a working example that combines all the concepts:
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -444,17 +444,17 @@ Here's a working example that combines all the concepts:
 }
 ```
 
-### background.js
+background.js
 
 ```javascript
 // Dev Docs Search - Complete Example
 
 // Documentation sources
 const DOC_SOURCES = [
-  { name: 'MDN', url: 'https://developer.mozilla.org/search?q=', icon: '📚' },
-  { name: 'React', url: 'https://react.dev/search?q=', icon: '⚛️' },
-  { name: 'TypeScript', url: 'https://www.typescriptlang.org/docs/?q=', icon: '💎' },
-  { name: 'Chrome Extensions', url: 'https://developer.chrome.com/docs/extensions/search/', icon: '🔧' }
+  { name: 'MDN', url: 'https://developer.mozilla.org/search?q=', icon: '' },
+  { name: 'React', url: 'https://react.dev/search?q=', icon: '' },
+  { name: 'TypeScript', url: 'https://www.typescriptlang.org/docs/?q=', icon: '' },
+  { name: 'Chrome Extensions', url: 'https://developer.chrome.com/docs/extensions/search/', icon: '' }
 ];
 
 // Initialize when user enters omnibox
@@ -541,39 +541,39 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 });
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Choose memorable keywords** - Keep them short and unique. Avoid common words that might conflict with search engines.
+1. Choose memorable keywords - Keep them short and unique. Avoid common words that might conflict with search engines.
 
-2. **Provide immediate feedback** - Set a default suggestion so users know what will happen if they press Enter.
+2. Provide immediate feedback - Set a default suggestion so users know what will happen if they press Enter.
 
-3. **Handle empty input gracefully** - Show useful default options when there's no input.
+3. Handle empty input gracefully - Show useful default options when there's no input.
 
-4. **Debounce API calls** - Wait for the user to stop typing before making expensive requests.
+4. Debounce API calls - Wait for the user to stop typing before making expensive requests.
 
-5. **Cache results** - Reduce latency and API load by caching recent suggestions.
+5. Cache results - Reduce latency and API load by caching recent suggestions.
 
-6. **Use clear descriptions** - Make it obvious what each suggestion will do.
+6. Use clear descriptions - Make it obvious what each suggestion will do.
 
-7. **Consider the user workflow** - Provide shortcuts for common actions.
+7. Consider the user workflow - Provide shortcuts for common actions.
 
-8. **Test thoroughly** - The omnibox has specific behavior in different Chrome modes (incognito, etc.).
+8. Test thoroughly - The omnibox has specific behavior in different Chrome modes (incognito, etc.).
 
-## Common Pitfalls {#common-pitfalls}
+Common Pitfalls {#common-pitfalls}
 
-- **Forgetting setDefaultSuggestion** - Users won't know what happens on Enter
-- **Not encoding URLs** - Special characters can break navigation
-- **Too many suggestions** - Keep the list focused and relevant
-- **Ignoring error handling** - API failures should have graceful fallbacks
-- **Not handling disposition** - Users may expect different tab behaviors
+- Forgetting setDefaultSuggestion - Users won't know what happens on Enter
+- Not encoding URLs - Special characters can break navigation
+- Too many suggestions - Keep the list focused and relevant
+- Ignoring error handling - API failures should have graceful fallbacks
+- Not handling disposition - Users may expect different tab behaviors
 
 ---
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Omnibox API Reference](/guides/omnibox-api/) — Complete API documentation and reference
-- [Omnibox Patterns](/patterns/omnibox-api/) — Advanced patterns and architectural guidance
-- [Commands API - Keyboard Shortcuts](/guides/commands-keyboard-shortcuts/) — Adding keyboard shortcuts to your extension
+- [Omnibox API Reference](/guides/omnibox-api/). Complete API documentation and reference
+- [Omnibox Patterns](/patterns/omnibox-api/). Advanced patterns and architectural guidance
+- [Commands API - Keyboard Shortcuts](/guides/commands-keyboard-shortcuts/). Adding keyboard shortcuts to your extension
 
 ---
 

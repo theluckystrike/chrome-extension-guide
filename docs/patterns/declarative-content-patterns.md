@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Declarative Content Patterns — Best Practices"
+title: "Chrome Extension Declarative Content Patterns. Best Practices"
 description: "Use Declarative Content API to trigger actions based on page content without host permissions."
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-content-patterns/"
 ---
 
 # Declarative Content Patterns
 
-This document covers advanced patterns for using `chrome.declarativeContent` to show the extension action icon only on pages that match specific conditions—without requiring content scripts to run.
+This document covers advanced patterns for using `chrome.declarativeContent` to show the extension action icon only on pages that match specific conditions, without requiring content scripts to run.
 
-## Overview {#overview}
+Overview {#overview}
 
 The `chrome.declarativeContent` API allows extensions to trigger actions based on page characteristics detected by the browser, rather than by injecting content scripts. This is more efficient than using content scripts to detect elements and then messaging back to show the action.
 
-## Core Concepts {#core-concepts}
+Core Concepts {#core-concepts}
 
-### PageStateMatcher {#pagestatematcher}
+PageStateMatcher {#pagestatematcher}
 
 The `PageStateMatcher` defines conditions for when a rule should activate:
 
@@ -32,7 +32,7 @@ The `PageStateMatcher` defines conditions for when a rule should activate:
 }
 ```
 
-### Available Page URL Conditions {#available-page-url-conditions}
+Available Page URL Conditions {#available-page-url-conditions}
 
 | Condition | Description | Example |
 |-----------|-------------|---------|
@@ -44,15 +44,15 @@ The `PageStateMatcher` defines conditions for when a rule should activate:
 | `schemes` | Match specific schemes | `['https']` |
 | `ports` | Match specific ports | `[443, 8080]` |
 
-### CSS Matching Rules {#css-matching-rules}
+CSS Matching Rules {#css-matching-rules}
 
-- The page must contain **at least one element** matching any of the provided selectors
+- The page must contain at least one element matching any of the provided selectors
 - Works with any valid CSS selector
 - Common use cases: forms, buttons, specific UI elements
 
-## Showing Action on Matching Pages {#showing-action-on-matching-pages}
+Showing Action on Matching Pages {#showing-action-on-matching-pages}
 
-### Basic Pattern: Show Icon on Specific Sites {#basic-pattern-show-icon-on-specific-sites}
+Basic Pattern: Show Icon on Specific Sites {#basic-pattern-show-icon-on-specific-sites}
 
 ```javascript
 chrome.runtime.onInstalled.addListener(() => {
@@ -71,7 +71,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Multiple Conditions (AND Logic) {#multiple-conditions-and-logic}
+Multiple Conditions (AND Logic) {#multiple-conditions-and-logic}
 
 ```javascript
 {
@@ -87,9 +87,9 @@ chrome.runtime.onInstalled.addListener(() => {
 }
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Use Case 1: Show Icon Only on Specific Sites {#use-case-1-show-icon-only-on-specific-sites}
+Use Case 1: Show Icon Only on Specific Sites {#use-case-1-show-icon-only-on-specific-sites}
 
 Show the action icon when visiting documentation pages:
 
@@ -111,7 +111,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Use Case 2: Enable Action When Page Has Specific Elements {#use-case-2-enable-action-when-page-has-specific-elements}
+Use Case 2: Enable Action When Page Has Specific Elements {#use-case-2-enable-action-when-page-has-specific-elements}
 
 Show action only when a login form is detected:
 
@@ -130,7 +130,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Use Case 3: Context-Sensitive Actions {#use-case-3-context-sensitive-actions}
+Use Case 3: Context-Sensitive Actions {#use-case-3-context-sensitive-actions}
 
 Show different icons based on page content:
 
@@ -150,17 +150,17 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Comparison: declarativeContent vs Content Script Detection {#comparison-declarativecontent-vs-content-script-detection}
+Comparison: declarativeContent vs Content Script Detection {#comparison-declarativecontent-vs-content-script-detection}
 
 | Aspect | declarativeContent | Content Script Detection |
 |--------|-------------------|-------------------------|
-| **Performance** | No script injection | Requires content script |
-| **Timing** | Browser-level detection | Runs after page load |
-| **Permissions** | Needs `declarativeContent` permission | Needs host permissions + script injection |
-| **Reliability** | Immediate matching | May miss dynamic content |
-| **Use Case** | Simple element presence | Complex logic required |
+| Performance | No script injection | Requires content script |
+| Timing | Browser-level detection | Runs after page load |
+| Permissions | Needs `declarativeContent` permission | Needs host permissions + script injection |
+| Reliability | Immediate matching | May miss dynamic content |
+| Use Case | Simple element presence | Complex logic required |
 
-## MV3 Migration: pageAction → action {#mv3-migration-pageaction-action}
+MV3 Migration: pageAction → action {#mv3-migration-pageaction-action}
 
 In Manifest V3, `chrome.pageAction` is replaced by `chrome.action`. The declarativeContent API works with `chrome.action`:
 
@@ -174,7 +174,7 @@ chrome.pageAction.hide(tabId);
 new chrome.declarativeContent.ShowAction()
 ```
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 Add to `manifest.json`:
 
@@ -186,20 +186,20 @@ Add to `manifest.json`:
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Permissions: declarativeContent](../permissions/declarativeContent.md)
 - [Basic declarativeContent Pattern](../patterns/declarative-content.md)
 - [Action API Reference](../api-reference/action-api.md)
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Register rules in `onInstalled`**: Ensure rules are registered when the extension installs or updates
-2. **Use specific selectors**: More specific CSS selectors reduce false positives
-3. **Combine URL and CSS conditions**: Use both for precise targeting
-4. **Test thoroughly**: Test across different pages to ensure rules match as expected
+1. Register rules in `onInstalled`: Ensure rules are registered when the extension installs or updates
+2. Use specific selectors: More specific CSS selectors reduce false positives
+3. Combine URL and CSS conditions: Use both for precise targeting
+4. Test thoroughly: Test across different pages to ensure rules match as expected
 
-## Limitations {#limitations}
+Limitations {#limitations}
 
 - Cannot detect element state (e.g., visible, hidden, checked)
 - Cannot read element content or attributes

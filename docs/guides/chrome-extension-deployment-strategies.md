@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Deployment Strategies — Developer Guide"
+title: "Chrome Extension Deployment Strategies. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-deployment-strategies/"
 ---
@@ -8,22 +8,22 @@ canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-deploym
 
 This guide covers deployment strategies for Chrome extensions, from Chrome Web Store publishing to enterprise deployment and advanced release patterns.
 
-## Chrome Web Store Publishing Options {#chrome-web-store-publishing-options}
+Chrome Web Store Publishing Options {#chrome-web-store-publishing-options}
 
-### Public {#public}
+Public {#public}
 The extension is visible to everyone and searchable in the Chrome Web Store. Users can discover and install it directly.
 
-### Unlisted {#unlisted}
+Unlisted {#unlisted}
 The extension is not searchable but can be accessed via direct link. Ideal for beta testers or controlled releases without public visibility.
 
-### Private (Domain) {#private-domain}
+Private (Domain) {#private-domain}
 Available only to users within a specific Google Workspace domain. Perfect for internal organization tools.
 
 ---
 
-## Enterprise Deployment {#enterprise-deployment}
+Enterprise Deployment {#enterprise-deployment}
 
-### Chrome Enterprise Policy {#chrome-enterprise-policy}
+Chrome Enterprise Policy {#chrome-enterprise-policy}
 Deploy extensions organization-wide using Chrome Enterprise policies:
 
 ```json
@@ -37,12 +37,12 @@ Deploy extensions organization-wide using Chrome Enterprise policies:
 }
 ```
 
-### Force-Install Extensions {#force-install-extensions}
+Force-Install Extensions {#force-install-extensions}
 Use the admin console to push extensions to all managed devices without user interaction.
 
 ---
 
-## Self-Hosting {#self-hosting}
+Self-Hosting {#self-hosting}
 
 Host your own extension by specifying `update_url` in the manifest:
 
@@ -65,22 +65,22 @@ Create an update XML manifest:
 
 ---
 
-## Staged Rollout {#staged-rollout}
+Staged Rollout {#staged-rollout}
 
 Use Chrome Web Store's percentage rollout feature for cautious releases. Start with 1-5% and gradually increase based on error metrics and user feedback.
 
 ---
 
-## Canary/Beta Channels {#canarybeta-channels}
+Canary/Beta Channels {#canarybeta-channels}
 
 Maintain separate CWS listings for testing:
-- **Stable**: Production-ready releases
-- **Beta**: Pre-release for trusted testers
-- **Dev**: Active development for internal testing
+- Stable: Production-ready releases
+- Beta: Pre-release for trusted testers
+- Dev: Active development for internal testing
 
 ---
 
-## Feature Flags {#feature-flags}
+Feature Flags {#feature-flags}
 
 Deploy code but control visibility remotely:
 
@@ -107,17 +107,17 @@ if (isFeatureEnabled('newDashboard')) {
 
 ---
 
-## Version Numbering Strategy {#version-numbering-strategy}
+Version Numbering Strategy {#version-numbering-strategy}
 
 Use semantic versioning: `MAJOR.MINOR.PATCH`
 
-- **MAJOR**: Breaking changes or significant redesigns
-- **MINOR**: New features backward-compatible
-- **PATCH**: Bug fixes
+- MAJOR: Breaking changes or significant redesigns
+- MINOR: New features backward-compatible
+- PATCH: Bug fixes
 
 ---
 
-## Update Frequency {#update-frequency}
+Update Frequency {#update-frequency}
 
 Balance new features against Chrome Web Store review time (typically 24-72 hours). Consider:
 - Critical security patches: Immediate release
@@ -126,11 +126,11 @@ Balance new features against Chrome Web Store review time (typically 24-72 hours
 
 ---
 
-## Auto-Update Behavior {#auto-update-behavior}
+Auto-Update Behavior {#auto-update-behavior}
 
 Chrome checks for updates every few hours (varies by browser). Users can manually check via `chrome://extensions`.
 
-### Forcing Updates {#forcing-updates}
+Forcing Updates {#forcing-updates}
 
 Increase `minimum_chrome_version` in manifest to require users update:
 
@@ -142,7 +142,7 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 ---
 
-## Rollback Plan {#rollback-plan}
+Rollback Plan {#rollback-plan}
 
 1. Keep previous version's source available
 2. Monitor error rates post-release
@@ -150,23 +150,23 @@ Increase `minimum_chrome_version` in manifest to require users update:
 
 ---
 
-## Pre-Release Testing {#pre-release-testing}
+Pre-Release Testing {#pre-release-testing}
 
-- Use **Trusted Testers** in CWS developer dashboard
+- Use Trusted Testers in CWS developer dashboard
 - Run automated tests before submission
 - Test across Chrome versions and platforms
 
 ---
 
-## Related Resources {#related-resources}
+Related Resources {#related-resources}
 
 - [Publishing Guide](../publishing/publishing-guide.md)
 - [Version Management](../publishing/version-management.md)
 - [Automated Publishing](./chrome-extension-automated-publishing.md)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Extension Packaging](../guides/extension-packaging.md)
 - [Extension Updates](../guides/extension-updates.md)

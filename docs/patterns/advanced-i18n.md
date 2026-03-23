@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Advanced I18n — Best Practices"
+title: "Chrome Extension Advanced I18n. Best Practices"
 description: "Advanced internationalization patterns for multi-language extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/advanced-i18n/"
 ---
 
 # Advanced Internationalization Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The [basic i18n guide](../guides/internationalization.md) covers `chrome.i18n` fundamentals. This article tackles real-world patterns: dynamic locale switching, pluralization, RTL support, formatted dates/numbers, and type-safe message keys.
 
 ---
 
-## Pattern 1: Type-Safe Message Keys {#pattern-1-type-safe-message-keys}
+Pattern 1: Type-Safe Message Keys {#pattern-1-type-safe-message-keys}
 
 Prevent typos by generating TypeScript types from your `messages.json`:
 
@@ -32,7 +32,7 @@ const messages = JSON.parse(
 const keys = Object.keys(messages);
 const union = keys.map((k) => `  | "${k}"`).join("\n");
 
-const output = `// Auto-generated — do not edit
+const output = `// Auto-generated. do not edit
 export type MessageKey =
 ${union};
 
@@ -68,7 +68,7 @@ Add to your build:
 
 ---
 
-## Pattern 2: Pluralization {#pattern-2-pluralization}
+Pattern 2: Pluralization {#pattern-2-pluralization}
 
 Chrome's i18n has no built-in pluralization. Implement it with ICU-style patterns:
 
@@ -122,7 +122,7 @@ const msg = plural(tabCount, {
 
 ---
 
-## Pattern 3: Dynamic Locale Switching {#pattern-3-dynamic-locale-switching}
+Pattern 3: Dynamic Locale Switching {#pattern-3-dynamic-locale-switching}
 
 Chrome extensions use the browser's locale by default. To let users choose their own locale:
 
@@ -182,7 +182,7 @@ export function getLocale(): string {
 
 ---
 
-## Pattern 4: RTL (Right-to-Left) Support {#pattern-4-rtl-right-to-left-support}
+Pattern 4: RTL (Right-to-Left) Support {#pattern-4-rtl-right-to-left-support}
 
 Extensions must handle RTL languages like Arabic, Hebrew, and Persian:
 
@@ -243,7 +243,7 @@ CSS patterns for RTL:
 
 ---
 
-## Pattern 5: Formatted Dates and Numbers {#pattern-5-formatted-dates-and-numbers}
+Pattern 5: Formatted Dates and Numbers {#pattern-5-formatted-dates-and-numbers}
 
 Use `Intl` APIs with the extension's locale for consistent formatting:
 
@@ -298,7 +298,7 @@ formatRelativeTime(twoHoursAgo);
 
 ---
 
-## Pattern 6: DOM Localization with Data Attributes {#pattern-6-dom-localization-with-data-attributes}
+Pattern 6: DOM Localization with Data Attributes {#pattern-6-dom-localization-with-data-attributes}
 
 Automatically translate static UI elements without manual JavaScript:
 
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => localizeDOM());
 
 ---
 
-## Pattern 7: Locale-Aware Manifest Fields {#pattern-7-locale-aware-manifest-fields}
+Pattern 7: Locale-Aware Manifest Fields {#pattern-7-locale-aware-manifest-fields}
 
 Chrome automatically localizes manifest fields prefixed with `__MSG_`:
 
@@ -364,7 +364,7 @@ This works for:
 
 ---
 
-## Pattern 8: Missing Translation Fallback Chain {#pattern-8-missing-translation-fallback-chain}
+Pattern 8: Missing Translation Fallback Chain {#pattern-8-missing-translation-fallback-chain}
 
 When a message isn't available in the user's locale, implement a fallback chain:
 
@@ -391,7 +391,7 @@ export function getMessageWithFallback(
 
 ---
 
-## Validation Script {#validation-script}
+Validation Script {#validation-script}
 
 Catch missing translations before they ship:
 
@@ -436,7 +436,7 @@ process.exit(hasErrors ? 1 : 0);
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

@@ -17,27 +17,27 @@ This comprehensive guide walks you through creating a fully functional website u
 
 ---
 
-## Why Build a Website Monitor Extension? {#why-build-extension}
+Why Build a Website Monitor Extension? {#why-build-extension}
 
 The need for reliable website monitoring has never been greater. With businesses increasingly dependent on web services, even minutes of downtime can result in significant financial losses and damaged reputations. Building your own website monitor extension gives you complete control over what you monitor and how you receive alerts.
 
-### The Problem with Existing Solutions
+The Problem with Existing Solutions
 
 Many website monitoring tools exist, but they often come with significant limitations. Commercial uptime monitoring services typically charge per website or per check, making them expensive for monitoring multiple sites. Browser-based tools often require constant tab management or lack the ability to run checks when the browser is minimized. Additionally, many existing solutions are overly complicated, bundling monitoring with analytics, reporting, and other features you may not need.
 
-A custom website monitor extension solves these problems by providing exactly what you need—simple, efficient monitoring without unnecessary complexity. You can monitor unlimited websites, customize check intervals to your exact specifications, and receive notifications through Chrome's built-in notification system.
+A custom website monitor extension solves these problems by providing exactly what you need, simple, efficient monitoring without unnecessary complexity. You can monitor unlimited websites, customize check intervals to your exact specifications, and receive notifications through Chrome's built-in notification system.
 
-### Benefits of Chrome Extension Monitoring
+Benefits of Chrome Extension Monitoring
 
-Chrome extensions offer unique advantages for website monitoring. They integrate seamlessly with your browser, eliminating the need for separate applications. Since you likely keep Chrome open throughout your workday, your monitoring runs continuously without requiring additional resources or background processes. The extension can also leverage Chrome's storage APIs for persistent data, meaning your monitored sites and preferences are saved across browser sessions.
+Chrome extensions offer unique advantages for website monitoring. They integrate smoothly with your browser, eliminating the need for separate applications. Since you likely keep Chrome open throughout your workday, your monitoring runs continuously without requiring additional resources or background processes. The extension can also use Chrome's storage APIs for persistent data, meaning your monitored sites and preferences are saved across browser sessions.
 
 ---
 
-## Project Architecture and Features {#project-architecture}
+Project Architecture and Features {#project-architecture}
 
 Before diving into code, let's establish the architecture of our website uptime monitor Chrome extension. This ensures we build a scalable, maintainable solution that meets real-world needs.
 
-### Core Features
+Core Features
 
 Our site down checker extension will include the following essential features:
 
@@ -51,17 +51,17 @@ Fourth, visual and audio notifications alert you immediately when a website goes
 
 Fifth, persistent storage saves your monitored sites and settings, so you don't need to reconfigure everything each time you restart Chrome.
 
-### Technical Architecture
+Technical Architecture
 
 The extension uses Manifest V3, the latest Chrome extension platform, ensuring compatibility with modern Chrome features and security requirements. We'll implement a background service worker to handle periodic checks, a popup interface for managing monitored sites, and Chrome's storage API for data persistence.
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your project and set up the essential files. Your website monitor extension will need a manifest file, background script, popup interface, and content scripts.
 
-### Manifest Configuration
+Manifest Configuration
 
 The manifest.json file defines your extension's configuration and permissions. For an uptime checker Chrome extension, we need permissions for storage (to save monitored sites), notifications (to alert users), and background (to run the monitoring service).
 
@@ -94,11 +94,11 @@ This configuration establishes the foundation for your website monitor extension
 
 ---
 
-## Building the Background Monitoring Service {#background-service}
+Building the Background Monitoring Service {#background-service}
 
 The background service worker is the heart of your website monitor extension. It runs independently of the popup interface and handles periodic checks on all monitored websites.
 
-### Implementing the Monitoring Logic
+Implementing the Monitoring Logic
 
 Create the background.js file with the following implementation:
 
@@ -166,8 +166,8 @@ async function checkAllSites() {
 // Send notification for status change
 function sendNotification(siteName, status, url) {
   const title = status === 'down' 
-    ? '⚠️ Website Down!' 
-    : '✅ Website Back Up!';
+    ? ' Website Down!' 
+    : ' Website Back Up!';
   
   const message = status === 'down'
     ? `${siteName} (${url}) is not responding`
@@ -225,11 +225,11 @@ This background service handles continuous monitoring, checks websites at regula
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup interface provides users with an easy way to manage their monitored websites. Let's build an intuitive HTML and CSS interface.
 
-### HTML Structure
+HTML Structure
 
 Create popup.html with the following structure:
 
@@ -268,7 +268,7 @@ Create popup.html with the following structure:
 </html>
 ```
 
-### Styling the Interface
+Styling the Interface
 
 Create popup.css to style your popup:
 
@@ -410,7 +410,7 @@ footer {
 }
 ```
 
-### Popup JavaScript
+Popup JavaScript
 
 Create popup.js to handle user interactions:
 
@@ -502,59 +502,59 @@ function escapeHtml(text) {
 
 ---
 
-## Testing Your Website Monitor Extension {#testing}
+Testing Your Website Monitor Extension {#testing}
 
 Now that you've built all the components, it's time to test your website uptime monitor Chrome extension.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 Open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Click the "Load unpacked" button and select your extension folder. Your website monitor extension should now appear in the extension list.
 
-Click the extension icon in your browser toolbar to open the popup. Try adding a website to monitor—for example, "Google" with URL "https://google.com". The site should appear in your list.
+Click the extension icon in your browser toolbar to open the popup. Try adding a website to monitor, for example, "Google" with URL "https://google.com". The site should appear in your list.
 
-### Verifying the Monitoring Functionality
+Verifying the Monitoring Functionality
 
 After adding a site, wait for the background service to run a check (up to 5 minutes with default settings), or restart the extension to trigger an immediate check. You should see the status indicator change to green (up) for accessible websites.
 
 To test the down detection, add a URL for a site you know is down, or use a non-existent domain. The extension should detect the failure and display a red indicator.
 
-### Testing Notifications
+Testing Notifications
 
 When a website status changes from up to down or vice versa, Chrome should display a notification. Make sure Chrome notifications are enabled in your system settings to receive these alerts.
 
 ---
 
-## Best Practices and Enhancements {#best-practices}
+Best Practices and Enhancements {#best-practices}
 
 Now that you have a working site down checker extension, consider these improvements to make it even more powerful.
 
-### Adding Custom Check Intervals
+Adding Custom Check Intervals
 
 Currently, all websites are checked every 5 minutes. You can enhance the extension to allow per-site check intervals. Add an interval field to each site object in your storage, and modify the background service to check each site according to its individual interval.
 
-### Implementing Status History
+Implementing Status History
 
 Track historical uptime data by storing check results over time. This allows you to calculate uptime percentages and identify patterns in website availability. Display this information in the popup to provide valuable insights.
 
-### Adding HTTP Status Code Checking
+Adding HTTP Status Code Checking
 
 The current implementation only checks if a site responds. Enhance it to verify specific HTTP status codes, ensuring you distinguish between different types of failures (server errors vs. DNS failures vs. timeouts).
 
-### Supporting Multiple Check Locations
+Supporting Multiple Check Locations
 
 Consider adding support for checking websites from different geographic locations using serverless functions or a simple backend. This helps identify regional outages that might not be apparent from your location.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you've tested your website monitor extension thoroughly, you can publish it to the Chrome Web Store to share with others.
 
-### Preparing for Publication
+Preparing for Publication
 
 Update your manifest.json with complete metadata including a detailed description, screenshots, and a small promotional image. Create appropriately sized icons (128x128 for the store listing, plus 16, 48, and 96 pixel versions for the extension itself).
 
-### Submitting to the Chrome Web Store
+Submitting to the Chrome Web Store
 
 Create a developer account at the Chrome Web Store Developer Dashboard. Package your extension into a ZIP file and upload it through the dashboard. Fill in the store listing details, including the description that highlights your extension's key features: website monitor extension, uptime checker Chrome functionality, and site down checker capabilities.
 
@@ -562,7 +562,7 @@ After submission, Google reviews your extension (typically within a few hours to
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You've built a complete website uptime monitor Chrome extension from scratch. This site down checker extension provides essential functionality for anyone who needs to track website availability, from developers managing production services to businesses monitoring their online presence.
 

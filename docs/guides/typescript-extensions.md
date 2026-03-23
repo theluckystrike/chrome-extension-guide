@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension TypeScript Extensions — Developer Guide"
+title: "Chrome Extension TypeScript Extensions. Developer Guide"
 description: "Learn Chrome extension typescript extensions with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/typescript-extensions/"
 ---
@@ -8,15 +8,15 @@ canonical_url: "https://bestchromeextensions.com/guides/typescript-extensions/"
 
 TypeScript brings type safety, autocompletion, and confident refactoring to Chrome extension development.
 
-## Overview {#overview}
+Overview {#overview}
 
-### Why TypeScript for Extensions {#why-typescript-for-extensions}
+Why TypeScript for Extensions {#why-typescript-for-extensions}
 
-- **Type safety** — catch mismatched message shapes at compile time
-- **Autocompletion** — `chrome.tabs.query` returns fully typed `Tab[]` objects
-- **Confident refactoring** — rename fields, verify with `tsc`
+- Type safety. catch mismatched message shapes at compile time
+- Autocompletion. `chrome.tabs.query` returns fully typed `Tab[]` objects
+- Confident refactoring. rename fields, verify with `tsc`
 
-### Chrome API Types {#chrome-api-types}
+Chrome API Types {#chrome-api-types}
 
 Install `@types/chrome` for all Chrome extension API types:
 
@@ -24,7 +24,7 @@ Install `@types/chrome` for all Chrome extension API types:
 npm install --save-dev @types/chrome
 ```
 
-## Project Setup {#project-setup}
+Project Setup {#project-setup}
 
 ```bash
 mkdir my-extension && cd my-extension
@@ -33,7 +33,7 @@ npm install --save-dev typescript @types/chrome esbuild
 mkdir src
 ```
 
-### tsconfig.json {#tsconfigjson}
+tsconfig.json {#tsconfigjson}
 
 ```json
 {
@@ -50,9 +50,9 @@ mkdir src
 }
 ```
 
-## Build Pipeline {#build-pipeline}
+Build Pipeline {#build-pipeline}
 
-### esbuild (Recommended) {#esbuild-recommended}
+esbuild (Recommended) {#esbuild-recommended}
 
 ```typescript
 import * as esbuild from 'esbuild';
@@ -79,16 +79,16 @@ async function build() {
 build();
 ```
 
-## Typing Chrome APIs {#typing-chrome-apis}
+Typing Chrome APIs {#typing-chrome-apis}
 
-### Automatic Types {#automatic-types}
+Automatic Types {#automatic-types}
 
 ```typescript
 const tabs = await chrome.tabs.query({ active: true });
 // tabs is typed as chrome.tabs.Tab[]
 ```
 
-### Typed Message Passing {#typed-message-passing}
+Typed Message Passing {#typed-message-passing}
 
 Define messages as discriminated unions:
 
@@ -109,7 +109,7 @@ chrome.runtime.onMessage.addListener((msg: AllMessages, s, reply) => {
 
 Use `@theluckystrike/webext-messaging` for simpler typed wrappers.
 
-## Typed Storage {#typed-storage}
+Typed Storage {#typed-storage}
 
 ```typescript
 interface ExtensionSettings {
@@ -125,23 +125,23 @@ async function getSettings(): Promise<ExtensionSettings> {
 
 `@theluckystrike/webext-storage` provides typed get/set helpers.
 
-## Context-Specific Types {#context-specific-types}
+Context-Specific Types {#context-specific-types}
 
-### Content Scripts (DOM) {#content-scripts-dom}
+Content Scripts (DOM) {#content-scripts-dom}
 
 ```json
 { "compilerOptions": { "lib": ["ES2020", "DOM"] } }
 ```
 
-Access `chrome.runtime`, `chrome.storage`—not `chrome.tabs`. Use messaging.
+Access `chrome.runtime`, `chrome.storage`, not `chrome.tabs`. Use messaging.
 
-### Service Workers (WebWorker) {#service-workers-webworker}
+Service Workers (WebWorker) {#service-workers-webworker}
 
 ```json
 { "compilerOptions": { "lib": ["ES2020", "WebWorker"] } }
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 1. Install `@types/chrome` for automatic Chrome API typing
 2. Use esbuild for fast builds; Vite for framework UIs
@@ -150,13 +150,13 @@ Access `chrome.runtime`, `chrome.storage`—not `chrome.tabs`. Use messaging.
 5. Use separate tsconfigs: DOM for content scripts, WebWorker for service workers
 
 Cross-references:
-- `docs/guides/architecture-patterns.md` — structuring extensions
-- `docs/guides/ci-cd-pipeline.md` — automated builds
-- `docs/guides/debugging-extensions.md` — debugging typed code
+- `docs/guides/architecture-patterns.md`. structuring extensions
+- `docs/guides/ci-cd-pipeline.md`. automated builds
+- `docs/guides/debugging-extensions.md`. debugging typed code
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [TypeScript Setup](../guides/typescript-setup.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

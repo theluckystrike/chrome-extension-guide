@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Content Script To Service Worker Patterns — Best Practices"
+title: "Chrome Extension Content Script To Service Worker Patterns. Best Practices"
 description: "Communicate from content scripts to service workers."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-to-service-worker-patterns/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-to-serv
 
 This guide covers the communication patterns between content scripts and service workers in Chrome extensions. This is the most fundamental and error-prone part of extension development.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Ensure your manifest declares the necessary permissions:
 
@@ -23,7 +23,7 @@ Ensure your manifest declares the necessary permissions:
 
 ---
 
-## Simple Request-Response with sendMessage {#simple-request-response-with-sendmessage}
+Simple Request-Response with sendMessage {#simple-request-response-with-sendmessage}
 
 The most straightforward pattern uses chrome.runtime.sendMessage for one-off requests. The content script sends a message and receives a single response.
 
@@ -56,7 +56,7 @@ The return value of true tells Chrome the response will arrive asynchronously.
 
 ---
 
-## Long-Lived Connections with connect {#long-lived-connections-with-connect}
+Long-Lived Connections with connect {#long-lived-connections-with-connect}
 
 For ongoing communication, use chrome.runtime.connect to establish a port. This survives service worker restarts more gracefully.
 
@@ -81,7 +81,7 @@ Ports handle reconnection automatically when the service worker wakes up.
 
 ---
 
-## Streaming Data from Service Worker {#streaming-data-from-service-worker}
+Streaming Data from Service Worker {#streaming-data-from-service-worker}
 
 When you need continuous data flow, establish a persistent port and use it as an event emitter.
 
@@ -113,7 +113,7 @@ function sendUpdate(tabId: number, data: unknown) {
 
 ---
 
-## Broadcasting to All Content Scripts {#broadcasting-to-all-content-scripts}
+Broadcasting to All Content Scripts {#broadcasting-to-all-content-scripts}
 
 Use tabs.query to find all active tabs and send messages to each content script.
 
@@ -141,7 +141,7 @@ async function broadcastToAllContentScripts(message: unknown) {
 
 ---
 
-## Permission-Gated Actions Through Service Worker {#permission-gated-actions-through-service-worker}
+Permission-Gated Actions Through Service Worker {#permission-gated-actions-through-service-worker}
 
 Content scripts cannot directly access many Chrome APIs. Route requests through the service worker.
 
@@ -166,7 +166,7 @@ This pattern lets you perform restricted operations while keeping your content s
 
 ---
 
-## Handling Service Worker Restarts {#handling-service-worker-restarts}
+Handling Service Worker Restarts {#handling-service-worker-restarts}
 
 Service workers can terminate after inactivity. Your code must handle this gracefully.
 
@@ -209,7 +209,7 @@ This queue ensures no messages are lost during service worker restarts.
 
 ---
 
-## Type-Safe Messaging Patterns {#type-safe-messaging-patterns}
+Type-Safe Messaging Patterns {#type-safe-messaging-patterns}
 
 Define a shared types file to ensure type safety across contexts.
 
@@ -229,7 +229,7 @@ Import this type definition in both your content script and service worker for c
 
 ---
 
-## Error Propagation Across Contexts {#error-propagation-across-contexts}
+Error Propagation Across Contexts {#error-propagation-across-contexts}
 
 Always propagate errors explicitly rather than letting them disappear.
 
@@ -257,7 +257,7 @@ This gives the content script full context about what went wrong.
 
 ---
 
-## Performance Patterns with Batching {#performance-patterns-with-batching}
+Performance Patterns with Batching {#performance-patterns-with-batching}
 
 When sending many messages, batch them to reduce overhead.
 
@@ -295,7 +295,7 @@ Batching reduces the number of service worker wake-ups significantly.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 These patterns form the backbone of content script to service worker communication. Choose the right pattern based on your use case. For simple requests, sendMessage works well. For ongoing communication, prefer connect with proper reconnection logic.
 

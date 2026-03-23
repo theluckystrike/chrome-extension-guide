@@ -16,11 +16,11 @@ The reality is that modern websites have grown exponentially more complex over t
 
 ---
 
-## Chrome's RAM Appetite Explained {#chromes-ram-appetite-explained}
+Chrome's RAM Appetite Explained {#chromes-ram-appetite-explained}
 
 To effectively optimize Chrome for low-RAM computers, you must first understand why the browser consumes so much memory in the first place. Chrome's architecture is fundamentally different from older browsers, and understanding these differences will help you appreciate why Tab Suspender Pro is so effective at addressing the problem.
 
-Chrome employs a multi-process model where each tab runs in its own isolated renderer process. This design choice provides excellent security and stability—if one tab crashes, it does not take down your entire browser. However, each renderer process carries its own memory overhead, typically consuming 10-20MB even for completely blank tabs. When you add actual website content to the mix, memory usage explodes. A single tab displaying a complex modern website can consume anywhere from 100MB to 500MB or more, depending on the content.
+Chrome employs a multi-process model where each tab runs in its own isolated renderer process. This design choice provides excellent security and stability, if one tab crashes, it does not take down your entire browser. However, each renderer process carries its own memory overhead, typically consuming 10-20MB even for completely blank tabs. When you add actual website content to the mix, memory usage explodes. A single tab displaying a complex modern website can consume anywhere from 100MB to 500MB or more, depending on the content.
 
 The situation compounds dramatically with multiple tabs. Unlike older browsers that shared a single process across all tabs, Chrome's approach means that twenty tabs consume approximately twenty times the base memory overhead plus the content memory for each site. A user who habitually keeps thirty or forty tabs open may find Chrome consuming 8GB or more of RAM alone, leaving virtually nothing for the operating system and other applications on a 4GB machine.
 
@@ -32,13 +32,13 @@ Chrome also maintains extensive caches to improve performance. The browser cache
 
 ---
 
-## Why 2-4GB Systems Struggle {#why-2-4gb-systems-struggle}
+Why 2-4GB Systems Struggle {#why-2-4gb-systems-struggle}
 
 Computers with 2GB or 4GB of RAM face unique challenges that make modern web browsing particularly painful. Understanding these challenges helps explain why Tab Suspender Pro is not just helpful but absolutely essential for these systems.
 
 A computer with 2GB of RAM has approximately 1.5GB to 1.8GB of actually usable memory after the operating system reserves resources for its own needs. Opening just three or four modern web tabs can consume this entire allocation, leaving no memory for other applications or even the operating system's normal operations. When memory is exhausted, the system begins swapping data to the hard drive, which is orders of magnitude slower than RAM. This swapping causes the severe stuttering, freezing, and unresponsiveness that low-RAM users know all too well.
 
-Systems with 4GB of RAM fare somewhat better but still struggle significantly with typical browsing behavior. After the operating system consumes its share, perhaps 3GB to 3.5GB remains available for applications. A user who opens ten tabs across various websites will likely exceed this allocation, triggering the same swap-based performance degradation. The situation becomes especially dire when users also run other applications simultaneously—email clients, messaging apps, music players, and productivity software all compete for the same limited memory resources.
+Systems with 4GB of RAM fare somewhat better but still struggle significantly with typical browsing behavior. After the operating system consumes its share, perhaps 3GB to 3.5GB remains available for applications. A user who opens ten tabs across various websites will likely exceed this allocation, triggering the same swap-based performance degradation. The situation becomes especially dire when users also run other applications simultaneously, email clients, messaging apps, music players, and productivity software all compete for the same limited memory resources.
 
 The Chrome browser itself becomes a memory hog on these systems due to its multi-process architecture. Even if Chrome's total memory usage stays within available RAM, the fragmentation of memory across numerous renderer processes creates inefficiency. Chrome's memory management can struggle to allocate new chunks efficiently when memory becomes fragmented across dozens of processes, leading to the appearance of memory exhaustion even when some RAM technically remains available.
 
@@ -48,7 +48,7 @@ The user experience on low-RAM systems without optimization is characterized by 
 
 ---
 
-## Aggressive Suspension Settings for Low RAM {#aggressive-suspension-settings-for-low-ram}
+Aggressive Suspension Settings for Low RAM {#aggressive-suspension-settings-for-low-ram}
 
 Making Tab Suspender Pro effective on 2-4GB RAM systems requires configuring aggressive suspension settings that prioritize memory conservation over convenience. The default settings are designed for typical users with adequate memory, but low-RAM systems need a much more proactive approach to tab suspension.
 
@@ -64,7 +64,7 @@ Consider enabling the "suspend all tabs on startup" option if you typically star
 
 ---
 
-## Recommended Max Active Tabs {#recommended-max-active-tabs}
+Recommended Max Active Tabs {#recommended-max-active-tabs}
 
 For computers with 2-4GB of RAM, limiting the number of simultaneously active tabs is essential for maintaining acceptable performance. Tab Suspender Pro can help you enforce these limits through its built-in tab counting features and by automatically suspending excess tabs.
 
@@ -74,13 +74,13 @@ Systems with 4GB of RAM can comfortably handle five to seven active tabs, though
 
 Tab Suspender Pro can help enforce these limits through its various settings. Look for options that limit the total number of open tabs or automatically suspend tabs when a threshold is exceeded. Some versions allow you to configure automatic suspension of the least-recently-used tab when you open a new one beyond your specified limit. This automatic management removes the cognitive burden of constantly monitoring your tab count.
 
-The key principle is treating tabs as temporary resources rather than permanent storage. Instead of keeping numerous tabs open "for later," develop the habit of closing tabs you no longer need and reopening them later if necessary. Tab Suspender Pro makes this workflow practical because reopening a suspended tab is nearly instantaneous—the extension remembers your scroll position and can restore the page content quickly when you return to it.
+The key principle is treating tabs as temporary resources rather than permanent storage. Instead of keeping numerous tabs open "for later," develop the habit of closing tabs you no longer need and reopening them later if necessary. Tab Suspender Pro makes this workflow practical because reopening a suspended tab is nearly instantaneous, the extension remembers your scroll position and can restore the page content quickly when you return to it.
 
 Using bookmarking in conjunction with Tab Suspender Pro can transform your browsing habits. When you find a page you want to read later, bookmark it and let Tab Suspender Pro suspend the tab. The bookmark preserves the link, and you can restore the page whenever you are ready to read it. This approach keeps your active tab count low while still maintaining access to all the content you want to explore.
 
 ---
 
-## Combining with Chrome Flags for Memory Savings {#combining-with-chrome-flags-for-memory-savings}
+Combining with Chrome Flags for Memory Savings {#combining-with-chrome-flags-for-memory-savings}
 
 Tab Suspender Pro works even better when combined with Chrome's built-in memory optimization flags. These experimental features provide additional memory savings that complement the extension's tab suspension capabilities, creating a comprehensive memory management strategy for low-RAM systems.
 
@@ -98,7 +98,7 @@ Finally, consider disabling hardware acceleration if your system struggles with 
 
 ---
 
-## Alternative Lightweight Browsers vs Tab Suspender Pro {#alternative-lightweight-browsers-vs-tab-suspender-pro}
+Alternative Lightweight Browsers vs Tab Suspender Pro {#alternative-lightweight-browsers-vs-tab-suspender-pro}
 
 While Tab Suspender Pro can dramatically improve Chrome's performance on low-RAM systems, some users wonder whether switching to a lighter browser might be a better solution. Evaluating these alternatives helps you make an informed decision about the best approach for your specific situation.
 
@@ -114,8 +114,8 @@ For most users with low-RAM computers who are invested in the Chrome ecosystem, 
 
 ---
 
-## Conclusion
+Conclusion
 
 Living with a computer that has only 2GB or 4GB of RAM does not mean you must endure sluggish browser performance or give up on modern web browsing. Tab Suspender Pro transforms Chrome from a memory-hungry application into one that respects your system constraints while still providing access to the full modern web. By understanding Chrome's memory architecture, configuring aggressive suspension settings, limiting your active tab count, leveraging Chrome's built-in memory features, and making informed choices about browser alternatives, you can achieve a smooth and productive browsing experience even on modest hardware.
 
-The key takeaways for low-RAM systems are straightforward: set your suspension timeout as short as possible, enable Low Memory Mode with an early trigger threshold, keep your whitelist minimal, limit active tabs to two to five depending on your RAM capacity, and combine Tab Suspender Pro with Chrome's native memory features for comprehensive optimization. With these strategies in place, Chrome becomes not just usable but genuinely pleasant on computers that others might have considered obsolete. Do not let limited RAM hold you back from enjoying the modern web—let Tab Suspender Pro unlock your browser's full potential.
+The key takeaways for low-RAM systems are straightforward: set your suspension timeout as short as possible, enable Low Memory Mode with an early trigger threshold, keep your whitelist minimal, limit active tabs to two to five depending on your RAM capacity, and combine Tab Suspender Pro with Chrome's native memory features for comprehensive optimization. With these strategies in place, Chrome becomes not just usable but genuinely pleasant on computers that others might have considered obsolete. Do not let limited RAM hold you back from enjoying the modern web, let Tab Suspender Pro unlock your browser's full potential.

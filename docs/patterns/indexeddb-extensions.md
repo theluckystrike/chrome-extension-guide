@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Indexeddb Extensions — Best Practices"
+title: "Chrome Extension Indexeddb Extensions. Best Practices"
 description: "Use IndexedDB for persistent client-side storage in Chrome extension content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/indexeddb-extensions/"
 ---
 
 # IndexedDB in Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
-`chrome.storage.local` works well for simple key-value data, but it falls apart when your extension needs to store thousands of structured records, run range queries, or manage data larger than 10 MB. IndexedDB gives you a full transactional database inside your extension — but it comes with its own quirks, especially in Manifest V3 service workers where the database connection can vanish when the worker terminates. This guide covers eight patterns for using IndexedDB effectively in Chrome extensions.
+`chrome.storage.local` works well for simple key-value data, but it falls apart when your extension needs to store thousands of structured records, run range queries, or manage data larger than 10 MB. IndexedDB gives you a full transactional database inside your extension. but it comes with its own quirks, especially in Manifest V3 service workers where the database connection can vanish when the worker terminates. This guide covers eight patterns for using IndexedDB effectively in Chrome extensions.
 
 ---
 
-## When to Use IndexedDB vs. chrome.storage {#when-to-use-indexeddb-vs-chromestorage}
+When to Use IndexedDB vs. chrome.storage {#when-to-use-indexeddb-vs-chromestorage}
 
 | Criteria | `chrome.storage.local` | IndexedDB |
 |----------|----------------------|-----------|
@@ -30,12 +30,12 @@ Use `chrome.storage` for settings and small state. Use IndexedDB when you need t
 
 ---
 
-## Pattern 1: Why IndexedDB (When chrome.storage Is Not Enough) {#pattern-1-why-indexeddb-when-chromestorage-is-not-enough}
+Pattern 1: Why IndexedDB (When chrome.storage Is Not Enough) {#pattern-1-why-indexeddb-when-chromestorage-is-not-enough}
 
 Consider a browser history analyzer extension that stores page visit metadata:
 
 ```ts
-// With chrome.storage.local — everything in one key, loaded entirely into memory
+// With chrome.storage.local. everything in one key, loaded entirely into memory
 const { visits = [] } = await chrome.storage.local.get("visits");
 const filtered = visits.filter(
   (v: Visit) => v.timestamp > weekAgo && v.domain === "github.com"
@@ -44,7 +44,7 @@ const filtered = visits.filter(
 ```
 
 ```ts
-// With IndexedDB — query only what you need via an index
+// With IndexedDB. query only what you need via an index
 const tx = db.transaction("visits", "readonly");
 const index = tx.objectStore("visits").index("by-domain-time");
 const range = IDBKeyRange.bound(
@@ -62,7 +62,7 @@ IndexedDB wins when: (1) your dataset exceeds a few hundred records, (2) you nee
 
 ---
 
-## Pattern 2: Database Setup with Versioned Schema {#pattern-2-database-setup-with-versioned-schema}
+Pattern 2: Database Setup with Versioned Schema {#pattern-2-database-setup-with-versioned-schema}
 
 Structure your database with explicit version numbers and upgrade handlers:
 
@@ -111,13 +111,13 @@ export function openDatabase(): Promise<IDBDatabase> {
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
     request.onblocked = () => {
-      reject(new Error("Database upgrade blocked — close other tabs"));
+      reject(new Error("Database upgrade blocked. close other tabs"));
     };
   });
 }
 ```
 
-### Gotcha: Blocked Upgrades {#gotcha-blocked-upgrades}
+Gotcha: Blocked Upgrades {#gotcha-blocked-upgrades}
 
 If another tab has an open connection to the database at an older version, the upgrade will be blocked. Handle `onblocked` and listen for `onversionchange` on existing connections:
 
@@ -128,13 +128,13 @@ const db = await openDatabase();
 db.onversionchange = () => {
   db.close();
   // Notify user or reload the page
-  console.warn("Database upgrade needed — closing connection");
+  console.warn("Database upgrade needed. closing connection");
 };
 ```
 
 ---
 
-## Pattern 3: Typed CRUD Wrapper Class {#pattern-3-typed-crud-wrapper-class}
+Pattern 3: Typed CRUD Wrapper Class {#pattern-3-typed-crud-wrapper-class}
 
 The raw IndexedDB API is verbose. Wrap it in a type-safe class:
 
@@ -237,7 +237,7 @@ interface Visit {
 
 const visitStore = new TypedStore<Visit>(openDatabase, "visits");
 
-// Fully typed — TypeScript enforces the Visit shape
+// Fully typed. TypeScript enforces the Visit shape
 await visitStore.put({
   id: 1,
   url: "https://github.com",
@@ -251,14 +251,14 @@ const visit = await visitStore.get(1); // Visit | undefined
 
 ---
 
-## Pattern 4: Indexes and Querying {#pattern-4-indexes-and-querying}
+Pattern 4: Indexes and Querying {#pattern-4-indexes-and-querying}
 
 Indexes are what make IndexedDB useful beyond a key-value store. Use them for range queries, sorting, and compound lookups:
 
 ```ts
 // lib/idb-query.ts
 
-/** Iterate an IDB cursor as an async generator */
+/ Iterate an IDB cursor as an async generator */
 async function* iterateCursor<T>(
   request: IDBRequest<IDBCursorWithValue | null>
 ): AsyncGenerator<T> {
@@ -275,7 +275,7 @@ async function* iterateCursor<T>(
   }
 }
 
-/** Query an index with optional bounds and limit */
+/ Query an index with optional bounds and limit */
 export async function queryIndex<T>(
   db: IDBDatabase,
   storeName: string,
@@ -341,13 +341,13 @@ const githubVisits = await queryIndex<Visit>(
 );
 ```
 
-### Compound Index Key Ordering {#compound-index-key-ordering}
+Compound Index Key Ordering {#compound-index-key-ordering}
 
-Compound index keys are compared left-to-right. The index `["domain", "timestamp"]` groups records by domain first, then sorts by timestamp within each domain. You cannot query by timestamp alone using this index — you need a separate `by-timestamp` index for that.
+Compound index keys are compared left-to-right. The index `["domain", "timestamp"]` groups records by domain first, then sorts by timestamp within each domain. You cannot query by timestamp alone using this index. you need a separate `by-timestamp` index for that.
 
 ---
 
-## Pattern 5: IndexedDB in Service Workers {#pattern-5-indexeddb-in-service-workers}
+Pattern 5: IndexedDB in Service Workers {#pattern-5-indexeddb-in-service-workers}
 
 Service workers are the trickiest context for IndexedDB. The worker can terminate mid-transaction, and the database connection becomes stale on wake:
 
@@ -356,7 +356,7 @@ Service workers are the trickiest context for IndexedDB. The worker can terminat
 
 let dbInstance: IDBDatabase | null = null;
 
-/**
+/
  * Get a database connection, reopening if the previous one was closed.
  * Service workers may terminate and restart, invalidating old connections.
  */
@@ -389,7 +389,7 @@ export async function getDatabase(): Promise<IDBDatabase> {
 ```
 
 ```ts
-// background.ts — Using getDatabase in message handlers
+// background.ts. Using getDatabase in message handlers
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === "GET_VISITS") {
@@ -413,17 +413,17 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Gotcha: Long-Running Transactions {#gotcha-long-running-transactions}
+Gotcha: Long-Running Transactions {#gotcha-long-running-transactions}
 
 Do not start a transaction and then `await` something unrelated before completing it. IndexedDB transactions auto-commit when the event loop is idle. If the service worker sleeps between operations, the transaction will commit prematurely or fail:
 
 ```ts
-// BAD — transaction may auto-commit during the fetch
+// BAD. transaction may auto-commit during the fetch
 const tx = db.transaction("cache", "readwrite");
 const data = await fetch("https://api.example.com/data"); // Transaction dies here
 tx.objectStore("cache").put(await data.json());
 
-// GOOD — fetch first, then write in one synchronous burst
+// GOOD. fetch first, then write in one synchronous burst
 const data = await fetch("https://api.example.com/data");
 const json = await data.json();
 const tx = db.transaction("cache", "readwrite");
@@ -432,7 +432,7 @@ tx.objectStore("cache").put(json);
 
 ---
 
-## Pattern 6: Background Data Import/Export with Progress {#pattern-6-background-data-importexport-with-progress}
+Pattern 6: Background Data Import/Export with Progress {#pattern-6-background-data-importexport-with-progress}
 
 For extensions that import or export large datasets (bookmarks, history, saved articles), use chunked processing with progress reporting:
 
@@ -524,7 +524,7 @@ export async function exportRecords<T>(
 ```
 
 ```ts
-// background.ts — Wire import/export to messaging
+// background.ts. Wire import/export to messaging
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "IMPORT_DATA") {
@@ -548,7 +548,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Pattern 7: Storage Quota Management and Cleanup {#pattern-7-storage-quota-management-and-cleanup}
+Pattern 7: Storage Quota Management and Cleanup {#pattern-7-storage-quota-management-and-cleanup}
 
 IndexedDB storage is quota-managed. Monitor usage and implement cleanup strategies to avoid hitting the limit:
 
@@ -605,7 +605,7 @@ export async function cleanupOldRecords(
 ```
 
 ```ts
-// background.ts — Periodic cleanup via alarms
+// background.ts. Periodic cleanup via alarms
 
 const CLEANUP_ALARM = "db-cleanup";
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -620,7 +620,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
   if (quota.percentUsed > QUOTA_WARN_PERCENT) {
     console.warn(
-      `[storage] ${quota.percentUsed.toFixed(1)}% quota used — running cleanup`
+      `[storage] ${quota.percentUsed.toFixed(1)}% quota used. running cleanup`
     );
 
     const db = await getDatabase();
@@ -635,7 +635,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Requesting Persistent Storage {#requesting-persistent-storage}
+Requesting Persistent Storage {#requesting-persistent-storage}
 
 By default, the browser can evict IndexedDB data under storage pressure. Request persistent storage to prevent this:
 
@@ -651,7 +651,7 @@ Extensions with the `unlimitedStorage` permission automatically get persistent s
 
 ---
 
-## Pattern 8: Migration from chrome.storage.local to IndexedDB {#pattern-8-migration-from-chromestoragelocal-to-indexeddb}
+Pattern 8: Migration from chrome.storage.local to IndexedDB {#pattern-8-migration-from-chromestoragelocal-to-indexeddb}
 
 When an extension outgrows `chrome.storage.local`, migrate existing data without losing user state:
 
@@ -732,7 +732,7 @@ export async function runMigrations(db: IDBDatabase): Promise<void> {
       console.log(`[migration] Completed migration v${step.version}`);
     } catch (error) {
       console.error(`[migration] Failed at v${step.version}:`, error);
-      // Stop on first failure — don't skip migrations
+      // Stop on first failure. don't skip migrations
       throw error;
     }
   }
@@ -740,7 +740,7 @@ export async function runMigrations(db: IDBDatabase): Promise<void> {
 ```
 
 ```ts
-// background.ts — Run migrations on install/update
+// background.ts. Run migrations on install/update
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === "install" || details.reason === "update") {
@@ -754,16 +754,16 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-### Migration Safety Rules {#migration-safety-rules}
+Migration Safety Rules {#migration-safety-rules}
 
 1. Always remove data from `chrome.storage` only after the IndexedDB write commits successfully.
-2. Track migration version separately from the IndexedDB schema version — they serve different purposes.
+2. Track migration version separately from the IndexedDB schema version. they serve different purposes.
 3. Never skip a failed migration step. If step 2 fails, do not run step 3.
 4. Test migrations with real user data sizes. A migration that works with 100 records may time out with 50,000.
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|
@@ -776,7 +776,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 | Quota management and cleanup | Monitoring storage usage and evicting stale data |
 | Migration from chrome.storage | Moving existing user data without loss or downtime |
 
-IndexedDB is the right tool when your extension manages structured data at scale. Wrap the raw API in typed helpers, manage your schema with versioned upgrades, and always account for the service worker lifecycle. The patterns above give you a production-ready foundation — start with the CRUD wrapper and add indexes and migrations as your data model grows.
+IndexedDB is the right tool when your extension manages structured data at scale. Wrap the raw API in typed helpers, manage your schema with versioned upgrades, and always account for the service worker lifecycle. The patterns above give you a production-ready foundation. start with the CRUD wrapper and add indexes and migrations as your data model grows.
 -e 
 ---
 

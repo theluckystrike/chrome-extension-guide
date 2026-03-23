@@ -17,61 +17,61 @@ This comprehensive guide walks you through setting up Webpack for Chrome extensi
 
 ---
 
-## Why Use Webpack for Chrome Extensions? {#why-webpack}
+Why Use Webpack for Chrome Extensions? {#why-webpack}
 
 Before diving into the technical setup, it is worth understanding why Webpack has become the preferred bundler for Chrome extension development. Chrome extensions present unique challenges that Webpack addresses elegantly.
 
-### The Complexity of Modern Extension Architecture
+The Complexity of Modern Extension Architecture
 
 Modern Chrome extensions with Manifest V3 typically consist of multiple components: background service workers, popup pages, options pages, content scripts, and various UI components. Each of these pieces may have different dependencies, bundling requirements, and runtime contexts. Managing these without a build system quickly becomes chaotic.
 
 Webpack solves this by treating your entire extension as a graph of dependencies. It analyzes your code, resolves imports and exports, optimizes the bundle, and produces output files that Chrome can load directly. This approach eliminates the manual process of concatenating files and managing script tags.
 
-### Key Benefits of Webpack Bundling
+Key Benefits of Webpack Bundling
 
-**Code Splitting**: Webpack can split your code into separate chunks that load on demand. For extensions, this means users download only the JavaScript they need. Your popup code does not need to include logic for the options page, and content scripts can remain lightweight.
+Code Splitting: Webpack can split your code into separate chunks that load on demand. For extensions, this means users download only the JavaScript they need. Your popup code does not need to include logic for the options page, and content scripts can remain lightweight.
 
-**Tree Shaking**: ES6 modules allow Webpack to eliminate dead code. If you import a utility library but only use one function, Webpack excludes everything else from your bundle. This significantly reduces file sizes.
+Tree Shaking: ES6 modules allow Webpack to eliminate dead code. If you import a utility library but only use one function, Webpack excludes everything else from your bundle. This significantly reduces file sizes.
 
-**Asset Management**: Webpack handles images, fonts, CSS, and other assets seamlessly. You can import these resources directly in your JavaScript, and Webpack processes them appropriately.
+Asset Management: Webpack handles images, fonts, CSS, and other assets smoothly. You can import these resources directly in your JavaScript, and Webpack processes them appropriately.
 
-**Development Experience**: Hot module replacement, source maps, and the development server dramatically speed up iteration. You see changes instantly without manually reloading your extension.
+Development Experience: Hot module replacement, source maps, and the development server dramatically speed up iteration. You see changes instantly without manually reloading your extension.
 
-**Consistency**: A proper build pipeline ensures your extension behaves identically in development and production. No more "it works on my machine" issues.
+Consistency: A proper build pipeline ensures your extension behaves identically in development and production. No more "it works on my machine" issues.
 
 ---
 
-## Project Structure and Initial Setup {#project-structure}
+Project Structure and Initial Setup {#project-structure}
 
 Let us start by setting up a proper project structure for a Webpack-bundled Chrome extension. This structure works well for extensions of any complexity.
 
 ```
 my-extension/
-├── src/
-│   ├── background/
-│   │   └── index.js
-│   ├── popup/
-│   │   ├── index.html
-│   │   ├── index.js
-│   │   └── styles.css
-│   ├── options/
-│   │   ├── index.html
-│   │   └── index.js
-│   ├── content/
-│   │   └── content.js
-│   └── shared/
-│       └── utils.js
-├── public/
-│   ├── manifest.json
-│   └── icons/
-├── webpack.config.js
-├── package.json
-└── .babelrc
+ src/
+    background/
+       index.js
+    popup/
+       index.html
+       index.js
+       styles.css
+    options/
+       index.html
+       index.js
+    content/
+       content.js
+    shared/
+        utils.js
+ public/
+    manifest.json
+    icons/
+ webpack.config.js
+ package.json
+ .babelrc
 ```
 
 This structure separates your code into logical directories while keeping the manifest and static assets in a public folder that Webpack copies directly to the output.
 
-### Installing Dependencies
+Installing Dependencies
 
 Initialize your project and install the necessary dependencies:
 
@@ -85,11 +85,11 @@ You will also need Chrome or Chromium to test your extension, but that installat
 
 ---
 
-## Webpack Configuration for Chrome Extensions {#webpack-config}
+Webpack Configuration for Chrome Extensions {#webpack-config}
 
 The webpack.config.js file is the heart of your build system. For Chrome extensions, you need a configuration that handles multiple entry points and produces output compatible with Chrome extension requirements.
 
-### Basic Configuration
+Basic Configuration
 
 ```javascript
 const path = require('path');
@@ -169,7 +169,7 @@ module.exports = (env, argv) => {
 
 This configuration creates separate bundles for each entry point: background, popup, options, and content scripts. The HtmlWebpackPlugin generates HTML files for your popup and options pages, injecting the bundled JavaScript automatically. The CopyWebpackPlugin transfers your manifest and icon assets to the output directory.
 
-### Manifest V3 Configuration
+Manifest V3 Configuration
 
 Your manifest.json must reference the bundled JavaScript files correctly:
 
@@ -202,7 +202,7 @@ Note that the filenames match the output names from your webpack configuration. 
 
 ---
 
-## Babel Configuration for Cross-Browser Compatibility {#babel-config}
+Babel Configuration for Cross-Browser Compatibility {#babel-config}
 
 Modern JavaScript features make your code cleaner and more maintainable, but Chrome extensions must run in browsers that may not support the latest syntax. Babel transpiles your modern code to compatible JavaScript that runs everywhere.
 
@@ -227,11 +227,11 @@ You can adjust the Chrome version target based on your minimum supported browser
 
 ---
 
-## Advanced Bundling Strategies {#advanced-strategies}
+Advanced Bundling Strategies {#advanced-strategies}
 
 Once you have the basic setup working, you can implement advanced strategies that significantly improve your extension.
 
-### Code Splitting for Background Scripts
+Code Splitting for Background Scripts
 
 Background service workers have a 2-minute execution timeout in Manifest V3. Heavy computation can trigger this timeout, causing your extension to fail. Code splitting helps by separating rarely-used code from the critical path.
 
@@ -259,7 +259,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 Using dynamic imports with import(), Webpack creates a separate chunk for heavyOperation.js. This chunk loads only when the message handler triggers it, keeping your initial service worker bundle small and fast.
 
-### Shared Code and Common Chunks
+Shared Code and Common Chunks
 
 Multiple parts of your extension likely share utility functions, API clients, or common components. Webpack can extract this shared code into a common chunk that loads once and caches.
 
@@ -291,11 +291,11 @@ This configuration creates a vendors chunk for third-party code and a common chu
 
 ---
 
-## Handling CSS and Styling {#css-handling}
+Handling CSS and Styling {#css-handling}
 
 Chrome extensions support CSS in popup, options, and content scripts, but the scoping works differently in each context. Proper CSS handling ensures your styles apply correctly without conflicts.
 
-### Popup and Options Pages
+Popup and Options Pages
 
 For popup and options pages, CSS works like regular web pages:
 
@@ -310,7 +310,7 @@ document.querySelector('.button').classList.add(styles.button);
 
 Webpack's css-loader supports CSS modules, which scope class names to prevent conflicts. This is particularly valuable when your extension injects content scripts that might share class names with the host page.
 
-### Content Script Styles
+Content Script Styles
 
 Content scripts operate in the host page context, making global styles dangerous. Chrome provides the shadow DOM for style isolation, but the simplest approach is using unique class names or CSS modules.
 
@@ -335,11 +335,11 @@ This technique completely isolates your styles from the page, preventing conflic
 
 ---
 
-## Development Workflow and Testing {#development-workflow}
+Development Workflow and Testing {#development-workflow}
 
 A proper development workflow makes building extensions pleasant rather than painful. Here is how to set up an efficient development cycle.
 
-### Watching for Changes
+Watching for Changes
 
 Configure your package.json with development scripts:
 
@@ -355,7 +355,7 @@ Configure your package.json with development scripts:
 
 The start command launches a development server that serves your extension files. However, Chrome extensions cannot load directly from localhost. The watch command builds continuously to your dist folder, which you then reload in Chrome.
 
-### Loading Your Extension in Chrome
+Loading Your Extension in Chrome
 
 To load your extension for testing:
 
@@ -370,11 +370,11 @@ For faster iteration, consider using Chrome's hot reloading extension, which aut
 
 ---
 
-## Production Optimization {#production-optimization}
+Production Optimization {#production-optimization}
 
 When you prepare to publish, optimization becomes critical. Users abandon slow extensions, and the Chrome Web Store may reject bundles that are excessively large.
 
-### Minification and Compression
+Minification and Compression
 
 Webpack production mode enables minification automatically. For additional compression, consider the compression-webpack-plugin:
 
@@ -397,7 +397,7 @@ plugins: [
 
 This creates gzipped versions of your bundles, which Chrome can serve to compatible browsers, reducing download size significantly.
 
-### Source Maps for Debugging
+Source Maps for Debugging
 
 Source maps let you debug your original source code even after minification. Configure them carefully for production:
 
@@ -409,7 +409,7 @@ module.exports = {
 
 Production source maps should be separate files, not inline, to keep bundle sizes small. Upload source maps to the Chrome Web Store separately if you want to receive stack traces from production errors.
 
-### Analyzing Bundle Size
+Analyzing Bundle Size
 
 The webpack-bundle-analyzer helps identify large dependencies:
 
@@ -429,11 +429,11 @@ Run ANALYZE=true npm run build to see a visual representation of what is contrib
 
 ---
 
-## Common Pitfalls and Troubleshooting {#troubleshooting}
+Common Pitfalls and Troubleshooting {#troubleshooting}
 
 Webpack configuration for Chrome extensions has several common gotchas that trip up developers.
 
-### Service Worker Loading Issues
+Service Worker Loading Issues
 
 Chrome extensions require service workers to be single files, not bundles with chunks. If your background script relies on code splitting, ensure the core logic remains in the main chunk:
 
@@ -454,21 +454,21 @@ module.exports = {
 };
 ```
 
-### Manifest Version Errors
+Manifest Version Errors
 
 Always verify your manifest version matches your extension architecture. Manifest V2 extensions cannot use service workers; Manifest V3 requires them. The Chrome Web Store rejected Manifest V2 extensions as of January 2023.
 
-### Infinite Reload Loops
+Infinite Reload Loops
 
 The webpack dev server can cause infinite reload loops when Chrome auto-reloads your extension while Webpack rebuilds. The writeToDisk: true option in the devServer configuration solves this by writing files to disk instead of serving them from memory.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Setting up Webpack for Chrome extension development requires more initial configuration than simple file-based development, but the benefits compound over time. Faster iteration, smaller bundle sizes, better code organization, and professional-grade optimization capabilities make Webpack essential for any serious extension project.
 
-The configuration in this guide provides a solid foundation that scales from small personal extensions to large commercial products. As Chrome extension capabilities expand, having a robust build system positions you to take advantage of new features without restructuring your entire project.
+The configuration in this guide provides a solid foundation that scales from small personal extensions to large commercial products. As Chrome extension capabilities expand, having a solid build system positions you to take advantage of new features without restructuring your entire project.
 
 Remember to test thoroughly in Chrome, verify your extension passes Chrome Web Store guidelines, and keep your dependencies updated. The extension ecosystem continues evolving rapidly, and a modern build pipeline ensures you can adapt quickly to changes.
 

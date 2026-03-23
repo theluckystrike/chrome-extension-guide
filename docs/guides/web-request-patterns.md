@@ -1,31 +1,31 @@
 ---
 layout: default
-title: "Chrome Extension Web Request Patterns — Developer Guide"
+title: "Chrome Extension Web Request Patterns. Developer Guide"
 description: "Learn Chrome extension web request patterns with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/web-request-patterns/"
 ---
 # WebRequest API Patterns
 
-## Overview {#overview}
-- `chrome.webRequest` — observe and optionally modify network requests
+Overview {#overview}
+- `chrome.webRequest`. observe and optionally modify network requests
 - Requires `"webRequest"` permission (cross-ref `docs/permissions/webRequest.md`)
 - MV3: blocking/modification requires `"declarativeNetRequest"` (cross-ref `docs/mv3/declarative-net-request.md`)
 - MV3 `webRequest` is observe-only (no blocking without `declarativeNetRequest`)
 
-## Request Lifecycle Events {#request-lifecycle-events}
+Request Lifecycle Events {#request-lifecycle-events}
 ```javascript
 // Events fire in this order for each request:
-// 1. onBeforeRequest       — request about to be made (can cancel/redirect)
-// 2. onBeforeSendHeaders   — headers about to be sent (can modify headers)
-// 3. onSendHeaders         — headers sent (informational)
-// 4. onHeadersReceived     — response headers received (can modify)
-// 5. onAuthRequired        — HTTP auth needed (can provide credentials)
-// 6. onResponseStarted     — first byte received (informational)
-// 7. onCompleted           — request complete (informational)
-// or onErrorOccurred       — request failed
+// 1. onBeforeRequest      . request about to be made (can cancel/redirect)
+// 2. onBeforeSendHeaders  . headers about to be sent (can modify headers)
+// 3. onSendHeaders        . headers sent (informational)
+// 4. onHeadersReceived    . response headers received (can modify)
+// 5. onAuthRequired       . HTTP auth needed (can provide credentials)
+// 6. onResponseStarted    . first byte received (informational)
+// 7. onCompleted          . request complete (informational)
+// or onErrorOccurred      . request failed
 ```
 
-## Observing Requests (MV3 Compatible) {#observing-requests-mv3-compatible}
+Observing Requests (MV3 Compatible) {#observing-requests-mv3-compatible}
 ```javascript
 // Monitor all requests (no blocking)
 chrome.webRequest.onCompleted.addListener(
@@ -51,23 +51,23 @@ chrome.webRequest.onCompleted.addListener(
 );
 ```
 
-## Request Types {#request-types}
-- `"main_frame"` — top-level page navigation
-- `"sub_frame"` — iframe navigation
-- `"stylesheet"` — CSS files
-- `"script"` — JavaScript files
-- `"image"` — images
-- `"font"` — web fonts
-- `"object"` — plugins (Flash, etc.)
-- `"xmlhttprequest"` — XHR and fetch requests
-- `"ping"` — sendBeacon, CSP reports
-- `"csp_report"` — CSP violation reports
-- `"media"` — audio/video
-- `"websocket"` — WebSocket connections
-- `"webbundle"` — web bundles
-- `"other"` — anything else
+Request Types {#request-types}
+- `"main_frame"`. top-level page navigation
+- `"sub_frame"`. iframe navigation
+- `"stylesheet"`. CSS files
+- `"script"`. JavaScript files
+- `"image"`. images
+- `"font"`. web fonts
+- `"object"`. plugins (Flash, etc.)
+- `"xmlhttprequest"`. XHR and fetch requests
+- `"ping"`. sendBeacon, CSP reports
+- `"csp_report"`. CSP violation reports
+- `"media"`. audio/video
+- `"websocket"`. WebSocket connections
+- `"webbundle"`. web bundles
+- `"other"`. anything else
 
-## Reading Headers {#reading-headers}
+Reading Headers {#reading-headers}
 ```javascript
 // Read request headers
 chrome.webRequest.onSendHeaders.addListener(
@@ -78,7 +78,7 @@ chrome.webRequest.onSendHeaders.addListener(
     console.log('Auth:', auth?.value);
   },
   { urls: ["<all_urls>"] },
-  ["requestHeaders"]  // Extra info spec — needed to access headers
+  ["requestHeaders"]  // Extra info spec. needed to access headers
 );
 
 // Read response headers
@@ -94,7 +94,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 ```
 
-## Blocking Requests (MV2 / Enterprise MV3) {#blocking-requests-mv2-enterprise-mv3}
+Blocking Requests (MV2 / Enterprise MV3) {#blocking-requests-mv2-enterprise-mv3}
 ```javascript
 // NOTE: In MV3, use declarativeNetRequest instead for public extensions
 // webRequestBlocking only works in MV2 or MV3 with enterprise policy
@@ -130,7 +130,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-## Network Request Logger {#network-request-logger}
+Network Request Logger {#network-request-logger}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -158,7 +158,7 @@ chrome.webRequest.onCompleted.addListener(async (details) => {
 });
 ```
 
-## MV3 Migration: webRequest to declarativeNetRequest {#mv3-migration-webrequest-to-declarativenetrequest}
+MV3 Migration: webRequest to declarativeNetRequest {#mv3-migration-webrequest-to-declarativenetrequest}
 | Feature | webRequest (MV2) | declarativeNetRequest (MV3) |
 |---------|-----------------|---------------------------|
 | Block requests | `onBeforeRequest` + `blocking` | Static/dynamic rules |
@@ -168,16 +168,16 @@ chrome.webRequest.onCompleted.addListener(async (details) => {
 | Performance | Extension code runs per request | Browser-native rule matching |
 | Cross-ref | This guide | `docs/mv3/declarative-net-request.md` |
 
-## Common Mistakes {#common-mistakes}
-- Missing `extraInfoSpec` (`["requestHeaders"]`, `["responseHeaders"]`) — headers won't be available
-- Using `webRequest` for blocking in MV3 — won't work for public extensions
-- Heavy processing in event handlers — blocks network requests (MV2 blocking mode)
-- Not filtering URLs — processing every request is expensive
+Common Mistakes {#common-mistakes}
+- Missing `extraInfoSpec` (`["requestHeaders"]`, `["responseHeaders"]`). headers won't be available
+- Using `webRequest` for blocking in MV3. won't work for public extensions
+- Heavy processing in event handlers. blocks network requests (MV2 blocking mode)
+- Not filtering URLs. processing every request is expensive
 - Forgetting that `webRequest` requires host permissions for the URLs being observed
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Network Interception](../patterns/network-interception.md)
 - [WebRequest Permission](../permissions/webRequest.md)

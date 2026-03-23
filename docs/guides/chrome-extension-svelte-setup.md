@@ -1,20 +1,20 @@
 ---
 layout: default
-title: "Chrome Extension Svelte Setup — Developer Guide"
+title: "Chrome Extension Svelte Setup. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-svelte-setup/"
 ---
 # Svelte Setup for Chrome Extensions
 
-Svelte provides an excellent developer experience for building Chrome extensions with minimal runtime overhead. Its compile-time approach produces tiny bundles—critical for fast popup loading.
+Svelte provides an excellent developer experience for building Chrome extensions with minimal runtime overhead. Its compile-time approach produces tiny bundles, critical for fast popup loading.
 
-## Why Svelte for Extensions {#why-svelte-for-extensions}
+Why Svelte for Extensions {#why-svelte-for-extensions}
 
 Svelte offers compelling advantages for Chrome extension development. The compiled output has no virtual DOM overhead, resulting in runtime sizes around 2KB (gzipped) for the core framework. This is particularly important for extension popups where every millisecond counts during user interaction.
 
 Unlike React or Vue, Svelte compiles away to efficient imperative code. Your extension loads faster, responds quicker, and users notice the difference. The scoped styling system works naturally within Chrome extension contexts without CSS leakage.
 
-## Project Setup with Vite {#project-setup-with-vite}
+Project Setup with Vite {#project-setup-with-vite}
 
 Initialize a new Svelte project using Vite:
 
@@ -30,7 +30,7 @@ Install the Chrome extension Vite plugin:
 npm install --save-dev vite-plugin-chrome-extension
 ```
 
-## vite.config.ts Configuration {#viteconfigts-configuration}
+vite.config.ts Configuration {#viteconfigts-configuration}
 
 Configure Vite for multiple extension entry points:
 
@@ -56,7 +56,7 @@ export default defineConfig({
 });
 ```
 
-## Multiple Entry Points {#multiple-entry-points}
+Multiple Entry Points {#multiple-entry-points}
 
 Organize your extension with separate directories for each entry point:
 
@@ -78,7 +78,7 @@ src/
 
 Each entry point compiles to a separate JavaScript file automatically.
 
-## Svelte Stores for Chrome API {#svelte-stores-for-chrome-api}
+Svelte Stores for Chrome API {#svelte-stores-for-chrome-api}
 
 Create reactive stores backed by chrome.storage:
 
@@ -110,7 +110,7 @@ function createChromeStorage<T>(key: string, initial: T) {
 export const settings = createChromeStorage('settings', { theme: 'light' });
 ```
 
-## Svelte 5 Runes Integration {#svelte-5-runes-integration}
+Svelte 5 Runes Integration {#svelte-5-runes-integration}
 
 Use Svelte 5 runes for reactive Chrome API data:
 
@@ -134,7 +134,7 @@ if (browser) {
 const activeCount = $derived(tabs.filter(t => t.active).length);
 ```
 
-## Content Scripts with Svelte {#content-scripts-with-svelte}
+Content Scripts with Svelte {#content-scripts-with-svelte}
 
 Mount Svelte components in content scripts using shadow DOM:
 
@@ -155,7 +155,7 @@ mount(ContentApp, { target: mountPoint });
 
 Svelte's scoped styles automatically apply within the shadow DOM without affecting the host page.
 
-## SvelteKit for Extension Pages {#sveltekit-for-extension-pages}
+SvelteKit for Extension Pages {#sveltekit-for-extension-pages}
 
 Use SvelteKit with adapter-static for extension pages:
 
@@ -181,7 +181,7 @@ export default {
 
 Set `prerender = false` in your root layout for Chrome extension pages.
 
-## TypeScript Integration {#typescript-integration}
+TypeScript Integration {#typescript-integration}
 
 Install Svelte type checking:
 
@@ -199,7 +199,7 @@ Add to package.json scripts:
 }
 ```
 
-## Styling Options {#styling-options}
+Styling Options {#styling-options}
 
 Svelte's built-in scoped styles work perfectly for extensions:
 
@@ -221,7 +221,7 @@ npx tailwindcss init -p
 
 Configure tailwind.config.js for your source files, then import in your components.
 
-## Testing {#testing}
+Testing {#testing}
 
 Set up Vitest with Svelte testing library:
 
@@ -246,20 +246,20 @@ export default defineConfig({
 
 Write tests using @testing-library/svelte for component testing.
 
-## Bundle Size Advantage {#bundle-size-advantage}
+Bundle Size Advantage {#bundle-size-advantage}
 
 Svelte's compilation approach produces remarkably small bundles. A typical popup with multiple components might compile to 15-20KB (gzipped), compared to 40-60KB+ for equivalent React implementations. This speed matters: users expect popups to open instantly.
 
 The small footprint also helps stay within Chrome's service worker memory limits and improves overall extension performance.
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
-- `docs/guides/vite-extension-setup.md` — general Vite configuration
-- `docs/guides/typescript-extensions.md` — TypeScript best practices
+- `docs/guides/vite-extension-setup.md`. general Vite configuration
+- `docs/guides/typescript-extensions.md`. TypeScript best practices
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Building with Svelte](../patterns/building-with-svelte.md)
 - [Vue Setup](../guides/chrome-extension-vue-setup.md)

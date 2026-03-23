@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Animation Patterns — Best Practices"
+title: "Chrome Extension Animation Patterns. Best Practices"
 description: "Create smooth animations in extension popups and content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/animation-patterns/"
 ---
@@ -11,7 +11,7 @@ Practical patterns for adding motion to Chrome extension UIs -- popups, content 
 
 ---
 
-## Table of Contents {#table-of-contents}
+Table of Contents {#table-of-contents}
 
 1. [Popup Open/Close Transitions](#pattern-1-popup-openclose-transitions)
 2. [Content Script Overlay Animations](#pattern-2-content-script-overlay-animations)
@@ -25,11 +25,11 @@ Practical patterns for adding motion to Chrome extension UIs -- popups, content 
 
 ---
 
-## Pattern 1: Popup Open/Close Transitions {#pattern-1-popup-openclose-transitions}
+Pattern 1: Popup Open/Close Transitions {#pattern-1-popup-openclose-transitions}
 
 Chrome popups appear instantly by default. Adding an entrance animation makes the UI feel polished. The trick is that there is no "close" event -- you must anticipate the close and play the exit animation preemptively.
 
-### Entrance Animation {#entrance-animation}
+Entrance Animation {#entrance-animation}
 
 ```css
 /* popup.css */
@@ -59,7 +59,7 @@ body {
 }
 ```
 
-### Staggered Content Entrance {#staggered-content-entrance}
+Staggered Content Entrance {#staggered-content-entrance}
 
 ```css
 /* Each child section enters with a slight delay */
@@ -85,7 +85,7 @@ body {
 }
 ```
 
-### View Transitions Within the Popup {#view-transitions-within-the-popup}
+View Transitions Within the Popup {#view-transitions-within-the-popup}
 
 ```typescript
 // Smooth transition between popup "pages" (e.g., main view -> detail view)
@@ -134,15 +134,15 @@ function navigatePopupView(fromId: string, toId: string): void {
 }
 ```
 
-**Key takeaway**: Keep popup entrance animations under 200ms. Use `startViewTransition` when available for page-like navigation inside the popup.
+Keep popup entrance animations under 200ms. Use `startViewTransition` when available for page-like navigation inside the popup.
 
 ---
 
-## Pattern 2: Content Script Overlay Animations {#pattern-2-content-script-overlay-animations}
+Pattern 2: Content Script Overlay Animations {#pattern-2-content-script-overlay-animations}
 
 Content scripts inject UI into host pages. Overlays must animate smoothly without interfering with the page's own styles.
 
-### Slide-In Side Panel {#slide-in-side-panel}
+Slide-In Side Panel {#slide-in-side-panel}
 
 ```typescript
 // content-overlay.ts
@@ -249,7 +249,7 @@ function closePanel(panel: HTMLElement, backdrop: HTMLElement, host: HTMLElement
 }
 ```
 
-### Fade-In Modal {#fade-in-modal}
+Fade-In Modal {#fade-in-modal}
 
 ```typescript
 function createModal(content: string): void {
@@ -312,15 +312,15 @@ function dismissModal(overlay: HTMLElement, host: HTMLElement): void {
 }
 ```
 
-**Key takeaway**: Always use Shadow DOM to isolate animation styles from the host page. Use `requestAnimationFrame` double-nesting to ensure the browser has painted before triggering transitions.
+Always use Shadow DOM to isolate animation styles from the host page. Use `requestAnimationFrame` double-nesting to ensure the browser has painted before triggering transitions.
 
 ---
 
-## Pattern 3: Badge Animation (Pulse, Count-Up) {#pattern-3-badge-animation-pulse-count-up}
+Pattern 3: Badge Animation (Pulse, Count-Up) {#pattern-3-badge-animation-pulse-count-up}
 
 Chrome's `chrome.action` API controls the toolbar badge. Since there is no CSS for the badge itself, animation requires programmatic updates.
 
-### Pulsing Badge Color {#pulsing-badge-color}
+Pulsing Badge Color {#pulsing-badge-color}
 
 ```typescript
 // background.ts - Pulse badge between two colors to draw attention
@@ -349,7 +349,7 @@ async function pulseBadge(
 }
 ```
 
-### Animated Count-Up {#animated-count-up}
+Animated Count-Up {#animated-count-up}
 
 ```typescript
 // Smoothly count up from 0 to the target number on the badge
@@ -386,7 +386,7 @@ chrome.runtime.onMessage.addListener(async (msg) => {
 });
 ```
 
-### Icon Swap Animation {#icon-swap-animation}
+Icon Swap Animation {#icon-swap-animation}
 
 ```typescript
 // Alternate between icon frames to simulate animation
@@ -417,15 +417,15 @@ animateIcon([
 ], 150, 5);
 ```
 
-**Key takeaway**: Badge animations use `setInterval` and `setBadgeBackgroundColor` since there is no CSS access. Keep cycles short to avoid being annoying.
+Badge animations use `setInterval` and `setBadgeBackgroundColor` since there is no CSS access. Keep cycles short to avoid being annoying.
 
 ---
 
-## Pattern 4: Loading States and Skeleton Screens {#pattern-4-loading-states-and-skeleton-screens}
+Pattern 4: Loading States and Skeleton Screens {#pattern-4-loading-states-and-skeleton-screens}
 
 Show structure before data arrives. Skeleton screens reduce perceived load time compared to spinners.
 
-### Skeleton Screen CSS {#skeleton-screen-css}
+Skeleton Screen CSS {#skeleton-screen-css}
 
 ```css
 /* Shared skeleton styles */
@@ -479,7 +479,7 @@ Show structure before data arrives. Skeleton screens reduce perceived load time 
 }
 ```
 
-### Skeleton Template Generator {#skeleton-template-generator}
+Skeleton Template Generator {#skeleton-template-generator}
 
 ```typescript
 function createSkeletonList(count: number): string {
@@ -525,7 +525,7 @@ async function loadItems(): Promise<void> {
 }
 ```
 
-### Inline Loading Indicator {#inline-loading-indicator}
+Inline Loading Indicator {#inline-loading-indicator}
 
 ```typescript
 // Button loading state with spinner
@@ -557,15 +557,15 @@ function setButtonLoading(btn: HTMLButtonElement, loading: boolean): void {
 }
 ```
 
-**Key takeaway**: Show skeletons immediately on popup open, then crossfade to real content. This eliminates the blank flash that makes extensions feel slow.
+Show skeletons immediately on popup open, then crossfade to real content. This eliminates the blank flash that makes extensions feel slow.
 
 ---
 
-## Pattern 5: Toast Notification Animations in Content Scripts {#pattern-5-toast-notification-animations-in-content-scripts}
+Pattern 5: Toast Notification Animations in Content Scripts {#pattern-5-toast-notification-animations-in-content-scripts}
 
 Floating notifications that appear and auto-dismiss. These must be injected into host pages via content scripts without style leakage.
 
-### Toast Manager {#toast-manager}
+Toast Manager {#toast-manager}
 
 ```typescript
 // content-toast.ts
@@ -744,15 +744,15 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-**Key takeaway**: Use Shadow DOM to prevent host page styles from breaking toast appearance. Auto-dismiss with a visible progress bar so users know when it will vanish.
+Use Shadow DOM to prevent host page styles from breaking toast appearance. Auto-dismiss with a visible progress bar so users know when it will vanish.
 
 ---
 
-## Pattern 6: Drag and Reorder with Smooth Transitions {#pattern-6-drag-and-reorder-with-smooth-transitions}
+Pattern 6: Drag and Reorder with Smooth Transitions {#pattern-6-drag-and-reorder-with-smooth-transitions}
 
 Let users reorder lists (bookmarks, rules, shortcuts) with drag-and-drop that has smooth position transitions.
 
-### Sortable List {#sortable-list}
+Sortable List {#sortable-list}
 
 ```typescript
 class SortableList {
@@ -841,7 +841,7 @@ class SortableList {
 }
 ```
 
-### CSS for Drag Interactions {#css-for-drag-interactions}
+CSS for Drag Interactions {#css-for-drag-interactions}
 
 ```css
 .sortable-item {
@@ -898,7 +898,7 @@ class SortableList {
 }
 ```
 
-### Persisting Order {#persisting-order}
+Persisting Order {#persisting-order}
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -938,15 +938,15 @@ async function restoreOrder(): Promise<void> {
 }
 ```
 
-**Key takeaway**: Use native HTML5 drag-and-drop with CSS transitions on sibling elements to create smooth reorder animations. Persist the order to storage immediately.
+Use native HTML5 drag-and-drop with CSS transitions on sibling elements to create smooth reorder animations. Persist the order to storage immediately.
 
 ---
 
-## Pattern 7: Dark/Light Theme Transition {#pattern-7-darklight-theme-transition}
+Pattern 7: Dark/Light Theme Transition {#pattern-7-darklight-theme-transition}
 
 Smooth theme switching without a jarring flash. Uses CSS custom properties and a transition overlay.
 
-### Theme System {#theme-system}
+Theme System {#theme-system}
 
 ```typescript
 type Theme = 'light' | 'dark' | 'system';
@@ -990,7 +990,7 @@ async function setTheme(theme: Theme): Promise<void> {
 }
 ```
 
-### CSS Custom Properties {#css-custom-properties}
+CSS Custom Properties {#css-custom-properties}
 
 ```css
 :root,
@@ -1049,7 +1049,7 @@ input, select {
 }
 ```
 
-### Theme Toggle Button {#theme-toggle-button}
+Theme Toggle Button {#theme-toggle-button}
 
 ```typescript
 class ThemeToggle {
@@ -1104,15 +1104,15 @@ class ThemeToggle {
 new ThemeToggle('theme-toggle');
 ```
 
-**Key takeaway**: Use CSS custom properties for all theme-dependent values. Transition only color-related properties to avoid layout thrashing. Use View Transitions API when available.
+Use CSS custom properties for all theme-dependent values. Transition only color-related properties to avoid layout thrashing. Use View Transitions API when available.
 
 ---
 
-## Pattern 8: Respecting prefers-reduced-motion {#pattern-8-respecting-prefers-reduced-motion}
+Pattern 8: Respecting prefers-reduced-motion {#pattern-8-respecting-prefers-reduced-motion}
 
 Users who enable "Reduce motion" in their OS settings expect extensions to respect that preference. This pattern shows how to conditionally disable animations throughout your extension.
 
-### CSS Approach: Disable All Animations {#css-approach-disable-all-animations}
+CSS Approach: Disable All Animations {#css-approach-disable-all-animations}
 
 ```css
 /* Global motion reduction */
@@ -1128,7 +1128,7 @@ Users who enable "Reduce motion" in their OS settings expect extensions to respe
 }
 ```
 
-### Granular CSS: Replace Instead of Remove {#granular-css-replace-instead-of-remove}
+Granular CSS: Replace Instead of Remove {#granular-css-replace-instead-of-remove}
 
 ```css
 /* Instead of removing all motion, replace with gentler alternatives */
@@ -1189,7 +1189,7 @@ Users who enable "Reduce motion" in their OS settings expect extensions to respe
 }
 ```
 
-### TypeScript: Query and React to Motion Preference {#typescript-query-and-react-to-motion-preference}
+TypeScript: Query and React to Motion Preference {#typescript-query-and-react-to-motion-preference}
 
 ```typescript
 // Utility: check if user prefers reduced motion
@@ -1228,7 +1228,7 @@ function slideInPanel(panel: HTMLElement): void {
 }
 ```
 
-### Background Script: Conditional Badge Animation {#background-script-conditional-badge-animation}
+Background Script: Conditional Badge Animation {#background-script-conditional-badge-animation}
 
 ```typescript
 // background.ts - Skip badge animation when reduced motion is preferred
@@ -1256,7 +1256,7 @@ async function updateBadge(count: number): Promise<void> {
 }
 ```
 
-### Popup: Report Motion Preference to Background {#popup-report-motion-preference-to-background}
+Popup: Report Motion Preference to Background {#popup-report-motion-preference-to-background}
 
 ```typescript
 // popup.ts - Tell the background script about the user's motion preference
@@ -1268,7 +1268,7 @@ watchMotionPreference((reduced) => {
 });
 ```
 
-### Testing Reduced Motion {#testing-reduced-motion}
+Testing Reduced Motion {#testing-reduced-motion}
 
 ```typescript
 // In development: force reduced motion for testing
@@ -1295,11 +1295,11 @@ function simulateReducedMotion(reduced: boolean): void {
 }
 ```
 
-**Key takeaway**: Never just remove animations for reduced-motion users -- replace them with subtle fades or instant state changes. Always provide the same information that the animation conveyed (e.g., a new item appeared) through non-animated means.
+Never just remove animations for reduced-motion users -- replace them with subtle fades or instant state changes. Always provide the same information that the animation conveyed (e.g., a new item appeared) through non-animated means.
 
 ---
 
-## Summary Table {#summary-table}
+Summary Table {#summary-table}
 
 | Pattern | Technique | Key CSS/API | Reduced Motion Fallback |
 |---|---|---|---|
@@ -1314,7 +1314,7 @@ function simulateReducedMotion(reduced: boolean): void {
 
 ---
 
-## Further Reading {#further-reading}
+Further Reading {#further-reading}
 
 - [Chrome Action API](https://developer.chrome.com/docs/extensions/reference/api/action)
 - [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API)

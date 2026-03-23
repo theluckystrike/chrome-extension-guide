@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Navigation Url Handling — Best Practices"
+title: "Chrome Extension Navigation Url Handling. Best Practices"
 description: "Handle navigation events and URL changes with the webNavigation API."
 canonical_url: "https://bestchromeextensions.com/patterns/navigation-url-handling/"
 ---
 
 # Navigation and URL Handling Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Extensions frequently need to observe, intercept, and manipulate navigation. Chrome provides `chrome.webNavigation`, `chrome.declarativeNetRequest`, and content-script-level techniques for this. This guide covers 8 production patterns: advanced URL matching, navigation events, SPA detection, URL canonicalization, deep linking, redirect handling, parameter manipulation, and history tracking.
 
-> **Permissions**: `"webNavigation"` for navigation events. `"declarativeNetRequest"` for redirect rules. Content scripts need `"activeTab"` or host permissions.
+> Permissions: `"webNavigation"` for navigation events. `"declarativeNetRequest"` for redirect rules. Content scripts need `"activeTab"` or host permissions.
 
 ---
 
-## Pattern 1: URL Pattern Matching Beyond Manifest Matches {#pattern-1-url-pattern-matching-beyond-manifest-matches}
+Pattern 1: URL Pattern Matching Beyond Manifest Matches {#pattern-1-url-pattern-matching-beyond-manifest-matches}
 
 Manifest `matches` patterns are limited to scheme/host/path globs. For finer control, use `URLPattern` or regex in your service worker:
 
@@ -85,14 +85,14 @@ if (params) {
 
 ---
 
-## Pattern 2: webNavigation Events {#pattern-2-webnavigation-events}
+Pattern 2: webNavigation Events {#pattern-2-webnavigation-events}
 
 The `chrome.webNavigation` API provides granular navigation lifecycle events that `tabs.onUpdated` cannot:
 
 ```ts
 // background.ts
 
-// Fires before any navigation starts — good for pre-checks
+// Fires before any navigation starts. good for pre-checks
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   // details.tabId, details.url, details.frameId, details.parentFrameId
   if (details.frameId === 0) {
@@ -108,7 +108,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   }
 });
 
-// Fires on pushState/replaceState — critical for SPAs
+// Fires on pushState/replaceState. critical for SPAs
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
   console.log(`SPA navigation in tab ${details.tabId}: ${details.url}`);
 });
@@ -182,7 +182,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((d) => recordNavEvent("hi
 
 ---
 
-## Pattern 3: SPA Navigation Detection in Content Scripts {#pattern-3-spa-navigation-detection-in-content-scripts}
+Pattern 3: SPA Navigation Detection in Content Scripts {#pattern-3-spa-navigation-detection-in-content-scripts}
 
 SPAs change URLs without full page loads. Detect this reliably in content scripts:
 
@@ -258,11 +258,11 @@ spaNav.onChange((oldUrl, newUrl) => {
 });
 ```
 
-> **Note**: If your content script runs in the `ISOLATED` world (default), override `history.pushState` via a [main-world script](content-script-isolation.md) injected with `"world": "MAIN"` in the manifest, then communicate back via `CustomEvent` or `window.postMessage`.
+> Note: If your content script runs in the `ISOLATED` world (default), override `history.pushState` via a [main-world script](content-script-isolation.md) injected with `"world": "MAIN"` in the manifest, then communicate back via `CustomEvent` or `window.postMessage`.
 
 ---
 
-## Pattern 4: URL Canonicalization and Comparison {#pattern-4-url-canonicalization-and-comparison}
+Pattern 4: URL Canonicalization and Comparison {#pattern-4-url-canonicalization-and-comparison}
 
 Normalize URLs before comparing them to avoid false negatives:
 
@@ -348,12 +348,12 @@ function urlsEqual(a: string, b: string, options?: CanonicalizeOptions): boolean
 
 ---
 
-## Pattern 5: Deep Linking into Extension Pages {#pattern-5-deep-linking-into-extension-pages}
+Pattern 5: Deep Linking into Extension Pages {#pattern-5-deep-linking-into-extension-pages}
 
 Create linkable routes within your extension's HTML pages:
 
 ```ts
-// Extension page router — works in popup, side panel, options, or full-tab pages
+// Extension page router. works in popup, side panel, options, or full-tab pages
 // options.html or sidepanel.html
 
 interface Route {
@@ -419,14 +419,14 @@ openExtensionPage("/detail", { id: "abc123" });
 
 ---
 
-## Pattern 6: Redirect Handling with declarativeNetRequest {#pattern-6-redirect-handling-with-declarativenetrequest}
+Pattern 6: Redirect Handling with declarativeNetRequest {#pattern-6-redirect-handling-with-declarativenetrequest}
 
 Use declarative rules for fast, efficient URL redirects without a blocking listener:
 
 ```ts
 // background.ts
 
-// Dynamic redirect rules — add/remove at runtime
+// Dynamic redirect rules. add/remove at runtime
 async function addRedirectRule(
   id: number,
   fromPattern: string,
@@ -453,7 +453,7 @@ async function addRedirectRule(
   });
 }
 
-// Regex-based redirect — e.g., force old.example.com to new.example.com
+// Regex-based redirect. e.g., force old.example.com to new.example.com
 async function addRegexRedirect(): Promise<void> {
   await chrome.declarativeNetRequest.updateDynamicRules({
     addRules: [
@@ -538,14 +538,14 @@ For static rules shipped with the extension, define them in a JSON file:
 
 ---
 
-## Pattern 7: URL Parameter Extraction and Manipulation {#pattern-7-url-parameter-extraction-and-manipulation}
+Pattern 7: URL Parameter Extraction and Manipulation {#pattern-7-url-parameter-extraction-and-manipulation}
 
 Build a utility layer for reading and rewriting URL parameters safely:
 
 ```ts
 // shared/url-params.ts
 
-/** Type-safe URL parameter extraction */
+/ Type-safe URL parameter extraction */
 interface ParamSchema {
   [key: string]: "string" | "number" | "boolean" | "string[]";
 }
@@ -657,7 +657,7 @@ function parseGitHubPR(url: string): GitHubPRUrl | null {
 
 ---
 
-## Pattern 8: Back/Forward Navigation Tracking {#pattern-8-backforward-navigation-tracking}
+Pattern 8: Back/Forward Navigation Tracking {#pattern-8-backforward-navigation-tracking}
 
 Track navigation history within a tab to understand user journeys:
 
@@ -689,7 +689,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
       history.currentIndex = matchIndex;
     }
   } else {
-    // New navigation — truncate forward history
+    // New navigation. truncate forward history
     history.entries = history.entries.slice(0, history.currentIndex + 1);
     history.entries.push({
       url: details.url,
@@ -730,7 +730,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
   const history = navHistories.get(details.tabId);
   if (!history) return;
 
-  // SPA navigation — always a new forward entry
+  // SPA navigation. always a new forward entry
   history.entries = history.entries.slice(0, history.currentIndex + 1);
   history.entries.push({
     url: details.url,
@@ -759,7 +759,7 @@ function detectNavigationLoop(tabId: number, threshold = 3): boolean {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

@@ -17,7 +17,7 @@ Whether you want to build an audio visualizer that reacts to music playing in yo
 
 ---
 
-## Understanding the Web Audio API {#understanding-web-audio-api}
+Understanding the Web Audio API {#understanding-web-audio-api}
 
 The Web Audio API is a powerful, versatile audio processing system that runs entirely in the browser. It provides a complete audio processing pipeline that includes audio sources, effects processing, spatial audio, and analysis capabilities. Unlike the simple HTML5 Audio element, the Web Audio API gives you low-level control over every aspect of audio processing, making it ideal for building sophisticated audio applications.
 
@@ -29,7 +29,7 @@ The Web Audio API also supports spatial audio through the PannerNode and AudioLi
 
 ---
 
-## Setting Up Your Chrome Extension Project {#project-setup}
+Setting Up Your Chrome Extension Project {#project-setup}
 
 Before we start building, let's set up our Chrome extension project with the proper structure and Manifest V3 configuration. This foundation will support our Web Audio API implementation and ensure our extension works with modern Chrome best practices.
 
@@ -76,7 +76,7 @@ Next, create the directory structure with all necessary files. You'll need icons
 
 ---
 
-## Building the Audio Capture System {#audio-capture}
+Building the Audio Capture System {#audio-capture}
 
 The heart of our extension is the audio capture system that extracts audio from the browser tab. Chrome provides the chrome.tabCapture API, which allows extensions to capture the audio and video from a tab. Let's implement this in our background service worker.
 
@@ -170,7 +170,7 @@ The chrome.tabCapture API is specifically designed for extensions and provides h
 
 ---
 
-## Creating the Content Script {#content-script}
+Creating the Content Script {#content-script}
 
 The content script runs in the context of web pages and handles the visual representation of our audio visualizer. It communicates with the background script to get frequency data and renders the visualization on the page.
 
@@ -355,7 +355,7 @@ The content script creates a canvas overlay on the web page and uses the frequen
 
 ---
 
-## Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup provides a user interface for controlling the visualizer. Create popup.html and popup.js to give users control over the visualization settings:
 
@@ -455,7 +455,7 @@ The popup provides a user interface for controlling the visualizer. Create popup
   </style>
 </head>
 <body>
-  <h1>🎵 Web Audio Visualizer</h1>
+  <h1> Web Audio Visualizer</h1>
   
   <div class="control-group">
     <label>Visualization Style</label>
@@ -558,7 +558,7 @@ sensitivity.addEventListener('input', (e) => {
 
 ---
 
-## Adding Sound Effects Capability {#sound-effects}
+Adding Sound Effects Capability {#sound-effects}
 
 Now let's add sound effects capability to our extension. This will allow users to add custom sound effects that can be triggered programmatically. We'll create a sound effects system using the Web Audio API's synthesis capabilities.
 
@@ -731,7 +731,7 @@ This sound effects system provides various synthesized sounds that can be trigge
 
 ---
 
-## Advanced: Creating an Audio Visualizer Chrome with Circular Display {#advanced-visualization}
+Advanced: Creating an Audio Visualizer Chrome with Circular Display {#advanced-visualization}
 
 For a more sophisticated visualization, let's add a circular visualizer that creates a radial frequency display. This is a popular style used in many music players and can make your extension stand out.
 
@@ -792,46 +792,46 @@ This circular visualization creates a radial display where bars radiate outward 
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing is essential. Here's how to test your Web Audio Chrome Extension:
 
-1. **Load the Extension**: Open Chrome and navigate to chrome://extensions/. Enable "Developer mode" in the top right corner. Click "Load unpacked" and select your extension directory.
+1. Load the Extension: Open Chrome and navigate to chrome://extensions/. Enable "Developer mode" in the top right corner. Click "Load unpacked" and select your extension directory.
 
-2. **Test Audio Capture**: Navigate to a website with audio (like YouTube or Spotify). Click your extension icon and start the visualizer. You should see the visualization appear at the top of the page.
+2. Test Audio Capture: Navigate to a website with audio (like YouTube or Spotify). Click your extension icon and start the visualizer. You should see the visualization appear at the top of the page.
 
-3. **Test Sound Effects**: Open the extension popup and test the sound effects buttons if you've added them. Each sound should play correctly.
+3. Test Sound Effects: Open the extension popup and test the sound effects buttons if you've added them. Each sound should play correctly.
 
-4. **Test Different Sources**: Try the extension with different types of audio content: music streaming services, video sites, web games, and web-based audio players.
+4. Test Different Sources: Try the extension with different types of audio content: music streaming services, video sites, web games, and web-based audio players.
 
-5. **Check Performance**: Open Chrome's Task Manager to ensure the extension isn't consuming excessive CPU or memory. The visualization should run smoothly at 60fps.
+5. Check Performance: Open Chrome's Task Manager to ensure the extension isn't consuming excessive CPU or memory. The visualization should run smoothly at 60fps.
 
-6. **Test Edge Cases**: Try the extension with no audio playing, with different audio volumes, and on various websites to ensure it handles all scenarios gracefully.
+6. Test Edge Cases: Try the extension with no audio playing, with different audio volumes, and on various websites to ensure it handles all scenarios gracefully.
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once you've tested your extension thoroughly, you can publish it to the Chrome Web Store:
 
-1. **Prepare for Publishing**: Update your manifest.json with accurate description, screenshots, and a privacy policy if needed. Increase the version number.
+1. Prepare for Publishing: Update your manifest.json with accurate description, screenshots, and a privacy policy if needed. Increase the version number.
 
-2. **Create a ZIP File**: Compress your extension directory into a ZIP file. Make sure the manifest.json is at the root level of the ZIP.
+2. Create a ZIP File: Compress your extension directory into a ZIP file. Make sure the manifest.json is at the root level of the ZIP.
 
-3. **Create Developer Account**: If you don't have one, create a Google Developer account at the Chrome Web Store developer dashboard.
+3. Create Developer Account: If you don't have one, create a Google Developer account at the Chrome Web Store developer dashboard.
 
-4. **Upload and Submit**: Upload your ZIP file, fill in the store listing details, and submit for review. Google typically reviews extensions within a few days.
+4. Upload and Submit: Upload your ZIP file, fill in the store listing details, and submit for review. Google typically reviews extensions within a few days.
 
-5. **Monitor Feedback**: After publication, monitor user reviews and feedback to make improvements and address any issues.
+5. Monitor Feedback: After publication, monitor user reviews and feedback to make improvements and address any issues.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a Web Audio Chrome Extension is an exciting project that combines the power of the Web Audio API with Chrome extension capabilities. In this tutorial, we've covered the complete development process, from setting up the project structure to implementing audio capture, visualization, and sound effects.
 
 The extension we built demonstrates several key concepts: using chrome.tabCapture to capture tab audio, processing that audio with the Web Audio API's AnalyserNode, creating real-time visualizations on a canvas overlay, and implementing synthesized sound effects without external audio files. These techniques form the foundation for building more sophisticated audio extensions.
 
-As you continue developing, consider adding features like multiple visualization styles, audio recording capabilities, equalizer controls, or integration with music识别 APIs. The Web Audio API is incredibly powerful, and Chrome extensions provide the perfect platform to deliver these experiences to millions of users.
+As you continue developing, consider adding features like multiple visualization styles, audio recording capabilities, equalizer controls, or integration with music APIs. The Web Audio API is incredibly powerful, and Chrome extensions provide the perfect platform to deliver these experiences to millions of users.
 
 Remember to follow Chrome's policies and best practices when publishing your extension. With creativity and good engineering, you can build audio extensions that delight users and stand out in the Chrome Web Store. The combination of web audio API extension development with Chrome's extension platform opens up endless possibilities for innovation in browser-based audio experiences.

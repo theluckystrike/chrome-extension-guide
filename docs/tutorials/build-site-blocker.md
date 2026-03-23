@@ -1,38 +1,38 @@
 ---
 layout: default
-title: "Chrome Extension Site Blocker — Developer Guide"
+title: "Chrome Extension Site Blocker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-site-blocker/"
 ---
 # Build a Site Blocker Chrome Extension
 
-This tutorial guides you through building a powerful site blocker extension using modern Chrome Extension APIs. We'll use **declarativeNetRequest** for efficient blocking, **@theluckystrike/webext-storage** for persistent blocklist storage, **@theluckystrike/webext-messaging** for popup communication, and implement schedule-based blocking with password-protected overrides.
+This tutorial guides you through building a powerful site blocker extension using modern Chrome Extension APIs. We'll use declarativeNetRequest for efficient blocking, @theluckystrike/webext-storage for persistent blocklist storage, @theluckystrike/webext-messaging for popup communication, and implement schedule-based blocking with password-protected overrides.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome browser (or Chromium-based browser)
 - Node.js 18+ installed
 - Basic JavaScript/TypeScript knowledge
 - Understanding of Chrome Extension architecture
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 ```
 site-blocker/
-├── manifest.json
-├── background.js
-├── popup/
-│   ├── popup.html
-│   ├── popup.js
-│   └── popup.css
-├── blocked.html
-├── options.html
-├── options.js
-├── types.ts
-└── rules.json
+ manifest.json
+ background.js
+ popup/
+    popup.html
+    popup.js
+    popup.css
+ blocked.html
+ options.html
+ options.js
+ types.ts
+ rules.json
 ```
 
-## 1. Manifest Configuration (manifest.json) {#1-manifest-configuration-manifestjson}
+1. Manifest Configuration (manifest.json) {#1-manifest-configuration-manifestjson}
 
 ```json
 {
@@ -72,7 +72,7 @@ site-blocker/
 }
 ```
 
-## 2. TypeScript Message Types (types.ts) {#2-typescript-message-types-typests}
+2. TypeScript Message Types (types.ts) {#2-typescript-message-types-typests}
 
 Define types for communication between popup, background, and options pages using @theluckystrike/webext-messaging patterns:
 
@@ -117,7 +117,7 @@ export type MessageAction =
   | 'GET_STATS';
 ```
 
-## 3. Service Worker (background.js) {#3-service-worker-backgroundjs}
+3. Service Worker (background.js) {#3-service-worker-backgroundjs}
 
 The background service worker handles rule management, scheduling, and messaging:
 
@@ -292,7 +292,7 @@ async function setRulesEnabled(enabled) {
 chrome.runtime.onInstalled.addListener(init);
 ```
 
-## 4. Popup HTML (popup/popup.html) {#4-popup-html-popuppopuphtml}
+4. Popup HTML (popup/popup.html) {#4-popup-html-popuppopuphtml}
 
 ```html
 <!DOCTYPE html>
@@ -304,7 +304,7 @@ chrome.runtime.onInstalled.addListener(init);
 <body>
   <div class="container">
     <header>
-      <h1>🚫 Site Blocker</h1>
+      <h1> Site Blocker</h1>
       <div class="status" id="status">Active</div>
     </header>
     
@@ -334,7 +334,7 @@ chrome.runtime.onInstalled.addListener(init);
     </section>
     
     <footer>
-      <a href="options.html" target="_blank">⚙️ Settings</a>
+      <a href="options.html" target="_blank"> Settings</a>
     </footer>
   </div>
   <script src="popup.js"></script>
@@ -342,7 +342,7 @@ chrome.runtime.onInstalled.addListener(init);
 </html>
 ```
 
-## 5. Popup JavaScript (popup/popup.js) {#5-popup-javascript-popuppopupjs}
+5. Popup JavaScript (popup/popup.js) {#5-popup-javascript-popuppopupjs}
 
 ```javascript
 import { messaging } from '@theluckystrike/webext-messaging';
@@ -430,7 +430,7 @@ overrideBtn.addEventListener('click', async () => {
 loadState();
 ```
 
-## 6. Blocked Page (blocked.html) {#6-blocked-page-blockedhtml}
+6. Blocked Page (blocked.html) {#6-blocked-page-blockedhtml}
 
 ```html
 <!DOCTYPE html>
@@ -460,7 +460,7 @@ loadState();
 </head>
 <body>
   <div class="container">
-    <h1>🚫 Site Blocked</h1>
+    <h1> Site Blocked</h1>
     <p>This website has been blocked by your Site Blocker extension.</p>
     <p class="blocked-time">Blocked at: <span id="blockedTime"></span></p>
   </div>
@@ -471,7 +471,7 @@ loadState();
 </html>
 ```
 
-## 7. Options Page (options.html) {#7-options-page-optionshtml}
+7. Options Page (options.html) {#7-options-page-optionshtml}
 
 ```html
 <!DOCTYPE html>
@@ -491,7 +491,7 @@ loadState();
   </style>
 </head>
 <body>
-  <h1>⚙️ Site Blocker Settings</h1>
+  <h1> Site Blocker Settings</h1>
   
   <div class="section">
     <h2>Schedule Blocking</h2>
@@ -524,7 +524,7 @@ loadState();
 </html>
 ```
 
-## 8. Options JavaScript (options.js) {#8-options-javascript-optionsjs}
+8. Options JavaScript (options.js) {#8-options-javascript-optionsjs}
 
 ```javascript
 import { messaging } from '@theluckystrike/webext-messaging';
@@ -573,31 +573,31 @@ document.getElementById('savePassword').addEventListener('click', async () => {
 loadSettings();
 ```
 
-## Key Features Explained {#key-features-explained}
+Key Features Explained {#key-features-explained}
 
-### declarativeNetRequest API {#declarativenetrequest-api}
+declarativeNetRequest API {#declarativenetrequest-api}
 The modern approach to network request blocking in Manifest V3. Unlike the deprecated `webRequest` API, `declarativeNetRequest` runs entirely in the browser for better performance and privacy. Rules are defined in JSON and updated dynamically.
 
-### @theluckystrike/webext-storage {#theluckystrikewebext-storage}
+@theluckystrike/webext-storage {#theluckystrikewebext-storage}
 Provides a clean Promise-based API for Chrome's storage API. Eliminates callback hell and integrates well with async/await patterns in service workers.
 
-### @theluckystrike/webext-messaging {#theluckystrikewebext-messaging}
+@theluckystrike/webext-messaging {#theluckystrikewebext-messaging}
 Simplifies message passing between extension components. Uses a handler pattern similar to Express.js for cleaner code organization.
 
-### chrome.alarms API {#chromealarms-api}
+chrome.alarms API {#chromealarms-api}
 Used for schedule-based blocking. The alarm fires every minute to check if current time falls within the blocked period.
 
-### Password Protection {#password-protection}
+Password Protection {#password-protection}
 A simple SHA-256 hash comparison could be added for better security. The current implementation stores plain text passwords (not recommended for production).
 
-## Related Tutorials {#related-tutorials}
+Related Tutorials {#related-tutorials}
 
 - [Build Your First Chrome Extension](getting-started.md) - Extension fundamentals
 - [Chrome Storage API Deep Dive](storage-guide.md) - Persistent data management
 - [Messaging Between Components](messaging-guide.md) - Popup/background communication
 - [Manifest V3 Migration](manifest-v3-migration.md) - Upgrading from V2
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 
 1. Add import/export functionality for blocklist
 2. Implement statistics tracking for blocked attempts
@@ -605,7 +605,7 @@ A simple SHA-256 hash comparison could be added for better security. The current
 4. Create a sync mechanism for multiple devices
 5. Add proper password hashing before storage
 
-## Resources {#resources}
+Resources {#resources}
 
 - [Chrome Extension Docs](https://developer.chrome.com/docs/extensions/)
 - [declarativeNetRequest API](https://developer.chrome.com/docs/extensions/mv3/reference/declarativeNetRequest)

@@ -9,26 +9,26 @@ canonical_url: "https://bestchromeextensions.com/api-reference/system-api/"
 
 The `chrome.system` API provides extensions with access to system hardware and resource information. This API enables extensions to adapt their behavior based on the capabilities and state of the underlying hardware.
 
-## Overview {#overview}
+Overview {#overview}
 
 The chrome.system API is organized into several sub-APIs, each providing access to different system resources:
 
-- **chrome.system.cpu** - CPU information and usage statistics
-- **chrome.system.memory** - Physical memory information
-- **chrome.system.storage** - Storage device information
-- **chrome.system.display** - Display and monitor configuration
+- chrome.system.cpu - CPU information and usage statistics
+- chrome.system.memory - Physical memory information
+- chrome.system.storage - Storage device information
+- chrome.system.display - Display and monitor configuration
 
 Each sub-API requires its own permission in the extension manifest. Request only the permissions you need to minimize the permissions surface of your extension.
 
-## chrome.system.cpu {#chromesystemcpu}
+chrome.system.cpu {#chromesystemcpu}
 
-### Permission {#permission}
+Permission {#permission}
 
 ```json
 "permissions": ["system.cpu"]
 ```
 
-### Methods {#methods}
+Methods {#methods}
 
 #### getInfo()
 
@@ -38,10 +38,10 @@ Retrieves information about the CPU on the system.
 chrome.system.cpu.getInfo(callback)
 ```
 
-**Parameters:**
+Parameters:
 - `callback` (function): Called with the CPU information.
 
-**Returns:** A [CpuInfo](#cpuinfo) object containing:
+Returns: A [CpuInfo](#cpuinfo) object containing:
 - `numOfProcessors` (number): The number of logical processors on the system.
 - `archName` (string): The architecture name (e.g., "x86", "arm").
 - `modelName` (string): The CPU model name.
@@ -57,21 +57,21 @@ Each processor object contains:
   - `idle` (number): Cumulative time in idle mode (milliseconds)
   - `total` (number): Total cumulative time (milliseconds)
 
-### Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Adaptive Performance**: Reduce computational work on systems with weaker CPUs
-- **Resource Monitoring**: Display CPU usage information in extension dashboards
-- **Performance Profiling**: Collect CPU statistics to optimize extension behavior
+- Adaptive Performance: Reduce computational work on systems with weaker CPUs
+- Resource Monitoring: Display CPU usage information in extension dashboards
+- Performance Profiling: Collect CPU statistics to optimize extension behavior
 
-## chrome.system.memory {#chromesystemmemory}
+chrome.system.memory {#chromesystemmemory}
 
-### Permission {#permission}
+Permission {#permission}
 
 ```json
 "permissions": ["system.memory"]
 ```
 
-### Methods {#methods}
+Methods {#methods}
 
 #### getInfo()
 
@@ -81,28 +81,28 @@ Retrieves physical memory information.
 chrome.system.memory.getInfo(callback)
 ```
 
-**Parameters:**
+Parameters:
 - `callback` (function): Called with the memory information.
 
-**Returns:** A [MemoryInfo](#memoryinfo) object containing:
+Returns: A [MemoryInfo](#memoryinfo) object containing:
 - `capacity` (number): Total physical memory in bytes.
 - `availableCapacity` (number): Available memory in bytes.
 
-### Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Memory-Aware Caching**: Adjust cache sizes based on available memory
-- **Resource Management**: Warn users when memory is low
-- **Adaptive Behavior**: Reduce memory footprint on constrained devices
+- Memory-Aware Caching: Adjust cache sizes based on available memory
+- Resource Management: Warn users when memory is low
+- Adaptive Behavior: Reduce memory footprint on constrained devices
 
-## chrome.system.storage {#chromesystemstorage}
+chrome.system.storage {#chromesystemstorage}
 
-### Permission {#permission}
+Permission {#permission}
 
 ```json
 "permissions": ["system.storage"]
 ```
 
-### Methods {#methods}
+Methods {#methods}
 
 #### getInfo()
 
@@ -112,7 +112,7 @@ Retrieves information about storage devices attached to the system.
 chrome.system.storage.getInfo(callback)
 ```
 
-**Returns:** An array of [StorageUnitInfo](#storageunitinfo) objects:
+Returns: An array of [StorageUnitInfo](#storageunitinfo) objects:
 - `id` (string): Unique identifier for the storage device.
 - `name` (string): Display name of the storage device.
 - `type` (string): Type of storage ("fixed", "removable", or "unknown").
@@ -126,7 +126,7 @@ Ejects a removable storage device.
 chrome.system.storage.ejectDevice(deviceId, callback)
 ```
 
-**Parameters:**
+Parameters:
 - `deviceId` (string): The unique ID of the storage device to eject.
 - `callback` (function): Called with the result status ("success", "in_use", "no_such_device", or "failure").
 
@@ -138,11 +138,11 @@ Gets the available capacity for a specific storage device.
 chrome.system.storage.getAvailableCapacity(deviceId, callback)
 ```
 
-**Parameters:**
+Parameters:
 - `deviceId` (string): The unique ID of the storage device.
 - `callback` (function): Called with the available capacity.
 
-### Events {#events}
+Events {#events}
 
 #### onAttached
 
@@ -160,21 +160,21 @@ Fired when a removable storage device is detached.
 chrome.system.storage.onDetached.addListener(callback)
 ```
 
-### Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Removable Media Management**: Monitor USB drives and SD cards
-- **Storage Monitoring**: Display available space to users
-- **File Operations**: Direct file I/O to specific storage devices
+- Removable Media Management: Monitor USB drives and SD cards
+- Storage Monitoring: Display available space to users
+- File Operations: Direct file I/O to specific storage devices
 
-## chrome.system.display {#chromesystemdisplay}
+chrome.system.display {#chromesystemdisplay}
 
-### Permission {#permission}
+Permission {#permission}
 
 ```json
 "permissions": ["system.display"]
 ```
 
-### Methods {#methods}
+Methods {#methods}
 
 #### getInfo(flags?)
 
@@ -185,11 +185,11 @@ chrome.system.display.getInfo(callback)
 chrome.system.display.getInfo({ singleUnified: true }, callback)
 ```
 
-**Parameters:**
+Parameters:
 - `flags` (object, optional): Configuration options
   - `singleUnified` (boolean): If true, returns display info in a unified structure for Chrome OS.
 
-**Returns:** An array of [DisplayInfo](#displayinfo) objects:
+Returns: An array of [DisplayInfo](#displayinfo) objects:
 - `id` (string): Unique identifier for the display.
 - `name` (string): Display name (e.g., "HDMI-1", "Built-in display").
 - `bounds` (object): Display bounds { x, y, width, height }.
@@ -209,7 +209,7 @@ Modifies display properties. Most properties only work on Chrome OS.
 chrome.system.display.setDisplayProperties(id, info, callback)
 ```
 
-**Parameters:**
+Parameters:
 - `id` (string): The display identifier.
 - `info` (object): Properties to set
   - `mirroringSourceId` (string): Source display ID for mirroring
@@ -217,7 +217,7 @@ chrome.system.display.setDisplayProperties(id, info, callback)
   - `rotation` (number): Screen rotation
   - `boundsOriginX`, `boundsOriginY` (number): Position for extended desktop
 
-### Events {#events}
+Events {#events}
 
 #### onDisplayChanged
 
@@ -227,13 +227,13 @@ Fired when the display configuration changes.
 chrome.system.display.onDisplayChanged.addListener(callback)
 ```
 
-### Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-- **Multi-Monitor Aware Extensions**: Position popups and windows appropriately
-- **Display Information**: Show users details about their monitor setup
-- **DPI-Aware Rendering**: Adjust UI scaling based on DPI
+- Multi-Monitor Aware Extensions: Position popups and windows appropriately
+- Display Information: Show users details about their monitor setup
+- DPI-Aware Rendering: Adjust UI scaling based on DPI
 
-## Manifest Declaration {#manifest-declaration}
+Manifest Declaration {#manifest-declaration}
 
 To use the chrome.system API, declare the required permissions in your manifest:
 
@@ -258,9 +258,9 @@ Request only the specific sub-permissions your extension needs. For example, if 
 }
 ```
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Display System Info Dashboard {#display-system-info-dashboard}
+Display System Info Dashboard {#display-system-info-dashboard}
 
 ```javascript
 async function showSystemInfo() {
@@ -274,7 +274,7 @@ async function showSystemInfo() {
 }
 ```
 
-### Adaptive Behavior Based on CPU/Memory {#adaptive-behavior-based-on-cpumemory}
+Adaptive Behavior Based on CPU/Memory {#adaptive-behavior-based-on-cpumemory}
 
 ```javascript
 async function adaptToSystemCapabilities() {
@@ -292,7 +292,7 @@ async function adaptToSystemCapabilities() {
 }
 ```
 
-### Monitor Removable Storage Devices {#monitor-removable-storage-devices}
+Monitor Removable Storage Devices {#monitor-removable-storage-devices}
 
 ```javascript
 // Listen for removable storage attachment
@@ -309,7 +309,7 @@ const devices = await chrome.system.storage.getInfo();
 const removable = devices.filter(d => d.type === 'removable');
 ```
 
-### Multi-Monitor Aware Extension {#multi-monitor-aware-extension}
+Multi-Monitor Aware Extension {#multi-monitor-aware-extension}
 
 ```javascript
 async function positionOnSecondMonitor() {
@@ -327,21 +327,21 @@ async function positionOnSecondMonitor() {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Permissions Overview](/docs/permissions/overview.md) - Understanding Chrome extension permissions
 - [System Permissions](/docs/permissions/system.md) - Detailed information on system-related permissions
 
-## Additional Resources {#additional-resources}
+Additional Resources {#additional-resources}
 
 - [Chrome System API Official Documentation](https://developer.chrome.com/docs/extensions/system-api)
 - [Manifest Permissions Format](/docs/permissions/overview.md)
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### What system information can I access?
+What system information can I access?
 chrome.system provides CPU, memory, display, and storage information. Specific capabilities vary by platform.
 
-### Is system API available in Chrome Apps?
+Is system API available in Chrome Apps?
 The system API is available in extensions but some features may differ from deprecated Chrome Apps.
 
 ---

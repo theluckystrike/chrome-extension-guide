@@ -6,10 +6,10 @@ Manifest V3 (MV3) is the latest version of the Chrome Extensions platform, intro
 
 ## Timeline and Chrome Web Store Requirements
 
-**Important Dates:**
-- **June 2024**: Warning banners appeared in Chrome Web Store for MV2 extensions
-- **October 2024**: Chrome began disabling MV2 extensions on stable channel
-- **Present**: MV3 is required for all new submissions and updates
+Important Dates:
+- June 2024: Warning banners appeared in Chrome Web Store for MV2 extensions
+- October 2024: Chrome began disabling MV2 extensions on stable channel
+- Present: MV3 is required for all new submissions and updates
 
 All extensions must migrate to Manifest V3 to remain in the Chrome Web Store. The migration involves changes to the manifest file, background scripts, permissions, and various APIs.
 
@@ -980,10 +980,10 @@ browser.runtime.sendMessage({
 
 ### Benefits
 
-1. **Cross-manifest compatibility**: Same code works in MV2 and MV3
-2. **Promise-based**: Clean async/await syntax
-3. **TypeScript support**: Full type definitions included
-4. **Familiar API**: Matches Firefox extension API
+1. Cross-manifest compatibility: Same code works in MV2 and MV3
+2. Promise-based: Clean async/await syntax
+3. TypeScript support: Full type definitions included
+4. Familiar API: Matches Firefox extension API
 
 ## Reference
 

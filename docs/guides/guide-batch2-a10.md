@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Social media tools extensions enhance the browsing experience on platforms like Twitter/X, Facebook, LinkedIn, Instagram, and Reddit by adding automation, productivity features, and customizations. This guide covers the essential patterns for building robust social media Chrome extensions using Manifest V3 and TypeScript.
+Social media tools extensions enhance the browsing experience on platforms like Twitter/X, Facebook, LinkedIn, Instagram, and Reddit by adding automation, productivity features, and customizations. This guide covers the essential patterns for building solid social media Chrome extensions using Manifest V3 and TypeScript.
 
 ## Core Architecture
 
@@ -279,19 +279,19 @@ export const SocialToolsPopup: React.FC = () => {
 
 ## Best Practices
 
-1. **Respect Rate Limits**: Always implement rate limiting to avoid getting your extension or user accounts blocked
-2. **Handle Dynamic Content**: Use MutationObserver for SPA frameworks
-3. **Privacy First**: Only collect data users explicitly consent to
-4. **Platform-Specific Logic**: Each social platform has unique DOM structures—create abstraction layers
-5. **Background Processing**: Keep heavy processing in the background script to avoid UI blocking
+1. Respect Rate Limits: Always implement rate limiting to avoid getting your extension or user accounts blocked
+2. Handle Dynamic Content: Use MutationObserver for SPA frameworks
+3. Privacy First: Only collect data users explicitly consent to
+4. Platform-Specific Logic: Each social platform has unique DOM structures, create abstraction layers
+5. Background Processing: Keep heavy processing in the background script to avoid UI blocking
 
 ## Common Use Cases
 
-- **Post Scheduler**: Queue posts for later publication
-- **Analytics Dashboard**: Track engagement metrics across platforms
-- **Content Aggregator**: Collect and display content from multiple sources
-- **Privacy Tools**: Hide or blur sensitive content
-- **Automation**: Auto-like, follow, or engage based on rules
+- Post Scheduler: Queue posts for later publication
+- Analytics Dashboard: Track engagement metrics across platforms
+- Content Aggregator: Collect and display content from multiple sources
+- Privacy Tools: Hide or blur sensitive content
+- Automation: Auto-like, follow, or engage based on rules
 
 ## Permissions Required
 

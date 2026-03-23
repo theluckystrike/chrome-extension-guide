@@ -1,33 +1,33 @@
 ---
 layout: default
-title: "Chrome Extension Declarative Content — Developer Guide"
+title: "Chrome Extension Declarative Content. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/declarative-content/"
 ---
 # Declarative Content API Guide
 
-## Overview {#overview}
+Overview {#overview}
 - Show/hide extension action icon based on page content
-- No need to read page data — rules evaluated by browser
+- No need to read page data. rules evaluated by browser
 - Requires `"declarativeContent"` permission
 - More performant than using `chrome.tabs.onUpdated`
 
-## Basic Setup: Show Icon on Matching Pages {#basic-setup-show-icon-on-matching-pages}
+Basic Setup: Show Icon on Matching Pages {#basic-setup-show-icon-on-matching-pages}
 ```javascript
 // Disable icon by default
 chrome.action.disable();
-# Chrome Declarative Content API
+Chrome Declarative Content API
 
 The Chrome Declarative Content API enables extensions to react to page state changes without requiring access to page content. Instead of actively polling or injecting scripts to check conditions, you define declarative rules that the browser evaluates efficiently.
 
-## Overview
+Overview
 
 The Declarative Content API is part of Chrome's declarative net Request API family, designed for extensions that need to:
 - Show or hide the extension action based on page characteristics
 - Modify the extension icon dynamically
 - Conditionally inject content scripts
 
-**Key advantages over imperative approaches:**
+Key advantages over imperative approaches:
 - No active content script injection to check page state
 - Rules evaluated by the browser, not extension JavaScript
 - Reduced permission requirements (no host permissions needed for content access)
@@ -35,7 +35,7 @@ The Declarative Content API is part of Chrome's declarative net Request API fami
 
 Reference: [developer.chrome.com/docs/extensions/reference/api/declarativeContent](https://developer.chrome.com/docs/extensions/reference/api/declarativeContent)
 
-## Required Permissions
+Required Permissions
 
 Add `"declarativeContent"` to your `manifest.json`:
 
@@ -47,10 +47,10 @@ Add `"declarativeContent"` to your `manifest.json`:
 }
 ```
 
-## PageStateMatcher Conditions {#pagestatematcher-conditions}
+PageStateMatcher Conditions {#pagestatematcher-conditions}
 
-### URL Matching {#url-matching}
-## The onPageChanged API
+URL Matching {#url-matching}
+The onPageChanged API
 
 The `chrome.declarativeContent.onPageChanged` namespace provides the core functionality:
 
@@ -64,9 +64,9 @@ chrome.declarativeContent.onPageChanged.removeRules(ruleIdentifiers?)
 chrome.declarativeContent.onPageChanged.getRules(ruleIdentifiers?, callback)
 ```
 
-## Rule Format
+Rule Format
 
-Rules consist of **conditions** and **actions**:
+Rules consist of conditions and actions:
 
 ```javascript
 {
@@ -83,11 +83,11 @@ Rules consist of **conditions** and **actions**:
 
 When ALL conditions in a rule are met, ALL actions are executed.
 
-## PageStateMatcher
+PageStateMatcher
 
 `PageStateMatcher` defines when a rule should trigger. It can match by URL or CSS selectors.
 
-### URL-Based Matching
+URL-Based Matching
 
 ```javascript
 // Match specific host
@@ -130,15 +130,15 @@ new chrome.declarativeContent.PageStateMatcher({
 })
 ```
 
-### URL Filter Properties {#url-filter-properties}
+URL Filter Properties {#url-filter-properties}
 - `hostEquals`, `hostContains`, `hostPrefix`, `hostSuffix`
 - `pathEquals`, `pathContains`, `pathPrefix`, `pathSuffix`
 - `queryEquals`, `queryContains`, `queryPrefix`, `querySuffix`
 - `urlEquals`, `urlContains`, `urlPrefix`, `urlSuffix`, `urlMatches`
 - `schemes` (array), `ports` (array of numbers or ranges)
 
-### CSS Selector Matching {#css-selector-matching}
-### CSS Selector Matching
+CSS Selector Matching {#css-selector-matching}
+CSS Selector Matching
 
 Match pages containing specific DOM elements:
 
@@ -165,14 +165,14 @@ new chrome.declarativeContent.PageStateMatcher({
 })
 ```
 
-## Available Actions {#available-actions}
+Available Actions {#available-actions}
 
-### ShowAction {#showaction}
-**Note**: CSS matching is evaluated against the page's DOM. The extension doesn't need host permissions to use CSS selectors.
+ShowAction {#showaction}
+CSS matching is evaluated against the page's DOM. The extension doesn't need host permissions to use CSS selectors.
 
-## Available Actions
+Available Actions
 
-### ShowAction
+ShowAction
 
 Show the extension action (icon) when conditions are met:
 
@@ -197,8 +197,8 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### SetIcon {#seticon}
-### SetIcon
+SetIcon {#seticon}
+SetIcon
 
 Dynamically change the icon based on page context:
 
@@ -247,9 +247,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### RequestContentScript
+RequestContentScript
 
-> ⚠️ **Experimental**: This action is not available on stable Chrome builds. Use `chrome.scripting.executeScript` instead.
+>  Experimental: This action is not available on stable Chrome builds. Use `chrome.scripting.executeScript` instead.
 
 ```javascript
 // NOT AVAILABLE ON STABLE - for reference only
@@ -260,7 +260,7 @@ new chrome.declarativeContent.RequestContentScript({
 })
 ```
 
-## Using with activeTab Permission
+Using with activeTab Permission
 
 The `activeTab` permission provides temporary tab access when the user clicks your extension icon. Combined with declarativeContent, you get the best of both worlds:
 
@@ -305,12 +305,12 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Replacing tabs.onUpdated
+Replacing tabs.onUpdated
 
 The traditional approach using `tabs.onUpdated` has performance costs:
 
 ```javascript
-// ❌ Imperative approach - runs on EVERY tab update
+//  Imperative approach - runs on EVERY tab update
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && 
       tab.url?.includes('example.com')) {
@@ -323,7 +323,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 The declarative approach is more efficient:
 
 ```javascript
-// ✅ Declarative approach - browser handles evaluation
+//  Declarative approach - browser handles evaluation
 chrome.action.disable(); // Default: hidden
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -342,26 +342,26 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## Declarative vs Imperative Approaches
+Declarative vs Imperative Approaches
 
 | Aspect | Declarative | Imperative |
 |--------|-------------|-------------|
-| **Performance** | Browser-optimized, minimal CPU | JS runs on every event |
-| **Permissions** | No host permission needed | Often needs host permissions |
-| **Service Worker** | May not wake SW | Wakes SW on each event |
-| **Flexibility** | Limited to defined matchers | Full JavaScript logic |
-| **CSS Matching** | Built-in | Requires content script |
-| **Best For** | Show/hide actions | Complex logic, dynamic behavior |
+| Performance | Browser-optimized, minimal CPU | JS runs on every event |
+| Permissions | No host permission needed | Often needs host permissions |
+| Service Worker | May not wake SW | Wakes SW on each event |
+| Flexibility | Limited to defined matchers | Full JavaScript logic |
+| CSS Matching | Built-in | Requires content script |
+| Best For | Show/hide actions | Complex logic, dynamic behavior |
 
-## Performance Benefits
+Performance Benefits
 
-1. **Browser-Level Evaluation**: The browser evaluates rules internally, not in extension JavaScript
-2. **No Content Scripts for Detection**: CSS selectors are evaluated without injecting scripts
-3. **Efficient Updates**: Only triggers when conditions actually change
-4. **No Service Worker Wake-ups**: Rules can execute without activating the service worker (for ShowAction and SetIcon)
-5. **Memory Efficient**: No need to keep content scripts active for detection
+1. Browser-Level Evaluation: The browser evaluates rules internally, not in extension JavaScript
+2. No Content Scripts for Detection: CSS selectors are evaluated without injecting scripts
+3. Efficient Updates: Only triggers when conditions actually change
+4. No Service Worker Wake-ups: Rules can execute without activating the service worker (for ShowAction and SetIcon)
+5. Memory Efficient: No need to keep content scripts active for detection
 
-## Building a Context-Aware Extension
+Building a Context-Aware Extension
 
 Here's a practical example that shows different icons based on page context:
 
@@ -429,7 +429,7 @@ function createIconData(color, size) {
 }
 ```
 
-### RequestContentScript (Experimental -- not available on stable builds) {#requestcontentscript-experimental-not-available-on-stable-builds}
+RequestContentScript (Experimental -- not available on stable builds) {#requestcontentscript-experimental-not-available-on-stable-builds}
 ```javascript
 // Inject content script when conditions match (experimental, not on stable Chrome)
 new chrome.declarativeContent.RequestContentScript({
@@ -438,7 +438,7 @@ new chrome.declarativeContent.RequestContentScript({
 })
 ```
 
-## Multiple Rules {#multiple-rules}
+Multiple Rules {#multiple-rules}
 ```javascript
 chrome.declarativeContent.onPageChanged.addRules([
   {
@@ -463,7 +463,7 @@ chrome.declarativeContent.onPageChanged.addRules([
 ]);
 ```
 
-## Comparison: declarativeContent vs tabs.onUpdated {#comparison-declarativecontent-vs-tabsonupdated}
+Comparison: declarativeContent vs tabs.onUpdated {#comparison-declarativecontent-vs-tabsonupdated}
 | Feature | declarativeContent | tabs.onUpdated |
 |---------|-------------------|----------------|
 | Performance | Rules evaluated by browser | Extension code runs per update |
@@ -472,39 +472,39 @@ chrome.declarativeContent.onPageChanged.addRules([
 | Complexity | Simple rules | Full JS logic |
 | Use case | Show/hide icon | Complex logic |
 
-## Common Mistakes {#common-mistakes}
-- Forgetting to call `chrome.action.disable()` first — icon shows everywhere by default
+Common Mistakes {#common-mistakes}
+- Forgetting to call `chrome.action.disable()` first. icon shows everywhere by default
 - Not removing old rules before adding new ones (causes duplicates)
-- Only setting rules in `onInstalled` — rules persist, but good practice to reset
-- Using `RequestContentScript` in MV3 (not supported — use `chrome.scripting` instead)
+- Only setting rules in `onInstalled`. rules persist, but good practice to reset
+- Using `RequestContentScript` in MV3 (not supported. use `chrome.scripting` instead)
 - Missing `"declarativeContent"` in permissions array
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Declarative Content Patterns](../patterns/declarative-content-patterns.md)
 - [Declarative Content Permission](../permissions/declarativeContent.md)
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
-## Best Practices
+Best Practices
 
-1. **Always disable action by default**: Call `chrome.action.disable()` before adding rules
-2. **Remove old rules**: Use `removeRules(undefined, callback)` before adding new ones to avoid duplicates
-3. **Set rules in onInstalled**: Ensures rules are registered when the extension loads
-4. **Combine conditions**: Use multiple conditions when you need AND logic
-5. **Use multiple rules**: Create separate rules for different conditions rather than complex single rules
-6. **Test CSS matching**: Verify selectors work on target pages before shipping
+1. Always disable action by default: Call `chrome.action.disable()` before adding rules
+2. Remove old rules: Use `removeRules(undefined, callback)` before adding new ones to avoid duplicates
+3. Set rules in onInstalled: Ensures rules are registered when the extension loads
+4. Combine conditions: Use multiple conditions when you need AND logic
+5. Use multiple rules: Create separate rules for different conditions rather than complex single rules
+6. Test CSS matching: Verify selectors work on target pages before shipping
 
-## Limitations
+Limitations
 
 - Cannot directly execute arbitrary JavaScript (use `chrome.scripting` for that)
 - `RequestContentScript` is experimental and unavailable on stable
 - Rules don't persist across extension updates (re-register in `onInstalled`)
 - Limited to URL and CSS matching (no XPath, no DOM access in conditions)
 
-## Migration from MV2 to MV3
+Migration from MV2 to MV3
 
 In Manifest V2, `declarativeContent` actions work similarly, but note:
 - Use `chrome.browserAction` instead of `chrome.action` for MV2

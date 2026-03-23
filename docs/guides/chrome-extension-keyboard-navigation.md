@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Keyboard Navigation — Developer Guide"
+title: "Chrome Extension Keyboard Navigation. Developer Guide"
 description: "Learn Chrome extension keyboard navigation with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-keyboard-navigation/"
 ---
 # Keyboard Navigation in Chrome Extensions
 
-## Introduction {#introduction}
+Introduction {#introduction}
 - Extension UIs (popups, options pages, side panels) must be fully keyboard accessible
-- Many users rely on keyboards for navigation — it's core accessibility
+- Many users rely on keyboards for navigation. it's core accessibility
 - This guide covers keyboard patterns for extension-specific UI components
 
-## Focus Management {#focus-management}
+Focus Management {#focus-management}
 
-### Auto-Focus First Element {#auto-focus-first-element}
+Auto-Focus First Element {#auto-focus-first-element}
 - Popups should auto-focus the first interactive element on open
 - Prevents users from having to tab through irrelevant content
 ```javascript
@@ -26,15 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Tab Order with tabindex {#tab-order-with-tabindex}
+Tab Order with tabindex {#tab-order-with-tabindex}
 - Use `tabindex="0"` for custom interactive elements (make them focusable)
 - Use `tabindex="-1"` for elements that need programmatic focus but not tab order
-- Never use `tabindex > 0` — it disrupts natural tab sequence
+- Never use `tabindex > 0`. it disrupts natural tab sequence
 - Rely on DOM order: place elements in logical tab sequence
 
-## Arrow Key Navigation {#arrow-key-navigation}
+Arrow Key Navigation {#arrow-key-navigation}
 
-### Roving Tabindex Pattern {#roving-tabindex-pattern}
+Roving Tabindex Pattern {#roving-tabindex-pattern}
 - For lists and grids: only one item has `tabindex="0"`, others have `-1`
 - Arrow keys move focus and update which element has `tabindex="0"`
 - This is the standard pattern for menu items, list views, and grids
@@ -57,9 +57,9 @@ listItems.forEach((item, index) => {
 });
 ```
 
-## Extension Keyboard Shortcuts {#extension-keyboard-shortcuts}
+Extension Keyboard Shortcuts {#extension-keyboard-shortcuts}
 
-### chrome.commands API {#chromecommands-api}
+chrome.commands API {#chromecommands-api}
 - Define shortcuts in manifest.json for global and extension-specific shortcuts
 ```json
 {
@@ -84,9 +84,9 @@ chrome.commands.onCommand.addListener((command) => {
 ```
 - Cross-ref: See [commands-keyboard-shortcuts.md](./commands-keyboard-shortcuts.md) for full reference
 
-## Focus Trapping in Modals {#focus-trapping-in-modals}
+Focus Trapping in Modals {#focus-trapping-in-modals}
 
-### Modal Focus Trap {#modal-focus-trap}
+Modal Focus Trap {#modal-focus-trap}
 - When a modal opens, Tab should cycle only within the modal
 - Restore focus to trigger element when modal closes
 ```javascript
@@ -110,9 +110,9 @@ function trapFocus(container) {
 }
 ```
 
-## Search Patterns {#search-patterns}
+Search Patterns {#search-patterns}
 
-### Search Auto-Focus and Escape {#search-auto-focus-and-escape}
+Search Auto-Focus and Escape {#search-auto-focus-and-escape}
 - Auto-focus search input when user starts typing or opens a view
 - Escape clears search and returns focus to main content
 ```javascript
@@ -132,9 +132,9 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-## List Interaction Patterns {#list-interaction-patterns}
+List Interaction Patterns {#list-interaction-patterns}
 
-### Enter, Space, Delete {#enter-space-delete}
+Enter, Space, Delete {#enter-space-delete}
 - Enter: select item, navigate to detail, or submit
 - Space: toggle checkbox, expand/collapse, or play/pause
 - Delete/Backspace: remove selected item with confirmation
@@ -152,9 +152,9 @@ listItem.addEventListener('keydown', (e) => {
 });
 ```
 
-## Visual Focus Indicators {#visual-focus-indicators}
+Visual Focus Indicators {#visual-focus-indicators}
 
-### Never Remove Outline {#never-remove-outline}
+Never Remove Outline {#never-remove-outline}
 - Never use `outline: none` without providing an alternative focus style
 - Custom focus indicators: border, background color, or box-shadow
 ```css
@@ -173,9 +173,9 @@ button:focus-visible,
 }
 ```
 
-## Screen Reader Support {#screen-reader-support}
+Screen Reader Support {#screen-reader-support}
 
-### ARIA Live Regions {#aria-live-regions}
+ARIA Live Regions {#aria-live-regions}
 - Announce dynamic updates to screen readers
 - Use `aria-live="polite"` for non-critical updates, "assertive" for urgent
 ```html
@@ -189,14 +189,14 @@ function announce(message) {
 }
 ```
 
-## Related Guides {#related-guides}
-- [accessibility.md](./accessibility.md) — Full accessibility guide
-- [keyboard-shortcuts.md](./keyboard-shortcuts.md) — Extension shortcut configuration
-- [commands-keyboard-shortcuts.md](./commands-keyboard-shortcuts.md) — Commands API deep dive
+Related Guides {#related-guides}
+- [accessibility.md](./accessibility.md). Full accessibility guide
+- [keyboard-shortcuts.md](./keyboard-shortcuts.md). Extension shortcut configuration
+- [commands-keyboard-shortcuts.md](./commands-keyboard-shortcuts.md). Commands API detailed look
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Accessibility](../guides/accessibility.md)
 - [Keyboard Shortcuts](../guides/commands-keyboard-shortcuts.md)

@@ -19,7 +19,7 @@ This guide covers the complete chrome.bookmarks API functionality, provides prac
 
 ---
 
-## Understanding the Chrome Bookmarks API {#understanding-chrome-bookmarks-api}
+Understanding the Chrome Bookmarks API {#understanding-chrome-bookmarks-api}
 
 The chrome.bookmarks API is part of the Chrome Extension APIs that provides methods for interacting with the browser's bookmark system. This API allows extensions to create, read, update, and delete bookmarks and bookmark folders. It also provides event listeners to react to changes in the bookmark system, enabling real-time synchronization and UI updates.
 
@@ -42,11 +42,11 @@ Understanding when and how to request this permission is important for user trus
 
 ---
 
-## Core Bookmark Operations {#core-bookmark-operations}
+Core Bookmark Operations {#core-bookmark-operations}
 
 The chrome.bookmarks API provides four primary operations: create, get, update, and remove. Each operation serves a specific purpose in managing bookmarks, and understanding these methods thoroughly is essential for building any bookmark-related extension.
 
-### Creating Bookmarks {#creating-bookmarks}
+Creating Bookmarks {#creating-bookmarks}
 
 The chrome.bookmarks.create method allows you to add new bookmarks to the browser. This method accepts a BookmarkCreateArg object containing the bookmark's properties and returns a Promise that resolves with the created BookmarkTreeNode. The basic syntax requires at minimum a title, and optionally a URL and parent folder ID.
 
@@ -75,7 +75,7 @@ chrome.bookmarks.create({
 
 Folders themselves are created by omitting the url property, effectively creating a container for other bookmarks. This distinction between bookmarks and folders is fundamental to understanding how the Chrome bookmark system organizes content hierarchically.
 
-### Reading Bookmarks {#reading-bookmarks}
+Reading Bookmarks {#reading-bookmarks}
 
 Retrieving bookmarks is accomplished through chrome.bookmarks.get and chrome.bookmarks.getTree. The get method accepts an array of bookmark IDs or a single ID and returns matching BookmarkTreeNode objects. The getTree method returns the entire bookmark hierarchy, which is useful for building comprehensive bookmark managers.
 
@@ -101,7 +101,7 @@ chrome.bookmarks.search('tutorial', (results) => {
 
 Building an effective bookmark manager requires understanding how to traverse the bookmark tree efficiently. The tree structure uses parentId references to create hierarchies, and you can recursively explore folders to build complete folder representations in your extension's UI.
 
-### Updating Bookmarks {#updating-bookmarks}
+Updating Bookmarks {#updating-bookmarks}
 
 The chrome.bookmarks.update method modifies existing bookmarks. This method accepts a bookmark ID and an object containing the properties to update. You can change the title, URL, and parent folder of any bookmark. The method returns the updated BookmarkTreeNode through its callback or Promise.
 
@@ -126,7 +126,7 @@ chrome.bookmarks.update('bookmark_id_here', {
 });
 ```
 
-### Deleting Bookmarks {#deleting-bookmarks}
+Deleting Bookmarks {#deleting-bookmarks}
 
 Removing bookmarks uses chrome.bookmarks.remove for individual bookmarks and chrome.bookmarks.removeTree for folders with all their contents. The remove method simply requires the ID of the bookmark to delete, while removeTree recursively removes a folder and everything within it.
 
@@ -148,7 +148,7 @@ Implement confirmation dialogs before destructive operations like removing folde
 
 ---
 
-## Handling Bookmark Events {#handling-bookmark-events}
+Handling Bookmark Events {#handling-bookmark-events}
 
 The chrome.bookmarks API provides event listeners that notify your extension when the bookmark system changes. These events are essential for building responsive bookmark managers that stay synchronized with the browser's state.
 
@@ -184,11 +184,11 @@ The onRemoved event fires when bookmarks or folders are deleted. For folders, th
 
 ---
 
-## Building a Complete Bookmark Manager Extension {#building-complete-bookmark-manager}
+Building a Complete Bookmark Manager Extension {#building-complete-bookmark-manager}
 
 Now that you understand the API fundamentals, let's build a complete bookmark manager extension. This practical example demonstrates how to combine all the concepts into a functional application that users would actually want to use.
 
-### Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 A well-organized extension follows consistent patterns for file structure. Create the following files in your project directory: manifest.json, popup.html, popup.js, popup.css, and optionally background.js for handling complex operations. This separation of concerns makes your code maintainable and easier to debug.
 
@@ -214,7 +214,7 @@ The manifest.json defines your extension's configuration and permissions. For ou
 }
 ```
 
-### Creating the Popup Interface {#popup-interface}
+Creating the Popup Interface {#popup-interface}
 
 The popup.html provides the user interface that appears when clicking your extension icon. Design a clean, intuitive interface with sections for searching, displaying bookmarks, and creating new bookmarks. Use semantic HTML and consider accessibility from the start.
 
@@ -255,7 +255,7 @@ The popup.html provides the user interface that appears when clicking your exten
 </html>
 ```
 
-### Implementing Core Functionality {#implementing-core-functionality}
+Implementing Core Functionality {#implementing-core-functionality}
 
 The popup.js file contains all the logic for interacting with the chrome.bookmarks API and managing the user interface. We'll implement bookmark display, search, creation, and deletion functionality.
 
@@ -306,7 +306,7 @@ function createFolderElement(folder) {
   const div = document.createElement('div');
   div.className = 'folder-item';
   div.innerHTML = `
-    <span class="folder-name">📁 ${folder.title}</span>
+    <span class="folder-name"> ${folder.title}</span>
     <div class="folder-contents"></div>
   `;
   
@@ -379,7 +379,7 @@ function displaySearchResults(results) {
 }
 ```
 
-### Styling Your Extension {#styling-your-extension}
+Styling Your Extension {#styling-your-extension}
 
 The popup.css file provides visual styling that makes your extension professional and enjoyable to use. Focus on clean design with clear visual hierarchy and comfortable interaction patterns.
 
@@ -539,11 +539,11 @@ h1 {
 
 ---
 
-## Advanced Features and Best Practices {#advanced-features-best-practices}
+Advanced Features and Best Practices {#advanced-features-best-practices}
 
 Building a production-quality bookmark manager requires attention to advanced features and best practices that differentiate excellent extensions from basic implementations.
 
-### Implementing Bookmark Import and Export {#implementing-import-export}
+Implementing Bookmark Import and Export {#implementing-import-export}
 
 Many users want to migrate between bookmark managers or back up their collections. Implement import from HTML bookmark files and export to standard HTML format. The chrome.bookmarks API doesn't directly support these operations, but you can parse and generate HTML using standard JavaScript techniques.
 
@@ -577,7 +577,7 @@ function generateBookmarkHTML(nodes) {
 }
 ```
 
-### Performance Optimization {#performance-optimization}
+Performance Optimization {#performance-optimization}
 
 Bookmark collections can grow quite large, so performance optimization is crucial. Use efficient data structures, lazy-load folder contents, and debounce search queries to maintain responsive user experience. Consider implementing virtual scrolling for large bookmark lists.
 
@@ -600,7 +600,7 @@ const debouncedSearch = debounce((query) => {
 }, 300);
 ```
 
-### Error Handling and Edge Cases {#error-handling}
+Error Handling and Edge Cases {#error-handling}
 
 Robust error handling distinguishes professional extensions from amateur efforts. Handle cases like duplicate URLs, empty titles, network errors, and permission issues gracefully. Provide meaningful error messages to users while maintaining a smooth experience.
 
@@ -620,10 +620,10 @@ chrome.bookmarks.create({
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The Chrome Bookmarks API provides a powerful foundation for building custom bookmark manager extensions. This guide covered the complete API surface, from basic CRUD operations to advanced features like event handling and import/export functionality. You now have everything needed to create professional bookmark management tools.
 
-Remember to always request only necessary permissions, handle user data responsibly, and provide excellent user experience through thoughtful design and robust error handling. With these principles and the technical knowledge from this guide, you're well-equipped to build bookmark manager extensions that users will love.
+Remember to always request only necessary permissions, handle user data responsibly, and provide excellent user experience through thoughtful design and solid error handling. With these principles and the technical knowledge from this guide, you're well-equipped to build bookmark manager extensions that users will love.
 
-The Chrome extension ecosystem continues to evolve, and bookmark management remains a valuable area for innovation. Consider exploring additional APIs like chrome.bookmarkManager or integrating with cloud services for cross-device synchronization to take your bookmark manager to the next level.
+The Chrome extension ecosystem continues to evolve, and bookmark management remains a valuable area for innovation. Consider exploring additional APIs like chrome.bookmarkManager or integrating with cloud services for cross-device synchronization to take your bookmark manager to the better.

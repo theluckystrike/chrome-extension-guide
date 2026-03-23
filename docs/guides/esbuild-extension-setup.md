@@ -1,26 +1,26 @@
 ---
 layout: default
-title: "Chrome Extension Esbuild Setup — Developer Guide"
+title: "Chrome Extension Esbuild Setup. Developer Guide"
 description: "Learn how to build a Esextension Setup Chrome extension with this comprehensive tutorial covering architecture, implementation, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/esbuild-extension-setup/"
 ---
 # esbuild Setup for Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 esbuild is an extremely fast JavaScript bundler written in Go that offers blazing-fast build times for Chrome extensions. Known for its parallel compilation and native code performance, esbuild can bundle extension code in milliseconds compared to seconds or minutes with traditional bundlers.
 
 This guide covers setting up esbuild for Chrome extension development, configuring multi-entry builds for different extension contexts, and establishing efficient development and production workflows.
 
-## Why esbuild {#why-esbuild}
+Why esbuild {#why-esbuild}
 
-esbuild offers several compelling advantages for Chrome extension development. First and most importantly, its build speed is orders of magnitude faster than traditional bundlers—esbuild can bundle entire extensions in under a second, making the development cycle nearly instantaneous. This speed comes from its Go-based architecture that compiles to native code and utilizes all available CPU cores through parallel processing.
+esbuild offers several compelling advantages for Chrome extension development. First and most importantly, its build speed is orders of magnitude faster than traditional bundlers, esbuild can bundle entire extensions in under a second, making the development cycle nearly instantaneous. This speed comes from its Go-based architecture that compiles to native code and utilizes all available CPU cores through parallel processing.
 
 esbuild includes built-in support for TypeScript without requiring additional configuration or separate compilation steps. You can use TypeScript syntax directly in your source files, and esbuild will transpile them correctly while preserving type annotations for IDE support. The minification engine is similarly impressive, producing smaller bundles than terser or other JavaScript minifiers while being significantly faster.
 
 The configuration system uses a straightforward JavaScript API that is easier to learn than webpack's complex DSL. Despite its simplicity, esbuild is highly capable, supporting code splitting, tree shaking, source maps, and plugin architecture for custom processing.
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 
 A typical Chrome extension project built with esbuild follows a structured directory layout:
 
@@ -49,7 +49,7 @@ tsconfig.json             # TypeScript configuration
 
 This structure keeps each extension context isolated while allowing shared code to be imported where needed. The manifest.json stays in the project root and gets copied to the dist folder during the build process.
 
-## esbuild Configuration {#esbuild-configuration}
+esbuild Configuration {#esbuild-configuration}
 
 The esbuild configuration for Chrome extensions requires setting up multiple entry points, each corresponding to a different extension context. Here is a comprehensive configuration:
 
@@ -145,9 +145,9 @@ if (isWatch) {
 
 This configuration defines four entry points: popup, options, background, and content. Each entry produces a corresponding JavaScript file in the dist directory.
 
-## Service Worker Build {#service-worker-build}
+Service Worker Build {#service-worker-build}
 
-The background service worker presents unique challenges because it runs in a special Chrome context without access to the DOM. Unlike popup and options pages, the service worker cannot use true HMR—each change requires reloading the extension in Chrome. Additionally, the service worker must be a single bundled file with no dynamic imports, as Chrome loads it as a single script.
+The background service worker presents unique challenges because it runs in a special Chrome context without access to the DOM. Unlike popup and options pages, the service worker cannot use true HMR, each change requires reloading the extension in Chrome. Additionally, the service worker must be a single bundled file with no dynamic imports, as Chrome loads it as a single script.
 
 Configure the service worker to ensure all dependencies are bundled into a single file:
 
@@ -164,7 +164,7 @@ Configure the service worker to ensure all dependencies are bundled into a singl
 
 The inlineDynamicImports option ensures all code is bundled into one file, which is required for service workers. Some developers prefer to create a separate build configuration specifically for the service worker to have more granular control over the output.
 
-## Content Script Build {#content-script-build}
+Content Script Build {#content-script-build}
 
 Content scripts are injected into web pages and must be completely self-contained since they run in the context of arbitrary websites. They cannot rely on any external dependencies being present, and Chrome requires them to be specified as single files in the manifest.
 
@@ -183,7 +183,7 @@ Configure content script builds to output a single file without code splitting:
 
 If your content script requires CSS, you can either extract CSS into a separate file and include it in the manifest's css array, or inject styles programmatically using JavaScript.
 
-## Watch Mode and Hot Reload {#watch-mode-and-hot-reload}
+Watch Mode and Hot Reload {#watch-mode-and-hot-reload}
 
 esbuild's watch mode rebuilds your extension automatically when source files change. For a complete development experience with automatic extension reloading, you can combine esbuild watch with the Chrome Extension Reload VS Code extension or use a custom script:
 
@@ -224,7 +224,7 @@ ctx.rebuild().then(() => notifyReload());
 
 For true hot reload in popup and options pages, consider using a development server with the CRXJS dev server or manually reloading the extension after each build.
 
-## TypeScript Support {#typescript-support}
+TypeScript Support {#typescript-support}
 
 esbuild has native TypeScript support built-in. Simply use .ts files as entry points, and esbuild will transpile them automatically:
 
@@ -247,7 +247,7 @@ Your tsconfig.json can be minimal since esbuild handles the transpilation:
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*"],
+  "include": ["src//*"],
   "exclude": ["node_modules", "dist"]
 }
 ```
@@ -258,7 +258,7 @@ Install Chrome types for full autocomplete support:
 npm install --save-dev @types/chrome
 ```
 
-## Package.json Scripts {#packagejson-scripts}
+Package.json Scripts {#packagejson-scripts}
 
 Add the following scripts to your package.json for convenient building:
 
@@ -290,7 +290,7 @@ For TypeScript type checking before builds, add a separate script:
 }
 ```
 
-## Manifest Copying {#manifest-copying}
+Manifest Copying {#manifest-copying}
 
 After building your JavaScript files, you need to copy the manifest.json to the dist directory. Include any static assets as well:
 
@@ -344,7 +344,7 @@ Update your manifest.json to reference the correct built file paths:
 }
 ```
 
-## Production Build {#production-build}
+Production Build {#production-build}
 
 The production build process creates optimized files ready for distribution. Enable minification and disable sourcemaps:
 
@@ -368,9 +368,9 @@ npm run build
 
 After building, you can upload the resulting zip file to the Chrome Web Store using the developer dashboard or the chrome-webstore-upload tool.
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Complete esbuild.config.mjs {#complete-esbuildconfigmjs}
+Complete esbuild.config.mjs {#complete-esbuildconfigmjs}
 
 ```javascript
 import * as esbuild from 'esbuild';
@@ -474,7 +474,7 @@ if (isWatch) {
 }
 ```
 
-### Service Worker Entry Example {#service-worker-entry-example}
+Service Worker Entry Example {#service-worker-entry-example}
 
 ```typescript
 // src/background/service-worker.ts
@@ -498,7 +498,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 For more information on related topics, see these guides:
 
@@ -506,9 +506,9 @@ For more information on related topics, see these guides:
 - [CI/CD Pipeline](./ci-cd-pipeline.md) - Automated testing and deployment workflows
 - [Vite Extension Setup](./vite-extension-setup.md) - Alternative build tool comparison
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Vite Setup](../guides/vite-extension-setup.md)
 - [Webpack Setup](../guides/webpack-extension-setup.md)

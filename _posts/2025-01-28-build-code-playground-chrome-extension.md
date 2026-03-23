@@ -17,17 +17,17 @@ This comprehensive guide will walk you through building a complete code playgrou
 
 ---
 
-## Understanding Code Playground Extensions {#understanding-code-playground-extensions}
+Understanding Code Playground Extensions {#understanding-code-playground-extensions}
 
 A code playground extension is a specialized Chrome extension that provides an integrated development environment (IDE) directly within your browser. Unlike traditional code editors that require you to create files and manually preview them, a code playground extension offers instant feedback through live preview capabilities. This immediate iteration cycle makes these extensions perfect for rapid prototyping, learning new technologies, or demonstrating code concepts.
 
-The architecture of a code playground extension typically consists of three core components working together seamlessly. The first component is the code editor interface, which provides a syntax-highlighted text area where users can write their HTML, CSS, and JavaScript code. Modern playgrounds support multiple programming languages and offer features like auto-completion, line numbers, and syntax error highlighting.
+The architecture of a code playground extension typically consists of three core components working together smoothly. The first component is the code editor interface, which provides a syntax-highlighted text area where users can write their HTML, CSS, and JavaScript code. Modern playgrounds support multiple programming languages and offer features like auto-completion, line numbers, and syntax error highlighting.
 
 The second component is the preview sandbox, which is an isolated environment where the code executes. This sandbox must be secure enough to prevent malicious code from affecting the user's browser while being flexible enough to render web content accurately. Chrome extensions provide several mechanisms for creating safe execution environments, including sandboxed iframes and the web request API for intercepting network requests.
 
 The third component is the communication layer that synchronizes changes between the editor and the preview. When a user modifies code in the editor, these changes must be reflected in the preview almost instantaneously. This requires efficient message passing between the extension's popup or options page and the sandboxed preview frame.
 
-### Why Build a Code Playground Extension
+Why Build a Code Playground Extension
 
 There are several compelling reasons to build your own code playground extension. First, it gives you complete control over the features and functionality, allowing you to customize the experience for your specific needs. You are not limited by the constraints of existing extensions, and you can add or modify features as required.
 
@@ -37,31 +37,31 @@ Third, a custom code playground extension can become a valuable tool that increa
 
 ---
 
-## Project Setup and Extension Structure {#project-setup}
+Project Setup and Extension Structure {#project-setup}
 
 Before we start coding, let's set up the project structure and create the necessary files for our code playground extension. A well-organized project structure makes development easier and helps maintain the extension over time.
 
-### Creating the Project Directory
+Creating the Project Directory
 
 Create a new directory for your extension project called `code-playground-extension`. Inside this directory, we will create the following structure:
 
 ```
 code-playground-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── sandbox.html
-├── sandbox.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ sandbox.html
+ sandbox.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 This structure separates the extension's popup interface from the sandbox environment, making it easier to manage security boundaries and communication between components.
 
-### Writing the Manifest File
+Writing the Manifest File
 
 The manifest.json file is the backbone of any Chrome extension. It defines the extension's permissions, resources, and entry points. For our code playground extension, we need to declare specific permissions for storage and activeTab access:
 
@@ -93,11 +93,11 @@ The manifest version 3 is the current standard for Chrome extensions, offering i
 
 ---
 
-## Building the Code Editor Interface {#building-editor-interface}
+Building the Code Editor Interface {#building-editor-interface}
 
 The user interface of our code playground consists of the popup that opens when clicking the extension icon. This popup contains the code editor, preview controls, and buttons for running code and saving snippets.
 
-### Creating the Popup HTML
+Creating the Popup HTML
 
 The popup HTML defines the structure of our code editor. We will create a tabbed interface that allows users to switch between HTML, CSS, and JavaScript editors:
 
@@ -146,7 +146,7 @@ The popup HTML defines the structure of our code editor. We will create a tabbed
 
 This HTML structure provides a clean, tabbed interface for editing code in three different languages. The preview section contains an iframe that will display the rendered output of our code.
 
-### Styling the Interface
+Styling the Interface
 
 The CSS file styles the editor to make it visually appealing and functional. We focus on creating a dark theme that reduces eye strain during long coding sessions:
 
@@ -284,11 +284,11 @@ The styling creates a cohesive dark theme similar to popular code editors like V
 
 ---
 
-## Implementing the Core Functionality {#implementing-functionality}
+Implementing the Core Functionality {#implementing-functionality}
 
 Now we need to implement the JavaScript logic that powers our code playground. This includes handling tab switching, executing code in the sandbox, saving and loading code, and communicating between the popup and the sandbox iframe.
 
-### The Popup JavaScript
+The Popup JavaScript
 
 The popup.js file contains all the logic for the code playground interface:
 
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 This JavaScript handles all the core functionality of our code playground. It switches between HTML, CSS, and JavaScript tabs, combines the code into a single HTML document, and displays it in the sandboxed iframe. It also saves code to Chrome's local storage and loads previously saved code when the popup opens.
 
-### Security Considerations for the Sandbox
+Security Considerations for the Sandbox
 
 When building a code playground, security is paramount. Users may accidentally or intentionally write code that could compromise their browsing session. The sandbox attribute on the iframe provides essential protection:
 
@@ -431,11 +431,11 @@ The sandbox attribute restricts the capabilities of the iframe content. By limit
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Now that we have a basic working code playground, let's explore some advanced features that can make our extension more powerful and user-friendly.
 
-### Adding Code Highlighting
+Adding Code Highlighting
 
 While plain text editors work, syntax highlighting significantly improves the coding experience. We can integrate a lightweight syntax highlighting library like Prism.js or CodeMirror into our extension. However, for a Chrome extension, using the simple textarea approach keeps the extension lightweight and fast to load.
 
@@ -449,7 +449,7 @@ If you want to add syntax highlighting, you can replace the textareas with CodeM
 
 To integrate CodeMirror, you would need to include the library files in your extension and modify the HTML to use CodeMirror's editor elements instead of textareas.
 
-### Implementing Live Reload
+Implementing Live Reload
 
 One of the most powerful features of a code playground is live reload, where changes in the editor are immediately reflected in the preview without requiring a manual run. We can implement this with a debounced auto-run function:
 
@@ -467,7 +467,7 @@ let debounceTimer;
 
 This debounce technique prevents the preview from updating on every keystroke, which would be disruptive and computationally expensive. Instead, it waits until the user stops typing for half a second before updating the preview.
 
-### Adding Template Support
+Adding Template Support
 
 Templates are pre-written code snippets that users can load to get started quickly. You can implement a template system that provides starting points for common use cases:
 
@@ -488,7 +488,7 @@ const templates = {
 
 Users can select from these templates to quickly start new projects without writing boilerplate code from scratch.
 
-### Export and Share Functionality
+Export and Share Functionality
 
 Another valuable feature is the ability to export code as files or share it via a URL. You can implement export functionality using the Chrome Downloads API:
 
@@ -525,11 +525,11 @@ This export feature allows users to save their work as standalone HTML files tha
 
 ---
 
-## Testing Your Extension {#testing-extension}
+Testing Your Extension {#testing-extension}
 
 Before publishing your extension, thorough testing ensures it works correctly across different scenarios and browsers.
 
-### Loading the Extension Locally
+Loading the Extension Locally
 
 To test your extension in Chrome:
 
@@ -540,25 +540,25 @@ To test your extension in Chrome:
 
 The extension will appear in your toolbar, and you can click it to open the popup and test all features.
 
-### Testing Best Practices
+Testing Best Practices
 
 When testing your code playground extension, verify the following:
 
-- **Code execution**: Test that HTML, CSS, and JavaScript all render correctly in the preview
-- **Security**: Verify that malicious code cannot access sensitive browser data
-- **Performance**: Ensure the extension loads quickly and responds to input without lag
-- **Storage**: Confirm that saving and loading code works correctly
-- **Error handling**: Test with invalid or broken code to ensure errors are caught gracefully
+- Code execution: Test that HTML, CSS, and JavaScript all render correctly in the preview
+- Security: Verify that malicious code cannot access sensitive browser data
+- Performance: Ensure the extension loads quickly and responds to input without lag
+- Storage: Confirm that saving and loading code works correctly
+- Error handling: Test with invalid or broken code to ensure errors are caught gracefully
 
 Create test cases with various code snippets, including valid code, code with syntax errors, and potentially problematic code to ensure the sandbox protects the browser adequately.
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store to share it with other developers.
 
-### Preparing for Publication
+Preparing for Publication
 
 Before publishing, ensure you have:
 
@@ -567,7 +567,7 @@ Before publishing, ensure you have:
 3. Taken screenshots or a promotional video of your extension
 4. Created a developer account at the Chrome Web Store
 
-### Publishing Steps
+Publishing Steps
 
 To publish your extension:
 
@@ -581,7 +581,7 @@ The review process typically takes a few hours to a few days. Once approved, you
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a code playground Chrome extension is an excellent project that teaches you many valuable skills in Chrome extension development. You have learned how to create a user interface with tabs and editors, implement a secure sandbox for code execution, use Chrome's storage API for persistence, and communicate between different extension components.
 

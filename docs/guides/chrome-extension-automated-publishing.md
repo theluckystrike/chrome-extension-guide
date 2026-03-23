@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Automated Publishing — Developer Guide"
+title: "Chrome Extension Automated Publishing. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-automated-publishing/"
 ---
@@ -10,20 +10,20 @@ Automate your extension publishing workflow using CI/CD pipelines. This guide co
 
 ---
 
-## Chrome Web Store API Setup {#chrome-web-store-api-setup}
+Chrome Web Store API Setup {#chrome-web-store-api-setup}
 
 Before automating, set up API access in Google Cloud Console:
 
-1. **Create a project** in [Google Cloud Console](https://console.cloud.google.com/)
-2. **Enable Chrome Web Store API** — search for "Chrome Web Store API" in the API library
-3. **Create OAuth2 credentials** — go to APIs & Services > Credentials > Create Credentials > OAuth2 Client ID (Desktop app)
-4. **Get a refresh token** — follow the OAuth flow to obtain a refresh token for API access
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable Chrome Web Store API. search for "Chrome Web Store API" in the API library
+3. Create OAuth2 credentials. go to APIs & Services > Credentials > Create Credentials > OAuth2 Client ID (Desktop app)
+4. Get a refresh token. follow the OAuth flow to obtain a refresh token for API access
 
-> **Tip**: Service accounts are not supported for CWS API. Use OAuth2 refresh tokens for authentication.
+> Tip: Service accounts are not supported for CWS API. Use OAuth2 refresh tokens for authentication.
 
 ---
 
-## Authentication {#authentication}
+Authentication {#authentication}
 
 Store your CWS credentials securely in GitHub Secrets:
 
@@ -34,16 +34,16 @@ Store your CWS credentials securely in GitHub Secrets:
 | `CWS_REFRESH_TOKEN` | OAuth2 refresh token |
 | `CWS_EXTENSION_ID` | Your extension's unique ID |
 
-> **Security**: Never commit credentials to source control. Use GitHub Secrets or your CI/CD provider's secret management.
+> Security: Never commit credentials to source control. Use GitHub Secrets or your CI/CD provider's secret management.
 
 ---
 
-## CLI Tools {#cli-tools}
+CLI Tools {#cli-tools}
 
 The `chrome-webstore-upload-cli` package provides easy CLI access:
 
 ```bash
-# Install globally or use npx
+Install globally or use npx
 npx chrome-webstore-upload-cli upload \
   --extension-id $CWS_EXTENSION_ID \
   --client-id $CWS_CLIENT_ID \
@@ -54,13 +54,13 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-## GitHub Actions Workflow {#github-actions-workflow}
+GitHub Actions Workflow {#github-actions-workflow}
 
 Complete workflow that builds, packages, and publishes on tag push:
 
 {% raw %}
 ```yaml
-# .github/workflows/publish.yml
+.github/workflows/publish.yml
 name: Publish to Chrome Web Store
 
 on:
@@ -112,7 +112,7 @@ jobs:
 
 ---
 
-## Versioning Automation {#versioning-automation}
+Versioning Automation {#versioning-automation}
 
 Sync `manifest.json` version from `package.json` or git tags:
 
@@ -133,30 +133,30 @@ git push origin v1.2.3
 
 ---
 
-## Publishing Stages {#publishing-stages}
+Publishing Stages {#publishing-stages}
 
 Control when your extension goes live:
 
 | Stage | Description | Use Case |
 |-------|-------------|----------|
-| **Upload (draft)** | Upload without publishing | Testing the build |
-| **Trusted testers** | `publishTarget: trustedTesters` | Beta testing |
-| **Public** | Visible to all users | Production release |
+| Upload (draft) | Upload without publishing | Testing the build |
+| Trusted testers | `publishTarget: trustedTesters` | Beta testing |
+| Public | Visible to all users | Production release |
 
 ---
 
-## Pre-Publish Checks {#pre-publish-checks}
+Pre-Publish Checks {#pre-publish-checks}
 
 Run these checks before uploading:
 
-- **Lint** — `pnpm lint` for code quality
-- **Test** — `pnpm test` to verify functionality
-- **Size check** — Extension must be under 256MB (unpacked)
-- **Verify ZIP contents** — Ensure all required files are included
+- Lint. `pnpm lint` for code quality
+- Test. `pnpm test` to verify functionality
+- Size check. Extension must be under 256MB (unpacked)
+- Verify ZIP contents. Ensure all required files are included
 
 ---
 
-## Rollback {#rollback}
+Rollback {#rollback}
 
 To rollback to a previous version:
 
@@ -168,13 +168,13 @@ Or upload a previous tagged version:
 
 ```bash
 git checkout v1.2.2
-# Rebuild and upload
+Rebuild and upload
 git push origin v1.2.2
 ```
 
 ---
 
-## Multi-Browser Publishing {#multi-browser-publishing}
+Multi-Browser Publishing {#multi-browser-publishing}
 
 Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
 
@@ -186,16 +186,16 @@ Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
       --api-secret $AMO_API_SECRET
 ```
 
-> **Cross-ref**: `docs/guides/cross-browser.md` for multi-browser extension development.
+> Cross-ref: `docs/guides/cross-browser.md` for multi-browser extension development.
 
 ---
 
-## Semantic Release Integration {#semantic-release-integration}
+Semantic Release Integration {#semantic-release-integration}
 
 Automate changelog and version bumping with semantic-release:
 
 ```yaml
-# In package.json
+In package.json
 {
   "release": {
     "plugins": [
@@ -218,16 +218,16 @@ Configure to trigger CWS publish on release:
 
 ---
 
-## Related Guides {#related-guides}
+Related Guides {#related-guides}
 
-- [Publishing Guide](../publishing/publishing-guide.md) — Manual publishing process
-- [CI/CD Pipeline](../guides/ci-cd-pipeline.md) — Build automation
-- [Version Management](../publishing/version-management.md) — Version strategies
-- [Chrome Web Store API](../guides/chrome-web-store-api.md) — API reference
+- [Publishing Guide](../publishing/publishing-guide.md). Manual publishing process
+- [CI/CD Pipeline](../guides/ci-cd-pipeline.md). Build automation
+- [Version Management](../publishing/version-management.md). Version strategies
+- [Chrome Web Store API](../guides/chrome-web-store-api.md). API reference
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Chrome Web Store API](../guides/chrome-web-store-api.md)
@@ -237,5 +237,5 @@ Configure to trigger CWS publish on release:
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

@@ -1,14 +1,14 @@
 ---
 layout: default
-title: "Chrome Extension Email Tracker — Developer Guide"
+title: "Chrome Extension Email Tracker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-email-tracker/"
 ---
 # Build an Email Productivity Tracker
 
-Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly statistics with charts, provides a focus mode with configurable time limits, and sends notifications when over time. Uses **@theluckystrike/webext-storage** for persistent data and **chrome.idle** for intelligent pause detection.
+Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly statistics with charts, provides a focus mode with configurable time limits, and sends notifications when over time. Uses @theluckystrike/webext-storage for persistent data and chrome.idle for intelligent pause detection.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -16,7 +16,7 @@ Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly 
 
 ---
 
-## Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
+Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
 
 ```bash
 mkdir email-tracker && cd email-tracker
@@ -52,7 +52,7 @@ Create `manifest.json`:
 
 ---
 
-## Step 2: Gmail Detection via Content Script {#step-2-gmail-detection-via-content-script}
+Step 2: Gmail Detection via Content Script {#step-2-gmail-detection-via-content-script}
 
 Create `content/gmail-detector.js` to detect when user is actively reading or composing emails:
 
@@ -94,7 +94,7 @@ chrome.runtime.sendMessage({ type: 'GMAIL_ACTIVITY', isActive });
 
 ---
 
-## Step 3: Time Tracking with Tab and Window Events {#step-3-time-tracking-with-tab-and-window-events}
+Step 3: Time Tracking with Tab and Window Events {#step-3-time-tracking-with-tab-and-window-events}
 
 Create `background.js` to track time using `tabs.onActivated` and `windows.onFocusChanged`:
 
@@ -207,7 +207,7 @@ See [patterns/idle-detection.md](../patterns/idle-detection.md) for more idle de
 
 ---
 
-## Step 4: Statistics Popup with Daily Totals and Weekly Chart {#step-4-statistics-popup-with-daily-totals-and-weekly-chart}
+Step 4: Statistics Popup with Daily Totals and Weekly Chart {#step-4-statistics-popup-with-daily-totals-and-weekly-chart}
 
 Create `popup/popup.html`:
 
@@ -217,7 +217,7 @@ Create `popup/popup.html`:
 <head><meta charset="UTF-8"><link rel="stylesheet" href="popup.css"></head>
 <body>
   <div class="container">
-    <h1>📧 Email Tracker</h1>
+    <h1> Email Tracker</h1>
     <div class="today-stats">
       <div class="stat-card">
         <span class="stat-value" id="today-time">0</span>
@@ -312,7 +312,7 @@ loadStats();
 
 ---
 
-## Step 5: Focus Mode with Notifications and Daily Limit {#step-5-focus-mode-with-notifications-and-daily-limit}
+Step 5: Focus Mode with Notifications and Daily Limit {#step-5-focus-mode-with-notifications-and-daily-limit}
 
 Extend `background.js` with focus mode logic:
 
@@ -358,7 +358,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Step 6: CSV Export and Data Persistence {#step-6-csv-export-and-data-persistence}
+Step 6: CSV Export and Data Persistence {#step-6-csv-export-and-data-persistence}
 
 The popup already includes CSV export. For additional data management:
 
@@ -403,15 +403,15 @@ async function cleanupOldData() {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 This extension tracks email time through:
-1. **Content script** detects Gmail activity via URL and DOM
-2. **Background service** tracks time using `tabs.onActivated` and `windows.onFocusChanged`
-3. **Idle detection** pauses tracking when user is away
-4. **Focus mode** enforces daily limits with notifications
-5. **Chart.js** visualizes weekly statistics
-6. **CSV export** enables data analysis in spreadsheets
+1. Content script detects Gmail activity via URL and DOM
+2. Background service tracks time using `tabs.onActivated` and `windows.onFocusChanged`
+3. Idle detection pauses tracking when user is away
+4. Focus mode enforces daily limits with notifications
+5. Chart.js visualizes weekly statistics
+6. CSV export enables data analysis in spreadsheets
 
 For production, add error handling, sync data across devices with [patterns/data-sync.md](../patterns/data-sync.md), and implement proper TypeScript types.
 -e 

@@ -25,31 +25,31 @@ The snippet manager follows a standard extension architecture with three main co
 
 ```
 snippet-manager/
-├── manifest.json
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry point
-│   │   ├── handlers/
-│   │   │   ├── snippets.ts   # Snippet CRUD operations
-│   │   │   ├── storage.ts    # Chrome storage abstraction
-│   │   │   └── messaging.ts  # Message handlers
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts          # Popup entry point
-│   │   └── styles.css
-│   ├── content/
-│   │   ├── overlay.ts        # Page overlay for snippet insertion
-│   │   └── styles.css
-│   ├── shared/
-│   │   ├── types.ts          # TypeScript interfaces
-│   │   ├── constants.ts
-│   │   └── utils.ts
-│   └── options/
-│       ├── options.html
-│       └── options.ts
-├── icons/
-├── _locales/
-└── tsconfig.json
+ manifest.json
+ src/
+    background/
+       index.ts          # Service worker entry point
+       handlers/
+          snippets.ts   # Snippet CRUD operations
+          storage.ts    # Chrome storage abstraction
+          messaging.ts  # Message handlers
+    popup/
+       popup.html
+       popup.ts          # Popup entry point
+       styles.css
+    content/
+       overlay.ts        # Page overlay for snippet insertion
+       styles.css
+    shared/
+       types.ts          # TypeScript interfaces
+       constants.ts
+       utils.ts
+    options/
+        options.html
+        options.ts
+ icons/
+ _locales/
+ tsconfig.json
 ```
 
 ### Manifest Configuration
@@ -92,9 +92,9 @@ snippet-manager/
 
 ---
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Type Definitions
+Type Definitions
 
 Define all data structures in the shared types file to ensure consistency across contexts:
 
@@ -145,7 +145,7 @@ export type MessageAction =
   | { action: 'SEARCH_SNIPPETS'; payload: { query: string } };
 ```
 
-### Snippet Service (Background)
+Snippet Service (Background)
 
 The snippet service handles all CRUD operations and communicates with Chrome storage:
 
@@ -242,9 +242,9 @@ export async function searchSnippets(query: string): Promise<CodeSnippet[]> {
 
 ---
 
-## UI Design: Popup, Sidebar, and Content Script
+UI Design: Popup, Sidebar, and Content Script
 
-### Popup Interface
+Popup Interface
 
 The popup provides quick access to search and insert snippets:
 
@@ -368,7 +368,7 @@ function setupKeyboardShortcuts(): void {
 }
 ```
 
-### Content Script Overlay
+Content Script Overlay
 
 The content script overlay allows inserting snippets directly into web pages:
 
@@ -459,9 +459,9 @@ function escapeHtml(text: string): string {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions Explained
+Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -471,7 +471,7 @@ function escapeHtml(text: string): string {
 | `contextMenus` | Add right-click menu for quick snippet access |
 | `<all_urls>` | Allow insertion into any webpage |
 
-### Context Menu Setup
+Context Menu Setup
 
 ```typescript
 // src/background/handlers/contextMenus.ts
@@ -521,9 +521,9 @@ async function handleSaveSelection(selection: string, tabId?: number): Promise<v
 
 ---
 
-## State Management and Storage
+State Management and Storage
 
-### Storage Abstraction Layer
+Storage Abstraction Layer
 
 ```typescript
 // src/background/handlers/storage.ts
@@ -565,7 +565,7 @@ export function watchStorage<T>(
 }
 ```
 
-### Message Handler Registration
+Message Handler Registration
 
 ```typescript
 // src/background/handlers/messaging.ts
@@ -620,9 +620,9 @@ async function handleMessage(message: MessageAction): Promise<unknown> {
 
 ---
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Comprehensive Error Handling
+Comprehensive Error Handling
 
 ```typescript
 // src/shared/errors.ts
@@ -682,9 +682,9 @@ export function sanitizeCode(code: string): string {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing with Vitest
+Unit Testing with Vitest
 
 ```typescript
 // tests/snippets.test.ts
@@ -742,9 +742,9 @@ describe('Snippet Service', () => {
 
 ---
 
-## Full Code Examples
+Full Code Examples
 
-### Background Service Worker Entry Point
+Background Service Worker Entry Point
 
 ```typescript
 // src/background/index.ts
@@ -779,13 +779,13 @@ chrome.runtime.onConnect.addListener((port) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Strategies
+Optimization Strategies
 
-1. **Lazy Load Content Scripts**: Only inject when needed using `chrome.scripting.executeScript`
+1. Lazy Load Content Scripts: Only inject when needed using `chrome.scripting.executeScript`
 
-2. **Debounce Search**: Prevent excessive storage queries during typing:
+2. Debounce Search: Prevent excessive storage queries during typing:
 ```typescript
 function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
@@ -799,34 +799,34 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 }
 ```
 
-3. **Use IndexedDB for Large Snippets**: For snippets exceeding 100KB, use IndexedDB instead of chrome.storage
+3. Use IndexedDB for Large Snippets: For snippets exceeding 100KB, use IndexedDB instead of chrome.storage
 
-4. **Cache Active Tab Content**: Avoid repeated queries by caching tab information
+4. Cache Active Tab Content: Avoid repeated queries by caching tab information
 
-5. **Chunk Large Data Operations**: When syncing many snippets, process in batches
+5. Chunk Large Data Operations: When syncing many snippets, process in batches
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication Steps
+Pre-Publication Steps
 
-- [ ] **Test in Incognito Mode**: Ensure all features work without persistent storage
-- [ ] **Verify Permissions**: Request only necessary permissions
-- [ ] **Check Icon Sizes**: 16x16, 48x48, 128x128 PNG icons
-- [ ] **Add Screenshots**: 1280x800 PNG screenshots for store listing
-- [ ] **Write Privacy Policy**: Required for extensions with broad permissions
-- [ ] **Test Cross-Browser**: Consider Firefox (WebExtension) compatibility
-- [ ] **Optimize Bundle Size**: Use code splitting and tree shaking
+- [ ] Test in Incognito Mode: Ensure all features work without persistent storage
+- [ ] Verify Permissions: Request only necessary permissions
+- [ ] Check Icon Sizes: 16x16, 48x48, 128x128 PNG icons
+- [ ] Add Screenshots: 1280x800 PNG screenshots for store listing
+- [ ] Write Privacy Policy: Required for extensions with broad permissions
+- [ ] Test Cross-Browser: Consider Firefox (WebExtension) compatibility
+- [ ] Optimize Bundle Size: Use code splitting and tree shaking
 
-### Store Listing Requirements
+Store Listing Requirements
 
 - [ ] Unique extension name (no trademarked terms)
 - [ ] Detailed description (at least 2 sentences)
 - [ ] Category selection (Developer Tools > Extensions)
 - [ ] Language support declaration in `_locales`
 
-### Post-Publish
+Post-Publish
 
 - [ ] Monitor error reports in Chrome Web Store console
 - [ ] Set up update notifications to users
@@ -835,6 +835,6 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 
 ---
 
-## Summary
+Summary
 
 Building a code snippet manager requires careful consideration of Chrome's extension architecture. The service worker serves as the central hub, managing state and coordinating between the popup UI and content scripts. Use TypeScript throughout to maintain type safety across contexts, implement proper error handling for robustness, and test thoroughly before publishing. Follow the publishing checklist to ensure your extension passes review and provides a great user experience.

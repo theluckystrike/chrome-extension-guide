@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Chrome Extension Accessibility Checker — Developer Guide"
+title: "Chrome Extension Accessibility Checker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-accessibility-checker/"
 ---
 # Build an Accessibility Checker Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Scan any web page for common accessibility issues
 - Check alt text on images
 - Validate color contrast (WCAG AA/AAA)
@@ -18,7 +18,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-accessibility-c
 - Detect landmark regions
 - Generate accessibility reports with severity levels
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: activeTab, scripting, storage
 - host_permissions: <all_urls>
 - content scripts for page scanning
@@ -26,7 +26,7 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-accessibility-c
 
 ---
 
-## Step 1: DOM Scanner {#step-1-dom-scanner}
+Step 1: DOM Scanner {#step-1-dom-scanner}
 
 Scan the page for accessibility issues:
 
@@ -90,7 +90,7 @@ function getSelector(el) {
 
 ---
 
-## Step 2: Color Contrast Calculator {#step-2-color-contrast-calculator}
+Step 2: Color Contrast Calculator {#step-2-color-contrast-calculator}
 
 Validate WCAG color contrast ratios:
 
@@ -144,7 +144,7 @@ document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li').forEach(el =
 
 ---
 
-## Step 3: Issue Highlighter Overlay {#step-3-issue-highlighter-overlay}
+Step 3: Issue Highlighter Overlay {#step-3-issue-highlighter-overlay}
 
 Visual overlay to highlight issues on page:
 
@@ -188,7 +188,7 @@ function highlightIssues(issues) {
 
 ---
 
-## Step 4: Report Generator {#step-4-report-generator}
+Step 4: Report Generator {#step-4-report-generator}
 
 Create detailed accessibility report:
 
@@ -256,7 +256,7 @@ function displayReport(report) {
 
 ---
 
-## Testing {#testing}
+Testing {#testing}
 
 ```javascript
 // Run accessibility check
@@ -283,7 +283,7 @@ document.getElementById('run-scan').addEventListener('click', async () => {
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - [guides/accessibility.md](../guides/accessibility.md)
 - [guides/extension-a11y-testing.md](../guides/extension-a11y-testing.md)
 - [patterns/dom-observer-patterns.md](../patterns/dom-observer-patterns.md)
@@ -293,5 +293,5 @@ document.getElementById('run-scan').addEventListener('click', async () => {
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

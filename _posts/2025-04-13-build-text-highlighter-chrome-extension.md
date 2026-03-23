@@ -11,45 +11,45 @@ canonical_url: "https://bestchromeextensions.com/2025/04/13/build-text-highlight
 
 # Build a Text Highlighter Chrome Extension: Annotate and Save Web Content
 
-Web annotation tools have become essential for researchers, students, and professionals who consume large amounts of online content. The ability to highlight, annotate, and save important passages directly in the browser transforms how we interact with web content. In this comprehensive guide, we will walk you through building a fully functional text highlighter Chrome extension using Manifest V3.
+Web annotation tools have become essential for researchers, students, and professionals who consume large amounts of online content. The ability to highlight, annotate, and save important passages directly in the browser transforms how we interact with web content. we will walk you through building a fully functional text highlighter Chrome extension using Manifest V3.
 
 This extension will allow users to select text on any webpage, apply colored highlights, add notes to their selections, and save all annotations locally for future reference. By the end of this tutorial, you will have a complete understanding of how to build a text highlighter chrome extension that rivals popular commercial solutions.
 
 ---
 
-## Why Build a Text Highlighter Chrome Extension? {#why-build}
+Why Build a Text Highlighter Chrome Extension? {#why-build}
 
 The demand for web annotation tools continues to grow as more people rely on online resources for research, learning, and professional development. A well-designed highlight text chrome extension solves real problems for users across many domains:
 
-### Market Demand and Use Cases
+Market Demand and Use Cases
 
 Researchers need to mark key findings across dozens of articles and later export or review those highlights. Students highlighting text chrome extension tools help them study more effectively by color-coding different topics or themes. Content creators use web annotation extension functionality to collect quotes and inspiration for their own work. Professionals bookmark and annotate industry news, competitor analysis, and market research for later reference.
 
-Building a chrome extension annotate feature gives you a valuable tool that addresses genuine user pain points. The skills you develop — including DOM manipulation, cross-origin communication, storage management, and user interface design — transfer directly to many other extension projects.
+Building a chrome extension annotate feature gives you a valuable tool that addresses genuine user problems. The skills you develop. including DOM manipulation, cross-origin communication, storage management, and user interface design. transfer directly to many other extension projects.
 
-### Learning Opportunities
+Learning Opportunities
 
 This project teaches you several important Chrome extension development concepts. You will master text selection APIs that let you detect and manipulate what users highlight. You will work with localStorage and the Chrome Storage API to persist user data across sessions. You will implement a popup interface that communicates with content scripts. Finally, you will handle message passing between different extension components to coordinate functionality.
 
 ---
 
-## Project Architecture and Design {#architecture}
+Project Architecture and Design {#architecture}
 
 Before writing any code, let us establish the architecture that will power our text highlighter chrome extension.
 
-### Core Components
+Core Components
 
-Our extension consists of four main components that work together to deliver a seamless highlighting experience:
+Our extension consists of four main components that work together to deliver a smooth highlighting experience:
 
-**The Manifest File** defines the extension's identity, permissions, and the files that compose it. We will use Manifest V3, which is the current standard for Chrome extensions.
+The Manifest File defines the extension's identity, permissions, and the files that compose it. We will use Manifest V3, which is the current standard for Chrome extensions.
 
-**The Content Script** runs in the context of web pages and handles text selection, highlight rendering, and DOM manipulation. This is where the magic happens when users select and highlight text.
+The Content Script runs in the context of web pages and handles text selection, highlight rendering, and DOM manipulation. This is where the magic happens when users select and highlight text.
 
-**The Background Service Worker** manages extension lifecycle events and coordinates communication between components when needed.
+The Background Service Worker manages extension lifecycle events and coordinates communication between components when needed.
 
-**The Popup Interface** provides users with controls to manage their highlights, change highlight colors, view saved annotations, and access extension settings.
+The Popup Interface provides users with controls to manage their highlights, change highlight colors, view saved annotations, and access extension settings.
 
-### Data Flow
+Data Flow
 
 When a user selects text on a webpage, the content script detects the selection and displays a floating toolbar. The user chooses a highlight color and optionally adds a note. The content script then wraps the selected text in a highlight element, stores the highlight data in Chrome's local storage, and communicates with the popup to update the saved highlights list.
 
@@ -57,7 +57,7 @@ This architecture separates concerns cleanly: the content script handles page in
 
 ---
 
-## Step 1: Creating the Manifest {#manifest}
+Step 1: Creating the Manifest {#manifest}
 
 Every Chrome extension begins with the manifest.json file. This configuration tells Chrome about your extension's capabilities and requirements:
 
@@ -103,11 +103,11 @@ Notice that we use `<all_urls>` in host_permissions because users will want to h
 
 ---
 
-## Step 2: Building the Content Script {#content-script}
+Step 2: Building the Content Script {#content-script}
 
 The content script is the heart of our build highlighter extension. It detects text selections, renders highlights, and manages the floating toolbar that appears when users select text.
 
-### Detecting Text Selection
+Detecting Text Selection
 
 The first challenge is detecting when a user selects text on the page. We use the mouseup event combined with the Selection API:
 
@@ -173,8 +173,8 @@ The first challenge is detecting when a user selects text on the page. We use th
            title="${color.name}"></button>`
         ).join('')}
       </div>
-      <button class="highlighter-note-btn" title="Add Note">📝</button>
-      <button class="highlighter-clear-btn" title="Clear Selection">✕</button>
+      <button class="highlighter-note-btn" title="Add Note"></button>
+      <button class="highlighter-clear-btn" title="Clear Selection"></button>
     `;
 
     // Style the toolbar
@@ -341,7 +341,7 @@ The first challenge is detecting when a user selects text on the page. We use th
 
 This content script handles the core functionality of our chrome extension text highlighter. It detects when users select text, displays a floating toolbar with color options, and applies highlights by wrapping selected text in styled span elements.
 
-### Adding CSS Styles
+Adding CSS Styles
 
 Create a content.css file to style both the highlights and the toolbar:
 
@@ -412,7 +412,7 @@ Create a content.css file to style both the highlights and the toolbar:
 
 ---
 
-## Step 3: Building the Popup Interface {#popup}
+Step 3: Building the Popup Interface {#popup}
 
 The popup provides users with access to their saved highlights and controls for managing annotations. Let us create the popup HTML and JavaScript:
 
@@ -619,7 +619,7 @@ The popup provides users with access to their saved highlights and controls for 
 
   <div class="highlights-list" id="highlightsList">
     <div class="empty-state">
-      <div class="empty-state-icon">🖊️</div>
+      <div class="empty-state-icon"></div>
       <p>Select text on any page and click a color to highlight it.</p>
     </div>
   </div>
@@ -629,7 +629,7 @@ The popup provides users with access to their saved highlights and controls for 
 </html>
 ```
 
-### Popup JavaScript Logic
+Popup JavaScript Logic
 
 Now create the popup.js file to handle user interactions:
 
@@ -670,7 +670,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (filtered.length === 0) {
       highlightsList.innerHTML = `
         <div class="empty-state">
-          <div class="empty-state-icon">🖊️</div>
+          <div class="empty-state-icon"></div>
           <p>${currentFilter === 'all' 
             ? 'No highlights yet. Select text on any page to get started.' 
             : 'No highlights on this page yet.'}</p>
@@ -685,7 +685,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     highlightsList.innerHTML = filtered.map(highlight => `
       <div class="highlight-item" data-id="${highlight.id}" style="border-left-color: ${highlight.color}">
         <div class="highlight-text">${escapeHtml(highlight.text)}</div>
-        ${highlight.note ? `<div class="highlight-note">📝 ${escapeHtml(highlight.note)}</div>` : ''}
+        ${highlight.note ? `<div class="highlight-note"> ${escapeHtml(highlight.note)}</div>` : ''}
         <div class="highlight-meta">
           <span>${formatDate(highlight.timestamp)}</span>
           <span>${new URL(highlight.url).hostname}</span>
@@ -779,7 +779,7 @@ function formatDate(timestamp) {
 
 ---
 
-## Step 4: Creating the Background Service Worker {#background}
+Step 4: Creating the Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events and can coordinate between different parts of your extension:
 
@@ -805,7 +805,7 @@ chrome.action.onClicked.addListener((tab) => {
 
 ---
 
-## Step 5: Testing Your Extension {#testing}
+Step 5: Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our text highlighter chrome extension in Chrome:
 
@@ -823,28 +823,28 @@ To test the chrome extension annotate functionality:
 5. Click the note button to add an annotation
 6. Click the extension icon to see your saved highlights in the popup
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
-**Highlights not appearing**: Check the console for errors. Make sure the content script is loading correctly and that there are no JavaScript errors in the page itself.
+Highlights not appearing: Check the console for errors. Make sure the content script is loading correctly and that there are no JavaScript errors in the page itself.
 
-**Toolbar positioning issues**: The toolbar uses getBoundingClientRect() which works relative to the viewport. If your page has unusual CSS transforms or positioning, you may need to adjust the calculation.
+Toolbar positioning issues: The toolbar uses getBoundingClientRect() which works relative to the viewport. If your page has unusual CSS transforms or positioning, you may need to adjust the calculation.
 
-**Cannot highlight across elements**: The current implementation uses surroundContents() which only works for selections within a single parent element. For more complex selections, you would need to use a range extraction library or implement a more sophisticated algorithm.
+Cannot highlight across elements: The current implementation uses surroundContents() which only works for selections within a single parent element. For more complex selections, you would need to use a range extraction library or implement a more sophisticated algorithm.
 
 ---
 
-## Step 6: Publishing to the Chrome Web Store {#publishing}
+Step 6: Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension thoroughly, you can publish it to reach millions of users:
 
-### Prepare for Submission
+Prepare for Submission
 
-1. **Create icons**: You need 16x16, 48x48, and 128x128 PNG icons
-2. **Write a description**: Clearly explain what your chrome extension text highlighter does
-3. **Take screenshots**: Show the highlighting in action on a real webpage
-4. **Privacy policy**: Required since you are storing user data
+1. Create icons: You need 16x16, 48x48, and 128x128 PNG icons
+2. Write a description: Clearly explain what your chrome extension text highlighter does
+3. Take screenshots: Show the highlighting in action on a real webpage
+4. Privacy policy: Required since you are storing user data
 
-### Submit for Review
+Submit for Review
 
 1. Zip your extension files (excluding test files and source maps)
 2. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -856,33 +856,33 @@ Google typically reviews submissions within 1-3 business days. Make sure your ex
 
 ---
 
-## Advanced Features to Consider {#advanced}
+Advanced Features to Consider {#advanced}
 
 Once you have the basic chrome extension annotate functionality working, consider adding these advanced features:
 
-### Export Functionality
+Export Functionality
 
 Allow users to export their highlights in various formats: plain text, Markdown, HTML, or PDF. This is particularly valuable for researchers who need to compile notes from multiple sources.
 
-### Cloud Sync
+Cloud Sync
 
 Implement synchronization using chrome.storage.sync to let users access their highlights across different devices. This requires careful handling of merge conflicts and storage quotas.
 
-### Highlight Sharing
+Highlight Sharing
 
 Allow users to share specific highlights via a unique URL that opens the original page with the highlight visible.
 
-### PDF Support
+PDF Support
 
 Use the Chrome PDF API to extend highlighting capability to PDF documents viewed in Chrome.
 
-### Search Functionality
+Search Functionality
 
 Add a search feature in the popup to quickly find highlights by text content or notes.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 You have now built a complete text highlighter chrome extension that allows users to select and annotate web content. This project demonstrates several essential Chrome extension development concepts including content script manipulation, the Selection API, local storage management, popup UI design, and inter-component communication.
 
@@ -894,4 +894,4 @@ Start building today, and transform the way users interact with web content thro
 
 ---
 
-*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike — your comprehensive resource for Chrome extension development.*
+*This guide is part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. your comprehensive resource for Chrome extension development.*

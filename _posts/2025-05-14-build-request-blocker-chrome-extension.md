@@ -11,27 +11,27 @@ canonical_url: "https://bestchromeextensions.com/2025/05/14/build-request-blocke
 
 # Build a Request Blocker Chrome Extension: Block Trackers and Unwanted Scripts
 
-The internet has become a battlefield of sorts. Every time you visit a website, dozens of invisible requests are made on your behalf—tracking scripts, advertising networks, analytics providers, and third-party widgets all compete to collect data about your browsing behavior. For privacy-conscious users and developers, understanding how to block these requests at the source is a powerful skill.
+The internet has become a battlefield of sorts. Every time you visit a website, dozens of invisible requests are made on your behalf, tracking scripts, advertising networks, analytics providers, and third-party widgets all compete to collect data about your browsing behavior. For privacy-conscious users and developers, understanding how to block these requests at the source is a powerful skill.
 
-In this comprehensive guide, we will walk you through building a **request blocker Chrome extension** from scratch. By the end of this tutorial, you will have a fully functional extension capable of intercepting and blocking network requests based on customizable rules. Whether you want to block known trackers, prevent specific scripts from loading, or filter requests by domain patterns, this project will give you the foundation to do exactly that.
+we will walk you through building a request blocker Chrome extension from scratch. By the end of this tutorial, you will have a fully functional extension capable of intercepting and blocking network requests based on customizable rules. Whether you want to block known trackers, prevent specific scripts from loading, or filter requests by domain patterns, this project will give you the foundation to do exactly that.
 
 ---
 
-## Why Build a Request Blocker Extension?
+Why Build a Request Blocker Extension?
 
 Before we dive into the code, let's discuss why building a request blocker extension is valuable. The primary benefits include:
 
-1. **Enhanced Privacy**: Block tracking scripts and analytics that follow you across websites
-2. **Improved Performance**: Reduce page load times by blocking heavy third-party scripts and ads
-3. **Educational Value**: Learn how Chrome's webRequest API works under the hood
-4. **Custom Control**: Create your own rules tailored to your specific needs
-5. **Browser Independence**: Unlike some privacy tools, this extension works directly in Chrome
+1. Enhanced Privacy: Block tracking scripts and analytics that follow you across websites
+2. Improved Performance: Reduce page load times by blocking heavy third-party scripts and ads
+3. Educational Value: Learn how Chrome's webRequest API works under the hood
+4. Custom Control: Create your own rules tailored to your specific needs
+5. Browser Independence: Unlike some privacy tools, this extension works directly in Chrome
 
-Many popular ad blockers use similar techniques to what we will implement here. By understanding these mechanisms, you gain deeper insight into how web privacy tools function—and you can build custom solutions for your unique requirements.
+Many popular ad blockers use similar techniques to what we will implement here. By understanding these mechanisms, you gain deeper insight into how web privacy tools function, and you can build custom solutions for your unique requirements.
 
 ---
 
-## Prerequisites
+Prerequisites
 
 To follow along with this tutorial, you will need:
 
@@ -44,29 +44,29 @@ Let's start by setting up the project structure.
 
 ---
 
-## Project Structure
+Project Structure
 
 Every Chrome extension requires a manifest file and the appropriate directory structure. For our request blocker, we will need:
 
 ```
 request-blocker/
-├── manifest.json
-├── background.js
-├── popup.html
-├── popup.js
-├── popup.css
-├── rules.json
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ background.js
+ popup.html
+ popup.js
+ popup.css
+ rules.json
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 Create a new folder named `request-blocker` and set up these files. We will build each component step by step.
 
 ---
 
-## Step 1: Creating the Manifest
+Step 1: Creating the Manifest
 
 The manifest.json file is the backbone of any Chrome extension. It tells Chrome about the extension's permissions, background scripts, and user interface. Here is the manifest for our request blocker:
 
@@ -107,14 +107,14 @@ The manifest.json file is the backbone of any Chrome extension. It tells Chrome 
 
 Key permissions explained:
 
-- **webRequest**: Allows us to observe and analyze network requests
-- **webRequestBlocking**: Enables us to block or modify requests before they complete
-- **storage**: Lets us save user preferences and rule configurations
-- **activeTab**: Provides access to the current tab when the user interacts with the extension
+- webRequest: Allows us to observe and analyze network requests
+- webRequestBlocking: Enables us to block or modify requests before they complete
+- storage: Lets us save user preferences and rule configurations
+- activeTab: Provides access to the current tab when the user interacts with the extension
 
 ---
 
-## Step 2: The Background Service Worker
+Step 2: The Background Service Worker
 
 The background script is where the magic happens. This service worker listens for network requests and decides which ones to block based on our rules. Create a file named `background.js`:
 
@@ -264,7 +264,7 @@ This background script handles the core blocking logic. It maintains a list of b
 
 ---
 
-## Step 3: Building the Popup Interface
+Step 3: Building the Popup Interface
 
 The popup is what users see when they click the extension icon. It should provide an interface to enable/disable blocking and view statistics. Create `popup.html`:
 
@@ -691,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Step 4: Creating Placeholder Icons
+Step 4: Creating Placeholder Icons
 
 For the extension to work properly, you need icon files. You can create simple placeholder icons using any image editor, or generate them programmatically. For now, create empty placeholder files:
 
@@ -706,7 +706,7 @@ In a production extension, you would create proper 16x16, 48x48, and 128x128 PNG
 
 ---
 
-## Step 5: Loading the Extension
+Step 5: Loading the Extension
 
 Now that we have all the files in place, let's load the extension into Chrome:
 
@@ -719,13 +719,13 @@ The extension should now appear in your toolbar. Click the icon to see the popup
 
 ---
 
-## Testing Your Request Blocker
+Testing Your Request Blocker
 
 To verify that the extension is working:
 
 1. Visit a website with known trackers (news sites often have many)
 2. Open Chrome's Developer Tools (F12)
-3. Look at the Console in the background script—you should see "Blocked request:" messages
+3. Look at the Console in the background script, you should see "Blocked request:" messages
 4. Try enabling/disabling the extension using the toggle
 
 You can also test by adding custom rules:
@@ -737,33 +737,33 @@ You can also test by adding custom rules:
 
 ---
 
-## Advanced Features to Consider
+Advanced Features to Consider
 
 This basic implementation provides a solid foundation, but there are many ways to enhance it:
 
-1. **Dynamic Rule Updates**: Fetch updated blocklists from online sources
-2. **Whitelist Support**: Allow users to exclude specific domains
-3. **Statistics Dashboard**: Show how many requests have been blocked
-4. **Rule Import/Export**: Share blocklists with other users
-5. **Context Menus**: Right-click options for quick blocking
-6. **Tab-Specific Rules**: Different rules for different tabs
+1. Dynamic Rule Updates: Fetch updated blocklists from online sources
+2. Whitelist Support: Allow users to exclude specific domains
+3. Statistics Dashboard: Show how many requests have been blocked
+4. Rule Import/Export: Share blocklists with other users
+5. Context Menus: Right-click options for quick blocking
+6. Tab-Specific Rules: Different rules for different tabs
 
 ---
 
-## Understanding the webRequest API
+Understanding the webRequest API
 
 The webRequest API is incredibly powerful and forms the backbone of most Chrome ad blockers. Key concepts include:
 
-- **onBeforeRequest**: Fires before a request begins—ideal for blocking
-- **onBeforeSendHeaders**: Modify headers before they're sent
-- **onHeadersReceived**: Intercept response headers
-- **onAuthRequired**: Handle authentication challenges
+- onBeforeRequest: Fires before a request begins, ideal for blocking
+- onBeforeSendHeaders: Modify headers before they're sent
+- onHeadersReceived: Intercept response headers
+- onAuthRequired: Handle authentication challenges
 
 Chrome has implemented new restrictions in Manifest V3 to prevent abuse. The `webRequestBlocking` permission now requires manual review for public extensions, but it works fully for development and personal use.
 
 ---
 
-## Conclusion
+Conclusion
 
 You now have a fully functional request blocker Chrome extension. This project demonstrates the core concepts of network request interception and blocking in Chrome extensions. The extension can:
 
@@ -779,7 +779,7 @@ The knowledge you have gained here applies to many other Chrome extension projec
 
 ---
 
-## Additional Resources
+Additional Resources
 
 - [Chrome webRequest API Documentation](https://developer.chrome.com/docs/extensions/reference/webRequest/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

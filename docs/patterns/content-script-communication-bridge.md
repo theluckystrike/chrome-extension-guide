@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Chrome Extension Content Script Communication Bridge — Best Practices"
+title: "Chrome Extension Content Script Communication Bridge. Best Practices"
 description: "Bridge communication between content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-communication-bridge/"
 ---
 
 # Content Script Communication Bridge
 
-## Overview {#overview}
+Overview {#overview}
 
 Content scripts run in Chrome's [isolated world](../guides/content-script-isolation.md), separate from the page's JavaScript context. Both can access the DOM, but cannot directly share variables or call each other's functions. This guide covers practical patterns for bridging these worlds.
 
@@ -15,18 +15,18 @@ See also: [Content Script Isolation](./content-script-isolation.md), [Iframe Com
 
 ---
 
-## The Communication Problem {#the-communication-problem}
+The Communication Problem {#the-communication-problem}
 
-Both worlds see the same DOM, but have separate JavaScript contexts. Communication must go through the DOM — the only shared resource.
+Both worlds see the same DOM, but have separate JavaScript contexts. Communication must go through the DOM. the only shared resource.
 
 ---
 
-## Pattern 1: window.postMessage Bridge {#pattern-1-windowpostmessage-bridge}
+Pattern 1: window.postMessage Bridge {#pattern-1-windowpostmessage-bridge}
 
-### Extension → Page {#extension-page}
+Extension → Page {#extension-page}
 
 ```ts
-// content.ts — Send FROM extension TO page
+// content.ts. Send FROM extension TO page
 const bridge = document.createElement('div');
 bridge.id = 'extension-bridge';
 bridge.style.display = 'none';
@@ -38,21 +38,21 @@ bridge.dispatchEvent(new CustomEvent('extension-message', {
 ```
 
 ```js
-// Page script — Receive from extension
+// Page script. Receive from extension
 document.getElementById('extension-bridge')?.addEventListener('extension-message', (e) => {
   console.log(e.detail);
 });
 ```
 
-### Page → Extension {#page-extension}
+Page → Extension {#page-extension}
 
 ```js
-// Page script — Send TO extension
+// Page script. Send TO extension
 window.postMessage({ source: 'my-extension', action: 'get-settings' }, '*');
 ```
 
 ```ts
-// content.ts — Listen for page messages
+// content.ts. Listen for page messages
 window.addEventListener('message', (event) => {
   if (event.data?.source !== 'my-extension') return;
   const { action } = event.data;
@@ -65,17 +65,17 @@ window.addEventListener('message', (event) => {
 
 ---
 
-## Pattern 2: CustomEvent Dispatching {#pattern-2-customevent-dispatching}
+Pattern 2: CustomEvent Dispatching {#pattern-2-customevent-dispatching}
 
 ```ts
-// content.ts — Notify page of extension state
+// content.ts. Notify page of extension state
 document.dispatchEvent(new CustomEvent('extension-state-changed', {
   detail: { isLoggedIn: true, userId: '12345' }
 }));
 ```
 
 ```js
-// Page script — Listen anywhere
+// Page script. Listen anywhere
 document.addEventListener('extension-state-changed', (e) => {
   console.log('State:', e.detail);
 });
@@ -83,10 +83,10 @@ document.addEventListener('extension-state-changed', (e) => {
 
 ---
 
-## Pattern 3: DOM Attribute Signaling {#pattern-3-dom-attribute-signaling}
+Pattern 3: DOM Attribute Signaling {#pattern-3-dom-attribute-signaling}
 
 ```ts
-// content.ts — Write state to DOM
+// content.ts. Write state to DOM
 const indicator = document.createElement('div');
 indicator.id = 'ext-state';
 indicator.dataset.extensionReady = 'true';
@@ -94,7 +94,7 @@ document.body.appendChild(indicator);
 ```
 
 ```js
-// Page script — Observe for changes
+// Page script. Observe for changes
 const observer = new MutationObserver(() => {
   const ready = document.getElementById('ext-state')?.dataset.extensionReady;
   if (ready === 'true') console.log('Extension ready!');
@@ -104,7 +104,7 @@ observer.observe(document.body, { attributes: true, subtree: true });
 
 ---
 
-## Security Considerations {#security-considerations}
+Security Considerations {#security-considerations}
 
 Always validate origin and message shape:
 
@@ -123,21 +123,21 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-### Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Whitelist sources** — Don't accept from any origin
-2. **Validate structure** — Check expected properties and types
-3. **Sanitize data** — Never eval() incoming data
-4. **Use TypeScript** — Define message schemas for type safety
+1. Whitelist sources. Don't accept from any origin
+2. Validate structure. Check expected properties and types
+3. Sanitize data. Never eval() incoming data
+4. Use TypeScript. Define message schemas for type safety
 
 ---
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Intercepting Page API Calls {#intercepting-page-api-calls}
+Intercepting Page API Calls {#intercepting-page-api-calls}
 
 ```ts
-// content.ts — Inject fetch interceptor
+// content.ts. Inject fetch interceptor
 const script = document.createElement('script');
 script.textContent = `
   (function() {
@@ -153,10 +153,10 @@ script.textContent = `
 document.documentElement.appendChild(script);
 ```
 
-### Injecting Data into Page Context {#injecting-data-into-page-context}
+Injecting Data into Page Context {#injecting-data-into-page-context}
 
 ```ts
-// content.ts — Expose data to page
+// content.ts. Expose data to page
 function exposeToPage(key: string, value: unknown) {
   const el = document.createElement('script');
   el.textContent = \`window['__ext_${key}'] = \${JSON.stringify(value)};\`;
@@ -165,10 +165,10 @@ function exposeToPage(key: string, value: unknown) {
 exposeToPage('settings', { theme: 'dark' });
 ```
 
-### Reading Page Variables {#reading-page-variables}
+Reading Page Variables {#reading-page-variables}
 
 ```ts
-// content.ts — Read page state (if exposed)
+// content.ts. Read page state (if exposed)
 function getPageVar<T>(name: string): T | null {
   return (window as any)[name] ?? null;
 }
@@ -177,7 +177,7 @@ const pageState = getPageVar<{ user: string }>('__pageState');
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Method | Direction | Best For |
 |--------|-----------|----------|

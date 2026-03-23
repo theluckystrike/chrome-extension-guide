@@ -14,11 +14,11 @@ canonical_url: "https://bestchromeextensions.com/2025/04/20/build-simple-ad-bloc
 
 Ad blockers are among the most popular Chrome extensions available, with millions of users relying on them to enjoy a cleaner, faster browsing experience. Building your own ad blocker is not only a rewarding project but also an excellent way to learn advanced Chrome extension development techniques.
 
-In this comprehensive guide, I'll walk you through creating a simple yet functional ad blocker Chrome extension using the declarativeNetRequest API—the modern, privacy-focused approach introduced with Manifest V3. By the end of this tutorial, you'll have a complete extension that can block ads, is ready for testing, and can be published to the Chrome Web Store.
+I'll walk you through creating a simple yet functional ad blocker Chrome extension using the declarativeNetRequest API, the modern, privacy-focused approach introduced with Manifest V3. By the end of this tutorial, you'll have a complete extension that can block ads, is ready for testing, and can be published to the Chrome Web Store.
 
 ---
 
-## Prerequisites
+Prerequisites
 
 Before we begin building our ad blocker, ensure you have the following:
 
@@ -27,46 +27,46 @@ Before we begin building our ad blocker, ensure you have the following:
 - Basic knowledge of JavaScript and JSON
 - A Google account (for publishing to the Chrome Web Store)
 
-No prior Chrome extension experience is required—we'll cover everything step by step.
+No prior Chrome extension experience is required, we'll cover everything step by step.
 
 ---
 
-## Understanding declarativeNetRequest
+Understanding declarativeNetRequest
 
-The declarativeNetRequest API is Google's recommended way to block or modify network requests in Manifest V3 extensions. Unlike the older webRequest API used in Manifest V2, declarativeNetRequest doesn't require permission to read network requests—instead, you provide Chrome with a set of rules, and Chrome applies them internally.
+The declarativeNetRequest API is Google's recommended way to block or modify network requests in Manifest V3 extensions. Unlike the older webRequest API used in Manifest V2, declarativeNetRequest doesn't require permission to read network requests, instead, you provide Chrome with a set of rules, and Chrome applies them internally.
 
 This approach offers several advantages:
 
-- **Privacy**: Your extension never sees user's network requests
-- **Performance**: Chrome applies rules natively without invoking your code for each request
-- **Security**: Users don't need to grant broad permissions
-- **Reliability**: Rules are applied consistently without race conditions
+- Privacy: Your extension never sees user's network requests
+- Performance: Chrome applies rules natively without invoking your code for each request
+- Security: Users don't need to grant broad permissions
+- Reliability: Rules are applied consistently without race conditions
 
 ---
 
-## Step 1: Create the Project Structure
+Step 1: Create the Project Structure
 
 Let's start by setting up our project directory and creating the necessary files:
 
 ```bash
 my-simple-ad-blocker/
-├── manifest.json
-├── rules.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── background.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ rules.json
+ popup.html
+ popup.js
+ popup.css
+ background.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-Create a new folder called `my-simple-ad-blocker` and add these files. Don't worry about the icons for now—we'll generate simple placeholder icons or skip them initially.
+Create a new folder called `my-simple-ad-blocker` and add these files. Don't worry about the icons for now, we'll generate simple placeholder icons or skip them initially.
 
 ---
 
-## Step 2: Create the Manifest
+Step 2: Create the Manifest
 
 The manifest.json file is the heart of every Chrome extension. Create this file with the following content:
 
@@ -104,14 +104,14 @@ The manifest.json file is the heart of every Chrome extension. Create this file 
 
 Key points about this manifest:
 
-- **manifest_version: 3** — We're using the latest Manifest V3
-- **declarativeNetRequest permission** — Required to block network requests
-- **storage permission** — For saving user preferences
-- **host_permissions** — Needed to apply rules across all websites
+- manifest_version: 3. We're using the latest Manifest V3
+- declarativeNetRequest permission. Required to block network requests
+- storage permission. For saving user preferences
+- host_permissions. Needed to apply rules across all websites
 
 ---
 
-## Step 3: Define Blocking Rules
+Step 3: Define Blocking Rules
 
 The rules.json file contains our blocking rules. This is where we specify which network requests should be blocked. Create this file:
 
@@ -234,14 +234,14 @@ The rules.json file contains our blocking rules. This is where we specify which 
 
 Each rule has:
 
-- **id**: Unique identifier for the rule
-- **priority**: Higher priority rules are evaluated first
-- **action**: What to do when the condition matches (block, allow, redirect)
-- **condition**: The URL pattern to match against
+- id: Unique identifier for the rule
+- priority: Higher priority rules are evaluated first
+- action: What to do when the condition matches (block, allow, redirect)
+- condition: The URL pattern to match against
 
 ---
 
-## Step 4: Create the Background Script
+Step 4: Create the Background Script
 
 The background script loads our rules when the extension starts. Create background.js:
 
@@ -274,7 +274,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 ---
 
-## Step 5: Create the Popup UI
+Step 5: Create the Popup UI
 
 Now let's create a simple popup that shows the extension status. Create popup.html:
 
@@ -321,7 +321,7 @@ Now let's create a simple popup that shows the extension status. Create popup.ht
 
 ---
 
-## Step 6: Style the Popup
+Step 6: Style the Popup
 
 Create popup.css to make the popup look professional:
 
@@ -446,7 +446,7 @@ body {
 
 ---
 
-## Step 7: Add Popup Functionality
+Step 7: Add Popup Functionality
 
 Create popup.js to handle user interactions:
 
@@ -518,7 +518,7 @@ loadState();
 
 ---
 
-## Step 8: Create Placeholder Icons
+Step 8: Create Placeholder Icons
 
 For the extension to work properly, you need icon files. Create a simple `icons` folder and use any image editor to create three PNG files (16x16, 48x48, and 128x128 pixels). Alternatively, you can use online tools to generate placeholder icons.
 
@@ -526,7 +526,7 @@ For testing purposes, you can also remove the icon references from manifest.json
 
 ---
 
-## Step 9: Test the Extension
+Step 9: Test the Extension
 
 Now let's test our ad blocker:
 
@@ -541,7 +541,7 @@ To verify the ad blocking is working, visit a website with ads (like a news site
 
 ---
 
-## How to Add More Blocking Rules
+How to Add More Blocking Rules
 
 The declarativeNetRequest API has some important limitations:
 
@@ -551,28 +551,28 @@ The declarativeNetRequest API has some important limitations:
 
 To add more sophisticated blocking, you can:
 
-1. **Block by domain**: Add more domains to your rules.json
-2. **Block by content type**: Use resourceTypes to block only scripts or images
-3. **Use regex**: For complex patterns (with limitations)
-4. **Combine with content scripts**: For blocking in-page ad elements
+1. Block by domain: Add more domains to your rules.json
+2. Block by content type: Use resourceTypes to block only scripts or images
+3. Use regex: For complex patterns (with limitations)
+4. Combine with content scripts: For blocking in-page ad elements
 
 ---
 
-## Publishing to Chrome Web Store
+Publishing to Chrome Web Store
 
 Once you're satisfied with your ad blocker, here's how to publish it:
 
-1. **Prepare your extension**:
+1. Prepare your extension:
    - Create a 128x128 PNG icon
    - Take screenshots of your popup
    - Write a compelling description
 
-2. **Zip your extension**:
+2. Zip your extension:
    ```bash
    zip -r my-ad-blocker.zip my-simple-ad-blocker/
    ```
 
-3. **Submit to Chrome Web Store**:
+3. Submit to Chrome Web Store:
    - Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
    - Create a new item
    - Upload your zip file
@@ -581,11 +581,11 @@ Once you're satisfied with your ad blocker, here's how to publish it:
 
 ---
 
-## Advanced Features to Consider
+Advanced Features to Consider
 
 Once you have the basic ad blocker working, here are some features you can add:
 
-### 1. Whitelist Support
+1. Whitelist Support
 Allow users to disable blocking on specific websites:
 
 ```javascript
@@ -598,39 +598,39 @@ async function isWhitelisted(tabId) {
 }
 ```
 
-### 2. Custom Rules UI
+2. Custom Rules UI
 Allow users to add their own blocking rules through the popup interface.
 
-### 3. Filter List Integration
+3. Filter List Integration
 Integrate with popular filter lists like EasyList for comprehensive ad blocking.
 
-### 4. Statistics Dashboard
+4. Statistics Dashboard
 Track and display how many ads have been blocked over time.
 
 ---
 
-## Troubleshooting
+Troubleshooting
 
 Common issues and solutions:
 
-- **Rules not loading**: Check that rules.json is properly formatted
-- **Extension not appearing**: Make sure manifest.json has no syntax errors
-- **Ads still showing**: Some ads may be loaded dynamically by JavaScript
-- **Popup not working**: Check that all files are in the correct locations
-- **Rules not applying**: Ensure the background script is properly loading the rules
-- **Performance issues**: Too many rules can slow down browser startup; consider using a smaller ruleset
+- Rules not loading: Check that rules.json is properly formatted
+- Extension not appearing: Make sure manifest.json has no syntax errors
+- Ads still showing: Some ads may be loaded dynamically by JavaScript
+- Popup not working: Check that all files are in the correct locations
+- Rules not applying: Ensure the background script is properly loading the rules
+- Performance issues: Too many rules can slow down browser startup; consider using a smaller ruleset
 
-### Debugging Tips
+Debugging Tips
 
 When developing your ad blocker, use Chrome's developer tools to troubleshoot issues effectively. The Extensions Management page (`chrome://extensions/) provides access to the service worker console, where you can view logs from your background script. Additionally, the Network tab in Chrome DevTools allows you to inspect network requests and verify which ones are being blocked by your extension. Understanding how to read these logs will significantly speed up your development process and help you identify issues with rule matching or extension initialization.
 
-### Understanding Rule Priorities
+Understanding Rule Priorities
 
 The priority field in your rules is crucial for proper ad blocking behavior. When multiple rules could potentially match the same request, Chrome evaluates them based on priority values, with higher numbers indicating greater importance. In our simple ad blocker, all rules have the same priority (1), which works fine for basic use cases. However, when building more sophisticated blockers with both block and allow rules, understanding priority becomes essential. Allow rules should typically have higher priority than block rules when you want to whitelist specific domains while blocking everything else.
 
 ---
 
-## Conclusion
+Conclusion
 
 Congratulations! You've built a functional ad blocker Chrome extension using declarativeNetRequest. This extension demonstrates the core concepts of modern Chrome extension development and provides a solid foundation for building more advanced features.
 
@@ -648,4 +648,4 @@ Happy coding!
 
 ---
 
-**Built by theluckystrike at zovo.one**
+Built by theluckystrike at zovo.one

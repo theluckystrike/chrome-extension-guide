@@ -1,44 +1,44 @@
 ---
 layout: default
-title: "Chrome Extension Debugger API — Developer Guide"
+title: "Chrome Extension Debugger API. Developer Guide"
 description: "Learn how to use the Chrome Extension Debugger API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/debugger-api/"
 ---
 # Chrome Extension Debugger API
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
 The `chrome.debugger` API is a powerful Chrome Extension API that allows you to instrument, inspect, and debug web pages using the Chrome DevTools Protocol (CDP). Unlike the standard DevTools that are designed for human interaction, the Debugger API enables programmatic control over browser inspection, making it possible to build powerful developer tools, testing utilities, and automation scripts.
 
 This guide covers everything you need to know to build DevTools-powered extensions using the `chrome.debugger` API.
 
-## 1. Chrome DevTools Protocol Overview {#1-chrome-devtools-protocol-overview}
+1. Chrome DevTools Protocol Overview {#1-chrome-devtools-protocol-overview}
 
-### What is CDP? {#what-is-cdp}
+What is CDP? {#what-is-cdp}
 
 The Chrome DevTools Protocol (CDP) is a protocol that allows tools to instrument, inspect, debug, and profile Chromium-based browsers. It provides a set of commands and events that enable external clients to interact with browser tabs, network traffic, JavaScript execution, and more.
 
 CDP operates over a WebSocket-like communication channel, though in Chrome Extensions, we access it through the `chrome.debugger` API. Each command consists of:
-- **Method**: The CDP domain and method name (e.g., `Network.enable`, `Runtime.evaluate`)
-- **Parameters**: Optional JSON object with method-specific parameters
-- **Session ID**: Optional identifier for multi-target debugging
+- Method: The CDP domain and method name (e.g., `Network.enable`, `Runtime.evaluate`)
+- Parameters: Optional JSON object with method-specific parameters
+- Session ID: Optional identifier for multi-target debugging
 
-### CDP Domains {#cdp-domains}
+CDP Domains {#cdp-domains}
 
 CDP is organized into domains, each providing related functionality:
 
 | Domain | Purpose |
 |--------|---------|
-| **Page** | Page lifecycle, navigation, frame handling |
-| **Network** | HTTP/HTTPS request interception, response bodies |
-| **Runtime** | JavaScript execution, console, remote objects |
-| **DOM** | DOM tree inspection and modification |
-| **Debugger** | Breakpoints, stepping, call frames |
-| **Console** | Console API access |
-| **Performance** | Performance tracing and metrics |
-| **Memory** | Heap snapshots, memory profiling |
+| Page | Page lifecycle, navigation, frame handling |
+| Network | HTTP/HTTPS request interception, response bodies |
+| Runtime | JavaScript execution, console, remote objects |
+| DOM | DOM tree inspection and modification |
+| Debugger | Breakpoints, stepping, call frames |
+| Console | Console API access |
+| Performance | Performance tracing and metrics |
+| Memory | Heap snapshots, memory profiling |
 
-### Protocol Versioning {#protocol-versioning}
+Protocol Versioning {#protocol-versioning}
 
 CDP evolves with Chrome releases. Check your Chrome version to ensure compatibility:
 
@@ -48,9 +48,9 @@ chrome.debugger.getTargets((targets) => {
 });
 ```
 
-## 2. Manifest Configuration {#2-manifest-configuration}
+2. Manifest Configuration {#2-manifest-configuration}
 
-### Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 To use the `chrome.debugger` API, you need to declare it in your manifest:
 
@@ -68,15 +68,15 @@ To use the `chrome.debugger` API, you need to declare it in your manifest:
 }
 ```
 
-### Important Notes {#important-notes}
+Important Notes {#important-notes}
 
-- **Manifest V3**: The debugger API is available but requires a service worker in MV3
-- **Host Permissions**: Host permissions are NOT required for the debugger API; only the `"debugger"` permission is needed
-- **User Warning**: Chrome shows a warning bar when a debugger is attached to a tab
+- Manifest V3: The debugger API is available but requires a service worker in MV3
+- Host Permissions: Host permissions are NOT required for the debugger API; only the `"debugger"` permission is needed
+- User Warning: Chrome shows a warning bar when a debugger is attached to a tab
 
-## 3. Attaching to Tabs {#3-attaching-to-tabs}
+3. Attaching to Tabs {#3-attaching-to-tabs}
 
-### Basic Attachment {#basic-attachment}
+Basic Attachment {#basic-attachment}
 
 The first step in using CDP is attaching to a tab:
 
@@ -104,21 +104,21 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### The attach() Method {#the-attach-method}
+The attach() Method {#the-attach-method}
 
 ```javascript
 chrome.debugger.attach(debuggee, protocolVersion, callback)
 ```
 
 Parameters:
-- **debuggee**: Object with properties:
+- debuggee: Object with properties:
   - `tabId`: The ID of the tab to debug (required)
   - `extensionId`: Your extension's ID (optional, for background debugging)
   - `targetId`: Specific target within a target (optional)
-- **protocolVersion**: String specifying CDP version (typically "1.3")
-- **callback**: Called when the operation completes
+- protocolVersion: String specifying CDP version (typically "1.3")
+- callback: Called when the operation completes
 
-### Detaching from Tabs {#detaching-from-tabs}
+Detaching from Tabs {#detaching-from-tabs}
 
 Always detach when done to clean up:
 
@@ -136,9 +136,9 @@ function detachFromTab(tabId) {
 }
 ```
 
-## 4. Sending CDP Commands {#4-sending-cdp-commands}
+4. Sending CDP Commands {#4-sending-cdp-commands}
 
-### Using sendCommand() {#using-sendcommand}
+Using sendCommand() {#using-sendcommand}
 
 After attaching, send CDP commands using `sendCommand`:
 
@@ -179,7 +179,7 @@ function evaluateScript(tabId, script) {
 }
 ```
 
-### Command Response Format {#command-response-format}
+Command Response Format {#command-response-format}
 
 CDP commands return results in this format:
 
@@ -195,7 +195,7 @@ CDP commands return results in this format:
 }
 ```
 
-### Common CDP Commands {#common-cdp-commands}
+Common CDP Commands {#common-cdp-commands}
 
 #### Runtime Domain
 
@@ -257,9 +257,9 @@ chrome.debugger.sendCommand(debuggee, "Page.captureScreenshot", {
 });
 ```
 
-## 5. Handling Events {#5-handling-events}
+5. Handling Events {#5-handling-events}
 
-### onEvent Listener {#onevent-listener}
+onEvent Listener {#onevent-listener}
 
 The `chrome.debugger.onEvent` event fires when CDP sends events from the browser:
 
@@ -294,7 +294,7 @@ function handleConsoleAPI(params) {
 }
 ```
 
-### onDetach Listener {#ondetach-listener}
+onDetach Listener {#ondetach-listener}
 
 Handle disconnection events:
 
@@ -314,7 +314,7 @@ chrome.debugger.onDetach.addListener((source, reason) => {
 });
 ```
 
-### Complete Event Example {#complete-event-example}
+Complete Event Example {#complete-event-example}
 
 Here's a practical example capturing all network requests:
 
@@ -382,9 +382,9 @@ class NetworkDebugger {
 }
 ```
 
-## 6. Common CDP Domains in Detail {#6-common-cdp-domains-in-detail}
+6. Common CDP Domains in Detail {#6-common-cdp-domains-in-detail}
 
-### Network Domain {#network-domain}
+Network Domain {#network-domain}
 
 The Network domain provides comprehensive access to HTTP/HTTPS traffic:
 
@@ -411,7 +411,7 @@ await sendCommand(tabId, "Network.setExtraHTTPHeaders", {
 });
 ```
 
-### DOM Domain {#dom-domain}
+DOM Domain {#dom-domain}
 
 Inspect and manipulate the DOM tree:
 
@@ -436,7 +436,7 @@ const boxResult = await sendCommand(tabId, "DOM.getBoxModel", {
 });
 ```
 
-### Runtime Domain {#runtime-domain}
+Runtime Domain {#runtime-domain}
 
 Execute and inspect JavaScript:
 
@@ -467,7 +467,7 @@ const propsResult = await sendCommand(tabId, "Runtime.getProperties", {
 });
 ```
 
-### Page Domain {#page-domain}
+Page Domain {#page-domain}
 
 Control page navigation and capture content:
 
@@ -498,9 +498,9 @@ const pdf = await sendCommand(tabId, "Page.printToPDF", {
 });
 ```
 
-## 7. Building DevTools-Powered Extensions {#7-building-devtools-powered-extensions}
+7. Building DevTools-Powered Extensions {#7-building-devtools-powered-extensions}
 
-### Complete Extension Example {#complete-extension-example}
+Complete Extension Example {#complete-extension-example}
 
 Here's a complete extension that monitors console output:
 
@@ -664,20 +664,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## 8. Security Restrictions and User Consent {#8-security-restrictions-and-user-consent}
+8. Security Restrictions and User Consent {#8-security-restrictions-and-user-consent}
 
-### Extension Permissions {#extension-permissions}
+Extension Permissions {#extension-permissions}
 
 The `chrome.debugger` API requires specific permissions:
 
-1. **"debugger" permission**: Required in manifest
-2. **User awareness**: Chrome shows a warning bar when debugger attaches to a tab
+1. "debugger" permission: Required in manifest
+2. User awareness: Chrome shows a warning bar when debugger attaches to a tab
 
-### User Warning Banner {#user-warning-banner}
+User Warning Banner {#user-warning-banner}
 
 When your extension attaches to a tab, Chrome displays a warning bar at the top of the page informing the user that an extension is debugging the tab. The user can cancel the debugging session, which will trigger the `onDetach` event with reason `"canceled_by_user"`.
 
-### Best Practices for Security {#best-practices-for-security}
+Best Practices for Security {#best-practices-for-security}
 
 ```javascript
 // Always check for user consent
@@ -703,7 +703,7 @@ async function attachMinimal(tabId) {
 }
 ```
 
-### Content Security Policy {#content-security-policy}
+Content Security Policy {#content-security-policy}
 
 Debuggee pages operate under their own CSP. Some considerations:
 
@@ -718,9 +718,9 @@ chrome.debugger.sendCommand(debuggee, "Runtime.evaluate", {
 });
 ```
 
-## 9. Debugging Tips and Common Issues {#9-debugging-tips-and-common-issues}
+9. Debugging Tips and Common Issues {#9-debugging-tips-and-common-issues}
 
-### Debugging Your Extension {#debugging-your-extension}
+Debugging Your Extension {#debugging-your-extension}
 
 ```javascript
 // Add logging to track CDP communication
@@ -735,7 +735,7 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 });
 ```
 
-### Common Errors {#common-errors}
+Common Errors {#common-errors}
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -745,7 +745,7 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 | "Connection failed" | Extension not loaded | Reload extension |
 | "Protocol version mismatch" | CDP version incompatible | Use "1.3" or check Chrome version |
 
-### Handling Race Conditions {#handling-race-conditions}
+Handling Race Conditions {#handling-race-conditions}
 
 ```javascript
 // Use callbacks or promises to ensure ordering
@@ -775,9 +775,9 @@ await new Promise(resolve => {
 console.log('Page fully loaded');
 ```
 
-## 10. Advanced Topics {#10-advanced-topics}
+10. Advanced Topics {#10-advanced-topics}
 
-### Multi-Tab Debugging {#multi-tab-debugging}
+Multi-Tab Debugging {#multi-tab-debugging}
 
 ```javascript
 // Debug multiple tabs simultaneously
@@ -813,7 +813,7 @@ class MultiDebugger {
 }
 ```
 
-### Using with Other APIs {#using-with-other-apis}
+Using with Other APIs {#using-with-other-apis}
 
 Combine debugger with other Chrome Extension APIs:
 
@@ -851,14 +851,14 @@ function base64ToBlob(base64, mimeType) {
 }
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 The `chrome.debugger` API provides powerful capabilities for building Chrome Extensions that can:
 
-1. **Inspect** page content, network traffic, and JavaScript execution
-2. **Modify** DOM, JavaScript state, and network requests
-3. **Automate** testing, monitoring, and debugging workflows
-4. **Build** custom DevTools extensions and developer tools
+1. Inspect page content, network traffic, and JavaScript execution
+2. Modify DOM, JavaScript state, and network requests
+3. Automate testing, monitoring, and debugging workflows
+4. Build custom DevTools extensions and developer tools
 
 Key takeaways:
 - Always request minimal permissions
@@ -869,9 +869,9 @@ Key takeaways:
 
 For more information, refer to the official [Chrome Debugger API documentation](https://developer.chrome.com/docs/extensions/mv3/reference/debugger) and the [Chrome DevTools Protocol Viewer](https://chromedevtools.github.io/devtools-protocol/).
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Debugging Extensions](../guides/debugging-extensions.md)
 - [Advanced Debugging](../guides/advanced-debugging.md)

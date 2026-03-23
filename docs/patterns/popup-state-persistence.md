@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Chrome Extension Popup State Persistence — Best Practices"
+title: "Chrome Extension Popup State Persistence. Best Practices"
 description: "Persist popup UI state across sessions."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-state-persistence/"
 ---
 
 # Popup State Persistence
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extension popups are ephemeral by design. When a user clicks outside the popup or presses Escape, the popup closes and all in-memory state is lost. Any form inputs, scroll positions, active selections, and UI state vanish. This creates a frustrating user experience for extensions with complex forms, multi-step wizards, or feature-rich interfaces.
 
@@ -15,25 +15,25 @@ This pattern covers techniques to persist popup state across closures, ensuring 
 
 ---
 
-## The Problem {#the-problem}
+The Problem {#the-problem}
 
 When a popup closes, Chrome destroys the DOM and JavaScript context entirely. Unlike tabs, popups have no navigation history and cannot be restored from the back button. This affects several user experience aspects:
 
-**Form Data Loss**: Text inputs, checkboxes, selects, and other form controls lose their values when the popup reopens.
+Form Data Loss: Text inputs, checkboxes, selects, and other form controls lose their values when the popup reopens.
 
-**Scroll Position Reset**: Users lose their place in long lists or scrollable content.
+Scroll Position Reset: Users lose their place in long lists or scrollable content.
 
-**Active Section/Tab Memory**: Navigational state within the popup, such as which tab or accordion section is open, resets to defaults.
+Active Section/Tab Memory: Navigational state within the popup, such as which tab or accordion section is open, resets to defaults.
 
-**Selection State**: Any selected items, highlighted rows, or checked options disappear.
+Selection State: Any selected items, highlighted rows, or checked options disappear.
 
 ---
 
-## Solution: storage.session Persistence {#solution-storagesession-persistence}
+Solution: storage.session Persistence {#solution-storagesession-persistence}
 
 The most appropriate storage for ephemeral popup state is `chrome.storage.session`. This API stores data in memory while the browser session is active and clears when the browser closes. It's faster than `chrome.storage.local` and appropriate for data that shouldn't persist across browser restarts.
 
-### Basic Implementation {#basic-implementation}
+Basic Implementation {#basic-implementation}
 
 ```typescript
 // popup.ts - Save state on every change
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Debounced Saves {#debounced-saves}
+Debounced Saves {#debounced-saves}
 
 Saving on every keystroke or scroll event creates excessive storage writes. Use debouncing to batch updates:
 
@@ -111,7 +111,7 @@ document.addEventListener('scroll', () => {
 
 ---
 
-## Scroll Position Persistence {#scroll-position-persistence}
+Scroll Position Persistence {#scroll-position-persistence}
 
 Restoring scroll position requires capturing it before the popup closes and applying it after the DOM is ready:
 
@@ -133,7 +133,7 @@ async function restoreScrollPosition(position: number): Promise<void> {
 
 ---
 
-## Active Tab/Section Memory {#active-tabsection-memory}
+Active Tab/Section Memory {#active-tabsection-memory}
 
 Track and restore navigational state within the popup:
 
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-## Using @theluckystrike/webext-storage {#using-theluckystrikewebext-storage}
+Using @theluckystrike/webext-storage {#using-theluckystrikewebext-storage}
 
 For TypeScript projects, `@theluckystrike/webext-storage` provides typed persistence with less boilerplate:
 
@@ -216,7 +216,7 @@ class PopupStateManager {
 
 ---
 
-## Alternative: Side Panel for Persistent UI {#alternative-side-panel-for-persistent-ui}
+Alternative: Side Panel for Persistent UI {#alternative-side-panel-for-persistent-ui}
 
 For extensions requiring always-available UI that persists across browser sessions, consider the side panel:
 
@@ -232,7 +232,7 @@ The side panel remains open while browsing and maintains DOM state. See [Side Pa
 
 ---
 
-## Alternative: Tab-Based Interface {#alternative-tab-based-interface}
+Alternative: Tab-Based Interface {#alternative-tab-based-interface}
 
 Open complex UIs as tabs instead of popups for full persistence:
 
@@ -249,7 +249,7 @@ Tabs maintain scroll position, form state, and navigation automatically. See [Po
 
 ---
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 This pattern works alongside several other extension development approaches. The [State Management](./state-management.md) pattern provides centralized state architecture for larger extensions. For truly persistent UI, the [Side Panel](./side-panel.md) or [Popup-to-Tab](./popup-to-tab.md) patterns offer alternative interaction models that eliminate the persistence problem entirely.
 -e 

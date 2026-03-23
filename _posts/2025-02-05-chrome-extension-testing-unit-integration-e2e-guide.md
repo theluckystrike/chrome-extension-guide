@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Chrome Extension Testing — Unit, Integration, and E2E Testing Complete Guide"
+title: "Chrome Extension Testing. Unit, Integration, and E2E Testing Complete Guide"
 description: "Master Chrome extension testing. Unit tests with Vitest, integration tests with chrome API mocks, E2E tests with Puppeteer and Playwright. CI pipeline setup included."
 date: 2025-02-05
 categories: [guides, testing]
@@ -8,41 +8,41 @@ tags: [extension-testing, vitest, puppeteer, playwright, chrome-extension-testin
 author: theluckystrike
 ---
 
-# Chrome Extension Testing — Unit, Integration, and E2E Testing Complete Guide
+# Chrome Extension Testing. Unit, Integration, and E2E Testing Complete Guide
 
-Testing Chrome extensions presents unique challenges that differ from traditional web applications. Extensions span multiple execution contexts—background service workers, popup pages, options pages, and content scripts—each with its own isolated environment and access to Chrome APIs. A comprehensive testing strategy must address these distinct contexts while ensuring smooth communication between them.
+Testing Chrome extensions presents unique challenges that differ from traditional web applications. Extensions span multiple execution contexts, background service workers, popup pages, options pages, and content scripts, each with its own isolated environment and access to Chrome APIs. A comprehensive testing strategy must address these distinct contexts while ensuring smooth communication between them.
 
-This complete guide walks you through building a robust testing infrastructure for Chrome extensions, covering unit tests, integration tests, and end-to-end tests. We'll explore the testing pyramid specific to extensions, dive deep into mocking Chrome APIs, and examine real-world testing strategies used in production extensions like Tab Suspender Pro.
+This complete guide walks you through building a solid testing infrastructure for Chrome extensions, covering unit tests, integration tests, and end-to-end tests. We'll explore the testing pyramid specific to extensions, dive deep into mocking Chrome APIs, and examine real-world testing strategies used in production extensions like Tab Suspender Pro.
 
 ---
 
-## The Testing Pyramid for Chrome Extensions {#testing-pyramid}
+The Testing Pyramid for Chrome Extensions {#testing-pyramid}
 
 The testing pyramid provides a framework for allocating testing effort across different levels. For Chrome extensions, this pyramid adapts to account for the unique architecture of extension-based applications.
 
-### Foundation: Unit Tests (70%)
+Foundation: Unit Tests (70%)
 
 At the base of your testing strategy sit unit tests, which validate individual functions and modules in isolation. Unit tests should constitute approximately 70% of your test suite, providing fast feedback and comprehensive coverage of business logic. These tests run in Node.js environments and mock all external dependencies, including Chrome APIs.
 
-For a Chrome extension, unit tests verify the core logic of your extension—the URL analysis algorithms in Tab Suspender Pro, the data transformation functions in a note-taking extension, or the filtering rules in a content blocker. Unit tests execute in milliseconds, enabling rapid iteration during development.
+For a Chrome extension, unit tests verify the core logic of your extension, the URL analysis algorithms in Tab Suspender Pro, the data transformation functions in a note-taking extension, or the filtering rules in a content blocker. Unit tests execute in milliseconds, enabling rapid iteration during development.
 
-### Middle Layer: Integration Tests (20%)
+Middle Layer: Integration Tests (20%)
 
 Integration tests verify that multiple components work correctly together. In Chrome extension context, this typically means testing communication between the popup and background service worker, verifying that storage operations persist correctly, or ensuring message passing works as expected. Integration tests constitute roughly 20% of your test suite.
 
-These tests often use mocked Chrome APIs but exercise real code paths between different extension components. Integration tests catch issues that unit tests miss—such as serialization problems in message passing or timing issues in asynchronous storage operations.
+These tests often use mocked Chrome APIs but exercise real code paths between different extension components. Integration tests catch issues that unit tests miss, such as serialization problems in message passing or timing issues in asynchronous storage operations.
 
-### Top Layer: E2E Tests (10%)
+Top Layer: E2E Tests (10%)
 
 End-to-end tests validate the complete extension behavior in a real Chrome environment. These tests launch an actual Chrome browser with your extension loaded, simulating user interactions from clicking the extension icon to interacting with popup UI to verifying content script behavior on web pages. E2E tests constitute about 10% of your test suite but provide the highest confidence that your extension works correctly in production.
 
 ---
 
-## Unit Testing with Vitest {#unit-testing-vitest}
+Unit Testing with Vitest {#unit-testing-vitest}
 
 Vitest has become the preferred testing framework for Chrome extension development, offering significantly faster execution than Jest and excellent TypeScript support. Setting up Vitest for extension testing requires handling the unique aspects of extension architecture.
 
-### Initial Setup
+Initial Setup
 
 Install Vitest and necessary dependencies:
 
@@ -60,12 +60,12 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    include: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
+    include: ['src//*.test.ts', 'src//*.spec.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.ts'],
-      exclude: ['src/**/*.test.ts', 'src/**/*.spec.ts']
+      include: ['src//*.ts'],
+      exclude: ['src//*.test.ts', 'src//*.spec.ts']
     }
   }
 });
@@ -75,11 +75,11 @@ The `setupFiles` option points to a file that runs before each test, where you c
 
 ---
 
-## Mocking Chrome APIs {#mocking-chrome-apis}
+Mocking Chrome APIs {#mocking-chrome-apis}
 
 Chrome extensions rely heavily on `chrome.*` APIs for browser interaction. Testing these requires comprehensive mocking strategies. Two popular libraries simplify this process: `sinon-chrome` and `webextensions-polyfill-mock`.
 
-### Using sinon-chrome
+Using sinon-chrome
 
 Sinon-chrome provides stubs for most Chrome APIs, enabling you to simulate API behavior in your tests:
 
@@ -122,7 +122,7 @@ describe('Tab Suspender Pro - Tab Management', () => {
 });
 ```
 
-### Using webextensions-polyfill-mock
+Using webextensions-polyfill-mock
 
 The `webextensions-polyfill-mock` library provides a more realistic mock that mimics actual Chrome API behavior:
 
@@ -148,7 +148,7 @@ describe('Storage Service', () => {
 });
 ```
 
-### Manual Chrome API Mocking
+Manual Chrome API Mocking
 
 For complex scenarios, you may need to create custom mocks:
 
@@ -200,11 +200,11 @@ global.chrome = createChromeMock();
 
 ---
 
-## Integration Testing: Popup and Background Communication {#integration-testing}
+Integration Testing: Popup and Background Communication {#integration-testing}
 
 Integration tests verify that different extension components work together correctly. The most common scenario is testing communication between the popup and background service worker.
 
-### Setting Up Integration Tests
+Setting Up Integration Tests
 
 Create integration tests that load real extension code but mock Chrome APIs where needed:
 
@@ -256,7 +256,7 @@ describe('Popup to Background Communication', () => {
 });
 ```
 
-### Testing Storage Integration
+Testing Storage Integration
 
 Verify that storage operations work correctly across different contexts:
 
@@ -287,11 +287,11 @@ describe('Storage Synchronization', () => {
 
 ---
 
-## End-to-End Testing with Puppeteer {#e2e-puppeteer}
+End-to-End Testing with Puppeteer {#e2e-puppeteer}
 
 Puppeteer provides powerful browser automation capabilities for testing Chrome extensions in a real environment. E2E tests load your unpacked extension and simulate user interactions.
 
-### Setting Up Puppeteer for Extension Testing
+Setting Up Puppeteer for Extension Testing
 
 Install Puppeteer and configure it for extension testing:
 
@@ -334,7 +334,7 @@ export async function launchExtension(
 }
 ```
 
-### Writing Puppeteer E2E Tests
+Writing Puppeteer E2E Tests
 
 ```typescript
 // tests/e2e/popup.test.ts
@@ -383,7 +383,7 @@ describe('Tab Suspender Pro - Popup E2E', () => {
 });
 ```
 
-### Loading Unpacked Extensions
+Loading Unpacked Extensions
 
 For more complex scenarios, load the extension with specific launch arguments:
 
@@ -412,11 +412,11 @@ async function loadExtensionWithOptions(
 
 ---
 
-## End-to-End Testing with Playwright {#e2e-playwright}
+End-to-End Testing with Playwright {#e2e-playwright}
 
 Playwright offers a more modern API and better cross-browser support than Puppeteer, making it excellent for comprehensive extension testing.
 
-### Setting Up Playwright for Extensions
+Setting Up Playwright for Extensions
 
 Install Playwright:
 
@@ -449,7 +449,7 @@ export default defineConfig({
 });
 ```
 
-### Writing Playwright Extension Tests
+Writing Playwright Extension Tests
 
 ```typescript
 // tests/e2e/extension-popup.spec.ts
@@ -486,11 +486,11 @@ test.describe('Tab Suspender Pro Popup', () => {
 
 ---
 
-## Testing Content Scripts in Real Pages {#content-script-testing}
+Testing Content Scripts in Real Pages {#content-script-testing}
 
 Content scripts run in the context of web pages, requiring special testing strategies to verify they work correctly with actual page content.
 
-### Setting Up Content Script Tests
+Setting Up Content Script Tests
 
 ```typescript
 // tests/e2e/content-script.spec.ts
@@ -526,7 +526,7 @@ test.describe('Content Script Testing', () => {
 });
 ```
 
-### Injecting Content Scripts for Testing
+Injecting Content Scripts for Testing
 
 For isolated testing, inject the content script manually:
 
@@ -538,11 +538,11 @@ async function injectContentScript(page: Page, scriptPath: string) {
 
 ---
 
-## Snapshot Testing UI Components {#snapshot-testing}
+Snapshot Testing UI Components {#snapshot-testing}
 
 Snapshot testing captures the rendered output of UI components and compares them against saved snapshots, catching unintended changes.
 
-### Setting Up Snapshot Testing
+Setting Up Snapshot Testing
 
 For React-based extension UIs, use Jest or Vitest's snapshot testing:
 
@@ -570,7 +570,7 @@ describe('Popup UI Snapshots', () => {
 });
 ```
 
-### Updating Snapshots
+Updating Snapshots
 
 When intentional changes occur, update snapshots:
 
@@ -580,11 +580,11 @@ npx vitest update --snapshot
 
 ---
 
-## Code Coverage for Extensions {#code-coverage}
+Code Coverage for Extensions {#code-coverage}
 
 Measuring code coverage helps identify untested code paths and ensure comprehensive test coverage.
 
-### Configuring Coverage Reports
+Configuring Coverage Reports
 
 Update your Vitest configuration to enable coverage:
 
@@ -596,12 +596,12 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
       reportsDirectory: './coverage',
-      include: ['src/**/*.ts'],
+      include: ['src//*.ts'],
       exclude: [
-        'src/**/*.test.ts',
-        'src/**/*.spec.ts',
-        'src/types/**/*',
-        'src/**/*.d.ts'
+        'src//*.test.ts',
+        'src//*.spec.ts',
+        'src/types//*',
+        'src//*.d.ts'
       ],
       thresholds: {
         lines: 80,
@@ -614,7 +614,7 @@ export default defineConfig({
 });
 ```
 
-### Running Coverage Reports
+Running Coverage Reports
 
 ```bash
 npx vitest run --coverage
@@ -628,23 +628,23 @@ npx vitest run --coverage && npx serve coverage
 
 ---
 
-## Tab Suspender Pro Testing Strategy {#tab-suspender-testing}
+Tab Suspender Pro Testing Strategy {#tab-suspender-testing}
 
 Production extensions like Tab Suspender Pro require comprehensive testing strategies that address real-world usage scenarios.
 
-### Test Categories for Tab Suspender Pro
+Test Categories for Tab Suspender Pro
 
-1. **Inactivity Detection**: Test that tabs are correctly identified as inactive after the configured timeout period.
+1. Inactivity Detection: Test that tabs are correctly identified as inactive after the configured timeout period.
 
-2. **Suspension Logic**: Verify that eligible tabs (not pinned, not active, no audio playing) are suspended correctly.
+2. Suspension Logic: Verify that eligible tabs (not pinned, not active, no audio playing) are suspended correctly.
 
-3. **Memory Management**: Ensure suspended tabs release memory while maintaining restore capability.
+3. Memory Management: Ensure suspended tabs release memory while maintaining restore capability.
 
-4. **Exclusion Rules**: Test that domains in the exclusion list are never suspended.
+4. Exclusion Rules: Test that domains in the exclusion list are never suspended.
 
-5. **User Interaction**: Verify that user actions (clicks, keyboard shortcuts) correctly suspend or restore tabs.
+5. User Interaction: Verify that user actions (clicks, keyboard shortcuts) correctly suspend or restore tabs.
 
-### Example Tab Suspender Pro Test
+Example Tab Suspender Pro Test
 
 ```typescript
 // tests/unit/tab-suspender.test.ts
@@ -692,11 +692,11 @@ describe('Tab Suspender Pro - Core Logic', () => {
 
 ---
 
-## CI Pipeline for Extension Testing {#ci-pipeline}
+CI Pipeline for Extension Testing {#ci-pipeline}
 
 Automated testing in CI ensures every change is validated before deployment. See our [CI/CD Guide](/2025/01/18/chrome-extension-ci-cd-github-actions/) for complete setup instructions.
 
-### GitHub Actions Workflow
+GitHub Actions Workflow
 
 ```yaml
 name: Test Suite
@@ -733,9 +733,9 @@ jobs:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
-Building a comprehensive testing strategy for Chrome extensions requires understanding the unique architecture of extension-based applications. By implementing the testing pyramid—70% unit tests, 20% integration tests, and 10% E2E tests—you achieve fast feedback loops while maintaining confidence in your extension's behavior.
+Building a comprehensive testing strategy for Chrome extensions requires understanding the unique architecture of extension-based applications. By implementing the testing pyramid, 70% unit tests, 20% integration tests, and 10% E2E tests, you achieve fast feedback loops while maintaining confidence in your extension's behavior.
 
 Unit tests with Vitest and proper Chrome API mocking provide the foundation for rapid development. Integration tests verify that popup, background, and content scripts communicate correctly. E2E tests with Puppeteer and Playwright ensure your extension works in real browser environments.
 
@@ -745,7 +745,7 @@ Remember that testing is an investment in code quality and user satisfaction. We
 
 ---
 
-**Related Articles:**
+Related Articles:
 - [CI/CD for Chrome Extensions with GitHub Actions](/2025/01/18/chrome-extension-ci-cd-github-actions/)
 - [Extension Monetization Guide](/guides/extension-monetization/)
 - [Tab Suspender Pro - Ultimate Guide](/2025/01/24/tab-suspender-pro-ultimate-guide/)

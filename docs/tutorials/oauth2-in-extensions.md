@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "OAuth2 Authentication in Chrome Extensions — Developer Guide"
+title: "OAuth2 Authentication in Chrome Extensions. Developer Guide"
 description: "Learn how to implement OAuth2 authentication in Chrome Extensions using chrome.identity API, including Google APIs and third-party providers."
 canonical_url: "https://bestchromeextensions.com/tutorials/oauth2-in-extensions/"
 ---
 
 # OAuth2 Authentication in Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 Implementing authentication in Chrome extensions requires understanding the `chrome.identity` API, which provides two primary methods: `getAuthToken` for Google APIs and `launchWebAuthFlow` for third-party OAuth providers. This guide covers both approaches, token management, secure storage, error handling, and logout flows.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 You'll need:
 
@@ -29,22 +29,22 @@ You'll need:
 }
 ```
 
-## The chrome.identity API {#the-chrome-identity-api}
+The chrome.identity API {#the-chrome-identity-api}
 
 Chrome provides the `chrome.identity` API specifically for authentication in extensions. It handles the complexity of user authentication while keeping tokens secure.
 
-### Two Authentication Methods {#two-authentication-methods}
+Two Authentication Methods {#two-authentication-methods}
 
 | Method | Use Case | Token Handling |
 |--------|----------|----------------|
 | `getAuthToken` | Google APIs only | Chrome manages tokens automatically |
 | `launchWebAuthFlow` | Any OAuth2/OAuth provider | You receive the auth code, handle tokens yourself |
 
-## Google APIs: Using getAuthToken {#google-apis-using-getauthtoken}
+Google APIs: Using getAuthToken {#google-apis-using-getauthtoken}
 
 For Google APIs (Drive, Gmail, Calendar, etc.), `getAuthToken` is the simplest approach. Chrome handles token caching and refresh automatically.
 
-### Basic Usage {#basic-usage}
+Basic Usage {#basic-usage}
 
 ```ts
 // background.ts
@@ -61,7 +61,7 @@ async function getGoogleAccessToken(): Promise<string | undefined> {
 }
 ```
 
-### Interactive vs Non-Interactive {#interactive-vs-non-interactive}
+Interactive vs Non-Interactive {#interactive-vs-non-interactive}
 
 ```ts
 // Non-interactive (silent) - returns token if cached, undefined otherwise
@@ -71,7 +71,7 @@ const silentToken = await chrome.identity.getAuthToken({ interactive: false });
 const interactiveToken = await chrome.identity.getAuthToken({ interactive: true });
 ```
 
-### Using the Token {#using-the-token}
+Using the Token {#using-the-token}
 
 ```ts
 async function listGoogleDriveFiles(): Promise<void> {
@@ -94,7 +94,7 @@ async function listGoogleDriveFiles(): Promise<void> {
 }
 ```
 
-### Handling Token Expiration {#handling-token-expiration}
+Handling Token Expiration {#handling-token-expiration}
 
 Chrome automatically caches tokens, but they expire. Use `getAuthToken` with `interactive: false` to get a fresh token:
 
@@ -115,11 +115,11 @@ const token = await chrome.identity.getAuthToken({
 });
 ```
 
-## Third-Party OAuth: Using launchWebAuthFlow {#third-party-oauth-using-launchwebauthflow}
+Third-Party OAuth: Using launchWebAuthFlow {#third-party-oauth-using-launchwebauthflow}
 
 For non-Google OAuth providers (Auth0, Okta, your own OAuth server), use `launchWebAuthFlow`. This opens a popup where users authenticate, then returns an auth code or access token.
 
-### Basic Flow {#basic-flow}
+Basic Flow {#basic-flow}
 
 ```ts
 // background.ts
@@ -150,7 +150,7 @@ async function authenticateWithOAuth(): Promise<string | undefined> {
 }
 ```
 
-### Complete Example with Token Exchange {#complete-example-with-token-exchange}
+Complete Example with Token Exchange {#complete-example-with-token-exchange}
 
 ```ts
 // background.ts
@@ -262,9 +262,9 @@ if (tokens) {
 }
 ```
 
-## Token Management and Refresh {#token-management-and-refresh}
+Token Management and Refresh {#token-management-and-refresh}
 
-### Storing Tokens Securely {#storing-tokens-securely}
+Storing Tokens Securely {#storing-tokens-securely}
 
 Never store tokens in `localStorage` or plain text. Use `chrome.storage.session` for access tokens and `chrome.storage.local` with encryption for refresh tokens:
 
@@ -370,7 +370,7 @@ async function clearTokens(): Promise<void> {
 }
 ```
 
-### Token Refresh Logic {#token-refresh-logic}
+Token Refresh Logic {#token-refresh-logic}
 
 Implement automatic token refresh before making API calls:
 
@@ -418,9 +418,9 @@ async function makeAuthenticatedRequest(
 }
 ```
 
-## Handling Auth Errors {#handling-auth-errors}
+Handling Auth Errors {#handling-auth-errors}
 
-### Common Error Types {#common-error-types}
+Common Error Types {#common-error-types}
 
 ```ts
 // error-handler.ts
@@ -478,7 +478,7 @@ async function handleApiError(error: unknown): Promise<void> {
 }
 ```
 
-### Graceful Degradation {#graceful-degradation}
+Graceful Degradation {#graceful-degradation}
 
 ```ts
 // graceful-auth.ts
@@ -529,7 +529,7 @@ class AuthManager {
 }
 ```
 
-## Logout Flow {#logout-flow}
+Logout Flow {#logout-flow}
 
 Implement a complete logout that clears all stored credentials:
 
@@ -567,7 +567,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-### Logout from Popup {#logout-from-popup}
+Logout from Popup {#logout-from-popup}
 
 ```ts
 // popup.ts
@@ -580,17 +580,17 @@ document.getElementById("logout-btn")?.addEventListener("click", async () => {
 });
 ```
 
-## Security Best Practices {#security-best-ractices}
+Security Best Practices {#security-best-ractices}
 
-### Token Security {#token-security}
+Token Security {#token-security}
 
-1. **Never log tokens** — Tokens in console logs can be exploited
-2. **Use HTTPS always** — Never send tokens over HTTP
-3. **Implement token expiration** — Don't trust tokens indefinitely
-4. **Encrypt refresh tokens** — Use `chrome.storage.local` with encryption for long-lived tokens
-5. **Clear tokens on logout** — Ensure complete token cleanup
+1. Never log tokens. Tokens in console logs can be exploited
+2. Use HTTPS always. Never send tokens over HTTP
+3. Implement token expiration. Don't trust tokens indefinitely
+4. Encrypt refresh tokens. Use `chrome.storage.local` with encryption for long-lived tokens
+5. Clear tokens on logout. Ensure complete token cleanup
 
-### CSRF Protection {#csrf-protection}
+CSRF Protection {#csrf-protection}
 
 ```ts
 // Use state parameter to prevent CSRF
@@ -620,15 +620,15 @@ async function handleCallback(url: string): Promise<boolean> {
 }
 ```
 
-## Manifest V3 Considerations {#manifest-v3-considerations}
+Manifest V3 Considerations {#manifest-v3-considerations}
 
-### Service Worker vs Background Page {#service-worker-vs-background-page}
+Service Worker vs Background Page {#service-worker-vs-background-page}
 
 In Manifest V3, background scripts run as service workers with these implications:
 
-1. **No persistent state** — Use `chrome.storage` instead of variables
-2. ** Ephemeral execution** — Service worker can be terminated
-3. **No synchronous XHR** — Use `fetch` with async/await
+1. No persistent state. Use `chrome.storage` instead of variables
+2.  Ephemeral execution. Service worker can be terminated
+3. No synchronous XHR. Use `fetch` with async/await
 
 ```ts
 // background.ts (Manifest V3)
@@ -637,12 +637,12 @@ chrome.runtime.onStartup.addListener(async () => {
   // Initialize on browser startup
   const token = await getAccessToken();
   if (token) {
-    chrome.action.setBadgeText({ text: "✓" });
+    chrome.action.setBadgeText({ text: "" });
   }
 });
 ```
 
-### content Script Auth Communication {#content-script-auth-communication}
+content Script Auth Communication {#content-script-auth-communication}
 
 Content scripts cannot access `chrome.identity` directly. Use message passing:
 
@@ -669,7 +669,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Complete Example: Google Drive Extension {#complete-example-google-drive-extension}
+Complete Example: Google Drive Extension {#complete-example-google-drive-extension}
 
 ```ts
 // background.ts
@@ -764,9 +764,9 @@ document.getElementById("list-files")?.addEventListener("click", async () => {
 });
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
-- Use `getAuthToken` for Google APIs — Chrome manages token caching and refresh
+- Use `getAuthToken` for Google APIs. Chrome manages token caching and refresh
 - Use `launchWebAuthFlow` for third-party OAuth providers
 - Store tokens securely using `chrome.storage.session` for access tokens and encrypted `chrome.storage.local` for refresh tokens
 - Implement automatic token refresh before API calls
@@ -774,11 +774,11 @@ document.getElementById("list-files")?.addEventListener("click", async () => {
 - Clear all tokens and cached credentials on logout
 - Follow security best practices: HTTPS, CSRF protection, token expiration
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [Permissions Quickstart](permissions-quickstart.md) — Understanding Chrome extension permissions
-- [Chrome Storage Patterns](chrome-storage-patterns.md) — Advanced storage techniques for extensions
-- [Runtime API Guide](runtime-api-guide.md) — Chrome runtime API for extension communication
+- [Permissions Quickstart](permissions-quickstart.md). Understanding Chrome extension permissions
+- [Chrome Storage Patterns](chrome-storage-patterns.md). Advanced storage techniques for extensions
+- [Runtime API Guide](runtime-api-guide.md). Chrome runtime API for extension communication
 
 ---
 

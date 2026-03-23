@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Clipboard Patterns — Best Practices"
+title: "Chrome Extension Clipboard Patterns. Best Practices"
 description: "Read and write clipboard content in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/clipboard-patterns/"
 ---
 
 # Clipboard API Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Clipboard access in Chrome extensions is split across contexts: content scripts can use `document.execCommand` or the async Clipboard API on user-visible pages, service workers have no DOM and no clipboard access at all, and offscreen documents bridge the gap. This guide covers eight patterns for reading, writing, monitoring, and managing clipboard data across extension contexts.
 
 ---
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -26,11 +26,11 @@ Clipboard access in Chrome extensions is split across contexts: content scripts 
 
 ---
 
-## Pattern 1: Reading Clipboard Text from Different Contexts {#pattern-1-reading-clipboard-text-from-different-contexts}
+Pattern 1: Reading Clipboard Text from Different Contexts {#pattern-1-reading-clipboard-text-from-different-contexts}
 
 Each extension context has different clipboard capabilities. Here is how to read text in each:
 
-### Content Script (direct access) {#content-script-direct-access}
+Content Script (direct access) {#content-script-direct-access}
 
 Content scripts run on web pages and can use the async Clipboard API when the page is focused:
 
@@ -47,7 +47,7 @@ async function readClipboardInContentScript(): Promise<string | null> {
 }
 ```
 
-### Popup / Side Panel (direct access) {#popup-side-panel-direct-access}
+Popup / Side Panel (direct access) {#popup-side-panel-direct-access}
 
 Extension pages have their own origin and can read the clipboard while they are focused:
 
@@ -59,7 +59,7 @@ document.getElementById("paste-btn")!.addEventListener("click", async () => {
 });
 ```
 
-### Service Worker (via offscreen document) {#service-worker-via-offscreen-document}
+Service Worker (via offscreen document) {#service-worker-via-offscreen-document}
 
 Service workers cannot access the clipboard. Delegate to an offscreen document:
 
@@ -96,12 +96,12 @@ async function readClipboard(): Promise<string> {
 
 ---
 
-## Pattern 2: Writing to Clipboard from Background {#pattern-2-writing-to-clipboard-from-background}
+Pattern 2: Writing to Clipboard from Background {#pattern-2-writing-to-clipboard-from-background}
 
 The service worker must route clipboard writes through an offscreen document or a content script:
 
 ```ts
-// offscreen.ts — Clipboard write handler
+// offscreen.ts. Clipboard write handler
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === "clipboard:write") {
     navigator.clipboard.writeText(msg.text)
@@ -145,12 +145,12 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-## Pattern 3: Clipboard Monitoring (Watch for Changes) {#pattern-3-clipboard-monitoring-watch-for-changes}
+Pattern 3: Clipboard Monitoring (Watch for Changes) {#pattern-3-clipboard-monitoring-watch-for-changes}
 
 The Clipboard API has no change event. Poll by comparing snapshots at an interval:
 
 ```ts
-// offscreen.ts — Clipboard watcher
+// offscreen.ts. Clipboard watcher
 let lastClipboardText = "";
 let watchInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -193,7 +193,7 @@ function stopWatching(): void {
 ```
 
 ```ts
-// background.ts — React to clipboard changes
+// background.ts. React to clipboard changes
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "clipboard:changed") {
     // Store in history, trigger actions, etc.
@@ -202,16 +202,16 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-> **Note:** Aggressive polling drains battery. Use intervals of 1-2 seconds and let the user toggle monitoring on/off. Chrome may also restrict clipboard reads when the extension page is not focused.
+> Note: Aggressive polling drains battery. Use intervals of 1-2 seconds and let the user toggle monitoring on/off. Chrome may also restrict clipboard reads when the extension page is not focused.
 
 ---
 
-## Pattern 4: Rich Content -- Copying HTML and Images {#pattern-4-rich-content-copying-html-and-images}
+Pattern 4: Rich Content -- Copying HTML and Images {#pattern-4-rich-content-copying-html-and-images}
 
 The async Clipboard API supports `ClipboardItem` for rich content. Use this from a content script or offscreen document:
 
 ```ts
-// content-script.ts — Copy selection as HTML
+// content-script.ts. Copy selection as HTML
 async function copySelectionAsHTML(): Promise<boolean> {
   const selection = window.getSelection();
   if (!selection || selection.rangeCount === 0) return false;
@@ -236,10 +236,10 @@ async function copySelectionAsHTML(): Promise<boolean> {
 }
 ```
 
-### Copying an Image {#copying-an-image}
+Copying an Image {#copying-an-image}
 
 ```ts
-// content-script.ts — Copy an image element to clipboard
+// content-script.ts. Copy an image element to clipboard
 async function copyImageToClipboard(imgElement: HTMLImageElement): Promise<boolean> {
   try {
     const response = await fetch(imgElement.src);
@@ -282,7 +282,7 @@ function convertToPNG(blob: Blob): Promise<Blob> {
 
 ---
 
-## Pattern 5: Clipboard History Manager {#pattern-5-clipboard-history-manager}
+Pattern 5: Clipboard History Manager {#pattern-5-clipboard-history-manager}
 
 Store clipboard entries in `chrome.storage.local` for a searchable history:
 
@@ -306,7 +306,7 @@ const PREVIEW_LENGTH = 120;
 async function saveToHistory(text: string, source: "manual" | "monitor"): Promise<void> {
   const history = (await storage.get("clipboardHistory")) ?? [];
 
-  // Deduplicate — don't store the same text consecutively
+  // Deduplicate. don't store the same text consecutively
   if (history.length > 0 && history[0].text === text) return;
 
   const entry: ClipboardEntry = {
@@ -350,7 +350,7 @@ The popup can then call `searchHistory(query)` to render a filterable list of pa
 
 ---
 
-## Pattern 6: Context Menu "Copy as..." {#pattern-6-context-menu-copy-as}
+Pattern 6: Context Menu "Copy as..." {#pattern-6-context-menu-copy-as}
 
 Add right-click menu items that transform selected text before copying:
 
@@ -402,7 +402,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 ```
 
 ```ts
-// content-script.ts — Handle write requests from background
+// content-script.ts. Handle write requests from background
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === "clipboard:write-text") {
     navigator.clipboard.writeText(msg.text)
@@ -415,12 +415,12 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
 ---
 
-## Pattern 7: Paste Interception in Content Scripts {#pattern-7-paste-interception-in-content-scripts}
+Pattern 7: Paste Interception in Content Scripts {#pattern-7-paste-interception-in-content-scripts}
 
 Intercept paste events to transform or validate content before it enters the page:
 
 ```ts
-// content-script.ts — Paste interceptor
+// content-script.ts. Paste interceptor
 function setupPasteInterceptor(
   selector: string,
   transform: (text: string) => string
@@ -460,7 +460,7 @@ setupPasteInterceptor("input[type=url], textarea", (text) => {
     trackingParams.forEach((p) => url.searchParams.delete(p));
     return url.toString();
   } catch {
-    return text; // Not a URL — return as-is
+    return text; // Not a URL. return as-is
   }
 });
 
@@ -473,7 +473,7 @@ setupPasteInterceptor("[contenteditable]", (text) => {
 
 ---
 
-## Pattern 8: Clipboard Permissions and User Consent {#pattern-8-clipboard-permissions-and-user-consent}
+Pattern 8: Clipboard Permissions and User Consent {#pattern-8-clipboard-permissions-and-user-consent}
 
 Clipboard access can fail silently or throw depending on context and focus state. Handle permissions defensively:
 
@@ -522,9 +522,9 @@ async function safeClipboardRead(): Promise<{ text: string; error?: string }> {
 Ensure clipboard reads/writes happen in response to user gestures (clicks, key presses):
 
 ```ts
-// popup.ts — Gate clipboard access behind a button click
+// popup.ts. Gate clipboard access behind a button click
 document.getElementById("read-btn")!.addEventListener("click", async () => {
-  // This runs inside a user gesture — clipboard access is allowed
+  // This runs inside a user gesture. clipboard access is allowed
   const result = await safeClipboardRead();
 
   if (result.error) {
@@ -538,7 +538,7 @@ document.getElementById("read-btn")!.addEventListener("click", async () => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|
@@ -551,7 +551,7 @@ document.getElementById("read-btn")!.addEventListener("click", async () => {
 | Paste interception | Validate or clean pasted content in content scripts |
 | Permissions and consent | Defensive error handling and user-gesture gating |
 
-Clipboard access in extensions requires routing through the right context. Service workers cannot touch the clipboard directly — always delegate to an offscreen document or content script. Handle permission errors gracefully, gate operations behind user gestures, and give users control over monitoring and history retention.
+Clipboard access in extensions requires routing through the right context. Service workers cannot touch the clipboard directly. always delegate to an offscreen document or content script. Handle permission errors gracefully, gate operations behind user gestures, and give users control over monitoring and history retention.
 -e 
 ---
 

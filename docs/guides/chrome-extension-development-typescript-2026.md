@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Development Tutorial with TypeScript — Complete 2026 Guide"
+title: "Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide"
 description: "Learn to build production-ready Chrome extensions using TypeScript and Manifest V3. Covers project setup, service workers, content scripts, popup pages, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-development-typescript-2026/"
 ---
 
-# Chrome Extension Development Tutorial with TypeScript — Complete 2026 Guide
+# Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide
 
-## Introduction
+Introduction
 
 Building Chrome extensions has evolved significantly with the introduction of Manifest V3 and the deprecation of background pages in favor of service workers. This comprehensive tutorial walks you through creating a production-ready Chrome extension using TypeScript, covering everything from project setup to deployment.
 
-Whether you're building a simple productivity tool or a complex enterprise extension like **Tab Suspender Pro**, this guide provides the foundational knowledge you need to succeed in Chrome extension development in 2026.
+Whether you're building a simple productivity tool or a complex enterprise extension like Tab Suspender Pro, this guide provides the foundational knowledge you need to succeed in Chrome extension development in 2026.
 
-## Prerequisites
+Prerequisites
 
 Before we begin, ensure you have:
 - Node.js 18+ installed
@@ -21,11 +21,11 @@ Before we begin, ensure you have:
 - Google Chrome browser (latest version)
 - Basic familiarity with TypeScript and web development concepts
 
-## Setting Up Your TypeScript Project
+Setting Up Your TypeScript Project
 
 The first step in Chrome extension development is setting up a proper TypeScript project structure. Modern Chrome extensions require a build system to transpile TypeScript and bundle your code.
 
-### Initialize the Project
+Initialize the Project
 
 Create a new directory and initialize your project:
 
@@ -34,7 +34,7 @@ mkdir my-chrome-extension && cd my-chrome-extension
 npm init -y
 ```
 
-### Install Dependencies
+Install Dependencies
 
 Install the necessary development dependencies:
 
@@ -42,7 +42,7 @@ Install the necessary development dependencies:
 npm install -D typescript @types/chrome webpack webpack-cli ts-loader html-webpack-plugin copy-webpack-plugin
 ```
 
-### Configure TypeScript
+Configure TypeScript
 
 Create a `tsconfig.json` file optimized for Chrome extension development:
 
@@ -66,12 +66,12 @@ Create a `tsconfig.json` file optimized for Chrome extension development:
     "isolatedModules": true,
     "noEmit": false
   },
-  "include": ["src/**/*"],
+  "include": ["src//*"],
   "exclude": ["node_modules", "dist"]
 }
 ```
 
-### Configure Webpack
+Configure Webpack
 
 Create a `webpack.config.js` to bundle your extension:
 
@@ -125,11 +125,11 @@ const config: Configuration = {
 export default config;
 ```
 
-## Creating the Manifest V3 Configuration
+Creating the Manifest V3 Configuration
 
 The manifest.json is the heart of your Chrome extension. It defines permissions, entry points, and metadata.
 
-### Basic Manifest Structure
+Basic Manifest Structure
 
 Create `src/manifest.json`:
 
@@ -177,11 +177,11 @@ Create `src/manifest.json`:
 }
 ```
 
-## Building the Background Service Worker
+Building the Background Service Worker
 
-The background service worker handles events when no popup or content script is active. In Manifest V3, service workers are ephemeral—they can be terminated when idle and restarted when needed.
+The background service worker handles events when no popup or content script is active. In Manifest V3, service workers are ephemeral, they can be terminated when idle and restarted when needed.
 
-### Service Worker Implementation
+Service Worker Implementation
 
 Create `src/background/index.ts`:
 
@@ -332,18 +332,18 @@ chrome.runtime.onInstalled.addListener(() => {
 export {};
 ```
 
-### Key Service Worker Patterns
+Key Service Worker Patterns
 
-1. **Top-Level Event Registration**: Always register event listeners at the top level, not inside async functions
-2. **Async Response Pattern**: Return `true` from `onMessage` listener to indicate async response
-3. **State Persistence**: Use `chrome.storage` instead of in-memory variables for persistent state
-4. **Ephemeral Handling**: Design for service worker restart—don't rely on in-memory state
+1. Top-Level Event Registration: Always register event listeners at the top level, not inside async functions
+2. Async Response Pattern: Return `true` from `onMessage` listener to indicate async response
+3. State Persistence: Use `chrome.storage` instead of in-memory variables for persistent state
+4. Ephemeral Handling: Design for service worker restart, don't rely on in-memory state
 
-## Building the Content Script
+Building the Content Script
 
 Content scripts run in the context of web pages and can manipulate the DOM, inject CSS, and communicate with the background service worker.
 
-### Content Script Implementation
+Content Script Implementation
 
 Create `src/content/index.ts`:
 
@@ -566,11 +566,11 @@ if (document.readyState === 'loading') {
 }
 ```
 
-## Building the Popup Page
+Building the Popup Page
 
 The popup is the UI users interact with when clicking the extension icon. Modern popup pages use HTML, CSS, and JavaScript (or TypeScript).
 
-### Popup HTML
+Popup HTML
 
 Create `src/popup/popup.html`:
 
@@ -748,7 +748,7 @@ Create `src/popup/popup.html`:
 </html>
 ```
 
-### Popup TypeScript
+Popup TypeScript
 
 Create `src/popup/index.tsx`:
 
@@ -905,11 +905,11 @@ document.addEventListener('DOMContentLoaded', () => {
 export {};
 ```
 
-## Communication Patterns
+Communication Patterns
 
 Chrome extensions use several communication patterns between different contexts.
 
-### Message Passing Between Background and Content Scripts
+Message Passing Between Background and Content Scripts
 
 ```typescript
 // From content script to background
@@ -926,7 +926,7 @@ chrome.tabs.sendMessage(tabId, { action: 'updateUI' }, (response) => {
 });
 ```
 
-### Using Native Messaging
+Using Native Messaging
 
 For communication with native applications:
 
@@ -945,19 +945,19 @@ async function sendToNativeApp(): Promise<void> {
 }
 ```
 
-## Best Practices for Production Extensions
+Best Practices for Production Extensions
 
-1. **Use TypeScript Strict Mode**: Enable all TypeScript strict checks to catch errors at compile time
-2. **Implement Proper Error Handling**: Wrap async operations in try-catch blocks
-3. **Use Manifest V3**: Migrate from Manifest V2 as Google is phasing out V2 extensions
-4. **Minimize Permissions**: Request only the permissions your extension needs
-5. **Handle Service Worker Lifecycle**: Design for the ephemeral nature of service workers
-6. **Use Content Security Policy**: Follow Chrome's CSP guidelines
-7. **Test Thoroughly**: Test across different Chrome versions and OS configurations
+1. Use TypeScript Strict Mode: Enable all TypeScript strict checks to catch errors at compile time
+2. Implement Proper Error Handling: Wrap async operations in try-catch blocks
+3. Use Manifest V3: Migrate from Manifest V2 as Google is phasing out V2 extensions
+4. Minimize Permissions: Request only the permissions your extension needs
+5. Handle Service Worker Lifecycle: Design for the ephemeral nature of service workers
+6. Use Content Security Policy: Follow Chrome's CSP guidelines
+7. Test Thoroughly: Test across different Chrome versions and OS configurations
 
-## Building and Loading Your Extension
+Building and Loading Your Extension
 
-### Build the Extension
+Build the Extension
 
 Add build scripts to your `package.json`:
 
@@ -977,20 +977,20 @@ Run the build:
 npm run build
 ```
 
-### Load the Extension in Chrome
+Load the Extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked"
 4. Select your `dist` directory
 
-### Debugging
+Debugging
 
-- **Service Worker**: Right-click extension icon → "Inspect service worker"
-- **Popup**: Right-click extension icon → "Inspect popup"
-- **Content Script**: Open DevTools on any page → Look for extension context
+- Service Worker: Right-click extension icon → "Inspect service worker"
+- Popup: Right-click extension icon → "Inspect popup"
+- Content Script: Open DevTools on any page → Look for extension context
 
-## Publishing Your Extension
+Publishing Your Extension
 
 When ready to publish:
 
@@ -1000,7 +1000,7 @@ When ready to publish:
 4. Complete the verification process
 5. Publish your extension
 
-## Conclusion
+Conclusion
 
 This tutorial covered the essential components of building Chrome extensions with TypeScript in 2026. You've learned how to:
 
@@ -1011,6 +1011,6 @@ This tutorial covered the essential components of building Chrome extensions wit
 - Create interactive popup interfaces
 - Implement message passing between extension contexts
 
-For more advanced topics, explore the documentation on advanced messaging patterns, storage optimization, and Chrome Web Store optimization. Extensions like **Tab Suspender Pro** demonstrate how these patterns combine to create powerful productivity tools.
+For more advanced topics, explore the documentation on advanced messaging patterns, storage optimization, and Chrome Web Store optimization. Extensions like Tab Suspender Pro demonstrate how these patterns combine to create powerful productivity tools.
 
 Continue learning by exploring related guides on content script CSS injection, background service worker patterns, and popup design patterns in our comprehensive extension development documentation.

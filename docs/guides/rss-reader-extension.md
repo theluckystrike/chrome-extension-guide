@@ -47,27 +47,27 @@ This guide covers building a production-ready RSS reader extension using Chrome'
 ### Project Structure
 ```
 src/
-├── background/
-│   ├── worker.ts          # Service worker entry
-│   ├── feed-parser.ts     # RSS/Atom parsing
-│   ├── sync-engine.ts     # Background sync logic
-│   └── storage.ts         # chrome.storage abstraction
-├── popup/
-│   ├── index.html
-│   ├── App.tsx           # React/Vue component
-│   └── styles.css
-├── sidebar/
-│   ├── index.html
-│   └── reader.tsx
-├── content/
-│   ├── content.ts        # Page injection script
-│   └── overlay.ts        # Floating feed discovery
-├── shared/
-│   ├── types.ts          # Shared TypeScript interfaces
-│   ├── constants.ts
-│   └── utils.ts
-└── options/
-    └── settings.ts       # Options page
+ background/
+    worker.ts          # Service worker entry
+    feed-parser.ts     # RSS/Atom parsing
+    sync-engine.ts     # Background sync logic
+    storage.ts         # chrome.storage abstraction
+ popup/
+    index.html
+    App.tsx           # React/Vue component
+    styles.css
+ sidebar/
+    index.html
+    reader.tsx
+ content/
+    content.ts        # Page injection script
+    overlay.ts        # Floating feed discovery
+ shared/
+    types.ts          # Shared TypeScript interfaces
+    constants.ts
+    utils.ts
+ options/
+     settings.ts       # Options page
 ```
 
 ## Core TypeScript Implementation

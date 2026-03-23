@@ -19,44 +19,44 @@ In this comprehensive developer guide, we will walk through building a complete 
 
 ---
 
-## Understanding Site-Specific Search Extensions {#understanding-site-specific-search}
+Understanding Site-Specific Search Extensions {#understanding-site-specific-search}
 
 Site-specific search extensions are powerful tools that enhance user productivity by allowing instant search within the current website. Unlike general search engines that crawl and index the entire web, these extensions operate on the DOM of the active page, enabling users to find content precisely where they are browsing.
 
-### Why Build a Site-Specific Search Extension?
+Why Build a Site-Specific Search Extension?
 
 The demand for site-specific search tools continues to grow for several compelling reasons. First, large websites with extensive content libraries often have poor built-in search functionality or none at all. Users frequently need to navigate through multiple pages to find what they are looking for, which leads to frustration and decreased engagement. Second, professionals who work with specific websites daily, such as researchers analyzing academic papers, developers browsing documentation, or marketers analyzing competitor sites, benefit enormously from quick in-site search capabilities. Third, from a development perspective, building a site search extension is an excellent learning project that touches on multiple Chrome extension APIs, including the content script API, messaging API, and storage API.
 
-### Core Functionality Overview
+Core Functionality Overview
 
-Our site-specific search extension will provide the following features. First, a keyboard shortcut activated search modal that works on any webpage. Second, real-time highlighting of search results as users type their queries. Third, navigation between multiple matches on the same page. Fourth, case-insensitive search with option for exact matching. Fifth, remembers user preferences and recent searches. Sixth, works seamlessly across all websites without requiring configuration.
+Our site-specific search extension will provide the following features. First, a keyboard shortcut activated search modal that works on any webpage. Second, real-time highlighting of search results as users type their queries. Third, navigation between multiple matches on the same page. Fourth, case-insensitive search with option for exact matching. Fifth, remembers user preferences and recent searches. Sixth, works smoothly across all websites without requiring configuration.
 
 ---
 
-## Project Setup and Structure {#project-setup}
+Project Setup and Structure {#project-setup}
 
 Let us begin by setting up our project structure. Create a new folder for your extension and organize the files as follows:
 
 ```
 site-search-extension/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── popup.css
-├── content.js
-├── background.js
-├── search-modal.html
-├── search-modal.css
-├── search-modal.js
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ popup.html
+ popup.js
+ popup.css
+ content.js
+ background.js
+ search-modal.html
+ search-modal.css
+ search-modal.js
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
 This structure separates concerns between the popup interface, content scripts that run on web pages, and the background service worker that handles extension-wide logic.
 
-### Creating the Manifest File
+Creating the Manifest File
 
 Every Chrome extension begins with the manifest.json file. For our site-specific search extension, we will use Manifest V3, which is the current standard and provides improved security and performance.
 
@@ -109,11 +109,11 @@ The manifest file declares several important configurations. The host permission
 
 ---
 
-## Building the Content Script {#content-script}
+Building the Content Script {#content-script}
 
 The content script is the heart of our site-specific search extension. It runs within the context of the web page and handles all the search-related functionality directly on the DOM.
 
-### Initializing the Search Modal
+Initializing the Search Modal
 
 Create the content.js file with the following implementation:
 
@@ -384,7 +384,7 @@ This content script handles all the heavy lifting. It creates a search modal ove
 
 ---
 
-## Styling the Search Modal {#styling}
+Styling the Search Modal {#styling}
 
 The search-modal.css file provides attractive styling for our search interface:
 
@@ -503,7 +503,7 @@ The styling ensures a modern, clean appearance that works well across different 
 
 ---
 
-## Background Service Worker {#background-service-worker}
+Background Service Worker {#background-service-worker}
 
 The background.js file handles extension-wide logic, including responding to keyboard commands:
 
@@ -539,7 +539,7 @@ The background service worker listens for the keyboard shortcut and sends a mess
 
 ---
 
-## Popup Interface {#popup-interface}
+Popup Interface {#popup-interface}
 
 The popup.html provides a simple interface for configuring the extension:
 
@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension in development mode. Open Chrome and navigate to chrome://extensions/. Enable Developer mode in the top right corner, then click Load unpacked and select your extension folder.
 
@@ -605,7 +605,7 @@ Test the following scenarios. First, press Ctrl+Shift+F on various websites and 
 
 ---
 
-## Publishing to Chrome Web Store {#publishing}
+Publishing to Chrome Web Store {#publishing}
 
 Once your extension is thoroughly tested, you can publish it to the Chrome Web Store. First, create a developer account at the Chrome Web Store if you do not already have one. Next, package your extension using the Pack extension button in chrome://extensions/, or run the following command:
 
@@ -617,13 +617,13 @@ Then, navigate to the Chrome Web Store Developer Dashboard and create a new list
 
 ---
 
-## Advanced Features to Consider {#advanced-features}
+Advanced Features to Consider {#advanced-features}
 
 As you enhance your site-specific search extension, consider implementing several advanced features. Exact phrase matching using quotation marks would allow users to search for exact phrases. Regular expression support would enable power users to perform advanced pattern matching. Search history with autocomplete would remember previous searches for quick access. Site-specific configuration would let users customize search behavior for particular websites. Integration with page indexing services would enable searching across multiple pages of a site.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a site-specific search Chrome extension is an excellent project that teaches valuable skills while creating a genuinely useful tool. The extension we built in this guide provides instant search capabilities on any webpage, significantly improving user productivity when browsing content-rich websites.
 

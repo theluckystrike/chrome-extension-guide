@@ -9,9 +9,9 @@ permalink: /guides/chrome-tabs-api-complete-reference/
 
 The Chrome Tabs API is the cornerstone of any tab management extension. Whether you're building a simple tab saver or a sophisticated tab manager with grouping, suspension, and cross-window synchronization, this complete reference will guide you through every method, event, and pattern you need to know.
 
-This guide covers the full spectrum of tab management capabilities—from basic querying to advanced features like tab groups, discarding, capture, and cross-window operations. Each section includes production-ready code examples that you can adapt directly for your extension.
+This guide covers the full spectrum of tab management capabilities, from basic querying to advanced features like tab groups, discarding, capture, and cross-window operations. Each section includes production-ready code examples that you can adapt directly for your extension.
 
-## Table of Contents
+Table of Contents
 
 1. [Understanding Tab Objects](#understanding-tab-objects)
 2. [chrome.tabs.query Patterns](#chrometabsquery-patterns)
@@ -25,7 +25,7 @@ This guide covers the full spectrum of tab management capabilities—from basic 
 
 ---
 
-## Understanding Tab Objects
+Understanding Tab Objects
 
 Before diving into the API methods, it's essential to understand the structure of a tab object. Every tab in Chrome is represented by a comprehensive object containing dozens of properties:
 
@@ -51,7 +51,7 @@ Before diving into the API methods, it's essential to understand the structure o
 }
 ```
 
-**Key Property Notes:**
+Key Property Notes:
 
 - Tab IDs are unique within a browser session but are not persistent across restarts
 - The `groupId` property links tabs to their tab group (available in Chrome 88+)
@@ -60,11 +60,11 @@ Before diving into the API methods, it's essential to understand the structure o
 
 ---
 
-## chrome.tabs.query Patterns
+chrome.tabs.query Patterns
 
 The `chrome.tabs.query()` method is your primary tool for finding tabs. It accepts a `QueryInfo` object and returns an array of matching tabs. Mastering query patterns is essential for building efficient tab managers.
 
-### Basic Query Patterns
+Basic Query Patterns
 
 ```javascript
 // Get all tabs in the current window
@@ -80,7 +80,7 @@ const pinnedTabs = await chrome.tabs.query({ pinned: true });
 const audibleTabs = await chrome.tabs.query({ audible: true });
 ```
 
-### Advanced Filtering by URL Patterns
+Advanced Filtering by URL Patterns
 
 ```javascript
 // Get tabs matching a URL pattern (requires host permissions)
@@ -99,7 +99,7 @@ const loadingTabs = await chrome.tabs.query({
 });
 ```
 
-### Building a Duplicate Tab Finder
+Building a Duplicate Tab Finder
 
 One of the most useful tab manager features is finding duplicate tabs:
 
@@ -147,7 +147,7 @@ async function closeDuplicateTabs(keepNewest = false) {
 }
 ```
 
-### Querying by Window Type
+Querying by Window Type
 
 ```javascript
 // Get all tabs in regular (non-incognito) windows
@@ -166,11 +166,11 @@ const incognitoTabs = await chrome.tabs.query({
 
 ---
 
-## Tab Group Management API
+Tab Group Management API
 
 Tab groups (introduced in Chrome 88) allow users to organize their tabs into colored, named groups. The Chrome Tabs API provides full support for creating, modifying, and querying tab groups.
 
-### Creating and Managing Tab Groups
+Creating and Managing Tab Groups
 
 ```javascript
 // Create a new tab group from existing tabs
@@ -204,7 +204,7 @@ async function groupGitHubTabs() {
 }
 ```
 
-### Querying and Modifying Tab Groups
+Querying and Modifying Tab Groups
 
 ```javascript
 // Get all tab groups in a window
@@ -237,7 +237,7 @@ async function moveTabGroup(groupId, windowId, index) {
 }
 ```
 
-### Tab Group Events
+Tab Group Events
 
 ```javascript
 // Listen for group creation
@@ -258,11 +258,11 @@ chrome.tabGroups.onRemoved.addListener((group) => {
 
 ---
 
-## Tab Lifecycle Events
+Tab Lifecycle Events
 
 Understanding tab lifecycle events is crucial for building reactive extensions that respond to user actions in real-time.
 
-### Monitoring Tab Creation
+Monitoring Tab Creation
 
 ```javascript
 chrome.tabs.onCreated.addListener((tab) => {
@@ -280,9 +280,9 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 ```
 
-### Tracking Tab Updates
+Tracking Tab Updates
 
-The `onUpdated` event fires whenever a tab's properties change—URL, title, favicon, loading status, pinned state, or mute state:
+The `onUpdated` event fires whenever a tab's properties change, URL, title, favicon, loading status, pinned state, or mute state:
 
 ```javascript
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -317,7 +317,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### Handling Tab Removal
+Handling Tab Removal
 
 ```javascript
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -330,7 +330,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 ```
 
-### Tab Activation Events
+Tab Activation Events
 
 ```javascript
 chrome.tabs.onActivated.addListener((activeInfo) => {
@@ -345,7 +345,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 // Use chrome.windows.onFocusChanged for cross-window tracking
 ```
 
-### Window Events
+Window Events
 
 ```javascript
 // Window created
@@ -368,11 +368,11 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 ---
 
-## Moving, Pinning, and Discarding Tabs
+Moving, Pinning, and Discarding Tabs
 
 These operations form the core functionality of any tab manager extension.
 
-### Moving Tabs
+Moving Tabs
 
 ```javascript
 // Move a tab to a specific position in the same window
@@ -410,7 +410,7 @@ async function migrateTabs(sourceWindowId, targetWindowId) {
 }
 ```
 
-### Pinning Tabs
+Pinning Tabs
 
 Pinned tabs stay at the left edge of the tab strip and can't be easily closed:
 
@@ -444,7 +444,7 @@ async function getPinnedTabs() {
 }
 ```
 
-### Discarding Tabs
+Discarding Tabs
 
 Discarding unloads a tab's content from memory while keeping it in the tab strip. This is crucial for memory management in extensions like Tab Suspender Pro:
 
@@ -509,11 +509,11 @@ async function restoreTab(tabId) {
 
 ---
 
-## Tab Capture API
+Tab Capture API
 
 The Tab Capture API allows you to capture the visual content of a tab as a media stream. This is essential for building tab sharing, screenshot, or screencast extensions.
 
-### Basic Tab Capture
+Basic Tab Capture
 
 ```javascript
 // Capture a tab as a video stream
@@ -557,7 +557,7 @@ async function captureTabScreenshot(tabId) {
 }
 ```
 
-### Capture Events
+Capture Events
 
 ```javascript
 // Listen for capture status changes
@@ -569,20 +569,20 @@ chrome.tabCapture.onStatusChanged.addListener((info) => {
 });
 ```
 
-### Use Cases for Tab Capture
+Use Cases for Tab Capture
 
-1. **Screenshots**: Capture visible area or full page
-2. **Tab Sharing**: WebRTC screen sharing integration
-3. **Tab Mirroring**: Display tab content in sidebars
-4. **Video Recording**: Record tab activity
+1. Screenshots: Capture visible area or full page
+2. Tab Sharing: WebRTC screen sharing integration
+3. Tab Mirroring: Display tab content in sidebars
+4. Video Recording: Record tab activity
 
 ---
 
-## Cross-Window Management
+Cross-Window Management
 
 Modern workflows often span multiple windows. The Chrome Tabs API provides comprehensive support for managing tabs across windows.
 
-### Window Operations
+Window Operations
 
 ```javascript
 // Create a new window with tabs
@@ -671,7 +671,7 @@ async function smartMoveTab(tabId) {
 
 ---
 
-## Building a Complete Tab Manager Extension
+Building a Complete Tab Manager Extension
 
 Here's a comprehensive example that brings together all the concepts above into a production-ready tab manager:
 
@@ -956,11 +956,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
 When building tab management extensions, performance is critical. Here are key considerations:
 
-### Optimizing Query Performance
+Optimizing Query Performance
 
 ```javascript
 // BAD: Multiple sequential queries
@@ -973,7 +973,7 @@ const normalTabs = allTabs.filter(t => !t.incognito);
 const pinnedTabs = allTabs.filter(t => t.pinned);
 ```
 
-### Using Batch Operations
+Using Batch Operations
 
 ```javascript
 // BAD: Individual moves
@@ -985,7 +985,7 @@ for (const tabId of tabIds) {
 await chrome.tabs.move(tabIds, { index: 0 });
 ```
 
-### Debouncing Events
+Debouncing Events
 
 ```javascript
 // Avoid processing every single update
@@ -999,7 +999,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-### Memory Management
+Memory Management
 
 - Don't store large numbers of tab objects in memory
 - Use `chrome.storage` for persistent data
@@ -1008,18 +1008,18 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-## Related Articles
+Related Articles
 
 This guide is part of our comprehensive Chrome Extension development series. For more on tab management, see:
 
 - [Automatic Tab Suspension Guide](/guides/automatic-tab-suspension-guide/) - Learn how to implement intelligent tab suspension to reduce memory usage
 - [Tab Management Guide](/guides/tab-management/) - Patterns and best practices for building tab management extensions
-- [Tab Groups API](/guides/tab-groups/) - Deep dive into Chrome's tab grouping functionality
+- [Tab Groups API](/guides/tab-groups/) - Detailed look into Chrome's tab grouping functionality
 
 ---
 
 *Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by theluckystrike. Professional extension development at [zovo.one](https://zovo.one).*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

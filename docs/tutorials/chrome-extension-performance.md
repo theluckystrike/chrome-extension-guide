@@ -9,27 +9,27 @@ canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-perf
 
 Performance is critical for Chrome extensions. Users expect extensions to be fast, responsive, and memory-efficient. A poorly optimized extension can drain battery, slow down browsing, and lead to negative reviews. This tutorial covers essential techniques for building high-performance Chrome extensions.
 
-## Prerequisites
+Prerequisites
 
 - Basic understanding of Chrome extension architecture (Manifest V3)
 - Familiarity with JavaScript/TypeScript
 - Chrome DevTools experience
 
-## 1. Minimizing Memory Usage
+1. Minimizing Memory Usage
 
 Memory leaks are the most common performance issue in Chrome extensions. They occur when objects are retained in memory even after they're no longer needed.
 
-### Common Memory Leak Sources
+Common Memory Leak Sources
 
-- **Event listeners not removed**: Listeners persist after page navigation
-- **Closures holding references**: Variables captured by closures prevent garbage collection
-- **DOM references**: Storing references to removed DOM elements
-- ** timers and intervals**: Not clearing timers when cleanup is needed
+- Event listeners not removed: Listeners persist after page navigation
+- Closures holding references: Variables captured by closures prevent garbage collection
+- DOM references: Storing references to removed DOM elements
+-  timers and intervals: Not clearing timers when cleanup is needed
 
-### Before: Memory Leak Example
+Before: Memory Leak Example
 
 ```javascript
-// ❌ BAD: Event listener never removed
+//  BAD: Event listener never removed
 function setupContentScript() {
   document.addEventListener('click', handleClick);
   // This listener stays forever, causing memory leaks
@@ -46,10 +46,10 @@ setInterval(() => {
 }, 5000);
 ```
 
-### After: Proper Memory Management
+After: Proper Memory Management
 
 ```javascript
-// ✅ GOOD: Clean up on removal
+//  GOOD: Clean up on removal
 function setupContentScript() {
   document.addEventListener('click', handleClick);
   
@@ -59,7 +59,7 @@ function setupContentScript() {
   };
 }
 
-// ✅ GOOD: Store timer ID and clear when done
+//  GOOD: Store timer ID and clear when done
 let fetchTimerId = null;
 
 function startPeriodicFetch() {
@@ -75,7 +75,7 @@ function cleanup() {
   }
 }
 
-// ✅ GOOD: Use WeakMap for DOM element caching
+//  GOOD: Use WeakMap for DOM element caching
 const elementCache = new WeakMap();
 
 function getElementData(element) {
@@ -86,7 +86,7 @@ function getElementData(element) {
 }
 ```
 
-### Memory Management Best Practices
+Memory Management Best Practices
 
 - Use `chrome.runtime.onSuspend` to clean up resources in service workers
 - Implement a cleanup function that runs when content scripts are disconnected
@@ -104,14 +104,14 @@ function initContentScript() {
 }
 ```
 
-## 2. Efficient DOM Manipulation in Content Scripts
+2. Efficient DOM Manipulation in Content Scripts
 
 Content scripts run in the context of web pages, so DOM operations directly impact page performance.
 
-### Before: Inefficient DOM Manipulation
+Before: Inefficient DOM Manipulation
 
 ```javascript
-// ❌ BAD: Multiple reflows
+//  BAD: Multiple reflows
 function updateList(items) {
   const list = document.getElementById('list');
   
@@ -123,7 +123,7 @@ function updateList(items) {
   });
 }
 
-// ❌ BAD: Querying DOM repeatedly
+//  BAD: Querying DOM repeatedly
 function processElements(selectors) {
   selectors.forEach(selector => {
     const elements = document.querySelectorAll(selector); // Query each time
@@ -131,7 +131,7 @@ function processElements(selectors) {
   });
 }
 
-// ❌ BAD: Reading layout properties in a loop
+//  BAD: Reading layout properties in a loop
 function measureElements() {
   const items = document.querySelectorAll('.item');
   const heights = [];
@@ -142,10 +142,10 @@ function measureElements() {
 }
 ```
 
-### After: Optimized DOM Manipulation
+After: Optimized DOM Manipulation
 
 ```javascript
-// ✅ GOOD: DocumentFragment for batch updates
+//  GOOD: DocumentFragment for batch updates
 function updateList(items) {
   const fragment = document.createDocumentFragment();
   
@@ -160,7 +160,7 @@ function updateList(items) {
   list.appendChild(fragment); // Single reflow
 }
 
-// ✅ GOOD: Cache DOM queries
+//  GOOD: Cache DOM queries
 function processElements(selectors) {
   const processed = new Set();
   
@@ -175,7 +175,7 @@ function processElements(selectors) {
   });
 }
 
-// ✅ GOOD: Batch layout reads
+//  GOOD: Batch layout reads
 function measureElements() {
   const items = document.querySelectorAll('.item');
   
@@ -188,10 +188,10 @@ function measureElements() {
 }
 ```
 
-### Using requestAnimationFrame for Animations
+Using requestAnimationFrame for Animations
 
 ```javascript
-// ✅ GOOD: Use requestAnimationFrame for visual updates
+//  GOOD: Use requestAnimationFrame for visual updates
 function animateElements(elements) {
   let startTime = null;
   
@@ -212,21 +212,21 @@ function animateElements(elements) {
 }
 ```
 
-## 3. Lazy Loading
+3. Lazy Loading
 
 Load resources only when needed to reduce initial load time and memory usage.
 
-### Dynamic Import for Code Splitting
+Dynamic Import for Code Splitting
 
 ```javascript
-// ✅ GOOD: Lazy load heavy modules
+//  GOOD: Lazy load heavy modules
 async function handleFeatureClick() {
   const { HeavyModule } = await import('./heavy-module.js');
   const module = new HeavyModule();
   module.run();
 }
 
-// ✅ GOOD: Lazy load content script only when needed
+//  GOOD: Lazy load content script only when needed
 // In background.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'SHOW_OVERLAY') {
@@ -241,10 +241,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Intersection Observer for Lazy Initialization
+Intersection Observer for Lazy Initialization
 
 ```javascript
-// ✅ GOOD: Initialize content script features only when visible
+//  GOOD: Initialize content script features only when visible
 function setupLazyInitialization() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -261,10 +261,10 @@ function setupLazyInitialization() {
 }
 ```
 
-### Lazy Loading Images and Resources
+Lazy Loading Images and Resources
 
 ```javascript
-// ✅ GOOD: Lazy load images in extension popup
+//  GOOD: Lazy load images in extension popup
 function setupImageLazyLoading() {
   const images = document.querySelectorAll('img[data-src]');
   
@@ -283,14 +283,14 @@ function setupImageLazyLoading() {
 }
 ```
 
-## 4. Service Worker Lifecycle Management
+4. Service Worker Lifecycle Management
 
 Service workers in Manifest V3 are event-driven and can be terminated when idle. Understanding this lifecycle is crucial for building reliable extensions.
 
-### Before: Ignoring Service Worker Lifecycle
+Before: Ignoring Service Worker Lifecycle
 
 ```javascript
-// ❌ BAD: Assuming service worker stays alive
+//  BAD: Assuming service worker stays alive
 let cachedData = null;
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -309,10 +309,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### After: Proper Service Worker Lifecycle Handling
+After: Proper Service Worker Lifecycle Handling
 
 ```javascript
-// ✅ GOOD: Use chrome.storage for persistence
+//  GOOD: Use chrome.storage for persistence
 const STORAGE_KEY = 'cached_data';
 
 async function getData() {
@@ -335,7 +335,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// ✅ GOOD: Use lazy fetch with keepalive
+//  GOOD: Use lazy fetch with keepalive
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'FETCH_DATA') {
     // Use KeepAlive to prevent SW termination during fetch
@@ -352,10 +352,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Managing Service Worker Lifetime
+Managing Service Worker Lifetime
 
 ```javascript
-// ✅ GOOD: Prevent service worker from being terminated during critical operations
+//  GOOD: Prevent service worker from being terminated during critical operations
 function startCriticalOperation() {
   // Send a message to keep the service worker alive
   const keepAlivePort = chrome.runtime.connect({ name: 'keepalive' });
@@ -366,7 +366,7 @@ function startCriticalOperation() {
   });
 }
 
-// ✅ GOOD: Schedule alarms for periodic tasks
+//  GOOD: Schedule alarms for periodic tasks
 chrome.alarms.create('periodicSync', {
   periodInMinutes: 15
 });
@@ -378,26 +378,26 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## 5. Bundle Size Optimization
+5. Bundle Size Optimization
 
 A smaller extension loads faster and uses less memory. Use these techniques to minimize your bundle size.
 
-### Tree Shaking and Code Splitting
+Tree Shaking and Code Splitting
 
 ```javascript
-// ✅ GOOD: Import only what you need
+//  GOOD: Import only what you need
 // Instead of: import _ from 'lodash';
 import debounce from 'lodash-es/debounce';
 import throttle from 'lodash-es/throttle';
 
-// ✅ GOOD: Use dynamic imports for code splitting
+//  GOOD: Use dynamic imports for code splitting
 async function loadAnalytics() {
   const { trackEvent } = await import('./analytics.js');
   return trackEvent;
 }
 ```
 
-### Webpack/Vite Configuration for Extensions
+Webpack/Vite Configuration for Extensions
 
 ```javascript
 // vite.config.js - Optimize for production
@@ -422,13 +422,13 @@ export default defineConfig({
 });
 ```
 
-### Measuring Bundle Size
+Measuring Bundle Size
 
 ```javascript
-// ✅ GOOD: Use source-map-explorer to analyze bundle
+//  GOOD: Use source-map-explorer to analyze bundle
 // Run: npx source-map-explorer dist/*.js
 
-// ✅ GOOD: Check extension size during development
+//  GOOD: Check extension size during development
 // manifest.json
 {
   "name": "My Extension",
@@ -441,30 +441,30 @@ export default defineConfig({
 }
 ```
 
-### Replacing Heavy Libraries
+Replacing Heavy Libraries
 
 ```javascript
-// ❌ BAD: Using heavy libraries
+//  BAD: Using heavy libraries
 import moment from 'moment';
 import _ from 'lodash';
 
-// ✅ GOOD: Use lighter alternatives
+//  GOOD: Use lighter alternatives
 import dayjs from 'dayjs';
 import { debounce, throttle } from 'lodash-es';
 
-// ✅ GOOD: Use native APIs when possible
+//  GOOD: Use native APIs when possible
 // Instead of: import Papa from 'papaparse';
 // Use native: const lines = text.split('\n');
 ```
 
-## 6. Avoiding Performance Anti-Patterns
+6. Avoiding Performance Anti-Patterns
 
-### Common Anti-Patterns and Fixes
+Common Anti-Patterns and Fixes
 
 #### Polling vs Event-Driven
 
 ```javascript
-// ❌ BAD: Polling for changes
+//  BAD: Polling for changes
 setInterval(() => {
   const element = document.querySelector('.dynamic-content');
   if (element) {
@@ -472,7 +472,7 @@ setInterval(() => {
   }
 }, 1000);
 
-// ✅ GOOD: Use MutationObserver
+//  GOOD: Use MutationObserver
 const observer = new MutationObserver((mutations) => {
   mutations.forEach(mutation => {
     if (mutation.addedNodes.length > 0) {
@@ -487,7 +487,7 @@ observer.observe(document.body, { childList: true, subtree: true });
 #### Synchronous XHR
 
 ```javascript
-// ❌ BAD: Synchronous requests block the thread
+//  BAD: Synchronous requests block the thread
 function fetchData() {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', '/api/data', false); // Synchronous!
@@ -495,7 +495,7 @@ function fetchData() {
   return JSON.parse(xhr.responseText);
 }
 
-// ✅ GOOD: Use async/await with fetch
+//  GOOD: Use async/await with fetch
 async function fetchData() {
   const response = await fetch('/api/data');
   return response.json();
@@ -505,7 +505,7 @@ async function fetchData() {
 #### Expensive Computations in Hot Paths
 
 ```javascript
-// ❌ BAD: Expensive computation on every render
+//  BAD: Expensive computation on every render
 function renderList(items) {
   const html = items.map(item => {
     const formatted = formatCurrency(item.price); // Expensive
@@ -514,7 +514,7 @@ function renderList(items) {
   list.innerHTML = html;
 }
 
-// ✅ GOOD: Cache formatted values
+//  GOOD: Cache formatted values
 const priceCache = new Map();
 
 function getFormattedPrice(price) {
@@ -528,14 +528,14 @@ function getFormattedPrice(price) {
 #### Excessive Message Passing
 
 ```javascript
-// ❌ BAD: Too many message round trips
+//  BAD: Too many message round trips
 async function processPage() {
   for (const element of elements) {
     await chrome.runtime.sendMessage({ type: 'PROCESS', element });
   }
 }
 
-// ✅ GOOD: Batch operations
+//  GOOD: Batch operations
 async function processPage() {
   await chrome.runtime.sendMessage({ 
     type: 'PROCESS_BATCH', 
@@ -544,33 +544,33 @@ async function processPage() {
 }
 ```
 
-## 7. Measuring Performance with Chrome DevTools
+7. Measuring Performance with Chrome DevTools
 
-### Profiling Content Scripts
+Profiling Content Scripts
 
 1. Open Chrome DevTools (F12)
 2. Navigate to the page with your extension
-3. Open the **Performance** tab
-4. Click **Record** and perform actions
+3. Open the Performance tab
+4. Click Record and perform actions
 5. Look for your content script in the timeline
 
-### Analyzing Service Worker Performance
+Analyzing Service Worker Performance
 
 1. Open `chrome://extensions`
-2. Find your extension and click **Service Worker** link
-3. Use the **Performance** profiler in DevTools
-4. Check the **Memory** heap snapshot for leaks
+2. Find your extension and click Service Worker link
+3. Use the Performance profiler in DevTools
+4. Check the Memory heap snapshot for leaks
 
-### Memory Profiling
+Memory Profiling
 
-1. Open DevTools and go to the **Memory** tab
+1. Open DevTools and go to the Memory tab
 2. Take a heap snapshot
 3. Perform actions in your extension
 4. Take another snapshot and compare
 5. Look for retained objects (marked in red)
 
 ```javascript
-// ✅ GOOD: Add performance markers
+//  GOOD: Add performance markers
 function measurePerformance() {
   const start = performance.now();
   
@@ -582,10 +582,10 @@ function measurePerformance() {
 }
 ```
 
-### Using chrome.debugger for Advanced Profiling
+Using chrome.debugger for Advanced Profiling
 
 ```javascript
-// ✅ GOOD: Log performance metrics
+//  GOOD: Log performance metrics
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'PERF_MARK') {
     const { name, startTime } = message;
@@ -614,7 +614,7 @@ function measureOperation(name, operation) {
 }
 ```
 
-## Performance Checklist
+Performance Checklist
 
 Use this checklist to verify your extension is optimized:
 
@@ -629,7 +629,7 @@ Use this checklist to verify your extension is optimized:
 - [ ] Memory heap snapshots show no leaks
 - [ ] Content scripts use document_idle for injection
 
-## Summary
+Summary
 
 Performance optimization for Chrome extensions requires attention to memory management, DOM manipulation, lazy loading, service worker lifecycle, and bundle size. By following these patterns and anti-patterns, you can build extensions that are fast, responsive, and resource-efficient.
 
@@ -640,7 +640,7 @@ Key takeaways:
 - Persist data using chrome.storage instead of in-memory caches
 - Use Chrome DevTools to profile and identify bottlenecks
 
-## Related Articles
+Related Articles
 
 - [Performance Profiling](../patterns/performance-profiling.md)
 - [Memory Management](../patterns/memory-management.md)

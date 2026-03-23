@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Multi Account Patterns — Best Practices"
+title: "Chrome Extension Multi Account Patterns. Best Practices"
 description: "Handle multiple user accounts in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/multi-account-patterns/"
 ---
 
 # Multi-Account and Profile Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome supports multiple user profiles, each with its own set of extensions, storage, and browsing data. Extensions that manage multiple accounts -- whether across Chrome profiles or within a single profile -- need strategies for isolating data, switching contexts, and keeping settings in sync. This guide covers eight patterns for building profile-aware and multi-account extensions in Manifest V3, from detecting the active profile to migrating data between them.
 
 ---
 
-## Profile and Account Terminology {#profile-and-account-terminology}
+Profile and Account Terminology {#profile-and-account-terminology}
 
 | Concept | Scope | Description |
 |---------|-------|-------------|
@@ -25,7 +25,7 @@ Chrome supports multiple user profiles, each with its own set of extensions, sto
 
 ---
 
-## Pattern 1: Detecting Chrome Profiles {#pattern-1-detecting-chrome-profiles}
+Pattern 1: Detecting Chrome Profiles {#pattern-1-detecting-chrome-profiles}
 
 Chrome does not expose a direct "profile ID" API, but you can fingerprint the current profile using the signed-in account and session information:
 
@@ -74,7 +74,7 @@ The `identity.email` permission is required to read the signed-in email address.
 
 ---
 
-## Pattern 2: Per-Profile Storage Isolation {#pattern-2-per-profile-storage-isolation}
+Pattern 2: Per-Profile Storage Isolation {#pattern-2-per-profile-storage-isolation}
 
 When your extension supports multiple logical accounts within a single Chrome profile, you need to namespace storage keys to prevent collisions:
 
@@ -139,7 +139,7 @@ This approach keeps all profile data addressable while avoiding the complexity o
 
 ---
 
-## Pattern 3: Account Switching UI in Popup {#pattern-3-account-switching-ui-in-popup}
+Pattern 3: Account Switching UI in Popup {#pattern-3-account-switching-ui-in-popup}
 
 A common pattern is letting users switch between multiple accounts directly from the popup. The key challenge is updating all UI state without closing the popup:
 
@@ -274,7 +274,7 @@ The popup re-renders in place after a switch rather than closing and reopening, 
 
 ---
 
-## Pattern 4: Syncing Settings Across Profiles with chrome.storage.sync {#pattern-4-syncing-settings-across-profiles-with-chromestoragesync}
+Pattern 4: Syncing Settings Across Profiles with chrome.storage.sync {#pattern-4-syncing-settings-across-profiles-with-chromestoragesync}
 
 `chrome.storage.sync` ties data to the signed-in Google account, not the Chrome profile. This means two profiles signed into the same Google account share the same sync storage. Use this intentionally for cross-device settings:
 
@@ -336,7 +336,7 @@ Keep in mind the `chrome.storage.sync` quota limits: 102,400 bytes total, 8,192 
 
 ---
 
-## Pattern 5: Multiple OAuth Tokens Management {#pattern-5-multiple-oauth-tokens-management}
+Pattern 5: Multiple OAuth Tokens Management {#pattern-5-multiple-oauth-tokens-management}
 
 When your extension connects to multiple third-party services or manages tokens for several user accounts, you need a token registry with expiry tracking and refresh logic:
 
@@ -471,7 +471,7 @@ When an account is removed, iterate through the token registry and revoke all as
 
 ---
 
-## Pattern 6: Profile-Specific Content Script Behavior {#pattern-6-profile-specific-content-script-behavior}
+Pattern 6: Profile-Specific Content Script Behavior {#pattern-6-profile-specific-content-script-behavior}
 
 Content scripts may need to behave differently depending on which account is active -- for example, applying different highlight colors or injecting different toolbars:
 
@@ -553,7 +553,7 @@ The content script applies a CSS override scoped to the active account and re-ap
 
 ---
 
-## Pattern 7: Badge and Icon Per Active Account {#pattern-7-badge-and-icon-per-active-account}
+Pattern 7: Badge and Icon Per Active Account {#pattern-7-badge-and-icon-per-active-account}
 
 Visual differentiation in the toolbar helps users instantly see which account is active. You can change both the badge text and the extension icon dynamically:
 
@@ -627,7 +627,7 @@ For per-tab badges (e.g., showing which account "owns" each tab), pass the `tabI
 
 ---
 
-## Pattern 8: Cross-Profile Data Migration {#pattern-8-cross-profile-data-migration}
+Pattern 8: Cross-Profile Data Migration {#pattern-8-cross-profile-data-migration}
 
 When a user adds a new Chrome profile or wants to transfer extension data from one account to another, you need a structured export/import mechanism:
 
@@ -738,7 +738,7 @@ The export format includes a version number so future releases can handle format
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [OAuth and Identity Patterns](oauth-identity.md) -- Token acquisition and refresh flows
 - [State Management Patterns](state-management.md) -- Cross-context state synchronization strategies

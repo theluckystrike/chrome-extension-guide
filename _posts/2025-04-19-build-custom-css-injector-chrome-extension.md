@@ -19,11 +19,11 @@ This guide covers everything from understanding the foundational concepts of CSS
 
 ---
 
-## Understanding CSS Injection in Chrome Extensions {#understanding-css-injection}
+Understanding CSS Injection in Chrome Extensions {#understanding-css-injection}
 
 Before diving into code, it is essential to understand how CSS injection works within the Chrome extension architecture. Chrome extensions operate in a sandboxed environment separate from regular web pages, but they can interact with websites through content scripts and the Chrome APIs.
 
-### How Content Scripts Work
+How Content Scripts Work
 
 Content scripts are JavaScript files that run in the context of web pages. When you specify a content script in your extension's manifest, Chrome injects it into matching pages automatically. These scripts can access and modify the page's DOM (Document Object Model) and CSS, making them the perfect vehicle for CSS injection.
 
@@ -31,7 +31,7 @@ The key concept to understand is that content scripts share the page's DOM but r
 
 There are two primary methods for injecting CSS into web pages through Chrome extensions. The first method uses the chrome stylesheets API to insert CSS programmatically at runtime. The second method involves creating a content script that dynamically creates and appends style elements to the page. Both approaches have their advantages, and we will explore both in this guide.
 
-### The Manifest File: Your Extension's Foundation
+The Manifest File: Your Extension's Foundation
 
 Every Chrome extension begins with the manifest.json file. This configuration file tells Chrome about your extension's capabilities, permissions, and the files it includes. For a CSS injector extension, you need to declare content scripts and potentially host permissions for the websites you want to modify.
 
@@ -39,38 +39,38 @@ The manifest version 3 format has become the standard for modern Chrome extensio
 
 ---
 
-## Setting Up Your Development Environment {#development-environment}
+Setting Up Your Development Environment {#development-environment}
 
 Before writing any code, you need to set up a proper development environment. This involves creating the necessary project structure and organizing your files for maintainability and scalability.
 
-### Project Structure
+Project Structure
 
 Create a new folder for your extension project and organize it with the following structure:
 
 ```
 css-injector-extension/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── content/
-│   ├── content.js
-│   └── injector.js
-├── background/
-│   └── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── _locales/
-    └── en/
-        └── messages.json
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ content/
+    content.js
+    injector.js
+ background/
+    background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ _locales/
+     en/
+         messages.json
 ```
 
 This structure separates concerns between different parts of your extension. The popup folder contains the user interface that appears when users click your extension icon. The content folder holds scripts that run on web pages. The background folder contains service workers that handle events and coordinate between different parts of the extension.
 
-### Creating Your Manifest File
+Creating Your Manifest File
 
 The manifest.json file is the heart of your extension. Here is a complete manifest configuration for a CSS injector extension:
 
@@ -118,11 +118,11 @@ This manifest declares the necessary permissions for our extension. The storage 
 
 ---
 
-## Building the Content Script: CSS Injection Logic {#content-script}
+Building the Content Script: CSS Injection Logic {#content-script}
 
 The content script is where the actual CSS injection happens. This script runs on every web page (based on our manifest configuration) and provides the functionality to inject, manage, and remove custom styles.
 
-### Core Injection Engine
+Core Injection Engine
 
 Create the content/content.js file with the following comprehensive CSS injection logic:
 
@@ -230,9 +230,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.sendMessage({ action: 'contentScriptReady' });
 ```
 
-This content script provides a robust foundation for CSS injection. It maintains a Map of injected styles, allowing multiple style rules to coexist without conflicts. The script listens for messages from other parts of the extension and responds accordingly.
+This content script provides a solid foundation for CSS injection. It maintains a Map of injected styles, allowing multiple style rules to coexist without conflicts. The script listens for messages from other parts of the extension and responds accordingly.
 
-### Advanced Injection Techniques
+Advanced Injection Techniques
 
 Beyond basic CSS injection, you might want to implement more sophisticated features. One powerful technique is using CSS custom properties (variables) to create more flexible and maintainable style overrides. Another advanced approach involves using the Shadow DOM to create truly isolated style scopes.
 
@@ -273,11 +273,11 @@ function generateSpecificSelector(element) {
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It should provide an intuitive interface for writing, saving, and managing custom CSS rules. Let's create a comprehensive popup with all the features users expect from a professional CSS injector.
 
-### HTML Structure
+HTML Structure
 
 Create popup/popup.html:
 
@@ -348,7 +348,7 @@ h1, h2, h3 {
 </html>
 ```
 
-### Styling the Popup
+Styling the Popup
 
 Create popup/popup.css with professional styling:
 
@@ -618,7 +618,7 @@ body.dark-mode .options {
 }
 ```
 
-### JavaScript Logic for Popup
+JavaScript Logic for Popup
 
 Create popup/popup.js to handle user interactions:
 
@@ -867,7 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Background Service Worker {#background-service}
+Background Service Worker {#background-service}
 
 The background service worker handles events that occur independently of any particular tab or popup. It is particularly useful for managing extension state, handling installation events, and coordinating between different parts of your extension.
 
@@ -950,18 +950,18 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to test your extension in Chrome. Follow these steps to load your extension and verify that it works correctly.
 
-### Loading the Extension
+Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right corner
 3. Click "Load unpacked" and select your extension folder
 4. Your extension should now appear in the extensions list
 
-### Verifying Functionality
+Verifying Functionality
 
 To test your CSS injector:
 
@@ -976,7 +976,7 @@ To test your CSS injector:
 4. Click "Inject CSS" button
 5. The website background should change to red
 
-### Troubleshooting Common Issues
+Troubleshooting Common Issues
 
 If your extension is not working correctly, check the following common issues:
 
@@ -986,47 +986,47 @@ For content script issues, right-click on any web page, select "Inspect", and ch
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic CSS injector working, consider adding these advanced features to make your extension more powerful and user-friendly.
 
-### Style Manager with Multiple Profiles
+Style Manager with Multiple Profiles
 
 Implement a system that allows users to create and manage multiple style profiles. This feature enables users to switch between different themes for the same website quickly. Each profile can contain multiple CSS rules organized into categories, and users can enable or disable individual rules without deleting them.
 
-### Import and Export Functionality
+Import and Export Functionality
 
 Add the ability to import CSS from files and export saved styles for backup or sharing. This feature is particularly useful for users who want to share their custom themes with others or transfer their styles between different computers.
 
-### Pre-built Theme Library
+Pre-built Theme Library
 
 Include a library of pre-built themes that users can apply with one click. These themes can target popular websites like YouTube, Twitter, or Reddit, and demonstrate the extension's capabilities to new users. Themes can be organized by category and include both functional and aesthetic modifications.
 
-### Sync Across Devices
+Sync Across Devices
 
 Utilize chrome.storage.sync to enable synchronization of saved styles across different devices where users are signed in with the same Google account. This cloud synchronization ensures that users have access to their custom styles regardless of which computer they are using.
 
 ---
 
-## Best Practices and Performance Optimization {#best-practices}
+Best Practices and Performance Optimization {#best-practices}
 
 When building a production-ready CSS injector extension, following best practices ensures better performance, security, and user experience.
 
-### Performance Considerations
+Performance Considerations
 
 Avoid injecting large amounts of CSS on every page load. Instead, implement lazy loading and only inject styles when necessary. Use efficient CSS selectors and avoid overly complex rules that could slow down page rendering. Consider using CSS containment to limit the scope of your style modifications.
 
-### Security Best Practices
+Security Best Practices
 
 Always validate and sanitize any CSS input from users. While CSS injection is the intended functionality of your extension, malicious CSS could potentially be used for tracking or other purposes. Implement input validation and consider adding a warning when users import CSS from untrusted sources.
 
-### User Experience
+User Experience
 
 Provide clear feedback to users when styles are injected, modified, or removed. Use visual indicators like badges or notifications to show the current state. Include keyboard shortcuts for common actions to power users can work more efficiently.
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a custom CSS injector Chrome extension is an excellent project that teaches you fundamental concepts of Chrome extension development while creating a genuinely useful tool. Throughout this guide, you have learned how to create the manifest configuration, build content scripts for CSS injection, design an intuitive popup interface, and implement background service worker logic.
 
@@ -1038,7 +1038,7 @@ Remember to test thoroughly across different websites and browsers, gather feedb
 
 ---
 
-## Additional Resources {#resources}
+Additional Resources {#resources}
 
 To continue learning and improving your CSS injector extension, explore these additional resources:
 

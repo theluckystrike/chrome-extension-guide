@@ -1,23 +1,23 @@
 ---
 layout: default
-title: "Chrome Extension Social Dashboard — Developer Guide"
+title: "Chrome Extension Social Dashboard. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-social-dashboard/"
 ---
 # Build a Social Media Dashboard Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 
 In this tutorial, you'll create a Chrome extension that helps users manage their social media consumption. The extension will track time spent on social media sites, block or limit access during focus hours, display usage statistics, and provide motivational content when sites are blocked.
 
-**Key Features:**
+Key Features:
 - Track time spent on social media sites (Twitter, Facebook, Reddit, Instagram, TikTok, etc.)
 - Block or limit social media during focus hours
 - Usage statistics with weekly reports
 - Motivational alternatives when sites are blocked
 - Notifications at 80% limit and when blocked
 
-## Manifest Configuration {#manifest-configuration}
+Manifest Configuration {#manifest-configuration}
 
 Create your `manifest.json` with the following permissions and configuration:
 
@@ -62,14 +62,14 @@ Create your `manifest.json` with the following permissions and configuration:
 }
 ```
 
-**Required Permissions:**
+Required Permissions:
 - `storage` - Save user preferences and usage data
 - `alarms` - Schedule focus mode activation
 - `tabs` - Monitor active tab changes
 - `notifications` - Alert users at 80% limit and when blocked
 - `declarativeNetRequest` - Block network requests when limits reached
 
-## Step 1: Site Tracking {#step-1-site-tracking}
+Step 1: Site Tracking {#step-1-site-tracking}
 
 The foundation of your extension is tracking which social media sites users visit and for how long. Use the Chrome tabs API to detect when users navigate to social media domains.
 
@@ -123,7 +123,7 @@ This implementation monitors tab activations and updates to detect when users na
 
 See [guides/content-script-patterns.md](../guides/content-script-patterns.md) for more on communicating between content scripts and the background service worker.
 
-## Step 2: Blocking Rules {#step-2-blocking-rules}
+Step 2: Blocking Rules {#step-2-blocking-rules}
 
 Implement daily limits per site using declarativeNetRequest. Users can set custom limits for each platform, and when reached, the extension blocks access.
 
@@ -160,7 +160,7 @@ The blocking system redirects users to a custom blocked page when they exceed th
 
 See [permissions/declarativeNetRequest.md](../permissions/declarativeNetRequest.md) and [patterns/dynamic-rules.md](../patterns/dynamic-rules.md) for detailed information on dynamic rules.
 
-## Step 3: Focus Mode {#step-3-focus-mode}
+Step 3: Focus Mode {#step-3-focus-mode}
 
 Schedule focus hours during which all social media sites are blocked. Use chrome.alarms to activate and deactivate focus mode at scheduled times.
 
@@ -213,7 +213,7 @@ The focus mode system uses Chrome alarms to automatically enable and disable blo
 
 See [permissions/alarms.md](../permissions/alarms.md) for more information on scheduling with alarms.
 
-## Step 4: Usage Dashboard (Popup) {#step-4-usage-dashboard-popup}
+Step 4: Usage Dashboard (Popup) {#step-4-usage-dashboard-popup}
 
 Create a popup that displays today's usage per site with progress bars, weekly usage charts, and comparison with yesterday's usage.
 
@@ -274,7 +274,7 @@ async function loadDashboard() {
 loadDashboard();
 ```
 
-## Step 5: Notifications {#step-5-notifications}
+Step 5: Notifications {#step-5-notifications}
 
 Implement notifications to keep users informed about their social media usage throughout the day.
 
@@ -316,7 +316,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Step 6: Motivational Blocking Page {#step-6-motivational-blocking-page}
+Step 6: Motivational Blocking Page {#step-6-motivational-blocking-page}
 
 When a site is blocked, display a motivational page with productive alternatives and a countdown to when access resumes.
 
@@ -348,11 +348,11 @@ When a site is blocked, display a motivational page with productive alternatives
   </style>
 </head>
 <body>
-  <h1>🎯 Time's Up!</h1>
+  <h1> Time's Up!</h1>
   <p>You've reached your daily limit for this site.</p>
   
   <div class="saved-time">
-    You've saved 2h 34m this week! 🚀
+    You've saved 2h 34m this week! 
   </div>
   
   <div class="alternatives">
@@ -380,20 +380,20 @@ When a site is blocked, display a motivational page with productive alternatives
 </html>
 ```
 
-## Summary {#summary}
+Summary {#summary}
 
 You've built a comprehensive social media dashboard extension with the following capabilities:
 
-1. **Site Tracking** - Monitors active time on social media platforms using tabs and idle APIs
-2. **Blocking Rules** - Uses declarativeNetRequest to block sites when daily limits are reached
-3. **Focus Mode** - Scheduled blocking during productive hours using chrome.alarms
-4. **Usage Dashboard** - Visual popup with progress bars and weekly usage charts
-5. **Notifications** - Alerts at 80% usage, when blocked, and daily summaries
-6. **Motivational Page** - Productive alternatives and time saved statistics
+1. Site Tracking - Monitors active time on social media platforms using tabs and idle APIs
+2. Blocking Rules - Uses declarativeNetRequest to block sites when daily limits are reached
+3. Focus Mode - Scheduled blocking during productive hours using chrome.alarms
+4. Usage Dashboard - Visual popup with progress bars and weekly usage charts
+5. Notifications - Alerts at 80% usage, when blocked, and daily summaries
+6. Motivational Page - Productive alternatives and time saved statistics
 
 This extension demonstrates the power of Chrome's extension APIs for building productivity tools. The combination of background workers, storage, and the declarativeNetRequest API enables sophisticated usage monitoring and control.
 
-## Next Steps {#next-steps}
+Next Steps {#next-steps}
 
 - Add local storage sync across devices using chrome.storage.sync
 - Implement machine learning to suggest personalized focus schedules

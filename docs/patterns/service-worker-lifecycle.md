@@ -1,49 +1,49 @@
 ---
 layout: default
-title: "Chrome Extension Service Worker Lifecycle — Best Practices"
+title: "Chrome Extension Service Worker Lifecycle. Best Practices"
 description: "Understand the service worker lifecycle in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-lifecycle/"
 ---
 
 # Service Worker Lifecycle Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 The [MV3 service workers guide](../mv3/service-workers.md) covers the basics of migrating from background pages. This article goes deeper into lifecycle events, keep-alive strategies, state persistence, error recovery, and advanced patterns for working with Chrome's ephemeral service worker model.
 
 ---
 
-## Lifecycle States {#lifecycle-states}
+Lifecycle States {#lifecycle-states}
 
 ```
-                    ┌──────────┐
-        install ──> │ Starting │
-                    └────┬─────┘
-                         │
-                    ┌────▼─────┐
-   events arrive -> │  Active  │ <── wake up
-                    └────┬─────┘
-                         │ idle (~30s)
-                    ┌────▼─────┐
-                    │  Idle    │
-                    └────┬─────┘
-                         │ timeout
-                    ┌────▼──────┐
-                    │ Terminated│
-                    └───────────┘
+                    
+        install >  Starting 
+                    
+                         
+                    
+   events arrive ->   Active   < wake up
+                    
+                          idle (~30s)
+                    
+                      Idle    
+                    
+                          timeout
+                    
+                     Terminated
+                    
 ```
 
 Key facts:
-- **Active**: Processing events, running code
-- **Idle**: No pending events, countdown to termination begins (~30 seconds)
-- **Terminated**: All memory released, global state lost
-- **Wake up**: Chrome restarts the worker when an event fires
+- Active: Processing events, running code
+- Idle: No pending events, countdown to termination begins (~30 seconds)
+- Terminated: All memory released, global state lost
+- Wake up: Chrome restarts the worker when an event fires
 
 ---
 
-## Pattern 1: Synchronous Event Registration {#pattern-1-synchronous-event-registration}
+Pattern 1: Synchronous Event Registration {#pattern-1-synchronous-event-registration}
 
-All `chrome.*` event listeners **must** be registered synchronously at the top level of your service worker. This is the most critical lifecycle requirement:
+All `chrome.*` event listeners must be registered synchronously at the top level of your service worker. This is the most critical lifecycle requirement:
 
 ```ts
 // background.ts
@@ -60,7 +60,7 @@ chrome.alarms.onAlarm.addListener(handleAlarm);
 async function setup() {
   const settings = await chrome.storage.local.get("features");
   if (settings.features.contextMenu) {
-    // This might not fire — the SW could wake for this event
+    // This might not fire. the SW could wake for this event
     // before this async code runs
     chrome.contextMenus.onClicked.addListener(handleMenuClick);
   }
@@ -77,7 +77,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 ---
 
-## Pattern 2: State Persistence Across Restarts {#pattern-2-state-persistence-across-restarts}
+Pattern 2: State Persistence Across Restarts {#pattern-2-state-persistence-across-restarts}
 
 Global variables are lost when the service worker terminates. Choose the right storage for each type of state:
 
@@ -85,14 +85,14 @@ Global variables are lost when the service worker terminates. Choose the right s
 // background.ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
-// Persistent state — survives browser restart
+// Persistent state. survives browser restart
 const persistentSchema = defineSchema({
   userSettings: { theme: "light" as "light" | "dark", notifications: true },
   totalActions: 0,
 });
 const persistent = createStorage({ schema: persistentSchema, area: "local" });
 
-// Session state — survives SW restart, cleared on browser restart
+// Session state. survives SW restart, cleared on browser restart
 const sessionSchema = defineSchema({
   activeTab: 0,
   pendingQueue: [] as string[],
@@ -109,7 +109,7 @@ async function setSessionState(items: Record<string, unknown>) {
   await chrome.storage.session.set(items);
 }
 
-// Usage — restoring state after SW wake
+// Usage. restoring state after SW wake
 chrome.action.onClicked.addListener(async () => {
   const pendingQueue = (await getSessionState("pendingQueue")) ?? [];
   pendingQueue.push(Date.now().toString());
@@ -117,10 +117,10 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### State Machine Pattern {#state-machine-pattern}
+State Machine Pattern {#state-machine-pattern}
 
 ```ts
-// background.ts — Persistent state machine
+// background.ts. Persistent state machine
 type ExtensionState = "idle" | "scanning" | "paused" | "error";
 
 async function getState(): Promise<ExtensionState> {
@@ -152,15 +152,15 @@ async function transition(from: ExtensionState, to: ExtensionState): Promise<boo
 
 ---
 
-## Pattern 3: Keep-Alive Strategies {#pattern-3-keep-alive-strategies}
+Pattern 3: Keep-Alive Strategies {#pattern-3-keep-alive-strategies}
 
 Sometimes you need the service worker to stay active beyond 30 seconds:
 
-### Using chrome.alarms (Recommended) {#using-chromealarms-recommended}
+Using chrome.alarms (Recommended) {#using-chromealarms-recommended}
 
 ```ts
 // background.ts
-// Alarms wake up the SW — minimum interval is 1 minute in production
+// Alarms wake up the SW. minimum interval is 1 minute in production
 chrome.alarms.create("keepalive", { periodInMinutes: 0.5 }); // 30 sec in dev
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
@@ -171,10 +171,10 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-### Using Long-Lived Connections {#using-long-lived-connections}
+Using Long-Lived Connections {#using-long-lived-connections}
 
 ```ts
-// popup.ts or content.ts — keeps SW alive while connected
+// popup.ts or content.ts. keeps SW alive while connected
 const port = chrome.runtime.connect({ name: "keepalive" });
 
 // Send periodic pings to prevent port timeout (5 min max)
@@ -198,7 +198,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Using offscreen Documents (Chrome 109+) {#using-offscreen-documents-chrome-109}
+Using offscreen Documents (Chrome 109+) {#using-offscreen-documents-chrome-109}
 
 ```ts
 // background.ts
@@ -219,7 +219,7 @@ async function createKeepAliveDocument() {
 
 ---
 
-## Pattern 4: Handling the Install/Update Lifecycle {#pattern-4-handling-the-installupdate-lifecycle}
+Pattern 4: Handling the Install/Update Lifecycle {#pattern-4-handling-the-installupdate-lifecycle}
 
 ```ts
 // background.ts
@@ -234,7 +234,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       break;
 
     case "chrome_update":
-      // Browser was updated — re-register context menus, etc.
+      // Browser was updated. re-register context menus, etc.
       await reinitialize();
       break;
   }
@@ -275,7 +275,7 @@ async function handleUpdate(previousVersion: string) {
 }
 
 async function reinitialize() {
-  // Context menus are wiped on browser update — recreate them
+  // Context menus are wiped on browser update. recreate them
   chrome.contextMenus.create({
     id: "main-action",
     title: "Process Selection",
@@ -286,7 +286,7 @@ async function reinitialize() {
 
 ---
 
-## Pattern 5: Error Recovery {#pattern-5-error-recovery}
+Pattern 5: Error Recovery {#pattern-5-error-recovery}
 
 Service workers can crash. Handle unexpected termination gracefully:
 
@@ -348,7 +348,7 @@ resumeInterruptedOperations();
 
 ---
 
-## Pattern 6: Startup Time Optimization {#pattern-6-startup-time-optimization}
+Pattern 6: Startup Time Optimization {#pattern-6-startup-time-optimization}
 
 Fast startup means events are handled quickly:
 
@@ -374,7 +374,7 @@ async function initializeAsync() {
 
 // 3. Inside handlers, lazy-load heavy modules
 async function onActionClicked(tab: chrome.tabs.Tab) {
-  // Dynamic import — only loads when needed
+  // Dynamic import. only loads when needed
   const { processTab } = await import("./tab-processor.js");
   await processTab(tab);
 }
@@ -382,7 +382,7 @@ async function onActionClicked(tab: chrome.tabs.Tab) {
 
 ---
 
-## Pattern 7: Monitoring SW Health {#pattern-7-monitoring-sw-health}
+Pattern 7: Monitoring SW Health {#pattern-7-monitoring-sw-health}
 
 ```ts
 // background.ts
@@ -398,7 +398,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-// popup.ts — Check SW status
+// popup.ts. Check SW status
 async function checkServiceWorkerHealth() {
   try {
     const response = await chrome.runtime.sendMessage({ type: "sw-health" });
@@ -413,9 +413,9 @@ async function checkServiceWorkerHealth() {
 
 ---
 
-## Common Pitfalls {#common-pitfalls}
+Common Pitfalls {#common-pitfalls}
 
-### 1. setTimeout/setInterval {#1-settimeoutsetinterval}
+1. setTimeout/setInterval {#1-settimeoutsetinterval}
 
 ```ts
 // Bad: Timer is killed when SW terminates
@@ -428,7 +428,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### 2. Fetch with No Listener {#2-fetch-with-no-listener}
+2. Fetch with No Listener {#2-fetch-with-no-listener}
 
 ```ts
 // Bad: SW terminates before fetch completes if no event keeps it alive
@@ -447,7 +447,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### 3. WebSocket Connections {#3-websocket-connections}
+3. WebSocket Connections {#3-websocket-connections}
 
 ```ts
 // WebSockets close when SW terminates. Use chrome.alarms to poll instead,
@@ -456,11 +456,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | When to Use |
 |---------|------------|
-| Synchronous registration | Always — every event listener, every project |
+| Synchronous registration | Always. every event listener, every project |
 | Session storage state | Ephemeral state that survives SW restarts |
 | chrome.alarms keep-alive | Periodic background work |
 | Port-based keep-alive | While popup/content script is actively connected |
@@ -469,7 +469,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 | Lazy imports | Heavy modules not needed on every wake |
 | Health monitoring | Debugging and user-facing status |
 
-The service worker lifecycle is not a limitation to fight — it's a design constraint to embrace. Build your extension as a series of small, fast event handlers that persist their state externally and resume gracefully.
+The service worker lifecycle is not a limitation to fight. it's a design constraint to embrace. Build your extension as a series of small, fast event handlers that persist their state externally and resume gracefully.
 -e 
 ---
 

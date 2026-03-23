@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension GitHub PR Reviewer — Developer Guide"
+title: "Chrome Extension GitHub PR Reviewer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-github-pr-reviewer/"
 ---
@@ -15,7 +15,7 @@ Uses `@theluckystrike/webext-storage` for persistent data and
 
 ---
 
-## Step 1: Manifest Targeting GitHub {#step-1-manifest-targeting-github}
+Step 1: Manifest Targeting GitHub {#step-1-manifest-targeting-github}
 
 ```json
 {
@@ -45,7 +45,7 @@ periodic PR notification sync.
 
 ---
 
-## Step 2: Detecting PR Pages {#step-2-detecting-pr-pages}
+Step 2: Detecting PR Pages {#step-2-detecting-pr-pages}
 
 ```js
 // content.js
@@ -75,7 +75,7 @@ initializes only when the relevant page context is detected.
 
 ---
 
-## Step 3: Floating Toolbar {#step-3-floating-toolbar}
+Step 3: Floating Toolbar {#step-3-floating-toolbar}
 
 A toolbar anchored at the bottom-right provides quick access to all panels:
 
@@ -112,7 +112,7 @@ the collapse button are hidden via CSS.
 
 ---
 
-## Step 4: File Tree Navigator {#step-4-file-tree-navigator}
+Step 4: File Tree Navigator {#step-4-file-tree-navigator}
 
 A collapsible sidebar listing all changed files, extracted from GitHub's diff headers:
 
@@ -170,7 +170,7 @@ in green (`#3fb950`), deletions in red (`#f85149`).
 
 ---
 
-## Step 5: Inline Comment Templates {#step-5-inline-comment-templates}
+Step 5: Inline Comment Templates {#step-5-inline-comment-templates}
 
 Pre-built templates insert text into GitHub's comment textarea:
 
@@ -185,7 +185,7 @@ Pre-built templates insert text into GitHub's comment textarea:
       { label: "Suggestion", text: "Suggestion (non-blocking):\n\n```suggestion\n\n```" },
       { label: "Nitpick", text: "Nit: " },
       { label: "Question", text: "Question: Could you explain the reasoning behind this?" },
-      { label: "Security", text: "**Security concern:** This may introduce a vulnerability.\n\nDetails: " }
+      { label: "Security", text: "Security concern: This may introduce a vulnerability.\n\nDetails: " }
     ];
 
     const panel = document.createElement("div");
@@ -216,7 +216,7 @@ Pre-built templates insert text into GitHub's comment textarea:
 
 ---
 
-## Step 6: PR Statistics Panel {#step-6-pr-statistics-panel}
+Step 6: PR Statistics Panel {#step-6-pr-statistics-panel}
 
 Displays additions, deletions, files changed, file type breakdown, and estimated
 review time (heuristic: ~200 lines/hour for careful review):
@@ -266,7 +266,7 @@ stat values. Additions are green, deletions are red.
 
 ---
 
-## Step 7: Keyboard Shortcuts {#step-7-keyboard-shortcuts}
+Step 7: Keyboard Shortcuts {#step-7-keyboard-shortcuts}
 
 Navigate between files and toggle panels without the mouse:
 
@@ -315,7 +315,7 @@ Navigate between files and toggle panels without the mouse:
 
 ---
 
-## Step 8: Review Checklist {#step-8-review-checklist}
+Step 8: Review Checklist {#step-8-review-checklist}
 
 A per-repo checklist persisted via `@theluckystrike/webext-storage`. Template items
 are shared across PRs; checked state is per-PR:
@@ -402,7 +402,7 @@ Close the content script IIFE:
 
 ---
 
-## Step 9: Background Sync for Notification Badges {#step-9-background-sync-for-notification-badges}
+Step 9: Background Sync for Notification Badges {#step-9-background-sync-for-notification-badges}
 
 The background worker polls GitHub for pending review requests and updates the
 extension badge:
@@ -454,20 +454,20 @@ DevTools console.
 
 ---
 
-## Testing {#testing}
+Testing {#testing}
 
 1. Load unpacked at `chrome://extensions/` with Developer mode on.
 2. Navigate to any GitHub PR (e.g., `github.com/facebook/react/pull/1`).
 3. The floating toolbar appears at the bottom-right.
-4. Open the "Files changed" tab, then click **Files** for the file tree sidebar.
-5. Click **Stats** for addition/deletion counts and estimated review time.
-6. Click **Checklist** to manage a per-repo review checklist.
-7. Focus a comment textarea and click **Templates** to insert pre-built comments.
+4. Open the "Files changed" tab, then click Files for the file tree sidebar.
+5. Click Stats for addition/deletion counts and estimated review time.
+6. Click Checklist to manage a per-repo review checklist.
+7. Focus a comment textarea and click Templates to insert pre-built comments.
 8. Press `n`/`p` to navigate files, `e` to expand/collapse all diffs.
 
 ---
 
-## Architecture {#architecture}
+Architecture {#architecture}
 
 ```
   content.js                         background.js
@@ -491,27 +491,27 @@ DevTools console.
 
 ---
 
-## Extending the Extension {#extending-the-extension}
+Extending the Extension {#extending-the-extension}
 
 Here are several directions you can take this further:
 
-**Diff annotation layer.** Overlay colored markers on unchanged lines that contain
+Diff annotation layer. Overlay colored markers on unchanged lines that contain
 potential issues (e.g., TODO comments, large functions, missing error handling). Use
 the content script to parse the diff DOM and inject inline badges.
 
-**Cross-PR review history.** Store review notes per file path across PRs so you can
+Cross-PR review history. Store review notes per file path across PRs so you can
 see how a file has evolved. Use `@theluckystrike/webext-storage` with keys like
 `history:{owner}/{repo}/{filepath}` and display a timeline in the file tree panel.
 
-**Team review assignment.** Add a panel that shows who has reviewed and who still
+Team review assignment. Add a panel that shows who has reviewed and who still
 needs to, pulling data from the GitHub API's review endpoint
 (`/repos/{owner}/{repo}/pulls/{number}/reviews`).
 
-**Custom template management.** Build a settings page where users can add, edit,
+Custom template management. Build a settings page where users can add, edit,
 and reorder comment templates. Store them in `chrome.storage.local` and sync across
 devices with `chrome.storage.sync`.
 
-**PR comparison mode.** Let users compare the current PR against a previous version
+PR comparison mode. Let users compare the current PR against a previous version
 of the same PR by storing snapshots of file changes. This helps track how a PR has
 evolved through review cycles.
 -e 

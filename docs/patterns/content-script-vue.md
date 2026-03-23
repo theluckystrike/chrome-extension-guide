@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Content Script Vue — Best Practices"
+title: "Chrome Extension Content Script Vue. Best Practices"
 description: "Integrate Vue.js with content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-vue/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-vue/"
 
 Guide for integrating Vue.js into Chrome extension content scripts with proper isolation.
 
-## Shadow DOM Mounting {#shadow-dom-mounting}
+Shadow DOM Mounting {#shadow-dom-mounting}
 
 Content scripts run in the context of the host page, so style isolation is critical. Vue apps must mount inside a shadow DOM to prevent styles from bleeding into or out of your extension UI.
 
@@ -34,13 +34,13 @@ const app = createApp(App);
 app.mount(shadowHost);
 ```
 
-## Vue 3 createApp in Content Scripts {#vue-3-createapp-in-content-scripts}
+Vue 3 createApp in Content Scripts {#vue-3-createapp-in-content-scripts}
 
 Use `defineComponent` for type-safe components. Mount directly to the shadow root element, not the host. The runtime-only build is required since there's no compile step in content scripts.
 
-## Scoped Styles {#scoped-styles}
+Scoped Styles {#scoped-styles}
 
-Shadow DOM provides automatic style isolation—extension styles won't affect the page, and page styles won't affect your app. Combine with CSS modules for component-level scoping:
+Shadow DOM provides automatic style isolation, extension styles won't affect the page, and page styles won't affect your app. Combine with CSS modules for component-level scoping:
 
 ```typescript
 import styles from './Widget.module.css';
@@ -51,11 +51,11 @@ const Widget = defineComponent({
 });
 ```
 
-## Reactivity in Content Scripts {#reactivity-in-content-scripts}
+Reactivity in Content Scripts {#reactivity-in-content-scripts}
 
-Vue's reactivity system works normally inside shadow DOM. All features—composables, reactivity refs, computed properties—function as expected.
+Vue's reactivity system works normally inside shadow DOM. All features, composables, reactivity refs, computed properties, function as expected.
 
-## Communication with Background {#communication-with-background}
+Communication with Background {#communication-with-background}
 
 Create a composable for messaging:
 
@@ -75,7 +75,7 @@ export function useExtensionMessaging() {
 }
 ```
 
-## Pinia Store in Content Scripts {#pinia-store-in-content-scripts}
+Pinia Store in Content Scripts {#pinia-store-in-content-scripts}
 
 Pinia works in content scripts for shared state management. Keep stores lightweight since they're loaded per page:
 
@@ -90,9 +90,9 @@ export const useWidgetStore = defineStore('widget', {
 });
 ```
 
-## Bundle Considerations {#bundle-considerations}
+Bundle Considerations {#bundle-considerations}
 
-Vue 3 runtime is ~30KB gzipped. Use runtime-only builds—no template compiler in content scripts. Configure Vite to exclude the compiler:
+Vue 3 runtime is ~30KB gzipped. Use runtime-only builds, no template compiler in content scripts. Configure Vite to exclude the compiler:
 
 ```javascript
 export default {
@@ -104,11 +104,11 @@ export default {
 }
 ```
 
-## Teleport Limitations {#teleport-limitations}
+Teleport Limitations {#teleport-limitations}
 
 Vue teleport targets can't escape shadow DOM boundaries. Keep all teleported content within the shadow root, or use fixed-position portals inside the shadow tree.
 
-## Building with Vite {#building-with-vite}
+Building with Vite {#building-with-vite}
 
 Use `vite-plugin-web-extension` for building Vue content scripts. Configure it to output ESM and handle the Vue runtime:
 
@@ -121,15 +121,15 @@ export default {
 }
 ```
 
-## Hot Reload Limitations {#hot-reload-limitations}
+Hot Reload Limitations {#hot-reload-limitations}
 
-Content script hot reload is limited—changes may require page refresh. Use `chrome.runtime.reload()` carefully during development.
+Content script hot reload is limited, changes may require page refresh. Use `chrome.runtime.reload()` carefully during development.
 
-## Alternative: Petite Vue {#alternative-petite-vue}
+Alternative: Petite Vue {#alternative-petite-vue}
 
 For simpler injections, consider [Petite Vue](https://github.com/vuejs/petite-vue) (~6KB). It lacks full Vue features but works well for lightweight widgets.
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Building with Svelte](./building-with-svelte.md)
 - [Content Script React](./content-script-react.md)

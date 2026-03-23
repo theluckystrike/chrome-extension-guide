@@ -4,7 +4,7 @@
 
 The Chrome Notifications API enables extensions to display system-level notifications that appear outside the browser window, similar to native desktop applications. These notifications can include text, images, action buttons, and progress indicators, making them powerful tools for user engagement and real-time updates.
 
-**Reference**: [developer.chrome.com/docs/extensions/reference/api/notifications](https://developer.chrome.com/docs/extensions/reference/api/notifications)
+Reference: [developer.chrome.com/docs/extensions/reference/api/notifications](https://developer.chrome.com/docs/extensions/reference/api/notifications)
 
 ## Getting Started
 
@@ -360,10 +360,10 @@ const notifications = new NotificationManager();
 
 | Platform | Behavior |
 |----------|----------|
-| **Windows** | Integrates with Action Center; notifications persist until dismissed |
-| **macOS** | Uses Notification Center; may require system permissions |
-| **Linux** | Behavior varies by desktop environment (Unity, GNOME, KDE) |
-| **ChromeOS** | Native notification panel with full feature support |
+| Windows | Integrates with Action Center; notifications persist until dismissed |
+| macOS | Uses Notification Center; may require system permissions |
+| Linux | Behavior varies by desktop environment (Unity, GNOME, KDE) |
+| ChromeOS | Native notification panel with full feature support |
 
 ### Platform-Specific Considerations
 
@@ -386,22 +386,22 @@ if (isWindows) {
 
 ## Best Practices
 
-1. **Unique IDs**: Always use meaningful, unique notification IDs to enable updating and clearing
-2. **Respect Users**: Don't spam notifications; provide user controls for frequency
-3. **Handle Clicks**: Always handle `onClicked` to prevent dead-end notifications
-4. **Clear Stale Notifications**: Remove outdated notifications proactively
-5. **Use Progress Notifications**: Show progress for long-running operations
-6. **Silent Mode**: Use `silent: true` for non-critical updates to avoid disrupting users
-7. **Require Interaction**: Use sparingly and only for truly important notifications
-8. **Icon Requirements**: Use 128x128 PNG icons; no remote URLs allowed
+1. Unique IDs: Always use meaningful, unique notification IDs to enable updating and clearing
+2. Respect Users: Don't spam notifications; provide user controls for frequency
+3. Handle Clicks: Always handle `onClicked` to prevent dead-end notifications
+4. Clear Stale Notifications: Remove outdated notifications proactively
+5. Use Progress Notifications: Show progress for long-running operations
+6. Silent Mode: Use `silent: true` for non-critical updates to avoid disrupting users
+7. Require Interaction: Use sparingly and only for truly important notifications
+8. Icon Requirements: Use 128x128 PNG icons; no remote URLs allowed
 
 ## Common Issues
 
-- **Remote URLs not allowed**: `iconUrl` and `imageUrl` must be local extension files or data URLs
-- **Notification limit**: OS may limit active notifications; clear old ones promptly
-- **Permission denied**: Ensure `"notifications"` is in permissions array
-- **Silent notifications**: May be suppressed by OS on low-power mode
-- **requireInteraction**: Only works with priority 2 on Chrome OS and Windows
+- Remote URLs not allowed: `iconUrl` and `imageUrl` must be local extension files or data URLs
+- Notification limit: OS may limit active notifications; clear old ones promptly
+- Permission denied: Ensure `"notifications"` is in permissions array
+- Silent notifications: May be suppressed by OS on low-power mode
+- requireInteraction: Only works with priority 2 on Chrome OS and Windows
 
 ## Related APIs
 

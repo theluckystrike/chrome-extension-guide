@@ -1,6 +1,6 @@
 # Building a Local Storage Viewer Chrome Extension
 
-A localStorage viewer is one of the most useful developer tools you can build as a Chrome extension. It allows developers to inspect, edit, and manage localStorage, sessionStorage, and IndexedDB data across all domains. This guide walks through building a production-ready extension with full TypeScript support, modern UI patterns, and robust error handling.
+A localStorage viewer is one of the most useful developer tools you can build as a Chrome extension. It allows developers to inspect, edit, and manage localStorage, sessionStorage, and IndexedDB data across all domains. This guide walks through building a production-ready extension with full TypeScript support, modern UI patterns, and solid error handling.
 
 ## Table of Contents
 
@@ -25,44 +25,44 @@ The localStorage viewer extension requires access to multiple browser contexts. 
 
 ```
 local-storage-viewer/
-├── manifest.json
-├── tsconfig.json
-├── webpack.config.js
-├── src/
-│   ├── manifest.ts
-│   ├── background/
-│   │   ├── index.ts
-│   │   └── service-worker.ts
-│   ├── sidepanel/
-│   │   ├── index.html
-│   │   ├── main.ts
-│   │   ├── App.tsx
-│   │   ├── components/
-│   │   │   ├── StorageTree.tsx
-│   │   │   ├── KeyValueEditor.tsx
-│   │   │   ├── StorageStats.tsx
-│   │   │   └── SearchBar.tsx
-│   │   ├── hooks/
-│   │   │   ├── useStorage.ts
-│   │   │   ├── useSelectedDomain.ts
-│   │   │   └── useSearch.ts
-│   │   ├── store/
-│   │   │   └── index.ts
-│   │   └── styles/
-│   │       └── main.css
-│   ├── content-script/
-│   │   └── index.ts
-│   ├── shared/
-│   │   ├── types.ts
-│   │   ├── constants.ts
-│   │   └── utils.ts
-│   └── mocks/
-│       └── chrome-api.ts
-├── public/
-│   └── icons/
-└── tests/
-    ├── unit/
-    └── e2e/
+ manifest.json
+ tsconfig.json
+ webpack.config.js
+ src/
+    manifest.ts
+    background/
+       index.ts
+       service-worker.ts
+    sidepanel/
+       index.html
+       main.ts
+       App.tsx
+       components/
+          StorageTree.tsx
+          KeyValueEditor.tsx
+          StorageStats.tsx
+          SearchBar.tsx
+       hooks/
+          useStorage.ts
+          useSelectedDomain.ts
+          useSearch.ts
+       store/
+          index.ts
+       styles/
+           main.css
+    content-script/
+       index.ts
+    shared/
+       types.ts
+       constants.ts
+       utils.ts
+    mocks/
+        chrome-api.ts
+ public/
+    icons/
+ tests/
+     unit/
+     e2e/
 ```
 
 ### Manifest Configuration (manifest.ts)
@@ -118,9 +118,9 @@ export default manifest;
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types (src/shared/types.ts)
+Shared Types (src/shared/types.ts)
 
 ```typescript
 export interface StorageItem {
@@ -167,7 +167,7 @@ export interface StorageAction {
 }
 ```
 
-### Content Script for Storage Extraction (src/content-script/index.ts)
+Content Script for Storage Extraction (src/content-script/index.ts)
 
 The content script runs on each page and extracts storage data. It communicates with the side panel via message passing.
 
@@ -326,13 +326,13 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-## UI Design
+UI Design
 
-### Side Panel Layout
+Side Panel Layout
 
 The side panel should display storage in an organized, searchable interface. Use a tree view for nested JSON values and a split-pane layout for key editing.
 
-### Component: StorageTree.tsx
+Component: StorageTree.tsx
 
 ```typescript
 import React, { useState, useCallback } from 'react';
@@ -380,7 +380,7 @@ export const StorageTree: React.FC<Props> = ({
             className="expand-btn"
             onClick={() => toggleExpand(key)}
           >
-            {isExpanded ? '▼' : '▶'} {entries.length} keys
+            {isExpanded ? '' : ''} {entries.length} keys
           </button>
           {isExpanded && (
             <div className="nested-content">
@@ -438,9 +438,9 @@ function formatBytes(bytes: number): string {
 
 ---
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions Explained
+Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -451,7 +451,7 @@ function formatBytes(bytes: number): string {
 | `activeTab` | Access current tab's data |
 | `<all_urls>` | Read storage from any website |
 
-### Message Passing Pattern
+Message Passing Pattern
 
 ```typescript
 // In side panel
@@ -474,9 +474,9 @@ chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
 
 ---
 
-## State Management
+State Management
 
-### Simple Store Implementation
+Simple Store Implementation
 
 ```typescript
 import { create } from 'zustand';
@@ -547,9 +547,9 @@ export const useStorageStore = create<StorageState>((set, get) => ({
 
 ---
 
-## Error Handling
+Error Handling
 
-### Comprehensive Error Handling Pattern
+Comprehensive Error Handling Pattern
 
 ```typescript
 class StorageError extends Error {
@@ -622,9 +622,9 @@ class StorageService {
 
 ---
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests with Vitest
+Unit Tests with Vitest
 
 ```typescript
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -667,7 +667,7 @@ describe('StorageTree', () => {
 });
 ```
 
-### E2E Tests with Playwright
+E2E Tests with Playwright
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -691,11 +691,11 @@ test('side panel displays storage', async ({ page }) => {
 
 ---
 
-## Performance Considerations
+Performance Considerations
 
-### Optimizations for Large Storage
+Optimizations for Large Storage
 
-1. **Virtual Scrolling**: Use virtualization for large item lists
+1. Virtual Scrolling: Use virtualization for large item lists
    ```typescript
    import { useVirtualizer } from '@tanstack/react-virtual';
    
@@ -707,7 +707,7 @@ test('side panel displays storage', async ({ page }) => {
    });
    ```
 
-2. **Debounced Search**: Prevent re-renders during typing
+2. Debounced Search: Prevent re-renders during typing
    ```typescript
    const debouncedSearch = useMemo(
      () => debounce((term: string) => setFilter({ searchTerm: term }), 300),
@@ -715,7 +715,7 @@ test('side panel displays storage', async ({ page }) => {
    );
    ```
 
-3. **Lazy Loading**: Load IndexedDB data on demand
+3. Lazy Loading: Load IndexedDB data on demand
    ```typescript
    const loadIndexedDBData = useCallback(async (storeName: string) => {
      if (!currentStorage) return;
@@ -723,7 +723,7 @@ test('side panel displays storage', async ({ page }) => {
    }, [currentStorage]);
    ```
 
-4. **Memoization**: Prevent unnecessary re-renders
+4. Memoization: Prevent unnecessary re-renders
    ```typescript
    const filteredItems = useMemo(
      () => items.filter(item => matchesFilter(item, filter)),
@@ -733,24 +733,24 @@ test('side panel displays storage', async ({ page }) => {
 
 ---
 
-## Publishing Checklist
+Publishing Checklist
 
 Before publishing to Chrome Web Store:
 
-- [ ] **Manifest**: Verify all permissions are necessary
-- [ ] **Icons**: Create 16x16, 48x48, and 128x128 PNG icons
-- [ ] **Screenshots**: Add screenshots showing the extension in action
-- [ ] **Description**: Write clear, concise description (< 132 characters for title)
-- [ ] **Privacy Policy**: Required if accessing data on all websites
-- [ ] **Version Bump**: Increment version in manifest.json
-- [ ] **Build**: Run production build
+- [ ] Manifest: Verify all permissions are necessary
+- [ ] Icons: Create 16x16, 48x48, and 128x128 PNG icons
+- [ ] Screenshots: Add screenshots showing the extension in action
+- [ ] Description: Write clear, concise description (< 132 characters for title)
+- [ ] Privacy Policy: Required if accessing data on all websites
+- [ ] Version Bump: Increment version in manifest.json
+- [ ] Build: Run production build
   ```bash
   npm run build
   ```
-- [ ] **ZIP**: Create ZIP of dist folder
-- [ ] **Store Listing**: Fill all required fields in Developer Dashboard
+- [ ] ZIP: Create ZIP of dist folder
+- [ ] Store Listing: Fill all required fields in Developer Dashboard
 
-### Manifest Best Practices
+Manifest Best Practices
 
 ```json
 {
@@ -765,15 +765,15 @@ Before publishing to Chrome Web Store:
 
 ---
 
-## Summary
+Summary
 
 Building a localStorage viewer extension requires careful consideration of cross-context communication, security restrictions, and user experience. The key components are:
 
-1. **Manifest V3** with appropriate permissions for storage access
-2. **Content script** for extracting storage data from web pages
-3. **Side panel UI** for a developer-friendly interface
-4. **TypeScript** for type safety and maintainability
-5. **Proper error handling** for graceful degradation
-6. **Performance optimization** for handling large storage datasets
+1. Manifest V3 with appropriate permissions for storage access
+2. Content script for extracting storage data from web pages
+3. Side panel UI for a developer-friendly interface
+4. TypeScript for type safety and maintainability
+5. Proper error handling for graceful degradation
+6. Performance optimization for handling large storage datasets
 
 Following these patterns will result in a production-ready extension that developers find valuable for debugging and managing web storage.

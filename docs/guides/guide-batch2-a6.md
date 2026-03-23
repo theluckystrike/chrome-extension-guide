@@ -9,26 +9,26 @@ Ad blocking is one of the most popular use cases for Chrome extensions. Building
 Modern ad blockers in Chrome extensions rely on the `declarativeNetRequest` API, which allows you to block or modify network requests without requiring a content script running on every page. This is more performant than older approaches that used `webRequest` API.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Ad Blocker Architecture                   │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │   Manifest   │───▶│  Rule Sets   │───▶│   Matching   │  │
-│  │   Config     │    │   Manager    │    │   Engine     │  │
-│  └──────────────┘    └──────────────┘    └──────────────┘  │
-│         │                   │                   │            │
-│         ▼                   ▼                   ▼            │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │            declarativeNetRequest API                 │   │
-│  └──────────────────────────────────────────────────────┘   │
-│                          │                                   │
-│                          ▼                                   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │              Network Request Interception            │   │
-│  └──────────────────────────────────────────────────────┘   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+
+                    Ad Blocker Architecture                   
+
+                                                             
+            
+     Manifest     Rule Sets      Matching     
+     Config            Manager           Engine       
+            
+                                                           
+                                                           
+     
+              declarativeNetRequest API                    
+     
+                                                             
+                                                             
+     
+                Network Request Interception               
+     
+                                                             
+
 ```
 
 ## Manifest Configuration
@@ -515,13 +515,13 @@ describe('AdDetector', () => {
 
 ## Best Practices
 
-1. **Use declarativeNetRequest** - Never use `webRequest` for blocking as it's deprecated for this use case
-2. **Batch rule updates** - Chrome has limits on how many rules you can update at once
-3. **Prioritize user rules** - Allow users to add custom rules that take precedence
-4. **Regular filter updates** - Filter lists are updated frequently; implement auto-update
-5. **Respect resource limits** - Chrome allows up to 300,000 dynamic rules
-6. **Test thoroughly** - Use Chrome's `chrome://extensions` to debug rule matching
-7. **Handle edge cases** - Some sites use anti-adblock detection; implement workarounds
+1. Use declarativeNetRequest - Never use `webRequest` for blocking as it's deprecated for this use case
+2. Batch rule updates - Chrome has limits on how many rules you can update at once
+3. Prioritize user rules - Allow users to add custom rules that take precedence
+4. Regular filter updates - Filter lists are updated frequently; implement auto-update
+5. Respect resource limits - Chrome allows up to 300,000 dynamic rules
+6. Test thoroughly - Use Chrome's `chrome://extensions` to debug rule matching
+7. Handle edge cases - Some sites use anti-adblock detection; implement workarounds
 
 ## Conclusion
 

@@ -17,45 +17,45 @@ This comprehensive guide will walk you through setting up Parcel for your Chrome
 
 ---
 
-## Why Use a Bundler for Chrome Extensions? {#why-use-bundler}
+Why Use a Bundler for Chrome Extensions? {#why-use-bundler}
 
 Before diving into Parcel specifically, it is worth understanding why bundlers have become essential for Chrome extension development.
 
-### The Evolution of Extension Build Processes
+The Evolution of Extension Build Processes
 
 Early Chrome extensions were simple. You might have had a handful of JavaScript files, some CSS, and a manifest.json file. Loading this directly into Chrome worked fine. However, as extensions grew in complexity, developers faced new challenges:
 
-- **Dependency Management**: Managing third-party libraries became cumbersome without a package manager and bundler.
-- **Module Systems**: Modern JavaScript uses ES modules, but browsers need them transformed for compatibility.
-- **Performance**: Loading multiple separate files impacts load times and extension performance.
-- **Development Experience**: Hot reloading, source maps, and automatic refreshes dramatically improve developer productivity.
+- Dependency Management: Managing third-party libraries became cumbersome without a package manager and bundler.
+- Module Systems: Modern JavaScript uses ES modules, but browsers need them transformed for compatibility.
+- Performance: Loading multiple separate files impacts load times and extension performance.
+- Development Experience: Hot reloading, source maps, and automatic refreshes dramatically improve developer productivity.
 
 Webpack and Rollup became popular choices, but they require significant configuration. This is where Parcel changes the game.
 
 ---
 
-## Introducing Parcel: The Zero-Config Bundler {#introducing-parcel}
+Introducing Parcel: The Zero-Config Bundler {#introducing-parcel}
 
 Parcel burst onto the scene with a simple promise: zero configuration required. It automatically detects your entry point, analyzes your dependencies, and builds an optimized bundle without you writing a single line of configuration.
 
-### Key Features of Parcel
+Key Features of Parcel
 
-- **Zero Configuration**: No config files needed to get started
-- **Automatic Asset Handling**: Works with JavaScript, TypeScript, CSS, images, and more out of the box
-- **Fast Builds**: Uses multicore compilation and caching for blazing-fast rebuilds
-- **Code Splitting**: Automatically splits code into separate bundles for optimal loading
-- **Hot Module Replacement**: Updates modules in the browser without full page reloads
-- **Tree Shaking**: Removes unused code to reduce bundle size
+- Zero Configuration: No config files needed to get started
+- Automatic Asset Handling: Works with JavaScript, TypeScript, CSS, images, and more out of the box
+- Fast Builds: Uses multicore compilation and caching for blazing-fast rebuilds
+- Code Splitting: Automatically splits code into separate bundles for optimal loading
+- Hot Module Replacement: Updates modules in the browser without full page reloads
+- Tree Shaking: Removes unused code to reduce bundle size
 
 For Chrome extension development, these features translate to a streamlined workflow where you can focus on writing code rather than configuring build pipelines.
 
 ---
 
-## Setting Up Parcel for Chrome Extensions {#setting-up-parcel}
+Setting Up Parcel for Chrome Extensions {#setting-up-parcel}
 
 Getting started with Parcel for your Chrome extension is remarkably straightforward. Let us walk through the complete setup process.
 
-### Prerequisites
+Prerequisites
 
 Ensure you have Node.js installed (version 18 or higher is recommended), and initialize a new project:
 
@@ -64,7 +64,7 @@ mkdir my-chrome-extension && cd my-chrome-extension
 npm init -y
 ```
 
-### Installing Parcel
+Installing Parcel
 
 Install Parcel as a development dependency:
 
@@ -74,25 +74,25 @@ npm install --save-dev parcel
 
 You will also need to install any browsers you want to test with. For Chrome extensions, we recommend installing Chrome if you have not already.
 
-### Creating Your Extension Structure
+Creating Your Extension Structure
 
 Create the following directory structure for your extension:
 
 ```
 my-chrome-extension/
-├── src/
-│   ├── manifest.json
-│   ├── background.js
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.js
-│   │   └── popup.css
-│   └── content.js
-├── package.json
-└── .parcelrc (optional)
+ src/
+    manifest.json
+    background.js
+    popup/
+       popup.html
+       popup.js
+       popup.css
+    content.js
+ package.json
+ .parcelrc (optional)
 ```
 
-### The Manifest V3 Configuration
+The Manifest V3 Configuration
 
 Create your `manifest.json` in the src directory:
 
@@ -132,11 +132,11 @@ Notice that Parcel allows you to use relative paths without worrying about the f
 
 ---
 
-## Building Your First Parcel-Powered Extension {#first-extension}
+Building Your First Parcel-Powered Extension {#first-extension}
 
 Now let us create the core files for your extension and see Parcel in action.
 
-### The Background Service Worker
+The Background Service Worker
 
 Create `src/background.js`:
 
@@ -174,7 +174,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 console.log('Background service worker loaded');
 ```
 
-### The Popup Interface
+The Popup Interface
 
 Create `src/popup/popup.html`:
 
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-### The Content Script
+The Content Script
 
 Create `src/content.js`:
 
@@ -394,11 +394,11 @@ injectStyles();
 
 ---
 
-## Configuring Parcel for Chrome Extension Builds {#configuring-parcel}
+Configuring Parcel for Chrome Extension Builds {#configuring-parcel}
 
 While Parcel works without configuration, there are some settings specific to Chrome extensions that enhance the development experience.
 
-### Creating a Parcel Configuration
+Creating a Parcel Configuration
 
 Create a `.parcelrc` file in your project root:
 
@@ -411,7 +411,7 @@ Create a `.parcelrc` file in your project root:
 }
 ```
 
-### Adding Build Scripts
+Adding Build Scripts
 
 Update your `package.json` with proper scripts:
 
@@ -436,7 +436,7 @@ The key insight here is that Parcel uses your `manifest.json` as the entry point
 
 ---
 
-## Running Your Extension in Development Mode {#development-mode}
+Running Your Extension in Development Mode {#development-mode}
 
 Parcel provides excellent development experience with hot reloading. To run your extension:
 
@@ -446,7 +446,7 @@ npm run start
 
 This starts a development server. However, for Chrome extensions, the workflow is slightly different than regular web apps.
 
-### Loading the Extension in Chrome
+Loading the Extension in Chrome
 
 1. Build your extension with Parcel
 2. Open Chrome and navigate to `chrome://extensions/`
@@ -456,7 +456,7 @@ This starts a development server. However, for Chrome extensions, the workflow i
 
 For a smoother development experience, consider using the Chrome Extensions Reloader extension or setting up a watch mode that automatically rebuilds on changes.
 
-### Using Source Maps for Debugging
+Using Source Maps for Debugging
 
 Parcel generates source maps by default in development mode. This allows you to debug your original TypeScript or modern JavaScript directly in Chrome DevTools:
 
@@ -467,7 +467,7 @@ Parcel generates source maps by default in development mode. This allows you to 
 
 ---
 
-## Production Builds and Optimization {#production-builds}
+Production Builds and Optimization {#production-builds}
 
 When you are ready to publish your extension to the Chrome Web Store, run the production build:
 
@@ -483,7 +483,7 @@ Parcel will:
 - Apply tree shaking to remove unused code
 - Hash filenames for cache busting
 
-### Understanding Output Structure
+Understanding Output Structure
 
 After building, your `dist` folder will contain:
 
@@ -496,9 +496,9 @@ Parcel automatically updates the file references in your manifest to point to th
 
 ---
 
-## Advanced Parcel Features for Extensions {#advanced-features}
+Advanced Parcel Features for Extensions {#advanced-features}
 
-### Using TypeScript
+Using TypeScript
 
 Parcel has built-in TypeScript support. Simply create a `tsconfig.json`:
 
@@ -513,13 +513,13 @@ Parcel has built-in TypeScript support. Simply create a `tsconfig.json`:
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"]
+  "include": ["src//*"]
 }
 ```
 
 Then rename your `.js` files to `.ts` and Parcel will automatically compile them.
 
-### Handling Environment Variables
+Handling Environment Variables
 
 Parcel supports environment variables out of the box:
 
@@ -538,7 +538,7 @@ NODE_ENV=development
 
 And for production, Parcel automatically sets `NODE_ENV=production` during builds.
 
-### Code Splitting
+Code Splitting
 
 Parcel automatically code-splits at import statements. This is particularly useful for extensions with multiple features:
 
@@ -551,9 +551,9 @@ import('./features/analytics.js').then(module => {
 
 ---
 
-## Troubleshooting Common Issues {#troubleshooting}
+Troubleshooting Common Issues {#troubleshooting}
 
-### Manifest Parsing Errors
+Manifest Parsing Errors
 
 If Parcel has trouble parsing your manifest, ensure:
 
@@ -561,7 +561,7 @@ If Parcel has trouble parsing your manifest, ensure:
 - JSON syntax is valid
 - Permissions are correctly specified for Manifest V3
 
-### Module Resolution Issues
+Module Resolution Issues
 
 When Parcel cannot find a module:
 
@@ -569,7 +569,7 @@ When Parcel cannot find a module:
 2. Ensure your import paths are correct
 3. Try clearing the cache: `rm -rf .parcel-cache`
 
-### Hot Reload Not Working
+Hot Reload Not Working
 
 For Chrome extensions, hot reload works differently:
 
@@ -580,9 +580,9 @@ For Chrome extensions, hot reload works differently:
 
 ---
 
-## Comparing Parcel with Other Bundlers {#comparison}
+Comparing Parcel with Other Bundlers {#comparison}
 
-### Parcel vs Webpack
+Parcel vs Webpack
 
 Webpack offers more flexibility and customization but requires significant configuration. Parcel is ideal for:
 
@@ -590,29 +590,29 @@ Webpack offers more flexibility and customization but requires significant confi
 - Smaller to medium-sized extensions
 - Projects where simplicity is prioritized over fine-grained control
 
-### Parcel vs Rollup
+Parcel vs Rollup
 
 Rollup is excellent for library development and produces very clean bundles. Parcel, however, handles full applications better and includes more features out of the box.
 
-### Parcel vs Vite
+Parcel vs Vite
 
 Vite is another modern bundler with similar zero-config philosophy. Both are excellent choices. Vite uses esbuild for faster builds, while Parcel has more comprehensive asset handling out of the box.
 
 ---
 
-## Best Practices for Parcel-Based Extensions {#best-practices}
+Best Practices for Parcel-Based Extensions {#best-practices}
 
-1. **Keep Source Organized**: Use a clear directory structure (src/, icons/, etc.)
-2. **Use TypeScript**: Parcel handles TypeScript natively, providing better type safety
-3. **Enable Strict Mode**: Always enable strict TypeScript mode for reliable builds
-4. **Test Regularly**: Load your extension in Chrome frequently during development
-5. **Use Source Maps**: Always enable source maps for easier debugging
-6. **Optimize Assets**: Let Parcel handle image optimization automatically
-7. **Version Control**: Keep your build output in .gitignore
+1. Keep Source Organized: Use a clear directory structure (src/, icons/, etc.)
+2. Use TypeScript: Parcel handles TypeScript natively, providing better type safety
+3. Enable Strict Mode: Always enable strict TypeScript mode for reliable builds
+4. Test Regularly: Load your extension in Chrome frequently during development
+5. Use Source Maps: Always enable source maps for easier debugging
+6. Optimize Assets: Let Parcel handle image optimization automatically
+7. Version Control: Keep your build output in .gitignore
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Parcel represents a significant advancement in Chrome extension development tooling. Its zero-configuration approach means you can go from idea to working extension faster than ever. The automatic asset handling, built-in TypeScript support, and optimized production builds make it an excellent choice for developers of all skill levels.
 
@@ -622,7 +622,7 @@ Give Parcel a try for your next Chrome extension project. You might find that "z
 
 ---
 
-## Further Resources
+Further Resources
 
 - [Parcel Documentation](https://parceljs.org/)
 - [Chrome Extension Development Documentation](https://developer.chrome.com/docs/extensions/)

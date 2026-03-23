@@ -17,7 +17,7 @@ This project will teach you essential Chrome extension development skills includ
 
 ---
 
-## Understanding Reading List Extensions {#understanding-reading-list-extensions}
+Understanding Reading List Extensions {#understanding-reading-list-extensions}
 
 Reading list extensions serve a specific purpose: capturing web content for later consumption. Unlike simple bookmarks, a good reading list extension captures additional metadata such as the page title, excerpt, featured image, and the time it was saved. This extra information enables a richer reading experience when users return to their saved articles.
 
@@ -27,7 +27,7 @@ Before we dive into implementation, let's outline the features our reading list 
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup-and-manifest}
+Project Setup and Manifest Configuration {#project-setup-and-manifest}
 
 Every Chrome extension begins with the manifest.json file, which declares the extension's configuration, permissions, and components. For our reading list extension, we'll use Manifest V3, the current standard that offers improved security and performance.
 
@@ -69,7 +69,7 @@ You'll need to create placeholder icons for your extension to function properly.
 
 ---
 
-## Creating the Popup Interface {#creating-the-popup-interface}
+Creating the Popup Interface {#creating-the-popup-interface}
 
 The popup is the primary user interface for our extension, appearing when users click the extension icon in the Chrome toolbar. It serves two purposes: displaying the reading list and providing a quick save button for the current page.
 
@@ -247,7 +247,7 @@ footer {
 
 ---
 
-## Implementing the Popup Logic {#implementing-the-popup-logic}
+Implementing the Popup Logic {#implementing-the-popup-logic}
 
 The popup JavaScript handles user interactions, communicates with the background script, and renders the reading list. Create popup.js with the following implementation:
 
@@ -415,7 +415,7 @@ This implementation handles several important functions. The save button trigger
 
 ---
 
-## Understanding Chrome Storage API {#understanding-chrome-storage-api}
+Understanding Chrome Storage API {#understanding-chrome-storage-api}
 
 The chrome.storage API is specifically designed for Chrome extensions and provides several advantages over using localStorage. It offers synchronous get and set operations that return promises, automatic synchronization across browser instances when the user is signed into Chrome, and larger storage quotas compared to localStorage.
 
@@ -425,7 +425,7 @@ The storage operations in our code follow a simple pattern: we retrieve the exis
 
 ---
 
-## Content Script Injection Strategies {#content-script-injection-strategies}
+Content Script Injection Strategies {#content-script-injection-strategies}
 
 Our popup.js uses chrome.scripting.executeScript to run JavaScript in the context of the current page. This approach, called programatic injection, gives us access to the page's DOM and allows us to extract metadata for our reading list entries.
 
@@ -435,7 +435,7 @@ For more advanced metadata extraction, you might consider using the Page Metadat
 
 ---
 
-## Testing Your Extension {#testing-your-extension}
+Testing Your Extension {#testing-your-extension}
 
 Before deploying your extension, you'll want to test it thoroughly. Chrome provides a straightforward process for loading unpacked extensions for testing. Navigate to chrome://extensions in your browser, enable "Developer mode" in the top right corner, and click "Load unpacked" to select your extension folder.
 
@@ -445,7 +445,7 @@ Pay attention to error handling throughout your extension. Our implementation in
 
 ---
 
-## Enhancing Your Reading List Extension {#enhancing-your-reading-list-extension}
+Enhancing Your Reading List Extension {#enhancing-your-reading-list-extension}
 
 Once you have the basic extension working, there are many features you can add to make it more powerful and useful. Consider implementing tags or categories to organize saved articles. Add a search function to quickly find specific articles. Implement reading time estimates based on article length. Create a dedicated reading view that strips away distractions. Add support for syncing across devices using chrome.storage.sync. Implement keyboard shortcuts for quick saving. Add the ability to archive articles after reading.
 
@@ -453,7 +453,7 @@ Each of these enhancements provides an opportunity to learn more about Chrome ex
 
 ---
 
-## Best Practices and Considerations {#best-practices-and-considerations}
+Best Practices and Considerations {#best-practices-and-considerations}
 
 When building production-ready reading list extensions, several best practices deserve attention. First, always respect user privacy by being transparent about what data you collect and how you use it. Second, implement proper error handling to prevent the extension from breaking when encountering unexpected page structures. Third, optimize your extension's performance by lazy-loading content and minimizing DOM manipulations. Fourth, test across different Chrome versions and operating systems to ensure compatibility. Fifth, follow Chrome's Web Store policies to avoid rejection during the review process.
 
@@ -461,7 +461,7 @@ Additionally, consider implementing proper TypeScript types for your code, addin
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a reading list Chrome extension is an excellent project for learning Chrome extension development fundamentals. You've learned how to create a Manifest V3 extension, build a popup interface with HTML and CSS, implement storage using the chrome.storage API, extract page metadata with content scripts, and handle user interactions throughout the extension.
 

@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Tab Communication — Best Practices"
+title: "Chrome Extension Tab Communication. Best Practices"
 description: "Communicate between extension components and tabs."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-communication/"
 ---
 
 # Tab Communication Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extensions operate across multiple execution contexts: the service worker, popup, options page, and content scripts running in each tab. These contexts cannot directly access each other's variables or DOM, so communication must happen through message passing. This guide covers patterns for communicating between the service worker and content scripts, as well as direct tab-to-tab communication through relay mechanisms.
 
 Understanding these patterns is essential for building extensions that coordinate state across tabs, push updates to specific pages, or aggregate data from multiple sources.
 
-## Service Worker to Content Script {#service-worker-to-content-script}
+Service Worker to Content Script {#service-worker-to-content-script}
 
 Use `chrome.tabs.sendMessage()` to send targeted messages to a specific tab. The content script must have an active listener for messages to receive them.
 
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 The `tabId` can be obtained from `chrome.tabs.query()` or from the `sender.tab` property in message listeners. Note that `sendMessage` will throw if no content script is actively listening in the target tab.
 
-## Content Script to Service Worker {#content-script-to-service-worker}
+Content Script to Service Worker {#content-script-to-service-worker}
 
 Content scripts can send messages to the service worker using `chrome.runtime.sendMessage()`. Unlike tab-specific messaging, this goes to the extension's background context.
 
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 The `sender.tab` property contains information about which tab the message originated from, allowing the service worker to track which content script sent the data.
 
-## Broadcast to All Tabs {#broadcast-to-all-tabs}
+Broadcast to All Tabs {#broadcast-to-all-tabs}
 
 When you need to update all open extension pages simultaneously, query all tabs and send messages to each one. Handle errors gracefully since some tabs may not have content scripts injected.
 
@@ -98,9 +98,9 @@ await broadcastMessage({
 });
 ```
 
-Use this pattern sparingly—frequent broadcasts to many tabs can impact performance. Consider using `chrome.storage` with change listeners instead for high-frequency updates.
+Use this pattern sparingly, frequent broadcasts to many tabs can impact performance. Consider using `chrome.storage` with change listeners instead for high-frequency updates.
 
-## Long-Lived Connections {#long-lived-connections}
+Long-Lived Connections {#long-lived-connections}
 
 For streaming data or persistent communication channels, use the Port API. Ports remain open until explicitly disconnected and survive service worker restarts.
 
@@ -135,7 +135,7 @@ port.postMessage({ type: 'READY' });
 
 Ports automatically disconnect when the user navigates away or closes the tab, making them ideal for real-time data streaming.
 
-## Tab-to-Tab Communication via Service Worker Relay {#tab-to-tab-communication-via-service-worker-relay}
+Tab-to-Tab Communication via Service Worker Relay {#tab-to-tab-communication-via-service-worker-relay}
 
 Direct tab-to-tab communication is not possible. Instead, route messages through the service worker using a relay pattern.
 
@@ -161,9 +161,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-This pattern scales to N tabs but introduces latency. For simpler use cases, consider using `chrome.storage.onChanged` as a lightweight broadcast mechanism—all tabs listening to storage changes receive notifications when any tab updates the storage.
+This pattern scales to N tabs but introduces latency. For simpler use cases, consider using `chrome.storage.onChanged` as a lightweight broadcast mechanism, all tabs listening to storage changes receive notifications when any tab updates the storage.
 
-## Typed Messaging with TypeScript {#typed-messaging-with-typescript}
+Typed Messaging with TypeScript {#typed-messaging-with-typescript}
 
 For type-safe messaging, use a library like `@theluckystrike/webext-messaging` or define TypeScript interfaces:
 
@@ -188,7 +188,7 @@ function isStateUpdate(msg: ExtensionMessage): msg is StateUpdateMessage {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [Message Passing Patterns](/docs/reference/message-passing-patterns.md) - Core messaging concepts
 - [Content Script Patterns](/docs/guides/content-script-patterns.md) - Best practices for content script architecture

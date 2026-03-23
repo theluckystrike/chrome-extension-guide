@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Extension Logging Levels — Best Practices"
+title: "Chrome Extension Extension Logging Levels. Best Practices"
 description: "Implement structured logging with different levels for development and production."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-logging-levels/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-logging-leve
 
 A comprehensive pattern for implementing structured, context-aware logging in Chrome extensions with runtime-controllable log levels.
 
-## Log Levels {#log-levels}
+Log Levels {#log-levels}
 
 Define a strict hierarchy of log levels:
 
@@ -23,7 +23,7 @@ enum LogLevel {
 }
 ```
 
-## Logger Class {#logger-class}
+Logger Class {#logger-class}
 
 ```typescript
 class Logger {
@@ -95,7 +95,7 @@ class Logger {
 }
 ```
 
-## Context-Aware Logger {#context-aware-logger}
+Context-Aware Logger {#context-aware-logger}
 
 Create loggers for different extension contexts:
 
@@ -109,7 +109,7 @@ function createContentLogger(tabId: number, url: string): Logger {
 }
 ```
 
-## Conditional Logging {#conditional-logging}
+Conditional Logging {#conditional-logging}
 
 Avoid expensive operations when logging is disabled:
 
@@ -128,7 +128,7 @@ if (logger.shouldLog(LogLevel.DEBUG)) {
 }
 ```
 
-## Log Rotation (Circular Buffer) {#log-rotation-circular-buffer}
+Log Rotation (Circular Buffer) {#log-rotation-circular-buffer}
 
 ```typescript
 const MAX_LOG_ENTRIES = 500;
@@ -149,7 +149,7 @@ interface LogEntry {
 }
 ```
 
-## Remote Logging (ERROR+ Only) {#remote-logging-error-only}
+Remote Logging (ERROR+ Only) {#remote-logging-error-only}
 
 ```typescript
 async function sendToRemote(entry: LogEntry): Promise<void> {
@@ -163,7 +163,7 @@ async function sendToRemote(entry: LogEntry): Promise<void> {
 }
 ```
 
-## Production Stripping {#production-stripping}
+Production Stripping {#production-stripping}
 
 Use build-time defines to remove DEBUG logs:
 
@@ -183,7 +183,7 @@ module.exports = {
 const shouldLog = process.env.LOG_LEVEL === 'DEBUG';
 ```
 
-## Log Viewer Component {#log-viewer-component}
+Log Viewer Component {#log-viewer-component}
 
 In your options page, display recent logs with filtering:
 
@@ -223,7 +223,7 @@ function getLevelColor(level: string): string {
 }
 ```
 
-## Export Logs {#export-logs}
+Export Logs {#export-logs}
 
 ```typescript
 async function exportLogs(): Promise<void> {
@@ -234,7 +234,7 @@ async function exportLogs(): Promise<void> {
 }
 ```
 
-## Sentry Integration {#sentry-integration}
+Sentry Integration {#sentry-integration}
 
 ```typescript
 import * as Sentry from '@sentry/browser';
@@ -247,7 +247,7 @@ function captureError(error: Error, context: string): void {
 }
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [Extension Logging Guide](../../guides/extension-logging.md)
 - [Debugging Extensions](../../guides/debugging-extensions.md)

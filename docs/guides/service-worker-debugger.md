@@ -51,28 +51,28 @@ This guide covers building a Chrome extension that debugs, monitors, and inspect
 
 ```
 src/
-├── background/
-│   ├── worker.ts           # Main service worker
-│   ├── debugger.ts         # Chrome Debugger API wrapper
-│   ├── events.ts           # Event collectors
-│   └── storage.ts          # State management
-├── ui/
-│   ├── popup/
-│   │   ├── index.html
-│   │   ├── popup.ts
-│   │   └── popup.css
-│   ├── sidebar/
-│   │   ├── index.html
-│   │   ├── sidebar.ts
-│   │   └── sidebar.css
-│   └── content/
-│       ├── overlay.ts      # In-page overlay
-│       └── overlay.css
-├── shared/
-│   ├── types.ts            # TypeScript interfaces
-│   ├── constants.ts
-│   └── utils.ts
-└── manifest.ts
+ background/
+    worker.ts           # Main service worker
+    debugger.ts         # Chrome Debugger API wrapper
+    events.ts           # Event collectors
+    storage.ts          # State management
+ ui/
+    popup/
+       index.html
+       popup.ts
+       popup.css
+    sidebar/
+       index.html
+       sidebar.ts
+       sidebar.css
+    content/
+        overlay.ts      # In-page overlay
+        overlay.css
+ shared/
+    types.ts            # TypeScript interfaces
+    constants.ts
+    utils.ts
+ manifest.ts
 ```
 
 ## Core Implementation with TypeScript
@@ -882,7 +882,7 @@ test.describe('Service Worker Debugger Extension', () => {
   
   test('should display service worker events', async ({ page }) => {
     // Setup mock service worker
-    await page.route('**/sw.js', async route => {
+    await page.route('/sw.js', async route => {
       await route.fulfill({
         status: 200,
         body: `
@@ -1021,7 +1021,7 @@ npm version major  # 1.0.0 -> 2.0.0
 
 ## Conclusion
 
-Building a Service Worker debugger extension requires careful handling of Chrome's debugger APIs, proper state management for ephemeral service workers, and thoughtful UI design. This guide provides the foundation for creating a robust debugging tool that can significantly improve the development experience for PWA and Service Worker-based applications.
+Building a Service Worker debugger extension requires careful handling of Chrome's debugger APIs, proper state management for ephemeral service workers, and thoughtful UI design. This guide provides the foundation for creating a solid debugging tool that can significantly improve the development experience for PWA and Service Worker-based applications.
 
 Key takeaways:
 1. Use the Chrome Debugger API for low-level Service Worker inspection

@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Bookmarks API — How to Create, Search, and Organize Bookmarks"
+title: "Chrome Extension Bookmarks API. How to Create, Search, and Organize Bookmarks"
 description: "A comprehensive guide to using the Chrome Bookmarks API in extensions. Learn to create, search, organize bookmarks with CRUD operations, event listeners, and import/export features."
 canonical_url: "https://bestchromeextensions.com/guides/bookmarks-api/"
 ---
 
-# Chrome Extension Bookmarks API — How to Create, Search, and Organize Bookmarks
+# Chrome Extension Bookmarks API. How to Create, Search, and Organize Bookmarks
 
 The Chrome Bookmarks API (`chrome.bookmarks`) is a powerful extension API that enables your Chrome extension to create, read, update, and delete bookmarks, as well as organize them into folders. This guide covers everything you need to build bookmark management features into your extension.
 
-## Prerequisites and Permissions
+Prerequisites and Permissions
 
 Before using the Bookmarks API, you need to declare the `"bookmarks"` permission in your `manifest.json`:
 
@@ -19,11 +19,11 @@ Before using the Bookmarks API, you need to declare the `"bookmarks"` permission
 }
 ```
 
-This permission grants read and write access to all bookmarks in the user's browser. Note that you cannot restrict access to specific folders—a request for any bookmark returns all available data.
+This permission grants read and write access to all bookmarks in the user's browser. Note that you cannot restrict access to specific folders, a request for any bookmark returns all available data.
 
-## Understanding the Bookmark Tree Structure
+Understanding the Bookmark Tree Structure
 
-The Chrome Bookmarks API organizes bookmarks in a hierarchical tree structure known as the **BookmarkTreeNode**. Each node represents either a bookmark or a folder and contains properties like:
+The Chrome Bookmarks API organizes bookmarks in a hierarchical tree structure known as the BookmarkTreeNode. Each node represents either a bookmark or a folder and contains properties like:
 
 - `id` (string): Unique identifier for the node
 - `parentId` (string): ID of the parent folder (null for the root)
@@ -35,13 +35,13 @@ The Chrome Bookmarks API organizes bookmarks in a hierarchical tree structure kn
 - `children` (array): Child nodes (only present when retrieving subtrees)
 
 The tree root contains three default folders:
-1. **Bookmarks Bar** (usually ID "1")
-2. **Other Bookmarks** (usually ID "2")
-3. **Mobile Bookmarks** (usually ID "3")
+1. Bookmarks Bar (usually ID "1")
+2. Other Bookmarks (usually ID "2")
+3. Mobile Bookmarks (usually ID "3")
 
-## CRUD Operations
+CRUD Operations
 
-### Reading Bookmarks
+Reading Bookmarks
 
 Retrieve bookmarks using several methods:
 
@@ -69,7 +69,7 @@ chrome.bookmarks.search({ url: "https://example.com" }, (results) => {
 });
 ```
 
-### Creating Bookmarks and Folders
+Creating Bookmarks and Folders
 
 Create bookmarks with the `create()` method:
 
@@ -92,7 +92,7 @@ chrome.bookmarks.create({
 });
 ```
 
-### Updating Bookmarks
+Updating Bookmarks
 
 Modify existing bookmarks or folders:
 
@@ -112,7 +112,7 @@ chrome.bookmarks.move("123", {
 });
 ```
 
-### Deleting Bookmarks
+Deleting Bookmarks
 
 Remove bookmarks or entire folders:
 
@@ -126,48 +126,48 @@ chrome.bookmarks.remove("123", () => {
 chrome.bookmarks.removeTree("456", () => {
   console.log("Folder and contents deleted");
 });
-# Chrome Bookmarks API Guide
+Chrome Bookmarks API Guide
 
-## Introduction
+Introduction
 - `chrome.bookmarks` API manages browser bookmarks programmatically
 - Enables reading, creating, organizing, and searching bookmarks
 - Requires `"bookmarks"` permission in manifest.json
 
-## manifest.json
+manifest.json
 ```json
 { "permissions": ["bookmarks"], "background": { "service_worker": "background.js" } }
 ```
 
-## Bookmark Tree Structure
+Bookmark Tree Structure
 Each node has: `id`, `parentId`, `index`, `title`, `url` (bookmarks), `dateAdded`, `dateGroupModified`. Folders have `children`; bookmarks have `url`.
 
-## Reading Bookmarks
+Reading Bookmarks
 
-### getTree - Full Bookmark Tree
+getTree - Full Bookmark Tree
 ```javascript
 chrome.bookmarks.getTree((results) => {
   console.log("Root:", results[0].title, "Children:", results[0].children);
 });
 ```
 
-### getSubTree - Partial Tree
+getSubTree - Partial Tree
 ```javascript
 chrome.bookmarks.getSubTree("folder_id", (results) => console.log(results[0].children));
 ```
 
-### getChildren - Direct Children Only
+getChildren - Direct Children Only
 ```javascript
 chrome.bookmarks.getChildren("folder_id", (results) => results.forEach(n => console.log(n.title)));
 ```
 
-### getRecent - Recently Added
+getRecent - Recently Added
 ```javascript
 chrome.bookmarks.getRecent(10, (results) => console.log("Recent:", results));
 ```
 
-## Searching Bookmarks
+Searching Bookmarks
 
-### search - Find by Title or URL
+search - Find by Title or URL
 ```javascript
 // Search by text
 chrome.bookmarks.search("tutorial", (results) => console.log(results));
@@ -179,9 +179,9 @@ chrome.bookmarks.search({ url: "https://example.com" }, (results) => console.log
 chrome.bookmarks.search({ title: "My Bookmark" }, (results) => console.log(results));
 ```
 
-## Creating Bookmarks and Folders
+Creating Bookmarks and Folders
 
-### create - Add Bookmark
+create - Add Bookmark
 ```javascript
 // Simple bookmark
 chrome.bookmarks.create({ title: "Google", url: "https://google.com" }, (bm) => console.log(bm.id));
@@ -193,7 +193,7 @@ chrome.bookmarks.create({ parentId: "folder_id", title: "My Project", url: "http
 chrome.bookmarks.create({ parentId: "folder_id", index: 0, title: "First", url: "https://example.com" }, (bm) => console.log(bm));
 ```
 
-### create - Add Folder
+create - Add Folder
 ```javascript
 // Root folder
 chrome.bookmarks.create({ title: "Work Projects" }, (folder) => console.log(folder.id));
@@ -202,15 +202,15 @@ chrome.bookmarks.create({ title: "Work Projects" }, (folder) => console.log(fold
 chrome.bookmarks.create({ parentId: "parent_id", title: "Subfolder" }, (folder) => console.log(folder.id));
 ```
 
-## Updating Bookmarks
+Updating Bookmarks
 
-### update - Modify Bookmark/Folder
+update - Modify Bookmark/Folder
 ```javascript
 chrome.bookmarks.update("bookmark_id", { title: "New Title" }, (bm) => console.log("Updated:", bm));
 chrome.bookmarks.update("bookmark_id", { url: "https://new-url.com" }, (bm) => console.log("URL changed"));
 ```
 
-### move - Relocate Bookmark/Folder
+move - Relocate Bookmark/Folder
 ```javascript
 // Move to folder
 chrome.bookmarks.move("bookmark_id", { parentId: "new_parent_id" }, (bm) => console.log("Moved:", bm));
@@ -219,17 +219,17 @@ chrome.bookmarks.move("bookmark_id", { parentId: "new_parent_id" }, (bm) => cons
 chrome.bookmarks.move("bookmark_id", { parentId: "folder_id", index: 0 }, (bm) => console.log(bm));
 ```
 
-### remove - Delete Bookmark
+remove - Delete Bookmark
 ```javascript
 chrome.bookmarks.remove("bookmark_id", () => console.log("Deleted"));
 ```
 
-### removeTree - Delete Folder and Contents
+removeTree - Delete Folder and Contents
 ```javascript
 chrome.bookmarks.removeTree("folder_id", () => console.log("Folder deleted")); // Irreversible!
 ```
 
-## Event Listeners
+Event Listeners
 
 The Bookmarks API provides event listeners to track changes made by the user or other extensions:
 
@@ -263,11 +263,11 @@ chrome.bookmarks.onChildrenReordered.addListener((id, reorderInfo) => {
 
 Event listeners are essential for keeping your extension's UI in sync with the user's bookmark changes, especially if you display bookmarks in a popup or side panel.
 
-## Import and Export Bookmarks
+Import and Export Bookmarks
 
 While the Chrome Bookmarks API doesn't have dedicated import/export methods, you can implement this functionality using standard JavaScript and the Chrome Downloads API or by generating HTML bookmark files.
 
-### Exporting Bookmarks
+Exporting Bookmarks
 
 Generate an HTML bookmarks file that users can import into any browser:
 
@@ -306,7 +306,7 @@ function generateBookmarksHTML(node) {
 }
 ```
 
-### Importing Bookmarks
+Importing Bookmarks
 
 Parse an imported HTML bookmarks file and add each bookmark:
 
@@ -323,36 +323,36 @@ function importBookmarks(htmlContent, parentId = "2") {
       url: link.href
     });
   });
-### onCreated
+onCreated
 ```javascript
 chrome.bookmarks.onCreated.addListener((id, bookmark) => console.log(`Created: ${bookmark.title}`));
 ```
 
-### onRemoved
+onRemoved
 ```javascript
 chrome.bookmarks.onRemoved.addListener((id, info) => console.log(`Removed: ${info.title}`));
 ```
 
-### onChanged
+onChanged
 ```javascript
 chrome.bookmarks.onChanged.addListener((id, changeInfo) => console.log("Changed:", changeInfo));
 // changeInfo contains: title, url (if bookmark)
 ```
 
-### onMoved
+onMoved
 ```javascript
 chrome.bookmarks.onMoved.addListener((id, info) => console.log(`Moved to ${info.parentId}`));
 ```
 
-### onImportBegan / onImportEnded
+onImportBegan / onImportEnded
 ```javascript
 chrome.bookmarks.onImportBegan.addListener(() => console.log("Import started"));
 chrome.bookmarks.onImportEnded.addListener(() => console.log("Import finished"));
 ```
 
-## Building a Bookmark Manager Extension
+Building a Bookmark Manager Extension
 
-### background.js
+background.js
 ```javascript
 chrome.runtime.onInstalled.addListener(() => console.log("Installed"));
 
@@ -362,7 +362,7 @@ chrome.bookmarks.onChanged.addListener((id, info) => console.log("Changed:", inf
 chrome.bookmarks.onMoved.addListener((id, info) => console.log("Moved:", info.parentId));
 ```
 
-### popup.js - UI
+popup.js - UI
 ```javascript
 document.addEventListener("DOMContentLoaded", async () => {
   const tree = await chrome.bookmarks.getTree();
@@ -380,7 +380,7 @@ function render(nodes, container) {
     const div = document.createElement("div");
     if (node.url) div.innerHTML = `<a href="${node.url}">${node.title}</a>`;
     else {
-      div.innerHTML = `<strong>📁 ${node.title}</strong>`;
+      div.innerHTML = `<strong> ${node.title}</strong>`;
       if (node.children) {
         const child = document.createElement("div");
         child.style.paddingLeft = "20px";
@@ -393,7 +393,7 @@ function render(nodes, container) {
 }
 ```
 
-### Organize by Domain
+Organize by Domain
 ```javascript
 async function organizeByDomain() {
   const all = await chrome.bookmarks.search({});
@@ -410,21 +410,21 @@ async function organizeByDomain() {
 }
 ```
 
-## Best Practices
+Best Practices
 
 When implementing bookmark functionality in your extension:
 
-1. **Request permissions sparingly**: Only request the bookmarks permission when needed, and explain why in your extension's store listing.
+1. Request permissions sparingly: Only request the bookmarks permission when needed, and explain why in your extension's store listing.
 
-2. **Cache bookmark data**: For frequent access, consider caching bookmark data locally and updating via event listeners rather than querying the API repeatedly.
+2. Cache bookmark data: For frequent access, consider caching bookmark data locally and updating via event listeners rather than querying the API repeatedly.
 
-3. **Handle missing bookmarks gracefully**: Users may delete bookmarks while your extension is running—always check if a bookmark still exists before attempting operations.
+3. Handle missing bookmarks gracefully: Users may delete bookmarks while your extension is running, always check if a bookmark still exists before attempting operations.
 
-4. **Use meaningful folder organization**: Create dedicated folders for your extension's bookmarks to avoid cluttering the user's main bookmark folders.
+4. Use meaningful folder organization: Create dedicated folders for your extension's bookmarks to avoid cluttering the user's main bookmark folders.
 
-5. **Provide undo functionality**: Before deleting bookmarks, store the bookmark data so users can restore accidentally deleted items.
+5. Provide undo functionality: Before deleting bookmarks, store the bookmark data so users can restore accidentally deleted items.
 
-## Conclusion
+Conclusion
 
 The Chrome Bookmarks API provides a complete solution for building bookmark management features in your Chrome extension. From simple bookmark creation to complex hierarchical organization and import/export functionality, this API enables rich bookmark-related experiences. Remember to test thoroughly with real user data and handle edge cases like deleted bookmarks gracefully.
 - Handle async operations properly (callbacks/promises)
@@ -432,11 +432,11 @@ The Chrome Bookmarks API provides a complete solution for building bookmark mana
 - Implement event listeners to keep UI in sync
 - Consider performance with large bookmark collections
 
-## Common Mistakes
+Common Mistakes
 - Not requesting "bookmarks" permission
 - Using synchronous calls (all methods are async)
 - Not checking for `url` property (folder vs bookmark)
 - Using `remove` instead of `removeTree` for folders
 
-## Reference
+Reference
 - Official Docs: https://developer.chrome.com/docs/extensions/reference/api/bookmarks

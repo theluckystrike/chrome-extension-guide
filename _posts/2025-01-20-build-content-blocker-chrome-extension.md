@@ -13,15 +13,15 @@ canonical_url: "https://bestchromeextensions.com/2025/01/20/build-content-blocke
 
 Content blocking extensions are among the most popular and useful tools in the Chrome Web Store. Whether you want to hide annoying pop-ups, block specific page elements, remove distracting advertisements, or clean up web pages to focus on essential content, building a content blocker extension is an excellent project that teaches valuable skills in Chrome extension development.
 
-In this comprehensive guide, we will walk you through building a fully functional content blocker Chrome extension from scratch. You'll learn how to use the declarativeNetRequest API, manipulate DOM elements, create user-friendly interfaces for managing blocklists, and package your extension for the Chrome Web Store.
+we will walk you through building a fully functional content blocker Chrome extension from scratch. You'll learn how to use the declarativeNetRequest API, manipulate DOM elements, create user-friendly interfaces for managing blocklists, and package your extension for the Chrome Web Store.
 
 ---
 
-## Understanding Content Blocking in Chrome Extensions {#understanding-content-blocking}
+Understanding Content Blocking in Chrome Extensions {#understanding-content-blocking}
 
 Before we dive into code, it's essential to understand how content blocking works in modern Chrome extensions. Chrome provides two primary methods for blocking content: network-level blocking using the declarativeNetRequest API and DOM-level element hiding using content scripts.
 
-### Network-Level Blocking (declarativeNetRequest API)
+Network-Level Blocking (declarativeNetRequest API)
 
 The declarativeNetRequest API allows extensions to block or modify network requests before they are made. This is the most efficient method for blocking advertisements at the network level because the blocked resources never reach the browser, saving bandwidth and improving page load times.
 
@@ -31,7 +31,7 @@ This approach is perfect for:
 - Modifying request headers
 - Blocking cookies
 
-### DOM-Level Element Hiding
+DOM-Level Element Hiding
 
 DOM-level element hiding involves examining the page's HTML after it has loaded and hiding or removing specific elements using CSS selectors. This method is more flexible for visual customizations but requires the page to fully load before processing.
 
@@ -45,32 +45,32 @@ Most production content blockers use a combination of both approaches for optima
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup}
+Project Setup and Manifest Configuration {#project-setup}
 
 Let's start by setting up our Chrome extension project. Create a new directory for your extension and set up the necessary files.
 
-### Creating the Project Structure
+Creating the Project Structure
 
 Create the following directory structure for your content blocker extension:
 
 ```
 content-blocker/
-├── manifest.json
-├── background.js
-├── content.js
-├── popup.html
-├── popup.js
-├── popup.css
-├── options.html
-├── options.js
-├── blocked-elements.json
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+ manifest.json
+ background.js
+ content.js
+ popup.html
+ popup.js
+ popup.css
+ options.html
+ options.js
+ blocked-elements.json
+ icons/
+     icon16.png
+     icon48.png
+     icon128.png
 ```
 
-### Manifest V3 Configuration
+Manifest V3 Configuration
 
 The manifest.json file is the heart of your Chrome extension. For a content blocker, we need to declare specific permissions and configure the appropriate extension type.
 
@@ -119,11 +119,11 @@ This manifest configuration includes several key components. The declarativeNetR
 
 ---
 
-## Implementing Network-Level Blocking {#network-blocking}
+Implementing Network-Level Blocking {#network-blocking}
 
 The declarativeNetRequest API is powerful but requires careful setup. Unlike older blocking methods, it uses static rules defined in a JSON file rather than dynamic rules for better performance and security.
 
-### Creating Blocking Rules
+Creating Blocking Rules
 
 Create a file named rules.json in your project directory:
 
@@ -191,7 +191,7 @@ Create a file named rules.json in your project directory:
 
 These rules block common advertising and tracking networks. Each rule has an ID, priority, action type, and condition. The urlFilter uses regular expressions to match URLs, and resourceTypes specifies what types of requests to block.
 
-### Registering Rules in Background Script
+Registering Rules in Background Script
 
 Now let's create the background.js to register these rules when the extension starts:
 
@@ -298,11 +298,11 @@ The background script handles rule registration and management. It includes func
 
 ---
 
-## Implementing DOM Element Hiding {#element-hiding}
+Implementing DOM Element Hiding {#element-hiding}
 
 Now let's implement the content script that handles DOM-level element hiding. This is where the "element hider chrome" functionality comes to life.
 
-### The Content Script
+The Content Script
 
 Create content.js to handle element hiding:
 
@@ -517,11 +517,11 @@ This content script handles the "element hider chrome" functionality comprehensi
 
 ---
 
-## Creating the User Interface {#user-interface}
+Creating the User Interface {#user-interface}
 
 A content blocker extension needs a user-friendly interface for managing settings. Let's create the popup and options pages.
 
-### The Popup Interface
+The Popup Interface
 
 Create popup.html:
 
@@ -599,7 +599,7 @@ Create popup.html:
 </html>
 ```
 
-### The Popup Styles
+The Popup Styles
 
 Create popup.css:
 
@@ -781,7 +781,7 @@ body {
 }
 ```
 
-### The Popup JavaScript
+The Popup JavaScript
 
 Create popup.js:
 
@@ -874,11 +874,11 @@ function loadStats() {
 
 ---
 
-## Advanced Features: Custom Element Rules {#advanced-features}
+Advanced Features: Custom Element Rules {#advanced-features}
 
 For power users, you should provide an options page where they can add custom selectors to hide specific elements on any website.
 
-### The Options Page
+The Options Page
 
 Create options.html:
 
@@ -1046,36 +1046,36 @@ function notifyAllTabs() {
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your content blocker extension in development mode.
 
-### Loading the Extension
+Loading the Extension
 
 1. Open Chrome and navigate to chrome://extensions/
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. The extension icon should appear in your toolbar
 
-### Testing Network Blocking
+Testing Network Blocking
 
 Visit websites with known advertisements (make sure to use test sites that don't have malicious content). Open the extension popup and verify that the blocked counts increase. Check the network tab in Chrome DevTools to see blocked requests.
 
-### Testing Element Hiding
+Testing Element Hiding
 
 Visit popular websites like YouTube, Twitter, or news sites. Verify that advertisements, cookie banners, and other unwanted elements are hidden. Test the custom selector functionality by adding your own selectors and verifying they work.
 
-### Testing the Options Page
+Testing the Options Page
 
 Open the options page from the popup. Add custom selectors and site-specific rules. Verify they apply correctly to different websites.
 
 ---
 
-## Publishing to the Chrome Web Store {#publishing}
+Publishing to the Chrome Web Store {#publishing}
 
 Once you've thoroughly tested your extension, you can publish it to the Chrome Web Store.
 
-### Creating Store Assets
+Creating Store Assets
 
 You'll need:
 - A 128x128 pixel icon (icon128.png)
@@ -1083,7 +1083,7 @@ You'll need:
 - A 920x680 pixel promotional image (optional)
 - A detailed description following SEO best practices
 
-### The Publishing Process
+The Publishing Process
 
 1. Create a developer account at the Chrome Web Store Developer Dashboard
 2. Zip your extension directory (excluding .git and test files)
@@ -1094,7 +1094,7 @@ You'll need:
    - Appropriate category and tags
 5. Submit for review
 
-### SEO Optimization for the Store
+SEO Optimization for the Store
 
 Your store listing should include:
 - Primary keyword: "content blocker extension" in the title
@@ -1104,7 +1104,7 @@ Your store listing should include:
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Congratulations! You've built a complete content blocker Chrome extension with both network-level blocking using the declarativeNetRequest API and DOM-level element hiding using content scripts. The extension includes:
 

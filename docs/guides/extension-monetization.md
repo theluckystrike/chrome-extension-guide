@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "Chrome Extension Monetization — Developer Guide"
+title: "Chrome Extension Monetization. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 ---
 # Extension Monetization Guide
 
-## Overview {#overview}
+Overview {#overview}
 - Strategies for generating revenue from Chrome extensions
 - Choose based on extension type, user base, and market
 - Most extensions require external [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processing since Chrome Web Store [payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) were deprecated in 2020
 
-## [Freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model {#[freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)-model}
+[Freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model {#[freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)-model}
 - Free tier with core features, paid tier with [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) features
 - Use `@theluckystrike/webext-storage` to store license state locally:
   ```typescript
@@ -29,7 +29,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 - Clear distinction between free and [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) features in UI
 - Upsell prompts at strategic points (e.g., after successful free actions)
 
-## One-Time Purchase {#one-time-purchase}
+One-Time Purchase {#one-time-purchase}
 - Chrome Web Store [payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) deprecated since 2020
 - External [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processors: [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), Paddle, Gumroad, LemonSqueezy
 - License key validation pattern:
@@ -51,7 +51,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 - Use `chrome.identity` for user verification when available
 - Store purchase confirmation locally after successful validation
 
-## [Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model {#[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)-model}
+[Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model {#[subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model)-model}
 - Monthly/yearly recurring [payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)
 - External billing via [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Subscriptions, Paddle, or Recurly
 - Server-side license checks required:
@@ -91,7 +91,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
   ```
 - Send reminder emails before trial ends
 
-## Donation-Based {#donation-based}
+Donation-Based {#donation-based}
 - Platforms: Ko-fi, Buy Me a Coffee, GitHub Sponsors, Patreon
 - Add donate button in popup or options page:
   ```html
@@ -103,16 +103,16 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 - Show appreciation for donors with subtle badge or thank-you message
 - Don't gate core functionality behind donation requests
 
-## Sponsorship and Partnerships {#sponsorship-and-partnerships}
+Sponsorship and Partnerships {#sponsorship-and-partnerships}
 - Affiliate links in new tab pages or toolbar popups
 - Sponsored default settings (with clear disclosure)
 - Partnership with SaaS tools (offer as integration option)
 - Native integrations with products users already use
 - Ensure partnerships align with user trust and extension purpose
 
-## Implementation Patterns {#implementation-patterns}
+Implementation Patterns {#implementation-patterns}
 
-### License Key Validation {#license-key-validation}
+License Key Validation {#license-key-validation}
 - User enters key in options page:
   ```typescript
   document.getElementById('activate-btn')?.addEventListener('click', async () => {
@@ -135,7 +135,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 - Re-validate periodically (e.g., daily or on extension startup)
 - Handle offline gracefully: use cached data, warn user
 
-### Feature Gating {#feature-gating}
+Feature Gating {#feature-gating}
 - Check license state before [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) features:
   ```typescript
   function canAccessPremium(): boolean {
@@ -168,7 +168,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
   });
   ```
 
-### User Identification {#user-identification}
+User Identification {#user-identification}
 - `chrome.identity.getProfileUserInfo` for Google account (requires [OAuth](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication)):
   ```typescript
   chrome.identity.getProfileUserInfo((userInfo) => {
@@ -191,18 +191,18 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
   ```
 - Link purchases to identity for cross-device access
 
-## What NOT To Do {#what-not-to-do}
+What NOT To Do {#what-not-to-do}
 - Never inject ads into web pages (CWS policy violation)
 - Never sell user data or browsing history
 - Never use crypto miners in extensions
 - Never change default search engines for money
 - Don't use deceptive UX (fake "close" buttons, hidden dismisses)
 - Avoid aggressive upselling that disrupts user experience
-- Respect CWS developer program policies — violations result in removal
+- Respect CWS developer program policies. violations result in removal
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Upgrade Prompt UI {#upgrade-prompt-ui}
+Upgrade Prompt UI {#upgrade-prompt-ui}
 ```html
 <div id="upgrade-banner" class="hidden">
   <p>Upgrade to [Premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) for unlimited access</p>
@@ -223,7 +223,7 @@ canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 </style>
 ```
 
-### License Check Middleware {#license-check-middleware}
+License Check Middleware {#license-check-middleware}
 ```typescript
 function withLicenseCheck(handler: Function) {
   return async (...args: any[]) => {
@@ -240,23 +240,23 @@ const premiumAction = withLicenseCheck(async (data) => {
 });
 ```
 
-## Cross-references {#cross-references}
-- `docs/publishing/publishing-guide.md` — Publishing to Chrome Web Store
-- `docs/guides/security-best-practices.md` — Secure storage and [authentication](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication)
-- `docs/patterns/state-management.md` — State management patterns
-- `docs/guides/identity-[oauth](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication).md` — Chrome Identity API for user [authentication](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication)
+Cross-references {#cross-references}
+- `docs/publishing/publishing-guide.md`. Publishing to Chrome Web Store
+- `docs/guides/security-best-practices.md`. Secure storage and [authentication](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication)
+- `docs/patterns/state-management.md`. State management patterns
+- `docs/guides/identity-[oauth](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication).md`. Chrome Identity API for user [authentication](https://bestchromeextensions.com/extension-monetization-playbook/monetization/authentication)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-- [How to Monetize Your Chrome Extension — Complete Guide](../guides/monetization-overview.md) — In-depth overview of every monetization model with code examples
-- [SaaS Pricing Strategies for Chrome Extensions](../monetization/saas-pricing.md) — Pricing tiers, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) design, and pricing psychology
-- [Competitor Analysis](../monetization/competitor-analysis.md) — Analyze competing extensions' pricing and positioning
-- [Market Research for Chrome Extensions](../monetization/market-research.md) — Validate demand before choosing a monetization model
-- [User Interviews](../monetization/user-interviews.md) — Understand willingness to pay through user conversations
-- [Product Roadmap](../monetization/product-roadmap.md) — Align your feature roadmap with revenue goals
-- [Listing Optimization](../publishing/listing-optimization.md) — Optimize your CWS listing for conversions
-- [A/B Testing](../guides/ab-testing.md) — Test pricing and upgrade prompts with real data
-- [[User Onboarding](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies)](../guides/extension-[onboarding](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies).md) — Convert installs into engaged users ready to upgrade
+- [How to Monetize Your Chrome Extension. Complete Guide](../guides/monetization-overview.md). In-depth overview of every monetization model with code examples
+- [SaaS Pricing Strategies for Chrome Extensions](../monetization/saas-pricing.md). Pricing tiers, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) design, and pricing psychology
+- [Competitor Analysis](../monetization/competitor-analysis.md). Analyze competing extensions' pricing and positioning
+- [Market Research for Chrome Extensions](../monetization/market-research.md). Validate demand before choosing a monetization model
+- [User Interviews](../monetization/user-interviews.md). Understand willingness to pay through user conversations
+- [Product Roadmap](../monetization/product-roadmap.md). Align your feature roadmap with revenue goals
+- [Listing Optimization](../publishing/listing-optimization.md). Optimize your CWS listing for conversions
+- [A/B Testing](../guides/ab-testing.md). Test pricing and upgrade prompts with real data
+- [[User Onboarding](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies)](../guides/extension-[onboarding](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies).md). Convert installs into engaged users ready to upgrade
 
 For implementation playbooks covering [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, license key systems, and paywall patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 

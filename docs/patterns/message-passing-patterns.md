@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Chrome Extension Message Passing Patterns — Request/Response, Port, and External Messaging"
+title: "Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging"
 description: "Master message passing in Chrome extensions with sendMessage, connect/port, onMessageExternal, and cross-extension messaging patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/message-passing-patterns/"
 ---
 
-# Chrome Extension Message Passing Patterns — Request/Response, Port, and External Messaging
+# Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging
 
-Chrome extensions use message passing as the primary mechanism for communication between different contexts. Whether you need to coordinate between content scripts and background scripts, communicate with external web pages, or enable cross-extension messaging, understanding these patterns is essential for building robust extensions.
+Chrome extensions use message passing as the primary mechanism for communication between different contexts. Whether you need to coordinate between content scripts and background scripts, communicate with external web pages, or enable cross-extension messaging, understanding these patterns is essential for building solid extensions.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 
 Ensure you have the required permissions in your manifest:
 
@@ -23,11 +23,11 @@ Ensure you have the required permissions in your manifest:
 
 ---
 
-## Request/Response with chrome.runtime.sendMessage {#sendmessage}
+Request/Response with chrome.runtime.sendMessage {#sendmessage}
 
 The simplest message passing pattern uses `chrome.runtime.sendMessage()` for one-time request/response communication. This is ideal for scenarios where you need a quick response and don't require a persistent connection.
 
-### Sending Messages from Content Scripts {#sendmessage-from-content}
+Sending Messages from Content Scripts {#sendmessage-from-content}
 
 Content scripts can communicate with the background service worker using `chrome.runtime.sendMessage()`:
 
@@ -52,7 +52,7 @@ async function fetchExtensionData(): Promise<DataResponse> {
 }
 ```
 
-### Receiving Messages in Background Scripts {#receive-message-background}
+Receiving Messages in Background Scripts {#receive-message-background}
 
 The background service worker listens for messages using `chrome.runtime.onMessage.addListener()`:
 
@@ -78,11 +78,11 @@ Note that returning `true` from the listener indicates you'll call `sendResponse
 
 ---
 
-## Long-Lived Connections with chrome.runtime.connect {#port-connections}
+Long-Lived Connections with chrome.runtime.connect {#port-connections}
 
 For scenarios requiring ongoing communication between contexts, use the connection-based API. This pattern creates a persistent port that stays open for continuous message exchange.
 
-### Establishing a Connection {#establish-connection}
+Establishing a Connection {#establish-connection}
 
 ```typescript
 // content-script.ts
@@ -96,7 +96,7 @@ port.onMessage.addListener((message) => {
 port.postMessage({ type: 'INIT', tabId: chrome.runtime.id });
 ```
 
-### Handling Connections in Background {#handle-connection}
+Handling Connections in Background {#handle-connection}
 
 ```typescript
 // background.ts
@@ -119,11 +119,11 @@ Long-lived connections are particularly useful for real-time features, streaming
 
 ---
 
-## External Messaging with onMessageExternal {#external-messaging}
+External Messaging with onMessageExternal {#external-messaging}
 
 Chrome extensions can receive messages from external sources, including web pages and other extensions. This requires explicitly declaring allowed origins.
 
-### Configuring External Messaging {#configure-external}
+Configuring External Messaging {#configure-external}
 
 In your manifest, specify which external origins can send messages:
 
@@ -136,7 +136,7 @@ In your manifest, specify which external origins can send messages:
 }
 ```
 
-### Listening for External Messages {#listen-external}
+Listening for External Messages {#listen-external}
 
 ```typescript
 // background.ts
@@ -155,7 +155,7 @@ chrome.runtime.onMessageExternal.addListener(
 );
 ```
 
-### Sending from External Web Pages {#send-from-external}
+Sending from External Web Pages {#send-from-external}
 
 ```javascript
 // From a web page
@@ -170,11 +170,11 @@ chrome.runtime.sendMessage(
 
 ---
 
-## Cross-Extension Messaging {#cross-extension}
+Cross-Extension Messaging {#cross-extension}
 
 Extensions can communicate with each other using cross-extension messaging. This is useful for extensions that work together or for sharing functionality.
 
-### Sending to Another Extension {#send-to-extension}
+Sending to Another Extension {#send-to-extension}
 
 ```typescript
 // Sending extension
@@ -189,7 +189,7 @@ async function sendToAnotherExtension(extensionId: string, message: Message) {
 }
 ```
 
-### Receiving from Another Extension {#receive-from-extension}
+Receiving from Another Extension {#receive-from-extension}
 
 The receiving extension uses the same `onMessageExternal` listener, as Chrome treats messages from other extensions as external:
 
@@ -210,11 +210,11 @@ chrome.runtime.onMessageExternal.addListener(
 
 ---
 
-## Error Handling Best Practices {#error-handling}
+Error Handling Best Practices {#error-handling}
 
 Robust error handling is critical for message passing. Here are essential patterns:
 
-### Timeout Handling {#timeout-handling}
+Timeout Handling {#timeout-handling}
 
 ```typescript
 async function sendWithTimeout<T>(
@@ -239,7 +239,7 @@ async function sendWithTimeout<T>(
 }
 ```
 
-### Connection Error Handling {#connection-errors}
+Connection Error Handling {#connection-errors}
 
 ```typescript
 const port = chrome.runtime.connect({ name: 'channel' });
@@ -260,6 +260,6 @@ port.onMessage.addListener((message) => {
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
-Message passing in Chrome extensions supports multiple patterns suited to different use cases. Use `chrome.runtime.sendMessage()` for simple request/response scenarios, establish persistent connections with `chrome.runtime.connect()` for ongoing communication, and leverage external and cross-extension messaging for broader integration needs. Always implement proper error handling and consider timeout strategies for production-quality extensions.
+Message passing in Chrome extensions supports multiple patterns suited to different use cases. Use `chrome.runtime.sendMessage()` for simple request/response scenarios, establish persistent connections with `chrome.runtime.connect()` for ongoing communication, and use external and cross-extension messaging for broader integration needs. Always implement proper error handling and consider timeout strategies for production-quality extensions.

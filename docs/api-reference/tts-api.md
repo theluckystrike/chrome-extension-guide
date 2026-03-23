@@ -9,11 +9,11 @@ canonical_url: "https://bestchromeextensions.com/api-reference/tts-api/"
 
 The `chrome.tts` API enables extensions to synthesize speech using the operating system's text-to-speech engine. This API is particularly useful for accessibility features, read-aloud functionality, language learning applications, and audio notifications.
 
-## Overview {#overview}
+Overview {#overview}
 
 The Text-to-Speech (TTS) API allows Chrome extensions to convert text into spoken words. The API provides fine-grained control over voice selection, speech rate, pitch, volume, and event handling for synchronized visual highlighting.
 
-**Permission Required:** Add `"tts"` to the `permissions` array in your `manifest.json`:
+Permission Required: Add `"tts"` to the `permissions` array in your `manifest.json`:
 
 ```json
 {
@@ -23,9 +23,9 @@ The Text-to-Speech (TTS) API allows Chrome extensions to convert text into spoke
 
 The API uses the system's available TTS voices, which vary by operating system and installed language packs.
 
-## API Methods {#api-methods}
+API Methods {#api-methods}
 
-### chrome.tts.speak() {#chromettsspeak}
+chrome.tts.speak() {#chromettsspeak}
 
 Speaks text using the TTS engine.
 
@@ -33,7 +33,7 @@ Speaks text using the TTS engine.
 chrome.tts.speak(utterance, options?, callback?)
 ```
 
-**Parameters:**
+Parameters:
 - `utterance` (string): The text to speak.
 - `options` (optional object): Speech options including:
   - `voiceName` (string): The name of the voice to use.
@@ -45,7 +45,6 @@ chrome.tts.speak(utterance, options?, callback?)
   - `onEvent` (function): Callback for speech events.
 - `callback` (optional function): Called when speaking begins.
 
-**Example:**
 ```javascript
 chrome.tts.speak('Hello, world!', {
   voiceName: 'Google US English',
@@ -59,7 +58,7 @@ chrome.tts.speak('Hello, world!', {
 });
 ```
 
-### chrome.tts.stop() {#chromettsstop}
+chrome.tts.stop() {#chromettsstop}
 
 Immediately stops any ongoing speech and clears the queue.
 
@@ -67,7 +66,6 @@ Immediately stops any ongoing speech and clears the queue.
 chrome.tts.stop()
 ```
 
-**Example:**
 ```javascript
 // Stop speaking after 3 seconds
 setTimeout(() => {
@@ -75,7 +73,7 @@ setTimeout(() => {
 }, 3000);
 ```
 
-### chrome.tts.pause() {#chromettspause}
+chrome.tts.pause() {#chromettspause}
 
 Pauses speech synthesis. Note: Not all TTS engines support pausing.
 
@@ -83,7 +81,7 @@ Pauses speech synthesis. Note: Not all TTS engines support pausing.
 chrome.tts.pause()
 ```
 
-### chrome.tts.resume() {#chromettsresume}
+chrome.tts.resume() {#chromettsresume}
 
 Resumes paused speech.
 
@@ -91,7 +89,7 @@ Resumes paused speech.
 chrome.tts.resume()
 ```
 
-### chrome.tts.isSpeaking() {#chromettsisspeaking}
+chrome.tts.isSpeaking() {#chromettsisspeaking}
 
 Checks whether the TTS engine is currently speaking.
 
@@ -99,17 +97,16 @@ Checks whether the TTS engine is currently speaking.
 chrome.tts.isSpeaking(callback)
 ```
 
-**Parameters:**
+Parameters:
 - `callback` (function): Called with a boolean indicating if speaking.
 
-**Example:**
 ```javascript
 chrome.tts.isSpeaking((speaking) => {
   console.log('Currently speaking:', speaking);
 });
 ```
 
-### chrome.tts.getVoices() {#chromettsgetvoices}
+chrome.tts.getVoices() {#chromettsgetvoices}
 
 Retrieves the list of available TTS voices.
 
@@ -117,10 +114,9 @@ Retrieves the list of available TTS voices.
 chrome.tts.getVoices(callback)
 ```
 
-**Parameters:**
+Parameters:
 - `callback` (function): Called with an array of TtsVoice objects.
 
-**Example:**
 ```javascript
 chrome.tts.getVoices((voices) => {
   voices.forEach(voice => {
@@ -129,18 +125,18 @@ chrome.tts.getVoices((voices) => {
 });
 ```
 
-## TtsVoice Object {#ttsvoice-object}
+TtsVoice Object {#ttsvoice-object}
 
 Represents a single available voice for speech synthesis.
 
-**Properties:**
+Properties:
 - `voiceName` (string): The name of the voice.
 - `lang` (string): The language code (e.g., "en-US").
 - `remote` (boolean): Whether the voice is a remote network voice.
 - `extensionId` (string): ID of the extension providing this voice (if applicable).
 - `eventTypes` (array): Supported event types for this voice.
 
-**Example Voice Object:**
+Example Voice Object:
 ```javascript
 {
   voiceName: 'Google US English',
@@ -151,11 +147,11 @@ Represents a single available voice for speech synthesis.
 }
 ```
 
-## Speech Events {#speech-events}
+Speech Events {#speech-events}
 
 The TTS API dispatches events during speech synthesis. Use the `onEvent` callback in `chrome.tts.speak()` to handle these events.
 
-### Event Types {#event-types}
+Event Types {#event-types}
 
 | Event | Description |
 |-------|-------------|
@@ -168,7 +164,7 @@ The TTS API dispatches events during speech synthesis. Use the `onEvent` callbac
 | `"cancelled"` | Fired when speech is removed from the queue before starting. |
 | `"error"` | Fired when an error occurs. Includes error message. |
 
-**Example with Event Handling:**
+Example with Event Handling:
 ```javascript
 chrome.tts.speak('Hello world, this is a test.', {
   onEvent: (event) => {
@@ -183,33 +179,33 @@ chrome.tts.speak('Hello world, this is a test.', {
 });
 ```
 
-## Use Cases {#use-cases}
+Use Cases {#use-cases}
 
-### Accessibility {#accessibility}
+Accessibility {#accessibility}
 - Screen reader support for visually impaired users
 - Audio feedback for keyboard navigation
 - Voice prompts for complex interfaces
 
-### Read-Aloud Features {#read-aloud-features}
+Read-Aloud Features {#read-aloud-features}
 - Reading articles or documents aloud
 - Email and message readers
 - E-book narration
 
-### Language Learning {#language-learning}
+Language Learning {#language-learning}
 - Pronunciation practice
 - Listening comprehension exercises
 - Vocabulary audio playback
 
-### Audio Notifications {#audio-notifications}
+Audio Notifications {#audio-notifications}
 - Silent push notification alternatives
 - Background task completion alerts
 - Time-based announcements
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
-### Basic TTS Usage {#basic-tts-usage}
+Basic TTS Usage {#basic-tts-usage}
 
-### Basic chrome.tts.speak Usage
+Basic chrome.tts.speak Usage
 
 ```javascript
 function speakText(text) {
@@ -223,7 +219,7 @@ function speakText(text) {
 speakText('Welcome to our extension!');
 ```
 
-### Voice Selection {#voice-selection}
+Voice Selection {#voice-selection}
 
 ```javascript
 function speakWithVoice(text, voiceName) {
@@ -241,7 +237,7 @@ function speakWithVoice(text, voiceName) {
 speakWithVoice('Hello!', 'Google UK English Male');
 ```
 
-### Queue Multiple Utterances {#queue-multiple-utterances}
+Queue Multiple Utterances {#queue-multiple-utterances}
 
 ```javascript
 function speakQueue(messages) {
@@ -260,7 +256,7 @@ function speakQueue(messages) {
 speakQueue(['First message', 'Second message', 'Third message']);
 ```
 
-### Word Highlighting with Events {#word-highlighting-with-events}
+Word Highlighting with Events {#word-highlighting-with-events}
 
 ```javascript
 function speakWithHighlighting(text) {
@@ -283,18 +279,18 @@ function highlightWord(word) {
 }
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 - [TTS Permission](../permissions/tts.md) - Configuration and permission details
 - [TTS Engine Permission](../permissions/ttsEngine.md) - Custom TTS engine development
 - [Accessibility Guide](../guides/accessibility.md) - Building accessible extensions
 - [chrome.ttsEngine API](https://developer.chrome.com/docs/extensions/reference/ttsEngine) - Custom TTS engine implementation
-## Frequently Asked Questions
+Frequently Asked Questions
 
-### How do I make Chrome speak text?
+How do I make Chrome speak text?
 Use chrome.tts.speak() with the text to speak. You can customize rate, pitch, and voice selection.
 
-### Can I pause and resume speech?
+Can I pause and resume speech?
 Yes, use chrome.tts.pause() and chrome.tts.resume() to control ongoing speech.
 
 ---

@@ -1,22 +1,22 @@
 ---
 layout: default
-title: "Chrome Extension Tab Manager — Developer Guide"
+title: "Chrome Extension Tab Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-manager/"
 ---
-# Build a Tab Manager Extension — Full Tutorial
+# Build a Tab Manager Extension. Full Tutorial
 
-## What We're Building {#what-were-building}
+What We're Building {#what-were-building}
 - Popup showing all open tabs with search/filter
 - Close, pin, group, and deduplicate tabs
 - Uses `[chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)`, `chrome.tabGroups`, `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging`
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
 - `npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging`
 
-## Step 1: manifest.json {#step-1-manifestjson}
+Step 1: manifest.json {#step-1-manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -28,13 +28,13 @@ canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-manager/"
 }
 ```
 
-## Step 2: Popup HTML/CSS {#step-2-popup-htmlcss}
+Step 2: Popup HTML/CSS {#step-2-popup-htmlcss}
 - Clean list view with search bar at top
 - Each tab row: favicon, title (truncated), close button, pin toggle
 - Tab groups shown with colored labels
 - Responsive to popup width (~350px)
 
-## Step 3: Popup JavaScript {#step-3-popup-javascript}
+Step 3: Popup JavaScript {#step-3-popup-javascript}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -63,7 +63,7 @@ searchInput.addEventListener('input', async (e) => {
 });
 ```
 
-## Step 4: Background Service Worker {#step-4-background-service-worker}
+Step 4: Background Service Worker {#step-4-background-service-worker}
 ```typescript
 const messenger = createMessenger<Messages>();
 
@@ -85,14 +85,14 @@ messenger.onMessage('groupTabs', async ({ tabIds, title }) => {
 });
 ```
 
-## Step 5: Features {#step-5-features}
-- **Search**: filter tabs by title/URL as you type
-- **Close**: remove individual tabs or "close duplicates"
-- **Pin/Unpin**: toggle pin state
-- **Group by domain**: auto-group tabs sharing the same domain
-- **Duplicate finder**: highlight tabs with identical URLs
+Step 5: Features {#step-5-features}
+- Search: filter tabs by title/URL as you type
+- Close: remove individual tabs or "close duplicates"
+- Pin/Unpin: toggle pin state
+- Group by domain: auto-group tabs sharing the same domain
+- Duplicate finder: highlight tabs with identical URLs
 
-## Step 6: Duplicate Detection {#step-6-duplicate-detection}
+Step 6: Duplicate Detection {#step-6-duplicate-detection}
 ```javascript
 function findDuplicates(tabs) {
   const urlMap = new Map();
@@ -105,18 +105,18 @@ function findDuplicates(tabs) {
 }
 ```
 
-## Step 7: Polish {#step-7-polish}
+Step 7: Polish {#step-7-polish}
 - Keyboard navigation (arrow keys to select tabs, Enter to switch, Delete to close)
 - Badge showing tab count: `chrome.action.setBadgeText({ text: String(tabs.length) })`
 - Remember last search query with `@theluckystrike/webext-storage`
 - Smooth transitions when closing/grouping
 
-## Testing {#testing}
+Testing {#testing}
 - Load unpacked from `chrome://extensions`
 - Open 10+ tabs, test search, close, group, dedup
-- Test with 100+ tabs — ensure performance is acceptable
+- Test with 100+ tabs. ensure performance is acceptable
 
-## What You Learned {#what-you-learned}
+What You Learned {#what-you-learned}
 - `[chrome.tabs](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` query, create, remove, update, group APIs
 - `chrome.tabGroups` for colored tab groups
 - Type-safe messaging between popup and background
@@ -124,7 +124,7 @@ function findDuplicates(tabs) {
 -e 
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) models, [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) architecture, and growth strategies for Chrome extension developers.
 ---
 

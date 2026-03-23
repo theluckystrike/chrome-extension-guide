@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Rollup Setup — Developer Guide"
+title: "Chrome Extension Rollup Setup. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/rollup-extension-setup/"
 ---
@@ -8,16 +8,16 @@ canonical_url: "https://bestchromeextensions.com/guides/rollup-extension-setup/"
 
 Rollup is a powerful JavaScript bundler that excels at producing highly optimized, tree-shaken bundles. While originally designed for libraries, it has become an excellent choice for Chrome extension development due to its fine-grained control over output and minimal bundle sizes.
 
-## Why Choose Rollup? {#why-choose-rollup}
+Why Choose Rollup? {#why-choose-rollup}
 
 There are several compelling reasons to use Rollup for Chrome extension development:
 
-- **Tree-shaking**: Rollup statically analyzes your code and removes unused exports, significantly reducing bundle size
-- **ES Module Support**: Native ES module output allows for modern JavaScript patterns
-- **Smaller Bundles**: Rollup's scope hoisting and module consolidation produce leaner output compared to other bundlers
-- **Plugin Ecosystem**: A rich ecosystem of official and community plugins specifically designed for extension development
+- Tree-shaking: Rollup statically analyzes your code and removes unused exports, significantly reducing bundle size
+- ES Module Support: Native ES module output allows for modern JavaScript patterns
+- Smaller Bundles: Rollup's scope hoisting and module consolidation produce leaner output compared to other bundlers
+- Plugin Ecosystem: A rich ecosystem of official and community plugins specifically designed for extension development
 
-## Project Setup {#project-setup}
+Project Setup {#project-setup}
 
 First, install the required dependencies:
 
@@ -26,7 +26,7 @@ npm install --save-dev rollup @rollup/plugin-node-resolve @rollup/plugin-commonj
 npm install typescript
 ```
 
-## Configuring rollup.config.js {#configuring-rollupconfigjs}
+Configuring rollup.config.js {#configuring-rollupconfigjs}
 
 Create a configuration file with multiple entry points for different extension contexts:
 
@@ -67,15 +67,15 @@ export default {
 };
 ```
 
-## Understanding Output Formats {#understanding-output-formats}
+Understanding Output Formats {#understanding-output-formats}
 
 Chrome extensions require different output formats for different contexts:
 
-- **Background Scripts**: Use ES modules (`format: 'es'`) for modern async patterns and module support
-- **Content Scripts**: Use IIFE (`format: 'iife'`) to run immediately in page context without module overhead
-- **Popup/Options Pages**: ES modules work well since they run in their own context
+- Background Scripts: Use ES modules (`format: 'es'`) for modern async patterns and module support
+- Content Scripts: Use IIFE (`format: 'iife'`) to run immediately in page context without module overhead
+- Popup/Options Pages: ES modules work well since they run in their own context
 
-## Handling CSS {#handling-css}
+Handling CSS {#handling-css}
 
 Use `rollup-plugin-postcss` to bundle CSS alongside your JavaScript:
 
@@ -89,7 +89,7 @@ postcss({
 
 This extracts CSS into a separate file that can be referenced in your HTML.
 
-## Copying Static Assets {#copying-static-assets}
+Copying Static Assets {#copying-static-assets}
 
 The `rollup-plugin-chrome-extension` automatically copies your `manifest.json`, icons, and HTML files to the output directory. Ensure your manifest references the correct output filenames:
 
@@ -102,7 +102,7 @@ The `rollup-plugin-chrome-extension` automatically copies your `manifest.json`, 
 }
 ```
 
-## Development Workflow {#development-workflow}
+Development Workflow {#development-workflow}
 
 Enable watch mode for rapid development:
 
@@ -112,7 +112,7 @@ npx rollup -c -w
 
 Combine with Chrome's built-in hot reload by packing the extension in developer mode, or use a dedicated dev server with live reload capabilities.
 
-## Production Builds {#production-builds}
+Production Builds {#production-builds}
 
 Create a production build with minification:
 
@@ -131,7 +131,7 @@ Configure your `package.json`:
 }
 ```
 
-## Comparison with Other Bundlers {#comparison-with-other-bundlers}
+Comparison with Other Bundlers {#comparison-with-other-bundlers}
 
 | Feature | Rollup | Webpack | Vite |
 |---------|--------|---------|------|
@@ -142,15 +142,15 @@ Configure your `package.json`:
 
 Rollup offers the best balance of bundle optimization and configuration control, though Webpack provides more flexibility for complex scenarios and Vite excels in developer experience.
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Vite Extension Setup](./vite-extension-setup.md) - Alternative modern bundler
 - [ESBuild Extension Setup](./esbuild-extension-setup.md) - Fastest bundler option
 - [TypeScript Extensions](./typescript-extensions.md) - Type-safe extension development
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Webpack Setup](../guides/webpack-extension-setup.md)
 - [Vite Setup](../guides/vite-extension-setup.md)

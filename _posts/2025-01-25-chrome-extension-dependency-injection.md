@@ -15,7 +15,7 @@ Dependency injection has become one of the most important software design patter
 
 ---
 
-## Understanding Dependency Injection {#understanding-dependency-injection}
+Understanding Dependency Injection {#understanding-dependency-injection}
 
 Dependency injection is a technique where an object receives other objects it depends on, rather than creating them internally. This inversion of control fundamentally changes how you structure your code and offers significant benefits for Chrome extension development.
 
@@ -60,25 +60,25 @@ const tabManager = new TabManager(storage, notifier);
 
 Now `TabManager` is decoupled from its dependencies. You can easily pass mock implementations during testing or swap the `NotificationService` for a different implementation without touching the `TabManager` class itself.
 
-### Why Dependency Injection Matters for Chrome Extensions
+Why Dependency Injection Matters for Chrome Extensions
 
 Chrome extensions present unique challenges that make dependency injection particularly valuable:
 
-**Multiple Entry Points**: Extensions have service workers, content scripts, popup pages, and options pages that all need to share functionality. DI provides a clean way to inject shared services across these different contexts.
+Multiple Entry Points: Extensions have service workers, content scripts, popup pages, and options pages that all need to share functionality. DI provides a clean way to inject shared services across these different contexts.
 
-**Complex Messaging Systems**: Chrome extensions rely heavily on message passing between components. DI helps organize the handlers and services that respond to these messages.
+Complex Messaging Systems: Chrome extensions rely heavily on message passing between components. DI helps organize the handlers and services that respond to these messages.
 
-**Testing Constraints**: Extensions run in a constrained browser environment. DI makes it possible to mock Chrome APIs and test business logic without actual browser context.
+Testing Constraints: Extensions run in a constrained browser environment. DI makes it possible to mock Chrome APIs and test business logic without actual browser context.
 
-**Version Migration**: As Chrome extension APIs evolve, you may need to swap implementations. DI makes this transition smoother by isolating API-specific code.
+Version Migration: As Chrome extension APIs evolve, you may need to swap implementations. DI makes this transition smoother by isolating API-specific code.
 
 ---
 
-## Setting Up Inversify in Your Extension {#setting-up-inversify}
+Setting Up Inversify in Your Extension {#setting-up-inversify}
 
 Inversify is a powerful dependency injection library for TypeScript and JavaScript. It provides a complete solution with features like constructor injection, property injection, decorators, and container management. Here's how to set it up in your Chrome extension.
 
-### Installation
+Installation
 
 First, install the required packages:
 
@@ -98,7 +98,7 @@ Add the following to your `tsconfig.json`:
 }
 ```
 
-### Creating Your Service Container
+Creating Your Service Container
 
 The Inversify container is the core of your dependency injection setup. It manages the registration and resolution of dependencies:
 
@@ -116,7 +116,7 @@ container.bind<TabManager>('TabManager').to(TabManager);
 export { container };
 ```
 
-### Defining Services with Decorators
+Defining Services with Decorators
 
 Inversify uses decorators to mark classes as injectable:
 
@@ -157,11 +157,11 @@ class NotificationServiceImpl implements NotificationService {
 
 ---
 
-## Implementing DI Patterns in Chrome Extension Components {#implementing-di-patterns}
+Implementing DI Patterns in Chrome Extension Components {#implementing-di-patterns}
 
 Now let's explore how to apply dependency injection across the different components of a Chrome extension.
 
-### Service Worker Implementation
+Service Worker Implementation
 
 The service worker is the background brain of your extension. Here's how to use DI there:
 
@@ -196,7 +196,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Content Script Integration
+Content Script Integration
 
 Content scripts run in the context of web pages. While they cannot directly use the Inversify container from your service worker, you can share code by organizing your services properly:
 
@@ -232,7 +232,7 @@ export class TabManagerImpl implements TabManager {
 }
 ```
 
-### Popup and Options Pages
+Popup and Options Pages
 
 For popup and options pages, create separate containers or use a singleton pattern:
 
@@ -248,9 +248,9 @@ controller.initialize();
 
 ---
 
-## Advanced DI Patterns for Extensions {#advanced-di-patterns}
+Advanced DI Patterns for Extensions {#advanced-di-patterns}
 
-### Using Symbols for Type Safety
+Using Symbols for Type Safety
 
 Instead of string-based identifiers, use TypeScript symbols for type-safe dependency keys:
 
@@ -266,7 +266,7 @@ const TYPES = {
 export { TYPES };
 ```
 
-### Lazy Injection
+Lazy Injection
 
 For services that are expensive to initialize or may not be needed, use lazy injection:
 
@@ -284,7 +284,7 @@ class ContentScriptController {
 }
 ```
 
-### Scoped Bindings
+Scoped Bindings
 
 Inversify supports different scoping strategies:
 
@@ -301,17 +301,9 @@ container.bind<RequestContext>('RequestContext').to(RequestContext).inRequestSco
 
 ---
 
-## Testing with Dependency Injection {#testing-with-di}
+Testing with Dependency Injection {#testing-with-di}
 
-One of the greatest benefits of dependency injection is improved testability. Here's how to leverage DI for testing your Chrome extension.
-
-### Creating Mock Services
-
-```typescript
-// tests/mocks/MockStorageService.ts
-@injectable()
-class MockStorageService implements StorageService {
-  private storage: Map<string, any> = new Map();
+One of the greatest benefits of dependency injection is improved testability. Map<string, any> = new Map();
 
   async get<T>(key: string): Promise<T | null> {
     return this.storage.get(key) ?? null;
@@ -327,7 +319,7 @@ class MockStorageService implements StorageService {
 }
 ```
 
-### Writing Unit Tests
+Writing Unit Tests
 
 ```typescript
 import { Container } from 'inversify';
@@ -370,9 +362,9 @@ describe('TabManager', () => {
 
 ---
 
-## Best Practices for DI in Chrome Extensions {#best-practices}
+Best Practices for DI in Chrome Extensions {#best-practices}
 
-### 1. Keep Containers Localized
+1. Keep Containers Localized
 
 Create separate containers for different extension contexts:
 
@@ -384,7 +376,7 @@ Create separate containers for different extension contexts:
 
 This prevents unintended sharing of state between contexts.
 
-### 2. Use Interface Segregation
+2. Use Interface Segregation
 
 Define clear interfaces for your services:
 
@@ -398,7 +390,7 @@ interface StorageService {
 
 This allows you to create different implementations for testing and production.
 
-### 3. Avoid Service Worker Memory Leaks
+3. Avoid Service Worker Memory Leaks
 
 Be careful with container scope in service workers, which can be recreated by Chrome:
 
@@ -409,12 +401,12 @@ const container = new Container();
 // ... configure container
 ```
 
-### 4. Document Your Bindings
+4. Document Your Bindings
 
 Create a clear binding documentation:
 
 ```typescript
-/**
+/
  * Service Container Bindings
  * 
  * Services:
@@ -429,9 +421,9 @@ Create a clear binding documentation:
 
 ---
 
-## Common Pitfalls and How to Avoid Them {#common-pitfalls}
+Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
-### Circular Dependencies
+Circular Dependencies
 
 Avoid circular dependencies between services. If Service A needs Service B and vice versa, refactor using an intermediary:
 
@@ -444,7 +436,7 @@ class B { constructor(a: A) {} }
 class C { constructor(a: A, b: B) {} }
 ```
 
-### Over-Injection
+Over-Injection
 
 Don't inject every single utility function. Simple utilities don't need DI:
 
@@ -463,7 +455,7 @@ function uppercase(str: string): string {
 }
 ```
 
-### Forgetting reflect-metadata
+Forgetting reflect-metadata
 
 Always import `reflect-metadata` before using Inversify:
 
@@ -475,7 +467,7 @@ import { Container } from 'inversify';
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Dependency injection transforms Chrome extension development by enabling clean separation of concerns, improved testability, and maintainable codebases. Using Inversify, you can implement professional-grade architecture that scales with your extension's complexity.
 
@@ -485,7 +477,7 @@ Start implementing DI in your extensions today, and you'll immediately see impro
 
 ---
 
-## Additional Resources
+Additional Resources
 
 - [Inversify Documentation](https://inversify.github.io/)
 - [Chrome Extension Architecture Overview](https://developer.chrome.com/docs/extensions/mv3/architecture-overview/)
@@ -493,11 +485,11 @@ Start implementing DI in your extensions today, and you'll immediately see impro
 
 ---
 
-## Real-World Example: Refactoring an Extension with DI {#real-world-example}
+Real-World Example: Refactoring an Extension with DI {#real-world-example}
 
 Let's walk through a practical example of how to refactor an existing Chrome extension to use dependency injection. This will demonstrate the transformation process and highlight the benefits at each step.
 
-### Before: Monolithic Extension Architecture
+Before: Monolithic Extension Architecture
 
 Consider a typical Chrome extension with tightly coupled code:
 
@@ -540,7 +532,7 @@ app.initialize();
 
 This code has several problems. The `TabSuspenderExtension` class knows too much about its dependencies. Testing requires mocking Chrome APIs or using the actual extension context. Adding new features means modifying the existing class. Different environments (testing, production) require different implementations of the same services.
 
-### After: Refactored with Dependency Injection
+After: Refactored with Dependency Injection
 
 Here's the same extension refactored to use dependency injection:
 
@@ -677,15 +669,15 @@ const bootstrap = container.get<ExtensionBootstrap>(TYPES.ExtensionBootstrap);
 bootstrap.initialize();
 ```
 
-### Benefits of the Refactored Architecture
+Benefits of the Refactored Architecture
 
 The refactored version offers substantial improvements. Each service has a single responsibility, making the code easier to understand and maintain. Testing becomes straightforward because you can inject mock implementations. The code is more flexible since swapping implementations doesn't require changes to consuming classes. Adding new features means creating new services rather than modifying existing ones. The architecture also scales better as the extension grows.
 
 ---
 
-## Container Management Strategies {#container-management}
+Container Management Strategies {#container-management}
 
-### Context-Aware Containers
+Context-Aware Containers
 
 Chrome extensions run in multiple contexts, each with its own JavaScript scope. Here's how to manage containers appropriately:
 
@@ -716,7 +708,7 @@ export function createPopupContainer(): Container {
 }
 ```
 
-### Sharing State Between Contexts
+Sharing State Between Contexts
 
 When you need to share state between extension contexts, use chrome.storage or message passing:
 
@@ -740,11 +732,11 @@ class SharedStateManager {
 
 ---
 
-## Performance Considerations {#performance-considerations}
+Performance Considerations {#performance-considerations}
 
 While dependency injection adds a layer of abstraction, proper implementation ensures minimal performance impact.
 
-### Container Resolution Caching
+Container Resolution Caching
 
 Inversify caches resolved services by default, eliminating repeated instantiation costs:
 
@@ -757,7 +749,7 @@ const service2 = container.get<MyService>(TYPES.MyService);
 console.log(service === service2); // true
 ```
 
-### Lazy Loading for Heavy Services
+Lazy Loading for Heavy Services
 
 For services that are resource-intensive, consider lazy loading:
 
@@ -777,11 +769,11 @@ class FeatureManager {
 
 ---
 
-## Migrating from Other DI Solutions {#migration-guide}
+Migrating from Other DI Solutions {#migration-guide}
 
 If you're currently using another dependency injection approach, here's how to migrate to Inversify.
 
-### From Manual DI
+From Manual DI
 
 If you're manually passing dependencies, transition gradually:
 
@@ -807,7 +799,7 @@ class ServiceA {
 }
 ```
 
-### From Angular DI
+From Angular DI
 
 If you're coming from Angular, Inversify provides a similar experience:
 
@@ -827,10 +819,10 @@ The main difference is that Inversify doesn't have Angular's hierarchical inject
 
 ---
 
-## Summary and Key Takeaways {#summary}
+Summary and Key Takeaways {#summary}
 
 Dependency injection represents a fundamental shift in how you structure Chrome extension code. By externalizing dependencies and using inversion of control, you create extensions that are cleaner, more testable, and easier to maintain.
 
-Key takeaways from this guide include understanding the core principles of dependency injection and how they apply to Chrome extensions. Implement Inversify as your DI container for TypeScript-based extensions. Structure your extension with clear service interfaces and implementations. Leverage DI for testing by creating mock implementations of Chrome API services. Avoid common pitfalls like circular dependencies and over-injection.
+Key takeaways from this guide include understanding the core principles of dependency injection and how they apply to Chrome extensions. Implement Inversify as your DI container for TypeScript-based extensions. Structure your extension with clear service interfaces and implementations. Use DI for testing by creating mock implementations of Chrome API services. Avoid common pitfalls like circular dependencies and over-injection.
 
 As your extension grows, the investment in proper DI architecture pays dividends in code quality and maintainability. Start small, refactor incrementally, and enjoy the benefits of a well-architected Chrome extension.

@@ -1,21 +1,21 @@
 ---
 layout: default
-title: "Chrome Extension Typed Storage Wrapper — Best Practices"
+title: "Chrome Extension Typed Storage Wrapper. Best Practices"
 description: "Type-safe storage wrappers for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/typed-storage-wrapper/"
 ---
 
 # Type-Safe Storage Wrapper Patterns
 
-## Problem Statement {#problem-statement}
+Problem Statement {#problem-statement}
 
 The `chrome.storage` API uses `any` types, which undermines TypeScript's type safety. When you retrieve data from storage, you lose compile-time guarantees about the shape of the data. This leads to runtime errors and makes refactoring risky.
 
-## Solution: TypeScript Wrapper with Schema {#solution-typescript-wrapper-with-schema}
+Solution: TypeScript Wrapper with Schema {#solution-typescript-wrapper-with-schema}
 
 Create a typed wrapper that enforces a schema at compile time and validates at runtime.
 
-## Defining Storage Schema Interface {#defining-storage-schema-interface}
+Defining Storage Schema Interface {#defining-storage-schema-interface}
 
 ```typescript
 interface StorageSchema {
@@ -36,7 +36,7 @@ interface StorageSchema {
 }
 ```
 
-## Type-Safe Get/Set with Defaults {#type-safe-getset-with-defaults}
+Type-Safe Get/Set with Defaults {#type-safe-getset-with-defaults}
 
 ```typescript
 class TypedStorage<T extends Record<string, unknown>> {
@@ -66,7 +66,7 @@ class TypedStorage<T extends Record<string, unknown>> {
 }
 ```
 
-## Namespace Isolation with Key Prefixes {#namespace-isolation-with-key-prefixes}
+Namespace Isolation with Key Prefixes {#namespace-isolation-with-key-prefixes}
 
 ```typescript
 class NamespacedStorage<T extends Record<string, unknown>> {
@@ -89,7 +89,7 @@ class NamespacedStorage<T extends Record<string, unknown>> {
 }
 ```
 
-## Migration Support with Version Field {#migration-support-with-version-field}
+Migration Support with Version Field {#migration-support-with-version-field}
 
 ```typescript
 interface StorageWithVersion {
@@ -123,7 +123,7 @@ class VersionedStorage<T extends StorageWithVersion> {
 }
 ```
 
-## Validation with Zod {#validation-with-zod}
+Validation with Zod {#validation-with-zod}
 
 ```typescript
 import { z } from 'zod';
@@ -157,7 +157,7 @@ class ValidatedStorage<T> {
 }
 ```
 
-## Atomic Read-Modify-Write Helper {#atomic-read-modify-write-helper}
+Atomic Read-Modify-Write Helper {#atomic-read-modify-write-helper}
 
 ```typescript
 async function atomicUpdate<T>(
@@ -172,7 +172,7 @@ async function atomicUpdate<T>(
 }
 ```
 
-## React useStorage Hook {#react-usestorage-hook}
+React useStorage Hook {#react-usestorage-hook}
 
 ```typescript
 import { useState, useEffect, useCallback } from 'react';
@@ -209,7 +209,7 @@ function useStorage<T>(key: string, defaultValue: T, area: 'local' | 'sync' = 'l
 }
 ```
 
-## Supporting Multiple Storage Areas {#supporting-multiple-storage-areas}
+Supporting Multiple Storage Areas {#supporting-multiple-storage-areas}
 
 ```typescript
 const storageAreas = {
@@ -219,9 +219,9 @@ const storageAreas = {
 } as const;
 ```
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md) - Comprehensive guide to chrome.storage API
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) - Comprehensive guide to chrome.storage API
 - [Storage Patterns](../reference/storage-patterns.md) - Additional storage patterns and best practices
 - [State Management](./state-management.md) - Managing application state across components
 -e 

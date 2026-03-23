@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Side Panel API — How to Build a Sidebar UI"
+title: "Chrome Extension Side Panel API. How to Build a Sidebar UI"
 description: "Learn how to build a sidebar UI in Chrome extensions using the chrome.sidePanel API. This guide covers manifest setup, open/close methods, per-tab panels, and UX patterns."
 canonical_url: "https://bestchromeextensions.com/guides/side-panel/"
 ---
 
-# Chrome Extension Side Panel API — How to Build a Sidebar UI
+# Chrome Extension Side Panel API. How to Build a Sidebar UI
 
-## Introduction {#introduction}
+Introduction {#introduction}
 
 The Chrome Side Panel API, introduced in Chrome 114, provides a modern way to create persistent sidebar UIs for your Chrome extension. Unlike popup windows that disappear when you click away, side panels remain open alongside the web page, giving users easy access to your extension's features without interrupting their browsing experience.
 
 This guide covers everything you need to build a sidebar UI: manifest configuration, the chrome.sidePanel API methods, per-tab panel customization, and UX best practices for creating a polished user experience.
 
-## Manifest Setup {#manifest-setup}
+Manifest Setup {#manifest-setup}
 
 To use the Side Panel API, you need to declare the `sidePanel` permission in your manifest.json and specify a default panel path.
 
@@ -31,11 +31,11 @@ To use the Side Panel API, you need to declare the `sidePanel` permission in you
 
 The `side_panel` key defines the default HTML file that loads when the side panel opens. This file should contain your complete sidebar UI, including any CSS and JavaScript needed for the panel's functionality.
 
-## The chrome.sidePanel API {#the-chromesidepanel-api}
+The chrome.sidePanel API {#the-chromesidepanel-api}
 
 The chrome.sidePanel API provides methods to control the side panel's behavior, content, and visibility. Here's an overview of the main methods:
 
-### Setting Panel Behavior {#setting-panel-behavior}
+Setting Panel Behavior {#setting-panel-behavior}
 
 By default, clicking the extension's toolbar icon opens the action popup. You can redirect this to open the side panel instead:
 
@@ -46,7 +46,7 @@ chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
 This single line changes the toolbar icon behavior to show the side panel when clicked. The panel persists open until the user explicitly closes it or navigates to a new tab where it's disabled.
 
-### Opening the Side Panel Programmatically {#opening-the-side-panel-programmatically}
+Opening the Side Panel Programmatically {#opening-the-side-panel-programmatically}
 
 You can open the side panel from your background script or content script using the `open()` method:
 
@@ -60,7 +60,7 @@ await chrome.sidePanel.open({ tabId: tab.id });
 
 The `open()` method requires a user gesture (such as a click or keyboard shortcut) to work. If you try to call it without a user gesture, it will fail silently or throw an error.
 
-### Setting Panel Options {#setting-panel-options}
+Setting Panel Options {#setting-panel-options}
 
 Use `setOptions()` to configure the panel's content and visibility:
 
@@ -79,7 +79,7 @@ chrome.sidePanel.setOptions({
 });
 ```
 
-### Getting Panel Options {#getting-panel-options}
+Getting Panel Options {#getting-panel-options}
 
 Retrieve the current panel configuration:
 
@@ -89,7 +89,7 @@ const options = await chrome.sidePanel.getOptions({ tabId: tab.id });
 console.log(options.path, options.enabled);
 ```
 
-## Per-Tab Side Panels {#per-tab-side-panels}
+Per-Tab Side Panels {#per-tab-side-panels}
 
 One of the most powerful features of the Side Panel API is the ability to show different content for different tabs. This is perfect for extensions that need context-aware content.
 
@@ -124,9 +124,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 This pattern allows your extension to provide relevant tools based on the current page, making the side panel feel intelligent and context-aware.
 
-## Closing the Side Panel {#closing-the-side-panel}
+Closing the Side Panel {#closing-the-side-panel}
 
-Users can close the side panel by clicking the close button (X) or by toggling it off. From code, you cannot directly close the side panel—the user must take action. However, you can disable it for specific tabs or windows:
+Users can close the side panel by clicking the close button (X) or by toggling it off. From code, you cannot directly close the side panel, the user must take action. However, you can disable it for specific tabs or windows:
 
 ```javascript
 // Disable side panel for a specific tab
@@ -136,9 +136,9 @@ chrome.sidePanel.setOptions({
 });
 ```
 
-## UX Patterns and Best Practices {#ux-patterns-and-best-practices}
+UX Patterns and Best Practices {#ux-patterns-and-best-practices}
 
-### Responsive Width Design {#responsive-width-design}
+Responsive Width Design {#responsive-width-design}
 
 Side panels have a default width, but users can resize them. Design your panel to handle varying widths gracefully:
 
@@ -159,12 +159,12 @@ body {
 }
 ```
 
-### Communication with the Active Tab {#communication-with-the-active-tab}
+Communication with the Active Tab {#communication-with-the-active-tab}
 
 Your side panel often needs to interact with the current page. Use message passing:
 
 ```javascript
-// sidepanel.js — Send message to content script
+// sidepanel.js. Send message to content script
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   chrome.tabs.sendMessage(tabs[0].id, { action: "getData" }, (response) => {
     console.log("Page data:", response);
@@ -173,7 +173,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 ```
 
 ```javascript
-// content-script.js — Listen for messages
+// content-script.js. Listen for messages
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "getData") {
     sendResponse({ data: document.title, url: window.location.href });
@@ -181,7 +181,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Persisting User Preferences {#persisting-user-preferences}
+Persisting User Preferences {#persisting-user-preferences}
 
 Store user settings and panel preferences using the storage API:
 
@@ -200,9 +200,9 @@ document.getElementById('theme-toggle').addEventListener('click', async () => {
 });
 ```
 
-### Keyboard Shortcuts Integration {#keyboard-shortcuts-integration}
+Keyboard Shortcuts Integration {#keyboard-shortcuts-integration}
 
-The side panel works seamlessly with keyboard shortcuts defined in your manifest:
+The side panel works smoothly with keyboard shortcuts defined in your manifest:
 
 ```json
 {
@@ -235,16 +235,16 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Common Issues and Solutions {#common-issues-and-solutions}
+Common Issues and Solutions {#common-issues-and-solutions}
 
-### Panel Not Opening {#panel-not-opening}
+Panel Not Opening {#panel-not-opening}
 
 If your side panel doesn't open, check these common issues:
 - Missing `sidePanel` permission in manifest
 - Incorrect path in `side_panel.default_path`
 - Calling `open()` without a user gesture
 
-### Content Script Not Running in Panel {#content-script-not-running-in-panel}
+Content Script Not Running in Panel {#content-script-not-running-in-panel}
 
 Side panel HTML files don't load content scripts automatically. If you need scripts in your panel, include them directly:
 
@@ -262,13 +262,13 @@ Side panel HTML files don't load content scripts automatically. If you need scri
 </html>
 ```
 
-### Memory Management {#memory-management}
+Memory Management {#memory-management}
 
 Since side panels persist, be mindful of memory usage:
 - Clean up event listeners when the panel unloads
 - Release resources when disabled for specific tabs
 - Use `chrome.tabs.onRemoved` to clean up tab-specific resources
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 The Side Panel API opens up new possibilities for Chrome extension UIs. By providing a persistent, context-aware sidebar, you can create more engaging and useful extensions that don't interrupt the user's workflow. Remember to test with different panel widths, integrate with keyboard shortcuts, and use per-tab panels to provide relevant content for each page your users visit.

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Undo Redo Patterns — Best Practices"
+title: "Chrome Extension Undo Redo Patterns. Best Practices"
 description: "Implement undo/redo functionality in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/undo-redo-patterns/"
 ---
@@ -9,7 +9,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/undo-redo-patterns/"
 
 This guide covers implementing undo/redo functionality in Chrome extensions using proven patterns.
 
-## Command Pattern {#command-pattern}
+Command Pattern {#command-pattern}
 
 The Command pattern is the foundation for undo/redo systems. Each action is wrapped as a command object:
 
@@ -36,7 +36,7 @@ class DeleteBookmarkCommand implements Command {
 }
 ```
 
-## Stack Management {#stack-management}
+Stack Management {#stack-management}
 
 Maintain two stacks: one for undo and one for redo:
 
@@ -74,9 +74,9 @@ class UndoManager {
 }
 ```
 
-## Snapshot vs Diff Approaches {#snapshot-vs-diff-approaches}
+Snapshot vs Diff Approaches {#snapshot-vs-diff-approaches}
 
-### Snapshot Approach {#snapshot-approach}
+Snapshot Approach {#snapshot-approach}
 Save complete state before each change. Simpler to implement:
 
 ```typescript
@@ -98,7 +98,7 @@ class SnapshotManager {
 }
 ```
 
-### Diff-Based Approach {#diff-based-approach}
+Diff-Based Approach {#diff-based-approach}
 Save only changes. More memory efficient for large states:
 
 ```typescript
@@ -124,7 +124,7 @@ class DiffManager {
 }
 ```
 
-## Storage Persistence {#storage-persistence}
+Storage Persistence {#storage-persistence}
 
 Serialize undo history to chrome.storage for persistence across sessions:
 
@@ -147,7 +147,7 @@ class PersistentUndoManager extends UndoManager {
 }
 ```
 
-## Keyboard Shortcuts {#keyboard-shortcuts}
+Keyboard Shortcuts {#keyboard-shortcuts}
 
 Register Ctrl+Z (undo) and Ctrl+Shift+Z or Ctrl+Y (redo) in manifest.json:
 
@@ -166,7 +166,7 @@ Register Ctrl+Z (undo) and Ctrl+Shift+Z or Ctrl+Y (redo) in manifest.json:
 }
 ```
 
-## UI: Undo Toast Notification {#ui-undo-toast-notification}
+UI: Undo Toast Notification {#ui-undo-toast-notification}
 
 Display a temporary toast with undo option:
 
@@ -186,18 +186,18 @@ function showUndoToast(message: string, onUndo: () => void): void {
 }
 ```
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. **Limit stack size**: Set maxDepth (50 recommended) to control memory
-2. **Batch operations**: Combine related small operations into single undoable actions
-3. **Handle destructive actions carefully**: Always store sufficient data to restore state
-4. **Persist critical undo history**: Use chrome.storage for important operations
-5. **Provide clear feedback**: Show undo toast for user actions
+1. Limit stack size: Set maxDepth (50 recommended) to control memory
+2. Batch operations: Combine related small operations into single undoable actions
+3. Handle destructive actions carefully: Always store sufficient data to restore state
+4. Persist critical undo history: Use chrome.storage for important operations
+5. Provide clear feedback: Show undo toast for user actions
 
-## Related Patterns {#related-patterns}
+Related Patterns {#related-patterns}
 
 - [State Management](./state-management.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
 - [Keyboard Shortcuts](../guides/keyboard-shortcuts.md)
 -e 
 ---

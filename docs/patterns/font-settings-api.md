@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Font Settings Api — Best Practices"
+title: "Chrome Extension Font Settings Api. Best Practices"
 description: "Access and modify user font settings with the Font Settings API."
 canonical_url: "https://bestchromeextensions.com/patterns/font-settings-api/"
 ---
 
 # Font Settings API in Chrome Extensions
 
-## Overview {#overview}
+Overview {#overview}
 
 The Chrome Font Settings API (`chrome.fontSettings`) enables extensions to read and modify user font preferences at the browser level. This guide covers eight practical patterns from basic font retrieval to accessibility-focused font injection.
 
 ---
 
-## Required Permission {#required-permission}
+Required Permission {#required-permission}
 
 ```json
 {
@@ -26,11 +26,11 @@ The Chrome Font Settings API (`chrome.fontSettings`) enables extensions to read 
 
 ---
 
-## Pattern 1: Font Settings API Basics {#pattern-1-font-settings-api-basics}
+Pattern 1: Font Settings API Basics {#pattern-1-font-settings-api-basics}
 
 The API supports six generic font families: `standard`, `sansserif`, `serif`, `fixed`, `cursive`, and `fantasy`.
 
-### Getting the Current Font {#getting-the-current-font}
+Getting the Current Font {#getting-the-current-font}
 
 ```ts
 // background.ts or options.ts
@@ -54,7 +54,7 @@ const sansSerifFont = await getCurrentFont("sansserif");
 console.log(`Current sans-serif: ${sansSerifFont.fontId}`);
 ```
 
-### Setting a Font {#setting-a-font}
+Setting a Font {#setting-a-font}
 
 ```ts
 async function setFont(
@@ -77,9 +77,9 @@ await setFont("fixed", "Fira Code");
 
 ---
 
-## Pattern 2: Reading Current Font Configuration {#pattern-2-reading-current-font-configuration}
+Pattern 2: Reading Current Font Configuration {#pattern-2-reading-current-font-configuration}
 
-### Getting All Installed Fonts {#getting-all-installed-fonts}
+Getting All Installed Fonts {#getting-all-installed-fonts}
 
 ```ts
 interface FontDescriptor {
@@ -107,7 +107,7 @@ async function populateFontDropdown(dropdownId: string): Promise<void> {
 }
 ```
 
-### Loading All Font Preferences {#loading-all-font-preferences}
+Loading All Font Preferences {#loading-all-font-preferences}
 
 ```ts
 // storage/fontConfig.ts
@@ -141,7 +141,7 @@ async function loadAllFontPreferences(): Promise<Record<string, string>> {
 }
 ```
 
-### Minimum Font Size {#minimum-font-size}
+Minimum Font Size {#minimum-font-size}
 
 ```ts
 async function getMinimumFontSize(): Promise<number> {
@@ -156,11 +156,11 @@ async function setMinimumFontSize(pixelSize: number): Promise<void> {
 
 ---
 
-## Pattern 3: Font Override by Script/Language {#pattern-3-font-override-by-scriptlanguage}
+Pattern 3: Font Override by Script/Language {#pattern-3-font-override-by-scriptlanguage}
 
 Script codes: `Jpan` (Japanese), `Hang` (Korean), `Hans` (Simplified Chinese), `Hant` (Traditional Chinese), `Arab` (Arabic), `Latn` (Latin).
 
-### Setting Script-Specific Fonts {#setting-script-specific-fonts}
+Setting Script-Specific Fonts {#setting-script-specific-fonts}
 
 ```ts
 const SCRIPT_CODES = {
@@ -183,7 +183,7 @@ async function configureMultilingualFonts(): Promise<void> {
 }
 ```
 
-### Getting Script Fonts {#getting-script-fonts}
+Getting Script Fonts {#getting-script-fonts}
 
 ```ts
 const AVAILABLE_SCRIPTS = [
@@ -207,9 +207,9 @@ async function getAllScriptFonts(genericFamily: string): Promise<Map<string, str
 
 ---
 
-## Pattern 4: Font Preferences UI {#pattern-4-font-preferences-ui}
+Pattern 4: Font Preferences UI {#pattern-4-font-preferences-ui}
 
-### Options Page HTML {#options-page-html}
+Options Page HTML {#options-page-html}
 
 ```html
 <!-- options.html -->
@@ -254,7 +254,7 @@ async function getAllScriptFonts(genericFamily: string): Promise<Map<string, str
 </html>
 ```
 
-### Options Page TypeScript {#options-page-typescript}
+Options Page TypeScript {#options-page-typescript}
 
 ```ts
 // options.ts
@@ -348,9 +348,9 @@ document.addEventListener("DOMContentLoaded", init);
 
 ---
 
-## Pattern 5: Per-Site Font Override via Content Script {#pattern-5-per-site-font-override-via-content-script}
+Pattern 5: Per-Site Font Override via Content Script {#pattern-5-per-site-font-override-via-content-script}
 
-### Storage Schema {#storage-schema}
+Storage Schema {#storage-schema}
 
 ```ts
 // storage/siteFonts.ts
@@ -371,7 +371,7 @@ export interface SiteFontRule {
 }
 ```
 
-### Content Script {#content-script}
+Content Script {#content-script}
 
 ```ts
 // content-scripts/fontOverride.ts
@@ -417,7 +417,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 document.addEventListener("DOMContentLoaded", applySiteFontOverrides);
 ```
 
-### Custom Fonts with @font-face {#custom-fonts-with-font-face}
+Custom Fonts with @font-face {#custom-fonts-with-font-face}
 
 ```ts
 function loadCustomFonts(): void {
@@ -436,9 +436,9 @@ function loadCustomFonts(): void {
 
 ---
 
-## Pattern 6: Reading Mode with Custom Typography {#pattern-6-reading-mode-with-custom-typography}
+Pattern 6: Reading Mode with Custom Typography {#pattern-6-reading-mode-with-custom-typography}
 
-### Storage {#storage}
+Storage {#storage}
 
 ```ts
 // storage/readingMode.ts
@@ -457,7 +457,7 @@ const readingModeSchema = defineSchema({
 export const readingModeStorage = createStorage(readingModeSchema);
 ```
 
-### Content Script {#content-script}
+Content Script {#content-script}
 
 ```ts
 // content-scripts/readingMode.ts
@@ -518,7 +518,7 @@ readingModeStorage.get("enabled").then(enabled => {
 });
 ```
 
-### Background Script for Toggle {#background-script-for-toggle}
+Background Script for Toggle {#background-script-for-toggle}
 
 ```ts
 // background.ts
@@ -538,7 +538,7 @@ chrome.commands.onCommand.addListener(async (cmd) => {
 
 ---
 
-## Pattern 7: Font Change Monitoring {#pattern-7-font-change-monitoring}
+Pattern 7: Font Change Monitoring {#pattern-7-font-change-monitoring}
 
 ```ts
 // background.ts / listeners/fontChangeListener.ts
@@ -597,9 +597,9 @@ function startPolling(): void {
 
 ---
 
-## Pattern 8: Accessibility Font Patterns {#pattern-8-accessibility-font-patterns}
+Pattern 8: Accessibility Font Patterns {#pattern-8-accessibility-font-patterns}
 
-### Dyslexia-Friendly Mode {#dyslexia-friendly-mode}
+Dyslexia-Friendly Mode {#dyslexia-friendly-mode}
 
 ```ts
 // content-scripts/dyslexiaFont.ts
@@ -642,7 +642,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-### High Readability Mode {#high-readability-mode}
+High Readability Mode {#high-readability-mode}
 
 ```ts
 // content-scripts/highReadability.ts
@@ -677,7 +677,7 @@ async function applyHighReadability(): Promise<void> {
 }
 ```
 
-### System Preference Detection {#system-preference-detection}
+System Preference Detection {#system-preference-detection}
 
 ```ts
 function getSystemPreferences() {
@@ -696,20 +696,20 @@ window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change",
 
 ---
 
-## Summary Table {#summary-table}
+Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|
-| **1. Basics** | Read/write font preferences | `getFont()`, `setFont()` |
-| **2. Configuration** | Enumerate fonts, system defaults | `getFontList()`, `getMinimumFontSize()` |
-| **3. Script Override** | CJK/multilingual support | Script-specific `setFont()` |
-| **4. Preferences UI** | Options page with preview | Storage + UI handlers |
-| **5. Per-Site Override** | Domain-specific fonts | Content script + CSS |
-| **6. Reading Mode** | Distraction-free reading | Typography settings |
-| **7. Change Monitoring** | Real-time sync | `onFontChanged`, `onMinimumFontSizeChanged` |
-| **8. Accessibility** | Dyslexia, high readability | Font injection + system prefs |
+| 1. Basics | Read/write font preferences | `getFont()`, `setFont()` |
+| 2. Configuration | Enumerate fonts, system defaults | `getFontList()`, `getMinimumFontSize()` |
+| 3. Script Override | CJK/multilingual support | Script-specific `setFont()` |
+| 4. Preferences UI | Options page with preview | Storage + UI handlers |
+| 5. Per-Site Override | Domain-specific fonts | Content script + CSS |
+| 6. Reading Mode | Distraction-free reading | Typography settings |
+| 7. Change Monitoring | Real-time sync | `onFontChanged`, `onMinimumFontSizeChanged` |
+| 8. Accessibility | Dyslexia, high readability | Font injection + system prefs |
 
-### Quick Reference {#quick-reference}
+Quick Reference {#quick-reference}
 
 ```ts
 // Permission: "fontSettings"
@@ -729,14 +729,14 @@ chrome.fontSettings.onFontChanged.addListener(e => {});
 chrome.fontSettings.onMinimumFontSizeChanged.addListener(e => {});
 ```
 
-### Best Practices {#best-practices}
+Best Practices {#best-practices}
 
-1. Request only necessary permissions — `fontSettings` triggers a warning
+1. Request only necessary permissions. `fontSettings` triggers a warning
 2. Cache preferences with `@theluckystrike/webext-storage` for performance
-3. Handle errors gracefully — fonts may not exist on all systems
-4. Respect user preferences — don't override without consent
+3. Handle errors gracefully. fonts may not exist on all systems
+4. Respect user preferences. don't override without consent
 5. Test multilingual scripts thoroughly
-6. Provide accessibility options — dyslexia mode, high contrast
+6. Provide accessibility options. dyslexia mode, high contrast
 -e 
 ---
 

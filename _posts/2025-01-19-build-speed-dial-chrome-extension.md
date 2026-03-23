@@ -17,52 +17,52 @@ The concept of speed dial originated in web browsers as a way to provide instant
 
 ---
 
-## Understanding Speed Dial Extensions {#understanding-speed-dial}
+Understanding Speed Dial Extensions {#understanding-speed-dial}
 
 A speed dial extension fundamentally serves as a visual launcher for your most frequently visited websites. Unlike traditional bookmarks that hide behind menus, speed dials present your favorite sites as clickable tiles on the new tab page or within the extension popup. This immediate accessibility makes them invaluable for users who need to switch between multiple web applications throughout their day.
 
-### Core Features of Speed Dial Extensions
+Core Features of Speed Dial Extensions
 
 The most successful speed dial extensions share several common features that make them useful for everyday browsing. First and foremost is the grid-based display system that shows website thumbnails or favicons in an organized layout. This visual approach allows users to recognize sites by their appearance rather than remembering URLs or bookmark names.
 
-Quick access functionality represents another critical component. Users should be able to open any speed dial site with a single click, whether they are using the extension popup or the new tab page. This seamless experience eliminates the friction of navigating through multiple menus to reach frequently used resources.
+Quick access functionality represents another critical component. Users should be able to open any speed dial site with a single click, whether they are using the extension popup or the new tab page. This smooth experience eliminates the friction of navigating through multiple menus to reach frequently used resources.
 
 Customization options distinguish premium speed dial extensions from basic implementations. Users typically expect the ability to add or remove dials, rearrange their positions, and customize the visual appearance through themes or background images. Some extensions even support importing existing browser bookmarks to populate the speed dial automatically.
 
 ---
 
-## Project Setup and Manifest Configuration {#project-setup}
+Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest file, which defines the extension's capabilities and permissions. For our speed dial extension, we will use Manifest V3, which offers improved security and performance compared to older versions.
 
-### Creating the Project Structure
+Creating the Project Structure
 
 First, create a new directory for your speed dial extension project. Within this directory, create the following folder structure:
 
 ```
 speed-dial-extension/
-├── manifest.json
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js
-├── newtab/
-│   ├── newtab.html
-│   ├── newtab.css
-│   └── newtab.js
-├── background/
-│   └── background.js
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── styles/
-    └── common.css
+ manifest.json
+ popup/
+    popup.html
+    popup.css
+    popup.js
+ newtab/
+    newtab.html
+    newtab.css
+    newtab.js
+ background/
+    background.js
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ styles/
+     common.css
 ```
 
 This structure separates different components of the extension, making it easier to maintain and expand later. The popup folder handles the extension's popup interface, while the newtab folder contains the new tab page implementation.
 
-### Writing the Manifest File
+Writing the Manifest File
 
 The manifest.json file defines how Chrome loads and interacts with your extension. Here is a complete Manifest V3 configuration for our speed dial extension:
 
@@ -104,11 +104,11 @@ The permissions array includes storage for saving user preferences and dial conf
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup interface provides quick access to your speed dials without leaving the current page. This lightweight interface appears when users click the extension icon in the Chrome toolbar.
 
-### HTML Structure
+HTML Structure
 
 Create the popup.html file with a clean, grid-based layout:
 
@@ -126,7 +126,7 @@ Create the popup.html file with a clean, grid-based layout:
     <header class="popup-header">
       <h1>Speed Dial</h1>
       <button id="settings-btn" class="icon-btn" aria-label="Settings">
-        ⚙️
+        
       </button>
     </header>
     
@@ -164,7 +164,7 @@ Create the popup.html file with a clean, grid-based layout:
 </html>
 ```
 
-### Styling the Popup
+Styling the Popup
 
 The popup.css file provides attractive styling for the interface:
 
@@ -369,7 +369,7 @@ body {
 }
 ```
 
-### Implementing Popup Functionality
+Implementing Popup Functionality
 
 The popup.js file handles all user interactions:
 
@@ -498,11 +498,11 @@ function openSettings() {
 
 ---
 
-## Creating the New Tab Page {#new-tab-page}
+Creating the New Tab Page {#new-tab-page}
 
 The new tab page provides a full-screen speed dial experience when users open a new tab. This is often the primary interface for speed dial extensions.
 
-### New Tab HTML Structure
+New Tab HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -538,7 +538,7 @@ The new tab page provides a full-screen speed dial experience when users open a 
 </html>
 ```
 
-### New Tab Styling
+New Tab Styling
 
 ```css
 body {
@@ -649,7 +649,7 @@ body {
 }
 ```
 
-### New Tab JavaScript
+New Tab JavaScript
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -725,29 +725,29 @@ function getDefaultIcon(title) {
 
 ---
 
-## Advanced Features and Enhancements {#advanced-features}
+Advanced Features and Enhancements {#advanced-features}
 
 Now that you have a functional speed dial extension, consider adding these advanced features to make it more powerful and user-friendly.
 
-### Drag and Drop Reordering
+Drag and Drop Reordering
 
 Implementing drag and drop allows users to organize their speed dials intuitively. You can use the HTML5 Drag and Drop API to enable this functionality. The key is to track the position of each dial tile and update the storage when the user rearranges them.
 
-### Automatic Thumbnail Generation
+Automatic Thumbnail Generation
 
 Instead of using static icons, you can generate live thumbnails of websites using the chrome.tabCapture API or by taking screenshots of loaded pages. This provides users with visual confirmation of their bookmarks and makes the interface more engaging.
 
-### Background Sync and Cloud Storage
+Background Sync and Cloud Storage
 
-Integrating cloud synchronization allows users to access their speed dial configurations across multiple devices. You can implement this using a backend service or leverage Chrome's sync storage API which automatically syncs data across all devices where the user is signed in.
+Integrating cloud synchronization allows users to access their speed dial configurations across multiple devices. You can implement this using a backend service or use Chrome's sync storage API which automatically syncs data across all devices where the user is signed in.
 
-### Import from Bookmarks
+Import from Bookmarks
 
 The bookmarks permission allows importing existing browser bookmarks into your speed dial. This is an excellent feature for users who want to migrate their bookmarked sites to a speed dial interface without manually re-entering each URL.
 
 ---
 
-## Testing and Debugging Your Extension {#testing-debugging}
+Testing and Debugging Your Extension {#testing-debugging}
 
 Before distributing your extension, thorough testing ensures a smooth user experience. Load your extension in developer mode through chrome://extensions, enable developer mode, and use the "Load unpacked" button to select your extension directory.
 
@@ -755,7 +755,7 @@ Test all core functionality including adding and removing dials, opening URLs, a
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 Once testing is complete, you can publish your extension to the Chrome Web Store. Create a developer account, package your extension using the "Pack extension" button in chrome://extensions, and upload the package through the Chrome Web Store developer dashboard. Ensure your listing includes clear descriptions, appropriate screenshots, and relevant keywords to improve discoverability.
 

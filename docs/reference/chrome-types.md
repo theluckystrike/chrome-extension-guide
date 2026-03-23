@@ -100,12 +100,12 @@ type Messages = {
 
 const m = createMessenger<Messages>();
 
-// Fully typed — TypeScript knows request/response shapes
+// Fully typed. TypeScript knows request/response shapes
 const user = await m.sendMessage('GET_USER', { userId: '123' });
 // user: { name: string; email: string }
 
 m.onMessage('TOGGLE_FEATURE', async ({ feature, enabled }) => {
-  // feature: string, enabled: boolean — typed!
+  // feature: string, enabled: boolean. typed!
   return { ok: true };
 });
 ```
@@ -194,9 +194,9 @@ const all: string[] = listPermissions();
 
 ## Tips {#tips}
 - Always use `tab.id!` with non-null assertion only when you're sure ID exists
-- `url`, `title`, `favIconUrl` on Tab require `tabs` permission — otherwise undefined
+- `url`, `title`, `favIconUrl` on Tab require `tabs` permission. otherwise undefined
 - Use `chrome.tabs.Tab` not `Tab` to avoid conflicts with DOM `Tab`
-- `@types/chrome` is community-maintained — may lag behind Chrome releases
+- `@types/chrome` is community-maintained. may lag behind Chrome releases
 
 ## Cross-References {#cross-references}
 - Reference: `docs/reference/storage-patterns.md`

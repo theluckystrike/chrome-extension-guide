@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension User Onboarding — Developer Guide"
+title: "Chrome Extension User Onboarding. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/user-onboarding/"
 ---
@@ -8,11 +8,11 @@ canonical_url: "https://bestchromeextensions.com/guides/user-onboarding/"
 
 A comprehensive guide to designing effective onboarding experiences for Chrome extensions that drive user adoption and retention.
 
-## Overview {#overview}
+Overview {#overview}
 
 First impressions are critical in determining whether users continue using your extension or uninstall it within the first few minutes. A well-designed onboarding experience guides users through initial setup, demonstrates value quickly, and reduces the overall uninstall rate. This guide covers best practices for creating onboarding flows that educate users, request permissions appropriately, and set expectations for ongoing value.
 
-## onInstalled Welcome Page {#oninstalled-welcome-page}
+onInstalled Welcome Page {#oninstalled-welcome-page}
 
 The `onInstalled` event is the entry point for your onboarding experience. When a user installs your extension, you can automatically open a welcome page that guides them through setup.
 
@@ -31,19 +31,19 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 The `details.reason` property distinguishes between fresh installations and updates, allowing you to tailor the experience accordingly.
 
-## Onboarding Page Design {#onboarding-page-design}
+Onboarding Page Design {#onboarding-page-design}
 
 Effective onboarding pages share several key characteristics that maximize user engagement and comprehension:
 
-**Keep it concise** - Limit your onboarding flow to 3-5 steps maximum. Users are more likely to complete shorter flows and retain information presented in smaller chunks.
+Keep it concise - Limit your onboarding flow to 3-5 steps maximum. Users are more likely to complete shorter flows and retain information presented in smaller chunks.
 
-**Demonstrate value immediately** - The first screen should clearly communicate what your extension does and why the user should care. Use screenshots, GIFs, or short videos to show the extension in action.
+Demonstrate value immediately - The first screen should clearly communicate what your extension does and why the user should care. Use screenshots, GIFs, or short videos to show the extension in action.
 
-**Request permissions strategically** - When requesting optional permissions, provide clear explanations of why each permission is needed and how it benefits the user. Always allow users to skip optional permissions.
+Request permissions strategically - When requesting optional permissions, provide clear explanations of why each permission is needed and how it benefits the user. Always allow users to skip optional permissions.
 
-**Enable preference configuration** - Let users configure basic preferences during onboarding. This creates a sense of personalization and investment in your extension.
+Enable preference configuration - Let users configure basic preferences during onboarding. This creates a sense of personalization and investment in your extension.
 
-**Include clear call-to-action** - The final step should have a prominent button that transitions users to the main application experience.
+Include clear call-to-action - The final step should have a prominent button that transitions users to the main application experience.
 
 ```html
 <!-- onboarding.html - Multi-step wizard structure -->
@@ -89,11 +89,11 @@ Effective onboarding pages share several key characteristics that maximize user 
 </html>
 ```
 
-## Progressive Disclosure {#progressive-disclosure}
+Progressive Disclosure {#progressive-disclosure}
 
 Rather than overwhelming users with all features at once, implement progressive disclosure to reveal functionality as users explore your extension. This approach reduces initial cognitive load and encourages continued discovery.
 
-**Tooltip-style hints** - Show contextual tooltips when users first encounter specific features. These hints should appear on the first use and can be dismissed or permanently hidden by the user.
+Tooltip-style hints - Show contextual tooltips when users first encounter specific features. These hints should appear on the first use and can be dismissed or permanently hidden by the user.
 
 ```javascript
 // Feature tooltip system
@@ -147,7 +147,7 @@ class FeatureTooltip {
 }
 ```
 
-**Badge notifications** - Use badge notifications to draw attention to undiscovered features. Display a badge on UI elements that have new or unused features:
+Badge notifications - Use badge notifications to draw attention to undiscovered features. Display a badge on UI elements that have new or unused features:
 
 ```javascript
 // Feature discovery via badge notifications
@@ -176,11 +176,11 @@ function showBadge(elementId, text) {
 }
 ```
 
-## Permission Requests {#permission-requests}
+Permission Requests {#permission-requests}
 
 Requesting permissions requires careful consideration to maintain user trust. Always explain each permission in plain language and provide graceful degradation when users decline.
 
-**Request from user gesture** - Always trigger permission requests from explicit user actions like button clicks. This ensures the request appears in the browser's context and improves approval rates.
+Request from user gesture - Always trigger permission requests from explicit user actions like button clicks. This ensures the request appears in the browser's context and improves approval rates.
 
 ```javascript
 // Permission request with explanation UI
@@ -217,9 +217,9 @@ function enableLimitedMode() {
 }
 ```
 
-**Allow skipping gracefully** - Design your extension to function (perhaps with reduced functionality) when users decline permissions. This approach builds trust and prevents users from feeling pressured.
+Allow skipping gracefully - Design your extension to function (perhaps with reduced functionality) when users decline permissions. This approach builds trust and prevents users from feeling pressured.
 
-## Update Notifications {#update-notifications}
+Update Notifications {#update-notifications}
 
 When your extension updates, users may miss new features or breaking changes. Show a changelog notification to keep users informed:
 
@@ -256,7 +256,7 @@ function showUpdateNotification(changelog) {
 }
 ```
 
-## Tracking Completion {#tracking-completion}
+Tracking Completion {#tracking-completion}
 
 Store onboarding state using `@theluckystrike/webext-storage` to track progress and enable users to resume where they left off. This is especially valuable for multi-step onboarding flows.
 
@@ -323,39 +323,39 @@ async function initOnboarding() {
 }
 ```
 
-**Don't repeat completed steps** - Always check stored state before showing onboarding content. If a user has completed certain steps, skip them automatically while allowing manual review if desired.
+Don't repeat completed steps - Always check stored state before showing onboarding content. If a user has completed certain steps, skip them automatically while allowing manual review if desired.
 
-## Code Examples {#code-examples}
+Code Examples {#code-examples}
 
 The following examples demonstrate complete implementations of key onboarding patterns:
 
-### Multi-Step Wizard Welcome Page {#multi-step-wizard-welcome-page}
+Multi-Step Wizard Welcome Page {#multi-step-wizard-welcome-page}
 
 A full implementation of a step-by-step wizard that guides users through setup with progress tracking and state persistence.
 
-### Permission Request with Explanation UI {#permission-request-with-explanation-ui}
+Permission Request with Explanation UI {#permission-request-with-explanation-ui}
 
 Demonstrates how to present permission requests with clear explanations and graceful fallback when users decline.
 
-### Feature Tooltip System {#feature-tooltip-system}
+Feature Tooltip System {#feature-tooltip-system}
 
 Shows contextual hints that appear on first use, track dismissal state, and can be revisited by users.
 
-### Update Changelog Notification {#update-changelog-notification}
+Update Changelog Notification {#update-changelog-notification}
 
 Implements automatic changelog display when users install updates, keeping them informed of new features.
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 For more information on related topics, consult these additional guides:
 
-- **[Extension Updates](../guides/extension-updates.md)** - Best practices for managing update flows and maintaining backward compatibility
-- **[State Management Patterns](../patterns/state-management.md)** - Comprehensive guide to storing and retrieving extension state
-- **[Listing Optimization](../publishing/listing-optimization.md)** - Tips for optimizing your Chrome Web Store listing to improve conversion rates
+- [Extension Updates](../guides/extension-updates.md) - Best practices for managing update flows and maintaining backward compatibility
+- [State Management Patterns](../patterns/state-management.md) - Comprehensive guide to storing and retrieving extension state
+- [Listing Optimization](../publishing/listing-optimization.md) - Tips for optimizing your Chrome Web Store listing to improve conversion rates
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [Onboarding Patterns](../patterns/extension-onboarding.md)
 - [User Research](../guides/chrome-extension-user-research.md)
@@ -363,7 +363,7 @@ For more information on related topics, consult these additional guides:
 ---
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), and [user onboarding strategies](https://bestchromeextensions.com/extension-monetization-playbook/growth/onboarding-strategies) that convert free users to paid.
 
 ---

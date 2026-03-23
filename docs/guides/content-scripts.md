@@ -88,7 +88,7 @@ For more complex matching, use `include_globs` and `exclude_globs`:
 
 Glob patterns support:
 - `*` - Matches anything except `/`
-- `**` - Matches anything including `/`
+- `` - Matches anything including `/`
 - `?` - Matches single character
 - `[]` - Character classes
 
@@ -423,10 +423,10 @@ new MutationObserver(() => {
 
 ### Techniques
 
-1. **Use `run_at: document_idle`** - Don't block page load
-2. **Lazy load features** - Only inject when needed
-3. **Use CSS selectors efficiently** - Avoid expensive queries
-4. **Debounce observers** - Limit mutation callback frequency
+1. Use `run_at: document_idle` - Don't block page load
+2. Lazy load features - Only inject when needed
+3. Use CSS selectors efficiently - Avoid expensive queries
+4. Debounce observers - Limit mutation callback frequency
 
 ```typescript
 // Debounced observer
@@ -443,9 +443,9 @@ const observer = new MutationObserver(
 );
 ```
 
-5. **Remove observers when done** - Always disconnect
-6. **Use `contains`** instead of deep selectors when possible
-7. **Cache DOM queries** - Store references, don't query repeatedly
+5. Remove observers when done - Always disconnect
+6. Use `contains` instead of deep selectors when possible
+7. Cache DOM queries - Store references, don't query repeatedly
 
 ## Avoiding Conflicts with Page JavaScript
 

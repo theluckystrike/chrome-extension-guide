@@ -1,20 +1,20 @@
 ---
 layout: default
-title: "Chrome Extension Page Speed Analyzer — Developer Guide"
+title: "Chrome Extension Page Speed Analyzer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-speed-analyzer/"
 ---
 # Build a Page Speed Analyzer Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 A Chrome extension that analyzes page performance using the Performance API, displays metrics (FCP, LCP, CLS, FID, TTFB), shows resource breakdown, calculates performance scores, tracks history, and provides recommendations.
 
-## Prerequisites {#prerequisites}
+Prerequisites {#prerequisites}
 - Performance API (cross-ref `docs/guides/performance.md`)
 - Web Navigation API (cross-ref `docs/api-reference/web-navigation-api.md`)
 - Performance profiling patterns (cross-ref `docs/patterns/performance-profiling.md`)
 
-## Project Structure {#project-structure}
+Project Structure {#project-structure}
 ```
 page-speed-analyzer/
   manifest.json
@@ -25,7 +25,7 @@ page-speed-analyzer/
   background.js
 ```
 
-## Step 1: Manifest {#step-1-manifest}
+Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -39,7 +39,7 @@ page-speed-analyzer/
 }
 ```
 
-## Step 2: Content Script with Performance API {#step-2-content-script-with-performance-api}
+Step 2: Content Script with Performance API {#step-2-content-script-with-performance-api}
 ```javascript
 // content.js - Collect performance metrics using Performance API
 (function() {
@@ -67,7 +67,7 @@ page-speed-analyzer/
 })();
 ```
 
-## Step 3: Background Script with Badge Grades {#step-3-background-script-with-badge-grades}
+Step 3: Background Script with Badge Grades {#step-3-background-script-with-badge-grades}
 ```javascript
 // background.js - Handle badge updates with grades A-F
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -81,7 +81,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-## Step 4: Popup HTML {#step-4-popup-html}
+Step 4: Popup HTML {#step-4-popup-html}
 ```html
 <!DOCTYPE html>
 <html>
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 </html>
 ```
 
-## Step 5: Popup JavaScript {#step-5-popup-javascript}
+Step 5: Popup JavaScript {#step-5-popup-javascript}
 ```javascript
 // popup.js - Display metrics, charts, score calculation, history, export
 import { Chart } from 'chart.js/auto';
@@ -149,12 +149,12 @@ function showWaterfall(resources) {
 
 function generateRecommendations(m) {
   const recs = [];
-  if(m.ttfb>600) recs.push('⚠️ High TTFB - consider CDN');
-  if((m['largest-contentful-paint']||0)>2500) recs.push('⚠️ Slow LCP - optimize hero image');
+  if(m.ttfb>600) recs.push(' High TTFB - consider CDN');
+  if((m['largest-contentful-paint']||0)>2500) recs.push(' Slow LCP - optimize hero image');
   const slow = m.resources.filter(r=>r.duration>1000);
-  if(slow.length) recs.push(`⚠️ ${slow.length} slow resources`);
+  if(slow.length) recs.push(` ${slow.length} slow resources`);
   const large = m.resources.filter(r=>r.type.includes('img')&&r.size>500000);
-  if(large.length) recs.push(`⚠️ ${large.length} large images - lazy load`);
+  if(large.length) recs.push(` ${large.length} large images - lazy load`);
   document.getElementById('recommendations').innerHTML = recs.map(r=>`<p>${r}</p>`).join('');
 }
 
@@ -170,7 +170,7 @@ document.getElementById('export').addEventListener('click', () => {
 });
 ```
 
-## Step 6: Popup CSS {#step-6-popup-css}
+Step 6: Popup CSS {#step-6-popup-css}
 ```css
 body{width:320px;font-family:system-ui;background:#1a1a2e;color:#e0e0e0;padding:12px}
 h1{font-size:14px;color:#00ff41;margin-bottom:8px}
@@ -187,7 +187,7 @@ h1{font-size:14px;color:#00ff41;margin-bottom:8px}
 button{flex:1;padding:8px;border:1px solid #00ff41;background:transparent;color:#00ff41;border-radius:4px;cursor:pointer}
 ```
 
-## Summary {#summary}
+Summary {#summary}
 This extension uses the Performance API and PerformanceObserver to capture real-time metrics. The popup calculates a weighted performance score and displays a grade (A-F) as a badge. Resource breakdown uses a pie chart, and recommendations identify optimization opportunities. History is stored per URL, and reports can be exported as JSON.
 -e 
 ---

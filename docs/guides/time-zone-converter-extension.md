@@ -10,25 +10,25 @@ This guide covers building a production-ready Chrome extension for converting ti
 
 ```
 timezone-converter/
-├── src/
-│   ├── manifest.json
-│   ├── popup/
-│   │   ├── popup.html
-│   │   ├── popup.ts
-│   │   └── styles.css
-│   ├── background/
-│   │   └── background.ts
-│   ├── content/
-│   │   └── content.ts
-│   ├── shared/
-│   │   ├── types.ts
-│   │   ├── timezone.ts
-│   │   └── storage.ts
-│   └── utils/
-│       └── logger.ts
-├── tsconfig.json
-├── webpack.config.js
-└── package.json
+ src/
+    manifest.json
+    popup/
+       popup.html
+       popup.ts
+       styles.css
+    background/
+       background.ts
+    content/
+       content.ts
+    shared/
+       types.ts
+       timezone.ts
+       storage.ts
+    utils/
+        logger.ts
+ tsconfig.json
+ webpack.config.js
+ package.json
 ```
 
 ### Manifest V3 Configuration

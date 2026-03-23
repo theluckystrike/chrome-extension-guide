@@ -1,26 +1,26 @@
 ---
 layout: default
-title: "Chrome Extension Color Picker — Developer Guide"
+title: "Chrome Extension Color Picker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-color-picker/"
 ---
 # Build a Color Picker Extension
 
-## What You'll Build {#what-youll-build}
+What You'll Build {#what-youll-build}
 - Pick any color from any web page
 - Copy in HEX, RGB, HSL formats
 - Save color palettes
 - View recently picked colors
 - Keyboard shortcut: Alt+Shift+C
 
-## Manifest {#manifest}
+Manifest {#manifest}
 - permissions: activeTab, storage, clipboardWrite
 - commands with Alt+Shift+C shortcut
 - action with popup
 
 ---
 
-## Step 1: EyeDropper API (Modern Browsers) {#step-1-eyedropper-api-modern-browsers}
+Step 1: EyeDropper API (Modern Browsers) {#step-1-eyedropper-api-modern-browsers}
 
 Chrome 95+ supports the native EyeDropper API:
 
@@ -43,7 +43,7 @@ document.addEventListener('mousemove', (e) => {
 
 ---
 
-## Step 2: Magnifier Overlay {#step-2-magnifier-overlay}
+Step 2: Magnifier Overlay {#step-2-magnifier-overlay}
 
 Inject a picker with crosshair:
 
@@ -62,7 +62,7 @@ Style: 10x zoom canvas, crosshair at center, position fixed, z-index 999999.
 
 ---
 
-## Step 3: Color Conversion {#step-3-color-conversion}
+Step 3: Color Conversion {#step-3-color-conversion}
 
 ```javascript
 export function hexToRgb(hex) {
@@ -93,7 +93,7 @@ export function rgbToHsl(r, g, b) {
 
 ---
 
-## Step 4: Popup UI {#step-4-popup-ui}
+Step 4: Popup UI {#step-4-popup-ui}
 
 ```html
 <div class="picker-popup">
@@ -115,7 +115,7 @@ export function rgbToHsl(r, g, b) {
 
 ---
 
-## Step 5: Palette Storage {#step-5-palette-storage}
+Step 5: Palette Storage {#step-5-palette-storage}
 
 Use `@theluckystrike/webext-storage`:
 
@@ -135,7 +135,7 @@ function exportAsCssVars(name, colors) {
 
 ---
 
-## Step 6: Keyboard Shortcut {#step-6-keyboard-shortcut}
+Step 6: Keyboard Shortcut {#step-6-keyboard-shortcut}
 
 manifest.json:
 ```json
@@ -163,15 +163,15 @@ Works via activeTab, must be user-triggered. Set at chrome://extensions/shortcut
 
 ---
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
-- [activeTab Permission](./permissions/activeTab.md) — Overview of activeTab
-- [clipboardWrite Permission](./permissions/clipboardWrite.md) — Copying colors to clipboard
-- [Clipboard Patterns](./patterns/clipboard-patterns.md) — Best practices for clipboard operations
+- [activeTab Permission](./permissions/activeTab.md). Overview of activeTab
+- [clipboardWrite Permission](./permissions/clipboardWrite.md). Copying colors to clipboard
+- [Clipboard Patterns](./patterns/clipboard-patterns.md). Best practices for clipboard operations
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 You built a color picker extension with EyeDropper API + fallback content script, color conversion (HEX/RGB/HSL), popup UI with format switching, palette storage and export, and keyboard shortcut (Alt+Shift+C). Test at chrome://extensions/ with Developer mode enabled.
 -e 

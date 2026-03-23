@@ -17,7 +17,7 @@ In this comprehensive tutorial, we will walk through the entire process of creat
 
 ---
 
-## Why Build a Mouse Gesture Extension? {#why-build-gesture-extension}
+Why Build a Mouse Gesture Extension? {#why-build-gesture-extension}
 
 The popularity of gesture-based browsing continues to grow as users seek more efficient ways to navigate the web. A well-designed mouse gesture extension can dramatically improve productivity by reducing the number of clicks and keyboard shortcuts required to perform common tasks. Users can scroll through pages, switch tabs, go back or forward in history, and trigger custom actions simply by drawing patterns with their mouse.
 
@@ -27,17 +27,17 @@ The Chrome Web Store has a proven track record of successful gesture extensions.
 
 ---
 
-## Understanding the Core Concepts {#core-concepts}
+Understanding the Core Concepts {#core-concepts}
 
 Before diving into code, it is essential to understand the fundamental concepts that make mouse gesture recognition possible. A mouse gesture extension works by tracking the mouse position while the user holds down a trigger button (typically the middle mouse button or the right mouse button), recording the path the mouse travels, analyzing that path to determine what gesture was performed, and executing the action associated with recognized gesture.
 
-### Gesture Recognition Approaches
+Gesture Recognition Approaches
 
 There are several approaches to gesture recognition, each with its own advantages and trade-offs. The most common methods include dollar recognizer algorithms, template matching, direction-based recognition, and machine learning classifiers. For a Chrome extension, direction-based recognition offers the best balance of simplicity, accuracy, and performance.
 
 Direction-based recognition works by simplifying the mouse path into a sequence of cardinal directions: up, down, left, right, and their diagonal variants. For example, drawing an "L" shape would be recorded as a sequence like "right-down" or "right-down-right" depending on how precisely the user draws. This approach is computationally lightweight and intuitive for users to understand and remember.
 
-### The Role of Visual Feedback
+The Role of Visual Feedback
 
 One of the most important aspects of any gesture extension is visual feedback. Users need to see what they are drawing in real time to have confidence that their gesture will be recognized correctly. Most extensions draw a colored line or trail following the mouse cursor while the gesture is being performed, often with directional arrows or icons that indicate the recognized pattern.
 
@@ -45,7 +45,7 @@ Visual feedback serves multiple purposes. It confirms that the extension is acti
 
 ---
 
-## Setting Up the Project Structure {#project-structure}
+Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure and a manifest file that tells Chrome about the extension's capabilities. Let us set up our project structure and create the essential files.
 
@@ -55,18 +55,18 @@ Create a new directory for your project and set up the following structure:
 
 ```
 gesture-extension/
-├── manifest.json
-├── background.js
-├── content.js
-├── popup.html
-├── popup.js
-├── gesture-recognition.js
-└── styles.css
+ manifest.json
+ background.js
+ content.js
+ popup.html
+ popup.js
+ gesture-recognition.js
+ styles.css
 ```
 
 ---
 
-## Creating the Manifest File {#manifest-file}
+Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the foundation of every Chrome extension. For our gesture extension, we need to declare the appropriate permissions and specify the files that make up the extension. Since we will be injecting content scripts into web pages to capture mouse events, we need the "scripting" permission and host permissions for all URLs.
 
@@ -114,7 +114,7 @@ This manifest declares that our extension will run a service worker in the backg
 
 ---
 
-## Implementing Gesture Recognition Logic {#gesture-recognition}
+Implementing Gesture Recognition Logic {#gesture-recognition}
 
 The heart of our extension is the gesture recognition engine. We will implement a direction-based recognizer that converts mouse coordinates into a sequence of directions, then matches that sequence against predefined gesture patterns. Create a file called gesture-recognition.js with the following implementation:
 
@@ -217,7 +217,7 @@ This gesture recognition engine works by tracking mouse movement and converting 
 
 ---
 
-## Creating the Content Script {#content-script}
+Creating the Content Script {#content-script}
 
 The content script runs in the context of each web page and is responsible for capturing mouse events, drawing the visual feedback overlay, and communicating with the background script. Create content.js with the following implementation:
 
@@ -350,10 +350,10 @@ function getDirectionSymbol(direction) {
     'left': '←',
     'up': '↑',
     'down': '↓',
-    'right-down': '⤵',
-    'left-down': '⤴'
+    'right-down': '',
+    'left-down': ''
   };
-  return symbols[direction] || '✓';
+  return symbols[direction] || '';
 }
 ```
 
@@ -361,7 +361,7 @@ This content script sets up event listeners for mouse interactions, creates a ca
 
 ---
 
-## The Background Service Worker {#background-script}
+The Background Service Worker {#background-script}
 
 The background service worker handles the actual execution of gesture actions. Since Chrome extensions operate in an isolated environment, the background script serves as a central hub for coordinating between content scripts and performing browser operations. Create background.js with the following implementation:
 
@@ -491,7 +491,7 @@ The background service worker defines action handlers for each recognized gestur
 
 ---
 
-## Styling and User Interface {#styling}
+Styling and User Interface {#styling}
 
 The visual feedback overlay needs appropriate styling to provide a clear, non-intrusive experience for users. Create styles.css with the following styles:
 
@@ -564,7 +564,7 @@ The visual feedback overlay needs appropriate styling to provide a clear, non-in
 
 ---
 
-## The Popup Interface {#popup-interface}
+The Popup Interface {#popup-interface}
 
 Users need a way to configure their gesture extension, enable or disable it, and learn what gestures are available. Create popup.html to provide a settings interface:
 
@@ -762,7 +762,7 @@ The popup interface provides users with a clear overview of available gestures a
 
 ---
 
-## Testing Your Extension {#testing}
+Testing Your Extension {#testing}
 
 Before testing your extension, create simple placeholder icons for the extension. You will need three icon sizes: 16x16, 48x48, and 128x128 pixels. Place these in an icons directory within your project. For development purposes, you can create simple colored squares as placeholders.
 
@@ -774,7 +774,7 @@ Common issues to watch for include permission errors (ensure your manifest has t
 
 ---
 
-## Advanced Features and Customization {#advanced-features}
+Advanced Features and Customization {#advanced-features}
 
 Once you have the basic gesture extension working, there are many ways to enhance it. Consider adding gesture recording that lets users define their own custom gestures by drawing patterns and assigning actions to them. You can implement gesture training using machine learning to improve recognition accuracy for complex patterns.
 
@@ -784,7 +784,7 @@ For a more polished user experience, consider adding multi-monitor support to en
 
 ---
 
-## Publishing Your Extension {#publishing}
+Publishing Your Extension {#publishing}
 
 When your extension is ready for release, you can publish it to the Chrome Web Store. First, prepare your extension by creating proper icons (at least 128x128 pixels), writing a compelling description that highlights your extension's unique features, and creating screenshots or a promotional video that demonstrates how the extension works.
 
@@ -794,7 +794,7 @@ The review process typically takes a few hours to a few days. Google checks for 
 
 ---
 
-## Conclusion {#conclusion}
+Conclusion {#conclusion}
 
 Building a mouse gesture extension is an excellent project that teaches valuable skills in browser extension development while creating a genuinely useful tool for everyday browsing. In this tutorial, you learned how to set up a Chrome extension project, implement gesture recognition using direction-based pattern matching, create visual feedback with a canvas overlay, handle gesture actions in a background service worker, and design a user-friendly configuration interface.
 

@@ -15,29 +15,29 @@ A cookie consent manager helps users control which cookies and tracking technolo
 ### Project Structure
 ```
 cookie-consent-manager/
-├── src/
-│   ├── background/
-│   │   ├── index.ts          # Service worker entry
-│   │   ├── consent-engine.ts # Core consent logic
-│   │   └── storage.ts        # Storage management
-│   ├── content/
-│   │   ├── index.ts          # Content script entry
-│   │   ├── detector.ts       # Cookie dialog detection
-│   │   └── injector.ts       # DOM manipulation
-│   ├── popup/
-│   │   ├── index.html
-│   │   ├── index.tsx
-│   │   └── components/
-│   ├── shared/
-│   │   ├── types.ts          # Shared type definitions
-│   │   └── constants.ts
-│   └── styles/
-│       └── main.css
-├── public/
-│   └── icons/
-├── manifest.json
-├── package.json
-└── tsconfig.json
+ src/
+    background/
+       index.ts          # Service worker entry
+       consent-engine.ts # Core consent logic
+       storage.ts        # Storage management
+    content/
+       index.ts          # Content script entry
+       detector.ts       # Cookie dialog detection
+       injector.ts       # DOM manipulation
+    popup/
+       index.html
+       index.tsx
+       components/
+    shared/
+       types.ts          # Shared type definitions
+       constants.ts
+    styles/
+        main.css
+ public/
+    icons/
+ manifest.json
+ package.json
+ tsconfig.json
 ```
 
 ## Manifest Setup
@@ -525,7 +525,7 @@ const Popup: React.FC = () => {
           <div className="consent-status">
             {Object.entries(consent.levels).map(([level, enabled]) => (
               <span key={level} className={`badge ${enabled ? 'enabled' : 'disabled'}`}>
-                {level}: {enabled ? '✓' : '✗'}
+                {level}: {enabled ? '' : ''}
               </span>
             ))}
           </div>
@@ -779,15 +779,15 @@ test('popup displays current domain consent', async ({ page }) => {
 ## Performance Considerations
 
 ### Optimize Storage Access
-- **Batch reads**: Use `chrome.storage.local.get(['key1', 'key2'])` instead of multiple calls
-- **Lazy loading**: Load consent history only when needed
-- **Debounce updates**: Don't save on every preference change
+- Batch reads: Use `chrome.storage.local.get(['key1', 'key2'])` instead of multiple calls
+- Lazy loading: Load consent history only when needed
+- Debounce updates: Don't save on every preference change
 
 ### Content Script Performance
-- **Run at document_end**: Avoid blocking page load
-- **Use MutationObserver**: Instead of polling for dialogs
-- **Minimal DOM manipulation**: Cache element references
-- **Remove listeners**: Clean up when content script unloads
+- Run at document_end: Avoid blocking page load
+- Use MutationObserver: Instead of polling for dialogs
+- Minimal DOM manipulation: Cache element references
+- Remove listeners: Clean up when content script unloads
 
 ### Memory Management
 ```typescript

@@ -27,7 +27,7 @@ setInterval(() => {
 document.body.innerHTML = '<div>Background DOM</div>';
 ```
 
-**Key characteristics:**
+Key characteristics:
 - Persistent background page always running
 - Full DOM access within background context
 - Global variables persist across extension lifetime
@@ -36,7 +36,7 @@ document.body.innerHTML = '<div>Background DOM</div>';
 
 ## Service Worker Architecture in MV3
 
-Manifest V3 replaces persistent background pages with service workers—event-driven scripts that terminate when idle and wake up to handle events.
+Manifest V3 replaces persistent background pages with service workers, event-driven scripts that terminate when idle and wake up to handle events.
 
 ```javascript
 // MV3 Service Worker (service-worker.js)
@@ -64,7 +64,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-**Key differences:**
+Key differences:
 - Service worker terminates after inactivity (30 seconds)
 - No DOM access - use offscreen documents instead
 - No persistent global state - use chrome.storage
@@ -99,7 +99,7 @@ async function getUserData() {
 }
 ```
 
-**Best practices:**
+Best practices:
 - Use `chrome.storage.local` for user data (<10MB)
 - Use `chrome.storage.sync` for settings that sync across devices
 - Implement lazy loading - only load when needed
@@ -139,7 +139,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-**Use cases for offscreen documents:**
+Use cases for offscreen documents:
 - PDF generation
 - HTML parsing with DOM APIs
 - Canvas operations
@@ -172,7 +172,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-**Important notes:**
+Important notes:
 - Minimum alarm interval is 1 minute
 - Alarms persist across service worker restarts
 - Use unique names to manage multiple alarms
@@ -480,7 +480,7 @@ const isMV3 = chrome.runtime.getManifest().manifest_version === 3;
 | Network Idle | Continuous | Only when active |
 | Termination | Never | After 30s inactivity |
 
-**Typical improvements after migration:**
+Typical improvements after migration:
 - 50-70% reduction in memory footprint
 - Reduced CPU usage during idle
 - Faster browser startup
@@ -488,44 +488,44 @@ const isMV3 = chrome.runtime.getManifest().manifest_version === 3;
 
 ## Step-by-Step Migration Checklist
 
-1. **Audit Current Implementation**
+1. Audit Current Implementation
    - [ ] List all global variables and their purposes
    - [ ] Identify all setTimeout/setInterval calls
    - [ ] Document all XMLHttpRequest usage
    - [ ] Map all WebSocket connections
    - [ ] Identify DOM access in background
 
-2. **Update manifest.json**
+2. Update manifest.json
    - [ ] Change manifest_version to 3
    - [ ] Replace "background" with service_worker
    - [ ] Review and minimize permissions
 
-3. **Migrate State Management**
+3. Migrate State Management
    - [ ] Replace global variables with chrome.storage
    - [ ] Implement lazy loading patterns
    - [ ] Add state persistence handlers
 
-4. **Migrate Timers**
+4. Migrate Timers
    - [ ] Convert setInterval to chrome.alarms
    - [ ] Convert setTimeout to chrome.alarms with delay
 
-5. **Migrate Network Requests**
+5. Migrate Network Requests
    - [ ] Replace XMLHttpRequest with fetch
    - [ ] Add error handling and retries
    - [ ] Implement request caching if needed
 
-6. **Handle Special Cases**
+6. Handle Special Cases
    - [ ] Implement offscreen documents for DOM access
    - [ ] Add WebSocket reconnection logic
    - [ ] Set up IndexedDB for large data
 
-7. **Testing**
+7. Testing
    - [ ] Test all extension features
    - [ ] Verify storage persistence
    - [ ] Test alarm functionality
    - [ ] Test message passing
 
-8. **Deploy**
+8. Deploy
    - [ ] Push to Chrome Web Store
    - [ ] Monitor for errors
    - [ ] Prepare rollback plan

@@ -16,9 +16,9 @@ Whether you're managing translations for a small team or coordinating with profe
 
 ---
 
-## The Evolution from Basic i18n to Professional Workflows {#evolution}
+The Evolution from Basic i18n to Professional Workflows {#evolution}
 
-Most Chrome extension developers start with simple i18n implementation—creating a _locales folder, adding messages.json files, and using chrome.i18n.getMessage() to retrieve translations. While this approach works for extensions supporting two or three languages, it quickly becomes unsustainable as your user base expands globally.
+Most Chrome extension developers start with simple i18n implementation, creating a _locales folder, adding messages.json files, and using chrome.i18n.getMessage() to retrieve translations. While this approach works for extensions supporting two or three languages, it quickly becomes unsustainable as your user base expands globally.
 
 Advanced i18n workflows address several critical challenges that emerge at scale: maintaining consistency across hundreds of translation strings, coordinating with multiple translators, handling translation updates without breaking existing functionality, managing locale-specific formatting for dates and numbers, and implementing fallback strategies for missing translations.
 
@@ -26,9 +26,9 @@ The transition from basic to advanced workflows represents a fundamental shift i
 
 ---
 
-## Setting Up a Professional Translation Management System {#translation-management}
+Setting Up a Professional Translation Management System {#translation-management}
 
-### Infrastructure Requirements
+Infrastructure Requirements
 
 Before implementing advanced workflows, establish a solid foundation for your translation management system. This begins with organizing your locale files in a way that supports automation and version control integration.
 
@@ -36,20 +36,20 @@ Create a dedicated _locales directory at your extension root with a clear struct
 
 ```bash
 _locales/
-├── en/
-│   └── messages.json
-├── es/
-│   └── messages.json
-├── fr/
-│   └── messages.json
-├── de/
-│   └── messages.json
-├── ja/
-│   └── messages.json
-├── zh-CN/
-│   └── messages.json
-└── _meta/
-    └── config.json
+ en/
+    messages.json
+ es/
+    messages.json
+ fr/
+    messages.json
+ de/
+    messages.json
+ ja/
+    messages.json
+ zh-CN/
+    messages.json
+ _meta/
+     config.json
 ```
 
 The _meta folder contains configuration that defines your default locale and other global settings. In your manifest.json, specify the default_locale:
@@ -62,7 +62,7 @@ The _meta folder contains configuration that defines your default locale and oth
 }
 ```
 
-### Translation String Organization
+Translation String Organization
 
 As your extension grows, organizing translation strings becomes essential for maintainability. Rather than using a single massive messages.json file, consider splitting translations into logical categories:
 
@@ -87,23 +87,23 @@ As your extension grows, organizing translation strings becomes essential for ma
 }
 ```
 
-Grouping related strings together—popup strings in one section, settings strings in another, error messages in a third—makes it easier for translators to understand context and reduces the likelihood of translation errors.
+Grouping related strings together, popup strings in one section, settings strings in another, error messages in a third, makes it easier for translators to understand context and reduces the likelihood of translation errors.
 
 ---
 
-## Implementing Translation Management Tools {#tools}
+Implementing Translation Management Tools {#tools}
 
-### Building a Locale Management Extension
+Building a Locale Management Extension
 
 For teams managing multiple Chrome extensions or handling complex translation requirements, building a custom locale management extension provides powerful capabilities. This internal tool can help you:
 
-1. **Centralize Translation Management**: View and edit all locale files from a single interface, eliminating the need to manually navigate through multiple files.
+1. Centralize Translation Management: View and edit all locale files from a single interface, eliminating the need to manually navigate through multiple files.
 
-2. **Validate Translations**: Automatically check for missing keys, empty translations, and placeholder mismatches across all supported languages.
+2. Validate Translations: Automatically check for missing keys, empty translations, and placeholder mismatches across all supported languages.
 
-3. **Export and Import**: Generate translation files for professional translators and import their work back into your project.
+3. Export and Import: Generate translation files for professional translators and import their work back into your project.
 
-4. **Track Changes**: Maintain a history of translation changes with timestamps and author information.
+4. Track Changes: Maintain a history of translation changes with timestamps and author information.
 
 Here's a practical example of a locale management utility:
 
@@ -180,27 +180,27 @@ class LocaleManager {
 
 This utility forms the foundation of a more comprehensive locale management extension that can streamline your i18n workflow significantly.
 
-### Integrating with Translation Services
+Integrating with Translation Services
 
-Professional translation services like Lokalise, Transifex, or Smartling integrate seamlessly with your development workflow. These platforms offer:
+Professional translation services like Lokalise, Transifex, or Smartling integrate smoothly with your development workflow. These platforms offer:
 
-- **Translation Memory**: Reuse previously translated strings across projects
-- **Context Screenshots**: Show translators exactly where each string appears
-- **Quality Assurance**: Automatically detect missing placeholders, length issues, and inconsistencies
-- **Collaboration Tools**: Manage translator assignments and review workflows
+- Translation Memory: Reuse previously translated strings across projects
+- Context Screenshots: Show translators exactly where each string appears
+- Quality Assurance: Automatically detect missing placeholders, length issues, and inconsistencies
+- Collaboration Tools: Manage translator assignments and review workflows
 
 To integrate with these services, export your messages.json files in a compatible format (typically JSON or XLIFF), upload them to the translation platform, and periodically pull translated files back into your project.
 
 ---
 
-## Automation Strategies for i18n Workflows {#automation}
+Automation Strategies for i18n Workflows {#automation}
 
-### Continuous Integration Pipeline
+Continuous Integration Pipeline
 
 Automating your i18n workflow through CI/CD pipelines ensures translation quality and prevents broken builds from missing translations. Here's a comprehensive approach:
 
 ```yaml
-# .github/workflows/i18n.yml
+.github/workflows/i18n.yml
 name: i18n Validation
 
 on: [push, pull_request]
@@ -228,7 +228,7 @@ jobs:
 
 This workflow automatically validates translations on every push, catching issues before they reach production.
 
-### Pre-commit Hooks
+Pre-commit Hooks
 
 Set up pre-commit hooks to enforce translation standards locally:
 
@@ -265,14 +265,14 @@ function checkTranslations() {
 
 try {
   checkTranslations();
-  console.log('✓ All translations validated');
+  console.log(' All translations validated');
 } catch (error) {
   console.error('Translation validation failed:', error.message);
   process.exit(1);
 }
 ```
 
-### Automated Fallback Handling
+Automated Fallback Handling
 
 Implement intelligent fallback strategies that gracefully handle missing translations:
 
@@ -336,9 +336,9 @@ class I18nService {
 
 ---
 
-## Locale-Specific Formatting and Content {#locale-formatting}
+Locale-Specific Formatting and Content {#locale-formatting}
 
-### Date and Time Formatting
+Date and Time Formatting
 
 Different locales have vastly different conventions for date and time display. A professional i18n workflow must account for these variations:
 
@@ -397,7 +397,7 @@ class LocaleDateFormatter {
 }
 ```
 
-### Number and Currency Formatting
+Number and Currency Formatting
 
 Financial data, statistics, and measurements require locale-specific number formatting:
 
@@ -430,7 +430,7 @@ class LocaleNumberFormatter {
 }
 ```
 
-### Pluralization Rules
+Pluralization Rules
 
 Different languages have vastly different pluralization rules. English has two forms (one and other), while Russian has three, Arabic has six, and some languages don't distinguish plurals at all:
 
@@ -474,19 +474,19 @@ class PluralService {
 
 ---
 
-## Testing Internationalization {#testing}
+Testing Internationalization {#testing}
 
-### Comprehensive i18n Testing Strategies
+Comprehensive i18n Testing Strategies
 
 Testing internationalized extensions requires more than checking functionality in a single language:
 
-1. **Complete Coverage Testing**: Verify that every user-facing string uses the i18n system and is not hardcoded.
+1. Complete Coverage Testing: Verify that every user-facing string uses the i18n system and is not hardcoded.
 
-2. **Placeholder Testing**: Ensure all placeholders remain intact after translation.
+2. Placeholder Testing: Ensure all placeholders remain intact after translation.
 
-3. **Layout Testing**: Test UI with languages that have significantly longer translations (German, for example, often produces text 30% longer than English).
+3. Layout Testing: Test UI with languages that have significantly longer translations (German, for example, often produces text 30% longer than English).
 
-4. **RTL Language Testing**: If supporting Arabic or Hebrew, thoroughly test right-to-left layouts.
+4. RTL Language Testing: If supporting Arabic or Hebrew, thoroughly test right-to-left layouts.
 
 ```javascript
 // tests/i18n-coverage.js - Verify i18n coverage
@@ -496,8 +496,8 @@ const path = require('path');
 const glob = require('glob');
 
 function findHardcodedStrings() {
-  const sourceFiles = glob.sync('**/*.js', {
-    ignore: ['**/node_modules/**', '**/_locales/**']
+  const sourceFiles = glob.sync('/*.js', {
+    ignore: ['/node_modules/', '/_locales/']
   });
 
   const hardcodedStrings = [];
@@ -543,9 +543,9 @@ if (issues.length > 0) {
 
 ---
 
-## Best Practices for Scaling Your i18n Workflow {#best-practices}
+Best Practices for Scaling Your i18n Workflow {#best-practices}
 
-### Documentation and Guidelines
+Documentation and Guidelines
 
 Establish clear guidelines for translators working on your extension:
 
@@ -554,34 +554,34 @@ Establish clear guidelines for translators working on your extension:
 - Document any special formatting or placeholder requirements
 - Create a glossary of terminology that should remain consistent across translations
 
-### Version Control Integration
+Version Control Integration
 
 Structure your locale files to integrate smoothly with version control:
 
 ```bash
-# Use branch-based workflow for translations
-# main: English source
-# translation/spanish: Spanish translations
-# translation/french: French translations
+Use branch-based workflow for translations
+main: English source
+translation/spanish: Spanish translations
+translation/french: French translations
 ```
 
 This approach allows translators to work on separate branches without interfering with core development.
 
-### Performance Optimization
+Performance Optimization
 
 Consider performance implications of your i18n implementation:
 
 - Cache loaded translation files to avoid repeated disk reads
 - Lazy-load locale files for languages users are unlikely to use
 - Use Web Workers for translation-intensive operations in content scripts
-- Minimize runtime string concatenation—resolve translations during initialization
+- Minimize runtime string concatenation, resolve translations during initialization
 
 ---
 
-## Conclusion
+Conclusion
 
 Mastering advanced i18n workflows for Chrome extensions transforms translation management from a tedious chore into a streamlined, professional process. By implementing proper tooling, automation, and best practices, you can efficiently scale your extension to support dozens of languages while maintaining translation quality and consistency.
 
-The key lies in treating internationalization as a first-class concern in your development process—investing in robust infrastructure, automation, and quality assurance that pays dividends as your global user base grows. Start with the foundational elements outlined in this guide, then gradually adopt more advanced techniques as your extension's internationalization needs evolve.
+The key lies in treating internationalization as a first-class concern in your development process, investing in solid infrastructure, automation, and quality assurance that pays dividends as your global user base grows. Start with the foundational elements outlined in this guide, then gradually adopt more advanced techniques as your extension's internationalization needs evolve.
 
-Remember that successful global expansion isn't just about translating words—it's about creating experiences that feel native to users in every locale. The workflows and tools discussed here provide the foundation for achieving that goal.
+Remember that successful global expansion isn't just about translating words, it's about creating experiences that feel native to users in every locale. The workflows and tools discussed here provide the foundation for achieving that goal.

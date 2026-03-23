@@ -33,7 +33,7 @@ This document provides a comprehensive reference for all size and quota limits i
 | Default quota | 10 MB | Available since Chrome 112+ |
 | Persistence | Session-only | Data is cleared when the browser session ends |
 
-> **Note**: For applications requiring large storage, use `chrome.storage.local` with the `unlimitedStorage` permission.
+> Note: For applications requiring large storage, use `chrome.storage.local` with the `unlimitedStorage` permission.
 
 ## Message Passing {#message-passing}
 
@@ -104,7 +104,7 @@ chrome.alarms.create('myAlarm', {
 
 For more detailed information, see:
 
-- [Storage API Deep Dive](../api-reference/storage-api-deep-dive.md)
+- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
 - [Storage Migration Patterns](../patterns/storage-migration.md)
 -e 
 ---

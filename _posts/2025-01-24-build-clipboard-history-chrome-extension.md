@@ -17,11 +17,11 @@ This comprehensive guide walks you through building a complete clipboard history
 
 ---
 
-## Understanding Clipboard API in Chrome Extensions {#clipboard-api}
+Understanding Clipboard API in Chrome Extensions {#clipboard-api}
 
 Chrome provides several APIs for working with the clipboard, each with specific use cases and limitations. Understanding these APIs is crucial before implementing your clipboard history extension.
 
-### The Clipboard API Methods
+The Clipboard API Methods
 
 Modern Chrome extensions can interact with the clipboard using the `navigator.clipboard` API, which provides asynchronous read and write operations. The `readText()` method retrieves text content from the clipboard, while `writeText()` sets clipboard content. These Promise-based methods offer a clean, modern approach to clipboard manipulation.
 
@@ -51,7 +51,7 @@ async function writeToClipboard(text) {
 
 However, the Clipboard API has an important limitation: it requires the page to be focused to read from the clipboard. This restriction exists for security reasons, preventing websites from silently reading sensitive data users have copied. For a background clipboard monitor, you need a different approach.
 
-### Using the Clipboard Board Access Permission
+Using the Clipboard Board Access Permission
 
 In Manifest V3, extensions can request "clipboardRead" and "clipboardWrite" permissions to access clipboard content more freely. Add these permissions to your manifest.json to enable background clipboard monitoring:
 
@@ -73,11 +73,11 @@ The "clipboardRead" permission allows your extension to read clipboard content e
 
 ---
 
-## Project Structure and Manifest Configuration {#project-structure}
+Project Structure and Manifest Configuration {#project-structure}
 
 Every Chrome extension begins with a well-structured manifest.json file. For a clipboard history manager, you need to configure several key components.
 
-### The Manifest V3 Configuration
+The Manifest V3 Configuration
 
 Create a new folder for your extension and add the manifest.json file with all necessary configurations:
 
@@ -117,33 +117,33 @@ Create a new folder for your extension and add the manifest.json file with all n
 
 This configuration establishes the foundation for your clipboard history extension. The background service worker handles clipboard monitoring, while the popup provides the user interface for accessing history.
 
-### Directory Structure
+Directory Structure
 
 Organize your extension files logically to maintain code clarity:
 
 ```
 clipboard-history/
-├── manifest.json
-├── background.js
-├── popup.html
-├── popup.js
-├── styles.css
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── content.js
+ manifest.json
+ background.js
+ popup.html
+ popup.js
+ styles.css
+ icons/
+    icon16.png
+    icon48.png
+    icon128.png
+ content.js
 ```
 
 This structure separates concerns effectively: background scripts handle logic, popup files manage the user interface, and the icons folder contains your extension's visual assets.
 
 ---
 
-## Implementing the Background Clipboard Monitor {#background-monitor}
+Implementing the Background Clipboard Monitor {#background-monitor}
 
 The background service worker is the heart of your clipboard history extension. It monitors the clipboard continuously and stores new entries automatically.
 
-### Setting Up the Service Worker
+Setting Up the Service Worker
 
 Create background.js with the clipboard monitoring logic:
 
@@ -241,11 +241,11 @@ This background script continuously monitors the clipboard, captures new content
 
 ---
 
-## Building the Popup Interface {#popup-interface}
+Building the Popup Interface {#popup-interface}
 
 The popup provides users with access to their clipboard history. Design it to be clean, responsive, and intuitive.
 
-### The HTML Structure
+The HTML Structure
 
 Create popup.html with a well-organized interface:
 
@@ -287,7 +287,7 @@ Create popup.html with a well-organized interface:
 </html>
 ```
 
-### Styling the Interface
+Styling the Interface
 
 Create styles.css to make your popup visually appealing:
 
@@ -436,7 +436,7 @@ footer {
 }
 ```
 
-### Implementing Popup Logic
+Implementing Popup Logic
 
 Create popup.js to handle user interactions:
 
@@ -600,19 +600,19 @@ function formatDate(timestamp) {
 
 ---
 
-## Advanced Features and Optimization {#advanced-features}
+Advanced Features and Optimization {#advanced-features}
 
 A basic clipboard history extension works well, but adding advanced features elevates your extension from useful to exceptional.
 
-### Implementing Search Functionality
+Implementing Search Functionality
 
 The search feature already included in the popup code provides powerful filtering capabilities. Users can quickly find specific copied items by typing keywords, dates, or phrases. This is especially valuable when the clipboard history grows large.
 
-### Favorites System
+Favorites System
 
 Allowing users to mark important clipboard items as favorites prevents them from being accidentally deleted or pushed out of the history when the storage limit is reached. The implementation stores a boolean flag with each item and provides filtering by favorite status.
 
-### Keyboard Shortcuts
+Keyboard Shortcuts
 
 Adding keyboard shortcuts improves user experience significantly:
 
@@ -639,11 +639,11 @@ Configure the shortcut in manifest.json:
 }
 ```
 
-### Data Persistence and Storage Optimization
+Data Persistence and Storage Optimization
 
 Chrome provides multiple storage options for extensions. For clipboard history, consider using `chrome.storage.local` which offers more storage space than `sessionStorage`. The current implementation limits history to 100 items, but you can increase this based on user preferences.
 
-### Privacy Considerations
+Privacy Considerations
 
 Clipboard history extensions handle sensitive data, so privacy is paramount. Implement these best practices:
 
@@ -651,27 +651,27 @@ Never transmit clipboard data to external servers. Store all data locally using 
 
 ---
 
-## Testing and Debugging Your Extension {#testing-debugging}
+Testing and Debugging Your Extension {#testing-debugging}
 
 Before publishing your extension, thorough testing ensures a smooth user experience.
 
-### Loading the Extension Locally
+Loading the Extension Locally
 
 Navigate to chrome://extensions/ in Chrome, enable "Developer mode" in the top right corner, and click "Load unpacked". Select your extension folder to install it locally for testing.
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
 Clipboard access failures often occur when testing because Chrome restricts clipboard reading from certain contexts. Ensure your extension has the proper permissions and test in appropriate environments. Memory leaks can develop if your background script does not properly clean up intervals or event listeners. Use the Chrome DevTools memory profiler to identify potential issues.
 
 Storage quotas may limit how much clipboard data you can store. Monitor storage usage and implement cleanup strategies for older items when approaching limits.
 
-### Debugging Tips
+Debugging Tips
 
 Use console.log statements throughout your code during development. The background service worker logs appear in the Extensions page under "Service Worker" after clicking "Inspect views". The popup logs appear in the popup DevTools when you right-click the popup and select "Inspect".
 
 ---
 
-## Conclusion: Your Complete Clipboard History Extension
+Conclusion: Your Complete Clipboard History Extension
 
 You have now built a fully functional clipboard history manager Chrome extension. The extension monitors the clipboard in the background, stores up to 100 items, provides search and favorites functionality, and presents everything in a clean, intuitive interface.
 
@@ -689,5 +689,5 @@ Start using your clipboard history extension today and never lose an important c
 
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The Extension Monetization Playbook covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

@@ -11,11 +11,11 @@ The `chrome.history` API is a powerful tool that enables Chrome extensions to in
 
 This guide provides comprehensive coverage of all history API operations, from basic CRUD operations to advanced analytics patterns, along with important privacy considerations you must address when working with sensitive browsing data.
 
-## Prerequisites and Permission Setup
+Prerequisites and Permission Setup
 
 Before using any history API methods, you need to declare the `history` permission in your extension's manifest file. This permission triggers a significant privacy warning in the Chrome Web Store, so it's important to understand when and how to use it appropriately.
 
-### Adding the History Permission
+Adding the History Permission
 
 Add the `history` permission to your `manifest.json` file:
 
@@ -37,11 +37,11 @@ The history permission is categorized as a high-sensitivity permission because i
 
 For extensions that don't require persistent history access, consider using optional permissions that users can grant when needed. This approach gives users more control and can improve trust in your extension.
 
-## Understanding the Data Model
+Understanding the Data Model
 
 The history API works with two distinct but related data types: HistoryItem and VisitItem. Understanding the difference between these types is crucial for building effective history-powered features.
 
-### HistoryItem: Unique URLs
+HistoryItem: Unique URLs
 
 A HistoryItem represents a unique URL in the user's browsing history. Each URL appears only once in the history table, even if the user visited it multiple times:
 
@@ -58,7 +58,7 @@ interface HistoryItem {
 
 The `id` field serves as the unique identifier for querying related visit records. The `title` field contains the page title at the time of the last visit, which may differ from the current page title if the site changed. The `visitCount` tracks how many times the user visited this URL, while `typedCount` specifically tracks how many times the user typed the URL directly in the address bar.
 
-### VisitItem: Individual Visits
+VisitItem: Individual Visits
 
 A VisitItem represents a single visit to a URL, including how the user arrived at the page:
 
@@ -74,11 +74,11 @@ interface VisitItem {
 
 The `transition` field reveals the navigation type: `"link"` indicates clicking a link, `"typed"` means typing in the address bar, `"auto_bookmark"` comes from a bookmark, `"reload"` indicates a page refresh, and many other values exist. This information is invaluable for analytics extensions that want to understand user behavior patterns.
 
-## Searching History
+Searching History
 
 The `chrome.history.search()` method is the primary way to query the browsing history. It supports full-text search across page titles and URLs, along with powerful time-based filtering.
 
-### Basic Text Search
+Basic Text Search
 
 Search for pages by title or URL content:
 
@@ -104,7 +104,7 @@ searchHistory("chrome");
 
 The search matches against both the page title and the URL. Searching for an empty string returns all history items, though this is limited by the `maxResults` parameter.
 
-### Time-Based Queries
+Time-Based Queries
 
 Filter history by date range to analyze browsing patterns over specific periods:
 
@@ -142,7 +142,7 @@ getHistoryInRange(weekAgo, new Date());
 
 The `startTime` and `endTime` parameters accept Unix timestamps in milliseconds. Omitting `startTime` defaults to 24 hours ago, while omitting `endTime` defaults to the current time.
 
-### Building a Search UI
+Building a Search UI
 
 Create a practical search interface in your extension popup:
 
@@ -220,11 +220,11 @@ function formatDate(timestamp) {
 }
 ```
 
-## Retrieving Visit Details
+Retrieving Visit Details
 
 While `chrome.history.search()` returns summary information, you sometimes need detailed visit records for a specific URL. The `chrome.history.getVisits()` method provides this granular data.
 
-### Getting All Visits for a URL
+Getting All Visits for a URL
 
 ```javascript
 async function getVisitDetails(url) {
@@ -246,7 +246,7 @@ getVisitDetails("https://www.example.com");
 
 The visit details reveal how users arrived at each page, which is powerful for understanding user behavior. For instance, you can analyze what percentage of visits come from search engines versus direct navigation.
 
-### Analyzing Navigation Patterns
+Analyzing Navigation Patterns
 
 Use transition types to categorize and analyze user navigation:
 
@@ -287,11 +287,11 @@ async function analyzeNavigationPatterns() {
 
 This analysis can reveal valuable insights about how users navigate the web, helping you understand whether they primarily arrive through search, bookmarks, direct typing, or social links.
 
-## Adding and Deleting History Entries
+Adding and Deleting History Entries
 
 The history API allows programmatic modification of browsing history, though these capabilities come with significant responsibility and privacy implications.
 
-### Adding URLs to History
+Adding URLs to History
 
 Add a URL to history as if the user visited it:
 
@@ -313,7 +313,7 @@ addToHistory("https://developers.chrome.com/docs/extensions");
 
 Note that you cannot directly set the title when adding a URL. The title will be fetched from the URL's actual content on the next visit or can be updated if the URL is visited again later.
 
-### Deleting Specific URLs
+Deleting Specific URLs
 
 Remove individual history entries:
 
@@ -333,7 +333,7 @@ async function deleteFromHistory(url) {
 deleteFromHistory("https://example.com/private-page");
 ```
 
-### Deleting History by Date Range
+Deleting History by Date Range
 
 Remove all history within a specific time period:
 
@@ -355,7 +355,7 @@ const oneHourAgo = Date.now() - (60 * 60 * 1000);
 clearHistoryRange(oneHourAgo, Date.now());
 ```
 
-### Deleting All History
+Deleting All History
 
 Clear the entire browsing history:
 
@@ -373,13 +373,13 @@ async function clearAllHistory() {
 }
 ```
 
-**Important Warning:** The `deleteAll()` method is extremely powerful and should only be used when explicitly requested by the user. Always implement confirmation dialogs and consider providing more granular deletion options.
+Important Warning: The `deleteAll()` method is extremely powerful and should only be used when explicitly requested by the user. Always implement confirmation dialogs and consider providing more granular deletion options.
 
-## Listening to History Events
+Listening to History Events
 
 The history API provides real-time event listeners that fire when users browse, enabling powerful reactive features like tracking, analytics, and automation.
 
-### Tracking New Visits
+Tracking New Visits
 
 Monitor when users visit any page:
 
@@ -398,7 +398,7 @@ chrome.history.onVisited.addListener((historyItem) => {
 
 The `onVisited` event fires immediately after a page loads, making it ideal for real-time tracking and automation rules.
 
-### Monitoring History Deletion
+Monitoring History Deletion
 
 Detect when history entries are removed:
 
@@ -420,11 +420,11 @@ chrome.history.onVisitRemoved.addListener((removed) => {
 
 This event is crucial for keeping your extension's data in sync with the user's actual browsing history, especially for analytics extensions that maintain their own records.
 
-## Building Analytics Features
+Building Analytics Features
 
 Combine the history API with other Chrome APIs to create powerful analytics dashboards that provide insights into browsing behavior.
 
-### Top Sites Analysis
+Top Sites Analysis
 
 Build a top sites feature that identifies most-visited domains:
 
@@ -474,7 +474,7 @@ getTopSites(30, 10).then(topSites => {
 });
 ```
 
-### Daily Browsing Report
+Daily Browsing Report
 
 Create a daily summary feature showing browsing patterns:
 
@@ -532,7 +532,7 @@ async function generateDailyReport() {
 }
 ```
 
-### Combining with Storage API
+Combining with Storage API
 
 Persist analytics data across sessions:
 
@@ -577,15 +577,15 @@ async function trackBrowsingStats() {
 }
 ```
 
-## Privacy Considerations
+Privacy Considerations
 
 Working with browsing history requires careful attention to privacy best practices. Users trust you with extremely sensitive data, and mishandling it can cause serious harm to both users and your extension's reputation.
 
-### Minimizing Permission Requests
+Minimizing Permission Requests
 
 Request the minimum permissions necessary for your extension to function. If you only need to read history for analytics, avoid requesting write permissions unless deletion features are core to your functionality. Consider using optional permissions that users can enable when needed, which improves user trust and may expedite Chrome Web Store review.
 
-### Data Handling Best Practices
+Data Handling Best Practices
 
 Never transmit history data to external servers without explicit user consent. If your extension requires server-side processing, be transparent about what data is sent and why. Store only aggregate statistics rather than individual browsing records when possible, and implement data retention policies that automatically delete old data.
 
@@ -617,15 +617,15 @@ async function createPrivacySafeAnalytics() {
 }
 ```
 
-### User Control and Transparency
+User Control and Transparency
 
 Always provide users with clear controls over what data your extension accesses and how it's used. Include a clear privacy policy explaining your data practices, offer easy ways to delete stored data, and implement user-accessible settings to control functionality.
 
-### Security Considerations
+Security Considerations
 
 History data is sensitive and should be handled securely. Avoid logging URLs to console in production code, validate all data before processing, and be cautious about storing history data in extension storage since it persists on the device.
 
-## Related Articles
+Related Articles
 
 - [Build a Browsing History Search Extension](/tutorials/build-browsing-history-search.html) - A complete tutorial on building a history search extension with filtering and export features
 - [Chrome Bookmarks API](/api-reference/bookmarks-api.html) - Learn how to work with the bookmarks API for similar data management features
@@ -636,5 +636,5 @@ History data is sensitive and should be handled securely. Avoid logging URLs to 
 *Part of the [Chrome Extension Guide](https://github.com/theluckystrike/chrome-extension-guide) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

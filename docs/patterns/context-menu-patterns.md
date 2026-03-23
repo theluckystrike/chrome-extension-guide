@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "Chrome Extension Context Menu Patterns — Best Practices"
+title: "Chrome Extension Context Menu Patterns. Best Practices"
 description: "Create dynamic and contextual right-click menus with the Chrome Context Menus API."
 canonical_url: "https://bestchromeextensions.com/patterns/context-menu-patterns/"
 ---
 
 # Context Menu Patterns
 
-## Overview {#overview}
+Overview {#overview}
 
 Context menus let Chrome extensions add items to the right-click menu on pages, selections, links, and images. The `chrome.contextMenus` API runs entirely in the service worker and supports nested hierarchies, radio buttons, checkboxes, and dynamic updates. This guide covers eight patterns for building context menus that adapt to context, coordinate with content scripts, and stay in sync with user preferences.
 
 ---
 
-## Required Permissions {#required-permissions}
+Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -28,7 +28,7 @@ Context menus let Chrome extensions add items to the right-click menu on pages, 
 
 ---
 
-## Pattern 1: Dynamic Context Menu Creation on Install/Update {#pattern-1-dynamic-context-menu-creation-on-installupdate}
+Pattern 1: Dynamic Context Menu Creation on Install/Update {#pattern-1-dynamic-context-menu-creation-on-installupdate}
 
 Menus must be recreated every time the service worker starts after an install or update. Use `chrome.runtime.onInstalled` to set them up once, and the browser persists them until the next update:
 
@@ -97,7 +97,7 @@ The `removeAll` call inside `onInstalled` is important: without it, updating the
 
 ---
 
-## Pattern 2: Nested Context Menus (Parent/Child Hierarchy) {#pattern-2-nested-context-menus-parentchild-hierarchy}
+Pattern 2: Nested Context Menus (Parent/Child Hierarchy) {#pattern-2-nested-context-menus-parentchild-hierarchy}
 
 Use the `parentId` property to build multi-level menus. Chrome supports arbitrary nesting, but two levels is the practical maximum for usability:
 
@@ -184,7 +184,7 @@ When a parent item has children, clicking the parent itself does nothing -- only
 
 ---
 
-## Pattern 3: Context-Aware Menu Items {#pattern-3-context-aware-menu-items}
+Pattern 3: Context-Aware Menu Items {#pattern-3-context-aware-menu-items}
 
 Different `contexts` values control where each item appears. You can create separate items for text selections, links, images, and plain page backgrounds:
 
@@ -283,7 +283,7 @@ The `contexts` array accepts multiple values per item. For example, `["selection
 
 ---
 
-## Pattern 4: Context Menu with Radio Buttons and Checkboxes {#pattern-4-context-menu-with-radio-buttons-and-checkboxes}
+Pattern 4: Context Menu with Radio Buttons and Checkboxes {#pattern-4-context-menu-with-radio-buttons-and-checkboxes}
 
 Use `type: "radio"` and `type: "checkbox"` for toggleable settings directly in the context menu:
 
@@ -367,7 +367,7 @@ Radio buttons are grouped by their `parentId`. All radios under the same parent 
 
 ---
 
-## Pattern 5: Per-Tab Context Menu Updates {#pattern-5-per-tab-context-menu-updates}
+Pattern 5: Per-Tab Context Menu Updates {#pattern-5-per-tab-context-menu-updates}
 
 Enable or disable specific menu items based on the active tab's URL. Use `chrome.tabs.onActivated` and `chrome.tabs.onUpdated` to react to tab changes:
 
@@ -441,7 +441,7 @@ Note that `chrome.contextMenus.update` accepts the same properties as `create`. 
 
 ---
 
-## Pattern 6: Context Menu with Dynamic Sub-Items from Storage {#pattern-6-context-menu-with-dynamic-sub-items-from-storage}
+Pattern 6: Context Menu with Dynamic Sub-Items from Storage {#pattern-6-context-menu-with-dynamic-sub-items-from-storage}
 
 Build menus whose children come from user data stored in `chrome.storage`. Rebuild the menu whenever storage changes:
 
@@ -525,7 +525,7 @@ Calling `removeAll` plus re-creating every item is the safest approach. Trying t
 
 ---
 
-## Pattern 7: Context Menu Actions with Content Script Coordination {#pattern-7-context-menu-actions-with-content-script-coordination}
+Pattern 7: Context Menu Actions with Content Script Coordination {#pattern-7-context-menu-actions-with-content-script-coordination}
 
 Some actions require reading or modifying the page DOM. The service worker sends a message, and the content script performs the work:
 
@@ -635,7 +635,7 @@ Always return `true` from `onMessage` listeners that call `sendResponse` asynchr
 
 ---
 
-## Pattern 8: Keyboard Shortcut Hints in Context Menu Titles {#pattern-8-keyboard-shortcut-hints-in-context-menu-titles}
+Pattern 8: Keyboard Shortcut Hints in Context Menu Titles {#pattern-8-keyboard-shortcut-hints-in-context-menu-titles}
 
 Show keyboard shortcuts alongside menu item titles so users learn them. Pull the binding from the manifest or `chrome.commands` API:
 
@@ -738,7 +738,7 @@ The manifest must declare the commands for shortcuts to appear:
 
 ---
 
-## Summary {#summary}
+Summary {#summary}
 
 | Pattern | Purpose | Key API |
 |---|---|---|

@@ -38,13 +38,13 @@ The popup consists of three main files referenced in your manifest:
 
 ```
 my-extension/
-├── popup/
-│   ├── popup.html      # Entry point
-│   ├── popup.css       # Styles
-│   ├── popup.js        # Logic
-│   └── components/     # Reusable UI components
-├── icons/
-└── manifest.json
+ popup/
+    popup.html      # Entry point
+    popup.css       # Styles
+    popup.js        # Logic
+    components/     # Reusable UI components
+ icons/
+ manifest.json
 ```
 
 ### Minimal Popup HTML
@@ -69,11 +69,11 @@ my-extension/
 
 ---
 
-## Popup Lifecycle
+Popup Lifecycle
 
 Understanding the popup lifecycle is crucial for proper resource management and user experience.
 
-### Open → Render → Close Flow
+Open → Render → Close Flow
 
 ```javascript
 // popup.js - Lifecycle management
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Lifecycle Events
+Lifecycle Events
 
 | Event | Description | Use Case |
 |-------|-------------|----------|
@@ -152,18 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## Dimensions and Constraints
+Dimensions and Constraints
 
 Chrome imposes strict limits on popup dimensions that you must design around.
 
-### Size Limits
+Size Limits
 
-- **Maximum width**: 800px
-- **Maximum height**: 600px
-- **Default size**: Varies by Chrome version
-- **Minimum size**: Enforced by content (no hard minimum)
+- Maximum width: 800px
+- Maximum height: 600px
+- Default size: Varies by Chrome version
+- Minimum size: Enforced by content (no hard minimum)
 
-### Best Practices for Dimensions
+Best Practices for Dimensions
 
 ```css
 /* popup.css */
@@ -194,7 +194,7 @@ body {
 }
 ```
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -208,9 +208,9 @@ body {
 
 ---
 
-## Framework Setups
+Framework Setups
 
-### React/Preact Popup
+React/Preact Popup
 
 Using React or Preact provides component-based architecture and state management.
 
@@ -268,7 +268,7 @@ export default function App() {
 }
 ```
 
-### Vue Popup Setup
+Vue Popup Setup
 
 ```javascript
 // main.js - Vue 3 setup
@@ -338,7 +338,7 @@ function retry() {
 ```
 {% endraw %}
 
-### Svelte Popup Setup
+Svelte Popup Setup
 
 ```html
 <!-- Popup.svelte -->
@@ -392,7 +392,7 @@ function retry() {
 </div>
 ```
 
-### Vanilla JS Patterns
+Vanilla JS Patterns
 
 ```javascript
 // popup.js - Clean vanilla JS architecture
@@ -490,11 +490,11 @@ document.addEventListener('DOMContentLoaded', () => App.init());
 
 ---
 
-## State Persistence
+State Persistence
 
 Maintaining state across popup opens improves user experience significantly.
 
-### Using chrome.storage
+Using chrome.storage
 
 ```javascript
 // State persistence utilities
@@ -546,7 +546,7 @@ class StatefulPopup {
 }
 ```
 
-### State Sync Between Contexts
+State Sync Between Contexts
 
 ```javascript
 // Service worker - background.js
@@ -571,11 +571,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-## Service Worker Communication
+Service Worker Communication
 
 The popup communicates with the service worker for data processing and storage operations.
 
-### Message Passing Pattern
+Message Passing Pattern
 
 ```javascript
 // Popup → Service Worker communication
@@ -607,7 +607,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Long-Lived Connections
+Long-Lived Connections
 
 ```javascript
 // For real-time updates, use port connections
@@ -622,9 +622,9 @@ port.postMessage({ type: 'INIT', tabId: chrome.devtools?.inspectedWindow?.tabId 
 
 ---
 
-## Theme Support
+Theme Support
 
-### Dark Mode Support
+Dark Mode Support
 
 ```css
 /* popup.css - Theme variables */
@@ -663,7 +663,7 @@ body {
 }
 ```
 
-### System Theme Detection
+System Theme Detection
 
 ```javascript
 // Detect system theme preference
@@ -683,9 +683,9 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 
 ---
 
-## Responsive Design
+Responsive Design
 
-### Flexible Layouts
+Flexible Layouts
 
 ```css
 /* Responsive popup design */
@@ -728,9 +728,9 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 
 ---
 
-## Animations and Transitions
+Animations and Transitions
 
-### Smooth Transitions
+Smooth Transitions
 
 ```css
 /* CSS animations */
@@ -769,9 +769,9 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 
 ---
 
-## Loading and Error States
+Loading and Error States
 
-### Skeleton Loading
+Skeleton Loading
 
 ```css
 /* Skeleton loader styles */
@@ -804,7 +804,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 }
 ```
 
-### Error States with Retry
+Error States with Retry
 
 ```javascript
 // Error handling with retry logic
@@ -837,9 +837,9 @@ class ErrorHandler {
 
 ---
 
-## Accessibility
+Accessibility
 
-### A11y Best Practices
+A11y Best Practices
 
 ```html
 <!-- Semantic HTML and ARIA labels -->
@@ -860,7 +860,7 @@ class ErrorHandler {
   </ul>
   
   <footer role="contentinfo">
-    <button aria-label="Settings">⚙️</button>
+    <button aria-label="Settings"></button>
   </footer>
 </div>
 
@@ -878,7 +878,7 @@ class ErrorHandler {
 </style>
 ```
 
-### Keyboard Navigation
+Keyboard Navigation
 
 ```javascript
 // Keyboard navigation support
@@ -912,7 +912,7 @@ document.addEventListener('keydown', (e) => {
 
 ---
 
-## Reference
+Reference
 
 For more detailed information, visit the official Chrome documentation:
 

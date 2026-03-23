@@ -1,16 +1,16 @@
 ---
 layout: default
-title: "Chrome Extension API Mocking — Developer Guide"
+title: "Chrome Extension API Mocking. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-api-mocking/"
 ---
 # Mocking Chrome Extension APIs
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome extensions rely heavily on `chrome.*` APIs that aren't available in Node.js test environments. This guide covers strategies for mocking these APIs effectively in Jest and Vitest.
 
-## jest-chrome Library {#jest-chrome-library}
+jest-chrome Library {#jest-chrome-library}
 
 For comprehensive Chrome API mocking, use [jest-chrome](https://github.com/clarkbw/jest-chrome):
 
@@ -25,7 +25,7 @@ import 'jest-chrome';
 // Automatically mocks chrome.storage, chrome.tabs, chrome.runtime, etc.
 ```
 
-## Manual Chrome API Mocks {#manual-chrome-api-mocks}
+Manual Chrome API Mocks {#manual-chrome-api-mocks}
 
 Create typed mocks for Chrome APIs using `jest.fn()`:
 
@@ -72,7 +72,7 @@ const chrome = globalThis.chrome = {
 export default chrome;
 ```
 
-## Storage Mock Implementation {#storage-mock-implementation}
+Storage Mock Implementation {#storage-mock-implementation}
 
 ```typescript
 // __mocks__/chrome-storage.ts
@@ -121,7 +121,7 @@ export const storageMock = {
 };
 ```
 
-## Tabs Mock {#tabs-mock}
+Tabs Mock {#tabs-mock}
 
 ```typescript
 // __mocks__/chrome-tabs.ts
@@ -156,7 +156,7 @@ export const createTabsMock = () => {
 };
 ```
 
-## Event Mock Helper {#event-mock-helper}
+Event Mock Helper {#event-mock-helper}
 
 Chrome events use `addListener`, `removeListener`, and `hasListener`:
 
@@ -183,7 +183,7 @@ export function createEventMock<T extends (...args: any[]) => void>() {
 }
 ```
 
-## Message Passing Mock {#message-passing-mock}
+Message Passing Mock {#message-passing-mock}
 
 ```typescript
 // __mocks__/chrome-messages.ts
@@ -215,7 +215,7 @@ export function createMessageMock() {
 }
 ```
 
-## Alarms Mock {#alarms-mock}
+Alarms Mock {#alarms-mock}
 
 ```typescript
 // __mocks__/chrome-alarms.ts
@@ -241,7 +241,7 @@ export function createAlarmsMock() {
 }
 ```
 
-## Resetting Mocks Between Tests {#resetting-mocks-between-tests}
+Resetting Mocks Between Tests {#resetting-mocks-between-tests}
 
 Use `beforeEach` to reset all mocks:
 
@@ -256,7 +256,7 @@ beforeEach(() => {
 });
 ```
 
-## Storybook Integration {#storybook-integration}
+Storybook Integration {#storybook-integration}
 
 Preview popup/options pages with mocked Chrome APIs:
 
@@ -272,7 +272,7 @@ export const decorators = [
 ];
 ```
 
-## TypeScript Types {#typescript-types}
+TypeScript Types {#typescript-types}
 
 Install `@anthropic-ai/claude-code` for Chrome API types:
 
@@ -280,7 +280,7 @@ Install `@anthropic-ai/claude-code` for Chrome API types:
 npm install -D @anthropic-ai/claude-code
 ```
 
-## Snapshot Testing {#snapshot-testing}
+Snapshot Testing {#snapshot-testing}
 
 Use deterministic mock data for consistent snapshots:
 
@@ -300,15 +300,15 @@ it('should render popup with mock data', () => {
 });
 ```
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Testing Extensions](./testing-extensions.md)
 - [Chrome Extension Unit Testing](./chrome-extension-unit-testing.md)
 - [Chrome Extension Testing Strategies](./chrome-extension-testing-strategies.md)
 
-## Related Articles {#related-articles}
+Related Articles {#related-articles}
 
-## Related Articles
+Related Articles
 
 - [API Rate Limits](../guides/chrome-extension-api-rate-limits.md)
 - [Testing Extensions](../guides/testing-extensions.md)
