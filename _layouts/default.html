@@ -82,55 +82,45 @@
   {% endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.7; color: #1a1a2e; background: #fafafa; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif; max-width: 780px; margin: 0 auto; padding: 24px 20px; line-height: 1.7; color: #1a1a2e; background: #fafafa; }
     h1 { font-size: 1.8rem; margin-top: 2rem; color: #0f0f23; }
-    h2 { font-size: 1.4rem; margin-top: 1.8rem; color: #16213e; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3rem; }
+    h2 { font-size: 1.35rem; margin-top: 2rem; color: #16213e; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.4rem; }
+    h3 { font-size: 1.1rem; color: #2d3748; }
     a { color: #1a73e8; text-decoration: none; }
     a:hover { text-decoration: underline; }
     code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
-    pre { background: #1a1a2e; color: #e0e0e0; padding: 16px; border-radius: 6px; overflow-x: auto; }
+    pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
     pre code { background: none; color: inherit; padding: 0; }
     table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
-    th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+    th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }
     th { background: #f5f5f5; font-weight: 600; }
     blockquote { border-left: 3px solid #1a73e8; margin: 1rem 0; padding: 0.5rem 1rem; background: #f8f9fa; }
-    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: #666; font-size: 0.85rem; }
-    nav { padding: 1rem 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem; }
-    nav a { margin-right: 1.5rem; font-weight: 500; }
+    nav { padding: 0.8rem 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    nav a { font-weight: 500; font-size: 0.95rem; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: #888; font-size: 0.82rem; line-height: 1.8; }
+    footer a { color: #888; }
+    .date { color: #888; font-size: 0.85rem; margin-bottom: 1.5rem; display: block; }
     img { max-width: 100%; height: auto; }
+    @media (max-width: 600px) { body { padding: 16px 14px; } h1 { font-size: 1.5rem; } }
   </style>
 </head>
 <body>
   <nav>
-    <a href="{{ '/' | relative_url }}">Home</a>
-    <a href="{{ '/about/' | relative_url }}">About</a>
-    <a href="{{ '/docs/guides/' | relative_url }}">Guides</a>
-    <a href="{{ '/docs/tutorials/' | relative_url }}">Tutorials</a>
-    <a href="{{ '/docs/patterns/' | relative_url }}">Patterns</a>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/topics/productivity/">Productivity</a>
+    <a href="/topics/developer-tools/">Developer Tools</a>
+    <a href="/topics/privacy/">Privacy</a>
+    <a href="/topics/communication/">Communication</a>
   </nav>
-  {% if page.url != '/' and page.url != '/docs/' %}
-  <nav aria-label="breadcrumb" style="font-size:0.85em;color:#666;margin-bottom:1em;border:none;padding:0;">
-    <a href="{{ '/' | relative_url }}">Home</a>
-    {% if page.title %}
-      &rsaquo; <span>{{ page.title }}</span>
-    {% endif %}
-  </nav>
-  {% endif %}
   <main>
     {% if page.date %}
-    <p style="font-size: 0.85rem; color: #888;">Last updated: {{ page.date | date: "%B %d, %Y" }}</p>
+    <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
     {% endif %}
     {{ content }}
   </main>
   <footer>
-    <p>More guides:
-      <a href="https://securetoolsguide.com">Privacy Tools</a> ·
-      <a href="https://chrometipsguide.com">Chrome Tips</a> ·
-      <a href="https://bestchromeextensions.com">Extensions</a> ·
-      <a href="https://bestremotetools.com">AI Tools</a> ·
-      <a href="https://welikeremotestack.com">Remote Work</a> ·
-      <a href="https://claudecodeguides.com">Claude Code</a>
-    </p>
     <p>&copy; 2026 Chrome Extension Guide &middot; <a href="/about/">About</a></p>
   </footer>
   <script>
