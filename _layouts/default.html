@@ -44,6 +44,39 @@
   </script>
   {% endif %}
   {% seo %}
+  {% if page.url == "/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.title | escape }}",
+    "url": "{{ site.url }}",
+    "description": "{{ site.description | escape }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Chrome Extension Guide",
+      "url": "https://bestchromeextensions.com"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.google.com/search?q=site:bestchromeextensions.com+{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "SiteNavigationElement", "position": 1, "name": "Productivity", "url": "https://bestchromeextensions.com/topics/productivity/" },
+      { "@type": "SiteNavigationElement", "position": 2, "name": "Dev Tools", "url": "https://bestchromeextensions.com/topics/developer-tools/" },
+      { "@type": "SiteNavigationElement", "position": 3, "name": "Privacy", "url": "https://bestchromeextensions.com/topics/privacy/" },
+      { "@type": "SiteNavigationElement", "position": 4, "name": "Communication", "url": "https://bestchromeextensions.com/topics/communication/" }
+    ]
+  }
+  </script>
+  {% endif %}
   {% if page.title %}
   <script type="application/ld+json">
   {
@@ -77,6 +110,26 @@
       "name": "{{ site.title | escape }}",
       "url": "{{ site.url }}"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Chrome Extension Guide",
+        "item": "https://bestchromeextensions.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ page.title | escape }}",
+        "item": "{{ page.url | absolute_url }}"
+      }
+    ]
   }
   </script>
   {% endif %}
@@ -124,6 +177,12 @@
     <a href="/topics/privacy/">Privacy</a>
     <a href="/topics/communication/">Communication</a>
   </nav>
+  {% if page.date %}
+  <nav aria-label="breadcrumb" style="font-size:0.85em;color:#86868b;margin-bottom:1em;border:none;padding:0;">
+    <a href="/" style="color:#86868b; font-weight:400;">Home</a> <span style="color:#d2d2d7;">/</span>
+    <span>{{ page.title }}</span>
+  </nav>
+  {% endif %}
   <main>
     {% if page.date %}
     <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
@@ -131,8 +190,8 @@
     {{ content }}
   </main>
   <footer>
-    <p>&copy; 2026 Chrome Extension Guide</p>
-    <p><a href="/about/">About</a> &middot; <a href="/topics/productivity/">Productivity</a> &middot; <a href="/topics/developer-tools/">Dev Tools</a> &middot; <a href="/topics/privacy/">Privacy</a></p>
+    <p><a href="https://chrometipsguide.com">Chrome Tips</a> &middot; <a href="https://securetoolsguide.com">Security Tools</a> &middot; <a href="https://bestremotetools.com">AI Tools</a> &middot; <a href="https://welikeremotestack.com">Remote Work</a> &middot; <a href="https://claudecodeguides.com">Claude Code</a></p>
+    <p>&copy; 2026 Chrome Extension Guide &middot; <a href="/about/">About</a></p>
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', function() {

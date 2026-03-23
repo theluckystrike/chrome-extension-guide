@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://bestchromeextensions.com/sitemap.xml
+Sitemap: https://bestchromeextensions.com/feed.xml
