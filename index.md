@@ -35,24 +35,3 @@ The Chrome Web Store has 200,000+ extensions and most of them are garbage. These
   <p>Protect users from vulnerabilities with proper CSP, minimal permissions, and security audits.</p>
 </div>
 
-## Browse by Topic
-
-**[Productivity](/topics/productivity/)** — Tab management, workflow automation, and focus tools.
-
-**[Developer Tools](/topics/developer-tools/)** — Debugging, performance profiling, and code inspection.
-
-**[Privacy & Security](/topics/privacy/)** — Permission audits, data protection, and safe browsing.
-
-**[Performance](/topics/performance/)** — Memory management, profiling, and speed optimization.
-
-**[Tutorials](/topics/tutorials/)** — Build real Chrome extensions from scratch, step by step.
-
-**[API Guides](/topics/api-guides/)** — Chrome extension API documentation with working examples.
-
-**[UI & Design](/topics/ui-design/)** — Popup design, side panels, theming, and visual polish.
-
-**[Communication](/topics/communication/)** — Extensions for email, messaging, and team collaboration.
-
-## About
-
-Chrome Extension Guide publishes independent reviews. [Read more →](/about/)
