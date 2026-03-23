@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Chrome Extension Service Worker Lifecycle Deep Dive. Complete Guide (Manifest V3)"
+title: "Chrome Extension Service Worker Lifecycle detailed look. Complete Guide (Manifest V3)"
 seo_title: "Chrome Extension Service Worker Lifecycle | Manifest V3 Guide"
 description: "Master the Chrome extension service worker lifecycle. Install, activate, idle, terminate events. Persistent state patterns, alarm-based keepalive, and migration from background pages."
 date: 2025-01-25
@@ -9,7 +9,7 @@ tags: [service-worker, manifest-v3, background-scripts, extension-lifecycle, chr
 author: theluckystrike
 ---
 
-# Chrome Extension Service Worker Lifecycle Deep Dive. Complete Guide (Manifest V3)
+Chrome Extension Service Worker Lifecycle detailed look. Complete Guide (Manifest V3)
 
 The transition from Chrome's Manifest V2 to Manifest V3 brought one of the most significant architectural changes in extension development: the replacement of persistent background pages with ephemeral service workers. This change fundamentally alters how your extension manages state, schedules tasks, and maintains long-running operations. Understanding the service worker lifecycle isn't just helpful, it's essential for building production-ready extensions that work reliably.
 

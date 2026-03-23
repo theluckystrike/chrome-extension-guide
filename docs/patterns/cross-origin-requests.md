@@ -5,7 +5,7 @@ description: "Handle cross-origin requests in Chrome extensions with CORS workar
 canonical_url: "https://bestchromeextensions.com/patterns/cross-origin-requests/"
 ---
 
-# Cross-Origin Request Patterns for Chrome Extensions
+Cross-Origin Request Patterns for Chrome Extensions
 
 This guide covers making cross-origin HTTP requests from Chrome extensions, including permission configuration, content script limitations, and solid request handling patterns.
 

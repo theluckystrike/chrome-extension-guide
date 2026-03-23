@@ -9,7 +9,7 @@ keywords: "gesture drawing extension, sketch overlay chrome, web drawing tool, c
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-gesture-drawing-chrome-extension/"
 ---
 
-# Build a Gesture Drawing Chrome Extension: Complete Guide
+Build a Gesture Drawing Chrome Extension: Complete Guide
 
 Have you ever wanted to quickly sketch, annotate, or draw on top of any webpage you are viewing? Whether you need to mark up a design mockup, explain something visually to a colleague, or simply want a digital whiteboard overlay for brainstorming, a gesture drawing Chrome extension can transform your browsing experience. we will walk you through building a fully functional gesture drawing extension from scratch using modern web technologies.
 

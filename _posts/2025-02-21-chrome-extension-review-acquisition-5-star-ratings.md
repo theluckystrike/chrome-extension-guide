@@ -8,7 +8,7 @@ tags: [extension-reviews, chrome-web-store-reviews, user-feedback, rating-optimi
 author: theluckystrike
 ---
 
-# Chrome Extension Review Acquisition. How to Get 5-Star Ratings
+Chrome Extension Review Acquisition. How to Get 5-Star Ratings
 
 Your Chrome extension could be technically excellent, feature-rich, and solve a genuine problem, but without reviews, it struggles to gain traction in the Chrome Web Store. Reviews serve as social proof that influences both Google's ranking algorithm and potential users' download decisions. This guide provides comprehensive strategies for acquiring 5-star ratings while maintaining compliance with Chrome Web Store policies.
 

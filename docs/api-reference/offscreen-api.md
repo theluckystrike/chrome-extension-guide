@@ -5,7 +5,7 @@ description: "The Chrome Offscreen API creates offscreen documents for DOM acces
 canonical_url: "https://bestchromeextensions.com/api-reference/offscreen-api/"
 ---
 
-# chrome.offscreen API Reference
+chrome.offscreen API Reference
 
 The `chrome.offscreen` API enables extensions to create offscreen documents for DOM access in Manifest V3. Required for DOM operations that were handled by background pages in MV2.
 

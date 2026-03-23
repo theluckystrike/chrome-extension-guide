@@ -9,7 +9,7 @@ keywords: "css viewer extension, inspect css chrome, css tool extension, chrome 
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-css-viewer-chrome-extension/"
 ---
 
-# Build a CSS Properties Viewer Chrome Extension
+Build a CSS Properties Viewer Chrome Extension
 
 If you have ever used the built-in Chrome DevTools to debug styling issues, you know how powerful CSS inspection can be. But what if you could have quick access to CSS properties directly in your browser toolbar without opening the developer tools? A CSS properties viewer extension provides exactly that functionality. a streamlined way to inspect CSS chrome elements and view computed styles at a glance.
 

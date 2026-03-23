@@ -1,12 +1,12 @@
-# Building a Service Worker Debugger Chrome Extension
+Building a Service Worker Debugger Chrome Extension
 
-## Overview
+Overview
 
 This guide covers building a Chrome extension that debugs, monitors, and inspects Service Workers in real-time. Service Workers are a powerful but notoriously difficult-to-debug feature of modern web applications. A dedicated debugger extension can significantly improve the development experience by providing visibility into worker lifecycle, fetch events, caching, and messaging.
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 ```json
 {
@@ -47,7 +47,7 @@ This guide covers building a Chrome extension that debugs, monitors, and inspect
 }
 ```
 
-### Project Structure
+Project Structure
 
 ```
 src/
@@ -75,9 +75,9 @@ src/
  manifest.ts
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types (shared/types.ts)
+Shared Types (shared/types.ts)
 
 ```typescript
 // Service Worker lifecycle states
@@ -167,7 +167,7 @@ export interface ExtensionState {
 }
 ```
 
-### Background Service Worker (background/worker.ts)
+Background Service Worker (background/worker.ts)
 
 ```typescript
 import { ServiceWorkerInfo, SWEvent, ExtensionState, CacheInfo } from '../shared/types';
@@ -375,9 +375,9 @@ async function handleTabActivation(activeInfo: chrome.tabs.TabActiveInfo): Promi
 }
 ```
 
-## UI Design
+UI Design
 
-### Popup Interface (ui/popup/popup.ts)
+Popup Interface (ui/popup/popup.ts)
 
 ```typescript
 import { ExtensionState, SWEvent } from '../../shared/types';
@@ -438,7 +438,7 @@ document.getElementById('clear-events-btn')?.addEventListener('click', () => {
 });
 ```
 
-### Sidebar Interface (ui/sidebar/sidebar.ts)
+Sidebar Interface (ui/sidebar/sidebar.ts)
 
 ```typescript
 import { ExtensionState, SWEvent } from '../../shared/types';
@@ -568,9 +568,9 @@ function formatTime(timestamp: number): string {
 }
 ```
 
-## Chrome APIs Used and Permissions
+Chrome APIs Used and Permissions
 
-### Required Permissions
+Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -580,7 +580,7 @@ function formatTime(timestamp: number): string {
 | `scripting` | Inject content scripts for overlay |
 | `debugger` | Core API for Service Worker debugging |
 
-### Key Chrome APIs
+Key Chrome APIs
 
 ```typescript
 // Debugger API - Main debugging interface
@@ -605,9 +605,9 @@ chrome.debugger.onDetach.addListener((source, reason) => {})
 chrome.devtools.network.onRequestFinished.addListener((request) => {})
 ```
 
-## State Management and Storage Patterns
+State Management and Storage Patterns
 
-### Using chrome.storage for Persistence
+Using chrome.storage for Persistence
 
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -637,7 +637,7 @@ async function saveBreakpoint(url: string, line: number): Promise<void> {
 }
 ```
 
-### In-Memory State with Periodic Persistence
+In-Memory State with Periodic Persistence
 
 ```typescript
 class StateManager<T extends Record<string, unknown>> {
@@ -687,9 +687,9 @@ class StateManager<T extends Record<string, unknown>> {
 }
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Comprehensive Error Handling
+Comprehensive Error Handling
 
 ```typescript
 class DebuggerErrorHandler {
@@ -748,7 +748,7 @@ class DebuggerErrorHandler {
 const errorHandler = new DebuggerErrorHandler();
 ```
 
-### Edge Case Handling
+Edge Case Handling
 
 ```typescript
 // Handle service worker termination during debugging
@@ -800,9 +800,9 @@ async function ensureVersionCompatible(tabId: number): Promise<boolean> {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing with Vitest
+Unit Testing with Vitest
 
 ```typescript
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -857,7 +857,7 @@ describe('StateManager', () => {
 });
 ```
 
-### Integration Testing with Puppeteer
+Integration Testing with Puppeteer
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -905,9 +905,9 @@ test.describe('Service Worker Debugger Extension', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimizing Event Collection
+Optimizing Event Collection
 
 ```typescript
 class OptimizedEventCollector {
@@ -952,7 +952,7 @@ class OptimizedEventCollector {
 }
 ```
 
-### Memory Management
+Memory Management
 
 ```typescript
 const MAX_EVENTS = 1000;
@@ -978,9 +978,9 @@ setInterval(() => {
 }, 30000);
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication Requirements
+Pre-Publication Requirements
 
 - [ ] Update `manifest.json` version number
 - [ ] Test in Chrome, Edge, and Firefox (if cross-browser)
@@ -990,7 +990,7 @@ setInterval(() => {
 - [ ] Write concise store description (max 132 characters)
 - [ ] Prepare store assets (128x128, 440x280 icons)
 
-### Store Listing Details
+Store Listing Details
 
 ```json
 {
@@ -1002,7 +1002,7 @@ setInterval(() => {
 }
 ```
 
-### Post-Publication
+Post-Publication
 
 - [ ] Monitor crash reports in Chrome Web Store dashboard
 - [ ] Set up automated tests in CI/CD
@@ -1010,16 +1010,16 @@ setInterval(() => {
 - [ ] Document known limitations
 - [ ] Set up issue templates
 
-### Version Bumping
+Version Bumping
 
 ```bash
-# Use semantic versioning
+Use semantic versioning
 npm version patch  # 1.0.0 -> 1.0.1
 npm version minor  # 1.0.0 -> 1.1.0
 npm version major  # 1.0.0 -> 2.0.0
 ```
 
-## Conclusion
+Conclusion
 
 Building a Service Worker debugger extension requires careful handling of Chrome's debugger APIs, proper state management for ephemeral service workers, and thoughtful UI design. This guide provides the foundation for creating a solid debugging tool that can significantly improve the development experience for PWA and Service Worker-based applications.
 

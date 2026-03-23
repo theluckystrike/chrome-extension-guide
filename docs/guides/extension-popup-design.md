@@ -1,8 +1,8 @@
-# Chrome Extension Popup Design Patterns
+Chrome Extension Popup Design Patterns
 
 The popup is often the first interaction users have with your Chrome extension. A well-designed popup provides instant functionality without requiring users to navigate to a separate options page. This guide covers architecture patterns, lifecycle management, framework integrations, and UX best practices for building professional Chrome extension popups.
 
-## Table of Contents
+Table of Contents
 
 - [Popup HTML/CSS/JS Architecture](#popup-htmlcssjs-architecture)
 - [Popup Lifecycle](#popup-lifecycle)
@@ -19,9 +19,9 @@ The popup is often the first interaction users have with your Chrome extension. 
 
 ---
 
-## Popup HTML/CSS/JS Architecture
+Popup HTML/CSS/JS Architecture
 
-### Basic Structure
+Basic Structure
 
 The popup consists of three main files referenced in your manifest:
 
@@ -34,7 +34,7 @@ The popup consists of three main files referenced in your manifest:
 }
 ```
 
-### Standard File Organization
+Standard File Organization
 
 ```
 my-extension/
@@ -47,7 +47,7 @@ my-extension/
  manifest.json
 ```
 
-### Minimal Popup HTML
+Minimal Popup HTML
 
 ```html
 <!DOCTYPE html>

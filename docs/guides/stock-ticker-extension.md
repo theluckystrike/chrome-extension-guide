@@ -1,12 +1,12 @@
-# Building a Stock Ticker Chrome Extension
+Building a Stock Ticker Chrome Extension
 
 A comprehensive guide to building a real-time stock ticker extension with Manifest V3, TypeScript, and Chrome APIs.
 
-## Prerequisites
+Prerequisites
 
 Node.js 18+, TypeScript knowledge, Chrome browser
 
-## Project Structure
+Project Structure
 
 ```
 stock-ticker/
@@ -17,7 +17,7 @@ stock-ticker/
  manifest.json, tsconfig.json, webpack.config.js
 ```
 
-## Step 1: manifest.json
+Step 1: manifest.json
 
 ```json
 {
@@ -33,7 +33,7 @@ stock-ticker/
 }
 ```
 
-## Step 2: TypeScript Types
+Step 2: TypeScript Types
 
 ```typescript
 // src/types/stock.ts
@@ -51,7 +51,7 @@ export interface StorageData {
 }
 ```
 
-## Step 3: Stock API Service
+Step 3: Stock API Service
 
 ```typescript
 // src/services/StockAPI.ts
@@ -81,7 +81,7 @@ export class StockAPI {
 }
 ```
 
-## Step 4: Storage Utilities
+Step 4: Storage Utilities
 
 ```typescript
 // src/utils/storage.ts
@@ -110,7 +110,7 @@ export class StorageUtil {
 }
 ```
 
-## Step 5: Background Service Worker
+Step 5: Background Service Worker
 
 ```typescript
 // src/background/service-worker.ts
@@ -137,7 +137,7 @@ async function refreshStockPrices(): Promise<void> {
 chrome.runtime.onInstalled.addListener(() => refreshStockPrices());
 ```
 
-## Step 6: Popup HTML
+Step 6: Popup HTML
 
 ```html
 <!-- src/popup/popup.html -->
@@ -165,7 +165,7 @@ chrome.runtime.onInstalled.addListener(() => refreshStockPrices());
 </html>
 ```
 
-## Step 7: Popup Logic
+Step 7: Popup Logic
 
 ```typescript
 // src/popup/popup.ts
@@ -225,7 +225,7 @@ function setupEvents(): void {
 }
 ```
 
-## Step 8: Popup Styles
+Step 8: Popup Styles
 
 ```css
 /* src/popup/styles.css */
@@ -248,7 +248,7 @@ body { width: 320px; font-family: -apple-system, sans-serif; background: #f5f5f5
 .footer { margin-top: 12px; font-size: 11px; color: #666; text-align: center; }
 ```
 
-## Step 9: Webpack Config
+Step 9: Webpack Config
 
 ```javascript
 // webpack.config.js
@@ -262,7 +262,7 @@ module.exports = {
 };
 ```
 
-## Testing
+Testing
 
 Build: `npm run build` → Open `chrome://extensions/` → Enable Developer mode → Load unpacked → Select `dist`
 
@@ -275,7 +275,7 @@ test('popup displays stocks', async ({ page }) => {
 });
 ```
 
-## Features Summary
+Features Summary
 
 | Feature | Implementation |
 |---------|---------------|
@@ -284,7 +284,7 @@ test('popup displays stocks', async ({ page }) => {
 | Storage | chrome.storage.local |
 | Background updates | chrome.alarms + Service Worker |
 
-## Best Practices
+Best Practices
 
 1. Rate limiting: Cache requests to avoid API limits
 2. Error handling: Wrap API calls in try-catch

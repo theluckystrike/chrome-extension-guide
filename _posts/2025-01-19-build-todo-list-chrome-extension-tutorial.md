@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-todo-list-chrome-extension-tutorial/"
 ---
 
-# Build a Todo List Chrome Extension Tutorial. Complete 2025 Guide
+Build a Todo List Chrome Extension Tutorial. Complete 2025 Guide
 
 Chrome extensions have revolutionized the way we work and manage our digital lives. Among the most popular and useful extensions are task manager extensions that help users stay organized and productive. In this comprehensive tutorial, we'll walk you through building a fully functional todo chrome extension from scratch using Manifest V3, the latest version of Chrome's extension framework.
 

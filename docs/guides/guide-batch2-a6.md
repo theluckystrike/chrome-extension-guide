@@ -1,10 +1,10 @@
-# Ad Blocking Architecture in Chrome Extensions
+Ad Blocking Architecture in Chrome Extensions
 
-## Introduction
+Introduction
 
 Ad blocking is one of the most popular use cases for Chrome extensions. Building an effective ad blocker requires understanding the declarative net request API, content blocking rules, and efficient pattern matching algorithms. This guide covers the architecture patterns and implementation details for building a production-ready ad blocker.
 
-## Core Architecture Overview
+Core Architecture Overview
 
 Modern ad blockers in Chrome extensions rely on the `declarativeNetRequest` API, which allows you to block or modify network requests without requiring a content script running on every page. This is more performant than older approaches that used `webRequest` API.
 
@@ -31,7 +31,7 @@ Modern ad blockers in Chrome extensions rely on the `declarativeNetRequest` API,
 
 ```
 
-## Manifest Configuration
+Manifest Configuration
 
 Your `manifest.json` must declare the necessary permissions and specify rule files:
 
@@ -53,9 +53,9 @@ Your `manifest.json` must declare the necessary permissions and specify rule fil
 }
 ```
 
-## TypeScript Implementation
+TypeScript Implementation
 
-### Rule Type Definitions
+Rule Type Definitions
 
 ```typescript
 // types/adBlocker.ts
@@ -91,7 +91,7 @@ export interface RuleSet {
 }
 ```
 
-### Rule Manager Service
+Rule Manager Service
 
 ```typescript
 // services/ruleManager.ts
@@ -146,7 +146,7 @@ export class RuleManager {
 }
 ```
 
-### Ad Detection and Rule Generation
+Ad Detection and Rule Generation
 
 ```typescript
 // services/adDetector.ts
@@ -209,7 +209,7 @@ export class AdDetector {
 }
 ```
 
-## Filter List Management
+Filter List Management
 
 Real ad blockers use filter lists similar to EasyList and AdGuard. Here's how to manage them:
 
@@ -337,7 +337,7 @@ export class FilterListManager {
 }
 ```
 
-## Background Service Worker Setup
+Background Service Worker Setup
 
 ```typescript
 // background.ts
@@ -388,7 +388,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-## Element Hiding (Cosmetic Filtering)
+Element Hiding (Cosmetic Filtering)
 
 For hiding ad elements on pages, use the `declarativeNetRequest` with `modifyHeaders`:
 
@@ -424,9 +424,9 @@ export function generateCosmeticRules(filters: CosmeticRule[]): any[] {
 }
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Rule Prioritization
+Rule Prioritization
 
 ```typescript
 // Optimize rule loading order
@@ -439,7 +439,7 @@ const PRIORITY_ORDER = [
 ];
 ```
 
-### Monitoring and Statistics
+Monitoring and Statistics
 
 ```typescript
 // services/stats.ts
@@ -483,7 +483,7 @@ export class BlockingStatsCollector {
 }
 ```
 
-## Testing Your Ad Blocker
+Testing Your Ad Blocker
 
 ```typescript
 // __tests__/adBlocker.test.ts
@@ -513,7 +513,7 @@ describe('AdDetector', () => {
 });
 ```
 
-## Best Practices
+Best Practices
 
 1. Use declarativeNetRequest - Never use `webRequest` for blocking as it's deprecated for this use case
 2. Batch rule updates - Chrome has limits on how many rules you can update at once
@@ -523,6 +523,6 @@ describe('AdDetector', () => {
 6. Test thoroughly - Use Chrome's `chrome://extensions` to debug rule matching
 7. Handle edge cases - Some sites use anti-adblock detection; implement workarounds
 
-## Conclusion
+Conclusion
 
 Building an effective ad blocker requires understanding network request interception, filter list parsing, and efficient rule management. The declarativeNetRequest API provides the foundation, while proper architecture ensures performance and maintainability. Start with basic blocking rules and progressively add cosmetic filtering, user preferences, and statistics tracking as your extension matures.

@@ -8,7 +8,7 @@ tags: [chrome-extension, developer-tools]
 author: theluckystrike
 ---
 
-# Build a Base64 Encoder Decoder Chrome Extension: Complete 2025 Guide
+Build a Base64 Encoder Decoder Chrome Extension: Complete 2025 Guide
 
 Base64 encoding is an essential tool for developers, security professionals, and anyone working with data transmission. Whether you're debugging API responses, encoding images for data URLs, or working with authentication tokens, a reliable base64 converter extension can significantly boost your productivity. we'll walk you through building a fully functional base64 extension for Chrome from scratch.
 

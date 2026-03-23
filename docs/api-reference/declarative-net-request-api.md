@@ -5,7 +5,7 @@ description: "The Chrome Declarative Net Request API blocks, redirects, and modi
 canonical_url: "https://bestchromeextensions.com/api-reference/declarative-net-request-api/"
 ---
 
-# Chrome Declarative Net Request API Reference
+Chrome Declarative Net Request API Reference
 
 The `chrome.declarativeNetRequest` API lets you block, redirect, and modify network requests using declarative rules. It is the MV3 replacement for the `chrome.webRequest` blocking API and is designed to be performant and privacy-preserving -- the browser evaluates rules without exposing request details to the extension.
 

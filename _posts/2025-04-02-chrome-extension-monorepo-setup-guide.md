@@ -9,7 +9,7 @@ keywords: "chrome extension monorepo, monorepo chrome extension, turborepo chrom
 canonical_url: "https://bestchromeextensions.com/2025/04/02/chrome-extension-monorepo-setup-guide/"
 ---
 
-# Chrome Extension Monorepo Setup: Manage Multiple Extensions in One Repo
+Chrome Extension Monorepo Setup: Manage Multiple Extensions in One Repo
 
 If you are developing multiple Chrome extensions, managing each in a separate repository can quickly become a maintenance nightmare. Duplicated code, inconsistent configurations, and scattered dependencies make it difficult to maintain quality and efficiency across your extension portfolio. This is where a chrome extension monorepo comes into play, a powerful architectural approach that allows you to manage multiple extensions in a single repository while sharing code, reducing redundancy, and streamlining your development workflow.
 

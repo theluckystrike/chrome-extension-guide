@@ -5,7 +5,7 @@ description: "Handle extension updates and migrations smoothly."
 canonical_url: "https://bestchromeextensions.com/patterns/update-migration/"
 ---
 
-# Extension Update and Migration Strategies
+Extension Update and Migration Strategies
 
 Overview {#overview}
 

@@ -5,7 +5,7 @@ description: "Learn to build production-ready Chrome extensions using TypeScript
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-development-typescript-2026/"
 ---
 
-# Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide
+Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide
 
 Introduction
 

@@ -9,7 +9,7 @@ keywords: "chrome extension commands API, chrome extension keyboard shortcuts, g
 canonical_url: "https://bestchromeextensions.com/2025/03/14/chrome-extension-commands-api-keyboard-shortcuts/"
 ---
 
-# Chrome Extension Commands API: Define Global Keyboard Shortcuts
+Chrome Extension Commands API: Define Global Keyboard Shortcuts
 
 Keyboard shortcuts are the backbone of any professional Chrome extension experience. When users adopt your extension into their daily workflow, providing intuitive and powerful keyboard shortcuts can dramatically improve productivity and create a smooth user experience. The Chrome Extension Commands API (also known as chrome.commands API) is the official mechanism that allows extension developers to define and manage global keyboard shortcuts that work across all contexts within the browser.
 

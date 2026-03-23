@@ -4,7 +4,7 @@ title: "Chrome Extension Window Management. Developer Guide"
 description: "Learn Chrome extension window management with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/window-management/"
 ---
-# Window Management in Chrome Extensions
+Window Management in Chrome Extensions
 
 Introduction {#introduction}
 - `chrome.windows` API for creating, managing, and monitoring browser windows

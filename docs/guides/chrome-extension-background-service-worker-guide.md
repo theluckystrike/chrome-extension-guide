@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 
 ---
 
-# Chrome Extension Background Service Worker Guide. Complete MV3 Implementation
+Chrome Extension Background Service Worker Guide. Complete MV3 Implementation
 
 The background service worker is the backbone of any sophisticated Chrome extension built with Manifest V3. Unlike the persistent background pages of Manifest V2, service workers in MV3 are ephemeral by design, they activate when needed and terminate after periods of inactivity. This architectural shift demands a fundamentally different approach to extension development.
 
@@ -1059,7 +1059,7 @@ Common Pitfalls to Avoid
 
 Related Guides
 
-- [Service Worker Lifecycle Deep Dive](service-worker-lifecycle.md)
+- [Service Worker Lifecycle detailed look](service-worker-lifecycle.md)
 - [Chrome Extension Message Passing Patterns](message-passing-best-practices.md)
 - [Advanced Debugging Techniques](advanced-debugging.md)
 - [Storage API Complete Reference](../api-reference/storage.md)

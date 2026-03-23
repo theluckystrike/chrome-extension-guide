@@ -1,12 +1,12 @@
-# Chrome Tabs API Guide
+Chrome Tabs API Guide
 
-## Overview
+Overview
 
 The Chrome Tabs API provides powerful methods to manage browser tabs, creating, updating, moving, grouping, and listening for tab events. This guide covers all essential methods with practical code examples for building tab management extensions.
 
 Required Permission: `"tabs"` (or granular host permissions for specific URLs)
 
-## Tab Properties
+Tab Properties
 
 Every tab object contains these key properties:
 
@@ -33,9 +33,9 @@ Every tab object contains these key properties:
 
 ---
 
-## Finding & Getting Tabs
+Finding & Getting Tabs
 
-### chrome.tabs.query. Finding Tabs with Filters
+chrome.tabs.query. Finding Tabs with Filters
 
 Query tabs using a `QueryInfo` object to filter by various properties:
 
@@ -76,7 +76,7 @@ chrome.tabs.query({ windowId: 2 }, (tabs) => { /* tabs in window 2 */ });
 chrome.tabs.query({ groupId: 5 }, (tabs) => { /* tabs in group 5 */ });
 ```
 
-### chrome.tabs.get. Getting a Tab by ID
+chrome.tabs.get. Getting a Tab by ID
 
 ```javascript
 // Get a specific tab by ID
@@ -91,7 +91,7 @@ const tab = await chrome.tabs.get(42);
 console.log(tab.url);
 ```
 
-### chrome.tabs.getCurrent. Getting the Current Tab
+chrome.tabs.getCurrent. Getting the Current Tab
 
 Get the tab where the calling script is running (useful in popup or content script):
 

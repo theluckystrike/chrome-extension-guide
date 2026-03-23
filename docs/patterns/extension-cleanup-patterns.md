@@ -5,7 +5,7 @@ description: "Clean up resources when extensions or tabs are closed."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-cleanup-patterns/"
 ---
 
-# Cleanup and Teardown Patterns for Chrome Extensions
+Cleanup and Teardown Patterns for Chrome Extensions
 
 Proper cleanup ensures extensions leave no trace when disabled, uninstalled, or updated. This document covers essential patterns for graceful shutdown.
 

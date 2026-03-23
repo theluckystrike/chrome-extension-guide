@@ -5,7 +5,7 @@ description: "Implement right-to-left (RTL) localization support for Chrome exte
 canonical_url: "https://bestchromeextensions.com/patterns/rtl-localization/"
 ---
 
-# RTL and Advanced Localization Patterns
+RTL and Advanced Localization Patterns
 
 Overview {#overview}
 

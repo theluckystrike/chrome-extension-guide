@@ -4,7 +4,7 @@ title: "Chrome Extension Page Speed Analyzer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-speed-analyzer/"
 ---
-# Build a Page Speed Analyzer Extension
+Build a Page Speed Analyzer Extension
 
 What You'll Build {#what-youll-build}
 A Chrome extension that analyzes page performance using the Performance API, displays metrics (FCP, LCP, CLS, FID, TTFB), shows resource breakdown, calculates performance scores, tracks history, and provides recommendations.

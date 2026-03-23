@@ -9,7 +9,7 @@ keywords: "port chrome extension edge, edge extension development, chromium exte
 canonical_url: "https://bestchromeextensions.com/2025/01/25/porting-chrome-extensions-microsoft-edge/"
 ---
 
-# Porting Chrome Extensions to Microsoft Edge: Complete 2025 Guide
+Porting Chrome Extensions to Microsoft Edge: Complete 2025 Guide
 
 If you have built a Chrome extension and want to reach millions of additional users, porting your extension to Microsoft Edge is one of the smartest moves you can make in 2025. Microsoft Edge is built on the same Chromium engine that powers Google Chrome, which means the vast majority of your Chrome extension code will work directly in Edge with minimal modifications. This comprehensive guide walks you through every step of the porting process, from understanding the compatibility landscape to publishing your extension in the Microsoft Edge Add-ons store.
 

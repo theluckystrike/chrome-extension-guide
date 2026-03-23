@@ -9,7 +9,7 @@ keywords: "data export extension, export to csv chrome, web data exporter extens
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-data-export-chrome-extension/"
 ---
 
-# Build a Data Export Chrome Extension: CSV, JSON and PDF
+Build a Data Export Chrome Extension: CSV, JSON and PDF
 
 Have you ever needed to extract data from a website and save it for offline use? Whether you are collecting product prices for comparison shopping, gathering contact information from directories, or compiling research data from multiple sources, the ability to export web data in multiple formats is incredibly valuable. Building a data export extension empowers users to capture structured information from any webpage and download it in their preferred format.
 

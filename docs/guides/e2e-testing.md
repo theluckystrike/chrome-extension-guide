@@ -5,7 +5,7 @@ description: "Master end-to-end testing for Chrome extensions using Puppeteer, P
 canonical_url: "https://bestchromeextensions.com/guides/e2e-testing/"
 ---
 
-# Chrome Extension End-to-End Testing Guide. Automated Browser Testing
+Chrome Extension End-to-End Testing Guide. Automated Browser Testing
 
 End-to-end (E2E) testing verifies that your Chrome extension works correctly when installed and running in a real browser. While unit tests check individual functions in isolation, E2E tests validate the complete user experience, from clicking a button in the popup to observing the result in a content script on a webpage. This guide covers automated browser testing tools, patterns, and best practices for Chrome extensions.
 

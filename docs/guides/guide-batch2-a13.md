@@ -1,10 +1,10 @@
-# Building Translation Extensions for Chrome
+Building Translation Extensions for Chrome
 
-## Introduction
+Introduction
 
 Translation extensions are among the most useful browser extensions, enabling users to instantly translate text across the web. Whether you're building a simple one-way translator or a sophisticated multilingual assistant, understanding the architecture patterns for translation extensions is essential. This guide covers building translation extensions using the Chrome Extension Manifest V3, TypeScript, and modern APIs.
 
-## Architecture Overview
+Architecture Overview
 
 A translation extension typically consists of several key components:
 
@@ -13,7 +13,7 @@ A translation extension typically consists of several key components:
 3. Background Service Worker - Handles API calls, caching, and state management
 4. Options Page - User preferences and language settings
 
-## Core Translation Service
+Core Translation Service
 
 The foundation of any translation extension is the translation service. Here's a solid TypeScript implementation:
 
@@ -146,7 +146,7 @@ export class TranslationService {
 }
 ```
 
-## Language Detection
+Language Detection
 
 Modern translation extensions should auto-detect source language. Here's a language detection implementation:
 
@@ -251,7 +251,7 @@ export class LanguageDetector {
 }
 ```
 
-## Popup Implementation
+Popup Implementation
 
 The popup provides quick access to translation features:
 
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Selection Translation (Content Script)
+Selection Translation (Content Script)
 
 Allow users to translate selected text on any webpage:
 
@@ -548,7 +548,7 @@ class SelectionTranslator {
 new SelectionTranslator().init();
 ```
 
-## Background Service Worker
+Background Service Worker
 
 Handle translation requests from content scripts and popup:
 
@@ -630,7 +630,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -678,7 +678,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 }
 ```
 
-## Key Features Checklist
+Key Features Checklist
 
 - [ ] Popup translation interface with language selectors
 - [ ] Auto language detection for source text
@@ -690,7 +690,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 - [ ] Copy to clipboard functionality
 - [ ] Error handling and user feedback
 
-## Best Practices
+Best Practices
 
 1. Use free APIs initially - Start with LibreTranslate or Google Translate API's free tier
 2. Implement caching - Reduce API calls and improve response times
@@ -699,6 +699,6 @@ chrome.action.onClicked.addListener(async (tab) => {
 5. Support offline - Cache common translations for offline access
 6. Provide feedback - Show loading states and clear error messages
 
-## Conclusion
+Conclusion
 
 Building a translation extension requires careful consideration of user experience, API integration, and performance. The patterns shown in this guide provide a solid foundation for creating a production-ready translation extension with features like auto-detection, selection translation, and multiple provider support.

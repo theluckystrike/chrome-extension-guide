@@ -8,7 +8,7 @@ order: 14
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestFeedback/"
 ---
 
-# declarativeNetRequestFeedback Permission. Chrome Extension Reference
+declarativeNetRequestFeedback Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"declarativeNetRequestFeedback"`

@@ -4,7 +4,7 @@ title: "Chrome Extension React Setup. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-react-setup/"
 ---
-# Setting Up React for Chrome Extension Development
+Setting Up React for Chrome Extension Development
 
 This guide covers building Chrome extensions with React, covering project initialization, architecture patterns, and best practices for modern extension development.
 

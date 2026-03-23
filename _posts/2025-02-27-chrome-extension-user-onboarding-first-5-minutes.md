@@ -8,7 +8,7 @@ tags: [user-onboarding, extension-ux, retention, activation, chrome-extension-de
 author: theluckystrike
 ---
 
-# Chrome Extension User Onboarding. The First 5 Minutes That Matter Most
+Chrome Extension User Onboarding. The First 5 Minutes That Matter Most
 
 Your Chrome extension has been installed. The user sees your icon in the toolbar for the first time. In the next five minutes, one of two things will happen: they will either discover your extension's value and become a loyal user, or they will disable it and forget it ever existed.
 

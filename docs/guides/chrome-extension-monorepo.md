@@ -4,7 +4,7 @@ title: "Chrome Extension Monorepo Setup. Developer Guide"
 description: "Learn Chrome extension monorepo setup with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-monorepo/"
 ---
-# Chrome Extension Monorepo
+Chrome Extension Monorepo
 
 Monorepo architecture organizes multiple projects in a single repository. For Chrome extensions, this approach becomes valuable when building complex systems with shared code, multiple extensions, or accompanying web applications. This guide covers when to use monorepos, tooling options, package structures, and practical patterns for scaling extension development.
 

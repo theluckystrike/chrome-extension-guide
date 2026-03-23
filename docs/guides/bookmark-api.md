@@ -4,7 +4,7 @@ title: "Chrome Extension Bookmark API. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/bookmark-api/"
 ---
-# Bookmark API Guide
+Bookmark API Guide
 
 Overview {#overview}
 - Requires `"bookmarks"` permission (cross-ref `docs/permissions/bookmarks.md`)

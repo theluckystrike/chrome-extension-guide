@@ -1,4 +1,4 @@
-# MV3 Gotchas and Pitfalls Reference
+MV3 Gotchas and Pitfalls Reference
 
 Real issues you will hit when building Chrome extensions with Manifest V3. This guide covers the traps that trip up even experienced developers.
 

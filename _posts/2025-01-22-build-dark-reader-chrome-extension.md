@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-dark-reader-chrome-extension/"
 ---
 
-# Build a Dark Reader Chrome Extension. Complete 2025 Tutorial
+Build a Dark Reader Chrome Extension. Complete 2025 Tutorial
 
 Dark mode has become an essential feature for modern web applications and browser extensions. With users spending countless hours in front of screens, the demand for dark reader extension functionality has skyrocketed. This comprehensive tutorial will walk you through building a complete Chrome extension that provides dark mode injection capabilities, enabling users to apply a dark theme all sites they visit.
 

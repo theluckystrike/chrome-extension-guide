@@ -9,7 +9,7 @@ keywords: "chrome extension notification blocker, block notifications chrome, st
 canonical_url: "https://bestchromeextensions.com/2025/04/07/build-notification-blocker-chrome-extension/"
 ---
 
-# Build a Notification Blocker Chrome Extension: Stop Annoying Website Popups
+Build a Notification Blocker Chrome Extension: Stop Annoying Website Popups
 
 Website notification requests have become one of the most frustrating aspects of browsing the internet in 2025. Every day, millions of users are bombarded with intrusive popups asking for permission to send notifications, disrupting their browsing experience and wasting valuable time. If you have ever tried to read an article only to be greeted by a notification permission request that seems impossible to dismiss, you understand exactly why building a chrome extension notification blocker has become such a valuable project. This comprehensive tutorial will guide you through creating your own notification blocker extension that prevents websites from asking for notification permissions, blocks existing notification popups, and gives you complete control over your browsing experience.
 

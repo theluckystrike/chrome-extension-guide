@@ -5,7 +5,7 @@ description: "Advanced content script injection techniques and patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-injection/"
 ---
 
-# Content Script Injection Patterns
+Content Script Injection Patterns
 
 Content scripts run in the context of web pages. Understanding the different injection methods is essential for building effective Chrome extensions.
 

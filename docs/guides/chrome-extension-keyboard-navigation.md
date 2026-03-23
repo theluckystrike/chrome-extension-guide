@@ -4,7 +4,7 @@ title: "Chrome Extension Keyboard Navigation. Developer Guide"
 description: "Learn Chrome extension keyboard navigation with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-keyboard-navigation/"
 ---
-# Keyboard Navigation in Chrome Extensions
+Keyboard Navigation in Chrome Extensions
 
 Introduction {#introduction}
 - Extension UIs (popups, options pages, side panels) must be fully keyboard accessible

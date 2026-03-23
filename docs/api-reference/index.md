@@ -1,10 +1,10 @@
 ---
-title: "Chrome Extension API Reference — All APIs Explained"
+title: "Chrome Extension API Reference. All APIs Explained"
 slug: /api-reference/
 description: "Complete reference for Chrome Extension APIs including action, alarms, bookmarks, cookies, runtime, tabs, and more. Find method signatures, event listeners, and usage examples."
 ---
 
-# Chrome Extension API Reference — All APIs Explained
+# Chrome Extension API Reference. All APIs Explained
 
 The Chrome Extension API Reference is your definitive resource for understanding all available APIs in Chrome extensions. From the core APIs like `chrome.runtime` and `chrome.storage` to specialized APIs like `chrome.devtools` and `chrome.sidePanel`, this reference provides comprehensive documentation for building powerful Chrome extensions.
 

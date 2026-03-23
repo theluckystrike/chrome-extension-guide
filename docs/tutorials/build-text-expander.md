@@ -4,7 +4,7 @@ title: "Chrome Extension Text Expander. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-text-expander/"
 ---
-# Build a Text Expander Extension
+Build a Text Expander Extension
 
 What You'll Build {#what-youll-build}
 A text expander that transforms typed shortcuts into full snippets anywhere on the web. Includes an options page for snippet management, dynamic variables like {date} and {clipboard}, and works across all text inputs including contentEditable elements and shadow DOM.

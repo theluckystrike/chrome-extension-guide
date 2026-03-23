@@ -10,7 +10,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/04/20/build-simple-ad-blocker-chrome-extension/"
 ---
 
-# Build a Simple Ad Blocker Chrome Extension with declarativeNetRequest
+Build a Simple Ad Blocker Chrome Extension with declarativeNetRequest
 
 Ad blockers are among the most popular Chrome extensions available, with millions of users relying on them to enjoy a cleaner, faster browsing experience. Building your own ad blocker is not only a rewarding project but also an excellent way to learn advanced Chrome extension development techniques.
 

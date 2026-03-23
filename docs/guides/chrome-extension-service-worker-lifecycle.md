@@ -5,7 +5,7 @@ description: "Master the Chrome extension service worker lifecycle in Manifest V
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-service-worker-lifecycle/"
 ---
 
-# Chrome Extension Service Worker Lifecycle
+Chrome Extension Service Worker Lifecycle
 
 The service worker lifecycle is one of the most fundamental yet often misunderstood aspects of building Chrome extensions with Manifest V3. Unlike the persistent background pages of Manifest V2, MV3 service workers are transient by design, they can start, run, and terminate at any time based on browser needs and extension activity. Understanding this lifecycle is essential for building robust, reliable extensions that maintain state, perform background tasks, and respond to events correctly.
 

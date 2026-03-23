@@ -9,7 +9,7 @@ keywords: "chrome history api, browser history extension, history search chrome 
 canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-extension-history-api/"
 ---
 
-# Chrome History API Extension Tutorial: Build a Browser History Search Extension
+Chrome History API Extension Tutorial: Build a Browser History Search Extension
 
 The Chrome History API is one of the most powerful yet underutilized APIs available to extension developers. This comprehensive tutorial will guide you through building a fully functional browser history extension that allows users to search, filter, and manage their browsing history directly from your extension. Whether you're looking to create a simple history viewer or a sophisticated history search tool with advanced filtering capabilities, this guide will provide you with all the knowledge and code examples you need to get started.
 

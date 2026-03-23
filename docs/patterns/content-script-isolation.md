@@ -5,7 +5,7 @@ description: "Maintain proper isolation between content scripts and page scripts
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-isolation/"
 ---
 
-# Content Script Isolation Patterns
+Content Script Isolation Patterns
 
 Overview {#overview}
 

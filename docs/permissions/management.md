@@ -8,7 +8,7 @@ order: 24
 canonical_url: "https://bestchromeextensions.com/permissions/management/"
 ---
 
-# management Permission
+management Permission
 
 What It Grants {#what-it-grants}
 Access to `chrome.management` API. manage other installed extensions, apps, and themes.

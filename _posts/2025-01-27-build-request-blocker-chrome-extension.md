@@ -9,7 +9,7 @@ keywords: "request blocker extension, block url chrome, network filter extension
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-request-blocker-chrome-extension/"
 ---
 
-# Build a Request Blocker Chrome Extension: Complete Developer Guide 2025
+Build a Request Blocker Chrome Extension: Complete Developer Guide 2025
 
 The internet is filled with trackers, advertisements, and unwanted network requests that can slow down your browsing experience and compromise your privacy. Building a request blocker Chrome extension is one of the most valuable skills you can develop as a Chrome extension developer. Not only does this type of extension address real user problems, but it also provides deep insights into how Chrome's network filtering system works under the hood.
 

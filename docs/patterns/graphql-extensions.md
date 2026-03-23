@@ -5,7 +5,7 @@ description: "Consume GraphQL APIs in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/graphql-extensions/"
 ---
 
-# GraphQL in Chrome Extensions
+GraphQL in Chrome Extensions
 
 GraphQL offers structured data fetching that pairs well with the constrained environment of Chrome extensions. This guide covers eight patterns for integrating GraphQL clients, caching, subscriptions, and offline support into Manifest V3 extensions.
 

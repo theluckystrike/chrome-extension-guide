@@ -4,7 +4,7 @@ title: "Chrome Extension Focus Mode. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-focus-mode/"
 ---
-# Build a Site Blocker / Focus Mode Extension
+Build a Site Blocker / Focus Mode Extension
 
 Build a Chrome extension that blocks distracting sites during focus sessions, runs a Pomodoro timer, tracks daily statistics, and supports scheduled auto-activation. Uses @theluckystrike/webext-storage for persistent data and @theluckystrike/webext-messaging for popup-to-background communication.
 

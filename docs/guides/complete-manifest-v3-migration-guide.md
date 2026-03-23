@@ -5,7 +5,7 @@ description: "Everything you need to migrate a Chrome extension from Manifest V2
 canonical_url: "https://bestchromeextensions.com/guides/complete-manifest-v3-migration-guide/"
 ---
 
-# The Complete Manifest V3 Migration Guide
+The Complete Manifest V3 Migration Guide
 
 Everything you need to migrate a Chrome extension from Manifest V2 to Manifest V3. Written by a developer who migrated 20 production extensions.
 
@@ -97,7 +97,7 @@ This section provides detailed, step-by-step instructions for each phase of the 
 
 The manifest.json file is the entry point for any Chrome extension. Making these changes first establishes the MV3 foundation upon which all other changes depend. A correctly configured manifest is essential for your extension to even load in Chrome.
 
-#### Change manifest_version
+Change manifest_version
 
 Find the manifest_version field and change its value from 2 to 3:
 
@@ -109,7 +109,7 @@ Find the manifest_version field and change its value from 2 to 3:
 
 This single change triggers Chrome to treat your extension as an MV3 extension and applies all the associated restrictions and capabilities. However, this change alone is not sufficient - you must make additional changes to your manifest for the extension to function correctly.
 
-#### Rename browser_action to action
+Rename browser_action to action
 
 Replace the browser_action key with action in your manifest. The functionality is essentially the same, but the API has been renamed:
 
@@ -143,7 +143,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-#### Update permissions format
+Update permissions format
 
 Permissions remain in the permissions array, but some permission names changed. Review your current permissions and update any that have been renamed:
 
@@ -162,7 +162,7 @@ Permissions remain in the permissions array, but some permission names changed. 
 
 Pay special attention to permissions that have been removed or restricted in MV3. Some permissions that worked in MV2 require additional configuration or are no longer available.
 
-#### Add host_permissions separately
+Add host_permissions separately
 
 Host permissions must be declared in their own array, separate from API permissions. This separation improves security because users can see which sites your extension can access when installing:
 
@@ -180,7 +180,7 @@ The host_permissions array accepts the same formats as the permissions array pre
 
 Note that if you need access to a specific host for content script injection, you still need to declare that host in host_permissions, even if your content scripts are already declared in the content_scripts section.
 
-#### Update optional_permissions
+Update optional_permissions
 
 If your extension uses optional permissions, those also need to be updated:
 
@@ -195,7 +195,7 @@ If your extension uses optional permissions, those also need to be updated:
 
 The same host permission separation applies to optional permissions.
 
-#### Reference
+Reference
 
 For complete field documentation, see [Manifest V3 Fields](https://github.com/theluckystrike/blob/main/docs/guides/manifest-v3-fields.md). This reference provides detailed information on every field available in the manifest, including new fields introduced in MV3.
 
@@ -205,7 +205,7 @@ For complete field documentation, see [Manifest V3 Fields](https://github.com/th
 
 This is the most significant architectural change in MV3. Background pages were persistent pages that stayed loaded in the browser, maintaining memory state and DOM access. Service workers are event-driven processes that terminate when idle and must reinitialize when events occur. This fundamental architectural shift affects nearly every aspect of extension development.
 
-#### Event-Driven Architecture
+Event-Driven Architecture
 
 Service workers wake up only when events occur. Your code must register event listeners at the top level of your script, outside of any functions. Unlike the background page where code ran on page load, in a service worker, code only executes in response to events:
 
@@ -250,7 +250,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 All your service worker code should be structured around event listeners. Avoid placing logic at the top level that executes on service worker startup, as this can cause issues with the ephemeral lifecycle.
 
-#### No DOM Access
+No DOM Access
 
 Service workers cannot access the DOM. This is a fundamental limitation that affects how you structure your extension code. If you need to manipulate pages, you must use content scripts or offscreen documents:
 
@@ -266,7 +266,7 @@ document.cookie = 'value=abc';
 
 Any code that requires DOM manipulation must run in a content script, a popup, an options page, or an offscreen document. This is a significant architectural change that affects how extensions handle user interfaces and page manipulation.
 
-#### No Persistent State in Memory
+No Persistent State in Memory
 
 Variables lose their values when the service worker terminates. Service workers can terminate at any time after approximately 30 seconds of inactivity, or immediately after handling certain events. Do not store user data in global variables:
 
@@ -294,7 +294,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 Always use chrome.storage for any data that must persist across service worker restarts. The storage API is the only reliable way to maintain state.
 
-#### Using chrome.storage for Persistence
+Using chrome.storage for Persistence
 
 Replace in-memory state with chrome.storage. This API persists data to disk and survives service worker restarts:
 
@@ -329,7 +329,7 @@ The storage API has quota limits, so be mindful of how much data you store. For 
 
 Consider using [webext-storage](https://github.com/theluckystrike/webext-storage) for typed storage with schema validation. This library provides TypeScript support and helps prevent bugs caused by incorrect storage access patterns.
 
-#### Handling Service Worker Lifecycle
+Handling Service Worker Lifecycle
 
 Service workers terminate after about 30 seconds of inactivity. They also terminate immediately after handling certain events. To ensure operations complete, you must use specific patterns:
 
@@ -373,7 +373,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 Understanding the service worker lifecycle is crucial for building reliable MV3 extensions. Failing to handle lifecycle properly leads to intermittent bugs that are difficult to reproduce.
 
-#### Service Worker Lifecycle Events
+Service Worker Lifecycle Events
 
 The service worker lifecycle includes several events you should understand:
 
@@ -387,7 +387,7 @@ The service worker lifecycle includes several events you should understand:
 
 - Service Worker Wake: When an event occurs, Chrome may start a new service worker instance to handle it.
 
-#### Reference
+Reference
 
 For more details, see [Service Workers](https://github.com/theluckystrike/blob/main/docs/mv3/service-workers.md) and [Service Worker Tips](https://github.com/theluckystrike/blob/main/docs/mv3/service-worker-tips.md). These guides provide additional patterns and techniques for working with service workers effectively.
 
@@ -397,13 +397,13 @@ For more details, see [Service Workers](https://github.com/theluckystrike/blob/m
 
 The webRequest API allowed you to observe and modify network requests. In MV3, you must use declarativeNetRequest instead, which is more restrictive but more performant and improves user privacy by preventing extensions from observing user browsing activity.
 
-#### Why the Change
+Why the Change
 
 The webRequest API in MV2 allowed extensions to read and modify HTTP headers, block requests entirely, and redirect requests to different URLs. This powerful API was also a significant privacy concern, as it allowed extensions to potentially intercept sensitive data.
 
 DeclarativeNetRequest addresses these concerns by having the extension declare rules about what to do with requests, without actually seeing the request content. Chrome evaluates these rules and takes action, without revealing request details to the extension.
 
-#### Rule Format
+Rule Format
 
 DeclarativeNetRequest uses a JSON-based ruleset format. Each rule specifies conditions and actions:
 
@@ -462,7 +462,7 @@ DeclarativeNetRequest uses a JSON-based ruleset format. Each rule specifies cond
 ]
 ```
 
-#### Dynamic vs Static Rules
+Dynamic vs Static Rules
 
 Static rules are defined in the manifest and bundled with your extension. They cannot be modified after the extension is installed:
 
@@ -518,7 +518,7 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-#### Limitations Compared to webRequest
+Limitations Compared to webRequest
 
 DeclarativeNetRequest cannot do everything that webRequest could. Understanding these limitations helps you plan your migration:
 
@@ -532,7 +532,7 @@ DeclarativeNetRequest cannot do everything that webRequest could. Understanding 
 
 - Cannot observe requests: There is no way to see what requests are being made, only to define rules that affect them.
 
-#### Redirect Considerations
+Redirect Considerations
 
 Redirects in declarativeNetRequest have specific requirements:
 
@@ -588,7 +588,7 @@ Redirects in declarativeNetRequest have specific requirements:
 
 For typed rule building, consider [chrome-declarative-net](https://github.com/theluckystrike/chrome-declarative-net). This library provides TypeScript interfaces for creating rules and helps prevent errors in rule definitions.
 
-#### Reference
+Reference
 
 See [Declarative Net Request](https://github.com/theluckystrike/blob/main/docs/mv3/declarative-net-request.md). This guide provides comprehensive information on the declarativeNetRequest API including advanced rule patterns, performance considerations, and troubleshooting.
 
@@ -598,7 +598,7 @@ See [Declarative Net Request](https://github.com/theluckystrike/blob/main/docs/m
 
 MV3 enforces stricter Content Security Policy rules. These changes prevent extensions from executing remote code, improving security for users. While these restrictions can be inconvenient, they significantly reduce the attack surface of extensions.
 
-#### No Remote Code Execution
+No Remote Code Execution
 
 You cannot load scripts from external URLs. All extension code must be bundled within the extension package. This is a fundamental security improvement that prevents many attack vectors:
 
@@ -618,7 +618,7 @@ If you previously loaded scripts from a CDN, you must either:
 - Download and include the script as part of your extension
 - Find an alternative approach that does not require external scripts
 
-#### No Inline Scripts
+No Inline Scripts
 
 Inline JavaScript is no longer allowed. This includes both inline script tags and inline event handlers:
 
@@ -652,7 +652,7 @@ function handleClick() {
 
 This change improves security by preventing XSS attacks from affecting your extension pages. It also makes extensions more predictable and easier to audit.
 
-#### Sandboxed Pages for Dynamic Code
+Sandboxed Pages for Dynamic Code
 
 If you need to evaluate dynamic code, use a sandboxed page. This is relevant for extensions that need to run user-provided code or use libraries that require eval:
 
@@ -701,7 +701,7 @@ Sandboxed pages have their own CSP that is more permissive but isolated from the
 
 For generating valid CSP, use [extension-csp-builder](https://github.com/theluckystrike/extension-csp-builder). This tool helps you construct valid Content Security Policy strings that work with MV3 requirements.
 
-#### Reference
+Reference
 
 See [Content Security Policy](https://github.com/theluckystrike/blob/main/docs/mv3/content-security-policy.md). This guide covers CSP in depth, including common configurations, troubleshooting, and advanced patterns.
 
@@ -711,7 +711,7 @@ See [Content Security Policy](https://github.com/theluckystrike/blob/main/docs/m
 
 Content scripts have several changes in MV3 related to resource access and registration. Understanding these changes ensures your content scripts continue to work correctly after migration.
 
-#### web_accessible_resources Format Change
+web_accessible_resources Format Change
 
 Resources accessible to content scripts must be declared in the manifest with an array of objects, each specifying resources and the pages that can access them:
 
@@ -732,7 +732,7 @@ Resources accessible to content scripts must be declared in the manifest with an
 
 The new format provides better control over which resources can be accessed from which pages. You can restrict resources to specific domains rather than exposing them everywhere.
 
-#### Dynamic Content Script Registration
+Dynamic Content Script Registration
 
 You can now register content scripts at runtime, rather than only in the manifest. This provides flexibility for extensions that need to conditionally inject scripts:
 
@@ -796,7 +796,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-#### Reference
+Reference
 
 See [Dynamic Content Scripts](https://github.com/theluckystrike/blob/main/docs/mv3/dynamic-content-scripts.md). This guide covers all aspects of dynamic content script management in MV3.
 
@@ -806,7 +806,7 @@ See [Dynamic Content Scripts](https://github.com/theluckystrike/blob/main/docs/m
 
 All chrome.* APIs now support promises. This simplifies asynchronous code significantly and eliminates callback hell. While callbacks still work, the promise-based approach is preferred for new code.
 
-#### All chrome.* APIs Now Support Promises
+All chrome.* APIs Now Support Promises
 
 Most Chrome extension APIs now return promises when no callback is provided. This allows you to use modern async/await syntax:
 
@@ -823,7 +823,7 @@ console.log(result.key);
 
 The promise-based approach is cleaner and easier to reason about, especially when dealing with multiple asynchronous operations.
 
-#### Removing Callback Patterns
+Removing Callback Patterns
 
 Replace nested callbacks with async/await for cleaner code:
 
@@ -862,7 +862,7 @@ try {
 }
 ```
 
-#### Error Handling
+Error Handling
 
 With callbacks, errors were handled through chrome.runtime.lastError. With promises, you use try/catch:
 
@@ -888,7 +888,7 @@ try {
 
 For type-safe promise-based messaging, use [webext-messaging](https://github.com/theluckystrike/webext-messaging). This library provides TypeScript types and helps ensure message handlers are properly typed.
 
-#### Reference
+Reference
 
 See [Promise-Based APIs](https://github.com/theluckystrike/blob/main/docs/mv3/promise-based-apis.md). This guide covers the promise-based API patterns in detail, including migration strategies and best practices.
 
@@ -898,7 +898,7 @@ See [Promise-Based APIs](https://github.com/theluckystrike/blob/main/docs/mv3/pr
 
 Service workers cannot access the DOM. When you need DOM operations from your background script, use offscreen documents. This feature allows extensions to perform DOM-based operations in a context that is separate from both the service worker and content scripts.
 
-#### When You Need DOM Access From Background
+When You Need DOM Access From Background
 
 Common use cases for offscreen documents include:
 
@@ -909,7 +909,7 @@ Common use cases for offscreen documents include:
 - Complex DOM manipulation that is too complex for content scripts
 - Processing user-generated HTML content
 
-#### Creating and Managing Offscreen Documents
+Creating and Managing Offscreen Documents
 
 Create an offscreen document when you need DOM capabilities:
 
@@ -985,7 +985,7 @@ Close the document when done to free resources:
 await chrome.offscreen.closeDocument();
 ```
 
-#### Offscreen Document Lifecycle
+Offscreen Document Lifecycle
 
 Offscreen documents have their own lifecycle considerations:
 
@@ -994,7 +994,7 @@ Offscreen documents have their own lifecycle considerations:
 - Each offscreen document has its own JavaScript execution context
 - Communication happens through message passing, just like with content scripts
 
-#### Reference
+Reference
 
 See [Offscreen Documents](https://github.com/theluckystrike/blob/main/docs/mv3/offscreen-documents.md). This guide covers advanced patterns for offscreen document management.
 

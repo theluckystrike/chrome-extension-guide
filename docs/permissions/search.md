@@ -8,7 +8,7 @@ order: 36
 canonical_url: "https://bestchromeextensions.com/permissions/search/"
 ---
 
-# search Permission
+search Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.search` API for triggering searches using the user's default search engine.

@@ -4,7 +4,7 @@ description: Learn how to build a Chrome extension that polls the GitHub API for
 canonical_url: "https://bestchromeextensions.com/tutorials/build-github-notifier/"
 ---
 
-# Chrome Extension Building a GitHub Notifications Extension. Complete Developer's Guide
+Chrome Extension Building a GitHub Notifications Extension. Complete Developer's Guide
 
 Create desktop notifications with the Chrome Notifications API. Learn how to build engaging notification experiences.
 This tutorial walks you through creating a Chrome extension that monitors GitHub notifications.

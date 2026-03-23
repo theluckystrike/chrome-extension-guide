@@ -4,7 +4,7 @@ title: "Chrome Extension Service Worker Debugging. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/service-worker-debugging/"
 ---
-# Service Worker Debugging Guide
+Service Worker Debugging Guide
 
 Overview {#overview}
 - MV3 service workers are harder to debug than MV2 background pages

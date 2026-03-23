@@ -4,7 +4,7 @@ title: "Chrome Extension URL Shortener. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-url-shortener/"
 ---
-# Build a URL Shortener Extension
+Build a URL Shortener Extension
 
 What You'll Build {#what-youll-build}
 - Shorten current page URL with one click

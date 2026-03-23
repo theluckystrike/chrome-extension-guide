@@ -8,7 +8,7 @@ order: 8
 canonical_url: "https://bestchromeextensions.com/permissions/contentSettings/"
 ---
 
-# contentSettings Permission
+contentSettings Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.contentSettings` API for controlling per-site content settings (cookies, JavaScript, images, popups, notifications, location, camera, microphone, etc.).

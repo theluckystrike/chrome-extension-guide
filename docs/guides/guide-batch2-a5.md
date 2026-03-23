@@ -1,10 +1,10 @@
-# Password Manager Patterns in Chrome Extensions
+Password Manager Patterns in Chrome Extensions
 
-## Overview
+Overview
 
 Password manager extensions provide secure credential storage, form autofill, and password generation capabilities. Building a password manager requires careful attention to security, as these extensions handle sensitive user credentials. This guide covers essential patterns for implementing password management features in Chrome extensions.
 
-## Core Architecture
+Core Architecture
 
 A password manager extension typically consists of several components:
 
@@ -13,11 +13,11 @@ A password manager extension typically consists of several components:
 - Content Scripts: Detects login forms and performs autofill
 - Options Page: Full vault management interface
 
-## Secure Storage Patterns
+Secure Storage Patterns
 
 Never store passwords in plain text. Use `chrome.storage.session` for sensitive in-memory data and implement encryption for persistent storage.
 
-### Encrypted Storage Wrapper
+Encrypted Storage Wrapper
 
 ```typescript
 import { encrypt, decrypt } from './crypto';
@@ -132,11 +132,11 @@ class SecureVault {
 }
 ```
 
-## Form Detection and Autofill
+Form Detection and Autofill
 
 Content scripts detect login forms and provide autofill functionality.
 
-### Form Detection
+Form Detection
 
 ```typescript
 interface LoginForm {
@@ -185,7 +185,7 @@ function isPasswordField(input: Element): boolean {
 }
 ```
 
-### Autofill Implementation
+Autofill Implementation
 
 ```typescript
 class AutofillService {
@@ -232,7 +232,7 @@ class AutofillService {
 }
 ```
 
-## Password Generation
+Password Generation
 
 Secure password generation using cryptographic randomness.
 
@@ -311,7 +311,7 @@ class PasswordGenerator {
 }
 ```
 
-## Security Best Practices
+Security Best Practices
 
 1. Never store master password: Use it only to derive the encryption key in memory
 2. Use AES-GCM encryption: Provides authenticated encryption
@@ -365,7 +365,7 @@ class SecurityManager {
 }
 ```
 
-## Cross-Context Communication
+Cross-Context Communication
 
 Use message passing between service worker and content scripts securely.
 
@@ -397,6 +397,6 @@ async function requestAutofill(tabId: number): Promise<void> {
 }
 ```
 
-## Conclusion
+Conclusion
 
 Building a password manager extension requires a strong focus on security architecture. Use encryption at rest, implement secure key derivation, detect forms accurately, and always validate URLs before autofilling credentials. Follow these patterns to create a secure and user-friendly password management experience.

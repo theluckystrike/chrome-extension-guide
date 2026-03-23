@@ -4,7 +4,7 @@ title: "Chrome Extension Keyboard Shortcuts. How to Add Custom Hotkeys with the 
 description: "Learn how to add custom keyboard shortcuts to your Chrome extension using the Commands API. Cover manifest configuration, suggested_key, onCommand listener, global shortcuts, and user customization."
 canonical_url: "https://bestchromeextensions.com/guides/keyboard-shortcuts/"
 ---
-# Chrome Extension Keyboard Shortcuts. How to Add Custom Hotkeys with the Commands API
+Chrome Extension Keyboard Shortcuts. How to Add Custom Hotkeys with the Commands API
 
 Introduction {#introduction}
 

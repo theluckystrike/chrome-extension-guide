@@ -5,7 +5,7 @@ description: "Learn how to use Shadow DOM in Chrome extensions to create isolate
 canonical_url: "https://bestchromeextensions.com/guides/shadow-dom/"
 ---
 
-# Chrome Extension Shadow DOM. How to Isolate Your UI from Host Pages
+Chrome Extension Shadow DOM. How to Isolate Your UI from Host Pages
 
 Introduction {#introduction}
 

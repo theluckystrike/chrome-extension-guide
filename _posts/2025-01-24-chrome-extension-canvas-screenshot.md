@@ -9,7 +9,7 @@ keywords: "canvas screenshot extension, capture element chrome, html2canvas exte
 canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-extension-canvas-screenshot/"
 ---
 
-# Build a Canvas Screenshot Chrome Extension: Complete Guide
+Build a Canvas Screenshot Chrome Extension: Complete Guide
 
 Creating a canvas screenshot extension is one of the most practical projects you can undertake as a Chrome extension developer. Whether you need to capture web pages for documentation, create visual bug reports, or build a design handoff tool, understanding how to capture canvas elements and DOM screenshots is an essential skill. we'll walk through building a fully functional canvas screenshot extension using html2canvas, covering everything from project setup to advanced capture techniques.
 

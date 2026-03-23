@@ -5,7 +5,7 @@ description: "Learn how to implement OAuth2 authentication in Chrome Extensions 
 canonical_url: "https://bestchromeextensions.com/tutorials/oauth2-in-extensions/"
 ---
 
-# OAuth2 Authentication in Chrome Extensions
+OAuth2 Authentication in Chrome Extensions
 
 Overview {#overview}
 

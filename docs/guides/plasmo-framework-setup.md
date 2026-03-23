@@ -4,7 +4,7 @@ title: "Chrome Extension Plasmo Framework. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/plasmo-framework-setup/"
 ---
-# Plasmo Framework Setup Guide
+Plasmo Framework Setup Guide
 
 What is Plasmo {#what-is-plasmo}
 Plasmo is a browser extension framework built on top of Vite that provides a batteries-included developer experience. It handles boilerplate, build tooling, and common extension patterns so you can focus on your extension logic.

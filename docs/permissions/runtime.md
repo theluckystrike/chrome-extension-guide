@@ -8,7 +8,7 @@ order: 34
 canonical_url: "https://bestchromeextensions.com/permissions/runtime/"
 ---
 
-# chrome.runtime API Reference
+chrome.runtime API Reference
 
 The `chrome.runtime` API provides extension information and utilities for messaging, lifecycle management, and resource handling. No permissions required. always available.
 

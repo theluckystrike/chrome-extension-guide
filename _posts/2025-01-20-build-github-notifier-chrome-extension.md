@@ -9,7 +9,7 @@ keywords: "github notifier extension, github chrome extension, pull request noti
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-github-notifier-chrome-extension/"
 ---
 
-# Build a GitHub Notification Chrome Extension
+Build a GitHub Notification Chrome Extension
 
 In today's fast-paced development environment, staying on top of GitHub notifications is crucial for maintaining productivity and collaboration. Whether you're managing pull requests, tracking issues, or monitoring repository activity, having a dedicated GitHub notification Chrome extension can significantly streamline your workflow. This comprehensive guide will walk you through building a fully functional GitHub notifier extension from scratch.
 

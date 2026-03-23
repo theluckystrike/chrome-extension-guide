@@ -8,7 +8,7 @@ tags: [tab-suspender-pro, chrome-extensions, browser-performance, tab-management
 author: theluckystrike
 ---
 
-# Tab Suspender Pro: The Ultimate Guide to Managing Chrome Tabs and Saving Memory
+Tab Suspender Pro: The Ultimate Guide to Managing Chrome Tabs and Saving Memory
 
 Modern web browsing has evolved into a multi-tab experience. Whether you are a developer juggling documentation, a student researching across dozens of sources, or a remote worker balancing communication tools with project resources, the reality is the same: you need more tabs than your computer can comfortably handle. Chrome, for all its strengths, treats every open tab as its own process, and each one consumes real memory, real CPU cycles, and real battery life.
 
@@ -211,7 +211,7 @@ The whitelist is your most powerful configuration tool. You can add entries in s
 - URL pattern: `https://github.com/*/pull/*`. protects only GitHub pull request pages.
 - Regex pattern: For advanced users, full regular expression matching is available.
 
-#### Recommended Whitelist Entries
+Recommended Whitelist Entries
 
 Most users benefit from whitelisting these categories:
 

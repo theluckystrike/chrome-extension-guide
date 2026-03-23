@@ -9,7 +9,7 @@ keywords: "screen sharing chrome extension, webrtc screen capture, share screen 
 canonical_url: "https://bestchromeextensions.com/2025/01/24/build-screen-sharing-extension-with-webrtc/"
 ---
 
-# Build Screen Sharing Extension with WebRTC: Complete Guide
+Build Screen Sharing Extension with WebRTC: Complete Guide
 
 Screen sharing has become an essential feature for remote collaboration, online education, technical support, and countless other use cases. Whether you are building a video conferencing tool, a remote desktop application, or a productivity enhancer that lets users share their work, implementing screen sharing in a Chrome extension requires understanding WebRTC and the Chrome desktop capture APIs.
 

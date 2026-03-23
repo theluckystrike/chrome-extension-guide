@@ -1,15 +1,15 @@
-# Analytics and Telemetry for Chrome Extensions
+Analytics and Telemetry for Chrome Extensions
 
-## Introduction
+Introduction
 Analytics and telemetry are essential for understanding how users interact with your Chrome extension. This guide covers privacy-respecting analytics design, integration patterns, custom backend solutions, and compliance requirements.
 
-## 1. Privacy-Respecting Analytics Design
+1. Privacy-Respecting Analytics Design
 - Data minimization: Collect only what you need
 - Anonymization by default: Never send identifiable data without consent
 - Consent-first: Obtain explicit user consent before collecting telemetry
 - Local-first: Process data locally when possible
 
-## 2. Google Analytics 4 Integration
+2. Google Analytics 4 Integration
 ```bash
 npm install @analytics/google-analytics
 ```
@@ -28,7 +28,7 @@ export const trackEvent = (eventName: string, params?: Record<string, unknown>) 
 };
 ```
 
-## 3. Mixpanel Integration
+3. Mixpanel Integration
 ```bash
 npm install mixpanel
 ```
@@ -41,7 +41,7 @@ export const trackMixpanelEvent = (event: string, props?: Record<string, unknown
 };
 ```
 
-## 4. Custom Analytics Backend
+4. Custom Analytics Backend
 ```typescript
 // src/lib/customAnalytics.ts
 let eventQueue: Array<Record<string, unknown>> = [];
@@ -64,7 +64,7 @@ chrome.alarms.create('analytics-flush', { periodInMinutes: 1 });
 chrome.alarms.onAlarm.addListener((a) => { if (a.name === 'analytics-flush') flushEvents(); });
 ```
 
-## 5. Event Tracking Patterns
+5. Event Tracking Patterns
 ```typescript
 export enum AnalyticsEvent { INSTALLED = 'installed', UPDATED = 'updated', FEATURE_USED = 'feature_used' }
 
@@ -73,7 +73,7 @@ chrome.runtime.onInstalled.addListener((d) => {
 });
 ```
 
-## 6. Install and Uninstall Tracking
+6. Install and Uninstall Tracking
 ```typescript
 chrome.runtime.onInstalled.addListener((d) => {
   if (d.reason === 'install') trackEvent('installed', { source: 'cws', locale: chrome.i18n.getUILanguage() });
@@ -81,7 +81,7 @@ chrome.runtime.onInstalled.addListener((d) => {
 chrome.runtime.setUninstallURL('https://yoursite.com/uninstall');
 ```
 
-## 7. User Engagement Metrics
+7. User Engagement Metrics
 ```typescript
 chrome.runtime.onStartup.addListener(() => {
   const today = new Date().toDateString();
@@ -91,7 +91,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-## 8. Error and Crash Reporting - Sentry
+8. Error and Crash Reporting - Sentry
 ```bash
 npm install @sentry/chrome
 ```
@@ -105,14 +105,14 @@ window.addEventListener('error', (ev) => Sentry.captureException(ev.error));
 window.addEventListener('unhandledrejection', (ev) => Sentry.captureException(ev.reason));
 ```
 
-## 9. Performance Metrics
+9. Performance Metrics
 ```typescript
 import { getFCP, getLCP, getFID, getCLS } from 'web-vitals';
 const report = (n: string, v: number) => trackEvent('perf', { metric: n, value: Math.round(v) });
 getFCP(report); getLCP(report); getFID(report); getCLS(report);
 ```
 
-## 10. Version Adoption Tracking
+10. Version Adoption Tracking
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ install_time: Date.now() });
@@ -120,7 +120,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-## 11. A/B Test Measurement
+11. A/B Test Measurement
 ```typescript
 const assignVariant = (expId: string, variants: string[]): string => {
   const hash = hashString(getAnonId() + expId);
@@ -130,7 +130,7 @@ export const trackExperiment = (expId: string, variants: string[]) =>
   trackEvent('experiment', { exp_id: expId, variant: assignVariant(expId, variants) });
 ```
 
-## 12. GDPR and Privacy Compliance
+12. GDPR and Privacy Compliance
 ```typescript
 interface Consent { analytics: boolean; errors: boolean; timestamp: number; }
 
@@ -144,7 +144,7 @@ export const canTrack = async (type: 'analytics' | 'errors'): Promise<boolean> =
   (await getConsent())[type] === true;
 ```
 
-## 13. Anonymization Techniques
+13. Anonymization Techniques
 ```typescript
 // Hash user ID
 const hashUserId = async (id: string): Promise<string> => {
@@ -156,7 +156,7 @@ const hashUserId = async (id: string): Promise<string> => {
 const anonIp = (ip: string): string => ip.split('.').length === 4 ? ip.split('.').slice(0,3).join('.') + '.0' : ip;
 ```
 
-## 14. Batch Sending for Efficiency
+14. Batch Sending for Efficiency
 ```typescript
 class Batcher {
   private q: unknown[] = [];
@@ -169,7 +169,7 @@ class Batcher {
 }
 ```
 
-## Summary Table
+Summary Table
 
 | Category | Implementation | Key Points |
 |----------|---------------|------------|
@@ -182,13 +182,13 @@ class Batcher {
 | A/B Testing | Hash assignment | Deterministic, anonymous |
 | Version | onInstalled | Track installs/updates |
 
-## Reference
+Reference
 - [Chrome Extensions Dev](https://developer.chrome.com/docs/extensions/develop)
 - [GA4 Documentation](https://developers.google.com/analytics/devguides/collection/ga4)
 - [Sentry Chrome SDK](https://docs.sentry.io/platforms/javascript/guides/chrome/)
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

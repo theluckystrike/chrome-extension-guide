@@ -5,7 +5,7 @@ description: "Build accessible Chrome extensions following WCAG guidelines."
 canonical_url: "https://bestchromeextensions.com/patterns/accessibility/"
 ---
 
-# Accessibility in Chrome Extensions
+Accessibility in Chrome Extensions
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: "Chrome Extension GitHub PR Reviewer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-github-pr-reviewer/"
 ---
-# Build a GitHub PR Review Extension
+Build a GitHub PR Review Extension
 
 A Chrome extension that enhances GitHub pull request pages with a floating toolbar,
 file tree navigator, comment templates, PR statistics, keyboard shortcuts, review

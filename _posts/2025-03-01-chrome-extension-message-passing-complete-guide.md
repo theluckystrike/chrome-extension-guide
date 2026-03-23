@@ -9,7 +9,7 @@ keywords: "chrome extension message passing, chrome.runtime.sendMessage, chrome 
 canonical_url: "https://bestchromeextensions.com/2025/03/01/chrome-extension-message-passing-complete-guide/"
 ---
 
-# Chrome Extension Message Passing: Communication Between Components Guide
+Chrome Extension Message Passing: Communication Between Components Guide
 
 Chrome extensions are composed of multiple isolated components that run in different contexts. The content script operates within web pages, the background service worker lives in its own environment, and popups exist only when open. These components cannot directly access each other's variables or DOM, making chrome extension message passing essential for building functional extensions. This comprehensive guide covers every aspect of communication between extension components, from basic message passing to persistent port connections, with practical examples for Manifest V3.
 

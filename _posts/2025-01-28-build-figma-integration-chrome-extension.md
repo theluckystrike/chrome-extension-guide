@@ -9,7 +9,7 @@ keywords: "figma chrome extension, design to code extension, figma tool, figma i
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-figma-integration-chrome-extension/"
 ---
 
-# Build a Figma Integration Chrome Extension: Complete Developer Guide
+Build a Figma Integration Chrome Extension: Complete Developer Guide
 
 Figma has revolutionized the way designers and developers collaborate on digital products. As the leading collaborative interface design tool, Figma powers millions of design workflows worldwide. But what if you could extend Figma's functionality directly into your browser? What if you could bridge the gap between design and development with a custom figma chrome extension?
 

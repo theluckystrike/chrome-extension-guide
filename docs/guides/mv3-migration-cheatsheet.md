@@ -4,7 +4,7 @@ title: "Chrome Extension MV3 Migration Cheatsheet. Developer Guide"
 description: "Migrate your Chrome extension to Manifest V3 with this comprehensive guide covering API changes and required updates."
 canonical_url: "https://bestchromeextensions.com/guides/mv3-migration-cheatsheet/"
 ---
-# MV2 to MV3 Migration Cheatsheet
+MV2 to MV3 Migration Cheatsheet
 
 A practical, side-by-side reference for migrating Chrome extensions from Manifest V2 to Manifest V3. Each section shows the old MV2 pattern and its MV3 replacement with working code examples.
 
@@ -492,7 +492,7 @@ await chrome.storage.local.set({ preferences: { theme: "dark" } });
 const { preferences } = await chrome.storage.local.get("preferences");
 ```
 
-> Detailed look: [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) | [Storage Changes (MV3)](../mv3/storage-changes.md)
+> Detailed look: [Storage API detailed look](../api-reference/storage-api-deep detailed look.md) | [Storage Changes (MV3)](../mv3/storage-changes.md)
 
 ---
 
@@ -659,7 +659,7 @@ await storage.remove("token");
 await storage.clear();
 ```
 
-> Full API reference: [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+> Full API reference: [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 
 ---
 
@@ -755,7 +755,7 @@ Further Reading {#further-reading}
 - [Promise-Based APIs](../mv3/promise-based-apis.md). async patterns
 - [Content Security Policy](../mv3/content-security-policy.md). CSP rules
 - [Declarative Net Request](../mv3/declarative-net-request.md). network rules
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md). storage patterns
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md). storage patterns
 - [Alarms API](../api-reference/alarms-api.md). scheduling reference
 
 Related Articles {#related-articles}

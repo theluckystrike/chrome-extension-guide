@@ -4,7 +4,7 @@ title: "Chrome Extension Management API. Developer Guide"
 description: "Learn how to use the Chrome Extension Management API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/management-api/"
 ---
-# Chrome Extension Management API
+Chrome Extension Management API
 
 Introduction {#introduction}
 
@@ -425,7 +425,7 @@ async function detectConflicts() {
 
 Advanced Dashboard Features {#advanced-dashboard-features}
 
-#### Search and Filter
+Search and Filter
 
 Dependency Checking
 Check if required extensions are installed:
@@ -457,7 +457,7 @@ Important Limitations
 3. Self-uninstall always requires user confirmation
 4. Management permission requires Chrome Web Store review
 
-#### Extension Usage Statistics
+Extension Usage Statistics
 
 ```javascript
 // Track extension launch frequency
@@ -505,7 +505,7 @@ async function getSelfInfo() {
 Error Handling {#error-handling}
 
 ```javascript
-// Robust error handling for management API
+// Solid error handling for management API
 async function safeManagementOperation(operation, ...args) {
   try {
     const result = await operation(...args);

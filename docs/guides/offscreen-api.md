@@ -1,13 +1,13 @@
-# Chrome Offscreen Documents API
+Chrome Offscreen Documents API
 
-## Introduction
+Introduction
 - The Offscreen Documents API (`chrome.offscreen`) allows MV3 extensions to create hidden documents with full DOM access
 - Solves the DOM access limitation in MV3 where service workers cannot access the DOM directly
 - Enables scenarios that require HTML parsing, canvas manipulation, audio playback, and clipboard operations
 - Requires `"offscreen"` permission in manifest.json
 - Reference: https://developer.chrome.com/docs/extensions/reference/api/offscreen
 
-## manifest.json Configuration
+manifest.json Configuration
 ```json
 {
   "permissions": ["offscreen"],
@@ -15,9 +15,9 @@
 }
 ```
 
-## Core API Methods
+Core API Methods
 
-### chrome.offscreen.createDocument()
+chrome.offscreen.createDocument()
 Creates a new offscreen document with specified parameters:
 ```javascript
 await chrome.offscreen.createDocument({
@@ -30,7 +30,7 @@ await chrome.offscreen.createDocument({
 - `reasons`: Array of Reason enums (at least one required)
 - `justification`: Human-readable string explaining why the API is needed
 
-### chrome.offscreen.closeDocument()
+chrome.offscreen.closeDocument()
 Closes the current offscreen document:
 ```javascript
 await chrome.offscreen.closeDocument();
@@ -38,14 +38,14 @@ await chrome.offscreen.closeDocument();
 - No parameters required
 - Should be called when the document is no longer needed
 
-### chrome.offscreen.hasDocument()
+chrome.offscreen.hasDocument()
 Checks if an offscreen document currently exists:
 ```javascript
 const hasDocument = await chrome.offscreen.hasDocument();
 ```
 - Returns boolean: `true` if document exists, `false` otherwise
 
-## Reason Enum Values
+Reason Enum Values
 | Reason | Description |
 |--------|-------------|
 | `AUDIO_PLAYBACK` | Playing audio files from service worker |
@@ -55,17 +55,17 @@ const hasDocument = await chrome.offscreen.hasDocument();
 | `IFRAME` | Embedding cross-origin iframes |
 | `WEB_RTC` | WebRTC peer connections |
 
-## Lifecycle and Limits
+Lifecycle and Limits
 - One document per extension: Only ONE offscreen document can exist at a time
 - Lifetime tied to extension: Document closes when extension is updated or Chrome exits
 - Replacing reasons: Calling createDocument with different reasons replaces existing document
 - Service worker lifecycle: Document survives service worker termination but not extension updates
 - Memory considerations: Close documents when not needed to free resources
 
-## Communication via chrome.runtime Messaging
+Communication via chrome.runtime Messaging
 Service worker communicates with offscreen document using message passing:
 
-### Service Worker → Offscreen:
+Service Worker → Offscreen:
 ```javascript
 // Send message to offscreen
 chrome.runtime.sendMessage({
@@ -84,7 +84,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Offscreen → Service Worker:
+Offscreen → Service Worker:
 ```javascript
 // In offscreen.html
 chrome.runtime.sendMessage({
@@ -100,9 +100,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Use Cases and Examples
+Use Cases and Examples
 
-### DOM Parsing from Service Worker
+DOM Parsing from Service Worker
 ```javascript
 // background.js - Service worker
 async function parseHtmlContent(htmlString) {
@@ -155,7 +155,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Audio Playback from Service Worker
+Audio Playback from Service Worker
 ```javascript
 // background.js
 async function playAudio(audioUrl) {
@@ -181,7 +181,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-### Clipboard Operations
+Clipboard Operations
 ```javascript
 // background.js
 async function copyToClipboard(text) {
@@ -206,7 +206,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-### Canvas Image Manipulation
+Canvas Image Manipulation
 ```javascript
 // In offscreen.html - Image processing
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -230,7 +230,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Best Practices
+Best Practices
 
 1. Always check document existence before creating or sending messages:
    ```javascript
@@ -254,7 +254,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 7. Use meaningful Reason enums - Match the actual use case exactly
 
-## Error Handling
+Error Handling
 ```javascript
 try {
   await chrome.offscreen.createDocument({
@@ -271,7 +271,7 @@ try {
 }
 ```
 
-## Migration from MV2
+Migration from MV2
 - MV2 background pages had full DOM access - offscreen documents replace this capability
 - Move DOM-dependent code to offscreen.html
 - Use message passing to communicate between service worker and offscreen

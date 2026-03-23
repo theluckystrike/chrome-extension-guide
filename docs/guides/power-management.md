@@ -1,12 +1,12 @@
-# Chrome Extension Power Management
+Chrome Extension Power Management
 
 The Chrome Power API (`chrome.power`) enables extensions to manage system power states, preventing the system or display from sleeping during critical operations. This is essential for extensions that need to maintain active sessions without user interaction.
 
-## Overview
+Overview
 
 The Power API is part of the Chrome Extension APIs designed to control power management features. It allows extensions to request keep-awake behavior at different levels, ensuring that important tasks complete without interruption from system power-saving features.
 
-## Required Permission
+Required Permission
 
 To use the Power API, add the `power` permission to your extension's manifest:
 
@@ -23,11 +23,11 @@ To use the Power API, add the `power` permission to your extension's manifest:
 
 No additional permissions are required for basic power management functionality.
 
-## Power Levels
+Power Levels
 
 The Power API supports two distinct power levels that control different aspects of system behavior:
 
-### chrome.power.Level.SYSTEM
+chrome.power.Level.SYSTEM
 
 The system level prevents the entire system from entering sleep mode. This is appropriate for operations that require the full system to remain active, such as file downloads, system-wide synchronization, or background processing that cannot be interrupted.
 
@@ -38,7 +38,7 @@ chrome.power.requestKeepAwake('system');
 
 When using system level, the computer will remain fully awake and consuming power. Use this sparingly and only when necessary, as it significantly impacts battery life on portable devices.
 
-### chrome.power.Level.DISPLAY
+chrome.power.Level.DISPLAY
 
 The display level prevents only the display (monitor/screen) from turning off or dimming, while allowing the system to enter sleep mode when idle. This is ideal for scenarios where you need visual feedback but don't require full system processing.
 
@@ -49,11 +49,11 @@ chrome.power.requestKeepAwake('display');
 
 Display-level keep-awake is more battery-efficient than system-level, making it the preferred choice for most use cases involving user-visible content.
 
-## Preventing Display Sleep with requestKeepAwake
+Preventing Display Sleep with requestKeepAwake
 
 The `requestKeepAwake` method requests that power management be suppressed. The extension must call this method before performing any operation that should not be interrupted.
 
-### Basic Syntax
+Basic Syntax
 
 ```javascript
 chrome.power.requestKeepAwake(level);
@@ -61,7 +61,7 @@ chrome.power.requestKeepAwake(level);
 
 - `level`: A string specifying either `'system'` or `'display'`
 
-### Example: Preventing Display Sleep During Task
+Preventing Display Sleep During Task
 
 ```javascript
 // In your background script or content script
@@ -78,7 +78,7 @@ function stopPresentation() {
 }
 ```
 
-### Multiple Request Handling
+Multiple Request Handling
 
 Chrome handles multiple keep-awake requests internally using a reference count. The power will remain suppressed as long as at least one request is active.
 
@@ -95,17 +95,17 @@ chrome.power.releaseKeepAwake();
 // Now power management resumes
 ```
 
-## Releasing with releaseKeepAwake
+Releasing with releaseKeepAwake
 
 The `releaseKeepAwake` method releases a previously requested keep-awake. It's crucial to pair every `requestKeepAwake` with a corresponding `releaseKeepAwake` to avoid unnecessarily draining battery.
 
-### Basic Syntax
+Basic Syntax
 
 ```javascript
 chrome.power.releaseKeepAwake();
 ```
 
-### Release Patterns
+Release Patterns
 
 Always ensure proper release in error scenarios and when tasks complete:
 
@@ -128,7 +128,7 @@ async function performLongDownload(downloadId) {
 }
 ```
 
-### Using try-finally for Guaranteed Release
+Using try-finally for Guaranteed Release
 
 ```javascript
 function processLargeFile(fileData) {
@@ -144,11 +144,11 @@ function processLargeFile(fileData) {
 }
 ```
 
-## Power State Management Patterns
+Power State Management Patterns
 
 Effective power management requires thoughtful implementation patterns that balance functionality with battery conservation.
 
-### Level Change Handling
+Level Change Handling
 
 While the Power API doesn't directly provide power state change events, you can integrate with other APIs:
 
@@ -161,7 +161,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-### Context-Aware Power Management
+Context-Aware Power Management
 
 Adapt power management based on the current use case:
 
@@ -204,9 +204,9 @@ class PowerManager {
 const powerManager = new PowerManager();
 ```
 
-## Use Cases
+Use Cases
 
-### Presentations and Slide Shows
+Presentations and Slide Shows
 
 Extensions that control presentations should manage display power to prevent the screen from turning off during important moments:
 
@@ -251,7 +251,7 @@ class PresentationController {
 }
 ```
 
-### Media Playback
+Media Playback
 
 Video and audio extensions should maintain display power during playback:
 
@@ -296,7 +296,7 @@ const mediaManager = new MediaPowerManager();
 mediaManager.initialize('video');
 ```
 
-### Long Downloads and File Transfers
+Long Downloads and File Transfers
 
 Background downloads need system-level keep-awake to ensure completion:
 
@@ -334,7 +334,7 @@ class DownloadPowerManager {
 }
 ```
 
-### Real-Time Communication
+Real-Time Communication
 
 Video calls and live dashboards require sustained display power:
 
@@ -375,11 +375,11 @@ class VideoCallManager {
 }
 ```
 
-## Battery-Conscious Extension Design
+Battery-Conscious Extension Design
 
 Responsible extension development means minimizing power impact when full functionality isn't required.
 
-### Auto-Release Strategies
+Auto-Release Strategies
 
 Implement automatic release after timeouts:
 
@@ -419,7 +419,7 @@ class AutoReleasePowerManager {
 }
 ```
 
-### User Preference Integration
+User Preference Integration
 
 Allow users to control power behavior:
 
@@ -461,7 +461,7 @@ class UserPreferencePowerManager {
 }
 ```
 
-### Battery Status Integration (Experimental)
+Battery Status Integration (Experimental)
 
 When available, use battery information to make intelligent decisions:
 
@@ -504,7 +504,7 @@ function handleBatteryChange(battery) {
 }
 ```
 
-### Progressive Enhancement Pattern
+Progressive Enhancement Pattern
 
 Start with minimal power requirements and escalate only when necessary:
 
@@ -557,17 +557,17 @@ class ProgressivePowerManager {
 }
 ```
 
-## Best Practices
+Best Practices
 
-### Always Pair Request with Release
+Always Pair Request with Release
 
 Every `requestKeepAwake` should have a corresponding `releaseKeepAwake`. Use try-finally blocks to ensure release happens even when errors occur.
 
-### Prefer Display Over System Level
+Prefer Display Over System Level
 
 Use display level whenever possible. System level significantly impacts battery life and should be reserved for operations that truly require it.
 
-### Set Appropriate Timeouts
+Set Appropriate Timeouts
 
 Implement auto-release timeouts to prevent unintended power consumption:
 
@@ -582,7 +582,7 @@ function withTimeout(requestFn, timeoutMs = 300000) {
 }
 ```
 
-### Listen for Extension Lifecycle Events
+Listen for Extension Lifecycle Events
 
 Clean up power requests when the extension is suspended or unloaded:
 
@@ -593,7 +593,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-### Provide User Control
+Provide User Control
 
 Include options for users to configure power behavior:
 
@@ -611,7 +611,7 @@ document.getElementById('preventSleep').addEventListener('change', (e) => {
 });
 ```
 
-## Summary
+Summary
 
 The Chrome Power API is essential for building extensions that need to maintain active sessions without user interaction. Key takeaways:
 

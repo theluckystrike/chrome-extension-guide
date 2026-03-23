@@ -4,7 +4,7 @@ title: "Chrome Extension Link Saver. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-link-saver/"
 ---
-# Build a Link Saver Extension
+Build a Link Saver Extension
 
 What You'll Build {#what-youll-build}
 

@@ -5,7 +5,7 @@ description: "A comprehensive guide to chrome.runtime API covering lifecycle eve
 canonical_url: "https://bestchromeextensions.com/tutorials/runtime-api-guide/"
 ---
 
-# Chrome Runtime API: The Extension Lifecycle Hub
+Chrome Runtime API: The Extension Lifecycle Hub
 
 Overview {#overview}
 

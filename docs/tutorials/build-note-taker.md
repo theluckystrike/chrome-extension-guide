@@ -4,7 +4,7 @@ title: "Chrome Extension Note Taker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-note-taker/"
 ---
-# Build a Note-Taking Extension
+Build a Note-Taking Extension
 
 What You'll Build {#what-youll-build}
 Build a quick note-taking extension with page-linked notes, side panel editing, tag organization, and export capabilities.

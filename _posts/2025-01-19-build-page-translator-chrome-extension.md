@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-page-translator-chrome-extension/"
 ---
 
-# Build a Page Translator Chrome Extension. Complete Tutorial
+Build a Page Translator Chrome Extension. Complete Tutorial
 
 Language barriers on the web are becoming a thing of the past, thanks to powerful translation APIs and browser extension technology. In this comprehensive tutorial, we will build a fully functional page translator Chrome extension that can translate entire web pages instantly. This is one of the most popular types of extensions in the Chrome Web Store, with millions of users relying on translation tools daily.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Popup Patterns. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/popup-patterns/"
 ---
-# Popup Patterns
+Popup Patterns
 
 Overview {#overview}
 The popup is the most common UI surface for Chrome extensions. It opens when the user clicks the toolbar icon and closes when they click away. This guide covers patterns for building effective popups with the @theluckystrike/webext-* toolkit.

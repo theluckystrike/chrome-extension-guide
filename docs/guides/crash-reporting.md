@@ -3,7 +3,7 @@ layout: default
 title: "Chrome Extension Crash Reporting. How to Monitor Errors and Fix Bugs Fast"
 description: "Learn how to implement crash reporting in Chrome extensions to monitor errors, capture stack traces, and fix bugs quickly using Sentry and custom backends."
 ---
-# Chrome Extension Crash Reporting. How to Monitor Errors and Fix Bugs Fast
+Chrome Extension Crash Reporting. How to Monitor Errors and Fix Bugs Fast
 
 Introduction
 

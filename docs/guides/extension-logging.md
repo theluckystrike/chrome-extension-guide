@@ -4,7 +4,7 @@ title: "Chrome Extension Logging & Debugging. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-logging/"
 ---
-# Extension Logging Guide
+Extension Logging Guide
 
 Introduction {#introduction}
 Logging in Chrome extensions is challenging because logs are spread across multiple DevTools windows. background service worker, popup, options page, and content scripts each have their own console. This guide covers structured logging patterns that work reliably across all extension contexts.

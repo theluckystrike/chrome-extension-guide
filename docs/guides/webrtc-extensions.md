@@ -4,7 +4,7 @@ title: "Chrome Extension WebRTC. Developer Guide"
 description: "Learn Chrome extension webrtc with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/webrtc-extensions/"
 ---
-# Chrome Extensions and WebRTC
+Chrome Extensions and WebRTC
 
 Overview {#overview}
 WebRTC enables peer-to-peer audio/video communication in browsers. Chrome Extensions can use WebRTC for screen recording, tab audio capture, video conferencing, and collaborative tools. This guide covers essential patterns for WebRTC in extension contexts with emphasis on Manifest V3 (MV3) compatibility.

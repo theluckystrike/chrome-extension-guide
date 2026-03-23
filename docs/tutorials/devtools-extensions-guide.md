@@ -5,7 +5,7 @@ description: "A comprehensive tutorial on building Chrome DevTools extensions. L
 canonical_url: "https://bestchromeextensions.com/tutorials/devtools-extensions-guide/"
 ---
 
-# Building DevTools Extensions for Chrome
+Building DevTools Extensions for Chrome
 
 Chrome DevTools extensions allow you to extend Chrome's built-in developer tools with custom panels, sidebars, network analyzers, and more. Whether you want to build a performance profiler, API tester, or DOM inspector, DevTools extensions provide deep integration with the browser's debugging capabilities.
 

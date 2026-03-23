@@ -4,7 +4,7 @@ title: "Chrome Extension AI & LLM Integration. Developer Guide"
 description: "Learn Chrome extension ai & llm integration with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/ai-llm-integration-extensions/"
 ---
-# AI and LLM Integration in Chrome Extensions
+AI and LLM Integration in Chrome Extensions
 
 Architecture Overview {#architecture-overview}
 

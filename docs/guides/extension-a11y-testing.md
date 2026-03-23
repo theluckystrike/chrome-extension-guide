@@ -4,7 +4,7 @@ title: "Chrome Extension Accessibility Testing. Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
 canonical_url: "https://bestchromeextensions.com/guides/extension-a11y-testing/"
 ---
-# Accessibility Testing for Chrome Extensions
+Accessibility Testing for Chrome Extensions
 
 Overview {#overview}
 Accessibility testing ensures extension UIs work for all users, including those using assistive technologies. Chrome extensions present unique testing challenges due to popup windows, content script injections, and isolated contexts.

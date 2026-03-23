@@ -4,7 +4,7 @@ title: "Chrome Extension Accessibility Guide. Build Extensions Everyone Can Use"
 description: "Learn how to build accessible Chrome extensions with this developer guide covering ARIA attributes, keyboard navigation, screen reader support, color contrast, and focus management."
 canonical_url: "https://bestchromeextensions.com/guides/accessibility/"
 ---
-# Chrome Extension Accessibility Guide. Build Extensions Everyone Can Use
+Chrome Extension Accessibility Guide. Build Extensions Everyone Can Use
 
 Introduction {#introduction}
 

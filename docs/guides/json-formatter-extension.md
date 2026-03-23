@@ -1,8 +1,8 @@
-# Building a JSON Formatter Chrome Extension
+Building a JSON Formatter Chrome Extension
 
 A comprehensive guide to building a production-ready JSON formatter extension using Manifest V3 and TypeScript.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest V3 Setup](#manifest-v3-setup)
@@ -17,7 +17,7 @@ A comprehensive guide to building a production-ready JSON formatter extension us
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 A JSON Formatter extension typically consists of three main components:
 

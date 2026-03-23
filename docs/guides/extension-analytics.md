@@ -4,7 +4,7 @@ title: Chrome Extension Analytics. How to Track Usage, Events, and User Behavior
 description: Learn how to implement GA4 analytics in Chrome extensions, track custom events, segment users, analyze funnels, and maintain privacy compliance with MV3.
 ---
 
-# Chrome Extension Analytics. How to Track Usage, Events, and User Behavior
+Chrome Extension Analytics. How to Track Usage, Events, and User Behavior
 
 Understanding how users interact with your Chrome extension is crucial for making data-driven decisions and improving the user experience. This guide covers implementing comprehensive analytics in your extension, from Google Analytics 4 integration to advanced event tracking, user segmentation, and funnel analysis, all while maintaining privacy compliance and adhering to Manifest V3 requirements.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Regex Tester. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-regex-tester/"
 ---
-# Build a Regex Tester Extension
+Build a Regex Tester Extension
 
 What You'll Build {#what-youll-build}
 - Test regex patterns against text with real-time highlighting

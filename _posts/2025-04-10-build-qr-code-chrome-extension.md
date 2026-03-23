@@ -9,7 +9,7 @@ keywords: "chrome extension qr code, qr code generator chrome, build qr extensio
 canonical_url: "https://bestchromeextensions.com/2025/04/10/build-qr-code-chrome-extension/"
 ---
 
-# Build a QR Code Generator Chrome Extension: Share Links Instantly
+Build a QR Code Generator Chrome Extension: Share Links Instantly
 
 QR codes have become an essential part of our digital lives. Whether you need to share a website URL with a colleague, allow customers to access your business website quickly, or simply transfer a link from your computer to your phone, QR codes provide a smooth bridge between the digital and physical worlds. Building a QR code generator Chrome extension is an excellent project that combines practical utility with modern web development techniques.
 

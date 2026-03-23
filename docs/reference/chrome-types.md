@@ -1,13 +1,13 @@
-# Chrome Extension TypeScript Types Reference
+Chrome Extension TypeScript Types Reference
 
-## Installing Types {#installing-types}
+Installing Types {#installing-types}
 ```bash
 npm install -D @types/chrome
-# or
+or
 pnpm add -D @types/chrome
 ```
 
-## tsconfig.json Setup {#tsconfigjson-setup}
+tsconfig.json Setup {#tsconfigjson-setup}
 ```json
 {
   "compilerOptions": {
@@ -20,9 +20,9 @@ pnpm add -D @types/chrome
 }
 ```
 
-## Key Types {#key-types}
+Key Types {#key-types}
 
-### chrome.tabs.Tab {#chrometabstab}
+chrome.tabs.Tab {#chrometabstab}
 ```typescript
 interface Tab {
   id?: number;           // Tab ID (undefined in some events)
@@ -42,7 +42,7 @@ interface Tab {
 }
 ```
 
-### chrome.runtime.MessageSender {#chromeruntimemessagesender}
+chrome.runtime.MessageSender {#chromeruntimemessagesender}
 ```typescript
 interface MessageSender {
   tab?: Tab;              // Tab that sent the message (if from content script)
@@ -53,7 +53,7 @@ interface MessageSender {
 }
 ```
 
-### chrome.storage Types {#chromestorage-types}
+chrome.storage Types {#chromestorage-types}
 ```typescript
 // StorageArea methods return Promises in MV3
 interface StorageArea {
@@ -65,7 +65,7 @@ interface StorageArea {
 }
 ```
 
-### Type-Safe Storage with @theluckystrike/webext-storage {#type-safe-storage-with-theluckystrikewebext-storage}
+Type-Safe Storage with @theluckystrike/webext-storage {#type-safe-storage-with-theluckystrikewebext-storage}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -82,7 +82,7 @@ await storage.set('count', 42);               // type-checked
 await storage.set('count', 'wrong');          // TypeScript error!
 ```
 
-### Type-Safe Messaging with @theluckystrike/webext-messaging {#type-safe-messaging-with-theluckystrikewebext-messaging}
+Type-Safe Messaging with @theluckystrike/webext-messaging {#type-safe-messaging-with-theluckystrikewebext-messaging}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -110,7 +110,7 @@ m.onMessage('TOGGLE_FEATURE', async ({ feature, enabled }) => {
 });
 ```
 
-### chrome.action Types {#chromeaction-types}
+chrome.action Types {#chromeaction-types}
 ```typescript
 interface TabIconDetails {
   tabId?: number;
@@ -129,7 +129,7 @@ interface BadgeColorDetails {
 }
 ```
 
-### chrome.alarms.Alarm {#chromealarmsalarm}
+chrome.alarms.Alarm {#chromealarmsalarm}
 ```typescript
 interface Alarm {
   name: string;
@@ -144,7 +144,7 @@ interface AlarmCreateInfo {
 }
 ```
 
-### chrome.notifications Types {#chromenotifications-types}
+chrome.notifications Types {#chromenotifications-types}
 ```typescript
 interface NotificationOptions {
   type: 'basic' | 'image' | 'list' | 'progress';
@@ -160,7 +160,7 @@ interface NotificationOptions {
 }
 ```
 
-### chrome.commands Types {#chromecommands-types}
+chrome.commands Types {#chromecommands-types}
 ```typescript
 interface Command {
   name?: string;
@@ -169,7 +169,7 @@ interface Command {
 }
 ```
 
-### Event Listener Types {#event-listener-types}
+Event Listener Types {#event-listener-types}
 ```typescript
 // Generic pattern for all chrome events
 chrome.tabs.onCreated.addListener((tab: chrome.tabs.Tab) => {});
@@ -183,7 +183,7 @@ chrome.runtime.onMessage.addListener(
 );
 ```
 
-## Permission Check Types {#permission-check-types}
+Permission Check Types {#permission-check-types}
 ```typescript
 import { checkPermission, requestPermission, describePermission, listPermissions } from '@theluckystrike/webext-permissions';
 // All return typed results
@@ -192,13 +192,13 @@ const description: string = describePermission('storage');
 const all: string[] = listPermissions();
 ```
 
-## Tips {#tips}
+Tips {#tips}
 - Always use `tab.id!` with non-null assertion only when you're sure ID exists
 - `url`, `title`, `favIconUrl` on Tab require `tabs` permission. otherwise undefined
 - Use `chrome.tabs.Tab` not `Tab` to avoid conflicts with DOM `Tab`
 - `@types/chrome` is community-maintained. may lag behind Chrome releases
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - Reference: `docs/reference/storage-patterns.md`
 - Reference: `docs/reference/message-passing-patterns.md`
 - Reference: `docs/reference/manifest-permissions-map.md`

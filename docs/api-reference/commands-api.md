@@ -5,7 +5,7 @@ description: "The Chrome Commands API defines keyboard shortcuts that trigger ex
 canonical_url: "https://bestchromeextensions.com/api-reference/commands-api/"
 ---
 
-# Chrome Commands API Reference
+Chrome Commands API Reference
 
 The `chrome.commands` API allows extensions to define keyboard shortcuts that trigger actions. These shortcuts can work within Chrome's context or globally across the entire operating system.
 
@@ -150,11 +150,11 @@ Supported Modifiers {#supported-modifiers}
 
 Supported Keys {#supported-keys}
 
-- Letters: A–Z
-- Numbers: 0–9
+- Letters: A, Z
+- Numbers: 0, 9
 - Punctuation: Comma, Period, Home, End, Space
 - Arrows: ArrowLeft, ArrowUp, ArrowDown, ArrowRight
-- Function keys: F1–F12
+- Function keys: F1, F12
 - Media keys: MediaNextTrack, MediaPlayPause, MediaPrevTrack, MediaStop
 
 Key Requirements {#key-requirements}

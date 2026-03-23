@@ -8,7 +8,7 @@ tags: [chrome-tabs, browser-performance, memory-optimization, tab-suspender-pro,
 author: theluckystrike
 ---
 
-# How to Keep 100+ Tabs Open in Chrome Without Crashing
+How to Keep 100+ Tabs Open in Chrome Without Crashing
 
 You have 100 tabs open. Maybe more. You are not proud of it, but you are not closing them either. Every one of those tabs represents something. a research thread, a half-read article, a task you will get to eventually, a reference you might need in five minutes or five days. Closing them feels like throwing away potential work. But keeping them open is bringing your computer to its knees.
 
@@ -114,15 +114,15 @@ Strategy 3: Enable Chrome's Performance Features
 
 Chrome has several built-in performance features that complement Tab Suspender Pro.
 
-#### Memory Saver
+Memory Saver
 
 Navigate to `chrome://settings/performance` and enable Memory Saver. This is Chrome's built-in tab discarding feature. While not as configurable as Tab Suspender Pro, it provides an additional layer of memory management that catches any tabs Tab Suspender Pro might miss.
 
-#### Energy Saver
+Energy Saver
 
 On laptops, enable Energy Saver in the same settings page. This reduces Chrome's background activity and can help with both battery life and overall system performance.
 
-#### Prerender and Prefetch Settings
+Prerender and Prefetch Settings
 
 Navigate to `chrome://settings/cookies` (or `chrome://settings/preloading`) and review your preloading settings. With 100+ tabs, you probably do not want Chrome preloading pages, as this consumes additional memory.
 
@@ -130,7 +130,7 @@ Strategy 4: Optimize Chrome's Internal Settings
 
 Several Chrome flags can help with high tab counts.
 
-#### Reduce Tab Throttling Aggressiveness
+Reduce Tab Throttling Aggressiveness
 
 Chrome already throttles background tabs, but you can review and adjust this behavior:
 
@@ -138,7 +138,7 @@ Chrome already throttles background tabs, but you can review and adjust this beh
 2. Search for "throttle" to review tab throttling settings.
 3. The defaults are usually good, but if you notice background tabs consuming excessive CPU, enabling aggressive throttling can help.
 
-#### Enable Tab Scrolling
+Enable Tab Scrolling
 
 With 100+ tabs, the tab bar becomes unusably small. Enable tab scrolling:
 
@@ -150,19 +150,19 @@ Strategy 5: System-Level Optimization
 
 Your operating system can be tuned to handle high browser memory usage more gracefully.
 
-#### macOS
+macOS
 
 - Close memory-hungry applications when you need maximum Chrome capacity. Activity Monitor shows memory usage by application.
 - Increase swap performance: macOS manages swap automatically on SSDs, but ensuring you have at least 20-30 GB of free disk space helps swap performance.
 - Reduce visual effects: System Settings > Accessibility > Display > Reduce Motion. This frees a small amount of GPU memory.
 
-#### Windows
+Windows
 
 - Virtual memory settings: Ensure Windows has adequate page file space. System Properties > Advanced > Performance Settings > Advanced > Virtual Memory. Set it to "System managed" or manually configure it to 1.5-2x your physical RAM.
 - Close background applications: Use Task Manager to identify and close memory-hungry background apps.
 - Disable startup programs: Many applications launch at startup and consume memory you do not need to spare.
 
-#### Linux
+Linux
 
 - Adjust swappiness: A lower `vm.swappiness` value (10-30) tells Linux to prefer keeping data in RAM rather than swapping, which improves performance when you are near your memory limit.
 - Use zram: zram creates a compressed swap partition in RAM, effectively increasing your available memory by 30-50%.
@@ -171,11 +171,11 @@ Strategy 6: Adopt Smart Tab Habits
 
 Beyond tools and settings, your behavior significantly impacts how well Chrome handles large tab counts.
 
-#### The "3-5 Active, Rest Suspended" Rule
+The "3-5 Active, Rest Suspended" Rule
 
 At any given moment, you are realistically working with 3-5 tabs. Everything else is reference material. Accept this reality and let Tab Suspender Pro manage accordingly. You do not need 100 tabs loaded; you need 100 tabs accessible.
 
-#### Regular Tab Audits
+Regular Tab Audits
 
 Once a week, spend 5 minutes reviewing your tabs:
 
@@ -183,7 +183,7 @@ Once a week, spend 5 minutes reviewing your tabs:
 - Bookmark persistent references. If you open the same documentation page every day, bookmark it instead of keeping a tab open. Bookmarks use essentially zero memory.
 - Archive completed research. If you finished a research task, use OneTab or bookmarks to archive the tabs. You do not need them taking up tab bar space.
 
-#### Use Bookmarks for Persistent Resources
+Use Bookmarks for Persistent Resources
 
 Bookmarks are free. Tabs are expensive. For resources you access daily:
 
@@ -193,7 +193,7 @@ Bookmarks are free. Tabs are expensive. For resources you access daily:
 
 The overhead of clicking a bookmark versus clicking a tab is negligible, but the memory savings are significant.
 
-#### Window Separation
+Window Separation
 
 Use multiple Chrome windows to separate contexts:
 

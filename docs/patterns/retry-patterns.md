@@ -5,7 +5,7 @@ description: "Implement retry and backoff strategies for network requests."
 canonical_url: "https://bestchromeextensions.com/patterns/retry-patterns/"
 ---
 
-# Retry Patterns
+Retry Patterns
 
 Overview {#overview}
 

@@ -8,7 +8,7 @@ tags: [performance-profiling, chrome-devtools, cpu-profiling, memory-profiling, 
 seo_title: "Chrome Extension Performance Profiling Complete Guide | 2025"
 ---
 
-# Chrome Extension Performance Profiling Guide: Find and Fix Bottlenecks
+Chrome Extension Performance Profiling Guide: Find and Fix Bottlenecks
 
 Performance profiling is the systematic process of measuring and analyzing your Chrome extension's resource consumption to identify bottlenecks and optimization opportunities. Unlike general web application development, Chrome extensions operate across multiple contexts, background service workers, content scripts, popup pages, and options pages, each with its own performance characteristics and profiling requirements.
 

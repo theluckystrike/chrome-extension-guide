@@ -9,7 +9,7 @@ keywords: "clipboard history extension, copy paste history chrome, clipboard man
 canonical_url: "https://bestchromeextensions.com/2025/01/24/build-clipboard-history-chrome-extension/"
 ---
 
-# Build a Clipboard History Manager Chrome Extension
+Build a Clipboard History Manager Chrome Extension
 
 If you have ever copied something important only to lose it when you copied something else, you understand the frustration of a one-item clipboard. A clipboard history extension solves this problem by storing every item you copy, allowing you to retrieve and reuse previous selections instantly. Building your own clipboard history manager Chrome extension is an excellent project that teaches you essential Chrome extension development concepts while creating a genuinely useful tool.
 

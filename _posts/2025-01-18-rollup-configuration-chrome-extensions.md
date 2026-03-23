@@ -9,7 +9,7 @@ keywords: "rollup chrome extension, rollup mv3, extension bundler, chrome extens
 canonical_url: "https://bestchromeextensions.com/2025/01/18/rollup-configuration-chrome-extensions/"
 ---
 
-# Rollup Configuration for Chrome Extensions: Complete Guide
+Rollup Configuration for Chrome Extensions: Complete Guide
 
 Building Chrome extensions in 2025 requires modern tooling to handle the complexity of Manifest V3 extensions. Rollup has emerged as one of the most powerful and efficient bundlers for Chrome extensions, offering tree-shaking, code splitting, and a plugin ecosystem that makes managing extension builds straightforward. This comprehensive guide walks you through setting up Rollup for your Chrome extension projects, from basic configuration to advanced optimizations that will make your extension faster and smaller.
 

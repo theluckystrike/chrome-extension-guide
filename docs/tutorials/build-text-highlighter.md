@@ -4,7 +4,7 @@ title: "Chrome Extension Text Highlighter. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-text-highlighter/"
 ---
-# Build a Text Highlighter Extension
+Build a Text Highlighter Extension
 
 What You'll Build {#what-youll-build}
 - Select text and highlight with color
@@ -277,7 +277,7 @@ Download as .md file or copy to clipboard.
 Cross-References {#cross-references}
 
 - [DOM Observer Patterns](../patterns/dom-observer-patterns.md). Watching for dynamic content
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md). Advanced storage techniques
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md). Advanced storage techniques
 - [Content Script Patterns](../guides/content-script-patterns.md). Content script architecture
 
 ---

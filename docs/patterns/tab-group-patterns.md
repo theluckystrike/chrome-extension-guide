@@ -5,7 +5,7 @@ description: "Organize tabs with the Tab Groups API."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-group-patterns/"
 ---
 
-# Tab Group Patterns
+Tab Group Patterns
 
 Chrome's Tab Groups API allows organizing tabs into visual groups, creating a workspace-like experience within the browser.
 

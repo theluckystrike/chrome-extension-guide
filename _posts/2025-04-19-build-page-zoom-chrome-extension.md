@@ -9,7 +9,7 @@ keywords: "chrome extension zoom, page zoom chrome extension, custom zoom level 
 canonical_url: "https://bestchromeextensions.com/2025/04/19/build-page-zoom-chrome-extension/"
 ---
 
-# Build a Page Zoom Chrome Extension: Custom Zoom Levels Per Website
+Build a Page Zoom Chrome Extension: Custom Zoom Levels Per Website
 
 Have you ever visited a website with text that's too small to read comfortably, or a site with massive images that require constant scrolling? Maybe you need different zoom levels for different websites, your favorite news site at 110%, a documentation site at 125%, and your email at 100%. The built-in Chrome zoom works globally, but what if you want custom zoom levels per website? That's exactly what we'll build in this comprehensive guide.
 

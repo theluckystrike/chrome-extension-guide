@@ -5,7 +5,7 @@ description: "Design effective onboarding flows for new extension users."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-onboarding/"
 ---
 
-# Extension Onboarding Patterns
+Extension Onboarding Patterns
 
 User onboarding is critical for Chrome extensions to ensure users understand and adopt key features. This document covers proven onboarding patterns that improve user engagement and reduce early churn.
 

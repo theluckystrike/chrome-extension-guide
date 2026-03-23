@@ -9,7 +9,7 @@ keywords: "chrome extension keyboard shortcuts, chrome.commands API, suggested_k
 canonical_url: "https://bestchromeextensions.com/2026/03/10/chrome-extension-keyboard-shortcuts-complete-implementation-guide/"
 ---
 
-# Chrome Extension Keyboard Shortcuts: Complete Implementation Guide
+Chrome Extension Keyboard Shortcuts: Complete Implementation Guide
 
 Keyboard shortcuts transform a good Chrome extension into an exceptional one. When users can trigger your extension's functionality with a quick key combination, they stay in their workflow without reaching for the mouse or navigating through menus. This guide walks you through implementing keyboard shortcuts in your Chrome extension using the chrome.commands API, covering everything from basic configuration to advanced platform-specific handling.
 

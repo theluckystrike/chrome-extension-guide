@@ -8,7 +8,7 @@ order: 25
 canonical_url: "https://bestchromeextensions.com/permissions/nativeMessaging/"
 ---
 
-# nativeMessaging Permission
+nativeMessaging Permission
 
 Overview {#overview}
 - Permission string: `"nativeMessaging"`

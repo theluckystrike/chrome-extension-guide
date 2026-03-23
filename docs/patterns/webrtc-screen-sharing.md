@@ -5,7 +5,7 @@ description: "Implement screen sharing with WebRTC in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/webrtc-screen-sharing/"
 ---
 
-# WebRTC Screen Sharing Patterns for Chrome Extensions
+WebRTC Screen Sharing Patterns for Chrome Extensions
 
 This guide covers WebRTC-based screen and tab capture patterns for Chrome extensions, including desktop capture, tab capture, and streaming implementations.
 

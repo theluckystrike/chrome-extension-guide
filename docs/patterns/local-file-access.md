@@ -5,7 +5,7 @@ description: "Access local files from Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/local-file-access/"
 ---
 
-# Local File Access Patterns in Chrome Extensions
+Local File Access Patterns in Chrome Extensions
 
 This guide covers various methods for working with local files in Chrome extensions, from simple file input to advanced filesystem APIs.
 

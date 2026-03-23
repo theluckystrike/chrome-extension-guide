@@ -5,7 +5,7 @@ description: "Learn how to apply dependency injection patterns in Chrome extensi
 canonical_url: "https://bestchromeextensions.com/patterns/dependency-injection/"
 ---
 
-# Chrome Extension Dependency Injection
+Chrome Extension Dependency Injection
 
 Dependency injection (DI) is a design pattern that helps you write loosely coupled, testable code by inverting the control of dependencies. In Chrome extensions, where you deal with browser APIs, background scripts, and content scripts, applying DI can dramatically improve your code's maintainability and testability.
 

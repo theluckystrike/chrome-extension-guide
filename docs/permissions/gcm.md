@@ -8,7 +8,7 @@ order: 19
 canonical_url: "https://bestchromeextensions.com/permissions/gcm/"
 ---
 
-# gcm Permission
+gcm Permission
 
 What It Grants {#what-it-grants}
 Access to `chrome.gcm` (Google Cloud Messaging) API for sending and receiving push messages via Firebase Cloud Messaging (FCM).

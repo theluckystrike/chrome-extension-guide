@@ -5,7 +5,7 @@ description: "Use Chrome Managed Storage for enterprise-deployed extensions with
 canonical_url: "https://bestchromeextensions.com/patterns/managed-storage/"
 ---
 
-# Managed Storage Patterns for Enterprise Extensions
+Managed Storage Patterns for Enterprise Extensions
 
 This document covers `chrome.storage.managed` for enterprise-managed extension settings in Chrome extensions.
 
@@ -162,7 +162,7 @@ See Also {#see-also}
 
 - [Enterprise Policies](./enterprise-policies.md)
 - [Enterprise Extensions Guide](../guides/enterprise-extensions.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 -e 
 ---
 

@@ -5,7 +5,7 @@ description: "Update badge text and colors to indicate extension state to users.
 canonical_url: "https://bestchromeextensions.com/patterns/badge-action-ui/"
 ---
 
-# Badge and Action UI Patterns
+Badge and Action UI Patterns
 
 Overview {#overview}
 

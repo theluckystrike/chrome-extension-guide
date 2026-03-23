@@ -1,8 +1,8 @@
-# Storage Patterns Reference
+Storage Patterns Reference
 
 Complete reference for Chrome extension storage APIs and patterns.
 
-## Chrome Storage API Comparison
+Chrome Storage API Comparison
 
 ```
 
@@ -72,9 +72,9 @@ Complete reference for Chrome extension storage APIs and patterns.
 
 ![Chrome Extension storage API comparison diagram showing local, sync, session, and managed storage areas with quota and synchronization details](docs/images/storage-api-comparison.svg)
 
-## Storage Areas Comparison
+Storage Areas Comparison
 
-## Storage Areas Comparison {#storage-areas-comparison}
+Storage Areas Comparison {#storage-areas-comparison}
 
 | Area | Quota | Sync | Persist | Use Case |
 |------|-------|------|---------|----------|
@@ -83,9 +83,9 @@ Complete reference for Chrome extension storage APIs and patterns.
 | `chrome.storage.session` | 10MB | No | No (cleared on restart) | Temporary state |
 | `chrome.storage.managed` | Read-only | Via enterprise policy | Yes | Enterprise config |
 
-## Raw Chrome Storage API {#raw-chrome-storage-api}
+Raw Chrome Storage API {#raw-chrome-storage-api}
 
-### Basic CRUD {#basic-crud}
+Basic CRUD {#basic-crud}
 ```javascript
 // Set values
 chrome.storage.local.set({ theme: 'dark', count: 42, config: { debug: true } });
@@ -113,14 +113,14 @@ chrome.storage.local.remove('count');
 chrome.storage.local.clear();
 ```
 
-### Promise-based (MV3) {#promise-based-mv3}
+Promise-based (MV3) {#promise-based-mv3}
 ```javascript
 const { theme } = await chrome.storage.local.get('theme');
 await chrome.storage.local.set({ theme: 'dark' });
 await chrome.storage.local.remove('theme');
 ```
 
-### Storage Change Listener {#storage-change-listener}
+Storage Change Listener {#storage-change-listener}
 ```javascript
 chrome.storage.onChanged.addListener((changes, areaName) => {
   for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
@@ -129,9 +129,9 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-## Type-Safe Storage with @theluckystrike/webext-storage {#type-safe-storage-with-theluckystrikewebext-storage}
+Type-Safe Storage with @theluckystrike/webext-storage {#type-safe-storage-with-theluckystrikewebext-storage}
 
-### Schema Definition {#schema-definition}
+Schema Definition {#schema-definition}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -146,7 +146,7 @@ const storage = createStorage(schema, 'local');
 // or: createStorage(schema, 'sync') for cross-device sync
 ```
 
-### CRUD Operations {#crud-operations}
+CRUD Operations {#crud-operations}
 ```typescript
 // Single value
 const theme = await storage.get('theme');          // string | null
@@ -168,7 +168,7 @@ await storage.removeMany(['theme', 'fontSize']);
 await storage.clear();
 ```
 
-### Watching Changes {#watching-changes}
+Watching Changes {#watching-changes}
 ```typescript
 // Per-key watchers
 storage.watch('theme', (newValue, oldValue) => {
@@ -181,9 +181,9 @@ storage.watch('isEnabled', (enabled) => {
 });
 ```
 
-## Common Patterns {#common-patterns}
+Common Patterns {#common-patterns}
 
-### Feature Flags {#feature-flags}
+Feature Flags {#feature-flags}
 ```typescript
 const storage = createStorage(defineSchema({
   darkMode: 'boolean',
@@ -196,7 +196,7 @@ async function isFeatureEnabled(feature) {
 }
 ```
 
-### User Preferences with Defaults {#user-preferences-with-defaults}
+User Preferences with Defaults {#user-preferences-with-defaults}
 ```typescript
 const DEFAULTS = { theme: 'light', fontSize: 14, language: 'en' };
 
@@ -212,7 +212,7 @@ async function getAllPreferences() {
 }
 ```
 
-### Complex Objects (JSON Pattern) {#complex-objects-json-pattern}
+Complex Objects (JSON Pattern) {#complex-objects-json-pattern}
 ```typescript
 const storage = createStorage(defineSchema({
   blockedSites: 'string'  // JSON: string[]
@@ -230,7 +230,7 @@ async function addBlockedSite(site) {
 }
 ```
 
-### Cache with Expiry {#cache-with-expiry}
+Cache with Expiry {#cache-with-expiry}
 ```typescript
 const storage = createStorage(defineSchema({
   cache: 'string'  // JSON: { data: any, expires: number }
@@ -252,7 +252,7 @@ async function getCached(key, fetchFn, ttlMs = 60000) {
 }
 ```
 
-### Migration Between Schema Versions {#migration-between-schema-versions}
+Migration Between Schema Versions {#migration-between-schema-versions}
 ```typescript
 const CURRENT_VERSION = 2;
 
@@ -272,7 +272,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-## Quota Management {#quota-management}
+Quota Management {#quota-management}
 ```javascript
 // Check current usage
 chrome.storage.local.getBytesInUse(null, (bytes) => {
@@ -290,7 +290,7 @@ chrome.storage.sync.getBytesInUse(null, (bytes) => {
 });
 ```
 
-## Common Mistakes {#common-mistakes}
+Common Mistakes {#common-mistakes}
 - Exceeding sync quota (100KB total, 8KB per item). use local for large data
 - Not handling `null` returns from `get()`. always provide defaults
 - Storing sensitive data (passwords, tokens) in sync storage. use local

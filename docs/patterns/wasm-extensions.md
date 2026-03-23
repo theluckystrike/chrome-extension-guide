@@ -5,7 +5,7 @@ description: "Integrate WebAssembly modules into Chrome extensions for performan
 canonical_url: "https://bestchromeextensions.com/patterns/wasm-extensions/"
 ---
 
-# WebAssembly in Chrome Extensions
+WebAssembly in Chrome Extensions
 
 WebAssembly (WASM) enables near-native performance for compute-heavy tasks inside Chrome extensions. This guide covers eight practical patterns for integrating WASM modules with Manifest V3, including loading strategies, memory management, caching, and Content Security Policy configuration.
 

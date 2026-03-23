@@ -4,7 +4,7 @@ title: "Chrome Extension Pomodoro Timer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-pomodoro-timer/"
 ---
-# Build a Pomodoro Timer Extension
+Build a Pomodoro Timer Extension
 
 What You'll Build {#what-youll-build}
 - 25-minute work sessions with 5-minute breaks

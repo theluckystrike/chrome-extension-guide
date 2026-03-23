@@ -9,7 +9,7 @@ keywords: "chrome.action api, extension popup api, browserAction to action migra
 canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-action-api-guide/"
 ---
 
-# Chrome Action API Guide: Popup, Badge, and Click Handling
+Chrome Action API Guide: Popup, Badge, and Click Handling
 
 The `chrome.action` API controls your extension's toolbar icon. the small button that sits in Chrome's toolbar and serves as the primary interaction point between your extension and the user. Through this API, you can manage popups, display dynamic badges, change icons, handle click events, and provide contextual information to users at a glance.
 

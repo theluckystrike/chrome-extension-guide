@@ -9,7 +9,7 @@ keywords: "chrome extension sentry, error monitoring extension, sentry chrome ex
 canonical_url: "https://bestchromeextensions.com/2025/04/26/chrome-extension-sentry-error-monitoring/"
 ---
 
-# Error Monitoring Chrome Extensions with Sentry: Complete Setup Guide
+Error Monitoring Chrome Extensions with Sentry: Complete Setup Guide
 
 Building a Chrome extension is only half the battle. Once users install your extension, you need to know when things go wrong in their browsers. Without proper error monitoring, you're essentially flying blind, users encounter crashes and errors, but you have no visibility into what happened or how often it occurs. This is where Sentry comes in.
 
@@ -56,7 +56,7 @@ Step 3: Initialize Sentry in Your Extension
 
 The initialization depends on which part of your extension you want to monitor. Let's cover the three main contexts:
 
-#### Initializing in Background Scripts (Service Workers)
+Initializing in Background Scripts (Service Workers)
 
 In your service worker file (typically `background.js` or `service-worker.js`), add the following:
 
@@ -102,7 +102,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-#### Initializing in Content Scripts
+Initializing in Content Scripts
 
 Content scripts run in the context of web pages, which requires a slightly different approach:
 
@@ -141,7 +141,7 @@ try {
 }
 ```
 
-#### Initializing in Popup Scripts
+Initializing in Popup Scripts
 
 The popup runs in its own context, similar to a mini web page:
 
@@ -179,7 +179,7 @@ Handling Chrome Extension Specific Errors
 
 Chrome extensions have unique error patterns. Here's how to handle them effectively:
 
-#### Runtime Errors
+Runtime Errors
 
 ```javascript
 // Listen for unhandled errors in service worker
@@ -204,7 +204,7 @@ self.addEventListener('unhandledrejection', (event) => {
 });
 ```
 
-#### Message Passing Errors
+Message Passing Errors
 
 Extensions rely heavily on message passing between contexts. Monitor these:
 
@@ -224,7 +224,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-#### Storage Errors
+Storage Errors
 
 ```javascript
 // Wrapper for chrome.storage operations

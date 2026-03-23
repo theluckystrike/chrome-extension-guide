@@ -1,10 +1,10 @@
-# Web Workers and SharedWorkers in Chrome Extensions
+Web Workers and SharedWorkers in Chrome Extensions
 
-## Overview
+Overview
 
 Web Workers and SharedWorkers provide powerful background processing capabilities in Chrome Extensions, enabling you to run CPU-intensive tasks without blocking the main thread. This guide covers the essential patterns, differences from service workers, and practical implementation strategies for MV3.
 
-## Service Workers vs Web Workers: Key Differences
+Service Workers vs Web Workers: Key Differences
 
 Understanding the distinction between these worker types is critical for extension architecture:
 
@@ -31,11 +31,11 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-## Creating Web Workers from Extension Pages
+Creating Web Workers from Extension Pages
 
 Extension pages (popup, options, side panel) can create Web Workers using the standard API:
 
-### Popup / Options Page
+Popup / Options Page
 
 ```javascript
 // popup.js
@@ -69,7 +69,7 @@ window.addEventListener('unload', () => {
 });
 ```
 
-### Side Panel
+Side Panel
 
 ```javascript
 // sidepanel.js
@@ -84,7 +84,7 @@ worker.onmessage = (event) => {
 };
 ```
 
-### Worker File (data-processor.js)
+Worker File (data-processor.js)
 
 ```javascript
 // data-processor.js
@@ -126,11 +126,11 @@ function processData(data, options) {
 }
 ```
 
-## SharedWorker for Sharing State Between Extension Pages
+SharedWorker for Sharing State Between Extension Pages
 
 SharedWorkers allow multiple extension pages to share a single worker instance and communicate through it, perfect for sharing state across popup, options, and side panel.
 
-### manifest.json Configuration
+manifest.json Configuration
 
 ```json
 {
@@ -146,7 +146,7 @@ SharedWorkers allow multiple extension pages to share a single worker instance a
 }
 ```
 
-### Creating SharedWorker
+Creating SharedWorker
 
 ```javascript
 // In popup.js, options.js, or sidepanel.js
@@ -168,7 +168,7 @@ sharedWorker.port.postMessage({ type: 'getState' });
 sharedWorker.port.start();
 ```
 
-### SharedWorker Implementation
+SharedWorker Implementation
 
 ```javascript
 // shared-worker.js
@@ -241,7 +241,7 @@ function broadcastState() {
 }
 ```
 
-### State Synchronization Across Pages
+State Synchronization Across Pages
 
 ```javascript
 // shared-store.js - Utility for extension pages
@@ -294,7 +294,7 @@ store.subscribe((state) => {
 });
 ```
 
-## Offscreen Documents as DOM-Capable Workers
+Offscreen Documents as DOM-Capable Workers
 
 Offscreen documents provide a background context with DOM access, bridge the gap between service workers and web workers:
 
@@ -304,7 +304,7 @@ Offscreen documents provide a background context with DOM access, bridge the gap
 }
 ```
 
-### Creating Offscreen Document
+Creating Offscreen Document
 
 ```javascript
 // background.js (service worker)
@@ -347,7 +347,7 @@ async function processInOffscreen(data) {
 }
 ```
 
-### Offscreen Document Implementation
+Offscreen Document Implementation
 
 ```html
 <!-- offscreen.html -->
@@ -413,9 +413,9 @@ async function processImage(imageData) {
 }
 ```
 
-## Communication Patterns: postMessage and MessageChannel
+Communication Patterns: postMessage and MessageChannel
 
-### Basic postMessage
+Basic postMessage
 
 ```javascript
 // Main thread
@@ -435,7 +435,7 @@ self.onmessage = (event) => {
 };
 ```
 
-### MessageChannel for Direct Communication
+MessageChannel for Direct Communication
 
 MessageChannel creates a direct channel between two contexts, useful for popup-to-content-script communication:
 
@@ -459,7 +459,7 @@ popupPort.onmessage = (event) => {
 popupPort.postMessage({ type: 'ping' });
 ```
 
-### BroadcastChannel for Same-Origin Communication
+BroadcastChannel for Same-Origin Communication
 
 ```javascript
 // BroadcastChannel works across extension pages with same origin
@@ -472,7 +472,7 @@ channel.onmessage = (event) => {
 };
 ```
 
-### Transferable Objects for Performance
+Transferable Objects for Performance
 
 ```javascript
 // Main thread - transfer ArrayBuffer ownership
@@ -493,9 +493,9 @@ self.onmessage = (event) => {
 };
 ```
 
-## Use Cases
+Use Cases
 
-### Heavy Computation
+Heavy Computation
 
 ```javascript
 // computation-worker.js
@@ -544,7 +544,7 @@ function isPrime(n) {
 }
 ```
 
-### Image Processing
+Image Processing
 
 ```javascript
 // image-worker.js
@@ -576,7 +576,7 @@ self.onmessage = (event) => {
 };
 ```
 
-### Data Parsing
+Data Parsing
 
 ```javascript
 // parser-worker.js
@@ -626,7 +626,7 @@ function parseCSV(content, options) {
 }
 ```
 
-## Limitations in MV3
+Limitations in MV3
 
 - No Web Workers in Service Worker: Cannot create Web Workers directly in the background service worker
 - No Direct Chrome API Access: Workers must communicate via message passing
@@ -636,7 +636,7 @@ function parseCSV(content, options) {
 - Extension Context: Workers share the extension's origin but have isolated JavaScript contexts
 - Module Workers: Must use `{ type: 'module' }` for import statements
 
-## Related Guides
+Related Guides
 
 - [Offscreen Documents](../mv3/offscreen-documents.md)
 - [Message Passing Best Practices](message-passing-best-practices.md)

@@ -4,7 +4,7 @@ title: "Chrome Extension Habit Tracker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-habit-tracker/"
 ---
-# Build a Habit Tracker Extension. Full Tutorial
+Build a Habit Tracker Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Daily habit tracking with streak counting and check-off functionality
@@ -21,7 +21,7 @@ Step 1: Manifest Configuration {#step-1-manifest-configuration}
 - Background service worker for alarm handling
 - Badge text updates for completed/total count
 
-See: [[Alarms API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](../api-reference/alarms-api.md), [Notifications API](../api-reference/notifications-api.md), [[Storage API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) Deep Dive](../api-reference/storage-api-deep detailed look.md)
+See: [[Alarms API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](../api-reference/alarms-api.md), [Notifications API](../api-reference/notifications-api.md), [[Storage API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) detailed look](../api-reference/storage-api-deep detailed look.md)
 
 Step 2: Storage Schema {#step-2-storage-schema}
 - Habit object structure: `{ id, name, createdDate, completionLog: { "YYYY-MM-DD": boolean } }`

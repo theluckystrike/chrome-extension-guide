@@ -5,7 +5,7 @@ description: "The Chrome Runtime API provides core extension lifecycle managemen
 canonical_url: "https://bestchromeextensions.com/api-reference/runtime-api/"
 ---
 
-# Chrome Runtime API Complete Reference
+Chrome Runtime API Complete Reference
 
 The `chrome.runtime` API is the backbone of every Chrome extension. It provides lifecycle management, messaging between contexts, resource URL resolution, and platform utilities. No permission is required -- it is available in every extension context (service worker, popup, options page, content script).
 
@@ -602,7 +602,7 @@ Key migration note: In MV3, service workers terminate after approximately 30 sec
 Related {#related}
 
 - [Alarms API](alarms-api.md) -- scheduled background work
-- [Storage API Deep Dive](storage-api-deep detailed look.md) -- persistence patterns
+- [Storage API detailed look](storage-api-deep detailed look.md) -- persistence patterns
 - [Tabs API](tabs-api.md) -- `sendMessage` to content scripts
 - [Chrome runtime API docs](https://developer.chrome.com/docs/extensions/reference/api/runtime) -- official reference
 Frequently Asked Questions

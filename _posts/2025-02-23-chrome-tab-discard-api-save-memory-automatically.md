@@ -9,7 +9,7 @@ keywords: "chrome tab discard api, chrome.tabs.discard, auto suspend chrome tabs
 canonical_url: "https://bestchromeextensions.com/2025/02/23/chrome-tab-discard-api-save-memory-automatically/"
 ---
 
-# Chrome Tab Discard API: How Extensions Save Memory by Suspending Tabs
+Chrome Tab Discard API: How Extensions Save Memory by Suspending Tabs
 
 Modern Chrome users frequently juggle dozens, or even hundreds, of open tabs. Each tab consumes significant system resources even when sitting idle in the background. Chrome typically uses between 150MB and 300MB of RAM per tab, meaning that 50 open tabs can consume over 10GB of memory. This massive resource consumption leads to sluggish performance, browser crashes, and reduced productivity.
 

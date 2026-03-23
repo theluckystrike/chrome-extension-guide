@@ -9,7 +9,7 @@ keywords: "broken link checker extension, link validator chrome, dead link finde
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-broken-link-checker-extension/"
 ---
 
-# Build a Broken Link Checker Extension: Complete Chrome Extension Development Guide
+Build a Broken Link Checker Extension: Complete Chrome Extension Development Guide
 
 Broken links are one of the most frustrating issues web developers, content managers, and SEO specialists face daily. Whether you are maintaining a personal blog or managing a large corporate website, dead links can damage user experience, harm search engine rankings, and make your content appear neglected. In this comprehensive tutorial, we will walk through building a powerful broken link checker extension that runs directly in your Chrome browser, giving you the ability to validate links on any webpage with a single click.
 

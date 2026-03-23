@@ -9,7 +9,7 @@ keywords: "chrome extension rollup, rollup chrome extension, chrome extension tr
 canonical_url: "https://bestchromeextensions.com/2025/03/30/chrome-extension-rollup-bundling-guide/"
 ---
 
-# Bundling Chrome Extensions with Rollup: Tree-Shaking and Code Splitting
+Bundling Chrome Extensions with Rollup: Tree-Shaking and Code Splitting
 
 Building Chrome extensions has evolved significantly over the years. As extensions become more complex, with multiple scripts, modules, and dependencies, the need for efficient bundling solutions has never been greater. Rollup, a module bundler known for its exceptional tree-shaking capabilities and optimized output, offers a powerful solution for Chrome extension developers who want to create fast, lean, and production-ready extensions.
 

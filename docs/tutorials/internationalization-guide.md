@@ -5,7 +5,7 @@ description: "Learn how to build a multilingual Chrome extension with complete i
 canonical_url: "https://bestchromeextensions.com/tutorials/internationalization-guide/"
 ---
 
-# Internationalizing Your Chrome Extension
+Internationalizing Your Chrome Extension
 
 Overview {#overview}
 

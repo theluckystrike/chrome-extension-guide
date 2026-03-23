@@ -1,12 +1,12 @@
-# Building an Image Compressor Chrome Extension
+Building an Image Compressor Chrome Extension
 
 A comprehensive guide to building a production-ready image compressor Chrome extension with TypeScript.
 
-## Overview
+Overview
 
 This guide covers building a Chrome extension that compresses images directly in the browser without uploading to external servers. The extension will support drag-and-drop, right-click context menu compression, and bulk processing.
 
-## Architecture and manifest.json Setup
+Architecture and manifest.json Setup
 
 The extension uses Manifest V3 with a modular architecture:
 
@@ -60,7 +60,7 @@ The extension uses Manifest V3 with a modular architecture:
 }
 ```
 
-## Project Structure
+Project Structure
 
 ```
 image-compressor/
@@ -96,9 +96,9 @@ image-compressor/
  package.json
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Type Definitions
+Type Definitions
 
 ```typescript
 // src/types/index.ts
@@ -132,7 +132,7 @@ export interface CompressionProgress {
 export type CompressionStatus = 'idle' | 'compressing' | 'completed' | 'error';
 ```
 
-### Image Compressor Core
+Image Compressor Core
 
 ```typescript
 // src/core/compressor.ts
@@ -214,7 +214,7 @@ export class ImageCompressor {
 }
 ```
 
-### Background Service Worker
+Background Service Worker
 
 ```typescript
 // src/background/background.ts
@@ -261,9 +261,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## UI Design
+UI Design
 
-### Popup Interface
+Popup Interface
 
 ```html
 <!-- src/popup/popup.html -->
@@ -331,7 +331,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 </html>
 ```
 
-### Content Script Overlay
+Content Script Overlay
 
 ```typescript
 // src/content/overlay.ts
@@ -367,7 +367,7 @@ export class ImageOverlay {
 }
 ```
 
-## State Management and Storage
+State Management and Storage
 
 ```typescript
 // src/storage/storage.ts
@@ -440,7 +440,7 @@ export class StorageManager {
 }
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
 ```typescript
 // src/core/utils.ts
@@ -489,9 +489,9 @@ export class ErrorHandler {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing
+Unit Testing
 
 ```typescript
 // tests/compressor.test.ts
@@ -534,7 +534,7 @@ describe('ImageCompressor', () => {
 });
 ```
 
-### Integration Testing with Puppeteer
+Integration Testing with Puppeteer
 
 ```typescript
 // tests/integration.test.ts
@@ -559,7 +559,7 @@ test('popup compresses image successfully', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
 1. Web Workers: Offload compression to Web Workers to prevent UI blocking
 2. Lazy Loading: Load compression logic only when needed
@@ -582,7 +582,7 @@ const workerCode = `
 const worker = new Worker(URL.createObjectURL(new Blob([workerCode])));
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
 - [ ] Update version in manifest.json
 - [ ] Test in Chrome, Edge, and Firefox (if cross-browser)
@@ -595,6 +595,6 @@ const worker = new Worker(URL.createObjectURL(new Blob([workerCode])));
 - [ ] Run chrome-webstore-upload CLI or manual upload
 - [ ] Submit for review if required
 
-## Conclusion
+Conclusion
 
 This guide provides a complete foundation for building a production-ready image compressor Chrome extension. The architecture uses modern TypeScript patterns, follows MV3 best practices, and includes proper error handling and testing strategies. Extend this base with additional features like batch processing, format conversion, or cloud backup as needed.

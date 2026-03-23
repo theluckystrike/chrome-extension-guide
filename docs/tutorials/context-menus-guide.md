@@ -5,7 +5,7 @@ description: "A comprehensive tutorial on building context menus in Chrome exten
 canonical_url: "https://bestchromeextensions.com/tutorials/context-menus-guide/"
 ---
 
-# Building Context Menus in Chrome Extensions
+Building Context Menus in Chrome Extensions
 
 Overview {#overview}
 
@@ -93,7 +93,7 @@ Menu Item Types
 
 Chrome supports four menu item types:
 
-#### Normal Menu Item
+Normal Menu Item
 
 ```js
 chrome.contextMenus.create({
@@ -104,7 +104,7 @@ chrome.contextMenus.create({
 });
 ```
 
-#### Checkbox Menu Item
+Checkbox Menu Item
 
 ```js
 chrome.contextMenus.create({
@@ -131,7 +131,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-#### Radio Menu Item
+Radio Menu Item
 
 ```js
 // Create radio group
@@ -159,7 +159,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-#### Separator
+Separator
 
 ```js
 chrome.contextMenus.create({

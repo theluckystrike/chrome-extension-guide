@@ -5,7 +5,7 @@ description: "Master the Chrome Tabs API with this complete reference. Learn chr
 permalink: /guides/chrome-tabs-api-complete-reference/
 ---
 
-# Chrome Tabs API Complete Guide: Query, Group, Move, and Manage Tabs
+Chrome Tabs API Complete Guide: Query, Group, Move, and Manage Tabs
 
 The Chrome Tabs API is the cornerstone of any tab management extension. Whether you're building a simple tab saver or a sophisticated tab manager with grouping, suspension, and cross-window synchronization, this complete reference will guide you through every method, event, and pattern you need to know.
 

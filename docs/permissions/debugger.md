@@ -8,7 +8,7 @@ order: 11
 canonical_url: "https://bestchromeextensions.com/permissions/debugger/"
 ---
 
-# debugger Permission. Chrome Extension Reference
+debugger Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"debugger"`

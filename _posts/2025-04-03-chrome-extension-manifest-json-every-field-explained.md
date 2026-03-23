@@ -9,7 +9,7 @@ keywords: "chrome extension manifest.json, manifest json fields, chrome extensio
 canonical_url: "https://bestchromeextensions.com/2025/04/03/chrome-extension-manifest-json-every-field-explained/"
 ---
 
-# Chrome Extension manifest.json: Every Field Explained with Examples
+Chrome Extension manifest.json: Every Field Explained with Examples
 
 If you are building a Chrome extension, the manifest.json file is the backbone of your entire project. This configuration file tells Chrome everything it needs to know about your extension, from its name and version to the permissions it requires and the files it contains. Understanding every field in manifest.json is essential for creating extensions that work correctly, pass the Chrome Web Store review process, and provide a smooth user experience.
 

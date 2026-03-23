@@ -5,7 +5,7 @@ description: "Understand and avoid the most common Chrome Web Store rejection re
 canonical_url: "https://bestchromeextensions.com/publishing/common-rejections/"
 ---
 
-# Common Chrome Web Store Rejections (and How to Fix Them)
+Common Chrome Web Store Rejections (and How to Fix Them)
 
 Introduction {#introduction}
 - Chrome Web Store review process overview

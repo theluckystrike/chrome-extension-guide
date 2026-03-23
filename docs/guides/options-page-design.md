@@ -1,12 +1,12 @@
-# Chrome Extension Options Page Patterns
+Chrome Extension Options Page Patterns
 
-## Introduction
+Introduction
 - Options pages allow users to configure extension behavior
 - Critical for user experience. poorly designed settings frustrate users
 - Modern extensions should support both full-page and embedded options
 - Reference: https://developer.chrome.com/docs/extensions/develop/ui/options-page
 
-## Options Page vs options_ui (Embedded)
+Options Page vs options_ui (Embedded)
 - Full-page options: Opens in a new tab via `chrome://extensions` > "Extension options"
 - Embedded options: Displays inline within the extensions management page
 - Configure in manifest.json:
@@ -25,13 +25,13 @@
 - Use `options_ui` with `open_in_tab: false` for embedded (MV3)
 - Prefer embedded for quick access; full-page for complex settings
 
-## Full Page vs Embedded Options
+Full Page vs Embedded Options
 - Full-page: Opens in new tab, more screen real estate,
 - Embedded: Quick access, consistent with Chrome UI, limited space
 - Embedded options cannot use certain APIs (e.g., some chrome:// URLs)
 - Consider supporting both with responsive design
 
-## Settings Form Patterns
+Settings Form Patterns
 - Group related settings using `<fieldset>` and `<legend>`
 - Use semantic HTML: `<input type="checkbox">`, `<select>`, `<input type="range">`
 - Store form state in chrome.storage.local or chrome.storage.sync
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-## Real-time Save with chrome.storage
+Real-time Save with chrome.storage
 - Avoid "Save" buttons when possible. use auto-save
 - Use `chrome.storage.onChanged` to react to external changes
 
@@ -79,7 +79,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 - Show visual feedback: "Settings saved" toast or icon
 
-## Import/Export Settings
+Import/Export Settings
 - Users may want to backup or transfer settings
 - Use JSON format for portability
 
@@ -106,7 +106,7 @@ document.getElementById('importBtn').addEventListener('change', async (e) => {
 });
 ```
 
-## Settings Sync Across Devices
+Settings Sync Across Devices
 - Use `chrome.storage.sync` for automatic cloud sync
 - Sync is limited to 100KB total, 8KB per key
 - For larger data, use `chrome.storage.local` with manual sync
@@ -120,7 +120,7 @@ document.getElementById('importBtn').addEventListener('change', async (e) => {
 
 - Sync requires user to be signed into Chrome
 
-## Default Values Handling
+Default Values Handling
 - Always define defaults. first-run experience matters
 - Use a dedicated defaults object, export for consistency
 
@@ -149,7 +149,7 @@ async function initializeSettings() {
 }
 ```
 
-## Settings Migration Between Versions
+Settings Migration Between Versions
 - Version migrations prevent breaking changes when settings schema changes
 - Store migration version in storage
 
@@ -181,7 +181,7 @@ async function migrateSettings() {
 }
 ```
 
-## Section-based Navigation
+Section-based Navigation
 - For complex settings, use tabs or accordion navigation
 - Use URL hash for deep linking to sections
 
@@ -205,7 +205,7 @@ const hash = location.hash.slice(1);
 if (hash) showSection(hash);
 ```
 
-## Search Within Settings
+Search Within Settings
 - Helpful for extensions with many options
 - Implement with client-side filtering
 
@@ -219,7 +219,7 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 });
 ```
 
-## Reset to Defaults
+Reset to Defaults
 - Provide clear reset option, confirm before action
 
 ```javascript
@@ -232,7 +232,7 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
 });
 ```
 
-## Settings Validation
+Settings Validation
 - Validate on change, show inline errors
 - Common: URL format, number ranges, required fields
 
@@ -252,7 +252,7 @@ document.getElementById('apiEndpoint').addEventListener('blur', (e) => {
 });
 ```
 
-## Accessibility in Settings Pages
+Accessibility in Settings Pages
 - Every input needs a `<label>` with `for` attribute
 - Use `aria-describedby` for error messages
 - Keyboard-navigable: Tab order, Enter to save, Escape to cancel
@@ -269,7 +269,7 @@ document.getElementById('apiEndpoint').addEventListener('blur', (e) => {
 <div aria-live="polite" id="saveStatus" class="sr-only">Settings saved</div>
 ```
 
-## Dark Mode for Options Page
+Dark Mode for Options Page
 - Support system preference and user override
 - Use CSS custom properties for theming
 
@@ -313,7 +313,7 @@ async function applyTheme() {
 }
 ```
 
-## Best Practices Summary
+Best Practices Summary
 - Use chrome.storage.sync for user preferences
 - Implement auto-save with visual feedback
 - Support import/export for backup
@@ -323,7 +323,7 @@ async function applyTheme() {
 - Support dark mode via system preference + manual override
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 

@@ -9,7 +9,7 @@ keywords: "travel planner extension, trip planning chrome, flight search extensi
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-travel-planner-chrome-extension/"
 ---
 
-# Build a Travel Planner Chrome Extension: Complete Developer Guide
+Build a Travel Planner Chrome Extension: Complete Developer Guide
 
 Travel planning can be a chaotic process involving multiple browser tabs, scattered booking confirmations, and endless scrolling through flight comparison websites. What if you could consolidate all of this into a single, powerful Chrome extension that lives right in your browser? we will walk you through building a fully functional travel planner Chrome extension from scratch.
 

@@ -1,8 +1,8 @@
-# Building a Password Generator Chrome Extension
+Building a Password Generator Chrome Extension
 
 A comprehensive guide to building a production-ready Chrome extension for secure password generation with modern web technologies. This extension will demonstrate core Chrome extension patterns including popup UI, background service workers, storage management, clipboard integration, and autofill capabilities.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest Configuration](#manifest-configuration)
@@ -19,7 +19,7 @@ A comprehensive guide to building a production-ready Chrome extension for secure
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 This extension follows the standard Chrome extension architecture with three primary contexts:
 
@@ -27,7 +27,7 @@ This extension follows the standard Chrome extension architecture with three pri
 2. Background Service Worker (`background/`): Handles long-running tasks, alarm scheduling for password history cleanup, and cross-context communication
 3. Content Script (`content/`): Handles autofill functionality on web forms
 
-### Data Flow
+Data Flow
 
 ```
 User Action (Generate) → Popup UI → Background Service Worker → Chrome Storage

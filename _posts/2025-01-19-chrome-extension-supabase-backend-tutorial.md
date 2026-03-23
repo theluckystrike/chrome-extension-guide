@@ -9,7 +9,7 @@ keywords: "chrome extension supabase, supabase auth extension, serverless extens
 canonical_url: "https://bestchromeextensions.com/2025/01/19/chrome-extension-supabase-backend-tutorial/"
 ---
 
-# Chrome Extension Supabase Backend Tutorial: Build a Serverless Extension Backend
+Chrome Extension Supabase Backend Tutorial: Build a Serverless Extension Backend
 
 Building a Chrome extension with persistent data storage, user authentication, and server-side logic has traditionally required setting up complex backend infrastructure. However, with Supabase, you can now build a powerful serverless backend for your Chrome extension in minutes. This comprehensive tutorial will guide you through integrating Supabase with Chrome extensions, enabling features like user authentication, real-time database operations, and secure API access.
 

@@ -1,16 +1,16 @@
-# Chrome URL Schemes Reference
+Chrome URL Schemes Reference
 
-## Overview {#overview}
+Overview {#overview}
 
 Chrome and Chrome extensions use several special URL schemes for different purposes. Understanding these schemes is essential for content script matching, permissions configuration, and proper navigation within extensions.
 
 This reference documents the URL schemes you'll encounter when building Chrome extensions and explains what each scheme supports.
 
-## chrome:// URLs {#chrome-urls}
+chrome:// URLs {#chrome-urls}
 
 Chrome's internal pages use the `chrome://` URL scheme. These are built-in pages that provide access to browser settings, extension management, and debugging tools.
 
-### Available chrome:// URLs {#available-chrome-urls}
+Available chrome:// URLs {#available-chrome-urls}
 
 | URL | Description |
 |-----|-------------|
@@ -24,7 +24,7 @@ Chrome's internal pages use the `chrome://` URL scheme. These are built-in pages
 | `chrome://history` | Browsing history viewer |
 | `chrome://bookmarks` | Bookmark manager |
 
-### Important Limitations {#important-limitations}
+Important Limitations {#important-limitations}
 
 Extensions cannot inject content scripts into `chrome://` pages. This is a deliberate security restriction. You also cannot use `chrome://` URLs in the `matches` field of content script declarations.
 
@@ -38,11 +38,11 @@ Extensions cannot inject content scripts into `chrome://` pages. This is a delib
 }
 ```
 
-## chrome-extension:// URLs {#chrome-extension-urls}
+chrome-extension:// URLs {#chrome-extension-urls}
 
 Extensions use the `chrome-extension://` scheme to reference their own resources. This scheme is essential for loading extension assets.
 
-### URL Format {#url-format}
+URL Format {#url-format}
 
 ```
 chrome-extension://{extension-id}/{path}
@@ -54,7 +54,7 @@ For example, if your extension ID is `abcdefghijklmnopqrstuvwxyz012345` and you 
 chrome-extension://abcdefghijklmnopqrstuvwxyz012345/images/icon.png
 ```
 
-### Getting URLs Programmatically {#getting-urls-programmatically}
+Getting URLs Programmatically {#getting-urls-programmatically}
 
 Use `chrome.runtime.getURL()` to get the full extension URL for any resource:
 
@@ -70,7 +70,7 @@ console.log(iconUrl); // chrome-extension://{id}/images/icon.png
 // - Creating download links
 ```
 
-### Web-Accessible Resources {#web-accessible-resources}
+Web-Accessible Resources {#web-accessible-resources}
 
 By default, extension resources are not accessible from web pages. To make resources available, declare them as web-accessible in `manifest.json`:
 
@@ -87,7 +87,7 @@ By default, extension resources are not accessible from web pages. To make resou
 
 Only resources listed here can be loaded by web pages.
 
-## about: URLs {#about-urls}
+about: URLs {#about-urls}
 
 Chrome supports several `about:` URLs for built-in pages:
 
@@ -98,15 +98,15 @@ Chrome supports several `about:` URLs for built-in pages:
 | `about:version` | Chrome version information |
 | `about:history` | Browsing history |
 
-### Special Case: about:blank {#special-case-aboutblank}
+Special Case: about:blank {#special-case-aboutblank}
 
 Content scripts can run on `about:blank` pages. This makes it useful for extensions that need to create blank pages for intermediate processing or when using the page as a canvas for content script operations.
 
-## data: URLs {#data-urls}
+data: URLs {#data-urls}
 
 Data URLs embed content directly in the URL itself using the format `data:{mime-type};base64,{data}`.
 
-### Limitations for Extensions {#limitations-for-extensions}
+Limitations for Extensions {#limitations-for-extensions}
 
 - Content scripts do NOT run on `data:` URLs
 - You cannot navigate to `data:` URLs using `chrome.tabs.update()`
@@ -121,11 +121,11 @@ chrome.tabs.update(tabId, { url: 'data:text/html,<h1>Hello</h1>' });
 // The above will not execute content scripts
 ```
 
-## blob: URLs {#blob-urls}
+blob: URLs {#blob-urls}
 
 Blob URLs are created dynamically using `URL.createObjectURL()` and represent objects in memory.
 
-### Key Characteristics {#key-characteristics}
+Key Characteristics {#key-characteristics}
 
 - Scoped to the context that created them
 - Valid only within the same origin
@@ -147,11 +147,11 @@ a.click();
 URL.revokeObjectURL(url);
 ```
 
-## file:// URLs {#file-urls}
+file:// URLs {#file-urls}
 
 Accessing local files requires special handling in Chrome extensions.
 
-### Requirements {#requirements}
+Requirements {#requirements}
 
 - The extension must have "Allow access to file URLs" enabled in `chrome://extensions`
 - This permission is not enabled by default for security reasons
@@ -169,15 +169,15 @@ Accessing local files requires special handling in Chrome extensions.
 }
 ```
 
-### Security Considerations {#security-considerations}
+Security Considerations {#security-considerations}
 
 Be cautious when granting file URL access, as it allows the extension to read any local file the user has access to.
 
-## URL Matching Patterns {#url-matching-patterns}
+URL Matching Patterns {#url-matching-patterns}
 
 Understanding what your match patterns can and cannot match is critical for proper content script and permission configuration.
 
-### Pattern Syntax {#pattern-syntax}
+Pattern Syntax {#pattern-syntax}
 
 | Pattern | Matches |
 |---------|---------|
@@ -186,7 +186,7 @@ Understanding what your match patterns can and cannot match is critical for prop
 | `https://example.com/*` | All paths on example.com |
 | `<all_urls>` | HTTP, HTTPS, and file URLs (not chrome://, about:, data:, etc.) |
 
-### What `<all_urls>` Does NOT Match {#what-all-urls-does-not-match}
+What `<all_urls>` Does NOT Match {#what-all-urls-does-not-match}
 
 The `<all_urls>` special value does NOT match:
 
@@ -198,7 +198,7 @@ The `<all_urls>` special value does NOT match:
 
 `<all_urls>` does match `file://` URLs, but the user must enable "Allow access to file URLs" for the extension. The `*://*/*` pattern matches only `http` and `https` URLs (not `file://`).
 
-### Recommended Patterns {#recommended-patterns}
+Recommended Patterns {#recommended-patterns}
 
 ```json
 {
@@ -215,9 +215,9 @@ The `<all_urls>` special value does NOT match:
 }
 ```
 
-## What Extensions Can and Cannot Access {#what-extensions-can-and-cannot-access}
+What Extensions Can and Cannot Access {#what-extensions-can-and-cannot-access}
 
-### CAN Access {#can-access}
+CAN Access {#can-access}
 
 - `http://*/*` - HTTP websites (with permission)
 - `https://*/*` - HTTPS websites (with permission)
@@ -225,7 +225,7 @@ The `<all_urls>` special value does NOT match:
 - `file://*/*` - Local files (with permission and user approval)
 - `about:blank` - Empty page (special case)
 
-### CANNOT Access {#cannot-access}
+CANNOT Access {#cannot-access}
 
 - `chrome://*` - Chrome internal pages
 - `chrome-extension://` - Other extensions' resources
@@ -233,12 +233,12 @@ The `<all_urls>` special value does NOT match:
 - `data:` - Cannot run content scripts
 - `blob:` - Cannot run content scripts directly
 
-### Special Cases {#special-cases}
+Special Cases {#special-cases}
 
 - about:blank: Accessible and can run content scripts
 - Your own extension: Can always access `chrome-extension://` your own extension's resources
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 
 For more information, see:
 

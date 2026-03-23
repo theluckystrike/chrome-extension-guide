@@ -9,7 +9,7 @@ keywords: "chrome extension web vitals, core web vitals extension, LCP FID CLS c
 canonical_url: "https://bestchromeextensions.com/2025/05/11/build-web-vitals-tracker-chrome-extension/"
 ---
 
-# Build a Web Vitals Tracker Chrome Extension: Monitor LCP, FID, and CLS
+Build a Web Vitals Tracker Chrome Extension: Monitor LCP, FID, and CLS
 
 In the competitive world of web development and search engine optimization, understanding how your website performs in real-world conditions is more critical than ever. Google's Core Web Vitals, Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS), have become the definitive metrics for measuring user experience. These metrics directly impact your search rankings, user retention, and conversion rates.
 

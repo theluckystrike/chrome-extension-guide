@@ -4,7 +4,7 @@ title: "Chrome Extension Reading List. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-list/"
 ---
-# Build a Reading List Extension. Full Tutorial
+Build a Reading List Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Save current page to reading list with one click

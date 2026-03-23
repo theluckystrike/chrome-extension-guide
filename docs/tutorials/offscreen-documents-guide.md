@@ -5,7 +5,7 @@ description: "Learn how to use the chrome.offscreen API for DOM operations, audi
 canonical_url: "https://bestchromeextensions.com/tutorials/offscreen-documents-guide/"
 ---
 
-# Offscreen Documents in Chrome Extensions
+Offscreen Documents in Chrome Extensions
 
 Overview {#overview}
 
@@ -103,7 +103,7 @@ Available Reasons
 
 Use Case Examples {#use-case-examples}
 
-#### DOM Parsing {#dom-parsing}
+DOM Parsing {#dom-parsing}
 
 ```javascript
 // In service worker
@@ -149,7 +149,7 @@ async function parseHTML(htmlString) {
 </html>
 ```
 
-#### Audio Playback {#audio-playback}
+Audio Playback {#audio-playback}
 
 ```javascript
 // In service worker
@@ -192,7 +192,7 @@ async function playAudio(audioUrl) {
 </html>
 ```
 
-#### Clipboard Operations {#clipboard-operations}
+Clipboard Operations {#clipboard-operations}
 
 ```javascript
 // In service worker
@@ -252,7 +252,7 @@ async function readFromClipboard() {
 </html>
 ```
 
-#### Canvas Operations {#canvas-operations}
+Canvas Operations {#canvas-operations}
 
 ```javascript
 // In service worker
@@ -313,7 +313,7 @@ async function processImage(imageDataUrl, options = {}) {
 </html>
 ```
 
-#### Geolocation {#geolocation}
+Geolocation {#geolocation}
 
 ```javascript
 // In service worker
@@ -584,7 +584,7 @@ await chrome.offscreen.createDocument({
 
 Workarounds for the Limitation {#workarounds-for-the-limitation}
 
-#### 1. Single Page for All Operations
+1. Single Page for All Operations
 
 Create a single `offscreen.html` that handles all operations:
 
@@ -630,7 +630,7 @@ Create a single `offscreen.html` that handles all operations:
 </html>
 ```
 
-#### 2. Reason Aggregation
+2. Reason Aggregation
 
 When creating an offscreen document, aggregate all reasons you might need:
 
@@ -661,7 +661,7 @@ async function ensureOffscreen(reason) {
 }
 ```
 
-#### 3. Priority-Based Document Management
+3. Priority-Based Document Management
 
 For complex extensions, implement a priority system:
 
@@ -838,7 +838,7 @@ Related Articles {#related-articles}
 
 - [Offscreen Documents. API Reference](offscreen-api.md). Complete API reference for chrome.offscreen methods and properties
 - [Offscreen Document Patterns](offscreen-documents.md). Production-ready patterns for lifecycle management and typed communication
-- [Service Workers Deep Dive](service-workers-deep detailed look.md). Understanding service worker lifecycle and how it interacts with offscreen documents
+- [Service Workers detailed look](service-workers-deep detailed look.md). Understanding service worker lifecycle and how it interacts with offscreen documents
 
 ---
 

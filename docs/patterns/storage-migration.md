@@ -5,7 +5,7 @@ description: "Migrate between storage APIs safely."
 canonical_url: "https://bestchromeextensions.com/patterns/storage-migration/"
 ---
 
-# Storage Area Migration Pattern
+Storage Area Migration Pattern
 
 Overview {#overview}
 

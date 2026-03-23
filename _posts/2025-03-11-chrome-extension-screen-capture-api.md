@@ -9,7 +9,7 @@ keywords: "chrome extension screen capture, screenshot chrome extension, screen 
 canonical_url: "https://bestchromeextensions.com/2025/03/11/chrome-extension-screen-capture-api/"
 ---
 
-# Chrome Extension Screen Capture: Build a Screenshot and Recording Tool
+Chrome Extension Screen Capture: Build a Screenshot and Recording Tool
 
 Screen capture functionality is among the most sought-after features for Chrome extensions. Whether you're building a documentation tool that needs to capture web pages, a collaboration platform requiring screen sharing, or a productivity application with screenshot annotation capabilities, the Chrome tabCapture API provides the foundation you need. This comprehensive guide will teach you how to use the chrome.tabCapture API and related methods to create powerful screen capture and recording functionality in your Chrome extension.
 

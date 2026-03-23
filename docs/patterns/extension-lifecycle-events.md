@@ -5,7 +5,7 @@ description: "Handle extension lifecycle events."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-lifecycle-events/"
 ---
 
-# Extension Lifecycle Events
+Extension Lifecycle Events
 
 This guide covers handling Chrome extension lifecycle events comprehensively: installation, updates, startup, and shutdown.
 

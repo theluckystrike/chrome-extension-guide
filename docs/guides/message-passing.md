@@ -1,10 +1,10 @@
-# Chrome Extension Message Passing Patterns
+Chrome Extension Message Passing Patterns
 
-## Overview
+Overview
 
 Message passing enables your content scripts, popup, service worker, and external applications to exchange data and coordinate actions.
 
-## Manifest Setup
+Manifest Setup
 
 ```json
 {
@@ -14,7 +14,7 @@ Message passing enables your content scripts, popup, service worker, and externa
 }
 ```
 
-## One-Time Messages with sendMessage and onMessage
+One-Time Messages with sendMessage and onMessage
 
 ```ts
 // content-script.ts
@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Service Worker to Content Script
+Service Worker to Content Script
 
 ```ts
 // background.ts
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Long-Lived Connections with connect and onConnect
+Long-Lived Connections with connect and onConnect
 
 ```ts
 // Create connection
@@ -60,7 +60,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## Broadcasting to All Content Scripts
+Broadcasting to All Content Scripts
 
 ```ts
 async function broadcastToAllTabs(message: object) {
@@ -71,7 +71,7 @@ async function broadcastToAllTabs(message: object) {
 }
 ```
 
-## External Messaging Between Extensions
+External Messaging Between Extensions
 
 ```ts
 const EXTENSION_ID = "another-extension-id";
@@ -83,14 +83,14 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 });
 ```
 
-## Web Page to Extension Messaging
+Web Page to Extension Messaging
 
 ```ts
 // On https://example.com
 chrome.runtime.sendMessage("YOUR_EXTENSION_ID", { action: "fromPage" }, (response) => {});
 ```
 
-## Native Messaging with Host Applications
+Native Messaging with Host Applications
 
 ```json
 { "name": "My Native App", "nativeMessaging": true }
@@ -107,7 +107,7 @@ async function sendToNativeApp(message: object): Promise<unknown> {
 }
 ```
 
-## Message Serialization Limits
+Message Serialization Limits
 
 Large data should use `chrome.storage`:
 
@@ -119,7 +119,7 @@ async function sendLargeData(data: object) {
 }
 ```
 
-## Promise-Based Message Handling
+Promise-Based Message Handling
 
 ```ts
 function sendMessage<T = unknown>(message: object): Promise<T> {
@@ -132,7 +132,7 @@ function sendMessage<T = unknown>(message: object): Promise<T> {
 }
 ```
 
-## Type-Safe Message Router
+Type-Safe Message Router
 
 ```ts
 interface MessageMap {
@@ -154,7 +154,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Error Handling in Message Passing
+Error Handling in Message Passing
 
 ```ts
 async function safeSendMessage(message: object): Promise<unknown> {
@@ -170,9 +170,9 @@ async function safeSendMessage(message: object): Promise<unknown> {
 }
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Debouncing High-Frequency Messages
+Debouncing High-Frequency Messages
 
 ```ts
 let pendingUpdate: number | null = null;
@@ -185,7 +185,7 @@ function scheduleUpdate(data: object) {
 }
 ```
 
-### Connection Pooling
+Connection Pooling
 
 ```ts
 const portCache = new Map<string, chrome.runtime.Port>();
@@ -195,7 +195,7 @@ function getPort(name: string): chrome.runtime.Port {
 }
 ```
 
-## Message Bus Architecture
+Message Bus Architecture
 
 ```ts
 class MessageBus {
@@ -221,7 +221,7 @@ class MessageBus {
 }
 ```
 
-## Summary
+Summary
 
 1. One-time messages: Use `sendMessage` for request/response
 2. Persistent connections: Use `connect` for ongoing communication

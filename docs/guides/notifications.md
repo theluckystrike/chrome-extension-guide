@@ -5,7 +5,7 @@ description: "Learn how to use the chrome.notifications API to send desktop noti
 canonical_url: "https://bestchromeextensions.com/guides/notifications/"
 ---
 
-# Chrome Extension Notifications. How to Send Desktop Alerts and Updates
+Chrome Extension Notifications. How to Send Desktop Alerts and Updates
 
 Introduction {#introduction}
 
@@ -354,11 +354,11 @@ Best Practices {#best-practices}
 
 When implementing notifications in your Chrome extension:
 
-1. Request permissions sparingly – Only request the notifications permission when truly needed
-2. Respect user preferences – Allow users to opt out of notifications within your extension
-3. Use appropriate notification types – Choose the right type for your use case (progress for ongoing tasks, list for multiple items)
-4. Handle errors gracefully – Always check for `chrome.runtime.lastError` in callbacks
-5. Test on multiple platforms – Notification appearance varies across operating systems
+1. Request permissions sparingly, Only request the notifications permission when truly needed
+2. Respect user preferences, Allow users to opt out of notifications within your extension
+3. Use appropriate notification types, Choose the right type for your use case (progress for ongoing tasks, list for multiple items)
+4. Handle errors gracefully, Always check for `chrome.runtime.lastError` in callbacks
+5. Test on multiple platforms, Notification appearance varies across operating systems
 
 Conclusion {#conclusion}
 

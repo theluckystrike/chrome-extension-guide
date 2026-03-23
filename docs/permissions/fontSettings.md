@@ -8,7 +8,7 @@ order: 18
 canonical_url: "https://bestchromeextensions.com/permissions/fontSettings/"
 ---
 
-# fontSettings Permission
+fontSettings Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.fontSettings` API for reading and modifying Chrome's font preferences (default fonts, sizes, per-script fonts).

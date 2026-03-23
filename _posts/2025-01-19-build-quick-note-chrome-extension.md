@@ -9,7 +9,7 @@ keywords: "note taking extension, quick notes chrome, browser notepad extension,
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-quick-note-chrome-extension/"
 ---
 
-# Build a Quick Note Chrome Extension: Complete Step-by-Step Tutorial
+Build a Quick Note Chrome Extension: Complete Step-by-Step Tutorial
 
 Have you ever been browsing the web and needed to jot down a quick thought, a link, or a task before forgetting it? We have all been there. You open a new tab, switch to a notes app, paste the URL, and by the time you get back to your original task, you have lost your train of thought. This is exactly the problem that a quick note Chrome extension solves.
 

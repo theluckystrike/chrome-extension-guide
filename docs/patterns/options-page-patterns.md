@@ -5,7 +5,7 @@ description: "Build effective options pages for extension settings."
 canonical_url: "https://bestchromeextensions.com/patterns/options-page-patterns/"
 ---
 
-# Options Page Design Patterns
+Options Page Design Patterns
 
 This document covers design and implementation patterns for Chrome extension options pages.
 
@@ -305,7 +305,7 @@ migrateSettings();
 Related Resources {#related-resources}
 
 - [Options Page Guide](../guides/options-page.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Extension Configuration Patterns](./extension-configuration.md)
 -e 
 ---

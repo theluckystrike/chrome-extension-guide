@@ -9,7 +9,7 @@ keywords: "chrome extension broadcast channel, cross context communication exten
 canonical_url: "https://bestchromeextensions.com/2025/05/18/chrome-extension-broadcast-channel-api/"
 ---
 
-# BroadcastChannel API in Chrome Extensions: Cross-Context Communication
+BroadcastChannel API in Chrome Extensions: Cross-Context Communication
 
 Building Chrome extensions often requires communication between different contexts, popup scripts, content scripts, background service workers, and multiple tabs. While traditional message passing using chrome.runtime.sendMessage and chrome.tabs.sendMessage has served developers well, the BroadcastChannel API offers a more elegant and efficient solution for many communication scenarios. This comprehensive guide explores how to use the BroadcastChannel API to simplify cross-context communication in your Chrome extensions.
 

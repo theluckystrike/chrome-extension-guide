@@ -5,7 +5,7 @@ description: "Integrate Vue.js with content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-vue/"
 ---
 
-# Content Script Vue Pattern
+Content Script Vue Pattern
 
 Guide for integrating Vue.js into Chrome extension content scripts with proper isolation.
 

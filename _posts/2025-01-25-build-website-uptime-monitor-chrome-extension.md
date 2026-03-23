@@ -9,7 +9,7 @@ keywords: "website monitor extension, uptime checker chrome, site down checker e
 canonical_url: "https://bestchromeextensions.com/2025/01/25/build-website-uptime-monitor-chrome-extension/"
 ---
 
-# Build a Website Uptime Monitor Chrome Extension: Complete 2025 Tutorial
+Build a Website Uptime Monitor Chrome Extension: Complete 2025 Tutorial
 
 Creating a website monitor extension is one of the most practical projects you can undertake as a Chrome extension developer. website uptime is critical for businesses, bloggers, and developers who rely on their web properties being available around the clock. A well-built uptime checker chrome extension can monitor multiple websites simultaneously, alert you instantly when a site goes down, and provide valuable statistics about availability and response times.
 

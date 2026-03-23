@@ -5,7 +5,7 @@ description: "Track extension analytics while maintaining user privacy with priv
 canonical_url: "https://bestchromeextensions.com/patterns/extension-analytics-privacy/"
 ---
 
-# Privacy-First Analytics Patterns for Chrome Extensions
+Privacy-First Analytics Patterns for Chrome Extensions
 
 This guide covers how to implement analytics in Chrome extensions while respecting user privacy and complying with platform policies.
 

@@ -4,7 +4,7 @@ title: "Working with the Chrome Tabs API. Developer Guide"
 description: "Learn how to query, create, update, and manipulate browser tabs using the Chrome Tabs API. Covers tab events, groups, pinning, capture, and script injection."
 canonical_url: "https://bestchromeextensions.com/tutorials/tabs-api-guide/"
 ---
-# Working with the Chrome Tabs API
+Working with the Chrome Tabs API
 
 Overview {#overview}
 
@@ -842,7 +842,7 @@ API Reference Summary {#api-reference-summary}
 
 Related Articles {#related-articles}
 
-- [Tabs API Deep Dive](tabs-api-deep detailed look.md). Comprehensive reference for all Tabs API methods and properties
+- [Tabs API detailed look](tabs-api-deep detailed look.md). Comprehensive reference for all Tabs API methods and properties
 - [Tab Management Guide](tab-management.md). Best practices for building tab management extensions
 - [Content Scripts Guide](content-scripts-guide.md). Learn how content scripts work with the tabs API
 

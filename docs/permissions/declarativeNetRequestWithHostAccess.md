@@ -8,7 +8,7 @@ order: 15
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestWithHostAccess/"
 ---
 
-# declarativeNetRequestWithHostAccess
+declarativeNetRequestWithHostAccess
 
 The `declarativeNetRequestWithHostAccess` permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permissions.
 

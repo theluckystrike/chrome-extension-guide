@@ -1,10 +1,10 @@
-# IndexedDB Browser Chrome Extension
+IndexedDB Browser Chrome Extension
 
 IndexedDB is a powerful client-side NoSQL database built into modern browsers that enables Chrome extensions to store significant amounts of structured data locally. Unlike chrome.storage which limits you to JSON-serializable data with quotas, IndexedDB provides solid database capabilities with transactions, indexes, and support for large datasets.
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Manifest Configuration
+Manifest Configuration
 
 IndexedDB doesn't require special permissions in Manifest V3, it operates within your extension's origin. Your extension needs permissions based on other features, not IndexedDB itself.
 
@@ -28,15 +28,15 @@ IndexedDB doesn't require special permissions in Manifest V3, it operates within
 }
 ```
 
-### Extension Contexts and IndexedDB Access
+Extension Contexts and IndexedDB Access
 
 IndexedDB can be accessed from service worker, popup, options page, and content scripts. Each context shares the same underlying origin storage. Content scripts matched to pages operate within the page's origin, they access the page's IndexedDB, not your extension's. Use chrome.runtime.getURL to ensure proper context.
 
 ---
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Database Initialization
+Database Initialization
 
 ```typescript
 // src/db/indexed-db.ts

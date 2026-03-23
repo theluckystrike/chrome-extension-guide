@@ -8,7 +8,7 @@ tags: [chrome-web-store, cws-optimization, extension-listing, install-rate, app-
 author: theluckystrike
 ---
 
-# Chrome Web Store Listing Optimization. Double Your Install Rate
+Chrome Web Store Listing Optimization. Double Your Install Rate
 
 Your Chrome extension could be brilliant, feature-packed, and exactly what users need, but if your Chrome Web Store listing does not convert, no one will ever know. The difference between an extension with 100 installs and one with 10,000 often comes down to how well the listing communicates value in those critical first seconds. Listing optimization is not optional; it is the engine that drives organic discovery and conversion.
 

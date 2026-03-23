@@ -4,7 +4,7 @@ title: "Chrome Extension Testing Extensions. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/testing-extensions/"
 ---
-# Testing Chrome Extensions
+Testing Chrome Extensions
 
 Overview {#overview}
 Testing extensions is tricky because they run across multiple contexts (background, popup, content scripts) and depend on Chrome APIs. This guide covers strategies from unit tests to manual testing.

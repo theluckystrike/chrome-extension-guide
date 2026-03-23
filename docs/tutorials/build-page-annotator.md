@@ -4,7 +4,7 @@ title: "Chrome Extension Page Annotator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-annotator/"
 ---
-# Build a Page Annotator Extension
+Build a Page Annotator Extension
 
 What You'll Build {#what-youll-build}
 Highlight text on any page, add color-coded notes, persist across visits, sync across devices.

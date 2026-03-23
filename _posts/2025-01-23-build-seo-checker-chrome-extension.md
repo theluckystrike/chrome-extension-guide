@@ -8,7 +8,7 @@ tags: [chrome-extension, project]
 author: theluckystrike
 ---
 
-# Build an SEO Checker Chrome Extension. Complete 2025 Tutorial
+Build an SEO Checker Chrome Extension. Complete 2025 Tutorial
 
 In the competitive landscape of digital marketing and web development, having quick access to SEO insights can dramatically improve your workflow. Whether you're a content creator auditing blog posts, a developer checking landing pages, or a marketer analyzing competitor sites, an SEO checker extension provides immediate on-page SEO analysis without leaving your browser. This comprehensive tutorial will walk you through building a fully functional SEO checker Chrome extension using modern Chrome extension development practices with Manifest V3.
 

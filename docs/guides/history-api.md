@@ -4,7 +4,7 @@ title: "Chrome Extension History API. How to Search, Read, and Delete Browser Hi
 description: "A comprehensive developer guide for building Chrome extensions using the History API with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/history-api/"
 ---
-# History API Guide
+History API Guide
 
 Overview {#overview}
 - Requires `"history"` permission (cross-ref `docs/permissions/history.md`)

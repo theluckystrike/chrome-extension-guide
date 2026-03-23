@@ -1,10 +1,10 @@
-# TypeScript Types for Chrome Extensions
+TypeScript Types for Chrome Extensions
 
 Guide to TypeScript type definitions for Chrome extension development.
 
-## Available Type Packages
+Available Type Packages
 
-### @anthropic/chrome-types
+@anthropic/chrome-types
 
 Official package with comprehensive types:
 
@@ -12,7 +12,7 @@ Official package with comprehensive types:
 npm install @anthropic/chrome-types
 ```
 
-### @types/chrome
+@types/chrome
 
 Community package:
 
@@ -20,7 +20,7 @@ Community package:
 npm install --save-dev @types/chrome
 ```
 
-### @anthropic/webext-types
+@anthropic/webext-types
 
 For cross-browser support:
 
@@ -28,7 +28,7 @@ For cross-browser support:
 npm install @anthropic/webext-types
 ```
 
-## tsconfig.json Configuration
+tsconfig.json Configuration
 
 ```json
 {
@@ -46,7 +46,7 @@ npm install @anthropic/webext-types
 }
 ```
 
-## Type-Checking manifest.json
+Type-Checking manifest.json
 
 ```bash
 npm install --save-dev chrome-manifest-types
@@ -57,7 +57,7 @@ npm install --save-dev chrome-manifest-types
 /// <reference types="chrome-manifest-types" />
 ```
 
-## Typing Content Scripts
+Typing Content Scripts
 
 ```typescript
 chrome.storage.local.get(['theme'], (result) => {
@@ -65,7 +65,7 @@ chrome.storage.local.get(['theme'], (result) => {
 });
 ```
 
-## Typing Service Workers
+Typing Service Workers
 
 ```typescript
 /// <reference types="@anthropic/chrome-types" />
@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener((
 });
 ```
 
-## Typing Popup and Options Pages
+Typing Popup and Options Pages
 
 ```typescript
 interface ExtensionSettings {
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-## Shared Types Between Contexts
+Shared Types Between Contexts
 
 ```typescript
 export interface UserPreferences {
@@ -121,7 +121,7 @@ export type MessageType =
   | { type: 'SET_USER_PREFERENCES'; payload: Partial<UserPreferences> };
 ```
 
-## Generics in Chrome API Callbacks
+Generics in Chrome API Callbacks
 
 ```typescript
 async function getStorageItem<T>(key: string, defaultValue: T): Promise<T> {
@@ -133,7 +133,7 @@ interface Bookmark { id: string; title: string; url: string; }
 const bookmarks = await getStorageItem<Bookmark[]>('bookmarks', []);
 ```
 
-## Custom Type Guards
+Custom Type Guards
 
 ```typescript
 export function isChromeTab(tab: unknown): tab is chrome.tabs.Tab {
@@ -145,7 +145,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-## Type-Safe Message Passing
+Type-Safe Message Passing
 
 ```typescript
 export type Request =
@@ -167,7 +167,7 @@ export async function sendMessage<T>(request: Request): Promise<Response<T>> {
 }
 ```
 
-## Type-Safe Storage Wrappers
+Type-Safe Storage Wrappers
 
 ```typescript
 class TypedStorage {
@@ -186,7 +186,7 @@ interface StorageData {
 export const storage = new TypedStorage();
 ```
 
-## Ambient Declarations
+Ambient Declarations
 
 ```typescript
 /// <reference types="@anthropic/chrome-types" />
@@ -199,7 +199,7 @@ declare namespace chrome.storage {
 interface StorageData { settings: Record<string, unknown>; }
 ```
 
-## JSDoc for JavaScript
+JSDoc for JavaScript
 
 {% raw %}
 ```javascript
@@ -213,7 +213,7 @@ async function initContentScript(config) {
 ```
 {% endraw %}
 
-## Reference
+Reference
 
 - [Chrome Extensions API](https://developer.chrome.com/docs/extensions/reference/api)
 - [chrome-types npm](https://www.npmjs.com/package/@anthropic/chrome-types)

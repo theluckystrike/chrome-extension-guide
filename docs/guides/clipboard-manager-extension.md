@@ -1,9 +1,9 @@
-# Building a Clipboard Manager Chrome Extension
+Building a Clipboard Manager Chrome Extension
 
-## Introduction
+Introduction
 A clipboard manager extension stores, searches, and retrieves clipboard history. This guide covers building a complete MV3 clipboard manager with TypeScript.
 
-## Architecture Overview
+Architecture Overview
 ```
     chrome.runtime    
    Popup UI     Service Worker     
@@ -14,7 +14,7 @@ A clipboard manager extension stores, searches, and retrieves clipboard history.
                                           chrome.storage
 ```
 
-## manifest.json Setup
+manifest.json Setup
 ```json
 {
   "name": "Clipboard Manager Pro",
@@ -31,9 +31,9 @@ A clipboard manager extension stores, searches, and retrieves clipboard history.
 }
 ```
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Type Definitions
+Type Definitions
 ```typescript
 // types/clipboard.ts
 export interface ClipboardItem {
@@ -47,7 +47,7 @@ export interface ClipboardItem {
 }
 ```
 
-### Clipboard Service
+Clipboard Service
 ```typescript
 // services/clipboardService.ts
 const MAX_ITEMS = 500;
@@ -158,9 +158,9 @@ export class ClipboardService {
 }
 ```
 
-## UI Design (Popup)
+UI Design (Popup)
 
-### HTML Structure
+HTML Structure
 ```html
 <!-- popup/popup.html -->
 <div class="popup-container">
@@ -177,7 +177,7 @@ export class ClipboardService {
 <script type="module" src="popup.js"></script>
 ```
 
-### Popup Controller
+Popup Controller
 ```typescript
 // popup/popup.ts
 export class PopupController {
@@ -267,7 +267,7 @@ export class PopupController {
 document.addEventListener('DOMContentLoaded', () => new PopupController().init());
 ```
 
-## Chrome APIs & Permissions
+Chrome APIs & Permissions
 
 | API | Permission | Purpose |
 |-----|------------|---------|
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => new PopupController().init()
 | `chrome.contextMenus` | contextMenus | Right-click integration |
 | `chrome.commands` | commands | Keyboard shortcuts |
 
-### Keyboard Shortcuts (manifest.json)
+Keyboard Shortcuts (manifest.json)
 ```json
 {
   "commands": {
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => new PopupController().init()
 }
 ```
 
-## State Management
+State Management
 ```typescript
 // Simple store pattern
 class ClipboardStore {
@@ -315,7 +315,7 @@ class ClipboardStore {
 }
 ```
 
-## Error Handling
+Error Handling
 ```typescript
 async function safeClipboardRead(): Promise<string | null> {
   try { return await navigator.clipboard.readText(); }
@@ -328,9 +328,9 @@ async function safeClipboardRead(): Promise<string | null> {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests (Jest)
+Unit Tests (Jest)
 ```typescript
 describe('ClipboardService', () => {
   it('should detect URL type', async () => {
@@ -346,7 +346,7 @@ describe('ClipboardService', () => {
 });
 ```
 
-### Integration Tests (Playwright)
+Integration Tests (Playwright)
 ```typescript
 test('copy button works', async ({ page }) => {
   await page.goto('popup.html');
@@ -356,27 +356,27 @@ test('copy button works', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 - Virtual scrolling for large lists (>100 items)
 - Debounced search (300ms delay)
 - Lazy load storage with compression for large content
 - Cleanup timer to remove old items periodically
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 - [ ] MV3 manifest with minimal permissions
 - [ ] Icons (16, 48, 128px)
 - [ ] Privacy policy (if storing data)
 - [ ] Store screenshots (1280x800)
 
-### Testing
+Testing
 - [ ] Works on Chrome, Edge, Brave
 - [ ] Keyboard shortcuts functional
 - [ ] Context menu integration works
 - [ ] Large content (>1MB) handled gracefully
 
-### Post-publish
+Post-publish
 - Monitor error reports
 - Respond to reviews
 - Regular dependency updates

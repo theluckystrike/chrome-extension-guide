@@ -5,7 +5,7 @@ description: "Set up analytics for your Chrome extension to track users, engagem
 canonical_url: "https://bestchromeextensions.com/publishing/analytics/"
 ---
 
-# Chrome Extension Analytics
+Chrome Extension Analytics
 
 CWS Dashboard Metrics {#cws-dashboard-metrics}
 - Daily/weekly installs and uninstalls

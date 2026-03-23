@@ -8,7 +8,7 @@ order: 22
 canonical_url: "https://bestchromeextensions.com/permissions/identity/"
 ---
 
-# identity Permission. Chrome Extension Reference
+identity Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"identity"`

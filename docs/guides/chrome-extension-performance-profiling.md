@@ -4,7 +4,7 @@ title: "Chrome Extension Performance Profiling. Developer Guide"
 description: "Optimize your Chrome extension performance with this guide covering profiling, lazy loading, and memory management."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-profiling/"
 ---
-# Performance Profiling for Chrome Extensions
+Performance Profiling for Chrome Extensions
 
 Overview {#overview}
 Performance profiling for extensions requires understanding Chrome's multi-process architecture. Each extension component (service worker, popup, content scripts, options page) runs in isolated contexts with unique profiling approaches.

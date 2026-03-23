@@ -5,7 +5,7 @@ description: "Consume REST APIs securely in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/rest-api-patterns/"
 ---
 
-# REST API Patterns in Chrome Extensions
+REST API Patterns in Chrome Extensions
 
 REST APIs remain the most common integration point for Chrome extensions. The Manifest V3 service worker lifecycle, network constraints, and storage limitations create unique challenges that require purpose-built patterns. This guide covers eight essential patterns with TypeScript implementations.
 

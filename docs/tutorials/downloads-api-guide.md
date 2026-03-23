@@ -5,7 +5,7 @@ description: "Learn how to use the Chrome Downloads API to initiate, monitor, pa
 canonical_url: "https://bestchromeextensions.com/tutorials/downloads-api-guide/"
 ---
 
-# Managing Downloads in Chrome Extensions
+Managing Downloads in Chrome Extensions
 
 The `chrome.downloads` API provides powerful capabilities for managing file downloads directly from your Chrome extension. This guide covers everything from initiating downloads to handling the download shelf, with practical code examples for common operations.
 

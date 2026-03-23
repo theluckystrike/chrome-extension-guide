@@ -1,16 +1,16 @@
-# Chrome Extension Performance Optimization Guide
+Chrome Extension Performance Optimization Guide
 
-## Overview
+Overview
 
 Chrome extensions share browser resources with web pages, making performance optimization critical for user experience. A poorly optimized extension can significantly degrade browser responsiveness, increase memory consumption, and slow down page loads. This guide covers comprehensive strategies for optimizing Chrome extension performance across multiple dimensions, from service worker startup to content script injection and memory management.
 
-## 1. Service Worker Startup Time Optimization
+1. Service Worker Startup Time Optimization
 
-### Understanding the Service Worker Lifecycle
+Understanding the Service Worker Lifecycle
 
 In Manifest V3, the service worker replaces the background page from MV2. The service worker is event-driven and can be terminated when idle, meaning it must reinitialize on each wake-up. This creates cold start latency that directly impacts user experience.
 
-### Optimizing Service Worker Initialization
+Optimizing Service Worker Initialization
 
 The key principle is to minimize work done at service worker startup. Only register event listeners synchronously (as required by Chrome), and defer all other initialization:
 
@@ -58,7 +58,7 @@ function handleMessage(message, sender, sendResponse) {
 }
 ```
 
-### Pre-loading Data on Service Worker Wake
+Pre-loading Data on Service Worker Wake
 
 Use the `onStartup` event to pre-load data when the extension first loads after browser startup:
 
@@ -85,9 +85,9 @@ async function warmUpCache() {
 }
 ```
 
-## 2. Lazy Loading Modules and Code Splitting
+2. Lazy Loading Modules and Code Splitting
 
-### Dynamic Imports for Feature Modules
+Dynamic Imports for Feature Modules
 
 Code splitting allows you to split your extension into multiple chunks that are loaded on-demand rather than all at startup. This significantly reduces initial load time:
 
@@ -135,7 +135,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Conditional Feature Loading
+Conditional Feature Loading
 
 Load features only when specific conditions are met:
 
@@ -160,9 +160,9 @@ async function handleUserAction(action, tabId) {
 }
 ```
 
-## 3. Chrome Storage Read/Write Batching
+3. Chrome Storage Read/Write Batching
 
-### The Cost of Multiple Storage Calls
+The Cost of Multiple Storage Calls
 
 Each `chrome.storage` call involves inter-process communication (IPC) between the service worker and the browser's storage subsystem. Multiple individual calls are significantly slower than batched operations:
 
@@ -198,7 +198,7 @@ async function bestPractice() {
 }
 ```
 
-### Batched Write Operations
+Batched Write Operations
 
 Similarly, batch multiple writes to reduce IPC overhead:
 
@@ -220,7 +220,7 @@ async function goodWrite(data) {
 }
 ```
 
-### Creating a Storage Utility Class
+Creating a Storage Utility Class
 
 Create a reusable utility for optimized storage operations:
 
@@ -327,9 +327,9 @@ const settings = await storage.get(['theme', 'language', 'notifications']);
 await storage.set({ theme: 'dark', lastUpdated: Date.now() });
 ```
 
-## 4. Content Script Injection Performance
+4. Content Script Injection Performance
 
-### Understanding run_at Timing
+Understanding run_at Timing
 
 The `run_at` manifest property controls when content scripts execute relative to page load:
 
@@ -359,7 +359,7 @@ The `run_at` manifest property controls when content scripts execute relative to
 }
 ```
 
-### Programmatic Injection for Better Control
+Programmatic Injection for Better Control
 
 For more control, use programmatic injection with `chrome.scripting.executeScript`:
 
@@ -409,7 +409,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 });
 ```
 
-### Lazy Content Script Loading
+Lazy Content Script Loading
 
 Load content scripts only when needed rather than on every page:
 
@@ -460,9 +460,9 @@ window.addEventListener('message', async (event) => {
 });
 ```
 
-## 5. Memory Management
+5. Memory Management
 
-### Cleaning Up Event Listeners
+Cleaning Up Event Listeners
 
 Content scripts persist with the page, making proper cleanup essential:
 
@@ -537,7 +537,7 @@ class MemorySafeContentScript {
 const script = new MemorySafeContentScript();
 ```
 
-### Avoiding Memory Leaks in Service Workers
+Avoiding Memory Leaks in Service Workers
 
 Service workers can accumulate memory if not properly managed:
 
@@ -609,7 +609,7 @@ self.addEventListener('terminate', () => {
 });
 ```
 
-### Detecting and Fixing Memory Leaks
+Detecting and Fixing Memory Leaks
 
 Use these patterns to detect memory issues:
 
@@ -662,9 +662,9 @@ function forceCleanup() {
 setInterval(logMemoryUsage, 30000);
 ```
 
-## 6. Bundle Size Reduction
+6. Bundle Size Reduction
 
-### Tree Shaking Configuration
+Tree Shaking Configuration
 
 Modern bundlers can eliminate unused code through tree shaking:
 
@@ -691,7 +691,7 @@ module.exports = {
 };
 ```
 
-### Package.json Side Effects Declaration
+Package.json Side Effects Declaration
 
 ```json
 {
@@ -704,7 +704,7 @@ module.exports = {
 }
 ```
 
-### Minification Without Obfuscation
+Minification Without Obfuscation
 
 Chrome Web Store rejects obfuscated code. Use standard minification:
 
@@ -733,7 +733,7 @@ module.exports = {
 };
 ```
 
-### Analyzing Bundle Size
+Analyzing Bundle Size
 
 ```javascript
 // analyze-bundle.js
@@ -757,7 +757,7 @@ npx webpack --config webpack.config.js --profile --json > stats.json
 npx webpack-bundle-analyzer stats.json
 ```
 
-### Target Bundle Sizes
+Target Bundle Sizes
 
 | Component | Target Size | Maximum |
 |-----------|-------------|---------|
@@ -767,9 +767,9 @@ npx webpack-bundle-analyzer stats.json
 | Options Page | < 50KB | 100KB |
 | Total Extension | < 2MB | 10MB |
 
-## 7. Using IndexedDB for Large Datasets
+7. Using IndexedDB for Large Datasets
 
-### When to Use IndexedDB Instead of chrome.storage
+When to Use IndexedDB Instead of chrome.storage
 
 Use IndexedDB for:
 - Large datasets (> 1MB)
@@ -783,7 +783,7 @@ Use chrome.storage for:
 - Simple key-value pairs
 - Settings and preferences
 
-### IndexedDB Utility Implementation
+IndexedDB Utility Implementation
 
 ```javascript
 // utils/indexeddb.js
@@ -916,7 +916,7 @@ await db.bulkPut('users', largeUserArray);
 const userByEmail = await db.queryByIndex('users', 'email', 'user@example.com');
 ```
 
-### Syncing chrome.storage with IndexedDB
+Syncing chrome.storage with IndexedDB
 
 For compatibility, use chrome.storage for settings but IndexedDB for large data:
 
@@ -958,9 +958,9 @@ class HybridStorage {
 }
 ```
 
-## 8. Profiling Extensions with Chrome DevTools
+8. Profiling Extensions with Chrome DevTools
 
-### Profiling Service Worker Performance
+Profiling Service Worker Performance
 
 ```javascript
 // background.js - Performance markers
@@ -986,7 +986,7 @@ const optimizedFetch = measurePerformance('fetchConfig', fetchConfig);
 const optimizedParse = measurePerformance('parseData', parseData);
 ```
 
-### Using Chrome DevTools for Extension Profiling
+Using Chrome DevTools for Extension Profiling
 
 1. Open `chrome://extensions`
 2. Enable "Developer mode"
@@ -994,7 +994,7 @@ const optimizedParse = measurePerformance('parseData', parseData);
 4. Open DevTools (click "background page" or use keyboard shortcut)
 5. Use the Performance tab to record and analyze
 
-### Memory Profiling Tips
+Memory Profiling Tips
 
 ```javascript
 // Take heap snapshots programmatically
@@ -1016,7 +1016,7 @@ await processLargeData();
 takeHeapSnapshot('After processing');
 ```
 
-### Performance Panel Analysis
+Performance Panel Analysis
 
 Steps to profile your extension:
 
@@ -1030,13 +1030,13 @@ Steps to profile your extension:
    - Script execution time (green bars)
    - Memory allocation spikes
 
-## 9. chrome.runtime.getBackgroundPage Alternatives in MV3
+9. chrome.runtime.getBackgroundPage Alternatives in MV3
 
-### Why getBackgroundPage Doesn't Work in MV3
+Why getBackgroundPage Doesn't Work in MV3
 
 In MV3, service workers can be terminated, making `getBackgroundPage()` unreliable. It may return null or a disconnected page.
 
-### Alternative: Message-Based Communication
+Alternative: Message-Based Communication
 
 ```javascript
 // background.js - Message-based communication
@@ -1067,7 +1067,7 @@ registerHandler('processData', async (data) => {
 });
 ```
 
-### Using chrome.runtime.getBackgroundClient()
+Using chrome.runtime.getBackgroundClient()
 
 The recommended approach for inspecting service worker state:
 
@@ -1093,7 +1093,7 @@ async function getBackgroundState() {
 }
 ```
 
-### Using Long-Lived Connections
+Using Long-Lived Connections
 
 ```javascript
 // Create persistent connection
@@ -1111,7 +1111,7 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-### Service Worker Client API
+Service Worker Client API
 
 ```javascript
 // background.js - Using Clients API for tab communication
@@ -1131,9 +1131,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## 10. Measuring Extension Impact on Page Load Time
+10. Measuring Extension Impact on Page Load Time
 
-### Measuring Content Script Injection Delay
+Measuring Content Script Injection Delay
 
 ```javascript
 // content.js - Measure injection timing
@@ -1188,7 +1188,7 @@ window.addEventListener('load', () => {
 });
 ```
 
-### Measuring Extension Overhead
+Measuring Extension Overhead
 
 ```javascript
 // content.js - Measure specific extension operations
@@ -1245,7 +1245,7 @@ class PerformanceMeasurer {
 const measurer = new PerformanceMeasurer();
 ```
 
-### Minimizing Page Load Impact
+Minimizing Page Load Impact
 
 ```javascript
 // manifest.json - Optimize content script loading
@@ -1304,59 +1304,59 @@ document.addEventListener('click', async (e) => {
 }, { once: true }); // One-time listener
 ```
 
-## Performance Optimization Checklist
+Performance Optimization Checklist
 
 Use this checklist to verify your extension is optimized:
 
-### Service Worker Optimization
+Service Worker Optimization
 - [ ] Event listeners registered synchronously
 - [ ] Heavy initialization deferred until needed
 - [ ] No blocking operations at startup
 - [ ] `onStartup` used for initialization
 
-### Code Splitting and Lazy Loading
+Code Splitting and Lazy Loading
 - [ ] Dynamic imports for non-critical features
 - [ ] Feature flags to load only needed code
 - [ ] Content scripts injected on-demand when possible
 
-### Storage Optimization
+Storage Optimization
 - [ ] Batched storage reads (`getMany`, `getAll`)
 - [ ] Batched storage writes (`setMany`)
 - [ ] In-memory caching for frequently accessed data
 - [ ] IndexedDB for large datasets (>1MB)
 
-### Content Script Performance
+Content Script Performance
 - [ ] `run_at: "document_idle"` used by default
 - [ ] Programmatic injection for timing control
 - [ ] Lazy loading of features not needed immediately
 - [ ] Minimal DOM manipulation
 
-### Memory Management
+Memory Management
 - [ ] Event listeners properly cleaned up
 - [ ] MutationObservers disconnected
 - [ ] Intervals and timeouts cleared
 - [ ] WeakRef used for caches where appropriate
 
-### Bundle Size
+Bundle Size
 - [ ] Tree shaking enabled
 - [ ] Production minification applied
 - [ ] Code splitting configured
 - [ ] Bundle analysis performed
 - [ ] Target sizes met (SW <100KB, content <50KB)
 
-### Profiling
+Profiling
 - [ ] Performance markers in critical paths
 - [ ] Regular memory profiling done
 - [ ] DevTools Performance panel analyzed
 - [ ] Extension impact on page load measured
 
-### Best Practices
+Best Practices
 - [ ] No `chrome.runtime.getBackgroundPage()` usage
 - [ ] Message-based communication preferred
 - [ ] Long-lived connections for persistent communication
 - [ ] Error handling for all async operations
 
-## Conclusion
+Conclusion
 
 Performance optimization is an ongoing process. Start by measuring your extension's baseline performance, then apply these optimizations systematically. Focus first on the areas with the biggest impact: service worker startup time, storage batching, and content script injection timing.
 

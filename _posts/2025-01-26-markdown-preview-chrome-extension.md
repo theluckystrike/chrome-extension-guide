@@ -9,7 +9,7 @@ keywords: "markdown preview extension, live markdown chrome, markdown renderer e
 canonical_url: "https://bestchromeextensions.com/2025/01/26/markdown-preview-chrome-extension/"
 ---
 
-# Build a Live Markdown Preview Chrome Extension
+Build a Live Markdown Preview Chrome Extension
 
 Markdown has become the de facto standard for writing documentation, notes, and content across the web. Whether you are a developer writing README files, a technical writer creating documentation, or a blogger crafting articles, the ability to see a live preview of your markdown as you type dramatically improves productivity. we will walk through building a powerful live markdown preview Chrome extension that renders your markdown in real-time with full GitHub-flavored markdown support and syntax highlighting.
 

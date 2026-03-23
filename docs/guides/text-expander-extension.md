@@ -1,8 +1,8 @@
-# Building a Text Expander Chrome Extension
+Building a Text Expander Chrome Extension
 
 A text expander lets users define abbreviations that automatically expand into longer text snippets. This guide covers building a production-ready text expander extension using Chrome's Manifest V3, TypeScript, and modern extension architecture patterns.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -16,9 +16,9 @@ A text expander lets users define abbreviations that automatically expand into l
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Directory Structure
+Directory Structure
 
 ```
 text-expander/
@@ -51,7 +51,7 @@ text-expander/
  package.json
 ```
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 ```json
 {

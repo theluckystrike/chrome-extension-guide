@@ -4,7 +4,7 @@ title: "Chrome Extension Idle Detection. Developer Guide"
 description: "Learn Chrome extension idle detection with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/idle-detection/"
 ---
-# Idle Detection API
+Idle Detection API
 
 Introduction {#introduction}
 

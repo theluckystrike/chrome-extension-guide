@@ -8,7 +8,7 @@ tags: [manifest-v3, extension-monetization, mv3-migration, service-worker-paymen
 author: theluckystrike
 ---
 
-# Manifest V3 Monetization. What Changed for Paid Chrome Extensions
+Manifest V3 Monetization. What Changed for Paid Chrome Extensions
 
 The transition from Manifest V2 to Manifest V3 wasn't just a technical migration, it fundamentally reshaped how Chrome extension developers can monetize their products. If you built a paid extension using Manifest V2 patterns, you're likely discovering that many of your revenue-generating mechanisms need to be redesigned from the ground up.
 

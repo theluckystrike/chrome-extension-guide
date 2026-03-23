@@ -1,15 +1,15 @@
-# Text-to-Speech API Guide
+Text-to-Speech API Guide
 
-## Overview
+Overview
 The Chrome TTS API (`chrome.tts`) enables extensions to synthesize spoken text using the device's speech synthesis capabilities. This is powerful for accessibility features, language learning apps, and screen readers.
 
-## Key Capabilities
+Key Capabilities
 - Speak text with customizable voice parameters
 - Stop or pause ongoing speech
 - Query available voices
 - Monitor speech events (word boundaries, completion, errors)
 
-## Required Permission
+Required Permission
 Add `"tts"` to your `manifest.json` permissions:
 ```json
 {
@@ -19,7 +19,7 @@ Add `"tts"` to your `manifest.json` permissions:
 
 No special host permissions are required for basic TTS functionality.
 
-## chrome.tts.speak. Speaking Text
+chrome.tts.speak. Speaking Text
 
 The primary method for speaking text with optional configuration:
 ```javascript
@@ -30,7 +30,7 @@ chrome.tts.speak(
 ): void
 ```
 
-### Basic Usage
+Basic Usage
 ```javascript
 // Simple speech
 chrome.tts.speak('Hello, world!');
@@ -43,7 +43,7 @@ chrome.tts.speak('Speech complete!', () => {
 });
 ```
 
-### Voice Options
+Voice Options
 The `TtsOptions` object supports these properties:
 ```javascript
 const options = {
@@ -61,7 +61,7 @@ const options = {
 chrome.tts.speak('Customized speech!', options);
 ```
 
-### Enqueue vs Interrupt
+Enqueue vs Interrupt
 ```javascript
 // Enqueue: wait for current speech to finish
 chrome.tts.speak('First sentence.', { enqueue: true });
@@ -71,7 +71,7 @@ chrome.tts.speak('Second sentence.', { enqueue: true });
 chrome.tts.speak('Important!', { enqueue: false }); // default
 ```
 
-## chrome.tts.stop. Stopping Speech
+chrome.tts.stop. Stopping Speech
 
 Immediately halts any ongoing or queued speech:
 ```javascript
@@ -83,7 +83,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
 });
 ```
 
-## chrome.tts.pause and chrome.tts.resume
+chrome.tts.pause and chrome.tts.resume
 
 Pause and resume speech (if supported by the engine):
 ```javascript
@@ -101,7 +101,7 @@ chrome.tts.isSpeaking((speaking) => {
 });
 ```
 
-## chrome.tts.getVoices. Available Voices
+chrome.tts.getVoices. Available Voices
 
 Retrieve all available TTS voices on the system:
 ```javascript
@@ -116,7 +116,7 @@ chrome.tts.getVoices((voices) => {
 });
 ```
 
-### Voice Object Properties
+Voice Object Properties
 ```javascript
 interface TtsVoice {
   voiceName: string;      // Display name
@@ -128,7 +128,7 @@ interface TtsVoice {
 }
 ```
 
-### Filtering Voices
+Filtering Voices
 ```javascript
 chrome.tts.getVoices((voices) => {
   // Get English voices only
@@ -139,7 +139,7 @@ chrome.tts.getVoices((voices) => {
 });
 ```
 
-## chrome.tts.isSpeaking. Check Speech State
+chrome.tts.isSpeaking. Check Speech State
 
 Determine if speech is currently in progress:
 ```javascript
@@ -159,7 +159,7 @@ async function checkSpeaking() {
 }
 ```
 
-## TtsEvent Types. Monitoring Speech
+TtsEvent Types. Monitoring Speech
 
 Events provide feedback during speech synthesis. Pass an `onEvent` callback in options:
 ```javascript
@@ -206,7 +206,7 @@ chrome.tts.speak('Hello world! Here is some text to speak.', {
 });
 ```
 
-### Event Types Reference
+Event Types Reference
 | Event | Description |
 |-------|-------------|
 | `start` | Speech has started |
@@ -219,7 +219,7 @@ chrome.tts.speak('Hello world! Here is some text to speak.', {
 | `pause` | Speech was paused |
 | `resume` | Speech was resumed |
 
-## Building a Screen Reader Extension
+Building a Screen Reader Extension
 
 Here's a complete example of a basic screen reader:
 ```javascript
@@ -281,9 +281,9 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-## Practical Examples
+Practical Examples
 
-### Reading Page Content
+Reading Page Content
 ```javascript
 function readPageHeadings() {
   const headings = document.querySelectorAll('h1, h2, h3');
@@ -298,7 +298,7 @@ function readPageHeadings() {
 }
 ```
 
-### Custom Voice Selection UI
+Custom Voice Selection UI
 ```javascript
 function populateVoiceSelector(selectElement) {
   chrome.tts.getVoices((voices) => {
@@ -317,7 +317,7 @@ function populateVoiceSelector(selectElement) {
 }
 ```
 
-### Reading Notifications
+Reading Notifications
 ```javascript
 chrome.notifications.onClicked.addListener((notificationId) => {
   chrome.storage.local.get([notificationId], (result) => {
@@ -330,19 +330,19 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-## Browser Compatibility
+Browser Compatibility
 - TTS API is supported in Chrome, Edge, and Opera
 - Safari has partial support with `webkitSpeechSynthesis`
 - Firefox has limited TTS support
 
-## Best Practices
+Best Practices
 1. Always check for errors using `chrome.runtime.lastError`
 2. Provide visual feedback when speech starts/ends
 3. Allow voice customization - not all voices are available everywhere
 4. Handle interruptions gracefully - users may trigger new speech
 5. Test with different rates - default rate may be too fast/slow
 
-## Reference
+Reference
 - Official Docs: https://developer.chrome.com/docs/extensions/reference/api/tts
 - TtsOptions: https://developer.chrome.com/docs/extensions/reference/api/tts#type-TtsOptions
 - TtsVoice: https://developer.chrome.com/docs/extensions/reference/api/tts#type-TtsVoice

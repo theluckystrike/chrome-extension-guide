@@ -8,7 +8,7 @@ tags: [tab-suspender-pro, tab-groups, organization]
 author: theluckystrike
 ---
 
-# Tab Suspender Pro with Chrome Tab Groups: Suspend by Group
+Tab Suspender Pro with Chrome Tab Groups: Suspend by Group
 
 Chrome Tab Groups have revolutionized how we organize our browsing sessions, allowing users to categorize tabs by project, topic, or workflow. But even with organized tabs, memory consumption remains a challenge. This is where Tab Suspender Pro's integration with Chrome Tab Groups becomes a significant improvement, enabling you to suspend entire groups at once and manage your browser resources more effectively than ever before.
 

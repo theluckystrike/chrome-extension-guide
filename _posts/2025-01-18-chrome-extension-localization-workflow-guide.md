@@ -9,7 +9,7 @@ keywords: "extension localization, chrome i18n messages, _locales setup, chrome 
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-localization-workflow-guide/"
 ---
 
-# Chrome Extension Localization Workflow Guide: From Setup to Publishing
+Chrome Extension Localization Workflow Guide: From Setup to Publishing
 
 Building a Chrome extension that resonates with users worldwide requires more than just excellent functionality, it demands a smooth localization workflow that transforms your extension from a single-language tool into a globally accessible product. This comprehensive guide walks you through the complete Chrome extension localization workflow, covering everything from initial _locales setup to managing translations and publishing your internationalized extension to the Chrome Web Store.
 

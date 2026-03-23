@@ -4,7 +4,7 @@ title: "Chrome Extension Architecture Patterns. MVC, MVVM & Event-Driven. Develo
 description: "Master Chrome extension architecture patterns including MVC, MVVM, and event-driven designs with practical code examples and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/extension-architecture-patterns/"
 ---
-# Extension Architecture Patterns
+Extension Architecture Patterns
 
 Building a Chrome extension that scales requires more than just connecting components, it demands a clear architectural pattern that organizes code, manages state, and handles communication between isolated contexts. While the Chrome extension platform provides multiple execution environments (service workers, content scripts, popups, options pages), choosing the right architecture pattern determines how maintainable your extension becomes as features accumulate.
 

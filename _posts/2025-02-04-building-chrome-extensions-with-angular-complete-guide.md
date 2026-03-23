@@ -8,7 +8,7 @@ tags: [angular, chrome-extension, angular-chrome-extension, rxjs, typescript-ext
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with Angular. Complete Developer Guide (2025)
+Building Chrome Extensions with Angular. Complete Developer Guide (2025)
 
 Web developers have long used Angular for building robust, enterprise-grade applications. Now, with the evolution of Angular's tooling and Chrome Extension development best practices, Angular has become an excellent choice for building sophisticated Chrome extensions that require maintainable architecture, strong typing, and scalable code organization.
 

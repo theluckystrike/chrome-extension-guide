@@ -4,7 +4,7 @@ title: "Chrome Extension First Extension. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-first-extension/"
 ---
-# Building Your First Chrome Extension
+Building Your First Chrome Extension
 
 A complete beginner's guide to creating your first Chrome extension from scratch.
 

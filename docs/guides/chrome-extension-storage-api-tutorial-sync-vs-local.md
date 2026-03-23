@@ -7,7 +7,7 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-st
 
 ---
 
-# Chrome Extension Storage API Tutorial: Sync vs Local. Complete TypeScript Guide
+Chrome Extension Storage API Tutorial: Sync vs Local. Complete TypeScript Guide
 
 The Chrome Storage API is the backbone of most successful Chrome extensions. Whether you're building a simple popup utility or a complex productivity suite like Tab Suspender Pro, understanding when to use `chrome.storage.sync` versus `chrome.storage.local` is crucial for creating smooth user experiences across devices.
 

@@ -6,7 +6,7 @@ description: "In-depth development guides for Chrome extensions covering setup, 
 
 # Chrome Extension Development Guides
 
-Welcome to the Chrome Extension Development Guides — your comprehensive resource for building professional Chrome extensions. These guides cover every aspect of extension development, from setting up your first extension to implementing advanced features like cross-browser compatibility, performance optimization, and enterprise deployment.
+Welcome to the Chrome Extension Development Guides. your comprehensive resource for building professional Chrome extensions. These guides cover every aspect of extension development, from setting up your first extension to implementing advanced features like cross-browser compatibility, performance optimization, and enterprise deployment.
 
 Whether you're a beginner just starting with Chrome extensions or an experienced developer looking to level up your skills, these guides provide practical, hands-on tutorials and best practices used by professional extension developers.
 

@@ -9,7 +9,7 @@ keywords: "picture in picture extension, pip chrome extension, floating video ch
 canonical_url: "https://bestchromeextensions.com/2025/01/22/picture-in-picture-chrome-extension/"
 ---
 
-# Picture-in-Picture Chrome Extension: Build a Floating Video Player
+Picture-in-Picture Chrome Extension: Build a Floating Video Player
 
 Picture-in-Picture (PiP) functionality has revolutionized the way users consume video content on the web. Whether you're watching a tutorial while working on a project, following a cooking video while browsing recipes, or keeping up with your favorite streamer while checking emails, the ability to have a floating video player has become an essential feature for modern web browsing. we'll walk you through building a Chrome extension that implements a powerful Picture-in-Picture video player, giving users the flexibility to watch videos in a floating window that stays on top of all other content.
 

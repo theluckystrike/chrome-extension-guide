@@ -1,8 +1,8 @@
-# VPN Extension Patterns
+VPN Extension Patterns
 
 Building a VPN extension requires understanding the unique constraints and capabilities of browser extensions. Unlike traditional VPN applications, Chrome extensions operate within the browser's security sandbox while still providing powerful network control capabilities. This guide explores the architectural patterns and implementation strategies for creating solid VPN extensions using Chrome's Proxy API and related APIs.
 
-## Table of Contents
+Table of Contents
 
 - [Understanding VPN Extension Architecture](#understanding-vpn-extension-architecture)
 - [Chrome Proxy API Fundamentals](#chrome-proxy-api-fundamentals)
@@ -14,7 +14,7 @@ Building a VPN extension requires understanding the unique constraints and capab
 
 ---
 
-## Understanding VPN Extension Architecture
+Understanding VPN Extension Architecture
 
 A VPN extension in Chrome doesn't create a true VPN tunnel in the traditional sense. Instead, it uses the Proxy API to route browser traffic through a specified server. The extension acts as a configuration layer that tells Chrome's network stack where to send requests.
 
@@ -24,7 +24,7 @@ The architecture consists of three main components:
 2. Service Worker: Handles proxy configuration and maintains connection state
 3. Background Logic: Manages server communication, authentication, and tunnel establishment
 
-### Directory Structure
+Directory Structure
 
 ```
 vpn-extension/

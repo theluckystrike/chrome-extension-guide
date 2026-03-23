@@ -5,7 +5,7 @@ description: "Implement analytics and telemetry in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/analytics-telemetry/"
 ---
 
-# Extension Analytics and Telemetry
+Extension Analytics and Telemetry
 
 Overview {#overview}
 

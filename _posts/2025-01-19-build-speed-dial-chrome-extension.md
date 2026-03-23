@@ -9,7 +9,7 @@ keywords: "speed dial extension, quick access chrome, bookmark dial extension, c
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-speed-dial-chrome-extension/"
 ---
 
-# Build a Speed Dial Chrome Extension
+Build a Speed Dial Chrome Extension
 
 Speed dial extensions have become an essential tool for millions of Chrome users who want quick access to their favorite websites. Whether you want to launch your most-visited pages with a single click or organize bookmarks in a visually appealing grid, building a speed dial extension is an excellent project that combines practical functionality with valuable development experience. This comprehensive guide will walk you through creating a fully functional Speed Dial Chrome Extension using Manifest V3, covering everything from project setup to advanced features like drag-and-drop reordering and custom theming.
 

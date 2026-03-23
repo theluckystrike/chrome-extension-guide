@@ -5,7 +5,7 @@ description: "Inject content scripts dynamically based on user actions and page 
 canonical_url: "https://bestchromeextensions.com/patterns/dynamic-content-injection/"
 ---
 
-# Dynamic Content Injection
+Dynamic Content Injection
 
 Dynamic content injection enables Chrome Extensions to inject floating widgets, toolbars, sidebars, and other UI elements directly into web pages from content scripts. This pattern is fundamental for creating rich, interactive extensions that integrate smoothly with host pages.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Tab Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-manager/"
 ---
-# Build a Tab Manager Extension. Full Tutorial
+Build a Tab Manager Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Popup showing all open tabs with search/filter

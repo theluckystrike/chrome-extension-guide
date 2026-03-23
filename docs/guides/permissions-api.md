@@ -1,8 +1,8 @@
-# Chrome Extension Permissions API
+Chrome Extension Permissions API
 
 The chrome.permissions API enables dynamic permission management at runtime, allowing extensions to request, check, and revoke permissions beyond manifest declarations. This API is essential for implementing progressive disclosure patterns that improve user trust and install conversion rates.
 
-## Manifest Permissions vs Optional Permissions
+Manifest Permissions vs Optional Permissions
 
 Chrome extensions distinguish between required and optional permissions. Required permissions declared in `permissions` are requested at install time. Optional permissions declared in `optional_permissions` can be requested at runtime.
 
@@ -18,7 +18,7 @@ Chrome extensions distinguish between required and optional permissions. Require
 
 Required permissions appear in the installation dialog and cannot be revoked without uninstalling. Optional permissions reduce the initial trust barrier since users only see them when features requiring them are activated.
 
-## chrome.permissions.request
+chrome.permissions.request
 
 The `chrome.permissions.request()` method requests additional permissions at runtime, displaying a browser prompt for user approval. Returns a Promise resolving to a boolean indicating grant status.
 
@@ -39,7 +39,7 @@ await chrome.permissions.request({
 
 Permissions must be pre-declared in manifest's optional_permissions or optional_host_permissions fields before they can be requested.
 
-## chrome.permissions.remove
+chrome.permissions.remove
 
 The `chrome.permissions.remove()` method revokes previously granted optional permissions. This is useful for implementing privacy controls or feature toggles.
 
@@ -54,7 +54,7 @@ async function removePermission(permission) {
 
 Note that users can also revoke permissions manually through the extension management page.
 
-## chrome.permissions.contains
+chrome.permissions.contains
 
 The `chrome.permissions.contains()` method checks whether specific permissions are currently granted. Always verify permissions before performing privileged operations.
 
@@ -73,7 +73,7 @@ async function checkPermissions(permissions) {
 }
 ```
 
-## chrome.permissions.getAll
+chrome.permissions.getAll
 
 The `chrome.permissions.getAll()` method retrieves all currently granted permissions, including manifest-declared and runtime-granted optional permissions.
 
@@ -88,7 +88,7 @@ async function getAllPermissions() {
 
 Useful for building options pages that display current permissions and allow revocation.
 
-## chrome.permissions.onAdded
+chrome.permissions.onAdded
 
 The `chrome.permissions.onAdded` event fires when permissions are granted through user action or the extension management page.
 
@@ -103,7 +103,7 @@ chrome.permissions.onAdded.addListener((permissions) => {
 
 Use this event to dynamically enable features and update UI when permissions are granted.
 
-## chrome.permissions.onRemoved
+chrome.permissions.onRemoved
 
 The `chrome.permissions.onRemoved` event fires when permissions are revoked. Handle this to gracefully degrade functionality.
 
@@ -118,7 +118,7 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 
 Always implement proper revocation handling to maintain user experience.
 
-## Host Permissions and Match Patterns
+Host Permissions and Match Patterns
 
 Host permissions use match patterns to specify URL access with wildcards for schemes, hosts, and paths.
 
@@ -131,13 +131,13 @@ Host permissions use match patterns to specify URL access with wildcards for sch
 
 Use specific patterns instead of wildcards to minimize permission warnings.
 
-## Permission Warnings and Install Rates
+Permission Warnings and Install Rates
 
 Permission warnings directly impact Chrome Web Store conversion. Broad permissions display concerning warnings that deter installations. Extensions with fewer permissions see significantly higher install rates.
 
 High-warning permissions include `<all_urls>`, `*://*/*` (critical), and `tabs`, `webNavigation` (high). Silent permissions include `storage`, `alarms`, `idle`, `activeTab`.
 
-## Progressive Permission Disclosure UX
+Progressive Permission Disclosure UX
 
 Request permissions contextually when users attempt features that need them. Explain why each permission is needed at the moment of relevance.
 
@@ -167,7 +167,7 @@ async function enableFeatureWithPermission(feature) {
 
 Users are far more likely to grant permissions when they understand the benefit.
 
-## activeTab as Alternative to Broad Host Permissions
+activeTab as Alternative to Broad Host Permissions
 
 The `activeTab` permission grants temporary, user-initiated access to the current tab when the user explicitly invokes the extension. This displays no warnings and provides a high-trust alternative to broad host permissions.
 
@@ -179,13 +179,13 @@ The `activeTab` permission grants temporary, user-initiated access to the curren
 
 When invoked, `activeTab` grants access to the tab's URL, title, favicon, and the ability to inject scripts via the Scripting API. Use this for features that analyze or modify the current page without requiring broad host access.
 
-## Permission Groups and Warning Triggers
+Permission Groups and Warning Triggers
 
 Chrome groups permissions into categories that trigger specific warnings. Silent (no warning): `storage`, `alarms`, `idle`, `contextMenus`, `activeTab`. Moderate: `bookmarks`, `history`, `notifications`, `geolocation`. High: `tabs`, `webNavigation`, `webRequest`, `proxy`. Critical: `<all_urls>`, `*://*/*`.
 
 Design permission strategies to rely on silent permissions for core functionality.
 
-## Optional Permissions Strategy
+Optional Permissions Strategy
 
 Request minimal required permissions at install time, then request additional capabilities as users enable features.
 
@@ -198,7 +198,7 @@ Request minimal required permissions at install time, then request additional ca
 
 This pattern dramatically improves install conversion by reducing initial permission warnings.
 
-## Content Script Injection with Dynamic Permissions
+Content Script Injection with Dynamic Permissions
 
 Ensure proper host access before injecting scripts to arbitrary URLs.
 
@@ -224,7 +224,7 @@ async function injectToTab(tabId, hostPattern) {
 
 Always check and request host permissions before dynamic script injection.
 
-## Reference
+Reference
 
 Official documentation: [chrome.permissions](https://developer.chrome.com/docs/extensions/reference/api/permissions)
 

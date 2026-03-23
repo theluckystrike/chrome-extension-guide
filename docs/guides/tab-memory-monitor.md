@@ -1,10 +1,10 @@
-# Building a Tab Memory Monitor Chrome Extension
+Building a Tab Memory Monitor Chrome Extension
 
-## Introduction
+Introduction
 
 A Tab Memory Monitor extension helps users track and visualize memory usage across browser tabs, enabling better resource management and identifying memory-heavy pages. This guide covers building a production-ready extension using Chrome's memory APIs, Manifest V3, and TypeScript.
 
-## Architecture Overview
+Architecture Overview
 
 The extension follows a modular architecture:
 
@@ -13,7 +13,7 @@ The extension follows a modular architecture:
 - Content Script: Collects per-tab memory metrics from `performance.memory`
 - Storage: Uses `chrome.storage.local` for persistence and `chrome.runtime` for messaging
 
-## manifest.json Configuration
+manifest.json Configuration
 
 ```json
 {
@@ -50,7 +50,7 @@ The extension follows a modular architecture:
 }
 ```
 
-## Core Types (types.ts)
+Core Types (types.ts)
 
 ```typescript
 export interface TabMemoryInfo {
@@ -86,7 +86,7 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
 };
 ```
 
-## Background Service Worker (background.ts)
+Background Service Worker (background.ts)
 
 ```typescript
 import { TabMemoryInfo, MemorySnapshot, ExtensionSettings, DEFAULT_SETTINGS } from './types';
@@ -199,7 +199,7 @@ const monitor = new MemoryMonitor();
 monitor.initialize();
 ```
 
-## Content Script (content.ts)
+Content Script (content.ts)
 
 ```typescript
 interface MemoryMetrics {
@@ -237,7 +237,7 @@ if (typeof window !== 'undefined') {
 }
 ```
 
-## Popup UI (popup.ts)
+Popup UI (popup.ts)
 
 ```typescript
 import { TabMemoryInfo, MemorySnapshot } from './types';
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Popup HTML (popup.html)
+Popup HTML (popup.html)
 
 ```html
 <!DOCTYPE html>
@@ -400,9 +400,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </html>
 ```
 
-## State Management Patterns
+State Management Patterns
 
-### Using chrome.storage.local
+Using chrome.storage.local
 
 ```typescript
 class StorageManager {
@@ -431,7 +431,7 @@ class StorageManager {
 }
 ```
 
-### Debouncing Storage Writes
+Debouncing Storage Writes
 
 ```typescript
 function debounce<T extends (...args: any[]) => any>(
@@ -450,9 +450,9 @@ const saveSettings = debounce(async (settings: ExtensionSettings) => {
 }, 500);
 ```
 
-## Error Handling
+Error Handling
 
-### Service Worker Error Recovery
+Service Worker Error Recovery
 
 ```typescript
 // In background.ts
@@ -484,7 +484,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-### Content Script Error Boundaries
+Content Script Error Boundaries
 
 ```typescript
 // Wrap message handling in try-catch
@@ -505,9 +505,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing with Jest
+Unit Testing with Jest
 
 ```typescript
 // __tests__/types.test.ts
@@ -537,7 +537,7 @@ describe('DEFAULT_SETTINGS', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 // __tests__/integration/memory-collection.test.ts
@@ -562,16 +562,16 @@ describe('Memory Collection', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Memory Efficiency
+Memory Efficiency
 
 1. Limit Snapshot Retention: Keep only last 1000 snapshots to prevent storage bloat
 2. Use Structured Clone: Chrome's `JSON.parse(JSON.stringify())` for deep copies
 3. Lazy Loading: Load only visible tabs in popup, paginate results
 4. Efficient Sorting: Sort in background worker, not UI thread
 
-### Service Worker Optimization
+Service Worker Optimization
 
 ```typescript
 // Use minimal polling - rely on alarms
@@ -584,7 +584,7 @@ chrome.runtime.onUninstalled.addListener(async () => {
 });
 ```
 
-### UI Performance
+UI Performance
 
 ```typescript
 // Virtual scrolling for large tab lists
@@ -593,9 +593,9 @@ chrome.runtime.onUninstalled.addListener(async () => {
 // Minimize DOM operations
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication
+Pre-Publication
 
 - [ ] Test in Chrome, Edge, and Brave
 - [ ] Verify Manifest V3 compliance
@@ -605,7 +605,7 @@ chrome.runtime.onUninstalled.addListener(async () => {
 - [ ] Write privacy policy if needed
 - [ ] Create store listing description
 
-### Manifest Requirements
+Manifest Requirements
 
 ```json
 {
@@ -627,7 +627,7 @@ chrome.runtime.onUninstalled.addListener(async () => {
 }
 ```
 
-### Store Listing
+Store Listing
 
 - [ ] Compelling title (under 45 chars)
 - [ ] Clear description (prompts + features)
@@ -635,7 +635,7 @@ chrome.runtime.onUninstalled.addListener(async () => {
 - [ ] Keywords for searchability
 - [ ] Privacy policy URL (if collecting data)
 
-## Conclusion
+Conclusion
 
 This guide covered the essential components for building a Tab Memory Monitor extension. Key takeaways:
 

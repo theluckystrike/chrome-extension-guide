@@ -9,7 +9,7 @@ keywords: "chrome.identity api, getAuthToken, launchWebAuthFlow, extension oauth
 canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-identity-api-oauth/"
 ---
 
-# Chrome Identity API: OAuth2 and Token Management for Extensions
+Chrome Identity API: OAuth2 and Token Management for Extensions
 
 Authentication is one of the most complex challenges in Chrome extension development. Extensions run in a unique environment. they are not traditional web apps, they do not have a permanent server, and they cannot rely on standard browser-based OAuth redirects. The `chrome.identity` API solves these problems by providing purpose-built methods for OAuth2 authentication that work smoothly within the extension model.
 

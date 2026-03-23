@@ -5,7 +5,7 @@ description: "The Chrome Downloads API initiates, monitors, searches, pauses, re
 canonical_url: "https://bestchromeextensions.com/api-reference/downloads-api/"
 ---
 
-# Chrome Downloads API Reference
+Chrome Downloads API Reference
 
 The `chrome.downloads` API lets you initiate, monitor, search, pause, resume, cancel, and manage file downloads. You can also control where files are saved and open downloaded files.
 
@@ -459,7 +459,7 @@ Gotchas {#gotchas}
 Related {#related}
 
 - [downloads permission](../permissions/downloads.md)
-- [Storage API Deep Dive](storage-api-deep detailed look.md)
+- [Storage API detailed look](storage-api-deep detailed look.md)
 - [Chrome downloads API docs](https://developer.chrome.com/docs/extensions/reference/api/downloads)
 Frequently Asked Questions
 

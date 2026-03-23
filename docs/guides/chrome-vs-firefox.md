@@ -1,14 +1,14 @@
-# Chrome vs Firefox Extension Porting Guide
+Chrome vs Firefox Extension Porting Guide
 
 A comprehensive guide for porting Chrome extensions to Firefox and achieving cross-browser compatibility.
 
-## Overview
+Overview
 
 Porting Chrome extensions to Firefox is generally straightforward thanks to the WebExtensions standard. However, several key differences in API implementations, manifest handling, and distribution require attention. This guide covers all critical aspects of Chrome-to-Firefox porting.
 
-## Manifest V3 vs V2 Differences
+Manifest V3 vs V2 Differences
 
-### Manifest V2 (MV2)
+Manifest V2 (MV2)
 
 Firefox still supports MV2, while Chrome deprecated it. Key differences:
 
@@ -23,7 +23,7 @@ Firefox still supports MV2, while Chrome deprecated it. Key differences:
 }
 ```
 
-### Manifest V3 (MV3)
+Manifest V3 (MV3)
 
 ```json
 {
@@ -35,7 +35,7 @@ Firefox still supports MV2, while Chrome deprecated it. Key differences:
 }
 ```
 
-### Key MV3 Changes
+Key MV3 Changes
 
 | Feature | MV2 | MV3 |
 |---------|-----|-----|
@@ -45,15 +45,15 @@ Firefox still supports MV2, while Chrome deprecated it. Key differences:
 | Remote code | Allowed | Forbidden |
 | Host permissions | Wildcards allowed | Limited wildcards |
 
-## chrome.* vs browser.* Namespace
+chrome.* vs browser.* Namespace
 
-### Namespace Overview
+Namespace Overview
 
 - Chrome: Uses `chrome.*` namespace with callback-based APIs
 - Firefox: Supports both `chrome.*` and `browser.*` namespaces natively
 - Best practice: Use `browser.*` with WebExtensions polyfill for cross-browser compatibility
 
-### Chrome Namespace (Callbacks)
+Chrome Namespace (Callbacks)
 
 ```javascript
 chrome.runtime.sendMessage({ type: 'GREET' }, (response) => {
@@ -65,14 +65,14 @@ chrome.storage.local.get(['key'], (result) => {
 });
 ```
 
-### Firefox Namespace (Promises)
+Firefox Namespace (Promises)
 
 ```javascript
 const response = await browser.runtime.sendMessage({ type: 'GREET' });
 const result = await browser.storage.local.get('key');
 ```
 
-### Using browser.* in Chrome
+Using browser.* in Chrome
 
 Install the polyfill for consistent Promise-based APIs:
 
@@ -89,11 +89,11 @@ const tabs = await browser.tabs.query({ active: true });
 await browser.storage.local.set({ setting: true });
 ```
 
-## Promise vs Callback APIs
+Promise vs Callback APIs
 
 Chrome's `chrome.*` APIs use callbacks; Firefox's `browser.*` uses Promises.
 
-### Callback Pattern (Chrome)
+Callback Pattern (Chrome)
 
 ```javascript
 chrome.tabs.query({ active: true }, (tabs) => {
@@ -108,7 +108,7 @@ chrome.tabs.query({ active: true }, (tabs) => {
 });
 ```
 
-### Promise Pattern (Firefox/browser.*)
+Promise Pattern (Firefox/browser.*)
 
 ```javascript
 try {
@@ -121,7 +121,7 @@ try {
 }
 ```
 
-### Async/Await Wrapper for Chrome
+Async/Await Wrapper for Chrome
 
 ```javascript
 const promisify = (api, ...args) =>
@@ -139,17 +139,17 @@ const promisify = (api, ...args) =>
 const tabs = await promisify(chrome.tabs.query, { active: true });
 ```
 
-## WebExtensions Polyfill
+WebExtensions Polyfill
 
 The [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) normalizes cross-browser differences.
 
-### Installation
+Installation
 
 ```bash
 npm install webextension-polyfill
 ```
 
-### Setup
+Setup
 
 ```javascript
 // background.js or content script
@@ -159,7 +159,7 @@ import browser from 'webextension-polyfill';
 <script src="/node_modules/webextension-polyfill/dist/browser-polyfill.js"></script>
 ```
 
-### Manifest Import
+Manifest Import
 
 ```json
 {
@@ -169,7 +169,7 @@ import browser from 'webextension-polyfill';
 }
 ```
 
-### Common API Mappings
+Common API Mappings
 
 | Chrome (callback) | browser.* (Promise) |
 |-------------------|---------------------|
@@ -178,9 +178,9 @@ import browser from 'webextension-polyfill';
 | `chrome.tabs.query()` | `browser.tabs.query()` |
 | `chrome.notifications.create()` | `browser.notifications.create()` |
 
-## Service Workers vs Background Pages
+Service Workers vs Background Pages
 
-### Chrome MV3 (Service Workers)
+Chrome MV3 (Service Workers)
 
 ```json
 {
@@ -197,7 +197,7 @@ Service workers:
 - Use `chrome.runtime.onStartup` for initialization
 - Cannot use `setTimeout` reliably
 
-### Firefox MV3 (Background Scripts)
+Firefox MV3 (Background Scripts)
 
 ```json
 {
@@ -213,7 +213,7 @@ Firefox supports:
 - Persistent background pages (for MV2)
 - ES modules via `"type": "module"`
 
-### Firefox Service Worker Support
+Firefox Service Worker Support
 
 Firefox has limited service worker support:
 
@@ -228,7 +228,7 @@ Firefox has limited service worker support:
 
 Not all Chrome service worker APIs work in Firefox. Test thoroughly.
 
-### Migration Pattern
+Migration Pattern
 
 ```javascript
 // MV2 background (persistent)
@@ -242,15 +242,15 @@ self.addEventListener('install', (event) => {
 });
 ```
 
-## Packaging Differences
+Packaging Differences
 
-### Chrome (.zip)
+Chrome (.zip)
 
 ```bash
 zip -r extension.zip manifest.json background.js popup.html popup.js content.js/
 ```
 
-### Firefox (.xpi/.zip)
+Firefox (.xpi/.zip)
 
 Firefox accepts `.zip` files or `.xpi` (renamed ZIP):
 
@@ -258,7 +258,7 @@ Firefox accepts `.zip` files or `.xpi` (renamed ZIP):
 zip -r extension.xpi manifest.json background.js popup.html popup.js content.js/
 ```
 
-### Manifest Requirements
+Manifest Requirements
 
 Firefox-specific manifest keys:
 
@@ -273,23 +273,23 @@ Firefox-specific manifest keys:
 }
 ```
 
-## Signing and Distribution
+Signing and Distribution
 
-### Chrome Web Store
+Chrome Web Store
 
 1. Create developer account ($5 one-time)
 2. Upload ZIP package
 3. Submit for review
 4. Publish (public/unlisted)
 
-### Firefox Add-ons
+Firefox Add-ons
 
 1. Create Mozilla developer account
 2. Upload ZIP/XPI
 3. Sign automatically
 4. Publish to AMO or distribute directly
 
-### Self-Distribution (Firefox)
+Self-Distribution (Firefox)
 
 ```json
 {
@@ -321,9 +321,9 @@ Update manifest:
 }
 ```
 
-## Cross-Browser Manifest Patterns
+Cross-Browser Manifest Patterns
 
-### Universal Manifest (MV3)
+Universal Manifest (MV3)
 
 ```json
 {
@@ -359,7 +359,7 @@ Update manifest:
 }
 ```
 
-### Manifest Conditional Keys
+Manifest Conditional Keys
 
 Use `browser_specific_settings` to handle browser differences:
 
@@ -373,7 +373,7 @@ Use `browser_specific_settings` to handle browser differences:
 }
 ```
 
-## Feature Detection
+Feature Detection
 
 Always check API availability before use:
 
@@ -398,7 +398,7 @@ const isMV3 = manifest.manifest_version === 3;
 const hasStorage = manifest.permissions.includes('storage');
 ```
 
-### Runtime Feature Detection
+Runtime Feature Detection
 
 ```javascript
 const features = {
@@ -414,9 +414,9 @@ const features = {
 };
 ```
 
-## Common Gotchas
+Common Gotchas
 
-### 1. Chrome Runtime LastError
+1. Chrome Runtime LastError
 
 ```javascript
 // Chrome callbacks always execute, check for errors
@@ -428,7 +428,7 @@ chrome.storage.local.get('key', () => {
 });
 ```
 
-### 2. Firefox Promise Rejection
+2. Firefox Promise Rejection
 
 ```javascript
 // Always handle promise rejections
@@ -436,7 +436,7 @@ browser.storage.local.get('key')
   .catch(error => console.error('Storage error:', error));
 ```
 
-### 3. Service Worker Lifecycle
+3. Service Worker Lifecycle
 
 ```javascript
 // Service worker may terminate; don't rely on global state
@@ -460,7 +460,7 @@ self.addEventListener('message', (event) => {
 });
 ```
 
-### 4. Content Script Isolation
+4. Content Script Isolation
 
 ```javascript
 // Content scripts share page context
@@ -475,7 +475,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### 5. CORS in Content Scripts
+5. CORS in Content Scripts
 
 ```javascript
 // Content scripts inherit page CSP
@@ -494,7 +494,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### 6. Manifest Permission Order
+6. Manifest Permission Order
 
 ```json
 {
@@ -508,7 +508,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 }
 ```
 
-### 7. Firefox-Specific APIs
+7. Firefox-Specific APIs
 
 Firefox supports some APIs not in Chrome:
 
@@ -521,7 +521,7 @@ browser.contextualIdentities.query({})
 browser.browsingData.remove({}, { cache: true });
 ```
 
-### 8. Icon Sizing
+8. Icon Sizing
 
 | Size | Chrome | Firefox |
 |------|--------|---------|
@@ -530,9 +530,9 @@ browser.browsingData.remove({}, { cache: true });
 | 48x48 | Optional | Required |
 | 128x128 | Required (can be remote) | Required |
 
-## Code Examples
+Code Examples
 
-### Storage Abstraction Layer
+Storage Abstraction Layer
 
 ```javascript
 // storage.js - Cross-browser storage wrapper
@@ -575,7 +575,7 @@ export const storage = new Storage('myExtension');
 export default storage;
 ```
 
-### Messaging Abstraction
+Messaging Abstraction
 
 ```javascript
 // messaging.js - Cross-browser messaging
@@ -613,7 +613,7 @@ export const messenger = new Messenger();
 export default messenger;
 ```
 
-### Background Script Example
+Background Script Example
 
 ```javascript
 // background.js
@@ -651,7 +651,7 @@ browser.alarms.create('periodicSync', {
 });
 ```
 
-## Reference
+Reference
 
 - [MDN: Chrome incompatibilities](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities)
 - [MDN: Firefox WebExtensions](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions)
@@ -659,7 +659,7 @@ browser.alarms.create('periodicSync', {
 - [webextension-polyfill GitHub](https://github.com/mozilla/webextension-polyfill)
 - [Mozilla Add-on Developer Hub](https://addons.mozilla.org/)
 
-## Summary
+Summary
 
 Porting Chrome extensions to Firefox requires attention to:
 

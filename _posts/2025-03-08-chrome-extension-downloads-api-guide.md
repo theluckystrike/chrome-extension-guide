@@ -9,7 +9,7 @@ keywords: "chrome extension downloads API, chrome.downloads, download manager ch
 canonical_url: "https://bestchromeextensions.com/2025/03/08/chrome-extension-downloads-api-guide/"
 ---
 
-# Chrome Extension Downloads API: Build a Download Manager Extension
+Chrome Extension Downloads API: Build a Download Manager Extension
 
 Download management is one of the most requested features for Chrome extensions. Whether you're building a productivity tool that needs to batch download files, a web scraper that collects resources, or a full-featured download manager with pause/resume capabilities, the Chrome Downloads API provides the foundation you need. This comprehensive guide will teach you how to use the chrome.downloads API to create powerful download management functionality in your Chrome extension.
 

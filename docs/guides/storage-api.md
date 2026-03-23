@@ -1,12 +1,12 @@
-# Chrome Storage API Guide
+Chrome Storage API Guide
 
-## Overview
+Overview
 
 The Chrome Storage API provides specialized storage solutions for extensions, offering advantages over `localStorage`: automatic synchronization, change notifications, larger quotas, and async operations. This guide covers all storage areas, operations, and best practices.
 
-## Storage Areas
+Storage Areas
 
-### chrome.storage.local
+chrome.storage.local
 
 Local persistent storage that persists until the user clears it. Ideal for extension-specific data.
 
@@ -20,7 +20,7 @@ chrome.storage.local.get('key', (result) => {
 ```
 Quota: 10MB default, unlimited with `"unlimitedStorage"` permission.
 
-### chrome.storage.sync
+chrome.storage.sync
 
 Cross-device synchronized storage using the user's Google account. Data syncs automatically.
 
@@ -32,7 +32,7 @@ chrome.storage.sync.get(['theme', 'fontSize'], (result) => {
 ```
 Quota: 100KB total, 8KB per item.
 
-### chrome.storage.session
+chrome.storage.session
 
 Session-only storage in Manifest V3. Data clears when browser closes or extension reloads.
 
@@ -44,7 +44,7 @@ chrome.storage.session.get('tempData', (result) => {
 ```
 Quota: 10MB.
 
-### chrome.storage.managed
+chrome.storage.managed
 
 Enterprise-managed read-only storage set by administrators via enterprise policies.
 
@@ -55,9 +55,9 @@ chrome.storage.managed.get(['companySettings'], (result) => {
 ```
 Requires `managed_schema` in manifest to define allowed keys and types.
 
-## Core Operations
+Core Operations
 
-### StorageArea.get - Reading Values
+StorageArea.get - Reading Values
 
 ```javascript
 // Single key with default
@@ -73,26 +73,26 @@ chrome.storage.sync.get({
 chrome.storage.local.get(null, (result) => {});
 ```
 
-### StorageArea.set - Writing Values
+StorageArea.set - Writing Values
 
 ```javascript
 chrome.storage.sync.set({ theme: 'dark', fontSize: 14 }, () => {});
 ```
 
-### StorageArea.remove - Deleting Keys
+StorageArea.remove - Deleting Keys
 
 ```javascript
 chrome.storage.local.remove('oldSetting');
 chrome.storage.sync.remove(['key1', 'key2']);
 ```
 
-### StorageArea.clear - Clearing All Data
+StorageArea.clear - Clearing All Data
 
 ```javascript
 chrome.storage.local.clear();
 ```
 
-### StorageArea.getBytesInUse - Checking Usage
+StorageArea.getBytesInUse - Checking Usage
 
 ```javascript
 chrome.storage.sync.getBytesInUse(null, (bytes) => {
@@ -100,7 +100,7 @@ chrome.storage.sync.getBytesInUse(null, (bytes) => {
 });
 ```
 
-### StorageArea.setAccessLevel - MV3 Access Control
+StorageArea.setAccessLevel - MV3 Access Control
 
 ```javascript
 chrome.storage.session.setAccessLevel({
@@ -108,9 +108,9 @@ chrome.storage.session.setAccessLevel({
 });
 ```
 
-## Change Events
+Change Events
 
-### chrome.storage.onChanged
+chrome.storage.onChanged
 
 ```javascript
 chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -121,7 +121,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-## Storage Quotas
+Storage Quotas
 
 | Area | Default | Per-Item | Permission |
 |------|---------|----------|------------|
@@ -130,7 +130,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 | session | 10MB | 8KB | None |
 | local (unlimited) | Unlimited | 8KB | unlimitedStorage |
 
-## Performance: Batching Operations
+Performance: Batching Operations
 
 ```javascript
 // Batch writes - prefer this over multiple calls
@@ -140,7 +140,7 @@ chrome.storage.sync.set({ setting1: a, setting2: b, setting3: c });
 chrome.storage.sync.get(null, (result) => {});
 ```
 
-## Migration: localStorage to chrome.storage
+Migration: localStorage to chrome.storage
 
 ```javascript
 // Before: localStorage
@@ -159,7 +159,7 @@ const storage = {
 await storage.set('theme', 'dark');
 ```
 
-## JSON Serialization Edge Cases
+JSON Serialization Edge Cases
 
 ```javascript
 // Date objects - convert to ISO string
@@ -172,7 +172,7 @@ const data = { value: null }; // OK
 // const data = { value: undefined }; // Ignored!
 ```
 
-## Managed Storage Schema
+Managed Storage Schema
 
 ```json
 // manifest.json
@@ -190,7 +190,7 @@ const data = { value: null }; // OK
 }
 ```
 
-## Encrypting Sensitive Data
+Encrypting Sensitive Data
 
 ```javascript
 async function encrypt(data, key) {
@@ -208,7 +208,7 @@ async function secureStore(key, data) {
 }
 ```
 
-## Building a Settings Sync System
+Building a Settings Sync System
 
 ```javascript
 class SettingsSync {
@@ -238,13 +238,13 @@ class SettingsSync {
 }
 ```
 
-## Reference
+Reference
 
 - [Chrome Storage API](https://developer.chrome.com/docs/extensions/reference/api/storage)
 - [Enterprise Policy Storage](https://developer.chrome.com/docs/extensions/mv3/managed-storage/)
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, [Stripe integration](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

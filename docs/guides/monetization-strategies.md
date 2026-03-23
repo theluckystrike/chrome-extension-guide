@@ -1,19 +1,19 @@
-# Chrome Extension Monetization Strategies
+Chrome Extension Monetization Strategies
 
-## Introduction
+Introduction
 - Monetizing Chrome extensions requires balancing revenue with user experience
 - Multiple models exist: [freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model), subscriptions, one-time purchases, and hybrid approaches
 - Chrome Web Storepayments API was deprecated in 2020. third-party [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processors are now required
 - This guide covers implementation patterns, code examples, and best practices
 
-## [Freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model Design
+[Freemium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Model Design
 
-### Core Concept
+Core Concept
 - Offer basic features free, [premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) features paid
 - Free tier should provide genuine value. enough to demonstrate product worth
 - [Premium](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) tier should solve real problems that free users experience
 
-### Implementation Pattern
+Implementation Pattern
 ```javascript
 // manifest.json - declare permissions
 {
@@ -36,20 +36,20 @@ async function checkFeatureAccess(feature) {
 }
 ```
 
-### Tier Design Tips
+Tier Design Tips
 - Start with 2-3 tiers: Free, Pro, Enterprise
 - Free: core functionality, limited usage (e.g., 10 queries/day)
 - Pro: unlimited usage, advanced features ($5-15/month)
 - Enterprise: team management, SSO, dedicated support (custom pricing)
 
-## [Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Management
+[Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Management
 
-### Overview
+Overview
 - Recurring revenue model providing predictable income
 - Requires ongoing value delivery to prevent churn
 - Can be monthly or annual (annual typically 20% discount)
 
-### [Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Tiers Example
+[Subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) Tiers Example
 ```javascript
 const SUBSCRIPTION_TIERS = {
   free: {
@@ -74,14 +74,14 @@ const SUBSCRIPTION_TIERS = {
 };
 ```
 
-## One-Time Purchase with License Keys
+One-Time Purchase with License Keys
 
-### When to Use
+When to Use
 - Users prefer ownership over subscriptions
 - Limited feature set (no ongoing server costs)
 - Lower friction. no recurring billing concerns
 
-### License Key Format
+License Key Format
 ```javascript
 // Generate license keys (server-side)
 function generateLicenseKey() {
@@ -94,7 +94,7 @@ function generateLicenseKey() {
 // License key format example: EXT-M7X2K9-A3B4CD
 ```
 
-### License Validation Flow
+License Validation Flow
 ```javascript
 // Client-side: activate license
 async function activateLicense(key) {
@@ -113,11 +113,11 @@ async function activateLicense(key) {
 }
 ```
 
-## [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Processor Integration
+[Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Processor Integration
 
-### [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Integration
+[Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Integration
 
-#### Setup
+Setup
 ```javascript
 // Create [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) checkout session (server-side)
 const [stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) = require('[stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)')(process.env.STRIPE_SECRET_KEY);
@@ -138,7 +138,7 @@ async function createCheckoutSession(priceId, customerEmail, successUrl, cancelU
 }
 ```
 
-#### Client-Side Redirect
+Client-Side Redirect
 ```javascript
 async function purchaseSubscription(priceId) {
   const response = await fetch('/api/create-checkout-session', {
@@ -151,15 +151,15 @@ async function purchaseSubscription(priceId) {
 }
 ```
 
-### Lemon Squeezy (Recommended for Extensions)
+Lemon Squeezy (Recommended for Extensions)
 
-#### Why Lemon Squeezy?
+Why Lemon Squeezy?
 - Designed for digital products and software
 - Handles global tax (VAT, GST) automatically
 - Simple API and webhooks
 - License key generation included
 
-#### Integration
+Integration
 ```javascript
 // Server-side: create order
 const ls = require('@lemonsqueezy/lemonsqueezy.js')('your-api-key');
@@ -186,9 +186,9 @@ async function createCheckout(variantId, userEmail) {
 }
 ```
 
-### Gumroad Integration
+Gumroad Integration
 
-#### Simple Overlay [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)
+Simple Overlay [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)
 ```javascript
 // Add Gumroad overlay to your extension
 function showGumroadOverlay(productId) {
@@ -211,9 +211,9 @@ function showGumroadOverlay(productId) {
 }
 ```
 
-## License Key Validation
+License Key Validation
 
-### Server-Side Validation
+Server-Side Validation
 ```javascript
 // Express.js server example
 app.post('/api/validate-license', async (req, res) => {
@@ -244,7 +244,7 @@ app.post('/api/validate-license', async (req, res) => {
 });
 ```
 
-### Client-Side Validation with Caching
+Client-Side Validation with Caching
 ```javascript
 const LICENSE_CACHE_DURATION = 60 * 60 * 1000; // 1 hour
 
@@ -272,9 +272,9 @@ async function getValidLicense() {
 }
 ```
 
-## Free Trial Implementation
+Free Trial Implementation
 
-### Trial Configuration
+Trial Configuration
 ```javascript
 const TRIAL_CONFIG = {
   duration: 14, // days
@@ -308,7 +308,7 @@ async function isTrialActive(user) {
 }
 ```
 
-### Trial-to-Paid Conversion
+Trial-to-Paid Conversion
 ```javascript
 async function checkAndApplyTrialPricing(user) {
   if (await isTrialActive(user)) {
@@ -323,9 +323,9 @@ async function checkAndApplyTrialPricing(user) {
 }
 ```
 
-## Feature Gating Patterns
+Feature Gating Patterns
 
-### Manifest Permission Gating
+Manifest Permission Gating
 ```javascript
 // Conditionally request permissions after purchase
 async function unlockPremiumFeatures() {
@@ -341,7 +341,7 @@ async function unlockPremiumFeatures() {
 }
 ```
 
-### Runtime Feature Checking
+Runtime Feature Checking
 ```javascript
 class FeatureGate {
   constructor() {
@@ -380,9 +380,9 @@ class FeatureGate {
 }
 ```
 
-## Usage-Based Pricing
+Usage-Based Pricing
 
-### Tracking Usage
+Tracking Usage
 ```javascript
 class UsageTracker {
   constructor() {
@@ -421,9 +421,9 @@ class UsageTracker {
 }
 ```
 
-## Sponsorships and Donations
+Sponsorships and Donations
 
-### Implementation
+Implementation
 ```javascript
 // Add "Support Us" link in extension popup
 function renderSupportOption() {
@@ -438,15 +438,15 @@ function renderSupportOption() {
 }
 ```
 
-### Platforms
+Platforms
 - Ko-fi: Simple donations, monthly memberships
 - Patreon: Recurring support with tiered rewards
 - GitHub Sponsors: For open-source extensions
 - Open Collective: Transparent funding
 
-## Affiliate Marketing in Extensions
+Affiliate Marketing in Extensions
 
-### Adding Affiliate Links
+Adding Affiliate Links
 ```javascript
 const AFFILIATE_PRODUCTS = [
   { id: 'tool-a', name: 'Product A', affiliateLink: 'https://partner.producta.com/ref=user123' },
@@ -462,14 +462,14 @@ async function getRecommendedProducts() {
 }
 ```
 
-### Disclosure Requirements
+Disclosure Requirements
 - Clearly disclose affiliate relationships
 - Follow FTC guidelines on endorsements
 - Don't let affiliates degrade user experience
 
-## White-Labeling for Enterprise
+White-Labeling for Enterprise
 
-### Implementation
+Implementation
 ```javascript
 const WHITE_LABEL_CONFIG = {
   branding: {
@@ -497,16 +497,16 @@ async function applyWhiteLabel(companyId) {
 }
 ```
 
-## Pricing Psychology
+Pricing Psychology
 
-### Strategies
+Strategies
 - Charm pricing: $9.99 instead of $10
 - Anchor pricing: Show $49 crossed out, display $19
 - Tiered pricing: 3 options with middle tier highlighted
 - Annual discount: 20% off for yearly billing
 - Loss leaders: Low-priced tier to acquire customers
 
-### Example Pricing Page
+Example Pricing Page
 ```javascript
 const PRICING_DATA = [
   {
@@ -535,9 +535,9 @@ const PRICING_DATA = [
 ];
 ```
 
-## [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Webhook Handling
+[Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Webhook Handling
 
-### Server-Side Webhook Handler
+Server-Side Webhook Handler
 ```javascript
 // Express.js webhook endpoint
 app.post('/webhooks/[payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)', express.raw({ type: 'application/json' }), async (req, res) => {
@@ -580,9 +580,9 @@ async function handleCheckoutComplete(session) {
 }
 ```
 
-## Revenue Tracking and Analytics
+Revenue Tracking and Analytics
 
-### Key Metrics
+Key Metrics
 - Monthly Recurring Revenue (MRR)
 - Annual Recurring Revenue (ARR)
 - Customer Lifetime Value (LTV)
@@ -590,7 +590,7 @@ async function handleCheckoutComplete(session) {
 - Conversion rate (free to paid)
 - Average Revenue Per User (ARPU)
 
-### Implementation
+Implementation
 ```javascript
 class RevenueAnalytics {
   constructor() {
@@ -630,9 +630,9 @@ class RevenueAnalytics {
 }
 ```
 
-## Code Example: Complete [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Flow
+Code Example: Complete [Payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) Flow
 
-### Extension Popup Implementation
+Extension Popup Implementation
 ```javascript
 // popup.js
 class ExtensionPaymentFlow {
@@ -714,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Reference Resources
+Reference Resources
 
 - [Chrome Web Store [Payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration)](https://developer.chrome.com/docs/webstore/money) - Official documentation on deprecated [payments](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) API and alternatives
 - [Chrome Web Store Monetization](https://developer.chrome.com/docs/webstore/monetization) - Overview of monetization options
@@ -723,7 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
 - [Gumroad Documentation](https://gumroad.com/overlay) - Simple [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) overlays
 - [FTC Endorsement Guidelines](https://www.ftc.gov/endorsement) - Affiliate disclosure requirements
 
-## Related Articles
+Related Articles
 
 - [How to Monetize Your Chrome Extension. Complete Guide](../guides/monetization-overview.md). Comprehensive overview of every monetization model with case studies
 - [SaaS Pricing Strategies](../monetization/saas-pricing.md). Pricing psychology, [subscription](https://bestchromeextensions.com/extension-monetization-playbook/monetization/freemium-model) tiers, and trial periods that convert
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 For end-to-end implementation guides on [Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) integration, license key systems, and paywall UI patterns, see the [Extension Monetization Playbook](https://github.com/theluckystrike/extension-monetization-playbook).
 
-## Conclusion
+Conclusion
 - Choose a monetization model that matches your extension's value delivery
 - Always provide a free tier or trial to demonstrate value
 - Use established [payment](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration) processors ([Stripe](https://bestchromeextensions.com/extension-monetization-playbook/monetization/stripe-integration), Lemon Squeezy)

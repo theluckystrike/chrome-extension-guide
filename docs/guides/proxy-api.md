@@ -1,12 +1,12 @@
-# Chrome Proxy API Guide
+Chrome Proxy API Guide
 
-## Overview
+Overview
 
 The Chrome Proxy API (`chrome.proxy`) controls Chrome's proxy settings, routing all browser traffic through specified servers. Requires `"proxy"` permission in manifest.json.
 
 - Reference: [developer.chrome.com/docs/extensions/reference/api/proxy](https://developer.chrome.com/docs/extensions/reference/api/proxy)
 
-## Proxy Modes
+Proxy Modes
 
 | Mode | Description |
 |------|-------------|
@@ -16,9 +16,9 @@ The Chrome Proxy API (`chrome.proxy`) controls Chrome's proxy settings, routing 
 | `"fixed_servers"` | Specified proxy server(s) |
 | `"system"` | System proxy settings |
 
-## chrome.proxy.settings
+chrome.proxy.settings
 
-### Setting a Fixed Proxy
+Setting a Fixed Proxy
 
 ```javascript
 chrome.proxy.settings.set({
@@ -33,7 +33,7 @@ chrome.proxy.settings.set({
 });
 ```
 
-### Getting Settings
+Getting Settings
 
 ```javascript
 chrome.proxy.settings.get({ incognito: false }, (config) => {
@@ -42,13 +42,13 @@ chrome.proxy.settings.get({ incognito: false }, (config) => {
 });
 ```
 
-### Clearing Settings
+Clearing Settings
 
 ```javascript
 chrome.proxy.settings.clear({ scope: "regular" });
 ```
 
-## ProxyConfig Types
+ProxyConfig Types
 
 ```typescript
 type ProxyConfig = 
@@ -70,7 +70,7 @@ type ProxyServer = {
 };
 ```
 
-## PAC Script Configuration
+PAC Script Configuration
 
 PAC scripts use `FindProxyForURL(url, host)` for dynamic routing:
 
@@ -92,7 +92,7 @@ chrome.proxy.settings.set({
 });
 ```
 
-## Proxy Rules and Bypass Lists
+Proxy Rules and Bypass Lists
 
 ```javascript
 rules: {
@@ -103,7 +103,7 @@ rules: {
 
 Patterns: exact host, `*.domain.com` (wildcard), CIDR, `<-loopback>` (all loopback).
 
-## SOCKS Proxy Setup
+SOCKS Proxy Setup
 
 ```javascript
 // SOCKS5
@@ -128,7 +128,7 @@ chrome.proxy.settings.set({
 });
 ```
 
-## Per-URL Routing
+Per-URL Routing
 
 ```javascript
 const pacScript = `
@@ -141,7 +141,7 @@ const pacScript = `
 `;
 ```
 
-## onProxyError Handling
+onProxyError Handling
 
 ```javascript
 chrome.proxy.onProxyError.addListener((details) => {
@@ -159,7 +159,7 @@ chrome.proxy.onProxyError.addListener((details) => {
 });
 ```
 
-## Building a Proxy Switcher
+Building a Proxy Switcher
 
 ```javascript
 // background.js
@@ -194,7 +194,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-## Important Considerations
+Important Considerations
 
 Check level of control:
 ```javascript
@@ -213,7 +213,7 @@ Security:
 3. Be transparent about traffic routing
 4. PAC errors are silent. test thoroughly
 
-## Related
+Related
 
 - [Chrome Proxy API](https://developer.chrome.com/docs/extensions/reference/api/proxy)
 - [PAC File Format](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file)

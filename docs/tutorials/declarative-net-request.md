@@ -5,7 +5,7 @@ description: "Master declarativeNetRequest API in Chrome Extensions Manifest V3.
 canonical_url: "https://bestchromeextensions.com/tutorials/declarative-net-request/"
 ---
 
-# declarativeNetRequest: Content Blocking in MV3
+declarativeNetRequest: Content Blocking in MV3
 
 > Learn how to block, redirect, and modify network requests in Manifest V3 using the Declarative Net Request API. the MV3 replacement for webRequestBlocking.
 

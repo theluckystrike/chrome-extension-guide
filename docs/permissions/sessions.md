@@ -8,7 +8,7 @@ order: 37
 canonical_url: "https://bestchromeextensions.com/permissions/sessions/"
 ---
 
-# sessions Permission
+sessions Permission
 
 Overview {#overview}
 - Permission string: `"sessions"`

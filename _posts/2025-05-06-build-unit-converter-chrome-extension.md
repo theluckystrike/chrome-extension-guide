@@ -9,7 +9,7 @@ keywords: "chrome extension unit converter, convert units chrome, measurement co
 canonical_url: "https://bestchromeextensions.com/2025/05/06/build-unit-converter-chrome-extension/"
 ---
 
-# Build a Unit Converter Chrome Extension: Convert Measurements on Any Page
+Build a Unit Converter Chrome Extension: Convert Measurements on Any Page
 
 Have you ever found yourself on a website displaying measurements in units you're unfamiliar with? Perhaps you're reading a recipe that uses metric measurements while your kitchen tools are in imperial units, or browsing an international real estate listing where square meters need to be converted to square feet. These scenarios are incredibly common, and they represent a perfect use case for a custom Chrome extension. we'll walk you through building a fully functional unit converter Chrome extension that works smoothly on any webpage, allowing users to convert measurements instantly without leaving their current tab.
 

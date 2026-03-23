@@ -4,7 +4,7 @@ title: "Chrome Extension Security Hardening. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/security-hardening/"
 ---
-# Chrome Extension Security Hardening
+Chrome Extension Security Hardening
 
 An advanced, actionable guide to hardening Chrome extensions against real-world attack vectors. This goes beyond the basics covered in `security-best-practices.md` with concrete implementations you can drop into your codebase.
 

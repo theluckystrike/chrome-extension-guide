@@ -8,7 +8,7 @@ order: 35
 canonical_url: "https://bestchromeextensions.com/permissions/scripting/"
 ---
 
-# scripting Permission Reference
+scripting Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to the `chrome.scripting` API (MV3 replacement for `chrome.tabs.executeScript`)

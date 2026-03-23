@@ -9,7 +9,7 @@ keywords: "chrome extension new tab, new tab override chrome extension, custom n
 canonical_url: "https://bestchromeextensions.com/2025/03/17/chrome-extension-new-tab-override-page/"
 ---
 
-# Chrome Extension New Tab Override: Build a Custom New Tab Page
+Chrome Extension New Tab Override: Build a Custom New Tab Page
 
 Have you ever wanted to replace Chrome's default new tab page with something entirely your own? Whether you want to display a personalized dashboard, your favorite bookmarks, a productivity widget, or simply a beautiful wallpaper with quick links, the Chrome Extensions API makes this possible through the new tab override feature. This comprehensive guide will walk you through everything you need to know to build a powerful custom new tab page extension that will transform the way you start your browsing sessions.
 

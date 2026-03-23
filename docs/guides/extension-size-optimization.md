@@ -4,7 +4,7 @@ title: "Chrome Extension Size Optimization. Developer Guide"
 description: "Learn Chrome extension size optimization with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/extension-size-optimization/"
 ---
-# Extension Size Optimization
+Extension Size Optimization
 
 Learn how to reduce your Chrome extension's bundle size for faster installs, better performance, and smoother Chrome Web Store reviews.
 

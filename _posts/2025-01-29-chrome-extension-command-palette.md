@@ -9,7 +9,7 @@ keywords: "command palette extension, command bar chrome, spotlight search exten
 canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-command-palette/"
 ---
 
-# Build a Command Palette Chrome Extension: Complete 2025 Guide
+Build a Command Palette Chrome Extension: Complete 2025 Guide
 
 Command palette extensions have revolutionized how users interact with web applications and browsers. Inspired by macOS Spotlight and similar tools, these interfaces provide a quick, keyboard-driven way to access features, search content, and navigate applications. we will walk you through building a fully functional command palette Chrome extension that you can customize and extend for your own projects.
 

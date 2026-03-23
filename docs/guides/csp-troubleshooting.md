@@ -5,7 +5,7 @@ description: "Resolve Content Security Policy (CSP) errors in Chrome extensions 
 canonical_url: "https://bestchromeextensions.com/guides/csp-troubleshooting/"
 ---
 
-# Chrome Extension Content Security Policy Errors. Troubleshooting Guide
+Chrome Extension Content Security Policy Errors. Troubleshooting Guide
 
 Content Security Policy (CSP) errors are among the most frustrating issues you'll encounter when developing Chrome extensions. These errors occur when your extension attempts to execute code or load resources that violate Chrome's security policies. This guide covers the most common CSP violations and proven solutions.
 

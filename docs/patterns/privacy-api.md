@@ -5,7 +5,7 @@ description: "Use the Privacy API to respect user privacy settings."
 canonical_url: "https://bestchromeextensions.com/patterns/privacy-api/"
 ---
 
-# Chrome Extension Privacy API Patterns
+Chrome Extension Privacy API Patterns
 
 Overview {#overview}
 

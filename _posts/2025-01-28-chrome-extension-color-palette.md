@@ -9,7 +9,7 @@ keywords: "color palette extension, color scheme chrome, palette generator, chro
 canonical_url: "https://bestchromeextensions.com/2025/01/28/chrome-extension-color-palette/"
 ---
 
-# Build a Color Palette Generator Chrome Extension: Complete Guide
+Build a Color Palette Generator Chrome Extension: Complete Guide
 
 Color is one of the most powerful tools in a designer's arsenal. Whether you're a web developer, UI/UX designer, or digital artist, having quick access to beautiful color palettes can dramatically improve your workflow. I'll walk you through building a fully functional Color Palette Generator Chrome Extension from scratch.
 

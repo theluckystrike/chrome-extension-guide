@@ -5,7 +5,7 @@ description: "Advanced patterns for side panel development."
 canonical_url: "https://bestchromeextensions.com/patterns/side-panel-patterns/"
 ---
 
-# Advanced Side Panel Patterns
+Advanced Side Panel Patterns
 
 This guide covers advanced patterns for building Chrome Extension side panels using the Side Panel API (Manifest V3).
 

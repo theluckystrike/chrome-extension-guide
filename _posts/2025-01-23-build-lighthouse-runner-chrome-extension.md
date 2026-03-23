@@ -9,7 +9,7 @@ keywords: "lighthouse extension, performance audit chrome, web performance exten
 canonical_url: "https://bestchromeextensions.com/2025/01/23/build-lighthouse-runner-chrome-extension/"
 ---
 
-# Build a Lighthouse Runner Chrome Extension: Complete 2025 Tutorial
+Build a Lighthouse Runner Chrome Extension: Complete 2025 Tutorial
 
 Web performance has become a critical factor in user experience, search engine rankings, and conversion rates. As developers and site owners strive to deliver lightning-fast experiences, having the right tools at your fingertips is essential. Google's Lighthouse has emerged as the gold standard for performance auditing, but running audits typically requires opening DevTools or using command-line tools. What if you could bring powerful performance auditing directly into your browser workflow?
 

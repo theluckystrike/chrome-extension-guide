@@ -9,7 +9,7 @@ keywords: "chrome extension page speed, build performance extension, lighthouse 
 canonical_url: "https://bestchromeextensions.com/2025/04/16/build-page-speed-chrome-extension/"
 ---
 
-# Build a Page Speed Analyzer Chrome Extension: Lighthouse Metrics at a Glance
+Build a Page Speed Analyzer Chrome Extension: Lighthouse Metrics at a Glance
 
 In today's fast-paced digital landscape, website performance has become a critical factor for user experience and search engine rankings. Users expect pages to load instantly, and search engines like Google factor page speed into their ranking algorithms. For developers and website owners, having a convenient way to measure and monitor page speed metrics is invaluable. This comprehensive guide will walk you through building a powerful page speed analyzer Chrome extension that brings Lighthouse metrics directly to your browser.
 

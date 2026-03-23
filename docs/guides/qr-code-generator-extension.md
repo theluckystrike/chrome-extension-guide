@@ -1,8 +1,8 @@
-# Building a QR Code Generator Chrome Extension
+Building a QR Code Generator Chrome Extension
 
 A QR code generator extension is an excellent project to learn Chrome extension development because it touches on many core concepts: user interfaces, background processing, storage, permissions, and cross-context communication. This guide walks through building a production-ready QR code generator with TypeScript, covering architecture, implementation, and deployment.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -16,9 +16,9 @@ A QR code generator extension is an excellent project to learn Chrome extension 
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Recommended Directory Structure
+Recommended Directory Structure
 
 ```
 qr-code-generator/
@@ -46,7 +46,7 @@ qr-code-generator/
      ...
 ```
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 ```json
 {
@@ -86,7 +86,7 @@ qr-code-generator/
 }
 ```
 
-### Build Configuration (tsconfig.json)
+Build Configuration (tsconfig.json)
 
 ```json
 {

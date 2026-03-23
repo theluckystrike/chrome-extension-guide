@@ -9,7 +9,7 @@ keywords: "chrome extension json viewer, build json formatter extension, json pr
 canonical_url: "https://bestchromeextensions.com/2025/04/06/build-json-viewer-chrome-extension/"
 ---
 
-# Build a JSON Viewer Chrome Extension: Pretty Print API Responses
+Build a JSON Viewer Chrome Extension: Pretty Print API Responses
 
 Working with JSON data is an everyday task for web developers. Whether you are debugging API responses, inspecting database outputs, or analyzing configuration files, raw JSON can be difficult to read and navigate. This is where a JSON viewer Chrome extension becomes invaluable. In this comprehensive tutorial, I will walk you through building a fully functional JSON viewer extension from scratch using Manifest V3.
 

@@ -5,7 +5,7 @@ description: "A comprehensive guide to using the chrome.readingList API in Chrom
 canonical_url: "https://bestchromeextensions.com/tutorials/reading-list-api-guide/"
 ---
 
-# Chrome Reading List API for Extensions
+Chrome Reading List API for Extensions
 
 Overview {#overview}
 

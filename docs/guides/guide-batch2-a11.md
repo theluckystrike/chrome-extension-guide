@@ -1,10 +1,10 @@
-# Reading Mode Implementation in Chrome Extensions
+Reading Mode Implementation in Chrome Extensions
 
-## Introduction
+Introduction
 
 Reading mode is a popular feature that transforms cluttered web pages into clean, distraction-free reading experiences. This guide covers building a Chrome extension that extracts article content, applies clean formatting, and provides customizable reading experiences.
 
-## How Reading Mode Works
+How Reading Mode Works
 
 Reading mode extensions typically:
 1. Detect when a user activates the feature (button, keyboard shortcut)
@@ -13,7 +13,7 @@ Reading mode extensions typically:
 4. Render a clean, readable version
 5. Save user preferences (theme, font size, line height)
 
-## Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -38,7 +38,7 @@ Reading mode extensions typically:
 }
 ```
 
-## Content Extraction Patterns
+Content Extraction Patterns
 
 The core challenge is extracting the main article content while filtering out noise. Here's a solid extraction strategy:
 
@@ -174,7 +174,7 @@ class ArticleExtractor {
 }
 ```
 
-## Reading Mode UI Controller
+Reading Mode UI Controller
 
 The content script manages the reading mode overlay:
 
@@ -412,7 +412,7 @@ class ReadingModeController {
 }
 ```
 
-## Background Script Integration
+Background Script Integration
 
 Handle keyboard shortcuts and manage state:
 
@@ -437,7 +437,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
 1. Lazy load content: Only extract content when user activates reading mode
 2. Cache extractions: Store extracted content in sessionStorage to avoid re-parsing
@@ -457,6 +457,6 @@ function debounce<T extends (...args: unknown[]) => Promise<void>>(
 }
 ```
 
-## Conclusion
+Conclusion
 
 Building a reading mode extension requires careful content extraction, thoughtful UI design, and attention to user preferences. The patterns shown here provide a solid foundation for creating a polished reading experience that works across different websites and respects user customization choices.

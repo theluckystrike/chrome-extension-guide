@@ -9,7 +9,7 @@ keywords: "chrome extension speed dial, speed dial new tab chrome, build speed d
 canonical_url: "https://bestchromeextensions.com/2025/04/21/build-speed-dial-chrome-extension/"
 ---
 
-# Build a Speed Dial Chrome Extension: Quick Access to Your Favorite Sites
+Build a Speed Dial Chrome Extension: Quick Access to Your Favorite Sites
 
 Speed dial extensions are among the most popular and useful Chrome extensions available. They replace the default new tab page with a visually appealing grid of your favorite websites, allowing you to access frequently visited sites with a single click. we will walk you through the complete process of building your own speed dial Chrome extension from scratch.
 

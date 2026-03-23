@@ -5,7 +5,7 @@ description: "Implement structured logging with different levels for development
 canonical_url: "https://bestchromeextensions.com/patterns/extension-logging-levels/"
 ---
 
-# Extension Logging Levels
+Extension Logging Levels
 
 A comprehensive pattern for implementing structured, context-aware logging in Chrome extensions with runtime-controllable log levels.
 

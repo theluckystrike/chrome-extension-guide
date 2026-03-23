@@ -5,7 +5,7 @@ description: "A comprehensive comparison of Manifest V2 vs V3 for Chrome extensi
 canonical_url: "https://bestchromeextensions.com/guides/mv2-vs-mv3/"
 ---
 
-# Manifest V2 vs V3. Complete Comparison for Chrome Extension Developers
+Manifest V2 vs V3. Complete Comparison for Chrome Extension Developers
 
 Introduction
 

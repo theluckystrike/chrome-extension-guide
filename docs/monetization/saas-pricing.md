@@ -1,10 +1,10 @@
-# SaaS Pricing Strategies for Chrome Extensions
+SaaS Pricing Strategies for Chrome Extensions
 
 Comprehensive guide to pricing your Chrome extension for maximum revenue and user acquisition. Learn how to balance user growth with profitability using proven SaaS pricing models.
 
 ---
 
-## Table of Contents
+Table of Contents
 
 1. [Understanding the Pricing Landscape](#understanding-the-pricing-landscape)
 2. [Freemium vs Premium: Finding Your Balance](#freemium-vs-premium-finding-your-balance)

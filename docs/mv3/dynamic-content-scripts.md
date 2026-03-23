@@ -5,7 +5,7 @@ description: "Register and manage content scripts dynamically at runtime with ch
 canonical_url: "https://bestchromeextensions.com/mv3/dynamic-content-scripts/"
 ---
 
-# Dynamic Content Scripts in MV3
+Dynamic Content Scripts in MV3
 
 Overview {#overview}
 MV3 introduces `chrome.scripting.registerContentScripts` for runtime content script registration. Scripts persist across service worker restarts.

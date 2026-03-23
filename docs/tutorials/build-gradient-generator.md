@@ -4,7 +4,7 @@ title: "Chrome Extension Gradient Generator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-gradient-generator/"
 ---
-# Build a CSS Gradient Generator Extension
+Build a CSS Gradient Generator Extension
 
 What You'll Build {#what-youll-build}
 - Visual gradient builder with live preview | Multiple color stops | Linear/radial/conic types

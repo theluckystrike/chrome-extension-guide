@@ -1,8 +1,8 @@
-# Chrome Extension Manifest V3 Reference
+Chrome Extension Manifest V3 Reference
 
 Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 
-## Required Fields {#required-fields}
+Required Fields {#required-fields}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -10,7 +10,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 | `name` | string | Extension name (max 45 chars) |
 | `version` | string | Version string (e.g., "1.0.0") |
 
-## Recommended Fields {#recommended-fields}
+Recommended Fields {#recommended-fields}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -18,7 +18,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 | `icons` | object | Extension icons (16, 48, 128px) |
 | `action` | object | Browser action configuration |
 
-## Background Section {#background-section}
+Background Section {#background-section}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -32,7 +32,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 }
 ```
 
-## Content Scripts {#content-scripts}
+Content Scripts {#content-scripts}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -51,7 +51,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 }]
 ```
 
-## Permissions {#permissions}
+Permissions {#permissions}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -65,7 +65,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 "optional_permissions": ["notifications"]
 ```
 
-## UI Components {#ui-components}
+UI Components {#ui-components}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -91,7 +91,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 }
 ```
 
-## Web Accessible Resources {#web-accessible-resources}
+Web Accessible Resources {#web-accessible-resources}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -104,7 +104,7 @@ Complete reference for all manifest.json fields in Chrome Extension Manifest V3.
 }]
 ```
 
-## Content Security Policy {#content-security-policy}
+Content Security Policy {#content-security-policy}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -118,7 +118,7 @@ In MV3, `content_security_policy` is an object, not a string. The default enforc
 }
 ```
 
-## Other Extensions Features {#other-extensions-features}
+Other Extensions Features {#other-extensions-features}
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -143,7 +143,7 @@ In MV3, `content_security_policy` is an object, not a string. The default enforc
 }
 ```
 
-## Minimal Manifest Example {#minimal-manifest-example}
+Minimal Manifest Example {#minimal-manifest-example}
 
 ```json
 {
@@ -153,7 +153,7 @@ In MV3, `content_security_policy` is an object, not a string. The default enforc
 }
 ```
 
-## Full-Featured Manifest Example {#full-featured-manifest-example}
+Full-Featured Manifest Example {#full-featured-manifest-example}
 
 ```json
 {
@@ -216,7 +216,7 @@ In MV3, `content_security_policy` is an object, not a string. The default enforc
 }
 ```
 
-## See Also {#see-also}
+See Also {#see-also}
 
 - [Manifest V3 Documentation](https://developer.chrome.com/docs/extensions/mv3/intro/)
 - [Chrome Extensions GitHub Repository](https://github.com/GoogleChrome/chrome-extensions-samples)

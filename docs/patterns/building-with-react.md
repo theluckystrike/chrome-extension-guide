@@ -5,7 +5,7 @@ description: "Build Chrome extensions with React."
 canonical_url: "https://bestchromeextensions.com/patterns/building-with-react/"
 ---
 
-# Building Chrome Extensions with React
+Building Chrome Extensions with React
 
 Overview {#overview}
 

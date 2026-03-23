@@ -5,7 +5,7 @@ description: "Learn how to build Chrome extensions with TypeScript in 2026. This
 permalink: /guides/chrome-extension-development-typescript-tutorial/
 ---
 
-# Chrome Extension Development Tutorial with TypeScript: Complete Guide for 2026
+Chrome Extension Development Tutorial with TypeScript: Complete Guide for 2026
 
 Chrome extension development has evolved significantly with the adoption of Manifest V3 and modern JavaScript tooling. TypeScript has become the standard for building robust, maintainable extensions that can scale with complex features. This comprehensive tutorial walks you through building production-ready Chrome extensions using TypeScript, covering everything from project setup to advanced patterns used in real-world extensions like Tab Suspender Pro.
 
@@ -13,7 +13,7 @@ Table of Contents
 
 - [Why TypeScript for Chrome Extensions](#why-typescript-for-chrome-extensions)
 - [Project Setup and Build Configuration](#project-setup-and-build-configuration)
-- [Manifest V3 Configuration Deep Dive](#manifest-v3-configuration-deep detailed look)
+- [Manifest V3 Configuration detailed look](#manifest-v3-configuration-deep detailed look)
 - [Type-Safe Content Scripts](#type-safe-content-scripts)
 - [Background Service Worker Implementation](#background-service-worker-implementation)
 - [Popup Page Design Patterns](#popup-page-design-patterns)
@@ -108,7 +108,7 @@ export default defineConfig({
 
 This configuration builds each entry point separately while maintaining proper chunking for shared code. The alias configuration makes imports cleaner and more maintainable as your codebase grows.
 
-Manifest V3 Configuration Deep Dive {#manifest-v3-configuration-deep detailed look}
+Manifest V3 Configuration detailed look {#manifest-v3-configuration-deep detailed look}
 
 The manifest.json file serves as the blueprint for your extension, and understanding its configuration options is essential for building compliant extensions. Let's examine each critical section with TypeScript-friendly examples.
 

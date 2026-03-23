@@ -5,7 +5,7 @@ description: "Handle extension updates and notify users."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-update-handling/"
 ---
 
-# Extension Update Handling
+Extension Update Handling
 
 Graceful handling of extension updates is critical for maintaining user data integrity and a smooth experience. This pattern covers the complete update lifecycle.
 

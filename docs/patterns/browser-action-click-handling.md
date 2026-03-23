@@ -5,7 +5,7 @@ description: "Handle browser action (toolbar button) clicks with popup, badge, a
 canonical_url: "https://bestchromeextensions.com/patterns/browser-action-click-handling/"
 ---
 
-# Browser Action Click Handling
+Browser Action Click Handling
 
 The browser action (toolbar icon) is a primary interaction point for extensions. Understanding click handling patterns is essential for building intuitive user experiences.
 

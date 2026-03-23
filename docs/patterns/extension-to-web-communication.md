@@ -5,7 +5,7 @@ description: "Communicate from extensions to web pages."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-to-web-communication/"
 ---
 
-# Extension-to-Web Communication
+Extension-to-Web Communication
 
 This pattern describes how Chrome extensions communicate with websites they are not injected into. Unlike content scripts which run in the context of web pages, extension-to-web communication allows external websites to interact with your extension's backend.
 

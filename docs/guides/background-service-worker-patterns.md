@@ -5,7 +5,7 @@ description: "Master Chrome extension service worker patterns for MV3. Learn abo
 canonical_url: "https://bestchromeextensions.com/guides/background-service-worker-patterns/"
 ---
 
-# Chrome Extension Background Service Worker Patterns. Alarms, Keep-Alive, and State Persistence
+Chrome Extension Background Service Worker Patterns. Alarms, Keep-Alive, and State Persistence
 
 Introduction {#introduction}
 
@@ -82,7 +82,7 @@ async function handlePeriodicSync() {
 
 Advanced Alarm Patterns
 
-#### Dynamic Alarm Scheduling
+Dynamic Alarm Scheduling
 
 For extensions that need flexible scheduling based on user activity or external factors:
 
@@ -122,7 +122,7 @@ class AlarmScheduler {
 const scheduler = new AlarmScheduler();
 ```
 
-#### Alarm with Payload Data
+Alarm with Payload Data
 
 Since alarms don't carry payload data, store the data in storage and retrieve it when the alarm fires:
 

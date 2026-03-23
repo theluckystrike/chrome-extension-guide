@@ -4,7 +4,7 @@ title: "Chrome Extension Password Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-password-manager/"
 ---
-# Build a Password Manager Extension
+Build a Password Manager Extension
 
 Overview {#overview}
 Build a Chrome extension that saves credentials, auto-fills login forms, and generates passwords. all with client-side encryption.

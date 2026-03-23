@@ -4,7 +4,7 @@ title: "Chrome Extension Debugger API. Developer Guide"
 description: "Learn how to use the Chrome Extension Debugger API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/debugger-api/"
 ---
-# Chrome Extension Debugger API
+Chrome Extension Debugger API
 
 Introduction {#introduction}
 
@@ -197,7 +197,7 @@ CDP commands return results in this format:
 
 Common CDP Commands {#common-cdp-commands}
 
-#### Runtime Domain
+Runtime Domain
 
 ```javascript
 // Evaluate JavaScript in page context
@@ -219,7 +219,7 @@ chrome.debugger.sendCommand(debuggee, "Runtime.callFunctionOn", {
 });
 ```
 
-#### DOM Domain
+DOM Domain
 
 ```javascript
 // Get document root node
@@ -239,7 +239,7 @@ chrome.debugger.sendCommand(debuggee, "DOM.getAttributes", {
 });
 ```
 
-#### Page Domain
+Page Domain
 
 ```javascript
 // Navigate to URL

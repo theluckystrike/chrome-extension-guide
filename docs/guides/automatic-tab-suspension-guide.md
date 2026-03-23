@@ -5,7 +5,7 @@ description: "Master automatic tab suspension in Chrome. Configure freeze timers
 permalink: /guides/automatic-tab-suspension-guide/
 ---
 
-# Automatic Tab Suspension in Chrome: Complete Setup Guide
+Automatic Tab Suspension in Chrome: Complete Setup Guide
 
 Automatic tab suspension is the most effective technique for reducing Chrome's memory and CPU consumption without changing your browsing habits. Rather than requiring you to manually close or consolidate tabs, automatic suspension monitors your activity and transparently freezes tabs you are not using, restoring them instantly when you return.
 

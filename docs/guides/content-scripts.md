@@ -1,9 +1,9 @@
-# Content Scripts Guide
+Content Scripts Guide
 
-## Overview
+Overview
 Content scripts are JavaScript files that run in the context of web pages. They can read and modify the DOM, respond to user actions, and communicate with the extension's background service worker. Understanding content script mechanics is essential for building effective page modifier extensions.
 
-## Content Script Declaration in manifest.json
+Content Script Declaration in manifest.json
 
 Content scripts are declared in the manifest under the `content_scripts` key:
 
@@ -20,11 +20,11 @@ Content scripts are declared in the manifest under the `content_scripts` key:
 }
 ```
 
-## Match Patterns
+Match Patterns
 
 Match patterns control which pages your content script injects into. They follow the format `<scheme>://<host><path>`.
 
-### Basic Patterns
+Basic Patterns
 ```json
 {
   "matches": [
@@ -36,7 +36,7 @@ Match patterns control which pages your content script injects into. They follow
 }
 ```
 
-### Scheme Patterns
+Scheme Patterns
 ```json
 {
   "matches": [
@@ -47,7 +47,7 @@ Match patterns control which pages your content script injects into. They follow
 }
 ```
 
-### Host Wildcards
+Host Wildcards
 ```json
 {
   "matches": [
@@ -57,7 +57,7 @@ Match patterns control which pages your content script injects into. They follow
 }
 ```
 
-### Path Wildcards
+Path Wildcards
 ```json
 {
   "matches": [
@@ -69,7 +69,7 @@ Match patterns control which pages your content script injects into. They follow
 }
 ```
 
-## Glob Patterns
+Glob Patterns
 
 For more complex matching, use `include_globs` and `exclude_globs`:
 
@@ -92,7 +92,7 @@ Glob patterns support:
 - `?` - Matches single character
 - `[]` - Character classes
 
-## Run At Timing
+Run At Timing
 
 Control when your script executes using `run_at`:
 
@@ -108,7 +108,7 @@ Control when your script executes using `run_at`:
 }
 ```
 
-### Timing Options
+Timing Options
 - `document_start` - Executes before any DOM is constructed. Use for CSS injection.
 - `document_end` - Executes after DOM is complete but before resources load.
 - `document_idle` - Executes after `DOMContentLoaded`. Recommended for most cases.
@@ -122,11 +122,11 @@ if (document.readyState === 'loading') {
 }
 ```
 
-## Isolated World vs Main World
+Isolated World vs Main World
 
 Content scripts run in an "isolated world" - separate from the page's JavaScript.
 
-### Isolated World
+Isolated World
 ```typescript
 // content.ts - Runs in isolated world
 const EXTENSION_VAR = "I'm isolated from page";
@@ -138,7 +138,7 @@ The isolated world means:
 - Page scripts can't modify content script code
 - Page and content scripts share the DOM but not JavaScript globals
 
-### Injecting into Main World
+Injecting into Main World
 
 To access page variables or avoid conflicts, inject into main world:
 
@@ -155,9 +155,9 @@ await chrome.scripting.executeScript({
 });
 ```
 
-## CSS Injection in Content Scripts
+CSS Injection in Content Scripts
 
-### Static CSS in Manifest
+Static CSS in Manifest
 ```json
 {
   "content_scripts": [
@@ -169,7 +169,7 @@ await chrome.scripting.executeScript({
 }
 ```
 
-### Dynamic CSS Injection
+Dynamic CSS Injection
 ```typescript
 // content.ts
 const style = document.createElement('style');
@@ -185,7 +185,7 @@ document.head.appendChild(style);
 window.addEventListener('unload', () => style.remove());
 ```
 
-## Dynamic Content Script Registration
+Dynamic Content Script Registration
 
 Register content scripts programmatically with `chrome.scripting`:
 
@@ -205,7 +205,7 @@ chrome.scripting.registerContentScripts([
 chrome.scripting.unregisterContentScripts(["dynamic-script"]);
 ```
 
-## Programmatic Injection with executeScript
+Programmatic Injection with executeScript
 
 Inject scripts on-demand from background or popup:
 
@@ -233,7 +233,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-## Shadow DOM for UI Isolation
+Shadow DOM for UI Isolation
 
 Use Shadow DOM to prevent page styles from affecting your UI:
 
@@ -265,7 +265,7 @@ shadow.innerHTML = `
 // Page styles won't affect shadow DOM contents
 ```
 
-## MutationObserver for Dynamic Pages
+MutationObserver for Dynamic Pages
 
 Monitor DOM changes for SPAs and dynamic content:
 
@@ -296,9 +296,9 @@ observer.observe(document.body, {
 window.addEventListener('unload', () => observer.disconnect());
 ```
 
-## Communication with Service Worker
+Communication with Service Worker
 
-### Sending Messages from Content Script
+Sending Messages from Content Script
 
 ```typescript
 // content.ts - Send to background
@@ -310,7 +310,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-### Two-Way Communication
+Two-Way Communication
 
 ```typescript
 // content.ts
@@ -331,7 +331,7 @@ function sendMessage(message: object): Promise<unknown> {
 }
 ```
 
-### Long-Lived Connections
+Long-Lived Connections
 
 ```typescript
 // content.ts
@@ -344,7 +344,7 @@ port.onMessage.addListener((msg) => {
 port.postMessage({ type: 'INIT', tab: location.href });
 ```
 
-## Accessing Extension Resources
+Accessing Extension Resources
 
 Use `chrome.runtime.getURL` to reference extension files:
 
@@ -359,7 +359,7 @@ img.src = iconUrl;
 document.body.appendChild(img);
 ```
 
-## Web Accessible Resources
+Web Accessible Resources
 
 Declare accessible resources in manifest:
 
@@ -379,16 +379,16 @@ Then access them:
 const resourceUrl = chrome.runtime.getURL('images/logo.png');
 ```
 
-## Content Script Lifecycle
+Content Script Lifecycle
 
-### When Content Scripts Run
+When Content Scripts Run
 1. User navigates to matching URL
 2. Chrome injects content script based on `run_at`
 3. Script executes in isolated world
 4. Script can access DOM
 5. On navigation, script may reload if matches new URL
 
-### Cleanup Best Practices
+Cleanup Best Practices
 
 ```typescript
 // content.ts - Clean up on page unload
@@ -419,9 +419,9 @@ new MutationObserver(() => {
 }).observe(document.body, { subtree: true });
 ```
 
-## Performance Impact Minimization
+Performance Impact Minimization
 
-### Techniques
+Techniques
 
 1. Use `run_at: document_idle` - Don't block page load
 2. Lazy load features - Only inject when needed
@@ -447,9 +447,9 @@ const observer = new MutationObserver(
 6. Use `contains` instead of deep selectors when possible
 7. Cache DOM queries - Store references, don't query repeatedly
 
-## Avoiding Conflicts with Page JavaScript
+Avoiding Conflicts with Page JavaScript
 
-### Namespace Everything
+Namespace Everything
 
 ```typescript
 // content.ts - Wrap in IIFE with unique prefix
@@ -468,7 +468,7 @@ const observer = new MutationObserver(
 })();
 ```
 
-### Avoid Global Variables
+Avoid Global Variables
 
 ```typescript
 // Bad
@@ -481,7 +481,7 @@ const ExtensionNamespace = {
 };
 ```
 
-### Use Shadow DOM for UI Components
+Use Shadow DOM for UI Components
 
 ```typescript
 // Isolate your UI from page CSS
@@ -490,16 +490,16 @@ const shadow = host.attachShadow({ mode: 'closed' });
 shadow.innerHTML = '<button>Click me</button>';
 ```
 
-## Cross-Origin Restrictions
+Cross-Origin Restrictions
 
 Content scripts are subject to cross-origin policies:
 
-### What Works
+What Works
 - Reading/modifying the page DOM
 - Using `fetch` to extension URLs
 - Messaging with extension contexts
 
-### What Doesn't Work
+What Doesn't Work
 - Making cross-origin requests to arbitrary sites (use background)
 - Reading cookies/storage of other origins
 - Accessing `localStorage` of other domains
@@ -513,11 +513,11 @@ chrome.runtime.sendMessage({
 });
 ```
 
-## Building a Page Modifier Extension
+Building a Page Modifier Extension
 
 Here's a complete example:
 
-### manifest.json
+manifest.json
 ```json
 {
   "manifest_version": 3,
@@ -536,7 +536,7 @@ Here's a complete example:
 }
 ```
 
-### content.ts
+content.ts
 ```typescript
 interface HighlightConfig {
   color: string;
@@ -607,7 +607,7 @@ highlighter.init();
 window.addEventListener('unload', () => highlighter.destroy());
 ```
 
-### popup.ts (for user control)
+popup.ts (for user control)
 ```typescript
 document.getElementById('toggle')?.addEventListener('click', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -618,7 +618,7 @@ document.getElementById('toggle')?.addEventListener('click', async () => {
 });
 ```
 
-## Reference
+Reference
 - [Content Scripts Documentation](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts)
 - [Chrome Scripting API](https://developer.chrome.com/docs/extensions/reference/scripting)
 - [Match Patterns](https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns)

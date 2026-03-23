@@ -5,7 +5,7 @@ description: "Testing strategies for Manifest V3 Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/mv3/testing-mv3-extensions/"
 ---
 
-# Testing MV3 Extensions
+Testing MV3 Extensions
 
 Unit Testing Service Workers {#unit-testing-service-workers}
 Service workers have no DOM. test business logic separately.

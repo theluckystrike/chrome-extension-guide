@@ -8,7 +8,7 @@ tags: [landing-page, extension-marketing, conversion-optimization, extension-web
 author: theluckystrike
 ---
 
-# Chrome Extension Landing Page. Convert Visitors to Installs
+Chrome Extension Landing Page. Convert Visitors to Installs
 
 Your Chrome extension is ready. You have published it to the Chrome Web Store, optimized your listing, and waited for users to arrive. Yet the install counts remain modest. The problem is not your extension. it is how you are presenting it. The Chrome Web Store provides a basic listing page, but it gives you limited control over presentation, storytelling, and conversion optimization. A dedicated landing page changes everything.
 

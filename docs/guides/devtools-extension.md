@@ -4,7 +4,7 @@ title: "Chrome Extension DevTools Panel. How to Build Custom Developer Tools"
 description: "Learn how to build custom Chrome DevTools panels with the chrome.devtools API. Create panels, inspect elements, extend the network panel, and add custom sidebars."
 canonical_url: "https://bestchromeextensions.com/guides/devtools-extension/"
 ---
-# Chrome Extension DevTools Panel. How to Build Custom Developer Tools
+Chrome Extension DevTools Panel. How to Build Custom Developer Tools
 
 Introduction {#introduction}
 Chrome DevTools is the most powerful browser development environment, and Chrome extensions can extend it in powerful ways. The `chrome.devtools` API enables you to create custom panels that integrate directly into DevTools, add sidebars to existing panels like Elements and Network, and build specialized debugging tools tailored to your workflow or your users' needs.

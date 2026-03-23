@@ -5,7 +5,7 @@ description: "A comprehensive guide to mastering content scripts in Chrome exten
 canonical_url: "https://bestchromeextensions.com/tutorials/content-scripts-guide/"
 ---
 
-# Mastering Content Scripts in Chrome Extensions
+Mastering Content Scripts in Chrome Extensions
 
 Content scripts are the bridge between your Chrome extension and web pages. They run in the context of web pages, allowing you to read and modify the DOM, respond to user interactions, and inject custom styles. This guide covers everything you need to become proficient with content scripts in Chrome extensions.
 

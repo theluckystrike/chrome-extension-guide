@@ -1,12 +1,12 @@
-# Building a Session Manager Chrome Extension
+Building a Session Manager Chrome Extension
 
-## Introduction
+Introduction
 
 A Session Manager extension allows users to save, organize, and restore browser sessions, collections of tabs and windows that can be named, tagged, and quickly restored. This guide covers building a complete MV3 session manager with TypeScript, covering architecture, implementation, UI design, storage, testing, and publishing.
 
-## Architecture Overview
+Architecture Overview
 
-### Extension Components
+Extension Components
 
 ```
 session-manager-extension/
@@ -41,7 +41,7 @@ session-manager-extension/
          messages.json
 ```
 
-## Manifest Configuration (MV3)
+Manifest Configuration (MV3)
 
 ```json
 {
@@ -102,7 +102,7 @@ session-manager-extension/
 }
 ```
 
-## Core TypeScript Types
+Core TypeScript Types
 
 ```typescript
 // src/shared/types.ts
@@ -156,7 +156,7 @@ export interface ExtensionSettings {
 }
 ```
 
-## Storage Implementation
+Storage Implementation
 
 ```typescript
 // src/shared/storage.ts
@@ -186,7 +186,7 @@ export const storage = createStorage({
 export type Storage = typeof storage;
 ```
 
-## Session Service (Background)
+Session Service (Background)
 
 ```typescript
 // src/background/sessions.ts
@@ -356,7 +356,7 @@ export class SessionService {
 }
 ```
 
-## Background Service Worker
+Background Service Worker
 
 ```typescript
 // src/background/index.ts
@@ -420,7 +420,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 setupAutoSave();
 ```
 
-## Message Handling
+Message Handling
 
 ```typescript
 // src/shared/messaging.ts
@@ -472,7 +472,7 @@ export function createMessageHandler() {
 }
 ```
 
-## Popup UI Component
+Popup UI Component
 
 ```typescript
 // src/popup/PopupApp.tsx
@@ -579,7 +579,7 @@ function formatDate(timestamp: number): string {
 }
 ```
 
-## Side Panel UI
+Side Panel UI
 
 ```typescript
 // src/sidebar/SidebarApp.tsx
@@ -664,7 +664,7 @@ export function SidebarApp() {
 }
 ```
 
-## Error Handling
+Error Handling
 
 ```typescript
 // src/utils/errors.ts
@@ -729,9 +729,9 @@ export function handleStorageError(error: unknown): void {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests (Vitest)
+Unit Tests (Vitest)
 
 ```typescript
 // tests/unit/sessions.test.ts
@@ -768,7 +768,7 @@ describe('SessionService', () => {
 });
 ```
 
-### Integration Tests (Playwright)
+Integration Tests (Playwright)
 
 ```typescript
 // tests/integration/popup.test.ts
@@ -790,9 +790,9 @@ test('popup saves session', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### 1. Lazy Loading
+1. Lazy Loading
 
 ```typescript
 // Only load heavy data when needed
@@ -802,7 +802,7 @@ async function loadSessionDetails(sessionId: string): Promise<SavedSession> {
 }
 ```
 
-### 2. Tab Batch Processing
+2. Tab Batch Processing
 
 ```typescript
 // Restore tabs in batches to avoid UI freeze
@@ -821,7 +821,7 @@ async function restoreTabsBatched(urls: string[], windowId: number): Promise<voi
 }
 ```
 
-### 3. Debounced Storage
+3. Debounced Storage
 
 ```typescript
 // Debounce rapid saves
@@ -832,15 +832,15 @@ const debouncedSave = debounce(async (sessions: SavedSession[]) => {
 }, 500);
 ```
 
-### 4. Memory Management
+4. Memory Management
 
 - Clear large session data when not in use
 - Use `chrome.tabs.query()` with specific filters instead of querying all tabs
 - Implement pagination for large session lists
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 
 - [ ] Test extension in fresh Chrome profile
 - [ ] Verify all keyboard shortcuts work
@@ -850,14 +850,14 @@ const debouncedSave = debounce(async (sessions: SavedSession[]) => {
 - [ ] Test in Incognito mode
 - [ ] Check for console errors
 
-### Manifest Review
+Manifest Review
 
 - [ ] Manifest V3 required for new extensions
 - [ ] Permissions are minimal and justified
 - [ ] Host permissions use specific patterns, not `<all_urls>`
 - [ ] Service worker has proper error handling
 
-### Store Listing
+Store Listing
 
 - [ ] Compelling icon and screenshots (at least one)
 - [ ] Clear, concise description
@@ -865,14 +865,14 @@ const debouncedSave = debounce(async (sessions: SavedSession[]) => {
 - [ ] Privacy policy if accessing web history or storing user data
 - [ ] Support URL (can be GitHub Issues link)
 
-### Post-submission
+Post-submission
 
 - [ ] Monitor review status
 - [ ] Address reviewer feedback promptly
 - [ ] Test published version after approval
 - [ ] Set up update notifications
 
-## Related Resources
+Related Resources
 
 - [Chrome Sessions API](https://developer.chrome.com/docs/extensions/reference/api/sessions)
 - [Chrome Storage API](https://developer.chrome.com/docs/extensions/reference/api/storage)

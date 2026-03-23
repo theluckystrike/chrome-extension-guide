@@ -5,7 +5,7 @@ description: "Migrate from persistent background pages to event pages (service w
 canonical_url: "https://bestchromeextensions.com/patterns/event-page-migration/"
 ---
 
-# Event Page to Service Worker Migration Patterns
+Event Page to Service Worker Migration Patterns
 
 This document outlines patterns for migrating Chrome extensions from Manifest V2 event pages to Manifest V3 service workers.
 

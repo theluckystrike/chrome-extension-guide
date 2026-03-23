@@ -1,10 +1,10 @@
-# Web Accessible Resources
+Web Accessible Resources
 
-## Overview
+Overview
 
 Web Accessible Resources allow extension resources to be accessible from web pages and content scripts. This is essential for injecting UI components, loading extension assets in web pages, and enabling fingerprinting protection through dynamic URLs.
 
-## Declaring web_accessible_resources in Manifest
+Declaring web_accessible_resources in Manifest
 
 In Manifest V3, declare resources in `manifest.json`:
 ---
@@ -14,7 +14,7 @@ description: "A comprehensive developer guide for building Chrome extensions wit
 canonical_url: "https://bestchromeextensions.com/guides/web-accessible-resources/"
 ---
 
-# Chrome Extension Web Accessible Resources. How to Share Files with Web Pages
+Chrome Extension Web Accessible Resources. How to Share Files with Web Pages
 
 Web Accessible Resources (WAR) is a critical manifest configuration in Chrome Extensions that determines which extension files can be loaded by web pages. This mechanism bridges the gap between your extension's bundled resources and the broader web ecosystem, enabling powerful use cases while maintaining security boundaries.
 

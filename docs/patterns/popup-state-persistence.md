@@ -5,7 +5,7 @@ description: "Persist popup UI state across sessions."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-state-persistence/"
 ---
 
-# Popup State Persistence
+Popup State Persistence
 
 Overview {#overview}
 

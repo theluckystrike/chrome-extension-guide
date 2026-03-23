@@ -4,7 +4,7 @@ title: "Chrome Extension Backup & Restore. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-backup-restore/"
 ---
-# Extension Backup and Restore Patterns
+Extension Backup and Restore Patterns
 
 Overview {#overview}
 Guide to implementing solid backup and restore functionality for Chrome extension user data. Covers export formats, import strategies, encryption, and migration patterns.
@@ -215,7 +215,7 @@ async function autoBackupToSync(key: string, data: unknown): Promise<void> {
 ```
 
 See Also {#see-also}
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Downloads API](../api-reference/downloads-api.md)
 - [Storage Migration Patterns](./storage-migration.md)
 

@@ -5,7 +5,7 @@ description: "Implement side panels in Manifest V3 with the chrome.sidePanel API
 canonical_url: "https://bestchromeextensions.com/mv3/side-panel/"
 ---
 
-# Side Panel API in Chrome Extensions
+Side Panel API in Chrome Extensions
 
 Introduction {#introduction}
 - Side Panel: persistent UI panel that opens alongside the page (right side of browser)

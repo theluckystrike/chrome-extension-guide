@@ -5,7 +5,7 @@ description: "Master Tab Suspender Pro keyboard shortcuts for Chrome. Learn defa
 permalink: /guides/tab-suspender-pro-keyboard-shortcuts-power-user/
 ---
 
-# Tab Suspender Pro Keyboard Shortcuts: Complete Power User Guide
+Tab Suspender Pro Keyboard Shortcuts: Complete Power User Guide
 
 Keyboard shortcuts transform how you interact with Tab Suspender Pro, enabling lightning-fast tab management without ever leaving your keyboard. Whether you're a developer juggling dozens of project tabs, a researcher organizing research materials, or a power user seeking to maximize browser efficiency, mastering these shortcuts will fundamentally change your Chrome experience. This comprehensive guide covers every aspect of keyboard-driven tab suspension, from default bindings to advanced power user workflows that will make you a true Chrome productivity ninja.
 

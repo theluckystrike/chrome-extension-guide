@@ -5,7 +5,7 @@ description: "Use MutationObserver for DOM changes."
 canonical_url: "https://bestchromeextensions.com/patterns/dom-observer-patterns/"
 ---
 
-# DOM Observer Patterns for Content Scripts
+DOM Observer Patterns for Content Scripts
 
 This guide covers patterns for observing DOM changes in Chrome extension content scripts using MutationObserver, IntersectionObserver, and ResizeObserver.
 

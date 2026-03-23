@@ -8,7 +8,7 @@ order: 3
 canonical_url: "https://bestchromeextensions.com/permissions/bookmarks/"
 ---
 
-# bookmarks Permission. Chrome Extension Reference
+bookmarks Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"bookmarks"`
@@ -34,7 +34,7 @@ Key APIs {#key-apis}
 
 Reading Bookmarks {#reading-bookmarks}
 
-#### chrome.bookmarks.getTree()
+chrome.bookmarks.getTree()
 ```javascript
 chrome.bookmarks.getTree((tree) => {
   // tree[0] is the root node
@@ -44,17 +44,17 @@ chrome.bookmarks.getTree((tree) => {
 ```
 - Returns the full bookmark tree as nested `BookmarkTreeNode` objects
 
-#### chrome.bookmarks.get(idOrIds)
+chrome.bookmarks.get(idOrIds)
 ```javascript
 chrome.bookmarks.get("123", (results) => {
   console.log(results[0].title, results[0].url);
 });
 ```
 
-#### chrome.bookmarks.getChildren(id)
+chrome.bookmarks.getChildren(id)
 - Get direct children of a folder
 
-#### chrome.bookmarks.search(query)
+chrome.bookmarks.search(query)
 ```javascript
 chrome.bookmarks.search({ query: "github" }, (results) => {
   results.forEach(b => console.log(b.title, b.url));
@@ -65,7 +65,7 @@ chrome.bookmarks.search({ query: "github" }, (results) => {
 
 Creating Bookmarks {#creating-bookmarks}
 
-#### chrome.bookmarks.create(bookmark)
+chrome.bookmarks.create(bookmark)
 ```javascript
 chrome.bookmarks.create({
   parentId: "1",  // "1" = Bookmarks Bar
@@ -78,29 +78,29 @@ chrome.bookmarks.create({
 
 Modifying Bookmarks {#modifying-bookmarks}
 
-#### chrome.bookmarks.update(id, changes)
+chrome.bookmarks.update(id, changes)
 ```javascript
 chrome.bookmarks.update("123", { title: "New Title", url: "https://new-url.com" });
 ```
 
-#### chrome.bookmarks.move(id, destination)
+chrome.bookmarks.move(id, destination)
 ```javascript
 chrome.bookmarks.move("123", { parentId: "2", index: 0 });
 ```
 
-#### chrome.bookmarks.remove(id) / removeTree(id)
+chrome.bookmarks.remove(id) / removeTree(id)
 - `remove`. delete a single bookmark
 - `removeTree`. delete a folder and all its contents
 
 Events {#events}
 
-#### chrome.bookmarks.onCreated
-#### chrome.bookmarks.onRemoved
-#### chrome.bookmarks.onChanged
-#### chrome.bookmarks.onMoved
-#### chrome.bookmarks.onChildrenReordered
-#### chrome.bookmarks.onImportBegan
-#### chrome.bookmarks.onImportEnded
+chrome.bookmarks.onCreated
+chrome.bookmarks.onRemoved
+chrome.bookmarks.onChanged
+chrome.bookmarks.onMoved
+chrome.bookmarks.onChildrenReordered
+chrome.bookmarks.onImportBegan
+chrome.bookmarks.onImportEnded
 ```javascript
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
   console.log(`New bookmark: ${bookmark.title} at ${bookmark.url}`);

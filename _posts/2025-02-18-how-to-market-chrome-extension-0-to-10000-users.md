@@ -8,7 +8,7 @@ tags: [extension-marketing, chrome-extension-growth, product-hunt, user-acquisit
 author: theluckystrike
 ---
 
-# How to Market Your Chrome Extension. From 0 to 10,000 Users
+How to Market Your Chrome Extension. From 0 to 10,000 Users
 
 Launching a Chrome extension is only half the battle. Getting it into the hands of thousands of users requires a strategic marketing approach that combines multiple channels, timing, and persistence. This guide walks you through the complete marketing playbook that has helped extensions grow from zero to 10,000 users, and beyond.
 

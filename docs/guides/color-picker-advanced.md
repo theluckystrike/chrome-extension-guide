@@ -1,12 +1,12 @@
-# Building an Advanced Color Picker Chrome Extension
+Building an Advanced Color Picker Chrome Extension
 
-## Overview
+Overview
 
 This guide covers building a sophisticated color picker Chrome extension with eye dropper functionality, color history, palette generation, and clipboard integration using TypeScript.
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Project Structure
+Project Structure
 ```
 color-picker-advanced/
  manifest.json
@@ -18,7 +18,7 @@ color-picker-advanced/
  assets/icons/
 ```
 
-### Manifest Configuration
+Manifest Configuration
 ```json
 {
   "manifest_version": 3,
@@ -35,9 +35,9 @@ color-picker-advanced/
 }
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Type Definitions
+Type Definitions
 ```ts
 // src/shared/types.ts
 export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv' | 'cmyk';
@@ -60,7 +60,7 @@ export interface PickerSettings {
 }
 ```
 
-### Color Conversion Utilities
+Color Conversion Utilities
 ```ts
 // src/shared/color-utils.ts
 import { Color, ColorFormat } from './types';
@@ -108,9 +108,9 @@ export function formatColor(color: Color, format: ColorFormat): string {
 }
 ```
 
-## UI Design
+UI Design
 
-### Popup HTML
+Popup HTML
 ```html
 <!-- src/popup/popup.html -->
 <!DOCTYPE html>
@@ -145,7 +145,7 @@ export function formatColor(color: Color, format: ColorFormat): string {
 </html>
 ```
 
-### Content Script Eye Dropper
+Content Script Eye Dropper
 ```ts
 // src/content-script/eye-dropper.ts
 interface EyeDropperResult { sRGBHex: string; }
@@ -172,7 +172,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-## State Management
+State Management
 ```ts
 // src/shared/storage.ts
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -195,7 +195,7 @@ export async function addToHistory(item: ColorHistoryItem): Promise<void> {
 }
 ```
 
-## Background Service Worker
+Background Service Worker
 ```ts
 // src/background/service-worker.ts
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -223,7 +223,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-## Error Handling
+Error Handling
 ```ts
 export class ColorError extends Error {
   constructor(message: string, public code: string) { super(message); this.name = 'ColorError'; }
@@ -248,7 +248,7 @@ export function normalizeHex(hex: string): string {
 }
 ```
 
-## Testing Approach
+Testing Approach
 ```ts
 // tests/color-utils.test.ts
 import { describe, it, expect } from 'vitest';
@@ -263,7 +263,7 @@ describe('Color conversions', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 ```ts
 // Debounce for smooth UI
 function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T {
@@ -283,7 +283,7 @@ export function createColorMemoized(hex: string): Color {
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
 1. Manifest: Validate with Chrome Manifest Validator
 2. Icons: 16, 32, 48, 128px PNG with transparency
@@ -292,8 +292,8 @@ export function createColorMemoized(hex: string): Color {
 5. Privacy Policy: Local storage only, no data collection, no external requests
 6. Store Listing: Title, description, screenshots, categories, analytics
 
-### Sample Privacy Section
+Sample Privacy Section
 ```markdown
-## Privacy Policy
+Privacy Policy
 This extension stores all data locally. No personal information is collected or transmitted. Color picking only reads pixel data locally. Uninstalling removes all data.
 ```

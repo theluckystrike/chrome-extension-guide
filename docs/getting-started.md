@@ -7,7 +7,7 @@ canonical_url: "https://bestchromeextensions.com/docs/getting-started/"
 date: 2026-03-23
 ---
 
-# Chrome Extension Getting Started
+Chrome Extension Getting Started
 
 Welcome to the Chrome Extension Guide! This comprehensive resource will take you from zero to publishing your first Chrome extension in minutes.
 

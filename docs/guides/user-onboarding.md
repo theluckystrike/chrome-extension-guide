@@ -4,7 +4,7 @@ title: "Chrome Extension User Onboarding. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/user-onboarding/"
 ---
-# User Onboarding Guide
+User Onboarding Guide
 
 A comprehensive guide to designing effective onboarding experiences for Chrome extensions that drive user adoption and retention.
 

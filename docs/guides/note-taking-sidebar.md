@@ -1,10 +1,10 @@
-# Building a Note-Taking Sidebar Chrome Extension
+Building a Note-Taking Sidebar Chrome Extension
 
-## Overview
+Overview
 
 A note-taking sidebar extension provides users with a persistent panel to capture thoughts, annotations, and ideas while browsing the web. This guide covers building a complete MV3 extension using the Side Panel API, Storage API, and modern TypeScript patterns.
 
-## Architecture
+Architecture
 
 The extension follows a clean architecture with clear separation of concerns:
 
@@ -31,7 +31,7 @@ The extension follows a clean architecture with clear separation of concerns:
 
 ```
 
-## Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -63,9 +63,9 @@ The extension follows a clean architecture with clear separation of concerns:
 }
 ```
 
-## TypeScript Implementation
+TypeScript Implementation
 
-### Types Definition
+Types Definition
 
 ```ts
 // types.ts
@@ -91,7 +91,7 @@ export type NoteMessage =
   | { type: 'SEARCH_NOTES'; request: { query: string } };
 ```
 
-### Background Service Worker
+Background Service Worker
 
 ```ts
 // background.ts
@@ -158,7 +158,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-### Side Panel UI
+Side Panel UI
 
 ```html
 <!-- sidepanel.html -->
@@ -297,7 +297,7 @@ body {
 }
 ```
 
-### Side Panel Script
+Side Panel Script
 
 ```ts
 // sidepanel.ts
@@ -428,7 +428,7 @@ window.addEventListener('beforeunload', saveNote);
 loadNotes();
 ```
 
-## Chrome APIs Used
+Chrome APIs Used
 
 | API | Purpose |
 |-----|---------|
@@ -438,9 +438,9 @@ loadNotes();
 | `chrome.action` | Browser action button |
 | `chrome.tabs` | Get current tab info |
 
-## Testing
+Testing
 
-### Manual Testing
+Manual Testing
 
 1. Load unpacked extension in Chrome (`chrome://extensions`)
 2. Enable developer mode
@@ -448,7 +448,7 @@ loadNotes();
 4. Click extension icon to open side panel
 5. Test creating, editing, and deleting notes
 
-### Automated Testing with Playwright
+Automated Testing with Playwright
 
 ```ts
 // tests/sidebar.spec.ts
@@ -486,7 +486,7 @@ test.describe('Note Taking Sidebar', () => {
 });
 ```
 
-## Keyboard Shortcuts
+Keyboard Shortcuts
 
 ```json
 {
@@ -499,7 +499,7 @@ test.describe('Note Taking Sidebar', () => {
 }
 ```
 
-## Best Practices
+Best Practices
 
 1. Auto-save: Implement debounced auto-save to prevent excessive storage writes
 2. Sync: Use `chrome.storage.sync` for cross-device persistence
@@ -508,7 +508,7 @@ test.describe('Note Taking Sidebar', () => {
 5. Security: Sanitize note content before rendering to prevent XSS
 ---
 
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 
 ---

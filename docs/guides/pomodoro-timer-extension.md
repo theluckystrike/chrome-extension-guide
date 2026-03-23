@@ -1,8 +1,8 @@
-# Building a Pomodoro Timer Chrome Extension
+Building a Pomodoro Timer Chrome Extension
 
 The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes), separated by short breaks (5 minutes). Building a Pomodoro timer as a Chrome extension is an excellent project that demonstrates key Chrome extension development concepts including background service workers, popup UI, alarms API, storage, and cross-context communication. This guide walks through building a production-ready Pomodoro timer extension from architecture to publishing.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -17,9 +17,9 @@ The Pomodoro Technique is a time management method that uses a timer to break wo
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Recommended Directory Structure
+Recommended Directory Structure
 
 ```
 pomodoro-timer/
@@ -55,7 +55,7 @@ pomodoro-timer/
          messages.json
 ```
 
-### Manifest Configuration (Manifest V3)
+Manifest Configuration (Manifest V3)
 
 ```json
 {

@@ -8,7 +8,7 @@ order: 17
 canonical_url: "https://bestchromeextensions.com/permissions/downloads/"
 ---
 
-# downloads Permission Reference
+downloads Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to `chrome.downloads` API

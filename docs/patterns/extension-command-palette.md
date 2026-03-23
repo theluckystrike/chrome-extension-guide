@@ -5,7 +5,7 @@ description: "Implement a command palette for quick extension actions and naviga
 canonical_url: "https://bestchromeextensions.com/patterns/extension-command-palette/"
 ---
 
-# Command Palette Pattern for Chrome Extensions
+Command Palette Pattern for Chrome Extensions
 
 A command palette provides a powerful keyboard-driven interface for accessing extension functionality, similar to VS Code's popular Ctrl+Shift+P launcher. This pattern has become essential for power users who want to navigate and control extensions efficiently without reaching for the mouse. By implementing a well-designed command palette, you can significantly improve your extension's usability and user satisfaction.
 

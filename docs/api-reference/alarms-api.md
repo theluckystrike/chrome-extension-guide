@@ -5,7 +5,7 @@ description: "The Chrome Alarms API schedules code to run periodically or at a s
 canonical_url: "https://bestchromeextensions.com/api-reference/alarms-api/"
 ---
 
-# Chrome Alarms API Reference
+Chrome Alarms API Reference
 
 The `chrome.alarms` API lets you schedule code to run periodically or at a specified time. In MV3, alarms are the primary way to perform background work since service workers can be terminated at any time. `setTimeout` and `setInterval` are unreliable.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Built-in AI APIs. Developer Guide"
 description: "Learn how to use the Chrome Extension Chrome Built In Ais API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-built-in-ai-apis/"
 ---
-# Chrome Built-in AI APIs
+Chrome Built-in AI APIs
 
 Introduction {#introduction}
 Chrome ships on-device AI through chrome.ai. These APIs run locally on the user's machine, meaning no data leaves the device. This is a significant improvement for extensions needing AI without external servers.

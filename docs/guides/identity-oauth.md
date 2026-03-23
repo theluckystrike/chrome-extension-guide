@@ -4,7 +4,7 @@ title: "Chrome Extension OAuth & Identity. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/identity-oauth/"
 ---
-# Identity & OAuth Guide
+Identity & OAuth Guide
 
 Overview {#overview}
 - `chrome.identity` API for authentication in extensions

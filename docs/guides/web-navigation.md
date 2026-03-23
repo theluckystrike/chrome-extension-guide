@@ -4,7 +4,7 @@ title: "Chrome Extension Web Navigation. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/web-navigation/"
 ---
-# Web Navigation API Guide
+Web Navigation API Guide
 
 Overview {#overview}
 - Requires `"webNavigation"` permission

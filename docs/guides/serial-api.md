@@ -4,7 +4,7 @@ title: Chrome Serial API Guide
 description: Learn how to use the Chrome Serial API to communicate with serial devices from Chrome extensions.
 ---
 
-# Chrome Serial API Guide
+Chrome Serial API Guide
 
 Overview
 The Chrome Serial API (`chrome.serial`) enables Chrome extensions to communicate with serial devices connected to the user's computer via USB or Bluetooth. This API is particularly useful for building extensions that interact with microcontrollers (Arduino, Raspberry Pi), industrial equipment, or any device using serial communication (RS-232, RS-485).

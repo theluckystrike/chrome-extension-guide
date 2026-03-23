@@ -1,10 +1,10 @@
-# Manifest V3 Migration Guide
+Manifest V3 Migration Guide
 
-## Overview
+Overview
 
 Manifest V3 (MV3) is the latest version of the Chrome Extensions platform, introducing significant changes to improve security, performance, and user privacy. This comprehensive guide covers every aspect of migrating from Manifest V2 (MV2) to MV3, with practical examples and common pitfalls to avoid.
 
-## Timeline and Chrome Web Store Requirements
+Timeline and Chrome Web Store Requirements
 
 Important Dates:
 - June 2024: Warning banners appeared in Chrome Web Store for MV2 extensions
@@ -13,9 +13,9 @@ Important Dates:
 
 All extensions must migrate to Manifest V3 to remain in the Chrome Web Store. The migration involves changes to the manifest file, background scripts, permissions, and various APIs.
 
-## Manifest Field Changes
+Manifest Field Changes
 
-### Basic Manifest Migration
+Basic Manifest Migration
 
 ```json
 // MV2 - manifest.json
@@ -73,7 +73,7 @@ All extensions must migrate to Manifest V3 to remain in the Chrome Web Store. Th
 }
 ```
 
-### Key Manifest Changes
+Key Manifest Changes
 
 | MV2 Field | MV3 Field | Notes |
 |-----------|-----------|-------|
@@ -85,7 +85,7 @@ All extensions must migrate to Manifest V3 to remain in the Chrome Web Store. Th
 | Host patterns in `permissions` | `host_permissions` | Separated in MV3 |
 | `content_security_policy` | `content_security_policy` object | Now uses object format |
 
-### Web Accessible Resources
+Web Accessible Resources
 
 ```json
 // MV2
@@ -103,11 +103,11 @@ All extensions must migrate to Manifest V3 to remain in the Chrome Web Store. Th
 ]
 ```
 
-## Background Pages to Service Workers
+Background Pages to Service Workers
 
 The most significant change in MV3 is replacing persistent background pages with service workers. This affects how you write and structure your extension's background logic.
 
-### Service Worker Basics
+Service Worker Basics
 
 ```javascript
 // MV3 Service Worker (background.js)
@@ -144,7 +144,7 @@ async function init() {
 init();
 ```
 
-### Handling State in Service Workers
+Handling State in Service Workers
 
 ```javascript
 // Service workers are stateless - all data is lost on termination
@@ -188,7 +188,7 @@ async function getConfig() {
 }
 ```
 
-### Replacing setTimeout/setInterval
+Replacing setTimeout/setInterval
 
 ```javascript
 // MV2 - background page
@@ -212,7 +212,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-### Using Offscreen Documents for DOM Operations
+Using Offscreen Documents for DOM Operations
 
 ```javascript
 // Service workers can't access DOM
@@ -247,11 +247,11 @@ async function createOffscreen() {
 </script>
 ```
 
-## chrome.browserAction to chrome.action
+chrome.browserAction to chrome.action
 
 The `browserAction` and `page_action` APIs are unified into a single `action` API in MV3.
 
-### API Changes
+API Changes
 
 ```javascript
 // MV2
@@ -279,7 +279,7 @@ chrome.action.getBadgeText({}, (result) => {
 });
 ```
 
-### Manifest Changes for Actions
+Manifest Changes for Actions
 
 ```json
 {
@@ -296,11 +296,11 @@ chrome.action.getBadgeText({}, (result) => {
 }
 ```
 
-## Blocking webRequest to declarativeNetRequest
+Blocking webRequest to declarativeNetRequest
 
 MV3 removes the ability to block or modify web requests synchronously. You must use the declarativeNetRequest API instead.
 
-### Basic Migration
+Basic Migration
 
 ```javascript
 // MV2 - blocking webRequest
@@ -341,7 +341,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 ]
 ```
 
-### Dynamic Rules
+Dynamic Rules
 
 ```javascript
 // For rules that change at runtime, use dynamic rules
@@ -373,7 +373,7 @@ chrome.declarativeNetRequest.getDynamicRules((rules) => {
 });
 ```
 
-### Header Modification
+Header Modification
 
 ```javascript
 // MV2 - modifying headers
@@ -411,7 +411,7 @@ chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-### Ruleset Limits
+Ruleset Limits
 
 | Rule Type | Limit |
 |-----------|-------|
@@ -419,11 +419,11 @@ chrome.declarativeNetRequest.updateDynamicRules({
 | Dynamic rules | 30,000 rules |
 | Session rules | 10,000 rules |
 
-## Remotely Hosted Code Restrictions
+Remotely Hosted Code Restrictions
 
 MV3 prohibits loading remote code (JavaScript or Wasm) from external sources. All code must be bundled with the extension.
 
-### What Changed
+What Changed
 
 ```javascript
 // MV2 - could load remote scripts
@@ -441,7 +441,7 @@ script.src = '/lib/library.js'; // Bundled with extension
 document.head.appendChild(script);
 ```
 
-### Migration Strategies
+Migration Strategies
 
 ```javascript
 // 1. Bundle dependencies
@@ -473,7 +473,7 @@ import { createStore } from './lib/redux.js';
 import { parseHTML } from './lib/domparser.js';
 ```
 
-### Web Workers
+Web Workers
 
 ```javascript
 // Inline worker (MV3 compatible)
@@ -490,11 +490,11 @@ const worker = new Worker(workerUrl);
 // Or use offscreen document for more complex worker needs
 ```
 
-## Content Security Policy Changes
+Content Security Policy Changes
 
 MV3 imposes stricter Content Security Policy (CSP) rules.
 
-### New CSP Requirements
+New CSP Requirements
 
 ```json
 // MV2
@@ -507,7 +507,7 @@ MV3 imposes stricter Content Security Policy (CSP) rules.
 }
 ```
 
-### Restrictions
+Restrictions
 
 | MV2 | MV3 | Impact |
 |-----|-----|--------|
@@ -516,7 +516,7 @@ MV3 imposes stricter Content Security Policy (CSP) rules.
 | `file://` access | Limited | Use `chrome.runtime.getURL()` |
 | Inline scripts | Limited | Use external files or `chrome.runtime.getURL()` |
 
-### Working Without unsafe-eval
+Working Without unsafe-eval
 
 ```javascript
 // MV2 - using eval (PROHIBITED in MV3)
@@ -532,7 +532,7 @@ const fn = new Function('a', 'b', 'return a + b');
 const fn = (a, b) => a + b;
 ```
 
-### Loading External Resources
+Loading External Resources
 
 ```javascript
 // MV2 - could load external images/styles
@@ -550,11 +550,11 @@ fetch('https://api.example.com/data')
   .then(data => { /* use data */ });
 ```
 
-## Host Permissions Separation
+Host Permissions Separation
 
 MV3 separates host permissions from API permissions, requiring explicit declaration of host access.
 
-### Permission Changes
+Permission Changes
 
 ```json
 // MV2 - all in permissions
@@ -582,7 +582,7 @@ MV3 separates host permissions from API permissions, requiring explicit declarat
 }
 ```
 
-### Permission Types
+Permission Types
 
 ```json
 {
@@ -606,7 +606,7 @@ MV3 separates host permissions from API permissions, requiring explicit declarat
 }
 ```
 
-### Requesting Permissions at Runtime
+Requesting Permissions at Runtime
 
 ```javascript
 // Request optional permissions
@@ -630,11 +630,11 @@ chrome.permissions.contains({
 });
 ```
 
-## Promise-based API Migration
+Promise-based API Migration
 
 MV3 APIs return Promises instead of using callbacks, enabling cleaner async/await code.
 
-### Callback to Promise Pattern
+Callback to Promise Pattern
 
 ```javascript
 // MV2 - callback-based
@@ -652,7 +652,7 @@ chrome.storage.local.get('key', (result) => {
 });
 ```
 
-### Async/Await Migration
+Async/Await Migration
 
 ```javascript
 // MV2 - nested callbacks (callback hell)
@@ -679,7 +679,7 @@ async function getData() {
 }
 ```
 
-### API Promise Support
+API Promise Support
 
 Most extension APIs support promises in MV3:
 - `chrome.storage.*`
@@ -702,11 +702,11 @@ const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 const [window] = await chrome.windows.getCurrent();
 ```
 
-## executeScript API Changes
+executeScript API Changes
 
 The `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` APIs have been replaced with the `chrome.scripting` API.
 
-### Script Injection
+Script Injection
 
 ```javascript
 // MV2 - executeScript
@@ -732,7 +732,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-### CSS Injection
+CSS Injection
 
 ```javascript
 // MV2 - insertCSS
@@ -758,7 +758,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-### Injection Results and Errors
+Injection Results and Errors
 
 ```javascript
 // MV3 - results are returned in results array
@@ -787,16 +787,16 @@ await chrome.scripting.executeScript({
 });
 ```
 
-## Testing Migration Completeness
+Testing Migration Completeness
 
-### Using chrome://extensions
+Using chrome://extensions
 
 1. Enable Developer mode
 2. Load unpacked extension
 3. Check for warnings/errors in the console
 4. Test all features manually
 
-### Automated Testing
+Automated Testing
 
 ```javascript
 // Test service worker wake-up
@@ -821,7 +821,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-### Migration Audit Checklist
+Migration Audit Checklist
 
 - [ ] All background scripts use service worker patterns
 - [ ] No DOM operations in service worker
@@ -838,9 +838,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 - [ ] Extension loads without errors
 - [ ] All features work in MV3
 
-## Common Migration Pitfalls
+Common Migration Pitfalls
 
-### 1. Top-Level Event Listeners
+1. Top-Level Event Listeners
 
 ```javascript
 // WRONG - Service worker terminates before listener registers
@@ -853,7 +853,7 @@ init();
 chrome.runtime.onInstalled.addListener(() => {});
 ```
 
-### 2. Global State Lost on Wake-up
+2. Global State Lost on Wake-up
 
 ```javascript
 // WRONG - Data lost when service worker restarts
@@ -869,7 +869,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-### 3. Forgetting Host Permissions
+3. Forgetting Host Permissions
 
 ```javascript
 // WRONG - Extension can't access sites
@@ -880,7 +880,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 "host_permissions": ["https://example.com/*"]
 ```
 
-### 4. Using Old API Names
+4. Using Old API Names
 
 ```javascript
 // WRONG - These don't exist in MV3
@@ -891,7 +891,7 @@ chrome.pageAction.show(tabId);
 chrome.action.setBadgeText({ text: '5' });
 ```
 
-### 5. Blocking webRequest
+5. Blocking webRequest
 
 ```javascript
 // WRONG - Blocking webRequest removed in MV3
@@ -910,7 +910,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }]
 ```
 
-### 6. Remote Code Loading
+6. Remote Code Loading
 
 ```javascript
 // WRONG - CSP violation
@@ -922,7 +922,7 @@ const script = document.createElement('script');
 script.src = chrome.runtime.getURL('lib/bundled.js');
 ```
 
-### 7. Wrong Storage Key Access
+7. Wrong Storage Key Access
 
 ```javascript
 // WRONG - Treats entire result as value
@@ -934,17 +934,17 @@ const { user } = await chrome.storage.local.get('user');
 console.log(user); // {...}
 ```
 
-## Using webextension-polyfill for Compatibility
+Using webextension-polyfill for Compatibility
 
 The [webextension-polyfill](https://github.com/mozilla/webextension-polyfill) library provides Promise-based APIs that work across both MV2 and MV3, making it easier to maintain compatibility.
 
-### Installation
+Installation
 
 ```bash
 npm install webextension-polyfill
 ```
 
-### Basic Usage
+Basic Usage
 
 ```javascript
 // Import in your background script
@@ -961,7 +961,7 @@ const tabs = await browser.tabs.query({ active: true });
 await browser.runtime.sendMessage({ message: 'hello' });
 ```
 
-### With TypeScript
+With TypeScript
 
 ```typescript
 import browser from 'webextension-polyfill';
@@ -978,14 +978,14 @@ browser.runtime.sendMessage({
 } as MyMessage);
 ```
 
-### Benefits
+Benefits
 
 1. Cross-manifest compatibility: Same code works in MV2 and MV3
 2. Promise-based: Clean async/await syntax
 3. TypeScript support: Full type definitions included
 4. Familiar API: Matches Firefox extension API
 
-## Reference
+Reference
 
 - Official Migration Guide: [developer.chrome.com/docs/extensions/develop/migrate](https://developer.chrome.com/docs/extensions/develop/migrate)
 - Manifest V3 Overview: [developer.chrome.com/docs/extensions/mv3/intro](https://developer.chrome.com/docs/extensions/mv3/intro)
@@ -994,5 +994,5 @@ browser.runtime.sendMessage({
 - Scripting API: [developer.chrome.com/docs/extensions/reference/scripting](https://developer.chrome.com/docs/extensions/reference/scripting)
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

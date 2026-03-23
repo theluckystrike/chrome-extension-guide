@@ -3,7 +3,7 @@ title: Chrome Extension Popup UI. Design Patterns and Best Practices
 description: A comprehensive guide to building high-quality popup UIs for Chrome extensions
 ---
 
-# Chrome Extension Popup UI. Design Patterns and Best Practices
+Chrome Extension Popup UI. Design Patterns and Best Practices
 
 The popup is often the first interaction users have with your Chrome extension. A well-designed popup can significantly improve user engagement, while a poorly designed one can lead to instant abandonment. This guide covers essential patterns and best practices for creating professional, performant, and user-friendly popup interfaces.
 

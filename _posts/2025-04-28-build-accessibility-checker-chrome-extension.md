@@ -9,7 +9,7 @@ keywords: "chrome extension accessibility checker, wcag checker chrome, a11y sca
 canonical_url: "https://bestchromeextensions.com/2025/04/28/build-accessibility-checker-chrome-extension/"
 ---
 
-# Build an Accessibility Checker Chrome Extension: WCAG Compliance Scanner
+Build an Accessibility Checker Chrome Extension: WCAG Compliance Scanner
 
 Web accessibility is not just a legal requirement, it is a moral imperative that ensures digital experiences are inclusive for everyone, regardless of ability. With over 1.3 billion people living with some form of disability worldwide, creating accessible websites has become a critical responsibility for web developers and businesses alike. The Web Content Accessibility Guidelines (WCAG) provide a comprehensive framework for building inclusive digital experiences, but manually auditing websites for accessibility compliance is time-consuming and prone to human error.
 

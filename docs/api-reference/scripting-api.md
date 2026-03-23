@@ -5,7 +5,7 @@ description: "The Chrome Scripting API injects JavaScript and CSS into web pages
 canonical_url: "https://bestchromeextensions.com/api-reference/scripting-api/"
 ---
 
-# Chrome Scripting API Reference
+Chrome Scripting API Reference
 
 The `chrome.scripting` API lets you inject JavaScript and CSS into web pages. It replaces the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` from Manifest V2 with a more powerful, structured interface.
 
@@ -86,7 +86,7 @@ Injects JavaScript into a page. Returns a promise resolving to an array of `Inje
 function executeScript(injection: ScriptInjection): Promise<InjectionResult[]>;
 ```
 
-#### Inject an inline function
+Inject an inline function
 
 ```ts
 const results = await chrome.scripting.executeScript({
@@ -96,7 +96,7 @@ const results = await chrome.scripting.executeScript({
 console.log(results[0].result); // "Example Page"
 ```
 
-#### Inject a function with arguments
+Inject a function with arguments
 
 Arguments are JSON-serialized, so they must be plain values (no DOM elements, functions, or circular references).
 
@@ -110,7 +110,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-#### Inject a file
+Inject a file
 
 ```ts
 await chrome.scripting.executeScript({
@@ -119,7 +119,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-#### Inject into all frames
+Inject into all frames
 
 ```ts
 const results = await chrome.scripting.executeScript({
@@ -129,7 +129,7 @@ const results = await chrome.scripting.executeScript({
 const totalLinks = results.reduce((sum, r) => sum + (r.result || 0), 0);
 ```
 
-#### Inject into the MAIN world
+Inject into the MAIN world
 
 ```ts
 const results = await chrome.scripting.executeScript({
@@ -141,7 +141,7 @@ const results = await chrome.scripting.executeScript({
 });
 ```
 
-#### Inject immediately (before page load)
+Inject immediately (before page load)
 
 ```ts
 await chrome.scripting.executeScript({
@@ -153,7 +153,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-#### Error handling
+Error handling
 
 ```ts
 try {
@@ -191,7 +191,7 @@ interface CSSInjection {
 
 Provide exactly one of `css` or `files`.
 
-#### Inject inline CSS
+Inject inline CSS
 
 ```ts
 await chrome.scripting.insertCSS({
@@ -200,7 +200,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-#### Inject a CSS file
+Inject a CSS file
 
 ```ts
 await chrome.scripting.insertCSS({
@@ -209,7 +209,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-#### Inject as user-origin CSS
+Inject as user-origin CSS
 
 User-origin styles have lower specificity than author styles but can use `!important` to override them effectively.
 
@@ -262,7 +262,7 @@ interface RegisteredContentScript {
 }
 ```
 
-#### Register a content script
+Register a content script
 
 ```ts
 await chrome.scripting.registerContentScripts([
@@ -276,7 +276,7 @@ await chrome.scripting.registerContentScripts([
 ]);
 ```
 
-#### Register multiple scripts at once
+Register multiple scripts at once
 
 ```ts
 await chrome.scripting.registerContentScripts([
@@ -296,7 +296,7 @@ await chrome.scripting.registerContentScripts([
 ]);
 ```
 
-#### Session-only scripts
+Session-only scripts
 
 ```ts
 await chrome.scripting.registerContentScripts([
@@ -309,7 +309,7 @@ await chrome.scripting.registerContentScripts([
 ]);
 ```
 
-#### Error handling
+Error handling
 
 ```ts
 try {

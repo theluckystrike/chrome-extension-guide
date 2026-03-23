@@ -4,7 +4,7 @@ title: "Chrome Extension Design System. Developer Guide"
 description: "Learn Chrome extension design system with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-design-system/"
 ---
-# Design System for Chrome Extensions
+Design System for Chrome Extensions
 
 Overview {#overview}
 Building consistent, professional UI for Chrome extensions requires understanding the unique constraints and patterns of extension surfaces. This guide covers design principles for creating extensions that feel native to Chrome.

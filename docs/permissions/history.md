@@ -8,7 +8,7 @@ order: 21
 canonical_url: "https://bestchromeextensions.com/permissions/history/"
 ---
 
-# history Permission. Chrome Extension Reference
+history Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"history"`
@@ -82,7 +82,7 @@ chrome.history.deleteAll() {#chromehistorydeleteall}
 
 Events {#events}
 
-#### chrome.history.onVisited
+chrome.history.onVisited
 ```javascript
 chrome.history.onVisited.addListener((historyItem) => {
   console.log("Visited:", historyItem.url, historyItem.title);
@@ -91,7 +91,7 @@ chrome.history.onVisited.addListener((historyItem) => {
 - Fires when a URL is visited
 - Works in background service worker
 
-#### chrome.history.onVisitRemoved
+chrome.history.onVisitRemoved
 - Fires when history entries are deleted (by user or extension)
 - `allHistory: true` if all history was cleared
 

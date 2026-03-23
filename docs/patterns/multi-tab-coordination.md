@@ -5,7 +5,7 @@ description: "Coordinate actions across multiple tabs with patterns for tab grou
 canonical_url: "https://bestchromeextensions.com/patterns/multi-tab-coordination/"
 ---
 
-# Multi-Tab Coordination Patterns
+Multi-Tab Coordination Patterns
 
 Overview {#overview}
 

@@ -8,7 +8,7 @@ tags: [tab-manager, chrome-extension-tutorial, tab-groups, chrome-tabs-api, brow
 seo_title: "Build a Tab Manager Chrome Extension | 2025 Tutorial"
 ---
 
-# Building a Tab Manager Chrome Extension. Step-by-Step Tutorial (2025)
+Building a Tab Manager Chrome Extension. Step-by-Step Tutorial (2025)
 
 Tab overload is one of the most common productivity killers in modern web browsing. With the average power user juggling dozens of open tabs, having a well-designed tab manager can make the difference between chaotic multitasking and organized workflow efficiency. In this comprehensive tutorial, we'll walk through building a complete tab manager Chrome extension from scratch using Manifest V3.
 
@@ -60,7 +60,7 @@ For a detailed breakdown of all available permissions, check out our [Chrome Ext
 
 ---
 
-Chrome Tabs API Deep Dive {#chrome-tabs-api}
+Chrome Tabs API detailed look {#chrome-tabs-api}
 
 The `chrome.tabs` API is the foundation of any tab management extension. This powerful API provides methods for creating, querying, updating, and manipulating browser tabs.
 

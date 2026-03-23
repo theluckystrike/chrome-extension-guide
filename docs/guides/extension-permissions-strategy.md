@@ -4,7 +4,7 @@ title: "Chrome Extension Permissions Strategy. Developer Guide"
 description: "Manage Chrome extension permissions with this guide covering manifest declarations, optional permissions, and security best practices."
 canonical_url: "https://bestchromeextensions.com/guides/extension-permissions-strategy/"
 ---
-# Extension Permissions Strategy
+Extension Permissions Strategy
 
 A strategic approach to Chrome extension permissions that balances functionality with user trust and install conversion.
 

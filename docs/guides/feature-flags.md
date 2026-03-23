@@ -4,7 +4,7 @@ title: "Chrome Extension Feature Flags. How to Roll Out Features Safely"
 description: "Learn how to implement feature flags in Chrome extensions for safe, controlled feature rollouts, A/B testing, and emergency kill switches."
 ---
 
-# Chrome Extension Feature Flags. How to Roll Out Features Safely
+Chrome Extension Feature Flags. How to Roll Out Features Safely
 
 Feature flags (also known as feature toggles) are a powerful engineering practice that allows you to enable or disable functionality in your extension without deploying new code. Instead of shipping a new version every time you want to test a feature or respond to a critical bug, you can toggle behavior dynamically. This guide covers everything you need to implement feature flags in your Chrome extension.
 

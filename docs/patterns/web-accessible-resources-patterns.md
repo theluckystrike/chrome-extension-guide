@@ -5,7 +5,7 @@ description: "Advanced patterns for web accessible resources."
 canonical_url: "https://bestchromeextensions.com/patterns/web-accessible-resources-patterns/"
 ---
 
-# Web Accessible Resources Advanced Patterns (MV3)
+Web Accessible Resources Advanced Patterns (MV3)
 
 Overview {#overview}
 

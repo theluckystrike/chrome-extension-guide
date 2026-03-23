@@ -4,7 +4,7 @@ title: "Chrome Extension Tab Search. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-search/"
 ---
-# Build a Tab Search & Switch Extension
+Build a Tab Search & Switch Extension
 
 This tutorial guides you through building a Chrome extension that searches and switches between open tabs, with support for recently closed tabs.
 

@@ -1,14 +1,14 @@
-# Chrome Notifications API
+Chrome Notifications API
 
-## Overview
+Overview
 
 The Chrome Notifications API enables extensions to display system-level notifications that appear outside the browser window, similar to native desktop applications. These notifications can include text, images, action buttons, and progress indicators, making them powerful tools for user engagement and real-time updates.
 
 Reference: [developer.chrome.com/docs/extensions/reference/api/notifications](https://developer.chrome.com/docs/extensions/reference/api/notifications)
 
-## Getting Started
+Getting Started
 
-### Permission Required
+Permission Required
 
 Add the notifications permission to your `manifest.json`:
 
@@ -18,7 +18,7 @@ Add the notifications permission to your `manifest.json`:
 }
 ```
 
-### Basic Syntax
+Basic Syntax
 
 ```javascript
 // Create a simple notification
@@ -38,11 +38,11 @@ chrome.notifications.create(
 );
 ```
 
-## Template Types
+Template Types
 
 The API supports four template types for different notification styles.
 
-### 1. Basic Notification
+1. Basic Notification
 
 The simplest form with an icon, title, and message:
 
@@ -58,7 +58,7 @@ chrome.notifications.create("basic-demo", {
 });
 ```
 
-### 2. Image Notification
+2. Image Notification
 
 Displays a larger preview image below the text (recommended 300x200px):
 
@@ -73,7 +73,7 @@ chrome.notifications.create("image-demo", {
 });
 ```
 
-### 3. List Notification
+3. List Notification
 
 Shows multiple items in a compact list format:
 
@@ -91,7 +91,7 @@ chrome.notifications.create("list-demo", {
 });
 ```
 
-### 4. Progress Notification
+4. Progress Notification
 
 Displays a progress bar for ongoing operations:
 
@@ -106,7 +106,7 @@ chrome.notifications.create("progress-demo", {
 });
 ```
 
-## Action Buttons
+Action Buttons
 
 Add up to two clickable buttons to notifications:
 
@@ -140,9 +140,9 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 });
 ```
 
-## Event Handlers
+Event Handlers
 
-### onClicked - Notification Body Clicked
+onClicked - Notification Body Clicked
 
 Triggered when user clicks the notification body (not buttons):
 
@@ -164,7 +164,7 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-### onButtonClicked - Action Button Clicked
+onButtonClicked - Action Button Clicked
 
 Handle button interactions with the `buttonIndex`:
 
@@ -183,7 +183,7 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 });
 ```
 
-### onClosed - Notification Dismissed
+onClosed - Notification Dismissed
 
 Track when notifications are dismissed:
 
@@ -199,7 +199,7 @@ chrome.notifications.onClosed.addListener((notificationId, byUser) => {
 });
 ```
 
-### onShown - Notification Displayed
+onShown - Notification Displayed
 
  fires after notification is rendered (useful for analytics):
 
@@ -210,7 +210,7 @@ chrome.notifications.onShown.addListener((notificationId) => {
 });
 ```
 
-## Updating Notifications
+Updating Notifications
 
 Modify existing notifications in-place using their ID:
 
@@ -243,7 +243,7 @@ const updateProgress = () => {
 const timer = setInterval(updateProgress, 1000);
 ```
 
-## Building a Notification Center
+Building a Notification Center
 
 Aggregate notifications into a custom notification center UI:
 
@@ -274,7 +274,7 @@ function updateBadgeCount() {
 }
 ```
 
-### Notification Manager Class
+Notification Manager Class
 
 ```javascript
 class NotificationManager {
@@ -356,7 +356,7 @@ class NotificationManager {
 const notifications = new NotificationManager();
 ```
 
-## Platform Differences
+Platform Differences
 
 | Platform | Behavior |
 |----------|----------|
@@ -365,7 +365,7 @@ const notifications = new NotificationManager();
 | Linux | Behavior varies by desktop environment (Unity, GNOME, KDE) |
 | ChromeOS | Native notification panel with full feature support |
 
-### Platform-Specific Considerations
+Platform-Specific Considerations
 
 ```javascript
 // Detect platform for platform-specific behavior
@@ -384,7 +384,7 @@ if (isWindows) {
 }
 ```
 
-## Best Practices
+Best Practices
 
 1. Unique IDs: Always use meaningful, unique notification IDs to enable updating and clearing
 2. Respect Users: Don't spam notifications; provide user controls for frequency
@@ -395,7 +395,7 @@ if (isWindows) {
 7. Require Interaction: Use sparingly and only for truly important notifications
 8. Icon Requirements: Use 128x128 PNG icons; no remote URLs allowed
 
-## Common Issues
+Common Issues
 
 - Remote URLs not allowed: `iconUrl` and `imageUrl` must be local extension files or data URLs
 - Notification limit: OS may limit active notifications; clear old ones promptly
@@ -403,7 +403,7 @@ if (isWindows) {
 - Silent notifications: May be suppressed by OS on low-power mode
 - requireInteraction: Only works with priority 2 on Chrome OS and Windows
 
-## Related APIs
+Related APIs
 
 - [chrome.alarms](/docs/extensions/reference/api/alarms) - Schedule notifications
 - [chrome.action.setBadgeText](/docs/extensions/reference/api/action) - Badge indicators

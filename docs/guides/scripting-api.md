@@ -4,7 +4,7 @@ title: "Chrome Extension Scripting API. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/scripting-api/"
 ---
-# Scripting API Guide
+Scripting API Guide
 
 Overview {#overview}
 Chrome Scripting API Guide

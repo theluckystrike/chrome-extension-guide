@@ -4,7 +4,7 @@ title: "Chrome Extension Font Changer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-font-changer/"
 ---
-# Build a Font Changer Extension
+Build a Font Changer Extension
 
 What You'll Build {#what-youll-build}
 - Change fonts on any webpage dynamically

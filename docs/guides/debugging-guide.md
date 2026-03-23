@@ -5,7 +5,7 @@ description: "Master Chrome extension debugging with this comprehensive guide co
 canonical_url: "https://bestchromeextensions.com/guides/debugging-guide/"
 ---
 
-# Chrome Extension Debugging Guide. DevTools Tips and Tricks
+Chrome Extension Debugging Guide. DevTools Tips and Tricks
 
 Debugging Chrome extensions requires understanding multiple execution contexts and the DevTools features designed for each. This guide provides practical techniques to diagnose and fix extension issues efficiently.
 

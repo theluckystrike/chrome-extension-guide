@@ -9,7 +9,7 @@ keywords: "audio recorder extension, record audio chrome, voice recorder extensi
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-audio-recorder-chrome-extension/"
 ---
 
-# Build an Audio Recorder Chrome Extension
+Build an Audio Recorder Chrome Extension
 
 Audio recording capabilities in web browsers have evolved significantly in recent years. With the MediaRecorder API now widely supported across modern browsers, building an audio recorder extension for Chrome has become an achievable project for developers of all skill levels. Whether you need to capture voice notes, record podcast episodes, document meetings, or create audio tutorials, a custom audio recorder extension gives you complete control over your recording experience without relying on third-party services.
 

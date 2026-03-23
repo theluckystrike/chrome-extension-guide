@@ -1,10 +1,10 @@
-# Building a Web Scraper Chrome Extension
+Building a Web Scraper Chrome Extension
 
-## Overview
+Overview
 
 A web scraper extension allows users to extract data from web pages efficiently. Unlike standalone scrapers, browser extensions benefit from direct page access, authentication state, and user interaction capabilities. This guide covers building a production-ready web scraper extension using Manifest V3.
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
 The extension architecture consists of several components working together:
 
@@ -13,7 +13,7 @@ The extension architecture consists of several components working together:
 - Popup UI: Quick-access interface for starting/scraping operations
 - Side Panel: Full-featured interface for complex scraping tasks
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -53,9 +53,9 @@ The extension architecture consists of several components working together:
 }
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Type Definitions
+Type Definitions
 
 ```ts
 // types.ts
@@ -95,7 +95,7 @@ export interface ScrapingResult {
 }
 ```
 
-### Content Script Implementation
+Content Script Implementation
 
 ```ts
 // content.ts
@@ -196,7 +196,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-### Background Service Worker
+Background Service Worker
 
 ```ts
 // background.ts
@@ -332,9 +332,9 @@ function convertToCSV(scrapes: StoredScrape[]): string {
 }
 ```
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup Interface
+Popup Interface
 
 ```html
 <!-- popup.html -->
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Side Panel Interface
+Side Panel Interface
 
 The side panel provides a more comprehensive interface for managing scraped data:
 
@@ -483,9 +483,9 @@ The side panel provides a more comprehensive interface for managing scraped data
 </html>
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions Explained
+Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -495,7 +495,7 @@ The side panel provides a more comprehensive interface for managing scraped data
 | `storage` | Persist scraped data locally |
 | `<all_urls>` | Access content on any website |
 
-### Optional Advanced APIs
+Optional Advanced APIs
 
 ```ts
 // For scheduled scraping
@@ -508,9 +508,9 @@ import { proxy } from 'chrome-api';
 import { downloads } from 'chrome-api';
 ```
 
-## State Management and Storage
+State Management and Storage
 
-### Using chrome.storage.local
+Using chrome.storage.local
 
 ```ts
 // storage.ts
@@ -543,9 +543,9 @@ export class ScraperStorage {
 }
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Robust Error Handling
+Robust Error Handling
 
 ```ts
 // error-handling.ts
@@ -604,7 +604,7 @@ export function createAbortController(): { abort: () => void; signal: AbortSigna
 }
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
 1. SPA Navigation: Listen for URL changes in SPAs
 2. Iframes: Handle cross-origin iframe restrictions
@@ -612,9 +612,9 @@ export function createAbortController(): { abort: () => void; signal: AbortSigna
 4. Rate Limiting: Implement delays between requests
 5. Session Expiry: Handle authentication timeouts
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing
+Unit Testing
 
 ```ts
 // __tests__/scraper.test.ts
@@ -651,7 +651,7 @@ describe('PageScraper', () => {
 });
 ```
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 
 ```ts
 // __tests__/integration.test.ts
@@ -673,9 +673,9 @@ test('scraper popup functionality', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Tips
+Optimization Tips
 
 1. Limit DOM Access: Cache selector results
 2. Use WeakRef: Avoid memory leaks with large page data
@@ -700,9 +700,9 @@ export function createWeakCache<K extends object, V>():
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-publication Requirements
+Pre-publication Requirements
 
 - [ ] Remove all `console.log` statements
 - [ ] Set appropriate `host_permissions` (avoid `<all_urls>` if possible)
@@ -711,7 +711,7 @@ export function createWeakCache<K extends object, V>():
 - [ ] Test on Chrome, Edge, and Brave
 - [ ] VerifyManifest passes all checks
 
-### Store Listing
+Store Listing
 
 ```json
 {
@@ -725,7 +725,7 @@ export function createWeakCache<K extends object, V>():
 }
 ```
 
-### Version Management
+Version Management
 
 ```json
 {

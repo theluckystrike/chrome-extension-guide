@@ -4,7 +4,7 @@ title: "Chrome Extension RSS Reader. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-rss-reader/"
 ---
-# Build an RSS Reader Chrome Extension
+Build an RSS Reader Chrome Extension
 
 This tutorial walks through building a fully functional RSS feed reader extension with feed management, periodic polling, and unread badges.
 

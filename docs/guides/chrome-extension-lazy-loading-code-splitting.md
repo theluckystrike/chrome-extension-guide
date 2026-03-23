@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-la
 
 ---
 
-# Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup
+Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup
 
 Performance is the currency of Chrome extensions. Users expect instant responses when they click your extension's icon, press a keyboard shortcut, or interact with a content script. Yet many extensions ship with bloated bundles that load everything upfront, causing sluggish startup times that frustrate users and harm your extension's reputation in the Chrome Web Store.
 

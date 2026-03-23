@@ -5,7 +5,7 @@ description: "A comprehensive tutorial for building Chrome extensions with TypeS
 canonical_url: "https://bestchromeextensions.com/tutorials/building-with-typescript/"
 ---
 
-# Building Chrome Extensions with TypeScript
+Building Chrome Extensions with TypeScript
 
 TypeScript has become the standard for building solid Chrome extensions. It provides compile-time type safety for Chrome APIs, enables intelligent autocomplete, and catches errors before runtime. This comprehensive guide covers everything you need to build type-safe Chrome extensions.
 

@@ -5,7 +5,7 @@ description: "Master chrome.storage API with patterns for local, sync, and sessi
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-storage-patterns/"
 ---
 
-# Chrome Storage Patterns for Extensions
+Chrome Storage Patterns for Extensions
 
 Chrome's storage API provides three distinct storage areas, each optimized for different use cases. Understanding when and how to use each type, along with patterns for handling large data and reactive updates, is essential for building solid extensions.
 

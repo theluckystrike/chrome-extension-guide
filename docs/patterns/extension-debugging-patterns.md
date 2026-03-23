@@ -5,7 +5,7 @@ description: "Master debugging techniques for Chrome extensions across all execu
 canonical_url: "https://bestchromeextensions.com/patterns/extension-debugging-patterns/"
 ---
 
-# Extension Debugging Patterns
+Extension Debugging Patterns
 
 This document covers common debugging patterns for Chrome extension development across different contexts.
 

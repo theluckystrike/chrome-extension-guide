@@ -1,10 +1,10 @@
-# Building Privacy-Focused Chrome Extensions
+Building Privacy-Focused Chrome Extensions
 
-## Introduction
+Introduction
 
 Privacy-focused extensions are increasingly in demand as users become more conscious of their digital footprint. Building an extension with privacy at its core requires intentional architectural decisions, not just feature additions. This guide covers the technical implementation of privacy-preserving features while maintaining compliance with Chrome Web Store (CWS) policies and global privacy regulations.
 
-## 1. Privacy by Design Principles
+1. Privacy by Design Principles
 
 Privacy by design means embedding privacy considerations into every layer of your extension's architecture. The seven foundational principles are:
 
@@ -16,7 +16,7 @@ Privacy by design means embedding privacy considerations into every layer of you
 6. Visibility and Transparency: Operate openly with verifiable practices
 7. Respect for User Privacy: Maintain strong privacy defaults with user-centric options
 
-### Implementation Blueprint
+Implementation Blueprint
 
 ```javascript
 // manifest.json - Declare privacy-focused permissions
@@ -33,11 +33,11 @@ Privacy by design means embedding privacy considerations into every layer of you
 }
 ```
 
-## 2. Data Minimization in Extensions
+2. Data Minimization in Extensions
 
 Data minimization means collecting only the information strictly necessary for your extension's functionality. This principle reduces liability, improves user trust, and often improves performance.
 
-### Practical Strategies
+Practical Strategies
 
 - Audit every data point: Before collecting any information, ask: "Does this serve a core function?"
 - Use pseudonymous identifiers: Instead of email addresses, use hashed or generated IDs
@@ -81,9 +81,9 @@ class PrivacyAwareAnalytics {
 }
 ```
 
-## 3. Local-Only Processing vs Cloud Processing
+3. Local-Only Processing vs Cloud Processing
 
-### Local-First Architecture
+Local-First Architecture
 
 The safest approach for user data is processing everything locally. Chrome's storage APIs provide solid local storage that never sends data to external servers:
 
@@ -99,7 +99,7 @@ const saveSyncPreferences = async (preferences) => {
 };
 ```
 
-### When Cloud Processing is Necessary
+When Cloud Processing is Necessary
 
 Only send data to external servers when absolutely required (e.g., cloud sync, API-backed features). When you must:
 
@@ -144,7 +144,7 @@ class SecureAPIClient {
 }
 ```
 
-## 4. Encrypting User Data at Rest
+4. Encrypting User Data at Rest
 
 Even data stored locally can be compromised if a device is accessed by unauthorized parties. Encrypt sensitive data using the Web Crypto API:
 
@@ -217,9 +217,9 @@ class LocalEncryption {
 }
 ```
 
-## 5. Secure Communication with External Servers
+5. Secure Communication with External Servers
 
-### HTTPS Enforcement
+HTTPS Enforcement
 
 Always use HTTPS and validate certificates properly:
 
@@ -252,7 +252,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-### Certificate Pinning
+Certificate Pinning
 
 For critical APIs, implement certificate pinning:
 
@@ -265,7 +265,7 @@ For critical APIs, implement certificate pinning:
 }
 ```
 
-## 6. Cookie and Tracker Blocking Techniques
+6. Cookie and Tracker Blocking Techniques
 
 Use the Declarative Net Request API to block trackers without requiring extensive permissions:
 
@@ -305,7 +305,7 @@ Use the Declarative Net Request API to block trackers without requiring extensiv
 }
 ```
 
-### Dynamic Rule Management
+Dynamic Rule Management
 
 ```javascript
 // Manage blocking rules dynamically
@@ -345,7 +345,7 @@ class TrackerBlocker {
 }
 ```
 
-## 7. Fingerprint Protection Methods
+7. Fingerprint Protection Methods
 
 Browser fingerprinting uses collected browser attributes to create unique identifiers. Protect users by normalizing or randomizing these values:
 
@@ -391,7 +391,7 @@ Browser fingerprinting uses collected browser attributes to create unique identi
 })();
 ```
 
-### Font Fingerprinting Protection
+Font Fingerprinting Protection
 
 ```javascript
 // Limit available fonts to prevent fingerprinting
@@ -419,7 +419,7 @@ Object.defineProperty(document.fonts, 'check', {
 });
 ```
 
-## 8. DNS-over-HTTPS Integration
+8. DNS-over-HTTPS Integration
 
 DNS-over-HTTPS (DoH) encrypts DNS queries to prevent eavesdropping and manipulation:
 
@@ -464,7 +464,7 @@ const configurePrivacyDNS = async () => {
 };
 ```
 
-## 9. WebRTC Leak Prevention
+9. WebRTC Leak Prevention
 
 WebRTC can expose real IP addresses even behind VPNs. Protect users by controlling WebRTC behavior:
 
@@ -508,7 +508,7 @@ class WebRTCProtection {
 }
 ```
 
-## 10. Referrer Header Stripping
+10. Referrer Header Stripping
 
 Control referrer headers to prevent leaking user browsing history to third parties:
 
@@ -551,7 +551,7 @@ const setReferrerPolicy = () => {
 };
 ```
 
-## 11. User-Agent Spoofing Considerations
+11. User-Agent Spoofing Considerations
 
 User-agent spoofing is controversial, it can break websites but is sometimes necessary for privacy. Implement carefully:
 
@@ -579,18 +579,18 @@ class UserAgentManager {
 }
 ```
 
-## 12. Privacy Policy Requirements for CWS
+12. Privacy Policy Requirements for CWS
 
 The Chrome Web Store has strict privacy requirements:
 
-### Mandatory Disclosures
+Mandatory Disclosures
 
 - Data collection declaration: List all data your extension accesses
 - Privacy policy URL: Required if collecting ANY user data
 - Third-party disclosure: Document all analytics, APIs, and services
 - User communications: How you handle data deletion requests
 
-### CWS Privacy Practices Form
+CWS Privacy Practices Form
 
 Complete the privacy practices disclosure honestly:
 
@@ -602,9 +602,9 @@ Complete the privacy practices disclosure honestly:
 | Location data | Yes/No | Describe | Yes/No |
 | Health data | Yes/No | Describe | Yes/No |
 
-## 13. GDPR Compliance for Extensions
+13. GDPR Compliance for Extensions
 
-### Key Requirements
+Key Requirements
 
 - Lawful basis: Identify your legal basis (consent, contract, legitimate interest)
 - Consent management: Request consent before collecting non-essential data
@@ -614,7 +614,7 @@ Complete the privacy practices disclosure honestly:
   - Right to erasure (account deletion)
   - Right to portability (data portability)
 
-### Implementation Example
+Implementation Example
 
 ```javascript
 // GDPR-compliant data handling
@@ -652,16 +652,16 @@ class GDPRCompliance {
 }
 ```
 
-## 14. CCPA Compliance Considerations
+14. CCPA Compliance Considerations
 
-### California Consumer Privacy Act
+California Consumer Privacy Act
 
 - Right to know: What data you collect and how you use it
 - Right to delete: Request deletion of personal information
 - Right to opt-out: Opt-out of data "sales" (provide even if not selling)
 - Non-discrimination: Don't deny service for exercising rights
 
-### Implementation
+Implementation
 
 ```javascript
 // CCPA compliance utilities
@@ -686,11 +686,11 @@ class CCPACompliance {
 }
 ```
 
-## 15. Transparency Reports and Audit Logs
+15. Transparency Reports and Audit Logs
 
 Maintain trust through transparency:
 
-### What to Document
+What to Document
 
 - Types of data collected
 - Frequency of data collection
@@ -732,25 +732,25 @@ class TransparencyLogger {
 }
 ```
 
-## 16. Open Source for Trust Building
+16. Open Source for Trust Building
 
 Open source builds trust by allowing community verification:
 
-### What to Open Source
+What to Open Source
 
 - Core extension logic
 - Encryption implementations
 - Data handling code
 - Privacy-preserving features
 
-### Benefits
+Benefits
 
 - Security audits by community
 - Faster bug discovery
 - Demonstrable privacy commitment
 - Trust building with privacy-conscious users
 
-### Repository Structure
+Repository Structure
 
 ```
 /src
@@ -765,7 +765,7 @@ Open source builds trust by allowing community verification:
   /privacy           # Security-focused tests
 ```
 
-## 17. Summary and Best Practices Checklist
+17. Summary and Best Practices Checklist
 
 - [ ] Implement privacy by design from project start
 - [ ] Collect only essential data (data minimization)
@@ -784,7 +784,7 @@ Open source builds trust by allowing community verification:
 - [ ] Maintain transparency reports
 - [ ] Consider open source for trust building
 
-## References
+References
 
 - [Chrome Extension Development](https://developer.chrome.com/docs/extensions/develop)
 - [Chrome Web Store Privacy Guidelines](https://developer.chrome.com/docs/webstore/cws-payments-saas)

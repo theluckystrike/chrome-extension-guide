@@ -4,7 +4,7 @@ title: "Chrome Extension API Mocking. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-api-mocking/"
 ---
-# Mocking Chrome Extension APIs
+Mocking Chrome Extension APIs
 
 Overview {#overview}
 

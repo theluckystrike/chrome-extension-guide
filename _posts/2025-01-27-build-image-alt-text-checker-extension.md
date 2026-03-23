@@ -8,7 +8,7 @@ tags: [chrome-extension, developer-tools]
 keywords: "alt text checker extension, accessibility images chrome, img alt extension, chrome extension development, web accessibility"
 ---
 
-# Build an Image Alt Text Checker Extension: Complete 2025 Developer's Guide
+Build an Image Alt Text Checker Extension: Complete 2025 Developer's Guide
 
 Web accessibility has transformed from an optional consideration into a fundamental requirement for modern web development. With over one billion people worldwide experiencing some form of disability, ensuring your websites are accessible is no longer just good practice, it is essential for reaching your entire audience. One of the most critical aspects of web accessibility is proper image alt text, yet it remains one of the most commonly overlooked elements in web development.
 
@@ -243,7 +243,7 @@ As web accessibility standards continue to evolve and strengthen, tools like you
 
 ---
 
-Technical Deep Dive: Understanding WCAG Guidelines for Alt Text {#wcag-guidelines}
+Technical detailed look: Understanding WCAG Guidelines for Alt Text {#wcag-guidelines}
 
 The Web Content Accessibility Guidelines (WCAG) provide specific requirements for alt text that every developer should understand. WCAG 2.1 Level AA compliance requires that all images of text have appropriate alternative text, and all non-text content has text alternatives. Level AAA requirements are even stricter, requiring long descriptions for complex images.
 

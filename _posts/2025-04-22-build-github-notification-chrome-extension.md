@@ -9,7 +9,7 @@ keywords: "chrome extension github notifications, github notification extension,
 canonical_url: "https://bestchromeextensions.com/2025/04/22/build-github-notification-chrome-extension/"
 ---
 
-# Build a GitHub Notification Chrome Extension: Never Miss a PR or Issue
+Build a GitHub Notification Chrome Extension: Never Miss a PR or Issue
 
 If you work with GitHub professionally, you know how easy it is to miss important pull requests, issue assignments, or review requests. The native GitHub notifications are good, but they require you to visit the site constantly or rely on email alerts that often get buried in your inbox. Building a custom GitHub notification Chrome extension gives you real-time desktop notifications directly in your browser, ensuring you never miss a critical update again.
 

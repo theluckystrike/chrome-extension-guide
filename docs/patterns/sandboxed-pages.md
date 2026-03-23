@@ -5,7 +5,7 @@ description: "Use sandboxed pages for secure user-generated content."
 canonical_url: "https://bestchromeextensions.com/patterns/sandboxed-pages/"
 ---
 
-# Sandboxed Pages in Chrome Extensions
+Sandboxed Pages in Chrome Extensions
 
 Sandboxed pages are a powerful pattern in Chrome extensions that allow running code with relaxed Content Security Policy (CSP), enabling features that would otherwise be blocked. This pattern is essential for certain use cases but requires careful security considerations.
 

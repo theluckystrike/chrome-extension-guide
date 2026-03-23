@@ -5,7 +5,7 @@ description: "Learn how to optimize Chrome extensions for better performance. Co
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-performance/"
 ---
 
-# Performance Optimization for Chrome Extensions
+Performance Optimization for Chrome Extensions
 
 Performance is critical for Chrome extensions. Users expect extensions to be fast, responsive, and memory-efficient. A poorly optimized extension can drain battery, slow down browsing, and lead to negative reviews. This tutorial covers essential techniques for building high-performance Chrome extensions.
 
@@ -461,7 +461,7 @@ import { debounce, throttle } from 'lodash-es';
 
 Common Anti-Patterns and Fixes
 
-#### Polling vs Event-Driven
+Polling vs Event-Driven
 
 ```javascript
 //  BAD: Polling for changes
@@ -484,7 +484,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-#### Synchronous XHR
+Synchronous XHR
 
 ```javascript
 //  BAD: Synchronous requests block the thread
@@ -502,7 +502,7 @@ async function fetchData() {
 }
 ```
 
-#### Expensive Computations in Hot Paths
+Expensive Computations in Hot Paths
 
 ```javascript
 //  BAD: Expensive computation on every render
@@ -525,7 +525,7 @@ function getFormattedPrice(price) {
 }
 ```
 
-#### Excessive Message Passing
+Excessive Message Passing
 
 ```javascript
 //  BAD: Too many message round trips

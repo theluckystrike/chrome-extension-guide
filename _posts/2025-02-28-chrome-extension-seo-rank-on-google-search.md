@@ -8,7 +8,7 @@ tags: [extension-seo, google-ranking, chrome-extension-marketing, search-optimiz
 author: theluckystrike
 ---
 
-# Chrome Extension SEO. How to Rank Your Extension on Google Search
+Chrome Extension SEO. How to Rank Your Extension on Google Search
 
 Most Chrome extension developers focus all their SEO efforts on the Chrome Web Store (CWS). They optimize their listing title, description, and screenshots, then wait for installs to roll in. The problem? The Chrome Web Store has its own search algorithm that prioritizes different factors than Google, and your potential users may never find your extension there.
 

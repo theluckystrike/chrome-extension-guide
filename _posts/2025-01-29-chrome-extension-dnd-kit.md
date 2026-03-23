@@ -9,7 +9,7 @@ keywords: "dnd kit extension, drag drop library chrome, sortable extension, dnd-
 canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-dnd-kit/"
 ---
 
-# Complete Guide to dnd-kit Drag and Drop in Chrome Extensions
+Complete Guide to dnd-kit Drag and Drop in Chrome Extensions
 
 Adding drag and drop functionality to your Chrome extension can dramatically improve user experience, making your interface more intuitive and interactive. Whether you are building a tab manager, a bookmark organizer, a task management tool, or any extension that involves organizing items, implementing smooth drag and drop functionality is essential. This is where dnd-kit comes in. a modern, lightweight, and accessible drag and drop library that works smoothly with Chrome extensions.
 

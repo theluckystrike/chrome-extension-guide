@@ -5,7 +5,7 @@ description: "Handle extension uninstallation and gather feedback."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-uninstall/"
 ---
 
-# Extension Uninstall Patterns
+Extension Uninstall Patterns
 
 Overview {#overview}
 

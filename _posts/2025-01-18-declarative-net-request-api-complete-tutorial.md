@@ -9,7 +9,7 @@ keywords: "declarativeNetRequest tutorial, chrome network rules, mv3 network blo
 canonical_url: "https://bestchromeextensions.com/2025/01/18/declarative-net-request-api-complete-tutorial/"
 ---
 
-# DeclarativeNetRequest API Complete Tutorial: Master Chrome Network Rules in Manifest V3
+DeclarativeNetRequest API Complete Tutorial: Master Chrome Network Rules in Manifest V3
 
 The DeclarativeNetRequest API represents one of the most powerful additions to Chrome extensions in the Manifest V3 era. This API enables extension developers to intercept, block, and modify network requests directly from the extension's service worker, without requiring the intrusive background scripts that were common in Manifest V2. Whether you're building an ad blocker, content filter, privacy extension, or developer tool, understanding the DeclarativeNetRequest API is essential for creating modern, privacy-conscious Chrome extensions that respect user autonomy while providing powerful network control capabilities.
 

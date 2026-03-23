@@ -5,7 +5,7 @@ description: "Capture screen and audio with desktopCapture API."
 canonical_url: "https://bestchromeextensions.com/patterns/desktop-capture/"
 ---
 
-# Desktop Capture API Patterns
+Desktop Capture API Patterns
 
 Overview {#overview}
 

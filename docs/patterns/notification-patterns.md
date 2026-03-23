@@ -5,7 +5,7 @@ description: "Create and manage notifications in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/notification-patterns/"
 ---
 
-# Notification Patterns
+Notification Patterns
 
 Overview {#overview}
 

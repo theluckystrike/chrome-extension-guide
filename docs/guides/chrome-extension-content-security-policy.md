@@ -5,7 +5,7 @@ description: "Chrome extension CSP in MV3: sandbox pages, eval alternatives, tru
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-content-security-policy/"
 ---
 
-# Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3
+Chrome Extension Content Security Policy (CSP): Complete Security Guide for MV3
 
 Content Security Policy represents one of the most critical security mechanisms in modern browser extensions. In Chrome's Manifest V3, CSP has undergone significant changes that strengthen the security posture of extensions while introducing new challenges for developers accustomed to Manifest V2's more permissive policies. This comprehensive guide walks you through every aspect of CSP configuration, from understanding default behaviors to implementing advanced security patterns that protect millions of users.
 

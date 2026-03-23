@@ -9,7 +9,7 @@ keywords: "chrome extension translate, build translation extension, translate te
 canonical_url: "https://bestchromeextensions.com/2025/04/12/build-translation-chrome-extension/"
 ---
 
-# Build a Translation Chrome Extension: Translate Selected Text Instantly
+Build a Translation Chrome Extension: Translate Selected Text Instantly
 
 Have you ever been reading a webpage in a foreign language and wished you could instantly translate just a few words without leaving the page? Perhaps you're researching topics in multiple languages, communicating with international clients, or simply exploring content from around the world. A translation Chrome extension that translates selected text with a single right-click or keyboard shortcut can dramatically improve your browsing experience and productivity.
 

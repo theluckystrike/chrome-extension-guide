@@ -9,7 +9,7 @@ keywords: "api mock extension, mock server chrome, fake api extension, chrome ex
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-local-api-mock-chrome-extension/"
 ---
 
-# Build a Local API Mock Chrome Extension: Complete Developer Guide
+Build a Local API Mock Chrome Extension: Complete Developer Guide
 
 Creating a local API mock Chrome extension is one of the most valuable skills a frontend developer can add to their toolkit. Whether you're working on a project with incomplete backend services, need to test edge cases that are difficult to reproduce with real APIs, or simply want to speed up your development workflow by eliminating network latency, a well-built API mock extension can dramatically improve your productivity. we'll walk through the entire process of building a fully functional local API mock Chrome extension using Manifest V3 patterns.
 

@@ -5,7 +5,7 @@ description: "Master message passing in Chrome extensions with sendMessage, conn
 canonical_url: "https://bestchromeextensions.com/patterns/message-passing-patterns/"
 ---
 
-# Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging
+Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging
 
 Chrome extensions use message passing as the primary mechanism for communication between different contexts. Whether you need to coordinate between content scripts and background scripts, communicate with external web pages, or enable cross-extension messaging, understanding these patterns is essential for building solid extensions.
 

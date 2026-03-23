@@ -5,7 +5,7 @@ description: "Advanced badge management and visualization."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-badges-advanced/"
 ---
 
-# Advanced Badge Management Patterns
+Advanced Badge Management Patterns
 
 Overview {#overview}
 

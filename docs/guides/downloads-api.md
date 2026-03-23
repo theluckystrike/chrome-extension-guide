@@ -4,7 +4,7 @@ title: "Chrome Extension Downloads API. How to Download Files and Track Progress
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/downloads-api/"
 ---
-# Chrome Extension Downloads API. How to Download Files and Track Progress
+Chrome Extension Downloads API. How to Download Files and Track Progress
 
 Overview {#overview}
 The Chrome Downloads API (`chrome.downloads`) enables extensions to initiate file downloads, monitor their progress, and manage downloaded files programmatically. This API is essential for extensions that need to save content, cache resources, or provide download management features.

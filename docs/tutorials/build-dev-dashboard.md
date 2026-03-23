@@ -4,7 +4,7 @@ title: "Chrome Extension Dev Dashboard. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-dev-dashboard/"
 ---
-# Build a Developer Productivity Dashboard Extension -- Full Tutorial
+Build a Developer Productivity Dashboard Extension -- Full Tutorial
 
 What We're Building {#what-were-building}
 

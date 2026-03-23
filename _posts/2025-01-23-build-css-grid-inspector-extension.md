@@ -9,7 +9,7 @@ keywords: "css grid inspector, grid overlay chrome, css layout tools extension, 
 canonical_url: "https://bestchromeextensions.com/2025/01/23/build-css-grid-inspector-extension/"
 ---
 
-# Build a CSS Grid Inspector Extension
+Build a CSS Grid Inspector Extension
 
 CSS Grid has revolutionized web layout design, offering developers unprecedented control over two-dimensional layouts. However, debugging grid-based layouts can be challenging without the right tools. While browser DevTools provide some grid inspection capabilities, a dedicated CSS Grid Inspector extension offers enhanced functionality, custom overlays, and quick access directly from your browser toolbar. we will walk you through building a fully functional CSS Grid Inspector extension using Chrome's Manifest V3 architecture.
 

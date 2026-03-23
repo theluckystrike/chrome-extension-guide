@@ -10,7 +10,7 @@ author: "theluckystrike"
 updated: 2026-01-15
 ---
 
-# Chrome Extension Side Panel API Tutorial 2026: Complete Guide with TypeScript
+Chrome Extension Side Panel API Tutorial 2026: Complete Guide with TypeScript
 
 The Chrome Side Panel API represents one of the most significant additions to the extension platform in recent years. Introduced in Chrome 114 and continuously improved through 2026, this API enables developers to create persistent, rich interfaces that remain visible as users navigate across websites. Unlike traditional popup windows that close when users click away, side panels provide a dockable, resizable interface that transforms how extensions can deliver ongoing value to users.
 

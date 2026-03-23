@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-exten
 
 ---
 
-# Chrome Extension Cross-Browser Development
+Chrome Extension Cross-Browser Development
 
 Building extensions that work across multiple browsers maximizes your reach and ensures users can choose their preferred browser without losing functionality. The WebExtension API provides a standardized foundation, but each browser implements it differently. This guide covers the strategies, tools, and best practices for creating truly cross-browser extensions.
 

@@ -5,7 +5,7 @@ description: "Build a complete CI/CD pipeline for Chrome extensions with GitHub 
 permalink: /guides/chrome-extension-ci-cd-pipeline/
 ---
 
-# Chrome Extension CI/CD Pipeline: Automated Testing and Publishing
+Chrome Extension CI/CD Pipeline: Automated Testing and Publishing
 
 Building a solid CI/CD pipeline is essential for maintaining high-quality Chrome extensions. Manual build and deployment processes are error-prone, time-consuming, and don't scale well with team growth or project complexity. This guide walks you through building a complete automated pipeline that handles everything from code quality checks to production releases on the Chrome Web Store.
 

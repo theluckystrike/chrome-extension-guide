@@ -5,7 +5,7 @@ description: "A comprehensive guide covering content script injection methods in
 canonical_url: "https://bestchromeextensions.com/guides/content-script-injection/"
 ---
 
-# Chrome Extension Content Script Injection. Static vs Programmatic Injection
+Chrome Extension Content Script Injection. Static vs Programmatic Injection
 
 Content script injection is a fundamental technique in Chrome extension development, enabling extensions to execute code within the context of web pages. Understanding the different injection methods is crucial for building solid and performant extensions. This guide explores both static (manifest-based) and programmatic injection approaches, along with advanced concepts like world types and dynamic rules.
 

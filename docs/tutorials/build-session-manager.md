@@ -4,7 +4,7 @@ title: "Chrome Extension Session Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-session-manager/"
 ---
-# Build a Session Manager Extension
+Build a Session Manager Extension
 
 What You'll Build {#what-youll-build}
 A browser session manager that saves/restores window tab states, names sessions, and auto-saves.

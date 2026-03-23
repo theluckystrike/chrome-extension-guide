@@ -5,7 +5,7 @@ description: "Optimize extension bundle size with code splitting, tree shaking, 
 canonical_url: "https://bestchromeextensions.com/patterns/bundle-optimization/"
 ---
 
-# Bundle Optimization Patterns for Chrome Extensions
+Bundle Optimization Patterns for Chrome Extensions
 
 Chrome extensions ship as self-contained bundles downloaded by users, making bundle size a direct factor in install conversion and update speed. Unlike web apps served from CDNs, every kilobyte in an extension package is stored locally and re-downloaded on each update. This guide covers eight patterns for optimizing extension bundles, from code splitting across extension contexts to production build configuration.
 

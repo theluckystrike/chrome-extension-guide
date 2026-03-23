@@ -4,7 +4,7 @@ title: "Chrome Extension Bookmark Sorter. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-bookmark-sorter/"
 ---
-# Build a Bookmark Sorter Extension
+Build a Bookmark Sorter Extension
 
 What You'll Build {#what-youll-build}
 A popup-based bookmark sorter that organizes bookmarks alphabetically, by date, finds duplicates, and enables bulk operations.

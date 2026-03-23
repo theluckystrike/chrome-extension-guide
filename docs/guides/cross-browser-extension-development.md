@@ -5,7 +5,7 @@ description: "A comprehensive guide to building browser extensions across Chrome
 canonical_url: "https://bestchromeextensions.com/guides/cross-browser-extension-development/"
 ---
 
-# Cross-Browser Extension Development
+Cross-Browser Extension Development
 
 Building extensions that work across multiple browsers maximizes your reach and ensures a consistent experience for all users. This guide covers the WebExtensions standard, browser-specific considerations, compatibility patterns, and distribution strategies for Chrome, Firefox, Safari, and Edge. Whether you're starting fresh or porting an existing extension, these patterns will help you achieve true cross-browser compatibility.
 

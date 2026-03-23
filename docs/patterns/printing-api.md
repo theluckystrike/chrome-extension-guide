@@ -5,7 +5,7 @@ description: "Handle printing from Chrome extensions with the Printing API."
 canonical_url: "https://bestchromeextensions.com/patterns/printing-api/"
 ---
 
-# Printing API Patterns
+Printing API Patterns
 
 Overview {#overview}
 

@@ -5,7 +5,7 @@ description: "Implement memory management to prevent memory leaks."
 canonical_url: "https://bestchromeextensions.com/patterns/memory-management/"
 ---
 
-# Memory Management in Chrome Extensions
+Memory Management in Chrome Extensions
 
 Overview {#overview}
 
@@ -17,10 +17,10 @@ Memory Budgets {#memory-budgets}
 
 | Context | Typical Allocation | Warning Threshold |
 |---------|-------------------|-------------------|
-| Service worker | 20–50 MB | > 100 MB |
-| Content script (per tab) | 5–20 MB | > 50 MB |
-| Popup | 10–30 MB | > 50 MB |
-| Options page | 10–50 MB | > 100 MB |
+| Service worker | 20, 50 MB | > 100 MB |
+| Content script (per tab) | 5, 20 MB | > 50 MB |
+| Popup | 10, 30 MB | > 50 MB |
+| Options page | 10, 50 MB | > 100 MB |
 
 Chrome may terminate service workers or content scripts that consume excessive memory.
 

@@ -5,7 +5,7 @@ description: "The Chrome System API provides access to system hardware and resou
 canonical_url: "https://bestchromeextensions.com/api-reference/system-api/"
 ---
 
-# chrome.system API Reference
+chrome.system API Reference
 
 The `chrome.system` API provides extensions with access to system hardware and resource information. This API enables extensions to adapt their behavior based on the capabilities and state of the underlying hardware.
 
@@ -30,7 +30,7 @@ Permission {#permission}
 
 Methods {#methods}
 
-#### getInfo()
+getInfo()
 
 Retrieves information about the CPU on the system.
 
@@ -48,7 +48,7 @@ Returns: A [CpuInfo](#cpuinfo) object containing:
 - `features` (string[]): Available CPU features (e.g., "mmx", "sse", "sse2").
 - `processors` (ProcessorInfo[]): Array of processor information.
 
-#### ProcessorInfo
+ProcessorInfo
 
 Each processor object contains:
 - `usage` (object): Cumulative CPU usage statistics
@@ -73,7 +73,7 @@ Permission {#permission}
 
 Methods {#methods}
 
-#### getInfo()
+getInfo()
 
 Retrieves physical memory information.
 
@@ -104,7 +104,7 @@ Permission {#permission}
 
 Methods {#methods}
 
-#### getInfo()
+getInfo()
 
 Retrieves information about storage devices attached to the system.
 
@@ -118,7 +118,7 @@ Returns: An array of [StorageUnitInfo](#storageunitinfo) objects:
 - `type` (string): Type of storage ("fixed", "removable", or "unknown").
 - `capacity` (number): Total storage capacity in bytes.
 
-#### ejectDevice(deviceId)
+ejectDevice(deviceId)
 
 Ejects a removable storage device.
 
@@ -130,7 +130,7 @@ Parameters:
 - `deviceId` (string): The unique ID of the storage device to eject.
 - `callback` (function): Called with the result status ("success", "in_use", "no_such_device", or "failure").
 
-#### getAvailableCapacity(deviceId)
+getAvailableCapacity(deviceId)
 
 Gets the available capacity for a specific storage device.
 
@@ -144,7 +144,7 @@ Parameters:
 
 Events {#events}
 
-#### onAttached
+onAttached
 
 Fired when a removable storage device is attached.
 
@@ -152,7 +152,7 @@ Fired when a removable storage device is attached.
 chrome.system.storage.onAttached.addListener(callback)
 ```
 
-#### onDetached
+onDetached
 
 Fired when a removable storage device is detached.
 
@@ -176,7 +176,7 @@ Permission {#permission}
 
 Methods {#methods}
 
-#### getInfo(flags?)
+getInfo(flags?)
 
 Retrieves information about all displays connected to the system.
 
@@ -201,7 +201,7 @@ Returns: An array of [DisplayInfo](#displayinfo) objects:
 - `isEnabled` (boolean): Whether the display is enabled.
 - `isInternal` (boolean): Whether the display is internal (e.g., laptop panel).
 
-#### setDisplayProperties(id, info)
+setDisplayProperties(id, info)
 
 Modifies display properties. Most properties only work on Chrome OS.
 
@@ -219,7 +219,7 @@ Parameters:
 
 Events {#events}
 
-#### onDisplayChanged
+onDisplayChanged
 
 Fired when the display configuration changes.
 

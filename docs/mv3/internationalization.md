@@ -5,7 +5,7 @@ description: "Implement internationalization in Manifest V3 extensions."
 canonical_url: "https://bestchromeextensions.com/mv3/internationalization/"
 ---
 
-# Internationalization in Chrome Extensions (MV3)
+Internationalization in Chrome Extensions (MV3)
 
 Chrome's i18n system supports multiple languages in extensions.
 

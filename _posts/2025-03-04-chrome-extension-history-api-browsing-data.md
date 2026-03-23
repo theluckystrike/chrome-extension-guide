@@ -9,7 +9,7 @@ keywords: "chrome extension history API, chrome.history, browsing history extens
 canonical_url: "https://bestchromeextensions.com/2025/03/04/chrome-extension-history-api-browsing-data/"
 ---
 
-# Chrome Extension History API: Access and Manage Browsing History
+Chrome Extension History API: Access and Manage Browsing History
 
 The Chrome Extension History API represents one of the most powerful capabilities available to extension developers. This comprehensive API enables you to build sophisticated browsing history manager extensions that can search, analyze, and manipulate a user's browsing data. Whether you're creating a personal history search tool, an analytics dashboard, or a productivity-focused extension that helps users revisit important pages, the chrome.history namespace provides the functionality you need.
 

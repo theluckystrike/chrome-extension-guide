@@ -4,7 +4,7 @@ title: "Chrome Extension Chrome Web Store API. Developer Guide"
 description: "Learn how to use the Chrome Extension Chrome Web Store API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-web-store-api/"
 ---
-# Chrome Web Store Publish API
+Chrome Web Store Publish API
 
 Introduction {#introduction}
 - Automate extension publishing with Chrome Web Store API

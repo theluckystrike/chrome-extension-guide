@@ -5,7 +5,7 @@ description: "The Chrome Cookies API provides complete CRUD operations for query
 canonical_url: "https://bestchromeextensions.com/api-reference/cookies-api/"
 ---
 
-# chrome.cookies API Reference
+chrome.cookies API Reference
 
 The `chrome.cookies` API provides full CRUD operations for querying and modifying browser cookies. Requires `"cookies"` permission plus host permissions.
 

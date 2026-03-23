@@ -5,7 +5,7 @@ description: "Handle form submissions in extension pages."
 canonical_url: "https://bestchromeextensions.com/patterns/form-handling/"
 ---
 
-# Form Handling Patterns for Chrome Extensions
+Form Handling Patterns for Chrome Extensions
 
 Practical patterns for building forms in Chrome extension popups, options pages, and content scripts. Covers auto-save, validation, wizards, dynamic fields, import/export, state persistence, cross-context sync, and secure credential storage.
 

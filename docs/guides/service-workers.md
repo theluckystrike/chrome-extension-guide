@@ -1,12 +1,12 @@
-# Chrome Extension Service Workers Guide
+Chrome Extension Service Workers Guide
 
-## Introduction
+Introduction
 
 Chrome Extension Manifest V3 (MV3) replaced persistent background pages with service workers. Service workers in extensions are event-driven, short-lived, and stateless. This guide covers everything you need to build reliable extension service workers.
 
-## Service Worker Lifecycle
+Service Worker Lifecycle
 
-### Lifecycle Phases
+Lifecycle Phases
 
 1. Registration: Chrome reads `background.service_worker` from `manifest.json`
 2. Installation: `chrome.runtime.onInstalled` fires on first load or update
@@ -15,7 +15,7 @@ Chrome Extension Manifest V3 (MV3) replaced persistent background pages with ser
 5. Termination: ~30 seconds after last event, SW is killed
 6. Wake-up: New event arrives, SW restarts from scratch
 
-### Manifest Registration
+Manifest Registration
 
 ```json
 {
@@ -28,9 +28,9 @@ Chrome Extension Manifest V3 (MV3) replaced persistent background pages with ser
 
 Set `type: module` for ES modules support.
 
-## Event-Driven Architecture
+Event-Driven Architecture
 
-### Top-Level Listener Registration
+Top-Level Listener Registration
 
 All listeners MUST be registered at top level synchronously:
 
@@ -46,9 +46,9 @@ async function init() {
 init();
 ```
 
-## Persistent Data Storage
+Persistent Data Storage
 
-### chrome.storage vs Global Variables
+chrome.storage vs Global Variables
 
 Never rely on global variables, they reset when the service worker terminates.
 
@@ -63,7 +63,7 @@ const { userData } = await chrome.storage.local.get('userData');
 await chrome.storage.session.set({ tempToken: 'abc123' });
 ```
 
-### Lazy Initialization
+Lazy Initialization
 
 ```javascript
 let config = null;
@@ -76,7 +76,7 @@ async function getConfig() {
 }
 ```
 
-## Alarms for Periodic Tasks
+Alarms for Periodic Tasks
 
 Use `chrome.alarms` instead of `setInterval`, the latter doesn't work in service workers.
 
@@ -93,9 +93,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 chrome.runtime.onInstalled.addListener(() => chrome.alarms.clearAll());
 ```
 
-## Keeping Service Worker Alive
+Keeping Service Worker Alive
 
-### Patterns (Use Sparingly)
+Patterns (Use Sparingly)
 
 ```javascript
 // Periodic alarm keeps SW alive briefly
@@ -106,13 +106,13 @@ const port = chrome.runtime.connect({ name: 'keep-alive' });
 setInterval(() => port.postMessage({ keepAlive: true }), 25000);
 ```
 
-### Anti-Patterns to Avoid
+Anti-Patterns to Avoid
 
 - Don't use endless loops or timers
 - Don't keep SW alive for long operations
 - Design for termination instead
 
-### Better Alternative: Offscreen Documents
+Better Alternative: Offscreen Documents
 
 For DOM operations, use offscreen documents:
 
@@ -124,15 +124,15 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-## Script Import Methods
+Script Import Methods
 
-### importScripts (Classic)
+importScripts (Classic)
 
 ```javascript
 importScripts('utils.js', 'api-client.js');
 ```
 
-### ES Modules
+ES Modules
 
 ```javascript
 // In manifest.json
@@ -142,7 +142,7 @@ importScripts('utils.js', 'api-client.js');
 import { helper } from './utils.js';
 ```
 
-## Fetch Events Differences
+Fetch Events Differences
 
 Extension service workers handle fetch differently from web service workers:
 
@@ -159,7 +159,7 @@ Key differences:
 - Use `chrome.webRequest` or `chrome.declarativeNetRequest`
 - No Cache API for extension resources
 
-## WebSocket Connections
+WebSocket Connections
 
 ```javascript
 let socket = null;
@@ -181,7 +181,7 @@ function attemptReconnect() {
 }
 ```
 
-## IndexedDB for Large Data
+IndexedDB for Large Data
 
 ```javascript
 const DB_NAME = 'ExtensionDB';
@@ -202,7 +202,7 @@ function openDB() {
 }
 ```
 
-## Migrating from MV2 Background Pages
+Migrating from MV2 Background Pages
 
 | MV2 Background | MV3 Service Worker |
 |---------------|-------------------|
@@ -222,15 +222,15 @@ chrome.alarms.create('fetchData', { periodInMinutes: 1 });
 chrome.alarms.onAlarm.addListener((a) => { if (a.name === 'fetchData') fetchData(); });
 ```
 
-## Debugging Service Worker Lifecycle
+Debugging Service Worker Lifecycle
 
-### Access DevTools
+Access DevTools
 
 1. Open `chrome://extensions`
 2. Find your extension
 3. Click "Inspect views: service worker"
 
-### Lifecycle Logging
+Lifecycle Logging
 
 ```javascript
 console.log(`[SW] Started at ${new Date().toISOString()}`);
@@ -239,16 +239,16 @@ chrome.runtime.onStartup.addListener(() => console.log('[SW] Browser started'));
 chrome.alarms.onAlarm.addListener((a) => console.log(`[SW] Alarm: ${a.name}`));
 ```
 
-## Testing Termination Scenarios
+Testing Termination Scenarios
 
-### Manual Testing
+Manual Testing
 
 1. Open `chrome://serviceworker-internals`
 2. Find your extension's service worker
 3. Click "Terminate"
 4. Trigger events to verify wake-up
 
-### Automated with Puppeteer
+Automated with Puppeteer
 
 ```javascript
 const targets = await browser.targets();
@@ -259,9 +259,9 @@ if (swTarget) {
 }
 ```
 
-## Common Pitfalls
+Common Pitfalls
 
-### Lost State
+Lost State
 
 ```javascript
 //  BAD: Expecting state to persist
@@ -277,7 +277,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-### Race Conditions
+Race Conditions
 
 ```javascript
 //  BAD: Concurrent writes cause races
@@ -292,7 +292,7 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 ```
 
-### Event Ordering
+Event Ordering
 
 ```javascript
 // Handle events that may fire before setup
@@ -303,14 +303,14 @@ chrome.alarms.onAlarm.addListener(handleAlarm); // Register first
 chrome.runtime.onInstalled.addListener(() => setup()); // Then setup
 ```
 
-## Reference
+Reference
 
 - Official Docs: [developer.chrome.com/docs/extensions/develop/concepts/service-workers](https://developer.chrome.com/docs/extensions/develop/concepts/service-workers)
 - Storage API: [developer.chrome.com/docs/extensions/reference/storage](https://developer.chrome.com/docs/extensions/reference/storage)
 - Alarms API: [developer.chrome.com/docs/extensions/reference/alarms](https://developer.chrome.com/docs/extensions/reference/alarms)
 - Offscreen Documents: [developer.chrome.com/docs/extensions/mv3/intro/mv3-overview#offscreen-documents](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview#offscreen-documents)
 
-## Summary
+Summary
 
 - Design for termination, assume state will be lost
 - Register all listeners at top level synchronously

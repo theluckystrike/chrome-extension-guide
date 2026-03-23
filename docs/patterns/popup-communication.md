@@ -5,7 +5,7 @@ description: "Communicate between popups and background scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-communication/"
 ---
 
-# Popup Communication
+Popup Communication
 
 Overview {#overview}
 

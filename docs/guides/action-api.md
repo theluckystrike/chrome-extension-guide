@@ -1,14 +1,14 @@
-# Chrome Action API Guide
+Chrome Action API Guide
 
-## Overview
+Overview
 The Chrome Action API (`chrome.action`) controls the extension's toolbar icon in the browser's toolbar. Introduced in Manifest V3, it replaces the deprecated `chrome.browserAction` API from Manifest V2.
 
-## Required Permissions
+Required Permissions
 ```json
 { "permissions": ["action"] }
 ```
 
-## Setting Dynamic Icons
+Setting Dynamic Icons
 The `setIcon` method dynamically changes the toolbar icon based on extension state or tab context.
 
 ```javascript
@@ -28,7 +28,7 @@ chrome.action.setIcon({
 chrome.action.setIcon({ path: { '32': 'icon-active.png' } });
 ```
 
-## Badge Text and Background Color
+Badge Text and Background Color
 Badges display overlay text on the toolbar icon for notifications or counters.
 
 ```javascript
@@ -45,7 +45,7 @@ chrome.action.setBadgeBackgroundColor({ tabId: tab.id, color: '#FF0000' });
 chrome.action.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
 ```
 
-## Dynamic Popup Management
+Dynamic Popup Management
 Control the popup associated with the toolbar icon dynamically.
 
 ```javascript
@@ -59,7 +59,7 @@ chrome.action.setPopup({ tabId: tab.id, popup: '' });
 chrome.action.setPopup({ popup: 'popup.html' });
 ```
 
-## Programmatic Popup Opening
+Programmatic Popup Opening
 The `openPopup` method programmatically opens the extension's action popup.
 
 ```javascript
@@ -72,7 +72,7 @@ chrome.action.openPopup()
 chrome.action.openPopup(windowId);
 ```
 
-## Enabling and Disabling Actions
+Enabling and Disabling Actions
 Toggle the action button's enabled state per tab or globally.
 
 ```javascript
@@ -82,7 +82,7 @@ chrome.action.disable();         // Disable globally
 chrome.action.enable();          // Enable globally
 ```
 
-## Click Handler
+Click Handler
 The `onClicked` event fires when the user clicks the action icon. Only fires when no popup is set.
 
 ```javascript
@@ -95,7 +95,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-## Per-Tab vs Global State
+Per-Tab vs Global State
 All action methods support both per-tab and global scope. Omit `tabId` for global state.
 
 ```javascript
@@ -108,7 +108,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-## Migrating from chrome.browserAction (MV2)
+Migrating from chrome.browserAction (MV2)
 Key migration differences:
 
 | MV2 (browserAction) | MV3 (action) |
@@ -123,7 +123,7 @@ Key migration differences:
 // MV3: "action": { "default_icon": { "32": "icon.png" } }
 ```
 
-## Building Dynamic Toolbar Extensions
+Building Dynamic Toolbar Extensions
 Toggle extension state with visual feedback.
 
 ```javascript
@@ -144,18 +144,18 @@ chrome.action.onClicked.addListener((tab) => {
 function initTracker() { /* tracking logic */ }
 ```
 
-## Best Practices
+Best Practices
 - Provide icons for multiple sizes (16, 32, 48, 128px)
 - Use per-tab state for context-specific information
 - Clear badges when no longer relevant
 - Test with and without popup (click behavior differs)
 - Use `chrome.action` in MV3; `browserAction` is deprecated
 
-## Reference
+Reference
 - https://developer.chrome.com/docs/extensions/reference/api/action
 - https://developer.chrome.com/docs/extensions/mv3/intro
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

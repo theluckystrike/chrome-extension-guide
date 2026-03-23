@@ -5,7 +5,7 @@ description: "Master memory leak debugging in Chrome extensions with DevTools he
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-memory-leak-detection/"
 ---
 
-# How to Find and Fix Memory Leaks in Chrome Extensions
+How to Find and Fix Memory Leaks in Chrome Extensions
 
 Overview
 

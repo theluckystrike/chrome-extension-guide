@@ -5,7 +5,7 @@ description: "The Chrome Action API controls your extension's toolbar icon in Ch
 canonical_url: "https://bestchromeextensions.com/api-reference/action-api/"
 ---
 
-# Chrome Action API Reference
+Chrome Action API Reference
 
 The `chrome.action` API controls the extension's toolbar icon in Chrome. It replaces the deprecated `chrome.browserAction` API from Manifest V2.
 

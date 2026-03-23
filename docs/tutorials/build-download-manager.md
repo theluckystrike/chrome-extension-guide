@@ -4,7 +4,7 @@ title: "Chrome Extension Download Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-download-manager/"
 ---
-# Build a Download Manager Extension
+Build a Download Manager Extension
 
 What You'll Build {#what-youll-build}
 

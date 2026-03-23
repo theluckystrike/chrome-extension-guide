@@ -9,7 +9,7 @@ keywords: "chrome extension cors, cross origin extension, fetch api chrome exten
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-cross-origin-requests-guide/"
 ---
 
-# Cross-Origin Requests in Chrome Extensions: Complete CORS & Fetch API Guide
+Cross-Origin Requests in Chrome Extensions: Complete CORS & Fetch API Guide
 
 When building Chrome extensions that interact with external APIs or fetch data from third-party servers, understanding cross-origin requests is essential. Unlike regular web applications, Chrome extensions have a unique permission model that determines how and from which contexts you can make network requests. This guide covers everything you need to know about handling cross-origin requests, CORS, and the Fetch API in Chrome extensions built with Manifest V3.
 

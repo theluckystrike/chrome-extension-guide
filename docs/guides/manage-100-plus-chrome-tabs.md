@@ -5,7 +5,7 @@ description: "Practical strategies for managing 100+ Chrome tabs. Overcome tab h
 permalink: /guides/manage-100-plus-chrome-tabs/
 ---
 
-# How to Manage 100+ Chrome Tabs Without Slowing Down Your Computer
+How to Manage 100+ Chrome Tabs Without Slowing Down Your Computer
 
 You have over 100 tabs open in Chrome right now and you are reading this guide. You are not alone. Research shows that a significant percentage of knowledge workers maintain 50 to 200 open tabs at any given time, and the number has been climbing steadily as more of our work and life moves into the browser.
 

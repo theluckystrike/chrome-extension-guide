@@ -9,7 +9,7 @@ keywords: "plasmo chrome extension, plasmo framework, build extension plasmo, pl
 canonical_url: "https://bestchromeextensions.com/2025/04/26/chrome-extension-plasmo-framework-guide/"
 ---
 
-# Plasmo Framework for Chrome Extensions: Build Extensions Like Web Apps
+Plasmo Framework for Chrome Extensions: Build Extensions Like Web Apps
 
 If you have ever built a Chrome extension from scratch, you know the pain: manually configuring webpack, wrestling with manifest files, setting up separate build processes for different extension components, and constantly refreshing your browser to see changes. What if building a Chrome extension felt exactly like building a modern web application? Enter Plasmo Framework. the game-changing solution that brings the full power of React, TypeScript, and modern development workflows to browser extension development.
 

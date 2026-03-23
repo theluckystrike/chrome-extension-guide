@@ -4,7 +4,7 @@ title: "Chrome Extension Advanced Messaging. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/advanced-messaging/"
 ---
-# Advanced Messaging Patterns with @theluckystrike/webext-messaging
+Advanced Messaging Patterns with @theluckystrike/webext-messaging
 
 Prerequisites {#prerequisites}
 - Read `docs/tutorials/messaging-quickstart.md` first

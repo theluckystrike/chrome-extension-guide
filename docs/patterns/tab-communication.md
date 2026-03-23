@@ -5,7 +5,7 @@ description: "Communicate between extension components and tabs."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-communication/"
 ---
 
-# Tab Communication Patterns
+Tab Communication Patterns
 
 Overview {#overview}
 

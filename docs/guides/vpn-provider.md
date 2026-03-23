@@ -1,8 +1,8 @@
-# Chrome VPN Provider API
+Chrome VPN Provider API
 
 The Chrome VPN Provider API (`chrome.vpnProvider`) enables ChromeOS extensions to create, configure, and manage VPN connections directly from Chrome, integrating with ChromeOS's built-in VPN infrastructure.
 
-## Platform Requirements
+Platform Requirements
 
 The `chrome.vpnProvider` API is exclusively available on ChromeOS.
 
@@ -13,7 +13,7 @@ The `chrome.vpnProvider` API is exclusively available on ChromeOS.
 }
 ```
 
-## Creating VPN Configurations with createConfig
+Creating VPN Configurations with createConfig
 
 The `chrome.vpnProvider.createConfig()` method creates VPN configurations that persist across browser restarts.
 
@@ -58,7 +58,7 @@ Properties:
 chrome.vpnProvider.destroyConfig("my-vpn-tunnel", () => {});
 ```
 
-## Handling Platform Messages with onPlatformMessage
+Handling Platform Messages with onPlatformMessage
 
 The `chrome.vpnProvider.onPlatformMessage` event handles connection events from ChromeOS.
 
@@ -97,7 +97,7 @@ Message Types:
 | `error` | Connection error | `error` |
 | `configRemoved` | Config deleted | `id` |
 
-## Sending Packets with sendPacket
+Sending Packets with sendPacket
 
 The `chrome.vpnProvider.sendPacket()` transmits data through the VPN tunnel.
 
@@ -113,7 +113,7 @@ chrome.vpnProvider.sendPacket(packetData, () => {
 });
 ```
 
-## Receiving Packets with onPacketReceived
+Receiving Packets with onPacketReceived
 
 The `chrome.vpnProvider.onPacketReceived` event fires when packets arrive from the tunnel.
 
@@ -136,7 +136,7 @@ function handleTcp(data) { /* TCP handling */ }
 function handleUdp(data) { /* UDP handling */ }
 ```
 
-## VPN Connection Lifecycle Management
+VPN Connection Lifecycle Management
 
 Lifecycle: configuration → connection → tunnel → packet transfer → disconnection → cleanup.
 
@@ -214,7 +214,7 @@ class VpnConnectionManager {
 const vpnManager = new VpnConnectionManager();
 ```
 
-## UI Notifications for Connection Status
+UI Notifications for Connection Status
 
 ```javascript
 // background.js - UI notifications
@@ -263,7 +263,7 @@ function updateUI(status) {
 }
 ```
 
-## Complete Example
+Complete Example
 
 ```javascript
 // background.js - Full VPN Provider
@@ -315,7 +315,7 @@ class SimpleVpnProvider {
 new SimpleVpnProvider();
 ```
 
-## Best Practices
+Best Practices
 
 1. Verify server certificates to prevent MITM attacks
 2. Use strong encryption for all tunneled traffic

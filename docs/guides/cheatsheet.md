@@ -4,7 +4,7 @@ title: "Chrome Extension Developer Cheatsheet. Developer Guide"
 description: "Learn Chrome extension developer cheatsheet with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/cheatsheet/"
 ---
-# Chrome Extension Development Cheatsheet
+Chrome Extension Development Cheatsheet
 
 A quick-reference cheatsheet covering the most common patterns, APIs, and snippets for Chrome extension development with Manifest V3.
 

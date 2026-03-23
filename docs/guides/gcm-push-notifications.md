@@ -1,19 +1,19 @@
-# GCM & Push Notifications in Chrome Extensions
+GCM & Push Notifications in Chrome Extensions
 
-## Overview
+Overview
 
 Chrome extensions can receive push notifications from a backend server using either the legacy GCM (Google Cloud Messaging) API or the modern Web Push API. This guide covers both approaches with practical code examples.
 
-## Prerequisites
+Prerequisites
 
 - A Chrome Extension with appropriate permissions
 - A server-side component to send notifications
 - A Firebase project (for GCM) or VAPID key pair (for Web Push)
 - HTTPS endpoint for your extension's background service worker
 
-## manifest.json Configuration
+manifest.json Configuration
 
-### For GCM (Legacy)
+For GCM (Legacy)
 
 ```json
 {
@@ -24,7 +24,7 @@ Chrome extensions can receive push notifications from a backend server using eit
 }
 ```
 
-### For Web Push (Modern)
+For Web Push (Modern)
 
 ```json
 {
@@ -36,27 +36,27 @@ Chrome extensions can receive push notifications from a backend server using eit
 }
 ```
 
-## Chrome.gcm API Overview
+Chrome.gcm API Overview
 
 The `chrome.gcm` API provides methods for sending and receiving messages through Firebase Cloud Messaging (FCM).
 
-### Key Methods
+Key Methods
 
 - `chrome.gcm.register(senderIds, callback)` - Register to receive messages
 - `chrome.gcm.unregister(callback)` - Unregister from receiving messages
 - `chrome.gcm.send(message, callback)` - Send upstream messages to the server
 - `chrome.gcm.onMessage.addListener(callback)` - Listen for incoming messages
 
-## Registering with register() and Sender IDs
+Registering with register() and Sender IDs
 
-### Getting Your Sender ID
+Getting Your Sender ID
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project and find your Project Number (Sender ID)
 3. Enable "Firebase Cloud Messaging" API
 4. Get your Server Key from Firebase Console
 
-### Registration Implementation
+Registration Implementation
 
 ```javascript
 // background.js
@@ -84,7 +84,7 @@ function sendRegistrationIdToServer(registrationId) {
 }
 ```
 
-### Handling Registration Errors
+Handling Registration Errors
 
 ```javascript
 chrome.gcm.register([SENDER_ID], (registrationId) => {
@@ -101,7 +101,7 @@ chrome.gcm.register([SENDER_ID], (registrationId) => {
 });
 ```
 
-## Receiving Messages with onMessage
+Receiving Messages with onMessage
 
 ```javascript
 // background.js
@@ -124,7 +124,7 @@ chrome.gcm.onMessage.addListener((message) => {
 });
 ```
 
-### Handling Different Message Types
+Handling Different Message Types
 
 ```javascript
 chrome.gcm.onMessage.addListener((message) => {
@@ -151,7 +151,7 @@ function handleNewMessage(data) {
 }
 ```
 
-## Sending Upstream Messages with send()
+Sending Upstream Messages with send()
 
 ```javascript
 // background.js
@@ -186,7 +186,7 @@ function queueMessageForRetry(data) {
 }
 ```
 
-### Unregistering from GCM
+Unregistering from GCM
 
 ```javascript
 chrome.gcm.unregister(() => {
@@ -198,16 +198,16 @@ chrome.gcm.unregister(() => {
 });
 ```
 
-## Migration to Web Push API with pushManager
+Migration to Web Push API with pushManager
 
-### Generating VAPID Keys
+Generating VAPID Keys
 
 ```bash
 npm install -g web-push
 web-push generate-vapid-keys
 ```
 
-### Converting VAPID Keys
+Converting VAPID Keys
 
 ```javascript
 // utils/vapid.js
@@ -225,7 +225,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 ```
 
-### Subscribing to Push
+Subscribing to Push
 
 ```javascript
 // background.js
@@ -250,7 +250,7 @@ async function subscribeToPush() {
 }
 ```
 
-### Handling Push Events in Service Worker
+Handling Push Events in Service Worker
 
 ```javascript
 // sw.js
@@ -290,7 +290,7 @@ self.addEventListener('notificationclick', (event) => {
 });
 ```
 
-## Combining with chrome.notifications for Display
+Combining with chrome.notifications for Display
 
 ```javascript
 // background.js
@@ -325,9 +325,9 @@ chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
 });
 ```
 
-## Server-Side Setup and Payload Encryption
+Server-Side Setup and Payload Encryption
 
-### Node.js Server with web-push
+Node.js Server with web-push
 
 ```javascript
 // server.js
@@ -367,7 +367,7 @@ const notificationPayload = {
 };
 ```
 
-### GCM Server Integration (Legacy)
+GCM Server Integration (Legacy)
 
 ```javascript
 // server.js - GCM
@@ -406,7 +406,7 @@ function sendGCMMessage(registrationIds, data) {
 }
 ```
 
-## Migration Checklist
+Migration Checklist
 
 1. Generate VAPID keys: `npx web-push generate-vapid-keys`
 2. Update manifest.json - remove `gcm`, add `push` permission
@@ -425,9 +425,9 @@ await self.registration.pushManager.subscribe({
 });
 ```
 
-## Best Practices
+Best Practices
 
-### Rate Limiting
+Rate Limiting
 
 ```javascript
 const RATE_LIMIT_MS = 60000;
@@ -441,7 +441,7 @@ function canShowNotification() {
 }
 ```
 
-### Subscription Management
+Subscription Management
 
 ```javascript
 async function refreshSubscription() {
@@ -457,14 +457,14 @@ async function refreshSubscription() {
 }
 ```
 
-## Common Issues
+Common Issues
 
 1. Messages not received - Check service worker, permissions, network
 2. Permission denied - User blocked notifications; guide to enable
 3. GCM registration fails - Verify Sender ID and Firebase config
 4. Web Push subscription fails - Verify VAPID key format
 
-## Related Documentation
+Related Documentation
 
 - [Chrome Push Messaging](https://developer.chrome.com/docs/extensions/develop/concepts/push-messaging)
 - [Web Push Protocol](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol)

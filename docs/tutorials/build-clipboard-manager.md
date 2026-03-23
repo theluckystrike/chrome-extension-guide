@@ -4,7 +4,7 @@ title: "Chrome Extension Clipboard Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-clipboard-manager/"
 ---
-# Build a Clipboard Manager Extension
+Build a Clipboard Manager Extension
 
 What You'll Build {#what-youll-build}
 Popup clipboard history with search, pinned favorites, one-click paste. Uses offscreen document for clipboard access in MV3.

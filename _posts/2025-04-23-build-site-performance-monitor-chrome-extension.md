@@ -9,7 +9,7 @@ keywords: "chrome extension performance monitor, core web vitals extension, site
 canonical_url: "https://bestchromeextensions.com/2025/04/23/build-site-performance-monitor-chrome-extension/"
 ---
 
-# Build a Site Performance Monitor Chrome Extension: Core Web Vitals Dashboard
+Build a Site Performance Monitor Chrome Extension: Core Web Vitals Dashboard
 
 Performance monitoring has become an essential part of modern web development. With Google's Core Web Vitals now playing a significant role in search rankings, developers and site owners need reliable tools to measure and track their website's performance metrics. Building a Chrome extension for site performance monitoring gives you a powerful, always-accessible tool that can analyze pages in real-time and provide actionable insights through an intuitive dashboard.
 

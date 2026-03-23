@@ -8,7 +8,7 @@ tags: [vue, vue3, chrome-extension, vue-chrome-extension, composition-api]
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with Vue.js. Complete Developer Guide (2025)
+Building Chrome Extensions with Vue.js. Complete Developer Guide (2025)
 
 Vue.js has become one of the most popular choices for building Chrome extensions in 2025. Its reactive data binding, Composition API, and smooth integration with modern build tools make it an excellent framework for extension development. Whether you are building a simple popup tool or a complex extension with content scripts, background workers, and options pages, Vue 3 provides the flexibility and performance you need.
 

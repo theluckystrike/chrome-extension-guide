@@ -5,7 +5,7 @@ description: "Use the Sessions API to track browser sessions."
 canonical_url: "https://bestchromeextensions.com/patterns/sessions-api/"
 ---
 
-# Chrome Extension Sessions API Patterns
+Chrome Extension Sessions API Patterns
 
 Overview {#overview}
 

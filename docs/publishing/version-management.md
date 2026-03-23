@@ -5,7 +5,7 @@ description: "Manage extension versions effectively for smooth updates and rollb
 canonical_url: "https://bestchromeextensions.com/publishing/version-management/"
 ---
 
-# Version Management Strategies
+Version Management Strategies
 
 manifest.json Version Fields {#manifestjson-version-fields}
 - `"version"`: Required. 1-4 dot-separated integers (e.g., `"1.2.3"` or `"1.2.3.4"`)

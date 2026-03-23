@@ -9,7 +9,7 @@ keywords: "trello chrome extension, trello card creator, task management extensi
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-trello-integration-chrome-extension/"
 ---
 
-# Build a Trello Integration Chrome Extension: Complete Developer Guide
+Build a Trello Integration Chrome Extension: Complete Developer Guide
 
 Integrating Trello with Chrome through a custom extension unlocks powerful productivity workflows. Whether you need a quick trello card creator accessible from any webpage, want to capture tasks while browsing, or need to manage your boards without leaving Chrome, building a trello chrome extension is an excellent project that demonstrates real-world API integration skills.
 

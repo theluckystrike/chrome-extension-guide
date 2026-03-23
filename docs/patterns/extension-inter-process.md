@@ -5,7 +5,7 @@ description: "Implement inter-process communication patterns between extension c
 canonical_url: "https://bestchromeextensions.com/patterns/extension-inter-process/"
 ---
 
-# Extension Inter-Process Communication Patterns
+Extension Inter-Process Communication Patterns
 
 This document covers communication between Chrome Extensions and external applications, including native messaging and cross-extension communication.
 

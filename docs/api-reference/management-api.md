@@ -5,7 +5,7 @@ description: "The Chrome Management API queries and controls installed extension
 canonical_url: "https://bestchromeextensions.com/api-reference/management-api/"
 ---
 
-# chrome.management API Reference
+chrome.management API Reference
 
 Overview {#overview}
 

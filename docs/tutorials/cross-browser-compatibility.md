@@ -5,7 +5,7 @@ description: "Learn how to build cross-browser Chrome extensions that work in Ch
 canonical_url: "https://bestchromeextensions.com/tutorials/cross-browser-compatibility/"
 ---
 
-# Cross-Browser Extension Development
+Cross-Browser Extension Development
 
 Building browser extensions that work across Chrome, Firefox, Safari, and Edge requires understanding the WebExtensions API standard, browser-specific differences, and strategies for handling API incompatibilities. This tutorial covers everything you need to create truly cross-browser extensions.
 

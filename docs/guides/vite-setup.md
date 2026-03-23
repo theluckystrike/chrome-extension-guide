@@ -4,7 +4,7 @@ title: "Chrome Extension Vite Setup. Fast Development Environment"
 description: "Learn how to set up Vite for Chrome extensions with this developer guide covering configuration, HMR, and rapid development workflows."
 canonical_url: "https://bestchromeextensions.com/guides/vite-setup/"
 ---
-# Chrome Extension Vite Setup. Fast Development Environment
+Chrome Extension Vite Setup. Fast Development Environment
 
 Vite has revolutionized frontend tooling with its lightning-fast dev server and streamlined production builds. For Chrome extension development, Vite offers an compelling alternative to traditional bundlers, providing near-instant hot module replacement and a developer experience that significantly reduces iteration time. This guide covers setting up Vite specifically for Chrome extensions, including configurations for multiple entry points and proper extension manifest handling.
 

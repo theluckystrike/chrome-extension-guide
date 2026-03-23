@@ -1,8 +1,8 @@
-# API Testing Sidebar Chrome Extension
+API Testing Sidebar Chrome Extension
 
 A comprehensive guide to building a professional API testing sidebar extension using Chrome's Side Panel API, TypeScript, and modern extension architecture patterns.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest Configuration](#manifest-configuration)
@@ -17,11 +17,11 @@ A comprehensive guide to building a professional API testing sidebar extension u
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 API testing sidebar extensions provide developers with quick access to HTTP request testing directly within the browser's side panel. This architecture leverages Chrome's Side Panel API (Manifest V3) to provide a persistent, non-intrusive interface that works alongside any webpage.
 
-### Core Components
+Core Components
 
 ```
 api-tester-sidebar/

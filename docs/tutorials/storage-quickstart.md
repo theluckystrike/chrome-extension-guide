@@ -4,7 +4,7 @@ title: "Chrome Extension Storage Quickstart. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/storage-quickstart/"
 ---
-# Storage Quickstart
+Storage Quickstart
 
 Overview {#overview}
 

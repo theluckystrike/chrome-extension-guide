@@ -1,8 +1,8 @@
-# Error Handling Reference
+Error Handling Reference
 
 Quick reference for error handling in Chrome Extensions (Manifest V3).
 
-## 1. chrome.runtime.lastError (MV2 Callbacks) {#1-chromeruntimelasterror-mv2-callbacks}
+1. chrome.runtime.lastError (MV2 Callbacks) {#1-chromeruntimelasterror-mv2-callbacks}
 
 ```js
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -14,7 +14,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 ```
 
-## 2. Promise Rejection with try/catch (MV3) {#2-promise-rejection-with-trycatch-mv3}
+2. Promise Rejection with try/catch (MV3) {#2-promise-rejection-with-trycatch-mv3}
 
 ```js
 async function getActiveTab() {
@@ -28,7 +28,7 @@ async function getActiveTab() {
 }
 ```
 
-## 3. Common Error Messages {#3-common-error-messages}
+3. Common Error Messages {#3-common-error-messages}
 
 | API | Error | Cause |
 |-----|-------|-------|
@@ -41,7 +41,7 @@ async function getActiveTab() {
 | `scripting` | "Scripting disallowed" | Content script not injected |
 | `scripting` | "Cannot access frame" | Cross-origin restriction |
 
-## 4. @theluckystrike/webext-messaging MessagingError {#4-theluckystrikewebext-messaging-messagingerror}
+4. @theluckystrike/webext-messaging MessagingError {#4-theluckystrikewebext-messaging-messagingerror}
 
 ```js
 import { sendMessage, MessagingError } from '@theluckystrike/webext-messaging';
@@ -56,7 +56,7 @@ try {
 }
 ```
 
-## 5. @theluckystrike/webext-storage Error Handling {#5-theluckystrikewebext-storage-error-handling}
+5. @theluckystrike/webext-storage Error Handling {#5-theluckystrikewebext-storage-error-handling}
 
 ```js
 import { storage } from '@theluckystrike/webext-storage';
@@ -73,7 +73,7 @@ try {
 const results = await storage.getMany(['key1', 'key2', 'key3']);
 ```
 
-## 6. Listener Protection Pattern {#6-listener-protection-pattern}
+6. Listener Protection Pattern {#6-listener-protection-pattern}
 
 ```js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -97,7 +97,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-## 7. Extension Context Invalidated {#7-extension-context-invalidated}
+7. Extension Context Invalidated {#7-extension-context-invalidated}
 
 ```js
 // In content script - detect orphaned context
@@ -114,7 +114,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## 8. Retry with Exponential Backoff {#8-retry-with-exponential-backoff}
+8. Retry with Exponential Backoff {#8-retry-with-exponential-backoff}
 
 ```js
 async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 500) {
@@ -133,7 +133,7 @@ async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 500) {
 const tab = await retryWithBackoff(() => chrome.tabs.get(tabId));
 ```
 
-## 9. Promise.allSettled for Batch Operations {#9-promiseallsettled-for-batch-operations}
+9. Promise.allSettled for Batch Operations {#9-promiseallsettled-for-batch-operations}
 
 ```js
 async function updateMultipleSettings(settings) {
@@ -154,7 +154,7 @@ async function updateMultipleSettings(settings) {
 }
 ```
 
-## 10. Common Pitfalls {#10-common-pitfalls}
+10. Common Pitfalls {#10-common-pitfalls}
 
 | Pitfall | Solution |
 |---------|----------|
@@ -166,7 +166,7 @@ async function updateMultipleSettings(settings) {
 | Storage quota exceeded | Monitor usage with `chrome.storage.local.getBytesInUse()` |
 | Messaging timeout | Use `@theluckystrike/webext-messaging` with timeout option |
 
-## Quick Checklist {#quick-checklist}
+Quick Checklist {#quick-checklist}
 
 - [ ] Always wrap event listeners in try/catch
 - [ ] Check `chrome.runtime.lastError` in callbacks

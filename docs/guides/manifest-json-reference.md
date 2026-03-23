@@ -4,7 +4,7 @@ title: "Chrome Extension Manifest Reference. Developer Guide"
 description: "Learn Chrome extension manifest reference with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/manifest-json-reference/"
 ---
-# manifest.json Complete Reference
+manifest.json Complete Reference
 
 Introduction {#introduction}
 - The manifest is the blueprint of every Chrome extension
@@ -14,7 +14,7 @@ Introduction {#introduction}
 Required Fields {#required-fields}
 - `manifest_version`: Must be `3`
 - `name`: Extension display name (max 75 chars)
-- `version`: One to four dot-separated integers (e.g., `"1.0.0"` or `"1.2.3.4"`), not semver. each integer 0–65535
+- `version`: One to four dot-separated integers (e.g., `"1.0.0"` or `"1.2.3.4"`), not semver. each integer 0, 65535
 
 Recommended Fields {#recommended-fields}
 - `description`: Short summary (max 132 chars) shown in Chrome Web Store

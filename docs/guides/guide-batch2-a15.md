@@ -1,12 +1,12 @@
-# Tab Grouping Automation in Chrome Extensions
+Tab Grouping Automation in Chrome Extensions
 
-## Introduction
+Introduction
 
 Tab Grouping Automation is a powerful feature in Chrome extensions that allows you to automatically organize browser tabs into groups based on rules, patterns, or user behavior. The `chrome.tabGroups` API, introduced in Chrome 88, provides the foundation for creating, modifying, and managing tab groups programmatically. This guide covers advanced patterns for automating tab grouping to improve productivity and reduce tab clutter.
 
-## Key APIs
+Key APIs
 
-### chrome.tabGroups API
+chrome.tabGroups API
 
 The `chrome.tabGroups` API provides methods to create, update, and query tab groups:
 
@@ -38,7 +38,7 @@ async function getGroupsInWindow(windowId: number): Promise<chrome.tabGroups.Tab
 }
 ```
 
-### chrome.tabs.group() and chrome.tabs.ungroup()
+chrome.tabs.group() and chrome.tabs.ungroup()
 
 ```typescript
 // Group tabs by domain
@@ -76,9 +76,9 @@ async function ungroupTabs(tabIds: number[]): Promise<void> {
 }
 ```
 
-## Auto-Grouping Patterns
+Auto-Grouping Patterns
 
-### Domain-Based Auto-Grouping
+Domain-Based Auto-Grouping
 
 Automatically group tabs when they're created based on their domain:
 
@@ -132,7 +132,7 @@ function getColorForDomain(domain: string): string {
 }
 ```
 
-### URL Pattern-Based Grouping
+URL Pattern-Based Grouping
 
 Group tabs based on URL patterns or categories:
 
@@ -170,7 +170,7 @@ async function applyGroupingRules(): Promise<void> {
 }
 ```
 
-## Tab Group Events
+Tab Group Events
 
 Monitor and respond to group changes:
 
@@ -193,7 +193,7 @@ chrome.tabs.onMoved.addListener((tabId, moveInfo) => {
 });
 ```
 
-## Saving and Restoring Tab Groups
+Saving and Restoring Tab Groups
 
 Persist group configurations for session management:
 
@@ -244,9 +244,9 @@ async function restoreSession(savedGroups: SavedGroup[]): Promise<void> {
 }
 ```
 
-## Intelligent Grouping Patterns
+Intelligent Grouping Patterns
 
-### Content-Based Grouping
+Content-Based Grouping
 
 Group tabs by page content or metadata:
 
@@ -280,7 +280,7 @@ async function groupByContent(tabIds: number[]): Promise<void> {
 }
 ```
 
-## Common Mistakes
+Common Mistakes
 
 - Not checking for existing groups before creating duplicates
 - Ignoring the `groupId: -1` which indicates an ungrouped tab
@@ -289,7 +289,7 @@ async function groupByContent(tabIds: number[]): Promise<void> {
 - Not handling async operations when grouping multiple tabs
 - Forgetting to request `"tabs"` permission for full tab URL access
 
-## Best Practices
+Best Practices
 
 1. Use meaningful group titles that describe the category
 2. Apply consistent color coding (e.g., work = blue, personal = green)

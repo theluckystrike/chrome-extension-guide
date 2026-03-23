@@ -5,7 +5,7 @@ description: "Learn how to use the Chrome Tab Groups API to create, organize, an
 canonical_url: "https://bestchromeextensions.com/tutorials/tab-groups-api-guide/"
 ---
 
-# Working with Tab Groups in Chrome Extensions
+Working with Tab Groups in Chrome Extensions
 
 Overview {#overview}
 

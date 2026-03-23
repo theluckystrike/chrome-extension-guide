@@ -5,7 +5,7 @@ description: "Patterns for communicating between popup and background service wo
 canonical_url: "https://bestchromeextensions.com/patterns/popup-background-communication/"
 ---
 
-# Chrome Extension Popup-Background Communication. Patterns for Shared State
+Chrome Extension Popup-Background Communication. Patterns for Shared State
 
 Overview {#overview}
 

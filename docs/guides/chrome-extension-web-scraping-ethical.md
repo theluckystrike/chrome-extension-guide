@@ -9,7 +9,7 @@ category: guides
 tags: [web-scraping, content-scripts, dom, mutation-observer, ethics, data-extraction, typescript]
 ---
 
-# Ethical Web Scraping with Chrome Extensions: A Developer's Guide
+Ethical Web Scraping with Chrome Extensions: A Developer's Guide
 
 Web scraping remains one of the most powerful uses for Chrome extensions. Running inside the browser gives you access to fully rendered pages, authenticated sessions, and dynamic content that server-side scrapers struggle with. But with that power comes responsibility: scraping that ignores rate limits, terms of service, or user privacy damages the ecosystem for everyone.
 

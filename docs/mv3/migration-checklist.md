@@ -5,7 +5,7 @@ description: "Checklist for migrating Chrome extensions from Manifest V2 to V3."
 canonical_url: "https://bestchromeextensions.com/mv3/migration-checklist/"
 ---
 
-# MV2 to MV3 Migration Checklist
+MV2 to MV3 Migration Checklist
 
 Overview {#overview}
 - Chrome began disabling MV2 extensions on stable channel in October 2024 (warning banners appeared June 2024)

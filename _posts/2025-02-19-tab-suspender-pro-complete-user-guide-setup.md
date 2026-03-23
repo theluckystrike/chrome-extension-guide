@@ -8,7 +8,7 @@ tags: [tab-suspender-pro, chrome-extension, browser-memory, tab-management, prod
 author: theluckystrike
 ---
 
-# Tab Suspender Pro. Complete User Guide, Setup, and Tips
+Tab Suspender Pro. Complete User Guide, Setup, and Tips
 
 If you have ever found yourself with 50+ browser tabs open, watching your laptop fan spin up and your battery drain rapidly, you are not alone. Modern web browsing often involves keeping dozens of tabs open for reference, research, or "later reading." The problem is that every open tab consumes system resources, even tabs you are not currently viewing. This is where Tab Suspender Pro comes in.
 

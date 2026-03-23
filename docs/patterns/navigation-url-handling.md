@@ -5,7 +5,7 @@ description: "Handle navigation events and URL changes with the webNavigation AP
 canonical_url: "https://bestchromeextensions.com/patterns/navigation-url-handling/"
 ---
 
-# Navigation and URL Handling Patterns
+Navigation and URL Handling Patterns
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Weather Widget. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-weather-widget/"
 ---
-# Build a Weather Widget Extension
+Build a Weather Widget Extension
 
 What You'll Build {#what-youll-build}
 - Current weather display in popup

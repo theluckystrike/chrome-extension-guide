@@ -5,7 +5,7 @@ description: "Implement side panels in Manifest V3 with the chrome.sidePanel API
 canonical_url: "https://bestchromeextensions.com/patterns/side-panel/"
 ---
 
-# Side Panel Patterns
+Side Panel Patterns
 
 Overview {#overview}
 

@@ -9,7 +9,7 @@ keywords: "plasmo chrome extension, plasmo framework, extension framework 2025, 
 canonical_url: "https://bestchromeextensions.com/2025/01/25/build-chrome-extensions-with-plasmo-framework/"
 ---
 
-# Build Chrome Extensions with Plasmo Framework: Complete 2025 Guide
+Build Chrome Extensions with Plasmo Framework: Complete 2025 Guide
 
 If you have ever built a Chrome extension from scratch, you know the pain: setting up webpack configurations, managing multiple build processes for different extension contexts, handling hot reloading during development, and navigating the ever-changing requirements of Manifest V3. What if there was a better way? Enter Plasmo Framework. the modern, opinionated framework designed specifically for building browser extensions that will dramatically accelerate your development workflow in 2025.
 

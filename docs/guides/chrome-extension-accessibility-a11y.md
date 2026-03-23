@@ -5,7 +5,7 @@ description: "A comprehensive developer guide to building WCAG-compliant Chrome 
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-accessibility-a11y/"
 ---
 
-# Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices
+Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices
 
 Accessibility in Chrome extensions is not merely a nice-to-have feature, it's a critical aspect of inclusive design that ensures your extension serves all users, including those who rely on assistive technologies. With over 1 billion people worldwide living with some form of disability, making your extension accessible significantly expands your potential user base and often improves usability for everyone. This guide provides comprehensive coverage of WCAG compliance specifically tailored for Chrome extension UIs, including popup windows, options pages, and side panels.
 

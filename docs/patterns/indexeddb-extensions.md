@@ -5,7 +5,7 @@ description: "Use IndexedDB for persistent client-side storage in Chrome extensi
 canonical_url: "https://bestchromeextensions.com/patterns/indexeddb-extensions/"
 ---
 
-# IndexedDB in Extensions
+IndexedDB in Extensions
 
 Overview {#overview}
 

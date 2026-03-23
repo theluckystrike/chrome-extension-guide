@@ -4,7 +4,7 @@ title: "Chrome Extension CI/CD Pipeline. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/ci-cd-pipeline/"
 ---
-# Chrome Extension CI/CD Pipeline
+Chrome Extension CI/CD Pipeline
 
 A complete guide to automating Chrome extension builds, testing, and publishing using GitHub Actions, Playwright, and the Chrome Web Store API.
 

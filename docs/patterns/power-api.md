@@ -5,7 +5,7 @@ description: "Manage power settings to prevent battery drain from extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/power-api/"
 ---
 
-# Chrome Extension Power API Patterns
+Chrome Extension Power API Patterns
 
 Overview {#overview}
 

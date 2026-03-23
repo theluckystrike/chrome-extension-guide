@@ -5,7 +5,7 @@ description: "Implement OAuth and authentication flows in Chrome extensions secu
 canonical_url: "https://bestchromeextensions.com/patterns/authentication-patterns/"
 ---
 
-# Authentication Patterns for Chrome Extensions
+Authentication Patterns for Chrome Extensions
 
 This guide covers authentication patterns for Chrome extensions connecting to external services, including OAuth 2.0, token management, and security best practices.
 

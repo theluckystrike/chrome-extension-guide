@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "Chrome Extension History Deep Dive. Best Practices"
-description: "Deep dive into the History API for browsing data access."
+title: "Chrome Extension History detailed look. Best Practices"
+description: "Detailed look into the History API for browsing data access."
 canonical_url: "https://bestchromeextensions.com/patterns/history-deep detailed look/"
 ---
 
-# Chrome Extension History Deep Dive
+Chrome Extension History detailed look
 
 Overview {#overview}
 

@@ -8,7 +8,7 @@ tags: [react, chrome-extension, react-chrome-extension, popup-ui, content-script
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with React. Complete Developer Guide (2025)
+Building Chrome Extensions with React. Complete Developer Guide (2025)
 
 React has become the go-to framework for building modern Chrome extensions. Its component-based architecture, efficient rendering, and vast ecosystem make it an ideal choice for creating polished, maintainable extension UIs. This guide walks you through building production-ready Chrome extensions with React in 2025, from project scaffolding to publishing.
 

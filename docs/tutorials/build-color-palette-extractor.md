@@ -4,7 +4,7 @@ title: "Chrome Extension Color Palette Extractor. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-color-palette-extractor/"
 ---
-# Build a Color Palette Extractor
+Build a Color Palette Extractor
 
 What You'll Build {#what-youll-build}
 - Extract dominant colors from any web page

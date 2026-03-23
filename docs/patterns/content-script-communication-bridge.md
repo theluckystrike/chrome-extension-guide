@@ -5,7 +5,7 @@ description: "Bridge communication between content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-communication-bridge/"
 ---
 
-# Content Script Communication Bridge
+Content Script Communication Bridge
 
 Overview {#overview}
 

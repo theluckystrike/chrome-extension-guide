@@ -5,7 +5,7 @@ description: "Synchronize extension themes with browser themes."
 canonical_url: "https://bestchromeextensions.com/patterns/theme-sync/"
 ---
 
-# Theme Sync Pattern
+Theme Sync Pattern
 
 Overview {#overview}
 

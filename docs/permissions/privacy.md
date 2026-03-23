@@ -8,7 +8,7 @@ order: 31
 canonical_url: "https://bestchromeextensions.com/permissions/privacy/"
 ---
 
-# privacy Permission
+privacy Permission
 
 What It Grants {#what-it-grants}
 Access to `chrome.privacy` API for reading/controlling Chrome's privacy settings.

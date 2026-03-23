@@ -5,7 +5,7 @@ description: "Implement flexible configuration patterns for Chrome extensions us
 canonical_url: "https://bestchromeextensions.com/patterns/extension-configuration/"
 ---
 
-# Extension Configuration Patterns
+Extension Configuration Patterns
 
 Configuration management is critical for building flexible, user-customizable Chrome extensions. This guide covers patterns for implementing solid configuration systems.
 
@@ -130,7 +130,7 @@ const FEATURES = {
 Cross-References {#cross-references}
 
 - [Options Page Guide](../guides/options-page.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Feature Flags Pattern](./feature-flags.md)
 -e 
 ---

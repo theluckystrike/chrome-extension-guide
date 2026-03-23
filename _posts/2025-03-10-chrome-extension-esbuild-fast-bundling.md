@@ -9,7 +9,7 @@ keywords: "chrome extension esbuild, esbuild chrome extension, fast build chrome
 canonical_url: "https://bestchromeextensions.com/2025/03/10/chrome-extension-esbuild-fast-bundling/"
 ---
 
-# Chrome Extension Bundling with esbuild: Ultra-Fast Build Setup
+Chrome Extension Bundling with esbuild: Ultra-Fast Build Setup
 
 Building Chrome extensions has evolved significantly over the years. What once required complex webpack configurations taking minutes to compile can now be accomplished in milliseconds using esbuild. This comprehensive guide walks you through setting up an ultra-fast build system for your Chrome extensions using esbuild, the blazing-fast JavaScript bundler that has revolutionized how developers build and deploy browser extensions.
 

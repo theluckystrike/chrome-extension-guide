@@ -4,7 +4,7 @@ title: "Chrome Extension Site Blocker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-site-blocker/"
 ---
-# Build a Site Blocker Chrome Extension
+Build a Site Blocker Chrome Extension
 
 This tutorial guides you through building a powerful site blocker extension using modern Chrome Extension APIs. We'll use declarativeNetRequest for efficient blocking, @theluckystrike/webext-storage for persistent blocklist storage, @theluckystrike/webext-messaging for popup communication, and implement schedule-based blocking with password-protected overrides.
 
@@ -593,7 +593,7 @@ A simple SHA-256 hash comparison could be added for better security. The current
 Related Tutorials {#related-tutorials}
 
 - [Build Your First Chrome Extension](getting-started.md) - Extension fundamentals
-- [Chrome Storage API Deep Dive](storage-guide.md) - Persistent data management
+- [Chrome Storage API detailed look](storage-guide.md) - Persistent data management
 - [Messaging Between Components](messaging-guide.md) - Popup/background communication
 - [Manifest V3 Migration](manifest-v3-migration.md) - Upgrading from V2
 

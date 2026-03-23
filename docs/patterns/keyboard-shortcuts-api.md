@@ -5,7 +5,7 @@ description: "Configure keyboard shortcuts with the Commands API."
 canonical_url: "https://bestchromeextensions.com/patterns/keyboard-shortcuts-api/"
 ---
 
-# Keyboard Shortcuts API Patterns
+Keyboard Shortcuts API Patterns
 
 Overview {#overview}
 

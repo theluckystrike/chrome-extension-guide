@@ -5,7 +5,7 @@ description: "Keep service workers alive for long-running operations."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-keepalive/"
 ---
 
-# Service Worker Keep-Alive Patterns
+Service Worker Keep-Alive Patterns
 
 Understanding MV3 Service Worker Lifecycle {#understanding-mv3-service-worker-lifecycle}
 

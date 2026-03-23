@@ -1,10 +1,10 @@
-# Email Checker Extension Guide
+Email Checker Extension Guide
 
-## Overview
+Overview
 
 Email checker extensions are powerful tools that help users validate, verify, and manage email addresses directly from their browser. These extensions can detect email addresses on webpages, validate their format, check if they're from disposable email providers, verify if emails are deliverable, and even integrate with email verification APIs. This guide covers the architecture, implementation patterns, and best practices for building a solid email checker extension using TypeScript and Chrome's APIs.
 
-## Core Architecture
+Core Architecture
 
 An email checker extension typically consists of several key components working together:
 
@@ -14,7 +14,7 @@ An email checker extension typically consists of several key components working 
 4. Options Page - Configures API keys, preferences, and notification settings
 5. Storage Layer - Persists user preferences and checking history
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -51,7 +51,7 @@ An email checker extension typically consists of several key components working 
 }
 ```
 
-## Email Detection Pattern
+Email Detection Pattern
 
 The content script scans webpages for email addresses using regex patterns and DOM traversal:
 
@@ -153,7 +153,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-## Email Verification Service Integration
+Email Verification Service Integration
 
 The background service worker handles API calls to email verification services:
 
@@ -335,7 +335,7 @@ class EmailVerificationService {
 export const verifier = new EmailVerificationService();
 ```
 
-## Context Menu Integration
+Context Menu Integration
 
 Add email verification to the right-click menu:
 
@@ -412,7 +412,7 @@ function showResultNotification(result: VerificationResult): void {
 }
 ```
 
-## Popup UI Implementation
+Popup UI Implementation
 
 ```typescript
 // popup/popup.ts
@@ -530,9 +530,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Best Practices
+Best Practices
 
-### 1. API Key Security
+1. API Key Security
 Never expose API keys in client-side code. Use Chrome's secure storage or consider a backend proxy:
 
 ```typescript
@@ -540,7 +540,7 @@ Never expose API keys in client-side code. Use Chrome's secure storage or consid
 await chrome.storage.secure.set({ apiKey: 'your-key' });
 ```
 
-### 2. Rate Limiting
+2. Rate Limiting
 Implement request throttling to avoid API rate limits:
 
 ```typescript
@@ -581,12 +581,12 @@ class RateLimiter {
 }
 ```
 
-### 3. User Privacy
+3. User Privacy
 - Always disclose data collection in your extension's privacy policy
 - Provide clear options to opt-out of email tracking
 - Consider implementing local-only validation for privacy-sensitive users
 
-### 4. Error Handling
+4. Error Handling
 Implement solid error handling for network failures and API issues:
 
 ```typescript
@@ -603,12 +603,12 @@ try {
 }
 ```
 
-## Conclusion
+Conclusion
 
 Building an email checker extension requires careful consideration of detection patterns, API integration, user privacy, and error handling. The patterns and code examples in this guide provide a solid foundation for creating a production-ready email verification tool. Remember to always respect user privacy, implement proper caching strategies, and handle API rate limits gracefully for the best user experience.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

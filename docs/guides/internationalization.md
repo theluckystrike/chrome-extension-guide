@@ -5,7 +5,7 @@ description: "Learn how to internationalize your Chrome extension with chrome.i1
 canonical_url: "https://bestchromeextensions.com/guides/internationalization/"
 ---
 
-# Chrome Extension Internationalization (i18n). How to Translate Your Extension
+Chrome Extension Internationalization (i18n). How to Translate Your Extension
 
 Introduction
 - Chrome's built-in i18n system via `chrome.i18n` API

@@ -4,7 +4,7 @@ title: "Chrome Extension Alarms & Scheduling. Developer Guide"
 description: "Learn Chrome extension alarms & scheduling with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/alarms-scheduling/"
 ---
-# Background Scheduling with chrome.alarms
+Background Scheduling with chrome.alarms
 
 Introduction {#introduction}
 - `chrome.alarms` is THE way to schedule background tasks in MV3

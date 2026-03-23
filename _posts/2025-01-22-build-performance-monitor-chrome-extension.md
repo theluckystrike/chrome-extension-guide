@@ -9,7 +9,7 @@ keywords: "performance monitor extension, fps counter chrome, memory monitor ext
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-performance-monitor-chrome-extension/"
 ---
 
-# Build a Performance Monitor Chrome Extension: Complete 2025 Guide
+Build a Performance Monitor Chrome Extension: Complete 2025 Guide
 
 Creating a performance monitor extension is one of the most useful projects you can undertake as a Chrome extension developer. Whether you're a web developer wanting to track your application's performance, a power user curious about browser metrics, or a developer building tools for other developers, a performance monitor extension provides real-time insights that were previously only available through browser developer tools.
 
@@ -27,7 +27,7 @@ For Power Users: Understand what tab or extension is consuming the most resource
 
 For QA Engineers: Reproduce and document performance issues with concrete data. Capture performance metrics during testing cycles.
 
-The Chrome browser provides rich APIs through the chrome.debugger and chrome.performance APIs that make building such an extension possible. Let's dive in and build it step by step.
+The Chrome browser provides rich APIs through the chrome.debugger and chrome.performance APIs that make building such an extension possible.  and build it step by step.
 
 ---
 

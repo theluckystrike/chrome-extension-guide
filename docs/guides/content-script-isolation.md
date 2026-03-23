@@ -4,7 +4,7 @@ title: "Chrome Extension Content Script Isolation. Developer Guide"
 description: "Learn Chrome extension content script isolation with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/content-script-isolation/"
 ---
-# Content Script Isolation Deep Dive
+Content Script Isolation detailed look
 
 Introduction {#introduction}
 - Content scripts run in an "isolated world". they share the DOM but NOT the JavaScript scope

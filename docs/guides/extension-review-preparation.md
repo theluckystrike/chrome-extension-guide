@@ -4,7 +4,7 @@ title: "Chrome Extension Review Preparation. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-review-preparation/"
 ---
-# Extension Review Preparation
+Extension Review Preparation
 
 This guide covers everything you need to prepare your Chrome extension for a successful Chrome Web Store (CWS) review. Following these guidelines will help avoid common rejection reasons and ensure a smooth submission process.
 

@@ -8,7 +8,7 @@ order: 5
 canonical_url: "https://bestchromeextensions.com/permissions/clipboardRead/"
 ---
 
-# clipboardRead Permission
+clipboardRead Permission
 
 What It Grants {#what-it-grants}
 Allows reading clipboard content using `navigator.clipboard.readText()` or `document.execCommand('paste')`.

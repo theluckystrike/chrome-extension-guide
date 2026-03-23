@@ -4,7 +4,7 @@ title: "Chrome Extension Web Request Patterns. Developer Guide"
 description: "Learn Chrome extension web request patterns with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/web-request-patterns/"
 ---
-# WebRequest API Patterns
+WebRequest API Patterns
 
 Overview {#overview}
 - `chrome.webRequest`. observe and optionally modify network requests

@@ -8,7 +8,7 @@ order: 10
 canonical_url: "https://bestchromeextensions.com/permissions/cookies/"
 ---
 
-# cookies Permission Reference
+cookies Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to `chrome.cookies` API

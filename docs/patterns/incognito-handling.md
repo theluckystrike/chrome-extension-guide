@@ -5,7 +5,7 @@ description: "Handle incognito mode in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/incognito-handling/"
 ---
 
-# Incognito Mode Handling
+Incognito Mode Handling
 
 Chrome's incognito mode provides privacy-focused browsing where no history, cookies, or site data persist after the session ends. Extensions must handle incognito contexts thoughtfully to respect user privacy.
 

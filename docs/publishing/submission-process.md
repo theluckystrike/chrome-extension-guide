@@ -5,7 +5,7 @@ description: "Complete step-by-step guide to submitting your Chrome extension to
 canonical_url: "https://bestchromeextensions.com/publishing/submission-process/"
 ---
 
-# Chrome Web Store Submission Process
+Chrome Web Store Submission Process
 
 Overview {#overview}
 Step-by-step guide from code to published extension. Covers everything from creating a developer account to passing review.

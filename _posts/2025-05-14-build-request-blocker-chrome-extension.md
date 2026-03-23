@@ -9,7 +9,7 @@ keywords: "chrome extension request blocker, block trackers chrome, script block
 canonical_url: "https://bestchromeextensions.com/2025/05/14/build-request-blocker-chrome-extension/"
 ---
 
-# Build a Request Blocker Chrome Extension: Block Trackers and Unwanted Scripts
+Build a Request Blocker Chrome Extension: Block Trackers and Unwanted Scripts
 
 The internet has become a battlefield of sorts. Every time you visit a website, dozens of invisible requests are made on your behalf, tracking scripts, advertising networks, analytics providers, and third-party widgets all compete to collect data about your browsing behavior. For privacy-conscious users and developers, understanding how to block these requests at the source is a powerful skill.
 

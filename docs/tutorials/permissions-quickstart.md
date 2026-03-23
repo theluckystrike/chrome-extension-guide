@@ -4,7 +4,7 @@ title: "Chrome Extension Permissions Quickstart. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/permissions-quickstart/"
 ---
-# Permissions Quickstart
+Permissions Quickstart
 
 Overview {#overview}
 `@theluckystrike/webext-permissions` simplifies Chrome's runtime permissions API with human-readable descriptions, batch operations, and proper error handling.

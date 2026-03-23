@@ -5,7 +5,7 @@ description: "Use Declarative Net Request API for network request filtering in M
 canonical_url: "https://bestchromeextensions.com/mv3/declarative-net-request/"
 ---
 
-# Declarative Net Request (DNR)
+Declarative Net Request (DNR)
 
 > The Declarative Net Request API is the MV3 replacement for the deprecated `webRequestBlocking` API.
 

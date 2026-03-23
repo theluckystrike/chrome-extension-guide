@@ -5,7 +5,7 @@ description: "The Chrome Bookmarks API enables creating, reading, updating, dele
 canonical_url: "https://bestchromeextensions.com/api-reference/bookmarks-api/"
 ---
 
-# Chrome Bookmarks API Reference
+Chrome Bookmarks API Reference
 
 The `chrome.bookmarks` API lets you create, read, update, delete, search, and organize bookmarks. Bookmarks are stored in a tree structure with folders and bookmark nodes.
 
@@ -467,7 +467,7 @@ Related {#related}
 
 - [bookmarks permission](../permissions/bookmarks.md)
 - [History API](history-api.md)
-- [Storage API Deep Dive](storage-api-deep detailed look.md)
+- [Storage API detailed look](storage-api-deep detailed look.md)
 - [Chrome bookmarks API docs](https://developer.chrome.com/docs/extensions/reference/api/bookmarks)
 Frequently Asked Questions
 

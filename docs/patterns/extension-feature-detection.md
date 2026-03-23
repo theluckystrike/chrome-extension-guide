@@ -5,7 +5,7 @@ description: "Detect browser and API capabilities at runtime with feature detect
 canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-detection/"
 ---
 
-# Extension Feature Detection Patterns
+Extension Feature Detection Patterns
 
 Feature detection is essential for Chrome extensions because APIs are continuously added in newer Chrome versions, and cross-browser compatibility requires handling missing APIs gracefully.
 

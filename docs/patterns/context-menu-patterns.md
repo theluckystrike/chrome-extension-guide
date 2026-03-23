@@ -5,7 +5,7 @@ description: "Create dynamic and contextual right-click menus with the Chrome Co
 canonical_url: "https://bestchromeextensions.com/patterns/context-menu-patterns/"
 ---
 
-# Context Menu Patterns
+Context Menu Patterns
 
 Overview {#overview}
 

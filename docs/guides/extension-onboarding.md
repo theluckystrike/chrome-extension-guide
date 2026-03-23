@@ -4,7 +4,7 @@ title: Chrome Extension User Onboarding. How to Convert Installs into Active Use
 description: Learn how to design effective user onboarding flows that turn new install into engaged, active users. Covers welcome pages, permission timing, feature discovery, and success metrics.
 ---
 
-# Chrome Extension User Onboarding. How to Convert Installs into Active Users
+Chrome Extension User Onboarding. How to Convert Installs into Active Users
 
 User onboarding is the critical bridge between installation and sustained engagement. For Chrome extensions, where users can disable or uninstall with a single click, a well-designed onboarding flow determines whether your extension thrives or becomes another forgotten tool. This guide covers the essential patterns and best practices for converting installs into active, loyal users.
 

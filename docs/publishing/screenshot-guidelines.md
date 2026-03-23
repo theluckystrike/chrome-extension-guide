@@ -5,7 +5,7 @@ description: "Create effective screenshots and promotional images for your Chrom
 canonical_url: "https://bestchromeextensions.com/publishing/screenshot-guidelines/"
 ---
 
-# Chrome Web Store Screenshot Guidelines
+Chrome Web Store Screenshot Guidelines
 
 Overview {#overview}
 Screenshots are the first thing users see. Good screenshots dramatically increase install rates.

@@ -4,7 +4,7 @@ title: "Chrome Extension Vocabulary Builder. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-vocabulary-builder/"
 ---
-# Build a Vocabulary Builder Extension
+Build a Vocabulary Builder Extension
 
 Build a vocabulary builder extension that saves words while browsing, provides definitions via dictionary API, and offers flashcard review with spaced repetition for effective learning.
 

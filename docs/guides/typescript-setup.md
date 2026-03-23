@@ -4,7 +4,7 @@ title: "Chrome Extension TypeScript Setup. Type-Safe Extension Development"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/typescript-setup/"
 ---
-# TypeScript Configuration for Chrome Extensions
+TypeScript Configuration for Chrome Extensions
 
 TypeScript brings type safety, better tooling, and maintainability to Chrome extension development. This guide covers the definitive setup for TypeScript in Manifest V3 extensions, from compiler configuration to advanced patterns for typed messaging and storage.
 

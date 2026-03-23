@@ -1,12 +1,12 @@
-# Building a Unit Converter Chrome Extension
+Building a Unit Converter Chrome Extension
 
 A comprehensive guide to creating a production-ready Unit Converter Chrome extension with TypeScript, modern architecture, and best practices.
 
-## Overview
+Overview
 
 A Unit Converter extension allows users to quickly convert values between different measurement units. This guide covers building a complete, production-ready extension using Manifest V3, TypeScript, and modern Chrome extension patterns.
 
-## Architecture and manifest.json Setup
+Architecture and manifest.json Setup
 
 The extension uses a modular architecture with clear separation of concerns:
 
@@ -33,7 +33,7 @@ unit-converter/
      conversion.test.ts
 ```
 
-### manifest.json Configuration
+manifest.json Configuration
 
 ```json
 {
@@ -71,9 +71,9 @@ unit-converter/
 }
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Shared Types (shared/types.ts)
+Shared Types (shared/types.ts)
 
 ```typescript
 export type UnitCategory = 'length' | 'weight' | 'temperature' | 'volume' | 'area' | 'speed' | 'time';
@@ -108,7 +108,7 @@ export interface StoredPreferences {
 }
 ```
 
-### Conversion Logic (shared/conversion.ts)
+Conversion Logic (shared/conversion.ts)
 
 ```typescript
 import { Unit, UnitCategory } from './types';
@@ -267,7 +267,7 @@ export function formatResult(value: number, precision: number = 4): string {
 }
 ```
 
-### Storage Service (shared/storage.ts)
+Storage Service (shared/storage.ts)
 
 ```typescript
 import { StoredPreferences, UnitCategory } from './types';
@@ -303,9 +303,9 @@ export async function updateCategory(category: UnitCategory): Promise<void> {
 }
 ```
 
-## UI Design
+UI Design
 
-### Popup HTML (popup/popup.html)
+Popup HTML (popup/popup.html)
 
 ```html
 <!DOCTYPE html>
@@ -362,7 +362,7 @@ export async function updateCategory(category: UnitCategory): Promise<void> {
 </html>
 ```
 
-### Popup TypeScript (popup/popup.ts)
+Popup TypeScript (popup/popup.ts)
 
 ```typescript
 import { unitCategories, convert, formatResult } from '../shared/conversion';
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Content Script Overlay (content-script/content-script.ts)
+Content Script Overlay (content-script/content-script.ts)
 
 ```typescript
 // Content script for in-page conversion overlay
@@ -615,9 +615,9 @@ function showConversionPopup(x: number, y: number, context: SelectionContext) {
 }
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions
+Required Permissions
 
 For this extension, we need minimal permissions:
 
@@ -630,7 +630,7 @@ For this extension, we need minimal permissions:
 }
 ```
 
-### Storage API Usage
+Storage API Usage
 
 The `chrome.storage.local` API provides persistent storage that syncs across user's Chrome instances when logged in:
 
@@ -653,7 +653,7 @@ chrome.storage.local.set({ key: 'value' }, () => {
 });
 ```
 
-### Message Passing
+Message Passing
 
 Communication between popup, background script, and content scripts:
 
@@ -676,9 +676,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## State Management Patterns
+State Management Patterns
 
-### Using chrome.storage.local
+Using chrome.storage.local
 
 State is persisted using Chrome's storage API:
 
@@ -736,9 +736,9 @@ class StateManager {
 }
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Input Validation
+Input Validation
 
 ```typescript
 function validateInput(value: string): { valid: boolean; value: number; error?: string } {
@@ -765,7 +765,7 @@ function validateInput(value: string): { valid: boolean; value: number; error?: 
 }
 ```
 
-### Overflow/Underflow Handling
+Overflow/Underflow Handling
 
 ```typescript
 function safeConvert(value: number, fromUnit: Unit, toUnit: Unit): number | null {
@@ -792,7 +792,7 @@ function safeConvert(value: number, fromUnit: Unit, toUnit: Unit): number | null
 }
 ```
 
-### Error Boundary Pattern
+Error Boundary Pattern
 
 ```typescript
 class ConversionErrorBoundary {
@@ -822,9 +822,9 @@ class ConversionErrorBoundary {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests (Jest)
+Unit Tests (Jest)
 
 ```typescript
 // tests/conversion.test.ts
@@ -874,7 +874,7 @@ describe('Unit Conversion', () => {
 });
 ```
 
-### Integration Tests with Puppeteer
+Integration Tests with Puppeteer
 
 ```typescript
 // tests/integration.test.ts
@@ -912,9 +912,9 @@ describe('Extension Integration Tests', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Lazy Loading
+Lazy Loading
 
 Load conversion logic only when needed:
 
@@ -934,7 +934,7 @@ async function getUnitsForCategory(category: UnitCategory): Promise<Record<strin
 }
 ```
 
-### Service Worker Optimization
+Service Worker Optimization
 
 Minimize service worker wake-ups:
 
@@ -954,7 +954,7 @@ function preloadConversionData() {
 }
 ```
 
-### Popup Performance
+Popup Performance
 
 ```typescript
 // Optimize popup rendering
@@ -977,9 +977,9 @@ class OptimizedPopup {
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-publication
+Pre-publication
 
 - [ ] Test in Chrome, Edge, and Firefox (if cross-browser)
 - [ ] Verify all icons at required sizes (16, 48, 128px)
@@ -989,7 +989,7 @@ class OptimizedPopup {
 - [ ] Test keyboard navigation and accessibility
 - [ ] Review privacy practices and data handling
 
-### Chrome Web Store Submission
+Chrome Web Store Submission
 
 1. Create ZIP package:
    ```bash
@@ -1013,14 +1013,14 @@ class OptimizedPopup {
    - Pay one-time developer fee ($5)
    - Submit for review (usually 1-3 days)
 
-### Post-publication
+Post-publication
 
 - [ ] Monitor for user feedback and reviews
 - [ ] Track crashes and errors via chrome.runtime.lastError
 - [ ] Plan for regular updates
 - [ ] Set up update notifications
 
-## Summary
+Summary
 
 This guide covered building a complete Unit Converter Chrome extension with:
 
@@ -1029,7 +1029,7 @@ This guide covered building a complete Unit Converter Chrome extension with:
 - Popup UI for quick conversions
 - Content script for in-page overlay conversions
 - Chrome Storage API for state persistence
-- Robust error handling for edge cases
+- Solid error handling for edge cases
 - Testing strategies including unit and integration tests
 - Performance optimizations for fast execution
 - Publishing checklist for Chrome Web Store submission

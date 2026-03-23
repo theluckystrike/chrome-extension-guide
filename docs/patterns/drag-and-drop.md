@@ -5,7 +5,7 @@ description: "Implement drag and drop in extension UIs."
 canonical_url: "https://bestchromeextensions.com/patterns/drag-and-drop/"
 ---
 
-# Drag and Drop in Extensions
+Drag and Drop in Extensions
 
 Overview {#overview}
 

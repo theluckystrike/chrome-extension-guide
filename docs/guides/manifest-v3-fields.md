@@ -4,7 +4,7 @@ title: "Chrome Extension Manifest V3 Fields. Developer Guide"
 description: "Learn Chrome extension manifest v3 fields with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-fields/"
 ---
-# Manifest.json Complete Field Reference (Manifest V3)
+Manifest.json Complete Field Reference (Manifest V3)
 
 Every field available in a Chrome Extension MV3 manifest.json, explained with valid values, defaults, and working examples.
 

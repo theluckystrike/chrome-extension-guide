@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "Chrome Extension Proxy Settings Deep Dive. Best Practices"
+title: "Chrome Extension Proxy Settings detailed look. Best Practices"
 description: "Configure proxy settings programmatically in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings-deep detailed look/"
 ---
 
-# Proxy Settings Deep Dive
+Proxy Settings detailed look
 
 Overview {#overview}
 

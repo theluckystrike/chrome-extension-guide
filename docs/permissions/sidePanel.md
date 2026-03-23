@@ -8,7 +8,7 @@ order: 38
 canonical_url: "https://bestchromeextensions.com/permissions/sidePanel/"
 ---
 
-# sidePanel Permission
+sidePanel Permission
 
 Overview {#overview}
 

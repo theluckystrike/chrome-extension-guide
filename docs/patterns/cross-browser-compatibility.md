@@ -5,7 +5,7 @@ description: "Build extensions that work across Chrome, Firefox, and Edge."
 canonical_url: "https://bestchromeextensions.com/patterns/cross-browser-compatibility/"
 ---
 
-# Cross-Browser Compatibility
+Cross-Browser Compatibility
 
 Overview {#overview}
 

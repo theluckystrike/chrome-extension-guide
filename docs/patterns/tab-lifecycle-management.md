@@ -5,7 +5,7 @@ description: "Manage tab lifecycle events effectively."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-lifecycle-management/"
 ---
 
-# Tab Lifecycle Management Patterns
+Tab Lifecycle Management Patterns
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Clipboard API. How to Copy and Paste Programmatically"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/clipboard-api/"
 ---
-# Clipboard API Guide
+Clipboard API Guide
 
 Overview {#overview}
 - Modern approach: `navigator.clipboard` API

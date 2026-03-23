@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-website-blocker-chrome-extension/"
 ---
 
-# Build a Website Blocker Chrome Extension. Complete Step-by-Step Tutorial
+Build a Website Blocker Chrome Extension. Complete Step-by-Step Tutorial
 
 In today's hyper-connected digital world, maintaining focus has become one of the biggest challenges for professionals, students, and anyone trying to be productive. Distracting websites constantly vie for our attention, from social media platforms to news sites, breaking our concentration every few minutes. Building a website blocker extension is an excellent project that not only solves a real problem but also teaches you valuable skills in Chrome extension development.
 

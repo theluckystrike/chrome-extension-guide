@@ -8,7 +8,7 @@ order: 9
 canonical_url: "https://bestchromeextensions.com/permissions/contextMenus/"
 ---
 
-# contextMenus Permission Reference
+contextMenus Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to the `chrome.contextMenus` API

@@ -5,7 +5,7 @@ description: "Match URLs with patterns for content script injection."
 canonical_url: "https://bestchromeextensions.com/patterns/url-matching-patterns/"
 ---
 
-# URL Matching Patterns in Chrome Extensions
+URL Matching Patterns in Chrome Extensions
 
 URL matching patterns in Chrome extensions define which URLs an extension can access or interact with. Understanding these patterns is essential for configuring permissions, content scripts, and network request rules.
 

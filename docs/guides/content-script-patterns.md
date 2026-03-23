@@ -4,7 +4,7 @@ title: "Chrome Extension Content Script Patterns. Developer Guide"
 description: "Learn Chrome extension content script patterns with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/content-script-patterns/"
 ---
-# Content Script Patterns
+Content Script Patterns
 
 Overview {#overview}
 Content scripts run in web pages and bridge the gap between the page and your extension. They can read/modify the DOM but need messaging to communicate with the background service worker.

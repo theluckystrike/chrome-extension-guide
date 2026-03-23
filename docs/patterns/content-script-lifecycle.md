@@ -5,7 +5,7 @@ description: "Manage content script lifecycle effectively."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-lifecycle/"
 ---
 
-# Content Script Lifecycle Management
+Content Script Lifecycle Management
 
 Content scripts in Chrome extensions have a distinct lifecycle that differs from regular web page scripts. Understanding this lifecycle is crucial for building robust, memory-efficient extensions.
 

@@ -5,7 +5,7 @@ description: "The Chrome Windows API creates, modifies, queries, and monitors br
 canonical_url: "https://bestchromeextensions.com/api-reference/windows-api/"
 ---
 
-# Chrome Windows API Reference
+Chrome Windows API Reference
 
 The `chrome.windows` API lets you create, modify, query, and monitor browser windows. It works closely with the [Tabs API](tabs-api.md). every tab lives inside a window.
 

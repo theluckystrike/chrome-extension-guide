@@ -9,7 +9,7 @@ keywords: "dns lookup extension, domain info chrome, whois extension, chrome ext
 canonical_url: "https://bestchromeextensions.com/2025/01/26/build-dns-lookup-chrome-extension/"
 ---
 
-# Build a DNS Lookup Chrome Extension: Complete Developer Guide
+Build a DNS Lookup Chrome Extension: Complete Developer Guide
 
 In the world of web development and network administration, having quick access to DNS information is essential. Whether you are troubleshooting website issues, verifying domain configuration, or investigating potential security threats, a dns lookup extension can save valuable time. This comprehensive guide will walk you through building a fully functional DNS lookup Chrome extension from scratch, covering everything from project setup to advanced features like whois lookups and domain info retrieval.
 

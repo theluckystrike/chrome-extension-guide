@@ -8,7 +8,7 @@ order: 27
 canonical_url: "https://bestchromeextensions.com/permissions/offscreen/"
 ---
 
-# offscreen Permission
+offscreen Permission
 
 The `offscreen` permission enables the Chrome `chrome.offscreen` API, which allows extensions to create offscreen documents for performing operations that require DOM access from the extension's service worker context. This is a Manifest V3-only feature that replaces the background page DOM access available in Manifest V2.
 

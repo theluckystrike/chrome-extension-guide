@@ -1,8 +1,8 @@
-# Extension Onboarding Patterns
+Extension Onboarding Patterns
 
 Onboarding is critical for Chrome extensions. Unlike web apps where users can immediately interact, extensions require installation, often need permissions, and users may be skeptical about granting access to their browser. A well-designed onboarding experience can dramatically improve activation rates, reduce uninstalls, and set the foundation for long-term engagement. This guide covers proven patterns for welcoming new users, educating them about features, and guiding them through initial setup.
 
-## Table of Contents
+Table of Contents
 
 - [First-Run Experience](#first-run-experience)
 - [Welcome Page Patterns](#welcome-page-patterns)
@@ -15,11 +15,11 @@ Onboarding is critical for Chrome extensions. Unlike web apps where users can im
 
 ---
 
-## First-Run Experience
+First-Run Experience
 
 The first-run experience begins the moment your extension is installed. Chrome provides the `chrome.runtime.onInstalled` event which fires when the extension is first installed, updated to a new version, or the browser restarts. This is your opportunity to initialize state and trigger onboarding flows.
 
-### Detecting Fresh Installation
+Detecting Fresh Installation
 
 ```ts
 // background.ts

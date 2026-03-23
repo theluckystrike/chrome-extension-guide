@@ -4,7 +4,7 @@ title: "Chrome Extension Form Filler. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-form-filler/"
 ---
-# Build a Form Filler Extension
+Build a Form Filler Extension
 
 What You'll Build {#what-youll-build}
 - Auto-fill forms with saved profiles

@@ -5,7 +5,7 @@ description: "Detect user idle state with the Idle API to pause or resume extens
 canonical_url: "https://bestchromeextensions.com/patterns/idle-detection/"
 ---
 
-# Chrome Extension Idle Detection API Patterns
+Chrome Extension Idle Detection API Patterns
 
 Overview {#overview}
 

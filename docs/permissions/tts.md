@@ -8,7 +8,7 @@ order: 45
 canonical_url: "https://bestchromeextensions.com/permissions/tts/"
 ---
 
-# tts Permission. Chrome Extension Reference
+tts Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"tts"` (consumer) or `"ttsEngine"` (provider)

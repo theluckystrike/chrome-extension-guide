@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "Chrome Storage API Deep Dive"
+title: "Chrome Storage API detailed look"
 description: "An in-depth guide to the Chrome Storage API covering all four storage areas, quota management, change listeners, migration patterns, and advanced usage for extension data persistence."
 canonical_url: "https://bestchromeextensions.com/api-reference/storage-api-deep detailed look/"
 ---
 
-# Chrome Storage API Deep Dive
+Chrome Storage API detailed look
 
 This is an in-depth reference for `chrome.storage`, covering all four storage areas, quota management, change listeners, migration patterns, performance, and advanced usage with `@theluckystrike/webext-storage`.
 
@@ -170,7 +170,7 @@ interface StorageChange {
 }
 ```
 
-@theluckystrike/webext-storage Deep Dive {#theluckystrikewebext-storage-deep detailed look}
+@theluckystrike/webext-storage detailed look {#theluckystrikewebext-storage-deep detailed look}
 
 The `@theluckystrike/webext-storage` package wraps `chrome.storage` with type safety, schema validation, and a cleaner API.
 
@@ -293,7 +293,7 @@ unwatch();
 
 Advanced Patterns with webext-storage {#advanced-patterns-with-webext-storage}
 
-#### Migrating schema versions
+Migrating schema versions
 
 ```ts
 const schemaV2 = defineSchema({
@@ -317,7 +317,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-#### Derived/computed values
+Derived/computed values
 
 ```ts
 // Don't store derived values. compute them
@@ -334,7 +334,7 @@ async function getTotal(): Promise<number> {
 }
 ```
 
-#### Cross-context state machine
+Cross-context state machine
 
 ```ts
 const schema = defineSchema({

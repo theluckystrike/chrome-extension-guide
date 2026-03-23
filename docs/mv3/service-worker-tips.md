@@ -5,7 +5,7 @@ description: "Best practices for Chrome extension service workers in Manifest V3
 canonical_url: "https://bestchromeextensions.com/mv3/service-worker-tips/"
 ---
 
-# MV3 Service Worker Tips
+MV3 Service Worker Tips
 
 Practical tips for building solid Chrome Extension service workers using Manifest V3.
 

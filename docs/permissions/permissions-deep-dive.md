@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Chrome Extension Permissions Deep Dive"
+title: "Chrome Extension Permissions detailed look"
 description: "The definitive reference for every Chrome extension permission: what each grants, what users see, and how to request only what you need."
 canonical_url: "https://bestchromeextensions.com/permissions/permissions-deep detailed look/"
 --- 1. [How Permissions Work](#how-permissions-work)"
@@ -9,7 +9,7 @@ category: permissions
 order: 29
 ---
 
-# Chrome Extension Permissions Deep Dive
+Chrome Extension Permissions detailed look
 
 The definitive reference for every Chrome extension permission: what each grants,
 what users see, and how to request only what you need.

@@ -9,7 +9,7 @@ keywords: "chrome.runtime api, extension messaging, onInstalled event, runtime c
 canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-runtime-api-messaging/"
 ---
 
-# Chrome Runtime API: Complete Guide to Extension Messaging and Lifecycle
+Chrome Runtime API: Complete Guide to Extension Messaging and Lifecycle
 
 The `chrome.runtime` API is the backbone of every Chrome extension. It handles the fundamental tasks that keep your extension running: messaging between components, lifecycle management, installation and update events, and communication with other extensions. Whether you are building a simple popup or a complex multi-component system, you will rely on `chrome.runtime` more than almost any other API.
 

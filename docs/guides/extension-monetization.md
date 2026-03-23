@@ -4,7 +4,7 @@ title: "Chrome Extension Monetization. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-monetization/"
 ---
-# Extension Monetization Guide
+Extension Monetization Guide
 
 Overview {#overview}
 - Strategies for generating revenue from Chrome extensions

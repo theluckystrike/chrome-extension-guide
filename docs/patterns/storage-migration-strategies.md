@@ -5,7 +5,7 @@ description: "Migrate data between storage APIs when updating extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/storage-migration-strategies/"
 ---
 
-# Storage Migration Strategies
+Storage Migration Strategies
 
 Strategies for migrating extension storage data between versions.
 

@@ -5,7 +5,7 @@ description: "Complete reference for Chrome Extension permissions. Quick lookup 
 canonical_url: "https://bestchromeextensions.com/guides/permissions-cheatsheet/"
 ---
 
-# Chrome Extension Permissions Cheatsheet
+Chrome Extension Permissions Cheatsheet
 
 Complete reference for all Chrome Extension permissions. Use this cheatsheet to quickly look up permissions, understand their use cases, and determine which ones your extension needs.
 
@@ -192,7 +192,7 @@ Quick Lookup Table {#quick-lookup}
 
 Related Resources {#related-resources}
 
-- [Permissions Deep Dive](/permissions/permissions-deep detailed look/). Detailed permission explanations
+- [Permissions detailed look](/permissions/permissions-deep detailed look/). Detailed permission explanations
 - [Permission Strategy](/guides/extension-permissions-strategy/). Best practices for permission requests
 - [Manifest V3 Migration](/guides/mv2-to-mv3-migration/). Migrating from MV2 to MV3
 - [Security Best Practices](/guides/security-best-practices/). Extension security guidelines

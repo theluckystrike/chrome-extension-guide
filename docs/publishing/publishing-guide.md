@@ -5,7 +5,7 @@ description: "Complete guide to publishing your Chrome extension to the Chrome W
 canonical_url: "https://bestchromeextensions.com/publishing/publishing-guide/"
 ---
 
-# Chrome Web Store Publishing Guide
+Chrome Web Store Publishing Guide
 
 Complete guide from zero to published extension. Covers developer registration,
 store listing preparation, review process, updates, analytics, and monetization.

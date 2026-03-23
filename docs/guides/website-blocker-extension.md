@@ -1,16 +1,16 @@
-# Building a Website Blocker Chrome Extension
+Building a Website Blocker Chrome Extension
 
 A comprehensive guide to creating a production-ready website blocker extension using Chrome's declarativeNetRequest API.
 
-## Overview
+Overview
 
 Website blocker extensions are among the most popular types of productivity tools. This guide covers building a solid blocker using Manifest V3, TypeScript, and modern Chrome APIs.
 
-## Architecture and manifest.json Setup
+Architecture and manifest.json Setup
 
 The extension uses Manifest V3 with the declarativeNetRequest API for efficient, privacy-friendly blocking.
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -44,7 +44,7 @@ The extension uses Manifest V3 with the declarativeNetRequest API for efficient,
 }
 ```
 
-### Project Structure
+Project Structure
 
 ```
 website-blocker/
@@ -72,9 +72,9 @@ website-blocker/
  package.json
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Types (src/shared/types.ts)
+Types (src/shared/types.ts)
 
 ```typescript
 export interface BlockedSite {
@@ -113,7 +113,7 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
 };
 ```
 
-### Storage Manager (src/background/storage.ts)
+Storage Manager (src/background/storage.ts)
 
 ```typescript
 import { ExtensionSettings, BlockedSite, DEFAULT_SETTINGS } from '../shared/types';
@@ -150,7 +150,7 @@ export class StorageManager {
 }
 ```
 
-### Blocker Logic (src/background/blocker.ts)
+Blocker Logic (src/background/blocker.ts)
 
 ```typescript
 import { StorageManager } from './storage';
@@ -221,7 +221,7 @@ export class BlockerEngine {
 }
 ```
 
-### Background Service Worker (src/background/index.ts)
+Background Service Worker (src/background/index.ts)
 
 ```typescript
 import { StorageManager } from './storage';
@@ -276,9 +276,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 initialize();
 ```
 
-## UI Design
+UI Design
 
-### Popup Component (src/popup/App.tsx)
+Popup Component (src/popup/App.tsx)
 
 ```typescript
 import React, { useState, useEffect } from 'react';
@@ -369,7 +369,7 @@ export function App() {
 }
 ```
 
-### Custom Blocked Page (public/blocked.html)
+Custom Blocked Page (public/blocked.html)
 
 ```html
 <!DOCTYPE html>
@@ -408,9 +408,9 @@ export function App() {
 </html>
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions Explained
+Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -419,7 +419,7 @@ export function App() {
 | `declarativeNetRequestWithHostAccess` | Access host patterns for blocking |
 | `tabs` | Read tab URLs for blocking decisions |
 
-### Declarative Net Request API
+Declarative Net Request API
 
 The declarativeNetRequest API is the recommended way to block requests in MV3:
 
@@ -427,9 +427,9 @@ The declarativeNetRequest API is the recommended way to block requests in MV3:
 - Efficient: Rules evaluated by browser, not extension
 - No host permission for blocking: Only needed for reading URLs
 
-## State Management and Storage Patterns
+State Management and Storage Patterns
 
-### Using chrome.storage.local
+Using chrome.storage.local
 
 ```typescript
 // Pattern for atomic updates
@@ -443,7 +443,7 @@ async function updateSetting<K extends keyof ExtensionSettings>(
 }
 ```
 
-### Sync Across Components
+Sync Across Components
 
 ```typescript
 // Popup to Background communication
@@ -459,9 +459,9 @@ chrome.tabs.query({}, (tabs) => {
 });
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Common Issues and Solutions
+Common Issues and Solutions
 
 1. Rules not updating: Ensure `updateDynamicRules` is called after storage changes
 2. Pattern matching failures: Validate regex patterns before saving
@@ -490,9 +490,9 @@ async function addSiteWithQuotaCheck(site: BlockedSite): Promise<boolean> {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing Storage
+Unit Testing Storage
 
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -517,7 +517,7 @@ describe('StorageManager', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 // Test blocking behavior
@@ -540,9 +540,9 @@ async function testBlocking(): Promise<void> {
 }
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Rule Optimization
+Rule Optimization
 
 ```typescript
 // Combine multiple patterns into single rule
@@ -568,7 +568,7 @@ function optimizeRules(sites: BlockedSite[]): chrome.declarativeNetRequest.Rule[
 }
 ```
 
-### Lazy Loading
+Lazy Loading
 
 ```typescript
 // Only load blocking rules when needed
@@ -582,9 +582,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 
 - [ ] Test in Chrome, Edge, and Firefox (if cross-browser)
 - [ ] Verify all permissions are necessary
@@ -593,7 +593,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 - [ ] Verify privacy policy URL (if needed)
 - [ ] Add screenshots (1280x800, PNG/JPG)
 
-### Submission
+Submission
 
 1. Package extension: `zip -r extension.zip .`
 2. Go to Chrome Web Store Developer Dashboard
@@ -601,13 +601,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 4. Fill store listing details
 5. Submit for review
 
-### Post-approval
+Post-approval
 
 - Monitor review feedback
 - Set up crash reporting
 - Configure auto-update
 - Prepare for user feedback
 
-## Conclusion
+Conclusion
 
 This guide provides a complete foundation for building a production-ready website blocker. The declarativeNetRequest API ensures privacy and performance, while TypeScript provides type safety throughout the codebase. Remember to handle edge cases, test thoroughly, and follow Chrome's guidelines for a smooth publishing experience.

@@ -1,12 +1,12 @@
-# WebRequest API Guide
+WebRequest API Guide
 
-## Overview
+Overview
 - Requires `"webRequest"` permission plus host permissions for URLs you want to intercept
 - Provides hooks into the HTTP request lifecycle. observe, block, or modify requests
 - Events fire at different stages: before request, send headers, headers received, completion, errors
 - In Manifest V2, blocking listeners could modify requests; in MV3, most blocking is deprecated
 
-## Lifecycle Events
+Lifecycle Events
 
 The WebRequest API fires events in this order:
 
@@ -16,7 +16,7 @@ onHeadersReceived → onAuthRequired → onResponseStarted →
 onCompleted / onErrorOccurred
 ```
 
-### onBeforeRequest. Intercepting Requests
+onBeforeRequest. Intercepting Requests
 Fired when a request is about to occur. Use to:
 - Cancel requests (`blocking: true`)
 - Redirect requests
@@ -56,7 +56,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-### onBeforeSendHeaders. Modifying Request Headers
+onBeforeSendHeaders. Modifying Request Headers
 Fired before request headers are sent. Use to:
 - Add custom headers
 - Modify existing headers (User-Agent, Referer, etc.)
@@ -86,7 +86,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-### onSendHeaders. Observing Sent Headers
+onSendHeaders. Observing Sent Headers
 Fired after request headers have been sent. Read-only. cannot modify. Useful for:
 - Logging/monitoring
 - Analytics
@@ -102,7 +102,7 @@ chrome.webRequest.onSendHeaders.addListener(
 );
 ```
 
-### onHeadersReceived. Response Headers
+onHeadersReceived. Response Headers
 Fired when response headers are received. Use to:
 - Modify response headers
 - Set cookies
@@ -132,7 +132,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 ```
 
-### onAuthRequired. Handling Authentication
+onAuthRequired. Handling Authentication
 Fired when the server requests authentication (401/407). Use to:
 - Provide credentials automatically
 - Cancel authentication
@@ -153,7 +153,7 @@ chrome.webRequest.onAuthRequired.addListener(
 );
 ```
 
-### onResponseStarted. Response Body Starts
+onResponseStarted. Response Body Starts
 Fired when first byte of response is received. Read-only observer.
 
 ```javascript
@@ -165,7 +165,7 @@ chrome.webRequest.onResponseStarted.addListener(
 );
 ```
 
-### onCompleted. Request Completed
+onCompleted. Request Completed
 Fired when request completes successfully. Read-only.
 
 ```javascript
@@ -177,7 +177,7 @@ chrome.webRequest.onCompleted.addListener(
 );
 ```
 
-### onErrorOccurred. Request Failed
+onErrorOccurred. Request Failed
 Fired when request fails (network error, timeout, etc.).
 
 ```javascript
@@ -189,7 +189,7 @@ chrome.webRequest.onErrorOccurred.addListener(
 );
 ```
 
-## RequestFilter
+RequestFilter
 
 Filter which requests your listeners handle:
 
@@ -219,9 +219,9 @@ Filter which requests your listeners handle:
 }
 ```
 
-## Blocking vs Non-Blocking Listeners
+Blocking vs Non-Blocking Listeners
 
-### Blocking (MV2 only, deprecated in MV3)
+Blocking (MV2 only, deprecated in MV3)
 - Return an object to modify request
 - Use `'blocking'` in `extraInfoSpec` array
 - In MV3 service workers, this throws an error
@@ -238,7 +238,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 // This will cause an error!
 ```
 
-### Non-Blocking (Always Works)
+Non-Blocking (Always Works)
 - Don't return anything or use `'asyncBlocking'`
 - Use for observation/monitoring
 - Cannot modify requests
@@ -254,9 +254,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-## Modifying Headers and Redirecting
+Modifying Headers and Redirecting
 
-### Adding/Modifying Headers
+Adding/Modifying Headers
 ```javascript
 // Add header to all requests
 chrome.webRequest.onBeforeSendHeaders.addListener(
@@ -273,7 +273,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-### Redirecting Requests
+Redirecting Requests
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
@@ -288,7 +288,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-### Blocking Requests Entirely
+Blocking Requests Entirely
 ```javascript
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => ({ cancel: true }),
@@ -297,20 +297,20 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-## MV3 Limitations: No Blocking in Service Workers
+MV3 Limitations: No Blocking in Service Workers
 
 Manifest V3 runs extension logic in service workers, which are:
 - Event-driven, can be terminated at any time
 - Cannot use synchronous blocking APIs
 
-### What's Changed
+What's Changed
 | Feature | MV2 | MV3 |
 |---------|-----|-----|
 | Blocking listeners |  |  (in service worker) |
 | `webRequestBlocking` permission |  |  (removed) |
 | Access to request body |  | Limited |
 
-### The Workaround: Declarative Net Request
+The Workaround: Declarative Net Request
 MV3 introduces `declarativeNetRequest` for declarative rules:
 
 ```javascript
@@ -352,15 +352,15 @@ MV3 introduces `declarativeNetRequest` for declarative rules:
 ]
 ```
 
-## Migrating to declarativeNetRequest
+Migrating to declarativeNetRequest
 
-### When to Use Declarative Net Request
+When to Use Declarative Net Request
 - Blocking ads, trackers
 - Redirecting URLs
 - Modifying headers (request/response)
 - Setting cookies
 
-### When webRequest Is Still Needed
+When webRequest Is Still Needed
 - Reading request/response body content
 - Complex logic that depends on runtime state
 - Authentication handling
@@ -380,9 +380,9 @@ chrome.webRequest.onCompleted.addListener(
 // rules.json handles blocking/redirecting
 ```
 
-## Debugging Network Requests
+Debugging Network Requests
 
-### Using chrome.webRequest API
+Using chrome.webRequest API
 ```javascript
 // Log all requests
 chrome.webRequest.onBeforeRequest.addListener(
@@ -400,7 +400,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-### Using chrome.debugger API (More Powerful)
+Using chrome.debugger API (More Powerful)
 ```javascript
 // More detailed network debugging
 chrome.debugger.attach({ tabId: tabId }, '1.3', () => {
@@ -417,7 +417,7 @@ chrome.debugger.attach({ tabId: tabId }, '1.3', () => {
 });
 ```
 
-### Extension DevTools Panel
+Extension DevTools Panel
 ```javascript
 // In your DevTools extension
 chrome.devtools.network.onRequestFinished.addListener((request) => {
@@ -427,9 +427,9 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
 });
 ```
 
-## Code Examples
+Code Examples
 
-### Complete MV2 Blocking Extension
+Complete MV2 Blocking Extension
 ```javascript
 // background.js - MV2 with blocking
 chrome.webRequest.onBeforeRequest.addListener(
@@ -454,7 +454,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 ```
 
-### Complete MV3 Non-Blocking Extension
+Complete MV3 Non-Blocking Extension
 ```javascript
 // background.js - MV3 service worker (non-blocking)
 // Note: Use declarativeNetRequest for blocking features
@@ -485,7 +485,7 @@ chrome.webRequest.onAuthRequired.addListener(
 );
 ```
 
-### Declarative Net Request Rules
+Declarative Net Request Rules
 ```json
 // rules.json
 [
@@ -541,12 +541,12 @@ chrome.webRequest.onAuthRequired.addListener(
 ]
 ```
 
-## Reference
+Reference
 - Official Docs: https://developer.chrome.com/docs/extensions/reference/api/webRequest
 - Declarative Net Request: https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest
 - MV3 Migration Guide: https://developer.chrome.com/docs/extensions/mv3/intro/
 
-## Common Mistakes
+Common Mistakes
 - Using blocking in MV3 service workers. use `declarativeNetRequest` instead
 - Missing host permissions. need permissions for URLs you're intercepting
 - Confusing `onSendHeaders` (observer) with `onBeforeSendHeaders` (can modify)

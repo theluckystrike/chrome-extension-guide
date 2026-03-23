@@ -4,7 +4,7 @@ title: "Chrome Extension Debugging Tools. Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-debugging-tools/"
 ---
-# Chrome Extension Debugging Tools
+Chrome Extension Debugging Tools
 
 A comprehensive detailed look into debugging tools and techniques for Chrome extension development.
 

@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "Service Workers in Chrome Extensions: A Deep Dive"
+title: "Service Workers in Chrome Extensions: A detailed look"
 description: "Master Chrome Extension service workers: lifecycle, event-driven architecture, state management, keeping workers alive, alarm patterns, updates, and debugging."
 canonical_url: "https://bestchromeextensions.com/tutorials/service-workers-deep detailed look/"
 ---
 
-# Service Workers in Chrome Extensions: A Deep Dive
+Service Workers in Chrome Extensions: A detailed look
 
 Service workers are the backbone of Chrome Extensions in Manifest V3. They serve as the background controller, managing events, coordinating communication between extension components, and handling long-running tasks. Understanding the service worker lifecycle and architecture is essential for building robust, performant extensions.
 

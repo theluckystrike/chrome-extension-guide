@@ -1,8 +1,8 @@
-# Building a Code Snippet Manager Chrome Extension
+Building a Code Snippet Manager Chrome Extension
 
 A code snippet manager lets developers save, organize, and quickly retrieve reusable code blocks. This guide walks through building a full-featured snippet manager extension using Manifest V3, TypeScript, and modern Chrome extension patterns. You'll learn to architect the extension, implement core features, design the UI, handle state management, and prepare for publication.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core TypeScript Implementation](#core-typescript-implementation)
@@ -17,11 +17,11 @@ A code snippet manager lets developers save, organize, and quickly retrieve reus
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
 The snippet manager follows a standard extension architecture with three main contexts: a service worker for background logic, a popup for quick access, and content scripts for page interaction. The service worker acts as the central hub, managing all state and coordinating communication between the popup and content scripts.
 
-### Directory Structure
+Directory Structure
 
 ```
 snippet-manager/
@@ -52,7 +52,7 @@ snippet-manager/
  tsconfig.json
 ```
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {

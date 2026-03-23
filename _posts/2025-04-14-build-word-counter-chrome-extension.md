@@ -9,7 +9,7 @@ keywords: "chrome extension word counter, count words chrome, text counter chrom
 canonical_url: "https://bestchromeextensions.com/2025/04/14/build-word-counter-chrome-extension/"
 ---
 
-# Build a Word Counter Chrome Extension: Count Text on Any Webpage
+Build a Word Counter Chrome Extension: Count Text on Any Webpage
 
 Have you ever needed to quickly count the words in an article you are reading, a document you are editing, or text on any webpage? Whether you are a writer checking article length, a student working on an assignment, or a content creator ensuring your social media posts meet character limits, a word counter is an invaluable tool. we will walk you through building a fully functional word counter Chrome extension that works on any webpage you visit.
 

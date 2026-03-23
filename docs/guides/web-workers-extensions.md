@@ -4,7 +4,7 @@ title: "Chrome Extension Web Workers. Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
 canonical_url: "https://bestchromeextensions.com/guides/web-workers-extensions/"
 ---
-# Web Workers in Chrome Extensions
+Web Workers in Chrome Extensions
 
 Overview {#overview}
 Web Workers enable running JavaScript in background threads, keeping your extension's UI responsive by offloading CPU-intensive operations. They run in parallel to the main thread and communicate via message passing.

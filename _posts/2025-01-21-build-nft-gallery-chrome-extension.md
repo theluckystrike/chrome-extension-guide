@@ -9,7 +9,7 @@ keywords: "nft gallery extension, nft chrome extension, opensea api extension, w
 canonical_url: "https://bestchromeextensions.com/2025/01/21/build-nft-gallery-chrome-extension/"
 ---
 
-# Build an NFT Gallery Chrome Extension with OpenSea API
+Build an NFT Gallery Chrome Extension with OpenSea API
 
 The NFT ecosystem has exploded in recent years, with millions of digital collectibles traded across Ethereum, Polygon, and other blockchain networks. For crypto enthusiasts and collectors, keeping track of their NFT portfolio often means juggling multiple marketplaces, wallets, and tracking tools. What if you could have your entire NFT gallery accessible directly from your browser toolbar?
 

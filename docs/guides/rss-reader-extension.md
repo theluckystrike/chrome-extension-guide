@@ -1,11 +1,11 @@
-# Building an RSS Reader Chrome Extension
+Building an RSS Reader Chrome Extension
 
-## Overview
+Overview
 This guide covers building a production-ready RSS reader extension using Chrome's MV3 architecture, TypeScript, and modern state management patterns.
 
-## Architecture & Manifest Setup
+Architecture & Manifest Setup
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 ```json
 {
   "manifest_version": 3,
@@ -44,7 +44,7 @@ This guide covers building a production-ready RSS reader extension using Chrome'
 }
 ```
 
-### Project Structure
+Project Structure
 ```
 src/
  background/
@@ -70,9 +70,9 @@ src/
      settings.ts       # Options page
 ```
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Shared Types (shared/types.ts)
+Shared Types (shared/types.ts)
 ```typescript
 interface Feed {
   id: string;
@@ -111,7 +111,7 @@ interface SyncOptions {
 }
 ```
 
-### Feed Parser (background/feed-parser.ts)
+Feed Parser (background/feed-parser.ts)
 ```typescript
 import { Feed, Article } from '../shared/types';
 
@@ -221,9 +221,9 @@ export class FeedParser {
 }
 ```
 
-## State Management & Storage
+State Management & Storage
 
-### Storage Abstraction (background/storage.ts)
+Storage Abstraction (background/storage.ts)
 ```typescript
 import { Feed, Article, FeedState } from '../shared/types';
 
@@ -290,16 +290,16 @@ export class StorageManager {
 export const storage = new StorageManager();
 ```
 
-## Chrome APIs & Permissions
+Chrome APIs & Permissions
 
-### Required Permissions
+Required Permissions
 - `storage` - Persist feeds, articles, and settings
 - `notifications` - New article alerts
 - `alarms` - Scheduled feed refresh
 - `tabs` - Open articles in new tabs
 - `host_permissions: <all_urls>` - Fetch RSS feeds from any domain
 
-### Service Worker Implementation (background/worker.ts)
+Service Worker Implementation (background/worker.ts)
 ```typescript
 import { FeedParser } from './feed-parser';
 import { storage } from './storage';
@@ -416,9 +416,9 @@ function notifyNewArticles(): void {
 }
 ```
 
-## Error Handling & Edge Cases
+Error Handling & Edge Cases
 
-### Robust Error Handling Pattern
+Robust Error Handling Pattern
 ```typescript
 async function safeFetch<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -466,7 +466,7 @@ async function fetchWithRetry(
 }
 ```
 
-### Offline Handling
+Offline Handling
 ```typescript
 class OfflineManager {
   private online = navigator.onLine;
@@ -500,9 +500,9 @@ class OfflineManager {
 }
 ```
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup Interface (popup/App.tsx)
+Popup Interface (popup/App.tsx)
 ```typescript
 import React, { useState, useEffect } from 'react';
 import { Feed, Article } from '../shared/types';
@@ -573,7 +573,7 @@ function ArticleItem({ article }: { article: Article }) {
 }
 ```
 
-### Side Panel Reader (sidebar/reader.tsx)
+Side Panel Reader (sidebar/reader.tsx)
 {% raw %}
 ```typescript
 export function SidePanelReader() {
@@ -608,9 +608,9 @@ export function SidePanelReader() {
 ```
 {% endraw %}
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests with Vitest
+Unit Tests with Vitest
 ```typescript
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { FeedParser } from '../background/feed-parser';
@@ -654,7 +654,7 @@ describe('FeedParser', () => {
 });
 ```
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 ```typescript
 import { test, expect } from '@playwright/test';
 
@@ -676,15 +676,15 @@ test('feed sync works end-to-end', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Memory Management
+Memory Management
 - Limit stored articles per feed (e.g., 500 max)
 - Use `chrome.storage.session` for temporary data
 - Implement virtual scrolling for large article lists
 - Lazy load images in content script
 
-### Network Optimization
+Network Optimization
 ```typescript
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
@@ -709,14 +709,14 @@ async function fetchCached(url: string): Promise<Response> {
 }
 ```
 
-### Service Worker Optimization
+Service Worker Optimization
 - Keep service worker lean - offload to dedicated modules
 - Use `chrome.storage.session` for ephemeral data
 - Implement proper cleanup on `chrome.runtime.onSuspend`
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 - [ ] Increment version in manifest.json
 - [ ] Run production build (minify, tree-shake)
 - [ ] Verify all icons are present (16, 48, 128px)
@@ -725,18 +725,18 @@ async function fetchCached(url: string): Promise<Response> {
 - [ ] Verify all permissions are necessary
 - [ ] Add screenshots and description to manifest
 
-### Chrome Web Store
+Chrome Web Store
 - [ ] Create developer account
 - [ ] Upload as ZIP (exclude source maps)
 - [ ] Fill store listing (title, description, screenshots)
 - [ ] Set pricing and distribution
 - [ ] Submit for review
 
-### Post-publish
+Post-publish
 - [ ] Monitor error reports in Chrome Web Store console
 - [ ] Set up update URL for auto-updates
 - [ ] Create support page/email
 - [ ] Document changelog
 
-## Summary
+Summary
 This guide covered building a complete RSS reader extension with proper architecture, TypeScript implementation, state management, error handling, and UI patterns. The extension uses MV3 features including side panels, service workers, and modern Chrome APIs for a production-ready experience.

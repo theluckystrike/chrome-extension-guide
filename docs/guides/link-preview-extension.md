@@ -1,12 +1,12 @@
-# Building a Link Preview Extension
+Building a Link Preview Extension
 
-## Overview
+Overview
 
 A link preview extension displays rich previews of URLs when users hover over links. This guide covers building a production-ready link preview Chrome extension using Manifest V3 and TypeScript.
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -27,9 +27,9 @@ A link preview extension displays rich previews of URLs when users hover over li
 }
 ```
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Type Definitions
+Type Definitions
 
 ```ts
 // src/shared/types.ts
@@ -63,7 +63,7 @@ export type MessageType =
   | { type: 'PREVIEW_RESULT'; payload: { success: boolean; preview?: LinkPreview } };
 ```
 
-### Background Service Worker
+Background Service Worker
 
 ```ts
 // src/background/index.ts
@@ -98,7 +98,7 @@ async function handlePreviewRequest(request: PreviewRequest) {
 }
 ```
 
-### Link Metadata Fetcher
+Link Metadata Fetcher
 
 ```ts
 // src/background/preview.ts
@@ -140,9 +140,9 @@ function determineType(url: string): LinkPreview['type'] {
 }
 ```
 
-## UI Design
+UI Design
 
-### Link Detection
+Link Detection
 
 ```ts
 // src/content/detector.ts
@@ -176,7 +176,7 @@ export class LinkDetector {
 declare global { interface HTMLAnchorElement { _previewInit?: boolean; } }
 ```
 
-### Preview Overlay
+Preview Overlay
 
 ```ts
 // src/content/overlay.ts
@@ -240,7 +240,7 @@ function escapeHtml(s: string): string {
 }
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
 | API | Permission | Use Case |
 |-----|------------|----------|
@@ -250,7 +250,7 @@ function escapeHtml(s: string): string {
 | `chrome.scripting` | `scripting` | Inject content scripts |
 | `chrome.webNavigation` | `webNavigation` | Track navigation events |
 
-## State Management
+State Management
 
 ```ts
 // src/shared/storage.ts
@@ -267,7 +267,7 @@ const schema = defineSchema({
 export const storage = createStorage({ schema, area: 'local' });
 ```
 
-## Error Handling
+Error Handling
 
 ```ts
 export class PreviewError extends Error {
@@ -290,7 +290,7 @@ export function isValidUrl(url: string): boolean {
 }
 ```
 
-## Testing
+Testing
 
 ```ts
 // tests/preview.test.ts
@@ -309,7 +309,7 @@ describe('LinkPreview', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
 - Debounce hover events (150-300ms delay)
 - Cache metadata in chrome.storage (24hr TTL)
@@ -318,7 +318,7 @@ describe('LinkPreview', () => {
 - Limit concurrent fetches to 3
 - Clean up overlay on page unload
 
-## Publishing Checklist
+Publishing Checklist
 
 - [ ] Manifest V3 compliant (no remote code)
 - [ ] Minimal permissions declared
@@ -328,10 +328,10 @@ describe('LinkPreview', () => {
 - [ ] Tested on Chrome, Edge, Firefox
 
 ```bash
-# Package
+Package
 zip -r release.zip dist/
 
-# Upload via Developer Dashboard or CLI
+Upload via Developer Dashboard or CLI
 npx chrome-webstore-upload --source release.zip --extension-id $ID \
   --client-id $CLIENT_ID --client-secret $SECRET --refresh-token $TOKEN --publish
 ```

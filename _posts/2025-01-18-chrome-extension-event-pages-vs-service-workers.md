@@ -9,7 +9,7 @@ keywords: "chrome event pages, background page vs service worker, mv3 background
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-event-pages-vs-service-workers/"
 ---
 
-# Chrome Extension Event Pages vs Service Workers: Complete MV3 Guide
+Chrome Extension Event Pages vs Service Workers: Complete MV3 Guide
 
 If you're developing Chrome extensions in 2025, understanding the difference between event pages and service workers is essential for building high-performance, compliant extensions. Manifest V3 brought significant changes to how background scripts operate, replacing the persistent background pages of Manifest V2 with event-driven service workers. This comprehensive guide will walk you through everything you need to know about chrome event pages, the new mv3 background script architecture, and how to optimize your extension for the modern Chrome ecosystem.
 
@@ -67,7 +67,7 @@ Additionally, service workers in extensions support the same event types as even
 
 MV3 Background Script Implementation {#mv3-background-script-implementation}
 
-Implementing mv3 background scripts requires understanding the manifest configuration and the JavaScript patterns that work best with the service worker architecture. Let's dive into the practical aspects of writing modern Chrome extension background scripts.
+Implementing mv3 background scripts requires understanding the manifest configuration and the JavaScript patterns that work best with the service worker architecture. to the practical aspects of writing modern Chrome extension background scripts.
 
 Manifest Configuration
 

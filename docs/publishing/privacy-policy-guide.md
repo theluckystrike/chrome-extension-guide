@@ -5,7 +5,7 @@ description: "Learn how to write a privacy policy that passes Chrome Web Store r
 canonical_url: "https://bestchromeextensions.com/publishing/privacy-policy-guide/"
 ---
 
-# Chrome Extension Privacy Policy. How to Write One That Passes CWS Review
+Chrome Extension Privacy Policy. How to Write One That Passes CWS Review
 
 A privacy policy is your transparency contract with users. The Chrome Web Store (CWS) requires a privacy policy when your extension collects, processes, or transmits any user data. This guide walks you through creating a compliant privacy policy that satisfies CWS reviewers, respects user privacy, and meets legal requirements under GDPR and CCPA.
 

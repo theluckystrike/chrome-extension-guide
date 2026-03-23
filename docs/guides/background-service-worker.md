@@ -7,7 +7,7 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/background-service-
 
 ---
 
-# Chrome Extension Background Service Worker Guide
+Chrome Extension Background Service Worker Guide
 
 The background service worker is the backbone of any modern Chrome extension built with Manifest V3. Unlike the persistent background pages of Manifest V2, service workers are event-driven, ephemeral processes that Chrome manages automatically. This guide walks you through everything you need to build robust, production-ready extensions using TypeScript.
 

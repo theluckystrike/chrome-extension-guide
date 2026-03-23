@@ -4,7 +4,7 @@ title: "Chrome Extension MV2 to MV3 Migration. Developer Guide"
 description: "Migrate your Chrome extension to Manifest V3 with this comprehensive guide covering API changes and required updates."
 canonical_url: "https://bestchromeextensions.com/guides/extension-migration-mv2-to-mv3-checklist/"
 ---
-# Extension Migration MV2 to MV3 Checklist
+Extension Migration MV2 to MV3 Checklist
 
 A practical, step-by-step checklist for migrating Chrome extensions from Manifest V2 to Manifest V3. Use this as your migration workflow companion.
 

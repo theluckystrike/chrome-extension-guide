@@ -4,7 +4,7 @@ title: "Chrome Extension Meeting Notes. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-meeting-notes/"
 ---
-# Build a Meeting Notes Extension
+Build a Meeting Notes Extension
 
 What You'll Build {#what-youll-build}
 A Chrome extension for quick note-taking during online meetings with timestamp tracking and meeting history.

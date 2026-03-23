@@ -5,7 +5,7 @@ description: "Comprehensive benchmark testing Tab Suspender Pro across 50, 100, 
 canonical_url: "https://bestchromeextensions.com/guides/tab-suspender-pro-memory-benchmark-50-100-200-tabs/"
 ---
 
-# Tab Suspender Pro Memory Benchmark: How Much RAM Do You Save with 50, 100, and 200 Tabs?
+Tab Suspender Pro Memory Benchmark: How Much RAM Do You Save with 50, 100, and 200 Tabs?
 
 Overview
 

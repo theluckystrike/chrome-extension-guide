@@ -4,7 +4,7 @@ title: "Chrome Extension Firefox Migration. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-migration-firefox/"
 ---
-# Chrome Extension Migration to Firefox
+Chrome Extension Migration to Firefox
 
 Guide for porting Chrome extensions to Firefox, covering API compatibility and best practices.
 

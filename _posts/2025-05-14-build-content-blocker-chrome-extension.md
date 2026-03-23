@@ -9,7 +9,7 @@ keywords: "chrome extension content blocker, hide elements chrome, block content
 canonical_url: "https://bestchromeextensions.com/2025/05/14/build-content-blocker-chrome-extension/"
 ---
 
-# Build a Content Blocker Chrome Extension: Hide Distracting Page Elements
+Build a Content Blocker Chrome Extension: Hide Distracting Page Elements
 
 The modern web is filled with distractions. From persistent pop-ups and notification banners to social media widgets and recommendation sidebars, unwanted page elements can significantly impact your browsing experience and productivity. Fortunately, Chrome extensions provide a powerful solution: the ability to hide, block, or remove any element on any webpage.
 

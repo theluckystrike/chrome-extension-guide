@@ -9,7 +9,7 @@ keywords: "cors proxy extension, cors bypass chrome, cross origin extension"
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-cors-proxy-chrome-extension/"
 ---
 
-# Build a CORS Proxy Chrome Extension: Complete Developer's Guide
+Build a CORS Proxy Chrome Extension: Complete Developer's Guide
 
 Cross-Origin Resource Sharing (CORS) is one of the most common problems for web developers. Whether you're building a development tool, scraping data, or integrating APIs, CORS restrictions can bring your project to a halt. The good news? You can solve this with a CORS proxy Chrome extension that you build yourself.
 

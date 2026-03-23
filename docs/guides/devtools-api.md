@@ -1,10 +1,10 @@
-# Chrome DevTools API Guide
+Chrome DevTools API Guide
 
-## Introduction
+Introduction
 
 The Chrome DevTools API extends Chrome's developer tools with custom panels, sidebars, network monitoring, and profilers. This guide covers all major APIs with practical examples.
 
-## Manifest Configuration
+Manifest Configuration
 
 Add `devtools_page` to manifest.json:
 
@@ -18,7 +18,7 @@ Add `devtools_page` to manifest.json:
 <html><body><script src="devtools.js"></script></body></html>
 ```
 
-## chrome.devtools.inspectedWindow
+chrome.devtools.inspectedWindow
 
 Access the inspected page, get tab ID, reload, evaluate code, access resources.
 
@@ -38,7 +38,7 @@ chrome.devtools.inspectedWindow.getResources((resources) => {
 });
 ```
 
-## chrome.devtools.inspectedWindow.eval
+chrome.devtools.inspectedWindow.eval
 
 Execute JavaScript in the inspected page context.
 
@@ -63,7 +63,7 @@ chrome.devtools.inspectedWindow.eval(
 );
 ```
 
-## chrome.devtools.panels
+chrome.devtools.panels
 
 Create custom DevTools panels.
 
@@ -79,14 +79,14 @@ chrome.devtools.panels.create(
 );
 ```
 
-### Theme Support
+Theme Support
 
 ```javascript
 const theme = chrome.devtools.panels.themeName; // "default" or "dark"
 document.body.classList.add(theme === "dark" ? "dark" : "light");
 ```
 
-## chrome.devtools.panels.elements.createSidebarPane
+chrome.devtools.panels.elements.createSidebarPane
 
 Add sidebar panes to the Elements panel.
 
@@ -111,7 +111,7 @@ sidebar.setObject({ key: "value" }, "Title");  // JSON
 sidebar.setPage("sidebar.html");               // HTML page
 ```
 
-## chrome.devtools.network
+chrome.devtools.network
 
 Monitor network requests.
 
@@ -131,7 +131,7 @@ chrome.devtools.network.getHAR((har) => {
 });
 ```
 
-## chrome.devtools.recorder
+chrome.devtools.recorder
 
 Create custom Recorder panels.
 
@@ -144,11 +144,11 @@ chrome.devtools.panels.create(
 );
 ```
 
-## Communication: DevTools ↔ Service Worker
+Communication: DevTools ↔ Service Worker
 
 DevTools pages can't directly reach content scripts, use background as relay.
 
-### DevTools Side
+DevTools Side
 
 ```javascript
 // devtools.js
@@ -157,7 +157,7 @@ port.postMessage({ type: "INIT", tabId: chrome.devtools.inspectedWindow.tabId })
 port.onMessage.addListener((msg) => console.log("From BG:", msg));
 ```
 
-### Background Side
+Background Side
 
 ```javascript
 // background.js
@@ -173,7 +173,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-### Panel to DevTools Relay
+Panel to DevTools Relay
 
 ```javascript
 // panel.html sends to devtools.js (parent)
@@ -185,7 +185,7 @@ window.addEventListener("message", (e) => {
 });
 ```
 
-## Building a Custom Profiler
+Building a Custom Profiler
 
 ```javascript
 chrome.devtools.panels.create("Profiler", "icon.png", "panel.html", (panel) => {
@@ -202,7 +202,7 @@ chrome.devtools.panels.create("Profiler", "icon.png", "panel.html", (panel) => {
 });
 ```
 
-## Working Example: mv3-devtools-panel Template
+Working Example: mv3-devtools-panel Template
 
 See official Chrome extension samples for complete examples:
 
@@ -228,9 +228,9 @@ function safeEval(expr, ms = 5000) {
 }
 ```
 
-## Best Practices
+Best Practices
 
-### Performance
+Performance
 
 ```javascript
 // Debounce sidebar updates
@@ -241,7 +241,7 @@ chrome.devtools.panels.elements.onSelectionChanged.addListener(() => {
 });
 ```
 
-### Error Handling
+Error Handling
 
 ```javascript
 chrome.devtools.inspectedWindow.eval(expr, (r, e) => {
@@ -254,7 +254,7 @@ chrome.devtools.inspectedWindow.eval(expr, (r, e) => {
 });
 ```
 
-## Reference
+Reference
 
 - Docs: [developer.chrome.com/docs/extensions/reference/api/devtools](https://developer.chrome.com/docs/extensions/reference/api/devtools)
 - Samples: [github.com/GoogleChrome/chrome-extensions-samples](https://github.com/GoogleChrome/chrome-extensions-samples)

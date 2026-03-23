@@ -4,7 +4,7 @@ title: "Chrome Extension Link Checker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-link-checker/"
 ---
-# Build a Link Checker Extension
+Build a Link Checker Extension
 
 What You'll Build {#what-youll-build}
 

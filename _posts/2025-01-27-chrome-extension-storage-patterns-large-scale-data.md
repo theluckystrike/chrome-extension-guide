@@ -9,7 +9,7 @@ tags: [chrome-storage, indexeddb, extension-storage, data-management, chrome-ext
 author: theluckystrike
 ---
 
-# Chrome Extension Storage Patterns for Large-Scale Data
+Chrome Extension Storage Patterns for Large-Scale Data
 
 Building Chrome extensions that handle substantial amounts of data requires careful consideration of storage mechanisms. Whether you're building a tab management extension that tracks thousands of browser tabs, a productivity tool that caches extensive datasets, or an offline-first application, choosing the right storage strategy directly impacts performance, user experience, and maintainability. This comprehensive guide explores the storage options available to Chrome extension developers, compares their characteristics, and provides battle-tested patterns for managing large-scale data in production extensions.
 
@@ -658,7 +658,7 @@ The Tab Suspender Pro architecture demonstrates production patterns: session sto
 
 Remember to implement proper migration strategies, monitor quota usage, and consider compression for text-heavy data. With these patterns in place, your extension will handle growth gracefully while maintaining excellent performance.
 
-For more on the Chrome Storage API, see the [Storage API Deep Dive](/api-reference/storage-api-deep detailed look/) documentation. For TypeScript-ready storage with schema validation, check out the [@theluckystrike/webext-storage](/docs/packages/overview/#webext-storage) package.
+For more on the Chrome Storage API, see the [Storage API detailed look](/api-reference/storage-api-deep detailed look/) documentation. For TypeScript-ready storage with schema validation, check out the [@theluckystrike/webext-storage](/docs/packages/overview/#webext-storage) package.
 
 ---
 

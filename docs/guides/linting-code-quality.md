@@ -4,7 +4,7 @@ title: "Chrome Extension Linting & Code Quality. Developer Guide"
 description: "Learn Chrome extension linting & code quality with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/linting-code-quality/"
 ---
-# Code Quality and Linting for Chrome Extensions
+Code Quality and Linting for Chrome Extensions
 
 Maintaining code quality in Chrome extensions requires tooling that understands the unique constraints of extension development: multiple execution contexts, browser API patterns, service worker limitations, and Chrome Web Store policies. This guide covers a complete linting, formatting, and CI pipeline tailored for Manifest V3 extensions.
 

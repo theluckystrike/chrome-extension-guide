@@ -8,7 +8,7 @@ tags: [react, chrome-extension, tutorial]
 author: theluckystrike
 ---
 
-# Build a Chrome Extension with React in 2025: Step-by-Step Guide
+Build a Chrome Extension with React in 2025: Step-by-Step Guide
 
 Building Chrome extensions has evolved significantly over the years, and 2025 marks an exciting time to combine the power of React with Chrome's extension platform. Whether you're a seasoned React developer looking to expand into browser extensions or someone starting fresh, this comprehensive guide will walk you through creating a production-ready Chrome extension using React from scratch.
 

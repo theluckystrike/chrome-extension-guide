@@ -5,7 +5,7 @@ description: "Handle CORS issues in Chrome extensions with background scripts an
 canonical_url: "https://bestchromeextensions.com/patterns/cors-extension-patterns/"
 ---
 
-# CORS Handling Patterns in Chrome Extensions
+CORS Handling Patterns in Chrome Extensions
 
 Understanding CORS (Cross-Origin Resource Sharing) in Chrome extensions requires recognizing that different extension contexts have different CORS behaviors.
 

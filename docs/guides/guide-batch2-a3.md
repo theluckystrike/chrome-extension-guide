@@ -1,8 +1,8 @@
-# Screenshot Capture Patterns in Chrome Extensions
+Screenshot Capture Patterns in Chrome Extensions
 
 Screenshot capture is one of the most requested features for Chrome extensions. Whether you're building a note-taking app, a bug reporting tool, or a design collaboration platform, the ability to capture and manipulate screen content opens up powerful possibilities. we'll explore the various patterns for implementing screenshot functionality in your Chrome extension using Manifest V3.
 
-## Understanding Screenshot APIs
+Understanding Screenshot APIs
 
 Chrome provides several APIs for capturing screenshots, each with distinct use cases and permission requirements:
 
@@ -10,7 +10,7 @@ Chrome provides several APIs for capturing screenshots, each with distinct use c
 2. desktopCapture - Captures entire screens, windows, or tabs (including off-screen content)
 3. activeTab - Limited capture with user permission
 
-## Required Permissions
+Required Permissions
 
 For screenshot functionality, you'll need to declare appropriate permissions in your manifest:
 
@@ -36,7 +36,7 @@ For desktop capture (full screen including scrolling content):
 }
 ```
 
-## Pattern 1: Simple Visible Tab Capture
+Pattern 1: Simple Visible Tab Capture
 
 The most straightforward approach uses `tabs.captureVisibleTab()`, which captures only what's currently visible in the viewport:
 
@@ -63,7 +63,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Pattern 2: Full Page Screenshot
+Pattern 2: Full Page Screenshot
 
 For capturing entire scrollable pages, combine `tabs.captureVisibleTab` with a content script that scrolls through the page:
 
@@ -114,7 +114,7 @@ function getCurrentWindowId(): Promise<number> {
 }
 ```
 
-## Pattern 3: Region Selection Capture
+Pattern 3: Region Selection Capture
 
 Allow users to select a specific region of the page using a canvas-based selection overlay:
 
@@ -225,7 +225,7 @@ class RegionSelector {
 }
 ```
 
-## Pattern 4: Desktop Capture for Full Screen
+Pattern 4: Desktop Capture for Full Screen
 
 For applications requiring full desktop capture (including multiple monitors or content outside browser), use the desktopCapture API:
 
@@ -281,7 +281,7 @@ async function startDesktopCapture(): Promise<string | null> {
 }
 ```
 
-## Pattern 5: Saving Captured Images
+Pattern 5: Saving Captured Images
 
 After capturing, save the image using the Downloads API or Chrome Storage:
 
@@ -326,7 +326,7 @@ async function saveToStorage(dataUrl: string, key: string): Promise<void> {
 }
 ```
 
-## Best Practices and Considerations
+Best Practices and Considerations
 
 1. Permission Minimization: Use `activeTab` permission instead of `<all_urls>` when possible to avoid scary permission warnings during installation.
 
@@ -338,6 +338,6 @@ async function saveToStorage(dataUrl: string, key: string): Promise<void> {
 
 5. User Experience: Always provide visual feedback during capture operations and allow users to preview before saving.
 
-## Conclusion
+Conclusion
 
 Screenshot capture in Chrome extensions offers powerful capabilities for various use cases. By understanding the different capture patterns, visible tab capture, full-page stitching, region selection, and desktop capture, you can choose the right approach for your extension's needs. Remember to handle permissions appropriately and provide good user experience throughout the capture workflow.

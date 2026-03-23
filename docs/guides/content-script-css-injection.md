@@ -5,7 +5,7 @@ description: "Master CSS injection techniques in Chrome extension content script
 canonical_url: "https://bestchromeextensions.com/guides/content-script-css-injection/"
 ---
 
-# Chrome Extension Content Script CSS Injection. Complete Guide with TypeScript
+Chrome Extension Content Script CSS Injection. Complete Guide with TypeScript
 
 Introduction {#introduction}
 

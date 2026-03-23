@@ -8,7 +8,7 @@ order: 20
 canonical_url: "https://bestchromeextensions.com/permissions/geolocation/"
 ---
 
-# geolocation Permission
+geolocation Permission
 
 Overview {#overview}
 

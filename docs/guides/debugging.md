@@ -1,12 +1,12 @@
-# Debugging Chrome Extensions
+Debugging Chrome Extensions
 
-## Introduction
+Introduction
 
 Debugging Chrome extensions is fundamentally different from debugging regular web applications because extensions consist of multiple isolated contexts that run independently: background service workers, popup pages, options pages, content scripts, and sometimes DevTools panels or side panels. Each context has its own DevTools instance, its own console, and its own lifecycle. Understanding how to navigate between these contexts and use the right debugging tools for each is essential for building reliable extensions.
 
 This guide covers the complete debugging workflow for Chrome extensions, from basic techniques like using chrome://extensions and Inspect views, to advanced strategies like using the Chrome DevTools Protocol for automated testing. By the end, you'll have a systematic approach to diagnosing and fixing issues in any part of your extension.
 
-## The Chrome Extensions Page
+The Chrome Extensions Page
 
 The first tool in any extension developer's arsenal is the chrome://extensions page. This page is the control center for managing and debugging all your installed extensions. To access it, type `chrome://extensions` in the Chrome address bar.
 
@@ -18,7 +18,7 @@ Pay attention to the "Errors" counter that appears on extensions with issues. Th
 
 One common issue developers encounter is the "Extensions update required" error. This appears when an extension uses features that require a newer Chrome version than what's currently installed. Always check your Chrome version when debugging extension issues.
 
-## Debugging Popup Pages
+Debugging Popup Pages
 
 The popup is the most visible part of most extensions, and it's also the easiest to debug. However, there's a catch: the popup closes as soon as you click outside of it, which can make debugging tricky if you don't know the right technique.
 
@@ -30,7 +30,7 @@ In the popup's DevTools, you have full access to the Elements panel to inspect a
 
 A common issue with popup debugging is that the popup doesn't reload when you modify your source files. You need to either click the "Reload" button on the chrome://extensions page for your extension, or call `chrome.runtime.reload()` from the console. Some developers find it helpful to check the "Allow in incognito" box in developer mode, which can sometimes help with reloading issues.
 
-## Debugging Service Workers
+Debugging Service Workers
 
 The service worker is the background context of a Manifest V3 extension, handling events like browser actions, message passing, alarms, and network requests. Debugging the service worker requires understanding its unique lifecycle and the fact that Chrome can terminate it after periods of inactivity.
 
@@ -44,7 +44,7 @@ To verify your service worker is running, look at the status indicator in the ch
 
 In the Sources panel, your bundled service worker code appears under the "Service Worker" section. You can set breakpoints, step through code, and inspect variables just like in regular JavaScript debugging. The "Scope" section in the right panel shows all local and closure variables.
 
-## Debugging Content Scripts
+Debugging Content Scripts
 
 Content scripts run in the context of web pages, injecting functionality directly into loaded tabs. Debugging them requires understanding how they interact with both the page and the extension's other components.
 
@@ -58,7 +58,7 @@ A common debugging scenario is figuring out why a content script isn't running a
 
 For content scripts using the `world` property in Manifest V3 (using `"world": "MAIN"` to share the page's context), debugging works slightly differently, the script appears in the main page context rather than under "Content scripts."
 
-## Checking chrome.runtime.lastError
+Checking chrome.runtime.lastError
 
 One of the most common sources of silent failures in Chrome extensions is the `chrome.runtime.lastError` property. Many extension API callbacks receive this object as their first argument, and it's used to communicate errors that occur during asynchronous operations.
 
@@ -96,7 +96,7 @@ function sendMessageToTab(tabId, message) {
 }
 ```
 
-## Console Logging Strategies
+Console Logging Strategies
 
 Because Chrome extensions run in multiple separate contexts, effective logging requires a strategy that accounts for all these contexts. Each context has its own console, so you can't see all your logs in one place unless you implement a central logging solution.
 
@@ -143,7 +143,7 @@ This makes it easy to identify which context produced each log line when you hav
 
 For content scripts specifically, remember that `console.log` output appears in the page's DevTools, mixed with the page's own logs. Use distinctive prefixes or formatting to make your logs easy to find.
 
-## Using Breakpoints in Extension Code
+Using Breakpoints in Extension Code
 
 Setting breakpoints in extension code works similarly to regular web debugging, but there are some nuances depending on the context you're debugging.
 
@@ -159,7 +159,7 @@ Function breakpoints are useful when you want to pause whenever a specific funct
 
 A common issue with breakpoints in bundled code is source maps. If you're using a bundler like webpack, Rollup, or Vite, make sure source maps are generated and loaded. Without source maps, you'll be debugging the bundled and minified code rather than your original source files, which is much more difficult.
 
-## Network Panel for Extension API Calls
+Network Panel for Extension API Calls
 
 The Network tab in DevTools works for extension contexts just like it does for regular web pages, but there are some considerations specific to extensions.
 
@@ -175,7 +175,7 @@ A useful technique for debugging network issues is to enable the "Preserve log" 
 
 For service workers, remember that network requests made from the service worker context appear in the service worker's Network panel, not in the tab's Network panel. This is important when debugging fetch handlers or background request logic.
 
-## Storage Explorer for chrome.storage
+Storage Explorer for chrome.storage
 
 Chrome provides built-in storage inspection that's accessible from any extension context's DevTools. In the Application tab (or Storage tab in newer Chrome versions), expand the "Storage" section in the left sidebar, then click on "Extension Storage." This shows all the storage for your extension, organized by storage area (local, sync, managed, session).
 
@@ -208,7 +208,7 @@ chrome.storage.local.getBytesInUse(null, (bytes) => {
 });
 ```
 
-## Common Errors and What They Mean
+Common Errors and What They Mean
 
 Understanding common extension errors helps you diagnose issues quickly. Here are the most frequent errors you'll encounter and their solutions.
 
@@ -235,7 +235,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 "Scripts failed to load" errors. Often caused by syntax errors in your JavaScript files. Check the console in the relevant context for specific error messages and line numbers.
 
-## Chrome DevTools Protocol for Automated Debugging
+Chrome DevTools Protocol for Automated Debugging
 
 The Chrome DevTools Protocol (CDP) allows you to programmatically control Chrome, inspect pages, and debug extensions. This is the foundation for automated testing and advanced debugging scenarios.
 
@@ -307,17 +307,17 @@ Log.entryAdded(({ entry }) => {
 
 For automated testing of extensions, consider using Playwright's built-in extension testing support or the `@playwright/test` package with its experimental extension features. These tools handle much of the complexity of launching Chrome with extensions and connecting to the right contexts.
 
-## Complete Debugging Workflow Examples
+Complete Debugging Workflow Examples
 
 Now let's put together complete debugging workflows for common scenarios.
 
-### Workflow 1: Debugging a Popup That's Not Opening
+Workflow 1: Debugging a Popup That's Not Opening
 
 First, check chrome://extensions for errors on your extension. If there are no errors, the issue is likely in the popup's HTML or JavaScript. Right-click the extension icon and choose "Inspect popup" to open DevTools. Look for errors in the console, these might be hidden if the popup closes immediately.
 
 Check the popup's HTML file path in the manifest matches the actual file. Verify the default_popup property points to an existing file. If using a framework that requires building, make sure the popup is actually being generated in your output directory.
 
-### Workflow 2: Debugging Message Passing Failures
+Workflow 2: Debugging Message Passing Failures
 
 Message passing between content scripts and background scripts is a common source of bugs. Start by opening DevTools in both contexts: the page (for content script) and the service worker (for background). Add logging to both sides:
 
@@ -342,7 +342,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 If messages aren't getting through, verify the content script is loaded. Check the "Content scripts" section in the page's DevTools Sources panel. Also verify the service worker is active, check the status in chrome://extensions.
 
-### Workflow 3: Debugging Storage Not Persisting
+Workflow 3: Debugging Storage Not Persisting
 
 If your extension's storage isn't persisting data, first verify the storage is actually being set. Add logging around storage operations:
 
@@ -364,7 +364,7 @@ Check the Application/Storage tab to see if data is actually being stored. If da
 
 For sync storage issues, verify the user is signed into Chrome with sync enabled. Check `chrome.storage.sync.getBytesInUse()` to see if you've hit quota limits.
 
-### Workflow 4: Debugging Service Worker Not Responding to Events
+Workflow 4: Debugging Service Worker Not Responding to Events
 
 If your service worker isn't responding to events, first verify the service worker is registered and active. In chrome://extensions, check that the service worker shows as "Service Worker (active)" or is at least listed. Click "Inspect views" -> "service worker" to open its DevTools.
 
@@ -386,7 +386,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 If events aren't firing, check that you're not accidentally unregistering the service worker. Also verify your event listeners are at the top level, not inside async functions, the service worker context can terminate between events, so listeners must be registered when the service worker loads.
 
-### Workflow 5: Debugging Content Script Not Injecting
+Workflow 5: Debugging Content Script Not Injecting
 
 When a content script isn't running on a page, start by verifying the script is declared correctly in manifest.json with appropriate match patterns. Then check that the page URL actually matches those patterns, use the Match Pattern Tester in chrome://extensions developer mode if available.
 
@@ -402,7 +402,7 @@ console.log('[Content Script] Manifest:', chrome.runtime.getManifest());
 
 If using dynamic injection with `chrome.scripting.executeScript`, verify you're calling it correctly and that the target tab ID is valid.
 
-## Summary
+Summary
 
 Debugging Chrome extensions requires understanding their multi-context architecture and knowing which tools to use for each part of your extension. The chrome://extensions page is your command center, providing access to inspect views for all extension contexts. Each context, popup, service worker, content script, and options page, has its own DevTools instance that you can open and debug independently.
 

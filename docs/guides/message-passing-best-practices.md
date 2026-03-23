@@ -4,7 +4,7 @@ title: "Chrome Extension Message Passing. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/message-passing-best-practices/"
 ---
-# Message Passing Best Practices
+Message Passing Best Practices
 
 Overview {#overview}
 

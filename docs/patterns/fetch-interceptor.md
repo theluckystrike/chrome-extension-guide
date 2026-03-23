@@ -5,7 +5,7 @@ description: "Intercept and modify fetch requests in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/fetch-interceptor/"
 ---
 
-# Fetch/XHR Interception Patterns
+Fetch/XHR Interception Patterns
 
 This document covers patterns for intercepting and modifying network requests in Chrome extensions using MV3.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Advanced Web Navigation. Developer Guide"
 description: "Learn Chrome extension advanced web navigation with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/web-navigation-advanced/"
 ---
-# Chrome Extension Web Navigation Advanced Patterns
+Chrome Extension Web Navigation Advanced Patterns
 
 Introduction {#introduction}
 
@@ -42,7 +42,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 }, { url: [{ urlMatches: 'https://*/*' }] });
 ```
 
-Event Lifecycle Deep Dive {#event-lifecycle-deep detailed look}
+Event Lifecycle detailed look {#event-lifecycle-deep detailed look}
 
 onBeforeNavigate {#onbeforenavigate}
 

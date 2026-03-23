@@ -9,7 +9,7 @@ keywords: "chrome omnibox api, address bar extension, custom search chrome exten
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-omnibox-api-custom-search-extension-tutorial/"
 ---
 
-# Chrome Omnibox API Custom Search Extension Tutorial
+Chrome Omnibox API Custom Search Extension Tutorial
 
 The Chrome Omnibox API represents one of the most powerful yet underutilized APIs available to Chrome extension developers. If you have ever wanted to create a custom search experience that lives directly in Chrome's address bar, the Omnibox API is your gateway to building precisely that. This comprehensive tutorial will walk you through creating a fully functional custom search extension that integrates smoothly with Chrome's omnibox, providing users with instant access to your search functionality without requiring them to navigate to a website or install additional software.
 

@@ -1,8 +1,8 @@
-# Common Errors and Troubleshooting
+Common Errors and Troubleshooting
 
 A practical reference for Chrome extension developers encountering runtime errors during development and distribution.
 
-## Unchecked runtime.lastError {#unchecked-runtimelasterror}
+Unchecked runtime.lastError {#unchecked-runtimelasterror}
 
 The `runtime.lastError` property appears when a Chrome API call fails but the callback does not explicitly handle the error. This is one of the most common warnings seen in the extension console.
 
@@ -44,7 +44,7 @@ function queryTabs(queryInfo) {
 
 Prefer the Promise-based versions of Chrome APIs when available in Manifest V3.
 
-## Could not establish connection {#could-not-establish-connection}
+Could not establish connection {#could-not-establish-connection}
 
 This error occurs when the extension attempts to send a message but cannot reach the recipient. It typically manifests as "Could not establish connection. Receiving end does not exist."
 
@@ -76,7 +76,7 @@ function sendMessageToTab(tabId, message) {
 
 For service workers, acknowledge that they may be dormant. Implement retry logic or wake the service worker with a ping before sending actual messages.
 
-## Extension context invalidated {#extension-context-invalidated}
+Extension context invalidated {#extension-context-invalidated}
 
 This error appears when trying to use a context that has been destroyed, typically after an extension update or when a page refresh invalidates the extension's view.
 
@@ -103,7 +103,7 @@ async function isContextValid() {
 - Listen for the `runtime.onSuspend` event in background scripts to clean up state
 - Avoid caching extension API objects; call them fresh each time
 
-## Service worker registration failures {#service-worker-registration-failures}
+Service worker registration failures {#service-worker-registration-failures}
 
 Manifest V3 uses service workers instead of background pages, and registration can fail for several reasons.
 
@@ -131,7 +131,7 @@ self.addEventListener('activate', (event) => {
 });
 ```
 
-## Refused to execute inline script {#refused-to-execute-inline-script}
+Refused to execute inline script {#refused-to-execute-inline-script}
 
 This CSP violation occurs when the extension attempts to run inline JavaScript, which is prohibited by Chrome's content security policy for extensions.
 
@@ -153,7 +153,7 @@ chrome.scripting.executeScript({
 
 4. Do not use `eval()`, `new Function()`, or inline event handlers like `onclick="..."` in extension pages
 
-## CORS blocked XMLHttpRequest {#cors-blocked-xmlhttprequest}
+CORS blocked XMLHttpRequest {#cors-blocked-xmlhttprequest}
 
 Extensions can make cross-origin requests that bypass CORS when using the appropriate permissions, but misconfiguration leads to blocks.
 
@@ -181,7 +181,7 @@ chrome.runtime.sendMessage({ url: 'https://api.example.com/data' }, (response) =
 
 - Avoid `XMLHttpRequest` in favor of the Fetch API, which integrates better with Chrome's permission system
 
-## Message port closed before response {#message-port-closed-before-response}
+Message port closed before response {#message-port-closed-before-response}
 
 This error occurs when the sender closes the message channel before the receiver responds, or when the receiver's message port becomes invalid.
 
@@ -212,7 +212,7 @@ function sendMessageWithTimeout(message, timeout = 5000) {
 - Ensure that both sender and receiver stay alive during the message exchange
 - For long-running operations, establish a persistent port with `chrome.runtime.connect` instead of one-time messages
 
-## Storage quota exceeded {#storage-quota-exceeded}
+Storage quota exceeded {#storage-quota-exceeded}
 
 When using `chrome.storage.local` or `chrome.storage.sync`, you are limited to approximately 5MB for sync and 10MB for local storage (exact limits vary).
 
@@ -238,7 +238,7 @@ async function cleanupOldData() {
 - Consider using IndexedDB for large datasets instead of storage API
 - Implement a least-recently-used (LRU) cache that automatically evicts old entries when approaching the limit
 
-## Extension may have been corrupted {#extension-may-have-been-corrupted}
+Extension may have been corrupted {#extension-may-have-been-corrupted}
 
 This warning appears when Chrome detects that an extension's files have been modified outside of the expected update mechanism.
 
@@ -255,7 +255,7 @@ Resolution
 - For development, use `chrome://extensions` in developer mode and click "Reload" rather than modifying files directly
 - If using a crx file, ensure it is not being extracted and modified during installation
 
-## Permission not granted handling {#permission-not-granted-handling}
+Permission not granted handling {#permission-not-granted-handling}
 
 Extensions can declare permissions that users must approve, but some permissions are not granted automatically and require explicit user action.
 
@@ -292,7 +292,7 @@ chrome.permissions.contains({ permissions: ['bookmarks'] }, (result) => {
 - Provide graceful degradation when permissions are denied rather than crashing
 - Include clear messaging in your extension's UI about why specific permissions are needed
 
-## Additional resources {#additional-resources}
+Additional resources {#additional-resources}
 
 For persistent issues not covered here, consult the official Chrome Extensions documentation and the Chrome Extension bug tracker. The developer community at zovo.one frequently discusses troubleshooting patterns for Manifest V3 implementations and can provide context-specific guidance for complex error scenarios.
 -e 

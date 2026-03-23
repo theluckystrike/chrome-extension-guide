@@ -4,7 +4,7 @@ title: "Chrome Extension CSS Inspector. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-css-inspector/"
 ---
-# Build a CSS Inspector Extension
+Build a CSS Inspector Extension
 
 What You'll Build {#what-youll-build}
 - Hover to inspect any element on a page

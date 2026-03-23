@@ -5,7 +5,7 @@ description: "Optimize data loading patterns for extension popups."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-data-loading/"
 ---
 
-# Popup Data Loading Patterns
+Popup Data Loading Patterns
 
 Chrome extension popups present a unique challenge: each time the user opens the popup, it starts fresh with no persistent DOM or JavaScript state from the previous session. This means every open requires loading data quickly to provide a smooth user experience.
 

@@ -5,7 +5,7 @@ description: "Use Declarative Content API to trigger actions based on page conte
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-content-patterns/"
 ---
 
-# Declarative Content Patterns
+Declarative Content Patterns
 
 This document covers advanced patterns for using `chrome.declarativeContent` to show the extension action icon only on pages that match specific conditions, without requiring content scripts to run.
 

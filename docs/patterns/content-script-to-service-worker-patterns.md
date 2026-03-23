@@ -5,7 +5,7 @@ description: "Communicate from content scripts to service workers."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-to-service-worker-patterns/"
 ---
 
-# Content Script to Service Worker Communication Patterns
+Content Script to Service Worker Communication Patterns
 
 This guide covers the communication patterns between content scripts and service workers in Chrome extensions. This is the most fundamental and error-prone part of extension development.
 

@@ -1,8 +1,8 @@
-# Chrome Idle API
+Chrome Idle API
 
 The Chrome Idle API (`chrome.idle`) enables extensions to detect when users become inactive. Use it for security features, auto-save, and analytics.
 
-## Core Functions
+Core Functions
 
 - `chrome.idle.queryState`. Query current idle state on demand
 - `chrome.idle.setDetectionInterval`. Configure idle detection threshold
@@ -10,7 +10,7 @@ The Chrome Idle API (`chrome.idle`) enables extensions to detect when users beco
 
 > Reference: [developer.chrome.com/docs/extensions/reference/api/idle](https://developer.chrome.com/docs/extensions/reference/api/idle)
 
-## Permissions
+Permissions
 
 Add `"idle"` to your `manifest.json`:
 
@@ -18,11 +18,11 @@ Add `"idle"` to your `manifest.json`:
 { "permissions": ["idle"], "background": { "service_worker": "background.js" } }
 ```
 
-## Idle States
+Idle States
 
 Three states: `"active"`, `"idle"`, `"locked"`. Priority: locked > idle > active
 
-## chrome.idle.queryState
+chrome.idle.queryState
 
 Check current idle state:
 
@@ -32,7 +32,7 @@ chrome.idle.queryState(60, (state) => {
 });
 ```
 
-## chrome.idle.setDetectionInterval
+chrome.idle.setDetectionInterval
 
 - Default: 60 seconds
 - Minimum: 15 seconds (Chrome enforces this)
@@ -43,7 +43,7 @@ chrome.idle.setDetectionInterval(15); // Minimum
 chrome.idle.setDetectionInterval(300); // 5 min - battery friendly
 ```
 
-## chrome.idle.onStateChanged
+chrome.idle.onStateChanged
 
 Listen for state changes:
 
@@ -55,7 +55,7 @@ chrome.idle.onStateChanged.addListener((newState) => {
 });
 ```
 
-## Building an Auto-Lock Extension
+Building an Auto-Lock Extension
 
 ```javascript
 // background.js - Locks after 5 minutes of inactivity
@@ -77,7 +77,7 @@ function performAutoLock() {
 }
 ```
 
-## Building Activity Tracking
+Building Activity Tracking
 
 ```javascript
 class ActivityTracker {
@@ -101,7 +101,7 @@ class ActivityTracker {
 new ActivityTracker();
 ```
 
-## Power Management
+Power Management
 
 - Shorter intervals = more power usage; use default (60s) for balance
 - Consider longer intervals when on battery
@@ -113,7 +113,7 @@ function optimizeForPower(isOnBattery) {
 }
 ```
 
-## Security Extension Example
+Security Extension Example
 
 ```javascript
 chrome.idle.setDetectionInterval(30);
@@ -126,7 +126,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-## Best Practices
+Best Practices
 
 1. Use default interval (60s) for balance between responsiveness and battery
 2. Handle all three states including "locked"
@@ -134,7 +134,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 4. Clear sensitive data when screen is locked
 5. Respect minimum interval of 15 seconds
 
-## Summary
+Summary
 
 The Chrome Idle API provides:
 - `queryState()`. Check current idle state

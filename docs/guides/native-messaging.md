@@ -1,8 +1,8 @@
-# Chrome Extension Native Messaging
+Chrome Extension Native Messaging
 
 Native messaging allows Chrome Extensions to communicate with native applications installed on the user's computer. This powerful feature enables extensions to access system resources, hardware, and perform operations that web APIs cannot handle.
 
-## Architecture Overview
+Architecture Overview
 
 Native messaging creates a bi-directional communication channel between a Chrome Extension and a native host application. The communication occurs through standard input (stdin) and standard output (stdout) using JSON messages.
 
@@ -21,11 +21,11 @@ Native messaging creates a bi-directional communication channel between a Chrome
                                    
 ```
 
-## Host Application Manifest
+Host Application Manifest
 
 The native host application must provide a manifest file describing its configuration. This manifest tells Chrome how to connect to the native application.
 
-### Manifest Structure (nativeMessaging.json)
+Manifest Structure (nativeMessaging.json)
 
 ```json
 {
@@ -46,9 +46,9 @@ The native host application must provide a manifest file describing its configur
 | `type` | Must be "stdio" for standard input/output communication |
 | `allowed_origins` | List of extensions allowed to connect |
 
-## Chrome Extension API
+Chrome Extension API
 
-### Persistent Connection: chrome.runtime.connectNative
+Persistent Connection: chrome.runtime.connectNative
 
 Use `connectNative` for ongoing communication where multiple messages are exchanged.
 
@@ -68,7 +68,7 @@ port.onDisconnect.addListener(() => {
 port.postMessage({ action: 'getSystemInfo' });
 ```
 
-### One-Time Message: chrome.runtime.sendNativeMessage
+One-Time Message: chrome.runtime.sendNativeMessage
 
 Use `sendNativeMessage` for single request-response patterns.
 
@@ -100,9 +100,9 @@ async function sendNativeMessage(message) {
 }
 ```
 
-## Host Application Implementation
+Host Application Implementation
 
-### Python Implementation
+Python Implementation
 
 ```python
 #!/usr/bin/env python3
@@ -168,7 +168,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### Node.js Implementation
+Node.js Implementation
 
 ```javascript
 #!/usr/bin/env node
@@ -239,7 +239,7 @@ async function main() {
 main();
 ```
 
-### Rust Implementation
+Rust Implementation
 
 {% raw %}
 ```rust
@@ -284,7 +284,7 @@ fn main() {
 ```
 {% endraw %}
 
-### C++ Implementation
+C++ Implementation
 
 ```cpp
 #include <iostream>
@@ -322,9 +322,9 @@ int main() {
 }
 ```
 
-## Communication Protocol
+Communication Protocol
 
-### Message Format
+Message Format
 
 Messages are serialized as JSON and transmitted with a length prefix:
 
@@ -338,7 +338,7 @@ Messages are serialized as JSON and transmitted with a length prefix:
 - Length: 4-byte integer (little-endian), specifies message length
 - Message: JSON string, maximum 1MB
 
-### Size Limits
+Size Limits
 
 | Limit | Value |
 |-------|-------|
@@ -346,9 +346,9 @@ Messages are serialized as JSON and transmitted with a length prefix:
 | Maximum send timeout | 60 seconds |
 | Maximum receive timeout | 60 seconds |
 
-## Registering Native Host
+Registering Native Host
 
-### Windows Registry
+Windows Registry
 
 On Windows, register the native host in the registry:
 
@@ -365,14 +365,14 @@ HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.example.myapp
 Set the default value to the path of the manifest JSON file.
 
 ```powershell
-# Register using PowerShell (as Administrator)
+Register using PowerShell (as Administrator)
 $manifestPath = "C:\path\to\nativeMessaging.json"
 $regPath = "HKLM:\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.myapp"
 New-Item -Path $regPath -Force | Out-Null
 Set-ItemProperty -Path $regPath -Name "(Default)" -Value $manifestPath
 ```
 
-### macOS Manifest Location
+macOS Manifest Location
 
 Place the manifest file in:
 
@@ -386,7 +386,7 @@ Or system-wide:
 /Library/Application Support/Google/Chrome/NativeMessagingHosts/
 ```
 
-### Linux Manifest Location
+Linux Manifest Location
 
 Place the manifest file in:
 
@@ -407,16 +407,16 @@ For Chromium:
 /etc/chromium/nativeMessagingHosts/
 ```
 
-## Debugging Native Messaging
+Debugging Native Messaging
 
-### Enable Logging
+Enable Logging
 
 ```javascript
 // In extension - enable debug mode
 chrome.runtime.connectNative('com.example.myapp', { debug: true });
 ```
 
-### Check Native Host Registration
+Check Native Host Registration
 
 Windows (PowerShell):
 ```powershell
@@ -434,7 +434,7 @@ macOS:
 ls -la ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/
 ```
 
-### Common Issues
+Common Issues
 
 | Issue | Solution |
 |-------|----------|
@@ -443,9 +443,9 @@ ls -la ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/
 | Permission denied | Ensure executable has execute permissions |
 | Message parse error | Validate JSON format, check encoding |
 
-## Security Considerations
+Security Considerations
 
-### Validate Messages
+Validate Messages
 
 Always validate and sanitize messages from the native host:
 
@@ -464,7 +464,7 @@ port.onMessage.addListener((message) => {
 });
 ```
 
-### Limit Allowed Origins
+Limit Allowed Origins
 
 Restrict which extensions can connect:
 
@@ -476,36 +476,36 @@ Restrict which extensions can connect:
 }
 ```
 
-### Secure the Native Host
+Secure the Native Host
 
 - Validate all input data
 - Run with minimal privileges
 - Use absolute paths in manifest
 - Sign executables on Windows
 
-## Use Cases
+Use Cases
 
-### System Integration
+System Integration
 
 - Read system information (CPU, memory, OS version)
 - Execute system commands
 - Manage system services
 
-### Hardware Access
+Hardware Access
 
 - Communicate with serial devices (Arduino, USB devices)
 - Access Bluetooth peripherals
 - Control connected hardware
 
-### File System Operations
+File System Operations
 
 - Read/write files outside extension's sandbox
 - Access user documents
 - Manage configuration files
 
-### Advanced Examples
+Advanced Examples
 
-#### File Reader Example
+File Reader Example
 
 ```javascript
 // Extension side
@@ -528,13 +528,13 @@ readFile('/home/user/documents/data.txt')
   .catch(err => console.error(err));
 ```
 
-## Additional Resources
+Additional Resources
 
 - Official Documentation: https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging
 - Chrome Extensions API: https://developer.chrome.com/docs/extensions/reference/runtime
 - Native Messaging Host Examples: https://github.com/GoogleChrome/chrome-extensions-samples
 
-## Conclusion
+Conclusion
 
 Native messaging bridges Chrome Extensions with native applications, enabling powerful system integration capabilities. By following the protocols and security best practices outlined in this guide, you can create solid extensions that use the full power of the underlying operating system while maintaining security and reliability.
 ---
@@ -544,7 +544,7 @@ description: "Learn how to build native messaging hosts to enable Chrome extensi
 canonical_url: "https://bestchromeextensions.com/guides/native-messaging/"
 ---
 
-# Chrome Extension Native Messaging. How to Communicate with Desktop Apps
+Chrome Extension Native Messaging. How to Communicate with Desktop Apps
 
 Overview {#overview}
 

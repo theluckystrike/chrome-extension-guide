@@ -8,7 +8,7 @@ order: 49
 canonical_url: "https://bestchromeextensions.com/permissions/webRequest/"
 ---
 
-# webRequest Permission Reference
+webRequest Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to `chrome.webRequest` API

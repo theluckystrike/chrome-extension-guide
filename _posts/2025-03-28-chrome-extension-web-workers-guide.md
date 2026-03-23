@@ -9,7 +9,7 @@ keywords: "chrome extension web worker, web worker chrome extension, offload pro
 canonical_url: "https://bestchromeextensions.com/2025/03/28/chrome-extension-web-workers-guide/"
 ---
 
-# Web Workers in Chrome Extensions: Offload Heavy Processing
+Web Workers in Chrome Extensions: Offload Heavy Processing
 
 Web workers have revolutionized how we approach heavy computation in web applications, and Chrome extensions are no exception. If you have ever built a Chrome extension that performs intensive tasks, you likely encountered the dreaded "page unresponsive" message or watched your extension's popup freeze during complex operations. Web workers offer an elegant solution to these performance bottlenecks, allowing you to run computationally expensive scripts in background threads without blocking the main thread or degrading user experience.
 

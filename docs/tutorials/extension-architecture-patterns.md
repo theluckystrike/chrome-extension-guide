@@ -5,7 +5,7 @@ description: "Learn the essential architecture patterns for building solid Chrom
 canonical_url: "https://bestchromeextensions.com/tutorials/extension-architecture-patterns/"
 ---
 
-# Chrome Extension Architecture Patterns
+Chrome Extension Architecture Patterns
 
 Chrome extensions are complex applications that run in multiple isolated contexts. Choosing the right architecture pattern is crucial for building maintainable, performant, and scalable extensions. This tutorial covers the fundamental architectural patterns you'll need to design solid Chrome extensions.
 
@@ -1137,7 +1137,7 @@ Related Articles
 
 - [Extension Architecture Guide](/docs/guides/extension-architecture/). Comprehensive guide to extension architecture fundamentals
 - [Background Service Workers](/docs/guides/service-workers/). Detailed look into service worker implementation
-- [Content Scripts Deep Dive](/docs/guides/content-scripts-deep detailed look/). Advanced content script patterns and techniques
+- [Content Scripts detailed look](/docs/guides/content-scripts-deep detailed look/). Advanced content script patterns and techniques
 
 ---
 

@@ -9,7 +9,7 @@ keywords: "contrast checker extension, wcag contrast chrome, accessibility color
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-color-contrast-checker-chrome-extension/"
 ---
 
-# Build a Color Contrast Checker Chrome Extension: Complete Guide
+Build a Color Contrast Checker Chrome Extension: Complete Guide
 
 Web accessibility is no longer optional, it is a legal requirement and a moral imperative. One of the most critical aspects of accessibility is ensuring that text has sufficient color contrast against its background. This is where a contrast checker extension becomes an invaluable tool for developers, designers, and accessibility auditors alike. we will walk you through the process of building a fully functional color contrast checker Chrome extension from scratch.
 

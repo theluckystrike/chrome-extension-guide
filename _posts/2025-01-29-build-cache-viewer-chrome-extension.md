@@ -9,7 +9,7 @@ keywords: "cache viewer extension, browser cache chrome, cached content extensio
 canonical_url: "https://bestchromeextensions.com/2025/01/29/build-cache-viewer-chrome-extension/"
 ---
 
-# Build a Cache Viewer Chrome Extension
+Build a Cache Viewer Chrome Extension
 
 Browser caching is one of the most critical performance optimization techniques used by websites worldwide. When you visit a webpage, Chrome stores various resources locally in its cache to speed up subsequent visits. However, as developers and power users, we often need visibility into what is being cached, how large these cached files are, and how to manage them effectively. This is where a custom Cache Viewer Chrome Extension becomes an invaluable tool.
 

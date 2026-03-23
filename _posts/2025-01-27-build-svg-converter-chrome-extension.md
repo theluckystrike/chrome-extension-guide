@@ -8,7 +8,7 @@ tags: [chrome-extension, developer-tools]
 author: theluckystrike
 ---
 
-# Build an SVG Converter Chrome Extension: Complete Developer Guide
+Build an SVG Converter Chrome Extension: Complete Developer Guide
 
 The ability to convert raster images to scalable vector graphics directly within Chrome has become an essential tool for web developers, designers, and digital artists. Whether you need to transform a PNG logo into an SVG for crisp rendering at any size, convert a JPEG illustration into a vector format for animation, or batch process images for a design project, having a dedicated svg converter extension integrated into your browser streamlines workflow significantly.
 

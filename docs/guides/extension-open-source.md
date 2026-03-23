@@ -4,7 +4,7 @@ title: "Chrome Extension Open Source. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-open-source/"
 ---
-# Guide to Open-Sourcing Chrome Extensions
+Guide to Open-Sourcing Chrome Extensions
 
 This guide covers the process, benefits, and best practices for open-sourcing your Chrome extension.
 

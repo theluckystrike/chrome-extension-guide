@@ -5,7 +5,7 @@ description: "Handle multiple user accounts in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/multi-account-patterns/"
 ---
 
-# Multi-Account and Profile Patterns
+Multi-Account and Profile Patterns
 
 Overview {#overview}
 

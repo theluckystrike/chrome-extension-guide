@@ -5,7 +5,7 @@ description: "Master the chrome.alarms API for reliable background task scheduli
 canonical_url: "https://bestchromeextensions.com/tutorials/alarms-and-scheduling/"
 ---
 
-# Alarms and Scheduling in Chrome Extensions
+Alarms and Scheduling in Chrome Extensions
 
 Overview {#overview}
 

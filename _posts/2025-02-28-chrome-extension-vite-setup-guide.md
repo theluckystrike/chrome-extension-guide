@@ -9,7 +9,7 @@ keywords: "chrome extension vite, vite chrome extension, fast chrome extension b
 canonical_url: "https://bestchromeextensions.com/2025/02/28/chrome-extension-vite-setup-guide/"
 ---
 
-# Build Chrome Extensions with Vite: Fast Development Setup Guide 2025
+Build Chrome Extensions with Vite: Fast Development Setup Guide 2025
 
 If you have ever built a Chrome extension from scratch, you know the pain of manually refreshing your extension after every code change. The traditional development workflow involves editing your files, navigating to `chrome://extensions`, clicking the refresh button, and then testing your changes. This repetitive process slows down your development cycle and breaks your concentration. Fortunately, there is a better way in 2025.
 

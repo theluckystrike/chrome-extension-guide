@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-link-preview-chrome-extension/"
 ---
 
-# Build a Link Preview Chrome Extension. Hover Preview Tutorial (2025)
+Build a Link Preview Chrome Extension. Hover Preview Tutorial (2025)
 
 Link preview extensions have become an essential tool for modern web browsing. Whether you're researching topics, shopping online, or simply browsing social media, the ability to see what's behind a link before clicking it saves time and helps avoid malicious websites. In this comprehensive tutorial, we'll build a fully functional link preview Chrome extension using Manifest V3 that displays hover previews for any URL.
 

@@ -8,7 +8,7 @@ order: 1
 canonical_url: "https://bestchromeextensions.com/permissions/activeTab/"
 ---
 
-# activeTab Permission Reference
+activeTab Permission Reference
 
 What It Does {#what-it-does}
 - Grants temporary access to the currently active tab when the user invokes the extension (click, keyboard shortcut, context menu)

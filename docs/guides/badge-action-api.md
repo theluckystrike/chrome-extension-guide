@@ -5,7 +5,7 @@ description: "A comprehensive developer guide for building Chrome extensions usi
 canonical_url: "https://bestchromeextensions.com/guides/badge-action-api/"
 ---
 
-# Chrome Extension Badge & Action API. How to Update Icons, Badges, and Tooltips
+Chrome Extension Badge & Action API. How to Update Icons, Badges, and Tooltips
 
 The `chrome.action` API is one of the most powerful tools in a Chrome extension developer's arsenal. It allows you to control the extension's icon in the browser toolbar, display notification badges, set tooltips, and provide visual feedback to users without requiring them to open a popup. This guide covers everything you need to know about dynamic badge manipulation, icon management, and per-tab state handling.
 

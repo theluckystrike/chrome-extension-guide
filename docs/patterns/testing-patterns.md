@@ -5,7 +5,7 @@ description: "Testing patterns for Chrome extension development."
 canonical_url: "https://bestchromeextensions.com/patterns/testing-patterns/"
 ---
 
-# Testing Chrome Extensions
+Testing Chrome Extensions
 
 Overview {#overview}
 

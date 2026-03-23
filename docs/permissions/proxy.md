@@ -8,7 +8,7 @@ order: 32
 canonical_url: "https://bestchromeextensions.com/permissions/proxy/"
 ---
 
-# proxy Permission. Chrome Extension Reference
+proxy Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"proxy"`

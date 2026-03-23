@@ -4,7 +4,7 @@ title: "Chrome Extension CSS Injection. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-css-injection/"
 ---
-# CSS Injection Techniques for Chrome Extensions
+CSS Injection Techniques for Chrome Extensions
 
 This guide covers various CSS injection methods for Chrome extensions, from static manifest declarations to dynamic runtime injection.
 

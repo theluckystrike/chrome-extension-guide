@@ -1,14 +1,14 @@
-# Chrome Extension Permissions Best Practices
+Chrome Extension Permissions Best Practices
 
 Permissions are the foundation of Chrome extension security. They control what your extension can access and do, directly impacting user trust, Chrome Web Store approval, and the overall security posture of your extension. This guide covers best practices for declaring, requesting, and managing permissions in Manifest V3 extensions, with practical examples and patterns you can apply immediately.
 
 For the official documentation, see [Declare Permissions](https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions).
 
-## Required vs Optional Permissions
+Required vs Optional Permissions
 
 Understanding the distinction between required and optional permissions is crucial for building trustworthy extensions. Required permissions are declared in the manifest at install time, while optional permissions can be requested at runtime when specific features are needed.
 
-### Required Permissions
+Required Permissions
 
 Required permissions appear in the installation dialog and cannot be changed after installation. Users must accept all required permissions to install your extension. This makes required permissions a critical factor in installation conversion rates.
 
@@ -30,7 +30,7 @@ Required permissions appear in the installation dialog and cannot be changed aft
 
 Required permissions are appropriate for functionality that is core to your extension's purpose. If your extension fundamentally cannot function without a permission, declare it as required. However, always consider whether optional permissions could provide the same functionality with a better user experience.
 
-### Optional Permissions
+Optional Permissions
 
 Optional permissions allow users to install your extension with minimal permissions, with additional capabilities granted as needed. This approach reduces installation friction and builds trust by demonstrating that your extension respects user privacy.
 
@@ -53,11 +53,11 @@ Optional permissions allow users to install your extension with minimal permissi
 
 When a user attempts to use a feature requiring an optional permission, you can request it dynamically. If the user denies the permission, your extension should gracefully degrade rather than fail completely.
 
-## host_permissions vs permissions
+host_permissions vs permissions
 
 In Manifest V3, Chrome distinguishes between API permissions and host permissions. Understanding this separation is essential for proper permission management.
 
-### API Permissions (permissions field)
+API Permissions (permissions field)
 
 The `permissions` field contains API permissions that grant access to Chrome extension APIs. These are capabilities like accessing storage, managing tabs, or sending notifications.
 
@@ -75,7 +75,7 @@ The `permissions` field contains API permissions that grant access to Chrome ext
 
 API permissions typically generate warnings in the installation dialog. For example, `tabs` permission shows "Read and change your browsing activity on all websites" because it can access URL and title of every tab.
 
-### Host Permissions (host_permissions field)
+Host Permissions (host_permissions field)
 
 The `host_permissions` field contains website access permissions using match patterns. These specify which URLs your extension can access.
 
@@ -91,7 +91,7 @@ The `host_permissions` field contains website access permissions using match pat
 
 Host permissions are particularly sensitive because they allow your extension to read and modify content on websites. The `<all_urls>` permission (or `*://*/*`) grants access to every website and will generate significant warnings.
 
-### Migration from Manifest V2
+Migration from Manifest V2
 
 In Manifest V2, host permissions were mixed with API permissions in the `permissions` array. Manifest V3 separates them for clarity:
 
@@ -117,11 +117,11 @@ In Manifest V2, host permissions were mixed with API permissions in the `permiss
 }
 ```
 
-## Runtime Permission Requests
+Runtime Permission Requests
 
 Chrome provides the Permissions API for checking and requesting permissions at runtime. This is essential for optional permissions but can also be used to explain why a permission is needed before requesting it.
 
-### Checking Permissions with chrome.permissions.contains
+Checking Permissions with chrome.permissions.contains
 
 Before requesting a permission, check if it's already granted using `chrome.permissions.contains()`. This method takes a permissions object and returns whether the extension currently has those permissions.
 
@@ -161,7 +161,7 @@ async function checkExampleAccess(): Promise<void> {
 }
 ```
 
-### Requesting Permissions with chrome.permissions.request
+Requesting Permissions with chrome.permissions.request
 
 Use `chrome.permissions.request()` to request optional permissions at runtime. The user will see a prompt asking them to grant the specific permission. Always explain why the permission is needed before requesting it.
 
@@ -242,7 +242,7 @@ async function enableAnalytics(): Promise<void> {
 }
 ```
 
-### Permission Events: onAdded and onRemoved
+Permission Events: onAdded and onRemoved
 
 Listen for permission changes to react when users grant or revoke permissions through Chrome's extension settings.
 
@@ -274,15 +274,15 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 
 These events are particularly useful for maintaining sync between your extension's feature flags and actual permissions, and for cleaning up resources when permissions are revoked.
 
-## The Principle of Least Privilege
+The Principle of Least Privilege
 
 The principle of least privilege states that your extension should request only the permissions it absolutely needs to function. This principle should guide every permission decision you make.
 
-### Why Least Privilege Matters
+Why Least Privilege Matters
 
 Every permission you request increases your extension's attack surface. If your extension is compromised, an attacker gains access to everything your extension can access. Additionally, excessive permissions create friction in the installation process and reduce user trust.
 
-### Practical Application
+Practical Application
 
 Start with minimal permissions and add more only when needed for specific features. Use optional permissions for features that enhance but aren't essential to core functionality.
 
@@ -302,11 +302,11 @@ Start with minimal permissions and add more only when needed for specific featur
 
 In this example, the extension has persistent storage as a required permission (needed for basic state management), while features like bookmarks, history, and notifications are optional. Users can install with confidence knowing the extension's core functionality doesn't depend on sensitive permissions.
 
-## Common Permission Strings
+Common Permission Strings
 
 Understanding what each permission grants is essential for making informed decisions. Here's a comprehensive reference:
 
-### API Permissions
+API Permissions
 
 | Permission | Capability | Warning Message |
 |------------|------------|-----------------|
@@ -331,7 +331,7 @@ Understanding what each permission grants is essential for making informed decis
 | `idle` | Detect user idle state | No warning |
 | `alarms` | Schedule tasks | No warning |
 
-### Host Permission Patterns
+Host Permission Patterns
 
 | Pattern | Access Granted |
 |---------|----------------|
@@ -341,11 +341,11 @@ Understanding what each permission grants is essential for making informed decis
 | `http://localhost:3000/*` | Local development server |
 | `<all_urls>` or `*://*/*` | All websites (most restrictive) |
 
-## activeTab: The Privacy-Friendly Alternative
+activeTab: The Privacy-Friendly Alternative
 
 The `activeTab` permission is one of the most user-friendly permissions available. It grants temporary access to the active tab only when the user explicitly invokes your extension (e.g., clicking the toolbar icon, using a keyboard shortcut, or clicking a context menu item).
 
-### How activeTab Works
+How activeTab Works
 
 When you have `activeTab` permission, your extension can only access the currently active tab when:
 
@@ -365,7 +365,7 @@ When you have `activeTab` permission, your extension can only access the current
 
 With this configuration, your extension can inject scripts into the current page when the user activates it, but cannot access pages in the background or read data from other tabs.
 
-### Comparing activeTab to Host Permissions
+Comparing activeTab to Host Permissions
 
 Here's a practical comparison:
 
@@ -400,11 +400,11 @@ async function getActiveTabId(): Promise<number> {
 
 The `activeTab` permission generates no warning in the installation dialog, significantly improving conversion rates while still providing the functionality most extensions need.
 
-## Impact on Chrome Web Store Review
+Impact on Chrome Web Store Review
 
 Permissions directly affect your extension's review process and visibility in the Chrome Web Store.
 
-### Review Considerations
+Review Considerations
 
 Extensions with excessive or unnecessary permissions face:
 
@@ -413,7 +413,7 @@ Extensions with excessive or unnecessary permissions face:
 3. Visibility Impact: Permission warnings can reduce installation rates by 50% or more
 4. Trust Damage: Users are increasingly cautious about permissions
 
-### Best Practices for Store Approval
+Best Practices for Store Approval
 
 1. Use optional permissions for non-essential features
 2. Prefer activeTab over broad host permissions when possible
@@ -438,7 +438,7 @@ description: "Learn how to implement the principle of least privilege in your Ch
 canonical_url: "https://bestchromeextensions.com/guides/permissions-best-practices/"
 ---
 
-# Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust
+Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust
 
 When building Chrome extensions, the permissions you request directly impact user trust, installation rates, and Chrome Web Store approval. Understanding how to properly manage permissions isn't just about following technical requirements, it's about respecting your users' privacy and security. This guide covers the essential best practices for handling permissions in your Chrome extension.
 

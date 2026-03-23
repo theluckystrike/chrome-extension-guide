@@ -1,10 +1,10 @@
-# Social Media Tools Extensions
+Social Media Tools Extensions
 
-## Introduction
+Introduction
 
 Social media tools extensions enhance the browsing experience on platforms like Twitter/X, Facebook, LinkedIn, Instagram, and Reddit by adding automation, productivity features, and customizations. This guide covers the essential patterns for building solid social media Chrome extensions using Manifest V3 and TypeScript.
 
-## Core Architecture
+Core Architecture
 
 Social media extensions typically need to interact with dynamic content, handle authentication, and manage rate limiting. Here's a solid foundation:
 
@@ -37,7 +37,7 @@ export interface PlatformConfig {
 }
 ```
 
-## Content Script Injection Patterns
+Content Script Injection Patterns
 
 Social media sites are highly dynamic, using React, Vue, or custom frameworks. Your content script needs to handle dynamic DOM updates:
 
@@ -123,7 +123,7 @@ const collector = new SocialMediaCollector();
 collector.startCollection();
 ```
 
-## Background Service Worker Patterns
+Background Service Worker Patterns
 
 The background script handles API calls, data processing, and storage:
 
@@ -206,7 +206,7 @@ async function handleNewPost(post: Partial<SocialPost>): Promise<void> {
 }
 ```
 
-## Popup Interface for Social Tools
+Popup Interface for Social Tools
 
 The popup provides quick access to social features:
 
@@ -277,7 +277,7 @@ export const SocialToolsPopup: React.FC = () => {
 };
 ```
 
-## Best Practices
+Best Practices
 
 1. Respect Rate Limits: Always implement rate limiting to avoid getting your extension or user accounts blocked
 2. Handle Dynamic Content: Use MutationObserver for SPA frameworks
@@ -285,7 +285,7 @@ export const SocialToolsPopup: React.FC = () => {
 4. Platform-Specific Logic: Each social platform has unique DOM structures, create abstraction layers
 5. Background Processing: Keep heavy processing in the background script to avoid UI blocking
 
-## Common Use Cases
+Common Use Cases
 
 - Post Scheduler: Queue posts for later publication
 - Analytics Dashboard: Track engagement metrics across platforms
@@ -293,7 +293,7 @@ export const SocialToolsPopup: React.FC = () => {
 - Privacy Tools: Hide or blur sensitive content
 - Automation: Auto-like, follow, or engage based on rules
 
-## Permissions Required
+Permissions Required
 
 ```json
 {
@@ -311,12 +311,12 @@ export const SocialToolsPopup: React.FC = () => {
 }
 ```
 
-## Conclusion
+Conclusion
 
 Building social media tools extensions requires careful handling of dynamic content, rate limiting, and cross-platform compatibility. The patterns shown here provide a solid foundation for creating robust, user-friendly extensions that can collect, analyze, and interact with social media content while respecting platform constraints and user privacy.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

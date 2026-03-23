@@ -9,7 +9,7 @@ keywords: "chrome extension pomodoro, pomodoro timer chrome, build timer extensi
 canonical_url: "https://bestchromeextensions.com/2025/04/14/build-pomodoro-timer-chrome-extension/"
 ---
 
-# Build a Pomodoro Timer Chrome Extension: Focus Intervals in Your Browser
+Build a Pomodoro Timer Chrome Extension: Focus Intervals in Your Browser
 
 The Pomodoro Technique is one of the most popular productivity methods used by developers, writers, students, and professionals worldwide. Developed by Francesco Cirillo in the late 1980s, this time management technique uses a timer to break work into focused intervals, traditionally 25 minutes, separated by short breaks. Building a Pomodoro timer Chrome extension brings this powerful productivity tool directly into your browser, where you spend most of your workday.
 

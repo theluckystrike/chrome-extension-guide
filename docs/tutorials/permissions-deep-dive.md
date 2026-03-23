@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "Chrome Extension Permissions: A Deep Dive. Developer Guide"
+title: "Chrome Extension Permissions: A detailed look. Developer Guide"
 description: "Master Chrome extension permissions with this comprehensive tutorial covering required vs optional permissions, host access, activeTab, declarativeContent, runtime requests, and minimum-privilege strategies."
 canonical_url: "https://bestchromeextensions.com/tutorials/permissions-deep detailed look/"
 ---
 
-# Chrome Extension Permissions: A Deep Dive
+Chrome Extension Permissions: A detailed look
 
 Permissions are the cornerstone of Chrome extension security. They determine what data your extension can access, what actions it can perform, and most importantly, how much trust users place in your extension. This detailed look covers every aspect of the permissions system in Manifest V3, from basic concepts to advanced security patterns.
 

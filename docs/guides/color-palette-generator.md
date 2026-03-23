@@ -1,8 +1,8 @@
-# Building a Color Palette Generator Chrome Extension
+Building a Color Palette Generator Chrome Extension
 
 A color palette generator extension extracts colors from web pages, generates harmonious palettes, and provides tools for designers and developers. This guide covers building a production-ready MV3 extension with TypeScript, proper architecture, and best practices.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest Configuration](#manifest-configuration)
@@ -17,7 +17,7 @@ A color palette generator extension extracts colors from web pages, generates ha
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 A color palette generator typically requires three main contexts:
 

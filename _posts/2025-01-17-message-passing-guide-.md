@@ -9,7 +9,7 @@ keywords: "chrome extension message passing, sendMessage chrome extension, port 
 canonical_url: "https://bestchromeextensions.com/2025/01/17/message-passing-guide/"
 ---
 
-# Chrome Extension Message Passing Complete Guide
+Chrome Extension Message Passing Complete Guide
 
 Message passing is the backbone of communication in Chrome extensions. Whether you need your content script to communicate with the background service worker, or want different parts of your extension to share data and coordinate actions, understanding the message passing system is essential for building robust, functional Chrome extensions. This complete guide covers everything you need to know about chrome extension message passing, from basic one-time messages to persistent connections using port.connect.
 

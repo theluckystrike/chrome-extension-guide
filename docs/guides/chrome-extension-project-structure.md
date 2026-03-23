@@ -4,7 +4,7 @@ title: "Chrome Extension Project Structure. Developer Guide"
 description: "Learn Chrome extension project structure with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-project-structure/"
 ---
-# Chrome Extension Project Structure
+Chrome Extension Project Structure
 
 A well-organized project structure is the foundation of maintainable Chrome extension development. The right structure depends on your extension's complexity, whether you use a build tool, and how your team prefers to work. This guide covers recommended patterns from simple single-file extensions to complex monorepos.
 

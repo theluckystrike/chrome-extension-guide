@@ -5,7 +5,7 @@ description: "Implement A/B testing patterns for Chrome extensions to experiment
 canonical_url: "https://bestchromeextensions.com/patterns/extension-ab-testing/"
 ---
 
-# A/B Testing Patterns for Chrome Extensions
+A/B Testing Patterns for Chrome Extensions
 
 Overview {#overview}
 

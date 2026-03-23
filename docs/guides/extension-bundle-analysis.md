@@ -4,7 +4,7 @@ title: "Chrome Extension Bundle Analysis. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-bundle-analysis/"
 ---
-# Extension Bundle Analysis
+Extension Bundle Analysis
 
 This guide covers analyzing and optimizing your Chrome extension's bundle size for better performance and user experience.
 

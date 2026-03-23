@@ -4,7 +4,7 @@ title: "Chrome Extension API Rate Limits. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-api-rate-limits/"
 ---
-# Chrome API Rate Limits and Quotas
+Chrome API Rate Limits and Quotas
 
 This guide documents the rate limits and quotas enforced by Chrome for extension APIs. Understanding these limits is essential for building reliable extensions that function correctly across all users.
 
@@ -163,7 +163,7 @@ Common error codes:
 Related Resources {#related-resources}
 
 - [Size Limits Reference](/reference/size-limits.md)
-- [Storage API Deep Dive](/api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](/api-reference/storage-api-deep detailed look.md)
 - [Rate Limiting Patterns](/patterns/rate-limiting.md)
 
 Related Articles {#related-articles}

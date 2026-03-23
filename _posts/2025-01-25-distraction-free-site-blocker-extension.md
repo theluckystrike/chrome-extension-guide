@@ -9,7 +9,7 @@ keywords: "site blocker extension, block distracting sites, focus mode chrome, c
 canonical_url: "https://bestchromeextensions.com/2025/01/25/distraction-free-site-blocker-extension/"
 ---
 
-# Build a Distraction-Free Site Blocker Chrome Extension
+Build a Distraction-Free Site Blocker Chrome Extension
 
 In an era where digital distractions compete for every moment of our attention, building a site blocker extension represents one of the most valuable projects a Chrome extension developer can undertake. Whether you are a developer looking to expand your portfolio or someone seeking to eliminate time-wasting websites from your browsing experience, this comprehensive guide will walk you through creating a fully functional distraction-free site blocker Chrome extension using the latest Manifest V3 specifications.
 

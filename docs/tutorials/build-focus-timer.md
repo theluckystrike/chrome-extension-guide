@@ -4,7 +4,7 @@ title: "Chrome Extension Focus Timer. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-focus-timer/"
 ---
-# Build a Focus Timer (Pomodoro) Extension
+Build a Focus Timer (Pomodoro) Extension
 
 Overview {#overview}
 Build a Pomodoro timer extension with configurable work/break intervals, site blocking during focus sessions, notifications, and session history.

@@ -9,7 +9,7 @@ keywords: "web worker pool extension, parallel processing chrome, multithreading
 canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-web-worker-pool/"
 ---
 
-# Web Worker Thread Pool in Chrome Extensions: Complete Guide to Parallel Processing
+Web Worker Thread Pool in Chrome Extensions: Complete Guide to Parallel Processing
 
 Chrome extensions often need to perform intensive computational tasks, from parsing large datasets to processing images and running complex algorithms. However, the main thread in a browser is shared across all content scripts, popup pages, and the service worker, making it crucial to offload heavy work to background threads. This is where Web Workers become essential, and implementing an efficient worker thread pool can dramatically improve your extension's performance.
 
@@ -364,7 +364,7 @@ Error Handling and Recovery
 Worker errors can occur for various reasons including bugs in worker code, memory limits, or browser termination. Your pool implementation should handle these gracefully:
 
 ```javascript
-// Robust error handling in pool implementation
+// Solid error handling in pool implementation
 class RobustWorkerPool {
   constructor(workerScript, poolSize) {
     this.workerScript = workerScript;

@@ -4,7 +4,7 @@ title: "Chrome Extension Advanced Permissions. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/advanced-permissions/"
 ---
-# Advanced Permission Patterns with @theluckystrike/webext-permissions
+Advanced Permission Patterns with @theluckystrike/webext-permissions
 
 Prerequisites {#prerequisites}
 - Read `docs/tutorials/permissions-quickstart.md` first

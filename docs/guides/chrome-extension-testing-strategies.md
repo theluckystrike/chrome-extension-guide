@@ -4,7 +4,7 @@ title: "Chrome Extension Testing Strategies. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-testing-strategies/"
 ---
-# Chrome Extension Testing Strategies
+Chrome Extension Testing Strategies
 
 A comprehensive guide to testing Chrome Extensions (MV3) across all layers: unit tests, integration tests, and end-to-end tests.
 

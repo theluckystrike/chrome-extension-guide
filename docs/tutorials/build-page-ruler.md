@@ -4,7 +4,7 @@ title: "Chrome Extension Page Ruler. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-ruler/"
 ---
-# Build a Page Ruler Extension
+Build a Page Ruler Extension
 
 What You'll Build {#what-youll-build}
 - Drag to measure distances on any web page

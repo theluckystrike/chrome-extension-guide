@@ -1,8 +1,8 @@
-# Building a Font Inspector Chrome Extension
+Building a Font Inspector Chrome Extension
 
 A Font Inspector is a developer tool that analyzes and displays typography information from web pages, including font families, sizes, weights, line heights, and more. This guide walks through building a production-ready Font Inspector extension using Chrome's modern extension architecture with Manifest V3, TypeScript, and best practices.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest.json Setup](#manifestjson-setup)
@@ -17,7 +17,7 @@ A Font Inspector is a developer tool that analyzes and displays typography infor
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 The Font Inspector follows a three-context architecture that separates concerns across the service worker, popup, and content scripts.
 
@@ -37,7 +37,7 @@ The Font Inspector follows a three-context architecture that separates concerns 
                 
 ```
 
-### Directory Structure
+Directory Structure
 
 ```
 font-inspector/

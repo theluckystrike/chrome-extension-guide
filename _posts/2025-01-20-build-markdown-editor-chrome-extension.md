@@ -9,7 +9,7 @@ keywords: "markdown editor extension, markdown preview chrome, md editor extensi
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-markdown-editor-chrome-extension/"
 ---
 
-# Build a Markdown Editor Chrome Extension: Complete Step-by-Step Guide
+Build a Markdown Editor Chrome Extension: Complete Step-by-Step Guide
 
 Are you tired of switching between different applications just to preview your markdown documents? Do you want a smooth writing experience directly in your browser? A markdown editor extension with live preview capabilities might be exactly what you need. In this comprehensive tutorial, we will build a fully functional markdown editor Chrome extension that provides real-time preview, syntax highlighting, and persistent storage.
 

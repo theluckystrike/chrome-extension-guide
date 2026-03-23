@@ -4,7 +4,7 @@ title: "Chrome Extension Scroll to Top. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-scroll-to-top/"
 ---
-# Build a Scroll-to-Top Button Extension
+Build a Scroll-to-Top Button Extension
 
 A floating button that smoothly scrolls to top when clicked, with customizable appearance and per-site preferences.
 

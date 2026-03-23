@@ -5,7 +5,7 @@ description: "Intercept and modify network requests with the Declarative Net Req
 canonical_url: "https://bestchromeextensions.com/patterns/network-interception/"
 ---
 
-# Network Request Interception Patterns
+Network Request Interception Patterns
 
 Overview {#overview}
 

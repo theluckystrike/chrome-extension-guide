@@ -5,7 +5,7 @@ description: "Implement advanced tab management features."
 canonical_url: "https://bestchromeextensions.com/patterns/tab-management/"
 ---
 
-# Tab Management Patterns
+Tab Management Patterns
 
 Overview {#overview}
 

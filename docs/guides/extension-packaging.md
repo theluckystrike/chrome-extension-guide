@@ -4,7 +4,7 @@ title: "Chrome Extension Extension Packaging. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-packaging/"
 ---
-# Extension Packaging Guide
+Extension Packaging Guide
 
 This guide covers how to package your Chrome extension for distribution, either through the Chrome Web Store or for self-hosting. You'll learn what to include, what to exclude, and how to automate the packaging process in your CI/CD pipeline.
 

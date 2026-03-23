@@ -5,7 +5,7 @@ description: "Complete comparison of chrome.storage.local vs chrome.storage.sync
 canonical_url: "https://bestchromeextensions.com/guides/storage-local-vs-sync/"
 ---
 
-# chrome.storage.local vs sync. Which Should You Use?
+chrome.storage.local vs sync. Which Should You Use?
 
 Introduction
 

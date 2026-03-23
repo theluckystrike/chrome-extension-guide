@@ -5,7 +5,7 @@ description: "Profile and optimize extension performance."
 canonical_url: "https://bestchromeextensions.com/patterns/performance-profiling/"
 ---
 
-# Performance Profiling for Chrome Extensions
+Performance Profiling for Chrome Extensions
 
 Overview {#overview}
 
@@ -282,8 +282,8 @@ Payload Size Guidelines {#payload-size-guidelines}
 | Payload Size | Performance | Recommendation |
 |-------------|-------------|----------------|
 | < 1 KB | Negligible overhead | Fine for any frequency |
-| 1–100 KB | Measurable latency | Batch or debounce |
-| 100 KB–1 MB | Noticeable delay | Paginate or stream |
+| 1, 100 KB | Measurable latency | Batch or debounce |
+| 100 KB, 1 MB | Noticeable delay | Paginate or stream |
 | > 1 MB | Avoid | Use storage as intermediary |
 
 ---

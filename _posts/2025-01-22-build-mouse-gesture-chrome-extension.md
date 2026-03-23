@@ -9,7 +9,7 @@ keywords: "mouse gesture extension, gesture control chrome, gesture shortcuts ex
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-mouse-gesture-chrome-extension/"
 ---
 
-# Build a Mouse Gesture Chrome Extension: Complete Developer's Guide
+Build a Mouse Gesture Chrome Extension: Complete Developer's Guide
 
 Mouse gesture extensions have revolutionized the way users navigate browsers, offering lightning-fast shortcuts that eliminate the need to reach for keyboard combinations or click through multiple menu layers. If you have ever drawn an "L" shape to open a link in a new tab or traced a "U" to undo a closed tab, you have experienced the power of gesture-based navigation. Building your own mouse gesture extension is an exciting project that combines event handling, coordinate tracking, pattern recognition, and real-time visual feedback into a cohesive user experience.
 

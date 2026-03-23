@@ -5,7 +5,7 @@ description: "Master the chrome.windows API for creating, updating, and managing
 canonical_url: "https://bestchromeextensions.com/guides/windows-api/"
 ---
 
-# Chrome Extension Windows API. How to Create and Manage Browser Windows
+Chrome Extension Windows API. How to Create and Manage Browser Windows
 
 Introduction {#introduction}
 

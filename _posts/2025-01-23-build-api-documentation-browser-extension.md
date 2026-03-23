@@ -9,7 +9,7 @@ keywords: "api docs extension, swagger chrome extension, api browser extension, 
 canonical_url: "https://bestchromeextensions.com/2025/01/23/build-api-documentation-browser-extension/"
 ---
 
-# Build an API Documentation Browser Extension: Complete Guide
+Build an API Documentation Browser Extension: Complete Guide
 
 Modern API development requires constant reference to documentation. Whether you're working with REST APIs, GraphQL endpoints, or microservices, accessing API documentation quickly can significantly impact your productivity. While you could bookmark documentation pages or keep browser tabs open, a dedicated API documentation browser extension provides a more elegant solution, bringing documentation directly into your browser workflow.
 

@@ -1,18 +1,18 @@
-# Chrome Alarms API
+Chrome Alarms API
 
 The Chrome Alarms API provides solid background task scheduling in Manifest V3 extensions, replacing unreliable `setInterval`/`setTimeout` calls.
 
-## Why Use chrome.alarms
+Why Use chrome.alarms
 
 In Manifest V2, developers used `setInterval()` and `setTimeout()` in background pages, but these fail when service workers terminate. The `chrome.alarms` API persists alarms across service worker restarts, browser restarts, and wakes the worker when alarms fire.
 
-## Required Permission
+Required Permission
 
 ```json
 { "permissions": ["alarms"], "background": { "service_worker": "background.js" } }
 ```
 
-## AlarmInfo Properties
+AlarmInfo Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -22,31 +22,31 @@ In Manifest V2, developers used `setInterval()` and `setTimeout()` in background
 
 Minimum interval: 1 minute in production; shorter in dev allowed.
 
-## chrome.alarms.create. Creating Alarms
+chrome.alarms.create. Creating Alarms
 
-### One-Time Alarm
+One-Time Alarm
 ```javascript
 chrome.alarms.create("oneTimeTask", { delayInMinutes: 5 });
 ```
 
-### Periodic Alarm
+Periodic Alarm
 ```javascript
 chrome.alarms.create("syncTask", { delayInMinutes: 1, periodInMinutes: 30 });
 ```
 
-### Alarm at Specific Time
+Alarm at Specific Time
 ```javascript
 chrome.alarms.create("dailyTask", { when: new Date("2024-12-25T09:00:00").getTime() });
 ```
 
-### Multiple Named Alarms
+Multiple Named Alarms
 ```javascript
 chrome.alarms.create("pomodoroTimer", { delayInMinutes: 25 });
 chrome.alarms.create("breakTimer", { delayInMinutes: 5 });
 chrome.alarms.create("dataSync", { periodInMinutes: 15 });
 ```
 
-## chrome.alarms.get. Getting a Specific Alarm
+chrome.alarms.get. Getting a Specific Alarm
 
 ```javascript
 chrome.alarms.get("pomodoroTimer", (alarm) => {
@@ -57,28 +57,28 @@ chrome.alarms.get("pomodoroTimer", (alarm) => {
 // Promise-based: const alarm = await chrome.alarms.get("name");
 ```
 
-## chrome.alarms.getAll. Listing All Active Alarms
+chrome.alarms.getAll. Listing All Active Alarms
 
 ```javascript
 chrome.alarms.getAll((alarms) => alarms.forEach(a => console.log(a.name)));
 // Promise-based: const all = await chrome.alarms.getAll();
 ```
 
-## chrome.alarms.clear. Removing a Specific Alarm
+chrome.alarms.clear. Removing a Specific Alarm
 
 ```javascript
 chrome.alarms.clear("pomodoroTimer", (wasCleared) => console.log(wasCleared));
 // Promise-based: await chrome.alarms.clear("name");
 ```
 
-## chrome.alarms.clearAll. Removing All Alarms
+chrome.alarms.clearAll. Removing All Alarms
 
 ```javascript
 chrome.alarms.clearAll();
 // Promise-based: await chrome.alarms.clearAll();
 ```
 
-## chrome.alarms.onAlarm. Event Listener
+chrome.alarms.onAlarm. Event Listener
 
 Register at the top level of your service worker:
 
@@ -91,7 +91,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 The service worker wakes when alarms fire. Listener must be at top-level.
 
-## Persistent Scheduling Across Restarts
+Persistent Scheduling Across Restarts
 
 ```javascript
 chrome.alarms.get("dataSync", (alarm) => {
@@ -99,7 +99,7 @@ chrome.alarms.get("dataSync", (alarm) => {
 });
 ```
 
-## Building a Pomodoro Timer Extension
+Building a Pomodoro Timer Extension
 
 ```javascript
 // background.js - Pomodoro Timer
@@ -129,7 +129,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-## Building a Periodic Data Sync Extension
+Building a Periodic Data Sync Extension
 
 ```javascript
 // background.js - Periodic Sync
@@ -150,7 +150,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.alarms.onAlarm.addListener((a) => { if (a.name === "dataSync") syncData(); });
 ```
 
-## Best Practices
+Best Practices
 
 - Use meaningful alarm names for debugging
 - Check for existing alarms before creating duplicates
@@ -158,12 +158,12 @@ chrome.alarms.onAlarm.addListener((a) => { if (a.name === "dataSync") syncData()
 - Clean up on uninstall using `chrome.runtime.onUninstalled`
 - Combine with `chrome.notifications` for user alerts
 
-## Reference
+Reference
 
 - [Official Documentation](https://developer.chrome.com/docs/extensions/reference/api/alarms)
 - [Chrome Extensions Samples](https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/api/alarms)
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 

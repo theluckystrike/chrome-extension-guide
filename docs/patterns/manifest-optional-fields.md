@@ -5,7 +5,7 @@ description: "Explore optional manifest.json fields for enhanced extension funct
 canonical_url: "https://bestchromeextensions.com/patterns/manifest-optional-fields/"
 ---
 
-# Optional Manifest.json Fields
+Optional Manifest.json Fields
 
 Chrome extension manifest.json includes many optional fields beyond the required ones. Understanding when to use these fields helps you build more powerful and professional extensions.
 

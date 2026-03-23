@@ -9,7 +9,7 @@ keywords: "lighthouse auto extension, performance score chrome, web vitals exten
 canonical_url: "https://bestchromeextensions.com/2025/01/29/build-auto-lighthouse-score-chrome-extension/"
 ---
 
-# Build an Auto Lighthouse Score Chrome Extension: Complete Guide
+Build an Auto Lighthouse Score Chrome Extension: Complete Guide
 
 In the fast-paced world of web development, performance is everything. Users expect lightning-fast experiences, and search engines reward performant websites with better rankings. Google Lighthouse has become the gold standard for measuring web performance, but manually running audits for every page you visit is time-consuming. What if you could automatically capture Lighthouse scores every time you browse the web?
 

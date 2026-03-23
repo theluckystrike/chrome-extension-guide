@@ -5,7 +5,7 @@ description: "Centralized state management patterns for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/state-management/"
 ---
 
-# State Management Patterns
+State Management Patterns
 
 Overview {#overview}
 

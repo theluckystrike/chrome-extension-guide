@@ -4,7 +4,7 @@ title: "Chrome Extension Page Capture. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/page-capture/"
 ---
-# Page Capture API Guide
+Page Capture API Guide
 
 Overview {#overview}
 

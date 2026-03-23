@@ -5,7 +5,7 @@ description: "Persist and sync extension state across sessions and devices."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-state-persistence/"
 ---
 
-# Extension State Persistence Patterns
+Extension State Persistence Patterns
 
 Persisting state across MV3 service worker restarts is critical for building reliable Chrome extensions. Unlike the persistent background page in MV2, MV3 service workers are ephemeral and can be terminated after a period of inactivity, losing all in-memory state.
 
@@ -207,7 +207,7 @@ Cross-References {#cross-references}
 
 - [MV3 Service Workers](../mv3/service-workers.md)
 - [Service Worker Keep-Alive Patterns](./service-worker-keepalive.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 -e 
 ---
 

@@ -5,7 +5,7 @@ description: "The Chrome Permissions API requests and manages optional permissio
 canonical_url: "https://bestchromeextensions.com/api-reference/permissions-api/"
 ---
 
-# chrome.permissions API Reference
+chrome.permissions API Reference
 
 Overview {#overview}
 
@@ -263,7 +263,7 @@ Cross-References {#cross-references}
 
 - [Permissions Model](../guides/permissions-model.md) - Understanding Chrome's permission system
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md) - Detailed look into permission strategies
-- [Permissions Deep Dive](../permissions/permissions-deep detailed look.md) - Comprehensive permission guide
+- [Permissions detailed look](../permissions/permissions-deep detailed look.md) - Comprehensive permission guide
 Frequently Asked Questions
 
 How do I check if I have a permission?

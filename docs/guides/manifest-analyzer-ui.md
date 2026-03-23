@@ -1,8 +1,8 @@
-# Building a Manifest Analyzer UI Chrome Extension
+Building a Manifest Analyzer UI Chrome Extension
 
 A Manifest Analyzer is a developer tool that parses, validates, and provides insights into Chrome extension manifest.json files. This guide covers building a full-featured analyzer with an interactive UI.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest.json Setup](#architecture-and-manifestjson-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -16,11 +16,11 @@ A Manifest Analyzer is a developer tool that parses, validates, and provides ins
 
 ---
 
-## Architecture and Manifest.json Setup
+Architecture and Manifest.json Setup
 
 The Manifest Analyzer follows a standard MV3 architecture:
 
-### Directory Structure
+Directory Structure
 
 ```
 manifest-analyzer/
@@ -37,7 +37,7 @@ manifest-analyzer/
  icons/
 ```
 
-### Manifest Configuration
+Manifest Configuration
 
 ```json
 {

@@ -1,8 +1,8 @@
-# Building a Markdown Previewer Chrome Extension
+Building a Markdown Previewer Chrome Extension
 
 A Markdown previewer extension enhances your browsing experience by rendering Markdown content in real-time as you type or view raw Markdown files on the web. This guide walks you through building a production-ready Markdown previewer using Chrome Extension Manifest V3, TypeScript, and modern web technologies.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -17,9 +17,9 @@ A Markdown previewer extension enhances your browsing experience by rendering Ma
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Extension Architecture
+Extension Architecture
 
 The Markdown Previewer follows a modular architecture with clear separation of concerns:
 
@@ -52,7 +52,7 @@ markdown-previewer/
      logger.ts
 ```
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 ```json
 {

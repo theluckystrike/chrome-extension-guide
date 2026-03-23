@@ -5,7 +5,7 @@ description: "Access and display top sites from Chrome history using the Top Sit
 canonical_url: "https://bestchromeextensions.com/patterns/top-sites/"
 ---
 
-# Top Sites API Patterns
+Top Sites API Patterns
 
 Overview {#overview}
 

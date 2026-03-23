@@ -4,7 +4,7 @@ title: "Chrome Extension Keyboard Shortcuts. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/commands-keyboard-shortcuts/"
 ---
-# Keyboard Shortcuts & Commands Guide
+Keyboard Shortcuts & Commands Guide
 
 Overview {#overview}
 - `chrome.commands` API for global and extension-scoped keyboard shortcuts

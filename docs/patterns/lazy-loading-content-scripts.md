@@ -5,7 +5,7 @@ description: "Optimize extension performance with lazy loading patterns for cont
 canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading-content-scripts/"
 ---
 
-# Lazy Loading Content Scripts
+Lazy Loading Content Scripts
 On-demand and conditional content script injection for Chrome Extensions (MV3).
 Static vs Dynamic {#static-vs-dynamic}
 Static (manifest.json) - Always injected:

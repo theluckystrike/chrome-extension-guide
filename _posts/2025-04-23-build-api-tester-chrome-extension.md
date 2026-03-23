@@ -9,7 +9,7 @@ keywords: "chrome extension api tester, api testing chrome, build postman extens
 canonical_url: "https://bestchromeextensions.com/2025/04/23/build-api-tester-chrome-extension/"
 ---
 
-# Build an API Tester Chrome Extension: Postman Alternative in Your Browser
+Build an API Tester Chrome Extension: Postman Alternative in Your Browser
 
 If you are a web developer or API tester, you have probably used tools like Postman, Insomnia, or similar HTTP clients to test REST APIs. While these desktop applications are powerful, they require installation and cannot integrate directly into your browser workflow. What if you could have a lightweight, always-available API tester right in Chrome? we will walk you through building your own API Tester Chrome extension, a Postman alternative that runs directly in your browser.
 

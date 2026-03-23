@@ -5,7 +5,7 @@ description: "Learn how to use the chrome.offscreen API to access DOM APIs in Ch
 canonical_url: "https://bestchromeextensions.com/guides/offscreen-documents/"
 ---
 
-# Chrome Extension Offscreen Documents. How to Use DOM APIs in MV3 Service Workers
+Chrome Extension Offscreen Documents. How to Use DOM APIs in MV3 Service Workers
 
 Introduction
 

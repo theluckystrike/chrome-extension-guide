@@ -4,7 +4,7 @@ title: "Chrome Extension Security Audit. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-security-audit/"
 ---
-# Extension Security Audit Guide
+Extension Security Audit Guide
 
 Overview {#overview}
 

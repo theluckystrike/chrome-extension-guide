@@ -4,7 +4,7 @@ title: "Chrome Extension Email Tracker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-email-tracker/"
 ---
-# Build an Email Productivity Tracker
+Build an Email Productivity Tracker
 
 Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly statistics with charts, provides a focus mode with configurable time limits, and sends notifications when over time. Uses @theluckystrike/webext-storage for persistent data and chrome.idle for intelligent pause detection.
 

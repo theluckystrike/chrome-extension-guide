@@ -5,7 +5,7 @@ description: "Master the Chrome Alarms API for scheduling background tasks in Ma
 canonical_url: "https://bestchromeextensions.com/guides/alarms-background-tasks/"
 ---
 
-# Chrome Extension Alarms API. How to Schedule Background Tasks in MV3
+Chrome Extension Alarms API. How to Schedule Background Tasks in MV3
 
 Introduction
 

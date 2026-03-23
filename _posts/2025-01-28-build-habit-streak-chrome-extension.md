@@ -9,7 +9,7 @@ keywords: "habit streaks extension, daily streak chrome, consistency tracker, ch
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-habit-streak-chrome-extension/"
 ---
 
-# Build a Habit Streak Chrome Extension: Complete Developer Guide
+Build a Habit Streak Chrome Extension: Complete Developer Guide
 
 Creating a habit streaks extension is one of the most rewarding Chrome extension projects you can undertake. A daily streak chrome tracker helps users build positive habits by providing visual feedback on their consistency, making it an excellent addition to any productivity toolkit. we will walk you through building a fully functional habit streaks extension from scratch, covering everything from project setup to advanced features like local storage persistence and badge notifications.
 

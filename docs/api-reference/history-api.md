@@ -5,7 +5,7 @@ description: "The Chrome History API searches, reads, adds, and deletes browser 
 canonical_url: "https://bestchromeextensions.com/api-reference/history-api/"
 ---
 
-# Chrome History API Reference
+Chrome History API Reference
 
 The `chrome.history` API lets you search, read, add, and delete browser history entries. Each history item represents a unique URL the user has visited, and each URL can have multiple visit records with timestamps.
 

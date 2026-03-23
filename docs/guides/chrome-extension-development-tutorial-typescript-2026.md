@@ -8,7 +8,7 @@ last_modified_at: 2026-01-15
 
 ---
 
-# Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide
+Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide
 
 Chrome extension development has evolved significantly with the adoption of Manifest V3 and modern TypeScript tooling. This comprehensive tutorial walks you through building a production-ready Chrome extension from scratch using TypeScript, covering architecture patterns, API usage, and best practices that professional developers use in 2026.
 

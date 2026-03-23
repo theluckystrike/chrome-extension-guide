@@ -5,7 +5,7 @@ description: "Implement dependency injection for cleaner extension architecture.
 canonical_url: "https://bestchromeextensions.com/patterns/extension-dependency-injection/"
 ---
 
-# Extension Dependency Injection Patterns
+Extension Dependency Injection Patterns
 
 Patterns for writing testable Chrome extensions using dependency injection to decouple from global chrome.* APIs.
 

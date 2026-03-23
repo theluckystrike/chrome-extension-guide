@@ -8,7 +8,7 @@ tags: [i18n, localization, chrome-extension]
 keywords: "chrome extension i18n, chrome extension translation, internationalize chrome extension, chrome extension multiple languages, _locales chrome extension"
 ---
 
-# Chrome Extension Internationalization (i18n): Support Multiple Languages
+Chrome Extension Internationalization (i18n): Support Multiple Languages
 
 In the global marketplace of browser extensions, reaching users beyond your native language is no longer optional, it's a strategic necessity. With Chrome extensions serving millions of users worldwide, implementing solid internationalization (i18n) can dramatically expand your user base, improve user satisfaction, and boost your extension's visibility in international search results. This comprehensive guide walks you through the complete process of implementing multi-language support in your Chrome extension using Manifest V3.
 

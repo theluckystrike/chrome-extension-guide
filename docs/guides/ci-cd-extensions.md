@@ -1,10 +1,10 @@
-# CI/CD for Chrome Extensions
+CI/CD for Chrome Extensions
 
 A comprehensive guide to building, testing, and publishing Chrome extensions using continuous integration and deployment pipelines.
 
 ---
 
-## GitHub Actions Workflow Setup
+GitHub Actions Workflow Setup
 
 Create a `.github/workflows/` directory for your CI/CD workflows:
 
@@ -12,10 +12,10 @@ Create a `.github/workflows/` directory for your CI/CD workflows:
 mkdir -p .github/workflows
 ```
 
-### Basic CI Workflow
+Basic CI Workflow
 
 ```yaml
-# .github/workflows/ci.yml
+.github/workflows/ci.yml
 name: CI
 
 on:

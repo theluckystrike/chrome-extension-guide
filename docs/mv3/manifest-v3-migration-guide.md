@@ -5,7 +5,7 @@ description: "Complete guide to migrating your Chrome extension from Manifest V2
 canonical_url: "https://bestchromeextensions.com/mv3/manifest-v3-migration-guide/"
 ---
 
-# Manifest V3 Migration Guide
+Manifest V3 Migration Guide
 
 Quick Checklist {#quick-checklist}
 1. Change `"manifest_version": 2` → `3`

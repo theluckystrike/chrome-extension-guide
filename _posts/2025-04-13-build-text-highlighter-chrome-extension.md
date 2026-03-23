@@ -9,7 +9,7 @@ keywords: "chrome extension text highlighter, highlight text chrome extension, w
 canonical_url: "https://bestchromeextensions.com/2025/04/13/build-text-highlighter-chrome-extension/"
 ---
 
-# Build a Text Highlighter Chrome Extension: Annotate and Save Web Content
+Build a Text Highlighter Chrome Extension: Annotate and Save Web Content
 
 Web annotation tools have become essential for researchers, students, and professionals who consume large amounts of online content. The ability to highlight, annotate, and save important passages directly in the browser transforms how we interact with web content. we will walk you through building a fully functional text highlighter Chrome extension using Manifest V3.
 

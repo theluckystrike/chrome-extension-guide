@@ -9,7 +9,7 @@ keywords: "chrome extension github diff, github diff viewer chrome, enhanced cod
 canonical_url: "https://bestchromeextensions.com/2025/05/06/build-github-diff-viewer-chrome-extension/"
 ---
 
-# Build a GitHub Diff Viewer Chrome Extension: Enhanced Code Review Experience
+Build a GitHub Diff Viewer Chrome Extension: Enhanced Code Review Experience
 
 Code review is one of the most critical processes in modern software development. Whether you are reviewing pull requests, comparing branches, or auditing changes before merging, the default GitHub diff viewer has limitations that can slow down your workflow. Building a custom GitHub diff viewer Chrome extension gives you complete control over how you visualize and interact with code changes, transforming your code review experience into something far more powerful and efficient.
 

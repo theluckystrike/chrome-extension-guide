@@ -8,7 +8,7 @@ tags: [chrome-extension, developer-tools]
 keywords: "event logger extension, dom event chrome, javascript events debugger"
 ---
 
-# Build an Event Logger Chrome Extension: Complete Developer Guide
+Build an Event Logger Chrome Extension: Complete Developer Guide
 
 Creating an event logger Chrome extension is one of the most useful projects you can undertake as a Chrome extension developer. Whether you are debugging complex web applications, understanding user interactions, or building developer tools, having a solid event logging capability can save countless hours of development time. we will walk through the complete process of building a production-ready event logger extension that can capture DOM events, JavaScript events, and provide a powerful debugging interface for developers.
 

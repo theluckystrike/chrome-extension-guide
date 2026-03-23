@@ -8,7 +8,7 @@ order: 42
 canonical_url: "https://bestchromeextensions.com/permissions/tabGroups/"
 ---
 
-# tabGroups Permission
+tabGroups Permission
 
 Overview {#overview}
 

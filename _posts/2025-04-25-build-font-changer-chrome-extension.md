@@ -9,7 +9,7 @@ keywords: "chrome extension change font, font changer chrome, custom font chrome
 canonical_url: "https://bestchromeextensions.com/2025/04/25/build-font-changer-chrome-extension/"
 ---
 
-# Build a Font Changer Chrome Extension: Customize Website Typography
+Build a Font Changer Chrome Extension: Customize Website Typography
 
 Have you ever visited a website and wished you could change the font to something easier to read? Maybe the text is too small, the font family doesn't appeal to you, or you prefer reading in a specific typeface. A font changer Chrome extension solves this problem by allowing users to customize the typography of any website they visit. we'll walk through building a complete font changer extension from scratch using Manifest V3.
 

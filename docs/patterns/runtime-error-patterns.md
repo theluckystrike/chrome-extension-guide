@@ -5,7 +5,7 @@ description: "Handle and recover from runtime errors gracefully."
 canonical_url: "https://bestchromeextensions.com/patterns/runtime-error-patterns/"
 ---
 
-# Chrome Runtime Error Patterns
+Chrome Runtime Error Patterns
 
 This guide covers systematic handling of `chrome.runtime` errors in Chrome extensions.
 

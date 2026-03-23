@@ -9,7 +9,7 @@ keywords: "web components chrome extension, custom elements chrome extension, Ty
 canonical_url: "https://bestchromeextensions.com/2026/03/09/web-components-chrome-extensions-guide/"
 ---
 
-# Web Components in Chrome Extensions: Complete Guide with TypeScript
+Web Components in Chrome Extensions: Complete Guide with TypeScript
 
 Web Components represent one of the most powerful paradigms for building reusable, encapsulated UI elements in modern web development. When combined with Chrome extensions, they offer an elegant solution for creating maintainable, scalable extension interfaces. This comprehensive guide explores how to use Web Components (Custom Elements, Shadow DOM, and HTML Templates) in your Chrome extension projects using TypeScript.
 
@@ -425,7 +425,7 @@ For content scripts that run in webpage context, Web Components must be defined 
 
 ---
 
-Shadow DOM Deep Dive {#shadow-dom-deep detailed look}
+Shadow DOM detailed look {#shadow-dom-deep detailed look}
 
 Understanding Shadow DOM is crucial for building solid Web Components.  advanced patterns:
 

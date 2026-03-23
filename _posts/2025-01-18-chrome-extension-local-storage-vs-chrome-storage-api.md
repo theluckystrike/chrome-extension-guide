@@ -9,7 +9,7 @@ keywords: "chrome extension local storage, chrome storage api vs localStorage, e
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/"
 ---
 
-# Chrome Extension Local Storage vs Chrome Storage API: Complete Guide
+Chrome Extension Local Storage vs Chrome Storage API: Complete Guide
 
 When building Chrome extensions, one of the most critical decisions you'll make is how to store and persist data. Whether you're saving user preferences, caching data, or maintaining application state, choosing the right storage mechanism can significantly impact your extension's performance, reliability, and user experience.
 
@@ -88,7 +88,7 @@ Types of Chrome Storage
 
 Chrome provides three distinct storage areas:
 
-#### 1. chrome.storage.local
+1. chrome.storage.local
 ```javascript
 // Writing to local storage
 chrome.storage.local.set({ key: 'value' }).then(() => {
@@ -101,7 +101,7 @@ chrome.storage.local.get(['key']).then((result) => {
 });
 ```
 
-#### 2. chrome.storage.sync
+2. chrome.storage.sync
 ```javascript
 // Writing to sync storage - syncs across user's Chrome instances
 chrome.storage.sync.set({ 
@@ -117,7 +117,7 @@ chrome.storage.sync.get(['theme', 'fontSize']).then((result) => {
 });
 ```
 
-#### 3. chrome.storage.session (Manifest V3)
+3. chrome.storage.session (Manifest V3)
 ```javascript
 // Session storage - data cleared when browser closes
 chrome.storage.session.set({ 
@@ -334,7 +334,7 @@ How Manifest V3 Affects Storage Choices
 
 Chrome's transition from Manifest V2 to Manifest V3 brought significant changes to how extensions handle storage. Understanding these changes is essential for modern extension development.
 
-#### Key Manifest V3 Storage Differences
+Key Manifest V3 Storage Differences
 
 1. Background Pages to Service Workers: Manifest V3 replaces persistent background pages with service workers, which cannot access storage synchronously
 2. Content Script Restrictions: Content scripts have limited direct access to chrome.storage

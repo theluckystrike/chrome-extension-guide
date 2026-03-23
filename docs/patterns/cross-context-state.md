@@ -5,7 +5,7 @@ description: "Share state across extension contexts."
 canonical_url: "https://bestchromeextensions.com/patterns/cross-context-state/"
 ---
 
-# Cross-Context State Management
+Cross-Context State Management
 
 The Core Challenge {#the-core-challenge}
 
@@ -181,7 +181,7 @@ Cross-References {#cross-references}
 
 - [State Management Patterns](../patterns/state-management.md). General state patterns
 - [Message Passing Patterns Reference](../reference/message-passing-patterns.md). One-time and port-based messaging
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md). Full storage API reference
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md). Full storage API reference
 -e 
 ---
 

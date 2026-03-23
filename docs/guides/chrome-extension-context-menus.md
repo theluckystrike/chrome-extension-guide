@@ -5,7 +5,7 @@ description: "Build powerful context menus for Chrome extensions. Learn dynamic 
 permalink: /guides/chrome-extension-context-menus/
 ---
 
-# Chrome Extension Context Menus: Dynamic Right-Click Menus Guide
+Chrome Extension Context Menus: Dynamic Right-Click Menus Guide
 
 Context menus represent one of the most powerful UX features available to Chrome extension developers. When implemented correctly, right-click menus integrate your extension directly into the user's natural workflow, appearing exactly where and when they need specific functionality. Unlike popup windows that require explicit user action to open, or keyboard shortcuts that users must remember, context menus use a universally understood interaction pattern, the right-click, that users employ dozens of times daily while browsing the web.
 

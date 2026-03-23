@@ -9,7 +9,7 @@ keywords: "dom diff extension, html compare chrome, page change tracker"
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-dom-diff-viewer-chrome-extension/"
 ---
 
-# Build a DOM Diff Viewer Chrome Extension: Complete Developer's Guide
+Build a DOM Diff Viewer Chrome Extension: Complete Developer's Guide
 
 Web development often requires monitoring changes in web pages, debugging dynamic content, or tracking how websites evolve over time. Whether you are a web developer testing your own applications, a QA engineer verifying UI updates, or a researcher monitoring competitor websites, having a tool that can compare HTML and highlight differences is invaluable. we will walk through building a DOM diff viewer Chrome extension that captures page states, compares them, and visualizes differences in an intuitive way.
 

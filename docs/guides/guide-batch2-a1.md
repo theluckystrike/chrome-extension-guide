@@ -1,9 +1,9 @@
-# WebRTC in Chrome Extensions
+WebRTC in Chrome Extensions
 
-## Overview
+Overview
 WebRTC (Web Real-Time Communication) enables peer-to-peer audio, video, and data streaming directly in the browser. While Chrome extensions share many web platform capabilities, implementing WebRTC in extensions requires understanding unique constraints around permissions, content scripts, and service worker lifecycles. This guide covers patterns for building extension-powered video conferencing tools, screen sharing utilities, and real-time communication features.
 
-## Manifest Requirements
+Manifest Requirements
 
 WebRTC requires specific manifest configuration depending on your use case:
 
@@ -23,7 +23,7 @@ WebRTC requires specific manifest configuration depending on your use case:
 
 The `tabCapture` and `desktopCapture` permissions are essential for capturing browser tabs or the entire screen. For peer-to-peer connections to external servers, you'll need appropriate host permissions.
 
-## Capturing Tab or Screen Audio/Video
+Capturing Tab or Screen Audio/Video
 
 The `chrome.tabCapture` and `chrome.desktopCapture` APIs are the foundation of extension-based WebRTC:
 
@@ -66,7 +66,7 @@ async function getCaptureSources(): Promise<chrome.desktopCapture.DesktopCapture
 }
 ```
 
-## Implementing a Peer Connection Manager
+Implementing a Peer Connection Manager
 
 Managing WebRTC connections in extensions requires careful handling of the service worker lifecycle:
 
@@ -155,7 +155,7 @@ class ExtensionPeerManager {
 }
 ```
 
-## Communication Between Contexts
+Communication Between Contexts
 
 WebRTC streams must be passed between extension contexts carefully:
 
@@ -197,7 +197,7 @@ async function initiateCall(peerId: string): Promise<void> {
 }
 ```
 
-## Handling Service Worker Termination
+Handling Service Worker Termination
 
 Service workers in MV3 can be terminated after inactivity. Implement reconnection logic:
 
@@ -233,7 +233,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-## Best Practices
+Best Practices
 
 1. Always handle permissions gracefully - Users may revoke camera/microphone access at any time
 2. Use `getUserMedia` constraints properly - Test various resolution and frame rate combinations
@@ -241,7 +241,7 @@ chrome.runtime.onStartup.addListener(async () => {
 4. Handle ICE server failures - Provide fallback servers and connection state monitoring
 5. Consider MV2 to MV3 differences - Background pages in MV2 stay alive; service workers in MV3 need reconnection logic
 
-## Common Use Cases
+Common Use Cases
 
 - Screen recording extensions: Capture tabs or windows for tutorial creation
 - Meeting boosters: Add functionality to existing video conferencing platforms

@@ -8,7 +8,7 @@ order: 39
 canonical_url: "https://bestchromeextensions.com/permissions/storage/"
 ---
 
-# storage Permission Reference
+storage Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to `chrome.storage` API (local, sync, session, managed)
@@ -165,7 +165,7 @@ Related Permissions {#related-permissions}
 - [activeTab](activeTab.md). often paired to extract + store page data
 
 API Reference {#api-reference}
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Chrome storage API docs](https://developer.chrome.com/docs/extensions/reference/api/storage)
 
 Frequently Asked Questions

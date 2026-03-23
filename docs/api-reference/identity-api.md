@@ -5,7 +5,7 @@ description: "The Chrome Identity API provides OAuth2 and OpenID Connect authent
 canonical_url: "https://bestchromeextensions.com/api-reference/identity-api/"
 ---
 
-# chrome.identity API Reference
+chrome.identity API Reference
 
 The `chrome.identity` API provides OAuth2 and OpenID Connect authentication capabilities for Chrome extensions and apps. It enables extensions to access Google APIs and third-party services that support OAuth authentication.
 
@@ -63,7 +63,7 @@ API Methods {#api-methods}
 
 Google OAuth Methods {#google-oauth-methods}
 
-#### getAuthToken
+getAuthToken
 
 Retrieves an OAuth2 access token for Google APIs. This is the recommended method for authenticating with Google services.
 
@@ -97,7 +97,7 @@ chrome.identity.getAuthToken({ interactive: false }, (token) => {
 });
 ```
 
-#### removeCachedAuthToken
+removeCachedAuthToken
 
 Removes an OAuth2 token from Chrome's token cache. Call this when a token is rejected (401 Unauthorized) to force retrieval of a fresh token.
 
@@ -124,7 +124,7 @@ function handleUnauthorized() {
 }
 ```
 
-#### clearAllCachedAuthTokens
+clearAllCachedAuthTokens
 
 Clears all OAuth2 tokens from Chrome's token cache. Use this for complete logout functionality.
 
@@ -143,7 +143,7 @@ function logout() {
 
 Non-Google OAuth (Generic) {#non-google-oauth-generic}
 
-#### launchWebAuthFlow
+launchWebAuthFlow
 
 Launches an authentication flow for any OAuth2/OIDC provider. This method opens a popup window where users authenticate with the provider.
 
@@ -181,7 +181,7 @@ chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, (response
 });
 ```
 
-#### getRedirectURL
+getRedirectURL
 
 Returns the redirect URL for your extension. This URL follows the pattern `https://<extension-id>.chromiumapp.org/` and must be registered with your OAuth provider.
 
@@ -204,7 +204,7 @@ const redirectUrl = chrome.identity.getRedirectURL('oauth2callback');
 
 Profile Information {#profile-information}
 
-#### getProfileUserInfo
+getProfileUserInfo
 
 Retrieves information about the currently signed-in user. Returns signed-in Google account details.
 

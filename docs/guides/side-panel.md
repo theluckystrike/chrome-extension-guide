@@ -5,7 +5,7 @@ description: "Learn how to build a sidebar UI in Chrome extensions using the chr
 canonical_url: "https://bestchromeextensions.com/guides/side-panel/"
 ---
 
-# Chrome Extension Side Panel API. How to Build a Sidebar UI
+Chrome Extension Side Panel API. How to Build a Sidebar UI
 
 Introduction {#introduction}
 

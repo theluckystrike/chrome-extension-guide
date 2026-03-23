@@ -5,7 +5,7 @@ description: "Create migration wizards for major version updates."
 canonical_url: "https://bestchromeextensions.com/patterns/migration-wizard/"
 ---
 
-# Migration Wizard Pattern
+Migration Wizard Pattern
 
 Overview {#overview}
 

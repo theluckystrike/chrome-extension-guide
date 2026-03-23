@@ -9,7 +9,7 @@ keywords: "port chrome extension firefox, firefox webextension, cross-browser ex
 canonical_url: "https://bestchromeextensions.com/2025/01/25/port-chrome-extensions-to-firefox/"
 ---
 
-# Porting Chrome Extensions to Firefox: Complete Cross-Browser Guide
+Porting Chrome Extensions to Firefox: Complete Cross-Browser Guide
 
 The browser extension ecosystem has evolved significantly, and developers increasingly need to support multiple browsers to maximize their reach. With Firefox maintaining a significant user base and Mozilla's Add-on Marketplace (AMO) offering excellent discoverability, porting your Chrome extension to Firefox is a strategic move that can double your potential audience without requiring a complete rewrite of your codebase.
 

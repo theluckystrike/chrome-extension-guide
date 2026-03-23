@@ -5,7 +5,7 @@ description: "Handle long-running operations in service workers without timeout.
 canonical_url: "https://bestchromeextensions.com/patterns/long-running-operations/"
 ---
 
-# Long-Running Operations Patterns
+Long-Running Operations Patterns
 
 Overview {#overview}
 

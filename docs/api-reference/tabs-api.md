@@ -5,7 +5,7 @@ description: "The Chrome Tabs API creates, modifies, queries, and rearranges bro
 canonical_url: "https://bestchromeextensions.com/api-reference/tabs-api/"
 ---
 
-# Chrome Tabs API Reference
+Chrome Tabs API Reference
 
 The `chrome.tabs` API lets you create, modify, query, and rearrange tabs in the browser. It is one of the most heavily used Chrome extension APIs.
 

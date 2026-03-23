@@ -9,7 +9,7 @@ keywords: "reading speed extension, reading time estimator, words per minute chr
 canonical_url: "https://bestchromeextensions.com/2025/01/24/build-reading-speed-calculator-extension/"
 ---
 
-# Build a Reading Speed Calculator Extension: Complete WPM Guide
+Build a Reading Speed Calculator Extension: Complete WPM Guide
 
  how long it will take you to read an article before diving in? Whether you are a student planning study time, a professional estimating document review duration, or a content creator wanting to help your audience, a reading speed extension can be an invaluable tool. we will walk you through building a fully functional Chrome extension that calculates reading time based on words per minute (WPM), giving users instant estimates of how long any web content will take to read.
 

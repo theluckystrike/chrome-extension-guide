@@ -4,7 +4,7 @@ title: "Chrome Extension Code Review Checklist. Developer Guide"
 description: "Learn Chrome extension code review checklist with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-code-review-checklist/"
 ---
-# Chrome Extension Code Review Checklist
+Chrome Extension Code Review Checklist
 
 Use this checklist when reviewing pull requests for Chrome extension projects to ensure code quality, security, and best practices.
 

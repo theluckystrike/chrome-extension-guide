@@ -4,7 +4,7 @@ title: "Chrome Extension Reading List API. How to Add and Manage Reading List It
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/reading-list-api/"
 ---
-# Reading List API Guide
+Reading List API Guide
 
 Overview {#overview}
 - Requires `"readingList"` permission (cross-ref `docs/permissions/readingList.md`)

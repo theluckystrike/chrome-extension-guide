@@ -9,7 +9,7 @@ keywords: "chrome extension accessibility, a11y chrome extension, accessible pop
 canonical_url: "https://bestchromeextensions.com/2025/03/12/chrome-extension-accessibility-a11y-guide/"
 ---
 
-# Chrome Extension Accessibility (a11y): Build Extensions Everyone Can Use
+Chrome Extension Accessibility (a11y): Build Extensions Everyone Can Use
 
 Web accessibility is no longer an optional consideration, it is a fundamental aspect of quality software development. When building Chrome extensions, ensuring accessibility (often abbreviated as a11y) should be a core priority from the very beginning of your development process. An accessible Chrome extension reaches a wider audience, complies with legal requirements, and provides a better experience for all users, not just those with disabilities.
 

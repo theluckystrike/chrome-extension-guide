@@ -5,7 +5,7 @@ description: "A comprehensive guide to implementing OAuth2 authentication in Chr
 canonical_url: "https://bestchromeextensions.com/guides/oauth2-authentication/"
 ---
 
-# Chrome Extension OAuth2 Authentication. How to Sign In Users with Google, GitHub, and More
+Chrome Extension OAuth2 Authentication. How to Sign In Users with Google, GitHub, and More
 
 Overview {#overview}
 

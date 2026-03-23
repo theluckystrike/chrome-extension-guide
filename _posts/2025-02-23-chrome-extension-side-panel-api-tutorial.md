@@ -9,7 +9,7 @@ keywords: "chrome extension side panel, chrome sidebar extension, side panel API
 canonical_url: "https://bestchromeextensions.com/2025/02/23/chrome-extension-side-panel-api-tutorial/"
 ---
 
-# Chrome Extension Side Panel API: Build a Sidebar Extension in 2025
+Chrome Extension Side Panel API: Build a Sidebar Extension in 2025
 
 The Chrome Side Panel API represents one of the most exciting additions to Chrome's extension platform in recent years. If you have ever wanted to create a persistent sidebar that stays open while users browse the web, you now have a dedicated API to do exactly that. Unlike traditional popup windows that disappear when they lose focus, side panels remain visible and accessible throughout the user's browsing session, providing a smooth experience for building note-taking tools, reading assistants, translation extensions, productivity boosters, and much more.
 

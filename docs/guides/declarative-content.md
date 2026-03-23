@@ -4,7 +4,7 @@ title: "Chrome Extension Declarative Content. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/declarative-content/"
 ---
-# Declarative Content API Guide
+Declarative Content API Guide
 
 Overview {#overview}
 - Show/hide extension action icon based on page content

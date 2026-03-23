@@ -4,7 +4,7 @@ title: "Chrome Extension Error Reporting. Developer Guide"
 description: "Learn Chrome extension error reporting with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/extension-error-reporting/"
 ---
-# Error Reporting and Monitoring for Chrome Extensions
+Error Reporting and Monitoring for Chrome Extensions
 
 Introduction {#introduction}
 - Chrome extensions run across multiple isolated contexts: background service worker, popup, options page, content scripts

@@ -9,7 +9,7 @@ keywords: "dom manipulation extension, modify page chrome extension, content scr
 canonical_url: "https://bestchromeextensions.com/2025/01/20/chrome-extension-dom-manipulation-guide/"
 ---
 
-# Chrome Extension DOM Manipulation Guide: Master Content Script DOM Access
+Chrome Extension DOM Manipulation Guide: Master Content Script DOM Access
 
 DOM manipulation is one of the most powerful capabilities of Chrome extensions. Whether you want to highlight text, inject custom styles, modify page content, or build productivity tools that interact with web pages, understanding how to manipulate the DOM through content scripts is essential for any extension developer.
 

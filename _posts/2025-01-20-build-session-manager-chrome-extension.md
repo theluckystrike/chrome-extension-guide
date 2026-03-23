@@ -9,7 +9,7 @@ keywords: "session manager extension, save tabs session, restore tabs chrome, ch
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-session-manager-chrome-extension/"
 ---
 
-# Build a Session Manager Chrome Extension: Complete 2025 Tutorial
+Build a Session Manager Chrome Extension: Complete 2025 Tutorial
 
 If you have ever lost a dozen tabs because Chrome crashed or you accidentally closed a window, you know how frustrating it can be to recover your workflow. A session manager extension solves this problem by letting you save tabs session and restore tabs chrome whenever you need them. In this comprehensive tutorial, you will learn how to build a complete session manager Chrome extension from scratch using Manifest V3.
 

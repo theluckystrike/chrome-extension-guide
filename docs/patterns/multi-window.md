@@ -5,7 +5,7 @@ description: "Manage multiple windows and coordinate between them."
 canonical_url: "https://bestchromeextensions.com/patterns/multi-window/"
 ---
 
-# Multi-Window Management Pattern
+Multi-Window Management Pattern
 
 Overview {#overview}
 

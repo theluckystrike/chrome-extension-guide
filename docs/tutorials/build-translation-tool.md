@@ -4,7 +4,7 @@ title: "Chrome Extension Translation Tool. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-translation-tool/"
 ---
-# Build a Translation Tool Extension
+Build a Translation Tool Extension
 
 A Chrome extension that translates selected text instantly, provides a popup interface for manual translation, and maintains translation history.
 

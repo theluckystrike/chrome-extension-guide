@@ -4,7 +4,7 @@ title: "Chrome Extension Bookmark Manager. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-bookmark-manager/"
 ---
-# Build a Bookmark Manager Extension
+Build a Bookmark Manager Extension
 
 What You'll Build {#what-youll-build}
 A side panel bookmark manager with search, folder navigation, tags, and duplicate detection.

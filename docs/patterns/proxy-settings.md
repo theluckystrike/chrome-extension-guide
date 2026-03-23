@@ -5,7 +5,7 @@ description: "Configure proxy settings for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings/"
 ---
 
-# Proxy Settings API Patterns
+Proxy Settings API Patterns
 
 Overview {#overview}
 

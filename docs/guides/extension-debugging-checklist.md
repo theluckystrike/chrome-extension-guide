@@ -4,7 +4,7 @@ title: "Chrome Extension Debugging Checklist. Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
 canonical_url: "https://bestchromeextensions.com/guides/extension-debugging-checklist/"
 ---
-# Extension Debugging Checklist
+Extension Debugging Checklist
 
 This checklist provides a systematic approach to diagnosing and fixing common Chrome extension issues. Each section covers a specific problem area with symptoms, likely causes, diagnostic steps, and fixes.
 

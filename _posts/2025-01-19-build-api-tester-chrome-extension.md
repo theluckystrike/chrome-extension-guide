@@ -9,7 +9,7 @@ keywords: "api tester extension, rest client chrome extension, http client exten
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-api-tester-chrome-extension/"
 ---
 
-# Build an API Tester Chrome Extension: Complete Developer's Guide
+Build an API Tester Chrome Extension: Complete Developer's Guide
 
 In the world of web development, having a reliable API tester extension is essential for debugging, testing, and working with REST APIs. While tools like Postman offer comprehensive functionality, a lightweight REST client Chrome extension that lives directly in your browser can significantly streamline your workflow. we'll walk you through building a fully functional HTTP client extension from scratch using modern Chrome extension development practices.
 

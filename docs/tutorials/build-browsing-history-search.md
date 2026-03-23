@@ -4,7 +4,7 @@ title: "Chrome Extension History Search. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-browsing-history-search/"
 ---
-# Build a Browsing History Search Extension
+Build a Browsing History Search Extension
 
 This tutorial guides you through building an enhanced Chrome extension for searching and analyzing your browsing history.
 
@@ -123,7 +123,7 @@ Related Documentation {#related-documentation}
 
 - [History API Reference](../api_reference/history-api.md)
 - [History Permissions](../permissions/history.md)
-- [History Patterns Deep Dive](../patterns/history-deep detailed look.md)
+- [History Patterns detailed look](../patterns/history-deep detailed look.md)
 -e 
 ---
 

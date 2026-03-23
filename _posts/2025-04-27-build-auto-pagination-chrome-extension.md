@@ -9,7 +9,7 @@ keywords: "chrome extension auto pagination, infinite scroll extension, auto nex
 canonical_url: "https://bestchromeextensions.com/2025/04/27/build-auto-pagination-chrome-extension/"
 ---
 
-# Build an Auto-Pagination Chrome Extension: Infinite Scrolling on Any Site
+Build an Auto-Pagination Chrome Extension: Infinite Scrolling on Any Site
 
 Pagination is one of the most common patterns on the web. Whether you are browsing e-commerce product listings, reading through blog archives, or searching for specific content on a forum, you have likely encountered the frustration of manually clicking "Next Page" dozens of times. An auto-pagination Chrome extension solves this problem by automatically detecting when you reach the bottom of a page and loading the next set of content smoothly.
 

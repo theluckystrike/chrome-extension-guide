@@ -5,7 +5,7 @@ description: "Learn how to internationalize your Chrome extension with this comp
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-internationalization-i18n/"
 ---
 
-# Chrome Extension i18n: Complete Internationalization Guide
+Chrome Extension i18n: Complete Internationalization Guide
 
 Internationalization (i18n) transforms your Chrome extension from a single-language product into a global tool that serves users worldwide. When you invest in proper internationalization, you unlock access to billions of potential users who prefer interacting with applications in their native language. This guide covers everything you need to build, test, and maintain multilingual Chrome extensions using the chrome.i18n API and related tools.
 

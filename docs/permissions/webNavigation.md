@@ -8,7 +8,7 @@ order: 48
 canonical_url: "https://bestchromeextensions.com/permissions/webNavigation/"
 ---
 
-# webNavigation Permission
+webNavigation Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.webNavigation` API for monitoring page navigation lifecycle across all tabs and frames.

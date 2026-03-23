@@ -9,7 +9,7 @@ keywords: "reading list extension, save for later extension, bookmark reader"
 canonical_url: "https://bestchromeextensions.com/2025/01/19/build-reading-list-chrome-extension/"
 ---
 
-# Build a Reading List Chrome Extension: Complete Step-by-Step Guide
+Build a Reading List Chrome Extension: Complete Step-by-Step Guide
 
 Creating your own reading list Chrome extension is one of the most rewarding projects you can undertake as a developer. Whether you want to save articles for later reading, build a bookmark reader, or create a sophisticated save for later extension with cloud sync, this guide will walk you through the entire process. By the end of this tutorial, you will have a fully functional reading list extension that you can use and customize to your heart's content.
 

@@ -1,16 +1,16 @@
-# Building an Extension Dependency Tracker
+Building an Extension Dependency Tracker
 
-## Introduction
+Introduction
 
 An Extension Dependency Tracker monitors and visualizes dependencies between browser extensions. This guide covers building a complete MV3 extension with TypeScript and production-ready architecture.
 
-## Architecture Overview
+Architecture Overview
 
 - Popup: Quick dependency status view
 - Sidebar: Full visualization and management
 - Background Service Worker: Data collection and scheduling
 
-## manifest.json
+manifest.json
 
 ```json
 {
@@ -25,7 +25,7 @@ An Extension Dependency Tracker monitors and visualizes dependencies between bro
 }
 ```
 
-## TypeScript Types
+TypeScript Types
 
 ```typescript
 export interface ExtensionInfo {
@@ -45,7 +45,7 @@ export interface DependencyGraph {
 }
 ```
 
-## Background Service Worker
+Background Service Worker
 
 ```typescript
 // background/service.ts
@@ -128,7 +128,7 @@ class DependencyTracker {
 export const tracker = new DependencyTracker();
 ```
 
-## Message Handling
+Message Handling
 
 ```typescript
 // background/messages.ts
@@ -145,7 +145,7 @@ chrome.runtime.onMessage.addListener((msg, _, send) => {
 });
 ```
 
-## Popup UI
+Popup UI
 
 ```typescript
 // popup/popup.ts
@@ -183,7 +183,7 @@ class PopupController {
 document.addEventListener('DOMContentLoaded', () => new PopupController());
 ```
 
-## Sidebar UI
+Sidebar UI
 
 ```typescript
 // sidebar/sidebar.ts
@@ -232,7 +232,7 @@ class SidebarController {
 document.addEventListener('DOMContentLoaded', () => new SidebarController());
 ```
 
-## Chrome APIs
+Chrome APIs
 
 | API | Permission | Purpose |
 |-----|------------|---------|
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => new SidebarController());
 | `chrome.alarms` | alarms | Schedule periodic scans |
 | `chrome.sidePanel` | - | Open sidebar |
 
-## Storage Pattern
+Storage Pattern
 
 ```typescript
 class Storage<T> {
@@ -251,7 +251,7 @@ class Storage<T> {
 }
 ```
 
-## Error Handling
+Error Handling
 
 ```typescript
 class ExtensionError extends Error {
@@ -264,7 +264,7 @@ function handleError(e: unknown, ctx: string): ExtensionError {
 }
 ```
 
-## Testing
+Testing
 
 ```typescript
 describe('DependencyAnalyzer', () => {
@@ -276,7 +276,7 @@ describe('DependencyAnalyzer', () => {
 });
 ```
 
-## Performance Tips
+Performance Tips
 
 - Debounce scans, don't scan on every permission change
 - Cache graph data in chrome.storage.local
@@ -290,24 +290,24 @@ function debounce<T extends Function>(fn: T, ms: number): T {
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-publish
+Pre-publish
 - [ ] Run tests with 80%+ coverage
 - [ ] Verify in Chrome, Edge, Brave, Opera
 - [ ] Check performance metrics
 - [ ] Review and minimize permissions
 - [ ] Test edge cases
 
-### Store Assets
+Store Assets
 - [ ] 128x128 and 440x280 icons (PNG)
 - [ ] 1280x800 promo image
 - [ ] Detailed description
 
-### Documentation
+Documentation
 - [ ] Privacy policy
 - [ ] Support contact
 
-### Post-publish
+Post-publish
 - [ ] Monitor error reports
 - [ ] Plan update process

@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-bundle-
 proficiency_level: "Intermediate"
 ---
 
-# Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression
+Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression
 
 Chrome extensions face unique bundle size challenges that web applications don't encounter. The Chrome Web Store enforces strict size limits, and users expect lightning-fast load times. A bloated extension not only risks rejection during publication but also creates poor user experiences that lead to negative reviews and uninstalls. This comprehensive guide covers every aspect of extension bundle optimization, from understanding CWS limits to implementing advanced build configurations that minimize your extension's footprint while maintaining full functionality.
 

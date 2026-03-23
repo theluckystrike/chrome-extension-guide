@@ -5,7 +5,7 @@ description: "Implement feature flags for gradual rollout and testing."
 canonical_url: "https://bestchromeextensions.com/patterns/feature-flags/"
 ---
 
-# Feature Flag Patterns
+Feature Flag Patterns
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: Chrome Extension Declarative Net Request. MV3 Network Request Rules
 description: Learn how to use Chrome's Declarative Net Request API to modify network requests, block ads, and redirect traffic in Manifest V3 extensions.
 ---
 
-# Chrome Extension Declarative Net Request. MV3 Network Request Rules
+Chrome Extension Declarative Net Request. MV3 Network Request Rules
 
 The Declarative Net Request API is one of the most powerful features introduced in Manifest V3, enabling Chrome extensions to modify, block, or redirect network requests without requiring broad host permissions. This API provides a privacy-preserving and performance-friendly way to handle network-level operations, making it ideal for ad blocking, content filtering, and request modification.
 

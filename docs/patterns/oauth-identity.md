@@ -5,7 +5,7 @@ description: "Implement OAuth 2.0 for user authentication."
 canonical_url: "https://bestchromeextensions.com/patterns/oauth-identity/"
 ---
 
-# OAuth and Identity Patterns
+OAuth and Identity Patterns
 
 Overview {#overview}
 

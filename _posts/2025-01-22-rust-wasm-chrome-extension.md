@@ -9,7 +9,7 @@ keywords: "rust chrome extension, wasm rust extension, webassembly rust chrome, 
 canonical_url: "https://bestchromeextensions.com/2025/01/22/rust-wasm-chrome-extension/"
 ---
 
-# Building Chrome Extensions with Rust and WebAssembly
+Building Chrome Extensions with Rust and WebAssembly
 
 The landscape of Chrome extension development is evolving rapidly, and developers are increasingly turning to Rust and WebAssembly to build extensions that are faster, more secure, and more performant than ever before. If you have been curious about combining the power of Rust with the flexibility of Chrome extensions, this comprehensive guide will walk you through everything you need to know to get started with wasm rust extension development.
 

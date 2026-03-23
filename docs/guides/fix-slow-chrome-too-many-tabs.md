@@ -5,7 +5,7 @@ description: "Learn how to fix slow Chrome caused by too many tabs. Reduce memor
 permalink: /guides/fix-slow-chrome-too-many-tabs/
 ---
 
-# Fix Slow Chrome With Too Many Tabs: Complete Memory Management Guide
+Fix Slow Chrome With Too Many Tabs: Complete Memory Management Guide
 
 If Chrome is slow and your computer grinds to a halt every time you open a new tab, you are not alone. Chrome's memory consumption has been the number one complaint from users for over a decade. With modern web applications becoming increasingly complex, each tab can consume anywhere from 50 MB to over 500 MB of RAM.
 

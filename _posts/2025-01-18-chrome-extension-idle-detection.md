@@ -9,7 +9,7 @@ keywords: "chrome idle api, detect user idle extension, inactive tab detection, 
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-idle-detection/"
 ---
 
-# Chrome Extension Idle Detection API Guide: Detect User Activity and Inactive Tabs
+Chrome Extension Idle Detection API Guide: Detect User Activity and Inactive Tabs
 
 Building intelligent Chrome extensions often requires understanding when users are actively engaged with their browser versus when they have stepped away. The Chrome Idle Detection API provides a powerful mechanism to detect user inactivity, enabling developers to create smarter extensions that conserve system resources, optimize performance, and deliver contextual experiences based on user availability. This comprehensive guide will walk you through everything you need to know about implementing idle detection in your Chrome extensions using the chrome.idle API.
 

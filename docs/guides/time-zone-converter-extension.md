@@ -1,12 +1,12 @@
-# Time Zone Converter Extension Guide
+Time Zone Converter Extension Guide
 
-## Overview
+Overview
 
 This guide covers building a production-ready Chrome extension for converting time zones. We'll explore architecture, implementation patterns, and best practices using TypeScript and Manifest V3.
 
-## Architecture and Manifest.json Setup
+Architecture and Manifest.json Setup
 
-### Project Structure
+Project Structure
 
 ```
 timezone-converter/
@@ -31,7 +31,7 @@ timezone-converter/
  package.json
 ```
 
-### Manifest V3 Configuration
+Manifest V3 Configuration
 
 ```json
 {
@@ -69,9 +69,9 @@ timezone-converter/
 }
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Type Definitions
+Type Definitions
 
 ```typescript
 // src/shared/types.ts
@@ -111,7 +111,7 @@ export interface AppState {
 }
 ```
 
-### Time Zone Logic
+Time Zone Logic
 
 ```typescript
 // src/shared/timezone.ts
@@ -169,9 +169,9 @@ export function formatTime(date: Date, use24Hour: boolean): string {
 }
 ```
 
-## UI Design Patterns
+UI Design Patterns
 
-### Popup Implementation
+Popup Implementation
 
 ```typescript
 // src/popup/popup.ts
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-### Content Script Overlay
+Content Script Overlay
 
 ```typescript
 // src/content/content.ts
@@ -420,9 +420,9 @@ class TimeOverlay {
 new TimeOverlay();
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Storage Pattern
+Storage Pattern
 
 ```typescript
 // src/shared/storage.ts
@@ -474,7 +474,7 @@ export class StorageManager {
 }
 ```
 
-### Alarms for Scheduled Updates
+Alarms for Scheduled Updates
 
 ```typescript
 // src/background/background.ts
@@ -505,9 +505,9 @@ function updateTimezoneData(): void {
 }
 ```
 
-## State Management Patterns
+State Management Patterns
 
-### Redux-like Pattern with TypeScript
+Redux-like Pattern with TypeScript
 
 ```typescript
 // src/shared/store.ts
@@ -573,7 +573,7 @@ export const removeLocation = (id: string): Action<string> => ({
 });
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
 ```typescript
 // src/utils/errors.ts
@@ -630,9 +630,9 @@ export function handleInvalidTimezone(timezone: string): TimezoneError {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests with Jest
+Unit Tests with Jest
 
 ```typescript
 // __tests__/timezone.test.ts
@@ -668,7 +668,7 @@ describe('formatTime', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 // __tests__/integration.test.ts
@@ -692,9 +692,9 @@ describe('Storage Integration', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Strategies
+Optimization Strategies
 
 ```typescript
 // Performance optimizations
@@ -753,9 +753,9 @@ function updateUI(state: AppState): void {
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission Requirements
+Pre-submission Requirements
 
 - [ ] Update `manifest.json` version number
 - [ ] Replace placeholder icons with actual icons (16, 48, 128px)
@@ -766,7 +766,7 @@ function updateUI(state: AppState): void {
 - [ ] Check for console errors
 - [ ] Test offline functionality
 
-### Submission Steps
+Submission Steps
 
 1. Package extension: `npm run build && zip -r extension.zip dist/`
 2. Open [Chrome Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -774,14 +774,14 @@ function updateUI(state: AppState): void {
 4. Fill in store listing details
 5. Submit for review
 
-### Post-publication
+Post-publication
 
 - Monitor error reports in Developer Dashboard
 - Set up update notifications for users
 - Track user reviews and respond promptly
 - Maintain backwards compatibility
 
-## Conclusion
+Conclusion
 
 This guide covered the essential components for building a production-ready Chrome extension. Key takeaways:
 

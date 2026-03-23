@@ -9,7 +9,7 @@ keywords: "accessibility overlay extension, a11y checker chrome, wcag overlay ex
 canonical_url: "https://bestchromeextensions.com/2025/01/26/build-accessibility-overlay-chrome-extension/"
 ---
 
-# Build an Accessibility Overlay Chrome Extension: Complete 2025 Tutorial
+Build an Accessibility Overlay Chrome Extension: Complete 2025 Tutorial
 
 Web accessibility is no longer optional, it is a legal requirement, a moral imperative, and a business necessity. With over one billion people worldwide living with some form of disability, ensuring your website is accessible is essential. This comprehensive guide teaches you how to build an accessibility overlay Chrome extension that helps users identify and fix accessibility issues in real-time.
 

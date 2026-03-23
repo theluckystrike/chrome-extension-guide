@@ -8,7 +8,7 @@ tags: [email-marketing, extension-marketing, user-list, conversion-emails, chrom
 author: theluckystrike
 ---
 
-# Chrome Extension Email Marketing. Build and Monetize Your User List
+Chrome Extension Email Marketing. Build and Monetize Your User List
 
 Email marketing remains one of the most powerful tools in a developer's toolkit, yet many Chrome extension creators overlook its potential. Unlike social media platforms where algorithms control your reach, email gives you direct access to your users, people who have already chosen to install your extension. This guide covers everything you need to build, grow, and monetize your extension's email list in 2025.
 

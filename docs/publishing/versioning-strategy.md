@@ -5,7 +5,7 @@ description: "Master extension versioning with semantic versioning principles, a
 canonical_url: "https://bestchromeextensions.com/publishing/versioning-strategy/"
 ---
 
-# Chrome Extension Versioning. Semantic Versioning and Auto-Update Strategy
+Chrome Extension Versioning. Semantic Versioning and Auto-Update Strategy
 
 Effective version management is critical for maintaining Chrome extensions that serve thousands or millions of users. This guide covers the version format, semantic versioning principles tailored for extensions, the auto-update infrastructure, differential updates, staged rollouts, and maintaining a comprehensive version history.
 

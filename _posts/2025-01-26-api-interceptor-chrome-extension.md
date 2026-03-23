@@ -9,7 +9,7 @@ keywords: "api interceptor extension, http request modifier chrome, request inte
 canonical_url: "https://bestchromeextensions.com/2025/01/26/api-interceptor-chrome-extension/"
 ---
 
-# Build an API Request Interceptor Chrome Extension
+Build an API Request Interceptor Chrome Extension
 
 API request interception represents one of the most valuable capabilities available to Chrome extension developers. Whether you need to debug API calls, modify request headers for testing, simulate different server responses, or build developer tools, understanding how to intercept and manipulate HTTP requests is essential. This comprehensive guide walks you through building a complete API request interceptor extension using modern Chrome extension APIs.
 

@@ -5,7 +5,7 @@ description: "Implement search functionality with the Search API."
 canonical_url: "https://bestchromeextensions.com/patterns/search-api-patterns/"
 ---
 
-# Chrome Search API Patterns
+Chrome Search API Patterns
 
 The `chrome.search` API enables programmatic web searches from your Chrome extension. This document covers patterns for implementing search functionality in extensions.
 

@@ -6,7 +6,7 @@ description: "Complete guide to migrating Chrome extensions from Manifest V2 to 
 
 # Manifest V3 Migration Guide
 
-Welcome to the Manifest V3 Migration Guide — your complete resource for understanding and migrating to Chrome's latest extension manifest version. Manifest V3 brings significant changes to how Chrome extensions work, including the transition from background pages to service workers, new declarative APIs, promise-based methods, and enhanced security restrictions.
+Welcome to the Manifest V3 Migration Guide. your complete resource for understanding and migrating to Chrome's latest extension manifest version. Manifest V3 brings significant changes to how Chrome extensions work, including the transition from background pages to service workers, new declarative APIs, promise-based methods, and enhanced security restrictions.
 
 This guide provides comprehensive coverage of all Manifest V3 changes, migration strategies, and best practices for building modern extensions that take advantage of the latest Chrome APIs. Whether you're migrating an existing extension or building a new one, these guides will help you understand the new architecture and implement it correctly.
 

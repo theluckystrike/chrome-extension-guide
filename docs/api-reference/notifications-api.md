@@ -5,7 +5,7 @@ description: "The Chrome Notifications API creates rich desktop notifications us
 canonical_url: "https://bestchromeextensions.com/api-reference/notifications-api/"
 ---
 
-# Chrome Notifications API Reference
+Chrome Notifications API Reference
 
 The `chrome.notifications` API lets you create rich desktop notifications using templates. These are system-level notifications that appear outside the browser window.
 
@@ -80,7 +80,7 @@ chrome.notifications.create("progress-example", {
   iconUrl: "icon128.png",
   title: "Downloading...",
   message: "file.zip",
-  progress: 45, // 0–100
+  progress: 45, // 0, 100
 });
 ```
 
@@ -98,7 +98,7 @@ NotificationOptions {#notificationoptions}
 | `buttons` | `ButtonOptions[]` | No | Up to 2 action buttons |
 | `imageUrl` | `string` | No | Large image (`type: "image"` only) |
 | `items` | `ItemOptions[]` | No | List items (`type: "list"` only) |
-| `progress` | `number` | No | 0–100 (`type: "progress"` only) |
+| `progress` | `number` | No | 0, 100 (`type: "progress"` only) |
 | `requireInteraction` | `boolean` | No | Stay visible until user dismisses |
 | `silent` | `boolean` | No | Suppress sound |
 

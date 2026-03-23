@@ -5,7 +5,7 @@ description: "Master lazy loading patterns for Chrome Extensions: dynamic import
 canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading/"
 ---
 
-# Chrome Extension Lazy Loading
+Chrome Extension Lazy Loading
 
 Load Resources On Demand for Better Performance
 

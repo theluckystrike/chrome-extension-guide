@@ -1,14 +1,14 @@
-# Building a Focus Mode Chrome Extension
+Building a Focus Mode Chrome Extension
 
 A comprehensive guide to building a productivity-focused Chrome extension that helps users concentrate by managing distractions.
 
-## Overview
+Overview
 
 A Focus Mode extension provides users with tools to block distracting websites, set work sessions, and maintain concentration. This guide covers the complete implementation using Chrome's MV3 manifest.
 
-## Architecture
+Architecture
 
-### Extension Components
+Extension Components
 
 ```
 src/
@@ -31,7 +31,7 @@ src/
      logger.ts           # Logging utility
 ```
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -69,9 +69,9 @@ src/
 }
 ```
 
-## Core Implementation
+Core Implementation
 
-### TypeScript Types (src/types/index.ts)
+TypeScript Types (src/types/index.ts)
 
 ```typescript
 export interface FocusSession {
@@ -114,7 +114,7 @@ export interface Message {
 }
 ```
 
-### Storage Management (src/core/storage.ts)
+Storage Management (src/core/storage.ts)
 
 ```typescript
 import { FocusSettings, FocusSession, ExtensionState } from '../types';
@@ -170,7 +170,7 @@ class StorageManager {
 export const storageManager = new StorageManager();
 ```
 
-### Focus Session Logic (src/core/focus-session.ts)
+Focus Session Logic (src/core/focus-session.ts)
 
 ```typescript
 import { FocusSession, FocusSettings } from '../types';
@@ -293,7 +293,7 @@ export class FocusSessionManager {
 export const sessionManager = new FocusSessionManager();
 ```
 
-### Blocklist Management (src/core/blocklist.ts)
+Blocklist Management (src/core/blocklist.ts)
 
 ```typescript
 export class BlocklistManager {
@@ -342,9 +342,9 @@ export class BlocklistManager {
 }
 ```
 
-## UI Implementation
+UI Implementation
 
-### Popup (src/popup/popup.ts)
+Popup (src/popup/popup.ts)
 
 ```typescript
 import { ExtensionState, FocusSettings } from '../types';
@@ -445,9 +445,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Content Script Overlay
+Content Script Overlay
 
-### Full-Page Overlay (src/content/overlay.ts)
+Full-Page Overlay (src/content/overlay.ts)
 
 ```typescript
 interface OverlayMessage {
@@ -515,9 +515,9 @@ class FocusOverlay {
 new FocusOverlay().initialize();
 ```
 
-## State Management
+State Management
 
-### Message Passing Pattern
+Message Passing Pattern
 
 ```typescript
 // Background service worker
@@ -542,9 +542,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Error Handling
+Error Handling
 
-### Service Worker Error Recovery
+Service Worker Error Recovery
 
 ```typescript
 // background/service-worker.ts
@@ -578,9 +578,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-## Testing
+Testing
 
-### Unit Tests with Vitest
+Unit Tests with Vitest
 
 ```typescript
 // tests/storage.test.ts
@@ -615,7 +615,7 @@ describe('StorageManager', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 // tests/e2e/session.test.ts
@@ -639,9 +639,9 @@ test('Focus session lifecycle', async ({ page, extension }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimization Tips
+Optimization Tips
 
 1. Lazy Load Content Scripts: Use dynamic import for heavy modules
 2. Minimize Storage Operations: Batch reads/writes with `chrome.storage.session`
@@ -663,9 +663,9 @@ function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number) 
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-Publication Requirements
+Pre-Publication Requirements
 
 - [ ] Complete `manifest.json` with all required fields
 - [ ] Add privacy policy URL in developer dashboard
@@ -674,7 +674,7 @@ function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number) 
 - [ ] Test in Chrome, Edge, and Firefox (if cross-browser)
 - [ ] Verify no console errors in production build
 
-### Manifest Verification
+Manifest Verification
 
 ```json
 {
@@ -698,14 +698,14 @@ function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number) 
 }
 ```
 
-### Store Listing Best Practices
+Store Listing Best Practices
 
 - Use clear, concise description (150 chars max visible)
 - Include relevant keywords in description
 - Add video demonstrating key features
 - Respond to user reviews promptly
 
-## Summary
+Summary
 
 This guide covered the essential components for building a Focus Mode Chrome extension:
 

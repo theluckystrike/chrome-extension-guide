@@ -5,7 +5,7 @@ description: "Implement communication between different Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-to-extension/"
 ---
 
-# Extension-to-Extension Communication Patterns
+Extension-to-Extension Communication Patterns
 
 Overview {#overview}
 

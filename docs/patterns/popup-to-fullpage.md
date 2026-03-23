@@ -5,7 +5,7 @@ description: "Open popups as full pages for enhanced functionality."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-to-fullpage/"
 ---
 
-# Popup-to-Fullpage Pattern
+Popup-to-Fullpage Pattern
 
 Overview {#overview}
 

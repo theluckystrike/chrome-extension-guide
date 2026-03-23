@@ -5,7 +5,7 @@ description: "Build command palettes for quick access to features."
 canonical_url: "https://bestchromeextensions.com/patterns/command-palette/"
 ---
 
-# Command Palette Pattern
+Command Palette Pattern
 
 The command palette pattern brings VS Code-style functionality to Chrome Extensions, combining keyboard shortcuts, fuzzy search, and quick actions into a unified interface that users love.
 

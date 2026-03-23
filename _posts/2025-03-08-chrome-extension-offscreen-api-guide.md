@@ -9,7 +9,7 @@ keywords: "chrome extension offscreen API, offscreen document chrome, chrome ext
 canonical_url: "https://bestchromeextensions.com/2025/03/08/chrome-extension-offscreen-api-guide/"
 ---
 
-# Chrome Extension Offscreen API: Access DOM APIs from Service Workers
+Chrome Extension Offscreen API: Access DOM APIs from Service Workers
 
 The transition from Manifest V2 to Manifest V3 brought significant changes to how Chrome extensions operate. One of the most impactful changes was the replacement of background pages with service workers, which introduced a fundamental challenge: service workers cannot access the DOM directly. This limitation created problems for developers who needed to perform DOM-related operations, use Web APIs, or execute code that required a window context. The Chrome Extension Offscreen API emerged as the solution to this problem, providing a way to create documents that run in a hidden context with full DOM access.
 

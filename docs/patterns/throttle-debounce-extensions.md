@@ -5,7 +5,7 @@ description: "Throttle and debounce events in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/throttle-debounce-extensions/"
 ---
 
-# Throttle and Debounce Patterns for Chrome Extensions
+Throttle and Debounce Patterns for Chrome Extensions
 
 Chrome extensions face unique performance challenges that require throttle and debounce patterns. Storage writes, API calls, DOM mutations, and message passing can overwhelm the extension if left uncontrolled. This guide covers implementations optimized for extension contexts, especially service workers.
 

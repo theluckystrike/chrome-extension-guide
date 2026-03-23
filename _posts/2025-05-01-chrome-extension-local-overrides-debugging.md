@@ -9,7 +9,7 @@ keywords: "chrome extension local overrides, persist devtools changes, chrome lo
 canonical_url: "https://bestchromeextensions.com/2025/05/01/chrome-extension-local-overrides-debugging/"
 ---
 
-# Chrome Extension Local Overrides: Persist DevTools Changes Across Reloads
+Chrome Extension Local Overrides: Persist DevTools Changes Across Reloads
 
 If you have ever made changes in Chrome DevTools only to watch them vanish after a page reload, you know how frustrating it can be to repeatedly recreate the same modifications during debugging sessions. Fortunately, Chrome provides a powerful feature called Local Overrides that allows you to persist your DevTools changes and have them automatically applied every time the page loads. This capability transforms your debugging workflow, enabling rapid iteration without losing precious modifications.
 

@@ -5,7 +5,7 @@ description: "A comprehensive guide to building Chrome extensions with React and
 canonical_url: "https://bestchromeextensions.com/guides/react-preact-extension/"
 ---
 
-# Chrome Extension with React or Preact. How to Build Modern Extension UIs
+Chrome Extension with React or Preact. How to Build Modern Extension UIs
 
 Building Chrome extensions with modern UI frameworks like React and Preact has become the standard approach for creating sophisticated, maintainable extension interfaces. While traditional extensions relied on vanilla JavaScript and direct DOM manipulation, leveraging React or Preact provides component-based architecture, declarative UI patterns, and a rich ecosystem of libraries that dramatically improve developer productivity and user experience.
 

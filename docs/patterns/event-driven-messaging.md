@@ -5,7 +5,7 @@ description: "Design event-driven architectures for extension components."
 canonical_url: "https://bestchromeextensions.com/patterns/event-driven-messaging/"
 ---
 
-# Event-Driven Messaging Patterns
+Event-Driven Messaging Patterns
 
 Overview {#overview}
 

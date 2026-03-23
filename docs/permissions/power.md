@@ -8,7 +8,7 @@ order: 30
 canonical_url: "https://bestchromeextensions.com/permissions/power/"
 ---
 
-# Power Permission
+Power Permission
 
 Overview {#overview}
 - Permission string: `"power"`

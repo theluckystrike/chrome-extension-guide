@@ -5,7 +5,7 @@ description: "Learn how to beta test Chrome extensions using trusted testers, un
 canonical_url: "https://bestchromeextensions.com/publishing/beta-testing/"
 ---
 
-# Beta Testing Chrome Extensions
+Beta Testing Chrome Extensions
 
 Introduction {#introduction}
 - Test new features with a subset of users before full release

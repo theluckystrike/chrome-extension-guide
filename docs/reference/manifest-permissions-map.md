@@ -1,8 +1,8 @@
-# Manifest Permissions Map
+Manifest Permissions Map
 
 Comprehensive reference mapping every Chrome extension permission to its API, user warning, and category.
 
-## Required Permissions (No Warning) {#required-permissions-no-warning}
+Required Permissions (No Warning) {#required-permissions-no-warning}
 | Permission | API | Notes |
 |------------|-----|-------|
 | `activeTab` | Temporary host access on user gesture | Best for click-triggered actions |
@@ -29,7 +29,7 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 | `unlimitedStorage` | No 10MB limit on local storage | Large data |
 | `webRequest` | `chrome.webRequest` | Observe-only in MV3 |
 
-## Permissions With Warnings {#permissions-with-warnings}
+Permissions With Warnings {#permissions-with-warnings}
 | Permission | API | Warning Shown |
 |------------|-----|---------------|
 | `bookmarks` | `chrome.bookmarks` | "Read and change your bookmarks" |
@@ -48,7 +48,7 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 | `topSites` | `chrome.topSites` | "Read a list of your most frequently visited websites" |
 | `webNavigation` | `chrome.webNavigation` | "Read your browsing history" |
 
-## Host Permissions {#host-permissions}
+Host Permissions {#host-permissions}
 ```json
 {
   "host_permissions": ["https://*.example.com/*"]
@@ -58,7 +58,7 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
 - `<all_urls>`: "Read and change all your data on all websites"
 - Use optional_host_permissions to request at runtime
 
-## Optional Permissions {#optional-permissions}
+Optional Permissions {#optional-permissions}
 ```json
 {
   "permissions": ["storage", "alarms"],
@@ -72,7 +72,7 @@ Comprehensive reference mapping every Chrome extension permission to its API, us
   - `checkPermission('bookmarks')`, `requestPermission('bookmarks')`
   - `describePermission('bookmarks')` returns human-readable description
 
-## Best Practices {#best-practices}
+Best Practices {#best-practices}
 - Start with `activeTab` instead of broad host permissions
 - Make high-warning permissions optional
 - Only request permissions when user needs the feature

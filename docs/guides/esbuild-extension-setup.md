@@ -4,7 +4,7 @@ title: "Chrome Extension Esbuild Setup. Developer Guide"
 description: "Learn how to build a Esextension Setup Chrome extension with this comprehensive tutorial covering architecture, implementation, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/esbuild-extension-setup/"
 ---
-# esbuild Setup for Chrome Extensions
+esbuild Setup for Chrome Extensions
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Tab Suspender. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-tab-suspender/"
 ---
-# Build a Tab Suspender Extension. Full Tutorial
+Build a Tab Suspender Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Automatically suspend inactive tabs to free memory

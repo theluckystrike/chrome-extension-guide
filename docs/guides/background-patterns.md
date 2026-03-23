@@ -4,7 +4,7 @@ title: "Chrome Extension Background Service Workers. Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
 canonical_url: "https://bestchromeextensions.com/guides/background-patterns/"
 ---
-# Background Service Worker Patterns
+Background Service Worker Patterns
 
 Overview {#overview}
 The background service worker is the central hub of your extension. It handles events, manages state, coordinates between contexts, and runs business logic. In MV3, it's ephemeral. so patterns must account for termination and restart.

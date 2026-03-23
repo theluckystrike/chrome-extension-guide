@@ -1,10 +1,10 @@
-# Chrome Extension Desktop Capture API Guide
+Chrome Extension Desktop Capture API Guide
 
-## Overview
+Overview
 
 The Chrome Desktop Capture API (`chrome.desktopCapture`) enables extensions to capture screen contents, windows, browser tabs, or audio streams. This API is essential for building screenshots, screen recordings, and collaborative sharing features.
 
-## Required Permissions
+Required Permissions
 
 ```json
 {
@@ -14,9 +14,9 @@ The Chrome Desktop Capture API (`chrome.desktopCapture`) enables extensions to c
 }
 ```
 
-## Source Types
+Source Types
 
-### Screen (`desktopCaptureSourceType.SCREEN`)
+Screen (`desktopCaptureSourceType.SCREEN`)
 
 Captures the entire display.
 
@@ -30,7 +30,7 @@ async function captureScreen() {
 }
 ```
 
-### Window (`desktopCaptureSourceType.WINDOW`)
+Window (`desktopCaptureSourceType.WINDOW`)
 
 Captures a single application window.
 
@@ -44,7 +44,7 @@ async function captureWindow() {
 }
 ```
 
-### Tab (`desktopCaptureSourceType.TAB`)
+Tab (`desktopCaptureSourceType.TAB`)
 
 Captures a browser tab.
 
@@ -56,7 +56,7 @@ async function captureTab(tabId) {
 }
 ```
 
-### Audio (`desktopCaptureSourceType.AUDIO`)
+Audio (`desktopCaptureSourceType.AUDIO`)
 
 Captures system or tab audio.
 
@@ -69,9 +69,9 @@ async function captureWithAudio(tabId) {
 }
 ```
 
-## Choosing Capture Sources
+Choosing Capture Sources
 
-### chooseDesktopMedia
+chooseDesktopMedia
 
 ```javascript
 async function startCapture() {
@@ -82,7 +82,7 @@ async function startCapture() {
 }
 ```
 
-### Custom Thumbnail Size
+Custom Thumbnail Size
 
 ```javascript
 async function getSources() {
@@ -93,9 +93,9 @@ async function getSources() {
 }
 ```
 
-## Canceling Capture
+Canceling Capture
 
-### cancelChooseDesktopMedia
+cancelChooseDesktopMedia
 
 ```javascript
 let currentId = null;
@@ -123,9 +123,9 @@ function captureWithTimeout(ms = 30000) {
 }
 ```
 
-## Converting to MediaStream
+Converting to MediaStream
 
-### Basic getUserMedia
+Basic getUserMedia
 
 ```javascript
 async function getDisplayStream(streamId) {
@@ -143,7 +143,7 @@ async function getDisplayStream(streamId) {
 }
 ```
 
-### With Audio
+With Audio
 
 ```javascript
 async function getStreamWithAudio(streamId) {
@@ -166,7 +166,7 @@ async function getStreamWithAudio(streamId) {
 }
 ```
 
-### Capture Manager Class
+Capture Manager Class
 
 ```javascript
 class CaptureManager {
@@ -194,9 +194,9 @@ class CaptureManager {
 }
 ```
 
-## Screenshot Extension
+Screenshot Extension
 
-### Manifest
+Manifest
 
 ```json
 {
@@ -208,7 +208,7 @@ class CaptureManager {
 }
 ```
 
-### Background Script
+Background Script
 
 ```javascript
 chrome.action.onClicked.addListener(async () => {
@@ -241,7 +241,7 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-### Reusable Class
+Reusable Class
 
 ```javascript
 class ScreenshotCapture {
@@ -280,9 +280,9 @@ class ScreenshotCapture {
 }
 ```
 
-## Screen Recording Extension
+Screen Recording Extension
 
-### Recorder Class
+Recorder Class
 
 ```javascript
 class ScreenRecorder {
@@ -321,7 +321,7 @@ class ScreenRecorder {
 }
 ```
 
-### Toggle Button
+Toggle Button
 
 ```javascript
 let recorder = null;
@@ -336,9 +336,9 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-## Best Practices
+Best Practices
 
-### Request Minimum Required Sources
+Request Minimum Required Sources
 
 ```javascript
 // Good
@@ -347,7 +347,7 @@ await chrome.desktopCapture.chooseDesktopMedia(['screen']);
 await chrome.desktopCapture.chooseDesktopMedia(['screen', 'window', 'tab', 'audio']);
 ```
 
-### Handle Errors Gracefully
+Handle Errors Gracefully
 
 ```javascript
 try {
@@ -361,7 +361,7 @@ try {
 }
 ```
 
-### Optimize Performance
+Optimize Performance
 
 ```javascript
 // Limit resolution and frame rate
@@ -376,13 +376,13 @@ const constraints = {
 };
 ```
 
-## Platform Limitations
+Platform Limitations
 
 - System audio: Windows and macOS only
 - Tab audio: All platforms (tab must be audible)
 - Enterprise environments may block capture
 
-## Conclusion
+Conclusion
 
 The Chrome Desktop Capture API enables powerful screen capture extensions. Key points:
 

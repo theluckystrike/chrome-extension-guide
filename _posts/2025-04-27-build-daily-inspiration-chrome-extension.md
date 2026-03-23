@@ -8,7 +8,7 @@ tags: [inspiration, quotes, chrome-extension]
 keywords: "chrome extension daily quotes, inspiration new tab chrome, motivational chrome extension, build quote extension, chrome extension daily motivation"
 ---
 
-# Build a Daily Inspiration Chrome Extension: Motivational Quotes on New Tab
+Build a Daily Inspiration Chrome Extension: Motivational Quotes on New Tab
 
 Have you ever opened a new tab in your browser and felt instantly motivated? For millions of Chrome users, the new tab page is just a blank canvas or a cluttered homepage filled with news and distractions. What if you could transform that moment into an opportunity for daily inspiration? In this comprehensive tutorial, we will walk you through building a powerful Chrome extension that displays fresh motivational quotes every time you open a new tab.
 

@@ -5,7 +5,7 @@ description: "Use Web Workers for background processing in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/web-workers-extensions/"
 ---
 
-# Web Workers in Chrome Extensions
+Web Workers in Chrome Extensions
 
 Overview {#overview}
 

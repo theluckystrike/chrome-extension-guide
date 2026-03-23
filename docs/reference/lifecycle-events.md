@@ -1,8 +1,8 @@
-# Extension Lifecycle Events Reference
+Extension Lifecycle Events Reference
 
-## chrome.runtime Events {#chromeruntime-events}
+chrome.runtime Events {#chromeruntime-events}
 
-### onInstalled {#oninstalled}
+onInstalled {#oninstalled}
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
   // details.reason: "install" | "update" | "chrome_update" | "shared_module_update"
@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 - Use for: setting defaults, creating alarms/context menus, running migrations, showing welcome page
 - Cross-ref: `docs/guides/extension-updates.md`
 
-### onStartup {#onstartup}
+onStartup {#onstartup}
 ```javascript
 chrome.runtime.onStartup.addListener(() => {});
 ```
@@ -21,7 +21,7 @@ chrome.runtime.onStartup.addListener(() => {});
 - Does NOT fire on extension install or update
 - Use for: session initialization, connectivity checks
 
-### onSuspend {#onsuspend}
+onSuspend {#onsuspend}
 ```javascript
 chrome.runtime.onSuspend.addListener(() => {
   // Service worker is about to terminate
@@ -32,7 +32,7 @@ chrome.runtime.onSuspend.addListener(() => {
 - Limited time. save critical state immediately
 - Use `@theluckystrike/webext-storage` for persistence
 
-### onUpdateAvailable {#onupdateavailable}
+onUpdateAvailable {#onupdateavailable}
 ```javascript
 chrome.runtime.onUpdateAvailable.addListener((details) => {
   console.log("Update available:", details.version);
@@ -43,7 +43,7 @@ chrome.runtime.onUpdateAvailable.addListener((details) => {
 - Chrome applies update when all extension views close
 - Call `chrome.runtime.reload()` to force immediate update
 
-### onMessage / onMessageExternal {#onmessage-onmessageexternal}
+onMessage / onMessageExternal {#onmessage-onmessageexternal}
 ```javascript
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // From own extension (content scripts, popup, etc.)
@@ -55,7 +55,7 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 ```
 - Use `@theluckystrike/webext-messaging` for type-safe handling
 
-### onConnect / onConnectExternal {#onconnect-onconnectexternal}
+onConnect / onConnectExternal {#onconnect-onconnectexternal}
 ```javascript
 chrome.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener((msg) => { /* long-lived connection */ });
@@ -64,9 +64,9 @@ chrome.runtime.onConnect.addListener((port) => {
 ```
 - For long-lived connections (streaming data, persistent channels)
 
-## chrome.management Events {#chromemanagement-events}
+chrome.management Events {#chromemanagement-events}
 
-### onInstalled / onUninstalled {#oninstalled-onuninstalled}
+onInstalled / onUninstalled {#oninstalled-onuninstalled}
 ```javascript
 chrome.management.onInstalled.addListener((info) => { /* another extension installed */ });
 chrome.management.onUninstalled.addListener((id) => { /* extension removed */ });
@@ -74,25 +74,25 @@ chrome.management.onUninstalled.addListener((id) => { /* extension removed */ })
 - Requires `"management"` permission
 - Cross-ref: `docs/permissions/management.md`
 
-### onEnabled / onDisabled {#onenabled-ondisabled}
+onEnabled / onDisabled {#onenabled-ondisabled}
 ```javascript
 chrome.management.onEnabled.addListener((info) => { /* extension enabled */ });
 chrome.management.onDisabled.addListener((info) => { /* extension disabled */ });
 ```
 
-## Tab & Window Events {#tab-window-events}
+Tab & Window Events {#tab-window-events}
 
-### chrome.tabs events {#chrometabs-events}
+chrome.tabs events {#chrometabs-events}
 - `onCreated`, `onUpdated`, `onRemoved`, `onActivated`, `onMoved`, `onDetached`, `onAttached`, `onReplaced`, `onHighlighted`
 - Cross-ref: `docs/guides/tab-management.md`
 
-### chrome.windows events {#chromewindows-events}
+chrome.windows events {#chromewindows-events}
 - `onCreated`, `onRemoved`, `onFocusChanged`, `onBoundsChanged`
 - Cross-ref: `docs/guides/window-management.md`
 
-## Storage Events {#storage-events}
+Storage Events {#storage-events}
 
-### chrome.storage.onChanged {#chromestorageonchanged}
+chrome.storage.onChanged {#chromestorageonchanged}
 ```javascript
 chrome.storage.onChanged.addListener((changes, areaName) => {
   for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
@@ -103,28 +103,28 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 - Fires across ALL extension contexts (background, popup, content, options)
 - `@theluckystrike/webext-storage` `watch()` wraps this per-key
 
-## Event Ordering {#event-ordering}
+Event Ordering {#event-ordering}
 
-### On Extension Install {#on-extension-install}
+On Extension Install {#on-extension-install}
 1. SW script executes (top-level code)
 2. `chrome.runtime.onInstalled` fires (reason: "install")
 3. Event listeners begin receiving events
 
-### On Browser Launch {#on-browser-launch}
+On Browser Launch {#on-browser-launch}
 1. SW script executes
 2. `chrome.runtime.onStartup` fires
 3. Event listeners active
 
-### On Extension Update {#on-extension-update}
+On Extension Update {#on-extension-update}
 1. Old SW terminates
 2. New SW script executes
 3. `chrome.runtime.onInstalled` fires (reason: "update", previousVersion set)
 
-### On SW Wake-up (Event) {#on-sw-wake-up-event}
+On SW Wake-up (Event) {#on-sw-wake-up-event}
 1. SW script executes (cold start)
 2. Pending event dispatched to registered listener
 
-## Initialization Patterns {#initialization-patterns}
+Initialization Patterns {#initialization-patterns}
 ```javascript
 // Recommended: register ALL listeners at top level
 chrome.runtime.onInstalled.addListener(onInstall);
@@ -137,7 +137,7 @@ async function onInstall(details) { /* ... */ }
 async function onStartup() { /* ... */ }
 ```
 
-## State Restoration {#state-restoration}
+State Restoration {#state-restoration}
 ```typescript
 // On every SW wake-up, restore state from storage
 const storage = createStorage(defineSchema({
@@ -154,7 +154,7 @@ async function getState() {
 }
 ```
 
-## Common Mistakes {#common-mistakes}
+Common Mistakes {#common-mistakes}
 - Registering listeners inside `onInstalled`. they won't exist on subsequent wake-ups
 - Confusing `onInstalled` with `onStartup`. different triggers
 - Not handling `onSuspend`. lose unsaved state

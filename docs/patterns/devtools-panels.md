@@ -5,7 +5,7 @@ description: "Create custom DevTools panels for extension debugging."
 canonical_url: "https://bestchromeextensions.com/patterns/devtools-panels/"
 ---
 
-# DevTools Panel Patterns
+DevTools Panel Patterns
 
 Overview {#overview}
 

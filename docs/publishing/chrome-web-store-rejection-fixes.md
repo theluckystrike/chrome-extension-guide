@@ -5,7 +5,7 @@ description: "Fix common Chrome Web Store rejection issues and get your extensio
 canonical_url: "https://bestchromeextensions.com/publishing/chrome-web-store-rejection-fixes/"
 ---
 
-# Chrome Web Store Rejection Fixes
+Chrome Web Store Rejection Fixes
 
 The Stricter Review Landscape {#the-stricter-review-landscape}
 

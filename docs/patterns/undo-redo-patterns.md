@@ -5,7 +5,7 @@ description: "Implement undo/redo functionality in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/undo-redo-patterns/"
 ---
 
-# Undo/Redo Patterns for Chrome Extensions
+Undo/Redo Patterns for Chrome Extensions
 
 This guide covers implementing undo/redo functionality in Chrome extensions using proven patterns.
 
@@ -197,7 +197,7 @@ Best Practices {#best-practices}
 Related Patterns {#related-patterns}
 
 - [State Management](./state-management.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Keyboard Shortcuts](../guides/keyboard-shortcuts.md)
 -e 
 ---

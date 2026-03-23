@@ -4,7 +4,7 @@ title: "Chrome Extension Site Stats. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-site-stats/"
 ---
-# Build a Website Statistics Extension
+Build a Website Statistics Extension
 
 Overview {#overview}
 Build an extension that tracks time spent on websites, visit frequency, and generates daily/weekly reports with idle detection and data export.
@@ -241,7 +241,7 @@ async function exportToCSV() {
 Cross-References {#cross-references}
 - [Tabs API](../api-reference/tabs-api.md)
 - [Idle Detection Patterns](../patterns/idle-detection.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 -e 
 ---
 

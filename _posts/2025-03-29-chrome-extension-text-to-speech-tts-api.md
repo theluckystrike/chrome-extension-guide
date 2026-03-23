@@ -9,7 +9,7 @@ keywords: "chrome extension text to speech, tts API chrome extension, chrome ext
 canonical_url: "https://bestchromeextensions.com/2025/03/29/chrome-extension-text-to-speech-tts-api/"
 ---
 
-# Chrome Extension Text-to-Speech (TTS) API: Build a Screen Reader
+Chrome Extension Text-to-Speech (TTS) API: Build a Screen Reader
 
 Text-to-speech technology has revolutionized how we interact with digital content. For users with visual impairments, learning disabilities, or those who simply prefer listening to reading, screen readers have become indispensable tools. we will explore how to build a powerful Chrome extension text to speech feature using the chrome.tts API, enabling you to create a fully functional screen reader directly in your browser.
 

@@ -9,7 +9,7 @@ keywords: "chrome tts api, text to speech extension, speech synthesis chrome ext
 canonical_url: "https://bestchromeextensions.com/2025/01/17/chrome-text-to-speech-api-complete-guide/"
 ---
 
-# Chrome Text-to-Speech API Complete Guide for Extension Developers
+Chrome Text-to-Speech API Complete Guide for Extension Developers
 
 The Chrome Text-to-Speech API (TTS API) is one of the most powerful yet underutilized APIs available to Chrome extension developers. This comprehensive guide will walk you through everything you need to know to implement text-to-speech functionality in your extensions, from basic usage to advanced voice control and event handling.
 

@@ -5,7 +5,7 @@ description: "Learn how to use the chrome.history API to search, add, delete his
 canonical_url: "https://bestchromeextensions.com/tutorials/history-api-guide/"
 ---
 
-# Working with Browser History in Chrome Extensions
+Working with Browser History in Chrome Extensions
 
 The `chrome.history` API is a powerful tool that enables Chrome extensions to interact with the user's browsing history. This API allows you to search through past visits, add new entries, delete history items, and even monitor when users visit new pages in real-time. Whether you're building a history search tool, an analytics dashboard, or a productivity extension that tracks browsing patterns, understanding the history API is essential.
 

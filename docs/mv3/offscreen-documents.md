@@ -5,7 +5,7 @@ description: "Use offscreen documents for DOM operations and long-running tasks 
 canonical_url: "https://bestchromeextensions.com/mv3/offscreen-documents/"
 ---
 
-# Offscreen Documents in Manifest V3
+Offscreen Documents in Manifest V3
 
 Introduction {#introduction}
 - MV3 service workers have NO DOM access. no `document`, `window`, `canvas`, `audio`, etc.

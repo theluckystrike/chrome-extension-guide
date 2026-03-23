@@ -5,7 +5,7 @@ description: "Process and manipulate images in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/image-manipulation/"
 ---
 
-# Image Manipulation Patterns in Chrome Extensions
+Image Manipulation Patterns in Chrome Extensions
 
 This guide covers patterns for handling images in Chrome extensions, including capture, processing, and optimization.
 

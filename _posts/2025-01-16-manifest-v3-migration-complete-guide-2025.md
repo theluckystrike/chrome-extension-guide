@@ -9,7 +9,7 @@ keywords: "manifest v3 migration guide, chrome extension manifest v3, mv2 to mv3
 canonical_url: "https://bestchromeextensions.com/2025/01/16/manifest-v3-migration-complete-guide-2025/"
 ---
 
-# Manifest V3 Migration Guide: Update Your Chrome Extension in 2025
+Manifest V3 Migration Guide: Update Your Chrome Extension in 2025
 
 Google's transition from Manifest V2 to Manifest V3 represents the most significant change to the Chrome extension platform since its inception. With Manifest V2 extensions no longer accepted for new submissions since January 2022 and existing extensions facing mandatory migration deadlines, understanding how to migrate your extension to Manifest V3 is essential for any Chrome extension developer in 2025.
 

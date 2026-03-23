@@ -5,7 +5,7 @@ description: "A comprehensive guide to intercepting and modifying network traffi
 canonical_url: "https://bestchromeextensions.com/guides/web-requests/"
 ---
 
-# Chrome Extension Web Requests. How to Intercept and Modify Network Traffic
+Chrome Extension Web Requests. How to Intercept and Modify Network Traffic
 
 Overview
 

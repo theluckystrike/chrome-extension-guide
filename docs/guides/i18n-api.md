@@ -1,12 +1,12 @@
-# Chrome Internationalization (i18n) API
+Chrome Internationalization (i18n) API
 
 The Chrome Extensions i18n API provides a powerful system for creating multilingual extensions. This guide covers the complete `chrome.i18n` API and best practices for building fully localized extensions.
 
-## Overview
+Overview
 
 Chrome's built-in internationalization system allows extensions to display user interface in the user's preferred language, support multiple locales, handle dynamic content with placeholders, and support RTL languages. The i18n system requires no permissions.
 
-## Directory Structure
+Directory Structure
 
 Extensions use a standardized directory structure:
 
@@ -27,7 +27,7 @@ The `default_locale` field in manifest.json is required:
 { "name": "__MSG_extension_name__", "default_locale": "en" }
 ```
 
-## messages.json Format
+messages.json Format
 
 ```json
 {
@@ -43,7 +43,7 @@ The `default_locale` field in manifest.json is required:
 }
 ```
 
-## Placeholders and Substitutions
+Placeholders and Substitutions
 
 ```javascript
 // Positional: $1, $2, etc.
@@ -54,7 +54,7 @@ console.log(greeting); // "Hello, John!"
 const weather = chrome.i18n.getMessage("weather_report", ["Tokyo", "22"]);
 ```
 
-## Predefined Messages
+Predefined Messages
 
 | Message | Description | Value |
 |---------|-------------|-------|
@@ -64,16 +64,16 @@ const weather = chrome.i18n.getMessage("weather_report", ["Tokyo", "22"]);
 | `@@ui_locale` | UI locale | `"en-US"` |
 | `@@extension_id` | Extension ID | `"abc123"` |
 
-### CSS Usage
+CSS Usage
 
 ```css
 body { direction: __MSG_@@bidi_dir__; }
 .toolbar { margin-__MSG_@@bidi_start_edge__: 10px; }
 ```
 
-## chrome.i18n API
+chrome.i18n API
 
-### getMessage(messageName, substitutions?)
+getMessage(messageName, substitutions?)
 
 ```javascript
 const title = chrome.i18n.getMessage("extension_name");
@@ -83,7 +83,7 @@ const missing = chrome.i18n.getMessage("nonexistent"); // ""
 
 Fallback: user locale → default_locale → empty string.
 
-### getUILanguage()
+getUILanguage()
 
 Returns the browser's UI language:
 
@@ -96,7 +96,7 @@ if (uiLang.startsWith("ar") || uiLang.startsWith("he")) {
 }
 ```
 
-### getAcceptLanguages()
+getAcceptLanguages()
 
 Returns user's preferred languages in order:
 
@@ -105,7 +105,7 @@ chrome.i18n.getAcceptLanguages((langs) => console.log(langs));
 // ["en-US", "es", "fr"]
 ```
 
-### detectLanguage(text, callback?)
+detectLanguage(text, callback?)
 
 Detects language of given text using CLD:
 
@@ -115,9 +115,9 @@ chrome.i18n.detectLanguage("Bonjour le monde", (result) => {
 });
 ```
 
-## CSS and HTML Localization
+CSS and HTML Localization
 
-### CSS
+CSS
 
 ```css
 body { direction: __MSG_@@bidi_dir__; }
@@ -125,7 +125,7 @@ body { direction: __MSG_@@bidi_dir__; }
 :lang(zh) body { font-family: "Microsoft YaHei", sans-serif; }
 ```
 
-### HTML
+HTML
 
 HTML doesn't support `__MSG_` directly. Use JavaScript:
 
@@ -140,7 +140,7 @@ document.querySelectorAll("[data-i18n]").forEach(el => {
 });
 ```
 
-## RTL Language Support
+RTL Language Support
 
 Extensions supporting Arabic, Hebrew need special handling:
 
@@ -152,22 +152,22 @@ function setupRTL() {
 }
 ```
 
-### CSS Logical Properties
+CSS Logical Properties
 
 ```css
 .card { margin-inline-start: 10px; padding-block: 16px; }
 ```
 
-### Date/Number Formatting
+Date/Number Formatting
 
 ```javascript
 new Intl.DateTimeFormat(chrome.i18n.getUILanguage()).format(date);
 new Intl.NumberFormat(chrome.i18n.getUILanguage()).format(num);
 ```
 
-## Building a Fully Localized Extension
+Building a Fully Localized Extension
 
-### 1. Define Messages
+1. Define Messages
 
 ```json
 // _locales/en/messages.json
@@ -181,13 +181,13 @@ new Intl.NumberFormat(chrome.i18n.getUILanguage()).format(num);
 }
 ```
 
-### 2. Use in Manifest
+2. Use in Manifest
 
 ```json
 { "name": "__MSG_extension_name__", "default_locale": "en" }
 ```
 
-### 3. Use in JavaScript
+3. Use in JavaScript
 
 ```javascript
 // Background script
@@ -204,7 +204,7 @@ chrome.contextMenus.create({
 });
 ```
 
-### 4. Localize Content
+4. Localize Content
 
 ```javascript
 function initI18n() {
@@ -217,11 +217,11 @@ function initI18n() {
 }
 ```
 
-## Locale Fallback Chain
+Locale Fallback Chain
 
 Chrome uses: exact locale → language match → default_locale → empty string.
 
-## Best Practices
+Best Practices
 
 1. Always include `default_locale` when `_locales/` exists
 2. Use descriptive keys: `button_save_settings` not `btn1`
@@ -230,7 +230,7 @@ Chrome uses: exact locale → language match → default_locale → empty string
 5. Test RTL languages (Arabic, Hebrew)
 6. Use logical CSS properties (`margin-inline-start`)
 
-## Reference
+Reference
 
 - Official: [developer.chrome.com/docs/extensions/reference/api/i18n](https://developer.chrome.com/docs/extensions/reference/api/i18n)
 - Store i18n: [developer.chrome.com/docs/webstore/i18n](https://developer.chrome.com/docs/webstore/i18n)

@@ -5,7 +5,7 @@ description: "Use the User Scripts API for user-defined scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-api/"
 ---
 
-# User Scripts API Patterns
+User Scripts API Patterns
 
 Overview {#overview}
 

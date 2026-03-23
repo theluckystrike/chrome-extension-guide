@@ -9,7 +9,7 @@ keywords: "chrome.scripting api, executeScript mv3, dynamic script injection, re
 canonical_url: "https://bestchromeextensions.com/2025/01/24/chrome-scripting-api-complete-reference/"
 ---
 
-# Chrome Scripting API Complete Reference: Dynamic Code Injection in MV3
+Chrome Scripting API Complete Reference: Dynamic Code Injection in MV3
 
 The `chrome.scripting` API is one of the most significant additions in Manifest V3, replacing the legacy `chrome.tabs.executeScript()` and `chrome.tabs.insertCSS()` methods with a more powerful, structured, and secure approach to dynamic code injection. Whether you need to inject scripts into web pages on demand, register content scripts programmatically, or apply CSS modifications at runtime, the Scripting API provides the tools you need.
 

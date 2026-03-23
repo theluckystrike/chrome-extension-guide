@@ -5,7 +5,7 @@ description: "Master Chrome extension performance with this comprehensive guide 
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-optimization/"
 ---
 
-# Chrome Extension Performance Optimization. Complete Guide
+Chrome Extension Performance Optimization. Complete Guide
 
 Overview {#overview}
 

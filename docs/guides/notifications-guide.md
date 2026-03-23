@@ -4,7 +4,7 @@ title: "Chrome Extension Notifications. Developer Guide"
 description: "Design Chrome extension UI with this guide covering popup, options page, and side panel development patterns."
 canonical_url: "https://bestchromeextensions.com/guides/notifications-guide/"
 ---
-# Rich Notifications in Chrome Extensions
+Rich Notifications in Chrome Extensions
 
 Introduction {#introduction}
 - System-level notifications that appear outside the browser

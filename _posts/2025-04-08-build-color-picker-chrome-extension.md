@@ -8,7 +8,7 @@ tags: [color-picker, design, chrome-extension]
 keywords: "chrome extension color picker, build eye dropper extension, color picker chrome, chrome extension eyedropper, color palette chrome extension"
 ---
 
-# Build a Color Picker Chrome Extension: Eye Dropper and Palette Generator
+Build a Color Picker Chrome Extension: Eye Dropper and Palette Generator
 
 Color is one of the most powerful design elements in web development and digital design. Whether you're a web designer, frontend developer, or digital artist, having quick access to color picking tools can dramatically improve your workflow. In this comprehensive tutorial, we'll walk through building a fully functional Chrome extension that combines an eye dropper tool with a palette generator, giving users the ability to pick colors from any webpage and generate harmonious color palettes automatically.
 

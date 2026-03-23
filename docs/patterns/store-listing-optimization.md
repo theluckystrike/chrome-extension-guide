@@ -5,7 +5,7 @@ description: "Optimize your Chrome Web Store listing for better visibility."
 canonical_url: "https://bestchromeextensions.com/patterns/store-listing-optimization/"
 ---
 
-# Chrome Web Store Listing That Converts
+Chrome Web Store Listing That Converts
 
 Overview {#overview}
 

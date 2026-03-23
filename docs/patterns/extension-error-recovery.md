@@ -5,7 +5,7 @@ description: "Recover gracefully from errors in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-error-recovery/"
 ---
 
-# Error Recovery Patterns
+Error Recovery Patterns
 
 Resilience patterns for building self-healing Chrome extensions.
 

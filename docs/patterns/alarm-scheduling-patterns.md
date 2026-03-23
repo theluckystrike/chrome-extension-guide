@@ -5,7 +5,7 @@ description: "Schedule tasks with the Alarms API."
 canonical_url: "https://bestchromeextensions.com/patterns/alarm-scheduling-patterns/"
 ---
 
-# Alarm Scheduling Patterns
+Alarm Scheduling Patterns
 
 Advanced patterns for the `chrome.alarms` API in Chrome extensions.
 

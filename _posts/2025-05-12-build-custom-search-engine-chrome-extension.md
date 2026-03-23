@@ -9,7 +9,7 @@ keywords: "chrome extension search engine, custom search chrome, multi search ch
 canonical_url: "https://bestchromeextensions.com/2025/05/12/build-custom-search-engine-chrome-extension/"
 ---
 
-# Build a Custom Search Engine Chrome Extension: Search Multiple Sites at Once
+Build a Custom Search Engine Chrome Extension: Search Multiple Sites at Once
 
 If you frequently search across multiple websites, like checking prices across different retailers, comparing code snippets on Stack Overflow and GitHub, or looking up topics across various documentation sites, you've probably wished there was a way to search everything at once. This is exactly what a multi-search Chrome extension can do for you. I'll walk you through building a custom search engine Chrome extension that lets you search multiple sites simultaneously, saving you time and boosting your productivity.
 

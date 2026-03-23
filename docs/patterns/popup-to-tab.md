@@ -5,7 +5,7 @@ description: "Learn patterns for opening extension popups as full tabs for enhan
 canonical_url: "https://bestchromeextensions.com/patterns/popup-to-tab/"
 ---
 
-# Popup-to-Tab Pattern
+Popup-to-Tab Pattern
 
 Overview {#overview}
 

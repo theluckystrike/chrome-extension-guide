@@ -1,8 +1,8 @@
-# Building a Regex Tester Extension
+Building a Regex Tester Extension
 
 A comprehensive guide to building a production-ready Regex Tester Chrome extension using Manifest V3, TypeScript, and modern Chrome extension patterns.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -16,11 +16,11 @@ A comprehensive guide to building a production-ready Regex Tester Chrome extensi
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
 A Regex Tester extension requires several components working together: a popup for quick testing, an optional side panel for persistent testing, a content script overlay for in-page testing, and a service worker for background logic. This section covers the manifest configuration and overall architecture.
 
-### Directory Structure
+Directory Structure
 
 ```
 regex-tester/
@@ -52,7 +52,7 @@ regex-tester/
      integration.test.ts
 ```
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 ```json
 {
@@ -100,7 +100,7 @@ regex-tester/
 }
 ```
 
-### Key Architecture Decisions
+Key Architecture Decisions
 
 The extension uses a modular architecture with clear separation between UI components, shared business logic, and background services. The `shared` folder contains all TypeScript types and the core regex engine, which can be imported by any component. This ensures consistency and eliminates code duplication.
 

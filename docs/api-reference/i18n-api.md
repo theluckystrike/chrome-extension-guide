@@ -5,7 +5,7 @@ description: "The Chrome i18n API provides internationalization and localization
 canonical_url: "https://bestchromeextensions.com/api-reference/i18n-api/"
 ---
 
-# chrome.i18n API Reference
+chrome.i18n API Reference
 
 The `chrome.i18n` API provides internationalization support for Chrome Extensions without requiring permissions.
 

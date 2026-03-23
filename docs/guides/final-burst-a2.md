@@ -1,10 +1,10 @@
-# Building a Habit Tracker Chrome Extension
+Building a Habit Tracker Chrome Extension
 
-## Overview
+Overview
 
 This guide covers building a production-ready Chrome extension for daily habit tracking with streak counting, reminder notifications, progress visualization, and cross-device synchronization using `chrome.storage.sync`.
 
-## Architecture
+Architecture
 
 The Habit Tracker extension follows a modular architecture:
 
@@ -27,14 +27,14 @@ src/
      options.ts          # Settings page
 ```
 
-### Key Components
+Key Components
 
 - Service Worker: Manages alarms, background sync, and notifications
 - Popup: Quick access to mark habits complete
 - Options Page: Configure habits, reminder times, and preferences
 - Shared Types: Consistent TypeScript interfaces across all modules
 
-## manifest.json
+manifest.json
 
 ```json
 {
@@ -67,9 +67,9 @@ src/
 }
 ```
 
-## TypeScript Implementation
+TypeScript Implementation
 
-### Shared Types (src/shared/types.ts)
+Shared Types (src/shared/types.ts)
 
 ```typescript
 export interface Habit {
@@ -109,7 +109,7 @@ export interface StorageSchema {
 }
 ```
 
-### Storage Layer (src/shared/storage.ts)
+Storage Layer (src/shared/storage.ts)
 
 ```typescript
 import { StorageSchema, Habit, HabitLog, ExtensionSettings } from './types';
@@ -255,7 +255,7 @@ export class StorageManager {
 }
 ```
 
-### Service Worker (src/background/service-worker.ts)
+Service Worker (src/background/service-worker.ts)
 
 ```typescript
 import { StorageManager } from '../shared/storage';
@@ -351,7 +351,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Popup Component (src/popup/popup.ts)
+Popup Component (src/popup/popup.ts)
 
 ```typescript
 import { StorageManager } from '../shared/storage';
@@ -415,7 +415,7 @@ async function renderHabits(): Promise<void> {
 }
 ```
 
-### Progress Chart (src/popup/chart.ts)
+Progress Chart (src/popup/chart.ts)
 
 ```typescript
 import { StorageManager } from '../shared/storage';
@@ -478,9 +478,9 @@ export class ProgressChart {
 }
 ```
 
-## UI Design
+UI Design
 
-### Popup Styling (src/popup/styles.css)
+Popup Styling (src/popup/styles.css)
 
 ```css
 * {
@@ -591,9 +591,9 @@ body {
 }
 ```
 
-## Chrome APIs Used
+Chrome APIs Used
 
-### 1. chrome.storage.sync
+1. chrome.storage.sync
 - Purpose: Cross-device data persistence
 - Usage: Store habits, logs, and settings
 - Quota: ~100KB, syncs automatically
@@ -603,7 +603,7 @@ await chrome.storage.sync.set({ key: value });
 const data = await chrome.storage.sync.get('key');
 ```
 
-### 2. chrome.alarms
+2. chrome.alarms
 - Purpose: Schedule periodic tasks
 - Usage: Daily reminder checks
 
@@ -614,7 +614,7 @@ chrome.alarms.create('reminder', {
 });
 ```
 
-### 3. chrome.notifications
+3. chrome.notifications
 - Purpose: System notifications
 - Usage: Habit reminders
 
@@ -626,13 +626,13 @@ chrome.notifications.create({
 });
 ```
 
-### 4. chrome.runtime
+4. chrome.runtime
 - Purpose: Extension lifecycle
 - Usage: Message passing, install events
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing
+Unit Testing
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
 import { StorageManager } from './storage';
@@ -653,12 +653,12 @@ describe('StorageManager', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 - Use Playwright for popup UI tests
 - Test alarm triggers in background
 - Verify storage sync between contexts
 
-### Manual Testing Checklist
+Manual Testing Checklist
 - [ ] Add new habit
 - [ ] Mark habit complete
 - [ ] Verify streak updates
@@ -666,29 +666,29 @@ describe('StorageManager', () => {
 - [ ] Verify cross-device sync
 - [ ] Test on multiple browsers
 
-## Building and Testing
+Building and Testing
 
 ```bash
-# Install dependencies
+Install dependencies
 npm install
 
-# Build extension
+Build extension
 npm run build
 
-# Load in Chrome:
-# 1. Go to chrome://extensions
-# 2. Enable Developer mode
-# 3. Click Load unpacked
-# 4. Select dist folder
+Load in Chrome:
+1. Go to chrome://extensions
+2. Enable Developer mode
+3. Click Load unpacked
+4. Select dist folder
 
-# Run tests
+Run tests
 npm test
 
-# Package for store
+Package for store
 npm run package
 ```
 
-## Best Practices
+Best Practices
 
 1. Always use TypeScript for type safety
 2. Modular architecture - separate concerns into different modules
@@ -697,7 +697,7 @@ npm run package
 5. User privacy - only request necessary permissions
 6. Offline first - handle sync failures gracefully
 
-## Conclusion
+Conclusion
 
 This guide provides a complete foundation for building a production-ready Habit Tracker Chrome extension. The architecture supports easy extension with features like:
 - Habit categories and tags
@@ -709,7 +709,7 @@ This guide provides a complete foundation for building a production-ready Habit 
 Remember to test thoroughly and follow Chrome Web Store policies before publishing.
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

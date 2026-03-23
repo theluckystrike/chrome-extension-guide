@@ -5,7 +5,7 @@ description: "Read and write clipboard content in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/clipboard-patterns/"
 ---
 
-# Clipboard API Patterns
+Clipboard API Patterns
 
 Overview {#overview}
 

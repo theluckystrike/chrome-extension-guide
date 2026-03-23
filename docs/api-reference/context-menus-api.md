@@ -5,7 +5,7 @@ description: "The Chrome Context Menus API adds custom items to Chrome's right-c
 canonical_url: "https://bestchromeextensions.com/api-reference/context-menus-api/"
 ---
 
-# Chrome Context Menus API Reference
+Chrome Context Menus API Reference
 
 The `chrome.contextMenus` API lets you add items to Chrome's right-click context menu. Menu items can appear on pages, links, images, selections, and more.
 

@@ -5,7 +5,7 @@ description: "Learn how to build accessible Chrome extensions with proper ARIA a
 canonical_url: "https://bestchromeextensions.com/tutorials/accessibility-in-extensions/"
 ---
 
-# Building Accessible Chrome Extensions
+Building Accessible Chrome Extensions
 
 Accessibility is not just a best practice, it's a legal requirement in many jurisdictions and a moral imperative to ensure your extension serves all users, including those with disabilities. Chrome extensions present unique accessibility challenges because they encompass multiple UI contexts: popups, options pages, side panels, and content scripts. This guide covers essential accessibility patterns and WCAG compliance strategies specifically for Chrome extension development.
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Content Blocker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-content-blocker/"
 ---
-# Build a Content Blocker Extension. Full Tutorial
+Build a Content Blocker Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Productivity-focused site blocker

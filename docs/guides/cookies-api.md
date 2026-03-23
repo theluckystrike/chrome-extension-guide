@@ -4,7 +4,7 @@ title: "Chrome Extension Cookies API. How to Read, Set, and Delete Browser Cooki
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/cookies-api/"
 ---
-# Chrome Extension Cookies API. How to Read, Set, and Delete Browser Cookies
+Chrome Extension Cookies API. How to Read, Set, and Delete Browser Cookies
 
 Overview {#overview}
 

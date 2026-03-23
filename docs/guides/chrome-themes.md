@@ -1,9 +1,9 @@
-# Creating Chrome Themes
+Creating Chrome Themes
 
-## Overview
+Overview
 Chrome themes allow you to customize the browser's appearance by changing colors, images, and tiling properties. Unlike full extensions, themes are lightweight and focus purely on visual customization without adding functionality.
 
-## Theme Manifest Structure
+Theme Manifest Structure
 A Chrome theme requires a `manifest.json` with `theme` declaration:
 
 ```json
@@ -38,7 +38,7 @@ A Chrome theme requires a `manifest.json` with `theme` declaration:
 }
 ```
 
-## Colors
+Colors
 Color values use RGB arrays `[red, green, blue]` with values 0-255:
 
 | Property | Description |
@@ -52,13 +52,13 @@ Color values use RGB arrays `[red, green, blue]` with values 0-255:
 | `omnibox_background` | Omnibox background |
 | `omnibox_text` | Omnibox text |
 
-## Images
+Images
 Image paths are relative to the manifest. Recommended sizes:
 - `theme_frame`: 1x: 220x34px, 2x: 440x68px
 - `theme_toolbar`: 1x: 220x30px, 2x: 440x60px
 - `ntp_background`: 1920x1080px recommended
 
-## Tints
+Tints
 Tints use HSL values `[hue, saturation, lightness]`:
 - `0.0-1.0` for hue (0=red, 0.33=green, 0.66=blue)
 - `0.0-1.0` for saturation
@@ -70,7 +70,7 @@ Tints use HSL values `[hue, saturation, lightness]`:
 | `frame` | Browser frame |
 | `background_tab` | Inactive tabs |
 
-## Properties
+Properties
 Control background image behavior on New Tab Page:
 
 ```json
@@ -83,7 +83,7 @@ Control background image behavior on New Tab Page:
 Alignment values: `top`, `bottom`, `left`, `right`, `center`
 Repeat values: `no-repeat`, `repeat-x`, `repeat-y`, `repeat`
 
-## Creating a Dark Theme
+Creating a Dark Theme
 Dark themes are popular and easy to create:
 
 ```json
@@ -111,7 +111,7 @@ Dark themes are popular and easy to create:
 }
 ```
 
-## Themed Extension with Theme API
+Themed Extension with Theme API
 Combine themes with extension functionality using the Theme API:
 
 ```javascript
@@ -136,32 +136,32 @@ Required permission in manifest:
 }
 ```
 
-## Theme Best Practices
+Theme Best Practices
 
-### Performance
+Performance
 - Use optimized images (WebP preferred)
 - Keep theme files under 2MB
 - Use CSS gradients instead of images when possible
 
-### Accessibility
+Accessibility
 - Ensure sufficient contrast (WCAG AA minimum)
 - Provide consistent text visibility
 - Test with different wallpaper backgrounds
 
-### Design
+Design
 - Support both light and dark system themes
 - Use platform-specific images if needed
 - Test on high-DPI displays
 
-## Testing Themes Across Platforms
+Testing Themes Across Platforms
 
-### Local Testing
+Local Testing
 1. Navigate to `chrome://extensions`
 2. Enable "Developer mode"
 3. Click "Pack extension" or load unpacked
 4. Apply theme in Chrome settings
 
-### Platform Testing Matrix
+Platform Testing Matrix
 | Platform | Chrome Version | DPI Scaling |
 |----------|---------------|-------------|
 | Windows | 90+ | 100%, 125%, 150% |
@@ -169,48 +169,48 @@ Required permission in manifest:
 | Linux | 90+ | Various |
 | ChromeOS | 90+ | High DPI |
 
-### Debugging
+Debugging
 - Use Chrome DevTools Theme Inspector
 - Check `chrome://theme` for applied colors
 - Review console for tint errors
 
-## Packaging and Publishing Themes
+Packaging and Publishing Themes
 
-### Local Packaging
+Local Packaging
 1. Go to `chrome://extensions`
 2. Enable Developer mode
 3. Click "Pack extension"
 4. Select theme folder
 
-### Publishing to Chrome Web Store
+Publishing to Chrome Web Store
 1. Create developer account ($5 one-time)
 2. Zip theme files (exclude .git, node_modules)
 3. Upload via Chrome Developer Dashboard
 4. Add screenshots (1280x800 or 640x400)
 5. Submit for review
 
-### Store Listing Tips
+Store Listing Tips
 - Use 1280x960px images for listing
 - Include light/dark preview images
 - Add detailed description
 - Set appropriate categories
 
-## Theme vs Extension: When to Use Which
+Theme vs Extension: When to Use Which
 
-### Use Themes When:
+Use Themes When:
 - Only changing visual appearance
 - No user interaction required
 - Lightweight, fast-loading
 - Simple color/image customization
 
-### Use Extensions When:
+Use Extensions When:
 - Adding functionality
 - User interaction needed
 - Content modification required
 - Persistent state management
 - Background processing
 
-### Hybrid Approach
+Hybrid Approach
 Combine both with `theme` and additional capabilities:
 
 ```json
@@ -225,9 +225,9 @@ Combine both with `theme` and additional capabilities:
 }
 ```
 
-## Code Examples
+Code Examples
 
-### Minimal Theme (MV3)
+Minimal Theme (MV3)
 ```json
 {
   "manifest_version": 3,
@@ -243,7 +243,7 @@ Combine both with `theme` and additional capabilities:
 }
 ```
 
-### Full-Featured Theme
+Full-Featured Theme
 ```json
 {
   "manifest_version": 3,
@@ -278,7 +278,7 @@ Combine both with `theme` and additional capabilities:
 }
 ```
 
-## Reference
+Reference
 - Official Documentation: https://developer.chrome.com/docs/extensions/develop/themes
 - Theme Manifest: https://developer.chrome.com/docs/extensions/mv3/intro
 - Chrome Web Store: https://chrome.google.com/webstore

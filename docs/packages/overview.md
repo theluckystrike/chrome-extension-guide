@@ -4,7 +4,7 @@ title: Webext Packages Overview. Chrome Extension Development
 description: Complete comparison of @theluckystrike webext packages for Chrome extension development. Learn when to use each package and how to install them.
 ---
 
-# Webext Packages Overview
+Webext Packages Overview
 
 A comprehensive comparison of the 8 core `@theluckystrike/webext-*` packages for building Chrome extensions. Each package provides typed, Promise-based wrappers for Chrome's extension APIs.
 

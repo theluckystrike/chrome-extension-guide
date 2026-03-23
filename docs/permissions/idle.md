@@ -9,7 +9,7 @@ category: permissions
 order: 23
 ---
 
-# Idle Permission
+Idle Permission
 
 Overview {#overview}
 

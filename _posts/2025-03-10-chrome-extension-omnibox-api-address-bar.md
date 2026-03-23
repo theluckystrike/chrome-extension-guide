@@ -9,7 +9,7 @@ keywords: "chrome extension omnibox, omnibox API chrome, address bar commands ch
 canonical_url: "https://bestchromeextensions.com/2025/03/10/chrome-extension-omnibox-api-address-bar/"
 ---
 
-# Chrome Extension Omnibox API: Add Custom Commands to the Address Bar
+Chrome Extension Omnibox API: Add Custom Commands to the Address Bar
 
 The Chrome address bar, known as the omnibox, is one of the most powerful yet underutilized features in browser extension development. While millions of users type searches and URLs into this bar every day, few realize that developers can extend its functionality to create custom commands, quick actions, and search experiences. The Chrome Extension Omnibox API opens up a world of possibilities for enhancing user productivity and creating smooth browser interactions.
 

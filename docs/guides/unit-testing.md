@@ -5,7 +5,7 @@ description: "A comprehensive guide to unit testing Chrome extensions using Jest
 canonical_url: "https://bestchromeextensions.com/guides/unit-testing/"
 ---
 
-# Chrome Extension Unit Testing. How to Test With Jest and Puppeteer
+Chrome Extension Unit Testing. How to Test With Jest and Puppeteer
 
 Unit testing is the foundation of reliable Chrome extension development. Unlike traditional web applications, extensions run across multiple execution contexts, background service workers, popup pages, content scripts, and options pages, each with unique API access patterns and lifecycle behaviors. This guide covers how to test your extension code effectively using Jest, Vitest, and Puppeteer.
 

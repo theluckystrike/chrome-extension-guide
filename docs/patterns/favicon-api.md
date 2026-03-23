@@ -5,7 +5,7 @@ description: "Access and display favicons from web pages in your extension."
 canonical_url: "https://bestchromeextensions.com/patterns/favicon-api/"
 ---
 
-# Favicon API and Patterns
+Favicon API and Patterns
 
 Overview {#overview}
 

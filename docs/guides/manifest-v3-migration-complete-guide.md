@@ -5,7 +5,7 @@ description: "A comprehensive guide to migrating Chrome extensions from Manifest
 canonical_url: "https://bestchromeextensions.com/docs/guides/manifest-v3-migration-complete-guide/"
 ---
 
-# Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
+Manifest V3 Migration Guide: Convert Your Chrome Extension from MV2 to MV3
 
 Chrome's transition from Manifest V2 to Manifest V3 represents the most significant architectural change in the extension platform's history. With Chrome having fully deprecated MV2 and the Chrome Web Store no longer accepting extensions using the older manifest version, developers must migrate their existing extensions to stay on the platform. This comprehensive guide walks you through every aspect of the migration process, from understanding the fundamental architectural differences to implementing advanced patterns that work smoothly with the new service worker-based model.
 

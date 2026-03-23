@@ -1,10 +1,10 @@
-# Cross-Browser Extension Development
+Cross-Browser Extension Development
 
 A guide to building browser extensions across Chrome, Firefox, Edge, and Safari using the WebExtensions standard.
 
 ---
 
-## WebExtensions Standard Overview
+WebExtensions Standard Overview
 
 The WebExtensions API provides a cross-browser system for developing extensions. Created by Mozilla for Firefox, adopted by Chrome, Edge, Opera; Safari joined with Safari 14+.
 

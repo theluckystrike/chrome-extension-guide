@@ -5,7 +5,7 @@ description: "A comprehensive tutorial covering popup vs options page difference
 canonical_url: "https://bestchromeextensions.com/tutorials/popup-and-options-pages/"
 ---
 
-# Building Popup and Options Pages for Chrome Extensions
+Building Popup and Options Pages for Chrome Extensions
 
 Popups and options pages are the two primary user interfaces in Chrome extensions. Understanding when and how to use each, along with their unique constraints and capabilities, is essential for building polished, professional extensions. This tutorial covers everything you need to know to create effective popup and options page experiences for your users.
 

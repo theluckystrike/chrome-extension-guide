@@ -9,7 +9,7 @@ keywords: "text highlighter extension, highlight text chrome, web annotation ext
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-text-highlighter-chrome-extension/"
 ---
 
-# Build a Text Highlighter Chrome Extension: Complete 2025 Tutorial
+Build a Text Highlighter Chrome Extension: Complete 2025 Tutorial
 
 Text highlighting is one of the most useful features for web browsing, research, and online learning. Whether you are conducting academic research, collecting inspiration for a design project, or simply want to mark important information for later reference, a text highlighter extension can significantly improve your browsing experience. In this comprehensive tutorial, I will walk you through building a fully functional highlight text Chrome extension from scratch using Manifest V3 and modern JavaScript.
 

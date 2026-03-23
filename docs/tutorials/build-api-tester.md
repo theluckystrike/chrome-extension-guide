@@ -4,7 +4,7 @@ title: "Chrome Extension API Tester. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-api-tester/"
 ---
-# Build a REST API Tester Extension
+Build a REST API Tester Extension
 
 Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests and view formatted responses.
 

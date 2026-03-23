@@ -5,7 +5,7 @@ description: "Master Chrome extension notifications. Learn the Notifications API
 permalink: /guides/chrome-extension-notifications-system/
 ---
 
-# Chrome Extension Notifications: Badges, Alarms, and Alert Systems
+Chrome Extension Notifications: Badges, Alarms, and Alert Systems
 
 Notifications are one of the most powerful features for engaging users in Chrome extensions. When implemented correctly, they keep users informed about important events, drive return visits, and create meaningful touchpoints without overwhelming them. This comprehensive guide covers every aspect of notification systems in Chrome extensions, from system-level desktop notifications to in-page toast components, badge management, and intelligent scheduling.
 

@@ -5,7 +5,7 @@ description: "Master IndexedDB for Chrome extensions. Learn efficient storage of
 canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-indexeddb-storage/"
 ---
 
-# Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently
+Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently
 
 When building Chrome extensions that need to handle large amounts of structured data, the Chrome Storage API often falls short. IndexedDB provides a powerful client-side NoSQL database solution that enables Chrome extensions to store significant volumes of data with full transactional support, complex queries through indexes, and efficient data retrieval. This comprehensive guide walks you through implementing IndexedDB in your Chrome extension, from basic concepts to advanced patterns used by production extensions.
 

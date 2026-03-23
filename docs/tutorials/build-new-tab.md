@@ -4,7 +4,7 @@ title: "Chrome Extension New Tab. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-new-tab/"
 ---
-# Build a Custom New Tab Page
+Build a Custom New Tab Page
 
 What You'll Build {#what-youll-build}
 Custom new tab with clock, greeting, quick links from top sites, search bar, and todo list.

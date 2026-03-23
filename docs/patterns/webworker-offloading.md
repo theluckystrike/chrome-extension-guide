@@ -5,7 +5,7 @@ description: "Offload heavy computation to Web Workers."
 canonical_url: "https://bestchromeextensions.com/patterns/webworker-offloading/"
 ---
 
-# Web Worker Offloading Patterns
+Web Worker Offloading Patterns
 
 Web Workers enable running computationally intensive tasks off the main thread, keeping extension UIs responsive.
 

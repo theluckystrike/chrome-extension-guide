@@ -9,7 +9,7 @@ keywords: "code formatter extension, prettier chrome extension, code beautifier,
 canonical_url: "https://bestchromeextensions.com/2025/01/26/build-code-formatter-chrome-extension/"
 ---
 
-# Build a Code Formatter Chrome Extension: Complete Developer's Guide
+Build a Code Formatter Chrome Extension: Complete Developer's Guide
 
 Every developer knows the pain of working with poorly formatted code. Whether you are reviewing pull requests, browsing GitHub repositories, or debugging in the browser, inconsistent code formatting makes understanding code significantly harder. A code formatter extension for Chrome can solve this problem by instantly beautifying code directly in your browser. we will walk through building a production-ready code formatter Chrome extension using Prettier, the most popular code formatter in the JavaScript ecosystem.
 

@@ -8,7 +8,7 @@ order: 44
 canonical_url: "https://bestchromeextensions.com/permissions/topSites/"
 ---
 
-# topSites Permission
+topSites Permission
 
 Overview {#overview}
 - Permission string: `"topSites"`

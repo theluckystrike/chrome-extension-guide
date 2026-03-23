@@ -9,7 +9,7 @@ keywords: "chrome extension supabase, supabase chrome extension, chrome extensio
 canonical_url: "https://bestchromeextensions.com/2025/03/28/chrome-extension-supabase-backend-guide/"
 ---
 
-# Chrome Extension with Supabase Backend: Auth, Database, and Real-Time
+Chrome Extension with Supabase Backend: Auth, Database, and Real-Time
 
 Building a Chrome extension is only half the battle. When you need to store user data, authenticate users across devices, or sync information in real-time, you need a solid backend. Supabase is an open-source Firebase alternative that provides exactly what modern Chrome extensions need: authentication, a PostgreSQL database, and real-time subscriptions. all with a generous free tier that is perfect for getting started.
 

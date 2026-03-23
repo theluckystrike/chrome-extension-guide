@@ -5,7 +5,7 @@ description: "A comprehensive guide to the Chrome Omnibox API. Learn how to add 
 canonical_url: "https://bestchromeextensions.com/guides/omnibox-api/"
 ---
 
-# Chrome Extension Omnibox API. How to Add Custom Address Bar Commands
+Chrome Extension Omnibox API. How to Add Custom Address Bar Commands
 
 The Chrome Omnibox API allows you to extend Chrome's address bar with custom commands and suggestions. When users type a keyword you define in the omnibox (Chrome's address bar), your extension can provide custom suggestions, handle user input, and perform actions, all without requiring users to open a popup or navigate to a separate page. This powerful API transforms the address bar into a command center for your extension.
 

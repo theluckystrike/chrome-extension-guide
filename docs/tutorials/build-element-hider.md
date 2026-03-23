@@ -4,7 +4,7 @@ title: "Chrome Extension Element Hider. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-element-hider/"
 ---
-# Build an Element Hider Extension
+Build an Element Hider Extension
 
 In this tutorial, we'll build a Chrome extension that lets users click to hide any page element, with persistent storage per site.
 
@@ -130,7 +130,7 @@ Cross-References {#cross-references}
 
 - See [Content Script Patterns](../guides/content-script-patterns.md) for communication strategies
 - See [DOM Observer Patterns](../patterns/dom-observer-patterns.md) for dynamic content handling
-- See [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) for storage optimization
+- See [Storage API detailed look](../api-reference/storage-api-deep detailed look.md) for storage optimization
 -e 
 ---
 

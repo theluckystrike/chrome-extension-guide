@@ -8,7 +8,7 @@ tags: [svelte, chrome-extension, svelte-chrome-extension, lightweight-extension,
 author: theluckystrike
 ---
 
-# Building Chrome Extensions with Svelte. Complete Developer Guide (2025)
+Building Chrome Extensions with Svelte. Complete Developer Guide (2025)
 
 Svelte has revolutionized how we think about building user interfaces. Its compile-time approach eliminates the virtual DOM overhead that plagues React and Vue, resulting in dramatically smaller bundles and faster runtime performance. For Chrome extensions, where every kilobyte matters and user experience hinges on instant responsiveness, Svelte offers compelling advantages that make it the ideal choice for extension development in 2025.
 

@@ -9,7 +9,7 @@ keywords: "image compressor extension, compress images chrome, webp converter ex
 canonical_url: "https://bestchromeextensions.com/2025/01/25/build-an-image-compressor-chrome-extension/"
 ---
 
-# Build an Image Compressor Chrome Extension
+Build an Image Compressor Chrome Extension
 
 Image optimization remains one of the most impactful ways to improve website performance, reduce bandwidth costs, and enhance user experience. Whether you are a web developer, content creator, or digital marketer, having a reliable image compression tool directly in your browser can dramatically streamline your workflow. we will walk you through building a fully functional image compressor Chrome extension from scratch using modern web technologies and the latest Manifest V3 standards.
 

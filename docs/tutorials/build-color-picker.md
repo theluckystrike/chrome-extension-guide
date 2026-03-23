@@ -4,7 +4,7 @@ title: "Chrome Extension Color Picker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-color-picker/"
 ---
-# Build a Color Picker Extension
+Build a Color Picker Extension
 
 What You'll Build {#what-youll-build}
 - Pick any color from any web page

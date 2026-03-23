@@ -4,7 +4,7 @@ title: "Chrome Extension Content Script Frameworks. Developer Guide"
 description: "Learn Chrome extension content script frameworks with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/content-script-frameworks/"
 ---
-# Using Frameworks in Content Scripts
+Using Frameworks in Content Scripts
 
 Overview {#overview}
 

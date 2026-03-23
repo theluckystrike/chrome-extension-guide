@@ -1,6 +1,6 @@
-# Chrome Debugger API - Comprehensive Guide
+Chrome Debugger API - Comprehensive Guide
 
-## Introduction
+Introduction
 
 The `chrome.debugger` API provides powerful capabilities for extending Chrome DevTools functionality. It allows extensions to instrument network traffic, intercept JavaScript execution, modify DOM and CSS, capture performance profiles, and more. This API acts as a bridge between your extension and the Chrome DevTools Protocol (CDP).
 
@@ -8,7 +8,7 @@ The `chrome.debugger` API provides powerful capabilities for extending Chrome De
 - Chrome DevTools Protocol (CDP): The underlying wire protocol used by DevTools
 - Reference: https://developer.chrome.com/docs/extensions/reference/api/debugger
 
-## Required Permissions
+Required Permissions
 
 ```json
 {
@@ -19,9 +19,9 @@ The `chrome.debugger` API provides powerful capabilities for extending Chrome De
 
 The debugger permission requires user consent each session. Chrome displays an infobar asking the user to grant permission.
 
-## Core API Methods
+Core API Methods
 
-### chrome.debugger.attach. Attaching to a Target
+chrome.debugger.attach. Attaching to a Target
 
 Attach to a tab or target to begin debugging:
 ```javascript
@@ -34,7 +34,7 @@ chrome.debugger.attach({ tabId: tabId }, "1.3", () => {
 });
 ```
 
-### chrome.debugger.detach. Detaching from Target
+chrome.debugger.detach. Detaching from Target
 
 Always clean up by detaching when done:
 ```javascript
@@ -43,7 +43,7 @@ chrome.debugger.detach({ tabId: tabId }, () => {
 });
 ```
 
-### chrome.debugger.sendCommand. Sending CDP Commands
+chrome.debugger.sendCommand. Sending CDP Commands
 
 Send raw CDP commands after attaching:
 ```javascript
@@ -66,7 +66,7 @@ CDP commands follow the pattern: `Domain.method`. Common domains:
 - `Runtime`: JavaScript execution
 - `CSS`: CSS manipulation
 
-### chrome.debugger.getTargets. Listing Debug Targets
+chrome.debugger.getTargets. Listing Debug Targets
 
 Get all available debug targets:
 ```javascript
@@ -77,7 +77,7 @@ chrome.debugger.getTargets((targets) => {
 });
 ```
 
-### chrome.debugger.onEvent. CDP Event Listener
+chrome.debugger.onEvent. CDP Event Listener
 
 Listen for CDP domain events:
 ```javascript
@@ -91,7 +91,7 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 });
 ```
 
-### chrome.debugger.onDetach. Detach Event Listener
+chrome.debugger.onDetach. Detach Event Listener
 
 Handle unexpected detachment:
 ```javascript
@@ -101,9 +101,9 @@ chrome.debugger.onDetach.addListener((source, reason) => {
 });
 ```
 
-## Use Cases
+Use Cases
 
-### DOM Inspection via CDP
+DOM Inspection via CDP
 
 Inspect and traverse the DOM tree:
 ```javascript
@@ -122,7 +122,7 @@ chrome.debugger.sendCommand(debuggee, "DOM.getDocument", {}, (response) => {
 });
 ```
 
-### Network Monitoring via CDP
+Network Monitoring via CDP
 
 Intercept and analyze network requests:
 ```javascript
@@ -142,7 +142,7 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 });
 ```
 
-### Performance Profiling via CDP
+Performance Profiling via CDP
 
 Capture performance traces:
 ```javascript
@@ -158,7 +158,7 @@ function getMetrics(tabId) {
 }
 ```
 
-### Screenshot Capture via CDP
+Screenshot Capture via CDP
 
 Capture page screenshots:
 ```javascript
@@ -175,7 +175,7 @@ function captureScreenshot(tabId) {
 }
 ```
 
-### PDF Generation via CDP
+PDF Generation via CDP
 
 Generate PDF from page:
 ```javascript
@@ -194,7 +194,7 @@ function generatePDF(tabId) {
 }
 ```
 
-### JavaScript Evaluation via CDP
+JavaScript Evaluation via CDP
 
 Execute JavaScript in page context:
 ```javascript
@@ -219,7 +219,7 @@ evaluateJS(tabId, "document.title").then(console.log);
 evaluateJS(tabId, "[1,2,3].map(x => x * 2)").then(console.log);
 ```
 
-### CSS Manipulation via CDP
+CSS Manipulation via CDP
 
 Inspect and modify CSS:
 ```javascript
@@ -239,7 +239,7 @@ function getComputedStyles(tabId, selector) {
 }
 ```
 
-## Security Considerations
+Security Considerations
 
 - `"debugger"` permission is required in manifest
 - User consent is required each session (infobar appears)
@@ -252,7 +252,7 @@ Best Practices:
 3. Use consistent CDP version
 4. Rate limit requests
 
-## Building a Custom DevTools Extension
+Building a Custom DevTools Extension
 
 ```javascript
 // devtools.js - Load when DevTools opens
@@ -274,7 +274,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-## Reference Links
+Reference Links
 
 - Official API Docs: https://developer.chrome.com/docs/extensions/reference/api/debugger
 - Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/

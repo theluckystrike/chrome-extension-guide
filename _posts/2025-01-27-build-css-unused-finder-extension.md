@@ -9,7 +9,7 @@ keywords: "unused css extension, dead css finder chrome, css coverage extension,
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-css-unused-finder-extension/"
 ---
 
-# Build a CSS Unused Rules Finder Extension: Complete Developer Guide
+Build a CSS Unused Rules Finder Extension: Complete Developer Guide
 
 In the world of web development, CSS files tend to grow organically over time. As projects evolve, developers add new styles, refactor components, and sometimes leave behind orphaned CSS rules that no longer apply to any element on the page. These unused CSS rules, often called dead CSS or unused styles, contribute to larger file sizes, slower page loads, and decreased performance. Building a CSS unused rules finder extension is one of the most valuable tools a developer can create to combat this problem.
 

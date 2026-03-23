@@ -4,7 +4,7 @@ title: "Chrome Extension Timer Extension. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-timer-extension/"
 ---
-# Build a Countdown Timer Extension
+Build a Countdown Timer Extension
 
 What You'll Build {#what-youll-build}
 - Custom countdown timers with hours, minutes, seconds input

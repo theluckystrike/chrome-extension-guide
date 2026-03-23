@@ -4,7 +4,7 @@ title: "Chrome Extension Page Notes. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-page-notes/"
 ---
-# Build a Per-Page Notes Extension
+Build a Per-Page Notes Extension
 
 What You'll Build {#what-youll-build}
 Chrome extension saving notes linked to pages with markdown support and full-text search. Notes associate with URLs, render markdown, search across all notes, and sync across devices.

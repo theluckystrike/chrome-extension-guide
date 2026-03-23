@@ -5,7 +5,7 @@ description: "Implement Server-Sent Events for real-time streaming in extensions
 canonical_url: "https://bestchromeextensions.com/patterns/streaming-sse-patterns/"
 ---
 
-# Streaming and Server-Sent Events in Chrome Extensions
+Streaming and Server-Sent Events in Chrome Extensions
 
 Modern Chrome extensions increasingly need to handle streaming data -- from AI API responses
 to real-time feeds. The extension architecture (service workers, popups, content scripts) adds

@@ -4,7 +4,7 @@ title: "Chrome Extension DevTools Extensions. Developer Guide"
 description: "Learn Chrome extension devtools extensions with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/devtools-extensions/"
 ---
-# Building DevTools Extensions
+Building DevTools Extensions
 
 Introduction {#introduction}
 - Extend Chrome DevTools with custom panels, sidebars, and functionality

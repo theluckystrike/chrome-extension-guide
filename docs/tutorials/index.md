@@ -1,12 +1,12 @@
 ---
-title: "Chrome Extension Tutorials — Step by Step"
+title: "Chrome Extension Tutorials. Step by Step"
 slug: /tutorials/
 description: "Hands-on tutorials for building Chrome extensions from scratch. Follow step-by-step guides to create bookmark managers, password managers, productivity tools, and more."
 ---
 
-# Chrome Extension Tutorials — Step by Step
+# Chrome Extension Tutorials. Step by Step
 
-Welcome to the Chrome Extension Tutorials — your hands-on resource for building real-world Chrome extensions. These step-by-step tutorials guide you through creating complete, functional extensions from scratch. Whether you want to build a bookmark manager, password generator, productivity timer, or any other extension, these tutorials provide the complete code and explanation you need.
+Welcome to the Chrome Extension Tutorials. your hands-on resource for building real-world Chrome extensions. These step-by-step tutorials guide you through creating complete, functional extensions from scratch. Whether you want to build a bookmark manager, password generator, productivity timer, or any other extension, these tutorials provide the complete code and explanation you need.
 
 Each tutorial covers the entire development process: planning, manifest configuration, implementing core features, handling permissions, and testing. By the end of each tutorial, you'll have a working extension that you can customize and extend.
 

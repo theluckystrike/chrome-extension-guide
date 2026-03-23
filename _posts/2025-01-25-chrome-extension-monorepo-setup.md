@@ -9,7 +9,7 @@ keywords: "chrome extension monorepo, turborepo extension, pnpm workspace extens
 canonical_url: "https://bestchromeextensions.com/2025/01/25/chrome-extension-monorepo-setup/"
 ---
 
-# Chrome Extension Monorepo Setup with Turborepo and pnpm
+Chrome Extension Monorepo Setup with Turborepo and pnpm
 
 Building a single Chrome extension is straightforward, but what happens when your project grows? You might find yourself managing multiple extensions that share common functionality, maintaining duplicate code across repositories, or struggling to keep dependencies synchronized. This is exactly where a monorepo approach shines, and combining it with Turborepo and pnpm creates a powerful development environment that scales with your project.
 

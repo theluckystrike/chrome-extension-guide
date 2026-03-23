@@ -5,7 +5,7 @@ description: "Type-safe storage wrappers for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/typed-storage-wrapper/"
 ---
 
-# Type-Safe Storage Wrapper Patterns
+Type-Safe Storage Wrapper Patterns
 
 Problem Statement {#problem-statement}
 
@@ -221,7 +221,7 @@ const storageAreas = {
 
 Related Patterns {#related-patterns}
 
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md) - Comprehensive guide to chrome.storage API
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md) - Comprehensive guide to chrome.storage API
 - [Storage Patterns](../reference/storage-patterns.md) - Additional storage patterns and best practices
 - [State Management](./state-management.md) - Managing application state across components
 -e 

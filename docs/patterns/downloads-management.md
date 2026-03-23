@@ -5,7 +5,7 @@ description: "Manage file downloads from extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 ---
 
-# Downloads Management Patterns
+Downloads Management Patterns
 
 This guide covers patterns for managing downloads in Chrome extensions using the Downloads API.
 

@@ -5,7 +5,7 @@ description: "Implement context-aware actions based on page and user state."
 canonical_url: "https://bestchromeextensions.com/patterns/context-aware-actions/"
 ---
 
-# Context-Aware Extension Actions
+Context-Aware Extension Actions
 
 Overview {#overview}
 

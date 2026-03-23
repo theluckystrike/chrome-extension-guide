@@ -5,7 +5,7 @@ description: "Optimize content script performance."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-performance/"
 ---
 
-# Content Script Performance Optimization
+Content Script Performance Optimization
 
 Overview {#overview}
 

@@ -4,7 +4,7 @@ title: "Chrome Extension Website Annotator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-website-annotator/"
 ---
-# Build a Website Annotator Extension
+Build a Website Annotator Extension
 
 This tutorial guides you through building a Chrome extension that allows users to add sticky notes to any position on a webpage, save annotations per URL, and manage their notes.
 
@@ -289,7 +289,7 @@ Related Patterns {#related-patterns}
 
 - [DOM Observer Pattern](/docs/patterns/dom-observer-patterns.md) - For detecting page changes
 - [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md) - For advanced injection
-- [Storage API Deep Dive](/docs/api-reference/storage-api-deep detailed look.md) - For complex storage needs
+- [Storage API detailed look](/docs/api-reference/storage-api-deep detailed look.md) - For complex storage needs
 -e 
 ---
 

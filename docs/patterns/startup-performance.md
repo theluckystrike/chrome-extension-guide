@@ -5,7 +5,7 @@ description: "Optimize extension startup performance."
 canonical_url: "https://bestchromeextensions.com/patterns/startup-performance/"
 ---
 
-# Startup Performance Patterns
+Startup Performance Patterns
 
 Optimize Chrome extension startup and popup performance. Target <100ms popup open time for a snappy user experience.
 

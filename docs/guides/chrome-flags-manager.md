@@ -1,8 +1,8 @@
-# Building a Chrome Flags Manager Extension
+Building a Chrome Flags Manager Extension
 
 A guide to building a Chrome extension for managing Chrome flags.
 
-## Manifest Setup (Manifest V3)
+Manifest Setup (Manifest V3)
 
 ```json
 {
@@ -17,9 +17,9 @@ A guide to building a Chrome extension for managing Chrome flags.
 }
 ```
 
-## TypeScript Implementation
+TypeScript Implementation
 
-### Types
+Types
 ```typescript
 export interface ChromeFlag {
   id: string; name: string; description: string;
@@ -32,7 +32,7 @@ export interface ExtensionSettings {
 }
 ```
 
-### Flag Service
+Flag Service
 ```typescript
 export class FlagService {
   private static instance: FlagService;
@@ -59,7 +59,7 @@ export class FlagService {
 }
 ```
 
-## UI Design
+UI Design
 ```typescript
 import React, { useState, useEffect } from 'react';
 import { ChromeFlag, ExtensionSettings } from '../shared/types';
@@ -93,7 +93,7 @@ export const App: React.FC = () => {
 };
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -108,7 +108,7 @@ const tabs = await chrome.tabs.query({ url: 'chrome://flags/*' });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { });
 ```
 
-## State Management
+State Management
 ```typescript
 const STORAGE_KEYS = { SETTINGS: 'settings', FLAGS: 'flags', PRESETS: 'presets' } as const;
 
@@ -120,7 +120,7 @@ export class StorageManager {
 }
 ```
 
-## Error Handling
+Error Handling
 ```typescript
 async fetchAllFlags(): Promise<ChromeFlag[]> {
   try {
@@ -138,7 +138,7 @@ async fetchAllFlags(): Promise<ChromeFlag[]> {
 
 Edge Cases: No flags page open (prompt user), Extension reload (re-fetch), Flag conflicts (warn user), Stale cache (validate age).
 
-## Testing
+Testing
 ```typescript
 import { FlagService } from '../src/background/services/FlagService';
 
@@ -155,7 +155,7 @@ describe('FlagService', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
 1. Lazy Loading: Load flags only when popup opens
 2. Caching: Cache flags with TTL to reduce page fetches
@@ -166,7 +166,7 @@ describe('FlagService', () => {
 const debounce = (fn: Function, delay: number) => { let timeoutId: NodeJS.Timeout; return (...args: any[]) => { clearTimeout(timeoutId); timeoutId = setTimeout(() => fn(...args), delay); }; };
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
 - [ ] Increment version in `manifest.json`
 - [ ] Update `CHANGELOG.md`
@@ -177,6 +177,6 @@ const debounce = (fn: Function, delay: number) => { let timeoutId: NodeJS.Timeou
 - [ ] Set pricing (free/paid)
 - [ ] Publish and verify
 
-## Conclusion
+Conclusion
 
 Building a Chrome Flags Manager extension requires careful handling of Chrome's internal pages, proper permission management, and a clean UI. Follow the patterns in this guide to create a robust, user-friendly extension.

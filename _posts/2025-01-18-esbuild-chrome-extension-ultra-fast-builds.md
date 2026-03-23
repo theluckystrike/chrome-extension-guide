@@ -9,7 +9,7 @@ keywords: "esbuild chrome extension, fast build chrome extension, esbuild chrome
 canonical_url: "https://bestchromeextensions.com/2025/01/18/esbuild-chrome-extension-ultra-fast-builds/"
 ---
 
-# Esbuild for Chrome Extensions: Ultra Fast Builds That Will Transform Your Development Workflow
+Esbuild for Chrome Extensions: Ultra Fast Builds That Will Transform Your Development Workflow
 
 If you have ever waited for your Chrome extension to rebuild during development, you know how frustrating slow build times can be. Every second spent waiting for compilation is a second taken away from actually building features and fixing bugs. This is where esbuild comes in. a JavaScript bundler that is up to 100x faster than traditional build tools like Webpack, Rollup, or Parcel.
 
@@ -468,7 +468,7 @@ When migrating from Webpack to esbuild, follow this checklist:
 
 Common Migration Issues and Solutions
 
-#### Issue: Missing CSS Styles
+Issue: Missing CSS Styles
 
 Problem: Styles not being applied after migration.
 
@@ -504,7 +504,7 @@ esbuild.build({
 });
 ```
 
-#### Issue: Environment Variables Not Working
+Issue: Environment Variables Not Working
 
 Problem: `process.env` variables are undefined.
 
@@ -522,7 +522,7 @@ esbuild.build({
 });
 ```
 
-#### Issue: Third-Party Libraries Not Bundling
+Issue: Third-Party Libraries Not Bundling
 
 Problem: External libraries not included in bundle.
 

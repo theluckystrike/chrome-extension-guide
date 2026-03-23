@@ -5,7 +5,7 @@ description: "Optimize your Chrome Web Store listing for better visibility, clic
 canonical_url: "https://bestchromeextensions.com/publishing/listing-optimization/"
 ---
 
-# Chrome Web Store Listing Optimization
+Chrome Web Store Listing Optimization
 
 Overview {#overview}
 Your store listing is your extension's landing page. Optimization affects both search ranking and install conversion rate.

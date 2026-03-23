@@ -4,7 +4,7 @@ title: "Chrome Extension Puppeteer Testing. Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
 canonical_url: "https://bestchromeextensions.com/guides/extension-testing-with-puppeteer/"
 ---
-# End-to-End Testing Chrome Extensions with Puppeteer
+End-to-End Testing Chrome Extensions with Puppeteer
 
 Overview {#overview}
 

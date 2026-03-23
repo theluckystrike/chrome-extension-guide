@@ -4,7 +4,7 @@ title: "Chrome Extension Data Privacy. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-data-privacy/"
 ---
-# Data Privacy Guide for Chrome Extensions
+Data Privacy Guide for Chrome Extensions
 
 Introduction {#introduction}
 Data privacy is not optional. it's a requirement for Chrome Web Store (CWS) publication and a legal obligation under GDPR, CCPA, and COPPA. This guide covers how to build privacy-respecting extensions that comply with regulations and earn user trust.

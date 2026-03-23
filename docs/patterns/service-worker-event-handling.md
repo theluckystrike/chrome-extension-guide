@@ -5,7 +5,7 @@ description: "Handle service worker events properly."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-event-handling/"
 ---
 
-# Service Worker Event Handling Best Practices
+Service Worker Event Handling Best Practices
 
 This document outlines essential patterns for handling events in Chrome Extension Manifest V3 service workers.
 

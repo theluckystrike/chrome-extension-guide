@@ -9,7 +9,7 @@ keywords: "chrome extension pdf viewer, pdf.js chrome extension, build pdf reade
 canonical_url: "https://bestchromeextensions.com/2025/03/19/build-pdf-viewer-chrome-extension/"
 ---
 
-# Build a PDF Viewer Chrome Extension: Complete Tutorial with pdf.js
+Build a PDF Viewer Chrome Extension: Complete Tutorial with pdf.js
 
 PDF documents remain one of the most widely used file formats for sharing and preserving document formatting across different platforms. While Chrome includes a built-in PDF viewer, building your own PDF viewer Chrome extension using pdf.js opens up powerful customization possibilities. Whether you need to add annotation tools, implement custom navigation features, or create a branded document viewing experience, this comprehensive tutorial will guide you through building a production-ready PDF viewer extension from scratch.
 

@@ -9,7 +9,7 @@ keywords: "study timer extension, pomodoro study chrome, focus study extension"
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-study-timer-chrome-extension/"
 ---
 
-# Build a Study Timer Chrome Extension: Complete 2025 Guide
+Build a Study Timer Chrome Extension: Complete 2025 Guide
 
 Are you looking to build a study timer Chrome extension that can help students and professionals stay focused? Perhaps you have struggled with distractions while studying or working, and you want to create a tool that enforces productive habits. Whatever your motivation, building a study timer extension is one of the most rewarding projects you can undertake in 2025.
 

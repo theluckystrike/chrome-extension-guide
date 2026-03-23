@@ -1,9 +1,9 @@
-# Chrome Extension Page Overrides
+Chrome Extension Page Overrides
 
-## Introduction
+Introduction
 Chrome Extension Page Overrides allow you to replace built-in Chrome pages with your own custom pages. This powerful feature lets you create personalized experiences for the New Tab, History, and Bookmarks pages.
 
-## chrome_url_overrides Manifest Key
+chrome_url_overrides Manifest Key
 
 The `chrome_url_overrides` key in manifest.json enables page overrides:
 
@@ -20,29 +20,29 @@ The `chrome_url_overrides` key in manifest.json enables page overrides:
 }
 ```
 
-## Supported Override Pages
+Supported Override Pages
 
-### 1. New Tab Page (newtab)
+1. New Tab Page (newtab)
 The most common override - replaces the default new tab with a custom page.
 - Loaded when user opens a new tab
 - Can display search box, widgets, backgrounds
 - Available immediately on installation
 
-### 2. History Page (history)
+2. History Page (history)
 Replaces the Chrome history manager (chrome://history).
 - Shows browsing history in custom UI
 - Can integrate with your own data storage
 - Useful for custom history search/filtering
 
-### 3. Bookmarks Page (bookmarks)
+3. Bookmarks Page (bookmarks)
 Replaces the Chrome bookmark manager (chrome://bookmarks).
 - Custom bookmark organization
 - Enhanced search and filtering
 - Additional features like tags, notes
 
-## Overriding the New Tab Page
+Overriding the New Tab Page
 
-### Basic Implementation
+Basic Implementation
 ```javascript
 // manifest.json
 {
@@ -67,9 +67,9 @@ Replaces the Chrome bookmark manager (chrome://bookmarks).
 </html>
 ```
 
-## Designing a Custom New Tab Experience
+Designing a Custom New Tab Experience
 
-### Search Integration
+Search Integration
 Add a prominent search box as the central feature:
 
 ```javascript
@@ -81,7 +81,7 @@ document.getElementById('search-form').addEventListener('submit', (e) => {
 });
 ```
 
-### Quick Links / Shortcuts
+Quick Links / Shortcuts
 ```javascript
 const shortcuts = [
   { name: 'Gmail', url: 'https://gmail.com', icon: 'gmail.png' },
@@ -101,9 +101,9 @@ function renderShortcuts() {
 }
 ```
 
-## Background Images and Themes
+Background Images and Themes
 
-### Setting Dynamic Backgrounds
+Setting Dynamic Backgrounds
 ```javascript
 async function setBackground() {
   // Option 1: From extension's local assets
@@ -121,7 +121,7 @@ async function setBackground() {
 }
 ```
 
-### Theme Integration
+Theme Integration
 ```javascript
 // Apply user-selected theme
 function applyTheme(theme) {
@@ -131,9 +131,9 @@ function applyTheme(theme) {
 }
 ```
 
-## Widgets and Quick Features
+Widgets and Quick Features
 
-### Weather Widget
+Weather Widget
 ```javascript
 async function renderWeatherWidget() {
   const weather = await fetchWeatherData(); // Your API call
@@ -148,7 +148,7 @@ async function renderWeatherWidget() {
 }
 ```
 
-### News Ticker Widget
+News Ticker Widget
 ```javascript
 async function renderNewsWidget() {
   const news = await fetchTopNews();
@@ -159,16 +159,16 @@ async function renderNewsWidget() {
 }
 ```
 
-### Productivity Widgets
+Productivity Widgets
 - Task list / TODO items
 - Calendar / agenda view
 - Quick notes
 - Recently visited sites
 - Download manager quick access
 
-## Performance Optimization for New Tab
+Performance Optimization for New Tab
 
-### Lazy Loading
+Lazy Loading
 ```javascript
 // Only load widgets when scrolled into view
 const observer = new IntersectionObserver((entries) => {
@@ -186,7 +186,7 @@ document.querySelectorAll('.widget').forEach(el => {
 });
 ```
 
-### Service Worker Caching
+Service Worker Caching
 ```javascript
 // Cache API responses in service worker
 const CACHE_NAME = 'newtab-v1';
@@ -200,7 +200,7 @@ self.addEventListener('install', event => {
 });
 ```
 
-### Efficient DOM Updates
+Efficient DOM Updates
 ```javascript
 // Use document fragments for batch updates
 function updateRecentlyVisited(sites) {
@@ -212,9 +212,9 @@ function updateRecentlyVisited(sites) {
 }
 ```
 
-## Fallback to Default Chrome Pages
+Fallback to Default Chrome Pages
 
-### Handling Extension Errors
+Handling Extension Errors
 ```javascript
 // If your custom page fails, redirect to default
 window.addEventListener('error', (e) => {
@@ -223,7 +223,7 @@ window.addEventListener('error', (e) => {
 });
 ```
 
-### User Controls
+User Controls
 Allow users to disable your override:
 
 ```javascript
@@ -243,16 +243,16 @@ async function checkOverrideEnabled() {
 }
 ```
 
-## User Expectations and UX
+User Expectations and UX
 
-### Key UX Principles
+Key UX Principles
 1. Speed: Load within 200ms - users expect instant new tabs
 2. Familiarity: Keep search prominent, easy navigation
 3. Consistency: Match Chrome's visual style where appropriate
 4. Respect Privacy: Clearly explain data usage
 5. Customization: Let users personalize their experience
 
-### Recommended Features
+Recommended Features
 - Minimal setup required
 - Offline functionality
 - Fast search with autocomplete
@@ -260,18 +260,18 @@ async function checkOverrideEnabled() {
 - Undo/redo for actions
 - Clear visual hierarchy
 
-## Reference
+Reference
 
 Official documentation: [developer.chrome.com/docs/extensions/develop/ui/override-chrome-pages](https://developer.chrome.com/docs/extensions/develop/ui/override-chrome-pages)
 
-### Limitations
+Limitations
 - Only one extension can override each page at a time
 - Cannot override the Settings page
 - New tab override requires user gesture for some features
 - Some Chrome APIs may have limited functionality in overridden pages
 
 ---
-## Turn Your Extension Into a Business
+Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.
 ---
 

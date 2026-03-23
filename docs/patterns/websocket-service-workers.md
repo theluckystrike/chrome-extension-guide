@@ -5,7 +5,7 @@ description: "Use WebSockets in service workers."
 canonical_url: "https://bestchromeextensions.com/patterns/websocket-service-workers/"
 ---
 
-# WebSocket Connections from Service Workers
+WebSocket Connections from Service Workers
 
 Overview {#overview}
 

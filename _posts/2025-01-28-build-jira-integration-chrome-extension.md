@@ -9,7 +9,7 @@ keywords: "jira chrome extension, jira issue creator, atlassian extension, jira 
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-jira-integration-chrome-extension/"
 ---
 
-# Build a Jira Integration Chrome Extension: Complete 2025 Guide
+Build a Jira Integration Chrome Extension: Complete 2025 Guide
 
 Jira is the backbone of project management for millions of development teams worldwide. Being able to quickly create issues, check ticket status, and access your Jira workflow directly from Chrome can dramatically improve productivity. we will walk you through building a production-ready Jira Integration Chrome Extension from scratch.
 

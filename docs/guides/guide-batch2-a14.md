@@ -1,8 +1,8 @@
-# Grammar Checker Extension Patterns
+Grammar Checker Extension Patterns
 
 Building a grammar checker extension for Chrome is a sophisticated undertaking that combines text analysis, API integration, and smooth user experience design. This guide covers the architectural patterns, implementation strategies, and TypeScript code examples needed to create a production-ready grammar checking extension.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Core Components](#core-components)
@@ -15,7 +15,7 @@ Building a grammar checker extension for Chrome is a sophisticated undertaking t
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 A grammar checker extension typically operates across multiple Chrome extension contexts:
 

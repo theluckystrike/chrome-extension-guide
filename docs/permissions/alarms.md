@@ -8,7 +8,7 @@ order: 2
 canonical_url: "https://bestchromeextensions.com/permissions/alarms/"
 ---
 
-# alarms Permission Reference
+alarms Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to the `chrome.alarms` API

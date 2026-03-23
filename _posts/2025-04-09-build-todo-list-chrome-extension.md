@@ -9,7 +9,7 @@ keywords: "chrome extension todo list, build todo extension, task manager chrome
 canonical_url: "https://bestchromeextensions.com/2025/04/09/build-todo-list-chrome-extension/"
 ---
 
-# Build a Todo List Chrome Extension: Productivity Right in Your Browser
+Build a Todo List Chrome Extension: Productivity Right in Your Browser
 
 Every productive day begins with a clear list of tasks. What if you could manage your todo list without leaving your browser? we will walk through building a fully functional Todo List Chrome Extension from scratch. By the end of this tutorial, you will have a working task manager that lives in your browser toolbar, ready to help you stay organized and focused.
 

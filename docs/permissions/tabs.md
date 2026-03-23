@@ -8,7 +8,7 @@ order: 43
 canonical_url: "https://bestchromeextensions.com/permissions/tabs/"
 ---
 
-# tabs Permission Reference
+tabs Permission Reference
 
 What It Does {#what-it-does}
 - Grants persistent access to tab metadata on all tabs in the browser

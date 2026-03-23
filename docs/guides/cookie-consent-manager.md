@@ -1,8 +1,8 @@
-# Building a Cookie Consent Manager Chrome Extension
+Building a Cookie Consent Manager Chrome Extension
 
 This guide covers building a comprehensive cookie consent manager extension using Chrome's Manifest V3, TypeScript, and modern web technologies.
 
-## Overview
+Overview
 
 A cookie consent manager helps users control which cookies and tracking technologies websites can set on their browser. This extension will:
 - Detect cookie consent dialogs on websites
@@ -10,9 +10,9 @@ A cookie consent manager helps users control which cookies and tracking technolo
 - Store consent history for compliance
 - Provide a UI for managing consent settings
 
-## Architecture
+Architecture
 
-### Project Structure
+Project Structure
 ```
 cookie-consent-manager/
  src/
@@ -40,9 +40,9 @@ cookie-consent-manager/
  tsconfig.json
 ```
 
-## Manifest Setup
+Manifest Setup
 
-### manifest.json
+manifest.json
 ```json
 {
   "manifest_version": 3,
@@ -85,7 +85,7 @@ cookie-consent-manager/
 }
 ```
 
-### Required Permissions
+Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -95,9 +95,9 @@ cookie-consent-manager/
 | `tabs` | Get tab information for domain-specific settings |
 | `host_permissions` | Required for content scripts on all sites |
 
-## Core Implementation
+Core Implementation
 
-### Type Definitions (src/shared/types.ts)
+Type Definitions (src/shared/types.ts)
 ```typescript
 export type ConsentLevel = 'essential' | 'analytics' | 'marketing' | 'functional';
 
@@ -138,7 +138,7 @@ export interface MessageResponse<T> {
 }
 ```
 
-### Storage Management (src/background/storage.ts)
+Storage Management (src/background/storage.ts)
 ```typescript
 import { UserPreferences, CookieConsent, ConsentHistoryEntry } from '../shared/types';
 
@@ -223,7 +223,7 @@ export class ConsentStorage {
 export const storage = ConsentStorage.getInstance();
 ```
 
-### Consent Engine (src/background/consent-engine.ts)
+Consent Engine (src/background/consent-engine.ts)
 ```typescript
 import { storage } from './storage';
 import { CookieConsent, ConsentLevel } from '../shared/types';
@@ -303,9 +303,9 @@ export class ConsentEngine {
 export const consentEngine = new ConsentEngine();
 ```
 
-## Content Script Implementation
+Content Script Implementation
 
-### Cookie Dialog Detector (src/content/detector.ts)
+Cookie Dialog Detector (src/content/detector.ts)
 ```typescript
 interface DialogElement {
   element: Element;
@@ -402,7 +402,7 @@ export class CookieDialogDetector {
 }
 ```
 
-### Content Script Entry (src/content/index.ts)
+Content Script Entry (src/content/index.ts)
 ```typescript
 import { CookieDialogDetector } from './detector';
 
@@ -440,9 +440,9 @@ chrome.runtime.onMessage.addListener((message: ContentMessage, sender, sendRespo
 console.log('[Cookie Consent] Content script loaded');
 ```
 
-## Popup Implementation
+Popup Implementation
 
-### Popup Component (src/popup/index.tsx)
+Popup Component (src/popup/index.tsx)
 ```typescript
 import React, { useState, useEffect } from 'react';
 import { UserPreferences, CookieConsent, ConsentLevel } from '../shared/types';
@@ -598,9 +598,9 @@ const Popup: React.FC = () => {
 export default Popup;
 ```
 
-## Background Service Worker
+Background Service Worker
 
-### Background Entry (src/background/index.ts)
+Background Entry (src/background/index.ts)
 ```typescript
 import { storage } from './storage';
 import { consentEngine } from './consent-engine';
@@ -673,9 +673,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-## State Management Patterns
+State Management Patterns
 
-### Using Chrome Storage with Type Safety
+Using Chrome Storage with Type Safety
 ```typescript
 // Type-safe storage wrapper
 class TypedStorage<T extends Record<string, unknown>> {
@@ -700,9 +700,9 @@ class TypedStorage<T extends Record<string, unknown>> {
 }
 ```
 
-## Error Handling
+Error Handling
 
-### Content Script Error Boundaries
+Content Script Error Boundaries
 ```typescript
 window.onerror = (message, source, lineno, colno, error) => {
   console.error('[Cookie Consent] Global error:', { message, lineno, colno });
@@ -722,7 +722,7 @@ window.onerror = (message, source, lineno, colno, error) => {
 };
 ```
 
-### Background Error Handling
+Background Error Handling
 ```typescript
 self.onunhandledrejection = (event) => {
   console.error('[Background] Unhandled promise rejection:', event.reason);
@@ -736,9 +736,9 @@ self.onunhandledrejection = (event) => {
 };
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing Storage
+Unit Testing Storage
 ```typescript
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
@@ -764,7 +764,7 @@ describe('ConsentStorage', () => {
 });
 ```
 
-### Integration Testing with Playwright
+Integration Testing with Playwright
 ```typescript
 import { test, expect } from '@playwright/test';
 
@@ -776,20 +776,20 @@ test('popup displays current domain consent', async ({ page }) => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimize Storage Access
+Optimize Storage Access
 - Batch reads: Use `chrome.storage.local.get(['key1', 'key2'])` instead of multiple calls
 - Lazy loading: Load consent history only when needed
 - Debounce updates: Don't save on every preference change
 
-### Content Script Performance
+Content Script Performance
 - Run at document_end: Avoid blocking page load
 - Use MutationObserver: Instead of polling for dialogs
 - Minimal DOM manipulation: Cache element references
 - Remove listeners: Clean up when content script unloads
 
-### Memory Management
+Memory Management
 ```typescript
 // Clean up on page unload
 window.addEventListener('unload', () => {
@@ -800,9 +800,9 @@ window.addEventListener('unload', () => {
 const weakCache = new WeakMap<object, any>();
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 - [ ] Test on Chrome, Edge, and Firefox (if supporting)
 - [ ] Verify all permissions are necessary
 - [ ] Add privacy policy URL in manifest
@@ -811,7 +811,7 @@ const weakCache = new WeakMap<object, any>();
 - [ ] Check for console errors
 - [ ] Verify auto-update works
 
-### Store Assets
+Store Assets
 - [ ] 128x128 icon
 - [ ] 440x280 small promo tile
 - [ ] 1400x560 large promo tile
@@ -819,7 +819,7 @@ const weakCache = new WeakMap<object, any>();
 - [ ] Privacy policy
 - [ ] Support URL
 
-### Manifest Requirements
+Manifest Requirements
 ```json
 {
   "name": "Cookie Consent Manager",
@@ -831,13 +831,13 @@ const weakCache = new WeakMap<object, any>();
 }
 ```
 
-### Submission
+Submission
 1. Go to Chrome Web Store Developer Dashboard
 2. Upload zip file
 3. Fill store listing details
 4. Submit for review
 
-## Conclusion
+Conclusion
 
 This guide covered the essential components for building a cookie consent manager Chrome extension. Key takeaways:
 

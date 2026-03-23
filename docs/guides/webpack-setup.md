@@ -4,7 +4,7 @@ title: "Chrome Extension Webpack Setup. Modern Build Configuration Guide"
 description: "Learn how to set up Webpack for Chrome extensions with this developer guide covering configuration, HMR, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/webpack-setup/"
 ---
-# Chrome Extension Webpack Setup. Modern Build Configuration Guide
+Chrome Extension Webpack Setup. Modern Build Configuration Guide
 
 Webpack remains one of the most powerful bundling tools for Chrome extensions, offering fine-grained control over how your code gets transformed, bundled, and optimized. While newer tools like Vite have gained popularity, Webpack's extensive plugin ecosystem and mature configuration options make it an excellent choice for complex extension projects. This guide walks you through setting up a modern Webpack configuration specifically tailored for Chrome extension development, complete with Hot Module Replacement for rapid iteration.
 

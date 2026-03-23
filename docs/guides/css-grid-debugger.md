@@ -1,10 +1,10 @@
-# Building a CSS Grid Debugger Chrome Extension
+Building a CSS Grid Debugger Chrome Extension
 
 This guide walks through building a production-ready CSS Grid Debugger extension using Chrome's modern extension APIs. You'll learn architecture patterns, TypeScript implementation, UI design, and deployment strategies.
 
-## Architecture Overview
+Architecture Overview
 
-### Manifest Configuration (manifest.json)
+Manifest Configuration (manifest.json)
 
 The extension uses Manifest V3 with precise permissions for DOM inspection and script injection:
 
@@ -42,9 +42,9 @@ The extension uses Manifest V3 with precise permissions for DOM inspection and s
 }
 ```
 
-## Core Implementation with TypeScript
+Core Implementation with TypeScript
 
-### Project Structure
+Project Structure
 
 ```
 css-grid-debugger/
@@ -70,7 +70,7 @@ css-grid-debugger/
  webpack.config.js
 ```
 
-### Type Definitions (src/content/types.ts)
+Type Definitions (src/content/types.ts)
 
 Define clear interfaces for grid analysis data:
 
@@ -125,7 +125,7 @@ export interface Message {
 }
 ```
 
-### Grid Analyzer (src/content/grid-analyzer.ts)
+Grid Analyzer (src/content/grid-analyzer.ts)
 
 The core analysis engine parses computed styles and identifies grid containers:
 
@@ -254,7 +254,7 @@ export class GridAnalyzer {
 }
 ```
 
-### Overlay Renderer (src/content/overlay-renderer.ts)
+Overlay Renderer (src/content/overlay-renderer.ts)
 
 Creates visual overlays to highlight grid structure:
 
@@ -434,7 +434,7 @@ export class OverlayRenderer {
 }
 ```
 
-## Content Script Entry Point (src/content/content-script.ts)
+Content Script Entry Point (src/content/content-script.ts)
 
 Connects all components and handles messaging with the background script:
 
@@ -588,7 +588,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-## Background Service Worker (src/background/background.ts)
+Background Service Worker (src/background/background.ts)
 
 Manages extension state and handles popup communications:
 
@@ -645,7 +645,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-## Popup UI (src/popup/popup.ts)
+Popup UI (src/popup/popup.ts)
 
 User interface for quick settings adjustment:
 
@@ -709,9 +709,9 @@ async function broadcastUpdate(partialState: Partial<DebuggerState>): Promise<vo
 }
 ```
 
-## State Management and Storage Patterns
+State Management and Storage Patterns
 
-### Using chrome.storage API
+Using chrome.storage API
 
 The extension uses `chrome.storage.local` for persistent state:
 
@@ -746,7 +746,7 @@ class StorageManager<T extends Record<string, unknown>> {
 }
 ```
 
-### State Synchronization
+State Synchronization
 
 Keep popup and content script in sync:
 
@@ -771,9 +771,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-## Error Handling and Edge Cases
+Error Handling and Edge Cases
 
-### Graceful Degradation
+Graceful Degradation
 
 ```typescript
 try {
@@ -794,7 +794,7 @@ try {
 }
 ```
 
-### Handling Dynamic Content
+Handling Dynamic Content
 
 ```typescript
 // Observe DOM changes for dynamically added grids
@@ -823,7 +823,7 @@ const debouncedAnalyze = debounce(() => {
 }, 250);
 ```
 
-### Edge Cases to Handle
+Edge Cases to Handle
 
 1. Nested grids: Analyze recursively and render overlays for each container
 2. Anonymous grid items: Handle text nodes wrapped in grid containers
@@ -832,9 +832,9 @@ const debouncedAnalyze = debounce(() => {
 5. iframe isolation: Cannot access cross-origin iframes
 6. Shadow DOM: Use `querySelectorAll` with shadow roots
 
-## Testing Approach
+Testing Approach
 
-### Unit Testing GridAnalyzer
+Unit Testing GridAnalyzer
 
 ```typescript
 import { GridAnalyzer } from './grid-analyzer';
@@ -868,7 +868,7 @@ describe('GridAnalyzer', () => {
 });
 ```
 
-### Integration Testing with Puppeteer
+Integration Testing with Puppeteer
 
 ```typescript
 import puppeteer from 'puppeteer';
@@ -894,9 +894,9 @@ describe('Extension Integration', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Optimizations
+Optimizations
 
 1. Debounce resize handlers: Prevent excessive re-renders
 2. Use requestAnimationFrame: Smooth overlay positioning
@@ -923,7 +923,7 @@ const analyzeGrid = throttle(() => {
 window.addEventListener('resize', analyzeGrid);
 ```
 
-### Memory Management
+Memory Management
 
 Always clean up when extension is disabled:
 
@@ -938,9 +938,9 @@ class GridDebugger {
 }
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission Requirements
+Pre-submission Requirements
 
 - [ ] Test on Chrome, Edge, and Firefox (if supporting MV2)
 - [ ] Verify all permissions are minimal and justified
@@ -949,28 +949,28 @@ class GridDebugger {
 - [ ] Write comprehensive store listing
 - [ ] Set up Google Analytics or tracking (optional)
 
-### Manifest Validation
+Manifest Validation
 
 ```bash
-# Validate manifest using Chrome's tools
+Validate manifest using Chrome's tools
 npx @chrome-extension-validator/validate manifest.json
 ```
 
-### Store Submission
+Store Submission
 
 1. Package extension: `chrome.exe --pack-extension=./dist`
 2. Upload to Chrome Web Developer Dashboard
 3. Complete store listing details
 4. Submit for review
 
-### Post-publication
+Post-publication
 
 - Monitor error reports in Chrome Developer Dashboard
 - Collect and respond to user reviews
 - Plan feature updates based on feedback
 - Maintain compatibility with Chrome releases
 
-## Conclusion
+Conclusion
 
 This guide covered the essential patterns for building a Chrome extension that visualizes CSS Grid layouts. The architecture separates concerns between content scripts, background workers, and the popup UI, while TypeScript provides type safety throughout. 
 

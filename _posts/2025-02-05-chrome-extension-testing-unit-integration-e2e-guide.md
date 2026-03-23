@@ -8,7 +8,7 @@ tags: [extension-testing, vitest, puppeteer, playwright, chrome-extension-testin
 author: theluckystrike
 ---
 
-# Chrome Extension Testing. Unit, Integration, and E2E Testing Complete Guide
+Chrome Extension Testing. Unit, Integration, and E2E Testing Complete Guide
 
 Testing Chrome extensions presents unique challenges that differ from traditional web applications. Extensions span multiple execution contexts, background service workers, popup pages, options pages, and content scripts, each with its own isolated environment and access to Chrome APIs. A comprehensive testing strategy must address these distinct contexts while ensuring smooth communication between them.
 

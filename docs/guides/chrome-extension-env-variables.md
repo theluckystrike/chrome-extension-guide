@@ -4,7 +4,7 @@ title: "Chrome Extension Environment Variables. Developer Guide"
 description: "Learn Chrome extension environment variables with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-env-variables/"
 ---
-# Environment Variables in Chrome Extensions
+Environment Variables in Chrome Extensions
 
 Chrome extensions run in a browser context where Node.js APIs like `process.env` are unavailable. Unlike traditional web applications, extensions cannot read `.env` files at runtime. This guide covers the patterns for managing configuration and environment variables throughout the extension development lifecycle.
 

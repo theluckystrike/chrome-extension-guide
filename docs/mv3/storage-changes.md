@@ -5,7 +5,7 @@ description: "Handle storage changes with the chrome.storage API in Manifest V3.
 canonical_url: "https://bestchromeextensions.com/mv3/storage-changes/"
 ---
 
-# Storage API Changes in Manifest V3
+Storage API Changes in Manifest V3
 
 Why Storage Matters More in MV3 {#why-storage-matters-more-in-mv3}
 - MV2: persistent background page could hold state in memory

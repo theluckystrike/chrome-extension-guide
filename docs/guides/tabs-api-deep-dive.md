@@ -5,7 +5,7 @@ description: "A comprehensive developer guide for managing browser tabs using th
 canonical_url: "https://bestchromeextensions.com/guides/tabs-api-deep detailed look/"
 ---
 
-# Chrome Extension Tabs API. Complete Guide to Managing Browser Tabs
+Chrome Extension Tabs API. Complete Guide to Managing Browser Tabs
 
 The Chrome Tabs API is one of the most frequently used APIs in extension development. It provides powerful methods for querying, creating, updating, and removing browser tabs, along with event listeners to respond to tab state changes. This guide covers all the essential operations you'll need to build feature-rich extensions that manage tabs effectively.
 

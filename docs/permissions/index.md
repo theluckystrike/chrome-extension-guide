@@ -6,7 +6,7 @@ description: "Comprehensive guide to all Chrome extension permissions, including
 
 # Complete Chrome Extension Permissions Reference
 
-Welcome to the Chrome Extension Permissions Reference — your comprehensive guide to understanding and correctly implementing all permissions available in Chrome extensions. This reference covers everything from basic permissions like `storage` and `tabs` to advanced permissions like `webRequest` and `declarativeNetRequest`.
+Welcome to the Chrome Extension Permissions Reference. your comprehensive guide to understanding and correctly implementing all permissions available in Chrome extensions. This reference covers everything from basic permissions like `storage` and `tabs` to advanced permissions like `webRequest` and `declarativeNetRequest`.
 
 Properly understanding permissions is crucial for Chrome Web Store approval, user trust, and extension security. Each permission grants specific capabilities to your extension, and using the minimum necessary permissions helps avoid scary warning dialogs that can deter users from installing your extension.
 

@@ -8,7 +8,7 @@ tags: [tab-suspender-pro, chrome-profiles, configuration]
 author: theluckystrike
 ---
 
-# Tab Suspender Pro with Multiple Chrome Profiles: Setup and Tips
+Tab Suspender Pro with Multiple Chrome Profiles: Setup and Tips
 
 If you use Chrome across different contexts, whether for work and personal browsing, multiple client projects, or separating development environments from everyday surfing, you likely already know about Chrome profiles. These powerful containers let you keep your bookmarks, extensions, history, and settings organized by context. But here's what many users discover the hard way: Chrome profiles don't automatically share extension settings. Each profile treats every extension as if it were a fresh install, complete with its own configuration, whitelists, and preferences.
 

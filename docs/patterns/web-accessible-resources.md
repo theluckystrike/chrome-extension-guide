@@ -5,7 +5,7 @@ description: "Configure web accessible resources in Manifest V3 for content scri
 canonical_url: "https://bestchromeextensions.com/patterns/web-accessible-resources/"
 ---
 
-# Web Accessible Resources Patterns
+Web Accessible Resources Patterns
 
 Overview {#overview}
 

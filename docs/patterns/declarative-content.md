@@ -5,7 +5,7 @@ description: "Use declarative content for conditional script injection."
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-content/"
 ---
 
-# DeclarativeContent API Patterns
+DeclarativeContent API Patterns
 
 Overview {#overview}
 

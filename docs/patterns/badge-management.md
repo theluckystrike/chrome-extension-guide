@@ -5,7 +5,7 @@ description: "Manage extension badges for user notifications."
 canonical_url: "https://bestchromeextensions.com/patterns/badge-management/"
 ---
 
-# Badge Management Patterns
+Badge Management Patterns
 
 Overview {#overview}
 

@@ -5,7 +5,7 @@ description: "Quick reference guide for Chrome Extension Manifest V3. Covers all
 canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-cheatsheet/"
 ---
 
-# Manifest V3 Cheatsheet
+Manifest V3 Cheatsheet
 
 Quick reference for Chrome Extension developers working with Manifest V3. This cheatsheet covers all essential manifest fields, permissions, and configurations.
 

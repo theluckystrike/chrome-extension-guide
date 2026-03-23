@@ -4,7 +4,7 @@ title: "Chrome Extension DOM Inspector. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-dom-inspector/"
 ---
-# Building a DOM Inspector Extension
+Building a DOM Inspector Extension
 
 This tutorial walks through building a Chrome extension that lets users inspect DOM elements on any webpage, hover to highlight, view element details, and copy selectors.
 

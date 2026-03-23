@@ -5,7 +5,7 @@ description: "Implement runtime internationalization for dynamic translations."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-internationalization-runtime/"
 ---
 
-# Runtime Internationalization Patterns
+Runtime Internationalization Patterns
 
 Beyond `chrome.i18n.getMessage`, Chrome extensions can use modern JavaScript APIs for runtime localization.
 

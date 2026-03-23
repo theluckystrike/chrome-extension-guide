@@ -4,7 +4,7 @@ title: "Chrome Extension Tailwind CSS. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/tailwind-css-extensions/"
 ---
-# Tailwind CSS for Chrome Extensions
+Tailwind CSS for Chrome Extensions
 
 Tailwind CSS brings utility-first styling to Chrome extension development, offering rapid UI with minimal CSS. This guide covers integrating Tailwind into extension contexts while handling unique browser extension constraints.
 

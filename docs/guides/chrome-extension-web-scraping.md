@@ -5,7 +5,7 @@ description: "Build data extraction Chrome extensions using content scripts. Lea
 permalink: /guides/chrome-extension-web-scraping/
 ---
 
-# Chrome Extension Web Scraping: Data Extraction with Content Scripts
+Chrome Extension Web Scraping: Data Extraction with Content Scripts
 
 Web scraping has evolved significantly beyond simple HTTP requests and server-side parsers. Chrome extensions provide a uniquely powerful platform for data extraction, combining the ability to execute JavaScript, render dynamic content, and access authenticated sessions, all within a real browser environment. This comprehensive guide walks you through building solid web scraping extensions using content scripts, handling dynamic content, managing data flow, and following ethical scraping practices.
 

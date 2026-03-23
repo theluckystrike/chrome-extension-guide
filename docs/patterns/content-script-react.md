@@ -5,7 +5,7 @@ description: "Integrate React with content scripts for dynamic DOM manipulation 
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-react/"
 ---
 
-# Integrating React into Chrome Extension Content Scripts
+Integrating React into Chrome Extension Content Scripts
 
 The Challenge {#the-challenge}
 

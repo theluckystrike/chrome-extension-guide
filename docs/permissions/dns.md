@@ -8,7 +8,7 @@ order: 16
 canonical_url: "https://bestchromeextensions.com/permissions/dns/"
 ---
 
-# dns Permission
+dns Permission
 
 Overview {#overview}
 - Permission string: `"dns"`
@@ -106,7 +106,7 @@ if (typeof chrome !== 'undefined' && chrome.dns) {
 }
 ```
 
-Provide Robust Fallbacks
+Provide Solid Fallbacks
 Since the DNS API isn't universally available, implement fallback mechanisms using public DNS-over-HTTPS (DoH) services. This ensures your extension works for all users.
 
 Handle Errors Gracefully

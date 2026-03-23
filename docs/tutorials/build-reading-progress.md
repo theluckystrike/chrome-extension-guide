@@ -4,7 +4,7 @@ title: "Chrome Extension Reading Progress. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-reading-progress/"
 ---
-# Build a Reading Progress Tracker Extension
+Build a Reading Progress Tracker Extension
 
 This tutorial walks through building a Chrome extension that tracks reading progress, saves position, and displays reading statistics.
 
@@ -280,7 +280,7 @@ function isArticlePage() {
 Related Guides {#related-guides}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [Throttle & Debounce Patterns](../patterns/throttle-debounce-extensions.md)
 -e 
 ---

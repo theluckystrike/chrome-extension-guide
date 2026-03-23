@@ -5,7 +5,7 @@ description: "Encrypt data in extension storage for security."
 canonical_url: "https://bestchromeextensions.com/patterns/storage-encryption/"
 ---
 
-# Storage Encryption Pattern
+Storage Encryption Pattern
 
 Overview {#overview}
 

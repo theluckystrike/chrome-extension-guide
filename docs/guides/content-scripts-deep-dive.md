@@ -1,8 +1,8 @@
-# Content Scripts Deep Dive
+Content Scripts detailed look
 
 Content scripts are JavaScript files that run in the context of web pages, allowing extensions to interact with and manipulate the DOM. Unlike background service workers, content scripts operate within the context of the loaded page, giving them direct access to the page's HTML and JavaScript.
 
-## Content Scripts vs Background Scripts
+Content Scripts vs Background Scripts
 
 Understanding the distinction between these two execution contexts is fundamental:
 
@@ -17,9 +17,9 @@ Understanding the distinction between these two execution contexts is fundamenta
 
 Content scripts share the DOM with the page but run in an isolated world, a separate JavaScript execution environment. This means page JavaScript cannot see extension variables, and extension variables cannot directly interact with page JavaScript objects.
 
-## Static vs Programmatic Injection
+Static vs Programmatic Injection
 
-### Static Injection (manifest.json)
+Static Injection (manifest.json)
 
 Declare content scripts in the manifest for automatic injection:
 
@@ -36,7 +36,7 @@ Declare content scripts in the manifest for automatic injection:
 
 Static declarations are simple but inflexible, the script loads every time a matching page loads, with no runtime control.
 
-### Programmatic Injection (chrome.scripting.executeScript)
+Programmatic Injection (chrome.scripting.executeScript)
 
 Inject scripts dynamically from the background service worker:
 
@@ -59,7 +59,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 Programmatic injection offers fine-grained control, you can inject based on user actions, specific conditions, or runtime state. This is the preferred approach for most modern extensions.
 
-### Injecting Functions (Not Just Files)
+Injecting Functions (Not Just Files)
 
 You can inject inline functions for dynamic code:
 
@@ -81,11 +81,11 @@ await chrome.scripting.executeScript({
 
 The function is serialized and executed in the target context, with `args` passed as parameters.
 
-## Match Patterns and Globs
+Match Patterns and Globs
 
 Control which URLs your content scripts run on using match patterns:
 
-### Match Patterns
+Match Patterns
 
 ```json
 {
@@ -105,7 +105,7 @@ Pattern syntax:
 - `` matches any characters across path segments
 - No scheme matches both http and https
 
-### Globs for Complex Matching
+Globs for Complex Matching
 
 Globs provide more granular control with wildcards and exclusions:
 
@@ -127,11 +127,11 @@ Globs provide more granular control with wildcards and exclusions:
 
 Combining `matches`, `globs`, and `exclude_globs` gives precise control over injection targets.
 
-## The run_at Property
+The run_at Property
 
 Control when your content script executes relative to page load:
 
-### document_start
+document_start
 
 Injects before any DOM content is parsed:
 
@@ -156,7 +156,7 @@ style.textContent = `
 document.head.appendChild(style);
 ```
 
-### document_end
+document_end
 
 Injects after the DOM is complete but before subresources:
 
@@ -171,7 +171,7 @@ Use cases:
 - Performance-sensitive operations
 - Working with scripts that run at end of body
 
-### document_idle (Default)
+document_idle (Default)
 
 Injects after `DOMContentLoaded` and when the page is idle:
 
@@ -185,11 +185,11 @@ This is the default and most common choice, safe for most DOM operations.
 
 Use `document_idle` unless you have a specific reason otherwise. It's the safest for general DOM manipulation.
 
-## Isolated World vs Main World
+Isolated World vs Main World
 
 Content scripts run in an isolated world, separate from the page's JavaScript context.
 
-### Isolated World (Default)
+Isolated World (Default)
 
 ```javascript
 // content-script.js
@@ -206,7 +206,7 @@ The isolated world has these characteristics:
 - Can still access DOM (shared with main world)
 - Useful for security, page scripts can't interfere
 
-### Injecting into Main World
+Injecting into Main World
 
 To run code in the page's JavaScript context:
 
@@ -224,11 +224,11 @@ await chrome.scripting.executeScript({
 
 Caution: Code in the MAIN world can be detected by page scripts and may conflict with page JavaScript. Use sparingly.
 
-## Communication: Content Script ↔ Service Worker
+Communication: Content Script ↔ Service Worker
 
 Content scripts communicate with background service workers via message passing.
 
-### Sending from Content Script to Background
+Sending from Content Script to Background
 
 ```javascript
 // content-script.js
@@ -247,7 +247,7 @@ chrome.runtime.sendMessage(
 );
 ```
 
-### Receiving in Background Service Worker
+Receiving in Background Service Worker
 
 ```javascript
 // background.ts
@@ -268,7 +268,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Tab-Specific Communication
+Tab-Specific Communication
 
 For messages related to a specific tab:
 
@@ -280,7 +280,7 @@ chrome.runtime.sendMessage(
 );
 ```
 
-### Long-Lived Connections
+Long-Lived Connections
 
 For continuous communication, use ports:
 
@@ -305,9 +305,9 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-## DOM Manipulation Patterns
+DOM Manipulation Patterns
 
-### Safe DOM Access Patterns
+Safe DOM Access Patterns
 
 ```javascript
 // Wait for element before manipulation
@@ -342,7 +342,7 @@ function waitForElement(selector, timeout = 5000) {
 })();
 ```
 
-### Observer Patterns for Dynamic Content
+Observer Patterns for Dynamic Content
 
 ```javascript
 // React to DOM changes
@@ -363,7 +363,7 @@ observer.observe(document.body, {
 });
 ```
 
-### Best Practices
+Best Practices
 
 1. Check element existence before manipulation:
 ```javascript
@@ -393,9 +393,9 @@ function debounce(fn, delay) {
 }
 ```
 
-## CSS Injection
+CSS Injection
 
-### Programmatic CSS Injection
+Programmatic CSS Injection
 
 ```javascript
 await chrome.scripting.insertCSS({
@@ -410,7 +410,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-### Removing Injected CSS
+Removing Injected CSS
 
 ```javascript
 await chrome.scripting.removeCSS({
@@ -419,7 +419,7 @@ await chrome.scripting.removeCSS({
 });
 ```
 
-### Dynamic Style Injection
+Dynamic Style Injection
 
 ```javascript
 function injectThemeColors(theme) {
@@ -440,11 +440,11 @@ function injectThemeColors(theme) {
 }
 ```
 
-## Shadow DOM for UI Isolation
+Shadow DOM for UI Isolation
 
 Shadow DOM provides style isolation, your extension UI won't be affected by page styles, and page styles won't affect your UI.
 
-### Creating an Isolated Widget
+Creating an Isolated Widget
 
 ```javascript
 function createExtensionWidget() {
@@ -502,7 +502,7 @@ function createExtensionWidget() {
 }
 ```
 
-### Benefits of Shadow DOM
+Benefits of Shadow DOM
 
 1. Style Isolation: Page CSS won't affect your component
 2. No Global Pollution: Your class names won't conflict
@@ -513,11 +513,11 @@ function createExtensionWidget() {
 // Shadow DOM :host styles remain unaffected
 ```
 
-## Complete Working Example
+Complete Working Example
 
 Here's a practical extension that demonstrates these concepts:
 
-### manifest.json
+manifest.json
 
 ```json
 {
@@ -536,7 +536,7 @@ Here's a practical extension that demonstrates these concepts:
 }
 ```
 
-### background.js
+background.js
 
 ```javascript
 // Handle toolbar click
@@ -559,7 +559,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### content-script.js
+content-script.js
 
 ```javascript
 // Create Shadow DOM widget
@@ -646,7 +646,7 @@ document.body.appendChild(host);
 console.log('Annotation widget loaded');
 ```
 
-## Key Takeaways
+Key Takeaways
 
 1. Choose injection method wisely: Static for universal functionality, programmatic for conditional features.
 

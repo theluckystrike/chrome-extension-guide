@@ -5,7 +5,7 @@ description: "Manage storage quotas effectively."
 canonical_url: "https://bestchromeextensions.com/patterns/storage-quota-management/"
 ---
 
-# Storage Quota Management
+Storage Quota Management
 
 Chrome extension storage has strict quota limits that require careful management. This guide covers patterns for effectively managing storage quotas in your extension.
 
@@ -193,7 +193,7 @@ function renderStorageUI(container) {
 
 Related Resources {#related-resources}
 
-- [Storage API Deep Dive](../api-reference/storage-api-deep detailed look.md)
+- [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [IndexedDB for Extensions](../patterns/indexeddb-extensions.md)
 - [Size Limits Reference](../reference/size-limits.md)
 -e 

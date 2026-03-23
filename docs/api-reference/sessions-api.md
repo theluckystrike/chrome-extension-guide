@@ -5,7 +5,7 @@ description: "The Chrome Sessions API queries and restores recently closed tabs 
 canonical_url: "https://bestchromeextensions.com/api-reference/sessions-api/"
 ---
 
-# chrome.sessions API Reference
+chrome.sessions API Reference
 
 The `chrome.sessions` API lets you query and restore recently closed tabs and windows, as well as access tabs from other devices signed into the same Chrome profile.
 

@@ -8,7 +8,7 @@ order: 46
 canonical_url: "https://bestchromeextensions.com/permissions/ttsEngine/"
 ---
 
-# ttsEngine Permission
+ttsEngine Permission
 
 What It Grants {#what-it-grants}
 Allows your extension to register as a text-to-speech engine that other extensions (and Chrome itself) can use via `chrome.tts.speak()`.

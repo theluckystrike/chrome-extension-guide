@@ -4,7 +4,7 @@ title: "Comprehensive Chrome Extension Testing Guide. From Unit Tests to E2E"
 description: "A complete guide to testing Chrome extensions covering unit testing with Jest and Vitest, integration testing with Puppeteer and Playwright, E2E testing for popup and options pages, Chrome API mocking, CI/CD pipelines, visual regression testing, and performance testing strategies."
 canonical_url: "https://bestchromeextensions.com/guides/comprehensive-extension-testing/"
 ---
-# Comprehensive Chrome Extension Testing Guide. From Unit Tests to E2E
+Comprehensive Chrome Extension Testing Guide. From Unit Tests to E2E
 
 Introduction {#introduction}
 

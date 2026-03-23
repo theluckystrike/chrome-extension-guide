@@ -4,7 +4,7 @@ title: "Chrome Extension Webpack Setup. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/webpack-extension-setup/"
 ---
-# Webpack Setup for Chrome Extensions
+Webpack Setup for Chrome Extensions
 
 Overview {#overview}
 

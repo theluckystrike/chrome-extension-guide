@@ -4,7 +4,7 @@ title: "Chrome Extension Security Best Practices. Developer Guide"
 description: "Learn essential security practices for Chrome extensions including CSP configuration, XSS prevention, secure messaging, and credential storage."
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-security/"
 ---
-# Chrome Extension Security Best Practices
+Chrome Extension Security Best Practices
 
 What You'll Build {#what-youll-build}
 - Understand the Chrome extension security threat landscape

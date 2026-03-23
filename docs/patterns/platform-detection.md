@@ -5,7 +5,7 @@ description: "Detect platform and OS for cross-platform extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/platform-detection/"
 ---
 
-# Platform Detection
+Platform Detection
 
 Overview {#overview}
 

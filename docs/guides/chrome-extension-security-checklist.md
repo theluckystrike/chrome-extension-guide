@@ -4,7 +4,7 @@ title: "Chrome Extension Security Checklist. Developer Guide"
 description: "Secure your Chrome extension with this security guide covering best practices, vulnerability prevention, and audit procedures."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-security-checklist/"
 ---
-# Chrome Extension Security Checklist
+Chrome Extension Security Checklist
 
 Use this checklist when developing, auditing, or reviewing a Chrome extension.
 

@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/docs/glossary/"
 date: 2026-03-23
 ---
 
-# Chrome Extension Development Glossary. Key Terms Explained
+Chrome Extension Development Glossary. Key Terms Explained
 
 This glossary provides definitions for the most important Chrome extension development terms. Each term includes a brief explanation and links to related articles for deeper learning.
 

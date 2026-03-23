@@ -8,7 +8,7 @@ tags: [chrome-extension, developer-tools]
 keywords: "animation inspector extension, css animation chrome, transition debugger, chrome animation tool, css keyframe inspector"
 ---
 
-# Build an Animation Inspector Chrome Extension: Complete Developer's Guide
+Build an Animation Inspector Chrome Extension: Complete Developer's Guide
 
 Animation debugging has long been one of the most challenging aspects of web development. Whether you're fine-tuning a subtle hover effect, debugging a complex keyframe sequence, or troubleshooting a transition that refuses to behave as expected, having the right tools can mean the difference between hours of frustration and quick, efficient problem resolution. While Chrome DevTools provides some animation inspection capabilities, building a dedicated animation inspector extension gives you customized control, deeper analysis, and the ability to capture animations exactly how you need them.
 

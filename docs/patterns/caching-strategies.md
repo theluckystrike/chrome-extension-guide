@@ -5,7 +5,7 @@ description: "Implement effective caching strategies for Chrome extensions using
 canonical_url: "https://bestchromeextensions.com/patterns/caching-strategies/"
 ---
 
-# Caching Strategies for Chrome Extensions
+Caching Strategies for Chrome Extensions
 
 Chrome extensions operate under unique constraints: service workers can terminate at
 any moment, content scripts run in isolated worlds, and storage APIs have specific

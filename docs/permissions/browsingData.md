@@ -8,7 +8,7 @@ order: 4
 canonical_url: "https://bestchromeextensions.com/permissions/browsingData/"
 ---
 
-# browsingData Permission
+browsingData Permission
 
 Overview {#overview}
 

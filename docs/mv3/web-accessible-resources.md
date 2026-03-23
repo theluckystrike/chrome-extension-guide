@@ -5,7 +5,7 @@ description: "Configure web accessible resources in Manifest V3 for content scri
 canonical_url: "https://bestchromeextensions.com/mv3/web-accessible-resources/"
 ---
 
-# Web Accessible Resources in Manifest V3
+Web Accessible Resources in Manifest V3
 
 Introduction {#introduction}
 - Files in your extension that web pages and content scripts can access

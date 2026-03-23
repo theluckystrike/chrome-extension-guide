@@ -8,7 +8,7 @@ order: 7
 canonical_url: "https://bestchromeextensions.com/permissions/commands/"
 ---
 
-# commands (Manifest Key)
+commands (Manifest Key)
 
 What It Is {#what-it-is}
 `commands` is a manifest key (not a `permissions` entry) that defines keyboard shortcuts. Enables the `chrome.commands` API.

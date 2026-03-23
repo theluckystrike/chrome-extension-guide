@@ -5,7 +5,7 @@ description: "Use offscreen documents for DOM operations and long-running tasks 
 canonical_url: "https://bestchromeextensions.com/patterns/offscreen-documents/"
 ---
 
-# Offscreen Document Patterns
+Offscreen Document Patterns
 
 Overview {#overview}
 

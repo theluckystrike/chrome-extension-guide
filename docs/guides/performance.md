@@ -4,7 +4,7 @@ title: "Chrome Extension Performance Optimization. Developer Guide"
 description: "Optimize your Chrome extension performance with this guide covering profiling, lazy loading, and memory management."
 canonical_url: "https://bestchromeextensions.com/guides/performance/"
 ---
-# Performance Optimization for Chrome Extensions
+Performance Optimization for Chrome Extensions
 
 Introduction {#introduction}
 - Extensions share browser resources. slow extensions degrade the whole browser

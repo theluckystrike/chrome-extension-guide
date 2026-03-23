@@ -8,7 +8,7 @@ order: 26
 canonical_url: "https://bestchromeextensions.com/permissions/notifications/"
 ---
 
-# notifications Permission Reference
+notifications Permission Reference
 
 What It Does {#what-it-does}
 - Grants access to the `chrome.notifications` API

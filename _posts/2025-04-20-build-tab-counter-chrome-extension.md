@@ -9,7 +9,7 @@ keywords: "chrome extension tab counter, count open tabs chrome, tab counter bad
 canonical_url: "https://bestchromeextensions.com/2025/04/20/build-tab-counter-chrome-extension/"
 ---
 
-# Build a Tab Counter Chrome Extension: Track Your Open Tab Count
+Build a Tab Counter Chrome Extension: Track Your Open Tab Count
 
 If you have ever found yourself drowning in dozens of open browser tabs, you are not alone. The average Chrome user has between 15 and 70 tabs open at any given time, and this number continues to grow as we rely more heavily on web-based workflows. Building a tab counter Chrome extension is one of the most practical projects you can undertake as a Chrome extension developer. Not only does it solve a genuine problem, but it also teaches you fundamental concepts about the Chrome Extension APIs that you will use in virtually every extension you build.
 

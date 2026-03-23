@@ -4,7 +4,7 @@ title: "Chrome Extension Extension Debugging. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/debugging-extensions/"
 ---
-# Debugging Chrome Extensions
+Debugging Chrome Extensions
 
 Introduction {#introduction}
 - Debugging extensions is harder than web apps. multiple contexts, background workers, content scripts

@@ -9,7 +9,7 @@ tags: [browser-ram, chrome-memory, tab-suspender, ram-reduction, browser-perform
 author: theluckystrike
 ---
 
-# Why Your Browser Uses So Much RAM. And How Chrome Extensions Can Help
+Why Your Browser Uses So Much RAM. And How Chrome Extensions Can Help
 
 If you have ever opened just a handful of tabs only to watch your computer's RAM disappear faster than you can load webpages, you are witnessing one of the modern web's most frustrating inefficiencies. Chrome, despite being the most popular browser worldwide, has earned a notorious reputation for consuming massive amounts of memory. Understanding why this happens, and what you can do about it, can transform your browsing experience and free up gigabytes of precious RAM for the applications that actually need it.
 

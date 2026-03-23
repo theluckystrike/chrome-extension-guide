@@ -1,17 +1,17 @@
-# Chrome Extension Event Reference
+Chrome Extension Event Reference
 
 Complete reference for chrome.* events in Chrome Extensions (Manifest V3).
 
-## Overview {#overview}
+Overview {#overview}
 
 Events wake the service worker in MV3. When the worker restarts, top-level listeners are automatically restored.
 
-### Key Principles {#key-principles}
+Key Principles {#key-principles}
 - Register at top level (synchronously)
 - Never register inside async callbacks
 - Listeners persist across restarts
 
-## Event Pattern {#event-pattern}
+Event Pattern {#event-pattern}
 
 ```javascript
 chrome.someApi.onSomeEvent.addListener(callback);
@@ -19,7 +19,7 @@ chrome.someApi.onSomeEvent.removeListener(callback);
 chrome.someApi.onSomeEvent.hasListener(callback);
 ```
 
-## Lifecycle Events {#lifecycle-events}
+Lifecycle Events {#lifecycle-events}
 
 | Event | Description |
 |-------|-------------|
@@ -35,7 +35,7 @@ chrome.runtime.onSuspend.addListener(() => {});
 chrome.runtime.onUpdateAvailable.addListener((d) => {});
 ```
 
-## Messaging Events {#messaging-events}
+Messaging Events {#messaging-events}
 
 | Event | Description |
 |-------|-------------|
@@ -51,7 +51,7 @@ chrome.runtime.onMessageExternal.addListener((msg, sender, sendResponse) => {});
 chrome.runtime.onConnectExternal.addListener((port) => {});
 ```
 
-## Tab Events {#tab-events}
+Tab Events {#tab-events}
 
 | Event | Description |
 |-------|-------------|
@@ -77,7 +77,7 @@ chrome.tabs.onDetached.addListener((id, info) => {});
 chrome.tabs.onReplaced.addListener((added, removed) => {});
 ```
 
-## Tab Group Events {#tab-group-events}
+Tab Group Events {#tab-group-events}
 
 ```javascript
 chrome.tabGroups.onCreated.addListener((g) => {});
@@ -86,7 +86,7 @@ chrome.tabGroups.onRemoved.addListener((g) => {});
 chrome.tabGroups.onMoved.addListener((g) => {});
 ```
 
-## Navigation Events {#navigation-events}
+Navigation Events {#navigation-events}
 
 | Event | Description |
 |-------|-------------|
@@ -106,7 +106,7 @@ chrome.webNavigation.onErrorOccurred.addListener((d) => {});
 chrome.webNavigation.onHistoryStateUpdated.addListener((d) => {});
 ```
 
-## Web Request Events {#web-request-events}
+Web Request Events {#web-request-events}
 
 Requires `webRequest` permission.
 
@@ -123,7 +123,7 @@ chrome.webRequest.onCompleted.addListener((d) => {}, { urls: ['<all_urls>'] });
 chrome.webRequest.onErrorOccurred.addListener((d) => {}, { urls: ['<all_urls>'] });
 ```
 
-## Storage, Alarm, Action Events {#storage-alarm-action-events}
+Storage, Alarm, Action Events {#storage-alarm-action-events}
 
 ```javascript
 chrome.storage.onChanged.addListener((changes, area) => {
@@ -135,7 +135,7 @@ chrome.alarms.onAlarm.addListener((alarm) => console.log(alarm.name));
 chrome.action.onClicked.addListener((tab) => {});
 ```
 
-## Other Notable Events {#other-notable-events}
+Other Notable Events {#other-notable-events}
 
 | API | Events |
 |-----|--------|
@@ -163,9 +163,9 @@ chrome.sessions.onChanged.addListener(() => {});
 chrome.permissions.onAdded.addListener((p) => {});
 ```
 
-## MV3 Event Rules {#mv3-event-rules}
+MV3 Event Rules {#mv3-event-rules}
 
-### Register at Top Level {#register-at-top-level}
+Register at Top Level {#register-at-top-level}
 
 ```javascript
 //  CORRECT
@@ -176,13 +176,13 @@ async function init() { chrome.tabs.onUpdated.addListener((id, info, tab) => {})
 init();
 ```
 
-### Use Filters {#use-filters}
+Use Filters {#use-filters}
 
 ```javascript
 chrome.tabs.onUpdated.addListener((id, info, tab) => {}, { urls: ['*://youtube.com/*'] });
 ```
 
-## Cross-References {#cross-references}
+Cross-References {#cross-references}
 - [Lifecycle Events](./lifecycle-events.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
 - [Service Workers](../mv3/service-workers.md)

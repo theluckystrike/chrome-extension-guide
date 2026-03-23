@@ -5,13 +5,13 @@ description: "Master advanced content script injection patterns in Chrome extens
 canonical_url: "https://bestchromeextensions.com/guides/content-script-injection-patterns/"
 ---
 
-# Content Script Injection Patterns
+Content Script Injection Patterns
 
 Content script injection is the foundation of how Chrome extensions interact with web pages. While basic injection through the manifest works for simple use cases, advanced extension development requires deeper understanding of programmatic injection, CSS manipulation, and Shadow DOM integration. This guide covers sophisticated patterns that enable robust, performant, and secure content script deployment for complex extension architectures.
 
 Table of Contents {#table-of-contents}
 
-- [Programmatic Injection Deep Dive](#programmatic-injection-deep detailed look)
+- [Programmatic Injection detailed look](#programmatic-injection-deep detailed look)
 - [CSS Injection Patterns](#css-injection-patterns)
 - [Shadow DOM Integration](#shadow-dom-integration)
 - [World Types and Isolation](#world-types-and-isolation)
@@ -21,7 +21,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-Programmatic Injection Deep Dive {#programmatic-injection-deep detailed look}
+Programmatic Injection detailed look {#programmatic-injection-deep detailed look}
 
 Programmatic injection using `chrome.scripting.executeScript` provides granular control over when and how content scripts execute. Unlike static manifest declarations, programmatic injection allows runtime decisions based on user actions, page conditions, or extension state.
 

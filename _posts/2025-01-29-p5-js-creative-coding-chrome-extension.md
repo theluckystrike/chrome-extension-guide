@@ -9,7 +9,7 @@ keywords: "p5 js extension, creative coding chrome, generative art extension, p5
 canonical_url: "https://bestchromeextensions.com/2025/01/29/p5-js-creative-coding-chrome-extension/"
 ---
 
-# p5.js Creative Coding in Chrome Extensions: Complete Guide
+p5.js Creative Coding in Chrome Extensions: Complete Guide
 
 Creative coding has revolutionized how we think about web development, art, and interactive experiences. p5.js, the JavaScript library based on Processing, has become the go-to tool for artists, designers, and developers who want to create generative art, data visualizations, and interactive installations. But what happens when you combine the power of p5.js with Chrome extensions? You get a whole new dimension of browser-based creative tools that can run locally, interact with web pages, and provide unique experiences for users.
 

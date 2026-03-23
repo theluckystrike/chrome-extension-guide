@@ -4,7 +4,7 @@ title: "Chrome Extension Screenshot Tool. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-screenshot-tool/"
 ---
-# Build a Screenshot Capture Extension. Full Tutorial
+Build a Screenshot Capture Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Capture visible tab, full page, or selected area

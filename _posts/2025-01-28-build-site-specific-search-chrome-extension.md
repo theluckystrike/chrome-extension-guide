@@ -9,7 +9,7 @@ keywords: "site search extension, custom search chrome, search within site, chro
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-site-specific-search-chrome-extension/"
 ---
 
-# Build a Site-Specific Search Chrome Extension: Complete Developer Guide
+Build a Site-Specific Search Chrome Extension: Complete Developer Guide
 
 Have you ever visited a large website and struggled to find specific information? Perhaps you were on a documentation site trying to locate a particular API reference, or on an e-commerce platform searching for a product in a specific category. The default browser search often fails to deliver relevant results because it searches the entire web, not the specific site you are currently viewing.
 

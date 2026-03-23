@@ -5,7 +5,7 @@ description: "A comprehensive tutorial on building Chrome extension omnibox expe
 canonical_url: "https://bestchromeextensions.com/tutorials/omnibox-api-guide/"
 ---
 
-# Building Omnibox Extensions for Chrome
+Building Omnibox Extensions for Chrome
 
 The Chrome Omnibox API transforms your extension into a powerful command center accessible directly from the address bar. This tutorial walks you through building feature-rich omnibox experiences, from basic keyword registration to advanced search integration with real-time suggestions.
 

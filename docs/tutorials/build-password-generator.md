@@ -4,7 +4,7 @@ title: "Chrome Extension Password Generator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-password-generator/"
 ---
-# Build a Password Generator Extension. Full Tutorial
+Build a Password Generator Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Popup with configurable password options (length, uppercase, lowercase, numbers, symbols)

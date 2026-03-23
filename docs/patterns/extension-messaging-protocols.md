@@ -5,7 +5,7 @@ description: "Design message passing protocols between extension components."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-messaging-protocols/"
 ---
 
-# Extension Messaging Protocols
+Extension Messaging Protocols
 
 Designing structured messaging protocols for Chrome extensions ensures type-safe, maintainable communication between content scripts, background scripts, and popup pages.
 

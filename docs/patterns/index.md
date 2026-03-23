@@ -6,7 +6,7 @@ description: "Proven design patterns and best practices for Chrome extensions. L
 
 # Chrome Extension Design Patterns
 
-Welcome to the Chrome Extension Design Patterns — a comprehensive collection of proven patterns and best practices for building robust, maintainable Chrome extensions. These patterns cover everything from architecture and communication to performance optimization and security.
+Welcome to the Chrome Extension Design Patterns. a comprehensive collection of proven patterns and best practices for building robust, maintainable Chrome extensions. These patterns cover everything from architecture and communication to performance optimization and security.
 
 Whether you need to implement efficient message passing between content scripts and service workers, manage complex state across multiple contexts, or optimize your extension's performance, these patterns provide battle-tested solutions used by professional extension developers. Each pattern includes implementation details, code examples, and guidance on when to use each approach.
 

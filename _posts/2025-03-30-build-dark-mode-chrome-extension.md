@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/03/30/build-dark-mode-chrome-extension/"
 ---
 
-# Build a Dark Mode Chrome Extension: Invert Colors and Apply Themes
+Build a Dark Mode Chrome Extension: Invert Colors and Apply Themes
 
 Dark mode has evolved from a simple aesthetic preference to a crucial accessibility feature that millions of users rely on daily. Whether you're a developer who spends long hours coding or someone sensitive to bright screens, having the ability to build dark mode extension functionality into Chrome can dramatically improve the browsing experience. This comprehensive tutorial will walk you through creating a fully functional dark mode Chrome extension that can invert colors chrome extension style and apply beautiful themes to any website you visit.
 

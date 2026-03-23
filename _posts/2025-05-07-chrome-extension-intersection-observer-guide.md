@@ -9,7 +9,7 @@ keywords: "chrome extension intersection observer, detect visible elements exten
 canonical_url: "https://bestchromeextensions.com/2025/05/07/chrome-extension-intersection-observer-guide/"
 ---
 
-# IntersectionObserver in Chrome Extensions: Detect Visible Elements
+IntersectionObserver in Chrome Extensions: Detect Visible Elements
 
 Modern Chrome extensions often need to detect when elements enter or leave the viewport. Whether you are building a lazy-loading image gallery, tracking user engagement with specific page sections, implementing infinite scroll, or creating an extension that highlights visible content, the IntersectionObserver API is the most efficient and performant solution available.
 

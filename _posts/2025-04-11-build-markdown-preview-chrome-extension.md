@@ -9,7 +9,7 @@ keywords: "chrome extension markdown, markdown preview chrome, build markdown ex
 canonical_url: "https://bestchromeextensions.com/2025/04/11/build-markdown-preview-chrome-extension/"
 ---
 
-# Build a Markdown Preview Chrome Extension: Live Rendering in Browser
+Build a Markdown Preview Chrome Extension: Live Rendering in Browser
 
 Markdown has become the de facto standard for writing documentation, notes, and content across the internet. Whether you are a developer documenting code, a technical writer creating user guides, or a content creator drafting articles, Markdown provides a clean and efficient way to format text without the complexity of HTML. However, one of the persistent challenges with Markdown is the inability to see how your content will look in real-time. This is where building a markdown preview Chrome extension becomes invaluable.
 

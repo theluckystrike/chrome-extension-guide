@@ -5,7 +5,7 @@ description: "Learn how Chrome extensions handle cross-origin requests in Manife
 canonical_url: "https://bestchromeextensions.com/guides/cross-origin-requests/"
 ---
 
-# Chrome Extension Cross-Origin Requests
+Chrome Extension Cross-Origin Requests
 
 Overview {#overview}
 

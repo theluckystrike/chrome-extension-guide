@@ -4,7 +4,7 @@ title: "Chrome Extension Accessibility Checker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-accessibility-checker/"
 ---
-# Build an Accessibility Checker Extension
+Build an Accessibility Checker Extension
 
 What You'll Build {#what-youll-build}
 - Scan any web page for common accessibility issues

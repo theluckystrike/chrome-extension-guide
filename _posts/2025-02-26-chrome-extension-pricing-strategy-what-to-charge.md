@@ -8,7 +8,7 @@ tags: [extension-pricing, pricing-strategy, saas-pricing, chrome-extension-busin
 author: theluckystrike
 ---
 
-# Chrome Extension Pricing Strategy. What to Charge and Why
+Chrome Extension Pricing Strategy. What to Charge and Why
 
 Pricing is arguably the most consequential decision you'll make for your Chrome extension business. Get it wrong, and even an excellent product will fail to generate revenue. Get it right, and you build a sustainable business that funds ongoing development while delivering genuine value to users. Yet pricing remains one of the most underdiscussed topics in the extension ecosystem, most developers guess rather than strategize.
 

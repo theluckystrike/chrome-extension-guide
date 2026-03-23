@@ -4,7 +4,7 @@ title: "Chrome Extension Safari Porting. Developer Guide"
 description: "Learn Chrome extension safari porting with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-safari-porting/"
 ---
-# Porting Chrome Extensions to Safari Web Extensions
+Porting Chrome Extensions to Safari Web Extensions
 
 Safari Web Extensions allow you to bring your Chrome extension to Safari on macOS and iOS. While Safari uses a WebExtensions API layer similar to Chrome, there are important differences in tooling, distribution, and API support that you need to understand.
 

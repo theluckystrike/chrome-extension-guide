@@ -8,7 +8,7 @@ order: 28
 canonical_url: "https://bestchromeextensions.com/permissions/pageCapture/"
 ---
 
-# pageCapture Permission
+pageCapture Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.pageCapture` API for saving complete web pages as MHTML files.

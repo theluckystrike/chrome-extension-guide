@@ -8,7 +8,7 @@ order: 47
 canonical_url: "https://bestchromeextensions.com/permissions/unlimitedStorage/"
 ---
 
-# unlimitedStorage Permission
+unlimitedStorage Permission
 
 What It Grants {#what-it-grants}
 Removes the quota limits on `chrome.storage.local`, IndexedDB, Cache API, and other client-side storage used by the extension. Without it, `chrome.storage.local` is limited to ~10 MB.

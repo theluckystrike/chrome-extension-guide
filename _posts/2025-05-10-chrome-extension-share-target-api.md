@@ -9,7 +9,7 @@ keywords: "chrome extension share target, share to extension chrome, receive sha
 canonical_url: "https://bestchromeextensions.com/2025/05/10/chrome-extension-share-target-api/"
 ---
 
-# Chrome Extension Share Target API: Receive Shared Content from Other Apps
+Chrome Extension Share Target API: Receive Shared Content from Other Apps
 
 The Chrome Extension Share Target API represents one of the most powerful yet underutilized features available to extension developers today. This API enables your Chrome extension to appear in the native share sheet on both desktop and mobile devices, allowing users to send content directly from any application to your extension with a single tap. Whether you want to create a bookmarking tool that saves articles from anywhere, a note-taking app that captures text snippets, or a productivity extension that organizes shared links, the Share Target API provides the foundation you need to build smooth integration with the broader ecosystem of apps on your users' devices.
 

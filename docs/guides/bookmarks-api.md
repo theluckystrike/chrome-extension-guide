@@ -5,7 +5,7 @@ description: "A comprehensive guide to using the Chrome Bookmarks API in extensi
 canonical_url: "https://bestchromeextensions.com/guides/bookmarks-api/"
 ---
 
-# Chrome Extension Bookmarks API. How to Create, Search, and Organize Bookmarks
+Chrome Extension Bookmarks API. How to Create, Search, and Organize Bookmarks
 
 The Chrome Bookmarks API (`chrome.bookmarks`) is a powerful extension API that enables your Chrome extension to create, read, update, and delete bookmarks, as well as organize them into folders. This guide covers everything you need to build bookmark management features into your extension.
 

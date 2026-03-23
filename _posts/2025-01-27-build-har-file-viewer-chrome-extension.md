@@ -9,7 +9,7 @@ keywords: "har viewer extension, network trace chrome, http archive viewer"
 canonical_url: "https://bestchromeextensions.com/2025/01/27/build-har-file-viewer-chrome-extension/"
 ---
 
-# Build an HAR File Viewer Chrome Extension: Complete Developer's Guide
+Build an HAR File Viewer Chrome Extension: Complete Developer's Guide
 
 The HTTP Archive format (HAR) is the industry standard for capturing network traffic data. If you have ever used Chrome DevTools Network tab, you have already interacted with HAR files. they are the JSON-based format that stores every network request and response made by your browser. Building a har viewer extension allows you to create a powerful developer tool that can parse, visualize, and analyze network traces directly in the browser.
 

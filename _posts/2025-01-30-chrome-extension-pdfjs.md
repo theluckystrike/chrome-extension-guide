@@ -9,7 +9,7 @@ keywords: "pdf js extension, pdf viewer chrome, document reader extension"
 canonical_url: "https://bestchromeextensions.com/2025/01/30/chrome-extension-pdfjs/"
 ---
 
-# PDF.js Document Viewer in Chrome Extensions: Complete Implementation Guide
+PDF.js Document Viewer in Chrome Extensions: Complete Implementation Guide
 
 PDF.js is Mozilla's JavaScript library for rendering PDF documents directly in web browsers, and it has become the gold standard for embedding PDF viewing capabilities into Chrome extensions. Whether you're building a document reader extension, a PDF annotation tool, or integrating PDF support into your existing Chrome extension, PDF.js provides a robust, feature-rich solution that works smoothly within the Chrome extension environment.
 

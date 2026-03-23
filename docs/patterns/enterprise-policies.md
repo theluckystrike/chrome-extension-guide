@@ -5,7 +5,7 @@ description: "Support enterprise deployment with Chrome policies."
 canonical_url: "https://bestchromeextensions.com/patterns/enterprise-policies/"
 ---
 
-# Enterprise Policy Patterns for Chrome Extensions
+Enterprise Policy Patterns for Chrome Extensions
 
 Enterprise environments impose strict requirements on Chrome extensions: managed configuration, forced installation, policy-driven feature flags, and compliance logging. This guide covers eight patterns for building extensions that integrate cleanly with Google Admin Console and enterprise policy infrastructure.
 

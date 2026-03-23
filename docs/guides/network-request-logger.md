@@ -1,8 +1,8 @@
-# Building a Network Request Logger Chrome Extension
+Building a Network Request Logger Chrome Extension
 
 A network request logger captures and displays HTTP requests made by the browser, enabling developers to debug API calls, monitor traffic, and analyze network behavior. This guide covers building a production-ready Network Request Logger extension using Chrome's webRequest API and modern TypeScript patterns.
 
-## Architecture Overview
+Architecture Overview
 
 The extension consists of three main components: service worker (central hub for webRequest events), content scripts (page overlays), and popup/side panel (UI display).
 
@@ -19,7 +19,7 @@ The extension consists of three main components: service worker (central hub for
                         
 ```
 
-## Manifest Configuration
+Manifest Configuration
 
 ```json
 {
@@ -36,9 +36,9 @@ The extension consists of three main components: service worker (central hub for
 }
 ```
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Types
+Types
 
 ```typescript
 // src/types/network.ts
@@ -55,7 +55,7 @@ export interface FilterOptions { urlPattern?: string; methods?: string[]; status
 export interface LoggerConfig { maxRequests: number; captureRequestBody: boolean; autoRecord: boolean; filters: FilterOptions; }
 ```
 
-### Service Worker
+Service Worker
 
 ```typescript
 // src/background/service-worker.ts
@@ -135,7 +135,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-## UI Design (Popup)
+UI Design (Popup)
 
 ```typescript
 // src/popup/popup.ts
@@ -188,7 +188,7 @@ class PopupController {
 document.addEventListener('DOMContentLoaded', () => new PopupController());
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => new PopupController());
 
 webRequest is observe-only in MV3. Use declarativeNetRequest for blocking capabilities.
 
-## State Management
+State Management
 
 ```typescript
 // src/background/storage.ts
@@ -212,7 +212,7 @@ export class StorageManager {
 }
 ```
 
-## Error Handling
+Error Handling
 
 ```typescript
 // src/utils/error-handler.ts
@@ -236,7 +236,7 @@ export class ErrorHandler {
 }
 ```
 
-## Testing Strategy
+Testing Strategy
 
 Unit tests with Jest:
 ```typescript
@@ -262,7 +262,7 @@ describe('NetworkLogger', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
 1. Debounce message passing - Batch updates every 100ms instead of individual messages
 2. Limit in-memory storage - Prune requests beyond configured maximum (default 1000)
@@ -270,7 +270,7 @@ describe('NetworkLogger', () => {
 4. Lazy load details - Fetch full request details only when expanded
 5. Virtualize long lists - Use virtualization for 1000+ items in UI
 
-## Publishing Checklist
+Publishing Checklist
 
 - [ ] Manifest version 3 with all required fields
 - [ ] Minimal permissions - only request what's needed
@@ -282,6 +282,6 @@ describe('NetworkLogger', () => {
 - [ ] Service worker handles lifecycle events
 - [ ] Extension works after reload
 
-## Conclusion
+Conclusion
 
 Building a network request logger requires careful consideration of Chrome's MV3 architecture. Use webRequest for observation, implement proper TypeScript typing, design for service worker lifecycle management, consider privacy implications, and test thoroughly across browsers. This guide provides a production-ready foundation for capturing network traffic efficiently while maintaining good performance.

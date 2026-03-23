@@ -1,4 +1,4 @@
-# Package Catalog
+Package Catalog
 
 Complete catalog of all `@theluckystrike` packages for Chrome extension development.
 
@@ -6,7 +6,7 @@ Install any package with: `npm install @theluckystrike/<package-name>`
 
 ---
 
-## Storage {#storage}
+Storage {#storage}
 
 | Package | Description |
 |
@@ -19,7 +19,7 @@ date: 2026-03-23
 | [webext-data-sync](#webext-data-sync) | IndexedDB data sync |
 | [chrome-sync-engine](#chrome-sync-engine) | Two-way storage sync |
 
-### webext-storage {#webext-storage}
+webext-storage {#webext-storage}
 
 Typed Chrome storage wrapper with schema validation.
 
@@ -33,7 +33,7 @@ npm install @theluckystrike/webext-storage
 - `createStorage()` factory returns typed get/set/watch interface
 - Supports `local` and `sync` storage areas
 
-### chrome-storage-typed {#chrome-storage-typed}
+chrome-storage-typed {#chrome-storage-typed}
 
 Type-safe wrapper for Chrome storage API with automatic serialization.
 
@@ -47,7 +47,7 @@ npm install @theluckystrike/chrome-storage-typed
 - Watch for storage changes with typed callbacks
 - Sync quota constants and `getBytesInUse()` helper
 
-### chrome-storage-plus {#chrome-storage-plus}
+chrome-storage-plus {#chrome-storage-plus}
 
 Type-safe Chrome extension storage with schema validation, data migrations, and reactive subscriptions.
 
@@ -61,7 +61,7 @@ npm install @theluckystrike/chrome-storage-plus
 - Reactive subscriptions for real-time UI updates
 - Built-in quota management and zero dependencies
 
-### webext-reactive-store {#webext-reactive-store}
+webext-reactive-store {#webext-reactive-store}
 
 Reactive state store for Chrome extensions.
 
@@ -75,7 +75,7 @@ npm install @theluckystrike/webext-reactive-store
 - Middleware support for logging and persistence
 - Works across background, popup, and content scripts
 
-### webext-data-sync {#webext-data-sync}
+webext-data-sync {#webext-data-sync}
 
 IndexedDB data sync for Chrome extensions.
 
@@ -89,7 +89,7 @@ npm install @theluckystrike/webext-data-sync
 - Conflict resolution strategies
 - Offline-first with automatic reconnection
 
-### chrome-sync-engine {#chrome-sync-engine}
+chrome-sync-engine {#chrome-sync-engine}
 
 Two-way storage sync engine.
 

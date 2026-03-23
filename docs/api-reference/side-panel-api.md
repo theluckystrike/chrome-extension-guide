@@ -5,7 +5,7 @@ description: "The Chrome Side Panel API provides a persistent side panel UI that
 canonical_url: "https://bestchromeextensions.com/api-reference/side-panel-api/"
 ---
 
-# chrome.sidePanel API Reference
+chrome.sidePanel API Reference
 
 The `chrome.sidePanel` API provides a persistent side panel UI that displays alongside web content. Introduced in Chrome 114, it offers a more integrated experience than popups for extensions that need to display information while users browse.
 

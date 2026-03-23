@@ -1,8 +1,8 @@
-# Enterprise Chrome Extension Deployment
+Enterprise Chrome Extension Deployment
 
 This guide covers deploying Chrome extensions in enterprise environments using managed storage, force-installation, Group Policy, MDM, and other enterprise-grade deployment mechanisms.
 
-## Table of Contents
+Table of Contents
 
 1. [Managed Storage with chrome.storage.managed](#managed-storage-with-chromestoragemanaged)
 2. [Force-Installing Extensions via Google Admin Console](#force-installing-extensions-via-google-admin-console)
@@ -19,17 +19,17 @@ This guide covers deploying Chrome extensions in enterprise environments using m
 
 ---
 
-## Managed Storage with chrome.storage.managed
+Managed Storage with chrome.storage.managed
 
 The `chrome.storage.managed` API allows IT administrators to push configuration to extensions via enterprise policies. Unlike `chrome.storage.local` and `chrome.storage.sync`, managed storage is read-only from the extension's perspective, users cannot modify these values.
 
-### How It Works
+How It Works
 
 1. Administrator defines policies in the Google Admin Console or via Group Policy
 2. Chrome pushes these policies to the extension at runtime
 3. Extension reads configuration from `chrome.storage.managed`
 
-### manifest.json Configuration
+manifest.json Configuration
 
 ```json
 {
@@ -59,7 +59,7 @@ The `chrome.storage.managed` API allows IT administrators to push configuration 
 }
 ```
 
-### Reading Managed Storage
+Reading Managed Storage
 
 ```javascript
 // background.js - Reading managed storage
@@ -81,7 +81,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-### Best Practices
+Best Practices
 
 - Always handle the case where managed storage is not available
 - Validate configuration schema at runtime

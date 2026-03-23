@@ -4,7 +4,7 @@ title: "Chrome Extension Messaging Quickstart. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/messaging-quickstart/"
 ---
-# Messaging Quickstart
+Messaging Quickstart
 
 Overview {#overview}
 

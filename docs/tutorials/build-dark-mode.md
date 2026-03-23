@@ -4,7 +4,7 @@ title: "Chrome Extension Dark Mode. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-dark-mode/"
 ---
-# Build a Dark Mode Toggle Extension. Full Tutorial
+Build a Dark Mode Toggle Extension. Full Tutorial
 
 Creating a dark mode extension is one of the most practical projects you can build for Chrome. This tutorial walks you through building a complete dark mode toggle that works on any website, respects per-site preferences, and provides a smooth user experience. By the end, you'll understand how to use the Chrome Scripting API, manage per-site storage, and handle real-time updates across extension contexts.
 

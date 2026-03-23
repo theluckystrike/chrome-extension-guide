@@ -8,7 +8,7 @@ order: 6
 canonical_url: "https://bestchromeextensions.com/permissions/clipboardWrite/"
 ---
 
-# clipboardWrite Permission
+clipboardWrite Permission
 
 What It Grants {#what-it-grants}
 Allows the extension to write content to the system clipboard using `navigator.clipboard.writeText()` or `document.execCommand('copy')`.

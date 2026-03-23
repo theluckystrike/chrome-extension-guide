@@ -5,7 +5,7 @@ description: "Request permissions progressively with permission gating patterns.
 canonical_url: "https://bestchromeextensions.com/patterns/permission-gating/"
 ---
 
-# Permission Gating UI Patterns
+Permission Gating UI Patterns
 
 Guide for implementing UI patterns that gate features behind optional permissions in Chrome extensions.
 

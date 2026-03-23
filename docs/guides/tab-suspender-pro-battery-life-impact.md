@@ -7,7 +7,7 @@ canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-b
 
 ---
 
-# How Tab Suspension Extends Laptop Battery Life by 2+ Hours
+How Tab Suspension Extends Laptop Battery Life by 2+ Hours
 
 If you use your laptop for work or travel, you've likely experienced the frustration of watching your battery drain far faster than expected. While screen brightness and background applications are known battery culprits, there's a hidden consumer lurking in your browser: dozens of open Chrome tabs consuming CPU cycles even when you're not using them.
 

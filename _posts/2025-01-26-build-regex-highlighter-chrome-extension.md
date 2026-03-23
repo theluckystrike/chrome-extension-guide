@@ -9,7 +9,7 @@ keywords: "regex highlighter extension, pattern matcher chrome, regex helper, ch
 canonical_url: "https://bestchromeextensions.com/2025/01/26/build-regex-highlighter-chrome-extension/"
 ---
 
-# Build a Regex Highlighter Chrome Extension
+Build a Regex Highlighter Chrome Extension
 
 Regular expressions are one of the most powerful tools in a developer's toolkit. Whether you are validating input, parsing logs, searching through code, or extracting data, regex patterns provide unmatched flexibility. However, working with complex regex patterns can be challenging without visual feedback. A regex highlighter extension for Chrome can transform this process, giving developers instant visual confirmation of pattern matches across any webpage. This comprehensive guide will walk you through building a complete regex highlighter Chrome extension from scratch using Manifest V3.
 

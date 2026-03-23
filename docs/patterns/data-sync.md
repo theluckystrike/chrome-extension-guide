@@ -5,7 +5,7 @@ description: "Sync extension data across devices with sync storage."
 canonical_url: "https://bestchromeextensions.com/patterns/data-sync/"
 ---
 
-# Data Synchronization Patterns
+Data Synchronization Patterns
 
 Overview {#overview}
 

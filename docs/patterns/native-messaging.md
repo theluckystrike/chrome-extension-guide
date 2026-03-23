@@ -5,7 +5,7 @@ description: "Communicate with native applications via native messaging."
 canonical_url: "https://bestchromeextensions.com/patterns/native-messaging/"
 ---
 
-# Native Messaging Patterns
+Native Messaging Patterns
 
 Overview {#overview}
 Native messaging enables Chrome extensions to communicate with native applications. Two modes:

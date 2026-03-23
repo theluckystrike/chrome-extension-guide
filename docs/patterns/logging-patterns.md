@@ -5,7 +5,7 @@ description: "Master logging patterns for debugging Chrome extensions across ser
 canonical_url: "https://bestchromeextensions.com/patterns/logging-patterns/"
 ---
 
-# Logging Patterns for Chrome Extensions
+Logging Patterns for Chrome Extensions
 
 Effective logging is essential for debugging Chrome extensions, where code runs across
 multiple contexts -- service workers, content scripts, popups, and DevTools panels.

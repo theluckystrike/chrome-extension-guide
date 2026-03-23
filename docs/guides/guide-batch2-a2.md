@@ -1,12 +1,12 @@
-# PDF Handling in Chrome Extensions
+PDF Handling in Chrome Extensions
 
-## Introduction
+Introduction
 
 PDF handling in Chrome extensions opens up powerful possibilities for document processing, from viewing and annotation to extraction and conversion. Whether you're building a document viewer, form filler, or PDF analyzer, understanding the available APIs and libraries is essential for creating solid extension functionality.
 
 This guide covers the architecture, libraries, and patterns for handling PDFs effectively in Chrome extensions using TypeScript.
 
-## Understanding PDF Handling Approaches
+Understanding PDF Handling Approaches
 
 Chrome extensions can handle PDFs in several ways, each with distinct trade-offs:
 
@@ -17,7 +17,7 @@ Chrome extensions can handle PDFs in several ways, each with distinct trade-offs
 
 Choose based on your use case: viewing needs PDF.js, modification needs PDF-lib, and complex analysis might need backend support.
 
-## Architecture Overview
+Architecture Overview
 
 ```
 
@@ -34,17 +34,17 @@ Choose based on your use case: viewing needs PDF.js, modification needs PDF-lib,
 
 ```
 
-## Using PDF.js for Rendering
+Using PDF.js for Rendering
 
 PDF.js is the most popular library for rendering PDFs in the browser. It runs entirely client-side and works well within Chrome extension contexts.
 
-### Installation
+Installation
 
 ```bash
 npm install pdfjs-dist
 ```
 
-### Basic PDF Rendering in Content Script
+Basic PDF Rendering in Content Script
 
 ```typescript
 // content/pdf-renderer.ts
@@ -110,7 +110,7 @@ async function loadPDFFromTab(tabId: number): Promise<ArrayBuffer | null> {
 }
 ```
 
-### Handling Large PDFs Efficiently
+Handling Large PDFs Efficiently
 
 ```typescript
 // content/pdf-viewer.ts
@@ -165,17 +165,17 @@ class PDFViewer {
 }
 ```
 
-## Using PDF-lib for PDF Modification
+Using PDF-lib for PDF Modification
 
 PDF-lib enables creating and modifying PDFs directly in the browser. This is powerful for features like form filling, watermarking, and merging.
 
-### Installation
+Installation
 
 ```bash
 npm install pdf-lib
 ```
 
-### Creating and Modifying PDFs
+Creating and Modifying PDFs
 
 ```typescript
 // background/pdf-editor.ts
@@ -281,7 +281,7 @@ class PDFEditor {
 }
 ```
 
-## Text Extraction with PDF.js
+Text Extraction with PDF.js
 
 For extracting text from PDFs, PDF.js provides the getTextContent method:
 
@@ -357,7 +357,7 @@ class PDFTextExtractor {
 }
 ```
 
-## Handling PDF Downloads and Storage
+Handling PDF Downloads and Storage
 
 Chrome extensions have specific APIs for handling file downloads and storage:
 
@@ -434,7 +434,7 @@ class PDFDownloadManager {
 }
 ```
 
-## Message Passing for PDF Operations
+Message Passing for PDF Operations
 
 Coordinate PDF operations between content scripts and background worker:
 
@@ -480,7 +480,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-## Manifest Permissions
+Manifest Permissions
 
 Configure your manifest for PDF handling:
 
@@ -504,9 +504,9 @@ Configure your manifest for PDF handling:
 }
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### Lazy Loading
+Lazy Loading
 
 ```typescript
 class LazyPDFLoader {
@@ -529,7 +529,7 @@ class LazyPDFLoader {
 }
 ```
 
-### Web Workers
+Web Workers
 
 PDF.js uses web workers for parsing. Ensure workers are properly loaded:
 
@@ -539,7 +539,7 @@ const workerSrc = chrome.runtime.getURL('assets/pdf.worker.min.mjs');
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
 ```
 
-## Error Handling
+Error Handling
 
 ```typescript
 async function safePDFOperation<T>(
@@ -562,7 +562,7 @@ async function safePDFOperation<T>(
 }
 ```
 
-## Best Practices Summary
+Best Practices Summary
 
 PDF handling in Chrome extensions requires careful architecture decisions. Use PDF.js for rendering and text extraction, as it runs entirely client-side with no server dependency. Use PDF-lib for document modification like form filling, watermarking, and merging. Implement proper error handling for corrupted or password-protected PDFs, and always consider performance when handling large documents by implementing lazy loading and page prefetching.
 

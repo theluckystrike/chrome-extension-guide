@@ -5,7 +5,7 @@ description: "Master state management in Chrome extensions with chrome.storage A
 canonical_url: "https://bestchromeextensions.com/tutorials/state-management-patterns/"
 ---
 
-# State Management Patterns for Chrome Extensions
+State Management Patterns for Chrome Extensions
 
 Overview {#overview}
 

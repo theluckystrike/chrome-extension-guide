@@ -9,7 +9,7 @@ keywords: "mv2 to mv3 checklist, manifest v2 deprecation, chrome extension migra
 canonical_url: "https://bestchromeextensions.com/2025/01/18/migrating-chrome-extension-manifest-v2-v3-checklist/"
 ---
 
-# Migrating Chrome Extension from Manifest V2 to V3 Checklist
+Migrating Chrome Extension from Manifest V2 to V3 Checklist
 
 With Google enforcing the transition from Manifest V2 to Manifest V3, extension developers must migrate their existing extensions to remain functional in Chrome. This comprehensive checklist provides a systematic approach to ensure you cover every critical step during the migration process. Whether you're managing a simple utility extension or a complex enterprise tool, following this checklist will help you avoid common pitfalls and successfully complete your migration.
 

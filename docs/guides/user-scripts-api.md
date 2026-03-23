@@ -5,7 +5,7 @@ description: "A comprehensive developer guide for using the chrome.userScripts A
 canonical_url: "https://bestchromeextensions.com/guides/user-scripts-api/"
 ---
 
-# Chrome Extension User Scripts API. How to Inject User-Provided Scripts
+Chrome Extension User Scripts API. How to Inject User-Provided Scripts
 
 Overview {#overview}
 

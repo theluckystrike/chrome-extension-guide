@@ -9,7 +9,7 @@ keywords: "image gallery extension, photo viewer chrome, image collection extens
 canonical_url: "https://bestchromeextensions.com/2025/01/22/build-image-gallery-chrome-extension/"
 ---
 
-# Build an Image Gallery Chrome Extension: Complete Developer's Guide
+Build an Image Gallery Chrome Extension: Complete Developer's Guide
 
 Creating an image gallery Chrome extension is one of the most rewarding projects you can undertake as a web developer. Whether you want to help users organize their favorite photos from across the web, create a powerful photo viewer chrome extension, or build an image collection extension that aggregates visual content, this comprehensive guide will walk you through every step of the development process.
 

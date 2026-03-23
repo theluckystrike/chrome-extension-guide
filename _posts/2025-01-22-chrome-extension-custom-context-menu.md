@@ -9,7 +9,7 @@ keywords: "custom context menu, right click extension, context menu api chrome, 
 canonical_url: "https://bestchromeextensions.com/2025/01/22/chrome-extension-custom-context-menu/"
 ---
 
-# Build Custom Context Menu Chrome Extension: Complete Guide
+Build Custom Context Menu Chrome Extension: Complete Guide
 
 The Chrome Context Menu API is one of the most powerful features available for extension developers, allowing you to add custom options to the right-click menu that appears when users right-click on pages, links, images, or other elements in Chrome. Whether you want to create a quick action to save selected text, translate foreign language content, search selected terms in different services, or perform any number of other useful operations, understanding how to properly implement the chrome.contextMenus API is essential for building extensions that feel integrated and intuitive.
 

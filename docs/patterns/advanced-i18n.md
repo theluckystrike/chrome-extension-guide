@@ -5,7 +5,7 @@ description: "Advanced internationalization patterns for multi-language extensio
 canonical_url: "https://bestchromeextensions.com/patterns/advanced-i18n/"
 ---
 
-# Advanced Internationalization Patterns
+Advanced Internationalization Patterns
 
 Overview {#overview}
 

@@ -5,7 +5,7 @@ description: "Master Chrome extension release management. Learn versioning, stag
 permalink: /guides/chrome-extension-release-management/
 ---
 
-# Chrome Extension Release Management
+Chrome Extension Release Management
 
 Release management for Chrome extensions requires careful planning and execution. Unlike traditional web applications where you can deploy instant fixes, extensions live on users' machines and must go through the Chrome Web Store (CWS) review process. This guide covers the complete release lifecycle from versioning strategy to hotfixes and migration planning.
 

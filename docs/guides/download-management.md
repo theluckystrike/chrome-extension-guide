@@ -4,7 +4,7 @@ title: "Chrome Extension Download Management. Developer Guide"
 description: "Learn Chrome extension download management with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/download-management/"
 ---
-# Download Management in Chrome Extensions
+Download Management in Chrome Extensions
 
 chrome.downloads API Overview {#chromedownloads-api-overview}
 - Requires `"downloads"` permission (cross-ref `docs/permissions/downloads.md`)

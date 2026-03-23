@@ -8,7 +8,7 @@ order: 41
 canonical_url: "https://bestchromeextensions.com/permissions/tabCapture/"
 ---
 
-# tabCapture Permission
+tabCapture Permission
 
 What It Grants {#what-it-grants}
 Access to the `chrome.tabCapture` API for capturing the visible area of a tab as a media stream (audio and/or video).

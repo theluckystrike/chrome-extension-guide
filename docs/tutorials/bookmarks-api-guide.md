@@ -5,7 +5,7 @@ description: "A comprehensive tutorial on using the Chrome Bookmarks API in exte
 canonical_url: "https://bestchromeextensions.com/tutorials/bookmarks-api-guide/"
 ---
 
-# Working with Bookmarks in Chrome Extensions
+Working with Bookmarks in Chrome Extensions
 
 Overview {#overview}
 

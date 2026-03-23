@@ -5,7 +5,7 @@ description: "The Chrome DevTools API extends Chrome Developer Tools with custom
 canonical_url: "https://bestchromeextensions.com/api-reference/devtools-api/"
 ---
 
-# chrome.devtools API Reference
+chrome.devtools API Reference
 
 The `chrome.devtools` API extends Chrome DevTools with custom panels, sidebars, and network tools.
 

@@ -8,7 +8,7 @@ tags: [manifest-v3, service-worker-patterns, chrome-extensions, background-scrip
 author: theluckystrike
 ---
 
-# Manifest V3 Service Worker Patterns and Anti-Patterns
+Manifest V3 Service Worker Patterns and Anti-Patterns
 
 If you've migrated a Chrome extension from Manifest V2 to V3, you've likely encountered the service worker, the replacement for background pages. While service workers bring improved memory management and a more modern architecture, they also introduce a fundamentally different execution model that can break assumptions developers made about background scripts.
 

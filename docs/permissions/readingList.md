@@ -8,7 +8,7 @@ order: 33
 canonical_url: "https://bestchromeextensions.com/permissions/readingList/"
 ---
 
-# readingList Permission
+readingList Permission
 
 Overview {#overview}
 

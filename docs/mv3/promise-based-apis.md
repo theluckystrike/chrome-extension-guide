@@ -5,7 +5,7 @@ description: "Master promise-based APIs in Manifest V3 for asynchronous operatio
 canonical_url: "https://bestchromeextensions.com/mv3/promise-based-apis/"
 ---
 
-# Promise-Based APIs in MV3
+Promise-Based APIs in MV3
 
 A comprehensive guide to migrating from callback-based Chrome extension APIs to promise-based patterns in Manifest V3.
 

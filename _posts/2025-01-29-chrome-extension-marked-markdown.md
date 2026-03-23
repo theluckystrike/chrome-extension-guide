@@ -9,7 +9,7 @@ keywords: "marked js extension, markdown render chrome, md viewer extension, mar
 canonical_url: "https://bestchromeextensions.com/2025/01/29/chrome-extension-marked-markdown/"
 ---
 
-# Marked.js Markdown in Chrome Extensions: Complete Implementation Guide
+Marked.js Markdown in Chrome Extensions: Complete Implementation Guide
 
 If you are building a Chrome extension that needs to display Markdown content, you have probably discovered that raw Markdown is difficult for users to read. Whether you are creating an MD viewer extension, building a documentation reader, or developing a note-taking app that works with Markdown files, rendering Markdown properly is essential for providing a great user experience. This is where Marked.js comes in, a fast, reliable, and feature-rich Markdown parser that integrates smoothly with Chrome extensions.
 

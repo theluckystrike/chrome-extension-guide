@@ -5,7 +5,7 @@ description: "Implement keyboard shortcuts in Chrome extensions. Learn the Comma
 permalink: /guides/chrome-extension-keyboard-shortcuts/
 ---
 
-# Chrome Extension Keyboard Shortcuts: Commands API & Custom Hotkeys
+Chrome Extension Keyboard Shortcuts: Commands API & Custom Hotkeys
 
 Keyboard shortcuts represent one of the most powerful features for transforming a good Chrome extension into an indispensable tool for power users. When implemented thoughtfully, shortcuts can dramatically reduce the friction between user intent and action, turning what would be multiple clicks into a single keystroke combination. This comprehensive guide covers everything you need to know about implementing keyboard shortcuts in Chrome extensions, from basic Commands API usage to advanced chord patterns and accessibility considerations.
 

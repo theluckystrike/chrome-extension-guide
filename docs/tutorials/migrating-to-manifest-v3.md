@@ -5,7 +5,7 @@ description: "A comprehensive step-by-step tutorial for migrating Chrome extensi
 canonical_url: "https://bestchromeextensions.com/tutorials/migrating-to-manifest-v3/"
 ---
 
-# Migrating Your Chrome Extension from Manifest V2 to V3
+Migrating Your Chrome Extension from Manifest V2 to V3
 
 Google began disabling Manifest V2 extensions in June 2024, with full removal from the stable channel in October 2024. If you haven't migrated your extension to Manifest V3 (MV3) yet, now is the time. This guide walks you through every aspect of the migration process.
 

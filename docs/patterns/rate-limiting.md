@@ -5,7 +5,7 @@ description: "Implement rate limiting to prevent API abuse and throttling."
 canonical_url: "https://bestchromeextensions.com/patterns/rate-limiting/"
 ---
 
-# Rate Limiting Patterns
+Rate Limiting Patterns
 
 Overview {#overview}
 

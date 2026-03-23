@@ -5,7 +5,7 @@ description: "A comprehensive guide to the Chrome Scripting API: executeScript, 
 canonical_url: "https://bestchromeextensions.com/tutorials/scripting-api-guide/"
 ---
 
-# Chrome Scripting API: Programmatic Script and CSS Injection
+Chrome Scripting API: Programmatic Script and CSS Injection
 
 The Chrome Scripting API (`chrome.scripting`) is the cornerstone of programmatic injection in Manifest V3 extensions. It provides fine-grained control over when and how JavaScript and CSS are injected into web pages, replacing the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` methods from Manifest V2.
 
@@ -631,7 +631,7 @@ Common Pitfalls {#common-pitfalls}
 Related Articles {#related-articles}
 
 - [Content Scripts Guide](/tutorials/content-scripts-guide/). Comprehensive guide to content script injection and isolation
-- [Permissions Deep Dive](/tutorials/permissions-deep detailed look/). Understanding extension permissions and security
+- [Permissions detailed look](/tutorials/permissions-deep detailed look/). Understanding extension permissions and security
 - [Messaging Quickstart](/tutorials/messaging-quickstart/). Communication between extension components
 
 ---

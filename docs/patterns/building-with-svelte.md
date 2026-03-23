@@ -5,7 +5,7 @@ description: "Build Chrome extensions with Svelte framework."
 canonical_url: "https://bestchromeextensions.com/patterns/building-with-svelte/"
 ---
 
-# Building Chrome Extensions with Svelte
+Building Chrome Extensions with Svelte
 
 Overview {#overview}
 

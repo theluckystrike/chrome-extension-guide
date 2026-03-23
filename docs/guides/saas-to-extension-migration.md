@@ -1,8 +1,8 @@
-# Converting a SaaS Product into a Chrome Extension
+Converting a SaaS Product into a Chrome Extension
 
 Many SaaS companies consider building Chrome extensions to deepen user engagement, provide contextual functionality, and create new distribution channels. This guide covers the strategic and technical considerations for converting an existing SaaS product into a Chrome extension, including architecture decisions, authentication flows, data synchronization, pricing strategies, and distribution options.
 
-## Table of Contents
+Table of Contents
 
 - [When an Extension Makes Sense vs. a Web App](#when-an-extension-makes-sense-vs-a-web-app)
 - [Architecture Patterns](#architecture-patterns)
@@ -18,23 +18,23 @@ Many SaaS companies consider building Chrome extensions to deepen user engagemen
 
 ---
 
-## When an Extension Makes Sense vs. a Web App
+When an Extension Makes Sense vs. a Web App
 
 Before embarking on the conversion journey, it's essential to understand when a Chrome extension provides genuine value over simply improving the existing web application.
 
-### Use Cases Ideal for Extensions
+Use Cases Ideal for Extensions
 
 Chrome extensions excel when your product needs to interact with third-party websites or provide persistent functionality across browsing sessions. An extension can inject content into any webpage, access browser-specific APIs, and run in the background without requiring users to keep a tab open. If your SaaS product involves activities like content creation, note-taking, communication monitoring, or productivity enhancement that span multiple websites, an extension can deliver a more contextual and always-available experience than a pure web app.
 
 Extensions also shine for workflows that require quick access without context switching. A project management tool delivered as an extension allows users to check tasks or add notes without navigating away from their current work. This frictionless access often leads to higher engagement metrics and more frequent usage patterns.
 
-### When to Stick with Web App
+When to Stick with Web App
 
 However, not all SaaS products benefit from extension conversion. If your product requires complex, immersive interfaces with extensive data visualization, real-time collaboration features, or heavy computational resources, a web application remains the superior choice. Extensions have limited UI capabilities compared to full web apps, and their performance can be constrained by browser resource management.
 
 Consider also the maintenance burden. An extension introduces a third codebase to maintain alongside your web app and potentially mobile apps. If the extension would provide only marginal improvements over the web app experience, the additional development and maintenance costs may not justify the investment.
 
-### Decision Framework
+Decision Framework
 
 Evaluate the conversion based on three criteria: contextual relevance (does the product need to interact with other websites?), access frequency (would users benefit from persistent, always-available access?), and workflow integration (does the product enhance existing browsing activities?). If two of these three criteria are strongly satisfied, a Chrome extension is worth pursuing.
 
@@ -52,7 +52,7 @@ This pattern works well when your extension offers simplified workflows that enh
 
 The companion architecture simplifies development because you can reuse existing API integrations, authentication logic, and business rules. Your backend doesn't need significant modification to support the extension, and users appreciate the smooth experience of accessing the same data and features across both platforms.
 
-#### Implementation Example
+Implementation Example
 
 ```
 saas-product/
@@ -108,7 +108,7 @@ The most solid solution uses native messaging to establish a communication chann
 
 This approach requires the user to have both the web app open and the extension installed, but it provides strong security because tokens are transmitted directly between trusted contexts. The extension can verify the message origin to prevent token theft by malicious websites.
 
-#### Implementation Pattern
+Implementation Pattern
 
 ```javascript
 // In your web app - after user logs in

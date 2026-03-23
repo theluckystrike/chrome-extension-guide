@@ -8,7 +8,7 @@ tags: [crypto, ticker, chrome-extension]
 keywords: "chrome extension crypto, bitcoin price chrome extension, crypto ticker extension, cryptocurrency chrome extension, build crypto tracker"
 ---
 
-# Build a Crypto Price Ticker Chrome Extension: Live Bitcoin and Ethereum Prices
+Build a Crypto Price Ticker Chrome Extension: Live Bitcoin and Ethereum Prices
 
 Cryptocurrency has revolutionized the financial landscape, and millions of users now track price movements throughout the day. A crypto ticker extension provides a convenient way to monitor Bitcoin, Ethereum, and other popular cryptocurrencies directly from your browser without constantly refreshing exchange websites. we'll walk you through building a fully functional crypto price ticker Chrome extension that displays real-time prices with automatic updates.
 

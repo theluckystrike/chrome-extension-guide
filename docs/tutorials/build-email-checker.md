@@ -4,7 +4,7 @@ title: "Chrome Extension Email Checker. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-email-checker/"
 ---
-# Build an Email Checker Extension
+Build an Email Checker Extension
 
 Build a Chrome extension that connects to Gmail via OAuth2, shows your unread email count on the badge, previews messages in a popup, and sends desktop notifications when new mail arrives. Uses @theluckystrike/webext-storage for configurable settings and the Chrome Identity API for secure authentication.
 

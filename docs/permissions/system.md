@@ -8,7 +8,7 @@ order: 40
 canonical_url: "https://bestchromeextensions.com/permissions/system/"
 ---
 
-# System.* Permissions (Chrome Extension API)
+System.* Permissions (Chrome Extension API)
 
 Overview {#overview}
 The `system.*` permissions provide access to hardware and system information. Each is a separate permission.

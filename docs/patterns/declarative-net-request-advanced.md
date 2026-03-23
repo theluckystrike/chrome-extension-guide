@@ -5,7 +5,7 @@ description: "Advanced declarative net request patterns for network filtering."
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-net-request-advanced/"
 ---
 
-# DeclarativeNetRequest Advanced Patterns
+DeclarativeNetRequest Advanced Patterns
 
 Overview {#overview}
 

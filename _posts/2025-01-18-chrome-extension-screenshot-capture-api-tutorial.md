@@ -9,7 +9,7 @@ keywords: "chrome extension screenshot, capture visible tab, screen capture exte
 canonical_url: "https://bestchromeextensions.com/2025/01/18/chrome-extension-screenshot-capture-api-tutorial/"
 ---
 
-# Chrome Extension Screenshot Capture API Tutorial: Complete Guide
+Chrome Extension Screenshot Capture API Tutorial: Complete Guide
 
 Screen capture functionality is one of the most sought-after features in the Chrome extension ecosystem. Whether users need to capture an entire webpage for documentation, save a visual reference, or create screenshots for bug reports, the ability to capture visible tab content programmatically opens up endless possibilities for extension developers.
 

@@ -1,10 +1,10 @@
-# Contributing to Chrome Extension Guide
+Contributing to Chrome Extension Guide
 
 Thank you for your interest in contributing to the Chrome Extension Guide! This document outlines how you can contribute to this project.
 
-## How to Contribute
+How to Contribute
 
-### Reporting Issues
+Reporting Issues
 
 If you find a bug, typo, or have a suggestion for improvement:
 
@@ -19,7 +19,7 @@ If you find a bug, typo, or have a suggestion for improvement:
    - Expected vs. actual behavior
    - Relevant code snippets or links
 
-### Pull Requests
+Pull Requests
 
 We welcome pull requests for:
 
@@ -29,7 +29,7 @@ We welcome pull requests for:
 - New features
 - Translation updates
 
-#### PR Process
+PR Process
 
 1. Fork the repository and create a feature branch from `main`
 2. Make your changes following the code style guidelines
@@ -44,33 +44,33 @@ When submitting a PR, please include:
 - Screenshots for UI changes (if applicable)
 - Test results (if applicable)
 
-### Getting Started
+Getting Started
 
 ```bash
-# Clone your fork
+Clone your fork
 git clone https://github.com/YOUR_USERNAME/chrome-extension-guide.git
 
-# Create a new branch
+Create a new branch
 git checkout -b your-feature-branch
 
-# Make your changes and commit them
+Make your changes and commit them
 git add .
 git commit -m "Description of your changes"
 
-# Push to your fork
+Push to your fork
 git push origin your-feature-branch
 ```
 
-## Code Style
+Code Style
 
-### General Guidelines
+General Guidelines
 
 - Use TypeScript for all code contributions
 - Follow existing code conventions in the repository
 - Keep code clean and well-commented
 - Write meaningful commit messages
 
-### TypeScript Style
+TypeScript Style
 
 - Use strict TypeScript with explicit types
 - Prefer interfaces over types for object shapes
@@ -78,14 +78,14 @@ git push origin your-feature-branch
 - Keep functions small and focused
 - Use async/await over raw promises
 
-### Documentation Style
+Documentation Style
 
 - Use clear, concise language
 - Include code examples where helpful
 - Follow the existing documentation structure
 - Use Markdown formatting consistently
 
-### Git Commit Messages
+Git Commit Messages
 
 - Use imperative mood ("Add feature" not "Added feature")
 - Keep the first line under 72 characters
@@ -101,7 +101,7 @@ Add TypeScript types for storage API
 Closes #123
 ```
 
-## PR Requirements
+PR Requirements
 
 Before submitting a pull request, ensure:
 
@@ -111,19 +111,19 @@ Before submitting a pull request, ensure:
 - [ ] Your commits are atomic and well-organized
 - [ ] PR description clearly explains the changes
 
-## Code of Conduct
+Code of Conduct
 
 This project is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 Please read the full [Code of Conduct](CODE_OF_CONDUCT.md) to understand what behavior is and isn't acceptable.
 
-## Recognition
+Recognition
 
 Contributors will be recognized in the following ways:
 - Listed in the README contributors section
 - Mentioned in release notes for significant contributions
 
-## Questions?
+Questions?
 
 If you have questions about contributing:
 - Open an issue with the "question" label

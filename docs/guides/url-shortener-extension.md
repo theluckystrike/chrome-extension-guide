@@ -1,8 +1,8 @@
-# Building a URL Shortener Chrome Extension
+Building a URL Shortener Chrome Extension
 
 A URL shortener extension is a practical project that demonstrates many Chrome extension concepts: popup interaction, background service workers, content scripts, Chrome storage APIs, and external API communication. This guide walks through building a production-ready URL shortener extension using TypeScript and Manifest V3.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Manifest Configuration](#manifest-configuration)
@@ -17,7 +17,7 @@ A URL shortener extension is a practical project that demonstrates many Chrome e
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 A URL shortener extension typically consists of three main components:
 
@@ -25,7 +25,7 @@ A URL shortener extension typically consists of three main components:
 2. Service Worker - Handles API calls, storage, and background processing
 3. Content Script - Optional overlay for context-menu shortening on pages
 
-### Recommended Directory Structure
+Recommended Directory Structure
 
 ```
 url-shortener/

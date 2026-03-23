@@ -1,8 +1,8 @@
-# Migrating Background Pages to Service Workers
+Migrating Background Pages to Service Workers
 
 This guide provides comprehensive instructions for migrating Chrome Extension background pages (Manifest V2) to service workers (Manifest V3). Service workers replace persistent background pages with an event-driven model that conserves resources.
 
-## Background Page Architecture in MV2
+Background Page Architecture in MV2
 
 In Manifest V2, background pages operate as persistent HTML pages that stay open while the extension is installed. They have full access to the Chrome Extension APIs and maintain global state throughout the browser session.
 
@@ -34,7 +34,7 @@ Key characteristics:
 - setTimeout/setInterval work without restrictions
 - XMLHttpRequest for network requests
 
-## Service Worker Architecture in MV3
+Service Worker Architecture in MV3
 
 Manifest V3 replaces persistent background pages with service workers, event-driven scripts that terminate when idle and wake up to handle events.
 
@@ -71,7 +71,7 @@ Key differences:
 - Use chrome.alarms instead of setInterval/setTimeout
 - Use fetch instead of XMLHttpRequest
 
-## Global State Migration to chrome.storage
+Global State Migration to chrome.storage
 
 Migrate global variables to chrome.storage for persistence across service worker restarts.
 
@@ -105,7 +105,7 @@ Best practices:
 - Implement lazy loading - only load when needed
 - Cache frequently accessed data in memory after first load
 
-## DOM Access Migration to Offscreen Documents
+DOM Access Migration to Offscreen Documents
 
 Service workers cannot access DOM. Use offscreen documents for tasks requiring DOM APIs.
 
@@ -145,7 +145,7 @@ Use cases for offscreen documents:
 - Canvas operations
 - Complex string manipulation requiring Regex
 
-## setTimeout/setInterval to chrome.alarms
+setTimeout/setInterval to chrome.alarms
 
 Replace timers with chrome.alarms API for reliable scheduling.
 
@@ -177,7 +177,7 @@ Important notes:
 - Alarms persist across service worker restarts
 - Use unique names to manage multiple alarms
 
-## XMLHttpRequest to Fetch API
+XMLHttpRequest to Fetch API
 
 Replace XMLHttpRequest with the modern fetch API.
 
@@ -208,7 +208,7 @@ async function fetchData() {
 }
 ```
 
-## WebSocket Connection Management
+WebSocket Connection Management
 
 Service worker termination can disrupt WebSocket connections. Implement reconnection logic.
 
@@ -253,7 +253,7 @@ class WebSocketManager {
 }
 ```
 
-## IndexedDB for Persistent Data
+IndexedDB for Persistent Data
 
 Use IndexedDB for large datasets that exceed storage limits.
 
@@ -299,7 +299,7 @@ const getFromDB = async (id) => {
 };
 ```
 
-## Event Listener Registration at Top Level
+Event Listener Registration at Top Level
 
 All event listeners must be registered at the top level of the service worker file.
 
@@ -327,7 +327,7 @@ function init() {
 }
 ```
 
-## Lazy Initialization Patterns
+Lazy Initialization Patterns
 
 Initialize resources only when needed to reduce startup time.
 
@@ -355,7 +355,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-## Handling Service Worker Termination Gracefully
+Handling Service Worker Termination Gracefully
 
 Service workers can terminate unexpectedly. Design for stateless operations.
 
@@ -394,7 +394,7 @@ async function syncWithRetry() {
 }
 ```
 
-## Testing Migration Completeness
+Testing Migration Completeness
 
 Verify all background page functionality works in the service worker.
 
@@ -440,7 +440,7 @@ const migrationTests = {
 };
 ```
 
-## Rollback Strategy
+Rollback Strategy
 
 Plan for reverting to MV2 if migration encounters issues.
 
@@ -470,7 +470,7 @@ async function initializeWithFallback() {
 const isMV3 = chrome.runtime.getManifest().manifest_version === 3;
 ```
 
-## Performance Comparison
+Performance Comparison
 
 | Aspect | MV2 Background Page | MV3 Service Worker |
 |--------|--------------------|--------------------|
@@ -486,7 +486,7 @@ Typical improvements after migration:
 - Faster browser startup
 - Better extension isolation
 
-## Step-by-Step Migration Checklist
+Step-by-Step Migration Checklist
 
 1. Audit Current Implementation
    - [ ] List all global variables and their purposes
@@ -530,7 +530,7 @@ Typical improvements after migration:
    - [ ] Monitor for errors
    - [ ] Prepare rollback plan
 
-## Additional Resources
+Additional Resources
 
 - [Official Migration Guide](https://developer.chrome.com/docs/extensions/develop/migrate/to-service-workers)
 - [Manifest V3 Overview](https://developer.chrome.com/docs/extensions/mv3/intro)
@@ -538,6 +538,6 @@ Typical improvements after migration:
 - [chrome.storage API](https://developer.chrome.com/docs/extensions/reference/storage)
 - [Offscreen Documents](https://developer.chrome.com/docs/extensions/reference/offscreen)
 
-## Conclusion
+Conclusion
 
 Migrating from background pages to service workers requires rethinking state management and event handling, but results in a more efficient extension that conserves system resources. The key challenges involve adapting to the non-persistent nature of service workers and replacing APIs that rely on continuous execution. Follow this guide systematically and test thoroughly at each stage.

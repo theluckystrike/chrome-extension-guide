@@ -1,8 +1,8 @@
-# Building a Tab Search Extension for Chrome
+Building a Tab Search Extension for Chrome
 
 This guide walks through creating a Tab Search extension that allows users to quickly find and switch between open browser tabs using fuzzy search. We'll cover architecture, implementation, UI design, and deployment.
 
-## Architecture Overview
+Architecture Overview
 
 A Tab Search extension consists of several interconnected components:
 
@@ -29,7 +29,7 @@ A Tab Search extension consists of several interconnected components:
 
 ```
 
-## Manifest.json Setup
+Manifest.json Setup
 
 ```json
 {
@@ -68,9 +68,9 @@ A Tab Search extension consists of several interconnected components:
 }
 ```
 
-## Core TypeScript Implementation
+Core TypeScript Implementation
 
-### Type Definitions (types.ts)
+Type Definitions (types.ts)
 
 ```typescript
 interface TabInfo {
@@ -103,7 +103,7 @@ interface ExtensionState {
 }
 ```
 
-### Background Service Worker (background.ts)
+Background Service Worker (background.ts)
 
 ```typescript
 import { TabInfo, SearchResult, ExtensionState } from './types';
@@ -244,7 +244,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Popup UI (popup.ts)
+Popup UI (popup.ts)
 
 ```typescript
 interface UIController {
@@ -385,9 +385,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Chrome APIs and Permissions
+Chrome APIs and Permissions
 
-### Required Permissions
+Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 | `storage` | Persist user preferences and cached data |
 | `commands` | Register keyboard shortcuts |
 
-### Host Permissions
+Host Permissions
 
 ```json
 "host_permissions": [
@@ -405,9 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Required for accessing favicon URLs from all domains.
 
-## State Management Patterns
+State Management Patterns
 
-### Using chrome.storage
+Using chrome.storage
 
 ```typescript
 class StorageManager {
@@ -434,7 +434,7 @@ class StorageManager {
 }
 ```
 
-## Error Handling
+Error Handling
 
 ```typescript
 class ErrorHandler {
@@ -469,9 +469,9 @@ class ErrorHandler {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
-### Unit Tests with Jest
+Unit Tests with Jest
 
 ```typescript
 import { FuzzySearchIndex } from './background';
@@ -501,7 +501,7 @@ describe('FuzzySearchIndex', () => {
 });
 ```
 
-### Integration Testing
+Integration Testing
 
 ```typescript
 describe('Tab Search Integration', () => {
@@ -528,9 +528,9 @@ describe('Tab Search Integration', () => {
 });
 ```
 
-## Performance Considerations
+Performance Considerations
 
-### 1. Debounce Search Input
+1. Debounce Search Input
 
 ```typescript
 function debounce<T extends (...args: any[]) => any>(
@@ -550,7 +550,7 @@ const debouncedSearch = debounce((query: string) => {
 }, 150);
 ```
 
-### 2. Lazy Load Favicons
+2. Lazy Load Favicons
 
 ```typescript
 class FaviconCache {
@@ -583,13 +583,13 @@ class FaviconCache {
 }
 ```
 
-### 3. Virtual Scrolling for Large Lists
+3. Virtual Scrolling for Large Lists
 
 For users with 100+ tabs, implement virtual scrolling to only render visible items.
 
-## Publishing Checklist
+Publishing Checklist
 
-### Pre-submission
+Pre-submission
 
 - [ ] Test extension in Chrome, Edge, and Brave
 - [ ] Verify keyboard shortcuts work on all platforms
@@ -598,7 +598,7 @@ For users with 100+ tabs, implement virtual scrolling to only render visible ite
 - [ ] Add screenshots for store listing (1280x800)
 - [ ] Write privacy policy if collecting any data
 
-### Store Listing
+Store Listing
 
 - [ ] Choose unique, descriptive name
 - [ ] Write compelling short and long descriptions
@@ -606,14 +606,14 @@ For users with 100+ tabs, implement virtual scrolling to only render visible ite
 - [ ] Set pricing (free or one-time purchase)
 - [ ] Upload store assets
 
-### After Publication
+After Publication
 
 - [ ] Monitor error reports in Chrome Web Store dashboard
 - [ ] Respond to user reviews
 - [ ] Plan feature updates based on feedback
 - [ ] Update version in manifest.json and update ZIP
 
-## Conclusion
+Conclusion
 
 Building a Tab Search extension requires understanding Chrome's extension architecture, implementing efficient search algorithms, and creating a responsive UI. This guide covered the essential patterns and practices to build a production-ready extension. 
 

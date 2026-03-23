@@ -9,7 +9,7 @@ keywords: "crxjs vite plugin, crxjs chrome extension, vite extension development
 canonical_url: "https://bestchromeextensions.com/2025/01/25/crxjs-vite-plugin-chrome-extension-development/"
 ---
 
-# CRXJS Vite Plugin for Chrome Extension Development: The Complete Guide
+CRXJS Vite Plugin for Chrome Extension Development: The Complete Guide
 
 Chrome extension development has undergone a significant transformation in recent years. What once required manual build configurations, complex webpack setups, and tedious debugging processes has evolved into a more streamlined experience thanks to modern tooling. At the center of this evolution lies CRXJS, a powerful build tool specifically designed for packaging Chrome extensions, and its Vite plugin that brings incredible developer experience to extension creators.
 
@@ -102,7 +102,7 @@ This configuration generates a proper manifest.json and packages your extension.
 
 ---
 
-Deep Dive: CRXJS Configuration Options {#configuration}
+detailed look: CRXJS Configuration Options {#configuration}
 
 CRXJS Vite Plugin offers extensive configuration options that allow you to customize every aspect of your extension build.
 

@@ -9,7 +9,7 @@ keywords: "how ad blockers work, chrome ad blocker extension, declarativeNetRequ
 canonical_url: "https://bestchromeextensions.com/2025/01/18/how-ad-blocker-chrome-extensions-work-under-the-hood/"
 ---
 
-# How Ad Blocker Chrome Extensions Work Under the Hood
+How Ad Blocker Chrome Extensions Work Under the Hood
 
 If you have ever used an ad blocker in Chrome, you have probably wondered how it actually works. How does a small extension know which requests to block? How does it identify an advertisement versus legitimate content? More importantly, what happens "under the hood" when you browse a website with an ad blocker enabled?
 
@@ -61,7 +61,7 @@ The community-driven nature of filter lists is one of their greatest strengths. 
 
 ---
 
-The declarativeNetRequest API Deep Dive {#declarative-net-request}
+The declarativeNetRequest API detailed look {#declarative-net-request}
 
 Now let us examine the technical heart of modern ad blocking: the declarativeNetRequest API. This API is what allows Chrome extensions to block network requests efficiently and reliably.
 

@@ -5,7 +5,7 @@ description: "Learn how to build Chrome extensions with side panels. This compre
 canonical_url: "https://bestchromeextensions.com/tutorials/side-panel-guide/"
 ---
 
-# Building Side Panel Extensions in Chrome
+Building Side Panel Extensions in Chrome
 
 Side panels provide a powerful way to create persistent, always-accessible UI for your Chrome extensions. Unlike popups that disappear on blur, side panels remain visible alongside the web content, making them ideal for note-taking tools, page analyzers, bookmarks managers, and any extension that benefits from continuous visibility.
 

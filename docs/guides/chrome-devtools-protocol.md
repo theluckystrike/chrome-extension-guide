@@ -1,10 +1,10 @@
-# Chrome DevTools Protocol in Extensions
+Chrome DevTools Protocol in Extensions
 
-## Overview
+Overview
 
 The Chrome DevTools Protocol (CDP) provides powerful capabilities for inspecting and controlling Chrome browsers and extensions. Through the `chrome.debugger` API, extensions can attach to tabs, send commands to control browser behavior, and listen for events. This enables advanced use cases like network interception, DOM inspection, performance profiling, and automated testing.
 
-## Required Permission
+Required Permission
 
 To use the `chrome.debugger` API, you must declare the `"debugger"` permission in your extension's `manifest.json`:
 
@@ -21,7 +21,7 @@ To use the `chrome.debugger` API, you must declare the `"debugger"` permission i
 
 The debugger permission provides access to all CDP domains and allows your extension to instrument browser tabs at a low level.
 
-## chrome.debugger API Overview
+chrome.debugger API Overview
 
 The `chrome.debugger` API provides four core methods:
 
@@ -31,7 +31,7 @@ The `chrome.debugger` API provides four core methods:
 - `chrome.debugger.onEvent.addListener(callback)` - Listen for CDP events
 - `chrome.debugger.onDetach.addListener(callback)` - Handle detach events
 
-## Attaching to Tabs with chrome.debugger.attach
+Attaching to Tabs with chrome.debugger.attach
 
 Before you can interact with a tab using CDP, you must attach to it. The attach method requires a target and a protocol version.
 
@@ -58,7 +58,7 @@ async function attachToActiveTab() {
 
 The `requiredVersion` parameter specifies the minimum CDP protocol version your extension requires. Using `"1.3"` is generally safe for modern Chrome versions.
 
-## Sending Commands with chrome.debugger.sendCommand
+Sending Commands with chrome.debugger.sendCommand
 
 Once attached, you can send CDP commands to interact with the page. CDP commands are organized into domains (like Network, DOM, Page, Runtime).
 
@@ -95,7 +95,7 @@ Common CDP domains include:
 - `Runtime` - JavaScript execution and console access
 - `Performance` - Performance metrics collection
 
-## Listening for Events with chrome.debugger.onEvent
+Listening for Events with chrome.debugger.onEvent
 
 You can listen for CDP events to monitor browser behavior in real-time. Events are fired for network requests, DOM changes, console output, and more.
 
@@ -122,9 +122,9 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 
 The `source` parameter identifies which tab the event came from, allowing you to filter events from specific tabs.
 
-## Common Use Cases
+Common Use Cases
 
-### Network Interception
+Network Interception
 
 Monitor and modify network requests:
 
@@ -140,7 +140,7 @@ async function setupNetworkInterception(target) {
 }
 ```
 
-### DOM Inspection
+DOM Inspection
 
 Access and traverse the DOM tree:
 
@@ -165,7 +165,7 @@ async function findElementsBySelector(target, selector) {
 }
 ```
 
-### Performance Profiling
+Performance Profiling
 
 Collect performance metrics:
 
@@ -188,9 +188,9 @@ async function startPerformanceProfiling(target) {
 }
 ```
 
-## User Experience Considerations
+User Experience Considerations
 
-### The Debugger Banner
+The Debugger Banner
 
 When your extension is attached to a tab using `chrome.debugger`, Chrome displays a warning banner at the top of the page:
 
@@ -206,7 +206,7 @@ This banner:
 
 This is an important consideration for user experience. Users should be aware when your extension is using debugger capabilities.
 
-### Best Practices
+Best Practices
 
 1. Attach only when needed - Attach to tabs only when performing debugging operations and detach when done.
 
@@ -224,7 +224,7 @@ chrome.debugger.onDetach.addListener((source, reason) => {
 });
 ```
 
-## Detaching Properly with chrome.debugger.detach
+Detaching Properly with chrome.debugger.detach
 
 Always detach from tabs when you're done to clean up resources and remove the debugger banner:
 
@@ -265,9 +265,9 @@ async function performDebugging(tabId) {
 
 The debugger automatically detaches when the extension is unloaded or the tab is closed, but explicit detachment is best practice.
 
-## Code Examples
+Code Examples
 
-### Network Logger Extension
+Network Logger Extension
 
 A complete example of a network logging extension:
 
@@ -305,7 +305,7 @@ async function stopNetworkLogging(tabId) {
 }
 ```
 
-### DOM Scraper Extension
+DOM Scraper Extension
 
 A complete example of a DOM scraping extension:
 
@@ -355,7 +355,7 @@ async function scrapeDOM(tabId, selector) {
 }
 ```
 
-## Security Considerations
+Security Considerations
 
 The debugger API provides powerful capabilities that can access sensitive data:
 
@@ -364,7 +364,7 @@ The debugger API provides powerful capabilities that can access sensitive data:
 - HTTPS requirement - Debugger connections should use HTTPS when possible
 - Extension lifecycle - Debugger automatically detaches when extension is disabled
 
-## Reference
+Reference
 
 For more information, see:
 - [chrome.debugger API Reference](https://developer.chrome.com/docs/extensions/reference/api/debugger)

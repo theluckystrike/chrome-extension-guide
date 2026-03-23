@@ -8,7 +8,7 @@ order: 50
 canonical_url: "https://bestchromeextensions.com/permissions/webRequestBlocking/"
 ---
 
-# webRequestBlocking Permission (MV2 Only)
+webRequestBlocking Permission (MV2 Only)
 
 What It Grants {#what-it-grants}
 Enables blocking/modifying network requests in `chrome.webRequest` listeners. MV2 only. removed in MV3.

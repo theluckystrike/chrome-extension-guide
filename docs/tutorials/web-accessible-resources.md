@@ -5,7 +5,7 @@ description: "Learn how to use web accessible resources in Chrome Extensions to 
 canonical_url: "https://bestchromeextensions.com/tutorials/web-accessible-resources/"
 ---
 
-# Web Accessible Resources in Chrome Extensions
+Web Accessible Resources in Chrome Extensions
 
 Web Accessible Resources are a fundamental feature of Chrome Extensions that allow your extension's files to be loaded and used in contexts outside the extension itself. specifically in web pages and content scripts. This tutorial covers everything you need to know to use them effectively in Manifest V3.
 
@@ -301,7 +301,7 @@ Potential Risks
 
 Best Practices
 
-#### 1. Follow Least Privilege
+1. Follow Least Privilege
 
 Only expose resources that must be accessible:
 
@@ -319,7 +319,7 @@ Only expose resources that must be accessible:
 }
 ```
 
-#### 2. Use Dynamic URLs
+2. Use Dynamic URLs
 
 Always enable `use_dynamic_url` when fingerprinting protection is needed:
 
@@ -331,7 +331,7 @@ Always enable `use_dynamic_url` when fingerprinting protection is needed:
 }
 ```
 
-#### 3. Restrict Match Patterns
+3. Restrict Match Patterns
 
 Use specific URL patterns instead of `<all_urls>` when possible:
 
@@ -342,7 +342,7 @@ Use specific URL patterns instead of `<all_urls>` when possible:
 }
 ```
 
-#### 4. Validate Origins in Communication
+4. Validate Origins in Communication
 
 When your content script communicates with web pages:
 

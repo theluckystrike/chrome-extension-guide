@@ -9,7 +9,7 @@ keywords: "social share extension, share page chrome, social media sharing exten
 canonical_url: "https://bestchromeextensions.com/2025/01/20/build-social-share-chrome-extension/"
 ---
 
-# Build a Social Share Chrome Extension
+Build a Social Share Chrome Extension
 
 Social sharing is one of the most common features users expect from browser extensions. Whether you want to share an interesting article to Twitter, post a product to Facebook, or save a link to LinkedIn, having a dedicated social share extension can significantly improve the user experience. we will walk you through building a complete social share Chrome extension using Manifest V3.
 

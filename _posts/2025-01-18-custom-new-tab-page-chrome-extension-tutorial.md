@@ -9,7 +9,7 @@ author: theluckystrike
 canonical_url: "https://bestchromeextensions.com/2025/01/18/custom-new-tab-page-chrome-extension-tutorial/"
 ---
 
-# Custom New Tab Page Chrome Extension Tutorial. Complete Guide (2025)
+Custom New Tab Page Chrome Extension Tutorial. Complete Guide (2025)
 
 Every Chrome user interacts with the new tab page dozens of times per day. By default, Chrome displays a simple page with a search box and frequently visited sites. However, with the chrome new tab extension capability, you can replace this default experience with something personalized and powerful. Whether you want to display a custom dashboard, a productivity widget, or a beautiful visual theme, building a custom new tab page extension opens up tremendous possibilities.
 

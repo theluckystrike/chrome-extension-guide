@@ -1,10 +1,10 @@
-# Chrome Extension Onboarding UX Patterns
+Chrome Extension Onboarding UX Patterns
 
-## Overview
+Overview
 
 Onboarding is critical for Chrome extension success. A well-designed onboarding experience guides users from installation to realizing value quickly, while respecting their time and privacy. This guide covers proven patterns for creating effective onboarding flows that maximize user activation and retention.
 
-## First-Run Experience with onInstalled
+First-Run Experience with onInstalled
 
 The `chrome.runtime.onInstalled` event is the entry point for onboarding logic. It fires once when the extension is installed or updated, making it ideal for initializing user state and triggering welcome flows.
 
@@ -36,11 +36,11 @@ function initializeNewUser() {
 }
 ```
 
-## Welcome Page Design
+Welcome Page Design
 
 A well-designed welcome page sets expectations and guides users through initial setup. Keep it focused - users should understand your extension's value in under 30 seconds.
 
-### Key Elements
+Key Elements
 
 1. Clear value proposition - What does this extension do? Why should I care?
 2. Minimal required permissions - Explain why each permission is needed
@@ -89,11 +89,11 @@ A well-designed welcome page sets expectations and guides users through initial 
 </html>
 ```
 
-## Permission Request Timing
+Permission Request Timing
 
 Requesting permissions at the right time significantly impacts conversion. Never ask for permissions during installation - Chrome's warning scares away users.
 
-### Best Practices
+Best Practices
 
 1. Install-time: Request only core permissions required for basic functionality
 2. First-use: Request additional permissions when users attempt a feature that needs them
@@ -125,11 +125,11 @@ async function requestTabAccess() {
 }
 ```
 
-## Progressive Disclosure
+Progressive Disclosure
 
 Progressive disclosure reveals complexity gradually. Start simple, then introduce advanced features as users become more engaged.
 
-### Implementation Pattern
+Implementation Pattern
 
 ```ts
 // Track user engagement level
@@ -163,11 +163,11 @@ function updateUIForEngagementLevel() {
 }
 ```
 
-## Feature Discovery Patterns
+Feature Discovery Patterns
 
 Help users discover features they might miss. Use tooltips, guided tours, and contextual hints.
 
-### Tooltip Pattern
+Tooltip Pattern
 
 ```ts
 // Create feature discovery tooltips
@@ -206,11 +206,11 @@ class FeatureDiscovery {
 }
 ```
 
-## Options Page as Onboarding Wizard
+Options Page as Onboarding Wizard
 
 Transform your options page into a guided setup wizard. This works especially well for complex extensions requiring configuration.
 
-### Wizard Pattern
+Wizard Pattern
 
 ```ts
 // options-wizard.ts
@@ -272,11 +272,11 @@ class OnboardingWizard {
 }
 ```
 
-## Measuring Completion Rates
+Measuring Completion Rates
 
 Track onboarding funnel metrics to identify drop-off points and optimize the experience.
 
-### Analytics Integration
+Analytics Integration
 
 ```ts
 // onboarding-analytics.ts
@@ -336,7 +336,7 @@ const ONBOARDING_METRICS = [
 ];
 ```
 
-## Update Notifications
+Update Notifications
 
 When your extension updates, inform users about new features without disrupting their workflow.
 
@@ -373,7 +373,7 @@ async function showWhatsNew() {
 }
 ```
 
-## Uninstall Feedback Page
+Uninstall Feedback Page
 
 Collect feedback when users uninstall. This valuable data helps improve your extension.
 
@@ -420,11 +420,11 @@ Collect feedback when users uninstall. This valuable data helps improve your ext
 </html>
 ```
 
-## Rating Prompt Timing
+Rating Prompt Timing
 
 Timing your rating prompt significantly affects conversion. Ask at moments of high satisfaction, not frustration.
 
-### Optimal Timing Patterns
+Optimal Timing Patterns
 
 1. After successful feature completion - User just accomplished something
 2. After positive streak - Multiple sessions without errors
@@ -466,7 +466,7 @@ class RatingPrompter {
 }
 ```
 
-## Summary
+Summary
 
 Effective onboarding balances guiding new users with respecting experienced ones. Key principles:
 
@@ -481,7 +481,7 @@ Effective onboarding balances guiding new users with respecting experienced ones
 9. Collect uninstall feedback to improve
 10. Time rating prompts at moments of maximum satisfaction
 
-## References
+References
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/develop)
 - [Chrome Web Store Guidelines](https://developer.chrome.com/docs/webstore)

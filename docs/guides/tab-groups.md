@@ -5,7 +5,7 @@ description: "A comprehensive guide to using the Chrome Tab Groups API in extens
 canonical_url: "https://bestchromeextensions.com/guides/tab-groups/"
 ---
 
-# Chrome Extension Tab Groups API. How to Organize and Manage Tab Groups
+Chrome Extension Tab Groups API. How to Organize and Manage Tab Groups
 
 The Chrome Tab Groups API (`chrome.tabGroups`) is a powerful extension API that enables Chrome extensions to programmatically organize, manage, and manipulate tab groups. Tab groups help users categorize and manage their browser workspace efficiently, making it easier to handle numerous open tabs. This guide covers everything you need to build solid tab group management features into your extension.
 

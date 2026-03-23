@@ -9,7 +9,7 @@ keywords: "linear chrome extension, issue tracker extension, linear api chrome, 
 canonical_url: "https://bestchromeextensions.com/2025/01/28/build-linear-integration-chrome-extension/"
 ---
 
-# Build a Linear Integration Chrome Extension: Complete Developer Guide
+Build a Linear Integration Chrome Extension: Complete Developer Guide
 
 Building a linear chrome extension that integrates with Linear's powerful issue tracking system can transform your development workflow. This comprehensive guide walks you through creating a fully functional issue tracker extension that communicates with Linear's API, enabling you to manage issues directly from your browser without switching contexts.
 

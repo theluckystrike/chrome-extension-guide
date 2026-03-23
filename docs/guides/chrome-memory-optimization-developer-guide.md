@@ -5,7 +5,7 @@ description: "Developer guide to building memory-efficient Chrome extensions. Me
 permalink: /guides/chrome-memory-optimization-developer-guide/
 ---
 
-# Chrome Extension Memory Optimization: A Developer Guide
+Chrome Extension Memory Optimization: A Developer Guide
 
 Building a Chrome extension that performs well means building one that respects system memory. Extensions run continuously alongside the user's browsing session, and a memory-hungry or leaky extension degrades the experience for every tab and application on the system.
 

@@ -5,7 +5,7 @@ description: "Master security best practices for Chrome extensions including Con
 canonical_url: "https://bestchromeextensions.com/guides/extension-security-hardening/"
 ---
 
-# Chrome Extension Security Hardening Guide. Protect Your Users
+Chrome Extension Security Hardening Guide. Protect Your Users
 
 Introduction {#introduction}
 

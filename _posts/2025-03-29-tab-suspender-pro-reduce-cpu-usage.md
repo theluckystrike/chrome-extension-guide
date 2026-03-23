@@ -8,7 +8,7 @@ tags: [tab-suspender-pro, cpu-usage, chrome-performance]
 author: theluckystrike
 ---
 
-# Tab Suspender Pro: How to Reduce Chrome CPU Usage by 50% or More
+Tab Suspender Pro: How to Reduce Chrome CPU Usage by 50% or More
 
 If your computer fans sound like they're preparing for takeoff every time you open Chrome, you're not alone. Millions of users experience frustratingly high CPU usage from their browser, even when they're only actively viewing one or two tabs. The culprit isn't Chrome itself, it's the dozens of tabs you have open in the background, silently consuming processing power while you work on something else.
 

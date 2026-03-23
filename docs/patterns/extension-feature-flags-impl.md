@@ -5,7 +5,7 @@ description: "Implement feature flags with storage and remote configuration."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-flags-impl/"
 ---
 
-# Extension Feature Flag Implementation
+Extension Feature Flag Implementation
 
 Overview {#overview}
 

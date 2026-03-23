@@ -8,7 +8,7 @@ tags: [chrome-extension, ui]
 keywords: "i18n workflow extension, translation management, locale management extension"
 ---
 
-# Advanced i18n Workflow for Chrome Extensions: A Complete Translation Management Guide
+Advanced i18n Workflow for Chrome Extensions: A Complete Translation Management Guide
 
 Building a Chrome extension that reaches global audiences requires more than basic internationalization setup. As your extension grows to support multiple languages, managing translations becomes increasingly complex. This comprehensive guide explores advanced workflows, automation strategies, and professional tools that transform chaotic translation management into a streamlined, scalable process for Chrome extension developers.
 

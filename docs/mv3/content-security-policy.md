@@ -5,7 +5,7 @@ description: "Understand and work with Content Security Policy restrictions in M
 canonical_url: "https://bestchromeextensions.com/mv3/content-security-policy/"
 ---
 
-# MV3 Content Security Policy
+MV3 Content Security Policy
 
 A comprehensive guide to Content Security Policy changes in Manifest V3 and how to migrate your extension.
 

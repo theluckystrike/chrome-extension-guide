@@ -1,14 +1,14 @@
-# Collecting User Feedback in Chrome Extensions
+Collecting User Feedback in Chrome Extensions
 
-## Introduction
+Introduction
 - User feedback is critical for improving Chrome extensions
 - Multiple feedback channels: in-app forms, exit surveys, NPS, bug reports
 - This guide covers implementing comprehensive feedback collection
 - Reference: https://developer.chrome.com/docs/extensions/develop
 
-## In-Extension Feedback Forms
+In-Extension Feedback Forms
 
-### Basic Feedback Popup
+Basic Feedback Popup
 ```javascript
 // popup/feedback.js
 document.getElementById('submitFeedback').addEventListener('click', async () => {
@@ -26,15 +26,15 @@ document.getElementById('submitFeedback').addEventListener('click', async () => 
 });
 ```
 
-### Feedback Types
+Feedback Types
 - General feedback: Suggestions, questions
 - Bug report: Issues, errors, unexpected behavior
 - Feature request: New functionality ideas
 - Rating: 1-5 star or thumbs up/down
 
-## setUninstallURL for Exit Surveys
+setUninstallURL for Exit Surveys
 
-### Setting Up Exit Survey
+Setting Up Exit Survey
 ```javascript
 // background.js
 chrome.runtime.onInstalled.addListener(() => {
@@ -45,7 +45,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Server-Side Survey (HTML)
+Server-Side Survey (HTML)
 ```html
 <!-- https://yourdomain.com/uninstall-survey -->
 <!DOCTYPE html>
@@ -67,9 +67,9 @@ chrome.runtime.onInstalled.addListener(() => {
 </html>
 ```
 
-## NPS Implementation
+NPS Implementation
 
-### Simple NPS Survey
+Simple NPS Survey
 ```javascript
 // popup/nps.js
 function showNPSSurvey() {
@@ -113,7 +113,7 @@ function saveNPSScore(score) {
 }
 ```
 
-### NPS Styling
+NPS Styling
 ```css
 .nps-scale {
   display: flex;
@@ -130,9 +130,9 @@ function saveNPSScore(score) {
 .nps-btn:hover { background: #f0f0f0; }
 ```
 
-## Bug Reporting with Screenshots
+Bug Reporting with Screenshots
 
-### captureVisibleTab Usage
+captureVisibleTab Usage
 ```javascript
 // background.js / popup.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -145,7 +145,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-### Full Bug Report Form
+Full Bug Report Form
 ```javascript
 // popup/bugreport.js
 async function submitBugReport(formData) {
@@ -186,7 +186,7 @@ async function submitBugReport(formData) {
 }
 ```
 
-### Automatic Error Capture
+Automatic Error Capture
 ```javascript
 // background.js
 window.addEventListener('error', (event) => {
@@ -221,9 +221,9 @@ setInterval(() => {
 }, 5 * 60 * 1000); // Every 5 minutes
 ```
 
-## Chrome Web Store Review Management
+Chrome Web Store Review Management
 
-### Responding to Reviews
+Responding to Reviews
 ```javascript
 // Using Chrome Web Store Publishing API
 // Note: Requires Google Cloud project setup
@@ -248,7 +248,7 @@ async function replyToReview(reviewId, message) {
 }
 ```
 
-### Review Monitoring
+Review Monitoring
 ```javascript
 // Check for new reviews periodically
 setInterval(async () => {
@@ -265,9 +265,9 @@ setInterval(async () => {
 }, 30 * 60 * 1000); // Check every 30 minutes
 ```
 
-## Feature Request Collection
+Feature Request Collection
 
-### Feature Request Form
+Feature Request Form
 ```javascript
 // popup/featureRequest.js
 async function submitFeatureRequest(data) {
@@ -302,7 +302,7 @@ async function submitFeatureRequest(data) {
 }
 ```
 
-### Public Feature Voting
+Public Feature Voting
 ```javascript
 // website/feature-votes.js
 async function voteForFeature(featureId) {
@@ -327,9 +327,9 @@ async function showTopFeatures() {
 }
 ```
 
-## Beta Testing Channels
+Beta Testing Channels
 
-### Beta Program Setup
+Beta Program Setup
 ```javascript
 // manifest.json - Beta version uses separate ID or channel
 {
@@ -339,7 +339,7 @@ async function showTopFeatures() {
 }
 ```
 
-### Beta Tester Management
+Beta Tester Management
 ```javascript
 // background.js
 const BETA_GROUP_ID = 'beta-testers';
@@ -361,7 +361,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-### Beta Feedback Collection
+Beta Feedback Collection
 ```javascript
 // Automatic beta feedback
 function initBetaFeedback() {
@@ -378,27 +378,27 @@ function initBetaFeedback() {
 }
 ```
 
-## Best Practices
+Best Practices
 
-### Feedback Timing
+Feedback Timing
 - Don't ask immediately after install. let users explore first
 - Prompt for feedback after successful feature usage
 - Space out NPS surveys (once per quarter max)
 - Exit surveys only on uninstall, not downgrade
 
-### Privacy Considerations
+Privacy Considerations
 - Always explain what data is collected
 - Get explicit consent for optional data (screenshots, system info)
 - Anonymize user data where possible
 - Comply with GDPR. allow data deletion requests
 
-### Feedback Analytics
+Feedback Analytics
 - Track feedback trends over time
 - Categorize and tag feedback automatically
 - Set up alerts for critical issues
 - Create feedback-to-task workflows
 
-## Resources
+Resources
 - https://developer.chrome.com/docs/extensions/develop
 - https://developer.chrome.com/docs/webstore/
 - https://developer.chrome.com/docs/extensions/mv3/intro/

@@ -1,8 +1,8 @@
-# Building a Page Annotator Chrome Extension
+Building a Page Annotator Chrome Extension
 
 A Page Annotator extension allows users to highlight, comment, and annotate web pages directly in the browser. This guide covers the complete implementation using Chrome's Manifest V3, TypeScript, and modern extension patterns.
 
-## Architecture Overview
+Architecture Overview
 
 The Page Annotator follows a multi-context architecture:
 
@@ -30,7 +30,7 @@ page-annotator/
  icons/                  # Extension icons
 ```
 
-## Manifest Setup
+Manifest Setup
 
 ```json
 {
@@ -78,7 +78,7 @@ page-annotator/
 }
 ```
 
-## Core Types
+Core Types
 
 ```typescript
 // src/shared/types.ts
@@ -120,7 +120,7 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
 };
 ```
 
-## Content Script Implementation
+Content Script Implementation
 
 ```typescript
 // src/content/index.ts
@@ -271,7 +271,7 @@ class PageAnnotator {
 new PageAnnotator();
 ```
 
-## Annotation Overlay
+Annotation Overlay
 
 ```typescript
 // src/content/overlay.ts
@@ -381,7 +381,7 @@ export class AnnotationOverlay {
 }
 ```
 
-## Storage Management
+Storage Management
 
 ```typescript
 // src/content/storage.ts
@@ -447,7 +447,7 @@ export class AnnotationStorage {
 }
 ```
 
-## Sidebar Implementation
+Sidebar Implementation
 
 ```typescript
 // src/sidebar/sidebar.ts
@@ -524,7 +524,7 @@ function escapeHtml(text: string): string {
 document.addEventListener('DOMContentLoaded', loadAnnotations);
 ```
 
-## Error Handling Patterns
+Error Handling Patterns
 
 ```typescript
 // Comprehensive error handling example
@@ -561,7 +561,7 @@ class ErrorHandlingExample {
 }
 ```
 
-## Testing Approach
+Testing Approach
 
 ```typescript
 // Testing strategy for Page Annotator
@@ -605,7 +605,7 @@ test('annotate page', async ({ page }) => {
 */
 ```
 
-## Performance Considerations
+Performance Considerations
 
 1. Lazy Load Annotations: Only load annotations when sidebar opens
 2. Debounce Storage Writes: Batch annotation saves with debounce
@@ -622,7 +622,7 @@ const debouncedSave = debounce(async (annotations: Annotation[]) => {
 }, 1000);
 ```
 
-## Publishing Checklist
+Publishing Checklist
 
 - [ ] Update `manifest.json` version number
 - [ ] Test on Chrome, Edge, and Brave
@@ -634,14 +634,14 @@ const debouncedSave = debounce(async (annotations: Annotation[]) => {
 - [ ] Submit for review with completed metadata
 
 ```bash
-# Build for production
+Build for production
 npm run build
 
-# Package extension
+Package extension
 zip -r page-annotator.zip dist/
 ```
 
-## Summary
+Summary
 
 This guide covered building a complete Page Annotator extension with:
 - MV3 manifest with proper permissions

@@ -4,7 +4,7 @@ title: "Chrome Extension IP Lookup. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-ip-lookup/"
 ---
-# Build an IP Lookup Extension
+Build an IP Lookup Extension
 
 What You'll Build {#what-youll-build}
 - Display your public IP address in popup

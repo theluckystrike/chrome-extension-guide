@@ -1,8 +1,8 @@
-# Building a Kanban Board Chrome Extension
+Building a Kanban Board Chrome Extension
 
 A Kanban board extension allows users to manage tasks visually across different stages, directly from their browser. This guide covers building a production-ready Kanban extension using Chrome's modern APIs, TypeScript, and best practices for state management, persistence, and cross-context communication.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -17,9 +17,9 @@ A Kanban board extension allows users to manage tasks visually across different 
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
-### Manifest Version 3
+Manifest Version 3
 
 All modern extensions should use Manifest V3. Here's the manifest structure for a Kanban board:
 
@@ -63,7 +63,7 @@ All modern extensions should use Manifest V3. Here's the manifest structure for 
 }
 ```
 
-### Project Directory Structure
+Project Directory Structure
 
 ```
 kanban-extension/

@@ -5,7 +5,7 @@ description: "Access and modify user font settings with the Font Settings API."
 canonical_url: "https://bestchromeextensions.com/patterns/font-settings-api/"
 ---
 
-# Font Settings API in Chrome Extensions
+Font Settings API in Chrome Extensions
 
 Overview {#overview}
 

@@ -5,7 +5,7 @@ description: "Process tasks in the background with queue-based patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/background-queue-processing/"
 ---
 
-# Background Queue Processing Patterns
+Background Queue Processing Patterns
 
 Overview {#overview}
 

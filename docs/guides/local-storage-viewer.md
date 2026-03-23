@@ -1,8 +1,8 @@
-# Building a Local Storage Viewer Chrome Extension
+Building a Local Storage Viewer Chrome Extension
 
 A localStorage viewer is one of the most useful developer tools you can build as a Chrome extension. It allows developers to inspect, edit, and manage localStorage, sessionStorage, and IndexedDB data across all domains. This guide walks through building a production-ready extension with full TypeScript support, modern UI patterns, and solid error handling.
 
-## Table of Contents
+Table of Contents
 
 - [Architecture and Manifest Setup](#architecture-and-manifest-setup)
 - [Core Implementation with TypeScript](#core-implementation-with-typescript)
@@ -17,11 +17,11 @@ A localStorage viewer is one of the most useful developer tools you can build as
 
 ---
 
-## Architecture and Manifest Setup
+Architecture and Manifest Setup
 
 The localStorage viewer extension requires access to multiple browser contexts. We'll use Manifest V3 with a side panel for the main interface, allowing developers to view storage while browsing.
 
-### Recommended Directory Structure
+Recommended Directory Structure
 
 ```
 local-storage-viewer/
@@ -65,7 +65,7 @@ local-storage-viewer/
      e2e/
 ```
 
-### Manifest Configuration (manifest.ts)
+Manifest Configuration (manifest.ts)
 
 ```typescript
 import type { Manifest } from 'webpack-ext-manifest';

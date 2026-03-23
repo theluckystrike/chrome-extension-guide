@@ -5,7 +5,7 @@ description: "Configure content scripts in manifest.json."
 canonical_url: "https://bestchromeextensions.com/patterns/manifest-content-scripts-config/"
 ---
 
-# Content Script Manifest Configuration Patterns
+Content Script Manifest Configuration Patterns
 
 This guide covers optimization patterns for the `content_scripts` field in `manifest.json`.
 

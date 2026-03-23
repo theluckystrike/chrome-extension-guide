@@ -4,7 +4,7 @@ title: "Chrome Extension Lorem Ipsum Generator. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-lorem-ipsum-generator/"
 ---
-# Build a Lorem Ipsum Generator Extension. Full Tutorial
+Build a Lorem Ipsum Generator Extension. Full Tutorial
 
 What We're Building {#what-were-building}
 - Generate placeholder text in multiple formats (paragraphs, sentences, words)

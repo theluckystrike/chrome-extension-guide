@@ -8,7 +8,7 @@ order: 13
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequest/"
 ---
 
-# declarativeNetRequest Permission. Chrome Extension Reference
+declarativeNetRequest Permission. Chrome Extension Reference
 
 Overview {#overview}
 - Permission string: `"declarativeNetRequest"` or `"declarativeNetRequestWithHostAccess"`

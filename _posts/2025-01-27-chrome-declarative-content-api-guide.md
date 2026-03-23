@@ -9,7 +9,7 @@ keywords: "declarative content extension, page action rules, conditional extensi
 canonical_url: "https://bestchromeextensions.com/2025/01/27/chrome-declarative-content-api-guide/"
 ---
 
-# Chrome Declarative Content API Complete Guide
+Chrome Declarative Content API Complete Guide
 
 The Chrome Declarative Content API is one of the most powerful yet often underutilized APIs available to Chrome extension developers. This comprehensive guide will walk you through everything you need to know about building extensions that automatically react to page content using declarative content extension patterns. Whether you're looking to create intelligent page action rules, implement conditional extension actions, or optimize how your extension responds to website content, this guide has you covered.
 

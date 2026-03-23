@@ -5,7 +5,7 @@ description: "Master the Chrome extension service worker lifecycle in Manifest V
 canonical_url: "https://bestchromeextensions.com/guides/service-worker-lifecycle/"
 ---
 
-# Chrome Extension Service Worker Lifecycle. Events, Idle Timeout, and Persistence in MV3
+Chrome Extension Service Worker Lifecycle. Events, Idle Timeout, and Persistence in MV3
 
 Introduction {#introduction}
 

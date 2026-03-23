@@ -4,7 +4,7 @@ title: "Chrome Extension Printing API. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/printing-api/"
 ---
-# Chrome Extension Printing API Guide
+Chrome Extension Printing API Guide
 
 Overview {#overview}
 - `chrome.printing` API provides programmatic control over print jobs in Chrome extensions
@@ -638,7 +638,7 @@ HTML for Print Content {#html-for-print-content}
 
 Best Practices & Error Handling {#best-practices-error-handling}
 ```javascript
-// Robust print job submission with retries
+// Solid print job submission with retries
 async function submitWithRetry(printTicket, maxRetries = 3) {
   let lastError;
   

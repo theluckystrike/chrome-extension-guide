@@ -4,7 +4,7 @@ slug: /publishing/packaging-distribution/
 description: "Learn how to package Chrome extensions as CRX files, self-host extensions with update_url, and deploy via enterprise policies and group policies for managed Chrome environments."
 ---
 
-# Chrome Extension Packaging & Distribution. CRX Files, Self-Hosting, and Enterprise Deployment
+Chrome Extension Packaging & Distribution. CRX Files, Self-Hosting, and Enterprise Deployment
 
 While the Chrome Web Store remains the primary distribution channel for most developers, understanding alternative packaging and distribution methods is essential for enterprises, developers with specific deployment requirements, and organizations that need to maintain full control over their extension lifecycle. This guide covers CRX packaging, self-hosting options, and enterprise deployment strategies.
 
