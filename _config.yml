@@ -1,5 +1,6 @@
-title: "Chrome Extension Guide by theluckystrike"
-description: "500+ articles on Chrome extension development"
+title: "Chrome Extension Guide"
+tagline: "Find Extensions Worth Installing — Reviews, Tutorials & Dev Guides"
+description: "In-depth Chrome extension reviews, development tutorials, and curated recommendations. Find the best extensions for productivity, privacy, and web development with honest testing."
 url: "https://bestchromeextensions.com"
 baseurl: ""
 google_analytics: "G-XXXXXXXXXX"
@@ -11,6 +12,10 @@ kramdown:
 
 include:
   - google1a218412aeef37cf.html
+
+twitter:
+  username: _alphashark_
+  card: summary_large_image
 
 author:
   name: Michael Lip
@@ -55,4 +60,3 @@ exclude:
 collections:
   docs:
     output: true
-
